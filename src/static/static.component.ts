@@ -21,12 +21,6 @@ export class StaticComponent {
         public router: Router,
     ) {
         this.navigationConfig = staticNavigationConfig;
-
-        router.events.subscribe((val) => {
-            if (val instanceof NavigationEnd) {
-                this.isMenuOpen = false;
-            }
-        });
     }
 
     toggleMenuOpen () {
