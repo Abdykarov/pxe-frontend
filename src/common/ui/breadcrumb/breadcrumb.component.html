@@ -1,0 +1,43 @@
+<div class="breadcrumb-holder">
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"
+                *ngFor="let item of breadcrumbItems">
+                <a *ngIf="item.url && !item.hasTemplate"
+                   [routerLink]="item.url ? item.url : null">
+                    <span class="breadcrumb__text">{{item.label}}</span>
+                </a>
+                <span
+                    *ngIf="(!item.url && !item.hasTemplate) || (item.hasTemplate && !dropdownContent)"
+                    class="breadcrumb__text">
+                        {{item.label}}
+                </span>
+                <ng-template #dropdown1 let-toggle="toggle">
+                    <a
+                        (click)="toggle()"
+                        class="dropdown-toggle dropdown-link">
+                        <span
+                            class="dropdown-link__text breadcrumb__text"
+                            [innerHTML]="item.label"
+                            >
+                        </span>
+                        <span class="
+                            icon
+                            icon--arrow-minimal-down
+                            dropdown-toggle-icon">
+                        </span>
+                    </a>
+                </ng-template>
+                <lnd-dropdown
+                    *ngIf="item.hasTemplate && dropdownContent"
+                    [actionTemplate]="dropdown1"
+                    hasBeak="true"
+                    menuDirection="center"
+                    [overlayEnabled]="item.overlayEnabled"
+                    (toggleOverlayerAction)="item.dropdownAction()">
+                    <ng-container *ngTemplateOutlet="dropdownContent"></ng-container>
+                </lnd-dropdown>
+            </li>
+        </ul>
+    </nav>
+</div>

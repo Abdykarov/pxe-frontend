@@ -1,0 +1,347 @@
+<div
+    class="form-group"
+    [ngClass]="customFormGroupClass">
+    <span
+        *ngIf="type === 'LABEL'"
+        class="form-control-text"
+        [ngClass]="customFieldClass">
+        {{ label }}
+    </span>
+    <div
+        *ngIf="type !== 'LABEL'"
+        [class.custom-control]="type === 'CHECKBOX'"
+        [class.custom-file]="type === 'FILE'"
+        [class.custom-checkbox]="type === 'CHECKBOX'"
+        [class.input-group]="!!appendIcon || !!appendButtonIcon || !!prependIcon || !!prependButtonIcon"
+        [class.input-group--append]="!!appendIcon || !!appendButtonIcon || !!appendText"
+        [class.input-group--prepend]="!!prependIcon || !!prependButtonIcon"
+        [class.select]="type === 'SELECT'"
+        [class.custom-checkbox--switch]="type === 'SWITCH'"
+        [class.select--inline-label]="inlineLabel"
+        [ngSwitch]="type">
+        <div
+            *ngIf="!!prependIcon"
+            class="input-group-prepend">
+            <span
+                class="icon input-group-icon"
+                [ngClass]="prependIcon">
+            </span>
+        </div>
+        <div
+            *ngIf="!!prependButtonIcon"
+            class="input-group-prepend">
+            <button
+                (click)="prependButtonAction.emit()"
+                type="button"
+                class="btn">
+                <span
+                    class="icon"
+                    [ngClass]="prependButtonIcon">
+                </span>
+            </button>
+        </div>
+        <div
+            *ngIf="!!prependText"
+            class="input-group-switch">
+            <span
+                class="input-group-switch__text input-group-switch__text--prepend"
+                [class.input-group-switch__text--active]="!checked"
+                [class.input-group-switch__text--disabled]="!!disabled">
+                {{ prependText }}
+            </span>
+        </div>
+        <input
+            *ngSwitchDefault
+            #field
+            type="text"
+            (blur)="blur.emit($event)"
+            class="form-control"
+            [class.form-control--not-empty]="!!value"
+            [class.form-control--placeholder]="hideLabel"
+            [class.is-invalid]="!!error && !!touched"
+            [class.is-valid]="success"
+            [class.is-warning]="warning"
+            [disabled]="disabledField"
+            [id]="id"
+            [name]="name"
+            [ngClass]="customFieldClass"
+            [(ngModel)]="value"
+            [placeholder]="placeholder"
+            [readonly]="readonly"
+            [required]="required"
+            [attr.autocomplete]="autocomplete"
+            >
+        <input
+            *ngSwitchCase="'NUMBER'"
+            #field
+            type="number"
+            class="form-control"
+            [class.form-control--not-empty]="!!value"
+            [class.form-control--placeholder]="hideLabel"
+            [class.is-invalid]="!!error && !!touched"
+            [class.is-valid]="success"
+            [class.is-warning]="warning"
+            [disabled]="disabledField"
+            [id]="id"
+            [name]="name"
+            [ngClass]="customFieldClass"
+            [(ngModel)]="value"
+            [placeholder]="placeholder"
+            [readonly]="readonly"
+            [required]="required"
+            [attr.autocomplete]="autocomplete"
+        >
+        <input
+            *ngSwitchCase="'PASSWORD'"
+            #field
+            type="password"
+            (blur)="blur.emit($event)"
+            class="form-control"
+            [class.form-control--not-empty]="!!value"
+            [class.form-control--placeholder]="hideLabel"
+            [class.is-invalid]="!!error && !!touched"
+            [class.is-valid]="success"
+            [class.is-warning]="warning"
+            [disabled]="disabledField"
+            [id]="id"
+            [name]="name"
+            [ngClass]="customFieldClass"
+            [(ngModel)]="value"
+            [placeholder]="placeholder"
+            [readonly]="readonly"
+            [required]="required"
+            [attr.autocomplete]="autocomplete"
+        >
+        <input
+            *ngSwitchCase="'FILE'"
+            #field
+            type="file"
+            (blur)="blur.emit($event)"
+            class="custom-file-input"
+            [class.form-control--not-empty]="!!value"
+            [class.form-control--placeholder]="hideLabel"
+            [class.is-invalid]="!!error && !!touched"
+            [class.is-valid]="success"
+            [class.is-warning]="warning"
+            [disabled]="disabledField"
+            [id]="id"
+            [ngClass]="customFieldClass"
+            [(ngModel)]="value"
+            >
+        <div
+            *ngSwitchCase="'RADIOGROUP'"
+            #field
+            [id]="id"
+            [ngClass]="radioGroupClass">
+            <span
+                class="control-label radiogroup-control-label"
+                *ngIf="!hideLabel">
+                {{ label }}
+            </span>
+            <div
+                *ngFor="let option of options"
+                class="custom-control custom-radio"
+                [ngClass]="radioGroupItemClass">
+                <input
+                    type="radio"
+                    (blur)="blur.emit($event)"
+                    class="custom-control-input"
+                    [class.form-control--not-empty]="value === option.key"
+                    [class.form-control--placeholder]="hideLabel"
+                    [class.is-invalid]="!!error && !!touched"
+                    [class.is-valid]="success"
+                    [class.is-warning]="warning"
+                    (change)="changeRadioGroupAction(option.key)"
+                    [disabled]="option.disabled"
+                    [checked]="value === option.key"
+                    [ngClass]="customFieldClass"
+                    [readonly]="readonly"
+                    [value]="option.value"
+                    [required]="required">
+                <label
+                    *ngIf="option.label"
+                    class="custom-control-label"
+                    (click)="labelClick(option.key)">
+                    {{ option.label }}
+                </label>
+            </div>
+        </div>
+        <input
+            *ngSwitchCase="'CHECKBOX'"
+            #field
+            type="checkbox"
+            (blur)="blur.emit($event)"
+            class="custom-control-input"
+            [class.form-control--not-empty]="!!value"
+            [class.form-control--placeholder]="hideLabel"
+            [class.is-invalid]="!!error"
+            [class.is-valid]="success"
+            [class.is-warning]="warning"
+            [disabled]="disabledField"
+            [checked]="checked"
+            [id]="id"
+            [ngClass]="customFieldClass"
+            [(ngModel)]="value"
+            [readonly]="readonly"
+            [required]="required"
+            >
+        <input
+            *ngSwitchCase="'SWITCH'"
+            #field
+            type="checkbox"
+            (blur)="blur.emit($event)"
+            class="custom-control-input"
+            [class.form-control--not-empty]="!!value"
+            [class.form-control--placeholder]="hideLabel"
+            [class.is-invalid]="!!error"
+            [class.is-valid]="success"
+            [class.is-warning]="warning"
+            [disabled]="disabledField"
+            [checked]="checked"
+            [id]="id"
+            [ngClass]="customFieldClass"
+            [(ngModel)]="value"
+            [readonly]="readonly"
+            [required]="required"
+            >
+        <div
+            *ngSwitchCase="'TOGGLE'"
+            #field
+            [id]="id"
+            class="radio-group--switch">
+            <span
+                class="control-label radiogroup-control-label"
+                *ngIf="!hideLabel">
+                {{ label }}
+            </span>
+            <div
+                *ngFor="let option of options"
+                class="custom-control custom-radio custom-radio--switch">
+                <input
+                    type="radio"
+                    (blur)="blur.emit($event)"
+                    class="custom-control-input"
+                    [class.form-control--not-empty]="value === option.key"
+                    [class.form-control--placeholder]="hideLabel"
+                    [class.is-invalid]="!!error && !!touched"
+                    [class.is-valid]="success"
+                    [class.is-warning]="warning"
+                    (change)="changeRadioGroupAction(option.key)"
+                    [disabled]="option.disabled"
+                    [checked]="value === option.key"
+                    [ngClass]="customFieldClass"
+                    [readonly]="readonly"
+                    [value]="option.value"
+                    [required]="required">
+                <label
+                    *ngIf="option.label"
+                    class="custom-control-label"
+                    (click)="labelClick(option.key)">
+                    {{ option.label }}
+                </label>
+            </div>
+        </div>
+        <textarea
+            *ngSwitchCase="'TEXTAREA'"
+            #field
+            class="form-control"
+            [class.form-control--not-empty]="!!value"
+            [class.form-control--placeholder]="hideLabel"
+            [class.is-invalid]="!!error && !!touched"
+            [class.is-valid]="success"
+            [class.is-warning]="warning"
+            [disabled]="disabledField"
+            [id]="id"
+            [ngClass]="customFieldClass"
+            [(ngModel)]="value"
+            [placeholder]="placeholder"
+            [readonly]="readonly"
+            [required]="required"
+            [rows]="rows"
+            >
+            {{ value }}
+        </textarea>
+        <select
+            *ngSwitchCase="'SELECT'"
+            #field
+            class="form-control"
+            [class.form-control--not-empty]="!!value"
+            [class.form-control--placeholder]="hideLabel"
+            [class.is-invalid]="!!error && !!touched"
+            [class.is-valid]="success"
+            [class.is-warning]="warning"
+            [disabled]="disabledField"
+            (change)="changeSelect($event)"
+            [id]="id"
+            [ngClass]="customFieldClass"
+            ([ngModel])="value"
+            [required]="required"
+            >
+            <option
+                *ngFor="let option of options"
+                [value]="option.key"
+                [disabled]="option.disabled"
+                [selected]="option.key === value">
+                {{ option.label }}
+            </option>
+        </select>
+        <label
+            *ngIf="label"
+            [class.control-label]="type !== 'CHECKBOX' && type !== 'FILE' && !hideLabel && type !== 'SWITCH'"
+            [class.custom-control-label]="!!hideLabel || type === 'CHECKBOX' && !hideLabel || type === 'SWITCH' && !hideLabel"
+            [class.custom-file-label]="type === 'FILE' && !hideLabel"
+            [class.sr-only]="!!hideLabel || type === 'RADIOGROUP' || type === 'SELECT'"
+            (click)="labelClick()"
+            [for]="id">
+            {{ label }}
+        </label>
+        <span
+            *ngIf="type === 'SELECT'"
+            class="icon icon--arrow-down select-icon">
+        </span>
+        <div
+            *ngIf="!!appendIcon"
+            class="input-group-append">
+            <span
+                class="icon input-group-icon"
+                [ngClass]="appendIcon">
+            </span>
+        </div>
+        <div
+            *ngIf="!!appendButtonIcon"
+            class="input-group-append">
+            <button
+                (click)="appendButtonAction.emit()"
+                type="button"
+                class="btn">
+                <span
+                    class="icon"
+                    [ngClass]="appendButtonIcon">
+                </span>
+            </button>
+        </div>
+        <div
+            *ngIf="!!appendText"
+            [class.input-group-append]="type !== 'SWITCH'">
+            <span
+                [ngClass]="[
+                    type === 'SWITCH' ? 'input-group-switch__text input-group-switch__text--append' : 'input-group-append__text'
+                ]"
+                [class.input-group-switch__text--active]="type === 'SWITCH' && !!checked"
+                [class.input-group-switch__text--disabled]="type === 'SWITCH' && !!disabled">
+                {{ appendText }}
+            </span>
+        </div>
+        <div
+            *ngIf="!!subtext"
+            class="input-subtext"
+            [class.input-subtext--disabled]="!!disabled">
+            {{ subtext }}
+        </div>
+        <div
+            *ngIf="!!getErrorMessage()"
+            [innerHtml]="getErrorMessage()"
+            class="invalid-feedback">
+        </div>
+    </div>
+</div>

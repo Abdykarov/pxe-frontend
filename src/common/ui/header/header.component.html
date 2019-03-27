@@ -1,0 +1,29 @@
+<header class="header"
+        [ngClass]="{ 'header--sticked' : isHeaderSticked }">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="header-inner">
+                    <div class="menu-toggle-holder">
+                        <a
+                            class="menu-toggle"
+                            [ngClass]="{ 'menu-toggle--open' : isMenuOpen }"
+                            (click)="toggleMenu.emit()">
+                            <span class="menu-toggle__line"></span>
+                            <span class="menu-toggle__line"></span>
+                            <span class="menu-toggle__line"></span>
+                            <span class="menu-toggle__line"></span>
+                        </a>
+                    </div>
+                    <div class="logo-holder">
+                        <a
+                            [routerLink]="['/secured/dashboard']"
+                            class="logo">
+                            Angular Devstack
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

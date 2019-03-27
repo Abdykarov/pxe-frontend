@@ -1,0 +1,40 @@
+/*
+ -  Alerts
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+// Bootstrap alert and close import
+@import '~bootstrap/scss/alert';
+@import '~bootstrap/scss/close';
+
+.alert {
+	color: $white;
+
+	&--with-icon {
+		padding-left: ( $icon-size-px + $alert-padding-x * 2 );
+	}
+
+	&-info {
+		border-color: $gray-300;
+		background-color: $gray-300;
+	}
+
+	&__common-icon {
+		position: absolute;
+		top: $alert-padding-y;
+		left: $alert-padding-x;
+	}
+}
+
+.alert-dismissible {
+	.close {
+		position: absolute;
+		top: $alert-padding-y;
+		right: $alert-padding-x;
+		padding: 0;
+	}
+}

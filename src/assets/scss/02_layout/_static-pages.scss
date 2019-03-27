@@ -1,0 +1,144 @@
+/*
+ -  Static pages
+ -
+ -
+ */
+
+.static-pages {
+	background-color: $white;
+	padding: $spacer ( $spacer / 2 );
+	margin-bottom: $spacer;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	.icon-boxes {
+		margin: ( -$spacer / 2 ) ( -$spacer / 2 ) $spacer ( -$spacer / 2 );
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	.icon-box {
+		width: 96px;
+		height: 96px;
+		border: 1px solid $gray-100;
+		border-radius: $btn-border-radius;
+		padding: ( $spacer / 1.2 ) ( $spacer / 6 ) ( $spacer / 2 ) ( $spacer / 6 );
+		margin: ( $spacer / 2 );
+		text-align: center;
+
+		&__symbol {
+			display: block;
+			margin-bottom: ( $spacer / 3 );
+			color: $blue-400;
+		}
+
+		&__name {
+			display: block;
+			@include smart-short-text;
+			font-size: .75rem;
+		}
+
+		&:hover {
+			border-color: $primary;
+
+			.icon-box__symbol {
+				opacity: .9;
+			}
+		}
+	}
+
+	.colors-overview {
+		margin: ( -$spacer / 4 ) ( -$spacer / 2 ) $spacer ( -$spacer / 2 );
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	.color {
+		display: flex;
+		flex-wrap: wrap;
+		align-content: space-between;
+		width: 110px;
+		height: 90px;
+		border-radius: $btn-border-radius;
+		margin:( $spacer / 4 ) ( $spacer / 2 );
+
+		&--wide {
+			width: (2 * 110px ) + ( ( $spacer / 2) * 3 );    // Double color size + Triple gutter width
+		}
+
+		&__name {
+			align-self: flex-start;
+			flex-grow: 1;
+			width: 100%;
+			background-color: $white;
+			padding: 0 ( $spacer / 3 ) ( $spacer / 10 ) 0;
+			font-size: .75rem;
+		}
+
+		&__value {
+			align-self: flex-end;
+			flex-grow: 1;
+			padding: 0 ( $spacer / 3 ) ( $spacer / 6 ) 0;
+			text-align: right;
+			color: $white;
+			font-size: .75rem;
+
+			&--dark {
+				color: $font-text;
+			}
+		}
+	}
+
+	.btn-holder {
+		lnd-button {
+			margin-bottom: $spacer;
+
+			// Media queries
+			@include media-breakpoint-up(sm) {
+				margin-right: $spacer;
+			}
+
+			&:last-of-type {
+				// Media queries
+				@include media-breakpoint-up(sm) {
+					margin-right: 0;
+				}
+			}
+		}
+	}
+}
+
+.static-page-holder {
+	background-color: $body-bg;
+	margin: -( $spacer / 2 );
+	padding: $spacer 0;
+
+	// Media queries
+	@include media-breakpoint-up(md) {
+		margin: -$spacer;
+	}
+}
+
+.static-page-settings {
+	.tabs .tabs {
+		margin-bottom: 0;
+	}
+
+	.tab-content .tab-content {
+		padding-left: 0;
+		padding-right: 0;
+		padding-bottom: 0;
+	}
+}

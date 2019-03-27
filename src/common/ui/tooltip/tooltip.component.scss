@@ -1,0 +1,156 @@
+/*
+ -  Tooltip
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+.tooltip {
+	position: relative;
+	display: inline-block;
+
+	&__toggle {
+		position: relative;
+		cursor: pointer;
+
+		&:after {
+			content: '';
+			position: absolute;
+			display: none;
+			width: 0;
+			height: 0;
+			border-bottom: $tooltip-beak-border-width $tooltip-beak-border-style $white;
+			border-right: $tooltip-beak-border-width $tooltip-beak-border-style transparent;
+			box-shadow: $tooltip-beak-shadow;
+			cursor: default;
+			z-index: $zindex-tooltip-beak;
+		}
+	}
+
+	&__content {
+		position: absolute;
+		min-width: 200px;
+		display: none;
+		padding: ( $spacer / 2 );
+		background-color: $white;
+		border-radius: $tooltip-content-border-radius;
+		box-shadow: $tooltip-content-box-shadow;
+		z-index: $zindex-tooltip-content;
+	}
+
+	&--top,
+	&--bottom {
+		.tooltip__toggle {
+			&::after {
+				left: 50%;
+			}
+		}
+
+		.tooltip__content {
+			left: 50%;
+			transform: translateX(-50%);
+		}
+	}
+
+	&--top {
+		.tooltip__toggle {
+			&::after {
+				bottom: calc(100% + 15px);
+				transform: translateX(-50%) rotate(-45deg);
+			}
+		}
+
+		.tooltip__content {
+			bottom: 100%;
+			margin-bottom: $tooltip-content-offset;
+		}
+	}
+
+	&--bottom {
+		.tooltip__toggle {
+			&::after {
+				top: calc(100% + 15px);
+				transform: translateX(-50%) rotate(135deg);
+			}
+		}
+
+		.tooltip__content {
+			top: 100%;
+			margin-top: $tooltip-content-offset;
+		}
+	}
+
+	&--left,
+	&--right {
+		.tooltip__toggle {
+			&::after {
+				top: 50%;
+			}
+		}
+
+		.tooltip__content {
+			top: 50%;
+			transform: translateY(-50%);
+		}
+	}
+
+	&--left {
+		.tooltip__toggle {
+			&::after {
+				right: calc(100% + 15px);
+				transform: translateY(-50%) rotate(-135deg);
+			}
+		}
+
+		.tooltip__content {
+			right: 100%;
+			margin-right: $tooltip-content-offset;
+		}
+	}
+
+	&--right {
+		.tooltip__toggle {
+			&::after {
+				left: calc(100% + 15px);
+				transform: translateY(-50%) rotate(45deg);
+			}
+		}
+
+		.tooltip__content {
+			left: 100%;
+			margin-left: $tooltip-content-offset;
+		}
+	}
+
+	&--open {
+		.tooltip__toggle {
+			&::after {
+				display: block;
+			}
+		}
+
+		.tooltip__content {
+			display: block;
+		}
+	}
+
+	&:hover {
+		.tooltip__toggle {
+			&::after {
+				// Media queries
+				@include media-breakpoint-up(lg) {
+					display: block;
+				}
+			}
+		}
+
+		.tooltip__content {
+			// Media queries
+			@include media-breakpoint-up(lg) {
+				display: block;
+			}
+		}
+	}
+}

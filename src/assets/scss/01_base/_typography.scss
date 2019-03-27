@@ -1,0 +1,23 @@
+/*
+ -  Theme typography
+ -
+ -  This file contains @font-face declarations.
+ */
+
+
+
+/*
+ -	Open Sans
+ */
+
+// Font weight: Regular
+@include font-face('roboto', '../fonts/roboto/roboto-regular', 400);
+
+// Font weight: Regular italic
+@include font-face('roboto', '../fonts/roboto/roboto-italic', 400, italic);
+
+// Font weight: Bold
+@include font-face('roboto', '../fonts/roboto/roboto-bold', 700);
+
+// Font weight: Bold italic
+@include font-face('roboto', '../fonts/roboto/roboto-bolditalic', 700, italic);

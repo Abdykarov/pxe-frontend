@@ -1,0 +1,86 @@
+/*
+ -  Banner
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+
+.banner {
+	position: relative;
+	padding: $spacer ( $spacer / 2 );
+	background-color: $banner-bg;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+
+	// Media queries
+	@include media-breakpoint-up(md) {
+		text-align: left;
+		padding: $spacer;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+	@include media-breakpoint-up(lg) {
+		padding: $spacer ( $spacer / 2 );
+	}
+	@include media-breakpoint-up(xl) {
+		padding: $spacer;
+	}
+
+	&__content {
+		max-width: $banner-content-max-width-xs;
+		margin: 0 auto;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			max-width: $banner-content-max-width-md;
+			margin: 0 $spacer 0 0;
+		}
+	}
+
+	&__title {
+		margin-bottom: ( $spacer / 2 );
+	}
+
+	&__text {
+		margin-bottom: ( $spacer / 1.5 );
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			margin-bottom: 0;
+		}
+	}
+
+	&__picture-holder {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	&__picture {
+		width: 100%;
+		height: auto;
+	}
+}
+
+::ng-deep .banner-simple {
+	padding: $spacer ( $spacer / 2 );
+	text-align: center;
+
+	// Media queries
+	@include media-breakpoint-up(xl) {
+		padding: $spacer;
+	}
+
+	.banner-simple__title {
+		margin-bottom: $spacer;
+		color: $white;
+	}
+}
+

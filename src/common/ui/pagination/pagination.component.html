@@ -1,0 +1,52 @@
+<div *ngIf="pagination.pages && pagination.pages.length"
+     class="pagination-holder">
+    <lnd-button type="secondary" [label]="label"></lnd-button>
+    <nav>
+        <ul class="pagination">
+            <li *ngIf="prevDots"
+                class="page-item">
+                <a class="page-link"
+                   (click)="setPage(defaultPage)">
+                    {{ defaultPage }}
+                </a>
+            </li>
+            <li *ngIf="prevDots"
+                class="page-item">
+                <span class="page-dots">
+                    &hellip;
+                </span>
+            </li>
+            <li *ngFor="let page of pagination.pages"
+                class="page-item"
+                [class.active]="pagination.activePage === page">
+                <a class="page-link"
+                   (click)="setPage(page)">
+                    {{ page }}
+                </a>
+            </li>
+            <li *ngIf="nextDots"
+                class="page-item">
+                <span class="page-dots">
+                    &hellip;
+                </span>
+            </li>
+                <li *ngIf="nextDots"
+                    class="page-item">
+                <a class="page-link"
+                   (click)="setPage(pagination.totalPages)">
+                    {{ pagination.totalPages }}
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <lnd-form-field
+        *ngIf="hasOptions"
+        customFormGroupClass="mb-0 pt-0"
+        id="pagination-selectbox"
+        [inlineLabel]="true"
+        [label]="optionsLabel"
+        (change)="changePerPage($event.target.value)"
+        [options]="perPageOptions"
+        type="select"
+    ></lnd-form-field>
+</div>

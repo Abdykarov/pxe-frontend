@@ -1,0 +1,303 @@
+/*
+ -  Buttons
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+// Bootstrap button import
+@import '~bootstrap/scss/buttons';
+
+:host {
+	display: flex;
+
+	// Media queries
+	@include media-breakpoint-up(sm) {
+		display: inline-flex;
+	}
+}
+
+.btn {
+	position: relative;
+	width: 100%;
+	min-height: $btn-height;
+	text-transform: uppercase;
+	text-decoration: none;
+	white-space: normal;
+	box-shadow: none;
+	border: none;
+
+	// Media queries
+	@include media-breakpoint-up(sm) {
+		min-width: $btn-width;
+		width: auto;
+	}
+
+	&:focus,
+	&.focus {
+		box-shadow: $btn-focus-box-shadow;
+	}
+
+	&:not(:disabled):not(.disabled):active,
+	&:not(:disabled):not(.disabled).active {
+		&:focus {
+			box-shadow: $btn-focus-box-shadow;
+		}
+	}
+
+	&.btn-primary,
+	&.btn-secondary,
+	&.btn-success,
+	&.btn-warning,
+	&.btn-danger,
+	&.btn-light {
+		color: $white;
+	}
+
+	&.btn-primary {
+		&:focus,
+		&.focus,
+		&:hover,
+		&:active {
+			background-color: $primary-dark;
+		}
+	}
+
+	&.btn-secondary {
+		&:focus,
+		&.focus,
+		&:hover,
+		&:active {
+			background-color: $secondary-dark;
+		}
+
+		&:not(:disabled):not(.disabled):active,
+		&:not(:disabled):not(.disabled).active {
+			background-color: $blue-400;
+		}
+	}
+
+	&.btn-success {
+		&:focus,
+		&.focus,
+		&:hover,
+		&:active {
+			background-color: $success-dark;
+		}
+	}
+
+	&.btn-warning {
+		&:focus,
+		&.focus,
+		&:hover,
+		&:active {
+			background-color: $warning-dark;
+		}
+	}
+
+	&.btn-danger {
+		&:focus,
+		&.focus,
+		&:hover,
+		&:active {
+			background-color: $danger-dark;
+		}
+	}
+
+	&.btn-light {
+		&:focus,
+		&.focus,
+		&:hover {
+			background-color: $light-dark;
+		}
+
+		&:not(:disabled):not(.disabled):active {
+			background-color: $light-darken;
+		}
+	}
+
+	&.btn-white {
+		color: $gray-400;
+		background-color: $white;
+
+		&:focus,
+		&.focus,
+		&:hover {
+			background-color: $gray-150;
+		}
+
+		&:not(:disabled):not(.disabled):active {
+			background-color: $gray-200;
+		}
+	}
+
+	&.btn-outline-primary,
+	&.btn-outline-secondary,
+	&.btn-outline-success,
+	&.btn-outline-warning,
+	&.btn-outline-danger,
+	&.btn-outline-light,
+	&.btn-outline-white {
+		border: 1px solid;
+
+		&:focus,
+		&.focus,
+		&:hover,
+		&:active {
+			background: transparent;
+		}
+
+		&:not(:disabled):not(.disabled):active,
+		&:not(:disabled):not(.disabled).active {
+			&:focus {
+				background: transparent;
+			}
+		}
+
+		&.disabled,
+		&.btn-disabled,
+		&[disabled],
+		fieldset[disabled] & {
+			color: rgba($gray-200, .6);
+			background-color: transparent;
+			pointer-events: none;
+			border-color: $gray-200;
+		}
+	}
+
+	&.btn-outline-primary {
+		@include button-ghost-color($primary-dark);
+	}
+
+	&.btn-outline-secondary {
+		@include button-ghost-color($secondary-dark);
+	}
+
+	&.btn-outline-success {
+		@include button-ghost-color($success-dark);
+	}
+
+	&.btn-outline-warning {
+		@include button-ghost-color($warning-dark);
+	}
+
+	&.btn-outline-danger {
+		@include button-ghost-color($danger-dark);
+	}
+
+	&.btn-outline-light {
+		@include button-ghost-color($light-dark);
+	}
+
+	&.btn-outline-white {
+		&,
+		&:visited {
+			color: $white;
+			background-color: transparent;
+			border-color: $white;
+		}
+
+		@include button-ghost-color($gray-200);
+	}
+
+	&.btn-sm {
+		min-width: auto;
+		min-height: $btn-height-small;
+
+		.btn__icon {
+			font-size: $icon-size-small-px;
+
+			& + .btn__text {
+				padding-left: ( $spacer / 1.5 );
+			}
+
+			&--left {
+				padding-left: ( $spacer / 3 );
+			}
+
+			&--right {
+				padding-right: ( $spacer / 3 );
+			}
+		}
+	}
+
+	&.btn-long {
+		// Media queries
+		@include media-breakpoint-up(sm) {
+			text-align: left;
+		}
+	}
+
+	&.btn--no-border {
+		border: none;
+	}
+
+	&__text {
+		display: inline-block;
+	}
+
+	&__icon {
+		position: absolute;
+		top: 0;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+
+		& + .btn__text {
+			text-align: left;
+		}
+
+		&--left {
+			left: 0;
+			padding-left: ( $spacer / 2 );
+
+			& + .btn__text {
+				padding-left: ( $icon-size-px + ( $spacer / 2 ) );
+			}
+		}
+
+		&--right {
+			right: 0;
+			padding-right: ( $spacer / 2 );
+
+			& + .btn__text {
+				padding-right: ( $icon-size-px + ( $spacer / 2 ) );
+			}
+		}
+
+		&--alone {
+			position: relative;
+			padding: ( $spacer / 3 );
+			text-align: center;
+		}
+	}
+
+	&.dropdown-toggle {
+		text-align: left;
+	}
+
+	&.disabled,
+	&.btn-disabled,
+	&[disabled],
+	fieldset[disabled] & {
+		background: $gray-200;
+		color: rgba($white, .6);
+		pointer-events: none;
+	}
+
+	&.btn--raw {
+		width: auto;
+		min-height: 0;
+		background-color: transparent;
+		color: inherit;
+		padding: 0;
+
+		// Media queries
+		@include media-breakpoint-up(sm) {
+			min-width: 0;
+		}
+	}
+}

@@ -1,0 +1,201 @@
+/*
+ -	Theme utilities
+ */
+
+// Set text size to 12px, (1rem = 16px)
+.font-size-12 {
+	font-size: .75rem;
+}
+
+// Set text size to 13px, (1rem = 16px)
+.font-size-13 {
+	font-size: .8125rem;
+}
+
+// Set text size to 14px, (1rem = 16px)
+.font-size-14 {
+	font-size: .875rem;
+}
+
+.link {
+	@include link-without-href {
+		cursor: pointer;
+		display: inline-block;
+		color: $link-color;
+		border-color: $link-color;
+		text-decoration: $link-decoration;
+	}
+
+	@include link-without-href-interactive {
+		color: $link-hover-color;
+		text-decoration: $link-hover-decoration;
+	}
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+
+//
+// Overwriting default - Extend new definition `table-row-group` for default Bootstrap
+//
+// Utilities for common `display` values
+//
+/* stylelint-disable declaration-no-important */
+@each $breakpoint in map-keys($grid-breakpoints) {
+	@include media-breakpoint-up($breakpoint) {
+		$infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+		.d#{$infix}-none {
+			display: none !important;
+		}
+
+		.d#{$infix}-inline {
+			display: inline !important;
+		}
+
+		.d#{$infix}-inline-block {
+			display: inline-block !important;
+		}
+
+		.d#{$infix}-block {
+			display: block !important;
+		}
+
+		.d#{$infix}-table {
+			display: table !important;
+		}
+
+		.d#{$infix}-table-row {
+			display: table-row !important;
+		}
+
+		.d#{$infix}-table-cell {
+			display: table-cell !important;
+		}
+
+		// new added definition
+		.d#{$infix}-table-row-group {
+			display: table-row-group !important;
+		}
+
+		.d#{$infix}-flex {
+			display: flex !important;
+		}
+
+		.d#{$infix}-inline-flex {
+			display: inline-flex !important;
+		}
+	}
+}
+/* stylelint-enable */
+
+
+
+/*
+ *  Colors utilities via properties generator
+ */
+
+$colors: (
+	blue-050:                      $blue-050,
+	blue-100:                      $blue-100,
+	blue-200:                      $blue-200,
+	blue-300:                      $blue-300,
+	blue-400:                      $blue-400,
+	blue-500:                      $blue-500,
+	gray-000:                      $gray-000,
+	gray-050:                      $gray-050,
+	gray-100:                      $gray-100,
+	gray-150:                      $gray-150,
+	gray-200:                      $gray-200,
+	gray-300:                      $gray-300,
+	gray-400:                      $gray-400,
+	gray-500:                      $gray-500,
+	gray-600:                      $gray-600,
+	gray-1000:                     $gray-1000,
+	white:                         $white,
+	black:                         $black,
+	primary:                       $primary,
+	primary-dark:                  $primary-dark,
+	secondary:                     $secondary,
+	secondary-dark:                $secondary-dark,
+	success-lighten:               $success-lighten,
+	success:                       $success,
+	success-dark:                  $success-dark,
+	success-darken:                $success-darken,
+	warning-lighten:               $warning-lighten,
+	warning:                       $warning,
+	warning-dark:                  $warning-dark,
+	warning-darken:                $warning-darken,
+	danger-lighten:                $danger-lighten,
+	danger:                        $danger,
+	danger-dark:                   $danger-dark,
+	danger-darken:                 $danger-darken,
+	light:                         $light,
+	light-dark:                    $light-dark,
+	light-darken:                  $light-darken,
+	disabled:                      $disabled,
+	icons-primary:                 $icons-primary,
+	icons-active:                  $icons-active,
+	icons-inactive:                $icons-inactive,
+	gradient-blue-light:           $gradient-blue-light,
+	gradient-blue-dark:            $gradient-blue-dark,
+	gradient-green-light:          $gradient-green-light,
+	gradient-green-dark:           $gradient-green-dark,
+	gradient-orange-light:         $gradient-orange-light,
+	gradient-orange-dark:          $gradient-orange-dark,
+	gradient-red-light:            $gradient-red-light,
+	gradient-red-dark:             $gradient-red-dark
+);
+
+@each $name, $value in $colors {
+	.bg--#{$name} {
+		background-color: $value;
+	}
+
+	.text-color--#{$name} {
+		color: $value;
+	}
+}
+
+
+
+
+/*
+ *	Gradients mixins
+ */
+
+@mixin generate-gradient($name-color, $start-color, $end-color) {
+	.bg--gradient-#{$name-color} {
+		background: linear-gradient(90deg, $start-color 10%, $end-color 90%);
+	}
+}
+
+@include generate-gradient(blue, $gradient-blue-light, $gradient-blue-dark);
+@include generate-gradient(green, $gradient-green-light, $gradient-green-dark);
+@include generate-gradient(orange, $gradient-orange-light, $gradient-orange-dark);
+@include generate-gradient(red, $gradient-red-light, $gradient-red-dark);
+
+
+
+/*
+ *	Progress bar classes for width in % units
+ */
+
+@mixin generate-progress($dimension: width, $class: progress) {
+	$i: 0;
+	$n: 100;
+
+	@while $i <= $n {
+		.#{$class}--#{$i} {
+			#{$dimension}: ($i * 100% / $n);
+		}
+
+		$i: $i + 1;
+	}
+}
+
+/* Generate progress bars */
+@include generate-progress;                              // width
+@include generate-progress(height, progress-h);          // height

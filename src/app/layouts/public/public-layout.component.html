@@ -1,0 +1,33 @@
+<div
+    id="top"
+    class="body-inner"
+    [ngClass]="{
+        'body-inner--overlay' : (showOverlay$ | async)
+    }">
+    <header class="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="header-inner">
+                        <div class="logo-holder">
+                            <a
+                                [routerLink]="['/']"
+                                class="logo">
+                                Angular Devstack
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 container-content container-content--public">
+                <main class="main mt-4 mt-md-0">
+                    <router-outlet></router-outlet>
+                </main>
+            </div>
+        </div>
+    </div>
+</div>

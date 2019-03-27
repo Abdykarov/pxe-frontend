@@ -1,0 +1,137 @@
+/*
+ -  Master styles
+ -
+ -  This file defines html elements styles.
+ */
+
+
+html {
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+	& > span {
+		color: $text-muted;
+		padding-left: ( $spacer / 3 );
+		text-transform: none;
+	}
+}
+
+h1,
+h2,
+h3,
+.h1,
+.h2,
+.h3 {
+	text-transform: uppercase;
+}
+
+h4,
+h5,
+h6,
+.h4,
+.h5,
+.h6 {
+	color: $gray-400;
+	font-weight: 700;
+	margin-bottom: ( $headings-margin-bottom / 2 );
+}
+
+h1,
+.h1 {
+	& > .h1__sub-text {
+		font-size: $h1-font-size-snd;
+	}
+}
+
+h2,
+.h2 {
+	& > .h2__sub-text {
+		font-size: $h2-font-size-snd;
+	}
+}
+
+.table-entry {
+	display: flex;
+	flex-wrap: nowrap;
+	background-color: $table-accent-bg;
+
+	&--white {
+		background-color: $white;
+	}
+
+	&__cell {
+		flex-grow: 1;
+		padding: $table-cell-padding-vert $table-cell-padding;
+	}
+}
+
+blockquote,
+.blockquote {
+	font-size: $blockquote-font-size;
+	margin-bottom: $spacer;
+}
+
+.blockquote-footer {
+	display: block;
+	font-size: 81.25%; // back to default font-size
+	color: $blockquote-small-color;
+
+	&::before {
+		content: '\2014 \00A0'; // em dash, nbsp
+	}
+}
+
+.buttons-holder {
+	> :not(:last-child) {
+		margin-bottom: ( $spacer / 2 );
+		margin-right: 0;
+
+		// Media queries
+		@include media-breakpoint-up(sm) {
+			margin-bottom: 0;
+			margin-right: ( $spacer / 3 );
+		}
+	}
+
+	> :not(:first-child) {
+		margin-top: ( $spacer / 2 );
+		margin-left: 0;
+
+		// Media queries
+		@include media-breakpoint-up(sm) {
+			margin-top: 0;
+			margin-left: ( $spacer / 3 );
+		}
+	}
+}
+
+// Override default Reboot style from Bootstrap FW
+a {
+	@include link-without-href {
+		cursor: pointer;
+		color: $link-color;
+		text-decoration: $link-decoration;
+	}
+
+	@include link-without-href-interactive {
+		color: $link-hover-color;
+		text-decoration: $link-hover-decoration;
+	}
+}

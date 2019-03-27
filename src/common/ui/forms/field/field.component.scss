@@ -1,0 +1,992 @@
+/*
+ -  Form fields
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+// Component variables
+@import 'field.component.variables.scss';
+
+// Bootstrap form import
+@import '~bootstrap/scss/forms';
+@import '~bootstrap/scss/custom-forms';
+@import '~bootstrap/scss/input-group';
+
+.form-group {
+	position: relative;
+	padding-top: $form-group-padding-top;
+
+	&--with-currency {
+		.input-group-append {
+			right: $spacer;
+			background-color: transparent;
+
+			&::after {
+				background: transparent;
+			}
+		}
+	}
+
+	&--alone {
+		padding-top: 0;
+		margin-bottom: 0;
+
+		.input-group-append {
+			padding-top: 0;
+			height: $input-height - ( $input-border-width-interactive * 2 );
+		}
+	}
+}
+
+.form-control {
+	border-width: 0;
+	border-bottom-width: $input-border-width;
+	padding-top: ( $input-padding-y + $input-border-width );
+	cursor: pointer;
+	@include box-shadow(none);
+
+	&:focus,
+	&.focus,
+	&:hover {
+		padding-bottom: ( $spacer / 8 );
+		border-color: $input-color-interactive;
+		border-bottom-width: $input-border-width-interactive;
+
+		& + .control-label {
+			color: $input-color-interactive;
+		}
+	}
+
+	&:focus,
+	&.focus {
+		box-shadow: none;
+		@include placeholder($titanium-gray);
+	}
+
+	&[disabled],
+	&[readonly],
+	fieldset[disabled] & {
+		color: $input-disabled-color;
+		border-bottom-color: $input-disabled-color;
+		cursor: not-allowed;
+		pointer-events: none;
+	}
+
+	&[disabled],
+	&[readonly] {
+		& + .control-label {
+			color: $input-disabled-color;
+			cursor: not-allowed;
+			pointer-events: none;
+		}
+	}
+
+	&[readonly] {
+		color: $input-color;
+	}
+}
+
+.form-control-text {
+	cursor: default;
+	border-bottom-color: transparent;
+}
+
+textarea.form-control {
+	min-height: $input-textarea-min-height;
+	padding: ( ( $spacer * 2 ) + $input-border-width );
+	line-height: $input-textarea-line-height;
+	border-color: $input-border-color;
+	border-width: $input-border-width;
+	border-radius: $input-border-radius;
+
+	&:focus,
+	&.focus,
+	&:hover {
+		padding: ( $spacer * 2 );
+		border-width: $input-border-width-interactive;
+	}
+
+	& + .control-label {
+		top: ( $form-group-padding-top + $spacer + ( $input-border-width * 2 ) ) ; // 26px
+		left: ( ( $spacer * 2 ) + ( $input-border-width * 2 ) );
+	}
+
+	&[disabled] {
+		@include placeholder($input-disabled-color);
+	}
+}
+
+.form-control:focus:not(select),
+.form-control.focus:not(select),
+.form-control--not-empty {
+	& + .control-label {
+		font-size: $input-label-active-font-size;
+		font-weight: $font-weight-semibold;
+		transform: translateY(-( $input-label-active-font-size * 2 ));
+		pointer-events: auto;
+	}
+}
+
+textarea.form-control:focus,
+textarea.form-control.focus,
+textarea.form-control--not-empty {
+	& + .control-label {
+		top: ( $spacer * 1.5 );
+		left: 0;
+	}
+}
+
+.control-label {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: $input-height;
+	top: $form-group-padding-top;
+	left: 0;
+	margin: 0;
+	color: $blue;
+	cursor: pointer;
+	pointer-events: none;
+	transition: all ease $animation-speed;
+	@include smart-short-text;
+}
+
+.radiogroup-control-label {
+	position: relative;
+	display: block;
+	top: 0;
+	margin-bottom: ( $spacer * 2 );
+}
+
+// States
+.form-control {
+	&,
+	&:focus,
+	&.focus,
+	&:hover {
+		&.is-valid,
+		&.is-warning,
+		&.is-invalid {
+			&:focus {
+				box-shadow: none;
+			}
+		}
+
+		&.is-valid {
+			& + .control-label {
+				color: $primary;
+			}
+		}
+
+		&.is-warning {
+			border-color: $input-color-interactive-warning;
+
+			& + .control-label {
+				color: $input-color-interactive-warning;
+			}
+		}
+
+		&.is-invalid {
+			border-color: $input-color-interactive-invalid;
+
+			& + .control-label {
+				color: $input-color-interactive-invalid;
+			}
+		}
+	}
+}
+
+.form-control--not-empty {
+	& + .control-label {
+		color: $titanium-gray;
+		font-weight: $font-weight-semibold;
+	}
+}
+
+.form-control--placeholder {
+	@include placeholder($titanium-gray);
+}
+
+.form-control {
+	& ~ .invalid-feedback {
+		display: none;
+		margin-top: -( $spacer / 6 );
+		font-size: .75rem;
+	}
+
+	&.is-invalid {
+		& ~ .invalid-feedback {
+			display: block;
+		}
+
+		&.form-control--without-feedback ~ .invalid-feedback {
+			display: none;
+		}
+	}
+}
+
+.form-control--with-indentation {
+	padding: 0 ( $spacer * 4.5 ) 0 ( $spacer * 1.5 ) ;
+
+	&:focus,
+	&.focus,
+	&:hover {
+		padding-top: ( $input-padding-y + $input-border-width );
+	}
+}
+
+// Input group
+.input-group {
+	.btn {
+		min-width: auto;
+		background-color: transparent;
+		color: $gray-400;
+		border-width: 0;
+		z-index: $zindex-input-group-btn;
+
+		&:focus,
+		&:hover,
+		&:active {
+			color: $gray-500;
+		}
+	}
+
+	.form-control {
+		z-index: $zindex-input-group-form-control;
+	}
+
+	.control-label {
+		top: 0;
+	}
+}
+
+.input-group-prepend,
+.input-group-append {
+	position: absolute;
+	top: 0;
+	padding-top: $form-group-padding-top;
+	height: $input-height - ( $input-border-width-interactive * 2 ) + $form-group-padding-top;
+	line-height: $input-line-height;
+	background-color: $input-bg;
+	pointer-events: none;
+
+	&::after {
+		position: absolute;
+		top: 0;
+		content: '';
+		width: ( $spacer * 4 );
+		height: 100%;
+		background: linear-gradient(90deg, rgba($white, 0%) 0%, rgba($white, 100%) 60%);
+	}
+
+	&:focus,
+	& > button:focus {
+		outline: transparent auto 5px;
+	}
+
+	&:hover,
+	& > button:hover {
+		cursor: pointer;
+	}
+}
+
+.input-group-prepend {
+	left: 0;
+
+	&::after {
+		left: 100%;
+	}
+
+	.btn {
+		padding-left: 0;
+	}
+}
+
+.input-group-append {
+	right: 0;
+
+	&::after {
+		right: 100%;
+	}
+
+	.btn {
+		padding-right: 0;
+	}
+}
+
+.input-group-icon {
+	padding-top: ( $spacer / 3 );
+	color: $gray-300;
+}
+
+.input-group-switch__text {
+	color: $titanium-gray;
+
+	&--prepend {
+		margin-right: ( $spacer * 5 );
+	}
+
+	&--append {
+		margin-left: ( $spacer * 5 );
+	}
+
+	&--active {
+		color: $primary;
+		font-weight: $font-weight-semibold;
+	}
+
+	&--disabled {
+		color: $input-disabled-color;
+		cursor: not-allowed;
+		pointer-events: none;
+	}
+}
+
+// Radio Checkbox
+.custom-control {
+	min-height: auto;
+	margin-bottom: ( $spacer / 2 );
+}
+
+.custom-control-input[type='checkbox'],
+.custom-control-input[type='radio'] {
+	&:focus,
+	&.focus {
+		& + .custom-control-label {
+			&::after {
+				background-color: $custom-control-indicator-bg-interactive;
+			}
+		}
+
+		&.is-warning + .custom-control-label {
+			&::after {
+				background-color: $custom-control-indicator-bg-interactive-warning;
+			}
+		}
+
+		&.is-invalid + .custom-control-label {
+			&::before {
+				box-shadow: none;
+			}
+
+			&::after {
+				background-color: $custom-control-indicator-bg-interactive-error;
+			}
+		}
+	}
+
+	&,
+	&.is-valid,
+	&.is-warning,
+	&.is-invalid {
+		& + .custom-control-label {
+			&::before {
+				background-color: transparent;
+			}
+		}
+	}
+
+	& + .custom-control-label {
+		&:hover {
+			&::before {
+				background-color: $custom-control-indicator-bg-interactive;
+			}
+		}
+	}
+
+	&.is-warning + .custom-control-label {
+		color: $input-color;
+
+		&:hover {
+			&::before {
+				background-color: $custom-control-indicator-bg-interactive-warning;
+			}
+		}
+
+		&::after {
+			border-color: $custom-control-indicator-bg-warning;
+		}
+	}
+
+	&.is-invalid + .custom-control-label {
+		&:hover {
+			&::before {
+				background-color: $custom-control-indicator-bg-interactive-error;
+			}
+		}
+
+		&::after {
+			border-color: $custom-control-indicator-bg-invalid;
+		}
+	}
+
+	&:disabled,
+	&:disabled:checked {
+		& + .custom-control-label {
+			cursor: not-allowed;
+			pointer-events: none;
+
+			&::after {
+				background-color: $custom-control-indicator-disabled-bg;
+				border-color: $custom-control-indicator-disabled-border;
+			}
+		}
+	}
+}
+
+.custom-control-label {
+	padding-left: ( $custom-control-indicator-size-px + $spacer );
+	margin-bottom: ( $spacer / 2 );
+	color: $input-color;
+	cursor: pointer;
+
+	&::before,
+	&::after {
+		top: $custom-control-indicator-top;
+	}
+}
+
+// Radio
+.custom-radio {
+	.custom-control-label {
+		&::before {
+			left: 0;
+		}
+
+		&::after {
+			border: $custom-control-indicator-border-width $custom-control-indicator-border-type $green-300;
+			border-radius: $custom-radio-border-radius;
+			transition: all ease-in $animation-speed;
+		}
+	}
+
+	.custom-control-input:checked {
+		& + .custom-control-label {
+			&::before {
+				background-color: $white;
+			}
+
+			&::after {
+				background-image: none;
+			}
+		}
+	}
+}
+
+.custom-control-input[type='radio']:checked {
+	&:focus,
+	&.focus {
+		& + .custom-control-label {
+			&::after {
+				background-color: $custom-control-indicator-bg-check-interactive;
+				border-color: $custom-control-indicator-bg-check-interactive;
+			}
+		}
+
+		&.is-warning + .custom-control-label {
+			&::after {
+				background-color: $custom-control-indicator-bg-check-interactive-warning;
+				border-color: $custom-control-indicator-bg-check-interactive-warning;
+			}
+		}
+
+		&.is-invalid + .custom-control-label {
+			&::after {
+				background-color: $custom-control-indicator-bg-check-interactive-invalid;
+				border-color: $custom-control-indicator-bg-check-interactive-invalid;
+			}
+		}
+	}
+
+	& + .custom-control-label {
+		&::before {
+			position: absolute;
+			top: 12px;
+			left: ( $custom-control-indicator-size-px / 2 - $custom-radio-filling-size / 2 - 1px );
+			width: $custom-radio-filling-size;
+			height: $custom-radio-filling-size;
+			border-radius: $custom-radio-border-radius;
+			z-index: $zindex-input-group-form-control;
+
+			// Media queries
+			@include media-breakpoint-up(xl) {
+				top: 13px;
+				left: ( $custom-control-indicator-size-px / 2 - $custom-radio-filling-size / 2 );
+			}
+		}
+
+		&::after {
+			background-color: $custom-control-indicator-bg;
+		}
+
+		&:hover {
+			&::after {
+				background-color: $custom-control-indicator-bg-check-interactive;
+				border-color: $custom-control-indicator-bg-check-interactive;
+			}
+		}
+	}
+
+	&.is-warning {
+		& + .custom-control-label {
+			&::after {
+				background-color: $custom-control-indicator-bg-warning;
+			}
+
+			&:hover {
+				&::after {
+					background-color: $custom-control-indicator-bg-check-interactive-warning;
+					border-color: $custom-control-indicator-bg-check-interactive-warning;
+				}
+			}
+		}
+	}
+
+	&.is-invalid {
+		& + .custom-control-label {
+			&::after {
+				background-color: $custom-control-indicator-bg-invalid;
+			}
+
+			&:hover {
+				&::after {
+					background-color: $custom-control-indicator-bg-check-interactive-invalid;
+					border-color: $custom-control-indicator-bg-check-interactive-invalid;
+				}
+			}
+		}
+	}
+}
+
+// Radio group
+.custom-radio-group__item {
+	margin-bottom: ( $spacer * 2.5 );
+}
+
+// Checkbox
+.custom-checkbox {
+	.custom-control-label {
+		&::before,
+		&::after {
+			border-radius: $custom-checkbox-indicator-border-radius;
+			transition: background-color ease-in $animation-speed, border ease-in $animation-speed;
+		}
+
+		&::before {
+			left: $custom-control-gutter;
+		}
+
+		&::after {
+			border: $custom-control-indicator-border-width $custom-control-indicator-border-type $green-300;
+		}
+	}
+
+	.custom-control-input:checked {
+		& + .custom-control-label {
+			&::after {
+				background-image: none;
+			}
+		}
+	}
+}
+
+.custom-control-input[type='checkbox']:checked {
+	&:focus,
+	&.focus {
+		& + .custom-control-label {
+			&::before,
+			&::after {
+				background-color: $custom-control-indicator-bg-check-interactive;
+				border-color: $custom-control-indicator-bg-check-interactive;
+			}
+		}
+
+		&.is-warning + .custom-control-label {
+			&::before,
+			&::after {
+				background-color: $custom-control-indicator-bg-check-interactive-warning;
+				border-color: $custom-control-indicator-bg-check-interactive-warning;
+			}
+		}
+
+		&.is-invalid + .custom-control-label {
+			&::before,
+			&::after {
+				background-color: $custom-control-indicator-bg-check-interactive-invalid;
+				border-color: $custom-control-indicator-bg-check-interactive-invalid;
+			}
+		}
+	}
+
+	& + .custom-control-label {
+		&::before,
+		&::after {
+			background-color: $custom-control-indicator-bg;
+		}
+
+		&::after {
+			@include icon;
+			content: '\e907';
+			font-size: $custom-checkbox-icon-size;
+			line-height: ( $custom-control-indicator-size-px - 4px );
+			text-align: center;
+			color: $white;
+		}
+
+		&:hover {
+			&::before,
+			&::after {
+				background-color: $custom-control-indicator-bg-check-interactive;
+				border-color: $custom-control-indicator-bg-check-interactive;
+			}
+		}
+	}
+
+	&.is-warning {
+		& + .custom-control-label {
+			&::before,
+			&::after {
+				background-color: $custom-control-indicator-bg-warning;
+			}
+
+			&:hover {
+				&::before,
+				&::after {
+					background-color: $custom-control-indicator-bg-check-interactive-warning;
+					border-color: $custom-control-indicator-bg-check-interactive-warning;
+				}
+			}
+		}
+	}
+
+	&.is-invalid {
+		& + .custom-control-label {
+			&::before,
+			&::after {
+				background-color: $custom-control-indicator-bg-invalid;
+			}
+
+			&:hover {
+				&::before,
+				&::after {
+					background-color: $custom-control-indicator-bg-check-interactive-invalid;
+					border-color: $custom-control-indicator-bg-check-interactive-invalid;
+				}
+			}
+		}
+	}
+}
+
+// Switch
+.custom-checkbox--switch {
+	.custom-control-input {
+		& + .custom-control-label {
+			width: 100%;
+			display: flex;
+			flex-flow: row-reverse;
+			justify-content: space-between;
+			align-items: center;
+			padding-left: 0;
+			overflow: hidden;
+
+			&::before {
+				position: relative;
+				width: $custom-switch-width;
+				height: $custom-switch-height;
+				min-width: $custom-switch-width;
+				margin: -9px 0 0 10px;
+				background-color: $night-blue;
+				border-radius: $custom-switch-height;
+			}
+
+			&::after {
+				width: $custom-control-indicator-size-px;
+				height: $custom-control-indicator-size-px;
+				top: 50%;
+				right: 30px;
+				left: auto;
+				transform: translate(0, -50%);
+				background-color: $white;
+				border-radius: $custom-radio-border-radius;
+				box-shadow: $custom-switch-shadow;
+				transition: all $animation-speed ease-in;
+			}
+		}
+	}
+
+	.custom-control-input {
+		&:checked {
+			& + .custom-control-label {
+				&::after {
+					content: '';
+					right: 5px;
+					background-color: $white;
+				}
+				&::before {
+					background-color: $custom-switch-bg;
+				}
+			}
+		}
+
+		&:disabled {
+			& + .custom-control-label {
+				&::before {
+					background-color: $custom-control-indicator-disabled-bg;
+				}
+
+				&:after {
+					background-color: $white;
+				}
+			}
+		}
+	}
+
+	&:hover,
+	&:focus-within {
+		.custom-control-input:not([disabled]) {
+			& + .custom-control-label::before {
+				background-color: $titanium-gray;
+			}
+
+			&:checked {
+				& + .custom-control-label::before {
+					background-color: $custom-switch-bg-interactive;
+				}
+			}
+		}
+	}
+}
+
+// Radiogroup like toggle switch
+.radio-group--switch {
+	display: flex;
+	flex-direction: row;
+	width: auto;
+
+	.control-label {
+		display: none;
+	}
+}
+
+.radio-group--switch {
+	// Reset default - left + right
+	.custom-control-input {
+		&,
+		&:checked {
+			& + .custom-control-label {
+				z-index: 2;
+				padding-left: 0;
+				position: relative;
+
+				&::before,
+				&::after {
+					pointer-events: none;
+					display: none;
+					position: absolute;
+				}
+			}
+		}
+
+		&:checked {
+			& + .custom-control-label {
+				z-index: 1;
+			}
+		}
+	}
+
+	.custom-radio--switch {
+		// Left toggle
+		&:nth-of-type(1) {
+			.custom-control-input {
+				& + .custom-control-label {
+					padding-right: ( $spacer * 6 ) + ( $custom-switch-width / 2 );
+				}
+			}
+		}
+
+		// Right toggle
+		&:nth-of-type(2) {
+			margin-left: -$spacer * 7;
+
+			.custom-control-input + .custom-control-label {
+				padding-left: ( $spacer * 6 ) + ( $custom-switch-width / 2 );
+
+				&::before {
+					display: block;
+					width: $custom-switch-width;
+					height: $custom-switch-height;
+					background: $custom-switch-bg;
+					border-radius: $custom-switch-height;
+					top: 50%;
+					left: 0;
+					transform: translate(0, -50%);
+					z-index: 3;
+				}
+
+				&::after {
+					display: block;
+					border: none;
+					background-color: $white;
+					width: $custom-control-indicator-size-px;
+					height: $custom-control-indicator-size-px;
+					top: 50%;
+					left: 4px;
+					transform: translate(0, -50%);
+					z-index: 4;
+					box-shadow: $custom-switch-shadow;
+				}
+			}
+
+			.form-control--not-empty + .custom-control-label {
+				&::after {
+					left: 30px;
+				}
+			}
+
+			.custom-control-input:disabled,
+			.custom-control-input:disabled:checked {
+				& + .custom-control-label::before {
+					background-color: $custom-control-indicator-disabled-bg;
+				}
+			}
+		}
+
+		&:hover,
+		&:focus-within {
+			&,
+			& + .custom-radio--switch {
+				.custom-control-input:not([disabled]) + .custom-control-label::before {
+					background-color: $custom-switch-bg-interactive;
+				}
+			}
+		}
+	}
+}
+
+
+// Selectbox
+.select {
+	position: relative;
+
+	.select-icon {
+		position: absolute;
+		top: ( $input-height / 2 ) - ( $custom-select-icon-size / 2 );
+		right: 0;
+		padding-right: ( $spacer / 2 );
+		font-size: $custom-select-icon-size;
+		font-weight: $font-weight-bold;
+		color: $titanium-gray;
+		pointer-events: none;
+	}
+
+	select::-ms-expand {
+		display: none;
+	}
+
+	.form-control {
+		padding-right: ( $spacer * 1.25 );
+		appearance: none;
+
+		&,
+		&:focus,
+		&.focus,
+		&:hover {
+			&.is-valid {
+				border-color: $input-color-interactive;
+
+				& ~ .select-icon {
+					color: $input-color-interactive;
+				}
+			}
+
+			&.is-warning {
+				border-color: $input-color-interactive-warning;
+
+				& ~ .select-icon {
+					color: $input-color-interactive-warning;
+				}
+			}
+
+			&.is-invalid {
+				border-color: $input-color-interactive-invalid;
+
+				& ~ .select-icon {
+					color: $input-color-interactive-invalid;
+				}
+			}
+		}
+
+		&.is-valid {
+			border-color: $titanium-gray;
+
+			& ~ .select-icon {
+				color: $titanium-gray;
+			}
+		}
+
+		&[disabled] {
+			& ~ .select-icon {
+				color: $input-disabled-color;
+			}
+		}
+	}
+}
+
+// File input
+.custom-file {
+	width: auto;
+	margin-bottom: ( $spacer / 2 );
+}
+
+.custom-file-input {
+	position: absolute;
+	line-height: 1;
+	z-index: $zindex-form-file-input;
+
+	&:focus:not(disabled) ~ .custom-file-label {
+		text-decoration: underline;
+	}
+
+	&:disabled ~ .custom-file-label {
+		color: $disabled;
+
+		&:hover,
+		&:active {
+			text-decoration: none;
+			cursor: default;
+		}
+	}
+}
+
+.custom-file-label {
+	position: relative;
+	margin-bottom: 0;
+	color: $link-color;
+	border: none;
+	box-shadow: none;
+	text-decoration: $link-decoration;
+	padding: 0;
+
+	&::after {
+		display: none;
+	}
+
+	&:hover,
+	&:active {
+		text-decoration: $link-hover-decoration;
+		cursor: pointer;
+	}
+}
+
+.input-subtext {
+	color: $blue;
+	font-size: .75rem;
+
+	&--disabled {
+		color: $input-disabled-color;
+	}
+}

@@ -1,0 +1,37 @@
+<button
+    type="button"
+    class="btn w-100"
+    [ngClass]="[
+        type !== null && !hasOutline ? 'btn-' + type : '',
+        hasOutline ? 'btn-outline-' + type : '',
+        size ? 'btn-' + size : '',
+        variant === 'dots' ? 'btn--raw' : '',
+        customClass ? customClass : ''
+    ]"
+    [disabled]="isDisabled"
+    (click)="action.emit($event)">
+    <span
+        *ngIf="!!icon && !variant"
+        class="icon btn__icon"
+        [ngClass]="[
+            icon ? icon : '',
+            customIconClass ? customIconClass : '',
+            iconPosition ? 'btn__icon--' + iconPosition : '',
+            size === 'small' ? 'icon--small' : ''
+        ]">
+    </span>
+    <span
+        *ngIf="variant === 'dots'"
+        class="icon btn__icon btn__icon--alone"
+        [ngClass]="[
+            dotsDirection ? 'icon--dots-' + dotsDirection : 'icon--dots-vertical',
+            customIconClass ? customIconClass : ''
+        ]">
+    </span>
+    <span
+        *ngIf="label"
+        class="btn__text"
+    >
+        {{ label }}
+    </span>
+</button>

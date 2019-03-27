@@ -1,0 +1,72 @@
+/*
+ -  Tip
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+.tip {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	margin-bottom: $spacer;
+	background-color: rgba($blue-050, .1);
+	border: 1px solid $gray-200;
+
+	// Media queries
+	@include media-breakpoint-up(md) {
+		flex-direction: row;
+		text-align: left;
+	}
+
+	&__image,
+	&__text {
+		display: flex;
+	}
+
+	&__text {
+		width: 100%;
+	}
+
+	&__text-number {
+		display: block;
+		font-size: 1rem;
+		font-weight: 700;
+	}
+
+	p {
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	&--small {
+		padding: ( $spacer / 2 );
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			height: $tip-height-small;
+			padding: ( $spacer / 3 ) ( $spacer / 2 );
+		}
+
+		.tip__image {
+			width: ( $tip-height-small - ( $spacer / 1.5 ) );
+			min-width: ( $tip-height-small - ( $spacer / 1.5 ) );
+			height: ( $tip-height-small - ( $spacer / 1.5 ) );
+		}
+	}
+
+	&--big {
+		min-height: $tip-min-height-big;
+		padding: ( $spacer / 2 );
+
+		.tip__image {
+			width: ( $tip-min-height-big - $spacer );
+			min-width: ( $tip-min-height-big - $spacer );
+			height: ( $tip-min-height-big - $spacer );
+		}
+	}
+}

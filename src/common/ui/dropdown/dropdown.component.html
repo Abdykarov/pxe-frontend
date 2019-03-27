@@ -1,0 +1,24 @@
+<div
+    [ngClass]="[
+        direction ? 'drop' + direction : 'dropdown',
+        hasBeak && isOpen ? 'dropdown--with-beak' : '',
+        customDropdownClass ? customDropdownClass : '',
+        overlayEnabled && isOpen ? 'overlay--visible' : ''
+    ]"
+    (lndOffClick)="isOpen = false"
+    [offClickEnabled]="isOpen"
+    >
+    <div class="dropdown-toggle">
+        <ng-container *ngTemplateOutlet="actionTemplate; context: { toggle: this.toggle } "></ng-container>
+    </div>
+    <div
+        class="dropdown-menu"
+        (click)="itemClick()"
+        [ngClass]="[
+            isOpen ? 'dropdown-menu--open' : '',
+            menuDirection ? 'dropdown-menu-' + menuDirection : ''
+        ]">
+        <ng-content></ng-content>
+        <ng-container *ngTemplateOutlet="contentTemplate; context: { toggle: this.toggle } "></ng-container>
+    </div>
+</div>

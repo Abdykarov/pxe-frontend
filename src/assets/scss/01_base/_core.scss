@@ -1,0 +1,29 @@
+/*
+ -  Core Settings
+ -
+ -  Helper file to load core functionality and settings for styles
+ -  Only use for styling modular components in Angular
+ */
+
+@import '01_base/variables';                                                  // Variables
+@import '~bootstrap/scss/functions';                                          // Bootstrap functions
+@import '~bootstrap/scss/variables';                                          // Bootstrap variables
+@import '~bootstrap/scss/mixins';                                             // Bootstrap mixins
+@import '~bootstrap/scss/root';                                               // Bootstrap functions
+@import '~bootstrap/scss/reboot';                                             // Bootstrap root
+@import '~bootstrap/scss/type';                                               // Bootstrap type
+@import '~bootstrap/scss/images';                                             // Bootstrap images
+@import '~bootstrap/scss/alert';                                              // Bootstrap alert
+@import '~bootstrap/scss/badge';                                              // Bootstrap badge
+@import '~bootstrap/scss/breadcrumb';                                         // Bootstrap breadcrumb
+@import '~bootstrap/scss/pagination';                                         // Bootstrap pagination
+@import '~bootstrap/scss/close';                                              // Bootstrap close
+@import '~bootstrap/scss/code';                                               // Bootstrap code
+@import '~bootstrap/scss/grid';                                               // Bootstrap grid
+@import '~bootstrap/scss/transitions';                                        // Bootstrap transitions
+@import '~bootstrap/scss/utilities';                                          // Bootstrap utilities
+@import '01_base/mixins';                                                     // Mixins
+@import '01_base/utilities';                                                  // Utilities
+@import '01_base/master';                                                     // Master styles
+@import '01_base/icons';                                                      // Icons
+@import '01_base/typography';                                                 // Typography

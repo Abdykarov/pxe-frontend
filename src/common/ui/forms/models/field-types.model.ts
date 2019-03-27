@@ -1,0 +1,15 @@
+export enum FieldTypes {
+    'FILE' = 'FILE',
+    'SLIDER' = 'SLIDER',
+    'INPUT' = 'INPUT',
+    'LABEL' = 'LABEL',
+    'DATEPICKER' = 'DATEPICKER',
+    'IMAGECROPPER' = 'IMAGECROPPER',
+    'NUMBER' = 'NUMBER',
+    'SELECT' = 'SELECT',
+    'RADIOGROUP' = 'RADIOGROUP',
+    'TEXTAREA' = 'TEXTAREA',
+    'SWITCH' = 'SWITCH',
+    'TOGGLE' = 'TOGGLE',
+    'CHECKBOX' = 'CHECKBOX',
+}

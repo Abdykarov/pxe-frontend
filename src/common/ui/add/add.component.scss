@@ -1,0 +1,89 @@
+/*
+ -  Add
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+.add {
+	cursor: pointer;
+
+	@include link-without-href {
+		display: flex;
+		height: 100%;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		border: 1px dashed $gray-300;
+		text-align: center;
+		color: $gray-300;
+		text-decoration: none;
+	}
+
+	@include link-without-href-interactive {
+		color: $gray-400;
+		border-color: $gray-400;
+
+		.add__text {
+			border-color: $gray-400;
+		}
+	}
+
+	&__holder {
+		padding: ( $spacer / 2 );
+	}
+
+	&__icon,
+	&__text {
+		display: block;
+	}
+
+	&__icon {
+		margin-bottom: ( $spacer / 6 );
+	}
+
+	&__text {
+		text-transform: uppercase;
+	}
+}
+
+.add-table-holder {
+	padding: ( $spacer / 1.5 ) 0;
+	margin-bottom: $spacer;
+	border-top: 1px solid $table-border-color;
+	border-bottom: 1px solid $table-border-color;
+}
+
+.add-table {
+	margin-left: ( $spacer / 2 );
+
+	@include link-without-href {
+		color: $primary;
+		text-decoration: none;
+	}
+
+	@include link-without-href-interactive {
+		color: $primary-dark;
+
+		.add-table__icon-holder {
+			color: $primary-dark;
+		}
+	}
+
+	.add__holder {
+		padding: 0;
+	}
+
+	&__icon-holder {
+		margin-right: ( $spacer / 2 );
+		border: 1px solid $link-color;
+		border-radius: 100%;
+	}
+
+	&__text {
+		font-size: .75rem;
+		vertical-align: middle;
+	}
+}

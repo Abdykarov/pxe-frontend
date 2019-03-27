@@ -1,0 +1,21 @@
+<div
+    class="alert"
+    [ngClass]="[
+        type ? 'alert-' + type : '',
+        isDismissible ? 'alert-dismissible' : '',
+        hasIcon && (type !== 'info') ? 'alert--with-icon' : ''
+    ]">
+    <span
+        *ngIf="hasIcon && (type !== 'info')"
+        class="alert__common-icon icon"
+        [ngClass]="icon">
+    </span>
+    <ng-content></ng-content>
+    <button
+        *ngIf="isDismissible"
+        type="button"
+        class="close"
+        (click)="close.emit($event)">
+        <span class="icon icon--remove"></span>
+    </button>
+</div>

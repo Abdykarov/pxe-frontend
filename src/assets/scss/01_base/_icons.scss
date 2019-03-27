@@ -1,0 +1,87 @@
+/*
+ -  Theme icons
+ */
+
+$icon-version: random();
+
+@font-face {
+	font-family: 'icons';
+	src:
+		url('#{$icon-path}/icons.ttf?#{$icon-version}') format('truetype'),
+		url('#{$icon-path}/icons.woff?#{$icon-version}') format('woff'),
+		url('#{$icon-path}/icons.svg?#{$icon-version}#icons') format('svg');
+	font-weight: 400;
+	font-style: normal;
+}
+
+.icon {
+	@include icon;
+
+	&--small {
+		font-size: $icon-size-small;
+	}
+
+	&--light {
+		color: $icons-inactive;
+	}
+
+	&--gold {
+		color: $icons-active;
+	}
+
+	&__holder-small {
+		position: relative;
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		vertical-align: middle;
+
+		.icon {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+}
+
+@function unicode ($str) {
+	@return unquote('\"') + $str + unquote('\"');
+}
+
+// Icons variables array
+$icons: (
+	add:                   \e921,
+	alert:                 \e91a,
+	arrow-minimal-up:      \e90e,
+	arrow-minimal-down:    \e90f,
+	arrow-minimal-left:    \e910,
+	arrow-minimal-right:   \e911,
+	ban:                   \e91b,
+	cart:                  \e905,
+	delete:                \e922,
+	dots-vertical:         \e912,
+	dots-horizontal:       \e913,
+	favourite-fill:        \e91f,
+	favourite-stroke:      \e920,
+	home:                  \e908,
+	check:                 \e919,
+	logout:                \e90a,
+	remove:                \e918,
+	phone-call:            \e90c,
+	search:                \e900,
+	triangle-up:           \e914,
+	triangle-down:         \e915,
+	triangle-left:         \e916,
+	triangle-right:        \e917,
+	component-low:         \e91c,
+	component-middle:      \e91d,
+	component-high:        \e91e,
+);
+
+// Icons aplication to class
+@each $name, $icon in $icons {
+	.icon--#{$name}::before {
+		content: unicode($icon);
+	}
+}

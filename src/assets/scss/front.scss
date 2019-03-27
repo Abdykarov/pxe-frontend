@@ -1,0 +1,41 @@
+/*
+ -  Front
+ -
+ -  This file includes and describes all used CSS written in SCSS preprocesor.
+ */
+
+
+/* -------------------------- */
+/*   1. CORE - CONFIG,        */
+/*             BASE           */
+/*             VENDORS        */
+/* -------------------------- */
+
+@import '01_base/core';                                                       // Core CSS
+
+/* ------------------------- */
+/*   2. LAYOUT               */
+/* ------------------------- */
+
+@import '02_layout/body';                                                     // Container body
+@import '02_layout/container-content';                                        // Container content
+@import '02_layout/main';                                                     // Main
+@import '02_layout/static-pages';                                             // Static pages
+
+/* ------------------------- */
+/*   3. COMPONENTS           */
+/* ------------------------- */
+
+// Seperate and sort partials into blocks with different concerns if there's too much partials
+
+/* ------------------------- */
+/*   4. MODULES              */
+/* ------------------------- */
+
+
+
+/* ------------------------- */
+/*   5. TEMPLATES & PAGES    */
+/* ------------------------- */
+
+

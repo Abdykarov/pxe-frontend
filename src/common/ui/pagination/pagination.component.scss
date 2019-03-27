@@ -1,0 +1,93 @@
+/*
+ -  Pagination
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+// Bootstrap pagination import
+@import '~bootstrap/scss/pagination';
+
+
+.pagination-holder {
+	display: flex;
+	justify-content: space-between;
+
+	ul {
+		@include reset-list(none, 0, 0);
+	}
+
+	lnd-button {
+		// Media queries
+		@include media-breakpoint-up(md) {
+			display: none;
+		}
+	}
+
+	.select {
+		display: none;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			display: flex;
+		}
+	}
+}
+
+.pagination {
+	display: none;
+
+	// Media queries
+	@include media-breakpoint-up(md) {
+		display: flex;
+		border-radius: 0;
+	}
+
+	.page-item {
+		padding: 0;
+
+		&::before {
+			display: none;
+		}
+	}
+
+	.page-link,
+	.page-dots {
+		&,
+		&:visited {
+			display: block;
+			width: $pagination-link-width;
+			height: $pagination-link-height;
+			text-align: center;
+			line-height: $pagination-link-line-height;
+			text-decoration: none;
+			border-radius: $pagination-link-radius;
+		}
+
+		&:focus,
+		&:active {
+			color: $pagination-focus-color;
+		}
+
+		&:first-child,
+		&:last-child {
+			border-radius: $pagination-link-radius;
+		}
+	}
+
+	.active {
+		.page-link {
+			&,
+			&:visited,
+			&:hover {
+				background: $pagination-active-bg-gradient;
+			}
+
+			&:focus {
+				color: $white;
+			}
+		}
+	}
+}

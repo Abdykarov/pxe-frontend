@@ -1,0 +1,111 @@
+<table
+    class="table"
+    [ngClass]="tableClass"
+    [class.table--static]="isStatic">
+    <caption
+        *ngIf="caption"
+        [innerHtml]="caption">
+    </caption>
+    <caption *ngIf="customCaptionTemplate">
+        <ng-container *ngTemplateOutlet="customCaptionTemplate"></ng-container>
+    </caption>
+    <thead
+        *ngIf="showHead"
+        [ngClass]="desktopLayoutClasses">
+        <tr>
+            <th *ngIf="rowDetailTemplate"></th>
+            <ng-container *ngFor="let column of cols">
+                <th
+                    *ngFor="let view of column.views"
+                    [ngClass]="view.headingClass"
+                    [innerHtml]="column.label">
+                </th>
+            </ng-container>
+            <th
+                *ngIf="actionColTemplate"
+                [ngClass]="actionColClass">
+            </th>
+        </tr>
+    </thead>
+    <tbody [ngClass]="desktopLayoutClasses">
+        <ng-container *ngFor="let row of rows">
+            <tr
+                [class.table__tr--main]="isAdvanced"
+                [class.table__tr--active]="isAdvanced && openedRow === row"
+                (click)="openRow(row); selectRow(row)">
+                <td *ngIf="rowDetailTemplate">
+                    <span class="icon icon--small icon--collapse icon--arrow-minimal-down"></span>
+                </td>
+                <ng-container *ngFor="let column of cols">
+                    <ng-container *ngFor="let view of column.views">
+                        <td
+                            *ngIf="view.content"
+                            [ngClass]="view.cellClass"
+                            [innerHtml]="view.content(row)">
+                        </td>
+                        <td
+                            *ngIf="view.contentTemplateName"
+                            [ngClass]="!!view.cellClass ? view.cellClass : ''">
+                            <ng-container *ngTemplateOutlet="columnTemplates[view.contentTemplateName]; context: {row: row}"></ng-container>
+                        </td>
+                    </ng-container>
+                </ng-container>
+                <td
+                    *ngIf="actionColTemplate"
+                    [ngClass]="actionColClass">
+                    <ng-container *ngTemplateOutlet="actionColTemplate; context: {row: row}"></ng-container>
+                </td>
+            </tr>
+            <tr
+                *ngIf="rowDetailTemplate && openedRow === row"
+                class="table__tr--detail table__tr--show">
+                    <td></td>
+                    <td [attr.colspan]="cols.length + (actionColTemplate ? 1 : 0)">
+                        <ng-container *ngTemplateOutlet="rowDetailTemplate; context: {row: row}"></ng-container>
+                    </td>
+            </tr>
+        </ng-container>
+    </tbody>
+    <ng-container *ngIf="mobileCols.length">
+        <tbody
+            *ngFor="let row of rows"
+            class="tbody--mobile"
+            [ngClass]="mobileLayoutClasses">
+            <ng-container *ngFor="let column of mobileCols">
+                <tr *ngFor="let view of column.mobileViews">
+                    <td
+                        [ngClass]="view.headingClass"
+                        [innerHtml]="column.label">
+                    </td>
+                    <td
+                        *ngIf="view.content"
+                        [ngClass]="view.cellClass"
+                        [innerHtml]="view.content(row)">
+                    </td>
+                    <td *ngIf="view.contentTemplateName">
+                        <ng-container *ngTemplateOutlet="columnTemplates[view.contentTemplateName]; context: {row: row}"></ng-container>
+                    </td>
+                </tr>
+            </ng-container>
+            <tr *ngIf="rowDetailTemplate">
+                <td
+                    *ngIf="openedRow !== row"
+                    colspan="2"
+                    class="w-100 px-0 text-center">
+                    <lnd-button
+                        (action)="openRow(row); selectRow(row)"
+                        type="secondary"
+                        hasOutline="true"
+                        [label]="mobileDetailCaption">
+                    </lnd-button>
+                </td>
+                <td
+                    *ngIf="openedRow === row"
+                    colspan="2"
+                    class="w-100 px-0">
+                    <ng-container *ngTemplateOutlet="rowDetailTemplate; context: {row: row}"></ng-container>
+                </td>
+            </tr>
+        </tbody>
+    </ng-container>
+</table>

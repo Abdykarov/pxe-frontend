@@ -1,0 +1,32 @@
+/*
+ -  Container content
+ -
+ -
+ */
+
+
+.container-content {
+	padding-top: $header-height;
+	padding-bottom: $spacer;
+
+	// Media queries
+	@include media-breakpoint-up(md) {
+		padding-top: $header-height + $spacer;
+		padding-bottom: $footer-height + $spacer;
+		min-height: 100vh;
+	}
+	@include media-breakpoint-up(lg) {
+		//padding-top: $header-height;
+		padding-left: $aside-width + $spacer;
+		padding-bottom: $footer-height + $spacer;
+		min-height: 100vh;
+	}
+
+	&--public {
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			padding-top: $header-height + $spacer;
+			padding-left: ( $spacer / 2 );
+		}
+	}
+}

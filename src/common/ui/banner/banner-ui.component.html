@@ -1,0 +1,34 @@
+<div [ngClass]="[ type === 'simple' ? 'banner-simple bg--gradient-blue' : 'banner' ]">
+    <div
+        *ngIf="type === 'default'"
+        class="banner__content">
+        <h2 class="banner__title">
+            {{ data.title }}
+        </h2>
+        <p class="banner__text">
+            {{ data.text }}
+        </p>
+    </div>
+    <h2
+        *ngIf="type === 'simple'"
+        class="banner-simple__title">
+        {{ staticBannerTitle }}
+    </h2>
+    <div
+        *ngIf="type === 'default'"
+        class="banner__controls">
+        <lnd-button label="{{ buttonLabel }}"
+                     (action)="bannerAction(data.linkValue, data.linkType)"
+                     hasOutline="true"
+                     type="secondary"
+                     class="banner__btn">
+        </lnd-button>
+    </div>
+    <lnd-button
+        *ngIf="type === 'simple'"
+        (action)="staticBannerAction.emit($event)"
+        label="{{ buttonLabel }}"
+        type="white"
+        hasOutline="true">
+    </lnd-button>
+</div>

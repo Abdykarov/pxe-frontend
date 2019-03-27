@@ -1,105 +1,57 @@
-##
-## User local/specific files
-##
-project-local.properties
-docker-compose.override.yml
-*_private.sh
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# compiled output
+/dist*
+/tmp
+/out-tsc
 
-##
-## Output files and folders
-##
+# dependencies
+/node_modules
+/mock/node_modules
+/mock/package-lock.json
 
-# Log files
-*.log
+### Vim ###
+# swap
+.sw[a-p]
+.*.sw[a-p]
+# session
+Session.vim
+# temporary
+.netrwhist
+*~
+# auto-generated tag files
+tags
 
-# Binary output files 
-*.com
-*.class
-*.dll
-*.exe
-*.o
-*.so
-
-# Output folders
-.web_bundle_build
-bin
-build
-build_gradle
-bundles
-coverage
-dist
-out
-portal-deploy
-target
-test-coverage
-test-results
-tmp
-
-
-##
-## Build tools temp / local files / folders
-##
-
-# Maven
-dependency-reduced-pom.xml
-pom.xml.versionsBackup
-
-# Gradle
-.gradle
-gradle-*.properties
-
-# Ant & Ivy
-.ivy
-
-# Node
-node_modules
-
-# NPM
-npm-debug.log*
-
-# Yarn
-yarn-debug.log*
-yarn-error.log*
-
-# SASS
-.sass-cache
-
-# Liferay Theme Build
-liferay-theme.json
-
-
-##
-## IDE folders and files
-##
-
-# IntelliJ Idea / PhpStorm / WebStorm / ..
-*.iml
-.idea
-
-# Eclipse
+# IDEs and editors
+/.idea
 .project
 .classpath
-.settings
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
-##
-## OS specific deadwood
-##
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+# System Files
 .DS_Store
-.DS_Store?
-.Spotlight-V100
-.Trashes
-Icon?
-ehthumbs.db
 Thumbs.db
-._*
-.~*
-*~
-.*.sw*
-~*
-$~*
