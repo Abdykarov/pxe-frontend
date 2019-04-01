@@ -12,9 +12,11 @@ import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import {
-    map,
+    first, map,
     takeUntil,
 } from 'rxjs/operators';
+import * as R from 'ramda';
+
 
 import * as queries from 'src/common/graphql/queries';
 import * as mutations from 'src/common/graphql/mutations';
@@ -124,6 +126,7 @@ export class LandingPageComponent extends AbstractComponent implements OnInit {
             .subscribe();
     }
 
+
     public decrementCounter = () => {
         this.apollo
             .mutate({
@@ -151,9 +154,34 @@ export class LandingPageComponent extends AbstractComponent implements OnInit {
             .subscribe();
     }
 
+    public submitForm = () => {
+        R.pipe(
+            R.keys,
+            R.map((field) => {
+                this.loginForm
+                    .get(field)
+                    .markAsTouched({
+                        onlySelf: true,
+                    });
+            }),
+        )(this.loginForm.controls);
+        if (this.loginForm.valid) {
+            this.loginLoading = true;
+            this.loginError = false;
+            this.authService
+                .login(this.loginForm.value);
+            this.router.navigate(['/secured']);
+        }
+    }
+
+
     public toggleLoginDialog = () => {
         if (!this.loginLoading) {
             this.showLogin = !this.showLogin;
         }
     }
+
+
+
+
 }

@@ -39,19 +39,8 @@ export class AuthService {
     }
 
     login = ({username, password}: ILoginRequest) => {
-        return this.http.post<ILoginResponse>(`${environment.api}/api/user/login`, { username, password })
-            .pipe(
-                map(response => {
-                    if (response && response.token) {
-                        if ( response.expiresTime ) {
-                            this.expiresTime = response.expiresTime;
-                        }
-                        const user =  JSON.stringify({token: response.token});
-                        this.cookiesService.set(this.cookieName, user, this.expiresTime);
-                    }
-                    return response;
-                }),
-            );
+        this.cookiesService.set('asdads', 'asdasd', 5645454545);
+        return true;
     }
 
     logout = () => {
