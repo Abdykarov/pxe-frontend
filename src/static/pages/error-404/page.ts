@@ -5,7 +5,7 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
     templateUrl: './page.html',
 })
 
-export class ErrorPagePageComponent {
+export class ErrorPageComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
     constructor() {

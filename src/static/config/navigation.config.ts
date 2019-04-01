@@ -112,14 +112,13 @@ export const staticNavigationConfig: INavigationConfig = [
             'icon': 'component-high',
             'children': [
                 {
-                    'label': 'Error page 404',
-                    'url': '/error-page-404',
-                },
-                {
-                    'label': 'Landing page',
+                    'label': 'Landing',
                     'url': '/landing-page',
                 },
-
+                {
+                    'label': 'Error',
+                    'url': '/error-404',
+                },
             ],
         },
     ],

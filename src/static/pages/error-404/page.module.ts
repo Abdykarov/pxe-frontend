@@ -4,15 +4,15 @@ import { Routes } from '@angular/router';
 
 // own classes
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
-import { ErrorPage404Module } from 'src/common/ui/error-page-404/error-page-404.module';
-import { ErrorPagePageComponent } from './page';
+import {ErrorPageComponent} from './page';
+import {ErrorPage404Module} from '../../../common/ui/error-page-404/error-page-404.module';
 
 @NgModule({
     declarations: [
-        ErrorPagePageComponent,
+        ErrorPageComponent,
     ],
     exports: [
-        ErrorPagePageComponent,
+        ErrorPageComponent,
     ],
     imports: [
         CommonModule,
@@ -20,11 +20,11 @@ import { ErrorPagePageComponent } from './page';
         ErrorPage404Module,
     ],
 })
-export class ErrorPagePageModule {}
+export class ErrorPageModule {}
 
-export const errorPagePageRoutes: Routes = [
+export const errorPageRoutes: Routes = [
     {
-        path: 'error-page-404',
-        component: ErrorPagePageComponent,
+        path: 'error-404',
+        component: ErrorPageComponent,
     },
 ];

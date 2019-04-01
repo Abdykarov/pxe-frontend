@@ -4,7 +4,6 @@ import {
     RouterModule,
 } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import {ErrorPagePageModule, errorPagePageRoutes} from './pages/error-page-404/page.module';
 import {TypographyPageModule, typographyPageRoutes} from './atoms/typography/page.module';
 import {BannersPageModule, bannersPageRoutes} from './atoms/banners/page.module';
 import {AddPageModule, addPageRoutes} from './atoms/add/page.module';
@@ -25,7 +24,8 @@ import {PaginationPageModule, paginationPageRoutes} from './atoms/pagination/pag
 import {ModalsPageModule, modalsPageRoutes} from './organisms/modals/page.module';
 import {TooltipPageModule, tooltipPageRoutes} from './atoms/tooltip/page.module';
 import {ColorsPageModule, colorsPageRoutes} from './atoms/colors/page.module';
-import {LandingPageModule, landingPagePageRoutes} from './pages/landing-page/landing-page.module';
+import {ErrorPageModule, errorPageRoutes} from './pages/error-404/page.module';
+import {LandingModule, landingPageRoutes} from './pages/landing/landing.module';
 
 
 const routes: Routes = [
@@ -38,7 +38,7 @@ const routes: Routes = [
     ...cardPageRoutes,
     ...colorsPageRoutes,
     ...dropdownPageRoutes,
-    ...errorPagePageRoutes,
+    ...errorPageRoutes,
     ...formsPageRoutes,
     ...iconsPageRoutes,
     ...indicatorsPageRoutes,
@@ -50,7 +50,7 @@ const routes: Routes = [
     ...tipsPageRoutes,
     ...tooltipPageRoutes,
     ...typographyPageRoutes,
-    ...landingPagePageRoutes,
+    ...landingPageRoutes,
     {
         path: '**',
         redirectTo: '',
@@ -74,7 +74,7 @@ const routes: Routes = [
         CardPageModule,
         ColorsPageModule,
         DropdownPageModule,
-        ErrorPagePageModule,
+        ErrorPageModule,
         FormsPageModule,
         IconsPageModule,
         IndicatorsPageModule,
@@ -86,7 +86,7 @@ const routes: Routes = [
         TipsPageModule,
         TooltipPageModule,
         TypographyPageModule,
-        LandingPageModule,
+        LandingModule,
     ],
     exports: [
         RouterModule,
