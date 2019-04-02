@@ -27,16 +27,16 @@ $white:                            $gray-000;
 $black:                            $gray-1000;
 
 $font-header:                      $gray-500;
-$font-text:                        #5e5e5e;
+$font-text:                        #2b4762;
 $font-secondary:                   #919191;
 $font-link:                        $blue-200;
 
 $text-muted:                       $font-secondary;
 
-$primary:                          #95c11f;                    // Primary btn
+$primary:                          #0097ff;                    // Primary btn
 $primary-dark:                     darken($primary, 5%);         // Primary btn hover
-$secondary:                        $blue-200;                    // Secondary btn
-$secondary-dark:                   $blue-300;                    // Secondary btn hover
+$secondary:                        #7355a6;                    // Secondary btn
+$secondary-dark:                   darken($secondary, 5%);       // Secondary btn hover
 $success:                          #008551;                    // Success btn
 $success-lighten:                  lighten($success, 5%);        // Success bg
 $success-dark:                     darken($success, 5%);         // Success btn hover
@@ -45,7 +45,7 @@ $warning:                          #eda82f;                    // Warning btn
 $warning-lighten:                  lighten($warning, 10%);       // Warning bg
 $warning-dark:                     darken($warning, 15%);        // Warning btn hover
 $warning-darken:                   darken($warning, 25%);        // Warning text
-$danger:                           #e73540;                    // Danger btn
+$danger:                           #d0021b;                    // Danger btn
 $danger-lighten:                   lighten($danger, 10%);        // Danger bg
 $danger-dark:                      darken($danger, 15%);         // Danger btn hover
 $danger-darken:                    darken($danger, 25%);         // Danger text
@@ -63,13 +63,13 @@ $gradient-orange-dark:             $warning-dark;                // Gradient ora
 $gradient-red-light:               $danger;                      // Gradient red light, warm
 $gradient-red-dark:                $danger-dark;                 // Gradient red dark, warm
 
-$icons-primary:                    $blue-400;
+$icons-primary:                    $secondary;
 $icons-secondary:                  $white;
 $icons-active:                     $primary;
 $icons-inactive:                   $gray-200;
 $icons-hover:                      $gray-300;
 
-$body-bg:                          $gray-050;
+$body-bg:                          #eef2f6;
 $body-color:                       $font-text;
 
 // Config global
@@ -81,11 +81,11 @@ $grid-breakpoints: (
   xs: 0,
   sm: 576px,
   md: 768px,
-  lg: 992px,
-  xl: 1200px
+  lg: 1366px,
+  xl: 1640px
 ) !default;
 $grid-columns:                     12;
-$grid-gutter-width:                30px;
+$grid-gutter-width:                20px;
 $spacer:                           $grid-gutter-width;
 $spacers: () !default;
 $spacers: map-merge((
@@ -118,24 +118,23 @@ $sizes: map-merge((
 ), $sizes);
 
 $body-min-width:                   320px;
-$body-max-width:                   1400px;
 
 
 // Typography
-$font-family-sans-serif:           'roboto', 'Helvetica Neue', arial;
+$font-family-sans-serif:           'roboto_mono', 'space_mono', arial;
 $font-size-base:                   .875rem;
-$line-height-base:                 ( 22 / 14 );
+$line-height-base:                 ( 24 / 14 );
 
 $h1-font-size:                     1.5rem;
 $h1-font-size-snd:                 1rem;
-$h2-font-size:                     1.25rem;
+$h2-font-size:                     2.25rem;
 $h2-font-size-snd:                 .8125rem;
-$h3-font-size:                     1rem;
+$h3-font-size:                     1.125rem;
 $h4-font-size:                     .8125rem;
 $h5-font-size:                     .8125rem;
 $h6-font-size:                     .8125rem;
 $headings-color:                   $font-header;
-$headings-line-height:             ( 30 / 24 );
+$headings-line-height:             ( 32 / 24 );
 $headings-font-weight:             400;
 $headings-margin-bottom:           $spacer;
 
@@ -151,9 +150,9 @@ $border-color:                     $gray-100;
 
 // Links
 $link-color:                       $primary;
-$link-decoration:                  underline;
+$link-decoration:                  none;
 $link-hover-color:                 $link-color;
-$link-hover-decoration:            none;
+$link-hover-decoration:            underline;
 
 
 // Icons
@@ -231,7 +230,6 @@ $btn-height:                       40px;
 $btn-height-small:                 30px;
 $btn-padding-y:                    ( $spacer / 3 );
 $btn-padding-x:                    ( $spacer / 2 );
-$font-size-base:                   .813rem;
 $btn-line-height:                  ( 18 / 12 );
 $btn-border-radius:                0;
 $btn-padding-y-sm:                 ( $spacer / 6 );
@@ -247,7 +245,6 @@ $dropdown-border-radius:           0;
 $dropdown-item-min-height:         40px;
 $dropdown-item-padding-y:          ( $spacer / 3.75 );
 $dropdown-item-padding-x:          ( $spacer / 2 );
-$font-size-base:                   .75rem;
 $dropdown-link-color:              $gray-400;
 $dropdown-box-shadow:              none;
 $dropdown-link-hover-color:        $gray-400;
@@ -265,7 +262,6 @@ $dropdown-menu-offset:             ( $dropdown-beak-border-width - 3px );
 $input-height-min:                 40px;
 $input-padding-y:                  ( $spacer / 3.75 );
 $input-padding-x:                  0;
-$font-size-base:                   .8125rem;
 $input-line-height:                ( 24 / 13 );
 $input-color:                      $gray-400;
 $input-bg:                         transparent;

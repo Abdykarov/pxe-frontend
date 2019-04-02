@@ -35,22 +35,9 @@ h6,
 
 h1,
 h2,
-h3,
 .h1,
-.h2,
-.h3 {
+.h2 {
 	text-transform: uppercase;
-}
-
-h4,
-h5,
-h6,
-.h4,
-.h5,
-.h6 {
-	color: $gray-400;
-	font-weight: 700;
-	margin-bottom: ( $headings-margin-bottom / 2 );
 }
 
 h1,
@@ -62,9 +49,16 @@ h1,
 
 h2,
 .h2 {
+	line-height: ( 48 / 36 );
+
 	& > .h2__sub-text {
 		font-size: $h2-font-size-snd;
 	}
+}
+
+h3,
+.h3 {
+	line-height: ( 24 / 18 );
 }
 
 .table-entry {
@@ -127,11 +121,9 @@ a {
 	@include link-without-href {
 		cursor: pointer;
 		color: $link-color;
-		text-decoration: $link-decoration;
 	}
 
 	@include link-without-href-interactive {
 		color: $link-hover-color;
-		text-decoration: $link-hover-decoration;
 	}
 }
