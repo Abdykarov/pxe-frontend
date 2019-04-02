@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 import {
     Observable,
-    of,
+    of, Subject,
     Subscriber,
     throwError,
 } from 'rxjs';
-import {catchError, map, takeUntil} from 'rxjs/operators';
+import {
+    catchError,
+    takeUntil,
+} from 'rxjs/operators';
 
 // own models
 import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
 import { navigationConfig } from './navigation.config';
-import {Apollo} from 'apollo-angular';
-import * as navigationQuery from '../../../../common/graphql/queries/navigation';
-import * as navigationMut from '../../../../common/graphql/mutation/navigation';
+import { Apollo } from 'apollo-angular';
+import * as navigation from 'src/common/graphql/mutation/navigation';
 
 @Injectable({
     providedIn: 'root',
@@ -26,9 +28,10 @@ export class NavigationService {
 
     constructor(private apollo: Apollo) {}
 
-
     getNavigationConfig = () => this.get()
-        .pipe(catchError(error => throwError(error)))
+        .pipe(
+            catchError(error => throwError(error)),
+        )
         .subscribe(config => {
             this.saveConfigToStore(config);
             return of(<INavigationConfig>config);
@@ -37,14 +40,11 @@ export class NavigationService {
     saveConfigToStore(config: any) {
         this.apollo
             .mutate({
-                mutation: navigationMut.loadConfig,
+                mutation: navigation.loadConfig,
                 variables: {
                     config: config,
                 },
             })
-            .subscribe( param => {
-                return param;
-            });
+            .subscribe();
     }
-
 }

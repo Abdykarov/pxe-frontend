@@ -1,14 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'lnd-add',
     templateUrl: './add.component.html',
     styleUrls: ['./add.component.css'],
 })
-export class AddComponent implements OnInit {
-
-    constructor() { }
-
-    ngOnInit() {}
-
-}
+export class AddComponent {}

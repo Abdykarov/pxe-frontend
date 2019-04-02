@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {BasketComponent} from '../basket.component';
-import {AddComponent} from './add.component';
+import { Routes,
+         RouterModule,
+       } from '@angular/router';
+import { AddComponent } from './add.component';
 
 const routes: Routes = [
     {

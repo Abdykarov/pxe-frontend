@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
-import {config} from 'rxjs';
-import {getConfig} from './queries/navigation';
+import { config } from 'rxjs';
+import { getConfig } from './queries/navigation';
 
 export const defaults = {
     counter: {

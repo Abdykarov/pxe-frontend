@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
-import {
-    Router,
-    NavigationEnd,
-} from '@angular/router';
-
+import { Router,
+         NavigationEnd,
+       } from '@angular/router';
 import { NavigationService } from './services/navigation.service';
-import {Apollo} from 'apollo-angular';
+import { Apollo } from 'apollo-angular';
 import * as navigation from '../../../common/graphql/queries/navigation';
-import {map, takeUntil} from 'rxjs/operators';
-import {AbstractComponent} from '../../../common/abstract.component';
+import { map,
+         takeUntil,
+       } from 'rxjs/operators';
+import { AbstractComponent } from '../../../common/abstract.component';
 import * as navigationMut from '../../../common/graphql/mutation/navigation';
-import {INavigationConfig} from '../../../common/ui/navigation/models/navigation.model';
-
+import { INavigationConfig } from '../../../common/ui/navigation/models/navigation.model';
+import * as R from 'ramda';
 
 @Component({
     templateUrl: './secured-layout.component.html',
@@ -44,10 +44,9 @@ export class SecuredLayoutComponent extends AbstractComponent {
             })
             .valueChanges
             .pipe(
-                map(result => {
-                        return result && result.data && result.data.ui && result.data.ui.securedLayout
-                            && result.data.ui.securedLayout.navigationConfig;
-                    },
+                takeUntil(this.destroy$),
+                map(result =>
+                    R.path(['data', 'ui', 'securedLayout', 'navigationConfig'], result),
                 ),
             )
             .subscribe(current => {
@@ -64,6 +63,9 @@ export class SecuredLayoutComponent extends AbstractComponent {
                     item: navigationItem,
                 },
             })
-            .subscribe( param => {});
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe();
     }
 }

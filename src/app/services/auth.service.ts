@@ -10,7 +10,6 @@ import { environment } from 'src/environments/environment';
 
 import {
     ILoginRequest,
-    ILoginResponse,
 } from './model/auth.model';
 
 @Injectable({

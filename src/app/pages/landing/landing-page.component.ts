@@ -8,15 +8,13 @@ import {
     FormGroup,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import {
-    first, map,
+    map,
     takeUntil,
 } from 'rxjs/operators';
 import * as R from 'ramda';
-
 
 import * as queries from 'src/common/graphql/queries';
 import * as mutations from 'src/common/graphql/mutations';
@@ -180,8 +178,4 @@ export class LandingPageComponent extends AbstractComponent implements OnInit {
             this.showLogin = !this.showLogin;
         }
     }
-
-
-
-
 }
