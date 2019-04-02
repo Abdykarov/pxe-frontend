@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {LandingComponent} from './landing.component';
-import {Routes} from '@angular/router';
-import {BreadcrumbModule} from '../../../common/ui/breadcrumb/breadcrumb.module';
+import { NgModule } from '@angular/core';
+import { Routes } from '@angular/router';
 
+import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
+import { LandingComponent } from './landing.component';
 
 @NgModule({
     declarations: [
