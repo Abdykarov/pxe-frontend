@@ -167,8 +167,10 @@ export class LandingPageComponent extends AbstractComponent implements OnInit {
             this.loginLoading = true;
             this.loginError = false;
             this.authService
-                .login(this.loginForm.value);
-            this.router.navigate(['/secured']);
+                .login(this.loginForm.value)
+                .subscribe((a) => {
+                    this.router.navigate(['/secured']);
+                });
         }
     }
 

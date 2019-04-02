@@ -11,6 +11,8 @@ import { environment } from 'src/environments/environment';
 import {
     ILoginRequest,
 } from './model/auth.model';
+import { of } from 'rxjs/internal/observable/of';
+
 
 @Injectable({
     providedIn: 'root',
@@ -38,8 +40,10 @@ export class AuthService {
     }
 
     login = ({username, password}: ILoginRequest) => {
-        this.cookiesService.set('asdads', 'asdasd', 5645454545);
-        return true;
+        this.cookiesService.set('user', JSON.stringify({token: 'xxx'}), 5645454545);
+        this.checkLogin();
+        // TODO - temporary solution, will be replaced with gql call
+        return of(true);
     }
 
     logout = () => {
