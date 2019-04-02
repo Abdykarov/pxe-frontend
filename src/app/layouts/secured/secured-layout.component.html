@@ -18,7 +18,7 @@
                 </main>
             </div>
             <lnd-navigation
-                [config]="navigationConfig$ | async"
+                [config]="navConfig"
                 [isMenuOpen]="mobileMenuOpened$ | async"
                 [itemOpened]="navigationItemOpened$ | async"
                 (openItem)="toggleOpenItem($event)">

@@ -9,6 +9,14 @@ const routes = [
         component: SecuredLayoutComponent,
         children: [
             {
+                path: '',
+                loadChildren: '../../pages/dashboard/dashboard.module#DashboardModule',
+            },
+            {
+                path: 'basket',
+                loadChildren: '../../pages/basket/basket.module#BasketModule',
+            },
+            {
                 path: '404',
                 loadChildren: '../../pages/not-found/not-found.module#NotFoundModule',
             },
