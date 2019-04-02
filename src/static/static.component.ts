@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import {
-    NavigationEnd,
-    Router,
-} from '@angular/router';
+import { Router } from '@angular/router';
 
 import { staticNavigationConfig } from './config/navigation.config';
 
@@ -21,12 +18,6 @@ export class StaticComponent {
         public router: Router,
     ) {
         this.navigationConfig = staticNavigationConfig;
-
-        router.events.subscribe((val) => {
-            if (val instanceof NavigationEnd) {
-                this.isMenuOpen = false;
-            }
-        });
     }
 
     toggleMenuOpen () {

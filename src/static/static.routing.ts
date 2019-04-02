@@ -3,29 +3,31 @@ import {
     Routes,
     RouterModule,
 } from '@angular/router';
-import { environment } from 'src/environments/environment';
 
-import { AccordionPageModule, accordionPageRoutes } from './pages/accordion/page.module';
-import { AddPageModule, addPageRoutes } from './pages/add/page.module';
-import { AlertsPageModule, alertsPageRoutes } from './pages/alerts/page.module';
-import { BannersPageModule, bannersPageRoutes } from './pages/banners/page.module';
-import { BreadcrumbPageModule, breadcrumbPageRoutes } from './pages/breadcrumb/page.module';
-import { ButtonsPageModule, buttonsPageRoutes } from './pages/buttons/page.module';
-import { CardPageModule, cardPageRoutes } from './pages/card/page.module';
-import { ColorsPageModule, colorsPageRoutes } from './pages/colors/page.module';
-import { DropdownPageModule, dropdownPageRoutes } from './pages/dropdown/page.module';
-import { ErrorPagePageModule, errorPagePageRoutes } from './pages/error-page-404/page.module';
-import { FormsPageModule, formsPageRoutes } from './pages/forms/page.module';
-import { IconsPageModule, iconsPageRoutes } from './pages/icons/page.module';
-import { IndicatorsPageModule, indicatorsPageRoutes } from './pages/indicators/page.module';
-import { ModalsPageModule, modalsPageRoutes } from './pages/modals/page.module';
-import { PaginationPageModule, paginationPageRoutes } from './pages/pagination/page.module';
-import { PlaceloaderPageModule, placeloaderPageRoutes } from './pages/placeloader/page.module';
-import { TablesPageModule, tablesPageRoutes } from './pages/tables/page.module';
-import { TabsPageModule, tabsPageRoutes } from './pages/tabs/page.module';
-import { TipsPageModule, tipsPageRoutes } from './pages/tips/page.module';
-import { TooltipPageModule, tooltipPageRoutes } from './pages/tooltip/page.module';
-import { TypographyPageModule, typographyPageRoutes } from './pages/typography/page.module';
+import { environment } from 'src/environments/environment';
+import { TypographyPageModule , typographyPageRoutes } from './atoms/typography/page.module';
+import { BannersPageModule , bannersPageRoutes } from './atoms/banners/page.module';
+import { AddPageModule , addPageRoutes } from './atoms/add/page.module';
+import { AccordionPageModule , accordionPageRoutes } from './atoms/accordion/page.module';
+import { AlertsPageModule , alertsPageRoutes } from './atoms/alerts/page.module';
+import { BreadcrumbPageModule , breadcrumbPageRoutes } from './organisms/breadcrumb/page.module';
+import { ButtonsPageModule , buttonsPageRoutes } from './atoms/buttons/page.module';
+import { CardPageModule , cardPageRoutes } from './atoms/card/page.module';
+import { DropdownPageModule , dropdownPageRoutes } from './atoms/dropdown/page.module';
+import { FormsPageModule , formsPageRoutes } from './atoms/forms/page.module';
+import { IconsPageModule , iconsPageRoutes } from './atoms/icons/page.module';
+import { IndicatorsPageModule , indicatorsPageRoutes } from './atoms/indicators/page.module';
+import { PlaceloaderPageModule , placeloaderPageRoutes } from './atoms/placeloader/page.module';
+import { TablesPageModule , tablesPageRoutes } from './atoms/tables/page.module';
+import { TipsPageModule , tipsPageRoutes } from './atoms/tips/page.module';
+import { TabsPageModule , tabsPageRoutes } from './atoms/tabs/page.module';
+import { PaginationPageModule , paginationPageRoutes } from './atoms/pagination/page.module';
+import { ModalsPageModule , modalsPageRoutes } from './organisms/modals/page.module';
+import { TooltipPageModule , tooltipPageRoutes } from './atoms/tooltip/page.module';
+import { ColorsPageModule , colorsPageRoutes } from './atoms/colors/page.module';
+import { ErrorPageModule , errorPageRoutes } from './pages/error-404/page.module';
+import { LandingModule , landingPageRoutes } from './pages/landing/landing.module';
+
 
 const routes: Routes = [
     ...accordionPageRoutes,
@@ -37,7 +39,7 @@ const routes: Routes = [
     ...cardPageRoutes,
     ...colorsPageRoutes,
     ...dropdownPageRoutes,
-    ...errorPagePageRoutes,
+    ...errorPageRoutes,
     ...formsPageRoutes,
     ...iconsPageRoutes,
     ...indicatorsPageRoutes,
@@ -49,6 +51,7 @@ const routes: Routes = [
     ...tipsPageRoutes,
     ...tooltipPageRoutes,
     ...typographyPageRoutes,
+    ...landingPageRoutes,
     {
         path: '**',
         redirectTo: '',
@@ -72,7 +75,7 @@ const routes: Routes = [
         CardPageModule,
         ColorsPageModule,
         DropdownPageModule,
-        ErrorPagePageModule,
+        ErrorPageModule,
         FormsPageModule,
         IconsPageModule,
         IndicatorsPageModule,
@@ -84,6 +87,7 @@ const routes: Routes = [
         TipsPageModule,
         TooltipPageModule,
         TypographyPageModule,
+        LandingModule,
     ],
     exports: [
         RouterModule,
