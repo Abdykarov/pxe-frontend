@@ -7,8 +7,8 @@ import { AddComponent } from './add.component';
 @NgModule({
     declarations: [AddComponent],
     imports: [
-        CommonModule,
         AddRoutingModule,
+        CommonModule,
     ],
 })
 export class AddModule { }

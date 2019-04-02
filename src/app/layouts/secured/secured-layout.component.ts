@@ -2,16 +2,18 @@ import { Component } from '@angular/core';
 import { Router,
          NavigationEnd,
        } from '@angular/router';
-import { NavigationService } from './services/navigation.service';
+
 import { Apollo } from 'apollo-angular';
-import * as navigation from '../../../common/graphql/queries/navigation';
+import * as R from 'ramda';
 import { map,
          takeUntil,
        } from 'rxjs/operators';
-import { AbstractComponent } from '../../../common/abstract.component';
-import * as navigationMut from '../../../common/graphql/mutation/navigation';
-import { INavigationConfig } from '../../../common/ui/navigation/models/navigation.model';
-import * as R from 'ramda';
+
+import * as navigationMut from 'src/common/graphql/mutation/navigation';
+import * as navigation from 'src/common/graphql/queries/navigation';
+import { AbstractComponent } from 'src/common/abstract.component';
+import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
+import { NavigationService } from './services/navigation.service';
 
 @Component({
     templateUrl: './secured-layout.component.html',
@@ -21,9 +23,9 @@ export class SecuredLayoutComponent extends AbstractComponent {
     private readonly LOGOUT_URL = '/logout';
 
     constructor(
+        private apollo: Apollo,
         private navigationService: NavigationService,
         private router: Router,
-        private apollo: Apollo,
     ) {
         super();
 
