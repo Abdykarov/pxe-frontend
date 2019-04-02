@@ -15,8 +15,10 @@
 
 
 .body-inner {
+	max-width: $body-max-width;
+
 	// Media queries
-	@media (max-width: ( $body-min-width - 1 ) ) {
+	@media ( max-width: ( $body-min-width - 1 ) ) {
 		display: none;
 	}
 

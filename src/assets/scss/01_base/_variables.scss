@@ -35,6 +35,7 @@ $text-muted:                       $font-secondary;
 
 $primary:                          #0097ff;                    // Primary btn
 $primary-dark:                     darken($primary, 5%);         // Primary btn hover
+$secondary-lighten:                #926ece;                    // Secondary btn hover
 $secondary:                        #7355a6;                    // Secondary btn
 $secondary-dark:                   darken($secondary, 5%);       // Secondary btn hover
 $success:                          #008551;                    // Success btn
@@ -79,12 +80,10 @@ $animation-speed:                  100ms;
 
 $grid-breakpoints: (
   xs: 0,
-  sm: 576px,
   md: 768px,
-  lg: 1366px,
-  xl: 1640px
+  lg: 1366px
 ) !default;
-$grid-columns:                     12;
+$grid-columns:                     6;
 $grid-gutter-width:                20px;
 $spacer:                           $grid-gutter-width;
 $spacers: () !default;
@@ -118,6 +117,7 @@ $sizes: map-merge((
 ), $sizes);
 
 $body-min-width:                   320px;
+$body-max-width:                   1920px;
 
 
 // Typography
@@ -164,29 +164,31 @@ $icon-size-small-px:               10px;
 
 
 // Header
-$header-bg:                        $white;
-$header-height:                    70px;
+$header-bg:                        $body-bg;
+$header-height:                    100px;
 
 
 // Logo
-$logo-width:                       125px;
-$logo-height:                      auto;
-$logo-offset-left:                 55px;
-$logo-text-size:                   .8125rem;
+$logo-width:                       auto;
+$logo-height:                      41px;
 
 
 // Menu
-$menu-toggle-size:                 $icon-size-px;
+$menu-width:                       40px;
+$menu-height:                      50px;
+$menu-toggle-line-width:           24px;
+$menu-toggle-line-height:          4px;
+$menu-toggle-line-offset:          5px;
 
 
 // Footer
-$footer-bg:                        $white;
+$footer-bg:                        $body-bg;
 $footer-height:                    80px;
 $scroll-top-size:                  $spacer;
 
 
 // Sidebar
-$aside-bg:                         $gray-500;
+$aside-bg:                         $body-bg;
 $aside-bg-secondary:               $gray-600;
 $aside-width:                      270px;
 $aside-line-width:                 50px;
