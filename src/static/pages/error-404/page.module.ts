@@ -4,8 +4,8 @@ import { Routes } from '@angular/router';
 
 // own classes
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
-import {ErrorPageComponent} from './page';
-import {ErrorPage404Module} from '../../../common/ui/error-page-404/error-page-404.module';
+import { ErrorPageComponent } from './page';
+import { ErrorPage404Module } from '../../../common/ui/error-page-404/error-page-404.module';
 
 @NgModule({
     declarations: [
