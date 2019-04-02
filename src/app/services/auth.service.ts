@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { of } from 'rxjs/internal/observable/of';
 import {
     map,
 } from 'rxjs/operators';
@@ -11,7 +12,6 @@ import { environment } from 'src/environments/environment';
 import {
     ILoginRequest,
 } from './model/auth.model';
-import { of } from 'rxjs/internal/observable/of';
 
 
 @Injectable({
