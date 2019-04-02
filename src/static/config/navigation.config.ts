@@ -4,7 +4,7 @@ export const staticNavigationConfig: INavigationConfig = [
     [
         {
             'id': 'atoms-and-molecules',
-            'label': 'Atoms & Molecules',
+            'label': 'Atoms',
             'icon': 'component-low',
             'children': [
                 {
@@ -102,12 +102,22 @@ export const staticNavigationConfig: INavigationConfig = [
         },
         {
             'id': 'templates-and-pages',
-            'label': 'Templates & Pages',
+            'label': 'Templates',
+            'icon': 'component-high',
+            'children': [],
+        },
+        {
+            'id': 'templates-and-pages',
+            'label': 'Pages',
             'icon': 'component-high',
             'children': [
                 {
-                    'label': 'Error page 404',
-                    'url': '/error-page-404',
+                    'label': 'Landing',
+                    'url': '/landing-page',
+                },
+                {
+                    'label': 'Error',
+                    'url': '/error-404',
                 },
             ],
         },
