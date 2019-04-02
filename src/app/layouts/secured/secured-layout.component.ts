@@ -3,8 +3,8 @@ import { Router,
          NavigationEnd,
        } from '@angular/router';
 
-import { Apollo } from 'apollo-angular';
 import * as R from 'ramda';
+import { Apollo } from 'apollo-angular';
 import { map,
          takeUntil,
        } from 'rxjs/operators';
