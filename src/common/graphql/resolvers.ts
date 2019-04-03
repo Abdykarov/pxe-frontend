@@ -1,4 +1,3 @@
-import { config } from 'rxjs';
 import gql from 'graphql-tag';
 
 import { getConfig } from './queries/navigation';
