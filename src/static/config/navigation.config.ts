@@ -33,7 +33,7 @@ export const staticNavigationConfig: INavigationConfig = [
                 // },
                 {
                     'label': 'Colors',
-                    'url': '/colors',
+                    'url': '/basic/colors',
                 },
                 // {
                 //     'label': 'Drop*',
@@ -81,7 +81,7 @@ export const staticNavigationConfig: INavigationConfig = [
                 // },
                 {
                     'label': 'Typography',
-                    'url': '/typography',
+                    'url': '/basic/typography',
                 },
             ],
         },
@@ -107,7 +107,7 @@ export const staticNavigationConfig: INavigationConfig = [
             'children': [
                 {
                     'label': 'Landing page',
-                    'url': '/landing-page',
+                    'url': '/full/landing-page',
                 },
                 // {
                 //     'label': 'Error',
