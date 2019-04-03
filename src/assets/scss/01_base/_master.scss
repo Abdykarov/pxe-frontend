@@ -34,9 +34,9 @@ h6,
 }
 
 h1,
-h2,
+h3,
 .h1,
-.h2 {
+.h3 {
 	text-transform: uppercase;
 }
 
@@ -49,7 +49,7 @@ h1,
 
 h2,
 .h2 {
-	line-height: ( 48 / 36 );
+	line-height: ( 24 / 18 );
 
 	& > .h2__sub-text {
 		font-size: $h2-font-size-snd;
@@ -58,7 +58,7 @@ h2,
 
 h3,
 .h3 {
-	line-height: ( 24 / 18 );
+	line-height: ( 20 / 14 );
 }
 
 .table-entry {
