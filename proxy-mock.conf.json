@@ -2,7 +2,6 @@
     {
         "context": "/parc-rest",
         "logLevel": "debug",
-        "changeOrigin": true,
         "target": "http://localhost:4202",
         "secure": false
     },
