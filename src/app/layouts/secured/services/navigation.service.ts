@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
+
 import {
     Observable,
-    of, Subject,
+    of,
     Subscriber,
     throwError,
 } from 'rxjs';
 import {
     catchError,
-    takeUntil,
 } from 'rxjs/operators';
 
 // own models

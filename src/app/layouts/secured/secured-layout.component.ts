@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
-import { Router,
-         NavigationEnd,
-       } from '@angular/router';
+import {
+     NavigationEnd,
+     Router,
+} from '@angular/router';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
-import { map,
-         takeUntil,
-       } from 'rxjs/operators';
+import {
+    takeUntil,
+    map,
+} from 'rxjs/operators';
 
 import * as navigationMut from 'src/common/graphql/mutation/navigation';
 import * as navigation from 'src/common/graphql/queries/navigation';
