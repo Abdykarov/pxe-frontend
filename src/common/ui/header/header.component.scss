@@ -51,13 +51,26 @@
 	text-align: right;
 }
 
-.controls-holder {
+.menu-holder {
 	order: 3;
 	text-align: right;
 	margin-left: $spacer;
 
 	// Media queries
 	@include media-breakpoint-up(lg) {
+		display: none;
+	}
+}
+
+.user-holder {
+	display: none;
+
+	// Media queries
+	@include media-breakpoint-up(lg) {
+		display: block;
+		order: 3;
+		text-align: right;
+		margin-left: $spacer;
 	}
 }
 
@@ -69,11 +82,6 @@
 	position: relative;
 	cursor: pointer;
 	overflow: hidden;
-
-	// Media queries
-	@include media-breakpoint-up(lg) {
-		// display: none;
-	}
 
 	&__line {
 		position: absolute;
@@ -112,10 +120,6 @@
 			&:nth-child(3) {
 				transform: rotate(-45deg);
 			}
-		}
-
-		.menu-toggle__label {
-			opacity: 0;
 		}
 	}
 

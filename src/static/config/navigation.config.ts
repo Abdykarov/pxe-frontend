@@ -102,13 +102,7 @@ export const staticNavigationConfig: INavigationConfig = [
         },
         {
             'id': 'templates-and-pages',
-            'label': 'Templates',
-            'icon': 'component-high',
-            'children': [],
-        },
-        {
-            'id': 'templates-and-pages',
-            'label': 'Pages',
+            'label': 'Templates & Pages',
             'icon': 'component-high',
             'children': [
                 {
