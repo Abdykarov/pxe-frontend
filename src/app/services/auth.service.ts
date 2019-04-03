@@ -39,7 +39,7 @@ export class AuthService {
     }
 
     login = ({username, password}: ILoginRequest) => {
-        return this.http.post<ILoginResponse>(`${environment.api}/api/user/login`, { username, password })
+        return this.http.post<ILoginResponse>(`${environment.url}/login`, { username, password })
             .pipe(
                 map(response => {
                     if (response && response.token) {

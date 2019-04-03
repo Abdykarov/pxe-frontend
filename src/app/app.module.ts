@@ -51,7 +51,7 @@ console.log('ENVIRONMENt', environment);
             useFactory: (httpLink: HttpLink) => ({
                 cache: new InMemoryCache(),
                 link: httpLink.create({
-                    uri: `${environment.graphql}/graphql`,
+                    uri: `${environment.url}/graphql`,
                 }),
             }),
             deps: [
