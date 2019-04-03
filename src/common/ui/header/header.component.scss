@@ -9,7 +9,7 @@
 
 
 .header {
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -17,13 +17,6 @@
 	background-color: $header-bg;
 	color: $white;
 	z-index: 2010;
-
-	&--sticked {
-		// Media queries
-		@include media-breakpoint-up(lg) {
-			// box-shadow: 0 0 2px rgba($black, .2);
-		}
-	}
 }
 
 .header-inner {
@@ -34,26 +27,20 @@
 	display: flex;
 	flex-wrap: nowrap;
 	align-items: center;
+	justify-content: space-between;
 }
 
 .logo-holder {
-	flex-grow: 1;
 	order: 1;
-	text-align: left;
-
-	// Media queries
-	@include media-breakpoint-up(lg) {
-	}
+	margin-right: auto;
 }
 
 .notification-holder {
 	order: 2;
-	text-align: right;
 }
 
 .menu-holder {
 	order: 3;
-	text-align: right;
 	margin-left: $spacer;
 
 	// Media queries
@@ -69,7 +56,6 @@
 	@include media-breakpoint-up(lg) {
 		display: block;
 		order: 3;
-		text-align: right;
 		margin-left: $spacer;
 	}
 }
@@ -144,5 +130,13 @@ a.logo {
 		margin: 0 auto;
 		background: url('../../../assets/images/layout/logo-pxe.svg') no-repeat left center;
 		background-size: $logo-width $logo-height;
+	}
+
+	.header--sticked & {
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			position: fixed;
+			top: ( $spacer * 1.5 );
+		}
 	}
 }

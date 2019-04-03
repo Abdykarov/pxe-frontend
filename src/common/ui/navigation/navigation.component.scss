@@ -15,8 +15,8 @@
 	top: $header-height;
 	bottom: 0;
 	left: 0;
-	transform: translateX(-($aside-width));
-	width: $aside-width;
+	transform: translateX(-( 100% ));
+	width: $aside-width-mobile;
 	overflow-x: hidden;
 	overflow-y: auto;
 	color: $white;
@@ -26,15 +26,11 @@
 	// Media queries
 	@include media-breakpoint-up(lg) {
 		transform: translateX(0);
+		width: $aside-width-desktop;
 	}
 
 	&--open {
 		transform: translateX(0);
-	}
-
-	.navigation {
-		margin-left: -( $spacer / 2 );
-		margin-right: -( $spacer / 2 );
 	}
 
 	.avatar {
@@ -77,6 +73,7 @@
 }
 
 .navigation-main__sub-icon {
+	display: none;
 	font-size: $icon-size-small;
 	position: absolute;
 	top: 50%;

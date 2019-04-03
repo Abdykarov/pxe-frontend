@@ -9,11 +9,12 @@
     ></lnd-header>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 container-content">
+            <div class="col-lg-8 order-lg-2 container-content">
                 <main class="main">
                     <router-outlet></router-outlet>
                 </main>
             </div>
+            <div class="col-lg-2 order-lg-1 container-aside">
             <lnd-navigation
                     [config]="navigationConfig"
                     [isMenuOpen]="isMenuOpen"

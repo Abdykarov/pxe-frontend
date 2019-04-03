@@ -83,7 +83,7 @@ $grid-breakpoints: (
   md: 768px,
   lg: 1366px
 ) !default;
-$grid-columns:                     6;
+$grid-columns:                     12;
 $grid-gutter-width:                20px;
 $spacer:                           $grid-gutter-width;
 $spacers: () !default;
@@ -169,7 +169,7 @@ $header-height:                    100px;
 
 
 // Logo
-$logo-width:                       auto;
+$logo-width:                       104px;
 $logo-height:                      41px;
 
 
@@ -190,7 +190,8 @@ $scroll-top-size:                  $spacer;
 // Sidebar
 $aside-bg:                         $body-bg;
 $aside-bg-secondary:               $gray-600;
-$aside-width:                      270px;
+$aside-width-mobile:               270px;
+$aside-width-desktop:              calc( ( ( 100% / #{$grid-columns} ) * 2 ) - ( #{$spacer / 2} ) );
 $aside-line-width:                 50px;
 
 
