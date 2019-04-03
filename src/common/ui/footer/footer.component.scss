@@ -23,7 +23,6 @@
 .footer-container {
 	// Media queries
 	@include media-breakpoint-up(lg) {
-		padding-left: ( $aside-width + $spacer );
 	}
 }
 
