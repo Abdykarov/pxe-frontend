@@ -1,8 +1,9 @@
 [
     {
-        "context": "/login",
+        "context": "/parc-rest",
         "logLevel": "debug",
-        "target": "http://localhost:4202/parc-rest/webresources/users/login",
+        "changeOrigin": true,
+        "target": "http://localhost:4202",
         "secure": false
     },
     {
