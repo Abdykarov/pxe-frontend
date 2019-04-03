@@ -8,24 +8,16 @@ import localeCsExtra from '@angular/common/locales/extra/cs';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
-import { Router } from '@angular/router';
 
-import {
-    ApolloModule,
-    APOLLO_OPTIONS,
-} from 'apollo-angular';
-import {
-    HttpLinkModule,
-    HttpLink,
-} from 'apollo-angular-link-http';
+import { ApolloModule } from 'apollo-angular';
+import { HttpLinkModule } from 'apollo-angular-link-http';
 
 // own classes
+import { ApolloGraphQLProvider } from '../common/graphql/middleware/apollo-graphql-provider';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
-import { apolloGraphqlFactory } from '../common/graphql/middleware/apollo-graphql-factory';
 import { InterceptorProviders } from './interceptors';
 import { PipesModule } from 'src/common/pipes/pipes.module';
-import { AuthService } from './services/auth.service';
 
 @NgModule({
     declarations: [
@@ -41,19 +33,11 @@ import { AuthService } from './services/auth.service';
         ReactiveFormsModule,
     ],
     providers: [
+        ApolloGraphQLProvider,
         InterceptorProviders,
         {
             provide: LOCALE_ID,
             useValue: 'cs-CZ',
-        },
-        {
-            provide: APOLLO_OPTIONS,
-            useFactory: apolloGraphqlFactory,
-            deps: [
-                HttpLink,
-                AuthService,
-                Router,
-            ],
         },
     ],
     bootstrap: [

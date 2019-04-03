@@ -57,5 +57,10 @@ export class AuthService {
             );
     }
 
+    refreshToken = () => {
+        // TODO refresh token logic
+        return of(true);
+    }
+
     getToken = (): string => this.token;
 }
