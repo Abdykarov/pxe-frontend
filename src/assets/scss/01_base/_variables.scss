@@ -29,7 +29,6 @@ $black:                            $gray-1000;
 $font-header:                      $gray-500;
 $font-text:                        #2b4762;
 $font-secondary:                   #919191;
-$font-link:                        $blue-200;
 
 $text-muted:                       $font-secondary;
 
@@ -121,20 +120,27 @@ $body-max-width:                   1920px;
 
 
 // Typography
-$font-family-sans-serif:           'roboto_mono', 'space_mono', arial;
+$font-family-sans-serif:           'roboto_mono', arial;
+$font-family-sans-serif-public:    'space_mono', arial;
 $font-size-base:                   .875rem;
 $line-height-base:                 ( 24 / 14 );
+$small-font-size:                  .75rem;
+$line-height-sm:                   ( 16 / 12 );
+$perex-font-size:                  1.125rem;
 
-$h1-font-size:                     1.5rem;
+$h1-font-size:                     1.875rem;
 $h1-font-size-snd:                 1rem;
-$h2-font-size:                     2.25rem;
+$h1-font-size-public:              2.25rem;
+$h2-font-size:                     1.125rem;
 $h2-font-size-snd:                 .8125rem;
-$h3-font-size:                     1.125rem;
+$h2-font-size-public:              1.875rem;
+$h3-font-size:                     .875rem;
+$h3-font-size-public:              1.5rem;
 $h4-font-size:                     .8125rem;
 $h5-font-size:                     .8125rem;
 $h6-font-size:                     .8125rem;
 $headings-color:                   $font-header;
-$headings-line-height:             ( 32 / 24 );
+$headings-line-height:             ( 40 / 30 );
 $headings-font-weight:             400;
 $headings-margin-bottom:           $spacer;
 
@@ -143,7 +149,7 @@ $blockquote-font-size:             ( $font-size-base * 1.231 ) !default;
 
 $paragraph-margin-bottom:          $spacer;
 
-$list-bullet-size:                 9px;
+$list-bullet-size:                 3px;
 $lists-margin-bottom:              $spacer;
 
 $border-color:                     $gray-100;

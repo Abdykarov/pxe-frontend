@@ -43,10 +43,10 @@ export const staticNavigationConfig: INavigationConfig = [
                 //     'label': 'Forms',
                 //     'url': '/forms',
                 // },
-                // {
-                //     'label': 'Icons',
-                //     'url': '/icons',
-                // },
+                {
+                    'label': 'Icons',
+                    'url': '/icons',
+                },
                 // {
                 //     'label': 'Indicators',
                 //     'url': '/indicators',
