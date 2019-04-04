@@ -86,20 +86,6 @@
 		}
 	}
 
-	.check-list,
-	.arrow-list {
-		li {
-			&::before {
-				@include icon;
-				left: 0;
-				width: auto;
-				height: auto;
-				background-color: transparent;
-				color: $primary;
-			}
-		}
-	}
-
 	.check-list {
 		li {
 			padding-left: ( $icon-size-small-px + ( $spacer / 2 ) );
@@ -108,34 +94,14 @@
 
 			&::before {
 				content: '\e906';
+				@include icon;
 				top: 4px;
+				left: 0;
+				width: auto;
+				height: auto;
+				background-color: transparent;
+				color: $primary;
 				font-size: $icon-size-small-px;
-			}
-		}
-	}
-
-	.arrow-list {
-		li {
-			padding-left: ( 15px + ( $spacer / 2 ) );
-			padding-bottom: 0;
-
-			&::before {
-				content: '\e913';
-				top: 5px;
-				font-size: 15px;
-			}
-		}
-	}
-
-	.list--small {
-		li {
-			padding-left: ( $list-bullet-size + ( $spacer / 2 ));
-			padding-bottom: 0;
-			font-size: $small-font-size;
-			line-height: $line-height-sm;
-
-			&::before {
-				top: 6px;
 			}
 		}
 	}
