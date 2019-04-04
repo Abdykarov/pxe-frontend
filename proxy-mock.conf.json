@@ -1,6 +1,14 @@
-{
-    "/graphql": {
+[
+    {
+        "context": "/parc-rest",
+        "logLevel": "debug",
+        "target": "http://localhost:4202",
+        "secure": false
+    },
+    {
+        "context": "/graphql",
+        "logLevel": "debug",
         "target": "http://localhost:4201/graphql",
         "secure": false
     }
-}
+]
