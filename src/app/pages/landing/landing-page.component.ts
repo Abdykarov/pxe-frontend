@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import {
-    map,
     takeUntil,
+    map,
 } from 'rxjs/operators';
 import * as R from 'ramda';
 
