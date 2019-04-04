@@ -41,6 +41,17 @@
 	cursor: pointer;
 }
 
+.text-with-icon {
+	display: flex;
+	margin-bottom: $spacer;
+
+	&__icon {
+		padding-top: ( $spacer / 10 );
+		padding-right: $spacer;
+		color: $icons-secondary;
+	}
+}
+
 
 //
 // Overwriting default - Extend new definition `table-row-group` for default Bootstrap
