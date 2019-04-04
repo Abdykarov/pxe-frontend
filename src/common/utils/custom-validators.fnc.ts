@@ -16,6 +16,7 @@ export class CustomValidators {
     }
 
     static email = (email) => {
+        console.log('%c ***** email *****', 'background: #bada55; color: #000; font-weight: bold', email);
         if (email.pristine) {
             return null;
         }
@@ -34,6 +35,7 @@ export class CustomValidators {
     }
 
     static consent = (consent) => {
+        console.log('%c ***** consent *****', 'background: #bada55; color: #000; font-weight: bold', consent);
         if (consent.pristine) {
             return null;
         }

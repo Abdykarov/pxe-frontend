@@ -1,5 +1,7 @@
 import gql from 'graphql-tag';
 
+export * from './mutation/news-registration';
+
 export const incrementCounter = gql`
     mutation incrementCounter {
         incrementCounter @client

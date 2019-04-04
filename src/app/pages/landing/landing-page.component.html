@@ -66,11 +66,12 @@ visible: {{visible}}
         <lnd-button
                 type="secondary"
                 (action)="submitSubscriptionForm()"
-                [isDisabled]="loginLoading"
+                [isDisabled]="submitSubscriptionLoading"
                 label="Odeslat">
         </lnd-button>
     </div>
     {{subscriptionForm.controls.consent.errors | json}}
+    {{subscriptionForm.value | json}}
 </form>
 
 

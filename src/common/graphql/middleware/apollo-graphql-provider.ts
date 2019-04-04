@@ -28,14 +28,16 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
         if (token) {
             operation.setContext({
                 headers: {
-                    authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`,
+                    // Authorization: `Bearer eyJhbGciOiJSUzUxMiJ9.eyJ1c2VybmFtZSI6IjVfaG9zcGFza2FAUEFSQy5QWEUuQ1oiLCJmaXJzdG5hbWUiOiJNYXJ0aW4iLCJzdXJuYW1lIjoiSG9zcGFza2EiLCJyb2xlIjoicGFyY19tYW5hZ2VyIiwic3ViamVjdE5hbWUiOiJKYW4iLCJzdWJqZWN0SWQiOjUsInNpZCI6IkZPcEI3UFR1d2VQOU1CWWJUcUJKZVJLVGNrVkZJVWM4THl6R2V6azlvVHFzYmZGTm9xYTZtUXNMQU4wNTJ0eWMiLCJkYXRhIjpudWxsLCJzbXNDb25maXJtZWQiOmZhbHNlLCJsYXN0U21zQ29uZmlybVRzIjowLCJleHAiOjE1NTQ0MjY2NjQ3NzMsInRva2VuIjpudWxsLCJtYW5hZ2VVc2VycyI6ZmFsc2UsIm1hbmFnZU9yZGVycyI6ZmFsc2UsIm1hbmFnZU9mZmVycyI6ZmFsc2V9.jZUot0woEVz2An3WTJotQP7Mq-8RpIj7095p25nqe4_6TMUExDi5bfSknF4LvDdHAr7XBNVyoMGZyhFeSXiAoCs45WIUI1qnibV-78pg6yI8riPG9qeEqTXfvJ51DzXP_mgJzDdb_TDHHOG_usCBHZSZSrCIhsjkKqGuNK-y8M1CKzoO_I2R4mQMDWGh7AZllleM8mDC_K2BV_5hoXy6KBU80QCX7erI38YB6Jv27qSf0Srs3C0k0fmAVZgtIBGihXpoNXFPhQzEu1TR5ckNh1pKZsdcaIuFPrr71_6iI5g6XBs4aGLXvw2OlNiF00R7W40behJoLW3Y_jAETqKCXw`,
                 },
             });
         }
     };
 
     const http = httpLink.create({
-        uri: `${environment.graphql}/graphql`,
+        uri: `${environment.url}/graphql`,
+        // uri: `http://localhost:4203/graphql`,
     });
 
     const local = withClientState({
@@ -56,13 +58,15 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
                     error: networkError => {
                         if (networkError.status === 401) {
                             authService.refreshToken()
-                                .subscribe(() => {
-                                    setTokenHeader(operation);
-                                    innerSubscription = forward(operation).subscribe(observer);
-                                }, () => {
-                                    observer.error(new Error('jwt refresh failed'));
-                                    router.navigate(['/logout']);
-                                });
+                                .subscribe(
+                                    () => {
+                                        setTokenHeader(operation);
+                                        innerSubscription = forward(operation).subscribe(observer);
+                                    },
+                                    () => {
+                                        observer.error(new Error('jwt refresh failed'));
+                                        router.navigate(['/logout']);
+                                    });
                         } else {
                             observer.error(networkError);
                         }

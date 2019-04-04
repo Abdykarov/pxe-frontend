@@ -212,15 +212,6 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
         }
     }
 
-    private formatErrorObjectValues = (obj: object) => {
-        R.map(key => {
-            if (R_.isNumber(obj[key])) {
-                obj[key] = obj[key];
-            }
-        }, R.keys(obj));
-        return obj;
-    }
-
     public getErrorMessage = () => {
         if (R.isNil(this.error)) {
             return;
@@ -232,7 +223,6 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
 
         if (R_.isObject(this.error)) {
             const errorType = Object.keys(this.error)[0];
-            console.log('%c ***** this.error *****', 'background: #bada55; color: #000; font-weight: bold', this.error, errorType);
             return createStringFromTemplate(
                 ErrorMessages[errorType],
                 this.error[errorType],

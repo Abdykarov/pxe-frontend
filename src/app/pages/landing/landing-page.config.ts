@@ -12,5 +12,7 @@ export const subscriptionFormFields = {
         Validators.required,
         CustomValidators.email,
     ]],
-    consent: [false, CustomValidators.consent],
+    consent: [false, [
+        Validators.requiredTrue,
+    ]],
 };

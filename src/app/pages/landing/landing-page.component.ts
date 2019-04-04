@@ -53,6 +53,7 @@ export class LandingPageComponent extends AbstractComponent implements OnInit {
     public showLogin = false;
 
     public subscriptionForm: FormGroup;
+    public submitSubscriptionLoading = false;
 
     public counter = 0;
     public visible = false;
@@ -193,10 +194,25 @@ export class LandingPageComponent extends AbstractComponent implements OnInit {
             }),
         )(this.subscriptionForm.controls);
         if (this.subscriptionForm.valid) {
-            this.loginLoading = true;
+            this.submitSubscriptionLoading = true;
             this.loginError = false;
             console.log('%c ***** subscriptionForm *****', 'background: #bada55; color: #000; font-weight: bold',
                 this.subscriptionForm.value);
+            this.apollo
+                .mutate({
+                    mutation: mutations.makeRegistration,
+                    variables: this.subscriptionForm.value,
+                })
+                .subscribe(
+                    () => {
+                        this.submitSubscriptionLoading = false;
+                        this.cd.markForCheck();
+                    },
+                    (error) => {
+                        this.submitSubscriptionLoading = false;
+                        console.log('%c ***** error *****', 'background: #bada55; color: #000; font-weight: bold', error);
+                        this.cd.markForCheck();
+                    });
         }
     }
 
