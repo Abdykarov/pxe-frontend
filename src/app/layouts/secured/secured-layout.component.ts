@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {
-     NavigationEnd,
-     Router,
+    NavigationEnd,
+    Router,
 } from '@angular/router';
 
 import * as R from 'ramda';
