@@ -14,28 +14,28 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.h1-public,
-.h2-public,
-.h3-public {
+.h1--public,
+.h2--public,
+.h3--public {
 	font-family: $font-family-sans-serif-public;
 }
 
-.h1-public,
-.h3-public {
+.h1--public,
+.h3--public {
 	text-transform: none;
 }
 
-.h1-public {
+.h1--public {
 	font-size: $h1-font-size-public;
 	line-height: ( 40 / 36 );
 }
 
-.h2-public {
+.h2--public {
 	font-size: $h2-font-size-public;
 	line-height: ( 36 / 30 );
 }
 
-.h3-public {
+.h3--public {
 	font-size: $h3-font-size-public;
 	line-height: ( 30 / 24 );
 }
@@ -64,6 +64,13 @@ h3,
 .h1,
 .h3 {
 	text-transform: uppercase;
+}
+
+h2,
+h3,
+.h2,
+.h3 {
+	margin-bottom: $spacer;
 }
 
 h1,

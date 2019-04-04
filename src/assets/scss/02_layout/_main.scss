@@ -89,7 +89,7 @@
 	.check-list {
 		li {
 			padding-left: ( $icon-size-small-px + ( $spacer / 2 ) );
-			padding-bottom: ( $spacer * .75 );
+			padding-bottom: ( $spacer * 1.5 );
 			line-height: ( 18 / 14 );
 
 			&::before {
@@ -102,6 +102,12 @@
 				background-color: transparent;
 				color: $primary;
 				font-size: $icon-size-small-px;
+			}
+		}
+
+		&--less-offset {
+			li {
+				padding-bottom: ( $spacer * .25 );
 			}
 		}
 	}
