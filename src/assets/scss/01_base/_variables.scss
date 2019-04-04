@@ -63,13 +63,15 @@ $gradient-red-light:               $danger;                      // Gradient red
 $gradient-red-dark:                $danger-dark;                 // Gradient red dark, warm
 
 $icons-primary:                    $secondary;
-$icons-secondary:                  $white;
+$icons-secondary:                  #bdcad6;
 $icons-active:                     $primary;
 $icons-inactive:                   $gray-200;
 $icons-hover:                      $gray-300;
 
 $body-bg:                          #eef2f6;
 $body-color:                       $font-text;
+
+$border-color:                     #bdcad6;
 
 // Config global
 $enable-shadows:                   true;
@@ -152,7 +154,6 @@ $paragraph-margin-bottom:          $spacer;
 $list-bullet-size:                 3px;
 $lists-margin-bottom:              ( $spacer * 1.5 );
 
-$border-color:                     $gray-100;
 
 // Links
 $link-color:                       $primary;
