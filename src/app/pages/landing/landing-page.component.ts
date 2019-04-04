@@ -21,7 +21,10 @@ import * as queries from 'src/common/graphql/queries';
 import * as mutations from 'src/common/graphql/mutations';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { loginFormFields } from './landing-page.config';
+import {
+    loginFormFields,
+    subscriptionFormFields,
+} from './landing-page.config';
 
 interface ICounterResponse {
     counter: {
@@ -41,13 +44,15 @@ interface IVisiblityResponse {
     styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent extends AbstractComponent implements OnInit {
-    public showLogin = false;
-    public loginForm: FormGroup;
-    public loading = false;
     public errors: any;
-    public rates: any;
-    public loginLoading = false;
+    public loading = false;
     public loginError = false;
+    public loginForm: FormGroup;
+    public loginLoading = false;
+    public rates: any;
+    public showLogin = false;
+
+    public subscriptionForm: FormGroup;
 
     public counter = 0;
     public visible = false;
@@ -61,6 +66,7 @@ export class LandingPageComponent extends AbstractComponent implements OnInit {
     ) {
         super();
         this.loginForm = this.fb.group(loginFormFields);
+        this.subscriptionForm = this.fb.group(subscriptionFormFields);
     }
 
     ngOnInit() {
@@ -153,7 +159,7 @@ export class LandingPageComponent extends AbstractComponent implements OnInit {
             .subscribe();
     }
 
-    public submitForm = () => {
+    public submitLoginForm = () => {
         R.pipe(
             R.keys,
             R.map((field) => {
@@ -172,6 +178,25 @@ export class LandingPageComponent extends AbstractComponent implements OnInit {
                 .subscribe((a) => {
                     this.router.navigate(['/secured']);
                 });
+        }
+    }
+
+    public submitSubscriptionForm = () => {
+        R.pipe(
+            R.keys,
+            R.map((field) => {
+                this.subscriptionForm
+                    .get(field)
+                    .markAsTouched({
+                        onlySelf: true,
+                    });
+            }),
+        )(this.subscriptionForm.controls);
+        if (this.subscriptionForm.valid) {
+            this.loginLoading = true;
+            this.loginError = false;
+            console.log('%c ***** subscriptionForm *****', 'background: #bada55; color: #000; font-weight: bold',
+                this.subscriptionForm.value);
         }
     }
 

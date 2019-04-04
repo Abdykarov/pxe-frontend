@@ -29,7 +29,22 @@ export class CustomValidators {
         }
 
         return {
-            pattern: true,
+            email: true,
+        };
+    }
+
+    static consent = (consent) => {
+        if (consent.pristine) {
+            return null;
+        }
+
+        consent.markAsTouched();
+        if (/^true$/.test(consent.value)) {
+            return null;
+        }
+
+        return {
+            consent: true,
         };
     }
 }

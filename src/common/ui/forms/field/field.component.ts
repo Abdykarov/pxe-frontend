@@ -17,6 +17,7 @@ import {
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 
+import { createStringFromTemplate } from 'src/common/utils';
 import { ErrorMessages } from '../form.constants';
 import { FieldTypes } from '../models/field-types.model';
 import { IOption } from '../models/option.model';
@@ -231,7 +232,11 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
 
         if (R_.isObject(this.error)) {
             const errorType = Object.keys(this.error)[0];
-            return this.formatErrorObjectValues(this.error[errorType]);
+            console.log('%c ***** this.error *****', 'background: #bada55; color: #000; font-weight: bold', this.error, errorType);
+            return createStringFromTemplate(
+                ErrorMessages[errorType],
+                this.error[errorType],
+            );
         }
     }
 }

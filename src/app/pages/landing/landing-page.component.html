@@ -33,7 +33,51 @@ visible: {{visible}}
 
 <hr>
 
+<form [formGroup]="subscriptionForm"
+      autocomplete="off">
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <lnd-form-field
+                        [error]="subscriptionForm.controls.email.errors"
+                        [formControl]="subscriptionForm.controls.email"
+                        [id]="'email'"
+                        label="E-mail"
+                        [success]="subscriptionForm.controls.email.valid && subscriptionForm.controls.email.touched"
+                        [touched]="subscriptionForm.controls.email.touched"
+                ></lnd-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <lnd-form-field
+                        [error]="subscriptionForm.controls.consent.errors"
+                        [formControl]="subscriptionForm.controls.consent"
+                        [id]="'consent'"
+                        label="Souhlasím se zásadami bezpečnosti"
+                        [success]="subscriptionForm.controls.consent.valid && subscriptionForm.controls.consent.touched"
+                        [touched]="subscriptionForm.controls.consent.touched"
+                        [type]="'CHECKBOX'"
+                ></lnd-form-field>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <lnd-button
+                type="secondary"
+                (action)="submitSubscriptionForm()"
+                [isDisabled]="loginLoading"
+                label="Odeslat">
+        </lnd-button>
+    </div>
+    {{subscriptionForm.controls.consent.errors | json}}
+</form>
+
+
+<hr>
+
 <a [routerLink]="['/logout']">next</a>
+
 
 <lnd-modal title="Přihlášení"
            [isModalOpen]="showLogin"
@@ -76,7 +120,7 @@ visible: {{visible}}
         <div class="modal-footer">
             <lnd-button
                 type="secondary"
-                (action)="submitForm()"
+                (action)="submitLoginForm()"
                 [isDisabled]="loginLoading"
                 label="Přihlásit se">
             </lnd-button>
