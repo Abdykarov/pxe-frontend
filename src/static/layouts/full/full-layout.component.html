@@ -1,13 +1,13 @@
 <div
     id="top"
-    class="body-inner">
+    class="body-inner full-layout">
     <div class="header">
 
     </div>
     <main class="main">
         <router-outlet></router-outlet>
     </main>
-    <div class="footer bg-white text-center">
-        &copy;&nbsp;POWER EXCHANGE CENTRAL EUROPE a.s. 2018
-    </div>
+    <lnd-footer
+        [isPublic]="true">
+    </lnd-footer>
 </div>

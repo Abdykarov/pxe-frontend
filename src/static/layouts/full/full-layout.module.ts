@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { FullLayoutComponent } from './full-layout.component';
 import { FullLayoutRoutingModule } from './full-layout.routing';
+import { FooterModule } from 'src/common/ui/footer/footer.module';
 
 @NgModule({
     declarations: [
@@ -12,6 +13,7 @@ import { FullLayoutRoutingModule } from './full-layout.routing';
     imports: [
         CommonModule,
         FullLayoutRoutingModule,
+        FooterModule,
         HttpClientModule,
     ],
 })

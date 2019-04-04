@@ -121,15 +121,12 @@
 	}
 }
 
-a.logo {
+a.logo-link {
 	&,
 	&:visited {
 		display: block;
 		width: $logo-width;
 		height: $logo-height;
-		margin: 0 auto;
-		background: url('../../../assets/images/layout/logo-pxe.svg') no-repeat left center;
-		background-size: $logo-width $logo-height;
 	}
 
 	.header--sticked & {

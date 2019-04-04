@@ -68,4 +68,18 @@
 			height: auto;
 		}
 	}
+
+	.landing-page-illustration {
+		width: auto;
+		height: 100px;
+		margin-bottom: ( $spacer * 1.25 );
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			height: 105px;
+		}
+		@include media-breakpoint-up(lg) {
+			height: 150px;
+		}
+	}
 }

@@ -15,8 +15,6 @@
 
 
 .body-inner {
-	max-width: $body-max-width;
-
 	// Media queries
 	@media ( max-width: ( $body-min-width - 1 ) ) {
 		display: none;
@@ -38,6 +36,11 @@
 			z-index: $zindex-body-overlayer-full;
 		}
 	}
+}
+
+.container-content {
+	max-width: $body-max-width;
+	max-width: 0 auto;
 }
 
 .overlay--visible {

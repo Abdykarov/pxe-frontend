@@ -82,6 +82,7 @@ $animation-speed:                  100ms;
 $grid-breakpoints: (
   xs: 0,
   md: 768px,
+  xl: 992px,
   lg: 1366px
 ) !default;
 $grid-columns:                     12;
@@ -90,12 +91,13 @@ $spacer:                           $grid-gutter-width;
 $spacers: () !default;
 $spacers: map-merge((
   0: 0,
-  1: ( $spacer / 3 ),
-  2: ( $spacer / 1.5 ),
-  3: ( $spacer / 2 ),
-  4: $spacer,
-  5: ( $spacer * 1.5 ),
-  6: ( $spacer * 2 )
+  1: ( $spacer / 4 ),
+  2: ( $spacer / 2 ),
+  3: $spacer,
+  4: ( $spacer * 1.5 ),
+  5: ( $spacer * 2 ),
+  6: ( $spacer * 3 ),
+  7: ( $spacer * 4 )
 ), $spacers);
 $sizes: () !default;
 $sizes: map-merge((
@@ -149,10 +151,10 @@ $headings-margin-bottom:           ( $spacer * 1.5 );
 $blockquote-small-color:           $gray-300 !default;
 $blockquote-font-size:             ( $font-size-base * 1.231 ) !default;
 
-$paragraph-margin-bottom:          $spacer;
+$paragraph-margin-bottom:          ( $spacer * 1.25 );
 
 $list-bullet-size:                 3px;
-$lists-margin-bottom:              ( $spacer * 1.5 );
+$lists-margin-bottom:              ( $spacer * 1.25 );
 
 
 // Links
