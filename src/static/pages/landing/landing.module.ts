@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
+import { ButtonModule } from 'src/common/ui/button/button.module';
 import { LandingComponent } from './landing.component';
 
 @NgModule({
@@ -13,8 +14,9 @@ import { LandingComponent } from './landing.component';
         LandingComponent,
     ],
     imports: [
-        CommonModule,
         BreadcrumbModule,
+        ButtonModule,
+        CommonModule,
     ],
 })
 export class LandingModule { }

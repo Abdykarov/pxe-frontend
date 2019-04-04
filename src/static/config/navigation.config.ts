@@ -23,10 +23,10 @@ export const staticNavigationConfig: INavigationConfig = [
                 //     'label': 'Banners',
                 //     'url': '/banners',
                 // },
-                // {
-                //     'label': 'Buttons',
-                //     'url': '/buttons',
-                // },
+                {
+                    'label': 'Buttons',
+                    'url': '/buttons',
+                },
                 // {
                 //     'label': 'Cards',
                 //     'url': '/card',
