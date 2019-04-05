@@ -1,0 +1,66 @@
+<lnd-tabs>
+
+    <lnd-tab tabTitle="ELEKŘINA">
+        Aktuální pokrytí
+        <br />
+            {{config.power.places }}
+        <br />
+            {{ config.power.places.toString()  | plural:'place'}}
+        <br />
+        <br />
+
+        Výkon temelínu
+        <br />
+        {{config.power.notification}}
+        <br />
+        {{ config.power.notification.toString()  | plural:'day'}}
+        <br />
+        <br />
+
+        Celkový odběr
+        <br />
+        {{config.power.consumption | consumption}}
+        <br />
+        <br />
+        Nasi dodavatele elektriny
+        <br />
+        <div *ngFor="let supply of config.power.suppliers">
+            {{supply.url}}
+            {{supply.title}}
+            {{supply.logo}}
+        </div>
+    </lnd-tab>
+
+    <lnd-tab tabTitle="PLYN">
+        Aktuální pokrytí
+        <br />
+        {{config.gas.places }}
+        <br />
+        {{ config.gas.places.toString()  | plural:'place'}}
+        <br />
+        <br />
+
+        Objem největšího zásobníku  planu v ČR
+        <br />
+        {{config.gas.notification}}
+        <br />
+        násobek
+        <br />
+        <br />
+
+        Celkový odběr
+        <br />
+        {{config.gas.consumption | consumption}}
+        <br />
+        <br />
+        Nasi dodavatele plynu
+        <br />
+        <div *ngFor="let supply of config.gas.suppliers">
+            {{supply.url}}
+            {{supply.title}}
+            {{supply.logo}}
+        </div>
+
+    </lnd-tab>
+
+</lnd-tabs>

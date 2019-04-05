@@ -13,6 +13,10 @@ const routes = [
                 loadChildren: '../../pages/landing/landing-page.module#LandingPageModule',
             },
             {
+                path: 'coverage',
+                loadChildren: '../../pages/map-coverage/map-coverage.module#MapCoverageModule',
+            },
+            {
                 path: 'logout',
                 loadChildren: '../../pages/logout/logout-page.module#LogoutPageModule',
             },
