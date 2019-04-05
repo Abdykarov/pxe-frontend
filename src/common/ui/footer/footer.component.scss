@@ -20,12 +20,11 @@
 	}
 }
 
-.footer-container {
-	// Media queries
-	@include media-breakpoint-up(lg) {
-		padding-left: ( $aside-width + $spacer );
-	}
-}
+// .footer-container {
+// 	// Media queries
+// 	@include media-breakpoint-up(lg) {
+// 	}
+// }
 
 .footer-navigation {
 	padding: $spacer ( $spacer / 2 );
