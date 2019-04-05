@@ -15,8 +15,8 @@
 	top: $header-height;
 	bottom: 0;
 	left: 0;
-	transform: translateX(-($aside-width));
-	width: $aside-width;
+	transform: translateX(-100%);
+	width: $aside-width-mobile;
 	overflow-x: hidden;
 	overflow-y: auto;
 	color: $white;
@@ -26,34 +26,16 @@
 	// Media queries
 	@include media-breakpoint-up(lg) {
 		transform: translateX(0);
+		width: $aside-width-desktop;
 	}
 
 	&--open {
 		transform: translateX(0);
 	}
 
-	.navigation {
-		margin-left: -( $spacer / 2 );
-		margin-right: -( $spacer / 2 );
-	}
-
 	.avatar {
 		width: $icon-size-px;
 		height: $icon-size-px;
-	}
-}
-
-.aside,
-.navigation {
-	&::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		width: $aside-line-width;
-		height: 100%;
-		background-color: $aside-bg-secondary;
 	}
 }
 
@@ -76,15 +58,22 @@
 .navigation-main__item {
 	&--active,
 	&--open {
-		background-color: $aside-bg-secondary;
 
 		.navigation-main__sub-icon {
 			transform: rotate(-180deg);
+		}
+
+		.navigation-main__link {
+			&,
+			&:visited {
+				background-color: rgba($secondary, .05);
+			}
 		}
 	}
 }
 
 .navigation-main__sub-icon {
+	display: none;
 	font-size: $icon-size-small;
 	position: absolute;
 	top: 50%;
@@ -97,17 +86,31 @@
 	&:visited {
 		position: relative;
 		display: block;
-		padding: ( $spacer / 3 ) $spacer ( $spacer / 3 ) ( $aside-line-width + ( $spacer / 2 ) );
+		padding: ( $spacer * 1.5 ) $spacer ( $spacer * 1.5 ) ( $spacer * 4 );
 		text-decoration: none;
-		color: $white;
+		color: $font-text;
 		cursor: pointer;
 		@include smart-short-text;
 	}
 
 	&:hover,
 	&:focus {
-		color: $white;
-		background-color: rgba($white, .08);
+		color: $font-text;
+		background-color: rgba($secondary, .05);
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 3px;
+		height: 100%;
+		background-color: transparent;
+
+		.navigation-main__item--active & {
+			background-color: $secondary-lighten;
+		}
 	}
 }
 
@@ -122,15 +125,9 @@
 .navigation-main__link-icon {
 	position: absolute;
 	top: 50%;
-	left: ( $spacer / 2 );
+	left: ( $spacer * 2 );
 	margin-top: -( $icon-size-px / 2 );
-	opacity: .9;
-	color: $gray-300;
-
-	.navigation-main__item--open & {
-		color: $white;
-		opacity: 1;
-	}
+	color: $secondary;
 }
 
 .navigation-main-sub {
@@ -142,9 +139,9 @@
 	&:visited {
 		position: relative;
 		display: block;
-		padding: ( $spacer / 3 ) $spacer ( $spacer / 3 ) ( $aside-line-width + ( $spacer / 2 ) );
+		color: $font-text;
+		padding: $spacer $spacer $spacer ( $spacer * 4 );
 		text-decoration: none;
-		color: $white;
 		cursor: pointer;
 		@include smart-short-text;
 	}
@@ -156,7 +153,21 @@
 
 	.navigation-main-sub__item--active & {
 		color: $font-text;
-		background-color: $body-bg;
+		background-color: rgba($secondary, .05);
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 3px;
+		height: 100%;
+		background-color: transparent;
+
+		.navigation-main-sub__item--active & {
+			background-color: $secondary-lighten;
+		}
 	}
 }
 
