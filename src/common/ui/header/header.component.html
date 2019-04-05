@@ -4,7 +4,21 @@
         <div class="row">
             <div class="col-12">
                 <div class="header-inner">
-                    <div class="menu-toggle-holder">
+                    <div class="logo-holder">
+                        <a
+                            [routerLink]="['/secured/dashboard']"
+                            class="logo-link">
+                                <img
+                                    src="/assets/images/layout/logo-pxe.svg"
+                                    class="logo"
+                                    title="PXE"
+                                    alt="logo PXE">
+                        </a>
+                    </div>
+                    <div class="notification-holder">
+                        <span class="icon icon--favourite-fill text-color--secondary"></span>
+                    </div>
+                    <div class="menu-holder">
                         <a
                             class="menu-toggle"
                             [ngClass]="{ 'menu-toggle--open' : isMenuOpen }"
@@ -13,14 +27,11 @@
                             <span class="menu-toggle__line"></span>
                             <span class="menu-toggle__line"></span>
                             <span class="menu-toggle__line"></span>
+                            <span class="menu-toggle__label">Menu</span>
                         </a>
                     </div>
-                    <div class="logo-holder">
-                        <a
-                            [routerLink]="['/secured/dashboard']"
-                            class="logo">
-                            Angular Devstack
-                        </a>
+                    <div class="user-holder">
+                        <span class="icon icon--favourite-stroke text-color--secondary"></span>
                     </div>
                 </div>
             </div>

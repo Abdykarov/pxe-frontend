@@ -15,7 +15,7 @@ import { DOCUMENT } from '@angular/common';
 })
 export class FooterComponent {
     @Input()
-    public isMenuOpen: boolean;
+    public isPublic = false;
 
     public scrollToTopIsVisible: boolean;
 

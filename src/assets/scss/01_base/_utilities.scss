@@ -30,10 +30,26 @@
 		color: $link-hover-color;
 		text-decoration: $link-hover-decoration;
 	}
+
+	&--disabled {
+		opacity: .4;
+		pointer-events: none;
+	}
 }
 
 .cursor-pointer {
 	cursor: pointer;
+}
+
+.text-with-icon {
+	display: flex;
+	margin-bottom: $spacer;
+
+	&__icon {
+		padding-top: ( $spacer / 10 );
+		padding-right: $spacer;
+		color: $icons-secondary;
+	}
 }
 
 
