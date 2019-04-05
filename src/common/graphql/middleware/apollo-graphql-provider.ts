@@ -56,13 +56,15 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
                     error: networkError => {
                         if (networkError.status === 401) {
                             authService.refreshToken()
-                                .subscribe(() => {
-                                    setTokenHeader(operation);
-                                    innerSubscription = forward(operation).subscribe(observer);
-                                }, () => {
-                                    observer.error(new Error('jwt refresh failed'));
-                                    router.navigate(['/logout']);
-                                });
+                                .subscribe(
+                                    () => {
+                                        setTokenHeader(operation);
+                                        innerSubscription = forward(operation).subscribe(observer);
+                                    },
+                                    () => {
+                                        observer.error(new Error('jwt refresh failed'));
+                                        router.navigate(['/logout']);
+                                    });
                         } else {
                             observer.error(networkError);
                         }
