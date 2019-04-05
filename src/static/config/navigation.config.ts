@@ -4,7 +4,7 @@ export const staticNavigationConfig: INavigationConfig = [
     [
         {
             'id': 'atoms-and-molecules',
-            'label': 'Atoms',
+            'label': 'Atoms & Molecules',
             'icon': 'component-low',
             'children': [
                 // {
@@ -33,19 +33,19 @@ export const staticNavigationConfig: INavigationConfig = [
                 // },
                 {
                     'label': 'Colors',
-                    'url': '/colors',
+                    'url': '/basic/colors',
                 },
                 // {
                 //     'label': 'Drop*',
                 //     'url': '/dropdown',
                 // },
-                // {
-                //     'label': 'Forms',
-                //     'url': '/forms',
-                // },
+                {
+                    'label': 'Forms',
+                    'url': '/basic/forms',
+                },
                 {
                     'label': 'Icons',
-                    'url': '/icons',
+                    'url': '/basic/icons',
                 },
                 // {
                 //     'label': 'Indicators',
@@ -81,7 +81,7 @@ export const staticNavigationConfig: INavigationConfig = [
                 // },
                 {
                     'label': 'Typography',
-                    'url': '/typography',
+                    'url': '/basic/typography',
                 },
             ],
         },
@@ -102,19 +102,13 @@ export const staticNavigationConfig: INavigationConfig = [
         },
         {
             'id': 'templates-and-pages',
-            'label': 'Templates',
-            'icon': 'component-high',
-            'children': [],
-        },
-        {
-            'id': 'templates-and-pages',
-            'label': 'Pages',
+            'label': 'Templates & Pages',
             'icon': 'component-high',
             'children': [
-                // {
-                //     'label': 'Landing',
-                //     'url': '/landing-page',
-                // },
+                {
+                    'label': 'Landing page',
+                    'url': '/full/landing-page',
+                },
                 // {
                 //     'label': 'Error',
                 //     'url': '/error-404',

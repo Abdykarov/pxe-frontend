@@ -4,11 +4,11 @@
     </div>
 </div>
 <h3>Input</h3>
-<!--<div class="static-pages">-->
-    <!--<form>-->
+<div class="static-pages">
+    <form>
         <h4>Normal</h4>
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-md-3">
                 <lnd-form-field
                     id="normal-input"
                     label="Label"
@@ -17,25 +17,25 @@
                 ></lnd-form-field>
             </div>
         </div>
-        <!--<h4>Disabled</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--[disabled]="true"-->
-                    <!--id="disabled-input"-->
-                    <!--label="Disasbled input"-->
-                    <!--value=""-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--[disabled]="true"-->
-                    <!--id="disabled-input-filled"-->
-                    <!--label="Disabled input"-->
-                    <!--value="Disabled"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
+        <h4>Disabled</h4>
+        <!-- <div class="row">
+            <div class="col-md-3">
+                <lnd-form-field
+                    [disabled]="true"
+                    id="disabled-input"
+                    label="Disasbled input"
+                    value="">
+                </lnd-form-field>
+            </div>
+            <div class="col-md-3">
+                <lnd-form-field
+                    [disabled]="true"
+                    id="disabled-input-filled"
+                    label="Disabled input"
+                    value="Disabled">
+                </lnd-form-field>
+            </div>
+        </div> -->
         <!--<h4>Readonly</h4>-->
         <!--<div class="row">-->
             <!--<div class="col-sm-3">-->
@@ -114,8 +114,8 @@
                 <!--&gt;</lnd-form-field>-->
             <!--</div>-->
         <!--</div>-->
-    <!--</form>-->
-<!--</div>-->
+    </form>
+</div>
 <!--<h3>Input with icons</h3>-->
 <!--<div class="static-pages">-->
     <!--<form>-->
@@ -275,97 +275,103 @@
         <!--</div>-->
     <!--</form>-->
 <!--</div>-->
-<!--<h3>Radio</h3>-->
-<!--<div class="static-pages">-->
-    <!--<form>-->
-        <!--<h4>Normal</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="normal-radio"-->
-                    <!--label="Radio label"-->
-                    <!--type="radio"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<h4>Disabled</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--[disabled]="true"-->
-                    <!--id="disabled-radio"-->
-                    <!--label="Disabled radio"-->
-                    <!--type="radio"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--[disabled]="true"-->
-                    <!--[checked]="true"-->
-                    <!--id="disabled-radio-checked"-->
-                    <!--label="Disabled radio checked"-->
-                    <!--type="radio"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<h4>Status</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="success-radio-checked"-->
-                    <!--label="Success radio"-->
-                    <!--[success]="true"-->
-                    <!--type="radio"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="warning-radio"-->
-                    <!--label="Warning radio"-->
-                    <!--[warning]="true"-->
-                    <!--type="radio"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--error=" "-->
-                    <!--id="error-radio"-->
-                    <!--label="Error radio"-->
-                    <!--[touched]="true"-->
-                    <!--type="radio"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</form>-->
-    <!--<form class="was-validated">-->
-        <!--<h4>Validate</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--error="This field is required"-->
-                    <!--id="error-radio-validate"-->
-                    <!--label="Error radio"-->
-                    <!--[checked]="true"-->
-                    <!--[touched]="true"-->
-                    <!--type="radio"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</form>-->
-<!--</div>-->
-<!--<h3>Checkbox</h3>-->
-<!--<div class="static-pages">-->
-    <!--<form>-->
-        <!--<h4>Normal</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="normal-checkbox"-->
-                    <!--label="Checkbox label"-->
-                    <!--type="checkbox"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
+<h3>Radio</h3>
+<div class="static-pages">
+    <form>
+        <!-- <h4>Normal</h4>
+        <div class="row">
+            <div class="col-sm-3">
+                <lnd-form-field
+                    id="normal-radio"
+                    label="Radio label"
+                    [type]="'RADIOGROUP'">
+                </lnd-form-field>
+            </div>
+        </div> -->
+        <!-- <h4>Disabled</h4>
+        <div class="row">
+            <div class="col-md-3">
+                <lnd-form-field
+                    [disabled]="true"
+                    id="disabled-radio"
+                    label="Disabled radio"
+                    type="radio">
+                </lnd-form-field>
+            </div>
+            <div class="col-md-3">
+                <lnd-form-field
+                    [disabled]="true"
+                    [checked]="true"
+                    id="disabled-radio-checked"
+                    label="Disabled radio checked"
+                    type="radio">
+                </lnd-form-field>
+            </div>
+        </div> -->
+        <!-- <h4>Status</h4>
+        <div class="row">
+            <div class="col-md-3">
+                <lnd-form-field
+                    id="success-radio-checked"
+                    label="Success radio"
+                    [success]="true"
+                    type="radio">
+                </lnd-form-field>
+            </div>
+            <div class="col-md-3">
+                <lnd-form-field
+                    id="warning-radio"
+                    label="Warning radio"
+                    [warning]="true"
+                    type="radio">
+                </lnd-form-field>
+            </div>
+            <div class="col-md-3">
+                <lnd-form-field
+                    error=" "
+                    id="error-radio"
+                    label="Error radio"
+                    [touched]="true"
+                    type="radio">
+                </lnd-form-field>
+            </div>
+        </div> -->
+    </form>
+    <!-- <form class="was-validated">
+        <h4>Validate</h4>
+        <div class="row">
+            <div class="col-md-3">
+                <lnd-form-field
+                    error="This field is required"
+                    id="error-radio-validate"
+                    label="Error radio"
+                    [checked]="true"
+                    [touched]="true"
+                    type="radio">
+                </lnd-form-field>
+            </div>
+        </div>
+    </form> -->
+</div>
+<h3>Checkbox</h3>
+<div class="static-pages">
+    <form>
+        <h4>Normal</h4>
+        <div class="row">
+            <div class="col-md-3">
+                <lnd-form-field
+                    id="normal-checkbox"
+                    label="Checkbox label"
+                    [type]="'CHECKBOX'">
+                </lnd-form-field>
+                <!-- <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="normal-checkbox">
+                        <label class="custom-control-label" for="normal-checkbox">Normal</label>
+                    </div>
+                </div> -->
+            </div>
+        </div>
         <!--<h4>Disabled</h4>-->
         <!--<div class="row">-->
             <!--<div class="col-sm-3">-->
@@ -414,8 +420,8 @@
                 <!--&gt;</lnd-form-field>-->
             <!--</div>-->
         <!--</div>-->
-    <!--</form>-->
-<!--</div>-->
+    </form>
+</div>
 <!--<h3>Selectbox</h3>-->
 <!--<div class="static-pages">-->
     <!--<form>-->
