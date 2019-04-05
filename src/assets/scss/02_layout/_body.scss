@@ -5,19 +5,20 @@
  */
 
 
-.container-fluid {
-	// Media queries
-	@media (min-width: ( $body-max-width ) ) {
-		max-width: $body-max-width;    // Fix layout over full HP resolution
-		margin-left: 0;
-		margin-right: 0;
-	}
-}
+// .container-fluid {
+// 	// Media queries
+// 	@media (min-width: ( $body-max-width ) ) {
+// 		margin-left: 0;
+// 		margin-right: 0;
+// 	}
+// }
 
 
 .body-inner {
+	max-width: $body-max-width;
+
 	// Media queries
-	@media (max-width: ( $body-min-width - 1 ) ) {
+	@media ( max-width: ( $body-min-width - 1 ) ) {
 		display: none;
 	}
 
