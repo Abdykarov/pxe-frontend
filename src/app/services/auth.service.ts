@@ -14,7 +14,6 @@ import {
     ILoginResponse,
 } from './model/auth.model';
 
-
 @Injectable({
     providedIn: 'root',
 })
