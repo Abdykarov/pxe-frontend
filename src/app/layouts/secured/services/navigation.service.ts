@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
+
+import { catchError } from 'rxjs/operators';
 import {
     Observable,
-    of, Subject,
+    of,
     Subscriber,
     throwError,
 } from 'rxjs';
-import {
-    catchError,
-    takeUntil,
-} from 'rxjs/operators';
 
 // own models
+import { Apollo } from 'apollo-angular';
 import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
 import { navigationConfig } from './navigation.config';
-import { Apollo } from 'apollo-angular';
 import * as navigation from 'src/common/graphql/mutation/navigation';
 
 @Injectable({
