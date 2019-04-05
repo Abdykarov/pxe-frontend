@@ -11,8 +11,8 @@ import { environment } from 'src/environments/environment';
 
 import {
     ILoginRequest,
+    ILoginResponse,
 } from './model/auth.model';
-
 
 @Injectable({
     providedIn: 'root',
@@ -40,10 +40,20 @@ export class AuthService {
     }
 
     login = ({username, password}: ILoginRequest) => {
-        this.cookiesService.set('user', JSON.stringify({token: 'xxx'}), 5645454545);
-        this.checkLogin();
-        // TODO - temporary solution, will be replaced with gql call
-        return of(true);
+        return this.http.post<ILoginResponse>(`${environment.url}/parc-rest/webresources/users/login`, { username, password })
+            .pipe(
+                map(response => {
+                    if (response && response.token) {
+                        if ( response.expiresTime ) {
+                            this.expiresTime = response.expiresTime;
+                        }
+                        const user =  JSON.stringify({token: response.token});
+                        this.cookiesService.set(this.cookieName, user, this.expiresTime);
+                        this.checkLogin();
+                    }
+                    return response;
+                }),
+            );
     }
 
     logout = () => {
