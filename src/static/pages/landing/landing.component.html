@@ -49,9 +49,9 @@
             </div>
             <div class="row">
                 <div class="col-12 col-md-10 offset-md-1">
-                    <div class="row">
+                    <div class="row landing-page__process">
                         <div class="col-12 col-md-4">
-                            <div class="px-3 pb-7 pb-md-0">
+                            <div class="px-4 pb-7 pb-md-0">
                                 <img
                                     class="landing-page-illustration"
                                     src="/assets/images/illustrations/house.svg"
@@ -60,9 +60,10 @@
                                 <h3 class="h3--public">Nejdřív se seznámíme</h3>
                                 <p class="mb-0">Představíte sebe i&nbsp;vaše odběrné místo nebo&nbsp;nahrajete fakturu, ať&nbsp;máme potřebné informace.</p>
                             </div>
+                            <span class="landing-page__process-arrow icon icon--arrow-process"></span>
                         </div>
                         <div class="col-12 col-md-4">
-                            <div class="px-3 pt-7 pt-md-0 pb-7 pb-md-0">
+                            <div class="px-4 pt-7 pt-md-0 pb-7 pb-md-0">
                                 <img
                                 class="landing-page-illustration"
                                     src="/assets/images/illustrations/documents.svg"
@@ -70,10 +71,11 @@
                                     alt="Ilustrace podepsaných dokumentů">
                                 <h3 class="h3--public">Dostanete nabídky</h3>
                                 <p class="mb-0">Získáme pro&nbsp;vás ty nejzajímavější nabídky od&nbsp;dodavatelů, které&nbsp;před&nbsp;tím důkladně prověříme, ať&nbsp;se&nbsp;nemusíte ničeho bát.</p>
+                                <span class="landing-page__process-arrow icon icon--arrow-process"></span>
                             </div>
                         </div>
                         <div class="col-13 col-md-4">
-                            <div class="px-3 pt-7 pt-md-0">
+                            <div class="px-4 pt-7 pt-md-0">
                                 <img
                                 class="landing-page-illustration"
                                     src="/assets/images/illustrations/light.svg"
@@ -149,6 +151,20 @@
                     <h3 class="h3--public">
                         Chci mít také přístup k&nbsp;jiným cenám, možnost&nbsp;měnit dodavatele jen na&nbsp;jedno kliknutí a&nbsp;zbavit se starostí s&nbsp;převodem.
                     </h3>
+                    <lnd-form-field
+                        id="newsletter-email"
+                        label="E-mail"
+                        placeholder="jan@novak.cz">
+                    </lnd-form-field>
+                    <lnd-form-field
+                        id="newsletter-security-policy-agree"
+                        label="Souhlasím se zásady bezpečnosti"
+                        type="CHECKBOX">
+                    </lnd-form-field>
+                    <lnd-button
+                        label="Odeslat"
+                        type="primary">
+                    </lnd-button>
                 </div>
             </div>
         </div>

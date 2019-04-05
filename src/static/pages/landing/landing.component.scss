@@ -72,7 +72,7 @@
 	.landing-page-illustration {
 		width: auto;
 		height: 100px;
-		margin-bottom: ( $spacer * 1.25 );
+		margin-bottom: ( $spacer * 1.5 );
 
 		// Media queries
 		@include media-breakpoint-up(md) {
@@ -80,6 +80,36 @@
 		}
 		@include media-breakpoint-up(lg) {
 			height: 150px;
+		}
+	}
+
+	&__process-arrow {
+		pointer-events: none;
+		position: absolute;
+		top: 100%;
+		right: 50%;
+		color: $primary;
+		margin-top: -( 18px / 2 );
+		margin-right: -( 46px / 2 );
+		font-size: 46px;
+		width: 46px;
+		height: 18px;
+		line-height: 18px;
+		transform: rotate(90deg);
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			transform: rotate(0);
+			top: 50%;
+			right: 0;
+		}
+		@include media-breakpoint-up(lg) {
+			margin-top: -( 24px / 2 );
+			margin-right: -( 70px / 2 );
+			font-size: 70px;
+			width: 70px;
+			height: 24px;
+			line-height: 24px;
 		}
 	}
 }

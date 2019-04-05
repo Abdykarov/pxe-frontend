@@ -25,7 +25,7 @@ export const staticNavigationConfig: INavigationConfig = [
                 // },
                 {
                     'label': 'Buttons',
-                    'url': '/buttons',
+                    'url': '/basic/buttons',
                 },
                 // {
                 //     'label': 'Cards',
@@ -45,7 +45,7 @@ export const staticNavigationConfig: INavigationConfig = [
                 // },
                 {
                     'label': 'Icons',
-                    'url': '/icons',
+                    'url': '/basic/icons',
                 },
                 // {
                 //     'label': 'Indicators',
