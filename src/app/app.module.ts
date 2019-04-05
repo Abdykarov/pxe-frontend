@@ -22,11 +22,14 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 // own classes
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
-import { InterceptorProviders } from './interceptors';
+import {
+    defaults,
+    resolvers,
+} from '../common/graphql/resolvers';
 import { environment } from '../environments/environment';
+import { InterceptorProviders } from './interceptors';
 import { PipesModule } from 'src/common/pipes/pipes.module';
 import { withClientState } from 'apollo-link-state';
-import { defaults, resolvers } from '../common/graphql/resolvers';
 
 console.log('ENVIRONMENt', environment);
 
@@ -54,7 +57,7 @@ console.log('ENVIRONMENt', environment);
             useFactory: (httpLink: HttpLink) => {
                 const cache = new InMemoryCache();
                 const http = httpLink.create({
-                    uri: `${environment.graphql}/graphql`,
+                    uri: `${environment.url}/graphql`,
                 });
                 const local = withClientState({
                     cache,

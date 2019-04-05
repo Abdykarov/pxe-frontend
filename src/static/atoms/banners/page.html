@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col">
+        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+    </div>
+</div>
+<div class="static-pages">
+    <div class="row">
+        <div class="col">
+            <lnd-banner-ui
+                [data]="bannerObj"
+                [buttonLabel]="buttonLabel"
+            ></lnd-banner-ui>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <lnd-banner-ui
+            type="simple"
+            (staticBannerAction)="staticBannerAction()"
+            buttonLabel="Button label"
+            staticBannerTitle="Banner title"
+        ></lnd-banner-ui>
+    </div>
+</div>

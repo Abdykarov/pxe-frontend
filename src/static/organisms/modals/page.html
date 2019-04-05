@@ -1,0 +1,103 @@
+<div class="row">
+    <div class="col">
+        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+    </div>
+</div>
+<div class="static-pages">
+    <div class="row">
+        <div class="col-12 mb-2">
+            <lnd-button
+                type="secondary"
+                (action)="toggleNormalModal()"
+                label="Normal modal">
+            </lnd-button>
+        </div>
+        <div class="col-12 mb-2">
+            <lnd-button
+                type="secondary"
+                (action)="toggleLargeModal()"
+                label="Large modal">
+            </lnd-button>
+        </div>
+        <div class="col-12">
+            <lnd-button
+                type="secondary"
+                (action)="toggleModalWithLogo()"
+                label="Modal with logo">
+            </lnd-button>
+        </div>
+    </div>
+
+    <!-- Normal modal to show -->
+    <lnd-modal
+        title="Normal modal title"
+        [isModalOpen]="isNormalModalOpen"
+        (close)="toggleNormalModal()">
+        <div class="modal-body">
+            <p>Normal modal body content body content body content body content body content body content body content body content body content body content.</p>
+        </div>
+        <div class="modal-footer">
+            <lnd-button
+                type="secondary"
+                (action)="toggleNormalModal()"
+                label="Yes">
+            </lnd-button>
+            <lnd-button
+                type="secondary"
+                (action)="toggleNormalModal()"
+                label="No"
+                hasOutline="true">
+            </lnd-button>
+        </div>
+    </lnd-modal>
+
+    <!-- Large modal to show -->
+    <lnd-modal
+        title="Large modal title"
+        size="lg"
+        [isModalOpen]="isLargeModalOpen"
+        (close)="toggleLargeModal()">
+        <div class="modal-body">
+            <p>Normal modal body content body content body content body content body content body content body content body content body content body content.</p>
+        </div>
+        <div class="modal-footer">
+            <lnd-button
+                type="secondary"
+                (action)="toggleLargeModal()"
+                label="Yes">
+            </lnd-button>
+            <lnd-button
+                type="secondary"
+                (action)="toggleLargeModal()"
+                label="No"
+                hasOutline="true">
+            </lnd-button>
+        </div>
+    </lnd-modal>
+
+    <!-- Modal with logo to show -->
+    <lnd-modal
+        title="Modal with logo title"
+        [isModalOpen]="isModalWithLogoOpen"
+        logoSrc="assets/images/layout/logo.svg"
+        logoAlt="Modal with logo alt"
+        logoTitle="Modal with logo title"
+        (close)="toggleModalWithLogo()">
+        <div class="modal-body">
+            <p>Normal modal body content body content body content body content body content body content body content body content body content body content.</p>
+        </div>
+        <div class="modal-footer">
+            <lnd-button
+                type="secondary"
+                (action)="toggleModalWithLogo()"
+                label="Yes">
+            </lnd-button>
+            <lnd-button
+                type="secondary"
+                (action)="toggleModalWithLogo()"
+                label="No"
+                hasOutline="true">
+            </lnd-button>
+        </div>
+    </lnd-modal>
+</div>
