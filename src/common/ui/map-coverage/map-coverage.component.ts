@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 
-import { IConfig } from './coverage.model';
+import { IConfig } from './model/coverage.model';
 
 @Component({
-    selector: 'lnd-map-coverage',
+    selector: 'pxe-map-coverage',
     templateUrl: './map-coverage.component.html',
     styleUrls: ['./map-coverage.component.css'],
 })
