@@ -20,11 +20,3 @@ export const getConfig = gql`
     }
 `;
 
-
-export const showOverlay = gql`
-    query {
-        ui @client{
-            showOverlay
-        }
-    }
-`;

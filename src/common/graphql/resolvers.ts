@@ -1,4 +1,3 @@
-import { config } from 'rxjs';
 import gql from 'graphql-tag';
 
 import { getConfig } from './queries/navigation';
@@ -77,7 +76,6 @@ export const resolvers = {
             return null;
         },
         toggleOverlay: (_, variables, {cache}) => {
-            console.log('toggleOverlay');
             const prev = cache.readQuery({query: getConfig});
             const data = {
                 ui: {
@@ -86,7 +84,7 @@ export const resolvers = {
                         navigationItemOpened: prev.ui.securedLayout.navigationItemOpened,
                         __typename: 'securedLayout',
                     } : null,
-                    showOverlay: !prev.ui.showOverlay,
+                    showOverlay: variables.value === null ? !prev.ui.showOverlay : variables.value,
                     __typename: 'ui',
                 },
             };

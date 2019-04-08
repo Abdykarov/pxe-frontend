@@ -31,6 +31,9 @@ export class PublicLayoutComponent extends AbstractComponent {
             .events
             .subscribe(event => {
                 if (event instanceof NavigationEnd) {
+                    this.overlayService.toggleOverlay(false)
+                                            .pipe(takeUntil(this.destroy$))
+                                            .subscribe();
                 }
             });
 

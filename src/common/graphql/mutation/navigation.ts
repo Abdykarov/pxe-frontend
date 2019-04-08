@@ -13,12 +13,6 @@ export const openItem = gql`
     }
 `;
 
-export const toggleOverlay = gql`
-    mutation toggleOverlay {
-        toggleOverlay @client
-    }
-`;
-
 export const logout = gql`
     mutation logout {
         logout @client

@@ -2,9 +2,13 @@ import { Injectable } from '@angular/core';
 
 import { Apollo } from 'apollo-angular';
 
-import * as navigation from '../queries/navigation';
-import * as navigationMut from '../mutation/navigation';
-import { toggleOverlay } from 'src/common/graphql/mutation/navigation';
+import { getConfig } from 'src/common/graphql/queries/navigation';
+import {
+    loadConfig,
+    logout,
+    openItem,
+} from 'src/common/graphql/mutation/navigation';
+
 
 @Injectable({
     providedIn: 'root',
@@ -17,7 +21,7 @@ export class NavigationService {
     public getConfig() {
         return  this.apollo
                     .watchQuery<any>({
-                        query: navigation.getConfig,
+                        query: getConfig,
                     })
                     .valueChanges;
     }
@@ -25,7 +29,7 @@ export class NavigationService {
     public saveConfig(config) {
         return this.apollo
                     .mutate({
-                        mutation: navigationMut.loadConfig,
+                        mutation: loadConfig,
                     variables: {
                         config: config,
                     },
@@ -35,7 +39,7 @@ export class NavigationService {
     public toggleOpenItem(navigationItem) {
         return this.apollo
                     .mutate({
-                        mutation: navigationItem.url === this.LOGOUT_URL ? navigationMut.logout : navigationMut.openItem,
+                        mutation: navigationItem.url === this.LOGOUT_URL ? logout : openItem,
                         variables: {
                             item: navigationItem,
                         },

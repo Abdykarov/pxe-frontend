@@ -32,6 +32,15 @@ export class SecuredLayoutComponent extends AbstractComponent {
         private router: Router,
     ) {
         super();
+        this.router
+            .events
+            .subscribe(event => {
+                if (event instanceof NavigationEnd) {
+                    this.overlayService.toggleOverlay(false)
+                                            .pipe(takeUntil(this.destroy$))
+                                            .subscribe();
+                }
+            });
 
         this.navigationService.getNavigationConfig();
 

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Apollo } from 'apollo-angular';
 
-import * as navigation from '../queries/navigation';
-import { toggleOverlay } from 'src/common/graphql/mutation/navigation';
+import { showOverlay } from 'src/common/graphql/queries/overlay';
+import { toggleOverlay } from 'src/common/graphql/mutation/overlay';
 
 @Injectable({
     providedIn: 'root',
@@ -12,19 +12,22 @@ export class OverlayService {
 
     constructor(private apollo: Apollo) { }
 
-    public toggleOverlay() {
+    public toggleOverlay(value = null) {
         return  this.apollo
-                .mutate({
-                    mutation: toggleOverlay,
-                });
+                    .mutate({
+                        mutation: toggleOverlay,
+                        variables: {
+                            value: value,
+                        },
+                    });
     }
 
     public getOverlay() {
-       return   this.apollo
-                .watchQuery<any>({
-                    query: navigation.showOverlay,
-                })
-                .valueChanges;
+        return   this.apollo
+                    .watchQuery<any>({
+                        query: showOverlay,
+                    })
+                    .valueChanges;
     }
 
 }
