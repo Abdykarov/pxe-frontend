@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col">
+        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+    </div>
+</div>
+<lnd-card
+    alignment="center"
+    [data]="firstCard"
+    [hasButton]="true"
+    buttonLabel="Go somewhere"
+    hasButtonOutline="true"
+    (action)="goSomewhere()">
+</lnd-card>
+<lnd-card
+    [data]="secondCard"
+    imgPosition="bottom">
+</lnd-card>
+<h3>Card list</h3>
+<div class="static-pages">
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-card
+                [data]="listCard"
+                type="list">
+            </lnd-card>
+        </div>
+        <div class="col-md-4">
+            <lnd-card
+                [data]="listCard"
+                type="list">
+            </lnd-card>
+        </div>
+        <div class="col-md-4">
+            <lnd-card
+                [data]="listCard"
+                type="list">
+            </lnd-card>
+        </div>
+    </div>
+</div>
+<h3>Card tiles</h3>
+<div class="row mb-4">
+    <div class="col-sm-6 col-md-4 col-xl-3">
+        <lnd-card
+            [data]="tileCard"
+            type="tile"
+            (action)="tileAction()">
+        </lnd-card>
+    </div>
+    <div class="col-sm-6 col-md-4 col-xl-3">
+        <lnd-card
+            [data]="tileCard"
+            type="tile"
+            (action)="tileAction()">
+        </lnd-card>
+    </div>
+    <div class="col-sm-6 col-md-4 col-xl-3">
+        <lnd-card
+            [data]="tileCard"
+            type="tile"
+            (action)="tileAction()">
+        </lnd-card>
+    </div>
+</div>

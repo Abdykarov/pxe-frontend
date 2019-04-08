@@ -1,7 +1,14 @@
-{
-    "/graphql": {
+[
+    {
+        "context": "/graphql",
+        "logLevel": "debug",
         "target": "http://mock:9002/graphql",
-        "secure": false,
-        "logLevel": "debug"
+        "secure": false
+    },
+    {
+        "context": "/parc-rest",
+        "logLevel": "debug",
+        "target": "http://auth:8080",
+        "secure": false
     }
-}
+]

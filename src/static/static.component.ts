@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import {
-    NavigationEnd,
-    Router,
-} from '@angular/router';
+import { Router } from '@angular/router';
 
 import { staticNavigationConfig } from './config/navigation.config';
 
