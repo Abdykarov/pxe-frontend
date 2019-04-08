@@ -20,5 +20,4 @@ export class ConsumptionPipe implements PipeTransform {
     formatValue(input: number): string {
         return this.decimalPipe.transform(input, defaultDigitsInfo);
     }
-
 }

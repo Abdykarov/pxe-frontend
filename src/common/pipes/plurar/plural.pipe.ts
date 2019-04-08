@@ -19,8 +19,8 @@ export class PluralPipe implements PipeTransform {
             '=1' : 'Místo',
             '=2' : 'Místa',
             '=3' : 'Místa',
-            '=4' : 'Města',
-            'other' : 'Měsíců',
+            '=4' : 'Místa',
+            'other' : 'Míst',
         },
         'day': {
             '=1' : 'Den',
