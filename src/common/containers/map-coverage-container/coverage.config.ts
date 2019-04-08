@@ -1,4 +1,4 @@
-import { IConfig } from './coverage.model';
+import { IConfig } from '../../ui/map-coverage/coverage.model';
 
 export const config: IConfig = {
     gas : {

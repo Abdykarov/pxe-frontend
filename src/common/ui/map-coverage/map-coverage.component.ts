@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { config } from './model/coverage.config';
-import { IConfig } from './model/coverage.model';
+import { IConfig } from './coverage.model';
 
 @Component({
     selector: 'lnd-map-coverage',
@@ -9,5 +8,6 @@ import { IConfig } from './model/coverage.model';
     styleUrls: ['./map-coverage.component.css'],
 })
 export class MapCoverageComponent {
-  config: IConfig = config;
+  @Input()
+  config: IConfig;
 }
