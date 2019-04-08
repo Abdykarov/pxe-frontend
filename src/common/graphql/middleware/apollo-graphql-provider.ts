@@ -88,13 +88,11 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
         });
     });
 
-    const error = onError(({ graphQLErrors, networkError, response, operation }) => {
-        console.log('%c ***** VALUE *****', 'background: red; color: #000; font-weight: bold', response, operation);
+    const error = onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors) {
             graphQLErrors.map(({ message, locations, path }) => {
                 console.log('%c ***** [GraphQL error] *****', 'background: red; color: #fff; font-weight: bold',
                     `Message: ${message}, Location: ${locations}, Path: ${path}`);
-                // response.errors = { message, locations, path };
             });
         }
 

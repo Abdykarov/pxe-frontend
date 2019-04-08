@@ -1,7 +1,8 @@
 import {
     Component,
     EventEmitter,
-    Input, OnInit,
+    Input,
+    OnInit,
     Output,
 } from '@angular/core';
 import {
@@ -37,9 +38,7 @@ export class NewsSubscriptionComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-    ) {
-        console.log('%c ***** subscriptionFormFields *****', 'background: #bada55; color: #000; font-weight: bold', this.subscriptionFormFields);
-    }
+    ) {}
 
     ngOnInit() {
         this.subscriptionForm = this.fb.group(this.subscriptionFormFields.controls);
@@ -61,4 +60,3 @@ export class NewsSubscriptionComponent implements OnInit {
         }
     }
 }
-
