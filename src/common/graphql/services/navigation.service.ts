@@ -9,7 +9,6 @@ import {
     openItem,
 } from 'src/common/graphql/mutation/navigation';
 
-
 @Injectable({
     providedIn: 'root',
 })
@@ -19,30 +18,30 @@ export class NavigationService {
     constructor(private apollo: Apollo) { }
 
     public getConfig() {
-        return  this.apollo
-                    .watchQuery<any>({
-                        query: getConfig,
-                    })
-                    .valueChanges;
+        return this.apollo
+                   .watchQuery<any>({
+                       query: getConfig,
+                   })
+                   .valueChanges;
     }
 
     public saveConfig(config) {
         return this.apollo
-                    .mutate({
-                        mutation: loadConfig,
-                    variables: {
-                        config: config,
-                    },
+                   .mutate({
+                       mutation: loadConfig,
+                   variables: {
+                       config: config,
+                   },
         });
     }
 
     public toggleOpenItem(navigationItem) {
         return this.apollo
-                    .mutate({
-                        mutation: navigationItem.url === this.LOGOUT_URL ? logout : openItem,
-                        variables: {
-                            item: navigationItem,
-                        },
-                    });
+                   .mutate({
+                       mutation: navigationItem.url === this.LOGOUT_URL ? logout : openItem,
+                       variables: {
+                           item: navigationItem,
+                       },
+                   });
     }
 }

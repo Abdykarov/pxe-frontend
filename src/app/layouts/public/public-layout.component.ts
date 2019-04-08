@@ -10,6 +10,7 @@ import {
     map,
     takeUntil,
 } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
@@ -19,7 +20,8 @@ import { OverlayService } from 'src/common/graphql/services/overlay.service';
     styleUrls: ['./public-layout.component.scss'],
 })
 export class PublicLayoutComponent extends AbstractComponent {
-    public showOverlay = false;
+    public showOverlay: any = false;
+    private toggleSubscription: Subscription;
 
     constructor(
         private apollo: Apollo,
@@ -27,36 +29,29 @@ export class PublicLayoutComponent extends AbstractComponent {
         private router: Router,
     ) {
         super();
-        this.router
-            .events
-            .subscribe(event => {
-                if (event instanceof NavigationEnd) {
-                    this.overlayService.toggleOverlay(false)
-                                            .pipe(takeUntil(this.destroy$))
-                                            .subscribe();
-                }
-            });
-
+        this.router.events.subscribe(event => {
+            if (event instanceof NavigationEnd) {
+                this.toggleSubscription = this.overlayService.toggleOverlay(false)
+                                                             .subscribe();
+                this.toggleSubscription.unsubscribe();
+            }
+        });
 
         this.overlayService.getOverlay()
             .pipe(
                 takeUntil(this.destroy$),
-                map(result => {
-                        return   R.path(['data', 'ui', 'showOverlay'], result);
-                    },
-                ),
+                map( R.path(['data', 'ui', 'showOverlay'])),
             )
             .subscribe(current => {
                 this.showOverlay = current;
             });
-
     }
 
     public toggleOverlay() {
         this.overlayService.toggleOverlay()
-        .pipe(
-            takeUntil(this.destroy$),
-        )
-        .subscribe();
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe();
     }
 }

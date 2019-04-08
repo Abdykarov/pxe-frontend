@@ -92,7 +92,6 @@ export const resolvers = {
             return data;
         },
         loadConfig: (_, variables, {cache}) => {
-            console.log('loadconfig');
             const data = {
                 ui: {
                     securedLayout: {

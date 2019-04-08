@@ -5,7 +5,9 @@ import { IndexRoutingModule } from './index-routing.module';
 import { IndexComponent } from './index.component';
 
 @NgModule({
-    declarations: [IndexComponent],
+    declarations: [
+        IndexComponent,
+    ],
     imports: [
         CommonModule,
         IndexRoutingModule,

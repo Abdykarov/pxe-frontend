@@ -22,7 +22,7 @@ import * as mutations from 'src/common/graphql/mutations';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { loginFormFields } from './landing-page.config';
-import { OverlayService } from '../../../common/graphql/services/overlay.service';
+import { OverlayService } from 'src/common/graphql/services/overlay.service';
 
 interface ICounterResponse {
     counter: {

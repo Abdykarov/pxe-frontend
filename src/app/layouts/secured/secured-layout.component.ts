@@ -16,6 +16,7 @@ import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.mo
 import { NavigationService as NavigationApolloService} from 'src/common/graphql/services/navigation.service';
 import { NavigationService } from './services/navigation.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     templateUrl: './secured-layout.component.html',
@@ -23,6 +24,7 @@ import { OverlayService } from 'src/common/graphql/services/overlay.service';
 export class SecuredLayoutComponent extends AbstractComponent {
     public navConfig: INavigationConfig = [];
     public showOverlay = false;
+    private toggleSubscription: Subscription;
 
     constructor(
         private apollo: Apollo,
@@ -32,35 +34,22 @@ export class SecuredLayoutComponent extends AbstractComponent {
         private router: Router,
     ) {
         super();
-        this.router
-            .events
-            .subscribe(event => {
-                if (event instanceof NavigationEnd) {
-                    this.overlayService.toggleOverlay(false)
-                                            .pipe(takeUntil(this.destroy$))
-                                            .subscribe();
-                }
-            });
+        this.router.events.subscribe(event => {
+            if (event instanceof NavigationEnd) {
+                this.toggleSubscription = this.overlayService.toggleOverlay(false)
+                                                             .subscribe();
+                this.toggleSubscription.unsubscribe();
+            }
+        });
 
         this.navigationService.getNavigationConfig();
-
-        this.router
-            .events
-            .subscribe(event => {
-                if (event instanceof NavigationEnd) {
-                }
-            });
-
 
         this.navigationApolloService.getConfig()
             .pipe(
                 takeUntil(this.destroy$),
-                map(result => {
-                      return   R.path(['data', 'ui'], result);
-                    },
-                ),
+                map( R.path(['data', 'ui'])),
             )
-            .subscribe(current => {
+            .subscribe((current: any)  => {
                 if (current.securedLayout) {
                     this.navConfig = current.securedLayout.navigationConfig;
                     this.showOverlay = current.showOverlay;
