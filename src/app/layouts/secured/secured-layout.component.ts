@@ -16,6 +16,7 @@ import * as navigation from 'src/common/graphql/queries/navigation';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
 import { NavigationService } from './services/navigation.service';
+import { toggleOverlay } from 'src/common/graphql/mutation/navigation';
 
 @Component({
     templateUrl: './secured-layout.component.html',
@@ -23,6 +24,7 @@ import { NavigationService } from './services/navigation.service';
 export class SecuredLayoutComponent extends AbstractComponent {
     public navConfig: INavigationConfig = [];
     private readonly LOGOUT_URL = '/logout';
+    public showOverlay = false;
 
     constructor(
         private apollo: Apollo,
@@ -49,12 +51,16 @@ export class SecuredLayoutComponent extends AbstractComponent {
             .valueChanges
             .pipe(
                 takeUntil(this.destroy$),
-                map(result =>
-                    R.path(['data', 'ui', 'securedLayout', 'navigationConfig'], result),
+                map(result => {
+                      return   R.path(['data', 'ui', 'securedLayout'], result);
+                    },
                 ),
             )
             .subscribe(current => {
-                this.navConfig = current;
+                if (current) {
+                    this.navConfig = current.navigationConfig;
+                    this.showOverlay = current.showOverlay;
+                }
             });
 
     }
@@ -66,6 +72,17 @@ export class SecuredLayoutComponent extends AbstractComponent {
                 variables: {
                     item: navigationItem,
                 },
+            })
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe();
+    }
+
+    public click() {
+        this.apollo
+            .mutate({
+                mutation: toggleOverlay,
             })
             .pipe(
                 takeUntil(this.destroy$),

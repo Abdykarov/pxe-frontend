@@ -9,8 +9,9 @@ export const getConfig = gql`
                     icon,
                     url
                 }
+                navigationItemOpened
+                showOverlay
             }
         }
     }
 `;
-

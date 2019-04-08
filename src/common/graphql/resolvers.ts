@@ -75,12 +75,29 @@ export const resolvers = {
             cache.writeData({data});
             return null;
         },
+        toggleOverlay: (_, variables, {cache}) => {
+            const prev = cache.readQuery({query: getConfig});
+            const data = {
+                ui: {
+                    securedLayout: {
+                        navigationConfig: prev.ui.securedLayout.navigationConfig,
+                        navigationItemOpened: prev.ui.securedLayout.navigationItemOpened,
+                        showOverlay: !prev.ui.securedLayout.showOverlay,
+                        __typename: 'securedLayout',
+                    },
+                    __typename: 'ui',
+                },
+            };
+            cache.writeData({data});
+            return data;
+        },
         loadConfig: (_, variables, {cache}) => {
             const data = {
                 ui: {
                     securedLayout: {
                         navigationConfig: variables.config,
                         navigationItemOpened: null,
+                        showOverlay: false,
                         __typename: 'securedLayout',
                     },
                     __typename: 'ui',
@@ -96,6 +113,7 @@ export const resolvers = {
                     securedLayout: {
                         navigationConfig: prev.ui.securedLayout.navigationConfig,
                         navigationItemOpened: variables.item,
+                        showOverlay: false,
                         __typename: 'securedLayout',
                     },
                     __typename: 'ui',
