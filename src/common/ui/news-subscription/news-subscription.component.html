@@ -2,10 +2,10 @@
     <h3 class="h3--public">
         Chci mít také přístup k&nbsp;jiným cenám, možnost&nbsp;měnit dodavatele jen na&nbsp;jedno kliknutí a&nbsp;zbavit se starostí s&nbsp;převodem.
     </h3>
-    <h4 *ngIf="subscriptionError"
-        class="text-danger">
+    <lnd-alert *ngIf="subscriptionError"
+               type="danger">
         {{subscriptionError}}
-    </h4>
+    </lnd-alert>
     <form [formGroup]="subscriptionForm"
           autocomplete="off">
         <lnd-form-field

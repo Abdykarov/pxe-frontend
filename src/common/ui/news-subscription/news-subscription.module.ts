@@ -5,8 +5,9 @@ import {
 } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
-import { ButtonModule } from '../button/button.module';
-import { FormModule } from '../forms/form.module';
+import { AlertModule } from 'src/common/ui/alert/alert.module';
+import { ButtonModule } from 'src/common/ui/button/button.module';
+import { FormModule } from 'src/common/ui/forms/form.module';
 import { NewsSubscriptionComponent } from './news-subscription.component';
 
 @NgModule({
@@ -14,6 +15,7 @@ import { NewsSubscriptionComponent } from './news-subscription.component';
         NewsSubscriptionComponent,
     ],
     imports: [
+        AlertModule,
         ButtonModule,
         CommonModule,
         FormModule,
