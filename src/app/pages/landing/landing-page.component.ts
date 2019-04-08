@@ -54,6 +54,8 @@ export class LandingPageComponent extends AbstractComponent implements OnInit {
 
     public subscriptionForm: FormGroup;
     public submitSubscriptionLoading = false;
+    public subscriptionFormFields = subscriptionFormFields;
+    public subscriptionFormSent = false;
 
     public counter = 0;
     public visible = false;
@@ -67,7 +69,8 @@ export class LandingPageComponent extends AbstractComponent implements OnInit {
     ) {
         super();
         this.loginForm = this.fb.group(loginFormFields);
-        this.subscriptionForm = this.fb.group(subscriptionFormFields);
+        // this.subscriptionForm = this.fb.group(this.subscriptionFormFields.controls);
+        console.log('%c ***** this.subscriptionForm *****', 'background: yellow; color: #000; font-weight: bold');
     }
 
     ngOnInit() {
@@ -100,28 +103,28 @@ export class LandingPageComponent extends AbstractComponent implements OnInit {
                 this.visible = current;
             });
 
-        this.apollo
-            .watchQuery({
-                query: gql`
-                    {
-                        employee(id:1) {
-                            firstName
-                            address
-                        }
-                    }
-                `,
-            })
-            .valueChanges
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe(result => {
-                console.log('%c ***** result *****', 'background: #bada55; color: #000; font-weight: bold', result);
-                this.rates = result.data;
-                this.loading = result.loading;
-                this.errors = result.errors;
-                this.cd.markForCheck();
-            });
+        // this.apollo
+        //     .watchQuery({
+        //         query: gql`
+        //             {
+        //                 employee(id:1) {
+        //                     firstName
+        //                     address
+        //                 }
+        //             }
+        //         `,
+        //     })
+        //     .valueChanges
+        //     .pipe(
+        //         takeUntil(this.destroy$),
+        //     )
+        //     .subscribe(result => {
+        //         console.log('%c ***** result *****', 'background: #bada55; color: #000; font-weight: bold', result);
+        //         this.rates = result.data;
+        //         this.loading = result.loading;
+        //         this.errors = result.errors;
+        //         this.cd.markForCheck();
+        //     });
     }
 
     public incrementCounter = () => {
@@ -206,6 +209,7 @@ export class LandingPageComponent extends AbstractComponent implements OnInit {
                 .subscribe(
                     () => {
                         this.submitSubscriptionLoading = false;
+                        this.subscriptionFormSent = true;
                         this.cd.markForCheck();
                     },
                     (error) => {

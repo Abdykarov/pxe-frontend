@@ -21,6 +21,7 @@ import { createStringFromTemplate } from 'src/common/utils';
 import { ErrorMessages } from '../form.constants';
 import { FieldTypes } from '../models/field-types.model';
 import { IOption } from '../models/option.model';
+import { IValidationMessages } from '../models/validation-messages.model';
 
 @Component({
     selector: 'lnd-form-field',
@@ -142,6 +143,9 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     public type: string = FieldTypes.INPUT;
 
     @Input()
+    public validationMessages?: IValidationMessages;
+
+    @Input()
     public warning = false;
 
     onChange: any = () => {};
@@ -223,8 +227,9 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
 
         if (R_.isObject(this.error)) {
             const errorType = Object.keys(this.error)[0];
+            const message = this.validationMessages && this.validationMessages[errorType] || ErrorMessages[errorType];
             return createStringFromTemplate(
-                ErrorMessages[errorType],
+                message,
                 this.error[errorType],
             );
         }

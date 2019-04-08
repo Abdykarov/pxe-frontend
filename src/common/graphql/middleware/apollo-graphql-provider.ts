@@ -14,10 +14,14 @@ import { onError } from 'apollo-link-error';
 import { withClientState } from 'apollo-link-state';
 
 import { AuthService } from 'src/app/services/auth.service';
+// import {
+//     defaults,
+//     resolvers,
+// } from '../resolvers';
 import {
     defaults,
     resolvers,
-} from '../resolvers';
+} from '../resolvers/';
 import { environment } from 'src/environments/environment';
 
 const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, router: Router) => {
@@ -84,12 +88,14 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
         });
     });
 
-    const error = onError(({ graphQLErrors, networkError }) => {
+    const error = onError(({ graphQLErrors, networkError, response, operation }) => {
+        console.log('%c ***** VALUE *****', 'background: red; color: #000; font-weight: bold', response, operation);
         if (graphQLErrors) {
-            graphQLErrors.map(({ message, locations, path }) =>
+            graphQLErrors.map(({ message, locations, path }) => {
                 console.log('%c ***** [GraphQL error] *****', 'background: red; color: #fff; font-weight: bold',
-                    `Message: ${message}, Location: ${locations}, Path: ${path}`),
-            );
+                    `Message: ${message}, Location: ${locations}, Path: ${path}`);
+                // response.errors = { message, locations, path };
+            });
         }
 
         if (networkError) {

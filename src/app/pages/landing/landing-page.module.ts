@@ -12,6 +12,7 @@ import { FormModule } from 'src/common/ui/forms/form.module';
 import { LandingPageComponent } from './landing-page.component';
 import { LandingPageRoutingModule } from './landing-page.routing';
 import { ModalModule } from 'src/common/ui/modal/modal.module';
+import { NewsSubscriptionContainerModule } from 'src/common/containers/news-subscription/news-subscription-container.module';
 
 @NgModule({
     declarations: [
@@ -26,8 +27,9 @@ import { ModalModule } from 'src/common/ui/modal/modal.module';
         CommonModule,
         FormModule,
         FormsModule,
-        ModalModule,
         LandingPageRoutingModule,
+        ModalModule,
+        NewsSubscriptionContainerModule,
         ReactiveFormsModule,
     ],
 })

@@ -8,11 +8,23 @@ export const loginFormFields = {
 };
 
 export const subscriptionFormFields = {
-    email: ['', [
-        Validators.required,
-        CustomValidators.email,
-    ]],
-    consent: [false, [
-        Validators.requiredTrue,
-    ]],
+    controls: {
+        email: ['', [
+            Validators.required,
+            CustomValidators.email,
+        ]],
+        consent: [false, [
+            Validators.requiredTrue,
+        ]],
+    },
+    validationMessages: {
+        email: {
+            required: 'Zadejte svůj e-mail.',
+            email: 'E-mail není ve správném formátu.',
+        },
+        consent: {
+            required: 'Musíte souhlasit se zásadami bezpečnosti.',
+        },
+    },
 };
+
