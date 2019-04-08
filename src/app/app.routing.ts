@@ -29,7 +29,7 @@ const routes: Routes = [
         RouterModule.forRoot(
             routes,
             {
-                enableTracing: !!environment.production,
+                enableTracing: !environment.production,
             },
         ),
     ],

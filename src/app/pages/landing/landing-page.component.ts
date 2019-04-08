@@ -184,7 +184,8 @@ export class LandingPageComponent extends AbstractComponent implements OnInit {
             this.overlayService.toggleOverlay()
                 .pipe(
                     takeUntil(this.destroy$),
-                ).subscribe();
+                )
+                .subscribe();
         }
     }
 }
