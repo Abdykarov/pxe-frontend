@@ -9,9 +9,22 @@ export const getConfig = gql`
                     icon,
                     url
                 }
-                navigationItemOpened
-                showOverlay
+                navigationItemOpened{
+                    label,
+                    icon,
+                    url
+                }
             }
+            showOverlay
+        }
+    }
+`;
+
+
+export const showOverlay = gql`
+    query {
+        ui @client{
+            showOverlay
         }
     }
 `;

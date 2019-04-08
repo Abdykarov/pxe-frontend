@@ -13,6 +13,7 @@ import {
     ApolloModule,
     APOLLO_OPTIONS,
 } from 'apollo-angular';
+import { withClientState } from 'apollo-link-state';
 import {
     HttpLinkModule,
     HttpLink,
@@ -29,7 +30,6 @@ import {
 import { environment } from '../environments/environment';
 import { InterceptorProviders } from './interceptors';
 import { PipesModule } from 'src/common/pipes/pipes.module';
-import { withClientState } from 'apollo-link-state';
 
 console.log('ENVIRONMENt', environment);
 

@@ -14,6 +14,7 @@ export const defaults = {
     },
     ui: {
         securedLayout: null,
+        showOverlay: false,
         __typename: 'ui',
     },
 };
@@ -76,15 +77,16 @@ export const resolvers = {
             return null;
         },
         toggleOverlay: (_, variables, {cache}) => {
+            console.log('toggleOverlay');
             const prev = cache.readQuery({query: getConfig});
             const data = {
                 ui: {
-                    securedLayout: {
+                    securedLayout: prev.ui.securedLayout ? {
                         navigationConfig: prev.ui.securedLayout.navigationConfig,
                         navigationItemOpened: prev.ui.securedLayout.navigationItemOpened,
-                        showOverlay: !prev.ui.securedLayout.showOverlay,
                         __typename: 'securedLayout',
-                    },
+                    } : null,
+                    showOverlay: !prev.ui.showOverlay,
                     __typename: 'ui',
                 },
             };
@@ -92,14 +94,15 @@ export const resolvers = {
             return data;
         },
         loadConfig: (_, variables, {cache}) => {
+            console.log('loadconfig');
             const data = {
                 ui: {
                     securedLayout: {
                         navigationConfig: variables.config,
                         navigationItemOpened: null,
-                        showOverlay: false,
                         __typename: 'securedLayout',
                     },
+                    showOverlay: false,
                     __typename: 'ui',
                 },
             };
@@ -113,19 +116,20 @@ export const resolvers = {
                     securedLayout: {
                         navigationConfig: prev.ui.securedLayout.navigationConfig,
                         navigationItemOpened: variables.item,
-                        showOverlay: false,
                         __typename: 'securedLayout',
                     },
+                    showOverlay: false,
                     __typename: 'ui',
                 },
             };
             cache.writeData({data});
-            return null;
+            return data;
         },
         logout: (_, variables, {cache}) => {
             const data = {
                 ui: {
                     securedLayout: null,
+                    showOverlay: false,
                     __typename: 'ui',
                 },
             };

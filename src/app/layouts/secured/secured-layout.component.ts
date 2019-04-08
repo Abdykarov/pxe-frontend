@@ -11,24 +11,24 @@ import {
     map,
 } from 'rxjs/operators';
 
-import * as navigationMut from 'src/common/graphql/mutation/navigation';
-import * as navigation from 'src/common/graphql/queries/navigation';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
+import { NavigationService as NavigationApolloService} from 'src/common/graphql/services/navigation.service';
 import { NavigationService } from './services/navigation.service';
-import { toggleOverlay } from 'src/common/graphql/mutation/navigation';
+import { OverlayService } from 'src/common/graphql/services/overlay.service';
 
 @Component({
     templateUrl: './secured-layout.component.html',
 })
 export class SecuredLayoutComponent extends AbstractComponent {
     public navConfig: INavigationConfig = [];
-    private readonly LOGOUT_URL = '/logout';
     public showOverlay = false;
 
     constructor(
         private apollo: Apollo,
+        private navigationApolloService: NavigationApolloService,
         private navigationService: NavigationService,
+        private overlayService: OverlayService,
         private router: Router,
     ) {
         super();
@@ -39,26 +39,21 @@ export class SecuredLayoutComponent extends AbstractComponent {
             .events
             .subscribe(event => {
                 if (event instanceof NavigationEnd) {
-                    console.log('SECURED LAYOUT: NAVIGATION END');
                 }
             });
 
 
-        this.apollo
-            .watchQuery<any>({
-                query: navigation.getConfig,
-            })
-            .valueChanges
+        this.navigationApolloService.getConfig()
             .pipe(
                 takeUntil(this.destroy$),
                 map(result => {
-                      return   R.path(['data', 'ui', 'securedLayout'], result);
+                      return   R.path(['data', 'ui'], result);
                     },
                 ),
             )
             .subscribe(current => {
-                if (current) {
-                    this.navConfig = current.navigationConfig;
+                if (current.securedLayout) {
+                    this.navConfig = current.securedLayout.navigationConfig;
                     this.showOverlay = current.showOverlay;
                 }
             });
@@ -66,13 +61,7 @@ export class SecuredLayoutComponent extends AbstractComponent {
     }
 
     public toggleOpenItem (navigationItem) {
-        this.apollo
-            .mutate({
-                mutation: navigationItem.url === this.LOGOUT_URL ? navigationMut.logout : navigationMut.openItem,
-                variables: {
-                    item: navigationItem,
-                },
-            })
+        this.navigationApolloService.toggleOpenItem(navigationItem)
             .pipe(
                 takeUntil(this.destroy$),
             )
@@ -80,10 +69,7 @@ export class SecuredLayoutComponent extends AbstractComponent {
     }
 
     public click() {
-        this.apollo
-            .mutate({
-                mutation: toggleOverlay,
-            })
+        this.overlayService.toggleOverlay()
             .pipe(
                 takeUntil(this.destroy$),
             )
