@@ -50,7 +50,11 @@ app.set('view engine', 'html');
 app.set('views', join(DIST_FOLDER, 'app'));
 
 // TODO: implement data requests securely
-app.get('/api/*', (req, res) => {
+app.get('/graphql', (req, res) => {
+    res.status(404).send('data requests are not supported');
+});
+
+app.get('/parc-rest/*', (req, res) => {
     res.status(404).send('data requests are not supported');
 });
 
