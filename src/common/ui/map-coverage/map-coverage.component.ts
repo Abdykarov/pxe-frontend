@@ -1,6 +1,9 @@
-import { Component, Input } from '@angular/core';
+import {
+    Component,
+    Input,
+} from '@angular/core';
 
-import { IConfig } from './model/coverage.model';
+import { IMapCoverageConfig } from './model/coverage.model';
 
 @Component({
     selector: 'pxe-map-coverage',
@@ -9,5 +12,5 @@ import { IConfig } from './model/coverage.model';
 })
 export class MapCoverageComponent {
   @Input()
-  config: IConfig;
+  public config: IMapCoverageConfig;
 }

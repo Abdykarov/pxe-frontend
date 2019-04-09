@@ -1,11 +1,11 @@
 <lnd-tabs>
 
-    <lnd-tab tabTitle="ELEKŘINA">
+    <lnd-tab tabTitle="ELEKTŘINA">
         Aktuální pokrytí
         <br />
-            {{config.power.places }}
+            {{config.power.places}}
         <br />
-            {{ config.power.places.toString()  | plural:'place'}}
+            {{config.power.places.toString() | plural:'place'}}
         <br />
         <br />
 
@@ -13,7 +13,7 @@
         <br />
         {{config.power.notification}}
         <br />
-        {{ config.power.notification.toString()  | plural:'day'}}
+        {{config.power.notification.toString() | plural:'day'}}
         <br />
         <br />
 
@@ -24,23 +24,24 @@
         <br />
         Nasi dodavatele elektriny
         <br />
-        <div *ngFor="let supply of config.power.suppliers">
-            {{supply.url}}
-            {{supply.title}}
-            {{supply.logo}}
+        <div *ngFor="let supplier of config.power.suppliers">
+            <img
+                [src]="supplier.logoUrl"
+                [attr.title]="supplier.title"
+                [attr.alt]="supplier.supplierUrl">
         </div>
     </lnd-tab>
 
     <lnd-tab tabTitle="PLYN">
         Aktuální pokrytí
         <br />
-        {{config.gas.places }}
+        {{config.gas.places}}
         <br />
-        {{ config.gas.places.toString()  | plural:'place'}}
+        {{ config.gas.places.toString() | plural:'place'}}
         <br />
         <br />
 
-        Objem největšího zásobníku  planu v ČR
+        Objem největšího zásobníku  plynu v ČR
         <br />
         {{config.gas.notification}}
         <br />
@@ -55,12 +56,13 @@
         <br />
         Nasi dodavatele plynu
         <br />
-        <div *ngFor="let supply of config.gas.suppliers">
-            {{supply.url}}
-            {{supply.title}}
-            {{supply.logo}}
+        <img src='http://mruanova.com/img/1.jpg' alt='image'>
+
+        <div *ngFor="let supplier of config.gas.suppliers">
+            <img
+                [src]="supplier.logoUrl"
+                [attr.title]="supplier.title"
+                [attr.alt]="supplier.supplierUrl">
         </div>
-
     </lnd-tab>
-
 </lnd-tabs>

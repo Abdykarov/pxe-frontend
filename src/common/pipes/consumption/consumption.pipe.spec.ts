@@ -1,4 +1,7 @@
-import { DecimalPipe, registerLocaleData } from '@angular/common';
+import {
+    DecimalPipe,
+    registerLocaleData,
+} from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
 import localeCs from '@angular/common/locales/cs';
 import localeCsExtra from '@angular/common/locales/extra/cs';

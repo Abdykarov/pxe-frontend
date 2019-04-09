@@ -6,10 +6,14 @@ import {
 
 const defaultDigitsInfo = '1.0-1';
 
-@Pipe({name: 'consumption'})
+@Pipe({
+        name: 'consumption',
+})
 export class ConsumptionPipe implements PipeTransform {
 
-    constructor(private decimalPipe: DecimalPipe) {}
+    constructor(
+        private decimalPipe: DecimalPipe,
+    ) {}
 
     transform(value: number): string {
         const units = ['Wh', 'KWh', 'MWh', 'GWh', 'TWh', 'PWh'],

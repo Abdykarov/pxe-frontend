@@ -1,49 +1,22 @@
-import { IConfig } from 'src/common/ui/map-coverage/model/coverage.model';
+import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
 
-export const config: IConfig = {
-    gas : {
+export const config: IMapCoverageConfig = {
+    gas: {
+        places: 447,
+        notification: 2,
+        consumption: 1300000000000,
+        suppliers: [],
+    },
+    power: {
         places: 781,
         notification: 49,
-        consumption: 999999,
-        suppliers : [
+        consumption: 1883500000,
+        suppliers: [
             {
-                logo: 'logo',
-                title: 'Plyn',
-                url: 'https://media1.mypage.cz/images/media1:4a290f93ac074.jpg/%5Bobrazky.4ever.sk%5D%20Smrt%208219832.jpg',
+                logoUrl: 'https://cs.wikipedia.org/wiki/%C4%8CEZ#/media/File:%C4%8Cez_logo.PNG',
+                title: 'Skupina ČEZ',
+                supplierUrl: 'https://cs.wikipedia.org/wiki/%C4%8CEZ#/media/File:%C4%8Cez_logo.PNG',
             },
-            {
-                logo: 'logo',
-                title: 'Plyn',
-                url: 'https://media1.mypage.cz/images/media1:4a290f93ac074.jpg/%5Bobrazky.4ever.sk%5D%20Smrt%208219832.jpg',
-            },
-        ],
-    },
-    power : {
-        places: 5,
-        notification: 5,
-        consumption: 5883.5,
-        suppliers : [
-            {
-                logo: 'logo',
-                title: 'Plyn',
-                url: 'https://files.slack.com/files-pri/T0GMH7LMQ-FHPQ325RU/image.png',
-            },
-            {
-                logo: 'logo',
-                title: 'Plyn',
-                url: 'https://files.slack.com/files-pri/T0GMH7LMQ-FHPQ325RU/image.png',
-            },
-            {
-                logo: 'logo',
-                title: 'Plyn',
-                url: 'https://files.slack.com/files-pri/T0GMH7LMQ-FHPQ325RU/image.png',
-            },
-            {
-                logo: 'logo',
-                title: 'Plyn',
-                url: 'https://files.slack.com/files-pri/T0GMH7LMQ-FHPQ325RU/image.png',
-            },
-
         ],
     },
 };

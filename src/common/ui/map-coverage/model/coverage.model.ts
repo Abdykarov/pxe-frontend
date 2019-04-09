@@ -1,19 +1,19 @@
-export interface ISource {
+export interface IMapCoverageSource {
     consumption: number;
     notification: number;
     places: number;
-    suppliers: Supplier[];
+    suppliers: IMapCoverageSupplier[];
 }
 
-export interface Supplier {
-    logo: string;
+export interface IMapCoverageSupplier {
+    logoUrl: string;
+    supplierUrl: string;
     title: string;
-    url: string;
 }
 
-export interface IConfig {
-    gas: ISource;
-    power: ISource;
+export interface IMapCoverageConfig {
+    gas: IMapCoverageSource;
+    power: IMapCoverageSource;
 }
 
 

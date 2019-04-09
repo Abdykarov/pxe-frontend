@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { config } from './coverage.config';
-import { IConfig } from 'src/common/ui/map-coverage/model/coverage.model';
+import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
 
 @Component({
     selector: 'pxe-map-coverage-container',
@@ -9,5 +9,5 @@ import { IConfig } from 'src/common/ui/map-coverage/model/coverage.model';
     styleUrls: ['./map-coverage-container.component.css'],
 })
 export class MapCoverageContainerComponent {
-    config: IConfig = config;
+    public config: IMapCoverageConfig = config;
 }
