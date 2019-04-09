@@ -25,10 +25,11 @@
         Nasi dodavatele elektriny
         <br />
         <div *ngFor="let supplier of config.power.suppliers">
-            <img
-                [src]="supplier.logoUrl"
-                [attr.title]="supplier.title"
-                [attr.alt]="supplier.supplierUrl">
+            <div *ngFor="let supplier of config.gas.suppliers">
+                <img
+                    [src]="supplier.logoUrl"
+                    [attr.alt]="supplier.title">
+            </div>
         </div>
     </lnd-tab>
 
@@ -56,13 +57,11 @@
         <br />
         Nasi dodavatele plynu
         <br />
-        <img src='http://mruanova.com/img/1.jpg' alt='image'>
 
         <div *ngFor="let supplier of config.gas.suppliers">
             <img
                 [src]="supplier.logoUrl"
-                [attr.title]="supplier.title"
-                [attr.alt]="supplier.supplierUrl">
+                [attr.alt]="supplier.title">
         </div>
     </lnd-tab>
 </lnd-tabs>
