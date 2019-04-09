@@ -43,8 +43,48 @@ export class NewsSubscriptionContainerComponent {
                 },
                 (error) => {
                     this.submitSubscriptionLoading = false;
-                    this.subscriptionError = this.splitLastPipe.transform(error.message, ':');
+                    // this.subscriptionError = this.splitLastPipe.transform(error.message, ':');
+                    this.subscriptionError = error;
                     this.cd.markForCheck();
                 });
     }
 }
+/*
+{
+    "graphQLErrors": [
+    {
+        "errorMessage": "Internat communication error with serverSessionID není správné",
+        "errorCode": "SEC9001",
+        "locations": [],
+        "errorType": "DataFetchingException",
+        "message": "Internat communication error with serverSessionID není správné",
+        "path": null,
+        "extensions": null
+    }
+],
+    "networkError": null,
+    "message": "GraphQL error: Internat communication error with serverSessionID není správné"
+}
+
+{
+  "graphQLErrors": [
+    {
+      "validationError": {
+        "field": {
+          "email": [
+            "already-registered-email"
+          ]
+        }
+      },
+      "locations": [],
+      "errorType": "ValidationError",
+      "message": "Given mail was already registered",
+      "path": null,
+      "extensions": null
+    }
+  ],
+  "networkError": null,
+  "message": "GraphQL error: Given mail was already registered"
+}
+
+*/

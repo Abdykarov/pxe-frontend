@@ -35,6 +35,7 @@ export class NewsSubscriptionComponent implements OnInit {
     submitSubscriptionForm: EventEmitter<any> = new EventEmitter<any>();
 
     public subscriptionForm: FormGroup;
+    public subscriptionFormError: any = {};
 
     constructor(
         private fb: FormBuilder,
@@ -42,6 +43,8 @@ export class NewsSubscriptionComponent implements OnInit {
 
     ngOnInit() {
         this.subscriptionForm = this.fb.group(this.subscriptionFormFields.controls);
+        this.subscriptionFormError.email = {};
+        this.subscriptionFormError.email['already-registered-email'] = true;
     }
 
     public submitForm = () => {

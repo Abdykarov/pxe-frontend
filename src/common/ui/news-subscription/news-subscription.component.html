@@ -4,12 +4,12 @@
     </h3>
     <lnd-alert *ngIf="subscriptionError"
                type="danger">
-        {{subscriptionError}}
+        <pre>{{subscriptionError | json}}</pre>
     </lnd-alert>
     <form [formGroup]="subscriptionForm"
           autocomplete="off">
         <lnd-form-field
-                [error]="subscriptionForm.controls.email.errors"
+                [error]="subscriptionFormError.email || subscriptionForm.controls.email.errors"
                 [formControl]="subscriptionForm.controls.email"
                 [id]="'email'"
                 label="E-mail"

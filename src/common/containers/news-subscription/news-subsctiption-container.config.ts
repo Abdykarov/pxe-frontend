@@ -9,6 +9,7 @@ export const subscriptionFormFields: IForm = {
             '',
             [
                 Validators.required,
+                Validators.min(1),
                 CustomValidators.email,
             ],
         ],
