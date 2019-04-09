@@ -20,7 +20,7 @@ import { OverlayService } from 'src/common/graphql/services/overlay.service';
     styleUrls: ['./public-layout.component.scss'],
 })
 export class PublicLayoutComponent extends AbstractComponent {
-    public showOverlay: any = false;
+    public showOverlay = false;
     private toggleSubscription: Subscription;
 
     constructor(
@@ -42,7 +42,7 @@ export class PublicLayoutComponent extends AbstractComponent {
                 takeUntil(this.destroy$),
                 map( R.path(['data', 'ui', 'showOverlay'])),
             )
-            .subscribe(current => {
+            .subscribe((current: boolean) => {
                 this.showOverlay = current;
             });
     }
