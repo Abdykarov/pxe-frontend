@@ -2,13 +2,11 @@
     id="top"
     class="body-inner"
     [ngClass]="{
-        'body-inner--overlay' : (mobileMenuOpened$ | async) || (showOverlay$ | async),
-        'body-inner--overlay-full' : (showOverlay$ | async) && !(isOverlayFromHeader$ | async),
-        'body-inner--overlay-header body-inner--overlay-aside' : (showOverlay$ | async) && (isOverlayFromHeader$ | async)
+        'body-inner--overlay' : (showOverlay),
+        'body-inner--overlay-full' : (showOverlay),
+        'body-inner--overlay-header body-inner--overlay-aside' : (showOverlay)
     }">
-    <lnd-header
-        [isMenuOpen]="mobileMenuOpened$ | async"
-        (toggleMenu)="toggleMenuOpen()">
+    <lnd-header>
     </lnd-header>
     <div class="container-fluid">
         <div class="row">
@@ -18,12 +16,21 @@
                 </main>
             </div>
             <lnd-navigation
-                [config]="navigationConfig$ | async"
-                [isMenuOpen]="mobileMenuOpened$ | async"
-                [itemOpened]="navigationItemOpened$ | async"
+                [config]="navConfig"
                 (openItem)="toggleOpenItem($event)">
             </lnd-navigation>
         </div>
     </div>
-    <lnd-footer [isMenuOpen]="mobileMenuOpened$ | async"></lnd-footer>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 container-content" style="min-height: 0;">
+<!--                document.getElementById('add-button').click();-->
+                    <button id="add-button" (click)="click()">
+                        toggleOverlay
+                    </button>
+            </div>
+        </div>
+    </div>
+
+    <lnd-footer [isMenuOpen]="true"></lnd-footer>
 </div>
