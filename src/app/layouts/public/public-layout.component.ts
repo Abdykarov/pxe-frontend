@@ -4,6 +4,10 @@ import {
     Router,
 } from '@angular/router';
 
+import { environment } from 'src/environments/environment';
+
+declare var gtag;
+
 @Component({
     templateUrl: './public-layout.component.html',
     styleUrls: ['./public-layout.component.scss'],
@@ -17,7 +21,9 @@ export class PublicLayoutComponent {
             .events
             .subscribe(event => {
                 if (event instanceof NavigationEnd) {
-                    console.log('NAVIGATION END');
+                    gtag('config', environment.gtmId, {
+                        'page_path': event.urlAfterRedirects,
+                    });
                 }
             });
     }
