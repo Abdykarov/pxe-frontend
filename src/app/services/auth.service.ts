@@ -26,7 +26,7 @@ export class AuthService {
 
     checkLogin = () => {
         if (this.cookiesService.has(this.cookieName)) {
-            this.token = this.cookiesService.get(this.cookieName).token;
+            this.token = (<any>this.cookiesService.get(this.cookieName)).token;
         } else {
             this.token = null;
         }

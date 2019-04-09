@@ -10,9 +10,10 @@
     "build:prod": "yarn build --prod",
     "build:static": "yarn build static --prod --base-href /static/",
     "build:500": "yarn build app-500 --prod --base-href /500/",
+    "build:ssr": "yarn run build:client-and-server-bundles && yarn run webpack:server",
+    "build:client-and-server-bundles": "ng build --prod && ng run app:server",
     "development": "yarn start",
     "e2e": "ng e2e",
-    "lang": "ng xi18n --output-path assets/locale --i18n-locale cs",
     "lint": "ng lint",
     "lint:scss": "stylelint \"./src/**/*.scss\"",
     "ng": "ng",
@@ -24,7 +25,9 @@
     "start:500": "yarn start app-500",
     "start:mock": "ng serve -c mock --proxy-config proxy-mock.conf.json",
     "start:mock-docker": "ng serve -c mock --proxy-config proxy-mock-docker.conf.json",
-    "test": "ng test"
+    "start:ssr": "nodemon dist/server.js",
+    "test": "ng test",
+    "webpack:server": "webpack --config webpack.server.config.js --progress --colors"
   },
   "private": true,
   "dependencies": {
@@ -37,6 +40,8 @@
     "@angular/platform-browser": "7.2.10",
     "@angular/platform-browser-dynamic": "7.2.10",
     "@angular/router": "7.2.10",
+    "@nguniversal/express-engine": "^7.1.1",
+    "@nguniversal/module-map-ngfactory-loader": "^7.1.1",
     "apollo-angular": "^1.5.0",
     "apollo-angular-link-http": "^1.5.0",
     "apollo-cache-inmemory": "^1.5.1",
@@ -48,6 +53,7 @@
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
     "moment": "^2.22.2",
+    "ngx-cookie": "^4.1.2",
     "ramda": "^0.25.0",
     "ramda-extension": "^0.5.1",
     "rxjs": "^6.3.3",
@@ -61,10 +67,12 @@
     "@angular/cli": "7.3.6",
     "@angular/compiler-cli": "7.2.10",
     "@angular/language-service": "7.2.10",
+    "@angular/platform-server": "^7.2.12",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~10.9.4",
     "codelyzer": "~4.5.0",
+    "domino": "^2.1.3",
     "jasmine-core": "~2.8.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",
@@ -72,10 +80,13 @@
     "karma-coverage-istanbul-reporter": "~1.4.2",
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "nodemon": "^1.18.11",
     "protractor": "~5.3.0",
     "rxjs-tslint": "0.1.5",
-    "ts-node": "~7.0.1",
+    "ts-loader": "^5.3.3",
+    "ts-node": "^8.0.3",
     "tslint": "~5.11.0",
-    "typescript": "3.1.3"
+    "typescript": "3.1.3",
+    "webpack-cli": "^3.3.0"
   }
 }

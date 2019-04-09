@@ -19,6 +19,7 @@ import {
     HttpLink,
 } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { CookieModule } from 'ngx-cookie';
 
 // own classes
 import { AppComponent } from './app.component';
@@ -31,8 +32,6 @@ import { environment } from '../environments/environment';
 import { InterceptorProviders } from './interceptors';
 import { PipesModule } from 'src/common/pipes/pipes.module';
 
-console.log('ENVIRONMENt', environment);
-
 @NgModule({
     declarations: [
         AppComponent,
@@ -40,7 +39,10 @@ console.log('ENVIRONMENt', environment);
     imports: [
         ApolloModule,
         AppRoutingModule,
-        BrowserModule,
+        BrowserModule.withServerTransition({
+            appId: 'pxe-pacr4retail',
+        }),
+        CookieModule.forRoot(),
         HttpClientModule,
         HttpLinkModule,
         PipesModule,
