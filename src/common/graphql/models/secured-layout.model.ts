@@ -8,4 +8,3 @@ export interface ISecuredLayout {
     navigationItemOpened: INavigationChildItem;
     __typename: string;
 }
-
