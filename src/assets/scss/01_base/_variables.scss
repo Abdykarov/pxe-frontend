@@ -15,9 +15,9 @@ $blue-500:                         #004d6b;                    // Blue level 6
 
 $gray-000:                         #fff;                       // Gray level 0
 $gray-050:                         #fafafa;                    // Gray level 1
-$gray-100:                         #f2f2f2;                    // Gray level 2
+$gray-100:                         #bdcad6;                    // Gray level 2
 $gray-150:                         #ededed;                    // Gray level 3
-$gray-200:                         #e5e5e5;                    // Gray level 4
+$gray-200:                         #8c9cab;                    // Gray level 4
 $gray-300:                         #b3b3b3;                    // Gray level 5
 $gray-400:                         #808080;                    // Gray level 6
 $gray-500:                         #3d4549;                    // Gray level 7
@@ -37,7 +37,7 @@ $primary-dark:                     darken($primary, 5%);         // Primary btn 
 $secondary-lighten:                #926ece;                    // Secondary btn hover
 $secondary:                        #7355a6;                    // Secondary btn
 $secondary-dark:                   darken($secondary, 5%);       // Secondary btn hover
-$success:                          #008551;                    // Success btn
+$success:                          $font-text;                   // Success btn
 $success-lighten:                  lighten($success, 5%);        // Success bg
 $success-dark:                     darken($success, 5%);         // Success btn hover
 $success-darken:                   darken($success, 10%);        // Success text

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { IDropdownItem } from 'src/common/ui/dropdown/models/item.model';
 
+import { FormsPageConfig } from './config';
+
 @Component({
   templateUrl: './page.html',
 })
@@ -12,20 +14,24 @@ export class FormsPageComponent {
 
     public options = [
         {
-            key: 'one',
-            value: 'one',
+            key: 1,
+            value: 'value-one',
+            label: 'Radio button one',
         },
         {
             key: 2,
-            value: 'second',
+            value: 'value-two',
+            label: 'Radio button two',
         },
         {
             key: 3,
-            value: 3,
+            value: 'value-three',
+            label: 'Disabled radio button',
+            disabled: true, 
         },
     ];
 
-    constructor() {
+    constructor(public config: FormsPageConfig,) {
         this.dropdownItems = [];
         const item1 = <IDropdownItem>{
                 label: 'FOO',
