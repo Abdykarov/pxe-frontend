@@ -352,29 +352,13 @@ textarea.form-control--not-empty {
 
 		&.is-invalid + .custom-control-label {
 			&::before {
+				border-color: $custom-control-indicator-bg-check-interactive-invalid;
 				box-shadow: none;
-			}
-
-			&::after {
-				background-color: $custom-control-indicator-bg-interactive-error;
-			}
-		}
-	}
-
-	&,
-	&.is-valid,
-	&.is-warning,
-	&.is-invalid {
-		& + .custom-control-label {
-			&::before {
-				// background-color: transparent;
 			}
 		}
 	}
 
 	&.is-warning + .custom-control-label {
-		color: $input-color;
-
 		&:hover {
 			&::before {
 				background-color: $custom-control-indicator-bg-interactive-warning;
@@ -387,14 +371,12 @@ textarea.form-control--not-empty {
 	}
 
 	&.is-invalid + .custom-control-label {
+		color: $input-color;
+
 		&:hover {
 			&::before {
-				background-color: $custom-control-indicator-bg-interactive-error;
+				border-color: $custom-control-indicator-bg-check-interactive-invalid;
 			}
-		}
-
-		&::after {
-			border-color: $custom-control-indicator-bg-invalid;
 		}
 	}
 
@@ -438,33 +420,28 @@ textarea.form-control--not-empty {
 }
 
 // Radio
-.custom-radio {
-	.custom-control-label {
-		&::after {
-			transition: all ease-in $animation-speed;
-		}
-	}
-}
-
 .custom-control-input[type='radio']:checked {
 	&:focus,
 	&.focus {
 		&.is-warning + .custom-control-label {
-			&::after {
-				background-color: $custom-control-indicator-bg-check-interactive-warning;
+			&::before {
 				border-color: $custom-control-indicator-bg-check-interactive-warning;
 			}
 		}
 
 		&.is-invalid + .custom-control-label {
-			&::after {
-				background-color: $custom-control-indicator-bg-check-interactive-invalid;
+			&::before {
 				border-color: $custom-control-indicator-bg-check-interactive-invalid;
 			}
 		}
 	}
 
 	& + .custom-control-label {
+		&::before,
+		&::after {
+			transition: all ease-in $animation-speed;
+		}
+
 		&::after {
 			top: ( $custom-control-indicator-size-px / 2 - $custom-radio-filling-size / 2 + $custom-control-indicator-top);
 			left: ( $custom-control-indicator-size-px / 2 - $custom-radio-filling-size / 2);
@@ -477,13 +454,12 @@ textarea.form-control--not-empty {
 
 	&.is-warning {
 		& + .custom-control-label {
-			&::after {
-				background-color: $custom-control-indicator-bg-warning;
+			&::before {
+				border-color: $custom-control-indicator-bg-warning;
 			}
 
 			&:hover {
-				&::after {
-					background-color: $custom-control-indicator-bg-check-interactive-warning;
+				&::before {
 					border-color: $custom-control-indicator-bg-check-interactive-warning;
 				}
 			}
@@ -516,7 +492,7 @@ textarea.form-control--not-empty {
 	.custom-control-label {
 		&::before,
 		&::after {
-			transition: background-color ease-in $animation-speed, border ease-in $animation-speed;
+			transition: border ease-in $animation-speed;
 		}
 
 		&::before {
@@ -529,18 +505,18 @@ textarea.form-control--not-empty {
 	&:focus,
 	&.focus {
 		&.is-warning + .custom-control-label {
-			&::before,
-			&::after {
-				background-color: $custom-control-indicator-bg-check-interactive-warning;
+			&::before {
 				border-color: $custom-control-indicator-bg-check-interactive-warning;
 			}
 		}
 
 		&.is-invalid + .custom-control-label {
-			&::before,
-			&::after {
-				background-color: $custom-control-indicator-bg-check-interactive-invalid;
+			&::before {
 				border-color: $custom-control-indicator-bg-check-interactive-invalid;
+			}
+
+			&::after {
+				background-color: transparent;
 			}
 		}
 	}
@@ -557,15 +533,12 @@ textarea.form-control--not-empty {
 
 	&.is-warning {
 		& + .custom-control-label {
-			&::before,
-			&::after {
-				background-color: $custom-control-indicator-bg-warning;
+			&::before {
+				border-color: $custom-control-indicator-bg-warning;
 			}
 
 			&:hover {
-				&::before,
-				&::after {
-					background-color: $custom-control-indicator-bg-check-interactive-warning;
+				&::before {
 					border-color: $custom-control-indicator-bg-check-interactive-warning;
 				}
 			}
@@ -574,15 +547,13 @@ textarea.form-control--not-empty {
 
 	&.is-invalid {
 		& + .custom-control-label {
-			&::before,
-			&::after {
-				background-color: $custom-control-indicator-bg-invalid;
+			&::before {
+				background-color: transparent;
+				border-color: $custom-control-indicator-bg-invalid;
 			}
 
 			&:hover {
-				&::before,
-				&::after {
-					background-color: $custom-control-indicator-bg-check-interactive-invalid;
+				&::before {
 					border-color: $custom-control-indicator-bg-check-interactive-invalid;
 				}
 			}
