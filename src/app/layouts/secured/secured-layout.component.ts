@@ -22,7 +22,6 @@ export class SecuredLayoutComponent {
         this.router.events
             .subscribe(event => {
                 if (event instanceof NavigationEnd) {
-                    console.log('JJJ');
                     gtag('config', environment.gtmId, {
                         'page_path': event.urlAfterRedirects,
                     });
