@@ -13,8 +13,8 @@
                 [formControl]="subscriptionForm.controls.email"
                 [id]="'email'"
                 label="E-mail"
-                [success]="subscriptionForm.controls.email.valid && subscriptionForm.controls.email.touched"
-                [touched]="subscriptionForm.controls.email.touched"
+                [success]="subscriptionForm.controls.email.valid && (subscriptionForm.controls.email.touched || subscriptionFormError.email)"
+                [touched]="subscriptionForm.controls.email.touched || subscriptionFormError.email"
                 [validationMessages]="subscriptionFormFields.validationMessages.email"
         ></lnd-form-field>
         <lnd-form-field
