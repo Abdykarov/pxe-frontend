@@ -19,29 +19,29 @@ export class NavigationService {
 
     public getConfig() {
         return this.apollo
-                   .watchQuery<any>({
-                       query: getConfig,
-                   })
-                   .valueChanges;
+            .watchQuery<any>({
+                query: getConfig,
+            })
+            .valueChanges;
     }
 
     public saveConfig(config) {
         return this.apollo
-                   .mutate({
-                       mutation: loadConfig,
-                   variables: {
-                       config: config,
-                   },
+            .mutate({
+                mutation: loadConfig,
+            variables: {
+                config: config,
+            },
         });
     }
 
     public toggleOpenItem(navigationItem) {
         return this.apollo
-                   .mutate({
-                       mutation: navigationItem.url === this.LOGOUT_URL ? logout : openItem,
-                       variables: {
-                           item: navigationItem,
-                       },
-                   });
+            .mutate({
+                mutation: navigationItem.url === this.LOGOUT_URL ? logout : openItem,
+                variables: {
+                    item: navigationItem,
+                },
+        });
     }
 }

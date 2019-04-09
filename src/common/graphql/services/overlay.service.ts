@@ -14,19 +14,19 @@ export class OverlayService {
 
     public toggleOverlay(value = null) {
         return this.apollo
-                   .mutate({
-                       mutation: toggleOverlay,
-                       variables: {
-                           value: value,
-                       },
-                   });
+            .mutate({
+                mutation: toggleOverlay,
+                    variables: {
+                    value: value,
+                },
+            });
     }
 
     public getOverlay() {
         return this.apollo
-                   .watchQuery<any>({
-                        query: showOverlay,
-                   })
-                   .valueChanges;
+            .watchQuery<any>({
+                query: showOverlay,
+            })
+            .valueChanges;
     }
 }

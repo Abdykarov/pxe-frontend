@@ -35,9 +35,9 @@ export class SecuredLayoutComponent extends AbstractComponent {
     ) {
         super();
         this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd) {
+            if (event instanceof NavigationEnd && this.showOverlay) {
                 this.toggleSubscription = this.overlayService.toggleOverlay(false)
-                                                             .subscribe();
+                    .subscribe();
                 this.toggleSubscription.unsubscribe();
             }
         });
