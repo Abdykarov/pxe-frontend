@@ -7,9 +7,9 @@ export const config: IMapCoverageConfig = {
         consumption: 1300000000000,
         suppliers: [
             {
-                logoUrl: 'assets/images/suppliers/logo/logo.svg',
+                logoUrl: 'assets/images/suppliers/logo.svg',
                 title: 'Skupina ČEZ',
-                supplierUrl: 'assets/images/suppliers/supplier/logo.svg',
+                supplierUrl: 'https://www.lundegaard.eu/cs/',
             },
         ],
     },

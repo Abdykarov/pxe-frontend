@@ -15,6 +15,3 @@ export interface IMapCoverageConfig {
     gas: IMapCoverageSource;
     power: IMapCoverageSource;
 }
-
-
-

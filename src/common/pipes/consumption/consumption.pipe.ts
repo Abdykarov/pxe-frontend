@@ -7,7 +7,7 @@ import {
 const defaultDigitsInfo = '1.0-1';
 
 @Pipe({
-        name: 'consumption',
+    name: 'consumption',
 })
 export class ConsumptionPipe implements PipeTransform {
 
@@ -16,8 +16,8 @@ export class ConsumptionPipe implements PipeTransform {
     ) {}
 
     transform(value: number): string {
-        const units = ['Wh', 'KWh', 'MWh', 'GWh', 'TWh', 'PWh'],
-            number = Math.floor(Math.log(value) / Math.log(1000));
+        const units = ['Wh', 'KWh', 'MWh', 'GWh', 'TWh', 'PWh'];
+        const number = Math.floor(Math.log(value) / Math.log(1000));
         return  `${this.formatValue(value / Math.pow(1000, Math.floor(number)))} ${units[number]}`;
     }
 

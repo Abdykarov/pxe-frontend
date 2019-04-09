@@ -12,7 +12,9 @@ describe('MapCoverageContainerComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-        declarations: [ MapCoverageContainerComponent ],
+        declarations: [
+            MapCoverageContainerComponent,
+        ],
     })
     .compileComponents();
     }));

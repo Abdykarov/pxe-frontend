@@ -21,16 +21,18 @@
         <br />
         {{config.power.consumption | consumption}}
         <br />
-        <br />
-        Nasi dodavatele elektriny
-        <br />
-        <div *ngFor="let supplier of config.power.suppliers">
-            <div *ngFor="let supplier of config.gas.suppliers">
-                <img
-                    [src]="supplier.logoUrl"
-                    [attr.alt]="supplier.title">
+        <ng-container *ngIf="config.power.suppliers.length">
+            <br />
+            Naši dodavatelé elektřiny
+            <br />
+            <div *ngFor="let supplier of config.power.suppliers">
+                <a [href]="supplier.supplierUrl" target=_blank>
+                    <img
+                        [src]="supplier.logoUrl"
+                        [attr.alt]="supplier.title">
+                </a>
             </div>
-        </div>
+        </ng-container>
     </lnd-tab>
 
     <lnd-tab tabTitle="PLYN">
@@ -54,14 +56,17 @@
         <br />
         {{config.gas.consumption | consumption}}
         <br />
-        <br />
-        Nasi dodavatele plynu
-        <br />
-
-        <div *ngFor="let supplier of config.gas.suppliers">
-            <img
-                [src]="supplier.logoUrl"
-                [attr.alt]="supplier.title">
-        </div>
+        <ng-container *ngIf="config.gas.suppliers.length">
+            <br />
+            Naši dodavatelé plynu
+            <br />
+            <div *ngFor="let supplier of config.gas.suppliers">
+                <a [href]="supplier.supplierUrl" target=_blank>
+                    <img
+                        [src]="supplier.logoUrl"
+                        [attr.alt]="supplier.title">
+                </a>
+            </div>
+        </ng-container>
     </lnd-tab>
 </lnd-tabs>
