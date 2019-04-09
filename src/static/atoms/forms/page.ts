@@ -12,7 +12,7 @@ export class FormsPageComponent {
     public dropdownItems: Array<IDropdownItem>;
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
-    constructor(public config: FormsPageConfig,) {
+    constructor(public config: FormsPageConfig, ) {
         this.dropdownItems = [];
         const item1 = <IDropdownItem>{
                 label: 'FOO',

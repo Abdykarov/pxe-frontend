@@ -1,4 +1,4 @@
- /*
+/*
  -  Form fields
  -
  -
@@ -175,7 +175,6 @@ textarea.form-control--not-empty {
 
 		&.is-invalid {
 			border-color: $input-color-interactive-invalid;
-
 		}
 	}
 }
@@ -184,7 +183,7 @@ textarea.form-control--not-empty {
 	max-width: $input-width;
 	border-radius: $input-border-radius;
 	overflow: hidden;
-	
+
 	& ~ .invalid-feedback {
 		display: none;
 		margin-left: $spacer;
