@@ -1,7 +1,13 @@
 <div
     id="top"
     class="body-inner"
-  >
+    [class.body-inner--overlay]="showOverlay"
+    [class.body-inner--overlay-full]="showOverlay"
+    [ngClass]="{
+        'body-inner--overlay-header body-inner--overlay-aside' : showOverlay
+    }">
+    <lnd-header>
+    </lnd-header>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 container-content">
@@ -9,6 +15,11 @@
                     <router-outlet></router-outlet>
                 </main>
             </div>
+            <lnd-navigation
+                [config]="navConfig"
+                (openItem)="toggleOpenItem($event)">
+            </lnd-navigation>
         </div>
     </div>
+    <lnd-footer [isMenuOpen]="true"></lnd-footer>
 </div>
