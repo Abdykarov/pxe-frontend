@@ -8,12 +8,12 @@ import {
     map,
 } from 'rxjs/operators';
 
+import { AbstractLayoutComponent } from 'src/app/layouts/AbstractLayoutComponent';
 import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
 import { IStoreUi } from 'src/common/graphql/models/store.model';
 import { NavigationService as NavigationApolloService} from 'src/common/graphql/services/navigation.service';
 import { NavigationService } from './services/navigation.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
-import { AbstractLayoutComponent } from 'src/app/layouts/AbstractLayoutComponent';
 
 @Component({
     templateUrl: './secured-layout.component.html',
