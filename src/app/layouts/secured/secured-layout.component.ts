@@ -10,13 +10,14 @@ import {
     takeUntil,
     map,
 } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
+import { IStoreUi } from 'src/common/graphql/models/store.model';
 import { NavigationService as NavigationApolloService} from 'src/common/graphql/services/navigation.service';
 import { NavigationService } from './services/navigation.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
-import { Subscription } from 'rxjs';
 
 @Component({
     templateUrl: './secured-layout.component.html',
@@ -49,7 +50,7 @@ export class SecuredLayoutComponent extends AbstractComponent {
                 takeUntil(this.destroy$),
                 map( R.path(['data', 'ui'])),
             )
-            .subscribe((current: any)  => {
+            .subscribe((current: IStoreUi)  => {
                 if (current.securedLayout) {
                     this.navConfig = current.securedLayout.navigationConfig;
                     this.showOverlay = current.showOverlay;

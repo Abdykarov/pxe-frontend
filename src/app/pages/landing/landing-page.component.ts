@@ -57,8 +57,8 @@ export class LandingPageComponent extends AbstractComponent implements OnInit {
         private apollo: Apollo,
         private authService: AuthService,
         private cd: ChangeDetectorRef,
-        private overlayService: OverlayService,
         private fb: FormBuilder,
+        private overlayService: OverlayService,
         private router: Router,
     ) {
         super();

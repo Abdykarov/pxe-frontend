@@ -1,10 +1,10 @@
 <div
     id="top"
     class="body-inner"
+    [class.body-inner--overlay]="showOverlay"
+    [class.body-inner--overlay-full]="showOverlay"
     [ngClass]="{
-        'body-inner--overlay' : (showOverlay),
-        'body-inner--overlay-full' : (showOverlay),
-        'body-inner--overlay-header body-inner--overlay-aside' : (showOverlay)
+        'body-inner--overlay-header body-inner--overlay-aside' : showOverlay
     }">
     <lnd-header>
     </lnd-header>
@@ -21,16 +21,5 @@
             </lnd-navigation>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 container-content" style="min-height: 0;">
-<!--                document.getElementById('add-button').click();-->
-                    <button id="add-button" (click)="click()">
-                        toggleOverlay
-                    </button>
-            </div>
-        </div>
-    </div>
-
     <lnd-footer [isMenuOpen]="true"></lnd-footer>
 </div>
