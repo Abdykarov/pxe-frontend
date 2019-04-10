@@ -6,7 +6,7 @@ import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.mo
 @Component({
     selector: 'pxe-map-coverage-container',
     templateUrl: './map-coverage-container.component.html',
-    styleUrls: ['./map-coverage-container.component.css'],
+    styleUrls: ['./map-coverage-container.component.scss'],
 })
 export class MapCoverageContainerComponent {
     public config: IMapCoverageConfig = config;
