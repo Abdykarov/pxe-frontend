@@ -132,13 +132,21 @@
         "directive-selector": [
             true,
             "attribute",
-            ["lnd"],
+            [
+                "lnd",
+                "pxe"
+            ],
             "camelCase"
         ],
         "component-selector": [
             true,
             "element",
-            ["app", "layout", "lnd"],
+            [
+                "app",
+                "layout",
+                "lnd",
+                "pxe"
+            ],
             "kebab-case"
         ],
         "no-output-on-prefix": true,
