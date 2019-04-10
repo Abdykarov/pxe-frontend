@@ -106,6 +106,10 @@ export const staticNavigationConfig: INavigationConfig = [
             'icon': 'component-high',
             'children': [
                 {
+                    'label': 'Cookies policy page',
+                    'url': '/full/cookies',
+                },
+                {
                     'label': 'Landing page',
                     'url': '/full/landing-page',
                 },

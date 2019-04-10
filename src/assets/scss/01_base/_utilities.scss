@@ -215,3 +215,10 @@ $colors: (
 /* Generate progress bars */
 @include generate-progress;                              // width
 @include generate-progress(height, progress-h);          // height
+
+
+.page {
+	padding: ( $spacer * 4 ) 0;
+	background-color: $white;
+	box-shadow: 0 2px 5px 0 rgba($body-bg, .16);
+}
