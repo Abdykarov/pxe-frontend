@@ -14,8 +14,7 @@ import { DOCUMENT } from '@angular/common';
     encapsulation: ViewEncapsulation.None,
 })
 export class FooterComponent {
-    @Input()
-    public isPublic = false;
+    @Input() isPublic = false;
 
     public scrollToTopIsVisible: boolean;
 

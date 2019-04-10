@@ -1,6 +1,8 @@
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 
+import { IFieldError } from 'src/common/ui/news-subscription/models/form-definition.model';
+
 const mapValidationFieldArrayToValidationObj = (array) => {
     const prepareKeys = (val) => R.pipe(
         R.map(key => ({[key]: true})),
@@ -10,8 +12,8 @@ const mapValidationFieldArrayToValidationObj = (array) => {
 };
 
 export const parseGraphQLErrors = (error) => {
-    let fieldError = {};
-    let globalError = [];
+    let fieldError: IFieldError = {};
+    let globalError: string[] = [];
     const {graphQLErrors, networkError, message} = error;
     if (!R_.isNilOrEmpty(graphQLErrors)) {
         const errors = R.head(graphQLErrors);

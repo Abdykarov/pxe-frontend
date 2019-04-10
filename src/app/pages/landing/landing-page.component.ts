@@ -59,9 +59,15 @@ export class LandingPageComponent extends AbstractComponent {
             this.loginError = false;
             this.authService
                 .login(this.loginForm.value)
-                .subscribe((a) => {
-                    this.router.navigate(['/secured']);
-                });
+                .subscribe(
+                    () => {
+                        this.router.navigate(['/secured']);
+                    },
+                    error => {
+                        this.loginError = true;
+                        this.loginLoading = false;
+                        this.cd.markForCheck();
+                    });
         }
     }
 

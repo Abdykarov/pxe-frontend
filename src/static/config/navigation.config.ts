@@ -39,10 +39,10 @@ export const staticNavigationConfig: INavigationConfig = [
                 //     'label': 'Drop*',
                 //     'url': '/dropdown',
                 // },
-                // {
-                //     'label': 'Forms',
-                //     'url': '/forms',
-                // },
+                {
+                    'label': 'Forms',
+                    'url': '/basic/forms',
+                },
                 {
                     'label': 'Icons',
                     'url': '/basic/icons',

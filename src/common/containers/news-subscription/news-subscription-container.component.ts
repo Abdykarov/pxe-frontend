@@ -6,7 +6,8 @@ import {
 import { Apollo } from 'apollo-angular';
 
 import * as mutations from 'src/common/graphql/mutations';
-import { parseGraphQLErrors } from '../../utils/';
+import { IFieldError } from 'src/common/ui/news-subscription/models/form-definition.model';
+import { parseGraphQLErrors } from 'src/common/utils/';
 import { subscriptionFormFields } from './news-subsctiption-container.config';
 
 @Component({
@@ -19,7 +20,7 @@ export class NewsSubscriptionContainerComponent {
     public subscriptionFormFields = subscriptionFormFields;
     public subscriptionFormSent = false;
     public subscriptionGlobalError: string[] = [];
-    public subscriptionFieldError: any = {};
+    public subscriptionFieldError: IFieldError = {};
 
     constructor(
         private apollo: Apollo,
