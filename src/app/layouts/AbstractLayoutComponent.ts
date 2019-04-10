@@ -14,7 +14,7 @@ import { takeUntil } from 'rxjs/operators';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 
-export abstract class AbstractLayoutComponent extends AbstractComponent implements OnInit, OnDestroy {
+export abstract class AbstractLayoutComponent extends AbstractComponent {
     public showOverlay = false;
     public toggleSubscription: Subscription;
 

@@ -19,7 +19,7 @@ import { GTMService } from './services/gtm.service';
 export class AppComponent {
 
     constructor(
-        private gtnService: GTMService,
+        private gtmService: GTMService,
         private router: Router,
     ) {
         const script = document.createElement('script');
@@ -29,7 +29,7 @@ export class AppComponent {
 
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
-                gtnService.gtm(event);
+                gtmService.gtm(event);
             }
         });
     }
