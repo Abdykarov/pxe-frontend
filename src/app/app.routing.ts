@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import {
+    PreloadAllModules,
     Routes,
     RouterModule,
 } from '@angular/router';
@@ -30,6 +31,8 @@ const routes: Routes = [
             routes,
             {
                 enableTracing: !environment.production,
+                preloadingStrategy: PreloadAllModules,
+                initialNavigation: 'enabled',
             },
         ),
     ],

@@ -54,10 +54,6 @@ app.get('/graphql', (req, res) => {
     res.status(404).send('data requests are not supported');
 });
 
-app.get('/parc-rest/*', (req, res) => {
-    res.status(404).send('data requests are not supported');
-});
-
 // Server static files from /app
 app.get('*.*', express.static(join(DIST_FOLDER, 'app')));
 
