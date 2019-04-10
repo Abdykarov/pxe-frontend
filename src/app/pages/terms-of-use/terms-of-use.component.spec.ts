@@ -4,23 +4,23 @@ import {
     TestBed,
 } from '@angular/core/testing';
 
-import { TermOfUseComponent } from './term-of-use.component';
+import { TermsOfUseComponent } from './terms-of-use.component';
 
 describe('TermOfUseComponent', () => {
-    let component: TermOfUseComponent;
-    let fixture: ComponentFixture<TermOfUseComponent>;
+    let component: TermsOfUseComponent;
+    let fixture: ComponentFixture<TermsOfUseComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                TermOfUseComponent,
+                TermsOfUseComponent,
             ],
         })
         .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(TermOfUseComponent);
+        fixture = TestBed.createComponent(TermsOfUseComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

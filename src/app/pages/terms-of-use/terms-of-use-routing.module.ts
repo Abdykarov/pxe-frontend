@@ -4,12 +4,12 @@ import {
     RouterModule,
 } from '@angular/router';
 
-import { TermOfUseComponent } from './term-of-use.component';
+import { TermsOfUseComponent } from './terms-of-use.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: TermOfUseComponent,
+        component: TermsOfUseComponent,
     },
 ];
 
@@ -21,4 +21,4 @@ const routes: Routes = [
         RouterModule,
     ],
 })
-export class TermOfUseRoutingModule {}
+export class TermsOfUseRoutingModule {}

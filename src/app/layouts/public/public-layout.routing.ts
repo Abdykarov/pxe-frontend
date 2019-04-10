@@ -17,7 +17,7 @@ const routes = [
                 loadChildren: '../../pages/logout/logout-page.module#LogoutPageModule',
             },
             {
-                path: 'prague-exchange',
+                path: 'prague-stock-exchange',
                 loadChildren: '../../pages/prague-exchange/prague-exchange.module#PragueExchangeModule',
             },
             {
@@ -25,8 +25,8 @@ const routes = [
                 loadChildren: '../../pages/securing-your-data/securing-your-data.module#SecuringYourDataModule',
             },
             {
-                path: 'term-of-use',
-                loadChildren: '../../pages/term-of-use/term-of-use.module#TermOfUseModule',
+                path: 'terms-of-use',
+                loadChildren: '../../pages/terms-of-use/terms-of-use.module#TermsOfUseModule',
             },
         ],
     },
