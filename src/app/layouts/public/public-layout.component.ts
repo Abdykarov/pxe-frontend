@@ -13,7 +13,10 @@ import {
 import { Subscription } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { environment } from 'src/environments/environment';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+
+declare var gtag;
 
 @Component({
     templateUrl: './public-layout.component.html',
@@ -30,10 +33,15 @@ export class PublicLayoutComponent extends AbstractComponent {
     ) {
         super();
         this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd && this.showOverlay) {
-                this.toggleSubscription = this.overlayService.toggleOverlay(false)
-                    .subscribe();
-                this.toggleSubscription.unsubscribe();
+            if (event instanceof NavigationEnd) {
+                gtag('config', environment.gtmId, {
+                    'page_path': event.urlAfterRedirects,
+                });
+                if (this.showOverlay) {
+                    this.toggleSubscription = this.overlayService.toggleOverlay(false)
+                        .subscribe();
+                    this.toggleSubscription.unsubscribe();
+                }
             }
         });
 

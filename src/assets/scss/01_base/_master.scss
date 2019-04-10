@@ -14,6 +14,32 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.h1--public,
+.h2--public,
+.h3--public {
+	font-family: $font-family-sans-serif-public;
+}
+
+.h1--public,
+.h3--public {
+	text-transform: none;
+}
+
+.h1--public {
+	font-size: $h1-font-size-public;
+	line-height: ( 40 / 36 );
+}
+
+.h2--public {
+	font-size: $h2-font-size-public;
+	line-height: ( 36 / 30 );
+}
+
+.h3--public {
+	font-size: $h3-font-size-public;
+	line-height: ( 30 / 24 );
+}
+
 h1,
 h2,
 h3,
@@ -34,23 +60,17 @@ h6,
 }
 
 h1,
-h2,
 h3,
 .h1,
-.h2,
 .h3 {
 	text-transform: uppercase;
 }
 
-h4,
-h5,
-h6,
-.h4,
-.h5,
-.h6 {
-	color: $gray-400;
-	font-weight: 700;
-	margin-bottom: ( $headings-margin-bottom / 2 );
+h2,
+h3,
+.h2,
+.h3 {
+	margin-bottom: $spacer;
 }
 
 h1,
@@ -62,9 +82,21 @@ h1,
 
 h2,
 .h2 {
+	line-height: ( 24 / 18 );
+
 	& > .h2__sub-text {
 		font-size: $h2-font-size-snd;
 	}
+}
+
+h3,
+.h3 {
+	line-height: ( 20 / 14 );
+}
+
+.perex {
+	font-size: $perex-font-size;
+	line-height: ( 28 / 18 );
 }
 
 .table-entry {
@@ -127,11 +159,9 @@ a {
 	@include link-without-href {
 		cursor: pointer;
 		color: $link-color;
-		text-decoration: $link-decoration;
 	}
 
 	@include link-without-href-interactive {
 		color: $link-hover-color;
-		text-decoration: $link-hover-decoration;
 	}
 }
