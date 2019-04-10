@@ -2,10 +2,6 @@ import {
     NavigationEnd,
     Router,
 } from '@angular/router';
-import {
-    OnInit,
-    OnDestroy,
-} from '@angular/core';
 
 import { Apollo } from 'apollo-angular';
 import { Subscription } from 'rxjs';

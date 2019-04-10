@@ -8,7 +8,7 @@ import {
     takeUntil,
 } from 'rxjs/operators';
 
-import { AbstractLayoutComponent } from 'src/app/layouts/AbstractLayoutComponent';
+import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 
 @Component({

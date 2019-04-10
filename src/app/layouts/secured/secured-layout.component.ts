@@ -8,7 +8,7 @@ import {
     map,
 } from 'rxjs/operators';
 
-import { AbstractLayoutComponent } from 'src/app/layouts/AbstractLayoutComponent';
+import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
 import { IStoreUi } from 'src/common/graphql/models/store.model';
 import { NavigationService as NavigationApolloService} from 'src/common/graphql/services/navigation.service';
