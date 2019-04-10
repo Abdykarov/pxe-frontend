@@ -1,9 +1,9 @@
-import { ISecuredLayout } from './securedLayout';
+import { ISecuredLayout } from './secured-layout.model';
 
 export interface ILocalStore {
     counter: ICounter;
     visibility: IVisibility;
-    ui: IUi;
+    ui: IStoreUi;
 }
 
 export interface ICounter {
@@ -14,13 +14,14 @@ export interface ICounter {
 }
 
 export interface IVisibility {
-    current: number;
-    __typename: string;
+    visiblity: {
+        current: number;
+        __typename: string;
+    };
 }
 
-export interface IUi {
+export interface IStoreUi {
     securedLayout: ISecuredLayout;
     showOverlay: boolean;
     __typename: string;
 }
-
