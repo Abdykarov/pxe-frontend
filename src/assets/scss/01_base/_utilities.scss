@@ -218,7 +218,8 @@ $colors: (
 
 
 .page {
-	padding: ( $spacer * 4 ) 0;
+	padding: ( $spacer * 2 ) 0;
 	background-color: $white;
-	box-shadow: 0 2px 5px 0 rgba($body-bg, .16);
+	border-radius: 4px;
+	box-shadow: 0 2px 5px 0 rgba($body-color, .16);
 }
