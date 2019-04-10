@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { SecuringYourDataRoutingModule } from './securing-your-data-routing.module';
 import { SecuringYourDataComponent } from './securing-your-data.component';
+import { SecuringYourDataRoutingModule } from './securing-your-data-routing.module';
 
 @NgModule({
     declarations: [
