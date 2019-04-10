@@ -1,19 +1,4 @@
 // Forms
-$green-100:							 #001400;
-$green-300:							 #008b00;
-$green-400:							 #009e00;
-$night-blue:						 #2677e5;
-$light-blue:						 #2275e5;
-$icon-size-half-px:					 12px;
-$titanium-gray:						 #e9e9e9;
-$font-weight-semibold:				 400;
-
-$gray-100:                           #bdcad6;
-$gray-200:                           #8c9cab;
-$font-text:                          #2b4762;
-$border-radius:                      5px;
-
-
 $input-width:                        300px;
 $input-height:                       50px;
 $input-padding-y:                    ( $spacer / 4 );
@@ -21,7 +6,6 @@ $input-padding-x:                    $spacer;
 $input-font-size:                    12px;
 $input-line-height:                  1;
 $input-color:                        $font-text;
-$input-color-interactive:            $green-300;
 $input-color-interactive-warning:    $warning-dark;
 $input-color-interactive-invalid:    $danger-dark;
 $input-bg:                           $body-bg;
@@ -54,7 +38,6 @@ $custom-control-indicator-bg-interactive-warning:        rgba($warning-lighten, 
 $custom-control-indicator-bg-interactive-error:          rgba($danger-lighten, .3);
 $custom-control-indicator-bg-warning:                    $warning;
 $custom-control-indicator-bg-invalid:                    $danger;
-$custom-control-indicator-bg-check-interactive:          $green-400;
 $custom-control-indicator-bg-check-interactive-warning:  $warning-dark;
 $custom-control-indicator-bg-check-interactive-invalid:  $danger-dark;
 $custom-control-indicator-checked-box-shadow:            none;
@@ -87,4 +70,3 @@ $custom-switch-width:                 56px;
 $custom-switch-bg:                    $primary;
 $custom-switch-shadow:                0 2px 4px 0 rgba($black, .25);
 $custom-switch-bg-interactive:        $primary-dark;
-$custom-select-icon-size:             $icon-size-half-px;

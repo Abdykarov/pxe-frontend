@@ -303,8 +303,6 @@ textarea.form-control--not-empty {
 }
 
 .input-group-switch__text {
-	color: $titanium-gray;
-
 	&--prepend {
 		margin-right: ( $spacer * 5 );
 	}
@@ -315,7 +313,6 @@ textarea.form-control--not-empty {
 
 	&--active {
 		color: $primary;
-		font-weight: $font-weight-semibold;
 	}
 
 	&--disabled {
@@ -578,7 +575,6 @@ textarea.form-control--not-empty {
 				height: $custom-switch-height;
 				min-width: $custom-switch-width;
 				margin: -9px 0 0 10px;
-				background-color: $night-blue;
 				border-radius: $custom-switch-height;
 			}
 
@@ -627,10 +623,6 @@ textarea.form-control--not-empty {
 	&:hover,
 	&:focus-within {
 		.custom-control-input:not([disabled]) {
-			& + .custom-control-label::before {
-				background-color: $titanium-gray;
-			}
-
 			&:checked {
 				& + .custom-control-label::before {
 					background-color: $custom-switch-bg-interactive;
@@ -753,12 +745,10 @@ textarea.form-control--not-empty {
 
 	.select-icon {
 		position: absolute;
-		top: ( $input-height / 2 ) - ( $custom-select-icon-size / 2 );
+		top: ( $input-height / 2 );
 		right: 0;
 		padding-right: ( $spacer / 2 );
-		font-size: $custom-select-icon-size;
 		font-weight: $font-weight-bold;
-		color: $titanium-gray;
 		pointer-events: none;
 	}
 
@@ -774,36 +764,12 @@ textarea.form-control--not-empty {
 		&:focus,
 		&.focus,
 		&:hover {
-			&.is-valid {
-				border-color: $input-color-interactive;
-
-				& ~ .select-icon {
-					color: $input-color-interactive;
-				}
-			}
-
-			&.is-warning {
-				border-color: $input-color-interactive-warning;
-
-				& ~ .select-icon {
-					color: $input-color-interactive-warning;
-				}
-			}
-
 			&.is-invalid {
 				border-color: $input-color-interactive-invalid;
 
 				& ~ .select-icon {
 					color: $input-color-interactive-invalid;
 				}
-			}
-		}
-
-		&.is-valid {
-			border-color: $titanium-gray;
-
-			& ~ .select-icon {
-				color: $titanium-gray;
 			}
 		}
 
