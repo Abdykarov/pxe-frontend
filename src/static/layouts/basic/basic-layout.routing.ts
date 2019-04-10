@@ -15,6 +15,11 @@ import {
 } from 'src/static/atoms/colors/page.module';
 
 import {
+    FormsPageModule,
+    formsPageRoutes,
+} from 'src/static/atoms/forms/page.module';
+
+import {
     IconsPageModule,
     iconsPageRoutes,
 } from 'src/static/atoms/icons/page.module';
@@ -33,6 +38,7 @@ const routes: Routes = [
         children: [
             ...buttonsPageRoutes,
             ...colorsPageRoutes,
+            ...formsPageRoutes,
             ...iconsPageRoutes,
             ...typographyPageRoutes,
             {
@@ -47,6 +53,7 @@ const routes: Routes = [
     imports: [
         ButtonsPageModule,
         ColorsPageModule,
+        FormsPageModule,
         IconsPageModule,
         RouterModule.forChild(routes),
         TypographyPageModule,

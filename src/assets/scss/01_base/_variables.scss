@@ -15,9 +15,9 @@ $blue-500:                         #004d6b;                    // Blue level 6
 
 $gray-000:                         #fff;                       // Gray level 0
 $gray-050:                         #fafafa;                    // Gray level 1
-$gray-100:                         #f2f2f2;                    // Gray level 2
+$gray-100:                         #bdcad6;                    // Gray level 2
 $gray-150:                         #ededed;                    // Gray level 3
-$gray-200:                         #e5e5e5;                    // Gray level 4
+$gray-200:                         #8c9cab;                    // Gray level 4
 $gray-300:                         #b3b3b3;                    // Gray level 5
 $gray-400:                         #808080;                    // Gray level 6
 $gray-500:                         #3d4549;                    // Gray level 7
@@ -37,7 +37,7 @@ $primary-dark:                     darken($primary, 5%);         // Primary btn 
 $secondary-lighten:                #926ece;                    // Secondary btn hover
 $secondary:                        #7355a6;                    // Secondary btn
 $secondary-dark:                   darken($secondary, 5%);       // Secondary btn hover
-$success:                          #008551;                    // Success btn
+$success:                          $font-text;                   // Success btn
 $success-lighten:                  lighten($success, 5%);        // Success bg
 $success-dark:                     darken($success, 5%);         // Success btn hover
 $success-darken:                   darken($success, 10%);        // Success text
@@ -156,6 +156,8 @@ $paragraph-margin-bottom:          ( $spacer * 1.25 );
 $list-bullet-size:                 3px;
 $lists-margin-bottom:              ( $spacer * 1.25 );
 
+$border-radius:                    5px;
+
 
 // Links
 $link-color:                       $primary;
@@ -273,40 +275,6 @@ $dropdown-beak-border-style:       solid;
 $dropdown-beak-border-color:       $white;
 $dropdown-beak-box-shadow:         none;
 $dropdown-menu-offset:             ( $dropdown-beak-border-width - 3px );
-
-
-// Forms
-$input-height-min:                 40px;
-$input-padding-y:                  ( $spacer / 3.75 );
-$input-padding-x:                  0;
-$input-line-height:                ( 24 / 13 );
-$input-color:                      $gray-400;
-$input-bg:                         transparent;
-$input-border-width:               0;
-$input-border-color:               $gray-300;
-$input-border-radius:              0;
-$input-placeholder-color:          transparent;
-$input-disabled-bg:                transparent;
-$input-disabled-color:             rgba($gray-300, .5);
-$input-group-addon-bg:             transparent;
-$input-group-addon-color:          $gray-400;
-$form-group-margin-bottom:         $spacer;
-
-$custom-control-gutter:                         0;
-$custom-control-indicator-size:                 14px;
-$custom-control-indicator-size-after:           20px;
-$custom-control-indicator-bg:                   transparent;
-$custom-control-indicator-box-shadow:           none;
-$custom-control-indicator-checked-bg:           $primary;
-$custom-control-indicator-checked-box-shadow:   none;
-$custom-control-indicator-focus-box-shadow:     none;
-$custom-control-indicator-active-bg:            transparent;
-$custom-control-indicator-disabled-bg:          transparent;
-$custom-control-indicator-disabled-border:      rgba($gray-200, .2);
-$custom-control-indicator-checked-disabled-bg:  rgba($gray-100, .3);
-$custom-control-indicator-checkbox-size:        20px;
-$custom-control-label-disabled-color:           $input-disabled-color;
-$custom-checkbox-indicator-border-radius:       0;
 
 
 // Tabs

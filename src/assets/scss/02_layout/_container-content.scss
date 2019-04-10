@@ -9,7 +9,7 @@
 	max-width: $body-max-width;
 	max-width: 0 auto;
 	padding-top: $header-height;
-	padding-bottom: $spacer;
+	padding-bottom: 100px;
 
 	// Media queries
 	@include media-breakpoint-up(md) {
