@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import {
-    NavigationEnd,
-    Router,
-} from '@angular/router';
+import { Router } from '@angular/router';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
@@ -10,40 +7,26 @@ import {
     map,
     takeUntil,
 } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
 
-import { AbstractComponent } from 'src/common/abstract.component';
-import { environment } from 'src/environments/environment';
+import { AbstractLayoutComponent } from 'src/app/layouts/AbstractLayoutComponent';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
-
-declare var gtag;
 
 @Component({
     templateUrl: './public-layout.component.html',
     styleUrls: ['./public-layout.component.scss'],
 })
-export class PublicLayoutComponent extends AbstractComponent {
-    public showOverlay = false;
-    private toggleSubscription: Subscription;
+export class PublicLayoutComponent extends AbstractLayoutComponent {
 
     constructor(
-        private apollo: Apollo,
-        private overlayService: OverlayService,
-        private router: Router,
+        protected apollo: Apollo,
+        protected overlayService: OverlayService,
+        protected router: Router,
     ) {
-        super();
-        this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd) {
-                gtag('config', environment.gtmId, {
-                    'page_path': event.urlAfterRedirects,
-                });
-                if (this.showOverlay) {
-                    this.toggleSubscription = this.overlayService.toggleOverlay(false)
-                        .subscribe();
-                    this.toggleSubscription.unsubscribe();
-                }
-            }
-        });
+        super(
+            apollo,
+            overlayService,
+            router,
+        );
 
         this.overlayService.getOverlay()
             .pipe(
@@ -53,13 +36,5 @@ export class PublicLayoutComponent extends AbstractComponent {
             .subscribe((current: boolean) => {
                 this.showOverlay = current;
             });
-    }
-
-    public toggleOverlay() {
-        this.overlayService.toggleOverlay()
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe();
     }
 }
