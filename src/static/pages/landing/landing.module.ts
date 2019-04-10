@@ -18,7 +18,7 @@ import { LandingComponent } from './landing.component';
         BreadcrumbModule,
         ButtonModule,
         CommonModule,
-        FormModule
+        FormModule,
     ],
 })
 export class LandingModule { }
