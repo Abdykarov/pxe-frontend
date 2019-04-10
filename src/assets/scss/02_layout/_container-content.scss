@@ -7,27 +7,24 @@
 
 .container-content {
 	max-width: $body-max-width;
-	max-width: 0 auto;
 	padding-top: $header-height;
 	padding-bottom: 100px;
 
 	// Media queries
 	@include media-breakpoint-up(md) {
-		padding-top: $header-height + $spacer;
-		padding-bottom: $spacer * 2;
-		// padding-bottom: $footer-height + $spacer;
+		padding-top: ( $header-height + $spacer );
+		padding-bottom: ( $spacer * 2 );
 		min-height: 100vh;
 	}
 	@include media-breakpoint-up(lg) {
-		// padding-bottom: $footer-height + $spacer;
-		padding-bottom: $spacer * 4;
+		padding-bottom: ( $spacer * 4 );
 		min-height: 100vh;
 	}
 
 	&--public {
 		// Media queries
 		@include media-breakpoint-up(lg) {
-			padding-top: $header-height + $spacer;
+			padding-top: ( $header-height + $spacer );
 		}
 	}
 }
