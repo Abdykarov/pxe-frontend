@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import localeCs from '@angular/common/locales/cs';
 import {
     LOCALE_ID,
     NgModule,
 } from '@angular/core';
 import localeCsExtra from '@angular/common/locales/extra/cs';
-import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 

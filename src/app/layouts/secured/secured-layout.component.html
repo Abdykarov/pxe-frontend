@@ -1,7 +1,11 @@
 <div
     id="top"
     class="body-inner"
->
+    [class.body-inner--overlay]="showOverlay"
+    [class.body-inner--overlay-full]="showOverlay"
+    [ngClass]="{
+        'body-inner--overlay-header body-inner--overlay-aside' : showOverlay
+    }">
     <lnd-header>
     </lnd-header>
     <div class="container-fluid">

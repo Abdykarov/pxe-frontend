@@ -22,6 +22,7 @@ import * as mutations from 'src/common/graphql/mutations';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { loginFormFields } from './landing-page.config';
+import { OverlayService } from 'src/common/graphql/services/overlay.service';
 
 interface ICounterResponse {
     counter: {
@@ -57,6 +58,7 @@ export class LandingPageComponent extends AbstractComponent implements OnInit {
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private fb: FormBuilder,
+        private overlayService: OverlayService,
         private router: Router,
     ) {
         super();
@@ -179,6 +181,11 @@ export class LandingPageComponent extends AbstractComponent implements OnInit {
     public toggleLoginDialog = () => {
         if (!this.loginLoading) {
             this.showLogin = !this.showLogin;
+            this.overlayService.toggleOverlay()
+                .pipe(
+                    takeUntil(this.destroy$),
+                )
+                .subscribe();
         }
     }
 }

@@ -10,63 +10,65 @@ import {
     takeUntil,
     map,
 } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
-import * as navigationMut from 'src/common/graphql/mutation/navigation';
-import * as navigation from 'src/common/graphql/queries/navigation';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
+import { IStoreUi } from 'src/common/graphql/models/store.model';
+import { NavigationService as NavigationApolloService} from 'src/common/graphql/services/navigation.service';
 import { NavigationService } from './services/navigation.service';
+import { OverlayService } from 'src/common/graphql/services/overlay.service';
 
 @Component({
     templateUrl: './secured-layout.component.html',
 })
 export class SecuredLayoutComponent extends AbstractComponent {
     public navConfig: INavigationConfig = [];
-    private readonly LOGOUT_URL = '/logout';
+    public showOverlay = false;
+    private toggleSubscription: Subscription;
 
     constructor(
         private apollo: Apollo,
+        private navigationApolloService: NavigationApolloService,
         private navigationService: NavigationService,
+        private overlayService: OverlayService,
         private router: Router,
     ) {
         super();
+        this.router.events.subscribe(event => {
+            if (event instanceof NavigationEnd && this.showOverlay) {
+                this.toggleSubscription = this.overlayService.toggleOverlay(false)
+                    .subscribe();
+                this.toggleSubscription.unsubscribe();
+            }
+        });
 
         this.navigationService.getNavigationConfig();
 
-        this.router
-            .events
-            .subscribe(event => {
-                if (event instanceof NavigationEnd) {
-                    console.log('SECURED LAYOUT: NAVIGATION END');
-                }
-            });
-
-
-        this.apollo
-            .watchQuery<any>({
-                query: navigation.getConfig,
-            })
-            .valueChanges
+        this.navigationApolloService.getConfig()
             .pipe(
                 takeUntil(this.destroy$),
-                map(result =>
-                    R.path(['data', 'ui', 'securedLayout', 'navigationConfig'], result),
-                ),
+                map( R.path(['data', 'ui'])),
             )
-            .subscribe(current => {
-                this.navConfig = current;
+            .subscribe((current: IStoreUi)  => {
+                if (current.securedLayout) {
+                    this.navConfig = current.securedLayout.navigationConfig;
+                    this.showOverlay = current.showOverlay;
+                }
             });
 
     }
 
     public toggleOpenItem (navigationItem) {
-        this.apollo
-            .mutate({
-                mutation: navigationItem.url === this.LOGOUT_URL ? navigationMut.logout : navigationMut.openItem,
-                variables: {
-                    item: navigationItem,
-                },
-            })
+        this.navigationApolloService.toggleOpenItem(navigationItem)
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe();
+    }
+
+    public click() {
+        this.overlayService.toggleOverlay()
             .pipe(
                 takeUntil(this.destroy$),
             )

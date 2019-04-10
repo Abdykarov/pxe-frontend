@@ -9,7 +9,13 @@ export const getConfig = gql`
                     icon,
                     url
                 }
+                navigationItemOpened{
+                    label,
+                    icon,
+                    url
+                }
             }
+            showOverlay
         }
     }
 `;
