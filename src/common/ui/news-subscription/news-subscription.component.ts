@@ -4,7 +4,8 @@ import {
     Input,
     OnChanges,
     OnInit,
-    Output, SimpleChanges,
+    Output,
+    SimpleChanges,
 } from '@angular/core';
 import {
     FormBuilder,
@@ -77,84 +78,7 @@ export class NewsSubscriptionComponent implements OnInit, OnChanges {
 
     public resetCustomFieldError = () => {
         R.mapObjIndexed((_, field) => {
-            console.log(field);
             delete this.subscriptionFormError[field];
         })(this.subscriptionFormFields.controls);
     }
 }
-
-/*
-{
-    "graphQLErrors": [
-    {
-        "errorMessage": "Internat communication error with serverSessionID není správné",
-        "errorCode": "SEC9001",
-        "locations": [],
-        "errorType": "DataFetchingException",
-        "message": "Internat communication error with serverSessionID není správné",
-        "path": null,
-        "extensions": null
-    }
-],
-    "networkError": null,
-    "message": "GraphQL error: Internat communication error with serverSessionID není správné"
-}
-
-{
-  "graphQLErrors": [
-    {
-      "message": "Validation error of type FieldUndefined: Field 'makeRegistrationn' in type 'Mutation' is undefined @ 'makeRegistrationn'",
-      "path": null,
-      "extensions": null
-    }
-  ],
-  "networkError": null,
-  "message": "GraphQL error: Validation error of type FieldUndefined: Field 'makeRegistrationn' in type 'Mutation' is'"
-}
-
-{
-  "graphQLErrors": [
-    {
-      "validationError": {
-        "field": {
-          "email": [
-            "already-registered-email"
-          ]
-        }
-      },
-      "locations": [],
-      "errorType": "ValidationError",
-      "message": "Given mail was already registered",
-      "path": null,
-      "extensions": null
-    }
-  ],
-  "networkError": null,
-  "message": "GraphQL error: Given mail was already registered"
-}
-
-{
-  "graphQLErrors": [],
-  "networkError": {
-    "headers": {
-      "normalizedNames": {},
-      "lazyUpdate": null
-    },
-    "status": 404,
-    "statusText": "Not Found",
-    "url": "http://localhost:4200/graphqld",
-    "ok": false,
-    "name": "HttpErrorResponse",
-    "message": "Http failure response for http://localhost:4200/graphqld: 404 Not Found",
-    "error": {
-      "timestamp": "2019-04-09T16:39:35.512+0000",
-      "status": 404,
-      "error": "Not Found",
-      "message": "No message available",
-      "path": "/graphqld"
-    }
-  },
-  "message": "Network error: Http failure response for http://localhost:4200/graphqld: 404 Not Found"
-}
-
-*/
