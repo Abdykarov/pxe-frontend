@@ -8,3 +8,7 @@ export interface IForm {
         };
     };
 }
+
+export interface IFieldError {
+    [key: string]: string[];
+}

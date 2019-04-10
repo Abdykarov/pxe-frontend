@@ -2,11 +2,16 @@
     <h3 class="h3--public">
         Chci mít také přístup k&nbsp;jiným cenám, možnost&nbsp;měnit dodavatele jen na&nbsp;jedno kliknutí a&nbsp;zbavit se starostí s&nbsp;převodem.
     </h3>
-    <lnd-alert *ngIf="subscriptionError"
+    <lnd-alert *ngIf="subscriptionGlobalError.length"
                type="danger">
-        <pre>{{subscriptionError | json}}</pre>
+        <ng-container *ngFor="let globalError of subscriptionGlobalError">
+            {{globalError}}<br>
+        </ng-container>
+        <pre>{{subscriptionGlobalError | json}}</pre>
     </lnd-alert>
     <form [formGroup]="subscriptionForm"
+          (keydown)="resetCustomFieldError()"
+          (change)="resetCustomFieldError()"
           autocomplete="off">
         <lnd-form-field
                 [error]="subscriptionFormError.email || subscriptionForm.controls.email.errors"

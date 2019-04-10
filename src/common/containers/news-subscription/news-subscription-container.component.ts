@@ -3,6 +3,7 @@ import {
     Component,
 } from '@angular/core';
 
+import * as R_ from 'ramda-extension';
 import { Apollo } from 'apollo-angular';
 
 import * as mutations from 'src/common/graphql/mutations';
@@ -18,7 +19,10 @@ export class NewsSubscriptionContainerComponent {
     public submitSubscriptionLoading = false;
     public subscriptionFormFields = subscriptionFormFields;
     public subscriptionFormSent = false;
-    public subscriptionError: string = null;
+    public subscriptionGlobalError: string[] = [];
+    public subscriptionFieldError: any = null;
+
+    public error;
 
     constructor(
         private apollo: Apollo,
@@ -29,7 +33,8 @@ export class NewsSubscriptionContainerComponent {
     public submitSubscriptionForm = (values) => {
         console.log(values);
         this.submitSubscriptionLoading = true;
-        this.subscriptionError = null;
+        this.subscriptionGlobalError = [];
+        this.subscriptionFieldError = null;
         this.apollo
             .mutate({
                 mutation: mutations.makeRegistration,
@@ -43,8 +48,32 @@ export class NewsSubscriptionContainerComponent {
                 },
                 (error) => {
                     this.submitSubscriptionLoading = false;
+                    console.log('%c ***** error *****', 'background: #bada55; color: #000; font-weight: bold', error);
                     // this.subscriptionError = this.splitLastPipe.transform(error.message, ':');
-                    this.subscriptionError = error;
+                    this.subscriptionFieldError = {
+                        'email': [
+                            'already-registered-email',
+                        ],
+                    };
+                    if (!R_.isNilOrEmpty(error.graphQLErrors)) {
+                        if (error.graphQLErrors[0].validationError) {
+                            if (error.graphQLErrors[0].validationError.field) {
+                                this.subscriptionFieldError = error.graphQLErrors[0].validationError.field;
+                            }
+                            if (error.graphQLErrors[0].validationError.global) {
+                                this.subscriptionGlobalError = error.graphQLErrors[0].validationError.global;
+                            }
+                        } else {
+                            this.subscriptionGlobalError.push(error.graphQLErrors[0].message);
+                        }
+                    }
+                    if (error.networkError) {
+                        this.subscriptionGlobalError.push(error.networkError.message);
+                    }
+                    if (!error.networkError && !error.graphQLErrors) {
+                        this.subscriptionGlobalError.push(error.message);
+                    }
+                    this.error = error;
                     this.cd.markForCheck();
                 });
     }
@@ -69,12 +98,24 @@ export class NewsSubscriptionContainerComponent {
 {
   "graphQLErrors": [
     {
+      "message": "Validation error of type FieldUndefined: Field 'makeRegistrationn' in type 'Mutation' is undefined @ 'makeRegistrationn'",
+      "path": null,
+      "extensions": null
+    }
+  ],
+  "networkError": null,
+  "message": "GraphQL error: Validation error of type FieldUndefined: Field 'makeRegistrationn' in type 'Mutation' is'"
+}
+
+{
+  "graphQLErrors": [
+    {
       "validationError": {
-        "field": {
-          "email": [
-            "already-registered-email"
-          ]
-        }
+            "field": {
+              "email": [
+                "already-registered-email"
+              ]
+            }
       },
       "locations": [],
       "errorType": "ValidationError",
@@ -85,6 +126,30 @@ export class NewsSubscriptionContainerComponent {
   ],
   "networkError": null,
   "message": "GraphQL error: Given mail was already registered"
+}
+
+{
+  "graphQLErrors": [],
+  "networkError": {
+    "headers": {
+      "normalizedNames": {},
+      "lazyUpdate": null
+    },
+    "status": 404,
+    "statusText": "Not Found",
+    "url": "http://localhost:4200/graphqld",
+    "ok": false,
+    "name": "HttpErrorResponse",
+    "message": "Http failure response for http://localhost:4200/graphqld: 404 Not Found",
+    "error": {
+      "timestamp": "2019-04-09T16:39:35.512+0000",
+      "status": 404,
+      "error": "Not Found",
+      "message": "No message available",
+      "path": "/graphqld"
+    }
+  },
+  "message": "Network error: Http failure response for http://localhost:4200/graphqld: 404 Not Found"
 }
 
 */
