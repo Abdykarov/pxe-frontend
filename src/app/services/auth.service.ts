@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { of } from 'rxjs/internal/observable/of';
-import {
-    map,
-} from 'rxjs/operators';
+import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { CookiesService } from './cookies.service';
 import { environment } from 'src/environments/environment';

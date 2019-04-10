@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { Apollo } from 'apollo-angular';
 import { catchError } from 'rxjs/operators';
 import {
     Observable,
@@ -9,10 +10,9 @@ import {
 } from 'rxjs';
 
 // own models
-import { Apollo } from 'apollo-angular';
 import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
 import { navigationConfig } from './navigation.config';
-import * as navigation from 'src/common/graphql/mutation/navigation';
+import { NavigationService as NavigationApolloService} from 'src/common/graphql/services/navigation.service';
 
 @Injectable({
     providedIn: 'root',
@@ -24,7 +24,10 @@ export class NavigationService {
         return new Observable<INavigationConfig>((subscriber: Subscriber<INavigationConfig>) => subscriber.next(config));
     }
 
-    constructor(private apollo: Apollo) {}
+    constructor(
+        private apollo: Apollo,
+        private navigationApolloService: NavigationApolloService,
+    ) {}
 
     getNavigationConfig = () => this.get()
         .pipe(
@@ -36,13 +39,6 @@ export class NavigationService {
         })
 
     saveConfigToStore(config: any) {
-        this.apollo
-            .mutate({
-                mutation: navigation.loadConfig,
-                variables: {
-                    config: config,
-                },
-            })
-            .subscribe();
+        this.navigationApolloService.saveConfig(config).subscribe();
     }
 }

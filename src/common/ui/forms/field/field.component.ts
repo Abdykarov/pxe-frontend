@@ -228,6 +228,7 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
         if (R_.isObject(this.error)) {
             const errorType = Object.keys(this.error)[0];
             const message = this.validationMessages && this.validationMessages[errorType] || ErrorMessages[errorType];
+            // console.log('%c ***** error *****', 'background: #bada55; color: #000; font-weight: bold', this.error, message);
             return createStringFromTemplate(
                 message,
                 this.error[errorType],

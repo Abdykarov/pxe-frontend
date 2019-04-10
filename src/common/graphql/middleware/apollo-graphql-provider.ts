@@ -14,10 +14,6 @@ import { onError } from 'apollo-link-error';
 import { withClientState } from 'apollo-link-state';
 
 import { AuthService } from 'src/app/services/auth.service';
-// import {
-//     defaults,
-//     resolvers,
-// } from '../resolvers';
 import {
     defaults,
     resolvers,

@@ -24,6 +24,7 @@ export const subscriptionFormFields: IForm = {
         email: {
             required: 'Zadejte svůj e-mail.',
             email: 'E-mail není ve správném formátu.',
+            'already-registered-email': 'Tento email je již registrován.',
         },
         consent: {
             required: 'Musíte souhlasit se zásadami bezpečnosti.',

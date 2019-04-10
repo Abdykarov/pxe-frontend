@@ -2,8 +2,9 @@ import {
     Component,
     EventEmitter,
     Input,
+    OnChanges,
     OnInit,
-    Output,
+    Output, SimpleChanges,
 } from '@angular/core';
 import {
     FormBuilder,
@@ -21,7 +22,7 @@ import {
     templateUrl: './news-subscription.component.html',
     styleUrls: ['./news-subscription.component.scss'],
 })
-export class NewsSubscriptionComponent implements OnInit {
+export class NewsSubscriptionComponent implements OnInit, OnChanges {
     @Input()
     public subscriptionFormSent = false;
 
@@ -35,7 +36,7 @@ export class NewsSubscriptionComponent implements OnInit {
     public subscriptionGlobalError: string[] = null;
 
     @Input()
-    public subscriptionFieldError: IFieldError = null;
+    public subscriptionFieldError: IFieldError = {};
 
     @Output()
     submitSubscriptionForm: EventEmitter<any> = new EventEmitter<any>();
@@ -49,8 +50,12 @@ export class NewsSubscriptionComponent implements OnInit {
 
     ngOnInit() {
         this.subscriptionForm = this.fb.group(this.subscriptionFormFields.controls);
-        // this.subscriptionFormError.email = {};
-        // this.subscriptionFormError.email['already-registered-email'] = true;
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.subscriptionFieldError) {
+            this.subscriptionFormError = R.clone(changes.subscriptionFieldError.currentValue);
+        }
     }
 
     public submitForm = () => {

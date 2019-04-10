@@ -8,12 +8,14 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { Apollo } from 'apollo-angular';
 import * as R from 'ramda';
+import { Apollo } from 'apollo-angular';
+import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { loginFormFields } from './landing-page.config';
+import { OverlayService } from 'src/common/graphql/services/overlay.service';
 
 @Component({
     selector: 'lnd-landing-page',
@@ -34,6 +36,7 @@ export class LandingPageComponent extends AbstractComponent {
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private fb: FormBuilder,
+        private overlayService: OverlayService,
         private router: Router,
     ) {
         super();
@@ -65,6 +68,11 @@ export class LandingPageComponent extends AbstractComponent {
     public toggleLoginDialog = () => {
         if (!this.loginLoading) {
             this.showLogin = !this.showLogin;
+            this.overlayService.toggleOverlay()
+                .pipe(
+                    takeUntil(this.destroy$),
+                )
+                .subscribe();
         }
     }
 }

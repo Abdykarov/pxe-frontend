@@ -3,6 +3,7 @@ import {
     Component,
 } from '@angular/core';
 
+import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import { Apollo } from 'apollo-angular';
 
@@ -20,21 +21,39 @@ export class NewsSubscriptionContainerComponent {
     public subscriptionFormFields = subscriptionFormFields;
     public subscriptionFormSent = false;
     public subscriptionGlobalError: string[] = [];
-    public subscriptionFieldError: any = null;
+    public subscriptionFieldError: any = {};
 
     public error;
+    public data2;
 
     constructor(
         private apollo: Apollo,
         private cd: ChangeDetectorRef,
         private splitLastPipe: SplitLastPipe,
-    ) {}
+    ) {
+        const data = {
+            'email': [
+                'already-registered-email',
+                'already-registered-email2',
+            ],
+        };
+        this.data2 = this.mapArrayToValidationObj(data);
+        console.log('%c ***** xxx *****', 'background: #bada55; color: #000; font-weight: bold', this.data2);
+    }
+
+    public mapArrayToValidationObj = (array) => {
+        const prepareKeys = (val) => R.pipe(
+            R.map(key => ({[key]: true})),
+            R.mergeAll,
+        )(val);
+        return R.map(prepareKeys)(array);
+    }
 
     public submitSubscriptionForm = (values) => {
         console.log(values);
         this.submitSubscriptionLoading = true;
         this.subscriptionGlobalError = [];
-        this.subscriptionFieldError = null;
+        this.subscriptionFieldError = {};
         this.apollo
             .mutate({
                 mutation: mutations.makeRegistration,
@@ -46,34 +65,36 @@ export class NewsSubscriptionContainerComponent {
                     this.subscriptionFormSent = true;
                     this.cd.markForCheck();
                 },
-                (error) => {
+                ({ graphQLErrors, networkError, message }) => {
                     this.submitSubscriptionLoading = false;
-                    console.log('%c ***** error *****', 'background: #bada55; color: #000; font-weight: bold', error);
+                    console.log('%c ***** error *****', 'background: #bada55; color: #000; font-weight: bold',
+                        { graphQLErrors, networkError, message });
                     // this.subscriptionError = this.splitLastPipe.transform(error.message, ':');
-                    this.subscriptionFieldError = {
-                        'email': [
-                            'already-registered-email',
-                        ],
-                    };
-                    if (!R_.isNilOrEmpty(error.graphQLErrors)) {
-                        if (error.graphQLErrors[0].validationError) {
-                            if (error.graphQLErrors[0].validationError.field) {
-                                this.subscriptionFieldError = error.graphQLErrors[0].validationError.field;
+                    // this.subscriptionFieldError = {
+                    //     'email': [
+                    //         'already-registered-email',
+                    //     ],
+                    // };
+                    // this.subscriptionFieldError = this.data2;
+                    if (!R_.isNilOrEmpty(graphQLErrors)) {
+                        if (graphQLErrors[0].validationError) {
+                            if (graphQLErrors[0].validationError.field) {
+                                this.subscriptionFieldError = this.mapArrayToValidationObj(graphQLErrors[0].validationError.field);
                             }
-                            if (error.graphQLErrors[0].validationError.global) {
-                                this.subscriptionGlobalError = error.graphQLErrors[0].validationError.global;
+                            if (graphQLErrors[0].validationError.global) {
+                                this.subscriptionGlobalError = graphQLErrors[0].validationError.global;
                             }
                         } else {
-                            this.subscriptionGlobalError.push(error.graphQLErrors[0].message);
+                            this.subscriptionGlobalError.push(graphQLErrors[0].message);
                         }
                     }
-                    if (error.networkError) {
-                        this.subscriptionGlobalError.push(error.networkError.message);
+                    if (networkError) {
+                        this.subscriptionGlobalError.push(networkError.message);
                     }
-                    if (!error.networkError && !error.graphQLErrors) {
-                        this.subscriptionGlobalError.push(error.message);
+                    if (!networkError && !graphQLErrors) {
+                        this.subscriptionGlobalError.push(message);
                     }
-                    this.error = error;
+                    this.error = { graphQLErrors, networkError, message };
                     this.cd.markForCheck();
                 });
     }
