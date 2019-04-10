@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
-import { PragueExchangeRoutingModule } from './prague-exchange-routing.module';
 import { PragueExchangeComponent } from './prague-exchange.component';
+import { PragueExchangeRoutingModule } from './prague-exchange-routing.module';
 
 @NgModule({
     declarations: [

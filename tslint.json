@@ -138,7 +138,7 @@
         "component-selector": [
             true,
             "element",
-            ["app", "layout", "lnd"],
+            ["app", "pxe", "layout", "lnd"],
             "kebab-case"
         ],
         "no-output-on-prefix": true,

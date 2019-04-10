@@ -16,6 +16,18 @@ const routes = [
                 path: 'logout',
                 loadChildren: '../../pages/logout/logout-page.module#LogoutPageModule',
             },
+            {
+                path: 'prague-exchange',
+                loadChildren: '../../pages/prague-exchange/prague-exchange.module#PragueExchangeModule',
+            },
+            {
+                path: 'securing-your-data',
+                loadChildren: '../../pages/securing-your-data/securing-your-data.module#SecuringYourDataModule',
+            },
+            {
+                path: 'term-of-use',
+                loadChildren: '../../pages/term-of-use/term-of-use.module#TermOfUseModule',
+            },
         ],
     },
 ];

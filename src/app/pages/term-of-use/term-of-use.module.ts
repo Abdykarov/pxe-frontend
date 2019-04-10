@@ -14,4 +14,4 @@ import { TermOfUseRoutingModule } from './term-of-use-routing.module';
         TermOfUseRoutingModule,
     ],
 })
-export class TermOfUseModule { }
+export class TermOfUseModule {}
