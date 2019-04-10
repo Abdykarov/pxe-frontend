@@ -1,14 +1,12 @@
 <div
     id="top"
     class="body-inner"
+    [class.body-inner--overlay]="showOverlay"
+    [class.body-inner--overlay-full]="showOverlay"
     [ngClass]="{
-        'body-inner--overlay' : (mobileMenuOpened$ | async) || (showOverlay$ | async),
-        'body-inner--overlay-full' : (showOverlay$ | async) && !(isOverlayFromHeader$ | async),
-        'body-inner--overlay-header body-inner--overlay-aside' : (showOverlay$ | async) && (isOverlayFromHeader$ | async)
+        'body-inner--overlay-header body-inner--overlay-aside' : showOverlay
     }">
-    <lnd-header
-        [isMenuOpen]="mobileMenuOpened$ | async"
-        (toggleMenu)="toggleMenuOpen()">
+    <lnd-header>
     </lnd-header>
     <div class="container-fluid">
         <div class="row">
@@ -18,12 +16,10 @@
                 </main>
             </div>
             <lnd-navigation
-                [config]="navigationConfig$ | async"
-                [isMenuOpen]="mobileMenuOpened$ | async"
-                [itemOpened]="navigationItemOpened$ | async"
+                [config]="navConfig"
                 (openItem)="toggleOpenItem($event)">
             </lnd-navigation>
         </div>
     </div>
-    <lnd-footer [isMenuOpen]="mobileMenuOpened$ | async"></lnd-footer>
+    <lnd-footer [isMenuOpen]="true"></lnd-footer>
 </div>
