@@ -7,24 +7,27 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
+// Component variables
+@import 'landing.component.variables.scss';
+
 .landing-page {
 	.section {
 		position: relative;
-		padding: 40px 0 60px;
+		padding: ( $spacer * 2 ) 0 ( $spacer * 3 );
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			padding: 60px 0 80px;
+			padding: ( $spacer * 3 ) 0 ( $spacer * 4 );
 		}
 		@include media-breakpoint-up(lg) {
-			padding: 90px 0 110px;
+			padding: ( $spacer * 4.5 ) 0 ( $spacer * 5.5 );
 		}
 
 		&--picture-first,
 		&--picture-second {
 			// Media queries
 			@include media-breakpoint-down(xs) {
-				padding-top: 40px + 320px;
+				padding-top: ( $spacer * 2 ) + $landing-page-picture-height-mobile;
 			}
 		}
 
@@ -125,12 +128,12 @@
 		top: 100%;
 		right: 50%;
 		color: $primary;
-		margin-top: -( 18px / 2 );
-		margin-right: -( 46px / 2 );
-		font-size: 46px;
-		width: 46px;
-		height: 18px;
-		line-height: 18px;
+		margin-top: -( $landing-page-process-arrow-height-mobile / 2 );
+		margin-right: -( $landing-page-process-arrow-width-mobile / 2 );
+		font-size: $landing-page-process-arrow-width-mobile;
+		width: $landing-page-process-arrow-width-mobile;
+		height: $landing-page-process-arrow-height-mobile;
+		line-height: $landing-page-process-arrow-height-mobile;
 		transform: rotate(90deg);
 
 		// Media queries
@@ -140,12 +143,12 @@
 			right: 0;
 		}
 		@include media-breakpoint-up(lg) {
-			margin-top: -( 24px / 2 );
-			margin-right: -( 70px / 2 );
-			font-size: 70px;
-			width: 70px;
-			height: 24px;
-			line-height: 24px;
+			margin-top: -( $landing-page-process-arrow-height-desktop / 2 );
+			margin-right: -( $landing-page-process-arrow-width-desktop / 2 );
+			font-size: $landing-page-process-arrow-width-desktop;
+			width: $landing-page-process-arrow-width-desktop;
+			height: $landing-page-process-arrow-height-desktop;
+			line-height: $landing-page-process-arrow-height-desktop;
 		}
 	}
 
@@ -179,7 +182,7 @@
 		}
 
 		&:nth-child(n + 2) {
-			margin-top: $spacer ;
+			margin-top: $spacer;
 
 			// Media queries
 			@include media-breakpoint-up(md) {
