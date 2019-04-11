@@ -3,11 +3,13 @@ import {
     Pipe,
     PipeTransform,
 } from '@angular/core';
-import { IConsumption, RESULT_TYPE_CONSUMPTION } from './model/consumption-model';
 
+import {
+    IConsumption,
+    RESULT_TYPE_CONSUMPTION,
+} from './model/consumption-model';
 
 const defaultDigitsInfo = '1.0-1';
-
 
 @Pipe({
     name: 'consumption',
