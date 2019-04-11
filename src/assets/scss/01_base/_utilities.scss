@@ -216,15 +216,6 @@ $colors: (
 @include generate-progress;                              // width
 @include generate-progress(height, progress-h);          // height
 
-.page-with-title {
-	padding-top: $header-height;
-	
-	// Media queries
-	@include media-breakpoint-up(md) {
-		padding-top: ( ($header-height - $logo-height-tablet) / 2 );
-	}
-}
-
 .page-box {
 	padding: ( $spacer * 1.5 ) 0;
 	margin-bottom: ( $spacer * 2 );
