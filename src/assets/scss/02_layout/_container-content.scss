@@ -30,7 +30,7 @@
 
 	&--with-title {
 		padding-top: $header-height;
-	
+
 		// Media queries
 		@include media-breakpoint-up(md) {
 			padding-top: ( ( $header-height - $logo-height-tablet ) / 2 );
