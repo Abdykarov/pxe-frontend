@@ -1,4 +1,7 @@
-import { DecimalPipe, registerLocaleData } from '@angular/common';
+import {
+    DecimalPipe,
+    registerLocaleData,
+} from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
 import localeCs from '@angular/common/locales/cs';
 import localeCsExtra from '@angular/common/locales/extra/cs';
@@ -31,26 +34,50 @@ describe('ConsumptionPipe', () => {
     it('create an instance', () => expect(pipe).toBeTruthy());
 
     it('999 should result 999,0 Wh', () => {
-        expect(pipe.transform(999, RESULT_TYPE_CONSUMPTION.BOTH)).toEqual('999 Wh');
+        expect(pipe.transform(999, RESULT_TYPE_CONSUMPTION.BOTH)).toEqual({
+                'value': '999',
+                'unit': 'Wh',
+            },
+        );
     });
 
     it('1000 should result 1 KWh', () => {
-        expect(pipe.transform(1000, RESULT_TYPE_CONSUMPTION.BOTH)).toEqual('1 KWh');
+        expect(pipe.transform(1000, RESULT_TYPE_CONSUMPTION.BOTH)).toEqual({
+                'value': '1',
+                'unit': 'KWh',
+            },
+        );
     });
 
     it('999 999 should result 1 000 KWh', () => {
-        expect(pipe.transform(999999, RESULT_TYPE_CONSUMPTION.BOTH)).toEqual('1 000 KWh');
+        expect(pipe.transform(999999, RESULT_TYPE_CONSUMPTION.BOTH)).toEqual({
+                'value': '1 000',
+                'unit': 'KWh',
+            },
+        );
     });
 
     it('1 000 000 should result 1 MWh', () => {
-        expect(pipe.transform(1000000, RESULT_TYPE_CONSUMPTION.BOTH)).toEqual('1 MWh');
+        expect(pipe.transform(1000000, RESULT_TYPE_CONSUMPTION.BOTH)).toEqual({
+                'value': '1',
+                'unit': 'MWh',
+            },
+        );
     });
 
     it('999 999 999 should result 1000 MWh', () => {
-        expect(pipe.transform(999999999, RESULT_TYPE_CONSUMPTION.BOTH)).toEqual('1 000 MWh');
+        expect(pipe.transform(999999999, RESULT_TYPE_CONSUMPTION.BOTH)).toEqual({
+                'value': '1 000',
+                'unit': 'MWh',
+            },
+        );
     });
 
     it('1 000 000 000 should result 1 GWh', () => {
-        expect(pipe.transform(1000000000, RESULT_TYPE_CONSUMPTION.BOTH)).toEqual('1 GWh');
+        expect(pipe.transform(1000000000, RESULT_TYPE_CONSUMPTION.BOTH)).toEqual({
+                'value': '1',
+                'unit': 'GWh',
+            },
+        );
     });
  });
