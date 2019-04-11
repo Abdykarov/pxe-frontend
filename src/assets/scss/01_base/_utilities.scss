@@ -215,16 +215,3 @@ $colors: (
 /* Generate progress bars */
 @include generate-progress;                              // width
 @include generate-progress(height, progress-h);          // height
-
-.page-box {
-	padding: ( $spacer * 1.5 ) 0;
-	margin-bottom: ( $spacer * 2 );
-	background-color: $white;
-	border-radius: 4px;
-	box-shadow: $box-shadow;
-
-	// Media queries
-	@include media-breakpoint-up(lg) {
-		padding: ( $spacer * 2 ) 0;
-	}
-}
