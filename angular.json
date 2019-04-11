@@ -98,6 +98,7 @@
                 "server": {
                     "builder": "@angular-devkit/build-angular:server",
                     "options": {
+                        "sourceMap": false,
                         "outputPath": "dist/server",
                         "main": "src/app.server.ts",
                         "tsConfig": "src/tsconfig.server.json"
