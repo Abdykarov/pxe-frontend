@@ -1,5 +1,4 @@
 // Default variables for all not defined environments and for DEV
-<<<<<<< HEAD
 // !!! it is necessary to follow the JSON structure !!!
 
 window.angularDevstack = {
