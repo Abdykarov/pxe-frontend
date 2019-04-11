@@ -14,9 +14,12 @@
 	left: 0;
 	right: 0;
 	height: $header-height;
-	background-color: $header-bg;
 	color: $white;
 	z-index: 2010;
+
+	.logo {
+		vertical-align: top;
+	}
 }
 
 .header-inner {
@@ -33,6 +36,10 @@
 .logo-holder {
 	order: 1;
 	margin-right: auto;
+}
+
+.registration-holder {
+	order: 2;
 }
 
 .notification-holder {
@@ -121,15 +128,18 @@
 	}
 }
 
-a.logo {
+a.logo-link {
 	&,
 	&:visited {
 		display: block;
-		width: $logo-width;
-		height: $logo-height;
-		margin: 0 auto;
-		background: url('../../../assets/images/layout/logo-pxe.svg') no-repeat left center;
-		background-size: $logo-width $logo-height;
+		width: $logo-width-mobile;
+		height: $logo-height-mobile;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			width: $logo-width-tablet;
+			height: $logo-height-tablet;
+		}
 	}
 
 	.header--sticked & {

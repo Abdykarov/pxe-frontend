@@ -1,35 +1,53 @@
-<footer class="footer">
+<footer
+    class="footer"
+    [class.footer--public]="isPublic"
+    [class.footer--secured]="!isPublic">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 footer-container">
-                <div class="row justify-content-md-between">
-                    <div class="col-12 order-md-2 col-md-auto">
-                        <!-- <nav class="footer-navigation">
-                            <ul class="footer-navigation__list">
-                                <li class="footer-navigation__item">
-                                    <a routerLink="/secured/dashboard" class="footer-navigation__link">Dashboard</a>
-                                </li>
-                                <li class="footer-navigation__item">
-                                    <a routerLink="/secured/cart" class="footer-navigation__link">Nákupní košík</a>
-                                </li>
-                            </ul>
-                        </nav> -->
+                <div class="copy-holder">
+                    <div class="logo-holder">
+                        <img
+                            src="/assets/images/layout/logo-pxe.svg"
+                            class="logo"
+                            title="PXE"
+                            alt="logo PXE">
                     </div>
-                    <div class="col-12 order-md-1 col-md-auto">
-                        <div class="copy-holder">
-                            <span class="copy">
-                                &copy;&nbsp;POWER EXCHANGE CENTRAL EUROPE, a.s. 2018
-                            </span>
-                        </div>
-                    </div>
+                    <p class="copy mb-0">
+                        &copy;&nbsp;POWER EXCHANGE CENTRAL EUROPE, a.s. 2018
+                    </p>
                 </div>
-                <span
-                    (click)="scrollToTop()"
-                    class="btn-scroll-top"
-                    [ngClass]="{'btn-scroll-top--visible': scrollToTopIsVisible}">
-                    <span class="icon icon--arrow-minimal-up"></span>
-                </span>
+            </div>
+            <div class="col-12">
+                <nav class="footer-navigation">
+                    <ul class="footer-navigation__list">
+                        <li class="footer-navigation__item">
+                            <a routerLink="/secured/dashboard" class="footer-navigation__link">Podmínky užívání</a>
+                        </li>
+                        <li class="footer-navigation__item">
+                            <a routerLink="/secured/dashboard" class="footer-navigation__link">Zabezpeční vašich dat</a>
+                        </li>
+                        <li class="footer-navigation__item">
+                            <a routerLink="/secured/dashboard" class="footer-navigation__link">Pražská burza</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div
+                class="col-12"
+                *ngIf="!isPublic">
+                <div class="cookies-holder">
+                    <p class="cookies mb-0">
+                        Při poskytování služeb nám pomáhají soubory cookie. Používáním webu vyjadřujete souhlas.
+                    </p>
+                </div>
             </div>
         </div>
+        <!-- <span
+            (click)="scrollToTop()"
+            class="btn-scroll-top"
+            [ngClass]="{'btn-scroll-top--visible': scrollToTopIsVisible}">
+            <span class="icon icon--arrow-minimal-up"></span>
+        </span> -->
     </div>
 </footer>

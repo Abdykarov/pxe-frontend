@@ -1,9 +1,13 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            <main class="main">
-                <router-outlet></router-outlet>
-            </main>
-        </div>
-    </div>
+<div
+    id="top"
+    class="body-inner full-layout">
+    <lnd-header
+        [isPublic]="true">
+    </lnd-header>
+    <main class="main">
+        <router-outlet></router-outlet>
+    </main>
+    <lnd-footer
+        [isPublic]="true">
+    </lnd-footer>
 </div>
