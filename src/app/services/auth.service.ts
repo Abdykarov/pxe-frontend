@@ -27,7 +27,7 @@ export class AuthService {
 
     checkLogin = () => {
         if (this.cookiesService.has(this.cookieName)) {
-            this.token = (<any>this.cookiesService.get(this.cookieName)).token;
+            this.token = (<any>this.cookiesService.getObject(this.cookieName)).token;
         } else {
             this.token = null;
         }
@@ -45,8 +45,10 @@ export class AuthService {
                         if ( response.expiresTime ) {
                             this.expiresTime = response.expiresTime;
                         }
-                        const user =  JSON.stringify({token: response.token});
-                        this.cookiesService.set(this.cookieName, user, this.expiresTime);
+                        const user = {
+                            token: response.token,
+                        };
+                        this.cookiesService.setObject(this.cookieName, user, this.expiresTime);
                         this.checkLogin();
                     }
                     return response;
