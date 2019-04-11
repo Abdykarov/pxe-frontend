@@ -1,13 +1,10 @@
 <div
     id="top"
-    class="body-inner"
+    class="body-inner basic-layout"
     [ngClass]="{
-        'body-inner--overlay' : isMenuOpen
+    'body-inner--overlay' : isMenuOpen
     }">
-    <lnd-header
-        [isMenuOpen]="isMenuOpen"
-        (toggleMenu)="toggleMenuOpen()">
-    </lnd-header>
+    <lnd-header></lnd-header>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-8 order-lg-2 container-content">
@@ -24,7 +21,5 @@
             </lnd-navigation>
         </div>
     </div>
-    <lnd-footer
-            [isMenuOpen]="isMenuOpen">
-    </lnd-footer>
+    <lnd-footer></lnd-footer>
 </div>
