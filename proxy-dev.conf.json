@@ -8,7 +8,7 @@
     {
         "context": "/graphql",
         "logLevel": "debug",
-        "target": "http://localhost:4201",
+        "target": "http://localhost:4203",
         "secure": false
     }
 ]

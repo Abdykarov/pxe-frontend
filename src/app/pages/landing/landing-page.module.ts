@@ -13,7 +13,7 @@ import { LandingPageComponent } from './landing-page.component';
 import { LandingPageRoutingModule } from './landing-page.routing';
 import { MapCoverageContainerModule } from 'src/common/containers/map-coverage-container/map-coverage-container.module';
 import { ModalModule } from 'src/common/ui/modal/modal.module';
-
+import { NewsSubscriptionContainerModule } from 'src/common/containers/news-subscription/news-subscription-container.module';
 
 @NgModule({
     declarations: [
@@ -28,9 +28,10 @@ import { ModalModule } from 'src/common/ui/modal/modal.module';
         CommonModule,
         FormModule,
         FormsModule,
+        LandingPageRoutingModule,
         MapCoverageContainerModule,
         ModalModule,
-        LandingPageRoutingModule,
+        NewsSubscriptionContainerModule,
         ReactiveFormsModule,
     ],
 })

@@ -39,7 +39,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent {
         this.navigationApolloService.getConfig()
             .pipe(
                 takeUntil(this.destroy$),
-                map( R.path(['data', 'ui'])),
+                map(R.path(['data', 'ui'])),
             )
             .subscribe((current: IStoreUi)  => {
                 if (current.securedLayout) {

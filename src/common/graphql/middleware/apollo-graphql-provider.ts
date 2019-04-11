@@ -17,7 +17,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import {
     defaults,
     resolvers,
-} from '../resolvers';
+} from '../resolvers/';
 import { environment } from 'src/environments/environment';
 
 const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, router: Router) => {
@@ -28,14 +28,14 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
         if (token) {
             operation.setContext({
                 headers: {
-                    authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
         }
     };
 
     const http = httpLink.create({
-        uri: `${environment.graphql}/graphql`,
+        uri: `${environment.url}/graphql`,
     });
 
     const local = withClientState({
@@ -86,14 +86,14 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
 
     const error = onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors) {
-            graphQLErrors.map(({ message, locations, path }) =>
-                console.log('%c ***** [GraphQL error] *****', 'background: red; color: #fff; font-weight: bold',
-                    `Message: ${message}, Location: ${locations}, Path: ${path}`),
-            );
+            graphQLErrors.map(({ message, locations, path }) => {
+                // console.log('%c ***** [GraphQL error] *****', 'background: red; color: #fff; font-weight: bold',
+                //     `Message: ${message}, Location: ${locations}, Path: ${path}`);
+            });
         }
 
         if (networkError) {
-            console.log('%c ***** [Network error] *****', 'background: red; color: #fff; font-weight: bold', networkError);
+            // console.log('%c ***** [Network error] *****', 'background: red; color: #fff; font-weight: bold', networkError);
         }
     });
 

@@ -2,7 +2,7 @@
     {
         "context": "/graphql",
         "logLevel": "debug",
-        "target": "http://mock:9002/graphql",
+        "target": "http://mock:9002",
         "secure": false
     },
     {
