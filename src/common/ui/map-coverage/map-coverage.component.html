@@ -1,72 +1,191 @@
-<lnd-tabs>
-
-    <lnd-tab tabTitle="ELEKTŘINA">
-        Aktuální pokrytí
-        <br />
-            {{config.power.places}}
-        <br />
-            {{config.power.places.toString() | plural:'place'}}
-        <br />
-        <br />
-
-        Výkon temelínu
-        <br />
-        {{config.power.notification}}
-        <br />
-        {{config.power.notification.toString() | plural:'day'}}
-        <br />
-        <br />
-
-        Celkový odběr
-        <br />
-        {{config.power.consumption | consumption}}
-        <br />
-        <ng-container *ngIf="config.power.suppliers.length">
-            <br />
-            Naši dodavatelé elektřiny
-            <br />
-            <div *ngFor="let supplier of config.power.suppliers">
-                <a [href]="supplier.supplierUrl" target=_blank>
-                    <img
-                        [src]="supplier.logoUrl"
-                        [attr.alt]="supplier.title">
-                </a>
+<div class="section where-we-are bg--white text-center">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="px-3 px-md-0">
+                    <h2 class="h2--public">
+                        Tady už PARC znají
+                    </h2>
+                </div>
             </div>
-        </ng-container>
-    </lnd-tab>
-
-    <lnd-tab tabTitle="PLYN">
-        Aktuální pokrytí
-        <br />
-        {{config.gas.places}}
-        <br />
-        {{ config.gas.places.toString() | plural:'place'}}
-        <br />
-        <br />
-
-        Objem největšího zásobníku  plynu v ČR
-        <br />
-        {{config.gas.notification}}
-        <br />
-        násobek
-        <br />
-        <br />
-
-        Celkový odběr
-        <br />
-        {{config.gas.consumption | consumption}}
-        <br />
-        <ng-container *ngIf="config.gas.suppliers.length">
-            <br />
-            Naši dodavatelé plynu
-            <br />
-            <div *ngFor="let supplier of config.gas.suppliers">
-                <a [href]="supplier.supplierUrl" target=_blank>
-                    <img
-                        [src]="supplier.logoUrl"
-                        [attr.alt]="supplier.title">
-                </a>
-            </div>
-        </ng-container>
-    </lnd-tab>
-</lnd-tabs>
+        </div>
+        <lnd-tabs>
+            <lnd-tab tabTitle="ELEKTŘINA">
+                <div class="row">
+                    <div class="col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
+                        <div class="boxes">
+                            <div class="box-info">
+                                <div class="box-info__holder">
+                                    <div class="box-info__label">
+                                        Aktuální<br class="d-lg-none d-xl-none"> pokrytí
+                                    </div>
+                                    <div class="box-info__value">
+                                        <div class="box-info__number">
+                                            {{config.power.places}}
+                                        </div>
+                                        <div class="box-info__unit">
+                                            {{config.power.places.toString() | plural:'place'}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-info box-info--primary">
+                                <div class="box-info__holder">
+                                    <div class="box-info__label">
+                                        Výkon<br class="d-lg-none d-xl-none"> Temelínu
+                                    </div>
+                                    <div class="box-info__value">
+                                        <div class="box-info__number">
+                                            {{config.power.temelinPerformance}}
+                                        </div>
+                                        <div class="box-info__unit">
+                                            {{config.power.temelinPerformance.toString() | plural:'day'}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-info box-info--secondary">
+                                <div class="box-info__holder">
+                                    <div class="box-info__label">
+                                        Celkový<br class="d-lg-none d-xl-none"> odběr
+                                    </div>
+                                    <div class="box-info__value">
+                                        <div class="box-info__number">
+                                            {{config.power.consumption | consumption: RESULT_TYPE_CONSUMPTION_VALUE}}
+                                        </div>
+                                        <div class="box-info__unit">
+                                            {{config.power.consumption | consumption: RESULT_TYPE_CONSUMPTION_UNIT}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ng-container *ngIf="config.power.suppliers.length">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="px-3 px-md-0">
+                                <h3>
+                                    Naši dodavatelé elektřiny
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-10 offset-md-1">
+                            <div class="suppliers-holder">
+                                <ul class="suppliers-overview">
+                                    <li class="suppliers-overview__item" *ngFor="let supplier of config.power.suppliers">
+                                        <a
+                                            href="{{supplier.supplierUrl}}"
+                                            target="_blank"
+                                            class="suppliers-overview__link">
+                                            <img
+                                                class="suppliers-overview__picture"
+                                                src="{{supplier.logoUrl}}"
+                                                title="{{supplier.title}}"
+                                                alt="{{supplier.alt}}">
+                                            <img
+                                                class="suppliers-overview__picture-hover"
+                                                src="{{supplier.logoUrlHover}}"
+                                                title="{{supplier.title}}"
+                                                alt="{{supplier.alt}}">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </lnd-tab>
+            <lnd-tab tabTitle="PLYN">
+                <div class="row">
+                    <div class="col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
+                        <div class="boxes">
+                            <div class="box-info">
+                                <div class="box-info__holder">
+                                    <div class="box-info__label">
+                                        Aktuální<br class="d-lg-none d-xl-none"> pokrytí
+                                    </div>
+                                    <div class="box-info__value">
+                                        <div class="box-info__number">
+                                            {{config.gas.places}}
+                                        </div>
+                                        <div class="box-info__unit">
+                                            {{config.gas.places.toString() | plural:'place'}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-info box-info--primary">
+                                <div class="box-info__holder">
+                                    <div class="box-info__label">
+                                        Objem největšího zásobníku plynu <br class="d-lg-none d-xl-none"> v ČR
+                                    </div>
+                                    <div class="box-info__value">
+                                        <div class="box-info__number">
+                                            {{config.gas.stackCapacity}}
+                                        </div>
+                                        <div class="box-info__unit">
+                                            Násobek
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-info box-info--secondary">
+                                <div class="box-info__holder">
+                                    <div class="box-info__label">
+                                        Celkový<br class="d-lg-none d-xl-none"> odběr
+                                    </div>
+                                    <div class="box-info__value">
+                                        <div class="box-info__number">
+                                            {{config.gas.consumption | consumption: RESULT_TYPE_CONSUMPTION_VALUE}}
+                                        </div>
+                                        <div class="box-info__unit">
+                                            {{config.gas.consumption | consumption: RESULT_TYPE_CONSUMPTION_UNIT}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="px-3 px-md-0">
+                            <h3>
+                                Naši dodavatelé plynu
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-10 offset-md-1">
+                        <div class="suppliers-holder">
+                            <ul class="suppliers-overview">
+                                <li class="suppliers-overview__item" *ngFor="let supplier of config.gas.suppliers">
+                                    <a
+                                        href="{{supplier.supplierUrl}}"
+                                        target="_blank"
+                                        class="suppliers-overview__link">
+                                        <img
+                                            class="suppliers-overview__picture"
+                                            src="{{supplier.logoUrl}}"
+                                            title="{{supplier.title}}"
+                                            alt="{{supplier.alt}}">
+                                        <img
+                                            class="suppliers-overview__picture-hover"
+                                            src="{{supplier.logoUrlHover}}"
+                                            title="{{supplier.title}}"
+                                            alt="{{supplier.alt}}">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </lnd-tab>
+        </lnd-tabs>
+    </div>
+</div>

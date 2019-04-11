@@ -1,78 +1,203 @@
-<div class="landing-page">
+<div style="position: absolute;right: 200px;top: 30px;z-index: 9999999999;">
     <lnd-button
         type="secondary"
         (action)="toggleLoginDialog()"
         label="Příhlásit se"
         [hasOutline]="false">
     </lnd-button>
+</div>
 
-    <div class="section stay-in-touch">
+<div class="landing-page">
+    <div class="section about-our-benefit section--picture-second">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-3 col-lg-4 offset-lg-4">
+                <div class="col-12 col-md-4 offset-md-1">
                     <div class="px-3 px-md-0">
-                        <pxe-news-subscription-container></pxe-news-subscription-container>
+                        <h1 class="h1--public">
+                            Plaťte za&nbsp;energie chytře díky burze
+                        </h1>
+                        <p>
+                            PARC je jediné prostředí, které&nbsp;vám dodává ceny energií přímo z&nbsp;burzy a&nbsp;umožňuje měnit dodavatele na&nbsp;jedno kliknutí.
+                        </p>
+                        <ul class="check-list">
+                            <li>
+                                Měníte dodavatele na&nbsp;jedno kliknutí
+                            </li>
+                            <li>
+                                Neřešíte papírování a&nbsp;chození na&nbsp;pobočky
+                            </li>
+                            <li>
+                                Jste chráněni před&nbsp;nekalostmi ve&nbsp;smlouvě
+                            </li>
+                            <li>
+                                Dostáváte férové ceny bez&nbsp;skrytých poplatků
+                            </li>
+                        </ul>
+                        <lnd-button
+                            label="To chci"
+                            type="primary">
+                        </lnd-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-picture-holder">
+            <img
+                class="section-picture"
+                src="/assets/images/landing-page/picture-about-our-benefit.jpg"
+                title="Plaťte za energie chytře díky burze"
+                alt="Plaťte za energie chytře díky burze">
+        </div>
+    </div>
+    <div class="section what-you-can-expect bg--white text-center">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="px-3 px-md-0">
+                        <h2 class="h2--public mb-6 mb-lg-7">
+                            Co vás v&nbsp;PARCu čeká
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-10 offset-md-1">
+                    <div class="row landing-page__process">
+                        <div class="col-12 col-md-4">
+                            <div class="px-4 pb-7 pb-md-0">
+                                <img
+                                    class="landing-page-illustration"
+                                    src="/assets/images/illustrations/house.svg"
+                                    title="Nejdřív se seznámíme"
+                                    alt="Ilustrace domu">
+                                <h3 class="h3--public">Nejdřív se seznámíme</h3>
+                                <p class="mb-0">Představíte sebe i&nbsp;vaše odběrné místo nebo&nbsp;nahrajete fakturu, ať&nbsp;máme potřebné informace.</p>
+                            </div>
+                            <span class="landing-page__process-arrow icon icon--arrow-process"></span>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="px-4 pt-7 pt-md-0 pb-7 pb-md-0">
+                                <img
+                                    class="landing-page-illustration"
+                                    src="/assets/images/illustrations/documents.svg"
+                                    title="Dostanete nabídky"
+                                    alt="Ilustrace podepsaných dokumentů">
+                                <h3 class="h3--public">Dostanete nabídky</h3>
+                                <p class="mb-0">Získáme pro&nbsp;vás ty nejzajímavější nabídky od&nbsp;dodavatelů, které&nbsp;před&nbsp;tím důkladně prověříme, ať&nbsp;se&nbsp;nemusíte ničeho bát.</p>
+                                <span class="landing-page__process-arrow icon icon--arrow-process"></span>
+                            </div>
+                        </div>
+                        <div class="col-13 col-md-4">
+                            <div class="px-4 pt-7 pt-md-0">
+                                <img
+                                    class="landing-page-illustration"
+                                    src="/assets/images/illustrations/light.svg"
+                                    title="Vyberete si a je to"
+                                    alt="Ilustrace rozsvíceného světla">
+                                <h3 class="h3--public">Vyberete si a&nbsp;je to</h3>
+                                <p class="mb-0">Nejlákavější nabídku potvrdíte jedním kliknutím a&nbsp;potřebný převod už za&nbsp;vás zařídíme my.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <lnd-modal title="Přihlášení"
-               [isModalOpen]="showLogin"
-               (close)="toggleLoginDialog()">
-        <form [formGroup]="loginForm"
-              autocomplete="off">
-            <div class="modal-body">
-                <lnd-alert
-                    [type]="'danger'"
-                    [isDismissible]="false"
-                    [hasIcon]="true"
-                    *ngIf="loginError">
-                    Při odeslání došlo k chybě.
-                </lnd-alert>
-                <div class="row">
-                    <div class="col-md-6">
-                        <lnd-form-field
-                            [error]="loginForm.controls.username.errors"
-                            formControlName="username"
-                            id="username"
-                            label="Přihlašovací jméno / email"
-                            [success]="loginForm.controls.username.valid && loginForm.controls.username.touched"
-                            [touched]="loginForm.controls.username.touched"
-                        ></lnd-form-field>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <lnd-form-field
-                            [error]="loginForm.controls.password.errors"
-                            formControlName="password"
-                            id="password"
-                            label="Heslo"
-                            [success]="loginForm.controls.password.valid && loginForm.controls.password.touched"
-                            [touched]="loginForm.controls.password.touched"
-                            type="password"
-                        ></lnd-form-field>
+    <div class="section shortcut bg--white section--picture-first">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-md-4 offset-md-7">
+                    <div class="px-3 px-md-0">
+                        <h3 class="h3--public">
+                            Cesta k&nbsp;nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC
+                        </h3>
+                        <ul class="check-list">
+                            <li>
+                                Nechte dodavatele ať&nbsp;se o&nbsp;vás poperou
+                            </li>
+                            <li>
+                                Přestaňte se bát skrytých poplatků a&nbsp;jiných kliček
+                            </li>
+                            <li>
+                                Neluštěte zbytečně z&nbsp;faktur nic, co jde zjistit i&nbsp;jinak
+                            </li>
+                            <li>
+                                Vydejte se snadnou a&nbsp;bezpečnou cestou přes&nbsp;PARC
+                            </li>
+                        </ul>
+                        <lnd-button
+                            label="Chci do PARCu"
+                            type="primary">
+                        </lnd-button>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <lnd-button
-                    type="secondary"
-                    (action)="submitLoginForm()"
-                    [isDisabled]="loginLoading"
-                    label="Přihlásit se">
-                </lnd-button>
-                <lnd-button
-                    type="primary"
-                    (action)="toggleLoginDialog()"
-                    [isDisabled]="loginLoading"
-                    label="Zrušit"
-                    hasOutline="true">
-                </lnd-button>
-            </div>
-        </form>
-    </lnd-modal>
+        </div>
+        <div class="section-picture-holder">
+            <img
+                class="section-picture"
+                src="/assets/images/landing-page/picture-shortcut.jpg"
+                title="Cesta k nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC"
+                alt="Cesta k nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC">
+        </div>
+    </div>
     <pxe-map-coverage-container></pxe-map-coverage-container>
+    <pxe-news-subscription-container></pxe-news-subscription-container>
 </div>
+
+
+<lnd-modal title="Přihlášení"
+           [isModalOpen]="showLogin"
+           (close)="toggleLoginDialog()">
+    <form [formGroup]="loginForm">
+        <div class="modal-body">
+            <lnd-alert
+                [type]="'danger'"
+                [isDismissible]="false"
+                [hasIcon]="true"
+                *ngIf="loginError">
+                Při odeslání došlo k chybě.
+            </lnd-alert>
+            <div class="row">
+                <div class="col-md-6">
+                    <lnd-form-field
+                        [error]="loginForm.controls.username.errors"
+                        formControlName="username"
+                        id="username"
+                        label="Přihlašovací jméno / email"
+                        [success]="loginForm.controls.username.valid && loginForm.controls.username.touched"
+                        [touched]="loginForm.controls.username.touched"
+                    ></lnd-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <lnd-form-field
+                        [error]="loginForm.controls.password.errors"
+                        formControlName="password"
+                        id="password"
+                        label="Heslo"
+                        [success]="loginForm.controls.password.valid && loginForm.controls.password.touched"
+                        [touched]="loginForm.controls.password.touched"
+                        type="password"
+                    ></lnd-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <lnd-button
+                type="secondary"
+                (action)="submitLoginForm()"
+                [isDisabled]="loginLoading"
+                label="Přihlásit se">
+            </lnd-button>
+            <lnd-button
+                type="primary"
+                (action)="toggleLoginDialog()"
+                [isDisabled]="loginLoading"
+                label="Zrušit"
+                hasOutline="true">
+            </lnd-button>
+        </div>
+    </form>
+</lnd-modal>

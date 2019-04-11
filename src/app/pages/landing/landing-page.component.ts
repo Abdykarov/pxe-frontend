@@ -1,6 +1,7 @@
 import {
     ChangeDetectorRef,
     Component,
+    ViewEncapsulation,
 } from '@angular/core';
 import {
     FormBuilder,
@@ -21,15 +22,13 @@ import { OverlayService } from 'src/common/graphql/services/overlay.service';
     selector: 'lnd-landing-page',
     templateUrl: './landing-page.component.html',
     styleUrls: ['./landing-page.component.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class LandingPageComponent extends AbstractComponent {
     public loginError = false;
     public loginForm: FormGroup;
     public loginLoading = false;
     public showLogin = false;
-
-    public counter = 0;
-    public visible = false;
 
     constructor(
         private apollo: Apollo,

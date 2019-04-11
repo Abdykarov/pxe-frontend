@@ -1,0 +1,18 @@
+@import 'src/assets/scss/01_base/base.scss';
+
+.where-we-are {
+	background-repeat: no-repeat;
+	background-position: center 100px;
+	background-image: url('../../../assets/images/landing-page/picture-to-silhouette.svg');
+
+	// Media queries
+	@include media-breakpoint-up(md) {
+		background-position: center center;
+		background-size: 80% auto;
+	}
+	@include media-breakpoint-up(xl) {
+		background-size: auto auto;
+	}
+}
+
+
