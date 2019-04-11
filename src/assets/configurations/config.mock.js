@@ -1,7 +1,8 @@
 // Variables for MOCK environment
-//
+// !!! it is necessary to follow the JSON structure !!!
+
 window.angularDevstack = {
-    config: {
+    "config": {
         "url": "http://localhost:4200",
         "production": false,
         "web_api_key": "mock-api-key",

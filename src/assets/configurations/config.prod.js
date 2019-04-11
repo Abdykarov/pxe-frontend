@@ -1,7 +1,8 @@
 // Variables for PRODUCTION environment
+// !!! it is necessary to follow the JSON structure !!!
 
 window.angularDevstack = {
-    config: {
+    "config": {
         "url": "http://localhost:4200",
         "production": true,
         "web_api_key": "default-api-key",
