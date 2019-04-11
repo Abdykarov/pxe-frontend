@@ -5,6 +5,36 @@
     [hasOutline]="false">
 </lnd-button>
 
+<div *ngIf="loading">
+    Loading...
+</div>
+<!--<div *ngIf="rates">-->
+    <!--<div *ngFor="let rate of rates">-->
+        <!--<p>{{rate.currency}}: {{rate.rate}}</p>-->
+    <!--</div>-->
+<!--</div>-->
+
+<hr>
+<div>
+    counter = {{counter | json}}
+</div>
+
+<div>
+    <button (click)="incrementCounter()">+1</button>
+    <button (click)="decrementCounter()">-1</button>
+    <button (click)="resetCounter()">reset</button>
+</div>
+
+<hr>
+
+visible: {{visible}}
+<br>
+<button (click)="toggleVisibility()">toggle</button>
+
+<hr>
+
+<a [routerLink]="['/logout']">next</a>
+
 <lnd-modal title="Přihlášení"
            [isModalOpen]="showLogin"
            (close)="toggleLoginDialog()">
@@ -60,3 +90,5 @@
         </div>
     </form>
 </lnd-modal>
+
+<pxe-map-coverage-container></pxe-map-coverage-container>

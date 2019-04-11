@@ -1,24 +1,40 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+import * as R from 'ramda';
+import { Apollo } from 'apollo-angular';
 import {
-    NavigationEnd,
-    Router,
-} from '@angular/router';
+    map,
+    takeUntil,
+} from 'rxjs/operators';
+
+import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
+import { OverlayService } from 'src/common/graphql/services/overlay.service';
 
 @Component({
     templateUrl: './public-layout.component.html',
     styleUrls: ['./public-layout.component.scss'],
 })
-export class PublicLayoutComponent {
+export class PublicLayoutComponent extends AbstractLayoutComponent {
 
     constructor(
-        private router: Router,
+        protected apollo: Apollo,
+        protected overlayService: OverlayService,
+        protected router: Router,
     ) {
-        this.router
-            .events
-            .subscribe(event => {
-                if (event instanceof NavigationEnd) {
-                    console.log('NAVIGATION END');
-                }
+        super(
+            apollo,
+            overlayService,
+            router,
+        );
+
+        this.overlayService.getOverlay()
+            .pipe(
+                takeUntil(this.destroy$),
+                map( R.path(['data', 'ui', 'showOverlay'])),
+            )
+            .subscribe((current: boolean) => {
+                this.showOverlay = current;
             });
     }
 }
