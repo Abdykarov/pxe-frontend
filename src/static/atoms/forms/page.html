@@ -4,94 +4,109 @@
     </div>
 </div>
 <h3>Input</h3>
-<!--<div class="static-pages">-->
-    <!--<form>-->
+<div class="static-pages">
+    <form>
         <h4>Normal</h4>
+        <div class="row">
+            <div class="col-md-4">
+                <lnd-form-field
+                    id="normal-input"
+                    label="Label">
+                </lnd-form-field>
+            </div>
+            <div class="col-md-4">
+                <lnd-form-field
+                    id="error-input"
+                    label="Standard error"
+                    error="This field is required"
+                    [touched]="true">
+                </lnd-form-field>
+            </div>
+        </div>
+        <h4>Filled</h4>
+        <div class="row">
+            <div class="col-md-4">
+                <lnd-form-field
+                    id="normal-input"
+                    label="Normal input"
+                    placeholder="Placeholder text"
+                    [touched]="true"
+                    value="Filled input">
+                </lnd-form-field>
+            </div>
+        </div>
+        <!-- <h4>States</h4>
+        <div class="row">
+            <div class="col-md-4">
+                <lnd-form-field
+                    id="success-no-value-input"
+                    label="Success"
+                    [success]="true">
+                </lnd-form-field>
+            </div>
+            <div class="col-md-4">
+                <lnd-form-field
+                    id="warning-no-value-input"
+                    label="Warning"
+                    [warning]="true">
+                </lnd-form-field>
+            </div>
+            <div class="col-md-4">
+                <lnd-form-field
+                    id="error-no-value-input"
+                    label="Error"
+                    error=" "
+                    [touched]="true">
+                </lnd-form-field>
+            </div>
+        </div> -->
+        <!-- <h4>Error</h4>
+        <div class="row">
+            <div class="col-md-4">
+                <lnd-form-field
+                    id="error-input"
+                    label="Standard error"
+                    error="This field is required"
+                    [touched]="true"
+                </lnd-form-field>
+            </div>
+        </div> -->
+        <!-- <h4>Readonly</h4>
         <div class="row">
             <div class="col-sm-3">
                 <lnd-form-field
-                    id="normal-input"
-                    label="Label"
-                    placeholder="Placeholder text"
-                    value=""
-                ></lnd-form-field>
+                    id="readonly-input"
+                    label="Readonly"
+                    [readonly]="true">
+                &gt;</lnd-form-field>
+            </div>
+            <div class="col-md-6">
+                <lnd-form-field
+                    id="readonly-input-filled"
+                    label="Readonly"
+                    [readonly]="true"
+                    value="Readonly input">
+                </lnd-form-field>
+            </div>
+        </div> -->
+        <h4>Disabled</h4>
+        <div class="row">
+            <div class="col-md-4">
+                <lnd-form-field
+                    [disabledField]="true"
+                    id="disabled-input"
+                    label="Disabled input">
+                </lnd-form-field>
+            </div>
+            <div class="col-md-4">
+                <lnd-form-field
+                    [disabledField]="true"
+                    id="disabled-input-filled"
+                    label="Disabled input"
+                    value="Disabled">
+                </lnd-form-field>
             </div>
         </div>
-        <!--<h4>Disabled</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--[disabled]="true"-->
-                    <!--id="disabled-input"-->
-                    <!--label="Disasbled input"-->
-                    <!--value=""-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--[disabled]="true"-->
-                    <!--id="disabled-input-filled"-->
-                    <!--label="Disabled input"-->
-                    <!--value="Disabled"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<h4>Readonly</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="readonly-input"-->
-                    <!--label="Readonly"-->
-                    <!--[readonly]="true"-->
-                    <!--value=""-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="readonly-input-filled"-->
-                    <!--label="Readonly"-->
-                    <!--[readonly]="true"-->
-                    <!--value="Readonly input"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<h4>States</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="success-no-value-input"-->
-                    <!--label="Success"-->
-                    <!--[success]="true"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="warning-no-value-input"-->
-                    <!--label="Warning"-->
-                    <!--[warning]="true"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="error-no-value-input"-->
-                    <!--error=" "-->
-                    <!--[touched]="true"-->
-                    <!--label="Error"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<h4>Error</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--error="This field is required"-->
-                    <!--id="error-input"-->
-                    <!--label="Standard error"-->
-                    <!--[touched]="true"-->
-                    <!--value=""-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
         <!--<h4>Input with subtext</h4>-->
         <!--<div class="row">-->
             <!--<div class="col-sm-3">-->
@@ -114,8 +129,8 @@
                 <!--&gt;</lnd-form-field>-->
             <!--</div>-->
         <!--</div>-->
-    <!--</form>-->
-<!--</div>-->
+    </form>
+</div>
 <!--<h3>Input with icons</h3>-->
 <!--<div class="static-pages">-->
     <!--<form>-->
@@ -176,7 +191,6 @@
                     <!--placeholder="Placeholder text"-->
                     <!--label="Label"-->
                     <!--type="textarea"-->
-                    <!--value=""-->
                 <!--&gt;</lnd-form-field>-->
             <!--</div>-->
         <!--</div>-->
@@ -189,7 +203,6 @@
                     <!--placeholder="Disabled textarea"-->
                     <!--label="Disabled"-->
                     <!--type="textarea"-->
-                    <!--value=""-->
                 <!--&gt;</lnd-form-field>-->
             <!--</div>-->
             <!--<div class="col-sm-3">-->
@@ -211,7 +224,6 @@
                     <!--label="Readonly textarea"-->
                     <!--[readonly]="true"-->
                     <!--type="textarea"-->
-                    <!--value=""-->
                 <!--&gt;</lnd-form-field>-->
             <!--</div>-->
             <!--<div class="col-sm-3">-->
@@ -234,7 +246,6 @@
                     <!--label="Success"-->
                     <!--[success]="true"-->
                     <!--type="textarea"-->
-                    <!--value=""-->
                 <!--&gt;</lnd-form-field>-->
             <!--</div>-->
             <!--<div class="col-sm-3">-->
@@ -243,7 +254,6 @@
                     <!--placeholder="Warning textarea"-->
                     <!--label="Warning"-->
                     <!--type="textarea"-->
-                    <!--value=""-->
                     <!--[warning]="true"-->
                 <!--&gt;</lnd-form-field>-->
             <!--</div>-->
@@ -255,7 +265,6 @@
                     <!--label="Error"-->
                     <!--[touched]="true"-->
                     <!--type="textarea"-->
-                    <!--value=""-->
                 <!--&gt;</lnd-form-field>-->
             <!--</div>-->
         <!--</div>-->
@@ -269,123 +278,134 @@
                     <!--label="Error"-->
                     <!--[touched]="true"-->
                     <!--type="textarea"-->
-                    <!--value=""-->
                 <!--&gt;</lnd-form-field>-->
             <!--</div>-->
         <!--</div>-->
     <!--</form>-->
 <!--</div>-->
-<!--<h3>Radio</h3>-->
-<!--<div class="static-pages">-->
-    <!--<form>-->
-        <!--<h4>Normal</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="normal-radio"-->
-                    <!--label="Radio label"-->
-                    <!--type="radio"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<h4>Disabled</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--[disabled]="true"-->
-                    <!--id="disabled-radio"-->
-                    <!--label="Disabled radio"-->
-                    <!--type="radio"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--[disabled]="true"-->
-                    <!--[checked]="true"-->
-                    <!--id="disabled-radio-checked"-->
-                    <!--label="Disabled radio checked"-->
-                    <!--type="radio"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<h4>Status</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="success-radio-checked"-->
-                    <!--label="Success radio"-->
-                    <!--[success]="true"-->
-                    <!--type="radio"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="warning-radio"-->
-                    <!--label="Warning radio"-->
-                    <!--[warning]="true"-->
-                    <!--type="radio"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--error=" "-->
-                    <!--id="error-radio"-->
-                    <!--label="Error radio"-->
-                    <!--[touched]="true"-->
-                    <!--type="radio"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</form>-->
-    <!--<form class="was-validated">-->
-        <!--<h4>Validate</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--error="This field is required"-->
-                    <!--id="error-radio-validate"-->
-                    <!--label="Error radio"-->
-                    <!--[checked]="true"-->
-                    <!--[touched]="true"-->
-                    <!--type="radio"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</form>-->
-<!--</div>-->
-<!--<h3>Checkbox</h3>-->
-<!--<div class="static-pages">-->
-    <!--<form>-->
-        <!--<h4>Normal</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="normal-checkbox"-->
-                    <!--label="Checkbox label"-->
-                    <!--type="checkbox"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<h4>Disabled</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--[disabled]="true"-->
-                    <!--id="disabled-checkbox"-->
-                    <!--label="Disabled checkbox"-->
-                    <!--type="checkbox"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--[disabled]="true"-->
-                    <!--id="disabled-checkbox-checked"-->
-                    <!--label="Disabled checkbox checked"-->
-                    <!--[checked]="true"-->
-                    <!--type="checkbox"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
+<h3>Radio</h3>
+<div class="static-pages">
+    <form>
+        <h4>Normal</h4>
+        <div class="row">
+            <div class="col-md-4">
+                <lnd-form-field
+                    id="normal-radio"
+                    label="Radio label"
+                    [type]="'RADIOGROUP'"
+                    [options]="config.options"
+                    [defaultRadioGroupValue]="config.options[1].key">
+                </lnd-form-field>
+            </div>
+        </div>
+        <!-- <h4>Disabled</h4>
+        <div class="row">
+            <div class="col-md-3">
+                <lnd-form-field
+                    [disabled]="true"
+                    id="disabled-radio"
+                    label="Disabled radio"
+                    type="radio">
+                </lnd-form-field>
+            </div>
+            <div class="col-md-3">
+                <lnd-form-field
+                    [disabled]="true"
+                    [checked]="true"
+                    id="disabled-radio-checked"
+                    label="Disabled radio checked"
+                    type="radio">
+                </lnd-form-field>
+            </div>
+        </div> -->
+        <!-- <h4>Status</h4>
+        <div class="row">
+            <div class="col-md-3">
+                <lnd-form-field
+                    id="success-radio-checked"
+                    label="Success radio"
+                    [success]="true"
+                    type="radio">
+                </lnd-form-field>
+            </div>
+            <div class="col-md-3">
+                <lnd-form-field
+                    id="warning-radio"
+                    label="Warning radio"
+                    [warning]="true"
+                    type="radio">
+                </lnd-form-field>
+            </div>
+            <div class="col-md-3">
+                <lnd-form-field
+                    error=" "
+                    id="error-radio"
+                    label="Error radio"
+                    [touched]="true"
+                    type="radio">
+                </lnd-form-field>
+            </div>
+        </div> -->
+    </form>
+    <!-- <form class="was-validated">
+        <h4>Validate</h4>
+        <div class="row">
+            <div class="col-md-3">
+                <lnd-form-field
+                    error="This field is required"
+                    id="error-radio-validate"
+                    label="Error radio"
+                    [checked]="true"
+                    [touched]="true"
+                    type="radio">
+                </lnd-form-field>
+            </div>
+        </div>
+    </form> -->
+</div>
+<h3>Checkbox</h3>
+<div class="static-pages">
+    <form>
+        <h4>Normal</h4>
+        <div class="row">
+            <div class="col-md-4">
+                <lnd-form-field
+                    [id]="'normal-checkbox'"
+                    label="Checkbox label"
+                    [type]="'CHECKBOX'">
+                </lnd-form-field>
+            </div>
+            <div class="col-md-4">
+                <lnd-form-field
+                    [id]="'checked-checkbox'"
+                    label="Checked checkbox"
+                    [type]="'CHECKBOX'"
+                    value="1"
+                    [checked]="true">
+                </lnd-form-field>
+            </div>
+        </div>
+        <h4>Disabled</h4>
+        <div class="row">
+            <div class="col-md-4">
+                <lnd-form-field
+                    [disabledField]="true"
+                    id="disabled-checkbox"
+                    label="Disabled checkbox"
+                    [type]="'CHECKBOX'">
+                </lnd-form-field>
+            </div>
+            <div class="col-md-4">
+                <lnd-form-field
+                    [disabledField]="true"
+                    [id]="'disabled-checkbox-checked'"
+                    label="Disabled checkbox checked"
+                    value="1"
+                    [checked]="true"
+                    [type]="'CHECKBOX'">
+                </lnd-form-field>
+            </div>
+        </div>
         <!--<h4>Status</h4>-->
         <!--<div class="row">-->
             <!--<div class="col-sm-3">-->
@@ -414,8 +434,8 @@
                 <!--&gt;</lnd-form-field>-->
             <!--</div>-->
         <!--</div>-->
-    <!--</form>-->
-<!--</div>-->
+    </form>
+</div>
 <!--<h3>Selectbox</h3>-->
 <!--<div class="static-pages">-->
     <!--<form>-->
