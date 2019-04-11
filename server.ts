@@ -3,13 +3,18 @@ import 'zone.js/dist/zone-node';
 import 'reflect-metadata';
 
 import { enableProdMode } from '@angular/core';
-
 import * as express from 'express';
 import { join } from 'path';
+import { readFileSync } from 'fs';
 
 // ssr DOM
 import { createWindow } from 'domino';
-import { readFileSync } from 'fs';
+
+// Express Engine
+import { ngExpressEngine } from '@nguniversal/express-engine';
+
+// Import module map for lazy loading
+import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
 
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
@@ -34,6 +39,7 @@ const config = JSON.parse(configString);
 win['angularDevstack'] = {};
 win['angularDevstack']['config'] = config.config;
 
+// create global variables
 global['window'] = win;
 global['document'] = win.document;
 
@@ -42,12 +48,6 @@ const {
     AppServerModuleNgFactory,
     LAZY_MODULE_MAP,
 } = require('./dist/server/main');
-
-// Express Engine
-import { ngExpressEngine } from '@nguniversal/express-engine';
-
-// Import module map for lazy loading
-import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
 
 app.engine('html', ngExpressEngine({
     bootstrap: AppServerModuleNgFactory,
