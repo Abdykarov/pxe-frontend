@@ -1,74 +1,49 @@
 import {
     ChangeDetectorRef,
     Component,
-    OnInit,
 } from '@angular/core';
 import {
     FormBuilder,
     FormGroup,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
-import {
-    first,
-    takeUntil,
-} from 'rxjs/operators';
+
 import * as R from 'ramda';
+import { Apollo } from 'apollo-angular';
+import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { loginFormFields } from './landing-page.config';
+import { OverlayService } from 'src/common/graphql/services/overlay.service';
 
 @Component({
     selector: 'lnd-landing-page',
     templateUrl: './landing-page.component.html',
     styleUrls: ['./landing-page.component.scss'],
 })
-export class LandingPageComponent extends AbstractComponent implements OnInit {
-    public showLogin = false;
-    public loginForm: FormGroup;
-    public loading = false;
-    public errors: any;
-    public rates: any;
-    public loginLoading = false;
+export class LandingPageComponent extends AbstractComponent {
     public loginError = false;
+    public loginForm: FormGroup;
+    public loginLoading = false;
+    public showLogin = false;
+
+    public counter = 0;
+    public visible = false;
 
     constructor(
         private apollo: Apollo,
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private fb: FormBuilder,
+        private overlayService: OverlayService,
         private router: Router,
     ) {
         super();
         this.loginForm = this.fb.group(loginFormFields);
     }
 
-    ngOnInit() {
-        this.apollo
-            .watchQuery({
-                query: gql`
-                    {
-                        employee(id:1) {
-                            firstName
-                            address
-                        }
-                    }
-                `,
-            })
-            .valueChanges
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe(result => {
-                this.rates = result.data;
-                this.loading = result.loading;
-                this.errors = result.errors;
-            });
-    }
-
-    public submitForm = () => {
+    public submitLoginForm = () => {
         R.pipe(
             R.keys,
             R.map((field) => {
@@ -84,18 +59,9 @@ export class LandingPageComponent extends AbstractComponent implements OnInit {
             this.loginError = false;
             this.authService
                 .login(this.loginForm.value)
-                .pipe(first())
                 .subscribe(
-                    data => {
-                        this.loginLoading = false;
-                        this.authService.checkLogin();
-                        if (this.authService.isLogged()) {
-                            this.router.navigate(['/secured/dashboard']);
-                        } else {
-                            this.loginError = true;
-                            this.loginLoading = false;
-                        }
-                        this.cd.markForCheck();
+                    () => {
+                        this.router.navigate(['/secured']);
                     },
                     error => {
                         this.loginError = true;
@@ -105,23 +71,14 @@ export class LandingPageComponent extends AbstractComponent implements OnInit {
         }
     }
 
-    public resetForm = () => {
-        R.pipe(
-            R.keys,
-            R.map((field) => {
-                this.loginForm
-                    .get(field)
-                    .setValue('');
-            }),
-        )(this.loginForm.controls);
-        this.loginForm.reset();
-        this.loginError = false;
-    }
-
     public toggleLoginDialog = () => {
         if (!this.loginLoading) {
             this.showLogin = !this.showLogin;
-            this.resetForm();
+            this.overlayService.toggleOverlay()
+                .pipe(
+                    takeUntil(this.destroy$),
+                )
+                .subscribe();
         }
     }
 }

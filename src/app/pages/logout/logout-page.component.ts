@@ -16,6 +16,9 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LogoutPageComponent extends AbstractComponent implements OnInit {
     public error = false;
 
+    public counter = 0;
+    public visible = false;
+
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,

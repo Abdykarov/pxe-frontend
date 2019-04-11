@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="126px" height="155px" viewBox="0 0 126 155" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 53.2 (72643) - https://sketchapp.com -->
+    <title>C3183B7A-452D-426E-B755-9E0D04074BD5</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <path d="M4.67157288,54.8284271 L56.6715729,2.82842712 C58.23367,1.26632996 60.76633,1.26632996 62.3284271,2.82842712 L114.328427,54.8284271 C115.078573,55.5785726 115.5,56.5959883 115.5,57.6568542 L115.5,143 C115.5,145.209139 113.709139,147 111.5,147 L7.5,147 C5.290861,147 3.5,145.209139 3.5,143 L3.5,57.6568542 C3.5,56.5959883 3.92142736,55.5785726 4.67157288,54.8284271 Z" id="path-1"></path>
+        <filter x="-7.6%" y="-4.5%" width="115.2%" height="111.7%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.170084227   0 0 0 0 0.299500553   0 0 0 0 0.428916879  0 0 0 0.161175272 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Master-page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Colors,-icons" transform="translate(-233.000000, -820.000000)">
+            <g id="Group-5-Copy" transform="translate(236.000000, 821.000000)">
+                <g id="Rectangle-Copy-14">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#F6FAFD" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <path d="M-1.98951966e-13,60 L57.1715729,2.82842712 C58.73367,1.26632996 61.26633,1.26632996 62.8284271,2.82842712 L120,60" id="Line-4" stroke="#DDE4EB" stroke-width="4" stroke-linecap="square" fill-rule="nonzero"></path>
+                <circle id="Oval" fill="#DDE4EB" fill-rule="nonzero" cx="59" cy="46" r="10"></circle>
+                <rect id="Rectangle-Copy-20" fill="#DDE4EB" fill-rule="nonzero" x="64.5" y="85" width="29" height="62"></rect>
+                <rect id="Rectangle-Copy-4" stroke="#F6FAFD" stroke-width="3" fill="#2B4762" fill-rule="nonzero" x="38.5" y="83.5" width="16" height="16"></rect>
+                <rect id="Rectangle-Copy-6" stroke="#F6FAFD" stroke-width="3" fill="#2B4762" fill-rule="nonzero" x="38.5" y="99.5" width="16" height="16"></rect>
+                <rect id="Rectangle-Copy-5" stroke="#F6FAFD" stroke-width="3" fill="#2B4762" fill-rule="nonzero" x="22.5" y="83.5" width="16" height="16"></rect>
+                <rect id="Rectangle-Copy-7" stroke="#F6FAFD" stroke-width="3" fill="#2B4762" fill-rule="nonzero" x="22.5" y="99.5" width="16" height="16"></rect>
+                <rect id="Rectangle-Copy-28" fill="#2B4762" fill-rule="nonzero" x="67" y="115" width="8" height="3"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

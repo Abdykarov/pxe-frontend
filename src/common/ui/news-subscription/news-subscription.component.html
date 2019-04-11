@@ -1,0 +1,47 @@
+<ng-container *ngIf="!subscriptionFormSent">
+    <h3 class="h3--public">
+        Chci mít také přístup k&nbsp;jiným cenám, možnost&nbsp;měnit dodavatele jen na&nbsp;jedno kliknutí a&nbsp;zbavit se starostí s&nbsp;převodem.
+    </h3>
+    <lnd-alert *ngIf="subscriptionGlobalError.length"
+               type="danger">
+        <ng-container *ngFor="let globalError of subscriptionGlobalError">
+            {{globalError}}<br>
+        </ng-container>
+    </lnd-alert>
+    <form [formGroup]="subscriptionForm"
+          (keydown)="resetCustomFieldError()"
+          (change)="resetCustomFieldError()"
+          autocomplete="off">
+        <lnd-form-field
+                [error]="subscriptionFormError.email || subscriptionForm.controls.email.errors"
+                [formControl]="subscriptionForm.controls.email"
+                [id]="'email'"
+                label="E-mail"
+                [success]="subscriptionForm.controls.email.valid && (subscriptionForm.controls.email.touched || subscriptionFormError.email)"
+                [touched]="subscriptionForm.controls.email.touched || subscriptionFormError.email"
+                [validationMessages]="subscriptionFormFields.validationMessages.email"
+        ></lnd-form-field>
+        <lnd-form-field
+                [error]="subscriptionFormError.consent || subscriptionForm.controls.consent.errors"
+                [formControl]="subscriptionForm.controls.consent"
+                [id]="'consent'"
+                label="Souhlasím se zásadami bezpečnosti"
+                [success]="subscriptionForm.controls.consent.valid && (subscriptionForm.controls.consent.touched || subscriptionFormError.consent)"
+                [touched]="subscriptionForm.controls.consent.touched || subscriptionFormError.consent"
+                [type]="'CHECKBOX'"
+                [validationMessages]="subscriptionFormFields.validationMessages.consent"
+        ></lnd-form-field>
+        <lnd-button
+                type="primary"
+                (action)="submitForm()"
+                [isDisabled]="submitSubscriptionLoading"
+                label="Odeslat">
+        </lnd-button>
+    </form>
+</ng-container>
+<ng-container *ngIf="subscriptionFormSent">
+    <h3 class="h3--public">
+        Děkujeme za váš zájem.<br>
+        Hned jak službu spustíme, tak se vám ozveme.
+    </h3>
+</ng-container>

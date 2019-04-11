@@ -17,10 +17,6 @@
 			position: relative;
 			padding-left: $spacer;
 			padding-bottom: ( $lists-margin-bottom / 2 );
-
-			&:last-child {
-				padding-bottom: 0;
-			}
 		}
 
 		ol,
@@ -112,3 +108,4 @@
 		}
 	}
 }
+

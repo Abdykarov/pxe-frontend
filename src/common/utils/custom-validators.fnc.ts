@@ -29,7 +29,7 @@ export class CustomValidators {
         }
 
         return {
-            pattern: true,
+            email: true,
         };
     }
 }

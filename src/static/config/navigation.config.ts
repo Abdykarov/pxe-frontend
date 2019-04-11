@@ -23,10 +23,10 @@ export const staticNavigationConfig: INavigationConfig = [
                 //     'label': 'Banners',
                 //     'url': '/banners',
                 // },
-                // {
-                //     'label': 'Buttons',
-                //     'url': '/buttons',
-                // },
+                {
+                    'label': 'Buttons',
+                    'url': '/basic/buttons',
+                },
                 // {
                 //     'label': 'Cards',
                 //     'url': '/card',
@@ -39,13 +39,13 @@ export const staticNavigationConfig: INavigationConfig = [
                 //     'label': 'Drop*',
                 //     'url': '/dropdown',
                 // },
-                // {
-                //     'label': 'Forms',
-                //     'url': '/forms',
-                // },
+                {
+                    'label': 'Forms',
+                    'url': '/basic/forms',
+                },
                 {
                     'label': 'Icons',
-                    'url': '/icons',
+                    'url': '/basic/icons',
                 },
                 // {
                 //     'label': 'Indicators',

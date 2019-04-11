@@ -1,17 +1,11 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { AuthInterceptor } from './auth.interceptor';
-import { LogoutInterceptor } from './logout.interceptor';
+import { ApiInterceptor } from './api.interceptor';
 
 export const InterceptorProviders = [
     {
         provide: HTTP_INTERCEPTORS,
-        useClass: AuthInterceptor,
-        multi: true,
-    },
-    {
-        provide: HTTP_INTERCEPTORS,
-        useClass: LogoutInterceptor,
+        useClass: ApiInterceptor,
         multi: true,
     },
 ];

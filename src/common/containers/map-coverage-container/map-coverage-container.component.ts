@@ -1,0 +1,13 @@
+import { Component } from '@angular/core';
+
+import { config } from './coverage.config';
+import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
+
+@Component({
+    selector: 'pxe-map-coverage-container',
+    templateUrl: './map-coverage-container.component.html',
+    styleUrls: ['./map-coverage-container.component.scss'],
+})
+export class MapCoverageContainerComponent {
+    public config: IMapCoverageConfig = config;
+}

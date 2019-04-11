@@ -1,29 +1,25 @@
 <div
     id="top"
     class="body-inner"
+    [class.body-inner--overlay]="showOverlay"
+    [class.body-inner--overlay-full]="showOverlay"
     [ngClass]="{
-        'body-inner--overlay' : (mobileMenuOpened$ | async) || (showOverlay$ | async),
-        'body-inner--overlay-full' : (showOverlay$ | async) && !(isOverlayFromHeader$ | async),
-        'body-inner--overlay-header body-inner--overlay-aside' : (showOverlay$ | async) && (isOverlayFromHeader$ | async)
+        'body-inner--overlay-header body-inner--overlay-aside' : showOverlay
     }">
-    <lnd-header
-        [isMenuOpen]="mobileMenuOpened$ | async"
-        (toggleMenu)="toggleMenuOpen()">
+    <lnd-header>
     </lnd-header>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 container-content">
+            <div class="col-md-12 container-content">
                 <main class="main">
                     <router-outlet></router-outlet>
                 </main>
             </div>
             <lnd-navigation
-                [config]="navigationConfig$ | async"
-                [isMenuOpen]="mobileMenuOpened$ | async"
-                [itemOpened]="navigationItemOpened$ | async"
-                (openItem)="toggleOpenItem($event)">
+                [config]="navConfig"
+                (openItem)="toggleNavigationItem($event)">
             </lnd-navigation>
         </div>
     </div>
-    <lnd-footer [isMenuOpen]="mobileMenuOpened$ | async"></lnd-footer>
+    <lnd-footer></lnd-footer>
 </div>

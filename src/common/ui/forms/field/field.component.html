@@ -46,31 +46,36 @@
             <span
                 class="input-group-switch__text input-group-switch__text--prepend"
                 [class.input-group-switch__text--active]="!checked"
-                [class.input-group-switch__text--disabled]="!!disabled">
+                [class.input-group-switch__text--disabled]="!!disabledField">
                 {{ prependText }}
             </span>
         </div>
-        <input
+        <div 
             *ngSwitchDefault
-            #field
-            type="text"
-            (blur)="blur.emit($event)"
-            class="form-control"
-            [class.form-control--not-empty]="!!value"
-            [class.form-control--placeholder]="hideLabel"
-            [class.is-invalid]="!!error && !!touched"
-            [class.is-valid]="success"
-            [class.is-warning]="warning"
-            [disabled]="disabledField"
-            [id]="id"
-            [name]="name"
-            [ngClass]="customFieldClass"
-            [(ngModel)]="value"
-            [placeholder]="placeholder"
-            [readonly]="readonly"
-            [required]="required"
-            [attr.autocomplete]="autocomplete"
-            >
+            class="form-control-wrapper"
+            [class.invalid-input]="!!error && !!touched"
+            [class.disabled-input]="!!disabledField">
+            <input
+                #field
+                type="text"
+                (blur)="blur.emit($event)"
+                class="form-control"
+                [class.form-control--not-empty]="!!value"
+                [class.form-control--placeholder]="hideLabel"
+                [class.is-invalid]="!!error && !!touched"
+                [class.is-valid]="success"
+                [class.is-warning]="warning"
+                [disabled]="disabledField"
+                [id]="id"
+                [name]="name"
+                [ngClass]="customFieldClass"
+                [(ngModel)]="value"
+                [placeholder]="placeholder"
+                [readonly]="readonly"
+                [required]="required"
+                [attr.autocomplete]="autocomplete"
+                >
+        </div>
         <input
             *ngSwitchCase="'NUMBER'"
             #field
@@ -174,7 +179,7 @@
             class="custom-control-input"
             [class.form-control--not-empty]="!!value"
             [class.form-control--placeholder]="hideLabel"
-            [class.is-invalid]="!!error"
+            [class.is-invalid]="!!error && !!touched"
             [class.is-valid]="success"
             [class.is-warning]="warning"
             [disabled]="disabledField"
@@ -328,14 +333,14 @@
                     type === 'SWITCH' ? 'input-group-switch__text input-group-switch__text--append' : 'input-group-append__text'
                 ]"
                 [class.input-group-switch__text--active]="type === 'SWITCH' && !!checked"
-                [class.input-group-switch__text--disabled]="type === 'SWITCH' && !!disabled">
+                [class.input-group-switch__text--disabled]="type === 'SWITCH' && !!disabledField">
                 {{ appendText }}
             </span>
         </div>
         <div
             *ngIf="!!subtext"
             class="input-subtext"
-            [class.input-subtext--disabled]="!!disabled">
+            [class.input-subtext--disabled]="!!disabledField">
             {{ subtext }}
         </div>
         <div

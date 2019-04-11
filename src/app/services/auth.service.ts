@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import {
-    map,
-} from 'rxjs/operators';
+import { of } from 'rxjs';
+import { map} from 'rxjs/operators';
 
 import { CookiesService } from './cookies.service';
 import { environment } from 'src/environments/environment';
@@ -48,6 +47,7 @@ export class AuthService {
                         }
                         const user =  JSON.stringify({token: response.token});
                         this.cookiesService.set(this.cookieName, user, this.expiresTime);
+                        this.checkLogin();
                     }
                     return response;
                 }),
@@ -63,6 +63,11 @@ export class AuthService {
                     return response;
                 }),
             );
+    }
+
+    refreshToken = () => {
+        // TODO refresh token logic
+        return of(true);
     }
 
     getToken = (): string => this.token;
