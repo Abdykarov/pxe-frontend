@@ -7,7 +7,7 @@
 
 .container-content {
 	padding-top: $header-height;
-	padding-bottom: $spacer;
+	padding-bottom: 100px;
 
 	// Media queries
 	@include media-breakpoint-up(md) {
