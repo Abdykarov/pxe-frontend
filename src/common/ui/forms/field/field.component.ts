@@ -17,9 +17,11 @@ import {
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 
+import { createStringFromTemplate } from 'src/common/utils';
 import { ErrorMessages } from '../form.constants';
 import { FieldTypes } from '../models/field-types.model';
 import { IOption } from '../models/option.model';
+import { IValidationMessages } from '../models/validation-messages.model';
 
 @Component({
     selector: 'lnd-form-field',
@@ -141,6 +143,9 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     public type: string = FieldTypes.INPUT;
 
     @Input()
+    public validationMessages?: IValidationMessages;
+
+    @Input()
     public warning = false;
 
     onChange: any = () => {};
@@ -211,15 +216,6 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
         }
     }
 
-    private formatErrorObjectValues = (obj: object) => {
-        R.map(key => {
-            if (R_.isNumber(obj[key])) {
-                obj[key] = obj[key];
-            }
-        }, R.keys(obj));
-        return obj;
-    }
-
     public getErrorMessage = () => {
         if (R.isNil(this.error)) {
             return;
@@ -231,7 +227,11 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
 
         if (R_.isObject(this.error)) {
             const errorType = Object.keys(this.error)[0];
-            return this.formatErrorObjectValues(this.error[errorType]);
+            const message = this.validationMessages && this.validationMessages[errorType] || ErrorMessages[errorType];
+            return createStringFromTemplate(
+                message || errorType,
+                this.error[errorType],
+            );
         }
     }
 }

@@ -14,6 +14,8 @@ import {
 export class HeaderComponent {
     public isHeaderSticked: boolean;
 
+    @Input() isPublic = false;
+
     @Input() isMenuOpen: boolean;
 
     @Output()
