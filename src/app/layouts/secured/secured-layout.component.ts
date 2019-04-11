@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import {
-    NavigationEnd,
-    Router,
-} from '@angular/router';
+import { Router } from '@angular/router';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
@@ -10,9 +7,8 @@ import {
     takeUntil,
     map,
 } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
 
-import { AbstractComponent } from 'src/common/abstract.component';
+import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
 import { IStoreUi } from 'src/common/graphql/models/store.model';
 import { NavigationService as NavigationApolloService} from 'src/common/graphql/services/navigation.service';
@@ -22,26 +18,21 @@ import { OverlayService } from 'src/common/graphql/services/overlay.service';
 @Component({
     templateUrl: './secured-layout.component.html',
 })
-export class SecuredLayoutComponent extends AbstractComponent {
+export class SecuredLayoutComponent extends AbstractLayoutComponent {
     public navConfig: INavigationConfig = [];
-    public showOverlay = false;
-    private toggleSubscription: Subscription;
 
     constructor(
-        private apollo: Apollo,
+        protected apollo: Apollo,
         private navigationApolloService: NavigationApolloService,
         private navigationService: NavigationService,
-        private overlayService: OverlayService,
-        private router: Router,
+        protected overlayService: OverlayService,
+        protected router: Router,
     ) {
-        super();
-        this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd && this.showOverlay) {
-                this.toggleSubscription = this.overlayService.toggleOverlay(false)
-                    .subscribe();
-                this.toggleSubscription.unsubscribe();
-            }
-        });
+        super(
+            apollo,
+            overlayService,
+            router,
+        );
 
         this.navigationService.getNavigationConfig();
 
@@ -56,19 +47,10 @@ export class SecuredLayoutComponent extends AbstractComponent {
                     this.showOverlay = current.showOverlay;
                 }
             });
-
     }
 
-    public toggleOpenItem (navigationItem) {
-        this.navigationApolloService.toggleOpenItem(navigationItem)
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe();
-    }
-
-    public click() {
-        this.overlayService.toggleOverlay()
+    public toggleNavigationItem (navigationItem) {
+        this.navigationApolloService.toggleNavigationItem(navigationItem)
             .pipe(
                 takeUntil(this.destroy$),
             )
