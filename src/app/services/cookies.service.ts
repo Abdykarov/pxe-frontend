@@ -35,5 +35,6 @@ export class CookiesService {
             expires: d.toUTCString(),
             path: '/',
         };
+        return options;
     }
 }
