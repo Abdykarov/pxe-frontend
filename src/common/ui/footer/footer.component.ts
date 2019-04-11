@@ -23,22 +23,21 @@ export class FooterComponent {
     onWindowScroll() {
         if (
             window.pageYOffset ||
-            document.documentElement.scrollTop ||
-            document.body.scrollTop > 100) {
-                this.scrollToTopIsVisible = true;
+            this.document.documentElement.scrollTop ||
+            this.document.body.scrollTop > 100
+        ) {
+            this.scrollToTopIsVisible = true;
         } else if (
             this.scrollToTopIsVisible &&
             window.pageYOffset ||
-            document.documentElement.scrollTop ||
-            document.body.scrollTop < 10) {
-                this.scrollToTopIsVisible = false;
-            }
+            this.document.documentElement.scrollTop ||
+            this.document.body.scrollTop < 10
+        ) {
+            this.scrollToTopIsVisible = false;
+        }
     }
 
-    constructor(
-        @Inject(DOCUMENT)
-        private document: Document,
-    ) {}
+    constructor(@Inject(DOCUMENT) private document: Document) {}
 
     public scrollToTop = () => {
         const currentScroll = this.document.documentElement.scrollTop || this.document.body.scrollTop;

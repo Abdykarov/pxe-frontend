@@ -30,7 +30,7 @@ const routes: Routes = [
         RouterModule.forRoot(
             routes,
             {
-                enableTracing: !environment.production,
+                enableTracing: environment.production || false,
                 preloadingStrategy: PreloadAllModules,
                 initialNavigation: 'enabled',
             },

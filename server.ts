@@ -8,8 +8,8 @@ import * as express from 'express';
 import { join } from 'path';
 
 // ssr DOM
-import * as domino from 'domino';
-import * as fs from 'fs';
+import { createWindow } from 'domino';
+import { readFileSync } from 'fs';
 
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
@@ -21,8 +21,18 @@ const PORT = process.env.PORT || 4200;
 const DIST_FOLDER = join(process.cwd(), 'dist');
 
 // index from browser build!
-const template = fs.readFileSync(join(DIST_FOLDER, 'app', 'index.html')).toString();
-const win = domino.createWindow(template);
+const template = readFileSync(join(DIST_FOLDER, 'app', 'index.html')).toString();
+const win = createWindow(template);
+
+// create configuration
+const configJs = readFileSync(join(DIST_FOLDER, 'app', 'assets', 'configurations', 'config.js')).toString();
+const configString = configJs.substring(
+    configJs.indexOf('= ') + 1,
+    configJs.indexOf(';'),
+);
+const config = JSON.parse(configString);
+win['angularDevstack'] = {};
+win['angularDevstack']['config'] = config.config;
 
 global['window'] = win;
 global['document'] = win.document;
