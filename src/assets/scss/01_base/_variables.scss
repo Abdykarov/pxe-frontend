@@ -33,7 +33,7 @@ $font-secondary:                   #919191;
 $text-muted:                       $font-secondary;
 
 $primary:                          #0097ff;                    // Primary btn
-$primary-dark:                     darken($primary, 5%);         // Primary btn hover
+$primary-dark:                     #0088e5;                    // Primary btn hover
 $secondary-lighten:                #926ece;                    // Secondary btn hover
 $secondary:                        #7355a6;                    // Secondary btn
 $secondary-dark:                   darken($secondary, 5%);       // Secondary btn hover
@@ -236,26 +236,6 @@ $table-dark-accent-bg:        $table-accent-bg;
 $table-dark-hover-bg:         $table-hover-bg;
 $table-dark-color:            $table-head-color;
 $table-striped-order:         odd;
-
-
-// Buttons
-$btn-font-weight:                  700;
-$btn-focus-box-shadow:             none;
-$btn-active-box-shadow:            $btn-focus-box-shadow;
-$btn-disabled-opacity:             1;
-$btn-link-disabled-color:          $disabled;
-$btn-width:                        160px;
-$btn-height:                       40px;
-$btn-height-small:                 30px;
-$btn-padding-y:                    ( $spacer / 3 );
-$btn-padding-x:                    ( $spacer / 2 );
-$btn-line-height:                  ( 18 / 12 );
-$btn-border-radius:                0;
-$btn-padding-y-sm:                 ( $spacer / 6 );
-$btn-padding-x-sm:                 ( $spacer / 3 );
-$font-size-sm:                     .688rem;
-$btn-line-height-sm:               ( 18 / 11 );
-$btn-border-radius-sm:             $btn-border-radius;
 
 
 // Dropdown

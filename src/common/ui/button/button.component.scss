@@ -7,6 +7,9 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
+// Component variables
+@import 'button.component.variables.scss';
+
 // Bootstrap button import
 @import '~bootstrap/scss/buttons';
 
@@ -21,19 +24,12 @@
 
 .btn {
 	position: relative;
-	width: 100%;
+	min-width: $btn-width;
 	min-height: $btn-height;
-	text-transform: uppercase;
 	text-decoration: none;
 	white-space: normal;
 	box-shadow: none;
 	border: none;
-
-	// Media queries
-	@include media-breakpoint-up(sm) {
-		min-width: $btn-width;
-		width: auto;
-	}
 
 	&:focus,
 	&.focus {
@@ -57,25 +53,25 @@
 	}
 
 	&.btn-primary {
-		&:focus,
-		&.focus,
 		&:hover,
-		&:active {
+		&:active,
+		&:focus:active {
 			background-color: $primary-dark;
 		}
 	}
 
 	&.btn-secondary {
+		color: $btn-secondary-color;
+		background-color: $btn-secondary-bg;
+		box-shadow: $btn-secondary-shadow;
+
 		&:focus,
 		&.focus,
 		&:hover,
-		&:active {
-			background-color: $secondary-dark;
-		}
-
-		&:not(:disabled):not(.disabled):active,
-		&:not(:disabled):not(.disabled).active {
-			background-color: $blue-400;
+		&:active,
+		&:focus:active {
+			color: $btn-secondary-color;
+			background-color: $btn-secondary-bg-hover;
 		}
 	}
 
@@ -283,8 +279,6 @@
 	&.btn-disabled,
 	&[disabled],
 	fieldset[disabled] & {
-		background: $gray-200;
-		color: rgba($white, .6);
 		pointer-events: none;
 	}
 
