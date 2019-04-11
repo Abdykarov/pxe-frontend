@@ -14,12 +14,12 @@
 	&--public {
 		position: relative;
 		background-color: $white;
-		padding: 60px 0;
+		padding: ( $spacer * 3 ) 0;
 		text-align: center;
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			padding: 70px 0;
+			padding: ( $spacer * 3.5 ) 0;
 		}
 	}
 

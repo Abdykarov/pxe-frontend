@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { IDropdownItem } from 'src/common/ui/dropdown/models/item.model';
-
 import { FormsPageConfig } from './config';
 
 @Component({
@@ -12,7 +12,9 @@ export class FormsPageComponent {
     public dropdownItems: Array<IDropdownItem>;
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
-    constructor(public config: FormsPageConfig, ) {
+    constructor(
+        public config: FormsPageConfig,
+    ) {
         this.dropdownItems = [];
         const item1 = <IDropdownItem>{
                 label: 'FOO',

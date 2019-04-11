@@ -1,8 +1,7 @@
 <header
     class="header"
-    [ngClass]="[
-        isPublic ? 'header--public' : 'header--secured'
-    ]">
+    [class.footer--public]="isPublic"
+    [class.footer--secured]="!isPublic">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
