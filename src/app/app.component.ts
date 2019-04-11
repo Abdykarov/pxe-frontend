@@ -4,10 +4,17 @@ import {
     Inject,
     PLATFORM_ID,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
-import { isPlatformBrowser} from '@angular/common';
+import {
+    DOCUMENT,
+    isPlatformBrowser,
+} from '@angular/common';
+import {
+    NavigationEnd,
+    Router,
+} from '@angular/router';
 
 import { environment } from 'src/environments/environment';
+import { GTMService } from './services/gtm.service';
 
 @Component({
     selector: 'lnd-root',
@@ -17,6 +24,8 @@ import { environment } from 'src/environments/environment';
 })
 export class AppComponent {
     constructor(
+        private gtmService: GTMService,
+        private router: Router,
         @Inject(DOCUMENT) private document: Document,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
@@ -26,5 +35,11 @@ export class AppComponent {
             script.src = 'https://www.googletagmanager.com/gtag/js?id=' + environment.gtmId;
             this.document.head.prepend(script);
         }
+
+        this.router.events.subscribe(event => {
+            if (event instanceof NavigationEnd) {
+                gtmService.gtm(event);
+            }
+        });
     }
 }

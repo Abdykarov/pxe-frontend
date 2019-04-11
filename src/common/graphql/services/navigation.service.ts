@@ -35,7 +35,7 @@ export class NavigationService {
         });
     }
 
-    public toggleOpenItem(navigationItem) {
+    public toggleNavigationItem(navigationItem) {
         return this.apollo
             .mutate({
                 mutation: navigationItem.url === this.LOGOUT_URL ? logout : openItem,

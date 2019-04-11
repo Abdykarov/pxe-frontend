@@ -1,0 +1,72 @@
+<lnd-tabs>
+
+    <lnd-tab tabTitle="ELEKTŘINA">
+        Aktuální pokrytí
+        <br />
+            {{config.power.places}}
+        <br />
+            {{config.power.places.toString() | plural:'place'}}
+        <br />
+        <br />
+
+        Výkon temelínu
+        <br />
+        {{config.power.notification}}
+        <br />
+        {{config.power.notification.toString() | plural:'day'}}
+        <br />
+        <br />
+
+        Celkový odběr
+        <br />
+        {{config.power.consumption | consumption}}
+        <br />
+        <ng-container *ngIf="config.power.suppliers.length">
+            <br />
+            Naši dodavatelé elektřiny
+            <br />
+            <div *ngFor="let supplier of config.power.suppliers">
+                <a [href]="supplier.supplierUrl" target=_blank>
+                    <img
+                        [src]="supplier.logoUrl"
+                        [attr.alt]="supplier.title">
+                </a>
+            </div>
+        </ng-container>
+    </lnd-tab>
+
+    <lnd-tab tabTitle="PLYN">
+        Aktuální pokrytí
+        <br />
+        {{config.gas.places}}
+        <br />
+        {{ config.gas.places.toString() | plural:'place'}}
+        <br />
+        <br />
+
+        Objem největšího zásobníku  plynu v ČR
+        <br />
+        {{config.gas.notification}}
+        <br />
+        násobek
+        <br />
+        <br />
+
+        Celkový odběr
+        <br />
+        {{config.gas.consumption | consumption}}
+        <br />
+        <ng-container *ngIf="config.gas.suppliers.length">
+            <br />
+            Naši dodavatelé plynu
+            <br />
+            <div *ngFor="let supplier of config.gas.suppliers">
+                <a [href]="supplier.supplierUrl" target=_blank>
+                    <img
+                        [src]="supplier.logoUrl"
+                        [attr.alt]="supplier.title">
+                </a>
+            </div>
+        </ng-container>
+    </lnd-tab>
+</lnd-tabs>
