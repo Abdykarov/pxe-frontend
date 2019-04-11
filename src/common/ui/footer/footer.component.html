@@ -1,8 +1,7 @@
 <footer
     class="footer"
-        [ngClass]="[
-            isPublic ? 'footer--public' : 'footer--secured'
-        ]">
+    [class.footer--public]="isPublic"
+    [class.footer--secured]="!isPublic">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 footer-container">
