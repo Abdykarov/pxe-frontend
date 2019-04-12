@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { TermsOfUseComponent } from './terms-of-use.component';
-import { TermsOfUseRoutingModule } from './terms-of-use-routing.module';
+import { TermsOfUseRoutingModule } from './terms-of-use.routing';
 
 @NgModule({
     declarations: [

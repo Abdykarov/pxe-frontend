@@ -1,7 +1,7 @@
 <footer
     class="footer"
-    [class.footer--public]="isPublic"
-    [class.footer--secured]="!isPublic">
+    [class.footer--public]="isSimpleFooter"
+    [class.footer--secured]="!isSimpleFooter">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 footer-container">
@@ -25,7 +25,7 @@
             </div>
             <div
                 class="col-12"
-                *ngIf="!isPublic">
+                *ngIf="!isSimpleFooter">
                 <div class="cookies-holder">
                     <p class="cookies mb-0">
                         Při poskytování služeb nám pomáhají soubory cookie. Používáním webu vyjadřujete souhlas.

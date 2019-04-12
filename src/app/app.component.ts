@@ -1,7 +1,13 @@
 import {
     Component,
     ChangeDetectionStrategy,
+    Inject,
+    PLATFORM_ID,
 } from '@angular/core';
+import {
+    DOCUMENT,
+    isPlatformBrowser,
+} from '@angular/common';
 import {
     NavigationEnd,
     Router,
@@ -17,21 +23,23 @@ import { GTMService } from './services/gtm.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-
     constructor(
         private gtmService: GTMService,
         private router: Router,
+        @Inject(DOCUMENT) private document: Document,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
-        const script = document.createElement('script');
-        script.async = true;
-        script.src = 'https://www.googletagmanager.com/gtag/js?id=' + environment.gtmId;
-        document.head.prepend(script);
+        if (isPlatformBrowser(this.platformId)) {
+            const script = this.document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=' + environment.gtmId;
+            this.document.head.prepend(script);
 
-        this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd) {
-                gtmService.gtm(event);
-            }
-        });
+            this.router.events.subscribe(event => {
+                if (event instanceof NavigationEnd) {
+                    gtmService.gtm(event);
+                }
+            });
+        }
     }
-
 }
