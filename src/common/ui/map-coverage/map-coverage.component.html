@@ -62,42 +62,6 @@
                         </div>
                     </div>
                 </div>
-                <ng-container *ngIf="config.power.suppliers.length">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="px-3 px-md-0">
-                                <h3>
-                                    Naši dodavatelé elektřiny
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-md-10 offset-md-1">
-                            <div class="suppliers-holder">
-                                <ul class="suppliers-overview">
-                                    <li class="suppliers-overview__item" *ngFor="let supplier of config.power.suppliers">
-                                        <a
-                                            href="{{supplier.supplierUrl}}"
-                                            target="_blank"
-                                            class="suppliers-overview__link">
-                                            <img
-                                                class="suppliers-overview__picture"
-                                                src="{{supplier.logoUrl}}"
-                                                title="{{supplier.title}}"
-                                                alt="{{supplier.alt}}">
-                                            <img
-                                                class="suppliers-overview__picture-hover"
-                                                src="{{supplier.logoUrlHover}}"
-                                                title="{{supplier.title}}"
-                                                alt="{{supplier.alt}}">
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </ng-container>
             </lnd-tab>
             <lnd-tab tabTitle="PLYN">
                 <div class="row">
@@ -151,43 +115,79 @@
                         </div>
                     </div>
                 </div>
-                <ng-container *ngIf="config.gas.suppliers.length">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="px-3 px-md-0">
-                                <h3>
-                                    Naši dodavatelé plynu
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-md-10 offset-md-1">
-                            <div class="suppliers-holder">
-                                <ul class="suppliers-overview">
-                                    <li class="suppliers-overview__item" *ngFor="let supplier of config.gas.suppliers">
-                                        <a
-                                            href="{{supplier.supplierUrl}}"
-                                            target="_blank"
-                                            class="suppliers-overview__link">
-                                            <img
-                                                class="suppliers-overview__picture"
-                                                src="{{supplier.logoUrl}}"
-                                                title="{{supplier.title}}"
-                                                alt="{{supplier.alt}}">
-                                            <img
-                                                class="suppliers-overview__picture-hover"
-                                                src="{{supplier.logoUrlHover}}"
-                                                title="{{supplier.title}}"
-                                                alt="{{supplier.alt}}">
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </ng-container>
             </lnd-tab>
         </lnd-tabs>
+        <ng-container *ngIf="config.power.suppliers.length">
+            <div class="row">
+                <div class="col-12">
+                    <div class="px-3 px-md-0">
+                        <h3>
+                            Naši dodavatelé elektřiny
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-10 offset-md-1">
+                    <div class="suppliers-holder">
+                        <ul class="suppliers-overview">
+                            <li class="suppliers-overview__item" *ngFor="let supplier of config.power.suppliers">
+                                <a
+                                    href="{{supplier.supplierUrl}}"
+                                    target="_blank"
+                                    class="suppliers-overview__link">
+                                    <img
+                                        class="suppliers-overview__picture"
+                                        src="{{supplier.logoUrl}}"
+                                        title="{{supplier.title}}"
+                                        alt="{{supplier.alt}}">
+                                    <img
+                                        class="suppliers-overview__picture-hover"
+                                        src="{{supplier.logoUrlHover}}"
+                                        title="{{supplier.title}}"
+                                        alt="{{supplier.alt}}">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="config.gas.suppliers.length">
+            <div class="row">
+                <div class="col-12">
+                    <div class="px-3 px-md-0">
+                        <h3>
+                            Naši dodavatelé plynu
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-10 offset-md-1">
+                    <div class="suppliers-holder">
+                        <ul class="suppliers-overview">
+                            <li class="suppliers-overview__item" *ngFor="let supplier of config.gas.suppliers">
+                                <a
+                                    href="{{supplier.supplierUrl}}"
+                                    target="_blank"
+                                    class="suppliers-overview__link">
+                                    <img
+                                        class="suppliers-overview__picture"
+                                        src="{{supplier.logoUrl}}"
+                                        title="{{supplier.title}}"
+                                        alt="{{supplier.alt}}">
+                                    <img
+                                        class="suppliers-overview__picture-hover"
+                                        src="{{supplier.logoUrlHover}}"
+                                        title="{{supplier.title}}"
+                                        alt="{{supplier.alt}}">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
     </div>
 </div>
