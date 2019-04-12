@@ -151,12 +151,13 @@ $headings-margin-bottom:           ( $spacer * 1.5 );
 $blockquote-small-color:           $gray-300 !default;
 $blockquote-font-size:             ( $font-size-base * 1.231 ) !default;
 
-$paragraph-margin-bottom:          ( $spacer * 1.25 );
+$paragraph-margin-bottom:          ( $spacer * 2 );
 
 $list-bullet-size:                 3px;
 $lists-margin-bottom:              ( $spacer * 1.25 );
 
 $border-radius:                    5px;
+$box-shadow:                       0 2px 5px 0 rgba($body-color, .16);
 
 
 // Links
