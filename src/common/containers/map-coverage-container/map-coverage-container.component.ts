@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { config } from './coverage.config';
+import { config } from './map-coverage-container.config';
 import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
 
 @Component({

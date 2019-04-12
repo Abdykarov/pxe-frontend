@@ -1,33 +1,27 @@
 <div
     id="top"
-    class="body-inner"
+    class="body-inner full-layout"
     [ngClass]="{
         'body-inner--overlay' : showOverlay
     }">
-    <header class="header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="header-inner">
-                        <div class="logo-holder">
-                            <a
-                                [routerLink]="['/']"
-                                class="logo">
-                                Angular Devstack
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 container-content container-content--public">
-                <main class="main mt-4 mt-md-0">
-                    <router-outlet></router-outlet>
-                </main>
-            </div>
-        </div>
-    </div>
+    <lnd-header
+        [isPublic]="true">
+    </lnd-header>
+    <main class="main">
+        <router-outlet></router-outlet>
+    </main>
+    <lnd-footer
+        [isSimpleFooter]="isSimpleFooter">
+        <ul class="footer-navigation__list">
+            <li class="footer-navigation__item">
+                <a routerLink="/cookies-policy" class="footer-navigation__link">Politika cookies</a>
+            </li>
+            <li class="footer-navigation__item">
+                <a routerLink="/securing-your-data" class="footer-navigation__link">Zabezpeční vašich dat</a>
+            </li>
+            <li class="footer-navigation__item">
+                <a routerLink="/prague-stock-exchange" class="footer-navigation__link">Pražská burza</a>
+            </li>
+        </ul>
+    </lnd-footer>
 </div>
