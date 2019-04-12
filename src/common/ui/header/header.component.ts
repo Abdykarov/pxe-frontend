@@ -1,11 +1,12 @@
 import {
     Component,
-    HostListener,
-    Input,
-    Output,
     EventEmitter,
+    Input,
+    HostListener,
+    Output,
 } from '@angular/core';
-import { ScrollRegisterService } from 'src/app/layouts/public/services/scroll-register';
+
+import { ScrollToSubscriptionService } from 'src/app/services/scroll-to-subscription';
 
 @Component({
     selector: 'lnd-header',
@@ -34,11 +35,11 @@ export class HeaderComponent {
         }
     }
 
-    scrollToNewSubscription() {
-        this.scrollRegisterService.clickedOnRegistration();
-    }
-
     constructor(
-        private scrollRegisterService: ScrollRegisterService,
+        private scrollToSubscriptionService: ScrollToSubscriptionService,
     ) {}
+
+    scrollToNewSubscription() {
+        this.scrollToSubscriptionService.scrollToSubscription();
+    }
 }

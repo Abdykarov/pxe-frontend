@@ -13,6 +13,10 @@ const routes = [
                 loadChildren: '../../pages/landing/landing-page.module#LandingPageModule',
             },
             {
+                path: 'login',
+                loadChildren: '../../pages/login/login-page.module#LoginPageModule',
+            },
+            {
                 path: 'logout',
                 loadChildren: '../../pages/logout/logout-page.module#LogoutPageModule',
             },

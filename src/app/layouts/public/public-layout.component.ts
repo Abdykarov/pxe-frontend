@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
@@ -18,6 +21,7 @@ import { OverlayService } from 'src/common/graphql/services/overlay.service';
 export class PublicLayoutComponent extends AbstractLayoutComponent {
 
     constructor(
+        protected route: ActivatedRoute,
         protected apollo: Apollo,
         protected overlayService: OverlayService,
         protected router: Router,
@@ -25,6 +29,7 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
         super(
             apollo,
             overlayService,
+            route,
             router,
         );
 
