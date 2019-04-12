@@ -4,12 +4,12 @@ import {
     RouterModule,
 } from '@angular/router';
 
-import { TermsOfUseComponent } from './terms-of-use.component';
+import { LoginComponent } from './login-page.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: TermsOfUseComponent,
+        component: LoginComponent,
     },
 ];
 
@@ -21,4 +21,4 @@ const routes: Routes = [
         RouterModule,
     ],
 })
-export class TermsOfUseRoutingModule {}
+export class LoginRoutingModule {}

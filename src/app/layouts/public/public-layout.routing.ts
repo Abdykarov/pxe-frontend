@@ -11,6 +11,13 @@ const routes = [
             {
                 path: '',
                 loadChildren: '../../pages/landing/landing-page.module#LandingPageModule',
+                data: {
+                    isSimpleFooter: true,
+                },
+            },
+            {
+                path: 'login',
+                loadChildren: '../../pages/login/login-page.module#LoginPageModule',
             },
             {
                 path: 'logout',
@@ -25,8 +32,8 @@ const routes = [
                 loadChildren: '../../pages/securing-your-data/securing-your-data.module#SecuringYourDataModule',
             },
             {
-                path: 'terms-of-use',
-                loadChildren: '../../pages/terms-of-use/terms-of-use.module#TermsOfUseModule',
+                path: 'cookies-policy',
+                loadChildren: '../../pages/cookies-policy/cookies-policy.module#CookiesPolicyModule',
             },
         ],
     },

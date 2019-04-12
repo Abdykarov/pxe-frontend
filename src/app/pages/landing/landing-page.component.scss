@@ -7,24 +7,27 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
+// Component variables
+@import 'landing.component.variables.scss';
+
 .landing-page {
 	.section {
 		position: relative;
-		padding: 40px 0 60px;
+		padding: ( $spacer * 2 ) 0 ( $spacer * 3 );
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			padding: 60px 0 80px;
+			padding: ( $spacer * 3 ) 0 ( $spacer * 4 );
 		}
 		@include media-breakpoint-up(lg) {
-			padding: 90px 0 110px;
+			padding: ( $spacer * 4.5 ) 0 ( $spacer * 5.5 );
 		}
 
 		&--picture-first,
 		&--picture-second {
 			// Media queries
 			@include media-breakpoint-down(xs) {
-				padding-top: 40px + 320px;
+				padding-top: ( $spacer * 2 ) + $landing-page-picture-height-mobile;
 			}
 		}
 
@@ -34,6 +37,24 @@
 				@include media-breakpoint-up(md) {
 					left: 50%;
 				}
+			}
+		}
+	}
+
+	.about-our-benefit {
+		// Media queries
+		@include media-breakpoint-up(md) {
+			padding-top: 100px;
+		}
+		@include media-breakpoint-up(lg) {
+			padding-top: 120px;
+		}
+
+		.section-picture {
+			// Media queries
+			@include media-breakpoint-down(xs) {
+				width: 140%;
+				top: 30%;
 			}
 		}
 	}
@@ -63,8 +84,11 @@
 			width: auto;
 			height: 100%;
 		}
+		@include media-breakpoint-up(xl) {
+			height: 125%;
+		}
 		@include media-breakpoint-up(lg) {
-			width: 100%;
+			width: 108%;
 			height: auto;
 		}
 	}
@@ -89,12 +113,12 @@
 		top: 100%;
 		right: 50%;
 		color: $primary;
-		margin-top: -( 18px / 2 );
-		margin-right: -( 46px / 2 );
-		font-size: 46px;
-		width: 46px;
-		height: 18px;
-		line-height: 18px;
+		margin-top: -( $landing-page-process-arrow-height-mobile / 2 );
+		margin-right: -( $landing-page-process-arrow-width-mobile / 2 );
+		font-size: $landing-page-process-arrow-width-mobile;
+		width: $landing-page-process-arrow-width-mobile;
+		height: $landing-page-process-arrow-height-mobile;
+		line-height: $landing-page-process-arrow-height-mobile;
 		transform: rotate(90deg);
 
 		// Media queries
@@ -104,12 +128,167 @@
 			right: 0;
 		}
 		@include media-breakpoint-up(lg) {
-			margin-top: -( 24px / 2 );
-			margin-right: -( 70px / 2 );
-			font-size: 70px;
-			width: 70px;
-			height: 24px;
-			line-height: 24px;
+			margin-top: -( $landing-page-process-arrow-height-desktop / 2 );
+			margin-right: -( $landing-page-process-arrow-width-desktop / 2 );
+			font-size: $landing-page-process-arrow-width-desktop;
+			width: $landing-page-process-arrow-width-desktop;
+			height: $landing-page-process-arrow-height-desktop;
+			line-height: $landing-page-process-arrow-height-desktop;
+		}
+	}
+
+	.boxes {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		margin-bottom: ( $spacer * 3 );
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			flex-direction: row;
+		}
+	}
+
+	.box-info {
+		position: relative;
+		width: 150px;
+		height: 150px;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: left;
+		background-color: $white;
+		border-radius: 3px;
+		box-shadow: 0 2px 5px 0 rgba($font-text, .16);
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			margin-left: 0;
+			margin-right: 0;
+		}
+
+		&:nth-child(n + 2) {
+			margin-top: $spacer;
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				margin-top: 0;
+				margin-left: $spacer;
+			}
+		}
+
+		// Media queries
+		@include media-breakpoint-up(xl) {
+			width: 220px;
+			height: 220px;
+		}
+
+		&--primary {
+			background-color: $primary;
+			color: $white;
+		}
+
+		&--secondary {
+			background-color: $secondary;
+			color: $white;
+		}
+
+		&__holder {
+			padding: $spacer;
+			display: flex;
+			flex-flow: wrap;
+			align-items: center;
+			height: 100%;
+
+			// Media queries
+			@include media-breakpoint-up(xl) {
+				padding: ( $spacer * 1.75 ) ( $spacer * 1.5 );
+			}
+		}
+
+		&__label,
+		&__value {
+			width: 100%;
+		}
+
+		&__label {
+			text-transform: uppercase;
+			align-self: flex-start;
+			line-height: ( 19 / 14 );
+		}
+
+		&__value {
+			align-self: flex-end;
+		}
+
+		&__number {
+			font-size: $h3-font-size-public;
+			line-height: 1;
+
+			// Media queries
+			@include media-breakpoint-up(xl) {
+				font-size: $h1-font-size-public;
+				line-height: ( 48 / 36 );
+			}
+		}
+
+		// &__unit {
+
+		// }
+	}
+
+	// .suppliers-holder {
+
+	// }
+
+	.suppliers-overview {
+		@include reset-list;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		text-align: center;
+		flex-wrap: wrap;
+
+		&__item {
+			@include reset-list;
+
+			&:nth-child(n + 2) {
+				margin-left: ( $spacer * 2 );
+				margin-bottom: ( $spacer * 2 );
+
+				// Media queries
+				@include media-breakpoint-up(md) {
+					margin-left: ( $spacer * 2.5 );
+				}
+			}
+		}
+
+		&__link {
+			display: block;
+			position: relative;
+
+			&:hover,
+			&:focus {
+				.suppliers-overview__picture {
+					visibility: hidden;
+				}
+
+				.suppliers-overview__picture-hover {
+					display: block;
+				}
+			}
+		}
+
+		&__picture,
+		&__picture-hover {
+			max-width: 100%;
+			height: 34px;
+		}
+
+		&__picture-hover {
+			display: none;
+			position: absolute;
+			top: 0;
+			left: 0;
 		}
 	}
 }
