@@ -35,6 +35,10 @@ const routes = [
                 path: 'cookies-policy',
                 loadChildren: '../../pages/cookies-policy/cookies-policy.module#CookiesPolicyModule',
             },
+            {
+                path: 'terms-of-use',
+                loadChildren: '../../pages/terms-of-use/terms-of-use.module#TermsOfUseModule',
+            },
         ],
     },
 ];
