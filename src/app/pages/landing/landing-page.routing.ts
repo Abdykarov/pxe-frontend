@@ -7,6 +7,9 @@ const routes = [
     {
         path: '',
         component: LandingPageComponent,
+        data: {
+            isHomePage: true,
+        },
     },
 ];
 

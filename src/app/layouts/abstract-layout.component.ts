@@ -1,4 +1,5 @@
 import {
+    ActivatedRoute,
     NavigationEnd,
     Router,
 } from '@angular/router';
@@ -13,10 +14,12 @@ import { OverlayService } from 'src/common/graphql/services/overlay.service';
 export abstract class AbstractLayoutComponent extends AbstractComponent {
     public showOverlay = false;
     public toggleSubscription: Subscription;
+    public isLandingPage = false;
 
     protected constructor(
         protected apollo: Apollo,
         protected overlayService: OverlayService,
+        protected route: ActivatedRoute,
         protected router: Router,
     ) {
         super();
@@ -27,6 +30,8 @@ export abstract class AbstractLayoutComponent extends AbstractComponent {
                         .subscribe();
                     this.toggleSubscription.unsubscribe();
                 }
+                this.isLandingPage = event.url === '/';
+                console.log(this.route.snapshot.firstChild.data);
             }
         });
     }
