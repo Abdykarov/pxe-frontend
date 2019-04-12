@@ -6,7 +6,7 @@ import {
     Output,
 } from '@angular/core';
 
-import { ScrollToSubscriptionService } from 'src/app/services/scroll-to-subscription';
+import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
     selector: 'lnd-header',
@@ -36,10 +36,10 @@ export class HeaderComponent {
     }
 
     constructor(
-        private scrollToSubscriptionService: ScrollToSubscriptionService,
+        private scrollToService: ScrollToService,
     ) {}
 
     scrollToNewSubscription() {
-        this.scrollToSubscriptionService.scrollToSubscription();
+        this.scrollToService.scrollToSubscription();
     }
 }

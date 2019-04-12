@@ -11,6 +11,10 @@
 @import 'landing.component.variables.scss';
 
 .landing-page {
+	p {
+		margin-bottom: ( $spacer * 1.25 );
+	}
+
 	.section {
 		position: relative;
 		padding: ( $spacer * 2 ) 0 ( $spacer * 3 );
@@ -173,7 +177,7 @@
 		text-align: left;
 		background-color: $white;
 		border-radius: 3px;
-		box-shadow: 0 2px 5px 0 rgba($font-text, .16);
+		box-shadow: $box-shadow;
 
 		// Media queries
 		@include media-breakpoint-up(md) {

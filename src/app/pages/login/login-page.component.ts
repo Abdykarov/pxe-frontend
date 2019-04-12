@@ -12,16 +12,10 @@ import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 import { takeUntil } from 'rxjs/operators';
 
-import { loginFormFields } from './login-page.config';
-
-import { AuthService } from 'src/app/services/auth.service';
-import { OverlayService } from 'src/common/graphql/services/overlay.service';
-import {
-    SCROLL_TO,
-    ScrollService,
-} from 'src/app/services/scroll-register';
-
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { loginFormFields } from './login-page.config';
+import { OverlayService } from 'src/common/graphql/services/overlay.service';
 
 @Component({
     selector: 'lnd-login',
@@ -40,7 +34,6 @@ export class LoginComponent extends AbstractComponent {
         private cd: ChangeDetectorRef,
         private fb: FormBuilder,
         private overlayService: OverlayService,
-        private scrollService: ScrollService,
         private router: Router,
     ) {
         super();

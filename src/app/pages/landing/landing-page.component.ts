@@ -11,10 +11,9 @@ import { takeUntil } from 'rxjs/operators';
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
     SCROLL_TO,
-    ScrollService,
-} from 'src/app/services/scroll-register';
+    ScrollToService,
+} from 'src/app/services/scroll-to.service';
 import { scrollToElementFnc } from 'src/common/utils/scroll-to-element.fnc';
-import { ScrollToSubscriptionService } from 'src/app/services/scroll-to-subscription';
 
 @Component({
     selector: 'lnd-landing-page',
@@ -25,15 +24,14 @@ import { ScrollToSubscriptionService } from 'src/app/services/scroll-to-subscrip
 export class LandingPageComponent extends AbstractComponent implements OnInit {
 
     @ViewChild('pxe_subscription')
-    pxeSubscriptionForm: ElementRef;
+    public pxeSubscriptionForm: ElementRef;
 
     constructor(
-        private scrollService: ScrollService,
-        private scrollToSubscriptionService: ScrollToSubscriptionService,
+        private scrollToService: ScrollToService,
     ) {
         super();
 
-        scrollService.getScrollStream()
+        this.scrollToService.getScrollStream()
             .pipe(takeUntil(this.destroy$))
             .subscribe((scrollTo: SCROLL_TO) => {
                 if (scrollTo === SCROLL_TO.LANDING_SUBSCRIPTION) {
@@ -43,6 +41,6 @@ export class LandingPageComponent extends AbstractComponent implements OnInit {
     }
 
     scrollToNewSubscription() {
-        this.scrollToSubscriptionService.scrollToSubscription();
+        this.scrollToService.scrollToSubscription();
     }
 }
