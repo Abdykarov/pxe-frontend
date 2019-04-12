@@ -18,7 +18,6 @@ import { scrollToElementFnc } from 'src/common/utils/scroll-to-element.fnc';
 @Component({
     selector: 'lnd-landing-page',
     templateUrl: './landing-page.component.html',
-    styleUrls: ['./landing-page.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
 export class LandingPageComponent extends AbstractComponent implements OnInit {
