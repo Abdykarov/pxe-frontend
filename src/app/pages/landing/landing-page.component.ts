@@ -1,6 +1,8 @@
 import {
     ChangeDetectorRef,
     Component,
+    ElementRef,
+    ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
 import {
@@ -15,8 +17,10 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { loginFormFields } from './landing-page.config';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { ScrollRegisterService } from 'src/app/layouts/public/services/scroll-register';
+
+import { loginFormFields } from './landing-page.config';
 
 @Component({
     selector: 'lnd-landing-page',
@@ -30,6 +34,8 @@ export class LandingPageComponent extends AbstractComponent {
     public loginLoading = false;
     public showLogin = false;
 
+    @ViewChild('pxe_subscription_form') pxeSubscriptionForm: ElementRef;
+
     constructor(
         private apollo: Apollo,
         private authService: AuthService,
@@ -37,9 +43,14 @@ export class LandingPageComponent extends AbstractComponent {
         private fb: FormBuilder,
         private overlayService: OverlayService,
         private router: Router,
+        private scrollRegisterService: ScrollRegisterService,
     ) {
         super();
         this.loginForm = this.fb.group(loginFormFields);
+
+        scrollRegisterService.clickedOnRegistrationStream().subscribe(() => {
+            this.pxeSubscriptionForm.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
     }
 
     public submitLoginForm = () => {
