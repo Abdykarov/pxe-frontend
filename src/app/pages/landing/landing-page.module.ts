@@ -2,10 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // own classes
+import { ButtonModule } from 'src/common/ui/button/button.module';
 import { LandingPageComponent } from './landing-page.component';
 import { LandingPageRoutingModule } from './landing-page.routing';
-
-import { ButtonModule } from 'src/common/ui/button/button.module';
 import { MapCoverageContainerModule } from 'src/common/containers/map-coverage-container/map-coverage-container.module';
 import { NewsSubscriptionContainerModule } from 'src/common/containers/news-subscription/news-subscription-container.module';
 
