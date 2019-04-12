@@ -106,7 +106,7 @@ export const staticNavigationConfig: INavigationConfig = [
             'icon': 'component-high',
             'children': [
                 {
-                    'label': 'Cookies policy page',
+                    'label': 'Cookies policy',
                     'url': '/full/cookies',
                 },
                 {
