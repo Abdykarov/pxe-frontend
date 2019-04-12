@@ -3,7 +3,7 @@
  */
 
 .page-box {
-	padding: ( $spacer * 1.5 ) 0;
+	padding: ( $spacer * 1.5 );
 	margin-bottom: ( $spacer * 2 );
 	background-color: $white;
 	border-radius: 4px;
@@ -11,6 +11,6 @@
 
 	// Media queries
 	@include media-breakpoint-up(lg) {
-		padding: ( $spacer * 2 ) 0;
+		padding: ( $spacer * 2 );
 	}
 }
