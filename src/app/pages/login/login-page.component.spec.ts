@@ -4,21 +4,21 @@ import {
     TestBed,
 } from '@angular/core/testing';
 
-import { LoginPageComponent } from './login.component';
+import { LoginComponent } from './login-page.component';
 
 describe('LoginComponent', () => {
-    let component: LoginPageComponent;
-    let fixture: ComponentFixture<LoginPageComponent>;
+    let component: LoginComponent;
+    let fixture: ComponentFixture<LoginComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ LoginPageComponent ],
+            declarations: [ LoginComponent ],
         })
         .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(LoginPageComponent);
+        fixture = TestBed.createComponent(LoginComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
