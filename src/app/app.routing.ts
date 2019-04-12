@@ -33,6 +33,7 @@ const routes: Routes = [
                 enableTracing: environment.production || false,
                 preloadingStrategy: PreloadAllModules,
                 initialNavigation: 'enabled',
+                scrollPositionRestoration: 'top',
             },
         ),
     ],
