@@ -21,7 +21,6 @@ import { OverlayService } from 'src/common/graphql/services/overlay.service';
 @Component({
     selector: 'lnd-landing-page',
     templateUrl: './landing-page.component.html',
-    styleUrls: ['./landing-page.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
 export class LandingPageComponent extends AbstractComponent {

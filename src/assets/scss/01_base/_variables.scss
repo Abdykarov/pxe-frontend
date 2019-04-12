@@ -413,3 +413,11 @@ $tooltip-beak-shadow:               -2px 2px 2px rgba($blue-500, .1);
 $tooltip-content-offset:            (( $spacer / 3 ) + ( $tooltip-beak-border-width - 3px ) );
 $tooltip-content-border-radius:     0;
 $tooltip-content-box-shadow:        0 0 4px rgba($blue-500, .22);
+
+
+// Landing page
+$landing-page-picture-height-mobile:              320px;
+$landing-page-process-arrow-width-mobile:         46px;
+$landing-page-process-arrow-height-mobile:        18px;
+$landing-page-process-arrow-width-desktop:        70px;
+$landing-page-process-arrow-height-desktop:       24px;

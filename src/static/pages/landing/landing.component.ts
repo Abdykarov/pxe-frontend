@@ -4,7 +4,6 @@ import { IBreadcrumbItems } from '../../../common/ui/breadcrumb/models/breadcrum
 @Component({
     selector: 'lnd-landing-page',
     templateUrl: './landing.component.html',
-    styleUrls: ['./landing.component.scss'],
 })
 export class LandingComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
