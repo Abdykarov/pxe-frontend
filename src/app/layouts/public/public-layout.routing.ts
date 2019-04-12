@@ -11,6 +11,9 @@ const routes = [
             {
                 path: '',
                 loadChildren: '../../pages/landing/landing-page.module#LandingPageModule',
+                data: {
+                    isSimpleFooter: true,
+                },
             },
             {
                 path: 'login',
