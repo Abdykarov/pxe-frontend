@@ -5,6 +5,7 @@ import {
     Output,
     EventEmitter,
 } from '@angular/core';
+import { ScrollRegisterService } from 'src/app/layouts/public/services/scroll-register';
 
 @Component({
     selector: 'lnd-header',
@@ -33,5 +34,11 @@ export class HeaderComponent {
         }
     }
 
-    constructor() {}
+    scrollToNewSubscription() {
+        this.scrollRegisterService.clickedOnRegistration();
+    }
+
+    constructor(
+        private scrollRegisterService: ScrollRegisterService,
+    ) {}
 }
