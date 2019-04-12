@@ -32,26 +32,26 @@ $font-secondary:                   #919191;
 
 $text-muted:                       $font-secondary;
 
-$primary:                          #0097ff;                    // Primary btn
-$primary-dark:                     darken($primary, 5%);         // Primary btn hover
-$secondary-lighten:                #926ece;                    // Secondary btn hover
-$secondary:                        #7355a6;                    // Secondary btn
-$secondary-dark:                   darken($secondary, 5%);       // Secondary btn hover
-$success:                          $font-text;                   // Success btn
-$success-lighten:                  lighten($success, 5%);        // Success bg
-$success-dark:                     darken($success, 5%);         // Success btn hover
-$success-darken:                   darken($success, 10%);        // Success text
-$warning:                          #eda82f;                    // Warning btn
-$warning-lighten:                  lighten($warning, 10%);       // Warning bg
-$warning-dark:                     darken($warning, 15%);        // Warning btn hover
-$warning-darken:                   darken($warning, 25%);        // Warning text
-$danger:                           #d0021b;                    // Danger btn
-$danger-lighten:                   lighten($danger, 10%);        // Danger bg
-$danger-dark:                      darken($danger, 15%);         // Danger btn hover
-$danger-darken:                    darken($danger, 25%);         // Danger text
-$light:                            $gray-300;                    // Light btn
-$light-dark:                       $gray-400;                    // Light btn hover
-$light-darken:                     $gray-500;                    // Light btn active
+$primary:                          #0097ff;                    // Primary color
+$primary-dark:                     #0088e5;
+$secondary-lighten:                #926ece;                    // Secondary color
+$secondary:                        #7355a6;
+$secondary-dark:                   darken($secondary, 5%);
+$success:                          $font-text;                   // Success color
+$success-lighten:                  lighten($success, 5%);
+$success-dark:                     darken($success, 5%);
+$success-darken:                   darken($success, 10%);
+$warning:                          #eda82f;                    // Warning color
+$warning-lighten:                  lighten($warning, 10%);
+$warning-dark:                     darken($warning, 15%);
+$warning-darken:                   darken($warning, 25%);
+$danger:                           #d0021b;                    // Danger color
+$danger-lighten:                   lighten($danger, 10%);
+$danger-dark:                      darken($danger, 15%);
+$danger-darken:                    darken($danger, 25%);
+$light:                            $gray-300;                    // Light color
+$light-dark:                       $gray-400;
+$light-darken:                     $gray-500;
 $disabled:                         $gray-200;                    // Disabled color
 
 $gradient-green-light:             $primary;                     // Gradient green light
@@ -237,26 +237,6 @@ $table-dark-accent-bg:        $table-accent-bg;
 $table-dark-hover-bg:         $table-hover-bg;
 $table-dark-color:            $table-head-color;
 $table-striped-order:         odd;
-
-
-// Buttons
-$btn-font-weight:                  700;
-$btn-focus-box-shadow:             none;
-$btn-active-box-shadow:            $btn-focus-box-shadow;
-$btn-disabled-opacity:             1;
-$btn-link-disabled-color:          $disabled;
-$btn-width:                        160px;
-$btn-height:                       40px;
-$btn-height-small:                 30px;
-$btn-padding-y:                    ( $spacer / 3 );
-$btn-padding-x:                    ( $spacer / 2 );
-$btn-line-height:                  ( 18 / 12 );
-$btn-border-radius:                0;
-$btn-padding-y-sm:                 ( $spacer / 6 );
-$btn-padding-x-sm:                 ( $spacer / 3 );
-$font-size-sm:                     .688rem;
-$btn-line-height-sm:               ( 18 / 11 );
-$btn-border-radius-sm:             $btn-border-radius;
 
 
 // Dropdown
