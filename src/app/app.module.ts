@@ -8,9 +8,9 @@ import {
 import localeCsExtra from '@angular/common/locales/extra/cs';
 import { ReactiveFormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
-
 import { ApolloModule } from 'apollo-angular';
 import { HttpLinkModule } from 'apollo-angular-link-http';
+import { CookieModule } from 'ngx-cookie';
 
 // own classes
 import { ApolloGraphQLProvider } from '../common/graphql/middleware/apollo-graphql-provider';
@@ -26,7 +26,10 @@ import { PipesModule } from 'src/common/pipes/pipes.module';
     imports: [
         ApolloModule,
         AppRoutingModule,
-        BrowserModule,
+        BrowserModule.withServerTransition({
+            appId: 'pxe-pacr4retail',
+        }),
+        CookieModule.forRoot(),
         HttpClientModule,
         HttpLinkModule,
         PipesModule,
