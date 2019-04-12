@@ -32,8 +32,8 @@ const routes = [
                 loadChildren: '../../pages/securing-your-data/securing-your-data.module#SecuringYourDataModule',
             },
             {
-                path: 'terms-of-use',
-                loadChildren: '../../pages/terms-of-use/terms-of-use.module#TermsOfUseModule',
+                path: 'cookies-policy',
+                loadChildren: '../../pages/cookies-policy/cookies-policy.module#CookiesPolicyModule',
             },
         ],
     },

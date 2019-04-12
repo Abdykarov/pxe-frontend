@@ -4,12 +4,12 @@ import {
     RouterModule,
 } from '@angular/router';
 
-import { TermsOfUseComponent } from './terms-of-use.component';
+import { CookiesPolicyComponent } from './cookies-policy.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: TermsOfUseComponent,
+        component: CookiesPolicyComponent,
     },
 ];
 
@@ -21,4 +21,4 @@ const routes: Routes = [
         RouterModule,
     ],
 })
-export class TermsOfUseRoutingModule {}
+export class CookiesPolicyRoutingModule {}
