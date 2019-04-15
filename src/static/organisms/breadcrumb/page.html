@@ -1,8 +1,16 @@
-<div class="row">
+<div class="row static-pages-holder">
     <div class="col">
         <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
     </div>
 </div>
-<hr class="mt-0">
-<h3>With multiple items</h3>
-<lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsMultiple"></lnd-breadcrumb>
+<div class="static-pages-holder">
+    <div class="static-pages">
+        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsMultiple0"></lnd-breadcrumb>
+    </div>
+    <div class="static-pages">
+        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsMultiple1"></lnd-breadcrumb>
+    </div>
+    <div class="static-pages">
+        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsMultiple2"></lnd-breadcrumb>
+    </div>
+</div>
