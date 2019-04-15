@@ -24,7 +24,8 @@
     "start:500": "yarn start app-500",
     "start:mock": "ng serve -c mock --proxy-config proxy-mock.conf.json",
     "start:mock-docker": "ng serve -c mock --proxy-config proxy-mock-docker.conf.json",
-    "test": "ng test"
+    "test": "ng test",
+    "test:watch": "ng test --watch=true",
   },
   "private": true,
   "dependencies": {

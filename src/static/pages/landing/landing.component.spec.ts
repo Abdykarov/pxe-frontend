@@ -3,7 +3,10 @@ import { async,
          TestBed,
 } from '@angular/core/testing';
 
+import { ButtonModule } from 'src/common/ui/button/button.module';
+import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { LandingComponent } from './landing.component';
+import { FormModule } from 'src/common/ui/forms/form.module';
 
 describe('LandingComponent', () => {
     let component: LandingComponent;
@@ -11,7 +14,14 @@ describe('LandingComponent', () => {
 
     beforeEach(async(() => {
     TestBed.configureTestingModule({
-          declarations: [ LandingComponent ],
+        declarations: [
+            LandingComponent,
+        ],
+        imports: [
+            BreadcrumbModule,
+            ButtonModule,
+            FormModule,
+        ],
     })
     .compileComponents();
     }));
