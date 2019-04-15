@@ -26,7 +26,7 @@
 /*   3. COMPONENTS           */
 /* ------------------------- */
 
-// Seperate and sort partials into blocks with different concerns if there's too much partials
+@import '03_components/page-box';                                             // Page box
 
 /* ------------------------- */
 /*   4. MODULES              */
@@ -38,4 +38,4 @@
 /*   5. TEMPLATES & PAGES    */
 /* ------------------------- */
 
-
+@import '05_pages/landing-page';                                             // Landind page(s)

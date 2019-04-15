@@ -34,12 +34,12 @@ export class AppComponent {
             script.async = true;
             script.src = 'https://www.googletagmanager.com/gtag/js?id=' + environment.gtmId;
             this.document.head.prepend(script);
-        }
 
-        this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd) {
-                gtmService.gtm(event);
-            }
-        });
+            this.router.events.subscribe(event => {
+                if (event instanceof NavigationEnd) {
+                    gtmService.gtm(event);
+                }
+            });
+        }
     }
 }
