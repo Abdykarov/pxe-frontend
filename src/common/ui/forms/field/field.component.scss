@@ -186,7 +186,6 @@ textarea.form-control--not-empty {
 
 	& ~ .invalid-feedback {
 		display: none;
-		margin-left: $spacer;
 		font-size: $small-font-size;
 	}
 
@@ -333,10 +332,13 @@ textarea.form-control--not-empty {
 .custom-control-input[type='radio'] {
 	&:focus,
 	&.focus {
-		& + .custom-control-label {
-			&::before {
-				border-color: $custom-control-indicator-focus-border-color;
-				box-shadow: none;
+		&,
+		&.is-valid {
+			& + .custom-control-label {
+				&::before {
+					border-color: $custom-control-indicator-focus-border-color;
+					box-shadow: none;
+				}
 			}
 		}
 
@@ -351,6 +353,18 @@ textarea.form-control--not-empty {
 				border-color: $custom-control-indicator-bg-check-interactive-invalid;
 				box-shadow: none;
 			}
+		}
+	}
+
+	&.is-valid + .custom-control-label {
+		&:hover {
+			&::before {
+				border-color: $custom-control-indicator-hover-border-color;
+			}
+		}
+
+		&::before {
+			border-color: $custom-control-indicator-border-color;
 		}
 	}
 
@@ -500,6 +514,12 @@ textarea.form-control--not-empty {
 .custom-control-input[type='checkbox']:checked {
 	&:focus,
 	&.focus {
+		&.is-valid {
+			&::after {
+				background-color: $custom-control-indicator-bg;
+			}
+		}
+
 		&.is-warning + .custom-control-label {
 			&::before {
 				border-color: $custom-control-indicator-bg-check-interactive-warning;
@@ -524,6 +544,14 @@ textarea.form-control--not-empty {
 			font-size: $custom-checkbox-icon-size;
 			line-height: $custom-control-indicator-size-px;
 			text-align: center;
+		}
+	}
+
+	&.is-valid {
+		& + .custom-control-label {
+			&::before {
+				background-color: $custom-control-indicator-checked-bg;
+			}
 		}
 	}
 
@@ -737,7 +765,6 @@ textarea.form-control--not-empty {
 		}
 	}
 }
-
 
 // Selectbox
 .select {
