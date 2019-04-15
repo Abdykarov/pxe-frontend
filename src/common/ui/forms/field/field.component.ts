@@ -74,6 +74,9 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     public disabledField = false;
 
     @Input()
+    public lightField = false;
+
+    @Input()
     public error?: any;
 
     @Input()
