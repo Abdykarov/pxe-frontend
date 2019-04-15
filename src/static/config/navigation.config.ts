@@ -90,10 +90,10 @@ export const staticNavigationConfig: INavigationConfig = [
             'label': 'Organisms',
             'icon': 'component-middle',
             'children': [
-                // {
-                //     'label': 'Breadcrumb',
-                //     'url': '/breadcrumb',
-                // },
+                {
+                    'label': 'Breadcrumb',
+                    'url': '/basic/breadcrumb',
+                },
                 // {
                 //     'label': 'Modals',
                 //     'url': '/modals',
