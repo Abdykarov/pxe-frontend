@@ -231,7 +231,9 @@
                         "styles": [
                             "src/assets/scss/front.scss"
                         ],
-                        "scripts": []
+                        "scripts": [
+                            "src/assets/configurations/config.test.js"
+                        ]
                     }
                 },
                 "lint": {
