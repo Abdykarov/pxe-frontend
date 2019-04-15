@@ -5,7 +5,7 @@ import {
 } from '@angular/core/testing';
 import { DecimalPipe } from '@angular/common';
 
-import { config } from 'src/common/containers/map-coverage-container/coverage.config';
+import { config } from 'src/common/containers/map-coverage-container/map-coverage-container.config';
 import { MapCoverageComponent } from './map-coverage.component';
 import { PipesModule } from 'src/common/pipes/pipes.module';
 import { TabsModule } from '../tabs/tabs.module';
