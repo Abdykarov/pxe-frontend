@@ -24,20 +24,16 @@ const routes = [
                 loadChildren: '../../pages/logout/logout-page.module#LogoutPageModule',
             },
             {
-                path: 'prague-stock-exchange',
-                loadChildren: '../../pages/prague-exchange/prague-exchange.module#PragueExchangeModule',
-            },
-            {
                 path: 'securing-your-data',
-                loadChildren: '../../pages/securing-your-data/securing-your-data.module#SecuringYourDataModule',
+                loadChildren: '../../pages/footer/securing-your-data/securing-your-data.module#SecuringYourDataModule',
             },
             {
                 path: 'cookies-policy',
-                loadChildren: '../../pages/cookies-policy/cookies-policy.module#CookiesPolicyModule',
+                loadChildren: '../../pages/footer/cookies-policy/cookies-policy.module#CookiesPolicyModule',
             },
             {
                 path: 'terms-of-use',
-                loadChildren: '../../pages/terms-of-use/terms-of-use.module#TermsOfUseModule',
+                loadChildren: '../../pages/footer/terms-of-use/terms-of-use.module#TermsOfUseModule',
             },
         ],
     },

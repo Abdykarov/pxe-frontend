@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IBreadcrumbItems } from '../../../../common/ui/breadcrumb/models/breadcrumb.model';
 
 @Component({
     selector: 'pxe-securing-your-data',

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { CookiesPolicyComponent } from './cookies-policy.component';
 import { CookiesPolicyRoutingModule } from './cookies-policy.routing';
+import { FooterLayoutModule } from 'src/common/containers/footer-layout/footer-layout.module';
 
 @NgModule({
     declarations: [
@@ -11,6 +12,7 @@ import { CookiesPolicyRoutingModule } from './cookies-policy.routing';
     imports: [
         CommonModule,
         CookiesPolicyRoutingModule,
+        FooterLayoutModule,
     ],
 })
 export class CookiesPolicyModule {}
