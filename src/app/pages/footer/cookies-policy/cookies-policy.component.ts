@@ -13,8 +13,11 @@ export class CookiesPolicyComponent {
     constructor() {
         this.breadcrumbItemsSimple = [
             {
+                label: 'Homepage',
+                url: '/',
+            },
+            {
                 label: 'Cookies policy',
-                url: null,
             },
         ];
     }

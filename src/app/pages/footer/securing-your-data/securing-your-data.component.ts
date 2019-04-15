@@ -13,8 +13,11 @@ export class SecuringYourDataComponent {
     constructor() {
         this.breadcrumbItemsSimple = [
             {
-                label: 'Ochrana osobních údajů',
-                url: null,
+                label: 'Homepage',
+                url: '/',
+            },
+            {
+                label: 'Securing your data',
             },
         ];
     }
