@@ -75,6 +75,13 @@
 	&[readonly] {
 		color: $input-color;
 	}
+
+	&--light {
+		&,
+		&:focus {
+			background-color: $white;
+		}
+	}
 }
 
 .form-control-text {
