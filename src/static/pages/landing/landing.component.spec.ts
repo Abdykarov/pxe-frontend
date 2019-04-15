@@ -3,9 +3,11 @@ import { async,
          TestBed,
 } from '@angular/core/testing';
 
+import { LandingComponent } from './landing.component';
+
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
-import { LandingComponent } from './landing.component';
+import { MapCoverageModule } from 'src/common/ui/map-coverage/map-coverage.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 
 describe('LandingComponent', () => {
@@ -21,6 +23,7 @@ describe('LandingComponent', () => {
             BreadcrumbModule,
             ButtonModule,
             FormModule,
+            MapCoverageModule,
         ],
     })
     .compileComponents();
