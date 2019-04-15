@@ -17,7 +17,7 @@ export class TermsOfUseComponent {
                 url: '/',
             },
             {
-                label: 'Terms of use',
+                label: 'Podmínky užívání',
             },
         ];
     }

@@ -17,7 +17,7 @@ export class SecuringYourDataComponent {
                 url: '/',
             },
             {
-                label: 'Securing your data',
+                label: 'Ochrana osobních údajů',
             },
         ];
     }
