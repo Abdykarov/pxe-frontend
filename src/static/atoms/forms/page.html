@@ -17,7 +17,7 @@
             <div class="col-md-4">
                 <lnd-form-field
                     id="error-input"
-                    label="Standard error"
+                    label="Label error"
                     error="This field is required"
                     [touched]="true">
                 </lnd-form-field>
@@ -34,14 +34,32 @@
                     value="Filled input">
                 </lnd-form-field>
             </div>
+            <div class="col-md-4">
+                <lnd-form-field
+                    id="error-input"
+                    label="Normal error"
+                    value="Filled input"
+                    error="This field is required"
+                    [touched]="true">
+                </lnd-form-field>
+            </div>
         </div>
         <h4>Light</h4>
-        <div class="row bg--body mb-4">
+        <div class="row bg--body pt-3 mb-4">
             <div class="col-md-4">
                 <lnd-form-field
                     id="light-input"
-                    label="Light input"
-                    [lightField]='true'>
+                    label="Normal input"
+                    [lightField]="true">
+                </lnd-form-field>
+            </div>
+            <div class="col-md-4">
+                <lnd-form-field
+                    id="error-input"
+                    label="Normal error"
+                    error="This field is required"
+                    [touched]="true"
+                    [lightField]="true">
                 </lnd-form-field>
             </div>
         </div>
