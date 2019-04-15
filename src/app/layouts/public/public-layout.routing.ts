@@ -62,4 +62,4 @@ const routes = [
         RouterModule,
     ],
 })
-export class NotificationLayoutContainerRoutingModule { }
+export class PublicLayoutRoutingModule {}

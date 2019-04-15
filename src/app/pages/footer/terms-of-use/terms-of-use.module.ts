@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { FooterLayoutModule } from 'src/common/containers/footer-layout/footer-layout.module';
+import {
+    NotificationLayoutContainerModule,
+} from 'src/common/containers/notification-layout-container/notification-layout-container.module';
 import { TermsOfUseComponent } from './terms-of-use.component';
 import { TermsOfUseRoutingModule } from './terms-of-use.routing';
 
@@ -11,7 +13,7 @@ import { TermsOfUseRoutingModule } from './terms-of-use.routing';
     ],
     imports: [
         CommonModule,
-        FooterLayoutModule,
+        NotificationLayoutContainerModule,
         TermsOfUseRoutingModule,
     ],
 })
