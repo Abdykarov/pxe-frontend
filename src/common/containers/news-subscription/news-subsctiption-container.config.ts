@@ -22,11 +22,11 @@ export const subscriptionFormFields: IForm = {
     validationMessages: {
         email: {
             required: 'Zadejte svůj e-mail.',
-            email: 'E-mail není ve správném formátu.',
-            'already-registered-email': 'Tento email je již registrován.',
+            email: 'Použijte pouze písmena bez diakritiky, číslice, tečku (.) a zavináč (@).',
+            'already-registered-email': 'Tento e-mail již registrujeme.',
         },
         consent: {
-            required: 'Musíte souhlasit se zásadami bezpečnosti.',
+            required: 'Nezapomeňte na souhlas se zásadami bezpečnosti.',
         },
     },
 };

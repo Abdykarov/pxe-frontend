@@ -18,35 +18,42 @@
                               (change)="resetCustomFieldError()"
                               autocomplete="off">
                             <lnd-form-field
-                                    [error]="subscriptionFormError.email || subscriptionForm.controls.email.errors"
-                                    [formControl]="subscriptionForm.controls.email"
-                                    [id]="'email'"
-                                    label="E-mail"
-                                    [success]="subscriptionForm.controls.email.valid && (subscriptionForm.controls.email.touched || subscriptionFormError.email)"
-                                    [touched]="subscriptionForm.controls.email.touched || subscriptionFormError.email"
-                                    [validationMessages]="subscriptionFormFields.validationMessages.email"
-                                    [lightField]="true"
+                                [error]="subscriptionFormError.email || subscriptionForm.controls.email.errors"
+                                [formControl]="subscriptionForm.controls.email"
+                                [id]="'email'"
+                                label="E-mail"
+                                [success]="subscriptionForm.controls.email.valid && (subscriptionForm.controls.email.touched || subscriptionFormError.email)"
+                                [touched]="subscriptionForm.controls.email.touched || subscriptionFormError.email"
+                                [validationMessages]="subscriptionFormFields.validationMessages.email"
+                                [lightField]="true"
                             ></lnd-form-field>
                             <lnd-form-field
-                                    [error]="subscriptionFormError.consent || subscriptionForm.controls.consent.errors"
-                                    [formControl]="subscriptionForm.controls.consent"
-                                    [id]="'consent'"
-                                    label="Souhlasím se zásadami bezpečnosti"
-                                    [success]="subscriptionForm.controls.consent.valid && (subscriptionForm.controls.consent.touched || subscriptionFormError.consent)"
-                                    [touched]="subscriptionForm.controls.consent.touched || subscriptionFormError.consent"
-                                    [type]="'CHECKBOX'"
-                                    [validationMessages]="subscriptionFormFields.validationMessages.consent"
+                                [error]="subscriptionFormError.consent || subscriptionForm.controls.consent.errors"
+                                [formControl]="subscriptionForm.controls.consent"
+                                [id]="'consent'"
+                                label="Souhlasím se zásadami bezpečnosti"
+                                [success]="subscriptionForm.controls.consent.valid && (subscriptionForm.controls.consent.touched || subscriptionFormError.consent)"
+                                [touched]="subscriptionForm.controls.consent.touched || subscriptionFormError.consent"
+                                [type]="'CHECKBOX'"
+                                [validationMessages]="subscriptionFormFields.validationMessages.consent"
                             ></lnd-form-field>
                             <lnd-button
-                                    type="primary"
-                                    (action)="submitForm()"
-                                    [isDisabled]="submitSubscriptionLoading"
-                                    label="Odeslat">
+                                type="primary"
+                                (action)="submitForm()"
+                                [isDisabled]="submitSubscriptionLoading"
+                                label="Odeslat">
                             </lnd-button>
                         </form>
                     </ng-container>
                     <ng-container *ngIf="subscriptionFormSent">
-                        <h3 class="h3--public">
+                        <img
+                            class="mb-2"
+                            width="122"
+                            height="129"
+                            src="/assets/images/illustrations/mail-letter.svg"
+                            title="Děkujeme za váš zájem"
+                            alt="Děkujeme za váš zájem">
+                        <h3 class="h3--public mb-0">
                             Děkujeme za váš zájem.<br>
                             Hned jak službu spustíme, tak se vám ozveme.
                         </h3>
