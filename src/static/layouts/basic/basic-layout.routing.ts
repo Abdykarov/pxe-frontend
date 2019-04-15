@@ -5,6 +5,11 @@ import {
 } from '@angular/router';
 
 import {
+    BreadcrumbPageModule,
+    breadcrumbPageRoutes,
+} from 'src/static/organisms/breadcrumb/page.module';
+
+import {
     ButtonsPageModule,
     buttonsPageRoutes,
 } from 'src/static/atoms/buttons/page.module';
@@ -36,6 +41,7 @@ const routes: Routes = [
         path: '',
         component: BasicLayoutComponent,
         children: [
+            ...breadcrumbPageRoutes,
             ...buttonsPageRoutes,
             ...colorsPageRoutes,
             ...formsPageRoutes,
@@ -51,6 +57,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
+        BreadcrumbPageModule,
         ButtonsPageModule,
         ColorsPageModule,
         FormsPageModule,

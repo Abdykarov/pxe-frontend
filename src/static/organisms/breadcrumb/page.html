@@ -1,11 +1,3 @@
-<ng-template #dropdownContent>
-    <lnd-table
-        [cols]="tableCols"
-        [rows]="tableRows"
-        [showHead]="true"
-        [tableClass]="['table-striped', 'table-hover', 'mb-0']"
-    ></lnd-table>
-</ng-template>
 <div class="row">
     <div class="col">
         <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
@@ -14,8 +6,3 @@
 <hr class="mt-0">
 <h3>With multiple items</h3>
 <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsMultiple"></lnd-breadcrumb>
-<hr>
-<h3>With multiple items and dropdown</h3>
-<lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsWithDropdown"
-                [dropdownContent]="dropdownContent"
-></lnd-breadcrumb>
