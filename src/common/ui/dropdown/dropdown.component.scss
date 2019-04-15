@@ -7,6 +7,9 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
+// Component variables
+@import 'dropdown.component.variables.scss';
+
 // Custom import
 @import '~bootstrap/scss/dropdown';
 

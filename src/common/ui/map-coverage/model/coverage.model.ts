@@ -1,17 +1,26 @@
 export interface IMapCoverageSource {
     consumption: number;
-    notification: number;
     places: number;
     suppliers: IMapCoverageSupplier[];
 }
 
+export interface IMapCoverageSourceGas extends IMapCoverageSource {
+    stackCapacity: number;
+}
+
+export interface IMapCoverageSourcePower extends IMapCoverageSource {
+    temelinPerformance: number;
+}
+
 export interface IMapCoverageSupplier {
     logoUrl: string;
+    logoUrlHover: string;
     supplierUrl: string;
     title: string;
+    alt: string;
 }
 
 export interface IMapCoverageConfig {
-    gas: IMapCoverageSource;
-    power: IMapCoverageSource;
+    gas: IMapCoverageSourceGas;
+    power: IMapCoverageSourcePower;
 }

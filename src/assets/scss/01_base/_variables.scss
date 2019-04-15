@@ -32,26 +32,26 @@ $font-secondary:                   #919191;
 
 $text-muted:                       $font-secondary;
 
-$primary:                          #0097ff;                    // Primary btn
-$primary-dark:                     darken($primary, 5%);         // Primary btn hover
-$secondary-lighten:                #926ece;                    // Secondary btn hover
-$secondary:                        #7355a6;                    // Secondary btn
-$secondary-dark:                   darken($secondary, 5%);       // Secondary btn hover
-$success:                          $font-text;                   // Success btn
-$success-lighten:                  lighten($success, 5%);        // Success bg
-$success-dark:                     darken($success, 5%);         // Success btn hover
-$success-darken:                   darken($success, 10%);        // Success text
-$warning:                          #eda82f;                    // Warning btn
-$warning-lighten:                  lighten($warning, 10%);       // Warning bg
-$warning-dark:                     darken($warning, 15%);        // Warning btn hover
-$warning-darken:                   darken($warning, 25%);        // Warning text
-$danger:                           #d0021b;                    // Danger btn
-$danger-lighten:                   lighten($danger, 10%);        // Danger bg
-$danger-dark:                      darken($danger, 15%);         // Danger btn hover
-$danger-darken:                    darken($danger, 25%);         // Danger text
-$light:                            $gray-300;                    // Light btn
-$light-dark:                       $gray-400;                    // Light btn hover
-$light-darken:                     $gray-500;                    // Light btn active
+$primary:                          #0097ff;                    // Primary color
+$primary-dark:                     #0088e5;
+$secondary-lighten:                #926ece;                    // Secondary color
+$secondary:                        #7355a6;
+$secondary-dark:                   darken($secondary, 5%);
+$success:                          $font-text;                   // Success color
+$success-lighten:                  lighten($success, 5%);
+$success-dark:                     darken($success, 5%);
+$success-darken:                   darken($success, 10%);
+$warning:                          #eda82f;                    // Warning color
+$warning-lighten:                  lighten($warning, 10%);
+$warning-dark:                     darken($warning, 15%);
+$warning-darken:                   darken($warning, 25%);
+$danger:                           #d0021b;                    // Danger color
+$danger-lighten:                   lighten($danger, 10%);
+$danger-dark:                      darken($danger, 15%);
+$danger-darken:                    darken($danger, 25%);
+$light:                            $gray-300;                    // Light color
+$light-dark:                       $gray-400;
+$light-darken:                     $gray-500;
 $disabled:                         $gray-200;                    // Disabled color
 
 $gradient-green-light:             $primary;                     // Gradient green light
@@ -151,12 +151,13 @@ $headings-margin-bottom:           ( $spacer * 1.5 );
 $blockquote-small-color:           $gray-300 !default;
 $blockquote-font-size:             ( $font-size-base * 1.231 ) !default;
 
-$paragraph-margin-bottom:          ( $spacer * 1.25 );
+$paragraph-margin-bottom:          ( $spacer * 2 );
 
 $list-bullet-size:                 3px;
 $lists-margin-bottom:              ( $spacer * 1.25 );
 
 $border-radius:                    5px;
+$box-shadow:                       0 2px 5px 0 rgba($body-color, .16);
 
 
 // Links
@@ -238,26 +239,6 @@ $table-dark-color:            $table-head-color;
 $table-striped-order:         odd;
 
 
-// Buttons
-$btn-font-weight:                  700;
-$btn-focus-box-shadow:             none;
-$btn-active-box-shadow:            $btn-focus-box-shadow;
-$btn-disabled-opacity:             1;
-$btn-link-disabled-color:          $disabled;
-$btn-width:                        160px;
-$btn-height:                       40px;
-$btn-height-small:                 30px;
-$btn-padding-y:                    ( $spacer / 3 );
-$btn-padding-x:                    ( $spacer / 2 );
-$btn-line-height:                  ( 18 / 12 );
-$btn-border-radius:                0;
-$btn-padding-y-sm:                 ( $spacer / 6 );
-$btn-padding-x-sm:                 ( $spacer / 3 );
-$font-size-sm:                     .688rem;
-$btn-line-height-sm:               ( 18 / 11 );
-$btn-border-radius-sm:             $btn-border-radius;
-
-
 // Dropdown
 $dropdown-padding-y:               0;
 $dropdown-border-radius:           0;
@@ -275,20 +256,6 @@ $dropdown-beak-border-style:       solid;
 $dropdown-beak-border-color:       $white;
 $dropdown-beak-box-shadow:         none;
 $dropdown-menu-offset:             ( $dropdown-beak-border-width - 3px );
-
-
-// Tabs
-$nav-tabs-border-width:             0;
-$nav-tabs-border-radius:            0;
-$nav-link-disabled-color:           rgba($gray-300, .5);
-$nav-tabs-link-active-color:        $gray-400;
-$nav-tabs-link-active-bg:           $white;
-$nav-tabs-item-min-width:           120px;
-$nav-tabs-item-height:              40px;
-$nav-tabs-item-more-width:          40px;
-$nav-tabs-graph-item-width-md:      230px;
-$nav-tabs-graph-item-width-lg:      280px;
-$nav-tabs-graph-item-width-xl:      300px;
 
 
 // Alerts
@@ -427,3 +394,11 @@ $tooltip-beak-shadow:               -2px 2px 2px rgba($blue-500, .1);
 $tooltip-content-offset:            (( $spacer / 3 ) + ( $tooltip-beak-border-width - 3px ) );
 $tooltip-content-border-radius:     0;
 $tooltip-content-box-shadow:        0 0 4px rgba($blue-500, .22);
+
+
+// Landing page
+$landing-page-picture-height-mobile:              320px;
+$landing-page-process-arrow-width-mobile:         46px;
+$landing-page-process-arrow-height-mobile:        18px;
+$landing-page-process-arrow-width-desktop:        70px;
+$landing-page-process-arrow-height-desktop:       24px;
