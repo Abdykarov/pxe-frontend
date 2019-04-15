@@ -6,7 +6,7 @@ import {
 import { Apollo } from 'apollo-angular';
 
 import { IFieldError } from 'src/common/ui/news-subscription/models/form-definition.model';
-import { makeRegistration } from '../../graphql/mutation/news-registration';
+import { makeRegistration } from 'src/common/graphql/mutation/news-registration';
 import { parseGraphQLErrors } from 'src/common/utils/parse-graphql-errors.fnc';
 import { subscriptionFormFields } from './news-subsctiption-container.config';
 
