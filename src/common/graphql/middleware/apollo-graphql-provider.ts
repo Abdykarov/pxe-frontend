@@ -35,7 +35,7 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
     };
 
     const http = httpLink.create({
-        uri: `${environment.url}/graphql`,
+        uri: `${environment.url}/graphql/`,
     });
 
     const local = withClientState({
