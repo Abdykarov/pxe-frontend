@@ -5,13 +5,26 @@ import { async,
 
 import { LandingComponent } from './landing.component';
 
+import { ButtonModule } from 'src/common/ui/button/button.module';
+import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
+import { MapCoverageModule } from 'src/common/ui/map-coverage/map-coverage.module';
+import { FormModule } from 'src/common/ui/forms/form.module';
+
 describe('LandingComponent', () => {
     let component: LandingComponent;
     let fixture: ComponentFixture<LandingComponent>;
 
     beforeEach(async(() => {
     TestBed.configureTestingModule({
-          declarations: [ LandingComponent ],
+        declarations: [
+            LandingComponent,
+        ],
+        imports: [
+            BreadcrumbModule,
+            ButtonModule,
+            FormModule,
+            MapCoverageModule,
+        ],
     })
     .compileComponents();
     }));

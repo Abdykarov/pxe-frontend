@@ -25,7 +25,6 @@ import { ModalModule } from 'src/common/ui/modal/modal.module';
         LoginRoutingModule,
         ModalModule,
         ReactiveFormsModule,
-
     ],
 })
 export class LoginPageModule {}
