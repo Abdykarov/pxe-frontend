@@ -2,18 +2,18 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
-import { FooterLayoutComponent } from './footer-layout.component';
+import { NotificationLayoutContainerComponent } from './notification-layout-container.component';
 
 @NgModule({
     declarations: [
-        FooterLayoutComponent,
+        NotificationLayoutContainerComponent,
     ],
     imports: [
         BreadcrumbModule,
         CommonModule,
     ],
     exports: [
-        FooterLayoutComponent,
+        NotificationLayoutContainerComponent,
     ],
 })
-export class FooterLayoutModule { }
+export class NotificationLayoutContainerModule { }

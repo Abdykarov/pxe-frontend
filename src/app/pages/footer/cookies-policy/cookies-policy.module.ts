@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { CookiesPolicyComponent } from './cookies-policy.component';
 import { CookiesPolicyRoutingModule } from './cookies-policy.routing';
-import { FooterLayoutModule } from 'src/common/containers/footer-layout/footer-layout.module';
+import {
+    NotificationLayoutContainerModule,
+} from 'src/common/containers/notification-layout-container/notification-layout-container.module';
 
 @NgModule({
     declarations: [
@@ -12,7 +14,7 @@ import { FooterLayoutModule } from 'src/common/containers/footer-layout/footer-l
     imports: [
         CommonModule,
         CookiesPolicyRoutingModule,
-        FooterLayoutModule,
+        NotificationLayoutContainerModule,
     ],
 })
 export class CookiesPolicyModule {}

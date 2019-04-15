@@ -6,10 +6,10 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 
 @Component({
     selector: 'pxe-layout-footer',
-    templateUrl: './footer-layout.component.html',
-    styleUrls: ['./footer-layout.component.scss'],
+    templateUrl: './notification-layout-container.component.html',
+    styleUrls: ['./notification-layout-container.component.scss'],
 })
-export class FooterLayoutComponent {
+export class NotificationLayoutContainerComponent {
     @Input()
     public title;
 

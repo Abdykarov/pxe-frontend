@@ -18,22 +18,37 @@ const routes = [
             {
                 path: 'login',
                 loadChildren: '../../pages/login/login-page.module#LoginPageModule',
+                data: {
+                    isSimpleFooter: true,
+                },
             },
             {
                 path: 'logout',
                 loadChildren: '../../pages/logout/logout-page.module#LogoutPageModule',
+                data: {
+                    isSimpleFooter: true,
+                },
             },
             {
                 path: 'securing-your-data',
                 loadChildren: '../../pages/footer/securing-your-data/securing-your-data.module#SecuringYourDataModule',
+                data: {
+                    isSimpleFooter: true,
+                },
             },
             {
                 path: 'cookies-policy',
                 loadChildren: '../../pages/footer/cookies-policy/cookies-policy.module#CookiesPolicyModule',
+                data: {
+                    isSimpleFooter: true,
+                },
             },
             {
                 path: 'terms-of-use',
                 loadChildren: '../../pages/footer/terms-of-use/terms-of-use.module#TermsOfUseModule',
+                data: {
+                    isSimpleFooter: true,
+                },
             },
         ],
     },
@@ -47,4 +62,4 @@ const routes = [
         RouterModule,
     ],
 })
-export class PublicLayoutRoutingModule { }
+export class NotificationLayoutContainerRoutingModule { }
