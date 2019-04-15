@@ -25,6 +25,7 @@
                                 [success]="subscriptionForm.controls.email.valid && (subscriptionForm.controls.email.touched || subscriptionFormError.email)"
                                 [touched]="subscriptionForm.controls.email.touched || subscriptionFormError.email"
                                 [validationMessages]="subscriptionFormFields.validationMessages.email"
+                                [lightField]="true"
                             ></lnd-form-field>
                             <lnd-form-field
                                 [error]="subscriptionFormError.consent || subscriptionForm.controls.consent.errors"

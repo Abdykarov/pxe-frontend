@@ -32,7 +32,7 @@ $custom-control-gutter:                                  0;
 $custom-control-indicator-top:                           4px;
 $custom-control-indicator-size:                          ( 15 / 16 ) + rem;
 $custom-control-indicator-size-px:                       15px;
-$custom-control-indicator-bg:                            transparent;
+$custom-control-indicator-bg:                            $white;
 $custom-control-indicator-box-shadow:                    none;
 $custom-control-indicator-bg-interactive-warning:        rgba($warning-lighten, .3);
 $custom-control-indicator-bg-interactive-error:          rgba($danger-lighten, .3);
@@ -52,7 +52,7 @@ $custom-control-indicator-disabled-border:               rgba($custom-control-in
 $custom-control-indicator-focus-border-color:            $font-text;
 $custom-control-indicator-hover-border-color:            $font-text;
 $custom-control-indicator-checked-border-color:          $gray-100;
-$custom-control-indicator-checked-bg:                    transparent;
+$custom-control-indicator-checked-bg:                    $custom-control-indicator-bg;
 $custom-control-indicator-checked-disabled-bg:           transparent;
 $custom-control-label-disabled-color:                    rgba($input-color, .4);
 

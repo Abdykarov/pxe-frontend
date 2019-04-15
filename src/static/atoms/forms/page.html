@@ -17,7 +17,7 @@
             <div class="col-md-4">
                 <lnd-form-field
                     id="error-input"
-                    label="Standard error"
+                    label="Label error"
                     error="This field is required"
                     [touched]="true">
                 </lnd-form-field>
@@ -32,6 +32,34 @@
                     placeholder="Placeholder text"
                     [touched]="true"
                     value="Filled input">
+                </lnd-form-field>
+            </div>
+            <div class="col-md-4">
+                <lnd-form-field
+                    id="error-input"
+                    label="Normal error"
+                    value="Filled input"
+                    error="This field is required field is required field is required field."
+                    [touched]="true">
+                </lnd-form-field>
+            </div>
+        </div>
+        <h4>Light</h4>
+        <div class="row bg--body pt-3 mb-4">
+            <div class="col-md-4">
+                <lnd-form-field
+                    id="light-input"
+                    label="Normal input"
+                    [lightField]="true">
+                </lnd-form-field>
+            </div>
+            <div class="col-md-4">
+                <lnd-form-field
+                    id="error-input"
+                    label="Normal error"
+                    error="This field is required"
+                    [touched]="true"
+                    [lightField]="true">
                 </lnd-form-field>
             </div>
         </div>
@@ -384,6 +412,15 @@
                     [checked]="true">
                 </lnd-form-field>
             </div>
+            <div class="col-md-4">
+                <lnd-form-field
+                    [id]="'error-checkbox'"
+                    label="Error checkbox"
+                    error="This field is required"
+                    [touched]="true"
+                    [type]="'CHECKBOX'">
+                </lnd-form-field>
+            </div>
         </div>
         <h4>Disabled</h4>
         <div class="row">
@@ -421,15 +458,6 @@
                     <!--id="warning-checkbox"-->
                     <!--label="Warning checkbox"-->
                     <!--[warning]="true"-->
-                    <!--type="checkbox"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="error-checkbox"-->
-                    <!--label="Error checkbox"-->
-                    <!--error="This field is required"-->
-                    <!--[touched]="true"-->
                     <!--type="checkbox"-->
                 <!--&gt;</lnd-form-field>-->
             <!--</div>-->
