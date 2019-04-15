@@ -194,6 +194,7 @@ textarea.form-control--not-empty {
 	& ~ .invalid-feedback {
 		display: none;
 		font-size: $small-font-size;
+		max-width: $input-width;
 	}
 
 	&.invalid-input {
