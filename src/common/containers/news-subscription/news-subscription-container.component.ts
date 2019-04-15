@@ -5,9 +5,9 @@ import {
 
 import { Apollo } from 'apollo-angular';
 
+import * as mutations from 'src/common/graphql/mutations';
 import { IFieldError } from 'src/common/ui/news-subscription/models/form-definition.model';
-import { makeRegistration } from 'src/common/graphql/mutation/news-registration';
-import { parseGraphQLErrors } from 'src/common/utils/parse-graphql-errors.fnc';
+import { parseGraphQLErrors } from 'src/common/utils/';
 import { subscriptionFormFields } from './news-subsctiption-container.config';
 
 @Component({
@@ -33,7 +33,7 @@ export class NewsSubscriptionContainerComponent {
         this.subscriptionFieldError = {};
         this.apollo
             .mutate({
-                mutation: makeRegistration,
+                mutation: mutations.makeRegistration,
                 variables: values,
             })
             .subscribe(
