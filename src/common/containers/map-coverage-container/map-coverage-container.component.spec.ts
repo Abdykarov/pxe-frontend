@@ -5,6 +5,7 @@ import {
 } from '@angular/core/testing';
 
 import { MapCoverageContainerComponent } from './map-coverage-container.component';
+import { MapCoverageModule } from 'src/common/ui/map-coverage/map-coverage.module';
 
 describe('MapCoverageContainerComponent', () => {
     let component: MapCoverageContainerComponent;
@@ -12,11 +13,14 @@ describe('MapCoverageContainerComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-        declarations: [
-            MapCoverageContainerComponent,
-        ],
-    })
-    .compileComponents();
+            declarations: [
+                MapCoverageContainerComponent,
+            ],
+            imports: [
+                MapCoverageModule,
+            ],
+        })
+        .compileComponents();
     }));
 
     beforeEach(() => {

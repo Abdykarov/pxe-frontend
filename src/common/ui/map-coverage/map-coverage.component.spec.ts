@@ -3,8 +3,12 @@ import {
     ComponentFixture,
     TestBed,
 } from '@angular/core/testing';
+import { DecimalPipe } from '@angular/common';
 
+import { config } from 'src/common/containers/map-coverage-container/map-coverage-container.config';
 import { MapCoverageComponent } from './map-coverage.component';
+import { PipesModule } from 'src/common/pipes/pipes.module';
+import { TabsModule } from '../tabs/tabs.module';
 
 describe('MapCoverageComponent', () => {
     let component: MapCoverageComponent;
@@ -12,7 +16,16 @@ describe('MapCoverageComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-          declarations: [ MapCoverageComponent ],
+            declarations: [
+                MapCoverageComponent,
+            ],
+            imports: [
+                PipesModule,
+                TabsModule,
+            ],
+            providers: [
+                DecimalPipe,
+            ],
         })
         .compileComponents();
     }));
@@ -20,6 +33,7 @@ describe('MapCoverageComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(MapCoverageComponent);
         component = fixture.componentInstance;
+        component.config = config;
         fixture.detectChanges();
     });
 
