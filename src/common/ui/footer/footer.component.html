@@ -4,9 +4,7 @@
     [class.footer--secured]="!isSimpleFooter">
     <div class="container-fluid">
         <div class="row">
-            <div
-                [ngClass]="isSimpleFooter ? 'col-12' : 'col-12 col-md-auto mr-md-3'" 
-                class="footer-container">
+            <div class="col-12 footer-container">
                 <div class="copy-holder">
                     <div class="logo-holder">
                         <img
@@ -20,7 +18,7 @@
                     </p>
                 </div>
             </div>
-            <div [ngClass]="isSimpleFooter ? 'col-12' : 'col-12 col-md-auto d-md-flex align-items-md-end mb-md-2'">
+            <div class="col-12">
                 <nav class="footer-navigation">
                     <ng-content></ng-content>
                 </nav>

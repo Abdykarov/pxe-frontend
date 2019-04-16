@@ -25,14 +25,6 @@
 
 	&--secured {
 		padding: $spacer 0;
-
-		// Media queries
-		@include media-breakpoint-up(md) {
-			text-align: left;
-		}
-		@include media-breakpoint-up(lg) {
-			margin-left: $aside-width-desktop;
-		}
 	}
 
 	.copy-holder {
