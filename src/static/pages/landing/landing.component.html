@@ -135,7 +135,12 @@
     <pxe-map-coverage
         [config]="config">
     </pxe-map-coverage>
-    <div>
-        <pxe-news-subscription-container></pxe-news-subscription-container>
-    </div>
+    <pxe-news-subscription
+        [subscriptionFormFields]="subscriptionFormFields"
+        [submitSubscriptionLoading]="submitSubscriptionLoading"
+        [subscriptionFormSent]="subscriptionFormSent"
+        [subscriptionGlobalError]="subscriptionGlobalError"
+        [subscriptionFieldError]="subscriptionFieldError"
+        (submitSubscriptionForm)="submitSubscriptionForm($event)"
+    ></pxe-news-subscription>
 </div>

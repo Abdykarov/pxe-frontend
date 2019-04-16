@@ -7,7 +7,7 @@ import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { LandingComponent } from './landing.component';
 import { MapCoverageModule } from 'src/common/ui/map-coverage/map-coverage.module';
-import { NewsSubscriptionContainerModule } from 'src/common/containers/news-subscription/news-subscription-container.module';
+import { NewsSubscriptionModule } from 'src/common/ui/news-subscription/news-subscription.module';
 
 @NgModule({
     declarations: [
@@ -22,7 +22,7 @@ import { NewsSubscriptionContainerModule } from 'src/common/containers/news-subs
         CommonModule,
         FormModule,
         MapCoverageModule,
-        NewsSubscriptionContainerModule,
+        NewsSubscriptionModule,
     ],
 })
 export class LandingModule { }

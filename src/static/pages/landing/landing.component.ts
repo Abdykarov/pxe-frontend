@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
+import { subscriptionFormFields } from '../../../common/containers/news-subscription/news-subsctiption-container.config';
+import { IFieldError } from '../../../common/ui/news-subscription/models/form-definition.model';
 
 @Component({
     selector: 'lnd-landing-page',
@@ -8,6 +10,13 @@ import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.mo
 })
 export class LandingComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
+
+    public submitSubscriptionLoading = false;
+    public subscriptionFormFields = subscriptionFormFields;
+    public subscriptionFormSent = false;
+    public subscriptionGlobalError: string[] = [];
+    public subscriptionFieldError: IFieldError = {};
+
 
     public config: IMapCoverageConfig = {
         gas: {
@@ -38,6 +47,10 @@ export class LandingComponent {
             ],
         },
     };
+
+    public submitSubscriptionForm = (values) => {
+        console.log('Formulář odeslán');
+    }
 
     constructor() {
         this.breadcrumbItemsSimple = [
