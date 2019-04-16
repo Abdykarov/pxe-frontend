@@ -20,5 +20,5 @@ ENTRYPOINT ["node", "dist/server.js"]
 
 COPY --from=builder /opt/dist /opt/dist/
 
-EXPOSE 4200
+EXPOSE 80
 WORKDIR /opt
