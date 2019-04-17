@@ -17,10 +17,10 @@ export abstract class AbstractLayoutComponent extends AbstractComponent {
     public toggleSubscription: Subscription;
 
     public routerData: IRouterData = {
+        isPublic: false,
         isSimpleFooter: false,
         showLogin: false,
         showSignIn: false,
-        isPublic: false,
     };
 
     protected constructor(
@@ -38,7 +38,6 @@ export abstract class AbstractLayoutComponent extends AbstractComponent {
                     this.toggleSubscription.unsubscribe();
                 }
                 this.routerData = <IRouterData>this.route.snapshot.firstChild.data;
-                console.log(this.routerData);
             }
         });
     }

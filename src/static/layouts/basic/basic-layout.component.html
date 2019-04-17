@@ -4,7 +4,9 @@
     [ngClass]="{
     'body-inner--overlay' : isMenuOpen
     }">
-    <lnd-header></lnd-header>
+    <lnd-header
+        [routerData]="routerData">
+    </lnd-header>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-8 order-lg-2 container-content">

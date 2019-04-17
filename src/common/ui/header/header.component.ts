@@ -3,7 +3,7 @@ import {
     EventEmitter,
     Input,
     HostListener,
-    Output, OnInit,
+    Output,
 } from '@angular/core';
 
 import { IRouterData } from 'src/app/layouts/model/router-data';

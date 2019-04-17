@@ -5,6 +5,7 @@ import {
 } from '@angular/router';
 
 import { staticNavigationConfig } from '../../config/navigation.config';
+import { IRouterData } from '../../../app/layouts/model/router-data';
 
 @Component({
     templateUrl: './basic-layout.component.html',
@@ -14,6 +15,12 @@ export class BasicLayoutComponent {
     public isMenuOpen = false;
     public itemOpened = null;
     public navigationConfig = [];
+    public routerData: IRouterData = {
+        isPublic: false,
+        isSimpleFooter: false,
+        showSignIn: true,
+        showLogin: false,
+    };
 
     constructor (
         public router: Router,
