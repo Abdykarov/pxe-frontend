@@ -21,6 +21,7 @@ export class NewsSubscriptionContainerComponent {
     public subscriptionFormSent = false;
     public subscriptionGlobalError: string[] = [];
     public subscriptionFieldError: IFieldError = {};
+    public hrefToSecuringData = '/securing-your-data';
 
     constructor(
         private apollo: Apollo,

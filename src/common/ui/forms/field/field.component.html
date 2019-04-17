@@ -144,8 +144,7 @@
             [ngClass]="radioGroupClass">
             <span
                 class="control-label radiogroup-control-label"
-                *ngIf="!hideLabel">
-                {{ label }}
+                *ngIf="!hideLabel" [innerHTML]="label">
             </span>
             <div
                 *ngFor="let option of options"
@@ -223,8 +222,7 @@
             class="radio-group--switch">
             <span
                 class="control-label radiogroup-control-label"
-                *ngIf="!hideLabel">
-                {{ label }}
+                *ngIf="!hideLabel" [innerHTML]="label">
             </span>
             <div
                 *ngFor="let option of options"
@@ -307,8 +305,8 @@
             [class.custom-file-label]="type === 'FILE' && !hideLabel"
             [class.sr-only]="!!hideLabel || type === 'RADIOGROUP' || type === 'SELECT'"
             (click)="labelClick()"
-            [for]="id">
-            {{ label }}
+            [for]="id"
+            [innerHTML]="label">
         </label>
         <span
             *ngIf="type === 'SELECT'"

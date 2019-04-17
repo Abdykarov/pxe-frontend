@@ -25,6 +25,9 @@ import {
 })
 export class NewsSubscriptionComponent implements OnInit, OnChanges {
     @Input()
+    public hrefToSecuringData: string;
+
+    @Input()
     public subscriptionFormSent = false;
 
     @Input()
