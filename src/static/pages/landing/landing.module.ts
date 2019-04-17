@@ -8,6 +8,7 @@ import { FormModule } from 'src/common/ui/forms/form.module';
 import { LandingComponent } from './landing.component';
 import { MapCoverageModule } from 'src/common/ui/map-coverage/map-coverage.module';
 import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
+import { NewsSubscriptionModule } from 'src/common/ui/news-subscription/news-subscription.module';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
         CommonModule,
         FormModule,
         MapCoverageModule,
+        NewsSubscriptionModule,
         SupplierModule,
     ],
 })

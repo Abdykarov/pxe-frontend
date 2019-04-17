@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { IFieldError } from 'src/common/ui/news-subscription/models/form-definition.model';
 import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
 import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
+import { subscriptionFormFields } from 'src/common/containers/news-subscription/news-subsctiption-container.config';
 
 @Component({
     selector: 'lnd-landing-page',
@@ -9,6 +11,13 @@ import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
 })
 export class LandingComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
+
+    public submitSubscriptionLoading = false;
+    public subscriptionFormFields = subscriptionFormFields;
+    public subscriptionFormSent = false;
+    public subscriptionGlobalError: string[] = [];
+    public subscriptionFieldError: IFieldError = {};
+
     public configSupplier: ISupplier[] = [
         {
             alt: 'logo - Alpiq CZ',
@@ -127,6 +136,11 @@ export class LandingComponent {
             consumption: 1883500000,
         },
     };
+
+    public submitSubscriptionForm = (values) => {
+        this.submitSubscriptionLoading = true;
+        console.log('Formulář odeslán');
+    }
 
     constructor() {
         this.breadcrumbItemsSimple = [
