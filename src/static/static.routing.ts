@@ -16,6 +16,10 @@ const routes: Routes = [
         loadChildren: './layouts/full/full-layout.module#FullLayoutModule',
     },
     {
+        path: 'hybrid',
+        loadChildren: './layouts/hybrid/hybrid-layout.module#HybridLayoutModule',
+    },
+    {
         path: '**',
         redirectTo: '/basic',
     },

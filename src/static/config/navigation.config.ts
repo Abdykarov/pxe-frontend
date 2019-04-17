@@ -107,7 +107,7 @@ export const staticNavigationConfig: INavigationConfig = [
             'children': [
                 {
                     'label': 'Cookies policy',
-                    'url': '/full/cookies',
+                    'url': '/hybrid/cookies',
                 },
                 {
                     'label': 'Landing page',

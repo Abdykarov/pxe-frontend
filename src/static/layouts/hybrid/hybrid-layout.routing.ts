@@ -4,15 +4,15 @@ import {
     RouterModule,
 } from '@angular/router';
 
-import { FullLayoutComponent } from './full-layout.component';
-import { LandingModule, landingPageRoutes } from 'src/static/pages/landing/landing.module';
+import { CookiesPageModule, cookiesPageRoutes } from 'src/static/pages/cookies/page.module';
+import { HybridLayoutComponent } from './hybrid-layout.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: FullLayoutComponent,
+        component: HybridLayoutComponent,
         children: [
-            ...landingPageRoutes,
+            ...cookiesPageRoutes,
             {
                 path: '**',
                 redirectTo: '',
@@ -23,11 +23,11 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        LandingModule,
+        CookiesPageModule,
         RouterModule.forChild(routes),
     ],
     exports: [
         RouterModule,
     ],
 })
-export class FullLayoutRoutingModule {}
+export class HybridLayoutRoutingModule {}
