@@ -1,7 +1,7 @@
 <header
     class="header"
-    [class.header--public]="isPublic"
-    [class.header--secured]="!isPublic">
+    [class.header--public]="routerData.isPublic"
+    [class.header--secured]="!routerData.isPublic">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
@@ -19,7 +19,7 @@
                     </div>
                     <div
                         class="registration-holder"
-                        *ngIf="isPublic">
+                        *ngIf="routerData.showSignIn">
                         <lnd-button
                             label="Registrace"
                             type="primary"
@@ -27,13 +27,22 @@
                         </lnd-button>
                     </div>
                     <div
+                        class="registration-holder"
+                        *ngIf="routerData.showLogin">
+                        <lnd-button
+                            label="Přihlášení"
+                            type="primary"
+                        >
+                        </lnd-button>
+                    </div>
+                    <div
                         class="notification-holder"
-                        *ngIf="!isPublic">
+                        *ngIf="!routerData.isPublic">
                         <span class="icon icon--favourite-fill text-color--secondary"></span>
                     </div>
                     <div
                         class="menu-holder"
-                        *ngIf="!isPublic">
+                        *ngIf="!routerData.isPublic">
                         <a
                             class="menu-toggle"
                             [ngClass]="{ 'menu-toggle--open' : isMenuOpen }"
@@ -47,7 +56,7 @@
                     </div>
                     <div
                         class="user-holder"
-                        *ngIf="!isPublic">
+                        *ngIf="!routerData.isPublic">
                         <span class="icon icon--favourite-stroke text-color--secondary"></span>
                     </div>
                 </div>

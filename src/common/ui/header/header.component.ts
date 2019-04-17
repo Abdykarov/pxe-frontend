@@ -3,9 +3,10 @@ import {
     EventEmitter,
     Input,
     HostListener,
-    Output,
+    Output, OnInit,
 } from '@angular/core';
 
+import { IRouterData } from 'src/app/layouts/model/router-data';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
@@ -16,7 +17,7 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 export class HeaderComponent {
     public isHeaderSticked: boolean;
 
-    @Input() isPublic = false;
+    @Input() routerData: IRouterData;
 
     @Input() isMenuOpen: boolean;
 
@@ -43,3 +44,4 @@ export class HeaderComponent {
         this.scrollToService.scrollToSubscription();
     }
 }
+

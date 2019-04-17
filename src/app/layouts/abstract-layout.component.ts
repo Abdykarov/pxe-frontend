@@ -10,11 +10,18 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { IRouterData } from './model/router-data';
 
 export abstract class AbstractLayoutComponent extends AbstractComponent {
     public showOverlay = false;
     public toggleSubscription: Subscription;
-    public isSimpleFooter = false;
+
+    public routerData: IRouterData = {
+        isSimpleFooter: false,
+        showLogin: false,
+        showSignIn: false,
+        isPublic: false,
+    };
 
     protected constructor(
         protected apollo: Apollo,
@@ -30,7 +37,8 @@ export abstract class AbstractLayoutComponent extends AbstractComponent {
                         .subscribe();
                     this.toggleSubscription.unsubscribe();
                 }
-                this.isSimpleFooter = this.route.snapshot.firstChild.data.isSimpleFooter;
+                this.routerData = <IRouterData>this.route.snapshot.firstChild.data;
+                console.log(this.routerData);
             }
         });
     }
