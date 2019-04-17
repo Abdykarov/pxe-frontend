@@ -10,9 +10,7 @@ import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { LoginFormModule } from 'src/common/containers/form-container/login-form/login-form.module';
 import { ModalModule } from 'src/common/ui/modal/modal.module';
-import {
-    NotificationLayoutContainerModule,
-} from 'src/common/containers/notification-layout-container/notification-layout-container.module';
+import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 
 @NgModule({
     declarations: [
@@ -29,7 +27,7 @@ import {
         LoginFormModule,
         LoginRoutingModule,
         ModalModule,
-        NotificationLayoutContainerModule,
+        LayoutContainerModule,
         ReactiveFormsModule,
     ],
 })

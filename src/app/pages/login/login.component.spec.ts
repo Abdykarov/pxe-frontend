@@ -13,10 +13,11 @@ import { CookieModule } from 'ngx-cookie';
 import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
-import { ModalModule } from 'src/common/ui/modal/modal.module';
-
+import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 import { LoginComponent } from './login.component';
+import { LoginFormModule } from 'src/common/containers/form-container/login-form/login-form.module';
 import { LoginRoutingModule } from './login.routing';
+import { ModalModule } from 'src/common/ui/modal/modal.module';
 
 describe('LoginComponent', () => {
     let component: LoginComponent;
@@ -34,7 +35,9 @@ describe('LoginComponent', () => {
                 CookieModule.forRoot(),
                 FormModule,
                 HttpClientModule,
+                LayoutContainerModule,
                 LoginRoutingModule,
+                LoginFormModule,
                 ModalModule,
                 ReactiveFormsModule,
                 RouterTestingModule,
