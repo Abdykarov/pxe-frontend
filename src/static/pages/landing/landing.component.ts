@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
-import { ISupplier } from '../../../common/ui/supplier/model/supplier.model';
-import { configSuppliers } from '../../../common/containers/map-coverage-container/map-coverage-container.config';
+import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
 
 @Component({
     selector: 'lnd-landing-page',

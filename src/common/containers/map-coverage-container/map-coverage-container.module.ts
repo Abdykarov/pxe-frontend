@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { MapCoverageContainerComponent } from './map-coverage-container.component';
 import { MapCoverageModule } from 'src/common/ui/map-coverage/map-coverage.module';
-import { SupplierModule } from '../../ui/supplier/supplier.module';
+import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
 
 @NgModule({
     declarations: [
