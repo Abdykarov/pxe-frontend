@@ -15,8 +15,8 @@ import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { ModalModule } from 'src/common/ui/modal/modal.module';
 
-import { LoginComponent } from './login-page.component';
-import { LoginRoutingModule } from './login-routing.module';
+import { LoginComponent } from './login.component';
+import { LoginRoutingModule } from './login.routing';
 
 describe('LoginComponent', () => {
     let component: LoginComponent;

@@ -16,7 +16,7 @@ import * as R from 'ramda';
 import {
     IFieldError,
     IForm,
-} from './models/form-definition.model';
+} from '../../containers/form-container/models/form-definition.model';
 
 @Component({
     selector: 'pxe-news-subscription',

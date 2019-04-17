@@ -2,13 +2,17 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
-import { LoginRoutingModule } from './login-routing.module';
-import { LoginComponent } from './login-page.component';
+import { LoginRoutingModule } from './login.routing';
+import { LoginComponent } from './login.component';
 
 import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
+import { LoginFormModule } from 'src/common/containers/form-container/login-form/login-form.module';
 import { ModalModule } from 'src/common/ui/modal/modal.module';
+import {
+    NotificationLayoutContainerModule,
+} from 'src/common/containers/notification-layout-container/notification-layout-container.module';
 
 @NgModule({
     declarations: [
@@ -22,9 +26,11 @@ import { ModalModule } from 'src/common/ui/modal/modal.module';
         ButtonModule,
         FormModule,
         CommonModule,
+        LoginFormModule,
         LoginRoutingModule,
         ModalModule,
+        NotificationLayoutContainerModule,
         ReactiveFormsModule,
     ],
 })
-export class LoginPageModule {}
+export class LoginModule {}

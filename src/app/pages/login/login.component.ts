@@ -2,70 +2,61 @@ import {
     ChangeDetectorRef,
     Component,
 } from '@angular/core';
-import {
-    FormBuilder,
-    FormGroup,
-} from '@angular/forms';
 import { Router } from '@angular/router';
 
-import * as R from 'ramda';
-import { Apollo } from 'apollo-angular';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { loginFormFields } from './login-page.config';
+import { loginFormFields } from './login.config';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { parseRestAPIErrors } from '../../../common/utils/parse-rest-erros.fns';
 
 @Component({
-    selector: 'lnd-login',
-    templateUrl: './login-page.component.html',
-    styleUrls: ['./login-page.component.css'],
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css'],
 })
 export class LoginComponent extends AbstractComponent {
-    public loginError = false;
-    public loginForm: FormGroup;
     public loginLoading = false;
     public showLogin = false;
 
+    public loginFormFields = loginFormFields;
+    public submitLoginFormLoading = false;
+    public loginGlobalError: string[] = [];
+
+    public error;
+
     constructor(
-        private apollo: Apollo,
         private authService: AuthService,
         private cd: ChangeDetectorRef,
-        private fb: FormBuilder,
         private overlayService: OverlayService,
         private router: Router,
     ) {
         super();
-        this.loginForm = this.fb.group(loginFormFields);
     }
 
-    public submitLoginForm = () => {
-        R.pipe(
-            R.keys,
-            R.map((field) => {
-                this.loginForm
-                    .get(field)
-                    .markAsTouched({
-                        onlySelf: true,
-                    });
-            }),
-        )(this.loginForm.controls);
-        if (this.loginForm.valid) {
-            this.loginLoading = true;
-            this.loginError = false;
+    public submitLoginForm = (values) => {
+
+        console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold', values);
+
+            this.submitLoginFormLoading = true;
+            this.loginGlobalError = [];
             this.authService
-                .login(this.loginForm.value)
+                .login(values)
                 .subscribe(
                     () => {
+                        this.submitLoginFormLoading = false;
                         this.router.navigate(['/secured']);
                     },
                     error => {
-                        this.loginError = true;
-                        this.loginLoading = false;
+                        this.error = error;
+                        const message = parseRestAPIErrors(error);
+                        console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold', error);
+                        this.submitLoginFormLoading = false;
+                        this.loginGlobalError.push(message);
                         this.cd.markForCheck();
                     });
-        }
+
     }
 
     public toggleLoginDialog = () => {
