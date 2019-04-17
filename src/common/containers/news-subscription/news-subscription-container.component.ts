@@ -16,12 +16,14 @@ import { subscriptionFormFields } from './news-subsctiption-container.config';
     styleUrls: ['./news-subscription-container.component.scss'],
 })
 export class NewsSubscriptionContainerComponent {
+
+    public hrefToSecuringData = '/securing-your-data';
+
     public submitSubscriptionLoading = false;
     public subscriptionFormFields = subscriptionFormFields;
     public subscriptionFormSent = false;
     public subscriptionGlobalError: string[] = [];
     public subscriptionFieldError: IFieldError = {};
-    public hrefToSecuringData = '/securing-your-data';
 
     constructor(
         private apollo: Apollo,

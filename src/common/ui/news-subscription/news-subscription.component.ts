@@ -5,7 +5,8 @@ import {
     OnChanges,
     OnInit,
     Output,
-    SimpleChanges, TemplateRef,
+    SimpleChanges,
+    TemplateRef,
 } from '@angular/core';
 import {
     FormBuilder,

@@ -7,7 +7,8 @@ import {
     forwardRef,
     Input,
     Output,
-    ViewChild, TemplateRef,
+    ViewChild,
+    TemplateRef,
 } from '@angular/core';
 import {
     ControlValueAccessor,

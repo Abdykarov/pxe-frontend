@@ -11,7 +11,6 @@ import { subscriptionFormFields } from 'src/common/containers/news-subscription/
 export class LandingComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
-    public hrefToSecuringData = '';
     public submitSubscriptionLoading = false;
     public subscriptionFormFields = subscriptionFormFields;
     public subscriptionFormSent = false;
