@@ -39,16 +39,6 @@ const routes = [
                 },
             },
             {
-                path: 'sign-in',
-                loadChildren: '../../pages/sign-in/sign-in-page.module#SignInPageModule',
-                data: {
-                    isPublic: true,
-                    isSimpleFooter: true,
-                    showLogin: true,
-                    showSignIn: false,
-                },
-            },
-            {
                 path: 'securing-your-data',
                 loadChildren: '../../pages/footer/securing-your-data/securing-your-data.module#SecuringYourDataModule',
                 data: {
