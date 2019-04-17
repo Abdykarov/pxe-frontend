@@ -10,7 +10,7 @@
 
 	// Media queries
 	@include media-breakpoint-up(md) {
-		min-height: calc(100vh - $footer-height-tablet);
+		min-height: calc(100vh - #{$footer-height-tablet});
 	}
 
 	ol,
