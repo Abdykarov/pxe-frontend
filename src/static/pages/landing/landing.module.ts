@@ -29,5 +29,8 @@ export const landingPageRoutes: Routes = [
     {
         path: 'landing-page',
         component: LandingComponent,
+        data: {
+            isSimpleFooter: true,
+        },
     },
 ];

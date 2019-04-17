@@ -26,5 +26,8 @@ export const cookiesPageRoutes: Routes = [
     {
         path: 'cookies',
         component: CookiesPageComponent,
+        data: {
+            isSimpleFooter: true,
+        },
     },
 ];
