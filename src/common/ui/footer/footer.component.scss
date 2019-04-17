@@ -10,12 +10,12 @@
 
 .footer {
 	font-size: $small-font-size;
+	text-align: center;
 
 	&--public {
 		position: relative;
 		background-color: $white;
 		padding: ( $spacer * 3 ) 0;
-		text-align: center;
 
 		// Media queries
 		@include media-breakpoint-up(md) {
@@ -24,10 +24,7 @@
 	}
 
 	&--secured {
-		// Media queries
-		@include media-breakpoint-up(lg) {
-			margin-left: $aside-width-desktop;
-		}
+		padding: $spacer 0;
 	}
 
 	.copy-holder {
