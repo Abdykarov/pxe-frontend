@@ -2,7 +2,8 @@ import {
     Component,
     Input,
 } from '@angular/core';
-import { ISupplier } from './model/supplier';
+
+import { ISupplier } from './model/supplier.model';
 
 @Component({
     selector: 'pxe-supplier',
@@ -11,5 +12,5 @@ import { ISupplier } from './model/supplier';
 })
 export class SupplierComponent {
     @Input()
-    public config: ISupplier[];
+    public configSupplier: ISupplier[];
 }

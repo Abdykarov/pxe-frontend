@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-import {
-    tableCols,
-    tableRows,
-} from './config';
 
 @Component({
   templateUrl: './page.html',
@@ -11,38 +7,31 @@ import {
 
 export class BreadcrumbPageComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
-    public breadcrumbItemsMultiple: IBreadcrumbItems;
-    public breadcrumbItemsWithDropdown: IBreadcrumbItems;
-    public tableCols: any;
-    public tableRows: any;
+    public breadcrumbItemsMultiple0: IBreadcrumbItems;
+    public breadcrumbItemsMultiple1: IBreadcrumbItems;
+    public breadcrumbItemsMultiple2: IBreadcrumbItems;
     private body = document.getElementById('top');
-
-    public toggleOverlayer() {
-        this.body.classList.toggle('body-inner--overlay');
-        this.body.classList.toggle('body-inner--overlay-full');
-    }
 
     constructor(
     ) {
         this.breadcrumbItemsSimple = [
             {
-                label: 'Breadcrumbs',
+                label: 'Breadcrumb',
                 url: null,
             },
         ];
 
-        this.breadcrumbItemsMultiple = [
+        this.breadcrumbItemsMultiple0 = [
             {
-                label: 'Buttons',
-                url: '/buttons',
+                label: 'Homepage',
+                url: '',
             },
+        ];
+
+        this.breadcrumbItemsMultiple1 = [
             {
-                label: 'Modals',
-                url: '/modals',
-            },
-            {
-                label: 'Colors',
-                url: '/colors',
+                label: 'Homepage',
+                url: '/',
             },
             {
                 label: 'Last item',
@@ -50,26 +39,19 @@ export class BreadcrumbPageComponent {
             },
         ];
 
-        this.breadcrumbItemsWithDropdown = [
+        this.breadcrumbItemsMultiple2 = [
+            {
+                label: 'Homepage',
+                url: '/',
+            },
             {
                 label: 'Buttons',
-                url: '/buttons',
+                url: '/basic/buttons',
             },
             {
-                label: 'Modals',
-                url: '/modals',
-            },
-            {
-                label: 'Dropdown item',
-                hasTemplate: true,
-                overlayEnabled: true,
-                dropdownAction: () => {
-                    this.toggleOverlayer();
-                },
+                label: 'Last item',
+                url: '',
             },
         ];
-
-        this.tableCols = tableCols;
-        this.tableRows = tableRows;
     }
 }

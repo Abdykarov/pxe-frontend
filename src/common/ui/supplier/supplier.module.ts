@@ -4,16 +4,16 @@ import {
 } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { SuplierComponent } from './map-coverage.component';
 import { PipesModule } from 'src/common/pipes/pipes.module';
+import { SupplierComponent } from './supplier.component';
 import { TabsModule } from 'src/common/ui/tabs/tabs.module';
 
 @NgModule({
     declarations: [
-        SuplierComponent,
+        SupplierComponent,
     ],
     exports: [
-        SuplierComponent,
+        SupplierComponent,
     ],
     imports: [
         CommonModule,

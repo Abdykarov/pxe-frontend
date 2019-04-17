@@ -1,3 +1,9 @@
+<ng-template #supplierTemplate>
+    <pxe-supplier [configSupplier]="configSupplier"></pxe-supplier>
+</ng-template>
+
 <pxe-map-coverage
-    [config]="config">
+    [configCovarage]="configCovarage"
+    [supplierTemplate]="supplierTemplate"
+>
 </pxe-map-coverage>

@@ -18,26 +18,37 @@ const routes = [
             {
                 path: 'login',
                 loadChildren: '../../pages/login/login-page.module#LoginPageModule',
+                data: {
+                    isSimpleFooter: true,
+                },
             },
             {
                 path: 'logout',
                 loadChildren: '../../pages/logout/logout-page.module#LogoutPageModule',
-            },
-            {
-                path: 'prague-stock-exchange',
-                loadChildren: '../../pages/prague-exchange/prague-exchange.module#PragueExchangeModule',
+                data: {
+                    isSimpleFooter: true,
+                },
             },
             {
                 path: 'securing-your-data',
-                loadChildren: '../../pages/securing-your-data/securing-your-data.module#SecuringYourDataModule',
+                loadChildren: '../../pages/footer/securing-your-data/securing-your-data.module#SecuringYourDataModule',
+                data: {
+                    isSimpleFooter: true,
+                },
             },
             {
                 path: 'cookies-policy',
-                loadChildren: '../../pages/cookies-policy/cookies-policy.module#CookiesPolicyModule',
+                loadChildren: '../../pages/footer/cookies-policy/cookies-policy.module#CookiesPolicyModule',
+                data: {
+                    isSimpleFooter: true,
+                },
             },
             {
                 path: 'terms-of-use',
-                loadChildren: '../../pages/terms-of-use/terms-of-use.module#TermsOfUseModule',
+                loadChildren: '../../pages/footer/terms-of-use/terms-of-use.module#TermsOfUseModule',
+                data: {
+                    isSimpleFooter: true,
+                },
             },
         ],
     },
@@ -51,4 +62,4 @@ const routes = [
         RouterModule,
     ],
 })
-export class PublicLayoutRoutingModule { }
+export class PublicLayoutRoutingModule {}
