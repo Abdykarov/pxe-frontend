@@ -5,7 +5,7 @@ import {
     OnChanges,
     OnInit,
     Output,
-    SimpleChanges,
+    SimpleChanges, TemplateRef,
 } from '@angular/core';
 import {
     FormBuilder,
@@ -25,7 +25,7 @@ import {
 })
 export class NewsSubscriptionComponent implements OnInit, OnChanges {
     @Input()
-    public hrefToSecuringData: string;
+    public customLabelSecuringDataTemplate?: TemplateRef<any>;
 
     @Input()
     public subscriptionFormSent = false;

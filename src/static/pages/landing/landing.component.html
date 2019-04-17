@@ -136,7 +136,7 @@
         [config]="config">
     </pxe-map-coverage>
     <pxe-news-subscription
-         [hrefToSecuringData]="hrefToSecuringData"
+        [customLabelSecuringDataTemplate]="hrefConfirmSecure"
         [subscriptionFormFields]="subscriptionFormFields"
         [submitSubscriptionLoading]="submitSubscriptionLoading"
         [subscriptionFormSent]="subscriptionFormSent"
@@ -145,3 +145,10 @@
         (submitSubscriptionForm)="submitSubscriptionForm($event)"
     ></pxe-news-subscription>
 </div>
+
+<ng-template #hrefConfirmSecure>
+    Souhlasím se
+    <a>
+        zásadami bezpečnosti
+    </a>
+</ng-template>

@@ -5,7 +5,12 @@
         *ngIf="type === 'LABEL'"
         class="form-control-text"
         [ngClass]="customFieldClass">
-        {{ label }}
+        <ng-container *ngIf="label">
+            {{label}}
+        </ng-container>
+        <ng-container *ngIf="customLabelTemplate">
+            <ng-container *ngTemplateOutlet="customLabelTemplate"></ng-container>
+        </ng-container>
     </span>
     <div
         *ngIf="type !== 'LABEL'"
@@ -144,7 +149,13 @@
             [ngClass]="radioGroupClass">
             <span
                 class="control-label radiogroup-control-label"
-                *ngIf="!hideLabel" [innerHTML]="label">
+                *ngIf="!hideLabel">
+                    <ng-container *ngIf="label">
+                        {{label}}
+                    </ng-container>
+                    <ng-container *ngIf="customLabelTemplate">
+                        <ng-container *ngTemplateOutlet="customLabelTemplate"></ng-container>
+                    </ng-container>
             </span>
             <div
                 *ngFor="let option of options"
@@ -222,7 +233,13 @@
             class="radio-group--switch">
             <span
                 class="control-label radiogroup-control-label"
-                *ngIf="!hideLabel" [innerHTML]="label">
+                *ngIf="!hideLabel">
+                    <ng-container *ngIf="label">
+                        {{label}}
+                    </ng-container>
+                    <ng-container *ngIf="customLabelTemplate">
+                        <ng-container *ngTemplateOutlet="customLabelTemplate"></ng-container>
+                    </ng-container>
             </span>
             <div
                 *ngFor="let option of options"
@@ -299,14 +316,20 @@
             </option>
         </select>
         <label
-            *ngIf="label"
+            *ngIf="label || customLabelTemplate"
             [class.control-label]="type !== 'CHECKBOX' && type !== 'FILE' && !hideLabel && type !== 'SWITCH'"
             [class.custom-control-label]="!!hideLabel || type === 'CHECKBOX' && !hideLabel || type === 'SWITCH' && !hideLabel"
             [class.custom-file-label]="type === 'FILE' && !hideLabel"
             [class.sr-only]="!!hideLabel || type === 'RADIOGROUP' || type === 'SELECT'"
             (click)="labelClick()"
             [for]="id"
-            [innerHTML]="label">
+        >
+            <ng-container *ngIf="label">
+                {{label}}
+            </ng-container>
+            <ng-container *ngIf="customLabelTemplate">
+                <ng-container *ngTemplateOutlet="customLabelTemplate"></ng-container>
+            </ng-container>
         </label>
         <span
             *ngIf="type === 'SELECT'"
