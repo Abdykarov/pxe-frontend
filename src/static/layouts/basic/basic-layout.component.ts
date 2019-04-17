@@ -4,8 +4,8 @@ import {
     Router,
 } from '@angular/router';
 
-import { staticNavigationConfig } from '../../config/navigation.config';
-import { IRouterData } from '../../../app/layouts/model/router-data';
+import { staticNavigationConfig } from 'src/static/config/navigation.config';
+import { IRouterData } from 'src/app/layouts/model/router-data';
 
 @Component({
     templateUrl: './basic-layout.component.html',

@@ -9,8 +9,8 @@ import { Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { IRouterData } from './model/router-data';
+import { OverlayService } from 'src/common/graphql/services/overlay.service';
 
 export abstract class AbstractLayoutComponent extends AbstractComponent {
     public showOverlay = false;

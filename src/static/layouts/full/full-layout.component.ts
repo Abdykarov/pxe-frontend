@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IRouterData } from '../../../app/layouts/model/router-data';
+
+import { IRouterData } from 'src/app/layouts/model/router-data';
 
 @Component({
     templateUrl: './full-layout.component.html',
