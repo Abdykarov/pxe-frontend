@@ -8,8 +8,8 @@
         <ng-container *ngIf="label">
             {{label}}
         </ng-container>
-        <ng-container *ngIf="customLabelTemplate">
-            <ng-container *ngTemplateOutlet="customLabelTemplate"></ng-container>
+        <ng-container *ngIf="labelTemplate">
+            <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
         </ng-container>
     </span>
     <div
@@ -153,8 +153,8 @@
                     <ng-container *ngIf="label">
                         {{label}}
                     </ng-container>
-                    <ng-container *ngIf="customLabelTemplate">
-                        <ng-container *ngTemplateOutlet="customLabelTemplate"></ng-container>
+                    <ng-container *ngIf="labelTemplate">
+                        <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
                     </ng-container>
             </span>
             <div
@@ -237,8 +237,8 @@
                     <ng-container *ngIf="label">
                         {{label}}
                     </ng-container>
-                    <ng-container *ngIf="customLabelTemplate">
-                        <ng-container *ngTemplateOutlet="customLabelTemplate"></ng-container>
+                    <ng-container *ngIf="labelTemplate">
+                        <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
                     </ng-container>
             </span>
             <div
@@ -316,7 +316,7 @@
             </option>
         </select>
         <label
-            *ngIf="label || customLabelTemplate"
+            *ngIf="label || labelTemplate"
             [class.control-label]="type !== 'CHECKBOX' && type !== 'FILE' && !hideLabel && type !== 'SWITCH'"
             [class.custom-control-label]="!!hideLabel || type === 'CHECKBOX' && !hideLabel || type === 'SWITCH' && !hideLabel"
             [class.custom-file-label]="type === 'FILE' && !hideLabel"
@@ -327,8 +327,8 @@
             <ng-container *ngIf="label">
                 {{label}}
             </ng-container>
-            <ng-container *ngIf="customLabelTemplate">
-                <ng-container *ngTemplateOutlet="customLabelTemplate"></ng-container>
+            <ng-container *ngIf="labelTemplate">
+                <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
             </ng-container>
         </label>
         <span

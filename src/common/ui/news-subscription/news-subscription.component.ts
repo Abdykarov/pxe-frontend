@@ -26,7 +26,7 @@ import {
 })
 export class NewsSubscriptionComponent implements OnInit, OnChanges {
     @Input()
-    public customLabelSecuringDataTemplate?: TemplateRef<any>;
+    public labelSecuringDataTemplate?: TemplateRef<any>;
 
     @Input()
     public subscriptionFormSent = false;

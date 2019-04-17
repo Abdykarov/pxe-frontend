@@ -32,7 +32,7 @@
                                 [formControl]="subscriptionForm.controls.consent"
                                 [id]="'consent'"
                                 label=""
-                                [customLabelTemplate]="customLabelSecuringDataTemplate"
+                                [labelTemplate]="labelSecuringDataTemplate"
                                 [success]="subscriptionForm.controls.consent.valid && (subscriptionForm.controls.consent.touched || subscriptionFormError.consent)"
                                 [touched]="subscriptionForm.controls.consent.touched || subscriptionFormError.consent"
                                 [type]="'CHECKBOX'"
