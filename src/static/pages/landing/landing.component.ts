@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { IFieldError } from 'src/common/ui/news-subscription/models/form-definition.model';
 import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
-import { subscriptionFormFields } from '../../../common/containers/news-subscription/news-subsctiption-container.config';
-import { IFieldError } from '../../../common/ui/news-subscription/models/form-definition.model';
+import { subscriptionFormFields } from 'src/common/containers/news-subscription/news-subsctiption-container.config';
 
 @Component({
     selector: 'lnd-landing-page',
@@ -49,6 +49,7 @@ export class LandingComponent {
     };
 
     public submitSubscriptionForm = (values) => {
+        this.submitSubscriptionLoading = true;
         console.log('Formulář odeslán');
     }
 
