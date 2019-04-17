@@ -7,6 +7,7 @@ import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { LandingComponent } from './landing.component';
 import { MapCoverageModule } from 'src/common/ui/map-coverage/map-coverage.module';
+import { NewsSubscriptionModule } from 'src/common/ui/news-subscription/news-subscription.module';
 
 @NgModule({
     declarations: [
@@ -21,6 +22,7 @@ import { MapCoverageModule } from 'src/common/ui/map-coverage/map-coverage.modul
         CommonModule,
         FormModule,
         MapCoverageModule,
+        NewsSubscriptionModule,
     ],
 })
 export class LandingModule { }

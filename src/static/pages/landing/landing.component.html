@@ -135,32 +135,13 @@
     <pxe-map-coverage
         [config]="config">
     </pxe-map-coverage>
-    <div class="section stay-in-touch">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-3 col-lg-4 offset-lg-4">
-                    <div class="px-3 px-md-0">
-                        <h3 class="h3--public">
-                            Chci mít také přístup k&nbsp;jiným cenám, možnost&nbsp;měnit dodavatele jen na&nbsp;jedno kliknutí a&nbsp;zbavit se starostí s&nbsp;převodem.
-                        </h3>
-                        <lnd-form-field
-                            [id]="'newsletter-email'"
-                            label="E-mail"
-                            placeholder="jan@novak.cz"
-                            [lightField]="true">
-                        </lnd-form-field>
-                        <lnd-form-field
-                            [id]="'newsletter-security-policy-agree'"
-                            label="<a>Souhlasím se zásady bezpečnosti</a>"
-                            type="CHECKBOX">
-                        </lnd-form-field>
-                        <lnd-button
-                            label="Odeslat"
-                            type="primary">
-                        </lnd-button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <pxe-news-subscription
+         [hrefToSecuringData]="hrefToSecuringData"
+        [subscriptionFormFields]="subscriptionFormFields"
+        [submitSubscriptionLoading]="submitSubscriptionLoading"
+        [subscriptionFormSent]="subscriptionFormSent"
+        [subscriptionGlobalError]="subscriptionGlobalError"
+        [subscriptionFieldError]="subscriptionFieldError"
+        (submitSubscriptionForm)="submitSubscriptionForm($event)"
+    ></pxe-news-subscription>
 </div>
