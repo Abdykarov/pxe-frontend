@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 
 import * as R from 'ramda';
+
 import { IForm } from '../models/form-definition.model';
 
 @Component({
