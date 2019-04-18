@@ -1,3 +1,8 @@
+import {
+    ActivatedRoute,
+    NavigationEnd,
+    Router,
+} from '@angular/router';
 import { Component } from '@angular/core';
 
 import {
@@ -14,6 +19,17 @@ export class FullLayoutComponent {
         isPublic: true,
         isSimpleFooter: true,
         signInType: SignType.STATIC,
-        loginType: LoginType.STATIC,
+        loginType: LoginType.NONE,
     };
+
+    constructor(
+        protected route: ActivatedRoute,
+        protected router: Router,
+    ) {
+        this.router.events.subscribe(event => {
+            if (event instanceof NavigationEnd) {
+                this.settings = <ISettings>this.route.snapshot.firstChild.data;
+            }
+        });
+    }
 }

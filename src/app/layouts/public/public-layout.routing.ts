@@ -34,7 +34,7 @@ const routes = [
             },
             {
                 path: 'login',
-                loadChildren: '../../pages/login/login-page.module#LoginPageModule',
+                loadChildren: '../../pages/login/login.module#LoginModule',
                 data: {
                     isPublic: true,
                     isSimpleFooter: true,

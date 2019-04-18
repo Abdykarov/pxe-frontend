@@ -17,10 +17,10 @@ export class BasicLayoutComponent {
     public itemOpened = null;
     public navigationConfig = [];
     public settings: ISettings = {
-        isPublic: false,
-        isSimpleFooter: false,
-        signInType: SignType.STATIC,
-        loginType: LoginType.STATIC,
+        isPublic: true,
+        isSimpleFooter: true,
+        signInType: SignType.NONE,
+        loginType: LoginType.NONE,
     };
 
     constructor (

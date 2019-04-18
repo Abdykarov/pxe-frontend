@@ -4,6 +4,9 @@ import {
     TestBed,
 } from '@angular/core/testing';
 
+import { RouterTestingModule } from '@angular/router/testing';
+
+import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 import { SecuringYourDataComponent } from './securing-your-data.component';
 
 describe('SecuringYourDataComponent', () => {
@@ -14,6 +17,10 @@ describe('SecuringYourDataComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 SecuringYourDataComponent,
+            ],
+            imports: [
+                LayoutContainerModule,
+                RouterTestingModule.withRoutes([]),
             ],
         })
         .compileComponents();
