@@ -1,0 +1,41 @@
+<div
+    [formGroup]="parentForm"
+    class="form-group ng-select ng-select-custom">
+    <ng-select
+        #select
+        [items]="options"
+        [selectOnTab]="true"
+        [searchable]="searchable"
+        [formControl]="parentForm.controls[selectName]"
+        bindValue="key"
+        bindLabel="label"
+        [placeholder]="label"
+        class="form-control"
+        [class.is-disabled]="disabledField"
+        [attr.tabindex]="!!disabledField ? '-1' : null"
+        [attr.disabled]="!!disabledField ? 'disabled' : null"
+        [class.is-warning]="!!warning"
+        [class.is-invalid]="!!error"
+        notFoundText="Nenalezeny žádné záznamy"
+        [searchFn]="customSearchFn">
+        <ng-template
+            ng-option-tmp
+            let-item="item"
+            let-search="searchTerm">
+            <div [ngOptionHighlight]="search">
+                {{ item.label }}
+            </div>
+        </ng-template>
+    </ng-select>
+    <div
+        *ngIf="!!subtext"
+        class="input-subtext"
+        [class.input-subtext--disabled]="!!disabled">
+        {{ subtext }}
+    </div>
+    <div
+        *ngIf="!!error"
+        class="invalid-feedback"
+        [innerHtml]="error">
+    </div>
+</div>
