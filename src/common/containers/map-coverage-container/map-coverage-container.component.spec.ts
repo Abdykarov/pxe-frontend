@@ -6,6 +6,11 @@ import {
 
 import { MapCoverageContainerComponent } from './map-coverage-container.component';
 import { MapCoverageModule } from 'src/common/ui/map-coverage/map-coverage.module';
+import {
+    NotificationLayoutContainerModule,
+} from 'src/common/containers/notification-layout-container/notification-layout-container.module';
+import { RouterTestingModule } from '@angular/router/testing';
+import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
 
 describe('MapCoverageContainerComponent', () => {
     let component: MapCoverageContainerComponent;
@@ -18,6 +23,9 @@ describe('MapCoverageContainerComponent', () => {
             ],
             imports: [
                 MapCoverageModule,
+                NotificationLayoutContainerModule,
+                RouterTestingModule.withRoutes([]),
+                SupplierModule,
             ],
         })
         .compileComponents();

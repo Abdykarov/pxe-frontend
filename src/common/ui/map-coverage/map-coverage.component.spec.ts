@@ -5,7 +5,7 @@ import {
 } from '@angular/core/testing';
 import { DecimalPipe } from '@angular/common';
 
-import { config } from 'src/common/containers/map-coverage-container/map-coverage-container.config';
+import { configCoverage } from 'src/common/containers/map-coverage-container/map-coverage-container.config';
 import { MapCoverageComponent } from './map-coverage.component';
 import { PipesModule } from 'src/common/pipes/pipes.module';
 import { TabsModule } from '../tabs/tabs.module';
@@ -33,7 +33,7 @@ describe('MapCoverageComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(MapCoverageComponent);
         component = fixture.componentInstance;
-        component.config = config;
+        component.configCoverage = configCoverage;
         fixture.detectChanges();
     });
 

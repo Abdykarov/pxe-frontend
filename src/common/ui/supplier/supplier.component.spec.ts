@@ -3,22 +3,24 @@ import {
     ComponentFixture,
     TestBed,
 } from '@angular/core/testing';
+import { SupplierComponent } from './supplier.component';
 
-import { SuplierComponent } from './map-coverage.component';
 
 describe('MapCoverageComponent', () => {
-    let component: SuplierComponent;
-    let fixture: ComponentFixture<SuplierComponent>;
+    let component: SupplierComponent;
+    let fixture: ComponentFixture<SupplierComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-          declarations: [ SuplierComponent ],
+            declarations: [
+                SupplierComponent,
+            ],
         })
         .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(SuplierComponent);
+        fixture = TestBed.createComponent(SupplierComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

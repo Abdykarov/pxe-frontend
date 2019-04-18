@@ -5,6 +5,10 @@ import {
 } from '@angular/core/testing';
 
 import { TermsOfUseComponent } from './terms-of-use.component';
+import {
+    NotificationLayoutContainerModule,
+} from 'src/common/containers/notification-layout-container/notification-layout-container.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('TermOfUseComponent', () => {
     let component: TermsOfUseComponent;
@@ -14,6 +18,10 @@ describe('TermOfUseComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 TermsOfUseComponent,
+            ],
+            imports: [
+                NotificationLayoutContainerModule,
+                RouterTestingModule.withRoutes([]),
             ],
         })
         .compileComponents();
