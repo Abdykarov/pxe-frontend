@@ -9,6 +9,7 @@ import { LandingComponent } from './landing.component';
 import { MapCoverageModule } from 'src/common/ui/map-coverage/map-coverage.module';
 import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
 import { NewsSubscriptionModule } from 'src/common/ui/news-subscription/news-subscription.module';
+import { LoginType, SignType } from '../../../app/layouts/models/router-data.model';
 
 @NgModule({
     declarations: [
@@ -33,5 +34,11 @@ export const landingPageRoutes: Routes = [
     {
         path: 'landing-page',
         component: LandingComponent,
+        data: {
+            isPublic: true,
+            isSimpleFooter: true,
+            loginType: LoginType.NONE,
+            signInType: SignType.STATIC,
+        },
     },
 ];

@@ -1,7 +1,8 @@
 import { Validators } from '@angular/forms';
 
 import { CustomValidators } from 'src/common/utils';
-import { IForm } from 'src/common/ui/news-subscription/models/form-definition.model';
+import { errorFieldMessages } from 'src/common/constants/errors.constant';
+import { IForm } from 'src/common/containers/form-container/models/form-definition.model';
 
 export const subscriptionFormFields: IForm = {
     controls: {
@@ -21,12 +22,12 @@ export const subscriptionFormFields: IForm = {
     },
     validationMessages: {
         email: {
-            required: 'Zadejte svůj e-mail.',
-            email: 'Použijte pouze písmena bez diakritiky, číslice, tečku (.) a zavináč (@).',
-            'already-registered-email': 'Tento e-mail již registrujeme.',
+            required: errorFieldMessages.email.required,
+            email: errorFieldMessages.email.email,
+            'already-registered-email': errorFieldMessages.email.alreadyRegisteredEmail,
         },
         consent: {
-            required: 'Nezapomeňte na souhlas se zásadami bezpečnosti.',
+            required: errorFieldMessages.consent.required,
         },
     },
 };

@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import {
-    NavigationEnd,
-    Router,
-} from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
-import { staticNavigationConfig } from '../../config/navigation.config';
+import { staticNavigationConfig } from 'src/static/config/navigation.config';
+import {
+    ISettings,
+    LoginType,
+    SignType,
+} from 'src/app/layouts/models/router-data.model';
 
 @Component({
     templateUrl: './basic-layout.component.html',
@@ -14,6 +16,12 @@ export class BasicLayoutComponent {
     public isMenuOpen = false;
     public itemOpened = null;
     public navigationConfig = [];
+    public settings: ISettings = {
+        isPublic: true,
+        isSimpleFooter: true,
+        signInType: SignType.NONE,
+        loginType: LoginType.NONE,
+    };
 
     constructor (
         public router: Router,

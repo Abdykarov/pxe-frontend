@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-import { IFieldError } from 'src/common/ui/news-subscription/models/form-definition.model';
+import { IFieldError } from 'src/common/containers/form-container/models/form-definition.model';
 import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
 import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
 import { subscriptionFormFields } from 'src/common/containers/news-subscription/news-subsctiption-container.config';
