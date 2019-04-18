@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import {
     ISettings,
+    LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 
@@ -13,6 +14,6 @@ export class FullLayoutComponent {
         isPublic: true,
         isSimpleFooter: true,
         signInType: SignType.STATIC,
-        showLogin: false,
+        loginType: LoginType.STATIC,
     };
 }

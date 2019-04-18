@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { PublicLayoutComponent } from './public-layout.component';
-import { SignType } from '../models/router-data.model';
+import {
+    LoginType,
+    SignType,
+} from '../models/router-data.model';
 
 const routes = [
     {
@@ -15,7 +18,7 @@ const routes = [
                 data: {
                     isPublic: true,
                     isSimpleFooter: true,
-                    showLogin: false,
+                    loginType: LoginType.NONE,
                     signInType: SignType.SCROLL,
                 },
             },
@@ -25,7 +28,7 @@ const routes = [
                 data: {
                     isPublic: true,
                     isSimpleFooter: true,
-                    showLogin: false,
+                    loginType: LoginType.NONE,
                     signInType: SignType.NAVIGATE,
                 },
             },
@@ -35,7 +38,7 @@ const routes = [
                 data: {
                     isPublic: true,
                     isSimpleFooter: true,
-                    showLogin: false,
+                    loginType: LoginType.NONE,
                     signInType: SignType.NAVIGATE,
                 },
             },
@@ -45,7 +48,7 @@ const routes = [
                 data: {
                     isPublic: true,
                     isSimpleFooter: true,
-                    showLogin: false,
+                    loginType: LoginType.NONE,
                     signInType: SignType.NONE,
                 },
             },
@@ -55,7 +58,7 @@ const routes = [
                 data: {
                     isPublic: true,
                     isSimpleFooter: true,
-                    showLogin: false,
+                    loginType: LoginType.NONE,
                     signInType: SignType.NAVIGATE,
                 },
             },
@@ -65,17 +68,17 @@ const routes = [
                 data: {
                     isPublic: true,
                     isSimpleFooter: true,
-                    showLogin: false,
+                    loginType: LoginType.NONE,
                     signInType: SignType.NAVIGATE,
                 },
             },
             {
                 path: 'sign-in',
-                loadChildren: '../../pages/ssign-in/sign-in.module#SignInModule',
+                loadChildren: '../../pages/sign-in/sign-in.module#SignInModule',
                 data: {
                     isPublic: true,
                     isSimpleFooter: true,
-                    showLogin: true,
+                    loginType: LoginType.NAVIGATE,
                     signInType: SignType.NONE,
                 },
             },

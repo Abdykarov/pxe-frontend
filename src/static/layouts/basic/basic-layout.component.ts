@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import {
-    NavigationEnd,
-    Router,
-} from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 import { staticNavigationConfig } from 'src/static/config/navigation.config';
 import {
     ISettings,
+    LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 
@@ -22,7 +20,7 @@ export class BasicLayoutComponent {
         isPublic: false,
         isSimpleFooter: false,
         signInType: SignType.STATIC,
-        showLogin: false,
+        loginType: LoginType.STATIC,
     };
 
     constructor (

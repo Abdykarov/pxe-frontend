@@ -8,7 +8,7 @@
 </div>
 
 <lnd-modal title="Přihlášení"
-           [isModalOpen]="showLogin"
+           [isModalOpen]="loginType"
            (close)="toggleLoginDialog()">
     <form [formGroup]="loginForm">
         <div class="modal-body">

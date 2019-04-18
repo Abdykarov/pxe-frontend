@@ -23,12 +23,12 @@
                         <lnd-button
                             label="Registrace"
                             type="primary"
-                            (click)="signIn(settings.signInType)">
+                            (click)="signIn()">
                         </lnd-button>
                     </div>
                     <div
                         class="registration-holder"
-                        *ngIf="settings.showLogin">
+                        *ngIf="settings.loginType !== loginTypeNone">
                         <lnd-button
                             label="Přihlášení"
                             type="primary"

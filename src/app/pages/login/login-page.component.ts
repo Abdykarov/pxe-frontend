@@ -26,7 +26,7 @@ export class LoginComponent extends AbstractComponent {
     public loginError = false;
     public loginForm: FormGroup;
     public loginLoading = false;
-    public showLogin = false;
+    public loginType = false;
 
     constructor(
         private apollo: Apollo,
@@ -70,7 +70,7 @@ export class LoginComponent extends AbstractComponent {
 
     public toggleLoginDialog = () => {
         if (!this.loginLoading) {
-            this.showLogin = !this.showLogin;
+            this.loginType = !this.loginType;
             this.overlayService.toggleOverlay()
                 .pipe(
                     takeUntil(this.destroy$),

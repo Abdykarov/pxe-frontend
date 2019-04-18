@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 
 import {
     ISettings,
+    LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
@@ -21,6 +22,7 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 export class HeaderComponent {
     public isHeaderSticked: boolean;
     public signTypeNone = SignType.NONE;
+    public loginTypeNone = LoginType.NONE;
 
     @Input() settings: ISettings;
 
@@ -46,16 +48,18 @@ export class HeaderComponent {
         private router: Router,
     ) {}
 
-    signIn(signInType: SignType) {
-        if (signInType === SignType.SCROLL) {
+    signIn() {
+        if (this.settings.signInType === SignType.SCROLL) {
             this.scrollToService.scrollToSubscription();
-        } else {
+        } else if (this.settings.signInType === SignType.NAVIGATE) {
             this.router.navigate(['sign-in']);
         }
     }
 
     login() {
-        this.router.navigate(['login']);
+        if (this.settings.loginType === LoginType.NAVIGATE) {
+            this.router.navigate(['login']);
+        }
     }
 }
 
