@@ -1,7 +1,7 @@
 import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
 import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
 
-export const configCovarage: IMapCoverageConfig = {
+export const configCoverage: IMapCoverageConfig = {
     gas: {
         places: 447,
         stackCapacity: 2,

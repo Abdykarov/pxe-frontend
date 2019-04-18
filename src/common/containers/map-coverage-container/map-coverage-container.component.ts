@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import {
-    configCovarage,
+    configCoverage,
     configSuppliers,
 } from './map-coverage-container.config';
 import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
@@ -13,6 +13,6 @@ import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
     styleUrls: ['./map-coverage-container.component.scss'],
 })
 export class MapCoverageContainerComponent {
-    public configCovarage: IMapCoverageConfig = configCovarage;
+    public configCoverage: IMapCoverageConfig = configCoverage;
     public configSupplier: ISupplier[] = configSuppliers;
 }

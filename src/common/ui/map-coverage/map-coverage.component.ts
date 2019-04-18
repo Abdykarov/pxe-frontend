@@ -15,10 +15,13 @@ import { SupplierComponent } from '../supplier/supplier.component';
 })
 export class MapCoverageComponent {
     @Input()
-    public configCovarage: IMapCoverageConfig;
+    public configCoverage: IMapCoverageConfig;
 
     @Input()
-    public supplierTemplate: TemplateRef<SupplierComponent>;
+    public supplierTemplateGas: TemplateRef<SupplierComponent>;
+
+    @Input()
+    public supplierTemplatePower: TemplateRef<SupplierComponent>;
 
     public RESULT_TYPE_CONSUMPTION_UNIT: RESULT_TYPE_CONSUMPTION = RESULT_TYPE_CONSUMPTION.UNIT;
     public RESULT_TYPE_CONSUMPTION_VALUE: RESULT_TYPE_CONSUMPTION = RESULT_TYPE_CONSUMPTION.VALUE;

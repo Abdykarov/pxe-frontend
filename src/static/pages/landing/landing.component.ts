@@ -124,7 +124,7 @@ export class LandingComponent {
         },
     ];
 
-    public configCovarage: IMapCoverageConfig = {
+    public configCoverage: IMapCoverageConfig = {
         gas: {
             places: 447,
             stackCapacity: 2,

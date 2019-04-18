@@ -21,10 +21,10 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            {{configCovarage.power.places}}
+                                            {{configCoverage.power.places}}
                                         </div>
                                         <div class="box-info__unit">
-                                            {{configCovarage.power.places.toString() | plural:'place'}}
+                                            {{configCoverage.power.places.toString() | plural:'place'}}
                                         </div>
                                     </div>
                                 </div>
@@ -36,10 +36,10 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            {{configCovarage.power.temelinPerformance}}
+                                            {{configCoverage.power.temelinPerformance}}
                                         </div>
                                         <div class="box-info__unit">
-                                            {{configCovarage.power.temelinPerformance.toString() | plural:'day'}}
+                                            {{configCoverage.power.temelinPerformance.toString() | plural:'day'}}
                                         </div>
                                     </div>
                                 </div>
@@ -51,15 +51,25 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            {{configCovarage.power.consumption | consumption: RESULT_TYPE_CONSUMPTION_VALUE}}
+                                            {{configCoverage.power.consumption | consumption: RESULT_TYPE_CONSUMPTION_VALUE}}
                                         </div>
                                         <div class="box-info__unit">
-                                            {{configCovarage.power.consumption | consumption: RESULT_TYPE_CONSUMPTION_UNIT}}
+                                            {{configCoverage.power.consumption | consumption: RESULT_TYPE_CONSUMPTION_UNIT}}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="px-3 px-md-0">
+                                <h3>
+                                    V jednání
+                                </h3>
+                            </div>
+                        </div>
+                        <ng-container *ngTemplateOutlet="supplierTemplatePower"></ng-container>
                     </div>
                 </div>
             </lnd-tab>
@@ -74,10 +84,10 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            {{configCovarage.gas.places}}
+                                            {{configCoverage.gas.places}}
                                         </div>
                                         <div class="box-info__unit">
-                                            {{configCovarage.gas.places.toString() | plural:'place'}}
+                                            {{configCoverage.gas.places.toString() | plural:'place'}}
                                         </div>
                                     </div>
                                 </div>
@@ -89,7 +99,7 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            {{configCovarage.gas.stackCapacity}}
+                                            {{configCoverage.gas.stackCapacity}}
                                         </div>
                                         <div class="box-info__unit">
                                             Násobek
@@ -104,29 +114,29 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            {{configCovarage.gas.consumption | consumption: RESULT_TYPE_CONSUMPTION_VALUE}}
+                                            {{configCoverage.gas.consumption | consumption: RESULT_TYPE_CONSUMPTION_VALUE}}
                                         </div>
                                         <div class="box-info__unit">
-                                            {{configCovarage.gas.consumption | consumption: RESULT_TYPE_CONSUMPTION_UNIT}}
+                                            {{configCoverage.gas.consumption | consumption: RESULT_TYPE_CONSUMPTION_UNIT}}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="px-3 px-md-0">
+                                <h3>
+                                    V jednání
+                                </h3>
+                            </div>
+                            <ng-container *ngTemplateOutlet="supplierTemplateGas"></ng-container>
+                        </div>
+                    </div>
                 </div>
             </lnd-tab>
         </lnd-tabs>
-        <div class="row">
-            <div class="col-12">
-                <div class="px-3 px-md-0">
-                    <h3>
-                        V jednání
-                    </h3>
-                </div>
-            </div>
-        </div>
     </div>
-    <ng-container *ngTemplateOutlet="supplierTemplate"></ng-container>
 </div>
 
