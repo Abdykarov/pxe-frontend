@@ -6,9 +6,7 @@ import {
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { CookiesPolicyComponent } from './cookies-policy.component';
-import {
-    NotificationLayoutContainerModule,
-} from 'src/common/containers/notification-layout-container/notification-layout-container.module';
+import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 
 describe('CookiesPolicyComponent', () => {
     let component: CookiesPolicyComponent;
@@ -20,7 +18,7 @@ describe('CookiesPolicyComponent', () => {
                 CookiesPolicyComponent,
             ],
             imports: [
-                NotificationLayoutContainerModule,
+                LayoutContainerModule,
                 RouterTestingModule.withRoutes([]),
             ],
         })

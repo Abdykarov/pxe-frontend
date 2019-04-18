@@ -144,6 +144,7 @@
     >
     </pxe-map-coverage>
     <pxe-news-subscription
+        (openConsentAction)="openConsent($event)"
         [subscriptionFormFields]="subscriptionFormFields"
         [submitSubscriptionLoading]="submitSubscriptionLoading"
         [subscriptionFormSent]="subscriptionFormSent"

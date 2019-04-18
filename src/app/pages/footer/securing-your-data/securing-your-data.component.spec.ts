@@ -4,11 +4,10 @@ import {
     TestBed,
 } from '@angular/core/testing';
 
-import { SecuringYourDataComponent } from './securing-your-data.component';
-import {
-    NotificationLayoutContainerModule,
-} from 'src/common/containers/notification-layout-container/notification-layout-container.module';
 import { RouterTestingModule } from '@angular/router/testing';
+
+import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
+import { SecuringYourDataComponent } from './securing-your-data.component';
 
 describe('SecuringYourDataComponent', () => {
     let component: SecuringYourDataComponent;
@@ -20,7 +19,7 @@ describe('SecuringYourDataComponent', () => {
                 SecuringYourDataComponent,
             ],
             imports: [
-                NotificationLayoutContainerModule,
+                LayoutContainerModule,
                 RouterTestingModule.withRoutes([]),
             ],
         })

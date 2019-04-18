@@ -1,0 +1,33 @@
+<lnd-alert *ngIf="loginGlobalError.length"
+           type="danger">
+    <ng-container *ngFor="let globalError of loginGlobalError">
+        {{globalError}}<br>
+    </ng-container>
+</lnd-alert>
+<form [formGroup]="loginForm"
+      autocomplete="off">
+    <lnd-form-field
+        [error]="loginForm.controls.username.errors"
+        [formControl]="loginForm.controls.username"
+        [id]="'username'"
+        label="E-mail"
+        [success]="loginForm.controls.username.valid && loginForm.controls.username.touched"
+        [touched]="loginForm.controls.username.touched"
+        [validationMessages]="loginFormFields.validationMessages.username"
+    ></lnd-form-field>
+    <lnd-form-field
+        [error]="loginForm.controls.password.errors"
+        [formControl]="loginForm.controls.password"
+        [id]="'password'"
+        label="Heslo"
+        [success]="loginForm.controls.password.valid && loginForm.controls.password.touched"
+        [touched]="loginForm.controls.password.touched"
+        [validationMessages]="loginFormFields.validationMessages.password"
+    ></lnd-form-field>
+    <lnd-button
+        type="primary"
+        (action)="submitForm()"
+        [isDisabled]="submitLoginFormLoading"
+        label="Přihlásit se">
+    </lnd-button>
+</form>

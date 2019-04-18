@@ -7,10 +7,10 @@ import { LandingComponent } from './landing.component';
 
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
-import { MapCoverageModule } from 'src/common/ui/map-coverage/map-coverage.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
-import { NewsSubscriptionModule } from '../../../common/ui/news-subscription/news-subscription.module';
-import { SupplierModule } from '../../../common/ui/supplier/supplier.module';
+import { MapCoverageModule } from 'src/common/ui/map-coverage/map-coverage.module';
+import { NewsSubscriptionModule } from 'src/common/ui/news-subscription/news-subscription.module';
+import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
 
 describe('LandingComponent', () => {
     let component: LandingComponent;

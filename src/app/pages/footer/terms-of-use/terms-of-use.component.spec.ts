@@ -4,11 +4,10 @@ import {
     TestBed,
 } from '@angular/core/testing';
 
-import { TermsOfUseComponent } from './terms-of-use.component';
-import {
-    NotificationLayoutContainerModule,
-} from 'src/common/containers/notification-layout-container/notification-layout-container.module';
 import { RouterTestingModule } from '@angular/router/testing';
+
+import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
+import { TermsOfUseComponent } from './terms-of-use.component';
 
 describe('TermOfUseComponent', () => {
     let component: TermsOfUseComponent;
@@ -20,7 +19,7 @@ describe('TermOfUseComponent', () => {
                 TermsOfUseComponent,
             ],
             imports: [
-                NotificationLayoutContainerModule,
+                LayoutContainerModule,
                 RouterTestingModule.withRoutes([]),
             ],
         })
