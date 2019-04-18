@@ -8,7 +8,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { loginFormFields } from './login.config';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
-import { parseRestAPIErrors } from 'src/common/utils/parse-rest-erros.fns';
+import { parseRestAPIErrors } from 'src/common/utils/';
 
 @Component({
     templateUrl: './login.component.html',
