@@ -1,6 +1,7 @@
 <div
     class="form-group"
-    [ngClass]="customFormGroupClass">
+    [ngClass]="customFormGroupClass"
+    [class.pt-0]="type === 'CHECKBOX'">
     <span
         *ngIf="type === 'LABEL'"
         class="form-control-text"

@@ -7,7 +7,7 @@
         </div>
         <div class="row">
             <div class="col-12 col-md-6 col-lg-3 offset-lg-3 d-md-flex justify-content-md-center flex-md-column">
-                <h2>Nakupujte elektřinu a plyn přímo na burze</h2>
+                <h2 class="h3--public">Nakupujte elektřinu a plyn přímo na burze</h2>
                 <ul class="check-list">
                     <li>Měňte dodavatele na jedno kliknutí</li>
                     <li>Neřešte papírování a chození na pobočky</li>
@@ -19,14 +19,23 @@
                 <div class="page-box">
                     <div class="row">
                         <div class="col-12">
-                            <p>
-                                Cookies jsou textové soubory, které obsahují malé množství informací,
-                                které se při návštěvě webové stránky stáhnou do vašeho počítače, mobilu nebo jiného zařízení.
-                                Následně, při každé další návštěvě této webové stránky, se soubory cookies zasílají zpět na původní
-                                webovou stránku nebo na jinou stránku, která cookies rozpozná. Cookies jsou užitečné,
-                                protože umožňují webovým stránkám rozpoznat vaše zařízení a opakovaná návštěva je tak pro vás
-                                komfortnější.
-                            </p>
+                            <form>
+                                <lnd-form-field
+                                    id="email"
+                                    label="Label">
+                                </lnd-form-field>
+                                <lnd-form-field
+                                    [id]="'Agreement'"
+                                    label="Souhlas se zpracováním osobních údajů"
+                                    [type]="'CHECKBOX'">
+                                </lnd-form-field>
+                                <lnd-button
+                                    type="primary"
+                                    (action)="submitForm()"
+                                    [isDisabled]="submitSubscriptionLoading"
+                                    label="Registrovat se">
+                                </lnd-button>
+                            </form>
                         </div>
                     </div>
                 </div>

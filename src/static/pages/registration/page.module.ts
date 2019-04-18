@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 
 // own classes
-import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
+import { ButtonModule } from 'src/common/ui/button/button.module';
+import { FormModule } from 'src/common/ui/forms/form.module';
 import { RegistrationPageComponent } from './page';
 
 @NgModule({
@@ -14,8 +15,9 @@ import { RegistrationPageComponent } from './page';
         RegistrationPageComponent,
     ],
     imports: [
+        ButtonModule,
         CommonModule,
-        BreadcrumbModule,
+        FormModule,
     ],
 })
 export class RegistrationPageModule {}
