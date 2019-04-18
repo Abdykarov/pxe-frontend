@@ -10,13 +10,13 @@ export const navigationConfig: INavigationConfig = [
         },
         {
             'url': '/secured/request',
-            'label': 'Žádost',
+            'label': 'ŽÁDOST',
             'icon': 'home',
             __typename : 'secured',
         },
         {
             'url': '/secured/supply-point',
-            'label': 'Odběrná místa',
+            'label': 'ODBĚRNÁ MÍSTA',
             'icon': 'home',
             __typename : 'secured',
         },

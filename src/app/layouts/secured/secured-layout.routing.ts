@@ -10,24 +10,28 @@ const routes = [
         children: [
             {
                 path: 'dashboard',
-                loadChildren: '../../pages/secured/dashboard/dashboard.module#DashboardModule',
+                loadChildren: '../../pages/dashboard/dashboard.module#DashboardModule',
                 data: {
                     isSimpleFooter: false,
                 },
             },
             {
                 path: 'request',
-                loadChildren: '../../pages/secured/request/request.module#RequestModule',
+                loadChildren: '../../pages/request/request.module#RequestModule',
                 data: {
                     isSimpleFooter: false,
                 },
             },
             {
                 path: 'supply-point',
-                loadChildren: '../../pages/secured/supply-point/supply-point.module#SupplyPointModule',
+                loadChildren: '../../pages/supply-point/supply-point.module#SupplyPointModule',
                 data: {
                     isSimpleFooter: false,
                 },
+            },
+            {
+                path: '',
+                redirectTo: 'dashboard',
             },
             {
                 path: '404',
@@ -35,10 +39,6 @@ const routes = [
                 data: {
                     isSimpleFooter: false,
                 },
-            },
-            {
-                path: 'dashboard',
-                redirectTo: '404',
             },
             {
                 path: '**',
