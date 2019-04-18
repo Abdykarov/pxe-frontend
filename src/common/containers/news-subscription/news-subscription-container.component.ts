@@ -17,8 +17,6 @@ import { subscriptionFormFields } from './news-subsctiption-container.config';
 })
 export class NewsSubscriptionContainerComponent {
 
-    public hrefToSecuringData = '/securing-your-data';
-
     public submitSubscriptionLoading = false;
     public subscriptionFormFields = subscriptionFormFields;
     public subscriptionFormSent = false;
@@ -30,7 +28,8 @@ export class NewsSubscriptionContainerComponent {
         private cd: ChangeDetectorRef,
     ) {}
 
-    public clickToSecureHref() {
+    public openConsent(evt) {
+        evt.preventDefault();
         window.open('securing-your-data');
     }
 

@@ -136,7 +136,7 @@
         [config]="config">
     </pxe-map-coverage>
     <pxe-news-subscription
-        (clickToSecurelinkEvn)="clickToHrefToSecureData()"
+        (openConsentAction)="openConsent($event)"
         [subscriptionFormFields]="subscriptionFormFields"
         [submitSubscriptionLoading]="submitSubscriptionLoading"
         [subscriptionFormSent]="subscriptionFormSent"

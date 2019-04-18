@@ -141,7 +141,8 @@ export class LandingComponent {
         console.log('Formulář odeslán');
     }
 
-    public clickToHrefToSecureData() {
+    public openConsent(evt) {
+        evt.preventDefault();
         console.log('Clicked');
     }
 

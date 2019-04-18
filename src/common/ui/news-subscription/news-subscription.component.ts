@@ -44,7 +44,7 @@ export class NewsSubscriptionComponent implements OnInit, OnChanges {
     submitSubscriptionForm: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
-    clickToSecurelinkEvn: EventEmitter<any> = new EventEmitter<any>();
+    openConsentAction: EventEmitter<any> = new EventEmitter<any>();
 
     public subscriptionForm: FormGroup;
     public subscriptionFormError: any = {};
@@ -63,8 +63,8 @@ export class NewsSubscriptionComponent implements OnInit, OnChanges {
         }
     }
 
-    public clickToSecurelink() {
-        this.clickToSecurelinkEvn.emit();
+    public openConsent($event) {
+        this.openConsentAction.emit($event);
     }
 
     public submitForm = () => {
