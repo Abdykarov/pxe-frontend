@@ -16,6 +16,7 @@ import { subscriptionFormFields } from './news-subsctiption-container.config';
     styleUrls: ['./news-subscription-container.component.scss'],
 })
 export class NewsSubscriptionContainerComponent {
+
     public submitSubscriptionLoading = false;
     public subscriptionFormFields = subscriptionFormFields;
     public subscriptionFormSent = false;
@@ -26,6 +27,11 @@ export class NewsSubscriptionContainerComponent {
         private apollo: Apollo,
         private cd: ChangeDetectorRef,
     ) {}
+
+    public openConsent(evt) {
+        evt.preventDefault();
+        window.open('securing-your-data');
+    }
 
     public submitSubscriptionForm = (values) => {
         this.submitSubscriptionLoading = true;
