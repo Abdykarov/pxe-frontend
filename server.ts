@@ -68,7 +68,7 @@ app.get('/graphql', (req, res) => {
 // Server static files from /app
 app.get('*.*', express.static(join(DIST_FOLDER, 'app')));
 
-// Catch reoutes for server side routes use the Universal engine
+// All routes are rendered as server side routes use the Universal engine
 app.get('*', (req, res, next) => {
     // Catch secured routes as normal client side app
     if (req.originalUrl.indexOf('/secured') === 0) {
@@ -90,7 +90,7 @@ app.get('*', (req, res, next) => {
     });
 });
 
-// All routes send normal client side app
+// All routes (without server side routes) are send as normal client side app
 app.get('*', (req, res) => {
     return res.sendFile(join(APP_FOLDER, 'index.html'));
 });
