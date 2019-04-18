@@ -13,10 +13,11 @@ import {
 } from '@angular/forms';
 
 import * as R from 'ramda';
+
 import {
     IFieldError,
     IForm,
-} from './models/form-definition.model';
+} from 'src/common/containers/form-container/models/form-definition.model';
 
 @Component({
     selector: 'pxe-news-subscription',
