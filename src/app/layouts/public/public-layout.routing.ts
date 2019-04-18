@@ -24,7 +24,7 @@ const routes = [
             },
             {
                 path: 'cookies-policy',
-                loadChildren: '../../pages/footer/cookies-policy/cookies-policy.module#CookiesPolicyModule',
+                loadChildren: '../../pages/cookies-policy/cookies-policy.module#CookiesPolicyModule',
                 data: {
                     isPublic: true,
                     isSimpleFooter: true,
@@ -55,16 +55,6 @@ const routes = [
             {
                 path: 'securing-your-data',
                 loadChildren: '../../pages/securing-your-data/securing-your-data.module#SecuringYourDataModule',
-                data: {
-                    isPublic: true,
-                    isSimpleFooter: true,
-                    loginType: LoginType.NONE,
-                    signInType: SignType.NAVIGATE,
-                },
-            },
-            {
-                path: 'cookies-policy',
-                loadChildren: '../../pages/cookies-policy/cookies-policy.module#CookiesPolicyModule',
                 data: {
                     isPublic: true,
                     isSimpleFooter: true,
