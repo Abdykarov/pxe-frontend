@@ -1,10 +1,3 @@
-<ng-template #hrefConfirmSecure>
-    Souhlasím se
-    <a>
-        zásadami bezpečnosti
-    </a>
-</ng-template>
-
 <div class="landing-page">
     <div class="section about-our-benefit section--picture-second">
         <div class="container-fluid">
@@ -143,7 +136,7 @@
         [config]="config">
     </pxe-map-coverage>
     <pxe-news-subscription
-        [labelSecuringDataTemplate]="hrefConfirmSecure"
+        (clickToSecurelinkEvn)="clickToHrefToSecureData()"
         [subscriptionFormFields]="subscriptionFormFields"
         [submitSubscriptionLoading]="submitSubscriptionLoading"
         [subscriptionFormSent]="subscriptionFormSent"

@@ -1,12 +1,5 @@
-<ng-template #hrefToSecuringTemplate>
-    Souhlasím se
-    <a href="{{hrefToSecuringData}}" target="_blank">
-        zásadami bezpečnosti
-    </a>
-</ng-template>
-
 <pxe-news-subscription
-    [labelSecuringDataTemplate]="hrefToSecuringTemplate"
+    (clickToSecurelinkEvn) ="clickToSecureHref()"
     [subscriptionFormFields]="subscriptionFormFields"
     [submitSubscriptionLoading]="submitSubscriptionLoading"
     [subscriptionFormSent]="subscriptionFormSent"

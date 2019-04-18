@@ -30,6 +30,10 @@ export class NewsSubscriptionContainerComponent {
         private cd: ChangeDetectorRef,
     ) {}
 
+    public clickToSecureHref() {
+        window.open('securing-your-data');
+    }
+
     public submitSubscriptionForm = (values) => {
         this.submitSubscriptionLoading = true;
         this.subscriptionGlobalError = [];

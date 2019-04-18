@@ -141,6 +141,10 @@ export class LandingComponent {
         console.log('Formulář odeslán');
     }
 
+    public clickToHrefToSecureData() {
+        console.log('Clicked');
+    }
+
     constructor() {
         this.breadcrumbItemsSimple = [
             {

@@ -1,3 +1,12 @@
+<ng-template #hrefToSecuringTemplate>
+    Souhlasím se
+    <a href="javascript: void(0);">
+        <span (click)="clickToSecurelink()">
+           zásadami bezpečnosti
+        </span>
+    </a>
+</ng-template>
+
 <div class="section stay-in-touch">
     <div class="container-fluid">
         <div class="row">
@@ -32,7 +41,7 @@
                                 [formControl]="subscriptionForm.controls.consent"
                                 [id]="'consent'"
                                 label=""
-                                [labelTemplate]="labelSecuringDataTemplate"
+                                [labelTemplate]="hrefToSecuringTemplate"
                                 [success]="subscriptionForm.controls.consent.valid && (subscriptionForm.controls.consent.touched || subscriptionFormError.consent)"
                                 [touched]="subscriptionForm.controls.consent.touched || subscriptionFormError.consent"
                                 [type]="'CHECKBOX'"

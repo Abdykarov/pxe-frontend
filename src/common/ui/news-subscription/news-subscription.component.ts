@@ -6,7 +6,6 @@ import {
     OnInit,
     Output,
     SimpleChanges,
-    TemplateRef,
 } from '@angular/core';
 import {
     FormBuilder,
@@ -25,8 +24,6 @@ import {
     styleUrls: ['./news-subscription.component.scss'],
 })
 export class NewsSubscriptionComponent implements OnInit, OnChanges {
-    @Input()
-    public labelSecuringDataTemplate?: TemplateRef<any>;
 
     @Input()
     public subscriptionFormSent = false;
@@ -46,6 +43,9 @@ export class NewsSubscriptionComponent implements OnInit, OnChanges {
     @Output()
     submitSubscriptionForm: EventEmitter<any> = new EventEmitter<any>();
 
+    @Output()
+    clickToSecurelinkEvn: EventEmitter<any> = new EventEmitter<any>();
+
     public subscriptionForm: FormGroup;
     public subscriptionFormError: any = {};
 
@@ -61,6 +61,10 @@ export class NewsSubscriptionComponent implements OnInit, OnChanges {
         if (changes.subscriptionFieldError) {
             this.subscriptionFormError = R.clone(changes.subscriptionFieldError.currentValue);
         }
+    }
+
+    public clickToSecurelink() {
+        this.clickToSecurelinkEvn.emit();
     }
 
     public submitForm = () => {
