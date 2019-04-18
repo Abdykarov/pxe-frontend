@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
 
-import { IRouterData } from 'src/app/layouts/model/router-data';
+import {
+    ISettings,
+    SignType,
+} from 'src/app/layouts/models/router-data.model';
 
 @Component({
     templateUrl: './full-layout.component.html',
 })
 export class FullLayoutComponent {
-    public routerData: IRouterData = {
+    public settings: ISettings = {
         isPublic: true,
         isSimpleFooter: true,
-        showSignIn: true,
+        signInType: SignType.STATIC,
         showLogin: false,
     };
 }

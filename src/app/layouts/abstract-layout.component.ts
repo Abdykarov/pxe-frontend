@@ -1,26 +1,25 @@
-import {
-    ActivatedRoute,
-    NavigationEnd,
-    Router,
-} from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
 import { Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { IRouterData } from './model/router-data';
+import {
+    ISettings,
+    SignType,
+} from './models/router-data.model';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 
 export abstract class AbstractLayoutComponent extends AbstractComponent {
     public showOverlay = false;
     public toggleSubscription: Subscription;
 
-    public routerData: IRouterData = {
+    public settings: ISettings = {
         isPublic: false,
         isSimpleFooter: false,
         showLogin: false,
-        showSignIn: false,
+        signInType: SignType.NONE,
     };
 
     protected constructor(
@@ -37,7 +36,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent {
                         .subscribe();
                     this.toggleSubscription.unsubscribe();
                 }
-                this.routerData = <IRouterData>this.route.snapshot.firstChild.data;
+                this.settings = <ISettings>this.route.snapshot.firstChild.data;
             }
         });
     }

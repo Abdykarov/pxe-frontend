@@ -5,13 +5,13 @@
         'body-inner--overlay' : showOverlay
     }">
     <lnd-header
-        [routerData]="routerData">
+        [settings]="settings">
     </lnd-header>
     <main class="main">
         <router-outlet></router-outlet>
     </main>
     <lnd-footer
-        [isSimpleFooter]="routerData.isSimpleFooter">
+        [isSimpleFooter]="settings.isSimpleFooter">
         <ul class="footer-navigation__list">
             <li class="footer-navigation__item">
                 <a routerLink="/terms-of-use"

@@ -1,7 +1,7 @@
 <header
     class="header"
-    [class.header--public]="routerData.isPublic"
-    [class.header--secured]="!routerData.isPublic">
+    [class.header--public]="settings.isPublic"
+    [class.header--secured]="!settings.isPublic">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
@@ -19,30 +19,31 @@
                     </div>
                     <div
                         class="registration-holder"
-                        *ngIf="routerData.showSignIn">
+                        *ngIf="settings.signInType !== signTypeNone">
                         <lnd-button
                             label="Registrace"
                             type="primary"
-                            (click)="scrollToNewSubscription()">
+                            (click)="signIn(settings.signInType)">
                         </lnd-button>
                     </div>
                     <div
                         class="registration-holder"
-                        *ngIf="routerData.showLogin">
+                        *ngIf="settings.showLogin">
                         <lnd-button
                             label="Přihlášení"
                             type="primary"
+                            (click)="login()">
                         >
                         </lnd-button>
                     </div>
                     <div
                         class="notification-holder"
-                        *ngIf="!routerData.isPublic">
+                        *ngIf="!settings.isPublic">
                         <span class="icon icon--favourite-fill text-color--secondary"></span>
                     </div>
                     <div
                         class="menu-holder"
-                        *ngIf="!routerData.isPublic">
+                        *ngIf="!settings.isPublic">
                         <a
                             class="menu-toggle"
                             [ngClass]="{ 'menu-toggle--open' : isMenuOpen }"
@@ -56,7 +57,7 @@
                     </div>
                     <div
                         class="user-holder"
-                        *ngIf="!routerData.isPublic">
+                        *ngIf="!settings.isPublic">
                         <span class="icon icon--favourite-stroke text-color--secondary"></span>
                     </div>
                 </div>
