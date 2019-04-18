@@ -9,16 +9,36 @@ const routes = [
         component: SecuredLayoutComponent,
         children: [
             {
-                path: '',
-                loadChildren: '../../pages/dashboard/dashboard.module#DashboardModule',
+                path: 'dashboard',
+                loadChildren: '../../pages/secured/dashboard/dashboard.module#DashboardModule',
+                data: {
+                    isSimpleFooter: false,
+                },
             },
             {
-                path: 'basket',
-                loadChildren: '../../pages/basket/basket.module#BasketModule',
+                path: 'request',
+                loadChildren: '../../pages/secured/request/request.module#RequestModule',
+                data: {
+                    isSimpleFooter: false,
+                },
+            },
+            {
+                path: 'supply-point',
+                loadChildren: '../../pages/secured/supply-point/supply-point.module#SupplyPointModule',
+                data: {
+                    isSimpleFooter: false,
+                },
             },
             {
                 path: '404',
                 loadChildren: '../../pages/not-found/not-found.module#NotFoundModule',
+                data: {
+                    isSimpleFooter: false,
+                },
+            },
+            {
+                path: 'dashboard',
+                redirectTo: '404',
             },
             {
                 path: '**',

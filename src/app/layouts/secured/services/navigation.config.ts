@@ -4,35 +4,21 @@ export const navigationConfig: INavigationConfig = [
     [
         {
             'url': '/secured',
-            'label': 'Úvodní přehled',
+            'label': 'NÁSTĚNKA',
             'icon': 'home',
             __typename : 'secured',
         },
         {
-            'label': 'Nákupní košík',
-            'icon': 'cart',
-            'url': '/secured/basket',
-            __typename : 'barker',
-            'children': [
-                {
-                    'url': '/secured/basket',
-                    'label': 'Přehled',
-                    __typename : 'basket',
-                },
-                {
-                    'url': '/secured/basket/add',
-                    'label': 'Přidat',
-                    __typename : 'add',
-                },
-            ],
+            'url': '/secured/request',
+            'label': 'Žádost',
+            'icon': 'home',
+            __typename : 'secured',
         },
-    ],
-    [
         {
-            'url': '/logout',
-            'label': 'Odhlásit se',
-            'icon': 'logout',
-            __typename : 'logout',
+            'url': '/secured/supply-point',
+            'label': 'Odběrná místa',
+            'icon': 'home',
+            __typename : 'secured',
         },
     ],
 ];
