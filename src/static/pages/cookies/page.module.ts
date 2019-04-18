@@ -5,6 +5,10 @@ import { Routes } from '@angular/router';
 // own classes
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { CookiesPageComponent } from './page';
+import {
+    LoginType,
+    SignType,
+} from 'src/app/layouts/models/router-data.model';
 
 @NgModule({
     declarations: [
@@ -24,5 +28,11 @@ export const cookiesPageRoutes: Routes = [
     {
         path: 'cookies',
         component: CookiesPageComponent,
+        data: {
+            isPublic: true,
+            isSimpleFooter: true,
+            loginType: LoginType.NONE,
+            signInType: SignType.STATIC,
+        },
     },
 ];
