@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import {
+    NavigationEnd,
+    Router,
+} from '@angular/router';
 
 import { staticNavigationConfig } from 'src/static/config/navigation.config';
-import { ISettings, SignType } from 'src/app/layouts/models/router-data.model';
+import {
+    ISettings,
+    SignType,
+} from 'src/app/layouts/models/router-data.model';
 
 @Component({
     templateUrl: './basic-layout.component.html',

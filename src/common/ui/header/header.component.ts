@@ -1,7 +1,16 @@
-import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    HostListener,
+    Input,
+    Output,
+} from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ISettings, SignType } from 'src/app/layouts/models/router-data.model';
+import {
+    ISettings,
+    SignType,
+} from 'src/app/layouts/models/router-data.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
@@ -38,10 +47,11 @@ export class HeaderComponent {
     ) {}
 
     signIn(signInType: SignType) {
-        if (signInType === SignType.SCROLL)
+        if (signInType === SignType.SCROLL) {
             this.scrollToService.scrollToSubscription();
-        else
+        } else {
             this.router.navigate(['sign-in']);
+        }
     }
 
     login() {

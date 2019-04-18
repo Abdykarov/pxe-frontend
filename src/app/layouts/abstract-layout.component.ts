@@ -1,4 +1,8 @@
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import {
+    ActivatedRoute,
+    NavigationEnd,
+    Router,
+} from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
 import { Subscription } from 'rxjs';
