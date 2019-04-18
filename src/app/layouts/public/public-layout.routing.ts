@@ -17,10 +17,7 @@ const routes = [
             },
             {
                 path: 'login',
-                loadChildren: '../../pages/login/login-page.module#LoginPageModule',
-                data: {
-                    isSimpleFooter: true,
-                },
+                loadChildren: '../../pages/login/login.module#LoginModule',
             },
             {
                 path: 'logout',
