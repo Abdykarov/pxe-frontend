@@ -3,7 +3,7 @@ import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.mo
 export const navigationConfig: INavigationConfig = [
     [
         {
-            'url': '/secured',
+            'url': '/secured/dashboard',
             'label': 'NÁSTĚNKA',
             'icon': 'home',
             __typename : 'secured',
