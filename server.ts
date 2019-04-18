@@ -24,6 +24,7 @@ const app = express();
 
 const PORT = process.env.PORT || 80;
 const DIST_FOLDER = join(process.cwd(), 'dist');
+const APP_FOLDER = join(DIST_FOLDER, 'app');
 
 // index from browser build!
 const template = readFileSync(join(DIST_FOLDER, 'app', 'index.html')).toString();
@@ -67,8 +68,12 @@ app.get('/graphql', (req, res) => {
 // Server static files from /app
 app.get('*.*', express.static(join(DIST_FOLDER, 'app')));
 
-// All regular routes use the Universal engine
-app.get('/', (req, res) => {
+// Catch reoutes for server side routes use the Universal engine
+app.get('*', (req, res, next) => {
+    // Catch secured routes as normal client side app
+    if (req.originalUrl.indexOf('/secured') === 0) {
+        return next();
+    }
     res.render('index', {
         req: req,
         res: res,
@@ -83,6 +88,11 @@ app.get('/', (req, res) => {
             },
         ],
     });
+});
+
+// All routes send normal client side app
+app.get('*', (req, res) => {
+    return res.sendFile(join(APP_FOLDER, 'index.html'));
 });
 
 // Start up the Node server
