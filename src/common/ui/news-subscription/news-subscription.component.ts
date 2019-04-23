@@ -13,10 +13,11 @@ import {
 } from '@angular/forms';
 
 import * as R from 'ramda';
+
 import {
     IFieldError,
     IForm,
-} from './models/form-definition.model';
+} from 'src/common/containers/form-container/models/form-definition.model';
 
 @Component({
     selector: 'pxe-news-subscription',
@@ -24,6 +25,7 @@ import {
     styleUrls: ['./news-subscription.component.scss'],
 })
 export class NewsSubscriptionComponent implements OnInit, OnChanges {
+
     @Input()
     public subscriptionFormSent = false;
 
@@ -42,6 +44,9 @@ export class NewsSubscriptionComponent implements OnInit, OnChanges {
     @Output()
     submitSubscriptionForm: EventEmitter<any> = new EventEmitter<any>();
 
+    @Output()
+    openConsentAction: EventEmitter<any> = new EventEmitter<any>();
+
     public subscriptionForm: FormGroup;
     public subscriptionFormError: any = {};
 
@@ -57,6 +62,10 @@ export class NewsSubscriptionComponent implements OnInit, OnChanges {
         if (changes.subscriptionFieldError) {
             this.subscriptionFormError = R.clone(changes.subscriptionFieldError.currentValue);
         }
+    }
+
+    public openConsent($event) {
+        this.openConsentAction.emit($event);
     }
 
     public submitForm = () => {

@@ -1,3 +1,12 @@
+<ng-template #hrefToPersonalDataTemplate>
+    Souhlas se zpracováním 
+    <a href="javascript: void(0);">
+        <span (click)="action($event)">
+           osobních údajů
+        </span>
+    </a>
+</ng-template>
+
 <div class="registration-page container-content--with-title">
     <div class="container-fluid">
         <div class="row text-center mb-6">
@@ -13,11 +22,11 @@
                             <form class="form-container">
                                 <lnd-form-field
                                     id="email"
-                                    label="Label">
+                                    label="Email">
                                 </lnd-form-field>
                                 <lnd-form-field
                                     [id]="'Agreement'"
-                                    label="Souhlas se zpracováním osobních údajů"
+                                    [labelTemplate]="hrefToPersonalDataTemplate"
                                     [type]="'CHECKBOX'">
                                 </lnd-form-field>
                                 <div class="text-right">

@@ -4,4 +4,10 @@ import { Component } from '@angular/core';
     templateUrl: './page.html',
 })
 
-export class RegistrationPageComponent {}
+export class RegistrationPageComponent {
+
+    public action(evt) {
+        evt.preventDefault();
+        window.open('/full/landing-page', '_blank');
+    }
+}

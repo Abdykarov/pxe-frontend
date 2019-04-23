@@ -5,11 +5,22 @@ import {
 } from '@angular/router';
 import { Component } from '@angular/core';
 
+import {
+    ISettings,
+    LoginType,
+    SignType,
+} from 'src/app/layouts/models/router-data.model';
+
 @Component({
     templateUrl: './full-layout.component.html',
 })
 export class FullLayoutComponent {
-    public isSimpleFooter = false;
+    public settings: ISettings = {
+        isPublic: true,
+        isSimpleFooter: true,
+        signInType: SignType.STATIC,
+        loginType: LoginType.NONE,
+    };
 
     constructor(
         protected route: ActivatedRoute,
@@ -17,7 +28,7 @@ export class FullLayoutComponent {
     ) {
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
-                this.isSimpleFooter = this.route.snapshot.firstChild.data.isSimpleFooter;
+                this.settings = <ISettings>this.route.snapshot.firstChild.data;
             }
         });
     }
