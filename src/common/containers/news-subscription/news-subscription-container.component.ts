@@ -8,15 +8,15 @@ import { Apollo } from 'apollo-angular';
 import * as mutations from 'src/common/graphql/mutations';
 import { IFieldError } from 'src/common/containers/form-container/models/form-definition.model';
 import { parseGraphQLErrors } from 'src/common/utils/';
-import { SignInAbstractComponent } from '../form-container/abstract/sign-in-abstract.component';
 import { subscriptionFormFields } from './news-subsctiption-container.config';
+import { RegisterAbstractComponent } from '../form-container/abstract/register-abstract.component';
 
 @Component({
     selector: 'pxe-news-subscription-container',
     templateUrl: './news-subscription-container.component.html',
     styleUrls: ['./news-subscription-container.component.scss'],
 })
-export class NewsSubscriptionContainerComponent extends  SignInAbstractComponent {
+export class NewsSubscriptionContainerComponent extends  RegisterAbstractComponent {
 
     constructor(
         protected apollo: Apollo,
@@ -25,6 +25,7 @@ export class NewsSubscriptionContainerComponent extends  SignInAbstractComponent
         super(
             apollo,
             cd,
+            subscriptionFormFields,
         );
     }
 
@@ -34,9 +35,9 @@ export class NewsSubscriptionContainerComponent extends  SignInAbstractComponent
     }
 
     public submitSubscriptionForm = (values) => {
-        this.submitSubscriptionLoading = true;
-        this.subscriptionGlobalError = [];
-        this.subscriptionFieldError = {};
+        this.submitRegistrationLoading = true;
+        this.registrationGlobalError = [];
+        this.registrationFieldError = {};
         this.apollo
             .mutate({
                 mutation: mutations.makeRegistration,
@@ -44,15 +45,15 @@ export class NewsSubscriptionContainerComponent extends  SignInAbstractComponent
             })
             .subscribe(
                 () => {
-                    this.submitSubscriptionLoading = false;
-                    this.subscriptionFormSent = true;
+                    this.submitRegistrationLoading = false;
+                    this.registrationFormSent = true;
                     this.cd.markForCheck();
                 },
                 (error) => {
-                    this.submitSubscriptionLoading = false;
+                    this.submitRegistrationLoading = false;
                     const {fieldError, globalError} = parseGraphQLErrors(error);
-                    this.subscriptionFieldError = fieldError;
-                    this.subscriptionGlobalError = globalError;
+                    this.registrationFieldError = fieldError;
+                    this.registrationGlobalError = globalError;
                     this.cd.markForCheck();
                 });
     }

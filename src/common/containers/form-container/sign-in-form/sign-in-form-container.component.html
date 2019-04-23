@@ -21,12 +21,12 @@
         </div>
         <div class="page-box offset-1 offset-md-0 col-10 col-md-4 order-1 order-md-2">
             <pxe-sign-in-form
-                [signInFormFields]="subscriptionFormFields"
-                [submitSignInFormLoading]="submitSubscriptionLoading"
-                [signInFormSent]="subscriptionFormSent"
-                [signInGlobalError]="subscriptionGlobalError"
-                [signInFieldError]="subscriptionFieldError"
-                (submitSignInForm)="submitSubscriptionForm($event)"
+                [signInFormFields]="registrationFormFields"
+                [submitSignInFormLoading]="submitRegistrationLoading"
+                [signInFormSent]="registrationFormSent"
+                [signInGlobalError]="registrationGlobalError"
+                [signInFieldError]="registrationFieldError"
+                (submitSignInForm)="submitRegistrationForm($event)"
             ></pxe-sign-in-form>
         </div>
     </div>
