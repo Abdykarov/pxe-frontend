@@ -12,7 +12,7 @@ import {
 
 import * as R from 'ramda';
 
-import { IForm } from 'src/common/containers/form-container/models/form-definition.model';
+import { IFieldError, IForm } from 'src/common/containers/form-container/models/form-definition.model';
 
 @Component({
     selector: 'pxe-sign-in-form',
@@ -33,7 +33,7 @@ export class SignInFormComponent implements OnInit {
     public signInGlobalError: string[] = null;
 
     @Input()
-    public signInFieldError: string[] = null;
+    public signInFieldError: IFieldError = {} = null;
 
     @Output()
     public submitSignInForm: EventEmitter<any> = new EventEmitter<any>();
@@ -49,6 +49,7 @@ export class SignInFormComponent implements OnInit {
     }
 
     public submitForm = () => {
+        console.log('SUBMITTING');
         R.pipe(
             R.keys,
             R.map((field) => {
@@ -59,8 +60,11 @@ export class SignInFormComponent implements OnInit {
                     });
             }),
         )(this.signInForm.controls);
+        console.log(this.signInForm);
+        console.log(this.signInForm.valid);
         if (this.signInForm.valid) {
-                this.submitSignInForm.emit(this.signInForm.value);
+            console.log('JSEM VALIDNI');
+            this.submitSignInForm.emit(this.signInForm.value);
         }
     }
 }
