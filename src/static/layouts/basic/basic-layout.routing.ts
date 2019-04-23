@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+
+import { BasicLayoutComponent } from './basic-layout.component';
 import {
     RouterModule,
     Routes,
@@ -33,8 +35,6 @@ import {
     TypographyPageModule,
     typographyPageRoutes,
 } from 'src/static/atoms/typography/page.module';
-
-import { BasicLayoutComponent } from './basic-layout.component';
 
 const routes: Routes = [
     {

@@ -12,7 +12,7 @@ import {
 
 import * as R from 'ramda';
 
-import { IForm } from '../models/form-definition.model';
+import { IForm } from 'src/common/containers/form-container/models/form-definition.model';
 
 @Component({
     selector: 'pxe-sign-in-form',
@@ -31,6 +31,9 @@ export class SignInFormComponent implements OnInit {
 
     @Input()
     public signInGlobalError: string[] = null;
+
+    @Input()
+    public signInFieldError: string[] = null;
 
     @Output()
     public submitSignInForm: EventEmitter<any> = new EventEmitter<any>();

@@ -113,6 +113,11 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Landing page',
                     'url': '/full/landing-page',
                 },
+                {
+                    'label': 'Registr',
+                    'url': '/full/sign-in',
+                },
+
                 // {
                 //     'label': 'Error',
                 //     'url': '/error-404',

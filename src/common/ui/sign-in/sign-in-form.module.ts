@@ -14,6 +14,9 @@ import { SignInFormComponent } from './sign-in-form.component';
     declarations: [
         SignInFormComponent,
     ],
+    exports: [
+        SignInFormComponent,
+    ],
     imports: [
         AlertModule,
         ButtonModule,
@@ -21,9 +24,6 @@ import { SignInFormComponent } from './sign-in-form.component';
         FormModule,
         FormsModule,
         ReactiveFormsModule,
-    ],
-    exports: [
-        SignInFormComponent,
     ],
 })
 export class SignInFormModule {}
