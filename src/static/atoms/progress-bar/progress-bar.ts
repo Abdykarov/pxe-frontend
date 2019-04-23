@@ -5,7 +5,6 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 @Component({
   templateUrl: './progress-bar.html',
 })
-
 export class ProgressBarComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
@@ -30,7 +29,7 @@ export class ProgressBarComponent {
     constructor() {
         this.breadcrumbItemsSimple = [
             {
-                label: 'Progress',
+                label: 'Progress bar',
                 url: null,
             },
         ];

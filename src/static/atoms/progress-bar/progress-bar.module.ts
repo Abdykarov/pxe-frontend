@@ -6,8 +6,6 @@ import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { ProgressBarComponent } from './progress-bar';
 import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.module';
 
-// own classes
-
 @NgModule({
     declarations: [
         ProgressBarComponent,
