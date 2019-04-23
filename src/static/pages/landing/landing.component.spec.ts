@@ -16,19 +16,19 @@ describe('LandingComponent', () => {
     let fixture: ComponentFixture<LandingComponent>;
 
     beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                LandingComponent,
-            ],
-            imports: [
-                BreadcrumbModule,
-                ButtonModule,
-                FormModule,
-                MapCoverageModule,
-                NewsSubscriptionModule,
-            ],
-        })
-        .compileComponents();
+    TestBed.configureTestingModule({
+        declarations: [
+            LandingComponent,
+        ],
+        imports: [
+            BreadcrumbModule,
+            ButtonModule,
+            FormModule,
+            MapCoverageModule,
+            NewsSubscriptionModule,
+        ],
+    })
+    .compileComponents();
     }));
 
     beforeEach(() => {

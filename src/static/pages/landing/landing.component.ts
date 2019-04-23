@@ -17,7 +17,6 @@ export class LandingComponent {
     public subscriptionGlobalError: string[] = [];
     public subscriptionFieldError: IFieldError = {};
 
-
     public config: IMapCoverageConfig = {
         gas: {
             places: 447,
@@ -140,6 +139,11 @@ export class LandingComponent {
     public submitSubscriptionForm = (values) => {
         this.submitSubscriptionLoading = true;
         console.log('Formulář odeslán');
+    }
+
+    public openConsent(evt) {
+        evt.preventDefault();
+        console.log('Clicked');
     }
 
     constructor() {
