@@ -21,11 +21,6 @@
 		padding-left: ( $icon-size-px + $alert-padding-x * 2 );
 	}
 
-	&-info {
-		border-color: $gray-300;
-		background-color: $gray-300;
-	}
-
 	&__common-icon {
 		position: absolute;
 		top: $alert-padding-y;

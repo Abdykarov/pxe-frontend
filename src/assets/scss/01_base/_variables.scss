@@ -49,6 +49,7 @@ $danger:                           #d0021b;                    // Danger color
 $danger-lighten:                   lighten($danger, 10%);
 $danger-dark:                      darken($danger, 15%);
 $danger-darken:                    darken($danger, 25%);
+$info:                             $secondary;                   // Info color
 $light:                            $gray-300;                    // Light color
 $light-dark:                       $gray-400;
 $light-darken:                     $gray-500;
