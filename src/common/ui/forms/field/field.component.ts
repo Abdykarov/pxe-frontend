@@ -8,6 +8,7 @@ import {
     Input,
     Output,
     ViewChild,
+    TemplateRef,
 } from '@angular/core';
 import {
     ControlValueAccessor,
@@ -38,6 +39,9 @@ import { IValidationMessages } from '../models/validation-messages.model';
 export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     @ViewChild('field')
     public field: ElementRef;
+
+    @Input()
+    public labelTemplate?: TemplateRef<any>;
 
     // tslint:disable-next-line:no-input-rename
     @Input('value')

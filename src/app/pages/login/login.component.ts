@@ -12,7 +12,7 @@ import { parseRestAPIErrors } from 'src/common/utils/';
 
 @Component({
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css'],
+    styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent extends AbstractComponent {
     public loginFormFields = loginFormFields;

@@ -1,3 +1,31 @@
-<p>
-  sign-in works!
-</p>
+<pxe-layout-container title="REGISTRACE">
+    <div class="row">
+        <div class="offset-1 col-10 col-md-4 offset-md-2 order-2 order-md-1">
+            <h2 class="h3--public">
+                Nakupujte elektřinu a plyn přímo na burze
+            </h2>
+            <ul class="check-list">
+                <li>
+                    Měníte dodavatele na&nbsp;jedno kliknutí
+                </li>
+                <li>
+                    Neřešíte papírování a&nbsp;chození na&nbsp;pobočky
+                </li>
+                <li>
+                    Buďte chráněni před nekalostmi ve smlouvě
+                </li>
+                <li>
+                    Dostávejte férové ceny bez&nbsp;skrytých poplatků
+                </li>
+            </ul>
+        </div>
+        <div class="page-box offset-1 offset-md-0 col-10 col-md-4 order-1 order-md-2">
+            <pxe-sign-in-form
+                [signInFormFields]="signInFormFields"
+                [submitSignInFormLoading]="submitSignInFormLoading"
+                [signInGlobalError]="signInGlobalError"
+                (submitSignInForm)="submitSignInForm($event)"
+            ></pxe-sign-in-form>
+        </div>
+    </div>
+</pxe-layout-container>

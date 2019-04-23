@@ -1,0 +1,24 @@
+<lnd-alert *ngIf="signInGlobalError.length"
+           type="danger">
+    <ng-container *ngFor="let globalError of signInGlobalError">
+        {{globalError}}<br>
+    </ng-container>
+</lnd-alert>
+<form [formGroup]="signInForm"
+      autocomplete="off">
+    <lnd-form-field
+        [error]="signInForm.controls.email.errors"
+        [formControl]="signInForm.controls.email"
+        [id]="'email'"
+        label="E-mail"
+        [success]="signInForm.controls.email.valid && signInForm.controls.email.touched"
+        [touched]="signInForm.controls.email.touched"
+        [validationMessages]="signInFormFields.validationMessages.email"
+    ></lnd-form-field>
+    <lnd-button
+        type="primary"
+        (action)="submitForm()"
+        [isDisabled]="submitSignInFormLoading"
+        label="Registrovat se">
+    </lnd-button>
+</form>
