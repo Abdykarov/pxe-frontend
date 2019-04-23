@@ -1,4 +1,26 @@
-<p>
-  supply-progress-bar works!
-</p>
-{{progress}}
+<nav class="progress">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="l-offset r-offset">
+                    <ul class="progress-bar">
+                        <li
+                            *ngFor="let item of config"
+                            class="progress-bar__item"
+                            [ngClass]="!!item.done && !isRouteIsActive(item.url) ? 'progress-bar__item--done' : ''"
+                            [routerLinkActive]="[ item.url ? 'progress-bar__item--active' : '' ]">
+                            <a
+                                class="progress-bar__link"
+                                [routerLink]="item.url ? item.url : null">
+                                <span class="progress-bar__bullet"></span>
+                                <span class="progress-bar__label">
+                                    {{ item.label }}
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
