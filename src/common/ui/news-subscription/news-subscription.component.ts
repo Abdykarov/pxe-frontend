@@ -45,7 +45,7 @@ export class NewsSubscriptionComponent implements OnInit, OnChanges {
     submitSubscriptionForm: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
-    openConsentAction?: EventEmitter<any> = new EventEmitter<any>();
+    openConsentAction: EventEmitter<any> = new EventEmitter<any>();
 
     public subscriptionForm: FormGroup;
     public subscriptionFormError: any = {};

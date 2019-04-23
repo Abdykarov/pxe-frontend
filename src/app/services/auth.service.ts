@@ -72,9 +72,5 @@ export class AuthService {
         return of(true);
     }
 
-    signIn = (todo: any) => {
-        console.log('AHOJ');
-    }
-
     getToken = (): string => this.token;
 }

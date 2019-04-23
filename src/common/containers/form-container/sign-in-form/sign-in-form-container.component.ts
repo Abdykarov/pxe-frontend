@@ -13,11 +13,11 @@ import { signInFormFields } from './sign-in-form-container.config';
     templateUrl: './sign-in-form-container.component.html',
     styleUrls: ['./sign-in-form-container.component.scss'],
 })
-export class SignInFormContainerComponent extends  RegisterAbstractComponent {
+export class SignInFormContainerComponent extends RegisterAbstractComponent {
 
     constructor(
-        protected apollo: Apollo,
-        protected cd: ChangeDetectorRef,
+        public apollo: Apollo,
+        public cd: ChangeDetectorRef,
     ) {
         super(
             apollo,

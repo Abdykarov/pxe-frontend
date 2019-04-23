@@ -16,9 +16,9 @@ export class RegisterAbstractComponent {
     public registrationFieldError: IFieldError = {};
 
     protected constructor(
-        protected apollo: Apollo,
-        protected cd: ChangeDetectorRef,
-        protected registrationFormFields: IForm,
+        public apollo: Apollo,
+        public cd: ChangeDetectorRef,
+        public registrationFormFields: IForm,
     ) {}
 
     public submitRegistrationForm = (values) => {
