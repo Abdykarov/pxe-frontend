@@ -229,6 +229,21 @@
 		border: none;
 	}
 
+	&.link {
+		&:focus,
+		&:hover {
+			.btn__text {
+				text-decoration: underline;
+			}
+		}
+
+		&:focus,
+		&:active,
+		&:not(:disabled):not(.disabled):active {
+			box-shadow: none;
+		}
+	}
+
 	&__text {
 		display: inline-block;
 	}

@@ -6,6 +6,7 @@ import { Routes } from '@angular/router';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { RegistrationPageComponent } from './page';
+import { LoginType, SignType } from '../../../app/layouts/models/router-data.model';
 
 @NgModule({
     declarations: [
@@ -26,5 +27,10 @@ export const registrationPageRoutes: Routes = [
     {
         path: 'registration',
         component: RegistrationPageComponent,
+        data: {
+            isPublic: true,
+            loginType: LoginType.STATIC,
+            signInType: SignType.NONE,
+        },
     },
 ];
