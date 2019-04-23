@@ -2,18 +2,18 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SupplyProgressBarComponent } from './supply-progress-bar.component';
+import { ProgressBarComponent } from './progress-bar.component';
 
 @NgModule({
     declarations: [
-        SupplyProgressBarComponent,
+        ProgressBarComponent,
     ],
     exports: [
-        SupplyProgressBarComponent,
+        ProgressBarComponent,
     ],
     imports: [
         CommonModule,
         RouterModule,
     ],
 })
-export class SupplyProgressBarModule {}
+export class ProgressBarModule {}
