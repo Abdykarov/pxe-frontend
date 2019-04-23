@@ -5,11 +5,7 @@ import { Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import {
-    ISettings,
-    LoginType,
-    SignType,
-} from './models/router-data.model';
+import { ISettings, LoginType, LogoutType, SignType } from './models/router-data.model';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 
 export abstract class AbstractLayoutComponent extends AbstractComponent {
@@ -21,6 +17,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent {
         isSimpleFooter: false,
         loginType: LoginType.NONE,
         signInType: SignType.NONE,
+        logoutType: LogoutType.NONE,
     };
 
     protected constructor(

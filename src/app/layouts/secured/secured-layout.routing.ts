@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { SecuredLayoutComponent } from './secured-layout.component';
+import { LoginType, SignType } from '../models/router-data.model';
 
 const routes = [
     {
@@ -13,6 +14,10 @@ const routes = [
                 loadChildren: '../../pages/dashboard/dashboard.module#DashboardModule',
                 data: {
                     isSimpleFooter: false,
+                    isPublic: false,
+                    loginType: LoginType.NONE,
+                    signInType: SignType.NONE,
+                    logoutType: LoginType.NAVIGATE,
                 },
             },
             {
@@ -20,6 +25,10 @@ const routes = [
                 loadChildren: '../../pages/request/request.module#RequestModule',
                 data: {
                     isSimpleFooter: false,
+                    isPublic: false,
+                    loginType: LoginType.NONE,
+                    signInType: SignType.NONE,
+                    logoutType: LoginType.NAVIGATE,
                 },
             },
             {
@@ -27,6 +36,10 @@ const routes = [
                 loadChildren: '../../pages/supply-point/supply-point.module#SupplyPointModule',
                 data: {
                     isSimpleFooter: false,
+                    isPublic: false,
+                    loginType: LoginType.NONE,
+                    signInType: SignType.NONE,
+                    logoutType: LoginType.NAVIGATE,
                 },
             },
             {

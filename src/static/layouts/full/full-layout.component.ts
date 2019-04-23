@@ -1,15 +1,7 @@
-import {
-    ActivatedRoute,
-    NavigationEnd,
-    Router,
-} from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Component } from '@angular/core';
 
-import {
-    ISettings,
-    LoginType,
-    SignType,
-} from 'src/app/layouts/models/router-data.model';
+import { ISettings, LoginType, LogoutType, SignType } from 'src/app/layouts/models/router-data.model';
 
 @Component({
     templateUrl: './full-layout.component.html',
@@ -20,6 +12,7 @@ export class FullLayoutComponent {
         isSimpleFooter: true,
         signInType: SignType.STATIC,
         loginType: LoginType.NONE,
+        logoutType: LogoutType.NONE,
     };
 
     constructor(

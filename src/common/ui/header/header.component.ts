@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 
 import {
     ISettings,
-    LoginType,
+    LoginType, LogoutType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
@@ -23,6 +23,7 @@ export class HeaderComponent {
     public isHeaderSticked: boolean;
     public signTypeNone = SignType.NONE;
     public loginTypeNone = LoginType.NONE;
+    public logoutTypeNone = LogoutType.NONE;
 
     @Input() settings: ISettings;
 
@@ -59,6 +60,12 @@ export class HeaderComponent {
     login() {
         if (this.settings.loginType === LoginType.NAVIGATE) {
             this.router.navigate(['login']);
+        }
+    }
+
+    logout() {
+        if (this.settings.logoutType === LogoutType.NAVIGATE) {
+            this.router.navigate(['logout']);
         }
     }
 }

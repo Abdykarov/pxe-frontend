@@ -2,6 +2,7 @@ export interface ISettings {
     isPublic: boolean;
     isSimpleFooter: boolean;
     loginType: LoginType;
+    logoutType: LogoutType;
     signInType: SignType;
 }
 
@@ -13,6 +14,13 @@ export enum SignType {
 }
 
 export enum LoginType {
+    NONE,
+    NAVIGATE,
+    STATIC,
+}
+
+
+export enum LogoutType {
     NONE,
     NAVIGATE,
     STATIC,
