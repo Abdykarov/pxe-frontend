@@ -21,10 +21,10 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            {{config.power.places}}
+                                            {{configCoverage.power.places}}
                                         </div>
                                         <div class="box-info__unit">
-                                            {{config.power.places.toString() | plural:'place'}}
+                                            {{configCoverage.power.places.toString() | plural:'place'}}
                                         </div>
                                     </div>
                                 </div>
@@ -36,10 +36,10 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            {{config.power.temelinPerformance}}
+                                            {{configCoverage.power.temelinPerformance}}
                                         </div>
                                         <div class="box-info__unit">
-                                            {{config.power.temelinPerformance.toString() | plural:'day'}}
+                                            {{configCoverage.power.temelinPerformance.toString() | plural:'day'}}
                                         </div>
                                     </div>
                                 </div>
@@ -51,10 +51,10 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            {{config.power.consumption | consumption: RESULT_TYPE_CONSUMPTION_VALUE}}
+                                            {{configCoverage.power.consumption | consumption: RESULT_TYPE_CONSUMPTION_VALUE}}
                                         </div>
                                         <div class="box-info__unit">
-                                            {{config.power.consumption | consumption: RESULT_TYPE_CONSUMPTION_UNIT}}
+                                            {{configCoverage.power.consumption | consumption: RESULT_TYPE_CONSUMPTION_UNIT}}
                                         </div>
                                     </div>
                                 </div>
@@ -62,70 +62,20 @@
                         </div>
                     </div>
                 </div>
-                <ng-container *ngIf="config.power.suppliers.length">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="px-3 px-md-0">
-                                <h3>
-                                    V jednání
-                                </h3>
-                            </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="px-3 px-md-0">
+                            <h3>
+                                V jednání
+                            </h3>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12 col-md-10 offset-md-1">
-                            <div class="suppliers-holder">
-                                <ul class="suppliers-overview">
-                                    <li class="suppliers-overview__item"
-                                        *ngFor="let supplier of config.power.suppliers">
-                                        <a
-                                            *ngIf="supplier.supplierUrl"
-                                            href="{{supplier.supplierUrl}}"
-                                            target="_blank"
-                                            class="suppliers-overview__content">
-                                            <img
-                                                class="suppliers-overview__picture"
-                                                [ngClass]="[
-                                            supplier.size ? 'suppliers-overview__picture--' + supplier.size : ''
-                                        ]"
-                                                src="{{supplier.logoUrl}}"
-                                                title="{{supplier.title}}"
-                                                alt="{{supplier.alt}}">
-                                            <img
-                                                class="suppliers-overview__picture-hover"
-                                                [ngClass]="[
-                                            supplier.size ? 'suppliers-overview__picture-hover--' + supplier.size : ''
-                                        ]"
-                                                src="{{supplier.logoUrlHover}}"
-                                                title="{{supplier.title}}"
-                                                alt="{{supplier.alt}}">
-                                        </a>
-                                        <span
-                                            *ngIf="!supplier.supplierUrl"
-                                            class="suppliers-overview__content">
-                                    <img
-                                        class="suppliers-overview__picture"
-                                        [ngClass]="[
-                                            supplier.size ? 'suppliers-overview__picture--' + supplier.size : ''
-                                        ]"
-                                        src="{{supplier.logoUrl}}"
-                                        title="{{supplier.title}}"
-                                        alt="{{supplier.alt}}">
-                                    <img
-                                        class="suppliers-overview__picture-hover"
-                                        [ngClass]="[
-                                            supplier.size ? 'suppliers-overview__picture-hover--' + supplier.size : ''
-                                        ]"
-                                        src="{{supplier.logoUrlHover}}"
-                                        title="{{supplier.title}}"
-                                        alt="{{supplier.alt}}">
-                            </span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-10 offset-md-1">
+                        <ng-container *ngTemplateOutlet="supplierTemplatePower"></ng-container>
                     </div>
-                </ng-container>
+                </div>
             </lnd-tab>
             <lnd-tab tabTitle="PLYN">
                 <div class="row">
@@ -138,10 +88,10 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            {{config.gas.places}}
+                                            {{configCoverage.gas.places}}
                                         </div>
                                         <div class="box-info__unit">
-                                            {{config.gas.places.toString() | plural:'place'}}
+                                            {{configCoverage.gas.places.toString() | plural:'place'}}
                                         </div>
                                     </div>
                                 </div>
@@ -153,7 +103,7 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            {{config.gas.stackCapacity}}
+                                            {{configCoverage.gas.stackCapacity}}
                                         </div>
                                         <div class="box-info__unit">
                                             Násobek
@@ -168,10 +118,10 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            {{config.gas.consumption | consumption: RESULT_TYPE_CONSUMPTION_VALUE}}
+                                            {{configCoverage.gas.consumption | consumption: RESULT_TYPE_CONSUMPTION_VALUE}}
                                         </div>
                                         <div class="box-info__unit">
-                                            {{config.gas.consumption | consumption: RESULT_TYPE_CONSUMPTION_UNIT}}
+                                            {{configCoverage.gas.consumption | consumption: RESULT_TYPE_CONSUMPTION_UNIT}}
                                         </div>
                                     </div>
                                 </div>
@@ -179,71 +129,22 @@
                         </div>
                     </div>
                 </div>
-                <ng-container *ngIf="config.gas.suppliers.length">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="px-3 px-md-0">
-                                <h3>
-                                    V JEDNÁNÍ
-                                </h3>
-                            </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="px-3 px-md-0">
+                            <h3>
+                                V jednání
+                            </h3>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12 col-md-10 offset-md-1">
-                            <div class="suppliers-holder">
-                                <ul class="suppliers-overview">
-                                    <li class="suppliers-overview__item"
-                                        *ngFor="let supplier of config.power.suppliers">
-                                        <a
-                                            *ngIf="supplier.supplierUrl"
-                                            href="{{supplier.supplierUrl}}"
-                                            target="_blank"
-                                            class="suppliers-overview__content">
-                                            <img
-                                                class="suppliers-overview__picture"
-                                                [ngClass]="[
-                                            supplier.size ? 'suppliers-overview__picture--' + supplier.size : ''
-                                        ]"
-                                                src="{{supplier.logoUrl}}"
-                                                title="{{supplier.title}}"
-                                                alt="{{supplier.alt}}">
-                                            <img
-                                                class="suppliers-overview__picture-hover"
-                                                [ngClass]="[
-                                            supplier.size ? 'suppliers-overview__picture-hover--' + supplier.size : ''
-                                        ]"
-                                                src="{{supplier.logoUrlHover}}"
-                                                title="{{supplier.title}}"
-                                                alt="{{supplier.alt}}">
-                                        </a>
-                                        <span
-                                            *ngIf="!supplier.supplierUrl"
-                                            class="suppliers-overview__content">
-                                    <img
-                                        class="suppliers-overview__picture"
-                                        [ngClass]="[
-                                            supplier.size ? 'suppliers-overview__picture--' + supplier.size : ''
-                                        ]"
-                                        src="{{supplier.logoUrl}}"
-                                        title="{{supplier.title}}"
-                                        alt="{{supplier.alt}}">
-                                    <img
-                                        class="suppliers-overview__picture-hover"
-                                        [ngClass]="[
-                                            supplier.size ? 'suppliers-overview__picture-hover--' + supplier.size : ''
-                                        ]"
-                                        src="{{supplier.logoUrlHover}}"
-                                        title="{{supplier.title}}"
-                                        alt="{{supplier.alt}}">
-                            </span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-10 offset-md-1">
+                        <ng-container *ngTemplateOutlet="supplierTemplateGas"></ng-container>
                     </div>
-                </ng-container>
+                </div>
             </lnd-tab>
         </lnd-tabs>
     </div>
 </div>
+
