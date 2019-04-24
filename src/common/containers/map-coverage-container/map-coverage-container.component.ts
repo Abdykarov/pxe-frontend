@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 
-import { config } from './map-coverage-container.config';
+import {
+    configCoverage,
+    configSuppliers,
+} from './map-coverage-container.config';
 import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
+import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
 
 @Component({
     selector: 'pxe-map-coverage-container',
@@ -9,5 +13,6 @@ import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.mo
     styleUrls: ['./map-coverage-container.component.scss'],
 })
 export class MapCoverageContainerComponent {
-    public config: IMapCoverageConfig = config;
+    public configCoverage: IMapCoverageConfig = configCoverage;
+    public configSupplier: ISupplier[] = configSuppliers;
 }

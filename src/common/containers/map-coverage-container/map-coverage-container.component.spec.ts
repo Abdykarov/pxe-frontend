@@ -6,6 +6,8 @@ import {
 
 import { MapCoverageContainerComponent } from './map-coverage-container.component';
 import { MapCoverageModule } from 'src/common/ui/map-coverage/map-coverage.module';
+import { RouterTestingModule } from '@angular/router/testing';
+import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
 
 describe('MapCoverageContainerComponent', () => {
     let component: MapCoverageContainerComponent;
@@ -18,6 +20,8 @@ describe('MapCoverageContainerComponent', () => {
             ],
             imports: [
                 MapCoverageModule,
+                RouterTestingModule.withRoutes([]),
+                SupplierModule,
             ],
         })
         .compileComponents();
