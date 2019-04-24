@@ -8,123 +8,142 @@
 @import 'select.component.variables.scss';
 
 
-ng-select {
-	.ng-select {
-		&.ng-select--custom {
-			.ng-select-container {
-				cursor: pointer;
-				font-weight: 300;
-			}
+.ng-select-custom {
+	padding-bottom: 0;
+	margin-bottom: ( $spacer * 2 );
 
-			.ng-select-container::after {
+	&.form-group {
+		.ng-select {
+			padding-bottom: 0;
+		}
+
+		&.ng-select-focused .ng-select-container {
+			&::after {
+				background-color: $primary;
+			}
+		}
+
+		.ng-select-container {
+			height: $input-height;
+			background-color: $input-bg;
+			border-radius: $input-border-radius;
+			overflow: visible;
+			cursor: pointer;
+
+			&::after {
 				left: 0;
 				bottom: 0;
-				height: 1px;
-				background-color: rgba($black, .3);
+				height: $input-border-width;
+				background-color: $input-border-color;
 				border: 0;
 			}
 
-			.ng-select-container:hover {
+			&:hover {
 				&::after {
-					height: 2px;
-					background-color: $primary;
+					background-color: $input-border-color-interactive;
 				}
 			}
 
-			&.ng-select-focused .ng-select-container {
+			&.ng-select-focused {
 				&::after {
-					height: 2px;
-					background-color: $primary;
+					background-color: $input-focus-border-color;
 				}
 			}
 
-			&.ng-select-focused .ng-select-container .ng-value-container .ng-placeholder {
-				color: $primary;
+			&,
+			&.ng-select-focused {
+				.ng-value-container {
+					align-items: center;
+					height: $input-height;
+					padding: $input-padding-y $input-padding-x;
+					border: none;
+				}
+
+				.ng-value-container .ng-placeholder {
+					top: -25px;
+					left: 0;
+					color: $font-text;
+					font-size: $input-font-size;
+					transform: none;
+					transition: none;
+				}
+			}
+		}
+
+		&.ng-select-single .ng-select-container.ng-has-value .ng-arrow-wrapper {
+			display: none;
+		}
+
+		.ng-select-single {
+			.ng-arrow-wrapper,
+			.ng-clear-wrapper {
+				@include absolute-center(true, false);
+				width: 10px;
+				height: 10px;
 			}
 
-			.ng-value {
-				font-size: 1rem;
+			.ng-arrow-wrapper {	
+				&::before {
+					content: '\e916';
+				}
 			}
 
-			.ng-select-container .ng-value-container .ng-placeholder {
-				bottom: 12px;
-				color: $font-text;
-				font-size: 1rem;
+			.ng-clear-wrapper {
+				&::before {
+					content: '\e915';
+				}
 			}
+		}
 
-			&.ng-select-single .ng-select-container.ng-has-value .ng-arrow-wrapper {
-				display: none;
-			}
-
-			&.ng-select-single .ng-arrow-wrapper,
-			&.ng-select-single .ng-clear-wrapper {
-				position: absolute;
-				right: 1px;
-			}
-
-			.ng-arrow-wrapper .ng-arrow,
-			.ng-clear-wrapper .ng-clear {
-				display: none;
-			}
-
-			.ng-arrow-wrapper::before,
-			.ng-clear-wrapper::before {
+		.ng-arrow-wrapper,
+		.ng-clear-wrapper {
+			&::before {
 				@include icon;
-				color: #161616;
-				font-size: 12px;
+				display: block;
+				font-size: 10px;
 			}
+		}
 
-			&.ng-select-single .ng-arrow-wrapper {
-				bottom: 19px;
-				width: 12px;
-				height: 12px;
+		.ng-arrow-wrapper .ng-arrow,
+		.ng-clear-wrapper .ng-clear {
+			display: none;
+		}
 
-				&::before {
-					content: '\e95a';
-				}
-			}
+		.ng-arrow-wrapper {
+			right: $input-padding-x;
+			bottom: auto;
+		}
 
-			&.ng-select-single .ng-clear-wrapper {
-				bottom: 8px;
-				width: ( 12px + 12px );
-				height: ( 12px + 16px );
+		.ng-clear-wrapper {
+			right: 40px;
 
-				&::before {
-					content: '\e918';
-					@include absolute-center(true, false);
-					right: 0;
-				}
-			}
-
-			.ng-clear-wrapper:hover {
+			&:hover {
 				&::before {
 					color: $primary;
 				}
 			}
+		}
 
-			.ng-dropdown-panel {
-				box-shadow: none;
+		.ng-dropdown-panel {
+			top: 100%;
+			box-shadow: none;
+		}
+
+		.ng-dropdown-panel-items {
+			background-color: $input-bg;
+		}
+
+		.ng-option {
+
+			&.ng-option-selected {
+				background-color: $white;
+				color: #393939;
 			}
 
-			.ng-option {
-				color: #393939;
-				font-weight: 300;
-				border-bottom: 1px solid #393939;
-
-				&.ng-option-selected {
-					background-color: $white;
-					color: #393939;
-				}
-
-				&.ng-option-marked,
-				&:hover {
-					background-color: $primary;
-					color: $white;
-				}
-
-				&:last-child {
-					border-bottom: none;
-				}
+			&.ng-option-marked,
+			&:hover {
+				background-color: $primary;
+				color: $white;
 			}
 		}
 	}

@@ -3,6 +3,33 @@
         <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
     </div>
 </div>
+<h3>Selectbox</h3>
+<div class="static-pages">
+    <h4>Normal</h4>
+    <form [formGroup]="selectBoxes">
+        <div class="row">
+            <div class="col-md-4">
+                <lnd-select
+                    label="Simple selectbox"
+                    subtext="Select subtext"
+                    [options]="config.selectOptions"
+                    [parentForm]="selectBoxes"
+                    [selectName]="'simpleSelect'">
+                </lnd-select>
+            </div>
+            <div class="col-md-4">
+                <lnd-select
+                    label="Searchable selectbox"
+                    subtext="Select subtext"
+                    [options]="config.selectOptions"
+                    [parentForm]="selectBoxes"
+                    searchable="true"
+                    [selectName]="'searchableSelect'">
+                </lnd-select>
+            </div>
+        </div>
+    </form>
+</div>
 <h3>Input</h3>
 <div class="static-pages">
     <h4>Normal</h4>
