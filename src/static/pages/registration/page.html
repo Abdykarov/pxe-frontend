@@ -7,6 +7,10 @@
     </a>
 </ng-template>
 
+<ng-template #supplierTemplate>
+    <pxe-supplier [configSupplier]="configSupplier"></pxe-supplier>
+</ng-template>
+
 <div class="registration-page container-content--with-title">
     <div class="container-fluid">
         <div class="row text-center mb-6">
@@ -54,7 +58,7 @@
         </div>
         <div class="row">
             <div class="col-12 col-lg-8 offset-lg-2 text-center">
-                To Do: Az bude hotova komponenta pro loga.
+                <ng-container *ngTemplateOutlet="supplierTemplate"></ng-container>
             </div>
         </div>
     </div>
