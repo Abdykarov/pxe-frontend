@@ -80,6 +80,10 @@ export const staticNavigationConfig: INavigationConfig = [
                 //     'url': '/tooltip',
                 // },
                 {
+                    'label': 'Progress bar',
+                    'url': '/basic/progress',
+                },
+                {
                     'label': 'Typography',
                     'url': '/basic/typography',
                 },

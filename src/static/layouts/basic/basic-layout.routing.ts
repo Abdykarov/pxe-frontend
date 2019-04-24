@@ -4,6 +4,8 @@ import {
     Routes,
 } from '@angular/router';
 
+import { BasicLayoutComponent } from './basic-layout.component';
+
 import {
     AlertsPageModule,
     alertsPageRoutes,
@@ -39,7 +41,11 @@ import {
     typographyPageRoutes,
 } from 'src/static/atoms/typography/page.module';
 
-import { BasicLayoutComponent } from './basic-layout.component';
+import {
+    ProgressBarPageModule,
+    progressBarPageRoutes,
+} from 'src/static/atoms/progress-bar/progress-bar.module';
+
 
 const routes: Routes = [
     {
@@ -52,6 +58,7 @@ const routes: Routes = [
             ...colorsPageRoutes,
             ...formsPageRoutes,
             ...iconsPageRoutes,
+            ...progressBarPageRoutes,
             ...typographyPageRoutes,
             {
                 path: '**',
@@ -69,6 +76,7 @@ const routes: Routes = [
         ColorsPageModule,
         FormsPageModule,
         IconsPageModule,
+        ProgressBarPageModule,
         RouterModule.forChild(routes),
         TypographyPageModule,
     ],
