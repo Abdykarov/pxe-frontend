@@ -7,7 +7,7 @@
                         <li
                             *ngFor="let item of config"
                             class="progress-bar__item"
-                            [ngClass]="!!item.done && !isRouteIsActive(item.url) ? 'progress-bar__item--done' : ''"
+                            [class.progress-bar__item--done]="!!item.done && !(item.url | isRouteActive: this.router.url)"
                             [routerLinkActive]="[ item.url ? 'progress-bar__item--active' : '' ]">
                             <a
                                 class="progress-bar__link"

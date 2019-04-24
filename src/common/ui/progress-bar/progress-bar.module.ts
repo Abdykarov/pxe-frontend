@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { PipesModule } from 'src/common/pipes/pipes.module';
 import { ProgressBarComponent } from './progress-bar.component';
 
 @NgModule({
@@ -13,6 +14,7 @@ import { ProgressBarComponent } from './progress-bar.component';
     ],
     imports: [
         CommonModule,
+        PipesModule,
         RouterModule,
     ],
 })

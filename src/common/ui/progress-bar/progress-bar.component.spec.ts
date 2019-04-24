@@ -4,7 +4,8 @@ import {
     TestBed,
 } from '@angular/core/testing';
 
-import { ProgressBarComponent } from './supply-progress-bar.component';
+import { ProgressBarComponent } from './progress-bar.component';
+
 
 describe('SupplyProgressBarComponent', () => {
     let component: ProgressBarComponent;

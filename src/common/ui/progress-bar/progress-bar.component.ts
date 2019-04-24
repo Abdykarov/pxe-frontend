@@ -21,6 +21,4 @@ export class ProgressBarComponent extends AbstractComponent {
     ) {
         super();
     }
-
-    public isRouteIsActive = (routePath: string): boolean => this.router.url === routePath;
 }
