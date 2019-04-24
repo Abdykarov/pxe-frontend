@@ -24,7 +24,7 @@ const routes = [
             },
             {
                 path: 'cookies-policy',
-                loadChildren: '../../pages/footer/cookies-policy/cookies-policy.module#CookiesPolicyModule',
+                loadChildren: '../../pages/cookies-policy/cookies-policy.module#CookiesPolicyModule',
                 data: {
                     isPublic: true,
                     isSimpleFooter: true,
@@ -54,7 +54,7 @@ const routes = [
             },
             {
                 path: 'securing-your-data',
-                loadChildren: '../../pages/footer/securing-your-data/securing-your-data.module#SecuringYourDataModule',
+                loadChildren: '../../pages/securing-your-data/securing-your-data.module#SecuringYourDataModule',
                 data: {
                     isPublic: true,
                     isSimpleFooter: true,
@@ -64,7 +64,7 @@ const routes = [
             },
             {
                 path: 'terms-of-use',
-                loadChildren: '../../pages/footer/terms-of-use/terms-of-use.module#TermsOfUseModule',
+                loadChildren: '../../pages/terms-of-use/terms-of-use.module#TermsOfUseModule',
                 data: {
                     isPublic: true,
                     isSimpleFooter: true,
