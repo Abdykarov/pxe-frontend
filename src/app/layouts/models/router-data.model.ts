@@ -19,7 +19,6 @@ export enum LoginType {
     STATIC,
 }
 
-
 export enum LogoutType {
     NONE,
     NAVIGATE,
