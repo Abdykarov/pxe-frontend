@@ -71,7 +71,11 @@
                         </div>
                     </div>
                 </div>
-                <ng-container *ngTemplateOutlet="supplierTemplatePower"></ng-container>
+                <div class="row">
+                    <div class="col-12 col-md-10 offset-md-1">
+                        <ng-container *ngTemplateOutlet="supplierTemplatePower"></ng-container>
+                    </div>
+                </div>
             </lnd-tab>
             <lnd-tab tabTitle="PLYN">
                 <div class="row">
@@ -134,7 +138,11 @@
                         </div>
                     </div>
                 </div>
-                <ng-container *ngTemplateOutlet="supplierTemplateGas"></ng-container>
+                <div class="row">
+                    <div class="col-12 col-md-10 offset-md-1">
+                        <ng-container *ngTemplateOutlet="supplierTemplateGas"></ng-container>
+                    </div>
+                </div>
             </lnd-tab>
         </lnd-tabs>
     </div>
