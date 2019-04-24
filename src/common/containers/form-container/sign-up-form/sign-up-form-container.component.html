@@ -20,16 +20,20 @@
             </ul>
         </div>
         <div class="page-box offset-1 offset-md-0 col-10 col-md-4 order-1 order-md-2">
-            <pxe-sign-in-form
+            <pxe-sign-up-form
                 (openConsentAction)="openConsent($event)"
-                [signInFormFields]="subscriptionFormFields"
-                [submitSignInFormLoading]="submitSubscriptionLoading"
-                [signInFormSent]="subscriptionFormSent"
-                [signInGlobalError]="subscriptionGlobalError"
-                [signInFieldError]="subscriptionFieldError"
-                (submitSubscriptionForm)="submitSubscriptionForm($event)"
-            ></pxe-sign-in-form>
+                [signUpFormFields]="registrationFormFields"
+                [submitSignUpFormLoading]="submitRegistrationLoading"
+                [signUpFormSent]="registrationFormSent"
+                [signUpGlobalError]="registrationGlobalError"
+                [signUpFieldError]="registrationFieldError"
+                (submitSignUpForm)="submitRegistrationForm($event)"
+            ></pxe-sign-up-form>
         </div>
     </div>
-    <pxe-supplier [configSupplier]="configSupplier"></pxe-supplier>
+    <div class="row">
+        <div class="col-12 col-md-10 offset-md-1">
+            <pxe-supplier-container></pxe-supplier-container>
+        </div>
+    </div>
 </pxe-layout-container>

@@ -6,28 +6,28 @@ import {
 
 import { ApolloModule } from 'apollo-angular';
 
-import { SignInComponent } from './sign-in.component';
-import { SignInFormContainerModule } from 'src/common/containers/form-container/sign-in-form/sign-in-form-container.module';
+import { SignUpComponent } from './sign-up.component';
+import { SignUpFormContainerModule } from 'src/common/containers/form-container/sign-up-form/sign-up-form-container.module';
 
-describe('SignInComponent', () => {
-    let component: SignInComponent;
-    let fixture: ComponentFixture<SignInComponent>;
+describe('SignUpComponent', () => {
+    let component: SignUpComponent;
+    let fixture: ComponentFixture<SignUpComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                SignInComponent,
+                SignUpComponent,
             ],
             imports: [
                 ApolloModule,
-                SignInFormContainerModule,
+                SignUpFormContainerModule,
             ],
         })
         .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(SignInComponent);
+        fixture = TestBed.createComponent(SignUpComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

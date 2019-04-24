@@ -22,7 +22,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent {
         isSimpleFooter: false,
         loginType: LoginType.NONE,
         logoutType: LogoutType.NONE,
-        signInType: SignType.NONE,
+        signUpType: SignType.NONE,
     };
 
     protected constructor(

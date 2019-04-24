@@ -8,11 +8,11 @@ import { Apollo } from 'apollo-angular';
 import { RegisterAbstractComponent } from '../abstract/register-abstract.component';
 
 @Component({
-    selector: 'pxe-sign-in-form-container',
-    templateUrl: './sign-in-form-container.component.html',
-    styleUrls: ['./sign-in-form-container.component.scss'],
+    selector: 'pxe-sign-up-form-container',
+    templateUrl: './sign-up-form-container.component.html',
+    styleUrls: ['./sign-up-form-container.component.scss'],
 })
-export class SignInFormContainerComponent extends RegisterAbstractComponent {
+export class SignUpFormContainerComponent extends RegisterAbstractComponent {
 
     constructor(
         public apollo: Apollo,

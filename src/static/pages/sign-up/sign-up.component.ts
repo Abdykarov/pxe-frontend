@@ -7,9 +7,9 @@ import { registrationFormFields } from 'src/common/containers/form-container/reg
 
 @Component({
     selector: 'lnd-landing-page',
-    templateUrl: './sign-in.component.html',
+    templateUrl: './sign-up.component.html',
 })
-export class SignInComponent {
+export class SignUpComponent {
     public submitSubscriptionLoading = false;
     public subscriptionFormFields = registrationFormFields;
     public subscriptionFormSent = false;

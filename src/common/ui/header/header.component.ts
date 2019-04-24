@@ -50,11 +50,11 @@ export class HeaderComponent {
         private router: Router,
     ) {}
 
-    signIn() {
-        if (this.settings.signInType === SignType.SCROLL) {
+    signUp() {
+        if (this.settings.signUpType === SignType.SCROLL) {
             this.scrollToService.scrollToSubscription();
-        } else if (this.settings.signInType === SignType.NAVIGATE) {
-            this.router.navigate(['sign-in']);
+        } else if (this.settings.signUpType === SignType.NAVIGATE) {
+            this.router.navigate(['sign-up']);
         }
     }
 

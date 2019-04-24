@@ -19,11 +19,11 @@
                     </div>
                     <div
                         class="registration-holder"
-                        *ngIf="settings.signInType !== signTypeNone">
+                        *ngIf="settings.signUpType !== signTypeNone">
                         <lnd-button
                             label="Registrace"
                             type="primary"
-                            (click)="signIn()">
+                            (click)="signUp()">
                         </lnd-button>
                     </div>
                     <div

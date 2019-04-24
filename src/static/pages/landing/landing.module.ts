@@ -43,7 +43,7 @@ export const landingPageRoutes: Routes = [
             isSimpleFooter: true,
             loginType: LoginType.NONE,
             logoutType: LogoutType.NONE,
-            signInType: SignType.STATIC,
+            signUpType: SignType.STATIC,
         },
     },
 ];

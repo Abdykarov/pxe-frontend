@@ -20,9 +20,9 @@ export class BasicLayoutComponent {
     public settings: ISettings = {
         isPublic: true,
         isSimpleFooter: true,
-        signInType: SignType.NONE,
         loginType: LoginType.NONE,
         logoutType: LogoutType.NONE,
+        signUpType: SignType.NONE,
     };
 
     constructor (

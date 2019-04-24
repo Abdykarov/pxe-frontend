@@ -115,7 +115,7 @@ export const staticNavigationConfig: INavigationConfig = [
                 },
                 {
                     'label': 'Registr',
-                    'url': '/full/sign-in',
+                    'url': '/full/sign-up',
                 },
 
                 // {

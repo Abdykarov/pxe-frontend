@@ -21,7 +21,7 @@ const routes = [
                     isSimpleFooter: true,
                     loginType: LoginType.NONE,
                     logoutType: LogoutType.NONE,
-                    signInType: SignType.NAVIGATE,
+                    signUpType: SignType.NAVIGATE,
                 },
             },
             {
@@ -32,7 +32,7 @@ const routes = [
                     isSimpleFooter: true,
                     loginType: LoginType.NONE,
                     logoutType: LogoutType.NONE,
-                    signInType: SignType.NAVIGATE,
+                    signUpType: SignType.NAVIGATE,
                 },
             },
             {
@@ -43,7 +43,7 @@ const routes = [
                     isSimpleFooter: true,
                     loginType: LoginType.NONE,
                     logoutType: LogoutType.NONE,
-                    signInType: SignType.NAVIGATE,
+                    signUpType: SignType.NAVIGATE,
                 },
             },
             {
@@ -54,7 +54,7 @@ const routes = [
                     isSimpleFooter: true,
                     loginType: LoginType.NONE,
                     logoutType: LogoutType.NONE,
-                    signInType: SignType.NONE,
+                    signUpType: SignType.NONE,
                 },
             },
             {
@@ -65,7 +65,7 @@ const routes = [
                     isSimpleFooter: true,
                     loginType: LoginType.NONE,
                     logoutType: LogoutType.NONE,
-                    signInType: SignType.NAVIGATE,
+                    signUpType: SignType.NAVIGATE,
                 },
             },
             {
@@ -76,18 +76,18 @@ const routes = [
                     isSimpleFooter: true,
                     loginType: LoginType.NONE,
                     logoutType: LogoutType.NONE,
-                    signInType: SignType.NAVIGATE,
+                    signUpType: SignType.NAVIGATE,
                 },
             },
             {
-                path: 'sign-in',
-                loadChildren: '../../pages/sign-in/sign-in.module#SignInModule',
+                path: 'sign-up',
+                loadChildren: '../../pages/sign-up/sign-up.module#SignUpModule',
                 data: {
                     isPublic: true,
                     isSimpleFooter: true,
                     loginType: LoginType.NAVIGATE,
                     logoutType: LogoutType.NONE,
-                    signInType: SignType.NONE,
+                    signUpType: SignType.NONE,
                 },
             },
         ],

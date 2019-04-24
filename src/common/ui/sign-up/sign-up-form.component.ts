@@ -20,41 +20,41 @@ import {
 } from 'src/common/containers/form-container/models/form-definition.model';
 
 @Component({
-    selector: 'pxe-sign-in-form',
-    templateUrl: './sign-in-form.component.html',
-    styleUrls: ['./sign-in-form.component.scss'],
+    selector: 'pxe-sign-up-form',
+    templateUrl: './sign-up-form.component.html',
+    styleUrls: ['./sign-up-form.component.scss'],
 })
-export class SignInFormComponent implements OnInit, OnChanges {
+export class SignUpFormComponent implements OnInit, OnChanges {
     @Input()
-    public signInFormSent = false;
+    public signUpFormSent = false;
 
     @Input()
-    public signInFormFields: IForm;
+    public signUpFormFields: IForm;
 
     @Input()
-    public submitSignInFormLoading = false;
+    public submitSignUpFormLoading = false;
 
     @Input()
-    public signInGlobalError: string[] = null;
+    public signUpGlobalError: string[] = null;
 
     @Input()
-    public signInFieldError: IFieldError = {} = null;
+    public signUpFieldError: IFieldError = {} = null;
 
     @Output()
-    public submitSignInForm: EventEmitter<any> = new EventEmitter<any>();
+    public submitSignUpForm: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
     openConsentAction: EventEmitter<any> = new EventEmitter<any>();
 
-    public signInForm: FormGroup;
-    public signInFormError: any = {};
+    public signUpForm: FormGroup;
+    public signUpFormError: any = {};
 
     constructor(
         private fb: FormBuilder,
     ) {}
 
     ngOnInit() {
-        this.signInForm = this.fb.group(this.signInFormFields.controls);
+        this.signUpForm = this.fb.group(this.signUpFormFields.controls);
     }
 
     public openConsent($event) {
@@ -63,7 +63,7 @@ export class SignInFormComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.subscriptionFieldError) {
-            this.signInFormError = R.clone(changes.subscriptionFieldError.currentValue);
+            this.signUpFormError = R.clone(changes.subscriptionFieldError.currentValue);
         }
     }
 
@@ -71,22 +71,22 @@ export class SignInFormComponent implements OnInit, OnChanges {
         R.pipe(
             R.keys,
             R.map((field) => {
-                this.signInForm
+                this.signUpForm
                     .get(field)
                     .markAsTouched({
                         onlySelf: true,
                     });
             }),
-        )(this.signInForm.controls);
-        if (this.signInForm.valid) {
-            const val = this.signInForm.value;
+        )(this.signUpForm.controls);
+        if (this.signUpForm.valid) {
+            const val = this.signUpForm.value;
             val.preregistration = false;
-            this.submitSignInForm.emit(val);
+            this.submitSignUpForm.emit(val);
         }
     }
     public resetCustomFieldError = () => {
         R.mapObjIndexed((_, field) => {
-            delete this.signInFormError[field];
-        })(this.signInFormFields.controls);
+            delete this.signUpFormError[field];
+        })(this.signUpFormFields.controls);
     }
 }

@@ -3,7 +3,7 @@ export interface ISettings {
     isSimpleFooter: boolean;
     loginType: LoginType;
     logoutType: LogoutType;
-    signInType: SignType;
+    signUpType: SignType;
 }
 
 export enum SignType {

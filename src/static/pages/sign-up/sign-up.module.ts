@@ -8,36 +8,36 @@ import {
     LogoutType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
-import { SignInComponent } from './sign-in.component';
-import { SignInFormModule } from 'src/common/ui/sign-in/sign-in-form.module';
+import { SignUpComponent } from './sign-up.component';
+import { SignUpFormModule } from 'src/common/ui/sign-up/sign-up-form.module';
 import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
 
 @NgModule({
     declarations: [
-        SignInComponent,
+        SignUpComponent,
     ],
     exports: [
-        SignInComponent,
+        SignUpComponent,
     ],
     imports: [
         CommonModule,
-        SignInFormModule,
+        SignUpFormModule,
         LayoutContainerModule,
         SupplierModule,
     ],
 })
-export class SignInModule { }
+export class SignUpModule { }
 
-export const signInPageRoutes: Routes = [
+export const signUpPageRoutes: Routes = [
     {
-        path: 'sign-in',
-        component: SignInComponent,
+        path: 'sign-up',
+        component: SignUpComponent,
         data: {
             isPublic: true,
             isSimpleFooter: true,
             loginType: LoginType.STATIC,
             logoutType: LogoutType.NONE,
-            signInType: SignType.NONE,
+            signUpType: SignType.NONE,
         },
     },
 ];
