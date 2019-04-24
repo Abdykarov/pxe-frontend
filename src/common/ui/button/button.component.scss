@@ -229,6 +229,29 @@
 		border: none;
 	}
 
+	&--link {
+		.btn__text {
+			color: $link-color;
+			border-color: $link-color;
+			text-decoration: $link-decoration;
+		}
+
+		&:hover {
+			.btn__text {
+				color: $link-hover-color;
+				text-decoration: $link-hover-decoration;
+			}
+		}
+
+		&:focus,
+		&:active,
+		&:not(:disabled):not(.disabled):focus,
+		&:not(:disabled):not(.disabled):active,
+		&:not(:disabled):not(.disabled):active:focus {
+			box-shadow: none;
+		}
+	}
+
 	&__text {
 		display: inline-block;
 	}
