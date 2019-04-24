@@ -8,21 +8,33 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 export class ProgressBarComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
-    public stepperProgressConfig  = [
+    public stepperProgressConfig = [
         {
             url: '/basic/colors',
             done: true,
-            label: 'Step #1 colors checked',
+            label: 'Step #1 colors',
         },
+        // {
+        //     url: '/basic/colors',
+        //     done: true,
+        //     subStep: true,
+        //     label: 'Step #2 colors',
+        // },
         {
             url: '/basic/icons',
-            done: false,
-            label: 'Step #2 icons',
+            done: true,
+            label: 'Step #3 icons',
         },
+        // {
+        //     url: '/basic/icons',
+        //     done: true,
+        //     subStep: true,
+        //     label: 'Step #4 icons',
+        // },
         {
-            url: '/basic/typography',
+            url: '/basic/progress',
             done: false,
-            label: 'Step #3 typography',
+            label: 'Step #5 typography',
         },
     ];
 

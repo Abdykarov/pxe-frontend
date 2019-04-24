@@ -21,6 +21,10 @@
 		margin-bottom: 0;
 	}
 
+	&--bg-transparent {
+		background-color: transparent;
+	}
+
 	.icon-boxes {
 		margin: ( -$spacer / 2 ) ( -$spacer / 2 ) $spacer ( -$spacer / 2 );
 		display: flex;
