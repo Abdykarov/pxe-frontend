@@ -12,8 +12,8 @@ import {
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 import { MapCoverageModule } from 'src/common/ui/map-coverage/map-coverage.module';
-import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
 import { NewsSubscriptionModule } from 'src/common/ui/news-subscription/news-subscription.module';
+import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
 
 @NgModule({
     declarations: [
