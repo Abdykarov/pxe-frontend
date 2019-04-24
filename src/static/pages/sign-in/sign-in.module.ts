@@ -4,11 +4,12 @@ import { Routes } from '@angular/router';
 
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 import {
-    LoginType,
+    LoginType, LogoutType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 import { SignInComponent } from './sign-in.component';
 import { SignInFormModule } from 'src/common/ui/sign-in/sign-in-form.module';
+import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
 
 @NgModule({
     declarations: [
@@ -21,6 +22,7 @@ import { SignInFormModule } from 'src/common/ui/sign-in/sign-in-form.module';
         CommonModule,
         SignInFormModule,
         LayoutContainerModule,
+        SupplierModule,
     ],
 })
 export class SignInModule { }
@@ -33,6 +35,7 @@ export const signInPageRoutes: Routes = [
             isPublic: true,
             isSimpleFooter: true,
             loginType: LoginType.STATIC,
+            logoutType: LogoutType.NONE,
             signInType: SignType.NONE,
         },
     },

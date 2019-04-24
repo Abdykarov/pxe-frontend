@@ -6,7 +6,7 @@ import { Routes } from '@angular/router';
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { CookiesPageComponent } from './page';
 import {
-    LoginType,
+    LoginType, LogoutType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 
@@ -32,6 +32,7 @@ export const cookiesPageRoutes: Routes = [
             isPublic: true,
             isSimpleFooter: true,
             loginType: LoginType.NONE,
+            logoutType: LogoutType.NONE,
             signInType: SignType.STATIC,
         },
     },

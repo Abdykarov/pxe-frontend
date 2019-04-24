@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 // own classes
 import { ConsumptionPipe } from './consumption/consumption.pipe';
+import { FilterCommodityTypePipe } from './filter-commodity-type/filter-commodity-type.pipe';
 import { KeysPipe } from './keys/keys.pipe';
 import { ValuesPipe } from './values/values.pipe';
 import { PluralPipe } from './plurar/plural.pipe';
@@ -9,22 +10,24 @@ import { PluralPipe } from './plurar/plural.pipe';
 @NgModule({
     declarations: [
         ConsumptionPipe,
+        FilterCommodityTypePipe,
         KeysPipe,
         ValuesPipe,
         PluralPipe,
     ],
     exports: [
         ConsumptionPipe,
+        FilterCommodityTypePipe,
         KeysPipe,
         ValuesPipe,
         PluralPipe,
     ],
     providers: [
         ConsumptionPipe,
+        FilterCommodityTypePipe,
         KeysPipe,
         ValuesPipe,
         PluralPipe,
     ],
 })
-
 export class PipesModule {}
