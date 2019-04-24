@@ -18,6 +18,7 @@ import { LoginComponent } from './login.component';
 import { LoginFormModule } from 'src/common/containers/form-container/login-form/login-form.module';
 import { LoginRoutingModule } from './login.routing';
 import { ModalModule } from 'src/common/ui/modal/modal.module';
+import { SupplierContainerModule } from 'src/common/containers/supplier-conteiner/supplier-conteiner.module';
 
 describe('LoginComponent', () => {
     let component: LoginComponent;
@@ -39,6 +40,7 @@ describe('LoginComponent', () => {
                 LoginRoutingModule,
                 LoginFormModule,
                 ModalModule,
+                SupplierContainerModule,
                 ReactiveFormsModule,
                 RouterTestingModule,
             ],

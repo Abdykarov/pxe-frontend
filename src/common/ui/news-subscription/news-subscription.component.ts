@@ -93,4 +93,4 @@ export class NewsSubscriptionComponent implements OnInit, OnChanges {
         })(this.subscriptionFormFields.controls);
     }
 }
-0;
+

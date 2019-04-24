@@ -4,7 +4,10 @@ import {
     TestBed,
 } from '@angular/core/testing';
 
+import { ApolloModule } from 'apollo-angular';
+
 import { SignInComponent } from './sign-in.component';
+import { SignInFormContainerModule } from 'src/common/containers/form-container/sign-in-form/sign-in-form-container.module';
 
 describe('SignInComponent', () => {
     let component: SignInComponent;
@@ -14,6 +17,10 @@ describe('SignInComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 SignInComponent,
+            ],
+            imports: [
+                ApolloModule,
+                SignInFormContainerModule,
             ],
         })
         .compileComponents();
