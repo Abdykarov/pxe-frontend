@@ -2,8 +2,10 @@ import {
     Component,
     EventEmitter,
     Input,
+    OnChanges,
     OnInit,
     Output,
+    SimpleChanges,
 } from '@angular/core';
 import {
     FormBuilder,
@@ -22,7 +24,7 @@ import {
     templateUrl: './sign-in-form.component.html',
     styleUrls: ['./sign-in-form.component.scss'],
 })
-export class SignInFormComponent implements OnInit {
+export class SignInFormComponent implements OnInit, OnChanges {
     @Input()
     public signInFormSent = false;
 
@@ -41,7 +43,11 @@ export class SignInFormComponent implements OnInit {
     @Output()
     public submitSignInForm: EventEmitter<any> = new EventEmitter<any>();
 
+    @Output()
+    openConsentAction: EventEmitter<any> = new EventEmitter<any>();
+
     public signInForm: FormGroup;
+    public signInFormError: any = {};
 
     constructor(
         private fb: FormBuilder,
@@ -51,8 +57,17 @@ export class SignInFormComponent implements OnInit {
         this.signInForm = this.fb.group(this.signInFormFields.controls);
     }
 
+    public openConsent($event) {
+        this.openConsentAction.emit($event);
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.subscriptionFieldError) {
+            this.signInFormError = R.clone(changes.subscriptionFieldError.currentValue);
+        }
+    }
+
     public submitForm = () => {
-        console.log('SUBMITTING');
         R.pipe(
             R.keys,
             R.map((field) => {
@@ -66,8 +81,12 @@ export class SignInFormComponent implements OnInit {
         if (this.signInForm.valid) {
             const val = this.signInForm.value;
             val.preregistration = false;
-            val.consent = true;
             this.submitSignInForm.emit(val);
         }
+    }
+    public resetCustomFieldError = () => {
+        R.mapObjIndexed((_, field) => {
+            delete this.signInFormError[field];
+        })(this.signInFormFields.controls);
     }
 }

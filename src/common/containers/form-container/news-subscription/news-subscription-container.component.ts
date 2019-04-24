@@ -5,10 +5,7 @@ import {
 
 import { Apollo } from 'apollo-angular';
 
-import * as mutations from 'src/common/graphql/mutations';
-import { parseGraphQLErrors } from 'src/common/utils/';
 import { RegisterAbstractComponent } from 'src/common/containers/form-container/abstract/register-abstract.component';
-import { subscriptionFormFields } from './news-subsctiption-container.config';
 
 @Component({
     selector: 'pxe-news-subscription-container',
@@ -24,12 +21,6 @@ export class NewsSubscriptionContainerComponent extends RegisterAbstractComponen
         super(
             apollo,
             cd,
-            subscriptionFormFields,
         );
-    }
-
-    public openConsent(evt) {
-        evt.preventDefault();
-        window.open('securing-your-data');
     }
 }

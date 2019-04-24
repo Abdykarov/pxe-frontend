@@ -8,18 +8,26 @@ import {
     IForm,
 } from 'src/common/containers/form-container/models/form-definition.model';
 import { parseGraphQLErrors } from 'src/common/utils';
+import { registrationFormFields } from '../registration.config';
 
 export class RegisterAbstractComponent {
     public submitRegistrationLoading = false;
     public registrationFormSent = false;
     public registrationGlobalError: string[] = [];
     public registrationFieldError: IFieldError = {};
+    public registrationFormFields: IForm;
 
     protected constructor(
         public apollo: Apollo,
         public cd: ChangeDetectorRef,
-        public registrationFormFields: IForm,
-    ) {}
+    ) {
+        this.registrationFormFields = registrationFormFields;
+    }
+
+    public openConsent(evt) {
+        evt.preventDefault();
+        window.open('securing-your-data');
+    }
 
     public submitRegistrationForm = (values) => {
         this.submitRegistrationLoading = true;

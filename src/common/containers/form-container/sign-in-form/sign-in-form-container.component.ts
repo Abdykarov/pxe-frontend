@@ -4,8 +4,8 @@ import {
 } from '@angular/core';
 
 import { Apollo } from 'apollo-angular';
+
 import { RegisterAbstractComponent } from '../abstract/register-abstract.component';
-import { signInFormFields } from './sign-in-form-container.config';
 
 @Component({
     selector: 'pxe-sign-in-form-container',
@@ -21,7 +21,6 @@ export class SignInFormContainerComponent extends RegisterAbstractComponent {
         super(
             apollo,
             cd,
-            signInFormFields,
         );
     }
 }
