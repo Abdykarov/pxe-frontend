@@ -9,8 +9,26 @@
 
 
 .ng-select-custom {
+	max-width: $input-width;
 	padding-bottom: 0;
 	margin-bottom: ( $spacer * 2 );
+
+	.ng-select-opened {
+		&,
+		&.ng-select-focused {
+			.ng-select-container {
+				&::after {
+					background-color: $primary;
+				}
+			}
+		}
+
+		.ng-arrow-wrapper {
+			&::before {
+				transform: rotate(180deg);
+			}
+		}
+	}
 
 	&.form-group {
 		.ng-select {
@@ -70,6 +88,22 @@
 			}
 		}
 
+		.ng-value,
+		.ng-input,
+		.ng-option {
+			font-size: $input-font-size;
+		}
+
+		.ng-input {
+			top: 0;
+			height: $input-height;
+			padding: $input-padding-y $input-padding-x;
+
+			& > input {
+				line-height: ( $input-height - ( $input-padding-y * 2 ));
+			}
+		}
+
 		&.ng-select-single .ng-select-container.ng-has-value .ng-arrow-wrapper {
 			display: none;
 		}
@@ -82,7 +116,7 @@
 				height: 10px;
 			}
 
-			.ng-arrow-wrapper {	
+			.ng-arrow-wrapper {
 				&::before {
 					content: '\e916';
 				}
@@ -90,7 +124,7 @@
 
 			.ng-clear-wrapper {
 				&::before {
-					content: '\e915';
+					content: '\e91b';
 				}
 			}
 		}
@@ -125,25 +159,30 @@
 		}
 
 		.ng-dropdown-panel {
-			top: 100%;
+			top: calc(100% + 10px);
+			border-radius: $input-border-radius;
 			box-shadow: none;
 		}
 
 		.ng-dropdown-panel-items {
+			padding: ( $spacer / 2.5 ) 0;
 			background-color: $input-bg;
 		}
 
 		.ng-option {
-
 			&.ng-option-selected {
-				background-color: $white;
-				color: #393939;
+				background-color: $font-text;
+				color: $white;
+
+				&.ng-option-marked,
+				&:hover {
+					background-color: lighten($font-text, 5%);
+				}
 			}
 
 			&.ng-option-marked,
 			&:hover {
-				background-color: $primary;
-				color: $white;
+				background-color: darken($input-bg, 4%);
 			}
 		}
 	}
