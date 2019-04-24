@@ -1,53 +1,49 @@
-<div class="row">
-    <div class="col-12 col-md-10 offset-md-1">
-        <div class="suppliers-holder">
-            <ul class="suppliers-overview">
-                <li class="suppliers-overview__item"
-                    *ngFor="let supplier of configSupplier | filter_commodity: typeCommodity ">
-                    <a
-                        *ngIf="supplier.supplierUrl"
-                        href="{{supplier.supplierUrl}}"
-                        target="_blank"
-                        class="suppliers-overview__content">
+<div class="suppliers-holder">
+    <ul class="suppliers-overview">
+        <li class="suppliers-overview__item"
+            *ngFor="let supplier of configSupplier | filter_commodity: typeCommodity ">
+            <a
+                *ngIf="supplier.supplierUrl"
+                href="{{supplier.supplierUrl}}"
+                target="_blank"
+                class="suppliers-overview__content">
+                <img
+                    class="suppliers-overview__picture"
+                    [ngClass]="[
+                                supplier.size ? 'suppliers-overview__picture--' + supplier.size : ''
+                            ]"
+                    src="{{supplier.logoUrl}}"
+                    title="{{supplier.title}}"
+                    alt="{{supplier.alt}}">
+                <img
+                    class="suppliers-overview__picture-hover"
+                    [ngClass]="[
+                                supplier.size ? 'suppliers-overview__picture-hover--' + supplier.size : ''
+                            ]"
+                    src="{{supplier.logoUrlHover}}"
+                    title="{{supplier.title}}"
+                    alt="{{supplier.alt}}">
+            </a>
+            <span
+                *ngIf="!supplier.supplierUrl"
+                class="suppliers-overview__content">
                         <img
                             class="suppliers-overview__picture"
                             [ngClass]="[
-                                        supplier.size ? 'suppliers-overview__picture--' + supplier.size : ''
-                                    ]"
+                                supplier.size ? 'suppliers-overview__picture--' + supplier.size : ''
+                            ]"
                             src="{{supplier.logoUrl}}"
                             title="{{supplier.title}}"
                             alt="{{supplier.alt}}">
                         <img
                             class="suppliers-overview__picture-hover"
                             [ngClass]="[
-                                        supplier.size ? 'suppliers-overview__picture-hover--' + supplier.size : ''
-                                    ]"
+                                supplier.size ? 'suppliers-overview__picture-hover--' + supplier.size : ''
+                            ]"
                             src="{{supplier.logoUrlHover}}"
                             title="{{supplier.title}}"
                             alt="{{supplier.alt}}">
-                    </a>
-                    <span
-                        *ngIf="!supplier.supplierUrl"
-                        class="suppliers-overview__content">
-                                <img
-                                    class="suppliers-overview__picture"
-                                    [ngClass]="[
-                                        supplier.size ? 'suppliers-overview__picture--' + supplier.size : ''
-                                    ]"
-                                    src="{{supplier.logoUrl}}"
-                                    title="{{supplier.title}}"
-                                    alt="{{supplier.alt}}">
-                                <img
-                                    class="suppliers-overview__picture-hover"
-                                    [ngClass]="[
-                                        supplier.size ? 'suppliers-overview__picture-hover--' + supplier.size : ''
-                                    ]"
-                                    src="{{supplier.logoUrlHover}}"
-                                    title="{{supplier.title}}"
-                                    alt="{{supplier.alt}}">
-                        </span>
-                </li>
-            </ul>
-        </div>
-    </div>
+                </span>
+        </li>
+    </ul>
 </div>

@@ -63,11 +63,11 @@ export class SignInFormComponent implements OnInit {
                     });
             }),
         )(this.signInForm.controls);
-        console.log(this.signInForm);
-        console.log(this.signInForm.valid);
         if (this.signInForm.valid) {
-            console.log('JSEM VALIDNI');
-            this.submitSignInForm.emit(this.signInForm.value);
+            const val = this.signInForm.value;
+            val.preregistration = false;
+            val.consent = true;
+            this.submitSignInForm.emit(val);
         }
     }
 }

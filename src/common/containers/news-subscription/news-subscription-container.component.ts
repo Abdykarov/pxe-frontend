@@ -32,28 +32,4 @@ export class NewsSubscriptionContainerComponent extends RegisterAbstractComponen
         evt.preventDefault();
         window.open('securing-your-data');
     }
-
-    public submitSubscriptionForm = (values) => {
-        this.submitRegistrationLoading = true;
-        this.registrationGlobalError = [];
-        this.registrationFieldError = {};
-        this.apollo
-            .mutate({
-                mutation: mutations.makeRegistration,
-                variables: values,
-            })
-            .subscribe(
-                () => {
-                    this.submitRegistrationLoading = false;
-                    this.registrationFormSent = true;
-                    this.cd.markForCheck();
-                },
-                (error) => {
-                    this.submitRegistrationLoading = false;
-                    const {fieldError, globalError} = parseGraphQLErrors(error);
-                    this.registrationFieldError = fieldError;
-                    this.registrationGlobalError = globalError;
-                    this.cd.markForCheck();
-                });
-    }
 }
