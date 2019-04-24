@@ -6,7 +6,8 @@ import { Routes } from '@angular/router';
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { CookiesPageComponent } from './page';
 import {
-    LoginType, LogoutType,
+    LoginType,
+    LogoutType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 

@@ -4,7 +4,8 @@ import { Routes } from '@angular/router';
 
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 import {
-    LoginType, LogoutType,
+    LoginType,
+    LogoutType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 import { SignInComponent } from './sign-in.component';

@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
 
 import {
     ISettings,
-    LoginType, LogoutType,
+    LoginType,
+    LogoutType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';

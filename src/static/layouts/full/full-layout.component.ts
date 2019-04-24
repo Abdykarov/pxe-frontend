@@ -31,7 +31,6 @@ export class FullLayoutComponent {
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
                 this.settings = <ISettings>this.route.snapshot.firstChild.data;
-                console.log(this.settings);
             }
         });
     }

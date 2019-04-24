@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
 
-import { ISupplier, TypeCommodity } from './model/supplier.model';
+import {
+    ISupplier,
+    TypeCommodity,
+} from './model/supplier.model';
 
 @Component({
     selector: 'pxe-supplier',

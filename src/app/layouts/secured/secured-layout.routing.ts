@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import {
+    LoginType,
+    SignType,
+} from '../models/router-data.model';
 import { SecuredLayoutComponent } from './secured-layout.component';
-import { LoginType, SignType } from '../models/router-data.model';
 
 const routes = [
     {
