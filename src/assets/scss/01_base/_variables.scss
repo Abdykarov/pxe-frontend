@@ -49,6 +49,7 @@ $danger:                           #d0021b;                    // Danger color
 $danger-lighten:                   lighten($danger, 10%);
 $danger-dark:                      darken($danger, 15%);
 $danger-darken:                    darken($danger, 25%);
+$info:                             $secondary;                   // Info color
 $light:                            $gray-300;                    // Light color
 $light-dark:                       $gray-400;
 $light-darken:                     $gray-500;
@@ -255,18 +256,6 @@ $dropdown-beak-border-style:       solid;
 $dropdown-beak-border-color:       $white;
 $dropdown-beak-box-shadow:         none;
 $dropdown-menu-offset:             ( $dropdown-beak-border-width - 3px );
-
-
-// Alerts
-$alert-padding-y:                   ( $spacer / 2 );
-$alert-padding-x:                   ( $spacer / 2 );
-$alert-margin-bottom:               ( $spacer / 2 );
-$alert-border-radius:               0;
-$alert-link-font-weight:            400;
-$alert-border-width:                0;
-$alert-bg-level:                    0;
-$alert-border-level:                0;
-$alert-color-level:                 0;
 
 
 // Close
