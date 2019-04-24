@@ -229,17 +229,25 @@
 		border: none;
 	}
 
-	&.link {
-		&:focus,
+	&--link {
+		.btn__text {
+			color: $link-color;
+			border-color: $link-color;
+			text-decoration: $link-decoration;
+		}
+
 		&:hover {
 			.btn__text {
-				text-decoration: underline;
+				color: $link-hover-color;
+				text-decoration: $link-hover-decoration;
 			}
 		}
 
 		&:focus,
 		&:active,
-		&:not(:disabled):not(.disabled):active {
+		&:not(:disabled):not(.disabled):focus,
+		&:not(:disabled):not(.disabled):active,
+		&:not(:disabled):not(.disabled):active:focus {
 			box-shadow: none;
 		}
 	}
