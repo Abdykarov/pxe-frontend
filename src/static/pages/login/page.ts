@@ -127,6 +127,6 @@ export class LoginPageComponent {
 
     public action = (evt) => {
         evt.preventDefault();
-        window.open('/full/landing-page', '_blank');
+        console.log('Zapomenuté heslo');
     }
 }
