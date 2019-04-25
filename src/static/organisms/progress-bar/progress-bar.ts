@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 
 @Component({
   templateUrl: './progress-bar.html',
@@ -8,16 +9,28 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 export class ProgressBarComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
-    public stepperProgressConfig = [
+    public stepperProgressConfig: IStepperProgressItem[] = [
         {
             url: '/basic/colors',
             done: true,
             label: 'Step #1 colors',
         },
         {
+            url: '/basic/alerts',
+            done: true,
+            label: 'Step #2 progress',
+        },
+        {
             url: '/basic/progress',
             done: false,
-            label: 'Step #2 progress',
+            label: 'Step #3 icons',
+            shadowStep: true,
+        },
+        {
+            url: '/basic/forms',
+            done: false,
+            label: 'Step #3 icons',
+            shadowStep: true,
         },
         {
             url: '/basic/icons',
