@@ -5,7 +5,7 @@ import {
 } from '@angular/core/testing';
 
 import { ProgressBarComponent } from './progress-bar.component';
-
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SupplyProgressBarComponent', () => {
     let component: ProgressBarComponent;
@@ -15,6 +15,9 @@ describe('SupplyProgressBarComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 ProgressBarComponent,
+            ],
+            imports: [
+                RouterTestingModule,
             ],
         })
         .compileComponents();
