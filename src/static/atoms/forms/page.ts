@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import {
+    FormControl,
+    FormGroup,
+} from '@angular/forms';
 
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { IDropdownItem } from 'src/common/ui/dropdown/models/item.model';
@@ -11,6 +15,10 @@ import { FormsPageConfig } from './config';
 export class FormsPageComponent {
     public dropdownItems: Array<IDropdownItem>;
     public breadcrumbItemsSimple: IBreadcrumbItems;
+
+    public datepickers: FormGroup = new FormGroup({
+        datepicker: new FormControl(''),
+    });
 
     constructor(
         public config: FormsPageConfig,

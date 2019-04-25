@@ -6,6 +6,8 @@ import { Routes } from '@angular/router';
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { FormsPageComponent } from './page';
 import { FormModule } from 'src/common/ui/forms/form.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DatepickerModule } from 'src/common/ui/forms/datepicker/datepicker.module';
 
 @NgModule({
     declarations: [
@@ -17,7 +19,9 @@ import { FormModule } from 'src/common/ui/forms/form.module';
     imports: [
         BreadcrumbModule,
         CommonModule,
+        DatepickerModule,
         FormModule,
+        ReactiveFormsModule,
     ],
 })
 export class FormsPageModule {}

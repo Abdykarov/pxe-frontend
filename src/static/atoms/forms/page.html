@@ -5,569 +5,161 @@
 </div>
 <h3>Input</h3>
 <div class="static-pages">
-    <form>
-        <h4>Normal</h4>
-        <div class="row">
-            <div class="col-md-4">
-                <lnd-form-field
-                    id="normal-input"
-                    label="Label">
-                </lnd-form-field>
-            </div>
-            <div class="col-md-4">
-                <lnd-form-field
-                    id="error-input"
-                    label="Label error"
-                    error="This field is required"
-                    [touched]="true">
-                </lnd-form-field>
-            </div>
+    <h4>Normal</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-form-field
+                id="normal-input"
+                label="Label">
+            </lnd-form-field>
         </div>
-        <h4>Filled</h4>
-        <div class="row">
-            <div class="col-md-4">
-                <lnd-form-field
-                    id="normal-input"
-                    label="Normal input"
-                    placeholder="Placeholder text"
-                    [touched]="true"
-                    value="Filled input">
-                </lnd-form-field>
-            </div>
-            <div class="col-md-4">
-                <lnd-form-field
-                    id="error-input"
-                    label="Normal error"
-                    value="Filled input"
-                    error="This field is required field is required field is required field."
-                    [touched]="true">
-                </lnd-form-field>
-            </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                id="error-input"
+                label="Label error"
+                error="This field is required"
+                [touched]="true">
+            </lnd-form-field>
         </div>
-        <h4>Light</h4>
-        <div class="row bg--body pt-3 mb-4">
-            <div class="col-md-4">
-                <lnd-form-field
-                    id="light-input"
-                    label="Normal input"
-                    [lightField]="true">
-                </lnd-form-field>
-            </div>
-            <div class="col-md-4">
-                <lnd-form-field
-                    id="error-input"
-                    label="Normal error"
-                    error="This field is required"
-                    [touched]="true"
-                    [lightField]="true">
-                </lnd-form-field>
-            </div>
+    </div>
+    <h4>Filled</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-form-field
+                id="normal-input"
+                label="Normal input"
+                placeholder="Placeholder text"
+                [touched]="true"
+                value="Filled input">
+            </lnd-form-field>
         </div>
-        <!-- <h4>States</h4>
-        <div class="row">
-            <div class="col-md-4">
-                <lnd-form-field
-                    id="success-no-value-input"
-                    label="Success"
-                    [success]="true">
-                </lnd-form-field>
-            </div>
-            <div class="col-md-4">
-                <lnd-form-field
-                    id="warning-no-value-input"
-                    label="Warning"
-                    [warning]="true">
-                </lnd-form-field>
-            </div>
-            <div class="col-md-4">
-                <lnd-form-field
-                    id="error-no-value-input"
-                    label="Error"
-                    error=" "
-                    [touched]="true">
-                </lnd-form-field>
-            </div>
-        </div> -->
-        <!-- <h4>Error</h4>
-        <div class="row">
-            <div class="col-md-4">
-                <lnd-form-field
-                    id="error-input"
-                    label="Standard error"
-                    error="This field is required"
-                    [touched]="true"
-                </lnd-form-field>
-            </div>
-        </div> -->
-        <!-- <h4>Readonly</h4>
-        <div class="row">
-            <div class="col-sm-3">
-                <lnd-form-field
-                    id="readonly-input"
-                    label="Readonly"
-                    [readonly]="true">
-                &gt;</lnd-form-field>
-            </div>
-            <div class="col-md-6">
-                <lnd-form-field
-                    id="readonly-input-filled"
-                    label="Readonly"
-                    [readonly]="true"
-                    value="Readonly input">
-                </lnd-form-field>
-            </div>
-        </div> -->
-        <h4>Disabled</h4>
-        <div class="row">
-            <div class="col-md-4">
-                <lnd-form-field
-                    [disabledField]="true"
-                    id="disabled-input"
-                    label="Disabled input">
-                </lnd-form-field>
-            </div>
-            <div class="col-md-4">
-                <lnd-form-field
-                    [disabledField]="true"
-                    id="disabled-input-filled"
-                    label="Disabled input"
-                    value="Disabled">
-                </lnd-form-field>
-            </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                id="error-input"
+                label="Normal error"
+                value="Filled input"
+                error="This field is required field is required field is required field."
+                [touched]="true">
+            </lnd-form-field>
         </div>
-        <!--<h4>Input with subtext</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="subtext-input"-->
-                    <!--label="Input se subtextem"-->
-                    <!--subtext="Input se subtextem"-->
-                    <!--[success]="true"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<h4>Input with appendtext</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="appendtext-input"-->
-                    <!--label="Input s appendtextem"-->
-                    <!--[success]="true"-->
-                    <!--appendText="CZK"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-    </form>
+    </div>
+    <h4>Light</h4>
+    <div class="row bg--body pt-3 mb-4">
+        <div class="col-md-4">
+            <lnd-form-field
+                id="light-input"
+                label="Normal input"
+                [lightField]="true">
+            </lnd-form-field>
+        </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                id="error-input"
+                label="Normal error"
+                error="This field is required"
+                [touched]="true"
+                [lightField]="true">
+            </lnd-form-field>
+        </div>
+    </div>
+    <h4>Disabled</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-form-field
+                [disabledField]="true"
+                id="disabled-input"
+                label="Disabled input">
+            </lnd-form-field>
+        </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                [disabledField]="true"
+                id="disabled-input-filled"
+                label="Disabled input"
+                value="Disabled">
+            </lnd-form-field>
+        </div>
+    </div>
 </div>
-<!--<h3>Input with icons</h3>-->
-<!--<div class="static-pages">-->
-    <!--<form>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="input-with-button-left"-->
-                    <!--label="Input s tlačítkem vlevo"-->
-                    <!--(prependButtonAction)="clickAction()"-->
-                    <!--prependButtonIcon="icon&#45;&#45;search"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="input-with-icon-left"-->
-                    <!--label="Input s ikonou vlevo"-->
-                    <!--prependIcon="icon&#45;&#45;search"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--(appendButtonAction)="clickAction()"-->
-                    <!--appendButtonIcon="icon&#45;&#45;search"-->
-                    <!--id="input-with-button-right"-->
-                    <!--label="Input s tlačítkem vpravo"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--appendIcon="icon&#45;&#45;search"-->
-                    <!--id="input-with-icon-right"-->
-                    <!--label="Input s ikonou vpravo"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--[hideLabel]="true"-->
-                    <!--id="input-with-icon-left-2"-->
-                    <!--label="Input s ikonou vlevo"-->
-                    <!--prependIcon="icon&#45;&#45;search"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</form>-->
-<!--</div>-->
-<!--<h3>Textarea</h3>-->
-<!--<div class="static-pages">-->
-    <!--<form>-->
-        <!--<h4>Normal</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="normal-textarea"-->
-                    <!--placeholder="Placeholder text"-->
-                    <!--label="Label"-->
-                    <!--type="textarea"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<h4>Disabled</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--[disabled]="true"-->
-                    <!--id="normal-textarea-disabled"-->
-                    <!--placeholder="Disabled textarea"-->
-                    <!--label="Disabled"-->
-                    <!--type="textarea"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--[disabled]="true"-->
-                    <!--id="filled-textarea-disable"-->
-                    <!--label="Filled textarea"-->
-                    <!--type="textarea"-->
-                    <!--value="Filled texarea"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<h4>Readonly</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="normal-textarea-readonly"-->
-                    <!--placeholder="Readonly textarea"-->
-                    <!--label="Readonly textarea"-->
-                    <!--[readonly]="true"-->
-                    <!--type="textarea"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="filled-textarea-readonly"-->
-                    <!--placeholder="Readonly textarea"-->
-                    <!--label="Readonly textarea"-->
-                    <!--[readonly]="true"-->
-                    <!--type="textarea"-->
-                    <!--value="Readonly textarea"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<h4>States</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="normal-textarea-success"-->
-                    <!--placeholder="Success textarea"-->
-                    <!--label="Success"-->
-                    <!--[success]="true"-->
-                    <!--type="textarea"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="normal-textarea-warning"-->
-                    <!--placeholder="Warning textarea"-->
-                    <!--label="Warning"-->
-                    <!--type="textarea"-->
-                    <!--[warning]="true"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--error=" "-->
-                    <!--id="normal-textarea-error"-->
-                    <!--placeholder="Error textarea"-->
-                    <!--label="Error"-->
-                    <!--[touched]="true"-->
-                    <!--type="textarea"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<h4>Error</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--error="This field is required"-->
-                    <!--id="normal-textarea-error-2"-->
-                    <!--placeholder="Error textarea"-->
-                    <!--label="Error"-->
-                    <!--[touched]="true"-->
-                    <!--type="textarea"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</form>-->
-<!--</div>-->
 <h3>Radio</h3>
 <div class="static-pages">
-    <form>
-        <h4>Normal</h4>
-        <div class="row">
-            <div class="col-md-4">
-                <lnd-form-field
-                    id="normal-radio"
-                    label="Radio label"
-                    [type]="'RADIOGROUP'"
-                    [options]="config.options"
-                    [defaultRadioGroupValue]="config.options[1].key">
-                </lnd-form-field>
-            </div>
+    <h4>Normal</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-form-field
+                id="normal-radio"
+                label="Radio label"
+                [type]="'RADIOGROUP'"
+                [options]="config.options"
+                [defaultRadioGroupValue]="config.options[1].key">
+            </lnd-form-field>
         </div>
-        <!-- <h4>Disabled</h4>
-        <div class="row">
-            <div class="col-md-3">
-                <lnd-form-field
-                    [disabled]="true"
-                    id="disabled-radio"
-                    label="Disabled radio"
-                    type="radio">
-                </lnd-form-field>
-            </div>
-            <div class="col-md-3">
-                <lnd-form-field
-                    [disabled]="true"
-                    [checked]="true"
-                    id="disabled-radio-checked"
-                    label="Disabled radio checked"
-                    type="radio">
-                </lnd-form-field>
-            </div>
-        </div> -->
-        <!-- <h4>Status</h4>
-        <div class="row">
-            <div class="col-md-3">
-                <lnd-form-field
-                    id="success-radio-checked"
-                    label="Success radio"
-                    [success]="true"
-                    type="radio">
-                </lnd-form-field>
-            </div>
-            <div class="col-md-3">
-                <lnd-form-field
-                    id="warning-radio"
-                    label="Warning radio"
-                    [warning]="true"
-                    type="radio">
-                </lnd-form-field>
-            </div>
-            <div class="col-md-3">
-                <lnd-form-field
-                    error=" "
-                    id="error-radio"
-                    label="Error radio"
-                    [touched]="true"
-                    type="radio">
-                </lnd-form-field>
-            </div>
-        </div> -->
-    </form>
-    <!-- <form class="was-validated">
-        <h4>Validate</h4>
-        <div class="row">
-            <div class="col-md-3">
-                <lnd-form-field
-                    error="This field is required"
-                    id="error-radio-validate"
-                    label="Error radio"
-                    [checked]="true"
-                    [touched]="true"
-                    type="radio">
-                </lnd-form-field>
-            </div>
-        </div>
-    </form> -->
+    </div>
 </div>
 <h3>Checkbox</h3>
 <div class="static-pages">
-    <form>
-        <h4>Normal</h4>
-        <div class="row">
-            <div class="col-md-4">
-                <lnd-form-field
-                    [id]="'normal-checkbox'"
-                    label="Checkbox label"
-                    [type]="'CHECKBOX'">
-                </lnd-form-field>
-            </div>
-            <div class="col-md-4">
-                <lnd-form-field
-                    [id]="'checked-checkbox'"
-                    label="Checked checkbox"
-                    [type]="'CHECKBOX'"
-                    value="1"
-                    [checked]="true">
-                </lnd-form-field>
-            </div>
-            <div class="col-md-4">
-                <lnd-form-field
-                    [id]="'error-checkbox'"
-                    label="Error checkbox"
-                    error="This field is required"
-                    [touched]="true"
-                    [type]="'CHECKBOX'">
-                </lnd-form-field>
-            </div>
+    <h4>Normal</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-form-field
+                [id]="'normal-checkbox'"
+                label="Checkbox label"
+                [type]="'CHECKBOX'">
+            </lnd-form-field>
         </div>
-        <h4>Disabled</h4>
-        <div class="row">
-            <div class="col-md-4">
-                <lnd-form-field
-                    [disabledField]="true"
-                    id="disabled-checkbox"
-                    label="Disabled checkbox"
-                    [type]="'CHECKBOX'">
-                </lnd-form-field>
-            </div>
-            <div class="col-md-4">
-                <lnd-form-field
-                    [disabledField]="true"
-                    [id]="'disabled-checkbox-checked'"
-                    label="Disabled checkbox checked"
-                    value="1"
-                    [checked]="true"
-                    [type]="'CHECKBOX'">
-                </lnd-form-field>
-            </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                [id]="'checked-checkbox'"
+                label="Checked checkbox"
+                [type]="'CHECKBOX'"
+                value="1"
+                [checked]="true">
+            </lnd-form-field>
         </div>
-        <!--<h4>Status</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="success-checkbox"-->
-                    <!--label="Success checkbox"-->
-                    <!--[success]="true"-->
-                    <!--type="checkbox"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="warning-checkbox"-->
-                    <!--label="Warning checkbox"-->
-                    <!--[warning]="true"-->
-                    <!--type="checkbox"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
+        <div class="col-md-4">
+            <lnd-form-field
+                [id]="'error-checkbox'"
+                label="Error checkbox"
+                error="This field is required"
+                [touched]="true"
+                [type]="'CHECKBOX'">
+            </lnd-form-field>
+        </div>
+    </div>
+    <h4>Disabled</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-form-field
+                [disabledField]="true"
+                id="disabled-checkbox"
+                label="Disabled checkbox"
+                [type]="'CHECKBOX'">
+            </lnd-form-field>
+        </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                [disabledField]="true"
+                [id]="'disabled-checkbox-checked'"
+                label="Disabled checkbox checked"
+                value="1"
+                [checked]="true"
+                [type]="'CHECKBOX'">
+            </lnd-form-field>
+        </div>
+    </div>
+</div>
+<h3>Datepickers</h3>
+<div class="static-pages">
+    <form [formGroup]="datepickers" class="row">
+        <div class="col-3 offset-1">
+            <lnd-datepicker
+                [parentForm]="datepickers"
+                [datepickerName]="'datepicker'"
+                [placeholder]="'Datepicker'"
+                label="Datepicker"
+                id="datepicker-1"
+                >
+            </lnd-datepicker>
+        </div>
     </form>
 </div>
-<!--<h3>Selectbox</h3>-->
-<!--<div class="static-pages">-->
-    <!--<form>-->
-        <!--<h4>Normal</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="normal-selectbox"-->
-                    <!--label="Normal selectbox"-->
-                    <!--[options]="options"-->
-                    <!--type="select"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<h4>Disabled</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--[disabled]="true"-->
-                    <!--id="selected-selectbox"-->
-                    <!--label="Selected selectbox"-->
-                    <!--[options]="options"-->
-                    <!--type="select"-->
-                    <!--[value]="3"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<h4>States</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--[success]="true"-->
-                    <!--id="success-selectbox"-->
-                    <!--label="Success selectbox"-->
-                    <!--[options]="options"-->
-                    <!--type="select"-->
-                    <!--[value]="3"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="warning-selectbox"-->
-                    <!--label="Warning selectbox"-->
-                    <!--[options]="options"-->
-                    <!--type="select"-->
-                    <!--[value]="3"-->
-                    <!--[warning]="true"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--error=" "-->
-                    <!--id="error-selectbox"-->
-                    <!--label="Error selectbox"-->
-                    <!--[options]="options"-->
-                    <!--[touched]="true"-->
-                    <!--type="select"-->
-                    <!--[value]="3"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<h4>Error</h4>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--error="This field is required"-->
-                    <!--id="normal-selectbox-error"-->
-                    <!--label="Error selectbox"-->
-                    <!--[options]="options"-->
-                    <!--[touched]="true"-->
-                    <!--type="select"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<h4>With label right</h4>-->
-        <!--<lnd-form-field-->
-            <!--id="inline-selectbox"-->
-            <!--[inlineLabel]="true"-->
-            <!--label="Inline selectbox"-->
-            <!--[options]="options"-->
-            <!--type="select"-->
-            <!--[value]="3"-->
-        <!--&gt;</lnd-form-field>-->
-    <!--</form>-->
-<!--</div>-->
-<!--<h3>File input</h3>-->
-<!--<div class="static-pages">-->
-    <!--<form>-->
-        <!--<div class="row">-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--id="file-input"-->
-                    <!--label="File input"-->
-                    <!--type="file"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<lnd-form-field-->
-                    <!--[disabled]="true"-->
-                    <!--id="file-input-diabled"-->
-                    <!--label="File input disabled"-->
-                    <!--type="file"-->
-                <!--&gt;</lnd-form-field>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</form>-->
-<!--</div>-->
