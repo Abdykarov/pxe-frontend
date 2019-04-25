@@ -1,0 +1,154 @@
+<lnd-alert *ngIf="globalError.length"
+           type="danger">
+    <ng-container *ngFor="let globalError of globalError">
+        {{globalError}}<br>
+    </ng-container>
+</lnd-alert>
+<form [formGroup]="form"
+      autocomplete="off"
+      (keydown)="resetCustomFieldError()"
+      (change)="resetCustomFieldError()">
+    <lnd-form-field
+        [error]="formError.commodityType || form.controls.commodityType.errors"
+        [formControl]="form.controls.commodityType"
+        [id]="'commodityType'"
+        label="Komodita"
+        [type]="'RADIOGROUP'"
+        [radioGroupItemClass]="'custom-control-inline'"
+        [options]="commodityTypeOptions"
+        [success]="form.controls.commodityType.valid && (form.controls.commodityType.touched || formError.commodityType)"
+        [touched]="form.controls.commodityType.touched || formError.commodityType"
+        [validationMessages]="formFields.validationMessages.commodityType"
+    ></lnd-form-field>
+    <lnd-form-field
+        [error]="formError.supplierId || form.controls.supplierId.errors"
+        [formControl]="form.controls.supplierId"
+        [id]="'commodityType'"
+        label="Dodavatel"
+        [type]="'SELECT'"
+        [options]="commodityTypeOptions"
+        [success]="form.controls.supplierId.valid && (form.controls.supplierId.touched || formError.supplierId)"
+        [touched]="form.controls.supplierId.touched || formError.supplierId"
+        [validationMessages]="formFields.validationMessages.supplierId"
+    ></lnd-form-field>
+    <lnd-form-field
+        [error]="formError.name || form.controls.name.errors"
+        [formControl]="form.controls.name"
+        [id]="'name'"
+        label="Název odběrného místa"
+        [success]="form.controls.name.valid && (form.controls.name.touched || formError.name)"
+        [touched]="form.controls.name.touched || formError.name"
+        [validationMessages]="formFields.validationMessages.name"
+    ></lnd-form-field>
+    <lnd-form-field
+        *ngIf="form.controls.ean.status !== 'DISABLED'"
+        [error]="formError.ean || form.controls.ean.errors"
+        [formControl]="form.controls.ean"
+        [id]="'ean'"
+        label="EAN"
+        [success]="form.controls.ean.valid && (form.controls.ean.touched || formError.ean)"
+        [touched]="form.controls.ean.touched || formError.ean"
+        [validationMessages]="formFields.validationMessages.ean"
+    ></lnd-form-field>
+    <lnd-form-field
+        *ngIf="form.controls.eic.status !== 'DISABLED'"
+        [error]="formError.eic || form.controls.eic.errors"
+        [formControl]="form.controls.eic"
+        [id]="'eic'"
+        label="EIC"
+        [success]="form.controls.eic.valid && (form.controls.eic.touched || formError.eic)"
+        [touched]="form.controls.eic.touched || formError.eic"
+        [validationMessages]="formFields.validationMessages.eic"
+    ></lnd-form-field>
+    <lnd-form-field
+        [error]="formError.address || form.controls.address.errors"
+        [formControl]="form.controls.address"
+        [id]="'address'"
+        label="Adresa odběrného místa"
+        [success]="form.controls.address.valid && (form.controls.address.touched || formError.address)"
+        [touched]="form.controls.address.touched || formError.address"
+        [validationMessages]="formFields.validationMessages.address"
+    ></lnd-form-field>
+    <lnd-form-field
+        *ngIf="form.controls.distributionRateId.status !== 'DISABLED'"
+        [error]="formError.distributionRateId || form.controls.distributionRateId.errors"
+        [formControl]="form.controls.distributionRateId"
+        [id]="'distributionRateId'"
+        label="Distribučná sazba"
+        [type]="'SELECT'"
+        [options]="commodityTypeOptions"
+        [success]="form.controls.distributionRateId.valid && (form.controls.distributionRateId.touched || formError.distributionRateId)"
+        [touched]="form.controls.distributionRateId.touched || formError.distributionRateId"
+        [validationMessages]="formFields.validationMessages.distributionRateId"
+    ></lnd-form-field>
+    <lnd-form-field
+        *ngIf="form.controls.circuitBreakerId.status !== 'DISABLED'"
+        [error]="formError.circuitBreakerId || form.controls.circuitBreakerId.errors"
+        [formControl]="form.controls.circuitBreakerId"
+        [id]="'circuitBreakerId'"
+        label="Jistič"
+        [type]="'SELECT'"
+        [options]="commodityTypeOptions"
+        [success]="form.controls.circuitBreakerId.valid && (form.controls.circuitBreakerId.touched || formError.circuitBreakerId)"
+        [touched]="form.controls.circuitBreakerId.touched || formError.circuitBreakerId"
+        [validationMessages]="formFields.validationMessages.circuitBreakerId"
+    ></lnd-form-field>
+    <lnd-form-field
+        *ngIf="form.controls.annualConsumptionNT.status !== 'DISABLED'"
+        [error]="formError.annualConsumptionNT || form.controls.annualConsumptionNT.errors"
+        [formControl]="form.controls.annualConsumptionNT"
+        [id]="'annualConsumptionNT'"
+        label="Roční spotřeba elektřiny (nízký tarif)"
+        appendText="MWh"
+        [success]="form.controls.annualConsumptionNT.valid && (form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT)"
+        [touched]="form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT"
+        [validationMessages]="formFields.validationMessages.annualConsumptionNT"
+    ></lnd-form-field>
+    <lnd-form-field
+        *ngIf="form.controls.annualConsumptionVT.status !== 'DISABLED'"
+        [error]="formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors"
+        [formControl]="form.controls.annualConsumptionVT"
+        [id]="'annualConsumptionVT'"
+        label="Roční spotřeba elektřiny (vysoký tarif)"
+        appendText="MWh"
+        [success]="form.controls.annualConsumptionVT.valid && (form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT)"
+        [touched]="form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT"
+        [validationMessages]="formFields.validationMessages.annualConsumptionVT"
+    ></lnd-form-field>
+    <lnd-form-field
+        *ngIf="form.controls.annualConsumption.status !== 'DISABLED'"
+        [error]="formError.annualConsumption || form.controls.annualConsumption.errors"
+        [formControl]="form.controls.annualConsumption"
+        [id]="'annualConsumption'"
+        label="Roční spotřeba plynu"
+        appendText="MWh"
+        [success]="form.controls.annualConsumption.valid && (form.controls.annualConsumption.touched || formError.annualConsumption)"
+        [touched]="form.controls.annualConsumption.touched || formError.annualConsumption"
+        [validationMessages]="formFields.validationMessages.annualConsumption"
+    ></lnd-form-field>
+    <lnd-form-field
+        [error]="formError.expirationDate || form.controls.expirationDate.errors"
+        [formControl]="form.controls.expirationDate"
+        [id]="'expirationDate'"
+        label="Ukončení platnosti stávající smlouvy"
+        [success]="form.controls.expirationDate.valid && (form.controls.expirationDate.touched || formError.expirationDate)"
+        [touched]="form.controls.expirationDate.touched || formError.expirationDate"
+        [validationMessages]="formFields.validationMessages.expirationDate"
+    ></lnd-form-field>
+    <lnd-button
+        type="primary"
+        (action)="submitForm()"
+        [isDisabled]="formLoading"
+        label="Uložit a vybrat nabídku">
+    </lnd-button>
+    <lnd-button
+        type="secondary"
+        (action)="submitForm()"
+        [isDisabled]="formLoading"
+        label="Uložit">
+    </lnd-button>
+    <a (click)="resetForm()">reset</a>
+    <pre>
+    {{form.value | json}}
+    </pre>
+</form>

@@ -1,0 +1,12 @@
+<pxe-layout-container title="Nové odběrné místo">
+    <h2 class="h3--public">Zadejte údaje k odběrnému místu</h2>
+    <div class="page-box">
+        <pxe-supply-point-form
+            [formFields]="formFields"
+            [formLoading]="submitLoginFormLoading"
+            [globalError]="loginGlobalError"
+            [fieldError]="fieldError"
+            (submitAction)="submitLoginForm($event)"
+        ></pxe-supply-point-form>
+    </div>
+</pxe-layout-container>

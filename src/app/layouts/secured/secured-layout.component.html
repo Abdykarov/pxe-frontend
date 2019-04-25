@@ -1,26 +1,50 @@
+<!--<div-->
+<!--    id="top"-->
+<!--    class="body-inner"-->
+<!--    [class.body-inner&#45;&#45;overlay]="showOverlay"-->
+<!--    [class.body-inner&#45;&#45;overlay-full]="showOverlay"-->
+<!--    [ngClass]="{-->
+<!--        'body-inner&#45;&#45;overlay-header body-inner&#45;&#45;overlay-aside' : showOverlay-->
+<!--    }">-->
+<!--    <lnd-header-->
+<!--        [settings]="settings">-->
+<!--    </lnd-header>-->
+<!--    <div class="container-fluid">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-12 container-content">-->
+<!--                <main class="main">-->
+<!--                    <router-outlet></router-outlet>-->
+<!--                </main>-->
+<!--            </div>-->
+<!--            <lnd-navigation-->
+<!--                [config]="navConfig"-->
+<!--                (openItem)="toggleNavigationItem($event)">-->
+<!--            </lnd-navigation>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <lnd-footer></lnd-footer>-->
+<!--</div>-->
+
 <div
     id="top"
-    class="body-inner"
-    [class.body-inner--overlay]="showOverlay"
-    [class.body-inner--overlay-full]="showOverlay"
-    [ngClass]="{
-        'body-inner--overlay-header body-inner--overlay-aside' : showOverlay
-    }">
+    class="body-inner full-layout">
     <lnd-header
-        [settings]="settings">
+            [settings]="settings">
     </lnd-header>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12 container-content">
+            <div class="col-lg-8 order-lg-2 container-content">
                 <main class="main">
                     <router-outlet></router-outlet>
                 </main>
             </div>
-            <lnd-navigation
-                [config]="navConfig"
-                (openItem)="toggleNavigationItem($event)">
-            </lnd-navigation>
+            <div class="col-lg-2 order-lg-1 container-aside">
+                <lnd-navigation
+                        [config]="navConfig"
+                        (openItem)="toggleNavigationItem($event)">
+                </lnd-navigation>
+            </div>
         </div>
+        <lnd-footer [isSimpleFooter]="settings.isSimpleFooter"></lnd-footer>
     </div>
-    <lnd-footer></lnd-footer>
 </div>
