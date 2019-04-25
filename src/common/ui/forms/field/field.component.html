@@ -1,7 +1,6 @@
 <div
     class="form-group"
-    [ngClass]="customFormGroupClass"
-    [class.pt-0]="type === 'CHECKBOX'">
+    [ngClass]="customFormGroupClass">
     <span
         *ngIf="type === 'LABEL'"
         class="form-control-text"
@@ -82,50 +81,50 @@
                 [required]="required"
                 [attr.autocomplete]="autocomplete"
                 >
+                <input
+                *ngSwitchCase="'NUMBER'"
+                #field
+                type="number"
+                class="form-control"
+                [class.form-control--light]="lightField"
+                [class.form-control--not-empty]="!!value"
+                [class.form-control--placeholder]="hideLabel"
+                [class.is-invalid]="!!error && !!touched"
+                [class.is-valid]="success"
+                [class.is-warning]="warning"
+                [disabled]="disabledField"
+                [id]="id"
+                [name]="name"
+                [ngClass]="customFieldClass"
+                [(ngModel)]="value"
+                [placeholder]="placeholder"
+                [readonly]="readonly"
+                [required]="required"
+                [attr.autocomplete]="autocomplete"
+            >
+            <input
+                *ngSwitchCase="'PASSWORD'"
+                #field
+                type="password"
+                (blur)="blur.emit($event)"
+                class="form-control"
+                [class.form-control--light]="lightField"
+                [class.form-control--not-empty]="!!value"
+                [class.form-control--placeholder]="hideLabel"
+                [class.is-invalid]="!!error && !!touched"
+                [class.is-valid]="success"
+                [class.is-warning]="warning"
+                [disabled]="disabledField"
+                [id]="id"
+                [name]="name"
+                [ngClass]="customFieldClass"
+                [(ngModel)]="value"
+                [placeholder]="placeholder"
+                [readonly]="readonly"
+                [required]="required"
+                [attr.autocomplete]="autocomplete"
+            >
         </div>
-        <input
-            *ngSwitchCase="'NUMBER'"
-            #field
-            type="number"
-            class="form-control"
-            [class.form-control--light]="lightField"
-            [class.form-control--not-empty]="!!value"
-            [class.form-control--placeholder]="hideLabel"
-            [class.is-invalid]="!!error && !!touched"
-            [class.is-valid]="success"
-            [class.is-warning]="warning"
-            [disabled]="disabledField"
-            [id]="id"
-            [name]="name"
-            [ngClass]="customFieldClass"
-            [(ngModel)]="value"
-            [placeholder]="placeholder"
-            [readonly]="readonly"
-            [required]="required"
-            [attr.autocomplete]="autocomplete"
-        >
-        <input
-            *ngSwitchCase="'PASSWORD'"
-            #field
-            type="password"
-            (blur)="blur.emit($event)"
-            class="form-control"
-            [class.form-control--light]="lightField"
-            [class.form-control--not-empty]="!!value"
-            [class.form-control--placeholder]="hideLabel"
-            [class.is-invalid]="!!error && !!touched"
-            [class.is-valid]="success"
-            [class.is-warning]="warning"
-            [disabled]="disabledField"
-            [id]="id"
-            [name]="name"
-            [ngClass]="customFieldClass"
-            [(ngModel)]="value"
-            [placeholder]="placeholder"
-            [readonly]="readonly"
-            [required]="required"
-            [attr.autocomplete]="autocomplete"
-        >
         <input
             *ngSwitchCase="'FILE'"
             #field
