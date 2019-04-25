@@ -60,4 +60,9 @@ export class LoginFormComponent implements OnInit {
                 this.submitLoginForm.emit(this.loginForm.value);
         }
     }
+
+    public action(evt) {
+        evt.preventDefault();
+        window.open('/full/landing-page', '_blank');
+    }
 }

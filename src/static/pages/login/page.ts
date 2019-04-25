@@ -12,11 +12,6 @@ import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
 })
 
 export class LoginPageComponent {
-    public action(evt) {
-        evt.preventDefault();
-        window.open('/full/landing-page', '_blank');
-    }
-
     @Input()
     public supplierTemplate: TemplateRef<SupplierComponent>;
 
@@ -125,4 +120,9 @@ export class LoginPageComponent {
             title: 'Skupina Veolia',
         },
     ];
+
+    public action = (evt) => {
+        evt.preventDefault();
+        window.open('/full/landing-page', '_blank');
+    }
 }
