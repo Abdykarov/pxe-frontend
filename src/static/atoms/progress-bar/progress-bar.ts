@@ -14,23 +14,11 @@ export class ProgressBarComponent {
             done: true,
             label: 'Step #1 colors',
         },
-        // {
-        //     url: '/basic/colors',
-        //     done: true,
-        //     subStep: true,
-        //     label: 'Step #2 colors',
-        // },
         {
             url: '/basic/icons',
             done: true,
             label: 'Step #3 icons',
         },
-        // {
-        //     url: '/basic/icons',
-        //     done: true,
-        //     subStep: true,
-        //     label: 'Step #4 icons',
-        // },
         {
             url: '/basic/progress',
             done: false,
