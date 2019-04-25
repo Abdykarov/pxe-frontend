@@ -4,13 +4,12 @@ import {
     TemplateRef,
 } from '@angular/core';
 
-import { SupplierComponent } from '../../../common/ui/supplier/supplier.component';
+import { SupplierComponent } from 'src/common/ui/supplier/supplier.component';
 import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
 
 @Component({
     templateUrl: './page.html',
 })
-
 export class LoginPageComponent {
     @Input()
     public supplierTemplate: TemplateRef<SupplierComponent>;
@@ -120,6 +119,11 @@ export class LoginPageComponent {
             title: 'Skupina Veolia',
         },
     ];
+
+    submitForm(evt) {
+        evt.preventDefault();
+        console.log('Submit form');
+    }
 
     public action = (evt) => {
         evt.preventDefault();

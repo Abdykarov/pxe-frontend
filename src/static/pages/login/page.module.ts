@@ -6,9 +6,11 @@ import { Routes } from '@angular/router';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { LoginPageComponent } from './page';
+import {
+    LoginType,
+    SignType,
+} from 'src/app/layouts/models/router-data.model';
 import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
-
-import { LoginType, SignType } from '../../../app/layouts/models/router-data.model';
 
 @NgModule({
     declarations: [
