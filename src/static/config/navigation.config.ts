@@ -117,6 +117,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Landing page',
                     'url': '/full/landing-page',
                 },
+                {
+                    'label': 'New supply point',
+                    'url': '/basic/new-supply-point',
+                },
                 // {
                 //     'label': 'Error',
                 //     'url': '/error-404',
