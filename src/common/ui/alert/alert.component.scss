@@ -7,6 +7,9 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
+// Component variables
+@import 'alert.component.variables.scss';
+
 // Bootstrap alert and close import
 @import '~bootstrap/scss/alert';
 @import '~bootstrap/scss/close';
@@ -16,11 +19,6 @@
 
 	&--with-icon {
 		padding-left: ( $icon-size-px + $alert-padding-x * 2 );
-	}
-
-	&-info {
-		border-color: $gray-300;
-		background-color: $gray-300;
 	}
 
 	&__common-icon {
