@@ -1,6 +1,7 @@
 <div
     [formGroup]="parentForm"
     class="form-group ng-select-custom">
+    <label class="control-label">{{label}}</label>
     <ng-select
         #select
         [items]="options"
@@ -9,7 +10,7 @@
         [formControl]="parentForm.controls[selectName]"
         bindValue="key"
         bindLabel="label"
-        [placeholder]="label"
+        [placeholder]="placeholder"
         class="form-control"
         [class.is-disabled]="disabledField"
         [attr.tabindex]="!!disabledField ? '-1' : null"

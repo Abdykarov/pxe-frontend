@@ -30,6 +30,9 @@ export class SelectComponent {
 
     @Input()
     public options?: Array<IOption>;
+    
+    @Input()
+    public placeholder?: string;
 
     @Input()
     public searchable = false;
