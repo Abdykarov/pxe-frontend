@@ -15,14 +15,14 @@ export class ProgressBarComponent {
             label: 'Step #1 colors',
         },
         {
-            url: '/basic/icons',
-            done: true,
-            label: 'Step #3 icons',
-        },
-        {
             url: '/basic/progress',
             done: false,
-            label: 'Step #5 typography',
+            label: 'Step #2 progress',
+        },
+        {
+            url: '/basic/icons',
+            done: false,
+            label: 'Step #3 icons',
         },
     ];
 

@@ -1,2 +1,11 @@
 // Progress bar / stepper variables
-$input-width:               300px;
+
+$progress-bar-line-height-bg:           $white;
+$progress-bar-line-height-bg-done:      $primary;
+$progress-bar-line-height-bg-active:    $primary;
+$progress-bar-line-height:              6px;
+$progress-bar-bullet-size:              20px;
+$progress-bar-bullet-size-inner:        10px;
+$progress-bar-margin-bottom:            ( $spacer / 2 );
+$progress-bar-icon-color:               $white;
+$progress-bar-icon-size:                $icon-size-small-px;

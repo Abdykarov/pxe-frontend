@@ -3,15 +3,15 @@
         <li
             *ngFor="let item of config"
             class="progress-bar__item"
-            [class.progress-bar__item--done]="!!item.done && !(item.url | isRouteActive: this.router.url)"
+            [class.progress-bar__item--done]="!!item.done"
             [routerLinkActive]="[ item.url ? 'progress-bar__item--active' : '' ]">
-            <a
+            <span
                 *ngIf="!item.subStep"
-                class="progress-bar__link"
+                class="progress-bar__item-inner"
                 [routerLink]="item.url ? item.url : null">
                 <span class="progress-bar__bullet">
                     <span
-                        *ngIf="!!item.done && !(item.url | isRouteActive: this.router.url)"
+                        *ngIf="!!item.done"
                         class="
                             progress-bar__icon
                             icon
@@ -21,7 +21,7 @@
                 <span class="progress-bar__label">
                     {{ item.label }}
                 </span>
-            </a>
+            </span>
         </li>
     </ol>
 </nav>

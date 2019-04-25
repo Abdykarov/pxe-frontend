@@ -44,7 +44,7 @@ import {
 import {
     ProgressBarPageModule,
     progressBarPageRoutes,
-} from 'src/static/atoms/progress-bar/progress-bar.module';
+} from 'src/static/organisms/progress-bar/progress-bar.module';
 
 
 const routes: Routes = [
