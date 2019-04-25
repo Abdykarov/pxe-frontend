@@ -11,7 +11,7 @@ import {
 } from 'src/common/ui/supplier/model/supplier.model';
 
 @Pipe({
-    name: 'filter_commodity',
+    name: 'filterCommodity',
     pure: false,
 })
 export class FilterCommodityTypePipe implements PipeTransform {

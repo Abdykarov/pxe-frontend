@@ -1,7 +1,7 @@
 <div class="suppliers-holder">
     <ul class="suppliers-overview">
         <li class="suppliers-overview__item"
-            *ngFor="let supplier of configSupplier | filter_commodity: typeCommodity ">
+            *ngFor="let supplier of configSupplier | filterCommodity: typeCommodity ">
             <a
                 *ngIf="supplier.supplierUrl"
                 href="{{supplier.supplierUrl}}"

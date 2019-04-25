@@ -38,7 +38,7 @@ export class SignUpFormComponent implements OnInit, OnChanges {
     public signUpGlobalError: string[] = null;
 
     @Input()
-    public signUpFieldError: IFieldError = {} = null;
+    public signUpFieldError: IFieldError = {};
 
     @Output()
     public submitSignUpForm: EventEmitter<any> = new EventEmitter<any>();
@@ -62,8 +62,8 @@ export class SignUpFormComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (changes.subscriptionFieldError) {
-            this.signUpFormError = R.clone(changes.subscriptionFieldError.currentValue);
+        if (changes.signUpFieldError) {
+            this.signUpFormError = R.clone(changes.signUpFieldError.currentValue);
         }
     }
 

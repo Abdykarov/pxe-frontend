@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 
 import { configSupplier } from 'src/static/config/suppliers.config';
-import { IFieldError } from 'src/common/containers/form-container/models/form-definition.model';
+import {
+    IFieldError,
+    SignUpType,
+} from 'src/common/containers/form-container/models/form-definition.model';
 import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
-import { registrationFormFields } from 'src/common/containers/form-container/registration.config';
+import { registrationFormFieldsFnc } from 'src/common/containers/form-container/registration.config';
 
 @Component({
     selector: 'lnd-landing-page',
@@ -11,7 +14,7 @@ import { registrationFormFields } from 'src/common/containers/form-container/reg
 })
 export class SignUpComponent {
     public submitSubscriptionLoading = false;
-    public subscriptionFormFields = registrationFormFields;
+    public subscriptionFormFields = registrationFormFieldsFnc(SignUpType.SignUp);
     public subscriptionFormSent = false;
     public subscriptionGlobalError: string[] = [];
     public subscriptionFieldError: IFieldError = {};

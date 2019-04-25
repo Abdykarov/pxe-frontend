@@ -21,8 +21,8 @@ import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
     ],
     imports: [
         CommonModule,
-        SignUpFormModule,
         LayoutContainerModule,
+        SignUpFormModule,
         SupplierModule,
     ],
 })

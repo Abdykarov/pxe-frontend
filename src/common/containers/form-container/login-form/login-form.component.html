@@ -4,6 +4,12 @@
         {{globalError}}<br>
     </ng-container>
 </lnd-alert>
+<ng-container *ngIf="isFromSignUp">
+    <lnd-alert type="danger">
+        Heslo jsme vám zaslali na {{email}}
+    </lnd-alert>
+    <a>Poslat e-mail znovu</a>
+</ng-container>
 <form [formGroup]="loginForm"
       autocomplete="off">
     <lnd-form-field
@@ -21,6 +27,7 @@
         [id]="'password'"
         label="Heslo"
         [success]="loginForm.controls.password.valid && loginForm.controls.password.touched"
+        type="PASSWORD"
         [touched]="loginForm.controls.password.touched"
         [validationMessages]="loginFormFields.validationMessages.password"
     ></lnd-form-field>

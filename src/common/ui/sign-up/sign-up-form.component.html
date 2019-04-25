@@ -1,8 +1,8 @@
 <ng-template #hrefToSecuringTemplate>
-    Souhlasím se
+    Souhlasím se zpracováním
     <a href="javascript: void(0);">
         <span (click)="openConsent($event)">
-           zásadami bezpečnosti
+            osobních údajů
         </span>
     </a>
 </ng-template>
@@ -25,7 +25,6 @@
         [success]="signUpForm.controls.email.valid && (signUpForm.controls.email.touched || signUpFormError.email)"
         [touched]="signUpForm.controls.email.touched || signUpFormError.email"
         [validationMessages]="signUpFormFields.validationMessages.email"
-        [lightField]="true"
     ></lnd-form-field>
     <lnd-form-field
         [error]="signUpFormError.consent || signUpForm.controls.consent.errors"

@@ -6,6 +6,8 @@ import {
 import { Apollo } from 'apollo-angular';
 
 import { RegisterAbstractComponent } from '../abstract/register-abstract.component';
+import { Router } from '@angular/router';
+import { SignUpType } from '../models/form-definition.model';
 
 @Component({
     selector: 'pxe-sign-up-form-container',
@@ -17,10 +19,13 @@ export class SignUpFormContainerComponent extends RegisterAbstractComponent {
     constructor(
         public apollo: Apollo,
         public cd: ChangeDetectorRef,
+        public router: Router,
     ) {
         super(
             apollo,
             cd,
+            router,
+            SignUpType.SignUp,
         );
     }
 }

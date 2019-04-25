@@ -1,4 +1,5 @@
 import { ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
 
@@ -6,9 +7,10 @@ import * as mutations from 'src/common/graphql/mutations';
 import {
     IFieldError,
     IForm,
+    SignUpType,
 } from 'src/common/containers/form-container/models/form-definition.model';
 import { parseGraphQLErrors } from 'src/common/utils';
-import { registrationFormFields } from '../registration.config';
+import { registrationFormFieldsFnc } from '../registration.config';
 
 export class RegisterAbstractComponent {
     public submitRegistrationLoading = false;
@@ -20,8 +22,10 @@ export class RegisterAbstractComponent {
     protected constructor(
         public apollo: Apollo,
         public cd: ChangeDetectorRef,
+        public router: Router,
+        public signUpType: SignUpType,
     ) {
-        this.registrationFormFields = registrationFormFields;
+        this.registrationFormFields = registrationFormFieldsFnc(signUpType);
     }
 
     public openConsent(evt) {
@@ -29,7 +33,7 @@ export class RegisterAbstractComponent {
         window.open('securing-your-data');
     }
 
-    public submitRegistrationForm = (values) => {
+    public submitRegistrationForm(values, isFromSignUp: boolean = false) {
         this.submitRegistrationLoading = true;
         this.registrationGlobalError = [];
         this.registrationFieldError = {};
@@ -43,6 +47,20 @@ export class RegisterAbstractComponent {
                     this.submitRegistrationLoading = false;
                     this.registrationFormSent = true;
                     this.cd.markForCheck();
+                    if (isFromSignUp) {
+                        this.router.navigate(['login'],
+                            {
+                                queryParams:
+                                    {
+                                        email: values.email,
+                                    },
+                                state:
+                                    {
+                                        isFromSignUp: true,
+                                    },
+                            },
+                        );
+                    }
                 },
                 (error) => {
                     this.submitRegistrationLoading = false;
