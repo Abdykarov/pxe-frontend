@@ -1,0 +1,64 @@
+<ng-template #forgottenPassword>
+    <a href="javascript: void(0);">
+        <span (click)="action($event)">
+            Zapomněli jste heslo?
+        </span>
+    </a>
+</ng-template>
+
+<ng-template #supplierTemplate>
+    <pxe-supplier [configSupplier]="configSupplier"></pxe-supplier>
+</ng-template>
+
+<div class="registration-page container-content--with-title">
+    <div class="container-fluid">
+        <div class="row text-center mb-6">
+            <div class="col-12 col-md-6 offset-md-3">
+                <h1>Log-in</h1>
+            </div>
+        </div>
+        <div class="row mb-6">
+            <div class="col-12 col-md-6 col-lg-3 order-md-last">
+                <div class="page-box">
+                    <div class="row">
+                        <div class="col-12">
+                            <form class="form-container">
+                                <lnd-form-field
+                                    id="email"
+                                    label="Email">
+                                </lnd-form-field>
+                                <lnd-form-field
+                                    id="password"
+                                    label="Heslo"
+                                    [subtextTemplate]="forgottenPassword">
+                                </lnd-form-field>
+                                <div class="text-right">
+                                    <lnd-button
+                                        type="primary"
+                                        (action)="submitForm()"
+                                        [isDisabled]="submitSubscriptionLoading"
+                                        label="Přihlásit se">
+                                    </lnd-button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 offset-lg-3 order-md-first d-md-flex justify-content-md-center flex-md-column">
+                <h2 class="h3--public">Nakupujte elektřinu a plyn přímo na burze</h2>
+                <ul class="check-list">
+                    <li>Měňte dodavatele na jedno kliknutí</li>
+                    <li>Neřešte papírování a chození na pobočky</li>
+                    <li>Buďte chráněni před nekalostmi ve smlouvě</li>
+                    <li>Dostávejte férové ceny bez skrytých poplatků</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-8 offset-lg-2 text-center">
+                <ng-container *ngTemplateOutlet="supplierTemplate"></ng-container>
+            </div>
+        </div>
+    </div>
+</div>

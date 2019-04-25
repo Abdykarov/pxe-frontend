@@ -45,6 +45,9 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     @Input()
     public labelTemplate?: TemplateRef<any>;
 
+    @Input()
+    public subtextTemplate?: TemplateRef<any>;
+
     // tslint:disable-next-line:no-input-rename
     @Input('value')
     private _value = '';
