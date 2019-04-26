@@ -32,7 +32,7 @@ export class RegistrationPageModule {}
 
 export const registrationPageRoutes: Routes = [
     {
-        path: 'sign-up',
+        path: 'registration',
         component: RegistrationPageComponent,
         data: {
             isPublic: true,

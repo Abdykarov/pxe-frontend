@@ -123,7 +123,7 @@ export const staticNavigationConfig: INavigationConfig = [
                 },
                 {
                     'label': 'Registration',
-                    'url': '/full/sign-up',
+                    'url': '/full/registration',
                 },
                 // {
                 //     'label': 'Error',
