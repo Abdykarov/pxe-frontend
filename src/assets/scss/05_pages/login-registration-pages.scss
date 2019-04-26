@@ -1,0 +1,15 @@
+/*
+ -  Login & registration page
+ -
+ -
+ */
+
+.check-list-wrapper {
+    // Media queries
+    @include media-breakpoint-up(md) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+    }
+}
