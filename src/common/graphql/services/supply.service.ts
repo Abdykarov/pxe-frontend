@@ -2,18 +2,23 @@ import { Injectable } from '@angular/core';
 
 import { Apollo } from 'apollo-angular';
 
-import { CommodityType } from '../models/supply.model';
+import {
+    CommodityType,
+    ISupplyPoint,
+} from '../models/supply.model';
 import {
     getCodelistByType,
     findAllSuppliers,
     findCodelistsByTypes,
     findSupplierDocumentsByComodity,
-} from 'src/common/graphql/queries/supplier';
+} from 'src/common/graphql/queries/supply';
+import { toggleOverlay } from '../mutation/overlay';
+import { saveElectricitySupplyPoint } from '../mutation/supply';
 
 @Injectable({
     providedIn: 'root',
 })
-export class SupplierService {
+export class SupplyService {
 
     constructor(private apollo: Apollo) { }
 
@@ -62,5 +67,15 @@ export class SupplierService {
                 },
             })
             .valueChanges;
+    }
+
+    public saveElectricitySupplyPoint(supplyPoint: ISupplyPoint) {
+        return this.apollo
+            .mutate({
+                mutation: saveElectricitySupplyPoint,
+                variables: {
+                    supplyPoint: supplyPoint,
+                },
+            });
     }
 }

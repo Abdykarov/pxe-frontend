@@ -5,8 +5,8 @@ export enum CommodityType {
 
 export interface IAddress {
     street: String;
-    orientationNumber: number;
-    descriptiveNumber: number;
+    orientationNumber: string;
+    descriptiveNumber: string;
     city: String;
     postCode: String;
 }
@@ -46,6 +46,6 @@ export interface ISupplyPoint {
     circuitBreaker: ICodelistItem;
     annualConsumptionNT: number;
     annualConsumptionVT: number;
-    expirationDate: Date;
+    expirationDate: String;
 }
 
