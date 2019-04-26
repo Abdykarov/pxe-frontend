@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { PublicLayoutComponent } from './public-layout.component';
 import {
     LoginType,
+    LogoutType,
     SignType,
 } from '../models/router-data.model';
 
@@ -19,7 +20,8 @@ const routes = [
                     isPublic: true,
                     isSimpleFooter: true,
                     loginType: LoginType.NONE,
-                    signInType: SignType.SCROLL,
+                    logoutType: LogoutType.NONE,
+                    signUpType: SignType.SCROLL,
                 },
             },
             {
@@ -29,7 +31,8 @@ const routes = [
                     isPublic: true,
                     isSimpleFooter: false,
                     loginType: LoginType.NONE,
-                    signInType: SignType.NAVIGATE,
+                    logoutType: LogoutType.NONE,
+                    signUpType: SignType.SCROLL,
                 },
             },
             {
@@ -37,9 +40,9 @@ const routes = [
                 loadChildren: '../../pages/login/login.module#LoginModule',
                 data: {
                     isPublic: true,
-                    isSimpleFooter: false,
                     loginType: LoginType.NONE,
-                    signInType: SignType.NAVIGATE,
+                    logoutType: LogoutType.NONE,
+                    signUpType: SignType.NAVIGATE,
                 },
             },
             {
@@ -49,7 +52,8 @@ const routes = [
                     isPublic: true,
                     isSimpleFooter: true,
                     loginType: LoginType.NONE,
-                    signInType: SignType.NONE,
+                    logoutType: LogoutType.NONE,
+                    signUpType: SignType.NONE,
                 },
             },
             {
@@ -59,7 +63,8 @@ const routes = [
                     isPublic: true,
                     isSimpleFooter: false,
                     loginType: LoginType.NONE,
-                    signInType: SignType.NAVIGATE,
+                    logoutType: LogoutType.NONE,
+                    signUpType: SignType.SCROLL,
                 },
             },
             {
@@ -69,17 +74,18 @@ const routes = [
                     isPublic: true,
                     isSimpleFooter: false,
                     loginType: LoginType.NONE,
-                    signInType: SignType.NAVIGATE,
+                    logoutType: LogoutType.NONE,
+                    signUpType: SignType.SCROLL,
                 },
             },
             {
-                path: 'sign-in',
-                loadChildren: '../../pages/sign-in/sign-in.module#SignInModule',
+                path: 'sign-up',
+                loadChildren: '../../pages/sign-up/sign-up.module#SignUpModule',
                 data: {
                     isPublic: true,
-                    isSimpleFooter: false,
                     loginType: LoginType.NAVIGATE,
-                    signInType: SignType.NONE,
+                    logoutType: LogoutType.NONE,
+                    signUpType: SignType.NONE,
                 },
             },
         ],

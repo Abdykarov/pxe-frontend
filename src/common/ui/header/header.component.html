@@ -8,7 +8,7 @@
                 <div class="header-inner">
                     <div class="logo-holder">
                         <a
-                            [routerLink]="['/secured/dashboard']"
+                            [routerLink]="['/']"
                             class="logo-link">
                             <img
                                 src="/assets/images/layout/logo-pxe.svg"
@@ -19,11 +19,11 @@
                     </div>
                     <div
                         class="registration-holder"
-                        *ngIf="settings.signInType !== signTypeNone">
+                        *ngIf="settings.signUpType !== signTypeNone">
                         <lnd-button
                             label="Registrace"
                             type="primary"
-                            (click)="signIn()">
+                            (click)="signUp()">
                         </lnd-button>
                     </div>
                     <div
@@ -35,6 +35,17 @@
                             (click)="login()">
                         </lnd-button>
                     </div>
+                    <div
+                        class="registration-holder"
+                        *ngIf="settings.logoutType !== logoutTypeNone">
+                        <lnd-button
+                            label="Odhlásit se"
+                            type="primary"
+                            (click)="logout()">
+                            >
+                        </lnd-button>
+                    </div>
+
                     <div
                         class="notification-holder"
                         *ngIf="!settings.isPublic">

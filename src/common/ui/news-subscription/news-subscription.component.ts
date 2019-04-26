@@ -81,7 +81,9 @@ export class NewsSubscriptionComponent implements OnInit, OnChanges {
             }),
         )(this.subscriptionForm.controls);
         if (this.subscriptionForm.valid) {
-                this.submitSubscriptionForm.emit(this.subscriptionForm.value);
+            const val = this.subscriptionForm.value;
+            val.preregistration = true;
+            this.submitSubscriptionForm.emit(val);
         }
     }
 
@@ -91,3 +93,4 @@ export class NewsSubscriptionComponent implements OnInit, OnChanges {
         })(this.subscriptionFormFields.controls);
     }
 }
+
