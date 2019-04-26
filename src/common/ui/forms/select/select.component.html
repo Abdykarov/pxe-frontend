@@ -19,7 +19,7 @@
         [class.is-disabled]="disabledField"
         [attr.tabindex]="!!disabledField ? '-1' : null"
         [attr.disabled]="!!disabledField ? 'disabled' : null"
-        [class.is-invalid]="error"
+        [class.is-invalid]="!!error && !!touched"
         [class.is-valid]="success"
         [class.is-warning]="warning"
         notFoundText="Nenalezeny žádné záznamy"
@@ -49,7 +49,7 @@
     <div
         *ngIf="!!subtext"
         class="input-subtext"
-        [class.input-subtext--disabled]="!!disabled">
+        [class.input-subtext--disabled]="!!disabledField">
         {{ subtext }}
     </div>
     <div
