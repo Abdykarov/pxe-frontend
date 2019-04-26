@@ -9,13 +9,20 @@
         {{globalError}}<br>
     </ng-container>
 </lnd-alert>
+<ng-container *ngIf="isFromSignUp">
+    <lnd-alert type="info">
+        Heslo jsme vám zaslali na {{email}}
+    </lnd-alert>
+    <a>Poslat e-mail znovu</a>
+</ng-container>
 <form [formGroup]="loginForm"
+      class="form-container"
       autocomplete="off">
     <lnd-form-field
         [error]="loginForm.controls.username.errors"
         [formControl]="loginForm.controls.username"
         [id]="'username'"
-        label="E-mail"
+        label="Email"
         [success]="loginForm.controls.username.valid && loginForm.controls.username.touched"
         [touched]="loginForm.controls.username.touched"
         [validationMessages]="loginFormFields.validationMessages.username"
@@ -26,14 +33,17 @@
         [id]="'password'"
         label="Heslo"
         [success]="loginForm.controls.password.valid && loginForm.controls.password.touched"
+        type="PASSWORD"
         [touched]="loginForm.controls.password.touched"
         [validationMessages]="loginFormFields.validationMessages.password"
         [subtextTemplate]="forgottenPassword"
     ></lnd-form-field>
-    <lnd-button
-        type="primary"
-        (action)="submitForm()"
-        [isDisabled]="submitLoginFormLoading"
-        label="Přihlásit se">
-    </lnd-button>
+    <div class="text-right">
+        <lnd-button
+            type="primary"
+            (action)="submitForm()"
+            [isDisabled]="submitLoginFormLoading"
+            label="Přihlásit se">
+        </lnd-button>
+    </div>
 </form>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 // own classes
 import { ConsumptionPipe } from './consumption/consumption.pipe';
+import { FilterCommodityTypePipe } from './filter-commodity-type/filter-commodity-type.pipe';
 import { IsRouteActivePipe } from './is-route-active/is-route-acrive.pipe';
 import { KeysPipe } from './keys/keys.pipe';
 import { PluralPipe } from './plurar/plural.pipe';
@@ -11,6 +12,7 @@ import { ValuesPipe } from './values/values.pipe';
     declarations: [
         ConsumptionPipe,
         IsRouteActivePipe,
+        FilterCommodityTypePipe,
         KeysPipe,
         ValuesPipe,
         PluralPipe,
@@ -18,6 +20,7 @@ import { ValuesPipe } from './values/values.pipe';
     exports: [
         ConsumptionPipe,
         IsRouteActivePipe,
+        FilterCommodityTypePipe,
         KeysPipe,
         PluralPipe,
         ValuesPipe,
@@ -25,6 +28,7 @@ import { ValuesPipe } from './values/values.pipe';
     providers: [
         ConsumptionPipe,
         IsRouteActivePipe,
+        FilterCommodityTypePipe,
         KeysPipe,
         ValuesPipe,
         PluralPipe,

@@ -4,14 +4,12 @@
             <div class="page-box">
                 <div class="row">
                     <div class="col-12">
-                        <div class="form-container">
-                            <pxe-login-form
-                                [loginFormFields]="loginFormFields"
-                                [submitLoginFormLoading]="submitLoginFormLoading"
-                                [loginGlobalError]="loginGlobalError"
-                                (submitLoginForm)="submitLoginForm($event)"
-                            ></pxe-login-form>
-                        </div>
+                        <pxe-login-form
+                            [loginFormFields]="loginFormFields"
+                            [submitLoginFormLoading]="submitLoginFormLoading"
+                            [loginGlobalError]="loginGlobalError"
+                            (submitLoginForm)="submitLoginForm($event)"
+                        ></pxe-login-form>
                     </div>
                 </div>
             </div>
@@ -30,7 +28,7 @@
     </div>
     <div class="row">
         <div class="col-12 col-lg-8 offset-lg-2 text-center">
-            <h2>To Do - Komponenta Suppliers</h2>
+            <pxe-supplier-container></pxe-supplier-container>
         </div>
     </div>
 </pxe-layout-container>

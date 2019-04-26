@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 import {
     ISettings,
     LoginType,
+    LogoutType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 
@@ -18,8 +19,9 @@ export class FullLayoutComponent {
     public settings: ISettings = {
         isPublic: true,
         isSimpleFooter: true,
-        signInType: SignType.STATIC,
+        signUpType: SignType.STATIC,
         loginType: LoginType.NONE,
+        logoutType: LogoutType.NONE,
     };
 
     constructor(

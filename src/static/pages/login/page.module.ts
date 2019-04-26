@@ -8,6 +8,7 @@ import { FormModule } from 'src/common/ui/forms/form.module';
 import { LoginPageComponent } from './page';
 import {
     LoginType,
+    LogoutType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
@@ -35,7 +36,8 @@ export const loginPageRoutes: Routes = [
         data: {
             isPublic: true,
             loginType: LoginType.NONE,
-            signInType: SignType.STATIC,
+            logoutType: LogoutType.NONE,
+            signUpType: SignType.STATIC,
         },
     },
 ];

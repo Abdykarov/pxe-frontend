@@ -8,6 +8,7 @@ import { FormModule } from 'src/common/ui/forms/form.module';
 import { LandingComponent } from './landing.component';
 import {
     LoginType,
+    LogoutType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 import { MapCoverageModule } from 'src/common/ui/map-coverage/map-coverage.module';
@@ -41,7 +42,8 @@ export const landingPageRoutes: Routes = [
             isPublic: true,
             isSimpleFooter: true,
             loginType: LoginType.NONE,
-            signInType: SignType.STATIC,
+            logoutType: LogoutType.NONE,
+            signUpType: SignType.STATIC,
         },
     },
 ];
