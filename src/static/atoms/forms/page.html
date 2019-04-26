@@ -511,6 +511,16 @@
                     [selectName]="'searchableSelect'">
                 </lnd-select>
             </div>
+            <div class="col-md-4">
+                <lnd-select
+                    label="Error selectbox"
+                    [options]="config.selectOptions"
+                    [parentForm]="selectBoxes"
+                    searchable="true"
+                    [error]="'Error message'"
+                    [selectName]="'errorSelect'">
+                </lnd-select>
+            </div>
         </div>
     </form>
 </div>

@@ -17,6 +17,7 @@ export class FormsPageComponent {
     public selectBoxes: FormGroup = new FormGroup({
         simpleSelect: new FormControl(),
         searchableSelect: new FormControl(),
+        errorSelect: new FormControl(),
     });
 
     constructor(

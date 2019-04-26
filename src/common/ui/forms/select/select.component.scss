@@ -205,6 +205,12 @@
 		.ng-dropdown-panel-items {
 			padding: ( $spacer / 2.5 ) 0;
 			background-color: $input-bg;
+
+			.ng-option {
+				.highlighted {
+					text-decoration: none;
+				}
+			}
 		}
 
 		.ng-option {
@@ -226,11 +232,16 @@
 	}
 }
 
-.input-subtext {
+.input-subtext,
+.invalid-feedback {
 	margin-top: ( $spacer / 4 );
 	font-size: $small-font-size;
 
 	&--disabled {
 		color: $input-disabled-color;
 	}
+}
+
+.invalid-feedback {
+	color: $danger;
 }

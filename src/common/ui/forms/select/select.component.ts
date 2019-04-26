@@ -5,6 +5,9 @@ import {
 } from '@angular/core';
 
 import { IOption } from '../models/option.model';
+import { IValidationMessages } from '../models/validation-messages.model';
+import { getErrorMessage } from 'src/common/utils';
+import { FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'lnd-select',
@@ -23,14 +26,14 @@ export class SelectComponent {
     public label?: string;
 
     @Input()
-    public parentForm;
+    public parentForm: FormGroup;
 
     @Input()
     public selectName: string;
 
     @Input()
     public options?: Array<IOption>;
-    
+
     @Input()
     public placeholder?: string;
 
@@ -41,6 +44,9 @@ export class SelectComponent {
     public subtext?: string;
 
     @Input()
+    public validationMessages?: IValidationMessages;
+
+    @Input()
     public warning?: any;
 
     public customSearchFn = (term: string, item: any) => {
@@ -48,4 +54,6 @@ export class SelectComponent {
             return item.label.toLocaleLowerCase().indexOf(term) > -1 || item.label.indexOf(term) > -1;
         }
     }
+
+    public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages);
 }
