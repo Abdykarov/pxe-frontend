@@ -1,26 +1,9 @@
-interface ISupplier {
-    id: number;
-    name: string;
-    vatNumber: string;
-    suplierSampleDocuments: ISupplierSampleDocument;
-}
-
-interface ISupplierSampleDocument {
-    type: string;
-    url: string;
-}
-
-enum CommodityType {
+export enum CommodityType {
     ELECTRICITY,
     GAS,
 }
 
-export interface IEntities {
-    suppliers: [ISupplier];
-    supplyPoint: [ISupplyPoint];
-}
-
-interface IAddress {
+export interface IAddress {
     street: String;
     orientationNumber: number;
     descriptiveNumber: number;
@@ -28,14 +11,32 @@ interface IAddress {
     postCode: String;
 }
 
-interface ICodelistItem {
+export interface ICodelistMap {
+    codelistType: string;
+    codelistItems: [ICodelistItem];
+}
+
+export interface ICodelistItem {
     type: string;
     code: string;
     description: string;
     help: string;
 }
 
-interface ISupplyPoint {
+interface ISupplier {
+    id: number;
+    name: string;
+    vatNumber: string;
+    logoPath: string;
+    suplierSampleDocuments: ISupplierSampleDocument;
+}
+
+export interface ISupplierSampleDocument {
+    type: string;
+    url: string;
+}
+
+export interface ISupplyPoint {
     id: number;
     commodityType: CommodityType;
     supplier: ISupplier;
@@ -47,3 +48,4 @@ interface ISupplyPoint {
     annualConsumptionVT: number;
     expirationDate: Date;
 }
+
