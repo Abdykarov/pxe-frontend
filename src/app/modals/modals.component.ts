@@ -8,7 +8,7 @@ import {
 
 import { AddModalDirective } from './add-modal.directive';
 import { ModalsLoaderService } from './modals-loader.service';
-import { OverlayService } from '../../common/graphql/services/overlay.service';
+import { OverlayService } from 'src/common/graphql/services/overlay.service';
 
 @Component({
     selector: 'lnd-modal-dynamic',
