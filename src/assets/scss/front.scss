@@ -12,6 +12,7 @@
 /* -------------------------- */
 
 @import '01_base/core';                                                       // Core CSS
+@import '~@ng-select/ng-select/themes/material.theme'; /* stylelint-disable-line scss/at-import-partial-extension-whitelist */
 
 /* ------------------------- */
 /*   2. LAYOUT               */
