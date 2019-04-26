@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {
     FormControl,
     FormGroup,
+    Validators,
 } from '@angular/forms';
 
 import { FormsPageConfig } from './config';
@@ -13,6 +14,11 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 export class FormsPageComponent {
 
     public breadcrumbItemsSimple: IBreadcrumbItems;
+
+    public datepickers: FormGroup = new FormGroup({
+        datepicker: new FormControl('', [Validators.required]),
+        errorDatepicker: new FormControl(''),
+    });
 
     public selectBoxes: FormGroup = new FormGroup({
         simpleSelect: new FormControl(),
