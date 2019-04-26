@@ -1,7 +1,7 @@
 <ng-template #hrefToSecuringTemplate>
     Souhlas se zpracováním
     <a href="javascript: void(0);">
-        <span (click)="action($event)">
+        <span (click)="openConsent($event)">
            osobních údajů
         </span>
     </a>
@@ -16,6 +16,7 @@
 <form [formGroup]="signUpForm"
       (keydown)="resetCustomFieldError()"
       (change)="resetCustomFieldError()"
+      class="form-container"
       autocomplete="off">
     <lnd-form-field
         [error]="signUpFormError.email || signUpForm.controls.email.errors"
