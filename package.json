@@ -26,8 +26,8 @@
     "start:mock": "yarn start -c mock --proxy-config proxy-mock.conf.json",
     "start:mock-docker": "yarn start -c mock --proxy-config proxy-mock-docker.conf.json",
     "start:ssr": "nodemon dist/server.js",
-    "test": "ng test",
-    "test:watch": "ng test --watch=true",
+    "test": "ng test app",
+    "test:watch": "ng test --watch=true app",
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors"
   },
   "private": true,

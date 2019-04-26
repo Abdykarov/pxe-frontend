@@ -484,8 +484,35 @@
                     placeholder="placeholder">
                 </lnd-select>
             </div>
+            <div class="col-md-4">
+                <lnd-select
+                    label="Error selectbox"
+                    [options]="config.selectOptions"
+                    [parentForm]="selectBoxes"
+                    searchable="true"
+                    [error]="'Error message'"
+                    [selectName]="'errorSelect'"
+                    placeholder="Error">
+                </lnd-select>
+            </div>
         </div>
     </form>
+    <!-- <h4>With append button</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-select
+                (appendButtonAction)="clickAction()"
+                appendButtonIcon="icon--info"
+                label="Searchable selectbox"
+                subtext="Select subtext"
+                [options]="config.selectOptions"
+                [parentForm]="selectBoxes"
+                searchable="true"
+                [selectName]="'searchableSelect'"
+                placeholder="placeholder">
+            </lnd-select>
+        </div>
+    </div> -->
 </div>
 <!--<h3>File input</h3>-->
 <!--<div class="static-pages">-->

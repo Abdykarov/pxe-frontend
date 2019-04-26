@@ -15,10 +15,10 @@ export const staticNavigationConfig: INavigationConfig = [
                 //     'label': 'Add',
                 //     'url': '/add',
                 // },
-                // {
-                //     'label': 'Alerts',
-                //     'url': '/alerts',
-                // },
+                {
+                    'label': 'Alerts',
+                    'url': '/basic/alerts',
+                },
                 // {
                 //     'label': 'Banners',
                 //     'url': '/banners',
@@ -79,6 +79,10 @@ export const staticNavigationConfig: INavigationConfig = [
                 //     'label': 'Tooltip',
                 //     'url': '/tooltip',
                 // },
+                {
+                    'label': 'Progress bar',
+                    'url': '/basic/progress',
+                },
                 {
                     'label': 'Typography',
                     'url': '/basic/typography',
