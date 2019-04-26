@@ -11,7 +11,7 @@ import {
     styleUrls: ['./show-image-modal.component.scss'],
     templateUrl: './show-image-modal.component.html',
 })
-export class ShowImageModalComponent implements OnInit {
+export class ShowImageModalComponent {
     @Input()
     public modalOpen: boolean;
 
@@ -20,8 +20,4 @@ export class ShowImageModalComponent implements OnInit {
 
     @Output()
     public closeModal: EventEmitter<any> = new EventEmitter<any>();
-
-    constructor() {}
-
-    ngOnInit() {}
 }
