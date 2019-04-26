@@ -139,7 +139,7 @@
 			text-decoration: $link-decoration;
 		}
 
-		&:hover {
+		@include link-without-href-interactive {
 			.btn__text {
 				color: $link-hover-color;
 				text-decoration: $link-hover-decoration;
