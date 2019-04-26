@@ -145,8 +145,7 @@
                 "app",
                 "layout",
                 "lnd",
-                "pxe",
-                "nn"
+                "pxe"
             ],
             "kebab-case"
         ],
