@@ -17,11 +17,9 @@ import {
 } from '@angular/forms';
 
 import * as R from 'ramda';
-import * as R_ from 'ramda-extension';
 
-import { createStringFromTemplate } from 'src/common/utils';
-import { ErrorMessages } from '../form.constants';
 import { FieldTypes } from '../models/field-types.model';
+import { getErrorMessage } from 'src/common/utils';
 import { IOption } from '../models/option.model';
 import { IValidationMessages } from '../models/validation-messages.model';
 
@@ -225,22 +223,5 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
         }
     }
 
-    public getErrorMessage = () => {
-        if (R.isNil(this.error)) {
-            return;
-        }
-
-        if (R_.isString(this.error)) {
-            return this.error;
-        }
-
-        if (R_.isObject(this.error)) {
-            const errorType = Object.keys(this.error)[0];
-            const message = this.validationMessages && this.validationMessages[errorType] || ErrorMessages[errorType];
-            return createStringFromTemplate(
-                message || errorType,
-                this.error[errorType],
-            );
-        }
-    }
+    public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages);
 }

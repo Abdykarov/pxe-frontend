@@ -869,8 +869,8 @@ textarea.form-control--not-empty {
 }
 
 .input-subtext {
-	color: $blue;
-	font-size: .75rem;
+	margin-top: ( $spacer / 4 );
+	font-size: $small-font-size;
 
 	&--disabled {
 		color: $input-disabled-color;
