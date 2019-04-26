@@ -16,6 +16,7 @@ export class FormsPageComponent {
 
     public datepickers: FormGroup = new FormGroup({
         datepicker: new FormControl(''),
+        errorDatepicker: new FormControl(''),
     });
 
     public selectBoxes: FormGroup = new FormGroup({

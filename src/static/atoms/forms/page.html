@@ -190,5 +190,16 @@
                 >
             </lnd-datepicker>
         </div>
+        <div class="col-3 offset-1">
+            <lnd-datepicker
+                [parentForm]="datepickers"
+                [datepickerName]="'errorDatepicker'"
+                [placeholder]="'Datepicker'"
+                label="Datepicker"
+                id="datepicker-2"
+                [error]="'Error message'"
+                >
+            </lnd-datepicker>
+        </div>
     </form>
 </div>

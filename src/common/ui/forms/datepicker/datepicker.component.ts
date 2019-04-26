@@ -1,23 +1,24 @@
 import {
     Component,
     ElementRef,
-    ChangeDetectorRef,
+    EventEmitter,
     Input,
+    Output,
     ViewEncapsulation,
     ViewChild,
 } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+
 import {
     BsDatepickerConfig,
     BsLocaleService,
 } from 'ngx-bootstrap/datepicker';
-
-import * as R from 'ramda';
 import { csLocale } from 'ngx-bootstrap/locale';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 
-import { createStringFromTemplate } from 'src/common/utils';
+import { getErrorMessage } from 'src/common/utils';
 import { defaultDatepickerConfig } from './datepicker.config';
-import { ErrorMessages } from '../form.constants';
+import { IValidationMessages } from '../models/validation-messages.model';
 
 const locale = 'cs';
 
@@ -31,11 +32,20 @@ export class DatepickerComponent {
     @ViewChild('datepicker')
     public datepicker: ElementRef;
 
+    @Output()
+    public appendButtonAction?: EventEmitter<any> = new EventEmitter();
+
+    @Input()
+    public appendButtonIcon?: string;
+
     @Input()
     public config: Partial<BsDatepickerConfig> = new BsDatepickerConfig();
 
     @Input()
     public datepickerName: string;
+
+    @Input()
+    public error?: any;
 
     @Input()
     public id: string;
@@ -44,16 +54,27 @@ export class DatepickerComponent {
     public label: string;
 
     @Input()
-    public parentForm;
+    public parentForm: FormGroup;
 
     @Input()
     public placeholder: string;
+
+    @Input()
+    public success = false;
+
+    @Input()
+    public touched = false;
+
+    @Input()
+    public validationMessages?: IValidationMessages;
+
+    @Input()
+    public warning = false;
 
     public minDate: Date;
     public maxDate: Date;
 
     constructor(
-        private cd: ChangeDetectorRef,
         private localeService: BsLocaleService,
     ) {
         csLocale.invalidDate = '';
@@ -64,17 +85,5 @@ export class DatepickerComponent {
         // this.maxDate = new Date();
     }
 
-    public getErrorMessage = (error) => {
-        if (R.isNil(error)) {
-            return;
-        }
-
-        if (typeof error === 'object') {
-            const errorType = Object.keys(error)[0];
-            return createStringFromTemplate(
-                ErrorMessages[errorType],
-                error[errorType],
-            );
-        }
-    }
+    public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages);
 }

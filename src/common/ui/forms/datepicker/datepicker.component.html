@@ -14,8 +14,9 @@
         [bsConfig]="config"
         [minDate]="minDate"
         [maxDate]="maxDate"
-        [class.is-invalid]="!!parentForm.controls[datepickerName].errors && !!parentForm.controls[datepickerName].touched"
-        [class.is-valid]="parentForm.controls[datepickerName].valid && parentForm.controls[datepickerName].touched"
+        [class.is-invalid]="!!error && !!touched"
+        [class.is-valid]="success"
+        [class.is-warning]="warning"
         [attr.autocomplete]="'off'">
     <label
         class="control-label"
@@ -34,8 +35,21 @@
         </button>
     </div>
     <div
-        *ngIf="!!getErrorMessage(parentForm.controls[datepickerName].errors)"
-        [innerHtml]="getErrorMessage(parentForm.controls[datepickerName].errors)"
+        *ngIf="!!appendButtonIcon"
+        class="input-group-append">
+        <button
+            (click)="appendButtonAction.emit()"
+            type="button"
+            class="btn">
+            <span
+                class="icon"
+                [ngClass]="appendButtonIcon">
+            </span>
+        </button>
+    </div>
+    <div
+        *ngIf="!!getErrorMessage()"
+        [innerHtml]="getErrorMessage()"
         class="invalid-feedback">
     </div>
 </div>
