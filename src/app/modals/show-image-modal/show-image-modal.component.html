@@ -1,0 +1,14 @@
+<lnd-modal [title]="instanceData.title"
+            [isModalOpen]="modalOpen"
+            (close)="closeModal.emit()">
+    <div class="modal-body">
+        <img [src]="instanceData.url" [alt]="instanceData.alt" />
+    </div>
+    <div class="modal-footer">
+        <lnd-button type="primary"
+                    (action)="closeModal.emit()"
+                    label="OK"
+                    customClass="btn-sm"
+        ></lnd-button>
+    </div>
+</lnd-modal>

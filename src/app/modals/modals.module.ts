@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AddModalDirective } from './add-modal.directive';
 import { ModalsComponent } from './modals.component';
+import { ShowImageModalModule } from './show-image-modal/show-image-modal.module';
 
 @NgModule({
     declarations: [
@@ -11,6 +12,7 @@ import { ModalsComponent } from './modals.component';
     ],
     exports: [
         ModalsComponent,
+        ShowImageModalModule,
     ],
     imports: [
         CommonModule,
