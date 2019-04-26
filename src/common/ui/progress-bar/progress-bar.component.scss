@@ -25,7 +25,7 @@
 		@include reset-list;
 		position: relative;
 		width: 100%;
-		flex-grow: 1;
+		flex-grow: 3;
 		flex-basis: 0;
 
 		&::before {
@@ -35,23 +35,37 @@
 			left: 50%;
 			width: 100%;
 			height: $progress-bar-line-height;
-			background-color: $progress-bar-line-height-bg;
+			background-color: $progress-bar-line-bg;
 		}
 
 		&:last-child {
 			&::before {
-				display: none;
+				left: 0;
+				width: 50%;
+			}
+
+			&.progress-bar__item--active {
+				&::before {
+					background-color: $progress-bar-line-bg-done;
+				}
 			}
 		}
 
 		&--done {
 			&::before {
-				background-color: $progress-bar-line-height-bg-done;
+				background-color: $progress-bar-line-bg-done;
 			}
+		}
 
-			&.progress-bar__item--active {
-				&::before {
-					background-color: $progress-bar-line-height-bg;
+		&--shadow-step {
+			flex-grow: 1;
+
+			.progress-bar__item-inner {
+				visibility: hidden;
+
+				// Media queries
+				@include media-breakpoint-down(sm) {
+					width: 10px;
 				}
 			}
 		}
@@ -74,7 +88,7 @@
 		height: $progress-bar-bullet-size;
 		border-radius: $progress-bar-bullet-size;
 		margin: 0 auto;
-		background-color: $progress-bar-line-height-bg;
+		background-color: $progress-bar-line-bg;
 
 		&::before {
 			content: '';
@@ -89,14 +103,14 @@
 		}
 
 		.progress-bar__item--active & {
-			background-color: $progress-bar-line-height-bg-active;
+			background-color: $progress-bar-line-bg-active;
 		}
 
 		.progress-bar__item--done & {
-			background-color: $progress-bar-line-height-bg-done;
+			background-color: $progress-bar-line-bg-done;
 
 			&::before {
-				background-color: $progress-bar-line-height-bg-done;
+				background-color: $progress-bar-line-bg-done;
 			}
 		}
 	}

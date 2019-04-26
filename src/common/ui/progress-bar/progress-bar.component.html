@@ -7,7 +7,6 @@
             [class.progress-bar__item--shadow-step]="!!item.shadowStep"
             [routerLinkActive]="[ item.url ? 'progress-bar__item--active' : '' ]">
             <a
-                *ngIf="!item.shadowStep"
                 class="progress-bar__item-inner"
                 [routerLink]="item.url ? item.url : null">
                 <span class="progress-bar__bullet">
