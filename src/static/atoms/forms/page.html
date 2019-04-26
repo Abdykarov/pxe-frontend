@@ -503,6 +503,8 @@
             </div>
             <div class="col-md-4">
                 <lnd-select
+                    (appendButtonAction)="clickAction()"
+                    appendButtonIcon="icon--info"
                     label="Searchable selectbox"
                     subtext="Select subtext"
                     [options]="config.selectOptions"

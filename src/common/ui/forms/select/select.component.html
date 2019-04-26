@@ -34,6 +34,19 @@
         </ng-template>
     </ng-select>
     <div
+        *ngIf="!!appendButtonIcon"
+        class="input-group-append">
+        <button
+            (click)="appendButtonAction.emit()"
+            type="button"
+            class="btn">
+            <span
+                class="icon"
+                [ngClass]="appendButtonIcon">
+            </span>
+        </button>
+    </div>
+    <div
         *ngIf="!!subtext"
         class="input-subtext"
         [class.input-subtext--disabled]="!!disabled">

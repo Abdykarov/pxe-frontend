@@ -1,13 +1,15 @@
 import {
     Component,
+    EventEmitter,
     Input,
+    Output,
     ViewEncapsulation,
 } from '@angular/core';
 
+import { FormGroup } from '@angular/forms';
+import { getErrorMessage } from 'src/common/utils';
 import { IOption } from '../models/option.model';
 import { IValidationMessages } from '../models/validation-messages.model';
-import { getErrorMessage } from 'src/common/utils';
-import { FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'lnd-select',
@@ -16,6 +18,12 @@ import { FormGroup } from '@angular/forms';
     encapsulation: ViewEncapsulation.None,
 })
 export class SelectComponent {
+    @Output()
+    public appendButtonAction?: EventEmitter<any> = new EventEmitter();
+
+    @Input()
+    public appendButtonIcon?: string;
+
     @Input()
     public disabledField = false;
 

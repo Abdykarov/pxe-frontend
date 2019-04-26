@@ -30,4 +30,6 @@ export class FormsPageComponent {
             },
         ];
     }
+
+    public clickAction = () => alert('CLICK');
 }
