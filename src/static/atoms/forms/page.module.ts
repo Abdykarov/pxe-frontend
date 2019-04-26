@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Routes } from '@angular/router';
 
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
+import { DatepickerModule } from 'src/common/ui/forms/datepicker/datepicker.module';
 import { FormsPageComponent } from './page';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { SelectModule } from 'src/common/ui/forms/select/select.module';
@@ -18,6 +19,7 @@ import { SelectModule } from 'src/common/ui/forms/select/select.module';
     imports: [
         BreadcrumbModule,
         CommonModule,
+        DatepickerModule,
         FormModule,
         ReactiveFormsModule,
         SelectModule,

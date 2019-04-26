@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
+
+import { BasicLayoutComponent } from './basic-layout.component';
 import {
     RouterModule,
     Routes,
 } from '@angular/router';
-
-import { BasicLayoutComponent } from './basic-layout.component';
 
 import {
     AlertsPageModule,
