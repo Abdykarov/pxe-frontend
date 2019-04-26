@@ -2,13 +2,13 @@
     id="top"
     class="body-inner full-layout">
     <lnd-header
-        [isPublic]="true">
+        [settings]="settings">
     </lnd-header>
     <main class="main">
         <router-outlet></router-outlet>
     </main>
     <lnd-footer
-        [isSimpleFooter]="true">
+        [isSimpleFooter]="this.settings.isSimpleFooter">
         <ul class="footer-navigation__list">
             <li class="footer-navigation__item">
                 <a routerLink="/secured/dashboard" class="footer-navigation__link">Podmínky užívání</a>

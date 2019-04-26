@@ -9,31 +9,22 @@
 
 
 .footer {
+	position: relative;
+	padding: ( $spacer * 5 ) 0 $spacer;
 	font-size: $small-font-size;
+	text-align: center;
+
+	// Media queries
+	@include media-breakpoint-up(md) {
+		height: $footer-height-tablet;
+		padding-bottom: ( $spacer * 1.5 );
+	}
 
 	&--public {
-		position: relative;
 		background-color: $white;
-		padding: ( $spacer * 3 ) 0;
-		text-align: center;
-
-		// Media queries
-		@include media-breakpoint-up(md) {
-			padding: ( $spacer * 3.5 ) 0;
-		}
 	}
 
-	&--secured {
-		// Media queries
-		@include media-breakpoint-up(lg) {
-			margin-left: $aside-width-desktop;
-		}
-	}
-
-	.copy-holder {
-		margin-bottom: ( $spacer / 2 );
-	}
-
+	.copy-holder,
 	.logo-holder {
 		margin-bottom: ( $spacer / 2 );
 	}

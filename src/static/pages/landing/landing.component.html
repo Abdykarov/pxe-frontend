@@ -1,3 +1,8 @@
+<ng-template #supplierTemplate>
+    <pxe-supplier [configSupplier]="configSupplier"></pxe-supplier>
+</ng-template>
+
+
 <div class="landing-page">
     <div class="section about-our-benefit section--picture-second">
         <div class="container-fluid">
@@ -133,9 +138,13 @@
         </div>
     </div>
     <pxe-map-coverage
-        [config]="config">
+        [configCoverage]="configCoverage"
+        [supplierTemplateGas]="supplierTemplate"
+        [supplierTemplatePower]="supplierTemplate"
+    >
     </pxe-map-coverage>
     <pxe-news-subscription
+        (openConsentAction)="openConsent($event)"
         [subscriptionFormFields]="subscriptionFormFields"
         [submitSubscriptionLoading]="submitSubscriptionLoading"
         [subscriptionFormSent]="subscriptionFormSent"

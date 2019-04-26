@@ -4,6 +4,13 @@ import {
     Routes,
 } from '@angular/router';
 
+import { BasicLayoutComponent } from './basic-layout.component';
+
+import {
+    AlertsPageModule,
+    alertsPageRoutes,
+} from 'src/static/atoms/alerts/page.module';
+
 import {
     BreadcrumbPageModule,
     breadcrumbPageRoutes,
@@ -34,18 +41,24 @@ import {
     typographyPageRoutes,
 } from 'src/static/atoms/typography/page.module';
 
-import { BasicLayoutComponent } from './basic-layout.component';
+import {
+    ProgressBarPageModule,
+    progressBarPageRoutes,
+} from 'src/static/atoms/progress-bar/progress-bar.module';
+
 
 const routes: Routes = [
     {
         path: '',
         component: BasicLayoutComponent,
         children: [
+            ...alertsPageRoutes,
             ...breadcrumbPageRoutes,
             ...buttonsPageRoutes,
             ...colorsPageRoutes,
             ...formsPageRoutes,
             ...iconsPageRoutes,
+            ...progressBarPageRoutes,
             ...typographyPageRoutes,
             {
                 path: '**',
@@ -57,11 +70,13 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
+        AlertsPageModule,
         BreadcrumbPageModule,
         ButtonsPageModule,
         ColorsPageModule,
         FormsPageModule,
         IconsPageModule,
+        ProgressBarPageModule,
         RouterModule.forChild(routes),
         TypographyPageModule,
     ],

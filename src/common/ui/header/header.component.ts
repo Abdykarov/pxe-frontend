@@ -1,11 +1,17 @@
 import {
     Component,
     EventEmitter,
-    Input,
     HostListener,
+    Input,
     Output,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
+import {
+    ISettings,
+    LoginType,
+    SignType,
+} from 'src/app/layouts/models/router-data.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
@@ -15,8 +21,10 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 })
 export class HeaderComponent {
     public isHeaderSticked: boolean;
+    public signTypeNone = SignType.NONE;
+    public loginTypeNone = LoginType.NONE;
 
-    @Input() isPublic = false;
+    @Input() settings: ISettings;
 
     @Input() isMenuOpen: boolean;
 
@@ -37,9 +45,21 @@ export class HeaderComponent {
 
     constructor(
         private scrollToService: ScrollToService,
+        private router: Router,
     ) {}
 
-    scrollToNewSubscription() {
-        this.scrollToService.scrollToSubscription();
+    signIn() {
+        if (this.settings.signInType === SignType.SCROLL) {
+            this.scrollToService.scrollToSubscription();
+        } else if (this.settings.signInType === SignType.NAVIGATE) {
+            this.router.navigate(['sign-in']);
+        }
+    }
+
+    login() {
+        if (this.settings.loginType === LoginType.NAVIGATE) {
+            this.router.navigate(['login']);
+        }
     }
 }
+
