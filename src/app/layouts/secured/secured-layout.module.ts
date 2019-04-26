@@ -11,6 +11,7 @@ import { NavigationModule } from 'src/common/ui/navigation/navigation.module';
 import { SecuredLayoutRoutingModule } from './secured-layout.routing';
 
 // own services
+import { ModalsModule } from 'src/app/modals/modals.module';
 import { NavigationService } from './services/navigation.service';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { NavigationService } from './services/navigation.service';
         CommonModule,
         FooterModule,
         HeaderModule,
+        ModalsModule,
         NavigationModule,
         SecuredLayoutRoutingModule,
     ],
