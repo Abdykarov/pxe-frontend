@@ -1,3 +1,8 @@
+<ng-template #forgottenPassword>
+    <a (click)="action($event)">
+        Zapomněli jste heslo?
+    </a>
+</ng-template>
 <lnd-alert *ngIf="loginGlobalError.length"
            type="danger">
     <ng-container *ngFor="let globalError of loginGlobalError">
@@ -23,6 +28,7 @@
         [success]="loginForm.controls.password.valid && loginForm.controls.password.touched"
         [touched]="loginForm.controls.password.touched"
         [validationMessages]="loginFormFields.validationMessages.password"
+        [subtextTemplate]="forgottenPassword"
     ></lnd-form-field>
     <lnd-button
         type="primary"

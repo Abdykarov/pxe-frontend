@@ -1,31 +1,36 @@
 <pxe-layout-container title="LOG-IN">
-    <div class="row">
-        <div class="offset-1 col-10 col-md-4 offset-md-2 order-2 order-md-1">
-            <h2 class="h3--public">
-                Nakupujte elektřinu a plyn přímo na burze
-            </h2>
-            <ul class="check-list">
-                <li>
-                    Měníte dodavatele na&nbsp;jedno kliknutí
-                </li>
-                <li>
-                    Neřešíte papírování a&nbsp;chození na&nbsp;pobočky
-                </li>
-                <li>
-                    Jste chráněni před&nbsp;nekalostmi ve&nbsp;smlouvě
-                </li>
-                <li>
-                    Dostáváte férové ceny bez&nbsp;skrytých poplatků
-                </li>
-            </ul>
+    <div class="row mb-6">
+        <div class="col-12 col-md-6 col-lg-3 order-md-last">
+            <div class="page-box">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-container">
+                            <pxe-login-form
+                                [loginFormFields]="loginFormFields"
+                                [submitLoginFormLoading]="submitLoginFormLoading"
+                                [loginGlobalError]="loginGlobalError"
+                                (submitLoginForm)="submitLoginForm($event)"
+                            ></pxe-login-form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="page-box offset-1 offset-md-0 col-10 col-md-4 order-1 order-md-2">
-            <pxe-login-form
-                [loginFormFields]="loginFormFields"
-                [submitLoginFormLoading]="submitLoginFormLoading"
-                [loginGlobalError]="loginGlobalError"
-                (submitLoginForm)="submitLoginForm($event)"
-            ></pxe-login-form>
+        <div class="col-12 col-md-6 col-lg-3 offset-lg-3 order-md-first">
+            <div class="check-list-wrapper">
+                <h2 class="h3--public">Nakupujte elektřinu a plyn přímo na burze</h2>
+                <ul class="check-list">
+                    <li>Měňte dodavatele na jedno kliknutí</li>
+                    <li>Neřešte papírování a chození na pobočky</li>
+                    <li>Buďte chráněni před nekalostmi ve smlouvě</li>
+                    <li>Dostávejte férové ceny bez skrytých poplatků</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-8 offset-lg-2 text-center">
+            <h2>To Do - Komponenta Suppliers</h2>
         </div>
     </div>
 </pxe-layout-container>

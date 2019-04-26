@@ -27,7 +27,7 @@ const routes = [
                 loadChildren: '../../pages/cookies-policy/cookies-policy.module#CookiesPolicyModule',
                 data: {
                     isPublic: true,
-                    isSimpleFooter: true,
+                    isSimpleFooter: false,
                     loginType: LoginType.NONE,
                     signInType: SignType.NAVIGATE,
                 },
@@ -37,7 +37,7 @@ const routes = [
                 loadChildren: '../../pages/login/login.module#LoginModule',
                 data: {
                     isPublic: true,
-                    isSimpleFooter: true,
+                    isSimpleFooter: false,
                     loginType: LoginType.NONE,
                     signInType: SignType.NAVIGATE,
                 },
@@ -57,7 +57,7 @@ const routes = [
                 loadChildren: '../../pages/securing-your-data/securing-your-data.module#SecuringYourDataModule',
                 data: {
                     isPublic: true,
-                    isSimpleFooter: true,
+                    isSimpleFooter: false,
                     loginType: LoginType.NONE,
                     signInType: SignType.NAVIGATE,
                 },
@@ -67,7 +67,7 @@ const routes = [
                 loadChildren: '../../pages/terms-of-use/terms-of-use.module#TermsOfUseModule',
                 data: {
                     isPublic: true,
-                    isSimpleFooter: true,
+                    isSimpleFooter: false,
                     loginType: LoginType.NONE,
                     signInType: SignType.NAVIGATE,
                 },
@@ -77,7 +77,7 @@ const routes = [
                 loadChildren: '../../pages/sign-in/sign-in.module#SignInModule',
                 data: {
                     isPublic: true,
-                    isSimpleFooter: true,
+                    isSimpleFooter: false,
                     loginType: LoginType.NAVIGATE,
                     signInType: SignType.NONE,
                 },
