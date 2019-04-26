@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 @Component({
-    selector: 'nn-modules-validation-modal',
+    selector: 'pxe-show-message-modal',
     styleUrls: ['./show-image-modal.component.scss'],
     templateUrl: './show-image-modal.component.html',
 })
