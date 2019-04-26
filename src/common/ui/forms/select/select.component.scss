@@ -16,17 +16,16 @@
 	.control-label {
 		margin-bottom: ( $spacer / 4 );
 		font-size: $input-font-size;
+		cursor: pointer;
 	}
 
 	.ng-select,
 	.ng-select-opened {
-		&.ng-select-focused {
-			.ng-select-container {
-				&,
-				&:hover {
-					&::after {
-						background-color: $input-focus-border-color;
-					}
+		&.ng-select-focused .ng-select-container {
+			&,
+			&:hover {
+				&::after {
+					background-color: $input-focus-border-color;
 				}
 			}
 		}
@@ -59,7 +58,7 @@
 
 				.ng-arrow-wrapper,
 				.ng-clear-wrapper {
-					color: $font-text;
+					color: $input-color;
 				}
 			}
 
@@ -89,31 +88,40 @@
 				.ng-value-container .ng-placeholder {
 					left: 0;
 					padding: 0 $spacer;
+					color: $input-color;
 					transform: none;
 					transition: none;
 				}
 			}
 
-			.ng-select-opened {
-				.ng-select-container {
-					.ng-arrow-wrapper,
-					.ng-clear-wrapper {
-						color: $font-text;
-					}
-				}
-	
-				.ng-arrow-wrapper {
-					&::before {
-						transform: rotate(180deg);
-					}
+			.ng-arrow-wrapper,
+			.ng-clear-wrapper {
+				@include absolute-center(true, false);
+				color: $input-border-color;
+
+				&::before {
+					@include icon;
+					display: block;
 				}
 			}
-		}
 
-		.ng-select.ng-select-filtered,
-		.ng-select .ng-has-value {
-			.ng-placeholder {
-				display: none;
+			.ng-arrow-wrapper {
+				width: $select-arrow-size;
+				height: $select-arrow-size;
+				right: $input-padding-x;
+				bottom: auto;
+
+				&::before {
+					content: '\e916';
+					font-size: $select-arrow-size;
+				}
+			}
+
+			.ng-clear-wrapper {
+				&::before {
+					content: '\e91b';
+					font-size: $select-clear-size;
+				}
 			}
 		}
 
@@ -125,49 +133,33 @@
 			font-size: $input-font-size;
 		}
 
-		&.ng-select-single .ng-select-container.ng-has-value .ng-arrow-wrapper {
-			display: none;
+		.ng-clear-wrapper {
+			right: ( ( $spacer * 1.5 ) + $select-arrow-size );
+			width: $select-clear-size;
+			height: $select-clear-size;
+
+			&:hover {
+				&::before {
+					color: $danger;
+				}
+			}
 		}
 
-		.ng-select-single {
+		.ng-select.ng-select-filtered,
+		.ng-select .ng-has-value {
+			.ng-placeholder {
+				display: none;
+			}
+		}
+
+		.ng-select-opened .ng-select-container {
 			.ng-arrow-wrapper,
 			.ng-clear-wrapper {
-				@include absolute-center(true, false);
-				color: $input-border-color;
+				color: $input-color;
 			}
 
-			.ng-arrow-wrapper {
-				width: 10px;
-				height: 10px;
-
-				&::before {
-					content: '\e916';
-					font-size: 10px;
-				}
-			}
-
-			.ng-clear-wrapper {
-				width: 15px;
-				height: 15px;
-
-				&:hover {
-					&::before {
-						color: $danger;
-					}
-				}
-
-				&::before {
-					content: '\e91b';
-					font-size: 15px;
-				}
-			}
-		}
-
-		.ng-arrow-wrapper,
-		.ng-clear-wrapper {
-			&::before {
-				@include icon;
-				display: block;
+			.ng-arrow-wrapper::before {
+				transform: rotate(180deg);
 			}
 		}
 
@@ -176,54 +168,16 @@
 			display: none;
 		}
 
-		.ng-arrow-wrapper {
-			right: $input-padding-x;
-			bottom: auto;
-		}
-
-		.ng-clear-wrapper {
-			right: 40px;
-
-			&:hover {
-				&::before {
-					color: $primary;
-				}
-			}
-		}
-
-		.is-invalid {
-			&,
-			&.ng-select-focused {
-				.ng-select-container {
-					&::after {
-						background-color: $danger;
-					}
-
-					&:hover {
-						&::after {
-							background-color: $input-color-interactive-invalid;
-						}
-					}
-				}
-			}
-		}
-
 		.ng-dropdown-panel {
 			top: calc(100% + 10px);
-			border-radius: $input-border-radius;
 			box-shadow: none;
 		}
 
 		.ng-dropdown-panel-items {
 			padding: ( $spacer / 2.5 ) 0;
 			background-color: $input-bg;
+			border-radius: $input-border-radius;
 			box-shadow: 0 0 10px 0 rgba($black, .09);
-
-			.ng-option {
-				.highlighted {
-					text-decoration: none;
-				}
-			}
 		}
 
 		.ng-option {
@@ -240,6 +194,24 @@
 			&.ng-option-marked,
 			&:hover {
 				background-color: darken($input-bg, 4%);
+			}
+		}
+	}
+
+	// Error state
+	.is-invalid {
+		&,
+		&.ng-select-focused {
+			.ng-select-container {
+				&::after {
+					background-color: $danger;
+				}
+			}
+
+			.ng-select-container:hover {
+				&::after {
+					background-color: $input-color-interactive-invalid;
+				}
 			}
 		}
 	}
