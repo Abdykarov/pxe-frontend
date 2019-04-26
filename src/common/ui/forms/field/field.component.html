@@ -14,6 +14,7 @@
     </span>
     <div
         *ngIf="type !== 'LABEL'"
+        [class.form-control-case]="type === 'INPUT'"
         [class.custom-control]="type === 'CHECKBOX'"
         [class.custom-file]="type === 'FILE'"
         [class.custom-checkbox]="type === 'CHECKBOX'"
@@ -369,10 +370,13 @@
             </span>
         </div>
         <div
-            *ngIf="!!subtext"
+            *ngIf="!!subtext || subtextTemplate"
             class="input-subtext"
             [class.input-subtext--disabled]="!!disabledField">
             {{ subtext }}
+            <ng-container *ngIf="subtextTemplate">
+                <ng-container *ngTemplateOutlet="subtextTemplate"></ng-container>
+            </ng-container>
         </div>
         <div
             *ngIf="!!getErrorMessage()"

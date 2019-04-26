@@ -4,13 +4,13 @@ import {
     TemplateRef,
 } from '@angular/core';
 
-import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
 import { SupplierComponent } from 'src/common/ui/supplier/supplier.component';
+import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
 
 @Component({
     templateUrl: './page.html',
 })
-export class RegistrationPageComponent {
+export class LoginPageComponent {
     @Input()
     public supplierTemplate: TemplateRef<SupplierComponent>;
 
@@ -120,13 +120,13 @@ export class RegistrationPageComponent {
         },
     ];
 
-    public submitForm(evt) {
+    submitForm(evt) {
         evt.preventDefault();
         console.log('Submit form');
     }
 
     public action = (evt) => {
         evt.preventDefault();
-        window.open('/full/landing-page', '_blank');
+        window.open('/forgotten-password');
     }
 }

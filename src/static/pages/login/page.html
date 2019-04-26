@@ -1,7 +1,6 @@
-<ng-template #hrefToPersonalDataTemplate>
-    Souhlas se zpracováním 
+<ng-template #forgottenPassword>
     <a (click)="action($event)">
-        osobních údajů
+        Zapomněli jste heslo?
     </a>
 </ng-template>
 
@@ -13,7 +12,7 @@
     <div class="container-fluid">
         <div class="row text-center mb-6">
             <div class="col-12 col-md-6 offset-md-3">
-                <h1>Registrace</h1>
+                <h1>Log-in</h1>
             </div>
         </div>
         <div class="row mb-6">
@@ -27,15 +26,15 @@
                                     label="Email">
                                 </lnd-form-field>
                                 <lnd-form-field
-                                    [id]="'Agreement'"
-                                    [labelTemplate]="hrefToPersonalDataTemplate"
-                                    [type]="'CHECKBOX'">
+                                    id="password"
+                                    label="Heslo"
+                                    [subtextTemplate]="forgottenPassword">
                                 </lnd-form-field>
                                 <div class="text-right">
                                     <lnd-button
                                         type="primary"
                                         (action)="submitForm($event)"
-                                        label="Registrovat se">
+                                        label="Přihlásit se">
                                     </lnd-button>
                                 </div>
                             </form>

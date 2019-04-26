@@ -118,6 +118,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/full/landing-page',
                 },
                 {
+                    'label': 'Login',
+                    'url': '/full/login',
+                },
+                {
                     'label': 'Registration',
                     'url': '/full/registration',
                 },

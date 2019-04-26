@@ -5,20 +5,19 @@ import { Routes } from '@angular/router';
 // own classes
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
-import { RegistrationPageComponent } from './page';
-import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
-
+import { LoginPageComponent } from './page';
 import {
     LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
+import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
 
 @NgModule({
     declarations: [
-        RegistrationPageComponent,
+        LoginPageComponent,
     ],
     exports: [
-        RegistrationPageComponent,
+        LoginPageComponent,
     ],
     imports: [
         ButtonModule,
@@ -27,16 +26,16 @@ import {
         SupplierModule,
     ],
 })
-export class RegistrationPageModule {}
+export class LoginPageModule {}
 
-export const registrationPageRoutes: Routes = [
+export const loginPageRoutes: Routes = [
     {
-        path: 'registration',
-        component: RegistrationPageComponent,
+        path: 'login',
+        component: LoginPageComponent,
         data: {
             isPublic: true,
-            loginType: LoginType.STATIC,
-            signInType: SignType.NONE,
+            loginType: LoginType.NONE,
+            signInType: SignType.STATIC,
         },
     },
 ];
