@@ -10,11 +10,11 @@
                         <a
                             [routerLink]="['/']"
                             class="logo-link">
-                                <img
-                                    src="/assets/images/layout/logo-pxe.svg"
-                                    class="logo"
-                                    title="PXE"
-                                    alt="logo PXE">
+                            <img
+                                src="/assets/images/layout/logo-pxe.svg"
+                                class="logo"
+                                title="PXE"
+                                alt="logo PXE">
                         </a>
                     </div>
                     <div
@@ -31,8 +31,8 @@
                         *ngIf="settings.loginType !== loginTypeNone">
                         <lnd-button
                             label="Přihlášení"
-                            (click)="login()"
-                            customClass="btn--link">
+                            type="link"
+                            (click)="login()">
                         </lnd-button>
                     </div>
                     <div

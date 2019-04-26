@@ -22,7 +22,6 @@
 
 .form-group {
 	position: relative;
-	padding-top: $form-group-padding-top;
 
 	&--with-currency {
 		.input-group-append {
@@ -193,6 +192,7 @@ textarea.form-control--not-empty {
 
 .form-control-wrapper {
 	max-width: $input-width;
+	padding-top: $form-group-padding-top;
 	border-radius: $input-border-radius;
 	overflow: hidden;
 
@@ -869,8 +869,8 @@ textarea.form-control--not-empty {
 }
 
 .input-subtext {
-	color: $blue;
-	font-size: .75rem;
+	margin-top: ( $spacer / 4 );
+	font-size: $small-font-size;
 
 	&--disabled {
 		color: $input-disabled-color;
