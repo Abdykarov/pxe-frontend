@@ -8,6 +8,7 @@ import {
     Input,
     Output,
     ViewChild,
+    ViewEncapsulation,
     TemplateRef,
 } from '@angular/core';
 import {
@@ -28,6 +29,7 @@ import { IValidationMessages } from '../models/validation-messages.model';
     selector: 'lnd-form-field',
     templateUrl: 'field.component.html',
     styleUrls: ['./field.component.scss'],
+    encapsulation: ViewEncapsulation.None,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
