@@ -11,17 +11,14 @@
 @import 'breadcrumb.component.variables.scss';
 
 // Bootstrap breadcrumb import
-@import '~bootstrap/scss/breadcrumb';                                         // Bootstrap breadcrumb
+@import '~bootstrap/scss/breadcrumb';
 
 .breadcrumb-holder {
 	margin-bottom: $breadcrumb-margin-bottom;
-
-	ul {
-		@include reset-list(none, 0, 0);
-	}
 }
 
 .breadcrumb {
+	@include reset-list(none, 0, 0);
 	position: relative;
 	justify-content: center;
 }
