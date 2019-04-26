@@ -6,16 +6,18 @@ import {
     ViewChild,
 } from '@angular/core';
 
+import { AbstractComponent } from 'src/common/abstract.component';
 import { AddModalDirective } from './add-modal.directive';
 import { ModalsLoaderService } from './modals-loader.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { map, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'lnd-modal-dynamic',
     templateUrl: './modals.component.html',
     styleUrls: ['./modals.component.scss'],
 })
-export class ModalsComponent {
+export class ModalsComponent extends AbstractComponent {
     @ViewChild(AddModalDirective) public addModal: AddModalDirective;
 
     @Input()
@@ -31,6 +33,7 @@ export class ModalsComponent {
         private modalLoaderService: ModalsLoaderService,
         private overlayService: OverlayService,
     ) {
+        super();
         this.modalLoaderService.showModal.subscribe(type => {
             if (this.component) {
                 this.component.destroy();
@@ -48,12 +51,18 @@ export class ModalsComponent {
             if (type.instanceData) {
                 this.component.instance.instanceData = type.instanceData;
             }
-            const $ovrOpn = this.overlayService.toggleOverlay(true).subscribe();
-            $ovrOpn.unsubscribe();
+            this.overlayService.toggleOverlay(true)
+                .pipe(
+                    takeUntil(this.destroy$),
+                )
+                .subscribe();
             this.component.instance.closeModal.subscribe(() => {
                 this.destroyComponent();
-                const $ovrClose = this.overlayService.toggleOverlay(false).subscribe();
-                $ovrClose.unsubscribe();
+                this.overlayService.toggleOverlay(false)
+                    .pipe(
+                        takeUntil(this.destroy$),
+                    )
+                    .subscribe();
             });
             this.component.changeDetectorRef.detectChanges();
         });
