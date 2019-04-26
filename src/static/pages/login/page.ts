@@ -127,6 +127,6 @@ export class LoginPageComponent {
 
     public action = (evt) => {
         evt.preventDefault();
-        console.log('Zapomenuté heslo');
+        window.open('/forgotten-password');
     }
 }
