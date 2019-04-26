@@ -14,6 +14,7 @@
     </span>
     <div
         *ngIf="type !== 'LABEL'"
+        [class.form-control-case]="type === 'INPUT'"
         [class.custom-control]="type === 'CHECKBOX'"
         [class.custom-file]="type === 'FILE'"
         [class.custom-checkbox]="type === 'CHECKBOX'"
