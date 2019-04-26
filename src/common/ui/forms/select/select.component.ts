@@ -52,6 +52,12 @@ export class SelectComponent {
     public subtext?: string;
 
     @Input()
+    public success = false;
+
+    @Input()
+    public touched = false;
+
+    @Input()
     public validationMessages?: IValidationMessages;
 
     @Input()
