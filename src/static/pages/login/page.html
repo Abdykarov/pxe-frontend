@@ -35,8 +35,7 @@
                                 <div class="text-right">
                                     <lnd-button
                                         type="primary"
-                                        (action)="submitForm()"
-                                        [isDisabled]="submitSubscriptionLoading"
+                                        (action)="submitForm($event)"
                                         label="Přihlásit se">
                                     </lnd-button>
                                 </div>

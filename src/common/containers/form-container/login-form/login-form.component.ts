@@ -63,6 +63,6 @@ export class LoginFormComponent implements OnInit {
 
     public action(evt) {
         evt.preventDefault();
-        window.open('/full/landing-page', '_blank');
+        window.open('/forgotten-password');
     }
 }

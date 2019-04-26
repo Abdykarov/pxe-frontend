@@ -8,7 +8,10 @@ import { FormModule } from 'src/common/ui/forms/form.module';
 import { RegistrationPageComponent } from './page';
 import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
 
-import { LoginType, SignType } from '../../../app/layouts/models/router-data.model';
+import {
+    LoginType,
+    SignType,
+} from 'src/app/layouts/models/router-data.model';
 
 @NgModule({
     declarations: [
