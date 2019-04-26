@@ -187,6 +187,9 @@
                 [placeholder]="'Datepicker'"
                 label="Datepicker"
                 id="datepicker-1"
+                [touched]="datepickers.controls.datepicker.touched"
+                [error]="datepickers.controls.datepicker.errors"
+                [validationMessages]="{bsDate: 'Špatný formát data'}"
                 >
             </lnd-datepicker>
         </div>
@@ -198,6 +201,7 @@
                 label="Datepicker"
                 id="datepicker-2"
                 [error]="'Error message'"
+                [touched]="true"
                 >
             </lnd-datepicker>
         </div>

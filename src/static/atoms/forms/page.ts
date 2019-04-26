@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {
     FormControl,
     FormGroup,
+    Validators,
 } from '@angular/forms';
 
 import { FormsPageConfig } from './config';
@@ -15,7 +16,7 @@ export class FormsPageComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
     public datepickers: FormGroup = new FormGroup({
-        datepicker: new FormControl(''),
+        datepicker: new FormControl('', [Validators.required]),
         errorDatepicker: new FormControl(''),
     });
 
