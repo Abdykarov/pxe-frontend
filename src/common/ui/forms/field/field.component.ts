@@ -7,8 +7,9 @@ import {
     forwardRef,
     Input,
     Output,
-    ViewChild,
     TemplateRef,
+    ViewChild,
+    ViewEncapsulation,
 } from '@angular/core';
 import {
     ControlValueAccessor,
@@ -28,6 +29,7 @@ import { IValidationMessages } from '../models/validation-messages.model';
     selector: 'lnd-form-field',
     templateUrl: 'field.component.html',
     styleUrls: ['./field.component.scss'],
+    encapsulation: ViewEncapsulation.None,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -42,6 +44,9 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
 
     @Input()
     public labelTemplate?: TemplateRef<any>;
+
+    @Input()
+    public subtextTemplate?: TemplateRef<any>;
 
     // tslint:disable-next-line:no-input-rename
     @Input('value')

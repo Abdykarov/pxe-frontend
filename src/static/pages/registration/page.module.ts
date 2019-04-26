@@ -2,39 +2,40 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 
-import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
+// own classes
+import { ButtonModule } from 'src/common/ui/button/button.module';
+import { FormModule } from 'src/common/ui/forms/form.module';
+import { RegistrationPageComponent } from './page';
+import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
+
 import {
     LoginType,
     LogoutType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
-import { SignUpComponent } from './sign-up.component';
-import { SignUpFormModule } from 'src/common/ui/sign-up/sign-up-form.module';
-import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
 
 @NgModule({
     declarations: [
-        SignUpComponent,
+        RegistrationPageComponent,
     ],
     exports: [
-        SignUpComponent,
+        RegistrationPageComponent,
     ],
     imports: [
+        ButtonModule,
         CommonModule,
-        LayoutContainerModule,
-        SignUpFormModule,
+        FormModule,
         SupplierModule,
     ],
 })
-export class SignUpModule { }
+export class RegistrationPageModule {}
 
-export const signUpPageRoutes: Routes = [
+export const registrationPageRoutes: Routes = [
     {
         path: 'sign-up',
-        component: SignUpComponent,
+        component: RegistrationPageComponent,
         data: {
             isPublic: true,
-            isSimpleFooter: true,
             loginType: LoginType.STATIC,
             logoutType: LogoutType.NONE,
             signUpType: SignType.NONE,

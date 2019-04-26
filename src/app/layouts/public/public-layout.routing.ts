@@ -29,7 +29,7 @@ const routes = [
                 loadChildren: '../../pages/cookies-policy/cookies-policy.module#CookiesPolicyModule',
                 data: {
                     isPublic: true,
-                    isSimpleFooter: true,
+                    isSimpleFooter: false,
                     loginType: LoginType.NONE,
                     logoutType: LogoutType.NONE,
                     signUpType: SignType.NAVIGATE,
@@ -40,7 +40,6 @@ const routes = [
                 loadChildren: '../../pages/login/login.module#LoginModule',
                 data: {
                     isPublic: true,
-                    isSimpleFooter: true,
                     loginType: LoginType.NONE,
                     logoutType: LogoutType.NONE,
                     signUpType: SignType.NAVIGATE,
@@ -62,7 +61,7 @@ const routes = [
                 loadChildren: '../../pages/securing-your-data/securing-your-data.module#SecuringYourDataModule',
                 data: {
                     isPublic: true,
-                    isSimpleFooter: true,
+                    isSimpleFooter: false,
                     loginType: LoginType.NONE,
                     logoutType: LogoutType.NONE,
                     signUpType: SignType.NAVIGATE,
@@ -73,7 +72,7 @@ const routes = [
                 loadChildren: '../../pages/terms-of-use/terms-of-use.module#TermsOfUseModule',
                 data: {
                     isPublic: true,
-                    isSimpleFooter: true,
+                    isSimpleFooter: false,
                     loginType: LoginType.NONE,
                     logoutType: LogoutType.NONE,
                     signUpType: SignType.NAVIGATE,
@@ -84,7 +83,6 @@ const routes = [
                 loadChildren: '../../pages/sign-up/sign-up.module#SignUpModule',
                 data: {
                     isPublic: true,
-                    isSimpleFooter: true,
                     loginType: LoginType.NAVIGATE,
                     logoutType: LogoutType.NONE,
                     signUpType: SignType.NONE,

@@ -62,9 +62,11 @@ export class LoginFormComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(params => {
                 this.email = params['email'];
-                const formValue = this.loginForm.value;
-                formValue.username = this.email;
-                this.loginForm.setValue(formValue);
+                if (this.email) {
+                    const formValue = this.loginForm.value;
+                    formValue.username = this.email;
+                    this.loginForm.setValue(formValue);
+                }
             });
         this.isFromSignUp = !!window.history.state.isFromSignUp;
     }
@@ -81,7 +83,13 @@ export class LoginFormComponent extends AbstractComponent implements OnInit {
             }),
         )(this.loginForm.controls);
         if (this.loginForm.valid) {
+            this.isFromSignUp = false;
             this.submitLoginForm.emit(this.loginForm.value);
         }
+    }
+
+    public action(evt) {
+        evt.preventDefault();
+        window.open('/forgotten-password');
     }
 }

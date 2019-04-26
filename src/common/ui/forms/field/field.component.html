@@ -1,6 +1,7 @@
 <div
     class="form-group"
-    [ngClass]="customFormGroupClass">
+    [ngClass]="customFormGroupClass"
+    [class.pt-0]="type === 'CHECKBOX'">
     <span
         *ngIf="type === 'LABEL'"
         class="form-control-text"
@@ -374,10 +375,13 @@
             </span>
         </div>
         <div
-            *ngIf="!!subtext"
+            *ngIf="!!subtext || subtextTemplate"
             class="input-subtext"
             [class.input-subtext--disabled]="!!disabledField">
             {{ subtext }}
+            <ng-container *ngIf="subtextTemplate">
+                <ng-container *ngTemplateOutlet="subtextTemplate"></ng-container>
+            </ng-container>
         </div>
         <div
             *ngIf="!!getErrorMessage()"

@@ -1,8 +1,8 @@
 <ng-template #hrefToSecuringTemplate>
-    Souhlasím se zpracováním
+    Souhlas se zpracováním
     <a href="javascript: void(0);">
-        <span (click)="openConsent($event)">
-            osobních údajů
+        <span (click)="action($event)">
+           osobních údajů
         </span>
     </a>
 </ng-template>
@@ -21,7 +21,7 @@
         [error]="signUpFormError.email || signUpForm.controls.email.errors"
         [formControl]="signUpForm.controls.email"
         [id]="'email'"
-        label="E-mail"
+        label="Email"
         [success]="signUpForm.controls.email.valid && (signUpForm.controls.email.touched || signUpFormError.email)"
         [touched]="signUpForm.controls.email.touched || signUpFormError.email"
         [validationMessages]="signUpFormFields.validationMessages.email"
@@ -37,10 +37,12 @@
         [type]="'CHECKBOX'"
         [validationMessages]="signUpFormFields.validationMessages.consent"
     ></lnd-form-field>
-    <lnd-button
-        type="primary"
-        (action)="submitForm()"
-        [isDisabled]="submitSignUpFormLoading"
-        label="Registrovat se">
-    </lnd-button>
+    <div class="text-right">
+        <lnd-button
+            type="primary"
+            (action)="submitForm()"
+            [isDisabled]="submitSignUpFormLoading"
+            label="Registrovat se">
+        </lnd-button>
+    </div>
 </form>

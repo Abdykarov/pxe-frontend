@@ -8,7 +8,8 @@ import { FullLayoutComponent } from './full-layout.component';
 
 import { CookiesPageModule, cookiesPageRoutes } from 'src/static/pages/cookies/page.module';
 import { LandingModule, landingPageRoutes } from 'src/static/pages/landing/landing.module';
-import { SignUpModule, signUpPageRoutes } from 'src/static/pages/sign-up/sign-up.module';
+import { LoginPageModule, loginPageRoutes } from 'src/static/pages/login/page.module';
+import { RegistrationPageModule, registrationPageRoutes } from 'src/static/pages/registration/page.module';
 
 const routes: Routes = [
     {
@@ -17,7 +18,8 @@ const routes: Routes = [
         children: [
             ...cookiesPageRoutes,
             ...landingPageRoutes,
-            ...signUpPageRoutes,
+            ...loginPageRoutes,
+            ...registrationPageRoutes,
             {
                 path: '**',
                 redirectTo: '',
@@ -30,7 +32,8 @@ const routes: Routes = [
     imports: [
         CookiesPageModule,
         LandingModule,
-        SignUpModule,
+        LoginPageModule,
+        RegistrationPageModule,
         RouterModule.forChild(routes),
     ],
     exports: [

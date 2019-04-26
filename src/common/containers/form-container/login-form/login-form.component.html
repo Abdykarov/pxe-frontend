@@ -1,3 +1,10 @@
+<ng-template #forgottenPassword>
+    <a href="javascript: void(0);">
+        <span (click)="action($event)">
+            Zapomněli jste heslo?
+        </span>
+    </a>
+</ng-template>
 <lnd-alert *ngIf="loginGlobalError.length"
            type="danger">
     <ng-container *ngFor="let globalError of loginGlobalError">
@@ -16,7 +23,7 @@
         [error]="loginForm.controls.username.errors"
         [formControl]="loginForm.controls.username"
         [id]="'username'"
-        label="E-mail"
+        label="Email"
         [success]="loginForm.controls.username.valid && loginForm.controls.username.touched"
         [touched]="loginForm.controls.username.touched"
         [validationMessages]="loginFormFields.validationMessages.username"
@@ -30,11 +37,14 @@
         type="PASSWORD"
         [touched]="loginForm.controls.password.touched"
         [validationMessages]="loginFormFields.validationMessages.password"
+        [subtextTemplate]="forgottenPassword"
     ></lnd-form-field>
-    <lnd-button
-        type="primary"
-        (action)="submitForm()"
-        [isDisabled]="submitLoginFormLoading"
-        label="Přihlásit se">
-    </lnd-button>
+    <div class="text-right">
+        <lnd-button
+            type="primary"
+            (action)="submitForm()"
+            [isDisabled]="submitLoginFormLoading"
+            label="Přihlásit se">
+        </lnd-button>
+    </div>
 </form>
