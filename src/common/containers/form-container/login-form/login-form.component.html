@@ -1,8 +1,6 @@
 <ng-template #forgottenPassword>
-    <a href="javascript: void(0);">
-        <span (click)="action($event)">
-            Zapomněli jste heslo?
-        </span>
+    <a (click)="action($event)">
+        Zapomněli jste heslo?
     </a>
 </ng-template>
 <lnd-alert *ngIf="loginGlobalError.length"
@@ -18,6 +16,7 @@
     <a>Poslat e-mail znovu</a>
 </ng-container>
 <form [formGroup]="loginForm"
+      class="form-container"
       autocomplete="off">
     <lnd-form-field
         [error]="loginForm.controls.username.errors"

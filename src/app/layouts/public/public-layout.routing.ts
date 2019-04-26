@@ -21,7 +21,7 @@ const routes = [
                     isSimpleFooter: true,
                     loginType: LoginType.NONE,
                     logoutType: LogoutType.NONE,
-                    signUpType: SignType.NAVIGATE,
+                    signUpType: SignType.SCROLL,
                 },
             },
             {
@@ -32,7 +32,7 @@ const routes = [
                     isSimpleFooter: false,
                     loginType: LoginType.NONE,
                     logoutType: LogoutType.NONE,
-                    signUpType: SignType.NAVIGATE,
+                    signUpType: SignType.SCROLL,
                 },
             },
             {
@@ -64,7 +64,7 @@ const routes = [
                     isSimpleFooter: false,
                     loginType: LoginType.NONE,
                     logoutType: LogoutType.NONE,
-                    signUpType: SignType.NAVIGATE,
+                    signUpType: SignType.SCROLL,
                 },
             },
             {
@@ -75,7 +75,7 @@ const routes = [
                     isSimpleFooter: false,
                     loginType: LoginType.NONE,
                     logoutType: LogoutType.NONE,
-                    signUpType: SignType.NAVIGATE,
+                    signUpType: SignType.SCROLL,
                 },
             },
             {

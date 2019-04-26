@@ -190,9 +190,12 @@ textarea.form-control--not-empty {
 	}
 }
 
+.form-control-case {
+	padding-top: $form-group-padding-top;
+}
+
 .form-control-wrapper {
 	max-width: $input-width;
-	padding-top: $form-group-padding-top;
 	border-radius: $input-border-radius;
 	overflow: hidden;
 

@@ -24,6 +24,6 @@ export class RegistrationPageComponent {
 
     public action = (evt) => {
         evt.preventDefault();
-        console.log('Consent');
+        window.open('/full/landing-page', '_blank');
     }
 }
