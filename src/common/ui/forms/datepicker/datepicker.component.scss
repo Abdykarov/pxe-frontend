@@ -1,0 +1,124 @@
+/*
+ -  Datepicker
+ -
+ -
+ */
+
+// NgxBootstrap datepicker import
+@import '~ngx-bootstrap/datepicker/utils/scss/variables.scss';
+@import '~ngx-bootstrap/datepicker/utils/scss/mixins.scss';
+@import '~ngx-bootstrap/datepicker/bs-datepicker.scss';
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+@import 'src/common/ui/forms/field/field.component.scss';
+
+
+bs-datepicker-container {
+	z-index: $zindex-datepicker-content;
+}
+
+.bs-datepicker-container {
+	padding: 0;
+}
+
+bs-month-calendar-view {
+	.bs-datepicker-head {
+		.current {
+			margin-left: -( $spacer * 3 );
+		}
+	}
+}
+
+bs-years-calendar-view {
+	.bs-datepicker-head {
+		.current {
+			margin-left: -( $spacer * 2 );
+		}
+	}
+}
+
+.theme-default {
+	background: transparent;
+	box-shadow: 0 2px 8px 0 rgba($blue, .2);
+
+	.bs-datepicker-head {
+		background-color: $primary;
+
+		.previous,
+		.next,
+		.current {
+			&:hover {
+				background-color: $primary-dark;
+			}
+		}
+
+		.previous,
+		.next {
+			&::before {
+				content: '\e90d';
+				@include icon;
+				display: block;
+				font-size: $icon-size-small-px;
+				font-weight: 700;
+			}
+
+			span {
+				display: none;
+			}
+		}
+
+		.previous {
+			&::before {
+				content: '\e919';
+			}
+		}
+
+		.next {
+			&::before {
+				content: '\e91a';
+			}
+		}
+	}
+
+	.bs-datepicker-body {
+		background-color: $white;
+		border: none;
+
+		th,
+		td {
+			&,
+			span {
+				color: $blue;
+				font-size: $small-font-size;
+			}
+		}
+
+		th {
+			font-weight: 600;
+		}
+	}
+
+	.bs-datepicker-body table td {
+		span {
+			&.is-highlighted:not(.disabled),
+			&.selected {
+				background-color: $primary;
+				color: $white;
+			}
+
+			&.selected {
+				&:hover {
+					background-color: $primary-dark;
+				}
+			}
+		}
+
+		&.is-highlighted:not(.disabled) {
+			span {
+				background-color: $primary;
+				color: $white;
+			}
+		}
+	}
+}

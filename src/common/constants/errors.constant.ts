@@ -11,7 +11,12 @@ export const errorFieldMessages =  {
         alreadyRegisteredEmail: 'Tento e-mail již registrujeme.',
     },
     consent: {
-        required: 'Nezapomeňte na souhlas se zásadami bezpečnosti.',
+        signUp: {
+            required: 'Nezapomeňte na souhlas se zpracovním osobních údajů.',
+        },
+        newsSubscription: {
+            required: 'Nezapomeňte na souhlas se zásadami bezpečnosti.',
+        },
     },
     password: {
         required: 'Zadejte heslo.',

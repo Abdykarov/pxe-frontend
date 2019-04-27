@@ -11,6 +11,7 @@ import { FormModule } from 'src/common/ui/forms/form.module';
 import { LoginFormModule } from 'src/common/containers/form-container/login-form/login-form.module';
 import { ModalModule } from 'src/common/ui/modal/modal.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
+import { SupplierContainerModule } from 'src/common/containers/supplier-conteiner/supplier-conteiner.module';
 
 @NgModule({
     declarations: [
@@ -24,11 +25,12 @@ import { LayoutContainerModule } from 'src/common/containers/layout-container/la
         ButtonModule,
         FormModule,
         CommonModule,
+        LayoutContainerModule,
         LoginFormModule,
         LoginRoutingModule,
         ModalModule,
-        LayoutContainerModule,
         ReactiveFormsModule,
+        SupplierContainerModule,
     ],
 })
 export class LoginModule {}

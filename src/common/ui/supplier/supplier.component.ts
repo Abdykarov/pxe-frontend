@@ -3,7 +3,10 @@ import {
     Input,
 } from '@angular/core';
 
-import { ISupplier } from './model/supplier.model';
+import {
+    ISupplier,
+    TypeCommodity,
+} from './model/supplier.model';
 
 @Component({
     selector: 'pxe-supplier',
@@ -13,4 +16,7 @@ import { ISupplier } from './model/supplier.model';
 export class SupplierComponent {
     @Input()
     public configSupplier: ISupplier[];
+
+    @Input()
+    public typeCommodity?: TypeCommodity = TypeCommodity.BOTH;
 }

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
+
+import { BasicLayoutComponent } from './basic-layout.component';
 import {
     RouterModule,
     Routes,
 } from '@angular/router';
-
-import { BasicLayoutComponent } from './basic-layout.component';
 
 import {
     AlertsPageModule,
@@ -44,7 +44,7 @@ import {
 import {
     ProgressBarPageModule,
     progressBarPageRoutes,
-} from 'src/static/atoms/progress-bar/progress-bar.module';
+} from 'src/static/organisms/progress-bar/progress-bar.module';
 
 import {
     NewSupplyPointPageModule,
