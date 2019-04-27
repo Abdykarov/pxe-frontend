@@ -94,6 +94,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Breadcrumb',
                     'url': '/basic/breadcrumb',
                 },
+                {
+                    'label': 'Progress bar',
+                    'url': '/basic/progress',
+                },
                 // {
                 //     'label': 'Modals',
                 //     'url': '/modals',
@@ -112,6 +116,14 @@ export const staticNavigationConfig: INavigationConfig = [
                 {
                     'label': 'Landing page',
                     'url': '/full/landing-page',
+                },
+                {
+                    'label': 'Login',
+                    'url': '/full/login',
+                },
+                {
+                    'label': 'Registration',
+                    'url': '/full/registration',
                 },
                 // {
                 //     'label': 'Error',

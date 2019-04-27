@@ -15,9 +15,13 @@
 @import '~bootstrap/scss/custom-forms';
 @import '~bootstrap/scss/input-group';
 
+.form-container {
+	max-width: $input-width;
+	margin: 0 auto;
+}
+
 .form-group {
 	position: relative;
-	padding-top: $form-group-padding-top;
 
 	&--with-currency {
 		.input-group-append {
@@ -184,6 +188,10 @@ textarea.form-control--not-empty {
 			border-color: $input-color-interactive-invalid;
 		}
 	}
+}
+
+.form-control-case {
+	padding-top: $form-group-padding-top;
 }
 
 .form-control-wrapper {
@@ -422,6 +430,7 @@ textarea.form-control--not-empty {
 .custom-control-label {
 	padding-left: ( $custom-control-indicator-size-px + ( $spacer / 2 ) );
 	color: $input-color;
+	font-size: $input-font-size;
 	cursor: pointer;
 
 	&:hover {
@@ -863,8 +872,8 @@ textarea.form-control--not-empty {
 }
 
 .input-subtext {
-	color: $blue;
-	font-size: .75rem;
+	margin-top: ( $spacer / 4 );
+	font-size: $small-font-size;
 
 	&--disabled {
 		color: $input-disabled-color;

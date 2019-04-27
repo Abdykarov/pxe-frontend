@@ -12,6 +12,7 @@
 /* -------------------------- */
 
 @import '01_base/core';                                                       // Core CSS
+@import '~@ng-select/ng-select/themes/material.theme'; /* stylelint-disable-line scss/at-import-partial-extension-whitelist */
 
 /* ------------------------- */
 /*   2. LAYOUT               */
@@ -39,3 +40,4 @@
 /* ------------------------- */
 
 @import '05_pages/landing-page';                                             // Landind page(s)
+@import '05_pages/login-registration-pages';                                 // Login & registration page

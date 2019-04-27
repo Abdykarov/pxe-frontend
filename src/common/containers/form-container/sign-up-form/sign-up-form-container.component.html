@@ -1,0 +1,9 @@
+<pxe-sign-up-form
+    (openConsentAction)="openConsent($event)"
+    [signUpFormFields]="registrationFormFields"
+    [submitSignUpFormLoading]="submitRegistrationLoading"
+    [signUpFormSent]="registrationFormSent"
+    [signUpGlobalError]="registrationGlobalError"
+    [signUpFieldError]="registrationFieldError"
+    (submitSignUpForm)="submitRegistrationForm($event,true)"
+></pxe-sign-up-form>

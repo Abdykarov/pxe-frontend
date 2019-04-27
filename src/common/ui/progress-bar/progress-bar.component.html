@@ -1,0 +1,27 @@
+<nav class="progress-bar-holder">
+    <ol class="progress-bar">
+        <li
+            *ngFor="let item of config"
+            class="progress-bar__item"
+            [class.progress-bar__item--done]="!!item.done"
+            [class.progress-bar__item--shadow-step]="!!item.shadowStep"
+            [routerLinkActive]="[ item.url ? 'progress-bar__item--active' : '' ]">
+            <a
+                class="progress-bar__item-inner"
+                [routerLink]="item.url ? item.url : null">
+                <span class="progress-bar__bullet">
+                    <span
+                        *ngIf="!!item.done"
+                        class="
+                            progress-bar__icon
+                            icon
+                            icon--check">
+                    </span>
+                </span>
+                <span class="progress-bar__label">
+                    {{ item.label }}
+                </span>
+            </a>
+        </li>
+    </ol>
+</nav>
