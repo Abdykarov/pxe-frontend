@@ -12,3 +12,8 @@ export interface IForm {
 export interface IFieldError {
     [key: string]: string[];
 }
+
+export enum SignUpType {
+    NewsSubscription,
+    SignUp,
+}

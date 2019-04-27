@@ -5,4 +5,11 @@ export interface ISupplier {
     size?: string;
     title: string;
     alt: string;
+    typeCommodity: TypeCommodity;
+}
+
+export enum TypeCommodity {
+    GAS,
+    POWER,
+    BOTH,
 }

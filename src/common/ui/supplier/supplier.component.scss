@@ -20,9 +20,13 @@
 				margin-left: ( $spacer * 2.5 );
 			}
 		}
+
+		&::before {
+			display: none;
+		}
 	}
 
-	&__link {
+	&__content {
 		display: block;
 		position: relative;
 
