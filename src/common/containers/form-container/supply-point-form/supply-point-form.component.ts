@@ -14,7 +14,7 @@ import {
 
 import * as R from 'ramda';
 
-import { commodityTypeFields } from './supply-point-form.config';
+import { commodityTypeFields, commodityTypeOptions } from './supply-point-form.config';
 import { commodityTypes } from './models/supply-point.model';
 import {
     IFieldError,
@@ -49,17 +49,7 @@ export class SupplyPointFormComponent implements OnInit, OnChanges {
     public form: FormGroup;
     public formError: any = {};
     public commodityTypes = commodityTypes;
-
-    public commodityTypeOptions: Array<IOption> = [
-        {
-            key: commodityTypes.ELECTRICITY,
-            label: 'elektřina',
-        },
-        {
-            key: commodityTypes.GAS,
-            label: 'plyn',
-        },
-    ];
+    public commodityTypeOptions: Array<IOption> = commodityTypeOptions;
 
     constructor(
         private fb: FormBuilder,
@@ -69,9 +59,9 @@ export class SupplyPointFormComponent implements OnInit, OnChanges {
         this.form = this.fb.group(this.formFields.controls);
 
         this.form.get('commodityType').valueChanges.subscribe(val => {
-            this.switchCommodity(val);
+            this.setCommodity(val);
         });
-        this.switchCommodity(commodityTypes.ELECTRICITY);
+        this.setCommodity(commodityTypes.ELECTRICITY);
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -80,7 +70,7 @@ export class SupplyPointFormComponent implements OnInit, OnChanges {
         }
     }
 
-    public switchCommodity = (commodityType: commodityTypes) => {
+    public setCommodity = (commodityType: commodityTypes) => {
         R.mapObjIndexed((fields, type) => {
             if (commodityTypeFields[type]) {
                 if (type === commodityType) {

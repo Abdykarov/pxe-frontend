@@ -28,12 +28,12 @@ export class RegisterAbstractComponent {
         this.registrationFormFields = registrationFormFieldsFnc(signUpType);
     }
 
-    public openConsent(evt) {
+    public openConsent = (evt)  => {
         evt.preventDefault();
         window.open('securing-your-data');
     }
 
-    public submitRegistrationForm(values, isFromSignUp: boolean = false) {
+    public submitRegistrationForm = (values, isFromSignUp: boolean = false) => {
         this.submitRegistrationLoading = true;
         this.registrationGlobalError = [];
         this.registrationFieldError = {};

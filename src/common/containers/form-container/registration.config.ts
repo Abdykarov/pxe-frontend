@@ -38,8 +38,8 @@ export function registrationFormFieldsFnc(signUpType: SignUpType): IForm {
                         'consent',
                         SignUpType.NewsSubscription === signUpType ? 'newsSubscription' : 'signUp',
                         'required',
-                    ]
-                    , errorFieldMessages,
+                    ],
+                    errorFieldMessages,
                 ),
             },
         },

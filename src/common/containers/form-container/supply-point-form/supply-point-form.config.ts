@@ -3,6 +3,7 @@ import { Validators } from '@angular/forms';
 import { commodityTypes } from './models/supply-point.model';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form-container/models/form-definition.model';
+import { IOption } from 'src/common/ui/forms/models/option.model';
 
 export const formFields: IForm = {
     controls: {
@@ -13,7 +14,7 @@ export const formFields: IForm = {
             ],
         ],
         supplierId: [
-            '',
+            null,
             [
                 Validators.required,
             ],
@@ -43,13 +44,13 @@ export const formFields: IForm = {
             ],
         ],
         distributionRateId: [
-            '',
+            null,
             [
                 Validators.required,
             ],
         ],
         circuitBreakerId: [
-            '',
+            null,
             [
                 Validators.required,
             ],
@@ -76,8 +77,23 @@ export const formFields: IForm = {
             '',
         ],
     },
-    validationMessages: {},
+    validationMessages: {
+        expirationDate: {
+            bsDate: 'Špatný formát data',
+        },
+    },
 };
+
+export const commodityTypeOptions: Array<IOption> = [
+    {
+        key: commodityTypes.ELECTRICITY,
+        label: 'elektřina',
+    },
+    {
+        key: commodityTypes.GAS,
+        label: 'plyn',
+    },
+];
 
 export const commodityTypeFields = {
     [commodityTypes.ELECTRICITY]: ['ean', 'distributionRateId', 'circuitBreakerId', 'annualConsumptionNT', 'annualConsumptionVT'],

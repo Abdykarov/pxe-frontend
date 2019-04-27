@@ -1,7 +1,4 @@
-import {
-    ActivatedRoute,
-    Router,
-} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import {
     Component,
     EventEmitter,
@@ -88,7 +85,7 @@ export class LoginFormComponent extends AbstractComponent implements OnInit {
         }
     }
 
-    public action(evt) {
+    public action = (evt) => {
         evt.preventDefault();
         window.open('/forgotten-password');
     }
