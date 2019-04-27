@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 @Injectable({
     providedIn: 'root',
 })
-export class ModalsLoaderService {
+export class ModalLoaderService {
     private components = {};
     public showModal: Subject<any> = new Subject();
     public loadModalComponent = (component: string) => this.components[component];

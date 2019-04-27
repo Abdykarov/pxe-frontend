@@ -6,18 +6,19 @@ import {
     ViewChild,
 } from '@angular/core';
 
+import { takeUntil } from 'rxjs/operators';
+
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AddModalDirective } from './add-modal.directive';
-import { ModalsLoaderService } from './modals-loader.service';
+import { ModalLoaderService } from './modal-loader.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
-import { map, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'lnd-modal-dynamic',
-    templateUrl: './modals.component.html',
-    styleUrls: ['./modals.component.scss'],
+    templateUrl: './modal.component.html',
+    styleUrls: ['./modal.component.scss'],
 })
-export class ModalsComponent extends AbstractComponent {
+export class ModalComponent extends AbstractComponent {
     @ViewChild(AddModalDirective) public addModal: AddModalDirective;
 
     @Input()
@@ -30,7 +31,7 @@ export class ModalsComponent extends AbstractComponent {
 
     constructor(
         private componentFactoryResolver: ComponentFactoryResolver,
-        private modalLoaderService: ModalsLoaderService,
+        private modalLoaderService: ModalLoaderService,
         private overlayService: OverlayService,
     ) {
         super();
@@ -68,11 +69,10 @@ export class ModalsComponent extends AbstractComponent {
         });
     }
 
-    public destroyComponent() {
+    public destroyComponent = () => {
         if (this.component) {
             this.component.destroy();
         }
         this.component = null;
-        // window.dispatchEvent(new Event('resize'));
     }
 }

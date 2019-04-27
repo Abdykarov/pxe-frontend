@@ -2,18 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AddModalDirective } from './add-modal.directive';
-import { ModalsComponent } from './modals.component';
+import { ModalComponent } from './modal.component';
 
 @NgModule({
     declarations: [
         AddModalDirective,
-        ModalsComponent,
+        ModalComponent,
     ],
     exports: [
-        ModalsComponent,
+        ModalComponent,
     ],
     imports: [
         CommonModule,
     ],
 })
-export class ModalsModule {}
+export class ModalModule {}
