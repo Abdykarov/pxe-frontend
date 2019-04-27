@@ -13,7 +13,7 @@
 	padding-bottom: 0;
 	margin-bottom: ( $spacer * 2 );
 
-	.control-label {
+	.ng-select-label {
 		margin-bottom: ( $spacer / 4 );
 		font-size: $input-font-size;
 		cursor: pointer;
@@ -66,12 +66,12 @@
 				.ng-input {
 					top: 0;
 					height: $input-height;
-					padding: $input-padding-y $input-padding-x;
+					padding: $input-padding-y $input-padding-x ( $input-padding-y + $input-border-width );
 				}
 
 				.ng-input > input {
 					padding: 0;
-					line-height: ( $input-height - ( $input-padding-y * 2 ));
+					line-height: ( $input-height - ( $input-padding-y * 2 ) - $input-border-width );
 					cursor: pointer;
 				}
 			}
@@ -81,7 +81,7 @@
 				.ng-value-container {
 					align-items: center;
 					height: $input-height;
-					padding: $input-padding-y $input-padding-x;
+					padding: $input-padding-y $input-padding-x ( $input-padding-y + $input-border-width );
 					border: none;
 				}
 
@@ -178,6 +178,20 @@
 			background-color: $input-bg;
 			border-radius: $input-border-radius;
 			box-shadow: 0 0 10px 0 rgba($black, .09);
+
+			.ng-option {
+				color: $gray-100;
+
+				.highlighted {
+					color: $input-color;
+					font-weight: 400;
+					text-decoration: none;
+				}
+
+				&.ng-option-selected .highlighted {
+					color: $white;
+				}
+			}
 		}
 
 		.ng-option {

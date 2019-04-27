@@ -14,6 +14,7 @@
     </span>
     <div
         *ngIf="type !== 'LABEL'"
+        [class.form-control-case]="type === 'INPUT' || type === 'PASSWORD'"
         [class.custom-control]="type === 'CHECKBOX'"
         [class.custom-file]="type === 'FILE'"
         [class.custom-checkbox]="type === 'CHECKBOX'"
@@ -56,11 +57,9 @@
             </span>
         </div>
         <div
-            *ngSwitchDefault
-            class="form-control-wrapper"
-            [class.invalid-input]="!!error && !!touched"
-            [class.disabled-input]="!!disabledField">
+            class="form-control-wrapper">
             <input
+                *ngSwitchDefault
                 #field
                 type="text"
                 (blur)="blur.emit($event)"
@@ -81,7 +80,7 @@
                 [required]="required"
                 [attr.autocomplete]="autocomplete"
                 >
-                <input
+            <input
                 *ngSwitchCase="'NUMBER'"
                 #field
                 type="number"
@@ -315,6 +314,7 @@
                 {{ option.label }}
             </option>
         </select>
+
         <label
             *ngIf="label || labelTemplate"
             [class.control-label]="type !== 'CHECKBOX' && type !== 'FILE' && !hideLabel && type !== 'SWITCH'"
@@ -369,10 +369,13 @@
             </span>
         </div>
         <div
-            *ngIf="!!subtext"
+            *ngIf="!!subtext || subtextTemplate"
             class="input-subtext"
             [class.input-subtext--disabled]="!!disabledField">
             {{ subtext }}
+            <ng-container *ngIf="subtextTemplate">
+                <ng-container *ngTemplateOutlet="subtextTemplate"></ng-container>
+            </ng-container>
         </div>
         <div
             *ngIf="!!getErrorMessage()"
