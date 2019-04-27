@@ -8,6 +8,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import {
     ISettings,
     LoginType,
+    LogoutType,
     SignType,
 } from './models/router-data.model';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
@@ -20,7 +21,8 @@ export abstract class AbstractLayoutComponent extends AbstractComponent {
         isPublic: false,
         isSimpleFooter: false,
         loginType: LoginType.NONE,
-        signInType: SignType.NONE,
+        logoutType: LogoutType.NONE,
+        signUpType: SignType.NONE,
     };
 
     protected constructor(

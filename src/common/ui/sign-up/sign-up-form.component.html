@@ -1,0 +1,49 @@
+<ng-template #hrefToSecuringTemplate>
+    Souhlas se zpracováním
+    <a href="javascript: void(0);">
+        <span (click)="openConsent($event)">
+           osobních údajů
+        </span>
+    </a>
+</ng-template>
+
+<lnd-alert *ngIf="signUpGlobalError.length"
+           type="danger">
+    <ng-container *ngFor="let globalError of signUpGlobalError">
+        {{globalError}}<br>
+    </ng-container>
+</lnd-alert>
+<form [formGroup]="signUpForm"
+      (keydown)="resetCustomFieldError()"
+      (change)="resetCustomFieldError()"
+      class="form-container"
+      autocomplete="off">
+    <lnd-form-field
+        [error]="signUpFormError.email || signUpForm.controls.email.errors"
+        [formControl]="signUpForm.controls.email"
+        [id]="'email'"
+        label="Email"
+        [success]="signUpForm.controls.email.valid && (signUpForm.controls.email.touched || signUpFormError.email)"
+        [touched]="signUpForm.controls.email.touched || signUpFormError.email"
+        [validationMessages]="signUpFormFields.validationMessages.email"
+    ></lnd-form-field>
+    <lnd-form-field
+        [error]="signUpFormError.consent || signUpForm.controls.consent.errors"
+        [formControl]="signUpForm.controls.consent"
+        [id]="'consent'"
+        label=""
+        [labelTemplate]="hrefToSecuringTemplate"
+        [success]="signUpForm.controls.consent.valid && (signUpForm.controls.consent.touched || signUpFormError.consent)"
+        [touched]="signUpForm.controls.consent.touched || signUpFormError.consent"
+        [type]="'CHECKBOX'"
+        [validationMessages]="signUpFormFields.validationMessages.consent"
+    ></lnd-form-field>
+    <div class="text-right">
+        <lnd-button
+            type="primary"
+            (action)="submitForm()"
+            [isDisabled]="submitSignUpFormLoading"
+            label="Registrovat se">
+        </lnd-button>
+    </div>
+</form>

@@ -1,0 +1,55 @@
+<div
+    class="form-group"
+    [formGroup]="parentForm">
+    <input
+        lndDatepickerDirective
+        bsDatepicker
+        #datepicker="bsDatepicker"
+        type="text"
+        class="form-control"
+        [class.form-control--not-empty]="!!parentForm.controls[datepickerName].value"
+        [id]="id"
+        [placeholder]="placeholder"
+        [formControl]="parentForm.controls[datepickerName]"
+        [bsConfig]="config"
+        [minDate]="minDate"
+        [maxDate]="maxDate"
+        [class.is-invalid]="!!error && !!touched"
+        [class.is-valid]="success"
+        [class.is-warning]="warning"
+        [attr.autocomplete]="'off'">
+    <label
+        class="control-label"
+        (click)="datepicker.toggle()"
+        [attr.aria-expanded]="datepicker.isOpen"
+        [for]="id">
+        {{ label }}
+    </label>
+    <div class="input-group-append">
+        <button
+            (click)="datepicker.toggle()"
+            [attr.aria-expanded]="datepicker.isOpen"
+            type="button"
+            class="btn">
+            <span class="icon icon--calendar"></span>
+        </button>
+    </div>
+    <div
+        *ngIf="!!appendButtonIcon"
+        class="input-group-append">
+        <button
+            (click)="appendButtonAction.emit()"
+            type="button"
+            class="btn">
+            <span
+                class="icon"
+                [ngClass]="appendButtonIcon">
+            </span>
+        </button>
+    </div>
+    <div
+        *ngIf="!!getErrorMessage()"
+        [innerHtml]="getErrorMessage()"
+        class="invalid-feedback">
+    </div>
+</div>

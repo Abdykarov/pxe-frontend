@@ -163,5 +163,6 @@ a {
 
 	@include link-without-href-interactive {
 		color: $link-hover-color;
+		text-decoration: $link-hover-decoration;
 	}
 }
