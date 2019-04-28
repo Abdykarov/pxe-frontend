@@ -4,7 +4,10 @@ import { Routes } from '@angular/router';
 
 // own classes
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
+import { ButtonModule } from 'src/common/ui/button/button.module';
+import { FormModule } from 'src/common/ui/forms/form.module';
 import { NewSupplyPointPageComponent } from './page';
+import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.module';
 
 @NgModule({
     declarations: [
@@ -16,6 +19,9 @@ import { NewSupplyPointPageComponent } from './page';
     imports: [
         CommonModule,
         BreadcrumbModule,
+        ButtonModule,
+        FormModule,
+        ProgressBarModule,
     ],
 })
 export class NewSupplyPointPageModule {}

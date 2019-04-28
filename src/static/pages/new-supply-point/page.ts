@@ -1,20 +1,27 @@
 import { Component } from '@angular/core';
 
-import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 
 @Component({
     templateUrl: './page.html',
 })
 
 export class NewSupplyPointPageComponent {
-    public breadcrumbItemsSimple: IBreadcrumbItems;
-
-    constructor() {
-        this.breadcrumbItemsSimple = [
-            {
-                label: 'New supply point',
-                url: null,
-            },
-        ];
-    }
+    public stepperProgressConfigSimple1: IStepperProgressItem[] = [
+        {
+            url: '/basic/new-supply-point',
+            done: false,
+            label: 'Výběr odběrného místa',
+        },
+        {
+            url: '/basic/menu-selection',
+            done: false,
+            label: 'Výběr nabídky',
+        },
+        {
+            url: '/basic/contract-signing',
+            done: false,
+            label: 'Podepsání smlouvy',
+        },
+    ];
 }
