@@ -14,8 +14,8 @@ import {
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
-import { IForm } from '../models/form-definition.model';
 import { AbstractComponent } from 'src/common/abstract.component';
+import { IForm } from '../../models/form-definition.model';
 
 @Component({
     selector: 'pxe-login-form',

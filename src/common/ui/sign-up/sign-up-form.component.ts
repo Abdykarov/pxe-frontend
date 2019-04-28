@@ -17,7 +17,7 @@ import * as R from 'ramda';
 import {
     IFieldError,
     IForm,
-} from 'src/common/containers/form-container/models/form-definition.model';
+} from 'src/common/containers/form/models/form-definition.model';
 
 @Component({
     selector: 'pxe-sign-up-form',

@@ -1,14 +1,14 @@
 import { Validators } from '@angular/forms';
 
-import { commodityTypes } from './models/supply-point.model';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
-import { IForm } from 'src/common/containers/form-container/models/form-definition.model';
+import { IForm } from 'src/common/containers/form/models/form-definition.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 
 export const formFields: IForm = {
     controls: {
         commodityType: [
-            commodityTypes.ELECTRICITY,
+            CommodityType.ELECTRICITY,
             [
                 Validators.required,
             ],
@@ -20,25 +20,25 @@ export const formFields: IForm = {
             ],
         ],
         name: [
-            '',
+            null,
             [
                 Validators.required,
             ],
         ],
         ean: [
-            { disabled: false, value: '' },
+            null,
             [
                 Validators.required,
             ],
         ],
         eic: [
-            { disabled: true, value: '' },
+            null,
             [
                 Validators.required,
             ],
         ],
         address: [
-            '',
+            null,
             [
                 Validators.required,
             ],
@@ -56,25 +56,25 @@ export const formFields: IForm = {
             ],
         ],
         annualConsumptionNT: [
-            '',
+            null,
             [
                 Validators.required,
             ],
         ],
         annualConsumptionVT: [
-            '',
+            null,
             [
                 Validators.required,
             ],
         ],
         annualConsumption: [
-            '',
+            null,
             [
                 Validators.required,
             ],
         ],
         expirationDate: [
-            '',
+            null,
         ],
     },
     validationMessages: {
@@ -86,16 +86,16 @@ export const formFields: IForm = {
 
 export const commodityTypeOptions: Array<IOption> = [
     {
-        key: commodityTypes.ELECTRICITY,
+        key: CommodityType.ELECTRICITY,
         label: 'elektřina',
     },
     {
-        key: commodityTypes.GAS,
+        key: CommodityType.GAS,
         label: 'plyn',
     },
 ];
 
 export const commodityTypeFields = {
-    [commodityTypes.ELECTRICITY]: ['ean', 'distributionRateId', 'circuitBreakerId', 'annualConsumptionNT', 'annualConsumptionVT'],
-    [commodityTypes.GAS]: ['eic', 'annualConsumption'],
+    [CommodityType.ELECTRICITY]: ['ean', 'distributionRateId', 'circuitBreakerId', 'annualConsumptionNT', 'annualConsumptionVT'],
+    [CommodityType.GAS]: ['eic', 'annualConsumption'],
 };

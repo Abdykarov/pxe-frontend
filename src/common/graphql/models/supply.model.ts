@@ -1,6 +1,6 @@
 export enum CommodityType {
-    ELECTRICITY,
-    GAS,
+    ELECTRICITY = 'ELECTRICITY',
+    GAS = 'GAS',
 }
 
 export interface IAddress {

@@ -8,7 +8,7 @@ import {
     IFieldError,
     IForm,
     SignUpType,
-} from 'src/common/containers/form-container/models/form-definition.model';
+} from 'src/common/containers/form/models/form-definition.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { registrationFormFieldsFnc } from '../registration.config';
 

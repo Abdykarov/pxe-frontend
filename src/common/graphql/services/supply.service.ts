@@ -12,7 +12,6 @@ import {
     findCodelistsByTypes,
     findSupplierDocumentsByComodity,
 } from 'src/common/graphql/queries/supply';
-import { toggleOverlay } from '../mutation/overlay';
 import { saveElectricitySupplyPoint } from '../mutation/supply';
 
 @Injectable({
@@ -20,38 +19,40 @@ import { saveElectricitySupplyPoint } from '../mutation/supply';
 })
 export class SupplyService {
 
-    constructor(private apollo: Apollo) { }
+    constructor(
+        private apollo: Apollo,
+    ) {}
 
     public getSuppliers(commodityType: CommodityType) {
         return this.apollo
             .watchQuery<any>({
                 query: findAllSuppliers,
                 variables: {
-                    commodityType: commodityType === CommodityType.ELECTRICITY ? 'ELECTRICITY' : 'GAS',
+                    commodityType,
                 },
             })
             .valueChanges;
     }
 
-    public getCodelistByType(type: String, locale: String) {
+    public getCodelistByType(type: string, locale: string) {
         return this.apollo
             .watchQuery<any>({
                 query: getCodelistByType,
                 variables: {
-                    type: type,
-                    locale: locale,
+                    type,
+                    locale,
                 },
             })
             .valueChanges;
     }
 
-    public findCodelistsByTypes(type: String, locale: String) {
+    public findCodelistsByTypes(types: string[], locale: string) {
         return this.apollo
             .watchQuery<any>({
                 query: findCodelistsByTypes,
                 variables: {
-                    types: type,
-                    locale: locale,
+                    types,
+                    locale,
                 },
             })
             .valueChanges;
@@ -62,8 +63,8 @@ export class SupplyService {
             .watchQuery<any>({
                 query: findSupplierDocumentsByComodity,
                 variables: {
-                    supplierId: supplierId,
-                    commodityType: commodityType === CommodityType.ELECTRICITY ? 'ELECTRICITY' : 'GAS',
+                    supplierId,
+                    commodityType,
                 },
             })
             .valueChanges;
@@ -74,7 +75,7 @@ export class SupplyService {
             .mutate({
                 mutation: saveElectricitySupplyPoint,
                 variables: {
-                    supplyPoint: supplyPoint,
+                    supplyPoint,
                 },
             });
     }

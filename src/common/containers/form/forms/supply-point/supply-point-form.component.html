@@ -22,9 +22,10 @@
         [validationMessages]="formFields.validationMessages.commodityType"
     ></lnd-form-field>
     <lnd-select
+        [bindValue]="null"
         [error]="formError.supplierId || form.controls.supplierId.errors"
         label="Dodavatel"
-        [options]="commodityTypeOptions"
+        [options]="suppliers && suppliers[form.controls.commodityType.value]"
         [parentForm]="form"
         [selectName]="'supplierId'"
         [success]="form.controls.supplierId.valid && (form.controls.supplierId.touched || formError.supplierId)"
@@ -34,6 +35,8 @@
         [validationMessages]="formFields.validationMessages.supplierId">
     </lnd-select>
     <lnd-form-field
+        [appendButtonIcon]="helpDocuments && helpDocuments['name'] ? 'icon--info' : null"
+        (appendButtonAction)="showHelp('name', 'Název odběrného místa')"
         [error]="formError.name || form.controls.name.errors"
         [formControl]="form.controls.name"
         [id]="'name'"
@@ -45,6 +48,8 @@
     ></lnd-form-field>
     <lnd-form-field
         *ngIf="form.controls.ean.status !== 'DISABLED'"
+        [appendButtonIcon]="helpDocuments && helpDocuments['ean'] ? 'icon--info' : null"
+        (appendButtonAction)="showHelp('ean', 'EAN')"
         [error]="formError.ean || form.controls.ean.errors"
         [formControl]="form.controls.ean"
         [id]="'ean'"
@@ -56,6 +61,8 @@
     ></lnd-form-field>
     <lnd-form-field
         *ngIf="form.controls.eic.status !== 'DISABLED'"
+        [appendButtonIcon]="helpDocuments && helpDocuments['eic'] ? 'icon--info' : null"
+        (appendButtonAction)="showHelp('eic', 'EIC')"
         [error]="formError.eic || form.controls.eic.errors"
         [formControl]="form.controls.eic"
         [id]="'eic'"
@@ -65,6 +72,8 @@
         [validationMessages]="formFields.validationMessages.eic"
     ></lnd-form-field>
     <lnd-form-field
+        [appendButtonIcon]="helpDocuments && helpDocuments['address'] ? 'icon--info' : null"
+        (appendButtonAction)="showHelp('address', 'Adresa odběrného místa')"
         [error]="formError.address || form.controls.address.errors"
         [formControl]="form.controls.address"
         [id]="'address'"
@@ -75,9 +84,11 @@
     ></lnd-form-field>
     <lnd-select
         *ngIf="form.controls.distributionRateId.status !== 'DISABLED'"
+        [appendButtonIcon]="helpDocuments && helpDocuments['distributionRateId'] ? 'icon--info' : null"
+        (appendButtonAction)="showHelp('distributionRateId', 'Distribučná sazba')"
         [error]="formError.distributionRateId || form.controls.distributionRateId.errors"
         label="Distribučná sazba"
-        [options]="commodityTypeOptions"
+        [options]="codeLists && codeLists['DSTSAZ']"
         [parentForm]="form"
         [selectName]="'distributionRateId'"
         [success]="form.controls.distributionRateId.valid && (form.controls.distributionRateId.touched || formError.distributionRateId)"
@@ -86,9 +97,11 @@
     </lnd-select>
     <lnd-select
         *ngIf="form.controls.circuitBreakerId.status !== 'DISABLED'"
+        [appendButtonIcon]="helpDocuments && helpDocuments['circuitBreakerId'] ? 'icon--info' : null"
+        (appendButtonAction)="showHelp('circuitBreakerId', 'Jistič')"
         [error]="formError.circuitBreakerId || form.controls.circuitBreakerId.errors"
         label="Jistič"
-        [options]="commodityTypeOptions"
+        [options]="codeLists && codeLists['JISTIC']"
         [parentForm]="form"
         [selectName]="'circuitBreakerId'"
         [success]="form.controls.circuitBreakerId.valid && (form.controls.circuitBreakerId.touched || formError.circuitBreakerId)"
@@ -97,6 +110,8 @@
     </lnd-select>
     <lnd-form-field
         *ngIf="form.controls.annualConsumptionNT.status !== 'DISABLED'"
+        [appendButtonIcon]="helpDocuments && helpDocuments['annualConsumptionNT'] ? 'icon--info' : null"
+        (appendButtonAction)="showHelp('annualConsumptionNT', 'Roční spotřeba elektřiny (nízký tarif)')"
         [error]="formError.annualConsumptionNT || form.controls.annualConsumptionNT.errors"
         [formControl]="form.controls.annualConsumptionNT"
         [id]="'annualConsumptionNT'"
@@ -108,6 +123,8 @@
     ></lnd-form-field>
     <lnd-form-field
         *ngIf="form.controls.annualConsumptionVT.status !== 'DISABLED'"
+        [appendButtonIcon]="helpDocuments && helpDocuments['annualConsumptionVT'] ? 'icon--info' : null"
+        (appendButtonAction)="showHelp('annualConsumptionVT', 'Roční spotřeba elektřiny (vysoký tarif)')"
         [error]="formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors"
         [formControl]="form.controls.annualConsumptionVT"
         [id]="'annualConsumptionVT'"
@@ -119,6 +136,8 @@
     ></lnd-form-field>
     <lnd-form-field
         *ngIf="form.controls.annualConsumption.status !== 'DISABLED'"
+        [appendButtonIcon]="helpDocuments && helpDocuments['annualConsumption'] ? 'icon--info' : null"
+        (appendButtonAction)="showHelp('annualConsumption', 'Roční spotřeba plynu')"
         [error]="formError.annualConsumption || form.controls.annualConsumption.errors"
         [formControl]="form.controls.annualConsumption"
         [id]="'annualConsumption'"
@@ -129,6 +148,8 @@
         [validationMessages]="formFields.validationMessages.annualConsumption"
     ></lnd-form-field>
     <lnd-datepicker
+        [appendButtonIcon]="helpDocuments && helpDocuments['expirationDate'] ? 'icon--info' : null"
+        (appendButtonAction)="showHelp('expirationDate', 'Ukončení platnosti stávající smlouvy')"
         [datepickerName]="'expirationDate'"
         [error]="formError.expirationDate || form.controls.expirationDate.errors"
         id="datepicker-1"
@@ -141,6 +162,7 @@
     >
     </lnd-datepicker>
     <lnd-button
+        *ngIf="!isStandalone"
         type="primary"
         (action)="submitForm()"
         [isDisabled]="formLoading"
@@ -152,7 +174,7 @@
         [isDisabled]="formLoading"
         label="Uložit">
     </lnd-button>
-    <a (click)="resetForm()">reset</a>
+    <a (click)="resetFormError()">reset</a>
     <pre>
     {{form.value | json}}
     </pre>

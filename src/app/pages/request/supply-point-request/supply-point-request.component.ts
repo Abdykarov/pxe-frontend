@@ -2,14 +2,15 @@ import {
     ChangeDetectorRef,
     Component,
 } from '@angular/core';
-import { Router } from '@angular/router';
 
+import { Apollo } from 'apollo-angular';
+
+import * as mutations from 'src/common/graphql/mutations';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { formFields } from 'src/common/containers/form-container/supply-point-form/supply-point-form.config';
-import { IFieldError } from 'src/common/containers/form-container/models/form-definition.model';
-import { OverlayService } from 'src/common/graphql/services/overlay.service';
-import { parseRestAPIErrors } from 'src/common/utils/';
+import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
+import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
+import { parseGraphQLErrors } from 'src/common/utils/';
 
 @Component({
     templateUrl: './supply-point-request.component.html',
@@ -17,42 +18,41 @@ import { parseRestAPIErrors } from 'src/common/utils/';
 })
 export class SupplyPointRequestComponent extends AbstractComponent {
     public formFields = formFields;
-    public loginGlobalError: string[] = [];
+    public formSent = false;
+    public globalError: string[] = [];
     public fieldError: IFieldError = {};
-    public submitLoginFormLoading = false;
+    public formLoading = false;
 
     constructor(
+        private apollo: Apollo,
         private authService: AuthService,
         private cd: ChangeDetectorRef,
-        private overlayService: OverlayService,
-        private router: Router,
     ) {
         super();
     }
 
     public submitLoginForm = (values) => {
-        this.submitLoginFormLoading = true;
-        this.loginGlobalError = [];
+        this.formLoading = true;
+        this.globalError = [];
         this.fieldError = {};
-        console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold', values);
-        return;
-
-        /*
-        const {fieldError, globalError} = parseGraphQLErrors(error);
-        this.fieldError = fieldError;
-        * */
-
-        this.authService
-            .login(values)
+        this.apollo
+            .mutate({
+                mutation: mutations.saveElectricitySupplyPoint,
+                variables: values,
+            })
             .subscribe(
-                () => {
-                    this.submitLoginFormLoading = false;
-                    console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold', values);
+                (data) => {
+                    this.formLoading = false;
+                    this.formSent = true;
+                    this.cd.markForCheck();
+                    // TODO redirect to next step
+                    console.log('%c ***** SAVED *****', 'background: #bada55; color: #000; font-weight: bold', data);
                 },
-                error => {
-                    const message = parseRestAPIErrors(error);
-                    this.submitLoginFormLoading = false;
-                    this.loginGlobalError.push(message);
+                (error) => {
+                    this.formLoading = false;
+                    const { fieldError, globalError } = parseGraphQLErrors(error);
+                    this.fieldError = fieldError;
+                    this.globalError = globalError;
                     this.cd.markForCheck();
                 });
 
