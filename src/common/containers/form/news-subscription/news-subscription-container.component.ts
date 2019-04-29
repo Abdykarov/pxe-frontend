@@ -5,7 +5,7 @@ import {
 
 import { Apollo } from 'apollo-angular';
 
-import { RegisterAbstractComponent } from 'src/common/containers/form-container/abstract/register-abstract.component';
+import { RegisterAbstractComponent } from 'src/common/containers/form/abstract/register-abstract.component';
 import { Router } from '@angular/router';
 import { SignUpType } from '../models/form-definition.model';
 

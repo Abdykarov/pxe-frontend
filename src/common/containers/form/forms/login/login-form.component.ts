@@ -1,7 +1,4 @@
-import {
-    ActivatedRoute,
-    Router,
-} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import {
     Component,
     EventEmitter,
@@ -17,8 +14,8 @@ import {
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
-import { IForm } from '../models/form-definition.model';
 import { AbstractComponent } from 'src/common/abstract.component';
+import { IForm } from '../../models/form-definition.model';
 
 @Component({
     selector: 'pxe-login-form',
@@ -88,7 +85,7 @@ export class LoginFormComponent extends AbstractComponent implements OnInit {
         }
     }
 
-    public action(evt) {
+    public action = (evt) => {
         evt.preventDefault();
         window.open('/forgotten-password');
     }

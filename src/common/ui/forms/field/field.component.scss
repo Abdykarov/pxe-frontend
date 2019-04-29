@@ -266,7 +266,7 @@ textarea.form-control--not-empty {
 	height: $input-height;
 	line-height: $input-line-height;
 	background-color: $input-bg;
-	pointer-events: none;
+	//pointer-events: none;
 
 	&::after {
 		position: absolute;

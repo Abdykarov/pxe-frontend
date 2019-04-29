@@ -7,7 +7,7 @@ import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import {
     IForm,
     SignUpType,
-} from 'src/common/containers/form-container/models/form-definition.model';
+} from 'src/common/containers/form/models/form-definition.model';
 
 export function registrationFormFieldsFnc(signUpType: SignUpType): IForm {
     return {
@@ -38,8 +38,8 @@ export function registrationFormFieldsFnc(signUpType: SignUpType): IForm {
                         'consent',
                         SignUpType.NewsSubscription === signUpType ? 'newsSubscription' : 'signUp',
                         'required',
-                    ]
-                    , errorFieldMessages,
+                    ],
+                    errorFieldMessages,
                 ),
             },
         },

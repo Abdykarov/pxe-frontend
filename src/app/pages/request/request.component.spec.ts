@@ -5,6 +5,7 @@ import {
 } from '@angular/core/testing';
 
 import { RequestComponent } from './request.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('RequestComponent', () => {
     let component: RequestComponent;
@@ -14,6 +15,9 @@ describe('RequestComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 RequestComponent,
+            ],
+            imports: [
+                RouterTestingModule,
             ],
         })
         .compileComponents();
