@@ -161,17 +161,20 @@
         [validationMessages]="formFields.validationMessages.expirationDate"
     >
     </lnd-datepicker>
-    <lnd-button
-        *ngIf="!isStandalone"
-        type="primary"
-        (action)="submitForm()"
-        [isDisabled]="formLoading"
-        label="Uložit a vybrat nabídku">
-    </lnd-button>
-    <lnd-button
-        type="secondary"
-        (action)="submitForm()"
-        [isDisabled]="formLoading"
-        label="Uložit">
-    </lnd-button>
+    <div class="text-center">
+        <lnd-button
+            *ngIf="!isStandalone"
+            type="primary"
+            (action)="submitForm()"
+            [isDisabled]="formLoading"
+            label="Uložit a vybrat nabídku">
+        </lnd-button>
+        <lnd-button
+            type="secondary"
+            (action)="submitForm()"
+            [isDisabled]="formLoading"
+            customClass="mt-3"
+            label="Uložit">
+        </lnd-button>
+    </div>
 </form>
