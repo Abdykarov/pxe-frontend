@@ -1,9 +1,9 @@
 <div
     class="form-group"
     [formGroup]="parentForm">
-    <div class="form-control-case">
+    <div class="form-control-case input-group--append">
         <div
-            class="form-control-wrapper input-group--append"
+            class="form-control-wrapper"
             [class.invalid-input]="!!error && !!touched"
             [class.disabled-input]="!!disabledField">
             <input
