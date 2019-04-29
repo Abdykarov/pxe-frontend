@@ -56,6 +56,8 @@ $custom-control-indicator-checked-bg:                    $custom-control-indicat
 $custom-control-indicator-checked-disabled-bg:           transparent;
 $custom-control-label-disabled-color:                    rgba($input-color, .4);
 
+$custom-control-spacer-x:                     ( $spacer * 2 );
+
 $custom-radio-filling-size:                   7px;
 $custom-radio-indicator-border-radius:        50%;
 $custom-radio-indicator-icon-checked:         none;

@@ -165,6 +165,19 @@
             </lnd-form-field>
         </div>
     </div>
+    <h4>Inline</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-form-field
+                id="normal-radio"
+                label="Inline radio label"
+                [type]="'RADIOGROUP'"
+                [radioGroupItemClass]="'custom-control-inline'"
+                [options]="config.inlineRadiogroupOptions"
+                [defaultRadioGroupValue]="config.options[1].key">
+            </lnd-form-field>
+        </div>
+    </div>
 </div>
 <h3>Checkbox</h3>
 <div class="static-pages">

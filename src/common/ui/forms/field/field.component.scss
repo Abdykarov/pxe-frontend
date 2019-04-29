@@ -57,7 +57,7 @@
 	&:focus,
 	&.focus {
 		box-shadow: none;
-		
+
 		& ~ .input-group-append {
 			color: $input-color;
 		}
@@ -333,6 +333,12 @@ textarea.form-control--not-empty {
 		color: $input-disabled-color;
 		cursor: not-allowed;
 		pointer-events: none;
+	}
+}
+
+.custom-control-inline {
+	&:last-child {
+		margin-right: 0;
 	}
 }
 
