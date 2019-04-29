@@ -28,7 +28,7 @@ export class LoginComponent extends AbstractComponent {
         super();
     }
 
-    public submitLoginForm = (values) => {
+    public submitForm = (values) => {
         this.submitLoginFormLoading = true;
         this.loginGlobalError = [];
         this.authService
@@ -36,7 +36,7 @@ export class LoginComponent extends AbstractComponent {
             .subscribe(
                 () => {
                     this.submitLoginFormLoading = false;
-                    this.router.navigate(['/secured']);
+                    this.router.navigate(['/secured/request/supply-point']);
                 },
                 error => {
                     const message = parseRestAPIErrors(error);
@@ -45,5 +45,10 @@ export class LoginComponent extends AbstractComponent {
                     this.cd.markForCheck();
                 });
 
+    }
+
+    public forgottenPasswordAction = ($event) => {
+        $event.preventDefault();
+        window.open('/forgotten-password');
     }
 }

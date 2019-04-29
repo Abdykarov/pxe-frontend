@@ -1,7 +1,7 @@
 <ng-template #hrefToSecuringTemplate>
     Souhlasím se
     <a href="javascript: void(0);">
-        <span (click)="openConsent($event)">
+        <span (click)="handleCustomAction($event)">
            zásadami bezpečnosti
         </span>
     </a>
@@ -12,50 +12,52 @@
         <div class="row">
             <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-3 col-lg-4 offset-lg-4">
                 <div class="px-3 px-md-0">
-                    <ng-container *ngIf="!subscriptionFormSent">
+                    <ng-container *ngIf="!formSent">
                         <h3 class="h3--public">
                             Chci mít také přístup k&nbsp;jiným cenám, možnost&nbsp;měnit dodavatele jen na&nbsp;jedno kliknutí a&nbsp;zbavit se starostí s&nbsp;převodem.
                         </h3>
-                        <lnd-alert *ngIf="subscriptionGlobalError.length"
-                                   type="danger">
-                            <ng-container *ngFor="let globalError of subscriptionGlobalError">
-                                {{globalError}}<br>
+                        <lnd-alert
+                            *ngIf="globalError.length"
+                            type="danger">
+                            <ng-container *ngFor="let error of globalError">
+                                {{ error }}<br>
                             </ng-container>
                         </lnd-alert>
-                        <form [formGroup]="subscriptionForm"
-                              (keydown)="resetCustomFieldError()"
-                              (change)="resetCustomFieldError()"
-                              autocomplete="off">
+                        <form
+                            [formGroup]="form"
+                            (keydown)="resetCustomFieldError()"
+                            (change)="resetCustomFieldError()"
+                            autocomplete="off">
                             <lnd-form-field
-                                [error]="subscriptionFormError.email || subscriptionForm.controls.email.errors"
-                                [formControl]="subscriptionForm.controls.email"
+                                [error]="formError.email || form.controls.email.errors"
+                                [formControl]="form.controls.email"
                                 [id]="'email'"
                                 label="E-mail"
-                                [success]="subscriptionForm.controls.email.valid && (subscriptionForm.controls.email.touched || subscriptionFormError.email)"
-                                [touched]="subscriptionForm.controls.email.touched || subscriptionFormError.email"
-                                [validationMessages]="subscriptionFormFields.validationMessages.email"
+                                [success]="form.controls.email.valid && (form.controls.email.touched || formError.email)"
+                                [touched]="form.controls.email.touched || formError.email"
+                                [validationMessages]="formFields.validationMessages.email"
                                 [lightField]="true"
                             ></lnd-form-field>
                             <lnd-form-field
-                                [error]="subscriptionFormError.consent || subscriptionForm.controls.consent.errors"
-                                [formControl]="subscriptionForm.controls.consent"
+                                [error]="formError.consent || form.controls.consent.errors"
+                                [formControl]="form.controls.consent"
                                 [id]="'consent'"
                                 label=""
                                 [labelTemplate]="hrefToSecuringTemplate"
-                                [success]="subscriptionForm.controls.consent.valid && (subscriptionForm.controls.consent.touched || subscriptionFormError.consent)"
-                                [touched]="subscriptionForm.controls.consent.touched || subscriptionFormError.consent"
+                                [success]="form.controls.consent.valid && (form.controls.consent.touched || formError.consent)"
+                                [touched]="form.controls.consent.touched || formError.consent"
                                 [type]="'CHECKBOX'"
-                                [validationMessages]="subscriptionFormFields.validationMessages.consent"
+                                [validationMessages]="formFields.validationMessages.consent"
                             ></lnd-form-field>
                             <lnd-button
                                 type="primary"
                                 (action)="submitForm()"
-                                [isDisabled]="submitSubscriptionLoading"
+                                [isDisabled]="!!formLoading"
                                 label="Odeslat">
                             </lnd-button>
                         </form>
                     </ng-container>
-                    <ng-container *ngIf="subscriptionFormSent">
+                    <ng-container *ngIf="formSent">
                         <img
                             class="mb-2"
                             width="122"

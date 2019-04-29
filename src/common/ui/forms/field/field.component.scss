@@ -199,6 +199,13 @@ textarea.form-control--not-empty {
 	border-radius: $input-border-radius;
 	overflow: hidden;
 
+	&.disabled-input {
+		& + .control-label {
+			cursor: not-allowed;
+			pointer-events: none;
+		}
+	}
+
 	& ~ .invalid-feedback {
 		display: none;
 		font-size: $small-font-size;
@@ -212,13 +219,6 @@ textarea.form-control--not-empty {
 
 		&.form-control--without-feedback ~ .invalid-feedback {
 			display: none;
-		}
-	}
-
-	&.disabled-input {
-		& + .control-label {
-			cursor: not-allowed;
-			pointer-events: none;
 		}
 	}
 }

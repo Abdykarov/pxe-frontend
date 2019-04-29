@@ -46,6 +46,11 @@ import {
     progressBarPageRoutes,
 } from 'src/static/organisms/progress-bar/progress-bar.module';
 
+import {
+    NewSupplyPointPageModule,
+    newSupplyPointPageRoutes,
+} from 'src/static/pages/new-supply-point/page.module';
+
 
 const routes: Routes = [
     {
@@ -59,6 +64,7 @@ const routes: Routes = [
             ...formsPageRoutes,
             ...iconsPageRoutes,
             ...progressBarPageRoutes,
+            ...newSupplyPointPageRoutes,
             ...typographyPageRoutes,
             {
                 path: '**',
@@ -77,6 +83,7 @@ const routes: Routes = [
         FormsPageModule,
         IconsPageModule,
         ProgressBarPageModule,
+        NewSupplyPointPageModule,
         RouterModule.forChild(routes),
         TypographyPageModule,
     ],

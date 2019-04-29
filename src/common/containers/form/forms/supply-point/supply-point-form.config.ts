@@ -84,6 +84,11 @@ export const formFields: IForm = {
     },
 };
 
+export const codeListTypes = [
+    'DSTSAZ',
+    'JISTIC',
+];
+
 export const commodityTypeOptions: Array<IOption> = [
     {
         key: CommodityType.POWER,
