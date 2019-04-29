@@ -43,6 +43,27 @@
             </lnd-form-field>
         </div>
     </div>
+    <h4>Subtext</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-form-field
+                id="subtext-input"
+                label="Input se subtextem"
+                placeholder="Placeholder text"
+                subtext="Input se subtextem">
+            </lnd-form-field>
+        </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                id="subtext-error-input"
+                label="Input se subtextem a error message"
+                value="Filled input"
+                error="This field is required field is required field is required field."
+                subtext="Input se subtextem"
+                [touched]="true">
+            </lnd-form-field>
+        </div>
+    </div>
     <h4>Light</h4>
     <div class="row bg--body pt-3 mb-4">
         <div class="col-md-4">
@@ -59,6 +80,26 @@
                 error="This field is required"
                 [touched]="true"
                 [lightField]="true">
+            </lnd-form-field>
+        </div>
+    </div>
+    <h4>Input with appendtext</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-form-field
+                id="appendtext-input"
+                label="Input s appendtext"
+                placeholder="Placeholder text"
+                appendText="CZK">
+            </lnd-form-field>
+        </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                [disabledField]="true"
+                id="appendtext-input"
+                label="Input s appendtext"
+                placeholder="Placeholder text"
+                appendText="CZK">
             </lnd-form-field>
         </div>
     </div>
@@ -91,6 +132,19 @@
                 label="Radio label"
                 [type]="'RADIOGROUP'"
                 [options]="config.options"
+                [defaultRadioGroupValue]="config.options[1].key">
+            </lnd-form-field>
+        </div>
+    </div>
+    <h4>Inline</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-form-field
+                id="normal-radio"
+                label="Inline radio label"
+                [type]="'RADIOGROUP'"
+                [radioGroupItemClass]="'custom-control-inline'"
+                [options]="config.inlineRadiogroupOptions"
                 [defaultRadioGroupValue]="config.options[1].key">
             </lnd-form-field>
         </div>

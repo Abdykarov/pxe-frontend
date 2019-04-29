@@ -17,7 +17,7 @@ $input-focus-border-color:           $primary;
 $input-border-color-interactive:     $gray-200;
 $input-border-radius:                $border-radius;
 $input-placeholder-color:            transparent;
-$input-disabled-bg:                  rgba($input-bg, .4);
+$input-disabled-bg:                  $disabled;
 $input-disabled-color:               rgba($input-color, .2);
 $input-disabled-border-color:        rgba($input-border-color, .4);
 $input-group-addon-bg:               transparent;
@@ -55,6 +55,8 @@ $custom-control-indicator-checked-border-color:          $gray-100;
 $custom-control-indicator-checked-bg:                    $custom-control-indicator-bg;
 $custom-control-indicator-checked-disabled-bg:           transparent;
 $custom-control-label-disabled-color:                    rgba($input-color, .4);
+
+$custom-control-spacer-x:                     ( $spacer * 2 );
 
 $custom-radio-filling-size:                   7px;
 $custom-radio-indicator-border-radius:        50%;
