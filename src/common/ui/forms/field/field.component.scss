@@ -57,6 +57,10 @@
 	&:focus,
 	&.focus {
 		box-shadow: none;
+		
+		& ~ .input-group-append {
+			color: $input-color;
+		}
 	}
 
 	&[disabled],
@@ -66,6 +70,10 @@
 		border-bottom-color: $input-disabled-border-color;
 		cursor: not-allowed;
 		pointer-events: none;
+
+		& ~ .input-group-append {
+			color: $input-disabled-color;
+		}
 	}
 
 	&[disabled],
@@ -197,6 +205,7 @@ textarea.form-control--not-empty {
 }
 
 .form-control-wrapper {
+	position: relative;
 	border-radius: $input-border-radius;
 	overflow: hidden;
 
@@ -262,11 +271,11 @@ textarea.form-control--not-empty {
 .input-group-prepend,
 .input-group-append {
 	position: absolute;
-	top: $form-group-padding-top;
-	padding-right: ( $spacer * .75 );
+	top: 0;
+	padding: 0 ( $spacer * .75 );
 	height: ( $input-height - $input-border-width );
 	line-height: ( $input-height - $input-border-width );
-	background-color: $input-bg;
+	background-color: transparent;
 	color: $gray-100;
 	font-size: $input-font-size;
 	pointer-events: none;

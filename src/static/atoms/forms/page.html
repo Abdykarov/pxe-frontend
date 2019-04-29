@@ -116,10 +116,18 @@
     <div class="row">
         <div class="col-md-4">
             <lnd-form-field
-                id="subtext-input"
-                label="Input se subtextem"
+                id="appendtext-input"
+                label="Input s appendtext"
                 placeholder="Placeholder text"
-                subtext="Input se subtextem"
+                appendText="CZK">
+            </lnd-form-field>
+        </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                [disabledField]="true"
+                id="appendtext-input"
+                label="Input s appendtext"
+                placeholder="Placeholder text"
                 appendText="CZK">
             </lnd-form-field>
         </div>
