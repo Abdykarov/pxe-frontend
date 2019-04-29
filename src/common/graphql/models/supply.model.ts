@@ -1,5 +1,5 @@
 export enum CommodityType {
-    ELECTRICITY = 'ELECTRICITY',
+    POWER = 'POWER',
     GAS = 'GAS',
 }
 

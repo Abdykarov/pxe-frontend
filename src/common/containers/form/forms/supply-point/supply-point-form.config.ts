@@ -8,7 +8,7 @@ import { IOption } from 'src/common/ui/forms/models/option.model';
 export const formFields: IForm = {
     controls: {
         commodityType: [
-            CommodityType.ELECTRICITY,
+            CommodityType.POWER,
             [
                 Validators.required,
             ],
@@ -86,7 +86,7 @@ export const formFields: IForm = {
 
 export const commodityTypeOptions: Array<IOption> = [
     {
-        key: CommodityType.ELECTRICITY,
+        key: CommodityType.POWER,
         label: 'elektřina',
     },
     {
@@ -96,6 +96,6 @@ export const commodityTypeOptions: Array<IOption> = [
 ];
 
 export const commodityTypeFields = {
-    [CommodityType.ELECTRICITY]: ['ean', 'distributionRateId', 'circuitBreakerId', 'annualConsumptionNT', 'annualConsumptionVT'],
+    [CommodityType.POWER]: ['ean', 'distributionRateId', 'circuitBreakerId', 'annualConsumptionNT', 'annualConsumptionVT'],
     [CommodityType.GAS]: ['eic', 'annualConsumption'],
 };

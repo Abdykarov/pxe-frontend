@@ -79,7 +79,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
                 this.helpDocuments = val && val.sampleDocuments ? convertArrayToObject(val.sampleDocuments, 'type') : {};
             });
 
-        this.setFormByCommodity(CommodityType.ELECTRICITY);
+        this.setFormByCommodity(CommodityType.POWER);
         this.loadCodelists();
     }
 
