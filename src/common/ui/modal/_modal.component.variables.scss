@@ -10,8 +10,8 @@ $modal-lg:                           620px;
 $modal-md:                           520px;
 $modal-sm:                           420px;
 
-$modal-dialog-margin:                ( $spacer / 2 );
-$modal-dialog-margin-y-sm-up:        ( $spacer / 2 );
+$modal-dialog-margin:                ( $spacer * 2 );
+$modal-dialog-margin-y-sm-up:        ( $spacer * 2 );
 $modal-inner-padding:                $spacer;
 $modal-inner-padding-md:             $spacer;
 
