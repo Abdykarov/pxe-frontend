@@ -1,3 +1,11 @@
+import {
+    AbstractControl,
+    ValidationErrors,
+    ValidatorFn,
+} from '@angular/forms';
+
+import * as R_ from 'ramda-extension';
+
 export class CustomValidators {
 
     static phoneNumber = (phoneNumber) => {
@@ -30,6 +38,24 @@ export class CustomValidators {
 
         return {
             email: true,
+        };
+    }
+
+    static isDecimal = (): ValidatorFn => {
+        const expresion = new RegExp(/^(\d*([\.\,]\d+)?)$/);
+        return (control: AbstractControl): ValidationErrors => {
+            if (control.pristine) {
+                return null;
+            }
+
+            control.markAsTouched();
+            if (R_.isNilOrEmpty(control.value) || expresion.test(control.value)) {
+                return null;
+            }
+
+            return {
+                decimal: true,
+            };
         };
     }
 }
