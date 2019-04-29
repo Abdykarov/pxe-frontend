@@ -3,7 +3,7 @@
     class="form-group ng-select-custom">
     <label
         (click)="select.open()"
-        class="control-label">
+        class="ng-select-label">
         {{ label }}
     </label>
     <ng-select
@@ -15,7 +15,6 @@
         bindValue="key"
         bindLabel="label"
         [placeholder]="placeholder"
-        class="form-control"
         [class.is-disabled]="disabledField"
         [attr.tabindex]="!!disabledField ? '-1' : null"
         [attr.disabled]="!!disabledField ? 'disabled' : null"
