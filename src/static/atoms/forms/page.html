@@ -3,35 +3,6 @@
         <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
     </div>
 </div>
-<h3>Selectbox</h3>
-<div class="static-pages">
-    <h4>Normal</h4>
-    <form [formGroup]="selectBoxes">
-        <div class="row">
-            <div class="col-md-4">
-                <lnd-select
-                    label="Simple selectbox"
-                    subtext="Select subtext"
-                    [options]="config.selectOptions"
-                    [parentForm]="selectBoxes"
-                    [selectName]="'simpleSelect'"
-                    placeholder="placeholder">
-                </lnd-select>
-            </div>
-            <div class="col-md-4">
-                <lnd-select
-                    label="Searchable selectbox"
-                    subtext="Select subtext"
-                    [options]="config.selectOptions"
-                    [parentForm]="selectBoxes"
-                    searchable="true"
-                    [selectName]="'searchableSelect'"
-                    placeholder="placeholder">
-                </lnd-select>
-            </div>
-        </div>
-    </form>
-</div>
 <h3>Input</h3>
 <div class="static-pages">
     <h4>Normal</h4>
@@ -177,33 +148,74 @@
         </div>
     </div>
 </div>
+<h3>Selectbox</h3>
+<div class="static-pages">
+    <h4>Normal</h4>
+    <form [formGroup]="selectBoxes">
+        <div class="row">
+            <div class="col-md-4">
+                <lnd-select
+                    label="Simple selectbox"
+                    subtext="Select subtext"
+                    [options]="config.selectOptions"
+                    [parentForm]="selectBoxes"
+                    [selectName]="'simpleSelect'"
+                    placeholder="placeholder">
+                </lnd-select>
+            </div>
+            <div class="col-md-4">
+                <lnd-select
+                    label="Searchable selectbox"
+                    subtext="Select subtext"
+                    [options]="config.selectOptions"
+                    [parentForm]="selectBoxes"
+                    searchable="true"
+                    [selectName]="'searchableSelect'"
+                    placeholder="placeholder">
+                </lnd-select>
+            </div>
+            <div class="col-md-4">
+                <lnd-select
+                    label="Error selectbox"
+                    [options]="config.selectOptions"
+                    [parentForm]="selectBoxes"
+                    searchable="true"
+                    [error]="'Error message'"
+                    [selectName]="'errorSelect'"
+                    placeholder="Error"
+                    touched="true">
+                </lnd-select>
+            </div>
+        </div>
+    </form>
+</div>
 <h3>Datepickers</h3>
 <div class="static-pages">
-    <form [formGroup]="datepickers" class="row">
-        <div class="col-3 offset-1">
-            <lnd-datepicker
-                [parentForm]="datepickers"
-                [datepickerName]="'datepicker'"
-                [placeholder]="'Datepicker'"
-                label="Datepicker"
-                id="datepicker-1"
-                [touched]="datepickers.controls.datepicker.touched"
-                [error]="datepickers.controls.datepicker.errors"
-                [validationMessages]="{bsDate: 'Špatný formát data'}"
-                >
-            </lnd-datepicker>
-        </div>
-        <div class="col-3 offset-1">
-            <lnd-datepicker
-                [parentForm]="datepickers"
-                [datepickerName]="'errorDatepicker'"
-                [placeholder]="'Datepicker'"
-                label="Datepicker"
-                id="datepicker-2"
-                [error]="'Error message'"
-                [touched]="true"
-                >
-            </lnd-datepicker>
+    <form [formGroup]="datepickers">
+        <div class="row">
+            <div class="col-3">
+                <lnd-datepicker
+                    [parentForm]="datepickers"
+                    [datepickerName]="'datepicker'"
+                    [placeholder]="'Datepicker'"
+                    label="Datepicker"
+                    id="datepicker-1"
+                    [validationMessages]="{bsDate: 'Špatný formát data'}"
+                    >
+                </lnd-datepicker>
+            </div>
+            <div class="col-3">
+                <lnd-datepicker
+                    [parentForm]="datepickers"
+                    [datepickerName]="'errorDatepicker'"
+                    [placeholder]="'Datepicker'"
+                    label="Datepicker"
+                    id="datepicker-2"
+                    [error]="'Error message'"
+                    [touched]="true"
+                    >
+                </lnd-datepicker>
+            </div>
         </div>
     </form>
 </div>

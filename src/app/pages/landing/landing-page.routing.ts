@@ -18,4 +18,4 @@ const routes = [
         RouterModule,
     ],
 })
-export class LandingPageRoutingModule { }
+export class LandingPageRoutingModule {}
