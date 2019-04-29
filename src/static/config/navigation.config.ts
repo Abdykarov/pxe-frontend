@@ -98,10 +98,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Progress bar',
                     'url': '/basic/progress',
                 },
-                // {
-                //     'label': 'Modals',
-                //     'url': '/modals',
-                // },
+                {
+                    'label': 'Modals',
+                    'url': '/basic/modals',
+                },
             ],
         },
         {

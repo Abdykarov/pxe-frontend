@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row static-pages-holder">
     <div class="col">
         <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
     </div>
@@ -7,12 +7,13 @@
     <div class="row">
         <div class="col-6 mb-2">
             <lnd-button
-                type="secondary"
+                type="primary"
                 (action)="toggleNormalModal()"
                 label="Normal modal">
             </lnd-button>
         </div>
-        <div class="col-6 mb-2">
+
+        <!-- <div class="col-6 mb-2">
             <lnd-button
                 type="secondary"
                 (action)="toggleLargeModal()"
@@ -25,7 +26,7 @@
                 (action)="toggleModalWithLogo()"
                 label="Modal with logo">
             </lnd-button>
-        </div>
+        </div> -->
     </div>
 
     <!-- Normal modal to show -->
@@ -52,7 +53,7 @@
     </lnd-modal>
 
     <!-- Large modal to show -->
-    <lnd-modal
+    <!-- <lnd-modal
         title="Large modal title"
         size="lg"
         [isModalOpen]="isLargeModalOpen"
@@ -73,10 +74,10 @@
                 hasOutline="true">
             </lnd-button>
         </div>
-    </lnd-modal>
+    </lnd-modal> -->
 
     <!-- Modal with logo to show -->
-    <lnd-modal
+    <!-- <lnd-modal
         title="Modal with logo title"
         [isModalOpen]="isModalWithLogoOpen"
         logoSrc="assets/images/layout/logo.svg"
@@ -99,5 +100,5 @@
                 hasOutline="true">
             </lnd-button>
         </div>
-    </lnd-modal>
+    </lnd-modal> -->
 </div>
