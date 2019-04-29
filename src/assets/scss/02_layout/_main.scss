@@ -8,11 +8,6 @@
 .main {
 	position: relative;
 
-	// Media queries
-	@include media-breakpoint-up(md) {
-		min-height: calc(100vh - #{$footer-height-tablet});
-	}
-
 	ol,
 	ul {
 		@include reset-list;
