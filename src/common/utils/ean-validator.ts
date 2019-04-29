@@ -2,14 +2,8 @@
 
 export class EanValidator {
     static validate(barcode: string): boolean {
-
-        const format =  {
-            validChars : /^\d+$/,
-            validLength : 18,
-        };
-
-        const validChars = format.validChars;
-        const validLength = format.validLength;
+        const validChars = /^\d+$/;
+        const validLength = 18;
 
         if ( validChars.exec( barcode ) === null ) {
             return false;
