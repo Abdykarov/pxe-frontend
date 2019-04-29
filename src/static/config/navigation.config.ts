@@ -98,10 +98,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Progress bar',
                     'url': '/basic/progress',
                 },
-                // {
-                //     'label': 'Modals',
-                //     'url': '/modals',
-                // },
+                {
+                    'label': 'Modals',
+                    'url': '/basic/modals',
+                },
             ],
         },
         {
@@ -124,6 +124,10 @@ export const staticNavigationConfig: INavigationConfig = [
                 {
                     'label': 'Registration',
                     'url': '/full/registration',
+                },
+                {
+                    'label': 'New supply point',
+                    'url': '/basic/new-supply-point',
                 },
                 // {
                 //     'label': 'Error',

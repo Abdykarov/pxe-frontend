@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 
 export * from './mutation/news-registration';
+export * from './mutation/supply';
 
 export const incrementCounter = gql`
     mutation incrementCounter {
