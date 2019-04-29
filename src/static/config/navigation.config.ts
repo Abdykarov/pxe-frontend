@@ -125,6 +125,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Registration',
                     'url': '/full/registration',
                 },
+                {
+                    'label': 'New supply point',
+                    'url': '/basic/new-supply-point',
+                },
                 // {
                 //     'label': 'Error',
                 //     'url': '/error-404',
