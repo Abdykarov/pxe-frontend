@@ -148,7 +148,7 @@
         </div>
     </div>
 </div>
-<h3>Datepickers</h3>
+<h3>Selectbox</h3>
 <div class="static-pages">
     <h4>Normal</h4>
     <form [formGroup]="selectBoxes">
@@ -182,13 +182,14 @@
                     searchable="true"
                     [error]="'Error message'"
                     [selectName]="'errorSelect'"
-                    placeholder="Error">
+                    placeholder="Error"
+                    touched="true">
                 </lnd-select>
             </div>
         </div>
     </form>
 </div>
-<h3>Selectbox</h3>
+<h3>Datepickers</h3>
 <div class="static-pages">
     <form [formGroup]="datepickers">
         <div class="row">
@@ -199,8 +200,6 @@
                     [placeholder]="'Datepicker'"
                     label="Datepicker"
                     id="datepicker-1"
-                    [touched]="datepickers.controls.datepicker.touched"
-                    [error]="datepickers.controls.datepicker.errors"
                     [validationMessages]="{bsDate: 'Špatný formát data'}"
                     >
                 </lnd-datepicker>

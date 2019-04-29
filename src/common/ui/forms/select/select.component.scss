@@ -219,6 +219,11 @@
 				background-color: darken($input-bg, 4%);
 			}
 		}
+
+		.ng-option-disabled {
+			cursor: default;
+			pointer-events: none;
+		}
 	}
 
 	// Error state
@@ -238,18 +243,4 @@
 			}
 		}
 	}
-}
-
-.input-subtext,
-.invalid-feedback {
-	margin-top: ( $spacer / 4 );
-	font-size: $small-font-size;
-
-	&--disabled {
-		color: $input-disabled-color;
-	}
-}
-
-.invalid-feedback {
-	color: $danger;
 }
