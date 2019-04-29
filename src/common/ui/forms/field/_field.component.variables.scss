@@ -17,7 +17,7 @@ $input-focus-border-color:           $primary;
 $input-border-color-interactive:     $gray-200;
 $input-border-radius:                $border-radius;
 $input-placeholder-color:            transparent;
-$input-disabled-bg:                  rgba($input-bg, .4);
+$input-disabled-bg:                  $disabled;
 $input-disabled-color:               rgba($input-color, .2);
 $input-disabled-border-color:        rgba($input-border-color, .4);
 $input-group-addon-bg:               transparent;

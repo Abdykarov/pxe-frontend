@@ -72,6 +72,7 @@
 		pointer-events: none;
 
 		& ~ .input-group-append {
+			background-color: $input-disabled-bg;
 			color: $input-disabled-color;
 		}
 	}
@@ -275,7 +276,7 @@ textarea.form-control--not-empty {
 	padding: 0 ( $spacer * .75 );
 	height: ( $input-height - $input-border-width );
 	line-height: ( $input-height - $input-border-width );
-	background-color: transparent;
+	background-color: $input-bg;
 	color: $gray-100;
 	font-size: $input-font-size;
 	pointer-events: none;
