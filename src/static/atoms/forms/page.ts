@@ -38,4 +38,6 @@ export class FormsPageComponent {
     }
 
     public clickAction = () => alert('CLICK');
+
+    public trigger = () => alert('Help icon works!');
 }

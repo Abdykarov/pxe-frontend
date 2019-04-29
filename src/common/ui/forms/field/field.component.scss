@@ -206,6 +206,7 @@ textarea.form-control--not-empty {
 }
 
 .form-control-wrapper {
+	width: 100%;
 	position: relative;
 	border-radius: $input-border-radius;
 	overflow: hidden;
@@ -257,6 +258,13 @@ textarea.form-control--not-empty {
 	.control-label {
 		top: 0;
 	}
+
+	&--append-button-icon {
+		// Media queries
+		@include media-breakpoint-down(xs) {
+			padding-right: $input-height;
+		}
+	}
 }
 
 .input-group-prepend,
@@ -279,6 +287,32 @@ textarea.form-control--not-empty {
 	&:hover,
 	& > button:hover {
 		cursor: pointer;
+	}
+}
+
+.input-group-append-help {
+	position: absolute;
+	top: $form-group-padding-top;
+	right: -( $input-height );
+	width: $input-height;
+	height: $input-height;
+	line-height: $input-height;
+	text-align: center;
+
+	// Media queries
+	@include media-breakpoint-down(xs) {
+		right: 0;
+	}
+
+	.btn {
+		@include reset-pa-ma;
+		color: $font-text;
+		height: $input-height;
+		line-height: $input-height;
+
+		.icon {
+			vertical-align: sub;
+		}
 	}
 }
 
