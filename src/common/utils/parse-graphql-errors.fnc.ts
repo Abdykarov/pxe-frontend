@@ -3,7 +3,7 @@ import * as R_ from 'ramda-extension';
 
 import { ErrorResponse } from 'apollo-link-error';
 
-import { IFieldError } from 'src/common/containers/form-container/models/form-definition.model';
+import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 
 const mapValidationFieldArrayToValidationObj = (array) => {
     const prepareKeys = (val) => R.pipe(

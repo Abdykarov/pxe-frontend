@@ -6,10 +6,10 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 import {
     IFieldError,
     SignUpType,
-} from 'src/common/containers/form-container/models/form-definition.model';
+} from 'src/common/containers/form/models/form-definition.model';
 import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
 import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
-import { registrationFormFieldsFnc } from 'src/common/containers/form-container/registration.config';
+import { registrationFormFieldsFnc } from 'src/common/containers/form/registration.config';
 
 @Component({
     selector: 'lnd-landing-page',

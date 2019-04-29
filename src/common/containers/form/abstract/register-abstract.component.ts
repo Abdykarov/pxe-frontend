@@ -8,7 +8,7 @@ import {
     IFieldError,
     IForm,
     SignUpType,
-} from 'src/common/containers/form-container/models/form-definition.model';
+} from 'src/common/containers/form/models/form-definition.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { registrationFormFieldsFnc } from '../registration.config';
 
@@ -28,12 +28,12 @@ export class RegisterAbstractComponent {
         this.registrationFormFields = registrationFormFieldsFnc(signUpType);
     }
 
-    public openConsent(evt) {
+    public openConsent = (evt)  => {
         evt.preventDefault();
         window.open('securing-your-data');
     }
 
-    public submitRegistrationForm(values, isFromSignUp: boolean = false) {
+    public submitRegistrationForm = (values, isFromSignUp: boolean = false) => {
         this.submitRegistrationLoading = true;
         this.registrationGlobalError = [];
         this.registrationFieldError = {};

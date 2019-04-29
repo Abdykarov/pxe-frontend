@@ -2,7 +2,7 @@ import { Validators } from '@angular/forms';
 
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
-import { IForm } from 'src/common/containers/form-container/models/form-definition.model';
+import { IForm } from 'src/common/containers/form/models/form-definition.model';
 
 export const loginFormFields: IForm = {
     controls: {

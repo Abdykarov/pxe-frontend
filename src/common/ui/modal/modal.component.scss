@@ -7,6 +7,9 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
+// Component variables
+@import 'modal.component.variables.scss';
+
 // Bootstrap imports
 @import '~bootstrap/scss/modal';
 @import '~bootstrap/scss/close';
@@ -18,7 +21,7 @@
 }
 
 .modal-header {
-	padding: ( $modal-header-padding-md * 2 ) $modal-header-padding 0;
+	padding: $modal-header-padding $modal-header-padding 0;
 
 	// Media queries
 	@include media-breakpoint-up(md) {
@@ -38,44 +41,10 @@
 			margin-right: -( $spacer / 2 );
 		}
 	}
-
-	&__logo-holder {
-		position: absolute;
-		top: ( $spacer / 2 );
-		left: ( $spacer / 2 );
-		width: $modal-logo-holder-width;
-		height: $modal-logo-holder-height;
-
-		// Media queries
-		@include media-breakpoint-up(md) {
-			position: relative;
-			top: 0;
-			left: auto;
-			text-align: center;
-		}
-	}
-
-	&__logo {
-		height: 100%;
-		width: auto;
-		max-width: 100%;
-	}
-
-	&--with-logo {
-		.modal-title {
-			padding-top: ( $spacer / 2 );
-
-			// Media queries
-			@include media-breakpoint-up(md) {
-				padding-top: 0;
-				padding-right: ( $spacer * 5 );
-			}
-		}
-	}
 }
 
 .modal-body {
-	padding: $modal-inner-padding $modal-inner-padding ( $modal-inner-padding * 2 );
+	padding: $modal-inner-padding;
 
 	// Media queries
 	@include media-breakpoint-up(md) {
@@ -94,7 +63,7 @@
 
 .modal-footer {
 	display: block;
-	padding: 0 $modal-header-padding $modal-header-padding-md;
+	padding: 0 $modal-header-padding $modal-header-padding;
 
 	// Media queries
 	@include media-breakpoint-up(sm) {

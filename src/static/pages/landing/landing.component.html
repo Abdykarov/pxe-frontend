@@ -144,12 +144,12 @@
     >
     </pxe-map-coverage>
     <pxe-news-subscription
-        (openConsentAction)="openConsent($event)"
-        [subscriptionFormFields]="subscriptionFormFields"
-        [submitSubscriptionLoading]="submitSubscriptionLoading"
-        [subscriptionFormSent]="subscriptionFormSent"
-        [subscriptionGlobalError]="subscriptionGlobalError"
-        [subscriptionFieldError]="subscriptionFieldError"
-        (submitSubscriptionForm)="submitSubscriptionForm($event)"
+        (customAction)="openConsent($event)"
+        [formFields]="subscriptionFormFields"
+        [formLoading]="submitSubscriptionLoading"
+        [formSent]="subscriptionFormSent"
+        [globalError]="subscriptionGlobalError"
+        [fieldError]="subscriptionFieldError"
+        (submitAction)="submitSubscriptionForm($event)"
     ></pxe-news-subscription>
 </div>
