@@ -6,35 +6,6 @@
 <h3>Selectbox</h3>
 <div class="static-pages">
     <h4>Normal</h4>
-    <form [formGroup]="selectBoxes">
-        <div class="row">
-            <div class="col-md-4">
-                <lnd-select
-                    label="Simple selectbox"
-                    subtext="Select subtext"
-                    [options]="config.selectOptions"
-                    [parentForm]="selectBoxes"
-                    [selectName]="'simpleSelect'"
-                    placeholder="placeholder">
-                </lnd-select>
-            </div>
-            <div class="col-md-4">
-                <lnd-select
-                    label="Searchable selectbox"
-                    subtext="Select subtext"
-                    [options]="config.selectOptions"
-                    [parentForm]="selectBoxes"
-                    searchable="true"
-                    [selectName]="'searchableSelect'"
-                    placeholder="placeholder">
-                </lnd-select>
-            </div>
-        </div>
-    </form>
-</div>
-<h3>Input</h3>
-<div class="static-pages">
-    <h4>Normal</h4>
     <div class="row">
         <div class="col-md-4">
             <lnd-form-field
@@ -72,27 +43,6 @@
             </lnd-form-field>
         </div>
     </div>
-    <h4>Subtext</h4>
-    <div class="row">
-        <div class="col-md-4">
-            <lnd-form-field
-                id="subtext-input"
-                label="Input se subtextem"
-                placeholder="Placeholder text"
-                subtext="Input se subtextem">
-            </lnd-form-field>
-        </div>
-        <div class="col-md-4">
-            <lnd-form-field
-                id="subtext-error-input"
-                label="Input se subtextem a error message"
-                value="Filled input"
-                error="This field is required field is required field is required field."
-                subtext="Input se subtextem"
-                [touched]="true">
-            </lnd-form-field>
-        </div>
-    </div>
     <h4>Light</h4>
     <div class="row bg--body pt-3 mb-4">
         <div class="col-md-4">
@@ -109,26 +59,6 @@
                 error="This field is required"
                 [touched]="true"
                 [lightField]="true">
-            </lnd-form-field>
-        </div>
-    </div>
-    <h4>Input with appendtext</h4>
-    <div class="row">
-        <div class="col-md-4">
-            <lnd-form-field
-                id="appendtext-input"
-                label="Input s appendtext"
-                placeholder="Placeholder text"
-                appendText="CZK">
-            </lnd-form-field>
-        </div>
-        <div class="col-md-4">
-            <lnd-form-field
-                [disabledField]="true"
-                id="appendtext-input"
-                label="Input s appendtext"
-                placeholder="Placeholder text"
-                appendText="CZK">
             </lnd-form-field>
         </div>
     </div>
@@ -161,19 +91,6 @@
                 label="Radio label"
                 [type]="'RADIOGROUP'"
                 [options]="config.options"
-                [defaultRadioGroupValue]="config.options[1].key">
-            </lnd-form-field>
-        </div>
-    </div>
-    <h4>Inline</h4>
-    <div class="row">
-        <div class="col-md-4">
-            <lnd-form-field
-                id="normal-radio"
-                label="Inline radio label"
-                [type]="'RADIOGROUP'"
-                [radioGroupItemClass]="'custom-control-inline'"
-                [options]="config.inlineRadiogroupOptions"
                 [defaultRadioGroupValue]="config.options[1].key">
             </lnd-form-field>
         </div>
@@ -231,10 +148,61 @@
         </div>
     </div>
 </div>
+<h3>Datepicker</h3>
+<div class="static-pages">
+    <div class="row mb-6">
+        <div class="col-3 offset-1">
+            <lnd-form-field
+                label="Datepicker"
+                id="datepicker-1"
+                [type]="'DATEPICKER'">
+            </lnd-form-field>
+        </div>
+    </div>
+</div>
+<h3>Selectbox</h3>
+<div class="static-pages">
+    <h4>Normal</h4>
+    <form [formGroup]="selectBoxes">
+        <div class="row">
+            <div class="col-md-4">
+                <lnd-select
+                    label="Simple selectbox"
+                    subtext="Select subtext"
+                    [options]="config.selectOptions"
+                    [parentForm]="selectBoxes"
+                    [selectName]="'simpleSelect'">
+                </lnd-select>
+            </div>
+            <div class="col-md-4">
+                <lnd-select
+                    (appendButtonAction)="clickAction()"
+                    appendButtonIcon="icon--info"
+                    label="Searchable selectbox"
+                    subtext="Select subtext"
+                    [options]="config.selectOptions"
+                    [parentForm]="selectBoxes"
+                    searchable="true"
+                    [selectName]="'searchableSelect'">
+                </lnd-select>
+            </div>
+            <div class="col-md-4">
+                <lnd-select
+                    label="Error selectbox"
+                    [options]="config.selectOptions"
+                    [parentForm]="selectBoxes"
+                    searchable="true"
+                    [error]="'Error message'"
+                    [selectName]="'errorSelect'">
+                </lnd-select>
+            </div>
+        </div>
+    </form>
+</div>
 <h3>Datepickers</h3>
 <div class="static-pages">
     <form [formGroup]="datepickers" class="row">
-        <div class="col-3 offset-1">
+        <div class="col-3">
             <lnd-datepicker
                 [parentForm]="datepickers"
                 [datepickerName]="'datepicker'"
@@ -247,7 +215,7 @@
                 >
             </lnd-datepicker>
         </div>
-        <div class="col-3 offset-1">
+        <div class="col-3">
             <lnd-datepicker
                 [parentForm]="datepickers"
                 [datepickerName]="'errorDatepicker'"

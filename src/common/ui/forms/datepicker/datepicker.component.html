@@ -26,13 +26,9 @@
         {{ label }}
     </label>
     <div class="input-group-append">
-        <button
-            (click)="datepicker.toggle()"
-            [attr.aria-expanded]="datepicker.isOpen"
-            type="button"
-            class="btn">
-            <span class="icon icon--calendar"></span>
-        </button>
+        <span
+            class="icon icon--calendar input-group-icon">
+        </span>
     </div>
     <div
         *ngIf="!!appendButtonIcon"
