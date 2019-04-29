@@ -1,58 +1,32 @@
 import { ActivatedRoute } from '@angular/router';
 import {
     Component,
-    EventEmitter,
-    Input,
     OnInit,
-    Output,
 } from '@angular/core';
-import {
-    FormBuilder,
-    FormGroup,
-} from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
-import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
-import { AbstractComponent } from 'src/common/abstract.component';
-import { IForm } from '../../models/form-definition.model';
+import { AbstractFormComponent } from '../../abstract-form.component';
 
 @Component({
     selector: 'pxe-login-form',
     templateUrl: './login-form.component.html',
     styleUrls: ['./login-form.component.scss'],
 })
-export class LoginFormComponent extends AbstractComponent implements OnInit {
-    @Input()
-    public loginFormSent = false;
-
-    @Input()
-    public loginFormFields: IForm;
-
-    @Input()
-    public submitLoginFormLoading = false;
-
-    @Input()
-    public loginGlobalError: string[] = null;
-
-    @Output()
-    public submitLoginForm: EventEmitter<any> = new EventEmitter<any>();
-
-    public loginForm: FormGroup;
-
+export class LoginFormComponent extends AbstractFormComponent implements OnInit {
     public isFromSignUp = false;
     public email = '';
 
     constructor(
-        private fb: FormBuilder,
+        protected fb: FormBuilder,
         private route: ActivatedRoute,
     ) {
-        super();
+        super(fb);
     }
 
     ngOnInit() {
         super.ngOnInit();
-        this.loginForm = this.fb.group(this.loginFormFields.controls);
         this.route.queryParams
             .pipe(
                 takeUntil(this.destroy$),
@@ -60,33 +34,16 @@ export class LoginFormComponent extends AbstractComponent implements OnInit {
             .subscribe(params => {
                 this.email = params['email'];
                 if (this.email) {
-                    const formValue = this.loginForm.value;
+                    const formValue = this.form.value;
                     formValue.username = this.email;
-                    this.loginForm.setValue(formValue);
+                    this.form.setValue(formValue);
                 }
             });
         this.isFromSignUp = !!window.history.state.isFromSignUp;
     }
 
-    public submitForm = () => {
-        R.pipe(
-            R.keys,
-            R.map((field) => {
-                this.loginForm
-                    .get(field)
-                    .markAsTouched({
-                        onlySelf: true,
-                    });
-            }),
-        )(this.loginForm.controls);
-        if (this.loginForm.valid) {
-            this.isFromSignUp = false;
-            this.submitLoginForm.emit(this.loginForm.value);
-        }
-    }
-
-    public action = (evt) => {
-        evt.preventDefault();
+    public labelAction = ($event) => {
+        $event.preventDefault();
         window.open('/forgotten-password');
     }
 }

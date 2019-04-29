@@ -1,12 +1,13 @@
 <ng-template #forgottenPassword>
-    <a (click)="action($event)">
+    <a (click)="labelAction($event)">
         Zapomněli jste heslo?
     </a>
 </ng-template>
-<lnd-alert *ngIf="loginGlobalError.length"
-           type="danger">
-    <ng-container *ngFor="let globalError of loginGlobalError">
-        {{globalError}}<br>
+<lnd-alert
+    *ngIf="globalError.length"
+    type="danger">
+    <ng-container *ngFor="let error of globalError">
+        {{ error }}<br>
     </ng-container>
 </lnd-alert>
 <ng-container *ngIf="isFromSignUp">
@@ -15,34 +16,35 @@
     </lnd-alert>
     <a>Poslat e-mail znovu</a>
 </ng-container>
-<form [formGroup]="loginForm"
-      class="form-container"
-      autocomplete="off">
+<form
+    [formGroup]="form"
+    class="form-container"
+    autocomplete="off">
     <lnd-form-field
-        [error]="loginForm.controls.username.errors"
-        [formControl]="loginForm.controls.username"
+        [error]="form.controls.username.errors"
+        [formControl]="form.controls.username"
         [id]="'username'"
         label="Email"
-        [success]="loginForm.controls.username.valid && loginForm.controls.username.touched"
-        [touched]="loginForm.controls.username.touched"
-        [validationMessages]="loginFormFields.validationMessages.username"
+        [success]="form.controls.username.valid && form.controls.username.touched"
+        [touched]="form.controls.username.touched"
+        [validationMessages]="formFields.validationMessages.username"
     ></lnd-form-field>
     <lnd-form-field
-        [error]="loginForm.controls.password.errors"
-        [formControl]="loginForm.controls.password"
+        [error]="form.controls.password.errors"
+        [formControl]="form.controls.password"
         [id]="'password'"
         label="Heslo"
-        [success]="loginForm.controls.password.valid && loginForm.controls.password.touched"
+        [success]="form.controls.password.valid && form.controls.password.touched"
         type="PASSWORD"
-        [touched]="loginForm.controls.password.touched"
-        [validationMessages]="loginFormFields.validationMessages.password"
+        [touched]="form.controls.password.touched"
+        [validationMessages]="formFields.validationMessages.password"
         [subtextTemplate]="forgottenPassword"
     ></lnd-form-field>
     <div class="text-right">
         <lnd-button
             type="primary"
             (action)="submitForm()"
-            [isDisabled]="submitLoginFormLoading"
+            [isDisabled]="!!formLoading"
             label="Přihlásit se">
         </lnd-button>
     </div>

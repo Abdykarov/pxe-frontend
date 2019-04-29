@@ -13,17 +13,18 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import {
+    codeListTypes,
     commodityTypeFields,
     commodityTypeOptions,
 } from './supply-point-form.config';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import {
-    CommodityType,
-    ICodelistMap,
-} from 'src/common/graphql/models/supply.model';
-import { convertArrayToObject } from 'src/common/utils';
+    convertArrayToObject,
+    transformCodeList,
+    transformSuppliers,
+} from 'src/common/utils';
 import { HelpModalComponent } from 'src/common/containers/modal/modals/help/help-modal.component';
 import { IOption } from 'src/common/ui/forms/models/option.model';
-import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
 import { ModalLoaderService } from 'src/common/containers/modal/modal-loader.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
@@ -138,11 +139,10 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
     }
 
     public loadCodelists = () => {
-        const codeListTypes = ['DSTSAZ', 'JISTIC'];
         this.supplyService.findCodelistsByTypes(codeListTypes, 'cs')
             .pipe(takeUntil(this.destroy$))
             .subscribe(({data}) => {
-                this.codeLists = this.transformCodeList(data.findCodelistsByTypes);
+                this.codeLists = transformCodeList(data.findCodelistsByTypes);
                 console.log('%c ***** codeLists *****', 'background: #bada55; color: #000; font-weight: bold', data, this.codeLists);
                 this.cd.markForCheck();
             });
@@ -152,35 +152,9 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
         this.supplyService.getSuppliers(commodityType)
             .pipe(takeUntil(this.destroy$))
             .subscribe(({data}) => {
-                this.suppliers[commodityType] = this.transformSuppliers(data.findAllSuppliers);
-                console.log('%c ***** suppliers *****', 'background: #bada55; color: #000; font-weight: bold', this.suppliers);
+                this.suppliers[commodityType] = transformSuppliers(data.findAllSuppliers);
+                console.log('%c ***** suppliers *****', 'background: #bada55; color: #000; font-weight: bold', data, this.suppliers);
                 this.cd.markForCheck();
             });
-    }
-
-    // TODO util fnc
-    public transformCodeList = (data: ICodelistMap[]) => {
-        const codeList = convertArrayToObject(data, 'codelistType');
-        return R.map(({codelistItems}) => {
-            return R.map((codelistItem) => {
-                return {
-                    ...codelistItem,
-                    key: codelistItem.code,
-                    value: codelistItem.code,
-                    label: codelistItem.description,
-                };
-            }, codelistItems);
-        }, codeList);
-    }
-
-    public transformSuppliers = (suppliers: ISupplier[]) => {
-        return R.map(supplier => {
-            return {
-                ...supplier,
-                key: supplier.id,
-                value: supplier.id,
-                label: supplier.name,
-            };
-        }, suppliers);
     }
 }

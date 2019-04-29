@@ -28,7 +28,7 @@ export class LoginComponent extends AbstractComponent {
         super();
     }
 
-    public submitLoginForm = (values) => {
+    public submitForm = (values) => {
         this.submitLoginFormLoading = true;
         this.loginGlobalError = [];
         this.authService
