@@ -8,14 +8,14 @@ import { NgModule } from '@angular/core';
 import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
-import { SignUpFormComponent } from './sign-up-form.component';
+import { SignUpComponent } from './sign-up.component';
 
 @NgModule({
     declarations: [
-        SignUpFormComponent,
+        SignUpComponent,
     ],
     exports: [
-        SignUpFormComponent,
+        SignUpComponent,
     ],
     imports: [
         AlertModule,
@@ -26,4 +26,4 @@ import { SignUpFormComponent } from './sign-up-form.component';
         ReactiveFormsModule,
     ],
 })
-export class SignUpFormModule {}
+export class SignUpModule {}

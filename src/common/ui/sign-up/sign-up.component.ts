@@ -4,11 +4,11 @@ import { FormBuilder } from '@angular/forms';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 
 @Component({
-    selector: 'pxe-news-subscription',
-    templateUrl: './news-subscription.component.html',
-    styleUrls: ['./news-subscription.component.scss'],
+    selector: 'pxe-sign-up',
+    templateUrl: './sign-up.component.html',
+    styleUrls: ['./sign-up.component.scss'],
 })
-export class NewsSubscriptionComponent extends AbstractFormComponent {
+export class SignUpComponent extends AbstractFormComponent {
     constructor(
         protected fb: FormBuilder,
     ) {
@@ -20,9 +20,8 @@ export class NewsSubscriptionComponent extends AbstractFormComponent {
         this.triggerValidation();
         if (this.form.valid) {
             const val = this.form.value;
-            val.preregistration = true;
+            val.preregistration = false;
             this.submitAction.emit(val);
         }
     }
 }
-

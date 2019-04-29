@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 import { SignUpComponent } from './sign-up.component';
-import { SignUpFormContainerModule } from 'src/common/containers/form/sign-up-form/sign-up-form-container.module';
+import { SignUpFormModule } from 'src/common/containers/form/forms/sign-up/sign-up-form.module';
 import { SignUpRoutingModule } from './sign-up-routing.module';
 import { SupplierContainerModule } from 'src/common/containers/supplier-conteiner/supplier-conteiner.module';
 
@@ -17,7 +17,7 @@ import { SupplierContainerModule } from 'src/common/containers/supplier-conteine
     imports: [
         CommonModule,
         LayoutContainerModule,
-        SignUpFormContainerModule,
+        SignUpFormModule,
         SignUpRoutingModule,
         SupplierContainerModule,
     ],

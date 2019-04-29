@@ -5,16 +5,16 @@ import {
 
 import { Apollo } from 'apollo-angular';
 
-import { RegisterAbstractComponent } from '../abstract/register-abstract.component';
+import { RegisterAbstractComponent } from 'src/common/containers/form/abstract/register-abstract.component';
 import { Router } from '@angular/router';
-import { SignUpType } from '../models/form-definition.model';
+import { SignUpType } from 'src/common/containers/form/models/form-definition.model';
 
 @Component({
-    selector: 'pxe-sign-up-form-container',
-    templateUrl: './sign-up-form-container.component.html',
-    styleUrls: ['./sign-up-form-container.component.scss'],
+    selector: 'pxe-sign-up-form',
+    templateUrl: './sign-up-form.component.html',
+    styleUrls: ['./sign-up-form.component.scss'],
 })
-export class SignUpFormContainerComponent extends RegisterAbstractComponent {
+export class SignUpFormComponent extends RegisterAbstractComponent {
 
     constructor(
         public apollo: Apollo,
