@@ -57,6 +57,10 @@
 	&:focus,
 	&.focus {
 		box-shadow: none;
+
+		& ~ .input-group-append {
+			color: $input-color;
+		}
 	}
 
 	&[disabled],
@@ -66,6 +70,11 @@
 		border-bottom-color: $input-disabled-border-color;
 		cursor: not-allowed;
 		pointer-events: none;
+
+		& ~ .input-group-append {
+			background-color: $input-disabled-bg;
+			color: $input-disabled-color;
+		}
 	}
 
 	&[disabled],
@@ -191,11 +200,13 @@ textarea.form-control--not-empty {
 }
 
 .form-control-case {
+	position: relative;
+	max-width: $input-width;
 	padding-top: $form-group-padding-top;
 }
 
 .form-control-wrapper {
-	max-width: $input-width;
+	position: relative;
 	border-radius: $input-border-radius;
 	overflow: hidden;
 
@@ -252,20 +263,13 @@ textarea.form-control--not-empty {
 .input-group-append {
 	position: absolute;
 	top: 0;
-	padding-top: $form-group-padding-top;
-	height: $input-height;
-	line-height: $input-line-height;
+	padding: 0 ( $spacer * .75 );
+	height: ( $input-height - $input-border-width );
+	line-height: ( $input-height - $input-border-width + 1 );
 	background-color: $input-bg;
+	color: $gray-100;
+	font-size: $input-font-size;
 	pointer-events: none;
-
-	&::after {
-		position: absolute;
-		top: 0;
-		content: '';
-		width: ( $spacer * 4 );
-		height: 100%;
-		background: linear-gradient(90deg, rgba($white, 0%) 0%, rgba($white, 100%) 60%);
-	}
 
 	&:focus,
 	& > button:focus {
@@ -292,10 +296,6 @@ textarea.form-control--not-empty {
 
 .input-group-append {
 	right: 0;
-
-	&::after {
-		right: 100%;
-	}
 
 	.btn {
 		padding-right: 0;
@@ -324,6 +324,12 @@ textarea.form-control--not-empty {
 		color: $input-disabled-color;
 		cursor: not-allowed;
 		pointer-events: none;
+	}
+}
+
+.custom-control-inline {
+	&:last-child {
+		margin-right: 0;
 	}
 }
 
