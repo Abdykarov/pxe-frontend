@@ -205,6 +205,22 @@ textarea.form-control--not-empty {
 			pointer-events: none;
 		}
 	}
+
+	& ~ .invalid-feedback {
+		display: none;
+		font-size: $small-font-size;
+		max-width: $input-width;
+	}
+
+	&.invalid-input {
+		& ~ .invalid-feedback {
+			display: block;
+		}
+
+		&.form-control--without-feedback ~ .invalid-feedback {
+			display: none;
+		}
+	}
 }
 
 .form-control--with-indentation {
@@ -215,12 +231,6 @@ textarea.form-control--not-empty {
 	&:hover {
 		padding-top: ( $input-padding-y + $input-border-width );
 	}
-}
-
-.invalid-feedback {
-	display: block;
-	font-size: $small-font-size;
-	max-width: $input-width;
 }
 
 // Input group

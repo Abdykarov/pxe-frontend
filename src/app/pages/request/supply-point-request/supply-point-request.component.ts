@@ -10,6 +10,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
+import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils/';
 
 @Component({
@@ -22,6 +23,24 @@ export class SupplyPointRequestComponent extends AbstractComponent {
     public globalError: string[] = [];
     public fieldError: IFieldError = {};
     public formLoading = false;
+
+    public stepperProgressConfigSimple1: IStepperProgressItem[] = [
+        {
+            url: '/secured/request/supply-point',
+            done: false,
+            label: 'Výběr odběrného místa',
+        },
+        {
+            url: '/secured/dashboard',
+            done: false,
+            label: 'Výběr nabídky',
+        },
+        {
+            url: '/secured/dashboard',
+            done: false,
+            label: 'Podepsání smlouvy',
+        },
+    ];
 
     constructor(
         private apollo: Apollo,
