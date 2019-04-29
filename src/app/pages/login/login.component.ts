@@ -46,4 +46,9 @@ export class LoginComponent extends AbstractComponent {
                 });
 
     }
+
+    public forgottenPasswordAction = ($event) => {
+        $event.preventDefault();
+        window.open('/forgotten-password');
+    }
 }

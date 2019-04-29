@@ -36,6 +36,9 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
     public fieldError: IFieldError = {};
 
     @Output()
+    public customAction?: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
     public submitAction: EventEmitter<any> = new EventEmitter<any>();
 
     public form: FormGroup;
@@ -57,6 +60,8 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
             this.formError = R.clone(changes.fieldError.currentValue);
         }
     }
+
+    public handleCustomAction = ($event) => this.customAction.emit($event);
 
     public submitForm = () => {
         this.resetCustomFieldError();

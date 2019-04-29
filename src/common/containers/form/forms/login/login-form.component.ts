@@ -41,9 +41,4 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
             });
         this.isFromSignUp = !!window.history.state.isFromSignUp;
     }
-
-    public labelAction = ($event) => {
-        $event.preventDefault();
-        window.open('/forgotten-password');
-    }
 }

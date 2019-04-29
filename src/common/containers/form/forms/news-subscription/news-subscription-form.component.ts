@@ -2,19 +2,19 @@ import {
     ChangeDetectorRef,
     Component,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
 
 import { RegisterAbstractComponent } from 'src/common/containers/form/abstract/register-abstract.component';
-import { Router } from '@angular/router';
-import { SignUpType } from '../models/form-definition.model';
+import { SignUpType } from 'src/common/containers/form/models/form-definition.model';
 
 @Component({
-    selector: 'pxe-news-subscription-container',
-    templateUrl: './news-subscription-container.component.html',
-    styleUrls: ['./news-subscription-container.component.scss'],
+    selector: 'pxe-news-subscription-form',
+    templateUrl: './news-subscription-form.component.html',
+    styleUrls: ['./news-subscription-form.component.scss'],
 })
-export class NewsSubscriptionContainerComponent extends RegisterAbstractComponent {
+export class NewsSubscriptionFormComponent extends RegisterAbstractComponent {
 
     constructor(
         public apollo: Apollo,
