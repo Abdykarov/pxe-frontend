@@ -112,15 +112,18 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
             const form = {
                 ...this.form.value,
                 supplierId: this.form.value.supplierId && this.form.value.supplierId.id,
+                // TODO - address is hardcoded, coz it is mandatory for service
                 address: {
                     street: this.form.value.address,
                     orientationNumber: this.form.value.address,
                     descriptiveNumber: this.form.value.address,
                     city: this.form.value.address,
-                    postCode: this.form.value.address,
+                    postCode: 12000,
                 },
                 expirationDate: this.form.value.expirationDate && this.form.value.expirationDate.toISOString().split('T')[0],
             };
+            // form.annualConsumptionNT = 1;
+            // form.annualConsumptionVT = 1;
             // TODO format annualConsumption*
             this.submitAction.emit(form);
         }

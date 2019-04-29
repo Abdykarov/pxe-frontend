@@ -75,7 +75,7 @@ export class SupplyService {
             .mutate({
                 mutation: saveElectricitySupplyPoint,
                 variables: {
-                    supplyPoint,
+                    supplyPoint: supplyPoint,
                 },
             });
     }

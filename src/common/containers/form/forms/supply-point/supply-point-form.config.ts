@@ -80,6 +80,7 @@ export const formFields: IForm = {
     validationMessages: {
         expirationDate: {
             bsDate: 'Špatný formát data',
+            'expiration-date-in-past': 'Platnost musí končit v budoucnosti',
         },
     },
 };

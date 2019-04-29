@@ -2,16 +2,17 @@ import {
     ChangeDetectorRef,
     Component,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
 
-import * as mutations from 'src/common/graphql/mutations';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils/';
+import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
     templateUrl: './supply-point-request.component.html',
@@ -31,7 +32,7 @@ export class SupplyPointRequestComponent extends AbstractComponent {
             label: 'Výběr odběrného místa',
         },
         {
-            url: '/secured/dashboard',
+            url: '/secured/request/offer-selection',
             done: false,
             label: 'Výběr nabídky',
         },
@@ -46,6 +47,8 @@ export class SupplyPointRequestComponent extends AbstractComponent {
         private apollo: Apollo,
         private authService: AuthService,
         private cd: ChangeDetectorRef,
+        private router: Router,
+        private supplyService: SupplyService,
     ) {
         super();
     }
@@ -54,18 +57,13 @@ export class SupplyPointRequestComponent extends AbstractComponent {
         this.formLoading = true;
         this.globalError = [];
         this.fieldError = {};
-        this.apollo
-            .mutate({
-                mutation: mutations.saveElectricitySupplyPoint,
-                variables: values,
-            })
+        this.supplyService.saveElectricitySupplyPoint(values)
             .subscribe(
                 (data) => {
                     this.formLoading = false;
                     this.formSent = true;
                     this.cd.markForCheck();
-                    // TODO redirect to next step
-                    console.log('%c ***** SAVED *****', 'background: #bada55; color: #000; font-weight: bold', data);
+                    this.router.navigate(['/secured/request/offer-selection']);
                 },
                 (error) => {
                     this.formLoading = false;
