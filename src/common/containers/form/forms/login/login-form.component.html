@@ -1,0 +1,51 @@
+<ng-template #forgottenPassword>
+    <a (click)="handleCustomAction($event)">
+        Zapomněli jste heslo?
+    </a>
+</ng-template>
+<lnd-alert
+    *ngIf="globalError.length"
+    type="danger">
+    <ng-container *ngFor="let error of globalError">
+        {{ error }}<br>
+    </ng-container>
+</lnd-alert>
+<ng-container *ngIf="isFromSignUp">
+    <lnd-alert type="info">
+        Heslo jsme vám zaslali na {{email}}
+    </lnd-alert>
+    <a>Poslat e-mail znovu</a>
+</ng-container>
+<form
+    [formGroup]="form"
+    class="form-container"
+    autocomplete="off">
+    <lnd-form-field
+        [error]="form.controls.username.errors"
+        [formControl]="form.controls.username"
+        [id]="'username'"
+        label="Email"
+        [success]="form.controls.username.valid && form.controls.username.touched"
+        [touched]="form.controls.username.touched"
+        [validationMessages]="formFields.validationMessages.username"
+    ></lnd-form-field>
+    <lnd-form-field
+        [error]="form.controls.password.errors"
+        [formControl]="form.controls.password"
+        [id]="'password'"
+        label="Heslo"
+        [success]="form.controls.password.valid && form.controls.password.touched"
+        type="PASSWORD"
+        [touched]="form.controls.password.touched"
+        [validationMessages]="formFields.validationMessages.password"
+        [subtextTemplate]="forgottenPassword"
+    ></lnd-form-field>
+    <div class="text-right">
+        <lnd-button
+            type="primary"
+            (action)="submitForm()"
+            [isDisabled]="!!formLoading"
+            label="Přihlásit se">
+        </lnd-button>
+    </div>
+</form>

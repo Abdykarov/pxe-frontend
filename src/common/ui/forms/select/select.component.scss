@@ -226,6 +226,10 @@
 		}
 	}
 
+	.is-invalid ~ .invalid-feedback {
+		display: block;
+	}
+
 	// Error state
 	.is-invalid {
 		&,
