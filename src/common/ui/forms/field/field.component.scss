@@ -209,22 +209,6 @@ textarea.form-control--not-empty {
 	border-radius: $input-border-radius;
 	overflow: hidden;
 
-	& ~ .invalid-feedback {
-		display: none;
-		font-size: $small-font-size;
-		max-width: $input-width;
-	}
-
-	&.invalid-input {
-		& ~ .invalid-feedback {
-			display: block;
-		}
-
-		&.form-control--without-feedback ~ .invalid-feedback {
-			display: none;
-		}
-	}
-
 	&.disabled-input {
 		& + .control-label {
 			cursor: not-allowed;
@@ -241,6 +225,12 @@ textarea.form-control--not-empty {
 	&:hover {
 		padding-top: ( $input-padding-y + $input-border-width );
 	}
+}
+
+.invalid-feedback {
+	display: block;
+	font-size: $small-font-size;
+	max-width: $input-width;
 }
 
 // Input group
