@@ -275,7 +275,7 @@ textarea.form-control--not-empty {
 	top: 0;
 	padding: 0 ( $spacer * .75 );
 	height: ( $input-height - $input-border-width );
-	line-height: ( $input-height - $input-border-width );
+	line-height: ( $input-height - $input-border-width + 1 );
 	background-color: $input-bg;
 	color: $gray-100;
 	font-size: $input-font-size;
