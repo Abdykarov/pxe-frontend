@@ -260,11 +260,11 @@ textarea.form-control--not-empty {
 
 .input-group-prepend,
 .input-group-append {
+	align-items: center;
 	position: absolute;
 	top: 0;
 	padding: 0 ( $spacer * .75 );
 	height: ( $input-height - $input-border-width );
-	line-height: ( $input-height - $input-border-width );
 	background-color: transparent;
 	color: $gray-100;
 	font-size: $input-font-size;
@@ -302,8 +302,7 @@ textarea.form-control--not-empty {
 }
 
 .input-group-icon {
-	padding-top: ( $spacer / 3 );
-	color: $gray-300;
+	// color: $gray-300;
 }
 
 .input-group-switch__text {
