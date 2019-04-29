@@ -21,6 +21,7 @@
 }
 
 .modal-header {
+	position: relative;
 	padding: $modal-header-padding $modal-header-padding 0;
 
 	// Media queries
@@ -28,18 +29,6 @@
 		padding: $modal-header-padding-md $modal-header-padding-md 0;
 		display: flex;
 		justify-content: space-between;
-	}
-
-	.close {
-		@include reset-pa-ma;
-		margin-top: -( $spacer * 1.5 );
-		color: $body-color;
-
-		// Media queries
-		@include media-breakpoint-up(md) {
-			margin-top: -( $spacer / 2 );
-			margin-right: -( $spacer / 2 );
-		}
 	}
 }
 
@@ -93,6 +82,28 @@
 		@include media-breakpoint-up(sm) {
 			margin-top: 0;
 			margin-left: ( $spacer / 3 );
+		}
+	}
+}
+
+.modal {
+	& &__close {
+		overflow: hidden;
+		float: none;
+		position: absolute;
+		top: -( $icon-size-px * 1.5 );
+		right: ( $icon-size-px / 2 );
+		width: $icon-size-px;
+		height: $icon-size-px;
+		line-height: $icon-size-px;
+		@include reset-pa-ma;
+		font-family: 'roboto_mono';
+		color: $body-color;
+		font-size: ( $icon-size-px * 1.5 );
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			right: 0;
 		}
 	}
 }
