@@ -219,6 +219,7 @@ textarea.form-control--not-empty {
 
 	& ~ .invalid-feedback {
 		display: none;
+		margin-top: ( $spacer / 4 );
 		font-size: $small-font-size;
 		max-width: $input-width;
 	}
