@@ -1,3 +1,5 @@
+import { EanValidator } from 'src/common/utils/ean-validator';
+
 export class CustomValidators {
 
     static phoneNumber = (phoneNumber) => {
@@ -32,4 +34,21 @@ export class CustomValidators {
             email: true,
         };
     }
+
+    static ean = (ean) => {
+        if (ean.pristine) {
+            return null;
+        }
+
+        ean.markAsTouched();
+
+        if (EanValidator.validate(ean)) {
+            return null;
+        }
+
+        return {
+            ean: true,
+        };
+    }
+
 }
