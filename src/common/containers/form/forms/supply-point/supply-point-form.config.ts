@@ -4,6 +4,7 @@ import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
+import { CustomValidators } from '../../../../utils';
 
 export const formFields: IForm = {
     controls: {
@@ -29,6 +30,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
+                CustomValidators.ean,
             ],
         ],
         eic: [
@@ -59,18 +61,21 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
+                CustomValidators.isDecimal,
             ],
         ],
         annualConsumptionVT: [
             null,
             [
                 Validators.required,
+                CustomValidators.isDecimal,
             ],
         ],
         annualConsumption: [
             null,
             [
                 Validators.required,
+                CustomValidators.isDecimal,
             ],
         ],
         expirationDate: [
@@ -78,6 +83,18 @@ export const formFields: IForm = {
         ],
     },
     validationMessages: {
+        ean: {
+            ean: 'Zadejte správné EAN.',
+        },
+        annualConsumptionNT: {
+            decimal: 'Zadejte číslo.',
+        },
+        annualConsumptionVT: {
+            decimal: 'Zadejte číslo.',
+        },
+        annualConsumption: {
+            decimal: 'Zadejte číslo.',
+        },
         expirationDate: {
             bsDate: 'Špatný formát data',
             'expiration-date-in-past': 'Platnost musí končit v budoucnosti',

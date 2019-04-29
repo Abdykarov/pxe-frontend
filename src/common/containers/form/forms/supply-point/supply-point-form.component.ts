@@ -122,9 +122,16 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
                 },
                 expirationDate: this.form.value.expirationDate && this.form.value.expirationDate.toISOString().split('T')[0],
             };
-            // form.annualConsumptionNT = 1;
-            // form.annualConsumptionVT = 1;
             // TODO format annualConsumption*
+            if (!R.isNil(form.annualConsumptionNT)) {
+                form.annualConsumptionNT = parseFloat(form.annualConsumptionNT.replace(',', '.'));
+            }
+            if (!R.isNil(form.annualConsumptionVT)) {
+                form.annualConsumptionVT = parseFloat(form.annualConsumptionVT.replace(',', '.'));
+            }
+            if (!R.isNil(form.annualConsumption)) {
+                form.annualConsumption = parseFloat(form.annualConsumption.replace(',', '.'));
+            }
             this.submitAction.emit(form);
         }
     }

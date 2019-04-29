@@ -6,6 +6,8 @@ import {
 
 import * as R_ from 'ramda-extension';
 
+import { EanValidator } from 'src/common/utils/ean-validator.fnc';
+
 export class CustomValidators {
 
     static phoneNumber = (phoneNumber) => {
@@ -41,21 +43,35 @@ export class CustomValidators {
         };
     }
 
-    static isDecimal = (): ValidatorFn => {
+    static ean = (ean) => {
+        if (ean.pristine) {
+            return null;
+        }
+
+        ean.markAsTouched();
+        if (EanValidator.validate(ean.value)) {
+            return null;
+        }
+
+        return {
+            ean: true,
+        };
+    }
+
+
+    static isDecimal = (number) => {
         const expresion = new RegExp(/^(\d*([\.\,]\d+)?)$/);
-        return (control: AbstractControl): ValidationErrors => {
-            if (control.pristine) {
-                return null;
-            }
+        if (number.pristine) {
+            return null;
+        }
 
-            control.markAsTouched();
-            if (R_.isNilOrEmpty(control.value) || expresion.test(control.value)) {
-                return null;
-            }
+        number.markAsTouched();
+        if (expresion.test(number.value)) {
+            return null;
+        }
 
-            return {
-                decimal: true,
-            };
+        return {
+            decimal: true,
         };
     }
 }
