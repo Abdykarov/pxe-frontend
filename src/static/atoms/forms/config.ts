@@ -24,6 +24,19 @@ export class FormsPageConfig {
         },
     ];
 
+    public inlineRadiogroupOptions = [
+        {
+            key: 1,
+            value: 'value-one',
+            label: 'Radio button one',
+        },
+        {
+            key: 2,
+            value: 'value-two',
+            label: 'Radio button two',
+        },
+    ];
+
     public selectOptions = [
         {
             key: 1,
