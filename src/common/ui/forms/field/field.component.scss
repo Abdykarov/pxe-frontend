@@ -247,6 +247,12 @@ textarea.form-control--not-empty {
 
 // Input group
 .input-group {
+	&--append {
+		.form-control {
+			padding-right: ( $spacer * 2.5 );
+		}
+	}
+
 	.btn {
 		min-width: auto;
 		background-color: transparent;
