@@ -1,4 +1,4 @@
-import { EanValidator } from 'src/common/utils/ean-validator';
+import { EanValidator } from 'src/common/utils/ean-validator.fnc';
 
 export class CustomValidators {
 
@@ -42,7 +42,7 @@ export class CustomValidators {
 
         ean.markAsTouched();
 
-        if (EanValidator.validate(ean)) {
+        if (EanValidator.validate(ean.value)) {
             return null;
         }
 

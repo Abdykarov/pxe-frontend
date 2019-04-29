@@ -1,4 +1,4 @@
-import { EanValidator } from './ean-validator';
+import { EanValidator } from './ean-validator.fnc';
 
 describe('EanValidator validator', () => {
 
