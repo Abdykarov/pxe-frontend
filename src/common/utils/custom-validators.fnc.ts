@@ -1,12 +1,5 @@
-import {
-    AbstractControl,
-    ValidationErrors,
-    ValidatorFn,
-} from '@angular/forms';
-
-import * as R_ from 'ramda-extension';
-
 import { EanValidator } from 'src/common/utils/ean-validator.fnc';
+import { EicValidator } from './eic-validator.fnc';
 
 export class CustomValidators {
 
@@ -50,6 +43,21 @@ export class CustomValidators {
 
         ean.markAsTouched();
         if (EanValidator.validate(ean.value)) {
+            return null;
+        }
+
+        return {
+            ean: true,
+        };
+    }
+
+    static eic = (eic) => {
+        if (eic.pristine) {
+            return null;
+        }
+
+        eic.markAsTouched();
+        if (EicValidator.validate(eic.value)) {
             return null;
         }
 
