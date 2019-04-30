@@ -6,5 +6,6 @@ export * from './get-error-message.fnc';
 export * from './is-router-link.fnc';
 export * from './parse-graphql-errors.fnc';
 export * from './parse-rest-erros.fnc';
+export * from './scroll-to-element.fnc';
 export * from './transform-code-list.fnc';
 export * from './transform-suppliers.fnc';

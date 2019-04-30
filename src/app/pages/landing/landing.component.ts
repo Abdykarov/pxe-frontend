@@ -1,9 +1,12 @@
 import {
     Component,
     ChangeDetectorRef,
+    ElementRef,
+    ViewChild,
 } from '@angular/core';
 
 import { Apollo } from 'apollo-angular';
+import { takeUntil } from 'rxjs/operators';
 
 import * as mutations from 'src/common/graphql/mutations';
 import { AbstractComponent } from 'src/common/abstract.component';
@@ -13,14 +16,23 @@ import {
     IForm,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
-import { parseGraphQLErrors } from 'src/common/utils';
-import { Router } from '@angular/router';
+import {
+    parseGraphQLErrors,
+    scrollToElementFnc,
+} from 'src/common/utils';
+import {
+    SCROLL_TO,
+    ScrollToService,
+} from 'src/app/services/scroll-to.service';
 
 @Component({
-    templateUrl: './sign-up.component.html',
-    styleUrls: ['./sign-up.component.scss'],
+    templateUrl: './landing.component.html',
 })
-export class SignUpComponent extends AbstractComponent {
+export class LandingComponent extends AbstractComponent {
+
+    @ViewChild('pxe_subscription')
+    public pxeSubscriptionForm: ElementRef;
+
     public formLoading = false;
     public formSent = false;
     public globalError: string[] = [];
@@ -30,10 +42,18 @@ export class SignUpComponent extends AbstractComponent {
     constructor(
         private apollo: Apollo,
         private cd: ChangeDetectorRef,
-        private router: Router,
+        private scrollToService: ScrollToService,
     ) {
         super();
-        this.formFields = createRegistrationFormFields(SignUpType.SignUp);
+        this.formFields = createRegistrationFormFields(SignUpType.NewsSubscription);
+
+        this.scrollToService.getScrollStream()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((scrollTo: SCROLL_TO) => {
+                if (scrollTo === SCROLL_TO.LANDING_SUBSCRIPTION) {
+                    scrollToElementFnc(this.pxeSubscriptionForm.nativeElement);
+                }
+            });
     }
 
     public submitForm = (values) => {
@@ -50,18 +70,6 @@ export class SignUpComponent extends AbstractComponent {
                     this.formLoading = false;
                     this.formSent = true;
                     this.cd.markForCheck();
-                    this.router.navigate(['login'],
-                        {
-                            queryParams:
-                                {
-                                    email: values.email,
-                                },
-                            state:
-                                {
-                                    isFromSignUp: true,
-                                },
-                        },
-                    );
                 },
                 (error) => {
                     this.formLoading = false;
@@ -71,5 +79,6 @@ export class SignUpComponent extends AbstractComponent {
                     this.cd.markForCheck();
                 });
     }
-}
 
+    public scrollToNewSubscription = () => this.scrollToService.scrollToSubscription();
+}

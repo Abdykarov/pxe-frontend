@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { configCoverage } from 'src/static/config/map-coverage.config';
 import { configSupplier } from 'src/static/config/suppliers.config';
+import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import {
     IFieldError,
@@ -9,7 +10,6 @@ import {
 } from 'src/common/containers/form/models/form-definition.model';
 import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
 import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
-import { registrationFormFieldsFnc } from 'src/common/containers/form/registration.config';
 
 @Component({
     selector: 'lnd-landing-page',
@@ -17,25 +17,13 @@ import { registrationFormFieldsFnc } from 'src/common/containers/form/registrati
 })
 export class LandingComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
-
-    public submitSubscriptionLoading = false;
-    public subscriptionFormFields = registrationFormFieldsFnc(SignUpType.NewsSubscription);
-    public subscriptionFormSent = false;
-    public subscriptionGlobalError: string[] = [];
-    public subscriptionFieldError: IFieldError = {};
-
-    public configSupplier: ISupplier[] = configSupplier;
     public configCoverage: IMapCoverageConfig = configCoverage;
-
-    public submitSubscriptionForm = (values) => {
-        this.submitSubscriptionLoading = true;
-        console.log('Formulář odeslán');
-    }
-
-    public openConsent(evt) {
-        evt.preventDefault();
-        console.log('Clicked');
-    }
+    public configSupplier: ISupplier[] = configSupplier;
+    public formLoading = false;
+    public formFields = createRegistrationFormFields(SignUpType.NewsSubscription);
+    public formSent = false;
+    public globalError: string[] = [];
+    public fieldError: IFieldError = {};
 
     constructor() {
         this.breadcrumbItemsSimple = [
@@ -44,5 +32,10 @@ export class LandingComponent {
               url: null,
             },
         ];
+    }
+
+    public submitSubscriptionForm = (values) => {
+        this.formLoading = true;
+        alert('Formulář odeslán');
     }
 }

@@ -10,7 +10,14 @@
                 <div class="page-box">
                     <div class="row">
                         <div class="col-12">
-                            <pxe-sign-up-form></pxe-sign-up-form>
+                            <pxe-registration-form
+                                [formFields]="formFields"
+                                [formLoading]="formLoading"
+                                [formSent]="formSent"
+                                [globalError]="globalError"
+                                [fieldError]="fieldError"
+                                (submitAction)="submitForm($event)"
+                            ></pxe-registration-form>
                         </div>
                     </div>
                 </div>

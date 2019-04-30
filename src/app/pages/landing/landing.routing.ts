@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { LandingPageComponent } from './landing-page.component';
+import { LandingComponent } from './landing.component';
 
 const routes = [
     {
         path: '',
-        component: LandingPageComponent,
+        component: LandingComponent,
     },
 ];
 
@@ -18,4 +18,4 @@ const routes = [
         RouterModule,
     ],
 })
-export class LandingPageRoutingModule {}
+export class LandingRoutingModule {}
