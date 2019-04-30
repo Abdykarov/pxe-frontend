@@ -16,12 +16,14 @@
 bs-datepicker-container {
 	left: -3px;
 	z-index: $zindex-datepicker-content;
-	max-width: 300px;
+	max-width: $input-width;
 	width: 100%;
 }
 
 .bs-datepicker,
 .bs-datepicker-container,
+bs-years-calendar-view,
+bs-month-calendar-view,
 bs-days-calendar-view {
 	width: 100%;
 }
@@ -30,18 +32,17 @@ bs-days-calendar-view {
 	padding: 0;
 }
 
+bs-datepicker-navigation-view {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+bs-years-calendar-view,
 bs-month-calendar-view {
 	.bs-datepicker-head {
 		.current {
-			margin-left: -( $spacer * 3 );
-		}
-	}
-}
-
-bs-years-calendar-view {
-	.bs-datepicker-head {
-		.current {
-			margin-left: -( $spacer * 2 );
+			margin-left: -( $spacer / 2.5 );
 		}
 	}
 }
