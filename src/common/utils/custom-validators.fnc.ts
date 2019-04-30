@@ -1,3 +1,13 @@
+import {
+    AbstractControl,
+    ValidationErrors,
+    ValidatorFn,
+} from '@angular/forms';
+
+import * as R_ from 'ramda-extension';
+
+import { EanValidator } from 'src/common/utils/ean-validator.fnc';
+
 export class CustomValidators {
 
     static phoneNumber = (phoneNumber) => {
@@ -30,6 +40,38 @@ export class CustomValidators {
 
         return {
             email: true,
+        };
+    }
+
+    static ean = (ean) => {
+        if (ean.pristine) {
+            return null;
+        }
+
+        ean.markAsTouched();
+        if (EanValidator.validate(ean.value)) {
+            return null;
+        }
+
+        return {
+            ean: true,
+        };
+    }
+
+
+    static isDecimal = (number) => {
+        const expresion = new RegExp(/^(\d*([\.\,]\d+)?)$/);
+        if (number.pristine) {
+            return null;
+        }
+
+        number.markAsTouched();
+        if (expresion.test(number.value)) {
+            return null;
+        }
+
+        return {
+            decimal: true,
         };
     }
 }

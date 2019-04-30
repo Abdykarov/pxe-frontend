@@ -2,7 +2,7 @@ import {
     defaultRestAPIErrorMessage,
     restAPIErrorCodes,
 } from '../constants/errors.constant';
-import { IRestAPIError } from 'src/common/containers/form-container/models/rest-api-error.model';
+import { IRestAPIError } from 'src/common/containers/form/models/rest-api-error.model';
 
 export const parseRestAPIErrors = (errorObj: IRestAPIError): string => {
     const { error } = errorObj;

@@ -57,7 +57,7 @@ export class AuthService {
     }
 
     logout = () => {
-        return this.http.delete<any>(`${environment.api}/api/user/logout`)
+        return this.http.get<any>(`${environment.url}/parc-rest/webresources/users/logout`)
             .pipe(
                 map(response => {
                     this.token = null;

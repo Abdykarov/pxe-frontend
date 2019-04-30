@@ -37,9 +37,14 @@ import {
 } from 'src/static/atoms/icons/page.module';
 
 import {
-    TypographyPageModule,
-    typographyPageRoutes,
-} from 'src/static/atoms/typography/page.module';
+    ModalsPageModule,
+    modalsPageRoutes,
+} from 'src/static/organisms/modals/page.module';
+
+import {
+    NewSupplyPointPageModule,
+    newSupplyPointPageRoutes,
+} from 'src/static/pages/new-supply-point/page.module';
 
 import {
     ProgressBarPageModule,
@@ -47,9 +52,9 @@ import {
 } from 'src/static/organisms/progress-bar/progress-bar.module';
 
 import {
-    NewSupplyPointPageModule,
-    newSupplyPointPageRoutes,
-} from 'src/static/pages/new-supply-point/page.module';
+    TypographyPageModule,
+    typographyPageRoutes,
+} from 'src/static/atoms/typography/page.module';
 
 
 const routes: Routes = [
@@ -63,8 +68,9 @@ const routes: Routes = [
             ...colorsPageRoutes,
             ...formsPageRoutes,
             ...iconsPageRoutes,
-            ...progressBarPageRoutes,
+            ...modalsPageRoutes,
             ...newSupplyPointPageRoutes,
+            ...progressBarPageRoutes,
             ...typographyPageRoutes,
             {
                 path: '**',
@@ -82,8 +88,9 @@ const routes: Routes = [
         ColorsPageModule,
         FormsPageModule,
         IconsPageModule,
-        ProgressBarPageModule,
+        ModalsPageModule,
         NewSupplyPointPageModule,
+        ProgressBarPageModule,
         RouterModule.forChild(routes),
         TypographyPageModule,
     ],

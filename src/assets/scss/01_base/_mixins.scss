@@ -261,7 +261,7 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
-		background-color: rgba($gray-500, .7);
+		background-color: rgba($modal-backdrop-bg, $modal-backdrop-opacity);
 		z-index: $zindex-body-overlayer;
 	}
 }

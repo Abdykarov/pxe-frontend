@@ -25,6 +25,9 @@ export class SelectComponent {
     public appendButtonIcon?: string;
 
     @Input()
+    public bindValue = 'key';
+
+    @Input()
     public disabledField = false;
 
     @Input()

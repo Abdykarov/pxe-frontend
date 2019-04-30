@@ -27,7 +27,7 @@ export const getCodelistByType = gql`
 `;
 
 export const findCodelistsByTypes = gql`
-    query findCodelistsByTypes($types: String!, $locale: String!){
+    query findCodelistsByTypes($types: [String]!, $locale: String!){
         findCodelistsByTypes(types: $types,locale: $locale){
             codelistType,
             codelistItems{

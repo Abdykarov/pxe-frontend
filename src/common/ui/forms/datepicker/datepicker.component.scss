@@ -13,9 +13,17 @@
 @import 'src/assets/scss/01_base/base.scss';
 @import 'src/common/ui/forms/field/field.component.scss';
 
-
 bs-datepicker-container {
+	left: -3px;
 	z-index: $zindex-datepicker-content;
+	max-width: 300px;
+	width: 100%;
+}
+
+.bs-datepicker,
+.bs-datepicker-container,
+bs-days-calendar-view {
+	width: 100%;
 }
 
 .bs-datepicker-container {
@@ -38,19 +46,32 @@ bs-years-calendar-view {
 	}
 }
 
-.theme-default {
+.bs-datepicker {
+	margin-top: ( $spacer / 2 );
 	background: transparent;
-	box-shadow: 0 2px 8px 0 rgba($blue, .2);
+	box-shadow: 0 0 10px 0 rgba($black, .09);
 
-	.bs-datepicker-head {
-		background-color: $primary;
+	.bs-datepicker-head,
+	.bs-datepicker-body {
+		background-color: $input-bg;
 
 		.previous,
 		.next,
-		.current {
+		.current,
+		th .is-highlighted:not(.disabled),
+		td .is-highlighted:not(.disabled) {
 			&:hover {
-				background-color: $primary-dark;
+				background-color: rgba($input-color, .1);
+				border-radius: $border-radius;
 			}
+		}
+	}
+
+	.bs-datepicker-head {
+		.previous,
+		.next,
+		.current {
+			color: $input-color;
 		}
 
 		.previous,
@@ -79,35 +100,43 @@ bs-years-calendar-view {
 				content: '\e91a';
 			}
 		}
+
+		.current {
+			font-weight: 700;
+			text-transform: uppercase;
+		}
 	}
 
 	.bs-datepicker-body {
-		background-color: $white;
 		border: none;
+
+		th {
+			text-transform: uppercase;
+		}
 
 		th,
 		td {
 			&,
 			span {
-				color: $blue;
+				color: $input-color;
 				font-size: $small-font-size;
+				font-weight: 700;
 			}
-		}
-
-		th {
-			font-weight: 600;
 		}
 	}
 
 	.bs-datepicker-body table td {
 		span {
-			&.is-highlighted:not(.disabled),
-			&.selected {
-				background-color: $primary;
-				color: $white;
+			&.is-highlighted:not(.disabled) {
+				background-color: rgba($input-color, .1);
+				border-radius: $border-radius;
 			}
 
 			&.selected {
+				background-color: $primary;
+				color: $white;
+				border-radius: $border-radius;
+
 				&:hover {
 					background-color: $primary-dark;
 				}
@@ -119,6 +148,10 @@ bs-years-calendar-view {
 				background-color: $primary;
 				color: $white;
 			}
+		}
+
+		& .is-other-month {
+			color: $gray-100;
 		}
 	}
 }
