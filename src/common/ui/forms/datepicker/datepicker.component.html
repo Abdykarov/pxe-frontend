@@ -21,11 +21,10 @@
                 [class.is-invalid]="!!error && !!touched"
                 [class.is-valid]="success"
                 [class.is-warning]="warning"
+                [attr.disabled]="!!disabledField ? 'disabled' : null"
                 [attr.autocomplete]="'off'">
                 <div class="input-group-append">
-                    <span
-                        class="icon icon--calendar input-group-icon">
-                    </span>
+                    <span class="icon icon--calendar input-group-icon"></span>
                 </div>
         </div>
         <label
