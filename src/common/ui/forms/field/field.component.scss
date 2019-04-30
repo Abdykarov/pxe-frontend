@@ -285,7 +285,7 @@ textarea.form-control--not-empty {
 	line-height: ( $input-height - $input-border-width + 1 );
 	color: $gray-100;
 	font-size: $input-font-size;
-	//pointer-events: none;
+	pointer-events: none;
 
 	&:focus,
 	& > button:focus {

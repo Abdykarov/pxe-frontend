@@ -4,7 +4,8 @@
     <div class="form-control-case input-group--append">
         <div
             class="form-control-wrapper"
-            [class.invalid-input]="!!error && !!touched">
+            [class.invalid-input]="!!error && !!touched"
+            [class.disabled-input]="!!disabledField">
             <input
                 lndDatepickerDirective
                 bsDatepicker
