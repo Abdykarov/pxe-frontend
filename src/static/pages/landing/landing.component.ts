@@ -34,7 +34,7 @@ export class LandingComponent {
         ];
     }
 
-    public submitSubscriptionForm = (values) => {
+    public submitForm = (values) => {
         this.formLoading = true;
         alert('Formulář odeslán');
     }

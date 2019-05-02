@@ -22,7 +22,7 @@ export class SupplyPointRequestComponent extends AbstractComponent {
     public fieldError: IFieldError = {};
     public formLoading = false;
 
-    public stepperProgressConfigSimple1: IStepperProgressItem[] = [
+    public stepperProgressConfig: IStepperProgressItem[] = [
         {
             url: '/secured/request/supply-point',
             done: false,
@@ -48,7 +48,7 @@ export class SupplyPointRequestComponent extends AbstractComponent {
         super();
     }
 
-    public submitLoginForm = (values) => {
+    public submitForm = (values) => {
         this.formLoading = true;
         this.globalError = [];
         this.fieldError = {};

@@ -1,7 +1,7 @@
 <pxe-layout-container title="Nové odběrné místo">
     <div class="row mb-6">
         <div class="col-12 col-xl-10 offset-xl-1">
-            <pxe-progress-bar [config]="stepperProgressConfigSimple1"></pxe-progress-bar>
+            <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
         </div>
     </div>
     <div class="row">
@@ -16,7 +16,7 @@
                     [formSent]="formSent"
                     [globalError]="globalError"
                     [fieldError]="fieldError"
-                    (submitAction)="submitLoginForm($event)"
+                    (submitAction)="submitForm($event)"
                     [isStandalone]="false"
                 ></pxe-supply-point-form>
             </div>
