@@ -19,11 +19,6 @@
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
             <div class="page-box">
-                <lnd-alert type="danger">
-                    <ng-container>
-                        Error message<br>
-                    </ng-container>
-                </lnd-alert>
                 <form
                     [formGroup]="form"
                     class="form-container">
@@ -117,7 +112,7 @@
                             label="Uložit a vybrat nabídku">
                         </lnd-button>
                         <lnd-button
-                            type="secondary"
+                            type="link"
                             (action)="submitAction()"
                             [isDisabled]="formLoading"
                             customClass="mt-3"
