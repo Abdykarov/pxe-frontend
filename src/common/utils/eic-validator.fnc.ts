@@ -21,15 +21,11 @@ export class EicValidator {
 
     private static valueChars = R.invert(EicValidator.charValues);
 
-    private static mapping(x) {
-        return EicValidator.charValues[x];
-    }
+    private static mapping = (x) => EicValidator.charValues[x];
 
-    private static weighting(x, index) {
-        return (16 - index) * x;
-    }
+    private static weighting = (x, index) => (16 - index) * x;
 
-    private static calcCheckChar(str) {
+    private static calcCheckChar = (str) => {
         const s = str.substring(0, 15).toLowerCase().split('');
 
         const c = R.sum(
@@ -46,7 +42,7 @@ export class EicValidator {
         return EicValidator.valueChars[(36 - ((c - 1) % 37))][0];
     }
 
-    public static validate(str) {
+    public static validate = (str) => {
         if (str.length !== 16) {
             return false;
         }
