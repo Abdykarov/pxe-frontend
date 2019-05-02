@@ -3,6 +3,54 @@
         <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
     </div>
 </div>
+
+<h3>Inputs with help icon</h3>
+<div class="static-pages">
+    <div class="row">
+        <div class="col-12">
+            <lnd-form-field
+                id="normal-input"
+                label="Normal"
+                [appendButtonIcon]="true ? 'icon--info' : null"
+                (appendButtonAction)="trigger()">
+            </lnd-form-field>
+        </div>
+        <div class="col-12">
+            <lnd-form-field
+                id="appendtext-input"
+                label="With appendtext"
+                appendText="CZK"
+                [appendButtonIcon]="true ? 'icon--info' : null"
+                (appendButtonAction)="trigger()">
+            </lnd-form-field>
+        </div>
+        <div class="col-12">
+            <lnd-select
+                label="Searchable selectbox"
+                [options]="config.selectOptions"
+                [parentForm]="selectBoxes"
+                searchable="true"
+                [selectName]="'searchableSelect'"
+                placeholder="placeholder"
+                [appendButtonIcon]="true ? 'icon--info' : null"
+                (appendButtonAction)="trigger()">
+            </lnd-select>
+        </div>
+        <div class="col-12">
+            <lnd-datepicker
+                [parentForm]="datepickers"
+                [datepickerName]="'datepicker'"
+                [placeholder]="'Datepicker'"
+                label="Datepicker"
+                id="datepicker-1"
+                [appendButtonIcon]="true ? 'icon--info' : null"
+                (appendButtonAction)="trigger()">
+            </lnd-datepicker>
+        </div>
+    </div>
+</div>
+
+
 <h3>Inputs</h3>
 <div class="static-pages">
     <h4>Normal</h4>
@@ -102,17 +150,6 @@
             </lnd-form-field>
         </div>
     </div>
-    <h4>With help icon</h4>
-    <div class="row">
-        <div class="col-md-4">
-            <lnd-form-field
-                id="normal-input"
-                label="Label"
-                [appendButtonIcon]="true ? 'icon--info' : null"
-                (appendButtonAction)="trigger()">
-            </lnd-form-field>
-        </div>
-    </div>
     <h4>Disabled</h4>
     <div class="row">
         <div class="col-md-4">
@@ -149,8 +186,6 @@
             </div>
             <div class="col-md-4">
                 <lnd-select
-                    (appendButtonAction)="clickAction()"
-                    appendButtonIcon="icon--info"
                     label="Searchable selectbox"
                     subtext="Select subtext"
                     [options]="config.selectOptions"

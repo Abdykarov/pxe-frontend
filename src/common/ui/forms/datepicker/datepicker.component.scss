@@ -11,7 +11,7 @@
 
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
-@import 'src/common/ui/forms/field/field.component.scss';
+@import 'src/common/ui/forms/field/field.component.variables.scss';
 
 bs-datepicker-container {
 	left: -3px;

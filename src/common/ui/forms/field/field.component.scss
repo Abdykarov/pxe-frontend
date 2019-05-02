@@ -322,6 +322,8 @@ textarea.form-control--not-empty {
 
 	.btn {
 		@include reset-pa-ma;
+		background-color: transparent;
+		border: none;
 		color: $font-text;
 		height: $input-height;
 		line-height: $input-height;
