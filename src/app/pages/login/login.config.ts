@@ -30,3 +30,20 @@ export const loginFormFields: IForm = {
         },
     },
 };
+
+export const loginSupplyAuthFormFields: IForm = {
+    controls: {
+        code: [
+            '',
+            [
+                Validators.required,
+            ],
+        ],
+    },
+    validationMessages: {
+        code: {
+            required: errorFieldMessages.code.required,
+           // code: errorFieldMessages.code.code,//todo custm validate
+        },
+    },
+};

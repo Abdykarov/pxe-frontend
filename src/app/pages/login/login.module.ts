@@ -11,6 +11,7 @@ import { FormModule } from 'src/common/ui/forms/form.module';
 import { LoginFormModule } from 'src/common/containers/form/forms/login/login-form.module';
 import { ModalModule } from 'src/common/ui/modal/modal.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
+import { LoginSupplyAuthFormModule } from 'src/common/containers/form/forms/login-supply-auth/login-supply-auth-form.module';
 import { SupplierContainerModule } from 'src/common/containers/supplier-conteiner/supplier-conteiner.module';
 
 @NgModule({
@@ -31,6 +32,7 @@ import { SupplierContainerModule } from 'src/common/containers/supplier-conteine
         ModalModule,
         ReactiveFormsModule,
         SupplierContainerModule,
+        LoginSupplyAuthFormModule,
     ],
 })
 export class LoginModule {}

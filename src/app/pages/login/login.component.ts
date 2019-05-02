@@ -6,7 +6,10 @@ import { Router } from '@angular/router';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { loginFormFields } from './login.config';
+import {
+    loginFormFields,
+    loginSupplyAuthFormFields,
+} from './login.config';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { parseRestAPIErrors } from 'src/common/utils/';
 
@@ -16,8 +19,13 @@ import { parseRestAPIErrors } from 'src/common/utils/';
 })
 export class LoginComponent extends AbstractComponent {
     public loginFormFields = loginFormFields;
+    public loginSupplyAuthFields = loginSupplyAuthFormFields;
+
     public loginGlobalError: string[] = [];
+
     public submitLoginFormLoading = false;
+
+    public wasSentSms = false;
 
     constructor(
         private authService: AuthService,
@@ -28,7 +36,7 @@ export class LoginComponent extends AbstractComponent {
         super();
     }
 
-    public submitForm = (values) => {
+    public submitFormLogin = (values) => {
         this.submitLoginFormLoading = true;
         this.loginGlobalError = [];
         this.authService
@@ -47,8 +55,33 @@ export class LoginComponent extends AbstractComponent {
 
     }
 
+    public submitFormLoginAuth = (values) => {
+        this.authService
+            .login(values)
+            .subscribe(
+                () => {
+                    this.submitLoginFormLoading = false;
+                    this.router.navigate(['/secured/request/supply-point']);
+                },
+                error => {
+                    const message = parseRestAPIErrors(error);
+                    this.submitLoginFormLoading = false;
+                    this.loginGlobalError.push(message);
+                    this.cd.markForCheck();
+                });
+
+    }
+
+
     public forgottenPasswordAction = ($event) => {
         $event.preventDefault();
         window.open('/forgotten-password');
     }
+
+    public reSendSms = ($event) => {
+        this.wasSentSms = true; // todo odstranit po implemtaci sluzeb/mocku
+        $event.preventDefault();
+        console.log('resendsms');
+    }
+
 }

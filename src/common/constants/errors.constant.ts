@@ -21,4 +21,8 @@ export const errorFieldMessages =  {
     password: {
         required: 'Zadejte heslo.',
     },
+    code: {
+        required: 'Zadejte kód.',
+        badCode: 'Zadali jste neplatný kód.', // je treba syncs s grafkikou!!!
+    },
 };
