@@ -6,6 +6,7 @@ import { LoginRoutingModule } from './login.routing';
 import { LoginComponent } from './login.component';
 
 import { AlertModule } from 'src/common/ui/alert/alert.module';
+import { AddressWhispererModule } from 'src/common/containers/address-whisperer/address-whisperer.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { LoginFormModule } from 'src/common/containers/form/forms/login/login-form.module';
@@ -21,6 +22,7 @@ import { SupplierContainerModule } from 'src/common/containers/supplier-conteine
         LoginComponent,
     ],
     imports: [
+        AddressWhispererModule,
         AlertModule,
         ButtonModule,
         FormModule,
