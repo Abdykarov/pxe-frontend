@@ -18,6 +18,7 @@ const routes = [
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
+                    isSupplier: false,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
                     logoutType: LoginType.NAVIGATE,
@@ -29,6 +30,7 @@ const routes = [
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
+                    isSupplier: false,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
                     logoutType: LoginType.NAVIGATE,
@@ -40,6 +42,19 @@ const routes = [
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
+                    isSupplier: false,
+                    loginType: LoginType.NONE,
+                    signUpType: SignType.NONE,
+                    logoutType: LoginType.NAVIGATE,
+                },
+            },
+            {
+                path: 'supply-offer',
+                loadChildren: '../../pages/supply-offer/supply-offer.module#SupplyOfferModule',
+                data: {
+                    isSimpleFooter: false,
+                    isPublic: false,
+                    isSupplier: true,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
                     logoutType: LoginType.NAVIGATE,

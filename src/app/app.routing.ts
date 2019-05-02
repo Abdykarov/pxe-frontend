@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 const routes: Routes = [
     {
         path: 'secured',
-        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
         loadChildren: './layouts/secured/secured-layout.module#SecuredLayoutModule',
     },
     {

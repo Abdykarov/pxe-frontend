@@ -42,7 +42,7 @@ export class LoginComponent extends AbstractComponent {
         this.authService
             .login(values)
             .subscribe(
-                () => {
+                respone => {
                     this.submitLoginFormLoading = false;
                     this.router.navigate(['/secured/request/supply-point']);
                 },

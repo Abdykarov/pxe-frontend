@@ -67,6 +67,30 @@ export class AuthService {
             );
     }
 
+    sendSms = () => {
+        return this.http.get<any>(`${environment.url}/parc-rest/webresources/sms/send `)
+            .pipe(
+                map(response => {
+                    console.log(response);
+                    return response;
+                }),
+            );
+    }
+
+    confirm = () => {
+        return this.http.get<any>(`${environment.url}/parc-rest/webresources/sms/confirm`)
+            .pipe(
+                map(response => {
+                    console.log(response);
+                    return response;
+                }),
+            );
+    }
+
+    isSupplier = () => {
+        return false;
+    }
+
     refreshToken = () => {
         // TODO refresh token logic
         return of(true);
@@ -74,3 +98,4 @@ export class AuthService {
 
     getToken = (): string => this.token;
 }
+
