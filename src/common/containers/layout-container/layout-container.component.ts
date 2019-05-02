@@ -11,7 +11,7 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 })
 export class LayoutContainerComponent {
     @Input()
-    public title;
+    public pageTitle;
 
     @Input()
     public breadcrumbItemsSimple: IBreadcrumbItems;
