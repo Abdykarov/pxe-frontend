@@ -5,8 +5,8 @@ import {
 } from '@angular/core';
 
 import { configSupplier } from 'src/static/config/suppliers.config';
-import { SupplierComponent } from 'src/common/ui/supplier/supplier.component';
 import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
+import { SupplierComponent } from 'src/common/ui/supplier/supplier.component';
 
 @Component({
     templateUrl: './page.html',
@@ -17,13 +17,7 @@ export class LoginAfterRegistrationPageComponent {
 
     public configSupplier: ISupplier[] = configSupplier;
 
-    submitForm(evt) {
-        evt.preventDefault();
-        console.log('Submit form');
-    }
+    public submitForm = () => alert('Form submitted');
 
-    public action = (evt) => {
-        evt.preventDefault();
-        window.open('/send-email-again');
-    }
+    public action = () => alert('Email send');
 }
