@@ -45,6 +45,9 @@ export class DatepickerComponent {
     public datepickerName: string;
 
     @Input()
+    public disabledField = false;
+
+    @Input()
     public error?: any;
 
     @Input()
