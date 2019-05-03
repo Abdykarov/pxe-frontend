@@ -2,11 +2,9 @@ import {
     ChangeDetectorRef,
     Component,
     EventEmitter,
+    Input,
 } from '@angular/core';
-import {
-    FormControl,
-    FormGroup,
-} from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 import {
     debounceTime,
@@ -24,11 +22,13 @@ import { MapyCzApiService } from './services/mapy-cz-api.service';
 export class AddressWhispererComponent {
     private static readonly ROWS_RESPONSE = 5;
 
-    public addresses: Array<IOption> = [];
+    @Input()
+    public parentForm: FormGroup;
 
-    public parentForm: FormGroup = new FormGroup({
-        selected: new FormControl(),
-    });
+    @Input()
+    public whispererName: string;
+
+    public addresses: Array<IOption> = [];
 
     public typeahead: EventEmitter<any>;
 

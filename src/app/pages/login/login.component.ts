@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { loginFormFields } from './login.config';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { parseRestAPIErrors } from 'src/common/utils/';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     templateUrl: './login.component.html',
@@ -18,6 +19,10 @@ export class LoginComponent extends AbstractComponent {
     public loginFormFields = loginFormFields;
     public loginGlobalError: string[] = [];
     public submitLoginFormLoading = false;
+
+    public selectForm: FormGroup = new FormGroup({
+        whisperer: new FormControl(),
+    });
 
     constructor(
         private authService: AuthService,
