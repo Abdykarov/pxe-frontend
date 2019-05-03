@@ -59,6 +59,22 @@ export class CustomValidators {
     }
 
 
+    static eanFormat = (ean) => {
+        if (ean.pristine) {
+            return null;
+        }
+
+        ean.markAsTouched();
+        if (/^8591824\d{11}$/.test(ean.value)) {
+            return null;
+        }
+
+        return {
+            pattern: true,
+        };
+    }
+
+
     static isDecimal = (number) => {
         const expresion = new RegExp(/^(\d*([\.\,]\d+)?)$/);
         if (number.pristine) {
