@@ -46,20 +46,3 @@ export interface IUserDataMapyCzResponse {
     wikiId: string;
     zipCode: string;
 }
-
-export interface IAddresses {
-    addresses: [IAddress];
-}
-
-export interface IAddress {
-    city: string;
-    district: string;
-    houseNumber: string;
-    region: string;
-    street: string;
-    streetNumber: string;
-    suggestFirstRow: string;
-    suggestSecondRow: string;
-    suggestThirdRow: string;
-    zipCode: string;
-}

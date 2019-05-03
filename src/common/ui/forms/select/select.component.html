@@ -8,10 +8,12 @@
     </label>
     <ng-select
         #select
+        [addTag]="addTag"
         [items]="options"
         [selectOnTab]="true"
         [searchable]="searchable"
         [formControl]="parentForm.controls[selectName]"
+        [typeahead]="typeahead"
         [bindValue]="bindValue"
         bindLabel="label"
         [placeholder]="placeholder"
@@ -23,6 +25,14 @@
         [class.is-warning]="warning"
         notFoundText="Nenalezeny žádné záznamy"
         [searchFn]="customSearchFn">
+        <ng-container *ngIf="templateTag">
+            <ng-template
+                ng-tag-tmp
+                let-search="searchTerm">
+                <ng-container *ngTemplateOutlet="templateTag"></ng-container>
+                {{search}}
+            </ng-template>
+        </ng-container>
         <ng-template
             ng-option-tmp
             let-item="item"

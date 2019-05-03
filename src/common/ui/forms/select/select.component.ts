@@ -3,6 +3,7 @@ import {
     EventEmitter,
     Input,
     Output,
+    TemplateRef,
     ViewEncapsulation,
 } from '@angular/core';
 
@@ -20,6 +21,9 @@ import { IValidationMessages } from '../models/validation-messages.model';
 export class SelectComponent {
     @Output()
     public appendButtonAction?: EventEmitter<any> = new EventEmitter();
+
+    @Input()
+    public addTag = false;
 
     @Input()
     public appendButtonIcon?: string;
@@ -62,6 +66,12 @@ export class SelectComponent {
 
     @Input()
     public validationMessages?: IValidationMessages;
+
+    @Input()
+    typeahead?: EventEmitter<any>;
+
+    @Input()
+    public templateTag?: TemplateRef<any>;
 
     @Input()
     public warning?: any;

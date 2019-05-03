@@ -1,4 +1,3 @@
-// @ts-ignore tslint moc pil
 import { Injectable } from '@angular/core';
 import {
     HttpClient,
@@ -9,11 +8,10 @@ import * as R from 'ramda';
 import { map } from 'rxjs/operators';
 
 import {
-    IAddresses,
     IMapyCzResponse,
     IResultMapyCZResponse,
     IUserDataMapyCzResponse,
-} from 'src/common/containers/address-whisperer/model/mapy-cz-response';
+} from 'src/common/containers/address-whisperer/model/mapy-cz-response.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 
 @Injectable({

@@ -1,7 +1,14 @@
+<ng-template #tagTemplate>
+    Přidat položku
+</ng-template>
+
 <lnd-select
+    [addTag]="true"
     [parentForm]="parentForm"
-    [selectName]="selectName"
+    [selectName]="'selected'"
     [searchable]="true"
-    [options]="seznamApi$ | async"
+    [options]="addresses"
+    [typeahead]="typeahead"
+    [templateTag]="tagTemplate"
 >
 </lnd-select>

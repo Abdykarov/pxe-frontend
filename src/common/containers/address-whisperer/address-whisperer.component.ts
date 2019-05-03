@@ -1,11 +1,17 @@
 import {
+    ChangeDetectorRef,
     Component,
+    EventEmitter,
 } from '@angular/core';
 import {
-    FormBuilder,
     FormControl,
     FormGroup,
 } from '@angular/forms';
+
+import {
+    debounceTime,
+    mergeMap,
+} from 'rxjs/operators';
 
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { MapyCzApiService } from './services/mapy-cz-api.service';
@@ -16,20 +22,33 @@ import { MapyCzApiService } from './services/mapy-cz-api.service';
     styleUrls: ['./address-whisperer.component.scss'],
 })
 export class AddressWhispererComponent {
+    private static readonly ROWS_RESPONSE = 5;
 
-    public seznamApi$ = this.mapyCzService.getPlaces(5, 'lánecká 426');
+    public addresses: Array<IOption> = [];
 
-    public parentForm = new FormGroup({
-        firstName: new FormControl(''),
+    public parentForm: FormGroup = new FormGroup({
+        selected: new FormControl(),
     });
 
-
-    public options: Array<IOption> = [];
-
-    public selectName = 'firstName';
+    public typeahead: EventEmitter<any>;
 
     constructor(
+        private cd: ChangeDetectorRef,
         private mapyCzService: MapyCzApiService,
-        private builder: FormBuilder,
-    ) {}
+    ) {
+        this.typeahead = new EventEmitter();
+
+        this.typeahead
+            .pipe(
+                debounceTime(200),
+                mergeMap((term: string) => this.mapyCzService.getPlaces(AddressWhispererComponent.ROWS_RESPONSE, term)),
+            )
+            .subscribe((addresses: Array<IOption>)  => {
+                this.addresses = addresses;
+                this.cd.markForCheck();
+            }, (err) => {
+                this.addresses = [];
+                this.cd.markForCheck();
+            });
+    }
 }
