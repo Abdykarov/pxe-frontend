@@ -1,9 +1,11 @@
-<span *ngIf="badge !== 'none' else indicator" class="badge" [ngClass]="'badge-' + badge">
-    <ng-container *ngTemplateOutlet="indicator"></ng-container>
+<span
+    class="indicator"
+    [class.indicator--negative]="isNegative">
+    <span
+        class="icon"
+        [ngClass]="isNegative ? 'icon--arrow-decrease' : 'icon--arrow-increase'">
+    </span>
+    <span>
+        {{ absValue | number:'1.1-2' }}%
+    </span>
 </span>
-
-<ng-template #indicator>
-    <span *ngIf="position === 'left'" class="mr-1 indicator" [ngClass]="'indicator--' + direction" [class.indicator--badge]="badge !== 'none'"></span>
-    <span class="text-truncate"><ng-content></ng-content></span>
-    <span *ngIf="position === 'right'" class="ml-1 indicator" [ngClass]="'indicator--' + direction" [class.indicator--badge]="badge !== 'none'"></span>
-</ng-template>
