@@ -16,7 +16,8 @@ export class CustomValidators {
         }
 
         phoneNumber.markAsTouched();
-        if (/^(\+420)?[0-9]{9}$|^(\+){1}[0-9]{10,20}$/.test(phoneNumber.value)) {
+        const PHONE_REGEXP = /^(\+420)?[0-9]{9}$|^(\+){1}[0-9]{10,20}$/;
+        if (PHONE_REGEXP.test(phoneNumber.value)) {
             return null;
         }
 
@@ -65,7 +66,8 @@ export class CustomValidators {
         }
 
         ean.markAsTouched();
-        if (/^8591824\d{11}$/.test(ean.value)) {
+        const EAN_REGEXP = /^8591824\d{11}$/;
+        if (EAN_REGEXP.test(ean.value)) {
             return null;
         }
 
