@@ -62,10 +62,25 @@ export class CustomValidators {
         }
 
         return {
-            ean: true,
+            eic: true,
         };
     }
 
+    static eicFormat = (eic) => {
+        if (eic.pristine) {
+            return null;
+        }
+
+        eic.markAsTouched();
+        const EIC_REGEXP = /^27Z|zG|g.{12}$/;
+        if (EIC_REGEXP.test(eic.value)) {
+            return null;
+        }
+
+        return {
+            pattern: true,
+        };
+    }
 
     static isDecimal = (number) => {
         const expresion = new RegExp(/^(\d*([\.\,]\d+)?)$/);
