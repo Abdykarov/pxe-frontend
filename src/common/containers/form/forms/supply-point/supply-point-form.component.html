@@ -17,6 +17,7 @@
         [id]="'commodityType'"
         label="Komodita"
         [type]="'RADIOGROUP'"
+        [customFormGroupClass]="'mb-3'"
         [radioGroupItemClass]="'custom-control-inline'"
         [options]="commodityTypeOptions"
         [success]="form.controls.commodityType.valid && (form.controls.commodityType.touched || formError.commodityType)"
