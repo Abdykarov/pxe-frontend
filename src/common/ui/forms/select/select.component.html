@@ -1,59 +1,64 @@
 <div
     [formGroup]="parentForm"
     class="form-group ng-select-custom">
-    <label
-        (click)="select.open()"
-        class="ng-select-label">
-        {{ label }}
-    </label>
-    <ng-select
-        #select
-        [items]="options"
-        [selectOnTab]="true"
-        [searchable]="searchable"
-        [formControl]="parentForm.controls[selectName]"
-        [bindValue]="bindValue"
-        bindLabel="label"
-        [placeholder]="placeholder"
-        [class.is-disabled]="disabledField"
-        [attr.tabindex]="!!disabledField ? '-1' : null"
-        [attr.disabled]="!!disabledField ? 'disabled' : null"
-        [class.is-invalid]="!!error && !!touched"
-        [class.is-valid]="success"
-        [class.is-warning]="warning"
-        notFoundText="Nenalezeny žádné záznamy"
-        [searchFn]="customSearchFn">
-        <ng-template
-            ng-option-tmp
-            let-item="item"
-            let-search="searchTerm">
-            <div [ngOptionHighlight]="search">
-                {{ item.label }}
-            </div>
-        </ng-template>
-    </ng-select>
     <div
-        *ngIf="!!appendButtonIcon"
-        class="input-group-append">
-        <button
-            (click)="appendButtonAction.emit()"
-            type="button"
-            class="btn">
-            <span
-                class="icon"
-                [ngClass]="appendButtonIcon">
-            </span>
-        </button>
-    </div>
-    <div
-        *ngIf="!!subtext"
-        class="input-subtext"
-        [class.input-subtext--disabled]="!!disabledField">
-        {{ subtext }}
-    </div>
-    <div
-        *ngIf="!!getErrorMessage()"
-        [innerHtml]="getErrorMessage()"
-        class="invalid-feedback">
+        [class.input-group]="!!appendButtonIcon"
+        [class.input-group--append]="!!appendButtonIcon"
+        [class.input-group--append-button-icon]="!!appendButtonIcon">
+        <label
+            (click)="select.open()"
+            class="ng-select-label">
+            {{ label }}
+        </label>
+        <ng-select
+            #select
+            [items]="options"
+            [selectOnTab]="true"
+            [searchable]="searchable"
+            [formControl]="parentForm.controls[selectName]"
+            [bindValue]="bindValue"
+            bindLabel="label"
+            [placeholder]="placeholder"
+            [class.is-disabled]="disabledField"
+            [attr.tabindex]="!!disabledField ? '-1' : null"
+            [attr.disabled]="!!disabledField ? 'disabled' : null"
+            [class.is-invalid]="!!error && !!touched"
+            [class.is-valid]="success"
+            [class.is-warning]="warning"
+            notFoundText="Nenalezeny žádné záznamy"
+            [searchFn]="customSearchFn">
+            <ng-template
+                ng-option-tmp
+                let-item="item"
+                let-search="searchTerm">
+                <div [ngOptionHighlight]="search">
+                    {{ item.label }}
+                </div>
+            </ng-template>
+        </ng-select>
+        <div
+            *ngIf="!!appendButtonIcon"
+            class="input-group-append-help">
+            <button
+                (click)="appendButtonAction.emit()"
+                type="button"
+                class="btn">
+                <span
+                    class="icon"
+                    [ngClass]="appendButtonIcon">
+                </span>
+            </button>
+        </div>
+        <div
+            *ngIf="!!subtext"
+            class="input-subtext"
+            [class.input-subtext--disabled]="!!disabledField">
+            {{ subtext }}
+        </div>
+        <div
+            *ngIf="!!getErrorMessage()"
+            [innerHtml]="getErrorMessage()"
+            class="invalid-feedback">
+        </div>
     </div>
 </div>

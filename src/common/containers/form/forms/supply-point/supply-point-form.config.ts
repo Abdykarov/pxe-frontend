@@ -30,6 +30,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
+                CustomValidators.eanFormat,
                 CustomValidators.ean,
             ],
         ],
@@ -37,6 +38,8 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
+                CustomValidators.eic,
+                CustomValidators.eicFormat,
             ],
         ],
         address: [
