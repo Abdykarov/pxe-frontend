@@ -102,6 +102,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Modals',
                     'url': '/basic/modals',
                 },
+                {
+                    'label': 'Supply point',
+                    'url': '/basic/supply-point',
+                },
             ],
         },
         {

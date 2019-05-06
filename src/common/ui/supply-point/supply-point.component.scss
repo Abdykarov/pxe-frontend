@@ -1,0 +1,26 @@
+/*
+ -  Supply point
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+// Component variables
+// @import 'progress-bar.component.variables.scss';
+
+.supply-point {
+    padding: ( $spacer * 2.5 ) 0;
+
+    &__icon {
+        color: $icons-primary;
+        font-size: 40px;
+    }
+
+    &__title {
+        font-size: 36px;
+        line-height: ( 48 / 36 );
+        text-transform: uppercase;
+    }
+}
