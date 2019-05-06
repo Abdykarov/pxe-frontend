@@ -18,6 +18,19 @@ export class NewSupplyPointPageConfig {
         },
     ];
 
+    public subscriberTypeOptions = [
+        {
+            key: 1,
+            value: 'household',
+            label: 'Domácnost',
+        },
+        {
+            key: 2,
+            value: 'firm',
+            label: 'Firma',
+        },
+    ];
+
     public suppliersOptions = [
         {
             key: 1,
