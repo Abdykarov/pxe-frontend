@@ -18,6 +18,7 @@ export class FormsPageComponent {
     public datepickers: FormGroup = new FormGroup({
         datepicker: new FormControl('', [Validators.required]),
         errorDatepicker: new FormControl(''),
+        disabledDatepicker: new FormControl(''),
     });
 
     public selectBoxes: FormGroup = new FormGroup({
@@ -38,4 +39,6 @@ export class FormsPageComponent {
     }
 
     public clickAction = () => alert('CLICK');
+
+    public trigger = () => alert('Help icon works!');
 }

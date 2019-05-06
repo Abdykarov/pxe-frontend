@@ -122,6 +122,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/full/login',
                 },
                 {
+                    'label': 'Login after registration',
+                    'url': '/full/login-after-registration',
+                },
+                {
                     'label': 'Registration',
                     'url': '/full/registration',
                 },
