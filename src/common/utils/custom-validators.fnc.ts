@@ -1,12 +1,5 @@
-import {
-    AbstractControl,
-    ValidationErrors,
-    ValidatorFn,
-} from '@angular/forms';
-
-import * as R_ from 'ramda-extension';
-
 import { EanValidator } from 'src/common/utils/ean-validator.fnc';
+import { EicValidator } from './eic-validator.fnc';
 
 export class CustomValidators {
 
@@ -58,6 +51,36 @@ export class CustomValidators {
         };
     }
 
+    static eic = (eic) => {
+        if (eic.pristine) {
+            return null;
+        }
+
+        eic.markAsTouched();
+        if (EicValidator.validate(eic.value)) {
+            return null;
+        }
+
+        return {
+            eic: true,
+        };
+    }
+
+    static eicFormat = (eic) => {
+        if (eic.pristine) {
+            return null;
+        }
+
+        eic.markAsTouched();
+        const EIC_REGEXP = /^27Z|zG|g.{12}$/;
+        if (EIC_REGEXP.test(eic.value)) {
+            return null;
+        }
+
+        return {
+            pattern: true,
+        };
+    }
 
     static isDecimal = (number) => {
         const expresion = new RegExp(/^(\d*([\.\,]\d+)?)$/);

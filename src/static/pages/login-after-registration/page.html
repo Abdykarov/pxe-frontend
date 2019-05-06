@@ -1,10 +1,3 @@
-<ng-template #hrefToPersonalDataTemplate>
-    Souhlas se zpracováním 
-    <a (click)="action($event)">
-        osobních údajů
-    </a>
-</ng-template>
-
 <ng-template #supplierTemplate>
     <pxe-supplier [configSupplier]="configSupplier"></pxe-supplier>
 </ng-template>
@@ -13,13 +6,25 @@
     <div class="container-fluid">
         <div class="row text-center mb-md-6">
             <div class="col-12 col-md-6 offset-md-3">
-                <h1>Registrace</h1>
+                <h1>Log-in</h1>
             </div>
         </div>
         <div class="row mb-6">
             <div class="col-12 col-md-8 offset-md-2 col-xl-5 offset-xl-0 col-lg-3 order-xl-last">
                 <div class="page-box">
                     <div class="row">
+                        <div class="col-12 mb-5">
+                            <lnd-alert 
+                                type="info"
+                                customClass="mb-2">
+                                Heslo jsme vám zaslali na pepa@email.cz
+                            </lnd-alert>
+                            <div class="text-right">
+                                <a (click)="action()">
+                                    Poslat e-mail znovu
+                                </a>
+                            </div>
+                        </div>
                         <div class="col-12">
                             <form class="form-container">
                                 <lnd-form-field
@@ -27,15 +32,14 @@
                                     label="Email">
                                 </lnd-form-field>
                                 <lnd-form-field
-                                    [id]="'Agreement'"
-                                    [labelTemplate]="hrefToPersonalDataTemplate"
-                                    [type]="'CHECKBOX'">
+                                    id="password"
+                                    label="Heslo">
                                 </lnd-form-field>
                                 <div class="text-right">
                                     <lnd-button
                                         type="primary"
-                                        (action)="submitForm($event)"
-                                        label="Registrovat se">
+                                        (action)="submitForm()"
+                                        label="Přihlásit se">
                                     </lnd-button>
                                 </div>
                             </form>

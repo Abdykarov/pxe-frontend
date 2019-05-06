@@ -20,6 +20,9 @@ export class AlertComponent {
     public type: IAlertType;
 
     @Input()
+    public customClass?: string;
+
+    @Input()
     public isDismissible = false;
 
     @Input()
