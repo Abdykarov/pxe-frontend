@@ -8,10 +8,48 @@
 @import 'src/assets/scss/01_base/base.scss';
 
 // Component variables
-// @import 'progress-bar.component.variables.scss';
+// @import 'supply-point.component.variables.scss';
 
 .supply-point {
-    padding: ( $spacer * 2.5 ) 0;
+    margin-bottom: $spacer;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px 0 rgba($font-text, .16);
+
+    &:hover {
+        box-shadow: 0 10px 30px 0 rgba($font-text, .2);
+
+        .supply-point__inner--info {
+            background-color: $white;
+        }
+
+        .supply-point__inner--price {
+            background-color: $body-bg;
+        }
+    }
+    
+    &__inner {
+        height: 100%;
+        padding: ( $spacer * 1.5 ) $spacer;
+
+        &--info {
+            background-color: $white;
+
+            // Media queries
+            @include media-breakpoint-up(lg) {
+                background-color: $body-bg;
+            }
+        }
+
+        &--price {
+            // Media queries
+            @include media-breakpoint-up(md) {
+                padding: ( $spacer * 2.5 ) ( $spacer * 3 );
+            }
+            @include media-breakpoint-up(lg) {
+                background-color: $white;
+            }
+        }
+    }
 
     &__icon {
         color: $icons-primary;
@@ -19,8 +57,31 @@
     }
 
     &__title {
-        font-size: 36px;
-        line-height: ( 48 / 36 );
+        display: block;
+        font-size: 24px;
+        line-height: ( 32 / 24 );
         text-transform: uppercase;
+
+        // Media queries
+        @include media-breakpoint-up(md) {
+            display: inline-block;
+            margin-right: ( $spacer * 1.25 );
+            font-size: 36px;
+            line-height: ( 48 / 36 );
+        }
+    }
+
+    &__title-subtext {
+        // Media queries
+	    @include media-breakpoint-up(md) {}
+    }
+
+    &__value-name {
+        text-transform: uppercase;
+    }
+
+    &__value {
+        display: block;
+        font-size: 24px;
     }
 }
