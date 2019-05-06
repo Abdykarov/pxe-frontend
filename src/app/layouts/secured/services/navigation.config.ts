@@ -5,19 +5,19 @@ export const navigationConfig: INavigationConfig = [
         {
             'url': '/secured/dashboard',
             'label': 'NÁSTĚNKA',
-            'icon': 'home',
+            'icon': 'notice-board',
             __typename : 'secured',
         },
         {
             'url': '/secured/request',
             'label': 'ŽÁDOST',
-            'icon': 'home',
+            'icon': 'star',
             __typename : 'secured',
         },
         {
             'url': '/secured/supply-point',
             'label': 'ODBĚRNÁ MÍSTA',
-            'icon': 'home',
+            'icon': 'pin',
             __typename : 'secured',
         },
     ],
