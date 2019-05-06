@@ -32,12 +32,4 @@
             <pxe-supplier-container></pxe-supplier-container>
         </div>
     </div>
-    <form [formGroup]="selectForm">
-        <pxe-address-whisperer
-            [parentForm]="selectForm"
-            [whispererName]="'whisperer'">
-        </pxe-address-whisperer>
-        {{ selectForm.controls.whisperer.value | json }}
-    </form>
-
 </pxe-layout-container>

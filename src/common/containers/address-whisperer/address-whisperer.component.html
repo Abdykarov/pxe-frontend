@@ -1,13 +1,13 @@
-<ng-template #tagTemplate>
-    Přidat položku
-</ng-template>
-
 <lnd-select
+    [error]="parentForm.controls.whisperer.errors"
     [addTag]="true"
+    [bindValue]="'value'"
     [parentForm]="parentForm"
     [selectName]="whispererName"
     [searchable]="true"
     [options]="addresses"
     [typeahead]="typeahead"
+    [success]="parentForm.controls.whisperer.valid && (parentForm.controls.whisperer.touched)"
+    [touched]="parentForm.controls.whisperer.touched"
 >
 </lnd-select>
