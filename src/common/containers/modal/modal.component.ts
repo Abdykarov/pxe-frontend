@@ -19,7 +19,8 @@ import { OverlayService } from 'src/common/graphql/services/overlay.service';
     styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent extends AbstractComponent {
-    @ViewChild(AddModalDirective) public addModal: AddModalDirective;
+    @ViewChild(AddModalDirective)
+    public addModal: AddModalDirective;
 
     @Input()
     public isModalOpen: boolean;
