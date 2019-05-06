@@ -1,14 +1,16 @@
-<lnd-alert *ngIf="globalError.length"
-           type="danger">
-    <ng-container *ngFor="let globalError of globalError">
-        {{globalError}}<br>
+<lnd-alert
+    *ngIf="globalError.length"
+    type="danger">
+    <ng-container *ngFor="let error of globalError">
+        {{ error }}<br>
     </ng-container>
 </lnd-alert>
-<form [formGroup]="form"
-      (keydown)="resetCustomFieldError()"
-      (change)="resetCustomFieldError()"
-      autocomplete="off"
-      class="form-container">
+<form
+    [formGroup]="form"
+    (keydown)="resetCustomFieldError()"
+    (change)="resetCustomFieldError()"
+    autocomplete="off"
+    class="form-container">
     <lnd-form-field
         [error]="formError.commodityType || form.controls.commodityType.errors"
         [formControl]="form.controls.commodityType"
@@ -169,13 +171,6 @@
             (action)="submitForm()"
             [isDisabled]="formLoading"
             label="Uložit a vybrat nabídku">
-        </lnd-button>
-        <lnd-button
-            type="secondary"
-            (action)="submitForm()"
-            [isDisabled]="formLoading"
-            customClass="mt-3"
-            label="Uložit">
         </lnd-button>
     </div>
 </form>

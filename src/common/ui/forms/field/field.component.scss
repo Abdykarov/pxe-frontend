@@ -423,6 +423,7 @@ textarea.form-control--not-empty {
 		}
 
 		&::before {
+			background-color: transparent;
 			border-color: $custom-control-indicator-border-color;
 		}
 	}

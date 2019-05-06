@@ -31,7 +31,6 @@ export const cookiesPageRoutes: Routes = [
         component: CookiesPageComponent,
         data: {
             isPublic: true,
-            isSimpleFooter: true,
             loginType: LoginType.NONE,
             logoutType: LogoutType.NONE,
             signUpType: SignType.STATIC,
