@@ -1,12 +1,5 @@
-import {
-    AbstractControl,
-    ValidationErrors,
-    ValidatorFn,
-} from '@angular/forms';
-
-import * as R_ from 'ramda-extension';
-
 import { EanValidator } from 'src/common/utils/ean-validator.fnc';
+import { EicValidator } from './eic-validator.fnc';
 
 export class CustomValidators {
 
@@ -16,7 +9,8 @@ export class CustomValidators {
         }
 
         phoneNumber.markAsTouched();
-        if (/^(\+420)?[0-9]{9}$|^(\+){1}[0-9]{10,20}$/.test(phoneNumber.value)) {
+        const PHONE_REGEXP = /^(\+420)?[0-9]{9}$|^(\+){1}[0-9]{10,20}$/;
+        if (PHONE_REGEXP.test(phoneNumber.value)) {
             return null;
         }
 
@@ -55,6 +49,53 @@ export class CustomValidators {
 
         return {
             ean: true,
+        };
+    }
+
+    static eic = (eic) => {
+        if (eic.pristine) {
+            return null;
+        }
+
+        eic.markAsTouched();
+        if (EicValidator.validate(eic.value)) {
+            return null;
+        }
+
+        return {
+            eic: true,
+        };
+    }
+
+    static eicFormat = (eic) => {
+        if (eic.pristine) {
+            return null;
+        }
+
+        eic.markAsTouched();
+        const EIC_REGEXP = /^27Z|zG|g.{12}$/;
+        if (EIC_REGEXP.test(eic.value)) {
+            return null;
+        }
+
+        return {
+            pattern: true,
+        };
+    }
+
+    static eanFormat = (ean) => {
+        if (ean.pristine) {
+            return null;
+        }
+
+        ean.markAsTouched();
+        const EAN_REGEXP = /^8591824\d{11}$/;
+        if (EAN_REGEXP.test(ean.value)) {
+            return null;
+        }
+
+        return {
+            pattern: true,
         };
     }
 
