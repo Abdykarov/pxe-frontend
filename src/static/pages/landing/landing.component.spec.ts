@@ -9,7 +9,7 @@ import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { LandingComponent } from './landing.component';
 import { MapCoverageModule } from 'src/common/ui/map-coverage/map-coverage.module';
-import { NewsSubscriptionModule } from 'src/common/ui/news-subscription/news-subscription.module';
+import { RegistrationFormModule } from 'src/common/containers/form/forms/registration/registration-form.module';
 import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
 
 describe('LandingComponent', () => {
@@ -26,7 +26,7 @@ describe('LandingComponent', () => {
                 ButtonModule,
                 FormModule,
                 MapCoverageModule,
-                NewsSubscriptionModule,
+                RegistrationFormModule,
                 SupplierModule,
             ],
         })

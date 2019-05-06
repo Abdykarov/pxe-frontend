@@ -1,4 +1,4 @@
-import { EanValidator } from 'src/common/utils/ean-validator.fnc';
+import { EanValidator } from './ean-validator.fnc';
 import { EicValidator } from './eic-validator.fnc';
 
 export class CustomValidators {
