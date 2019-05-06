@@ -30,6 +30,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
+                CustomValidators.eanFormat,
                 CustomValidators.ean,
             ],
         ],
