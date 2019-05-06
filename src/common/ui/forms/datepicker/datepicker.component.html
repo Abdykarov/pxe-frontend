@@ -1,7 +1,11 @@
 <div
     class="form-group"
     [formGroup]="parentForm">
-    <div class="form-control-case input-group--append">
+    <div
+        class="form-control-case input-group--append"
+        [class.input-group]="!!appendButtonIcon"
+        [class.input-group--append]="!!appendButtonIcon"
+        [class.input-group--append-button-icon]="!!appendButtonIcon">
         <div
             class="form-control-wrapper"
             [class.invalid-input]="!!error && !!touched"
@@ -37,7 +41,7 @@
         </label>
         <div
             *ngIf="!!appendButtonIcon"
-            class="input-group-append">
+            class="input-group-append-help">
             <button
                 (click)="appendButtonAction.emit()"
                 type="button"

@@ -20,6 +20,7 @@
         [class.custom-checkbox]="type === 'CHECKBOX'"
         [class.input-group]="!!appendIcon || !!appendButtonIcon || !!prependIcon || !!prependButtonIcon"
         [class.input-group--append]="!!appendIcon || !!appendButtonIcon || !!appendText"
+        [class.input-group--append-button-icon]="!!appendButtonIcon"
         [class.input-group--prepend]="!!prependIcon || !!prependButtonIcon"
         [class.select]="type === 'SELECT'"
         [class.custom-checkbox--switch]="type === 'SWITCH'"
@@ -354,7 +355,7 @@
         </div>
         <div
             *ngIf="!!appendButtonIcon"
-            class="input-group-append">
+            class="input-group-append-help">
             <button
                 (click)="appendButtonAction.emit()"
                 type="button"

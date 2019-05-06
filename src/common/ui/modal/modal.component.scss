@@ -97,7 +97,7 @@
 		height: $icon-size-px;
 		line-height: $icon-size-px;
 		@include reset-pa-ma;
-		font-family: 'roboto_mono';
+		font-family: $font-family-sans-serif;
 		color: $body-color;
 		font-size: ( $icon-size-px * 1.5 );
 
