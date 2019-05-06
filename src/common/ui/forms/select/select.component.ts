@@ -3,7 +3,6 @@ import {
     EventEmitter,
     Input,
     Output,
-    TemplateRef,
     ViewEncapsulation,
 } from '@angular/core';
 
@@ -11,6 +10,7 @@ import { FormGroup } from '@angular/forms';
 import { getErrorMessage } from 'src/common/utils';
 import { IOption } from '../models/option.model';
 import { IValidationMessages } from '../models/validation-messages.model';
+import { NgSelectConfig } from '@ng-select/ng-select';
 
 @Component({
     selector: 'lnd-select',
@@ -71,9 +71,6 @@ export class SelectComponent {
     typeahead?: EventEmitter<any>;
 
     @Input()
-    public templateTag?: TemplateRef<any>;
-
-    @Input()
     public warning?: any;
 
     public customSearchFn = (term: string, item: any) => {
@@ -83,4 +80,12 @@ export class SelectComponent {
     }
 
     public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages);
+
+    constructor(private config: NgSelectConfig) {
+        this.config.notFoundText = 'Nenalezeno';
+        this.config.typeToSearchText = 'Napište výraz';
+        this.config.addTagText = 'Přidat položku';
+        this.config.loadingText = 'Načítání...';
+        this.config.clearAllText = 'Vymazat';
+    }
 }

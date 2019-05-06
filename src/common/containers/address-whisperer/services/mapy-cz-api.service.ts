@@ -28,7 +28,13 @@ export class MapyCzApiService {
         const userData: IUserDataMapyCzResponse = resultMapyCz.userData;
         return {
             label: `${userData.suggestFirstRow}, ${userData.suggestSecondRow}, ${userData.zipCode}`,
-            value: `${userData.suggestFirstRow}, ${userData.suggestSecondRow}, ${userData.zipCode}`,
+            value: {
+                street: userData.street,
+                orientationNumber: userData.streetNumber,
+                descriptiveNumber: userData.houseNumber,
+                city: userData.municipality,
+                postCode: userData.zipCode,
+            },
             key:   `${userData.suggestFirstRow}, ${userData.suggestSecondRow}, ${userData.zipCode}`,
         };
     }
