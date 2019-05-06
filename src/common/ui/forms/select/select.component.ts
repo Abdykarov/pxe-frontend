@@ -3,14 +3,18 @@ import {
     EventEmitter,
     Input,
     Output,
+    TemplateRef,
     ViewEncapsulation,
 } from '@angular/core';
-
 import { FormGroup } from '@angular/forms';
+
+import * as R from 'ramda';
+import { NgSelectConfig } from '@ng-select/ng-select';
+
 import { getErrorMessage } from 'src/common/utils';
 import { IOption } from '../models/option.model';
 import { IValidationMessages } from '../models/validation-messages.model';
-import { NgSelectConfig } from '@ng-select/ng-select';
+import { messagesConfig } from './select-text-config';
 
 @Component({
     selector: 'lnd-select',
@@ -65,6 +69,12 @@ export class SelectComponent {
     public touched = false;
 
     @Input()
+    public templateItem?: TemplateRef<any>;
+
+    @Input()
+    public templateLabel?: TemplateRef<any>;
+
+    @Input()
     public validationMessages?: IValidationMessages;
 
     @Input()
@@ -82,10 +92,11 @@ export class SelectComponent {
     public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages);
 
     constructor(private config: NgSelectConfig) {
-        this.config.notFoundText = 'Nenalezeno';
-        this.config.typeToSearchText = 'Napište výraz';
-        this.config.addTagText = 'Přidat položku';
-        this.config.loadingText = 'Načítání...';
-        this.config.clearAllText = 'Vymazat';
+        R.pipe(
+            R.keys,
+            R.map(key => {
+                this.config[key] = messagesConfig[key];
+            }),
+        )(messagesConfig);
     }
 }
