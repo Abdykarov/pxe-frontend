@@ -34,7 +34,7 @@ export class LoginComponent extends AbstractComponent {
             .subscribe(
                 () => {
                     this.formLoading = false;
-                    this.router.navigate(['/secured/request/supply-point']);
+                    this.router.navigate(['/secured/supply-points/new-supply-point']);
                 },
                 error => {
                     const message = parseRestAPIErrors(error);

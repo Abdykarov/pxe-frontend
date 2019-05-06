@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { RequestRoutingModule } from './request-routing.module';
+import { RequestRoutingModule } from './request.routing';
 import { RequestComponent } from './request.component';
 
 @NgModule({
@@ -13,4 +13,4 @@ import { RequestComponent } from './request.component';
         RequestRoutingModule,
     ],
 })
-export class RequestModule { }
+export class RequestModule {}

@@ -3,22 +3,22 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
-import { SupplyPointRequestRoutingModule } from './supply-point-request.routing';
+import { NewSupplyPointRoutingModule } from './new-supply-point.routing';
 import { SupplyPointFormModule } from 'src/common/containers/form/forms/supply-point/supply-point-form.module';
-import { SupplyPointRequestComponent } from './supply-point-request.component';
+import { NewSupplyPointComponent } from './new-supply-point.component';
 import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.module';
 
 @NgModule({
     declarations: [
-        SupplyPointRequestComponent,
+        NewSupplyPointComponent,
     ],
     imports: [
         CommonModule,
         LayoutContainerModule,
+        NewSupplyPointRoutingModule,
         ProgressBarModule,
         ReactiveFormsModule,
         SupplyPointFormModule,
-        SupplyPointRequestRoutingModule,
     ],
 })
-export class SupplyPointRequestModule { }
+export class NewSupplyPointModule {}

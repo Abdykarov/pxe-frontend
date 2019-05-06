@@ -12,10 +12,10 @@ import { parseGraphQLErrors } from 'src/common/utils/';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
-    templateUrl: './supply-point-request.component.html',
-    styleUrls: ['./supply-point-request.component.scss'],
+    templateUrl: './new-supply-point.component.html',
+    styleUrls: ['./new-supply-point.component.scss'],
 })
-export class SupplyPointRequestComponent extends AbstractComponent {
+export class NewSupplyPointComponent extends AbstractComponent {
     public formFields = formFields;
     public formSent = false;
     public globalError: string[] = [];
@@ -24,7 +24,7 @@ export class SupplyPointRequestComponent extends AbstractComponent {
 
     public stepperProgressConfig: IStepperProgressItem[] = [
         {
-            url: '/secured/request/supply-point',
+            url: '/secured/supply-points/new-supply-point',
             done: false,
             label: 'Výběr odběrného místa',
         },
