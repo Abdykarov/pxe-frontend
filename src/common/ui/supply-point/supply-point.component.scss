@@ -31,10 +31,21 @@
         height: 100%;
         padding: ( $spacer * 1.5 ) $spacer;
 
+        &--info,
+        &--price {
+            // Media queries
+            @include media-breakpoint-up(md) {
+                padding: ( $spacer * 2.5 ) ( $spacer * 3 );
+            }
+        }
+
         &--info {
             background-color: $white;
 
             // Media queries
+            @include media-breakpoint-up(md) {
+                padding-left: ( $spacer * 1.5 );
+            }
             @include media-breakpoint-up(lg) {
                 background-color: $body-bg;
             }
@@ -42,9 +53,6 @@
 
         &--price {
             // Media queries
-            @include media-breakpoint-up(md) {
-                padding: ( $spacer * 2.5 ) ( $spacer * 3 );
-            }
             @include media-breakpoint-up(lg) {
                 background-color: $white;
             }
@@ -83,5 +91,28 @@
     &__value {
         display: block;
         font-size: 24px;
+    }
+
+    &__price-label {
+        display: flex;
+
+        // Media queries
+	    @include media-breakpoint-up(xl) {
+            align-items: flex-end;
+            height: 48px;
+            margin-bottom: $spacer;
+        }
+    }
+
+    &__price {
+        font-size: 24px;
+        line-height: ( 32 / 24 );
+
+        // Media queries
+	    @include media-breakpoint-up(md) {
+            display: block;
+            font-size: 36px;
+            line-height: ( 48 / 36 );
+        }
     }
 }
