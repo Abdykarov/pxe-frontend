@@ -23,7 +23,6 @@
                     [formGroup]="form"
                     class="form-container">
                     <lnd-form-field
-                        [formControl]="commodityType"
                         [id]="'commodityType'"
                         label="Komodita"
                         [type]="'RADIOGROUP'"
@@ -32,7 +31,6 @@
                         [options]="config.commodityTypeOptions"
                     ></lnd-form-field>
                     <lnd-form-field
-                        [formControl]="subscriberType"
                         [id]="'subscriberType'"
                         label="Odběratel"
                         [type]="'RADIOGROUP'"
@@ -52,7 +50,6 @@
                     <lnd-form-field
                         [appendButtonIcon]="'icon--info'"
                         (appendButtonAction)="openModal()"
-                        [formControl]="name"
                         [id]="'name'"
                         label="Název odběrného místa"
                         subtext="Cokoliv, podle čeho chcete místo identifikovat"
@@ -60,7 +57,6 @@
                     <lnd-form-field
                         [appendButtonIcon]="'icon--info'"
                         (appendButtonAction)="openModal()"
-                        [formControl]="ean"
                         [id]="'ean'"
                         label="EAN"
                         subtext="Jednoznačný identifikátor vašeho elektroměru"
@@ -68,7 +64,6 @@
                     <lnd-form-field
                         [appendButtonIcon]="'icon--info'"
                         (appendButtonAction)="openModal()"
-                        [formControl]="address"
                         [id]="'address'"
                         label="Adresa odběrného místa"
                     ></lnd-form-field>
@@ -91,7 +86,6 @@
                     <lnd-form-field
                         [appendButtonIcon]="'icon--info'"
                         (appendButtonAction)="openModal()"
-                        [formControl]="annualConsumptionNT"
                         [id]="'annualConsumptionNT'"
                         label="Roční spotřeba elektřiny (nízký tarif)"
                         appendText="MWh"
@@ -99,7 +93,6 @@
                     <lnd-form-field
                         [appendButtonIcon]="'icon--info'"
                         (appendButtonAction)="openModal()"
-                        [formControl]="annualConsumptionVT"
                         [id]="'annualConsumptionVT'"
                         label="Roční spotřeba elektřiny (vysoký tarif)"
                         appendText="MWh"
@@ -118,13 +111,11 @@
                         <lnd-button
                             type="primary"
                             (action)="submitAction()"
-                            [isDisabled]="formLoading"
                             label="Uložit a vybrat nabídku">
                         </lnd-button>
                         <lnd-button
                             type="link"
                             (action)="submitAction()"
-                            [isDisabled]="formLoading"
                             customClass="mt-3"
                             label="Uložit">
                         </lnd-button>
