@@ -11,15 +11,9 @@ import { NewSupplyPointPageConfig } from './config';
 })
 export class NewSupplyPointPageComponent {
     public form: FormGroup = new FormGroup({
-        commodityType: new FormControl(),
         supplierId: new FormControl(),
-        name: new FormControl(),
-        ean: new FormControl(),
-        address: new FormControl(),
         distributionRateId: new FormControl(),
         circuitBreakerId: new FormControl(),
-        annualConsumptionNT: new FormControl(),
-        annualConsumptionVT: new FormControl(),
         expirationDate: new FormControl(),
     });
 
@@ -27,7 +21,7 @@ export class NewSupplyPointPageComponent {
         public config: NewSupplyPointPageConfig,
     ) {}
 
-    public submitAction = () => alert('SUBMIT ACTION');
-
     public openModal = () => alert('MODAL OPENED');
+
+    public submitAction = () => alert('SUBMIT ACTION');
 }
