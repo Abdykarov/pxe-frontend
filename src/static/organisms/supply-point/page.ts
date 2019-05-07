@@ -4,7 +4,6 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 
 @Component({
   templateUrl: './page.html',
-  styleUrls: ['../../../common/ui/supply-point/supply-point.component.scss'], // smazat po vytvoreni UI komponenty
 })
 
 export class SupplyPointComponent {
