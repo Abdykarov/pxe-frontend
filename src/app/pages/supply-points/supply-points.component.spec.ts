@@ -3,6 +3,7 @@ import {
     ComponentFixture,
     TestBed,
 } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { SupplyPointsComponent } from './supply-points.component';
 
@@ -14,6 +15,9 @@ describe('SupplyPointComponent', () => {
         TestBed.configureTestingModule({
             declarations: [
                 SupplyPointsComponent,
+            ],
+            imports: [
+                RouterTestingModule,
             ],
         })
         .compileComponents();
