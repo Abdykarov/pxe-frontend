@@ -129,12 +129,12 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
     public showHelp = (field, title) => {
         this.modalsLoaderService
             .showModal.next({
-            component: HelpModalComponent,
-            instanceData: {
-                title: title,
-                alt: title,
-                url: this.helpDocuments[field].url,
-            },
+                component: HelpModalComponent,
+                instanceData: {
+                    url: this.helpDocuments[field].url,
+                    alt: title,
+                    showButton: false,
+                },
         });
     }
 
