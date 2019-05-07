@@ -1,18 +1,16 @@
-<!--pouziti-->
-<!--<ng-template #templateItem let-item="item" let-index>-->
-<!--    {{item | json}}-->
-<!--</ng-template>-->
-
 <lnd-select
-    [error]="parentForm.controls.whisperer.errors"
     [addTag]="true"
     [bindValue]="'value'"
-    [parentForm]="parentForm"
-    [selectName]="whispererName"
+    [error]="parentForm.controls[whispererName].errors"
+    [label]="label"
     [searchable]="true"
+    [selectName]="whispererName"
     [options]="addresses"
+    [parentForm]="parentForm"
+    [success]="parentForm.controls[whispererName].valid && (parentForm.controls[whispererName].touched)"
+    [templateItem]="templateItem"
+    [templateLabel]="templateLabel"
+    [touched]="parentForm.controls[whispererName].touched"
     [typeahead]="typeahead"
-    [success]="parentForm.controls.whisperer.valid && (parentForm.controls.whisperer.touched)"
-    [touched]="parentForm.controls.whisperer.touched"
 >
 </lnd-select>

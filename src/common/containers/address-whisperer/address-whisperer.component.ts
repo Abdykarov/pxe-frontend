@@ -3,6 +3,7 @@ import {
     Component,
     EventEmitter,
     Input,
+    TemplateRef,
 } from '@angular/core';
 import {
     FormGroup,
@@ -29,6 +30,15 @@ export class AddressWhispererComponent {
 
     @Input()
     public whispererName: string;
+
+    @Input()
+    public label: string;
+
+    @Input()
+    public templateItem?: TemplateRef<any>;
+
+    @Input()
+    public templateLabel?: TemplateRef<any>;
 
     public addresses: Array<IOption> = [];
 

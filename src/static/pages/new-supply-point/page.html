@@ -1,3 +1,15 @@
+<ng-template #templateItem let-item="item" let-index="index">
+    <div>
+        {{ item.label }}
+    </div>
+</ng-template>
+
+<ng-template #templateLabel let-item="item" let-index="index">
+    <div>
+        {{item.label }}
+    </div>
+</ng-template>
+
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12 col-md-6 offset-md-3 text-center">
@@ -61,12 +73,13 @@
                         label="EAN"
                         subtext="Jednoznačný identifikátor vašeho elektroměru"
                     ></lnd-form-field>
-                    <lnd-form-field
-                        [appendButtonIcon]="'icon--info'"
-                        (appendButtonAction)="openModal()"
-                        [id]="'address'"
-                        label="Adresa odběrného místa"
-                    ></lnd-form-field>
+                    <pxe-address-whisperer
+                        [label]="'Adresa'"
+                        [parentForm]="form"
+                        [whispererName]="'address'"
+                        [templateItem]="templateItem"
+                        [templateLabel]="templateLabel">
+                    </pxe-address-whisperer>
                     <lnd-select
                         [appendButtonIcon]="'icon--info'"
                         (appendButtonAction)="openModal()"
