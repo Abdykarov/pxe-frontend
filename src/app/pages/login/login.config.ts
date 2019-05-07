@@ -10,7 +10,6 @@ export const loginFormFields: IForm = {
             '',
             [
                 Validators.required,
-                CustomValidators.email,
             ],
         ],
         password: [
@@ -23,7 +22,6 @@ export const loginFormFields: IForm = {
     validationMessages: {
         username: {
             required: errorFieldMessages.email.required,
-            email: errorFieldMessages.email.email,
         },
         password: {
             required: errorFieldMessages.password.required,

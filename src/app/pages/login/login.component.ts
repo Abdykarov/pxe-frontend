@@ -4,6 +4,8 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
@@ -12,6 +14,9 @@ import {
 } from './login.config';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { parseRestAPIErrors } from 'src/common/utils/';
+
+
+const jwtHelperService = new JwtHelperService();
 
 @Component({
     templateUrl: './login.component.html',
@@ -43,8 +48,13 @@ export class LoginComponent extends AbstractComponent {
             .login(values)
             .subscribe(
                 respone => {
-                    this.submitLoginFormLoading = false;
-                    this.router.navigate(['/secured/request/supply-point']);
+                    // isdodavatel
+                    // if()
+                    this.sendSms(respone.token);
+
+
+                    // this.submitLoginFormLoading = false;
+                    // this.router.navigate(['/secured/request/supply-point']);
                 },
                 error => {
                     const message = parseRestAPIErrors(error);
@@ -60,8 +70,9 @@ export class LoginComponent extends AbstractComponent {
             .login(values)
             .subscribe(
                 () => {
-                    this.submitLoginFormLoading = false;
-                    this.router.navigate(['/secured/request/supply-point']);
+
+                    // this.submitLoginFormLoading = false;
+                    // this.router.navigate(['/secured/request/supply-point']);
                 },
                 error => {
                     const message = parseRestAPIErrors(error);
@@ -76,6 +87,14 @@ export class LoginComponent extends AbstractComponent {
     public forgottenPasswordAction = ($event) => {
         $event.preventDefault();
         window.open('/forgotten-password');
+    }
+
+    public sendSms(token: string) {
+        this.wasSentSms = true;
+        this.authService.sendSms(token).subscribe(res => {
+            console.log(res);
+        });
+
     }
 
     public reSendSms = ($event) => {

@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 import { LoginRoutingModule } from './login.routing';
 import { LoginComponent } from './login.component';
 

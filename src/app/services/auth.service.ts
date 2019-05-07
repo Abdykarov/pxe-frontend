@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {
+    HttpClient,
+    HttpHeaders,
+} from '@angular/common/http';
 
 import { of } from 'rxjs';
 import { map} from 'rxjs/operators';
@@ -67,8 +70,14 @@ export class AuthService {
             );
     }
 
-    sendSms = () => {
-        return this.http.get<any>(`${environment.url}/parc-rest/webresources/sms/send `)
+    sendSms = (token: string) => {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Authorization': 'Bearer ' + token,
+            }),
+        };
+
+        return this.http.get<any>(`${environment.url}/parc-rest/webresources/sms/send`, httpOptions)
             .pipe(
                 map(response => {
                     console.log(response);
