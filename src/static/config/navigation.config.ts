@@ -47,10 +47,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Icons',
                     'url': '/basic/icons',
                 },
-                // {
-                //     'label': 'Indicators',
-                //     'url': '/indicators',
-                // },
+                {
+                    'label': 'Indicators',
+                    'url': '/basic/indicators',
+                },
                 // {
                 //     'label': 'Pagination',
                 //     'url': '/pagination',
@@ -124,6 +124,10 @@ export const staticNavigationConfig: INavigationConfig = [
                 {
                     'label': 'Login',
                     'url': '/full/login',
+                },
+                {
+                    'label': 'Login after registration',
+                    'url': '/full/login-after-registration',
                 },
                 {
                     'label': 'Registration',

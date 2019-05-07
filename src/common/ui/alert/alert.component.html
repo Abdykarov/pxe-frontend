@@ -3,7 +3,8 @@
     [ngClass]="[
         type ? 'alert-' + type : '',
         isDismissible ? 'alert-dismissible' : '',
-        hasIcon && (type !== 'info') ? 'alert--with-icon' : ''
+        hasIcon && (type !== 'info') ? 'alert--with-icon' : '',
+        customClass ? customClass : ''
     ]">
     <span
         *ngIf="hasIcon && (type !== 'info')"

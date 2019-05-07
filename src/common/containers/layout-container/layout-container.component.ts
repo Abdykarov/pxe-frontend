@@ -10,9 +10,10 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
     styleUrls: ['./layout-container.component.scss'],
 })
 export class LayoutContainerComponent {
-    @Input()
-    public title;
 
     @Input()
     public breadcrumbItemsSimple: IBreadcrumbItems;
+
+    @Input()
+    public pageTitle: string;
 }

@@ -19,6 +19,10 @@
 		cursor: pointer;
 	}
 
+	.ng-select {
+		width: 100%;
+	}
+
 	.ng-select,
 	.ng-select-opened {
 		&.ng-select-focused .ng-select-container {
@@ -180,6 +184,7 @@
 
 		.ng-dropdown-panel-items {
 			padding: ( $spacer / 2.5 ) 0;
+			max-height: $select-dropdown-panel-height;
 			background-color: $input-bg;
 			border-radius: $input-border-radius;
 			box-shadow: 0 0 10px 0 rgba($black, .09);
