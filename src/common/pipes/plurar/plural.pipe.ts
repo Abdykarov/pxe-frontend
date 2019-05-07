@@ -16,18 +16,18 @@ export class PluralPipe implements PipeTransform {
 
     public itemPluralMapping = {
         'place': {
-            '=1' : 'Místo',
-            '=2' : 'Místa',
-            '=3' : 'Místa',
-            '=4' : 'Místa',
-            'other' : 'Míst',
+            '=1' : 'místo',
+            '=2' : 'místa',
+            '=3' : 'místa',
+            '=4' : 'místa',
+            'other' : 'míst',
         },
         'day': {
-            '=1' : 'Den',
-            '=2' : 'Dny',
-            '=3' : 'Dny',
-            '=4' : 'Dny',
-            'other' : 'Dní',
+            '=1' : 'den v kuse',
+            '=2' : 'dny v kuse',
+            '=3' : 'dny v kuse',
+            '=4' : 'dny v kuse',
+            'other' : 'dní v kuse',
         },
     };
 
