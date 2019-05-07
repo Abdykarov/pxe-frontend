@@ -10,28 +10,34 @@
         <div class="col-12 col-xl-7">
             <div class="supply-point__inner supply-point__inner--info">
                 <div class="row pb-4">
-                    <div class="col-3 col-md-2 col-xl-2 text-center">
+                    <div class="col-3 col-md-2 text-center">
                         <span class="icon icon--flash supply-point__icon"></span>
                     </div>
-                    <div class="col-9 col-md-10 col-xl-10">
+                    <div class="col-9 col-md-10">
                         <span class="supply-point__title">Byt – Praha</span>
                         <span class="supply-point__title-subtext">Běžný odběr (D0D1)</span>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 col-md-10 offset-md-2 col-xl-11 offset-xl-1">
+                    <div class="col-12 col-md-10 offset-md-2">
                         <div class="row justify-content-between">
-                            <div class="col-auto mb-3 mb-md-0">
-                                <span class="supply-point__value-name">Jistič</span>
-                                <span class="supply-point__value">3×10 A</span>
+                            <div class="col-6 col-md-auto">
+                                <div class="supply-point__value-box">
+                                    <span class="supply-point__value-name">Jistič</span>
+                                    <span class="supply-point__value">3×10 A</span>
+                                </div>
                             </div>
-                            <div class="col-auto order-md-2">
-                                <span class="supply-point__value-name">Spotřeba</span>
-                                <span class="supply-point__value">a 0,15%</span>
+                            <div class="col-6 col-md-auto order-md-2">
+                                <div class="supply-point__value-box">
+                                    <span class="supply-point__value-name">Spotřeba</span>
+                                    <span class="supply-point__value">a 0,15%</span>
+                                </div>
                             </div>
-                            <div class="col-auto order-md-1">
-                                <span class="supply-point__value-name">EAN</span>
-                                <span class="supply-point__value">123456789012</span>
+                            <div class="col-12 col-md-auto order-md-1">
+                                <div class="supply-point__value-box">
+                                    <span class="supply-point__value-name">EAN</span>
+                                    <span class="supply-point__value">123456789012</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -41,16 +47,16 @@
         <div class="col-12 col-xl-5">
             <div class="supply-point__inner supply-point__inner--price">
                 <div class="row">
-                    <div class="col-12 col-md-10 offset-md-2 offset-xl-0">
+                    <div class="col-12 col-md-10 offset-md-2 col-xl-12 offset-xl-0">
                         <div class="row">
                             <div class="col-12">
                                 <span class="supply-point__price-label">Cena</span>
                             </div>
-                            <div class="col-12 col-md-8 col-xl-12">
+                            <div class="col-12 col-md-8 col-xl-12 mb-4 mb-md-0">
                                 <span class="supply-point__price">660,00 Kč</span>
                                 / měsíc (Inogi)
                             </div>
-                            <div class="col-12 col-md-4 text-center d-xl-none">
+                            <div class="col-12 col-md-4 supply-point__addon">
                                 <lnd-button
                                     label="Vybrat"
                                     type="primary">
