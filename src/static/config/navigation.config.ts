@@ -95,12 +95,16 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/breadcrumb',
                 },
                 {
-                    'label': 'Progress bar',
-                    'url': '/basic/progress',
+                    'label': 'Info banner',
+                    'url': '/basic/info-banner',
                 },
                 {
                     'label': 'Modals',
                     'url': '/basic/modals',
+                },
+                {
+                    'label': 'Progress bar',
+                    'url': '/basic/progress',
                 },
             ],
         },

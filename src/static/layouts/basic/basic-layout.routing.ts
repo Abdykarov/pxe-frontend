@@ -37,6 +37,11 @@ import {
 } from 'src/static/atoms/icons/page.module';
 
 import {
+    InfoBannerPageModule,
+    infoBannerPageRoutes,
+} from 'src/static/organisms/info-banner/page.module';
+
+import {
     ModalsPageModule,
     modalsPageRoutes,
 } from 'src/static/organisms/modals/page.module';
@@ -68,6 +73,7 @@ const routes: Routes = [
             ...colorsPageRoutes,
             ...formsPageRoutes,
             ...iconsPageRoutes,
+            ...infoBannerPageRoutes,
             ...modalsPageRoutes,
             ...newSupplyPointPageRoutes,
             ...progressBarPageRoutes,
@@ -88,6 +94,7 @@ const routes: Routes = [
         ColorsPageModule,
         FormsPageModule,
         IconsPageModule,
+        InfoBannerPageModule,
         ModalsPageModule,
         NewSupplyPointPageModule,
         ProgressBarPageModule,
