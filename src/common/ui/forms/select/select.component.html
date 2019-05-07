@@ -30,8 +30,14 @@
             [typeahead]="typeahead"
             [searchFn]="customSearchFn">
             <ng-container *ngIf="templateItem; else defaultItem">
-                <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
-                    <ng-container *ngTemplateOutlet="templateItem; context: {item: item,index: index,search: search}"></ng-container>
+                <ng-template
+                    ng-option-tmp
+                    let-item="item"
+                    let-index="index"
+                    let-search="searchTerm">
+                    <div [ngOptionHighlight]="search">
+                        <ng-container *ngTemplateOutlet="templateItem; context: {item: item,index: index,search: search}"></ng-container>
+                    </div>
                 </ng-template>
             </ng-container>
             <ng-template #defaultItem>

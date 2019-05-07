@@ -15,7 +15,7 @@ import {
 } from 'rxjs/operators';
 
 import { IOption } from 'src/common/ui/forms/models/option.model';
-import { MapyCzApiService } from './services/mapy-cz-api.service';
+import { AddressWhispererService } from './services/address-whisperer.service';
 
 @Component({
     selector: 'pxe-address-whisperer',
@@ -41,19 +41,18 @@ export class AddressWhispererComponent {
     public templateLabel?: TemplateRef<any>;
 
     public addresses: Array<IOption> = [];
-
     public typeahead: EventEmitter<any>;
 
     constructor(
         private cd: ChangeDetectorRef,
-        private mapyCzService: MapyCzApiService,
+        private addressWhispererService: AddressWhispererService,
     ) {
         this.typeahead = new EventEmitter();
 
         this.typeahead
             .pipe(
                 debounceTime(200),
-                mergeMap((term: string) => this.mapyCzService.getPlaces(AddressWhispererComponent.ROWS_RESPONSE, term)),
+                mergeMap((term: string) => this.addressWhispererService.getPlaces(AddressWhispererComponent.ROWS_RESPONSE, term)),
             )
             .subscribe((addresses: Array<IOption>)  => {
                 this.addresses = addresses;

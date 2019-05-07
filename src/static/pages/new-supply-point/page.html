@@ -1,12 +1,22 @@
-<ng-template #templateItem let-item="item" let-index="index">
+<!-- Example custom lael template -->
+<ng-template
+    #templateLabel
+    let-item="item"
+    let-index="index">
     <div>
-        {{ item.label }}
+        <span class="icon icon--small icon--info"></span>&nbsp;{{ item.label }}
     </div>
 </ng-template>
-
-<ng-template #templateLabel let-item="item" let-index="index">
+<!-- Example searched items template -->
+<ng-template
+    #templateItem
+    let-item="item"
+    let-index="index">
     <div>
-        {{item.label }}
+        {{ item.value.street }}&nbsp;{{ item.value.orientationNumber }}/{{ item.value.descriptiveNumber }}
+    </div>
+    <div>
+        {{ item.value.city }}&nbsp;{{ item.value.postCode }}
     </div>
 </ng-template>
 

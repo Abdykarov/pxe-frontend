@@ -11,10 +11,10 @@ import { FormGroup } from '@angular/forms';
 import * as R from 'ramda';
 import { NgSelectConfig } from '@ng-select/ng-select';
 
+import { defaultSelectConfig } from './select.config';
 import { getErrorMessage } from 'src/common/utils';
 import { IOption } from '../models/option.model';
 import { IValidationMessages } from '../models/validation-messages.model';
-import { messagesConfig } from './select-text-config';
 
 @Component({
     selector: 'lnd-select',
@@ -75,10 +75,10 @@ export class SelectComponent {
     public templateLabel?: TemplateRef<any>;
 
     @Input()
-    public validationMessages?: IValidationMessages;
+    public typeahead?: EventEmitter<any>;
 
     @Input()
-    typeahead?: EventEmitter<any>;
+    public validationMessages?: IValidationMessages;
 
     @Input()
     public warning?: any;
@@ -95,8 +95,8 @@ export class SelectComponent {
         R.pipe(
             R.keys,
             R.map(key => {
-                this.config[key] = messagesConfig[key];
+                this.config[key] = defaultSelectConfig[key];
             }),
-        )(messagesConfig);
+        )(defaultSelectConfig);
     }
 }
