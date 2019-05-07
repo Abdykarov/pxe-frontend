@@ -1,11 +1,17 @@
 <span
     class="indicator"
-    [class.indicator--negative]="isNegative">
+    [class.indicator--negative]="isNegative && !neutralValue"
+    [class.indicator--positive]="!isNegative && !neutralValue">
     <span
+        *ngIf="!neutralValue"
         class="icon"
-        [ngClass]="isNegative ? 'icon--arrow-decrease' : 'icon--arrow-increase'">
+        [class.icon--arrow-decrease]="isNegative"
+        [class.icon--arrow-increase]="!isNegative">
     </span>
-    <span>
+    <span *ngIf="!neutralValue">
         {{ absValue | number:'1.1-2' }}%
+    </span>
+    <span *ngIf="!!neutralValue">
+        {{ neutralValue }}
     </span>
 </span>

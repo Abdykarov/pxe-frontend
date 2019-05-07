@@ -13,13 +13,18 @@ import * as R_ from 'ramda-extension';
 })
 export class IndicatorComponent implements OnInit {
     @Input()
-    public value: number;
+    public value: number | string;
 
     public absValue: number;
     public isNegative: boolean;
+    public neutralValue: string;
 
     ngOnInit() {
-        this.isNegative = R_.isNegative(this.value);
-        this.absValue = Math.abs(this.value);
+        if (R_.isNumber(this.value) && R_.isTruthy(this.value)) {
+            this.isNegative = R_.isNegative(this.value);
+            this.absValue = Math.abs(Number(this.value));
+        } else {
+            this.neutralValue = this.value.toString();
+        }
     }
 }

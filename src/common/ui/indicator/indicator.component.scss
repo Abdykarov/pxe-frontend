@@ -16,7 +16,10 @@
 	align-items: center;
 	font-size: $indicator-font-size;
 	line-height: $indicator-line-height;
-	color: $positive;
+
+	&--positive {
+		color: $positive;
+	}
 
 	&--negative {
 		color: $danger;

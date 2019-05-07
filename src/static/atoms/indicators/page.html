@@ -6,19 +6,31 @@
 <h3>Trend indicators</h3>
 <div class="static-pages">
     <div class="row mb-1">
-        <div class="col-6 col-md-3">
+        <div class="col-3 col-md-3">
             <h4>Trend up</h4>
         </div>
-        <div class="col-6 col-md-3">
+        <div class="col-3 col-md-3">
             <h4>Trend down</h4>
+        </div>
+        <div class="col-3 col-md-3">
+            <h4>Trend string</h4>
+        </div>
+        <div class="col-3 col-md-3">
+            <h4>Trend null</h4>
         </div>
     </div>
     <div class="row mb-1">
-        <div class="col-6 col-md-3">
-            <lnd-indicator value="0.159515"></lnd-indicator>
+        <div class="col-3 col-md-3">
+            <lnd-indicator [value]="0.159515"></lnd-indicator>
         </div>
-        <div class="col-6 col-md-3">
-            <lnd-indicator value="-10.10"></lnd-indicator>
+        <div class="col-3 col-md-3">
+            <lnd-indicator [value]="-10.10"></lnd-indicator>
+        </div>
+        <div class="col-3 col-md-3">
+            <lnd-indicator [value]="'String'"></lnd-indicator>
+        </div>
+        <div class="col-3 col-md-3">
+            <lnd-indicator [value]="0"></lnd-indicator>
         </div>
     </div>
 </div>
