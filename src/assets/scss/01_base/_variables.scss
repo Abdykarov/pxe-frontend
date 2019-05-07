@@ -49,6 +49,7 @@ $danger:                           #d0021b;                    // Danger color
 $danger-lighten:                   lighten($danger, 10%);
 $danger-dark:                      darken($danger, 15%);
 $danger-darken:                    darken($danger, 25%);
+$positive:                         #0aa374;                    // Positive color
 $info:                             $secondary;                   // Info color
 $light:                            $gray-300;                    // Light color
 $light-dark:                       $gray-400;
@@ -342,11 +343,6 @@ $placeloader-circle-radius:         0;
 // Tips
 $tip-height-small:                  80px;
 $tip-min-height-big:                180px;
-
-
-// Indicators
-$indicator-width:                   10px;
-$indicator-height:                  6px;
 
 
 // Tooltip

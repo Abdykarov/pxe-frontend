@@ -47,10 +47,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Icons',
                     'url': '/basic/icons',
                 },
-                // {
-                //     'label': 'Indicators',
-                //     'url': '/indicators',
-                // },
+                {
+                    'label': 'Indicators',
+                    'url': '/basic/indicators',
+                },
                 // {
                 //     'label': 'Pagination',
                 //     'url': '/pagination',
