@@ -36,16 +36,41 @@ export interface ISupplierSampleDocument {
     url: string;
 }
 
-export interface ISupplyPoint {
-    id: number;
-    commodityType: CommodityType;
-    supplier: ISupplier;
-    ean: string;
-    address: IAddress;
-    distributionRate: ICodelistItem;
-    circuitBreaker: ICodelistItem;
-    annualConsumptionNT: number;
-    annualConsumptionVT: number;
-    expirationDate: String;
+export interface ISupplyPointGasAttributes {
+    eic: string;
+    annualConsumption: number;
 }
 
+export interface ISupplyPointPowerAttributes {
+    ean: string;
+    circuitBreakerId: string;
+    distributionRateId: string;
+    annualConsumptionNT: number;
+    annualConsumptionVT: number;
+}
+
+export interface ISupplyPoint {
+    id: number;
+    supplierId: number;
+    name: string;
+    region: string;
+    address: IAddress;
+    expirationDate: string;
+}
+
+export interface ISupplyPointInput {
+    id: number;
+    supplierId: number;
+    name: string;
+    commodityType?: string;
+    region: string;
+    address: IAddress;
+    ean?: string;
+    circuitBreakerId?: string;
+    distributionRateId?: string;
+    annualConsumptionNT?: number;
+    annualConsumptionVT?: number;
+    eic?: string;
+    annualConsumption?: number;
+
+}

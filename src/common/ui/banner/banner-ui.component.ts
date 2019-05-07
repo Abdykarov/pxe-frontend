@@ -5,6 +5,7 @@ import {
     Output,
 } from '@angular/core';
 import { Router } from '@angular/router';
+
 import * as R from 'ramda';
 
 // own classes

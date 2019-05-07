@@ -1,15 +1,20 @@
-import {
-    ChangeDetectorRef,
-    Component,
-} from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
+import {
+    CommodityType,
+    ISupplyPoint,
+    ISupplyPointGasAttributes,
+    ISupplyPointInput,
+    ISupplyPointPowerAttributes,
+} from 'src/common/graphql/models/supply.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils/';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -53,11 +58,44 @@ export class SupplyPointRequestComponent extends AbstractComponent {
         super();
     }
 
-    public submitLoginForm = (values) => {
+    public submiSupplyForm = (supplyPointInput: ISupplyPointInput) => {
         this.formLoading = true;
         this.globalError = [];
         this.fieldError = {};
-        this.supplyService.saveElectricitySupplyPoint(values)
+
+        const supplyPoint: ISupplyPoint = R.pick(['id', 'supplierId', 'name', 'region', 'address', 'expirationDate'], supplyPointInput);
+        // todo pri mergy
+        supplyPoint.region = 'kraj';
+
+        console.log(supplyPointInput.commodityType);
+
+        if (supplyPointInput.commodityType === 'POWER') {
+            console.log('POWER');
+            const powerAttributes: ISupplyPointPowerAttributes =
+                R.pick([
+                    'ean',
+                    'circuitBreakerId',
+                    'distributionRateId',
+                    'annualConsumptionNT',
+                    'annualConsumptionVT',
+                ], supplyPointInput);
+
+            console.log(powerAttributes);
+
+            this.saveElectricitySupplyPoint(supplyPoint, powerAttributes);
+        } else {
+            const gasAttributes: ISupplyPointGasAttributes =
+                R.pick([
+                    'eic',
+                    'annualConsumption',
+                ], supplyPointInput);
+
+            this.saveGasSupplyPoint(supplyPoint, gasAttributes);
+        }
+    }
+
+    private saveElectricitySupplyPoint(supplyPoint: ISupplyPoint, gasAttributes: ISupplyPointPowerAttributes) {
+        this.supplyService.saveElectricitySupplyPoint(supplyPoint, gasAttributes)
             .subscribe(
                 (data) => {
                     this.formLoading = false;
@@ -72,6 +110,24 @@ export class SupplyPointRequestComponent extends AbstractComponent {
                     this.globalError = globalError;
                     this.cd.markForCheck();
                 });
-
     }
+
+    private saveGasSupplyPoint(supplyPoint: ISupplyPoint, gasAttributes: ISupplyPointGasAttributes) {
+        this.supplyService.saveGasSupplyPoint(supplyPoint, gasAttributes)
+            .subscribe(
+                (data) => {
+                    this.formLoading = false;
+                    this.formSent = true;
+                    this.cd.markForCheck();
+                    this.router.navigate(['/secured/request/offer-selection']);
+                },
+                (error) => {
+                    this.formLoading = false;
+                    const { fieldError, globalError } = parseGraphQLErrors(error);
+                    this.fieldError = fieldError;
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
+                });
+    }
+
 }
