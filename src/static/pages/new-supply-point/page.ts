@@ -28,4 +28,6 @@ export class NewSupplyPointPageComponent {
     ) {}
 
     public submitAction = () => alert('SUBMIT ACTION');
+
+    public openModal = () => alert('MODAL OPENED');
 }
