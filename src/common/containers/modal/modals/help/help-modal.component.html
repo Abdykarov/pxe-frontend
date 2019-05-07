@@ -1,14 +1,19 @@
-<lnd-modal [title]="instanceData.title"
-           [isModalOpen]="modalOpen"
-           (close)="closeModal.emit()">
+<lnd-modal
+    [isModalOpen]="modalOpen"
+    (close)="closeModal.emit()">
     <div class="modal-body">
-        <img [src]="instanceData.url" [alt]="instanceData.alt" />
+        <img
+            [attr.src]="instanceData.url"
+            [attr.alt]="instanceData.alt"
+            [attr.title]="instanceData.alt"/>
     </div>
-    <div class="modal-footer">
-        <lnd-button type="primary"
-                    (action)="closeModal.emit()"
-                    label="OK"
-                    customClass="btn-sm"
-        ></lnd-button>
+    <div
+        *ngIf="!!instanceData.showButton"
+        class="modal-footer">
+        <lnd-button
+            type="primary"
+            label="Zavřít"
+            (action)="closeModal.emit()">
+        </lnd-button>
     </div>
 </lnd-modal>

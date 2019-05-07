@@ -4,5 +4,6 @@
  -
  */
 
-$select-arrow-size:           $icon-size-small-px;
-$select-clear-size:           15px;
+$select-arrow-size:               $icon-size-small-px;
+$select-clear-size:               15px;
+$select-dropdown-panel-height:    196px; // 5x ng-option height + ng-dropdown-panel-items padding top and bottom
