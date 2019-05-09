@@ -26,7 +26,7 @@ export class RegistrationFormComponent extends AbstractFormComponent {
         this.triggerValidation();
         if (this.form.valid) {
             const val = this.form.value;
-            val.preregistration = !!this.isSignUp ? false : true;
+            val.preregistration = !this.isSignUp;
             this.submitAction.emit(val);
         }
     }

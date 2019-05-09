@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { loginFormFields } from './login.config';
+import { loginFormFields } from 'src/common/containers/form/forms/login/login-form.config';
 import { parseRestAPIErrors } from 'src/common/utils/';
 
 @Component({

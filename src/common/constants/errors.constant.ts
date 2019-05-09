@@ -28,7 +28,7 @@ export const errorFieldMessages =  {
     },
     consent: {
         signUp: {
-            required: 'Nezapomeňte na souhlas se zpracovním osobních údajů.',
+            required: 'Nezapomeňte na souhlas se zpracováním osobních údajů.',
         },
         newsSubscription: {
             required: 'Nezapomeňte na souhlas se zásadami bezpečnosti.',
