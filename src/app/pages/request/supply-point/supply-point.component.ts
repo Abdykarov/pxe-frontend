@@ -7,8 +7,6 @@ import { Router } from '@angular/router';
 import * as R from 'ramda';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
-import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
     CommodityType,
     ISupplyPoint,
@@ -16,6 +14,8 @@ import {
     ISupplyPointFormData,
     ISupplyPointPowerAttributes,
 } from 'src/common/graphql/models/supply.model';
+import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
+import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
