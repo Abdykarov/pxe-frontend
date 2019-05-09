@@ -4,7 +4,16 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 
+import * as R from 'ramda';
+
 import { AbstractComponent } from 'src/common/abstract.component';
+import {
+    CommodityType,
+    ISupplyPoint,
+    ISupplyPointGasAttributes,
+    ISupplyPointFormData,
+    ISupplyPointPowerAttributes,
+} from 'src/common/graphql/models/supply.model';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
@@ -48,11 +57,38 @@ export class SupplyPointComponent extends AbstractComponent {
         super();
     }
 
-    public submitForm = (values) => {
+    public submiSupplyForm = (supplyPointFormData: ISupplyPointFormData) => {
         this.formLoading = true;
         this.globalError = [];
         this.fieldError = {};
-        this.supplyService.saveElectricitySupplyPoint(values)
+        let saveSupplyPoint;
+
+        const supplyPoint: ISupplyPoint = R.pick(['id', 'supplierId', 'name', 'region', 'address', 'expirationDate'], supplyPointFormData);
+
+        // todo pri mergy s naseptavacem adres
+        supplyPoint.region = 'kraj';
+        supplyPoint.subjectType =  'INDIVIDUAL';
+
+        if (supplyPointFormData.commodityType === CommodityType.POWER) {
+            const powerAttributes: ISupplyPointPowerAttributes =
+                R.pick([
+                    'ean',
+                    'circuitBreakerId',
+                    'distributionRateId',
+                    'annualConsumptionNT',
+                    'annualConsumptionVT',
+                ], supplyPointFormData);
+            saveSupplyPoint = this.supplyService.savePowerSupplyPoint(supplyPoint, powerAttributes);
+        } else {
+            const gasAttributes: ISupplyPointGasAttributes =
+                R.pick([
+                    'eic',
+                    'annualConsumption',
+                ], supplyPointFormData);
+            saveSupplyPoint = this.supplyService.saveGasSupplyPoint(supplyPoint, gasAttributes);
+        }
+
+        saveSupplyPoint
             .subscribe(
                 (data) => {
                     this.formLoading = false;
@@ -67,6 +103,5 @@ export class SupplyPointComponent extends AbstractComponent {
                     this.globalError = globalError;
                     this.cd.markForCheck();
                 });
-
     }
 }
