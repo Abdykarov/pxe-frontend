@@ -7,8 +7,6 @@ import {
     PipeTransform,
 } from '@angular/core';
 
-import * as R_ from 'ramda-extension';
-
 @Pipe({
     name: 'plural',
 })
@@ -44,10 +42,10 @@ export class PluralPipe implements PipeTransform {
 
     transform(value: any, label: string): string {
         const i18nPipe: I18nPluralPipe = new I18nPluralPipe(this.localization);
-        const amount = Math.abs(parseInt(value.toString(), 10));
-        if (!this.itemPluralMapping[label] || !R_.isNumeric(amount)) {
+        if (!this.itemPluralMapping[label]) {
             return label;
         }
+        const amount = Math.abs(parseInt(value.toString(), 10));
         return i18nPipe.transform(amount, this.itemPluralMapping[label]);
     }
 }
