@@ -46,6 +46,10 @@ import {
     progressBarPageRoutes,
 } from 'src/static/organisms/progress-bar/progress-bar.module';
 import {
+    SamplePointsPageModule,
+    samplePointsPageRoutes,
+} from 'src/static/pages/sample-points/page.module';
+import {
     TypographyPageModule,
     typographyPageRoutes,
 } from 'src/static/atoms/typography/page.module';
@@ -65,6 +69,7 @@ const routes: Routes = [
             ...modalsPageRoutes,
             ...newSupplyPointPageRoutes,
             ...progressBarPageRoutes,
+            ...samplePointsPageRoutes,
             ...typographyPageRoutes,
             {
                 path: '**',
@@ -87,6 +92,7 @@ const routes: Routes = [
         NewSupplyPointPageModule,
         ProgressBarPageModule,
         RouterModule.forChild(routes),
+        SamplePointsPageModule,
         TypographyPageModule,
     ],
     exports: [
