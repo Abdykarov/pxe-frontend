@@ -3,24 +3,28 @@ import {
     ComponentFixture,
     TestBed,
 } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
-import { SupplyPointComponent } from './supply-point.component';
+import { SupplyPointsComponent } from './supply-points.component';
 
 describe('SupplyPointComponent', () => {
-    let component: SupplyPointComponent;
-    let fixture: ComponentFixture<SupplyPointComponent>;
+    let component: SupplyPointsComponent;
+    let fixture: ComponentFixture<SupplyPointsComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                SupplyPointComponent,
+                SupplyPointsComponent,
+            ],
+            imports: [
+                RouterTestingModule,
             ],
         })
         .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(SupplyPointComponent);
+        fixture = TestBed.createComponent(SupplyPointsComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

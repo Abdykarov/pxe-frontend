@@ -13,7 +13,7 @@ const routes: Routes = [
         children: [
             {
                 path: 'supply-point',
-                loadChildren: '../../pages/request/supply-point-request/supply-point-request.module#SupplyPointRequestModule',
+                loadChildren: '../../pages/request/supply-point/supply-point.module#SupplyPointModule',
             },
             {
                 path: 'offer-selection',
