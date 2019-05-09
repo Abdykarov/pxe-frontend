@@ -27,6 +27,9 @@ export class SelectComponent {
     public appendButtonAction?: EventEmitter<any> = new EventEmitter();
 
     @Input()
+    public customClass?: string;
+
+    @Input()
     public addTag = false;
 
     @Input()

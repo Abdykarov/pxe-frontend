@@ -4,7 +4,7 @@
     let-item="item"
     let-index="index">
     <div>
-        <span class="icon icon--small icon--info"></span>&nbsp;{{ item.label }}
+        {{ item.label }}
     </div>
 </ng-template>
 <!-- Example searched items template -->
@@ -12,12 +12,14 @@
     #templateItem
     let-item="item"
     let-index="index">
-    <div>
+    <span class="option-address">
+        <!-- Jugoslávských Partyzánů 20/1155  -->
         {{ item.value.street }}&nbsp;{{ item.value.orientationNumber }}/{{ item.value.descriptiveNumber }}
-    </div>
-    <div>
+    </span>
+    <span class="option-address">
+        <!-- Praha 6 16000 -->
         {{ item.value.city }}&nbsp;{{ item.value.postCode }}
-    </div>
+    </span>
 </ng-template>
 
 <div class="container-fluid">

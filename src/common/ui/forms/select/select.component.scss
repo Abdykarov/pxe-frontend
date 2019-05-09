@@ -76,7 +76,7 @@
 				.ng-input {
 					top: 0;
 					height: $input-height;
-					padding: $input-padding-y $input-padding-x ( $input-padding-y + $input-border-width );
+					padding: $input-padding-y $input-padding-x $select-input-padding-bottom;
 				}
 
 				.ng-input > input {
@@ -90,7 +90,7 @@
 				.ng-value-container {
 					align-items: center;
 					height: $input-height;
-					padding: $input-padding-y $input-padding-x ( $input-padding-y + $input-border-width );
+					padding: $input-padding-y $select-value-padding-right $select-input-padding-bottom $input-padding-x;
 					border: none;
 				}
 
@@ -143,7 +143,7 @@
 		}
 
 		.ng-clear-wrapper {
-			right: ( ( $spacer * 1.5 ) + $select-arrow-size );
+			right: $select-clear-right;
 			width: $select-clear-size;
 			height: $select-clear-size;
 
@@ -209,6 +209,9 @@
 		}
 
 		.ng-option {
+			padding: ( $spacer / 2 ) $input-padding-x;
+			line-height: $line-height-sm;
+
 			&.ng-option-selected {
 				background-color: $font-text;
 				color: $white;
@@ -250,6 +253,38 @@
 					background-color: $input-color-interactive-invalid;
 				}
 			}
+		}
+	}
+
+	// Address
+	&--address {
+		&.form-group .ng-select-container {
+			.ng-arrow-wrapper {
+				display: none;
+			}
+
+			.ng-clear-wrapper {
+				right: 20px;
+			}
+
+			.ng-value-container {
+				position: relative;
+				padding-right: ( $input-padding-x + $select-clear-size );
+
+				&::after {
+					content: '';
+					position: absolute;
+					top: 0;
+					right: ( $input-padding-x + $select-clear-size );
+					width: 50px;
+					height: 100%;
+					background: linear-gradient(90deg,rgba($input-bg, 0) 0,$input-bg 100%);
+				}
+			}
+		}
+
+		.option-address {
+			display: block;
 		}
 	}
 }
