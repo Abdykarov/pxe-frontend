@@ -258,27 +258,45 @@
 
 	// Address
 	&--address {
-		&.form-group .ng-select-container {
-			.ng-arrow-wrapper {
+		&.form-group {
+			.ng-select-container {
+				.ng-arrow-wrapper {
+					display: none;
+				}
+	
+				.ng-clear-wrapper {
+					right: 20px;
+				}
+	
+				.ng-value-container {
+					position: relative;
+					padding-right: ( $input-padding-x + $select-clear-size );
+	
+					&::after {
+						content: '';
+						position: absolute;
+						top: 0;
+						right: ( $input-padding-x + $select-clear-size );
+						width: 50px;
+						height: 100%;
+						background: linear-gradient(90deg,rgba($input-bg, 0) 0,$input-bg 100%);
+					}
+				}
+			}
+
+			.ng-dropdown-panel-items {
+				max-height: 100%;
+			}
+		}
+
+		.ng-select-opened {
+			.ng-dropdown-panel {
 				display: none;
 			}
 
-			.ng-clear-wrapper {
-				right: 20px;
-			}
-
-			.ng-value-container {
-				position: relative;
-				padding-right: ( $input-padding-x + $select-clear-size );
-
-				&::after {
-					content: '';
-					position: absolute;
-					top: 0;
-					right: ( $input-padding-x + $select-clear-size );
-					width: 50px;
-					height: 100%;
-					background: linear-gradient(90deg,rgba($input-bg, 0) 0,$input-bg 100%);
+			&.ng-select-filtered {
+				.ng-dropdown-panel {
+					display: block;
 				}
 			}
 		}

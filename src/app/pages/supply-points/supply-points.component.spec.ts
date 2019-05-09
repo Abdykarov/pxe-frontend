@@ -5,16 +5,16 @@ import {
 } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { RequestComponent } from './request.component';
+import { SupplyPointsComponent } from './supply-points.component';
 
-describe('RequestComponent', () => {
-    let component: RequestComponent;
-    let fixture: ComponentFixture<RequestComponent>;
+describe('SupplyPointComponent', () => {
+    let component: SupplyPointsComponent;
+    let fixture: ComponentFixture<SupplyPointsComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
-                RequestComponent,
+                SupplyPointsComponent,
             ],
             imports: [
                 RouterTestingModule,
@@ -24,7 +24,7 @@ describe('RequestComponent', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(RequestComponent);
+        fixture = TestBed.createComponent(SupplyPointsComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

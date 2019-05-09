@@ -1,8 +1,3 @@
-<ng-template #supplierTemplate>
-    <pxe-supplier [configSupplier]="configSupplier"></pxe-supplier>
-</ng-template>
-
-
 <div class="landing-page">
     <div class="section about-our-benefit section--picture-second">
         <div class="container-fluid">
@@ -30,8 +25,9 @@
                             </li>
                         </ul>
                         <lnd-button
-                            label="To chci"
-                            type="primary">
+                            label="Chci platit chytře"
+                            type="primary"
+                            (action)="scrollToNewSubscription()">
                         </lnd-button>
                     </div>
                 </div>
@@ -51,7 +47,7 @@
                 <div class="col-12">
                     <div class="px-3 px-md-0">
                         <h2 class="h2--public mb-6 mb-lg-7">
-                            Jak se PARCu daří
+                            Co vás v&nbsp;PARCu čeká
                         </h2>
                     </div>
                 </div>
@@ -66,32 +62,44 @@
                                     src="/assets/images/illustrations/house.svg"
                                     title="Nejdřív se seznámíme"
                                     alt="Ilustrace domu">
-                                <h3 class="h3--public">Nejdřív se seznámíme</h3>
-                                <p class="mb-0">Představíte sebe i&nbsp;vaše odběrné místo nebo&nbsp;nahrajete fakturu, ať&nbsp;máme potřebné informace.</p>
+                                <h3 class="h3--public">
+                                    Nejdřív se seznámíme
+                                </h3>
+                                <p class="mb-0">
+                                    Představíte sebe i&nbsp;vaše odběrné místo nebo&nbsp;nahrajete fakturu, ať&nbsp;máme potřebné informace.
+                                </p>
                             </div>
                             <span class="landing-page__process-arrow icon icon--arrow-process"></span>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="px-4 pt-7 pt-md-0 pb-7 pb-md-0">
                                 <img
-                                class="landing-page-illustration"
+                                    class="landing-page-illustration"
                                     src="/assets/images/illustrations/documents.svg"
                                     title="Dostanete nabídky"
                                     alt="Ilustrace podepsaných dokumentů">
-                                <h3 class="h3--public">Dostanete nabídky</h3>
-                                <p class="mb-0">Získáme pro&nbsp;vás ty nejzajímavější nabídky od&nbsp;dodavatelů, které&nbsp;před&nbsp;tím důkladně prověříme, ať&nbsp;se&nbsp;nemusíte ničeho bát.</p>
+                                <h3 class="h3--public">
+                                    Dostanete nabídky
+                                </h3>
+                                <p class="mb-0">
+                                    Získáme pro&nbsp;vás ty nejzajímavější nabídky od&nbsp;dodavatelů, které&nbsp;před&nbsp;tím důkladně prověříme, ať&nbsp;se&nbsp;nemusíte ničeho bát.
+                                </p>
                                 <span class="landing-page__process-arrow icon icon--arrow-process"></span>
                             </div>
                         </div>
                         <div class="col-13 col-md-4">
                             <div class="px-4 pt-7 pt-md-0">
                                 <img
-                                class="landing-page-illustration"
+                                    class="landing-page-illustration"
                                     src="/assets/images/illustrations/light.svg"
                                     title="Vyberete si a je to"
                                     alt="Ilustrace rozsvíceného světla">
-                                <h3 class="h3--public">Vyberete si a&nbsp;je to</h3>
-                                <p class="mb-0">Nejlákavější nabídku potvrdíte jedním kliknutím a&nbsp;potřebný převod už za&nbsp;vás zařídíme my.</p>
+                                <h3 class="h3--public">
+                                    Vyberete si a&nbsp;je to
+                                </h3>
+                                <p class="mb-0">
+                                    Nejlákavější nabídku potvrdíte jedním kliknutím a&nbsp;potřebný převod už za&nbsp;vás zařídíme my.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -123,7 +131,8 @@
                         </ul>
                         <lnd-button
                             label="Chci do PARCu"
-                            type="primary">
+                            type="primary"
+                            (action)="scrollToNewSubscription()">
                         </lnd-button>
                     </div>
                 </div>
@@ -137,29 +146,41 @@
                 alt="Cesta k nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC">
         </div>
     </div>
-    <pxe-map-coverage
-        [configCoverage]="configCoverage"
-        [supplierTemplateGas]="supplierTemplate"
-        [supplierTemplatePower]="supplierTemplate"
-    >
-    </pxe-map-coverage>
-    <div class="section stay-in-touch">
+    <pxe-map-coverage-container></pxe-map-coverage-container>
+    <div
+        #pxe_subscription
+        class="section stay-in-touch">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-3 col-lg-4 offset-lg-4">
                     <div class="px-3 px-md-0">
-                        <h3 class="h3--public">
-                            Chci mít také přístup k&nbsp;jiným cenám, možnost&nbsp;měnit dodavatele jen na&nbsp;jedno kliknutí a&nbsp;zbavit se starostí s&nbsp;převodem.
-                        </h3>
-                        <pxe-registration-form
-                            [formFields]="formFields"
-                            [formLoading]="formLoading"
-                            [formSent]="formSent"
-                            [globalError]="globalError"
-                            [fieldError]="fieldError"
-                            (submitAction)="submitForm($event)"
-                            [isSignUp]="false"
-                        ></pxe-registration-form>
+                        <ng-container *ngIf="!formSent">
+                            <h3 class="h3--public">
+                                Chci mít také přístup k&nbsp;jiným cenám, možnost&nbsp;měnit dodavatele jen na&nbsp;jedno kliknutí a&nbsp;zbavit se starostí s&nbsp;převodem.
+                            </h3>
+                            <pxe-registration-form
+                                [formFields]="formFields"
+                                [formLoading]="formLoading"
+                                [formSent]="formSent"
+                                [globalError]="globalError"
+                                [fieldError]="fieldError"
+                                (submitAction)="submitForm($event)"
+                                [isSignUp]="false"
+                            ></pxe-registration-form>
+                        </ng-container>
+                        <ng-container *ngIf="!!formSent">
+                            <img
+                                class="mb-2"
+                                width="122"
+                                height="129"
+                                src="/assets/images/illustrations/mail-letter.svg"
+                                title="Děkujeme za váš zájem"
+                                alt="Děkujeme za váš zájem">
+                            <h3 class="h3--public mb-0">
+                                Děkujeme za váš zájem.<br>
+                                Hned jak službu spustíme, tak se vám ozveme.
+                            </h3>
+                        </ng-container>
                     </div>
                 </div>
             </div>

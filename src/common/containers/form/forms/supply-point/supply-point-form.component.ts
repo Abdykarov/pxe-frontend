@@ -40,6 +40,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
     public commodityTypeOptions: Array<IOption> = commodityTypeOptions;
     public codeLists;
     public helpDocuments = {};
+    public minDate: Date;
     public suppliers = [];
 
     constructor(
@@ -49,6 +50,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
         private supplyService: SupplyService,
     ) {
         super(fb);
+        this.minDate = new Date();
     }
 
     ngOnInit() {
