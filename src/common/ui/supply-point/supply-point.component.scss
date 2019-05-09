@@ -20,6 +20,7 @@
 		color: inherit;
 		border-radius: 4px;
 		box-shadow: 0 2px 5px rgba($box-shadow-color, .16);
+		overflow: hidden;
 
 		// Media queries
 		@include media-breakpoint-up(xl) {
@@ -49,7 +50,6 @@
 
 		&--price {
 			background-color: rgba($body-bg, .5);
-			position: relative;
 
 			// Media queries
 			@include media-breakpoint-up(xl) {
