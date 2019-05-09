@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { Subject } from 'rxjs';
 
-import { SCROLL_TO } from './model/scroll-to,model';
+import { SCROLL_TO } from './model/scroll-to.model';
 
 @Injectable({
     providedIn: 'root',

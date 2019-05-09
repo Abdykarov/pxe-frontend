@@ -20,7 +20,7 @@ import {
     parseGraphQLErrors,
     scrollToElementFnc,
 } from 'src/common/utils';
-import { SCROLL_TO } from 'src/app/services/model/scroll-to,model';
+import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
