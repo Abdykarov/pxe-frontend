@@ -29,15 +29,22 @@ export class PluralPipe implements PipeTransform {
             '=4' : 'dny v kuse',
             'other' : 'dní v kuse',
         },
+        'stackCapacity': {
+            '=1' : 'zásobník',
+            '=2' : 'zásobníky',
+            '=3' : 'zásobníky',
+            '=4' : 'zásobníky',
+            'other' : 'zásobníků',
+        },
     };
 
     constructor(
         private localization: NgLocalization,
     ) {}
 
-    transform(value: string, label: string): string {
+    transform(value: any, label: string): string {
         const i18nPipe: I18nPluralPipe = new I18nPluralPipe(this.localization);
-        const amount = Math.abs(parseInt(value, 10));
+        const amount = Math.abs(parseInt(value.toString(), 10));
         if (!this.itemPluralMapping[label] || !R_.isNumeric(amount)) {
             return label;
         }
