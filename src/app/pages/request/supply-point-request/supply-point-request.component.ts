@@ -66,8 +66,10 @@ export class SupplyPointRequestComponent extends AbstractComponent {
         const supplyPoint: ISupplyPoint = R.pick(['id', 'supplierId', 'name', 'region', 'address', 'expirationDate'], supplyPointInput);
         // todo pri mergy
         supplyPoint.region = 'kraj';
+        supplyPoint.subjectType =  'INDIVIDUAL';
 
-        console.log(supplyPointInput.commodityType);
+
+            console.log(supplyPointInput.commodityType);
 
         if (supplyPointInput.commodityType === 'POWER') {
             console.log('POWER');

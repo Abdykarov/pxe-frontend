@@ -56,6 +56,7 @@ export interface ISupplyPoint {
     region: string;
     address: IAddress;
     expirationDate: string;
+    subjectType: string;
 }
 
 export interface ISupplyPointInput {
