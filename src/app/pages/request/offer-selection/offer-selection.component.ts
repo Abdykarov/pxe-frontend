@@ -11,7 +11,7 @@ export class OfferSelectionComponent extends AbstractComponent {
 
     public stepperProgressConfigSimple1: IStepperProgressItem[] = [
         {
-            url: '/secured/supply-points/new-supply-point',
+            url: '/secured/request/supply-point',
             done: true,
             label: 'Výběr odběrného místa',
         },

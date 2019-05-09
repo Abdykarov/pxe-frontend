@@ -4,12 +4,12 @@ import {
     RouterModule,
 } from '@angular/router';
 
-import { NewSupplyPointComponent } from './new-supply-point.component';
+import { SupplyPointComponent } from './supply-point.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: NewSupplyPointComponent,
+        component: SupplyPointComponent,
     },
 ];
 

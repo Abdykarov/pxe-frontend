@@ -10,12 +10,6 @@ const routes: Routes = [
     {
         path: '',
         component: SupplyPointsComponent,
-        children: [
-            {
-                path: 'new-supply-point',
-                loadChildren: '../../pages/supply-points/new-supply-point/new-supply-point.module#NewSupplyPointModule',
-            },
-        ],
     },
 ];
 

@@ -12,6 +12,10 @@ const routes: Routes = [
         component: RequestComponent,
         children: [
             {
+                path: 'supply-point',
+                loadChildren: '../../pages/request/supply-point/supply-point.module#SupplyPointModule',
+            },
+            {
                 path: 'offer-selection',
                 loadChildren: '../../pages/request/offer-selection/offer-selection.module#OfferSelectionModule',
             },

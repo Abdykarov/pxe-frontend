@@ -8,14 +8,14 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
-import { parseGraphQLErrors } from 'src/common/utils/';
+import { parseGraphQLErrors } from 'src/common/utils';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
-    templateUrl: './new-supply-point.component.html',
-    styleUrls: ['./new-supply-point.component.scss'],
+    templateUrl: './supply-point.component.html',
+    styleUrls: ['./supply-point.component.scss'],
 })
-export class NewSupplyPointComponent extends AbstractComponent {
+export class SupplyPointComponent extends AbstractComponent {
     public formFields = formFields;
     public formSent = false;
     public globalError: string[] = [];
@@ -24,7 +24,7 @@ export class NewSupplyPointComponent extends AbstractComponent {
 
     public stepperProgressConfig: IStepperProgressItem[] = [
         {
-            url: '/secured/supply-points/new-supply-point',
+            url: '/secured/request/supply-point',
             done: false,
             label: 'Výběr odběrného místa',
         },
