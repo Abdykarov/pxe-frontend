@@ -31,6 +31,10 @@ export const CONSTS = {
 };
 
 export const ROUTES = {
+    ROUTER_REQUEST:
+        `/${CONSTS.getAllPaths.SECURED}/${CONSTS.getAllPaths.REQUEST}`,
+    ROUTER_SUPPLY_POINT:
+        `/${CONSTS.getAllPaths.SECURED}/${CONSTS.getAllPaths.SUPPLY_POINT_REQUEST}`,
     ROUTER_SECURED_REQUEST_SUPPLY_POINT:
         `/${CONSTS.getAllPaths.SECURED}/${CONSTS.getAllPaths.REQUEST}/${CONSTS.getAllPaths.SUPPLY_POINT_REQUEST}`,
     ROUTER_SECURED_REQUEST_OFFER_SELECTION:
