@@ -59,7 +59,7 @@ export interface ISupplyPoint {
     subjectType: string;
 }
 
-export interface ISupplyPointInput {
+export interface ISupplyPointFormData {
     id: number;
     supplierId: number;
     name: string;

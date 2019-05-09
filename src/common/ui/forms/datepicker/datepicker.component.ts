@@ -74,8 +74,11 @@ export class DatepickerComponent {
     @Input()
     public warning = false;
 
-    public minDate: Date;
-    public maxDate: Date;
+    @Input()
+    public minDate?: Date;
+
+    @Input()
+    public maxDate?: Date;
 
     constructor(
         private localeService: BsLocaleService,
@@ -84,8 +87,6 @@ export class DatepickerComponent {
         defineLocale(locale, csLocale);
         this.localeService.use(locale);
         this.config = defaultDatepickerConfig;
-        // this.minDate = new Date();
-        // this.maxDate = new Date();
     }
 
     public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages);

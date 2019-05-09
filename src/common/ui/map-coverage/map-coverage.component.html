@@ -4,7 +4,7 @@
             <div class="col-12">
                 <div class="px-3 px-md-0">
                     <h2 class="h2--public">
-                        Tady už PARC znají
+                        Jak se PARCu daří
                     </h2>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                                             {{configCoverage.power.places}}
                                         </div>
                                         <div class="box-info__unit">
-                                            {{configCoverage.power.places.toString() | plural:'place'}}
+                                            {{configCoverage.power.places | plural:'place'}}
                                         </div>
                                     </div>
                                 </div>
@@ -32,14 +32,14 @@
                             <div class="box-info box-info--primary">
                                 <div class="box-info__holder">
                                     <div class="box-info__label">
-                                        Výkon<br class="d-lg-none d-xl-none"> Temelínu
+                                        Práce<br class="d-lg-none d-xl-none"> Temelínu
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
                                             {{configCoverage.power.temelinPerformance}}
                                         </div>
                                         <div class="box-info__unit">
-                                            {{configCoverage.power.temelinPerformance.toString() | plural:'day'}}
+                                            {{configCoverage.power.temelinPerformance | plural:'day'}}
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +91,7 @@
                                             {{configCoverage.gas.places}}
                                         </div>
                                         <div class="box-info__unit">
-                                            {{configCoverage.gas.places.toString() | plural:'place'}}
+                                            {{configCoverage.gas.places | plural:'place'}}
                                         </div>
                                     </div>
                                 </div>
@@ -99,14 +99,14 @@
                             <div class="box-info box-info--primary">
                                 <div class="box-info__holder">
                                     <div class="box-info__label">
-                                        Objem největšího zásobníku plynu v&nbsp;ČR
+                                        Spotřeba největších zásobníků
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
                                             {{configCoverage.gas.stackCapacity}}
                                         </div>
                                         <div class="box-info__unit">
-                                            Násobek
+                                            {{configCoverage.gas.stackCapacity | plural:'stackCapacity'}}
                                         </div>
                                     </div>
                                 </div>

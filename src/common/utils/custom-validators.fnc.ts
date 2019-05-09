@@ -1,4 +1,4 @@
-import { EanValidator } from 'src/common/utils/ean-validator.fnc';
+import { EanValidator } from './ean-validator.fnc';
 import { EicValidator } from './eic-validator.fnc';
 
 export class CustomValidators {
@@ -8,7 +8,6 @@ export class CustomValidators {
             return null;
         }
 
-        phoneNumber.markAsTouched();
         const PHONE_REGEXP = /^(\+420)?[0-9]{9}$|^(\+){1}[0-9]{10,20}$/;
         if (PHONE_REGEXP.test(phoneNumber.value)) {
             return null;
@@ -24,7 +23,6 @@ export class CustomValidators {
             return null;
         }
 
-        email.markAsTouched();
         const EMAIL_REGEXP = new RegExp('^[a-zA-Z0-9!#$%&amp;&apos;\*+/=?^_`{|}~-]+(\.[a-zA-Z0-9!#$%&amp;' +
             '&apos;\*+/=?^_`{|}~-]+)*@(([a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9]+)?){1,63}\.)+([a-zA-Z0-9](' +
             '[-a-zA-Z0-9]*[a-zA-Z0-9]+)?){2,63}$');
@@ -42,7 +40,6 @@ export class CustomValidators {
             return null;
         }
 
-        ean.markAsTouched();
         if (EanValidator.validate(ean.value)) {
             return null;
         }
@@ -57,7 +54,6 @@ export class CustomValidators {
             return null;
         }
 
-        eic.markAsTouched();
         if (EicValidator.validate(eic.value)) {
             return null;
         }
@@ -72,7 +68,6 @@ export class CustomValidators {
             return null;
         }
 
-        eic.markAsTouched();
         const EIC_REGEXP = /^27Z|zG|g.{12}$/;
         if (EIC_REGEXP.test(eic.value)) {
             return null;
@@ -88,7 +83,6 @@ export class CustomValidators {
             return null;
         }
 
-        ean.markAsTouched();
         const EAN_REGEXP = /^8591824\d{11}$/;
         if (EAN_REGEXP.test(ean.value)) {
             return null;
@@ -106,7 +100,6 @@ export class CustomValidators {
             return null;
         }
 
-        number.markAsTouched();
         if (expresion.test(number.value)) {
             return null;
         }

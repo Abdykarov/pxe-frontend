@@ -15,7 +15,7 @@ export const navigationConfig: INavigationConfig = [
             __typename : 'secured',
         },
         {
-            'url': '/secured/supply-point',
+            'url': '/secured/supply-points',
             'label': 'ODBĚRNÁ MÍSTA',
             'icon': 'pin',
             __typename : 'secured',
