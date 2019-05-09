@@ -26,9 +26,11 @@ export class AddressWhispererService {
 
     private responeToResult = (resultMapyCz: IResultMapyCZResponse): IOption => {
         const userData: IUserDataMapyCzResponse = resultMapyCz.userData;
+        const numberSeparator = userData.streetNumber && userData.houseNumber ? '/' : '';
 
         return {
-            label: `${userData.suggestFirstRow}, ${userData.suggestSecondRow}, ${userData.zipCode}`,
+            label: `${userData.street} ${userData.streetNumber}${numberSeparator}${userData.houseNumber}, ` +
+                `${userData.municipality}, ${userData.zipCode}`,
             value: {
                 street: userData.street,
                 orientationNumber: userData.streetNumber,

@@ -4,7 +4,7 @@
     let-item="item"
     let-index="index">
     <div>
-        <span class="icon icon--small icon--info"></span>&nbsp;{{ item.label }}
+        {{ item.label }}
     </div>
 </ng-template>
 <!-- Example searched items template -->
@@ -13,7 +13,7 @@
     let-item="item"
     let-index="index">
     <div>
-        {{ item.value.street }}&nbsp;{{ item.value.orientationNumber }}/{{ item.value.descriptiveNumber }}
+        {{ item.value.street }}&nbsp;{{ item.value.orientationNumber }}<ng-container *ngIf="item && item.value && item.value.orientationNumber && item.value.descriptiveNumber">/</ng-container>{{ item.value.descriptiveNumber }}
     </div>
     <div>
         {{ item.value.city }}&nbsp;{{ item.value.postCode }}

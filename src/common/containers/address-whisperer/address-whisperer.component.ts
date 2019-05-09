@@ -11,18 +11,24 @@ import {
 
 import {
     debounceTime,
-    mergeMap,
+    distinctUntilChanged,
+    filter,
+    switchMap,
+    takeUntil,
 } from 'rxjs/operators';
 
-import { IOption } from 'src/common/ui/forms/models/option.model';
+import { AbstractComponent } from 'src/common/abstract.component';
 import { AddressWhispererService } from './services/address-whisperer.service';
+import { IOption } from 'src/common/ui/forms/models/option.model';
 
 @Component({
     selector: 'pxe-address-whisperer',
     templateUrl: './address-whisperer.component.html',
     styleUrls: ['./address-whisperer.component.scss'],
 })
-export class AddressWhispererComponent {
+export class AddressWhispererComponent extends AbstractComponent {
+    private static readonly ADDRESS_MIN_LENGTH = 2;
+    private static readonly DEBOUNCE_TIME = 200;
     private static readonly ROWS_RESPONSE = 5;
 
     @Input()
@@ -47,12 +53,16 @@ export class AddressWhispererComponent {
         private cd: ChangeDetectorRef,
         private addressWhispererService: AddressWhispererService,
     ) {
+        super();
         this.typeahead = new EventEmitter();
 
         this.typeahead
             .pipe(
-                debounceTime(200),
-                mergeMap((term: string) => this.addressWhispererService.getPlaces(AddressWhispererComponent.ROWS_RESPONSE, term)),
+                takeUntil(this.destroy$),
+                debounceTime(AddressWhispererComponent.DEBOUNCE_TIME),
+                filter(term => term && term.length >= AddressWhispererComponent.ADDRESS_MIN_LENGTH),
+                distinctUntilChanged(),
+                switchMap((term: string) => this.addressWhispererService.getPlaces(AddressWhispererComponent.ROWS_RESPONSE, term)),
             )
             .subscribe((addresses: Array<IOption>)  => {
                 this.addresses = addresses;
