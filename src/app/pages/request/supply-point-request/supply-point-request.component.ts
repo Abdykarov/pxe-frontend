@@ -1,4 +1,7 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+} from '@angular/core';
 import { Router } from '@angular/router';
 
 import * as R from 'ramda';
@@ -78,7 +81,7 @@ export class SupplyPointRequestComponent extends AbstractComponent {
                     'annualConsumptionVT',
                 ], supplyPointInput);
 
-            this.saveElectricitySupplyPoint(supplyPoint, powerAttributes);
+            this.savePowerSupplyPoint(supplyPoint, powerAttributes);
         } else {
             const gasAttributes: ISupplyPointGasAttributes =
                 R.pick([
@@ -90,8 +93,8 @@ export class SupplyPointRequestComponent extends AbstractComponent {
         }
     }
 
-    private saveElectricitySupplyPoint(supplyPoint: ISupplyPoint, gasAttributes: ISupplyPointPowerAttributes) {
-        this.supplyService.saveElectricitySupplyPoint(supplyPoint, gasAttributes)
+    private savePowerSupplyPoint(supplyPoint: ISupplyPoint, gasAttributes: ISupplyPointPowerAttributes) {
+        this.supplyService.savePowerSupplyPoint(supplyPoint, gasAttributes)
             .subscribe(
                 (data) => {
                     this.formLoading = false;

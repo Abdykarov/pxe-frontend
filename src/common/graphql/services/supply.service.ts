@@ -15,8 +15,8 @@ import {
     findSupplierDocumentsByComodity,
 } from 'src/common/graphql/queries/supply';
 import {
-    saveElectricitySupplyPoint,
     saveGasSupplyPoint,
+    savePowerSupplyPoint,
 } from '../mutation/supply';
 
 @Injectable({
@@ -75,10 +75,10 @@ export class SupplyService {
             .valueChanges;
     }
 
-    public saveElectricitySupplyPoint(supplyPoint: ISupplyPoint, powerAttributes: ISupplyPointPowerAttributes) {
+    public savePowerSupplyPoint(supplyPoint: ISupplyPoint, powerAttributes: ISupplyPointPowerAttributes) {
         return this.apollo
             .mutate({
-                mutation: saveElectricitySupplyPoint,
+                mutation: savePowerSupplyPoint,
                 variables: {
                     supplyPoint: supplyPoint,
                     powerAttributes: powerAttributes,
@@ -87,8 +87,6 @@ export class SupplyService {
     }
 
     public saveGasSupplyPoint(supplyPoint: ISupplyPoint, gasAttributes: ISupplyPointGasAttributes) {
-        console.log(supplyPoint);
-        console.log(gasAttributes);
         return this.apollo
             .mutate({
                 mutation: saveGasSupplyPoint,
