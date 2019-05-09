@@ -16,7 +16,7 @@ const routes = [
         children: [
             {
                 path: CONSTS.PATHS.EMPTY,
-                loadChildren: '../../pages/landing/landing-page.module#LandingPageModule',
+                loadChildren: '../../pages/landing/landing.module#LandingModule',
                 data: {
                     isPublic: true,
                     isSimpleFooter: true,

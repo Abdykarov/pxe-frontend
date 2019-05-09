@@ -32,16 +32,6 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     selector: 'pxe-supply-point-form',
     templateUrl: './supply-point-form.component.html',
     styleUrls: ['./supply-point-form.component.scss'],
-    // inputs: [
-    //     'formSent',
-    //     'formFields',
-    //     'formLoading',
-    //     'globalError',
-    //     'fieldError',
-    // ],
-    // outputs: [
-    //     'submitAction',
-    // ],
 })
 export class SupplyPointFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
     @Input()
@@ -50,6 +40,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
     public commodityTypeOptions: Array<IOption> = commodityTypeOptions;
     public codeLists;
     public helpDocuments = {};
+    public minDate: Date;
     public suppliers = [];
 
     constructor(
@@ -59,6 +50,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
         private supplyService: SupplyService,
     ) {
         super(fb);
+        this.minDate = new Date();
     }
 
     ngOnInit() {

@@ -10,7 +10,7 @@ import {
     CONSTS,
     ROUTES,
 } from 'src/app/app.constants';
-import { loginFormFields } from './login.config';
+import { loginFormFields } from 'src/common/containers/form/forms/login/login-form.config';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { parseRestAPIErrors } from 'src/common/utils/';
 
@@ -19,36 +19,34 @@ import { parseRestAPIErrors } from 'src/common/utils/';
     styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent extends AbstractComponent {
-    public loginFormFields = loginFormFields;
-    public loginGlobalError: string[] = [];
-    public submitLoginFormLoading = false;
+    public formFields = loginFormFields;
+    public globalError: string[] = [];
+    public formLoading = false;
 
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
-        private overlayService: OverlayService,
         private router: Router,
     ) {
         super();
     }
 
     public submitForm = (values) => {
-        this.submitLoginFormLoading = true;
-        this.loginGlobalError = [];
+        this.formLoading = true;
+        this.globalError = [];
         this.authService
             .login(values)
             .subscribe(
                 () => {
-                    this.submitLoginFormLoading = false;
+                    this.formLoading = false;
                     this.router.navigate([ROUTES.ROUTER_SECURED_REQUEST_SUPPLY_POINT]);
                 },
                 error => {
                     const message = parseRestAPIErrors(error);
-                    this.submitLoginFormLoading = false;
-                    this.loginGlobalError.push(message);
+                    this.formLoading = false;
+                    this.globalError.push(message);
                     this.cd.markForCheck();
                 });
-
     }
 
     public forgottenPasswordAction = ($event) => {

@@ -37,7 +37,7 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.SUPPLY_POINT,
-                loadChildren: '../../pages/supply-point/supply-point.module#SupplyPointModule',
+                loadChildren: '../../pages/supply-points/supply-points.module#SupplyPointsModule',
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,

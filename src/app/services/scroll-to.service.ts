@@ -4,10 +4,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
 import { CONSTS } from 'src/app/app.constants';
-
-export enum SCROLL_TO {
-    LANDING_SUBSCRIPTION,
-}
+import { SCROLL_TO } from './model/scroll-to.model';
 
 @Injectable({
     providedIn: 'root',
@@ -19,15 +16,13 @@ export class ScrollToService {
         private router: Router,
     ) {}
 
-    getScrollStream() {
-       return this.scrollRegister.asObservable();
-    }
+    getScrollStream = () => this.scrollRegister.asObservable();
 
-    activeScrollTo(scrollTo: SCROLL_TO) {
+    activeScrollTo = (scrollTo: SCROLL_TO) => {
         this.scrollRegister.next(scrollTo);
     }
 
-    scrollToSubscription() {
+    scrollToSubscription = () => {
         this.router.navigate([CONSTS.PATHS.EMPTY])
             .then(() => {
                 const that = this;
