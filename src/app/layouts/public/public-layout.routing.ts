@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { CONSTS} from 'src/app/app.constants';
+import { CONSTS } from 'src/app/app.constants';
 import { PublicLayoutComponent } from './public-layout.component';
 import {
     LoginType,
