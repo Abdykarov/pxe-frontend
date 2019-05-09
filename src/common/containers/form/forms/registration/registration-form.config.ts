@@ -9,7 +9,7 @@ import {
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
 
-export function registrationFormFieldsFnc(signUpType: SignUpType): IForm {
+export function createRegistrationFormFields(signUpType: SignUpType): IForm {
     return {
         controls: {
             email: [

@@ -1,10 +1,10 @@
 import { Validators } from '@angular/forms';
 
 import { CommodityType } from 'src/common/graphql/models/supply.model';
+import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
-import { CustomValidators } from '../../../../utils';
 
 export const formFields: IForm = {
     controls: {
@@ -30,8 +30,8 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.eanFormat,
                 CustomValidators.ean,
+                CustomValidators.eanFormat,
             ],
         ],
         eic: [
@@ -83,24 +83,59 @@ export const formFields: IForm = {
         ],
         expirationDate: [
             null,
+            [
+                Validators.required,
+            ],
         ],
     },
     validationMessages: {
+        commodityType: {
+            required: errorFieldMessages.commodityType.required,
+        },
+        supplierId: {
+            required: errorFieldMessages.supplierId.required,
+        },
+        name: {
+            required: errorFieldMessages.name.required,
+        },
         ean: {
-            ean: 'Zadejte správné EAN.',
+            required: errorFieldMessages.ean.required,
+            ean: errorFieldMessages.ean.ean,
+            eanFormat: errorFieldMessages.ean.ean,
+        },
+        eic: {
+            required: errorFieldMessages.eic.required,
+            eic: errorFieldMessages.eic.eic,
+            eicFormat: errorFieldMessages.eic.eic,
+        },
+        address: {
+            required: errorFieldMessages.address.required,
+        },
+        distributionRateId: {
+            required: errorFieldMessages.distributionRateId.required,
+        },
+        circuitBreakerId: {
+            required: errorFieldMessages.circuitBreakerId.required,
         },
         annualConsumptionNT: {
-            decimal: 'Zadejte číslo.',
+            required: errorFieldMessages.annualConsumptionNT.required,
+            decimal: errorFieldMessages.annualConsumptionNT.annualConsumptionNT,
         },
         annualConsumptionVT: {
-            decimal: 'Zadejte číslo.',
+            required: errorFieldMessages.annualConsumptionVT.required,
+            decimal: errorFieldMessages.annualConsumptionVT.annualConsumptionVT,
         },
         annualConsumption: {
-            decimal: 'Zadejte číslo.',
+            required: errorFieldMessages.annualConsumption.required,
+            decimal: errorFieldMessages.annualConsumption.annualConsumption,
         },
-        expirationDate: {
-            bsDate: 'Špatný formát data',
-            'expiration-date-in-past': 'Platnost musí končit v budoucnosti',
+        expirationDateGas: {
+            required: errorFieldMessages.expirationDate.requiredGas,
+            bsDate: errorFieldMessages.expirationDate.expirationDateInPast,
+        },
+        expirationDatePower: {
+            required: errorFieldMessages.expirationDate.requiredPower,
+            bsDate: errorFieldMessages.expirationDate.expirationDateInPast,
         },
     },
 };

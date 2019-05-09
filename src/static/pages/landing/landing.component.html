@@ -143,13 +143,26 @@
         [supplierTemplatePower]="supplierTemplate"
     >
     </pxe-map-coverage>
-    <pxe-news-subscription
-        (customAction)="openConsent($event)"
-        [formFields]="subscriptionFormFields"
-        [formLoading]="submitSubscriptionLoading"
-        [formSent]="subscriptionFormSent"
-        [globalError]="subscriptionGlobalError"
-        [fieldError]="subscriptionFieldError"
-        (submitAction)="submitSubscriptionForm($event)"
-    ></pxe-news-subscription>
+    <div class="section stay-in-touch">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-3 col-lg-4 offset-lg-4">
+                    <div class="px-3 px-md-0">
+                        <h3 class="h3--public">
+                            Chci mít také přístup k&nbsp;jiným cenám, možnost&nbsp;měnit dodavatele jen na&nbsp;jedno kliknutí a&nbsp;zbavit se starostí s&nbsp;převodem.
+                        </h3>
+                        <pxe-registration-form
+                            [formFields]="formFields"
+                            [formLoading]="formLoading"
+                            [formSent]="formSent"
+                            [globalError]="globalError"
+                            [fieldError]="fieldError"
+                            (submitAction)="submitForm($event)"
+                            [isSignUp]="false"
+                        ></pxe-registration-form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

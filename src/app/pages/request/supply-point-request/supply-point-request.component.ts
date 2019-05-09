@@ -4,10 +4,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Apollo } from 'apollo-angular';
-
 import { AbstractComponent } from 'src/common/abstract.component';
-import { AuthService } from 'src/app/services/auth.service';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
@@ -25,7 +22,7 @@ export class SupplyPointRequestComponent extends AbstractComponent {
     public fieldError: IFieldError = {};
     public formLoading = false;
 
-    public stepperProgressConfigSimple1: IStepperProgressItem[] = [
+    public stepperProgressConfig: IStepperProgressItem[] = [
         {
             url: '/secured/request/supply-point',
             done: false,
@@ -44,8 +41,6 @@ export class SupplyPointRequestComponent extends AbstractComponent {
     ];
 
     constructor(
-        private apollo: Apollo,
-        private authService: AuthService,
         private cd: ChangeDetectorRef,
         private router: Router,
         private supplyService: SupplyService,
@@ -53,7 +48,7 @@ export class SupplyPointRequestComponent extends AbstractComponent {
         super();
     }
 
-    public submitLoginForm = (values) => {
+    public submitForm = (values) => {
         this.formLoading = true;
         this.globalError = [];
         this.fieldError = {};

@@ -8,7 +8,7 @@ declare const gtag;
     providedIn: 'root',
 })
 export class GTMService {
-    public gtm(event): void {
+    public gtm = (event): void => {
         gtag('config', environment.gtmId, {
             'page_path': event.urlAfterRedirects,
         });
