@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 
 import * as mutations from 'src/common/graphql/mutations';
+import { CONSTS } from 'src/app/app.constants';
 import {
     IFieldError,
     IForm,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
-import { LOGIN } from 'src/app/routes/paths';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { registrationFormFieldsFnc } from '../registration.config';
 
@@ -49,7 +49,7 @@ export class RegisterAbstractComponent {
                     this.registrationFormSent = true;
                     this.cd.markForCheck();
                     if (isFromSignUp) {
-                        this.router.navigate([LOGIN],
+                        this.router.navigate([CONSTS.PATHS.LOGIN],
                             {
                                 queryParams:
                                     {

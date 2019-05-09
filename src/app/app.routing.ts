@@ -7,25 +7,21 @@ import {
 
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { AuthService } from 'src/app/services/auth.service';
+import { CONSTS } from './app.constants';
 import { environment } from 'src/environments/environment';
-import {
-    EMPTY,
-    SECURED,
-    WILD_CART,
-} from './routes/paths';
 
 const routes: Routes = [
     {
-        path: EMPTY,
+        path: CONSTS.PATHS.EMPTY,
         loadChildren: './layouts/public/public-layout.module#PublicLayoutModule',
     },
     {
-        path: SECURED,
+        path: CONSTS.PATHS.SECURED,
         canActivate: [AuthGuard],
         loadChildren: './layouts/secured/secured-layout.module#SecuredLayoutModule',
     },
     {
-        path: WILD_CART,
+        path: CONSTS.PATHS.WILD_CART,
         redirectTo: '',
     },
 ];

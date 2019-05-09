@@ -14,12 +14,12 @@ import { onError } from 'apollo-link-error';
 import { withClientState } from 'apollo-link-state';
 
 import { AuthService } from 'src/app/services/auth.service';
+import { CONSTS } from 'src/app/app.constants';
 import {
     defaults,
     resolvers,
 } from '../resolvers/';
 import { environment } from 'src/environments/environment';
-import { LOGOUT } from 'src/app/routes/paths';
 
 const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
@@ -64,7 +64,7 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
                                     },
                                     () => {
                                         observer.error(new Error('jwt refresh failed'));
-                                        router.navigate([LOGOUT]);
+                                        router.navigate([CONSTS.PATHS.LOGOUT]);
                                     });
                         } else {
                             observer.error(networkError);

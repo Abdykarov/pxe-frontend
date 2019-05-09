@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-
-import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 
-import { EMPTY } from 'src/app/routes/paths';
+import { Subject } from 'rxjs';
+
+import { CONSTS } from 'src/app/app.constants';
 
 export enum SCROLL_TO {
     LANDING_SUBSCRIPTION,
@@ -28,7 +28,7 @@ export class ScrollToService {
     }
 
     scrollToSubscription() {
-        this.router.navigate([EMPTY])
+        this.router.navigate([CONSTS.PATHS.EMPTY])
             .then(() => {
                 const that = this;
                 setTimeout(function() {

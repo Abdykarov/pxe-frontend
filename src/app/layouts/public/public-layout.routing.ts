@@ -1,14 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import {
-    COOKIES_POLICY,
-    EMPTY,
-    LOGIN,
-    LOGOUT,
-    SECURING_YOUR_DATA,
-    SIGN_UP,
-    TERMS_OF_USE } from 'src/app/routes/paths';
+import { CONSTS} from 'src/app/app.constants';
 import { PublicLayoutComponent } from './public-layout.component';
 import {
     LoginType,
@@ -18,11 +11,11 @@ import {
 
 const routes = [
     {
-        path: EMPTY,
+        path: CONSTS.PATHS.EMPTY,
         component: PublicLayoutComponent,
         children: [
             {
-                path: EMPTY,
+                path: CONSTS.PATHS.EMPTY,
                 loadChildren: '../../pages/landing/landing-page.module#LandingPageModule',
                 data: {
                     isPublic: true,
@@ -33,7 +26,7 @@ const routes = [
                 },
             },
             {
-                path: COOKIES_POLICY,
+                path: CONSTS.PATHS.COOKIES_POLICY,
                 loadChildren: '../../pages/cookies-policy/cookies-policy.module#CookiesPolicyModule',
                 data: {
                     isPublic: true,
@@ -44,7 +37,7 @@ const routes = [
                 },
             },
             {
-                path: LOGIN,
+                path: CONSTS.PATHS.LOGIN,
                 loadChildren: '../../pages/login/login.module#LoginModule',
                 data: {
                     isPublic: true,
@@ -54,7 +47,7 @@ const routes = [
                 },
             },
             {
-                path: LOGOUT,
+                path: CONSTS.PATHS.LOGOUT,
                 loadChildren: '../../pages/logout/logout-page.module#LogoutPageModule',
                 data: {
                     isPublic: true,
@@ -65,7 +58,7 @@ const routes = [
                 },
             },
             {
-                path: SECURING_YOUR_DATA,
+                path: CONSTS.PATHS.SECURING_YOUR_DATA,
                 loadChildren: '../../pages/securing-your-data/securing-your-data.module#SecuringYourDataModule',
                 data: {
                     isPublic: true,
@@ -76,7 +69,7 @@ const routes = [
                 },
             },
             {
-                path: TERMS_OF_USE,
+                path: CONSTS.PATHS.TERMS_OF_USE,
                 loadChildren: '../../pages/terms-of-use/terms-of-use.module#TermsOfUseModule',
                 data: {
                     isPublic: true,
@@ -87,7 +80,7 @@ const routes = [
                 },
             },
             {
-                path: SIGN_UP,
+                path: CONSTS.PATHS.SIGN_UP,
                 loadChildren: '../../pages/sign-up/sign-up.module#SignUpModule',
                 data: {
                     isPublic: true,

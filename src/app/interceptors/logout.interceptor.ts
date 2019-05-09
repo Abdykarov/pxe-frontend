@@ -14,7 +14,7 @@ import {
 } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { LOGOUT } from 'src/app/routes/paths';
+import { CONSTS } from 'src/app/app.constants';
 
 @Injectable({
     providedIn: 'root',
@@ -38,7 +38,7 @@ export class LogoutInterceptor implements HttpInterceptor {
                     (err: any) => {
                         if (err instanceof HttpErrorResponse) {
                             if (err.status === 401) {
-                                this.router.navigate([LOGOUT]);
+                                this.router.navigate([CONSTS.PATHS.LOGOUT]);
                             }
                         }
                         return throwError(err);

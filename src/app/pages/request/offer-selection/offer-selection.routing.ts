@@ -4,12 +4,12 @@ import {
     RouterModule,
 } from '@angular/router';
 
-import { EMPTY } from 'src/app/routes/paths';
+import { CONSTS } from 'src/app/app.constants';
 import { OfferSelectionComponent } from './offer-selection.component';
 
 const routes: Routes = [
     {
-        path: EMPTY,
+        path: CONSTS.PATHS.EMPTY,
         component: OfferSelectionComponent,
     },
 ];

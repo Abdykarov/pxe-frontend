@@ -1,14 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import {
-    EMPTY,
-    DASHBOARD,
-    ERROR_PAGE,
-    REQUEST,
-    SUPPLY_POINT,
-    WILD_CART,
-} from 'src/app/routes/paths';
+import { CONSTS } from 'src/app/app.constants';
 import {
     LoginType,
     SignType,
@@ -17,11 +10,11 @@ import { SecuredLayoutComponent } from './secured-layout.component';
 
 const routes = [
     {
-        path: EMPTY,
+        path: CONSTS.PATHS.EMPTY,
         component: SecuredLayoutComponent,
         children: [
             {
-                path: DASHBOARD,
+                path: CONSTS.PATHS.DASHBOARD,
                 loadChildren: '../../pages/dashboard/dashboard.module#DashboardModule',
                 data: {
                     isSimpleFooter: false,
@@ -32,7 +25,7 @@ const routes = [
                 },
             },
             {
-                path: REQUEST,
+                path: CONSTS.PATHS.REQUEST,
                 loadChildren: '../../pages/request/request.module#RequestModule',
                 data: {
                     isSimpleFooter: false,
@@ -43,7 +36,7 @@ const routes = [
                 },
             },
             {
-                path: SUPPLY_POINT,
+                path: CONSTS.PATHS.SUPPLY_POINT,
                 loadChildren: '../../pages/supply-point/supply-point.module#SupplyPointModule',
                 data: {
                     isSimpleFooter: false,
@@ -54,19 +47,19 @@ const routes = [
                 },
             },
             {
-                path: EMPTY,
-                redirectTo: DASHBOARD,
+                path: CONSTS.PATHS.EMPTY,
+                redirectTo: CONSTS.PATHS.DASHBOARD,
             },
             {
-                path: ERROR_PAGE,
+                path: CONSTS.PATHS.ERROR_PAGE,
                 loadChildren: '../../pages/not-found/not-found.module#NotFoundModule',
                 data: {
                     isSimpleFooter: false,
                 },
             },
             {
-                path: WILD_CART,
-                redirectTo: ERROR_PAGE,
+                path: CONSTS.PATHS.WILD_CART,
+                redirectTo: CONSTS.PATHS.ERROR_PAGE,
             },
         ],
     },

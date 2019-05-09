@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { EMPTY } from 'src/app/routes/paths';
+import { CONSTS } from 'src/app/app.constants';
 import { LogoutPageComponent } from './logout-page.component';
 
 const routes = [
     {
-        path: EMPTY,
+        path: CONSTS.PATHS.EMPTY,
         component: LogoutPageComponent,
     },
 ];
