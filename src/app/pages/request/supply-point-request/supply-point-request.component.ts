@@ -9,7 +9,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
-    CommodityType,
     ISupplyPoint,
     ISupplyPointGasAttributes,
     ISupplyPointInput,
@@ -64,15 +63,12 @@ export class SupplyPointRequestComponent extends AbstractComponent {
         this.fieldError = {};
 
         const supplyPoint: ISupplyPoint = R.pick(['id', 'supplierId', 'name', 'region', 'address', 'expirationDate'], supplyPointInput);
-        // todo pri mergy
+
+        // todo pri mergy s naseptavacem adres
         supplyPoint.region = 'kraj';
         supplyPoint.subjectType =  'INDIVIDUAL';
 
-
-            console.log(supplyPointInput.commodityType);
-
         if (supplyPointInput.commodityType === 'POWER') {
-            console.log('POWER');
             const powerAttributes: ISupplyPointPowerAttributes =
                 R.pick([
                     'ean',
@@ -81,8 +77,6 @@ export class SupplyPointRequestComponent extends AbstractComponent {
                     'annualConsumptionNT',
                     'annualConsumptionVT',
                 ], supplyPointInput);
-
-            console.log(powerAttributes);
 
             this.saveElectricitySupplyPoint(supplyPoint, powerAttributes);
         } else {
