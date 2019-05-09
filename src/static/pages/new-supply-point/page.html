@@ -1,3 +1,25 @@
+<!-- Example custom lael template -->
+<ng-template
+    #templateLabel
+    let-item="item"
+    let-index="index">
+    <div>
+        {{ item.label }}
+    </div>
+</ng-template>
+<!-- Example searched items template -->
+<ng-template
+    #templateItem
+    let-item="item"
+    let-index="index">
+    <div>
+        {{ item.value.street }}&nbsp;{{ item.value.orientationNumber }}<ng-container *ngIf="item && item.value && item.value.orientationNumber && item.value.descriptiveNumber">/</ng-container>{{ item.value.descriptiveNumber }}
+    </div>
+    <div>
+        {{ item.value.city }}&nbsp;{{ item.value.postCode }}
+    </div>
+</ng-template>
+
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12 col-md-6 offset-md-3 text-center">
@@ -61,12 +83,13 @@
                         label="EAN"
                         subtext="Jednoznačný identifikátor vašeho elektroměru"
                     ></lnd-form-field>
-                    <lnd-form-field
-                        [appendButtonIcon]="'icon--info'"
-                        (appendButtonAction)="openModal()"
-                        [id]="'address'"
-                        label="Adresa odběrného místa"
-                    ></lnd-form-field>
+                    <pxe-address-whisperer
+                        [label]="'Adresa'"
+                        [parentForm]="form"
+                        [whispererName]="'address'"
+                        [templateItem]="templateItem"
+                        [templateLabel]="templateLabel">
+                    </pxe-address-whisperer>
                     <lnd-select
                         [appendButtonIcon]="'icon--info'"
                         (appendButtonAction)="openModal()"

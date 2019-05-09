@@ -15,6 +15,7 @@ export class NewSupplyPointPageComponent {
         distributionRateId: new FormControl(),
         circuitBreakerId: new FormControl(),
         expirationDate: new FormControl(),
+        address: new FormControl(),
     });
 
     constructor(
