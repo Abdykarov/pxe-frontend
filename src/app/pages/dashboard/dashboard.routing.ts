@@ -5,10 +5,11 @@ import {
 } from '@angular/router';
 
 import { DashboardComponent } from './dashboard.component';
+import { EMPTY } from 'src/app/routes/paths';
 
 const routes: Routes = [
     {
-        path: '',
+        path: EMPTY,
         component: DashboardComponent,
     },
 ];

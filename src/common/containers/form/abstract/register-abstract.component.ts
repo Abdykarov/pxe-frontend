@@ -9,6 +9,7 @@ import {
     IForm,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
+import { LOGIN } from 'src/app/routes/paths';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { registrationFormFieldsFnc } from '../registration.config';
 
@@ -48,7 +49,7 @@ export class RegisterAbstractComponent {
                     this.registrationFormSent = true;
                     this.cd.markForCheck();
                     if (isFromSignUp) {
-                        this.router.navigate(['login'],
+                        this.router.navigate([LOGIN],
                             {
                                 queryParams:
                                     {

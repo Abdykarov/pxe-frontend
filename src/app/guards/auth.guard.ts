@@ -7,6 +7,7 @@ import {
 } from '@angular/router';
 
 import { AuthService } from 'src/app/services/auth.service';
+import { EMPTY } from 'src/app/routes/paths';
 
 @Injectable({
     providedIn: 'root',
@@ -22,7 +23,7 @@ export class AuthGuard implements CanActivate {
         if (this.authService.isLogged()) {
             return true;
         }
-        this.router.navigate(['']);
+        this.router.navigate([EMPTY]);
         return false;
     }
 }

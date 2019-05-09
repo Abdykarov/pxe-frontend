@@ -13,6 +13,11 @@ import {
     LogoutType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
+import {
+    LOGIN,
+    LOGOUT,
+    SIGN_UP,
+} from 'src/app/routes/paths';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
@@ -54,19 +59,19 @@ export class HeaderComponent {
         if (this.settings.signUpType === SignType.SCROLL) {
             this.scrollToService.scrollToSubscription();
         } else if (this.settings.signUpType === SignType.NAVIGATE) {
-            this.router.navigate(['sign-up']);
+            this.router.navigate([SIGN_UP]);
         }
     }
 
     login() {
         if (this.settings.loginType === LoginType.NAVIGATE) {
-            this.router.navigate(['login']);
+            this.router.navigate([LOGIN]);
         }
     }
 
     logout() {
         if (this.settings.logoutType === LogoutType.NAVIGATE) {
-            this.router.navigate(['logout']);
+            this.router.navigate([LOGOUT]);
         }
     }
 }

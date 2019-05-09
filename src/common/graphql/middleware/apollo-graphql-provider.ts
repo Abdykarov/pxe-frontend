@@ -19,6 +19,7 @@ import {
     resolvers,
 } from '../resolvers/';
 import { environment } from 'src/environments/environment';
+import { LOGOUT } from 'src/app/routes/paths';
 
 const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
@@ -63,7 +64,7 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
                                     },
                                     () => {
                                         observer.error(new Error('jwt refresh failed'));
-                                        router.navigate(['/logout']);
+                                        router.navigate([LOGOUT]);
                                     });
                         } else {
                             observer.error(networkError);

@@ -5,22 +5,27 @@ import {
     RouterModule,
 } from '@angular/router';
 
-import { environment } from 'src/environments/environment';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment';
+import {
+    EMPTY,
+    SECURED,
+    WILD_CART,
+} from './routes/paths';
 
 const routes: Routes = [
     {
-        path: 'secured',
+        path: EMPTY,
+        loadChildren: './layouts/public/public-layout.module#PublicLayoutModule',
+    },
+    {
+        path: SECURED,
         canActivate: [AuthGuard],
         loadChildren: './layouts/secured/secured-layout.module#SecuredLayoutModule',
     },
     {
-        path: '',
-        loadChildren: './layouts/public/public-layout.module#PublicLayoutModule',
-    },
-    {
-        path: '**',
+        path: WILD_CART,
         redirectTo: '',
     },
 ];

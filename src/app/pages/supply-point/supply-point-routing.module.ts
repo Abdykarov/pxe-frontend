@@ -4,12 +4,12 @@ import {
     RouterModule,
 } from '@angular/router';
 
+import { EMPTY } from 'src/app/routes/paths';
 import { SupplyPointComponent } from './supply-point.component';
-
 
 const routes: Routes = [
     {
-        path: '',
+        path: EMPTY,
         component: SupplyPointComponent,
     },
 ];

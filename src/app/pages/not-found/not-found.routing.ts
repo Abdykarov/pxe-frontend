@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { EMPTY } from 'src/app/routes/paths';
 import { NotFoundComponent } from './not-found.component';
 
 const routes = [
     {
-        path: '',
+        path: EMPTY,
         component: NotFoundComponent,
     },
 ];

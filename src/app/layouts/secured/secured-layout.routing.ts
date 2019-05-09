@@ -2,6 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import {
+    EMPTY,
+    DASHBOARD,
+    ERROR_PAGE,
+    REQUEST,
+    SUPPLY_POINT,
+    WILD_CART,
+} from 'src/app/routes/paths';
+import {
     LoginType,
     SignType,
 } from '../models/router-data.model';
@@ -9,11 +17,11 @@ import { SecuredLayoutComponent } from './secured-layout.component';
 
 const routes = [
     {
-        path: '',
+        path: EMPTY,
         component: SecuredLayoutComponent,
         children: [
             {
-                path: 'dashboard',
+                path: DASHBOARD,
                 loadChildren: '../../pages/dashboard/dashboard.module#DashboardModule',
                 data: {
                     isSimpleFooter: false,
@@ -24,7 +32,7 @@ const routes = [
                 },
             },
             {
-                path: 'request',
+                path: REQUEST,
                 loadChildren: '../../pages/request/request.module#RequestModule',
                 data: {
                     isSimpleFooter: false,
@@ -35,7 +43,7 @@ const routes = [
                 },
             },
             {
-                path: 'supply-point',
+                path: SUPPLY_POINT,
                 loadChildren: '../../pages/supply-point/supply-point.module#SupplyPointModule',
                 data: {
                     isSimpleFooter: false,
@@ -46,19 +54,19 @@ const routes = [
                 },
             },
             {
-                path: '',
-                redirectTo: 'dashboard',
+                path: EMPTY,
+                redirectTo: DASHBOARD,
             },
             {
-                path: '404',
+                path: ERROR_PAGE,
                 loadChildren: '../../pages/not-found/not-found.module#NotFoundModule',
                 data: {
                     isSimpleFooter: false,
                 },
             },
             {
-                path: '**',
-                redirectTo: '404',
+                path: WILD_CART,
+                redirectTo: ERROR_PAGE,
             },
         ],
     },
