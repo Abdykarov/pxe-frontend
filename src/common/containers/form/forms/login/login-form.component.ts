@@ -7,7 +7,7 @@ import { FormBuilder } from '@angular/forms';
 
 import { takeUntil } from 'rxjs/operators';
 
-import { AbstractFormComponent } from '../../abstract-form.component';
+import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 
 @Component({
     selector: 'pxe-login-form',

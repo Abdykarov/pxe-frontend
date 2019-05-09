@@ -1,8 +1,8 @@
-<ng-template #hrefToSecuringTemplate>
-    Souhlas se zpracováním
+<ng-template #labelTemplate>
+    {{ !!isSignUp ? 'Souhlas se zpracováním' : 'Souhlasím se' }}
     <a href="javascript: void(0);">
-        <span (click)="handleCustomAction($event)">
-           osobních údajů
+        <span (click)="openConsent($event)">
+           {{ !!isSignUp ? 'osobních údajů' : 'zásadami bezpečnosti' }}
         </span>
     </a>
 </ng-template>
@@ -28,24 +28,25 @@
         [success]="form.controls.email.valid && (form.controls.email.touched || formError.email)"
         [touched]="form.controls.email.touched || formError.email"
         [validationMessages]="formFields.validationMessages.email"
+        [lightField]="!!isSignUp ? false : true"
     ></lnd-form-field>
     <lnd-form-field
         [error]="formError.consent || form.controls.consent.errors"
         [formControl]="form.controls.consent"
         [id]="'consent'"
         label=""
-        [labelTemplate]="hrefToSecuringTemplate"
+        [labelTemplate]="labelTemplate"
         [success]="form.controls.consent.valid && (form.controls.consent.touched || formError.consent)"
         [touched]="form.controls.consent.touched || formError.consent"
         [type]="'CHECKBOX'"
         [validationMessages]="formFields.validationMessages.consent"
     ></lnd-form-field>
-    <div class="text-right">
+    <div [class.text-right]="!!isSignUp">
         <lnd-button
             type="primary"
             (action)="submitForm()"
             [isDisabled]="!!formLoading"
-            label="Registrovat se">
+            [label]="!!isSignUp ? 'Registrovat se' : 'Odeslat'">
         </lnd-button>
     </div>
 </form>
