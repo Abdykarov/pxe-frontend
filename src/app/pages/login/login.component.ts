@@ -11,7 +11,6 @@ import {
     ROUTES,
 } from 'src/app/app.constants';
 import { loginFormFields } from 'src/common/containers/form/forms/login/login-form.config';
-import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { parseRestAPIErrors } from 'src/common/utils/';
 
 @Component({
