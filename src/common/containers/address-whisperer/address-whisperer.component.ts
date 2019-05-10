@@ -2,7 +2,8 @@ import {
     ChangeDetectorRef,
     Component,
     EventEmitter,
-    Input, Output,
+    Input,
+    Output,
     TemplateRef,
 } from '@angular/core';
 import {
@@ -20,7 +21,7 @@ import {
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AddressWhispererService } from './services/address-whisperer.service';
 import { IOption } from 'src/common/ui/forms/models/option.model';
-import { IValidationMessages } from '../../ui/forms/models/validation-messages.model';
+import { IValidationMessages } from 'src/common/ui/forms/models/validation-messages.model';
 
 @Component({
     selector: 'pxe-address-whisperer',
