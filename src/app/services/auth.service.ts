@@ -86,8 +86,14 @@ export class AuthService {
             );
     }
 
-    confirm = () => {
-        return this.http.get<any>(`${environment.url}/parc-rest/webresources/sms/confirm`)
+    confirm = (token: string) => {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Authorization': 'Bearer ' + token,
+            }),
+        };
+
+        return this.http.post<any>(`${environment.url}/parc-rest/webresources/sms/confirm/123456`, {}, httpOptions)
             .pipe(
                 map(response => {
                     console.log(response);

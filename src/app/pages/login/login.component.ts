@@ -91,10 +91,9 @@ export class LoginComponent extends AbstractComponent {
 
     public sendSms(token: string) {
         this.wasSentSms = true;
-        this.authService.sendSms(token).subscribe(res => {
-            console.log(res);
-        });
-
+        // this.authService.sendSms(token).subscribe(res => {
+            this.authService.confirm(token).subscribe();
+        // });
     }
 
     public reSendSms = ($event) => {
