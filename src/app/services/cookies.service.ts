@@ -9,7 +9,9 @@ import {
 })
 export class CookiesService {
 
-    constructor(private cookieService: CookieService) {}
+    constructor(
+        private cookieService: CookieService,
+    ) {}
 
     get = (name: string) => this.cookieService.get(name);
     set = (name: string, value: string, expires: number) => {

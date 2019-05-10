@@ -9,6 +9,7 @@ import { first } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { CONSTS } from 'src/app/app.constants';
 
 @Component({
     templateUrl: './logout-page.component.html',
@@ -36,7 +37,7 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
-                    this.router.navigate(['/']);
+                    this.router.navigate([CONSTS.PATHS.EMPTY]);
                 },
                 error => {
                     this.error = true;
