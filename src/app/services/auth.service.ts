@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
     HttpClient,
-    HttpHeaders,
+    HttpHeaders, HttpParams,
 } from '@angular/common/http';
 
 import { of } from 'rxjs';
@@ -14,6 +14,7 @@ import {
     ILoginRequest,
     ILoginResponse,
 } from './model/auth.model';
+import { RequestOptions } from '@angular/http';
 
 @Injectable({
     providedIn: 'root',
@@ -90,10 +91,13 @@ export class AuthService {
         const httpOptions = {
             headers: new HttpHeaders({
                 'Authorization': 'Bearer ' + token,
+                'Content-Type': 'text/plain',
             }),
         };
 
-        return this.http.post<any>(`${environment.url}/parc-rest/webresources/sms/confirm/123456`, {}, httpOptions)
+        return this.http.post<any>(`${environment.url}/parc-rest/webresources/sms/confirm`, {
+            smsCode: 123456,
+        }, httpOptions)
             .pipe(
                 map(response => {
                     console.log(response);
