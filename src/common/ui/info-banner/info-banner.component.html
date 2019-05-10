@@ -1,12 +1,11 @@
 <div class="info-banner">
-    <img alt="" class="info-banner__illustration" src="{{srcImg}}" title="">
+    <img alt="" class="info-banner__illustration" src="{{bannerImageSrc}}" title="">
     <h2 class="info-banner__title">{{bannerTitle}}</h2>
     <p class="info-banner__description">{{bannerDescription}}</p>
     <lnd-button
-        (action)="bannerAction.emit($event)"
-        label="{{bannerLabel}}"
+        (action)="buttonAction.emit($event)"
+        label="{{buttonLabel}}"
         type="primary"
-        customClass="{{customClassButton}}">
+        customClass="{{buttonCustomClass}}">
     </lnd-button>
 </div>
-

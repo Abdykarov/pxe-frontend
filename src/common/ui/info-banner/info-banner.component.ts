@@ -13,7 +13,7 @@ import {
 export class InfoBannerComponent {
 
     @Input()
-    public bannerLabel: string;
+    public buttonLabel: string;
 
     @Input()
     public bannerTitle: string;
@@ -22,13 +22,13 @@ export class InfoBannerComponent {
     public bannerDescription: string;
 
     @Input()
-    public srcImg = '/assets/images/illustrations/house-alert.svg';
+    public bannerImageSrc = '/assets/images/illustrations/house-alert.svg';
 
     @Input()
-    public customClassButton  = 'info-banner__btn';
+    public buttonCustomClass  = 'info-banner__btn';
 
     @Output()
-    public bannerAction?: EventEmitter<any> = new EventEmitter<any>();
+    public buttonAction?: EventEmitter<any> = new EventEmitter<any>();
 
     constructor() {}
 }

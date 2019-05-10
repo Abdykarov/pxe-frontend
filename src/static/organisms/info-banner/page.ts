@@ -21,7 +21,7 @@ export class InfoBannerPageComponent {
 
     public bannerDescription = 'Info banner message description banner message description';
 
-    public bannerLabel = 'Info banner CTA';
+    public buttonLabel = 'Info banner CTA';
 
     public bannerTitle = 'Info banner message title banner message title';
 
