@@ -13,6 +13,7 @@
     [templateLabel]="templateLabel"
     [touched]="parentForm.controls[whispererName].touched"
     [typeahead]="typeahead"
+    (close)="setAddresses()"
     customClass="ng-select-custom--address"
 >
 </lnd-select>

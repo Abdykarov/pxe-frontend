@@ -29,7 +29,8 @@
             [class.is-warning]="warning"
             notFoundText="Nenalezeny žádné záznamy"
             [typeahead]="typeahead"
-            [searchFn]="customSearchFn">
+            [searchFn]="customSearchFn"
+            (close)="close.emit()">
             <ng-container *ngIf="templateItem; else defaultItem">
                 <ng-template
                     ng-option-tmp

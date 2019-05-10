@@ -68,11 +68,14 @@ export class AddressWhispererComponent extends AbstractComponent {
                 switchMap((term: string) => this.addressWhispererService.getPlaces(AddressWhispererComponent.ROWS_RESPONSE, term)),
             )
             .subscribe((addresses: Array<IOption>)  => {
-                this.addresses = addresses;
-                this.cd.markForCheck();
+                this.setAddresses(addresses);
             }, (err) => {
-                this.addresses = [];
-                this.cd.markForCheck();
+                this.setAddresses();
             });
+    }
+
+    public setAddresses = (addresses = []) => {
+        this.addresses = addresses;
+        this.cd.markForCheck();
     }
 }
