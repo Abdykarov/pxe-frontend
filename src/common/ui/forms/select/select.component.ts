@@ -38,6 +38,12 @@ export class SelectComponent {
     @Input()
     public disabledField = false;
 
+    @Output()
+    public close?: EventEmitter<any> = new EventEmitter();
+
+    @Input()
+    public customClass?: string;
+
     @Input()
     public error?: any;
 
