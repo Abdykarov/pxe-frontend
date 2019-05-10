@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { CONSTS } from 'src/app/app.constants';
 import {
     ISettings,
     LoginType,
@@ -54,19 +55,19 @@ export class HeaderComponent {
         if (this.settings.signUpType === SignType.SCROLL) {
             this.scrollToService.scrollToSubscription();
         } else if (this.settings.signUpType === SignType.NAVIGATE) {
-            this.router.navigate(['sign-up']);
+            this.router.navigate([CONSTS.PATHS.SIGN_UP]);
         }
     }
 
     login() {
         if (this.settings.loginType === LoginType.NAVIGATE) {
-            this.router.navigate(['login']);
+            this.router.navigate([CONSTS.PATHS.LOGIN]);
         }
     }
 
     logout() {
         if (this.settings.logoutType === LogoutType.NAVIGATE) {
-            this.router.navigate(['logout']);
+            this.router.navigate([CONSTS.PATHS.LOGOUT]);
         }
     }
 }

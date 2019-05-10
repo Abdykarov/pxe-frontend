@@ -4,11 +4,12 @@ import {
     RouterModule,
 } from '@angular/router';
 
+import { CONSTS } from 'src/app/app.constants';
 import { SignUpComponent } from './sign-up.component';
 
 const routes: Routes = [
     {
-        path: '',
+        path: CONSTS.PATHS.EMPTY,
         component: SignUpComponent,
     },
 ];

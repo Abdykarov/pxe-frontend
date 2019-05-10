@@ -18,6 +18,7 @@ import { formFields } from 'src/common/containers/form/forms/supply-point/supply
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils';
+import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -33,17 +34,17 @@ export class SupplyPointComponent extends AbstractComponent {
 
     public stepperProgressConfig: IStepperProgressItem[] = [
         {
-            url: '/secured/request/supply-point',
+            url: ROUTES.ROUTER_REQUEST_SUPPLY_POINT,
             done: false,
             label: 'Výběr odběrného místa',
         },
         {
-            url: '/secured/request/offer-selection',
+            url: ROUTES.ROUTER_REQUEST_OFFER_SELECTION,
             done: false,
             label: 'Výběr nabídky',
         },
         {
-            url: '/secured/dashboard',
+            url: ROUTES.ROUTER_DASHBOARD,
             done: false,
             label: 'Podepsání smlouvy',
         },
@@ -94,7 +95,7 @@ export class SupplyPointComponent extends AbstractComponent {
                     this.formLoading = false;
                     this.formSent = true;
                     this.cd.markForCheck();
-                    this.router.navigate(['/secured/request/offer-selection']);
+                    this.router.navigate([ROUTES.ROUTER_REQUEST_OFFER_SELECTION]);
                 },
                 (error) => {
                     this.formLoading = false;
