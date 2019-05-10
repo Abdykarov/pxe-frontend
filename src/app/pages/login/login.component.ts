@@ -6,6 +6,10 @@ import { Router } from '@angular/router';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
+import {
+    CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
 import { loginFormFields } from 'src/common/containers/form/forms/login/login-form.config';
 import { parseRestAPIErrors } from 'src/common/utils/';
 
@@ -34,7 +38,7 @@ export class LoginComponent extends AbstractComponent {
             .subscribe(
                 () => {
                     this.formLoading = false;
-                    this.router.navigate(['/secured/request/supply-point']);
+                    this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
                 },
                 error => {
                     const message = parseRestAPIErrors(error);
@@ -46,6 +50,6 @@ export class LoginComponent extends AbstractComponent {
 
     public forgottenPasswordAction = ($event) => {
         $event.preventDefault();
-        window.open('/forgotten-password');
+        window.open(CONSTS.PATHS.FORGOTTEN_PASSWORD);
     }
 }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { Subject } from 'rxjs';
 
+import { CONSTS } from 'src/app/app.constants';
 import { SCROLL_TO } from './model/scroll-to.model';
 
 @Injectable({
@@ -22,7 +23,7 @@ export class ScrollToService {
     }
 
     scrollToSubscription = () => {
-        this.router.navigate([''])
+        this.router.navigate([CONSTS.PATHS.EMPTY])
             .then(() => {
                 const that = this;
                 setTimeout(function() {

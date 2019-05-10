@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { CONSTS } from 'src/app/app.constants';
 import { LandingComponent } from './landing.component';
 
 const routes = [
     {
-        path: '',
+        path: CONSTS.PATHS.EMPTY,
         component: LandingComponent,
     },
 ];

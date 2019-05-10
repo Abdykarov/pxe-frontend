@@ -4,19 +4,23 @@ import {
     RouterModule,
 } from '@angular/router';
 
+import {
+    CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
 import { RequestComponent } from './request.component';
 
 const routes: Routes = [
     {
-        path: '',
+        path: CONSTS.PATHS.EMPTY,
         component: RequestComponent,
         children: [
             {
-                path: 'supply-point',
+                path: CONSTS.PATHS.SUPPLY_POINT,
                 loadChildren: '../../pages/request/supply-point/supply-point.module#SupplyPointModule',
             },
             {
-                path: 'offer-selection',
+                path: CONSTS.PATHS.OFFER_SELECTION,
                 loadChildren: '../../pages/request/offer-selection/offer-selection.module#OfferSelectionModule',
             },
         ],
