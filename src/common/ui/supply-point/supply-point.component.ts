@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {
+    Component,
+    Input,
+} from '@angular/core';
 
 @Component({
     selector: 'pxe-supply-point',
@@ -6,4 +9,37 @@ import { Component } from '@angular/core';
     styleUrls: ['./supply-point.component.scss'],
 })
 
-export class SupplyPointComponent {}
+export class SupplyPointComponent {
+    @Input()
+    public title;
+
+    @Input()
+    public titleSubtext;
+
+    @Input()
+    public firstRowValueName;
+
+    @Input()
+    public firstRowValue;
+
+    @Input()
+    public secondRowValueName;
+
+    @Input()
+    public secondRowValue;
+
+    @Input()
+    public middleRowValueName;
+
+    @Input()
+    public middleRowValue;
+
+    @Input()
+    public priceLabel;
+
+    @Input()
+    public price;
+
+    @Input()
+    public seasonPrice;
+}
