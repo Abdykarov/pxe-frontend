@@ -53,10 +53,12 @@ export const errorFieldMessages =  {
     expirationDate: {
         requiredGas: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr plynu.',
         requiredPower: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr elektřiny.',
+        format: 'Vyplňte platný formát data.',
         expirationDateInPast: 'Doplnit můžete pouze budoucí datum.',
     },
     name: {
         required: 'Vyplňte libovolný název odběrného místa (např. Byt dcera) v maximální délce 50 znaků.',
+        maxlength: 'Maximální délka pro název odběrného místa je 50 znaků.',
     },
     password: {
         required: 'Zadejte heslo.',

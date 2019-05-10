@@ -24,6 +24,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
+                Validators.maxLength(50),
             ],
         ],
         ean: [
@@ -97,6 +98,7 @@ export const formFields: IForm = {
         },
         name: {
             required: errorFieldMessages.name.required,
+            maxlength: errorFieldMessages.name.maxlength,
         },
         ean: {
             required: errorFieldMessages.ean.required,
@@ -131,11 +133,13 @@ export const formFields: IForm = {
         },
         expirationDateGas: {
             required: errorFieldMessages.expirationDate.requiredGas,
-            bsDate: errorFieldMessages.expirationDate.expirationDateInPast,
+            bsDate: errorFieldMessages.expirationDate.format,
+            'expiration-date-in-past': errorFieldMessages.expirationDate.expirationDateInPast,
         },
         expirationDatePower: {
             required: errorFieldMessages.expirationDate.requiredPower,
-            bsDate: errorFieldMessages.expirationDate.expirationDateInPast,
+            bsDate: errorFieldMessages.expirationDate.format,
+            'expiration-date-in-past': errorFieldMessages.expirationDate.expirationDateInPast,
         },
     },
 };

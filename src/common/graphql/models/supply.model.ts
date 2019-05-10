@@ -4,11 +4,12 @@ export enum CommodityType {
 }
 
 export interface IAddress {
-    street: String;
+    street: string;
     orientationNumber: string;
     descriptiveNumber: string;
-    city: String;
-    postCode: String;
+    city: string;
+    postCode: string;
+    region: string;
 }
 
 export interface ICodelistMap {
