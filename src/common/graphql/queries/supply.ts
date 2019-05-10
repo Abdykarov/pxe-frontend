@@ -51,54 +51,51 @@ export const findSupplierDocumentsByComodity = gql`
 
 
 export const findSupplyPoints = gql`
-
-\`;
-
-
-    /*
-      findSupplyPoints(email: "asdasd"){
-    id,
-    commodityType,
-    supplier{
-      id,
-      name,
-      vatNumber,
-      suplierSampleDocuments{
-        type,
-        url
-      }
-    },
-        ean,
-    region,
-    address{
-      street,
-      orientationNumber,
-      descriptiveNumber,
-      city,
-      postCode,
-    },
-    distributionRate{
-      type,
-      code,
-      description,
-      help
-    },
-    circuitBreaker{
-      type,
-      code,
-      description,
-      help
-    },
-    annualConsumptionNT,
-    expirationDate,
-    subject{
-      type,
-      code,
-      description,
-      help,
+    query findSupplyPoints($email: String){
+        findSupplyPoints(email: $email){
+            id,
+            commodityType,
+            supplier{
+              id,
+              name,
+              vatNumber,
+              suplierSampleDocuments{
+                type,
+                url
+              }
+            },
+                ean,
+            region,
+            address{
+              street,
+              orientationNumber,
+              descriptiveNumber,
+              city,
+              postCode,
+            },
+            distributionRate{
+              type,
+              code,
+              description,
+              help
+            },
+            circuitBreaker{
+              type,
+              code,
+              description,
+              help
+            },
+            annualConsumptionNT,
+            expirationDate,
+            subject{
+              type,
+              code,
+              description,
+              help,
+            }
+            lastAnnualConsumptionNT,
+            lastAnnualConsumptionVT,
+        }
     }
-    lastAnnualConsumptionNT,
-    lastAnnualConsumptionVT,
-  }
 
-     */
+`;
