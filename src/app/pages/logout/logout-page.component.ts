@@ -37,7 +37,7 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
-                    this.router.navigate([CONSTS.PATHS.ROOT]);
+                    this.router.navigate([CONSTS.PATHS.EMPTY]);
                 },
                 error => {
                     this.error = true;

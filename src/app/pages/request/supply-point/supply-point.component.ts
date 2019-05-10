@@ -34,17 +34,17 @@ export class SupplyPointComponent extends AbstractComponent {
 
     public stepperProgressConfig: IStepperProgressItem[] = [
         {
-            url: ROUTES.ROUTER_SECURED_REQUEST_SUPPLY_POINT,
+            url: ROUTES.ROUTER_REQUEST_SUPPLY_POINT,
             done: false,
             label: 'Výběr odběrného místa',
         },
         {
-            url: ROUTES.ROUTER_SECURED_REQUEST_OFFER_SELECTION,
+            url: ROUTES.ROUTER_REQUEST_OFFER_SELECTION,
             done: false,
             label: 'Výběr nabídky',
         },
         {
-            url: ROUTES.ROUTER_SECURED_DASHBOARD,
+            url: ROUTES.ROUTER_DASHBOARD,
             done: false,
             label: 'Podepsání smlouvy',
         },
@@ -95,7 +95,7 @@ export class SupplyPointComponent extends AbstractComponent {
                     this.formLoading = false;
                     this.formSent = true;
                     this.cd.markForCheck();
-                    this.router.navigate([ROUTES.ROUTER_SECURED_REQUEST_OFFER_SELECTION]);
+                    this.router.navigate([ROUTES.ROUTER_REQUEST_OFFER_SELECTION]);
                 },
                 (error) => {
                     this.formLoading = false;

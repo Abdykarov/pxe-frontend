@@ -7,38 +7,31 @@ export const CONSTS = {
         DEFAULT: 'CZK',
     },
     PATHS: {
-        EMPTY : '',
-        ROOT : '/',
-        WILD_CART  : '**',
-        ERROR_PAGE : '404',
-        SECURED : 'secured',
+        DASHBOARD : 'dashboard',
         COOKIES_POLICY : 'cookies-policy',
+        EMPTY : '',
+        FORGOTTEN_PASSWORD : 'forgotten-password',
+        NOT_FOUND : '404',
         LOGIN : 'login',
         LOGOUT : 'logout',
-        FORGOTTEN_PASSWORD : 'forgotten-password',
-        SECURING_YOUR_DATA : 'securing-your-data',
-        TERMS_OF_USE : 'terms-of-use',
-        SIGN_UP : 'sign-up',
-        DASHBOARD : 'dashboard',
-        REQUEST : 'request',
-        SUPPLY_POINT : 'supply-point',
-        SUPPLY_POINT_REQUEST : 'supply-point',
         OFFER_SELECTION : 'offer-selection',
-    },
-    get getAllPaths() {
-        return CONSTS.PATHS;
+        SECURING_YOUR_DATA : 'securing-your-data',
+        REQUEST : 'request',
+        REQUESTS : 'requests',
+        SECURED : 'secured',
+        SIGN_UP : 'sign-up',
+        SUPPLY_POINT : 'supply-point',
+        SUPPLY_POINTS : 'supply-points',
+        TERMS_OF_USE : 'terms-of-use',
+        WILD_CART  : '**',
     },
 };
 
 export const ROUTES = {
-    ROUTER_REQUEST:
-        `/${CONSTS.getAllPaths.SECURED}/${CONSTS.getAllPaths.REQUEST}`,
-    ROUTER_SUPPLY_POINT:
-        `/${CONSTS.getAllPaths.SECURED}/${CONSTS.getAllPaths.SUPPLY_POINT_REQUEST}`,
-    ROUTER_SECURED_REQUEST_SUPPLY_POINT:
-        `/${CONSTS.getAllPaths.SECURED}/${CONSTS.getAllPaths.REQUEST}/${CONSTS.getAllPaths.SUPPLY_POINT_REQUEST}`,
-    ROUTER_SECURED_REQUEST_OFFER_SELECTION:
-        `/${CONSTS.getAllPaths.SECURED}/${CONSTS.getAllPaths.REQUEST}/${CONSTS.getAllPaths.OFFER_SELECTION}`,
-    ROUTER_SECURED_DASHBOARD:
-        `/${CONSTS.getAllPaths.SECURED}/${CONSTS.getAllPaths.DASHBOARD}`,
+    ROUTER_ROOT: '/',
+    ROUTER_REQUEST: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}`,
+    ROUTER_SUPPLY_POINTS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_POINTS}`,
+    ROUTER_REQUEST_SUPPLY_POINT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.SUPPLY_POINT}`,
+    ROUTER_REQUEST_OFFER_SELECTION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.OFFER_SELECTION}`,
+    ROUTER_DASHBOARD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.DASHBOARD}`,
 };

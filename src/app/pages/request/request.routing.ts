@@ -16,7 +16,7 @@ const routes: Routes = [
         component: RequestComponent,
         children: [
             {
-                path: CONSTS.PATHS.SUPPLY_POINT_REQUEST,
+                path: CONSTS.PATHS.SUPPLY_POINT,
                 loadChildren: '../../pages/request/supply-point/supply-point.module#SupplyPointModule',
             },
             {

@@ -36,7 +36,7 @@ const routes = [
                 },
             },
             {
-                path: CONSTS.PATHS.SUPPLY_POINT,
+                path: CONSTS.PATHS.SUPPLY_POINTS,
                 loadChildren: '../../pages/supply-points/supply-points.module#SupplyPointsModule',
                 data: {
                     isSimpleFooter: false,
@@ -51,7 +51,7 @@ const routes = [
                 redirectTo: CONSTS.PATHS.DASHBOARD,
             },
             {
-                path: CONSTS.PATHS.ERROR_PAGE,
+                path: CONSTS.PATHS.NOT_FOUND,
                 loadChildren: '../../pages/not-found/not-found.module#NotFoundModule',
                 data: {
                     isSimpleFooter: false,
@@ -59,7 +59,7 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.WILD_CART,
-                redirectTo: CONSTS.PATHS.ERROR_PAGE,
+                redirectTo: CONSTS.PATHS.NOT_FOUND,
             },
         ],
     },

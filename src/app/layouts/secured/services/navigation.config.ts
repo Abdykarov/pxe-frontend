@@ -5,7 +5,7 @@ import { ROUTES } from 'src/app/app.constants';
 export const navigationConfig: INavigationConfig = [
     [
         {
-            'url': ROUTES.ROUTER_SECURED_DASHBOARD,
+            'url': ROUTES.ROUTER_DASHBOARD,
             'label': 'NÁSTĚNKA',
             'icon': 'notice-board',
             __typename : 'secured',
@@ -17,7 +17,7 @@ export const navigationConfig: INavigationConfig = [
             __typename : 'secured',
         },
         {
-            'url': ROUTES.ROUTER_SUPPLY_POINT,
+            'url': ROUTES.ROUTER_SUPPLY_POINTS,
             'label': 'ODBĚRNÁ MÍSTA',
             'icon': 'pin',
             __typename : 'secured',

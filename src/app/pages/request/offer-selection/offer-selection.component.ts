@@ -11,17 +11,17 @@ import { ROUTES } from 'src/app/app.constants';
 export class OfferSelectionComponent extends AbstractComponent {
     public stepperProgressConfigSimple1: IStepperProgressItem[] = [
         {
-            url: ROUTES.ROUTER_SECURED_REQUEST_OFFER_SELECTION,
+            url: ROUTES.ROUTER_REQUEST_OFFER_SELECTION,
             done: true,
             label: 'Výběr odběrného místa',
         },
         {
-            url: ROUTES.ROUTER_SECURED_REQUEST_SUPPLY_POINT,
+            url: ROUTES.ROUTER_REQUEST_SUPPLY_POINT,
             done: false,
             label: 'Výběr nabídky',
         },
         {
-            url: ROUTES.ROUTER_SECURED_DASHBOARD,
+            url: ROUTES.ROUTER_DASHBOARD,
             done: false,
             label: 'Podepsání smlouvy',
         },
