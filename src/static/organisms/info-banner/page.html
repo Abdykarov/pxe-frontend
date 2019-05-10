@@ -5,6 +5,12 @@
 </div>
 <div class="static-pages-holder">
     <div class="static-pages static-pages--bg-transparent">
-        <lnd-info-banner></lnd-info-banner>
+        <lnd-info-banner
+            [bannerTitle]="bannerTitle"
+            [bannerDescription]="bannerDescription"
+            [bannerLabel]="bannerLabel"
+            (bannerAction)="clicked($event)"
+        >
+        </lnd-info-banner>
     </div>
 </div>

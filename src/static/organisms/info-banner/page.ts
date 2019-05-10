@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 
 @Component({
@@ -18,5 +19,14 @@ export class InfoBannerPageComponent {
         ];
     }
 
-    public trigger = () => alert('Help icon works!');
+    public bannerDescription = 'Info banner message description banner message description';
+
+    public bannerLabel = 'Info banner CTA';
+
+    public bannerTitle = 'Info banner message title banner message title';
+
+    public clicked = (evt) => {
+        evt.preventDefault();
+        console.log('clicked');
+    }
 }

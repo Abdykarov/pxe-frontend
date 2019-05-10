@@ -4,49 +4,31 @@ import {
     Input,
     Output,
 } from '@angular/core';
-import { Router } from '@angular/router';
-import * as R from 'ramda';
-
-// own classes
-import { AbstractComponent } from 'src/common/abstract.component';
-
-// own models
-import { IBannerObj } from './models/banner-object.model';
-import { IBannerType } from './models/type.model';
 
 @Component({
     selector: 'lnd-info-banner',
     templateUrl: './info-banner.component.html',
     styleUrls: ['./info-banner.component.scss'],
 })
-export class InfoBannerComponent extends AbstractComponent {
-    @Input()
-    public buttonLabel: string;
+export class InfoBannerComponent {
 
     @Input()
-    public data?: IBannerObj;
+    public bannerLabel: string;
 
     @Input()
-    public staticBannerTitle?: string;
+    public bannerTitle: string;
+
+    @Input()
+    public bannerDescription: string;
+
+    @Input()
+    public srcImg = '/assets/images/illustrations/house-alert.svg';
+
+    @Input()
+    public customClassButton  = 'info-banner__btn';
 
     @Output()
-    public staticBannerAction?: EventEmitter<any> = new EventEmitter<any>();
+    public bannerAction?: EventEmitter<any> = new EventEmitter<any>();
 
-    @Input()
-    public type?: IBannerType;
-
-    public bannerAction(value: string, type: string) {
-        if (type === 'external') {
-            window.open(value);
-        } else {
-            this.router.navigate([value]);
-        }
-    }
-
-    constructor(
-        private router: Router,
-    ) {
-        super();
-        this.type = R.contains(this.type, Object.values(IBannerType)) ? this.type : IBannerType.DEFAULT;
-    }
+    constructor() {}
 }
