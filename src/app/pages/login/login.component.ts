@@ -50,7 +50,7 @@ export class LoginComponent extends AbstractComponent {
                 respone => {
                     // isdodavatel
                     // if()
-                    this.sendSms(respone.token);
+                    // this.sendSms();
 
 
                     // this.submitLoginFormLoading = false;
@@ -67,7 +67,7 @@ export class LoginComponent extends AbstractComponent {
 
     public submitFormLoginAuth = (values) => {
         this.authService
-            .login(values)
+            .confirmSupplierLoginSms(values)
             .subscribe(
                 () => {
 
@@ -89,14 +89,14 @@ export class LoginComponent extends AbstractComponent {
         window.open('/forgotten-password');
     }
 
-    public sendSms(token: string) {
+    public sendSms() {
         this.wasSentSms = true;
-        this.authService.confirm(token).subscribe();
+        // this.authService.confirmSupplierLoginSms(token).subscribe();
 
-        // this.authService.sendSms(token).subscribe(res => {
-        //     console.log(res);
-        //     this.authService.confirm(res.token).subscribe();
-        // });
+        this.authService.sendSupplierLoginSms().subscribe(res => {
+            console.log(res);
+            // this.authService.confirmSupplierLoginSms(res.token).subscribe();
+        });
     }
 
     public reSendSms = ($event) => {

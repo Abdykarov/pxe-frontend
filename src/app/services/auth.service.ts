@@ -71,10 +71,10 @@ export class AuthService {
             );
     }
 
-    sendSms = (token: string) => {
+    sendSupplierLoginSms = () => {
         const httpOptions = {
             headers: new HttpHeaders({
-                'Authorization': 'Bearer ' + token,
+                'Authorization': 'Bearer ' + this.token,
                 'Content-Type': 'application/json',
             }),
         };
@@ -88,17 +88,16 @@ export class AuthService {
             );
     }
 
-    confirm = (token: string) => {
+    confirmSupplierLoginSms = ({code}) => {
+        console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold', code);
         const httpOptions = {
             headers: new HttpHeaders({
-                'Authorization': 'Bearer ' + token,
+                'Authorization': 'Bearer ' + this.token,
                 'Content-Type': 'text/plain',
             }),
         };
 
-        return this.http.post<any>(`${environment.url}/parc-rest/webresources/sms/confirm`, {
-            smsCode: 123456,
-        }, httpOptions)
+        return this.http.post<any>(`${environment.url}/parc-rest/webresources/sms/confirm`, code, httpOptions)
             .pipe(
                 map(response => {
                     console.log(response);
