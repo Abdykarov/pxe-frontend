@@ -1,9 +1,24 @@
+<!-- Example custom lael template -->
+<ng-template
+    #templateLabel
+    let-item="item"
+    let-index="index">
+        {{ item.label }}
+</ng-template>
+<!-- Example searched items template -->
+<ng-template
+    #templateItem
+    let-item="item"
+    let-index="index">
+    {{ item.value.street }}&nbsp;{{ item.value.orientationNumber }}<ng-container *ngIf="item && item.value && item.value.orientationNumber && item.value.descriptiveNumber">/</ng-container>{{ item.value.descriptiveNumber }}<br>
+    {{ item.value.city }}&nbsp;{{ item.value.postCode }}
+</ng-template>
+
 <div class="row static-pages-holder">
     <div class="col">
         <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
     </div>
 </div>
-
 <h3>Inputs with help icon</h3>
 <div class="static-pages">
     <div class="row">
@@ -49,8 +64,6 @@
         </div>
     </div>
 </div>
-
-
 <h3>Inputs</h3>
 <div class="static-pages">
     <h4>Normal</h4>
@@ -207,6 +220,21 @@
                     touched="true">
                 </lnd-select>
             </div>
+        </div>
+    </form>
+</div>
+<h3>Address whisperer</h3>
+<div class="static-pages">
+    <form [formGroup]="addressWhisperer" class="row">
+        <div class="col-md-4">
+            <pxe-address-whisperer
+                [label]="'Adresa'"
+                [placeholder]="'Address whisperer placeholder'"
+                [parentForm]="addressWhisperer"
+                [whispererName]="'address'"
+                [templateItem]="templateItem"
+                [templateLabel]="templateLabel">
+            </pxe-address-whisperer>
         </div>
     </form>
 </div>

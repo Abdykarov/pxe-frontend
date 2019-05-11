@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
 import {
     HttpClient,
-    HttpHeaders, HttpParams,
+    HttpHeaders,
 } from '@angular/common/http';
 
 import { of } from 'rxjs';
 import { map} from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { CookiesService } from './cookies.service';
 import { environment } from 'src/environments/environment';
 
 import {
+    IJwtPayload,
     ILoginRequest,
-    ILoginResponse,
+    ILoginResponse, IUserRoles,
 } from './model/auth.model';
-import { RequestOptions } from '@angular/http';
 
 @Injectable({
     providedIn: 'root',
@@ -79,17 +80,10 @@ export class AuthService {
             }),
         };
 
-        return this.http.get<any>(`${environment.url}/parc-rest/webresources/sms/send`, httpOptions)
-            .pipe(
-                map(response => {
-                    console.log(response);
-                    return response;
-                }),
-            );
+        return this.http.get<any>(`${environment.url}/parc-rest/webresources/sms/send`, httpOptions);
     }
 
     confirmSupplierLoginSms = ({code}) => {
-        console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold', code);
         const httpOptions = {
             headers: new HttpHeaders({
                 'Authorization': 'Bearer ' + this.token,
@@ -97,17 +91,12 @@ export class AuthService {
             }),
         };
 
-        return this.http.post<any>(`${environment.url}/parc-rest/webresources/sms/confirm`, code, httpOptions)
-            .pipe(
-                map(response => {
-                    console.log(response);
-                    return response;
-                }),
-            );
+        return this.http.post<any>(`${environment.url}/parc-rest/webresources/sms/confirm`, code, httpOptions);
     }
 
     isSupplier = () => {
-        return false;
+        const jwtPayload = this.parseJwt();
+        return jwtPayload.role === IUserRoles.PARC_SUPPLIER_P4R;
     }
 
     refreshToken = () => {
@@ -116,5 +105,10 @@ export class AuthService {
     }
 
     getToken = (): string => this.token;
+
+    parseJwt = (): IJwtPayload => {
+        const jwtHelper = new JwtHelperService();
+        return jwtHelper.decodeToken(this.token);
+    }
 }
 

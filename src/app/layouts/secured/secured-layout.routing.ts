@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { CONSTS } from 'src/app/app.constants';
 import {
     LoginType,
     SignType,
@@ -9,11 +10,11 @@ import { SecuredLayoutComponent } from './secured-layout.component';
 
 const routes = [
     {
-        path: '',
+        path: CONSTS.PATHS.EMPTY,
         component: SecuredLayoutComponent,
         children: [
             {
-                path: 'dashboard',
+                path: CONSTS.PATHS.DASHBOARD,
                 loadChildren: '../../pages/dashboard/dashboard.module#DashboardModule',
                 data: {
                     isSimpleFooter: false,
@@ -25,7 +26,7 @@ const routes = [
                 },
             },
             {
-                path: 'request',
+                path: CONSTS.PATHS.REQUEST,
                 loadChildren: '../../pages/request/request.module#RequestModule',
                 data: {
                     isSimpleFooter: false,
@@ -37,8 +38,8 @@ const routes = [
                 },
             },
             {
-                path: 'supply-point',
-                loadChildren: '../../pages/supply-point/supply-point.module#SupplyPointModule',
+                path: CONSTS.PATHS.SUPPLY_POINTS,
+                loadChildren: '../../pages/supply-points/supply-points.module#SupplyPointsModule',
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
@@ -49,7 +50,7 @@ const routes = [
                 },
             },
             {
-                path: 'supply-offer',
+                path: CONSTS.PATHS.SUPPLY_OFFER,
                 loadChildren: '../../pages/supply-offer/supply-offer.module#SupplyOfferModule',
                 data: {
                     isSimpleFooter: false,
@@ -61,19 +62,19 @@ const routes = [
                 },
             },
             {
-                path: '',
-                redirectTo: 'dashboard',
+                path: CONSTS.PATHS.EMPTY,
+                redirectTo: CONSTS.PATHS.DASHBOARD,
             },
             {
-                path: '404',
+                path: CONSTS.PATHS.NOT_FOUND,
                 loadChildren: '../../pages/not-found/not-found.module#NotFoundModule',
                 data: {
                     isSimpleFooter: false,
                 },
             },
             {
-                path: '**',
-                redirectTo: '404',
+                path: CONSTS.PATHS.WILD_CART,
+                redirectTo: CONSTS.PATHS.NOT_FOUND,
             },
         ],
     },

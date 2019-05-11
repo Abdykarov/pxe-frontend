@@ -1,31 +1,30 @@
 import {
     Component,
     Input,
+    OnInit,
 } from '@angular/core';
-import * as R from 'ramda';
 
-import { IndicatorDirection } from './model/direction.model';
-import { IndicatorPosition } from './model/position.model';
-import { IndicatorBadge } from './model/badge.model';
+import * as R_ from 'ramda-extension';
 
 @Component({
     selector: 'lnd-indicator',
     templateUrl: './indicator.component.html',
     styleUrls: ['./indicator.component.scss'],
 })
-
-export class IndicatorComponent {
+export class IndicatorComponent implements OnInit {
     @Input()
-    public direction: IndicatorDirection;
+    public value: number | string;
 
-    @Input()
-    public position: IndicatorPosition;
+    public absValue: number;
+    public isNegative: boolean;
+    public neutralValue: string;
 
-    @Input()
-    public badge: IndicatorBadge;
-
-    constructor() {
-        this.position = R.contains(this.position, Object.values(IndicatorPosition)) ? this.position : IndicatorPosition.LEFT;
-        this.badge = R.contains(this.badge, Object.values(IndicatorBadge)) ? this.badge : IndicatorBadge.NONE;
+    ngOnInit() {
+        if (R_.isNumber(this.value) && R_.isTruthy(this.value)) {
+            this.isNegative = R_.isNegative(this.value);
+            this.absValue = Math.abs(Number(this.value));
+        } else {
+            this.neutralValue = this.value.toString();
+        }
     }
 }

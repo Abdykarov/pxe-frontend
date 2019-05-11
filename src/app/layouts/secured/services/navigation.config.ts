@@ -1,23 +1,25 @@
 import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
+import { ROUTES } from 'src/app/app.constants';
+
 
 export const navigationConfig: INavigationConfig = [
     [
         {
-            'url': '/secured/dashboard',
+            'url': ROUTES.ROUTER_DASHBOARD,
             'label': 'NÁSTĚNKA',
-            'icon': 'home',
+            'icon': 'notice-board',
             __typename : 'secured',
         },
         {
-            'url': '/secured/request',
+            'url': ROUTES.ROUTER_REQUEST,
             'label': 'ŽÁDOST',
-            'icon': 'home',
+            'icon': 'star',
             __typename : 'secured',
         },
         {
-            'url': '/secured/supply-point',
+            'url': ROUTES.ROUTER_SUPPLY_POINTS,
             'label': 'ODBĚRNÁ MÍSTA',
-            'icon': 'home',
+            'icon': 'pin',
             __typename : 'secured',
         },
     ],

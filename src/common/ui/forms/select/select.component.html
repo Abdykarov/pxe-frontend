@@ -1,6 +1,7 @@
 <div
     [formGroup]="parentForm"
-    class="form-group ng-select-custom">
+    class="form-group ng-select-custom"
+    [ngClass]="customClass">
     <div
         [class.input-group]="!!appendButtonIcon"
         [class.input-group--append]="!!appendButtonIcon"
@@ -12,6 +13,7 @@
         </label>
         <ng-select
             #select
+            [addTag]="addTag"
             [items]="options"
             [selectOnTab]="true"
             [searchable]="searchable"
@@ -26,15 +28,35 @@
             [class.is-valid]="success"
             [class.is-warning]="warning"
             notFoundText="Nenalezeny žádné záznamy"
-            [searchFn]="customSearchFn">
-            <ng-template
-                ng-option-tmp
-                let-item="item"
-                let-search="searchTerm">
-                <div [ngOptionHighlight]="search">
-                    {{ item.label }}
-                </div>
+            [typeahead]="typeahead"
+            [searchFn]="customSearchFn"
+            (close)="close.emit()">
+            <ng-container *ngIf="templateItem; else defaultItem">
+                <ng-template
+                    ng-option-tmp
+                    let-item="item"
+                    let-index="index"
+                    let-search="searchTerm">
+                    <div [ngOptionHighlight]="search">
+                        <ng-container *ngTemplateOutlet="templateItem; context: {item: item,index: index,search: search}"></ng-container>
+                    </div>
+                </ng-template>
+            </ng-container>
+            <ng-template #defaultItem>
+                <ng-template
+                    ng-option-tmp
+                    let-item="item"
+                    let-search="searchTerm">
+                    <div [ngOptionHighlight]="search">
+                        {{ item.label }}
+                    </div>
+                </ng-template>
             </ng-template>
+            <ng-container *ngIf="templateLabel">
+                <ng-template ng-label-tmp let-item="item">
+                    <ng-container *ngTemplateOutlet="templateLabel; context: {item: item}"></ng-container>
+                </ng-template>
+            </ng-container>
         </ng-select>
         <div
             *ngIf="!!appendButtonIcon"

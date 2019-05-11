@@ -1,0 +1,19 @@
+<lnd-select
+    [addTag]="false"
+    [bindValue]="'value'"
+    [error]="parentForm.controls[whispererName].errors"
+    [label]="label"
+    [placeholder]="placeholder"
+    [searchable]="true"
+    [selectName]="whispererName"
+    [options]="addresses"
+    [parentForm]="parentForm"
+    [success]="parentForm.controls[whispererName].valid && (parentForm.controls[whispererName].touched)"
+    [templateItem]="templateItem"
+    [templateLabel]="templateLabel"
+    [touched]="parentForm.controls[whispererName].touched"
+    [typeahead]="typeahead"
+    (close)="setAddresses()"
+    customClass="ng-select-custom--address"
+>
+</lnd-select>

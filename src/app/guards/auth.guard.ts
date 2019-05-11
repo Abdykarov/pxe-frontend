@@ -9,6 +9,7 @@ import {
 
 import { AuthService } from 'src/app/services/auth.service';
 import { Observable } from 'rxjs';
+import { CONSTS } from 'src/app/app.constants';
 
 @Injectable({
     providedIn: 'root',
@@ -26,7 +27,7 @@ export class AuthGuard implements CanActivateChild {
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
         if (!this.authService.isLogged()) {
-            this.router.navigate(['']);
+            this.router.navigate([CONSTS.PATHS.EMPTY]);
             return false;
         }
 
