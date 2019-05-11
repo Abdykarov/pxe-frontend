@@ -9,13 +9,13 @@ import { map} from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { CookiesService } from './cookies.service';
-import { environment } from 'src/environments/environment';
-
 import {
     IJwtPayload,
     ILoginRequest,
-    ILoginResponse, IUserRoles,
+    ILoginResponse,
+    IUserRoles,
 } from './model/auth.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
