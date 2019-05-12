@@ -1,36 +1,37 @@
 <a class="supply-point">
     <div class="row no-gutters">
         <div class="col-12 col-xl-7">
-            <div class="supply-point__inner">
+            <div class="supply-point__inner supply-point__inner--info">
                 <div class="row mb-4">
                     <div class="col-3 col-md-2 text-center">
-                        <span class="icon icon--flash supply-point__icon"></span>
+                        <span
+                            [ngClass]="supplyPoint.commodityType === 'GAS' ? 'icon--flame' : 'icon--flash'"
+                            class="icon supply-point__icon"></span>
                     </div>
                     <div class="col-9 col-md-10">
-                        <span class="supply-point__title">{{title}}</span>
-                        <span class="supply-point__title-subtext">{{titleSubtext}}</span>
+                        <span class="supply-point__title">{{supplyPoint.subject.description}}</span>
+                        <span class="supply-point__title-subtext">{{supplyPoint.distributionRate.type}} ({{supplyPoint.distributionRate.code}})</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 col-md-10 offset-md-2">
                         <div class="row justify-content-between">
-                            <div class="col-6 col-md-auto">
+                            <div class="col-6 col-md-auto" *ngIf="supplyPoint.commodityType === 'POWER'">
                                 <div class="supply-point__value-box">
-                                    <span class="supply-point__value-name">{{firstRowValueName}}</span>
-                                    <span class="supply-point__value">{{firstRowValue}}</span>
+                                    <span class="supply-point__value-name">Jistič</span>
+                                    <span class="supply-point__value">{{supplyPoint.circuitBreaker.code}}</span>
                                 </div>
                             </div>
-
                             <div class="col-6 col-md-auto order-md-2">
                                 <div class="supply-point__value-box">
-                                    <span class="supply-point__value-name">{{secondRowValueName}}</span>
-                                    <lnd-indicator [value]="secondRowValue"></lnd-indicator>
+                                    <span class="supply-point__value-name">Spotřeba</span>
+                                    <lnd-indicator [value]="0"></lnd-indicator>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-auto order-md-1">
+                            <div class="col-12 col-md-auto order-md-1" *ngIf="supplyPoint.commodityType === 'POWER'">
                                 <div class="supply-point__value-box">
-                                    <span class="supply-point__value-name">{{middleRowValueName}}</span>
-                                    <span class="supply-point__value">{{middleRowValue}}</span>
+                                    <span class="supply-point__value-name">EAN</span>
+                                    <span class="supply-point__value">{{supplyPoint.ean}}</span>
                                 </div>
                             </div>
                         </div>
@@ -44,11 +45,11 @@
                     <div class="col-12 col-md-10 offset-md-2 col-xl-12 offset-xl-0">
                         <div class="row">
                             <div class="col-12">
-                                <span class="supply-point__price-label">{{priceLabel}}</span>
+                                <span class="supply-point__price-label">Cena</span>
                             </div>
                             <div class="col-12 col-md-8 col-xl-12 mb-4 mb-md-0">
-                                <span class="supply-point__price">{{price}}</span>
-                                {{seasonPrice}}
+                                <span class="supply-point__price">NA</span>
+                                / NA
                             </div>
                             <div class="col-12 col-md-4 supply-point__addon">
                                 <lnd-button

@@ -3,6 +3,8 @@ import {
     Input,
 } from '@angular/core';
 
+import { ISupplyPointFindData } from 'src/common/graphql/models/supply.model';
+
 @Component({
     selector: 'pxe-supply-point',
     templateUrl: './supply-point.component.html',
@@ -11,35 +13,5 @@ import {
 
 export class SupplyPointComponent {
     @Input()
-    public title;
-
-    @Input()
-    public titleSubtext;
-
-    @Input()
-    public firstRowValueName;
-
-    @Input()
-    public firstRowValue;
-
-    @Input()
-    public secondRowValueName;
-
-    @Input()
-    public secondRowValue;
-
-    @Input()
-    public middleRowValueName;
-
-    @Input()
-    public middleRowValue;
-
-    @Input()
-    public priceLabel;
-
-    @Input()
-    public price;
-
-    @Input()
-    public seasonPrice;
+    public supplyPoint: ISupplyPointFindData;
 }
