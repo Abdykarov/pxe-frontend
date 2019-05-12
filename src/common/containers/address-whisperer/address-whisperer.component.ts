@@ -41,6 +41,9 @@ export class AddressWhispererComponent extends AbstractComponent {
     public label: string;
 
     @Input()
+    public placeholder: string;
+
+    @Input()
     public templateItem?: TemplateRef<any>;
 
     @Input()
