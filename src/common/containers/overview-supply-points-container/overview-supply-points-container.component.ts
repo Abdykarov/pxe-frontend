@@ -1,8 +1,14 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { SupplyService } from '../../graphql/services/supply.service';
+import {
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+} from '@angular/core';
+
 import { map, takeUntil } from 'rxjs/operators';
-import { ISupplyPointFindData } from '../../graphql/models/supply.model';
-import { AbstractComponent } from '../../abstract.component';
+
+import { AbstractComponent } from 'src/common/abstract.component';
+import { ISupplyPointFindData } from 'src/common/graphql/models/supply.model';
+import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
     selector: 'pxe-overview-supply-points-container',
