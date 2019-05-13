@@ -101,10 +101,10 @@ export class LoginComponent extends AbstractComponent {
                 });
     }
 
-    public reSendSms = ($event) => {
-        this.loginSmsRequired = true; // todo odstranit po implemtaci sluzeb/mocku
+    public resendSupplierLoginSms = ($event) => {
+        this.loginSmsRequired = true;
         $event.preventDefault();
-        console.log('resendsms');
+        this.sendSupplierLoginSms();
     }
 
     public handleError = (error) => {
@@ -114,5 +114,4 @@ export class LoginComponent extends AbstractComponent {
         this.globalError.push(message);
         this.cd.markForCheck();
     }
-
 }
