@@ -5,7 +5,8 @@
                 <div class="row mb-4">
                     <div class="col-3 col-md-2 text-center">
                         <span
-                            [ngClass]="supplyPoint.commodityType === 'GAS' ? 'icon--flame' : 'icon--flash'"
+                            [class.icon--flame]="supplyPoint.commodityType === 'GAS'"
+                            [class.icon--flash]="supplyPoint.commodityType === 'POWER'"
                             class="icon supply-point__icon"></span>
                     </div>
                     <div class="col-9 col-md-10">
