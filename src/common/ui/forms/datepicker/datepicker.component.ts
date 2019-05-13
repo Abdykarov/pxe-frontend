@@ -5,7 +5,7 @@ import {
     Input,
     Output,
     ViewEncapsulation,
-    ViewChild,
+    ViewChild, SimpleChanges, OnInit, OnChanges,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
@@ -87,6 +87,18 @@ export class DatepickerComponent {
         defineLocale(locale, csLocale);
         this.localeService.use(locale);
         this.config = defaultDatepickerConfig;
+    }
+
+    handle(event) {
+        const DATE_FORMAT_REGEXP = new RegExp('\\d\\d[.]\\d\\d[.]\\d\\d\\d\\d');
+        if (DATE_FORMAT_REGEXP.test(event.target.value)) {
+            console.log(event.target.value);
+            this.parentForm.controls[this.datepickerName].setValue(event.target.value);
+            this.parentForm.controls[this.datepickerName].updateValueAndValidity();
+            console.log(this.parentForm.getRawValue());
+            console.log(this.parentForm.invalid);
+            console.log(this.parentForm.controls[this.datepickerName].invalid);
+        }
     }
 
     public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages);
