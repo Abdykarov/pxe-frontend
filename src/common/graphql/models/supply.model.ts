@@ -1,5 +1,3 @@
-import { IDisabledInterval } from 'tslint';
-
 export enum CommodityType {
     POWER = 'POWER',
     GAS = 'GAS',

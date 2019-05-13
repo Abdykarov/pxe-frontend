@@ -78,8 +78,6 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
 
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
-        console.log(this.form);
-        console.log(this.formFields);
     }
 
     public setFormByCommodity = (commodityType: CommodityType) => {
