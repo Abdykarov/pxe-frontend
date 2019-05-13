@@ -44,7 +44,6 @@
 	}
 
 	&.btn-primary,
-	&.btn-secondary,
 	&.btn-success,
 	&.btn-warning,
 	&.btn-danger,
@@ -63,13 +62,14 @@
 	&.btn-secondary {
 		color: $btn-secondary-color;
 		background-color: $btn-secondary-bg;
+		border: 2px solid $btn-secondary-color;
 
 		&:focus,
 		&.focus,
 		&:hover,
 		&:active,
 		&:focus:active {
-			color: $btn-secondary-color;
+			color: inherit;
 			background-color: $btn-secondary-bg-hover;
 		}
 	}
