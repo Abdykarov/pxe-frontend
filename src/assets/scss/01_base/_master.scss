@@ -66,12 +66,12 @@ h3,
 	text-transform: uppercase;
 }
 
-h2,
-h3,
-.h2,
-.h3 {
-	// margin-bottom: $spacer;
-}
+// h2,
+// h3,
+// .h2,
+// .h3 {
+// margin-bottom: $spacer;
+// }
 
 h1,
 .h1 {
@@ -164,5 +164,12 @@ a {
 	@include link-without-href-interactive {
 		color: $link-hover-color;
 		text-decoration: $link-hover-decoration;
+	}
+}
+
+button {
+	&:focus,
+	&.focus {
+		@include clear-outline;
 	}
 }
