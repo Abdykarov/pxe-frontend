@@ -80,6 +80,7 @@
 				}
 
 				.ng-input > input {
+					height: 100%;
 					padding: 0;
 					cursor: pointer;
 				}
@@ -95,6 +96,7 @@
 				}
 
 				.ng-value-container .ng-placeholder {
+					top: 5px;
 					left: 0;
 					padding: 0 $spacer;
 					color: rgba($input-color, .5);
