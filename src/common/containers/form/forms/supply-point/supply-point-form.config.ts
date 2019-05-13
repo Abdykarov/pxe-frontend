@@ -66,6 +66,7 @@ export const formFields: IForm = {
             [
                 Validators.required,
                 CustomValidators.isDecimal,
+                CustomValidators.minValue(0),
             ],
         ],
         annualConsumptionVT: [
@@ -73,6 +74,7 @@ export const formFields: IForm = {
             [
                 Validators.required,
                 CustomValidators.isDecimal,
+                CustomValidators.minValue(0),
             ],
         ],
         annualConsumption: [
@@ -80,6 +82,7 @@ export const formFields: IForm = {
             [
                 Validators.required,
                 CustomValidators.isDecimal,
+                CustomValidators.minValue(0),
             ],
         ],
         expirationDate: [
@@ -125,16 +128,19 @@ export const formFields: IForm = {
         annualConsumptionNT: {
             required: errorFieldMessages.annualConsumptionNT.required,
             decimal: errorFieldMessages.annualConsumptionNT.annualConsumptionNT,
+            min: errorFieldMessages.annualConsumptionNT.negativeAnnualConsumption,
             negativeAnnualConsumption: errorFieldMessages.annualConsumptionNT.negativeAnnualConsumption,
         },
         annualConsumptionVT: {
             required: errorFieldMessages.annualConsumptionVT.required,
             decimal: errorFieldMessages.annualConsumptionVT.annualConsumptionVT,
+            min: errorFieldMessages.annualConsumptionVT.negativeAnnualConsumption,
             negativeAnnualConsumption: errorFieldMessages.annualConsumptionVT.negativeAnnualConsumption,
         },
         annualConsumption: {
             required: errorFieldMessages.annualConsumption.required,
             decimal: errorFieldMessages.annualConsumption.annualConsumption,
+            min: errorFieldMessages.annualConsumption.negativeAnnualConsumption,
             negativeAnnualConsumption: errorFieldMessages.annualConsumption.negativeAnnualConsumption,
         },
         expirationDateGas: {

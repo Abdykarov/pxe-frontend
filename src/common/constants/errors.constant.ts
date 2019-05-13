@@ -12,17 +12,17 @@ export const errorFieldMessages =  {
     annualConsumption: {
         required: 'Vyplňte roční spotřebu plynu.',
         annualConsumption: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
-        negativeAnnualConsumption: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
+        negativeAnnualConsumption: 'Použít můžete pouze kladná čísla.',
     },
     annualConsumptionNT: {
         required: 'Vyplňte roční spotřebu elektřiny v nízkém tarifu.',
         annualConsumptionNT: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
-        negativeAnnualConsumption: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
+        negativeAnnualConsumption: 'Použít můžete pouze kladná čísla.',
     },
     annualConsumptionVT: {
         required: 'Vyplňte roční spotřebu elektřiny ve vysokém tarifu.',
         annualConsumptionVT: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
-        negativeAnnualConsumption: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
+        negativeAnnualConsumption: 'Použít můžete pouze kladná čísla.',
     },
     circuitBreakerId: {
         required: 'Vyberte ze seznamu, jakou máte velikost jističe.',
