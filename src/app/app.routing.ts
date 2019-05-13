@@ -17,7 +17,7 @@ const routes: Routes = [
     },
     {
         path: CONSTS.PATHS.SECURED,
-        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
         loadChildren: './layouts/secured/secured-layout.module#SecuredLayoutModule',
     },
     {
