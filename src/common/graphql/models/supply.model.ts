@@ -65,6 +65,7 @@ export interface ISupplyPoint {
 export interface ISupplyPointFindData {
     id: string;
     commodityType: string;
+    name: string;
     supplier: ISupplier;
     ean: string;
     region: string;

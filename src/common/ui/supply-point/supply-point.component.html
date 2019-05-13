@@ -9,8 +9,8 @@
                             class="icon supply-point__icon"></span>
                     </div>
                     <div class="col-9 col-md-10">
-                        <span class="supply-point__title">{{supplyPoint.subject.description}}</span>
-                        <span class="supply-point__title-subtext">{{supplyPoint.distributionRate.type}} ({{supplyPoint.distributionRate.code}})</span>
+                        <span class="supply-point__title">{{supplyPoint.name}}</span>
+                        <span class="supply-point__title-subtext">{{supplyPoint.distributionRate.description}} ({{supplyPoint.distributionRate.code}})</span>
                     </div>
                 </div>
                 <div class="row">
@@ -25,7 +25,8 @@
                             <div class="col-6 col-md-auto order-md-2">
                                 <div class="supply-point__value-box">
                                     <span class="supply-point__value-name">Spotřeba</span>
-                                    <lnd-indicator [value]="0"></lnd-indicator>
+<!--                                    zkontrolovat vypocet... jeslti neba by opacne-->
+                                    <lnd-indicator [value]="(supplyPoint.lastAnnualConsumptionNT)/(supplyPoint.annualConsumptionNT / 100) - 100"></lnd-indicator>
                                 </div>
                             </div>
                             <div class="col-12 col-md-auto order-md-1" *ngIf="supplyPoint.commodityType === 'POWER'">
@@ -49,7 +50,7 @@
                             </div>
                             <div class="col-12 col-md-8 col-xl-12 mb-4 mb-md-0">
                                 <span class="supply-point__price">NA</span>
-                                / NA
+                                / NA ({{supplyPoint.supplier.name}})
                             </div>
                             <div class="col-12 col-md-4 supply-point__addon">
                                 <lnd-button
