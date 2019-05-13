@@ -49,6 +49,10 @@ import {
     SupplyPointPageModule,
     supplyPointPageRoutes,
 } from 'src/static/organisms/supply-point/page.module';
+import {
+    SupplyPointOfferPageModule,
+    supplyPointOfferPageRoutes,
+} from 'src/static/organisms/supply-point-offer/page.module';
 
 import {
     TypographyPageModule,
@@ -71,6 +75,7 @@ const routes: Routes = [
             ...newSupplyPointPageRoutes,
             ...progressBarPageRoutes,
             ...supplyPointPageRoutes,
+            ...supplyPointOfferPageRoutes,
             ...typographyPageRoutes,
             {
                 path: '**',
@@ -94,6 +99,7 @@ const routes: Routes = [
         ProgressBarPageModule,
         RouterModule.forChild(routes),
         SupplyPointPageModule,
+        SupplyPointOfferPageModule,
         TypographyPageModule,
     ],
     exports: [
