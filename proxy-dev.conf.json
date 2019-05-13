@@ -3,8 +3,7 @@
         "context": "/parc-rest",
         "logLevel": "debug",
         "target": "http://localhost:4202",
-        "secure": false,
-        "changeOrigin": true
+        "secure": false
     },
     {
         "context": "/graphql",
