@@ -88,6 +88,10 @@
 		color: $input-color;
 	}
 
+	&::-ms-clear {
+		display: none;
+	}
+
 	&--light {
 		&,
 		&:focus {
