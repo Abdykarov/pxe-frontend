@@ -22,11 +22,10 @@
                                     <span class="supply-point__value">{{supplyPoint.circuitBreaker.code}}</span>
                                 </div>
                             </div>
-                            <div class="col-6 col-md-auto order-md-2">
+                            <div class="col-6 col-md-auto order-md-2"  *ngIf="supplyPoint.annualConsumptionNT && supplyPoint.lastAnnualConsumptionNT">
                                 <div class="supply-point__value-box">
                                     <span class="supply-point__value-name">Spotřeba</span>
-<!--                                    zkontrolovat vypocet... jeslti neba by opacne-->
-                                    <lnd-indicator [value]="(supplyPoint.lastAnnualConsumptionNT)/(supplyPoint.annualConsumptionNT / 100) - 100"></lnd-indicator>
+                                    <lnd-indicator [value]="supplyPoint.annualConsumptionNT | indicator: supplyPoint.lastAnnualConsumptionNT"></lnd-indicator>
                                 </div>
                             </div>
                             <div class="col-12 col-md-auto order-md-1" *ngIf="supplyPoint.commodityType === 'POWER'">

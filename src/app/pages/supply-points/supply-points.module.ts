@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { OverviewSupplyPointsModule } from 'src/common/ui/overview-supply-points/overview-supply-points.module';
 import { SupplyPointsRoutingModule } from './supply-points.routing';
 import { SupplyPointsComponent } from './supply-points.component';
+import { SupplyPointModule } from 'src/common/ui/supply-point/supply-point.module';
 
 @NgModule({
     declarations: [
@@ -11,7 +11,7 @@ import { SupplyPointsComponent } from './supply-points.component';
     ],
     imports: [
         CommonModule,
-        OverviewSupplyPointsModule,
+        SupplyPointModule,
         SupplyPointsRoutingModule,
     ],
 })

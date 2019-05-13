@@ -1,2 +1,5 @@
-<pxe-overview-supply-points [supplierPoints]="supplierPoints"></pxe-overview-supply-points>
-
+<ng-container *ngFor="let supplierPoint of supplierPoints">
+    <pxe-supply-point
+        [supplyPoint]="supplierPoint"
+    ></pxe-supply-point>
+</ng-container>
