@@ -4,10 +4,10 @@ import {
     ValidatorFn,
 } from '@angular/forms';
 
+import * as R_ from 'ramda-extension';
+
 import { EanValidator } from './ean-validator.fnc';
 import { EicValidator } from './eic-validator.fnc';
-
-import * as R_ from 'ramda-extension';
 
 export class CustomValidators {
 
