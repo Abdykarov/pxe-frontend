@@ -58,15 +58,15 @@ export class SupplyPointComponent extends AbstractComponent {
         super();
     }
 
-    public submiSupplyForm = (supplyPointFormData: ISupplyPointFormData) => {
+    public submitSupplyForm = (supplyPointFormData: ISupplyPointFormData) => {
         this.formLoading = true;
         this.globalError = [];
         this.fieldError = {};
         let saveSupplyPoint;
 
-        const supplyPoint: ISupplyPoint = R.pick(['id', 'supplierId', 'name', 'region', 'address', 'expirationDate'], supplyPointFormData);
+        const supplyPoint: ISupplyPoint = R.pick(['id', 'supplierId', 'name', 'address', 'expirationDate'], supplyPointFormData);
 
-        supplyPoint.subjectType =  'INDIVIDUAL';
+        supplyPoint.subjectTypeId =  '1'; // INDIVIDUAL
 
         if (supplyPointFormData.commodityType === CommodityType.POWER) {
             const powerAttributes: ISupplyPointPowerAttributes =

@@ -100,14 +100,10 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
         if (this.form.valid) {
             const form = {
                 ...this.form.value,
-                region: this.form.value.address.region,
                 supplierId: this.form.value.supplierId && this.form.value.supplierId.id,
                 address: {
-                    street: this.form.value.address.street,
+                    ...this.form.value.address,
                     orientationNumber: this.form.value.address.orientationNumber || this.form.value.address.descriptiveNumber,
-                    descriptiveNumber: this.form.value.address.descriptiveNumber,
-                    city: this.form.value.address.city,
-                    postCode: this.form.value.address.postCode,
                 },
                 expirationDate: this.form.value.expirationDate && this.form.value.expirationDate.toISOString().split('T')[0],
             };

@@ -7,18 +7,22 @@ export const restAPIErrorCodes = {
 export const errorFieldMessages =  {
     address: {
         required: 'Vyplňte adresu odběrného místa.',
+        invalidAddress: 'Zvolená adresa není platná.',
     },
     annualConsumption: {
         required: 'Vyplňte roční spotřebu plynu.',
         annualConsumption: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
+        negativeAnnualConsumption: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
     },
     annualConsumptionNT: {
         required: 'Vyplňte roční spotřebu elektřiny v nízkém tarifu.',
         annualConsumptionNT: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
+        negativeAnnualConsumption: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
     },
     annualConsumptionVT: {
         required: 'Vyplňte roční spotřebu elektřiny ve vysokém tarifu.',
         annualConsumptionVT: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
+        negativeAnnualConsumption: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
     },
     circuitBreakerId: {
         required: 'Vyberte ze seznamu, jakou máte velikost jističe.',
@@ -40,6 +44,7 @@ export const errorFieldMessages =  {
     ean: {
         required: 'Vyplňte unikátní 18místné identifikační číslo odběrného místa.',
         ean: 'Správné identifikační číslo odběrného místa má 18 znaků, obsahuje pouze čísla a vždy začíná 8591824.',
+        invalidEan: 'Správné identifikační číslo odběrného místa má 18 znaků, obsahuje pouze čísla a vždy začíná 8591824.',
     },
     eic: {
         required:  'Vyplňte unikátní 16místný identifikační kód odběrného místa.',
@@ -48,6 +53,7 @@ export const errorFieldMessages =  {
     email: {
         required: 'Zadejte svůj e-mail.',
         email: 'Použijte pouze písmena bez diakritiky, číslice, tečku (.) a zavináč (@).',
+        invalidEmail: 'Použijte pouze písmena bez diakritiky, číslice, tečku (.) a zavináč (@).',
         alreadyRegisteredEmail: 'Tento e-mail již registrujeme.',
     },
     expirationDate: {

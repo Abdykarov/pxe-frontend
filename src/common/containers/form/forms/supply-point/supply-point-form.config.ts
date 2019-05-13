@@ -103,15 +103,18 @@ export const formFields: IForm = {
         ean: {
             required: errorFieldMessages.ean.required,
             ean: errorFieldMessages.ean.ean,
+            invalidEan: errorFieldMessages.ean.ean,
             eanFormat: errorFieldMessages.ean.ean,
         },
         eic: {
             required: errorFieldMessages.eic.required,
             eic: errorFieldMessages.eic.eic,
+            invalidEic: errorFieldMessages.eic.eic,
             eicFormat: errorFieldMessages.eic.eic,
         },
         address: {
             required: errorFieldMessages.address.required,
+            invalidAddress: errorFieldMessages.address.invalidAddress,
         },
         distributionRateId: {
             required: errorFieldMessages.distributionRateId.required,
@@ -122,24 +125,27 @@ export const formFields: IForm = {
         annualConsumptionNT: {
             required: errorFieldMessages.annualConsumptionNT.required,
             decimal: errorFieldMessages.annualConsumptionNT.annualConsumptionNT,
+            negativeAnnualConsumption: errorFieldMessages.annualConsumptionNT.negativeAnnualConsumption,
         },
         annualConsumptionVT: {
             required: errorFieldMessages.annualConsumptionVT.required,
             decimal: errorFieldMessages.annualConsumptionVT.annualConsumptionVT,
+            negativeAnnualConsumption: errorFieldMessages.annualConsumptionVT.negativeAnnualConsumption,
         },
         annualConsumption: {
             required: errorFieldMessages.annualConsumption.required,
             decimal: errorFieldMessages.annualConsumption.annualConsumption,
+            negativeAnnualConsumption: errorFieldMessages.annualConsumption.negativeAnnualConsumption,
         },
         expirationDateGas: {
             required: errorFieldMessages.expirationDate.requiredGas,
             bsDate: errorFieldMessages.expirationDate.format,
-            'expiration-date-in-past': errorFieldMessages.expirationDate.expirationDateInPast,
+            expirationDateInPast: errorFieldMessages.expirationDate.expirationDateInPast,
         },
         expirationDatePower: {
             required: errorFieldMessages.expirationDate.requiredPower,
             bsDate: errorFieldMessages.expirationDate.format,
-            'expiration-date-in-past': errorFieldMessages.expirationDate.expirationDateInPast,
+            expirationDateInPast: errorFieldMessages.expirationDate.expirationDateInPast,
         },
     },
 };
