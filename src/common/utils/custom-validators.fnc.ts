@@ -1,6 +1,11 @@
+import {
+    AbstractControl,
+    ValidationErrors,
+    ValidatorFn,
+} from '@angular/forms';
+
 import { EanValidator } from './ean-validator.fnc';
 import { EicValidator } from './eic-validator.fnc';
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 import * as R_ from 'ramda-extension';
 
