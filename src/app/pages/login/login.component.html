@@ -7,12 +7,21 @@
                         <div class="row">
                             <div class="col-12">
                                 <pxe-login-form
-                                    [formFields]="formFields"
+                                    *ngIf="!loginSmsRequired"
+                                    [formFields]="loginFormFields"
                                     [formLoading]="formLoading"
                                     [globalError]="globalError"
-                                    (submitAction)="submitForm($event)"
+                                    (submitAction)="submitFormLogin($event)"
                                     (customAction)="forgottenPasswordAction($event)"
                                 ></pxe-login-form>
+                                <pxe-login-supply-auth-form
+                                    *ngIf="loginSmsRequired"
+                                    [formFields]="loginSupplyAuthFields"
+                                    [formLoading]="formLoading"
+                                    [globalError]="globalError"
+                                    (submitAction)="submitSupplierLoginSms($event)"
+                                    (customAction)="resendSupplierLoginSms($event)"
+                                ></pxe-login-supply-auth-form>
                             </div>
                         </div>
                     </div>
@@ -30,7 +39,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-lg-8 offset-lg-2 text-center">
+                <div class="col-12 col-md-8 offset-md-2 col-xl-10 offset-xl-1 col-lg-8 offset-lg-2 text-center">
                     <pxe-supplier-container></pxe-supplier-container>
                 </div>
             </div>

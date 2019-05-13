@@ -72,4 +72,8 @@ export const errorFieldMessages =  {
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
     },
+    code: {
+        required: 'Zadejte kód.',
+        badCode: 'Zadali jste neplatný kód.', // je treba syncs s grafikou!!!
+    },
 };
