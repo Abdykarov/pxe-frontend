@@ -1,1 +1,5 @@
-<router-outlet></router-outlet>
+<ng-container *ngFor="let supplierPoint of supplierPoints">
+    <pxe-supply-point
+        [data]="supplierPoint"
+    ></pxe-supply-point>
+</ng-container>

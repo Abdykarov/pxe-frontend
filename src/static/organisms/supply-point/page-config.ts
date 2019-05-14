@@ -3,6 +3,7 @@ import { ISupplyPointFindData } from 'src/common/graphql/models/supply.model';
 export const supplyPointConfig: ISupplyPointFindData = {
     id: 'U3VwcGx5UG9pbnQ6MTM3Mjg0MTU1',
     commodityType: 'POWER',
+    name: 'byt - Praha',
     supplier: {
         id: 'U3VwcGxpZXI6MjI3ODYyNDA1Mw',
         name: 'Eichmann LLC',
@@ -18,7 +19,7 @@ export const supplyPointConfig: ISupplyPointFindData = {
             },
         ],
     },
-    ean: 'SAMPLE - EAN',
+    ean: '123456789012',
     region: 'MYREGION',
     address: {
         street: 'Legros Vista',
@@ -29,17 +30,17 @@ export const supplyPointConfig: ISupplyPointFindData = {
     },
     distributionRate: {
         type: 'DISTRRATE',
-        code: 'NEVIM',
-        description: 'Rate 1',
+        code: 'D0D1',
+        description: 'Běžný odběr',
         help: 'help 2',
     },
     circuitBreaker: {
         type: 'CIRCTBREAKERS',
-        code: 'NEVIM',
+        code: '3x10 A',
         description: 'Breaker1',
         help: 'help 2',
     },
-    annualConsumptionNT: 1529.25,
+    annualConsumptionNT: 160,
     expirationDate: '2020 - 03 - 22T23: 57: 28.997Z',
     subject: {
         type: 'SUBJECT',
@@ -47,6 +48,6 @@ export const supplyPointConfig: ISupplyPointFindData = {
         description: 'fyzicka osoba',
         help: 'Help 1',
     },
-    lastAnnualConsumptionNT: 1529.25,
+    lastAnnualConsumptionNT: 200,
     lastAnnualConsumptionVT: 1529.25,
 };

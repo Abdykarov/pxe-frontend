@@ -56,46 +56,45 @@ export const findSupplyPoints = gql`
             id,
             commodityType,
             supplier{
-              id,
-              name,
-              vatNumber,
-              suplierSampleDocuments{
-                type,
-                url
-              }
+                    id,
+                    name,
+                    vatNumber,
+                    suplierSampleDocuments{
+                    type,
+                    url
+                }
             },
-                ean,
+            ean,
             region,
             address{
-              street,
-              orientationNumber,
-              descriptiveNumber,
-              city,
-              postCode,
+                street,
+                orientationNumber,
+                descriptiveNumber,
+                city,
+                postCode,
             },
             distributionRate{
-              type,
-              code,
-              description,
-              help
+                type,
+                code,
+                description,
+                help
             },
             circuitBreaker{
-              type,
-              code,
-              description,
-              help
+                type,
+                code,
+                description,
+                help
             },
             annualConsumptionNT,
             expirationDate,
             subject{
-              type,
-              code,
-              description,
-              help,
+                type,
+                code,
+                description,
+                help,
             }
             lastAnnualConsumptionNT,
             lastAnnualConsumptionVT,
         }
     }
-
 `;
