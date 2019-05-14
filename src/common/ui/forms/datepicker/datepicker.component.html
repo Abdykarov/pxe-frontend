@@ -27,7 +27,8 @@
                 [class.is-valid]="success"
                 [class.is-warning]="warning"
                 [attr.disabled]="!!disabledField ? 'disabled' : null"
-                [attr.autocomplete]="'off'">
+                [attr.autocomplete]="'off'"
+                (keyup)="handle($event)">
                 <div class="input-group-append">
                     <span class="icon icon--calendar input-group-icon"></span>
                 </div>

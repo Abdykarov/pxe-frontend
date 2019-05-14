@@ -1,11 +1,10 @@
 import {
     Component,
-    ElementRef,
     EventEmitter,
     Input,
     Output,
     ViewEncapsulation,
-    ViewChild,
+    ViewChild, SimpleChanges, OnChanges, ChangeDetectorRef,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
@@ -30,7 +29,7 @@ const locale = 'cs';
 })
 export class DatepickerComponent {
     @ViewChild('datepicker')
-    public datepicker: ElementRef;
+    public datepicker: any;
 
     @Output()
     public appendButtonAction?: EventEmitter<any> = new EventEmitter();
@@ -80,8 +79,22 @@ export class DatepickerComponent {
     @Input()
     public maxDate?: Date;
 
+    handle(event) {
+        const DATE_FORMAT_REGEXP = new RegExp('^\\d\\d[.]\\d\\d[.]\\d\\d\\d\\d$');
+        if (DATE_FORMAT_REGEXP.test(event.target.value)) {
+            const stringDate = event.target.value;
+            const dddd = new Date();
+            dddd.setDate(stringDate.substr(0, 2) + 1 );
+            dddd.setMonth(stringDate.substr(3, 2) + 1 );
+            dddd.setFullYear(stringDate.substr(6, 4));
+            console.log(dddd);
+            this.datepicker.bsValue = dddd;
+        }
+    }
+
     constructor(
         private localeService: BsLocaleService,
+        private cd: ChangeDetectorRef,
     ) {
         csLocale.invalidDate = '';
         defineLocale(locale, csLocale);
