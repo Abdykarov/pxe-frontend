@@ -8,4 +8,13 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 
 export class SupplyPointOfferComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
+
+    constructor() {
+      this.breadcrumbItemsSimple = [
+          {
+              label: 'Supply point offer',
+              url: null,
+          },
+      ];
+  }
 }
