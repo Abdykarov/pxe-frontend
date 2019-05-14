@@ -49,7 +49,6 @@ export const findSupplierDocumentsByComodity = gql`
     }
 `;
 
-
 export const findSupplyPoints = gql`
     query findSupplyPoints($email: String!){
         findSupplyPoints(email: $email){
@@ -57,14 +56,14 @@ export const findSupplyPoints = gql`
             name,
             commodityType,
             supplier{
-                    id,
-                    name,
-                    vatNumber,
-                    logoPath,
-                    sampleDocuments{
-                        type,
-                        url
-                    }
+                id,
+                name,
+                vatNumber,
+                logoPath,
+                sampleDocuments{
+                    type,
+                    url
+                }
             },
             ean,
             address{

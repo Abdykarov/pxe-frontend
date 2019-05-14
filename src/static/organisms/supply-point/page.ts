@@ -12,5 +12,3 @@ export class SupplyPointComponent {
 
     public supplyPoint = supplyPointConfig;
 }
-
-
