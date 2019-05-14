@@ -11,7 +11,10 @@
                     </div>
                     <div class="col-9 col-md-10">
                         <span class="supply-point__title">{{data.name}}</span>
-                        <span class="supply-point__title-subtext">{{data.distributionRate.description}} ({{data.distributionRate.code}})</span>
+                        <span *ngIf="data.commodityType === 'POWER'"
+                              class="supply-point__title-subtext">
+                            {{data.distributionRate.description}} ({{data.distributionRate.code}})
+                        </span>
                     </div>
                 </div>
                 <div class="row">
@@ -31,10 +34,16 @@
                                     <lnd-indicator [value]="data.annualConsumptionNT | consumptionIndicator: data.lastAnnualConsumptionNT"></lnd-indicator>
                                 </div>
                             </div>
-                            <div *ngIf="data.commodityType === 'POWER'"
-                                 class="col-12 col-md-auto order-md-1">
+                            <div class="col-12 col-md-auto order-md-1">
                                 <div class="supply-point__value-box">
-                                    <span class="supply-point__value-name">EAN</span>
+                                    <span *ngIf="data.commodityType === 'POWER'"
+                                          class="supply-point__value-name">
+                                        EAN
+                                    </span>
+                                    <span *ngIf="data.commodityType === 'GAS'"
+                                          class="supply-point__value-name">
+                                        EIC
+                                    </span>
                                     <span class="supply-point__value">{{data.ean}}</span>
                                 </div>
                             </div>
@@ -52,7 +61,7 @@
                                 <span class="supply-point__price-label">Cena</span>
                             </div>
                             <div class="col-12 col-md-8 col-xl-12 mb-4 mb-md-0">
-                                <span class="supply-point__price">NA</span>
+                                <span class="supply-point__price">0 Kč</span>
                                 / Měsíčně ({{data.supplier.name}})
                             </div>
                             <div class="col-12 col-md-4 supply-point__addon">

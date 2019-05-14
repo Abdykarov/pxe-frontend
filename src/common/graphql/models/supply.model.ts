@@ -29,7 +29,7 @@ interface ISupplier {
     name: string;
     vatNumber: string;
     logoPath?: string;
-    suplierSampleDocuments: ISupplierSampleDocument[];
+    sampleDocuments: ISupplierSampleDocument[];
 }
 
 export interface ISupplierSampleDocument {
@@ -59,14 +59,12 @@ export interface ISupplyPoint {
     subjectTypeId: string;
 }
 
-
 export interface ISupplyPointFindData {
     id: string;
     commodityType: string;
     name: string;
     supplier: ISupplier;
     ean: string;
-    region: string;
     address: IAddress;
     distributionRate?: ICodelistItem;
     circuitBreaker?: ICodelistItem;

@@ -54,18 +54,19 @@ export const findSupplyPoints = gql`
     query findSupplyPoints($email: String!){
         findSupplyPoints(email: $email){
             id,
+            name,
             commodityType,
             supplier{
                     id,
                     name,
                     vatNumber,
-                    suplierSampleDocuments{
-                    type,
-                    url
-                }
+                    logoPath,
+                    sampleDocuments{
+                        type,
+                        url
+                    }
             },
             ean,
-            region,
             address{
                 street,
                 orientationNumber,
