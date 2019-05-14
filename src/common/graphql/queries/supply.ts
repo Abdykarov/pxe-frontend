@@ -48,3 +48,53 @@ export const findSupplierDocumentsByComodity = gql`
         }
     }
 `;
+
+export const findSupplyPoints = gql`
+    query findSupplyPoints($email: String!){
+        findSupplyPoints(email: $email){
+            id,
+            name,
+            commodityType,
+            supplier{
+                id,
+                name,
+                vatNumber,
+                logoPath,
+                sampleDocuments{
+                    type,
+                    url
+                }
+            },
+            ean,
+            address{
+                street,
+                orientationNumber,
+                descriptiveNumber,
+                city,
+                postCode,
+            },
+            distributionRate{
+                type,
+                code,
+                description,
+                help
+            },
+            circuitBreaker{
+                type,
+                code,
+                description,
+                help
+            },
+            annualConsumptionNT,
+            expirationDate,
+            subject{
+                type,
+                code,
+                description,
+                help,
+            }
+            lastAnnualConsumptionNT,
+            lastAnnualConsumptionVT,
+        }
+    }
+`;

@@ -16,6 +16,7 @@ import {
     IUserRoles,
 } from './model/auth.model';
 import { environment } from 'src/environments/environment';
+import { parseEmailFromUsername } from 'src/common/utils';
 
 @Injectable({
     providedIn: 'root',
@@ -105,6 +106,12 @@ export class AuthService {
     }
 
     getToken = (): string => this.token;
+
+    getUserEmail = () => {
+        const jwtPayload = this.parseJwt();
+        const { username } = jwtPayload;
+        return parseEmailFromUsername(username);
+    }
 
     parseJwt = (): IJwtPayload => {
         const jwtHelper = new JwtHelperService();
