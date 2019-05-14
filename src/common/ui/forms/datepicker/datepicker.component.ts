@@ -4,7 +4,7 @@ import {
     Input,
     Output,
     ViewEncapsulation,
-    ViewChild, SimpleChanges, OnChanges, ChangeDetectorRef,
+    ViewChild,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
@@ -116,7 +116,6 @@ export class DatepickerComponent {
 
     constructor(
         private localeService: BsLocaleService,
-        private cd: ChangeDetectorRef,
     ) {
         csLocale.invalidDate = '';
         defineLocale(locale, csLocale);
