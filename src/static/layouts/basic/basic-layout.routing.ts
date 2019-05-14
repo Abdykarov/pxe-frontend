@@ -4,11 +4,11 @@ import {
     Routes,
 } from '@angular/router';
 
-import { BasicLayoutComponent } from './basic-layout.component';
 import {
     AlertsPageModule,
     alertsPageRoutes,
 } from 'src/static/atoms/alerts/page.module';
+import { BasicLayoutComponent } from './basic-layout.component';
 import {
     BreadcrumbPageModule,
     breadcrumbPageRoutes,
@@ -33,6 +33,10 @@ import {
     IndicatorsPageModule,
     indicatorsPageRoutes,
 } from 'src/static/atoms/indicators/page.module';
+import {
+    InfoBannerPageModule,
+    infoBannerPageRoutes,
+} from 'src/static/organisms/info-banner/page.module';
 import {
     ModalsPageModule,
     modalsPageRoutes,
@@ -67,6 +71,7 @@ const routes: Routes = [
             ...formsPageRoutes,
             ...iconsPageRoutes,
             ...indicatorsPageRoutes,
+            ...infoBannerPageRoutes,
             ...modalsPageRoutes,
             ...newSupplyPointPageRoutes,
             ...progressBarPageRoutes,
@@ -89,6 +94,7 @@ const routes: Routes = [
         FormsPageModule,
         IconsPageModule,
         IndicatorsPageModule,
+        InfoBannerPageModule,
         ModalsPageModule,
         NewSupplyPointPageModule,
         ProgressBarPageModule,

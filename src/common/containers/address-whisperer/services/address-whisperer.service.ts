@@ -5,6 +5,7 @@ import {
 import { Injectable } from '@angular/core';
 
 import * as R from 'ramda';
+import * as R_ from 'ramda-extension';
 import { map } from 'rxjs/operators';
 
 import {
@@ -27,19 +28,24 @@ export class AddressWhispererService {
     private responeToResult = (resultMapyCz: IResultMapyCZResponse): IOption => {
         const userData: IUserDataMapyCzResponse = resultMapyCz.userData;
         const numberSeparator = userData.streetNumber && userData.houseNumber ? '/' : '';
+        let address = null;
 
-        return {
-            label: `${userData.street} ${userData.streetNumber}${numberSeparator}${userData.houseNumber}, ` +
-                `${userData.municipality}, ${userData.zipCode}`,
-            value: {
-                street: userData.street,
-                orientationNumber: userData.streetNumber,
-                descriptiveNumber: userData.houseNumber,
-                city: userData.municipality,
-                postCode: userData.zipCode,
-            },
-            key: `${userData.suggestFirstRow}, ${userData.suggestSecondRow}, ${userData.zipCode}`,
-        };
+        if ((userData.street || userData.ward) && userData.houseNumber && userData.municipality && userData.zipCode && userData.region) {
+            address = {
+                label: `${userData.street || userData.ward} ${userData.streetNumber}${numberSeparator}${userData.houseNumber}, ` +
+                    `${userData.municipality}, ${userData.zipCode}`,
+                value: {
+                    street: userData.street || userData.ward,
+                    orientationNumber: userData.streetNumber,
+                    descriptiveNumber: userData.houseNumber,
+                    city: userData.municipality,
+                    postCode: userData.zipCode,
+                    region: userData.region,
+                },
+                key: `${userData.suggestFirstRow}, ${userData.suggestSecondRow}, ${userData.zipCode}`,
+            };
+        }
+        return address;
     }
 
     public getPlaces = (count: number, phrase: string) => {
@@ -53,7 +59,10 @@ export class AddressWhispererService {
         return this.http.get(AddressWhispererService.MAPY_CZ_URL, options)
             .pipe(
                 map((response: IMapyCzResponse): Array<IOption> => {
-                    return R.map(this.responeToResult)(response.result);
+                    return R.pipe(
+                        R.map(this.responeToResult),
+                        R.filter(R_.isNotNil),
+                    )(response.result);
                 }),
             );
     }

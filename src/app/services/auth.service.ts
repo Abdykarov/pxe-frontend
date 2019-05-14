@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {
+    HttpClient,
+    HttpHeaders,
+} from '@angular/common/http';
 
 import { of } from 'rxjs';
 import { map} from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { CookiesService } from './cookies.service';
-import { environment } from 'src/environments/environment';
-
 import {
+    IJwtPayload,
     ILoginRequest,
     ILoginResponse,
+    IUserRoles,
 } from './model/auth.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -67,10 +72,43 @@ export class AuthService {
             );
     }
 
+    sendSupplierLoginSms = () => {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Authorization': 'Bearer ' + this.token,
+                'Content-Type': 'application/json',
+            }),
+        };
+
+        return this.http.get<any>(`${environment.url}/parc-rest/webresources/sms/send`, httpOptions);
+    }
+
+    confirmSupplierLoginSms = ({code}) => {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Authorization': 'Bearer ' + this.token,
+                'Content-Type': 'text/plain',
+            }),
+        };
+
+        return this.http.post<any>(`${environment.url}/parc-rest/webresources/sms/confirm`, code, httpOptions);
+    }
+
+    isSupplier = () => {
+        const jwtPayload = this.parseJwt();
+        return jwtPayload.role === IUserRoles.PARC_SUPPLIER_P4R;
+    }
+
     refreshToken = () => {
         // TODO refresh token logic
         return of(true);
     }
 
     getToken = (): string => this.token;
+
+    parseJwt = (): IJwtPayload => {
+        const jwtHelper = new JwtHelperService();
+        return jwtHelper.decodeToken(this.token);
+    }
 }
+

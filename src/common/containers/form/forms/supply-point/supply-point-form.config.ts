@@ -24,6 +24,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
+                Validators.maxLength(50),
             ],
         ],
         ean: [
@@ -65,6 +66,7 @@ export const formFields: IForm = {
             [
                 Validators.required,
                 CustomValidators.isDecimal,
+                CustomValidators.minValue(0),
             ],
         ],
         annualConsumptionVT: [
@@ -72,6 +74,7 @@ export const formFields: IForm = {
             [
                 Validators.required,
                 CustomValidators.isDecimal,
+                CustomValidators.minValue(0),
             ],
         ],
         annualConsumption: [
@@ -79,6 +82,7 @@ export const formFields: IForm = {
             [
                 Validators.required,
                 CustomValidators.isDecimal,
+                CustomValidators.minValue(0),
             ],
         ],
         expirationDate: [
@@ -97,19 +101,23 @@ export const formFields: IForm = {
         },
         name: {
             required: errorFieldMessages.name.required,
+            maxlength: errorFieldMessages.name.maxlength,
         },
         ean: {
             required: errorFieldMessages.ean.required,
             ean: errorFieldMessages.ean.ean,
+            invalidEan: errorFieldMessages.ean.ean,
             eanFormat: errorFieldMessages.ean.ean,
         },
         eic: {
             required: errorFieldMessages.eic.required,
             eic: errorFieldMessages.eic.eic,
+            invalidEic: errorFieldMessages.eic.eic,
             eicFormat: errorFieldMessages.eic.eic,
         },
         address: {
             required: errorFieldMessages.address.required,
+            invalidAddress: errorFieldMessages.address.invalidAddress,
         },
         distributionRateId: {
             required: errorFieldMessages.distributionRateId.required,
@@ -120,22 +128,30 @@ export const formFields: IForm = {
         annualConsumptionNT: {
             required: errorFieldMessages.annualConsumptionNT.required,
             decimal: errorFieldMessages.annualConsumptionNT.annualConsumptionNT,
+            min: errorFieldMessages.annualConsumptionNT.negativeAnnualConsumption,
+            negativeAnnualConsumption: errorFieldMessages.annualConsumptionNT.negativeAnnualConsumption,
         },
         annualConsumptionVT: {
             required: errorFieldMessages.annualConsumptionVT.required,
             decimal: errorFieldMessages.annualConsumptionVT.annualConsumptionVT,
+            min: errorFieldMessages.annualConsumptionVT.negativeAnnualConsumption,
+            negativeAnnualConsumption: errorFieldMessages.annualConsumptionVT.negativeAnnualConsumption,
         },
         annualConsumption: {
             required: errorFieldMessages.annualConsumption.required,
             decimal: errorFieldMessages.annualConsumption.annualConsumption,
+            min: errorFieldMessages.annualConsumption.negativeAnnualConsumption,
+            negativeAnnualConsumption: errorFieldMessages.annualConsumption.negativeAnnualConsumption,
         },
         expirationDateGas: {
             required: errorFieldMessages.expirationDate.requiredGas,
-            bsDate: errorFieldMessages.expirationDate.expirationDateInPast,
+            bsDate: errorFieldMessages.expirationDate.format,
+            expirationDateInPast: errorFieldMessages.expirationDate.expirationDateInPast,
         },
         expirationDatePower: {
             required: errorFieldMessages.expirationDate.requiredPower,
-            bsDate: errorFieldMessages.expirationDate.expirationDateInPast,
+            bsDate: errorFieldMessages.expirationDate.format,
+            expirationDateInPast: errorFieldMessages.expirationDate.expirationDateInPast,
         },
     },
 };

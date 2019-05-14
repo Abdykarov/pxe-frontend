@@ -1,3 +1,11 @@
+import {
+    AbstractControl,
+    ValidationErrors,
+    ValidatorFn,
+} from '@angular/forms';
+
+import * as R_ from 'ramda-extension';
+
 import { EanValidator } from './ean-validator.fnc';
 import { EicValidator } from './eic-validator.fnc';
 
@@ -106,6 +114,38 @@ export class CustomValidators {
 
         return {
             decimal: true,
+        };
+    }
+
+    static minValue = (min: number): ValidatorFn => {
+        return (control: AbstractControl): ValidationErrors => {
+            if (control.pristine) {
+                return null;
+            }
+
+            if (R_.isNilOrEmpty(control.value) || parseFloat(control.value.toString().replace(',', '.')) > min) {
+                return null;
+            }
+
+            return {
+                min: true,
+            };
+        };
+    }
+
+    static maxValue = (max: number): ValidatorFn => {
+        return (control: AbstractControl): ValidationErrors => {
+            if (control.pristine) {
+                return null;
+            }
+
+            if (R_.isNilOrEmpty(control.value) || parseFloat(control.value.toString().replace(',', '.')) < max) {
+                return null;
+            }
+
+            return {
+                max: true,
+            };
         };
     }
 }
