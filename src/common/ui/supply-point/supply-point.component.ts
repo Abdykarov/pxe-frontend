@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import {
+    Component,
+    Input,
+} from '@angular/core';
+
+import { ISupplyPointFindData } from 'src/common/graphql/models/supply.model';
 
 @Component({
     selector: 'pxe-supply-point',
@@ -6,4 +11,7 @@ import { Component } from '@angular/core';
     styleUrls: ['./supply-point.component.scss'],
 })
 
-export class SupplyPointComponent {}
+export class SupplyPointComponent {
+    @Input()
+    public supplyPoint: ISupplyPointFindData;
+}
