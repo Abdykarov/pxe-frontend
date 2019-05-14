@@ -1,13 +1,16 @@
 import { ActivatedRoute } from '@angular/router';
 import {
     Component,
+    Inject,
     OnInit,
+    PLATFORM_ID,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { isPlatformBrowser } from '@angular/common';
 
 import { takeUntil } from 'rxjs/operators';
 
-import { AbstractFormComponent } from '../../abstract-form.component';
+import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 
 @Component({
     selector: 'pxe-login-form',
@@ -21,6 +24,7 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
     constructor(
         protected fb: FormBuilder,
         private route: ActivatedRoute,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super(fb);
     }
@@ -39,6 +43,8 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
                     this.form.setValue(formValue);
                 }
             });
-        this.isFromSignUp = !!window.history.state.isFromSignUp;
+        if (isPlatformBrowser(this.platformId)) {
+            this.isFromSignUp = !!window.history.state.isFromSignUp;
+        }
     }
 }

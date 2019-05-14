@@ -88,6 +88,10 @@
 		color: $input-color;
 	}
 
+	&::-ms-clear {
+		display: none;
+	}
+
 	&--light {
 		&,
 		&:focus {
@@ -325,11 +329,16 @@ textarea.form-control--not-empty {
 		background-color: transparent;
 		border: none;
 		color: $font-text;
-		height: $input-height;
-		line-height: $input-height;
+		height: $icon-size-px;
+		line-height: $icon-size-px;
 
 		.icon {
 			vertical-align: sub;
+		}
+
+		&:focus,
+		&.focus {
+			color: $input-focus-border-color;
 		}
 	}
 }

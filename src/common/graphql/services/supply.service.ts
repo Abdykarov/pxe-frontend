@@ -5,6 +5,8 @@ import { Apollo } from 'apollo-angular';
 import {
     CommodityType,
     ISupplyPoint,
+    ISupplyPointGasAttributes,
+    ISupplyPointPowerAttributes,
 } from '../models/supply.model';
 import {
     getCodelistByType,
@@ -12,7 +14,10 @@ import {
     findCodelistsByTypes,
     findSupplierDocumentsByComodity,
 } from 'src/common/graphql/queries/supply';
-import { saveElectricitySupplyPoint } from '../mutation/supply';
+import {
+    saveGasSupplyPoint,
+    savePowerSupplyPoint,
+} from '../mutation/supply';
 
 @Injectable({
     providedIn: 'root',
@@ -70,12 +75,24 @@ export class SupplyService {
             .valueChanges;
     }
 
-    public saveElectricitySupplyPoint(supplyPoint: ISupplyPoint) {
+    public savePowerSupplyPoint(supplyPoint: ISupplyPoint, powerAttributes: ISupplyPointPowerAttributes) {
         return this.apollo
             .mutate({
-                mutation: saveElectricitySupplyPoint,
+                mutation: savePowerSupplyPoint,
                 variables: {
                     supplyPoint: supplyPoint,
+                    powerAttributes: powerAttributes,
+                },
+            });
+    }
+
+    public saveGasSupplyPoint(supplyPoint: ISupplyPoint, gasAttributes: ISupplyPointGasAttributes) {
+        return this.apollo
+            .mutate({
+                mutation: saveGasSupplyPoint,
+                variables: {
+                    supplyPoint: supplyPoint,
+                    gasAttributes: gasAttributes,
                 },
             });
     }

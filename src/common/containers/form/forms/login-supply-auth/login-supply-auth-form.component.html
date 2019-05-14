@@ -1,0 +1,38 @@
+<ng-template #reSendAuthSupplySms>
+    Na číslo {{telephoneNumber}} jsme vám poslali čtyřmístný  autentikační kód.
+    <br />
+    <a (click)="handleCustomAction($event)">
+        Poslat znovu
+    </a>
+</ng-template>
+
+<lnd-alert
+    *ngIf="globalError.length"
+    type="danger">
+    <ng-container *ngFor="let error of globalError">
+        {{ error }}<br>
+    </ng-container>
+</lnd-alert>
+<form
+    [formGroup]="form"
+    class="form-container"
+    autocomplete="off">
+    <lnd-form-field
+        [error]="form.controls.code.errors"
+        [formControl]="form.controls.code"
+        [id]="'code'"
+        label="Kód"
+        [success]="form.controls.code.valid && form.controls.code.touched"
+        [touched]="form.controls.code.touched"
+        [validationMessages]="formFields.validationMessages.code"
+        [subtextTemplate]="reSendAuthSupplySms"
+    ></lnd-form-field>
+    <div class="text-right">
+        <lnd-button
+            type="primary"
+            (action)="submitForm()"
+            [isDisabled]="!!formLoading"
+            label="Přihlásit se">
+        </lnd-button>
+    </div>
+</form>

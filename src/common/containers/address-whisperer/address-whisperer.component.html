@@ -1,0 +1,22 @@
+<lnd-select
+    [addTag]="false"
+    [appendButtonIcon]="appendButtonIcon"
+    (appendButtonAction)="appendButtonAction.emit()"
+    [bindValue]="'value'"
+    (close)="setAddresses()"
+    [error]="error"
+    [label]="label"
+    [placeholder]="placeholder"
+    [searchable]="true"
+    [selectName]="whispererName"
+    [options]="addresses"
+    [parentForm]="parentForm"
+    [success]="success"
+    [templateItem]="templateItem"
+    [templateLabel]="templateLabel"
+    [touched]="touched"
+    [typeahead]="typeahead"
+    [validationMessages]="validationMessages"
+    customClass="ng-select-custom--address"
+>
+</lnd-select>

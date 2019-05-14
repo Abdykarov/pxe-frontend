@@ -15,7 +15,7 @@ $btn-height:                       40px;
 $btn-height-small:                 30px;
 $btn-padding-y:                    ( $spacer / 2 );
 $btn-padding-x:                    ( $spacer * 1.5 );
-$btn-line-height:                  ( 18 / 12 );
+$btn-line-height:                  ( 14 / 12 );
 $btn-border-radius:                4px;
 $btn-padding-y-sm:                 ( $spacer / 6 );
 $btn-padding-x-sm:                 ( $spacer / 3 );
@@ -23,7 +23,8 @@ $font-size-sm:                     .688rem;
 $btn-line-height-sm:               ( 18 / 11 );
 $btn-border-radius-sm:             $btn-border-radius;
 
-$btn-secondary-bg:                 $white;
-$btn-secondary-bg-hover:           #e4eaf1;
+
+$btn-secondary-bg:                 transparent;
+$btn-secondary-bg-hover:           rgba($black, .03);
 $btn-secondary-color:              $font-text;
 $btn-secondary-shadow:             0 2px 4px 0 #c8d3df;

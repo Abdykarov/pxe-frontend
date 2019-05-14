@@ -1,3 +1,19 @@
+<!-- Example custom lael template -->
+<ng-template
+    #templateLabel
+    let-item="item"
+    let-index="index">
+    {{ item.label }}
+</ng-template>
+<!-- Example searched items template -->
+<ng-template
+    #templateItem
+    let-item="item"
+    let-index="index">
+    {{ item.value.street }}&nbsp;{{ item.value.orientationNumber }}<ng-container *ngIf="item && item.value && item.value.orientationNumber && item.value.descriptiveNumber">/</ng-container>{{ item.value.descriptiveNumber }}<br>
+    {{ item.value.city }}&nbsp;{{ item.value.postCode }}
+</ng-template>
+
 <lnd-alert
     *ngIf="globalError.length"
     type="danger">
@@ -74,17 +90,19 @@
         [touched]="form.controls.eic.touched || formError.eic"
         [validationMessages]="formFields.validationMessages.eic"
     ></lnd-form-field>
-    <lnd-form-field
+    <pxe-address-whisperer
         [appendButtonIcon]="helpDocuments && helpDocuments['address'] ? 'icon--info' : null"
         (appendButtonAction)="showHelp('address', 'Adresa odběrného místa')"
         [error]="formError.address || form.controls.address.errors"
-        [formControl]="form.controls.address"
-        [id]="'address'"
-        label="Adresa odběrného místa"
+        [label]="'Adresa odběrného místa'"
+        [parentForm]="form"
         [success]="form.controls.address.valid && (form.controls.address.touched || formError.address)"
+        [templateItem]="templateItem"
+        [templateLabel]="templateLabel"
         [touched]="form.controls.address.touched || formError.address"
         [validationMessages]="formFields.validationMessages.address"
-    ></lnd-form-field>
+        [whispererName]="'address'">
+    </pxe-address-whisperer>
     <lnd-select
         *ngIf="form.controls.distributionRateId.status !== 'DISABLED'"
         [appendButtonIcon]="helpDocuments && helpDocuments['distributionRateId'] ? 'icon--info' : null"
@@ -159,14 +177,14 @@
         label="Ukončení platnosti stávající smlouvy"
         [parentForm]="form"
         [placeholder]="'dd.mm.rrrr'"
+        [minDate]="minDate"
         [success]="form.controls.expirationDate.valid && (form.controls.expirationDate.touched || formError.expirationDate)"
         [touched]="form.controls.expirationDate.touched || formError.expirationDate"
-        [validationMessages]="formFields.validationMessages.expirationDate"
+        [validationMessages]="form.controls.commodityType.value === 'POWER' ? formFields.validationMessages.expirationDatePower : formFields.validationMessages.expirationDateGas"
     >
     </lnd-datepicker>
     <div class="text-center">
         <lnd-button
-            *ngIf="!isStandalone"
             type="primary"
             (action)="submitForm()"
             [isDisabled]="formLoading"

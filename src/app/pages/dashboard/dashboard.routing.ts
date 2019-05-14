@@ -4,11 +4,12 @@ import {
     RouterModule,
 } from '@angular/router';
 
+import { CONSTS } from 'src/app/app.constants';
 import { DashboardComponent } from './dashboard.component';
 
 const routes: Routes = [
     {
-        path: '',
+        path: CONSTS.PATHS.EMPTY,
         component: DashboardComponent,
     },
 ];

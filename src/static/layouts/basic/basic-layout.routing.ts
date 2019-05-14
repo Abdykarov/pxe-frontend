@@ -4,11 +4,11 @@ import {
     Routes,
 } from '@angular/router';
 
-import { BasicLayoutComponent } from './basic-layout.component';
 import {
     AlertsPageModule,
     alertsPageRoutes,
 } from 'src/static/atoms/alerts/page.module';
+import { BasicLayoutComponent } from './basic-layout.component';
 import {
     BreadcrumbPageModule,
     breadcrumbPageRoutes,
@@ -34,6 +34,10 @@ import {
     indicatorsPageRoutes,
 } from 'src/static/atoms/indicators/page.module';
 import {
+    InfoBannerPageModule,
+    infoBannerPageRoutes,
+} from 'src/static/organisms/info-banner/page.module';
+import {
     ModalsPageModule,
     modalsPageRoutes,
 } from 'src/static/organisms/modals/page.module';
@@ -49,6 +53,11 @@ import {
     SamplePointsPageModule,
     samplePointsPageRoutes,
 } from 'src/static/pages/sample-points/page.module';
+import {
+    SupplyPointPageModule,
+    supplyPointPageRoutes,
+} from 'src/static/organisms/supply-point/page.module';
+
 import {
     TypographyPageModule,
     typographyPageRoutes,
@@ -66,10 +75,12 @@ const routes: Routes = [
             ...formsPageRoutes,
             ...iconsPageRoutes,
             ...indicatorsPageRoutes,
+            ...infoBannerPageRoutes,
             ...modalsPageRoutes,
             ...newSupplyPointPageRoutes,
             ...progressBarPageRoutes,
             ...samplePointsPageRoutes,
+            ...supplyPointPageRoutes,
             ...typographyPageRoutes,
             {
                 path: '**',
@@ -88,11 +99,13 @@ const routes: Routes = [
         FormsPageModule,
         IconsPageModule,
         IndicatorsPageModule,
+        InfoBannerPageModule,
         ModalsPageModule,
         NewSupplyPointPageModule,
         ProgressBarPageModule,
         RouterModule.forChild(routes),
         SamplePointsPageModule,
+        SupplyPointPageModule,
         TypographyPageModule,
     ],
     exports: [

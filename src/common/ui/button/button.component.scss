@@ -68,9 +68,12 @@
 		&.focus,
 		&:hover,
 		&:active,
-		&:focus:active {
-			color: $btn-secondary-color;
+		&:focus:active,
+		&:not(:disabled):not(.disabled):active,
+		&:not(:disabled):not(.disabled).active {
+			color: inherit;
 			background-color: $btn-secondary-bg-hover;
+			border-color: inherit;
 		}
 	}
 

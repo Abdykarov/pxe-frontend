@@ -4,11 +4,12 @@ export enum CommodityType {
 }
 
 export interface IAddress {
-    street: String;
+    street: string;
     orientationNumber: string;
     descriptiveNumber: string;
-    city: String;
-    postCode: String;
+    city: string;
+    postCode: string;
+    region: string;
 }
 
 export interface ICodelistMap {
@@ -36,16 +37,41 @@ export interface ISupplierSampleDocument {
     url: string;
 }
 
-export interface ISupplyPoint {
-    id: number;
-    commodityType: CommodityType;
-    supplier: ISupplier;
-    ean: string;
-    address: IAddress;
-    distributionRate: ICodelistItem;
-    circuitBreaker: ICodelistItem;
-    annualConsumptionNT: number;
-    annualConsumptionVT: number;
-    expirationDate: String;
+export interface ISupplyPointGasAttributes {
+    eic: string;
+    annualConsumption: number;
 }
 
+export interface ISupplyPointPowerAttributes {
+    ean: string;
+    circuitBreakerId: string;
+    distributionRateId: string;
+    annualConsumptionNT: number;
+    annualConsumptionVT: number;
+}
+
+export interface ISupplyPoint {
+    id: number;
+    supplierId: number;
+    name: string;
+    address: IAddress;
+    expirationDate: string;
+    subjectTypeId: string;
+}
+
+export interface ISupplyPointFormData {
+    id: number;
+    supplierId: number;
+    name: string;
+    commodityType?: string;
+    region: string;
+    address: IAddress;
+    ean?: string;
+    circuitBreakerId?: string;
+    distributionRateId?: string;
+    annualConsumptionNT?: number;
+    annualConsumptionVT?: number;
+    eic?: string;
+    annualConsumption?: number;
+
+}

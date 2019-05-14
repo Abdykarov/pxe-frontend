@@ -27,6 +27,10 @@ export class FormsPageComponent {
         errorSelect: new FormControl(),
     });
 
+    public addressWhisperer: FormGroup = new FormGroup({
+        address: new FormControl(),
+    });
+
     constructor(
         public config: FormsPageConfig,
     ) {
