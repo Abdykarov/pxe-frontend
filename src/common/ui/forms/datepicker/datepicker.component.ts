@@ -79,17 +79,39 @@ export class DatepickerComponent {
     @Input()
     public maxDate?: Date;
 
-    handle(event) {
+    refresh(event) {
+        const stringDate = event.target.value;
         const DATE_FORMAT_REGEXP = new RegExp('^\\d\\d[.]\\d\\d[.]\\d\\d\\d\\d$');
         if (DATE_FORMAT_REGEXP.test(event.target.value)) {
-            const stringDate = event.target.value;
-            const dddd = new Date();
-            dddd.setDate(stringDate.substr(0, 2) + 1 );
-            dddd.setMonth(stringDate.substr(3, 2) + 1 );
-            dddd.setFullYear(stringDate.substr(6, 4));
-            console.log(dddd);
-            this.datepicker.bsValue = dddd;
+            const date = Date.parse(stringDate.substr(6, 4) + '-' + (stringDate.substr(3, 2)) + '-' + (stringDate.substr(0, 2)));
+            if (date) {
+                this.datepicker.bsValue = new Date(date);
+            } else {
+                this.datepicker.bsValue = null;
+                this.parentForm.controls[this.datepickerName].setErrors({
+                    'pattern': true,
+                });
+                this.parentForm.updateValueAndValidity();
+            }
         }
+    }
+
+    onShowPicker(event) {
+        const dayHoverHandler = event.dayHoverHandler;
+        const hoverWrapper = (hoverEvent) => {
+            const { cell, isHovered } = hoverEvent;
+
+            if ((isHovered &&
+                !!navigator.platform &&
+                /iPad|iPhone|iPod/.test(navigator.platform)) &&
+                'ontouchstart' in window
+            ) {
+                (this.datepicker as any)._datepickerRef.instance.daySelectHandler(cell);
+            }
+
+            return dayHoverHandler(hoverEvent);
+        };
+        event.dayHoverHandler = hoverWrapper;
     }
 
     constructor(
