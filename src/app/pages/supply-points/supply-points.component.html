@@ -1,1 +1,31 @@
-<router-outlet></router-outlet>
+<div class="container-fluid">
+    <div class="container-content">
+        <pxe-layout-container pageTitle="Odběrná místa">
+            <lnd-alert
+                    [type]="'danger'"
+                    [isDismissible]="false"
+                    [hasIcon]="true"
+                    *ngIf="error">
+                Při načítání odběrných míst došlo k chybě. Zkuste to později.<br>
+                <ng-container *ngFor="let message of errorMessages">
+                    {{ message }}<br>
+                </ng-container>
+            </lnd-alert>
+            <ng-container *ngIf="supplierPoints && !supplierPoints.length">
+                <lnd-info-banner
+                    [bannerTitle]="'Zatím nemáte uložené žádné odběrné místo'"
+                    [bannerDescription]="'Zadejte odběrné místo a my vám hned dáme nabídky'"
+                    [buttonLabel]="'Zadat odběrné místo'"
+                    (buttonAction)="createSupplyPoint($event)"
+                ></lnd-info-banner>
+            </ng-container>
+            <ng-container *ngIf="supplierPoints && supplierPoints.length">
+                <ng-container *ngFor="let supplierPoint of supplierPoints">
+                    <pxe-supply-point
+                        [data]="supplierPoint"
+                    ></pxe-supply-point>
+                </ng-container>
+            </ng-container>
+        </pxe-layout-container>
+    </div>
+</div>
