@@ -4,9 +4,9 @@ import {
 } from '@angular/core';
 
 @Pipe({
-  name: 'indicator',
+  name: 'consumptionIndicator',
 })
-export class IndicatorPipe implements PipeTransform {
+export class ConsumptionIndicatorPipe implements PipeTransform {
     transform(annualConsumptionNT: number, lastAnnualConsumptionNT: number): number {
         return lastAnnualConsumptionNT / (annualConsumptionNT / 100) - 100;
     }

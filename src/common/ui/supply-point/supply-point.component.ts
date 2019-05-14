@@ -13,5 +13,5 @@ import { ISupplyPointFindData } from 'src/common/graphql/models/supply.model';
 
 export class SupplyPointComponent {
     @Input()
-    public supplyPoint: ISupplyPointFindData;
+    public data: ISupplyPointFindData;
 }

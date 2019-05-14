@@ -5,34 +5,37 @@
                 <div class="row mb-4">
                     <div class="col-3 col-md-2 text-center">
                         <span
-                            [class.icon--flame]="supplyPoint.commodityType === 'GAS'"
-                            [class.icon--flash]="supplyPoint.commodityType === 'POWER'"
+                            [class.icon--flame]="data.commodityType === 'GAS'"
+                            [class.icon--flash]="data.commodityType === 'POWER'"
                             class="icon supply-point__icon"></span>
                     </div>
                     <div class="col-9 col-md-10">
-                        <span class="supply-point__title">{{supplyPoint.name}}</span>
-                        <span class="supply-point__title-subtext">{{supplyPoint.distributionRate.description}} ({{supplyPoint.distributionRate.code}})</span>
+                        <span class="supply-point__title">{{data.name}}</span>
+                        <span class="supply-point__title-subtext">{{data.distributionRate.description}} ({{data.distributionRate.code}})</span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 col-md-10 offset-md-2">
                         <div class="row justify-content-between">
-                            <div class="col-6 col-md-auto" *ngIf="supplyPoint.commodityType === 'POWER'">
+                            <div *ngIf="data.commodityType === 'POWER'"
+                                 class="col-6 col-md-auto">
                                 <div class="supply-point__value-box">
                                     <span class="supply-point__value-name">Jistič</span>
-                                    <span class="supply-point__value">{{supplyPoint.circuitBreaker.code}}</span>
+                                    <span class="supply-point__value">{{data.circuitBreaker.code}}</span>
                                 </div>
                             </div>
-                            <div class="col-6 col-md-auto order-md-2"  *ngIf="supplyPoint.annualConsumptionNT && supplyPoint.lastAnnualConsumptionNT">
+                            <div *ngIf="data.annualConsumptionNT && data.lastAnnualConsumptionNT"
+                                 class="col-6 col-md-auto order-md-2">
                                 <div class="supply-point__value-box">
                                     <span class="supply-point__value-name">Spotřeba</span>
-                                    <lnd-indicator [value]="supplyPoint.annualConsumptionNT | indicator: supplyPoint.lastAnnualConsumptionNT"></lnd-indicator>
+                                    <lnd-indicator [value]="data.annualConsumptionNT | consumptionIndicator: data.lastAnnualConsumptionNT"></lnd-indicator>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-auto order-md-1" *ngIf="supplyPoint.commodityType === 'POWER'">
+                            <div *ngIf="data.commodityType === 'POWER'"
+                                 class="col-12 col-md-auto order-md-1">
                                 <div class="supply-point__value-box">
                                     <span class="supply-point__value-name">EAN</span>
-                                    <span class="supply-point__value">{{supplyPoint.ean}}</span>
+                                    <span class="supply-point__value">{{data.ean}}</span>
                                 </div>
                             </div>
                         </div>
@@ -50,7 +53,7 @@
                             </div>
                             <div class="col-12 col-md-8 col-xl-12 mb-4 mb-md-0">
                                 <span class="supply-point__price">NA</span>
-                                / Měsíčně ({{supplyPoint.supplier.name}})
+                                / Měsíčně ({{data.supplier.name}})
                             </div>
                             <div class="col-12 col-md-4 supply-point__addon">
                                 <lnd-button
