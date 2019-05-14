@@ -13,7 +13,7 @@ import { HttpLinkModule } from 'apollo-angular-link-http';
 import { CookieModule } from 'ngx-cookie';
 
 // own classes
-import { ApolloGraphQLProvider } from '../common/graphql/middleware/apollo-graphql-provider';
+import { ApolloGraphQLProvider } from 'src/common/graphql/middleware/apollo-graphql-provider';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { InterceptorProviders } from './interceptors';

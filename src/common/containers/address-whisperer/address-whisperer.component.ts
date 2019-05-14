@@ -3,6 +3,7 @@ import {
     Component,
     EventEmitter,
     Input,
+    Output,
     TemplateRef,
 } from '@angular/core';
 import {
@@ -20,6 +21,7 @@ import {
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AddressWhispererService } from './services/address-whisperer.service';
 import { IOption } from 'src/common/ui/forms/models/option.model';
+import { IValidationMessages } from 'src/common/ui/forms/models/validation-messages.model';
 
 @Component({
     selector: 'pxe-address-whisperer',
@@ -31,14 +33,20 @@ export class AddressWhispererComponent extends AbstractComponent {
     private static readonly DEBOUNCE_TIME = 200;
     private static readonly ROWS_RESPONSE = 5;
 
-    @Input()
-    public parentForm: FormGroup;
+    @Output()
+    public appendButtonAction?: EventEmitter<any> = new EventEmitter();
 
     @Input()
-    public whispererName: string;
+    public appendButtonIcon?: string;
+
+    @Input()
+    public error?: any;
 
     @Input()
     public label: string;
+
+    @Input()
+    public parentForm: FormGroup;
 
     @Input()
     public placeholder: string;
@@ -48,6 +56,18 @@ export class AddressWhispererComponent extends AbstractComponent {
 
     @Input()
     public templateLabel?: TemplateRef<any>;
+
+    @Input()
+    public touched = false;
+
+    @Input()
+    public success = false;
+
+    @Input()
+    public validationMessages?: IValidationMessages;
+
+    @Input()
+    public whispererName: string;
 
     public addresses: Array<IOption> = [];
     public typeahead: EventEmitter<any>;

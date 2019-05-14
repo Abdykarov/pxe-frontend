@@ -30,7 +30,8 @@ export function createRegistrationFormFields(signUpType: SignUpType): IForm {
             email: {
                 required: errorFieldMessages.email.required,
                 email: errorFieldMessages.email.email,
-                'already-registered-email': errorFieldMessages.email.alreadyRegisteredEmail,
+                invalidEmail: errorFieldMessages.email.invalidEmail,
+                alreadyRegisteredEmail: errorFieldMessages.email.alreadyRegisteredEmail,
             },
             consent: {
                 required: R.path(
