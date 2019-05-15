@@ -1,6 +1,5 @@
 import {
     Component,
-    ElementRef,
     EventEmitter,
     Input,
     Output,
@@ -30,7 +29,7 @@ const locale = 'cs';
 })
 export class DatepickerComponent {
     @ViewChild('datepicker')
-    public datepicker: ElementRef;
+    public datepicker: any;
 
     @Output()
     public appendButtonAction?: EventEmitter<any> = new EventEmitter();
@@ -87,6 +86,44 @@ export class DatepickerComponent {
         defineLocale(locale, csLocale);
         this.localeService.use(locale);
         this.config = defaultDatepickerConfig;
+    }
+
+    public checkValue = (event) => {
+        const stringDate = event.target.value;
+        const dateFormatRegexp = new RegExp(defaultDatepickerConfig.dateFormatRegexp);
+        if (dateFormatRegexp.test(stringDate)) {
+            const match = stringDate.match(dateFormatRegexp);
+            const date = Date.parse(`${match[3]}-${match[2]}-${match[1]}`);
+            if (date) {
+                this.datepicker.bsValue = new Date(date);
+            } else {
+                // IE walkaround
+                this.datepicker.bsValue = null;
+                this.datepicker.bsValue = undefined;
+                this.parentForm.controls[this.datepickerName].setErrors({
+                    'bsDate': true,
+                });
+                this.datepicker.isOpen = false;
+            }
+        }
+    }
+
+    public onShowPicker = (event) => {
+        const dayHoverHandler = event.dayHoverHandler;
+        const hoverWrapper = (hoverEvent) => {
+            const { cell, isHovered } = hoverEvent;
+
+            if ((isHovered &&
+                !!navigator.platform &&
+                /iPad|iPhone|iPod/.test(navigator.platform)) &&
+                'ontouchstart' in window
+            ) {
+                this.datepicker._datepickerRef.instance.daySelectHandler(cell);
+            }
+
+            return dayHoverHandler(hoverEvent);
+        };
+        event.dayHoverHandler = hoverWrapper;
     }
 
     public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages);
