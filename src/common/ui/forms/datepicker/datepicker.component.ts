@@ -88,6 +88,7 @@ export class DatepickerComponent {
                 this.datepicker.bsValue = new Date(date);
             } else {
                 this.datepicker.bsValue = null;
+                this.datepicker.bsValue = undefined;
                 this.parentForm.controls[this.datepickerName].setErrors({
                     'pattern': true,
                 });
