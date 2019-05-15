@@ -133,8 +133,8 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
     }
 
     ieFixValidation() {
-        const isIEOrEdge = /msie\s|trident\/\//i.test(window.navigator.userAgent);
-        if (isIEOrEdge) {
+        const isIE = /msie\s|trident\/\//i.test(window.navigator.userAgent);
+        if (isIE) {
             for (const key in this.form.controls) {
                 if (this.form.controls[key]) {
                     this.form.controls[key].markAsPristine();
