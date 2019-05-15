@@ -75,10 +75,10 @@ export const staticNavigationConfig: INavigationConfig = [
                 //     'label': 'Tips',
                 //     'url': '/tips',
                 // },
-                // {
-                //     'label': 'Tooltip',
-                //     'url': '/tooltip',
-                // },
+                {
+                    'label': 'Tooltip',
+                    'url': '/basic/tooltip',
+                },
                 {
                     'label': 'Typography',
                     'url': '/basic/typography',

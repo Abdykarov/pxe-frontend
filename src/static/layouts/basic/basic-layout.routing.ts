@@ -53,6 +53,10 @@ import {
     SupplyPointPageModule,
     supplyPointPageRoutes,
 } from 'src/static/organisms/supply-point/page.module';
+import {
+    TooltipPageModule,
+    tooltipPageRoutes,
+} from 'src/static/atoms/tooltip/page.module';
 
 import {
     TypographyPageModule,
@@ -76,6 +80,7 @@ const routes: Routes = [
             ...newSupplyPointPageRoutes,
             ...progressBarPageRoutes,
             ...supplyPointPageRoutes,
+            ...tooltipPageRoutes,
             ...typographyPageRoutes,
             {
                 path: '**',
@@ -100,6 +105,7 @@ const routes: Routes = [
         ProgressBarPageModule,
         RouterModule.forChild(routes),
         SupplyPointPageModule,
+        TooltipPageModule,
         TypographyPageModule,
     ],
     exports: [

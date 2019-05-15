@@ -5,6 +5,14 @@
 </div>
 <div class="row pt-4 mt-4">
     <div class="col-6 mb-4">
+        <ng-template #tooltipBottom let-toggle="toggle">
+            <span (click)="toggle()"><span class="icon icon--star"></span></span>
+        </ng-template>
+        <lnd-tooltip [actionTemplate]="tooltipBottom" direction="bottom">
+            Text
+        </lnd-tooltip>
+    </div>
+    <!-- <div class="col-6 mb-4">
         <div class="tooltip__holder">
             <ng-template #tooltipTop let-toggle="toggle">
                 <span (click)="toggle()">Tooltip on top</span>
@@ -14,17 +22,8 @@
                 Prosím, přihlašte se do svého internetovém bankovnictví této banky.
             </lnd-tooltip>
         </div>
-    </div>
-    <div class="col-6 mb-4">
-        <ng-template #tooltipBottom let-toggle="toggle">
-            <span (click)="toggle()">Tooltip on bottom</span>
-        </ng-template>
-        <lnd-tooltip [actionTemplate]="tooltipBottom" direction="bottom">
-            Tato banka je připojena, ale zřejmě někde <strong>nastala chyba</strong>.
-            Prosím, přihlašte se do svého internetovém bankovnictví této banky.
-        </lnd-tooltip>
-    </div>
-    <div class="col-6 mb-4">
+    </div> -->
+    <!-- <div class="col-6 mb-4">
         <ng-template #tooltipLeft let-toggle="toggle">
             <span (click)="toggle()">Tooltip on left</span>
         </ng-template>
@@ -32,8 +31,8 @@
             Tato banka je připojena, ale zřejmě někde <strong>nastala chyba</strong>.
             Prosím, přihlašte se do svého internetovém bankovnictví této banky.
         </lnd-tooltip>
-    </div>
-    <div class="col-6 mb-4">
+    </div> -->
+    <!-- <div class="col-6 mb-4">
         <ng-template #tooltipRight let-toggle="toggle">
             <span (click)="toggle()">Tooltip on right</span>
         </ng-template>
@@ -41,5 +40,5 @@
             Tato banka je připojena, ale zřejmě někde <strong>nastala chyba</strong>.
             Prosím, přihlašte se do svého internetovém bankovnictví této banky.
         </lnd-tooltip>
-    </div>
+    </div> -->
 </div>
