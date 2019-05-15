@@ -49,6 +49,7 @@
 	border-bottom-width: $input-border-width;
 	cursor: pointer;
 	@include box-shadow(none);
+	@include placeholder($input-placeholder-color);
 
 	&:hover:not(:focus) {
 		border-color: $input-border-color-interactive;
