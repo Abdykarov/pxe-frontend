@@ -46,9 +46,23 @@
 		margin: ( $spacer / 2 );
 		text-align: center;
 
-		&__symbol {
+		&--double {
+			width: ( 96px * 1.5 + $spacer );
+			height: ( 96px * 1.5 + $spacer );
+		}
+
+		&__symbol,
+		&__illustration-holder {
 			display: block;
 			margin-bottom: ( $spacer / 3 );
+		}
+		&__illustration {
+			width: 50%;
+			height: auto;
+			max-height: 80px;
+		}
+
+		&__symbol {
 			color: $blue-400;
 		}
 
