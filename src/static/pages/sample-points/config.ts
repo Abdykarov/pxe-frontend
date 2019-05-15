@@ -6,7 +6,59 @@ export const supplyPointConfig: ISupplyPointFindData = {
     name: 'byt - Praha',
     supplier: {
         id: 'U3VwcGxpZXI6MjI3ODYyNDA1Mw',
-        name: 'Eichmann LLC',
+        name: 'Inogy',
+        vatNumber: '264264896',
+        sampleDocuments: [
+            {
+                type: 'email',
+                url: 'http: // lorempixel.com/640/480',
+            },
+            {
+                type: 'email',
+                url: 'http: // lorempixel.com/640/480',
+            },
+        ],
+    },
+    ean: '123456789012',
+    address: {
+        street: 'Legros Vista',
+        orientationNumber: '46533',
+        descriptiveNumber: '62934',
+        city: 'North Jovan',
+        postCode: '14895 - 5074',
+        region: 'MYREGION',
+    },
+    distributionRate: {
+        type: 'DISTRRATE',
+        code: 'D0D1',
+        description: 'Běžný odběr',
+        help: 'help 2',
+    },
+    circuitBreaker: {
+        type: 'CIRCTBREAKERS',
+        code: '3x10 A',
+        description: 'Breaker1',
+        help: 'help 2',
+    },
+    annualConsumptionNT: 160,
+    expirationDate: '2020 - 03 - 22T23: 57: 28.997Z',
+    subject: {
+        type: 'SUBJECT',
+        code: '1',
+        description: 'fyzicka osoba',
+        help: 'Help 1',
+    },
+    lastAnnualConsumptionNT: 200,
+    lastAnnualConsumptionVT: 1529.25,
+};
+
+export const supplyPointConfigGas: ISupplyPointFindData = {
+    id: 'U3VwcGx5UG9pbnQ6MTM3Mjg0MTU1',
+    commodityType: 'GAS',
+    name: 'byt - Praha',
+    supplier: {
+        id: 'U3VwcGxpZXI6MjI3ODYyNDA1Mw',
+        name: 'PRE',
         vatNumber: '264264896',
         sampleDocuments: [
             {
