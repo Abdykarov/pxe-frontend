@@ -37,7 +37,7 @@ export const supplyPointConfig: ISupplyPointFindData = {
     circuitBreaker: {
         type: 'CIRCTBREAKERS',
         code: '3x10 A',
-        description: 'Breaker1',
+        description: '3×10 A',
         help: 'help 2',
     },
     annualConsumptionNT: 160,
@@ -100,6 +100,6 @@ export const supplyPointConfigGas: ISupplyPointFindData = {
         description: 'fyzicka osoba',
         help: 'Help 1',
     },
-    lastAnnualConsumptionNT: 200,
+    lastAnnualConsumptionNT: 130,
     lastAnnualConsumptionVT: 1529.25,
 };

@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-import { supplyPointConfig } from './config';
+
+import {
+    supplyPointConfigGas,
+    supplyPointConfigPower,
+} from './config';
 
 @Component({
   templateUrl: './page.html',
@@ -10,5 +14,6 @@ import { supplyPointConfig } from './config';
 export class SupplyPointComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
-    public supplyPoint = supplyPointConfig;
+    public supplyPointPower = supplyPointConfigPower;
+    public supplyPointGas = supplyPointConfigGas;
 }
