@@ -106,7 +106,7 @@ export class DatepickerComponent {
                 /iPad|iPhone|iPod/.test(navigator.platform)) &&
                 'ontouchstart' in window
             ) {
-                (this.datepicker as any)._datepickerRef.instance.daySelectHandler(cell);
+                this.datepicker._datepickerRef.instance.daySelectHandler(cell);
             }
 
             return dayHoverHandler(hoverEvent);
