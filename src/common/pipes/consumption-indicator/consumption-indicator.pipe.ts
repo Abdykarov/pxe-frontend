@@ -11,5 +11,3 @@ export class ConsumptionIndicatorPipe implements PipeTransform {
         return lastAnnualConsumptionNT / (annualConsumptionNT / 100) - 100;
     }
 }
-
-

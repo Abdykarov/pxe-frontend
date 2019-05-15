@@ -8,7 +8,7 @@ export const supplyPointConfig: ISupplyPointFindData = {
         id: 'U3VwcGxpZXI6MjI3ODYyNDA1Mw',
         name: 'Eichmann LLC',
         vatNumber: '264264896',
-        suplierSampleDocuments: [
+        sampleDocuments: [
             {
                 type: 'email',
                 url: 'http: // lorempixel.com/640/480',
@@ -20,13 +20,13 @@ export const supplyPointConfig: ISupplyPointFindData = {
         ],
     },
     ean: '123456789012',
-    region: 'MYREGION',
     address: {
         street: 'Legros Vista',
         orientationNumber: '46533',
         descriptiveNumber: '62934',
         city: 'North Jovan',
         postCode: '14895 - 5074',
+        region: 'MYREGION',
     },
     distributionRate: {
         type: 'DISTRRATE',
