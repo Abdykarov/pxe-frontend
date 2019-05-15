@@ -13,6 +13,7 @@ import {
     findAllSuppliers,
     findCodelistsByTypes,
     findSupplierDocumentsByComodity,
+    findSupplyPoints,
 } from 'src/common/graphql/queries/supply';
 import {
     saveGasSupplyPoint,
@@ -70,6 +71,17 @@ export class SupplyService {
                 variables: {
                     supplierId,
                     commodityType,
+                },
+            })
+            .valueChanges;
+    }
+
+    public findSupplyPoints(email: string) {
+        return this.apollo
+            .watchQuery<any>({
+                query: findSupplyPoints,
+                variables: {
+                    email,
                 },
             })
             .valueChanges;

@@ -25,11 +25,11 @@ export interface ICodelistItem {
 }
 
 interface ISupplier {
-    id: number;
+    id: string;
     name: string;
     vatNumber: string;
-    logoPath: string;
-    suplierSampleDocuments: ISupplierSampleDocument;
+    logoPath?: string;
+    sampleDocuments: ISupplierSampleDocument[];
 }
 
 export interface ISupplierSampleDocument {
@@ -59,6 +59,22 @@ export interface ISupplyPoint {
     subjectTypeId: string;
 }
 
+export interface ISupplyPointFindData {
+    id: string;
+    commodityType: string;
+    name: string;
+    supplier: ISupplier;
+    ean: string;
+    address: IAddress;
+    distributionRate?: ICodelistItem;
+    circuitBreaker?: ICodelistItem;
+    annualConsumptionNT?: number;
+    expirationDate?: string;
+    subject?: ICodelistItem;
+    lastAnnualConsumptionNT?: number;
+    lastAnnualConsumptionVT?: number;
+}
+
 export interface ISupplyPointFormData {
     id: number;
     supplierId: number;
@@ -73,5 +89,4 @@ export interface ISupplyPointFormData {
     annualConsumptionVT?: number;
     eic?: string;
     annualConsumption?: number;
-
 }
