@@ -5,6 +5,7 @@ import { Routes } from '@angular/router';
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { SamplePointsPageComponent } from './page';
+import { SupplyPointModule } from 'src/common/ui/supply-point/supply-point.module';
 
 @NgModule({
     declarations: [
@@ -17,6 +18,7 @@ import { SamplePointsPageComponent } from './page';
         BreadcrumbModule,
         ButtonModule,
         CommonModule,
+        SupplyPointModule,
     ],
 })
 export class SamplePointsPageModule {}
