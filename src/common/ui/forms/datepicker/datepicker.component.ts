@@ -79,25 +79,36 @@ export class DatepickerComponent {
     @Input()
     public maxDate?: Date;
 
-    refresh(event) {
+    constructor(
+        private localeService: BsLocaleService,
+    ) {
+        csLocale.invalidDate = '';
+        defineLocale(locale, csLocale);
+        this.localeService.use(locale);
+        this.config = defaultDatepickerConfig;
+    }
+
+    public checkValue = (event) => {
         const stringDate = event.target.value;
-        const DATE_FORMAT_REGEXP = new RegExp('^\\d\\d[.]\\d\\d[.]\\d\\d\\d\\d$');
-        if (DATE_FORMAT_REGEXP.test(event.target.value)) {
-            const date = Date.parse(stringDate.substr(6, 4) + '-' + (stringDate.substr(3, 2)) + '-' + (stringDate.substr(0, 2)));
+        const dateFormatRegexp = new RegExp(defaultDatepickerConfig.dateFormatRegexp);
+        if (dateFormatRegexp.test(stringDate)) {
+            const match = stringDate.match(dateFormatRegexp);
+            const date = Date.parse(`${match[3]}-${match[2]}-${match[1]}`);
             if (date) {
                 this.datepicker.bsValue = new Date(date);
             } else {
+                // IE walkaround
                 this.datepicker.bsValue = null;
                 this.datepicker.bsValue = undefined;
                 this.parentForm.controls[this.datepickerName].setErrors({
-                    'pattern': true,
+                    'bsDate': true,
                 });
-                this.parentForm.updateValueAndValidity();
+                this.datepicker.isOpen = false;
             }
         }
     }
 
-    onShowPicker(event) {
+    public onShowPicker = (event) => {
         const dayHoverHandler = event.dayHoverHandler;
         const hoverWrapper = (hoverEvent) => {
             const { cell, isHovered } = hoverEvent;
@@ -113,15 +124,6 @@ export class DatepickerComponent {
             return dayHoverHandler(hoverEvent);
         };
         event.dayHoverHandler = hoverWrapper;
-    }
-
-    constructor(
-        private localeService: BsLocaleService,
-    ) {
-        csLocale.invalidDate = '';
-        defineLocale(locale, csLocale);
-        this.localeService.use(locale);
-        this.config = defaultDatepickerConfig;
     }
 
     public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages);
