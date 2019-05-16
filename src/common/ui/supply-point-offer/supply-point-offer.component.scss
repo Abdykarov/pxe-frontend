@@ -10,7 +10,6 @@
 // Component variables
 @import 'supply-point-offer.component.variables.scss';
 @import '../supply-point/supply-point.component.variables.scss';
-@import '../button/button.component.variables.scss';
 
 
 .supply-point-offer {
@@ -88,15 +87,16 @@
 
 	&__inner {
 		height: 100%;
-		padding: $supply-point-offer-inner-padding;
-
-		// Media queries
-		@include media-breakpoint-up(md) {
-			padding-bottom: ( $spacer * .75 );
-		}
+		padding: $supply-point-offer-inner-padding $supply-point-offer-inner-padding $supply-point-offer-inner-padding-bottom;
 
 		&--price {
+			padding-bottom: $supply-point-offer-inner-padding;
 			background-color: rgba($body-bg, .5);
+
+			// Media queries
+			@include media-breakpoint-up(xl) {
+				padding-bottom: $supply-point-offer-inner-padding-bottom;
+			}
 		}
 	}
 
@@ -106,13 +106,20 @@
 		line-height: $supply-point-label-line-height;
 	}
 
-	&__title-label {
+	&__title-label,
+	&__value-name {
+		display: block;
+		line-height: ( 18 / 14 );
 		text-transform: uppercase;
+	}
+
+	&__title-label {
+		margin-bottom: ( $spacer / 4 );
 	}
 
 	&__title {
 		display: block;
-		margin-bottom: ( $spacer * 1.5 );
+		margin-bottom: ( $spacer * 1.75 );
 
 		// Media queries
 		@include media-breakpoint-up(md) {
@@ -129,7 +136,7 @@
 	}
 
 	&__value-name {
-		text-transform: uppercase;
+		margin-bottom: ( $spacer / 2 );
 	}
 
 	&__addon {
@@ -137,7 +144,6 @@
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			padding-top: ( ( $supply-point-title-line-height-px - $btn-height ) / 2 );
 			text-align: right;
 		}
 		@include media-breakpoint-up(xl) {
