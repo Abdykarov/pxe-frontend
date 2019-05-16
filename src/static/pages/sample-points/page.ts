@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import {
     supplyPointConfigPower,
     supplyPointConfigGas,
-} from '../../organisms/supply-point/config';
+} from 'src/static/organisms/supply-point/config';
 
 @Component({
     templateUrl: './page.html',
