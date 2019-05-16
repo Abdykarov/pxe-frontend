@@ -4,6 +4,7 @@ import {
     HttpHeaders,
 } from '@angular/common/http';
 
+import { Apollo } from 'apollo-angular';
 import { of } from 'rxjs';
 import { map} from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -17,16 +18,19 @@ import {
 } from './model/auth.model';
 import { environment } from 'src/environments/environment';
 import { parseEmailFromUsername } from 'src/common/utils';
+import { userLogin } from '../../common/graphql/mutation/user';
+import { getEmail, getUserDetail } from '../../common/graphql/queries/user';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
     private token: string;
-    private cookieName = 'user';
+    private cookieName = 'auth.ts';
     private expiresTime = 3600;
 
     constructor(
+        private apollo: Apollo,
         private cookiesService: CookiesService,
         private http: HttpClient,
     ) {}
@@ -95,9 +99,9 @@ export class AuthService {
         return this.http.post<any>(`${environment.url}/parc-rest/webresources/sms/confirm`, code, httpOptions);
     }
 
-    isSupplier = () => {
-        const jwtPayload = this.parseJwt();
-        return jwtPayload.role === IUserRoles.PARC_SUPPLIER_P4R;
+    isSupplier(): boolean {
+        const userDetail = this.getUserDetail();
+        return !userDetail || (userDetail.role === IUserRoles.PARC_SUPPLIER_P4R);
     }
 
     refreshToken = () => {
@@ -107,15 +111,50 @@ export class AuthService {
 
     getToken = (): string => this.token;
 
-    getUserEmail = () => {
-        const jwtPayload = this.parseJwt();
-        const { username } = jwtPayload;
-        return parseEmailFromUsername(username);
+    public userLogin() {
+        return this.apollo
+            .mutate({
+                mutation: userLogin,
+                variables: {
+                    userPayload: this.getJwtPayload(),
+                },
+            });
+    }
+
+    getUserEmail = (): string => {
+        return this.getAttribute('email');
+    }
+
+     getUserDetail(): IJwtPayload {
+         try {
+             return this.apollo.getClient().readQuery({
+                 query: getUserDetail,
+             }).user.userPayload;
+         } catch (e) {
+             return null;
+         }
+    }
+
+    getAttribute(attribute: string): any {
+        const userDetail: IJwtPayload = this.getUserDetail();
+        if (!userDetail || !userDetail[attribute]) {
+            return null;
+        }
+
+        return userDetail[attribute];
     }
 
     parseJwt = (): IJwtPayload => {
         const jwtHelper = new JwtHelperService();
         return jwtHelper.decodeToken(this.token);
+    }
+
+    getJwtPayload = (): IJwtPayload => {
+        const jwtPayload = this.parseJwt();
+        const { username } = jwtPayload;
+        jwtPayload.email = parseEmailFromUsername(username);
+        jwtPayload.__typename = 'UserPayload';
+        return jwtPayload;
     }
 }
 

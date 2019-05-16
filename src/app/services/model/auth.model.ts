@@ -16,7 +16,7 @@ export interface IJwtPayload {
     manageOffers: boolean;
     manageOrders: boolean;
     manageUsers: boolean;
-    role: IUserRoles;
+    role: any;
     sid: string;
     smsConfirmed: boolean;
     subjectId: number;
@@ -24,6 +24,8 @@ export interface IJwtPayload {
     surname: string;
     token: string;
     username: string;
+    email?: string;
+    __typename?: string;
 }
 
 export enum IUserRoles {
