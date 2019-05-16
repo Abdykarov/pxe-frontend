@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 
-import { 
-    supplyPointConfig,
-    supplyPointConfigGas
-} from './config';
+import {
+    supplyPointConfigPower,
+    supplyPointConfigGas,
+} from '../../organisms/supply-point/config';
 
 @Component({
     templateUrl: './page.html',
 })
 export class SamplePointsPageComponent {
-    public supplyPoint = supplyPointConfig;
+    public supplyPointPower = supplyPointConfigPower;
     public supplyPointGas = supplyPointConfigGas;
 }
