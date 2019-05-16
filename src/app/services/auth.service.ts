@@ -17,9 +17,12 @@ import {
     IUserRoles,
 } from './model/auth.model';
 import { environment } from 'src/environments/environment';
+import {
+    getEmail,
+    getUserDetail,
+} from 'src/common/graphql/queries/user';
+import { userLogin } from 'src/common/graphql/mutation/user';
 import { parseEmailFromUsername } from 'src/common/utils';
-import { userLogin } from '../../common/graphql/mutation/user';
-import { getEmail, getUserDetail } from '../../common/graphql/queries/user';
 
 @Injectable({
     providedIn: 'root',
