@@ -9,24 +9,29 @@
 
 
 .aside {
-	display: block;
-	position: fixed;
+	// display: none;
+	position: absolute;
 	z-index: 2010;
 	top: $header-height;
-	bottom: 0;
-	left: 0;
-	transform: translateX(-100%);
+	right: 20px;
+	// transform: translateX(-100%);
 	width: $aside-width-mobile;
 	overflow-x: hidden;
 	overflow-y: auto;
 	color: $white;
-	background-color: $aside-bg;
+	background-color: $white;
 	transition: transform ease-in $animation-speed;
 
 	// Media queries
 	@include media-breakpoint-up(lg) {
-		transform: translateX(0);
+		position: fixed;
+		display: block;
+		top: $header-height;
+		bottom: 0;
+		left: 0;
+		// transform: translateX(0);
 		width: $aside-width-desktop;
+		background-color: $aside-bg;
 	}
 
 	&--open {
