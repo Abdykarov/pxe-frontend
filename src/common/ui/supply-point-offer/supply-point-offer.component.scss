@@ -71,12 +71,7 @@
 		}
 
 		.supply-point-offer__inner--price {
-			padding-top: 0;
-
-			// Media queries
-			@include media-breakpoint-up(md) {
-				padding-top: $supply-point-offer-inner-padding;
-			}
+			padding-top: $spacer;
 
 			.supply-point-offer__title {
 				font-size: $supply-point-label-font-size;
@@ -85,6 +80,13 @@
 				@include media-breakpoint-up(md) {
 					font-size: $supply-point-title-font-size;
 				}
+			}
+		}
+
+		.supply-point-offer__inner {
+			// Media queries
+			@include media-breakpoint-up(md) {
+				padding-top: $supply-point-offer-inner-padding;
 			}
 		}
 
