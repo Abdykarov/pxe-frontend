@@ -18,6 +18,7 @@ export const staticNavigationConfig: INavigationConfig = [
                 {
                     'label': 'Alerts',
                     'url': '/basic/alerts',
+                    'class': 'text-danger',
                 },
                 // {
                 //     'label': 'Banners',
@@ -151,6 +152,7 @@ export const staticNavigationConfig: INavigationConfig = [
             'id': 'logout',
             'label': 'Logout',
             'icon': 'component-high',
+            'class': 'text-danger',
         },
     ],
 ];

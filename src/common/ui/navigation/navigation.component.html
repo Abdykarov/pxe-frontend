@@ -16,6 +16,7 @@
                     [routerLink]="item.url ? item.url : null"
                     [attr.aria-expanded]="item.children ? item === itemOpened : null"
                     [attr.aria-controls]="item.id ? item.id : null"
+                    [ngClass]="item.class"
                     (click)="callOpenItem(item)">
                     <span
                         class="navigation-main__link-label"
@@ -46,6 +47,7 @@
                         [routerLinkActive]="[childItem.url ? 'navigation-main-sub__item--active' : '']">
                         <a
                             [routerLink]="childItem.url ? childItem.url : null"
+                            [ngClass]="childItem.class"
                             class="navigation-main-sub__link">
                             <span
                                 class="navigation-main-sub__link-label"
