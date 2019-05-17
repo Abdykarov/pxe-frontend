@@ -1,4 +1,5 @@
-<aside class="aside aside--open">
+<aside class="aside"
+       [class.aside--open]="isMenuOpen">
     <nav class="navigation">
         <ul
             *ngFor="let menu of config"

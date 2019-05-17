@@ -54,7 +54,8 @@
                     <div
                         class="menu-holder">
                         <a
-                            class="menu-toggle menu-toggle--open"
+                            class="menu-toggle"
+                            [class.menu-toggle--open]="isMenuOpen"
                             (click)="toggleMenu.emit()">
                             <span class="menu-toggle__line"></span>
                             <span class="menu-toggle__line"></span>
