@@ -12,15 +12,15 @@
 	// display: none;
 	position: absolute;
 	z-index: 2010;
-	top: $header-height;
-	right: 20px;
-	// transform: translateX(-100%);
-	width: $aside-width-mobile;
+	top: 65px;
+	right: 30px;
+	width: 260px;
 	overflow-x: hidden;
 	overflow-y: auto;
 	color: $white;
 	background-color: $white;
 	transition: transform ease-in $animation-speed;
+	box-shadow: $box-shadow;
 
 	// Media queries
 	@include media-breakpoint-up(lg) {
@@ -29,9 +29,9 @@
 		top: $header-height;
 		bottom: 0;
 		left: 0;
-		// transform: translateX(0);
 		width: $aside-width-desktop;
 		background-color: $aside-bg;
+		box-shadow: none;
 	}
 
 	&--open {
@@ -52,8 +52,12 @@
 	position: relative;
 	z-index: 1;
 	@include reset-list;
-	padding-top: ( $spacer / 1.5 );
-	padding-bottom: ( $spacer / 1.5 );
+
+	// Media queries
+	@include media-breakpoint-up(lg) {
+		padding-top: ( $spacer / 1.5 );
+		padding-bottom: ( $spacer / 1.5 );
+	}
 
 	&:nth-child(n + 2) {
 		border-top: 1px solid rgba($gray-400, .4);
@@ -91,11 +95,16 @@
 	&:visited {
 		position: relative;
 		display: block;
-		padding: ( $spacer * 1.5 ) $spacer ( $spacer * 1.5 ) ( $spacer * 4 );
+		padding: ( $spacer * .75 ) $spacer ( $spacer * .75 ) ( $spacer * 3 );
 		text-decoration: none;
 		color: $font-text;
 		cursor: pointer;
 		@include smart-short-text;
+
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			padding: ( $spacer * 1.5 ) $spacer ( $spacer * 1.5 ) ( $spacer * 4 );
+		}
 	}
 
 	&:hover,
@@ -120,7 +129,10 @@
 }
 
 .navigation-main__link-label {
-	text-transform: uppercase;
+	// Media queries
+	@include media-breakpoint-up(lg) {
+		text-transform: uppercase;
+	}
 
 	& + .badge {
 		margin-left: ( $spacer / 3 );
@@ -130,9 +142,14 @@
 .navigation-main__link-icon {
 	position: absolute;
 	top: 50%;
-	left: ( $spacer * 2 );
+	left: $spacer;
 	margin-top: -( $icon-size-px / 2 );
 	color: $secondary;
+
+	// Media queries
+	@include media-breakpoint-up(lg) {
+		left: ( $spacer * 2 );
+	}
 }
 
 .navigation-main-sub {

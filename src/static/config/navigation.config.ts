@@ -147,5 +147,10 @@ export const staticNavigationConfig: INavigationConfig = [
                 // },
             ],
         },
+        {
+            'id': 'logout',
+            'label': 'Logout',
+            'icon': 'component-high',
+        },
     ],
 ];
