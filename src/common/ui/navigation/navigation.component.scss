@@ -14,7 +14,7 @@
 	z-index: 2010;
 	top: ( ( $header-height / 2 ) + ( $menu-toggle-line-width-rotate - ( $logo-height-mobile / 2 ) ) + ( $spacer * .75 ) );
 	right: 30px;
-	width: 260px;
+	width: $aside-width-mobile;
 	overflow-x: hidden;
 	overflow-y: auto;
 	color: $white;

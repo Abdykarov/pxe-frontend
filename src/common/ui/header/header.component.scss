@@ -115,7 +115,8 @@
 			background-color: $font-text;
 
 			&:nth-child(1),
-			&:nth-child(4) {
+			&:nth-child(4),
+			& + .menu-toggle__label {
 				opacity: 0;
 			}
 
@@ -126,10 +127,6 @@
 			&:nth-child(3) {
 				transform: rotate(-45deg);
 			}
-		}
-
-		.menu-toggle__label {
-			opacity: 0;
 		}
 	}
 

@@ -18,7 +18,6 @@ export const staticNavigationConfig: INavigationConfig = [
                 {
                     'label': 'Alerts',
                     'url': '/basic/alerts',
-                    'class': 'text-danger',
                 },
                 // {
                 //     'label': 'Banners',

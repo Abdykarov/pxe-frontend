@@ -42,10 +42,10 @@
                     <li
                         *ngFor="let childItem of item.children"
                         class="navigation-main-sub__item"
+                        [ngClass]="childItem.class"
                         [routerLinkActive]="[childItem.url ? 'navigation-main-sub__item--active' : '']">
                         <a
                             [routerLink]="childItem.url ? childItem.url : null"
-                            [ngClass]="childItem.class"
                             class="navigation-main-sub__link">
                             <span
                                 class="navigation-main-sub__link-label"
@@ -56,16 +56,6 @@
                     </li>
                 </ul>
             </li>
-            <!-- <li class="navigation-main__item">
-                <a class="
-                        navigation-main__link
-                        navigation-main__link--logout">
-                    <span class="navigation-main__link-label">
-                        Odhlášení
-                    </span>
-                    <span class="navigation-main__link-icon icon icon--logout"></span>
-                </a>
-            </li> -->
         </ul>
     </nav>
 </aside>
