@@ -61,7 +61,10 @@ import {
     SupplyPointPageModule,
     supplyPointPageRoutes,
 } from 'src/static/organisms/supply-point/page.module';
-
+import {
+    TablesPageModule,
+    tablesPageRoutes,
+} from 'src/static/atoms/tables/page.module';
 import {
     TypographyPageModule,
     typographyPageRoutes,
@@ -86,6 +89,7 @@ const routes: Routes = [
             ...samplePointsPageRoutes,
             ...samplePointsBannerPageRoutes,
             ...supplyPointPageRoutes,
+            ...tablesPageRoutes,
             ...typographyPageRoutes,
             {
                 path: '**',
@@ -112,6 +116,7 @@ const routes: Routes = [
         SamplePointsPageModule,
         SamplePointsBannerPageModule,
         SupplyPointPageModule,
+        TablesPageModule,
         TypographyPageModule,
     ],
     exports: [

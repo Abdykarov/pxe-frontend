@@ -7,9 +7,19 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
+// Component variables
+@import 'table.component.variables.scss';
+
 // Bootstrap tables import
 @import '~bootstrap/scss/tables';
 
+.table-wrapper {
+	&--advanced {
+		overflow-x: scroll;
+		width: 100%;
+		padding-bottom: $spacer;
+	}
+}
 
 .table {
 	font-size: $table-font-size;
@@ -56,6 +66,8 @@
 			border-bottom-width: 0;
 
 			th {
+				opacity: .5;
+				font-weight: 400;
 				background-color: transparent;
 			}
 		}
@@ -177,25 +189,6 @@
 
 			&:hover {
 				background-color: transparent;
-			}
-		}
-	}
-}
-
-::ng-deep caption {
-	caption {
-		.add-table__holder {
-			padding: ($spacer / 3) 0;
-			margin-bottom: 0;
-		}
-	}
-
-	th,
-	td {
-		&.w-icon,
-		&.w-icon-small {
-			.icon {
-				display: block;
 			}
 		}
 	}

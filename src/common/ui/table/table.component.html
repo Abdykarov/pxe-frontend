@@ -1,4 +1,7 @@
-<table
+<div
+    class="table-wrapper"
+    [ngClass]="tableWrapperClass">
+    <table
     class="table"
     [ngClass]="tableClass"
     [class.table--static]="isStatic">
@@ -108,4 +111,5 @@
             </tr>
         </tbody>
     </ng-container>
-</table>
+    </table>
+</div>

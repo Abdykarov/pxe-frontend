@@ -220,26 +220,6 @@ $badge-padding-y:                  ( $spacer / 7.5 );
 $badge-padding-x:                  ( $spacer / 4 );
 
 
-// Tables
-$table-cell-padding:          ( $spacer / 2 );
-$table-cell-padding-vert:     ( $spacer / 3 );
-$table-cell-padding-sm:       ( $spacer / 4 );
-$table-bg:                    $white;
-$table-font-size:             .75rem;
-$table-accent-bg:             $gray-100;
-$table-hover-bg:              rgba($blue-200, .05);
-$table-active-bg:             $table-hover-bg;
-$table-border-width:          0;
-$table-head-bg:               $gray-100;
-$table-border-color:          $gray-150;
-$table-head-color:            $font-text;
-$table-dark-bg:               $table-bg;
-$table-dark-accent-bg:        $table-accent-bg;
-$table-dark-hover-bg:         $table-hover-bg;
-$table-dark-color:            $table-head-color;
-$table-striped-order:         odd;
-
-
 // Dropdown
 $dropdown-padding-y:               0;
 $dropdown-border-radius:           0;
