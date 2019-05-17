@@ -19,8 +19,9 @@
 	overflow-y: auto;
 	color: $white;
 	background-color: $white;
-	transition: transform ease-in $animation-speed;
+	border-radius: 4px;
 	box-shadow: $box-shadow;
+	transition: transform ease-in $animation-speed;
 
 	// Media queries
 	@include media-breakpoint-up(md) {
@@ -34,6 +35,7 @@
 		left: 0;
 		width: $aside-width-desktop;
 		background-color: $aside-bg;
+		border-radius: 0;
 		box-shadow: none;
 	}
 
