@@ -14,6 +14,16 @@ import {
 export class SupplyPointComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
+    constructor(
+      ) {
+          this.breadcrumbItemsSimple = [
+              {
+                  label: 'Supply point',
+                  url: null,
+              },
+          ];
+      }
+
     public supplyPointPower = supplyPointConfigPower;
     public supplyPointGas = supplyPointConfigGas;
 }
