@@ -141,6 +141,14 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'New supply point',
                     'url': '/basic/new-supply-point',
                 },
+                {
+                    'label': 'Sample points',
+                    'url': '/basic/sample-points',
+                },
+                {
+                    'label': 'Sample points banner',
+                    'url': '/basic/sample-points-banner',
+                },
                 // {
                 //     'label': 'Error',
                 //     'url': '/error-404',
