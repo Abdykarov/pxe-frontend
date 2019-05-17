@@ -1,6 +1,4 @@
-<aside
-    class="aside"
-    [class.aside--open]="isMenuOpen">
+<aside class="aside aside--open">
     <nav class="navigation">
         <ul
             *ngFor="let menu of config"
@@ -10,13 +8,13 @@
                 class="navigation-main__item"
                 [routerLinkActive]="[item.url ? 'navigation-main__item--active' : '']"
                 [class.navigation-main__item--sub]="item.children"
-                [class.navigation-main__item--open]="item === itemOpened">
+                [class.navigation-main__item--open]="item === itemOpened"
+                [ngClass]="item.class">
                 <a
                     class="navigation-main__link"
                     [routerLink]="item.url ? item.url : null"
                     [attr.aria-expanded]="item.children ? item === itemOpened : null"
                     [attr.aria-controls]="item.id ? item.id : null"
-                    [ngClass]="item.class"
                     (click)="callOpenItem(item)">
                     <span
                         class="navigation-main__link-label"

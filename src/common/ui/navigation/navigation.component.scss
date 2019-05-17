@@ -9,10 +9,10 @@
 
 
 .aside {
-	// display: none;
+	display: none;
 	position: absolute;
 	z-index: 2010;
-	top: 65px;
+	top: ( ( $header-height / 2 ) + ( $menu-toggle-line-width-rotate - ( $logo-height-mobile / 2 ) ) + ( $spacer * .75 ) );
 	right: 30px;
 	width: 260px;
 	overflow-x: hidden;
@@ -23,6 +23,9 @@
 	box-shadow: $box-shadow;
 
 	// Media queries
+	@include media-breakpoint-up(md) {
+		top: ( ( $header-height / 2 ) + ( $menu-toggle-line-width-rotate - ( $logo-height-tablet / 2 ) ) + ( $spacer * .75 ) );
+	}
 	@include media-breakpoint-up(lg) {
 		position: fixed;
 		display: block;
@@ -35,7 +38,7 @@
 	}
 
 	&--open {
-		transform: translateX(0);
+		display: block;
 	}
 
 	.avatar {
@@ -75,7 +78,30 @@
 		.navigation-main__link {
 			&,
 			&:visited {
+				background-color: rgba($font-text, .1);
+
+				// Media queries
+				@include media-breakpoint-up(lg) {
+					background-color: rgba($secondary, .05);
+				}
+			}
+		}
+	}
+
+	&--logout {
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			display: none;
+		}
+
+		.navigation-main__link {
+			&,
+			&:visited {
 				background-color: rgba($secondary, .05);
+			}
+
+			&:active {
+				background-color: rgba($secondary, .15);
 			}
 		}
 	}
@@ -95,7 +121,7 @@
 	&:visited {
 		position: relative;
 		display: block;
-		padding: ( $spacer * .75 ) $spacer ( $spacer * .75 ) ( $spacer * 3 );
+		padding: $spacer $spacer $spacer ( $spacer * 3 );
 		text-decoration: none;
 		color: $font-text;
 		cursor: pointer;
@@ -108,9 +134,15 @@
 	}
 
 	&:hover,
-	&:focus {
-		color: $font-text;
-		background-color: rgba($secondary, .05);
+	&:focus,
+	&:active {
+		background-color: rgba($font-text, .1);
+
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			color: $font-text;
+			background-color: rgba($secondary, .05);
+		}
 	}
 
 	&::before {
@@ -129,8 +161,13 @@
 }
 
 .navigation-main__link-label {
+	font-size: $small-font-size;
+	line-height: $line-height-sm;
+
 	// Media queries
 	@include media-breakpoint-up(lg) {
+		font-size: $font-size-base;
+		line-height: $line-height-base;
 		text-transform: uppercase;
 	}
 

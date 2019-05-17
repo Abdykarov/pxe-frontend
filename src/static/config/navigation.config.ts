@@ -150,9 +150,9 @@ export const staticNavigationConfig: INavigationConfig = [
         },
         {
             'id': 'logout',
-            'label': 'Logout',
-            'icon': 'component-high',
-            'class': 'text-danger',
+            'label': 'Odhlášení',
+            'icon': 'flame',
+            'class': 'navigation-main__item--logout',
         },
     ],
 ];
