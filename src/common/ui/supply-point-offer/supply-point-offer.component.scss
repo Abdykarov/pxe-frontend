@@ -1,0 +1,180 @@
+/*
+ -  Supply point
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+// Component variables
+@import 'supply-point-offer.component.variables.scss';
+@import '../supply-point/supply-point.component.variables.scss';
+
+
+.supply-point-offer {
+	@include link-without-href-self {
+		display: block;
+		margin-bottom: $spacer;
+		background-color: $white;
+		color: inherit;
+		border-radius: 4px;
+		box-shadow: 0 2px 5px rgba($box-shadow-color, .16);
+		overflow: hidden;
+	}
+
+	@include link-without-href-interactive {
+		color: inherit;
+		text-decoration: none;
+		box-shadow: 0 10px 20px rgba($box-shadow-color, .2);
+	}
+
+	&.supply-point-offer--not-select {
+		@include link-without-href-self {
+			// Media queries
+			@include media-breakpoint-up(xl) {
+				background-color: $body-bg;
+			}
+		}
+
+		.supply-point-offer__inner--price {
+			// Media queries
+			@include media-breakpoint-up(xl) {
+				background-color: rgba($white, .5);
+			}
+		}
+	}
+
+	&.supply-point-offer--owner {
+		@include link-without-href-self {
+			background-color: transparent;
+			text-align: center;
+			box-shadow: none;
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				text-align: left;
+			}
+		}
+
+		@include link-without-href-interactive-self {
+			pointer-events: none;
+		}
+
+		.supply-point-offer__inner--price {
+			padding-top: 0;
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				padding-top: $supply-point-offer-inner-padding;
+			}
+
+			.supply-point-offer__title {
+				font-size: $supply-point-label-font-size;
+
+				// Media queries
+				@include media-breakpoint-up(md) {
+					font-size: $supply-point-title-font-size;
+				}
+			}
+		}
+
+		.supply-point-offer__title {
+			margin-bottom: 0;
+			font-size: $supply-point-title-font-size;
+		}
+	}
+
+	&__inner {
+		height: 100%;
+		padding: $supply-point-offer-inner-padding $supply-point-offer-inner-padding $supply-point-offer-inner-padding-bottom;
+
+		&--price {
+			padding-bottom: $supply-point-offer-inner-padding;
+			background-color: rgba($body-bg, .5);
+
+			// Media queries
+			@include media-breakpoint-up(xl) {
+				padding-bottom: $supply-point-offer-inner-padding-bottom;
+			}
+		}
+	}
+
+	&__title,
+	&__value {
+		font-size: $supply-point-label-font-size;
+		line-height: $supply-point-label-line-height;
+	}
+
+	&__title-label,
+	&__value-name {
+		display: block;
+		line-height: ( 18 / 14 );
+		text-transform: uppercase;
+	}
+
+	&__title-label {
+		margin-bottom: ( $spacer / 4 );
+	}
+
+	&__title {
+		display: block;
+		margin-bottom: ( $spacer * 1.75 );
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			font-size: $supply-point-title-font-size;
+			line-height: $supply-point-title-line-height;
+		}
+	}
+
+	&__value-box {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: $spacer;
+		margin-right: $spacer;
+	}
+
+	&__value-name {
+		margin-bottom: ( $spacer / 2 );
+	}
+
+	&__addon {
+		text-align: center;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			text-align: right;
+		}
+		@include media-breakpoint-up(xl) {
+			display: none;
+		}
+
+		> :nth-child(n) {
+			margin: ( $spacer / 2 );
+		}
+	}
+
+	&__benefits-list {
+		display: none;
+		padding: ( $spacer * 1.25 ) $supply-point-offer-inner-padding $spacer;
+		margin-bottom: 0;
+
+		// Media queries
+		@include media-breakpoint-up(xl) {
+			display: block;
+			padding-top: $spacer;
+			padding-bottom: ( $spacer * .75 );
+		}
+
+		li {
+			padding-bottom: ( $spacer / 2 );
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				display: inline-block;
+				margin-right: ( $spacer * 3 );
+			}
+		}
+	}
+}
