@@ -24,8 +24,13 @@ import { environment } from 'src/environments/environment';
 const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
 
+    console.log('%c ***** apolloGraphQLFactory *****', 'background: #bada55; color: #000; font-weight: bold', httpLink, authService, router);
+
     const setTokenHeader = (operation: Operation): void => {
+        authService.checkLogin();
         const token = authService.getToken();
+        console.log('%c ***** token *****', 'background: #bada55; color: #000; font-weight: bold', token);
+        // const token = null;
         if (token) {
             operation.setContext({
                 headers: {
@@ -39,11 +44,11 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
         uri: `${environment.url}/graphql/`,
     });
 
-    const local = withClientState({
-        cache,
-        defaults,
-        resolvers,
-    });
+    // const local = withClientState({
+    //     cache,
+    //     defaults,
+    //     resolvers,
+    // });
 
     const auth = new ApolloLink((operation: Operation, forward: NextLink) => {
         setTokenHeader(operation);
@@ -100,9 +105,14 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
 
     // TODO restLink, retryLink?
 
+    cache.writeData({
+        data: defaults,
+    });
+
     return {
         cache,
-        link: from([error, local, auth, http]),
+        resolvers,
+        link: from([error, auth, http]),
         connectToDevTools: !environment.production,
     };
 };

@@ -6,7 +6,7 @@ import {
 
 import { Apollo } from 'apollo-angular';
 import { of } from 'rxjs';
-import { map} from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { CookiesService } from './cookies.service';
@@ -23,20 +23,52 @@ import {
 } from 'src/common/graphql/queries/user';
 import { userLogin } from 'src/common/graphql/mutation/user';
 import { parseEmailFromUsername } from 'src/common/utils';
+import { AbstractComponent } from '../../common/abstract.component';
+import { AuthApolloService } from './auth-apollo.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
     private token: string;
-    private cookieName = 'auth.ts';
+    private cookieName = 'user';
     private expiresTime = 3600;
 
     constructor(
-        private apollo: Apollo,
+        // private apollo: Apollo,
+        // private authApolloService: AuthApolloService,
         private cookiesService: CookiesService,
         private http: HttpClient,
-    ) {}
+    ) {
+        // super();
+        console.log('%c ***** INIT *****', 'background: #bada55; color: #000; font-weight: bold', this.getJwtPayload());
+        // this.apollo.getClient().writeData({
+        //     // query: getUserDetail,
+        //     data: {
+        //         user: {
+        //             __typename: 'User',
+        //             userPayload: {
+        //                 data: 'xxx',
+        //                 __typename: 'UserPayload',
+        //             },
+        //         },
+        //     },
+        // });
+
+        // this.apollo.getClient().writeQuery({
+        //     query: getUserDetail,
+        //     data: {
+        //         userPayload: this.getJwtPayload(),
+        //     },
+        // });
+
+        // this.userLogin()
+        //     // .pipe(takeUntil(this.destroy$))
+        //     .subscribe(res => {
+        //     console.log('%c ***** res *****', 'background: #bada55; color: #000; font-weight: bold', res);
+        //     // console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold', this.getUserDetail());
+        // });
+    }
 
     checkLogin = () => {
         if (this.cookiesService.has(this.cookieName)) {
@@ -51,6 +83,22 @@ export class AuthService {
     }
 
     login = ({username, password}: ILoginRequest) => {
+        console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold', this.getJwtPayload());
+
+        // this.apollo.getClient().writeQuery({
+        //     query: getUserDetail,
+        //     data: {
+        //         userPayload: this.getJwtPayload(),
+        //     },
+        // });
+
+        // this.userLogin().pipe(takeUntil(this.destroy$)).subscribe(res => {
+        //     console.log('%c ***** res *****', 'background: #bada55; color: #000; font-weight: bold', res);
+        //     console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold', this.getUserDetail());
+        // });
+
+
+        // return;
         return this.http.post<ILoginResponse>(`${environment.url}/parc-rest/webresources/users/login`, { username, password })
             .pipe(
                 map(response => {
@@ -63,6 +111,12 @@ export class AuthService {
                         };
                         this.cookiesService.setObject(this.cookieName, user, this.expiresTime);
                         this.checkLogin();
+                        // this.apollo.getClient().writeQuery({
+                        //     query: getUserDetail,
+                        //     data: {
+                        //         userPayload: this.getJwtPayload(),
+                        //     },
+                        // });
                     }
                     return response;
                 }),
@@ -102,10 +156,16 @@ export class AuthService {
         return this.http.post<any>(`${environment.url}/parc-rest/webresources/sms/confirm`, code, httpOptions);
     }
 
-    isSupplier(): boolean {
-        const userDetail = this.getUserDetail();
-        return !userDetail || (userDetail.role === IUserRoles.PARC_SUPPLIER_P4R);
+    isSupplier = () => {
+        const jwtPayload = this.parseJwt();
+        return jwtPayload.role === IUserRoles.PARC_SUPPLIER_P4R;
     }
+
+    // isSupplier(): boolean {
+    //     const userDetail = this.getUserDetail();
+    //     console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold', userDetail);
+    //     return !userDetail || (userDetail.role === IUserRoles.PARC_SUPPLIER_P4R);
+    // }
 
     refreshToken = () => {
         // TODO refresh token logic
@@ -114,38 +174,49 @@ export class AuthService {
 
     getToken = (): string => this.token;
 
-    public userLogin() {
-        return this.apollo
-            .mutate({
-                mutation: userLogin,
-                variables: {
-                    userPayload: this.getJwtPayload(),
-                },
-            });
+    getUserEmail = () => {
+        const jwtPayload = this.parseJwt();
+        const { username } = jwtPayload;
+        return parseEmailFromUsername(username);
     }
 
-    getUserEmail = (): string => {
-        return this.getAttribute('email');
-    }
-
-     getUserDetail(): IJwtPayload {
-         try {
-             return this.apollo.getClient().readQuery({
-                 query: getUserDetail,
-             }).user.userPayload;
-         } catch (e) {
-             return null;
-         }
-    }
-
-    getAttribute(attribute: string): any {
-        const userDetail: IJwtPayload = this.getUserDetail();
-        if (!userDetail || !userDetail[attribute]) {
-            return null;
-        }
-
-        return userDetail[attribute];
-    }
+    // public userLogin() {
+    //     return this.apollo
+    //         .mutate({
+    //             mutation: userLogin,
+    //             variables: {
+    //                 // userPayload: this.getJwtPayload(),
+    //                 userPayload: {
+    //                     data: 'xxx2',
+    //                     __typename: 'UserPayload',
+    //                 },
+    //             },
+    //         });
+    // }
+    //
+    // getUserEmail = (): string => {
+    //     return this.getAttribute('email');
+    // }
+    //
+    //  getUserDetail(): IJwtPayload {
+    //      try {
+    //          return this.apollo.getClient().readQuery({
+    //              query: getUserDetail,
+    //          }).user.userPayload;
+    //      } catch (e) {
+    //          console.log('%c ***** e *****', 'background: #bada55; color: #000; font-weight: bold', e);
+    //          return null;
+    //      }
+    // }
+    //
+    // getAttribute(attribute: string): any {
+    //     const userDetail: IJwtPayload = this.getUserDetail();
+    //     if (!userDetail || !userDetail[attribute]) {
+    //         return null;
+    //     }
+    //
+    //     return userDetail[attribute];
+    // }
 
     parseJwt = (): IJwtPayload => {
         const jwtHelper = new JwtHelperService();
@@ -153,6 +224,7 @@ export class AuthService {
     }
 
     getJwtPayload = (): IJwtPayload => {
+        this.checkLogin();
         const jwtPayload = this.parseJwt();
         const { username } = jwtPayload;
         jwtPayload.email = parseEmailFromUsername(username);

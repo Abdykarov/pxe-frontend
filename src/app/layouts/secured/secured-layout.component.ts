@@ -11,7 +11,6 @@ import {
     map,
 } from 'rxjs/operators';
 
-import { AuthService } from 'src/app/services/auth.service';
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
 import { IStoreUi } from 'src/common/graphql/models/store.model';
@@ -27,7 +26,6 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent {
 
     constructor(
         protected apollo: Apollo,
-        private authService: AuthService,
         private navigationApolloService: NavigationApolloService,
         private navigationService: NavigationService,
         protected overlayService: OverlayService,
@@ -41,21 +39,19 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent {
             router,
         );
 
-        this.authService.userLogin().subscribe( res => {
-            this.navigationService.getNavigationConfig();
+        this.navigationService.getNavigationConfig();
 
-            this.navigationApolloService.getConfig()
-                .pipe(
-                    takeUntil(this.destroy$),
-                    map(R.path(['data', 'ui'])),
-                )
-                .subscribe((current: IStoreUi)  => {
-                    if (current.securedLayout) {
-                        this.navConfig = current.securedLayout.navigationConfig;
-                        this.showOverlay = current.showOverlay;
-                    }
-                });
-        });
+        this.navigationApolloService.getConfig()
+            .pipe(
+                takeUntil(this.destroy$),
+                map(R.path(['data', 'ui'])),
+            )
+            .subscribe((current: IStoreUi)  => {
+                if (current.securedLayout) {
+                    this.navConfig = current.securedLayout.navigationConfig;
+                    this.showOverlay = current.showOverlay;
+                }
+            });
     }
 
     public toggleNavigationItem (navigationItem) {
