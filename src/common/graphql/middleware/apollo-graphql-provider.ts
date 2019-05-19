@@ -11,7 +11,7 @@ import {
 import { HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { onError } from 'apollo-link-error';
-import { withClientState } from 'apollo-link-state';
+// import { withClientState } from 'apollo-link-state';
 
 import { AuthService } from 'src/app/services/auth.service';
 import { CONSTS } from 'src/app/app.constants';
@@ -24,13 +24,8 @@ import { environment } from 'src/environments/environment';
 const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
 
-    console.log('%c ***** apolloGraphQLFactory *****', 'background: #bada55; color: #000; font-weight: bold', httpLink, authService, router);
-
     const setTokenHeader = (operation: Operation): void => {
-        authService.checkLogin();
         const token = authService.getToken();
-        console.log('%c ***** token *****', 'background: #bada55; color: #000; font-weight: bold', token);
-        // const token = null;
         if (token) {
             operation.setContext({
                 headers: {

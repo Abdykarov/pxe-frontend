@@ -25,7 +25,7 @@ export interface IJwtPayload {
     token: string;
     username: string;
     email?: string;
-    __typename?: string;
+    supplier?: boolean;
 }
 
 export enum IUserRoles {

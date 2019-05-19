@@ -6,6 +6,6 @@ import ui from './ui';
 import user from './user';
 import visibility from './visibility';
 
-const {defaults, resolvers} = R_.mergeDeepLeftAll([counter, visibility, ui, user/*, supply*/]);
+const {defaults, resolvers} = R_.mergeDeepLeftAll([counter, visibility, ui/*, user, supply*/]);
 
 export {defaults, resolvers};

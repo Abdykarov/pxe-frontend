@@ -6,6 +6,7 @@ export const CONSTS = {
     CURRENCY: {
         DEFAULT: 'CZK',
     },
+    DEFAULT_EXPIRATION: 3600,
     PATHS: {
         DASHBOARD : 'dashboard',
         COOKIES_POLICY : 'cookies-policy',
