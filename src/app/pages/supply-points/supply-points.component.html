@@ -20,6 +20,15 @@
                 ></lnd-info-banner>
             </ng-container>
             <ng-container *ngIf="supplierPoints && supplierPoints.length">
+                <div class="row mb-5">
+                    <div class="col text-center">
+                        <lnd-button
+                            label="Nové odběrné místo"
+                            type="secondary"
+                            (action)="createSupplyPoint($event)"
+                        ></lnd-button>
+                    </div>
+                </div>
                 <ng-container *ngFor="let supplierPoint of supplierPoints">
                     <pxe-supply-point
                         [data]="supplierPoint"

@@ -50,9 +50,25 @@ import {
     progressBarPageRoutes,
 } from 'src/static/organisms/progress-bar/progress-bar.module';
 import {
+    SamplePointsPageModule,
+    samplePointsPageRoutes,
+} from 'src/static/pages/sample-points/page.module';
+import {
+    SamplePointsBannerPageModule,
+    samplePointsBannerPageRoutes,
+} from 'src/static/pages/sample-points-banner/page.module';
+import {
+    SupplyPointOfferPageModule,
+    supplyPointOfferPageRoutes,
+} from 'src/static/organisms/supply-point-offer/page.module';
+import {
     SupplyPointPageModule,
     supplyPointPageRoutes,
 } from 'src/static/organisms/supply-point/page.module';
+import {
+    TooltipPageModule,
+    tooltipPageRoutes,
+} from 'src/static/atoms/tooltip/page.module';
 
 import {
     TypographyPageModule,
@@ -75,7 +91,11 @@ const routes: Routes = [
             ...modalsPageRoutes,
             ...newSupplyPointPageRoutes,
             ...progressBarPageRoutes,
+            ...samplePointsPageRoutes,
+            ...samplePointsBannerPageRoutes,
+            ...supplyPointOfferPageRoutes,
             ...supplyPointPageRoutes,
+            ...tooltipPageRoutes,
             ...typographyPageRoutes,
             {
                 path: '**',
@@ -99,7 +119,11 @@ const routes: Routes = [
         NewSupplyPointPageModule,
         ProgressBarPageModule,
         RouterModule.forChild(routes),
+        SamplePointsPageModule,
+        SamplePointsBannerPageModule,
+        SupplyPointOfferPageModule,
         SupplyPointPageModule,
+        TooltipPageModule,
         TypographyPageModule,
     ],
     exports: [
