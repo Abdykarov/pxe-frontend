@@ -1,6 +1,5 @@
-<aside
-    class="aside"
-    [class.aside--open]="isMenuOpen">
+<aside class="aside"
+       [class.aside--open]="isMenuOpen">
     <nav class="navigation">
         <ul
             *ngFor="let menu of config"
@@ -10,7 +9,8 @@
                 class="navigation-main__item"
                 [routerLinkActive]="[item.url ? 'navigation-main__item--active' : '']"
                 [class.navigation-main__item--sub]="item.children"
-                [class.navigation-main__item--open]="item === itemOpened">
+                [class.navigation-main__item--open]="item === itemOpened"
+                [ngClass]="item.class">
                 <a
                     class="navigation-main__link"
                     [routerLink]="item.url ? item.url : null"
@@ -43,6 +43,7 @@
                     <li
                         *ngFor="let childItem of item.children"
                         class="navigation-main-sub__item"
+                        [ngClass]="childItem.class"
                         [routerLinkActive]="[childItem.url ? 'navigation-main-sub__item--active' : '']">
                         <a
                             [routerLink]="childItem.url ? childItem.url : null"

@@ -9,6 +9,7 @@ export interface INavigationItem {
     url?: string;
     id?: string;
     badge?: string;
+    class?: string;
     children?: Array<INavigationChildItem>;
     __typename?: string;
 }
@@ -16,5 +17,6 @@ export interface INavigationItem {
 export interface INavigationChildItem {
     url?: string;
     label: string;
+    class?: string;
     __typename?: string;
 }
