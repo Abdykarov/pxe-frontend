@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
 import {
     ActivatedRoute,
     Router,
 } from '@angular/router';
+import {
+    Component,
+    HostListener,
+} from '@angular/core';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
@@ -69,5 +72,12 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent {
 
     toggleMenuOpen () {
         this.isMenuOpen = !this.isMenuOpen;
+    }
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+        if (this.isMenuOpen) {
+            this.toggleMenuOpen();
+        }
     }
 }

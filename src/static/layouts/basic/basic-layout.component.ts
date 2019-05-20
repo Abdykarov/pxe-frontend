@@ -5,7 +5,6 @@ import { staticNavigationConfig } from 'src/static/config/navigation.config';
 import {
     ISettings,
     LoginType,
-    LogoutType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 
@@ -21,7 +20,6 @@ export class BasicLayoutComponent {
         isPublic: true,
         isSimpleFooter: true,
         loginType: LoginType.NONE,
-        logoutType: LogoutType.NONE,
         signUpType: SignType.NONE,
     };
 

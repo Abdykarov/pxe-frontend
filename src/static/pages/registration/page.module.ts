@@ -10,7 +10,6 @@ import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
 
 import {
     LoginType,
-    LogoutType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 
@@ -37,7 +36,6 @@ export const registrationPageRoutes: Routes = [
         data: {
             isPublic: true,
             loginType: LoginType.STATIC,
-            logoutType: LogoutType.NONE,
             signUpType: SignType.NONE,
         },
     },

@@ -11,7 +11,6 @@ import { CONSTS } from 'src/app/app.constants';
 import {
     ISettings,
     LoginType,
-    LogoutType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
@@ -25,7 +24,6 @@ export class HeaderComponent {
     public isHeaderSticked: boolean;
     public signTypeNone = SignType.NONE;
     public loginTypeNone = LoginType.NONE;
-    public logoutTypeNone = LogoutType.NONE;
 
     @Input() settings: ISettings;
 

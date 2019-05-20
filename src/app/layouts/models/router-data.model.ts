@@ -3,7 +3,6 @@ export interface ISettings {
     isSimpleFooter: boolean;
     isSupplier?: boolean;
     loginType: LoginType;
-    logoutType: LogoutType;
     signUpType: SignType;
 }
 
@@ -20,8 +19,3 @@ export enum LoginType {
     STATIC,
 }
 
-export enum LogoutType {
-    NONE,
-    NAVIGATE,
-    STATIC,
-}
