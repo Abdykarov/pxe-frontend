@@ -1,7 +1,7 @@
 <ng-template #dropdownTabTop let-toggle="toggle">
     <lnd-button
         (click)="toggle()"
-        label="AHOJ"
+        [label]="currentUser.username"
         type="light"
     ></lnd-button>
 </ng-template>
@@ -70,8 +70,8 @@
                             [actionTemplate]="dropdownTabTop"
                             [overlayEnabled]="true">
                             <a *ngFor="let item of navigationConfigUserActions[0]"
-                               class="dropdown-item">
-                                {{ item | json }}
+                               class="dropdown-item" (click)="navigateTo(item.url)">
+                                {{ item.label }}
                             </a>
                         </lnd-dropdown>
                     </div>

@@ -3,10 +3,12 @@ import {
     EventEmitter,
     HostListener,
     Input,
+    OnInit,
     Output,
 } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { AuthService } from 'src/app/services/auth.service';
 import { CONSTS } from 'src/app/app.constants';
 import {
     ISettings,
@@ -17,16 +19,19 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 import { IDropdownItem } from '../dropdown/models/item.model';
 import { INavigationConfig } from '../navigation/models/navigation.model';
 import { navigationConfigUserActions } from 'src/app/layouts/secured/services/navigation.config';
+import { IJwtPayload } from '../../../app/services/model/auth.model';
 
 @Component({
     selector: 'lnd-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
     public isHeaderSticked: boolean;
     public signTypeNone = SignType.NONE;
     public loginTypeNone = LoginType.NONE;
+
+    public currentUser: IJwtPayload = null;
 
     public navigationConfigUserActions: INavigationConfig = navigationConfigUserActions;
 
@@ -50,6 +55,7 @@ export class HeaderComponent {
     }
 
     constructor(
+        private authService: AuthService,
         private scrollToService: ScrollToService,
         private router: Router,
     ) {}
@@ -67,5 +73,14 @@ export class HeaderComponent {
             this.router.navigate([CONSTS.PATHS.LOGIN]);
         }
     }
-}
 
+    navigateTo(url: string) {
+        this.router.navigate([url]);
+    }
+
+    ngOnInit(): void {
+        if (this.authService.isLogged()) {
+            this.currentUser = this.authService.currentUserValue;
+        }
+    }
+}
