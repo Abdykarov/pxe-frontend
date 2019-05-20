@@ -72,7 +72,6 @@
 .navigation-main__item {
 	&--active,
 	&--open {
-
 		.navigation-main__sub-icon {
 			transform: rotate(-180deg);
 		}
@@ -90,18 +89,31 @@
 		}
 	}
 
-	&--logout {
+	&--second {
+		&:first-of-type {
+			margin-top: $spacer;
+		}
+
 		// Media queries
 		@include media-breakpoint-up(lg) {
 			display: none;
 		}
 
+		.navigation-main__link-label,
+		.navigation-main-sub__link {
+			text-transform: none;
+		}
+	}
+
+	&--logout {
 		.navigation-main__link {
 			&,
 			&:visited {
+				text-transform: none;
 				background-color: rgba($secondary, .05);
 			}
 
+			&:hover,
 			&:active {
 				background-color: rgba($secondary, .15);
 			}
@@ -162,7 +174,13 @@
 	}
 }
 
-.navigation-main__link-label {
+.navigation-main__link-label,
+.navigation-main-sub__link {
+	text-transform: uppercase;
+}
+
+.navigation-main__link-label,
+.navigation-main-sub__link {
 	font-size: $small-font-size;
 	line-height: $line-height-sm;
 
@@ -170,7 +188,6 @@
 	@include media-breakpoint-up(lg) {
 		font-size: $font-size-base;
 		line-height: $line-height-base;
-		text-transform: uppercase;
 	}
 
 	& + .badge {
@@ -201,10 +218,15 @@
 		position: relative;
 		display: block;
 		color: $font-text;
-		padding: $spacer $spacer $spacer ( $spacer * 4 );
+		padding: $spacer $spacer $spacer ( $spacer * 3 );
 		text-decoration: none;
 		cursor: pointer;
 		@include smart-short-text;
+
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			padding: $spacer $spacer $spacer ( $spacer * 4 );
+		}
 	}
 
 	&:hover,
@@ -230,8 +252,4 @@
 			background-color: $secondary-lighten;
 		}
 	}
-}
-
-.navigation-main-sub__link-label {
-	text-transform: uppercase;
 }
