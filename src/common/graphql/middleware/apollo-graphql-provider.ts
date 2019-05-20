@@ -11,7 +11,6 @@ import {
 import { HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { onError } from 'apollo-link-error';
-// import { withClientState } from 'apollo-link-state';
 
 import { AuthService } from 'src/app/services/auth.service';
 import { CONSTS } from 'src/app/app.constants';
@@ -38,12 +37,6 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
     const http = httpLink.create({
         uri: `${environment.url}/graphql/`,
     });
-
-    // const local = withClientState({
-    //     cache,
-    //     defaults,
-    //     resolvers,
-    // });
 
     const auth = new ApolloLink((operation: Operation, forward: NextLink) => {
         setTokenHeader(operation);
