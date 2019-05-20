@@ -63,7 +63,7 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     public appendText?: string;
 
     @Input()
-    public autocomplete: string = 'off';
+    public autocomplete = 'off';
 
     @Output()
     public blur?: EventEmitter<any> = new EventEmitter();
