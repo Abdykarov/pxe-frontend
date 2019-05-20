@@ -9,28 +9,38 @@
 
 
 .aside {
-	display: block;
-	position: fixed;
+	display: none;
+	position: absolute;
 	z-index: 2010;
-	top: $header-height;
-	bottom: 0;
-	left: 0;
-	transform: translateX(-100%);
+	top: ( ( $header-height / 2 ) + ( $menu-toggle-line-width-rotate - ( $logo-height-mobile / 2 ) ) + ( $spacer * .75 ) );
+	right: 30px;
 	width: $aside-width-mobile;
 	overflow-x: hidden;
 	overflow-y: auto;
 	color: $white;
-	background-color: $aside-bg;
+	background-color: $white;
+	border-radius: 4px;
+	box-shadow: $box-shadow;
 	transition: transform ease-in $animation-speed;
 
 	// Media queries
+	@include media-breakpoint-up(md) {
+		top: ( ( $header-height / 2 ) + ( $menu-toggle-line-width-rotate - ( $logo-height-tablet / 2 ) ) + ( $spacer * .75 ) );
+	}
 	@include media-breakpoint-up(lg) {
-		transform: translateX(0);
+		position: fixed;
+		display: block;
+		top: $header-height;
+		bottom: 0;
+		left: 0;
 		width: $aside-width-desktop;
+		background-color: $aside-bg;
+		border-radius: 0;
+		box-shadow: none;
 	}
 
 	&--open {
-		transform: translateX(0);
+		display: block;
 	}
 
 	.avatar {
@@ -47,8 +57,12 @@
 	position: relative;
 	z-index: 1;
 	@include reset-list;
-	padding-top: ( $spacer / 1.5 );
-	padding-bottom: ( $spacer / 1.5 );
+
+	// Media queries
+	@include media-breakpoint-up(lg) {
+		padding-top: ( $spacer / 1.5 );
+		padding-bottom: ( $spacer / 1.5 );
+	}
 
 	&:nth-child(n + 2) {
 		border-top: 1px solid rgba($gray-400, .4);
@@ -58,7 +72,6 @@
 .navigation-main__item {
 	&--active,
 	&--open {
-
 		.navigation-main__sub-icon {
 			transform: rotate(-180deg);
 		}
@@ -66,7 +79,43 @@
 		.navigation-main__link {
 			&,
 			&:visited {
+				background-color: rgba($font-text, .1);
+
+				// Media queries
+				@include media-breakpoint-up(lg) {
+					background-color: rgba($secondary, .05);
+				}
+			}
+		}
+	}
+
+	&--second {
+		&:first-of-type {
+			margin-top: $spacer;
+		}
+
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			display: none;
+		}
+
+		.navigation-main__link-label,
+		.navigation-main-sub__link {
+			text-transform: none;
+		}
+	}
+
+	&--logout {
+		.navigation-main__link {
+			&,
+			&:visited {
+				text-transform: none;
 				background-color: rgba($secondary, .05);
+			}
+
+			&:hover,
+			&:active {
+				background-color: rgba($secondary, .15);
 			}
 		}
 	}
@@ -86,17 +135,28 @@
 	&:visited {
 		position: relative;
 		display: block;
-		padding: ( $spacer * 1.5 ) $spacer ( $spacer * 1.5 ) ( $spacer * 4 );
+		padding: $spacer $spacer $spacer ( $spacer * 3 );
 		text-decoration: none;
 		color: $font-text;
 		cursor: pointer;
 		@include smart-short-text;
+
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			padding: ( $spacer * 1.5 ) $spacer ( $spacer * 1.5 ) ( $spacer * 4 );
+		}
 	}
 
 	&:hover,
-	&:focus {
-		color: $font-text;
-		background-color: rgba($secondary, .05);
+	&:focus,
+	&:active {
+		background-color: rgba($font-text, .1);
+
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			color: $font-text;
+			background-color: rgba($secondary, .05);
+		}
 	}
 
 	&::before {
@@ -114,8 +174,21 @@
 	}
 }
 
-.navigation-main__link-label {
+.navigation-main__link-label,
+.navigation-main-sub__link {
 	text-transform: uppercase;
+}
+
+.navigation-main__link-label,
+.navigation-main-sub__link {
+	font-size: $small-font-size;
+	line-height: $line-height-sm;
+
+	// Media queries
+	@include media-breakpoint-up(lg) {
+		font-size: $font-size-base;
+		line-height: $line-height-base;
+	}
 
 	& + .badge {
 		margin-left: ( $spacer / 3 );
@@ -125,9 +198,14 @@
 .navigation-main__link-icon {
 	position: absolute;
 	top: 50%;
-	left: ( $spacer * 2 );
+	left: $spacer;
 	margin-top: -( $icon-size-px / 2 );
 	color: $secondary;
+
+	// Media queries
+	@include media-breakpoint-up(lg) {
+		left: ( $spacer * 2 );
+	}
 }
 
 .navigation-main-sub {
@@ -140,10 +218,15 @@
 		position: relative;
 		display: block;
 		color: $font-text;
-		padding: $spacer $spacer $spacer ( $spacer * 4 );
+		padding: $spacer $spacer $spacer ( $spacer * 3 );
 		text-decoration: none;
 		cursor: pointer;
 		@include smart-short-text;
+
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			padding: $spacer $spacer $spacer ( $spacer * 4 );
+		}
 	}
 
 	&:hover,
@@ -169,8 +252,4 @@
 			background-color: $secondary-lighten;
 		}
 	}
-}
-
-.navigation-main-sub__link-label {
-	text-transform: uppercase;
 }

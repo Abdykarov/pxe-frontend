@@ -6,22 +6,25 @@
     }"
 >
     <lnd-header
-        [settings]="settings">
+        [settings]="settings"
+        [isMenuOpen]="isMenuOpen"
+        (toggleMenu)="toggleMenuOpen()"
+    >
     </lnd-header>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-8 order-lg-2 container-content">
-                <main class="main">
-                    <router-outlet></router-outlet>
-                </main>
-            </div>
-            <div class="col-lg-2 order-lg-1 container-aside">
+            <div class="col-lg-2 container-aside">
                 <lnd-navigation
                     [config]="navigationConfig"
                     [isMenuOpen]="isMenuOpen"
                     [itemOpened]="itemOpened"
                     (openItem)="toggleOpenItem($event)">
                 </lnd-navigation>
+            </div>
+            <div class="col-lg-8 container-content">
+                <main class="main">
+                    <router-outlet></router-outlet>
+                </main>
             </div>
         </div>
         <lnd-footer>

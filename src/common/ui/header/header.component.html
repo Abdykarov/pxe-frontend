@@ -52,11 +52,10 @@
                         <span class="icon icon--favourite-fill text-color--secondary"></span>
                     </div>
                     <div
-                        class="menu-holder"
-                        *ngIf="!settings.isPublic">
+                        class="menu-holder">
                         <a
                             class="menu-toggle"
-                            [ngClass]="{ 'menu-toggle--open' : isMenuOpen }"
+                            [class.menu-toggle--open]="isMenuOpen"
                             (click)="toggleMenu.emit()">
                             <span class="menu-toggle__line"></span>
                             <span class="menu-toggle__line"></span>

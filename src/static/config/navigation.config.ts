@@ -159,5 +159,23 @@ export const staticNavigationConfig: INavigationConfig = [
                 // },
             ],
         },
+        {
+            'id': 'profile',
+            'label': 'Profil uživatele',
+            'icon': 'user',
+            'class': 'navigation-main__item--second',
+        },
+        {
+            'id': 'change-password',
+            'label': 'Změna hesla',
+            'icon': 'lock-close',
+            'class': 'navigation-main__item--second',
+        },
+        {
+            'id': 'logout',
+            'label': 'Odhlášení',
+            'icon': 'power',
+            'class': 'navigation-main__item--second navigation-main__item--logout',
+        },
     ],
 ];
