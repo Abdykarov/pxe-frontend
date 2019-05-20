@@ -5,6 +5,7 @@ import {
 import {
     Component,
     HostListener,
+    OnInit,
 } from '@angular/core';
 
 import * as R from 'ramda';
@@ -15,22 +16,30 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
-import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
+import { AuthService } from 'src/app/services/auth.service';
+import { INavigationConfig, INavigationMenu } from 'src/common/ui/navigation/models/navigation.model';
 import { IStoreUi } from 'src/common/graphql/models/store.model';
-import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { NavigationService as NavigationApolloService} from 'src/common/graphql/services/navigation.service';
+import { navigationMenuUserActions } from './services/navigation.config';
 import { NavigationService } from './services/navigation.service';
+import { IJwtPayload } from '../../services/model/auth.model';
+import { OverlayService } from 'src/common/graphql/services/overlay.service';
 
 @Component({
     templateUrl: './secured-layout.component.html',
 })
-export class SecuredLayoutComponent extends AbstractLayoutComponent {
+export class SecuredLayoutComponent extends AbstractLayoutComponent implements OnInit {
     public isMenuOpen = false;
     public itemOpened = null;
 
     public navConfig: INavigationConfig = [];
 
+    public currentUser: IJwtPayload = this.authService.currentUserValue;
+
+    public navigationMenuUserActions: INavigationMenu = navigationMenuUserActions;
+
     constructor(
+        private authService: AuthService,
         protected apollo: Apollo,
         private navigationApolloService: NavigationApolloService,
         private navigationService: NavigationService,

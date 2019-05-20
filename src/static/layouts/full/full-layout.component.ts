@@ -19,6 +19,7 @@ export class FullLayoutComponent {
         isPublic: true,
         isSimpleFooter: true,
         isSupplier: false,
+        isStatic: true,
         signUpType: SignType.STATIC,
         loginType: LoginType.NONE,
     };

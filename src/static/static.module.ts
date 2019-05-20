@@ -5,8 +5,10 @@ import {
     NgModule,
 } from '@angular/core';
 import localeCs from '@angular/common/locales/cs';
-import localeCsExtra from '@angular/common/locales/extra/cs';
 
+import { CookieModule } from 'ngx-cookie';
+
+import localeCsExtra from '@angular/common/locales/extra/cs';
 import { FooterModule } from 'src/common/ui/footer/footer.module';
 import { HeaderModule } from 'src/common/ui/header/header.module';
 import { NavigationModule } from 'src/common/ui/navigation/navigation.module';
@@ -20,6 +22,7 @@ import { registerLocaleData } from '@angular/common';
     ],
     imports: [
         BrowserModule,
+        CookieModule.forRoot(),
         FooterModule,
         HeaderModule,
         HttpClientModule,

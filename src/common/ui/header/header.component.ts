@@ -15,25 +15,25 @@ import {
     LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
+import { IJwtPayload } from 'src/app/services/model/auth.model';
+import { INavigationMenu } from 'src/common/ui/navigation/models/navigation.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
-import { IDropdownItem } from '../dropdown/models/item.model';
-import { INavigationConfig } from '../navigation/models/navigation.model';
-import { navigationConfigUserActions } from 'src/app/layouts/secured/services/navigation.config';
-import { IJwtPayload } from '../../../app/services/model/auth.model';
 
 @Component({
     selector: 'lnd-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
     public isHeaderSticked: boolean;
     public signTypeNone = SignType.NONE;
     public loginTypeNone = LoginType.NONE;
 
+    @Input()
     public currentUser: IJwtPayload = null;
 
-    public navigationConfigUserActions: INavigationConfig = navigationConfigUserActions;
+    @Input()
+    public navigationMenuUserActions: INavigationMenu = [];
 
     @Input() settings: ISettings;
 
@@ -76,11 +76,5 @@ export class HeaderComponent implements OnInit {
 
     navigateTo(url: string) {
         this.router.navigate([url]);
-    }
-
-    ngOnInit(): void {
-        if (this.authService.isLogged()) {
-            this.currentUser = this.authService.currentUserValue;
-        }
     }
 }

@@ -4,8 +4,10 @@
     [class.body-inner--overlay]="showOverlay || isMenuOpen"
     [class.body-inner--overlay-full]="showOverlay">
     <lnd-header
-        [settings]="settings"
+        [currentUser]="currentUser"
+        [navigationMenuUserActions]="navigationMenuUserActions"
         [isMenuOpen]="isMenuOpen"
+        [settings]="settings"
         (toggleMenu)="toggleMenuOpen()"
     ></lnd-header>
     <div class="container-fluid">

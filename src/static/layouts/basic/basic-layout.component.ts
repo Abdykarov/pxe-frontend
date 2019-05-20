@@ -19,6 +19,7 @@ export class BasicLayoutComponent {
     public settings: ISettings = {
         isPublic: true,
         isSimpleFooter: true,
+        isStatic: true,
         loginType: LoginType.NONE,
         signUpType: SignType.NONE,
     };
