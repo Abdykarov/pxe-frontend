@@ -177,7 +177,6 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
 
     ngAfterContentInit() {
         this.name = !!this.name ? this.name : this.id;
-        this.placeholder = !!this.placeholder ? this.placeholder : this.label;
         this.cd.markForCheck();
 
         if (!!this.defaultRadioGroupValue) {
