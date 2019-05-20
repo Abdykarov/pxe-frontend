@@ -4,7 +4,6 @@ import {
 } from 'src/app/app.constants';
 import { INavigationMenu } from 'src/common/ui/navigation/models/navigation.model';
 
-
 export const navigationMenuUsers: INavigationMenu = [
     {
         'class': '',
@@ -28,7 +27,6 @@ export const navigationMenuUsers: INavigationMenu = [
         __typename : 'secured',
     },
 ];
-
 
 export const navigationMenuSuppliers: INavigationMenu = [];
 
