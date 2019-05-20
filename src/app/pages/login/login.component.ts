@@ -46,8 +46,7 @@ export class LoginComponent extends AbstractComponent {
             )
             .subscribe(
                 () => {
-                    const isSupplier = this.authService.isSupplier();
-                    if (isSupplier) {
+                    if (this.authService.currentUserValue.supplier) {
                         this.sendSupplierLoginSms();
                     } else {
                         this.formLoading = false;

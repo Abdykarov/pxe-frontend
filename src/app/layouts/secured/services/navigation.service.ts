@@ -10,9 +10,13 @@ import {
 } from 'rxjs';
 
 // own models
+import { AuthService } from 'src/app/services/auth.service';
 import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
-import { navigationConfig } from './navigation.config';
-import { NavigationService as NavigationApolloService} from 'src/common/graphql/services/navigation.service';
+import {
+    navigationConfigUser,
+    navigationConfigSupplier,
+} from './navigation.config';
+import { NavigationService as NavigationApolloService } from 'src/common/graphql/services/navigation.service';
 
 @Injectable({
     providedIn: 'root',
@@ -20,12 +24,14 @@ import { NavigationService as NavigationApolloService} from 'src/common/graphql/
 export class NavigationService {
 
     get = () => {
-        const config = navigationConfig;
+        const currentUser = this.authService.currentUserValue;
+        const config = currentUser.supplier ? navigationConfigSupplier : navigationConfigUser ;
         return new Observable<INavigationConfig>((subscriber: Subscriber<INavigationConfig>) => subscriber.next(config));
     }
 
     constructor(
         private apollo: Apollo,
+        private authService: AuthService,
         private navigationApolloService: NavigationApolloService,
     ) {}
 

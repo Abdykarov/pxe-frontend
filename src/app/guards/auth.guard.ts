@@ -7,6 +7,8 @@ import {
     UrlTree,
 } from '@angular/router';
 
+import * as R from 'ramda';
+
 import { AuthService } from 'src/app/services/auth.service';
 import { Observable } from 'rxjs';
 import { CONSTS } from 'src/app/app.constants';
@@ -25,14 +27,16 @@ export class AuthGuard implements CanActivateChild {
         childRoute: ActivatedRouteSnapshot,
         state: RouterStateSnapshot,
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+        this.authService.checkLogin();
 
         if (!this.authService.isLogged()) {
             this.router.navigate([CONSTS.PATHS.EMPTY]);
             return false;
         }
 
-        if (childRoute.data.isSupplier !== undefined) {
-            return this.authService.isSupplier() === childRoute.data.isSupplier;
+        if (!R.isNil(childRoute.data.isSupplier)) {
+            const currentUser = this.authService.currentUserValue;
+            return currentUser.supplier === childRoute.data.isSupplier;
         }
 
         return true;
