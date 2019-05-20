@@ -40,7 +40,7 @@ export const navigationConfigUserActions: INavigationConfig = [
             'label': 'Profil uživatele',
             'icon': 'user',
             'class': 'navigation-main__item--second',
-            'url': CONSTS.PATHS.PROFILE,
+            'url': `/${CONSTS.PATHS.PROFILE}`,
             __typename: 'profile',
         },
         {
@@ -48,7 +48,7 @@ export const navigationConfigUserActions: INavigationConfig = [
             'label': 'Změna hesla',
             'icon': 'lock-close',
             'class': 'navigation-main__item--second',
-            'url': CONSTS.PATHS.CHANGE_PASSWORD,
+            'url': `/${CONSTS.PATHS.CHANGE_PASSWORD}`,
             __typename: 'change-password',
 
         },
@@ -57,7 +57,7 @@ export const navigationConfigUserActions: INavigationConfig = [
             'label': 'Odhlášení',
             'icon': 'flame',
             'class': 'navigation-main__item--logout',
-            'url' : CONSTS.PATHS.LOGOUT,
+            'url' : `/${CONSTS.PATHS.LOGOUT}`,
             __typename: 'logout',
         },
     ],
