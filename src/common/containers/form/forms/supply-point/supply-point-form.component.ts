@@ -132,25 +132,11 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
         });
     }
 
-    ieFixValidation() {
-        const isIE = /msie\s|trident\/\//i.test(window.navigator.userAgent);
-        if (isIE) {
-            for (const key in this.form.controls) {
-                if (this.form.controls[key]) {
-                    this.form.controls[key].markAsPristine();
-                    this.form.controls[key].markAsUntouched();
-                    this.form.controls[key].updateValueAndValidity();
-                }
-            }
-        }
-    }
-
     public loadCodelists = () => {
         this.supplyService.findCodelistsByTypes(codeListTypes, 'cs')
             .pipe(takeUntil(this.destroy$))
             .subscribe(({data}) => {
                 this.codeLists = transformCodeList(data.findCodelistsByTypes);
-                this.ieFixValidation();
                 this.cd.markForCheck();
             });
     }
@@ -160,7 +146,6 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
             .pipe(takeUntil(this.destroy$))
             .subscribe(({data}) => {
                 this.suppliers[commodityType] = transformSuppliers(data.findAllSuppliers);
-                this.ieFixValidation();
                 this.cd.markForCheck();
             });
     }

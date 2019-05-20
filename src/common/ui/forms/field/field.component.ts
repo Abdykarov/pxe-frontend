@@ -166,8 +166,6 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     }
 
     set value(val) {
-
-        console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold', this.id, this.name);
         this._value = val;
         this.onChange(val);
         this.onTouched();
@@ -179,7 +177,6 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
 
     ngAfterContentInit() {
         this.name = !!this.name ? this.name : this.id;
-        this.placeholder = !!this.placeholder ? this.placeholder : this.label;
         this.cd.markForCheck();
 
         if (!!this.defaultRadioGroupValue) {
