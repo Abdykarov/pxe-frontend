@@ -2,7 +2,7 @@ import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.mo
 import { ROUTES } from 'src/app/app.constants';
 
 
-export const navigationConfig: INavigationConfig = [
+export const navigationConfigUser: INavigationConfig = [
     [
         {
             'url': ROUTES.ROUTER_DASHBOARD,
@@ -23,4 +23,9 @@ export const navigationConfig: INavigationConfig = [
             __typename : 'secured',
         },
     ],
+];
+
+
+export const navigationConfigSupplier: INavigationConfig = [
+    [],
 ];
