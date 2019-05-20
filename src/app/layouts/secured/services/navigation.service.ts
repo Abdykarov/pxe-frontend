@@ -13,9 +13,9 @@ import {
 import { AuthService } from 'src/app/services/auth.service';
 import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
 import {
-    navigationConfigSupplier,
-    navigationConfigUser,
-    navigationConfigUserActions,
+    navigationMenuUsers,
+    navigationMenuUserActions,
+    navigationMenuSuppliers,
 } from './navigation.config';
 import { NavigationService as NavigationApolloService } from 'src/common/graphql/services/navigation.service';
 
@@ -26,10 +26,12 @@ export class NavigationService {
 
     get = () => {
         const currentUser = this.authService.currentUserValue;
-        const configPage = currentUser.supplier ? navigationConfigSupplier : navigationConfigUser ;
-        const config: INavigationConfig = [configPage[0].concat(navigationConfigUserActions[0])];
+        const navigationMenuUser = currentUser.supplier ? navigationMenuSuppliers : navigationMenuUsers ;
 
-        return new Observable<INavigationConfig>((subscriber: Subscriber<INavigationConfig>) => subscriber.next(config));
+        return new Observable<INavigationConfig>((subscriber: Subscriber<INavigationConfig>) => subscriber.next([
+            navigationMenuUser,
+            navigationMenuUserActions,
+        ]));
     }
 
     constructor(
