@@ -63,7 +63,7 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     public appendText?: string;
 
     @Input()
-    public autocomplete?: string;
+    public autocomplete = 'off';
 
     @Output()
     public blur?: EventEmitter<any> = new EventEmitter();
@@ -106,6 +106,9 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
 
     @Input()
     public label = '';
+
+    @Input()
+    public lbl;
 
     @Input()
     public name?: string;
@@ -166,6 +169,8 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     }
 
     set value(val) {
+
+        console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold', this.id, this.name);
         this._value = val;
         this.onChange(val);
         this.onTouched();

@@ -59,12 +59,16 @@
         [error]="formError.name || form.controls.name.errors"
         [formControl]="form.controls.name"
         [id]="'name'"
-        label="Název odběrného místa"
+        lbl="Název odběrného místa"
         subtext="Cokoliv, podle čeho chcete místo identifikovat"
         [success]="form.controls.name.valid && (form.controls.name.touched || formError.name)"
         [touched]="form.controls.name.touched || formError.name"
         [validationMessages]="formFields.validationMessages.name"
     ></lnd-form-field>
+    {{form.controls.name.errors | json}}<br>
+    touched {{form.controls.name.touched}}<br>
+    pristine {{form.controls.name.pristine}}<br>
+    dirty  {{form.controls.name.dirty}}
     <lnd-form-field
         *ngIf="form.controls.ean.status !== 'DISABLED'"
         [appendButtonIcon]="helpDocuments && helpDocuments['ean'] ? 'icon--info' : null"
