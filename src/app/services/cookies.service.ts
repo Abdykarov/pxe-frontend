@@ -32,7 +32,7 @@ export class CookiesService {
 
     private createCookieOptions = (expires: number) => {
         const d = new Date();
-        d.setTime(d.getTime() + (expires * 24 * 60 * 60 * 1000));
+        d.setTime(expires);
         const options: CookieOptions = {
             expires: d.toUTCString(),
             path: '/',

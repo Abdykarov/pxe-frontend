@@ -75,10 +75,10 @@ export const staticNavigationConfig: INavigationConfig = [
                 //     'label': 'Tips',
                 //     'url': '/tips',
                 // },
-                // {
-                //     'label': 'Tooltip',
-                //     'url': '/tooltip',
-                // },
+                {
+                    'label': 'Tooltip',
+                    'url': '/basic/tooltip',
+                },
                 {
                     'label': 'Typography',
                     'url': '/basic/typography',
@@ -110,6 +110,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Supply point',
                     'url': '/basic/supply-point',
                 },
+                {
+                    'label': 'Supply point offer',
+                    'url': '/basic/supply-point-offer',
+                },
             ],
         },
         {
@@ -140,6 +144,14 @@ export const staticNavigationConfig: INavigationConfig = [
                 {
                     'label': 'New supply point',
                     'url': '/basic/new-supply-point',
+                },
+                {
+                    'label': 'Sample points',
+                    'url': '/basic/sample-points',
+                },
+                {
+                    'label': 'Sample points banner',
+                    'url': '/basic/sample-points-banner',
                 },
                 // {
                 //     'label': 'Error',
