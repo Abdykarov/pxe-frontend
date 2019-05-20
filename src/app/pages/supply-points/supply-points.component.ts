@@ -39,7 +39,7 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
 
     ngOnInit () {
         super.ngOnInit();
-        const email = this.authService.getUserEmail();
+        const email = this.authService.currentUserValue.email;
         this.supplyService.findSupplyPoints(email)
             .pipe(
                 takeUntil(this.destroy$),
