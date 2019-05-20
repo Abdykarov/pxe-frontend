@@ -22,6 +22,9 @@ import { NavigationService } from './services/navigation.service';
     templateUrl: './secured-layout.component.html',
 })
 export class SecuredLayoutComponent extends AbstractLayoutComponent {
+    public isMenuOpen = false;
+    public itemOpened = null;
+
     public navConfig: INavigationConfig = [];
 
     constructor(
@@ -59,6 +62,12 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent {
             .pipe(
                 takeUntil(this.destroy$),
             )
-            .subscribe();
+            .subscribe( res => {
+                this.isMenuOpen = false;
+            });
+    }
+
+    toggleMenuOpen () {
+        this.isMenuOpen = !this.isMenuOpen;
     }
 }

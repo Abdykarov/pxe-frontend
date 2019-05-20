@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 import { catchError } from 'rxjs/operators';
 import {
@@ -13,8 +14,9 @@ import {
 import { AuthService } from 'src/app/services/auth.service';
 import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
 import {
-    navigationConfigUser,
     navigationConfigSupplier,
+    navigationConfigUser,
+    navigationConfigUserActions,
 } from './navigation.config';
 import { NavigationService as NavigationApolloService } from 'src/common/graphql/services/navigation.service';
 
@@ -25,8 +27,11 @@ export class NavigationService {
 
     get = () => {
         const currentUser = this.authService.currentUserValue;
-        const config = currentUser.supplier ? navigationConfigSupplier : navigationConfigUser ;
-        return new Observable<INavigationConfig>((subscriber: Subscriber<INavigationConfig>) => subscriber.next(config));
+        const configPage = currentUser.supplier ? navigationConfigSupplier : navigationConfigUser ;
+        return new Observable<INavigationConfig>((subscriber: Subscriber<INavigationConfig>) => subscriber.next(
+            [...configPage,
+                   ...navigationConfigUserActions,
+            ]));
     }
 
     constructor(

@@ -1,22 +1,28 @@
 <div
     id="top"
     class="body-inner"
-    [class.body-inner--overlay]="showOverlay"
+    [class.body-inner--overlay]="showOverlay || isMenuOpen"
     [class.body-inner--overlay-full]="showOverlay">
-    <lnd-header [settings]="settings"></lnd-header>
+    <lnd-header
+        [settings]="settings"
+        [isMenuOpen]="isMenuOpen"
+        (toggleMenu)="toggleMenuOpen()"
+    ></lnd-header>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-8 order-lg-2">
+            <div class="col-lg-2 container-aside">
+                <lnd-navigation
+                [config]="navConfig"
+                [isMenuOpen]="isMenuOpen"
+                [itemOpened]="itemOpened"
+                (openItem)="toggleNavigationItem($event)">
+                </lnd-navigation>
+            </div>
+            <div class="col-lg-8 container-content">
                 <main class="main">
                     <router-outlet></router-outlet>
                     <lnd-modal-dynamic></lnd-modal-dynamic>
                 </main>
-            </div>
-            <div class="col-lg-2 order-lg-1 container-aside">
-                <lnd-navigation
-                    [config]="navConfig"
-                    (openItem)="toggleNavigationItem($event)">
-                </lnd-navigation>
             </div>
         </div>
         <lnd-footer [isSimpleFooter]="settings.isSimpleFooter"></lnd-footer>

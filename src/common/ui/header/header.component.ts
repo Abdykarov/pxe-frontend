@@ -64,11 +64,5 @@ export class HeaderComponent {
             this.router.navigate([CONSTS.PATHS.LOGIN]);
         }
     }
-
-    logout() {
-        if (this.settings.logoutType === LogoutType.NAVIGATE) {
-            this.router.navigate([CONSTS.PATHS.LOGOUT]);
-        }
-    }
 }
 
