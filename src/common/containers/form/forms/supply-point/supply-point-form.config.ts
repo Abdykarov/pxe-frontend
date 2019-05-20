@@ -146,11 +146,13 @@ export const formFields: IForm = {
         expirationDateGas: {
             required: errorFieldMessages.expirationDate.requiredGas,
             bsDate: errorFieldMessages.expirationDate.format,
+            bsDateMinDate: errorFieldMessages.expirationDate.expirationDateInPast,
             expirationDateInPast: errorFieldMessages.expirationDate.expirationDateInPast,
         },
         expirationDatePower: {
             required: errorFieldMessages.expirationDate.requiredPower,
             bsDate: errorFieldMessages.expirationDate.format,
+            bsDateMinDate: errorFieldMessages.expirationDate.expirationDateInPast,
             expirationDateInPast: errorFieldMessages.expirationDate.expirationDateInPast,
         },
     },
