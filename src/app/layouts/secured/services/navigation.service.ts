@@ -27,10 +27,9 @@ export class NavigationService {
     get = () => {
         const currentUser = this.authService.currentUserValue;
         const configPage = currentUser.supplier ? navigationConfigSupplier : navigationConfigUser ;
-        return new Observable<INavigationConfig>((subscriber: Subscriber<INavigationConfig>) => subscriber.next([
-                ...configPage,
-                ...navigationConfigUserActions,
-            ]));
+        const config: INavigationConfig = [configPage[0].concat(navigationConfigUserActions[0])];
+
+        return new Observable<INavigationConfig>((subscriber: Subscriber<INavigationConfig>) => subscriber.next(config));
     }
 
     constructor(
