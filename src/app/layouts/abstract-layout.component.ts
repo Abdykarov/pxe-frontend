@@ -19,6 +19,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent {
     public settings: ISettings = {
         isPublic: false,
         isSimpleFooter: false,
+        isStatic: false,
         loginType: LoginType.NONE,
         signUpType: SignType.NONE,
     };
