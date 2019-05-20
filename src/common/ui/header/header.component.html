@@ -1,3 +1,11 @@
+<ng-template #dropdownTabTop let-toggle="toggle">
+    <lnd-button
+        (click)="toggle()"
+        label="AHOJ"
+        type="light"
+    ></lnd-button>
+</ng-template>
+
 <header
     class="header"
     [class.header--public]="settings.isPublic"
@@ -58,6 +66,14 @@
                         class="user-holder"
                         *ngIf="!settings.isPublic">
                         <span class="icon icon--favourite-stroke text-color--secondary"></span>
+                        <lnd-dropdown
+                            [actionTemplate]="dropdownTabTop"
+                            [overlayEnabled]="true">
+                            <a *ngFor="let item of navigationConfigUserActions[0]"
+                               class="dropdown-item">
+                                {{ item | json }}
+                            </a>
+                        </lnd-dropdown>
                     </div>
                 </div>
             </div>

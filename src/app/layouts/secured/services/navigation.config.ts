@@ -4,7 +4,6 @@ import {
 } from 'src/app/app.constants';
 import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
 
-
 export const navigationConfigUser: INavigationConfig = [
     [
         {
@@ -27,7 +26,6 @@ export const navigationConfigUser: INavigationConfig = [
         },
     ],
 ];
-
 
 export const navigationConfigSupplier: INavigationConfig = [
     [],

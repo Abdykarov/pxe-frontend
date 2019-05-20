@@ -14,6 +14,9 @@ import {
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
+import { IDropdownItem } from '../dropdown/models/item.model';
+import { INavigationConfig } from '../navigation/models/navigation.model';
+import { navigationConfigUserActions } from 'src/app/layouts/secured/services/navigation.config';
 
 @Component({
     selector: 'lnd-header',
@@ -24,6 +27,8 @@ export class HeaderComponent {
     public isHeaderSticked: boolean;
     public signTypeNone = SignType.NONE;
     public loginTypeNone = LoginType.NONE;
+
+    public navigationConfigUserActions: INavigationConfig = navigationConfigUserActions;
 
     @Input() settings: ISettings;
 
