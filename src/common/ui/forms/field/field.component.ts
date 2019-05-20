@@ -108,9 +108,6 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     public label = '';
 
     @Input()
-    public lbl;
-
-    @Input()
     public name?: string;
 
     @Input()
