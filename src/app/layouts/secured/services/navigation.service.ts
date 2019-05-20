@@ -9,7 +9,6 @@ import {
     throwError,
 } from 'rxjs';
 
-// own models
 import { AuthService } from 'src/app/services/auth.service';
 import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
 import {

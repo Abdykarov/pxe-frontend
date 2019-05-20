@@ -1,6 +1,7 @@
 export interface ISettings {
     isPublic: boolean;
     isSimpleFooter: boolean;
+    isStatic: boolean;
     isSupplier?: boolean;
     loginType: LoginType;
     signUpType: SignType;

@@ -4,7 +4,6 @@ import {
 } from 'src/app/app.constants';
 import { INavigationMenu } from 'src/common/ui/navigation/models/navigation.model';
 
-
 export const navigationMenuUsers: INavigationMenu = [
     {
         'class': '',
@@ -29,7 +28,6 @@ export const navigationMenuUsers: INavigationMenu = [
     },
 ];
 
-
 export const navigationMenuSuppliers: INavigationMenu = [];
 
 export const navigationMenuUserActions: INavigationMenu = [
@@ -51,7 +49,7 @@ export const navigationMenuUserActions: INavigationMenu = [
     {
         'class': 'navigation-main__item--second navigation-main__item--logout',
         'label': 'Odhlášení',
-        'icon': 'flame',
+        'icon': 'power',
         'url' : `/${CONSTS.PATHS.LOGOUT}`,
         __typename: 'logout',
     },

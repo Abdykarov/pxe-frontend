@@ -50,7 +50,8 @@
                         <span class="icon icon--favourite-fill text-color--secondary"></span>
                     </div>
                     <div
-                        class="menu-holder">
+                        class="menu-holder"
+                        *ngIf="!settings.isPublic || settings.isStatic">
                         <a
                             class="menu-toggle"
                             [class.menu-toggle--open]="isMenuOpen"

@@ -174,7 +174,7 @@ export const staticNavigationConfig: INavigationConfig = [
         {
             'id': 'logout',
             'label': 'Odhlášení',
-            'icon': 'logout',
+            'icon': 'power',
             'class': 'navigation-main__item--second navigation-main__item--logout',
         },
     ],
