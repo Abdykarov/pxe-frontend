@@ -113,11 +113,6 @@ export class AuthService {
         return this.http.post<any>(`${environment.url}/parc-rest/webresources/sms/confirm`, code, httpOptions);
     }
 
-    isSupplier = () => {
-        const jwtPayload = this.currentUserValue;
-        return jwtPayload.role === IUserRoles.PARC_SUPPLIER_P4R;
-    }
-
     refreshToken = () => {
         // TODO refresh token logic
         return of(true);

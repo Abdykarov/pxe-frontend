@@ -24,7 +24,8 @@ import { NavigationService as NavigationApolloService } from 'src/common/graphql
 export class NavigationService {
 
     get = () => {
-        const config = this.authService.isSupplier() ? navigationConfigSupplier : navigationConfigUser ;
+        const currentUser = this.authService.currentUserValue;
+        const config = currentUser.supplier ? navigationConfigSupplier : navigationConfigUser ;
         return new Observable<INavigationConfig>((subscriber: Subscriber<INavigationConfig>) => subscriber.next(config));
     }
 
