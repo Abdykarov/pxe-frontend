@@ -3,6 +3,14 @@ export enum CommodityType {
     GAS = 'GAS',
 }
 
+export enum DistributionType {
+    ONE = 'ONE',
+    TWO = 'TWO',
+}
+
+export const SUBJECT_TYPE_INDIVIDUAL = '1';
+export const SUBJECT_TYPE_BUSINESSMAN = '2';
+
 export interface IAddress {
     street: string;
     orientationNumber: string;

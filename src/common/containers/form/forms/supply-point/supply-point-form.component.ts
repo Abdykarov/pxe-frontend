@@ -1,11 +1,4 @@
-import {
-    ChangeDetectorRef,
-    Component,
-    Input,
-    OnChanges,
-    OnInit,
-    SimpleChanges,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 import * as R from 'ramda';
@@ -13,16 +6,15 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import {
+    CODE_LIST_TYPE_DR_INDIVIDUAL,
     codeListTypes,
     commodityTypeFields,
     commodityTypeOptions,
+    distributionRatesTypeDefinition,
+    subjectTypeOptions,
 } from './supply-point-form.config';
-import { CommodityType } from 'src/common/graphql/models/supply.model';
-import {
-    convertArrayToObject,
-    transformCodeList,
-    transformSuppliers,
-} from 'src/common/utils';
+import { CommodityType, DistributionType } from 'src/common/graphql/models/supply.model';
+import { convertArrayToObject, transformCodeList, transformSuppliers } from 'src/common/utils';
 import { HelpModalComponent } from 'src/common/containers/modal/modals/help/help-modal.component';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { ModalLoaderService } from 'src/common/containers/modal/modal-loader.service';
@@ -35,10 +27,12 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class SupplyPointFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
     public commodityTypeOptions: Array<IOption> = commodityTypeOptions;
+    public subjectTypeOptions: Array<IOption> = subjectTypeOptions;
     public codeLists;
     public helpDocuments = {};
     public minDate: Date;
     public suppliers = [];
+    public distributionRateType: string = CODE_LIST_TYPE_DR_INDIVIDUAL;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -62,6 +56,26 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
                 this.resetFieldValue('supplierId');
             });
 
+        this.form.get('subjectType')
+            .valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(val => {
+                this.distributionRateType = val;
+                this.cd.markForCheck();
+            });
+
+        this.form.get('distributionRateId')
+            .valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(val => {
+                const fieldControl = this.form.get('annualConsumptionNT');
+                if (this.isTwoTariffs(val)) {
+                    fieldControl.enable();
+                } else {
+                    fieldControl.disable();
+                }
+            });
+
         this.form.get('supplierId')
             .valueChanges
             .pipe(takeUntil(this.destroy$))
@@ -75,6 +89,10 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
 
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
+    }
+
+    isTwoTariffs = (id: string) => {
+        return distributionRatesTypeDefinition[DistributionType.TWO].includes(id);
     }
 
     public setFormByCommodity = (commodityType: CommodityType) => {
