@@ -3,8 +3,7 @@ import { Validators } from '@angular/forms';
 import {
     CommodityType,
     DistributionType,
-    SUBJECT_TYPE_BUSINESSMAN,
-    SUBJECT_TYPE_INDIVIDUAL,
+    SubjectType,
 } from 'src/common/graphql/models/supply.model';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
@@ -20,7 +19,7 @@ export const formFields: IForm = {
             ],
         ],
         subjectType: [
-            SUBJECT_TYPE_INDIVIDUAL,
+            SubjectType.SUBJECT_TYPE_INDIVIDUAL,
             [
                 Validators.required,
             ],
@@ -172,25 +171,25 @@ export const formFields: IForm = {
     },
 };
 
-export const CODE_LIST_TYPE_DR_INDIVIDUAL = 'DSTSAZ';
-export const CODE_LIST_TYPE_DR_BOTH = 'DSTSAZ';
-export const CODE_LIST_TYPE_DR_BUSINESSMAN = 'DSTSAZ';
+export const CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL = 'DSTSA2';
+export const CODE_LIST_TYPE_DIST_RATE_BOTH = 'DSTSAZ';
+export const CODE_LIST_TYPE_DIST_RATE_BUSINESSMAN = 'DSTSA1';
 export const CODE_LIST_TYPE_CIRCUIT_BREAKER = 'JISTIC';
 
 export const codeListTypes = [
-    CODE_LIST_TYPE_DR_BOTH, // kompletní
-    CODE_LIST_TYPE_DR_BUSINESSMAN, // pro firmy
-    CODE_LIST_TYPE_DR_INDIVIDUAL, // pro domácnosti
+    CODE_LIST_TYPE_DIST_RATE_BOTH, // kompletní
+    CODE_LIST_TYPE_DIST_RATE_BUSINESSMAN, // pro firmy
+    CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL, // pro domácnosti
     CODE_LIST_TYPE_CIRCUIT_BREAKER,
 ];
 
 export const subjectTypeOptions: Array<IOption> = [
     {
-        key: SUBJECT_TYPE_INDIVIDUAL,
+        key: SubjectType.SUBJECT_TYPE_INDIVIDUAL,
         label: 'Domácnost',
     },
     {
-        key: SUBJECT_TYPE_BUSINESSMAN,
+        key: SubjectType.SUBJECT_TYPE_BUSINESSMAN,
         label: 'Firma',
     },
 ];
@@ -214,8 +213,8 @@ export const commodityTypeFields = {
 
 
 export const distributionRatesTypeDefinition = {
-    [DistributionType.ONE] : ['C01d', 'C02d', 'C03d', 'C62d', 'D01d', 'D02d'],
-    [DistributionType.TWO] : [
+    [DistributionType.VT] : ['C01d', 'C02d', 'C03d', 'C62d', 'D01d', 'D02d'],
+    [DistributionType.BOTH] : [
         'C25d', 'C26d', 'C27d', 'C35d', 'C45d', 'C46d', 'C55d', 'C56d', 'D25d', 'D26d', 'D27d', 'D35d', 'D45d',
         'D56d', 'D57d', 'D61d',
     ],

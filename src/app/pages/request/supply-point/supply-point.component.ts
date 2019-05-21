@@ -66,8 +66,6 @@ export class SupplyPointComponent extends AbstractComponent {
 
         const supplyPoint: ISupplyPoint = R.pick(['id', 'supplierId', 'name', 'address', 'expirationDate'], supplyPointFormData);
 
-        supplyPoint.subjectTypeId =  '1'; // INDIVIDUAL
-
         if (supplyPointFormData.commodityType === CommodityType.POWER) {
             const powerAttributes: ISupplyPointPowerAttributes =
                 R.pick([

@@ -4,12 +4,14 @@ export enum CommodityType {
 }
 
 export enum DistributionType {
-    ONE = 'ONE',
-    TWO = 'TWO',
+    VT = 'ONE',
+    BOTH = 'TWO',
 }
 
-export const SUBJECT_TYPE_INDIVIDUAL = '1';
-export const SUBJECT_TYPE_BUSINESSMAN = '2';
+export enum SubjectType {
+    SUBJECT_TYPE_INDIVIDUAL = '1',
+    SUBJECT_TYPE_BUSINESSMAN = '2',
+}
 
 export interface IAddress {
     street: string;

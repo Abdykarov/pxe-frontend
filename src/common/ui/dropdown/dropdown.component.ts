@@ -1,4 +1,5 @@
 import {
+    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,

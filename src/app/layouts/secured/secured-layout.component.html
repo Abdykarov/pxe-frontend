@@ -4,8 +4,11 @@
     [class.body-inner--overlay]="showOverlay || isMenuOpen"
     [class.body-inner--overlay-full]="showOverlay">
     <lnd-header
-        [settings]="settings"
+        [user]="currentUser"
+        [userMenu]="navigationMenuUserActions"
         [isMenuOpen]="isMenuOpen"
+        [resizeEvent$]="resizeEvent$"
+        [settings]="settings"
         (loginAction)="login()"
         (signUpAction)="signUp()"
         (homeRedirect)="homeRedirect()"

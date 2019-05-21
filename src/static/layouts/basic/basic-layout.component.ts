@@ -1,7 +1,6 @@
 import {
     ChangeDetectorRef,
     Component,
-    HostListener,
     OnInit,
 } from '@angular/core';
 import {
