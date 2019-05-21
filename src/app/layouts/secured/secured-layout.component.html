@@ -6,6 +6,11 @@
     <lnd-header
         [settings]="settings"
         [isMenuOpen]="isMenuOpen"
+        [showSignUp]="settings.signUpType !== signTypeNone"
+        [showLogin]="settings.loginType !== loginTypeNone"
+        (loginAction)="login()"
+        (signUpAction)="signUp()"
+        (homeRedirect)="homeRedirect()"
         (toggleMenu)="toggleMenuOpen()"
     ></lnd-header>
     <div class="container-fluid">

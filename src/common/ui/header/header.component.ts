@@ -22,12 +22,25 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 })
 export class HeaderComponent {
     public isHeaderSticked: boolean;
-    public signTypeNone = SignType.NONE;
-    public loginTypeNone = LoginType.NONE;
 
     @Input() settings: ISettings;
 
     @Input() isMenuOpen: boolean;
+
+    @Output()
+    public loginAction: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
+    public homeRedirect: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
+    public signUpAction: EventEmitter<any> = new EventEmitter<any>();
+
+    @Input()
+    public showSignUp = false;
+
+    @Input()
+    public showLogin = false;
 
     @Output()
     public toggleMenu: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -41,25 +54,6 @@ export class HeaderComponent {
                 this.isHeaderSticked = true;
         } else {
                 this.isHeaderSticked = false;
-        }
-    }
-
-    constructor(
-        private scrollToService: ScrollToService,
-        private router: Router,
-    ) {}
-
-    signUp() {
-        if (this.settings.signUpType === SignType.SCROLL) {
-            this.scrollToService.scrollToSubscription();
-        } else if (this.settings.signUpType === SignType.NAVIGATE) {
-            this.router.navigate([CONSTS.PATHS.SIGN_UP]);
-        }
-    }
-
-    login() {
-        if (this.settings.loginType === LoginType.NAVIGATE) {
-            this.router.navigate([CONSTS.PATHS.LOGIN]);
         }
     }
 }

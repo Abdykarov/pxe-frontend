@@ -1,9 +1,22 @@
 import {
+    ChangeDetectorRef,
     Component,
     HostListener,
+    OnInit,
 } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import {
+    NavigationEnd,
+    Router,
+} from '@angular/router';
 
+import {
+    debounceTime,
+    takeUntil,
+} from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
+
+import { AbstractComponent } from 'src/common/abstract.component';
+import { CONSTS } from 'src/app/app.constants';
 import {
     ISettings,
     LoginType,
@@ -14,7 +27,7 @@ import { staticNavigationConfig } from 'src/static/config/navigation.config';
 @Component({
     templateUrl: './basic-layout.component.html',
 })
-export class BasicLayoutComponent {
+export class BasicLayoutComponent extends AbstractComponent implements OnInit {
 
     public isMenuOpen = false;
     public itemOpened = null;
@@ -29,9 +42,17 @@ export class BasicLayoutComponent {
         signUpType: SignType.NONE,
     };
 
+    public resizeEvent$ = fromEvent(window, 'resize')
+        .pipe(
+            takeUntil(this.destroy$),
+            debounceTime(200),
+        );
+
     constructor (
+        private cd: ChangeDetectorRef,
         public router: Router,
     ) {
+        super();
         this.navigationConfig = staticNavigationConfig;
         router.events.subscribe((val) => {
             if (val instanceof NavigationEnd) {
@@ -40,19 +61,24 @@ export class BasicLayoutComponent {
         });
     }
 
-    toggleMenuOpen () {
-        this.isMenuOpen = !this.isMenuOpen;
+    ngOnInit() {
+        this.resizeEvent$.subscribe(() => {
+            if (this.isMenuOpen) {
+                this.toggleMenuOpen();
+            }
+        });
     }
 
-    toggleOpenItem (itemOpened) {
+    public toggleMenuOpen = () => {
+        this.isMenuOpen = !this.isMenuOpen;
+        this.cd.markForCheck();
+    }
+
+    public toggleOpenItem = (itemOpened) => {
         this.itemOpened = itemOpened;
     }
 
-    @HostListener('window:resize', ['$event'])
-    onResize(event) {
-        if (this.isMenuOpen) {
-            this.toggleMenuOpen();
-        }
+    public homeRedirect = () => {
+        this.router.navigate([CONSTS.PATHS.EMPTY]);
     }
-
 }
