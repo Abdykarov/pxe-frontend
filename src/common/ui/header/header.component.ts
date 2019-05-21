@@ -1,30 +1,52 @@
 import {
+    ChangeDetectorRef,
     Component,
     EventEmitter,
-    HostListener,
     Input,
+    OnInit,
     Output,
+    ViewChild,
 } from '@angular/core';
+
+import {
+    debounceTime,
+    takeUntil,
+} from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
+
+import { AbstractComponent } from 'src/common/abstract.component';
+import { DropdownComponent } from 'src/common/ui/dropdown/dropdown.component';
 import {
     ISettings,
     LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
+import { IJwtPayload } from 'src/app/services/model/auth.model';
+import { INavigationMenu } from 'src/common/ui/navigation/models/navigation.model';
 
 @Component({
     selector: 'lnd-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
-    public isHeaderSticked: boolean;
-
+export class HeaderComponent extends AbstractComponent implements OnInit {
     public signTypeNone = SignType.NONE;
     public loginTypeNone = LoginType.NONE;
 
-    @Input() settings: ISettings;
+    @ViewChild('userProfile')
+    public userProfile: DropdownComponent;
 
-    @Input() isMenuOpen: boolean;
+    @Input()
+    public user: IJwtPayload = null;
+
+    @Input()
+    public userMenu: INavigationMenu = [];
+
+    @Input()
+    public settings: ISettings;
+
+    @Input()
+    public isMenuOpen: boolean;
 
     @Output()
     public loginAction: EventEmitter<any> = new EventEmitter<any>();
@@ -38,16 +60,25 @@ export class HeaderComponent {
     @Output()
     public toggleMenu: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    @HostListener('window:scroll')
-    onWindowScroll() {
-        if (
-            window.pageYOffset ||
-            document.documentElement.scrollTop ||
-            document.body.scrollTop > 5) {
-                this.isHeaderSticked = true;
-        } else {
-                this.isHeaderSticked = false;
-        }
+    public resizeEvent$ = fromEvent(window, 'resize')
+        .pipe(
+            takeUntil(this.destroy$),
+            debounceTime(200),
+        );
+
+    constructor(
+        private cd: ChangeDetectorRef,
+    ) {
+        super();
+    }
+
+    ngOnInit () {
+        super.ngOnInit();
+        this.resizeEvent$.subscribe(() => {
+             if (this.userProfile && this.userProfile.isOpen) {
+                this.userProfile.toggle();
+                this.cd.markForCheck();
+            }
+        });
     }
 }
-
