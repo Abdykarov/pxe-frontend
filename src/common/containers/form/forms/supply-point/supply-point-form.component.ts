@@ -1,4 +1,9 @@
-import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    OnChanges,
+    OnInit,
+    SimpleChanges } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 import * as R from 'ramda';
@@ -13,8 +18,15 @@ import {
     distributionRatesTypeDefinition,
     subjectTypeOptions,
 } from './supply-point-form.config';
-import { CommodityType, DistributionType } from 'src/common/graphql/models/supply.model';
-import { convertArrayToObject, transformCodeList, transformSuppliers } from 'src/common/utils';
+import {
+    CommodityType,
+    DistributionType,
+} from 'src/common/graphql/models/supply.model';
+import {
+    convertArrayToObject,
+    transformCodeList,
+    transformSuppliers,
+} from 'src/common/utils';
 import { HelpModalComponent } from 'src/common/containers/modal/modals/help/help-modal.component';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { ModalLoaderService } from 'src/common/containers/modal/modal-loader.service';
