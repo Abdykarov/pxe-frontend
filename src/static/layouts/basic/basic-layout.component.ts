@@ -2,7 +2,10 @@ import {
     Component,
     HostListener,
 } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import {
+    NavigationEnd,
+    Router,
+} from '@angular/router';
 
 import {
     ISettings,
@@ -54,5 +57,4 @@ export class BasicLayoutComponent {
             this.toggleMenuOpen();
         }
     }
-
 }

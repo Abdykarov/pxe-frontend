@@ -55,7 +55,6 @@ export class HeaderComponent {
     }
 
     constructor(
-        private authService: AuthService,
         private scrollToService: ScrollToService,
         private router: Router,
     ) {}
