@@ -65,7 +65,12 @@ export class SupplyPointComponent extends AbstractComponent {
         let saveSupplyPoint;
 
         const supplyPoint: ISupplyPoint = R.pick([
-            'id', 'supplierId', 'name', 'address', 'expirationDate', 'subjectTypeId',
+            'id',
+            'supplierId',
+            'name',
+            'address',
+            'expirationDate',
+            'subjectTypeId',
         ], supplyPointFormData);
 
         if (supplyPointFormData.commodityType === CommodityType.POWER) {
