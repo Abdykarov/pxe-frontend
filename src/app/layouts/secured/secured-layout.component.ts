@@ -3,8 +3,8 @@ import {
     Router,
 } from '@angular/router';
 import {
+    ChangeDetectorRef,
     Component,
-    HostListener,
     OnInit,
 } from '@angular/core';
 
@@ -27,6 +27,7 @@ import { NavigationService as NavigationApolloService} from 'src/common/graphql/
 import { navigationMenuUserActions } from './services/navigation.config';
 import { NavigationService } from './services/navigation.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
     templateUrl: './secured-layout.component.html',
@@ -39,19 +40,23 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
     public navigationMenuUserActions: INavigationMenu = navigationMenuUserActions;
 
     constructor(
-        private authService: AuthService,
         protected apollo: Apollo,
+        protected authService: AuthService,
+        private cd: ChangeDetectorRef,
         private navigationApolloService: NavigationApolloService,
         private navigationService: NavigationService,
         protected overlayService: OverlayService,
         protected route: ActivatedRoute,
         protected router: Router,
+        protected scrollToService: ScrollToService,
     ) {
         super(
             apollo,
+            authService,
             overlayService,
             route,
             router,
+            scrollToService,
         );
 
         this.navigationService.getNavigationConfig();
@@ -69,6 +74,14 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
             });
     }
 
+    ngOnInit() {
+        this.resizeEvent$.subscribe(() => {
+            if (this.isMenuOpen) {
+                this.toggleMenuOpen();
+            }
+        });
+    }
+
     public toggleNavigationItem (navigationItem) {
         this.navigationApolloService.toggleNavigationItem(navigationItem)
             .pipe(
@@ -79,14 +92,8 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
             });
     }
 
-    toggleMenuOpen () {
+    public toggleMenuOpen = () => {
         this.isMenuOpen = !this.isMenuOpen;
-    }
-
-    @HostListener('window:resize', ['$event'])
-    onResize(event) {
-        if (this.isMenuOpen) {
-            this.toggleMenuOpen();
-        }
+        this.cd.markForCheck();
     }
 }

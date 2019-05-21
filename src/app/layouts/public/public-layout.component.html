@@ -5,7 +5,10 @@
         'body-inner--overlay' : showOverlay
     }">
     <lnd-header
-        [settings]="settings">
+        [settings]="settings"
+        (homeRedirect)="homeRedirect()"
+        (loginAction)="login()"
+        (signUpAction)="signUp()">
     </lnd-header>
     <main class="main">
         <router-outlet></router-outlet>

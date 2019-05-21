@@ -5,9 +5,7 @@ import {
     Input,
     Output,
 } from '@angular/core';
-import { Router } from '@angular/router';
 
-import { CONSTS } from 'src/app/app.constants';
 import {
     ISettings,
     LoginType,
@@ -15,7 +13,6 @@ import {
 } from 'src/app/layouts/models/router-data.model';
 import { IJwtPayload } from 'src/app/services/model/auth.model';
 import { INavigationMenu } from 'src/common/ui/navigation/models/navigation.model';
-import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
     selector: 'lnd-header',
@@ -33,9 +30,20 @@ export class HeaderComponent {
     @Input()
     public userMenu: INavigationMenu = [];
 
-    @Input() settings: ISettings;
+    @Input()
+    public settings: ISettings;
 
-    @Input() isMenuOpen: boolean;
+    @Input()
+    public isMenuOpen: boolean;
+
+    @Output()
+    public loginAction: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
+    public homeRedirect: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
+    public signUpAction: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
     public toggleMenu: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -50,28 +58,5 @@ export class HeaderComponent {
         } else {
                 this.isHeaderSticked = false;
         }
-    }
-
-    constructor(
-        private scrollToService: ScrollToService,
-        private router: Router,
-    ) {}
-
-    signUp() {
-        if (this.settings.signUpType === SignType.SCROLL) {
-            this.scrollToService.scrollToSubscription();
-        } else if (this.settings.signUpType === SignType.NAVIGATE) {
-            this.router.navigate([CONSTS.PATHS.SIGN_UP]);
-        }
-    }
-
-    login() {
-        if (this.settings.loginType === LoginType.NAVIGATE) {
-            this.router.navigate([CONSTS.PATHS.LOGIN]);
-        }
-    }
-
-    navigateTo(url: string) {
-        this.router.navigate([url]);
     }
 }

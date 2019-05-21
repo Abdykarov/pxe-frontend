@@ -5,6 +5,7 @@ import {
 } from '@angular/router';
 import { Component } from '@angular/core';
 
+import { CONSTS } from 'src/app/app.constants';
 import {
     ISettings,
     LoginType,
@@ -33,5 +34,9 @@ export class FullLayoutComponent {
                 this.settings = <ISettings>this.route.snapshot.firstChild.data;
             }
         });
+    }
+
+    public homeRedirect = () => {
+        this.router.navigate([CONSTS.PATHS.EMPTY]);
     }
 }
