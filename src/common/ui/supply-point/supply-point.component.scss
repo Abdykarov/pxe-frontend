@@ -23,44 +23,65 @@
 		overflow: hidden;
 
 		// Media queries
-		@include media-breakpoint-up(xl) {
-			background-color: $body-bg;
+		@include media-breakpoint-down(xl) {
+			pointer-events: none;
 		}
 	}
 
 	@include link-without-href-interactive {
-		background-color: $white;
 		color: inherit;
 		text-decoration: none;
-		box-shadow: 0 10px 20px rgba($box-shadow-color, .2);
+
+		// Media queries
+		@include media-breakpoint-up(xl) {
+			box-shadow: 0 10px 20px rgba($box-shadow-color, .2);
+		}
 
 		.supply-point__inner--price {
 			background-color: rgba($body-bg, .5);
 		}
 	}
 
-	&__inner {
-		height: 100%;
-		padding: ( $spacer * 1.5 ) $spacer;
-
-		// Media queries
-		@include media-breakpoint-up(md) {
-			padding: ( $spacer * 2.5 ) ( $spacer * 3 ) ( $spacer * 2.5 ) ( $spacer * 1.5 );
-		}
-
-		&--price {
-			background-color: rgba($body-bg, .5);
-
+	&.supply-point--not-select {
+		@include link-without-href-self {
 			// Media queries
 			@include media-breakpoint-up(xl) {
-				padding-left: ( $spacer * 3 );
+				background-color: $body-bg;
+			}
+		}
+
+		.supply-point__inner--price {
+			// Media queries
+			@include media-breakpoint-up(xl) {
 				background-color: rgba($white, .5);
 			}
 		}
 	}
 
+	&__inner {
+		height: 100%;
+		padding: ( $spacer * 1.5 ) $spacer ( $spacer / 2 );
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			padding: ( $spacer * 2.5 ) ( $spacer * 3 ) ( $spacer * 1.5 ) ( $spacer * 1.5 );
+		}
+
+		&--price {
+			padding-bottom: ( $spacer * 1.5 );
+			background-color: rgba($body-bg, .5);
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				padding-bottom: ( $spacer * 2.5 );
+			}
+			@include media-breakpoint-up(xl) {
+				padding-left: ( $spacer * 3 );
+			}
+		}
+	}
+
 	&__title,
-	&__value,
 	&__price {
 		font-size: $supply-point-label-font-size;
 		line-height: $supply-point-label-line-height;
@@ -94,7 +115,7 @@
 	&__value-box {
 		display: flex;
 		flex-direction: column;
-		margin-bottom: ( $spacer * .75 );
+		margin-bottom: $spacer;
 
 		// Media queries
 		@include media-breakpoint-up(md) {
@@ -104,6 +125,17 @@
 
 	&__value-name {
 		text-transform: uppercase;
+	}
+
+	&__value {
+		font-size: 1.125rem;
+		line-height: ( 26 / 18 );
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			font-size: $supply-point-label-font-size;
+			line-height: $supply-point-label-line-height;
+		}
 	}
 
 	&__price-label {
@@ -139,6 +171,10 @@
 		}
 		@include media-breakpoint-up(xl) {
 			display: none;
+		}
+
+		> :nth-child(n) {
+			pointer-events: auto;
 		}
 	}
 }
