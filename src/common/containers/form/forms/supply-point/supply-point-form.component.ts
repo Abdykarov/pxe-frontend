@@ -76,7 +76,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
                 this.setDefaultAnnualConsumption();
             });
 
-        this.form.get('subjectType')
+        this.form.get('subjectTypeId')
             .valueChanges
             .pipe(takeUntil(this.destroy$))
             .subscribe((val: string) => {

@@ -30,7 +30,7 @@ export const errorFieldMessages =  {
     commodityType: {
         required: 'Zvolte komoditu.',
     },
-    subjectType: {
+    subjectTypeId: {
         required: 'Zvolte odběratele.',
     },
     consent: {

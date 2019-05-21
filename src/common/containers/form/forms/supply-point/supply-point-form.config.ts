@@ -18,7 +18,7 @@ export const formFields: IForm = {
                 Validators.required,
             ],
         ],
-        subjectType: [
+        subjectTypeId: [
             SubjectType.SUBJECT_TYPE_INDIVIDUAL,
             [
                 Validators.required,
@@ -106,8 +106,8 @@ export const formFields: IForm = {
         commodityType: {
             required: errorFieldMessages.commodityType.required,
         },
-        subjectType: {
-            required: errorFieldMessages.subjectType.required,
+        subjectTypeId: {
+            required: errorFieldMessages.subjectTypeId.required,
         },
         supplierId: {
             required: errorFieldMessages.supplierId.required,

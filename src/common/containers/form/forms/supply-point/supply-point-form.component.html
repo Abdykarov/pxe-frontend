@@ -41,17 +41,17 @@
         [validationMessages]="formFields.validationMessages.commodityType"
     ></lnd-form-field>
     <lnd-form-field
-        [error]="formError.subjectType || form.controls.subjectType.errors"
-        [formControl]="form.controls.subjectType"
-        [id]="'subjectType'"
+        [error]="formError.subjectTypeId || form.controls.subjectTypeId.errors"
+        [formControl]="form.controls.subjectTypeId"
+        [id]="'subjectTypeId'"
         label="Odběratel"
         [type]="'RADIOGROUP'"
         [customFormGroupClass]="'mb-3'"
         [radioGroupItemClass]="'custom-control-inline'"
         [options]="subjectTypeOptions"
-        [success]="form.controls.subjectType.valid && (form.controls.subjectType.touched || formError.subjectType)"
-        [touched]="form.controls.subjectType.touched || formError.subjectType"
-        [validationMessages]="formFields.validationMessages.subjectType"
+        [success]="form.controls.subjectTypeId.valid && (form.controls.subjectTypeId.touched || formError.subjectTypeId)"
+        [touched]="form.controls.subjectTypeId.touched || formError.subjectTypeId"
+        [validationMessages]="formFields.validationMessages.subjectTypeId"
     ></lnd-form-field>
     <lnd-select
         [bindValue]="null"
