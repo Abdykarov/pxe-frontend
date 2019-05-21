@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { DropdownModule } from '../dropdown/dropdown.module';
 import { HeaderComponent } from './header.component';
-import { TypeaheadModule } from 'ngx-bootstrap';
 
 @NgModule({
     declarations: [
@@ -19,7 +18,6 @@ import { TypeaheadModule } from 'ngx-bootstrap';
         CommonModule,
         DropdownModule,
         RouterModule,
-        TypeaheadModule,
     ],
 })
 export class HeaderModule {}
