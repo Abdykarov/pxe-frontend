@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import {
+    Component,
+    HostListener,
+} from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
-import { staticNavigationConfig } from 'src/static/config/navigation.config';
 import {
     ISettings,
     LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
+import { staticNavigationConfig } from 'src/static/config/navigation.config';
 
 @Component({
     templateUrl: './basic-layout.component.html',
@@ -15,7 +18,9 @@ export class BasicLayoutComponent {
 
     public isMenuOpen = false;
     public itemOpened = null;
+
     public navigationConfig = [];
+
     public settings: ISettings = {
         isPublic: true,
         isSimpleFooter: true,
@@ -42,4 +47,12 @@ export class BasicLayoutComponent {
     toggleOpenItem (itemOpened) {
         this.itemOpened = itemOpened;
     }
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+        if (this.isMenuOpen) {
+            this.toggleMenuOpen();
+        }
+    }
+
 }
