@@ -1,9 +1,12 @@
 import {
+    ChangeDetectorRef,
     Component,
     EventEmitter,
     HostListener,
     Input,
+    OnInit,
     Output,
+    ViewChild,
 } from '@angular/core';
 
 import {
@@ -13,16 +16,22 @@ import {
 } from 'src/app/layouts/models/router-data.model';
 import { IJwtPayload } from 'src/app/services/model/auth.model';
 import { INavigationMenu } from 'src/common/ui/navigation/models/navigation.model';
+import { DropdownComponent } from '../dropdown/dropdown.component';
 
 @Component({
     selector: 'lnd-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
-    public isHeaderSticked: boolean;
+export class HeaderComponent implements OnInit {
     public signTypeNone = SignType.NONE;
     public loginTypeNone = LoginType.NONE;
+
+    @ViewChild('userProfile')
+    public userProfile: DropdownComponent;
+
+    @Input()
+    public resizeEvent$: any = new EventEmitter();
 
     @Input()
     public user: IJwtPayload = null;
@@ -48,15 +57,16 @@ export class HeaderComponent {
     @Output()
     public toggleMenu: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    @HostListener('window:scroll')
-    onWindowScroll() {
-        if (
-            window.pageYOffset ||
-            document.documentElement.scrollTop ||
-            document.body.scrollTop > 5) {
-                this.isHeaderSticked = true;
-        } else {
-                this.isHeaderSticked = false;
-        }
+    constructor(
+        private cd: ChangeDetectorRef,
+    ) {}
+
+    ngOnInit () {
+        this.resizeEvent$.subscribe(() => {
+            if (this.userProfile.isOpen) {
+                this.userProfile.toggle();
+                this.cd.markForCheck();
+            }
+        });
     }
 }
