@@ -5,16 +5,11 @@ import {
     Input,
     Output,
 } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { CONSTS } from 'src/app/app.constants';
 import {
     ISettings,
     LoginType,
-    LogoutType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
-import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
     selector: 'lnd-header',
@@ -23,13 +18,22 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 })
 export class HeaderComponent {
     public isHeaderSticked: boolean;
+
     public signTypeNone = SignType.NONE;
     public loginTypeNone = LoginType.NONE;
-    public logoutTypeNone = LogoutType.NONE;
 
     @Input() settings: ISettings;
 
     @Input() isMenuOpen: boolean;
+
+    @Output()
+    public loginAction: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
+    public homeRedirect: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
+    public signUpAction: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
     public toggleMenu: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -43,31 +47,6 @@ export class HeaderComponent {
                 this.isHeaderSticked = true;
         } else {
                 this.isHeaderSticked = false;
-        }
-    }
-
-    constructor(
-        private scrollToService: ScrollToService,
-        private router: Router,
-    ) {}
-
-    signUp() {
-        if (this.settings.signUpType === SignType.SCROLL) {
-            this.scrollToService.scrollToSubscription();
-        } else if (this.settings.signUpType === SignType.NAVIGATE) {
-            this.router.navigate([CONSTS.PATHS.SIGN_UP]);
-        }
-    }
-
-    login() {
-        if (this.settings.loginType === LoginType.NAVIGATE) {
-            this.router.navigate([CONSTS.PATHS.LOGIN]);
-        }
-    }
-
-    logout() {
-        if (this.settings.logoutType === LogoutType.NAVIGATE) {
-            this.router.navigate([CONSTS.PATHS.LOGOUT]);
         }
     }
 }
