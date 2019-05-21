@@ -1,8 +1,8 @@
 <ng-template #profileMenu let-toggle="toggle">
     <lnd-button
         (click)="toggle()"
-        [label]="currentUser.username"
-        type="light"
+        [label]="user.email"
+        type="primary"
     ></lnd-button>
 </ng-template>
 
@@ -68,7 +68,7 @@
                         *ngIf="!settings.isPublic">
                         <span class="icon icon--favourite-stroke text-color--secondary"></span>
                         <lnd-dropdown [actionTemplate]="profileMenu">
-                            <a *ngFor="let item of navigationMenuUserActions"
+                            <a *ngFor="let item of userMenu"
                                class="dropdown-item" (click)="navigateTo(item.url)">
                                 {{ item.label }}
                             </a>

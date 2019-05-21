@@ -3,12 +3,10 @@ import {
     EventEmitter,
     HostListener,
     Input,
-    OnInit,
     Output,
 } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from 'src/app/services/auth.service';
 import { CONSTS } from 'src/app/app.constants';
 import {
     ISettings,
@@ -30,10 +28,10 @@ export class HeaderComponent {
     public loginTypeNone = LoginType.NONE;
 
     @Input()
-    public currentUser: IJwtPayload = null;
+    public user: IJwtPayload = null;
 
     @Input()
-    public navigationMenuUserActions: INavigationMenu = [];
+    public userMenu: INavigationMenu = [];
 
     @Input() settings: ISettings;
 

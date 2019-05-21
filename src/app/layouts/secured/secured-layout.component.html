@@ -4,8 +4,8 @@
     [class.body-inner--overlay]="showOverlay || isMenuOpen"
     [class.body-inner--overlay-full]="showOverlay">
     <lnd-header
-        [currentUser]="currentUser"
-        [navigationMenuUserActions]="navigationMenuUserActions"
+        [user]="currentUser"
+        [userMenu]="navigationMenuUserActions"
         [isMenuOpen]="isMenuOpen"
         [settings]="settings"
         (toggleMenu)="toggleMenuOpen()"
