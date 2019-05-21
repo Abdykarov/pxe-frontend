@@ -2,7 +2,8 @@
     id="top"
     class="body-inner full-layout">
     <lnd-header
-        [settings]="settings">
+        [settings]="settings"
+        (homeRedirect)="homeRedirect()">
     </lnd-header>
     <main class="main">
         <router-outlet></router-outlet>
