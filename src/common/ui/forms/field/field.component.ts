@@ -63,7 +63,7 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     public appendText?: string;
 
     @Input()
-    public autocomplete?: string;
+    public autocomplete = 'off';
 
     @Output()
     public blur?: EventEmitter<any> = new EventEmitter();
@@ -177,7 +177,6 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
 
     ngAfterContentInit() {
         this.name = !!this.name ? this.name : this.id;
-        this.placeholder = !!this.placeholder ? this.placeholder : this.label;
         this.cd.markForCheck();
 
         if (!!this.defaultRadioGroupValue) {

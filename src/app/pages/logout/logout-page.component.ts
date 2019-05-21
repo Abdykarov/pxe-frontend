@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { Apollo } from 'apollo-angular';
 import { first } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
@@ -21,6 +22,7 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
     public visible = false;
 
     constructor(
+        private apollo: Apollo,
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private router: Router,
@@ -37,6 +39,7 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
+                    this.apollo.getClient().resetStore();
                     this.router.navigate([CONSTS.PATHS.EMPTY]);
                 },
                 error => {

@@ -22,7 +22,6 @@ const routes = [
                     isSupplier: false,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
-                    logoutType: LoginType.NAVIGATE,
                 },
             },
             {
@@ -34,7 +33,6 @@ const routes = [
                     isSupplier: false,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
-                    logoutType: LoginType.NAVIGATE,
                 },
             },
             {
@@ -46,7 +44,6 @@ const routes = [
                     isSupplier: false,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
-                    logoutType: LoginType.NAVIGATE,
                 },
             },
             {
@@ -58,7 +55,6 @@ const routes = [
                     isSupplier: true,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
-                    logoutType: LoginType.NAVIGATE,
                 },
             },
             {

@@ -75,10 +75,10 @@ export const staticNavigationConfig: INavigationConfig = [
                 //     'label': 'Tips',
                 //     'url': '/tips',
                 // },
-                // {
-                //     'label': 'Tooltip',
-                //     'url': '/tooltip',
-                // },
+                {
+                    'label': 'Tooltip',
+                    'url': '/basic/tooltip',
+                },
                 {
                     'label': 'Typography',
                     'url': '/basic/typography',
@@ -109,6 +109,10 @@ export const staticNavigationConfig: INavigationConfig = [
                 {
                     'label': 'Supply point',
                     'url': '/basic/supply-point',
+                },
+                {
+                    'label': 'Supply point offer',
+                    'url': '/basic/supply-point-offer',
                 },
             ],
         },
@@ -154,6 +158,24 @@ export const staticNavigationConfig: INavigationConfig = [
                 //     'url': '/error-404',
                 // },
             ],
+        },
+        {
+            'id': 'profile',
+            'label': 'Profil uživatele',
+            'icon': 'user',
+            'class': 'navigation-main__item--second',
+        },
+        {
+            'id': 'change-password',
+            'label': 'Změna hesla',
+            'icon': 'lock-close',
+            'class': 'navigation-main__item--second',
+        },
+        {
+            'id': 'logout',
+            'label': 'Odhlášení',
+            'icon': 'power',
+            'class': 'navigation-main__item--second navigation-main__item--logout',
         },
     ],
 ];

@@ -1,3 +1,11 @@
+<ng-template #profileMenu let-toggle="toggle">
+    <lnd-button
+        (click)="toggle()"
+        [label]="user.email"
+        type="primary"
+    ></lnd-button>
+</ng-template>
+
 <header
     class="header"
     [class.header--public]="settings.isPublic"
@@ -8,7 +16,7 @@
                 <div class="header-inner">
                     <div class="logo-holder">
                         <a
-                            [routerLink]="['/']"
+                            (click)="homeRedirect.emit()"
                             class="logo-link">
                             <img
                                 src="/assets/images/layout/logo-pxe.svg"
@@ -23,7 +31,7 @@
                         <lnd-button
                             label="Registrace"
                             type="primary"
-                            (click)="signUp()">
+                            (click)="signUpAction.emit()">
                         </lnd-button>
                     </div>
                     <div
@@ -32,31 +40,16 @@
                         <lnd-button
                             label="Přihlášení"
                             type="link"
-                            (click)="login()">
-                        </lnd-button>
-                    </div>
-                    <div
-                        class="registration-holder"
-                        *ngIf="settings.logoutType !== logoutTypeNone">
-                        <lnd-button
-                            label="Odhlásit se"
-                            type="primary"
-                            (click)="logout()">
-                            >
+                            (click)="loginAction.emit()">
                         </lnd-button>
                     </div>
 
                     <div
-                        class="notification-holder"
-                        *ngIf="!settings.isPublic">
-                        <span class="icon icon--favourite-fill text-color--secondary"></span>
-                    </div>
-                    <div
                         class="menu-holder"
-                        *ngIf="!settings.isPublic">
+                        *ngIf="!settings.isPublic || settings.isStatic">
                         <a
                             class="menu-toggle"
-                            [ngClass]="{ 'menu-toggle--open' : isMenuOpen }"
+                            [class.menu-toggle--open]="isMenuOpen"
                             (click)="toggleMenu.emit()">
                             <span class="menu-toggle__line"></span>
                             <span class="menu-toggle__line"></span>
@@ -69,6 +62,13 @@
                         class="user-holder"
                         *ngIf="!settings.isPublic">
                         <span class="icon icon--favourite-stroke text-color--secondary"></span>
+                        <lnd-dropdown #userProfile [actionTemplate]="profileMenu">
+                            <a *ngFor="let item of userMenu"
+                               class="dropdown-item"
+                               [routerLink]="item.url">
+                                {{ item.label }}
+                            </a>
+                        </lnd-dropdown>
                     </div>
                 </div>
             </div>

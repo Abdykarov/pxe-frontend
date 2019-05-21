@@ -73,12 +73,14 @@
 	width: $menu-width;
 	height: $menu-height;
 	position: relative;
+	margin-top: ( $menu-height - $logo-height-mobile );
+	margin-right: -$menu-toggle-line-center;
 	cursor: pointer;
 	overflow: hidden;
 
 	&__line {
 		position: absolute;
-		left: ( ( $menu-width - $menu-toggle-line-width ) / 2 );
+		left: $menu-toggle-line-center;
 		width: $menu-toggle-line-width;
 		height: $menu-toggle-line-height;
 		background-color: $primary;
@@ -100,9 +102,21 @@
 	}
 
 	&--open {
+		height: $logo-height-mobile;
+		margin-top: 0;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			height: $logo-height-tablet;
+		}
+
 		.menu-toggle__line {
+			top: 8px;
+			background-color: $font-text;
+
 			&:nth-child(1),
-			&:nth-child(4) {
+			&:nth-child(4),
+			& + .menu-toggle__label {
 				opacity: 0;
 			}
 

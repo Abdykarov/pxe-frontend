@@ -1,9 +1,9 @@
 export interface ISettings {
     isPublic: boolean;
     isSimpleFooter: boolean;
+    isStatic: boolean;
     isSupplier?: boolean;
     loginType: LoginType;
-    logoutType: LogoutType;
     signUpType: SignType;
 }
 
@@ -20,8 +20,3 @@ export enum LoginType {
     STATIC,
 }
 
-export enum LogoutType {
-    NONE,
-    NAVIGATE,
-    STATIC,
-}

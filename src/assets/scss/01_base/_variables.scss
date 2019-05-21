@@ -196,8 +196,10 @@ $logo-height-tablet:               41px;
 $menu-width:                       40px;
 $menu-height:                      50px;
 $menu-toggle-line-width:           24px;
+$menu-toggle-line-width-rotate:    20px;
 $menu-toggle-line-height:          4px;
 $menu-toggle-line-offset:          5px;
+$menu-toggle-line-center:          ( ( $menu-width - $menu-toggle-line-width ) / 2 );
 
 
 // Footer
@@ -208,7 +210,7 @@ $footer-height-tablet:             220px;
 // Sidebar
 $aside-bg:                         $body-bg;
 $aside-bg-secondary:               $gray-600;
-$aside-width-mobile:               270px;
+$aside-width-mobile:               260px;
 $aside-width-desktop:              calc( ( ( 100% / #{$grid-columns} ) * 2 ) - ( #{$spacer / 2} ) );
 $aside-line-width:                 50px;
 
@@ -323,15 +325,6 @@ $placeloader-circle-radius:         0;
 // Tips
 $tip-height-small:                  80px;
 $tip-min-height-big:                180px;
-
-
-// Tooltip
-$tooltip-beak-border-width:         15px;
-$tooltip-beak-border-style:         solid;
-$tooltip-beak-shadow:               -2px 2px 2px rgba($blue-500, .1);
-$tooltip-content-offset:            (( $spacer / 3 ) + ( $tooltip-beak-border-width - 3px ) );
-$tooltip-content-border-radius:     0;
-$tooltip-content-box-shadow:        0 0 4px rgba($blue-500, .22);
 
 
 // Landing page

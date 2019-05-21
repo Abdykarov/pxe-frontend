@@ -7,7 +7,8 @@ export const getConfig = gql`
                 navigationConfig {
                     label,
                     icon,
-                    url
+                    url,
+                    class,
                 }
                 navigationItemOpened{
                     label,

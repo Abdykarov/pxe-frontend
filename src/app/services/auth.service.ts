@@ -4,10 +4,15 @@ import {
     HttpHeaders,
 } from '@angular/common/http';
 
-import { of } from 'rxjs';
-import { map} from 'rxjs/operators';
+import {
+    BehaviorSubject,
+    Observable,
+    of,
+} from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { map } from 'rxjs/operators';
 
+import { CONSTS } from 'src/app/app.constants';
 import { CookiesService } from './cookies.service';
 import {
     IJwtPayload,
@@ -22,14 +27,24 @@ import { parseEmailFromUsername } from 'src/common/utils';
     providedIn: 'root',
 })
 export class AuthService {
-    private token: string;
     private cookieName = 'user';
-    private expiresTime = 3600;
+    private currentUserSubject$: BehaviorSubject<IJwtPayload>;
+    public currentUser$: Observable<IJwtPayload>;
+    private expiresTime = new Date().getTime() + (CONSTS.DEFAULT_EXPIRATION * 1000);
+    private token: string;
 
     constructor(
         private cookiesService: CookiesService,
         private http: HttpClient,
-    ) {}
+    ) {
+        const jwtPayload = this.getJwtPayload();
+        this.currentUserSubject$ = new BehaviorSubject<IJwtPayload>(jwtPayload);
+        this.currentUser$ = this.currentUserSubject$.asObservable();
+    }
+
+    public get currentUserValue(): IJwtPayload {
+        return this.currentUserSubject$.value;
+    }
 
     checkLogin = () => {
         if (this.cookiesService.has(this.cookieName)) {
@@ -48,14 +63,16 @@ export class AuthService {
             .pipe(
                 map(response => {
                     if (response && response.token) {
-                        if ( response.expiresTime ) {
-                            this.expiresTime = response.expiresTime;
+                        const jwtPayload = this.getJwtPayload(response.token);
+                        if (jwtPayload.exp) {
+                            this.expiresTime = jwtPayload.exp;
                         }
                         const user = {
                             token: response.token,
                         };
                         this.cookiesService.setObject(this.cookieName, user, this.expiresTime);
                         this.checkLogin();
+                        this.currentUserSubject$.next(jwtPayload);
                     }
                     return response;
                 }),
@@ -68,6 +85,7 @@ export class AuthService {
                 map(response => {
                     this.token = null;
                     this.cookiesService.remove(this.cookieName);
+                    this.currentUserSubject$.next(null);
                     return response;
                 }),
             );
@@ -95,11 +113,6 @@ export class AuthService {
         return this.http.post<any>(`${environment.url}/parc-rest/webresources/sms/confirm`, code, httpOptions);
     }
 
-    isSupplier = () => {
-        const jwtPayload = this.parseJwt();
-        return jwtPayload.role === IUserRoles.PARC_SUPPLIER_P4R;
-    }
-
     refreshToken = () => {
         // TODO refresh token logic
         return of(true);
@@ -107,15 +120,24 @@ export class AuthService {
 
     getToken = (): string => this.token;
 
-    getUserEmail = () => {
-        const jwtPayload = this.parseJwt();
-        const { username } = jwtPayload;
-        return parseEmailFromUsername(username);
-    }
+    private getJwtPayload = (token: string = null): IJwtPayload => {
+        this.checkLogin();
+        let jwtPayload: IJwtPayload = null;
+        if (this.isLogged() || token) {
+            token = token || this.token;
+            try {
+                const jwtHelper = new JwtHelperService();
+                jwtPayload = jwtHelper.decodeToken(token);
+                const { username, role } = jwtPayload;
+                jwtPayload.email = parseEmailFromUsername(username);
+                jwtPayload.supplier = role === IUserRoles.PARC_SUPPLIER_P4R;
+            } catch (e) {
+                this.token = null;
+                this.cookiesService.remove(this.cookieName);
+            }
 
-    parseJwt = (): IJwtPayload => {
-        const jwtHelper = new JwtHelperService();
-        return jwtHelper.decodeToken(this.token);
+        }
+        return jwtPayload;
     }
 }
 

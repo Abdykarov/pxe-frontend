@@ -5,7 +5,6 @@ import { CONSTS } from 'src/app/app.constants';
 import { PublicLayoutComponent } from './public-layout.component';
 import {
     LoginType,
-    LogoutType,
     SignType,
 } from '../models/router-data.model';
 
@@ -21,7 +20,6 @@ const routes = [
                     isPublic: true,
                     isSimpleFooter: true,
                     loginType: LoginType.NONE,
-                    logoutType: LogoutType.NONE,
                     signUpType: SignType.SCROLL,
                 },
             },
@@ -32,7 +30,6 @@ const routes = [
                     isPublic: true,
                     isSimpleFooter: false,
                     loginType: LoginType.NONE,
-                    logoutType: LogoutType.NONE,
                     signUpType: SignType.SCROLL,
                 },
             },
@@ -42,7 +39,6 @@ const routes = [
                 data: {
                     isPublic: true,
                     loginType: LoginType.NONE,
-                    logoutType: LogoutType.NONE,
                     signUpType: SignType.NAVIGATE,
                 },
             },
@@ -53,7 +49,6 @@ const routes = [
                     isPublic: true,
                     isSimpleFooter: true,
                     loginType: LoginType.NONE,
-                    logoutType: LogoutType.NONE,
                     signUpType: SignType.NONE,
                 },
             },
@@ -64,7 +59,6 @@ const routes = [
                     isPublic: true,
                     isSimpleFooter: false,
                     loginType: LoginType.NONE,
-                    logoutType: LogoutType.NONE,
                     signUpType: SignType.SCROLL,
                 },
             },
@@ -75,7 +69,6 @@ const routes = [
                     isPublic: true,
                     isSimpleFooter: false,
                     loginType: LoginType.NONE,
-                    logoutType: LogoutType.NONE,
                     signUpType: SignType.SCROLL,
                 },
             },
@@ -85,7 +78,6 @@ const routes = [
                 data: {
                     isPublic: true,
                     loginType: LoginType.NAVIGATE,
-                    logoutType: LogoutType.NONE,
                     signUpType: SignType.NONE,
                 },
             },

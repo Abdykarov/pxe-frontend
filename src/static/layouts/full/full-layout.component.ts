@@ -5,10 +5,10 @@ import {
 } from '@angular/router';
 import { Component } from '@angular/core';
 
+import { CONSTS } from 'src/app/app.constants';
 import {
     ISettings,
     LoginType,
-    LogoutType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 
@@ -20,9 +20,9 @@ export class FullLayoutComponent {
         isPublic: true,
         isSimpleFooter: true,
         isSupplier: false,
+        isStatic: true,
         signUpType: SignType.STATIC,
         loginType: LoginType.NONE,
-        logoutType: LogoutType.NONE,
     };
 
     constructor(
@@ -34,5 +34,9 @@ export class FullLayoutComponent {
                 this.settings = <ISettings>this.route.snapshot.firstChild.data;
             }
         });
+    }
+
+    public homeRedirect = () => {
+        this.router.navigate([CONSTS.PATHS.EMPTY]);
     }
 }

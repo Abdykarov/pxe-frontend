@@ -8,7 +8,9 @@ import {
     AlertsPageModule,
     alertsPageRoutes,
 } from 'src/static/atoms/alerts/page.module';
-import { BasicLayoutComponent } from './basic-layout.component';
+import {
+    BasicLayoutComponent
+} from './basic-layout.component';
 import {
     BreadcrumbPageModule,
     breadcrumbPageRoutes,
@@ -58,6 +60,10 @@ import {
     samplePointsBannerPageRoutes,
 } from 'src/static/pages/sample-points-banner/page.module';
 import {
+    SupplyPointOfferPageModule,
+    supplyPointOfferPageRoutes,
+} from 'src/static/organisms/supply-point-offer/page.module';
+import {
     SupplyPointPageModule,
     supplyPointPageRoutes,
 } from 'src/static/organisms/supply-point/page.module';
@@ -65,6 +71,10 @@ import {
     TablesPageModule,
     tablesPageRoutes,
 } from 'src/static/atoms/tables/page.module';
+import {
+    TooltipPageModule,
+    tooltipPageRoutes,
+} from 'src/static/atoms/tooltip/page.module';
 import {
     TypographyPageModule,
     typographyPageRoutes,
@@ -88,8 +98,10 @@ const routes: Routes = [
             ...progressBarPageRoutes,
             ...samplePointsPageRoutes,
             ...samplePointsBannerPageRoutes,
+            ...supplyPointOfferPageRoutes,
             ...supplyPointPageRoutes,
             ...tablesPageRoutes,
+            ...tooltipPageRoutes,
             ...typographyPageRoutes,
             {
                 path: '**',
@@ -115,8 +127,10 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SamplePointsPageModule,
         SamplePointsBannerPageModule,
+        SupplyPointOfferPageModule,
         SupplyPointPageModule,
         TablesPageModule,
+        TooltipPageModule,
         TypographyPageModule,
     ],
     exports: [
