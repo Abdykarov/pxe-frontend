@@ -1,3 +1,11 @@
+<ng-template #profileMenu let-toggle="toggle">
+    <lnd-button
+        (click)="toggle()"
+        [label]="user.email"
+        type="primary"
+    ></lnd-button>
+</ng-template>
+
 <header
     class="header"
     [class.header--public]="settings.isPublic"
@@ -49,6 +57,18 @@
                             <span class="menu-toggle__line"></span>
                             <span class="menu-toggle__label">Menu</span>
                         </a>
+                    </div>
+                    <div
+                        class="user-holder"
+                        *ngIf="!settings.isPublic">
+                        <span class="icon icon--favourite-stroke text-color--secondary"></span>
+                        <lnd-dropdown #userProfile [actionTemplate]="profileMenu">
+                            <a *ngFor="let item of userMenu"
+                               class="dropdown-item"
+                               [routerLink]="item.url">
+                                {{ item.label }}
+                            </a>
+                        </lnd-dropdown>
                     </div>
                 </div>
             </div>
