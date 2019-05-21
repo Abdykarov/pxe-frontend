@@ -3,21 +3,13 @@ import {
     EventEmitter,
     HostListener,
     Input,
-    OnInit,
     Output,
 } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { AuthService } from 'src/app/services/auth.service';
-import { CONSTS } from 'src/app/app.constants';
 import {
     ISettings,
     LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
-import { IJwtPayload } from 'src/app/services/model/auth.model';
-import { INavigationMenu } from 'src/common/ui/navigation/models/navigation.model';
-import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
     selector: 'lnd-header',
@@ -26,18 +18,22 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 })
 export class HeaderComponent {
     public isHeaderSticked: boolean;
+
     public signTypeNone = SignType.NONE;
     public loginTypeNone = LoginType.NONE;
-
-    @Input()
-    public currentUser: IJwtPayload = null;
-
-    @Input()
-    public navigationMenuUserActions: INavigationMenu = [];
 
     @Input() settings: ISettings;
 
     @Input() isMenuOpen: boolean;
+
+    @Output()
+    public loginAction: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
+    public homeRedirect: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
+    public signUpAction: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
     public toggleMenu: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -53,27 +49,5 @@ export class HeaderComponent {
                 this.isHeaderSticked = false;
         }
     }
-
-    constructor(
-        private scrollToService: ScrollToService,
-        private router: Router,
-    ) {}
-
-    signUp() {
-        if (this.settings.signUpType === SignType.SCROLL) {
-            this.scrollToService.scrollToSubscription();
-        } else if (this.settings.signUpType === SignType.NAVIGATE) {
-            this.router.navigate([CONSTS.PATHS.SIGN_UP]);
-        }
-    }
-
-    login() {
-        if (this.settings.loginType === LoginType.NAVIGATE) {
-            this.router.navigate([CONSTS.PATHS.LOGIN]);
-        }
-    }
-
-    navigateTo(url: string) {
-        this.router.navigate([url]);
-    }
 }
+

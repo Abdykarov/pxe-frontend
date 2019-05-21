@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 import { catchError } from 'rxjs/operators';
 import {
@@ -28,8 +29,7 @@ export class NavigationService {
         const navigationMenuUser = currentUser.supplier ? navigationMenuSuppliers : navigationMenuUsers ;
 
         return new Observable<INavigationConfig>((subscriber: Subscriber<INavigationConfig>) => subscriber.next([
-            navigationMenuUser,
-            navigationMenuUserActions,
+            R.concat(navigationMenuUser, navigationMenuUserActions),
         ]));
     }
 

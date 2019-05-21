@@ -3,8 +3,8 @@ import {
     Router,
 } from '@angular/router';
 import {
+    ChangeDetectorRef,
     Component,
-    HostListener,
     OnInit,
 } from '@angular/core';
 
@@ -17,16 +17,12 @@ import {
 
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { AuthService } from 'src/app/services/auth.service';
-import {
-    INavigationConfig,
-    INavigationMenu,
-} from 'src/common/ui/navigation/models/navigation.model';
+import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
 import { IStoreUi } from 'src/common/graphql/models/store.model';
-import { NavigationService as NavigationApolloService} from 'src/common/graphql/services/navigation.service';
-import { navigationMenuUserActions } from './services/navigation.config';
-import { NavigationService } from './services/navigation.service';
-import { IJwtPayload } from 'src/app/services/model/auth.model';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { NavigationService as NavigationApolloService} from 'src/common/graphql/services/navigation.service';
+import { NavigationService } from './services/navigation.service';
+import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
     templateUrl: './secured-layout.component.html',
@@ -34,27 +30,26 @@ import { OverlayService } from 'src/common/graphql/services/overlay.service';
 export class SecuredLayoutComponent extends AbstractLayoutComponent implements OnInit {
     public isMenuOpen = false;
     public itemOpened = null;
-
     public navConfig: INavigationConfig = [];
 
-    public currentUser: IJwtPayload = this.authService.currentUserValue;
-
-    public navigationMenuUserActions: INavigationMenu = navigationMenuUserActions;
-
     constructor(
-        private authService: AuthService,
         protected apollo: Apollo,
+        protected authService: AuthService,
+        private cd: ChangeDetectorRef,
         private navigationApolloService: NavigationApolloService,
         private navigationService: NavigationService,
         protected overlayService: OverlayService,
         protected route: ActivatedRoute,
         protected router: Router,
+        protected scrollToService: ScrollToService,
     ) {
         super(
             apollo,
+            authService,
             overlayService,
             route,
             router,
+            scrollToService,
         );
 
         this.navigationService.getNavigationConfig();
@@ -72,6 +67,14 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
             });
     }
 
+    ngOnInit() {
+        this.resizeEvent$.subscribe(() => {
+            if (this.isMenuOpen) {
+                this.toggleMenuOpen();
+            }
+        });
+    }
+
     public toggleNavigationItem (navigationItem) {
         this.navigationApolloService.toggleNavigationItem(navigationItem)
             .pipe(
@@ -82,14 +85,8 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
             });
     }
 
-    toggleMenuOpen () {
+    public toggleMenuOpen = () => {
         this.isMenuOpen = !this.isMenuOpen;
-    }
-
-    @HostListener('window:resize', ['$event'])
-    onResize(event) {
-        if (this.isMenuOpen) {
-            this.toggleMenuOpen();
-        }
+        this.cd.markForCheck();
     }
 }
