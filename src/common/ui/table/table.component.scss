@@ -16,8 +16,9 @@
 .table-wrapper {
 	&--advanced {
 		overflow-x: scroll;
-		width: 100%;
-		padding-bottom: $spacer;
+		width: calc( 100% + ( #{$spacer} * 2 ) );
+		margin: 0 ( $spacer * ( -1 ) );
+		padding: 0 $spacer $spacer;
 	}
 }
 
@@ -65,13 +66,40 @@
 		> thead {
 			border-bottom-width: 0;
 
-			th {
+			th,
+			td {
 				opacity: .5;
 				font-weight: 400;
 				background-color: transparent;
+				padding: $table-adv-cell-padding-hor $table-adv-cell-padding-vert;
+
+				&:first-child {
+					padding-left: ( $spacer * 1.5 );
+				}
+
+				&:last-child {
+					padding-right: ( $spacer * 1.5 );
+				}
 			}
 		}
 
+		> tbody {
+			th,
+			td {
+				padding: $table-adv-cell-padding-hor $table-adv-cell-padding-vert;
+				vertical-align: middle;
+
+				&:first-child {
+					padding-left: ( $spacer * 1.5 );
+				}
+
+				&:last-child {
+					padding-right: ( $spacer * 1.5 );
+				}
+			}
+		}
+
+		/*
 		tbody.tbody--mobile {
 			> tr {
 				> th,
@@ -100,8 +128,10 @@
 				border-top: 1px solid $table-border-color;
 			}
 		}
+		*/
 	}
 
+	/*
 	&--sides-aligned {
 		thead > tr,
 		.table__tr--main {
@@ -136,7 +166,7 @@
 		}
 	}
 
-	&__tbody--advance:nth-child(n+2) {
+	&__tbody--advanced:nth-child(n+2) {
 		> .table__tr--main {
 			> th,
 			> td {
@@ -144,6 +174,7 @@
 			}
 		}
 	}
+	*/
 
 	&__tr--main {
 		cursor: pointer;
@@ -152,14 +183,9 @@
 			background-color: $table-hover-bg;
 		}
 
-		> th,
-		> td {
-			border-top: 1px solid $table-border-color;
-			vertical-align: middle;
-		}
-
 		.icon--collapse {
 			display: inline-block;
+			transform: rotate(180deg);
 		}
 	}
 
@@ -176,10 +202,28 @@
 	}
 
 	&__tr--active {
-		background-color: $table-hover-bg;
+		box-shadow: $table-active-shadow;
+
+		&,
+		&:hover {
+			background-color: $table-active-bg;
+		}
 
 		.icon--collapse {
-			transform: rotate(180deg);
+			transform: rotate(0deg);
+		}
+
+		& > th,
+		& > td {
+			&:first-child {
+				border-top-left-radius: $border-radius;
+				border-bottom-left-radius: $border-radius;
+			}
+
+			&:last-child {
+				border-top-right-radius: $border-radius;
+				border-bottom-right-radius: $border-radius;
+			}
 		}
 	}
 

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import {
     tableCols,
-    tableColsSnd,
     tableRows,
 } from './config';
 
@@ -13,12 +12,10 @@ import {
 export class AdvancedTablesPageComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
     public tableCols;
-    public tableColsSnd;
     public tableRows;
 
     constructor() {
         this.tableCols = tableCols;
-        this.tableColsSnd = tableColsSnd;
         this.tableRows = tableRows;
 
         this.breadcrumbItemsSimple = [

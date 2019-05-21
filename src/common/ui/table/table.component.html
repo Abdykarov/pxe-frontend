@@ -16,7 +16,6 @@
         *ngIf="showHead"
         [ngClass]="desktopLayoutClasses">
         <tr>
-            <th *ngIf="rowDetailTemplate"></th>
             <ng-container *ngFor="let column of cols">
                 <th
                     *ngFor="let view of column.views"
@@ -36,9 +35,6 @@
                 [class.table__tr--main]="isAdvanced"
                 [class.table__tr--active]="isAdvanced && openedRow === row"
                 (click)="openRow(row); selectRow(row)">
-                <td *ngIf="rowDetailTemplate">
-                    <span class="icon icon--small icon--collapse icon--arrow-minimal-down"></span>
-                </td>
                 <ng-container *ngFor="let column of cols">
                     <ng-container *ngFor="let view of column.views">
                         <td
@@ -62,7 +58,6 @@
             <tr
                 *ngIf="rowDetailTemplate && openedRow === row"
                 class="table__tr--detail table__tr--show">
-                    <td></td>
                     <td [attr.colspan]="cols.length + (actionColTemplate ? 1 : 0)">
                         <ng-container *ngTemplateOutlet="rowDetailTemplate; context: {row: row}"></ng-container>
                     </td>

@@ -12,18 +12,6 @@
             variant="dots"
         ></lnd-button>
     </ng-template>
-    <lnd-dropdown
-        [actionTemplate]="dropdown"
-        [hasBeak]="true"
-        menuDirection="right"
-        (toggleOverlayerAction)="toggleOverlayer();"
-        [overlayEnabled]="true">
-        <a
-            class="dropdown-item"
-            href="#">
-            Potvrzení o platbě (PDF)
-        </a>
-    </lnd-dropdown>
 </ng-template>
 
 <div class="row static-pages-holder">
@@ -46,7 +34,6 @@
             [mobileDetailCaption]="'Show more...'"
             [rowDetailTemplate]="rowDetail"
             [actionColTemplate]="actionCol"
-            [actionColClass]="['pr-0']"
         ></lnd-table>
     </div>
 </div>
