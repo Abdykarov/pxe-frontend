@@ -25,9 +25,6 @@ export class FullLayoutComponent {
         loginType: LoginType.NONE,
     };
 
-    public signTypeNone = SignType.NONE;
-    public loginTypeNone = LoginType.NONE;
-
     constructor(
         protected route: ActivatedRoute,
         protected router: Router,

@@ -6,8 +6,6 @@
     }">
     <lnd-header
         [settings]="settings"
-        [showSignUp]="settings.signUpType !== signTypeNone"
-        [showLogin]="settings.loginType !== loginTypeNone"
         (homeRedirect)="homeRedirect()"
         (loginAction)="login()"
         (signUpAction)="signUp()">

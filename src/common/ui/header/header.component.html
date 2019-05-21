@@ -19,7 +19,7 @@
                     </div>
                     <div
                         class="registration-holder"
-                        *ngIf="showSignUp">
+                        *ngIf="settings.signUpType !== signTypeNone">
                         <lnd-button
                             label="Registrace"
                             type="primary"
@@ -28,7 +28,7 @@
                     </div>
                     <div
                         class="registration-holder"
-                        *ngIf="showLogin">
+                        *ngIf="settings.loginType !== loginTypeNone">
                         <lnd-button
                             label="Přihlášení"
                             type="link"

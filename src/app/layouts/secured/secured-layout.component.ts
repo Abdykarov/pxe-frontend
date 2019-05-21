@@ -19,10 +19,6 @@ import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.compone
 import { AuthService } from 'src/app/services/auth.service';
 import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
 import { IStoreUi } from 'src/common/graphql/models/store.model';
-import {
-    LoginType,
-    SignType,
-} from '../models/router-data.model';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { NavigationService as NavigationApolloService} from 'src/common/graphql/services/navigation.service';
 import { NavigationService } from './services/navigation.service';
@@ -35,8 +31,6 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
     public isMenuOpen = false;
     public itemOpened = null;
     public navConfig: INavigationConfig = [];
-    public signTypeNone = SignType.NONE;
-    public loginTypeNone = LoginType.NONE;
 
     constructor(
         protected apollo: Apollo,

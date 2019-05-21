@@ -5,15 +5,11 @@ import {
     Input,
     Output,
 } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { CONSTS } from 'src/app/app.constants';
 import {
     ISettings,
     LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
-import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
     selector: 'lnd-header',
@@ -22,6 +18,9 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 })
 export class HeaderComponent {
     public isHeaderSticked: boolean;
+
+    public signTypeNone = SignType.NONE;
+    public loginTypeNone = LoginType.NONE;
 
     @Input() settings: ISettings;
 

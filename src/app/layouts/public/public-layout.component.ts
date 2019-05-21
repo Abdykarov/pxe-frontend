@@ -13,10 +13,6 @@ import {
 
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { AuthService } from 'src/app/services/auth.service';
-import {
-    LoginType,
-    SignType,
-} from '../models/router-data.model';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
@@ -25,10 +21,6 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
     styleUrls: ['./public-layout.component.scss'],
 })
 export class PublicLayoutComponent extends AbstractLayoutComponent {
-
-    public signTypeNone = SignType.NONE;
-    public loginTypeNone = LoginType.NONE;
-
     constructor(
         protected apollo: Apollo,
         protected authService: AuthService,
