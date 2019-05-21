@@ -62,7 +62,7 @@
                         class="user-holder"
                         *ngIf="!settings.isPublic">
                         <span class="icon icon--favourite-stroke text-color--secondary"></span>
-                        <lnd-dropdown [actionTemplate]="profileMenu">
+                        <lnd-dropdown #userProfile [actionTemplate]="profileMenu">
                             <a *ngFor="let item of userMenu"
                                class="dropdown-item"
                                [routerLink]="item.url">
