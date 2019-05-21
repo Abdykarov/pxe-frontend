@@ -32,7 +32,8 @@
             <tr
                 [class.table__tr--main]="isAdvanced"
                 [class.table__tr--active]="isAdvanced && openedRow === row"
-                (click)="openRow(row); selectRow(row)">
+                click="openRow(row); selectRow(row)"
+            >
                 <td *ngIf="rowDetailTemplate">
                     <span class="icon icon--small icon--collapse icon--arrow-minimal-down"></span>
                 </td>
@@ -46,14 +47,14 @@
                         <td
                             *ngIf="view.contentTemplateName"
                             [ngClass]="!!view.cellClass ? view.cellClass : ''">
-                            <ng-container *ngTemplateOutlet="columnTemplates[view.contentTemplateName]; context: {row: row}"></ng-container>
+                            <ng-container *ngTemplateOutlet="columnTemplates[view.contentTemplateName]; context: {row: row, openRow: this.openRow, selectRow: this.selectRow}"></ng-container>
                         </td>
                     </ng-container>
                 </ng-container>
                 <td
                     *ngIf="actionColTemplate"
                     [ngClass]="actionColClass">
-                    <ng-container *ngTemplateOutlet="actionColTemplate; context: {row: row}"></ng-container>
+                    <ng-container *ngTemplateOutlet="actionColTemplate; context: {row: row, openRow: this.openRow, selectRow: this.selectRow}"></ng-container>
                 </td>
             </tr>
             <tr
@@ -61,7 +62,7 @@
                 class="table__tr--detail table__tr--show">
                     <td></td>
                     <td [attr.colspan]="cols.length + (actionColTemplate ? 1 : 0)">
-                        <ng-container *ngTemplateOutlet="rowDetailTemplate; context: {row: row}"></ng-container>
+                        <ng-container *ngTemplateOutlet="rowDetailTemplate; context: {row: row, openRow: this.openRow, selectRow: this.selectRow}"></ng-container>
                     </td>
             </tr>
         </ng-container>
@@ -83,7 +84,7 @@
                         [innerHtml]="view.content(row)">
                     </td>
                     <td *ngIf="view.contentTemplateName">
-                        <ng-container *ngTemplateOutlet="columnTemplates[view.contentTemplateName]; context: {row: row}"></ng-container>
+                        <ng-container *ngTemplateOutlet="columnTemplates[view.contentTemplateName]; context: {row: row, openRow: this.openRow, selectRow: this.selectRow}"></ng-container>
                     </td>
                 </tr>
             </ng-container>

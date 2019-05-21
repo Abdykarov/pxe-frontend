@@ -1,6 +1,52 @@
 <div class="container-fluid">
-  <div class="container-content">
-    <pxe-layout-container pageTitle="Přehled nabídek">
-    </pxe-layout-container>
-  </div>
+    <div class="container-content">
+        <pxe-layout-container pageTitle="Přehled nabídek">
+
+
+            <ng-template #rowDetail let-row="row">
+                {{row | json}}
+            </ng-template>
+            <ng-template #actionCol let-row="row" let-openRow="openRow" let-selectRow="selectRow">
+                <!--        <lnd-button-->
+                <!--          label="E"-->
+                <!--          (action)="edit(row); openRow(row); selectRow(row)"-->
+                <!--        ></lnd-button>-->
+                <lnd-button
+                        label="E"
+                        type="primary"
+                        (action)="edit(table, row)"
+                ></lnd-button>
+                <lnd-button
+                        label="C"
+                        type="primary"
+                        (action)="create(table, row)"
+                ></lnd-button>
+            </ng-template>
+
+
+            <div class="static-pages">
+                <h3>Default</h3>
+                <h4 class="d-block d-sm-none">XS view</h4>
+                <h4 class="d-none d-sm-block d-md-none">SM view</h4>
+                <h4 class="d-none d-md-block d-xl-none">MD, LG view</h4>
+                <h4 class="d-none d-xl-block">XL view</h4>
+                <lnd-table
+                    #table
+                    [cols]="tableCols.main"
+                    [rows]="tableRows.main"
+                    [showHead]="true"
+                    [isStatic]="false"
+                    [tableClass]="['table--advanced', 'mb-0']"
+                    [mobileDetailCaption]="'Show more...'"
+                    [rowDetailTemplate]="rowDetail"
+                    [actionColTemplate]="actionCol"
+                    [actionColClass]="['pr-0']"
+                    (rowOpened)="rowOpened($event)"
+                    (rowSelected)="rowSelected($event)"
+                ></lnd-table>
+            </div>
+
+
+        </pxe-layout-container>
+    </div>
 </div>

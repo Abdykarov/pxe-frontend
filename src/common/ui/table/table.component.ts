@@ -99,6 +99,7 @@ export class TableComponent extends AbstractComponent implements OnChanges {
     }
 
     openRow (row) {
+        console.log('%c ***** T openRow *****', 'background: #bada55; color: #000; font-weight: bold', this.rowDetailTemplate, !this.isStatic, row);
         if ( this.rowDetailTemplate && !this.isStatic ) {
             this.openedRow = ( this.openedRow === row ) ? null : row;
             this.rowOpened.emit(this.openedRow);
@@ -106,6 +107,7 @@ export class TableComponent extends AbstractComponent implements OnChanges {
     }
 
     selectRow (row) {
+        console.log('%c ***** T selectRow *****', 'background: #bada55; color: #000; font-weight: bold', !this.isStatic, row);
         if ( !this.isStatic ) {
             this.selectedRow = row;
             this.rowSelected.emit(this.selectedRow);
