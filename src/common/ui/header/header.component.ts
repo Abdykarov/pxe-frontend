@@ -35,12 +35,6 @@ export class HeaderComponent {
     @Output()
     public signUpAction: EventEmitter<any> = new EventEmitter<any>();
 
-    @Input()
-    public showSignUp = false;
-
-    @Input()
-    public showLogin = false;
-
     @Output()
     public toggleMenu: EventEmitter<boolean> = new EventEmitter<boolean>();
 
