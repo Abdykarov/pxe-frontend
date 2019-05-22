@@ -67,8 +67,8 @@ export const supplyPointConfigGas: ISupplyPointFindData = {
     },
     'distributionRate': null,
     'circuitBreaker': null,
-    'annualConsumptionNT': 1.45,
-    'annualConsumptionVT': 1.10,
+    'annualConsumptionNT': null,
+    'annualConsumptionVT': null,
     'expirationDate': '2019-05-17',
     'subject': {
         'type': 'TPSB',
@@ -76,6 +76,6 @@ export const supplyPointConfigGas: ISupplyPointFindData = {
         'description': 'Fyzická osoba',
         'help': 'Fyzická osoba',
     },
-    'lastAnnualConsumptionNT': 1.25,
+    'lastAnnualConsumptionNT': null,
     'lastAnnualConsumptionVT': 1.35,
 };

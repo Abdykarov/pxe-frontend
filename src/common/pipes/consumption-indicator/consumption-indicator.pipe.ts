@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 
 import * as R from 'ramda';
+import * as R_ from 'ramda-extension';
 
 import { ISupplyPointFindData } from 'src/common/graphql/models/supply.model';
 
@@ -11,29 +12,26 @@ import { ISupplyPointFindData } from 'src/common/graphql/models/supply.model';
   name: 'consumptionIndicator',
 })
 export class ConsumptionIndicatorPipe implements PipeTransform {
-    private andTruthy = (val) => {
-        return !!val;
-    }
-
-    private isBoth = (data) => {
-        const { annualConsumptionVT, annualConsumptionNT, lastAnnualConsumptionVT, lastAnnualConsumptionNT} = data;
-        return R.all(this.andTruthy)(
-            [
-                annualConsumptionVT,
-                annualConsumptionNT,
-                lastAnnualConsumptionVT,
-                lastAnnualConsumptionNT,
-            ]);
-    }
+    private allNotNil = () => R.all(R_.isNotNil);
 
     private count = (avg: number, last: number) => {
         return last / (avg / 100) - 100;
     }
 
     transform(data: ISupplyPointFindData, unit: string): number | string {
-        const { annualConsumptionVT, annualConsumptionNT, lastAnnualConsumptionVT, lastAnnualConsumptionNT} = data;
+        const {
+            annualConsumptionVT = null,
+            annualConsumptionNT = null,
+            lastAnnualConsumptionVT = null,
+            lastAnnualConsumptionNT = null,
+        } = data;
 
-        if (this.isBoth(data)) {
+        if (this.allNotNil()([
+            annualConsumptionVT,
+            annualConsumptionNT,
+            lastAnnualConsumptionVT,
+            lastAnnualConsumptionNT,
+        ])) {
             const annualConsumption = annualConsumptionVT + annualConsumptionNT;
             const lastAnnualConsumption = lastAnnualConsumptionVT + lastAnnualConsumptionNT;
             return this.count(annualConsumption, lastAnnualConsumption);
@@ -47,6 +45,6 @@ export class ConsumptionIndicatorPipe implements PipeTransform {
             return this.count(annualConsumptionNT, lastAnnualConsumptionNT);
         }
 
-        return `${String(R.sum([lastAnnualConsumptionNT, lastAnnualConsumptionVT]))} ${unit}`;
+        return `${R.sum([lastAnnualConsumptionNT, lastAnnualConsumptionVT])} ${unit}`;
     }
 }
