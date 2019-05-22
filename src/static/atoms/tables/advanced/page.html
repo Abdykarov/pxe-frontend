@@ -1,14 +1,7 @@
 <ng-template #rowDetail let-row="row">
     <div class="row">
         <div class="col-6">
-            <div class="table-responsive">
-                <lnd-table
-                    [cols]="tableCols.detail"
-                    [rows]="tableRows.detail"
-                    [showHead]="true"
-                    [tableClass]="'table-striped'"
-                ></lnd-table>
-            </div>
+            Detail
         </div>
     </div>
 </ng-template>
@@ -19,106 +12,28 @@
             variant="dots"
         ></lnd-button>
     </ng-template>
-    <lnd-dropdown
-        [actionTemplate]="dropdown"
-        [hasBeak]="true"
-        menuDirection="right"
-        (toggleOverlayerAction)="toggleOverlayer();"
-        [overlayEnabled]="true">
-        <a
-            class="dropdown-item"
-            href="#">
-            Potvrzení o platbě (PDF)
-        </a>
-    </lnd-dropdown>
 </ng-template>
 
-<div class="row">
+<div class="row static-pages-holder">
     <div class="col">
         <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
     </div>
 </div>
-<div class="static-pages">
-    <h3>Default</h3>
-    <h4 class="d-block d-sm-none">XS view</h4>
-    <h4 class="d-none d-sm-block d-md-none">SM view</h4>
-    <h4 class="d-none d-md-block d-xl-none">MD, LG view</h4>
-    <h4 class="d-none d-xl-block">XL view</h4>
-    <lnd-table
-        [cols]="tableCols.main"
-        [rows]="tableRows.main"
-        [tableClass]="['table--advanced', 'mb-0']"
-        [mobileDetailCaption]="'Show more...'"
-        [rowDetailTemplate]="rowDetail"
-        [actionColTemplate]="actionCol"
-        [actionColClass]="['pr-0']"
-    ></lnd-table>
-</div>
-<div class="static-pages">
-    <h3>Without side padding</h3>
-    <ul>
-        <li>without row detail</li>
-        <li>with row hover</li>
-        <li>with header</li>
-    </ul>
-    <h4 class="d-block d-sm-none">XS view</h4>
-    <h4 class="d-none d-sm-block d-md-none">SM view</h4>
-    <h4 class="d-none d-md-block d-xl-none">MD, LG view</h4>
-    <h4 class="d-none d-xl-block">XL view</h4>
-    <lnd-table
-        [cols]="tableColsSnd.main"
-        [rows]="tableRows.main"
-        [showHead]="true"
-        [isStatic]="true"
-        [tableClass]="[
-            'mb-0',
-            'table--advanced',
-            'table--sides-aligned',
-            'table-hover'
-        ]"
-    ></lnd-table>
-</div>
-<div class="static-pages">
-    <h3>Without top border</h3>
-    <ul>
-        <li>without row detail</li>
-        <li>without row hover</li>
-        <li>without header</li>
-    </ul>
-    <h4 class="d-block d-sm-none">XS view</h4>
-    <h4 class="d-none d-sm-block d-md-none">SM view</h4>
-    <h4 class="d-none d-md-block d-xl-none">MD, LG view</h4>
-    <h4 class="d-none d-xl-block">XL view</h4>
-    <lnd-table
-        [cols]="tableColsSnd.main"
-        [rows]="tableRows.main"
-        [isStatic]="true"
-        [tableClass]="[
-            'mb-0',
-            'table--advanced',
-            'table--top-borderless'
-        ]"
-    ></lnd-table>
-</div>
-<div class="static-pages">
-    <h3>With bottom border</h3>
-    <ul>
-        <li>without row detail</li>
-        <li>without row hover</li>
-        <li>without header</li>
-    </ul>
-    <h4 class="d-block d-sm-none">XS view</h4>
-    <h4 class="d-none d-sm-block d-md-none">SM view</h4>
-    <h4 class="d-none d-md-block d-xl-none">MD, LG view</h4>
-    <h4 class="d-none d-xl-block">XL view</h4>
-    <lnd-table
-        [cols]="tableColsSnd.main"
-        [rows]="tableRows.main"
-        [isStatic]="true"
-        [tableClass]="[
-            'mb-0',
-            'table--advanced',
-            'table--bottom-bordered'
-        ]"
-    ></lnd-table>
+<div class="static-pages-holder">
+    <div class="static-pages static-pages--bg-transparent">
+        <!-- <h4 class="d-block d-sm-none">XS view</h4>
+        <h4 class="d-none d-sm-block d-md-none">SM view</h4>
+        <h4 class="d-none d-md-block d-xl-none">MD, LG view</h4>
+        <h4 class="d-none d-xl-block">XL view</h4> -->
+        <lnd-table
+            [cols]="tableCols.main"
+            [rows]="tableRows.main"
+            [showHead]="true"
+            [tableWrapperClass]="['table-wrapper--advanced']"
+            [tableClass]="['table--advanced', 'mb-0']"
+            [mobileDetailCaption]="'Show more...'"
+            [rowDetailTemplate]="rowDetail"
+            [actionColTemplate]="actionCol"
+        ></lnd-table>
+    </div>
 </div>
