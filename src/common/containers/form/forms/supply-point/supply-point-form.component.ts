@@ -101,7 +101,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
         super.ngOnChanges(changes);
     }
 
-    public includesBothTariffs = (id: string) => distributionRatesTypeDefinition[DistributionType.BOTH].includes(id)
+    public includesBothTariffs = (id: string) => distributionRatesTypeDefinition[DistributionType.BOTH].includes(id);
 
     public setFormByCommodity = (commodityType: CommodityType) => {
         R.mapObjIndexed((fields, type) => {
