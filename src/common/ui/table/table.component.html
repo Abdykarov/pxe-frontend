@@ -89,22 +89,27 @@
                 </tr>
             </ng-container>
             <tr *ngIf="rowDetailTemplate">
-                <td
-                    *ngIf="openedRow !== row"
-                    colspan="2"
-                    class="w-100 px-0 text-center">
-                    <lnd-button
-                        (action)="openRow(row); selectRow(row)"
-                        type="secondary"
-                        hasOutline="true"
-                        [label]="mobileDetailCaption">
-                    </lnd-button>
-                </td>
+<!--                <td-->
+<!--                    *ngIf="openedRow !== row"-->
+<!--                    colspan="2"-->
+<!--                    class="w-100 px-0 text-center">-->
+<!--                    <lnd-button-->
+<!--                        (action)="openRow(row); selectRow(row)"-->
+<!--                        type="secondary"-->
+<!--                        hasOutline="true"-->
+<!--                        [label]="mobileDetailCaption">-->
+<!--                    </lnd-button>-->
+<!--                </td>-->
                 <td
                     *ngIf="openedRow === row"
                     colspan="2"
                     class="w-100 px-0">
-                    <ng-container *ngTemplateOutlet="rowDetailTemplate; context: {row: row}"></ng-container>
+                    <ng-container *ngTemplateOutlet="rowDetailTemplate; context: {row: row, openRow: this.openRow, selectRow: this.selectRow}"></ng-container>
+                </td>
+            </tr>
+            <tr *ngIf="actionColTemplate">
+                <td colspan="2">
+                    <ng-container *ngTemplateOutlet="actionColTemplate; context: {row: row, openRow: this.openRow, selectRow: this.selectRow}"></ng-container>
                 </td>
             </tr>
         </tbody>

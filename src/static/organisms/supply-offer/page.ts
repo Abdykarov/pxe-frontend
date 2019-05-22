@@ -33,7 +33,23 @@ export class SupplyOfferComponent {
     }
 
     public create = (table, row) => {
-        console.log('%c ***** edit *****', 'background: #bada55; color: #000; font-weight: bold', row, table.rowOpened);
+        console.log('%c ***** create *****', 'background: #bada55; color: #000; font-weight: bold', row, table.rowOpened);
+        if (table.openedRow !== row) {
+            table.openRow(row);
+            table.selectRow(row);
+        }
+    }
+
+    public duplicate = (table, row) => {
+        console.log('%c ***** duplicate *****', 'background: #bada55; color: #000; font-weight: bold', row, table.rowOpened);
+        if (table.openedRow !== row) {
+            table.openRow(row);
+            table.selectRow(row);
+        }
+    }
+
+    public delete = (table, row) => {
+        console.log('%c ***** delete *****', 'background: #bada55; color: #000; font-weight: bold', row, table.rowOpened);
         if (table.openedRow !== row) {
             table.openRow(row);
             table.selectRow(row);

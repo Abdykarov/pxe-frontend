@@ -34,14 +34,24 @@
         <ng-template #actionCol let-row="row" let-openRow="openRow" let-selectRow="selectRow">
             <div *ngIf="table.openedRow !== row">
                 <lnd-button
-                        label="E"
+                        label="edit"
                         type="primary"
                         (action)="edit(table, row)"
                 ></lnd-button>
                 <lnd-button
-                        label="C"
+                        label="create"
                         type="primary"
                         (action)="create(table, row)"
+                ></lnd-button>
+                <lnd-button
+                        label="duplicate"
+                        type="primary"
+                        (action)="duplicate(table, row)"
+                ></lnd-button>
+                <lnd-button
+                        label="delete"
+                        type="primary"
+                        (action)="delete(table, row)"
                 ></lnd-button>
             </div>
         </ng-template>
