@@ -17,8 +17,8 @@
         <div class="row">
             <div
                 class="container-aside"
-                [class.d-none]="settings.hideLeftNavigate"
-                [class.col-lg-2]="!settings.hideLeftNavigate">
+                [class.d-lg-none]="settings.hideLeftNavigation"
+                [class.col-lg-2]="!settings.hideLeftNavigation">
                 <lnd-navigation
                 [config]="navConfig"
                 [isMenuOpen]="isMenuOpen"
@@ -27,8 +27,8 @@
                 </lnd-navigation>
             </div>
             <div class="container-content"
-                [class.col-lg-8]="!settings.hideLeftNavigate"
-                [class.col-lg-12]="settings.hideLeftNavigate">
+                [class.col-lg-8]="!settings.hideLeftNavigation"
+                [class.col-lg-12]="settings.hideLeftNavigation">
                 <main class="main">
                     <router-outlet></router-outlet>
                     <lnd-modal-dynamic></lnd-modal-dynamic>

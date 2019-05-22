@@ -46,12 +46,11 @@ export class LoginComponent extends AbstractComponent {
             )
             .subscribe(
                 () => {
+                    this.resetErrorsAndLoading();
                     if (this.authService.currentUserValue.supplier) {
-                        this.resetErrors();
                         this.sendSupplierLoginSms();
                     } else {
-                        this.formLoading = false;
-                        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
+                         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
                     }
                 },
                 error => {
@@ -69,7 +68,7 @@ export class LoginComponent extends AbstractComponent {
             )
             .subscribe(
                 () => {
-                    this.formLoading = false;
+                    this.resetErrorsAndLoading();
                     this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER]);
                 },
                 error => {
@@ -92,7 +91,7 @@ export class LoginComponent extends AbstractComponent {
             )
             .subscribe(
                 res => {
-                    this.formLoading = false;
+                    this.resetErrorsAndLoading();
                     this.loginSmsRequired = true;
                     this.cd.markForCheck();
                 },
@@ -109,15 +108,13 @@ export class LoginComponent extends AbstractComponent {
 
     public handleError = (error) => {
         const message = parseRestAPIErrors(error);
-        this.globalError = [];
-        this.formLoading = false;
+        this.resetErrorsAndLoading();
         this.globalError.push(message);
         this.cd.markForCheck();
     }
 
-    public resetErrors = () => {
+    public resetErrorsAndLoading = () => {
         this.globalError = [];
         this.formLoading = false;
-        this.cd.markForCheck();
     }
 }
