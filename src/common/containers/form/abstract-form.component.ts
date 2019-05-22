@@ -75,13 +75,17 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         R.pipe(
             R.keys,
             R.map((field) => {
-                const fieldControl = this.form.get(field);
-                fieldControl.markAsUntouched({
-                    onlySelf: true,
-                });
-                fieldControl.setErrors(null);
+                this.resetFieldError(field);
             }),
         )(this.form.controls);
+    }
+
+    public resetFieldError = (field) => {
+        const fieldControl = this.form.get(field);
+        fieldControl.markAsUntouched({
+            onlySelf: true,
+        });
+        fieldControl.setErrors(null);
     }
 
     public triggerValidation = () => {
@@ -99,6 +103,7 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
 
     public resetFieldValue = (field) => {
         this.form.get(field).setValue(null);
+        this.resetFieldError(field);
     }
 
     public resetCustomFieldError = () => {
