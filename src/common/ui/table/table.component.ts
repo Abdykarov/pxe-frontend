@@ -99,7 +99,8 @@ export class TableComponent extends AbstractComponent implements OnChanges {
     }
 
     openRow (row) {
-        console.log('%c ***** T openRow *****', 'background: #bada55; color: #000; font-weight: bold', this.rowDetailTemplate, !this.isStatic, row);
+        console.log('%c ***** T openRow *****', 'background: #bada55; color: #000; font-weight: bold', this.rowDetailTemplate,
+            !this.isStatic, row);
         if ( this.rowDetailTemplate && !this.isStatic ) {
             this.openedRow = ( this.openedRow === row ) ? null : row;
             this.rowOpened.emit(this.openedRow);
