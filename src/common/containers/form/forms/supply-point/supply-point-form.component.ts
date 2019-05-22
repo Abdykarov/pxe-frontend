@@ -67,13 +67,13 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
                 this.resetFormError();
                 this.setFormByCommodity(val);
                 this.resetFieldValue('supplierId');
-                this.setDefaultAnnualConsumption();
             });
 
         this.form.get('subjectTypeId')
             .valueChanges
             .pipe(takeUntil(this.destroy$))
             .subscribe((val: string) => {
+                this.resetFieldValue('distributionRateId');
                 this.distributionRateType = SUBJECT_TYPE_TO_DIST_RATE[val];
                 this.cd.markForCheck();
             });
@@ -82,12 +82,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
             .valueChanges
             .pipe(takeUntil(this.destroy$))
             .subscribe(val => {
-                const annualConsumptionNTControl = this.form.get('annualConsumptionNT');
-                if (this.isTwoTariffs(val)) {
-                    annualConsumptionNTControl.enable();
-                } else {
-                    annualConsumptionNTControl.disable();
-                }
+                this.setAnnualConsumptionNTState(val);
             });
 
         this.form.get('supplierId')
@@ -98,17 +93,15 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
             });
 
         this.setFormByCommodity(CommodityType.POWER);
-        this.loadCodelists();
-        this.setDefaultAnnualConsumption();
+        this.loadCodeLists();
+        this.setAnnualConsumptionNTState();
     }
 
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
     }
 
-    public isTwoTariffs = (id: string) => {
-        return distributionRatesTypeDefinition[DistributionType.BOTH].includes(id);
-    }
+    public includesBothTariffs = (id: string) => distributionRatesTypeDefinition[DistributionType.BOTH].includes(id)
 
     public setFormByCommodity = (commodityType: CommodityType) => {
         R.mapObjIndexed((fields, type) => {
@@ -165,7 +158,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
         });
     }
 
-    public loadCodelists = () => {
+    public loadCodeLists = () => {
         this.supplyService.findCodelistsByTypes(codeListTypes, 'cs')
             .pipe(takeUntil(this.destroy$))
             .subscribe(({data}) => {
@@ -174,9 +167,13 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
             });
     }
 
-    public setDefaultAnnualConsumption = () => {
-        const fieldControl = this.form.get('annualConsumptionNT');
-        fieldControl.disable();
+    public setAnnualConsumptionNTState = (distributionRateId: string = null) => {
+        const annualConsumptionNTControl = this.form.get('annualConsumptionNT');
+        if (this.includesBothTariffs(distributionRateId)) {
+            annualConsumptionNTControl.enable();
+        } else {
+            annualConsumptionNTControl.disable();
+        }
     }
 
     public loadSuppliers = (commodityType) => {
