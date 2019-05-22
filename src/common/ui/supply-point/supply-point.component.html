@@ -27,11 +27,10 @@
                                     <span class="supply-point__value">{{data.circuitBreaker.description}}</span>
                                 </div>
                             </div>
-                            <div *ngIf="data.annualConsumptionNT && data.lastAnnualConsumptionNT"
-                                 class="col-6 col-md-auto order-md-2">
+                            <div class="col-6 col-md-auto order-md-2">
                                 <div class="supply-point__value-box">
                                     <span class="supply-point__value-name">Spotřeba</span>
-                                    <lnd-indicator [value]="data.annualConsumptionNT | consumptionIndicator: data.lastAnnualConsumptionNT"></lnd-indicator>
+                                    <lnd-indicator [value]="data | consumptionIndicator: UNIT_INDICATOR"></lnd-indicator>
                                 </div>
                             </div>
                             <div class="col-12 col-md-auto order-md-1">
