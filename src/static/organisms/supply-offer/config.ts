@@ -1,154 +1,92 @@
 export const tableCols = {
     main: [
         {
-            label: 'First column',
+            label: 'Název produktu',
             views: [
                 {
-                    headingClass: ['w-20'],
-                    cellClass: ['w-20'],
-                    content: (row) => `<span class="d-block font-weight-bold">${row.first.a}</span>${row.first.b}`,
-                },
-            ],
-            mobileViews: [
-                {
-                    cellClass: ['font-weight-bold', 'text-right'],
-                    content: (row) => `${row.first.a} ${row.first.b}`,
+                    headingClass: [''],
+                    cellClass: [''],
+                    content: (row) => `${row.name.value}`,
                 },
             ],
         },
         {
-            label: 'Second column',
+            label: 'Distribuční umístění',
             views: [
                 {
-                    headingClass: ['w-20'],
-                    cellClass: ['w-20'],
-                    content: (row) => `<span class="d-block font-weight-bold">${row.second.a}</span>${row.second.b}`,
-                },
-            ],
-            mobileViews: [
-                {
-                    cellClass: ['font-weight-bold', 'text-right'],
-                    content: (row) => `${row.second.a} ${row.second.b}`,
+                    headingClass: [''],
+                    cellClass: [''],
+                    content: (row) => `${row.location.value}`,
                 },
             ],
         },
         {
-            label: 'Third column',
+            label: 'Distribuční sazba',
             views: [
                 {
-                    showIn: ['md', 'lg'],
-                    headingClass: ['w-30'],
-                    cellClass: ['w-30'],
-                    content: (row) => `<span class="d-block font-weight-bold">${row.third.a}</span>${row.third.b}`,
-                },
-                {
-                    showIn: ['xl'],
-                    headingClass: ['w-20'],
-                    cellClass: ['w-20'],
-                    content: (row) => `<span class="d-block font-weight-bold">${row.third.a}</span>${row.third.b}`,
-                },
-            ],
-            mobileViews: [
-                {
-                    cellClass: ['font-weight-bold', 'text-right'],
-                    content: (row) => `${row.third.a} ${row.third.b}`,
+                    headingClass: [''],
+                    cellClass: [''],
+                    content: (row) => `${row.rate.value}`,
                 },
             ],
         },
         {
-            label: 'Fourth column',
+            label: 'Roční&nbsp;spotřeba elektřiny&nbsp;VT',
             views: [
                 {
-                    showIn: ['xl'],
-                    headingClass: ['w-20'],
-                    cellClass: ['w-20'],
-                    content: (row) => `<span class="d-block font-weight-bold">${row.fourth.a}</span>${row.fourth.b}`,
-                },
-            ],
-            mobileViews: [
-                {
-                    cellClass: ['font-weight-bold', 'text-right'],
-                    content: (row) => `${row.fourth.a} ${row.fourth.b}`,
+                    headingClass: [''],
+                    cellClass: [''],
+                    content: (row) => `${row.consumptionHighTarif.value}`,
                 },
             ],
         },
         {
-            label: 'Last column',
+            label: 'Roční&nbsp;spotřeba elektřiny&nbsp;NT',
             views: [
                 {
-                    showIn: ['md', 'lg'],
-                    headingClass: ['w-30'],
-                    cellClass: ['w-30'],
-                    content: (row) => `<span class="d-block font-weight-bold">${row.last.a}</span>${row.last.b}`,
-                },
-                {
-                    showIn: ['xl'],
-                    headingClass: ['w-20'],
-                    content: (row) => `<span class="d-block font-weight-bold">${row.last.a}</span>${row.last.b}`,
-                },
-            ],
-            mobileViews: [
-                {
-                    cellClass: ['font-weight-bold', 'text-right'],
-                    content: (row) => `${row.last.a} ${row.last.b}`,
-                },
-            ],
-        },
-    ],
-    detail: [
-        {
-            label: 'First detail column',
-            views: [
-                {
-                    content: (row) => row.first,
-                },
-            ],
-            mobileViews: [
-                {
-                    cellClass: ['font-weight-bold', 'text-right'],
-                    content: (row) => row.first,
+                    headingClass: [''],
+                    cellClass: [''],
+                    content: (row) => `${row.consumptionLowTarif.value}`,
                 },
             ],
         },
         {
-            label: 'Second detail column',
+            label: 'Cena&nbsp;VT',
             views: [
                 {
-                    content: (row) => row.second,
-                },
-            ],
-            mobileViews: [
-                {
-                    cellClass: ['font-weight-bold', 'text-right'],
-                    content: (row) => row.second,
+                    headingClass: [''],
+                    cellClass: [''],
+                    content: (row) => `${row.priceHighTarif.value}`,
                 },
             ],
         },
         {
-            label: 'Third detail column',
+            label: 'Cena&nbsp;NT',
             views: [
                 {
-                    content: (row) => row.third,
-                },
-            ],
-            mobileViews: [
-                {
-                    cellClass: ['font-weight-bold', 'text-right'],
-                    content: (row) => row.third,
+                    headingClass: [''],
+                    cellClass: [''],
+                    content: (row) => `${row.priceLowTarif.value}`,
                 },
             ],
         },
         {
-            label: 'Last detail column',
+            label: 'Dodávkové období',
             views: [
                 {
-                    content: (row) => row.last,
+                    headingClass: [''],
+                    cellClass: [''],
+                    content: (row) => `${row.period.value}`,
                 },
             ],
-            mobileViews: [
+        },
+        {
+            label: 'Měsíční záloha',
+            views: [
                 {
-                    cellClass: ['font-weight-bold', 'text-right'],
-                    content: (row) => row.last,
+                    headingClass: ['', 'text-right'],
+                    cellClass: ['', 'text-right'],
+                    content: (row) => `${row.cashAdvance.value}`,
                 },
             ],
         },
@@ -158,58 +96,70 @@ export const tableCols = {
 export const tableRows = {
     main: [
         {
-            first: { a: 'First row', b: 'first cell' },
-            second: { a: 'First row', b: 'second cell'},
-            third: { a: 'First row', b: 'third cell'},
-            fourth: { a: 'First row', b: 'fourth cell'},
-            last: { a: 'First row', b: 'last cell'},
+            name: { value: 'Variant 36' },
+            location: { value: 'Praha' },
+            rate: { value: 'D02D' },
+            consumptionHighTarif: { value: '1,62&nbsp;MWh' },
+            consumptionLowTarif: { value: '0&nbsp;MWh' },
+            priceHighTarif: { value: '3,75&nbsp;MWh/Kč' },
+            priceLowTarif: { value: '3,20&nbsp;MWh/Kč' },
+            period: { value: '31.5.2019' },
+            cashAdvance: { value: '650&nbsp;Kč' },
         },
         {
-            first: { a: 'Second row', b: 'first cell'},
-            second: { a: 'Second row', b: 'second cell'},
-            third: { a: 'Second row', b: 'third cell'},
-            fourth: { a: 'Second row', b: 'fourth cell'},
-            last: { a: 'Second row', b: 'last cell'},
+            name: { value: 'Zelená usporám od&nbsp;1.1.2019 do&nbsp;12.12.2019' },
+            location: { value: 'Praha' },
+            rate: { value: 'D02D' },
+            consumptionHighTarif: { value: '1,62&nbsp;MWh' },
+            consumptionLowTarif: { value: '0&nbsp;MWh' },
+            priceHighTarif: { value: '3,75&nbsp;MWh/Kč' },
+            priceLowTarif: { value: '3,20&nbsp;MWh/Kč' },
+            period: { value: '1.1.2019 - 12.12.2019' },
+            cashAdvance: { value: '250&nbsp;Kč' },
         },
         {
-            first: { a: 'Third row', b: 'first cell'},
-            second: { a: 'Third row', b: 'second cell'},
-            third: { a: 'Third row', b: 'third cell'},
-            fourth: { a: 'Third row', b: 'fourth cell'},
-            last: { a: 'Third row', b: 'last cell'},
+            name: { value: 'Název 1' },
+            location: { value: 'Praha' },
+            rate: { value: 'D02D' },
+            consumptionHighTarif: { value: '1,62&nbsp;MWh' },
+            consumptionLowTarif: { value: '0&nbsp;MWh' },
+            priceHighTarif: { value: '5,75&nbsp;MWh/Kč' },
+            priceLowTarif: { value: '2,20&nbsp;MWh/Kč' },
+            period: { value: '31.5.2019' },
+            cashAdvance: { value: '3&nbsp;650&nbsp;Kč' },
         },
         {
-            first: { a: 'Last row', b: 'first cell'},
-            second: { a: 'Last row', b: 'second cell'},
-            third: { a: 'Last row', b: 'third cell'},
-            fourth: { a: 'Last row', b: 'fourth cell'},
-            last: { a: 'Last row ', b: 'last cell'},
-        },
-    ],
-    detail: [
-        {
-            first: 'First row first cell',
-            second: 'First row second cell',
-            third: 'First row third cell',
-            last: 'First row last cell',
+            name: { value: 'Variant 36' },
+            location: { value: 'Praha' },
+            rate: { value: 'D02D' },
+            consumptionHighTarif: { value: '1,62&nbsp;MWh' },
+            consumptionLowTarif: { value: '0&nbsp;MWh' },
+            priceHighTarif: { value: '3,75&nbsp;MWh/Kč' },
+            priceLowTarif: { value: '3,20&nbsp;MWh/Kč' },
+            period: { value: '31.5.2019' },
+            cashAdvance: { value: '650&nbsp;Kč' },
         },
         {
-            first: 'Second row first cell',
-            second: 'Second row second cell',
-            third: 'Second row third cell',
-            last: 'Second row last cell',
+            name: { value: 'Zelená usporám od&nbsp;1.1.2019 do&nbsp;12.12.2019' },
+            location: { value: 'Praha' },
+            rate: { value: 'D02D' },
+            consumptionHighTarif: { value: '1,62&nbsp;MWh' },
+            consumptionLowTarif: { value: '0&nbsp;MWh' },
+            priceHighTarif: { value: '3,75&nbsp;MWh/Kč' },
+            priceLowTarif: { value: '3,20&nbsp;MWh/Kč' },
+            period: { value: '1.1.2019 - 12.12.2019' },
+            cashAdvance: { value: '250&nbsp;Kč' },
         },
         {
-            first: 'Third row first cell',
-            second: 'Third row second cell',
-            third: 'Third row third cell',
-            last: 'Third row last cell',
-        },
-        {
-            first: 'Last row first cell',
-            second: 'Last row second cell',
-            third: 'Last row third cell',
-            last: 'Last row last cell',
+            name: { value: 'Název 1' },
+            location: { value: 'Praha' },
+            rate: { value: 'D02D' },
+            consumptionHighTarif: { value: '1,62&nbsp;MWh' },
+            consumptionLowTarif: { value: '0&nbsp;MWh' },
+            priceHighTarif: { value: '5,75&nbsp;MWh/Kč' },
+            priceLowTarif: { value: '2,20&nbsp;MWh/Kč' },
+            period: { value: '31.5.2019' },
+            cashAdvance: { value: '3&nbsp;650&nbsp;Kč' },
         },
     ],
 };

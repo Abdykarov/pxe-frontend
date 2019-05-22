@@ -6,21 +6,22 @@
 
 <div class="static-pages-holder">
     <div class="static-pages static-pages--bg-transparent">
-
-
         <ng-template #rowDetail let-row="row">
             <div>
                 <lnd-button
-                        label="duplicate"
-                        type="primary"
+                icon="icon--bin"
+                type="icon"
+                variant="icon"
                 ></lnd-button>
                 <lnd-button
-                        label="create"
-                        type="primary"
+                icon="icon--bin"
+                type="icon"
+                variant="icon"
                 ></lnd-button>
                 <lnd-button
-                        label="delete"
-                        type="primary"
+                icon="icon--bin"
+                type="icon"
+                variant="icon"
                 ></lnd-button>
             </div>
             <div>
@@ -32,26 +33,32 @@
         </ng-template>
 
         <ng-template #actionCol let-row="row" let-openRow="openRow" let-selectRow="selectRow">
-            <div *ngIf="table.openedRow !== row">
+            <div
+                *ngIf="table.openedRow !== row"
+                class="action-area-div">
                 <lnd-button
-                        label="edit"
-                        type="primary"
-                        (action)="edit(table, row)"
+                    icon="icon--bin"
+                    type="icon"
+                    variant="icon"
+                    (action)="edit(table, row)"
                 ></lnd-button>
                 <lnd-button
-                        label="create"
-                        type="primary"
-                        (action)="create(table, row)"
+                    icon="icon--bin"
+                    type="icon"
+                    variant="icon"
+                    (action)="create(table, row)"
                 ></lnd-button>
                 <lnd-button
-                        label="duplicate"
-                        type="primary"
-                        (action)="duplicate(table, row)"
+                    icon="icon--bin"
+                    type="icon"
+                    variant="icon"
+                    (action)="duplicate(table, row)"
                 ></lnd-button>
                 <lnd-button
-                        label="delete"
-                        type="primary"
-                        (action)="delete(table, row)"
+                    icon="icon--bin"
+                    type="icon"
+                    variant="icon"
+                    (action)="delete(table, row)"
                 ></lnd-button>
             </div>
         </ng-template>
@@ -68,7 +75,7 @@
                 [mobileDetailCaption]="'Show more...'"
                 [rowDetailTemplate]="rowDetail"
                 [actionColTemplate]="actionCol"
-                [actionColClass]="['pr-0']"
+                [actionColClass]="['table--advanced__action-area']"
                 [actionColTriggersDetail]="true"
                 (rowOpened)="rowOpened($event)"
                 (rowSelected)="rowSelected($event)"

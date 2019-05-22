@@ -158,6 +158,10 @@
 		}
 	}
 
+	&-icon {
+		width: $btn-width-icon;
+	}
+
 	&.btn-outline-primary,
 	&.btn-outline-secondary,
 	&.btn-outline-success,
@@ -264,6 +268,7 @@
 	}
 
 	&__icon {
+		width: $btn-width-icon;
 		position: absolute;
 		top: 0;
 		height: 100%;

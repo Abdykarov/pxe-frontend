@@ -101,6 +101,21 @@
 		}
 	}
 
+	::ng-deep {
+		.action-area-div {
+			visibility: hidden; // temp
+			width: ( 30px * 4 ); // $btn-width-icon:
+		}
+
+		.table__tr--main:hover .action-area-div {
+			visibility: visible; // temp
+		}
+	}
+
+	&--advanced__action-area {
+
+	}
+
 	&__tr--main {
 		vertical-align: top;
 
