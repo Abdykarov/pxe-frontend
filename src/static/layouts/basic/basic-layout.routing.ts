@@ -8,7 +8,9 @@ import {
     AlertsPageModule,
     alertsPageRoutes,
 } from 'src/static/atoms/alerts/page.module';
-import { BasicLayoutComponent } from './basic-layout.component';
+import {
+    BasicLayoutComponent,
+} from './basic-layout.component';
 import {
     BreadcrumbPageModule,
     breadcrumbPageRoutes,
@@ -70,10 +72,13 @@ import {
     supplyPointPageRoutes,
 } from 'src/static/organisms/supply-point/page.module';
 import {
+    TablesPageModule,
+    tablesPageRoutes,
+} from 'src/static/atoms/tables/page.module';
+import {
     TooltipPageModule,
     tooltipPageRoutes,
 } from 'src/static/atoms/tooltip/page.module';
-
 import {
     TypographyPageModule,
     typographyPageRoutes,
@@ -100,6 +105,7 @@ const routes: Routes = [
             ...supplyOfferPageRoutes,
             ...supplyPointOfferPageRoutes,
             ...supplyPointPageRoutes,
+            ...tablesPageRoutes,
             ...tooltipPageRoutes,
             ...typographyPageRoutes,
             {
@@ -129,6 +135,7 @@ const routes: Routes = [
         SupplyOfferPageModule,
         SupplyPointOfferPageModule,
         SupplyPointPageModule,
+        TablesPageModule,
         TooltipPageModule,
         TypographyPageModule,
     ],

@@ -56,13 +56,14 @@
             </div>
         </ng-template>
 
-        <div class="static-pages">
+        <div>
             <lnd-table
                 #table
                 [cols]="tableCols.main"
                 [rows]="tableRows.main"
                 [showHead]="true"
                 [isStatic]="false"
+                [tableWrapperClass]="['table-wrapper--advanced']"
                 [tableClass]="['table--advanced', 'mb-0']"
                 [mobileDetailCaption]="'Show more...'"
                 [rowDetailTemplate]="rowDetail"

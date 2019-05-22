@@ -61,12 +61,12 @@ export const staticNavigationConfig: INavigationConfig = [
                 // },
                 // {
                 //     'label': 'Table - simple',
-                //     'url': '/tables-basic',
+                //     'url': '/basic/tables-basic',
                 // },
-                // {
-                //     'label': 'Table - advanced',
-                //     'url': '/tables-advanced',
-                // },
+                {
+                    'label': 'Table - advanced',
+                    'url': '/basic/tables-advanced',
+                },
                 // {
                 //     'label': 'Tabs',
                 //     'url': '/tabs',

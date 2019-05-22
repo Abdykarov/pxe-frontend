@@ -99,21 +99,6 @@ h3,
 	line-height: ( 28 / 18 );
 }
 
-.table-entry {
-	display: flex;
-	flex-wrap: nowrap;
-	background-color: $table-accent-bg;
-
-	&--white {
-		background-color: $white;
-	}
-
-	&__cell {
-		flex-grow: 1;
-		padding: $table-cell-padding-vert $table-cell-padding;
-	}
-}
-
 blockquote,
 .blockquote {
 	font-size: $blockquote-font-size;
