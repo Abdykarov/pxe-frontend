@@ -69,6 +69,7 @@ export interface ISupplyPointFindData {
     distributionRate?: ICodelistItem;
     circuitBreaker?: ICodelistItem;
     annualConsumptionNT?: number;
+    annualConsumptionVT?: number;
     expirationDate?: string;
     subject?: ICodelistItem;
     lastAnnualConsumptionNT?: number;

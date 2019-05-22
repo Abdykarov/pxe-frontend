@@ -33,6 +33,7 @@ export const supplyPointConfigPower: ISupplyPointFindData = {
         'help': 'menší než 1x25A včetně',
     },
     'annualConsumptionNT': 1.15,
+    'annualConsumptionVT': 1.15,
     'expirationDate': '2019-05-17',
     'subject': {
         'type': 'TPSB',
@@ -67,6 +68,7 @@ export const supplyPointConfigGas: ISupplyPointFindData = {
     'distributionRate': null,
     'circuitBreaker': null,
     'annualConsumptionNT': 1.45,
+    'annualConsumptionVT': 1.10,
     'expirationDate': '2019-05-17',
     'subject': {
         'type': 'TPSB',

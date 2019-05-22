@@ -10,8 +10,10 @@ import { ISupplyPointFindData } from 'src/common/graphql/models/supply.model';
     templateUrl: './supply-point.component.html',
     styleUrls: ['./supply-point.component.scss'],
 })
-
 export class SupplyPointComponent {
+
+    readonly UNIT_INDICATOR = 'MWh';
+
     @Input()
     public data: ISupplyPointFindData;
 }
