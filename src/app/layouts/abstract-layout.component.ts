@@ -37,6 +37,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent {
         isSimpleFooter: false,
         isStatic: false,
         loginType: LoginType.NONE,
+        hideLeftNavigate: false,
         signUpType: SignType.NONE,
     };
 

@@ -47,6 +47,7 @@ export class LoginComponent extends AbstractComponent {
             .subscribe(
                 () => {
                     if (this.authService.currentUserValue.supplier) {
+                        this.resetErrors();
                         this.sendSupplierLoginSms();
                     } else {
                         this.formLoading = false;
@@ -111,6 +112,12 @@ export class LoginComponent extends AbstractComponent {
         this.globalError = [];
         this.formLoading = false;
         this.globalError.push(message);
+        this.cd.markForCheck();
+    }
+
+    public resetErrors = () => {
+        this.globalError = [];
+        this.formLoading = false;
         this.cd.markForCheck();
     }
 }
