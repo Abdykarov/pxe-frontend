@@ -58,6 +58,10 @@ import {
     samplePointsBannerPageRoutes,
 } from 'src/static/pages/sample-points-banner/page.module';
 import {
+    SupplyOfferPageModule,
+    supplyOfferPageRoutes,
+} from 'src/static/organisms/supply-offer/page.module';
+import {
     SupplyPointOfferPageModule,
     supplyPointOfferPageRoutes,
 } from 'src/static/organisms/supply-point-offer/page.module';
@@ -93,6 +97,7 @@ const routes: Routes = [
             ...progressBarPageRoutes,
             ...samplePointsPageRoutes,
             ...samplePointsBannerPageRoutes,
+            ...supplyOfferPageRoutes,
             ...supplyPointOfferPageRoutes,
             ...supplyPointPageRoutes,
             ...tooltipPageRoutes,
@@ -121,6 +126,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SamplePointsPageModule,
         SamplePointsBannerPageModule,
+        SupplyOfferPageModule,
         SupplyPointOfferPageModule,
         SupplyPointPageModule,
         TooltipPageModule,

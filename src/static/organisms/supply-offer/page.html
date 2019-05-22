@@ -1,0 +1,68 @@
+<div class="row static-pages-holder">
+    <div class="col">
+        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+    </div>
+</div>
+
+<div class="static-pages-holder">
+    <div class="static-pages static-pages--bg-transparent">
+
+
+        <ng-template #rowDetail let-row="row">
+            <div>
+                <lnd-button
+                        label="duplicate"
+                        type="primary"
+                ></lnd-button>
+                <lnd-button
+                        label="create"
+                        type="primary"
+                ></lnd-button>
+                <lnd-button
+                        label="delete"
+                        type="primary"
+                ></lnd-button>
+            </div>
+            <div>
+                {{row | json}}
+            </div>
+            <div>
+                <a (click)="table.openRow(row)">storno</a>
+            </div>
+        </ng-template>
+
+        <ng-template #actionCol let-row="row" let-openRow="openRow" let-selectRow="selectRow">
+            <div *ngIf="table.openedRow !== row">
+                <lnd-button
+                        label="E"
+                        type="primary"
+                        (action)="edit(table, row)"
+                ></lnd-button>
+                <lnd-button
+                        label="C"
+                        type="primary"
+                        (action)="create(table, row)"
+                ></lnd-button>
+            </div>
+        </ng-template>
+
+        <div class="static-pages">
+            <lnd-table
+                #table
+                [cols]="tableCols.main"
+                [rows]="tableRows.main"
+                [showHead]="true"
+                [isStatic]="false"
+                [tableClass]="['table--advanced', 'mb-0']"
+                [mobileDetailCaption]="'Show more...'"
+                [rowDetailTemplate]="rowDetail"
+                [actionColTemplate]="actionCol"
+                [actionColClass]="['pr-0']"
+                (rowOpened)="rowOpened($event)"
+                (rowSelected)="rowSelected($event)"
+            ></lnd-table>
+        </div>
+
+
+    </div>
+</div>
