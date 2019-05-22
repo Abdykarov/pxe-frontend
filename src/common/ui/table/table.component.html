@@ -34,7 +34,7 @@
             <tr
                 [class.table__tr--main]="isAdvanced"
                 [class.table__tr--active]="isAdvanced && openedRow === row"
-                click="openRow(row); selectRow(row)"
+                (click)="!actionColTriggersDetail && openRow(row); !actionColTriggersDetail && selectRow(row)"
             >
                 <ng-container *ngFor="let column of cols">
                     <ng-container *ngFor="let view of column.views">
@@ -46,21 +46,21 @@
                         <td
                             *ngIf="view.contentTemplateName"
                             [ngClass]="!!view.cellClass ? view.cellClass : ''">
-                            <ng-container *ngTemplateOutlet="columnTemplates[view.contentTemplateName]; context: {row: row, openRow: this.openRow, selectRow: this.selectRow}"></ng-container>
+                            <ng-container *ngTemplateOutlet="columnTemplates[view.contentTemplateName]; context: {row: row}"></ng-container>
                         </td>
                     </ng-container>
                 </ng-container>
                 <td
                     *ngIf="actionColTemplate"
                     [ngClass]="actionColClass">
-                    <ng-container *ngTemplateOutlet="actionColTemplate; context: {row: row, openRow: this.openRow, selectRow: this.selectRow}"></ng-container>
+                    <ng-container *ngTemplateOutlet="actionColTemplate; context: {row: row}"></ng-container>
                 </td>
             </tr>
             <tr
                 *ngIf="rowDetailTemplate && openedRow === row"
                 class="table__tr--detail table__tr--show">
                     <td [attr.colspan]="cols.length + (actionColTemplate ? 1 : 0)">
-                        <ng-container *ngTemplateOutlet="rowDetailTemplate; context: {row: row, openRow: this.openRow, selectRow: this.selectRow}"></ng-container>
+                        <ng-container *ngTemplateOutlet="rowDetailTemplate; context: {row: row}"></ng-container>
                     </td>
             </tr>
         </ng-container>
@@ -82,32 +82,32 @@
                         [innerHtml]="view.content(row)">
                     </td>
                     <td *ngIf="view.contentTemplateName">
-                        <ng-container *ngTemplateOutlet="columnTemplates[view.contentTemplateName]; context: {row: row, openRow: this.openRow, selectRow: this.selectRow}"></ng-container>
+                        <ng-container *ngTemplateOutlet="columnTemplates[view.contentTemplateName]; context: {row: row}"></ng-container>
                     </td>
                 </tr>
             </ng-container>
+            <tr *ngIf="actionColTemplate">
+                <td colspan="2">
+                    <ng-container *ngTemplateOutlet="actionColTemplate; context: {row: row}"></ng-container>
+                </td>
+            </tr>
             <tr *ngIf="rowDetailTemplate">
-<!--                <td-->
-<!--                    *ngIf="openedRow !== row"-->
-<!--                    colspan="2"-->
-<!--                    class="w-100 px-0 text-center">-->
-<!--                    <lnd-button-->
-<!--                        (action)="openRow(row); selectRow(row)"-->
-<!--                        type="secondary"-->
-<!--                        hasOutline="true"-->
-<!--                        [label]="mobileDetailCaption">-->
-<!--                    </lnd-button>-->
-<!--                </td>-->
+                <td
+                    *ngIf="openedRow !== row && !actionColTriggersDetail"
+                    colspan="2"
+                    class="w-100 px-0 text-center">
+                    <lnd-button
+                        (action)="openRow(row); selectRow(row)"
+                        type="secondary"
+                        hasOutline="true"
+                        [label]="mobileDetailCaption">
+                    </lnd-button>
+                </td>
                 <td
                     *ngIf="openedRow === row"
                     colspan="2"
                     class="w-100 px-0">
-                    <ng-container *ngTemplateOutlet="rowDetailTemplate; context: {row: row, openRow: this.openRow, selectRow: this.selectRow}"></ng-container>
-                </td>
-            </tr>
-            <tr *ngIf="actionColTemplate">
-                <td colspan="2">
-                    <ng-container *ngTemplateOutlet="actionColTemplate; context: {row: row, openRow: this.openRow, selectRow: this.selectRow}"></ng-container>
+                    <ng-container *ngTemplateOutlet="rowDetailTemplate; context: {row: row}"></ng-container>
                 </td>
             </tr>
         </tbody>

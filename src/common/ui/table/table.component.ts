@@ -39,6 +39,7 @@ export class TableComponent extends AbstractComponent implements OnChanges {
     // html template for action column
     @Input() actionColTemplate?: TemplateRef<any>;
     @Input() actionColClass?: string;
+    @Input() actionColTriggersDetail = false;
     // html custom template for caption
     @Input() customCaptionTemplate?: TemplateRef<any>;
     // html templates for individual columns
