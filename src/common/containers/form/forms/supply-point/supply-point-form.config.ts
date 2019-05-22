@@ -1,6 +1,10 @@
 import { Validators } from '@angular/forms';
 
-import { CommodityType } from 'src/common/graphql/models/supply.model';
+import {
+    CommodityType,
+    DistributionType,
+    SubjectType,
+} from 'src/common/graphql/models/supply.model';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
@@ -10,6 +14,12 @@ export const formFields: IForm = {
     controls: {
         commodityType: [
             CommodityType.POWER,
+            [
+                Validators.required,
+            ],
+        ],
+        subjectTypeId: [
+            SubjectType.SUBJECT_TYPE_INDIVIDUAL,
             [
                 Validators.required,
             ],
@@ -96,6 +106,9 @@ export const formFields: IForm = {
         commodityType: {
             required: errorFieldMessages.commodityType.required,
         },
+        subjectTypeId: {
+            required: errorFieldMessages.subjectTypeId.required,
+        },
         supplierId: {
             required: errorFieldMessages.supplierId.required,
         },
@@ -158,9 +171,27 @@ export const formFields: IForm = {
     },
 };
 
+export const CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL = 'DSTSA2';
+export const CODE_LIST_TYPE_DIST_RATE_BOTH = 'DSTSAZ';
+export const CODE_LIST_TYPE_DIST_RATE_BUSINESSMAN = 'DSTSA1';
+export const CODE_LIST_TYPE_CIRCUIT_BREAKER = 'JISTIC';
+
 export const codeListTypes = [
-    'DSTSAZ',
-    'JISTIC',
+    CODE_LIST_TYPE_DIST_RATE_BOTH, // kompletní
+    CODE_LIST_TYPE_DIST_RATE_BUSINESSMAN, // pro firmy
+    CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL, // pro domácnosti
+    CODE_LIST_TYPE_CIRCUIT_BREAKER,
+];
+
+export const subjectTypeOptions: Array<IOption> = [
+    {
+        key: SubjectType.SUBJECT_TYPE_INDIVIDUAL,
+        label: 'Domácnost',
+    },
+    {
+        key: SubjectType.SUBJECT_TYPE_BUSINESSMAN,
+        label: 'Firma',
+    },
 ];
 
 export const commodityTypeOptions: Array<IOption> = [
@@ -174,7 +205,22 @@ export const commodityTypeOptions: Array<IOption> = [
     },
 ];
 
+
 export const commodityTypeFields = {
     [CommodityType.POWER]: ['ean', 'distributionRateId', 'circuitBreakerId', 'annualConsumptionNT', 'annualConsumptionVT'],
     [CommodityType.GAS]: ['eic', 'annualConsumption'],
+};
+
+
+export const distributionRatesTypeDefinition = {
+    [DistributionType.VT] : ['C01d', 'C02d', 'C03d', 'C62d', 'D01d', 'D02d'],
+    [DistributionType.BOTH] : [
+        'C25d', 'C26d', 'C27d', 'C35d', 'C45d', 'C46d', 'C55d', 'C56d', 'D25d', 'D26d', 'D27d', 'D35d', 'D45d',
+        'D56d', 'D57d', 'D61d',
+    ],
+};
+
+export const SUBJECT_TYPE_TO_DIST_RATE = {
+    [SubjectType.SUBJECT_TYPE_INDIVIDUAL]: CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL,
+    [SubjectType.SUBJECT_TYPE_BUSINESSMAN]: CODE_LIST_TYPE_DIST_RATE_BUSINESSMAN,
 };

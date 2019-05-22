@@ -30,6 +30,9 @@ export const errorFieldMessages =  {
     commodityType: {
         required: 'Zvolte komoditu.',
     },
+    subjectTypeId: {
+        required: 'Zvolte odběratele.',
+    },
     consent: {
         signUp: {
             required: 'Nezapomeňte na souhlas se zpracováním osobních údajů.',

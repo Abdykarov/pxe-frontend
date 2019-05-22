@@ -64,9 +64,14 @@ export class SupplyPointComponent extends AbstractComponent {
         this.fieldError = {};
         let saveSupplyPoint;
 
-        const supplyPoint: ISupplyPoint = R.pick(['id', 'supplierId', 'name', 'address', 'expirationDate'], supplyPointFormData);
-
-        supplyPoint.subjectTypeId =  '1'; // INDIVIDUAL
+        const supplyPoint: ISupplyPoint = R.pick([
+            'id',
+            'supplierId',
+            'name',
+            'address',
+            'expirationDate',
+            'subjectTypeId',
+        ], supplyPointFormData);
 
         if (supplyPointFormData.commodityType === CommodityType.POWER) {
             const powerAttributes: ISupplyPointPowerAttributes =

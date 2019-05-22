@@ -22,6 +22,7 @@ export class FullLayoutComponent {
         isSupplier: false,
         isStatic: true,
         signUpType: SignType.STATIC,
+        hideLeftNavigation: false,
         loginType: LoginType.NONE,
     };
 
