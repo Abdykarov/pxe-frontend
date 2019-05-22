@@ -7,9 +7,20 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
+// Component variables
+@import 'table.component.variables.scss';
+
 // Bootstrap tables import
 @import '~bootstrap/scss/tables';
 
+.table-wrapper {
+	&--advanced {
+		overflow-x: auto;
+		width: calc( 100% + ( #{$spacer} * 2 ) );
+		margin: 0 ( $spacer * ( -1 ) ) ( $spacer * ( -1 ) );
+		padding: 0 $spacer ( $spacer * 2 );
+	}
+}
 
 .table {
 	font-size: $table-font-size;
@@ -55,107 +66,77 @@
 		> thead {
 			border-bottom-width: 0;
 
-			th {
+			th,
+			td {
+				opacity: .5;
+				font-weight: 400;
 				background-color: transparent;
-			}
-		}
+				padding: $table-adv-cell-padding-hor $table-adv-cell-padding-vert;
+				vertical-align: bottom;
 
-		tbody.tbody--mobile {
-			> tr {
-				> th,
-				> td {
-					padding: ( $table-cell-padding-vert / 3 ) 0;
-					max-width: 0;
-					@include smart-short-text;
-				}
-			}
-
-			> tr:first-child {
-				> th,
-				> td {
-					padding-top: ( $table-cell-padding-vert * 1.5 );
-				}
-			}
-
-			> tr:last-child {
-				> th,
-				> td {
-					padding-bottom: ( $table-cell-padding-vert * 1.5 );
-				}
-			}
-
-			&:nth-child(n+2) {
-				border-top: 1px solid $table-border-color;
-			}
-		}
-	}
-
-	&--sides-aligned {
-		thead > tr,
-		.table__tr--main {
-			> th,
-			> td {
 				&:first-child {
-					padding-left: 0;
+					padding-left: ( $spacer * 1.5 );
 				}
 
 				&:last-child {
-					padding-right: 0;
+					padding-right: ( $spacer * 1.5 );
 				}
 			}
 		}
-	}
 
-	&--top-borderless {
-		.table__tr--main:first-child {
-			> th,
-			> td {
-				border-top: 0;
-			}
-		}
-	}
+		> tbody {
+			th,
+			td {
+				padding: $table-adv-cell-padding-hor $table-adv-cell-padding-vert;
+				vertical-align: middle;
 
-	&--bottom-bordered {
-		.table__tr--main:last-child {
-			> th,
-			> td {
-				border-bottom: 1px solid $table-border-color;
-			}
-		}
-	}
+				&:first-child {
+					padding-left: ( $spacer * 1.5 );
+				}
 
-	&__tbody--advance:nth-child(n+2) {
-		> .table__tr--main {
-			> th,
-			> td {
-				border-top: 1px solid $table-border-color;
+				&:last-child {
+					padding-right: ( $spacer * 1.5 );
+				}
 			}
 		}
 	}
 
 	&__tr--main {
-		cursor: pointer;
+		vertical-align: top;
+
+		& > th,
+		& > td {
+			&:first-child {
+				border-top-left-radius: $border-radius;
+				border-bottom-left-radius: $border-radius;
+			}
+
+			&:last-child {
+				border-top-right-radius: $border-radius;
+				border-bottom-right-radius: $border-radius;
+			}
+		}
 
 		&:hover {
-			background-color: $table-hover-bg;
-		}
+			box-shadow: $table-active-shadow;
 
-		> th,
-		> td {
-			border-top: 1px solid $table-border-color;
-			vertical-align: middle;
-		}
-
-		.icon--collapse {
-			display: inline-block;
+			& > th,
+			& > td {
+				background-color: $table-hover-bg;
+			}
 		}
 	}
 
 	&__tr--detail {
 		display: none;
 
-		table {
-			margin-bottom: 0;
+		& > th,
+		& > td {
+			z-index: 1;
+			position: relative;
+			background-color: $table-adv-detail-bg;
+			border-radius: $border-radius;
+			box-shadow: $table-active-shadow;
 		}
 	}
 
@@ -164,10 +145,9 @@
 	}
 
 	&__tr--active {
-		background-color: $table-hover-bg;
-
-		.icon--collapse {
-			transform: rotate(180deg);
+		& > th,
+		& > td {
+			background-color: $table-active-bg;
 		}
 	}
 
@@ -177,25 +157,6 @@
 
 			&:hover {
 				background-color: transparent;
-			}
-		}
-	}
-}
-
-::ng-deep caption {
-	caption {
-		.add-table__holder {
-			padding: ($spacer / 3) 0;
-			margin-bottom: 0;
-		}
-	}
-
-	th,
-	td {
-		&.w-icon,
-		&.w-icon-small {
-			.icon {
-				display: block;
 			}
 		}
 	}

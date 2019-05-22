@@ -27,6 +27,7 @@ export class TableComponent extends AbstractComponent implements OnChanges {
     @Input() caption?: string;
     @Input() mobileDetailCaption?: string;
     @Input() showHead?: boolean;
+    @Input() tableWrapperClass?: string;
     @Input() tableClass?: string;
     @Input() rowSelectorFn?: (row: any) => boolean;
     @Input() isStatic = false;
