@@ -15,7 +15,10 @@
     ></lnd-header>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-2 container-aside">
+            <div
+                class="container-aside"
+                [class.d-lg-none]="settings.hideLeftNavigation"
+                [class.col-lg-2]="!settings.hideLeftNavigation">
                 <lnd-navigation
                 [config]="navConfig"
                 [isMenuOpen]="isMenuOpen"
@@ -23,7 +26,9 @@
                 (openItem)="toggleNavigationItem($event)">
                 </lnd-navigation>
             </div>
-            <div class="col-lg-8 container-content">
+            <div class="container-content"
+                [class.col-lg-8]="!settings.hideLeftNavigation"
+                [class.col-lg-12]="settings.hideLeftNavigation">
                 <main class="main">
                     <router-outlet></router-outlet>
                     <lnd-modal-dynamic></lnd-modal-dynamic>

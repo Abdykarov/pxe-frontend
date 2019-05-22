@@ -4,6 +4,7 @@ export interface ISettings {
     isStatic: boolean;
     isSupplier?: boolean;
     loginType: LoginType;
+    hideLeftNavigation?: boolean;
     signUpType: SignType;
 }
 
