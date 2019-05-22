@@ -219,3 +219,8 @@ export const distributionRatesTypeDefinition = {
         'D56d', 'D57d', 'D61d',
     ],
 };
+
+export const SUBJECT_TYPE_TO_DIST_RATE = {
+    [SubjectType.SUBJECT_TYPE_INDIVIDUAL]: CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL,
+    [SubjectType.SUBJECT_TYPE_BUSINESSMAN]: CODE_LIST_TYPE_DIST_RATE_BUSINESSMAN,
+};

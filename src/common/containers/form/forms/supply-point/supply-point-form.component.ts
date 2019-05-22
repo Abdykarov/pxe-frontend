@@ -11,18 +11,17 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import {
-    CODE_LIST_TYPE_DIST_RATE_BUSINESSMAN,
     CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL,
     codeListTypes,
     commodityTypeFields,
     commodityTypeOptions,
     distributionRatesTypeDefinition,
+    SUBJECT_TYPE_TO_DIST_RATE,
     subjectTypeOptions,
 } from './supply-point-form.config';
 import {
     CommodityType,
     DistributionType,
-    SubjectType,
 } from 'src/common/graphql/models/supply.model';
 import {
     convertArrayToObject,
@@ -47,11 +46,6 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
     public minDate: Date;
     public suppliers = [];
     public distributionRateType: string = CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL;
-
-    private readonly DIST_RATES_CODE = {
-        [SubjectType.SUBJECT_TYPE_INDIVIDUAL]: CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL,
-        [SubjectType.SUBJECT_TYPE_BUSINESSMAN]: CODE_LIST_TYPE_DIST_RATE_BUSINESSMAN,
-    };
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -80,7 +74,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
             .valueChanges
             .pipe(takeUntil(this.destroy$))
             .subscribe((val: string) => {
-                this.distributionRateType = this.DIST_RATES_CODE[val];
+                this.distributionRateType = SUBJECT_TYPE_TO_DIST_RATE[val];
                 this.cd.markForCheck();
             });
 
@@ -112,7 +106,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
         super.ngOnChanges(changes);
     }
 
-    isTwoTariffs = (id: string) => {
+    public isTwoTariffs = (id: string) => {
         return distributionRatesTypeDefinition[DistributionType.BOTH].includes(id);
     }
 

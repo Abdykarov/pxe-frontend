@@ -4,8 +4,8 @@ export enum CommodityType {
 }
 
 export enum DistributionType {
-    VT = 'ONE',
-    BOTH = 'TWO',
+    VT = 'VT',
+    BOTH = 'BOTH',
 }
 
 export enum SubjectType {
