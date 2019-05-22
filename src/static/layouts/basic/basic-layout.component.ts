@@ -38,6 +38,7 @@ export class BasicLayoutComponent extends AbstractComponent implements OnInit {
         isSimpleFooter: true,
         isStatic: true,
         loginType: LoginType.NONE,
+        hideLeftNavigation: true,
         signUpType: SignType.NONE,
     };
 
