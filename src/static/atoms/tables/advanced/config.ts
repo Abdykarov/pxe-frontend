@@ -11,7 +11,7 @@ export const tableCols = {
             ],
         },
         {
-            label: 'Second column',
+            label: 'Second longer column',
             views: [
                 {
                     headingClass: [''],
@@ -103,7 +103,7 @@ export const tableRows = {
             fifth: { value: 'Value #5'},
             sixth: { value: 'Value #6'},
             seventh: { value: 'Value #7'},
-            last: { value: 'Number #1'},
+            last: { value: 'Number #2'},
         },
         {
             first: { value: 'Value #1 value value value'},
@@ -113,7 +113,37 @@ export const tableRows = {
             fifth: { value: 'Value #5'},
             sixth: { value: 'Value #6'},
             seventh: { value: 'Value #7'},
+            last: { value: 'Number #3'},
+        },
+        {
+            first: { value: 'Value #1'},
+            second: { value: 'Value #2 value'},
+            third: { value: 'Value #3'},
+            fourth: { value: 'Value #4'},
+            fifth: { value: 'Value #5'},
+            sixth: { value: 'Value #6'},
+            seventh: { value: 'Value #7'},
             last: { value: 'Number #1'},
+        },
+        {
+            first: { value: 'Value #1 value value'},
+            second: { value: 'Value #2'},
+            third: { value: 'Value #3'},
+            fourth: { value: 'Value #4'},
+            fifth: { value: 'Value #5'},
+            sixth: { value: 'Value #6'},
+            seventh: { value: 'Value #7'},
+            last: { value: 'Number #2'},
+        },
+        {
+            first: { value: 'Value #1 value value value'},
+            second: { value: 'Value #2 value'},
+            third: { value: 'Value #3'},
+            fourth: { value: 'Value #4'},
+            fifth: { value: 'Value #5'},
+            sixth: { value: 'Value #6'},
+            seventh: { value: 'Value #7'},
+            last: { value: 'Number #3'},
         },
     ],
 };

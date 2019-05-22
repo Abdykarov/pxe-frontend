@@ -9,7 +9,7 @@ import {
     alertsPageRoutes,
 } from 'src/static/atoms/alerts/page.module';
 import {
-    BasicLayoutComponent
+    BasicLayoutComponent,
 } from './basic-layout.component';
 import {
     BreadcrumbPageModule,

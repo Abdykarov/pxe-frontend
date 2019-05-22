@@ -11,8 +11,8 @@ $table-cell-padding-sm:          ( $spacer / 4 );
 $table-bg:                       transparent;
 $table-font-size:                .75rem;
 $table-accent-bg:                $gray-100;
-$table-hover-bg:                 rgba($white, .5);
-$table-active-bg:                $white;
+$table-hover-bg:                 $white;
+$table-active-bg:                rgba($white, .3);
 $table-active-shadow:            0 10px 30px 0 rgba(43, 76, 109, .2);
 $table-border-width:             0;
 $table-head-bg:                  $gray-100;
@@ -26,3 +26,4 @@ $table-striped-order:            odd;
 
 $table-adv-cell-padding-hor:     ( $spacer * .75 );
 $table-adv-cell-padding-vert:    ( $spacer / 2 );
+$table-adv-detail-bg:            $white;
