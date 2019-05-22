@@ -1,11 +1,9 @@
 import {
     ChangeDetectorRef,
     Component,
-    Input,
     OnChanges,
     OnInit,
-    SimpleChanges,
-} from '@angular/core';
+    SimpleChanges } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 import * as R from 'ramda';
@@ -13,11 +11,18 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import {
+    CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL,
     codeListTypes,
     commodityTypeFields,
     commodityTypeOptions,
+    distributionRatesTypeDefinition,
+    SUBJECT_TYPE_TO_DIST_RATE,
+    subjectTypeOptions,
 } from './supply-point-form.config';
-import { CommodityType } from 'src/common/graphql/models/supply.model';
+import {
+    CommodityType,
+    DistributionType,
+} from 'src/common/graphql/models/supply.model';
 import {
     convertArrayToObject,
     transformCodeList,
@@ -35,10 +40,12 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class SupplyPointFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
     public commodityTypeOptions: Array<IOption> = commodityTypeOptions;
+    public subjectTypeOptions: Array<IOption> = subjectTypeOptions;
     public codeLists;
     public helpDocuments = {};
     public minDate: Date;
     public suppliers = [];
+    public distributionRateType: string = CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -62,6 +69,22 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
                 this.resetFieldValue('supplierId');
             });
 
+        this.form.get('subjectTypeId')
+            .valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((val: string) => {
+                this.resetFieldValue('distributionRateId');
+                this.distributionRateType = SUBJECT_TYPE_TO_DIST_RATE[val];
+                this.cd.markForCheck();
+            });
+
+        this.form.get('distributionRateId')
+            .valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(val => {
+                this.setAnnualConsumptionNTState(val);
+            });
+
         this.form.get('supplierId')
             .valueChanges
             .pipe(takeUntil(this.destroy$))
@@ -70,12 +93,15 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
             });
 
         this.setFormByCommodity(CommodityType.POWER);
-        this.loadCodelists();
+        this.loadCodeLists();
+        this.setAnnualConsumptionNTState();
     }
 
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
     }
+
+    public includesBothTariffs = (id: string) => distributionRatesTypeDefinition[DistributionType.BOTH].includes(id);
 
     public setFormByCommodity = (commodityType: CommodityType) => {
         R.mapObjIndexed((fields, type) => {
@@ -132,13 +158,22 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
         });
     }
 
-    public loadCodelists = () => {
+    public loadCodeLists = () => {
         this.supplyService.findCodelistsByTypes(codeListTypes, 'cs')
             .pipe(takeUntil(this.destroy$))
             .subscribe(({data}) => {
                 this.codeLists = transformCodeList(data.findCodelistsByTypes);
                 this.cd.markForCheck();
             });
+    }
+
+    public setAnnualConsumptionNTState = (distributionRateId: string = null) => {
+        const annualConsumptionNTControl = this.form.get('annualConsumptionNT');
+        if (this.includesBothTariffs(distributionRateId)) {
+            annualConsumptionNTControl.enable();
+        } else {
+            annualConsumptionNTControl.disable();
+        }
     }
 
     public loadSuppliers = (commodityType) => {

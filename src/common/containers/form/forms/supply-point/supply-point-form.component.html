@@ -40,6 +40,19 @@
         [touched]="form.controls.commodityType.touched || formError.commodityType"
         [validationMessages]="formFields.validationMessages.commodityType"
     ></lnd-form-field>
+    <lnd-form-field
+        [error]="formError.subjectTypeId || form.controls.subjectTypeId.errors"
+        [formControl]="form.controls.subjectTypeId"
+        [id]="'subjectTypeId'"
+        label="Odběratel"
+        [type]="'RADIOGROUP'"
+        [customFormGroupClass]="'mb-3'"
+        [radioGroupItemClass]="'custom-control-inline'"
+        [options]="subjectTypeOptions"
+        [success]="form.controls.subjectTypeId.valid && (form.controls.subjectTypeId.touched || formError.subjectTypeId)"
+        [touched]="form.controls.subjectTypeId.touched || formError.subjectTypeId"
+        [validationMessages]="formFields.validationMessages.subjectTypeId"
+    ></lnd-form-field>
     <lnd-select
         [bindValue]="null"
         [error]="formError.supplierId || form.controls.supplierId.errors"
@@ -109,7 +122,7 @@
         (appendButtonAction)="showHelp('distributionRateId', 'Distribučná sazba')"
         [error]="formError.distributionRateId || form.controls.distributionRateId.errors"
         label="Distribučná sazba"
-        [options]="codeLists && codeLists['DSTSAZ']"
+        [options]="codeLists && codeLists[distributionRateType]"
         [parentForm]="form"
         [selectName]="'distributionRateId'"
         [success]="form.controls.distributionRateId.valid && (form.controls.distributionRateId.touched || formError.distributionRateId)"

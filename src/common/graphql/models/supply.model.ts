@@ -3,6 +3,16 @@ export enum CommodityType {
     GAS = 'GAS',
 }
 
+export enum DistributionType {
+    VT = 'VT',
+    BOTH = 'BOTH',
+}
+
+export enum SubjectType {
+    SUBJECT_TYPE_INDIVIDUAL = '1',
+    SUBJECT_TYPE_BUSINESSMAN = '2',
+}
+
 export interface IAddress {
     street: string;
     orientationNumber: string;
