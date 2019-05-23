@@ -46,7 +46,6 @@ export class SupplyOfferComponent {
     }
 
     public edit = (table, row) => {
-        console.log('%c ***** edit *****', 'background: #bada55; color: #000; font-weight: bold', row);
         if (table.openedRow !== row) {
             table.openRow(row);
             table.selectRow(row);
@@ -54,7 +53,6 @@ export class SupplyOfferComponent {
     }
 
     public create = (table, row) => {
-        console.log('%c ***** create *****', 'background: #bada55; color: #000; font-weight: bold', row, table.rowOpened);
         if (table.openedRow !== row) {
             table.openRow(row);
             table.selectRow(row);
@@ -62,7 +60,6 @@ export class SupplyOfferComponent {
     }
 
     public duplicate = (table, row) => {
-        console.log('%c ***** duplicate *****', 'background: #bada55; color: #000; font-weight: bold', row, table.rowOpened);
         if (table.openedRow !== row) {
             table.openRow(row);
             table.selectRow(row);
@@ -70,7 +67,6 @@ export class SupplyOfferComponent {
     }
 
     public delete = (table, row) => {
-        console.log('%c ***** delete *****', 'background: #bada55; color: #000; font-weight: bold', row, table.rowOpened);
         if (table.openedRow !== row) {
             table.openRow(row);
             table.selectRow(row);
