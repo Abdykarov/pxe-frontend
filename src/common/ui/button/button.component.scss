@@ -158,10 +158,6 @@
 		}
 	}
 
-	&-icon {
-		width: $btn-width-icon;
-	}
-
 	&.btn-outline-primary,
 	&.btn-outline-secondary,
 	&.btn-outline-success,
@@ -274,7 +270,7 @@
 		height: 100%;
 		display: flex;
 		justify-content: center;
-		flex-direction: column;
+		// flex-direction: column;
 
 		& + .btn__text {
 			text-align: left;
@@ -326,6 +322,18 @@
 		// Media queries
 		@include media-breakpoint-up(sm) {
 			min-width: 0;
+		}
+	}
+
+	&.btn-icon {
+		width: $btn-width-icon;
+		color: $icons-secondary;
+
+		&:focus,
+		&.focus,
+		&:hover,
+		&:active {
+			color: $icons-hover;
 		}
 	}
 }
