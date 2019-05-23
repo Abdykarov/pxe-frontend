@@ -21,7 +21,7 @@
                     <div class="col-auto">
                         <div class="supply-point-offer__value-box">
                             <span class="supply-point-offer__value-name">Platnost nabídky</span>
-                            <span class="supply-point-offer__value">{{(offer.validFrom | dayBetweenDays: offer.validTo)}} {{(offer.validFrom | dayBetweenDays: offer.validTo) | plural: 'day_clear' | titlecase}}</span>
+                            <span class="supply-point-offer__value">{{(offer.validFrom | dayBetweenDays: offer.validTo)}} {{(offer.validFrom | dayBetweenDays: offer.validTo) | plural: 'day' | titlecase}}</span>
                         </div>
                     </div>
                 </div>

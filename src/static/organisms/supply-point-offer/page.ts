@@ -4,12 +4,10 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 import { IOffer } from 'src/common/graphql/models/offer.model';
 import { offerConfig } from './config';
 
-import { SupplyPointOfferComponent } from 'src/common/ui/supply-point-offer/supply-point-offer.component';
-
 @Component({
   templateUrl: './page.html',
 })
-export class SupplyPointOfferStaticComponent {
+export class SupplyPointOfferComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
     public offer: IOffer = offerConfig;
 
