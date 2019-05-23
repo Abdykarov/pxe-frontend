@@ -7,13 +7,13 @@ import {
     saveGasOffer,
     savePowerOffer,
     updatePowerOffer,
-} from '../mutation/offer';
-import { findOffers } from '../queries/offer';
+} from 'src/common/graphql/mutation/offer';
+import { findOffers } from 'src/common/graphql/queries/offer';
 import {
     IOfferInput,
     IOfferInputGasAttributes,
     IOfferInputPowerAttributes,
-} from '../models/offer.model';
+} from 'src/common/graphql/models/offer.model';
 
 @Injectable({
     providedIn: 'root',
