@@ -13,6 +13,20 @@ import {
 export class PluralPipe implements PipeTransform {
 
     public itemPluralMapping = {
+        'day': {
+            '=1' : 'den v kuse',
+            '=2' : 'dny v kuse',
+            '=3' : 'dny v kuse',
+            '=4' : 'dny v kuse',
+            'other' : 'dní v kuse',
+        },
+        'day_clear': {
+            '=1' : 'den',
+            '=2' : 'dny',
+            '=3' : 'dny',
+            '=4' : 'dny',
+            'other' : 'dní',
+        },
         'place': {
             '=1' : 'místo',
             '=2' : 'místa',
@@ -20,12 +34,12 @@ export class PluralPipe implements PipeTransform {
             '=4' : 'místa',
             'other' : 'míst',
         },
-        'day': {
-            '=1' : 'den v kuse',
-            '=2' : 'dny v kuse',
-            '=3' : 'dny v kuse',
-            '=4' : 'dny v kuse',
-            'other' : 'dní v kuse',
+        'year': {
+            '=1' : 'rok',
+            '=2' : 'roky',
+            '=3' : 'roky',
+            '=4' : 'roky',
+            'other' : 'let',
         },
         'stackCapacity': {
             '=1' : 'zásobník',

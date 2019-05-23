@@ -3,15 +3,15 @@ import { CommonModule } from '@angular/common';
 import { Routes } from '@angular/router';
 
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
-import { SupplyPointOfferComponent } from './page';
+import { SupplyPointOfferStaticComponent } from './page';
 import { SupplyPointOfferModule } from 'src/common/ui/supply-point-offer/supply-point-offer.module';
 
 @NgModule({
     declarations: [
-        SupplyPointOfferComponent,
+        SupplyPointOfferStaticComponent,
     ],
     exports: [
-        SupplyPointOfferComponent,
+        SupplyPointOfferStaticComponent,
     ],
     imports: [
         BreadcrumbModule,
@@ -24,6 +24,6 @@ export class SupplyPointOfferPageModule {}
 export const supplyPointOfferPageRoutes: Routes = [
     {
         path: 'supply-point-offer',
-        component: SupplyPointOfferComponent,
+        component: SupplyPointOfferStaticComponent,
     },
 ];

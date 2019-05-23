@@ -1,45 +1,54 @@
-<h3>Normal</h3>
-<a class="supply-point-offer">
+<a class="supply-point-offer"
+    [class.supply-point-offer--not-select]="NON_SELECTED_OFFER === typeOffer"
+    [class.supply-point-offer--owner]="OWNER_OFFER === typeOffer">
     <div class="row no-gutters">
-        <div class="col-12 col-xl-7">
+        <div class="col-12 col-xl-7"
+            [class.col-md-6]="OWNER_OFFER === typeOffer">
             <div class="supply-point-offer__inner">
                 <div class="row">
                     <div class="col-12">
                         <span class="supply-point-offer__title-label">Dodavatel</span>
-                        <span class="supply-point-offer__title">PRE</span>
+                        <span class="supply-point-offer__title">{{offer.supplier.title}}</span>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" *ngIf="OWNER_OFFER !== typeOffer">
                     <div class="col-auto">
                         <div class="supply-point-offer__value-box">
                             <span class="supply-point-offer__value-name">Dodávka</span>
-                            <span class="supply-point-offer__value">1 Rok</span>
+                            <span class="supply-point-offer__value">{{offer.deliveryLength}} {{offer.deliveryLength | plural: 'year' | titlecase}}</span>
                         </div>
                     </div>
                     <div class="col-auto">
                         <div class="supply-point-offer__value-box">
                             <span class="supply-point-offer__value-name">Platnost nabídky</span>
-                            <span class="supply-point-offer__value">45 dní</span>
+                            <span class="supply-point-offer__value">{{(offer.validFrom | dayBetweenDays: offer.validTo)}} {{(offer.validFrom | dayBetweenDays: offer.validTo) | plural: 'day_clear' | titlecase}}</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-xl-5">
+        <div class="col-12 col-xl-5"
+            [class.col-md-6]="OWNER_OFFER === typeOffer">
             <div class="supply-point-offer__inner supply-point-offer__inner--price">
                 <div class="row">
                     <div class="col-12">
                         <span class="supply-point-offer__title-label">Měsíční záloha</span>
-                        <span class="supply-point-offer__title">823,00 Kč</span>
+                        <span class="supply-point-offer__title">{{offer.permanentPaymentPrice | number: '1.0-2'}} Kč</span>
                     </div>
                 </div>
-                <div class="row justify-content-between">
+                <div class="row justify-content-between" *ngIf="OWNER_OFFER !== typeOffer">
                     <div class="col-12 col-md-auto">
                         <div class="row">
-                            <div class="col-auto">
+                            <div class="col-auto" *ngIf="offer.priceVT">
                                 <div class="supply-point-offer__value-box">
                                     <span class="supply-point-offer__value-name">Cena za kWh / VT</span>
-                                    <span class="supply-point-offer__value">3,42 Kč</span>
+                                    <span class="supply-point-offer__value">{{offer.priceVT | number: '1.0-2'}} Kč</span>
+                                </div>
+                            </div>
+                            <div class="col-auto" *ngIf="offer.priceNT">
+                                <div class="supply-point-offer__value-box">
+                                    <span class="supply-point-offer__value-name">Cena za kWh / NT</span>
+                                    <span class="supply-point-offer__value">{{offer.priceNT | number: '1.0-1'}} Kč</span>
                                 </div>
                             </div>
                         </div>
@@ -57,106 +66,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-12">
-            <ul class="check-list supply-point-offer__benefits-list">
-                <li>Žárovka LED Lorem</li>
-                <li>Žárovka LED Lorem</li>
-                <li>Žárovka LED Lorem</li>
-                <li>Žárovka LED Lorem</li>
-            </ul>
-        </div>
-    </div>
-</a>
-<h3>Owner</h3>
-<a class="supply-point-offer supply-point-offer--owner">
-    <div class="row no-gutters">
-        <div class="col-12 col-md-6 col-xl-7">
-            <div class="supply-point-offer__inner">
-                <div class="row">
-                    <div class="col-12">
-                        <span class="supply-point-offer__title-label">Dodavatel</span>
-                        <span class="supply-point-offer__title">PRE</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-xl-5">
-            <div class="supply-point-offer__inner supply-point-offer__inner--price">
-                <div class="row">
-                    <div class="col-12">
-                        <span  class="supply-point-offer__title-label">Měsíční záloha</span>
-                        <span class="supply-point-offer__title">823,00 Kč</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</a>
-<h3>Not select</h3>
-<a class="supply-point-offer supply-point-offer--not-select">
-    <div class="row no-gutters">
-        <div class="col-12 col-xl-7">
-            <div class="supply-point-offer__inner">
-                <div class="row">
-                    <div class="col-12">
-                        <span class="supply-point-offer__title-label">Dodavatel</span>
-                        <span class="supply-point-offer__title">PRE</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-auto">
-                        <div class="supply-point-offer__value-box">
-                            <span class="supply-point-offer__value-name">Dodávka</span>
-                            <span class="supply-point-offer__value">1 Rok</span>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <div class="supply-point-offer__value-box">
-                            <span class="supply-point-offer__value-name">Platnost nabídky</span>
-                            <span class="supply-point-offer__value text-color--danger">48 hodin</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-xl-5">
-            <div class="supply-point-offer__inner supply-point-offer__inner--price">
-                <div class="row">
-                    <div class="col-12">
-                        <span class="supply-point-offer__title-label">Měsíční záloha</span>
-                        <span class="supply-point-offer__title">823,00 Kč</span>
-                    </div>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-12 col-md-auto">
-                        <div class="row">
-                            <div class="col-auto">
-                                <div class="supply-point-offer__value-box">
-                                    <span class="supply-point-offer__value-name">Cena za kWh / VT</span>
-                                    <span class="supply-point-offer__value">3,42 Kč</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-auto supply-point-offer__addon">
-                        <lnd-button
-                            label="Výhody"
-                            type="link">
-                        </lnd-button>
-                        <lnd-button
-                            label="Vybrat"
-                            type="primary">
-                        </lnd-button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12">
+        <div class="col-12" *ngIf="OWNER_OFFER !== typeOffer">
             <ul class="check-list supply-point-offer__benefits-list d-block">
-                <li>Žárovka LED Lorem</li>
-                <li>Žárovka LED Lorem</li>
-                <li>Žárovka LED Lorem</li>
-                <li>Žárovka LED Lorem</li>
+                <li *ngFor="let benefit of offer.benefits">{{benefit}}</li>
             </ul>
         </div>
     </div>
