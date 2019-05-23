@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
+import {
+    FormControl,
+    FormGroup,
+} from '@angular/forms';
 
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { NewSupplyPointPageConfig } from 'src/static/pages/new-supply-point/config';
 import {
-    tableCols,
-    tableRows,
+    SupplyOfferOrganismConfig,
+
 } from './config';
 
 @Component({
@@ -12,10 +17,26 @@ import {
 
 export class SupplyOfferComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
-    public tableCols = tableCols;
-    public tableRows = tableRows;
 
-    constructor() {
+    public form: FormGroup = new FormGroup({
+        distributionLocation: new FormControl(),
+        distributionRateId: new FormControl(),
+        circuitBreakerId: new FormControl(),
+        deliveryLength: new FormControl(),
+        subjectTypeId: new FormControl(),
+        annualConsumptionId: new FormControl(),
+        validFrom: new FormControl(),
+        validTo: new FormControl(),
+        validFromTo: new FormControl(),
+        deliveryFrom: new FormControl(),
+        deliveryTo: new FormControl(),
+        deliveryFromTo: new FormControl(),
+    });
+
+    constructor(
+        public supplyOfferConfig: SupplyOfferOrganismConfig,
+        public newSupplyPointPageConfig: NewSupplyPointPageConfig,
+    ) {
         this.breadcrumbItemsSimple = [
             {
                 label: 'Supply offer',

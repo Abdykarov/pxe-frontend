@@ -103,6 +103,9 @@
 
 	::ng-deep {
 		.action-area-div {
+			position: absolute;
+			right: 0;
+			top: 0;
 			visibility: hidden; // temp
 			width: ( 30px * 4 ); // $btn-width-icon:
 		}
@@ -113,7 +116,7 @@
 	}
 
 	&--advanced__action-area {
-
+		position: relative;
 	}
 
 	&__tr--main {

@@ -181,6 +181,9 @@ export const codeListTypes = [
     CODE_LIST_TYPE_DIST_RATE_BUSINESSMAN, // pro firmy
     CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL, // pro domácnosti
     CODE_LIST_TYPE_CIRCUIT_BREAKER,
+    'TPSB',
+    'COMO',
+    'CGAS',
 ];
 
 export const subjectTypeOptions: Array<IOption> = [
