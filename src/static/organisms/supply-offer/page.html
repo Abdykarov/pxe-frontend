@@ -4,7 +4,7 @@
          class="action-area-div">
         <ng-template #tooltipEdit let-toggle="toggle">
             <lnd-button
-                    icon="icon--bin"
+                    icon="icon--edit"
                     type="icon"
                     variant="icon"
                     (action)="toggle();edit(table, row)"
@@ -16,7 +16,7 @@
 
         <ng-template #tooltipNew let-toggle="toggle">
             <lnd-button
-                    icon="icon--bin"
+                    icon="icon--add-new"
                     type="icon"
                     variant="icon"
                     (action)="toggle();create(table, row)"
@@ -28,7 +28,7 @@
 
         <ng-template #tooltipDuplicate let-toggle="toggle">
             <lnd-button
-                    icon="icon--bin"
+                    icon="icon--copy"
                     type="icon"
                     variant="icon"
                     (action)="toggle();duplicate(table, row)"
@@ -40,7 +40,7 @@
 
         <ng-template #tooltipDelete let-toggle="toggle">
             <lnd-button
-                    icon="icon--bin"
+                    icon="icon--delete"
                     type="icon"
                     variant="icon"
                     (action)="toggle();delete(table, row)"
@@ -57,7 +57,7 @@
         <div class="col text-right">
             <ng-template #tooltipNewDetail let-toggle="toggle">
                 <lnd-button
-                        icon="icon--bin"
+                        icon="icon--add-new"
                         type="icon"
                         variant="icon"
                         (action)="toggle();"
@@ -68,7 +68,7 @@
             </lnd-tooltip>
             <ng-template #tooltipDuplicateDetail let-toggle="toggle">
                 <lnd-button
-                        icon="icon--bin"
+                        icon="icon--copy"
                         type="icon"
                         variant="icon"
                         (action)="toggle();"
@@ -79,7 +79,7 @@
             </lnd-tooltip>
             <ng-template #tooltipDeleteDetail let-toggle="toggle">
                 <lnd-button
-                        icon="icon--bin"
+                        icon="icon--delete"
                         type="icon"
                         variant="icon"
                         (action)="toggle();"
