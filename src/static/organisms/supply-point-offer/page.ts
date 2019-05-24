@@ -21,7 +21,7 @@ export class SupplyPointOfferComponent {
   }
 
     public click = (evt) => {
-        console.log('clicked');
         evt.preventDefault();
+        console.log('clicked');
     }
 }
