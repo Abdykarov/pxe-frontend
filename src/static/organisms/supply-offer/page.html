@@ -1,5 +1,14 @@
+<ng-template #columnTemplatePriceVT let-row="row">
+    <span [innerHtml]="row.priceVT | number:'1.0-2'"></span>
+</ng-template>
+<ng-template #columnTemplatePriceNT let-row="row">
+    <span [innerHtml]="row.priceNT | number:'1.0-2'"></span>
+</ng-template>
+<ng-template #columnTemplatePriceGas let-row="row">
+    <span [innerHtml]="row.priceGas | number:'1.0-2'"></span>
+</ng-template>
 <ng-template #actionColumnTemplatePower let-row="row">
-    <span [innerHtml]="row.cashAdvance.value"></span>
+    <span [innerHtml]="row.permanentPaymentPrice | number:'1.0-2'"></span>
     <div *ngIf="table.openedRow !== row"
          class="action-area-div">
         <ng-template #tooltipEdit let-toggle="toggle">
@@ -126,7 +135,7 @@
         <div class="col-2">
             <lnd-select
                 label="Jistič"
-                [options]="newSupplyPointPageConfig.circuitBreakerOtions"
+                [options]="newSupplyPointPageConfig.circuitBreakerOptions"
                 [parentForm]="form"
                 [selectName]="'circuitBreakerId'">
             </lnd-select>
@@ -255,7 +264,12 @@
                 [tableClass]="['table--advanced', 'mb-0']"
                 [rowDetailTemplate]="rowDetail"
                 [actionColTriggersDetail]="true"
-                [columnTemplates]="{actionColumnTemplatePower: actionColumnTemplatePower}">
+                [columnTemplates]="{
+                    actionColumnTemplatePower: actionColumnTemplatePower,
+                    columnTemplatePriceVT: columnTemplatePriceVT,
+                    columnTemplatePriceNT: columnTemplatePriceNT,
+                    columnTemplatePriceGas: columnTemplatePriceGas
+                }">
                 (rowOpened)="rowOpened($event)"
                 (rowSelected)="rowSelected($event)"
             ></lnd-table>

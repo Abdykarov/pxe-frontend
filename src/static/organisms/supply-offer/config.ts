@@ -1,4 +1,8 @@
+import { DecimalPipe } from '@angular/common';
 import { Injectable } from '@angular/core';
+
+import * as R from 'ramda';
+import { NewSupplyPointPageConfig } from 'src/static/pages/new-supply-point/config';
 
 @Injectable({
     providedIn: 'root',
@@ -12,7 +16,7 @@ export class SupplyOfferOrganismConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.name.value}`,
+                        content: (row) => `${row.name}`,
                     },
                 ],
             },
@@ -22,7 +26,7 @@ export class SupplyOfferOrganismConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.subjectTypeId}`,
+                        content: (row) => `${R.find(R.propEq('value', row.subjectTypeId))(this.subjectTypeOptions).label}`,
                     },
                 ],
             },
@@ -32,97 +36,85 @@ export class SupplyOfferOrganismConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.location.value}`,
+                        content: (row) => `${row.distributionLocation}`,
                     },
                 ],
             },
+            // POWER ONLY
             {
                 label: 'Distribuční sazba',
                 views: [
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.rate.value}`,
+                        content: (row) => `${row.distributionRateId}`,
                     },
                 ],
             },
+            // POWER ONLY
             {
                 label: 'Jistič',
                 views: [
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.rate.value}`,
+                        content: (row) => `${R.find(R.propEq('value', row.circuitBreakerId))
+                        (this.newSupplyPointPageConfig.circuitBreakerOptions).label}`,
                     },
                 ],
             },
-            {
-                label: 'Spotřeba',
-                views: [
-                    {
-                        headingClass: [''],
-                        cellClass: [''],
-                        content: (row) => `${row.rate.value}`,
-                    },
-                ],
-            },
+            // GAS ONLY
             // {
-            //     label: 'Roční&nbsp;spotřeba elektřiny&nbsp;VT',
+            //     label: 'Spotřeba',
             //     views: [
             //         {
             //             headingClass: [''],
             //             cellClass: [''],
-            //             content: (row) => `${row.consumptionHighTarif.value}`,
+            //             content: (row) => `${R.find(R.propEq('value', row.annualConsumptionId))(this.annualConsumptionOptions).label}`,
             //         },
             //     ],
             // },
-            // {
-            //     label: 'Roční&nbsp;spotřeba elektřiny&nbsp;NT',
-            //     views: [
-            //         {
-            //             headingClass: [''],
-            //             cellClass: [''],
-            //             content: (row) => `${row.consumptionLowTarif.value}`,
-            //         },
-            //     ],
-            // },
+            // POWER ONLY
             {
                 label: 'Cena&nbsp;VT (MWh/Kč)',
                 views: [
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.priceHighTarif.value}`,
+                        // content: (row) => `${row.priceVT}`,
+                        contentTemplateName: 'columnTemplatePriceVT',
                     },
                 ],
             },
+            // POWER ONLY
             {
                 label: 'Cena&nbsp;NT (MWh/Kč)',
                 views: [
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.priceLowTarif.value}`,
+                        contentTemplateName: 'columnTemplatePriceNT',
                     },
                 ],
             },
-            {
-                label: 'Cena (MWh/Kč)',
-                views: [
-                    {
-                        headingClass: [''],
-                        cellClass: [''],
-                        content: (row) => `${row.priceLowTarif.value}`,
-                    },
-                ],
-            },
+            // GAS ONLY
+            // {
+            //     label: 'Cena (MWh/Kč)',
+            //     views: [
+            //         {
+            //             headingClass: [''],
+            //             cellClass: [''],
+            //             contentTemplateName: 'columnTemplatePriceGas',
+            //         },
+            //     ],
+            // },
             {
                 label: 'Platnost',
                 views: [
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.period.value}`,
+                        content: (row) => `${row.validFromTo}`,
                     },
                 ],
             },
@@ -132,7 +124,7 @@ export class SupplyOfferOrganismConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.period.value}`,
+                        content: (row) => `${row.validFromTo}`,
                     },
                 ],
             },
@@ -142,7 +134,7 @@ export class SupplyOfferOrganismConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.period.value}`,
+                        content: (row) => `${R.find(R.propEq('value', row.deliveryLength))(this.deliveryLengthOptions).label}`,
                     },
                 ],
             },
@@ -163,71 +155,93 @@ export class SupplyOfferOrganismConfig {
     public tableRows = {
         main: [
             {
-                name: { value: 'Variant 36' },
+                name: 'Variant 36',
                 subjectTypeId: '1',
-                location: { value: 'Praha' },
-                rate: { value: 'D02D' },
-                // consumptionHighTarif: { value: '1,62&nbsp;MWh' },
-                // consumptionLowTarif: { value: '0&nbsp;MWh' },
-                priceHighTarif: { value: '3,75' },
-                priceLowTarif: { value: '3,20' },
-                period: { value: '31.5.2019' },
-                cashAdvance: { value: '650' },
+                distributionLocation: 'EON',
+                distributionRateId: 'D02D',
+                circuitBreakerId: '3x(16A, 20A>',
+                annualConsumptionId: '1',
+                priceVT: 3.75,
+                priceNT: 3.75,
+                priceGas: 3.75,
+                validFromTo: '31.5.2019',
+                deliveryFromTo: '31.5.2019',
+                deliveryLength: '1',
+                permanentPaymentPrice: 650,
             },
             {
-                name: { value: 'Zelená usporám od&nbsp;1.1.2019 do&nbsp;12.12.2019' },
-                location: { value: 'Praha' },
-                rate: { value: 'D02D' },
-                // consumptionHighTarif: { value: '1,62&nbsp;MWh' },
-                // consumptionLowTarif: { value: '0&nbsp;MWh' },
-                priceHighTarif: { value: '3,75' },
-                priceLowTarif: { value: '3,20' },
-                period: { value: '1.1.2019 - 12.12.2019' },
-                cashAdvance: { value: '250' },
+                name: 'Zelená usporám od&nbsp;1.1.2019 do&nbsp;12.12.2019',
+                subjectTypeId: '2',
+                distributionLocation: 'CEZ',
+                distributionRateId: 'D02D',
+                circuitBreakerId: '3x(16A, 20A>',
+                annualConsumptionId: '2',
+                priceVT: 3.75,
+                priceNT: 3.75,
+                priceGas: 3.75,
+                validFromTo: '12.12.2019',
+                deliveryLength: '2',
+                permanentPaymentPrice: 250,
             },
             {
-                name: { value: 'Název 1' },
-                location: { value: 'Praha' },
-                rate: { value: 'D02D' },
-                // consumptionHighTarif: { value: '1,62&nbsp;MWh' },
-                // consumptionLowTarif: { value: '0&nbsp;MWh' },
-                priceHighTarif: { value: '5,75' },
-                priceLowTarif: { value: '2,20' },
-                period: { value: '31.5.2019' },
-                cashAdvance: { value: '3&nbsp;650' },
+                name: 'Název 1',
+                subjectTypeId: '1',
+                distributionLocation: 'ALL',
+                distributionRateId: 'D02D',
+                circuitBreakerId: '3x(16A, 20A>',
+                annualConsumptionId: '3',
+                priceVT: 5.75,
+                priceNT: 3.75,
+                priceGas: 3.75,
+                validFromTo: '31.5.2019',
+                deliveryFromTo: '31.5.2019',
+                deliveryLength: '1',
+                permanentPaymentPrice: 3650,
             },
             {
-                name: { value: 'Variant 36' },
-                location: { value: 'Praha' },
-                rate: { value: 'D02D' },
-                // consumptionHighTarif: { value: '1,62&nbsp;MWh' },
-                // consumptionLowTarif: { value: '0&nbsp;MWh' },
-                priceHighTarif: { value: '3,75' },
-                priceLowTarif: { value: '3,20' },
-                period: { value: '31.5.2019' },
-                cashAdvance: { value: '650' },
+                name: 'Variant 36',
+                subjectTypeId: '1',
+                distributionLocation: 'EON',
+                distributionRateId: 'D02D',
+                circuitBreakerId: '3x(16A, 20A>',
+                annualConsumptionId: '1',
+                priceVT: 3.75,
+                priceNT: 3.75,
+                priceGas: 3.75,
+                validFromTo: '31.5.2019',
+                deliveryFromTo: '31.5.2019',
+                deliveryLength: '1',
+                permanentPaymentPrice: 650,
             },
             {
-                name: { value: 'Zelená usporám od&nbsp;1.1.2019 do&nbsp;12.12.2019' },
-                location: { value: 'Praha' },
-                rate: { value: 'D02D' },
-                // consumptionHighTarif: { value: '1,62&nbsp;MWh' },
-                // consumptionLowTarif: { value: '0&nbsp;MWh' },
-                priceHighTarif: { value: '3,75' },
-                priceLowTarif: { value: '3,20' },
-                period: { value: '1.1.2019 - 12.12.2019' },
-                cashAdvance: { value: '250' },
+                name: 'Zelená usporám od&nbsp;1.1.2019 do&nbsp;12.12.2019',
+                subjectTypeId: '1',
+                distributionLocation: 'EON',
+                distributionRateId: 'D02D',
+                circuitBreakerId: '3x(16A, 20A>',
+                annualConsumptionId: '2',
+                priceVT: 3.75,
+                priceNT: 3.75,
+                priceGas: 3.75,
+                validFromTo: '1.1.2019 - 12.12.2019',
+                deliveryFromTo: '1.1.2019',
+                deliveryLength: '1',
+                permanentPaymentPrice: 250,
             },
             {
-                name: { value: 'Název 1' },
-                location: { value: 'Praha' },
-                rate: { value: 'D02D' },
-                // consumptionHighTarif: { value: '1,62&nbsp;MWh' },
-                // consumptionLowTarif: { value: '0&nbsp;MWh' },
-                priceHighTarif: { value: '5,75' },
-                priceLowTarif: { value: '2,20' },
-                period: { value: '31.5.2019' },
-                cashAdvance: { value: '3&nbsp;650' },
+                name: 'Název 1',
+                subjectTypeId: '1',
+                distributionLocation: 'EON',
+                distributionRateId: 'D02D',
+                circuitBreakerId: '3x(16A, 20A>',
+                annualConsumptionId: '1',
+                priceVT: 3.75,
+                priceNT: 3.75,
+                priceGas: 3.75,
+                validFromTo: '31.5.2019',
+                deliveryFromTo: '31.5.2019',
+                deliveryLength: '1',
+                permanentPaymentPrice: 3650,
             },
         ],
     };
@@ -290,4 +304,8 @@ export class SupplyOfferOrganismConfig {
             label: '45 - 63 MWh',
         },
     ];
+
+    constructor(
+        public newSupplyPointPageConfig: NewSupplyPointPageConfig,
+    ) {}
 }
