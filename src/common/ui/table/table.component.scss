@@ -73,14 +73,6 @@
 				background-color: transparent;
 				padding: $table-adv-cell-padding-hor $table-adv-cell-padding-vert;
 				vertical-align: bottom;
-
-				&:first-child {
-					padding-left: ( $spacer * 1.5 );
-				}
-
-				&:last-child {
-					padding-right: ( $spacer * 1.5 );
-				}
 			}
 		}
 
@@ -89,7 +81,20 @@
 			td {
 				padding: $table-adv-cell-padding-hor $table-adv-cell-padding-vert;
 				vertical-align: middle;
+			}
 
+			.table__tr--detail {
+				th,
+				td {
+					padding: ( $spacer * 2 ) ( $spacer * 2.75 ) ( $spacer * 3.25 );
+				}
+			}
+		}
+
+		> thead,
+		> tbody {
+			th,
+			td {
 				&:first-child {
 					padding-left: ( $spacer * 1.5 );
 				}
