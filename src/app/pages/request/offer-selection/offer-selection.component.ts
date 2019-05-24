@@ -1,33 +1,35 @@
-import { Component } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+} from '@angular/core';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { configStepper } from './offer-selection.config';
+import { IOffer } from 'src/common/graphql/models/offer.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
-import { ROUTES } from 'src/app/app.constants';
+import { OfferService } from 'src/common/graphql/services/offer.service';
 
 @Component({
     templateUrl: './offer-selection.component.html',
     styleUrls: ['./offer-selection.component.scss'],
 })
-export class OfferSelectionComponent extends AbstractComponent {
-    public stepperProgressConfigSimple1: IStepperProgressItem[] = [
-        {
-            url: ROUTES.ROUTER_REQUEST_OFFER_SELECTION,
-            done: true,
-            label: 'Výběr odběrného místa',
-        },
-        {
-            url: ROUTES.ROUTER_REQUEST_SUPPLY_POINT,
-            done: false,
-            label: 'Výběr nabídky',
-        },
-        {
-            url: ROUTES.ROUTER_DASHBOARD,
-            done: false,
-            label: 'Podepsání smlouvy',
-        },
-    ];
+export class OfferSelectionComponent extends AbstractComponent implements OnInit {
+    public stepperProgressConfigSimple1: IStepperProgressItem[] = configStepper;
+    public offers: IOffer[] = [];
 
-    constructor() {
+    constructor(
+        private cd: ChangeDetectorRef,
+        private offerService: OfferService,
+    ) {
         super();
+    }
+
+    ngOnInit () {
+        this.offerService.findOffers().subscribe(({data}) => {
+            this.offers = data.findOffers;
+            console.log(this.offers);
+            this.cd.markForCheck();
+        });
     }
 }
