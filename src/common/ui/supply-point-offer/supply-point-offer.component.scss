@@ -23,7 +23,7 @@
 		overflow: hidden;
 
 		// Media queries
-		@include media-breakpoint-down(xl) {
+		@include media-breakpoint-down(md) {
 			pointer-events: none;
 		}
 	}
