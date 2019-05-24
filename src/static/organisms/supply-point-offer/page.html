@@ -7,10 +7,10 @@
 <div class="static-pages-holder">
     <div class="static-pages static-pages--bg-transparent">
         <h3>Selected</h3>
-        <pxe-supply-point-offer [offer]="offer"></pxe-supply-point-offer>
+        <pxe-supply-point-offer [offer]="offer" (click)="click($event)"></pxe-supply-point-offer>
         <h3>Owner</h3>
-        <pxe-supply-point-offer [typeOffer]="'owner'" [offer]="offer"></pxe-supply-point-offer>
+        <pxe-supply-point-offer [typeOffer]="'owner'" [offer]="offer" (click)="click($event)"></pxe-supply-point-offer>
         <h3>Non selected</h3>
-        <pxe-supply-point-offer [typeOffer]="'non_selected'" [offer]="offer"></pxe-supply-point-offer>
+        <pxe-supply-point-offer [typeOffer]="'non_selected'" [offer]="offer" (click)="click($event)"></pxe-supply-point-offer>
     </div>
 </div>

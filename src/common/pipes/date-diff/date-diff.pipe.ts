@@ -10,7 +10,7 @@ import { unitOfTime } from 'moment';
     name: 'dateDiff',
 })
 export class DateDiffPipe implements PipeTransform {
-    transform(dateFromString: string, dateToString: string, resultUnit: unitOfTime.Diff): number {
+    transform(dateFromString: string, dateToString: string, resultUnit: unitOfTime.Diff = 'days'): number {
         const from = moment(dateFromString);
         const to = moment(dateToString);
         return to.diff(from, resultUnit);

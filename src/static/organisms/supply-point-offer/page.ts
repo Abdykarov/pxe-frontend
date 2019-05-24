@@ -19,4 +19,9 @@ export class SupplyPointOfferComponent {
           },
       ];
   }
+
+    public click = (evt) => {
+        evt.preventDefault();
+        console.log('clicked');
+    }
 }

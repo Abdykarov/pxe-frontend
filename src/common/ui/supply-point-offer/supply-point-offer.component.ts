@@ -1,6 +1,8 @@
 import {
     Component,
+    EventEmitter,
     Input,
+    Output,
 } from '@angular/core';
 
 import { IOffer } from 'src/common/graphql/models/offer.model';
@@ -20,5 +22,8 @@ export class SupplyPointOfferComponent {
 
     @Input()
     public typeOffer: string = this.SELECTED_OFFER;
+
+    @Output()
+    click: EventEmitter<any> = new EventEmitter();
 
 }
