@@ -37,8 +37,8 @@ export class OfferService {
             .mutate({
                 mutation: savePowerOffer,
                 variables: {
-                    offer: offer,
-                    powerAttributes: powerAttributes,
+                    offer,
+                    powerAttributes,
                 },
             });
     }
@@ -48,8 +48,8 @@ export class OfferService {
             .mutate({
                 mutation: saveGasOffer,
                 variables: {
-                    offer: offer,
-                    gasAttributes: gasAttributes,
+                    offer,
+                    gasAttributes,
                 },
             });
     }
@@ -59,9 +59,9 @@ export class OfferService {
             .mutate({
                 mutation: updatePowerOffer,
                 variables: {
-                    offerId: offerId,
-                    offer: offer,
-                    powerAttributes: powerAttributes,
+                    offerId,
+                    offer,
+                    powerAttributes,
                 },
             });
     }
@@ -71,9 +71,9 @@ export class OfferService {
             .mutate({
                 mutation: gasAttributes,
                 variables: {
-                    offerId: offerId,
-                    offer: offer,
-                    gasAttributes: gasAttributes,
+                    offerId,
+                    offer,
+                    gasAttributes,
                 },
             });
     }
@@ -83,7 +83,7 @@ export class OfferService {
             .mutate({
                 mutation: deleteOffer,
                 variables: {
-                    offerId: offerId,
+                    offerId,
                 },
             });
     }
