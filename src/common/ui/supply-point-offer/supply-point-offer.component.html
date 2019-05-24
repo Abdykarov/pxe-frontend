@@ -1,9 +1,9 @@
 <a class="supply-point-offer"
-    [class.supply-point-offer--owner]="isOwner"
-    (click)="action.emit($event)">
+   [class.supply-point-offer--owner]="isOwner"
+   (click)="action.emit(offer)">
     <div class="row no-gutters">
         <div class="col-12 col-xl-7"
-            [class.col-md-6]="isOwner">
+             [class.col-md-6]="isOwner">
             <div class="supply-point-offer__inner">
                 <div class="row">
                     <div class="col-12">
@@ -11,7 +11,8 @@
                         <span class="supply-point-offer__title">{{offer.supplier.title}}</span>
                     </div>
                 </div>
-                <div class="row" *ngIf="!isOwner">
+                <div *ngIf="!isOwner"
+                     class="row">
                     <div class="col-auto">
                         <div class="supply-point-offer__value-box">
                             <span class="supply-point-offer__value-name">Dodávka</span>
@@ -28,7 +29,7 @@
             </div>
         </div>
         <div class="col-12 col-xl-5"
-            [class.col-md-6]="isOwner">
+             [class.col-md-6]="isOwner">
             <div class="supply-point-offer__inner supply-point-offer__inner--price">
                 <div class="row">
                     <div class="col-12">
@@ -72,13 +73,14 @@
                         <lnd-button
                             label="Vybrat"
                             type="primary"
-                            (action)="action.emit($event)">
+                            (action)="$event.stopPropagation();action.emit(offer)">
                         </lnd-button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12">
+        <div class="col-12"
+             *ngIf="!isOwner">
             <ul class="check-list supply-point-offer__benefits-list"
                 [class.d-block]="showBenefits"
                 [class.d-none]="!showBenefits"

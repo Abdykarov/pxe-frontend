@@ -24,10 +24,11 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     public isOwner = false;
 
     @Output()
-    action: EventEmitter<any> = new EventEmitter();
+    public action: EventEmitter<any> = new EventEmitter();
 
-    public toggleBenefits(evt) {
-        evt.preventDefault();
+    public toggleBenefits = (event) => {
+        event.preventDefault();
+        event.cancelBubble = true;
         this.showBenefits = !this.showBenefits;
     }
 }
