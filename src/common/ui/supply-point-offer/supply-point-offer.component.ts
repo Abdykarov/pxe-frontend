@@ -1,8 +1,8 @@
 import {
     Component,
     EventEmitter,
-    HostListener,
-    Input, OnInit,
+    Input,
+    OnInit,
     Output,
 } from '@angular/core';
 

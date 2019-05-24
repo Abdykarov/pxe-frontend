@@ -1,4 +1,4 @@
-<span (click)="allowGlobalClick && action.emit($event)">
+<span (click)="!isOwner && allowGlobalClick && action.emit($event)">
     <a class="supply-point-offer"
         [class.supply-point-offer--owner]="isOwner">
         <div class="row no-gutters">
@@ -68,7 +68,7 @@
                             <lnd-button
                                 label="Vybrat"
                                 type="primary"
-                                (action)="action.emit($event)">
+                                (action)="!isOwner && action.emit($event)">
                             </lnd-button>
                         </div>
                     </div>
