@@ -10,10 +10,10 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { configStepper } from './offer-selection.config';
-import { IOffer, ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
+import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { OfferService } from 'src/common/graphql/services/offer.service';
-import { ROUTES } from '../../../app.constants';
+import { ROUTES } from 'src/app/app.constants';
 
 @Component({
     templateUrl: './offer-selection.component.html',
@@ -41,7 +41,6 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     }
 
     action = (id) => {
-        console.log(ROUTES.ROUTER_REQUEST_RECAPITULATION);
         this.router.navigate([ROUTES.ROUTER_REQUEST_RECAPITULATION]);
     }
 }

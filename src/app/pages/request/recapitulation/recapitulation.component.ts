@@ -1,23 +1,15 @@
 import {
     Component,
-    OnInit,
 } from '@angular/core';
 
+import { configStepper } from 'src/app/pages/request/offer-selection/offer-selection.config';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
-import { configStepper } from '../offer-selection/offer-selection.config';
 
 @Component({
     selector: 'pxe-recapitulation',
     templateUrl: './recapitulation.component.html',
-    styleUrls: ['./recapitulation.component.css'],
+    styleUrls: ['./recapitulation.component.scss'],
 })
-export class RecapitulationComponent implements OnInit {
-
+export class RecapitulationComponent {
     public stepperProgressConfig: IStepperProgressItem[] = configStepper;
-
-    constructor() { }
-
-    ngOnInit() {
-    }
-
 }

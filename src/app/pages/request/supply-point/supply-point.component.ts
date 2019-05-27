@@ -63,6 +63,7 @@ export class SupplyPointComponent extends AbstractComponent {
         this.globalError = [];
         this.fieldError = {};
         let saveSupplyPoint;
+        let ean = '';
 
         const supplyPoint: ISupplyPoint = R.pick([
             'id',
@@ -82,6 +83,7 @@ export class SupplyPointComponent extends AbstractComponent {
                     'annualConsumptionNT',
                     'annualConsumptionVT',
                 ], supplyPointFormData);
+            ean = powerAttributes.ean;
             saveSupplyPoint = this.supplyService.savePowerSupplyPoint(supplyPoint, powerAttributes);
         } else {
             const gasAttributes: ISupplyPointGasAttributes =
@@ -95,11 +97,12 @@ export class SupplyPointComponent extends AbstractComponent {
         saveSupplyPoint
             .subscribe(
                 (data) => {
-                    console.log(data);
                     this.formLoading = false;
                     this.formSent = true;
                     this.cd.markForCheck();
-                    this.router.navigate([ROUTES.ROUTER_REQUEST_OFFER_SELECTION]);
+                    this.router.navigate([ROUTES.ROUTER_REQUEST_OFFER_SELECTION, {
+                        ean,
+                    }]);
                 },
                 (error) => {
                     this.formLoading = false;
