@@ -126,7 +126,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
         if (this.form.valid) {
             const form = {
                 ...this.form.value,
-                supplierId: this.form.value.supplierId && this.form.value.supplierId.id,
+                supplierId: this.form.value.supplierId && parseInt(this.form.value.supplierId.id, 10),
                 address: {
                     ...this.form.value.address,
                     orientationNumber: this.form.value.address.orientationNumber || this.form.value.address.descriptiveNumber,
