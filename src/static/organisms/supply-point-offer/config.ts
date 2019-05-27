@@ -1,29 +1,23 @@
-import { IOffer } from 'src/common/graphql/models/offer.model';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
+import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { TypeCommodity } from 'src/common/ui/supplier/model/supplier.model';
 
-export const offerConfig: IOffer = {
-    annualConsumption: undefined,
+export const offerConfig: ISupplyPointOffer = {
     benefits: [
         'Žárovka LED Lorem',
         'Žárovka LED Lorem',
         'Žárovka LED Lorem',
         'Žárovka LED Lorem',
     ],
-    circuitBreaker: undefined,
-    commodityType: '',
+    commodityType: CommodityType.POWER,
     deliveryFrom: '',
     deliveryLength: 1,
-    deliveryTo: '',
-    distributionLocation: '',
-    distributionRate: undefined,
     id: 0,
     name: '',
     permanentPaymentPrice: 823.00,
     priceGas: 0,
     priceNT: 3.14,
     priceVT: 3.54,
-    status: '',
-    subject: undefined,
     supplier: {
         alt: 'logo - Alpiq CZ',
         logoUrl: '/assets/images/suppliers/logo_alpiq.svg',

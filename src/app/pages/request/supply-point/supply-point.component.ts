@@ -95,6 +95,7 @@ export class SupplyPointComponent extends AbstractComponent {
         saveSupplyPoint
             .subscribe(
                 (data) => {
+                    console.log(data);
                     this.formLoading = false;
                     this.formSent = true;
                     this.cd.markForCheck();

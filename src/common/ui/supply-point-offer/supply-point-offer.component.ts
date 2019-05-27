@@ -8,7 +8,7 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
-import { IOffer } from 'src/common/graphql/models/offer.model';
+import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 
 @Component({
     selector: 'pxe-supply-point-offer',
@@ -22,7 +22,7 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     public COMMODITY_TYPE_GAS = CommodityType.GAS;
 
     @Input()
-    public offer: IOffer;
+    public supplyPointOffer: ISupplyPointOffer;
 
     @Input()
     public isOwner = false;
