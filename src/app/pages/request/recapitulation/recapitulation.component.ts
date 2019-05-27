@@ -1,6 +1,4 @@
-import {
-    Component,
-} from '@angular/core';
+import { Component } from '@angular/core';
 
 import { configStepper } from 'src/app/pages/request/offer-selection/offer-selection.config';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
