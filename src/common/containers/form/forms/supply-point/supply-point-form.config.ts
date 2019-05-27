@@ -213,10 +213,12 @@ export const commodityTypeFields = {
 
 
 export const distributionRatesTypeDefinition = {
-    [DistributionType.VT] : ['C01d', 'C02d', 'C03d', 'C62d', 'D01d', 'D02d'],
+    [DistributionType.VT] : [
+        'C01d', 'C02d', 'C03d', 'C60d', 'C61d', 'C62d', 'D01d', 'D02d',
+    ],
     [DistributionType.BOTH] : [
-        'C25d', 'C26d', 'C27d', 'C35d', 'C45d', 'C46d', 'C55d', 'C56d', 'D25d', 'D26d', 'D27d', 'D35d', 'D45d',
-        'D56d', 'D57d', 'D61d',
+        'C25d', 'C26d', 'C27d', 'C35d', 'C45d', 'C46d', 'C55d', 'C56d',
+        'D25d', 'D26d', 'D27d', 'D35d', 'D45d', 'D56d', 'D57d', 'D61d',
     ],
 };
 

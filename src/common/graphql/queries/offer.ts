@@ -56,3 +56,31 @@ export const findOffers = gql`
     }
 `;
 
+export const findSupplyPointOffers = gql`
+    query findSupplyPointOffers($ean: String!){
+        findSupplyPointOffers(ean: $ean){
+            id,
+            supplier{
+                id,
+                name,
+                vatNumber,
+                logoPath,
+                sampleDocuments{
+                    type,
+                    url
+                }
+            },
+            commodityType,
+            name,
+            validFrom,
+            validTo,
+            deliveryFrom,
+            deliveryLength,
+            permanentPaymentPrice,
+            benefits,
+            priceVT,
+            priceNT,
+            priceGas,
+        }
+    }
+`;
