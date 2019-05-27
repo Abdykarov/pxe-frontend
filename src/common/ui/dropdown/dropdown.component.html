@@ -2,8 +2,7 @@
     [ngClass]="[
         direction ? 'drop' + direction : 'dropdown',
         hasBeak && isOpen ? 'dropdown--with-beak' : '',
-        customDropdownClass ? customDropdownClass : '',
-        overlayEnabled && isOpen ? 'overlay--visible' : ''
+        customDropdownClass ? customDropdownClass : ''
     ]"
     (lndOffClick)="isOpen = false"
     [offClickEnabled]="isOpen"

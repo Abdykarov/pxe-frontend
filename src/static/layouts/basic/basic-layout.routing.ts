@@ -24,6 +24,10 @@ import {
     colorsPageRoutes,
 } from 'src/static/atoms/colors/page.module';
 import {
+    DropdownPageModule,
+    dropdownPageRoutes,
+} from 'src/static/atoms/dropdown/page.module';
+import {
     FormsPageModule,
     formsPageRoutes,
 } from 'src/static/atoms/forms/page.module';
@@ -89,6 +93,7 @@ const routes: Routes = [
             ...breadcrumbPageRoutes,
             ...buttonsPageRoutes,
             ...colorsPageRoutes,
+            ...dropdownPageRoutes,
             ...formsPageRoutes,
             ...iconsPageRoutes,
             ...indicatorsPageRoutes,
@@ -117,6 +122,7 @@ const routes: Routes = [
         BreadcrumbPageModule,
         ButtonsPageModule,
         ColorsPageModule,
+        DropdownPageModule,
         FormsPageModule,
         IconsPageModule,
         IndicatorsPageModule,

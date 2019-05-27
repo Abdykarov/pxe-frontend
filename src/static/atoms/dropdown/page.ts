@@ -8,13 +8,7 @@ import { IDropdownItem } from 'src/common/ui/dropdown/models/item.model';
 
 export class DropdownPageComponent {
     public dropdownItems: Array<IDropdownItem>;
-    private body = document.getElementById('top');
     public breadcrumbItemsSimple: IBreadcrumbItems;
-
-    public toggleOverlayer() {
-        this.body.classList.toggle('body-inner--overlay');
-        this.body.classList.toggle('body-inner--overlay-full');
-    }
 
     constructor() {
         this.dropdownItems = [];

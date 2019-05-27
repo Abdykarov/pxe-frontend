@@ -117,7 +117,7 @@
 .dropdown-menu {
 	min-width: 100%;
 	max-width: calc( 100vw - 60px );
-	top: 100%;
+	top: calc(100% + 10px);
 	margin-top: 0;
 	border: none;
 	box-shadow: $dropdown-box-shadow;
