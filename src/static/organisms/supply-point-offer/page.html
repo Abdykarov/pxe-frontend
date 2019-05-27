@@ -5,8 +5,23 @@
 </div>
 
 <div class="static-pages-holder">
-    <h3>Normal</h3>
     <div class="static-pages static-pages--bg-transparent">
-        <pxe-supply-point-offer></pxe-supply-point-offer>
+        <div class="supply-points-offer">
+            <h3>Normal</h3>
+            <pxe-supply-point-offer
+                    [offer]="offer"
+                    (action)="click($event)"
+            ></pxe-supply-point-offer>
+            <h3>Owner</h3>
+            <pxe-supply-point-offer
+                    [isOwner]="true"
+                    [offer]="offer"
+                    (action)="click($event)"
+            ></pxe-supply-point-offer>
+            <pxe-supply-point-offer
+                    [offer]="offer"
+                    (action)="click($event)"
+            ></pxe-supply-point-offer>
+        </div>
     </div>
 </div>

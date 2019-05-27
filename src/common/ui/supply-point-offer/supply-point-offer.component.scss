@@ -12,6 +12,30 @@
 @import '../supply-point/supply-point.component.variables.scss';
 
 
+::ng-deep {
+	.supply-points-offer {
+		pointer-events: none;
+
+		&:hover {
+			.supply-point-offer:not(:hover):not(.supply-point-offer--owner) {
+				@include link-without-href-self {
+					// Media queries
+					@include media-breakpoint-up(xl) {
+						background-color: $body-bg;
+					}
+				}
+
+				.supply-point-offer__inner--price {
+					// Media queries
+					@include media-breakpoint-up(xl) {
+						background-color: rgba($white, .5);
+					}
+				}
+			}
+		}
+	}
+}
+
 .supply-point-offer {
 	@include link-without-href-self {
 		display: block;
@@ -23,7 +47,7 @@
 		overflow: hidden;
 
 		// Media queries
-		@include media-breakpoint-down(xl) {
+		@include media-breakpoint-down(md) {
 			pointer-events: none;
 		}
 	}
@@ -38,19 +62,9 @@
 		}
 	}
 
-	&.supply-point-offer--not-select {
+	&:not(.supply-point-offer--owner) {
 		@include link-without-href-self {
-			// Media queries
-			@include media-breakpoint-up(xl) {
-				background-color: $body-bg;
-			}
-		}
-
-		.supply-point-offer__inner--price {
-			// Media queries
-			@include media-breakpoint-up(xl) {
-				background-color: rgba($white, .5);
-			}
+			pointer-events: auto;
 		}
 	}
 

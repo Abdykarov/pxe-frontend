@@ -29,11 +29,13 @@
                         ></lnd-button>
                     </div>
                 </div>
-                <ng-container *ngFor="let supplierPoint of supplierPoints">
-                    <pxe-supply-point
-                        [data]="supplierPoint"
-                    ></pxe-supply-point>
-                </ng-container>
+                <div class="supply-points">
+                    <ng-container *ngFor="let supplierPoint of supplierPoints">
+                        <pxe-supply-point
+                            [data]="supplierPoint"
+                        ></pxe-supply-point>
+                    </ng-container>
+                </div>
             </ng-container>
         </pxe-layout-container>
     </div>
