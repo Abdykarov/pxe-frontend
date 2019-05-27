@@ -76,12 +76,12 @@ export class SupplyService {
             .valueChanges;
     }
 
-    public findSupplyPoints(email: string) {
+    public findSupplyPoints(ean: string = null) {
         return this.apollo
             .watchQuery<any>({
                 query: findSupplyPoints,
                 variables: {
-                    email,
+                    ean,
                 },
             })
             .valueChanges;
@@ -95,6 +95,12 @@ export class SupplyService {
                     supplyPoint: supplyPoint,
                     powerAttributes: powerAttributes,
                 },
+                refetchQueries: [{
+                    query: findSupplyPoints,
+                    variables: {
+                        ean: null,
+                    },
+                }],
             });
     }
 
@@ -106,6 +112,12 @@ export class SupplyService {
                     supplyPoint: supplyPoint,
                     gasAttributes: gasAttributes,
                 },
+                refetchQueries: [{
+                    query: findSupplyPoints,
+                    variables: {
+                        ean: null,
+                    },
+                }],
             });
     }
 }
