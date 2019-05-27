@@ -34,8 +34,8 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
 
     ngOnInit () {
         const ean = this.route.snapshot.paramMap.get('ean');
-        this.offerService.findSupplyPointOffers(ean).subscribe(({data}) => {
-            this.supplyPointOffers = data.findSupplyPointOffers;
+        this.offerService.findSupplyPointOffers(ean).subscribe((res: any) => {
+            this.supplyPointOffers = res.data.findSupplyPointOffers;
             this.cd.markForCheck();
         });
     }
