@@ -37,6 +37,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     }
 
     nextStep = (id) => {
-        this.router.navigate([ROUTES.ROUTER_REQUEST_RECAPITULATION, id]);
+        console.log(ROUTES.ROUTER_REQUEST_RECAPITULATION);
+        this.router.navigate([ROUTES.ROUTER_REQUEST_RECAPITULATION]);
     }
 }
