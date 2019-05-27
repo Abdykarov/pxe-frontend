@@ -8,7 +8,10 @@ import {
     savePowerOffer,
     updatePowerOffer,
 } from 'src/common/graphql/mutation/offer';
-import { findOffers } from 'src/common/graphql/queries/offer';
+import {
+    findOffers,
+    findSupplyPointOffers,
+} from 'src/common/graphql/queries/offer';
 import {
     IOfferInput,
     IOfferInputGasAttributes,
@@ -30,6 +33,16 @@ export class OfferService {
                 query: findOffers,
             })
             .valueChanges;
+    }
+
+    public findSupplyPointOffers(ean: string) {
+        return this.apollo
+            .query({
+                query: findSupplyPointOffers,
+                variables: {
+                    ean,
+                },
+            });
     }
 
     public savePowerOffer(offer: IOfferInput, powerAttributes: IOfferInputPowerAttributes) {

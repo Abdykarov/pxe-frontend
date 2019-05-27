@@ -1,6 +1,22 @@
 import { ICodelistItem } from './supply.model';
 import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
 
+export interface ISupplyPointOffer {
+    id: number;
+    supplier: ISupplier;
+    commodityType: string;
+    name: string;
+    validFrom: string;
+    validTo: string;
+    deliveryFrom: string;
+    deliveryLength: number;
+    permanentPaymentPrice: number;
+    benefits: string[];
+    priceVT: number;
+    priceNT: number;
+    priceGas: number;
+}
+
 export interface IOffer {
     id: number;
     supplier: ISupplier;
