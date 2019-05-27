@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { IOffer } from 'src/common/graphql/models/offer.model';
 
 @Component({
@@ -16,6 +17,9 @@ import { IOffer } from 'src/common/graphql/models/offer.model';
 })
 export class SupplyPointOfferComponent extends AbstractComponent implements OnInit {
     public showBenefits = false;
+
+    public COMMODITY_TYPE_POWER = CommodityType.POWER;
+    public COMMODITY_TYPE_GAS = CommodityType.GAS;
 
     @Input()
     public offer: IOffer;

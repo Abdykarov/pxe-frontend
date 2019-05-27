@@ -42,21 +42,21 @@
                     <div class="col-12 col-md-auto">
                         <div class="row">
                             <div class="col-auto"
-                                 *ngIf="offer.priceVT">
+                                 *ngIf="offer.priceVT && offer.commodityType === COMMODITY_TYPE_POWER">
                                 <div class="supply-point-offer__value-box">
                                     <span class="supply-point-offer__value-name">Cena za KWH / VT</span>
                                     <span class="supply-point-offer__value">{{offer.priceVT | number: '1.0-2'}} Kč</span>
                                 </div>
                             </div>
                             <div class="col-auto"
-                                 *ngIf="offer.priceNT">
+                                 *ngIf="offer.priceNT && offer.commodityType === COMMODITY_TYPE_POWER">
                                 <div class="supply-point-offer__value-box">
                                     <span class="supply-point-offer__value-name">Cena za kWh / NT</span>
                                     <span class="supply-point-offer__value">{{offer.priceNT | number: '1.0-2'}} Kč</span>
                                 </div>
                             </div>
                             <div class="col-auto"
-                                 *ngIf="offer.priceGas">
+                                 *ngIf="offer.priceGas && offer.commodityType === COMMODITY_TYPE_GAS">
                                 <div class="supply-point-offer__value-box">
                                     <span class="supply-point-offer__value-name">Cena za kWh</span>
                                     <span class="supply-point-offer__value">{{offer.priceGas | number: '1.0-2'}} Kč</span>

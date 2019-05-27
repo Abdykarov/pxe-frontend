@@ -147,7 +147,7 @@ export const staticNavigationConfig: INavigationConfig = [
                 },
                 {
                     'label': 'Offer selection',
-                    'url': '/full/offer-selection',
+                    'url': '/basic/offer-selection',
                 },
                 {
                     'label': 'Sample points',

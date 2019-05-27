@@ -4,6 +4,9 @@ import { Routes } from '@angular/router';
 
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { OfferSelectionPageComponent } from './page';
+import { PipesModule } from 'src/common/pipes/pipes.module';
+import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.module';
+import { SupplyPointOfferModule } from 'src/common/ui/supply-point-offer/supply-point-offer.module';
 
 @NgModule({
     declarations: [
@@ -15,6 +18,9 @@ import { OfferSelectionPageComponent } from './page';
     imports: [
         BreadcrumbModule,
         CommonModule,
+        PipesModule,
+        ProgressBarModule,
+        SupplyPointOfferModule,
     ],
 })
 export class OfferSelectionPageModule {}
