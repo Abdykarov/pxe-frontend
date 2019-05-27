@@ -13,6 +13,7 @@ export class OfferSelectionPageComponent {
     public supplyPointOffers: ISupplyPointOffer[] = config;
 
     public action = (evt) => {
+        evt.preventDefault();
         console.log('clicked');
     }
 }
