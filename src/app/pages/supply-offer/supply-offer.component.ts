@@ -240,9 +240,7 @@ export const tableRows = {
     ],
 })
 export class SupplyOfferComponent extends AbstractComponent implements OnInit {
-    public tableCols = tableCols;
-    public tableRows = tableRows;
-    public commodityType = null;
+    public commodityType = CommodityType.POWER;
     public routePower = ROUTES.ROUTER_SUPPLY_OFFER_POWER;
     public routeGas = ROUTES.ROUTER_SUPPLY_OFFER_GAS;
 

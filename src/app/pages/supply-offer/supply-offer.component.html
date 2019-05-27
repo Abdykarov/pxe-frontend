@@ -101,6 +101,8 @@
     </div>
     <div class="row">
         <pxe-supply-offer-form
+                [id]="row.id"
+                [commodityType]=""
                 [formFields]="formFields"
                 [formLoading]="formLoading"
                 [formSent]="formSent"
@@ -109,134 +111,134 @@
                 (submitAction)="submitSupplyForm($event)"
         ></pxe-supply-offer-form>
     </div>
-    <div class="row">
-        <div class="col-4">
-            <lnd-form-field
-                    [id]="'name'"
-                    label="Název produktu"
-            ></lnd-form-field>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-2">
-            <lnd-select
-                    label="Typ osoby"
-                    [options]="supplyOfferConfig.subjectTypeOptions"
-                    [parentForm]="form"
-                    [selectName]="'subjectTypeId'">
-            </lnd-select>
-        </div>
-        <div class="col-2">
-            <lnd-select
-                    label="Distribuční umístění"
-                    [options]="newSupplyPointPageConfig.suppliersOptions"
-                    [parentForm]="form"
-                    [selectName]="'distributionLocation'">
-            </lnd-select>
-        </div>
-        <div class="col-2">
-            <lnd-select
-                    label="Distribuční sazba"
-                    [options]="newSupplyPointPageConfig.distributionRateOptions"
-                    [parentForm]="form"
-                    [selectName]="'distributionRateId'">
-            </lnd-select>
-        </div>
-        <div class="col-2">
-            <lnd-select
-                    label="Jistič"
-                    [options]="newSupplyPointPageConfig.circuitBreakerOptions"
-                    [parentForm]="form"
-                    [selectName]="'circuitBreakerId'">
-            </lnd-select>
-        </div>
-        <div class="col-2">
-            <lnd-select
-                    label="Délka dodávky"
-                    [options]="supplyOfferConfig.deliveryLengthOptions"
-                    [parentForm]="form"
-                    [selectName]="'deliveryLength'">
-            </lnd-select>
-        </div>
-        <div class="col-2">
-            <lnd-select
-                    label="Spotřeba"
-                    [options]="supplyOfferConfig.annualConsumptionOptions"
-                    [parentForm]="form"
-                    [selectName]="'annualConsumptionId'">
-            </lnd-select>
-        </div>
-        <div class="col-2">
-            <lnd-form-field
-                    [id]="'priceNT'"
-                    label="Cena NT"
-                    appendText="kWh/Kč"
-            ></lnd-form-field>
-        </div>
-        <div class="col-2">
-            <lnd-form-field
-                    [id]="'priceVT'"
-                    label="Cena VT"
-                    appendText="kWh/Kč"
-            ></lnd-form-field>
-        </div>
-        <div class="col-2">
-            <lnd-form-field
-                    [id]="'priceGAS'"
-                    label="Cena GAS"
-                    appendText="kWh/Kč"
-            ></lnd-form-field>
-        </div>
-        <div class="col-2">
-            <lnd-datepicker
-                    [datepickerName]="'validFromTo'"
-                    id="validFromTo"
-                    label="Platnost"
-                    [parentForm]="form"
-            ></lnd-datepicker>
-        </div>
-        <div class="col-2">
-            <lnd-datepicker
-                    [datepickerName]="'deliveryFromTo'"
-                    id="deliveryFromTo"
-                    label="Dodávkové období"
-                    [parentForm]="form"
-            ></lnd-datepicker>
-        </div>
-        <div class="col-2">
-            <lnd-form-field
-                    [id]="'permanentPaymentPrice'"
-                    label="Měsíční záloha"
-                    appendText="Kč"
-            ></lnd-form-field>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-2">
-            <lnd-form-field
-                    [id]="'benefits1'"
-                    label="Výhody"
-            ></lnd-form-field>
-        </div>
-        <div class="col-2">
-            <lnd-form-field
-                    [id]="'benefits2'"
-                    label=""
-            ></lnd-form-field>
-        </div>
-        <div class="col-2">
-            <lnd-form-field
-                    [id]="'benefits3'"
-                    label=""
-            ></lnd-form-field>
-        </div>
-        <div class="col-2">
-            <lnd-form-field
-                    [id]="'benefits4'"
-                    label=""
-            ></lnd-form-field>
-        </div>
-    </div>
+<!--    <div class="row">-->
+<!--        <div class="col-4">-->
+<!--            <lnd-form-field-->
+<!--                    [id]="'name'"-->
+<!--                    label="Název produktu"-->
+<!--            ></lnd-form-field>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="row">-->
+<!--        <div class="col-2">-->
+<!--            <lnd-select-->
+<!--                    label="Typ osoby"-->
+<!--                    [options]="supplyOfferConfig.subjectTypeOptions"-->
+<!--                    [parentForm]="form"-->
+<!--                    [selectName]="'subjectTypeId'">-->
+<!--            </lnd-select>-->
+<!--        </div>-->
+<!--        <div class="col-2">-->
+<!--            <lnd-select-->
+<!--                    label="Distribuční umístění"-->
+<!--                    [options]="newSupplyPointPageConfig.suppliersOptions"-->
+<!--                    [parentForm]="form"-->
+<!--                    [selectName]="'distributionLocation'">-->
+<!--            </lnd-select>-->
+<!--        </div>-->
+<!--        <div class="col-2">-->
+<!--            <lnd-select-->
+<!--                    label="Distribuční sazba"-->
+<!--                    [options]="newSupplyPointPageConfig.distributionRateOptions"-->
+<!--                    [parentForm]="form"-->
+<!--                    [selectName]="'distributionRateId'">-->
+<!--            </lnd-select>-->
+<!--        </div>-->
+<!--        <div class="col-2">-->
+<!--            <lnd-select-->
+<!--                    label="Jistič"-->
+<!--                    [options]="newSupplyPointPageConfig.circuitBreakerOptions"-->
+<!--                    [parentForm]="form"-->
+<!--                    [selectName]="'circuitBreakerId'">-->
+<!--            </lnd-select>-->
+<!--        </div>-->
+<!--        <div class="col-2">-->
+<!--            <lnd-select-->
+<!--                    label="Délka dodávky"-->
+<!--                    [options]="supplyOfferConfig.deliveryLengthOptions"-->
+<!--                    [parentForm]="form"-->
+<!--                    [selectName]="'deliveryLength'">-->
+<!--            </lnd-select>-->
+<!--        </div>-->
+<!--        <div class="col-2">-->
+<!--            <lnd-select-->
+<!--                    label="Spotřeba"-->
+<!--                    [options]="supplyOfferConfig.annualConsumptionOptions"-->
+<!--                    [parentForm]="form"-->
+<!--                    [selectName]="'annualConsumptionId'">-->
+<!--            </lnd-select>-->
+<!--        </div>-->
+<!--        <div class="col-2">-->
+<!--            <lnd-form-field-->
+<!--                    [id]="'priceNT'"-->
+<!--                    label="Cena NT"-->
+<!--                    appendText="kWh/Kč"-->
+<!--            ></lnd-form-field>-->
+<!--        </div>-->
+<!--        <div class="col-2">-->
+<!--            <lnd-form-field-->
+<!--                    [id]="'priceVT'"-->
+<!--                    label="Cena VT"-->
+<!--                    appendText="kWh/Kč"-->
+<!--            ></lnd-form-field>-->
+<!--        </div>-->
+<!--        <div class="col-2">-->
+<!--            <lnd-form-field-->
+<!--                    [id]="'priceGAS'"-->
+<!--                    label="Cena GAS"-->
+<!--                    appendText="kWh/Kč"-->
+<!--            ></lnd-form-field>-->
+<!--        </div>-->
+<!--        <div class="col-2">-->
+<!--            <lnd-datepicker-->
+<!--                    [datepickerName]="'validFromTo'"-->
+<!--                    id="validFromTo"-->
+<!--                    label="Platnost"-->
+<!--                    [parentForm]="form"-->
+<!--            ></lnd-datepicker>-->
+<!--        </div>-->
+<!--        <div class="col-2">-->
+<!--            <lnd-datepicker-->
+<!--                    [datepickerName]="'deliveryFromTo'"-->
+<!--                    id="deliveryFromTo"-->
+<!--                    label="Dodávkové období"-->
+<!--                    [parentForm]="form"-->
+<!--            ></lnd-datepicker>-->
+<!--        </div>-->
+<!--        <div class="col-2">-->
+<!--            <lnd-form-field-->
+<!--                    [id]="'permanentPaymentPrice'"-->
+<!--                    label="Měsíční záloha"-->
+<!--                    appendText="Kč"-->
+<!--            ></lnd-form-field>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="row">-->
+<!--        <div class="col-2">-->
+<!--            <lnd-form-field-->
+<!--                    [id]="'benefits1'"-->
+<!--                    label="Výhody"-->
+<!--            ></lnd-form-field>-->
+<!--        </div>-->
+<!--        <div class="col-2">-->
+<!--            <lnd-form-field-->
+<!--                    [id]="'benefits2'"-->
+<!--                    label=""-->
+<!--            ></lnd-form-field>-->
+<!--        </div>-->
+<!--        <div class="col-2">-->
+<!--            <lnd-form-field-->
+<!--                    [id]="'benefits3'"-->
+<!--                    label=""-->
+<!--            ></lnd-form-field>-->
+<!--        </div>-->
+<!--        <div class="col-2">-->
+<!--            <lnd-form-field-->
+<!--                    [id]="'benefits4'"-->
+<!--                    label=""-->
+<!--            ></lnd-form-field>-->
+<!--        </div>-->
+<!--    </div>-->
     <div class="row">
         <div class="col text-right">
             <lnd-button
@@ -265,39 +267,41 @@
                     <a [routerLink]="[routeGas]">Plyn</a>
                 </li>
             </ul>
-            <div class="page-box">
-                <pxe-supply-offer-form
-                        [commodityType]="commodityType"
-                        [formFields]="formFields"
-                        [formLoading]="formLoading"
-                        [formSent]="formSent"
-                        [globalError]="globalError"
-                        [fieldError]="fieldError"
-                        (submitAction)="submitSupplyForm($event)"
-                ></pxe-supply-offer-form>
-            </div>
-            <div>
-                <lnd-table
-                    #table
-                    [cols]="supplyOfferConfig.tableCols[commodityType]"
-                    [rows]="supplyOfferConfig.tableRows"
-                    [showHead]="true"
-                    [isStatic]="false"
-                    [tableWrapperClass]="['table-wrapper--advanced']"
-                    [tableClass]="['table--advanced', 'mb-0']"
-                    [rowDetailTemplate]="rowDetail"
-                    [actionColTriggersDetail]="true"
-                    [columnTemplates]="{
-                        actionColumnTemplatePower: actionColumnTemplatePower,
-                        columnTemplatePriceVT: columnTemplatePriceVT,
-                        columnTemplatePriceNT: columnTemplatePriceNT,
-                        columnTemplatePriceGas: columnTemplatePriceGas
-                    }">
-                    (rowOpened)="rowOpened($event)"
-                    (rowSelected)="rowSelected($event)"
-                    >
-                </lnd-table>
-            </div>
+            <ng-container>
+                <div class="page-box">
+                    <pxe-supply-offer-form
+                            [commodityType]="commodityType"
+                            [formFields]="formFields"
+                            [formLoading]="formLoading"
+                            [formSent]="formSent"
+                            [globalError]="globalError"
+                            [fieldError]="fieldError"
+                            (submitAction)="submitSupplyForm($event)"
+                    ></pxe-supply-offer-form>
+                </div>
+                <div>
+                    <lnd-table
+                        #table
+                        [cols]="supplyOfferConfig.tableCols[commodityType]"
+                        [rows]="supplyOfferConfig.tableRows"
+                        [showHead]="true"
+                        [isStatic]="false"
+                        [tableWrapperClass]="['table-wrapper--advanced']"
+                        [tableClass]="['table--advanced', 'mb-0']"
+                        [rowDetailTemplate]="rowDetail"
+                        [actionColTriggersDetail]="true"
+                        [columnTemplates]="{
+                            actionColumnTemplatePower: actionColumnTemplatePower,
+                            columnTemplatePriceVT: columnTemplatePriceVT,
+                            columnTemplatePriceNT: columnTemplatePriceNT,
+                            columnTemplatePriceGas: columnTemplatePriceGas
+                        }">
+                        (rowOpened)="rowOpened($event)"
+                        (rowSelected)="rowSelected($event)"
+                        >
+                    </lnd-table>
+                </div>
+            </ng-container>
 
         </pxe-layout-container>
     </div>

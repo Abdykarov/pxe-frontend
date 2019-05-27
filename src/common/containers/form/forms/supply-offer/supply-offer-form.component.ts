@@ -34,7 +34,6 @@ import { HelpModalComponent } from 'src/common/containers/modal/modals/help/help
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { ModalLoaderService } from 'src/common/containers/modal/modal-loader.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { logger } from 'codelyzer/util/logger';
 
 @Component({
     selector: 'pxe-supply-offer-form',
@@ -44,6 +43,9 @@ import { logger } from 'codelyzer/util/logger';
 export class SupplyOfferFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
     @Input()
     public commodityType = CommodityType.POWER;
+
+    @Input()
+    public id: number = null;
 
     public commodityTypeOptions: Array<IOption> = commodityTypeOptions;
     public subjectTypeOptions: Array<IOption> = subjectTypeOptions;
@@ -66,9 +68,10 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
     ngOnInit() {
         super.ngOnInit();
         console.log('----------INIT');
+        this.clearFormArray((this.form.controls['benefits'] as FormArray));
         (this.form.controls['benefits'] as FormArray).push(this.addBenefit());
         (this.form.controls['benefits'] as FormArray).push(this.addBenefit());
-        this.form.controls['id'].patchValue(1);
+        this.form.controls['id'].patchValue(this.id);
         this.form.controls['commodityType'].patchValue(this.commodityType);
 
         // this.form.get('commodityType')

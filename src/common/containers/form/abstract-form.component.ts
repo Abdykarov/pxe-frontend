@@ -7,6 +7,7 @@ import {
     SimpleChanges,
 } from '@angular/core';
 import {
+    FormArray,
     FormBuilder,
     FormGroup,
 } from '@angular/forms';
@@ -113,5 +114,11 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
                 delete this.formError[field];
             }
         })(this.formFields.controls);
+    }
+
+    public clearFormArray = (formArray: FormArray) => {
+        while (formArray.length !== 0) {
+            formArray.removeAt(0);
+        }
     }
 }

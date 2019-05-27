@@ -47,7 +47,6 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        // content: (row) => `${row.priceVT}`,
                         contentTemplateName: 'columnTemplatePriceVT',
                     },
                 ],
@@ -199,6 +198,8 @@ export class SupplyOfferConfig {
 
     public tableRows = [
         {
+            id: 1,
+            commodityType: CommodityType.POWER,
             name: 'Variant 36',
             subjectTypeId: '1',
             distributionLocation: 'EON',
@@ -214,6 +215,8 @@ export class SupplyOfferConfig {
             permanentPaymentPrice: 650,
         },
         {
+            id: 2,
+            commodityType: CommodityType.GAS,
             name: 'Zelená usporám od&nbsp;1.1.2019 do&nbsp;12.12.2019',
             subjectTypeId: '2',
             distributionLocation: 'CEZ',
@@ -228,6 +231,8 @@ export class SupplyOfferConfig {
             permanentPaymentPrice: 250,
         },
         {
+            id: 3,
+            commodityType: CommodityType.GAS,
             name: 'Název 1',
             subjectTypeId: '1',
             distributionLocation: 'ALL',
@@ -243,6 +248,8 @@ export class SupplyOfferConfig {
             permanentPaymentPrice: 3650,
         },
         {
+            id: 4,
+            commodityType: CommodityType.POWER,
             name: 'Variant 36',
             subjectTypeId: '1',
             distributionLocation: 'EON',
@@ -258,6 +265,8 @@ export class SupplyOfferConfig {
             permanentPaymentPrice: 650,
         },
         {
+            id: 5,
+            commodityType: CommodityType.POWER,
             name: 'Zelená usporám od&nbsp;1.1.2019 do&nbsp;12.12.2019',
             subjectTypeId: '1',
             distributionLocation: 'EON',
@@ -273,6 +282,8 @@ export class SupplyOfferConfig {
             permanentPaymentPrice: 250,
         },
         {
+            id: 6,
+            commodityType: CommodityType.POWER,
             name: 'Název 1',
             subjectTypeId: '1',
             distributionLocation: 'EON',
