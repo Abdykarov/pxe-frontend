@@ -1,0 +1,219 @@
+<lnd-alert
+    *ngIf="globalError.length"
+    type="danger">
+    <ng-container *ngFor="let error of globalError">
+        {{ error }}<br>
+    </ng-container>
+</lnd-alert>
+<form
+    [formGroup]="form"
+    (keydown)="resetCustomFieldError()"
+    (change)="resetCustomFieldError()"
+    autocomplete="off">
+
+    <div class="row">
+        <div class="col-4">
+            <lnd-form-field
+                    *ngIf="form.controls.name.status !== 'DISABLED'"
+                    [error]="formError.name || form.controls.name.errors"
+                    [formControl]="form.controls.name"
+                    [id]="'name'"
+                    label="Název produktu"
+                    [success]="form.controls.name.valid && (form.controls.name.touched || formError.name)"
+                    [touched]="form.controls.name.touched || formError.name"
+                    [validationMessages]="formFields.validationMessages.name"
+            ></lnd-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <lnd-select
+                    *ngIf="form.controls.subjectTypeId.status !== 'DISABLED'"
+                    [error]="formError.subjectTypeId || form.controls.subjectTypeId.errors"
+                    label="Odběratel"
+                    [options]="subjectTypeOptions"
+                    [parentForm]="form"
+                    [selectName]="'subjectTypeId'"
+                    [success]="form.controls.subjectTypeId.valid && (form.controls.subjectTypeId.touched || formError.subjectTypeId)"
+                    [touched]="form.controls.subjectTypeId.touched || formError.subjectTypeId"
+                    [validationMessages]="formFields.validationMessages.subjectTypeId">
+            </lnd-select>
+        </div>
+        <div class="col-4">
+            <lnd-select
+                    *ngIf="form.controls.distributionLocation.status !== 'DISABLED'"
+                    [error]="formError.distributionLocation || form.controls.distributionLocation.errors"
+                    label="Distribuční umístění"
+                    [options]="subjectTypeOptions"
+                    [parentForm]="form"
+                    [selectName]="'distributionLocation'"
+                    [success]="form.controls.distributionLocation.valid && (form.controls.distributionLocation.touched || formError.distributionLocation)"
+                    [touched]="form.controls.distributionLocation.touched || formError.distributionLocation"
+                    [validationMessages]="formFields.validationMessages.distributionLocation">
+            </lnd-select>
+        </div>
+        <div class="col-4">
+            <lnd-select
+                    *ngIf="form.controls.distributionRateId.status !== 'DISABLED'"
+                    [error]="formError.distributionRateId || form.controls.distributionRateId.errors"
+                    label="Distribučná sazba"
+                    [options]="codeLists && codeLists[distributionRateType]"
+                    [parentForm]="form"
+                    [selectName]="'distributionRateId'"
+                    [success]="form.controls.distributionRateId.valid && (form.controls.distributionRateId.touched || formError.distributionRateId)"
+                    [touched]="form.controls.distributionRateId.touched || formError.distributionRateId"
+                    [validationMessages]="formFields.validationMessages.distributionRateId">
+            </lnd-select>
+        </div>
+        <div class="col-4">
+            <lnd-select
+                    *ngIf="form.controls.circuitBreakerId.status !== 'DISABLED'"
+                    [error]="formError.circuitBreakerId || form.controls.circuitBreakerId.errors"
+                    label="Jistič"
+                    [options]="codeLists && codeLists['JISTIC']"
+                    [parentForm]="form"
+                    [selectName]="'circuitBreakerId'"
+                    [success]="form.controls.circuitBreakerId.valid && (form.controls.circuitBreakerId.touched || formError.circuitBreakerId)"
+                    [touched]="form.controls.circuitBreakerId.touched || formError.circuitBreakerId"
+                    [validationMessages]="formFields.validationMessages.circuitBreakerId">
+            </lnd-select>
+        </div>
+        <div class="col-4">
+            <lnd-select
+                    *ngIf="form.controls.deliveryLength.status !== 'DISABLED'"
+                    [error]="formError.deliveryLength || form.controls.deliveryLength.errors"
+                    label="Délka dodávky"
+                    [options]="subjectTypeOptions"
+                    [parentForm]="form"
+                    [selectName]="'deliveryLength'"
+                    [success]="form.controls.deliveryLength.valid && (form.controls.deliveryLength.touched || formError.deliveryLength)"
+                    [touched]="form.controls.deliveryLength.touched || formError.deliveryLength"
+                    [validationMessages]="formFields.validationMessages.deliveryLength">
+            </lnd-select>
+        </div>
+        <div class="col-4">
+            <lnd-select
+                    *ngIf="form.controls.annualConsumptionId.status !== 'DISABLED'"
+                    [error]="formError.annualConsumptionId || form.controls.annualConsumptionId.errors"
+                    label="Spotřeba"
+                    [options]="subjectTypeOptions"
+                    [parentForm]="form"
+                    [selectName]="'annualConsumptionId'"
+                    [success]="form.controls.annualConsumptionId.valid && (form.controls.annualConsumptionId.touched || formError.annualConsumptionId)"
+                    [touched]="form.controls.annualConsumptionId.touched || formError.annualConsumptionId"
+                    [validationMessages]="formFields.validationMessages.annualConsumptionId">
+            </lnd-select>
+        </div>
+        <div class="col-4">
+            <lnd-form-field
+                    *ngIf="form.controls.priceVT.status !== 'DISABLED'"
+                    appendText="kWh/Kč"
+                    [error]="formError.priceVT || form.controls.priceVT.errors"
+                    [formControl]="form.controls.priceVT"
+                    [id]="'priceVT'"
+                    label="Cena VT"
+                    [success]="form.controls.priceVT.valid && (form.controls.priceVT.touched || formError.priceVT)"
+                    [touched]="form.controls.priceVT.touched || formError.priceVT"
+                    [validationMessages]="formFields.validationMessages.priceVT"
+            ></lnd-form-field>
+        </div>
+        <div class="col-4">
+            <lnd-form-field
+                    *ngIf="form.controls.priceNT.status !== 'DISABLED'"
+                    appendText="kWh/Kč"
+                    [error]="formError.priceNT || form.controls.priceNT.errors"
+                    [formControl]="form.controls.priceNT"
+                    [id]="'priceNT'"
+                    label="Cena NT"
+                    [success]="form.controls.priceNT.valid && (form.controls.priceNT.touched || formError.priceNT)"
+                    [touched]="form.controls.priceNT.touched || formError.priceNT"
+                    [validationMessages]="formFields.validationMessages.priceNT"
+            ></lnd-form-field>
+        </div>
+        <div class="col-4">
+            <lnd-form-field
+                    *ngIf="form.controls.priceGas.status !== 'DISABLED'"
+                    appendText="kWh/Kč"
+                    [error]="formError.priceGas || form.controls.priceGas.errors"
+                    [formControl]="form.controls.priceGas"
+                    [id]="'priceGas'"
+                    label="Cena"
+                    [success]="form.controls.priceGas.valid && (form.controls.priceGas.touched || formError.priceGas)"
+                    [touched]="form.controls.priceGas.touched || formError.priceGas"
+                    [validationMessages]="formFields.validationMessages.priceGas"
+            ></lnd-form-field>
+        </div>
+        <div class="col-4">
+            <lnd-datepicker
+                    [datepickerName]="'validFromTo'"
+                    [error]="formError.validFromTo || form.controls.validFromTo.errors"
+                    id="validFromTo"
+                    label="Platnost"
+                    [parentForm]="form"
+                    [placeholder]="'dd.mm.rrrr'"
+                    [minDate]="minDate"
+                    [success]="form.controls.validFromTo.valid && (form.controls.validFromTo.touched || formError.validFromTo)"
+                    [touched]="form.controls.validFromTo.touched || formError.validFromTo"
+                    [validationMessages]="formFields.validationMessages.validFromTo"
+            >
+            </lnd-datepicker>
+        </div>
+        <div class="col-4">
+            <lnd-datepicker
+                    [datepickerName]="'deliveryFromTo'"
+                    [error]="formError.deliveryFromTo || form.controls.deliveryFromTo.errors"
+                    id="deliveryFromTo"
+                    label="Dodávkové období"
+                    [parentForm]="form"
+                    [placeholder]="'dd.mm.rrrr'"
+                    [minDate]="minDate"
+                    [success]="form.controls.deliveryFromTo.valid && (form.controls.deliveryFromTo.touched || formError.deliveryFromTo)"
+                    [touched]="form.controls.deliveryFromTo.touched || formError.deliveryFromTo"
+                    [validationMessages]="formFields.validationMessages.deliveryFromTo"
+            >
+            </lnd-datepicker>
+        </div>
+        <div class="col-4">
+            <lnd-form-field
+                    *ngIf="form.controls.permanentPaymentPrice.status !== 'DISABLED'"
+                    appendText="Kč"
+                    [error]="formError.permanentPaymentPrice || form.controls.permanentPaymentPrice.errors"
+                    [formControl]="form.controls.permanentPaymentPrice"
+                    [id]="'priceGas'"
+                    label="Měsíční záloha"
+                    [success]="form.controls.permanentPaymentPrice.valid && (form.controls.permanentPaymentPrice.touched || formError.permanentPaymentPrice)"
+                    [touched]="form.controls.permanentPaymentPrice.touched || formError.permanentPaymentPrice"
+                    [validationMessages]="formFields.validationMessages.permanentPaymentPrice"
+            ></lnd-form-field>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+    </div>
+    <div class="row">
+        <ng-container formArrayName="benefits" *ngFor="let benefit of form.controls.benefits.controls; let i = index">
+            <ng-container [formGroupName]="i">
+                <div class="col-4">
+                    <lnd-form-field
+                            formControlName="value"
+                            [label]="'Benefit ' + (i + 1)"
+                    ></lnd-form-field>
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+
+<pre>
+    {{form.value | json}}
+</pre>
+
+    <div class="text-center">
+        <lnd-button
+            type="primary"
+            (action)="submitForm()"
+            [isDisabled]="formLoading"
+            label="Uložit a vybrat nabídku">
+        </lnd-button>
+    </div>
+</form>

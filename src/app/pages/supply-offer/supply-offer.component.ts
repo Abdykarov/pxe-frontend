@@ -1,6 +1,19 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import {
     Component,
+    OnInit,
 } from '@angular/core';
+
+import { AbstractComponent } from 'src/common/abstract.component';
+import { CONSTS, ROUTES } from '../../app.constants';
+import { takeUntil } from 'rxjs/operators';
+
+import { NewSupplyPointPageConfig } from '../../../static/pages/new-supply-point/config';
+import { SupplyOfferConfig } from './supply-offer.config';
+import { FormControl, FormGroup } from '@angular/forms';
+import { formFields } from '../../../common/containers/form/forms/supply-offer/supply-offer-form.config';
+import { IFieldError } from '../../../common/containers/form/models/form-definition.model';
+import { CommodityType, ISupplyPointFormData } from '../../../common/graphql/models/supply.model';
 
 export const tableCols = {
     main: [
@@ -226,15 +239,60 @@ export const tableRows = {
         './supply-offer.component.css',
     ],
 })
-export class SupplyOfferComponent {
+export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public tableCols = tableCols;
     public tableRows = tableRows;
+    public commodityType = null;
+    public routePower = ROUTES.ROUTER_SUPPLY_OFFER_POWER;
+    public routeGas = ROUTES.ROUTER_SUPPLY_OFFER_GAS;
 
-    constructor() {
+    public form: FormGroup = new FormGroup({
+        distributionLocation: new FormControl(),
+        distributionRateId: new FormControl(),
+        circuitBreakerId: new FormControl(),
+        deliveryLength: new FormControl(),
+        subjectTypeId: new FormControl(),
+        annualConsumptionId: new FormControl(),
+        validFrom: new FormControl(),
+        validTo: new FormControl(),
+        validFromTo: new FormControl(),
+        deliveryFrom: new FormControl(),
+        deliveryTo: new FormControl(),
+        deliveryFromTo: new FormControl(),
+    });
+
+    public formFields = formFields;
+    public formSent = false;
+    public globalError: string[] = [];
+    public fieldError: IFieldError = {};
+    public formLoading = false;
+
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        public supplyOfferConfig: SupplyOfferConfig,
+        public newSupplyPointPageConfig: NewSupplyPointPageConfig,
+    ) {
+        super();
+    }
+
+    ngOnInit() {
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.route.params
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(params => {
+                console.log('%c ***** params *****', 'background: #bada55; color: #000; font-weight: bold', params, Object.values(CommodityType));
+                if (params.commodityType !== 'power' && params.commodityType !== 'gas') {
+                    this.router.navigate([this.routePower]);
+                    return;
+                }
+                this.commodityType = params.commodityType === 'power' ? CommodityType.POWER : CommodityType.GAS;
+            });
     }
 
     public edit = (table, row) => {
-        console.log('%c ***** edit *****', 'background: #bada55; color: #000; font-weight: bold', row);
         if (table.openedRow !== row) {
             table.openRow(row);
             table.selectRow(row);
@@ -242,7 +300,20 @@ export class SupplyOfferComponent {
     }
 
     public create = (table, row) => {
-        console.log('%c ***** edit *****', 'background: #bada55; color: #000; font-weight: bold', row, table.rowOpened);
+        if (table.openedRow !== row) {
+            table.openRow(row);
+            table.selectRow(row);
+        }
+    }
+
+    public duplicate = (table, row) => {
+        if (table.openedRow !== row) {
+            table.openRow(row);
+            table.selectRow(row);
+        }
+    }
+
+    public delete = (table, row) => {
         if (table.openedRow !== row) {
             table.openRow(row);
             table.selectRow(row);
@@ -255,5 +326,9 @@ export class SupplyOfferComponent {
 
     public rowSelected = (row) => {
         console.log('%c ***** rowSelected *****', 'background: #bada55; color: #000; font-weight: bold', row);
+    }
+
+    public submitSupplyForm = (supplyOfferFormData: any) => {
+        console.log('%c ***** submitSupplyForm *****', 'background: #bada55; color: #000; font-weight: bold', supplyOfferFormData);
     }
 }

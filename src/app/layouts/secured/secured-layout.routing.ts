@@ -48,6 +48,10 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.SUPPLY_OFFER,
+                redirectTo: CONSTS.PATHS.SUPPLY_OFFER + '/',
+            },
+            {
+                path: CONSTS.PATHS.SUPPLY_OFFER + '/:commodityType',
                 loadChildren: '../../pages/supply-offer/supply-offer.module#SupplyOfferModule',
                 data: {
                     isSimpleFooter: false,

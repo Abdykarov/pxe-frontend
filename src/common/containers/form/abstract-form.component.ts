@@ -54,6 +54,7 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         super.ngOnInit();
         this.form = this.fb.group(this.formFields.controls);
     }
+
     ngOnChanges(changes: SimpleChanges) {
         if (changes.fieldError) {
             this.formError = R.clone(changes.fieldError.currentValue);

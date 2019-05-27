@@ -1,10 +1,12 @@
 import {
     ChangeDetectorRef,
     Component,
+    Input,
     OnChanges,
     OnInit,
-    SimpleChanges } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+    SimpleChanges
+} from '@angular/core';
+import { FormArray, FormBuilder } from '@angular/forms';
 
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
@@ -18,7 +20,7 @@ import {
     distributionRatesTypeDefinition,
     SUBJECT_TYPE_TO_DIST_RATE,
     subjectTypeOptions,
-} from './supply-point-form.config';
+} from './supply-offer-form.config';
 import {
     CommodityType,
     DistributionType,
@@ -32,13 +34,17 @@ import { HelpModalComponent } from 'src/common/containers/modal/modals/help/help
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { ModalLoaderService } from 'src/common/containers/modal/modal-loader.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { logger } from 'codelyzer/util/logger';
 
 @Component({
-    selector: 'pxe-supply-point-form',
-    templateUrl: './supply-point-form.component.html',
-    styleUrls: ['./supply-point-form.component.scss'],
+    selector: 'pxe-supply-offer-form',
+    templateUrl: './supply-offer-form.component.html',
+    styleUrls: ['./supply-offer-form.component.scss'],
 })
-export class SupplyPointFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
+export class SupplyOfferFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
+    @Input()
+    public commodityType = CommodityType.POWER;
+
     public commodityTypeOptions: Array<IOption> = commodityTypeOptions;
     public subjectTypeOptions: Array<IOption> = subjectTypeOptions;
     public codeLists;
@@ -59,46 +65,57 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
 
     ngOnInit() {
         super.ngOnInit();
+        console.log('----------INIT');
+        (this.form.controls['benefits'] as FormArray).push(this.addBenefit());
+        (this.form.controls['benefits'] as FormArray).push(this.addBenefit());
+        this.form.controls['id'].patchValue(1);
+        this.form.controls['commodityType'].patchValue(this.commodityType);
 
-        this.form.get('commodityType')
-            .valueChanges
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(val => {
-                this.resetFormError();
-                this.setFormByCommodity(val);
-                this.resetFieldValue('supplierId');
-            });
-
-        this.form.get('subjectTypeId')
-            .valueChanges
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((val: string) => {
-                this.resetFieldValue('distributionRateId');
-                this.distributionRateType = SUBJECT_TYPE_TO_DIST_RATE[val];
-                this.cd.markForCheck();
-            });
-
-        this.form.get('distributionRateId')
-            .valueChanges
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(val => {
-                this.setAnnualConsumptionNTState(val);
-            });
-
-        this.form.get('supplierId')
-            .valueChanges
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(val => {
-                this.helpDocuments = val && val.sampleDocuments ? convertArrayToObject(val.sampleDocuments, 'type') : {};
-            });
-
-        this.setFormByCommodity(CommodityType.POWER);
-        this.loadCodeLists();
-        this.setAnnualConsumptionNTState();
+        // this.form.get('commodityType')
+        //     .valueChanges
+        //     .pipe(takeUntil(this.destroy$))
+        //     .subscribe(val => {
+        //         this.resetFormError();
+        //         this.setFormByCommodity(val);
+        //         this.resetFieldValue('supplierId');
+        //     });
+        //
+        // this.form.get('subjectTypeId')
+        //     .valueChanges
+        //     .pipe(takeUntil(this.destroy$))
+        //     .subscribe((val: string) => {
+        //         this.resetFieldValue('distributionRateId');
+        //         this.distributionRateType = SUBJECT_TYPE_TO_DIST_RATE[val];
+        //         this.cd.markForCheck();
+        //     });
+        //
+        // this.form.get('distributionRateId')
+        //     .valueChanges
+        //     .pipe(takeUntil(this.destroy$))
+        //     .subscribe(val => {
+        //         this.setAnnualConsumptionNTState(val);
+        //     });
+        //
+        // this.form.get('supplierId')
+        //     .valueChanges
+        //     .pipe(takeUntil(this.destroy$))
+        //     .subscribe(val => {
+        //         this.helpDocuments = val && val.sampleDocuments ? convertArrayToObject(val.sampleDocuments, 'type') : {};
+        //     });
+        //
+        // this.setFormByCommodity(CommodityType.POWER);
+        // this.loadCodeLists();
+        // this.setAnnualConsumptionNTState();
     }
 
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
+    }
+
+    public addBenefit = () => {
+        return this.fb.group({
+            value: [null],
+        });
     }
 
     public includesBothTariffs = (id: string) => distributionRatesTypeDefinition[DistributionType.BOTH].includes(id);
@@ -126,7 +143,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
         if (this.form.valid) {
             const form = {
                 ...this.form.value,
-                supplierId: this.form.value.supplierId && parseInt(this.form.value.supplierId.id, 10),
+                supplierId: this.form.value.supplierId && this.form.value.supplierId.id,
                 address: {
                     ...this.form.value.address,
                     orientationNumber: this.form.value.address.orientationNumber || this.form.value.address.descriptiveNumber,
