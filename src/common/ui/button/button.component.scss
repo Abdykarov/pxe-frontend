@@ -158,6 +158,19 @@
 		}
 	}
 
+	&-dropdown-toggle {
+		padding-left: ( $spacer / 2 );
+		text-transform: uppercase;
+
+		&:focus,
+		&:active,
+		&:not(:disabled):not(.disabled):focus,
+		&:not(:disabled):not(.disabled):active,
+		&:not(:disabled):not(.disabled):active:focus {
+			box-shadow: none;
+		}
+	}
+
 	&.btn-outline-primary,
 	&.btn-outline-secondary,
 	&.btn-outline-success,
@@ -234,10 +247,6 @@
 		.btn__icon {
 			font-size: $icon-size-small-px;
 
-			& + .btn__text {
-				padding-left: ( $spacer / 1.5 );
-			}
-
 			&--left {
 				padding-left: ( $spacer / 3 );
 			}
@@ -278,19 +287,11 @@
 		&--left {
 			left: 0;
 			padding-left: ( $spacer / 2 );
-
-			& + .btn__text {
-				padding-left: ( $icon-size-px + ( $spacer / 2 ) );
-			}
 		}
 
 		&--right {
 			right: 0;
 			padding-right: ( $spacer / 2 );
-
-			& + .btn__text {
-				padding-right: ( $icon-size-px + ( $spacer / 2 ) );
-			}
 		}
 
 		&--alone {
@@ -298,10 +299,6 @@
 			padding: ( $spacer / 3 );
 			text-align: center;
 		}
-	}
-
-	&.dropdown-toggle {
-		text-align: left;
 	}
 
 	&.disabled,

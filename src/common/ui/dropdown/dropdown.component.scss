@@ -122,12 +122,9 @@
 	border: none;
 	box-shadow: $dropdown-box-shadow;
 	overflow: hidden;
+	border-radius: 4px;
+	box-shadow: $box-shadow;
 	z-index: $zindex-dropdown-menu;
-
-	// Media queries
-	@include media-breakpoint-up(sm) {
-		max-width: none;
-	}
 
 	&--open {
 		display: block;
@@ -135,199 +132,52 @@
 }
 
 ::ng-deep {
-	.breadcrumb {
-		.dropdown {
-			position: initial;
-
-			// Media queries
-			@include media-breakpoint-up(md) {
-				position: relative;
-			}
-		}
-
-		.dropdown-toggle {
-			.dropdown-link__text {
-				margin-right: ( $icon-size-small-px + ( $spacer / 2 ) );
-				border-bottom: 1px solid transparent;
-			}
-
-			// Modified default properties in breadcrumb context
-			&.dropdown-link {
-				display: block;
-				color: $gray-500;
-				text-decoration: none;
-
-				&:hover,
-				&:focus {
-					color: $gray-500;
-					text-decoration: none;
-				}
-
-				.dropdown-toggle-icon {
-					display: block;
-					font-size: $icon-size-small;
-					position: absolute;
-					top: 50%;
-					right: 0;
-					margin-top: -( $icon-size-small-px / 2 );
-				}
-			}
-		}
-
-		.dropdown-toggle.dropdown-link {
-			&:hover {
-				.dropdown-link__text {
-					border-bottom-color: $gray-500;
-				}
-			}
-		}
-
-		.dropdown-menu {
-			left: ( $spacer / 2 );
-			min-width: calc(100% - ( #{$spacer} ));
-
-			// Media queries
-			@include media-breakpoint-up(md) {
-				left: 0;
-				min-width: 100%;
-			}
-		}
-	}
-
-	.tabs-item-more {
-		.dropdown-toggle-icon {
-			width: $nav-tabs-item-more-width;
-			height: $nav-tabs-item-height;
-		}
-	}
-
-	.dropdown,
-	.dropup {
+	.dropdown {
 		.dropdown-item {
-			position: relative;
-			display: block;
-			clear: both;
-			width: 100%;
-			min-height: $dropdown-item-min-height;
-			border: 0;
-			border-bottom: 1px solid $border-color;
-			background-color: transparent;
-			padding: $dropdown-item-padding-y $dropdown-item-padding-x;
-			font-weight: $font-weight-normal;
-			text-align: inherit;
-			line-height: $line-height-base;
-			cursor: pointer;
-			@include smart-short-text;
-
 			@include link-without-href {
+				position: relative;
+				display: block;
+				padding: $dropdown-item-padding-y $dropdown-item-padding-x $dropdown-item-padding-y ( $spacer * 3 );
+				clear: both;
+				width: 100%;
+				background-color: transparent;
 				color: $dropdown-link-color;
+				font-size: $small-font-size;
+				line-height: $line-height-sm;
+				cursor: pointer;
+				@include smart-short-text;
 				text-decoration: none;
 			}
 
 			@include link-without-href-interactive {
-				color: $dropdown-link-hover-color;
+				background-color: rgba($font-text, .1);
+				color: $dropdown-link-color;
 				text-decoration: none;
-				@include gradient-bg($dropdown-link-hover-bg);
 			}
 
-			&.active,
-			&:active {
-				color: $dropdown-link-active-color;
-				text-decoration: none;
-				@include gradient-bg($dropdown-link-active-bg);
+			&--logout {
+				@include link-without-href {
+					background-color: rgba($secondary, .05);
+				}
+
+				@include link-without-href-interactive {
+					background-color: rgba($secondary, .15);
+				}
 			}
 
 			&.disabled,
 			&:disabled {
 				color: $dropdown-link-disabled-color;
 				background-color: transparent;
-
-				// Remove CSS gradients if they're enabled
-				@if $enable-gradients {
-					background-image: none;
-				}
-			}
-
-			&:last-of-type {
-				border-bottom: 0;
-			}
-
-			&--no-effect {
-				&:focus,
-				&:hover {
-					color: $dropdown-link-color;
-					background-color: transparent;
-					cursor: default;
-				}
-			}
-
-			.custom-control,
-			.custom-control-label {
-				margin-bottom: 0;
 			}
 		}
-	}
 
-	.dropdown-menu {
-		min-width: 100%;
-		top: 100%;
-		margin-top: 0;
-		border: none;
-		box-shadow: $dropdown-box-shadow;
-		overflow: hidden;
-		z-index: $zindex-dropdown-menu;
-
-		.form-group,
-		.form-control,
-		.custom-control,
-		.custom-control-label {
-			margin: 0;
-		}
-
-		.custom-control {
-			position: initial;
-		}
-
-		.custom-control-input {
+		.dropdown-item-icon {
 			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			cursor: pointer;
-			z-index: $zindex-dropdown-menu-input;
-		}
-
-		.table {
-			margin-bottom: 0;
-
-			thead {
-				display: none;
-			}
-
-			tr {
-				&:hover {
-					cursor: pointer;
-				}
-			}
-
-			td {
-				text-transform: none;
-				white-space: normal;
-
-				// Media queries
-				@include media-breakpoint-up(md) {
-					white-space: nowrap;
-				}
-			}
-
-			.active {
-				font-weight: 700;
-			}
-		}
-
-		&--open {
-			display: block;
+			top: 50%;
+			left: $spacer;
+			margin-top: -( $icon-size-px / 2 );
+			color: $secondary;
 		}
 	}
 }

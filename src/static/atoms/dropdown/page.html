@@ -56,7 +56,7 @@
             <ng-template #dropdown3 let-toggle="toggle">
                 <lnd-button
                     (click)="toggle()"
-                    customClass="asd"
+                    customClass="btn-dropdown-toggle"
                     icon="icon--triangle-down"
                     customIconClass="icon--small"
                     iconPosition="right"
@@ -70,6 +70,7 @@
                 <a *ngFor="let item of dropdownItems"
                     (click)="item.action()"
                     class="dropdown-item">
+                    <span class="dropdown-item-icon icon icon--power"></span>
                     {{ item.label }}
                 </a>
             </lnd-dropdown>
@@ -229,8 +230,8 @@
         </div>
     </div> -->
 </div>
-<h3>Dropup</h3>
-<!-- <div class="static-pages">
+<!-- <h3>Dropup</h3>
+<div class="static-pages">
     <div class="row pb-5">
         <div class="col-sm-4 col-xl-4 pb-5 pb-sm-0">
             <ng-template #dropdown10 let-toggle="toggle">
@@ -381,8 +382,8 @@
         </div>
     </div>
 </div> -->
-<h3>Dropdown (no space)</h3>
-<!-- <div class="static-pages">
+<!-- <h3>Dropdown (no space)</h3>
+<div class="static-pages">
     <div class="row">
         <div class="offset-lg-8 col-sm-4 col-xl-4 text-right">
             <ng-template #dropdown15 let-toggle="toggle">
