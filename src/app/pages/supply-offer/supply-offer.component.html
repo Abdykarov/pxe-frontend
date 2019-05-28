@@ -128,7 +128,7 @@
                 </li>
             </ul>
             <ng-container>
-                <div class="page-box">
+                <div *ngIf="!loadingOffers && tableRows.length === 0" class="page-box">
                     <pxe-supply-offer-form
                             [commodityType]="commodityType"
                             [formFields]="formFields"
@@ -141,11 +141,12 @@
                             (customAction)="cancel($event)"
                     ></pxe-supply-offer-form>
                 </div>
-                <div>
+
+                <div [class.d-none]="loadingOffers || tableRows.length === 0">
                     <lnd-table
                         #table
                         [cols]="supplyOfferConfig.tableCols[commodityType]"
-                        [rows]="supplyOfferConfig.tableRows"
+                        [rows]="tableRows"
                         [showHead]="true"
                         [isStatic]="false"
                         [tableWrapperClass]="['table-wrapper--advanced']"
@@ -157,10 +158,7 @@
                             columnTemplatePriceVT: columnTemplatePriceVT,
                             columnTemplatePriceNT: columnTemplatePriceNT,
                             columnTemplatePriceGas: columnTemplatePriceGas
-                        }"
-                        (rowOpened)="rowOpened($event)"
-                        (rowSelected)="rowSelected($event)"
-                        >
+                        }">
                     </lnd-table>
                 </div>
             </ng-container>

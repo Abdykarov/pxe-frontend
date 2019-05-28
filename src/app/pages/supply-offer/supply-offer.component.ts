@@ -1,4 +1,7 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
 import {
     ChangeDetectorRef,
     Component,
@@ -6,25 +9,25 @@ import {
 } from '@angular/core';
 
 import * as R from 'ramda';
-import { takeUntil } from 'rxjs/operators';
+import {
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { ROUTES } from '../../app.constants';
-import { SupplyOfferConfig } from './supply-offer.config';
-import { FormControl, FormGroup } from '@angular/forms';
-import { formFields } from '../../../common/containers/form/forms/supply-offer/supply-offer-form.config';
-import { IFieldError } from '../../../common/containers/form/models/form-definition.model';
+import { AuthService } from 'src/app/services/auth.service';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
+import { formFields } from 'src/common/containers/form/forms/supply-offer/supply-offer-form.config';
+import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
-    CommodityType,
-    ISupplyPoint,
-    ISupplyPointGasAttributes,
-    ISupplyPointPowerAttributes,
-} from '../../../common/graphql/models/supply.model';
-import { OfferService } from '../../../common/graphql/services/offer.service';
-import { parseGraphQLErrors } from '../../../common/utils';
-import { IOfferInput, IOfferInputGasAttributes, IOfferInputPowerAttributes } from '../../../common/graphql/models/offer.model';
-import { AuthService } from '../../services/auth.service';
-import { findSupplierOffers } from '../../../common/graphql/queries/offer';
+    IOfferInput,
+    IOfferInputGasAttributes,
+    IOfferInputPowerAttributes,
+} from 'src/common/graphql/models/offer.model';
+import { OfferService } from 'src/common/graphql/services/offer.service';
+import { parseGraphQLErrors } from 'src/common/utils';
+import { ROUTES } from 'src/app/app.constants';
+import { SupplyOfferConfig } from './supply-offer.config';
 
 @Component({
     selector: 'pxe-supply-offer',
@@ -37,27 +40,13 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public commodityType = CommodityType.POWER;
     public routePower = ROUTES.ROUTER_SUPPLY_OFFER_POWER;
     public routeGas = ROUTES.ROUTER_SUPPLY_OFFER_GAS;
-
-    public form: FormGroup = new FormGroup({
-        distributionLocation: new FormControl(),
-        distributionRateId: new FormControl(),
-        circuitBreakerId: new FormControl(),
-        deliveryLength: new FormControl(),
-        subjectTypeId: new FormControl(),
-        annualConsumptionId: new FormControl(),
-        validFrom: new FormControl(),
-        validTo: new FormControl(),
-        validFromTo: new FormControl(),
-        deliveryFrom: new FormControl(),
-        deliveryTo: new FormControl(),
-        deliveryFromTo: new FormControl(),
-    });
-
     public formFields = formFields;
     public formSent = false;
     public globalError: string[] = [];
     public fieldError: IFieldError = {};
     public formLoading = false;
+    public tableRows = [];
+    public loadingOffers = true;
 
     constructor(
         private authService: AuthService,
@@ -77,7 +66,8 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                 takeUntil(this.destroy$),
             )
             .subscribe(params => {
-                console.log('%c ***** params *****', 'background: #bada55; color: #000; font-weight: bold', params, Object.values(CommodityType));
+                console.log('%c ***** params *****', 'background: #bada55; color: #000; font-weight: bold',
+                    params, Object.values(CommodityType));
                 if (params.commodityType !== 'power' && params.commodityType !== 'gas') {
                     this.router.navigate([this.routePower]);
                     return;
@@ -115,18 +105,21 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         }
     }
 
-    public rowOpened = (row) => {
-        console.log('%c ***** rowOpened *****', 'background: #bada55; color: #000; font-weight: bold', row);
-    }
-
-    public rowSelected = (row) => {
-        console.log('%c ***** rowSelected *****', 'background: #bada55; color: #000; font-weight: bold', row);
-    }
-
     public loadOffers = () => {
-        this.offerService.findSupplierOffers().subscribe(data => {
-            console.log('%c ***** loadOffers *****', 'background: #bada55; color: #000; font-weight: bold', data);
-        });
+        this.offerService.findSupplierOffers()
+            .pipe(
+                takeUntil(this.destroy$),
+                map(({data}) => R.filter(R.propEq('commodityType', this.commodityType))(data.findSupplierOffers)),
+            )
+            .subscribe(
+                rows => {
+                    console.log('%c ***** loadOffers *****', 'background: #bada55; color: #000; font-weight: bold', rows);
+                    this.tableRows = rows;
+                    this.loadingOffers = false;
+                    this.cd.markForCheck();
+                }, error => {
+                    // TODO errors are temporary disabled for this query
+                });
     }
 
     public submitForm = (supplyOfferFormData: any, table = null, row = null) => {

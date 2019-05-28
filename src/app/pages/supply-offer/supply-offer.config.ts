@@ -27,7 +27,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${R.find(R.propEq('value', row.subjectTypeId))(this.subjectTypeOptions).label}`,
+                        content: (row) => `${R.find(R.propEq('value', row.subject.code))(this.subjectTypeOptions).label}`,
                     },
                 ],
             },
@@ -37,7 +37,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.distributionLocation}`,
+                        content: (row) => `${row.distributionLocation.code}`,
                     },
                 ],
             },
@@ -67,7 +67,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.validFromTo}`,
+                        content: (row) => `${row.validFrom} - ${row.validTo}`,
                     },
                 ],
             },
@@ -77,7 +77,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.validFromTo}`,
+                        content: (row) => `${row.deliveryFrom} - ${row.deliveryTo}`,
                     },
                 ],
             },
@@ -119,7 +119,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${R.find(R.propEq('value', row.subjectTypeId))(this.subjectTypeOptions).label}`,
+                        content: (row) => `${R.find(R.propEq('value', row.subject.code))(this.subjectTypeOptions).label}`,
                     },
                 ],
             },
@@ -129,7 +129,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.distributionLocation}`,
+                        content: (row) => `${row.distributionLocation ? row.distributionLocation.code : ''}`,
                     },
                 ],
             },
@@ -139,7 +139,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${R.find(R.propEq('value', row.annualConsumptionId))(this.annualConsumptionOptions).label}`,
+                        content: (row) => `${R.find(R.propEq('value', row.annualConsumption.code))(this.annualConsumptionOptions).label}`,
                     },
                 ],
             },
@@ -159,7 +159,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.validFromTo}`,
+                        content: (row) => `${row.validFrom} - ${row.validTo}`,
                     },
                 ],
             },
@@ -169,7 +169,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.validFromTo}`,
+                        content: (row) => `${row.deliveryFrom} - ${row.deliveryTo}`,
                     },
                 ],
             },
@@ -316,12 +316,12 @@ export class SupplyOfferConfig {
     public deliveryLengthOptions = [
         {
             key: 1,
-            value: '1',
+            value: 1,
             label: '1 rok',
         },
         {
             key: 2,
-            value: '2',
+            value: 2,
             label: '2 roky',
         },
     ];
@@ -363,8 +363,4 @@ export class SupplyOfferConfig {
         power: CommodityType.POWER,
         gas: CommodityType.GAS,
     };
-
-    constructor(
-        public newSupplyPointPageConfig: NewSupplyPointPageConfig,
-    ) {}
 }

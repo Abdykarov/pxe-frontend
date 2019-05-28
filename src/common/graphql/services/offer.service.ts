@@ -31,6 +31,7 @@ export class OfferService {
         return this.apollo
             .watchQuery<any>({
                 query: findSupplierOffers,
+                errorPolicy: 'ignore',
             })
             .valueChanges;
     }
@@ -53,6 +54,9 @@ export class OfferService {
                     offer,
                     powerAttributes,
                 },
+                refetchQueries: [{
+                    query: findSupplierOffers,
+                }],
             });
     }
 
@@ -64,6 +68,9 @@ export class OfferService {
                     offer,
                     gasAttributes,
                 },
+                refetchQueries: [{
+                    query: findSupplierOffers,
+                }],
             });
     }
 
@@ -76,6 +83,9 @@ export class OfferService {
                     offer,
                     powerAttributes,
                 },
+                refetchQueries: [{
+                    query: findSupplierOffers,
+                }],
             });
     }
 
@@ -88,6 +98,9 @@ export class OfferService {
                     offer,
                     gasAttributes,
                 },
+                refetchQueries: [{
+                    query: findSupplierOffers,
+                }],
             });
     }
 
@@ -98,6 +111,9 @@ export class OfferService {
                 variables: {
                     offerId,
                 },
+                refetchQueries: [{
+                    query: findSupplierOffers,
+                }],
             });
     }
 

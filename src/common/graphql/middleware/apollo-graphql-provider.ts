@@ -78,7 +78,7 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
         });
     });
 
-    const error = onError(({ graphQLErrors, networkError }) => {
+    const error = onError(({ graphQLErrors, networkError, response }) => {
         if (graphQLErrors) {
             graphQLErrors.map(({ message, locations, path }) => {
                 // console.log('%c ***** [GraphQL error] *****', 'background: red; color: #fff; font-weight: bold',
@@ -89,6 +89,7 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
         if (networkError) {
             // console.log('%c ***** [Network error] *****', 'background: red; color: #fff; font-weight: bold', networkError);
         }
+        // response.errors = null;
     });
 
     // TODO restLink, retryLink?

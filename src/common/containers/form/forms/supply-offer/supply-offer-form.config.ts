@@ -110,73 +110,7 @@ export const formFields: IForm = {
         ],
         benefits: new FormArray([]),
     },
-    validationMessages: {
-        commodityType: {
-            required: errorFieldMessages.commodityType.required,
-        },
-        subjectTypeId: {
-            required: errorFieldMessages.subjectTypeId.required,
-        },
-        supplierId: {
-            required: errorFieldMessages.supplierId.required,
-        },
-        name: {
-            required: errorFieldMessages.name.required,
-            maxlength: errorFieldMessages.name.maxlength,
-        },
-        ean: {
-            required: errorFieldMessages.ean.required,
-            ean: errorFieldMessages.ean.ean,
-            invalidEan: errorFieldMessages.ean.ean,
-            eanFormat: errorFieldMessages.ean.ean,
-        },
-        eic: {
-            required: errorFieldMessages.eic.required,
-            eic: errorFieldMessages.eic.eic,
-            invalidEic: errorFieldMessages.eic.eic,
-            eicFormat: errorFieldMessages.eic.eic,
-        },
-        address: {
-            required: errorFieldMessages.address.required,
-            invalidAddress: errorFieldMessages.address.invalidAddress,
-        },
-        distributionRateId: {
-            required: errorFieldMessages.distributionRateId.required,
-        },
-        circuitBreakerId: {
-            required: errorFieldMessages.circuitBreakerId.required,
-        },
-        annualConsumptionNT: {
-            required: errorFieldMessages.annualConsumptionNT.required,
-            decimal: errorFieldMessages.annualConsumptionNT.annualConsumptionNT,
-            min: errorFieldMessages.annualConsumptionNT.negativeAnnualConsumption,
-            negativeAnnualConsumption: errorFieldMessages.annualConsumptionNT.negativeAnnualConsumption,
-        },
-        annualConsumptionVT: {
-            required: errorFieldMessages.annualConsumptionVT.required,
-            decimal: errorFieldMessages.annualConsumptionVT.annualConsumptionVT,
-            min: errorFieldMessages.annualConsumptionVT.negativeAnnualConsumption,
-            negativeAnnualConsumption: errorFieldMessages.annualConsumptionVT.negativeAnnualConsumption,
-        },
-        annualConsumption: {
-            required: errorFieldMessages.annualConsumption.required,
-            decimal: errorFieldMessages.annualConsumption.annualConsumption,
-            min: errorFieldMessages.annualConsumption.negativeAnnualConsumption,
-            negativeAnnualConsumption: errorFieldMessages.annualConsumption.negativeAnnualConsumption,
-        },
-        expirationDateGas: {
-            required: errorFieldMessages.expirationDate.requiredGas,
-            bsDate: errorFieldMessages.expirationDate.format,
-            bsDateMinDate: errorFieldMessages.expirationDate.expirationDateInPast,
-            expirationDateInPast: errorFieldMessages.expirationDate.expirationDateInPast,
-        },
-        expirationDatePower: {
-            required: errorFieldMessages.expirationDate.requiredPower,
-            bsDate: errorFieldMessages.expirationDate.format,
-            bsDateMinDate: errorFieldMessages.expirationDate.expirationDateInPast,
-            expirationDateInPast: errorFieldMessages.expirationDate.expirationDateInPast,
-        },
-    },
+    validationMessages: {},
 };
 
 export const CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL = 'DSTSA2';
