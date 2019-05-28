@@ -52,13 +52,13 @@ import {
     progressBarPageRoutes,
 } from 'src/static/organisms/progress-bar/progress-bar.module';
 import {
-    SamplePointsPageModule,
-    samplePointsPageRoutes,
-} from 'src/static/pages/sample-points/page.module';
+    SupplyPointsPageModule,
+    supplyPointsPageRoutes,
+} from 'src/static/pages/supply-points/page.module';
 import {
-    SamplePointsBannerPageModule,
-    samplePointsBannerPageRoutes,
-} from 'src/static/pages/sample-points-banner/page.module';
+    SupplyPointsBannerPageModule,
+    supplyPointsBannerPageRoutes,
+} from 'src/static/pages/supply-points-banner/page.module';
 import {
     SupplyPointOfferPageModule,
     supplyPointOfferPageRoutes,
@@ -96,8 +96,8 @@ const routes: Routes = [
             ...modalsPageRoutes,
             ...newSupplyPointPageRoutes,
             ...progressBarPageRoutes,
-            ...samplePointsPageRoutes,
-            ...samplePointsBannerPageRoutes,
+            ...supplyPointsPageRoutes,
+            ...supplyPointsBannerPageRoutes,
             ...supplyPointOfferPageRoutes,
             ...supplyPointPageRoutes,
             ...tablesPageRoutes,
@@ -125,8 +125,8 @@ const routes: Routes = [
         NewSupplyPointPageModule,
         ProgressBarPageModule,
         RouterModule.forChild(routes),
-        SamplePointsPageModule,
-        SamplePointsBannerPageModule,
+        SupplyPointsPageModule,
+        SupplyPointsBannerPageModule,
         SupplyPointOfferPageModule,
         SupplyPointPageModule,
         TablesPageModule,
