@@ -117,14 +117,18 @@
 <div class="container-fluid">
     <div class="container-content">
         <pxe-layout-container pageTitle="Přehled nabídek">
-            <ul>
-                <li routerLinkActive="active"
-                    [routerLinkActiveOptions]="{exact: true}">
-                    <a [routerLink]="[routePower]">Elektřina</a>
+            <ul class="text-center link-list">
+                <li class="link-list__item">
+                    <a class="link-list__link"
+                       routerLinkActive="active"
+                       [routerLinkActiveOptions]="{exact: true}"
+                       [routerLink]="[routePower]">Elektřina</a>
                 </li>
-                <li routerLinkActive="active"
-                    [routerLinkActiveOptions]="{exact: true}">
-                    <a [routerLink]="[routeGas]">Plyn</a>
+                <li class="link-list__item">
+                    <a class="link-list__link"
+                       routerLinkActive="active"
+                       [routerLinkActiveOptions]="{exact: true}"
+                       [routerLink]="[routeGas]">Plyn</a>
                 </li>
             </ul>
             <ng-container>
