@@ -205,12 +205,10 @@ export const commodityTypeOptions: Array<IOption> = [
     },
 ];
 
-
 export const commodityTypeFields = {
     [CommodityType.POWER]: ['ean', 'distributionRateId', 'circuitBreakerId', 'annualConsumptionNT', 'annualConsumptionVT'],
     [CommodityType.GAS]: ['eic', 'annualConsumption'],
 };
-
 
 export const distributionRatesTypeDefinition = {
     [DistributionType.VT] : [

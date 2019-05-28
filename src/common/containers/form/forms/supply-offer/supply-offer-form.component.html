@@ -12,9 +12,9 @@
     autocomplete="off">
 
     <div class="row">
-        <div class="col-4">
+        <div *ngIf="form.controls.name.status !== 'DISABLED'"
+             class="col-4 col-xl-3">
             <lnd-form-field
-                    *ngIf="form.controls.name.status !== 'DISABLED'"
                     [error]="formError.name || form.controls.name.errors"
                     [formControl]="form.controls.name"
                     [id]="'name'"
@@ -26,9 +26,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-4">
+        <div *ngIf="form.controls.subjectTypeId.status !== 'DISABLED'"
+             class="col-4 col-xl-3">
             <lnd-select
-                    *ngIf="form.controls.subjectTypeId.status !== 'DISABLED'"
                     [error]="formError.subjectTypeId || form.controls.subjectTypeId.errors"
                     label="Odběratel"
                     [options]="subjectTypeOptions"
@@ -39,12 +39,12 @@
                     [validationMessages]="formFields.validationMessages.subjectTypeId">
             </lnd-select>
         </div>
-        <div class="col-4">
+        <div *ngIf="form.controls.distributionLocation.status !== 'DISABLED'"
+             class="col-4 col-xl-3">
             <lnd-select
-                    *ngIf="form.controls.distributionLocation.status !== 'DISABLED'"
                     [error]="formError.distributionLocation || form.controls.distributionLocation.errors"
                     label="Distribuční umístění"
-                    [options]="subjectTypeOptions"
+                    [options]="codeLists && codeLists[distributionLocationType]"
                     [parentForm]="form"
                     [selectName]="'distributionLocation'"
                     [success]="form.controls.distributionLocation.valid && (form.controls.distributionLocation.touched || formError.distributionLocation)"
@@ -52,9 +52,9 @@
                     [validationMessages]="formFields.validationMessages.distributionLocation">
             </lnd-select>
         </div>
-        <div class="col-4">
+        <div *ngIf="form.controls.distributionRateId.status !== 'DISABLED'"
+             class="col-4 col-xl-3">
             <lnd-select
-                    *ngIf="form.controls.distributionRateId.status !== 'DISABLED'"
                     [error]="formError.distributionRateId || form.controls.distributionRateId.errors"
                     label="Distribučná sazba"
                     [options]="codeLists && codeLists[distributionRateType]"
@@ -65,9 +65,9 @@
                     [validationMessages]="formFields.validationMessages.distributionRateId">
             </lnd-select>
         </div>
-        <div class="col-4">
+        <div *ngIf="form.controls.circuitBreakerId.status !== 'DISABLED'"
+             class="col-4 col-xl-3">
             <lnd-select
-                    *ngIf="form.controls.circuitBreakerId.status !== 'DISABLED'"
                     [error]="formError.circuitBreakerId || form.controls.circuitBreakerId.errors"
                     label="Jistič"
                     [options]="codeLists && codeLists['JISTIC']"
@@ -78,12 +78,12 @@
                     [validationMessages]="formFields.validationMessages.circuitBreakerId">
             </lnd-select>
         </div>
-        <div class="col-4">
+        <div *ngIf="form.controls.deliveryLength.status !== 'DISABLED'"
+             class="col-4 col-xl-3">
             <lnd-select
-                    *ngIf="form.controls.deliveryLength.status !== 'DISABLED'"
                     [error]="formError.deliveryLength || form.controls.deliveryLength.errors"
                     label="Délka dodávky"
-                    [options]="subjectTypeOptions"
+                    [options]="deliveryLengthOptions"
                     [parentForm]="form"
                     [selectName]="'deliveryLength'"
                     [success]="form.controls.deliveryLength.valid && (form.controls.deliveryLength.touched || formError.deliveryLength)"
@@ -91,12 +91,12 @@
                     [validationMessages]="formFields.validationMessages.deliveryLength">
             </lnd-select>
         </div>
-        <div class="col-4">
+        <div *ngIf="form.controls.annualConsumptionId.status !== 'DISABLED'"
+             class="col-4 col-xl-3">
             <lnd-select
-                    *ngIf="form.controls.annualConsumptionId.status !== 'DISABLED'"
                     [error]="formError.annualConsumptionId || form.controls.annualConsumptionId.errors"
                     label="Spotřeba"
-                    [options]="subjectTypeOptions"
+                    [options]="codeLists && codeLists['CGAS']"
                     [parentForm]="form"
                     [selectName]="'annualConsumptionId'"
                     [success]="form.controls.annualConsumptionId.valid && (form.controls.annualConsumptionId.touched || formError.annualConsumptionId)"
@@ -104,9 +104,9 @@
                     [validationMessages]="formFields.validationMessages.annualConsumptionId">
             </lnd-select>
         </div>
-        <div class="col-4">
+        <div *ngIf="form.controls.priceVT.status !== 'DISABLED'"
+             class="col-4 col-xl-3">
             <lnd-form-field
-                    *ngIf="form.controls.priceVT.status !== 'DISABLED'"
                     appendText="kWh/Kč"
                     [error]="formError.priceVT || form.controls.priceVT.errors"
                     [formControl]="form.controls.priceVT"
@@ -117,9 +117,9 @@
                     [validationMessages]="formFields.validationMessages.priceVT"
             ></lnd-form-field>
         </div>
-        <div class="col-4">
+        <div *ngIf="form.controls.priceNT.status !== 'DISABLED'"
+             class="col-4 col-xl-3">
             <lnd-form-field
-                    *ngIf="form.controls.priceNT.status !== 'DISABLED'"
                     appendText="kWh/Kč"
                     [error]="formError.priceNT || form.controls.priceNT.errors"
                     [formControl]="form.controls.priceNT"
@@ -130,9 +130,9 @@
                     [validationMessages]="formFields.validationMessages.priceNT"
             ></lnd-form-field>
         </div>
-        <div class="col-4">
+        <div *ngIf="form.controls.priceGas.status !== 'DISABLED'"
+             class="col-4 col-xl-3">
             <lnd-form-field
-                    *ngIf="form.controls.priceGas.status !== 'DISABLED'"
                     appendText="kWh/Kč"
                     [error]="formError.priceGas || form.controls.priceGas.errors"
                     [formControl]="form.controls.priceGas"
@@ -143,7 +143,8 @@
                     [validationMessages]="formFields.validationMessages.priceGas"
             ></lnd-form-field>
         </div>
-        <div class="col-4">
+        <div *ngIf="form.controls.validFromTo.status !== 'DISABLED'"
+             class="col-4 col-xl-3">
             <lnd-datepicker
                     [datepickerName]="'validFromTo'"
                     [error]="formError.validFromTo || form.controls.validFromTo.errors"
@@ -158,7 +159,8 @@
             >
             </lnd-datepicker>
         </div>
-        <div class="col-4">
+        <div *ngIf="form.controls.deliveryFromTo.status !== 'DISABLED'"
+             class="col-4 col-xl-3">
             <lnd-datepicker
                     [datepickerName]="'deliveryFromTo'"
                     [error]="formError.deliveryFromTo || form.controls.deliveryFromTo.errors"
@@ -173,7 +175,8 @@
             >
             </lnd-datepicker>
         </div>
-        <div class="col-4">
+        <div *ngIf="form.controls.permanentPaymentPrice.status !== 'DISABLED'"
+             class="col-4 col-xl-3">
             <lnd-form-field
                     *ngIf="form.controls.permanentPaymentPrice.status !== 'DISABLED'"
                     appendText="Kč"
@@ -186,15 +189,11 @@
                     [validationMessages]="formFields.validationMessages.permanentPaymentPrice"
             ></lnd-form-field>
         </div>
-        <div class="col-4"></div>
-        <div class="col-4"></div>
-        <div class="col-4"></div>
-        <div class="col-4"></div>
     </div>
     <div class="row">
         <ng-container formArrayName="benefits" *ngFor="let benefit of form.controls.benefits.controls; let i = index">
             <ng-container [formGroupName]="i">
-                <div class="col-4">
+                <div class="col-4 col-xl-3">
                     <lnd-form-field
                             formControlName="value"
                             [label]="'Benefit ' + (i + 1)"
@@ -208,12 +207,22 @@
     {{form.value | json}}
 </pre>
 
-    <div class="text-center">
-        <lnd-button
-            type="primary"
-            (action)="submitForm()"
-            [isDisabled]="formLoading"
-            label="Uložit a vybrat nabídku">
-        </lnd-button>
+    <div class="row">
+        <div class="col text-right">
+            <lnd-button
+                    *ngIf="showCancel"
+                    type="link"
+                    label="Storno"
+                    customClass="mr-5"
+                    [isDisabled]="formLoading"
+                    (action)="customAction.emit()"
+            ></lnd-button>
+            <lnd-button
+                    type="primary"
+                    label="Uložit"
+                    [isDisabled]="formLoading"
+                    (action)="submitForm()"
+            ></lnd-button>
+        </div>
     </div>
 </form>

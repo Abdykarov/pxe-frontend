@@ -9,7 +9,7 @@ import {
     updatePowerOffer,
 } from 'src/common/graphql/mutation/offer';
 import {
-    findOffers,
+    findSupplierOffers,
     findSupplyPointOffers,
 } from 'src/common/graphql/queries/offer';
 import {
@@ -27,10 +27,10 @@ export class OfferService {
         private apollo: Apollo,
     ) {}
 
-    public findOffers() {
+    public findSupplierOffers() {
         return this.apollo
             .watchQuery<any>({
-                query: findOffers,
+                query: findSupplierOffers,
             })
             .valueChanges;
     }

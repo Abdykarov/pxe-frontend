@@ -59,7 +59,7 @@ const routes = [
                     isSupplier: true,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
-                    hideLeftNavigate: true,
+                    hideLeftNavigation: true,
                 },
             },
             {

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
-export const findOffers = gql`
-    query findOffers{
-        findOffers{
+export const findSupplierOffers = gql`
+    query findSupplierOffers{
+        findSupplierOffers{
             id,
             supplier{
                 id,
@@ -22,7 +22,12 @@ export const findOffers = gql`
             deliveryFrom,
             deliveryTo,
             deliveryLength,
-            distributionLocation,
+            distributionLocation{
+                type,
+                code,
+                description,
+                help,
+            },
             permanentPaymentPrice,
             subject{
                 type,

@@ -1,242 +1,36 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+    ChangeDetectorRef,
     Component,
     OnInit,
 } from '@angular/core';
 
-import { AbstractComponent } from 'src/common/abstract.component';
-import { CONSTS, ROUTES } from '../../app.constants';
+import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
-import { NewSupplyPointPageConfig } from '../../../static/pages/new-supply-point/config';
+import { AbstractComponent } from 'src/common/abstract.component';
+import { ROUTES } from '../../app.constants';
 import { SupplyOfferConfig } from './supply-offer.config';
 import { FormControl, FormGroup } from '@angular/forms';
 import { formFields } from '../../../common/containers/form/forms/supply-offer/supply-offer-form.config';
 import { IFieldError } from '../../../common/containers/form/models/form-definition.model';
-import { CommodityType, ISupplyPointFormData } from '../../../common/graphql/models/supply.model';
-
-export const tableCols = {
-    main: [
-        {
-            label: 'First column',
-            views: [
-                {
-                    headingClass: ['w-20'],
-                    cellClass: ['w-20'],
-                    content: (row) => `<span class="d-block font-weight-bold">${row.first.a}</span>${row.first.b}`,
-                },
-            ],
-            mobileViews: [
-                {
-                    cellClass: ['font-weight-bold', 'text-right'],
-                    content: (row) => `${row.first.a} ${row.first.b}`,
-                },
-            ],
-        },
-        {
-            label: 'Second column',
-            views: [
-                {
-                    headingClass: ['w-20'],
-                    cellClass: ['w-20'],
-                    content: (row) => `<span class="d-block font-weight-bold">${row.second.a}</span>${row.second.b}`,
-                },
-            ],
-            mobileViews: [
-                {
-                    cellClass: ['font-weight-bold', 'text-right'],
-                    content: (row) => `${row.second.a} ${row.second.b}`,
-                },
-            ],
-        },
-        {
-            label: 'Third column',
-            views: [
-                {
-                    showIn: ['md', 'lg'],
-                    headingClass: ['w-30'],
-                    cellClass: ['w-30'],
-                    content: (row) => `<span class="d-block font-weight-bold">${row.third.a}</span>${row.third.b}`,
-                },
-                {
-                    showIn: ['xl'],
-                    headingClass: ['w-20'],
-                    cellClass: ['w-20'],
-                    content: (row) => `<span class="d-block font-weight-bold">${row.third.a}</span>${row.third.b}`,
-                },
-            ],
-            mobileViews: [
-                {
-                    cellClass: ['font-weight-bold', 'text-right'],
-                    content: (row) => `${row.third.a} ${row.third.b}`,
-                },
-            ],
-        },
-        {
-            label: 'Fourth column',
-            views: [
-                {
-                    showIn: ['xl'],
-                    headingClass: ['w-20'],
-                    cellClass: ['w-20'],
-                    content: (row) => `<span class="d-block font-weight-bold">${row.fourth.a}</span>${row.fourth.b}`,
-                },
-            ],
-            mobileViews: [
-                {
-                    cellClass: ['font-weight-bold', 'text-right'],
-                    content: (row) => `${row.fourth.a} ${row.fourth.b}`,
-                },
-            ],
-        },
-        {
-            label: 'Last column',
-            views: [
-                {
-                    showIn: ['md', 'lg'],
-                    headingClass: ['w-30'],
-                    cellClass: ['w-30'],
-                    content: (row) => `<span class="d-block font-weight-bold">${row.last.a}</span>${row.last.b}`,
-                },
-                {
-                    showIn: ['xl'],
-                    headingClass: ['w-20'],
-                    content: (row) => `<span class="d-block font-weight-bold">${row.last.a}</span>${row.last.b}`,
-                },
-            ],
-            mobileViews: [
-                {
-                    cellClass: ['font-weight-bold', 'text-right'],
-                    content: (row) => `${row.last.a} ${row.last.b}`,
-                },
-            ],
-        },
-    ],
-    detail: [
-        {
-            label: 'First detail column',
-            views: [
-                {
-                    content: (row) => row.first,
-                },
-            ],
-            mobileViews: [
-                {
-                    cellClass: ['font-weight-bold', 'text-right'],
-                    content: (row) => row.first,
-                },
-            ],
-        },
-        {
-            label: 'Second detail column',
-            views: [
-                {
-                    content: (row) => row.second,
-                },
-            ],
-            mobileViews: [
-                {
-                    cellClass: ['font-weight-bold', 'text-right'],
-                    content: (row) => row.second,
-                },
-            ],
-        },
-        {
-            label: 'Third detail column',
-            views: [
-                {
-                    content: (row) => row.third,
-                },
-            ],
-            mobileViews: [
-                {
-                    cellClass: ['font-weight-bold', 'text-right'],
-                    content: (row) => row.third,
-                },
-            ],
-        },
-        {
-            label: 'Last detail column',
-            views: [
-                {
-                    content: (row) => row.last,
-                },
-            ],
-            mobileViews: [
-                {
-                    cellClass: ['font-weight-bold', 'text-right'],
-                    content: (row) => row.last,
-                },
-            ],
-        },
-    ],
-};
-
-export const tableRows = {
-    main: [
-        {
-            first: { a: 'First row', b: 'first cell' },
-            second: { a: 'First row', b: 'second cell'},
-            third: { a: 'First row', b: 'third cell'},
-            fourth: { a: 'First row', b: 'fourth cell'},
-            last: { a: 'First row', b: 'last cell'},
-        },
-        {
-            first: { a: 'Second row', b: 'first cell'},
-            second: { a: 'Second row', b: 'second cell'},
-            third: { a: 'Second row', b: 'third cell'},
-            fourth: { a: 'Second row', b: 'fourth cell'},
-            last: { a: 'Second row', b: 'last cell'},
-        },
-        {
-            first: { a: 'Third row', b: 'first cell'},
-            second: { a: 'Third row', b: 'second cell'},
-            third: { a: 'Third row', b: 'third cell'},
-            fourth: { a: 'Third row', b: 'fourth cell'},
-            last: { a: 'Third row', b: 'last cell'},
-        },
-        {
-            first: { a: 'Last row', b: 'first cell'},
-            second: { a: 'Last row', b: 'second cell'},
-            third: { a: 'Last row', b: 'third cell'},
-            fourth: { a: 'Last row', b: 'fourth cell'},
-            last: { a: 'Last row ', b: 'last cell'},
-        },
-    ],
-    detail: [
-        {
-            first: 'First row first cell',
-            second: 'First row second cell',
-            third: 'First row third cell',
-            last: 'First row last cell',
-        },
-        {
-            first: 'Second row first cell',
-            second: 'Second row second cell',
-            third: 'Second row third cell',
-            last: 'Second row last cell',
-        },
-        {
-            first: 'Third row first cell',
-            second: 'Third row second cell',
-            third: 'Third row third cell',
-            last: 'Third row last cell',
-        },
-        {
-            first: 'Last row first cell',
-            second: 'Last row second cell',
-            third: 'Last row third cell',
-            last: 'Last row last cell',
-        },
-    ],
-};
-
+import {
+    CommodityType,
+    ISupplyPoint,
+    ISupplyPointGasAttributes,
+    ISupplyPointPowerAttributes,
+} from '../../../common/graphql/models/supply.model';
+import { OfferService } from '../../../common/graphql/services/offer.service';
+import { parseGraphQLErrors } from '../../../common/utils';
+import { IOfferInput, IOfferInputGasAttributes, IOfferInputPowerAttributes } from '../../../common/graphql/models/offer.model';
+import { AuthService } from '../../services/auth.service';
+import { findSupplierOffers } from '../../../common/graphql/queries/offer';
 
 @Component({
     selector: 'pxe-supply-offer',
     templateUrl: './supply-offer.component.html',
     styleUrls: [
-        './supply-offer.component.css',
+        './supply-offer.component.scss',
     ],
 })
 export class SupplyOfferComponent extends AbstractComponent implements OnInit {
@@ -266,10 +60,12 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public formLoading = false;
 
     constructor(
+        private authService: AuthService,
+        private cd: ChangeDetectorRef,
+        private offerService: OfferService,
         private route: ActivatedRoute,
         private router: Router,
         public supplyOfferConfig: SupplyOfferConfig,
-        public newSupplyPointPageConfig: NewSupplyPointPageConfig,
     ) {
         super();
     }
@@ -287,6 +83,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                     return;
                 }
                 this.commodityType = params.commodityType === 'power' ? CommodityType.POWER : CommodityType.GAS;
+                this.loadOffers();
             });
     }
 
@@ -326,7 +123,80 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         console.log('%c ***** rowSelected *****', 'background: #bada55; color: #000; font-weight: bold', row);
     }
 
-    public submitSupplyForm = (supplyOfferFormData: any) => {
-        console.log('%c ***** submitSupplyForm *****', 'background: #bada55; color: #000; font-weight: bold', supplyOfferFormData);
+    public loadOffers = () => {
+        this.offerService.findSupplierOffers().subscribe(data => {
+            console.log('%c ***** loadOffers *****', 'background: #bada55; color: #000; font-weight: bold', data);
+        });
+    }
+
+    public submitForm = (supplyOfferFormData: any, table = null, row = null) => {
+        console.log('%c ***** submitSupplyForm *****', 'background: #bada55; color: #000; font-weight: bold',
+            supplyOfferFormData, JSON.stringify(supplyOfferFormData), this.authService.currentUserValue.subjectId);
+        this.formLoading = true;
+        this.globalError = [];
+        this.fieldError = {};
+        let offerPointAction;
+
+        const offer: IOfferInput = R.pick([
+            'name',
+            'validFrom',
+            'validTo',
+            'deliveryFrom',
+            'deliveryTo',
+            'deliveryLength',
+            'distributionLocation',
+            'permanentPaymentPrice',
+            'subjectTypeId',
+            'benefits',
+        ], supplyOfferFormData);
+
+        offer.supplierId = this.authService.currentUserValue.subjectId;
+
+        if (supplyOfferFormData.commodityType === CommodityType.POWER) {
+            const powerAttributes: IOfferInputPowerAttributes =
+                R.pick([
+                    'priceVT',
+                    'priceNT',
+                    'distributionRateId',
+                    'circuitBreakerId',
+                ], supplyOfferFormData);
+            offerPointAction = this.offerService.savePowerOffer(offer, powerAttributes);
+        } else {
+            const gasAttributes: IOfferInputGasAttributes =
+                R.pick([
+                    'priceGas',
+                    'annualConsumptionId',
+                ], supplyOfferFormData);
+            offerPointAction = this.offerService.saveGasOffer(offer, gasAttributes);
+        }
+
+        offerPointAction
+            .subscribe(
+                (data) => {
+                    this.formLoading = false;
+                    this.formSent = true;
+                    this.cd.markForCheck();
+
+                    if (table && row) {
+                        this.toggleRow(table, row);
+                    }
+                },
+                (error) => {
+                    this.formLoading = false;
+                    const { fieldError, globalError } = parseGraphQLErrors(error);
+                    this.fieldError = fieldError;
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
+                });
+    }
+
+    public cancel = (event, table = null, row = null) => {
+        if (table && row) {
+            this.toggleRow(table, row);
+        }
+    }
+
+    public toggleRow = (table, row) => {
+        table.openRow(row);
     }
 }

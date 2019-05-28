@@ -22,7 +22,7 @@ export const formFields: IForm = {
             ],
         ],
         subjectTypeId: [
-            SubjectType.SUBJECT_TYPE_INDIVIDUAL,
+            null,
             [
                 Validators.required,
             ],
@@ -184,11 +184,22 @@ export const CODE_LIST_TYPE_DIST_RATE_BOTH = 'DSTSAZ';
 export const CODE_LIST_TYPE_DIST_RATE_BUSINESSMAN = 'DSTSA1';
 export const CODE_LIST_TYPE_CIRCUIT_BREAKER = 'JISTIC';
 
+export const CODE_LIST_TYPE_SUBJECT = 'TPSB';
+export const CODE_LIST_TYPE_COMMODITY = 'COMO';
+export const CODE_LIST_TYPE_CONSUMPTION = 'CGAS';
+export const CODE_LIST_TYPE_DISTRIBUTION_POWER = 'PDISTR';
+export const CODE_LIST_TYPE_DISTRIBUTION_GAS = 'GDISTR';
+
 export const codeListTypes = [
-    CODE_LIST_TYPE_DIST_RATE_BOTH, // kompletní
-    CODE_LIST_TYPE_DIST_RATE_BUSINESSMAN, // pro firmy
-    CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL, // pro domácnosti
+    CODE_LIST_TYPE_DIST_RATE_BOTH,
+    CODE_LIST_TYPE_DIST_RATE_BUSINESSMAN,
+    CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL,
     CODE_LIST_TYPE_CIRCUIT_BREAKER,
+    CODE_LIST_TYPE_SUBJECT,
+    CODE_LIST_TYPE_COMMODITY,
+    CODE_LIST_TYPE_CONSUMPTION,
+    CODE_LIST_TYPE_DISTRIBUTION_POWER,
+    CODE_LIST_TYPE_DISTRIBUTION_GAS,
 ];
 
 export const subjectTypeOptions: Array<IOption> = [
@@ -213,22 +224,39 @@ export const commodityTypeOptions: Array<IOption> = [
     },
 ];
 
+export const deliveryLengthOptions: Array<IOption> = [
+    {
+        key: '1',
+        label: '1 rok',
+    },
+    {
+        key: '2',
+        label: '2 roky',
+    },
+];
 
 export const commodityTypeFields = {
-    [CommodityType.POWER]: ['ean', 'distributionRateId', 'circuitBreakerId', 'annualConsumptionNT', 'annualConsumptionVT'],
-    [CommodityType.GAS]: [/*'eic', */'annualConsumption'],
+    [CommodityType.POWER]: ['distributionRateId', 'circuitBreakerId', 'priceNT', 'priceVT'],
+    [CommodityType.GAS]: ['priceGas', 'annualConsumptionId'],
 };
 
-
 export const distributionRatesTypeDefinition = {
-    [DistributionType.VT] : ['C01d', 'C02d', 'C03d', 'C62d', 'D01d', 'D02d'],
+    [DistributionType.VT] : [
+        'C01d', 'C02d', 'C03d', 'C60d', 'C61d', 'C62d', 'D01d', 'D02d',
+    ],
     [DistributionType.BOTH] : [
-        'C25d', 'C26d', 'C27d', 'C35d', 'C45d', 'C46d', 'C55d', 'C56d', 'D25d', 'D26d', 'D27d', 'D35d', 'D45d',
-        'D56d', 'D57d', 'D61d',
+        'C25d', 'C26d', 'C27d', 'C35d', 'C45d', 'C46d', 'C55d', 'C56d',
+        'D25d', 'D26d', 'D27d', 'D35d', 'D45d', 'D56d', 'D57d', 'D61d',
     ],
 };
 
 export const SUBJECT_TYPE_TO_DIST_RATE = {
     [SubjectType.SUBJECT_TYPE_INDIVIDUAL]: CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL,
     [SubjectType.SUBJECT_TYPE_BUSINESSMAN]: CODE_LIST_TYPE_DIST_RATE_BUSINESSMAN,
+};
+
+
+export const COMMODITY_TO_DISTRIBUTION = {
+    [CommodityType.POWER]: CODE_LIST_TYPE_DISTRIBUTION_POWER,
+    [CommodityType.GAS]: CODE_LIST_TYPE_DISTRIBUTION_GAS,
 };

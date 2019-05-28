@@ -50,7 +50,7 @@ export interface IOfferInput {
     deliveryLength: number;
     distributionLocation: string;
     permanentPaymentPrice: number;
-    subject: string;
+    subjectTypeId: string;
     benefits: string[];
     powerAttributes: IOfferInputPowerAttributes;
     gasAttributes: IOfferInputGasAttributes;
@@ -59,12 +59,12 @@ export interface IOfferInput {
 export interface IOfferInputPowerAttributes {
     priceVT: number;
     priceNT: number;
-    distributionRate: string;
-    circuitBreaker: string;
+    distributionRateId: string;
+    circuitBreakerId: string;
 }
 
 export interface IOfferInputGasAttributes {
-    price: number;
-    annualConsumption: string;
+    priceGas: number;
+    annualConsumptionId: string;
 }
 

@@ -9,17 +9,20 @@ import {
 import { FormArray, FormBuilder } from '@angular/forms';
 
 import * as R from 'ramda';
+import * as R_ from 'ramda-extension';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import {
     CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL,
+    COMMODITY_TO_DISTRIBUTION,
     codeListTypes,
     commodityTypeFields,
     commodityTypeOptions,
     distributionRatesTypeDefinition,
     SUBJECT_TYPE_TO_DIST_RATE,
     subjectTypeOptions,
+    deliveryLengthOptions,
 } from './supply-offer-form.config';
 import {
     CommodityType,
@@ -30,7 +33,6 @@ import {
     transformCodeList,
     transformSuppliers,
 } from 'src/common/utils';
-import { HelpModalComponent } from 'src/common/containers/modal/modals/help/help-modal.component';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { ModalLoaderService } from 'src/common/containers/modal/modal-loader.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -47,13 +49,16 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
     @Input()
     public id: number = null;
 
-    public commodityTypeOptions: Array<IOption> = commodityTypeOptions;
+    @Input()
+    public showCancel = true;
+
     public subjectTypeOptions: Array<IOption> = subjectTypeOptions;
+    public deliveryLengthOptions: Array<IOption> = deliveryLengthOptions;
     public codeLists;
-    public helpDocuments = {};
     public minDate: Date;
     public suppliers = [];
-    public distributionRateType: string = CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL;
+    public distributionRateType = '';
+    public distributionLocationType = COMMODITY_TO_DISTRIBUTION[this.commodityType];
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -67,48 +72,32 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
 
     ngOnInit() {
         super.ngOnInit();
-        console.log('----------INIT');
         this.clearFormArray((this.form.controls['benefits'] as FormArray));
-        (this.form.controls['benefits'] as FormArray).push(this.addBenefit());
-        (this.form.controls['benefits'] as FormArray).push(this.addBenefit());
+        R.times(() => {
+            (this.form.controls['benefits'] as FormArray).push(this.addBenefit());
+        }, 4);
         this.form.controls['id'].patchValue(this.id);
-        this.form.controls['commodityType'].patchValue(this.commodityType);
+        this.form.controls['commodityType'].setValue(this.commodityType);
 
-        // this.form.get('commodityType')
-        //     .valueChanges
-        //     .pipe(takeUntil(this.destroy$))
-        //     .subscribe(val => {
-        //         this.resetFormError();
-        //         this.setFormByCommodity(val);
-        //         this.resetFieldValue('supplierId');
-        //     });
-        //
-        // this.form.get('subjectTypeId')
-        //     .valueChanges
-        //     .pipe(takeUntil(this.destroy$))
-        //     .subscribe((val: string) => {
-        //         this.resetFieldValue('distributionRateId');
-        //         this.distributionRateType = SUBJECT_TYPE_TO_DIST_RATE[val];
-        //         this.cd.markForCheck();
-        //     });
-        //
-        // this.form.get('distributionRateId')
-        //     .valueChanges
-        //     .pipe(takeUntil(this.destroy$))
-        //     .subscribe(val => {
-        //         this.setAnnualConsumptionNTState(val);
-        //     });
-        //
-        // this.form.get('supplierId')
-        //     .valueChanges
-        //     .pipe(takeUntil(this.destroy$))
-        //     .subscribe(val => {
-        //         this.helpDocuments = val && val.sampleDocuments ? convertArrayToObject(val.sampleDocuments, 'type') : {};
-        //     });
-        //
-        // this.setFormByCommodity(CommodityType.POWER);
-        // this.loadCodeLists();
-        // this.setAnnualConsumptionNTState();
+        this.form.get('subjectTypeId')
+            .valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((val: string) => {
+                this.resetFieldValue('distributionRateId');
+                this.distributionRateType = SUBJECT_TYPE_TO_DIST_RATE[val];
+                this.cd.markForCheck();
+            });
+
+        this.form.get('distributionRateId')
+            .valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(val => {
+                this.setPriceNTState(val);
+            });
+
+        this.setFormByCommodity(this.commodityType);
+        this.loadCodeLists();
+        this.setPriceNTState();
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -136,46 +125,39 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
                 }, fields);
             }
         }, commodityTypeFields);
-
-        this.loadSuppliers(commodityType);
     }
 
     public submitForm = () => {
         this.resetCustomFieldError();
         this.triggerValidation();
-        if (this.form.valid) {
+        if (this.form.valid || 1) {
             const form = {
                 ...this.form.value,
-                supplierId: this.form.value.supplierId && this.form.value.supplierId.id,
-                address: {
-                    ...this.form.value.address,
-                    orientationNumber: this.form.value.address.orientationNumber || this.form.value.address.descriptiveNumber,
-                },
-                expirationDate: this.form.value.expirationDate && this.form.value.expirationDate.toISOString().split('T')[0],
+                benefits: R.pipe(
+                    R.map(R.values),
+                    R.flatten,
+                    R.filter(R_.isNotNil),
+                )(this.form.value.benefits),
             };
-            if (!R.isNil(form.annualConsumptionNT)) {
-                form.annualConsumptionNT = parseFloat(form.annualConsumptionNT.replace(',', '.'));
+            if (!R.isNil(form.validFromTo)) {
+                form.validFrom = form.validFromTo[0].toISOString().split('T')[0];
+                form.validTo = form.validFromTo[1].toISOString().split('T')[0];
             }
-            if (!R.isNil(form.annualConsumptionVT)) {
-                form.annualConsumptionVT = parseFloat(form.annualConsumptionVT.replace(',', '.'));
+            if (!R.isNil(form.deliveryFromTo)) {
+                form.deliveryFrom = form.deliveryFromTo[0].toISOString().split('T')[0];
+                form.deliveryTo = form.deliveryFromTo[1].toISOString().split('T')[0];
             }
-            if (!R.isNil(form.annualConsumption)) {
-                form.annualConsumption = parseFloat(form.annualConsumption.replace(',', '.'));
+            if (!R.isNil(form.priceNT)) {
+                form.priceNT = parseFloat(form.priceNT.replace(',', '.'));
+            }
+            if (!R.isNil(form.priceVT)) {
+                form.priceVT = parseFloat(form.priceVT.replace(',', '.'));
+            }
+            if (!R.isNil(form.priceGas)) {
+                form.priceGas = parseFloat(form.priceGas.replace(',', '.'));
             }
             this.submitAction.emit(form);
         }
-    }
-
-    public showHelp = (field, title) => {
-        this.modalsLoaderService
-            .showModal.next({
-                component: HelpModalComponent,
-                instanceData: {
-                    url: this.helpDocuments[field].url,
-                    alt: title,
-                    showButton: false,
-                },
-        });
     }
 
     public loadCodeLists = () => {
@@ -187,21 +169,12 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
             });
     }
 
-    public setAnnualConsumptionNTState = (distributionRateId: string = null) => {
-        const annualConsumptionNTControl = this.form.get('annualConsumptionNT');
+    public setPriceNTState = (distributionRateId: string = null) => {
+        const annualConsumptionNTControl = this.form.get('priceNT');
         if (this.includesBothTariffs(distributionRateId)) {
             annualConsumptionNTControl.enable();
         } else {
             annualConsumptionNTControl.disable();
         }
-    }
-
-    public loadSuppliers = (commodityType) => {
-        this.supplyService.getSuppliers(commodityType)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(({data}) => {
-                this.suppliers[commodityType] = transformSuppliers(data.findAllSuppliers);
-                this.cd.markForCheck();
-            });
     }
 }
