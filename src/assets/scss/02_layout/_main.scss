@@ -107,4 +107,31 @@
 			}
 		}
 	}
+
+	.link-list {
+		&__item {
+			display: inline-block;
+			padding: 0 ( $spacer * .75 );
+
+			&::before {
+				display: none;
+			}
+		}
+
+		&__link {
+			@include link-without-href-self {
+				color: $font-text;
+				font-size: 1.125rem;
+			}
+
+			&:focus,
+			&:hover {
+				text-decoration: none;
+			}
+		}
+
+		.active {
+			border-bottom: 2px solid $primary;
+		}
+	}
 }
