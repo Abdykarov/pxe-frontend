@@ -8,6 +8,8 @@ import {
     OnInit,
 } from '@angular/core';
 
+import { takeUntil } from 'rxjs/operators';
+
 import { AbstractComponent } from 'src/common/abstract.component';
 import { configStepper } from './offer-selection.config';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
@@ -34,10 +36,14 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
 
     ngOnInit () {
         const ean = this.route.snapshot.paramMap.get('ean');
-        this.offerService.findSupplyPointOffers(ean).subscribe((res: any) => {
-            this.supplyPointOffers = res.data.findSupplyPointOffers;
-            this.cd.markForCheck();
-        });
+        this.offerService.findSupplyPointOffers(ean)
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe((res: any) => {
+                this.supplyPointOffers = res.data.findSupplyPointOffers;
+                this.cd.markForCheck();
+            });
     }
 
     action = (id) => {

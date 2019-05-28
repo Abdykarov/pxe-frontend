@@ -12,7 +12,7 @@ export class OfferSelectionPageComponent {
     public stepperProgressConfig: IStepperProgressItem[] = configStepper;
     public supplyPointOffers: ISupplyPointOffer[] = config;
 
-    public action = (evt) => {
+    public action = (supplyPointOffer) => {
         console.log('clicked');
     }
 }
