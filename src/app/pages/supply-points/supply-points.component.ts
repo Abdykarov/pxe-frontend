@@ -36,6 +36,10 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
     }
 
     ngOnInit () {
+        console.log('____ON INIT____');
+        console.log('____ON INIT____');
+        console.log('____ON INIT____');
+
         super.ngOnInit();
         this.supplyService.findSupplyPoints()
             .pipe(
