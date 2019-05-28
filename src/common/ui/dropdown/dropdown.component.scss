@@ -132,52 +132,42 @@
 }
 
 ::ng-deep {
-	.dropdown {
-		.dropdown-item {
-			@include link-without-href {
-				position: relative;
-				display: block;
-				padding: $dropdown-item-padding-y $dropdown-item-padding-x $dropdown-item-padding-y ( $spacer * 3 );
-				clear: both;
-				width: 100%;
-				background-color: transparent;
-				color: $dropdown-link-color;
-				font-size: $small-font-size;
-				line-height: $line-height-sm;
-				cursor: pointer;
-				@include smart-short-text;
-				text-decoration: none;
-			}
-
-			@include link-without-href-interactive {
-				background-color: rgba($font-text, .1);
-				color: $dropdown-link-color;
-				text-decoration: none;
-			}
-
-			&--logout {
-				@include link-without-href {
-					background-color: rgba($secondary, .05);
-				}
-
-				@include link-without-href-interactive {
-					background-color: rgba($secondary, .15);
-				}
-			}
-
-			&.disabled,
-			&:disabled {
-				color: $dropdown-link-disabled-color;
-				background-color: transparent;
-			}
+	.dropdown-item {
+		@include link-without-href-self {
+			position: relative;
+			display: block;
+			padding: $dropdown-item-padding-y $dropdown-item-padding-x $dropdown-item-padding-y ( $spacer * 3 );
+			clear: both;
+			width: 100%;
+			background-color: transparent;
+			color: $dropdown-link-color;
+			font-size: $small-font-size;
+			line-height: $line-height-sm;
+			cursor: pointer;
+			@include smart-short-text;
+			text-decoration: none;
 		}
 
-		.dropdown-item-icon {
-			position: absolute;
-			top: 50%;
-			left: $spacer;
-			margin-top: -( $icon-size-px / 2 );
-			color: $secondary;
+		&:focus,
+		&:hover,
+		&:active {
+			background-color: rgba($font-text, .1);
+			color: $dropdown-link-color;
+			text-decoration: none;
 		}
+
+		&.disabled,
+		&:disabled {
+			color: $dropdown-link-disabled-color;
+			background-color: transparent;
+		}
+	}
+
+	.dropdown-item-icon {
+		position: absolute;
+		top: 50%;
+		left: $spacer;
+		margin-top: -( $icon-size-px / 2 );
+		color: $secondary;
 	}
 }

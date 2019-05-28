@@ -50,10 +50,14 @@ export class DropdownComponent implements OnInit {
     @Input()
     public overlayEnabled?: boolean;
 
+    @Output()
+    public toggleOverlayerAction: EventEmitter<any> = new EventEmitter<any>();
+
     private _isOpen: boolean;
 
     set isOpen(open: boolean) {
         this._isOpen = open;
+        this.toggleOverlayerAction.emit();
         if (this._isOpen) {
             this.openedDropdown = this.hostElement.nativeElement;
             setTimeout(() => this.manageDropdownPosition(), 0);

@@ -65,12 +65,13 @@
             </ng-template>
             <lnd-dropdown
                 [actionTemplate]="dropdown3"
-                menuDirection="right"
-                [overlayEnabled]="true">
+                (toggleOverlayerAction)="toggleOverlayer();"
+                menuDirection="right">
                 <a *ngFor="let item of dropdownItems"
-                    (click)="item.action()"
-                    class="dropdown-item">
-                    <span class="dropdown-item-icon icon icon--power"></span>
+                    [ngClass]="item.class"
+                    class="dropdown-item"
+                    (click)="item.action()">
+                    <span [ngClass]="'dropdown-item-icon icon icon--' + item.icon"></span>
                     {{ item.label }}
                 </a>
             </lnd-dropdown>

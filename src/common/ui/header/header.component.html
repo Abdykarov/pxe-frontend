@@ -62,10 +62,16 @@
                         class="user-holder"
                         *ngIf="!settings.isPublic">
                         <span class="icon icon--favourite-stroke text-color--secondary"></span>
-                        <lnd-dropdown #userProfile [actionTemplate]="profileMenu">
+                        <lnd-dropdown 
+                            #userProfile 
+                            [actionTemplate]="profileMenu"
+                            menuDirection="right">
                             <a *ngFor="let item of userMenu"
-                               class="dropdown-item"
-                               [routerLink]="item.url">
+                                (toggleOverlayerAction)="toggleOverlayer();"
+                                [ngClass]="item.class"
+                                class="dropdown-item"
+                                [routerLink]="item.url">
+                                <span [ngClass]="'dropdown-item-icon icon icon--' + item.icon"></span>
                                 {{ item.label }}
                             </a>
                         </lnd-dropdown>

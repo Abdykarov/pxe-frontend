@@ -31,6 +31,21 @@
 		text-decoration: $link-hover-decoration;
 	}
 
+	&--logout {
+		&.dropdown-item,
+		.navigation-main__link {
+			@include link-without-href-self {
+				background-color: rgba($secondary, .05);
+			}
+
+			&:focus,
+			&:hover,
+			&:active {
+				background-color: rgba($secondary, .15);
+			}
+		}
+	}
+
 	&--disabled {
 		opacity: .4;
 		pointer-events: none;
