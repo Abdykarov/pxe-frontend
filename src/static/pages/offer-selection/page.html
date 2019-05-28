@@ -12,6 +12,8 @@
         </div>
     </div>
     <div class="row">
-        <pxe-supply-point-offer (click)="action(supplyPointOffer.id)" *ngFor="let supplyPointOffer of supplyPointOffers" [supplyPointOffer]="supplyPointOffer"></pxe-supply-point-offer>
+        <div class="supply-points-offer">
+            <pxe-supply-point-offer (click)="action(supplyPointOffer.id)" *ngFor="let supplyPointOffer of supplyPointOffers" [supplyPointOffer]="supplyPointOffer"></pxe-supply-point-offer>
+        </div>
     </div>
 </div>

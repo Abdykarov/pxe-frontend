@@ -91,6 +91,7 @@ export class SupplyPointComponent extends AbstractComponent {
                     'eic',
                     'annualConsumption',
                 ], supplyPointFormData);
+            ean = gasAttributes.eic;
             saveSupplyPoint = this.supplyService.saveGasSupplyPoint(supplyPoint, gasAttributes);
         }
 
