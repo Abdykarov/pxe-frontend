@@ -1,0 +1,158 @@
+/*
+ -  Datepicker
+ -
+ -
+ */
+
+// NgxBootstrap datepicker import
+@import '~ngx-bootstrap/datepicker/utils/scss/variables.scss';
+@import '~ngx-bootstrap/datepicker/utils/scss/mixins.scss';
+@import '~ngx-bootstrap/datepicker/bs-datepicker.scss';
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+@import 'src/common/ui/forms/field/field.component.variables.scss';
+
+bs-datepicker-container {
+	left: -3px;
+	z-index: $zindex-datepicker-content;
+	max-width: $input-width;
+	width: 100%;
+}
+
+.bs-datepicker,
+.bs-datepicker-container,
+bs-years-calendar-view,
+bs-month-calendar-view,
+bs-days-calendar-view {
+	width: 100%;
+}
+
+.bs-datepicker-container {
+	padding: 0;
+}
+
+bs-datepicker-navigation-view {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+bs-years-calendar-view,
+bs-month-calendar-view {
+	.bs-datepicker-head {
+		.current {
+			margin-left: -( $spacer / 2.5 );
+		}
+	}
+}
+
+.bs-datepicker {
+	margin-top: ( $spacer / 2 );
+	background: transparent;
+	box-shadow: 0 0 10px 0 rgba($black, .09);
+
+	.bs-datepicker-head,
+	.bs-datepicker-body {
+		background-color: $input-bg;
+
+		.previous,
+		.next,
+		.current,
+		th .is-highlighted:not(.disabled),
+		td .is-highlighted:not(.disabled) {
+			&:hover {
+				background-color: rgba($input-color, .1);
+				border-radius: $border-radius;
+			}
+		}
+	}
+
+	.bs-datepicker-head {
+		.previous,
+		.next,
+		.current {
+			color: $input-color;
+		}
+
+		.previous,
+		.next {
+			&::before {
+				content: '\e90d';
+				@include icon;
+				display: block;
+				font-size: $icon-size-small-px;
+				font-weight: 700;
+			}
+
+			span {
+				display: none;
+			}
+		}
+
+		.previous {
+			&::before {
+				content: '\e919';
+			}
+		}
+
+		.next {
+			&::before {
+				content: '\e91a';
+			}
+		}
+
+		.current {
+			font-weight: 700;
+			text-transform: uppercase;
+		}
+	}
+
+	.bs-datepicker-body {
+		border: none;
+
+		th {
+			text-transform: uppercase;
+		}
+
+		th,
+		td {
+			&,
+			span {
+				color: $input-color;
+				font-size: $small-font-size;
+				font-weight: 700;
+			}
+		}
+	}
+
+	.bs-datepicker-body table td {
+		span {
+			&.is-highlighted:not(.disabled) {
+				background-color: rgba($input-color, .1);
+				border-radius: $border-radius;
+			}
+
+			&.selected {
+				background-color: $primary;
+				color: $white;
+				border-radius: $border-radius;
+
+				&:hover {
+					background-color: $primary-dark;
+				}
+			}
+		}
+
+		&.is-highlighted:not(.disabled) {
+			span {
+				background-color: $primary;
+				color: $white;
+			}
+		}
+
+		& .is-other-month {
+			color: $gray-100;
+		}
+	}
+}

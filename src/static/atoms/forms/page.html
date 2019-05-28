@@ -251,6 +251,17 @@
                 >
             </lnd-datepicker>
         </div>
+        <div class="col-4">
+            <lnd-datepicker-range
+                [parentForm]="datepickers"
+                [datepickerName]="'datepicker'"
+                [placeholder]="'Datepicker range'"
+                label="Datepicker range"
+                id="datepicker-1-range"
+                [appendButtonIcon]="true ? 'icon--info' : null"
+                (appendButtonAction)="trigger()">
+            </lnd-datepicker-range>
+        </div>
         <div class="col-md-4">
             <lnd-datepicker
                 [parentForm]="datepickers"
