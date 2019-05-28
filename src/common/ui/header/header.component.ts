@@ -31,13 +31,8 @@ import { INavigationMenu } from 'src/common/ui/navigation/models/navigation.mode
 })
 export class HeaderComponent extends AbstractComponent implements OnInit {
     public signTypeNone = SignType.NONE;
-    private body = document.getElementById('top');
     public loginTypeNone = LoginType.NONE;
 
-    public toggleOverlayer() {
-        this.body.classList.toggle('body-inner--overlay');
-        this.body.classList.toggle('body-inner--overlay-full');
-    }
 
     @ViewChild('userProfile')
     public userProfile: DropdownComponent;

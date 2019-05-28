@@ -66,6 +66,7 @@
             <lnd-dropdown
                 [actionTemplate]="dropdown3"
                 (toggleOverlayerAction)="toggleOverlayer();"
+                [overlayEnabled]="true"
                 menuDirection="right">
                 <a *ngFor="let item of dropdownItems"
                     [ngClass]="item.class"
