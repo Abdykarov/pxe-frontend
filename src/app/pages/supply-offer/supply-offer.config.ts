@@ -37,7 +37,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.distributionLocation.code}`,
+                        content: (row) => `${row.distributionLocation ? row.distributionLocation.code : ''}`,
                     },
                 ],
             },
@@ -139,7 +139,10 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${R.find(R.propEq('value', row.annualConsumption.code))(this.annualConsumptionOptions).label}`,
+                        content: (row) => {
+                            return row.annualConsumption ?
+                                `${R.find(R.propEq('value', row.annualConsumption.code))(this.annualConsumptionOptions).label}` : '';
+                        },
                     },
                 ],
             },
