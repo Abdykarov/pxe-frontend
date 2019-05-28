@@ -145,7 +145,7 @@
         </div>
         <div *ngIf="form.controls.validFromTo.status !== 'DISABLED'"
              class="col-4 col-xl-3">
-            <lnd-datepicker
+            <lnd-datepicker-range
                     [datepickerName]="'validFromTo'"
                     [error]="formError.validFromTo || form.controls.validFromTo.errors"
                     id="validFromTo"
@@ -157,11 +157,11 @@
                     [touched]="form.controls.validFromTo.touched || formError.validFromTo"
                     [validationMessages]="formFields.validationMessages.validFromTo"
             >
-            </lnd-datepicker>
+            </lnd-datepicker-range>
         </div>
         <div *ngIf="form.controls.deliveryFromTo.status !== 'DISABLED'"
              class="col-4 col-xl-3">
-            <lnd-datepicker
+            <lnd-datepicker-range
                     [datepickerName]="'deliveryFromTo'"
                     [error]="formError.deliveryFromTo || form.controls.deliveryFromTo.errors"
                     id="deliveryFromTo"
@@ -173,7 +173,7 @@
                     [touched]="form.controls.deliveryFromTo.touched || formError.deliveryFromTo"
                     [validationMessages]="formFields.validationMessages.deliveryFromTo"
             >
-            </lnd-datepicker>
+            </lnd-datepicker-range>
         </div>
         <div *ngIf="form.controls.permanentPaymentPrice.status !== 'DISABLED'"
              class="col-4 col-xl-3">
