@@ -12,9 +12,8 @@
             [class.invalid-input]="!!error && !!touched"
             [class.disabled-input]="!!disabledField">
             <input
-                lndDatepickerDirective
-                bsDatepicker
-                #datepicker="bsDatepicker"
+                bsDaterangepicker
+                #datepicker="bsDaterangepicker"
                 type="text"
                 class="form-control"
                 [class.form-control--not-empty]="!!parentForm.controls[datepickerName].value"
@@ -29,7 +28,6 @@
                 [class.is-warning]="warning"
                 [attr.disabled]="!!disabledField ? 'disabled' : null"
                 [attr.autocomplete]="'off'"
-                (keyup)="checkValue($event)"
                 (onShown)="onShowPicker($event)">
                 <div class="input-group-append">
                     <span class="icon icon--calendar input-group-icon"></span>
