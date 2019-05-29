@@ -110,8 +110,13 @@
 
 	.link-list {
 		&__item {
-			display: inline-block;
+			display: inline-flex;
 			padding: 0 ( $spacer * .75 );
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				padding: 0 ( $spacer * 1.25 );
+			}
 
 			&::before {
 				display: none;
@@ -120,18 +125,25 @@
 
 		&__link {
 			@include link-without-href-self {
+				padding: ( $spacer / 4 ) 0;
 				color: $font-text;
-				font-size: 1.125rem;
+				font-size: $perex-font-size;
+				text-transform: uppercase;
+
+				// Media queries
+				@include media-breakpoint-up(md) {
+					padding: ( $spacer / 2 ) 0;
+				}
 			}
 
 			&:focus,
 			&:hover {
 				text-decoration: none;
 			}
-		}
 
-		.active {
-			border-bottom: 2px solid $primary;
+			&--active {
+				border-bottom: 2px solid $primary;
+			}
 		}
 	}
 }
