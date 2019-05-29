@@ -24,6 +24,10 @@ import {
     colorsPageRoutes,
 } from 'src/static/atoms/colors/page.module';
 import {
+    ContractSigningPageModule,
+    contractSigningPageRoutes,
+} from 'src/static/pages/contract-signing/page.module';
+import {
     FormsPageModule,
     formsPageRoutes,
 } from 'src/static/atoms/forms/page.module';
@@ -89,6 +93,7 @@ const routes: Routes = [
             ...breadcrumbPageRoutes,
             ...buttonsPageRoutes,
             ...colorsPageRoutes,
+            ...contractSigningPageRoutes,
             ...formsPageRoutes,
             ...iconsPageRoutes,
             ...indicatorsPageRoutes,
@@ -117,6 +122,7 @@ const routes: Routes = [
         BreadcrumbPageModule,
         ButtonsPageModule,
         ColorsPageModule,
+        ContractSigningPageModule,
         FormsPageModule,
         IconsPageModule,
         IndicatorsPageModule,
