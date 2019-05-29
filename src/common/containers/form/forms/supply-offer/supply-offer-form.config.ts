@@ -1,4 +1,7 @@
-import { FormArray, Validators } from '@angular/forms';
+import {
+    FormArray,
+    Validators,
+} from '@angular/forms';
 
 import {
     CommodityType,
@@ -110,7 +113,27 @@ export const formFields: IForm = {
         ],
         benefits: new FormArray([]),
     },
-    validationMessages: {},
+    validationMessages: {
+        circuitBreakerId: {
+            required: errorFieldMessages.circuitBreakerId.required,
+        },
+        commodityType: {
+            required: errorFieldMessages.commodityType.required,
+        },
+        distributionRateId: {
+            required: errorFieldMessages.distributionRateId.required,
+        },
+        name: {
+            required: errorFieldMessages.name.required,
+            maxlength: errorFieldMessages.name.maxlength,
+        },
+        subjectTypeId: {
+            required: errorFieldMessages.subjectTypeId.required,
+        },
+        supplierId: {
+            required: errorFieldMessages.supplierId.required,
+        },
+    },
 };
 
 export const CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL = 'DSTSA2';
