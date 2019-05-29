@@ -18,7 +18,7 @@ export class SupplyPointOfferComponent {
               url: null,
           },
       ];
-  }
+    }
 
     public click = (data) => {
         console.log('clicked', data);

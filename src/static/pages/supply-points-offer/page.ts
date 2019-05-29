@@ -1,14 +1,25 @@
 import { Component } from '@angular/core';
 
 import {
-    supplyPointConfigPower,
-    supplyPointConfigGas,
-} from 'src/static/organisms/supply-point/config';
+    offerConfig1,
+    offerConfig2,
+    offerConfig3,
+    SupplyPointsOfferPageConfig,
+} from './config';
 
 @Component({
     templateUrl: './page.html',
 })
-export class SupplyPointsPageComponent {
-    public supplyPointPower = supplyPointConfigPower;
-    public supplyPointGas = supplyPointConfigGas;
+export class SupplyPointsOfferPageComponent {
+    public offer1 = offerConfig1;
+    public offer2 = offerConfig2;
+    public offer3 = offerConfig3;
+
+    constructor(
+        public progressbarConfig: SupplyPointsOfferPageConfig,
+    ) {}
+
+    public click = (data) => {
+        console.log('clicked', data);
+    }
 }

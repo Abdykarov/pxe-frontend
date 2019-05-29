@@ -16,20 +16,18 @@
 	.supply-points-offer {
 		pointer-events: none;
 
-		&:hover {
-			.supply-point-offer:not(:hover):not(.supply-point-offer--owner) {
-				@include link-without-href-self {
-					// Media queries
-					@include media-breakpoint-up(xl) {
-						background-color: $body-bg;
-					}
+		&:hover .supply-point-offer:not(:hover):not(.supply-point-offer--owner) {
+			@include link-without-href-self {
+				// Media queries
+				@include media-breakpoint-up(xl) {
+					background-color: $body-bg;
 				}
+			}
 
-				.supply-point-offer__inner--price {
-					// Media queries
-					@include media-breakpoint-up(xl) {
-						background-color: rgba($white, .5);
-					}
+			.supply-point-offer__inner--price {
+				// Media queries
+				@include media-breakpoint-up(xl) {
+					background-color: rgba($white, .5);
 				}
 			}
 		}

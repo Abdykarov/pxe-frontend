@@ -4,28 +4,30 @@ import { Routes } from '@angular/router';
 
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
-import { SupplyPointsPageComponent } from './page';
-import { SupplyPointModule } from 'src/common/ui/supply-point/supply-point.module';
+import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.module';
+import { SupplyPointsOfferPageComponent } from './page';
+import { SupplyPointOfferModule } from 'src/common/ui/supply-point-offer/supply-point-offer.module';
 
 @NgModule({
     declarations: [
-        SupplyPointsPageComponent,
+        SupplyPointsOfferPageComponent,
     ],
     exports: [
-        SupplyPointsPageComponent,
+        SupplyPointsOfferPageComponent,
     ],
     imports: [
         BreadcrumbModule,
         ButtonModule,
         CommonModule,
-        SupplyPointModule,
+        ProgressBarModule,
+        SupplyPointOfferModule,
     ],
 })
-export class SupplyPointsPageModule {}
+export class SupplyPointsOfferPageModule {}
 
-export const supplyPointsPageRoutes: Routes = [
+export const supplyPointsOfferPageRoutes: Routes = [
     {
-        path: 'supply-points',
-        component: SupplyPointsPageComponent,
+        path: 'supply-points-offer',
+        component: SupplyPointsOfferPageComponent,
     },
 ];

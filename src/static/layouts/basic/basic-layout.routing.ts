@@ -52,6 +52,10 @@ import {
     progressBarPageRoutes,
 } from 'src/static/organisms/progress-bar/progress-bar.module';
 import {
+    SupplyPointPageModule,
+    supplyPointPageRoutes,
+} from 'src/static/organisms/supply-point/page.module';
+import {
     SupplyPointsPageModule,
     supplyPointsPageRoutes,
 } from 'src/static/pages/supply-points/page.module';
@@ -64,9 +68,9 @@ import {
     supplyPointOfferPageRoutes,
 } from 'src/static/organisms/supply-point-offer/page.module';
 import {
-    SupplyPointPageModule,
-    supplyPointPageRoutes,
-} from 'src/static/organisms/supply-point/page.module';
+    SupplyPointsOfferPageModule,
+    supplyPointsOfferPageRoutes,
+} from 'src/static/pages/supply-points-offer/page.module';
 import {
     TablesPageModule,
     tablesPageRoutes,
@@ -96,10 +100,11 @@ const routes: Routes = [
             ...modalsPageRoutes,
             ...newSupplyPointPageRoutes,
             ...progressBarPageRoutes,
+            ...supplyPointPageRoutes,
             ...supplyPointsPageRoutes,
             ...supplyPointsBannerPageRoutes,
             ...supplyPointOfferPageRoutes,
-            ...supplyPointPageRoutes,
+            ...supplyPointsOfferPageRoutes,
             ...tablesPageRoutes,
             ...tooltipPageRoutes,
             ...typographyPageRoutes,
@@ -125,10 +130,11 @@ const routes: Routes = [
         NewSupplyPointPageModule,
         ProgressBarPageModule,
         RouterModule.forChild(routes),
+        SupplyPointPageModule,
         SupplyPointsPageModule,
         SupplyPointsBannerPageModule,
         SupplyPointOfferPageModule,
-        SupplyPointPageModule,
+        SupplyPointsOfferPageModule,
         TablesPageModule,
         TooltipPageModule,
         TypographyPageModule,
