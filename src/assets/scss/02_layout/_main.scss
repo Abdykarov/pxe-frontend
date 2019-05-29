@@ -112,6 +112,7 @@
 		&__item {
 			display: inline-flex;
 			padding: 0 ( $spacer * .75 );
+			margin-bottom: ( $spacer / 2 );
 
 			// Media queries
 			@include media-breakpoint-up(md) {
