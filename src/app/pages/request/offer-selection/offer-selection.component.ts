@@ -16,6 +16,8 @@ import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { OfferService } from 'src/common/graphql/services/offer.service';
 import { ROUTES } from 'src/app/app.constants';
+import { IFieldError } from '../../../../common/containers/form/models/form-definition.model';
+import { parseGraphQLErrors } from '../../../../common/utils';
 
 @Component({
     templateUrl: './offer-selection.component.html',
@@ -24,6 +26,11 @@ import { ROUTES } from 'src/app/app.constants';
 export class OfferSelectionComponent extends AbstractComponent implements OnInit {
     public stepperProgressConfig: IStepperProgressItem[] = configStepper;
     public supplyPointOffers: ISupplyPointOffer[] = [];
+
+    public formSent = false;
+    public globalError: string[] = [];
+    public fieldError: IFieldError = {};
+    public formLoading = false;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -40,10 +47,21 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
             .pipe(
                 takeUntil(this.destroy$),
             )
-            .subscribe((res: any) => {
-                this.supplyPointOffers = res.data.findSupplyPointOffers;
-                this.cd.markForCheck();
-            });
+            .subscribe(
+                (res: any) => {
+                    this.formLoading = false;
+                    this.formSent = true;
+                    this.supplyPointOffers = res.data.findSupplyPointOffers;
+                    this.cd.markForCheck();
+                },
+                (error) => {
+                    this.formLoading = false;
+                    const { fieldError, globalError } = parseGraphQLErrors(error);
+                    this.fieldError = fieldError;
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
+                },
+            );
     }
 
     action = (supplyPointOffer) => {

@@ -85,10 +85,7 @@ export class SupplyPointComponent extends AbstractComponent {
                     'annualConsumptionVT',
                 ], supplyPointFormData);
             ean = powerAttributes.ean;
-            saveSupplyPoint = this.supplyService.savePowerSupplyPoint(supplyPoint, powerAttributes)
-                .pipe(
-                    takeUntil(this.destroy$),
-                );
+            saveSupplyPoint = this.supplyService.savePowerSupplyPoint(supplyPoint, powerAttributes);
         } else {
             const gasAttributes: ISupplyPointGasAttributes =
                 R.pick([
@@ -96,13 +93,13 @@ export class SupplyPointComponent extends AbstractComponent {
                     'annualConsumption',
                 ], supplyPointFormData);
             ean = gasAttributes.eic;
-            saveSupplyPoint = this.supplyService.saveGasSupplyPoint(supplyPoint, gasAttributes)
-                .pipe(
-                    takeUntil(this.destroy$),
-                );
+            saveSupplyPoint = this.supplyService.saveGasSupplyPoint(supplyPoint, gasAttributes);
         }
 
         saveSupplyPoint
+            .pipe(
+                takeUntil(this.destroy$),
+            )
             .subscribe(
                 (data) => {
                     this.formLoading = false;
