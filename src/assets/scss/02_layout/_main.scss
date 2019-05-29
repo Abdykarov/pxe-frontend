@@ -125,7 +125,8 @@
 		}
 
 		&__link {
-			@include link-without-href-self {
+			&,
+			&:visited {
 				padding: ( $spacer / 4 ) 0;
 				color: $font-text;
 				font-size: $perex-font-size;
