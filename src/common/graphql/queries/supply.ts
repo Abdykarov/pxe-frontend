@@ -50,8 +50,8 @@ export const findSupplierDocumentsByComodity = gql`
 `;
 
 export const findSupplyPoints = gql`
-    query findSupplyPoints($email: String!){
-        findSupplyPoints(email: $email){
+    query findSupplyPoints($ean: String){
+        findSupplyPoints(ean: $ean){
             id,
             name,
             commodityType,
