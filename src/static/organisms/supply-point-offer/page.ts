@@ -5,19 +5,19 @@ import { IOffer } from 'src/common/graphql/models/offer.model';
 import { offerConfig } from './config';
 
 @Component({
-  templateUrl: './page.html',
+    templateUrl: './page.html',
 })
 export class SupplyPointOfferComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
     public offer: IOffer = offerConfig;
 
     constructor() {
-      this.breadcrumbItemsSimple = [
-          {
-              label: 'Supply point offer',
-              url: null,
-          },
-      ];
+        this.breadcrumbItemsSimple = [
+            {
+                label: 'Supply point offer',
+                url: null,
+            },
+        ];
     }
 
     public click = (data) => {
