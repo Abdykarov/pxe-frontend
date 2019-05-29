@@ -12,12 +12,12 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { configStepper } from './offer-selection.config';
+import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { OfferService } from 'src/common/graphql/services/offer.service';
+import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
-import { IFieldError } from '../../../../common/containers/form/models/form-definition.model';
-import { parseGraphQLErrors } from '../../../../common/utils';
 
 @Component({
     templateUrl: './offer-selection.component.html',
@@ -25,7 +25,7 @@ import { parseGraphQLErrors } from '../../../../common/utils';
 })
 export class OfferSelectionComponent extends AbstractComponent implements OnInit {
     public stepperProgressConfig: IStepperProgressItem[] = configStepper;
-    public supplyPointOffers: ISupplyPointOffer[] = [];
+    public supplyPointOffers: ISupplyPointOffer[];
 
     public formSent = false;
     public globalError: string[] = [];
@@ -55,6 +55,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                     this.cd.markForCheck();
                 },
                 (error) => {
+                    this.supplyPointOffers = [];
                     this.formLoading = false;
                     const { fieldError, globalError } = parseGraphQLErrors(error);
                     this.fieldError = fieldError;

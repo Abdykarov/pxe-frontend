@@ -20,9 +20,10 @@
                         </div>
                     </div>
                     <div class="col-auto">
-                        <div class="supply-point-offer__value-box">
+                        <div class="supply-point-offer__value-box"
+                             *ngIf="(supplyPointOffer.validFrom | dateDiff: supplyPointOffer.validTo:'hours' ) < 73">
                             <span class="supply-point-offer__value-name">Platnost nabídky</span>
-                            <span class="supply-point-offer__value">{{(supplyPointOffer.validFrom | dateDiff: supplyPointOffer.validTo )}} {{(supplyPointOffer.validFrom | dateDiff: supplyPointOffer.validTo) | plural: 'day' | titlecase}}</span>
+                            <span class="supply-point-offer__value text-color--danger">{{supplyPointOffer.validFrom | dateDiff: supplyPointOffer.validTo:'hours'}} hodin</span>
                         </div>
                     </div>
                 </div>

@@ -1,3 +1,11 @@
+<ng-template #emptyOffers>
+    <lnd-info-banner
+        bannerTitle="Litujeme pro Vaše odběrné místo neexistuje žádná nabídka."
+        [showButton]="false"
+    >
+    </lnd-info-banner>
+</ng-template>
+
 <div class="container-fluid">
     <div class="container-content">
         <pxe-layout-container pageTitle="Nová nabídka">
@@ -6,13 +14,16 @@
                     <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
                 </div>
             </div>
-            <div class="row">
+            <div class="row"
+                 *ngIf="supplyPointOffers">
                 <div class="col-12 col-md-12 supply-points-offer">
-                    <pxe-supply-point-offer
-                        (action)="action(supplyPointOffer)"
-                        *ngFor="let supplyPointOffer of supplyPointOffers"
-                        [supplyPointOffer]="supplyPointOffer">
-                    </pxe-supply-point-offer>
+                    <ng-container *ngIf="supplyPointOffers.length; else emptyOffers">
+                        <pxe-supply-point-offer
+                            (action)="action(supplyPointOffer)"
+                            *ngFor="let supplyPointOffer of supplyPointOffers"
+                            [supplyPointOffer]="supplyPointOffer">
+                        </pxe-supply-point-offer>
+                    </ng-container>
                 </div>
             </div>
         </pxe-layout-container>
