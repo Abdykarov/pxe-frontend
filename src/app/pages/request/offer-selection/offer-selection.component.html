@@ -7,9 +7,9 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-md-12">
+                <div class="col-12 col-md-12 supply-points-offer">
                     <pxe-supply-point-offer
-                        (click)="action(supplyPointOffer.id)"
+                        (click)="action(supplyPointOffer)"
                         *ngFor="let supplyPointOffer of supplyPointOffers"
                         [supplyPointOffer]="supplyPointOffer">
                     </pxe-supply-point-offer>

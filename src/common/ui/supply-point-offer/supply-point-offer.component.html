@@ -66,6 +66,7 @@
                     </div>
                     <div class="col-12 col-md-auto supply-point-offer__addon">
                         <lnd-button
+                            *ngIf="supplyPointOffer.benefits"
                             label="Výhody"
                             type="link"
                             (click)="toggleBenefits($event)">
@@ -80,7 +81,7 @@
             </div>
         </div>
         <div class="col-12"
-             *ngIf="!isOwner">
+             *ngIf="!isOwner && supplyPointOffer.benefits">
             <ul class="check-list supply-point-offer__benefits-list"
                 [class.d-block]="showBenefits"
                 [class.d-none]="!showBenefits"

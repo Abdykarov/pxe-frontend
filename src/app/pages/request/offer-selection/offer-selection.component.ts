@@ -46,7 +46,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
             });
     }
 
-    action = (id) => {
+    action = (supplyPointOffer) => {
         this.router.navigate([ROUTES.ROUTER_REQUEST_RECAPITULATION]);
     }
 }
