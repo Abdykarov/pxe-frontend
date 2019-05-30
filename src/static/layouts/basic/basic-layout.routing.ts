@@ -52,6 +52,10 @@ import {
     progressBarPageRoutes,
 } from 'src/static/organisms/progress-bar/progress-bar.module';
 import {
+    RecapitulationPageModule,
+    recapitulationPageRoutes,
+} from 'src/static/pages/recapitulation/page.module';
+import {
     SamplePointsPageModule,
     samplePointsPageRoutes,
 } from 'src/static/pages/sample-points/page.module';
@@ -96,6 +100,7 @@ const routes: Routes = [
             ...modalsPageRoutes,
             ...newSupplyPointPageRoutes,
             ...progressBarPageRoutes,
+            ...recapitulationPageRoutes,
             ...samplePointsPageRoutes,
             ...samplePointsBannerPageRoutes,
             ...supplyPointOfferPageRoutes,
@@ -124,6 +129,7 @@ const routes: Routes = [
         ModalsPageModule,
         NewSupplyPointPageModule,
         ProgressBarPageModule,
+        RecapitulationPageModule,
         RouterModule.forChild(routes),
         SamplePointsPageModule,
         SamplePointsBannerPageModule,

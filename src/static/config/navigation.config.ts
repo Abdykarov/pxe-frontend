@@ -146,6 +146,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/new-supply-point',
                 },
                 {
+                    'label': 'Recapitulation',
+                    'url': '/basic/recapitulation',
+                },
+                {
                     'label': 'Sample points',
                     'url': '/basic/sample-points',
                 },

@@ -18,12 +18,6 @@ export const formFields: IForm = {
                 Validators.required,
             ],
         ],
-        address: [
-            null,
-            [
-                Validators.required,
-            ],
-        ],
         permanentAddress: [
             null,
             [
@@ -34,7 +28,7 @@ export const formFields: IForm = {
             null,
             [],
         ],
-        acount: [
+        acountNumber: [
             null,
             [
                 Validators.required,
@@ -71,7 +65,7 @@ export const formFields: IForm = {
         address: {},
         permanentAddress: {},
         correspondenceAddress: {},
-        acount: {},
+        acountNumber: {},
         acountBankNumber: {},
         telephone: {},
         telephonePrefix: {},
