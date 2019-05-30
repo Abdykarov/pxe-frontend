@@ -101,7 +101,7 @@ export const formFields: IForm = {
             ],
         ],
         permanentPaymentPrice: [
-            null,
+            10,
             [
                 Validators.required,
                 CustomValidators.isDecimal,

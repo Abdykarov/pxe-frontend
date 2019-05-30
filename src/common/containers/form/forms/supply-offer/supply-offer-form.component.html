@@ -5,6 +5,7 @@
         {{ error }}<br>
     </ng-container>
 </lnd-alert>
+<pre>{{formValues | json}}</pre>
 <form
     [formGroup]="form"
     (keydown)="resetCustomFieldError()"
@@ -22,6 +23,7 @@
                     [success]="form.controls.name.valid && (form.controls.name.touched || formError.name)"
                     [touched]="form.controls.name.touched || formError.name"
                     [validationMessages]="formFields.validationMessages.name"
+                    [value]="form.controls.name.value"
             ></lnd-form-field>
         </div>
     </div>
@@ -115,12 +117,14 @@
                     [success]="form.controls.priceVT.valid && (form.controls.priceVT.touched || formError.priceVT)"
                     [touched]="form.controls.priceVT.touched || formError.priceVT"
                     [validationMessages]="formFields.validationMessages.priceVT"
+                    [value]="form.controls.priceVT.value"
             ></lnd-form-field>
         </div>
-        <div *ngIf="form.controls.priceNT.status !== 'DISABLED'"
+        <div *ngIf="form.controls.priceNT.status !== 'DISABLED' || commodityType === COMMODITY_TYPE_POWER"
              class="col-4 col-xl-3">
             <lnd-form-field
                     appendText="kWh/Kč"
+                    [disabledField]="form.controls.priceNT.status === 'DISABLED'"
                     [error]="formError.priceNT || form.controls.priceNT.errors"
                     [formControl]="form.controls.priceNT"
                     [id]="'priceNT'"
@@ -128,6 +132,7 @@
                     [success]="form.controls.priceNT.valid && (form.controls.priceNT.touched || formError.priceNT)"
                     [touched]="form.controls.priceNT.touched || formError.priceNT"
                     [validationMessages]="formFields.validationMessages.priceNT"
+                    [value]="form.controls.priceNT.value"
             ></lnd-form-field>
         </div>
         <div *ngIf="form.controls.priceGas.status !== 'DISABLED'"
@@ -141,6 +146,7 @@
                     [success]="form.controls.priceGas.valid && (form.controls.priceGas.touched || formError.priceGas)"
                     [touched]="form.controls.priceGas.touched || formError.priceGas"
                     [validationMessages]="formFields.validationMessages.priceGas"
+                    [value]="form.controls.priceGas.value"
             ></lnd-form-field>
         </div>
         <div *ngIf="form.controls.validFromTo.status !== 'DISABLED'"
@@ -187,20 +193,24 @@
                     [success]="form.controls.permanentPaymentPrice.valid && (form.controls.permanentPaymentPrice.touched || formError.permanentPaymentPrice)"
                     [touched]="form.controls.permanentPaymentPrice.touched || formError.permanentPaymentPrice"
                     [validationMessages]="formFields.validationMessages.permanentPaymentPrice"
+                    [value]="form.controls.permanentPaymentPrice.value"
             ></lnd-form-field>
         </div>
     </div>
     <div class="row">
-        <ng-container formArrayName="benefits" *ngFor="let benefit of form.controls.benefits.controls; let i = index">
+        <ng-container *ngFor="let benefit of benefitsFormArray.controls; let i = index"
+                      formArrayName="benefits">
             <ng-container [formGroupName]="i">
                 <div class="col-4 col-xl-3">
                     <lnd-form-field
                             formControlName="value"
+                            [id]="'benefit' + i"
                             [label]="'Benefit ' + (i + 1)"
                     ></lnd-form-field>
                 </div>
             </ng-container>
         </ng-container>
+        <pre>{{form.value | json}}</pre>
     </div>
     <div class="row">
         <div class="col text-right">

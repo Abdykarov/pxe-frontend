@@ -1,4 +1,5 @@
 import {
+    AfterViewInit,
     ChangeDetectorRef,
     Component,
     Input,
@@ -6,7 +7,10 @@ import {
     OnInit,
     SimpleChanges
 } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import {
+    FormArray,
+    FormBuilder,
+} from '@angular/forms';
 
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
@@ -14,11 +18,9 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import {
-    CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL,
     COMMODITY_TO_DISTRIBUTION,
     codeListTypes,
     commodityTypeFields,
-    commodityTypeOptions,
     distributionRatesTypeDefinition,
     SUBJECT_TYPE_TO_DIST_RATE,
     subjectTypeOptions,
@@ -28,29 +30,25 @@ import {
     CommodityType,
     DistributionType,
 } from 'src/common/graphql/models/supply.model';
-import {
-    convertArrayToObject,
-    transformCodeList,
-    transformSuppliers,
-} from 'src/common/utils';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { ModalLoaderService } from 'src/common/containers/modal/modal-loader.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { transformCodeList } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-supply-offer-form',
     templateUrl: './supply-offer-form.component.html',
     styleUrls: ['./supply-offer-form.component.scss'],
 })
-export class SupplyOfferFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
+export class SupplyOfferFormComponent extends AbstractFormComponent implements OnInit, OnChanges, AfterViewInit {
     @Input()
     public commodityType = CommodityType.POWER;
 
     @Input()
-    public id: number = null;
+    public showCancel = true;
 
     @Input()
-    public showCancel = true;
+    public formValues = null;
 
     public subjectTypeOptions: Array<IOption> = subjectTypeOptions;
     public deliveryLengthOptions: Array<IOption> = deliveryLengthOptions;
@@ -59,6 +57,11 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
     public suppliers = [];
     public distributionRateType = '';
     public distributionLocationType = COMMODITY_TO_DISTRIBUTION[this.commodityType];
+    public COMMODITY_TYPE_POWER = CommodityType.POWER;
+
+    get benefitsFormArray() {
+        return <FormArray>this.form.get('benefits');
+    }
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -76,7 +79,6 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
         R.times(() => {
             (this.form.controls['benefits'] as FormArray).push(this.addBenefit());
         }, 4);
-        this.form.controls['id'].patchValue(this.id);
         this.form.controls['commodityType'].setValue(this.commodityType);
 
         this.form.get('subjectTypeId')
@@ -92,6 +94,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
             .valueChanges
             .pipe(takeUntil(this.destroy$))
             .subscribe(val => {
+                this.resetFieldValue('permanentPaymentPrice');
                 this.setPriceNTState(val);
             });
 
@@ -100,8 +103,19 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
         this.setPriceNTState();
     }
 
+    ngAfterViewInit(): void {
+        // this.form.controls['permanentPaymentPrice'].setValue(1000);
+        // this.form.controls['priceNT'].setValue(1000);
+        // this.form.controls['validFromTo'].setValue([
+        //     new Date(),
+        //     new Date(),
+        // ]);
+    }
+
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
+        console.log('%c ***** changes *****', 'background: #bada55; color: #000; font-weight: bold', changes);
+        console.log(changes.formValues.currentValue);
     }
 
     public addBenefit = () => {
@@ -174,7 +188,9 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
         if (this.includesBothTariffs(distributionRateId)) {
             annualConsumptionNTControl.enable();
         } else {
+            this.resetFieldValue('priceNT');
             annualConsumptionNTControl.disable();
+            this.cd.markForCheck();
         }
     }
 }

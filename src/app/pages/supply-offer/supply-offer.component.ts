@@ -38,15 +38,18 @@ import { SupplyOfferConfig } from './supply-offer.config';
 })
 export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public commodityType = CommodityType.POWER;
+    public fieldError: IFieldError = {};
+    public formFields = formFields;
+    public formLoading = false;
+    public formSent = false;
+    public formValues = {};
+    public globalError: string[] = [];
+    public loadingOffers = true;
+    public tableRows = [];
     public routePower = ROUTES.ROUTER_SUPPLY_OFFER_POWER;
     public routeGas = ROUTES.ROUTER_SUPPLY_OFFER_GAS;
-    public formFields = formFields;
-    public formSent = false;
-    public globalError: string[] = [];
-    public fieldError: IFieldError = {};
-    public formLoading = false;
-    public tableRows = [];
-    public loadingOffers = true;
+
+    public action;
 
     constructor(
         private authService: AuthService,
@@ -78,31 +81,36 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public edit = (table, row) => {
+        this.action = 'edit';
+        this.formValues = {
+            ...row,
+        };
         if (table.openedRow !== row) {
-            table.openRow(row);
-            table.selectRow(row);
+            this.toggleRow(table, row);
         }
     }
 
     public create = (table, row) => {
+        this.action = 'create';
+        this.formValues = {};
         if (table.openedRow !== row) {
-            table.openRow(row);
-            table.selectRow(row);
+            this.toggleRow(table, row);
         }
     }
 
     public duplicate = (table, row) => {
+        this.action = 'dupl';
+        this.formValues = {
+            ...row,
+            id: null,
+        };
         if (table.openedRow !== row) {
-            table.openRow(row);
-            table.selectRow(row);
+            this.toggleRow(table, row);
         }
     }
 
     public delete = (table, row) => {
-        if (table.openedRow !== row) {
-            table.openRow(row);
-            table.selectRow(row);
-        }
+        console.log('%c ***** DELETE *****', 'background: #bada55; color: #000; font-weight: bold', row.id);
     }
 
     public loadOffers = () => {
@@ -191,5 +199,6 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
 
     public toggleRow = (table, row) => {
         table.openRow(row);
+        table.selectRow(row);
     }
 }

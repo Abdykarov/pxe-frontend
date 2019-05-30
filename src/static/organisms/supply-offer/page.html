@@ -100,7 +100,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-4">
+        <div class="col-4 col-xl-3">
             <lnd-form-field
                     [id]="'name'"
                     label="Název produktu"
@@ -108,7 +108,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-2">
+        <div class="col-4 col-xl-3">
             <lnd-select
                 label="Typ osoby"
                 [options]="supplyOfferConfig.subjectTypeOptions"
@@ -116,7 +116,7 @@
                 [selectName]="'subjectTypeId'">
             </lnd-select>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-xl-3">
             <lnd-select
                 label="Distribuční umístění"
                 [options]="newSupplyPointPageConfig.suppliersOptions"
@@ -124,7 +124,7 @@
                 [selectName]="'distributionLocation'">
             </lnd-select>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-xl-3">
             <lnd-select
                 label="Distribuční sazba"
                 [options]="newSupplyPointPageConfig.distributionRateOptions"
@@ -132,7 +132,7 @@
                 [selectName]="'distributionRateId'">
             </lnd-select>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-xl-3">
             <lnd-select
                 label="Jistič"
                 [options]="newSupplyPointPageConfig.circuitBreakerOptions"
@@ -140,7 +140,7 @@
                 [selectName]="'circuitBreakerId'">
             </lnd-select>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-xl-3">
             <lnd-select
                 label="Délka dodávky"
                 [options]="supplyOfferConfig.deliveryLengthOptions"
@@ -148,7 +148,7 @@
                 [selectName]="'deliveryLength'">
             </lnd-select>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-xl-3">
             <lnd-select
                 label="Spotřeba"
                 [options]="supplyOfferConfig.annualConsumptionOptions"
@@ -156,28 +156,28 @@
                 [selectName]="'annualConsumptionId'">
             </lnd-select>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-xl-3">
             <lnd-form-field
                 [id]="'priceNT'"
                 label="Cena NT"
                 appendText="kWh/Kč"
             ></lnd-form-field>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-xl-3">
             <lnd-form-field
                 [id]="'priceVT'"
                 label="Cena VT"
                 appendText="kWh/Kč"
             ></lnd-form-field>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-xl-3">
             <lnd-form-field
                 [id]="'priceGAS'"
                 label="Cena GAS"
                 appendText="kWh/Kč"
             ></lnd-form-field>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-xl-3">
             <lnd-datepicker
                 [datepickerName]="'validFromTo'"
                 id="validFromTo"
@@ -185,7 +185,7 @@
                 [parentForm]="form"
             ></lnd-datepicker>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-xl-3">
             <lnd-datepicker
                 [datepickerName]="'deliveryFromTo'"
                 id="deliveryFromTo"
@@ -193,7 +193,7 @@
                 [parentForm]="form"
             ></lnd-datepicker>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-xl-3">
             <lnd-form-field
                 [id]="'permanentPaymentPrice'"
                 label="Měsíční záloha"
@@ -202,25 +202,25 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-2">
+        <div class="col-4 col-xl-3">
             <lnd-form-field
                 [id]="'benefits1'"
                 label="Výhody"
             ></lnd-form-field>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-xl-3">
             <lnd-form-field
                 [id]="'benefits2'"
                 label=""
             ></lnd-form-field>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-xl-3">
             <lnd-form-field
                 [id]="'benefits3'"
                 label=""
             ></lnd-form-field>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-xl-3">
             <lnd-form-field
                 [id]="'benefits4'"
                 label=""
