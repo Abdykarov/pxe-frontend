@@ -6,8 +6,6 @@ import {
     Output,
 } from '@angular/core';
 
-import * as moment from 'moment';
-
 import { AbstractComponent } from 'src/common/abstract.component';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
@@ -17,7 +15,6 @@ import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
     selector: 'pxe-supply-point-offer',
     templateUrl: './supply-point-offer.component.html',
     styleUrls: ['./supply-point-offer.component.scss'],
-    providers: [DateDiffPipe],
 })
 export class SupplyPointOfferComponent extends AbstractComponent implements OnInit {
     private static readonly MAX_HOURS_VALIDITY_OF_OFFER_DISPLAYED = 72;
@@ -50,11 +47,11 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     }
 
     ngOnInit () {
-        const validToDate = moment(this.supplyPointOffer.validTo).toDate();
         this.dateDiffValidityOfOffer = this.dateDiffPipe.transform(
             this.currentTime.toISOString(),
             this.supplyPointOffer.validTo,
-            'hours');
+            'hours',
+        );
 
         this.dateDiffValidityOfOffer =
             this.dateDiffValidityOfOffer === SupplyPointOfferComponent.ZERO_HOURS_VALIDITY_OF_OFFER ?
