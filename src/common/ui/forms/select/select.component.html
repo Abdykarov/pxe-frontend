@@ -58,6 +58,9 @@
                 </ng-template>
             </ng-container>
         </ng-select>
+        <ng-container *ngIf="appendTemplate"
+            [ngTemplateOutlet]="appendTemplate">
+        </ng-container>
         <div
             *ngIf="!!appendButtonIcon"
             class="input-group-append-help">

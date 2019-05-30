@@ -1,8 +1,9 @@
-<ng-template #checkboxInSubtext>
+<ng-template #otherAddress>
     <lnd-form-field
         [id]="'checkbox-in-subtext'"
         label="Mám jinou korespondenční adresu"
-        [type]="'CHECKBOX'">
+        [type]="'CHECKBOX'"
+        [formControl]="form.controls.onlyPermanentAddress">
     </lnd-form-field>
 </ng-template>
 <!-- Example custom lael template -->
@@ -51,14 +52,15 @@
                         label="Jméno a příjmení"
                     ></lnd-form-field>
                     <pxe-address-whisperer
+                        [appendTemplate]="otherAddress"
                         [label]="'Trvalá adresa'"
                         [parentForm]="form"
                         [templateItem]="templateItem"
                         [templateLabel]="templateLabel"
                         [whispererName]="'permanentAddress'">
                     </pxe-address-whisperer>
-                    <ng-container [ngTemplateOutlet]="checkboxInSubtext"></ng-container>
                     <pxe-address-whisperer
+                        *ngIf="form.getRawValue().onlyPermanentAddress"
                         [label]="'Korespondeční adresa'"
                         [parentForm]="form"
                         [templateItem]="templateItem"

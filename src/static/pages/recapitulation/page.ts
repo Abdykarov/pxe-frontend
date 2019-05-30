@@ -20,6 +20,7 @@ export class RecapitulationPageComponent {
         telephone: new FormControl(),
         telephonePrefix: new FormControl(),
         email: new FormControl(),
+        onlyPermanentAddress: new FormControl(),
     });
 
     public config = configStepper;
