@@ -16,8 +16,6 @@ export class ContractSigningPageComponent {
     ) {}
 
     public toggleOffer = (event) => {
-        event.preventDefault();
-        event.cancelBubble = true;
         this.showOffer = !this.showOffer;
     }
 }
