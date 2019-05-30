@@ -24,11 +24,12 @@ export const config: ISupplyPointOffer[] = [
             logoUrl: '/assets/images/suppliers/logo_alpiq.svg',
             logoUrlHover: '/assets/images/suppliers/logo_alpiq-hover.svg',
             supplierUrl: '',
+            name: 'PRE',
             title: 'PRE',
             typeCommodity: TypeCommodity.POWER,
         },
         validFrom: '2019-03-12T22:59:12.133Z',
-        validTo: '2019-03-31T22:59:12.133Z',
+        validTo:   '2090-06-02T10:42:12.000Z',
     },
     {
         benefits: [
@@ -51,10 +52,11 @@ export const config: ISupplyPointOffer[] = [
             logoUrl: '/assets/images/suppliers/logo_alpiq.svg',
             logoUrlHover: '/assets/images/suppliers/logo_alpiq-hover.svg',
             supplierUrl: '',
+            name: 'PRE',
             title: 'PRE',
             typeCommodity: TypeCommodity.GAS,
         },
         validFrom: '2019-02-12T22:59:12.133Z',
-        validTo: '2019-02-25T22:59:12.133Z',
+        validTo: '2090-02-25T22:59:12.133Z',
     },
 ];

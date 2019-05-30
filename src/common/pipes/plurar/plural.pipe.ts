@@ -20,6 +20,13 @@ export class PluralPipe implements PipeTransform {
             '=4' : 'dny',
             'other' : 'dní',
         },
+        'hour': {
+            '=1' : 'hodina',
+            '=2' : 'hodiny',
+            '=3' : 'hodiny',
+            '=4' : 'hodiny',
+            'other' : 'hodin',
+        },
         'place': {
             '=1' : 'místo',
             '=2' : 'místa',

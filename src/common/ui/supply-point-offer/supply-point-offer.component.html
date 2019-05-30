@@ -1,5 +1,6 @@
 <a class="supply-point-offer"
    [class.supply-point-offer--owner]="isOwner"
+   *ngIf="!invalidOffer"
    (click)="action.emit(supplyPointOffer)">
     <div class="row no-gutters">
         <div class="col-12 col-xl-7"
@@ -19,12 +20,11 @@
                             <span class="supply-point-offer__value">{{supplyPointOffer.deliveryLength}} {{supplyPointOffer.deliveryLength | plural: 'year' | titlecase}}</span>
                         </div>
                     </div>
-                    <ng-container *ngIf="(currentTime.toISOString() | dateDiff: supplyPointOffer.validTo:'hours' ); let diff">
+                    <ng-container *ngIf="showValidityOfOffer">
                         <div class="col-auto">
-                            <div class="supply-point-offer__value-box"
-                                 *ngIf="diff <= 72 && diff >= 0">
+                            <div class="supply-point-offer__value-box">
                                 <span class="supply-point-offer__value-name">Platnost nabídky</span>
-                                <span class="supply-point-offer__value text-color--danger">{{diff}} hodin</span>
+                                <span class="supply-point-offer__value text-color--danger">{{dateDiffValidityOfOffer}} {{dateDiffValidityOfOffer | plural: 'hour'}}</span>
                             </div>
                         </div>
                     </ng-container>

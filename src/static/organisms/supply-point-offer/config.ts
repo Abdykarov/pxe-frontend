@@ -27,5 +27,5 @@ export const offerConfig: ISupplyPointOffer = {
         typeCommodity: TypeCommodity.POWER,
     },
     validFrom: '2019-03-12T22:59:12.133Z',
-    validTo: '2019-03-31T22:59:12.133Z',
+    validTo: '2090-03-31T22:59:12.133Z',
 };
