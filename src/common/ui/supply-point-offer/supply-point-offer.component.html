@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-12">
                         <span class="supply-point-offer__title-label">Dodavatel</span>
-                        <span class="supply-point-offer__title">{{supplyPointOffer.supplier?.title}}</span>
+                        <span class="supply-point-offer__title">{{supplyPointOffer.supplier?.name}}</span>
                     </div>
                 </div>
                 <div *ngIf="!isOwner"
@@ -19,13 +19,15 @@
                             <span class="supply-point-offer__value">{{supplyPointOffer.deliveryLength}} {{supplyPointOffer.deliveryLength | plural: 'year' | titlecase}}</span>
                         </div>
                     </div>
-                    <div class="col-auto">
-                        <div class="supply-point-offer__value-box"
-                             *ngIf="(supplyPointOffer.validFrom | dateDiff: supplyPointOffer.validTo:'hours' ) < 73">
-                            <span class="supply-point-offer__value-name">Platnost nabídky</span>
-                            <span class="supply-point-offer__value text-color--danger">{{supplyPointOffer.validFrom | dateDiff: supplyPointOffer.validTo:'hours'}} hodin</span>
+                    <ng-container *ngIf="(currentTime.toISOString() | dateDiff: supplyPointOffer.validTo:'hours' ); let diff">
+                        <div class="col-auto">
+                            <div class="supply-point-offer__value-box"
+                                 *ngIf="diff <= 72 && diff >= 0">
+                                <span class="supply-point-offer__value-name">Platnost nabídky</span>
+                                <span class="supply-point-offer__value text-color--danger">{{diff}} hodin</span>
+                            </div>
                         </div>
-                    </div>
+                    </ng-container>
                 </div>
             </div>
         </div>
@@ -67,7 +69,7 @@
                     </div>
                     <div class="col-12 col-md-auto supply-point-offer__addon">
                         <lnd-button
-                            *ngIf="supplyPointOffer.benefits"
+                            *ngIf="supplyPointOffer.benefits.length"
                             label="Výhody"
                             type="link"
                             (click)="toggleBenefits($event)">
@@ -82,7 +84,7 @@
             </div>
         </div>
         <div class="col-12"
-             *ngIf="!isOwner && supplyPointOffer.benefits">
+             *ngIf="!isOwner && supplyPointOffer.benefits.length">
             <ul class="check-list supply-point-offer__benefits-list"
                 [class.d-block]="showBenefits"
                 [class.d-none]="!showBenefits"

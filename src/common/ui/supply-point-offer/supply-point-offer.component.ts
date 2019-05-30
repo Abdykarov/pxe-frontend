@@ -18,6 +18,8 @@ import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 export class SupplyPointOfferComponent extends AbstractComponent implements OnInit {
     public showBenefits = false;
 
+    public currentTime = new Date();
+
     public COMMODITY_TYPE_POWER = CommodityType.POWER;
     public COMMODITY_TYPE_GAS = CommodityType.GAS;
 

@@ -27,10 +27,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     public stepperProgressConfig: IStepperProgressItem[] = configStepper;
     public supplyPointOffers: ISupplyPointOffer[];
 
-    public formSent = false;
     public globalError: string[] = [];
-    public fieldError: IFieldError = {};
-    public formLoading = false;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -49,16 +46,12 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
             )
             .subscribe(
                 (res: any) => {
-                    this.formLoading = false;
-                    this.formSent = true;
                     this.supplyPointOffers = res.data.findSupplyPointOffers;
                     this.cd.markForCheck();
                 },
                 (error) => {
                     this.supplyPointOffers = [];
-                    this.formLoading = false;
-                    const { fieldError, globalError } = parseGraphQLErrors(error);
-                    this.fieldError = fieldError;
+                    const { globalError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.cd.markForCheck();
                 },

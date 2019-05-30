@@ -14,6 +14,17 @@
                     <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12 col-md-12">
+                    <lnd-alert
+                        *ngIf="globalError.length"
+                        type="danger">
+                        <ng-container *ngFor="let error of globalError">
+                            {{ error }}<br>
+                        </ng-container>
+                    </lnd-alert>
+                </div>
+            </div>
             <div class="row"
                  *ngIf="supplyPointOffers">
                 <div class="col-12 col-md-12 supply-points-offer">
