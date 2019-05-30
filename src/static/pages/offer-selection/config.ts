@@ -29,7 +29,7 @@ export const config: ISupplyPointOffer[] = [
             typeCommodity: TypeCommodity.POWER,
         },
         validFrom: '2019-03-12T22:59:12.133Z',
-        validTo:   '2090-06-02T10:42:12.000Z',
+        validTo: new Date(new Date().getTime() + 3600 * 1000 * 24).toISOString(),
     },
     {
         benefits: [
