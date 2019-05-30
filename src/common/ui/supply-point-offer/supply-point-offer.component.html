@@ -1,5 +1,6 @@
 <a class="supply-point-offer"
    [class.supply-point-offer--owner]="isOwner"
+   [class.supply-point-offer--not-interactive]="isNotInteractive"
    (click)="action.emit(offer)">
     <div class="row no-gutters">
         <div class="col-12 col-xl-7"

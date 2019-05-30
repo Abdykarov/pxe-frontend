@@ -13,35 +13,51 @@
     </div>
     <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1">
-            <div class="row">
-                <div class="col-md-3">
+            <div class="row align-items-center mb-1 mb-xl-3">
+                <div class="col-md-3 text-center text-md-left mb-5 mb-md-0">
                     <lnd-button
                         label="Krok zpět"
                         type="secondary">
                     </lnd-button>
                 </div>
                 <div class="col-md-6 text-center">
-                    <h2>
+                    <h2 class="mb-0">
                         Podepište smlouvu
                     </h2>
                 </div>
             </div>
         </div>
+        <div class="col-12 text-center d-xl-none mb-2">
+            <lnd-button
+                [label]="showOffer ? 'Skrýt nabídku' : 'Zobrazit nabídku'"
+                type="link"
+                (click)="toggleOffer($event)">
+            </lnd-button>
+        </div>
+        <div 
+            class="col-12 col-xl-10 offset-xl-1 d-xl-block"
+            [class.d-block]="showOffer"
+            [class.d-none]="!showOffer">
+            <pxe-supply-point-offer
+                [offer]="offer"
+                [isNotInteractive]="true">
+            </pxe-supply-point-offer>
+        </div>
         <div class="col-12 col-xl-10 offset-xl-1">
             <div class="page-box">
                 <div class="row justify-content-between mb-5">
-                    <div class="col-auto">
+                    <div class="col-md-auto order-md-2 mb-2">
+                        V Praze, dne 22.11.2018
+                    </div>
+                    <div class="col-md-auto order-md-1">
                         Dodavatel<br>
                         Pražská energetika, a. s.<br>
                         Na Hroudě 1492/4<br>
                         100 05  Praha 10
                     </div>
-                    <div class="col-auto">
-                        V Praze, dne 22.11.2018
-                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 col-lg-9 offset-lg-3">
+                    <div class="col-12 col-lg-9 offset-lg-3 text-center text-md-left">
                         <h2>Smlouva o dodání energií</h2>
                     </div>
                 </div>
@@ -67,7 +83,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-lg-3">
-                        <h2>Smluvní strany</h2>
+                        <h3>Smluvní strany</h3>
                     </div>
                     <div class="col-12 col-lg-9">
                         <p>
@@ -89,7 +105,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-lg-3">
-                        <h2>Vypovězení smlouvy</h2>
+                        <h3>Vypovězení smlouvy</h3>
                     </div>
                     <div class="col-12 col-lg-9">
                         <p>
@@ -112,17 +128,20 @@
                 <div class="row">
                 <div class="col-12 col-lg-9 offset-lg-3">
                     <div class="row justify-content-between">
-                        <div class="col-auto">
+                        <div class="col-md-auto">
                             <lnd-form-field
-                                id="normal-input"
-                                label="Label">
+                                [disabledField]="true"
+                                id="sms-code"
+                                label="Kód z SMS">
                             </lnd-form-field>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-md-auto mt-md-4">
                             <lnd-button
                                 label="Odeslat ověřovací kód"
                                 type="primary">
                             </lnd-button>
+                            <p class="small mt-2">Na číslo +420 777 666 555<br>
+                                odešleme ověřovací kód</p>
                         </div>
                     </div>
                 </div>
