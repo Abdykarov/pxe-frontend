@@ -20,6 +20,10 @@ import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
     providers: [DateDiffPipe],
 })
 export class SupplyPointOfferComponent extends AbstractComponent implements OnInit {
+    private static readonly MAX_HOURS_VALIDITY_OF_OFFER_DISPLAYED = 72;
+    private static readonly MIN_HOURS_VALIDITY_OF_OFFER_DISPLAYED = 1;
+    private static readonly ZERO_HOURS_VALIDITY_OF_OFFER = 0;
+
     public showBenefits = false;
 
     public currentTime = new Date();
@@ -29,7 +33,6 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
 
     public showValidityOfOffer = false;
     public dateDiffValidityOfOffer = Number.MIN_VALUE;
-    public invalidOffer = false;
 
     @Input()
     public supplyPointOffer: ISupplyPointOffer;
@@ -53,17 +56,13 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
             this.supplyPointOffer.validTo,
             'hours');
 
-        if (this.currentTime.getTime() >= validToDate.getTime()) {
-            this.invalidOffer = true;
-            return;
-        }
+        this.dateDiffValidityOfOffer =
+            this.dateDiffValidityOfOffer === SupplyPointOfferComponent.ZERO_HOURS_VALIDITY_OF_OFFER ?
+                SupplyPointOfferComponent.MIN_HOURS_VALIDITY_OF_OFFER_DISPLAYED : this.dateDiffValidityOfOffer;
 
-        if (this.dateDiffValidityOfOffer > 72) {
-            return;
+        if (this.dateDiffValidityOfOffer <= SupplyPointOfferComponent.MAX_HOURS_VALIDITY_OF_OFFER_DISPLAYED) {
+            this.showValidityOfOffer = true;
         }
-
-        this.showValidityOfOffer = true;
-        this.dateDiffValidityOfOffer = this.dateDiffValidityOfOffer === 0 ? 1 : this.dateDiffValidityOfOffer;
     }
 
     public toggleBenefits = (event) => {
