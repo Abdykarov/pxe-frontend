@@ -13,6 +13,20 @@
     {{ item.value.street }}&nbsp;{{ item.value.orientationNumber }}<ng-container *ngIf="item && item.value && item.value.orientationNumber && item.value.descriptiveNumber">/</ng-container>{{ item.value.descriptiveNumber }}<br>
     {{ item.value.city }}&nbsp;{{ item.value.postCode }}
 </ng-template>
+<!-- Example link in subtext -->
+<ng-template #linkInSubtext>
+    <a (click)="clickAction()">
+        Link
+    </a>
+</ng-template>
+<!-- Example checkbox in subtext -->
+<ng-template #checkboxInSubtext>
+    <lnd-form-field
+        [id]="'checkbox-in-subtext'"
+        label="Checkbox"
+        [type]="'CHECKBOX'">
+    </lnd-form-field>
+</ng-template>
 
 <div class="row static-pages-holder">
     <div class="col">
@@ -178,6 +192,30 @@
                 id="disabled-input-filled"
                 label="Disabled input"
                 value="Disabled">
+            </lnd-form-field>
+        </div>
+    </div>
+    <h4>Types subtext</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-form-field
+                id="input-normal-subtext"
+                label="Normal subtext"
+                subtext="Subtext">
+            </lnd-form-field>
+        </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                id="input-link-in-subtext"
+                label="Link in subtext"
+                [subtextTemplate]="linkInSubtext">
+            </lnd-form-field>
+        </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                id="input-checkbox-in-subtext"
+                label="Checkbox in subtext"
+                [subtextTemplate]="checkboxInSubtext">
             </lnd-form-field>
         </div>
     </div>
