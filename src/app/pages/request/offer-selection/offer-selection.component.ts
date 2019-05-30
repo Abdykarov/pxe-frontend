@@ -50,7 +50,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                     this.cd.markForCheck();
                 },
                 (error) => {
-                    this.supplyPointOffers = [];
+                    this.supplyPointOffers = null;
                     const { globalError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.cd.markForCheck();
