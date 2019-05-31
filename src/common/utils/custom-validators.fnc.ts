@@ -11,6 +11,21 @@ import { EicValidator } from './eic-validator.fnc';
 
 export class CustomValidators {
 
+    static phoneNumberPrefix = (phoneNumberPrefix) => {
+        if (phoneNumberPrefix.pristine) {
+            return null;
+        }
+
+        const PHONE_REGEXP = /^(\+420)|(\+421)$/;
+        if (PHONE_REGEXP.test(phoneNumberPrefix.value)) {
+            return null;
+        }
+
+        return {
+            pattern: true,
+        };
+    }
+
     static phoneNumber = (phoneNumber) => {
         if (phoneNumber.pristine) {
             return null;

@@ -1,6 +1,7 @@
 import { FormControl, Validators } from '@angular/forms';
 
 import { CustomValidators } from 'src/common/utils';
+import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
 
 export const formFields: IForm = {
@@ -43,6 +44,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
+                CustomValidators.phoneNumberPrefix,
             ],
         ],
         email: [
@@ -65,7 +67,10 @@ export const formFields: IForm = {
         acountNumber: {},
         acountBankNumber: {},
         telephone: {},
-        telephonePrefix: {},
+        telephonePrefix: {
+            required: errorFieldMessages.name.required,
+            maxlength: errorFieldMessages.name.maxlength,
+        },
         email: {},
     },
 };
