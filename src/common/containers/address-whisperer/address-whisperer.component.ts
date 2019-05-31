@@ -43,6 +43,9 @@ export class AddressWhispererComponent extends AbstractComponent {
     public appendTemplate?: TemplateRef<any>;
 
     @Input()
+    public disabled = false;
+
+    @Input()
     public error?: any;
 
     @Input()

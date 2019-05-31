@@ -1,4 +1,11 @@
-import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    Input,
+    OnChanges,
+    OnInit,
+    SimpleChanges,
+} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
@@ -9,6 +16,9 @@ import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.
     styleUrls: ['./personal-info-form.component.scss'],
 })
 export class PersonalInfoFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
+
+    @Input()
+    public headerText = 'Osobní informace';
 
     constructor(
         private cd: ChangeDetectorRef,

@@ -5,6 +5,7 @@ import { LayoutContainerModule } from 'src/common/containers/layout-container/la
 import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.module';
 import { RecapitulationComponent } from './recapitulation.component';
 import { RecapitulationRoutingModule } from './recapitulation.routing';
+import { PersonalInfoFormModule } from 'src/common/containers/form/forms/personal-info/personal-info-form.module';
 
 @NgModule({
     declarations: [
@@ -12,9 +13,10 @@ import { RecapitulationRoutingModule } from './recapitulation.routing';
     ],
     imports: [
         CommonModule,
-        RecapitulationRoutingModule,
         LayoutContainerModule,
+        PersonalInfoFormModule,
         ProgressBarModule,
+        RecapitulationRoutingModule,
     ],
 })
 export class RecapitulationModule { }

@@ -1,3 +1,11 @@
+<ng-template #otherAddress>
+    <lnd-form-field
+        [id]="'checkbox-in-subtext'"
+        label="Mám jinou korespondenční adresu"
+        [type]="'CHECKBOX'"
+        [formControl]="form.controls.onlyPermanentAddress">
+    </lnd-form-field>
+</ng-template>
 <!-- Example custom lael template -->
 <ng-template
     #templateLabel
@@ -31,6 +39,11 @@
     </lnd-form-field>
 </ng-template>
 
+<div class="row mb-5">
+    <div class="col-12 text-center">
+        {{headerText}}
+    </div>
+</div>
 <form
     [formGroup]="form"
     (keydown)="resetCustomFieldError()"
@@ -47,6 +60,7 @@
         [validationMessages]="formFields.validationMessages.name"
     ></lnd-form-field>
     <pxe-address-whisperer
+        [appendTemplate]="otherAddress"
         [error]="formError.permanentAddress || form.controls.permanentAddress.errors"
         [label]="'Trvalá adresa'"
         [parentForm]="form"
@@ -57,9 +71,9 @@
         [validationMessages]="formFields.validationMessages.permanentAddress"
         [whispererName]="'permanentAddress'">
     </pxe-address-whisperer>
-    <ng-container [ngTemplateOutlet]="checkboxInSubtext"></ng-container>
     <pxe-address-whisperer
-        [error]="formError.correspondenceAddress || form.controls.correspondenceAddress.errors"
+        [disabled]="!form.getRawValue().onlyPermanentAddress"
+        [error]="formError.correspondentAddress || form.controls.correspondenceAddress.errors"
         [label]="'Korespondeční adresa'"
         [parentForm]="form"
         [success]="form.controls.correspondenceAddress.valid && (form.controls.correspondenceAddress.touched || formError.correspondenceAddress)"
@@ -77,7 +91,6 @@
                 [id]="'telephonePrefix'"
                 label="Bankovní účet"
                 subtext="Číslo bankovního účtu obsahujcí prefix uveďte prosím ve tvaru XXXXX-XXXXXXXXXX"
-
                 [success]="form.controls.acountNumber.valid && (form.controls.acountNumber.touched || formError.acountNumber)"
                 [touched]="form.controls.acountNumber.touched || formError.acountNumber"
                 [validationMessages]="formFields.validationMessages.acountNumber"
@@ -128,4 +141,12 @@
         [touched]="form.controls.email.touched || formError.email"
         [validationMessages]="formFields.validationMessages.email"
     ></lnd-form-field>
+    <div class="text-center">
+        <lnd-button
+            type="primary"
+            (action)="submitForm()"
+            [isDisabled]="formLoading"
+            label="Pokračovat">
+        </lnd-button>
+    </div>
 </form>

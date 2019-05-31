@@ -7,7 +7,22 @@
                 </div>
             </div>
             <div class="row">
-
+                <div class="col-12 col-xl-10 offset-xl-1 text-center">
+                    <h2>Něco o vás</h2>
+                </div>
+                <div class="col-12 col-xl-10 offset-xl-1">
+                    <div class="page-box">
+                        <pxe-personal-info-form
+                            headerText="Osobní informace"
+                            [formFields]="formFields"
+                            [formLoading]="formLoading"
+                            [formSent]="formSent"
+                            [globalError]="globalError"
+                            [fieldError]="fieldError"
+                            (submitAction)="submitPersonalInfoForm($event)">
+                        </pxe-personal-info-form>
+                    </div>
+                </div>
             </div>
         </pxe-layout-container>
     </div>
