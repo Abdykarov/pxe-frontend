@@ -117,13 +117,18 @@
 	}
 
 	&.btn-white {
-		color: $gray-400;
-		background-color: $white;
+		color: $white;
+		background-color: $secondary;
+		border: 2px solid $white;
 
 		&:focus,
 		&.focus,
 		&:hover {
-			background-color: $gray-150;
+			background-color: $secondary-dark;
+		}
+
+		&:focus {
+			box-shadow: 0 0 8px 0 rgba($white, .8);
 		}
 
 		&:not(:disabled):not(.disabled):active {

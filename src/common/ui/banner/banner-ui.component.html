@@ -1,11 +1,9 @@
 <div class="banner">
     <div class="banner__content">
-        <h2 class="banner__title">
-            {{ data.title }}
-        </h2>
-        <p class="banner__text">
+        <span class="banner__icon icon icon--info"></span>
+        <span class="banner__text">
             {{ data.text }}
-        </p>
+        </span>
     </div>
     <h2
         *ngIf="type === 'simple'"
@@ -15,9 +13,7 @@
     <div class="banner__controls">
         <lnd-button label="{{ buttonLabel }}"
                      (action)="bannerAction(data.linkValue, data.linkType)"
-                     hasOutline="true"
-                     type="primary"
-                     class="banner__btn">
+                     type="white">
         </lnd-button>
     </div>
 </div>

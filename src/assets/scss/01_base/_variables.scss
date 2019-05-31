@@ -173,8 +173,10 @@ $link-hover-decoration:            underline;
 $icon-path:                        '../fonts/icons';
 $icon-size:                        1.25rem;
 $icon-size-small:                  .625rem;
+$icon-size-big:                    	2.1875rem;
 $icon-size-px:                     20px;
 $icon-size-small-px:               10px;
+$icon-size-big-px:                 35px;
 
 
 $images-path:                      '../../../assets/images/';
@@ -246,12 +248,6 @@ $close-font-size:                   14px;
 $close-font-weight:                 400;
 $close-color:                       $white;
 $close-text-shadow:                 none;
-
-
-// Banner
-$banner-bg:                         $secondary;
-$banner-content-max-width-xs:       260px;
-$banner-content-max-width-md:       340px;
 
 
 // Modals
