@@ -11,6 +11,36 @@ import { EicValidator } from './eic-validator.fnc';
 
 export class CustomValidators {
 
+    static acountBank = (acountBank) => {
+        if (acountBank.pristine) {
+            return null;
+        }
+
+        const ACOUNT_BANK = /^\d{0,6}-?\d{2,10}$/;
+        if (ACOUNT_BANK.test(acountBank.value)) {
+            return null;
+        }
+
+        return {
+            pattern: true,
+        };
+    }
+
+    static acountBankNumber = (acountBankNumber) => {
+        if (acountBankNumber.pristine) {
+            return null;
+        }
+
+        const ACOUNT_BANK_NUMBER = /^\d{4}$/;
+        if (ACOUNT_BANK_NUMBER.test(acountBankNumber.value)) {
+            return null;
+        }
+
+        return {
+            pattern: true,
+        };
+    }
+
     static phoneNumberPrefix = (phoneNumberPrefix) => {
         if (phoneNumberPrefix.pristine) {
             return null;

@@ -26,12 +26,15 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
+                CustomValidators.acountBank,
             ],
         ],
+        // https://www.mbank.cz/informace-k-produktum/info/ucty/cislo-uctu.html
         acountBankNumber: [
             null,
             [
                 Validators.required,
+                CustomValidators.acountBankNumber,
             ],
         ],
         telephone: [
