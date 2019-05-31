@@ -69,18 +69,3 @@
 	}
 }
 
-::ng-deep .banner-simple {
-	padding: $spacer ( $spacer / 2 );
-	text-align: center;
-
-	// Media queries
-	@include media-breakpoint-up(xl) {
-		padding: $spacer;
-	}
-
-	.banner-simple__title {
-		margin-bottom: $spacer;
-		color: $white;
-	}
-}
-

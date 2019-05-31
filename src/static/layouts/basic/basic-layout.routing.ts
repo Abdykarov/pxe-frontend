@@ -9,6 +9,10 @@ import {
     alertsPageRoutes,
 } from 'src/static/atoms/alerts/page.module';
 import {
+    BannersPageModule,
+    bannersPageRoutes,
+} from 'src/static/atoms/banners/page.module';
+import {
     BasicLayoutComponent,
 } from './basic-layout.component';
 import {
@@ -86,6 +90,7 @@ const routes: Routes = [
         component: BasicLayoutComponent,
         children: [
             ...alertsPageRoutes,
+            ...bannersPageRoutes,
             ...breadcrumbPageRoutes,
             ...buttonsPageRoutes,
             ...colorsPageRoutes,
@@ -114,6 +119,7 @@ const routes: Routes = [
 @NgModule({
     imports: [
         AlertsPageModule,
+        BannersPageModule,
         BreadcrumbPageModule,
         ButtonsPageModule,
         ColorsPageModule,
