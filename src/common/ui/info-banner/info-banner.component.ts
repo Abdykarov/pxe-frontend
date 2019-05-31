@@ -27,6 +27,9 @@ export class InfoBannerComponent {
     @Input()
     public buttonCustomClass  = 'info-banner__btn';
 
+    @Input()
+    public showButton = true;
+
     @Output()
     public buttonAction?: EventEmitter<any> = new EventEmitter<any>();
 

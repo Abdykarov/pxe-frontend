@@ -9,13 +9,17 @@
         <div class="supply-points-offer">
             <h3>Normal</h3>
             <pxe-supply-point-offer
-                    [offer]="offer"
+                    [supplyPointOffer]="supplyPointOffer"
                     (action)="click($event)"
             ></pxe-supply-point-offer>
             <h3>Owner</h3>
             <pxe-supply-point-offer
                     [isOwner]="true"
-                    [offer]="offer"
+                    [supplyPointOffer]="supplyPointOffer"
+                    (action)="click($event)"
+            ></pxe-supply-point-offer>
+            <pxe-supply-point-offer
+                    [supplyPointOffer]="supplyPointOffer"
                     (action)="click($event)"
             ></pxe-supply-point-offer>
         </div>

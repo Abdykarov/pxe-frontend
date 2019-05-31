@@ -43,11 +43,7 @@
 		border-radius: 4px;
 		box-shadow: 0 2px 5px rgba($box-shadow-color, .16);
 		overflow: hidden;
-
-		// Media queries
-		@include media-breakpoint-down(md) {
-			pointer-events: none;
-		}
+		pointer-events: none;
 	}
 
 	@include link-without-href-interactive {
@@ -62,7 +58,10 @@
 
 	&:not(.supply-point-offer--owner) {
 		@include link-without-href-self {
-			pointer-events: auto;
+			// Media queries
+			@include media-breakpoint-up(xl) {
+				pointer-events: auto;
+			}
 		}
 	}
 
@@ -76,10 +75,6 @@
 			@include media-breakpoint-up(md) {
 				text-align: left;
 			}
-		}
-
-		@include link-without-href-interactive-self {
-			pointer-events: none;
 		}
 
 		.supply-point-offer__inner--price {
