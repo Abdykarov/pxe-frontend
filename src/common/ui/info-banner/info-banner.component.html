@@ -3,6 +3,7 @@
     <h2 class="info-banner__title">{{bannerTitle}}</h2>
     <p class="info-banner__description">{{bannerDescription}}</p>
     <lnd-button
+        *ngIf="showButton"
         (action)="buttonAction.emit($event)"
         label="{{buttonLabel}}"
         type="primary"

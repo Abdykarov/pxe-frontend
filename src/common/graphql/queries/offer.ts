@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const findOffers = gql`
-    query findOffers{
-        findOffers{
+    query findSupplierOffers{
+        findSupplierOffers{
             id,
             supplier{
                 id,

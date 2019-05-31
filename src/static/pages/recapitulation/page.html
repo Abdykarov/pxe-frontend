@@ -59,14 +59,6 @@
                         [templateLabel]="templateLabel"
                         [whispererName]="'permanentAddress'">
                     </pxe-address-whisperer>
-                    <pxe-address-whisperer
-                        *ngIf="form.getRawValue().onlyPermanentAddress"
-                        [label]="'Korespondeční adresa'"
-                        [parentForm]="form"
-                        [templateItem]="templateItem"
-                        [templateLabel]="templateLabel"
-                        [whispererName]="'correspondenceAddress'">
-                    </pxe-address-whisperer>
                     <div class="row">
                         <div class="col-8">
                             <lnd-form-field
