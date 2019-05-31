@@ -150,6 +150,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/new-supply-point',
                 },
                 {
+                    'label': 'Offer selection',
+                    'url': '/basic/offer-selection',
+                },
+                {
                     'label': 'Sample points',
                     'url': '/basic/sample-points',
                 },

@@ -6,7 +6,6 @@ import {
 
 import {
     CONSTS,
-    ROUTES,
 } from 'src/app/app.constants';
 import { RequestComponent } from './request.component';
 
@@ -22,6 +21,10 @@ const routes: Routes = [
             {
                 path: CONSTS.PATHS.OFFER_SELECTION,
                 loadChildren: '../../pages/request/offer-selection/offer-selection.module#OfferSelectionModule',
+            },
+            {
+                path: CONSTS.PATHS.RECAPITULATION,
+                loadChildren: '../../pages/request/recapitulation/recapitulation.module#RecapitulationModule',
             },
         ],
     },

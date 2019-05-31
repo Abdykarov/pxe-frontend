@@ -6,6 +6,7 @@ export interface ISupplier {
     title: string;
     alt: string;
     typeCommodity: TypeCommodity;
+    name?: string;
 }
 
 export enum TypeCommodity {

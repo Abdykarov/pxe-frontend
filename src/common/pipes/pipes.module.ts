@@ -33,6 +33,8 @@ import { ValuesPipe } from './values/values.pipe';
     ],
     providers: [
         ConsumptionPipe,
+        ConsumptionIndicatorPipe,
+        DateDiffPipe,
         IsRouteActivePipe,
         FilterCommodityTypePipe,
         KeysPipe,

@@ -72,6 +72,7 @@ export const findSupplyPoints = gql`
                 descriptiveNumber,
                 city,
                 postCode,
+                region,
             },
             distributionRate{
                 type,

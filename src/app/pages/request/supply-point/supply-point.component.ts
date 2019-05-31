@@ -5,6 +5,7 @@ import {
 import { Router } from '@angular/router';
 
 import * as R from 'ramda';
+import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -63,6 +64,7 @@ export class SupplyPointComponent extends AbstractComponent {
         this.globalError = [];
         this.fieldError = {};
         let saveSupplyPoint;
+        let ean = '';
 
         const supplyPoint: ISupplyPoint = R.pick([
             'id',
@@ -82,6 +84,7 @@ export class SupplyPointComponent extends AbstractComponent {
                     'annualConsumptionNT',
                     'annualConsumptionVT',
                 ], supplyPointFormData);
+            ean = powerAttributes.ean;
             saveSupplyPoint = this.supplyService.savePowerSupplyPoint(supplyPoint, powerAttributes);
         } else {
             const gasAttributes: ISupplyPointGasAttributes =
@@ -89,16 +92,22 @@ export class SupplyPointComponent extends AbstractComponent {
                     'eic',
                     'annualConsumption',
                 ], supplyPointFormData);
+            ean = gasAttributes.eic;
             saveSupplyPoint = this.supplyService.saveGasSupplyPoint(supplyPoint, gasAttributes);
         }
 
         saveSupplyPoint
+            .pipe(
+                takeUntil(this.destroy$),
+            )
             .subscribe(
                 (data) => {
                     this.formLoading = false;
                     this.formSent = true;
                     this.cd.markForCheck();
-                    this.router.navigate([ROUTES.ROUTER_REQUEST_OFFER_SELECTION]);
+                    this.router.navigate([ROUTES.ROUTER_REQUEST_OFFER_SELECTION, {
+                        ean,
+                    }]);
                 },
                 (error) => {
                     this.formLoading = false;
