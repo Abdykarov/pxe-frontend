@@ -48,7 +48,9 @@ export class LoginComponent extends AbstractComponent {
                 () => {
                     this.resetErrorsAndLoading();
                     if (this.authService.currentUserValue.supplier) {
-                        this.sendSupplierLoginSms();
+                        this.resetErrorsAndLoading();
+                        this.loginSmsRequired = true;
+                        this.cd.markForCheck();
                     } else {
                          this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
                     }
@@ -101,6 +103,7 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public resendSupplierLoginSms = ($event) => {
+        this.resetErrorsAndLoading();
         this.loginSmsRequired = true;
         $event.preventDefault();
         this.sendSupplierLoginSms();

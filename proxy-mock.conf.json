@@ -1,8 +1,8 @@
 [
     {
-        "context": "/parc-rest",
+        "context": "/api/v1.0",
         "logLevel": "debug",
-        "target": "http://localhost:4202",
+        "target": "http://localhost:4203",
         "secure": false
     },
     {

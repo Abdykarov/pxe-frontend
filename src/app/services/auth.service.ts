@@ -14,13 +14,13 @@ import { map } from 'rxjs/operators';
 
 import { CONSTS } from 'src/app/app.constants';
 import { CookiesService } from './cookies.service';
+import { environment } from 'src/environments/environment';
 import {
     IJwtPayload,
     ILoginRequest,
     ILoginResponse,
     IUserRoles,
 } from './model/auth.model';
-import { environment } from 'src/environments/environment';
 import { parseEmailFromUsername } from 'src/common/utils';
 
 @Injectable({
@@ -42,6 +42,15 @@ export class AuthService {
         this.currentUser$ = this.currentUserSubject$.asObservable();
     }
 
+    public getHttpOptions(): {headers: HttpHeaders} {
+        return {
+            headers: new HttpHeaders({
+                'Authorization': 'Bearer ' + this.token,
+                'Content-Type': 'application/json',
+            }),
+        };
+    }
+
     public get currentUserValue(): IJwtPayload {
         return this.currentUserSubject$.value;
     }
@@ -58,8 +67,8 @@ export class AuthService {
         return !!this.token;
     }
 
-    login = ({username, password}: ILoginRequest) => {
-        return this.http.post<ILoginResponse>(`${environment.url}/parc-rest/webresources/users/login`, { username, password })
+    login = ({email, password}: ILoginRequest) => {
+        return this.http.post<ILoginResponse>(`${environment.url}/api/v1.0/users/login`, { email, password })
             .pipe(
                 map(response => {
                     if (response && response.token) {
@@ -80,7 +89,7 @@ export class AuthService {
     }
 
     logout = () => {
-        return this.http.get<any>(`${environment.url}/parc-rest/webresources/users/logout`)
+        return this.http.delete<any>(`${environment.url}/api/v1.0/users/logout`, this.getHttpOptions())
             .pipe(
                 map(response => {
                     this.token = null;
@@ -92,25 +101,11 @@ export class AuthService {
     }
 
     sendSupplierLoginSms = () => {
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Authorization': 'Bearer ' + this.token,
-                'Content-Type': 'application/json',
-            }),
-        };
-
-        return this.http.get<any>(`${environment.url}/parc-rest/webresources/sms/send`, httpOptions);
+        return this.http.post<any>(`${environment.url}/api/v1.0/sms/send`, this.getHttpOptions());
     }
 
-    confirmSupplierLoginSms = ({code}) => {
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Authorization': 'Bearer ' + this.token,
-                'Content-Type': 'text/plain',
-            }),
-        };
-
-        return this.http.post<any>(`${environment.url}/parc-rest/webresources/sms/confirm`, code, httpOptions);
+    confirmSupplierLoginSms = ({confirmationCode}) => {
+        return this.http.post<any>(`${environment.url}/api/v1.0/sms/confirm`, {confirmationCode}, this.getHttpOptions());
     }
 
     refreshToken = () => {
@@ -130,7 +125,7 @@ export class AuthService {
                 jwtPayload = jwtHelper.decodeToken(token);
                 const { username, role } = jwtPayload;
                 jwtPayload.email = parseEmailFromUsername(username);
-                jwtPayload.supplier = role === IUserRoles.PARC_SUPPLIER_P4R;
+                jwtPayload.supplier = role.indexOf(IUserRoles.PARC_SUPPLIER_P4R) !== -1;
             } catch (e) {
                 this.token = null;
                 this.cookiesService.remove(this.cookieName);
