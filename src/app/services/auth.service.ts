@@ -109,8 +109,7 @@ export class AuthService {
     }
 
     refreshToken = () => {
-        // TODO refresh token logic
-        return of(true);
+        return this.http.post<any>(`${environment.url}/api/v1.0/sms/refresh`, {}, this.getHttpOptions());
     }
 
     getToken = (): string => this.token;
