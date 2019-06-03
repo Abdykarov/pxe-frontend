@@ -60,21 +60,25 @@ import {
     progressBarPageRoutes,
 } from 'src/static/organisms/progress-bar/progress-bar.module';
 import {
-    SamplePointsPageModule,
-    samplePointsPageRoutes,
-} from 'src/static/pages/sample-points/page.module';
+    SupplyPointPageModule,
+    supplyPointPageRoutes,
+} from 'src/static/organisms/supply-point/page.module';
 import {
-    SamplePointsBannerPageModule,
-    samplePointsBannerPageRoutes,
-} from 'src/static/pages/sample-points-banner/page.module';
+    SupplyPointsPageModule,
+    supplyPointsPageRoutes,
+} from 'src/static/pages/supply-points/page.module';
+import {
+    SupplyPointsBannerPageModule,
+    supplyPointsBannerPageRoutes,
+} from 'src/static/pages/supply-points-banner/page.module';
 import {
     SupplyPointOfferPageModule,
     supplyPointOfferPageRoutes,
 } from 'src/static/organisms/supply-point-offer/page.module';
 import {
-    SupplyPointPageModule,
-    supplyPointPageRoutes,
-} from 'src/static/organisms/supply-point/page.module';
+    SupplyPointsOfferPageModule,
+    supplyPointsOfferPageRoutes,
+} from 'src/static/pages/supply-points-offer/page.module';
 import {
     TablesPageModule,
     tablesPageRoutes,
@@ -106,10 +110,11 @@ const routes: Routes = [
             ...newSupplyPointPageRoutes,
             ...offerSelectionPageRoutes,
             ...progressBarPageRoutes,
-            ...samplePointsPageRoutes,
-            ...samplePointsBannerPageRoutes,
-            ...supplyPointOfferPageRoutes,
             ...supplyPointPageRoutes,
+            ...supplyPointsPageRoutes,
+            ...supplyPointsBannerPageRoutes,
+            ...supplyPointOfferPageRoutes,
+            ...supplyPointsOfferPageRoutes,
             ...tablesPageRoutes,
             ...tooltipPageRoutes,
             ...typographyPageRoutes,
@@ -137,10 +142,11 @@ const routes: Routes = [
         OfferSelectionPageModule,
         ProgressBarPageModule,
         RouterModule.forChild(routes),
-        SamplePointsPageModule,
-        SamplePointsBannerPageModule,
-        SupplyPointOfferPageModule,
         SupplyPointPageModule,
+        SupplyPointsPageModule,
+        SupplyPointsBannerPageModule,
+        SupplyPointOfferPageModule,
+        SupplyPointsOfferPageModule,
         TablesPageModule,
         TooltipPageModule,
         TypographyPageModule,

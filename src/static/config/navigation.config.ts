@@ -154,12 +154,16 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/offer-selection',
                 },
                 {
-                    'label': 'Sample points',
-                    'url': '/basic/sample-points',
+                    'label': 'Supply points',
+                    'url': '/basic/supply-points',
                 },
                 {
-                    'label': 'Sample points banner',
-                    'url': '/basic/sample-points-banner',
+                    'label': 'Supply points (banner)',
+                    'url': '/basic/supply-points-banner',
+                },
+                {
+                    'label': 'Supply points offer',
+                    'url': '/basic/supply-points-offer',
                 },
                 // {
                 //     'label': 'Error',

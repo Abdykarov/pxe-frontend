@@ -15,20 +15,18 @@
 	.supply-points {
 		pointer-events: none;
 
-		&:hover {
-			.supply-point:not(:hover) {
-				@include link-without-href-self {
-					// Media queries
-					@include media-breakpoint-up(xl) {
-						background-color: $body-bg;
-					}
+		&:hover .supply-point:not(:hover) {
+			@include link-without-href-self {
+				// Media queries
+				@include media-breakpoint-up(xl) {
+					background-color: $body-bg;
 				}
+			}
 
-				.supply-point__inner--price {
-					// Media queries
-					@include media-breakpoint-up(xl) {
-						background-color: rgba($white, .5);
-					}
+			.supply-point__inner--price {
+				// Media queries
+				@include media-breakpoint-up(xl) {
+					background-color: rgba($white, .5);
 				}
 			}
 		}
