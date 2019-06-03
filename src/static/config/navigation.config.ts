@@ -122,6 +122,10 @@ export const staticNavigationConfig: INavigationConfig = [
             'icon': 'component-high',
             'children': [
                 {
+                    'label': 'Contract signing',
+                    'url': '/basic/contract-signing',
+                },
+                {
                     'label': 'Cookies policy',
                     'url': '/full/cookies',
                 },

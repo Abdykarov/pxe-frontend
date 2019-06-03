@@ -105,6 +105,25 @@
 		}
 	}
 
+	&.supply-point-offer--not-interactive {
+		@include link-without-href-self {
+			pointer-events: none;
+		}
+
+		.supply-point-offer__addon {
+			> :nth-child(n) {
+				margin: 0;
+			}
+
+			> :last-child {
+				// Media queries
+				@include media-breakpoint-down(xl) {
+					display: none;
+				}
+			}
+		}
+	}
+
 	&__inner {
 		height: 100%;
 		padding: $supply-point-offer-inner-padding $spacer $supply-point-offer-inner-padding-bottom;
