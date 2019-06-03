@@ -6,6 +6,7 @@ import {
     HttpInterceptor,
     HttpRequest,
 } from '@angular/common/http';
+
 import { Observable } from 'rxjs';
 
 // own classes
@@ -28,7 +29,7 @@ export class ApiInterceptor implements HttpInterceptor {
 
         let resultRequest;
 
-        if (request.url.match(/api\//)) { // api call
+        if (request.url.match(/api\//)) {
             resultRequest = request.clone({
                 headers: new HttpHeaders({
                     'Authorization': 'Bearer ' + this.authService.getToken(),
