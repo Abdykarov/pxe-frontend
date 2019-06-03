@@ -10,8 +10,8 @@ import {
 import { Observable } from 'rxjs';
 
 // own classes
-import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
