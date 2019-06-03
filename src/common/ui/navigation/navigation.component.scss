@@ -31,7 +31,7 @@
 		top: ( ( $header-height / 2 ) + ( $menu-toggle-line-width-rotate - ( $logo-height-tablet / 2 ) ) + ( $spacer * .75 ) );
 	}
 	@include media-breakpoint-down(lg) {
-		max-height: calc( 100vh - ( ( ( #{$header-height} / 2 ) + ( #{$menu-toggle-line-width-rotate} - ( #{$logo-height-mobile} / 2 ) ) + ( #{$spacer} * .75 ) ) + #{$aside-right-offset-mobile} ));
+		max-height: calc( 100vh - ( ( ( #{$header-height} / 2 ) + ( #{$menu-toggle-line-width-rotate} - ( #{$logo-height-mobile} / 2 ) ) + ( #{$spacer} * .75 ) ) + #{$aside-right-offset-mobile} ) );
 	}
 	@include media-breakpoint-up(lg) {
 		position: fixed;
