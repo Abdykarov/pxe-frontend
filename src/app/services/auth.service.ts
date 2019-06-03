@@ -42,15 +42,6 @@ export class AuthService {
         this.currentUser$ = this.currentUserSubject$.asObservable();
     }
 
-    public getHttpOptions(): {headers: HttpHeaders} {
-        return {
-            headers: new HttpHeaders({
-                'Authorization': 'Bearer ' + this.token,
-                'Content-Type': 'application/json',
-            }),
-        };
-    }
-
     public get currentUserValue(): IJwtPayload {
         return this.currentUserSubject$.value;
     }
@@ -68,7 +59,7 @@ export class AuthService {
     }
 
     login = ({email, password}: ILoginRequest) => {
-        return this.http.post<ILoginResponse>(`${environment.url_be}/v1.0/users/login`, { email, password })
+        return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { email, password })
             .pipe(
                 map(response => {
                     return this.setToken(response);
@@ -77,7 +68,7 @@ export class AuthService {
     }
 
     logout = () => {
-        return this.http.delete<any>(`${environment.url_be}/v1.0/users/logout`, this.getHttpOptions())
+        return this.http.delete<any>(`${environment.url_api}/v1.0/users/logout`)
             .pipe(
                 map(response => {
                     this.token = null;
@@ -89,15 +80,15 @@ export class AuthService {
     }
 
     sendSupplierLoginSms = () => {
-        return this.http.post<any>(`${environment.url_be}/v1.0/sms/send`, this.getHttpOptions());
+        return this.http.post<any>(`${environment.url_api}/v1.0/sms/send`, {});
     }
 
     confirmSupplierLoginSms = ({confirmationCode}) => {
-        return this.http.post<any>(`${environment.url_be}/v1.0/sms/confirm`, {confirmationCode}, this.getHttpOptions());
+        return this.http.post<any>(`${environment.url_api}/v1.0/sms/confirm`, {confirmationCode});
     }
 
     refreshToken = () => {
-        return this.http.post<any>(`${environment.url_be}/v1.0/sms/refresh`, {}, this.getHttpOptions());
+        return this.http.post<any>(`${environment.url_api}/v1.0/sms/refresh`, {});
     }
 
     setToken = (response) => {
