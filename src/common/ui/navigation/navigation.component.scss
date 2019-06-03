@@ -7,13 +7,16 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
+// Component variables
+@import 'navigation.component.variables.scss';
+
 
 .aside {
 	display: none;
 	position: absolute;
 	z-index: 2010;
 	top: ( ( $header-height / 2 ) + ( $menu-toggle-line-width-rotate - ( $logo-height-mobile / 2 ) ) + ( $spacer * .75 ) );
-	right: 30px;
+	right: $aside-right-offset-mobile;
 	width: $aside-width-mobile;
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -28,7 +31,7 @@
 		top: ( ( $header-height / 2 ) + ( $menu-toggle-line-width-rotate - ( $logo-height-tablet / 2 ) ) + ( $spacer * .75 ) );
 	}
 	@include media-breakpoint-down(lg) {
-		max-height: calc( 100vh - ( ( ( #{$header-height} / 2 ) + ( #{$menu-toggle-line-width-rotate} - ( #{$logo-height-mobile} / 2 ) ) + ( #{$spacer} * .75 ) ) + 30px ));
+		max-height: calc( 100vh - ( ( ( #{$header-height} / 2 ) + ( #{$menu-toggle-line-width-rotate} - ( #{$logo-height-mobile} / 2 ) ) + ( #{$spacer} * .75 ) ) + #{$aside-right-offset-mobile} ));
 	}
 	@include media-breakpoint-up(lg) {
 		position: fixed;
@@ -36,6 +39,7 @@
 		top: $header-height;
 		bottom: 0;
 		left: 0;
+		right: 0;
 		width: $aside-width-desktop;
 		background-color: $aside-bg;
 		border-radius: 0;

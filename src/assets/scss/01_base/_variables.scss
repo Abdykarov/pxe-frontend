@@ -207,14 +207,6 @@ $footer-bg:                        $body-bg;
 $footer-height-tablet:             220px;
 
 
-// Sidebar
-$aside-bg:                         $body-bg;
-$aside-bg-secondary:               $gray-600;
-$aside-width-mobile:               260px;
-$aside-width-desktop:              calc( ( ( 100% / #{$grid-columns} ) * 2 ) - ( #{$spacer / 2} ) );
-$aside-line-width:                 50px;
-
-
 // Badges
 $badge-font-size:                  .75rem;
 $badge-font-weight:                400;
