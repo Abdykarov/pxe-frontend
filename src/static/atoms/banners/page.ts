@@ -18,6 +18,4 @@ export class BannersPageComponent {
             },
         ];
     }
-
-    public staticBannerAction = () => alert('some action');
 }

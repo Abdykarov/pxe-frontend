@@ -44,6 +44,5 @@ export class BannerUIComponent extends AbstractComponent {
         private router: Router,
     ) {
         super();
-        // this.type = R.contains(this.type, Object.values(IBannerType)) ? this.type : IBannerType.DEFAULT;
     }
 }
