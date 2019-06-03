@@ -1,6 +1,6 @@
 [
     {
-        "context": "/api/v1.0",
+        "context": "/api",
         "logLevel": "debug",
         "target": "http://localhost:4203",
         "secure": false

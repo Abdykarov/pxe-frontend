@@ -51,7 +51,8 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
                         if (networkError.status === 401) {
                             authService.refreshToken()
                                 .subscribe(
-                                    () => {
+                                    (response) => {
+                                        authService.setToken(response);
                                         setTokenHeader(operation);
                                         innerSubscription = forward(operation).subscribe(observer);
                                     },

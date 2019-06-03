@@ -68,28 +68,16 @@ export class AuthService {
     }
 
     login = ({email, password}: ILoginRequest) => {
-        return this.http.post<ILoginResponse>(`${environment.url}/api/v1.0/users/login`, { email, password })
+        return this.http.post<ILoginResponse>(`${environment.url_be}/v1.0/users/login`, { email, password })
             .pipe(
                 map(response => {
-                    if (response && response.token) {
-                        const jwtPayload = this.getJwtPayload(response.token);
-                        if (jwtPayload.exp) {
-                            this.expiresTime = jwtPayload.exp;
-                        }
-                        const user = {
-                            token: response.token,
-                        };
-                        this.cookiesService.setObject(this.cookieName, user, this.expiresTime);
-                        this.checkLogin();
-                        this.currentUserSubject$.next(jwtPayload);
-                    }
-                    return response;
+                    return this.setToken(response);
                 }),
             );
     }
 
     logout = () => {
-        return this.http.delete<any>(`${environment.url}/api/v1.0/users/logout`, this.getHttpOptions())
+        return this.http.delete<any>(`${environment.url_be}/v1.0/users/logout`, this.getHttpOptions())
             .pipe(
                 map(response => {
                     this.token = null;
@@ -101,15 +89,31 @@ export class AuthService {
     }
 
     sendSupplierLoginSms = () => {
-        return this.http.post<any>(`${environment.url}/api/v1.0/sms/send`, this.getHttpOptions());
+        return this.http.post<any>(`${environment.url_be}/v1.0/sms/send`, this.getHttpOptions());
     }
 
     confirmSupplierLoginSms = ({confirmationCode}) => {
-        return this.http.post<any>(`${environment.url}/api/v1.0/sms/confirm`, {confirmationCode}, this.getHttpOptions());
+        return this.http.post<any>(`${environment.url_be}/v1.0/sms/confirm`, {confirmationCode}, this.getHttpOptions());
     }
 
     refreshToken = () => {
-        return this.http.post<any>(`${environment.url}/api/v1.0/sms/refresh`, {}, this.getHttpOptions());
+        return this.http.post<any>(`${environment.url_be}/v1.0/sms/refresh`, {}, this.getHttpOptions());
+    }
+
+    setToken = (response) => {
+        if (response && response.token) {
+            const jwtPayload = this.getJwtPayload(response.token);
+            if (jwtPayload.exp) {
+                this.expiresTime = jwtPayload.exp;
+            }
+            const user = {
+                token: response.token,
+            };
+            this.cookiesService.setObject(this.cookieName, user, this.expiresTime);
+            this.checkLogin();
+            this.currentUserSubject$.next(jwtPayload);
+        }
+        return response;
     }
 
     getToken = (): string => this.token;
