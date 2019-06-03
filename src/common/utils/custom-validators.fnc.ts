@@ -16,13 +16,50 @@ export class CustomValidators {
             return null;
         }
 
-        const ACOUNT_BANK = /^\d{0,6}-?\d{2,10}$/;
-        if (ACOUNT_BANK.test(acountBank.value)) {
+        const accountNumberValidator = function (value) {
+            const An: string = String(value);
+            const AnPrefixKfc: number[] = [6, 3, 7, 9, 10, 5, 8, 4, 2, 1];
+
+            let AnPrefixNumber: any = 0;
+            let err = false;
+            let AnNumber = '';
+            let ch: string;
+
+            if (An === '0') {
+                err = true;
+            }
+
+            for (let i = 0; i < An.length; i++) {
+                ch = An.charAt(i);
+                if (ch.match(/[0-9 -]/i)) {
+                    if (ch !== '-') {
+                        AnNumber = AnNumber + ch;
+                    }
+                } else {
+                    err = true;
+                }
+            }
+            if (!err) {
+                const AnPrefix = AnNumber;
+                for (let i = 0; i < AnPrefix.length; i++) {
+                    AnPrefixNumber = AnPrefixNumber + (AnPrefixKfc[i] *  parseInt(AnPrefix.charAt(i), 10));
+                }
+                if (AnPrefixNumber % 11 !== 0) {
+                    err = true;
+                }
+            } else {
+                err = true;
+            }
+
+            return !err;
+        };
+
+        if (!accountNumberValidator(acountBank.value)) {
             return null;
         }
 
         return {
-            pattern: true,
+            acount: true,
         };
     }
 
@@ -31,8 +68,45 @@ export class CustomValidators {
             return null;
         }
 
-        const ACOUNT_BANK_NUMBER = /^\d{4}$/;
-        if (ACOUNT_BANK_NUMBER.test(acountBankNumber.value)) {
+        const accountNumberPrefixValidator = (value): boolean => {
+            const AnPrefixKfc: number[] = [10, 5, 8, 4, 2, 1];
+            const An = String(value);
+
+            let AnPrefixNumber = 0;
+            let ch: string;
+            let err = false;
+            let AnNumber = '';
+
+            // we need to check string undefined and null, coz they are provided if value is empty in field
+            if (An.length && An !== 'undefined' && An !== 'null') {
+                for (let i = 0; i < An.length; i++) {
+                    ch = An.charAt(i);
+                    if (ch.match(/[0-9 -]/i)) {
+                        if (ch !== '-') {
+                            AnNumber = AnNumber + ch;
+                        }
+                    } else {
+                        err = true;
+                    }
+                }
+
+                if (!err) {
+                    const AnPrefix = AnNumber;
+                    for (let i = 0; i < AnPrefix.length; i++) {
+                        AnPrefixNumber = AnPrefixNumber + (AnPrefixKfc[i] * parseInt(AnPrefix.charAt(i), 10));
+                    }
+                    if (AnPrefixNumber % 11 !== 0) {
+                        err = true;
+                    }
+                } else {
+                    err = true;
+                }
+            }
+
+            return !err;
+        };
+
+        if (accountNumberPrefixValidator(acountBankNumber.value)) {
             return null;
         }
 
@@ -53,6 +127,47 @@ export class CustomValidators {
 
         return {
             pattern: true,
+        };
+    }
+
+    static phoneNumberDeep = (phoneNumber) => {
+        if (phoneNumber.pristine) {
+            return null;
+        }
+
+        const phonePrefixes = ['2', '31', '32', '35', '37', '38', '39', '41', '46', '47', '48', '49', '51', '53',
+            '54', '55', '56', '57', '58', '59', '95', '971', '972', '973', '974', '840114114', '972436321',
+            '973315650', '975853100'];
+        const mobilePrefixes = ['60', '70', '72', '73', '77', '79'];
+        const pattern = /^[0-9]{9}$/i;
+        const patternWithSpaces = /^[0-9]{3}[ ][0-9]{3}[ ][0-9]{3}$/i;
+
+        const isValidPhone = (value) => {
+            return (pattern.test(value) || patternWithSpaces.test(value)) && searchPrefixes(phonePrefixes, value);
+        };
+
+        const isValidMobile = (value) => {
+            return (pattern.test(value) || patternWithSpaces.test(value)) && searchPrefixes(mobilePrefixes, value);
+        };
+
+        const searchPrefixes = (prefixes, value) => {
+            value = value.replace(/ /g, '');
+            let j = Number.MAX_VALUE;
+            for (let i = 0; i < prefixes.length; i++) {
+                if (value.indexOf(prefixes[i]) === 0) {
+                    j = i;
+                    break;
+                }
+            }
+            return j < prefixes.length && value.substring(0, 2) !== '20';
+        };
+
+        if (isValidMobile(phoneNumber) || isValidPhone(phoneNumber)) {
+            return null;
+        }
+
+        return {
+            phoneNumber: true,
         };
     }
 
