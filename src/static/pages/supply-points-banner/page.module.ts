@@ -4,28 +4,28 @@ import { Routes } from '@angular/router';
 
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
-import { SamplePointsPageComponent } from './page';
-import { SupplyPointModule } from 'src/common/ui/supply-point/supply-point.module';
+import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
+import { SupplyPointsBannerPageComponent } from './page';
 
 @NgModule({
     declarations: [
-        SamplePointsPageComponent,
+        SupplyPointsBannerPageComponent,
     ],
     exports: [
-        SamplePointsPageComponent,
+        SupplyPointsBannerPageComponent,
     ],
     imports: [
         BreadcrumbModule,
         ButtonModule,
         CommonModule,
-        SupplyPointModule,
+        InfoBannerModule,
     ],
 })
-export class SamplePointsPageModule {}
+export class SupplyPointsBannerPageModule {}
 
-export const samplePointsPageRoutes: Routes = [
+export const supplyPointsBannerPageRoutes: Routes = [
     {
-        path: 'sample-points',
-        component: SamplePointsPageComponent,
+        path: 'supply-points-banner',
+        component: SupplyPointsBannerPageComponent,
     },
 ];
