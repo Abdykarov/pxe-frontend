@@ -20,7 +20,7 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/alerts',
                 },
                 {
-                    'label': 'Banners',
+                    'label': 'Banner',
                     'url': '/basic/banners',
                 },
                 {

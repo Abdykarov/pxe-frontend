@@ -38,11 +38,7 @@
 	}
 
 	&__text {
-		margin-left: $spacer;
-	}
-
-	&__icon {
-		font-size: $icon-size-big-px;
+		margin-left: ( $spacer * .75 );
 	}
 
 	&__controls {
