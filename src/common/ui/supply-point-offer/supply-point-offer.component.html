@@ -1,5 +1,6 @@
 <a class="supply-point-offer"
    [class.supply-point-offer--owner]="isOwner"
+   [class.supply-point-offer--not-interactive]="isNotInteractive"
    (click)="action.emit(supplyPointOffer)">
     <div class="row no-gutters">
         <div class="col-12 col-xl-7"
@@ -8,7 +9,7 @@
                 <div class="row">
                     <div class="col-12">
                         <span class="supply-point-offer__title-label">Dodavatel</span>
-                        <span class="supply-point-offer__title">{{supplyPointOffer.supplier?.name}}</span>
+                        <span class="supply-point-offer__title">{{supplyPointOffer.supplier?.title}}</span>
                     </div>
                 </div>
                 <div *ngIf="!isOwner"
