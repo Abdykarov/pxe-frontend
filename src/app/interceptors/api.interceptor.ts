@@ -37,13 +37,13 @@ export class ApiInterceptor implements HttpInterceptor {
                     'X-API-Key': `${environment.x_api_key}`,
                 }),
             });
+        } else {
+            resultRequest = request.clone({
+                setHeaders: {
+                    'X-API-Key': `${environment.x_api_key}`,
+                },
+            });
         }
-
-        resultRequest = request.clone({
-            setHeaders: {
-                'X-API-Key': `${environment.x_api_key}`,
-            },
-        });
 
         return next.handle(resultRequest);
     }
