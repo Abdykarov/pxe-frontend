@@ -122,6 +122,14 @@ export const staticNavigationConfig: INavigationConfig = [
             'icon': 'component-high',
             'children': [
                 {
+                    'label': 'Change password',
+                    'url': '/full/change-password',
+                },
+                {
+                    'label': 'Change password (banner)',
+                    'url': '/basic/change-password-banner',
+                },
+                {
                     'label': 'Contract signing',
                     'url': '/basic/contract-signing',
                 },

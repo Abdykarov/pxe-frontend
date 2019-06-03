@@ -20,6 +20,10 @@ import {
     buttonsPageRoutes,
 } from 'src/static/atoms/buttons/page.module';
 import {
+    ChangePasswordBannerPageModule,
+    changePasswordBannerPageRoutes,
+} from 'src/static/pages/change-password-banner/page.module';
+import {
     ColorsPageModule,
     colorsPageRoutes,
 } from 'src/static/atoms/colors/page.module';
@@ -100,6 +104,7 @@ const routes: Routes = [
             ...alertsPageRoutes,
             ...breadcrumbPageRoutes,
             ...buttonsPageRoutes,
+            ...changePasswordBannerPageRoutes,
             ...colorsPageRoutes,
             ...contractSigningPageRoutes,
             ...formsPageRoutes,
@@ -131,6 +136,7 @@ const routes: Routes = [
         AlertsPageModule,
         BreadcrumbPageModule,
         ButtonsPageModule,
+        ChangePasswordBannerPageModule,
         ColorsPageModule,
         ContractSigningPageModule,
         FormsPageModule,
