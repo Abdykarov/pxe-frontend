@@ -11,6 +11,5 @@ export class ChangePasswordBannerPageComponent {
 
     public clicked = (evt) => {
         evt.preventDefault();
-        console.log('clicked');
     }
 }
