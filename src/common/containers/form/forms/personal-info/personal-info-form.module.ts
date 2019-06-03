@@ -10,6 +10,7 @@ import { AddressWhispererModule } from 'src/common/containers/address-whisperer/
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { PersonalInfoFormComponent } from './personal-info-form.component';
+import { SelectModule } from 'src/common/ui/forms/select/select.module';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import { PersonalInfoFormComponent } from './personal-info-form.component';
         FormModule,
         FormsModule,
         ReactiveFormsModule,
+        SelectModule,
     ],
 })
 export class PersonalInfoFormModule {}

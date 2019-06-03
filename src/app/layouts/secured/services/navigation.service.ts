@@ -26,7 +26,9 @@ export class NavigationService {
 
     get = () => {
         const currentUser = this.authService.currentUserValue;
-        const navigationMenuUser = currentUser.supplier ? navigationMenuSuppliers : navigationMenuUsers ;
+        // const navigationMenuUser = currentUser.supplier ? navigationMenuSuppliers : navigationMenuUsers ;
+
+        const navigationMenuUser = navigationMenuSuppliers;
 
         return new Observable<INavigationConfig>((subscriber: Subscriber<INavigationConfig>) => subscriber.next([
             R.concat(navigationMenuUser, navigationMenuUserActions),

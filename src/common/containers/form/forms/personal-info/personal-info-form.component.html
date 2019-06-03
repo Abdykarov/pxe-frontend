@@ -30,14 +30,6 @@
     </ng-container>
 </lnd-alert>
 
-<!-- Example checkbox in subtext -->
-<ng-template #checkboxInSubtext>
-    <lnd-form-field
-        [id]="'checkbox-in-subtext'"
-        label="Mám jinou korespondenční adresu"
-        [type]="'CHECKBOX'">
-    </lnd-form-field>
-</ng-template>
 
 <div class="row mb-5">
     <div class="col-12 text-center">
@@ -51,13 +43,13 @@
     autocomplete="off"
     class="form-container">
     <lnd-form-field
-        [error]="formError.name || form.controls.name.errors"
-        [formControl]="form.controls.name"
-        [id]="'name'"
+        [error]="formError.fullName || form.controls.fullName.errors"
+        [formControl]="form.controls.fullName"
+        [id]="'fullName'"
         label="Jméno a příjmení"
-        [success]="form.controls.name.valid && (form.controls.name.touched || formError.name)"
-        [touched]="form.controls.name.touched || formError.name"
-        [validationMessages]="formFields.validationMessages.name"
+        [success]="form.controls.fullName.valid && (form.controls.fullName.touched || formError.fullName)"
+        [touched]="form.controls.fullName.touched || formError.fullName"
+        [validationMessages]="formFields.validationMessages.fullName"
     ></lnd-form-field>
     <pxe-address-whisperer
         [appendTemplate]="otherAddress"
@@ -140,6 +132,21 @@
         [success]="form.controls.email.valid && (form.controls.email.touched || formError.email)"
         [touched]="form.controls.email.touched || formError.email"
         [validationMessages]="formFields.validationMessages.email"
+    ></lnd-form-field>
+    <lnd-select
+        label="Způsob placení záloh"
+        [options]="methodOfPaymentOfAdvances"
+        [parentForm]="form"
+        [selectName]="'methodOfPaymentOfAdvances'">
+    </lnd-select>
+    <lnd-form-field
+        [error]="formError.advances || form.controls.advances.errors"
+        [formControl]="form.controls.advances"
+        [id]="'advances'"
+        label="Výše záloh"
+        [success]="form.controls.advances.valid && (form.controls.advances.touched || formError.advances)"
+        [touched]="form.controls.advances.touched || formError.advances"
+        [validationMessages]="formFields.validationMessages.advances"
     ></lnd-form-field>
     <div class="text-center">
         <lnd-button

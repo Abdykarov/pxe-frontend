@@ -9,6 +9,7 @@ import {
 import { FormBuilder } from '@angular/forms';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
+import { methodOfPaymentOfAdvances } from './personal-info-form.config';
 
 @Component({
     selector: 'pxe-personal-info-form',
@@ -19,6 +20,8 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
 
     @Input()
     public headerText = 'Osobní informace';
+
+    public methodOfPaymentOfAdvances = methodOfPaymentOfAdvances;
 
     constructor(
         private cd: ChangeDetectorRef,

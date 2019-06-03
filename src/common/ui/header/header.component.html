@@ -1,7 +1,7 @@
 <ng-template #profileMenu let-toggle="toggle">
     <lnd-button
         (click)="toggle()"
-        [label]="user.email"
+        [label]="user?.email"
         type="primary"
     ></lnd-button>
 </ng-template>

@@ -5,6 +5,9 @@ export const restAPIErrorCodes = {
 };
 
 export const errorFieldMessages =  {
+    advances: {
+        required: 'Vyplňte adresu odběrného místa.',
+    },
     address: {
         required: 'Vyplňte adresu odběrného místa.',
         invalidAddress: 'Zvolená adresa není platná.',
@@ -27,11 +30,12 @@ export const errorFieldMessages =  {
     circuitBreakerId: {
         required: 'Vyberte ze seznamu, jakou máte velikost jističe.',
     },
+    code: {
+        required: 'Zadejte kód.',
+        badCode: 'Zadali jste neplatný kód.', // je treba syncs s grafikou!!!
+    },
     commodityType: {
         required: 'Zvolte komoditu.',
-    },
-    subjectTypeId: {
-        required: 'Zvolte odběratele.',
     },
     consent: {
         signUp: {
@@ -65,6 +69,12 @@ export const errorFieldMessages =  {
         format: 'Vyplňte platný formát data.',
         expirationDateInPast: 'Doplnit můžete pouze budoucí datum.',
     },
+    fullName: {
+        required: 'Vyplňte libovolný název odběrného místa (např. Byt dcera) v maximální délce 50 znaků.',
+    },
+    methodOfPaymentOfAdvances: {
+        required: 'Vyberte ze seznamu jakého máte dodavatele.',
+    },
     name: {
         required: 'Vyplňte libovolný název odběrného místa (např. Byt dcera) v maximální délce 50 znaků.',
         maxlength: 'Maximální délka pro název odběrného místa je 50 znaků.',
@@ -75,8 +85,15 @@ export const errorFieldMessages =  {
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
     },
-    code: {
-        required: 'Zadejte kód.',
-        badCode: 'Zadali jste neplatný kód.', // je treba syncs s grafikou!!!
+    subjectTypeId: {
+        required: 'Zvolte odběratele.',
+    },
+    telephone: {
+        required: 'Vyberte ze seznamu jakého máte dodavatele.',
+        invalidTelephone: 'Vyberte ze seznamu jakého máte dodavatele.',
+    },
+    telephonePrefix: {
+        required: 'Vyberte ze seznamu jakého máte dodavatele.',
+        invalidTelephonePrefix: 'Vyberte ze seznamu jakého máte dodavatele.',
     },
 };

@@ -3,10 +3,11 @@ import { FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
+import { IOption } from 'src/common/ui/forms/models/option.model';
 
 export const formFields: IForm = {
     controls: {
-        name: [
+        fullName: [
             null,
             [
                 Validators.required,
@@ -57,23 +58,84 @@ export const formFields: IForm = {
                 CustomValidators.email,
             ],
         ],
+        methodOfPaymentOfAdvances: [
+            null,
+            [
+                Validators.required,
+            ],
+        ],
+        advances: [
+            null,
+            [
+                Validators.required,
+            ],
+        ],
         onlyPermanentAddress: [
             false,
             [],
         ],
     },
     validationMessages: {
-        name: {},
-        address: {},
-        permanentAddress: {},
-        correspondenceAddress: {},
-        acountNumber: {},
-        acountBankNumber: {},
-        telephone: {},
-        telephonePrefix: {
-            required: errorFieldMessages.name.required,
-            maxlength: errorFieldMessages.name.maxlength,
+        advances: {
+            required: errorFieldMessages.advances.required,
         },
-        email: {},
+        fullName: {
+            required: errorFieldMessages.fullName.required,
+        },
+        permanentAddress: {
+            required: errorFieldMessages.address.required,
+            invalidAddress: errorFieldMessages.address.invalidAddress,
+        },
+        correspondenceAddress: {
+            invalidAddress: errorFieldMessages.address.invalidAddress,
+        },
+        acountNumber: {
+            required: errorFieldMessages.acountNumber.required,
+            invalidAcountNumber: errorFieldMessages.acountNumber.invalidAcountNumber,
+        },
+        acountNumberPrefix: {
+            required: errorFieldMessages.invalidAcountNumberPrefix.required,
+            invalidAcountNumberPrefix: errorFieldMessages.invalidAcountNumberPrefix.invalidAcountNumberPrefix,
+        },
+        methodOfPaymentOfAdvances: {
+            required: errorFieldMessages.methodOfPaymentOfAdvances.required,
+        },
+        telephone: {
+            required: errorFieldMessages.telephone.required,
+            invalidTelephone: errorFieldMessages.telephone.invalidTelephone,
+        },
+        telephonePrefix: {
+            required: errorFieldMessages.telephonePrefix.required,
+            invalidTelephonePrefix: errorFieldMessages.telephonePrefix.invalidTelephonePrefix,
+        },
+        email: {
+            required: errorFieldMessages.email.required,
+            email: errorFieldMessages.email.email,
+            invalidEmail: errorFieldMessages.email.invalidEmail,
+        },
     },
 };
+
+export const methodOfPaymentOfAdvances: IOption[] = [
+    {
+        key: 1,
+        value: 1,
+        label: 'Inkaso',
+    },
+    {
+        key: 2,
+        value: 2,
+        label: 'SIPO',
+    },
+    {
+        key: 3,
+        value: 3,
+        label: 'Příkaz k úhradě',
+    },
+    {
+        key: 4,
+        value: 4,
+        label: 'Složenkou',
+    },
+];
+
