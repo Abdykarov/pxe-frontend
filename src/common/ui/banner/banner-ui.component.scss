@@ -33,16 +33,12 @@
 		// Media queries
 		@include media-breakpoint-up(md) {
 			margin-bottom: 0;
+			margin-right: $spacer;
 		}
 	}
 
 	&__text {
 		margin-left: $spacer;
-
-		// Media queries
-		@include media-breakpoint-up(md) {
-			margin-bottom: 0;
-		}
 	}
 
 	&__icon {

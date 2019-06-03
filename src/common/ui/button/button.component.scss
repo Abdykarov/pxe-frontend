@@ -121,18 +121,19 @@
 		background-color: $secondary;
 		border: 2px solid $white;
 
-		&:focus,
-		&.focus,
-		&:hover {
+		&:hover,
+		&:active,
+		&:focus:active,
+		&:not(:disabled):not(.disabled):active,
+		&:not(:disabled):not(.disabled).active {
 			background-color: $secondary-dark;
 		}
 
-		&:focus {
+		&:focus,
+		&.focus,
+		&:not(:disabled):not(.disabled):active,
+		&:not(:disabled):not(.disabled).active {
 			box-shadow: 0 0 8px 0 rgba($white, .8);
-		}
-
-		&:not(:disabled):not(.disabled):active {
-			background-color: $gray-200;
 		}
 	}
 
