@@ -15,16 +15,17 @@
 @import '~bootstrap/scss/close';
 
 .alert {
+	display: flex;
+	align-items: center;
 	color: $white;
 
 	&--with-icon {
-		padding-left: ( $icon-size-px + $alert-padding-x * 2 );
+		justify-content: center;
 	}
 
 	&__common-icon {
-		position: absolute;
-		top: $alert-padding-y;
-		left: $alert-padding-x;
+		padding-right: ( $spacer / 2 );
+		font-size: 15px;
 	}
 }
 
