@@ -4,8 +4,8 @@ import { Routes } from '@angular/router';
 
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
-import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
 import { ChangePasswordBannerPageComponent } from './page';
+import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
 
 @NgModule({
     declarations: [
