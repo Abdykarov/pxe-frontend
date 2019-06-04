@@ -72,22 +72,24 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         }
     }
 
-    public resetFormError = () => {
+    public resetFormError = (clearError = true) => {
         this.resetCustomFieldError();
         R.pipe(
             R.keys,
             R.map((field) => {
-                this.resetFieldError(field);
+                this.resetFieldError(field, clearError);
             }),
         )(this.form.controls);
     }
 
-    public resetFieldError = (field) => {
+    public resetFieldError = (field, clearError) => {
         const fieldControl = this.form.get(field);
         fieldControl.markAsUntouched({
             onlySelf: true,
         });
-        fieldControl.setErrors(null);
+        if (clearError) {
+            fieldControl.setErrors(null);
+        }
     }
 
     public triggerValidation = () => {
@@ -103,10 +105,9 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         )(this.form.controls);
     }
 
-    public resetFieldValue = (field) => {
-        console.log('%c ***** field *****', 'background: #bada55; color: #000; font-weight: bold', field, this.form.get(field).value);
+    public resetFieldValue = (field, clearError = true) => {
         this.form.get(field).patchValue(null);
-        this.resetFieldError(field);
+        this.resetFieldError(field, clearError);
     }
 
     public resetCustomFieldError = () => {

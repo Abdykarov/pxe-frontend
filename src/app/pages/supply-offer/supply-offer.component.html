@@ -7,7 +7,13 @@
 <ng-template #columnTemplatePriceGas let-row="row">
     <span [innerHtml]="row.priceGas | number:'1.0-2'"></span>
 </ng-template>
-<ng-template #actionColumnTemplatePower let-row="row">
+<ng-template #columnTemplateValidFromTo let-row="row">
+    {{row.validFrom | date: 'dd.MM.yyyy'}} - {{row.validTo | date: 'dd.MM.yyyy'}}
+</ng-template>
+<ng-template #columnTemplateDeliveryFromTo let-row="row">
+    {{row.deliveryFrom | date: 'dd.MM.yyyy'}} - {{row.deliveryTo | date: 'dd.MM.yyyy'}}
+</ng-template>
+<ng-template #actionColumnTemplate let-row="row">
     <span [innerHtml]="row.permanentPaymentPrice | number:'1.0-2'"></span>
     <div *ngIf="table.openedRow !== row"
          class="action-area-div">
@@ -52,7 +58,8 @@
                     icon="icon--delete"
                     type="icon"
                     variant="icon"
-                    (action)="toggle();delete(table, row)"
+                    (action)="toggle();delete(table, row, row.id)"
+                    [isDisabled]="deleteDisabled[row.id]"
             ></lnd-button>
         </ng-template>
         <lnd-tooltip [actionTemplate]="tooltipDelete" direction="bottom">
@@ -70,6 +77,7 @@
                         type="icon"
                         variant="icon"
                         (action)="toggle();create(table, row)"
+                        [isDisabled]="false"
                 ></lnd-button>
             </ng-template>
             <lnd-tooltip [actionTemplate]="tooltipNewDetail" direction="bottom">
@@ -81,6 +89,7 @@
                         type="icon"
                         variant="icon"
                         (action)="toggle();duplicate(table, row)"
+                        [isDisabled]="!formValues.id"
                 ></lnd-button>
             </ng-template>
             <lnd-tooltip [actionTemplate]="tooltipDuplicateDetail" direction="bottom">
@@ -91,7 +100,8 @@
                         icon="icon--delete"
                         type="icon"
                         variant="icon"
-                        (action)="toggle();delete(table, row)"
+                        (action)="toggle();delete(table, row, formValues.id)"
+                        [isDisabled]="false"
                 ></lnd-button>
             </ng-template>
             <lnd-tooltip [actionTemplate]="tooltipDeleteDetail" direction="bottom">
@@ -159,10 +169,12 @@
                         [rowDetailTemplate]="rowDetail"
                         [actionColTriggersDetail]="true"
                         [columnTemplates]="{
-                            actionColumnTemplatePower: actionColumnTemplatePower,
+                            actionColumnTemplate: actionColumnTemplate,
                             columnTemplatePriceVT: columnTemplatePriceVT,
                             columnTemplatePriceNT: columnTemplatePriceNT,
-                            columnTemplatePriceGas: columnTemplatePriceGas
+                            columnTemplatePriceGas: columnTemplatePriceGas,
+                            columnTemplateValidFromTo: columnTemplateValidFromTo,
+                            columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo
                         }">
                     </lnd-table>
                 </div>

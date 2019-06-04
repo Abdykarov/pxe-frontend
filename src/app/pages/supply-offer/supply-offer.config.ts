@@ -67,7 +67,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.validFrom} - ${row.validTo}`,
+                        contentTemplateName: 'columnTemplateValidFromTo',
                     },
                 ],
             },
@@ -77,7 +77,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.deliveryFrom} - ${row.deliveryTo}`,
+                        contentTemplateName: 'columnTemplateDeliveryFromTo',
                     },
                 ],
             },
@@ -97,7 +97,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: ['', 'text-right'],
                         cellClass: ['', 'text-right', 'table--advanced__action-area'],
-                        contentTemplateName: 'actionColumnTemplatePower',
+                        contentTemplateName: 'actionColumnTemplate',
                     },
                 ],
             },
@@ -162,7 +162,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.validFrom} - ${row.validTo}`,
+                        contentTemplateName: 'columnTemplateValidFromTo',
                     },
                 ],
             },
@@ -172,7 +172,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.deliveryFrom} - ${row.deliveryTo}`,
+                        contentTemplateName: 'columnTemplateDeliveryFromTo',
                     },
                 ],
             },
@@ -192,7 +192,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: ['', 'text-right'],
                         cellClass: ['', 'text-right', 'table--advanced__action-area'],
-                        contentTemplateName: 'actionColumnTemplatePower',
+                        contentTemplateName: 'actionColumnTemplate',
                     },
                 ],
             },

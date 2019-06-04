@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 
 import * as R from 'ramda';
+import * as R_ from 'ramda-extension';
 import {
     map,
     takeUntil,
@@ -20,6 +21,7 @@ import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { formFields } from 'src/common/containers/form/forms/supply-offer/supply-offer-form.config';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
+    IOffer,
     IOfferInput,
     IOfferInputGasAttributes,
     IOfferInputPowerAttributes,
@@ -42,12 +44,14 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public formFields = formFields;
     public formLoading = false;
     public formSent = false;
-    public formValues = {};
+    public formValues = <IOffer>{};
     public globalError: string[] = [];
     public loadingOffers = true;
     public tableRows = [];
     public routePower = ROUTES.ROUTER_SUPPLY_OFFER_POWER;
     public routeGas = ROUTES.ROUTER_SUPPLY_OFFER_GAS;
+
+    public deleteDisabled: boolean[] = [];
 
     public action;
 
@@ -92,7 +96,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
 
     public create = (table, row) => {
         this.action = 'create';
-        this.formValues = {};
+        this.formValues = <IOffer>{};
         if (table.openedRow !== row) {
             this.toggleRow(table, row);
         }
@@ -109,23 +113,43 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         }
     }
 
-    public delete = (table, row) => {
-        console.log('%c ***** DELETE *****', 'background: #bada55; color: #000; font-weight: bold', row.id);
+    public delete = (table, row, id = undefined) => {
+        console.log('%c ***** DELETE *****', 'background: #bada55; color: #000; font-weight: bold', row.id, id);
+        if (R_.isNilOrEmptyString(id)) {
+            this.toggleRow(table, row);
+        } else {
+            console.log('delete');
+            this.deleteDisabled[id] = true;
+            this.offerService.deleteOffer(row.id)
+                .pipe(
+                    takeUntil(this.destroy$),
+                )
+                .subscribe(
+                    (data) => {
+                        console.log(data);
+                    },
+                    (error) => {
+                        console.log(error);
+                    },
+                );
+        }
     }
 
     public loadOffers = () => {
         this.offerService.findSupplierOffers()
             .pipe(
                 takeUntil(this.destroy$),
-                map(({data}) => R.filter(R.propEq('commodityType', this.commodityType))(data.findSupplierOffers)),
+                map(({data}) => R.filter(R.whereEq({commodityType: this.commodityType, status: 'ACTIVE'}))(data.findSupplierOffers)),
             )
             .subscribe(
                 rows => {
                     console.log('%c ***** loadOffers *****', 'background: #bada55; color: #000; font-weight: bold', rows);
                     this.tableRows = rows;
                     this.loadingOffers = false;
+                    this.deleteDisabled = [];
                     this.cd.markForCheck();
                 }, error => {
+                    this.deleteDisabled = [];
                     // TODO errors are temporary disabled for this query
                 });
     }
@@ -137,6 +161,10 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         this.globalError = [];
         this.fieldError = {};
         let offerPointAction;
+        const isCreateAction = R.isNil(supplyOfferFormData.id);
+        const id = parseInt(supplyOfferFormData.id, 10);
+
+        // return;
 
         const offer: IOfferInput = R.pick([
             'name',
@@ -161,14 +189,16 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                     'distributionRateId',
                     'circuitBreakerId',
                 ], supplyOfferFormData);
-            offerPointAction = this.offerService.savePowerOffer(offer, powerAttributes);
+            offerPointAction = isCreateAction ? this.offerService.savePowerOffer(offer, powerAttributes) :
+                this.offerService.updatePowerOffer(id, offer, powerAttributes);
         } else {
             const gasAttributes: IOfferInputGasAttributes =
                 R.pick([
                     'priceGas',
                     'annualConsumptionId',
                 ], supplyOfferFormData);
-            offerPointAction = this.offerService.saveGasOffer(offer, gasAttributes);
+            offerPointAction = isCreateAction ? this.offerService.saveGasOffer(offer, gasAttributes) :
+                this.offerService.updateGasOffer(id, offer, gasAttributes);
         }
 
         offerPointAction

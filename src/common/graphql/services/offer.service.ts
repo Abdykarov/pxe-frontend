@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 
 import {
@@ -110,6 +111,23 @@ export class OfferService {
                 mutation: deleteOffer,
                 variables: {
                     offerId,
+                },
+                // updateQueries: {
+                //     findSupplierOffers:
+                // },
+                update: (cache, {data}) => {
+                    const offers: any = cache.readQuery({ query: findSupplierOffers });
+                    const udpatedData = R.map(offer => {
+                        if (offer.id === data.deleteOffer.toString()) {
+                            offer.status = 'DELETED';
+                        }
+                        return offer;
+                    })(offers.findSupplierOffers);
+                    console.log(cache, data, data.deleteOffer, offers, udpatedData);
+                    cache.writeQuery({
+                        query: findSupplierOffers,
+                        data: { findSupplierOffers: udpatedData},
+                    });
                 },
                 refetchQueries: [{
                     query: findSupplierOffers,

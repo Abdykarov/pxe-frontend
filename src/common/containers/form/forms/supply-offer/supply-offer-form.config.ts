@@ -104,7 +104,7 @@ export const formFields: IForm = {
             ],
         ],
         permanentPaymentPrice: [
-            10,
+            null,
             [
                 Validators.required,
                 CustomValidators.isDecimal,
@@ -183,11 +183,11 @@ export const commodityTypeOptions: Array<IOption> = [
 
 export const deliveryLengthOptions: Array<IOption> = [
     {
-        key: '1',
+        key: 1,
         label: '1 rok',
     },
     {
-        key: '2',
+        key: 2,
         label: '2 roky',
     },
 ];

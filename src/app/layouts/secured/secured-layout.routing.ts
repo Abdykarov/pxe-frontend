@@ -71,6 +71,8 @@ const routes = [
                 loadChildren: '../../pages/not-found/not-found.module#NotFoundModule',
                 data: {
                     isSimpleFooter: false,
+                    loginType: LoginType.NONE,
+                    signUpType: SignType.NONE,
                 },
             },
             {
