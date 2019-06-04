@@ -22,13 +22,13 @@
     class="form-container"
     autocomplete="off">
     <lnd-form-field
-        [error]="form.controls.username.errors"
-        [formControl]="form.controls.username"
-        [id]="'username'"
+        [error]="form.controls.email.errors"
+        [formControl]="form.controls.email"
+        [id]="'email'"
         label="Email"
-        [success]="form.controls.username.valid && form.controls.username.touched"
-        [touched]="form.controls.username.touched"
-        [validationMessages]="formFields.validationMessages.username"
+        [success]="form.controls.email.valid && form.controls.email.touched"
+        [touched]="form.controls.email.touched"
+        [validationMessages]="formFields.validationMessages.email"
     ></lnd-form-field>
     <lnd-form-field
         [error]="form.controls.password.errors"

@@ -14,14 +14,13 @@ import { map } from 'rxjs/operators';
 
 import { CONSTS } from 'src/app/app.constants';
 import { CookiesService } from './cookies.service';
+import { environment } from 'src/environments/environment';
 import {
     IJwtPayload,
     ILoginRequest,
     ILoginResponse,
     IUserRoles,
 } from './model/auth.model';
-import { environment } from 'src/environments/environment';
-import { parseEmailFromUsername } from 'src/common/utils';
 
 @Injectable({
     providedIn: 'root',
@@ -58,29 +57,17 @@ export class AuthService {
         return !!this.token;
     }
 
-    login = ({username, password}: ILoginRequest) => {
-        return this.http.post<ILoginResponse>(`${environment.url}/parc-rest/webresources/users/login`, { username, password })
+    login = ({email, password}: ILoginRequest) => {
+        return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { email, password })
             .pipe(
                 map(response => {
-                    if (response && response.token) {
-                        const jwtPayload = this.getJwtPayload(response.token);
-                        if (jwtPayload.exp) {
-                            this.expiresTime = jwtPayload.exp;
-                        }
-                        const user = {
-                            token: response.token,
-                        };
-                        this.cookiesService.setObject(this.cookieName, user, this.expiresTime);
-                        this.checkLogin();
-                        this.currentUserSubject$.next(jwtPayload);
-                    }
-                    return response;
+                    return this.setToken(response);
                 }),
             );
     }
 
     logout = () => {
-        return this.http.get<any>(`${environment.url}/parc-rest/webresources/users/logout`)
+        return this.http.delete<any>(`${environment.url_api}/v1.0/users/logout`)
             .pipe(
                 map(response => {
                     this.token = null;
@@ -92,30 +79,31 @@ export class AuthService {
     }
 
     sendSupplierLoginSms = () => {
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Authorization': 'Bearer ' + this.token,
-                'Content-Type': 'application/json',
-            }),
-        };
-
-        return this.http.get<any>(`${environment.url}/parc-rest/webresources/sms/send`, httpOptions);
+        return this.http.post<any>(`${environment.url_api}/v1.0/sms/send`, {});
     }
 
-    confirmSupplierLoginSms = ({code}) => {
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Authorization': 'Bearer ' + this.token,
-                'Content-Type': 'text/plain',
-            }),
-        };
-
-        return this.http.post<any>(`${environment.url}/parc-rest/webresources/sms/confirm`, code, httpOptions);
+    confirmSupplierLoginSms = ({confirmationCode}) => {
+        return this.http.post<any>(`${environment.url_api}/v1.0/sms/confirm`, {confirmationCode});
     }
 
     refreshToken = () => {
-        // TODO refresh token logic
-        return of(true);
+        return this.http.post<any>(`${environment.url_api}/v1.0/sms/refresh`, {});
+    }
+
+    setToken = (response) => {
+        if (response && response.token) {
+            const jwtPayload = this.getJwtPayload(response.token);
+            if (jwtPayload.exp) {
+                this.expiresTime = jwtPayload.exp;
+            }
+            const user = {
+                token: response.token,
+            };
+            this.cookiesService.setObject(this.cookieName, user, this.expiresTime);
+            this.checkLogin();
+            this.currentUserSubject$.next(jwtPayload);
+        }
+        return response;
     }
 
     getToken = (): string => this.token;
@@ -128,9 +116,8 @@ export class AuthService {
             try {
                 const jwtHelper = new JwtHelperService();
                 jwtPayload = jwtHelper.decodeToken(token);
-                const { username, role } = jwtPayload;
-                jwtPayload.email = parseEmailFromUsername(username);
-                jwtPayload.supplier = role === IUserRoles.PARC_SUPPLIER_P4R;
+                const { role } = jwtPayload;
+                jwtPayload.supplier = role.indexOf(IUserRoles.PARC_SUPPLIER_P4R) !== -1;
             } catch (e) {
                 this.token = null;
                 this.cookiesService.remove(this.cookieName);

@@ -35,7 +35,7 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
     };
 
     const http = httpLink.create({
-        uri: `${environment.url}/graphql/`,
+        uri: `${environment.url_graphql}/`,
     });
 
     const auth = new ApolloLink((operation: Operation, forward: NextLink) => {
@@ -51,7 +51,8 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
                         if (networkError.status === 401) {
                             authService.refreshToken()
                                 .subscribe(
-                                    () => {
+                                    (response) => {
+                                        authService.setToken(response);
                                         setTokenHeader(operation);
                                         innerSubscription = forward(operation).subscribe(observer);
                                     },

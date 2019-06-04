@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12 col-md-6 offset-md-3 text-center">
+            <h1>
+                Výběr nabídky
+            </h1>
+        </div>
+    </div>
+    <div class="row mb-6">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
+        </div>
+    </div>
+    <div class="row">
+        <div class="supply-points-offer">
+            <pxe-supply-point-offer
+                (click)="action(supplyPointOffer)"
+                *ngFor="let supplyPointOffer of supplyPointOffers"
+                [supplyPointOffer]="supplyPointOffer"></pxe-supply-point-offer>
+        </div>
+    </div>
+</div>

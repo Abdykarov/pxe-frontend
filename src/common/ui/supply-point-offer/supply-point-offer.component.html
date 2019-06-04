@@ -1,6 +1,7 @@
 <a class="supply-point-offer"
    [class.supply-point-offer--owner]="isOwner"
-   (click)="action.emit(offer)">
+   [class.supply-point-offer--not-interactive]="isNotInteractive"
+   (click)="action.emit(supplyPointOffer)">
     <div class="row no-gutters">
         <div class="col-12 col-xl-7"
              [class.col-md-6]="isOwner">
@@ -8,7 +9,7 @@
                 <div class="row">
                     <div class="col-12">
                         <span class="supply-point-offer__title-label">Dodavatel</span>
-                        <span class="supply-point-offer__title">{{offer.supplier.title}}</span>
+                        <span class="supply-point-offer__title">{{supplyPointOffer.supplier?.title}}</span>
                     </div>
                 </div>
                 <div *ngIf="!isOwner"
@@ -16,15 +17,17 @@
                     <div class="col-auto">
                         <div class="supply-point-offer__value-box">
                             <span class="supply-point-offer__value-name">Dodávka</span>
-                            <span class="supply-point-offer__value">{{offer.deliveryLength}} {{offer.deliveryLength | plural: 'year' | titlecase}}</span>
+                            <span class="supply-point-offer__value">{{supplyPointOffer.deliveryLength}} {{supplyPointOffer.deliveryLength | plural: 'year' | titlecase}}</span>
                         </div>
                     </div>
-                    <div class="col-auto">
-                        <div class="supply-point-offer__value-box">
-                            <span class="supply-point-offer__value-name">Platnost nabídky</span>
-                            <span class="supply-point-offer__value">{{(offer.validFrom | dateDiff: offer.validTo )}} {{(offer.validFrom | dateDiff: offer.validTo) | plural: 'day' | titlecase}}</span>
+                    <ng-container *ngIf="showValidityOfOffer">
+                        <div class="col-auto">
+                            <div class="supply-point-offer__value-box">
+                                <span class="supply-point-offer__value-name">Platnost nabídky</span>
+                                <span class="supply-point-offer__value text-color--danger">{{dateDiffValidityOfOffer}} {{dateDiffValidityOfOffer | plural: 'hour'}}</span>
+                            </div>
                         </div>
-                    </div>
+                    </ng-container>
                 </div>
             </div>
         </div>
@@ -34,7 +37,7 @@
                 <div class="row">
                     <div class="col-12">
                         <span class="supply-point-offer__title-label">Měsíční záloha</span>
-                        <span class="supply-point-offer__title">{{offer.permanentPaymentPrice | number: '1.0-2'}} Kč</span>
+                        <span class="supply-point-offer__title">{{supplyPointOffer.permanentPaymentPrice | number: '1.0-2'}} Kč</span>
                     </div>
                 </div>
                 <div class="row justify-content-between"
@@ -42,30 +45,31 @@
                     <div class="col-12 col-md-auto">
                         <div class="row">
                             <div class="col-auto"
-                                 *ngIf="offer.priceVT">
+                                 *ngIf="supplyPointOffer.priceVT && supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
                                 <div class="supply-point-offer__value-box">
                                     <span class="supply-point-offer__value-name">Cena za KWH / VT</span>
-                                    <span class="supply-point-offer__value">{{offer.priceVT | number: '1.0-2'}} Kč</span>
+                                    <span class="supply-point-offer__value">{{supplyPointOffer.priceVT | number: '1.0-2'}} Kč</span>
                                 </div>
                             </div>
                             <div class="col-auto"
-                                 *ngIf="offer.priceNT">
+                                 *ngIf="supplyPointOffer.priceNT && supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
                                 <div class="supply-point-offer__value-box">
                                     <span class="supply-point-offer__value-name">Cena za kWh / NT</span>
-                                    <span class="supply-point-offer__value">{{offer.priceNT | number: '1.0-2'}} Kč</span>
+                                    <span class="supply-point-offer__value">{{supplyPointOffer.priceNT | number: '1.0-2'}} Kč</span>
                                 </div>
                             </div>
                             <div class="col-auto"
-                                 *ngIf="offer.priceGas">
+                                 *ngIf="supplyPointOffer.priceGas && supplyPointOffer.commodityType === COMMODITY_TYPE_GAS">
                                 <div class="supply-point-offer__value-box">
                                     <span class="supply-point-offer__value-name">Cena za kWh</span>
-                                    <span class="supply-point-offer__value">{{offer.priceGas | number: '1.0-2'}} Kč</span>
+                                    <span class="supply-point-offer__value">{{supplyPointOffer.priceGas | number: '1.0-2'}} Kč</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-auto supply-point-offer__addon">
                         <lnd-button
+                            *ngIf="supplyPointOffer.benefits && supplyPointOffer.benefits.length"
                             label="Výhody"
                             type="link"
                             (click)="toggleBenefits($event)">
@@ -73,20 +77,20 @@
                         <lnd-button
                             label="Vybrat"
                             type="primary"
-                            (action)="$event.stopPropagation();action.emit(offer)">
+                            (action)="$event.stopPropagation();action.emit(supplyPointOffer)">
                         </lnd-button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-12"
-             *ngIf="!isOwner">
+             *ngIf="!isOwner && supplyPointOffer.benefits && supplyPointOffer.benefits.length">
             <ul class="check-list supply-point-offer__benefits-list"
                 [class.d-block]="showBenefits"
                 [class.d-none]="!showBenefits"
                 [class.d-xl-block]="!showBenefits"
                 [class.d-lg-block]="!showBenefits">
-                <li *ngFor="let benefit of offer.benefits">{{benefit}}</li>
+                <li *ngFor="let benefit of supplyPointOffer.benefits">{{benefit}}</li>
             </ul>
         </div>
     </div>

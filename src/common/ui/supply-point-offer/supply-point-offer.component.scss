@@ -16,20 +16,18 @@
 	.supply-points-offer {
 		pointer-events: none;
 
-		&:hover {
-			.supply-point-offer:not(:hover):not(.supply-point-offer--owner) {
-				@include link-without-href-self {
-					// Media queries
-					@include media-breakpoint-up(xl) {
-						background-color: $body-bg;
-					}
+		&:hover .supply-point-offer:not(:hover):not(.supply-point-offer--owner) {
+			@include link-without-href-self {
+				// Media queries
+				@include media-breakpoint-up(xl) {
+					background-color: $body-bg;
 				}
+			}
 
-				.supply-point-offer__inner--price {
-					// Media queries
-					@include media-breakpoint-up(xl) {
-						background-color: rgba($white, .5);
-					}
+			.supply-point-offer__inner--price {
+				// Media queries
+				@include media-breakpoint-up(xl) {
+					background-color: rgba($white, .5);
 				}
 			}
 		}
@@ -102,6 +100,25 @@
 		.supply-point-offer__title {
 			margin-bottom: 0;
 			font-size: $supply-point-title-font-size;
+		}
+	}
+
+	&.supply-point-offer--not-interactive {
+		@include link-without-href-self {
+			pointer-events: none;
+		}
+
+		.supply-point-offer__addon {
+			> :nth-child(n) {
+				margin: 0;
+			}
+
+			> :last-child {
+				// Media queries
+				@include media-breakpoint-down(xl) {
+					display: none;
+				}
+			}
 		}
 	}
 
