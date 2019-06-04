@@ -27,22 +27,22 @@ export class ApiInterceptor implements HttpInterceptor {
         next: HttpHandler,
     ): Observable<HttpEvent<any>> {
 
-        let resultRequest;
+        let resultRequest = request.clone({
+            setHeaders: {
+                'X-API-Key': `${environment.x_api_key}`,
+            },
+        });
 
-        if (request.url.match(/api\//)) {
-            resultRequest = request.clone({
-                headers: new HttpHeaders({
-                    'Authorization': 'Bearer ' + this.authService.getToken(),
-                    'Content-Type': 'application/json',
-                    'X-API-Key': `${environment.x_api_key}`,
-                }),
-            });
-        } else {
-            resultRequest = request.clone({
-                setHeaders: {
-                    'X-API-Key': `${environment.x_api_key}`,
-                },
-            });
+        if (request.url.match(/api\//) &&
+            request.url.indexOf('login') < 0 &&
+            request.url.indexOf('refresh') < 0) {
+                resultRequest = request.clone({
+                    headers: new HttpHeaders({
+                        'Authorization': 'Bearer ' + this.authService.getToken(),
+                        'Content-Type': 'application/json',
+                        'X-API-Key': `${environment.x_api_key}`,
+                    }),
+                });
         }
 
         return next.handle(resultRequest);

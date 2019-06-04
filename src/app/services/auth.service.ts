@@ -21,7 +21,6 @@ import {
     ILoginResponse,
     IUserRoles,
 } from './model/auth.model';
-import { parseEmailFromUsername } from 'src/common/utils';
 
 @Injectable({
     providedIn: 'root',
@@ -117,8 +116,7 @@ export class AuthService {
             try {
                 const jwtHelper = new JwtHelperService();
                 jwtPayload = jwtHelper.decodeToken(token);
-                const { username, role } = jwtPayload;
-                jwtPayload.email = parseEmailFromUsername(username);
+                const { role } = jwtPayload;
                 jwtPayload.supplier = role.indexOf(IUserRoles.PARC_SUPPLIER_P4R) !== -1;
             } catch (e) {
                 this.token = null;
