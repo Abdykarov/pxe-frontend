@@ -15,16 +15,16 @@
 @import '~bootstrap/scss/close';
 
 .alert {
-	display: flex;
-	align-items: center;
 	color: $white;
 
 	&--with-icon {
+		display: flex;
+		align-items: center;
 		justify-content: center;
 	}
 
 	&__common-icon {
-		padding-right: ( $spacer / 2 );
+		padding-right: ( $spacer * .75 );
 		font-size: $font-size-base;
 	}
 }
