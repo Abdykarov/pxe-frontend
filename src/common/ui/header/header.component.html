@@ -67,7 +67,7 @@
                         <lnd-dropdown 
                             #userProfile
                             [actionTemplate]="profileMenu"
-                            (click)="toggleMenu.emit()"
+                            (toggleOverlayerAction)="toggleMenu.emit()"
                             menuDirection="right">
                             <a *ngFor="let item of userMenu"
                                 [ngClass]="item.class"
