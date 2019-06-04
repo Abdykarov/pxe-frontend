@@ -75,7 +75,7 @@ export const errorFieldMessages =  {
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
     },
-    code: {
+    confirmationCode: {
         required: 'Zadejte kód.',
         badCode: 'Zadali jste neplatný kód.', // je treba syncs s grafikou!!!
     },
