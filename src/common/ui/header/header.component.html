@@ -46,7 +46,6 @@
                             (click)="loginAction.emit()">
                         </lnd-button>
                     </div>
-
                     <div
                         class="menu-holder"
                         *ngIf="!settings.isPublic || settings.isStatic">
@@ -68,6 +67,7 @@
                         <lnd-dropdown 
                             #userProfile
                             [actionTemplate]="profileMenu"
+                            (click)="toggleMenu.emit()"
                             menuDirection="right">
                             <a *ngFor="let item of userMenu"
                                 [ngClass]="item.class"
