@@ -7,25 +7,25 @@ import { IOption } from 'src/common/ui/forms/models/option.model';
 
 export const formFields: IForm = {
     controls: {
-        fullName: [
+        name: [
             null,
             [
                 Validators.required,
             ],
         ],
-        permanentAddress: [
+        address1: [
             null,
             [
                 Validators.required,
             ],
         ],
-        correspondenceAddress: [
+        address2: [
             null,
             [
                 Validators.required,
             ],
         ],
-        acountNumber: [
+        bankAccountNumber: [
             null,
             [
                 Validators.required,
@@ -34,21 +34,21 @@ export const formFields: IForm = {
                 CustomValidators.acountBank,
             ],
         ],
-        acountBankCode: [
+        bankCode: [
             null,
             [
                 Validators.required,
                 CustomValidators.acountBankCode,
             ],
         ],
-        telephone: [
+        phone: [
             null,
             [
                 Validators.required,
                 CustomValidators.phoneNumber,
             ],
         ],
-        telephonePrefix: [
+        phonePrefix: [
             null,
             [
                 Validators.required,
@@ -62,13 +62,13 @@ export const formFields: IForm = {
                 CustomValidators.email,
             ],
         ],
-        methodOfPaymentOfAdvances: [
+        depositPaymentType: [
             null,
             [
                 Validators.required,
             ],
         ],
-        advances: [
+        deposit: [
             null,
             [
                 Validators.required,
@@ -80,37 +80,37 @@ export const formFields: IForm = {
         ],
     },
     validationMessages: {
-        advances: {
-            required: errorFieldMessages.advances.required,
+        deposit: {
+            required: errorFieldMessages.deposit.required,
         },
-        fullName: {
+        name: {
             required: errorFieldMessages.fullName.required,
         },
-        permanentAddress: {
+        address1: {
             required: errorFieldMessages.address.required,
             invalidAddress: errorFieldMessages.address.invalidAddress,
         },
-        correspondenceAddress: {
+        address2: {
             invalidAddress: errorFieldMessages.address.invalidAddress,
         },
-        acountNumber: {
-            required: errorFieldMessages.acountNumber.required,
-            invalidAcountNumber: errorFieldMessages.acountNumber.invalidAcountNumber,
+        bankAccountNumber: {
+            required: errorFieldMessages.bankAccountNumber.required,
+            invalidAcountNumber: errorFieldMessages.bankAccountNumber.invalidAccountNumber,
         },
-        acountNumberPrefix: {
-            required: errorFieldMessages.acountNumberPrefix.required,
-            invalidAcountNumberPrefix: errorFieldMessages.acountNumberPrefix.invalidAcountNumberPrefix,
+        bankCode: {
+            required: errorFieldMessages.bankCode.required,
+            invalidAcountNumberPrefix: errorFieldMessages.bankCode.invalidAcountNumberPrefix,
         },
-        methodOfPaymentOfAdvances: {
-            required: errorFieldMessages.methodOfPaymentOfAdvances.required,
+        depositPaymentType: {
+            required: errorFieldMessages.depositPaymentType.required,
         },
-        telephone: {
-            required: errorFieldMessages.telephone.required,
-            invalidTelephone: errorFieldMessages.telephone.invalidTelephone,
+        phone: {
+            required: errorFieldMessages.phone.required,
+            invalidTelephone: errorFieldMessages.phone.invalidTelephone,
         },
-        telephonePrefix: {
-            required: errorFieldMessages.telephonePrefix.required,
-            invalidTelephonePrefix: errorFieldMessages.telephonePrefix.invalidTelephonePrefix,
+        phonePrefix: {
+            required: errorFieldMessages.phonePrefix.required,
+            invalidTelephonePrefix: errorFieldMessages.phonePrefix.invalidTelephonePrefix,
         },
         email: {
             required: errorFieldMessages.email.required,

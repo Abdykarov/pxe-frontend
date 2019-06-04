@@ -39,18 +39,18 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             .valueChanges
             .pipe(takeUntil(this.destroy$))
             .subscribe(val => {
-                this.setCorrespondenceAddress(val);
+                this.setAddress2(val);
             });
 
-        this.setCorrespondenceAddress(false);
+        this.setAddress2(false);
     }
 
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
     }
 
-    public setCorrespondenceAddress(val) {
-        const correspondenceAddress = this.form.get('correspondenceAddress');
+    public setAddress2(val) {
+        const correspondenceAddress = this.form.get('Address2');
         if (val) {
             correspondenceAddress.enable();
         } else {

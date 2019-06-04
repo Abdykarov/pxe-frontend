@@ -7,20 +7,9 @@ export const restAPIErrorCodes = {
 };
 
 export const errorFieldMessages =  {
-    acountNumber: {
-        required: 'povinne',
-        invalidAcountNumber: 'invalidAcountNumber',
-    },
-    acountNumberPrefix: {
-        required: 'povinne',
-        invalidAcountNumberPrefix: 'invalidAcountNumberPrefix',
-    },
     address: {
         required: 'Vyplňte adresu odběrného místa.',
         invalidAddress: 'Zvolená adresa není platná.',
-    },
-    advances: {
-        required: 'Vyplňte adresu odběrného místa.',
     },
     annualConsumption: {
         required: 'Vyplňte roční spotřebu plynu.',
@@ -36,6 +25,14 @@ export const errorFieldMessages =  {
         required: 'Vyplňte roční spotřebu elektřiny ve vysokém tarifu.',
         annualConsumptionVT: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
         negativeAnnualConsumption: 'Použít můžete pouze kladná čísla.',
+    },
+    bankAccountNumber: {
+        required: 'povinne',
+        invalidAccountNumber: 'invalidAcountNumber',
+    },
+    bankCode: {
+        required: 'povinne',
+        invalidAcountNumberPrefix: 'invalidAcountNumberPrefix',
     },
     circuitBreakerId: {
         required: 'Vyberte ze seznamu, jakou máte velikost jističe.',
@@ -54,6 +51,12 @@ export const errorFieldMessages =  {
         newsSubscription: {
             required: 'Nezapomeňte na souhlas se zásadami bezpečnosti.',
         },
+    },
+    deposit: {
+        required: 'Vyplňte adresu odběrného místa.',
+    },
+    depositPaymentType: {
+        required: 'Vyberte ze seznamu jakého máte dodavatele.',
     },
     distributionRateId: {
         required: 'Vyberte ze seznamu, jakou máte distribuční sazbu.',
@@ -82,9 +85,6 @@ export const errorFieldMessages =  {
     fullName: {
         required: 'Vyplňte jméno.',
     },
-    methodOfPaymentOfAdvances: {
-        required: 'Vyberte ze seznamu jakého máte dodavatele.',
-    },
     name: {
         required: 'Vyplňte libovolný název odběrného místa (např. Byt dcera) v maximální délce 50 znaků.',
         maxlength: 'Maximální délka pro název odběrného místa je 50 znaků.',
@@ -92,18 +92,18 @@ export const errorFieldMessages =  {
     password: {
         required: 'Zadejte heslo.',
     },
+    phone: {
+        required: 'Vyberte ze seznamu jakého máte dodavatele.',
+        invalidTelephone: 'Vyberte ze seznamu jakého máte dodavatele.',
+    },
+    phonePrefix: {
+        required: 'Vyberte ze seznamu jakého máte dodavatele.',
+        invalidTelephonePrefix: 'Vyberte ze seznamu jakého máte dodavatele.',
+    },
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
     },
     subjectTypeId: {
         required: 'Zvolte odběratele.',
-    },
-    telephone: {
-        required: 'Vyberte ze seznamu jakého máte dodavatele.',
-        invalidTelephone: 'Vyberte ze seznamu jakého máte dodavatele.',
-    },
-    telephonePrefix: {
-        required: 'Vyberte ze seznamu jakého máte dodavatele.',
-        invalidTelephonePrefix: 'Vyberte ze seznamu jakého máte dodavatele.',
     },
 };
