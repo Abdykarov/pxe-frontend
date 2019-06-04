@@ -8,6 +8,8 @@ import {
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
+import { takeUntil } from 'rxjs/operators';
+
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { methodOfPaymentOfAdvances } from './personal-info-form.config';
 
@@ -32,10 +34,28 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
 
     ngOnInit() {
         super.ngOnInit();
+
+        this.form.get('onlyPermanentAddress')
+            .valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(val => {
+                this.setCorrespondenceAddress(val);
+            });
+
+        this.setCorrespondenceAddress(false);
     }
 
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
+    }
+
+    public setCorrespondenceAddress(val) {
+        const correspondenceAddress = this.form.get('correspondenceAddress');
+        if (val) {
+            correspondenceAddress.enable();
+        } else {
+            correspondenceAddress.disable();
+        }
     }
 
     public submitForm = () => {

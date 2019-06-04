@@ -26,7 +26,7 @@ export class CustomValidators {
                 return null;
             } else {
                 return {
-                    acount: true,
+                    acountBankNumber: true,
                 };
             }
         }
@@ -35,13 +35,24 @@ export class CustomValidators {
             const prefix = acountNumbers[0];
             const number = acountNumbers[1];
 
-            if (acountNumberValidator(number) && acountNumberPrefixValidator(prefix)) {
-                return null;
+            if (!acountNumberValidator(number)) {
+                return {
+                    acountBankNumber: true,
+                };
             }
+
+            if (!acountNumberPrefixValidator(prefix)) {
+                return {
+                    acountBankPrefix: true,
+                };
+            }
+
+            return null;
         }
 
         return {
-            acount: true,
+            acountBankNumber: true,
+            acountBankPrefix: true,
         };
     }
 
