@@ -42,8 +42,12 @@
 	}
 
 	&__controls {
-		min-width: 250px;
 		text-align: right;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			min-width: 250px;
+		}
 	}
 }
 
