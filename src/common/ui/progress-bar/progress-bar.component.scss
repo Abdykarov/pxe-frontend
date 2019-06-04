@@ -132,4 +132,57 @@
 		padding: ( $spacer / 2 ) ( $spacer / 2 ) 0;
 		line-height: ( 19 / 14 );
 	}
+
+	&--request-card {
+		.progress-bar__item:not(.progress-bar__item--done) {
+			&::before {
+				background-color: $body-bg;
+			}
+
+			.progress-bar__bullet {
+				&::before {
+					background-color: $white;
+				}
+			}
+		}
+
+		.progress-bar__item:not(.progress-bar__item--done):not(.progress-bar__item--active) {
+			.progress-bar__bullet {
+				background-color: $body-bg;
+			}
+		}
+
+		.progress-bar__item {
+			&:first-child {
+				&::before {
+					left: 10px;
+					width: calc(150% - 10px);
+				}
+
+				.progress-bar__bullet {
+					margin-left: 0;
+				}
+			}
+
+			&:nth-child(2) {
+				&::before {
+					width: calc(150% - 10px);
+				}
+			}
+
+			&:last-child {
+				&::before {
+					display: none;
+				}
+
+				.progress-bar__bullet {
+					margin-right: 0;
+				}
+			}
+
+			.progress-bar__label {
+				display: none;
+			}
+		}
+	}
 }

@@ -1,0 +1,42 @@
+<div class="request-card">
+    <div class="request-card__inner">
+        <div class="row no-gutters">
+            <div class="col-12 col-xl-7">
+                <div class="row mb-3">
+                    <div class="col-3 col-md-2 text-center">
+                        <span class="icon request-card__icon icon--flame"></span>
+                    </div>
+                    <div class="col-9 col-md-10">
+                        <span class="request-card__title">Byt - Praha</span>
+                        <span class="request-card__title-subtext">
+                            Dodávka elektřiny
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-10 offset-md-2">
+                        <div class="row">
+                            <div class="col-auto mr-2">
+                                Stav – 2/3 Volba nabídky
+                            </div>
+                            <div class="col">
+                                <pxe-progress-bar 
+                                    [config]="stepperProgressConfigSimple2"
+                                    requestCard="true"
+                                ></pxe-progress-bar>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-xl-5">
+                <div class="request-card__addon">
+                    <lnd-button
+                        label="Dokončit žádost"
+                        type="primary">
+                    </lnd-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

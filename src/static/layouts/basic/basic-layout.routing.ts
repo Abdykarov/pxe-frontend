@@ -68,6 +68,10 @@ import {
     progressBarPageRoutes,
 } from 'src/static/organisms/progress-bar/progress-bar.module';
 import {
+    RequestCardPageModule,
+    requestCardPageRoutes,
+} from 'src/static/organisms/request-card/page.module';
+import {
     SupplyPointPageModule,
     supplyPointPageRoutes,
 } from 'src/static/organisms/supply-point/page.module';
@@ -120,6 +124,7 @@ const routes: Routes = [
             ...newSupplyPointPageRoutes,
             ...offerSelectionPageRoutes,
             ...progressBarPageRoutes,
+            ...requestCardPageRoutes,
             ...supplyPointPageRoutes,
             ...supplyPointsPageRoutes,
             ...supplyPointsBannerPageRoutes,
@@ -153,6 +158,7 @@ const routes: Routes = [
         NewSupplyPointPageModule,
         OfferSelectionPageModule,
         ProgressBarPageModule,
+        RequestCardPageModule,
         RouterModule.forChild(routes),
         SupplyPointPageModule,
         SupplyPointsPageModule,

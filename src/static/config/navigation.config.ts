@@ -107,6 +107,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/progress',
                 },
                 {
+                    'label': 'Request card',
+                    'url': '/basic/request-card',
+                },
+                {
                     'label': 'Supply point',
                     'url': '/basic/supply-point',
                 },
