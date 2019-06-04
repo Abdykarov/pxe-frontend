@@ -127,6 +127,13 @@
 <div class="container-fluid">
     <div class="container-content">
         <pxe-layout-container pageTitle="Přehled nabídek">
+            <lnd-alert
+                    *ngIf="globalError.length"
+                    type="danger">
+                <ng-container *ngFor="let error of globalError">
+                    {{ error }}<br>
+                </ng-container>
+            </lnd-alert>
             <ul class="text-center link-list">
                 <li class="link-list__item">
                     <a class="link-list__link"

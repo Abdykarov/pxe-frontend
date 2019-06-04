@@ -34,7 +34,6 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                Validators.maxLength(50),
             ],
         ],
         distributionLocation: [
@@ -114,24 +113,62 @@ export const formFields: IForm = {
         benefits: new FormArray([]),
     },
     validationMessages: {
+        annualConsumptionId: {
+            required: errorFieldMessages.offerAnnualConsumptionId.required,
+        },
         circuitBreakerId: {
-            required: errorFieldMessages.circuitBreakerId.required,
+            required: errorFieldMessages.offerCircuitBreakerId.required,
         },
         commodityType: {
             required: errorFieldMessages.commodityType.required,
         },
+        deliveryLength: {
+            required: errorFieldMessages.offerDeliveryLength.required,
+        },
+        distributionLocation: {
+            required: errorFieldMessages.offerDistributionLocation.required,
+        },
         distributionRateId: {
-            required: errorFieldMessages.distributionRateId.required,
+            required: errorFieldMessages.offerDistributionRateId.required,
         },
         name: {
-            required: errorFieldMessages.name.required,
-            maxlength: errorFieldMessages.name.maxlength,
+            required: errorFieldMessages.offerName.required,
         },
         subjectTypeId: {
             required: errorFieldMessages.subjectTypeId.required,
         },
         supplierId: {
             required: errorFieldMessages.supplierId.required,
+        },
+        priceGas: {
+            required: errorFieldMessages.offerPriceGas.required,
+            decimal: errorFieldMessages.offerPriceGas.annualConsumptionVT,
+            min: errorFieldMessages.offerPriceGas.negativeAnnualConsumption,
+        },
+        priceNT: {
+            required: errorFieldMessages.offerPriceNT.required,
+            decimal: errorFieldMessages.offerPriceNT.annualConsumptionVT,
+            min: errorFieldMessages.offerPriceNT.negativeAnnualConsumption,
+        },
+        priceVT: {
+            required: errorFieldMessages.offerPriceVT.required,
+            decimal: errorFieldMessages.offerPriceVT.annualConsumptionVT,
+            min: errorFieldMessages.offerPriceVT.negativeAnnualConsumption,
+        },
+        permanentPaymentPrice: {
+            required: errorFieldMessages.offerPermanentPaymentPrice.required,
+            decimal: errorFieldMessages.offerPermanentPaymentPrice.annualConsumptionVT,
+            min: errorFieldMessages.offerPermanentPaymentPrice.negativeAnnualConsumption,
+        },
+        validFromTo: {
+            required: errorFieldMessages.offerValidFromTo.required,
+            bsDate: errorFieldMessages.offerValidFromTo.format,
+            bsDateMinDate: errorFieldMessages.offerValidFromTo.expirationDateInPast,
+        },
+        deliveryFromTo: {
+            required: errorFieldMessages.offerDeliveryFromTo.required,
+            bsDate: errorFieldMessages.offerDeliveryFromTo.format,
+            bsDateMinDate: errorFieldMessages.offerDeliveryFromTo.expirationDateInPast,
         },
     },
 };
@@ -167,17 +204,6 @@ export const subjectTypeOptions: Array<IOption> = [
     {
         key: SubjectType.SUBJECT_TYPE_BUSINESSMAN,
         label: 'Firma',
-    },
-];
-
-export const commodityTypeOptions: Array<IOption> = [
-    {
-        key: CommodityType.POWER,
-        label: 'elektřina',
-    },
-    {
-        key: CommodityType.GAS,
-        label: 'plyn',
     },
 ];
 

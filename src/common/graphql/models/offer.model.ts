@@ -31,7 +31,7 @@ export interface IOffer {
     distributionLocation: string;
     permanentPaymentPrice: number;
     subject: ICodelistItem;
-    benefits: String[];
+    benefits: string;
     priceVT: number;
     priceNT: number;
     distributionRate: ICodelistItem;
@@ -41,7 +41,7 @@ export interface IOffer {
 }
 
 export interface IOfferInput {
-    name: String;
+    name: string;
     supplierId: number;
     validFrom: string;
     validTo: string;
@@ -51,7 +51,7 @@ export interface IOfferInput {
     distributionLocation: string;
     permanentPaymentPrice: number;
     subjectTypeId: string;
-    benefits: string[];
+    benefits: string;
     powerAttributes: IOfferInputPowerAttributes;
     gasAttributes: IOfferInputGasAttributes;
 }
@@ -68,3 +68,7 @@ export interface IOfferInputGasAttributes {
     annualConsumptionId: string;
 }
 
+export enum IOfferStatus {
+    DELETED = 'DELETED',
+    ACTIVE = 'ACTIVE',
+}

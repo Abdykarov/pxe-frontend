@@ -188,8 +188,8 @@
                     appendText="Kč"
                     [error]="formError.permanentPaymentPrice || form.controls.permanentPaymentPrice.errors"
                     [formControl]="form.controls.permanentPaymentPrice"
-                    [id]="'priceGas'"
-                    label="Měsíční záloha"
+                    [id]="'permanentPaymentPrice'"
+                    label="Stálá platba - cena"
                     [success]="form.controls.permanentPaymentPrice.valid && (form.controls.permanentPaymentPrice.touched || formError.permanentPaymentPrice)"
                     [touched]="form.controls.permanentPaymentPrice.touched || formError.permanentPaymentPrice"
                     [validationMessages]="formFields.validationMessages.permanentPaymentPrice"
@@ -206,6 +206,7 @@
                             formControlName="benefit"
                             [id]="'benefit' + i"
                             [label]="'Benefit ' + (i + 1)"
+                            [value]="benefit.value.benefit"
                     ></lnd-form-field>
                 </div>
             </ng-container>

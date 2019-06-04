@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { DatepickerModule } from 'src/common/ui/forms/datepicker/datepicker.module';
 import { DropdownModule } from 'src/common/ui/dropdown/dropdown.module';
@@ -19,6 +20,7 @@ import { TooltipModule } from 'src/common/ui/tooltip/tooltip.module';
         SupplyOfferComponent,
     ],
     imports: [
+        AlertModule,
         ButtonModule,
         CommonModule,
         DatepickerModule,

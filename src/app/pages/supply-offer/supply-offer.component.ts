@@ -24,7 +24,7 @@ import {
     IOffer,
     IOfferInput,
     IOfferInputGasAttributes,
-    IOfferInputPowerAttributes,
+    IOfferInputPowerAttributes, IOfferStatus,
 } from 'src/common/graphql/models/offer.model';
 import { OfferService } from 'src/common/graphql/services/offer.service';
 import { parseGraphQLErrors } from 'src/common/utils';
@@ -139,7 +139,12 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         this.offerService.findSupplierOffers()
             .pipe(
                 takeUntil(this.destroy$),
-                map(({data}) => R.filter(R.whereEq({commodityType: this.commodityType, status: 'ACTIVE'}))(data.findSupplierOffers)),
+                map(({data}) => R.filter(
+                    R.whereEq({
+                        commodityType: this.commodityType,
+                        status: IOfferStatus.ACTIVE},
+                    ),
+                )(data.findSupplierOffers)),
             )
             .subscribe(
                 rows => {
@@ -148,9 +153,12 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                     this.loadingOffers = false;
                     this.deleteDisabled = [];
                     this.cd.markForCheck();
-                }, error => {
+                },
+                error => {
                     this.deleteDisabled = [];
-                    // TODO errors are temporary disabled for this query
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
                 });
     }
 
@@ -180,6 +188,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         ], supplyOfferFormData);
 
         offer.supplierId = this.authService.currentUserValue.subjectId;
+        offer.supplierId = 599;
 
         if (supplyOfferFormData.commodityType === CommodityType.POWER) {
             const powerAttributes: IOfferInputPowerAttributes =

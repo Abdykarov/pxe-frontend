@@ -90,7 +90,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
             .valueChanges
             .pipe(takeUntil(this.destroy$))
             .subscribe((val: string) => {
-                this.resetFieldValue('distributionRateId');
+                this.resetFieldValue('distributionRateId', false);
                 this.distributionRateType = SUBJECT_TYPE_TO_DIST_RATE[val];
                 this.cd.markForCheck();
             });
@@ -99,7 +99,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
             .valueChanges
             .pipe(takeUntil(this.destroy$))
             .subscribe(val => {
-                this.resetFieldValue('permanentPaymentPrice');
+                // this.resetFieldValue('permanentPaymentPrice');
                 this.setPriceNTState(val);
             });
 
@@ -109,13 +109,6 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
     }
 
     ngAfterViewInit(): void {
-        // this.form.controls['permanentPaymentPrice'].setValue(1000);
-        // this.form.controls['priceNT'].setValue(1000);
-        // this.form.controls['validFromTo'].setValue([
-        //     new Date(),
-        //     new Date(),
-        // ]);
-        console.log('%c ***** prefillForm *****', 'background: #bada55; color: #000; font-weight: bold', this.prefillForm, this.formValues);
         if (this.prefillForm && !R.isEmpty(this.formValues)) {
             this.prefillFormData();
         }
@@ -173,6 +166,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
         let validFromTo = null;
         let deliveryFromTo = null;
         let permanentPaymentPrice = null;
+        let benefits = null;
 
         if (!R.isEmpty(this.formValues)) {
             id = this.formValues.id;
@@ -196,6 +190,10 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
                 new Date(this.formValues.deliveryFrom),
                 new Date(this.formValues.deliveryTo),
             ];
+
+            try {
+                benefits = this.formValues.benefits && JSON.parse(this.formValues.benefits);
+            } catch (e) {}
         }
 
         this.form.controls['id'].setValue(id);
@@ -214,7 +212,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
         this.form.controls['permanentPaymentPrice'].setValue(permanentPaymentPrice);
 
         R.times((n: number) => {
-            const benefit = this.formValues.benefits && this.formValues.benefits[n] || null;
+            const benefit = benefits && benefits[n] || null;
             (this.benefitsFormArray.controls[n] as FormGroup).controls['benefit'].setValue(benefit);
         }, SupplyOfferFormComponent.benefitCount);
 
@@ -231,6 +229,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
                     R.map(R.values),
                     R.flatten,
                     R.filter(R_.isNotNil),
+                    JSON.stringify,
                 )(this.form.value.benefits),
             };
             if (!R.isNil(form.validFromTo)) {

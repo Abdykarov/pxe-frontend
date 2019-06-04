@@ -92,7 +92,7 @@ export class SupplyOfferConfig {
                 ],
             },
             {
-                label: 'Měsíční záloha (Kč)',
+                label: 'Stálá platba - cena (Kč)',
                 views: [
                     {
                         headingClass: ['', 'text-right'],
@@ -187,7 +187,7 @@ export class SupplyOfferConfig {
                 ],
             },
             {
-                label: 'Měsíční záloha (Kč)',
+                label: 'Stálá platba - cena (Kč)',
                 views: [
                     {
                         headingClass: ['', 'text-right'],

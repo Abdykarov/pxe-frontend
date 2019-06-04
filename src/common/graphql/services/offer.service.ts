@@ -17,6 +17,7 @@ import {
     IOfferInput,
     IOfferInputGasAttributes,
     IOfferInputPowerAttributes,
+    IOfferStatus,
 } from 'src/common/graphql/models/offer.model';
 
 @Injectable({
@@ -32,7 +33,7 @@ export class OfferService {
         return this.apollo
             .watchQuery<any>({
                 query: findSupplierOffers,
-                errorPolicy: 'ignore',
+                // errorPolicy: 'ignore',
             })
             .valueChanges;
     }
@@ -112,21 +113,17 @@ export class OfferService {
                 variables: {
                     offerId,
                 },
-                // updateQueries: {
-                //     findSupplierOffers:
-                // },
                 update: (cache, {data}) => {
                     const offers: any = cache.readQuery({ query: findSupplierOffers });
-                    const udpatedData = R.map(offer => {
+                    const updatedData = R.map(offer => {
                         if (offer.id === data.deleteOffer.toString()) {
-                            offer.status = 'DELETED';
+                            offer.status = IOfferStatus.DELETED;
                         }
                         return offer;
                     })(offers.findSupplierOffers);
-                    console.log(cache, data, data.deleteOffer, offers, udpatedData);
                     cache.writeQuery({
                         query: findSupplierOffers,
-                        data: { findSupplierOffers: udpatedData},
+                        data: { findSupplierOffers: updatedData},
                     });
                 },
                 refetchQueries: [{
