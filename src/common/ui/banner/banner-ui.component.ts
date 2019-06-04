@@ -6,8 +6,6 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 
-import * as R from 'ramda';
-
 // own classes
 import { AbstractComponent } from 'src/common/abstract.component';
 
