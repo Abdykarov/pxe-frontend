@@ -1,5 +1,5 @@
 export interface ILoginRequest {
-    username: string;
+    email: string;
     password: string;
 }
 
@@ -29,6 +29,6 @@ export interface IJwtPayload {
 }
 
 export enum IUserRoles {
-    'PARC_MANAGER' = 'parc_manager',
-    'PARC_SUPPLIER_P4R' = 'parc_supplier_p4r',
+    'PARC_MANAGER' = 'PARC_MANAGER',
+    'PARC_SUPPLIER_P4R' = 'PARC_SUPPLIER_P_4_R',
 }

@@ -18,13 +18,13 @@
     class="form-container"
     autocomplete="off">
     <lnd-form-field
-        [error]="form.controls.code.errors"
-        [formControl]="form.controls.code"
-        [id]="'code'"
+        [error]="form.controls.confirmationCode.errors"
+        [formControl]="form.controls.confirmationCode"
+        [id]="'confirmationCode'"
         label="Kód"
-        [success]="form.controls.code.valid && form.controls.code.touched"
-        [touched]="form.controls.code.touched"
-        [validationMessages]="formFields.validationMessages.code"
+        [success]="form.controls.confirmationCode.valid && form.controls.confirmationCode.touched"
+        [touched]="form.controls.confirmationCode.touched"
+        [validationMessages]="formFields.validationMessages.confirmationCode"
         [subtextTemplate]="reSendAuthSupplySms"
     ></lnd-form-field>
     <div class="text-right">
