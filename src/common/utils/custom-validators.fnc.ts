@@ -6,8 +6,8 @@ import {
 
 import * as R_ from 'ramda-extension';
 
-import { accountNumberValidator } from './account-number-validator.fnc';
-import { accountNumberPrefixValidator } from './account-number-prefix-validator';
+import { acountNumberValidator } from './account-number.fnc';
+import { acountNumberPrefixValidator } from './account-number-prefix.fnc';
 import { EanValidator } from './ean-validator.fnc';
 import { EicValidator } from './eic-validator.fnc';
 
@@ -18,8 +18,26 @@ export class CustomValidators {
             return null;
         }
 
-        if (!accountNumberValidator(acountBank.value)) {
-            return null;
+        const value = acountBank.value;
+        const acountNumbers = acountBank.value.split('-');
+
+        if (acountNumbers.length === 1 ) {
+            if (acountNumberValidator(value)) {
+                return null;
+            } else {
+                return {
+                    acount: true,
+                };
+            }
+        }
+
+        if (acountNumbers.length === 2 ) {
+            const prefix = acountNumbers[0];
+            const number = acountNumbers[1];
+
+            if (acountNumberValidator(number) && acountNumberPrefixValidator(prefix)) {
+                return null;
+            }
         }
 
         return {
@@ -27,12 +45,13 @@ export class CustomValidators {
         };
     }
 
-    static acountBankNumber = (acountBankNumber) => {
-        if (acountBankNumber.pristine) {
+    static acountBankCode = (acountBankCode) => {
+        if (acountBankCode.pristine) {
             return null;
         }
 
-        if (!accountNumberPrefixValidator(acountBankNumber.value)) {
+        const ACOUNT_BANK_NUMBER = /^\d{4}$/;
+        if (ACOUNT_BANK_NUMBER.test(acountBankCode.value)) {
             return null;
         }
 
@@ -109,6 +128,24 @@ export class CustomValidators {
 
         return {
             pattern: true,
+        };
+    }
+
+    static conditionalValidator(condFn: (control: AbstractControl) => boolean,
+                                             validators: ValidatorFn | ValidatorFn[]): ValidatorFn {
+        return (control) => {
+            if (!condFn(control)) {
+                return null;
+            }
+
+            if (!Array.isArray(validators)) {
+                return validators(control);
+            }
+
+            return validators.map(v => v(control)).reduce((errors, result) =>
+                result === null ? errors :
+                    (Object.assign(errors || {}, result)),
+            );
         };
     }
 

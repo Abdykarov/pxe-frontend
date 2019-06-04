@@ -21,27 +21,31 @@ export const formFields: IForm = {
         ],
         correspondenceAddress: [
             null,
-            [],
+            [
+                Validators.required,
+            ],
         ],
         acountNumber: [
             null,
             [
                 Validators.required,
+                Validators.minLength(2),
+                Validators.maxLength(17),
                 CustomValidators.acountBank,
             ],
         ],
-        // https://www.mbank.cz/informace-k-produktum/info/ucty/cislo-uctu.html
-        acountBankNumber: [
+        acountBankCode: [
             null,
             [
                 Validators.required,
-                CustomValidators.acountBankNumber,
+                CustomValidators.acountBankCode,
             ],
         ],
         telephone: [
             null,
             [
                 Validators.required,
+                CustomValidators.phoneNumber,
             ],
         ],
         telephonePrefix: [
@@ -94,8 +98,8 @@ export const formFields: IForm = {
             invalidAcountNumber: errorFieldMessages.acountNumber.invalidAcountNumber,
         },
         acountNumberPrefix: {
-            required: errorFieldMessages.invalidAcountNumberPrefix.required,
-            invalidAcountNumberPrefix: errorFieldMessages.invalidAcountNumberPrefix.invalidAcountNumberPrefix,
+            required: errorFieldMessages.acountNumberPrefix.required,
+            invalidAcountNumberPrefix: errorFieldMessages.acountNumberPrefix.invalidAcountNumberPrefix,
         },
         methodOfPaymentOfAdvances: {
             required: errorFieldMessages.methodOfPaymentOfAdvances.required,

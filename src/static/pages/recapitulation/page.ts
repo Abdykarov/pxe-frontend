@@ -16,7 +16,7 @@ export class RecapitulationPageComponent {
         permanentAddress: new FormControl(),
         correspondenceAddress: new FormControl(),
         acountNumber: new FormControl(),
-        acountBankNumber: new FormControl(),
+        acountBankCode: new FormControl(),
         telephone: new FormControl(),
         telephonePrefix: new FormControl(),
         email: new FormControl(),

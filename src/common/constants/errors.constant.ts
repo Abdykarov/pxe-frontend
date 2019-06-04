@@ -1,3 +1,5 @@
+import { Validators } from '@angular/forms';
+
 export const defaultRestAPIErrorMessage = 'Došlo k chybě. Zkuste to později.';
 
 export const restAPIErrorCodes = {
@@ -5,12 +7,20 @@ export const restAPIErrorCodes = {
 };
 
 export const errorFieldMessages =  {
-    advances: {
-        required: 'Vyplňte adresu odběrného místa.',
+    acountNumber: {
+        required: 'povinne',
+        invalidAcountNumber: 'invalidAcountNumber',
+    },
+    acountNumberPrefix: {
+        required: 'povinne',
+        invalidAcountNumberPrefix: 'invalidAcountNumberPrefix',
     },
     address: {
         required: 'Vyplňte adresu odběrného místa.',
         invalidAddress: 'Zvolená adresa není platná.',
+    },
+    advances: {
+        required: 'Vyplňte adresu odběrného místa.',
     },
     annualConsumption: {
         required: 'Vyplňte roční spotřebu plynu.',
@@ -70,7 +80,7 @@ export const errorFieldMessages =  {
         expirationDateInPast: 'Doplnit můžete pouze budoucí datum.',
     },
     fullName: {
-        required: 'Vyplňte libovolný název odběrného místa (např. Byt dcera) v maximální délce 50 znaků.',
+        required: 'Vyplňte jméno.',
     },
     methodOfPaymentOfAdvances: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',

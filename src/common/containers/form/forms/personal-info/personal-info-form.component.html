@@ -90,13 +90,13 @@
         </div>
         <div class="col-4">
             <lnd-form-field
-                [error]="formError.acountBankNumber || form.controls.acountBankNumber.errors"
-                [formControl]="form.controls.acountBankNumber"
-                [id]="'acountBankNumber'"
+                [error]="formError.acountBankCode || form.controls.acountBankCode.errors"
+                [formControl]="form.controls.acountBankCode"
+                [id]="'acountBankCode'"
                 label=""
-                [success]="form.controls.acountBankNumber.valid && (form.controls.acountBankNumber.touched || formError.acountBankNumber)"
-                [touched]="form.controls.acountBankNumber.touched || formError.acountBankNumber"
-                [validationMessages]="formFields.validationMessages.acountBankNumber"
+                [success]="form.controls.acountBankCode.valid && (form.controls.acountBankCode.touched || formError.acountBankCode)"
+                [touched]="form.controls.acountBankCode.touched || formError.acountBankCode"
+                [validationMessages]="formFields.validationMessages.acountBankCode"
             ></lnd-form-field>
         </div>
     </div>

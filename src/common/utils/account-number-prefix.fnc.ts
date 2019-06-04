@@ -1,4 +1,8 @@
-export const accountNumberPrefixValidator = (value): boolean => {
+import * as R_ from 'ramda-extension';
+
+import { isNormalInteger } from './is-normal-integer.fnc';
+
+export const accountNumberPrefixFnc = (value): boolean => {
     const AnPrefixKfc: number[] = [10, 5, 8, 4, 2, 1];
     const An = String(value);
 
@@ -34,4 +38,17 @@ export const accountNumberPrefixValidator = (value): boolean => {
     }
 
     return !err;
+};
+
+export const acountNumberPrefixValidator = (value) => {
+
+    if (!R_.between(1, 6, value.length)) {
+        return false;
+    }
+
+    if (!isNormalInteger(value)) {
+        return false;
+    }
+
+    return !accountNumberPrefixFnc(value);
 };
