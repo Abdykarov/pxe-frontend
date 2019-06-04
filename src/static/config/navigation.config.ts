@@ -19,10 +19,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Alerts',
                     'url': '/basic/alerts',
                 },
-                // {
-                //     'label': 'Banners',
-                //     'url': '/banners',
-                // },
+                {
+                    'label': 'Banner',
+                    'url': '/basic/banners',
+                },
                 {
                     'label': 'Buttons',
                     'url': '/basic/buttons',
