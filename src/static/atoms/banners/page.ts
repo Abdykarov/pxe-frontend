@@ -8,17 +8,14 @@ import { defaultBannerObj } from './config';
 
 export class BannersPageComponent {
     public bannerObj = defaultBannerObj;
-    public buttonLabel = 'Více';
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
     constructor() {
         this.breadcrumbItemsSimple = [
             {
-                label: 'Banners',
+                label: 'Banner',
                 url: null,
             },
         ];
     }
-
-    public staticBannerAction = () => alert('some action');
 }
