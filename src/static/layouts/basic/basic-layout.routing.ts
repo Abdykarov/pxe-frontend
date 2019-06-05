@@ -88,6 +88,10 @@ import {
     supplyPointsOfferPageRoutes,
 } from 'src/static/pages/supply-points-offer/page.module';
 import {
+    SupplyPointOverviewPageModule,
+    supplyPointOverviewPageRoutes,
+} from 'src/static/organisms/supply-point-overview/page.module';
+import {
     TablesPageModule,
     tablesPageRoutes,
 } from 'src/static/atoms/tables/page.module';
@@ -125,6 +129,7 @@ const routes: Routes = [
             ...supplyPointsBannerPageRoutes,
             ...supplyPointOfferPageRoutes,
             ...supplyPointsOfferPageRoutes,
+            ...supplyPointOverviewPageRoutes,
             ...tablesPageRoutes,
             ...tooltipPageRoutes,
             ...typographyPageRoutes,
@@ -159,6 +164,7 @@ const routes: Routes = [
         SupplyPointsBannerPageModule,
         SupplyPointOfferPageModule,
         SupplyPointsOfferPageModule,
+        SupplyPointOverviewPageModule,
         TablesPageModule,
         TooltipPageModule,
         TypographyPageModule,
