@@ -112,6 +112,17 @@ export const SUBJECT_TYPE_OPTIONS: Array<IOption> = [
     },
 ];
 
+export const COMMODITY_TYPE_OPTIONS: Array<IOption> = [
+    {
+        key: CommodityType.POWER,
+        label: 'elektřina',
+    },
+    {
+        key: CommodityType.GAS,
+        label: 'plyn',
+    },
+];
+
 export const DELIVERY_LENGTH_OPTIONS: Array<IOption> = [
     {
         key: 1,
