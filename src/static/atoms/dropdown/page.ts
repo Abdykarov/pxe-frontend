@@ -25,18 +25,18 @@ export class DropdownPageComponent {
         const item1: INavigationItem =  {
             label: 'Profil uživatele',
             icon: 'user',
-            url: '/',
+            url: '/basic/dropdown',
         };
         const item2: INavigationItem = {
             label: 'Změna hesla',
             icon: 'lock-close',
-            url: '/',
+            url: '/basic/dropdown',
         };
         const item3: INavigationItem =  {
             class: 'link--logout',
             icon: 'power',
             label: 'Odhlášení',
-            url: '/',
+            url: '/basic/dropdown',
         };
 
         this.navigationItems.push(item1);
