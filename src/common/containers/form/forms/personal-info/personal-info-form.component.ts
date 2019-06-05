@@ -11,6 +11,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { depositPaymentType } from './personal-info-form.config';
+import { SubjectType } from 'src/common/graphql/models/supply.model';
 
 @Component({
     selector: 'pxe-personal-info-form',
@@ -20,7 +21,7 @@ import { depositPaymentType } from './personal-info-form.config';
 export class PersonalInfoFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
 
     @Input()
-    public headerText = 'Osobní informace';
+    public subjectType = SubjectType.SUBJECT_TYPE_BUSINESSMAN;
 
     public depositPaymentTypeId = depositPaymentType;
 
