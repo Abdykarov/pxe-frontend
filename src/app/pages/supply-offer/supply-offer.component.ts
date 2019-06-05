@@ -50,10 +50,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public tableRows = [];
     public routePower = ROUTES.ROUTER_SUPPLY_OFFER_POWER;
     public routeGas = ROUTES.ROUTER_SUPPLY_OFFER_GAS;
-
     public deleteDisabled: boolean[] = [];
-
-    public action;
 
     constructor(
         private authService: AuthService,
@@ -73,19 +70,17 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                 takeUntil(this.destroy$),
             )
             .subscribe(params => {
-                console.log('%c ***** params *****', 'background: #bada55; color: #000; font-weight: bold',
-                    params, Object.values(CommodityType));
-                if (params.commodityType !== 'power' && params.commodityType !== 'gas') {
+                const supplyOfferCommodityTypes = this.supplyOfferConfig.supplyOfferCommodityTypes;
+                if (R.indexOf(params.commodityType, R.keys(supplyOfferCommodityTypes)) < 0) {
                     this.router.navigate([this.routePower]);
                     return;
                 }
-                this.commodityType = params.commodityType === 'power' ? CommodityType.POWER : CommodityType.GAS;
+                this.commodityType = supplyOfferCommodityTypes[params.commodityType];
                 this.loadOffers();
             });
     }
 
     public edit = (table, row) => {
-        this.action = 'edit';
         this.formValues = {
             ...row,
         };
@@ -95,7 +90,6 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public create = (table, row) => {
-        this.action = 'create';
         this.formValues = <IOffer>{};
         if (table.openedRow !== row) {
             this.toggleRow(table, row);
@@ -103,7 +97,6 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public duplicate = (table, row) => {
-        this.action = 'dupl';
         this.formValues = {
             ...row,
             id: null,
@@ -114,22 +107,23 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public delete = (table, row, id = undefined) => {
-        console.log('%c ***** DELETE *****', 'background: #bada55; color: #000; font-weight: bold', row.id, id);
         if (R_.isNilOrEmptyString(id)) {
             this.toggleRow(table, row);
         } else {
-            console.log('delete');
             this.deleteDisabled[id] = true;
             this.offerService.deleteOffer(row.id)
                 .pipe(
                     takeUntil(this.destroy$),
                 )
                 .subscribe(
-                    (data) => {
-                        console.log(data);
+                    () => {
+                        this.deleteDisabled = [];
                     },
                     (error) => {
-                        console.log(error);
+                        this.deleteDisabled = [];
+                        const { globalError } = parseGraphQLErrors(error);
+                        this.globalError = globalError;
+                        this.cd.markForCheck();
                     },
                 );
         }
@@ -148,7 +142,6 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 rows => {
-                    console.log('%c ***** loadOffers *****', 'background: #bada55; color: #000; font-weight: bold', rows);
                     this.tableRows = rows;
                     this.loadingOffers = false;
                     this.deleteDisabled = [];
@@ -163,16 +156,12 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public submitForm = (supplyOfferFormData: any, table = null, row = null) => {
-        console.log('%c ***** submitSupplyForm *****', 'background: #bada55; color: #000; font-weight: bold',
-            supplyOfferFormData, JSON.stringify(supplyOfferFormData), this.authService.currentUserValue.subjectId);
         this.formLoading = true;
         this.globalError = [];
         this.fieldError = {};
         let offerPointAction;
         const isCreateAction = R.isNil(supplyOfferFormData.id);
         const id = parseInt(supplyOfferFormData.id, 10);
-
-        // return;
 
         const offer: IOfferInput = R.pick([
             'name',

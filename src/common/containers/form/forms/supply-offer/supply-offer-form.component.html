@@ -5,7 +5,6 @@
         {{ error }}<br>
     </ng-container>
 </lnd-alert>
-<pre>{{formValues | json}}</pre>
 <form
     [formGroup]="form"
     (keydown)="resetCustomFieldError()"
@@ -211,7 +210,6 @@
                 </div>
             </ng-container>
         </ng-container>
-        <pre>{{form.value | json}}</pre>
     </div>
     <div class="row">
         <div class="col text-right">

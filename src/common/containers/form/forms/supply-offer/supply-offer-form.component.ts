@@ -18,13 +18,15 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import {
-    COMMODITY_TO_DISTRIBUTION,
-    codeListTypes,
+    CODE_LIST_TYPES,
+    COMMODITY_TO_DISTRIBUTION_MAP,
+    DELIVERY_LENGTH_OPTIONS,
+    DISTRIBUTION_RATES_TYPE_DEFINITION,
+    SUBJECT_TYPE_OPTIONS,
+    SUBJECT_TYPE_TO_DIST_RATE_MAP,
+} from 'src/app/app.constants';
+import {
     commodityTypeFields,
-    distributionRatesTypeDefinition,
-    SUBJECT_TYPE_TO_DIST_RATE,
-    subjectTypeOptions,
-    deliveryLengthOptions,
 } from './supply-offer-form.config';
 import {
     CommodityType,
@@ -52,17 +54,15 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
     @Input()
     public formValues = null;
 
-
-    public subjectTypeOptions: Array<IOption> = subjectTypeOptions;
-    public deliveryLengthOptions: Array<IOption> = deliveryLengthOptions;
     public codeLists;
-    public minDate: Date;
-    public suppliers = [];
-    public distributionRateType = '';
-    public distributionLocationType = COMMODITY_TO_DISTRIBUTION[this.commodityType];
     public COMMODITY_TYPE_POWER = CommodityType.POWER;
-
+    public deliveryLengthOptions: Array<IOption> = DELIVERY_LENGTH_OPTIONS;
+    public distributionRateType = '';
+    public distributionLocationType = COMMODITY_TO_DISTRIBUTION_MAP[this.commodityType];
     public prefillForm = false;
+    public minDate: Date;
+    public subjectTypeOptions: Array<IOption> = SUBJECT_TYPE_OPTIONS;
+    public suppliers = [];
 
     get benefitsFormArray() {
         return <FormArray>this.form.get('benefits');
@@ -91,7 +91,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
             .pipe(takeUntil(this.destroy$))
             .subscribe((val: string) => {
                 this.resetFieldValue('distributionRateId', false);
-                this.distributionRateType = SUBJECT_TYPE_TO_DIST_RATE[val];
+                this.distributionRateType = SUBJECT_TYPE_TO_DIST_RATE_MAP[val];
                 this.cd.markForCheck();
             });
 
@@ -99,7 +99,6 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
             .valueChanges
             .pipe(takeUntil(this.destroy$))
             .subscribe(val => {
-                // this.resetFieldValue('permanentPaymentPrice');
                 this.setPriceNTState(val);
             });
 
@@ -116,9 +115,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
 
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
-        console.log('%c ***** changes *****', 'background: #bada55; color: #000; font-weight: bold', changes);
         if (changes.formValues) {
-            console.log(changes.formValues.currentValue);
             if (!R.isNil(changes.formValues.currentValue)) {
                 this.prefillForm = true;
             }
@@ -134,7 +131,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
         });
     }
 
-    public includesBothTariffs = (id: string) => distributionRatesTypeDefinition[DistributionType.BOTH].includes(id);
+    public includesBothTariffs = (id: string) => DISTRIBUTION_RATES_TYPE_DEFINITION[DistributionType.BOTH].includes(id);
 
     public setFormByCommodity = (commodityType: CommodityType) => {
         R.mapObjIndexed((fields, type) => {
@@ -254,7 +251,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
     }
 
     public loadCodeLists = () => {
-        this.supplyService.findCodelistsByTypes(codeListTypes, 'cs')
+        this.supplyService.findCodelistsByTypes(CODE_LIST_TYPES, 'cs')
             .pipe(takeUntil(this.destroy$))
             .subscribe(({data}) => {
                 this.codeLists = transformCodeList(data.findCodelistsByTypes);
