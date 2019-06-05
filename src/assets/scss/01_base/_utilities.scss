@@ -43,12 +43,17 @@
 
 .text-with-icon {
 	display: flex;
+	align-items: center;
 	margin-bottom: $spacer;
 
-	&__icon {
+	& &__icon {
 		padding-top: ( $spacer / 10 );
-		padding-right: $spacer;
-		color: $icons-secondary;
+		color: $icons-primary;
+		font-size: 1.625rem;
+	}
+
+	&__text {
+		margin-left: ( $spacer / 2 );
 	}
 }
 
