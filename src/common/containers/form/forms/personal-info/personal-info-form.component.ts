@@ -1,5 +1,4 @@
 import {
-    ChangeDetectorRef,
     Component,
     Input,
     OnChanges,
@@ -26,7 +25,6 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     public depositPaymentTypeId = depositPaymentType;
 
     constructor(
-        private cd: ChangeDetectorRef,
         protected fb: FormBuilder,
     ) {
         super(fb);
@@ -62,7 +60,13 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         this.resetCustomFieldError();
         this.triggerValidation();
         if (this.form.valid) {
-            this.submitAction.emit(this.form);
+            const form = {
+                ...this.form.value,
+            };
+            form.phone = form.phone +  form.phonePrefix;
+            delete form.phonePrefix;
+            delete form.onlyAddress1;
+            this.submitAction.emit(form);
         }
     }
 }

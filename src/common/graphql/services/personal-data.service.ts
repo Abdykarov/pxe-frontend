@@ -9,7 +9,7 @@ import { savePersonalData } from 'src/common/graphql/mutation/personal-data';
 @Injectable({
     providedIn: 'root',
 })
-export class SupplyService {
+export class PersonalDataService {
 
     constructor(
         private apollo: Apollo,

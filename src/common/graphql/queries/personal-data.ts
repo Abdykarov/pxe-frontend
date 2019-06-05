@@ -3,11 +3,11 @@ import { IAddress, ICodelistItem } from '../models/supply.model';
 
 export const getPersonalData = gql`
     query getPersonalData($contractId: Int!){
-        findSupplyPointOffers(contractId: $contractId){
+        findSupplyPointOffers(contractId: $contractId) {
             name,
             ico,
             dic,
-            address1: {
+            address1 {
                 street,
                 orientationNumber,
                 descriptiveNumber,
@@ -15,7 +15,7 @@ export const getPersonalData = gql`
                 postCode,
                 region,
             },
-            address2: {
+            address2 {
                 street,
                 orientationNumber,
                 descriptiveNumber,
@@ -27,7 +27,7 @@ export const getPersonalData = gql`
             phone,
             bankAccountNumber,
             bankCode,
-            depositPaymentType: {
+            depositPaymentType {
                 type,
                 code,
                 description,

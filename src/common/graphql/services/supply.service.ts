@@ -30,7 +30,6 @@ export class SupplyService {
     ) {}
 
     public getSuppliers(commodityType: CommodityType) {
-        console.log(commodityType);
         return this.apollo
             .watchQuery<any>({
                 query: findAllSuppliers,

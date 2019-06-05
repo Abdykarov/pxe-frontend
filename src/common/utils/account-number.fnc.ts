@@ -42,7 +42,6 @@ export const accountNumber = (value): boolean => {
 
 export const acountNumberValidator = (value) => {
     if (value.indexOf('-') !== -1) {
-        console.log('-');
         return false;
     }
 
