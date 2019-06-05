@@ -1,4 +1,4 @@
-import { FormControl, Validators } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
@@ -62,7 +62,7 @@ export const formFields: IForm = {
                 CustomValidators.email,
             ],
         ],
-        depositPaymentType: [
+        depositPaymentTypeId: [
             null,
             [
                 Validators.required,
@@ -74,7 +74,7 @@ export const formFields: IForm = {
                 Validators.required,
             ],
         ],
-        onlyPermanentAddress: [
+        onlyAddress1: [
             false,
             [],
         ],
@@ -120,7 +120,7 @@ export const formFields: IForm = {
     },
 };
 
-export const methodOfPaymentOfAdvances: IOption[] = [
+export const depositPaymentType: IOption[] = [
     {
         key: 1,
         value: 1,

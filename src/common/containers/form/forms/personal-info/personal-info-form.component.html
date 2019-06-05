@@ -3,7 +3,7 @@
         [id]="'checkbox-in-subtext'"
         label="Mám jinou korespondenční adresu"
         [type]="'CHECKBOX'"
-        [formControl]="form.controls.onlyPermanentAddress">
+        [formControl]="form.controls.onlyAddress1">
     </lnd-form-field>
 </ng-template>
 <!-- Example custom lael template -->
@@ -43,84 +43,84 @@
     autocomplete="off"
     class="form-container">
     <lnd-form-field
-        [error]="formError.fullName || form.controls.fullName.errors"
-        [formControl]="form.controls.fullName"
-        [id]="'fullName'"
+        [error]="formError.name || form.controls.name.errors"
+        [formControl]="form.controls.name"
+        [id]="'name'"
         label="Jméno a příjmení"
-        [success]="form.controls.fullName.valid && (form.controls.fullName.touched || formError.fullName)"
-        [touched]="form.controls.fullName.touched || formError.fullName"
-        [validationMessages]="formFields.validationMessages.fullName"
+        [success]="form.controls.name.valid && (form.controls.name.touched || formError.name)"
+        [touched]="form.controls.name.touched || formError.name"
+        [validationMessages]="formFields.validationMessages.name"
     ></lnd-form-field>
     <pxe-address-whisperer
         [appendTemplate]="otherAddress"
-        [error]="formError.permanentAddress || form.controls.permanentAddress.errors"
+        [error]="formError.address1 || form.controls.address1.errors"
         [label]="'Trvalá adresa'"
         [parentForm]="form"
-        [success]="form.controls.permanentAddress.valid && (form.controls.permanentAddress.touched || formError.permanentAddress)"
+        [success]="form.controls.address1.valid && (form.controls.address1.touched || formError.address1)"
         [templateItem]="templateItem"
         [templateLabel]="templateLabel"
-        [touched]="form.controls.permanentAddress.touched || formError.permanentAddress"
-        [validationMessages]="formFields.validationMessages.permanentAddress"
-        [whispererName]="'permanentAddress'">
+        [touched]="form.controls.address1.touched || formError.address1"
+        [validationMessages]="formFields.validationMessages.address1"
+        [whispererName]="'address1'">
     </pxe-address-whisperer>
     <pxe-address-whisperer
-        [disabled]="!form.getRawValue().onlyPermanentAddress"
-        [error]="formError.correspondentAddress || form.controls.correspondenceAddress.errors"
+        [disabled]="!form.getRawValue().onlyAddress1"
+        [error]="formError.address2 || form.controls.address2.errors"
         [label]="'Korespondeční adresa'"
         [parentForm]="form"
-        [success]="form.controls.correspondenceAddress.valid && (form.controls.correspondenceAddress.touched || formError.correspondenceAddress)"
+        [success]="form.controls.address2.valid && (form.controls.address2.touched || formError.address2)"
         [templateItem]="templateItem"
         [templateLabel]="templateLabel"
-        [touched]="form.controls.correspondenceAddress.touched || formError.correspondenceAddress"
-        [validationMessages]="formFields.validationMessages.correspondenceAddress"
-        [whispererName]="'correspondenceAddress'">
+        [touched]="form.controls.address2.touched || formError.address2"
+        [validationMessages]="formFields.validationMessages.address2"
+        [whispererName]="'address2'">
     </pxe-address-whisperer>
     <div class="row">
         <div class="col-8">
             <lnd-form-field
-                [error]="formError.acountNumber || form.controls.acountNumber.errors"
-                [formControl]="form.controls.acountNumber"
+                [error]="formError.bankAccountNumber || form.controls.bankAccountNumber.errors"
+                [formControl]="form.controls.bankAccountNumber"
                 [id]="'telephonePrefix'"
                 label="Bankovní účet"
                 subtext="Číslo bankovního účtu obsahujcí prefix uveďte prosím ve tvaru XXXXX-XXXXXXXXXX"
-                [success]="form.controls.acountNumber.valid && (form.controls.acountNumber.touched || formError.acountNumber)"
-                [touched]="form.controls.acountNumber.touched || formError.acountNumber"
-                [validationMessages]="formFields.validationMessages.acountNumber"
+                [success]="form.controls.bankAccountNumber.valid && (form.controls.bankAccountNumber.touched || formError.bankAccountNumber)"
+                [touched]="form.controls.bankAccountNumber.touched || formError.bankAccountNumber"
+                [validationMessages]="formFields.validationMessages.bankAccountNumber"
             ></lnd-form-field>
         </div>
         <div class="col-4">
             <lnd-form-field
-                [error]="formError.acountBankCode || form.controls.acountBankCode.errors"
-                [formControl]="form.controls.acountBankCode"
-                [id]="'acountBankCode'"
+                [error]="formError.bankCode || form.controls.bankCode.errors"
+                [formControl]="form.controls.bankCode"
+                [id]="'bankCode'"
                 label=""
-                [success]="form.controls.acountBankCode.valid && (form.controls.acountBankCode.touched || formError.acountBankCode)"
-                [touched]="form.controls.acountBankCode.touched || formError.acountBankCode"
-                [validationMessages]="formFields.validationMessages.acountBankCode"
+                [success]="form.controls.bankCode.valid && (form.controls.bankCode.touched || formError.bankCode)"
+                [touched]="form.controls.bankCode.touched || formError.bankCode"
+                [validationMessages]="formFields.validationMessages.bankCode"
             ></lnd-form-field>
         </div>
     </div>
     <div class="row">
         <div class="col-4">
             <lnd-form-field
-                [error]="formError.telephonePrefix || form.controls.telephonePrefix.errors"
-                [formControl]="form.controls.telephonePrefix"
-                [id]="'telephonePrefix'"
+                [error]="formError.phonePrefix || form.controls.phonePrefix.errors"
+                [formControl]="form.controls.phonePrefix"
+                [id]="'phonePrefix'"
                 label="Telefonní číslo"
-                [success]="form.controls.telephonePrefix.valid && (form.controls.telephonePrefix.touched || formError.telephonePrefix)"
-                [touched]="form.controls.telephonePrefix.touched || formError.telephonePrefix"
-                [validationMessages]="formFields.validationMessages.telephonePrefix"
+                [success]="form.controls.phonePrefix.valid && (form.controls.phonePrefix.touched || formError.phonePrefix)"
+                [touched]="form.controls.phonePrefix.touched || formError.phonePrefix"
+                [validationMessages]="formFields.validationMessages.phonePrefix"
             ></lnd-form-field>
         </div>
         <div class="col-8">
             <lnd-form-field
-                [error]="formError.telephone || form.controls.telephone.errors"
-                [formControl]="form.controls.telephone"
-                [id]="'telephone'"
+                [error]="formError.phone || form.controls.phone.errors"
+                [formControl]="form.controls.phone"
+                [id]="'phone'"
                 label=""
-                [success]="form.controls.telephone.valid && (form.controls.telephone.touched || formError.telephone)"
-                [touched]="form.controls.telephone.touched || formError.telephone"
-                [validationMessages]="formFields.validationMessages.telephone"
+                [success]="form.controls.phone.valid && (form.controls.phone.touched || formError.phone)"
+                [touched]="form.controls.phone.touched || formError.phone"
+                [validationMessages]="formFields.validationMessages.phone"
             ></lnd-form-field>
         </div>
     </div>
@@ -135,18 +135,18 @@
     ></lnd-form-field>
     <lnd-select
         label="Způsob placení záloh"
-        [options]="methodOfPaymentOfAdvances"
+        [options]="depositPaymentTypeId"
         [parentForm]="form"
-        [selectName]="'methodOfPaymentOfAdvances'">
+        [selectName]="'depositPaymentTypeId'">
     </lnd-select>
     <lnd-form-field
-        [error]="formError.advances || form.controls.advances.errors"
-        [formControl]="form.controls.advances"
-        [id]="'advances'"
+        [error]="formError.deposit || form.controls.deposit.errors"
+        [formControl]="form.controls.deposit"
+        [id]="'deposit'"
         label="Výše záloh"
-        [success]="form.controls.advances.valid && (form.controls.advances.touched || formError.advances)"
-        [touched]="form.controls.advances.touched || formError.advances"
-        [validationMessages]="formFields.validationMessages.advances"
+        [success]="form.controls.deposit.valid && (form.controls.deposit.touched || formError.deposit)"
+        [touched]="form.controls.deposit.touched || formError.deposit"
+        [validationMessages]="formFields.validationMessages.deposit"
     ></lnd-form-field>
     <div class="text-center">
         <lnd-button

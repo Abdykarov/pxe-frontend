@@ -1,5 +1,3 @@
-import { Validators } from '@angular/forms';
-
 export const defaultRestAPIErrorMessage = 'Došlo k chybě. Zkuste to později.';
 
 export const restAPIErrorCodes = {
@@ -102,6 +100,10 @@ export const errorFieldMessages =  {
     },
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
+    },
+    confirmationCode: {
+        required: 'Zadejte kód.',
+        badCode: 'Zadali jste neplatný kód.', // je treba syncs s grafikou!!!
     },
     subjectTypeId: {
         required: 'Zvolte odběratele.',

@@ -11,7 +11,7 @@ import { FormBuilder } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
-import { methodOfPaymentOfAdvances } from './personal-info-form.config';
+import { depositPaymentType } from './personal-info-form.config';
 
 @Component({
     selector: 'pxe-personal-info-form',
@@ -23,7 +23,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     @Input()
     public headerText = 'Osobní informace';
 
-    public methodOfPaymentOfAdvances = methodOfPaymentOfAdvances;
+    public depositPaymentTypeId = depositPaymentType;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -35,7 +35,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     ngOnInit() {
         super.ngOnInit();
 
-        this.form.get('onlyPermanentAddress')
+        this.form.get('onlyAddress1')
             .valueChanges
             .pipe(takeUntil(this.destroy$))
             .subscribe(val => {
@@ -50,7 +50,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     }
 
     public setAddress2(val) {
-        const correspondenceAddress = this.form.get('Address2');
+        const correspondenceAddress = this.form.get('address2');
         if (val) {
             correspondenceAddress.enable();
         } else {
