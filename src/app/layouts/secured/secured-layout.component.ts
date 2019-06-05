@@ -68,6 +68,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
             )
             .subscribe((current: IStoreUi)  => {
                 if (current.securedLayout) {
+                    console.log(current);
                     this.navConfig = current.securedLayout.navigationConfig;
                     this.showOverlay = current.showOverlay;
                 }
