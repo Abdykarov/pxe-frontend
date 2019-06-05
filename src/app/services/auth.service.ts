@@ -52,7 +52,6 @@ export class AuthService {
     }
 
     isLogged = (): boolean  => {
-        return true;
         return !!this.token;
     }
 
