@@ -126,9 +126,6 @@ export class OfferService {
                         data: { findSupplierOffers: updatedData},
                     });
                 },
-                refetchQueries: [{
-                    query: findSupplierOffers,
-                }],
             });
     }
 

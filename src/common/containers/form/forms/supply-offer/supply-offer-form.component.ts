@@ -246,6 +246,9 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
             if (!R.isNil(form.priceGas)) {
                 form.priceGas = parseFloat(form.priceGas.replace(',', '.'));
             }
+            if (!R.isNil(form.permanentPaymentPrice)) {
+                form.permanentPaymentPrice = parseFloat(form.permanentPaymentPrice.replace(',', '.'));
+            }
             this.submitAction.emit(form);
         }
     }

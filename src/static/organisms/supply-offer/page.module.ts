@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Routes } from '@angular/router';
 
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
-import { DatepickerModule } from 'src/common/ui/forms/datepicker/datepicker.module';
+import { DatepickerRangeModule } from 'src/common/ui/forms/datepicker-range/datepicker-range.module';
 import { DropdownModule } from 'src/common/ui/dropdown/dropdown.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { SelectModule } from 'src/common/ui/forms/select/select.module';
@@ -24,7 +24,7 @@ import { TooltipModule } from 'src/common/ui/tooltip/tooltip.module';
         BreadcrumbModule,
         ButtonModule,
         CommonModule,
-        DatepickerModule,
+        DatepickerRangeModule,
         DropdownModule,
         FormModule,
         ReactiveFormsModule,

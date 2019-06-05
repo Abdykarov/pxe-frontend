@@ -177,7 +177,6 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         ], supplyOfferFormData);
 
         offer.supplierId = this.authService.currentUserValue.subjectId;
-        offer.supplierId = 599;
 
         if (supplyOfferFormData.commodityType === CommodityType.POWER) {
             const powerAttributes: IOfferInputPowerAttributes =

@@ -4,6 +4,7 @@ import {
     FormGroup,
 } from '@angular/forms';
 
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { NewSupplyPointPageConfig } from 'src/static/pages/new-supply-point/config';
 import {
@@ -17,7 +18,7 @@ import {
 
 export class SupplyOfferComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
-
+    public commodityType = CommodityType.POWER;
     public form: FormGroup = new FormGroup({
         distributionLocation: new FormControl(),
         distributionRateId: new FormControl(),
@@ -34,8 +35,8 @@ export class SupplyOfferComponent {
     });
 
     constructor(
-        public supplyOfferConfig: SupplyOfferOrganismConfig,
         public newSupplyPointPageConfig: NewSupplyPointPageConfig,
+        public supplyOfferConfig: SupplyOfferOrganismConfig,
     ) {
         this.breadcrumbItemsSimple = [
             {
@@ -45,39 +46,10 @@ export class SupplyOfferComponent {
         ];
     }
 
-    public edit = (table, row) => {
+    public action = (table, row) => {
         if (table.openedRow !== row) {
             table.openRow(row);
             table.selectRow(row);
         }
-    }
-
-    public create = (table, row) => {
-        if (table.openedRow !== row) {
-            table.openRow(row);
-            table.selectRow(row);
-        }
-    }
-
-    public duplicate = (table, row) => {
-        if (table.openedRow !== row) {
-            table.openRow(row);
-            table.selectRow(row);
-        }
-    }
-
-    public delete = (table, row) => {
-        if (table.openedRow !== row) {
-            table.openRow(row);
-            table.selectRow(row);
-        }
-    }
-
-    public rowOpened = (row) => {
-        console.log('%c ***** rowOpened *****', 'background: #bada55; color: #000; font-weight: bold', row);
-    }
-
-    public rowSelected = (row) => {
-        console.log('%c ***** rowSelected *****', 'background: #bada55; color: #000; font-weight: bold', row);
     }
 }
