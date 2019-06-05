@@ -4,7 +4,15 @@ import {
     RouterModule,
 } from '@angular/router';
 
-const routes: Routes = [];
+import { CONSTS } from 'src/app/app.constants';
+import { ContractComponent } from './contract.component';
+
+const routes: Routes = [
+    {
+        path: CONSTS.PATHS.CONTRACT,
+        component: ContractComponent,
+    },
+];
 
 @NgModule({
     imports: [
