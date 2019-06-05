@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 
 import {
@@ -9,13 +10,14 @@ import {
     updatePowerOffer,
 } from 'src/common/graphql/mutation/offer';
 import {
-    findOffers,
+    findSupplierOffers,
     findSupplyPointOffers,
 } from 'src/common/graphql/queries/offer';
 import {
     IOfferInput,
     IOfferInputGasAttributes,
     IOfferInputPowerAttributes,
+    IOfferStatus,
 } from 'src/common/graphql/models/offer.model';
 
 @Injectable({
@@ -27,10 +29,11 @@ export class OfferService {
         private apollo: Apollo,
     ) {}
 
-    public findOffers() {
+    public findSupplierOffers() {
         return this.apollo
             .watchQuery<any>({
-                query: findOffers,
+                query: findSupplierOffers,
+                // errorPolicy: 'ignore',
             })
             .valueChanges;
     }
@@ -53,6 +56,9 @@ export class OfferService {
                     offer,
                     powerAttributes,
                 },
+                refetchQueries: [{
+                    query: findSupplierOffers,
+                }],
             });
     }
 
@@ -64,6 +70,9 @@ export class OfferService {
                     offer,
                     gasAttributes,
                 },
+                refetchQueries: [{
+                    query: findSupplierOffers,
+                }],
             });
     }
 
@@ -76,6 +85,9 @@ export class OfferService {
                     offer,
                     powerAttributes,
                 },
+                refetchQueries: [{
+                    query: findSupplierOffers,
+                }],
             });
     }
 
@@ -88,6 +100,9 @@ export class OfferService {
                     offer,
                     gasAttributes,
                 },
+                refetchQueries: [{
+                    query: findSupplierOffers,
+                }],
             });
     }
 
@@ -97,6 +112,19 @@ export class OfferService {
                 mutation: deleteOffer,
                 variables: {
                     offerId,
+                },
+                update: (cache, {data}) => {
+                    const offers: any = cache.readQuery({ query: findSupplierOffers });
+                    const updatedData = R.map(offer => {
+                        if (offer.id === data.deleteOffer.toString()) {
+                            offer.status = IOfferStatus.DELETED;
+                        }
+                        return offer;
+                    })(offers.findSupplierOffers);
+                    cache.writeQuery({
+                        query: findSupplierOffers,
+                        data: { findSupplierOffers: updatedData},
+                    });
                 },
             });
     }

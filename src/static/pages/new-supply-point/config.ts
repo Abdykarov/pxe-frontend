@@ -67,21 +67,21 @@ export class NewSupplyPointPageConfig {
         },
     ];
 
-    public circuitBreakerOtions = [
+    public circuitBreakerOptions = [
         {
             key: 1,
-            value: 'option-1',
-            label: 'Breaker option 1',
+            value: '3x( 10A, 16A>',
+            label: 'nad 3x10A do 3x16A včetně',
         },
         {
             key: 2,
-            value: 'option-2',
-            label: 'Breaker option 2',
+            value: '3x(16A, 20A>',
+            label: 'nad 3x16A do 3x20A včetně',
         },
         {
             key: 3,
-            value: 'option-3',
-            label: 'Breaker option 3',
+            value: '3x(20A, 25A>',
+            label: 'nad 3x20A do 3x25A včetně',
         },
     ];
 
