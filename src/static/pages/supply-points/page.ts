@@ -8,7 +8,7 @@ import {
 @Component({
     templateUrl: './page.html',
 })
-export class SamplePointsPageComponent {
+export class SupplyPointsPageComponent {
     public supplyPointPower = supplyPointConfigPower;
     public supplyPointGas = supplyPointConfigGas;
 }

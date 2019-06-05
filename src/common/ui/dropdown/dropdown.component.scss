@@ -132,7 +132,8 @@
 
 ::ng-deep {
 	.dropdown-item {
-		@include link-without-href-self {
+		&,
+		&:visited {
 			position: relative;
 			display: block;
 			padding: $dropdown-item-padding-y $dropdown-item-padding-x $dropdown-item-padding-y ( $spacer * 3 );

@@ -11,9 +11,31 @@
 @import 'supply-point.component.variables.scss';
 @import '../button/button.component.variables.scss';
 
+::ng-deep {
+	.supply-points {
+		pointer-events: none;
+
+		&:hover .supply-point:not(:hover) {
+			@include link-without-href-self {
+				// Media queries
+				@include media-breakpoint-up(xl) {
+					background-color: $body-bg;
+				}
+			}
+
+			.supply-point__inner--price {
+				// Media queries
+				@include media-breakpoint-up(xl) {
+					background-color: rgba($white, .5);
+				}
+			}
+		}
+	}
+}
 
 .supply-point {
 	@include link-without-href-self {
+		pointer-events: auto;
 		display: block;
 		margin-bottom: $spacer;
 		background-color: $white;
@@ -39,22 +61,6 @@
 
 		.supply-point__inner--price {
 			background-color: rgba($body-bg, .5);
-		}
-	}
-
-	&.supply-point--not-select {
-		@include link-without-href-self {
-			// Media queries
-			@include media-breakpoint-up(xl) {
-				background-color: $body-bg;
-			}
-		}
-
-		.supply-point__inner--price {
-			// Media queries
-			@include media-breakpoint-up(xl) {
-				background-color: rgba($white, .5);
-			}
 		}
 	}
 

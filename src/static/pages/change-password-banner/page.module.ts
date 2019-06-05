@@ -4,15 +4,15 @@ import { Routes } from '@angular/router';
 
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
+import { ChangePasswordBannerPageComponent } from './page';
 import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
-import { SamplePointsBannerPageComponent } from './page';
 
 @NgModule({
     declarations: [
-        SamplePointsBannerPageComponent,
+        ChangePasswordBannerPageComponent,
     ],
     exports: [
-        SamplePointsBannerPageComponent,
+        ChangePasswordBannerPageComponent,
     ],
     imports: [
         BreadcrumbModule,
@@ -21,11 +21,11 @@ import { SamplePointsBannerPageComponent } from './page';
         InfoBannerModule,
     ],
 })
-export class SamplePointsBannerPageModule {}
+export class ChangePasswordBannerPageModule {}
 
-export const samplePointsBannerPageRoutes: Routes = [
+export const changePasswordBannerPageRoutes: Routes = [
     {
-        path: 'sample-points-banner',
-        component: SamplePointsBannerPageComponent,
+        path: 'change-password-banner',
+        component: ChangePasswordBannerPageComponent,
     },
 ];

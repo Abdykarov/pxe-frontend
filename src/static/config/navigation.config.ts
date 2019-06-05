@@ -19,10 +19,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Alerts',
                     'url': '/basic/alerts',
                 },
-                // {
-                //     'label': 'Banners',
-                //     'url': '/banners',
-                // },
+                {
+                    'label': 'Banner',
+                    'url': '/basic/banners',
+                },
                 {
                     'label': 'Buttons',
                     'url': '/basic/buttons',
@@ -122,8 +122,20 @@ export const staticNavigationConfig: INavigationConfig = [
             'icon': 'component-high',
             'children': [
                 {
+                    'label': 'Contract signing',
+                    'url': '/basic/contract-signing',
+                },
+                {
                     'label': 'Cookies policy',
                     'url': '/full/cookies',
+                },
+                {
+                    'label': 'Change password',
+                    'url': '/full/change-password',
+                },
+                {
+                    'label': 'Change password (banner)',
+                    'url': '/basic/change-password-banner',
                 },
                 {
                     'label': 'Landing page',
@@ -146,12 +158,20 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/new-supply-point',
                 },
                 {
-                    'label': 'Sample points',
-                    'url': '/basic/sample-points',
+                    'label': 'Offer selection',
+                    'url': '/basic/offer-selection',
                 },
                 {
-                    'label': 'Sample points banner',
-                    'url': '/basic/sample-points-banner',
+                    'label': 'Supply points',
+                    'url': '/basic/supply-points',
+                },
+                {
+                    'label': 'Supply points (banner)',
+                    'url': '/basic/supply-points-banner',
+                },
+                {
+                    'label': 'Supply points offer',
+                    'url': '/basic/supply-points-offer',
                 },
                 // {
                 //     'label': 'Error',

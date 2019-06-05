@@ -11,7 +11,6 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { AuthService } from 'src/app/services/auth.service';
 import { ISupplyPointFindData } from 'src/common/graphql/models/supply.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
@@ -29,7 +28,6 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
     public errorMessages = [];
 
     constructor(
-        private authService: AuthService,
         private cd: ChangeDetectorRef,
         private supplyService: SupplyService,
         private router: Router,
@@ -39,8 +37,7 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
 
     ngOnInit () {
         super.ngOnInit();
-        const email = this.authService.currentUserValue.email;
-        this.supplyService.findSupplyPoints(email)
+        this.supplyService.findSupplyPoints()
             .pipe(
                 takeUntil(this.destroy$),
                 map( res => this.transportResponseToData(res)),

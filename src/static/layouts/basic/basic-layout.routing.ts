@@ -9,6 +9,10 @@ import {
     alertsPageRoutes,
 } from 'src/static/atoms/alerts/page.module';
 import {
+    BannersPageModule,
+    bannersPageRoutes,
+} from 'src/static/atoms/banners/page.module';
+import {
     BasicLayoutComponent,
 } from './basic-layout.component';
 import {
@@ -24,6 +28,10 @@ import {
     colorsPageRoutes,
 } from 'src/static/atoms/colors/page.module';
 import {
+    ContractSigningPageModule,
+    contractSigningPageRoutes,
+} from 'src/static/pages/contract-signing/page.module';
+import {
     DropdownPageModule,
     dropdownPageRoutes,
 } from 'src/static/atoms/dropdown/page.module';
@@ -31,6 +39,10 @@ import {
     FormsPageModule,
     formsPageRoutes,
 } from 'src/static/atoms/forms/page.module';
+import {
+    ChangePasswordBannerPageModule,
+    changePasswordBannerPageRoutes,
+} from 'src/static/pages/change-password-banner/page.module';
 import {
     IconsPageModule,
     iconsPageRoutes,
@@ -52,25 +64,33 @@ import {
     newSupplyPointPageRoutes,
 } from 'src/static/pages/new-supply-point/page.module';
 import {
+    OfferSelectionPageModule,
+    offerSelectionPageRoutes,
+} from 'src/static/pages/offer-selection/page.module';
+import {
     ProgressBarPageModule,
     progressBarPageRoutes,
 } from 'src/static/organisms/progress-bar/progress-bar.module';
 import {
-    SamplePointsPageModule,
-    samplePointsPageRoutes,
-} from 'src/static/pages/sample-points/page.module';
+    SupplyPointPageModule,
+    supplyPointPageRoutes,
+} from 'src/static/organisms/supply-point/page.module';
 import {
-    SamplePointsBannerPageModule,
-    samplePointsBannerPageRoutes,
-} from 'src/static/pages/sample-points-banner/page.module';
+    SupplyPointsPageModule,
+    supplyPointsPageRoutes,
+} from 'src/static/pages/supply-points/page.module';
+import {
+    SupplyPointsBannerPageModule,
+    supplyPointsBannerPageRoutes,
+} from 'src/static/pages/supply-points-banner/page.module';
 import {
     SupplyPointOfferPageModule,
     supplyPointOfferPageRoutes,
 } from 'src/static/organisms/supply-point-offer/page.module';
 import {
-    SupplyPointPageModule,
-    supplyPointPageRoutes,
-} from 'src/static/organisms/supply-point/page.module';
+    SupplyPointsOfferPageModule,
+    supplyPointsOfferPageRoutes,
+} from 'src/static/pages/supply-points-offer/page.module';
 import {
     TablesPageModule,
     tablesPageRoutes,
@@ -90,21 +110,26 @@ const routes: Routes = [
         component: BasicLayoutComponent,
         children: [
             ...alertsPageRoutes,
+            ...bannersPageRoutes,
             ...breadcrumbPageRoutes,
             ...buttonsPageRoutes,
             ...colorsPageRoutes,
+            ...contractSigningPageRoutes,
             ...dropdownPageRoutes,
             ...formsPageRoutes,
+            ...changePasswordBannerPageRoutes,
             ...iconsPageRoutes,
             ...indicatorsPageRoutes,
             ...infoBannerPageRoutes,
             ...modalsPageRoutes,
             ...newSupplyPointPageRoutes,
+            ...offerSelectionPageRoutes,
             ...progressBarPageRoutes,
-            ...samplePointsPageRoutes,
-            ...samplePointsBannerPageRoutes,
-            ...supplyPointOfferPageRoutes,
             ...supplyPointPageRoutes,
+            ...supplyPointsPageRoutes,
+            ...supplyPointsBannerPageRoutes,
+            ...supplyPointOfferPageRoutes,
+            ...supplyPointsOfferPageRoutes,
             ...tablesPageRoutes,
             ...tooltipPageRoutes,
             ...typographyPageRoutes,
@@ -119,22 +144,27 @@ const routes: Routes = [
 @NgModule({
     imports: [
         AlertsPageModule,
+        BannersPageModule,
         BreadcrumbPageModule,
         ButtonsPageModule,
         ColorsPageModule,
+        ContractSigningPageModule,
         DropdownPageModule,
         FormsPageModule,
+        ChangePasswordBannerPageModule,
         IconsPageModule,
         IndicatorsPageModule,
         InfoBannerPageModule,
         ModalsPageModule,
         NewSupplyPointPageModule,
+        OfferSelectionPageModule,
         ProgressBarPageModule,
         RouterModule.forChild(routes),
-        SamplePointsPageModule,
-        SamplePointsBannerPageModule,
-        SupplyPointOfferPageModule,
         SupplyPointPageModule,
+        SupplyPointsPageModule,
+        SupplyPointsBannerPageModule,
+        SupplyPointOfferPageModule,
+        SupplyPointsOfferPageModule,
         TablesPageModule,
         TooltipPageModule,
         TypographyPageModule,

@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row static-pages-holder">
     <div class="col">
         <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
     </div>
@@ -8,18 +8,8 @@
         <div class="col">
             <lnd-banner-ui
                 [data]="bannerObj"
-                [buttonLabel]="buttonLabel"
+                buttonLabel="Button label"
             ></lnd-banner-ui>
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col">
-        <lnd-banner-ui
-            type="simple"
-            (staticBannerAction)="staticBannerAction()"
-            buttonLabel="Button label"
-            staticBannerTitle="Banner title"
-        ></lnd-banner-ui>
     </div>
 </div>

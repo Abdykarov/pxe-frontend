@@ -6,7 +6,7 @@
         "secure": false
     },
     {
-        "context": "/parc-rest",
+        "context": "/api",
         "logLevel": "debug",
         "target": "http://auth:8080",
         "secure": false

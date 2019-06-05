@@ -6,7 +6,7 @@ import { IForm } from 'src/common/containers/form/models/form-definition.model';
 
 export const loginFormFields: IForm = {
     controls: {
-        username: [
+        email: [
             '',
             [
                 Validators.required,
@@ -31,7 +31,7 @@ export const loginFormFields: IForm = {
 
 export const loginSupplyAuthFormFields: IForm = {
     controls: {
-        code: [
+        confirmationCode: [
             '',
             [
                 Validators.required,
@@ -39,8 +39,8 @@ export const loginSupplyAuthFormFields: IForm = {
         ],
     },
     validationMessages: {
-        code: {
-            required: errorFieldMessages.code.required,
+        confirmationCode: {
+            required: errorFieldMessages.confirmationCode.required,
            // code: errorFieldMessages.code.code,//todo custm validate
         },
     },

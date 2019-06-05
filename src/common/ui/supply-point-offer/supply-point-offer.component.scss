@@ -12,6 +12,28 @@
 @import '../supply-point/supply-point.component.variables.scss';
 
 
+::ng-deep {
+	.supply-points-offer {
+		pointer-events: none;
+
+		&:hover .supply-point-offer:not(:hover):not(.supply-point-offer--owner) {
+			@include link-without-href-self {
+				// Media queries
+				@include media-breakpoint-up(xl) {
+					background-color: $body-bg;
+				}
+			}
+
+			.supply-point-offer__inner--price {
+				// Media queries
+				@include media-breakpoint-up(xl) {
+					background-color: rgba($white, .5);
+				}
+			}
+		}
+	}
+}
+
 .supply-point-offer {
 	@include link-without-href-self {
 		display: block;
@@ -21,11 +43,7 @@
 		border-radius: 4px;
 		box-shadow: 0 2px 5px rgba($box-shadow-color, .16);
 		overflow: hidden;
-
-		// Media queries
-		@include media-breakpoint-down(md) {
-			pointer-events: none;
-		}
+		pointer-events: none;
 	}
 
 	@include link-without-href-interactive {
@@ -38,18 +56,11 @@
 		}
 	}
 
-	&.supply-point-offer--not-select {
+	&:not(.supply-point-offer--owner) {
 		@include link-without-href-self {
 			// Media queries
 			@include media-breakpoint-up(xl) {
-				background-color: $body-bg;
-			}
-		}
-
-		.supply-point-offer__inner--price {
-			// Media queries
-			@include media-breakpoint-up(xl) {
-				background-color: rgba($white, .5);
+				pointer-events: auto;
 			}
 		}
 	}
@@ -64,10 +75,6 @@
 			@include media-breakpoint-up(md) {
 				text-align: left;
 			}
-		}
-
-		@include link-without-href-interactive-self {
-			pointer-events: none;
 		}
 
 		.supply-point-offer__inner--price {
@@ -93,6 +100,25 @@
 		.supply-point-offer__title {
 			margin-bottom: 0;
 			font-size: $supply-point-title-font-size;
+		}
+	}
+
+	&.supply-point-offer--not-interactive {
+		@include link-without-href-self {
+			pointer-events: none;
+		}
+
+		.supply-point-offer__addon {
+			> :nth-child(n) {
+				margin: 0;
+			}
+
+			> :last-child {
+				// Media queries
+				@include media-breakpoint-down(xl) {
+					display: none;
+				}
+			}
 		}
 	}
 
