@@ -13,6 +13,7 @@ export class DropdownPageComponent {
 
     public toggleOverlayer() {
         this.body.classList.toggle('body-inner--overlay');
+        this.body.classList.toggle('body-inner--overlay-aside');
     }
 
     constructor() {

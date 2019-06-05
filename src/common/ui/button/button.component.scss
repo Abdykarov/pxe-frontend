@@ -159,15 +159,21 @@
 	}
 
 	&-dropdown {
+		min-width: auto;
 		padding-left: ( $spacer / 2 );
 		text-transform: uppercase;
 
 		&:focus,
+		&:hover,
 		&:active,
 		&:not(:disabled):not(.disabled):focus,
 		&:not(:disabled):not(.disabled):active,
 		&:not(:disabled):not(.disabled):active:focus {
 			box-shadow: none;
+
+			.btn__icon {
+				color: $primary;
+			}
 		}
 	}
 

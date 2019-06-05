@@ -24,9 +24,15 @@
 		@include overlayer;
 	}
 
-	&--overlay-header .header,
-	&--overlay-aside .aside {
+	&--overlay-header .header {
 		@include overlayer(auto, absolute, after);
+	}
+
+	&--overlay-aside .aside {
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			@include overlayer(auto, absolute, after);
+		}
 	}
 
 	&--overlay-full {
