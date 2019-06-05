@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-import { IDropdownItem } from 'src/common/ui/dropdown/models/item.model';
+import {
+    INavigationItem,
+    INavigationMenu,
+} from 'src/common/ui/navigation/models/navigation.model';
 
 @Component({
   templateUrl: './page.html',
 })
 
 export class DropdownPageComponent {
-    public dropdownItems: Array<IDropdownItem>;
+    public navigationItems: INavigationMenu = [];
+
     private body = document.getElementById('top');
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
@@ -17,27 +21,27 @@ export class DropdownPageComponent {
     }
 
     constructor() {
-        this.dropdownItems = [];
-        const item1 = <IDropdownItem> {
+        this.navigationItems = [];
+        const item1: INavigationItem =  {
             label: 'Profil uživatele',
             icon: 'user',
-            action: () => console.log('Click on dropdown item 1'),
+            url: '/',
         };
-        const item2 = <IDropdownItem> {
+        const item2: INavigationItem = {
             label: 'Změna hesla',
             icon: 'lock-close',
-            action: () => console.log('Click on dropdown item 2'),
+            url: '/',
         };
-        const item3 = <IDropdownItem> {
+        const item3: INavigationItem =  {
             class: 'link--logout',
-            label: 'Odhlášení',
             icon: 'power',
-            action: () => console.log('Odhlášeno'),
+            label: 'Odhlášení',
+            url: '/',
         };
 
-        this.dropdownItems.push(item1);
-        this.dropdownItems.push(item2);
-        this.dropdownItems.push(item3);
+        this.navigationItems.push(item1);
+        this.navigationItems.push(item2);
+        this.navigationItems.push(item3);
 
         this.breadcrumbItemsSimple = [
             {

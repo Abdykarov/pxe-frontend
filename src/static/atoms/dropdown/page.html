@@ -68,10 +68,11 @@
                 (toggleOverlayerAction)="toggleOverlayer();"
                 [overlayEnabled]="true"
                 menuDirection="right">
-                <a *ngFor="let item of dropdownItems"
+                <a *ngFor="let item of navigationItems"
                     [ngClass]="item.class"
                     class="dropdown-item"
-                    (click)="item.action()">
+                    (click)="$event.preventDefault()"
+                    href="{{item.url}}">
                     <span [ngClass]="'dropdown-item-icon icon icon--' + item.icon"></span>
                     {{ item.label }}
                 </a>
