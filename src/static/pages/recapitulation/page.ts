@@ -5,7 +5,7 @@ import {
 } from '@angular/forms';
 
 import { configStepper } from './config';
-import { depositPaymentType } from '../../../common/containers/form/forms/personal-info/personal-info-form.config';
+import { depositPaymentType } from 'src/common/containers/form/forms/personal-info/personal-info-form.config';
 
 @Component({
     templateUrl: './page.html',
