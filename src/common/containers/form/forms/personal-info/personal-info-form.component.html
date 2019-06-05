@@ -1,7 +1,7 @@
 <ng-template #otherAddress>
     <lnd-form-field
         [id]="'checkbox-in-subtext'"
-        label="Mám jinou korespondenční adresu"
+        [label]="isIndividual ? 'Mám jinou korespondenční adresu' : 'Mám jinou fakturační adresu'"
         [type]="'CHECKBOX'"
         [formControl]="form.controls.onlyAddress1">
     </lnd-form-field>
@@ -33,7 +33,7 @@
 
 <div class="row mb-5">
     <div class="col-12 text-center">
-        {{subjectType === SubjectType.SUBJECT_TYPE_INDIVIDUAL ? 'Osobní informace' : 'Firemní informace'}}
+        {{isIndividual ? 'Osobní informace' : 'Firemní informace'}}
     </div>
 </div>
 <form
@@ -46,15 +46,35 @@
         [error]="formError.name || form.controls.name.errors"
         [formControl]="form.controls.name"
         [id]="'name'"
-        label="Jméno a příjmení"
+        [label]="isIndividual ? 'Jméno a příjmení' : 'Název společnosti'"
         [success]="form.controls.name.valid && (form.controls.name.touched || formError.name)"
         [touched]="form.controls.name.touched || formError.name"
         [validationMessages]="formFields.validationMessages.name"
     ></lnd-form-field>
+    <lnd-form-field
+        *ngIf="form.controls.ico.status !== 'DISABLED'"
+        [error]="formError.ico || form.controls.ico.errors"
+        [formControl]="form.controls.ico"
+        [id]="'ico'"
+        label="IČ"
+        [success]="form.controls.ico.valid && (form.controls.ico.touched || formError.ico)"
+        [touched]="form.controls.ico.touched || formError.ico"
+        [validationMessages]="formFields.validationMessages.ico"
+    ></lnd-form-field>
+    <lnd-form-field
+        *ngIf="form.controls.dic.status !== 'DISABLED'"
+        [error]="formError.dic || form.controls.dic.errors"
+        [formControl]="form.controls.dic"
+        [id]="'dic'"
+        label="DIČ (nepovinné)"
+        [success]="form.controls.dic.valid && (form.controls.dic.touched || formError.dic)"
+        [touched]="form.controls.dic.touched || formError.dic"
+        [validationMessages]="formFields.validationMessages.dic"
+    ></lnd-form-field>
     <pxe-address-whisperer
         [appendTemplate]="otherAddress"
         [error]="formError.address1 || form.controls.address1.errors"
-        [label]="'Trvalá adresa'"
+        [label]="isIndividual ? 'Trvalá adresa' : 'Sídlo firmy'"
         [parentForm]="form"
         [success]="form.controls.address1.valid && (form.controls.address1.touched || formError.address1)"
         [templateItem]="templateItem"
@@ -66,7 +86,7 @@
     <pxe-address-whisperer
         [disabled]="!form.getRawValue().onlyAddress1"
         [error]="formError.address2 || form.controls.address2.errors"
-        [label]="'Korespondeční adresa'"
+        [label]="isIndividual ? 'Korespondeční adresa' : 'Fakturační adresa'"
         [parentForm]="form"
         [success]="form.controls.address2.valid && (form.controls.address2.touched || formError.address2)"
         [templateItem]="templateItem"
@@ -134,12 +154,14 @@
         [validationMessages]="formFields.validationMessages.email"
     ></lnd-form-field>
     <lnd-select
+        *ngIf="form.controls.depositPaymentTypeId.status !== 'DISABLED'"
         label="Způsob placení záloh"
         [options]="depositPaymentTypeId"
         [parentForm]="form"
         [selectName]="'depositPaymentTypeId'">
     </lnd-select>
     <lnd-form-field
+        *ngIf="form.controls.deposit.status !== 'DISABLED'"
         [error]="formError.deposit || form.controls.deposit.errors"
         [formControl]="form.controls.deposit"
         [id]="'deposit'"

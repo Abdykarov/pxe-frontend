@@ -11,7 +11,6 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { depositPaymentType } from './personal-info-form.config';
-import { SubjectType } from 'src/common/graphql/models/supply.model';
 
 @Component({
     selector: 'pxe-personal-info-form',
@@ -21,7 +20,7 @@ import { SubjectType } from 'src/common/graphql/models/supply.model';
 export class PersonalInfoFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
 
     @Input()
-    public subjectType = SubjectType.SUBJECT_TYPE_BUSINESSMAN;
+    public isIndividual = false;
 
     public depositPaymentTypeId = depositPaymentType;
 
@@ -41,7 +40,18 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
                 this.setAddress2(val);
             });
 
+        this.setForm();
+    }
+
+    setForm = () => {
         this.setAddress2(false);
+        if (this.isIndividual) {
+            this.form.get('ico').disable();
+            this.form.get('dic').disable();
+        } else {
+            this.form.get('deposit').disable();
+            this.form.get('depositPaymentTypeId').disable();
+        }
     }
 
     ngOnChanges(changes: SimpleChanges) {

@@ -13,6 +13,16 @@ export const formFields: IForm = {
                 Validators.required,
             ],
         ],
+        ico: [
+            null,
+            [
+                Validators.required,
+            ],
+        ],
+        dic: [
+            null,
+            [],
+        ],
         address1: [
             null,
             [
