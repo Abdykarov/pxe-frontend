@@ -98,6 +98,17 @@
                         [id]="'email'"
                         label="E-mail"
                     ></lnd-form-field>
+                    <lnd-select
+                        label="Způsob placení záloh"
+                        [options]="depositPaymentTypeId"
+                        [parentForm]="form"
+                        [selectName]="'depositPaymentTypeId'">
+                    </lnd-select>
+                    <lnd-form-field
+                        [formControl]="form.controls.deposit"
+                        [id]="'deposit'"
+                        label="Výše záloh"
+                    ></lnd-form-field>
                     <div class="text-center">
                         <lnd-button
                             type="primary"

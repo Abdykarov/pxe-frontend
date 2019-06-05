@@ -10,6 +10,7 @@ import { PersonalInfoFormModule } from 'src/common/containers/form/forms/persona
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.module';
 import { RecapitulationPageComponent} from './page';
+import { SelectModule } from 'src/common/ui/forms/select/select.module';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { RecapitulationPageComponent} from './page';
         PersonalInfoFormModule,
         ProgressBarModule,
         ReactiveFormsModule,
+        SelectModule,
     ],
 })
 export class RecapitulationPageModule {}

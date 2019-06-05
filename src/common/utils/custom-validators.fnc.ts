@@ -98,14 +98,6 @@ export class CustomValidators {
         const pattern = /^[0-9]{9}$/i;
         const patternWithSpaces = /^[0-9]{3}[ ][0-9]{3}[ ][0-9]{3}$/i;
 
-        const isValidPhone = (value) => {
-            return (pattern.test(value) || patternWithSpaces.test(value)) && searchPrefixes(phonePrefixes, value);
-        };
-
-        const isValidMobile = (value) => {
-            return (pattern.test(value) || patternWithSpaces.test(value)) && searchPrefixes(mobilePrefixes, value);
-        };
-
         const searchPrefixes = (prefixes, value) => {
             value = value.replace(/ /g, '');
             let j = Number.MAX_VALUE;
@@ -116,6 +108,14 @@ export class CustomValidators {
                 }
             }
             return j < prefixes.length && value.substring(0, 2) !== '20';
+        };
+
+        const isValidPhone = (value) => {
+            return (pattern.test(value) || patternWithSpaces.test(value)) && searchPrefixes(phonePrefixes, value);
+        };
+
+        const isValidMobile = (value) => {
+            return (pattern.test(value) || patternWithSpaces.test(value)) && searchPrefixes(mobilePrefixes, value);
         };
 
         if (isValidMobile(phoneNumber) || isValidPhone(phoneNumber)) {
