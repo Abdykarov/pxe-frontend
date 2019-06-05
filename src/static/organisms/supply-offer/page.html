@@ -1,0 +1,285 @@
+<ng-template #columnTemplatePriceVT let-row="row">
+    <span [innerHtml]="row.priceVT | number:'1.0-2'"></span>
+</ng-template>
+<ng-template #columnTemplatePriceNT let-row="row">
+    <span [innerHtml]="row.priceNT | number:'1.0-2'"></span>
+</ng-template>
+<ng-template #columnTemplatePriceGas let-row="row">
+    <span [innerHtml]="row.priceGas | number:'1.0-2'"></span>
+</ng-template>
+<ng-template #columnTemplateValidFromTo let-row="row">
+    {{row.validFrom | date: 'dd.MM.yyyy'}} - {{row.validTo | date: 'dd.MM.yyyy'}}
+</ng-template>
+<ng-template #columnTemplateDeliveryFromTo let-row="row">
+    {{row.deliveryFrom | date: 'dd.MM.yyyy'}} - {{row.deliveryTo | date: 'dd.MM.yyyy'}}
+</ng-template>
+<ng-template #actionColumnTemplate let-row="row">
+    <span [innerHtml]="row.permanentPaymentPrice | number:'1.0-2'"></span>
+    <div *ngIf="table.openedRow !== row"
+         class="action-area-div">
+        <ng-template #tooltipEdit let-toggle="toggle">
+            <lnd-button
+                    icon="icon--edit"
+                    type="icon"
+                    variant="icon"
+                    (action)="toggle();action(table, row)"
+            ></lnd-button>
+        </ng-template>
+        <lnd-tooltip [actionTemplate]="tooltipEdit" direction="bottom">
+            Upravit
+        </lnd-tooltip>
+
+        <ng-template #tooltipNew let-toggle="toggle">
+            <lnd-button
+                    icon="icon--add-new"
+                    type="icon"
+                    variant="icon"
+                    (action)="toggle();action(table, row)"
+            ></lnd-button>
+        </ng-template>
+        <lnd-tooltip [actionTemplate]="tooltipNew" direction="bottom">
+            Nový
+        </lnd-tooltip>
+
+        <ng-template #tooltipDuplicate let-toggle="toggle">
+            <lnd-button
+                    icon="icon--copy"
+                    type="icon"
+                    variant="icon"
+                    (action)="toggle();action(table, row)"
+            ></lnd-button>
+        </ng-template>
+        <lnd-tooltip [actionTemplate]="tooltipDuplicate" direction="bottom">
+            Duplikovat
+        </lnd-tooltip>
+
+        <ng-template #tooltipDelete let-toggle="toggle">
+            <lnd-button
+                    icon="icon--delete"
+                    type="icon"
+                    variant="icon"
+                    (action)="toggle();action(table, row)"
+            ></lnd-button>
+        </ng-template>
+        <lnd-tooltip [actionTemplate]="tooltipDelete" direction="bottom">
+            Smazat
+        </lnd-tooltip>
+    </div>
+</ng-template>
+
+<ng-template #rowDetail let-row="row">
+    <div class="row">
+        <div class="col text-right">
+            <ng-template #tooltipNewDetail let-toggle="toggle">
+                <lnd-button
+                        icon="icon--add-new"
+                        type="icon"
+                        variant="icon"
+                        (action)="toggle();"
+                ></lnd-button>
+            </ng-template>
+            <lnd-tooltip [actionTemplate]="tooltipNewDetail" direction="bottom">
+                Nový
+            </lnd-tooltip>
+            <ng-template #tooltipDuplicateDetail let-toggle="toggle">
+                <lnd-button
+                        icon="icon--copy"
+                        type="icon"
+                        variant="icon"
+                        (action)="toggle();"
+                ></lnd-button>
+            </ng-template>
+            <lnd-tooltip [actionTemplate]="tooltipDuplicateDetail" direction="bottom">
+                Duplikovat
+            </lnd-tooltip>
+            <ng-template #tooltipDeleteDetail let-toggle="toggle">
+                <lnd-button
+                        icon="icon--delete"
+                        type="icon"
+                        variant="icon"
+                        (action)="toggle();"
+                ></lnd-button>
+            </ng-template>
+            <lnd-tooltip [actionTemplate]="tooltipDeleteDetail" direction="bottom">
+                Smazat
+            </lnd-tooltip>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4 col-xl-3">
+            <lnd-form-field
+                    [id]="'name'"
+                    label="Název produktu"
+            ></lnd-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4 col-xl-3">
+            <lnd-select
+                label="Typ osoby"
+                [options]="supplyOfferConfig.subjectTypeOptions"
+                [parentForm]="form"
+                [selectName]="'subjectTypeId'">
+            </lnd-select>
+        </div>
+        <div class="col-4 col-xl-3">
+            <lnd-select
+                label="Distribuční umístění"
+                [options]="newSupplyPointPageConfig.suppliersOptions"
+                [parentForm]="form"
+                [selectName]="'distributionLocation'">
+            </lnd-select>
+        </div>
+        <div class="col-4 col-xl-3">
+            <lnd-select
+                label="Distribuční sazba"
+                [options]="newSupplyPointPageConfig.distributionRateOptions"
+                [parentForm]="form"
+                [selectName]="'distributionRateId'">
+            </lnd-select>
+        </div>
+        <div class="col-4 col-xl-3">
+            <lnd-select
+                label="Jistič"
+                [options]="newSupplyPointPageConfig.circuitBreakerOptions"
+                [parentForm]="form"
+                [selectName]="'circuitBreakerId'">
+            </lnd-select>
+        </div>
+        <div class="col-4 col-xl-3">
+            <lnd-select
+                label="Délka dodávky"
+                [options]="supplyOfferConfig.deliveryLengthOptions"
+                [parentForm]="form"
+                [selectName]="'deliveryLength'">
+            </lnd-select>
+        </div>
+        <div class="col-4 col-xl-3">
+            <lnd-select
+                label="Spotřeba"
+                [options]="supplyOfferConfig.annualConsumptionOptions"
+                [parentForm]="form"
+                [selectName]="'annualConsumptionId'">
+            </lnd-select>
+        </div>
+        <div class="col-4 col-xl-3">
+            <lnd-form-field
+                [id]="'priceNT'"
+                label="Cena NT"
+                appendText="kWh/Kč"
+            ></lnd-form-field>
+        </div>
+        <div class="col-4 col-xl-3">
+            <lnd-form-field
+                [id]="'priceVT'"
+                label="Cena VT"
+                appendText="kWh/Kč"
+            ></lnd-form-field>
+        </div>
+        <div class="col-4 col-xl-3">
+            <lnd-form-field
+                [id]="'priceGAS'"
+                label="Cena GAS"
+                appendText="kWh/Kč"
+            ></lnd-form-field>
+        </div>
+        <div class="col-4 col-xl-3">
+            <lnd-datepicker-range
+                [datepickerName]="'validFromTo'"
+                id="validFromTo"
+                label="Platnost"
+                [parentForm]="form"
+            ></lnd-datepicker-range>
+        </div>
+        <div class="col-4 col-xl-3">
+            <lnd-datepicker-range
+                [datepickerName]="'deliveryFromTo'"
+                id="deliveryFromTo"
+                label="Dodávkové období"
+                [parentForm]="form"
+            ></lnd-datepicker-range>
+        </div>
+        <div class="col-4 col-xl-3">
+            <lnd-form-field
+                [id]="'permanentPaymentPrice'"
+                label="Stálá platba - cena"
+                appendText="Kč"
+            ></lnd-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4 col-xl-3">
+            <lnd-form-field
+                [id]="'benefits1'"
+                label="Benefit 1"
+            ></lnd-form-field>
+        </div>
+        <div class="col-4 col-xl-3">
+            <lnd-form-field
+                [id]="'benefits2'"
+                label="Benefit 2"
+            ></lnd-form-field>
+        </div>
+        <div class="col-4 col-xl-3">
+            <lnd-form-field
+                [id]="'benefits3'"
+                label="Benefit 3"
+            ></lnd-form-field>
+        </div>
+        <div class="col-4 col-xl-3">
+            <lnd-form-field
+                [id]="'benefits4'"
+                label="Benefit 4"
+            ></lnd-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-right">
+            <lnd-button
+                    type="link"
+                    label="Storno"
+                    customClass="mr-5"
+                    (action)="table.openRow(row)"
+            ></lnd-button>
+            <lnd-button
+                    type="primary"
+                    label="Uložit"
+                    (action)="table.openRow(row)"
+            ></lnd-button>
+        </div>
+    </div>
+</ng-template>
+
+<div class="row static-pages-holder">
+    <div class="col">
+        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+    </div>
+</div>
+
+<div class="static-pages-holder">
+    <div class="static-pages static-pages--bg-transparent">
+
+        <div>
+            <lnd-table
+                #table
+                [cols]="supplyOfferConfig.tableCols[commodityType]"
+                [rows]="supplyOfferConfig.tableRows"
+                [showHead]="true"
+                [isStatic]="false"
+                [tableWrapperClass]="['table-wrapper--advanced']"
+                [tableClass]="['table--advanced', 'mb-0']"
+                [rowDetailTemplate]="rowDetail"
+                [actionColTriggersDetail]="true"
+                [columnTemplates]="{
+                    actionColumnTemplate: actionColumnTemplate,
+                    columnTemplatePriceVT: columnTemplatePriceVT,
+                    columnTemplatePriceNT: columnTemplatePriceNT,
+                    columnTemplatePriceGas: columnTemplatePriceGas,
+                    columnTemplateValidFromTo: columnTemplateValidFromTo,
+                    columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo
+                }">
+            ></lnd-table>
+        </div>
+
+    </div>
+</div>

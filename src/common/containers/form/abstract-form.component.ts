@@ -7,6 +7,7 @@ import {
     SimpleChanges,
 } from '@angular/core';
 import {
+    FormArray,
     FormBuilder,
     FormGroup,
 } from '@angular/forms';
@@ -54,6 +55,7 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         super.ngOnInit();
         this.form = this.fb.group(this.formFields.controls);
     }
+
     ngOnChanges(changes: SimpleChanges) {
         if (changes.fieldError) {
             this.formError = R.clone(changes.fieldError.currentValue);
@@ -70,22 +72,24 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         }
     }
 
-    public resetFormError = () => {
+    public resetFormError = (clearError = true) => {
         this.resetCustomFieldError();
         R.pipe(
             R.keys,
             R.map((field) => {
-                this.resetFieldError(field);
+                this.resetFieldError(field, clearError);
             }),
         )(this.form.controls);
     }
 
-    public resetFieldError = (field) => {
+    public resetFieldError = (field, clearError) => {
         const fieldControl = this.form.get(field);
         fieldControl.markAsUntouched({
             onlySelf: true,
         });
-        fieldControl.setErrors(null);
+        if (clearError) {
+            fieldControl.setErrors(null);
+        }
     }
 
     public triggerValidation = () => {
@@ -101,9 +105,9 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         )(this.form.controls);
     }
 
-    public resetFieldValue = (field) => {
-        this.form.get(field).setValue(null);
-        this.resetFieldError(field);
+    public resetFieldValue = (field, clearError = true) => {
+        this.form.get(field).patchValue(null);
+        this.resetFieldError(field, clearError);
     }
 
     public resetCustomFieldError = () => {
@@ -112,5 +116,11 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
                 delete this.formError[field];
             }
         })(this.formFields.controls);
+    }
+
+    public clearFormArray = (formArray: FormArray) => {
+        while (formArray.length !== 0) {
+            formArray.removeAt(0);
+        }
     }
 }

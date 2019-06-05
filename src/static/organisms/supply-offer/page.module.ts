@@ -1,17 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Routes } from '@angular/router';
 
-import { AlertModule } from 'src/common/ui/alert/alert.module';
+import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
-import { DatepickerModule } from 'src/common/ui/forms/datepicker/datepicker.module';
+import { DatepickerRangeModule } from 'src/common/ui/forms/datepicker-range/datepicker-range.module';
 import { DropdownModule } from 'src/common/ui/dropdown/dropdown.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
-import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 import { SelectModule } from 'src/common/ui/forms/select/select.module';
-import { SupplyOfferComponent } from './supply-offer.component';
-import { SupplyOfferFormModule } from 'src/common/containers/form/forms/supply-offer/supply-offer-form.module';
-import { SupplyOfferRoutingModule } from './supply-offer-routing.module';
+import { SupplyOfferComponent } from './page';
 import { TableModule } from 'src/common/ui/table/table.module';
 import { TooltipModule } from 'src/common/ui/tooltip/tooltip.module';
 
@@ -19,20 +17,27 @@ import { TooltipModule } from 'src/common/ui/tooltip/tooltip.module';
     declarations: [
         SupplyOfferComponent,
     ],
+    exports: [
+        SupplyOfferComponent,
+    ],
     imports: [
-        AlertModule,
+        BreadcrumbModule,
         ButtonModule,
         CommonModule,
-        DatepickerModule,
+        DatepickerRangeModule,
         DropdownModule,
         FormModule,
-        LayoutContainerModule,
         ReactiveFormsModule,
         SelectModule,
-        SupplyOfferFormModule,
-        SupplyOfferRoutingModule,
         TableModule,
         TooltipModule,
     ],
 })
-export class SupplyOfferModule { }
+export class SupplyOfferPageModule {}
+
+export const supplyOfferPageRoutes: Routes = [
+    {
+        path: 'supply-offer',
+        component: SupplyOfferComponent,
+    },
+];

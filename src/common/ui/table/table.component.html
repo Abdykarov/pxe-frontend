@@ -34,7 +34,8 @@
             <tr
                 [class.table__tr--main]="isAdvanced"
                 [class.table__tr--active]="isAdvanced && openedRow === row"
-                (click)="openRow(row); selectRow(row)">
+                (click)="!actionColTriggersDetail && openRow(row); !actionColTriggersDetail && selectRow(row)"
+            >
                 <ng-container *ngFor="let column of cols">
                     <ng-container *ngFor="let view of column.views">
                         <td
@@ -85,9 +86,14 @@
                     </td>
                 </tr>
             </ng-container>
+            <tr *ngIf="actionColTemplate">
+                <td colspan="2">
+                    <ng-container *ngTemplateOutlet="actionColTemplate; context: {row: row}"></ng-container>
+                </td>
+            </tr>
             <tr *ngIf="rowDetailTemplate">
                 <td
-                    *ngIf="openedRow !== row"
+                    *ngIf="openedRow !== row && !actionColTriggersDetail"
                     colspan="2"
                     class="w-100 px-0 text-center">
                     <lnd-button
