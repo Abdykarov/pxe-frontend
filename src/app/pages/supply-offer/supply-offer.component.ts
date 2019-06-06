@@ -114,20 +114,22 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
             .pipe(
                 takeUntil(this.destroy$),
             )
-            .subscribe(([codeLists, offers, commodityType]) => {
-                if (codeLists && offers) {
-                    this.tableRows = offers;
-                    this.tableCols = this.supplyOfferConfig.tableCols(codeLists)[commodityType];
-                    this.loadingOffers = false;
+            .subscribe(
+                ([codeLists, offers, commodityType]) => {
+                    if (codeLists && offers) {
+                        this.tableRows = offers;
+                        this.tableCols = this.supplyOfferConfig.tableCols(codeLists)[commodityType];
+                        this.loadingOffers = false;
+                        this.deleteDisabled = [];
+                        this.cd.markForCheck();
+                    }
+                },
+                error => {
                     this.deleteDisabled = [];
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
                     this.cd.markForCheck();
-                }
-            }, error => {
-                this.deleteDisabled = [];
-                const { globalError } = parseGraphQLErrors(error);
-                this.globalError = globalError;
-                this.cd.markForCheck();
-            });
+                });
     }
 
     public edit = (table, row) => {

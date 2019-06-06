@@ -2,9 +2,14 @@
 import { Injectable } from '@angular/core';
 
 import * as R from 'ramda';
-import { NewSupplyPointPageConfig } from 'src/static/pages/new-supply-point/config';
+
+import {
+    ANNUAL_CONSUMPTION_OPTIONS,
+    DELIVERY_LENGTH_OPTIONS,
+    SUBJECT_TYPE_OPTIONS,
+} from 'src/app/app.constants';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
-import { ANNUAL_CONSUMPTION_OPTIONS, CODE_LIST, DELIVERY_LENGTH_OPTIONS, SUBJECT_TYPE_OPTIONS } from 'src/app/app.constants';
+import { NewSupplyPointPageConfig } from 'src/static/pages/new-supply-point/config';
 
 @Injectable({
     providedIn: 'root',
