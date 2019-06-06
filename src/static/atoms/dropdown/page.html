@@ -71,8 +71,7 @@
                 <a *ngFor="let item of navigationItems"
                     [ngClass]="item.class"
                     class="dropdown-item"
-                    (click)="$event.preventDefault()"
-                    href="{{item.url}}">
+                    [routerLink]="item.url">
                     <span [ngClass]="'dropdown-item-icon icon icon--' + item.icon"></span>
                     {{ item.label }}
                 </a>
