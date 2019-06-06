@@ -56,6 +56,13 @@ export const errorFieldMessages =  {
     depositPaymentType: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
     },
+    dic: {
+        dicPrefix: 'dicPrefix',
+        dicDecimal: 'dicDecimal',
+        dicLength: 'dicLength',
+        minLength: 'minLength',
+        maxLength: 'maxLength',
+    },
     distributionRateId: {
         required: 'Vyberte ze seznamu, jakou máte distribuční sazbu.',
     },
@@ -82,6 +89,13 @@ export const errorFieldMessages =  {
     },
     fullName: {
         required: 'Vyplňte jméno.',
+    },
+    ico: {
+        required: 'required',
+        ico: 'ico',
+        icoLength: 'icoLength',
+        minLength: 'minLength',
+        maxLength: 'maxLength',
     },
     name: {
         required: 'Vyplňte libovolný název odběrného místa (např. Byt dcera) v maximální délce 50 znaků.',

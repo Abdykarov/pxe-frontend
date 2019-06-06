@@ -1,4 +1,8 @@
 export const verifyIC = (icArray: number[]): boolean => {
+    if (icArray.length === 0) {
+        return null;
+    }
+
     let sum = 0;
 
     for (let i = 0; i < 7; i++) {

@@ -17,11 +17,18 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
+                Validators.minLength(8),
+                Validators.maxLength(8),
+                CustomValidators.ico,
             ],
         ],
         dic: [
             null,
-            [],
+            [
+                Validators.minLength(8),
+                Validators.maxLength(10),
+                CustomValidators.dic,
+            ],
         ],
         address1: [
             null,
@@ -90,11 +97,22 @@ export const formFields: IForm = {
         ],
     },
     validationMessages: {
-        deposit: {
-            required: errorFieldMessages.deposit.required,
-        },
         name: {
             required: errorFieldMessages.fullName.required,
+        },
+        ico: {
+            required: errorFieldMessages.ico.required,
+            ico: errorFieldMessages.ico.ico,
+            icoLength: errorFieldMessages.ico.icoLength,
+            minlength: errorFieldMessages.ico.minLength,
+            maxlength: errorFieldMessages.ico.maxLength,
+        },
+        dic: {
+            dicPrefix: errorFieldMessages.dic.dicPrefix,
+            dicDecimal: errorFieldMessages.dic.dicDecimal,
+            dicLength: errorFieldMessages.dic.dicLength,
+            minlength: errorFieldMessages.ico.minLength,
+            maxlength: errorFieldMessages.ico.maxLength,
         },
         address1: {
             required: errorFieldMessages.address.required,
@@ -111,9 +129,6 @@ export const formFields: IForm = {
             required: errorFieldMessages.bankCode.required,
             invalidAcountNumberPrefix: errorFieldMessages.bankCode.invalidAcountNumberPrefix,
         },
-        depositPaymentType: {
-            required: errorFieldMessages.depositPaymentType.required,
-        },
         phone: {
             required: errorFieldMessages.phone.required,
             invalidTelephone: errorFieldMessages.phone.invalidTelephone,
@@ -126,6 +141,12 @@ export const formFields: IForm = {
             required: errorFieldMessages.email.required,
             email: errorFieldMessages.email.email,
             invalidEmail: errorFieldMessages.email.invalidEmail,
+        },
+        depositPaymentType: {
+            required: errorFieldMessages.depositPaymentType.required,
+        },
+        deposit: {
+            required: errorFieldMessages.deposit.required,
         },
     },
 };
