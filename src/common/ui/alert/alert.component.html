@@ -3,13 +3,12 @@
     [ngClass]="[
         type ? 'alert-' + type : '',
         isDismissible ? 'alert-dismissible' : '',
-        hasIcon && (type !== 'info') ? 'alert--with-icon' : '',
+        hasIcon ? 'alert--with-icon' : '',
         customClass ? customClass : ''
     ]">
     <span
-        *ngIf="hasIcon && (type !== 'info')"
-        class="alert__common-icon icon"
-        [ngClass]="icon">
+        *ngIf="hasIcon"
+        class="alert__common-icon icon icon--check">
     </span>
     <ng-content></ng-content>
     <button
