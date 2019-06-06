@@ -1,6 +1,6 @@
 import * as R_ from 'ramda-extension';
 
-import { isNormalInteger } from './is-normal-integer.fnc';
+import { isPossibleIntegerFnc } from './is-possible-integer.fnc';
 
 export const accountNumberPrefixFnc = (value): boolean => {
     const AnPrefixKfc: number[] = [10, 5, 8, 4, 2, 1];
@@ -46,7 +46,7 @@ export const acountNumberPrefixValidator = (value) => {
         return false;
     }
 
-    if (!isNormalInteger(value)) {
+    if (!isPossibleIntegerFnc(value)) {
         return false;
     }
 

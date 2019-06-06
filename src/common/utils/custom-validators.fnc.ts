@@ -8,8 +8,13 @@ import * as R_ from 'ramda-extension';
 
 import { acountNumberValidator } from './account-number.fnc';
 import { acountNumberPrefixValidator } from './account-number-prefix.fnc';
+import {
+    DICError,
+    verifyDIC,
+} from './dic-validator.fnc';
 import { EanValidator } from './ean-validator.fnc';
 import { EicValidator } from './eic-validator.fnc';
+import { verifyIC } from './ico-validator.fnc';
 
 export class CustomValidators {
 
@@ -189,6 +194,40 @@ export class CustomValidators {
         return {
             ean: true,
         };
+    }
+
+    static ico = (ico): {} => {
+        if (ico.pristine) {
+            return null;
+        }
+
+        if (verifyIC(ico.value)) {
+            return null;
+        }
+
+        return {
+            ico: true,
+        };
+
+    }
+
+    static dic = (dic): {} => {
+        if (dic.pristine) {
+            return null;
+        }
+
+        switch (verifyDIC(dic.value)) {
+            case DICError.NONE:
+                return null;
+            case DICError.PREFIX:
+                return {
+                    dicPrefix: true,
+                };
+            case DICError.DECIMAL:
+                return {
+                    dicDecimal: true,
+                };
+        }
     }
 
     static eic = (eic) => {

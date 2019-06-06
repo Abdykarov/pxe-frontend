@@ -1,6 +1,6 @@
 import * as R_ from 'ramda-extension';
 
-import { isNormalInteger } from './is-normal-integer.fnc';
+import { isPossibleIntegerFnc } from './is-possible-integer.fnc';
 
 export const accountNumber = (value): boolean => {
     const An: string = String(value);
@@ -45,7 +45,7 @@ export const acountNumberValidator = (value) => {
         return false;
     }
 
-    if (!isNormalInteger(value)) {
+    if (!isPossibleIntegerFnc(value)) {
         return false;
     }
 
