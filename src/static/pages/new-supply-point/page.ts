@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {
     FormControl,
-    FormGroup, Validators,
+    FormGroup,
 } from '@angular/forms';
 
 import { NewSupplyPointPageConfig } from './config';

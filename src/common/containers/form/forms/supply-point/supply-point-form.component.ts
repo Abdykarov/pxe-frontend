@@ -30,7 +30,8 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 import {
     CODE_LIST,
     CODE_LIST_TYPES,
-    COMMODITY_TYPE_OPTIONS, CONTRACT_END_TYPE,
+    COMMODITY_TYPE_OPTIONS,
+    CONTRACT_END_TYPE,
     DISTRIBUTION_RATES_TYPE_DEFINITION,
     SUBJECT_TYPE_OPTIONS,
     SUBJECT_TYPE_TO_DIST_RATE_MAP,
