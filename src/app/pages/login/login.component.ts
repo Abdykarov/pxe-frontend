@@ -52,7 +52,7 @@ export class LoginComponent extends AbstractComponent {
                         this.loginSmsRequired = true;
                         this.cd.markForCheck();
                     } else {
-                         this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER_POWER]);
+                         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
                     }
                 },
                 error => {
@@ -71,7 +71,7 @@ export class LoginComponent extends AbstractComponent {
             .subscribe(
                 () => {
                     this.resetErrorsAndLoading();
-                    this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER]);
+                    this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER_POWER]);
                 },
                 error => {
                     this.handleError(error);
