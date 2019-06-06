@@ -121,8 +121,6 @@
 	margin-top: 0;
 	border: none;
 	overflow: hidden;
-	border-radius: 4px;
-	box-shadow: $box-shadow;
 	z-index: $zindex-dropdown-menu;
 
 	&--open {
@@ -146,13 +144,14 @@
 			cursor: pointer;
 			@include smart-short-text;
 			text-decoration: none;
+			outline: none;
 		}
 
 		&:focus,
 		&:hover,
 		&:active {
-			background-color: rgba($font-text, .1);
-			color: $dropdown-link-color;
+			background-color: $dropdown-link-hover-bg;
+			color: $dropdown-link-hover-color;
 			text-decoration: none;
 		}
 

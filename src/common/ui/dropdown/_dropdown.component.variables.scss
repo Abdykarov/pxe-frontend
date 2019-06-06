@@ -1,9 +1,21 @@
 /*
- -  Tabs variables
+ -  Dropdowns variables
  -
  -
  */
 
+
+$dropdown-padding-y:                     0;
+$dropdown-border-radius:                 $border-radius;
+$dropdown-box-shadow:                    $box-shadow;
 $dropdown-item-padding-y:                $spacer;
 $dropdown-item-padding-x:                $spacer;
 $dropdown-link-color:                    $font-text;
+$dropdown-link-hover-color:              $dropdown-link-color;
+$dropdown-link-hover-bg:                 rgba($font-text, .1);
+
+$dropdown-beak-border-width:             15px;
+$dropdown-beak-border-style:             solid;
+$dropdown-beak-border-color:             $white;
+$dropdown-beak-box-shadow:               none;
+$dropdown-menu-offset:                  ( $dropdown-beak-border-width - 3px );
