@@ -1,11 +1,13 @@
 <ng-template #columnTemplatePriceVT let-row="row">
-    <span [innerHtml]="row.priceVT | number:'1.0-2'"></span>
+    {{row.priceVT | number:'1.0-2'}}&nbsp;MWh/Kč
 </ng-template>
 <ng-template #columnTemplatePriceNT let-row="row">
-    <span [innerHtml]="row.priceNT | number:'1.0-2'"></span>
+    <ng-container *ngIf="row.priceNT !== null">
+        {{row.priceNT | number:'1.0-2'}}&nbsp;MWh/Kč
+    </ng-container>
 </ng-template>
 <ng-template #columnTemplatePriceGas let-row="row">
-    <span [innerHtml]="row.priceGas | number:'1.0-2'"></span>
+    {{row.priceGas | number:'1.0-2'}}&nbsp;MWh/Kč
 </ng-template>
 <ng-template #columnTemplateValidFromTo let-row="row">
     {{row.validFrom | date: 'dd.MM.yyyy'}} - {{row.validTo | date: 'dd.MM.yyyy'}}
@@ -14,7 +16,7 @@
     {{row.deliveryFrom | date: 'dd.MM.yyyy'}} - {{row.deliveryTo | date: 'dd.MM.yyyy'}}
 </ng-template>
 <ng-template #actionColumnTemplate let-row="row">
-    <span [innerHtml]="row.permanentPaymentPrice | number:'1.0-2'"></span>
+    <span>{{row.permanentPaymentPrice | number:'1.0-2'}}&nbsp;Kč</span>
     <div *ngIf="table.openedRow !== row"
          class="action-area-div">
         <ng-template #tooltipEdit let-toggle="toggle">
