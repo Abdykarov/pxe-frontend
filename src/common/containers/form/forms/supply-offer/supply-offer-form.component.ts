@@ -1,10 +1,12 @@
 import {
     AfterViewInit,
     ChangeDetectorRef,
-    Component, EventEmitter,
+    Component,
+    EventEmitter,
     Input,
     OnChanges,
-    OnInit, Output,
+    OnInit,
+    Output,
     SimpleChanges,
 } from '@angular/core';
 import {
