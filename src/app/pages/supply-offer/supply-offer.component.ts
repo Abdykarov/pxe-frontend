@@ -11,6 +11,7 @@ import {
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import {
+    filter,
     map,
     takeUntil,
 } from 'rxjs/operators';
@@ -31,6 +32,9 @@ import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyOfferConfig } from './supply-offer.config';
 
+import { ModalService } from '../../../common/containers/modal/modal.service';
+import { ICloseModalData } from '../../../common/containers/modal/modals/model/modal.model';
+
 @Component({
     selector: 'pxe-supply-offer',
     templateUrl: './supply-offer.component.html',
@@ -40,6 +44,8 @@ import { SupplyOfferConfig } from './supply-offer.config';
 })
 export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public commodityType = CommodityType.POWER;
+    public currentOfferFormValues = {};
+    public deleteDisabled: boolean[] = [];
     public fieldError: IFieldError = {};
     public formFields = formFields;
     public formLoading = false;
@@ -50,11 +56,11 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public tableRows = [];
     public routePower = ROUTES.ROUTER_SUPPLY_OFFER_POWER;
     public routeGas = ROUTES.ROUTER_SUPPLY_OFFER_GAS;
-    public deleteDisabled: boolean[] = [];
 
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
+        private modalsService: ModalService,
         private offerService: OfferService,
         private route: ActivatedRoute,
         private router: Router,
@@ -77,6 +83,51 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                 }
                 this.commodityType = supplyOfferCommodityTypes[params.commodityType];
                 this.loadOffers();
+            });
+
+        this.modalsService.closeModalData$
+            .pipe(
+                takeUntil(
+                    this.destroy$,
+                ),
+                filter(R_.isNotNil),
+                filter((modal: ICloseModalData) =>
+                    modal.confirmed &&
+                    modal.modalType === this.supplyOfferConfig.confirmDeleteOffer,
+                ),
+            )
+            .subscribe(value => {
+                this.deleteDisabled[value.data.row.id] = true;
+                this.offerService.deleteOffer(value.data.row.id)
+                    .pipe(
+                        takeUntil(this.destroy$),
+                    )
+                    .subscribe(
+                        () => {
+                            this.deleteDisabled = [];
+                        },
+                        (error) => {
+                            this.deleteDisabled = [];
+                            const { globalError } = parseGraphQLErrors(error);
+                            this.globalError = globalError;
+                            this.cd.markForCheck();
+                        },
+                    );
+            });
+
+        this.modalsService.closeModalData$
+            .pipe(
+                takeUntil(
+                    this.destroy$,
+                ),
+                filter(R_.isNotNil),
+                filter((modal: ICloseModalData) =>
+                    modal.confirmed &&
+                    modal.modalType === this.supplyOfferConfig.confirmCancelOffer,
+                ),
+            )
+            .subscribe(value => {
+                this.toggleRow(value.data.table, value.data.row);
             });
     }
 
@@ -106,27 +157,18 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         }
     }
 
-    public delete = (table, row, id = undefined) => {
-        if (R_.isNilOrEmptyString(id)) {
-            this.toggleRow(table, row);
+    public delete = (table, row, currentOfferFormValues = row) => {
+        if (R_.isNilOrEmptyString(currentOfferFormValues.id)) {
+            this.modalsService
+                .showModal$.next(this.supplyOfferConfig.confirmCancelOfferConfig({table, row, currentOfferFormValues}));
         } else {
-            this.deleteDisabled[id] = true;
-            this.offerService.deleteOffer(row.id)
-                .pipe(
-                    takeUntil(this.destroy$),
-                )
-                .subscribe(
-                    () => {
-                        this.deleteDisabled = [];
-                    },
-                    (error) => {
-                        this.deleteDisabled = [];
-                        const { globalError } = parseGraphQLErrors(error);
-                        this.globalError = globalError;
-                        this.cd.markForCheck();
-                    },
-                );
+            this.modalsService
+                .showModal$.next(this.supplyOfferConfig.confirmDeleteOfferConfig({table, row, currentOfferFormValues}));
         }
+    }
+
+    public getCurrentFormValues = (values) => {
+        this.currentOfferFormValues = values;
     }
 
     public loadOffers = () => {

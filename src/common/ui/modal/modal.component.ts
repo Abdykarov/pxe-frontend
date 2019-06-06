@@ -21,6 +21,9 @@ export class ModalComponent {
     public isModalOpen: boolean;
 
     @Input()
+    public showClose = true;
+
+    @Input()
     public title?: string;
 
     @Input()

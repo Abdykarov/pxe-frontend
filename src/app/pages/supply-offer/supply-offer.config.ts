@@ -8,11 +8,16 @@ import {
     SUBJECT_TYPE_OPTIONS,
 } from 'src/app/app.constants';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
+import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
 
 @Injectable({
     providedIn: 'root',
 })
 export class SupplyOfferConfig {
+
+    public confirmDeleteOffer = 'confirmDeleteOffer';
+    public confirmCancelOffer = 'confirmCancelOffer';
+
     public tableCols = {
         POWER: [
             {
@@ -207,4 +212,26 @@ export class SupplyOfferConfig {
         power: CommodityType.POWER,
         gas: CommodityType.GAS,
     };
+
+    public confirmDeleteOfferConfig = (data): IShowModal => ({
+        component: 'ConfirmModalComponent',
+        modalType: this.confirmDeleteOffer,
+        instanceData: {
+            confirmText: `Opravdu chcete smazat nabídku <strong>${data.currentOfferFormValues.name}</strong>?`,
+            data,
+        },
+    })
+
+    public confirmCancelOfferConfig = (data): IShowModal => {
+        const name = data.currentOfferFormValues.name ? data.currentOfferFormValues.name : '';
+        const space = name ? ' ' : '';
+        return {
+            component: 'ConfirmModalComponent',
+                modalType: this.confirmCancelOffer,
+                instanceData: {
+                confirmText: `Opravdu chcete zrušit vytváření nabídky<strong>${space}${name}</strong>?`,
+                    data,
+            },
+        };
+    }
 }
