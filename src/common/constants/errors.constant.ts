@@ -30,8 +30,9 @@ export const errorFieldMessages =  {
     commodityType: {
         required: 'Zvolte komoditu.',
     },
-    subjectTypeId: {
-        required: 'Zvolte odběratele.',
+    confirmationCode: {
+        required: 'Zadejte kód.',
+        badCode: 'Zadali jste neplatný kód.', // je treba syncs s grafikou!!!
     },
     consent: {
         signUp: {
@@ -117,14 +118,27 @@ export const errorFieldMessages =  {
     offerName: {
         required: 'Vyplňte libovolný název nabídky.',
     },
+    phasesId: {
+        required: 'Vyplňte fázy.',
+    },
     password: {
         required: 'Zadejte heslo.',
+    },
+    subjectTypeId: {
+        required: 'Zvolte odběratele.',
     },
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
     },
-    confirmationCode: {
-        required: 'Zadejte kód.',
-        badCode: 'Zadali jste neplatný kód.', // je treba syncs s grafikou!!!
+    contractEndTypeId: {
+        required: 'contractEndTypeId',
+    },
+    timeToContractEnd: {
+        required: 'timeToContractEnd1',
+        max: 'max2',
+        isPossibleInteger: 'isPossibleInteger3',
+    },
+    timeToContractEndPeriodId: {
+        required: 'timeToContractEndPeriodId',
     },
 };
