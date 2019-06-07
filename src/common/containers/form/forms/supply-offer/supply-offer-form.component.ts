@@ -2,14 +2,17 @@ import {
     AfterViewInit,
     ChangeDetectorRef,
     Component,
+    EventEmitter,
     Input,
     OnChanges,
     OnInit,
+    Output,
     SimpleChanges,
 } from '@angular/core';
 import {
     FormArray,
-    FormBuilder, FormGroup,
+    FormBuilder,
+    FormGroup,
 } from '@angular/forms';
 
 import * as R from 'ramda';
@@ -33,7 +36,6 @@ import {
     DistributionType,
 } from 'src/common/graphql/models/supply.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
-import { ModalLoaderService } from 'src/common/containers/modal/modal-loader.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { transformCodeList } from 'src/common/utils';
 
@@ -54,6 +56,9 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
     @Input()
     public formValues = null;
 
+    @Output()
+    public currentFormValues: EventEmitter<any> = new EventEmitter<any>();
+
     public codeLists;
     public COMMODITY_TYPE_POWER = CommodityType.POWER;
     public deliveryLengthOptions: Array<IOption> = DELIVERY_LENGTH_OPTIONS;
@@ -71,7 +76,6 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
     constructor(
         private cd: ChangeDetectorRef,
         protected fb: FormBuilder,
-        private modalsLoaderService: ModalLoaderService,
         private supplyService: SupplyService,
     ) {
         super(fb);
@@ -86,9 +90,19 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
         }, SupplyOfferFormComponent.benefitCount);
         this.form.controls['commodityType'].setValue(this.commodityType);
 
+        this.form.valueChanges
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(values => {
+                this.currentFormValues.emit(values);
+            });
+
         this.form.get('subjectTypeId')
             .valueChanges
-            .pipe(takeUntil(this.destroy$))
+            .pipe(
+                takeUntil(this.destroy$),
+            )
             .subscribe((val: string) => {
                 this.resetFieldValue('distributionRateId', false);
                 this.distributionRateType = SUBJECT_TYPE_TO_DIST_RATE_MAP[val];
@@ -97,7 +111,9 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
 
         this.form.get('distributionRateId')
             .valueChanges
-            .pipe(takeUntil(this.destroy$))
+            .pipe(
+                takeUntil(this.destroy$),
+            )
             .subscribe(val => {
                 this.setPriceNTState(val);
             });
@@ -105,6 +121,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
         this.setFormByCommodity(this.commodityType);
         this.loadCodeLists();
         this.setPriceNTState();
+        this.currentFormValues.emit(this.form.value);
     }
 
     ngAfterViewInit(): void {

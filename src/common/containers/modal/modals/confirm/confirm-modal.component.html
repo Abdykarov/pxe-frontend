@@ -1,0 +1,20 @@
+<lnd-modal
+    [isModalOpen]="modalOpen"
+    [showClose]="showClose"
+    (close)="closeModal.emit(false)">
+    <div class="modal-body" [innerHTML]="instanceData?.confirmText"></div>
+    <div class="modal-footer">
+        <lnd-button
+                *ngIf="showClose"
+                type="link"
+                [label]="titleClose"
+                (action)="closeModal.emit(false)">
+        </lnd-button>
+        <lnd-button
+                *ngIf="showConfirm"
+                type="primary"
+                [label]="'Pokračovat'"
+                (action)="closeModal.emit(true)">
+        </lnd-button>
+    </div>
+</lnd-modal>
