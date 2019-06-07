@@ -171,11 +171,11 @@
     <lnd-form-field
         *ngIf="form.controls.annualConsumption.status !== 'DISABLED'"
         [appendButtonIcon]="helpDocuments && helpDocuments['annualConsumption'] ? 'icon--info' : null"
-        (appendButtonAction)="showHelp('annualConsumption', 'Roční spotřeba plynu')"
+        (appendButtonAction)="showHelp('annualConsumption', 'Roční spotřeba')"
         [error]="formError.annualConsumption || form.controls.annualConsumption.errors"
         [formControl]="form.controls.annualConsumption"
         [id]="'annualConsumption'"
-        label="Roční spotřeba plynu"
+        label="Roční spotřeba"
         appendText="MWh"
         [success]="form.controls.annualConsumption.valid && (form.controls.annualConsumption.touched || formError.annualConsumption)"
         [touched]="form.controls.annualConsumption.touched || formError.annualConsumption"
