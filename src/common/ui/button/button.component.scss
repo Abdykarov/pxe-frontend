@@ -183,6 +183,11 @@
 				color: $primary;
 			}
 		}
+
+		.btn__icon {
+			flex-direction: column;
+			width: auto;
+		}
 	}
 
 	&.btn-outline-primary,
@@ -293,7 +298,6 @@
 		height: 100%;
 		display: flex;
 		justify-content: center;
-		// flex-direction: column;
 
 		& + .btn__text {
 			text-align: left;
@@ -343,8 +347,10 @@
 		&:focus,
 		&.focus,
 		&:hover,
-		&:active {
+		&:active,
+		&:not(:disabled):not(.disabled):active:focus {
 			color: $icons-hover;
+			box-shadow: none;
 		}
 	}
 }
