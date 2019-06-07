@@ -9,6 +9,7 @@ export class ModalsPageComponent {
     public isLargeModalOpen: boolean;
     public isModalWithLogoOpen: boolean;
     public isNormalModalOpen: boolean;
+    public isConfirmModalOpen: boolean;
     public breadcrumbItemsSimple: IBreadcrumbItems;
     private body = document.getElementById('top');
 
@@ -26,6 +27,12 @@ export class ModalsPageComponent {
 
     public toggleNormalModal = () => {
         this.isNormalModalOpen = !this.isNormalModalOpen;
+        this.body.classList.toggle('body-inner--overlay');
+        this.body.classList.toggle('body-inner--overlay-full');
+    }
+
+    public toggleConfirmModal = () => {
+        this.isConfirmModalOpen = !this.isConfirmModalOpen;
         this.body.classList.toggle('body-inner--overlay');
         this.body.classList.toggle('body-inner--overlay-full');
     }

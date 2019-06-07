@@ -103,3 +103,35 @@
 		z-index: $zindex-modal;
 	}
 }
+
+.modal--confirm {
+	.modal__icon {
+		display: block;
+		margin-bottom: $spacer;
+		color: $icons-primary;
+		font-size: 48px;
+	}
+
+	.modal-confirm-title {
+		font-size: 1.5rem;
+	}
+
+	.modal-body {
+		text-align: center;
+	}
+
+	.modal-footer {
+		flex-direction: column;
+		justify-content: center;
+		margin-bottom: $spacer;
+
+		> :not(:last-child) {
+			margin-bottom: ( $spacer / 2 );
+			margin-right: 0;
+		}
+
+		> :not(:first-child) {
+			margin-left: 0;
+		}
+	}
+}
