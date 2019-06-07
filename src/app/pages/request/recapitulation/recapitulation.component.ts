@@ -2,6 +2,7 @@ import {
     ChangeDetectorRef,
     Component,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { takeUntil } from 'rxjs/operators';
 
@@ -14,7 +15,6 @@ import { IPersonalDataInput, IPersonalDataInputForm } from 'src/common/graphql/m
 import { parseGraphQLErrors } from 'src/common/utils';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
 import { ROUTES } from 'src/app/app.constants';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'pxe-recapitulation',

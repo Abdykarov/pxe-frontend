@@ -36,7 +36,7 @@ export class AuthGuard implements CanActivateChild {
 
         if (!R.isNil(childRoute.data.isSupplier)) {
             const currentUser = this.authService.currentUserValue;
-            return currentUser.supplier === childRoute.data.isSupplier;
+            return currentUser && currentUser.supplier === childRoute.data.isSupplier;
         }
 
         return true;

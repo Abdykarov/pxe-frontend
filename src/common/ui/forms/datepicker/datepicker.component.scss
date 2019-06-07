@@ -133,13 +133,22 @@ bs-month-calendar-view {
 				border-radius: $border-radius;
 			}
 
+			&.selected.is-highlighted:not(.disabled),
+			&.in-range.is-highlighted:not(.disabled) {
+				background-color: $primary-dark;
+			}
+
 			&.selected {
 				background-color: $primary;
 				color: $white;
 				border-radius: $border-radius;
+			}
 
-				&:hover {
-					background-color: $primary-dark;
+			&.in-range:not(.select-start) {
+				color: $white;
+
+				&::before {
+					background-color: $primary;
 				}
 			}
 		}

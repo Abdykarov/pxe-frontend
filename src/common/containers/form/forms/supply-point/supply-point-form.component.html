@@ -129,19 +129,38 @@
         [touched]="form.controls.distributionRateId.touched || formError.distributionRateId"
         [validationMessages]="formFields.validationMessages.distributionRateId">
     </lnd-select>
-    <lnd-select
-        *ngIf="form.controls.circuitBreakerId.status !== 'DISABLED'"
-        [appendButtonIcon]="helpDocuments && helpDocuments['circuitBreakerId'] ? 'icon--info' : null"
-        (appendButtonAction)="showHelp('circuitBreakerId', 'Jistič')"
-        [error]="formError.circuitBreakerId || form.controls.circuitBreakerId.errors"
-        label="Jistič"
-        [options]="codeLists && codeLists['JISTIC']"
-        [parentForm]="form"
-        [selectName]="'circuitBreakerId'"
-        [success]="form.controls.circuitBreakerId.valid && (form.controls.circuitBreakerId.touched || formError.circuitBreakerId)"
-        [touched]="form.controls.circuitBreakerId.touched || formError.circuitBreakerId"
-        [validationMessages]="formFields.validationMessages.circuitBreakerId">
-    </lnd-select>
+    <div class="row">
+        <div class="col">
+            <lnd-select
+                *ngIf="form.controls.circuitBreakerId.status !== 'DISABLED'"
+                [appendButtonIcon]="helpDocuments && helpDocuments['phasesId'] ? 'icon--info' : null"
+                (appendButtonAction)="showHelp('phasesId', 'Jistič fáze')"
+                [error]="formError.phasesId || form.controls.phasesId.errors"
+                label="Jistič fáze"
+                [options]="codeLists && codeLists['POCFAZ']"
+                [parentForm]="form"
+                [selectName]="'phasesId'"
+                [success]="form.controls.phasesId.valid && (form.controls.phasesId.touched || formError.phasesId)"
+                [touched]="form.controls.phasesId.touched || formError.phasesId"
+                [validationMessages]="formFields.validationMessages.phasesId">
+            </lnd-select>
+        </div>
+        <div class="col">
+            <lnd-select
+                *ngIf="form.controls.circuitBreakerId.status !== 'DISABLED'"
+                [appendButtonIcon]="helpDocuments && helpDocuments['circuitBreakerId'] ? 'icon--info' : null"
+                (appendButtonAction)="showHelp('circuitBreakerId', 'Jistič')"
+                [error]="formError.circuitBreakerId || form.controls.circuitBreakerId.errors"
+                label="velikost"
+                [options]="codeLists && codeLists['JISTA']"
+                [parentForm]="form"
+                [selectName]="'circuitBreakerId'"
+                [success]="form.controls.circuitBreakerId.valid && (form.controls.circuitBreakerId.touched || formError.circuitBreakerId)"
+                [touched]="form.controls.circuitBreakerId.touched || formError.circuitBreakerId"
+                [validationMessages]="formFields.validationMessages.circuitBreakerId">
+            </lnd-select>
+        </div>
+    </div>
     <lnd-form-field
         *ngIf="form.controls.annualConsumptionNT.status !== 'DISABLED'"
         [appendButtonIcon]="helpDocuments && helpDocuments['annualConsumptionNT'] ? 'icon--info' : null"
@@ -181,13 +200,27 @@
         [touched]="form.controls.annualConsumption.touched || formError.annualConsumption"
         [validationMessages]="formFields.validationMessages.annualConsumption"
     ></lnd-form-field>
+    <lnd-form-field
+        [error]="formError.contractEndTypeId || form.controls.contractEndTypeId.errors"
+        [id]="'contractEndTypeId'"
+        label="Ukončení platnosti aktuální smlouvy"
+        [type]="'RADIOGROUP'"
+        [customFormGroupClass]="'mb-3'"
+        [options]="codeLists && codeLists['KONSML']"
+        [formControl]="form.controls.contractEndTypeId"
+        [radioGroupItemClass]="'custom-control-inline'"
+        [success]="form.controls.contractEndTypeId.valid && (form.controls.contractEndTypeId.touched || formError.contractEndTypeId)"
+        [touched]="form.controls.contractEndTypeId.touched || formError.contractEndTypeId"
+        [validationMessages]="formFields.validationMessages.contractEndTypeId">
+    ></lnd-form-field>
     <lnd-datepicker
+        *ngIf="form.controls.expirationDate.status !== 'DISABLED'"
         [appendButtonIcon]="helpDocuments && helpDocuments['expirationDate'] ? 'icon--info' : null"
-        (appendButtonAction)="showHelp('expirationDate', 'Ukončení platnosti stávající smlouvy')"
+        (appendButtonAction)="showHelp('expirationDate', 'Do kdy máte platnou aktuální smlouvu')"
         [datepickerName]="'expirationDate'"
         [error]="formError.expirationDate || form.controls.expirationDate.errors"
         id="datepicker-1"
-        label="Ukončení platnosti stávající smlouvy"
+        label="Do kdy máte platnou aktuální smlouvu"
         [parentForm]="form"
         [placeholder]="'dd.mm.rrrr'"
         [minDate]="minDate"
@@ -196,6 +229,38 @@
         [validationMessages]="form.controls.commodityType.value === 'POWER' ? formFields.validationMessages.expirationDatePower : formFields.validationMessages.expirationDateGas"
     >
     </lnd-datepicker>
+    <div class="row">
+        <div class="col-6">
+            <lnd-form-field
+                *ngIf="form.controls.timeToContractEnd.status !== 'DISABLED'"
+                [appendButtonIcon]="helpDocuments && helpDocuments['timeToContractEnd'] ? 'icon--info' : null"
+                (appendButtonAction)="showHelp('timeToContractEnd', 'Výpovědní lhůta')"
+                [error]="formError.timeToContractEnd || form.controls.timeToContractEnd.errors"
+                [formControl]="form.controls.timeToContractEnd"
+                [id]="'timeToContractEnd'"
+                label="Výpovědní lhůta"
+                [success]="form.controls.timeToContractEnd.valid && (form.controls.timeToContractEnd.touched || formError.timeToContractEnd)"
+                [touched]="form.controls.timeToContractEnd.touched || formError.timeToContractEnd"
+                [validationMessages]="formFields.validationMessages.timeToContractEnd"
+            ></lnd-form-field>
+        </div>
+        <div class="col-6">
+            <lnd-select
+                *ngIf="form.controls.timeToContractEndPeriodId.status !== 'DISABLED'"
+                [appendButtonIcon]="helpDocuments && helpDocuments[''] ? 'icon--info' : null"
+                (appendButtonAction)="showHelp('timeToContractEndPeriodId', 'Jistič')"
+                [error]="formError.timeToContractEndPeriodId || form.controls.timeToContractEndPeriodId.errors"
+                label=""
+                [options]="codeLists && codeLists['PERKON']"
+                [parentForm]="form"
+                [selectName]="'timeToContractEndPeriodId'"
+                [success]="form.controls.timeToContractEndPeriodId.valid && (form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId)"
+                [touched]="form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId"
+                [validationMessages]="formFields.validationMessages.timeToContractEndPeriodId">
+            </lnd-select>
+        </div>
+    </div>
+
     <div class="text-center">
         <lnd-button
             type="primary"
