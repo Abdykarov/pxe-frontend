@@ -22,7 +22,7 @@ import {
 } from 'src/common/utils';
 import { HelpModalComponent } from 'src/common/containers/modal/modals/help/help-modal.component';
 import { IOption } from 'src/common/ui/forms/models/option.model';
-import { ModalLoaderService } from 'src/common/containers/modal/modal-loader.service';
+import { ModalService } from 'src/common/containers/modal/modal.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 import {
     CODE_LIST,
@@ -50,7 +50,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
     constructor(
         private cd: ChangeDetectorRef,
         protected fb: FormBuilder,
-        private modalsLoaderService: ModalLoaderService,
+        private modalsService: ModalService,
         private supplyService: SupplyService,
     ) {
         super(fb);
@@ -62,7 +62,9 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
 
         this.form.get('commodityType')
             .valueChanges
-            .pipe(takeUntil(this.destroy$))
+            .pipe(
+                takeUntil(this.destroy$),
+            )
             .subscribe(val => {
                 this.resetFormError();
                 this.setFormByCommodity(val);
@@ -71,7 +73,9 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
 
         this.form.get('subjectTypeId')
             .valueChanges
-            .pipe(takeUntil(this.destroy$))
+            .pipe(
+                takeUntil(this.destroy$),
+            )
             .subscribe((val: string) => {
                 this.resetFieldValue('distributionRateId');
                 this.distributionRateType = SUBJECT_TYPE_TO_DIST_RATE_MAP[val];
@@ -80,14 +84,18 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
 
         this.form.get('distributionRateId')
             .valueChanges
-            .pipe(takeUntil(this.destroy$))
+            .pipe(
+                takeUntil(this.destroy$),
+            )
             .subscribe(val => {
                 this.setAnnualConsumptionNTState(val);
             });
 
         this.form.get('supplierId')
             .valueChanges
-            .pipe(takeUntil(this.destroy$))
+            .pipe(
+                takeUntil(this.destroy$),
+            )
             .subscribe(val => {
                 this.helpDocuments = val && val.sampleDocuments ? convertArrayToObject(val.sampleDocuments, 'type') : {};
             });
@@ -147,8 +155,8 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
     }
 
     public showHelp = (field, title) => {
-        this.modalsLoaderService
-            .showModal.next({
+        this.modalsService
+            .showModal$.next({
                 component: HelpModalComponent,
                 instanceData: {
                     url: this.helpDocuments[field].url,

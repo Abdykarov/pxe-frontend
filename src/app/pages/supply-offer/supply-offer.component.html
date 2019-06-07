@@ -60,7 +60,7 @@
                     icon="icon--delete"
                     type="icon"
                     variant="icon"
-                    (action)="toggle();delete(table, row, row.id)"
+                    (action)="toggle();delete(table, row)"
                     [isDisabled]="deleteDisabled[row.id]"
             ></lnd-button>
         </ng-template>
@@ -102,7 +102,7 @@
                         icon="icon--delete"
                         type="icon"
                         variant="icon"
-                        (action)="toggle();delete(table, row, formValues.id)"
+                        (action)="toggle();delete(table, row, currentOfferFormValues)"
                         [isDisabled]="false"
                 ></lnd-button>
             </ng-template>
@@ -122,6 +122,7 @@
                 [fieldError]="fieldError"
                 (submitAction)="submitForm($event, table, row)"
                 (customAction)="cancel($event, table, row)"
+                (currentFormValues)="getCurrentFormValues($event)"
         ></pxe-supply-offer-form>
     </div>
 </ng-template>
