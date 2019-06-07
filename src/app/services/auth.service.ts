@@ -6,6 +6,7 @@ import {
 import {
     BehaviorSubject,
     Observable,
+    of,
 } from 'rxjs';
 import {
     catchError,

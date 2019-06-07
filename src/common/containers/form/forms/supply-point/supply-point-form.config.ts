@@ -4,9 +4,28 @@ import {
     CommodityType,
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
+import { CONTRACT_END_TYPE } from 'src/app/app.constants';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
+
+export const expirationConfig = {
+    [CONTRACT_END_TYPE.CONTRACT_END_TERM]: {
+        'expirationDate': true,
+        'timeToContractEnd': true,
+        'timeToContractEndPeriodId': true,
+    },
+    [CONTRACT_END_TYPE.CONTRACT_END_TERMINATE]: {
+        'expirationDate': true,
+        'timeToContractEnd': false,
+        'timeToContractEndPeriodId': false,
+    },
+    [CONTRACT_END_TYPE.CONTRACT_END_INDEFINITE_PERIOD]: {
+        'expirationDate': false,
+        'timeToContractEnd': true,
+        'timeToContractEndPeriodId': true,
+    },
+};
 
 export const formFields: IForm = {
     controls: {
@@ -69,6 +88,12 @@ export const formFields: IForm = {
                 Validators.required,
             ],
         ],
+        phasesId: [
+            null,
+            [
+                Validators.required,
+            ],
+        ],
         annualConsumptionNT: [
             null,
             [
@@ -94,6 +119,26 @@ export const formFields: IForm = {
             ],
         ],
         expirationDate: [
+            null,
+            [
+                Validators.required,
+            ],
+        ],
+        contractEndTypeId: [
+            null,
+            [
+                Validators.required,
+            ],
+        ],
+        timeToContractEnd: [
+            null,
+            [
+                Validators.required,
+                Validators.max(99),
+                CustomValidators.isPossibleInteger,
+            ],
+        ],
+        timeToContractEndPeriodId: [
             null,
             [
                 Validators.required,
@@ -136,6 +181,9 @@ export const formFields: IForm = {
         circuitBreakerId: {
             required: errorFieldMessages.circuitBreakerId.required,
         },
+        phasesId: {
+            required: errorFieldMessages.phasesId.required,
+        },
         annualConsumptionNT: {
             required: errorFieldMessages.annualConsumptionNT.required,
             decimal: errorFieldMessages.annualConsumptionNT.annualConsumptionNT,
@@ -165,6 +213,17 @@ export const formFields: IForm = {
             bsDate: errorFieldMessages.expirationDate.format,
             bsDateMinDate: errorFieldMessages.expirationDate.expirationDateInPast,
             expirationDateInPast: errorFieldMessages.expirationDate.expirationDateInPast,
+        },
+        contractEndTypeId: {
+            required: errorFieldMessages.contractEndTypeId.required,
+        },
+        timeToContractEnd: {
+            required: errorFieldMessages.timeToContractEnd.required,
+            max: errorFieldMessages.timeToContractEnd.max,
+            isPossibleInteger: errorFieldMessages.timeToContractEnd.isPossibleInteger,
+        },
+        timeToContractEndPeriodId: {
+            required: errorFieldMessages.timeToContractEndPeriodId.required,
         },
     },
 };

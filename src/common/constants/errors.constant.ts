@@ -35,12 +35,12 @@ export const errorFieldMessages =  {
     circuitBreakerId: {
         required: 'Vyberte ze seznamu, jakou máte velikost jističe.',
     },
-    code: {
-        required: 'Zadejte kód.',
-        badCode: 'Zadali jste neplatný kód.', // je treba syncs s grafikou!!!
-    },
     commodityType: {
         required: 'Zvolte komoditu.',
+    },
+    confirmationCode: {
+        required: 'Zadejte kód.',
+        badCode: 'Zadali jste neplatný kód.', // je treba syncs s grafikou!!!
     },
     consent: {
         signUp: {
@@ -135,8 +135,14 @@ export const errorFieldMessages =  {
     offerName: {
         required: 'Vyplňte libovolný název nabídky.',
     },
+    phasesId: {
+        required: 'Vyplňte fázy.',
+    },
     password: {
         required: 'Zadejte heslo.',
+    },
+    subjectTypeId: {
+        required: 'Zvolte odběratele.',
     },
     phone: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
@@ -149,11 +155,15 @@ export const errorFieldMessages =  {
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
     },
-    confirmationCode: {
-        required: 'Zadejte kód.',
-        badCode: 'Zadali jste neplatný kód.', // je treba syncs s grafikou!!!
+    contractEndTypeId: {
+        required: 'contractEndTypeId',
     },
-    subjectTypeId: {
-        required: 'Zvolte odběratele.',
+    timeToContractEnd: {
+        required: 'timeToContractEnd1',
+        max: 'max2',
+        isPossibleInteger: 'isPossibleInteger3',
+    },
+    timeToContractEndPeriodId: {
+        required: 'timeToContractEndPeriodId',
     },
 };
