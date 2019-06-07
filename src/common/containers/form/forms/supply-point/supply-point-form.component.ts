@@ -130,7 +130,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
     public hideAllContractEndType() {
         R.forEachObjIndexed((value: string, field: string) => {
             this.form.get(field).disable();
-        }, this.expirationConfig[CONTRACT_END_TYPE.CONTRACT_END_TERM_TYPE]);
+        }, this.expirationConfig[CONTRACT_END_TYPE.CONTRACT_END_TERM]);
     }
 
     public setFormByCommodity = (commodityType: CommodityType) => {

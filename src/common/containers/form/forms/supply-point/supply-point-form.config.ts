@@ -4,13 +4,13 @@ import {
     CommodityType,
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
+import { CONTRACT_END_TYPE } from 'src/app/app.constants';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
-import { CONTRACT_END_TYPE } from 'src/app/app.constants';
 
 export const expirationConfig = {
-    [CONTRACT_END_TYPE.CONTRACT_END_TERM_TYPE]: {
+    [CONTRACT_END_TYPE.CONTRACT_END_TERM]: {
         'expirationDate': true,
         'timeToContractEnd': true,
         'timeToContractEndPeriodId': true,
