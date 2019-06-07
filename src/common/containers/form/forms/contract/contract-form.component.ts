@@ -1,8 +1,10 @@
 import {
     ChangeDetectorRef,
     Component,
-    Input, OnChanges,
-    OnInit, SimpleChanges,
+    Input,
+    OnChanges,
+    OnInit,
+    SimpleChanges,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
@@ -31,6 +33,7 @@ export class ContractFormComponent extends AbstractFormComponent implements OnIn
 
     ngOnInit() {
         super.ngOnInit();
+        this.setDisableField('smsCode');
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -40,11 +43,11 @@ export class ContractFormComponent extends AbstractFormComponent implements OnIn
     public submitForm = () => {
         this.resetCustomFieldError();
         this.triggerValidation();
-        if (this.form.valid) {
+        if (this.form.valid || !this.smsSend) {
             if (this.smsSend) {
-                console.log('TRUE');
             } else {
-                console.log('123456');
+                this.resetFieldError('smsCode');
+                this.setEnableField('smsCode');
                 this.smsSend = true;
             }
         }

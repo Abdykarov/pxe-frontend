@@ -5,23 +5,26 @@
             <div class="col-md-auto">
                 <lnd-form-field
                     label="Kód z SMS"
+                    [disabledField]="!smsSend"
                     [error]="formError.smsCode || form.controls.smsCode.errors"
                     [formControl]="form.controls.smsCode"
-                    [id]="'Kód z SMS'"
-                    label="sms-code"
+                    [id]="'smsCode'"
                     [success]="form.controls.smsCode.valid && (form.controls.smsCode.touched || formError.smsCode)"
                     [touched]="form.controls.smsCode.touched || formError.smsCode"
                     [validationMessages]="formFields.validationMessages.smsCode">
-
                 </lnd-form-field>
+                <span *ngIf="smsSend">
+                    Poslat SMS kód znovu
+                </span>
             </div>
             <div class="col-md-auto mt-md-4">
                 <lnd-button
                     (action)="submitForm()"
-                    label="Odeslat ověřovací kód"
+                    [label]="!smsSend ? 'Odeslat ověřovací kód' : 'Podepsat smlouvu'"
                     type="primary">
                 </lnd-button>
-                <p class="small mt-2">Na číslo {{personData.phone}}<br>
+                <p class="small mt-2"
+                    *ngIf="!smsSend">Na číslo {{personData.phone}}<br>
                     odešleme ověřovací kód</p>
             </div>
         </div>
