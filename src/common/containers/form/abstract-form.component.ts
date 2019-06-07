@@ -105,6 +105,10 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         )(this.form.controls);
     }
 
+    public getFieldValue = (fieldName: string) => {
+        return this.form.get(fieldName).value;
+    }
+
     public resetFieldValue = (field, clearError = true) => {
         this.form.get(field).patchValue(null);
         this.resetFieldError(field, clearError);

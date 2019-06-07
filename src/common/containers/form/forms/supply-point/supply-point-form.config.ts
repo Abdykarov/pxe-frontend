@@ -16,12 +16,12 @@ export const expirationConfig = {
         'timeToContractEndPeriodId': true,
     },
     [CONTRACT_END_TYPE.CONTRACT_END_TERMINATE]: {
-        'expirationDate': false,
-        'timeToContractEnd': true,
-        'timeToContractEndPeriodId': true,
+        'expirationDate': true,
+        'timeToContractEnd': false,
+        'timeToContractEndPeriodId': false,
     },
     [CONTRACT_END_TYPE.CONTRACT_END_INDEFINITE_PERIOD]: {
-        'expirationDate': true,
+        'expirationDate': false,
         'timeToContractEnd': true,
         'timeToContractEndPeriodId': true,
     },

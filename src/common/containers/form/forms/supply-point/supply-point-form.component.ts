@@ -72,7 +72,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
                 this.resetFormError();
                 this.setFormByCommodity(val);
                 this.resetFieldValue('supplierId');
-                this.setAnnualConsumptionNTState(this.form.getRawValue().distributionRateId);
+                this.setAnnualConsumptionNTState(val === CommodityType.POWER ? this.getFieldValue('distributionRateId') : false);
             });
 
         this.form.get('subjectTypeId')
