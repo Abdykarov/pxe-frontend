@@ -7,8 +7,11 @@ import {
     BehaviorSubject,
     Observable,
 } from 'rxjs';
+import {
+    catchError,
+    map,
+} from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { map } from 'rxjs/operators';
 
 import { CONSTS } from 'src/app/app.constants';
 import { CookiesService } from './cookies.service';
@@ -68,10 +71,12 @@ export class AuthService {
         return this.http.delete<any>(`${environment.url_api}/v1.0/users/logout`)
             .pipe(
                 map(response => {
-                    this.token = null;
-                    this.cookiesService.remove(this.cookieName);
-                    this.currentUserSubject$.next(null);
+                    this.cleanUserData();
                     return response;
+                }),
+                catchError((error) => {
+                    this.cleanUserData();
+                    return of(error);
                 }),
             );
     }
@@ -85,15 +90,30 @@ export class AuthService {
     }
 
     refreshToken = () => {
-        return this.http.post<any>(`${environment.url_api}/v1.0/sms/refresh`, {});
+        return this.http.post<any>(
+            `${environment.url_api}/v1.0/users/refresh`,
+            {
+                    token: this.token,
+            })
+            .pipe(
+                map(response => {
+                    return this.setToken(response);
+                }),
+            );
+    }
+
+    cleanUserData = () => {
+        this.token = null;
+        this.cookiesService.remove(this.cookieName);
+        this.currentUserSubject$.next(null);
     }
 
     setToken = (response) => {
         if (response && response.token) {
             const jwtPayload = this.getJwtPayload(response.token);
-            if (jwtPayload.exp) {
-                this.expiresTime = jwtPayload.exp;
-            }
+            // if (jwtPayload.exp) {
+            //     this.expiresTime = jwtPayload.exp * 1000;
+            // }
             const user = {
                 token: response.token,
             };
