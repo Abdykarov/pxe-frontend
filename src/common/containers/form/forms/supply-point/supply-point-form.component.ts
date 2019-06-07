@@ -11,18 +11,10 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import {
-    CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL,
-    codeListTypes,
-    commodityTypeFields,
-    commodityTypeOptions,
-    distributionRatesTypeDefinition,
-    SUBJECT_TYPE_TO_DIST_RATE,
-    subjectTypeOptions,
-} from './supply-point-form.config';
-import {
     CommodityType,
     DistributionType,
 } from 'src/common/graphql/models/supply.model';
+import { commodityTypeFields } from './supply-point-form.config';
 import {
     convertArrayToObject,
     transformCodeList,
@@ -30,8 +22,16 @@ import {
 } from 'src/common/utils';
 import { HelpModalComponent } from 'src/common/containers/modal/modals/help/help-modal.component';
 import { IOption } from 'src/common/ui/forms/models/option.model';
-import { ModalLoaderService } from 'src/common/containers/modal/modal-loader.service';
+import { ModalService } from 'src/common/containers/modal/modal.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import {
+    CODE_LIST,
+    CODE_LIST_TYPES,
+    COMMODITY_TYPE_OPTIONS,
+    DISTRIBUTION_RATES_TYPE_DEFINITION,
+    SUBJECT_TYPE_OPTIONS,
+    SUBJECT_TYPE_TO_DIST_RATE_MAP,
+} from 'src/app/app.constants';
 
 @Component({
     selector: 'pxe-supply-point-form',
@@ -39,18 +39,18 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./supply-point-form.component.scss'],
 })
 export class SupplyPointFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
-    public commodityTypeOptions: Array<IOption> = commodityTypeOptions;
-    public subjectTypeOptions: Array<IOption> = subjectTypeOptions;
+    public commodityTypeOptions: Array<IOption> = COMMODITY_TYPE_OPTIONS;
+    public subjectTypeOptions: Array<IOption> = SUBJECT_TYPE_OPTIONS;
     public codeLists;
     public helpDocuments = {};
     public minDate: Date;
     public suppliers = [];
-    public distributionRateType: string = CODE_LIST_TYPE_DIST_RATE_INDIVIDUAL;
+    public distributionRateType: string = CODE_LIST.DIST_RATE_INDIVIDUAL;
 
     constructor(
         private cd: ChangeDetectorRef,
         protected fb: FormBuilder,
-        private modalsLoaderService: ModalLoaderService,
+        private modalsService: ModalService,
         private supplyService: SupplyService,
     ) {
         super(fb);
@@ -62,7 +62,9 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
 
         this.form.get('commodityType')
             .valueChanges
-            .pipe(takeUntil(this.destroy$))
+            .pipe(
+                takeUntil(this.destroy$),
+            )
             .subscribe(val => {
                 this.resetFormError();
                 this.setFormByCommodity(val);
@@ -71,23 +73,29 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
 
         this.form.get('subjectTypeId')
             .valueChanges
-            .pipe(takeUntil(this.destroy$))
+            .pipe(
+                takeUntil(this.destroy$),
+            )
             .subscribe((val: string) => {
                 this.resetFieldValue('distributionRateId');
-                this.distributionRateType = SUBJECT_TYPE_TO_DIST_RATE[val];
+                this.distributionRateType = SUBJECT_TYPE_TO_DIST_RATE_MAP[val];
                 this.cd.markForCheck();
             });
 
         this.form.get('distributionRateId')
             .valueChanges
-            .pipe(takeUntil(this.destroy$))
+            .pipe(
+                takeUntil(this.destroy$),
+            )
             .subscribe(val => {
                 this.setAnnualConsumptionNTState(val);
             });
 
         this.form.get('supplierId')
             .valueChanges
-            .pipe(takeUntil(this.destroy$))
+            .pipe(
+                takeUntil(this.destroy$),
+            )
             .subscribe(val => {
                 this.helpDocuments = val && val.sampleDocuments ? convertArrayToObject(val.sampleDocuments, 'type') : {};
             });
@@ -101,7 +109,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
         super.ngOnChanges(changes);
     }
 
-    public includesBothTariffs = (id: string) => distributionRatesTypeDefinition[DistributionType.BOTH].includes(id);
+    public includesBothTariffs = (id: string) => DISTRIBUTION_RATES_TYPE_DEFINITION[DistributionType.BOTH].includes(id);
 
     public setFormByCommodity = (commodityType: CommodityType) => {
         R.mapObjIndexed((fields, type) => {
@@ -147,8 +155,8 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
     }
 
     public showHelp = (field, title) => {
-        this.modalsLoaderService
-            .showModal.next({
+        this.modalsService
+            .showModal$.next({
                 component: HelpModalComponent,
                 instanceData: {
                     url: this.helpDocuments[field].url,
@@ -159,7 +167,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
     }
 
     public loadCodeLists = () => {
-        this.supplyService.findCodelistsByTypes(codeListTypes, 'cs')
+        this.supplyService.findCodelistsByTypes(CODE_LIST_TYPES, 'cs')
             .pipe(takeUntil(this.destroy$))
             .subscribe(({data}) => {
                 this.codeLists = transformCodeList(data.findCodelistsByTypes);

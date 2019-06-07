@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AddModalDirective } from './add-modal.directive';
+import { ConfirmModalModule } from './modals/confirm/confirm-modal.module';
 import { HelpModalModule } from './modals/help/help-modal.module';
 import { ModalComponent } from './modal.component';
 
@@ -11,8 +12,9 @@ import { ModalComponent } from './modal.component';
         ModalComponent,
     ],
     exports: [
-        ModalComponent,
+        ConfirmModalModule,
         HelpModalModule,
+        ModalComponent,
     ],
     imports: [
         CommonModule,

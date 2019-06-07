@@ -11,7 +11,7 @@ export const transformCodeList = (data: ICodelistMap[]) => {
                 ...codelistItem,
                 key: codelistItem.code,
                 value: codelistItem.code,
-                label: codelistItem.description,
+                label: codelistItem.help || codelistItem.description,
             };
         }, codelistItems);
     }, codeList);
