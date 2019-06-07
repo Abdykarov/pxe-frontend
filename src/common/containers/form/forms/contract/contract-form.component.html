@@ -1,0 +1,29 @@
+<div [innerHTML]="contractTemplate"></div>
+<div class="row">
+    <div class="col-12 col-lg-9 offset-lg-3">
+        <div class="row justify-content-between">
+            <div class="col-md-auto">
+                <lnd-form-field
+                    label="Kód z SMS"
+                    [error]="formError.smsCode || form.controls.smsCode.errors"
+                    [formControl]="form.controls.smsCode"
+                    [id]="'Kód z SMS'"
+                    label="sms-code"
+                    [success]="form.controls.smsCode.valid && (form.controls.smsCode.touched || formError.smsCode)"
+                    [touched]="form.controls.smsCode.touched || formError.smsCode"
+                    [validationMessages]="formFields.validationMessages.smsCode">
+
+                </lnd-form-field>
+            </div>
+            <div class="col-md-auto mt-md-4">
+                <lnd-button
+                    (action)="submitForm()"
+                    label="Odeslat ověřovací kód"
+                    type="primary">
+                </lnd-button>
+                <p class="small mt-2">Na číslo {{personData.phone}}<br>
+                    odešleme ověřovací kód</p>
+            </div>
+        </div>
+    </div>
+</div>

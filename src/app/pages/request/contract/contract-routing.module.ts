@@ -9,7 +9,7 @@ import { ContractComponent } from './contract.component';
 
 const routes: Routes = [
     {
-        path: CONSTS.PATHS.CONTRACT,
+        path: CONSTS.PATHS.EMPTY,
         component: ContractComponent,
     },
 ];

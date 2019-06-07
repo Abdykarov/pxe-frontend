@@ -155,9 +155,6 @@ export const errorFieldMessages =  {
     password: {
         required: 'Zadejte heslo.',
     },
-    subjectTypeId: {
-        required: 'Zvolte odběratele.',
-    },
     phone: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
         invalidTelephone: 'Vyberte ze seznamu jakého máte dodavatele.',
@@ -166,8 +163,14 @@ export const errorFieldMessages =  {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
         invalidTelephonePrefix: 'Vyberte ze seznamu jakého máte dodavatele.',
     },
+    smsCode: {
+        required: 'smsCode213.',
+    },
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
+    },
+    subjectTypeId: {
+        required: 'Zvolte odběratele.',
     },
     contractEndTypeId: {
         required: 'contractEndTypeId',
