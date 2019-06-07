@@ -11,6 +11,11 @@ import {
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import {
+    BehaviorSubject,
+    combineLatest,
+    Observable,
+} from 'rxjs';
+import {
     filter,
     map,
     takeUntil,
@@ -18,6 +23,10 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
+import {
+    CODE_LIST_TYPES,
+    ROUTES,
+} from 'src/app/app.constants';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { formFields } from 'src/common/containers/form/forms/supply-offer/supply-offer-form.config';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
@@ -28,11 +37,15 @@ import {
     IOfferInputGasAttributes,
     IOfferInputPowerAttributes, IOfferStatus,
 } from 'src/common/graphql/models/offer.model';
+import { ITableColumnConfig } from 'src/common/ui/table/models/table.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { OfferService } from 'src/common/graphql/services/offer.service';
-import { parseGraphQLErrors } from 'src/common/utils';
-import { ROUTES } from 'src/app/app.constants';
+import {
+    parseGraphQLErrors,
+    transformCodeList,
+} from 'src/common/utils';
 import { SupplyOfferConfig } from './supply-offer.config';
+import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
     selector: 'pxe-supply-offer',
@@ -51,10 +64,27 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public formSent = false;
     public formValues = <IOffer>{};
     public globalError: string[] = [];
+    public globalFormError: string[] = [];
     public loadingOffers = true;
-    public tableRows = [];
+    public tableRows: IOffer[] = [];
+    public tableCols: ITableColumnConfig[] = [];
     public routePower = ROUTES.ROUTER_SUPPLY_OFFER_POWER;
     public routeGas = ROUTES.ROUTER_SUPPLY_OFFER_GAS;
+
+    private commodityType$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+    private codeLists$: Observable<any> = this.supplyService.findCodelistsByTypes(CODE_LIST_TYPES, 'cs')
+        .pipe(
+            map(({data}) => transformCodeList(data.findCodelistsByTypes)),
+        );
+    private offers$: Observable<IOffer[]> = this.offerService.findSupplierOffers()
+        .pipe(
+            map(({data}) => R.filter(
+                R.whereEq({
+                    commodityType: this.commodityType,
+                    status: IOfferStatus.ACTIVE},
+                ),
+            )(data.findSupplierOffers)),
+        );
 
     constructor(
         private authService: AuthService,
@@ -64,6 +94,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         public supplyOfferConfig: SupplyOfferConfig,
+        private supplyService: SupplyService,
     ) {
         super();
     }
@@ -81,8 +112,29 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                     return;
                 }
                 this.commodityType = supplyOfferCommodityTypes[params.commodityType];
-                this.loadOffers();
+                this.commodityType$.next(this.commodityType);
             });
+
+        combineLatest(this.codeLists$, this.offers$, this.commodityType$)
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                ([codeLists, offers, commodityType]) => {
+                    if (codeLists && offers) {
+                        this.tableRows = offers;
+                        this.tableCols = this.supplyOfferConfig.tableCols(codeLists)[commodityType];
+                        this.loadingOffers = false;
+                        this.deleteDisabled = [];
+                        this.cd.markForCheck();
+                    }
+                },
+                error => {
+                    this.deleteDisabled = [];
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
+                });
 
         this.modalsService.closeModalData$
             .pipe(
@@ -106,7 +158,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                             (error) => {
                                 this.deleteDisabled = [];
                                 const {globalError} = parseGraphQLErrors(error);
-                                this.globalError = globalError;
+                                this.globalFormError = globalError;
                                 this.cd.markForCheck();
                             },
                         );
@@ -118,6 +170,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public edit = (table, row) => {
+        this.globalFormError = [];
         this.formValues = {
             ...row,
         };
@@ -127,6 +180,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public create = (table, row) => {
+        this.globalFormError = [];
         this.formValues = <IOffer>{};
         if (table.openedRow !== row) {
             this.toggleRow(table, row);
@@ -134,6 +188,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public duplicate = (table, row) => {
+        this.globalFormError = [];
         this.formValues = {
             ...row,
             id: null,
@@ -148,6 +203,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
             this.modalsService
                 .showModal$.next(this.supplyOfferConfig.confirmCancelOfferConfig({table, row, currentOfferFormValues}));
         } else {
+            this.globalFormError = [];
             this.modalsService
                 .showModal$.next(this.supplyOfferConfig.confirmDeleteOfferConfig({table, row, currentOfferFormValues}));
         }
@@ -157,35 +213,9 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         this.currentOfferFormValues = values;
     }
 
-    public loadOffers = () => {
-        this.offerService.findSupplierOffers()
-            .pipe(
-                takeUntil(this.destroy$),
-                map(({data}) => R.filter(
-                    R.whereEq({
-                        commodityType: this.commodityType,
-                        status: IOfferStatus.ACTIVE},
-                    ),
-                )(data.findSupplierOffers)),
-            )
-            .subscribe(
-                rows => {
-                    this.tableRows = rows;
-                    this.loadingOffers = false;
-                    this.deleteDisabled = [];
-                    this.cd.markForCheck();
-                },
-                error => {
-                    this.deleteDisabled = [];
-                    const { globalError } = parseGraphQLErrors(error);
-                    this.globalError = globalError;
-                    this.cd.markForCheck();
-                });
-    }
-
     public submitForm = (supplyOfferFormData: any, table = null, row = null) => {
         this.formLoading = true;
-        this.globalError = [];
+        this.globalFormError = [];
         this.fieldError = {};
         let offerPointAction;
         const isCreateAction = R.isNil(supplyOfferFormData.id);
@@ -241,7 +271,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                     this.formLoading = false;
                     const { fieldError, globalError } = parseGraphQLErrors(error);
                     this.fieldError = fieldError;
-                    this.globalError = globalError;
+                    this.globalFormError = globalError;
                     this.cd.markForCheck();
                 });
     }
