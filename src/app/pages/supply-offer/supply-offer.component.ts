@@ -34,7 +34,6 @@ import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyOfferConfig } from './supply-offer.config';
 
-
 @Component({
     selector: 'pxe-supply-offer',
     templateUrl: './supply-offer.component.html',
@@ -91,43 +90,30 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                     this.destroy$,
                 ),
                 filter(R_.isNotNil),
-                filter((modal: ICloseModalData) =>
-                    modal.confirmed &&
-                    modal.modalType === this.supplyOfferConfig.confirmDeleteOffer,
-                ),
+                filter((modal: ICloseModalData) => modal.confirmed),
             )
-            .subscribe(value => {
-                this.deleteDisabled[value.data.row.id] = true;
-                this.offerService.deleteOffer(value.data.row.id)
-                    .pipe(
-                        takeUntil(this.destroy$),
-                    )
-                    .subscribe(
-                        () => {
-                            this.deleteDisabled = [];
-                        },
-                        (error) => {
-                            this.deleteDisabled = [];
-                            const { globalError } = parseGraphQLErrors(error);
-                            this.globalError = globalError;
-                            this.cd.markForCheck();
-                        },
-                    );
-            });
-
-        this.modalsService.closeModalData$
-            .pipe(
-                takeUntil(
-                    this.destroy$,
-                ),
-                filter(R_.isNotNil),
-                filter((modal: ICloseModalData) =>
-                    modal.confirmed &&
-                    modal.modalType === this.supplyOfferConfig.confirmCancelOffer,
-                ),
-            )
-            .subscribe(value => {
-                this.toggleRow(value.data.table, value.data.row);
+            .subscribe(modal => {
+                if (modal.modalType === this.supplyOfferConfig.confirmDeleteOffer) {
+                    this.deleteDisabled[modal.data.row.id] = true;
+                    this.offerService.deleteOffer(modal.data.row.id)
+                        .pipe(
+                            takeUntil(this.destroy$),
+                        )
+                        .subscribe(
+                            () => {
+                                this.deleteDisabled = [];
+                            },
+                            (error) => {
+                                this.deleteDisabled = [];
+                                const {globalError} = parseGraphQLErrors(error);
+                                this.globalError = globalError;
+                                this.cd.markForCheck();
+                            },
+                        );
+                }
+                if (modal.modalType === this.supplyOfferConfig.confirmCancelOffer) {
+                    this.toggleRow(modal.data.table, modal.data.row);
+                }
             });
     }
 
