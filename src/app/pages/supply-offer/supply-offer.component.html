@@ -1,11 +1,13 @@
 <ng-template #columnTemplatePriceVT let-row="row">
-    <span [innerHtml]="row.priceVT | number:'1.0-2'"></span>
+    {{row.priceVT | number:'1.0-2'}}&nbsp;MWh/Kč
 </ng-template>
 <ng-template #columnTemplatePriceNT let-row="row">
-    <span [innerHtml]="row.priceNT | number:'1.0-2'"></span>
+    <ng-container *ngIf="row.priceNT !== null">
+        {{row.priceNT | number:'1.0-2'}}&nbsp;MWh/Kč
+    </ng-container>
 </ng-template>
 <ng-template #columnTemplatePriceGas let-row="row">
-    <span [innerHtml]="row.priceGas | number:'1.0-2'"></span>
+    {{row.priceGas | number:'1.0-2'}}&nbsp;MWh/Kč
 </ng-template>
 <ng-template #columnTemplateValidFromTo let-row="row">
     {{row.validFrom | date: 'dd.MM.yyyy'}} - {{row.validTo | date: 'dd.MM.yyyy'}}
@@ -14,7 +16,7 @@
     {{row.deliveryFrom | date: 'dd.MM.yyyy'}} - {{row.deliveryTo | date: 'dd.MM.yyyy'}}
 </ng-template>
 <ng-template #actionColumnTemplate let-row="row">
-    <span [innerHtml]="row.permanentPaymentPrice | number:'1.0-2'"></span>
+    <span>{{row.permanentPaymentPrice | number:'1.0-2'}}&nbsp;Kč</span>
     <div *ngIf="table.openedRow !== row"
          class="action-area-div">
         <ng-template #tooltipEdit let-toggle="toggle">
@@ -58,7 +60,7 @@
                     icon="icon--delete"
                     type="icon"
                     variant="icon"
-                    (action)="toggle();delete(table, row, row.id)"
+                    (action)="toggle();delete(table, row)"
                     [isDisabled]="deleteDisabled[row.id]"
             ></lnd-button>
         </ng-template>
@@ -100,7 +102,7 @@
                         icon="icon--delete"
                         type="icon"
                         variant="icon"
-                        (action)="toggle();delete(table, row, formValues.id)"
+                        (action)="toggle();delete(table, row, currentOfferFormValues)"
                         [isDisabled]="false"
                 ></lnd-button>
             </ng-template>
@@ -116,10 +118,11 @@
                 [formFields]="formFields"
                 [formLoading]="formLoading"
                 [formSent]="formSent"
-                [globalError]="globalError"
+                [globalError]="globalFormError"
                 [fieldError]="fieldError"
                 (submitAction)="submitForm($event, table, row)"
                 (customAction)="cancel($event, table, row)"
+                (currentFormValues)="getCurrentFormValues($event)"
         ></pxe-supply-offer-form>
     </div>
 </ng-template>
@@ -149,6 +152,7 @@
                 </li>
             </ul>
             <ng-container>
+                <lnd-placeloader [loading]="loadingOffers && !globalError.length"></lnd-placeloader>
                 <div *ngIf="!loadingOffers && tableRows.length === 0" class="page-box">
                     <pxe-supply-offer-form
                             [commodityType]="commodityType"
@@ -156,7 +160,7 @@
                             [formFields]="formFields"
                             [formLoading]="formLoading"
                             [formSent]="formSent"
-                            [globalError]="globalError"
+                            [globalError]="globalFormError"
                             [fieldError]="fieldError"
                             [showCancel]="false"
                             (submitAction)="submitForm($event)"
@@ -167,7 +171,7 @@
                 <div [hidden]="loadingOffers || tableRows.length === 0">
                     <lnd-table
                         #table
-                        [cols]="supplyOfferConfig.tableCols[commodityType]"
+                        [cols]="tableCols"
                         [rows]="tableRows"
                         [showHead]="true"
                         [isStatic]="false"

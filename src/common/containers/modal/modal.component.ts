@@ -6,11 +6,12 @@ import {
     ViewChild,
 } from '@angular/core';
 
+import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AddModalDirective } from './add-modal.directive';
-import { ModalLoaderService } from './modal-loader.service';
+import { ModalService } from './modal.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 
 @Component({
@@ -32,41 +33,51 @@ export class ModalComponent extends AbstractComponent {
 
     constructor(
         private componentFactoryResolver: ComponentFactoryResolver,
-        private modalLoaderService: ModalLoaderService,
+        private modalLoaderService: ModalService,
         private overlayService: OverlayService,
     ) {
         super();
-        this.modalLoaderService.showModal.subscribe(type => {
-            if (this.component) {
-                this.component.destroy();
-            }
-            if (!this.addModal) {
-                return;
-            }
-            const componentToLoad = type.component ? type.component : this.modalLoaderService.loadModalComponent(type);
-            const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentToLoad);
-            const modalElmRef = this.addModal.viewContainerRef;
-            modalElmRef.clear();
-            this.component = modalElmRef.createComponent(componentFactory);
+        this.modalLoaderService.showModal$
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(modal => {
+                if (this.component) {
+                    this.component.destroy();
+                }
+                if (!this.addModal) {
+                    return;
+                }
+                const componentToLoad = R.is(String, modal.component) ?
+                    this.modalLoaderService.loadModalComponent(modal.component) : modal.component;
+                const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentToLoad);
+                const modalElmRef = this.addModal.viewContainerRef;
+                modalElmRef.clear();
+                this.component = modalElmRef.createComponent(componentFactory);
 
-            this.component.instance.modalOpen = true;
-            if (type.instanceData) {
-                this.component.instance.instanceData = type.instanceData;
-            }
-            this.overlayService.toggleOverlay(true)
-                .pipe(
-                    takeUntil(this.destroy$),
-                )
-                .subscribe();
-            this.component.instance.closeModal.subscribe(() => {
-                this.destroyComponent();
-                this.overlayService.toggleOverlay(false)
+                this.component.instance.modalOpen = true;
+                if (modal.instanceData) {
+                    this.component.instance.instanceData = modal.instanceData;
+                }
+                this.overlayService.toggleOverlay(true)
                     .pipe(
                         takeUntil(this.destroy$),
                     )
                     .subscribe();
-            });
-            this.component.changeDetectorRef.detectChanges();
+                this.component.instance.closeModal.subscribe((val) => {
+                    this.modalLoaderService.setCloseModalData({
+                        modalType: modal.modalType,
+                        confirmed: val,
+                        ...modal.instanceData,
+                    });
+                    this.destroyComponent();
+                    this.overlayService.toggleOverlay(false)
+                        .pipe(
+                            takeUntil(this.destroy$),
+                        )
+                        .subscribe();
+                });
+                this.component.changeDetectorRef.detectChanges();
         });
     }
 

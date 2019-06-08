@@ -276,7 +276,7 @@ export class CustomValidators {
         };
     }
 
-    static isPossibleInteger = (number) => {
+    static isNumber = (number) => {
         const expresion = new RegExp(/^\+?(0|[1-9]\d*)$/);
         if (number.pristine) {
             return null;
@@ -287,7 +287,7 @@ export class CustomValidators {
         }
 
         return {
-            decimal: true,
+            number: true,
         };
     }
 

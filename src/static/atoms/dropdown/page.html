@@ -6,7 +6,7 @@
 <h3>Dropdown</h3>
 <div class="static-pages">
     <div class="row pb-5">
-        <div class="col-sm-4 col-xl-4 pb-5 pb-sm-0">
+        <!-- <div class="col-sm-4 col-xl-4 pb-5 pb-sm-0">
             <ng-template #dropdown1 let-toggle="toggle">
                 <lnd-button
                     (click)="toggle()"
@@ -27,8 +27,8 @@
                     {{ item.label }}
                 </a>
             </lnd-dropdown>
-        </div>
-        <div class="col-sm-4 col-xl-4 text-right">
+        </div> -->
+        <!-- <div class="col-sm-4 col-xl-4 text-right">
             <ng-template #dropdown2 let-toggle="toggle">
                 <lnd-button
                     (click)="toggle()"
@@ -51,33 +51,34 @@
                     {{ item.label }}
                 </a>
             </lnd-dropdown>
-        </div>
-        <div class="col-sm-4 col-xl-4 text-right">
+        </div> -->
+        <div class="col-sm-4 col-xl-4">
             <ng-template #dropdown3 let-toggle="toggle">
                 <lnd-button
                     (click)="toggle()"
-                    icon="icon--arrow-minimal-down"
+                    type="dropdown"
+                    icon="icon--triangle-down"
                     customIconClass="icon--small"
                     iconPosition="right"
                     label="Dropdown with menu right"
-                    size="long"
-                    type="secondary"
                 ></lnd-button>
             </ng-template>
             <lnd-dropdown
                 [actionTemplate]="dropdown3"
                 (toggleOverlayerAction)="toggleOverlayer();"
-                menuDirection="right"
-                [overlayEnabled]="true">
-                <a *ngFor="let item of dropdownItems"
-                    (click)="item.action()"
-                    class="dropdown-item">
+                [overlayEnabled]="true"
+                menuDirection="right">
+                <a *ngFor="let item of navigationItems"
+                    [ngClass]="item.class"
+                    class="dropdown-item"
+                    [routerLink]="item.url">
+                    <span [ngClass]="'dropdown-item-icon icon icon--' + item.icon"></span>
                     {{ item.label }}
                 </a>
             </lnd-dropdown>
         </div>
     </div>
-    <div class="row pb-5">
+    <!-- <div class="row pb-5">
         <div class="col-sm-4 col-xl-4 pb-5 pb-sm-0">
             <ng-template #dropdown4 let-toggle="toggle">
                 <lnd-button
@@ -151,8 +152,8 @@
                 </a>
             </lnd-dropdown>
         </div>
-    </div>
-    <div class="row pb-5">
+    </div> -->
+    <!-- <div class="row pb-5">
         <div class="offset-lg-8 col-sm-4 col-xl-4 text-right">
             <ng-template #dropdown7 let-toggle="toggle">
                 <lnd-button
@@ -177,8 +178,8 @@
                 </a>
             </lnd-dropdown>
         </div>
-    </div>
-    <div class="row pb-5">
+    </div> -->
+    <!-- <div class="row pb-5">
         <div class="col-sm-4 col-xl-4 text-right">
             <ng-template #dropdown8 let-toggle="toggle">
                 <lnd-button
@@ -203,8 +204,8 @@
                 </a>
             </lnd-dropdown>
         </div>
-    </div>
-    <div class="row">
+    </div> -->
+    <!-- <div class="row">
         <div class="offset-lg-8 col-sm-4 col-xl-4 text-right">
             <ng-template #dropdown9 let-toggle="toggle">
                 <lnd-button
@@ -229,9 +230,9 @@
                 </a>
             </lnd-dropdown>
         </div>
-    </div>
+    </div> -->
 </div>
-<h3>Dropup</h3>
+<!-- <h3>Dropup</h3>
 <div class="static-pages">
     <div class="row pb-5">
         <div class="col-sm-4 col-xl-4 pb-5 pb-sm-0">
@@ -382,8 +383,8 @@
             </lnd-dropdown>
         </div>
     </div>
-</div>
-<h3>Dropdown (no space)</h3>
+</div> -->
+<!-- <h3>Dropdown (no space)</h3>
 <div class="static-pages">
     <div class="row">
         <div class="offset-lg-8 col-sm-4 col-xl-4 text-right">
@@ -411,4 +412,4 @@
             </lnd-dropdown>
         </div>
     </div>
-</div>
+</div> -->

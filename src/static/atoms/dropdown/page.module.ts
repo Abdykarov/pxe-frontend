@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes } from '@angular/router';
+import {
+    RouterModule,
+    Routes,
+} from '@angular/router';
 
 // own classes
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
@@ -22,6 +25,7 @@ import { ButtonModule } from 'src/common/ui/button/button.module';
         ButtonModule,
         CommonModule,
         DropdownModule,
+        RouterModule,
     ],
 })
 export class DropdownPageModule {}

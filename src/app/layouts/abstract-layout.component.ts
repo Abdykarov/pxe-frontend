@@ -68,14 +68,6 @@ export abstract class AbstractLayoutComponent extends AbstractComponent {
         });
     }
 
-    public toggleOverlay() {
-        this.overlayService.toggleOverlay()
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe();
-    }
-
     public signUp = () => {
         if (this.settings.signUpType === SignType.SCROLL) {
             this.scrollToService.scrollToSubscription();
