@@ -214,25 +214,6 @@ $badge-padding-y:                  ( $spacer / 7.5 );
 $badge-padding-x:                  ( $spacer / 4 );
 
 
-// Dropdown
-$dropdown-padding-y:               0;
-$dropdown-border-radius:           0;
-$dropdown-item-min-height:         40px;
-$dropdown-item-padding-y:          ( $spacer / 3.75 );
-$dropdown-item-padding-x:          ( $spacer / 2 );
-$dropdown-link-color:              $gray-400;
-$dropdown-box-shadow:              none;
-$dropdown-link-hover-color:        $gray-400;
-$dropdown-link-hover-bg:           $gray-100;
-$dropdown-link-active-color:       $gray-400;
-$dropdown-link-active-bg:          $gray-100;
-$dropdown-beak-border-width:       15px;
-$dropdown-beak-border-style:       solid;
-$dropdown-beak-border-color:       $white;
-$dropdown-beak-box-shadow:         none;
-$dropdown-menu-offset:             ( $dropdown-beak-border-width - 3px );
-
-
 // Close
 $close-font-size:                   14px;
 $close-font-weight:                 400;
