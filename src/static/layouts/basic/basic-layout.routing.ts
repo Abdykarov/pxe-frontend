@@ -32,6 +32,10 @@ import {
     contractSigningPageRoutes,
 } from 'src/static/pages/contract-signing/page.module';
 import {
+    DropdownPageModule,
+    dropdownPageRoutes,
+} from 'src/static/atoms/dropdown/page.module';
+import {
     FormsPageModule,
     formsPageRoutes,
 } from 'src/static/atoms/forms/page.module';
@@ -115,6 +119,7 @@ const routes: Routes = [
             ...buttonsPageRoutes,
             ...colorsPageRoutes,
             ...contractSigningPageRoutes,
+            ...dropdownPageRoutes,
             ...formsPageRoutes,
             ...changePasswordBannerPageRoutes,
             ...iconsPageRoutes,
@@ -149,6 +154,7 @@ const routes: Routes = [
         ButtonsPageModule,
         ColorsPageModule,
         ContractSigningPageModule,
+        DropdownPageModule,
         FormsPageModule,
         ChangePasswordBannerPageModule,
         IconsPageModule,

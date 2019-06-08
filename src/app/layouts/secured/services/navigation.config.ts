@@ -47,7 +47,7 @@ export const navigationMenuUserActions: INavigationMenu = [
 
     },
     {
-        'class': 'navigation-main__item--second navigation-main__item--logout',
+        'class': 'navigation-main__item--second link--logout',
         'label': 'Odhlášení',
         'icon': 'power',
         'url' : `/${CONSTS.PATHS.LOGOUT}`,
