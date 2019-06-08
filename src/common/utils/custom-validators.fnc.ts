@@ -101,6 +101,21 @@ export class CustomValidators {
         };
     }
 
+    static isNumber = (number) => {
+        const expresion = new RegExp(/^\+?(0|[1-9]\d*)$/);
+        if (number.pristine) {
+            return null;
+        }
+
+        if (expresion.test(number.value)) {
+            return null;
+        }
+
+        return {
+            number: true,
+        };
+    }
+
 
     static isDecimal = (number) => {
         const expresion = new RegExp(/^(\d*([\.\,]\d+)?)$/);

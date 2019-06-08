@@ -11,10 +11,22 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import {
+    CODE_LIST,
+    CODE_LIST_TYPES,
+    COMMODITY_TYPE_OPTIONS,
+    CONTRACT_END_TYPE,
+    DISTRIBUTION_RATES_TYPE_DEFINITION,
+    SUBJECT_TYPE_OPTIONS,
+    SUBJECT_TYPE_TO_DIST_RATE_MAP,
+} from 'src/app/app.constants';
+import {
     CommodityType,
     DistributionType,
 } from 'src/common/graphql/models/supply.model';
-import { commodityTypeFields } from './supply-point-form.config';
+import {
+    commodityTypeFields,
+    expirationConfig,
+} from './supply-point-form.config';
 import {
     convertArrayToObject,
     transformCodeList,
@@ -24,14 +36,6 @@ import { HelpModalComponent } from 'src/common/containers/modal/modals/help/help
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import {
-    CODE_LIST,
-    CODE_LIST_TYPES,
-    COMMODITY_TYPE_OPTIONS,
-    DISTRIBUTION_RATES_TYPE_DEFINITION,
-    SUBJECT_TYPE_OPTIONS,
-    SUBJECT_TYPE_TO_DIST_RATE_MAP,
-} from 'src/app/app.constants';
 
 @Component({
     selector: 'pxe-supply-point-form',
@@ -42,10 +46,12 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
     public commodityTypeOptions: Array<IOption> = COMMODITY_TYPE_OPTIONS;
     public subjectTypeOptions: Array<IOption> = SUBJECT_TYPE_OPTIONS;
     public codeLists;
+    public codeList = CODE_LIST;
     public helpDocuments = {};
     public minDate: Date;
     public suppliers = [];
     public distributionRateType: string = CODE_LIST.DIST_RATE_INDIVIDUAL;
+    public expirationConfig = expirationConfig;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -69,6 +75,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
                 this.resetFormError();
                 this.setFormByCommodity(val);
                 this.resetFieldValue('supplierId');
+                this.setAnnualConsumptionNTState(val === CommodityType.POWER ? this.getFieldValue('distributionRateId') : null);
             });
 
         this.form.get('subjectTypeId')
@@ -91,6 +98,13 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
                 this.setAnnualConsumptionNTState(val);
             });
 
+        this.form.get('contractEndTypeId')
+            .valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(val => {
+                this.changeByContractEndType(val);
+            });
+
         this.form.get('supplierId')
             .valueChanges
             .pipe(
@@ -103,6 +117,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
         this.setFormByCommodity(CommodityType.POWER);
         this.loadCodeLists();
         this.setAnnualConsumptionNTState();
+        this.hideAllContractEndType();
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -111,10 +126,26 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
 
     public includesBothTariffs = (id: string) => DISTRIBUTION_RATES_TYPE_DEFINITION[DistributionType.BOTH].includes(id);
 
+    public changeByContractEndType(changeByContractEndType: string) {
+        const selectedContractEndType = this.expirationConfig[changeByContractEndType];
+
+        R.forEachObjIndexed((show: boolean, field: string) => {
+            show ? this.form.get(field).enable() : this.form.get(field).disable();
+        }, selectedContractEndType);
+
+        this.cd.markForCheck();
+    }
+
+    public hideAllContractEndType() {
+        R.forEachObjIndexed((value: string, field: string) => {
+            this.form.get(field).disable();
+        }, this.expirationConfig[CONTRACT_END_TYPE.CONTRACT_END_TERM]);
+    }
+
     public setFormByCommodity = (commodityType: CommodityType) => {
-        R.mapObjIndexed((fields, type) => {
+        R.mapObjIndexed((fields: string[], type: CommodityType) => {
             if (commodityTypeFields[type]) {
-                R.map((field) => {
+                R.map((field: string) => {
                     const fieldControl = this.form.get(field);
                     if (type === commodityType) {
                         fieldControl.enable();
