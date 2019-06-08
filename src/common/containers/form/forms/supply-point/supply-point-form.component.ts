@@ -11,6 +11,15 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import {
+    CODE_LIST,
+    CODE_LIST_TYPES,
+    COMMODITY_TYPE_OPTIONS,
+    CONTRACT_END_TYPE,
+    DISTRIBUTION_RATES_TYPE_DEFINITION,
+    SUBJECT_TYPE_OPTIONS,
+    SUBJECT_TYPE_TO_DIST_RATE_MAP,
+} from 'src/app/app.constants';
+import {
     CommodityType,
     DistributionType,
 } from 'src/common/graphql/models/supply.model';
@@ -27,15 +36,6 @@ import { HelpModalComponent } from 'src/common/containers/modal/modals/help/help
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { ModalLoaderService } from 'src/common/containers/modal/modal-loader.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import {
-    CODE_LIST,
-    CODE_LIST_TYPES,
-    COMMODITY_TYPE_OPTIONS,
-    CONTRACT_END_TYPE,
-    DISTRIBUTION_RATES_TYPE_DEFINITION,
-    SUBJECT_TYPE_OPTIONS,
-    SUBJECT_TYPE_TO_DIST_RATE_MAP,
-} from 'src/app/app.constants';
 
 @Component({
     selector: 'pxe-supply-point-form',
@@ -46,6 +46,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
     public commodityTypeOptions: Array<IOption> = COMMODITY_TYPE_OPTIONS;
     public subjectTypeOptions: Array<IOption> = SUBJECT_TYPE_OPTIONS;
     public codeLists;
+    public codeList = CODE_LIST;
     public helpDocuments = {};
     public minDate: Date;
     public suppliers = [];
@@ -72,7 +73,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
                 this.resetFormError();
                 this.setFormByCommodity(val);
                 this.resetFieldValue('supplierId');
-                this.setAnnualConsumptionNTState(val === CommodityType.POWER ? this.getFieldValue('distributionRateId') : false);
+                this.setAnnualConsumptionNTState(val === CommodityType.POWER ? this.getFieldValue('distributionRateId') : null);
             });
 
         this.form.get('subjectTypeId')
@@ -118,11 +119,11 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
     public includesBothTariffs = (id: string) => DISTRIBUTION_RATES_TYPE_DEFINITION[DistributionType.BOTH].includes(id);
 
     public changeByContractEndType(changeByContractEndType: string) {
-        const configChoosedItem = this.expirationConfig[changeByContractEndType];
+        const selectedContractEndType = this.expirationConfig[changeByContractEndType];
 
         R.forEachObjIndexed((show: boolean, field: string) => {
             show ? this.form.get(field).enable() : this.form.get(field).disable();
-        }, configChoosedItem);
+        }, selectedContractEndType);
 
         this.cd.markForCheck();
     }
@@ -134,9 +135,9 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
     }
 
     public setFormByCommodity = (commodityType: CommodityType) => {
-        R.mapObjIndexed((fields, type) => {
+        R.mapObjIndexed((fields: string[], type: CommodityType) => {
             if (commodityTypeFields[type]) {
-                R.map((field) => {
+                R.map((field: string) => {
                     const fieldControl = this.form.get(field);
                     if (type === commodityType) {
                         fieldControl.enable();
