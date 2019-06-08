@@ -1,4 +1,4 @@
-import { CommodityType } from '../../../graphql/models/supply.model';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 
 export interface IForm {
     controls: {
