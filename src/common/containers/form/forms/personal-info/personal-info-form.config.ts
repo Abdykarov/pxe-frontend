@@ -46,8 +46,6 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                // Validators.minLength(2),
-                // Validators.maxLength(17),
                 CustomValidators.accountNumber,
             ],
         ],
@@ -95,7 +93,6 @@ export const formFields: IForm = {
         ],
         onlyAddress1: [
             false,
-            [],
         ],
     },
     validationMessages: {
@@ -151,7 +148,7 @@ export const formFields: IForm = {
         },
         phonePrefix: {
             required: errorFieldMessages.phonePrefix.required,
-            phonePrefix: errorFieldMessages.phonePrefix.invalidPhoneNumberPrefix,
+            phoneNumberPrefix: errorFieldMessages.phonePrefix.invalidPhoneNumberPrefix,
         },
         email: {
             required: errorFieldMessages.email.required,
