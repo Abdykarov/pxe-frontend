@@ -46,8 +46,6 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                // Validators.minLength(2),
-                // Validators.maxLength(17),
                 CustomValidators.accountNumber,
             ],
         ],
@@ -95,7 +93,6 @@ export const formFields: IForm = {
         ],
         onlyAddress1: [
             false,
-            [],
         ],
     },
     validationMessages: {
