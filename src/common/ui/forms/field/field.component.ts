@@ -40,12 +40,6 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     @ViewChild('field')
     public field: ElementRef;
 
-    @Input()
-    public labelTemplate?: TemplateRef<any>;
-
-    @Input()
-    public subtextTemplate?: TemplateRef<any>;
-
     // tslint:disable-next-line:no-input-rename
     @Input('value')
     private _value = '';
@@ -108,6 +102,9 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     public label = '';
 
     @Input()
+    public labelTemplate?: TemplateRef<any>;
+
+    @Input()
     public name?: string;
 
     @Input()
@@ -139,6 +136,9 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
 
     @Input()
     public subtext?: string;
+
+    @Input()
+    public subtextTemplate?: TemplateRef<any>;
 
     @Input()
     public success = false;

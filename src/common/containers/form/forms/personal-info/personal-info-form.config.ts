@@ -151,7 +151,7 @@ export const formFields: IForm = {
         },
         phonePrefix: {
             required: errorFieldMessages.phonePrefix.required,
-            phonePrefix: errorFieldMessages.phonePrefix.invalidPhoneNumberPrefix,
+            phoneNumberPrefix: errorFieldMessages.phonePrefix.invalidPhoneNumberPrefix,
         },
         email: {
             required: errorFieldMessages.email.required,
