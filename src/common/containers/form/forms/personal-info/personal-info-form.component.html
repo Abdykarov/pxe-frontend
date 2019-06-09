@@ -49,7 +49,7 @@
         [label]="isIndividual ? 'Jméno a příjmení' : 'Název společnosti'"
         [success]="form.controls.name.valid && (form.controls.name.touched || formError.name)"
         [touched]="form.controls.name.touched || formError.name"
-        [validationMessages]="formFields.validationMessages.name"
+        [validationMessages]="isIndividual ? formFields.validationMessages.namePerson : formFields.validationMessages.nameCompany"
     ></lnd-form-field>
     <lnd-form-field
         *ngIf="form.controls.ico.status !== 'DISABLED'"
@@ -72,15 +72,15 @@
         [validationMessages]="formFields.validationMessages.dic"
     ></lnd-form-field>
     <pxe-address-whisperer
-        [appendTemplate]="otherAddress"
         [error]="formError.address1 || form.controls.address1.errors"
         [label]="isIndividual ? 'Trvalá adresa' : 'Sídlo firmy'"
         [parentForm]="form"
         [success]="form.controls.address1.valid && (form.controls.address1.touched || formError.address1)"
+        [subtextTemplate]="otherAddress"
         [templateItem]="templateItem"
         [templateLabel]="templateLabel"
         [touched]="form.controls.address1.touched || formError.address1"
-        [validationMessages]="formFields.validationMessages.address1"
+        [validationMessages]="isIndividual ? formFields.validationMessages.address1Person : formFields.validationMessages.address1Company"
         [whispererName]="'address1'">
     </pxe-address-whisperer>
     <pxe-address-whisperer
@@ -92,7 +92,7 @@
         [templateItem]="templateItem"
         [templateLabel]="templateLabel"
         [touched]="form.controls.address2.touched || formError.address2"
-        [validationMessages]="formFields.validationMessages.address2"
+        [validationMessages]="isIndividual ? formFields.validationMessages.address2Person : formFields.validationMessages.address2Company"
         [whispererName]="'address2'">
     </pxe-address-whisperer>
     <div class="row">
@@ -155,10 +155,14 @@
     ></lnd-form-field>
     <lnd-select
         *ngIf="form.controls.depositPaymentTypeId.status !== 'DISABLED'"
+        [error]="formError.depositPaymentTypeId || form.controls.depositPaymentTypeId.errors"
         label="Způsob placení záloh"
         [options]="depositPaymentTypeId"
         [parentForm]="form"
-        [selectName]="'depositPaymentTypeId'">
+        [selectName]="'depositPaymentTypeId'"
+        [success]="form.controls.depositPaymentTypeId.valid && (form.controls.depositPaymentTypeId.touched || formError.depositPaymentTypeId)"
+        [touched]="form.controls.depositPaymentTypeId.touched || formError.depositPaymentTypeId"
+        [validationMessages]="formFields.validationMessages.depositPaymentTypeId">
     </lnd-select>
     <lnd-form-field
         *ngIf="form.controls.deposit.status !== 'DISABLED'"

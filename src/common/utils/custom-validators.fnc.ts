@@ -6,7 +6,7 @@ import {
 
 import * as R_ from 'ramda-extension';
 
-import { acountNumberValidator } from './account-number.fnc';
+import { accountNumberValidator } from './account-number.fnc';
 import { acountNumberPrefixValidator } from './account-number-prefix.fnc';
 import {
     DICError,
@@ -18,37 +18,47 @@ import { verifyIC } from './ico-validator.fnc';
 
 export class CustomValidators {
 
-    static acountBank = (acountBank) => {
-        if (acountBank.pristine) {
+    static accountNumber = (acountNumber) => {
+        if (acountNumber.pristine) {
             return null;
         }
 
-        const value = acountBank.value;
-        const acountNumbers = acountBank.value.split('-');
+        const value = acountNumber.value;
+        const accountParts = acountNumber.value.split('-');
 
-        if (acountNumbers.length === 1 ) {
-            if (acountNumberValidator(value)) {
+        if (accountParts.length === 1) {
+            if (accountNumberValidator(value)) {
                 return null;
             } else {
                 return {
-                    acountBankNumber: true,
+                    accountNumber: true,
                 };
             }
         }
 
-        if (acountNumbers.length === 2 ) {
-            const prefix = acountNumbers[0];
-            const number = acountNumbers[1];
+        if (accountParts.length === 2) {
+            const prefix = accountParts[0];
+            const number = accountParts[1];
 
-            if (!acountNumberValidator(number)) {
+            if (!accountNumberValidator(number) && !acountNumberPrefixValidator(prefix)) {
                 return {
-                    acountBankNumber: true,
+                    accountNumber: {
+                        both: true,
+                    },
+                };
+            }
+
+            if (!accountNumberValidator(number)) {
+                return {
+                    accountNumber: true,
                 };
             }
 
             if (!acountNumberPrefixValidator(prefix)) {
                 return {
-                    acountBankPrefix: true,
+                    accountNumber: {
+                        prefix: true,
+                    },
                 };
             }
 
@@ -56,12 +66,11 @@ export class CustomValidators {
         }
 
         return {
-            acountBankNumber: true,
-            acountBankPrefix: true,
+            accountNumber: true,
         };
     }
 
-    static acountBankCode = (acountBankCode) => {
+    static bankCode = (acountBankCode) => {
         if (acountBankCode.pristine) {
             return null;
         }
@@ -72,7 +81,7 @@ export class CustomValidators {
         }
 
         return {
-            pattern: true,
+            bankCode: true,
         };
     }
 
@@ -87,11 +96,11 @@ export class CustomValidators {
         }
 
         return {
-            pattern: true,
+            phoneNumberPrefix: true,
         };
     }
 
-    static phoneNumberDeep = (phoneNumber) => {
+    static phoneNumber = (phoneNumber) => {
         if (phoneNumber.pristine) {
             return null;
         }
@@ -129,21 +138,6 @@ export class CustomValidators {
 
         return {
             phoneNumber: true,
-        };
-    }
-
-    static phoneNumber = (phoneNumber) => {
-        if (phoneNumber.pristine) {
-            return null;
-        }
-
-        const PHONE_REGEXP = /^(\+420)?[0-9]{9}$|^(\+){1}[0-9]{10,20}$/;
-        if (PHONE_REGEXP.test(phoneNumber.value)) {
-            return null;
-        }
-
-        return {
-            pattern: true,
         };
     }
 

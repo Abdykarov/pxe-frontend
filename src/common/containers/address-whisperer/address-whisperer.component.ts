@@ -40,9 +40,6 @@ export class AddressWhispererComponent extends AbstractComponent {
     public appendButtonIcon?: string;
 
     @Input()
-    public appendTemplate?: TemplateRef<any>;
-
-    @Input()
     public disabled = false;
 
     @Input()
@@ -65,6 +62,12 @@ export class AddressWhispererComponent extends AbstractComponent {
 
     @Input()
     public touched = false;
+
+    @Input()
+    public subtext?: string;
+
+    @Input()
+    public subtextTemplate?: TemplateRef<any>;
 
     @Input()
     public success = false;

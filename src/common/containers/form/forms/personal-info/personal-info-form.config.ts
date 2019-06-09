@@ -46,16 +46,16 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                Validators.minLength(2),
-                Validators.maxLength(17),
-                CustomValidators.acountBank,
+                // Validators.minLength(2),
+                // Validators.maxLength(17),
+                CustomValidators.accountNumber,
             ],
         ],
         bankCode: [
             null,
             [
                 Validators.required,
-                CustomValidators.acountBankCode,
+                CustomValidators.bankCode,
             ],
         ],
         phone: [
@@ -89,6 +89,8 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
+                CustomValidators.isDecimal,
+                CustomValidators.minValue(0),
             ],
         ],
         onlyAddress1: [
@@ -97,56 +99,72 @@ export const formFields: IForm = {
         ],
     },
     validationMessages: {
-        name: {
-            required: errorFieldMessages.fullName.required,
+        namePerson: {
+            required: errorFieldMessages.fullName.requiredPerson,
+        },
+        nameCompany: {
+            required: errorFieldMessages.fullName.requiredCompany,
         },
         ico: {
             required: errorFieldMessages.ico.required,
-            ico: errorFieldMessages.ico.ico,
-            icoLength: errorFieldMessages.ico.icoLength,
-            minlength: errorFieldMessages.ico.minLength,
-            maxlength: errorFieldMessages.ico.maxLength,
+            ico: errorFieldMessages.ico.invalidIC,
+            icoLength: errorFieldMessages.ico.invalidIC,
+            minlength: errorFieldMessages.ico.invalidIC,
+            maxlength: errorFieldMessages.ico.invalidIC,
         },
         dic: {
-            dicPrefix: errorFieldMessages.dic.dicPrefix,
-            dicDecimal: errorFieldMessages.dic.dicDecimal,
-            dicLength: errorFieldMessages.dic.dicLength,
-            minlength: errorFieldMessages.ico.minLength,
-            maxlength: errorFieldMessages.ico.maxLength,
+            dicPrefix: errorFieldMessages.dic.invalidDIC,
+            dicDecimal: errorFieldMessages.dic.invalidDIC,
+            dicLength: errorFieldMessages.dic.invalidDIC,
+            minlength: errorFieldMessages.dic.invalidDIC,
+            maxlength: errorFieldMessages.dic.invalidDIC,
         },
-        address1: {
-            required: errorFieldMessages.address.required,
-            invalidAddress: errorFieldMessages.address.invalidAddress,
+        address1Person: {
+            required: errorFieldMessages.address.requiredPermanentAddressPerson,
+            invalidAddress: errorFieldMessages.address.invalidPermanentAddressPerson,
         },
-        address2: {
-            invalidAddress: errorFieldMessages.address.invalidAddress,
+        address1Company: {
+            required: errorFieldMessages.address.requiredPermanentAddressCompany,
+            invalidAddress: errorFieldMessages.address.invalidPermanentAddressCompany,
+        },
+        address2Person: {
+            required: errorFieldMessages.address.requiredCurrentAddressPerson,
+            invalidAddress: errorFieldMessages.address.invalidCurrentAddressPerson,
+        },
+        address2Company: {
+            required: errorFieldMessages.address.requiredCurrentAddressCompany,
+            invalidAddress: errorFieldMessages.address.invalidCurrentAddressCompany,
         },
         bankAccountNumber: {
             required: errorFieldMessages.bankAccountNumber.required,
-            invalidAcountNumber: errorFieldMessages.bankAccountNumber.invalidAccountNumber,
+            accountNumber: errorFieldMessages.bankAccountNumber.accountNumber,
+            accountNumberPrefix: errorFieldMessages.bankAccountNumber.accountNumberPrefix,
+            accountNumberBoth: errorFieldMessages.bankAccountNumber.accountNumberBoth,
         },
         bankCode: {
             required: errorFieldMessages.bankCode.required,
-            invalidAcountNumberPrefix: errorFieldMessages.bankCode.invalidAcountNumberPrefix,
+            bankCode: errorFieldMessages.bankCode.bankCode,
         },
         phone: {
             required: errorFieldMessages.phone.required,
-            invalidTelephone: errorFieldMessages.phone.invalidTelephone,
+            phoneNumber: errorFieldMessages.phone.invalidPhoneNumber,
         },
         phonePrefix: {
             required: errorFieldMessages.phonePrefix.required,
-            invalidTelephonePrefix: errorFieldMessages.phonePrefix.invalidTelephonePrefix,
+            phonePrefix: errorFieldMessages.phonePrefix.invalidPhoneNumberPrefix,
         },
         email: {
             required: errorFieldMessages.email.required,
             email: errorFieldMessages.email.email,
-            invalidEmail: errorFieldMessages.email.invalidEmail,
+            invalidEmail: errorFieldMessages.email.email,
         },
-        depositPaymentType: {
+        depositPaymentTypeId: {
             required: errorFieldMessages.depositPaymentType.required,
         },
         deposit: {
             required: errorFieldMessages.deposit.required,
+            decimal: errorFieldMessages.number.decimal,
+            min: errorFieldMessages.number.positive,
         },
     },
 };

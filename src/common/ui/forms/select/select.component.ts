@@ -75,7 +75,7 @@ export class SelectComponent {
     public touched = false;
 
     @Input()
-    public appendTemplate?: TemplateRef<any>;
+    public subtextTemplate?: TemplateRef<any>;
 
     @Input()
     public templateItem?: TemplateRef<any>;

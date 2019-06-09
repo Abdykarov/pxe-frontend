@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
+import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
@@ -73,8 +74,11 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         if (this.form.valid) {
             const form = {
                 ...this.form.value,
+                phone: this.form.value.phonePrefix + this.form.value.phone,
             };
-            form.phone = form.phone +  form.phonePrefix;
+            if (!R.isNil(form.deposit)) {
+                form.deposit = parseFloat(form.deposit.replace(',', '.'));
+            }
             delete form.phonePrefix;
             delete form.onlyAddress1;
             this.submitAction.emit(form);

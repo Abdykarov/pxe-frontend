@@ -1,7 +1,5 @@
 import * as R_ from 'ramda-extension';
 
-import { isPossibleIntegerFnc } from './is-possible-integer.fnc';
-
 export const accountNumberPrefixFnc = (value): boolean => {
     const AnPrefixKfc: number[] = [10, 5, 8, 4, 2, 1];
     const An = String(value);
@@ -15,10 +13,8 @@ export const accountNumberPrefixFnc = (value): boolean => {
     if (An.length && An !== 'undefined' && An !== 'null') {
         for (let i = 0; i < An.length; i++) {
             ch = An.charAt(i);
-            if (ch.match(/[0-9 -]/i)) {
-                if (ch !== '-') {
-                    AnNumber = AnNumber + ch;
-                }
+            if (ch.match(/[0-9]/i)) {
+                AnNumber = AnNumber + ch;
             } else {
                 err = true;
             }
@@ -42,13 +38,9 @@ export const accountNumberPrefixFnc = (value): boolean => {
 
 export const acountNumberPrefixValidator = (value) => {
 
-    if (!R_.between(1, 6, value.length)) {
+    if (!R_.between(2, 6, value.length)) {
         return false;
     }
 
-    if (!isPossibleIntegerFnc(value)) {
-        return false;
-    }
-
-    return !accountNumberPrefixFnc(value);
+    return accountNumberPrefixFnc(value);
 };

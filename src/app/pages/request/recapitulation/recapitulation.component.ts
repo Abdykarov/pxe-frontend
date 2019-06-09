@@ -11,7 +11,7 @@ import { configStepper } from 'src/app/pages/request/recapitulation/recapitulati
 import { formFields } from 'src/common/containers/form/forms/personal-info/personal-info-form.config';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import { IPersonalDataInput, IPersonalDataInputForm } from 'src/common/graphql/models/personal-data.model';
+import { IPersonalDataInput } from 'src/common/graphql/models/personal-data.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
 import { ROUTES } from 'src/app/app.constants';
@@ -29,6 +29,8 @@ export class RecapitulationComponent extends AbstractComponent {
     public globalError: string[] = [];
     public fieldError: IFieldError = {};
     public formLoading = false;
+
+    public isIndividual = true;
 
     constructor(
         private cd: ChangeDetectorRef,
