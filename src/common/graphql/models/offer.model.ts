@@ -11,7 +11,7 @@ export interface ISupplyPointOffer {
     deliveryFrom: string;
     deliveryLength: number;
     permanentPaymentPrice: number;
-    benefits: any;
+    benefits: string[];
     priceVT: number;
     priceNT: number;
     priceGas: number;
