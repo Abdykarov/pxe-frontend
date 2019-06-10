@@ -130,7 +130,7 @@
         [validationMessages]="formFields.validationMessages.distributionRateId">
     </lnd-select>
     <div class="row no-gutters">
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-6 pr-md-1">
             <lnd-select
                 *ngIf="form.controls.circuitBreakerId.status !== 'DISABLED'"
                 [appendButtonIcon]="helpDocuments && helpDocuments['phasesId'] ? 'icon--info' : null"
@@ -145,7 +145,7 @@
                 [validationMessages]="formFields.validationMessages.phasesId">
             </lnd-select>
         </div>
-        <div class="col-12 col-md-6 pl-md-2">
+        <div class="col-12 col-md-6 pl-md-1">
             <lnd-select
                 *ngIf="form.controls.circuitBreakerId.status !== 'DISABLED'"
                 [appendButtonIcon]="helpDocuments && helpDocuments['circuitBreakerId'] ? 'icon--info' : null"
@@ -205,7 +205,7 @@
         [id]="'contractEndTypeId'"
         label="Ukončení platnosti aktuální smlouvy"
         [type]="'RADIOGROUP'"
-        [customFormGroupClass]="'mb-4'"
+        [customFormGroupClass]="'mb-5'"
         [options]="codeLists && codeLists[codeList.CONTRACT_END_TYPE]"
         [formControl]="form.controls.contractEndTypeId"
         [success]="form.controls.contractEndTypeId.valid && (form.controls.contractEndTypeId.touched || formError.contractEndTypeId)"
