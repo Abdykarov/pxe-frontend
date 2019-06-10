@@ -228,38 +228,45 @@
         [validationMessages]="form.controls.commodityType.value === 'POWER' ? formFields.validationMessages.expirationDatePower : formFields.validationMessages.expirationDateGas"
     >
     </lnd-datepicker>
-    <div class="row no-gutters">
-        <div class="col-4 pr-1">
-            <lnd-form-field
-                *ngIf="form.controls.timeToContractEnd.status !== 'DISABLED'"
-                [appendButtonIcon]="helpDocuments && helpDocuments['timeToContractEnd'] ? 'icon--info' : null"
-                (appendButtonAction)="showHelp('timeToContractEnd', 'Výpovědní lhůta')"
-                [error]="formError.timeToContractEnd || form.controls.timeToContractEnd.errors"
-                [formControl]="form.controls.timeToContractEnd"
-                [id]="'timeToContractEnd'"
-                label="Výpovědní lhůta"
-                [success]="form.controls.timeToContractEnd.valid && (form.controls.timeToContractEnd.touched || formError.timeToContractEnd)"
-                [touched]="form.controls.timeToContractEnd.touched || formError.timeToContractEnd"
-                [validationMessages]="formFields.validationMessages.timeToContractEnd"
-            ></lnd-form-field>
+    <pxe-field-wrapper
+            label="Výpovědní lhůta"
+            labelFor="timeToContractEnd"
+            [error]="((form.controls.timeToContractEnd.touched || formError.timeToContractEnd) && (formError.timeToContractEnd || form.controls.timeToContractEnd.errors)) ||
+                     ((form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId) && (formError.timeToContractEndPeriodId || form.controls.timeToContractEndPeriodId.errors))"
+            [validationMessages]="((form.controls.timeToContractEnd.touched || formError.timeToContractEnd) && (formError.timeToContractEnd || form.controls.timeToContractEnd.errors) && formFields.validationMessages.timeToContractEnd) ||
+                                  ((form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId) && (formError.timeToContractEndPeriodId || form.controls.timeToContractEndPeriodId.errors) && formFields.validationMessages.timeToContractEndPeriodId)">
+        <div class="row no-gutters">
+            <div class="col-4 pr-1">
+                <lnd-form-field
+                    *ngIf="form.controls.timeToContractEnd.status !== 'DISABLED'"
+                    [appendButtonIcon]="helpDocuments && helpDocuments['timeToContractEnd'] ? 'icon--info' : null"
+                    (appendButtonAction)="showHelp('timeToContractEnd', 'Výpovědní lhůta')"
+                    [error]="formError.timeToContractEnd || form.controls.timeToContractEnd.errors"
+                    [formControl]="form.controls.timeToContractEnd"
+                    [id]="'timeToContractEnd'"
+                    label="Výpovědní lhůta"
+                    [success]="form.controls.timeToContractEnd.valid && (form.controls.timeToContractEnd.touched || formError.timeToContractEnd)"
+                    [touched]="form.controls.timeToContractEnd.touched || formError.timeToContractEnd"
+                    [validationMessages]="formFields.validationMessages.timeToContractEnd"
+                ></lnd-form-field>
+            </div>
+            <div class="col-8 pl-1">
+                <lnd-select
+                    *ngIf="form.controls.timeToContractEndPeriodId.status !== 'DISABLED'"
+                    [appendButtonIcon]="helpDocuments && helpDocuments[''] ? 'icon--info' : null"
+                    (appendButtonAction)="showHelp('timeToContractEndPeriodId', 'Jistič')"
+                    [error]="formError.timeToContractEndPeriodId || form.controls.timeToContractEndPeriodId.errors"
+                    label=""
+                    [options]="codeLists && codeLists[codeList.TIME_TO_CONTRACT_END_PERIOD]"
+                    [parentForm]="form"
+                    [selectName]="'timeToContractEndPeriodId'"
+                    [success]="form.controls.timeToContractEndPeriodId.valid && (form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId)"
+                    [touched]="form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId"
+                    [validationMessages]="formFields.validationMessages.timeToContractEndPeriodId">
+                </lnd-select>
+            </div>
         </div>
-        <div class="col-8 pl-1">
-            <lnd-select
-                *ngIf="form.controls.timeToContractEndPeriodId.status !== 'DISABLED'"
-                [appendButtonIcon]="helpDocuments && helpDocuments[''] ? 'icon--info' : null"
-                (appendButtonAction)="showHelp('timeToContractEndPeriodId', 'Jistič')"
-                [error]="formError.timeToContractEndPeriodId || form.controls.timeToContractEndPeriodId.errors"
-                label=""
-                [options]="codeLists && codeLists[codeList.TIME_TO_CONTRACT_END_PERIOD]"
-                [parentForm]="form"
-                [selectName]="'timeToContractEndPeriodId'"
-                [success]="form.controls.timeToContractEndPeriodId.valid && (form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId)"
-                [touched]="form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId"
-                [validationMessages]="formFields.validationMessages.timeToContractEndPeriodId">
-            </lnd-select>
-        </div>
-    </div>
-
+    </pxe-field-wrapper>
     <div class="text-center">
         <lnd-button
             type="primary"
