@@ -15,9 +15,9 @@ export const CONSTS = {
     },
     DEFAULT_EXPIRATION: 3600,
     PATHS: {
-        DASHBOARD : 'dashboard',
         CONTRACT : 'contract',
         COOKIES_POLICY : 'cookies-policy',
+        DASHBOARD : 'dashboard',
         EMPTY : '',
         FORGOTTEN_PASSWORD : 'forgotten-password',
         GAS: 'gas',

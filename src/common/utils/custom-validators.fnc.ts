@@ -132,7 +132,7 @@ export class CustomValidators {
             return (pattern.test(value) || patternWithSpaces.test(value)) && searchPrefixes(mobilePrefixes, value);
         };
 
-        if (isValidMobile(phoneNumber) || isValidPhone(phoneNumber)) {
+        if (isValidMobile(phoneNumber.value) || isValidPhone(phoneNumber.value)) {
             return null;
         }
 

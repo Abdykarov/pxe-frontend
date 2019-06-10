@@ -12,6 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { depositPaymentType } from './personal-info-form.config';
+import { IPersonalDataInputForm } from 'src/common/graphql/models/personal-data.model';
 
 @Component({
     selector: 'pxe-personal-info-form',
@@ -49,9 +50,6 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         if (this.isIndividual) {
             this.form.get('ico').disable();
             this.form.get('dic').disable();
-        } else {
-            this.form.get('deposit').disable();
-            this.form.get('depositPaymentTypeId').disable();
         }
     }
 
@@ -72,13 +70,11 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         this.resetCustomFieldError();
         this.triggerValidation();
         if (this.form.valid) {
-            const form = {
+            const form: IPersonalDataInputForm = {
                 ...this.form.value,
                 phone: this.form.value.phonePrefix + this.form.value.phone,
+                deposit: parseFloat(this.form.value.deposit.replace(',', '.')),
             };
-            if (!R.isNil(form.deposit)) {
-                form.deposit = parseFloat(form.deposit.replace(',', '.'));
-            }
             delete form.phonePrefix;
             delete form.onlyAddress1;
             this.submitAction.emit(form);
