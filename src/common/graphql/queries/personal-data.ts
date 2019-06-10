@@ -1,5 +1,4 @@
 import gql from 'graphql-tag';
-import { IAddress, ICodelistItem } from '../models/supply.model';
 
 export const getPersonalData = gql`
     query getPersonalData($contractId: Int!){
