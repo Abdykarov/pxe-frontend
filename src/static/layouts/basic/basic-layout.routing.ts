@@ -32,6 +32,10 @@ import {
     contractSigningPageRoutes,
 } from 'src/static/pages/contract-signing/page.module';
 import {
+    DropdownPageModule,
+    dropdownPageRoutes,
+} from 'src/static/atoms/dropdown/page.module';
+import {
     FormsPageModule,
     formsPageRoutes,
 } from 'src/static/atoms/forms/page.module';
@@ -76,6 +80,10 @@ import {
     supplyPointsPageRoutes,
 } from 'src/static/pages/supply-points/page.module';
 import {
+    RecapitulationPageModule,
+    recapitulationPageRoutes,
+} from 'src/static/pages/recapitulation/page.module';
+import {
     SupplyPointsBannerPageModule,
     supplyPointsBannerPageRoutes,
 } from 'src/static/pages/supply-points-banner/page.module';
@@ -115,6 +123,7 @@ const routes: Routes = [
             ...buttonsPageRoutes,
             ...colorsPageRoutes,
             ...contractSigningPageRoutes,
+            ...dropdownPageRoutes,
             ...formsPageRoutes,
             ...changePasswordBannerPageRoutes,
             ...iconsPageRoutes,
@@ -129,6 +138,8 @@ const routes: Routes = [
             ...supplyPointPageRoutes,
             ...supplyPointsPageRoutes,
             ...supplyPointsBannerPageRoutes,
+            ...recapitulationPageRoutes,
+            ...supplyPointOfferPageRoutes,
             ...supplyPointsOfferPageRoutes,
             ...tablesPageRoutes,
             ...tooltipPageRoutes,
@@ -149,6 +160,7 @@ const routes: Routes = [
         ButtonsPageModule,
         ColorsPageModule,
         ContractSigningPageModule,
+        DropdownPageModule,
         FormsPageModule,
         ChangePasswordBannerPageModule,
         IconsPageModule,
@@ -158,6 +170,7 @@ const routes: Routes = [
         NewSupplyPointPageModule,
         OfferSelectionPageModule,
         ProgressBarPageModule,
+        RecapitulationPageModule,
         RouterModule.forChild(routes),
         SupplyOfferPageModule,
         SupplyPointOfferPageModule,

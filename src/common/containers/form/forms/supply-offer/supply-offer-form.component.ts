@@ -79,7 +79,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
         private supplyService: SupplyService,
     ) {
         super(fb);
-        this.minDate = new Date();
+        this.minDate = new Date(new Date().getTime() + 3600 * 1000 * 24);
     }
 
     ngOnInit() {

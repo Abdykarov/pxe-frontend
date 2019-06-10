@@ -1,0 +1,30 @@
+<div class="field-wrapper"
+     [class.field-wrapper-with-label]="label || labelTemplate">
+    <label
+        *ngIf="label || labelTemplate"
+        [for]="labelFor"
+        class="control-label">
+        <ng-container *ngIf="label">
+            {{label}}
+        </ng-container>
+        <ng-container *ngIf="labelTemplate">
+            <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
+        </ng-container>
+    </label>
+    <div class="field-wrapper-content">
+        <ng-content></ng-content>
+    </div>
+    <div
+        *ngIf="!!subtext || subtextTemplate"
+        class="input-subtext">
+        {{ subtext }}
+        <ng-container *ngIf="subtextTemplate">
+            <ng-container *ngTemplateOutlet="subtextTemplate"></ng-container>
+        </ng-container>
+    </div>
+    <div
+        *ngIf="!!errorMessage"
+        [innerHtml]="errorMessage"
+        class="invalid-feedback">
+    </div>
+</div>

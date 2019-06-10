@@ -111,21 +111,6 @@
 			text-transform: none;
 		}
 	}
-
-	&--logout {
-		.navigation-main__link {
-			&,
-			&:visited {
-				text-transform: none;
-				background-color: rgba($secondary, .05);
-			}
-
-			&:hover,
-			&:active {
-				background-color: rgba($secondary, .15);
-			}
-		}
-	}
 }
 
 .navigation-main__sub-icon {

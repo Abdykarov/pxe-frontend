@@ -35,10 +35,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Colors',
                     'url': '/basic/colors',
                 },
-                // {
-                //     'label': 'Drop*',
-                //     'url': '/dropdown',
-                // },
+                {
+                    'label': 'Dropdown',
+                    'url': '/basic/dropdown',
+                },
                 {
                     'label': 'Forms',
                     'url': '/basic/forms',
@@ -174,6 +174,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/supply-points-banner',
                 },
                 {
+                    'label': 'Recapitulation',
+                    'url': '/basic/recapitulation',
+                },
+                {
                     'label': 'Supply points offer',
                     'url': '/basic/supply-points-offer',
                 },
@@ -199,7 +203,7 @@ export const staticNavigationConfig: INavigationConfig = [
             'id': 'logout',
             'label': 'Odhlášení',
             'icon': 'power',
-            'class': 'navigation-main__item--second navigation-main__item--logout',
+            'class': 'navigation-main__item--second link--logout',
         },
     ],
 ];

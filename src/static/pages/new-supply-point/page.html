@@ -92,14 +92,26 @@
                         [parentForm]="form"
                         [selectName]="'distributionRateId'">
                     </lnd-select>
-                    <lnd-select
-                        [appendButtonIcon]="'icon--info'"
-                        (appendButtonAction)="openModal()"
-                        label="Jistič"
-                        [options]="config.circuitBreakerOptions"
-                        [parentForm]="form"
-                        [selectName]="'circuitBreakerId'">
-                    </lnd-select>
+                    <div class="row">
+                        <div class="col">
+                            <lnd-select
+                                label="Jistič fáze"
+                                [options]="config.circuitBreakerPhaseOptions"
+                                [parentForm]="form"
+                                [selectName]="'phasesId'">
+                            </lnd-select>
+                        </div>
+                        <div class="col">
+                            <lnd-select
+                                [appendButtonIcon]="'icon--info'"
+                                (appendButtonAction)="openModal()"
+                                label="velikost"
+                                [options]="config.circuitBreakerSizeOptions"
+                                [parentForm]="form"
+                                [selectName]="'circuitBreakerId'">
+                            </lnd-select>
+                        </div>
+                    </div>
                     <lnd-form-field
                         [appendButtonIcon]="'icon--info'"
                         (appendButtonAction)="openModal()"
@@ -114,16 +126,14 @@
                         label="Roční spotřeba elektřiny (vysoký tarif)"
                         appendText="MWh"
                     ></lnd-form-field>
-                    <lnd-datepicker
-                        [appendButtonIcon]="'icon--info'"
-                        (appendButtonAction)="openModal()"
-                        [datepickerName]="'expirationDate'"
-                        id="datepicker-1"
-                        label="Ukončení platnosti stávající smlouvy"
-                        [parentForm]="form"
-                        [placeholder]="'dd.mm.rrrr'"
-                    >
-                    </lnd-datepicker>
+                    <lnd-form-field
+                        [id]="'contractEndTypeId'"
+                        label="Ukončení platnosti aktuální smlouvy"
+                        [type]="'RADIOGROUP'"
+                        [customFormGroupClass]="'mb-3'"
+                        [radioGroupItemClass]="'custom-control-inline'"
+                        [options]="config.contractEndTypeOptions"
+                    ></lnd-form-field>
                     <div class="text-center">
                         <lnd-button
                             type="primary"
