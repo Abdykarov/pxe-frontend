@@ -8,6 +8,7 @@ import {
     OnInit,
 } from '@angular/core';
 
+import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
@@ -47,6 +48,15 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
             .subscribe(
                 (res: any) => {
                     this.supplyPointOffers = res.data.findSupplyPointOffers;
+                    R.map((supplyPointOffer: ISupplyPointOffer) => {
+                        let benefits = [];
+
+                        try {
+                            benefits = supplyPointOffer.benefits && JSON.parse(supplyPointOffer.benefits);
+                        } catch (e) {}
+
+                        supplyPointOffer.benefits = benefits;
+                    } , this.supplyPointOffers);
                     this.cd.markForCheck();
                 },
                 (error) => {
