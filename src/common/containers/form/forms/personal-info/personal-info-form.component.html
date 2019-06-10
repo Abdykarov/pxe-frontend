@@ -97,7 +97,7 @@
     </pxe-address-whisperer>
     <pxe-field-wrapper
         label="Bankovní účet"
-        labelFor="telephonePrefix"
+        labelFor="bankAccountNumber"
         subtext="Číslo bankovního účtu obsahujcí prefix uveďte prosím ve tvaru XXXXX-XXXXXXXXXX"
         [error]="((form.controls.bankAccountNumber.touched || formError.bankAccountNumber) && (formError.bankAccountNumber || form.controls.bankAccountNumber.errors)) ||
                  ((form.controls.bankCode.touched || formError.bankCode) && (formError.bankCode || form.controls.bankCode.errors))"
@@ -108,7 +108,7 @@
                 <lnd-form-field
                         [error]="formError.bankAccountNumber || form.controls.bankAccountNumber.errors"
                         [formControl]="form.controls.bankAccountNumber"
-                        [id]="'telephonePrefix'"
+                        [id]="'bankAccountNumber'"
                         label="Bankovní účet"
                         subtext="Číslo bankovního účtu obsahujcí prefix uveďte prosím ve tvaru XXXXX-XXXXXXXXXX"
                         [success]="form.controls.bankAccountNumber.valid && (form.controls.bankAccountNumber.touched || formError.bankAccountNumber)"

@@ -20,6 +20,10 @@
 	}
 
 	&-with-label {
+		.control-label {
+			z-index: 5;
+		}
+
 		.field-wrapper-content {
 
 			label,

@@ -235,7 +235,7 @@
                      ((form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId) && (formError.timeToContractEndPeriodId || form.controls.timeToContractEndPeriodId.errors))"
             [validationMessages]="((form.controls.timeToContractEnd.touched || formError.timeToContractEnd) && (formError.timeToContractEnd || form.controls.timeToContractEnd.errors) && formFields.validationMessages.timeToContractEnd) ||
                                   ((form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId) && (formError.timeToContractEndPeriodId || form.controls.timeToContractEndPeriodId.errors) && formFields.validationMessages.timeToContractEndPeriodId)">
-        <div class="row no-gutters">
+        <div class="row align-items-end no-gutters">
             <div class="col-4 pr-1">
                 <lnd-form-field
                     *ngIf="form.controls.timeToContractEnd.status !== 'DISABLED'"
