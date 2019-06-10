@@ -159,11 +159,11 @@ export const staticNavigationConfig: INavigationConfig = [
                 },
                 {
                     'label': 'New supply point',
-                    'url': '/basic/new-supply-point',
+                    'url': '/full/new-supply-point',
                 },
                 {
-                    'label': 'Offer selection',
-                    'url': '/basic/offer-selection',
+                    'label': 'supply offer',
+                    'url': '/full/supply-offer',
                 },
                 {
                     'label': 'Supply points',
