@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 
 import * as R from 'ramda';
-import { takeUntil } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { configStepper } from './offer-selection.config';
@@ -45,13 +45,13 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                ({data}) => {
+                ({data}: any) => {
                      this.supplyPointOffers = data.findSupplyPointOffers;
-                     R.map((supplyPointOffer: ISupplyPointOffer) => {
+                     R.map((supplyPointOffer) => {
                          let benefits: string[] = [];
 
                          try {
-                             benefits = supplyPointOffer.benefits && <string[]>JSON.parse(supplyPointOffer.benefits);
+                             benefits = supplyPointOffer.benefits && JSON.parse(<string>supplyPointOffer.benefits);
                          } catch (e) {}
 
                          supplyPointOffer.benefits = benefits;
