@@ -229,6 +229,7 @@
     >
     </lnd-datepicker>
     <pxe-field-wrapper
+            *ngIf="form.controls.timeToContractEnd.status !== 'DISABLED' && form.controls.timeToContractEndPeriodId.status !== 'DISABLED'"
             label="Výpovědní lhůta"
             labelFor="timeToContractEnd"
             [error]="((form.controls.timeToContractEnd.touched || formError.timeToContractEnd) && (formError.timeToContractEnd || form.controls.timeToContractEnd.errors)) ||
