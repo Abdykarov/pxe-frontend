@@ -1,0 +1,32 @@
+/*
+ -  Field wrapper
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+.field-wrapper {
+	position: relative;
+	margin-bottom: 40px;
+
+	.form-group {
+		margin-bottom: 0;
+	}
+
+	.invalid-feedback {
+		display: block;
+	}
+
+	&-with-label {
+		.field-wrapper-content {
+
+			label,
+			.input-subtext,
+			.invalid-feedback {
+				display: none;
+			}
+		}
+	}
+}
