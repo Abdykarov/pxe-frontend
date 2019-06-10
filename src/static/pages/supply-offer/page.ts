@@ -7,7 +7,7 @@ import {
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { NewSupplyPointPageConfig } from 'src/static/pages/new-supply-point/config';
-import { SupplyOfferPageConfig } from './config';
+import { SupplyOfferOrganismConfig } from 'src/static/organisms/supply-offer/config';
 
 @Component({
     templateUrl: './page.html',
@@ -33,7 +33,7 @@ export class SupplyOfferComponent {
 
     constructor(
         public newSupplyPointPageConfig: NewSupplyPointPageConfig,
-        public supplyOfferConfig: SupplyOfferPageConfig,
+        public supplyOfferConfig: SupplyOfferOrganismConfig,
     ) {
         this.breadcrumbItemsSimple = [
             {
