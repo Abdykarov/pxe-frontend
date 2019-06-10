@@ -47,7 +47,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
             .subscribe(
                 ({data}: any) => {
                      this.supplyPointOffers = data.findSupplyPointOffers;
-                     R.map((supplyPointOffer) => {
+                     R.map((supplyPointOffer: ISupplyPointOffer) => {
                          let benefits: string[] = [];
 
                          try {
