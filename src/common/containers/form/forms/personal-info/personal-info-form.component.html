@@ -95,55 +95,72 @@
         [validationMessages]="isIndividual ? formFields.validationMessages.address2Person : formFields.validationMessages.address2Company"
         [whispererName]="'address2'">
     </pxe-address-whisperer>
-    <div class="row">
-        <div class="col-8">
-            <lnd-form-field
-                [error]="formError.bankAccountNumber || form.controls.bankAccountNumber.errors"
-                [formControl]="form.controls.bankAccountNumber"
-                [id]="'telephonePrefix'"
-                label="Bankovní účet"
-                subtext="Číslo bankovního účtu obsahujcí prefix uveďte prosím ve tvaru XXXXX-XXXXXXXXXX"
-                [success]="form.controls.bankAccountNumber.valid && (form.controls.bankAccountNumber.touched || formError.bankAccountNumber)"
-                [touched]="form.controls.bankAccountNumber.touched || formError.bankAccountNumber"
-                [validationMessages]="formFields.validationMessages.bankAccountNumber"
-            ></lnd-form-field>
+    <pxe-field-wrapper
+        label="Bankovní účet"
+        labelFor="telephonePrefix"
+        subtext="Číslo bankovního účtu obsahujcí prefix uveďte prosím ve tvaru XXXXX-XXXXXXXXXX"
+        [error]="((form.controls.bankAccountNumber.touched || formError.bankAccountNumber) && (formError.bankAccountNumber || form.controls.bankAccountNumber.errors)) ||
+                 ((form.controls.bankCode.touched || formError.bankCode) && (formError.bankCode || form.controls.bankCode.errors))"
+        [validationMessages]="((form.controls.bankAccountNumber.touched || formError.bankAccountNumber) && (formError.bankAccountNumber || form.controls.bankAccountNumber.errors) && formFields.validationMessages.bankAccountNumber) ||
+                              ((form.controls.bankCode.touched || formError.bankCode) && (formError.bankCode || form.controls.bankCode.errors) && formFields.validationMessages.bankCode)">
+        <div class="row">
+            <div class="col-8">
+                <lnd-form-field
+                        [error]="formError.bankAccountNumber || form.controls.bankAccountNumber.errors"
+                        [formControl]="form.controls.bankAccountNumber"
+                        [id]="'telephonePrefix'"
+                        label="Bankovní účet"
+                        subtext="Číslo bankovního účtu obsahujcí prefix uveďte prosím ve tvaru XXXXX-XXXXXXXXXX"
+                        [success]="form.controls.bankAccountNumber.valid && (form.controls.bankAccountNumber.touched || formError.bankAccountNumber)"
+                        [touched]="form.controls.bankAccountNumber.touched || formError.bankAccountNumber"
+                        [validationMessages]="formFields.validationMessages.bankAccountNumber"
+                ></lnd-form-field>
+            </div>
+            <div class="col-4">
+                <lnd-form-field
+                        [error]="formError.bankCode || form.controls.bankCode.errors"
+                        [formControl]="form.controls.bankCode"
+                        [id]="'bankCode'"
+                        label=""
+                        [success]="form.controls.bankCode.valid && (form.controls.bankCode.touched || formError.bankCode)"
+                        [touched]="form.controls.bankCode.touched || formError.bankCode"
+                        [validationMessages]="formFields.validationMessages.bankCode"
+                ></lnd-form-field>
+            </div>
         </div>
-        <div class="col-4">
-            <lnd-form-field
-                [error]="formError.bankCode || form.controls.bankCode.errors"
-                [formControl]="form.controls.bankCode"
-                [id]="'bankCode'"
-                label=""
-                [success]="form.controls.bankCode.valid && (form.controls.bankCode.touched || formError.bankCode)"
-                [touched]="form.controls.bankCode.touched || formError.bankCode"
-                [validationMessages]="formFields.validationMessages.bankCode"
-            ></lnd-form-field>
+    </pxe-field-wrapper>
+    <pxe-field-wrapper
+        label="Telefonní číslo"
+        labelFor="phonePrefix"
+        [error]="((form.controls.phonePrefix.touched || formError.phonePrefix) && (formError.phonePrefix || form.controls.phonePrefix.errors)) ||
+                 ((form.controls.phone.touched || formError.phone) && (formError.phone || form.controls.phone.errors))"
+        [validationMessages]="((form.controls.phonePrefix.touched || formError.phonePrefix) && (formError.phonePrefix || form.controls.phonePrefix.errors) && formFields.validationMessages.phonePrefix) ||
+                              ((form.controls.phone.touched || formError.phone) && (formError.phone || form.controls.phone.errors) && formFields.validationMessages.phone)">
+        <div class="row">
+            <div class="col-4">
+                <lnd-form-field
+                    [error]="formError.phonePrefix || form.controls.phonePrefix.errors"
+                    [formControl]="form.controls.phonePrefix"
+                    [id]="'phonePrefix'"
+                    label="Telefonní číslo"
+                    [success]="form.controls.phonePrefix.valid && (form.controls.phonePrefix.touched || formError.phonePrefix)"
+                    [touched]="form.controls.phonePrefix.touched || formError.phonePrefix"
+                    [validationMessages]="formFields.validationMessages.phonePrefix"
+                ></lnd-form-field>
+            </div>
+            <div class="col-8">
+                <lnd-form-field
+                    [error]="formError.phone || form.controls.phone.errors"
+                    [formControl]="form.controls.phone"
+                    [id]="'phone'"
+                    label=""
+                    [success]="form.controls.phone.valid && (form.controls.phone.touched || formError.phone)"
+                    [touched]="form.controls.phone.touched || formError.phone"
+                    [validationMessages]="formFields.validationMessages.phone"
+                ></lnd-form-field>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
-            <lnd-form-field
-                [error]="formError.phonePrefix || form.controls.phonePrefix.errors"
-                [formControl]="form.controls.phonePrefix"
-                [id]="'phonePrefix'"
-                label="Telefonní číslo"
-                [success]="form.controls.phonePrefix.valid && (form.controls.phonePrefix.touched || formError.phonePrefix)"
-                [touched]="form.controls.phonePrefix.touched || formError.phonePrefix"
-                [validationMessages]="formFields.validationMessages.phonePrefix"
-            ></lnd-form-field>
-        </div>
-        <div class="col-8">
-            <lnd-form-field
-                [error]="formError.phone || form.controls.phone.errors"
-                [formControl]="form.controls.phone"
-                [id]="'phone'"
-                label=""
-                [success]="form.controls.phone.valid && (form.controls.phone.touched || formError.phone)"
-                [touched]="form.controls.phone.touched || formError.phone"
-                [validationMessages]="formFields.validationMessages.phone"
-            ></lnd-form-field>
-        </div>
-    </div>
+    </pxe-field-wrapper>
     <lnd-form-field
         [error]="formError.email || form.controls.email.errors"
         [formControl]="form.controls.email"
