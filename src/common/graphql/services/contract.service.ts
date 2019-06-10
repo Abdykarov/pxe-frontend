@@ -1,14 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 
-import {
-    deleteOffer,
-    saveGasOffer,
-    savePowerOffer,
-    updatePowerOffer,
-} from 'src/common/graphql/mutation/offer';
 import {
     findSupplierOffers,
     findSupplyPointOffers,
@@ -16,9 +9,8 @@ import {
 import {
     IOfferInput,
     IOfferInputGasAttributes,
-    IOfferInputPowerAttributes,
-    IOfferStatus,
 } from 'src/common/graphql/models/offer.model';
+import { getContractTerms } from '../queries/contract';
 
 @Injectable({
     providedIn: 'root',
@@ -29,27 +21,25 @@ export class OfferService {
         private apollo: Apollo,
     ) {}
 
-    public findSupplierOffers() {
+    public getContractTerms(contractId: number) {
         return this.apollo
             .watchQuery<any>({
-                query: findSupplierOffers,
-                // errorPolicy: 'ignore',
+                query: getContractTerms,
+                variables: {
+                    contractId,
+                },
             })
             .valueChanges;
     }
 
-    public updateGasOffer(offerId: number, offer: IOfferInput, gasAttributes: IOfferInputGasAttributes) {
+    public signContract(contractId: number, smsCode: string) {
         return this.apollo
             .mutate({
-                mutation: gasAttributes,
+                mutation: signContract,
                 variables: {
-                    offerId,
-                    offer,
-                    gasAttributes,
+                    contractId,
+                    smsCode,
                 },
-                refetchQueries: [{
-                    query: findSupplierOffers,
-                }],
             });
     }
 }
