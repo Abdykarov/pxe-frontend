@@ -50,9 +50,6 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         if (this.isIndividual) {
             this.form.get('ico').disable();
             this.form.get('dic').disable();
-        } else {
-            this.form.get('deposit').disable();
-            this.form.get('depositPaymentTypeId').disable();
         }
     }
 
@@ -76,10 +73,8 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             const form: IPersonalDataInputForm = {
                 ...this.form.value,
                 phone: this.form.value.phonePrefix + this.form.value.phone,
+                deposit: parseFloat(this.form.value.deposit.replace(',', '.')),
             };
-            if (!R.isNil(form.deposit)) {
-                form.deposit = parseFloat(this.form.value.deposit.replace(',', '.'));
-            }
             delete form.phonePrefix;
             delete form.onlyAddress1;
             this.submitAction.emit(form);
