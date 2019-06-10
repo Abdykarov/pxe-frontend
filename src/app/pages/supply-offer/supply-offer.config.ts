@@ -3,11 +3,12 @@ import { Injectable } from '@angular/core';
 import * as R from 'ramda';
 
 import {
-    ANNUAL_CONSUMPTION_OPTIONS,
+    CODE_LIST,
     DELIVERY_LENGTH_OPTIONS,
     SUBJECT_TYPE_OPTIONS,
 } from 'src/app/app.constants';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
+import { IOfferTableRows } from './models/supply-pffer.model';
 import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
 
 @Injectable({
@@ -18,7 +19,12 @@ export class SupplyOfferConfig {
     public confirmDeleteOffer = 'confirmDeleteOffer';
     public confirmCancelOffer = 'confirmCancelOffer';
 
-    public tableCols = {
+    public supplyOfferCommodityTypes = {
+        power: CommodityType.POWER,
+        gas: CommodityType.GAS,
+    };
+
+    public tableCols = (codeLists): IOfferTableRows => ({
         POWER: [
             {
                 label: 'Název produktu',
@@ -46,26 +52,58 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.distributionLocation ? row.distributionLocation.code : ''}`,
+                        content: (row) => {
+                            return row.distributionLocation ?
+                                R.find(R.propEq('value', row.distributionLocation.code))(codeLists[CODE_LIST.DISTRIBUTION_POWER]).label :
+                                '';
+                        },
                     },
                 ],
             },
             {
-                label: 'Cena&nbsp;VT (MWh/Kč)',
+                label: 'Distribuční sazba',
                 views: [
                     {
                         headingClass: [''],
                         cellClass: [''],
+                        content: (row) => {
+                            return row.distributionRate ?
+                                R.find(R.propEq('value', row.distributionRate.code))(codeLists[CODE_LIST.DIST_RATE]).label :
+                                '';
+                        },
+                    },
+                ],
+            },
+            {
+                label: 'Jistič',
+                views: [
+                    {
+                        headingClass: [''],
+                        cellClass: [''],
+                        content: (row) => {
+                            return row.circuitBreaker ?
+                                R.find(R.propEq('value', row.circuitBreaker.code))(codeLists[CODE_LIST.CIRCUIT_BREAKER]).label :
+                                '';
+                        },
+                    },
+                ],
+            },
+            {
+                label: 'Cena za VT',
+                views: [
+                    {
+                        headingClass: [''],
+                        cellClass: ['', 'text-right'],
                         contentTemplateName: 'columnTemplatePriceVT',
                     },
                 ],
             },
             {
-                label: 'Cena&nbsp;NT (MWh/Kč)',
+                label: 'Cena za NT',
                 views: [
                     {
                         headingClass: [''],
-                        cellClass: [''],
+                        cellClass: ['', 'text-right'],
                         contentTemplateName: 'columnTemplatePriceNT',
                     },
                 ],
@@ -101,7 +139,7 @@ export class SupplyOfferConfig {
                 ],
             },
             {
-                label: 'Stálá platba - cena (Kč)',
+                label: 'Stálá platba - cena',
                 views: [
                     {
                         headingClass: ['', 'text-right'],
@@ -150,17 +188,18 @@ export class SupplyOfferConfig {
                         cellClass: [''],
                         content: (row) => {
                             return row.annualConsumption ?
-                                `${R.find(R.propEq('value', row.annualConsumption.code))(ANNUAL_CONSUMPTION_OPTIONS).label}` : '';
+                                R.find(R.propEq('value', row.annualConsumption.code))(codeLists[CODE_LIST.CONSUMPTION]).label :
+                                '';
                         },
                     },
                 ],
             },
             {
-                label: 'Cena (MWh/Kč)',
+                label: 'Cena',
                 views: [
                     {
                         headingClass: [''],
-                        cellClass: [''],
+                        cellClass: ['', 'text-right'],
                         contentTemplateName: 'columnTemplatePriceGas',
                     },
                 ],
@@ -196,7 +235,7 @@ export class SupplyOfferConfig {
                 ],
             },
             {
-                label: 'Stálá platba - cena (Kč)',
+                label: 'Stálá platba - cena',
                 views: [
                     {
                         headingClass: ['', 'text-right'],
@@ -206,12 +245,7 @@ export class SupplyOfferConfig {
                 ],
             },
         ],
-    };
-
-    public supplyOfferCommodityTypes = {
-        power: CommodityType.POWER,
-        gas: CommodityType.GAS,
-    };
+    })
 
     public confirmDeleteOfferConfig = (data): IShowModal => ({
         component: 'ConfirmModalComponent',

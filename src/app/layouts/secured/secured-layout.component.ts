@@ -94,6 +94,9 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
 
     public toggleMenuOpen = () => {
         this.isMenuOpen = !this.isMenuOpen;
-        this.cd.markForCheck();
+        this.overlayService.toggleOverlay( (res) => {
+            this.showOverlay = true;
+            this.cd.markForCheck();
+        });
     }
 }

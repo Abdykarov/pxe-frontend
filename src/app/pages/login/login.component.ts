@@ -71,7 +71,7 @@ export class LoginComponent extends AbstractComponent {
             .subscribe(
                 () => {
                     this.resetErrorsAndLoading();
-                    this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER]);
+                    this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER_POWER]);
                 },
                 error => {
                     this.handleError(error);

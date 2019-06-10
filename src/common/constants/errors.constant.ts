@@ -11,18 +11,12 @@ export const errorFieldMessages =  {
     },
     annualConsumption: {
         required: 'Vyplňte roční spotřebu plynu.',
-        annualConsumption: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
-        negativeAnnualConsumption: 'Použít můžete pouze kladná čísla.',
     },
     annualConsumptionNT: {
         required: 'Vyplňte roční spotřebu elektřiny v nízkém tarifu.',
-        annualConsumptionNT: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
-        negativeAnnualConsumption: 'Použít můžete pouze kladná čísla.',
     },
     annualConsumptionVT: {
         required: 'Vyplňte roční spotřebu elektřiny ve vysokém tarifu.',
-        annualConsumptionVT: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
-        negativeAnnualConsumption: 'Použít můžete pouze kladná čísla.',
     },
     circuitBreakerId: {
         required: 'Vyberte ze seznamu, jakou máte velikost jističe.',
@@ -30,8 +24,9 @@ export const errorFieldMessages =  {
     commodityType: {
         required: 'Zvolte komoditu.',
     },
-    subjectTypeId: {
-        required: 'Zvolte odběratele.',
+    confirmationCode: {
+        required: 'Zadejte kód.',
+        badCode: 'Zadali jste neplatný kód.',
     },
     consent: {
         signUp: {
@@ -40,6 +35,10 @@ export const errorFieldMessages =  {
         newsSubscription: {
             required: 'Nezapomeňte na souhlas se zásadami bezpečnosti.',
         },
+    },
+    date: {
+        format: 'Vyplňte platný formát data.',
+        expirationDateInPast: 'Doplnit můžete pouze budoucí datum.',
     },
     distributionRateId: {
         required: 'Vyberte ze seznamu, jakou máte distribuční sazbu.',
@@ -62,12 +61,15 @@ export const errorFieldMessages =  {
     expirationDate: {
         requiredGas: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr plynu.',
         requiredPower: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr elektřiny.',
-        format: 'Vyplňte platný formát data.',
-        expirationDateInPast: 'Doplnit můžete pouze budoucí datum.',
     },
     name: {
         required: 'Vyplňte libovolný název odběrného místa (např. Byt dcera) v maximální délce 50 znaků.',
         maxlength: 'Maximální délka pro název odběrného místa je 50 znaků.',
+    },
+    number: {
+        decimal: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
+        positive: 'Použít můžete pouze kladná čísla.',
+        integer: 'Použít můžete pouze celá čísla.',
     },
     offerAnnualConsumptionId: {
         required: 'Vyberte ze seznamu spotřebu.',
@@ -86,45 +88,45 @@ export const errorFieldMessages =  {
     },
     offerPriceGas: {
         required: 'Vyplňte cenu plynu.',
-        annualConsumptionVT: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
-        negativeAnnualConsumption: 'Použít můžete pouze kladná čísla.',
     },
     offerPriceNT: {
         required: 'Vyplňte cenu elektřiny v nízkém tarifu.',
-        annualConsumptionVT: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
-        negativeAnnualConsumption: 'Použít můžete pouze kladná čísla.',
     },
     offerPriceVT: {
         required: 'Vyplňte cenu elektřiny ve vysokém tarifu.',
-        annualConsumptionVT: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
-        negativeAnnualConsumption: 'Použít můžete pouze kladná čísla.',
     },
     offerPermanentPaymentPrice: {
         required: 'Vyplňte měsíční stálou platbu.',
-        annualConsumptionVT: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
-        negativeAnnualConsumption: 'Použít můžete pouze kladná čísla.',
     },
     offerValidFromTo: {
         required: 'Doplňte datum, dokdy je platná nabídka.',
-        format: 'Vyplňte platný formát data.',
-        expirationDateInPast: 'Doplnit můžete pouze budoucí datum.',
     },
     offerDeliveryFromTo: {
         required: 'Doplňte datum dodávkového období.',
-        format: 'Vyplňte platný formát data.',
-        expirationDateInPast: 'Doplnit můžete pouze budoucí datum.',
     },
     offerName: {
         required: 'Vyplňte libovolný název nabídky.',
     },
+    phasesId: {
+        required: 'Vyplňte typ fáze.',
+    },
     password: {
         required: 'Zadejte heslo.',
+    },
+    subjectTypeId: {
+        required: 'Zvolte odběratele.',
     },
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
     },
-    confirmationCode: {
-        required: 'Zadejte kód.',
-        badCode: 'Zadali jste neplatný kód.', // je treba syncs s grafikou!!!
+    contractEndTypeId: {
+        required: 'Zvolte typ ukončení platnosti aktuální smlouvy.',
+    },
+    timeToContractEnd: {
+        required: 'Zadejte výpovědní lhůtu.',
+        max: 'Zadejte maximálně 2 číslice do výpovědní lhůty.',
+    },
+    timeToContractEndPeriodId: {
+        required: 'Zvolte typ výpovědní lhůty.',
     },
 };
