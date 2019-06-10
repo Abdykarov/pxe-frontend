@@ -121,7 +121,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
         const configChoosedItem = this.expirationConfig[changeByContractEndType];
 
         R.forEachObjIndexed((show: boolean, field: string) => {
-            show ? this.form.get(field).enable() : this.form.get(field).disable();
+            show ? this.setEnableField(field) : this.setDisableField(field);
         }, configChoosedItem);
 
         this.cd.markForCheck();
@@ -129,7 +129,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
 
     public hideAllContractEndType() {
         R.forEachObjIndexed((value: string, field: string) => {
-            this.form.get(field).disable();
+            this.setDisableField(field);
         }, this.expirationConfig[CONTRACT_END_TYPE.CONTRACT_END_TERM]);
     }
 
@@ -137,11 +137,10 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
         R.mapObjIndexed((fields, type) => {
             if (commodityTypeFields[type]) {
                 R.map((field) => {
-                    const fieldControl = this.form.get(field);
                     if (type === commodityType) {
-                        fieldControl.enable();
+                        this.setEnableField(field);
                     } else {
-                        fieldControl.disable();
+                        this.setDisableField(field);
                     }
                 }, fields);
             }
@@ -198,11 +197,10 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
     }
 
     public setAnnualConsumptionNTState = (distributionRateId: string = null) => {
-        const annualConsumptionNTControl = this.form.get('annualConsumptionNT');
         if (this.includesBothTariffs(distributionRateId)) {
-            annualConsumptionNTControl.enable();
+            this.setEnableField('annualConsumptionNT');
         } else {
-            annualConsumptionNTControl.disable();
+            this.setDisableField('annualConsumptionNT');
         }
     }
 

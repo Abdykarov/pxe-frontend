@@ -46,7 +46,7 @@ export class ContractFormComponent extends AbstractFormComponent implements OnIn
         if (this.form.valid || !this.smsSend) {
             if (this.smsSend) {
             } else {
-                this.resetFieldError('smsCode');
+                this.resetFormError();
                 this.setEnableField('smsCode');
                 this.smsSend = true;
             }

@@ -46,11 +46,11 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     setForm = () => {
         this.setAddress2(false);
         if (this.isIndividual) {
-            this.form.get('ico').disable();
-            this.form.get('dic').disable();
+            this.setDisableField('ico');
+            this.setDisableField('dic');
         } else {
-            this.form.get('deposit').disable();
-            this.form.get('depositPaymentTypeId').disable();
+            this.setDisableField('deposit');
+            this.setDisableField('depositPaymentTypeId');
         }
     }
 
@@ -59,11 +59,10 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     }
 
     public setAddress2(val) {
-        const correspondenceAddress = this.form.get('address2');
         if (val) {
-            correspondenceAddress.enable();
+            this.setEnableField('address2');
         } else {
-            correspondenceAddress.disable();
+            this.setDisableField('address2');
         }
     }
 
