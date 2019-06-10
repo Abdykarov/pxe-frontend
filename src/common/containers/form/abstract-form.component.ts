@@ -22,10 +22,10 @@ import {
 
 export class AbstractFormComponent extends AbstractComponent implements OnInit, OnChanges {
     @Input()
-    public formSent = false;
+    public formFields: IForm;
 
     @Input()
-    public formFields: IForm;
+    public formSent = false;
 
     @Input()
     public formLoading = false;

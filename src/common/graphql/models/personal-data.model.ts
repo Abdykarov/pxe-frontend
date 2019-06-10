@@ -14,7 +14,7 @@ export interface IPersonalDataInput {
     bankAccountNumber: string;
     bankCode: string;
     depositPaymentTypeId: string;
-    deposit: string;
+    deposit: number;
 }
 
 export interface IPersonalDataInputForm {
@@ -29,7 +29,7 @@ export interface IPersonalDataInputForm {
     bankAccountNumber: string;
     bankCode: string;
     depositPaymentTypeId: string;
-    deposit: string;
+    deposit: number;
     onlyAddress1: string;
 }
 

@@ -73,18 +73,18 @@
             </button>
         </div>
         <div
-            *ngIf="!!subtext"
+            *ngIf="!!subtext || subtextTemplate"
             class="input-subtext"
             [class.input-subtext--disabled]="!!disabledField">
             {{ subtext }}
+            <ng-container *ngIf="subtextTemplate"
+                          [ngTemplateOutlet]="subtextTemplate">
+            </ng-container>
         </div>
         <div
             *ngIf="!!getErrorMessage()"
             [innerHtml]="getErrorMessage()"
             class="invalid-feedback">
         </div>
-        <ng-container *ngIf="appendTemplate"
-                      [ngTemplateOutlet]="appendTemplate">
-        </ng-container>
     </div>
 </div>

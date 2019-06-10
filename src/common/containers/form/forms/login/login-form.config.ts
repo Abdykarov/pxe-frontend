@@ -40,7 +40,6 @@ export const loginSupplyAuthFormFields: IForm = {
     validationMessages: {
         confirmationCode: {
             required: errorFieldMessages.confirmationCode.required,
-           // code: errorFieldMessages.code.code,//todo custm validate
         },
     },
 };

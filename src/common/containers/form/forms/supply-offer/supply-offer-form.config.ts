@@ -6,7 +6,10 @@ import {
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
-import { IForm } from 'src/common/containers/form/models/form-definition.model';
+import {
+    ICommodityTypeFields,
+    IForm,
+} from 'src/common/containers/form/models/form-definition.model';
 
 export const formFields: IForm = {
     controls: {
@@ -119,8 +122,8 @@ export const formFields: IForm = {
         },
         deliveryFromTo: {
             required: errorFieldMessages.offerDeliveryFromTo.required,
-            bsDate: errorFieldMessages.offerDeliveryFromTo.format,
-            bsDateMinDate: errorFieldMessages.offerDeliveryFromTo.expirationDateInPast,
+            bsDate: errorFieldMessages.date.format,
+            bsDateMinDate: errorFieldMessages.date.expirationDateInPast,
         },
         deliveryLength: {
             required: errorFieldMessages.offerDeliveryLength.required,
@@ -136,23 +139,23 @@ export const formFields: IForm = {
         },
         permanentPaymentPrice: {
             required: errorFieldMessages.offerPermanentPaymentPrice.required,
-            decimal: errorFieldMessages.offerPermanentPaymentPrice.annualConsumptionVT,
-            min: errorFieldMessages.offerPermanentPaymentPrice.negativeAnnualConsumption,
+            decimal: errorFieldMessages.number.decimal,
+            min: errorFieldMessages.number.positive,
         },
         priceGas: {
             required: errorFieldMessages.offerPriceGas.required,
-            decimal: errorFieldMessages.offerPriceGas.annualConsumptionVT,
-            min: errorFieldMessages.offerPriceGas.negativeAnnualConsumption,
+            decimal: errorFieldMessages.number.decimal,
+            min: errorFieldMessages.number.positive,
         },
         priceNT: {
             required: errorFieldMessages.offerPriceNT.required,
-            decimal: errorFieldMessages.offerPriceNT.annualConsumptionVT,
-            min: errorFieldMessages.offerPriceNT.negativeAnnualConsumption,
+            decimal: errorFieldMessages.number.decimal,
+            min: errorFieldMessages.number.positive,
         },
         priceVT: {
             required: errorFieldMessages.offerPriceVT.required,
-            decimal: errorFieldMessages.offerPriceVT.annualConsumptionVT,
-            min: errorFieldMessages.offerPriceVT.negativeAnnualConsumption,
+            decimal: errorFieldMessages.number.decimal,
+            min: errorFieldMessages.number.positive,
         },
         subjectTypeId: {
             required: errorFieldMessages.subjectTypeId.required,
@@ -162,13 +165,13 @@ export const formFields: IForm = {
         },
         validFromTo: {
             required: errorFieldMessages.offerValidFromTo.required,
-            bsDate: errorFieldMessages.offerValidFromTo.format,
-            bsDateMinDate: errorFieldMessages.offerValidFromTo.expirationDateInPast,
+            bsDate: errorFieldMessages.date.format,
+            bsDateMinDate: errorFieldMessages.date.expirationDateInPast,
         },
     },
 };
 
-export const commodityTypeFields = {
+export const commodityTypeFields: ICommodityTypeFields = {
     [CommodityType.POWER]: ['distributionRateId', 'circuitBreakerId', 'priceNT', 'priceVT'],
     [CommodityType.GAS]: ['priceGas', 'annualConsumptionId'],
 };

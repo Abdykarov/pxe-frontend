@@ -7,9 +7,13 @@ import {
 import { CONTRACT_END_TYPE } from 'src/app/app.constants';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
-import { IForm } from 'src/common/containers/form/models/form-definition.model';
+import {
+    ICommodityTypeFields,
+    IExpirationConfig,
+    IForm,
+} from 'src/common/containers/form/models/form-definition.model';
 
-export const expirationConfig = {
+export const expirationConfig: IExpirationConfig = {
     [CONTRACT_END_TYPE.CONTRACT_END_TERM]: {
         'expirationDate': true,
         'timeToContractEnd': true,
@@ -134,8 +138,9 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                Validators.max(99),
-                CustomValidators.isPossibleInteger,
+                CustomValidators.isNumber,
+                CustomValidators.minValue(0),
+                CustomValidators.maxValue(100),
             ],
         ],
         timeToContractEndPeriodId: [
@@ -186,33 +191,33 @@ export const formFields: IForm = {
         },
         annualConsumptionNT: {
             required: errorFieldMessages.annualConsumptionNT.required,
-            decimal: errorFieldMessages.annualConsumptionNT.annualConsumptionNT,
-            min: errorFieldMessages.annualConsumptionNT.negativeAnnualConsumption,
-            negativeAnnualConsumption: errorFieldMessages.annualConsumptionNT.negativeAnnualConsumption,
+            decimal: errorFieldMessages.number.decimal,
+            min: errorFieldMessages.number.positive,
+            negativeAnnualConsumption: errorFieldMessages.number.positive,
         },
         annualConsumptionVT: {
             required: errorFieldMessages.annualConsumptionVT.required,
-            decimal: errorFieldMessages.annualConsumptionVT.annualConsumptionVT,
-            min: errorFieldMessages.annualConsumptionVT.negativeAnnualConsumption,
-            negativeAnnualConsumption: errorFieldMessages.annualConsumptionVT.negativeAnnualConsumption,
+            decimal: errorFieldMessages.number.decimal,
+            min: errorFieldMessages.number.positive,
+            negativeAnnualConsumption: errorFieldMessages.number.positive,
         },
         annualConsumption: {
             required: errorFieldMessages.annualConsumption.required,
-            decimal: errorFieldMessages.annualConsumption.annualConsumption,
-            min: errorFieldMessages.annualConsumption.negativeAnnualConsumption,
-            negativeAnnualConsumption: errorFieldMessages.annualConsumption.negativeAnnualConsumption,
+            decimal: errorFieldMessages.number.decimal,
+            min: errorFieldMessages.number.positive,
+            negativeAnnualConsumption: errorFieldMessages.number.positive,
         },
         expirationDateGas: {
             required: errorFieldMessages.expirationDate.requiredGas,
-            bsDate: errorFieldMessages.expirationDate.format,
-            bsDateMinDate: errorFieldMessages.expirationDate.expirationDateInPast,
-            expirationDateInPast: errorFieldMessages.expirationDate.expirationDateInPast,
+            bsDate: errorFieldMessages.date.format,
+            bsDateMinDate: errorFieldMessages.date.expirationDateInPast,
+            expirationDateInPast: errorFieldMessages.date.expirationDateInPast,
         },
         expirationDatePower: {
             required: errorFieldMessages.expirationDate.requiredPower,
-            bsDate: errorFieldMessages.expirationDate.format,
-            bsDateMinDate: errorFieldMessages.expirationDate.expirationDateInPast,
-            expirationDateInPast: errorFieldMessages.expirationDate.expirationDateInPast,
+            bsDate: errorFieldMessages.date.format,
+            bsDateMinDate: errorFieldMessages.date.expirationDateInPast,
+            expirationDateInPast: errorFieldMessages.date.expirationDateInPast,
         },
         contractEndTypeId: {
             required: errorFieldMessages.contractEndTypeId.required,
@@ -220,7 +225,8 @@ export const formFields: IForm = {
         timeToContractEnd: {
             required: errorFieldMessages.timeToContractEnd.required,
             max: errorFieldMessages.timeToContractEnd.max,
-            isPossibleInteger: errorFieldMessages.timeToContractEnd.isPossibleInteger,
+            min: errorFieldMessages.number.positive,
+            number: errorFieldMessages.number.integer,
         },
         timeToContractEndPeriodId: {
             required: errorFieldMessages.timeToContractEndPeriodId.required,
@@ -228,7 +234,7 @@ export const formFields: IForm = {
     },
 };
 
-export const commodityTypeFields = {
+export const commodityTypeFields: ICommodityTypeFields = {
     [CommodityType.POWER]: ['ean', 'distributionRateId', 'circuitBreakerId', 'annualConsumptionNT', 'annualConsumptionVT'],
     [CommodityType.GAS]: ['eic', 'annualConsumption'],
 };

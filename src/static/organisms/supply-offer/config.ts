@@ -2,9 +2,14 @@
 import { Injectable } from '@angular/core';
 
 import * as R from 'ramda';
-import { NewSupplyPointPageConfig } from 'src/static/pages/new-supply-point/config';
+
+import {
+    ANNUAL_CONSUMPTION_OPTIONS,
+    DELIVERY_LENGTH_OPTIONS,
+    SUBJECT_TYPE_OPTIONS,
+} from 'src/app/app.constants';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
-import { ANNUAL_CONSUMPTION_OPTIONS, DELIVERY_LENGTH_OPTIONS, SUBJECT_TYPE_OPTIONS } from 'src/app/app.constants';
+import { NewSupplyPointPageConfig } from 'src/static/pages/new-supply-point/config';
 
 @Injectable({
     providedIn: 'root',
@@ -43,21 +48,41 @@ export class SupplyOfferOrganismConfig {
                 ],
             },
             {
-                label: 'Cena&nbsp;VT (MWh/Kč)',
+                label: 'Distribuční sazba',
                 views: [
                     {
                         headingClass: [''],
                         cellClass: [''],
+                        content: (row) => `${R.find(R.propEq('value', row.distributionRate.code))(this.distributionRateOptions).label}`,
+                    },
+                ],
+            },
+            {
+                label: 'Jistič',
+                views: [
+                    {
+                        headingClass: [''],
+                        cellClass: [''],
+                        content: (row) => `${R.find(R.propEq('value', row.circuitBreaker.code))(this.circuitBreakerOptions).label}`,
+                    },
+                ],
+            },
+            {
+                label: 'Cena za VT',
+                views: [
+                    {
+                        headingClass: [''],
+                        cellClass: ['', 'text-right'],
                         contentTemplateName: 'columnTemplatePriceVT',
                     },
                 ],
             },
             {
-                label: 'Cena&nbsp;NT (MWh/Kč)',
+                label: 'Cena za NT',
                 views: [
                     {
                         headingClass: [''],
-                        cellClass: [''],
+                        cellClass: ['', 'text-right'],
                         contentTemplateName: 'columnTemplatePriceNT',
                     },
                 ],
@@ -93,7 +118,7 @@ export class SupplyOfferOrganismConfig {
                 ],
             },
             {
-                label: 'Stálá platba - cena (Kč)',
+                label: 'Stálá platba - cena',
                 views: [
                     {
                         headingClass: ['', 'text-right'],
@@ -148,11 +173,11 @@ export class SupplyOfferOrganismConfig {
                 ],
             },
             {
-                label: 'Cena (MWh/Kč)',
+                label: 'Cena',
                 views: [
                     {
                         headingClass: [''],
-                        cellClass: [''],
+                        cellClass: ['', 'text-right'],
                         contentTemplateName: 'columnTemplatePriceGas',
                     },
                 ],
@@ -211,9 +236,13 @@ export class SupplyOfferOrganismConfig {
             distributionLocation: {
                 code: 'EON',
             },
-            distributionRateId: 'D02D',
-            circuitBreakerId: '3x(16A, 20A>',
-            annualConsumptionId: {
+            distributionRate: {
+                code: 'C25d',
+            },
+            circuitBreaker: {
+                code: '3x(80A, 100A>',
+            },
+            annualConsumption: {
                 code: '1',
             },
             priceVT: 3.75,
@@ -236,9 +265,13 @@ export class SupplyOfferOrganismConfig {
             distributionLocation: {
                 code: 'CEZ',
             },
-            distributionRateId: 'D02D',
-            circuitBreakerId: '3x(16A, 20A>',
-            annualConsumptionId: {
+            distributionRate: {
+                code: 'C25d',
+            },
+            circuitBreaker: {
+                code: '3x(80A, 100A>',
+            },
+            annualConsumption: {
                 code: '2',
             },
             priceVT: 3.75,
@@ -261,9 +294,13 @@ export class SupplyOfferOrganismConfig {
             distributionLocation: {
                 code: 'ALL',
             },
-            distributionRateId: 'D02D',
-            circuitBreakerId: '3x(16A, 20A>',
-            annualConsumptionId: {
+            distributionRate: {
+                code: 'C25d',
+            },
+            circuitBreaker: {
+                code: '3x(80A, 100A>',
+            },
+            annualConsumption: {
                 code: '1',
             },
             priceVT: 5.75,
@@ -286,9 +323,13 @@ export class SupplyOfferOrganismConfig {
             distributionLocation: {
                 code: 'EON',
             },
-            distributionRateId: 'D02D',
-            circuitBreakerId: '3x(16A, 20A>',
-            annualConsumptionId: {
+            distributionRate: {
+                code: 'C25d',
+            },
+            circuitBreaker: {
+                code: '3x(80A, 100A>',
+            },
+            annualConsumption: {
                 code: '1',
             },
             priceVT: 3.75,
@@ -311,9 +352,13 @@ export class SupplyOfferOrganismConfig {
             distributionLocation: {
                 code: 'EON',
             },
-            distributionRateId: 'D02D',
-            circuitBreakerId: '3x(16A, 20A>',
-            annualConsumptionId: {
+            distributionRate: {
+                code: 'C25d',
+            },
+            circuitBreaker: {
+                code: '3x(80A, 100A>',
+            },
+            annualConsumption: {
                 code: '1',
             },
             priceVT: 3.75,
@@ -336,9 +381,13 @@ export class SupplyOfferOrganismConfig {
             distributionLocation: {
                 code: 'EON',
             },
-            distributionRateId: 'D02D',
-            circuitBreakerId: '3x(16A, 20A>',
-            annualConsumptionId: {
+            distributionRate: {
+                code: 'C25d',
+            },
+            circuitBreaker: {
+                code: '3x(80A, 100A>',
+            },
+            annualConsumption: {
                 code: '1',
             },
             priceVT: 3.75,
@@ -376,6 +425,32 @@ export class SupplyOfferOrganismConfig {
             key: 2,
             value: '2',
             label: '2 roky',
+        },
+    ];
+
+    public distributionRateOptions = [
+        {
+            key: 'C03d',
+            value: 'C03d',
+            label: 'C03d',
+        },
+        {
+            key: 'C25d',
+            value: 'C25d',
+            label: 'C25d',
+        },
+    ];
+
+    public circuitBreakerOptions = [
+        {
+            key: '<= 1x25A',
+            value: '<= 1x25A',
+            label: 'menší než 1x25A včetně',
+        },
+        {
+            key: '3x(80A, 100A>',
+            value: '3x(80A, 100A>',
+            label: 'nad 3X80A do 3x100A včetně',
         },
     ];
 
