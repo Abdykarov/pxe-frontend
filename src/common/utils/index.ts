@@ -10,3 +10,4 @@ export * from './parse-rest-erros.fnc';
 export * from './scroll-to-element.fnc';
 export * from './transform-code-list.fnc';
 export * from './transform-suppliers.fnc';
+export * from './is-possible-integer.fnc';

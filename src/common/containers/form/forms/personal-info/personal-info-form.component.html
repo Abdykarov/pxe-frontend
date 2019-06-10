@@ -1,0 +1,185 @@
+<ng-template #otherAddress>
+    <lnd-form-field
+        [id]="'checkbox-in-subtext'"
+        [label]="isIndividual ? 'Mám jinou korespondenční adresu' : 'Mám jinou fakturační adresu'"
+        [type]="'CHECKBOX'"
+        [formControl]="form.controls.onlyAddress1">
+    </lnd-form-field>
+</ng-template>
+<!-- Example custom lael template -->
+<ng-template
+    #templateLabel
+    let-item="item"
+    let-index="index">
+    {{ item.label }}
+</ng-template>
+<!-- Example searched items template -->
+<ng-template
+    #templateItem
+    let-item="item"
+    let-index="index">
+    {{ item.value.street }}&nbsp;{{ item.value.orientationNumber }}<ng-container *ngIf="item && item.value && item.value.orientationNumber && item.value.descriptiveNumber">/</ng-container>{{ item.value.descriptiveNumber }}<br>
+    {{ item.value.city }}&nbsp;{{ item.value.postCode }}
+</ng-template>
+
+<lnd-alert
+    *ngIf="globalError.length"
+    type="danger">
+    <ng-container *ngFor="let error of globalError">
+        {{ error }}<br>
+    </ng-container>
+</lnd-alert>
+
+
+<div class="row mb-5">
+    <div class="col-12 text-center">
+        {{isIndividual ? 'Osobní informace' : 'Firemní informace'}}
+    </div>
+</div>
+<form
+    [formGroup]="form"
+    (keydown)="resetCustomFieldError()"
+    (change)="resetCustomFieldError()"
+    autocomplete="off"
+    class="form-container">
+    <lnd-form-field
+        [error]="formError.name || form.controls.name.errors"
+        [formControl]="form.controls.name"
+        [id]="'name'"
+        [label]="isIndividual ? 'Jméno a příjmení' : 'Název společnosti'"
+        [success]="form.controls.name.valid && (form.controls.name.touched || formError.name)"
+        [touched]="form.controls.name.touched || formError.name"
+        [validationMessages]="isIndividual ? formFields.validationMessages.namePerson : formFields.validationMessages.nameCompany"
+    ></lnd-form-field>
+    <lnd-form-field
+        *ngIf="form.controls.ico.status !== 'DISABLED'"
+        [error]="formError.ico || form.controls.ico.errors"
+        [formControl]="form.controls.ico"
+        [id]="'ico'"
+        label="IČ"
+        [success]="form.controls.ico.valid && (form.controls.ico.touched || formError.ico)"
+        [touched]="form.controls.ico.touched || formError.ico"
+        [validationMessages]="formFields.validationMessages.ico"
+    ></lnd-form-field>
+    <lnd-form-field
+        *ngIf="form.controls.dic.status !== 'DISABLED'"
+        [error]="formError.dic || form.controls.dic.errors"
+        [formControl]="form.controls.dic"
+        [id]="'dic'"
+        label="DIČ (nepovinné)"
+        [success]="form.controls.dic.valid && (form.controls.dic.touched || formError.dic)"
+        [touched]="form.controls.dic.touched || formError.dic"
+        [validationMessages]="formFields.validationMessages.dic"
+    ></lnd-form-field>
+    <pxe-address-whisperer
+        [error]="formError.address1 || form.controls.address1.errors"
+        [label]="isIndividual ? 'Trvalá adresa' : 'Sídlo firmy'"
+        [parentForm]="form"
+        [success]="form.controls.address1.valid && (form.controls.address1.touched || formError.address1)"
+        [subtextTemplate]="otherAddress"
+        [templateItem]="templateItem"
+        [templateLabel]="templateLabel"
+        [touched]="form.controls.address1.touched || formError.address1"
+        [validationMessages]="isIndividual ? formFields.validationMessages.address1Person : formFields.validationMessages.address1Company"
+        [whispererName]="'address1'">
+    </pxe-address-whisperer>
+    <pxe-address-whisperer
+        [disabled]="!getFieldValue('onlyAddress1')"
+        [error]="formError.address2 || form.controls.address2.errors"
+        [label]="isIndividual ? 'Korespondeční adresa' : 'Fakturační adresa'"
+        [parentForm]="form"
+        [success]="form.controls.address2.valid && (form.controls.address2.touched || formError.address2)"
+        [templateItem]="templateItem"
+        [templateLabel]="templateLabel"
+        [touched]="form.controls.address2.touched || formError.address2"
+        [validationMessages]="isIndividual ? formFields.validationMessages.address2Person : formFields.validationMessages.address2Company"
+        [whispererName]="'address2'">
+    </pxe-address-whisperer>
+    <div class="row">
+        <div class="col-8">
+            <lnd-form-field
+                [error]="formError.bankAccountNumber || form.controls.bankAccountNumber.errors"
+                [formControl]="form.controls.bankAccountNumber"
+                [id]="'telephonePrefix'"
+                label="Bankovní účet"
+                subtext="Číslo bankovního účtu obsahujcí prefix uveďte prosím ve tvaru XXXXX-XXXXXXXXXX"
+                [success]="form.controls.bankAccountNumber.valid && (form.controls.bankAccountNumber.touched || formError.bankAccountNumber)"
+                [touched]="form.controls.bankAccountNumber.touched || formError.bankAccountNumber"
+                [validationMessages]="formFields.validationMessages.bankAccountNumber"
+            ></lnd-form-field>
+        </div>
+        <div class="col-4">
+            <lnd-form-field
+                [error]="formError.bankCode || form.controls.bankCode.errors"
+                [formControl]="form.controls.bankCode"
+                [id]="'bankCode'"
+                label=""
+                [success]="form.controls.bankCode.valid && (form.controls.bankCode.touched || formError.bankCode)"
+                [touched]="form.controls.bankCode.touched || formError.bankCode"
+                [validationMessages]="formFields.validationMessages.bankCode"
+            ></lnd-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <lnd-form-field
+                [error]="formError.phonePrefix || form.controls.phonePrefix.errors"
+                [formControl]="form.controls.phonePrefix"
+                [id]="'phonePrefix'"
+                label="Telefonní číslo"
+                [success]="form.controls.phonePrefix.valid && (form.controls.phonePrefix.touched || formError.phonePrefix)"
+                [touched]="form.controls.phonePrefix.touched || formError.phonePrefix"
+                [validationMessages]="formFields.validationMessages.phonePrefix"
+            ></lnd-form-field>
+        </div>
+        <div class="col-8">
+            <lnd-form-field
+                [error]="formError.phone || form.controls.phone.errors"
+                [formControl]="form.controls.phone"
+                [id]="'phone'"
+                label=""
+                [success]="form.controls.phone.valid && (form.controls.phone.touched || formError.phone)"
+                [touched]="form.controls.phone.touched || formError.phone"
+                [validationMessages]="formFields.validationMessages.phone"
+            ></lnd-form-field>
+        </div>
+    </div>
+    <lnd-form-field
+        [error]="formError.email || form.controls.email.errors"
+        [formControl]="form.controls.email"
+        [id]="'email'"
+        label="E-mail"
+        [success]="form.controls.email.valid && (form.controls.email.touched || formError.email)"
+        [touched]="form.controls.email.touched || formError.email"
+        [validationMessages]="formFields.validationMessages.email"
+    ></lnd-form-field>
+    <lnd-select
+        *ngIf="form.controls.depositPaymentTypeId.status !== 'DISABLED'"
+        [error]="formError.depositPaymentTypeId || form.controls.depositPaymentTypeId.errors"
+        label="Způsob placení záloh"
+        [options]="depositPaymentTypeId"
+        [parentForm]="form"
+        [selectName]="'depositPaymentTypeId'"
+        [success]="form.controls.depositPaymentTypeId.valid && (form.controls.depositPaymentTypeId.touched || formError.depositPaymentTypeId)"
+        [touched]="form.controls.depositPaymentTypeId.touched || formError.depositPaymentTypeId"
+        [validationMessages]="formFields.validationMessages.depositPaymentTypeId">
+    </lnd-select>
+    <lnd-form-field
+        *ngIf="form.controls.deposit.status !== 'DISABLED'"
+        [error]="formError.deposit || form.controls.deposit.errors"
+        [formControl]="form.controls.deposit"
+        [id]="'deposit'"
+        label="Výše záloh"
+        [success]="form.controls.deposit.valid && (form.controls.deposit.touched || formError.deposit)"
+        [touched]="form.controls.deposit.touched || formError.deposit"
+        [validationMessages]="formFields.validationMessages.deposit"
+    ></lnd-form-field>
+    <div class="text-center">
+        <lnd-button
+            type="primary"
+            (action)="submitForm()"
+            [isDisabled]="formLoading"
+            label="Pokračovat">
+        </lnd-button>
+    </div>
+</form>

@@ -1,9 +1,11 @@
 <lnd-select
     [addTag]="false"
+    [subtextTemplate]="subtextTemplate"
     [appendButtonIcon]="appendButtonIcon"
     (appendButtonAction)="appendButtonAction.emit()"
     [bindValue]="'value'"
     (close)="setAddresses()"
+    [disabledField]="disabled"
     [error]="error"
     [label]="label"
     [placeholder]="placeholder"
