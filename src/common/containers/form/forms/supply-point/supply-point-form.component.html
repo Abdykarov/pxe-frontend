@@ -129,8 +129,8 @@
         [touched]="form.controls.distributionRateId.touched || formError.distributionRateId"
         [validationMessages]="formFields.validationMessages.distributionRateId">
     </lnd-select>
-    <div class="row">
-        <div class="col">
+    <div class="row no-gutters">
+        <div class="col-12 col-md-6">
             <lnd-select
                 *ngIf="form.controls.circuitBreakerId.status !== 'DISABLED'"
                 [appendButtonIcon]="helpDocuments && helpDocuments['phasesId'] ? 'icon--info' : null"
@@ -145,7 +145,7 @@
                 [validationMessages]="formFields.validationMessages.phasesId">
             </lnd-select>
         </div>
-        <div class="col">
+        <div class="col-12 col-md-6 pl-md-2">
             <lnd-select
                 *ngIf="form.controls.circuitBreakerId.status !== 'DISABLED'"
                 [appendButtonIcon]="helpDocuments && helpDocuments['circuitBreakerId'] ? 'icon--info' : null"
@@ -205,10 +205,9 @@
         [id]="'contractEndTypeId'"
         label="Ukončení platnosti aktuální smlouvy"
         [type]="'RADIOGROUP'"
-        [customFormGroupClass]="'mb-3'"
+        [customFormGroupClass]="'mb-4'"
         [options]="codeLists && codeLists[codeList.CONTRACT_END_TYPE]"
         [formControl]="form.controls.contractEndTypeId"
-        [radioGroupItemClass]="'custom-control-inline'"
         [success]="form.controls.contractEndTypeId.valid && (form.controls.contractEndTypeId.touched || formError.contractEndTypeId)"
         [touched]="form.controls.contractEndTypeId.touched || formError.contractEndTypeId"
         [validationMessages]="formFields.validationMessages.contractEndTypeId">
@@ -229,8 +228,8 @@
         [validationMessages]="form.controls.commodityType.value === 'POWER' ? formFields.validationMessages.expirationDatePower : formFields.validationMessages.expirationDateGas"
     >
     </lnd-datepicker>
-    <div class="row">
-        <div class="col-6">
+    <div class="row no-gutters">
+        <div class="col-4 pr-1">
             <lnd-form-field
                 *ngIf="form.controls.timeToContractEnd.status !== 'DISABLED'"
                 [appendButtonIcon]="helpDocuments && helpDocuments['timeToContractEnd'] ? 'icon--info' : null"
@@ -244,7 +243,7 @@
                 [validationMessages]="formFields.validationMessages.timeToContractEnd"
             ></lnd-form-field>
         </div>
-        <div class="col-6">
+        <div class="col-8 pl-1">
             <lnd-select
                 *ngIf="form.controls.timeToContractEndPeriodId.status !== 'DISABLED'"
                 [appendButtonIcon]="helpDocuments && helpDocuments[''] ? 'icon--info' : null"

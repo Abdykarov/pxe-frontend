@@ -103,8 +103,8 @@
                  ((form.controls.bankCode.touched || formError.bankCode) && (formError.bankCode || form.controls.bankCode.errors))"
         [validationMessages]="((form.controls.bankAccountNumber.touched || formError.bankAccountNumber) && (formError.bankAccountNumber || form.controls.bankAccountNumber.errors) && formFields.validationMessages.bankAccountNumber) ||
                               ((form.controls.bankCode.touched || formError.bankCode) && (formError.bankCode || form.controls.bankCode.errors) && formFields.validationMessages.bankCode)">
-        <div class="row">
-            <div class="col-8">
+        <div class="row no-gutters">
+            <div class="col-8 pr-1">
                 <lnd-form-field
                         [error]="formError.bankAccountNumber || form.controls.bankAccountNumber.errors"
                         [formControl]="form.controls.bankAccountNumber"
@@ -116,7 +116,7 @@
                         [validationMessages]="formFields.validationMessages.bankAccountNumber"
                 ></lnd-form-field>
             </div>
-            <div class="col-4">
+            <div class="col-4 pl-1">
                 <lnd-form-field
                         [error]="formError.bankCode || form.controls.bankCode.errors"
                         [formControl]="form.controls.bankCode"
@@ -136,8 +136,8 @@
                  ((form.controls.phone.touched || formError.phone) && (formError.phone || form.controls.phone.errors))"
         [validationMessages]="((form.controls.phonePrefix.touched || formError.phonePrefix) && (formError.phonePrefix || form.controls.phonePrefix.errors) && formFields.validationMessages.phonePrefix) ||
                               ((form.controls.phone.touched || formError.phone) && (formError.phone || form.controls.phone.errors) && formFields.validationMessages.phone)">
-        <div class="row">
-            <div class="col-4">
+        <div class="row no-gutters">
+            <div class="col-4 pr-1">
                 <lnd-form-field
                     [error]="formError.phonePrefix || form.controls.phonePrefix.errors"
                     [formControl]="form.controls.phonePrefix"
@@ -148,7 +148,7 @@
                     [validationMessages]="formFields.validationMessages.phonePrefix"
                 ></lnd-form-field>
             </div>
-            <div class="col-8">
+            <div class="col-8 pl-1">
                 <lnd-form-field
                     [error]="formError.phone || form.controls.phone.errors"
                     [formControl]="form.controls.phone"
