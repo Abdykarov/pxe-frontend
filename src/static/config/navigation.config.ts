@@ -159,7 +159,7 @@ export const staticNavigationConfig: INavigationConfig = [
                 },
                 {
                     'label': 'New supply point',
-                    'url': '/full/new-supply-point',
+                    'url': '/basic/new-supply-point',
                 },
                 {
                     'label': 'supply offer',
@@ -172,6 +172,10 @@ export const staticNavigationConfig: INavigationConfig = [
                 {
                     'label': 'Supply points (banner)',
                     'url': '/basic/supply-points-banner',
+                },
+                {
+                    'label': 'Recapitulation',
+                    'url': '/basic/recapitulation',
                 },
                 {
                     'label': 'Supply points offer',

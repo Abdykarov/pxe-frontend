@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { NgSelectModule } from '@ng-select/ng-select';
 
+import { FormModule } from 'src/common/ui/forms/form.module';
 import { SelectComponent } from './select.component';
 
 @NgModule({
@@ -12,6 +13,7 @@ import { SelectComponent } from './select.component';
     ],
     imports: [
         CommonModule,
+        FormModule,
         NgSelectModule,
         ReactiveFormsModule,
     ],

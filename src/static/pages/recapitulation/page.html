@@ -1,0 +1,123 @@
+<ng-template #otherAddress>
+    <lnd-form-field
+        [id]="'checkbox-in-subtext'"
+        label="Mám jinou korespondenční adresu"
+        [type]="'CHECKBOX'"
+        [formControl]="form.controls.onlyAddress1">
+    </lnd-form-field>
+</ng-template>
+<!-- Example custom lael template -->
+<ng-template
+    #templateLabel
+    let-item="item"
+    let-index="index">
+    {{ item.label }}
+</ng-template>
+<!-- Example searched items template -->
+<ng-template
+    #templateItem
+    let-item="item"
+    let-index="index">
+    {{ item.value.street }}&nbsp;{{ item.value.orientationNumber }}<ng-container *ngIf="item && item.value && item.value.orientationNumber && item.value.descriptiveNumber">/</ng-container>{{ item.value.descriptiveNumber }}<br>
+    {{ item.value.city }}&nbsp;{{ item.value.postCode }}
+</ng-template>
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12 col-md-6 offset-md-3 text-center">
+            <h1>
+                Rekapitulace
+            </h1>
+        </div>
+    </div>
+    <div class="row mb-6">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <pxe-progress-bar [config]="config"></pxe-progress-bar>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-xl-10 offset-xl-1 text-center">
+            <h2>
+                Rekapitulace
+            </h2>
+        </div>
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <div class="page-box">
+                <form
+                    [formGroup]="form"
+                    class="form-container">
+                    <lnd-form-field
+                        [formControl]="form.controls.name"
+                        [id]="'name'"
+                        label="Jméno a příjmení"
+                    ></lnd-form-field>
+                    <pxe-address-whisperer
+                        [appendTemplate]="otherAddress"
+                        [label]="'Trvalá adresa'"
+                        [parentForm]="form"
+                        [templateItem]="templateItem"
+                        [templateLabel]="templateLabel"
+                        [whispererName]="'permanentAddress'">
+                    </pxe-address-whisperer>
+                    <div class="row">
+                        <div class="col-8">
+                            <lnd-form-field
+                                [formControl]="form.controls.acountNumber"
+                                [id]="'telephonePrefix'"
+                                label="Bankovní účet"
+                                subtext="Číslo bankovního účtu obsahujcí prefix uveďte prosím ve tvaru XXXXX-XXXXXXXXXX"
+                          ></lnd-form-field>
+                        </div>
+                        <div class="col-4">
+                            <lnd-form-field
+                                [formControl]="form.controls.acountBankCode"
+                                [id]="'acountBankCode'"
+                                label=""
+                            ></lnd-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <lnd-form-field
+                                [formControl]="form.controls.telephonePrefix"
+                                subtext="lorem ipsum"
+                                [id]="'telephonePrefix'"
+                                label="Telefonní číslo"
+                            ></lnd-form-field>
+                        </div>
+                        <div class="col-8">
+                            <lnd-form-field
+                                [formControl]="form.controls.telephone"
+                                [id]="'telephone'"
+                                label=""
+                            ></lnd-form-field>
+                        </div>
+                    </div>
+                    <lnd-form-field
+                        [formControl]="form.controls.email"
+                        [id]="'email'"
+                        label="E-mail"
+                    ></lnd-form-field>
+                    <lnd-select
+                        label="Způsob placení záloh"
+                        [options]="depositPaymentTypeId"
+                        [parentForm]="form"
+                        [selectName]="'depositPaymentTypeId'">
+                    </lnd-select>
+                    <lnd-form-field
+                        [formControl]="form.controls.deposit"
+                        [id]="'deposit'"
+                        label="Výše záloh"
+                    ></lnd-form-field>
+                    <div class="text-center">
+                        <lnd-button
+                            type="primary"
+                            (action)="submitForm($event)"
+                            label="Pokračovat">
+                        </lnd-button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

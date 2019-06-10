@@ -76,6 +76,10 @@ import {
     supplyPointsPageRoutes,
 } from 'src/static/pages/supply-points/page.module';
 import {
+    RecapitulationPageModule,
+    recapitulationPageRoutes,
+} from 'src/static/pages/recapitulation/page.module';
+import {
     SupplyPointsBannerPageModule,
     supplyPointsBannerPageRoutes,
 } from 'src/static/pages/supply-points-banner/page.module';
@@ -129,6 +133,8 @@ const routes: Routes = [
             ...supplyPointPageRoutes,
             ...supplyPointsPageRoutes,
             ...supplyPointsBannerPageRoutes,
+            ...recapitulationPageRoutes,
+            ...supplyPointOfferPageRoutes,
             ...supplyPointsOfferPageRoutes,
             ...tablesPageRoutes,
             ...tooltipPageRoutes,
@@ -158,6 +164,7 @@ const routes: Routes = [
         ModalsPageModule,
         NewSupplyPointPageModule,
         ProgressBarPageModule,
+        RecapitulationPageModule,
         RouterModule.forChild(routes),
         SupplyOfferPageModule,
         SupplyPointOfferPageModule,
