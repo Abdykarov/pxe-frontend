@@ -104,20 +104,26 @@
 	}
 }
 
-.modal--confirm {
-	.modal__icon {
+.modal-confirm {
+	&__icon {
 		display: block;
 		margin-bottom: $spacer;
 		color: $icons-primary;
 		font-size: 48px;
 	}
 
-	.modal-confirm-title {
+	&__title {
+		margin-bottom: $spacer;
 		font-size: 1.5rem;
 	}
 
 	.modal-body {
 		text-align: center;
+
+			// Media queries
+			@include media-breakpoint-up(lg) {
+				padding: $modal-inner-padding-md ( $spacer * 4 );
+			}
 	}
 
 	.modal-footer {
