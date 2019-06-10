@@ -7,9 +7,7 @@ import {
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { NewSupplyPointPageConfig } from 'src/static/pages/new-supply-point/config';
-import {
-    SupplyOfferPageConfig
-} from './config';
+import { SupplyOfferPageConfig } from './config';
 
 @Component({
     templateUrl: './page.html',
