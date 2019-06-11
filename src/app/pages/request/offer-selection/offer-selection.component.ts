@@ -8,11 +8,14 @@ import {
     OnInit,
 } from '@angular/core';
 
-import { takeUntil } from 'rxjs/operators';
+import * as R from 'ramda';
+import {
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { configStepper } from './offer-selection.config';
-import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { OfferService } from 'src/common/graphql/services/offer.service';
@@ -45,8 +48,17 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                (res: any) => {
-                    this.supplyPointOffers = res.data.findSupplyPointOffers;
+                ({data}: any) => {
+                     this.supplyPointOffers = data.findSupplyPointOffers;
+                     R.map((supplyPointOffer: ISupplyPointOffer) => {
+                         let benefits: string[] = [];
+
+                         try {
+                             benefits = supplyPointOffer.benefits && JSON.parse(<string>supplyPointOffer.benefits);
+                         } catch (e) {}
+
+                         supplyPointOffer.benefits = benefits;
+                     } , this.supplyPointOffers);
                     this.cd.markForCheck();
                 },
                 (error) => {
