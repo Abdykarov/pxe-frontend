@@ -1,3 +1,11 @@
+<ng-template #sendAgainSms>
+    <a (click)="sendSms($event)"
+       *ngIf="smsSend">
+        Poslat SMS kód znovu?
+    </a>
+</ng-template>
+
+
 <div [innerHTML]="contractTemplate"></div>
 <div class="row">
     <div class="col-12 col-lg-9 offset-lg-3">
@@ -9,13 +17,11 @@
                     [error]="formError.smsCode || form.controls.smsCode.errors"
                     [formControl]="form.controls.smsCode"
                     [id]="'smsCode'"
+                    [subtextTemplate]="sendAgainSms"
                     [success]="form.controls.smsCode.valid && (form.controls.smsCode.touched || formError.smsCode)"
                     [touched]="form.controls.smsCode.touched || formError.smsCode"
                     [validationMessages]="formFields.validationMessages.smsCode">
                 </lnd-form-field>
-                <span *ngIf="smsSend">
-                    <a>Poslat SMS kód znovu</a>
-                </span>
             </div>
             <div class="col-md-auto mt-md-4">
                 <lnd-button

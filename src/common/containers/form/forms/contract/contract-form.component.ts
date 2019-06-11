@@ -101,4 +101,8 @@ export class ContractFormComponent extends AbstractFormComponent implements OnIn
                 },
             );
     }
+
+    public sendSms(evt) {
+        this.sendContractConfirmationSms();
+    }
 }
