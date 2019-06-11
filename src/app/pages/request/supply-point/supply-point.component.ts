@@ -106,12 +106,14 @@ export class SupplyPointComponent extends AbstractComponent {
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                (data) => {
+                ({data}) => {
+                    const supplyPointId = data.savePowerSupplyPoint;
                     this.formLoading = false;
                     this.formSent = true;
                     this.cd.markForCheck();
                     this.router.navigate([ROUTES.ROUTER_REQUEST_OFFER_SELECTION, {
                         ean,
+                        supplyPointId,
                     }]);
                 },
                 (error) => {

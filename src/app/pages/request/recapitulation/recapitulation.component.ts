@@ -1,8 +1,8 @@
 import {
     ChangeDetectorRef,
-    Component,
+    Component, OnInit,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { takeUntil } from 'rxjs/operators';
 
@@ -21,7 +21,7 @@ import { ROUTES } from 'src/app/app.constants';
     templateUrl: './recapitulation.component.html',
     styleUrls: ['./recapitulation.component.scss'],
 })
-export class RecapitulationComponent extends AbstractComponent {
+export class RecapitulationComponent extends AbstractComponent implements OnInit {
     public stepperProgressConfig: IStepperProgressItem[] = configStepper;
 
     public formFields = formFields;
@@ -31,13 +31,19 @@ export class RecapitulationComponent extends AbstractComponent {
     public formLoading = false;
 
     public isIndividual = true;
+    public contractId: number;
 
     constructor(
         private cd: ChangeDetectorRef,
         private personalDataService: PersonalDataService,
+        private route: ActivatedRoute,
         private router: Router,
     ) {
         super();
+    }
+
+    ngOnInit () {
+        this.contractId = parseInt(this.route.snapshot.paramMap.get('contractId'), 10);
     }
 
     public submitPersonalInfoForm = (personalInfoInput: IPersonalDataInput) => {
@@ -45,7 +51,7 @@ export class RecapitulationComponent extends AbstractComponent {
         this.globalError = [];
         this.fieldError = {};
 
-        this.personalDataService.savePersonalData(0, personalInfoInput)
+        this.personalDataService.savePersonalData(this.contractId, personalInfoInput)
             .pipe(
                 takeUntil(this.destroy$),
             )
