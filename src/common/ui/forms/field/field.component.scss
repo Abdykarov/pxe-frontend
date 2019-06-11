@@ -927,6 +927,11 @@ textarea.form-control--not-empty {
 	margin-top: ( $spacer / 4 );
 	font-size: $small-font-size;
 
+	.form-group,
+	.custom-control {
+		margin-bottom: 0;
+	}
+
 	&--disabled {
 		color: $input-disabled-color;
 	}
