@@ -8,23 +8,37 @@
     </div>
     <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1">
+            <lnd-banner-ui
+                [data]="bannerObj"
+                buttonLabel="Najít dodavatele"
+            ></lnd-banner-ui>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-xl-10 offset-xl-1">
             <div class="page-box">
-                <h2 class="h1 mb-3 text-center">Byt – Praha</h2>
-                <div class="text-with-icon justify-content-center mb-5">
-                    <span class="icon icon--flash text-with-icon__icon"></span>
-                    <span class="text-with-icon__text">Odběr elektřiny</span>
-                </div>
-                <form class="form-container">
-                    <lnd-form-field
-                        id="name"
-                        label="Název"
-                        subtext="Pomocný text">
-                    </lnd-form-field>
-                    <lnd-form-field
-                        id="annual-electricity-consumption"
-                        label="Roční spotřeba elektřiny"
-                        appendText="MWh">
-                    </lnd-form-field>
+                <div class="form-container">
+                    <lnd-alert type="info"
+                                hasIcon="true">
+                        Změny byly úspěšně uloženy
+                    </lnd-alert>
+                    <h2 class="h1 mb-3 text-center">Byt – Praha</h2>
+                    <div class="text-with-icon justify-content-center mb-5">
+                        <span class="icon icon--flash text-with-icon__icon"></span>
+                        <span class="text-with-icon__text">Odběr elektřiny</span>
+                    </div>
+                    <form>
+                        <lnd-form-field
+                            id="name"
+                            label="Název"
+                            subtext="Pomocný text">
+                        </lnd-form-field>
+                        <lnd-form-field
+                            id="annual-electricity-consumption"
+                            label="Roční spotřeba elektřiny"
+                            appendText="MWh">
+                        </lnd-form-field>
+                    </form>
                     <div class="row">
                         <div class="col-12 mb-5">
                             <h3 class="mb-3">Ean</h3>
@@ -54,12 +68,51 @@
                             <h3 class="mb-3">Jistič – velikost</h3>
                             <span>10 A</span>
                         </div>
-                        <div class="col-12 mb-5">
+                        <div class="col-12">
                             <h3 class="mb-3">Dodávka do</h3>
                             <span>31. 12. 2019</span>
                         </div>
                     </div>
-                </form>
+                    <hr>
+                    <div class="row align-items-end mb-5">
+                        <div class="col-7 pb-1">
+                            <small>Odstoupit od smlouvy do 14 dnů od podpisu</small>
+                        </div>
+                        <div class="col-5 text-right">
+                            <lnd-button
+                                label="Odstoupit"
+                                type="link-danger"
+                                size="sm">
+                            </lnd-button>
+                        </div>
+                    </div>
+                    <div class="row align-items-end mb-5">
+                        <div class="col-7 pb-1">
+                            <small>Odstoupit od smlouvy výpovědí</small>
+                        </div>
+                        <div class="col-5 text-right">
+                            <lnd-button
+                                label="Vypovědět"
+                                type="link-danger"
+                                size="sm">
+                            </lnd-button>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-12 mb-2">
+                            <lnd-button
+                                label="Uložit"
+                                type="primary">
+                            </lnd-button>
+                        </div>
+                        <div class="col-12">
+                            <lnd-button
+                                label="Storno"
+                                type="link">
+                            </lnd-button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
