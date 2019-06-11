@@ -15,6 +15,10 @@ const routes: Routes = [
         component: RequestComponent,
         children: [
             {
+                path: CONSTS.PATHS.CONTRACT,
+                loadChildren: '../../pages/request/contract/contract.module#ContractModule',
+            },
+            {
                 path: CONSTS.PATHS.SUPPLY_POINT,
                 loadChildren: '../../pages/request/supply-point/supply-point.module#SupplyPointModule',
             },

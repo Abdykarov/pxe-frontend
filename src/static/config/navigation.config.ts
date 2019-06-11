@@ -174,6 +174,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/supply-points-banner',
                 },
                 {
+                    'label': 'Recapitulation',
+                    'url': '/basic/recapitulation',
+                },
+                {
                     'label': 'Supply points offer',
                     'url': '/basic/supply-points-offer',
                 },
