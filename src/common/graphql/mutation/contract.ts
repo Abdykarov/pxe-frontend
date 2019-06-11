@@ -6,3 +6,8 @@ export const signContract = gql`
     }
 `;
 
+export const sendContractConfirmationSms = gql`
+    mutation sendContractConfirmationSms($contractId: Int!){
+        sendContractConfirmationSms(contractId: $contractId)
+    }
+`;

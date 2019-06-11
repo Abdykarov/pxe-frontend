@@ -2,20 +2,16 @@ import { Injectable } from '@angular/core';
 
 import { Apollo } from 'apollo-angular';
 
+import { getContractTerms } from 'src/common/graphql/queries/contract';
 import {
-    findSupplierOffers,
-    findSupplyPointOffers,
-} from 'src/common/graphql/queries/offer';
-import {
-    IOfferInput,
-    IOfferInputGasAttributes,
-} from 'src/common/graphql/models/offer.model';
-import { getContractTerms } from '../queries/contract';
+    sendContractConfirmationSms,
+    signContract,
+} from 'src/common/graphql/mutation/contract';
 
 @Injectable({
     providedIn: 'root',
 })
-export class OfferService {
+export class ContractService {
 
     constructor(
         private apollo: Apollo,
@@ -39,6 +35,16 @@ export class OfferService {
                 variables: {
                     contractId,
                     smsCode,
+                },
+            });
+    }
+
+    public sendContractConfirmationSms(contractId: number) {
+        return this.apollo
+            .mutate({
+                mutation: sendContractConfirmationSms,
+                variables: {
+                    contractId,
                 },
             });
     }
