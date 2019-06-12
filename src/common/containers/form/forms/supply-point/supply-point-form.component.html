@@ -121,7 +121,7 @@
         [appendButtonIcon]="helpDocuments && helpDocuments['distributionRateId'] ? 'icon--info' : null"
         (appendButtonAction)="showHelp('distributionRateId', 'Distribučná sazba')"
         [error]="formError.distributionRateId || form.controls.distributionRateId.errors"
-        label="Distribuční sazba"
+        label="Distribučná sazba"
         [options]="codeLists && codeLists[distributionRateType]"
         [parentForm]="form"
         [selectName]="'distributionRateId'"
@@ -129,7 +129,6 @@
         [touched]="form.controls.distributionRateId.touched || formError.distributionRateId"
         [validationMessages]="formFields.validationMessages.distributionRateId">
     </lnd-select>
-    <span>Jistič</span>
     <div class="row">
         <div class="col">
             <lnd-select
@@ -137,7 +136,7 @@
                 [appendButtonIcon]="helpDocuments && helpDocuments['phasesId'] ? 'icon--info' : null"
                 (appendButtonAction)="showHelp('phasesId', 'Jistič fáze')"
                 [error]="formError.phasesId || form.controls.phasesId.errors"
-                label="fáze"
+                label="Jistič fáze"
                 [options]="codeLists && codeLists[codeList.CIRCUIT_BREAKER_PHASE]"
                 [parentForm]="form"
                 [selectName]="'phasesId'"
