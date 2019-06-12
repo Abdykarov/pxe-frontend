@@ -139,8 +139,8 @@
 		}
 	}
 
-	&-link,
-	&-link-danger {
+	&.btn-link,
+	&.btn-link-danger {
 		min-width: auto;
 		padding-left: 0;
 		padding-right: 0;
@@ -269,7 +269,7 @@
 		@include button-ghost-color($gray-200);
 	}
 
-	&.btn-sm {
+	&-sm {
 		min-width: auto;
 		min-height: $btn-height-small;
 		padding: ( $spacer / 4 ) ( $spacer / 2 );
