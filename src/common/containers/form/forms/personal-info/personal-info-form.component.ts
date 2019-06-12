@@ -13,6 +13,7 @@ import { takeUntil } from 'rxjs/operators';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { depositPaymentType } from './personal-info-form.config';
 import { IPersonalDataInputForm } from 'src/common/graphql/models/personal-data.model';
+import { ISupplyPoint, SubjectType } from 'src/common/graphql/models/supply.model';
 
 @Component({
     selector: 'pxe-personal-info-form',
@@ -20,6 +21,9 @@ import { IPersonalDataInputForm } from 'src/common/graphql/models/personal-data.
     styleUrls: ['./personal-info-form.component.scss'],
 })
 export class PersonalInfoFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
+
+    @Input()
+    public supplyPoint: ISupplyPoint;
 
     @Input()
     public isIndividual = false;

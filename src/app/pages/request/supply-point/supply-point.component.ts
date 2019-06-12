@@ -112,7 +112,6 @@ export class SupplyPointComponent extends AbstractComponent {
                     this.formSent = true;
                     this.cd.markForCheck();
                     this.router.navigate([ROUTES.ROUTER_REQUEST_OFFER_SELECTION, {
-                        ean,
                         supplyPointId,
                     }]);
                 },

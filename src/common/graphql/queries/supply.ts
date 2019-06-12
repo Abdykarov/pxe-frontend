@@ -49,6 +49,117 @@ export const findSupplierDocumentsByComodity = gql`
     }
 `;
 
+export const getSupplyPoint = gql`
+    query getSupplyPoint($supplyPointId: ID!){
+        getSupplyPoint(supplyPointId: $supplyPointId){
+            id,
+            name,
+            commodityType,
+            supplier{
+                id,
+                name,
+                vatNumber,
+                logoPath,
+                sampleDocuments{
+                    type,
+                    url
+                }
+            },
+            ean,
+            address{
+                street,
+                orientationNumber,
+                descriptiveNumber,
+                city,
+                postCode,
+                region,
+            },
+            distributionRate{
+                type,
+                code,
+                description,
+                help
+            },
+            circuitBreaker{
+                type,
+                code,
+                description,
+                help
+            },
+            phases{
+                type,
+                code,
+                description,
+                help
+            },
+            annualConsumptionNT,
+            annualConsumptionVT,
+            expirationDate,
+            subject{
+                type,
+                code,
+                description,
+                help
+            },
+            lastAnnualConsumptionNT,
+            lastAnnualConsumptionVT,
+            offer{
+                id,
+                status,
+                commodityType,
+                name,
+                validFrom,
+                validTo,
+                deliveryFrom,
+                deliveryTo,
+                deliveryLength,
+                distributionLocation{
+                    type,
+                    code,
+                    description,
+                    help
+                },
+                permanentPaymentPrice,
+                subject{
+                    type,
+                    code,
+                    description,
+                    help
+                },
+                benefits,
+                priceVT,
+                priceNT,
+                distributionRate{
+                    type,
+                    code,
+                    description,
+                    help
+                },
+                circuitBreaker{
+                    type,
+                    code,
+                    description,
+                    help
+                },
+                priceGas,
+            }
+            contractEndType{
+                type,
+                code,
+                description,
+                help
+            },
+            timeToContractEnd,
+            timeToContractEndPeriod {
+                type,
+                code,
+                description,
+                help
+            },
+        }
+    }
+`;
+
 export const findSupplyPoints = gql`
     query findSupplyPoints($ean: String){
         findSupplyPoints(ean: $ean){
