@@ -21,11 +21,10 @@
 
 	&-with-label {
 		.control-label {
-			z-index: 5;
+			z-index: $zindex-field-wrapper-control-label;
 		}
 
 		.field-wrapper-content {
-
 			label,
 			.input-subtext,
 			.invalid-feedback {
