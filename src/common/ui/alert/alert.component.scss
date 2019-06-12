@@ -18,13 +18,14 @@
 	color: $white;
 
 	&--with-icon {
-		padding-left: ( $icon-size-px + $alert-padding-x * 2 );
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	&__common-icon {
-		position: absolute;
-		top: $alert-padding-y;
-		left: $alert-padding-x;
+		padding-right: ( $spacer / 2 );
+		font-size: $font-size-base;
 	}
 }
 

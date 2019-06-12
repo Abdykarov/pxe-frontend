@@ -73,14 +73,6 @@
 				background-color: transparent;
 				padding: $table-adv-cell-padding-hor $table-adv-cell-padding-vert;
 				vertical-align: bottom;
-
-				&:first-child {
-					padding-left: ( $spacer * 1.5 );
-				}
-
-				&:last-child {
-					padding-right: ( $spacer * 1.5 );
-				}
 			}
 		}
 
@@ -89,7 +81,20 @@
 			td {
 				padding: $table-adv-cell-padding-hor $table-adv-cell-padding-vert;
 				vertical-align: middle;
+			}
 
+			.table__tr--detail {
+				th,
+				td {
+					padding: ( $spacer * 2 ) ( $spacer * 2.75 ) ( $spacer * 3.25 );
+				}
+			}
+		}
+
+		> thead,
+		> tbody {
+			th,
+			td {
 				&:first-child {
 					padding-left: ( $spacer * 1.5 );
 				}
@@ -99,6 +104,40 @@
 				}
 			}
 		}
+	}
+
+	::ng-deep {
+		.action-area-div {
+			position: absolute;
+			right: 0;
+			top: 0;
+			visibility: hidden; // temp
+			width: ( ( 30px * 4 ) + $spacer ); // $btn-width-icon:
+			padding: 0 ( $spacer / 2 );
+			height: 100%;
+
+			&::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: - ( $spacer * 2 );
+				width: ( $spacer * 2 );
+				height: 100%;
+				background: linear-gradient(90deg, rgba($white, 0) 0%, rgba($white, 1) 100%);
+			}
+		}
+
+		.table__tr--main:hover .action-area-div {
+			visibility: visible; // temp
+			background-color: $white;
+			border-radius: $border-radius;
+			display: flex;
+			align-items: center;
+		}
+	}
+
+	&--advanced__action-area {
+		position: relative;
 	}
 
 	&__tr--main {

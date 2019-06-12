@@ -35,8 +35,12 @@
     &__product-holder {
         display: flex;
         flex-direction: column;
-        margin-right: $spacer;
         margin-bottom: ( $spacer * 2 );
+
+        // Media queries
+		@include media-breakpoint-up(xl) {
+            margin-right: $spacer;
+        }
     }
 
     &__type {
@@ -54,6 +58,28 @@
     }
 
     &__info {
-        border-top: 1px solid $gray-100;
+        display: flex;
+        flex-direction: column;
+        padding-top: $spacer;
+        border-top: 1px solid $border-color;
+
+        // Media queries
+		@include media-breakpoint-up(md) {
+            flex-direction: row;
+        }
+    }
+
+    &__info-icon {
+        margin-bottom: ( $spacer / 2 );
+        color: $icons-secondary;
+    }
+
+    &__info-description {
+        margin-bottom: $spacer;
+
+        // Media queries
+		@include media-breakpoint-up(md) {
+            margin-left: $spacer;
+        }
     }
 }

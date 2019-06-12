@@ -73,6 +73,10 @@ export class SupplyPointComponent extends AbstractComponent {
             'address',
             'expirationDate',
             'subjectTypeId',
+            'contractEndTypeId',
+            'timeToContractEnd',
+            'timeToContractEndPeriodId',
+
         ], supplyPointFormData);
 
         if (supplyPointFormData.commodityType === CommodityType.POWER) {
@@ -80,6 +84,7 @@ export class SupplyPointComponent extends AbstractComponent {
                 R.pick([
                     'ean',
                     'circuitBreakerId',
+                    'phasesId',
                     'distributionRateId',
                     'annualConsumptionNT',
                     'annualConsumptionVT',

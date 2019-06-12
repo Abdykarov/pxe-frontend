@@ -6,37 +6,33 @@
     </lnd-info-banner>
 </ng-template>
 
-<div class="container-fluid">
-    <div class="container-content">
-        <pxe-layout-container pageTitle="Nová nabídka">
-            <div class="row mb-6">
-                <div class="col-12 col-xl-10 offset-xl-1">
-                    <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-12">
-                    <lnd-alert
-                        *ngIf="globalError.length"
-                        type="danger">
-                        <ng-container *ngFor="let error of globalError">
-                            {{ error }}<br>
-                        </ng-container>
-                    </lnd-alert>
-                </div>
-            </div>
-            <div class="row"
-                 *ngIf="supplyPointOffers">
-                <div class="col-12 col-md-12 supply-points-offer">
-                    <ng-container *ngIf="supplyPointOffers.length; else emptyOffers">
-                        <pxe-supply-point-offer
-                            (action)="action(supplyPointOffer)"
-                            *ngFor="let supplyPointOffer of supplyPointOffers"
-                            [supplyPointOffer]="supplyPointOffer">
-                        </pxe-supply-point-offer>
-                    </ng-container>
-                </div>
-            </div>
-        </pxe-layout-container>
+<pxe-layout-container pageTitle="Nová nabídka">
+    <div class="row mb-6">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-12 col-md-12">
+            <lnd-alert
+                *ngIf="globalError.length"
+                type="danger">
+                <ng-container *ngFor="let error of globalError">
+                    {{ error }}<br>
+                </ng-container>
+            </lnd-alert>
+        </div>
+    </div>
+    <div class="row"
+            *ngIf="supplyPointOffers">
+        <div class="col-12 col-md-12 supply-points-offer">
+            <ng-container *ngIf="supplyPointOffers.length; else emptyOffers">
+                <pxe-supply-point-offer
+                    (action)="action(supplyPointOffer)"
+                    *ngFor="let supplyPointOffer of supplyPointOffers"
+                    [supplyPointOffer]="supplyPointOffer">
+                </pxe-supply-point-offer>
+            </ng-container>
+        </div>
+    </div>
+</pxe-layout-container>

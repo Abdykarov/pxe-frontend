@@ -1,6 +1,7 @@
 <div
     class="modal"
     [class.modal--open]="!!isModalOpen"
+    [class.modal-confirm]="isConfirm"
     tabindex="-1"
     role="dialog">
     <div
@@ -15,6 +16,7 @@
                     {{ title }}
                 </h3>
                 <button
+                    *ngIf="showClose"
                     type="button"
                     class="close modal__close"
                     (click)="close.emit($event)">

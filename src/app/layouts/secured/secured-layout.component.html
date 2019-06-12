@@ -2,6 +2,7 @@
     id="top"
     class="body-inner"
     [class.body-inner--overlay]="showOverlay || isMenuOpen"
+    [class.body-inner--overlay-aside]="showOverlay || isMenuOpen"
     [class.body-inner--overlay-full]="showOverlay">
     <lnd-header
         [user]="currentUser"
@@ -28,7 +29,8 @@
             </div>
             <div class="container-content"
                 [class.col-lg-8]="!settings.hideLeftNavigation"
-                [class.col-lg-12]="settings.hideLeftNavigation">
+                [class.col-lg-10]="settings.hideLeftNavigation"
+                [class.offset-lg-1]="settings.hideLeftNavigation">
                 <main class="main">
                     <router-outlet></router-outlet>
                     <lnd-modal-dynamic></lnd-modal-dynamic>

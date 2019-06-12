@@ -1,3 +1,5 @@
+import { CommodityType } from 'src/common/graphql/models/supply.model';
+
 export interface IForm {
     controls: {
         [key: string]: any;
@@ -16,4 +18,17 @@ export interface IFieldError {
 export enum SignUpType {
     NewsSubscription,
     SignUp,
+}
+
+export interface ICommodityTypeFields {
+    [CommodityType.POWER]: string[];
+    [CommodityType.GAS]: string[];
+}
+
+export interface IExpirationConfig {
+    [key: string]: {
+        expirationDate: boolean;
+        timeToContractEnd: boolean;
+        timeToContractEndPeriodId: boolean;
+    };
 }

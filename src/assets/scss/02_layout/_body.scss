@@ -24,9 +24,15 @@
 		@include overlayer;
 	}
 
-	&--overlay-header .header,
-	&--overlay-aside .aside {
+	&--overlay-header .header {
 		@include overlayer(auto, absolute, after);
+	}
+
+	&--overlay-aside .aside {
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			@include overlayer(auto, absolute, after);
+		}
 	}
 
 	&--overlay-full {
@@ -42,12 +48,6 @@
 	z-index: $zindex-body-overlayer-visible;
 
 	&.dropdown {
-		.dropdown-link__text,
-		.dropdown-toggle-icon,
-		.btn__icon {
-			color: $white;
-		}
-
 		.dropdown-toggle.dropdown-link {
 			&:hover {
 				.dropdown-link__text {
