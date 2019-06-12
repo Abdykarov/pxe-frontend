@@ -9,6 +9,10 @@ import {
     alertsPageRoutes,
 } from 'src/static/atoms/alerts/page.module';
 import {
+    BadgesPageModule,
+    badgesPageRoutes,
+} from 'src/static/atoms/badges/page.module';
+import {
     BannersPageModule,
     bannersPageRoutes,
 } from 'src/static/atoms/banners/page.module';
@@ -114,6 +118,7 @@ const routes: Routes = [
         component: BasicLayoutComponent,
         children: [
             ...alertsPageRoutes,
+            ...badgesPageRoutes,
             ...bannersPageRoutes,
             ...breadcrumbPageRoutes,
             ...buttonsPageRoutes,
@@ -150,6 +155,7 @@ const routes: Routes = [
 @NgModule({
     imports: [
         AlertsPageModule,
+        BadgesPageModule,
         BannersPageModule,
         BreadcrumbPageModule,
         ButtonsPageModule,

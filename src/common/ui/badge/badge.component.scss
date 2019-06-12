@@ -1,0 +1,30 @@
+/*
+ -  Badge
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+// Component variables
+@import 'badge.component.variables.scss';
+
+// Bootstrap alert and close import
+@import '~bootstrap/scss/badge';
+
+
+.badge {
+	line-height: $line-height-sm;
+	white-space: initial;
+
+	&-light,
+	&-transparent {
+		color: $font-text;
+	}
+
+	&-transparent {
+		background-color: transparent;
+	}
+}
+
