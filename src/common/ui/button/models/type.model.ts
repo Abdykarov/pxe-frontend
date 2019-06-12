@@ -3,6 +3,7 @@ export enum IButtonType {
     DROPDOWN = 'dropdown',
     LIGHT = 'light',
     LINK = 'link',
+    LINK_DANGER = 'link-danger',
     PRIMARY = 'primary',
     SECONDARY = 'secondary',
     SUCCESS = 'success',
