@@ -1,4 +1,3 @@
-import { AbstractFormComponent } from 'src/common/abstract-form.component';
 import {
     Component,
     OnChanges,
@@ -9,6 +8,8 @@ import {
     FormBuilder,
     FormGroup,
 } from '@angular/forms';
+
+import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 
 @Component({
     selector: 'pxe-change-password-form',

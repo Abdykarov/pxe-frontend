@@ -147,7 +147,7 @@ export const errorFieldMessages =  {
     password: {
         required: 'Zadejte heslo.',
         pattern: 'Vaše heslo musí obsahovat malý a velký znak, alespoň jedno číslo a alespoň jeden speciální znak,',
-        mustMatch: 'Musíte zadat stejná hesla.\t',
+        mustMatch: 'Musíte zadat stejná hesla.',
     },
     subjectTypeId: {
         required: 'Zvolte odběratele.',
