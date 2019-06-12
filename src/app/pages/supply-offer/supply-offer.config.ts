@@ -92,7 +92,7 @@ export class SupplyOfferConfig {
                 label: 'Cena za VT',
                 views: [
                     {
-                        headingClass: [''],
+                        headingClass: ['', 'text-right'],
                         cellClass: ['', 'text-right'],
                         contentTemplateName: 'columnTemplatePriceVT',
                     },
@@ -102,7 +102,7 @@ export class SupplyOfferConfig {
                 label: 'Cena za NT',
                 views: [
                     {
-                        headingClass: [''],
+                        headingClass: ['', 'text-right'],
                         cellClass: ['', 'text-right'],
                         contentTemplateName: 'columnTemplatePriceNT',
                     },
@@ -198,7 +198,7 @@ export class SupplyOfferConfig {
                 label: 'Cena',
                 views: [
                     {
-                        headingClass: [''],
+                        headingClass: ['', 'text-right'],
                         cellClass: ['', 'text-right'],
                         contentTemplateName: 'columnTemplatePriceGas',
                     },

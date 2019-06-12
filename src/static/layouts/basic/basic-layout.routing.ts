@@ -64,10 +64,6 @@ import {
     newSupplyPointPageRoutes,
 } from 'src/static/pages/new-supply-point/page.module';
 import {
-    OfferSelectionPageModule,
-    offerSelectionPageRoutes,
-} from 'src/static/pages/offer-selection/page.module';
-import {
     ProgressBarPageModule,
     progressBarPageRoutes,
 } from 'src/static/organisms/progress-bar/progress-bar.module';
@@ -135,7 +131,6 @@ const routes: Routes = [
             ...infoBannerPageRoutes,
             ...modalsPageRoutes,
             ...newSupplyPointPageRoutes,
-            ...offerSelectionPageRoutes,
             ...supplyPointOfferPageRoutes,
             ...progressBarPageRoutes,
             ...supplyOfferPageRoutes,
@@ -173,7 +168,6 @@ const routes: Routes = [
         InfoBannerPageModule,
         ModalsPageModule,
         NewSupplyPointPageModule,
-        OfferSelectionPageModule,
         ProgressBarPageModule,
         RecapitulationPageModule,
         RouterModule.forChild(routes),
