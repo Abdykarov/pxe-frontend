@@ -262,12 +262,12 @@ export class SupplyOfferConfig {
         const space = name ? ' ' : '';
         return {
             component: 'ConfirmModalComponent',
-                modalType: this.confirmCancelOffer,
-                instanceData: {
-                    confirmText: `Opravdu chcete zrušit vytváření nabídky<strong>${space}${name}</strong>?`,
-                    titleConfirm: 'ANO ZRUŠIT',
-                    data,
-                },
+            modalType: this.confirmCancelOffer,
+            instanceData: {
+                confirmText: `Opravdu chcete zrušit vytváření nabídky<strong>${space}${name}</strong>?`,
+                titleConfirm: 'ANO ZRUŠIT',
+                data,
+            },
         };
     }
 }
