@@ -11,7 +11,10 @@ import * as R from 'ramda';
 
 import { AuthService } from 'src/app/services/auth.service';
 import { Observable } from 'rxjs';
-import { CONSTS } from 'src/app/app.constants';
+import {
+    CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
 
 @Injectable({
     providedIn: 'root',
@@ -32,6 +35,13 @@ export class AuthGuard implements CanActivateChild {
         if (!this.authService.isLogged()) {
             this.router.navigate([CONSTS.PATHS.EMPTY]);
             return false;
+        }
+
+        if (this.authService.isFirstLogged()) {
+            if (state.url !== ROUTES.ROUTER_CHANGE_PASSWORD) {
+                this.router.navigate([ROUTES.ROUTER_CHANGE_PASSWORD]);
+                return false;
+            }
         }
 
         if (!R.isNil(childRoute.data.isSupplier)) {
