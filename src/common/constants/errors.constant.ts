@@ -8,21 +8,33 @@ export const errorFieldMessages =  {
     address: {
         required: 'Vyplňte adresu odběrného místa.',
         invalidAddress: 'Zvolená adresa není platná.',
+        requiredPermanentAddressPerson: 'Vyplňte trvalou adresu.',
+        invalidPermanentAddressPerson: 'Zvolená trvalá adresa není platná.',
+        requiredCurrentAddressPerson: 'Vyplňte korespondenční adresu.',
+        invalidCurrentAddressPerson: 'Zvolená korespondenční adresa není platná.',
+        requiredPermanentAddressCompany: 'Vyplňte trvalou adresu sídla společnosti.',
+        invalidPermanentAddressCompany: 'Zvolená trvalá adresa sídla společnosti není platná.',
+        requiredCurrentAddressCompany: 'Vyplňte korespondenční adresu sídla společnosti.',
+        invalidCurrentAddressCompany: 'Zvolená korespondenční adresa sídla společnosti není platná.',
     },
     annualConsumption: {
         required: 'Vyplňte roční spotřebu plynu.',
-        annualConsumption: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
-        negativeAnnualConsumption: 'Použít můžete pouze kladná čísla.',
     },
     annualConsumptionNT: {
         required: 'Vyplňte roční spotřebu elektřiny v nízkém tarifu.',
-        annualConsumptionNT: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
-        negativeAnnualConsumption: 'Použít můžete pouze kladná čísla.',
     },
     annualConsumptionVT: {
         required: 'Vyplňte roční spotřebu elektřiny ve vysokém tarifu.',
-        annualConsumptionVT: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
-        negativeAnnualConsumption: 'Použít můžete pouze kladná čísla.',
+    },
+    bankAccountNumber: {
+        required: 'Číslo účtu je povinné.',
+        accountNumber: 'Zadejte číslo účtu ve správném formátu.',
+        accountNumberBoth: 'Zadejte předčíslí a číslo účtu ve správném formátu.',
+        accountNumberPrefix: 'Zadejte předčíslí účtu ve správném formátu.',
+    },
+    bankCode: {
+        required: 'Zadejte kód banky.',
+        bankCode: 'Zadejte správný kód banky.',
     },
     circuitBreakerId: {
         required: 'Vyberte ze seznamu, jakou máte velikost jističe.',
@@ -30,8 +42,9 @@ export const errorFieldMessages =  {
     commodityType: {
         required: 'Zvolte komoditu.',
     },
-    subjectTypeId: {
-        required: 'Zvolte odběratele.',
+    confirmationCode: {
+        required: 'Zadejte kód.',
+        badCode: 'Zadali jste neplatný kód.',
     },
     consent: {
         signUp: {
@@ -40,6 +53,19 @@ export const errorFieldMessages =  {
         newsSubscription: {
             required: 'Nezapomeňte na souhlas se zásadami bezpečnosti.',
         },
+    },
+    date: {
+        format: 'Vyplňte platný formát data.',
+        expirationDateInPast: 'Doplnit můžete pouze budoucí datum.',
+    },
+    deposit: {
+        required: 'Vyplňte výši záloh.',
+    },
+    depositPaymentType: {
+        required: 'Vyberte ze seznamu způsob placení záloh.',
+    },
+    dic: {
+        invalidDIC: 'Zadejte své DIČ ve správném formátu.',
     },
     distributionRateId: {
         required: 'Vyberte ze seznamu, jakou máte distribuční sazbu.',
@@ -56,27 +82,93 @@ export const errorFieldMessages =  {
     email: {
         required: 'Zadejte svůj e-mail.',
         email: 'Použijte pouze písmena bez diakritiky, číslice, tečku (.) a zavináč (@).',
-        invalidEmail: 'Použijte pouze písmena bez diakritiky, číslice, tečku (.) a zavináč (@).',
         alreadyRegisteredEmail: 'Tento e-mail již registrujeme.',
     },
     expirationDate: {
         requiredGas: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr plynu.',
         requiredPower: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr elektřiny.',
-        format: 'Vyplňte platný formát data.',
-        expirationDateInPast: 'Doplnit můžete pouze budoucí datum.',
+    },
+    fullName: {
+        requiredPerson: 'Vyplňte jméno a příjmení.',
+        requiredCompany: 'Vyplňte název společnosti.',
+    },
+    ico: {
+        required: 'Zadejte své IČ.',
+        invalidIC: 'Zadejte své IČ ve správném formátu.',
     },
     name: {
         required: 'Vyplňte libovolný název odběrného místa (např. Byt dcera) v maximální délce 50 znaků.',
         maxlength: 'Maximální délka pro název odběrného místa je 50 znaků.',
     },
+    number: {
+        decimal: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
+        positive: 'Použít můžete pouze kladná čísla.',
+        integer: 'Použít můžete pouze celá čísla.',
+    },
+    offerAnnualConsumptionId: {
+        required: 'Vyberte ze seznamu spotřebu.',
+    },
+    offerCircuitBreakerId: {
+        required: 'Vyberte ze seznamu velikost jističe.',
+    },
+    offerDistributionRateId: {
+        required: 'Vyberte ze seznamu distribuční sazbu.',
+    },
+    offerDistributionLocation: {
+        required: 'Vyberte ze seznamu distribuční umístění.',
+    },
+    offerDeliveryLength: {
+        required: 'Vyberte ze seznamu délka dodávky.',
+    },
+    offerPriceGas: {
+        required: 'Vyplňte cenu plynu.',
+    },
+    offerPriceNT: {
+        required: 'Vyplňte cenu elektřiny v nízkém tarifu.',
+    },
+    offerPriceVT: {
+        required: 'Vyplňte cenu elektřiny ve vysokém tarifu.',
+    },
+    offerPermanentPaymentPrice: {
+        required: 'Vyplňte měsíční stálou platbu.',
+    },
+    offerValidFromTo: {
+        required: 'Doplňte datum, dokdy je platná nabídka.',
+    },
+    offerDeliveryFromTo: {
+        required: 'Doplňte datum dodávkového období.',
+    },
+    offerName: {
+        required: 'Vyplňte libovolný název nabídky.',
+    },
+    phasesId: {
+        required: 'Vyplňte typ fáze.',
+    },
     password: {
         required: 'Zadejte heslo.',
+    },
+    subjectTypeId: {
+        required: 'Zvolte odběratele.',
+    },
+    phone: {
+        required: 'Zadejte svůj telefon.',
+        invalidPhoneNumber: 'Zadaný telefon není ve správném formátu.',
+    },
+    phonePrefix: {
+        required: 'Zadejte předvolbu země. +420 pro ČR nebo +421 pro SR.',
+        invalidPhoneNumberPrefix: 'Zadejte správnou předvolbu země. +420 pro ČR nebo +421 pro SR.',
     },
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
     },
-    confirmationCode: {
-        required: 'Zadejte kód.',
-        badCode: 'Zadali jste neplatný kód.', // je treba syncs s grafikou!!!
+    contractEndTypeId: {
+        required: 'Zvolte typ ukončení platnosti aktuální smlouvy.',
+    },
+    timeToContractEnd: {
+        required: 'Zadejte výpovědní lhůtu.',
+        max: 'Zadejte maximálně 2 číslice do výpovědní lhůty.',
+    },
+    timeToContractEndPeriodId: {
+        required: 'Zvolte typ výpovědní lhůty.',
     },
 };

@@ -32,6 +32,10 @@ import {
     contractSigningPageRoutes,
 } from 'src/static/pages/contract-signing/page.module';
 import {
+    DropdownPageModule,
+    dropdownPageRoutes,
+} from 'src/static/atoms/dropdown/page.module';
+import {
     FormsPageModule,
     formsPageRoutes,
 } from 'src/static/atoms/forms/page.module';
@@ -60,10 +64,6 @@ import {
     newSupplyPointPageRoutes,
 } from 'src/static/pages/new-supply-point/page.module';
 import {
-    OfferSelectionPageModule,
-    offerSelectionPageRoutes,
-} from 'src/static/pages/offer-selection/page.module';
-import {
     ProgressBarPageModule,
     progressBarPageRoutes,
 } from 'src/static/organisms/progress-bar/progress-bar.module';
@@ -80,9 +80,17 @@ import {
     supplyPointsPageRoutes,
 } from 'src/static/pages/supply-points/page.module';
 import {
+    RecapitulationPageModule,
+    recapitulationPageRoutes,
+} from 'src/static/pages/recapitulation/page.module';
+import {
     SupplyPointsBannerPageModule,
     supplyPointsBannerPageRoutes,
 } from 'src/static/pages/supply-points-banner/page.module';
+import {
+    SupplyOfferPageModule,
+    supplyOfferPageRoutes,
+} from 'src/static/organisms/supply-offer/page.module';
 import {
     SupplyPointOfferPageModule,
     supplyPointOfferPageRoutes,
@@ -115,6 +123,7 @@ const routes: Routes = [
             ...buttonsPageRoutes,
             ...colorsPageRoutes,
             ...contractSigningPageRoutes,
+            ...dropdownPageRoutes,
             ...formsPageRoutes,
             ...changePasswordBannerPageRoutes,
             ...iconsPageRoutes,
@@ -122,12 +131,14 @@ const routes: Routes = [
             ...infoBannerPageRoutes,
             ...modalsPageRoutes,
             ...newSupplyPointPageRoutes,
-            ...offerSelectionPageRoutes,
+            ...supplyPointOfferPageRoutes,
             ...progressBarPageRoutes,
             ...requestCardPageRoutes,
+            ...supplyOfferPageRoutes,
             ...supplyPointPageRoutes,
             ...supplyPointsPageRoutes,
             ...supplyPointsBannerPageRoutes,
+            ...recapitulationPageRoutes,
             ...supplyPointOfferPageRoutes,
             ...supplyPointsOfferPageRoutes,
             ...tablesPageRoutes,
@@ -149,6 +160,7 @@ const routes: Routes = [
         ButtonsPageModule,
         ColorsPageModule,
         ContractSigningPageModule,
+        DropdownPageModule,
         FormsPageModule,
         ChangePasswordBannerPageModule,
         IconsPageModule,
@@ -156,14 +168,15 @@ const routes: Routes = [
         InfoBannerPageModule,
         ModalsPageModule,
         NewSupplyPointPageModule,
-        OfferSelectionPageModule,
         ProgressBarPageModule,
+        RecapitulationPageModule,
         RequestCardPageModule,
         RouterModule.forChild(routes),
+        SupplyOfferPageModule,
+        SupplyPointOfferPageModule,
         SupplyPointPageModule,
         SupplyPointsPageModule,
         SupplyPointsBannerPageModule,
-        SupplyPointOfferPageModule,
         SupplyPointsOfferPageModule,
         TablesPageModule,
         TooltipPageModule,

@@ -67,23 +67,56 @@ export class NewSupplyPointPageConfig {
         },
     ];
 
-    public circuitBreakerOtions = [
+    public contractEndTypeOptions = [
         {
             key: 1,
-            value: 'option-1',
-            label: 'Breaker option 1',
+            value: 1,
+            label: 'Smlouva na dobu určitou',
         },
         {
             key: 2,
-            value: 'option-2',
-            label: 'Breaker option 2',
+            value: 2,
+            label: 'Smlouva na dobu neurčitou',
         },
         {
             key: 3,
-            value: 'option-3',
-            label: 'Breaker option 3',
+            value: 3,
+            label: 'Vlastní výpověď',
+        },
+
+    ];
+
+    public circuitBreakerPhaseOptions = [
+        {
+            key: 1,
+            value: 1,
+            label: '1-fázový',
+        },
+        {
+            key: 2,
+            value: 2,
+            label: '3-fázový',
         },
     ];
+
+    public circuitBreakerSizeOptions = [
+        {
+            key: 1,
+            value: 1,
+            label: '10A',
+        },
+        {
+            key: 2,
+            value: 2,
+            label: '20A',
+        },
+        {
+            key: 3,
+            value: 3,
+            label: '30A',
+        },
+    ];
+
 
     public stepperProgressConfig: IStepperProgressItem[] = [
         {
@@ -103,3 +136,4 @@ export class NewSupplyPointPageConfig {
         },
     ];
 }
+

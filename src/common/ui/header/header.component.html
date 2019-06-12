@@ -1,8 +1,11 @@
 <ng-template #profileMenu let-toggle="toggle">
     <lnd-button
         (click)="toggle()"
-        [label]="user.email"
-        type="primary"
+        [label]="user?.email"
+        type="dropdown"
+        icon="icon--triangle-down"
+        customIconClass="icon--small"
+        iconPosition="right"
     ></lnd-button>
 </ng-template>
 
@@ -43,7 +46,6 @@
                             (click)="loginAction.emit()">
                         </lnd-button>
                     </div>
-
                     <div
                         class="menu-holder"
                         *ngIf="!settings.isPublic || settings.isStatic">
@@ -62,10 +64,16 @@
                         class="user-holder"
                         *ngIf="!settings.isPublic">
                         <span class="icon icon--favourite-stroke text-color--secondary"></span>
-                        <lnd-dropdown #userProfile [actionTemplate]="profileMenu">
+                        <lnd-dropdown
+                            #userProfile
+                            [actionTemplate]="profileMenu"
+                            (toggleOverlayerAction)="toggleMenu.emit()"
+                            menuDirection="right">
                             <a *ngFor="let item of userMenu"
-                               class="dropdown-item"
-                               [routerLink]="item.url">
+                                [ngClass]="item.class"
+                                class="dropdown-item"
+                                [routerLink]="item.url">
+                                <span [ngClass]="'dropdown-item-icon icon icon--' + item.icon"></span>
                                 {{ item.label }}
                             </a>
                         </lnd-dropdown>

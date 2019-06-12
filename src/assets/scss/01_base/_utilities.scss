@@ -31,6 +31,21 @@
 		text-decoration: $link-hover-decoration;
 	}
 
+	&--logout {
+		&.dropdown-item,
+		.navigation-main__link {
+			@include link-without-href-self {
+				background-color: rgba($secondary, .05);
+			}
+
+			&:focus,
+			&:hover,
+			&:active {
+				background-color: rgba($secondary, .15);
+			}
+		}
+	}
+
 	&--disabled {
 		opacity: .4;
 		pointer-events: none;
@@ -43,12 +58,16 @@
 
 .text-with-icon {
 	display: flex;
+	align-items: center;
 	margin-bottom: $spacer;
 
-	&__icon {
-		padding-top: ( $spacer / 10 );
-		padding-right: $spacer;
-		color: $icons-secondary;
+	& &__icon {
+		color: $icons-primary;
+		font-size: 1.625rem;
+	}
+
+	&__text {
+		margin-left: ( $spacer / 2 );
 	}
 }
 

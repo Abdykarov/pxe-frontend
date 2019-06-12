@@ -55,6 +55,7 @@ export interface ISupplyPointGasAttributes {
 export interface ISupplyPointPowerAttributes {
     ean: string;
     circuitBreakerId: string;
+    phasesId: string;
     distributionRateId: string;
     annualConsumptionNT: number;
     annualConsumptionVT: number;
@@ -65,8 +66,11 @@ export interface ISupplyPoint {
     supplierId: number;
     name: string;
     address: IAddress;
-    expirationDate: string;
+    expirationDate?: string;
     subjectTypeId: string;
+    contractEndTypeId: string;
+    timeToContractEnd: string;
+    timeToContractEndPeriodId: string;
 }
 
 export interface ISupplyPointFindData {

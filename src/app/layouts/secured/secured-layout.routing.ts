@@ -48,6 +48,10 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.SUPPLY_OFFER,
+                redirectTo: CONSTS.PATHS.SUPPLY_OFFER + '/',
+            },
+            {
+                path: CONSTS.PATHS.SUPPLY_OFFER + '/:commodityType',
                 loadChildren: '../../pages/supply-offer/supply-offer.module#SupplyOfferModule',
                 data: {
                     isSimpleFooter: false,
@@ -55,7 +59,7 @@ const routes = [
                     isSupplier: true,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
-                    hideLeftNavigate: true,
+                    hideLeftNavigation: true,
                 },
             },
             {
@@ -67,6 +71,8 @@ const routes = [
                 loadChildren: '../../pages/not-found/not-found.module#NotFoundModule',
                 data: {
                     isSimpleFooter: false,
+                    loginType: LoginType.NONE,
+                    signUpType: SignType.NONE,
                 },
             },
             {

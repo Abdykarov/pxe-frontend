@@ -35,10 +35,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Colors',
                     'url': '/basic/colors',
                 },
-                // {
-                //     'label': 'Drop*',
-                //     'url': '/dropdown',
-                // },
+                {
+                    'label': 'Dropdown',
+                    'url': '/basic/dropdown',
+                },
                 {
                     'label': 'Forms',
                     'url': '/basic/forms',
@@ -118,6 +118,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Supply point offer',
                     'url': '/basic/supply-point-offer',
                 },
+                {
+                    'label': 'Supply offer',
+                    'url': '/basic/supply-offer',
+                },
             ],
         },
         {
@@ -162,8 +166,8 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/new-supply-point',
                 },
                 {
-                    'label': 'Offer selection',
-                    'url': '/basic/offer-selection',
+                    'label': 'supply offer',
+                    'url': '/full/supply-offer',
                 },
                 {
                     'label': 'Supply points',
@@ -172,6 +176,10 @@ export const staticNavigationConfig: INavigationConfig = [
                 {
                     'label': 'Supply points (banner)',
                     'url': '/basic/supply-points-banner',
+                },
+                {
+                    'label': 'Recapitulation',
+                    'url': '/basic/recapitulation',
                 },
                 {
                     'label': 'Supply points offer',
@@ -199,7 +207,7 @@ export const staticNavigationConfig: INavigationConfig = [
             'id': 'logout',
             'label': 'Odhlášení',
             'icon': 'power',
-            'class': 'navigation-main__item--second navigation-main__item--logout',
+            'class': 'navigation-main__item--second link--logout',
         },
     ],
 ];
