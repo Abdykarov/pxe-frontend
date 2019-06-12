@@ -252,6 +252,7 @@ export class SupplyOfferConfig {
         modalType: this.confirmDeleteOffer,
         instanceData: {
             confirmText: `Opravdu chcete smazat nabídku <strong>${data.currentOfferFormValues.name}</strong>?`,
+            titleConfirm: 'ANO SMAZAT',
             data,
         },
     })
@@ -263,9 +264,10 @@ export class SupplyOfferConfig {
             component: 'ConfirmModalComponent',
                 modalType: this.confirmCancelOffer,
                 instanceData: {
-                confirmText: `Opravdu chcete zrušit vytváření nabídky<strong>${space}${name}</strong>?`,
+                    confirmText: `Opravdu chcete zrušit vytváření nabídky<strong>${space}${name}</strong>?`,
+                    titleConfirm: 'ANO ZRUŠIT',
                     data,
-            },
+                },
         };
     }
 }
