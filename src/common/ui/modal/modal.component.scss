@@ -120,10 +120,10 @@
 	.modal-body {
 		text-align: center;
 
-			// Media queries
-			@include media-breakpoint-up(lg) {
-				padding: $modal-inner-padding-md ( $spacer * 4 );
-			}
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			padding: $modal-inner-padding-md ( $spacer * 4 );
+		}
 	}
 
 	.modal-footer {
