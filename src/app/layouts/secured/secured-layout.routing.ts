@@ -14,6 +14,18 @@ const routes = [
         component: SecuredLayoutComponent,
         children: [
             {
+                path: CONSTS.PATHS.CHANGE_PASSWORD,
+                loadChildren: '../../pages/change-password/change-password.module#ChangePasswordModule',
+                data: {
+                    isSimpleFooter: false,
+                    isPublic: true,
+                    hideLeftNavigation: true,
+                    isSupplier: false,
+                    loginType: LoginType.NONE,
+                    signUpType: SignType.NONE,
+                },
+            },
+            {
                 path: CONSTS.PATHS.DASHBOARD,
                 loadChildren: '../../pages/dashboard/dashboard.module#DashboardModule',
                 data: {
