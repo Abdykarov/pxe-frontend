@@ -36,7 +36,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
 
     constructor(
         private cd: ChangeDetectorRef,
-        private contract: ContractService,
+        private contractService: ContractService,
         private offerService: OfferService,
         private route: ActivatedRoute,
         private router: Router,
@@ -96,7 +96,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     action = (supplyPointOffer: ISupplyPointOffer) => {
         const supplyPointId = this.supplyPoint.id;
 
-        this.contract.saveContract(supplyPointOffer.id, supplyPointId)
+        this.contractService.saveContract(supplyPointOffer.id, supplyPointId)
             .pipe(
                 takeUntil(this.destroy$),
             )
