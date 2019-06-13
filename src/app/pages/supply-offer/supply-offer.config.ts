@@ -37,7 +37,7 @@ export class SupplyOfferConfig {
                 ],
             },
             {
-                label: 'Typ osoby',
+                label: 'Odběratel',
                 views: [
                     {
                         headingClass: [''],
@@ -161,7 +161,7 @@ export class SupplyOfferConfig {
                 ],
             },
             {
-                label: 'Typ osoby',
+                label: 'Odběratel',
                 views: [
                     {
                         headingClass: [''],
