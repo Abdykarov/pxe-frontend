@@ -8,7 +8,8 @@ import {
     Observable,
     Operation,
 } from 'apollo-link';
-import { HttpLink } from 'apollo-angular-link-http';
+import { BatchHttpLink } from 'apollo-link-batch-http';
+// import { HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { onError } from 'apollo-link-error';
 
@@ -20,7 +21,7 @@ import {
 } from '../resolvers/';
 import { environment } from 'src/environments/environment';
 
-const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, router: Router) => {
+const apolloGraphQLFactory = (/*httpLink: HttpLink, */authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
 
     const setTokenHeader = (operation: Operation): void => {
@@ -29,12 +30,17 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
             operation.setContext({
                 headers: {
                     Authorization: `Bearer ${token}`,
+                    'X-API-Key': `${environment.x_api_key}`,
                 },
             });
         }
     };
 
-    const http = httpLink.create({
+    // const http = httpLink.create({
+    //     uri: `${environment.url_graphql}/`,
+    // });
+
+    const http = new BatchHttpLink({
         uri: `${environment.url_graphql}/`,
     });
 
@@ -48,7 +54,8 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
                     next: observer.next.bind(observer),
                     complete: observer.complete.bind(observer),
                     error: networkError => {
-                        if (networkError.status === 401) {
+                        console.log('%c ***** networkError *****', 'background: #bada55; color: #000; font-weight: bold', networkError, networkError.statusCode);
+                        if (networkError.status === 401 || networkError.statusCode === 401) {
                             authService.refreshToken()
                                 .subscribe(
                                     (response) => {
@@ -82,13 +89,13 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
     const error = onError(({ graphQLErrors, networkError, response }) => {
         if (graphQLErrors) {
             graphQLErrors.map(({ message, locations, path }) => {
-                // console.log('%c ***** [GraphQL error] *****', 'background: red; color: #fff; font-weight: bold',
-                //     `Message: ${message}, Location: ${locations}, Path: ${path}`);
+                console.log('%c ***** [GraphQL error] *****', 'background: red; color: #fff; font-weight: bold',
+                    `Message: ${message}, Location: ${locations}, Path: ${path}`);
             });
         }
 
         if (networkError) {
-            // console.log('%c ***** [Network error] *****', 'background: red; color: #fff; font-weight: bold', networkError);
+            console.log('%c ***** [Network error] *****', 'background: red; color: #fff; font-weight: bold', networkError);
         }
         // response.errors = null;
     });
@@ -111,7 +118,7 @@ export const ApolloGraphQLProvider = {
     provide: APOLLO_OPTIONS,
     useFactory: apolloGraphQLFactory,
     deps: [
-        HttpLink,
+        // HttpLink,
         AuthService,
         Router,
     ],
