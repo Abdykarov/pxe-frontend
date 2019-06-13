@@ -17,6 +17,6 @@ export class BadgeComponent {
     public type: IBadgeType;
 
     constructor() {
-        this.type = R.contains(this.type, Object.values(IBadgeType)) ? this.type : IBadgeType.SECONDARY;
+        this.type = R.contains(this.type, Object.values(IBadgeType)) ? this.type : IBadgeType.INFO;
     }
 }

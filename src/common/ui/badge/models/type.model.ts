@@ -1,5 +1,5 @@
 export enum IBadgeType {
     LIGHT = 'light',
-    SECONDARY = 'secondary',
+    INFO = 'info',
     TRANSPARENT = 'transparent',
 }
