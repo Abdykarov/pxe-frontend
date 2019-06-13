@@ -75,7 +75,7 @@
     }
 
     &__info-description {
-        margin-bottom: $spacer;
+        margin-bottom: ( $spacer * 1.25 );
 
         // Media queries
 		@include media-breakpoint-up(md) {
