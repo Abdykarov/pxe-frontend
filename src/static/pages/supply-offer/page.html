@@ -16,7 +16,7 @@
     {{row.deliveryFrom | date: 'dd.MM.yyyy'}} - {{row.deliveryTo | date: 'dd.MM.yyyy'}}
 </ng-template>
 <ng-template #actionColumnTemplate let-row="row">
-    <span>{{row.permanentPaymentPrice | number:'1.0-2'}}&nbsp;Kč</span>
+    <span>{{row.permanentPaymentPrice | number:'1.0-2'}}&nbsp;Kč/měsíc</span>
     <div *ngIf="table.openedRow !== row"
          class="action-area-div">
         <ng-template #tooltipEdit let-toggle="toggle">
@@ -204,8 +204,8 @@
         <div class="col-4 col-xl-3">
             <lnd-form-field
                 [id]="'permanentPaymentPrice'"
-                label="Stálá platba - cena"
-                appendText="Kč"
+                label="Stálá platba"
+                appendText="Kč/měsíc"
             ></lnd-form-field>
         </div>
     </div>

@@ -137,7 +137,7 @@ export const errorFieldMessages =  {
         required: 'Vyplňte cenu elektřiny ve vysokém tarifu.',
     },
     offerPermanentPaymentPrice: {
-        required: 'Vyplňte (stálou) měsíční platbu.',
+        required: 'Vyplňte stálou platbu.',
     },
     offerSubjectTypeId: {
         required: 'Vyberte ze seznamu typ odběratele.',

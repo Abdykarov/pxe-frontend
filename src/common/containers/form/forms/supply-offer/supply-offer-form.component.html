@@ -182,11 +182,11 @@
              class="col-4 col-xl-3">
             <lnd-form-field
                     *ngIf="form.controls.permanentPaymentPrice.status !== 'DISABLED'"
-                    appendText="Kč"
+                    appendText="Kč/měsíc"
                     [error]="formError.permanentPaymentPrice || form.controls.permanentPaymentPrice.errors"
                     [formControl]="form.controls.permanentPaymentPrice"
                     [id]="'permanentPaymentPrice'"
-                    label="Stálá platba - cena"
+                    label="Stálá platba"
                     [success]="form.controls.permanentPaymentPrice.valid && (form.controls.permanentPaymentPrice.touched || formError.permanentPaymentPrice)"
                     [touched]="form.controls.permanentPaymentPrice.touched || formError.permanentPaymentPrice"
                     [validationMessages]="formFields.validationMessages.permanentPaymentPrice"
