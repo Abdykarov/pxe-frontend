@@ -40,8 +40,8 @@
 		margin-bottom: $spacer;
 		background-color: $white;
 		color: inherit;
-		border-radius: 4px;
-		box-shadow: 0 2px 5px rgba($box-shadow-color, .16);
+		border-radius: $border-radius;
+		box-shadow: $box-shadow;
 		overflow: hidden;
 
 		// Media queries
