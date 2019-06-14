@@ -28,9 +28,9 @@ export const errorFieldMessages =  {
     },
     bankAccountNumber: {
         required: 'Vyplňte číslo účtu.',
-        accountNumber: 'Vyplňte správné číslo účtu.',
-        accountNumberBoth: 'Vyplňte správné číslo účtu včetně předčíslí.',
-        accountNumberPrefix: 'Vyplňte správné předčíslí čísla účtu.',
+        accountNumber: 'Vyplňte správné číslo účtu včetně případného předčíslí s pomlčkou.',
+        accountNumberBoth: 'Vyplňte správné předčíslí (včetně pomlčky) a číslo účtu.',
+        accountNumberPrefix: 'Vyplňte správné předčíslí účtu i s pomlčkou.',
     },
     bankCode: {
         required: 'Vyplňte kód banky.',
@@ -98,7 +98,7 @@ export const errorFieldMessages =  {
     },
     ico: {
         required: 'Vyplňte své IČO.',
-        invalidIC: 'Správné IČO obsahuje 8 číslic.',
+        invalidIC: 'Vyplňte platné IČO, které obsahuje 8 číslic.',
     },
     name: {
         required: 'Vyplňte libovolný název odběrného místa (např. Byt dcera) v maximální délce 50 znaků.',
@@ -163,7 +163,7 @@ export const errorFieldMessages =  {
     },
     phonePrefix: {
         required: 'Vyplňte předvolbu pro ČR +420',
-        invalidPhoneNumberPrefix: 'Zadejte správnou předvolbu země. +420 pro ČR nebo +421 pro SR.',
+        invalidPhoneNumberPrefix: 'Zadejte správnou předvolbu země. +420 pro ČR',
     },
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
@@ -173,7 +173,7 @@ export const errorFieldMessages =  {
     },
     timeToContractEnd: {
         required: 'Vyplňte délku výpovědní lhůty.',
-        min: 'Doplňte minimálně 1 číslici.',
+        min: 'Použít můžete pouze kladná čísla.',
         max: 'Doplňte maximálně 2 číslice.',
         isNumber: 'Použijte pouze celá a kladná čísla.',
     },
