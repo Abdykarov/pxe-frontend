@@ -61,8 +61,6 @@ export const errorFieldMessages =  {
     },
     deposit: {
         required: 'Vyplňte, jakou chcete mít výši záloh.',
-        decimal: 'Použijte pouze čísla a pro desetinné místo čárku nebo tečku.',
-        min: 'Použijte pouze kladná čísla.',
     },
     depositPaymentType: {
         required: 'Vyberte ze seznamu, jak chcete platit zálohy.',
