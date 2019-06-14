@@ -1,13 +1,15 @@
 import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
+import {
     ChangeDetectorRef,
     Component, OnInit,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
-import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CommodityType,
     ISupplyPoint,

@@ -1,7 +1,10 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import {
+    ChangeDetectorRef,
+    Component,
+} from '@angular/core';
 
 import { ShowBannerComponent } from 'src/common/component/show-banner.component';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'pxe-dashboard',

@@ -1,7 +1,8 @@
 import { ActivatedRoute } from '@angular/router';
 import {
     Component,
-    Inject, Input,
+    Inject,
+    Input,
     OnInit,
     PLATFORM_ID,
 } from '@angular/core';
