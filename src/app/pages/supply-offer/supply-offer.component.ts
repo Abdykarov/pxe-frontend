@@ -89,15 +89,15 @@ export class SupplyOfferComponent extends ShowBannerComponent implements OnInit 
 
     constructor(
         private authService: AuthService,
-        private cd: ChangeDetectorRef,
+        protected cd: ChangeDetectorRef,
         private modalsService: ModalService,
         private offerService: OfferService,
-        private route: ActivatedRoute,
+        protected route: ActivatedRoute,
         private router: Router,
         public supplyOfferConfig: SupplyOfferConfig,
         private supplyService: SupplyService,
     ) {
-        super();
+        super(cd, route);
     }
 
     ngOnInit() {
