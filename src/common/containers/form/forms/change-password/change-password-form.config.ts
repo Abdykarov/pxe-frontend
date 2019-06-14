@@ -1,5 +1,6 @@
 import { Validators } from '@angular/forms';
 
+import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
 import { mustMatchFnc } from 'src/common/utils/mustMatchFnc';
@@ -10,14 +11,14 @@ export const changePasswordFields: IForm = {
             '',
             [
                 Validators.required,
-                Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'),
+                CustomValidators.passwordFormat,
             ],
         ],
         confirmPassword: [
             '',
             [
                 Validators.required,
-                Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'),
+                CustomValidators.passwordFormat,
             ],
         ],
     },
