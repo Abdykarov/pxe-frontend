@@ -121,7 +121,7 @@
         [appendButtonIcon]="helpDocuments && helpDocuments['distributionRateId'] ? 'icon--info' : null"
         (appendButtonAction)="showHelp('distributionRateId', 'Distribučná sazba')"
         [error]="formError.distributionRateId || form.controls.distributionRateId.errors"
-        label="Distribučná sazba"
+        label="Distribuční sazba"
         [options]="codeLists && codeLists[distributionRateType]"
         [parentForm]="form"
         [selectName]="'distributionRateId'"
@@ -130,13 +130,16 @@
         [validationMessages]="formFields.validationMessages.distributionRateId">
     </lnd-select>
     <div class="row no-gutters">
+        <div class="col-12 mb-2">
+            <small>Jistič</small>
+        </div>
         <div class="col-12 col-md-6 pr-md-1">
             <lnd-select
                 *ngIf="form.controls.circuitBreakerId.status !== 'DISABLED'"
                 [appendButtonIcon]="helpDocuments && helpDocuments['phasesId'] ? 'icon--info' : null"
                 (appendButtonAction)="showHelp('phasesId', 'Jistič fáze')"
                 [error]="formError.phasesId || form.controls.phasesId.errors"
-                label="Jistič fáze"
+                label="fáze"
                 [options]="codeLists && codeLists[codeList.CIRCUIT_BREAKER_PHASE]"
                 [parentForm]="form"
                 [selectName]="'phasesId'"
