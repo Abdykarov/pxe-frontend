@@ -20,6 +20,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/alerts',
                 },
                 {
+                    'label': 'Badge',
+                    'url': '/basic/badges',
+                },
+                {
                     'label': 'Banner',
                     'url': '/basic/banners',
                 },
@@ -118,6 +122,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Supply offer',
                     'url': '/basic/supply-offer',
                 },
+                {
+                    'label': 'Supply point overview',
+                    'url': '/basic/supply-point-overview',
+                },
             ],
         },
         {
@@ -174,12 +182,16 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/supply-points-banner',
                 },
                 {
-                    'label': 'Recapitulation',
-                    'url': '/basic/recapitulation',
+                    'label': 'Supply points (detail)',
+                    'url': '/basic/supply-points-detail',
                 },
                 {
                     'label': 'Supply points offer',
                     'url': '/basic/supply-points-offer',
+                },
+                {
+                    'label': 'Recapitulation',
+                    'url': '/basic/recapitulation',
                 },
                 // {
                 //     'label': 'Error',

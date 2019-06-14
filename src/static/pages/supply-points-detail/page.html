@@ -1,0 +1,139 @@
+<div class="row mb-4">
+    <div class="col-12 col-md-6 offset-md-3 text-center">
+        <h1>
+            Odběrná místa
+        </h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-xl-10 offset-xl-1">
+        <lnd-banner-ui
+            [data]="bannerObj"
+            buttonLabel="Najít dodavatele"
+        ></lnd-banner-ui>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-xl-10 offset-xl-1">
+        <div class="page-box">
+            <div class="row">
+                <div class="col-12 col-md-6 offset-md-3">
+                    <lnd-alert type="info"
+                            hasIcon="true">
+                        Změny byly úspěšně uloženy
+                    </lnd-alert>
+                </div>
+            </div>
+            <h2 class="h1 mb-3 text-center">Byt – Praha</h2>
+            <div class="text-with-icon justify-content-center mb-5">
+                <span class="icon icon--flash text-with-icon__icon"></span>
+                <span class="text-with-icon__text">Odběr elektřiny</span>
+            </div>
+            <div class="form-container">
+                <form>
+                    <lnd-form-field
+                        id="name"
+                        label="Název"
+                        subtext="Pomocný text"
+                        value="Byt – Praha">
+                    </lnd-form-field>
+                    <lnd-form-field
+                        id="annual-electricity-consumption"
+                        label="Roční spotřeba elektřiny"
+                        appendText="MWh"
+                        value="1,125">
+                    </lnd-form-field>
+                </form>
+                <div class="row">
+                    <div class="col-12 mb-5">
+                        <div class="mb-1">
+                            <small>Ean</small>
+                        </div>
+                        <span class="perex">451982465165</span>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <div class="mb-1">
+                            <small>Typ odběru</small>
+                        </div>
+                        <span class="perex">Domácnost</span>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <div class="mb-1">
+                            <small>Dodavatel</small>
+                        </div>
+                        <span class="perex">PRE</span>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <div class="mb-1">
+                            <small>Území</small>
+                        </div>
+                        <span class="perex">Praha</span>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <div class="mb-1">
+                            <small>Distribuční sazba</small>
+                        </div>
+                        <span class="perex">D45d</span>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <div class="mb-1">
+                            <small>Jistič – fáze</small>
+                        </div>
+                        <span class="perex">3×</span>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <div class="mb-1">
+                            <small>Jistič – velikost</small>
+                        </div>
+                        <span class="perex">10 A</span>
+                    </div>
+                    <div class="col-12">
+                        <div class="mb-1">
+                            <small>Dodávka do</small>
+                        </div>
+                        <span class="perex">31. 12. 2019</span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row no-gutters align-items-end mb-5">
+                    <div class="col-12 col-md-6">
+                        <small>Odstoupit od smlouvy do 14 dnů od podpisu</small>
+                    </div>
+                    <div class="col-12 col-md-6 pl-3 text-right">
+                        <lnd-button
+                            label="Odstoupit"
+                            type="link-danger"
+                            size="sm">
+                        </lnd-button>
+                    </div>
+                </div>
+                <div class="row no-gutters align-items-end mb-5">
+                    <div class="col-12 col-md-6">
+                        <small>Odstoupit od smlouvy výpovědí</small>
+                    </div>
+                    <div class="col-12 col-md-6 pl-3 text-right">
+                        <lnd-button
+                            label="Vypovědět"
+                            type="link-danger"
+                            size="sm">
+                        </lnd-button>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-12 mb-2">
+                        <lnd-button
+                            label="Uložit"
+                            type="primary">
+                        </lnd-button>
+                    </div>
+                    <div class="col-12">
+                        <lnd-button
+                            label="Storno"
+                            type="link">
+                        </lnd-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

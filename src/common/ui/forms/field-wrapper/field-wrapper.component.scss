@@ -9,7 +9,7 @@
 
 .field-wrapper {
 	position: relative;
-	margin-bottom: 40px;
+	margin-bottom: ( $spacer * 2 );
 
 	.form-group {
 		margin-bottom: 0;
@@ -20,8 +20,11 @@
 	}
 
 	&-with-label {
-		.field-wrapper-content {
+		.control-label {
+			z-index: $zindex-field-wrapper-control-label;
+		}
 
+		.field-wrapper-content {
 			label,
 			.input-subtext,
 			.invalid-feedback {

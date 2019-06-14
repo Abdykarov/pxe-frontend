@@ -56,6 +56,7 @@ export const errorFieldMessages =  {
     },
     date: {
         format: 'Vyplňte platný formát data.',
+        formatInterval: 'Datum zadejte jako interval ve formátu dd.mm.rrrr - dd.mm.rrrr.',
         expirationDateInPast: 'Doplnit můžete pouze budoucí datum.',
     },
     deposit: {
@@ -114,14 +115,20 @@ export const errorFieldMessages =  {
     offerCircuitBreakerId: {
         required: 'Vyberte ze seznamu velikost jističe.',
     },
+    offerDeliveryFromTo: {
+        required: 'Doplňte datum dodávkového období.',
+    },
+    offerDeliveryLength: {
+        required: 'Vyberte ze seznamu délku dodávky.',
+    },
     offerDistributionRateId: {
         required: 'Vyberte ze seznamu distribuční sazbu.',
     },
     offerDistributionLocation: {
         required: 'Vyberte ze seznamu distribuční umístění.',
     },
-    offerDeliveryLength: {
-        required: 'Vyberte ze seznamu délka dodávky.',
+    offerName: {
+        required: 'Vyplňte libovolný název pro označení nabídky.',
     },
     offerPriceGas: {
         required: 'Vyplňte cenu plynu.',
@@ -133,16 +140,13 @@ export const errorFieldMessages =  {
         required: 'Vyplňte cenu elektřiny ve vysokém tarifu.',
     },
     offerPermanentPaymentPrice: {
-        required: 'Vyplňte měsíční stálou platbu.',
+        required: 'Vyplňte stálou platbu.',
+    },
+    offerSubjectTypeId: {
+        required: 'Vyberte ze seznamu typ odběratele.',
     },
     offerValidFromTo: {
-        required: 'Doplňte datum, dokdy je platná nabídka.',
-    },
-    offerDeliveryFromTo: {
-        required: 'Doplňte datum dodávkového období.',
-    },
-    offerName: {
-        required: 'Vyplňte libovolný název nabídky.',
+        required: 'Doplňte odkdy dokdy je nabídka platná.',
     },
     phasesId: {
         required: 'Vyberte ze seznamu, jakou máte fázi.',
