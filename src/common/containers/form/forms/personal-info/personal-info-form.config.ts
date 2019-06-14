@@ -110,11 +110,11 @@ export const formFields: IForm = {
             maxlength: errorFieldMessages.ico.invalidIC,
         },
         dic: {
-            dicPrefix: errorFieldMessages.dic.invalidDIC,
-            dicDecimal: errorFieldMessages.dic.invalidDIC,
-            dicLength: errorFieldMessages.dic.invalidDIC,
-            minlength: errorFieldMessages.dic.invalidDIC,
-            maxlength: errorFieldMessages.dic.invalidDIC,
+            dicPrefix: errorFieldMessages.dic.dicPrefix,
+            dicDecimal: errorFieldMessages.dic.dicDecimal,
+            dicLength: errorFieldMessages.dic.dicDecimal,
+            minlength: errorFieldMessages.dic.dicDecimal,
+            maxlength: errorFieldMessages.dic.dicDecimal,
         },
         address1Person: {
             required: errorFieldMessages.address.requiredPermanentAddressPerson,
@@ -143,7 +143,7 @@ export const formFields: IForm = {
             bankCode: errorFieldMessages.bankCode.bankCode,
         },
         phone: {
-            required: errorFieldMessages.phone.required,
+            required: errorFieldMessages.phone.requiredMobile,
             mobilePhoneNumber: errorFieldMessages.phone.mobilePhoneNumber,
         },
         phonePrefix: {
