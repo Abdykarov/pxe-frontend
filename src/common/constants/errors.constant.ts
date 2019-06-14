@@ -56,8 +56,8 @@ export const errorFieldMessages =  {
     },
     date: {
         format: 'Vyplňte platný formát data.',
-        formatInterval: 'Datum zadejte jako interval ve formátu dd.mm.rrrr - dd.mm.rrrr.',
-        expirationDateInPast: 'Doplnit můžete pouze budoucí datum.',
+        formatInterval: 'Datum vyplňte jako interval ve formátu dd.mm.rrrr - dd.mm.rrrr.',
+        expirationDateInPast: 'Zadat můžete pouze budoucí datum.',
     },
     deposit: {
         required: 'Vyplňte, jakou chcete mít výši záloh.',
@@ -106,6 +106,7 @@ export const errorFieldMessages =  {
         decimal: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
         positive: 'Použít můžete pouze kladná čísla.',
         integer: 'Použít můžete pouze celá čísla.',
+        positiveInteger: 'Použijte pouze celá a kladná čísla.',
     },
     offerAnnualConsumptionId: {
         required: 'Vyberte ze seznamu spotřebu.',
@@ -114,7 +115,7 @@ export const errorFieldMessages =  {
         required: 'Vyberte ze seznamu velikost jističe.',
     },
     offerDeliveryFromTo: {
-        required: 'Doplňte datum dodávkového období.',
+        required: 'Vyplňte datum dodávkového období.',
     },
     offerDeliveryLength: {
         required: 'Vyberte ze seznamu délku dodávky.',
@@ -144,7 +145,7 @@ export const errorFieldMessages =  {
         required: 'Vyberte ze seznamu typ odběratele.',
     },
     offerValidFromTo: {
-        required: 'Doplňte odkdy dokdy je nabídka platná.',
+        required: 'Vyplňte odkdy dokdy je nabídka platná.',
     },
     phasesId: {
         required: 'Vyberte ze seznamu, jakou máte fázi.',
@@ -157,7 +158,11 @@ export const errorFieldMessages =  {
     },
     phone: {
         required: 'Vyplňte svůj telefon.',
-        invalidPhoneNumber: 'Telefon musí obsahovat 9 číslic.',
+        requiredMobile: 'Vyplňte svůj mobilní telefon.',
+        requiredLandLine: 'Vyplňte svoji pevnou linku.',
+        phoneNumber: 'Telefon musí obsahovat 9 číslic.',
+        mobilePhoneNumber: 'Mobilní telefon musí obsahovat 9 číslic.',
+        landLineNumber: 'Pevná linka musí obsahovat 9 číslic.',
     },
     phonePrefix: {
         required: 'Vyplňte předvolbu pro ČR +420',
@@ -171,9 +176,7 @@ export const errorFieldMessages =  {
     },
     timeToContractEnd: {
         required: 'Vyplňte délku výpovědní lhůty.',
-        min: 'Použít můžete pouze kladná čísla.',
         max: 'Doplňte maximálně 2 číslice.',
-        isNumber: 'Použijte pouze celá a kladná čísla.',
     },
     timeToContractEndPeriodId: {
         required: 'Vyberte ze seznamu odpovídající časový údaj.',

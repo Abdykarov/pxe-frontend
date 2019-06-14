@@ -60,7 +60,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.phoneNumber,
+                CustomValidators.mobilePhoneNumber,
             ],
         ],
         phonePrefix: [
@@ -143,8 +143,8 @@ export const formFields: IForm = {
             bankCode: errorFieldMessages.bankCode.bankCode,
         },
         phone: {
-            required: errorFieldMessages.phone.required,
-            phoneNumber: errorFieldMessages.phone.invalidPhoneNumber,
+            required: errorFieldMessages.phone.requiredMobile,
+            mobilePhoneNumber: errorFieldMessages.phone.mobilePhoneNumber,
         },
         phonePrefix: {
             required: errorFieldMessages.phonePrefix.required,
