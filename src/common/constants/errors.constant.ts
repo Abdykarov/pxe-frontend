@@ -8,14 +8,14 @@ export const errorFieldMessages =  {
     address: {
         required: 'Vyplňte adresu odběrného místa.',
         invalidAddress: 'Zvolená adresa není platná.',
-        requiredPermanentAddressPerson: 'Vyplňte trvalou adresu.',
+        requiredPermanentAddressPerson: 'Vyplňte svou trvalou adresu.',
         invalidPermanentAddressPerson: 'Zvolená trvalá adresa není platná.',
-        requiredCurrentAddressPerson: 'Vyplňte korespondenční adresu.',
+        requiredCurrentAddressPerson: 'Vyplňte svou korespondenční adresu.',
         invalidCurrentAddressPerson: 'Zvolená korespondenční adresa není platná.',
-        requiredPermanentAddressCompany: 'Vyplňte trvalou adresu sídla společnosti.',
-        invalidPermanentAddressCompany: 'Zvolená trvalá adresa sídla společnosti není platná.',
-        requiredCurrentAddressCompany: 'Vyplňte korespondenční adresu sídla společnosti.',
-        invalidCurrentAddressCompany: 'Zvolená korespondenční adresa sídla společnosti není platná.',
+        requiredPermanentAddressCompany: 'Vyplňte sídlo společnosti.',
+        invalidPermanentAddressCompany: 'Zvolená adresa sídla společnosti není platná.',
+        requiredCurrentAddressCompany: 'Vyplňte fakturační adresu společnosti.',
+        invalidCurrentAddressCompany: 'Zvolená fakturační adresa společnosti není platná.',
     },
     annualConsumption: {
         required: 'Vyplňte roční spotřebu plynu.',
@@ -27,14 +27,14 @@ export const errorFieldMessages =  {
         required: 'Vyplňte roční spotřebu elektřiny ve vysokém tarifu.',
     },
     bankAccountNumber: {
-        required: 'Číslo účtu je povinné.',
-        accountNumber: 'Zadejte číslo účtu ve správném formátu.',
-        accountNumberBoth: 'Zadejte předčíslí a číslo účtu ve správném formátu.',
-        accountNumberPrefix: 'Zadejte předčíslí účtu ve správném formátu.',
+        required: 'Vyplňte číslo účtu.',
+        accountNumber: 'Vyplňte správné číslo účtu včetně případného předčíslí s pomlčkou.',
+        accountNumberBoth: 'Vyplňte správné předčíslí (včetně pomlčky) a číslo účtu.',
+        accountNumberPrefix: 'Vyplňte správné předčíslí účtu i s pomlčkou.',
     },
     bankCode: {
-        required: 'Zadejte kód banky.',
-        bankCode: 'Zadejte správný kód banky.',
+        required: 'Vyplňte kód banky.',
+        bankCode: 'Vyplňte kód banky v podobě 4 číslic.',
     },
     circuitBreakerId: {
         required: 'Vyberte ze seznamu, jakou máte velikost jističe.',
@@ -60,13 +60,14 @@ export const errorFieldMessages =  {
         expirationDateInPast: 'Zadat můžete pouze budoucí datum.',
     },
     deposit: {
-        required: 'Vyplňte výši záloh.',
+        required: 'Vyplňte, jakou chcete mít výši záloh.',
     },
     depositPaymentType: {
-        required: 'Vyberte ze seznamu způsob placení záloh.',
+        required: 'Vyberte ze seznamu, jak chcete platit zálohy.',
     },
     dic: {
-        invalidDIC: 'Zadejte své DIČ ve správném formátu.',
+        dicPrefix: 'Vyplňte své DIČ.',
+        dicDecimal: 'Správné DIČ pro ČR obsahuje CZ a 8-10 číslic.',
     },
     distributionRateId: {
         required: 'Vyberte ze seznamu, jakou máte distribuční sazbu.',
@@ -81,7 +82,7 @@ export const errorFieldMessages =  {
         eic: 'Správný identifikační kód odběrného místa má 16 znaků, obsahuje pouze čísla a písmena a vždy začíná 27ZG.',
     },
     email: {
-        required: 'Zadejte svůj e-mail.',
+        required: 'Vyplňte svůj e-mail.',
         email: 'Použijte pouze písmena bez diakritiky, číslice, tečku (.) a zavináč (@).',
         alreadyRegisteredEmail: 'Tento e-mail již registrujeme.',
     },
@@ -90,12 +91,12 @@ export const errorFieldMessages =  {
         requiredPower: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr elektřiny.',
     },
     fullName: {
-        requiredPerson: 'Vyplňte jméno a příjmení.',
+        requiredPerson: 'Vyplňte své jméno a příjmení.',
         requiredCompany: 'Vyplňte název společnosti.',
     },
     ico: {
-        required: 'Zadejte své IČ.',
-        invalidIC: 'Zadejte své IČ ve správném formátu.',
+        required: 'Vyplňte své IČO.',
+        invalidIC: 'Vyplňte platné IČO, které obsahuje 8 číslic.',
     },
     name: {
         required: 'Vyplňte libovolný název odběrného místa (např. Byt dcera) v maximální délce 50 znaků.',
@@ -105,6 +106,7 @@ export const errorFieldMessages =  {
         decimal: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
         positive: 'Použít můžete pouze kladná čísla.',
         integer: 'Použít můžete pouze celá čísla.',
+        positiveInteger: 'Použijte pouze celá a kladná čísla.',
     },
     offerAnnualConsumptionId: {
         required: 'Vyberte ze seznamu spotřebu.',
@@ -146,7 +148,7 @@ export const errorFieldMessages =  {
         required: 'Vyplňte odkdy dokdy je nabídka platná.',
     },
     phasesId: {
-        required: 'Vyplňte typ fáze.',
+        required: 'Vyberte ze seznamu, jakou máte fázi.',
     },
     password: {
         required: 'Zadejte heslo.',
@@ -163,8 +165,8 @@ export const errorFieldMessages =  {
         landLineNumber: 'Pevná linka musí obsahovat 9 číslic.',
     },
     phonePrefix: {
-        required: 'Zadejte předvolbu země. +420 pro ČR nebo +421 pro SR.',
-        invalidPhoneNumberPrefix: 'Zadejte správnou předvolbu země. +420 pro ČR nebo +421 pro SR.',
+        required: 'Vyplňte předvolbu pro ČR +420.',
+        invalidPhoneNumberPrefix: 'Vyplňte správnou předvolbu pro ČR +420.',
     },
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
@@ -173,10 +175,10 @@ export const errorFieldMessages =  {
         required: 'Zvolte typ ukončení platnosti aktuální smlouvy.',
     },
     timeToContractEnd: {
-        required: 'Zadejte výpovědní lhůtu.',
-        max: 'Zadejte maximálně 2 číslice do výpovědní lhůty.',
+        required: 'Vyplňte délku výpovědní lhůty.',
+        max: 'Doplňte maximálně 2 číslice.',
     },
     timeToContractEndPeriodId: {
-        required: 'Zvolte typ výpovědní lhůty.',
+        required: 'Vyberte ze seznamu odpovídající časový údaj.',
     },
 };
