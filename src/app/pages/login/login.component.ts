@@ -48,7 +48,7 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public submitChangePassword = (values) => {
-        this.state = ILoginState.CHANGE_PASSWORD;
+        alert('submitted');
     }
 
     public submitResetPassword = ({contactInfo}) => {
