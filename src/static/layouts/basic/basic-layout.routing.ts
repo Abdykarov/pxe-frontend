@@ -92,13 +92,13 @@ import {
     supplyPointOfferPageRoutes,
 } from 'src/static/organisms/supply-point-offer/page.module';
 import {
-    SupplyPointsOfferPageModule,
-    supplyPointsOfferPageRoutes,
-} from 'src/static/pages/supply-points-offer/page.module';
-import {
     SupplyPointOverviewPageModule,
     supplyPointOverviewPageRoutes,
 } from 'src/static/organisms/supply-point-overview/page.module';
+import {
+    SupplyPointsOfferPageModule,
+    supplyPointsOfferPageRoutes,
+} from 'src/static/pages/supply-points-offer/page.module';
 import {
     TablesPageModule,
     tablesPageRoutes,
@@ -139,8 +139,8 @@ const routes: Routes = [
             ...supplyPointsBannerPageRoutes,
             ...recapitulationPageRoutes,
             ...supplyPointOfferPageRoutes,
-            ...supplyPointsOfferPageRoutes,
             ...supplyPointOverviewPageRoutes,
+            ...supplyPointsOfferPageRoutes,
             ...tablesPageRoutes,
             ...tooltipPageRoutes,
             ...typographyPageRoutes,
@@ -176,8 +176,8 @@ const routes: Routes = [
         SupplyPointPageModule,
         SupplyPointsPageModule,
         SupplyPointsBannerPageModule,
-        SupplyPointsOfferPageModule,
         SupplyPointOverviewPageModule,
+        SupplyPointsOfferPageModule,
         TablesPageModule,
         TooltipPageModule,
         TypographyPageModule,
