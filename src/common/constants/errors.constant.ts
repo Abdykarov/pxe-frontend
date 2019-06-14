@@ -165,8 +165,8 @@ export const errorFieldMessages =  {
         landLineNumber: 'Pevná linka musí obsahovat 9 číslic.',
     },
     phonePrefix: {
-        required: 'Vyplňte předvolbu pro ČR +420',
-        invalidPhoneNumberPrefix: 'Zadejte správnou předvolbu země. +420 pro ČR',
+        required: 'Vyplňte předvolbu pro ČR +420.',
+        invalidPhoneNumberPrefix: 'Vyplňte správnou předvolbu pro ČR +420.',
     },
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
