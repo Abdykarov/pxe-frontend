@@ -122,6 +122,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Supply offer',
                     'url': '/basic/supply-offer',
                 },
+                {
+                    'label': 'Supply point overview',
+                    'url': '/basic/supply-point-overview',
+                },
             ],
         },
         {
@@ -182,12 +186,12 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/supply-points-detail',
                 },
                 {
-                    'label': 'Recapitulation',
-                    'url': '/basic/recapitulation',
-                },
-                {
                     'label': 'Supply points offer',
                     'url': '/basic/supply-points-offer',
+                },
+                {
+                    'label': 'Recapitulation',
+                    'url': '/basic/recapitulation',
                 },
                 // {
                 //     'label': 'Error',

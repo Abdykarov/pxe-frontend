@@ -72,25 +72,9 @@ import {
     progressBarPageRoutes,
 } from 'src/static/organisms/progress-bar/progress-bar.module';
 import {
-    SupplyPointPageModule,
-    supplyPointPageRoutes,
-} from 'src/static/organisms/supply-point/page.module';
-import {
-    SupplyPointsPageModule,
-    supplyPointsPageRoutes,
-} from 'src/static/pages/supply-points/page.module';
-import {
     RecapitulationPageModule,
     recapitulationPageRoutes,
 } from 'src/static/pages/recapitulation/page.module';
-import {
-    SupplyPointsBannerPageModule,
-    supplyPointsBannerPageRoutes,
-} from 'src/static/pages/supply-points-banner/page.module';
-import {
-    SupplyPointsDetailPageModule,
-    supplyPointsDetailPageRoutes,
-} from 'src/static/pages/supply-points-detail/page.module';
 import {
     SupplyOfferPageModule,
     supplyOfferPageRoutes,
@@ -100,9 +84,29 @@ import {
     supplyPointOfferPageRoutes,
 } from 'src/static/organisms/supply-point-offer/page.module';
 import {
+    SupplyPointOverviewPageModule,
+    supplyPointOverviewPageRoutes,
+} from 'src/static/organisms/supply-point-overview/page.module';
+import {
+    SupplyPointPageModule,
+    supplyPointPageRoutes,
+} from 'src/static/organisms/supply-point/page.module';
+import {
+    SupplyPointsBannerPageModule,
+    supplyPointsBannerPageRoutes,
+} from 'src/static/pages/supply-points-banner/page.module';
+import {
+    SupplyPointsDetailPageModule,
+    supplyPointsDetailPageRoutes,
+} from 'src/static/pages/supply-points-detail/page.module';
+import {
     SupplyPointsOfferPageModule,
     supplyPointsOfferPageRoutes,
 } from 'src/static/pages/supply-points-offer/page.module';
+import {
+    SupplyPointsPageModule,
+    supplyPointsPageRoutes,
+} from 'src/static/pages/supply-points/page.module';
 import {
     TablesPageModule,
     tablesPageRoutes,
@@ -136,16 +140,16 @@ const routes: Routes = [
             ...infoBannerPageRoutes,
             ...modalsPageRoutes,
             ...newSupplyPointPageRoutes,
-            ...supplyPointOfferPageRoutes,
             ...progressBarPageRoutes,
+            ...recapitulationPageRoutes,
             ...supplyOfferPageRoutes,
+            ...supplyPointOfferPageRoutes,
+            ...supplyPointOverviewPageRoutes,
             ...supplyPointPageRoutes,
-            ...supplyPointsPageRoutes,
             ...supplyPointsBannerPageRoutes,
             ...supplyPointsDetailPageRoutes,
-            ...recapitulationPageRoutes,
-            ...supplyPointOfferPageRoutes,
             ...supplyPointsOfferPageRoutes,
+            ...supplyPointsPageRoutes,
             ...tablesPageRoutes,
             ...tooltipPageRoutes,
             ...typographyPageRoutes,
@@ -179,11 +183,12 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SupplyOfferPageModule,
         SupplyPointOfferPageModule,
+        SupplyPointOverviewPageModule,
         SupplyPointPageModule,
-        SupplyPointsPageModule,
         SupplyPointsBannerPageModule,
         SupplyPointsDetailPageModule,
         SupplyPointsOfferPageModule,
+        SupplyPointsPageModule,
         TablesPageModule,
         TooltipPageModule,
         TypographyPageModule,
