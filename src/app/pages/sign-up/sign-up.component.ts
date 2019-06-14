@@ -58,7 +58,7 @@ export class SignUpComponent extends AbstractComponent {
                                 },
                             state:
                                 {
-                                    isFromSignUp: true,
+                                    showPasswordSend: true,
                                 },
                         },
                     );

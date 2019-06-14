@@ -1,7 +1,4 @@
-import {
-    ChangeDetectorRef,
-    Component,
-} from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { takeUntil } from 'rxjs/operators';
@@ -13,9 +10,9 @@ import {
     ROUTES,
 } from 'src/app/app.constants';
 import {
-    loginFormFields,
-    loginSupplyAuthFormFields,
-} from 'src/common/containers/form/forms/login/login-form.config';
+    formFieldsLogin,
+    ILoginState,
+} from './login.model';
 import { parseRestAPIErrors } from 'src/common/utils/';
 
 @Component({
@@ -25,9 +22,22 @@ import { parseRestAPIErrors } from 'src/common/utils/';
 export class LoginComponent extends AbstractComponent {
     public formLoading = false;
     public globalError: string[] = [];
-    public loginFormFields = loginFormFields;
-    public loginSmsRequired = false;
-    public loginSupplyAuthFields = loginSupplyAuthFormFields;
+
+    public formFieldsLogin = formFieldsLogin;
+
+    public state = ILoginState.LOGIN;
+
+    public LOGIN_STATE_LOGIN_AFTER_RESET = ILoginState.LOGIN_AFTER_RESET;
+    public LOGIN_STATE_LOGIN = ILoginState.LOGIN;
+    public LOGIN_STATE_RESET = ILoginState.RESET;
+    public LOGIN_STATE_CHANGE_PASSWORD = ILoginState.CHANGE_PASSWORD;
+    public LOGIN_STATE_CHANGE_SEND_SMS = ILoginState.SEND_SMS;
+
+    public contactInfo = '';
+    public isSendToTelephone = false;
+    public showPasswordSend = false;
+
+    public haveUserDefinitionTelephone = false;
 
     constructor(
         private authService: AuthService,
@@ -35,6 +45,17 @@ export class LoginComponent extends AbstractComponent {
         private router: Router,
     ) {
         super();
+    }
+
+    public submitChangePassword = (values) => {
+        this.state = ILoginState.CHANGE_PASSWORD;
+    }
+
+    public submitResetPassword = ({contactInfo}) => {
+        this.contactInfo = contactInfo;
+        this.isSendToTelephone = false; // todo
+        this.showPasswordSend = true;
+        this.state = ILoginState.LOGIN_AFTER_RESET;
     }
 
     public submitFormLogin = (values) => {
@@ -48,8 +69,11 @@ export class LoginComponent extends AbstractComponent {
                 () => {
                     this.resetErrorsAndLoading();
                     if (this.authService.currentUserValue.supplier) {
+                        if (this.authService.currentUserValue.smsConfirmed) {
+                            this.router.navigate([ROUTES.ROUTER_DASHBOARD]);
+                        }
+                        this.state = ILoginState.SEND_SMS;
                         this.resetErrorsAndLoading();
-                        this.loginSmsRequired = true;
                         this.cd.markForCheck();
                     } else {
                          this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
@@ -79,9 +103,13 @@ export class LoginComponent extends AbstractComponent {
     }
 
 
+    public submitResent = (event) => {
+        console.log(console.log('EVENT'));
+    }
+
     public forgottenPasswordAction = ($event) => {
         $event.preventDefault();
-        window.open(CONSTS.PATHS.FORGOTTEN_PASSWORD);
+        this.state = ILoginState.RESET;
     }
 
     public sendSupplierLoginSms() {
@@ -94,7 +122,6 @@ export class LoginComponent extends AbstractComponent {
             .subscribe(
                 res => {
                     this.resetErrorsAndLoading();
-                    this.loginSmsRequired = true;
                     this.cd.markForCheck();
                 },
                     error => {
@@ -104,7 +131,6 @@ export class LoginComponent extends AbstractComponent {
 
     public resendSupplierLoginSms = ($event) => {
         this.resetErrorsAndLoading();
-        this.loginSmsRequired = true;
         $event.preventDefault();
         this.sendSupplierLoginSms();
     }

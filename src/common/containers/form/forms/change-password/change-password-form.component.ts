@@ -1,5 +1,6 @@
 import {
     Component,
+    Input,
     OnChanges,
     OnInit,
     SimpleChanges,
@@ -18,6 +19,13 @@ import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.
 })
 export class ChangePasswordFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
     public form: FormGroup;
+
+    @Input()
+    public haveUserDefinitionTelephone: boolean;
+
+    @Input()
+    public contactInfo = '';
+
 
     constructor(
         protected fb: FormBuilder,

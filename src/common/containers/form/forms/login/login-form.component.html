@@ -1,5 +1,6 @@
 <ng-template #forgottenPassword>
-    <a (click)="handleCustomAction($event)">
+    <a  *ngIf="!showPasswordSend"
+        (click)="handleCustomAction($event)">
         Zapomněli jste heslo?
     </a>
 </ng-template>
@@ -11,9 +12,9 @@
         {{ error }}<br>
     </ng-container>
 </lnd-alert>
-<ng-container *ngIf="isFromSignUp">
+<ng-container *ngIf="showPasswordSend">
     <lnd-alert type="info">
-        Heslo jsme vám zaslali na {{email}}
+        Heslo jsme vám zaslali na {{isSendToTelephone ? 'telefonní číslo' : contactInfo}}
     </lnd-alert>
     <a>Poslat e-mail znovu</a>
 </ng-container>

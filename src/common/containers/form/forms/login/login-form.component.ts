@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import {
     Component,
-    Inject,
+    Inject, Input,
     OnInit,
     PLATFORM_ID,
 } from '@angular/core';
@@ -18,8 +18,14 @@ import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.
     styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent extends AbstractFormComponent implements OnInit {
-    public isFromSignUp = false;
-    public email = '';
+    @Input()
+    public showPasswordSend = false;
+
+    @Input()
+    public contactInfo = '';
+
+    @Input()
+    public isSendToTelephone = false;
 
     constructor(
         protected fb: FormBuilder,
@@ -36,15 +42,17 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
                 takeUntil(this.destroy$),
             )
             .subscribe(params => {
-                this.email = params['email'];
-                if (this.email) {
+                if (this.contactInfo  === '') {
+                    this.contactInfo = params['email'];
+                }
+                if (this.contactInfo && !this.isSendToTelephone) {
                     const formValue = this.form.value;
-                    formValue.username = this.email;
+                    formValue.email = this.contactInfo;
                     this.form.setValue(formValue);
                 }
             });
-        if (isPlatformBrowser(this.platformId)) {
-            this.isFromSignUp = !!window.history.state.isFromSignUp;
+        if (isPlatformBrowser(this.platformId) && !this.showPasswordSend) {
+            this.showPasswordSend = !!window.history.state.showPasswordSend;
         }
     }
 }

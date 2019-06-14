@@ -9,7 +9,7 @@ import { FormBuilder } from '@angular/forms';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 
 @Component({
-    selector: 'pxe-email-form',
+    selector: 'pxe-reset-password-form',
     templateUrl: './reset-password-form.component.html',
     styleUrls: ['./reset-password-form.component.scss'],
 })
