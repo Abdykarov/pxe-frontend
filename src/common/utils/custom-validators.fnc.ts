@@ -338,7 +338,7 @@ export class CustomValidators {
             return null;
         }
 
-        const PASSWORD_REGEXP = /^.(?=.{8,})((?=.[!@#$%^&()-_=+{};:,<.>]){1})(?=.\d)((?=.[a-z]){1})((?=.[A-Z]){1}).*$/
+        const PASSWORD_REGEXP = /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/;
         if (PASSWORD_REGEXP.test(password.value)) {
             return null;
         }
