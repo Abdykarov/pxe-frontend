@@ -60,7 +60,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.phoneNumber,
+                CustomValidators.mobilePhoneNumber,
             ],
         ],
         phonePrefix: [
@@ -144,7 +144,7 @@ export const formFields: IForm = {
         },
         phone: {
             required: errorFieldMessages.phone.required,
-            phoneNumber: errorFieldMessages.phone.invalidPhoneNumber,
+            mobilePhoneNumber: errorFieldMessages.phone.mobilePhoneNumber,
         },
         phonePrefix: {
             required: errorFieldMessages.phonePrefix.required,

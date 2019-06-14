@@ -156,7 +156,7 @@ export const errorFieldMessages =  {
     },
     phone: {
         required: 'Zadejte svůj telefon.',
-        invalidPhoneNumber: 'Zadaný telefon není ve správném formátu.',
+        mobilePhoneNumber: 'Zadaný telefon není ve správném formátu.',
     },
     phonePrefix: {
         required: 'Zadejte předvolbu země. +420 pro ČR nebo +421 pro SR.',
