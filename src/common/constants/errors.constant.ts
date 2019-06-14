@@ -56,8 +56,8 @@ export const errorFieldMessages =  {
     },
     date: {
         format: 'Vyplňte platný formát data.',
-        formatInterval: 'Datum zadejte jako interval ve formátu dd.mm.rrrr - dd.mm.rrrr.',
-        expirationDateInPast: 'Doplnit můžete pouze budoucí datum.',
+        formatInterval: 'Datum vyplňte jako interval ve formátu dd.mm.rrrr - dd.mm.rrrr.',
+        expirationDateInPast: 'Zadat můžete pouze budoucí datum.',
     },
     deposit: {
         required: 'Vyplňte výši záloh.',
@@ -113,7 +113,7 @@ export const errorFieldMessages =  {
         required: 'Vyberte ze seznamu velikost jističe.',
     },
     offerDeliveryFromTo: {
-        required: 'Doplňte datum dodávkového období.',
+        required: 'Vyplňte datum dodávkového období.',
     },
     offerDeliveryLength: {
         required: 'Vyberte ze seznamu délku dodávky.',
@@ -143,7 +143,7 @@ export const errorFieldMessages =  {
         required: 'Vyberte ze seznamu typ odběratele.',
     },
     offerValidFromTo: {
-        required: 'Doplňte odkdy dokdy je nabídka platná.',
+        required: 'Vyplňte odkdy dokdy je nabídka platná.',
     },
     phasesId: {
         required: 'Vyplňte typ fáze.',
