@@ -44,6 +44,7 @@ import {
     parseGraphQLErrors,
     transformCodeList,
 } from 'src/common/utils';
+import { ShowBannerComponent } from 'src/common/component/show-banner.component';
 import { SupplyOfferConfig } from './supply-offer.config';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
@@ -54,7 +55,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
         './supply-offer.component.scss',
     ],
 })
-export class SupplyOfferComponent extends AbstractComponent implements OnInit {
+export class SupplyOfferComponent extends ShowBannerComponent implements OnInit {
     public commodityType = CommodityType.POWER;
     public currentOfferFormValues = {};
     public deleteDisabled: boolean[] = [];

@@ -19,13 +19,13 @@ import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.
 })
 export class LoginFormComponent extends AbstractFormComponent implements OnInit {
     @Input()
-    public showPasswordSend = false;
+    public passwordWasSent = false;
 
     @Input()
     public contactInfo = '';
 
     @Input()
-    public isSendToTelephone = false;
+    public wasSentToPhone = false;
 
     constructor(
         protected fb: FormBuilder,
@@ -45,14 +45,14 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
                 if (this.contactInfo  === '') {
                     this.contactInfo = params['email'];
                 }
-                if (this.contactInfo && !this.isSendToTelephone) {
+                if (this.contactInfo && !this.wasSentToPhone) {
                     const formValue = this.form.value;
                     formValue.email = this.contactInfo;
                     this.form.setValue(formValue);
                 }
             });
-        if (isPlatformBrowser(this.platformId) && !this.showPasswordSend) {
-            this.showPasswordSend = !!window.history.state.showPasswordSend;
+        if (isPlatformBrowser(this.platformId) && !this.passwordWasSent) {
+            this.passwordWasSent = !!window.history.state.passwordWasSent;
         }
     }
 }

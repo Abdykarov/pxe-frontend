@@ -59,10 +59,6 @@ export class AuthService {
         return !!this.token;
     }
 
-    isFirstLogged() {
-        return true;
-    }
-
     login = ({email, password}: ILoginRequest) => {
         return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { email, password })
             .pipe(

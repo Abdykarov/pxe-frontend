@@ -1,5 +1,6 @@
 import { changePasswordFields } from 'src/common/containers/form/forms/change-password/change-password-form.config';
 import { emailFormFields } from 'src/common/containers/form/forms/reset-password/reset-password-form.config';
+import { IForm } from 'src/common/containers/form/models/form-definition.model';
 import {
     loginFormFields,
     loginSupplyAuthFormFields,
@@ -13,11 +14,20 @@ export enum ILoginState {
     SEND_SMS = 'SEND_SMS',
 }
 
+export interface IResetPassword {
+    password: string;
+}
+
+export interface IChangePassword {
+    password: string;
+    confirmPassword: string;
+}
+
 export interface IFormFieldsLogin {
-    loginFormFields;
-    loginSupplyAuthFields;
-    resetPassowordFields;
-    changePassowordFields;
+    loginFormFields: IForm;
+    loginSupplyAuthFields: IForm;
+    resetPassowordFields: IForm;
+    changePassowordFields: IForm;
 }
 
 export const formFieldsLogin: IFormFieldsLogin = {
@@ -33,4 +43,4 @@ export const LOGIN_STATE = {
     LOGIN: ILoginState.LOGIN,
     LOGIN_AFTER_RESET: ILoginState.LOGIN_AFTER_RESET,
     RESET: ILoginState.RESET,
-}
+};

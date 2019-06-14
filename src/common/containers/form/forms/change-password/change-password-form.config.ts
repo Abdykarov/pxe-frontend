@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
-import { mustMatchFnc } from 'src/common/utils/mustMatchFnc';
+import { mustMatch } from 'src/common/utils/must-match.fnc';
 
 export const changePasswordFields: IForm = {
     controls: {
@@ -23,7 +23,7 @@ export const changePasswordFields: IForm = {
         ],
     },
     options: {
-        validator: mustMatchFnc('password', 'confirmPassword'),
+        validator: mustMatch('password', 'confirmPassword'),
     },
     validationMessages: {
         password: {

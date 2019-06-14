@@ -23,10 +23,6 @@ export class ChangePasswordFormComponent extends AbstractFormComponent implement
     @Input()
     public haveUserDefinitionTelephone: boolean;
 
-    @Input()
-    public contactInfo = '';
-
-
     constructor(
         protected fb: FormBuilder,
     ) {

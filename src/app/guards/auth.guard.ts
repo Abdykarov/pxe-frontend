@@ -37,13 +37,6 @@ export class AuthGuard implements CanActivateChild {
             return false;
         }
 
-        if (this.authService.isFirstLogged()) {
-            if (state.url !== ROUTES.ROUTER_CHANGE_PASSWORD) {
-                this.router.navigate([ROUTES.ROUTER_CHANGE_PASSWORD]);
-                return false;
-            }
-        }
-
         if (!R.isNil(childRoute.data.isSupplier)) {
             const currentUser = this.authService.currentUserValue;
             return currentUser && currentUser.supplier === childRoute.data.isSupplier;

@@ -1,8 +1,8 @@
 import {
     ChangeDetectorRef,
-    Component,
+    Component, OnInit,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
@@ -16,22 +16,33 @@ import {
     ISupplyPointPowerAttributes,
 } from 'src/common/graphql/models/supply.model';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
+import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
+import { ShowBannerComponent } from 'src/common/component/show-banner.component';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
     templateUrl: './supply-point.component.html',
     styleUrls: ['./supply-point.component.scss'],
 })
-export class SupplyPointComponent extends AbstractComponent {
+export class SupplyPointComponent extends ShowBannerComponent implements OnInit {
     public formFields = formFields;
     public formSent = false;
     public globalError: string[] = [];
     public fieldError: IFieldError = {};
     public formLoading = false;
+
+    public showBanner = false;
+
+    public bannerObj: IBannerObj = {
+        linkValue: '#',
+        text: 'Vaše heslo bylo úspěšně změněno.',
+        linkType: '',
+        title: '',
+    };
 
     public stepperProgressConfig: IStepperProgressItem[] = [
         {
@@ -52,12 +63,14 @@ export class SupplyPointComponent extends AbstractComponent {
     ];
 
     constructor(
-        private cd: ChangeDetectorRef,
+        protected cd: ChangeDetectorRef,
+        protected route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
     ) {
-        super();
+        super(cd, route);
     }
+
 
     public submitSupplyForm = (supplyPointFormData: ISupplyPointFormData) => {
         this.formLoading = true;

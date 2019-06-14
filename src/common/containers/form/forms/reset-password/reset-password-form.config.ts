@@ -6,7 +6,7 @@ import { IForm } from 'src/common/containers/form/models/form-definition.model';
 
 export const emailFormFields: IForm = {
     controls: {
-        contactInfo: [
+        email: [
             '',
             [
                 Validators.required,
@@ -15,7 +15,7 @@ export const emailFormFields: IForm = {
         ],
     },
     validationMessages: {
-        contactInfo: {
+        email: {
             required: errorFieldMessages.email.required,
             email: errorFieldMessages.email.email,
             invalidEmail: errorFieldMessages.email.email,

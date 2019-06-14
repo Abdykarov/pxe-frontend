@@ -14,6 +14,7 @@ import {
 } from 'src/app/app.constants';
 import {
     formFieldsLogin,
+    IChangePassword,
     ILoginState,
     LOGIN_STATE,
 } from './login.model';
@@ -34,8 +35,8 @@ export class LoginComponent extends AbstractComponent {
     public LOGIN_STATE = LOGIN_STATE;
 
     public contactInfo = '';
-    public isSendToTelephone = false;
-    public showPasswordSend = false;
+    public wasSentToPhone = false;
+    public passwordWasSent = false;
 
     public haveUserDefinitionTelephone = false;
 
@@ -47,14 +48,14 @@ export class LoginComponent extends AbstractComponent {
         super();
     }
 
-    public submitChangePassword = (values) => {
+    public submitChangePassword = (data: IChangePassword) => {
         alert('submitted');
     }
 
     public submitResetPassword = ({contactInfo}) => {
         this.contactInfo = contactInfo;
-        this.isSendToTelephone = false; // todo
-        this.showPasswordSend = true;
+        this.wasSentToPhone = false; // todo
+        this.passwordWasSent = true;
         this.state = ILoginState.LOGIN_AFTER_RESET;
     }
 
@@ -70,13 +71,32 @@ export class LoginComponent extends AbstractComponent {
                     this.resetErrorsAndLoading();
                     if (this.authService.currentUserValue.supplier) {
                         if (this.authService.currentUserValue.smsConfirmed) {
-                            this.router.navigate([ROUTES.ROUTER_DASHBOARD]);
+                            this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER_POWER, {
+                                queryParams:
+                                    {
+                                        showBanner: true,
+                                    },
+                            }]);
                         }
                         this.state = ILoginState.SEND_SMS;
                         this.resetErrorsAndLoading();
                         this.cd.markForCheck();
                     } else {
-                         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
+                        // todo have supply point
+                        this.router.navigate([ROUTES.ROUTER_DASHBOARD], {
+                            queryParams:
+                                {
+                                    showBanner: true,
+                                },
+                        });
+
+
+                         // this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT], {
+                         //     queryParams:
+                         //         {
+                         //             showBanner: true,
+                         //         },
+                         // });
                     }
                 },
                 error => {
