@@ -65,7 +65,6 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
     public distributionRateType = '';
     public distributionLocationType = COMMODITY_TO_DISTRIBUTION_MAP[this.commodityType];
     public prefillForm = false;
-    public minDate: Date;
     public subjectTypeOptions: Array<IOption> = SUBJECT_TYPE_OPTIONS;
     public suppliers = [];
 
@@ -79,7 +78,6 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
         private supplyService: SupplyService,
     ) {
         super(fb);
-        this.minDate = new Date(new Date().getTime() + 3600 * 1000 * 24);
     }
 
     ngOnInit() {
