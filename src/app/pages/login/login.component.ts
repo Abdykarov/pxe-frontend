@@ -1,4 +1,7 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+} from '@angular/core';
 import { Router } from '@angular/router';
 
 import { takeUntil } from 'rxjs/operators';
