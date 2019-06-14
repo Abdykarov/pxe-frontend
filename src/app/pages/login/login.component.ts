@@ -15,6 +15,7 @@ import {
 import {
     formFieldsLogin,
     ILoginState,
+    LOGIN_STATE,
 } from './login.model';
 import { parseRestAPIErrors } from 'src/common/utils/';
 
@@ -30,11 +31,7 @@ export class LoginComponent extends AbstractComponent {
 
     public state = ILoginState.LOGIN;
 
-    public LOGIN_STATE_LOGIN_AFTER_RESET = ILoginState.LOGIN_AFTER_RESET;
-    public LOGIN_STATE_LOGIN = ILoginState.LOGIN;
-    public LOGIN_STATE_RESET = ILoginState.RESET;
-    public LOGIN_STATE_CHANGE_PASSWORD = ILoginState.CHANGE_PASSWORD;
-    public LOGIN_STATE_CHANGE_SEND_SMS = ILoginState.SEND_SMS;
+    public LOGIN_STATE = LOGIN_STATE;
 
     public contactInfo = '';
     public isSendToTelephone = false;

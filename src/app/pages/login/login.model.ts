@@ -26,3 +26,11 @@ export const formFieldsLogin: IFormFieldsLogin = {
     resetPassowordFields: emailFormFields,
     changePassowordFields: changePasswordFields,
 };
+
+export const LOGIN_STATE = {
+    CHANGE_PASSWORD: ILoginState.CHANGE_PASSWORD,
+    CHANGE_SEND_SMS: ILoginState.SEND_SMS,
+    LOGIN: ILoginState.LOGIN,
+    LOGIN_AFTER_RESET: ILoginState.LOGIN_AFTER_RESET,
+    RESET: ILoginState.RESET,
+}

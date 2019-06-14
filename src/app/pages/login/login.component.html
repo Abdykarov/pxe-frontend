@@ -7,7 +7,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <pxe-login-form
-                                    *ngIf="[LOGIN_STATE_LOGIN,LOGIN_STATE_LOGIN_AFTER_RESET].indexOf(state) != -1"
+                                    *ngIf="[LOGIN_STATE.LOGIN,LOGIN_STATE.LOGIN_AFTER_RESET].indexOf(state) != -1"
                                     [formFields]="formFieldsLogin.loginFormFields"
                                     [formLoading]="formLoading"
                                     [globalError]="globalError"
@@ -18,7 +18,7 @@
                                     (customAction)="forgottenPasswordAction($event)"
                                 ></pxe-login-form>
                                 <pxe-login-supply-auth-form
-                                    *ngIf="state === LOGIN_STATE_CHANGE_SEND_SMS"
+                                    *ngIf="state === LOGIN_STATE.CHANGE_SEND_SMS"
                                     [formFields]="formFieldsLogin.loginSupplyAuthFields"
                                     [formLoading]="formLoading"
                                     [globalError]="globalError"
@@ -26,14 +26,14 @@
                                     (customAction)="resendSupplierLoginSms($event)"
                                 ></pxe-login-supply-auth-form>
                                 <pxe-reset-password-form
-                                    *ngIf="state === LOGIN_STATE_RESET"
+                                    *ngIf="state === LOGIN_STATE.RESET"
                                     [formFields]="formFieldsLogin.resetPassowordFields"
                                     [formLoading]="formLoading"
                                     [globalError]="globalError"
                                     (submitAction)="submitResetPassword($event)">
                                 </pxe-reset-password-form>
                                 <pxe-change-password-form
-                                    *ngIf="state === LOGIN_STATE_CHANGE_PASSWORD"
+                                    *ngIf="state === LOGIN_STATE.CHANGE_PASSWORD"
                                     [formFields]="formFieldsLogin.changePassowordFields"
                                     [formLoading]="formLoading"
                                     [globalError]="globalError"
