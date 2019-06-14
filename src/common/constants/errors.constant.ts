@@ -155,8 +155,12 @@ export const errorFieldMessages =  {
         required: 'Zvolte odběratele.',
     },
     phone: {
-        required: 'Zadejte svůj telefon.',
-        mobilePhoneNumber: 'Zadaný telefon není ve správném formátu.',
+        required: 'Vyplňte svůj telefon.',
+        requiredMobile: 'Vyplňte svůj mobilní telefon.',
+        requiredLandLine: 'Vyplňte svoji pevnou linku.',
+        phoneNumber: 'Telefon musí obsahovat 9 číslic.',
+        mobilePhoneNumber: 'Mobilní telefon musí obsahovat 9 číslic.',
+        landLineNumber: 'Pevná linka musí obsahovat 9 číslic.',
     },
     phonePrefix: {
         required: 'Zadejte předvolbu země. +420 pro ČR nebo +421 pro SR.',
