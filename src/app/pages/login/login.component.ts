@@ -70,14 +70,15 @@ export class LoginComponent extends AbstractComponent {
                 () => {
                     this.resetErrorsAndLoading();
                     if (this.authService.currentUserValue.supplier) {
-                        if (this.authService.currentUserValue.smsConfirmed) {
-                            this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER_POWER, {
+                        // if (this.authService.currentUserValue.smsConfirmed) {
+                            this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER_POWER], {
                                 queryParams:
                                     {
                                         showBanner: true,
                                     },
-                            }]);
-                        }
+                            });
+                        // }
+                        return;
                         this.state = ILoginState.SEND_SMS;
                         this.resetErrorsAndLoading();
                         this.cd.markForCheck();

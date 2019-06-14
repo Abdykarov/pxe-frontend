@@ -101,6 +101,7 @@ export class SupplyOfferComponent extends ShowBannerComponent implements OnInit 
     }
 
     ngOnInit() {
+        super.ngOnInit();
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.route.params
             .pipe(

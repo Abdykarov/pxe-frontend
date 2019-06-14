@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AlertModule } from 'src/common/ui/alert/alert.module';
+import { BannerUIModule } from 'src/common/ui/banner/banner-ui.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { DatepickerModule } from 'src/common/ui/forms/datepicker/datepicker.module';
 import { DropdownModule } from 'src/common/ui/dropdown/dropdown.module';
@@ -22,6 +23,7 @@ import { TooltipModule } from 'src/common/ui/tooltip/tooltip.module';
     ],
     imports: [
         AlertModule,
+        BannerUIModule,
         ButtonModule,
         CommonModule,
         DatepickerModule,
