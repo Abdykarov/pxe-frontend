@@ -99,6 +99,16 @@ h3,
 	line-height: ( 28 / 18 );
 }
 
+hr {
+	margin: ( $spacer * 2 ) 0;
+	border-color: $border-color;
+}
+
+small,
+.small {
+	line-height: $line-height-sm;
+}
+
 blockquote,
 .blockquote {
 	font-size: $blockquote-font-size;

@@ -59,40 +59,48 @@
                         [templateLabel]="templateLabel"
                         [whispererName]="'permanentAddress'">
                     </pxe-address-whisperer>
-                    <div class="row">
-                        <div class="col-8">
-                            <lnd-form-field
-                                [formControl]="form.controls.acountNumber"
-                                [id]="'telephonePrefix'"
-                                label="Bankovní účet"
-                                subtext="Číslo bankovního účtu obsahujcí prefix uveďte prosím ve tvaru XXXXX-XXXXXXXXXX"
-                          ></lnd-form-field>
+                    <pxe-field-wrapper
+                        label="Bankovní účet"
+                        labelFor="bankAccount"
+                        subtext="Číslo bankovního účtu obsahujcí prefix uveďte prosím ve tvaru XXXXX-XXXXXXXXXX">
+                        <div class="row no-gutters">
+                            <div class="col-8 pr-1">
+                                <lnd-form-field
+                                        [formControl]="form.controls.acountNumber"
+                                        [id]="'bankAccount'"
+                                        label="Bankovní účet"
+                                        subtext="Číslo bankovního účtu obsahujcí prefix uveďte prosím ve tvaru XXXXX-XXXXXXXXXX"
+                                ></lnd-form-field>
+                            </div>
+                            <div class="col-4 pl-1">
+                                <lnd-form-field
+                                        [formControl]="form.controls.acountBankCode"
+                                        [id]="'acountBankCode'"
+                                        label=""
+                                ></lnd-form-field>
+                            </div>
                         </div>
-                        <div class="col-4">
-                            <lnd-form-field
-                                [formControl]="form.controls.acountBankCode"
-                                [id]="'acountBankCode'"
-                                label=""
-                            ></lnd-form-field>
+                    </pxe-field-wrapper>
+                    <pxe-field-wrapper
+                        label="Telefonní číslo"
+                        labelFor="telephonePrefix">
+                        <div class="row no-gutters">
+                            <div class="col-4 pr-1">
+                                <lnd-form-field
+                                    [formControl]="form.controls.telephonePrefix"
+                                    [id]="'telephonePrefix'"
+                                    label="Telefonní číslo"
+                                ></lnd-form-field>
+                            </div>
+                            <div class="col-8 pl-1">
+                                <lnd-form-field
+                                    [formControl]="form.controls.telephone"
+                                    [id]="'telephone'"
+                                    label=""
+                                ></lnd-form-field>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <lnd-form-field
-                                [formControl]="form.controls.telephonePrefix"
-                                subtext="lorem ipsum"
-                                [id]="'telephonePrefix'"
-                                label="Telefonní číslo"
-                            ></lnd-form-field>
-                        </div>
-                        <div class="col-8">
-                            <lnd-form-field
-                                [formControl]="form.controls.telephone"
-                                [id]="'telephone'"
-                                label=""
-                            ></lnd-form-field>
-                        </div>
-                    </div>
+                    </pxe-field-wrapper>
                     <lnd-form-field
                         [formControl]="form.controls.email"
                         [id]="'email'"

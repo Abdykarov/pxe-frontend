@@ -122,7 +122,7 @@ export const formFields: IForm = {
         },
         deliveryFromTo: {
             required: errorFieldMessages.offerDeliveryFromTo.required,
-            bsDate: errorFieldMessages.date.format,
+            bsDate: errorFieldMessages.date.formatInterval,
             bsDateMinDate: errorFieldMessages.date.expirationDateInPast,
         },
         deliveryLength: {
@@ -158,14 +158,14 @@ export const formFields: IForm = {
             min: errorFieldMessages.number.positive,
         },
         subjectTypeId: {
-            required: errorFieldMessages.subjectTypeId.required,
+            required: errorFieldMessages.offerSubjectTypeId.required,
         },
         supplierId: {
             required: errorFieldMessages.supplierId.required,
         },
         validFromTo: {
             required: errorFieldMessages.offerValidFromTo.required,
-            bsDate: errorFieldMessages.date.format,
+            bsDate: errorFieldMessages.date.formatInterval,
             bsDateMinDate: errorFieldMessages.date.expirationDateInPast,
         },
     },
