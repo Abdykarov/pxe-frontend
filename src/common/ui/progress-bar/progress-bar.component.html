@@ -1,7 +1,9 @@
 <nav class="progress-bar-holder">
     <ol 
         class="progress-bar"
-        [ngClass]="[requestCard ? 'progress-bar--request-card' : '' ]">
+        [ngClass]="[
+            withoutText ? 'progress-bar--without-text' : '',
+            notLight ? 'progress-bar--not-light' : '' ]">
         <li
             *ngFor="let item of config"
             class="progress-bar__item"

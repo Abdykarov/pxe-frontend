@@ -133,7 +133,7 @@
 		line-height: ( 19 / 14 );
 	}
 
-	&--request-card {
+	&--not-light {
 		.progress-bar__item:not(.progress-bar__item--done) {
 			&::before {
 				background-color: $body-bg;
@@ -151,37 +151,39 @@
 				background-color: $body-bg;
 			}
 		}
+	}
 
+	&--without-text {
 		.progress-bar__item {
+			&::before {
+				width: 100%;
+				left: 0;
+			}
+
 			&:first-child {
 				&::before {
 					left: 10px;
-					width: calc(150% - 10px);
-				}
-
-				.progress-bar__bullet {
-					margin-left: 0;
-				}
-			}
-
-			&:nth-child(2) {
-				&::before {
-					width: calc(150% - 10px);
 				}
 			}
 
 			&:last-child {
+				flex-grow: 0;
+
 				&::before {
 					display: none;
 				}
+			}
 
-				.progress-bar__bullet {
-					margin-right: 0;
-				}
+			.progress-bar__bullet {
+				margin-left: 0;
 			}
 
 			.progress-bar__label {
 				display: none;
+			}
+
+			&--shadow-step {
+				flex-grow: 2;
 			}
 		}
 	}
