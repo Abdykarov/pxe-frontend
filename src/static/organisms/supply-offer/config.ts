@@ -28,7 +28,7 @@ export class SupplyOfferOrganismConfig {
                 ],
             },
             {
-                label: 'Typ osoby',
+                label: 'Odběratel',
                 views: [
                     {
                         headingClass: [''],
@@ -71,7 +71,7 @@ export class SupplyOfferOrganismConfig {
                 label: 'Cena za VT',
                 views: [
                     {
-                        headingClass: [''],
+                        headingClass: ['', 'text-right'],
                         cellClass: ['', 'text-right'],
                         contentTemplateName: 'columnTemplatePriceVT',
                     },
@@ -81,7 +81,7 @@ export class SupplyOfferOrganismConfig {
                 label: 'Cena za NT',
                 views: [
                     {
-                        headingClass: [''],
+                        headingClass: ['', 'text-right'],
                         cellClass: ['', 'text-right'],
                         contentTemplateName: 'columnTemplatePriceNT',
                     },
@@ -118,7 +118,7 @@ export class SupplyOfferOrganismConfig {
                 ],
             },
             {
-                label: 'Stálá platba - cena',
+                label: 'Stálá platba',
                 views: [
                     {
                         headingClass: ['', 'text-right'],
@@ -140,7 +140,7 @@ export class SupplyOfferOrganismConfig {
                 ],
             },
             {
-                label: 'Typ osoby',
+                label: 'Odběratel',
                 views: [
                     {
                         headingClass: [''],
@@ -176,7 +176,7 @@ export class SupplyOfferOrganismConfig {
                 label: 'Cena',
                 views: [
                     {
-                        headingClass: [''],
+                        headingClass: ['', 'text-right'],
                         cellClass: ['', 'text-right'],
                         contentTemplateName: 'columnTemplatePriceGas',
                     },
@@ -213,7 +213,7 @@ export class SupplyOfferOrganismConfig {
                 ],
             },
             {
-                label: 'Stálá platba - cena (Kč)',
+                label: 'Stálá platba',
                 views: [
                     {
                         headingClass: ['', 'text-right'],

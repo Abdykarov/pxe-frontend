@@ -87,15 +87,18 @@
                     <lnd-select
                         [appendButtonIcon]="'icon--info'"
                         (appendButtonAction)="openModal()"
-                        label="Distribučná sazba"
+                        label="Distribuční sazba"
                         [options]="config.distributionRateOptions"
                         [parentForm]="form"
                         [selectName]="'distributionRateId'">
                     </lnd-select>
                     <div class="row">
+                        <div class="col-12 mb-2">
+                            <small>Jistič</small>
+                        </div>
                         <div class="col">
                             <lnd-select
-                                label="Jistič fáze"
+                                label="fáze"
                                 [options]="config.circuitBreakerPhaseOptions"
                                 [parentForm]="form"
                                 [selectName]="'phasesId'">

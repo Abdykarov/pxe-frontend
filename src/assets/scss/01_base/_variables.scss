@@ -51,9 +51,9 @@ $danger-dark:                      darken($danger, 15%);
 $danger-darken:                    darken($danger, 25%);
 $positive:                         #0aa374;                    // Positive color
 $info:                             $secondary;                   // Info color
-$light:                            $gray-300;                    // Light color
-$light-dark:                       $gray-400;
-$light-darken:                     $gray-500;
+$light:                            #eef2f6;                    // Light color
+$light-dark:                       darken($light, 15%);
+$light-darken:                     darken($light, 25%);
 $disabled:                         #f7f9fb;                    // Disabled color
 
 $gradient-green-light:             $primary;                     // Gradient green light
@@ -241,6 +241,7 @@ $zindex-input-group-btn:             9;
 $zindex-input-group-form-control:    2;
 $zindex-placeloader-holder:          10;
 $zindex-form-file-input:             -1;
+$zindex-field-wrapper-control-label: 5;
 $zindex-graph-tabs-active-after:     99;
 $zindex-tooltip-content:             3000;
 $zindex-tooltip-beak:                3001;

@@ -37,7 +37,7 @@ export class SupplyOfferConfig {
                 ],
             },
             {
-                label: 'Typ osoby',
+                label: 'Odběratel',
                 views: [
                     {
                         headingClass: [''],
@@ -92,7 +92,7 @@ export class SupplyOfferConfig {
                 label: 'Cena za VT',
                 views: [
                     {
-                        headingClass: [''],
+                        headingClass: ['', 'text-right'],
                         cellClass: ['', 'text-right'],
                         contentTemplateName: 'columnTemplatePriceVT',
                     },
@@ -102,7 +102,7 @@ export class SupplyOfferConfig {
                 label: 'Cena za NT',
                 views: [
                     {
-                        headingClass: [''],
+                        headingClass: ['', 'text-right'],
                         cellClass: ['', 'text-right'],
                         contentTemplateName: 'columnTemplatePriceNT',
                     },
@@ -139,7 +139,7 @@ export class SupplyOfferConfig {
                 ],
             },
             {
-                label: 'Stálá platba - cena',
+                label: 'Stálá platba',
                 views: [
                     {
                         headingClass: ['', 'text-right'],
@@ -161,7 +161,7 @@ export class SupplyOfferConfig {
                 ],
             },
             {
-                label: 'Typ osoby',
+                label: 'Odběratel',
                 views: [
                     {
                         headingClass: [''],
@@ -198,7 +198,7 @@ export class SupplyOfferConfig {
                 label: 'Cena',
                 views: [
                     {
-                        headingClass: [''],
+                        headingClass: ['', 'text-right'],
                         cellClass: ['', 'text-right'],
                         contentTemplateName: 'columnTemplatePriceGas',
                     },
@@ -235,7 +235,7 @@ export class SupplyOfferConfig {
                 ],
             },
             {
-                label: 'Stálá platba - cena',
+                label: 'Stálá platba',
                 views: [
                     {
                         headingClass: ['', 'text-right'],
@@ -252,6 +252,7 @@ export class SupplyOfferConfig {
         modalType: this.confirmDeleteOffer,
         instanceData: {
             confirmText: `Opravdu chcete smazat nabídku <strong>${data.currentOfferFormValues.name}</strong>?`,
+            titleConfirm: 'ANO SMAZAT',
             data,
         },
     })
@@ -261,10 +262,11 @@ export class SupplyOfferConfig {
         const space = name ? ' ' : '';
         return {
             component: 'ConfirmModalComponent',
-                modalType: this.confirmCancelOffer,
-                instanceData: {
+            modalType: this.confirmCancelOffer,
+            instanceData: {
                 confirmText: `Opravdu chcete zrušit vytváření nabídky<strong>${space}${name}</strong>?`,
-                    data,
+                titleConfirm: 'ANO ZRUŠIT',
+                data,
             },
         };
     }
