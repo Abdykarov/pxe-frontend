@@ -33,10 +33,7 @@ export class ResetPasswordFormComponent extends AbstractFormComponent implements
         this.resetCustomFieldError();
         this.triggerValidation();
         if (this.form.valid) {
-            const form = {
-                ...this.form.value,
-            };
-            this.submitAction.emit(form);
+            this.submitAction.emit(this.form.value);
         }
     }
 }

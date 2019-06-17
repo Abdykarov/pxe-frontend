@@ -23,7 +23,7 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
     public passwordWasSent = false;
 
     @Input()
-    public contactInfo = '';
+    public email = '';
 
     @Input()
     public wasSentToPhone = false;
@@ -43,12 +43,12 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
                 takeUntil(this.destroy$),
             )
             .subscribe(params => {
-                if (this.contactInfo  === '') {
-                    this.contactInfo = params['email'];
+                if (this.email  === '') {
+                    this.email = params['email'];
                 }
-                if (this.contactInfo && !this.wasSentToPhone) {
+                if (this.email && !this.wasSentToPhone) {
                     const formValue = this.form.value;
-                    formValue.email = this.contactInfo;
+                    formValue.email = this.email;
                     this.form.setValue(formValue);
                 }
             });
