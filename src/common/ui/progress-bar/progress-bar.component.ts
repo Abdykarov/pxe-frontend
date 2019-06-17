@@ -17,10 +17,7 @@ export class ProgressBarComponent extends AbstractComponent {
     public config: IStepperProgressItem[] = [];
 
     @Input()
-    public notLight = false;
-
-    @Input()
-    public withoutText = false;
+    public isMinor = false;
 
     constructor(
         private router: Router,

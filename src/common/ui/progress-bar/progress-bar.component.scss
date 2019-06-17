@@ -133,7 +133,7 @@
 		line-height: ( 19 / 14 );
 	}
 
-	&--not-light {
+	&--minor {
 		.progress-bar__item:not(.progress-bar__item--done) {
 			&::before {
 				background-color: $body-bg;
@@ -151,9 +151,7 @@
 				background-color: $body-bg;
 			}
 		}
-	}
 
-	&--without-text {
 		.progress-bar__item {
 			&::before {
 				width: 100%;
