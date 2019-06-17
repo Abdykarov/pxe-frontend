@@ -71,11 +71,11 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
             .pipe(
                 takeUntil(this.destroy$),
             )
-            .subscribe(val => {
-                this.resetFormError();
-                this.setFormByCommodity(val);
+            .subscribe((commodityType: CommodityType) => {
+                this.resetFormError(false);
+                this.setFormByCommodity(commodityType);
                 this.resetFieldValue('supplierId');
-                this.setAnnualConsumptionNTState(val === CommodityType.POWER ? this.getFieldValue('distributionRateId') : null);
+                this.setAnnualConsumptionNTState(commodityType === CommodityType.POWER ? this.getFieldValue('distributionRateId') : null);
             });
 
         this.form.get('subjectTypeId')
