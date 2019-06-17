@@ -167,7 +167,7 @@ textarea.form-control--not-empty {
 	}
 
 	&.is-valid {
-		border-color: $success-lighten;
+		border-color: $input-border-color;
 	}
 
 	&.is-warning {
