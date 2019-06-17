@@ -1,9 +1,9 @@
 import { ActivatedRoute } from '@angular/router';
 import {
-    Component,
+    Component, EventEmitter,
     Inject,
     Input,
-    OnInit,
+    OnInit, Output,
     PLATFORM_ID,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
@@ -28,6 +28,11 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
     @Input()
     public wasSentToPhone = false;
 
+    @Output()
+    public passwordAction?: EventEmitter<any> = new EventEmitter<any>();
+
+    public handlePasswordAction = ($event) => this.passwordAction.emit($event);
+
     constructor(
         protected fb: FormBuilder,
         private route: ActivatedRoute,
@@ -46,7 +51,7 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
                 if (this.email  === '') {
                     this.email = params['email'];
                 }
-                if (this.email && !this.wasSentToPhone) {
+                if (this.email) {
                     const formValue = this.form.value;
                     formValue.email = this.email;
                     this.form.setValue(formValue);

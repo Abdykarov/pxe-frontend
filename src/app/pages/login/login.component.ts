@@ -21,8 +21,10 @@ import {
 import { PasswordService } from 'src/common/graphql/services/password.service';
 import { parseRestAPIErrors } from 'src/common/utils/';
 import {
+    ILoginResponse,
+    LANDING_PAGE_DASHBOARD,
     RESET_PASSWORD_RESPONSE_EMAIL,
-    RESET_PASSWORD_RESPONSE_POWER,
+    RESET_PASSWORD_RESPONSE_PHONE,
 } from 'src/common/graphql/models/password';
 
 
@@ -44,8 +46,6 @@ export class LoginComponent extends AbstractComponent  {
     public wasSentToPhone = false;
     public passwordWasSent = false;
 
-    public haveUserDefinitionTelephone = false;
-
     public password: string;
 
     constructor(
@@ -66,12 +66,18 @@ export class LoginComponent extends AbstractComponent  {
 
     public submitResetPassword = ({email}) => {
         this.passwordService.resetPassword(email)
+            .pipe(
+                takeUntil(this.destroy$),
+                map(({data}) => data.resetPassword),
+            )
             .subscribe(
-            (res: 'EMAIL' | 'PASSWORD') => {
+            (passwordDestination: 'EMAIL' | 'PHONE') => {
                     this.email = email;
-                    this.wasSentToPhone = res === RESET_PASSWORD_RESPONSE_EMAIL;
+                    this.wasSentToPhone = passwordDestination === RESET_PASSWORD_RESPONSE_PHONE;
                     this.passwordWasSent = true;
                     this.state = ILoginState.LOGIN_AFTER_RESET;
+                    this.resetErrorsAndLoading();
+                    this.cd.markForCheck();
                 }, (error) => {
                     this.handleError(error);
             });
@@ -86,24 +92,41 @@ export class LoginComponent extends AbstractComponent  {
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                (resp) => {
-                    this.resetErrorsAndLoading();
-
-                    console.log(this.authService.currentUserValue);
-
+                (resp: ILoginResponse) => {
                     if (this.authService.currentUserValue.passwordReset) {
                         this.state = ILoginState.CHANGE_PASSWORD;
-                        return;
-                    }
-
-                    if (this.authService.currentUserValue.supplier) {
-                        if (this.authService.currentUserValue.smsConfirmed) {
+                        if (this.authService.currentUserValue.supplier) {
                             this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER_POWER], {
                                 queryParams:
                                     {
                                         showBanner: true,
                                     },
                             });
+                        } else {
+                            if (resp.landingPage === LANDING_PAGE_DASHBOARD) {
+                                this.router.navigate([ROUTES.ROUTER_DASHBOARD], {
+                                    queryParams:
+                                        {
+                                            showBanner: true,
+                                        },
+                                });
+
+                            } else {
+                                this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT], {
+                                    queryParams:
+                                        {
+                                            showBanner: true,
+                                        },
+                                });
+                            }
+                        }
+
+                        return;
+                    }
+
+                    if (this.authService.currentUserValue.supplier) {
+                        if (this.authService.currentUserValue.smsConfirmed) {
+                            this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER_POWER]);
                         }
                         this.state = ILoginState.SEND_SMS;
                         this.resetErrorsAndLoading();
@@ -116,18 +139,11 @@ export class LoginComponent extends AbstractComponent  {
                                     showBanner: true,
                                 },
                         });
-
-
-                         // this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT], {
-                         //     queryParams:
-                         //         {
-                         //             showBanner: true,
-                         //         },
-                         // });
                     }
                 },
                 error => {
                     this.handleError(error);
+                    this.resetErrorsAndLoading();
                 });
 
     }
@@ -150,16 +166,24 @@ export class LoginComponent extends AbstractComponent  {
     }
 
 
-    public submitResent = (event) => {
-        console.log(console.log('EVENT'));
+    public submitResent = () => {
+        this.resetErrorsAndLoading();
+
+        this.passwordService.resetPassword(this.email)
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe();
     }
 
     public forgottenPasswordAction = ($event) => {
+        this.resetErrorsAndLoading();
         $event.preventDefault();
         this.state = ILoginState.RESET;
     }
 
     public sendSupplierLoginSms() {
+        this.resetErrorsAndLoading();
         this.formLoading = true;
         this.authService
             .sendSupplierLoginSms()

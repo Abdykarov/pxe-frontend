@@ -4,4 +4,7 @@ export interface ILoginResponse {
 }
 
 export const RESET_PASSWORD_RESPONSE_EMAIL = 'EMAIL';
-export const RESET_PASSWORD_RESPONSE_POWER = 'POWER';
+export const RESET_PASSWORD_RESPONSE_PHONE = 'PHONE';
+
+export const LANDING_PAGE_DASHBOARD = 'DASHBOARD';
+export const LANDING_PAGE_NEW_SUPPLY_POINT = 'NEW_SUPPLY_POINT';

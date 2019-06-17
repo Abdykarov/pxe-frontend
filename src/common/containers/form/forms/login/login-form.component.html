@@ -1,10 +1,3 @@
-<ng-template #forgottenPassword>
-    <a  *ngIf="!passwordWasSent"
-        (click)="handleCustomAction($event)">
-        Zapomněli jste heslo?
-    </a>
-</ng-template>
-
 <lnd-alert
     *ngIf="globalError.length"
     type="danger">
@@ -16,8 +9,14 @@
     <lnd-alert type="info">
         Heslo jsme vám zaslali na {{wasSentToPhone ? 'telefonní číslo' : email}}
     </lnd-alert>
-    <a>Poslat e-mail znovu</a>
+    <a (click)="handlePasswordAction($event)">Poslat e-mail znovu</a>
 </ng-container>
+<ng-template #forgottenPassword>
+    <a  *ngIf="!passwordWasSent"
+        (click)="handleCustomAction($event)">
+        Zapomněli jste heslo?
+    </a>
+</ng-template>
 <form
     [formGroup]="form"
     class="form-container"

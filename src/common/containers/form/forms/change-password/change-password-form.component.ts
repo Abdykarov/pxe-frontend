@@ -20,9 +20,6 @@ import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.
 export class ChangePasswordFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
     public form: FormGroup;
 
-    @Input()
-    public haveUserDefinitionTelephone: boolean;
-
     constructor(
         protected fb: FormBuilder,
     ) {
@@ -42,10 +39,7 @@ export class ChangePasswordFormComponent extends AbstractFormComponent implement
         this.resetCustomFieldError();
         this.triggerValidation();
         if (this.form.valid) {
-            const form = {
-                ...this.form.value,
-            };
-            this.submitAction.emit(form);
+            this.submitAction.emit(this.form.value);
         }
     }
 }

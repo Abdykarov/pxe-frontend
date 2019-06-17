@@ -14,8 +14,9 @@
                                     [email]="email"
                                     [wasSentToPhone]="wasSentToPhone"
                                     [passwordWasSent]="passwordWasSent"
-                                    (submitAction)="submitFormLogin($event)"
                                     (customAction)="forgottenPasswordAction($event)"
+                                    (passwordAction)="submitResent($event)"
+                                    (submitAction)="submitFormLogin($event)"
                                 ></pxe-login-form>
                                 <pxe-login-supply-auth-form
                                     *ngIf="state === LOGIN_STATE.CHANGE_SEND_SMS"
@@ -38,7 +39,7 @@
                                     [formLoading]="formLoading"
                                     [globalError]="globalError"
                                     (submitAction)="submitChangePassword($event)"
-                                    (customAction)="submitResent($event)">
+                                    (customAction)="submitResent()">
                                 </pxe-change-password-form>
                             </div>
                         </div>
