@@ -10,6 +10,7 @@ import {
 } from '../models/supply.model';
 import {
     getCodelistByType,
+    getSupplyPoint,
     findAllSuppliers,
     findCodelistsByTypes,
     findSupplierDocumentsByComodity,
@@ -119,5 +120,16 @@ export class SupplyService {
                     },
                 }],
             });
+    }
+
+    public getSupplyPoint(supplyPointId: number) {
+        return this.apollo
+            .watchQuery<any>({
+                query: getSupplyPoint,
+            variables: {
+                supplyPointId,
+            },
+        })
+        .valueChanges;
     }
 }

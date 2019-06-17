@@ -1,3 +1,7 @@
+import { IContract } from './contract';
+import { IOffer } from './offer.model';
+import { IPersonalData } from './personal-data.model';
+
 export enum CommodityType {
     POWER = 'POWER',
     GAS = 'GAS',
@@ -63,14 +67,26 @@ export interface ISupplyPointPowerAttributes {
 
 export interface ISupplyPoint {
     id: number;
-    supplierId: number;
     name: string;
+    commodityType: string;
+    supplier: ISupplier;
+    ean: string;
     address: IAddress;
-    expirationDate?: string;
-    subjectTypeId: string;
-    contractEndTypeId: string;
-    timeToContractEnd: string;
-    timeToContractEndPeriodId: string;
+    distributionRate: ICodelistItem;
+    circuitBreaker: ICodelistItem;
+    phases: ICodelistItem;
+    annualConsumptionNT: number;
+    annualConsumptionVT: number;
+    expirationDate: string;
+    subject: ICodelistItem;
+    lastAnnualConsumptionNT: number;
+    lastAnnualConsumptionVT: number;
+    offer: IOffer;
+    contract: IContract;
+    personalData: IPersonalData;
+    contractEndType: ICodelistItem;
+    timeToContractEnd: number;
+    timeToContractEndPeriod: ICodelistItem;
 }
 
 export interface ISupplyPointFindData {
