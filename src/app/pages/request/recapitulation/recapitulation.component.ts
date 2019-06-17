@@ -20,7 +20,7 @@ import { ISupplyPoint, SubjectType } from 'src/common/graphql/models/supply.mode
 import { parseGraphQLErrors } from 'src/common/utils';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
 import { ROUTES } from 'src/app/app.constants';
-import { SupplyService } from '../../../../common/graphql/services/supply.service';
+import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
     selector: 'pxe-recapitulation',
@@ -37,7 +37,6 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     public formLoading = false;
 
     public isIndividual = true;
-    public contractId: number;
     public supplyPoint: ISupplyPoint;
 
     constructor(
@@ -51,7 +50,6 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     }
 
     ngOnInit () {
-        this.contractId = parseInt(this.route.snapshot.paramMap.get('contractId'), 10);
         this.supplyService.getSupplyPoint(parseInt(this.route.snapshot.paramMap.get('supplyPointId'), 10))
             .pipe(
                 takeUntil(this.destroy$),
@@ -66,7 +64,6 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                 this.cd.markForCheck();
             },
         );
-
     }
 
     public submitPersonalInfoForm = (personalInfoInput: IPersonalDataInput) => {
@@ -74,7 +71,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         this.globalError = [];
         this.fieldError = {};
 
-        this.personalDataService.savePersonalData(this.contractId, personalInfoInput)
+        this.personalDataService.savePersonalData(this.supplyPoint.contract.contractId, personalInfoInput)
             .pipe(
                 takeUntil(this.destroy$),
             )

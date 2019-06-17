@@ -1,4 +1,6 @@
+import { IContract } from './contract';
 import { IOffer } from './offer.model';
+import { IPersonalData } from './personal-data.model';
 
 export enum CommodityType {
     POWER = 'POWER',
@@ -80,6 +82,8 @@ export interface ISupplyPoint {
     lastAnnualConsumptionNT: number;
     lastAnnualConsumptionVT: number;
     offer: IOffer;
+    contract: IContract;
+    personalData: IPersonalData;
     contractEndType: ICodelistItem;
     timeToContractEnd: number;
     timeToContractEndPeriod: ICodelistItem;
