@@ -4,7 +4,10 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { debounceTime, map, takeUntil } from 'rxjs/operators';
+import {
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
@@ -95,32 +98,12 @@ export class LoginComponent extends AbstractComponent  {
                 (resp: ILoginResponse) => {
                     if (this.authService.currentUserValue.passwordReset) {
                         this.state = ILoginState.CHANGE_PASSWORD;
-                        if (this.authService.currentUserValue.supplier) {
-                            this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER_POWER], {
-                                queryParams:
-                                    {
-                                        showBanner: true,
-                                    },
-                            });
-                        } else {
-                            if (resp.landingPage === LANDING_PAGE_DASHBOARD) {
-                                this.router.navigate([ROUTES.ROUTER_DASHBOARD], {
-                                    queryParams:
-                                        {
-                                            showBanner: true,
-                                        },
-                                });
-
-                            } else {
-                                this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT], {
-                                    queryParams:
-                                        {
-                                            showBanner: true,
-                                        },
-                                });
-                            }
-                        }
-
+                        this.router.navigate([this.routerToAfterChangePassword(resp)], {
+                            state:
+                                {
+                                    showBanner: true,
+                                },
+                        });
                         return;
                     }
 
@@ -132,20 +115,13 @@ export class LoginComponent extends AbstractComponent  {
                         this.resetErrorsAndLoading();
                         this.cd.markForCheck();
                     } else {
-                        // todo have supply point
-                        this.router.navigate([ROUTES.ROUTER_DASHBOARD], {
-                            queryParams:
-                                {
-                                    showBanner: true,
-                                },
-                        });
+                        this.router.navigate([this.routerToAfterChangePassword(resp)]);
                     }
                 },
                 error => {
                     this.handleError(error);
                     this.resetErrorsAndLoading();
                 });
-
     }
 
     public submitSupplierLoginSms = (values) => {
@@ -216,5 +192,17 @@ export class LoginComponent extends AbstractComponent  {
     public resetErrorsAndLoading = () => {
         this.globalError = [];
         this.formLoading = false;
+    }
+
+    public routerToAfterChangePassword = (resp: ILoginResponse) => {
+        if (this.authService.currentUserValue.supplier) {
+            return ROUTES.ROUTER_SUPPLY_OFFER_POWER;
+        } else {
+            if (resp.landingPage === LANDING_PAGE_DASHBOARD) {
+                return ROUTES.ROUTER_DASHBOARD;
+            } else {
+                return ROUTES.ROUTER_REQUEST_SUPPLY_POINT;
+            }
+        }
     }
 }

@@ -37,6 +37,7 @@ export abstract class ShowBannerComponent extends AbstractComponent implements O
                 takeUntil(this.destroy$),
             )
             .subscribe(params => {
+                console.log(params);
                 this.showBanner = params['showBanner'];
                 this.cd.markForCheck();
             });
