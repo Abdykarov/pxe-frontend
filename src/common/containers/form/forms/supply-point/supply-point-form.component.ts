@@ -84,7 +84,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
                 takeUntil(this.destroy$),
             )
             .subscribe((val: string) => {
-                this.resetFieldValue('distributionRateId');
+                this.resetFieldValue('distributionRateId', false);
                 this.distributionRateType = SUBJECT_TYPE_TO_DIST_RATE_MAP[val];
                 this.cd.markForCheck();
             });
