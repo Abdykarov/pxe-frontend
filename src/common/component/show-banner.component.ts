@@ -5,8 +5,6 @@ import {
     OnInit,
 } from '@angular/core';
 
-import { takeUntil } from 'rxjs/operators';
-
 import { AbstractComponent } from 'src/common/abstract.component';
 import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 
@@ -17,6 +15,7 @@ export abstract class ShowBannerComponent extends AbstractComponent implements O
         protected route: ActivatedRoute,
     ) {
         super();
+        this.showBanner = !!window.history.state.passwordWasSent;
     }
 
     @Input()
@@ -29,17 +28,4 @@ export abstract class ShowBannerComponent extends AbstractComponent implements O
         linkType: '',
         title: '',
     };
-
-    ngOnInit() {
-        super.ngOnInit();
-        this.route.queryParams
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe(params => {
-                console.log(params);
-                this.showBanner = params['showBanner'];
-                this.cd.markForCheck();
-            });
-    }
 }

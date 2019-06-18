@@ -3,6 +3,12 @@ export interface ILoginResponse {
     landingPage: string;
 }
 
+export interface IUserLogin {
+    email: string;
+    password: string;
+}
+
+
 export const RESET_PASSWORD_RESPONSE_EMAIL = 'EMAIL';
 export const RESET_PASSWORD_RESPONSE_PHONE = 'PHONE';
 

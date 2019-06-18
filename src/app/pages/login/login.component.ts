@@ -24,7 +24,7 @@ import {
 import { PasswordService } from 'src/common/graphql/services/password.service';
 import { parseRestAPIErrors } from 'src/common/utils/';
 import {
-    ILoginResponse,
+    ILoginResponse, IUserLogin,
     LANDING_PAGE_DASHBOARD,
     RESET_PASSWORD_RESPONSE_EMAIL,
     RESET_PASSWORD_RESPONSE_PHONE,
@@ -60,19 +60,20 @@ export class LoginComponent extends AbstractComponent  {
         super();
     }
 
-    public submitChangePassword = (data: IChangePassword) => {
-        this.passwordService.changePassword(this.password, data.password)
+    public submitChangePassword = (changePassword: IChangePassword) => {
+        this.passwordService.changePassword(this.password, changePassword.password)
             .pipe(
                 takeUntil(this.destroy$),
             ).subscribe(
-            (resp: ILoginResponse) => {
-                    this.router.navigate([this.routerAfterLogin(resp)], {
-                        state:
-                            {
-                                showBanner: true,
-                            },
-                    });
-                    return;
+            (loginResponse: ILoginResponse) => {
+                this.authService.setToken(loginResponse.token);
+                this.router.navigate([this.routerAfterLogin(loginResponse)], {
+                    state:
+                    {
+                        showBanner: true,
+                    },
+                });
+                return;
             });
     }
 
@@ -95,18 +96,20 @@ export class LoginComponent extends AbstractComponent  {
             });
     }
 
-    public submitFormLogin = (values) => {
-        this.password = values.password;
+    public submitFormLogin = (userLogin: IUserLogin) => {
+        this.password = userLogin.password;
         this.formLoading = true;
         this.authService
-            .login(values)
+            .login(userLogin)
             .pipe(
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                (resp: ILoginResponse) => {
+                (loginResponse: ILoginResponse) => {
                     if (this.authService.userNeedChangePassword()) {
                         this.state = ILoginState.CHANGE_PASSWORD;
+                        this.resetErrorsAndLoading();
+                        this.cd.markForCheck();
                         return;
                     }
 
@@ -118,7 +121,7 @@ export class LoginComponent extends AbstractComponent  {
                         this.resetErrorsAndLoading();
                         this.cd.markForCheck();
                     } else {
-                        this.router.navigate([this.routerAfterLogin(resp)]);
+                        this.router.navigate([this.routerAfterLogin(loginResponse)]);
                     }
                 },
                 error => {
@@ -128,6 +131,7 @@ export class LoginComponent extends AbstractComponent  {
     }
 
     public submitSupplierLoginSms = (values) => {
+        console.log(values);
         this.formLoading = true;
         this.authService
             .confirmSupplierLoginSms(values)
@@ -135,7 +139,8 @@ export class LoginComponent extends AbstractComponent  {
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                () => {
+                (loginResponse: ILoginResponse) => {
+                    this.authService.setToken(loginResponse.token);
                     this.resetErrorsAndLoading();
                     this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER_POWER]);
                 },
@@ -158,6 +163,16 @@ export class LoginComponent extends AbstractComponent  {
     public forgottenPasswordAction = ($event) => {
         this.resetErrorsAndLoading();
         $event.preventDefault();
+        if (this.authService.isLogged()) {
+            this.authService
+                .logout()
+                .pipe(
+                    takeUntil(this.destroy$),
+                ).subscribe((res) => {
+                    this.state = ILoginState.RESET;
+                    this.cd.markForCheck();
+                });
+        }
         this.state = ILoginState.RESET;
     }
 
@@ -197,11 +212,11 @@ export class LoginComponent extends AbstractComponent  {
         this.formLoading = false;
     }
 
-    public routerAfterLogin = (resp: ILoginResponse) => {
+    public routerAfterLogin = (loginResponse: ILoginResponse) => {
         if (this.authService.currentUserValue.supplier) {
             return ROUTES.ROUTER_SUPPLY_OFFER_POWER;
         } else {
-            if (resp.landingPage === LANDING_PAGE_DASHBOARD) {
+            if (loginResponse.landingPage === LANDING_PAGE_DASHBOARD) {
                 return ROUTES.ROUTER_DASHBOARD;
             } else {
                 return ROUTES.ROUTER_REQUEST_SUPPLY_POINT;
