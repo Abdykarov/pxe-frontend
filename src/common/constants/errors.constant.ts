@@ -145,9 +145,10 @@ export const errorFieldMessages =  {
         required: 'Vyplňte typ fáze.',
     },
     password: {
-        required: 'Zadejte heslo.',
-        pattern: 'Vaše heslo musí obsahovat malý a velký znak, alespoň jedno číslo a alespoň jeden speciální znak,',
-        mustMatch: 'Musíte zadat stejná hesla.',
+        required: 'Vyplňte heslo.',
+        pattern: 'Vaše heslo musí mít minimálně 8 znaků, musí obsahovat malá a velká ' +
+            'písmena, aspoň jednu číslici a aspoň jeden speciální znak jako &_*+/#\\ apod.',
+        mustMatch: 'Musíte vyplnit stejná hesla.',
     },
     subjectTypeId: {
         required: 'Zvolte odběratele.',
