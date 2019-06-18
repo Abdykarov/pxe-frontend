@@ -22,8 +22,8 @@ import {
     ILoginState,
     LOGIN_STATE,
 } from './login.model';
-import { PasswordService } from 'src/common/graphql/services/password.service';
 import { parseRestAPIErrors } from 'src/common/utils/';
+import { PasswordService } from 'src/common/graphql/services/password.service';
 import {
     ILoginResponse,
     IUserLogin,
@@ -61,6 +61,8 @@ export class LoginComponent extends AbstractComponent  {
     }
 
     public submitChangePassword = (changePassword: IChangePassword) => {
+        this.formLoading = true;
+
         this.passwordService.changePassword(this.password, changePassword.password)
             .pipe(
                 takeUntil(this.destroy$),
@@ -83,8 +85,8 @@ export class LoginComponent extends AbstractComponent  {
     }
 
     public submitResetPassword = ({email}) => {
-        this.resetErrorsAndLoading();
         this.formLoading = true;
+
         this.passwordService.resetPassword(email)
             .pipe(
                 takeUntil(this.destroy$),
@@ -97,7 +99,6 @@ export class LoginComponent extends AbstractComponent  {
                     this.passwordWasSent = true;
                     this.state = ILoginState.LOGIN_AFTER_RESET;
                     this.resetErrorsAndLoading();
-                    this.formLoading = false;
                     this.cd.markForCheck();
                 }, error => {
                     this.resetErrorsAndLoading();
@@ -115,7 +116,6 @@ export class LoginComponent extends AbstractComponent  {
             )
             .subscribe(
                 (loginResponse: ILoginResponse) => {
-                    console.log('LOGIN');
                     if (this.authService.userNeedChangePassword()) {
                         this.state = ILoginState.CHANGE_PASSWORD;
                         this.resetErrorsAndLoading();
@@ -141,7 +141,6 @@ export class LoginComponent extends AbstractComponent  {
     }
 
     public submitSupplierLoginSms = (confirmationCode: IConfirmationCode) => {
-        this.resetErrorsAndLoading();
         this.formLoading = true;
         this.authService
             .confirmSupplierLoginSms(confirmationCode)
@@ -162,15 +161,18 @@ export class LoginComponent extends AbstractComponent  {
 
 
     public submitResent = () => {
-        this.resetErrorsAndLoading();
+        this.formLoading = true;
 
         this.passwordService.resetPassword(this.email)
             .pipe(
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                res => {},
+                res => {
+                    this.resetErrorsAndLoading();
+                },
                 error => {
+                    this.resetErrorsAndLoading();
                     this.handleError(error);
                 },
             );
@@ -200,7 +202,6 @@ export class LoginComponent extends AbstractComponent  {
     }
 
     public sendSupplierLoginSms() {
-        this.resetErrorsAndLoading();
         this.formLoading = true;
         this.authService
             .sendSupplierLoginSms()
@@ -208,15 +209,18 @@ export class LoginComponent extends AbstractComponent  {
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                res => {},
+                res => {
+                    this.resetErrorsAndLoading();
+                    this.cd.markForCheck();
+                },
                 error => {
+                    this.resetErrorsAndLoading();
                     this.handleError(error);
                 });
     }
 
     public resendSupplierLoginSms = ($event) => {
         $event.preventDefault();
-        this.resetErrorsAndLoading();
         this.sendSupplierLoginSms();
     }
 
@@ -227,9 +231,9 @@ export class LoginComponent extends AbstractComponent  {
         this.cd.markForCheck();
     }
 
-    public resetErrorsAndLoading = () => {
+    public resetErrorsAndLoading = (formLoading = false) => {
         this.globalError = [];
-        this.formLoading = false;
+        this.formLoading = formLoading;
     }
 
     public routerAfterLogin = ({landingPage}) => {
