@@ -295,7 +295,7 @@ export class CustomValidators {
 
 
     static isDecimal = (number) => {
-        const expresion = new RegExp(/^-?\d*[\.\,]?\d+$/);
+        const expresion = new RegExp(/^-?\d*[\.\,]{0,1}\d+$/);
         if (number.pristine) {
             return null;
         }
