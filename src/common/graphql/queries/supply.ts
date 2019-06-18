@@ -154,52 +154,6 @@ export const getSupplyPoint = gql`
             },
             lastAnnualConsumptionNT,
             lastAnnualConsumptionVT,
-            offer{
-                id,
-                status,
-                commodityType,
-                name,
-                validFrom,
-                validTo,
-                deliveryFrom,
-                deliveryTo,
-                deliveryLength,
-                distributionLocation{
-                    type,
-                    code,
-                    description,
-                    help
-                },
-                permanentPaymentPrice,
-                subject{
-                    type,
-                    code,
-                    description,
-                    help
-                },
-                benefits,
-                priceVT,
-                priceNT,
-                distributionRate{
-                    type,
-                    code,
-                    description,
-                    help
-                },
-                circuitBreaker{
-                    type,
-                    code,
-                    description,
-                    help
-                },
-                priceGas,
-            }
-            contractEndType{
-                type,
-                code,
-                description,
-                help
-            },
             timeToContractEnd,
             timeToContractEndPeriod {
                 type,
@@ -212,39 +166,65 @@ export const getSupplyPoint = gql`
                 contractStatus,
                 deliveryFrom,
                 deliveryTo,
+                offer{
+                    id,
+                    supplier{
+                        id,
+                        name,
+                        vatNumber,
+                        logoPath,
+                        sampleDocuments{
+                            type,
+                            url
+                        }
+                    },
+                    commodityType,
+                    name,
+                    validFrom,
+                    validTo,
+                    deliveryFrom,
+                    deliveryTo,
+                    deliveryLength,
+                    benefits,
+                    permanentPaymentPrice,
+                    priceVT,
+                    priceNT,
+                    priceGas,
+                    mountlyPaymentPrice,
+                },
+                personalData {
+                    name,
+                    ico,
+                    dic,
+                    address1{
+                        street,
+                        orientationNumber,
+                        descriptiveNumber,
+                        city,
+                        postCode,
+                        region,
+                    },
+                    address2{
+                        street,
+                        orientationNumber,
+                        descriptiveNumber,
+                        city,
+                        postCode,
+                        region,
+                    },
+                    email,
+                    phone,
+                    bankAccountNumber,
+                    bankCode,
+                    depositPaymentType {
+                        type,
+                        code,
+                        description,
+                        help
+                    },
+                    deposit,
+                }
             },
-            personalData {
-                name,
-                ico,
-                dic,
-                address1{
-                    street,
-                    orientationNumber,
-                    descriptiveNumber,
-                    city,
-                    postCode,
-                    region,
-                },
-                address2{
-                    street,
-                    orientationNumber,
-                    descriptiveNumber,
-                    city,
-                    postCode,
-                    region,
-                },
-                email,
-                phone,
-                bankAccountNumber,
-                bankCode,
-                depositPaymentType {
-                    type,
-                    code,
-                    description,
-                    help
-                },
-                deposit,
-            }
         }
     }
 `;
