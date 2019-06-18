@@ -170,6 +170,7 @@ export class LoginComponent extends AbstractComponent  {
             .subscribe(
                 res => {
                     this.resetErrorsAndLoading();
+                    this.cd.markForCheck();
                 },
                 error => {
                     this.resetErrorsAndLoading();
@@ -179,8 +180,8 @@ export class LoginComponent extends AbstractComponent  {
     }
 
     public forgottenPasswordAction = ($event) => {
-        this.resetErrorsAndLoading();
         $event.preventDefault();
+        this.resetErrorsAndLoading();
         if (this.authService.isLogged()) {
             this.authService
                 .logout()

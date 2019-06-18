@@ -6,10 +6,14 @@
     </ng-container>
 </lnd-alert>
 <ng-container *ngIf="passwordWasSent">
-    <lnd-alert type="info">
+    <lnd-alert
+        type="info"
+        customClass="mb-2">
         Heslo jsme vám zaslali na {{wasSentToPhone ? 'telefonní číslo' : email}}
     </lnd-alert>
-    <a (click)="forgottenPasswordAction($event)">Poslat e-mail znovu</a>
+    <div class="text-right">
+        <a (click)="handleForgottenPasswordAction($event)">Poslat e-mail znovu</a>
+    </div>
 </ng-container>
 <ng-template #forgottenPassword>
     <a  *ngIf="!passwordWasSent"
