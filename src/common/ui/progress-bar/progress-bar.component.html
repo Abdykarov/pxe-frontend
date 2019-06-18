@@ -1,5 +1,7 @@
 <nav class="progress-bar-holder">
-    <ol class="progress-bar">
+    <ol 
+        class="progress-bar"
+        [class.progress-bar--minor]="isMinor">
         <li
             *ngFor="let item of config"
             class="progress-bar__item"
