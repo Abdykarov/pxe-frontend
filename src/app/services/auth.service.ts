@@ -59,6 +59,14 @@ export class AuthService {
         return !!this.token;
     }
 
+    public isSupplier(): boolean {
+        return this.currentUserValue.supplier;
+    }
+
+    public userNeedChangePassword(): boolean {
+        return this.currentUserValue.passwordReset;
+    }
+
     login = ({email, password}: ILoginRequest) => {
         return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { email, password })
             .pipe(

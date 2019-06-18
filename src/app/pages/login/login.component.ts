@@ -64,7 +64,16 @@ export class LoginComponent extends AbstractComponent  {
         this.passwordService.changePassword(this.password, data.password)
             .pipe(
                 takeUntil(this.destroy$),
-            ).subscribe();
+            ).subscribe(
+            (resp: ILoginResponse) => {
+                    this.router.navigate([this.routerAfterLogin(resp)], {
+                        state:
+                            {
+                                showBanner: true,
+                            },
+                    });
+                    return;
+            });
     }
 
     public submitResetPassword = ({email}) => {
@@ -96,18 +105,12 @@ export class LoginComponent extends AbstractComponent  {
             )
             .subscribe(
                 (resp: ILoginResponse) => {
-                    if (this.authService.currentUserValue.passwordReset) {
+                    if (this.authService.userNeedChangePassword()) {
                         this.state = ILoginState.CHANGE_PASSWORD;
-                        this.router.navigate([this.routerToAfterChangePassword(resp)], {
-                            state:
-                                {
-                                    showBanner: true,
-                                },
-                        });
                         return;
                     }
 
-                    if (this.authService.currentUserValue.supplier) {
+                    if (this.authService.isSupplier()) {
                         if (this.authService.currentUserValue.smsConfirmed) {
                             this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER_POWER]);
                         }
@@ -115,7 +118,7 @@ export class LoginComponent extends AbstractComponent  {
                         this.resetErrorsAndLoading();
                         this.cd.markForCheck();
                     } else {
-                        this.router.navigate([this.routerToAfterChangePassword(resp)]);
+                        this.router.navigate([this.routerAfterLogin(resp)]);
                     }
                 },
                 error => {
@@ -194,7 +197,7 @@ export class LoginComponent extends AbstractComponent  {
         this.formLoading = false;
     }
 
-    public routerToAfterChangePassword = (resp: ILoginResponse) => {
+    public routerAfterLogin = (resp: ILoginResponse) => {
         if (this.authService.currentUserValue.supplier) {
             return ROUTES.ROUTER_SUPPLY_OFFER_POWER;
         } else {
