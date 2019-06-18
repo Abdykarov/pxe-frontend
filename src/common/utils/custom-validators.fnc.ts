@@ -279,7 +279,7 @@ export class CustomValidators {
     }
 
     static isNumber = (number) => {
-        const expresion = new RegExp(/^-?(0|[1-9]\d*)$/);
+        const expresion = new RegExp(/^(0|-?[1-9]\d*)$/);
         if (number.pristine) {
             return null;
         }
