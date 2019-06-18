@@ -27,8 +27,6 @@ import {
 } from '../app.constants';
 import { ScrollToService } from '../services/scroll-to.service';
 import { AuthService } from '../services/auth.service';
-import { Input } from '@angular/core';
-import { IBannerObj } from '../../common/ui/banner/models/banner-object.model';
 
 export abstract class AbstractLayoutComponent extends AbstractComponent {
     public showOverlay = false;

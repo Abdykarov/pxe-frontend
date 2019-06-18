@@ -1,9 +1,11 @@
 import { ActivatedRoute } from '@angular/router';
 import {
-    Component, EventEmitter,
+    Component,
+    EventEmitter,
     Inject,
     Input,
-    OnInit, Output,
+    OnInit,
+    Output,
     PLATFORM_ID,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
@@ -29,9 +31,9 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
     public wasSentToPhone = false;
 
     @Output()
-    public passwordAction?: EventEmitter<any> = new EventEmitter<any>();
+    public forgottenPasswordAction?: EventEmitter<any> = new EventEmitter<any>();
 
-    public handlePasswordAction = ($event) => this.passwordAction.emit($event);
+    public handleForgottenPasswordAction = ($event) => this.forgottenPasswordAction.emit($event);
 
     constructor(
         protected fb: FormBuilder,

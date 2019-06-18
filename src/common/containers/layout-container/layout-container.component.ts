@@ -2,8 +2,9 @@ import {
     Component,
     Input,
 } from '@angular/core';
+
+import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-import { IBannerObj } from '../../ui/banner/models/banner-object.model';
 
 @Component({
     selector: 'pxe-layout-container',

@@ -4,12 +4,14 @@ import {
 } from '@angular/router';
 import {
     ChangeDetectorRef,
-    Component, OnInit,
+    Component,
+    OnInit,
 } from '@angular/core';
 
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
+import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CommodityType,
     ISupplyPoint,
@@ -23,7 +25,6 @@ import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { AbstractComponent } from 'src/common/abstract.component';
 
 @Component({
     templateUrl: './supply-point.component.html',

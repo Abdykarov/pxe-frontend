@@ -9,7 +9,7 @@
     <lnd-alert type="info">
         Heslo jsme vám zaslali na {{wasSentToPhone ? 'telefonní číslo' : email}}
     </lnd-alert>
-    <a (click)="handlePasswordAction($event)">Poslat e-mail znovu</a>
+    <a (click)="forgottenPasswordAction($event)">Poslat e-mail znovu</a>
 </ng-container>
 <ng-template #forgottenPassword>
     <a  *ngIf="!passwordWasSent"

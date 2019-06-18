@@ -12,8 +12,8 @@ import { PersonalInfoFormModule } from 'src/common/containers/form/forms/persona
         DashboardComponent,
     ],
     imports: [
-        CommonModule,
         BannerUIModule,
+        CommonModule,
         DashboardRoutingModule,
         LayoutContainerModule,
         PersonalInfoFormModule,

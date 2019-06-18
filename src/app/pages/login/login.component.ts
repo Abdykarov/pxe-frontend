@@ -27,10 +27,9 @@ import { parseRestAPIErrors } from 'src/common/utils/';
 import {
     ILoginResponse,
     IUserLogin,
-    LANDING_PAGE, RESET_PASSWORD_RESPONSE_PHONE,
+    LANDING_PAGE,
+    RESET_PASSWORD_RESPONSE_PHONE,
 } from 'src/common/graphql/models/password';
-import { DICError, verifyDIC } from '../../../common/utils/dic-validator.fnc';
-
 
 @Component({
     templateUrl: './login.component.html',

@@ -4,7 +4,7 @@ import {
 } from '@angular/router';
 import {
     ChangeDetectorRef,
-    Component, Input,
+    Component,
     OnInit,
 } from '@angular/core';
 
@@ -28,7 +28,6 @@ import { navigationMenuUserActions } from './services/navigation.config';
 import { NavigationService } from './services/navigation.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
-import { IBannerObj } from '../../../common/ui/banner/models/banner-object.model';
 
 @Component({
     templateUrl: './secured-layout.component.html',
