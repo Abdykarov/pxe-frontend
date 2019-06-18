@@ -18,33 +18,23 @@ import {
     ISupplyPointPowerAttributes,
 } from 'src/common/graphql/models/supply.model';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
-import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
-import { ShowBannerComponent } from 'src/common/component/show-banner.component';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { AbstractComponent } from 'src/common/abstract.component';
 
 @Component({
     templateUrl: './supply-point.component.html',
     styleUrls: ['./supply-point.component.scss'],
 })
-export class SupplyPointComponent extends ShowBannerComponent implements OnInit {
+export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public formFields = formFields;
     public formSent = false;
     public globalError: string[] = [];
     public fieldError: IFieldError = {};
     public formLoading = false;
-
-    public showBanner = false;
-
-    public bannerObj: IBannerObj = {
-        linkValue: '#',
-        text: 'Vaše heslo bylo úspěšně změněno.',
-        linkType: '',
-        title: '',
-    };
 
     public stepperProgressConfig: IStepperProgressItem[] = [
         {
@@ -65,14 +55,13 @@ export class SupplyPointComponent extends ShowBannerComponent implements OnInit 
     ];
 
     constructor(
-        protected cd: ChangeDetectorRef,
-        protected route: ActivatedRoute,
+        private cd: ChangeDetectorRef,
+        private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
     ) {
-        super(cd, route);
+        super();
     }
-
 
     public submitSupplyForm = (supplyPointFormData: ISupplyPointFormData) => {
         this.formLoading = true;

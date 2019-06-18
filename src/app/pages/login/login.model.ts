@@ -14,8 +14,8 @@ export enum ILoginState {
     SEND_SMS = 'SEND_SMS',
 }
 
-export interface IResetPassword {
-    password: string;
+export interface IConfirmationCode {
+    confirmationCode: string;
 }
 
 export interface IChangePassword {

@@ -4,19 +4,18 @@ import {
     Component,
 } from '@angular/core';
 
-import { ShowBannerComponent } from 'src/common/component/show-banner.component';
+import { AbstractComponent } from 'src/common/abstract.component';
 
 @Component({
     selector: 'pxe-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent extends ShowBannerComponent {
+export class DashboardComponent extends AbstractComponent {
 
     constructor(
-        protected cd: ChangeDetectorRef,
-        protected route: ActivatedRoute,
+        private cd: ChangeDetectorRef,
     ) {
-        super(cd, route);
+        super();
     }
 }

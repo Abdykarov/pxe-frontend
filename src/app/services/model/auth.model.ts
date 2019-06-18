@@ -26,10 +26,12 @@ export interface IJwtPayload {
     username: string;
     email?: string;
     supplier?: boolean;
+    needSmsConfirm?: boolean;
     passwordReset?: boolean;
 }
 
 export enum IUserRoles {
     'PARC_MANAGER' = 'PARC_MANAGER',
     'PARC_SUPPLIER_P4R' = 'PARC_SUPPLIER_P_4_R',
+    'NEEDS_SMS_CONFIRMATION' = 'NEEDS_SMS_CONFIRMATION',
 }

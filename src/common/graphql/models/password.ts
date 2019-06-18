@@ -1,6 +1,6 @@
 export interface ILoginResponse {
     token: string;
-    landingPage: string;
+    landingPage: LANDING_PAGE;
 }
 
 export interface IUserLogin {
@@ -12,6 +12,9 @@ export interface IUserLogin {
 export const RESET_PASSWORD_RESPONSE_EMAIL = 'EMAIL';
 export const RESET_PASSWORD_RESPONSE_PHONE = 'PHONE';
 
-export const LANDING_PAGE_DASHBOARD = 'DASHBOARD';
-export const LANDING_PAGE_NEW_SUPPLY_POINT = 'NEW_SUPPLY_POINT';
 
+export enum LANDING_PAGE {
+    OFFERS = 'OFFERS',
+    DASHBOARD = 'DASHBOARD',
+    NEW_SUPPLY_POINT = 'NEW_SUPPLY_POINT',
+}
