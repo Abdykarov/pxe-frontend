@@ -4,9 +4,13 @@ import {
     CommodityType,
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
-import { CONTRACT_END_TYPE } from 'src/app/app.constants';
+import {
+    CONTRACT_END_TYPE,
+    ROUTES,
+} from 'src/app/app.constants';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
+import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import {
     ICommodityTypeFields,
     IExpirationConfig,
@@ -235,6 +239,17 @@ export const formFields: IForm = {
 };
 
 export const commodityTypeFields: ICommodityTypeFields = {
-    [CommodityType.POWER]: ['ean', 'distributionRateId', 'circuitBreakerId', 'annualConsumptionNT', 'annualConsumptionVT'],
+    [CommodityType.POWER]: ['ean', 'distributionRateId', 'phasesId', 'circuitBreakerId', 'annualConsumptionNT', 'annualConsumptionVT'],
     [CommodityType.GAS]: ['eic', 'annualConsumption'],
+};
+
+export const supplyPointDetailAllowedFields: ICommodityTypeFields = {
+    [CommodityType.POWER]: ['name', 'annualConsumptionNT', 'annualConsumptionVT'],
+    [CommodityType.GAS]: ['name', 'annualConsumption'],
+};
+
+export const supplyDetailInfoBanner: IBannerObj = {
+    linkValue: ROUTES.ROUTER_REQUEST_SUPPLY_POINT,
+    linkData: null,
+    text: 'Platnost smlouvy končí za 60 dní',
 };

@@ -31,6 +31,7 @@
             <ng-container *ngFor="let supplierPoint of supplierPoints">
                 <pxe-supply-point
                     [data]="supplierPoint"
+                    (action)="supplyPointDetail($event)"
                 ></pxe-supply-point>
             </ng-container>
         </div>

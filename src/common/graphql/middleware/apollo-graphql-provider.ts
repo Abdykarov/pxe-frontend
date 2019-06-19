@@ -60,7 +60,7 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
                                         innerSubscription = forward(operation).subscribe(observer);
                                     },
                                     () => {
-                                        observer.error(new Error('jwt refresh failed'));
+                                        // observer.error(new Error('jwt refresh failed'));
                                         router.navigate([CONSTS.PATHS.LOGOUT]);
                                     });
                         } else {

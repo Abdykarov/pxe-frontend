@@ -1,9 +1,11 @@
 import {
     ChangeDetectorRef,
     Component,
+    Input,
     OnChanges,
     OnInit,
-    SimpleChanges } from '@angular/core';
+    SimpleChanges,
+} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 import * as R from 'ramda';
@@ -43,6 +45,9 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./supply-point-form.component.scss'],
 })
 export class SupplyPointFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
+    @Input()
+    public isDetail = false;
+
     public commodityTypeOptions: Array<IOption> = COMMODITY_TYPE_OPTIONS;
     public subjectTypeOptions: Array<IOption> = SUBJECT_TYPE_OPTIONS;
     public codeLists;
@@ -72,9 +77,9 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
                 takeUntil(this.destroy$),
             )
             .subscribe(val => {
-                this.resetFormError();
+                this.resetFormError(false);
                 this.setFormByCommodity(val);
-                this.resetFieldValue('supplierId');
+                this.resetFieldValue('supplierId', false);
                 this.setAnnualConsumptionNTState(val === CommodityType.POWER ? this.getFieldValue('distributionRateId') : null);
             });
 

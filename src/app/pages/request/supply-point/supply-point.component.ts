@@ -1,7 +1,11 @@
 import {
     ChangeDetectorRef,
     Component,
+    Inject,
+    OnInit,
+    PLATFORM_ID,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 
 import * as R from 'ramda';
@@ -26,7 +30,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     templateUrl: './supply-point.component.html',
     styleUrls: ['./supply-point.component.scss'],
 })
-export class SupplyPointComponent extends AbstractComponent {
+export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public formFields = formFields;
     public formSent = false;
     public globalError: string[] = [];
@@ -55,8 +59,15 @@ export class SupplyPointComponent extends AbstractComponent {
         private cd: ChangeDetectorRef,
         private router: Router,
         private supplyService: SupplyService,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
+    }
+
+    ngOnInit() {
+        if (isPlatformBrowser(this.platformId)) {
+            const supplyPointCopy = window.history.state.supplyPointCopy;
+        }
     }
 
     public submitSupplyForm = (supplyPointFormData: ISupplyPointFormData) => {
