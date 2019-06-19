@@ -53,13 +53,12 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     }
 
     ngOnInit () {
-        console.log(this.route.snapshot.paramMap.get('supplyPointId'));
         this.supplyService.getSupplyPoint(parseInt(this.route.snapshot.paramMap.get('supplyPointId'), 10))
             .pipe(
                 takeUntil(this.destroy$),
-            ).subscribe(
+            )
+            .subscribe(
             ({data}) => {
-                console.log(data);
                 this.supplyPoint = data.getSupplyPoint;
                 this.isIndividual = this.supplyPoint.subject.code === SubjectType.SUBJECT_TYPE_INDIVIDUAL;
             },
@@ -76,17 +75,15 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         this.globalError = [];
         this.fieldError = {};
 
-        this.personalDataService.savePersonalData(this.supplyPoint.contract.contractId, personalInfoInput)
+        this.personalDataService.savePersonalData(this.supplyPoint, personalInfoInput)
             .pipe(
                 takeUntil(this.destroy$),
             )
             .subscribe(
                 () => {
-                    console.log('ok');
                     this.router.navigate([ROUTES.ROUTER_REQUEST_CONTRACT]);
                 },
                 (error) => {
-                    console.log(error);
                     this.formLoading = false;
                     const { fieldError, globalError } = parseGraphQLErrors(error);
                     this.fieldError = fieldError;

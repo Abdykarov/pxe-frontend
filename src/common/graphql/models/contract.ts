@@ -5,12 +5,13 @@ import {
 import { IPersonalData } from './personal-data.model';
 
 export interface IContract {
-    contractId: number;
-    contractStatus: string;
-    deliveryFrom: string;
-    deliveryTo: string;
-    offer: ISelectedOffer;
-    personalData: IPersonalData;
+    contractId?: string;
+    contractStatus?: string;
+    deliveryFrom?: string;
+    deliveryTo?: string;
+    offer?: ISelectedOffer;
+    personalData?: IPersonalData;
+    __typename?: string;
 }
 
 enum ContractStatus {

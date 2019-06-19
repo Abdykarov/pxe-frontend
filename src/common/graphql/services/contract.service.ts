@@ -8,7 +8,10 @@ import {
     saveContract,
     updateContract,
 } from 'src/common/graphql/mutation/contract';
-import { getSupplyPoint } from '../queries/supply';
+import { findSupplyPoints, getSupplyPoint } from '../queries/supply';
+import { ISelectedOffer, ISupplyPoint } from '../models/supply.model';
+import { findSupplyPointOffers } from '../queries/offer';
+import { ISupplyPointOffer } from '../models/offer.model';
 
 @Injectable({
     providedIn: 'root',
@@ -28,30 +31,101 @@ export class ContractService {
                     supplyPointId,
                 },
                 update: (cache, {data}) => {
-                    const supplyPoints: any = cache.readQuery(
+                    const getSupplyPointResult: {
+                        getSupplyPoint: ISupplyPoint
+                    } = cache.readQuery(
                         {
                             query: getSupplyPoint,
                             variables: {
-                                supplyPointId,
+                                supplyPointId: parseInt(String(supplyPointId), 10),
                             },
                     });
-                    console.log('UPRAVUJU');
-                    console.log(supplyPoints);
-                    console.log(data);
-                    console.log(offerId);
-                    console.log(supplyPoints);
-                    console.log('UPRAVUJU');
 
-                    // const updatedData = R.map(offer => {
-                    //     if (offer.id === data.deleteOffer.toString()) {
-                    //         offer.status = IOfferStatus.DELETED;
-                    //     }
-                    //     return offer;
-                    // })(offers.findSupplierOffers);
-                    // cache.writeQuery({
-                    //     query: findSupplierOffers,
-                    //     data: { findSupplierOffers: updatedData},
-                    // });
+                    const supplyPoint: ISupplyPoint = getSupplyPointResult.getSupplyPoint;
+
+                    const findSupplyPointOffersResponse: {
+                        findSupplyPointOffers: ISupplyPointOffer[]
+                    } = cache.readQuery(
+                        {
+                            query: findSupplyPointOffers,
+                            variables: {
+                                ean: supplyPoint.ean,
+                            },
+                        });
+
+                    const supplyPointOffers: ISupplyPointOffer[] = findSupplyPointOffersResponse.findSupplyPointOffers;
+                    const supplyPointOffer: ISupplyPointOffer = supplyPointOffers.find((spOffer: ISupplyPointOffer) => {
+                        return spOffer.id === offerId;
+                    });
+
+                    supplyPoint.contract = {
+                        contractId: data.saveContract,
+                        contractStatus: 'CONCLUDED',
+                        deliveryFrom: '',
+                        deliveryTo: '',
+                        offer: {
+                            id: offerId,
+                            supplier: supplyPointOffer.supplier,
+                            commodityType: supplyPointOffer.commodityType,
+                            name: supplyPointOffer.name,
+                            validFrom: supplyPointOffer.validFrom,
+                            validTo: supplyPointOffer.validTo,
+                            deliveryFrom: supplyPointOffer.deliveryFrom,
+                            deliveryTo: '',
+                            deliveryLength: supplyPointOffer.deliveryLength,
+                            benefits: supplyPointOffer.benefits,
+                            priceVT: supplyPointOffer.priceVT,
+                            priceNT: supplyPointOffer.priceNT,
+                            priceGas: supplyPointOffer.priceGas,
+                            mountlyPaymentPrice: supplyPointOffer.permanentPaymentPrice,
+                            __typename: 'offer',
+                        },
+                        personalData: {
+                            name: '',
+                            ico: '',
+                            dic: '',
+                            address1: {
+                                street: '',
+                                orientationNumber: '',
+                                descriptiveNumber: '',
+                                city: '',
+                                postCode: '',
+                                region: '',
+                                __typename: 'address2',
+                            },
+                            address2: {
+                                street: '',
+                                orientationNumber: '',
+                                descriptiveNumber: '',
+                                city: '',
+                                postCode: '',
+                                region: '',
+                                __typename: 'address2',
+                            },
+                            email: '',
+                            phone: '',
+                            bankAccountNumber: '',
+                            bankCode: '',
+                            depositPaymentType: {
+                                type: '',
+                                code: '',
+                                description: '',
+                                help: '',
+                                __typename: 'depositPaymentType',
+                            },
+                            deposit: null,
+                            __typename: 'personalData',
+                        },
+                        __typename: 'contract',
+                    };
+
+                    cache.writeQuery({
+                        query: getSupplyPoint,
+                        data: { getSupplyPoint: supplyPoint},
+                        variables: {
+                            supplyPointId: parseInt(String(supplyPointId), 10),
+                        },
+                    });
                 },
             });
     }

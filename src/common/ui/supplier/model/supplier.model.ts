@@ -1,4 +1,5 @@
 export interface ISupplier {
+    id?: number;
     logoUrl: string;
     logoUrlHover: string;
     supplierUrl: string;
