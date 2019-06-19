@@ -129,7 +129,8 @@
         [touched]="form.controls.distributionRateId.touched || formError.distributionRateId"
         [validationMessages]="formFields.validationMessages.distributionRateId">
     </lnd-select>
-    <div class="row no-gutters">
+    <div class="row no-gutters"
+         *ngIf="form.controls.commodityType.value === 'POWER'">
         <div class="col-12 mb-2">
             <small>Jistič</small>
         </div>
