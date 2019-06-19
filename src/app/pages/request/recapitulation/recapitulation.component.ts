@@ -16,7 +16,10 @@ import { formFields } from 'src/common/containers/form/forms/personal-info/perso
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IPersonalDataInput } from 'src/common/graphql/models/personal-data.model';
-import { ISupplyPoint, SubjectType } from 'src/common/graphql/models/supply.model';
+import {
+    ISupplyPoint,
+    SubjectType,
+} from 'src/common/graphql/models/supply.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
 import { ROUTES } from 'src/app/app.constants';
@@ -50,11 +53,13 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     }
 
     ngOnInit () {
+        console.log(this.route.snapshot.paramMap.get('supplyPointId'));
         this.supplyService.getSupplyPoint(parseInt(this.route.snapshot.paramMap.get('supplyPointId'), 10))
             .pipe(
                 takeUntil(this.destroy$),
             ).subscribe(
             ({data}) => {
+                console.log(data);
                 this.supplyPoint = data.getSupplyPoint;
                 this.isIndividual = this.supplyPoint.subject.code === SubjectType.SUBJECT_TYPE_INDIVIDUAL;
             },
@@ -77,9 +82,11 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             )
             .subscribe(
                 () => {
+                    console.log('ok');
                     this.router.navigate([ROUTES.ROUTER_REQUEST_CONTRACT]);
                 },
                 (error) => {
+                    console.log(error);
                     this.formLoading = false;
                     const { fieldError, globalError } = parseGraphQLErrors(error);
                     this.fieldError = fieldError;

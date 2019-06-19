@@ -96,12 +96,12 @@ export class SupplyService {
                     supplyPoint: supplyPoint,
                     powerAttributes: powerAttributes,
                 },
-                refetchQueries: [{
-                    query: findSupplyPoints,
-                    variables: {
-                        ean: null,
-                    },
-                }],
+                // refetchQueries: [{
+                //     query: findSupplyPoints,
+                //     variables: {
+                //         ean: supplyPoint.ean,
+                //     },
+                // }],
             });
     }
 
@@ -113,12 +113,12 @@ export class SupplyService {
                     supplyPoint: supplyPoint,
                     gasAttributes: gasAttributes,
                 },
-                refetchQueries: [{
-                    query: findSupplyPoints,
-                    variables: {
-                        ean: null,
-                    },
-                }],
+                // refetchQueries: [{
+                //     query: findSupplyPoints,
+                //     variables: {
+                //         ean: supplyPoint.ean,
+                //     },
+                // }],
             });
     }
 
