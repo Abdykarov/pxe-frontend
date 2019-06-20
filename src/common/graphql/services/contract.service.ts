@@ -8,15 +8,9 @@ import {
     saveContract,
     updateContract,
 } from 'src/common/graphql/mutation/contract';
-import {
-    findSupplyPoints,
-    getSupplyPoint,
-} from 'src/common/graphql/queries/supply';
+import { getSupplyPoint } from 'src/common/graphql/queries/supply';
 import { findSupplyPointOffers } from 'src/common/graphql/queries/offer';
-import {
-    ISelectedOffer,
-    ISupplyPoint,
-} from 'src/common/graphql/models/supply.model';
+import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 
 @Injectable({
@@ -44,7 +38,7 @@ export class ContractService {
                         {
                             query: getSupplyPoint,
                             variables: {
-                                supplyPointId: parseInt(String(supplyPointId), 10),
+                                supplyPointId: supplyPointId,
                             },
                         });
 
@@ -55,7 +49,7 @@ export class ContractService {
                         query: getSupplyPoint,
                         data: { getSupplyPoint: supplyPoint },
                         variables: {
-                            supplyPointId: parseInt(String(supplyPointId), 10),
+                            supplyPointId: supplyPointId,
                         },
                     });
                 },

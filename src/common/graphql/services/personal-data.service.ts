@@ -4,15 +4,8 @@ import { Apollo } from 'apollo-angular';
 
 import { getPersonalData } from 'src/common/graphql/queries/personal-data';
 import { getSupplyPoint } from 'src/common/graphql/queries/supply';
-import {
-    IAddress,
-    ICodelistItem,
-    ISupplyPoint,
-} from 'src/common/graphql/models/supply.model';
-import {
-    IPersonalData,
-    IPersonalDataInput,
-} from 'src/common/graphql/models/personal-data.model';
+import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import { IPersonalDataInput } from 'src/common/graphql/models/personal-data.model';
 import { savePersonalData } from 'src/common/graphql/mutation/personal-data';
 
 @Injectable({
@@ -50,7 +43,7 @@ export class PersonalDataService {
                         {
                             query: getSupplyPoint,
                             variables: {
-                                supplyPointId: parseInt(String(supplyPointOld.id), 10),
+                                supplyPointId: supplyPointOld,
                             },
                         });
 
