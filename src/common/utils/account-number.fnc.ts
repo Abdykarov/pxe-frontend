@@ -1,49 +1,36 @@
 import * as R_ from 'ramda-extension';
 
-export const accountNumber = (value): boolean => {
-    const An: string = String(value);
-    const AnPrefixKfc: number[] = [6, 3, 7, 9, 10, 5, 8, 4, 2, 1];
+const accountNumberWeights: number[] = [6, 3, 7, 9, 10, 5, 8, 4, 2, 1];
+const accountNumberPrefixWeights: number[] = [10, 5, 8, 4, 2, 1];
 
-    let AnPrefixNumber: any = 0;
-    let err = false;
-    let AnNumber = '';
-    let ch: string;
+const accountNumberFormatValidator = (value: string, weights: number[]): boolean => {
+    let sum = 0;
 
-    if (An === '0') {
-        err = true;
-    }
-
-    for (let i = 0; i < An.length; i++) {
-        ch = An.charAt(i);
-        if (ch.match(/[0-9]/i)) {
-            AnNumber = AnNumber + ch;
-        } else {
-            err = true;
-        }
-    }
-    if (!err) {
-        const AnPrefix = AnNumber;
-        for (let i = 0; i < AnPrefix.length; i++) {
-            AnPrefixNumber = AnPrefixNumber + (AnPrefixKfc[i] *  parseInt(AnPrefix.charAt(i), 10));
-        }
-        if (AnPrefixNumber % 11 !== 0) {
-            err = true;
-        }
-    } else {
-        err = true;
-    }
-
-    return !err;
-};
-
-export const accountNumberValidator = (value) => {
-    if (value.indexOf('-') !== -1) {
+    if (!value.match(/[0-9]+/i)) {
         return false;
     }
 
+    value.split('').forEach((char, i) => {
+        sum = sum + (weights[i] * parseInt(char, 10));
+    });
+
+    return sum % 11 === 0;
+};
+
+export const accountNumberPrefixValidator = (accountNumberPrefix) => {
+    const value = String(accountNumberPrefix);
+    if (!R_.between(2, 6, value.length)) {
+        return false;
+    }
+
+    return accountNumberFormatValidator(value, accountNumberPrefixWeights);
+};
+
+export const accountNumberValidator = (accountNumber) => {
+    const value = String(accountNumber);
     if (!R_.between(2, 10, value.length)) {
         return false;
     }
 
-    return accountNumber(value);
+    return accountNumberFormatValidator(value, accountNumberWeights);
 };

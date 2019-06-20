@@ -8,7 +8,8 @@ import {
     Observable,
     Operation,
 } from 'apollo-link';
-import { HttpLink } from 'apollo-angular-link-http';
+import { BatchHttpLink } from 'apollo-link-batch-http';
+import fetch from 'unfetch';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { onError } from 'apollo-link-error';
 
@@ -20,7 +21,7 @@ import {
 } from '../resolvers/';
 import { environment } from 'src/environments/environment';
 
-const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, router: Router) => {
+const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
 
     const setTokenHeader = (operation: Operation): void => {
@@ -29,13 +30,15 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
             operation.setContext({
                 headers: {
                     Authorization: `Bearer ${token}`,
+                    'X-API-Key': `${environment.x_api_key}`,
                 },
             });
         }
     };
 
-    const http = httpLink.create({
+    const http = new BatchHttpLink({
         uri: `${environment.url_graphql}/`,
+        fetch: fetch,
     });
 
     const auth = new ApolloLink((operation: Operation, forward: NextLink) => {
@@ -48,7 +51,7 @@ const apolloGraphQLFactory = (httpLink: HttpLink, authService: AuthService, rout
                     next: observer.next.bind(observer),
                     complete: observer.complete.bind(observer),
                     error: networkError => {
-                        if (networkError.status === 401) {
+                        if (networkError.status === 401 || networkError.statusCode === 401) {
                             authService.refreshToken()
                                 .subscribe(
                                     (response) => {
@@ -111,7 +114,6 @@ export const ApolloGraphQLProvider = {
     provide: APOLLO_OPTIONS,
     useFactory: apolloGraphQLFactory,
     deps: [
-        HttpLink,
         AuthService,
         Router,
     ],

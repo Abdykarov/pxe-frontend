@@ -6,14 +6,21 @@ import {
 
 import * as R_ from 'ramda-extension';
 
-import { accountNumberValidator } from './account-number.fnc';
-import { acountNumberPrefixValidator } from './account-number-prefix.fnc';
+import {
+    accountNumberValidator,
+    accountNumberPrefixValidator,
+} from './account-number.fnc';
 import {
     DICError,
     verifyDIC,
 } from './dic-validator.fnc';
 import { EanValidator } from './ean-validator.fnc';
 import { EicValidator } from './eic-validator.fnc';
+import {
+    isValidLandlineNumber,
+    isValidMobilePhoneNumber,
+    isValidTelephoneNumber,
+} from './phone.validator.fnc';
 import { verifyIC } from './ico-validator.fnc';
 
 export class CustomValidators {
@@ -40,7 +47,7 @@ export class CustomValidators {
             const prefix = accountParts[0];
             const number = accountParts[1];
 
-            if (!accountNumberValidator(number) && !acountNumberPrefixValidator(prefix)) {
+            if (!accountNumberValidator(number) && !accountNumberPrefixValidator(prefix)) {
                 return {
                     accountNumber: {
                         both: true,
@@ -54,7 +61,7 @@ export class CustomValidators {
                 };
             }
 
-            if (!acountNumberPrefixValidator(prefix)) {
+            if (!accountNumberPrefixValidator(prefix)) {
                 return {
                     accountNumber: {
                         prefix: true,
@@ -90,7 +97,7 @@ export class CustomValidators {
             return null;
         }
 
-        const PHONE_REGEXP = /^(\+420)|(\+421)$/;
+        const PHONE_REGEXP = /^(\+420)$/;
         if (PHONE_REGEXP.test(phoneNumberPrefix.value)) {
             return null;
         }
@@ -105,39 +112,40 @@ export class CustomValidators {
             return null;
         }
 
-        const phonePrefixes = ['2', '31', '32', '35', '37', '38', '39', '41', '46', '47', '48', '49', '51', '53',
-            '54', '55', '56', '57', '58', '59', '95', '971', '972', '973', '974', '840114114', '972436321',
-            '973315650', '975853100'];
-        const mobilePrefixes = ['60', '70', '72', '73', '77', '79'];
-        const pattern = /^[0-9]{9}$/i;
-        const patternWithSpaces = /^[0-9]{3}[ ][0-9]{3}[ ][0-9]{3}$/i;
-
-        const searchPrefixes = (prefixes, value) => {
-            value = value.replace(/ /g, '');
-            let j = Number.MAX_VALUE;
-            for (let i = 0; i < prefixes.length; i++) {
-                if (value.indexOf(prefixes[i]) === 0) {
-                    j = i;
-                    break;
-                }
-            }
-            return j < prefixes.length && value.substring(0, 2) !== '20';
-        };
-
-        const isValidPhone = (value) => {
-            return (pattern.test(value) || patternWithSpaces.test(value)) && searchPrefixes(phonePrefixes, value);
-        };
-
-        const isValidMobile = (value) => {
-            return (pattern.test(value) || patternWithSpaces.test(value)) && searchPrefixes(mobilePrefixes, value);
-        };
-
-        if (isValidMobile(phoneNumber.value) || isValidPhone(phoneNumber.value)) {
+        if (isValidTelephoneNumber(phoneNumber.value)) {
             return null;
         }
 
         return {
             phoneNumber: true,
+        };
+    }
+
+    static mobilePhoneNumber = (phoneNumber) => {
+        if (phoneNumber.pristine) {
+            return null;
+        }
+
+        if (isValidMobilePhoneNumber(phoneNumber.value)) {
+            return null;
+        }
+
+        return {
+            mobilePhoneNumber: true,
+        };
+    }
+
+    static landLineNumber = (phoneNumber) => {
+        if (phoneNumber.pristine) {
+            return null;
+        }
+
+        if (isValidLandlineNumber(phoneNumber.value)) {
+            return null;
+        }
+
+        return {
+            landLineNumber: true,
         };
     }
 
@@ -271,7 +279,7 @@ export class CustomValidators {
     }
 
     static isNumber = (number) => {
-        const expresion = new RegExp(/^\+?(0|[1-9]\d*)$/);
+        const expresion = new RegExp(/^(0|-?[1-9]\d*)$/);
         if (number.pristine) {
             return null;
         }
@@ -287,7 +295,7 @@ export class CustomValidators {
 
 
     static isDecimal = (number) => {
-        const expresion = new RegExp(/^(\d*([\.\,]\d+)?)$/);
+        const expresion = new RegExp(/^-?\d+([\.\,]?\d+)?$/);
         if (number.pristine) {
             return null;
         }

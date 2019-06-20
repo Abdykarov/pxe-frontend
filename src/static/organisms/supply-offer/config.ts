@@ -28,7 +28,7 @@ export class SupplyOfferOrganismConfig {
                 ],
             },
             {
-                label: 'Typ osoby',
+                label: 'Odběratel',
                 views: [
                     {
                         headingClass: [''],
@@ -118,7 +118,7 @@ export class SupplyOfferOrganismConfig {
                 ],
             },
             {
-                label: 'Stálá platba - cena',
+                label: 'Stálá platba',
                 views: [
                     {
                         headingClass: ['', 'text-right'],
@@ -140,7 +140,7 @@ export class SupplyOfferOrganismConfig {
                 ],
             },
             {
-                label: 'Typ osoby',
+                label: 'Odběratel',
                 views: [
                     {
                         headingClass: [''],
@@ -213,7 +213,7 @@ export class SupplyOfferOrganismConfig {
                 ],
             },
             {
-                label: 'Stálá platba - cena (Kč)',
+                label: 'Stálá platba',
                 views: [
                     {
                         headingClass: ['', 'text-right'],
