@@ -9,7 +9,10 @@ import {
 } from '@angular/core';
 
 import * as R from 'ramda';
-import { map, takeUntil } from 'rxjs/operators';
+import {
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { configStepper } from './offer-selection.config';

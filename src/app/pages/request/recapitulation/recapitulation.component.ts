@@ -8,7 +8,10 @@ import {
     OnInit,
 } from '@angular/core';
 
-import { map, takeUntil } from 'rxjs/operators';
+import {
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { configStepper } from 'src/app/pages/request/recapitulation/recapitulation.config';
