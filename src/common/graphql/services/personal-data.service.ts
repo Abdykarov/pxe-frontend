@@ -2,13 +2,18 @@ import { Injectable } from '@angular/core';
 
 import { Apollo } from 'apollo-angular';
 
-import { IPersonalData, IPersonalDataInput } from '../models/personal-data.model';
 import { getPersonalData } from 'src/common/graphql/queries/personal-data';
+import { getSupplyPoint } from 'src/common/graphql/queries/supply';
+import {
+    IAddress,
+    ICodelistItem,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
+import {
+    IPersonalData,
+    IPersonalDataInput,
+} from 'src/common/graphql/models/personal-data.model';
 import { savePersonalData } from 'src/common/graphql/mutation/personal-data';
-import { IAddress, ICodelistItem, ISupplyPoint } from '../models/supply.model';
-import { getSupplyPoint } from '../queries/supply';
-import { ISupplyPointOffer } from '../models/offer.model';
-import { findSupplyPointOffers } from '../queries/offer';
 
 @Injectable({
     providedIn: 'root',

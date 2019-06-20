@@ -11,10 +11,13 @@ import {
 import {
     findSupplyPoints,
     getSupplyPoint,
-} from '../queries/supply';
-import { ISelectedOffer, ISupplyPoint } from '../models/supply.model';
-import { findSupplyPointOffers } from '../queries/offer';
-import { ISupplyPointOffer } from '../models/offer.model';
+} from 'src/common/graphql/queries/supply';
+import { findSupplyPointOffers } from 'src/common/graphql/queries/offer';
+import {
+    ISelectedOffer,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
+import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 
 @Injectable({
     providedIn: 'root',
@@ -89,7 +92,7 @@ export class ContractService {
             });
     }
 
-    loadSupplyPointDetail = (offerId: number, supplyPoint: ISupplyPoint, cache, data): ISupplyPoint => {
+    loadSupplyPointDetail = (offerId: number, supplyPoint: ISupplyPoint, cache, data) => {
         const findSupplyPointOffersResponse: {
             findSupplyPointOffers: ISupplyPointOffer[]
         } = cache.readQuery(
@@ -165,7 +168,5 @@ export class ContractService {
             },
             __typename: 'contract',
         };
-
-        return supplyPoint;
     }
 }

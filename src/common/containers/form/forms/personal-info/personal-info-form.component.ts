@@ -101,7 +101,6 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             };
             delete form.phonePrefix;
             delete form.onlyAddress1;
-            console.log(form);
             this.submitAction.emit(form);
         }
     }
