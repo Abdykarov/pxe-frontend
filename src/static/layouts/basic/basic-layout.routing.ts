@@ -76,6 +76,10 @@ import {
     recapitulationPageRoutes,
 } from 'src/static/pages/recapitulation/page.module';
 import {
+    RequestCardPageModule,
+    requestCardPageRoutes,
+} from 'src/static/organisms/request-card/page.module';
+import {
     SupplyOfferPageModule,
     supplyOfferPageRoutes,
 } from 'src/static/organisms/supply-offer/page.module';
@@ -142,6 +146,7 @@ const routes: Routes = [
             ...newSupplyPointPageRoutes,
             ...progressBarPageRoutes,
             ...recapitulationPageRoutes,
+            ...requestCardPageRoutes,
             ...supplyOfferPageRoutes,
             ...supplyPointOfferPageRoutes,
             ...supplyPointOverviewPageRoutes,
@@ -180,6 +185,7 @@ const routes: Routes = [
         NewSupplyPointPageModule,
         ProgressBarPageModule,
         RecapitulationPageModule,
+        RequestCardPageModule,
         RouterModule.forChild(routes),
         SupplyOfferPageModule,
         SupplyPointOfferPageModule,
