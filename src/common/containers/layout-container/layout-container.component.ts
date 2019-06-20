@@ -1,7 +1,10 @@
 import {
     Component,
+    Inject,
     Input,
+    PLATFORM_ID,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
@@ -28,7 +31,11 @@ export class LayoutContainerComponent {
         title: '',
     };
 
-    constructor() {
-        this.showBanner = window.history.state.showBanner;
+    constructor(
+        @Inject(PLATFORM_ID) private platformId: string,
+    ) {
+        if (isPlatformBrowser(this.platformId)) {
+            this.showBanner = window.history.state.showBanner;
+        }
     }
 }

@@ -17,39 +17,36 @@ import {
 } from 'src/app/app.constants';
 import {
     formFieldsLogin,
+    LOGIN_STATE,
+} from './config';
+import {
     IChangePassword,
     IConfirmationCode,
     ILoginState,
-    LOGIN_STATE,
 } from './login.model';
-import { parseRestAPIErrors } from 'src/common/utils/';
-import { PasswordService } from 'src/common/graphql/services/password.service';
 import {
     ILoginResponse,
     IUserLogin,
     LANDING_PAGE,
-    RESET_PASSWORD_RESPONSE_PHONE,
+    PASSWORD_DESTINATION,
 } from 'src/common/graphql/models/password';
+import { parseGraphQLErrors, parseRestAPIErrors } from 'src/common/utils/';
+import { PasswordService } from 'src/common/graphql/services/password.service';
 
 @Component({
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent extends AbstractComponent  {
+export class LoginComponent extends AbstractComponent {
+    public email = '';
+    public formFieldsLogin = formFieldsLogin;
     public formLoading = false;
     public globalError: string[] = [];
-
-    public formFieldsLogin = formFieldsLogin;
-
-    public state = ILoginState.LOGIN;
-
     public LOGIN_STATE = LOGIN_STATE;
-
-    public email = '';
-    public wasSentToPhone = false;
     public passwordWasSent = false;
-
     public password: string;
+    public state = ILoginState.LOGIN;
+    public wasSentToPhone = false;
 
     constructor(
         private authService: AuthService,
@@ -69,17 +66,19 @@ export class LoginComponent extends AbstractComponent  {
                 map(({data}) => data.changePassword),
             )
             .subscribe(
-            (loginResponse: ILoginResponse) => {
-                    this.authService.setToken(loginResponse);
-                    this.router.navigate([this.routerAfterLogin(loginResponse)], {
-                        state:
-                        {
+                (loginResponse: ILoginResponse) => {
+                        this.authService.setToken(loginResponse);
+                        this.router.navigate([this.routerAfterLogin(loginResponse)], {
+                        state: {
                             showBanner: true,
                         },
                     });
-                }, error => {
+                },
+                error => {
                     this.resetErrorsAndLoading();
-                    this.handleError(error);
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
                 },
             );
     }
@@ -93,16 +92,18 @@ export class LoginComponent extends AbstractComponent  {
                 map(({data}) => data.resetPassword),
             )
             .subscribe(
-            (passwordDestination: 'EMAIL' | 'PHONE') => {
+                (passwordDestination: PASSWORD_DESTINATION) => {
                     this.email = email;
-                    this.wasSentToPhone = passwordDestination === RESET_PASSWORD_RESPONSE_PHONE;
+                    this.wasSentToPhone = passwordDestination === PASSWORD_DESTINATION.PHONE;
                     this.passwordWasSent = true;
                     this.state = ILoginState.LOGIN_AFTER_RESET;
                     this.resetErrorsAndLoading();
                     this.cd.markForCheck();
                 }, error => {
                     this.resetErrorsAndLoading();
-                    this.handleError(error);
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
                 });
     }
 
@@ -116,17 +117,13 @@ export class LoginComponent extends AbstractComponent  {
             )
             .subscribe(
                 (loginResponse: ILoginResponse) => {
-                    if (this.authService.userNeedChangePassword()) {
+                    if (this.authService.passwordChangeRequired()) {
                         this.state = ILoginState.CHANGE_PASSWORD;
                         this.resetErrorsAndLoading();
                         this.cd.markForCheck();
-                        return;
                     }
 
-                    if (this.authService.needSmSConfirm()) {
-                        if (this.authService.currentUserValue.smsConfirmed) {
-                            this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER_POWER]);
-                        }
+                    if (this.authService.needSmsConfirm()) {
                         this.state = ILoginState.SEND_SMS;
                         this.resetErrorsAndLoading();
                         this.cd.markForCheck();
@@ -160,7 +157,7 @@ export class LoginComponent extends AbstractComponent  {
     }
 
 
-    public submitResent = () => {
+    public submitResetPasswordAgain = () => {
         this.formLoading = true;
 
         this.passwordService.resetPassword(this.email)
@@ -174,7 +171,9 @@ export class LoginComponent extends AbstractComponent  {
                 },
                 error => {
                     this.resetErrorsAndLoading();
-                    this.handleError(error);
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
                 },
             );
     }
@@ -232,9 +231,9 @@ export class LoginComponent extends AbstractComponent  {
         this.cd.markForCheck();
     }
 
-    public resetErrorsAndLoading = (formLoading = false) => {
+    public resetErrorsAndLoading = () => {
         this.globalError = [];
-        this.formLoading = formLoading;
+        this.formLoading = false;
     }
 
     public routerAfterLogin = ({landingPage}) => {

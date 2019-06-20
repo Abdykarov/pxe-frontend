@@ -7,7 +7,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <pxe-login-form
-                                    *ngIf="[LOGIN_STATE.LOGIN,LOGIN_STATE.LOGIN_AFTER_RESET].indexOf(state) != -1"
+                                    *ngIf="[LOGIN_STATE.LOGIN, LOGIN_STATE.LOGIN_AFTER_RESET].indexOf(state) !== -1"
                                     [formFields]="formFieldsLogin.loginFormFields"
                                     [formLoading]="formLoading"
                                     [globalError]="globalError"
@@ -39,7 +39,7 @@
                                     [formLoading]="formLoading"
                                     [globalError]="globalError"
                                     (submitAction)="submitChangePassword($event)"
-                                    (customAction)="submitResent()">
+                                    (customAction)="submitResetPasswordAgain()">
                                 </pxe-change-password-form>
                             </div>
                         </div>

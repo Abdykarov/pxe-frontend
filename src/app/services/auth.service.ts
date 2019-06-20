@@ -63,11 +63,11 @@ export class AuthService {
         return this.currentUserValue.supplier;
     }
 
-    public needSmSConfirm(): boolean {
+    public needSmsConfirm(): boolean {
         return this.currentUserValue.needSmsConfirm;
     }
 
-    public userNeedChangePassword(): boolean {
+    public passwordChangeRequired(): boolean {
         return this.currentUserValue.passwordReset;
     }
 

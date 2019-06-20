@@ -154,7 +154,7 @@ export const errorFieldMessages =  {
         required: 'Vyplňte heslo.',
         pattern: 'Vaše heslo musí mít minimálně 8 znaků, musí obsahovat malá a velká ' +
             'písmena, aspoň jednu číslici a aspoň jeden speciální znak jako &_*+/#\\ apod.',
-        mustMatch: 'Musíte vyplnit stejná hesla.',
+        fieldsMustMatch: 'Musíte vyplnit stejná hesla.',
     },
     subjectTypeId: {
         required: 'Zvolte odběratele.',

@@ -1,16 +1,16 @@
 import { FormGroup } from '@angular/forms';
 
-export const mustMatch = (controlName: string, matchingControlName: string) => {
+export const fieldsMustMatch = (controlName: string, matchingControlName: string) => {
     return (formGroup: FormGroup) => {
         const control = formGroup.controls[controlName];
         const matchingControl = formGroup.controls[matchingControlName];
 
-        if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+        if (matchingControl.errors && !matchingControl.errors.fieldsMustMatch) {
             return;
         }
 
         if (control.value !== matchingControl.value) {
-            matchingControl.setErrors({ mustMatch: true });
+            matchingControl.setErrors({ fieldsMustMatch: true });
         } else {
             matchingControl.setErrors(null);
         }

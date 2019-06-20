@@ -8,10 +8,10 @@ export interface IUserLogin {
     password: string;
 }
 
-
-export const RESET_PASSWORD_RESPONSE_EMAIL = 'EMAIL';
-export const RESET_PASSWORD_RESPONSE_PHONE = 'PHONE';
-
+export enum PASSWORD_DESTINATION {
+    EMAIL = 'EMAIL',
+    PHONE = 'PHONE',
+}
 
 export enum LANDING_PAGE {
     OFFERS = 'OFFERS',

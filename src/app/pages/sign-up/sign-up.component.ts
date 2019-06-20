@@ -52,14 +52,12 @@ export class SignUpComponent extends AbstractComponent {
                     this.cd.markForCheck();
                     this.router.navigate(['login'],
                         {
-                            queryParams:
-                                {
-                                    email: values.email,
-                                },
-                            state:
-                                {
-                                    passwordWasSent: true,
-                                },
+                            queryParams: {
+                                email: values.email,
+                            },
+                            state: {
+                                passwordWasSent: true,
+                            },
                         },
                     );
                 },

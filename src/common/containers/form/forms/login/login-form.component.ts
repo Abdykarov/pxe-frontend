@@ -59,6 +59,7 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
                     this.form.setValue(formValue);
                 }
             });
+
         if (isPlatformBrowser(this.platformId) && !this.passwordWasSent) {
             this.passwordWasSent = !!window.history.state.passwordWasSent;
         }

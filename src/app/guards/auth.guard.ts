@@ -11,10 +11,7 @@ import * as R from 'ramda';
 
 import { AuthService } from 'src/app/services/auth.service';
 import { Observable } from 'rxjs';
-import {
-    CONSTS,
-    ROUTES,
-} from 'src/app/app.constants';
+import { CONSTS } from 'src/app/app.constants';
 
 @Injectable({
     providedIn: 'root',
