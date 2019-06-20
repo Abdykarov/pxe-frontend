@@ -21,7 +21,7 @@ import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { OfferService } from 'src/common/graphql/services/offer.service';
-import { parseGraphQLErrors, transformCodeList } from 'src/common/utils';
+import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
