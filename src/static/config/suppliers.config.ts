@@ -1,9 +1,9 @@
 import {
-    ISupplier,
+    ISupplierLogo,
     TypeCommodity,
 } from 'src/common/ui/supplier/model/supplier.model';
 
-export const configSupplier: ISupplier[] = [
+export const configSupplier: ISupplierLogo[] = [
     {
         alt: 'logo - Alpiq CZ',
         logoUrl: '/assets/images/suppliers/logo_alpiq.svg',

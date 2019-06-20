@@ -1,8 +1,8 @@
 import * as R from 'ramda';
 
-import { ISupplier } from '../ui/supplier/model/supplier.model';
+import { ISupplierLogo } from '../ui/supplier/model/supplier.model';
 
-export const transformSuppliers = (suppliers: ISupplier[]) => {
+export const transformSuppliers = (suppliers: ISupplierLogo[]) => {
     return R.map(supplier => {
         return {
             ...supplier,

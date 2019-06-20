@@ -1,5 +1,4 @@
 import { IContract } from './contract';
-import { ISupplier as ISupplierData } from 'src/common/ui/supplier/model/supplier.model';
 
 export enum CommodityType {
     POWER = 'POWER',
@@ -39,7 +38,7 @@ export interface ICodelistItem {
     __typename?: string;
 }
 
-interface ISupplier {
+export interface ISupplier {
     id: string;
     name: string;
     vatNumber: string;
@@ -90,7 +89,7 @@ export interface ISupplyPoint {
 
 export interface ISelectedOffer {
     id: number;
-    supplier?: ISupplierData;
+    supplier?: ISupplier;
     commodityType?: string;
     name?: string;
     validFrom: string;

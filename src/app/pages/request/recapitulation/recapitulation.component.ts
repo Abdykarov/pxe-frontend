@@ -61,6 +61,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             ({data}) => {
                 this.supplyPoint = data.getSupplyPoint;
                 this.isIndividual = this.supplyPoint.subject.code === SubjectType.SUBJECT_TYPE_INDIVIDUAL;
+                this.cd.markForCheck();
             },
             (error) => {
                 const { globalError } = parseGraphQLErrors(error);

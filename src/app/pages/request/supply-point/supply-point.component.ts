@@ -107,7 +107,7 @@ export class SupplyPointComponent extends AbstractComponent {
             )
             .subscribe(
                 ({data}) => {
-                    const supplyPointId = data.savePowerSupplyPoint;
+                    const supplyPointId = data.savePowerSupplyPoint || data.saveGasSupplyPoint;
                     this.formLoading = false;
                     this.formSent = true;
                     this.cd.markForCheck();

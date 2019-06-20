@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Apollo } from 'apollo-angular';
 
-import { IPersonalDataInput } from '../models/personal-data.model';
+import { IPersonalData, IPersonalDataInput } from '../models/personal-data.model';
 import { getPersonalData } from 'src/common/graphql/queries/personal-data';
 import { savePersonalData } from 'src/common/graphql/mutation/personal-data';
 import { IAddress, ICodelistItem, ISupplyPoint } from '../models/supply.model';
@@ -50,25 +50,7 @@ export class PersonalDataService {
                         });
 
                     const supplyPoint: ISupplyPoint = getSupplyPointResult.getSupplyPoint;
-                    supplyPoint.contract.personalData = {
-                        name: personalData.name,
-                        ico: personalData.ico,
-                        dic: personalData.dic,
-                        address1: personalData.address1,
-                        address2: personalData.address2,
-                        email: personalData.email,
-                        phone: personalData.phone,
-                        bankAccountNumber: personalData.bankAccountNumber,
-                        bankCode: personalData.bankCode,
-                        depositPaymentType: {
-                            type: personalData.depositPaymentTypeId,
-                            code: personalData.depositPaymentTypeId,
-                            description: personalData.depositPaymentTypeId,
-                            help: personalData.depositPaymentTypeId,
-                        },
-                        deposit: personalData.deposit,
-                        __typename: 'personalData',
-                    };
+                    this.loadSupplyPoint(supplyPoint, personalData);
 
                     cache.writeQuery({
                         query: getSupplyPoint,
@@ -79,6 +61,46 @@ export class PersonalDataService {
                     });
                 },
             });
+    }
+
+    loadSupplyPoint = (supplyPoint: ISupplyPoint, personalData: IPersonalDataInput) => {
+        supplyPoint.contract.personalData = {
+            name: personalData.name,
+            ico: personalData.ico ? personalData.ico : '',
+            dic: personalData.dic ? personalData.dic : '',
+            address1: personalData.address1,
+            address2: personalData.address2,
+            email: personalData.email,
+            phone: personalData.phone,
+            bankAccountNumber: personalData.bankAccountNumber,
+            bankCode: personalData.bankCode,
+            depositPaymentType: {
+                type: '',
+                code: personalData.depositPaymentTypeId,
+                description: '',
+                help: '',
+                __typename: 'depositPaymentType',
+            },
+            deposit: personalData.deposit,
+            __typename: 'personalData',
+        };
+        supplyPoint.contract.personalData.address1.__typename = 'address1';
+
+        if (supplyPoint.contract.personalData.address2) {
+            supplyPoint.contract.personalData.address2.__typename = 'address2';
+        } else {
+            supplyPoint.contract.personalData.address2 = {
+                street: '',
+                orientationNumber: '',
+                descriptiveNumber: '',
+                city: '',
+                postCode: '',
+                region: '',
+                __typename: 'address2',
+            };
+        }
+
+        return supplyPoint;
     }
 
 }

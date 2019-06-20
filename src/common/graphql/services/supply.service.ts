@@ -99,7 +99,7 @@ export class SupplyService {
                 refetchQueries: [{
                     query: findSupplyPoints,
                     variables: {
-                        ean: supplyPoint.ean,
+                        ean: powerAttributes.ean,
                     },
                 }],
             });
@@ -113,10 +113,10 @@ export class SupplyService {
                     supplyPoint: supplyPoint,
                     gasAttributes: gasAttributes,
                 },
-                refetchQueries: [{
+                refetchQueries:  [{
                     query: findSupplyPoints,
                     variables: {
-                        ean: supplyPoint.ean,
+                        ean: gasAttributes.eic,
                     },
                 }],
             });
