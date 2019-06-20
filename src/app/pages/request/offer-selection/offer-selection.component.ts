@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 
 import * as R from 'ramda';
-import { takeUntil } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { configStepper } from './offer-selection.config';
@@ -18,7 +18,7 @@ import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { OfferService } from 'src/common/graphql/services/offer.service';
-import { parseGraphQLErrors } from 'src/common/utils';
+import { parseGraphQLErrors, transformCodeList } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
@@ -27,9 +27,11 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./offer-selection.component.scss'],
 })
 export class OfferSelectionComponent extends AbstractComponent implements OnInit {
+    public globalError: string[] = [];
     public stepperProgressConfig: IStepperProgressItem[] = configStepper;
     public supplyPointOffers: ISupplyPointOffer[];
     public supplyPoint: ISupplyPoint;
+    public supplyPointId = this.route.snapshot.paramMap.get('supplyPointId');
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -42,18 +44,17 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
         super();
     }
 
-    public globalError: string[] = [];
-
     ngOnInit () {
-        this.supplyService.getSupplyPoint(parseInt(this.route.snapshot.paramMap.get('supplyPointId'), 10))
+        this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
                 takeUntil(this.destroy$),
+                map(({data}) => data.getSupplyPoint),
             ).subscribe(
-                ({data}) => {
-                    this.supplyPoint = data.getSupplyPoint;
+                (supplyPoint: ISupplyPoint) => {
+                    this.supplyPoint = supplyPoint;
                     this.findSupplyPointOffers(this.supplyPoint.ean);
                 },
-            (error) => {
+                (error) => {
                     this.supplyPointOffers = null;
                     const { globalError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
@@ -62,7 +63,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
             );
     }
 
-    findSupplyPointOffers = (ean) => {
+    public findSupplyPointOffers = (ean) => {
         this.offerService.findSupplyPointOffers(ean)
             .pipe(
                 takeUntil(this.destroy$),
@@ -90,7 +91,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
             );
     }
 
-    action = (supplyPointOffer: ISupplyPointOffer) => {
+    saveContract = (supplyPointOffer: ISupplyPointOffer) => {
         const supplyPointId = this.supplyPoint.id;
 
         this.contractService.saveContract(supplyPointOffer.id, supplyPointId)
@@ -98,11 +99,10 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                ({data}: any) => {
+                () => {
                     this.router.navigate([ROUTES.ROUTER_REQUEST_RECAPITULATION, {
                         supplyPointId,
                     }]);
-                    this.cd.markForCheck();
                 },
                 (error) => {
                     this.supplyPointOffers = null;

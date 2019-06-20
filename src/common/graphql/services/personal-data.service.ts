@@ -68,7 +68,8 @@ export class PersonalDataService {
             });
     }
 
-    loadSupplyPoint = (supplyPoint: ISupplyPoint, personalData: IPersonalDataInput) => {
+    // docasny reseni pred sync s BE
+    public loadSupplyPoint = (supplyPoint: ISupplyPoint, personalData: IPersonalDataInput) => {
         supplyPoint.contract.personalData = {
             name: personalData.name,
             ico: personalData.ico ? personalData.ico : '',

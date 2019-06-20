@@ -92,7 +92,8 @@ export class ContractService {
             });
     }
 
-    loadSupplyPointDetail = (offerId: number, supplyPoint: ISupplyPoint, cache, data) => {
+    // docasny reseni pred sync s BE
+    public loadSupplyPointDetail = (offerId: number, supplyPoint: ISupplyPoint, cache, data) => {
         const findSupplyPointOffersResponse: {
             findSupplyPointOffers: ISupplyPointOffer[]
         } = cache.readQuery(

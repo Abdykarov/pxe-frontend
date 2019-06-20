@@ -122,7 +122,7 @@ export class SupplyService {
             });
     }
 
-    public getSupplyPoint(supplyPointId: number) {
+    public getSupplyPoint(supplyPointId: string) {
         return this.apollo
             .watchQuery<any>({
                 query: getSupplyPoint,

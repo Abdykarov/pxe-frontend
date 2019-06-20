@@ -8,7 +8,7 @@ import {
     OnInit,
 } from '@angular/core';
 
-import { takeUntil } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { configStepper } from 'src/app/pages/request/recapitulation/recapitulation.config';
@@ -41,6 +41,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
 
     public isIndividual = true;
     public supplyPoint: ISupplyPoint;
+    public supplyPointId = this.route.snapshot.paramMap.get('supplyPointId');
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -53,21 +54,22 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     }
 
     ngOnInit () {
-        this.supplyService.getSupplyPoint(parseInt(this.route.snapshot.paramMap.get('supplyPointId'), 10))
+        this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
                 takeUntil(this.destroy$),
+                map(({data}) => data.getSupplyPoint),
             )
             .subscribe(
-            ({data}) => {
-                this.supplyPoint = data.getSupplyPoint;
-                this.isIndividual = this.supplyPoint.subject.code === SubjectType.SUBJECT_TYPE_INDIVIDUAL;
-                this.cd.markForCheck();
-            },
-            (error) => {
-                const { globalError } = parseGraphQLErrors(error);
-                this.globalError = globalError;
-                this.cd.markForCheck();
-            },
+                (supplyPoint: ISupplyPoint) => {
+                    this.supplyPoint = supplyPoint;
+                    this.isIndividual = this.supplyPoint.subject.code === SubjectType.SUBJECT_TYPE_INDIVIDUAL;
+                    this.cd.markForCheck();
+                },
+                (error) => {
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
+                },
         );
     }
 
