@@ -226,7 +226,7 @@ export const formFields: IForm = {
             required: errorFieldMessages.timeToContractEnd.required,
             max: errorFieldMessages.timeToContractEnd.max,
             min: errorFieldMessages.number.positive,
-            number: errorFieldMessages.number.integer,
+            number: errorFieldMessages.number.positiveInteger,
         },
         timeToContractEndPeriodId: {
             required: errorFieldMessages.timeToContractEndPeriodId.required,
@@ -235,6 +235,6 @@ export const formFields: IForm = {
 };
 
 export const commodityTypeFields: ICommodityTypeFields = {
-    [CommodityType.POWER]: ['ean', 'distributionRateId', 'circuitBreakerId', 'annualConsumptionNT', 'annualConsumptionVT'],
+    [CommodityType.POWER]: ['ean', 'distributionRateId', 'phasesId' , 'circuitBreakerId', 'annualConsumptionNT', 'annualConsumptionVT'],
     [CommodityType.GAS]: ['eic', 'annualConsumption'],
 };

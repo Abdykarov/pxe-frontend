@@ -9,10 +9,6 @@ export const findSupplierOffers = gql`
                 name,
                 vatNumber,
                 logoPath,
-                sampleDocuments{
-                    type,
-                    url
-                }
             },
             status,
             commodityType,

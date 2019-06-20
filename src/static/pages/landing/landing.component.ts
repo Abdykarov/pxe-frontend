@@ -9,7 +9,7 @@ import {
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
 import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
-import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
+import { ISupplierLogo } from 'src/common/ui/supplier/model/supplier.model';
 
 @Component({
     selector: 'lnd-landing-page',
@@ -18,7 +18,7 @@ import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
 export class LandingComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
     public configCoverage: IMapCoverageConfig = configCoverage;
-    public configSupplier: ISupplier[] = configSupplier;
+    public configSupplier: ISupplierLogo[] = configSupplier;
     public formLoading = false;
     public formFields = createRegistrationFormFields(SignUpType.NewsSubscription);
     public formSent = false;

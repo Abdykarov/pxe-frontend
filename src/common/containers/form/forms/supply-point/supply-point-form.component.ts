@@ -71,11 +71,11 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
             .pipe(
                 takeUntil(this.destroy$),
             )
-            .subscribe(val => {
-                this.resetFormError();
-                this.setFormByCommodity(val);
-                this.resetFieldValue('supplierId');
-                this.setAnnualConsumptionNTState(val === CommodityType.POWER ? this.getFieldValue('distributionRateId') : null);
+            .subscribe((commodityType: CommodityType) => {
+                this.resetFormError(false);
+                this.setFormByCommodity(commodityType);
+                this.resetFieldValue('supplierId', false);
+                this.setAnnualConsumptionNTState(commodityType === CommodityType.POWER ? this.getFieldValue('distributionRateId') : null);
             });
 
         this.form.get('subjectTypeId')
@@ -84,7 +84,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
                 takeUntil(this.destroy$),
             )
             .subscribe((val: string) => {
-                this.resetFieldValue('distributionRateId');
+                this.resetFieldValue('distributionRateId', false);
                 this.distributionRateType = SUBJECT_TYPE_TO_DIST_RATE_MAP[val];
                 this.cd.markForCheck();
             });

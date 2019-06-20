@@ -1,3 +1,5 @@
+import { IContract } from './contract';
+
 export enum CommodityType {
     POWER = 'POWER',
     GAS = 'GAS',
@@ -20,6 +22,7 @@ export interface IAddress {
     city: string;
     postCode: string;
     region: string;
+    __typename?: string;
 }
 
 export interface ICodelistMap {
@@ -32,9 +35,10 @@ export interface ICodelistItem {
     code: string;
     description: string;
     help: string;
+    __typename?: string;
 }
 
-interface ISupplier {
+export interface ISupplier {
     id: string;
     name: string;
     vatNumber: string;
@@ -62,16 +66,45 @@ export interface ISupplyPointPowerAttributes {
 }
 
 export interface ISupplyPoint {
-    id: number;
-    supplierId: number;
+    id: string;
     name: string;
+    commodityType: string;
+    supplier: ISupplier;
+    ean: string;
     address: IAddress;
-    expirationDate?: string;
-    subjectTypeId: string;
-    contractEndTypeId: string;
-    timeToContractEnd: string;
-    timeToContractEndPeriodId: string;
+    distributionRate: ICodelistItem;
+    circuitBreaker: ICodelistItem;
+    phases: ICodelistItem;
+    annualConsumptionNT: number;
+    annualConsumptionVT: number;
+    expirationDate: string;
+    subject: ICodelistItem;
+    lastAnnualConsumptionNT: number;
+    lastAnnualConsumptionVT: number;
+    contractEndType: ICodelistItem;
+    timeToContractEnd: number;
+    timeToContractEndPeriod: ICodelistItem;
+    contract: IContract;
 }
+
+export interface ISelectedOffer {
+    id: number;
+    supplier?: ISupplier;
+    commodityType?: string;
+    name?: string;
+    validFrom: string;
+    validTo: string;
+    deliveryFrom?: string;
+    deliveryTo?: string;
+    deliveryLength: number;
+    benefits?: string | string[];
+    priceVT?: number;
+    priceNT?: number;
+    priceGas?: number;
+    mountlyPaymentPrice?: number;
+    __typename?: string;
+}
+
 
 export interface ISupplyPointFindData {
     id: string;

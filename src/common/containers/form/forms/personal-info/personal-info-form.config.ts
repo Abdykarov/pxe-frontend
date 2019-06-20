@@ -60,7 +60,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.phoneNumber,
+                CustomValidators.mobilePhoneNumber,
             ],
         ],
         phonePrefix: [
@@ -110,11 +110,11 @@ export const formFields: IForm = {
             maxlength: errorFieldMessages.ico.invalidIC,
         },
         dic: {
-            dicPrefix: errorFieldMessages.dic.invalidDIC,
-            dicDecimal: errorFieldMessages.dic.invalidDIC,
-            dicLength: errorFieldMessages.dic.invalidDIC,
-            minlength: errorFieldMessages.dic.invalidDIC,
-            maxlength: errorFieldMessages.dic.invalidDIC,
+            dicPrefix: errorFieldMessages.dic.dicPrefix,
+            dicDecimal: errorFieldMessages.dic.dicDecimal,
+            dicLength: errorFieldMessages.dic.dicDecimal,
+            minlength: errorFieldMessages.dic.dicDecimal,
+            maxlength: errorFieldMessages.dic.dicDecimal,
         },
         address1Person: {
             required: errorFieldMessages.address.requiredPermanentAddressPerson,
@@ -143,8 +143,8 @@ export const formFields: IForm = {
             bankCode: errorFieldMessages.bankCode.bankCode,
         },
         phone: {
-            required: errorFieldMessages.phone.required,
-            phoneNumber: errorFieldMessages.phone.invalidPhoneNumber,
+            required: errorFieldMessages.phone.requiredMobile,
+            mobilePhoneNumber: errorFieldMessages.phone.mobilePhoneNumber,
         },
         phonePrefix: {
             required: errorFieldMessages.phonePrefix.required,
@@ -168,23 +168,23 @@ export const formFields: IForm = {
 
 export const depositPaymentType: IOption[] = [
     {
-        key: 1,
-        value: 1,
+        key: 'Inkaso',
+        value: 'Inkaso',
         label: 'Inkaso',
     },
     {
-        key: 2,
-        value: 2,
+        key: 'SIPO',
+        value: 'SIPO',
         label: 'SIPO',
     },
     {
-        key: 3,
-        value: 3,
+        key: 'Prikaz',
+        value: 'Prikaz',
         label: 'Příkaz k úhradě',
     },
     {
-        key: 4,
-        value: 4,
+        key: 'Slozenka',
+        value: 'Slozenka',
         label: 'Složenkou',
     },
 ];

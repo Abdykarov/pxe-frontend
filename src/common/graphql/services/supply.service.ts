@@ -10,6 +10,7 @@ import {
 } from '../models/supply.model';
 import {
     getCodelistByType,
+    getSupplyPoint,
     findAllSuppliers,
     findCodelistsByTypes,
     findSupplierDocumentsByComodity,
@@ -98,7 +99,7 @@ export class SupplyService {
                 refetchQueries: [{
                     query: findSupplyPoints,
                     variables: {
-                        ean: null,
+                        ean: powerAttributes.ean,
                     },
                 }],
             });
@@ -112,12 +113,23 @@ export class SupplyService {
                     supplyPoint: supplyPoint,
                     gasAttributes: gasAttributes,
                 },
-                refetchQueries: [{
+                refetchQueries:  [{
                     query: findSupplyPoints,
                     variables: {
-                        ean: null,
+                        ean: gasAttributes.eic,
                     },
                 }],
             });
+    }
+
+    public getSupplyPoint(supplyPointId: string) {
+        return this.apollo
+            .watchQuery<any>({
+                query: getSupplyPoint,
+                variables: {
+                    supplyPointId,
+                },
+            })
+            .valueChanges;
     }
 }

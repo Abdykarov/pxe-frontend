@@ -12,6 +12,7 @@ import { LandingModule, landingPageRoutes } from 'src/static/pages/landing/landi
 import { LoginPageModule, loginPageRoutes } from 'src/static/pages/login/page.module';
 import { LoginAfterRegistrationPageModule, loginAfterRegistrationPageRoutes } from 'src/static/pages/login-after-registration/page.module';
 import { RegistrationPageModule, registrationPageRoutes } from 'src/static/pages/registration/page.module';
+import { SupplyOfferPageModule, supplyOfferPageRoutes } from 'src/static/pages/supply-offer/page.module';
 
 const routes: Routes = [
     {
@@ -24,6 +25,7 @@ const routes: Routes = [
             ...loginPageRoutes,
             ...loginAfterRegistrationPageRoutes,
             ...registrationPageRoutes,
+            ...supplyOfferPageRoutes,
             {
                 path: '**',
                 redirectTo: '',
@@ -41,6 +43,7 @@ const routes: Routes = [
         LoginAfterRegistrationPageModule,
         RegistrationPageModule,
         RouterModule.forChild(routes),
+        SupplyOfferPageModule,
     ],
     exports: [
         RouterModule,

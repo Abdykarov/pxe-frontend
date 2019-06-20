@@ -29,8 +29,11 @@ export class ModalComponent {
     @Input()
     public size?: IModalSize;
 
+    @Input()
+    public isConfirm = false;
+
     @Output()
-    public close: EventEmitter<string> = new EventEmitter<string>();
+    public close: EventEmitter<any> = new EventEmitter<any>();
 
     constructor() {
         this.size = R.contains(this.size, Object.values(IModalSize)) ? this.size : null;

@@ -9,6 +9,10 @@ import {
     alertsPageRoutes,
 } from 'src/static/atoms/alerts/page.module';
 import {
+    BadgesPageModule,
+    badgesPageRoutes,
+} from 'src/static/atoms/badges/page.module';
+import {
     BannersPageModule,
     bannersPageRoutes,
 } from 'src/static/atoms/banners/page.module';
@@ -64,29 +68,17 @@ import {
     newSupplyPointPageRoutes,
 } from 'src/static/pages/new-supply-point/page.module';
 import {
-    OfferSelectionPageModule,
-    offerSelectionPageRoutes,
-} from 'src/static/pages/offer-selection/page.module';
-import {
     ProgressBarPageModule,
     progressBarPageRoutes,
 } from 'src/static/organisms/progress-bar/progress-bar.module';
-import {
-    SupplyPointPageModule,
-    supplyPointPageRoutes,
-} from 'src/static/organisms/supply-point/page.module';
-import {
-    SupplyPointsPageModule,
-    supplyPointsPageRoutes,
-} from 'src/static/pages/supply-points/page.module';
 import {
     RecapitulationPageModule,
     recapitulationPageRoutes,
 } from 'src/static/pages/recapitulation/page.module';
 import {
-    SupplyPointsBannerPageModule,
-    supplyPointsBannerPageRoutes,
-} from 'src/static/pages/supply-points-banner/page.module';
+    RequestCardPageModule,
+    requestCardPageRoutes,
+} from 'src/static/organisms/request-card/page.module';
 import {
     SupplyOfferPageModule,
     supplyOfferPageRoutes,
@@ -96,9 +88,29 @@ import {
     supplyPointOfferPageRoutes,
 } from 'src/static/organisms/supply-point-offer/page.module';
 import {
+    SupplyPointOverviewPageModule,
+    supplyPointOverviewPageRoutes,
+} from 'src/static/organisms/supply-point-overview/page.module';
+import {
+    SupplyPointPageModule,
+    supplyPointPageRoutes,
+} from 'src/static/organisms/supply-point/page.module';
+import {
+    SupplyPointsBannerPageModule,
+    supplyPointsBannerPageRoutes,
+} from 'src/static/pages/supply-points-banner/page.module';
+import {
+    SupplyPointsDetailPageModule,
+    supplyPointsDetailPageRoutes,
+} from 'src/static/pages/supply-points-detail/page.module';
+import {
     SupplyPointsOfferPageModule,
     supplyPointsOfferPageRoutes,
 } from 'src/static/pages/supply-points-offer/page.module';
+import {
+    SupplyPointsPageModule,
+    supplyPointsPageRoutes,
+} from 'src/static/pages/supply-points/page.module';
 import {
     TablesPageModule,
     tablesPageRoutes,
@@ -118,6 +130,7 @@ const routes: Routes = [
         component: BasicLayoutComponent,
         children: [
             ...alertsPageRoutes,
+            ...badgesPageRoutes,
             ...bannersPageRoutes,
             ...breadcrumbPageRoutes,
             ...buttonsPageRoutes,
@@ -131,16 +144,17 @@ const routes: Routes = [
             ...infoBannerPageRoutes,
             ...modalsPageRoutes,
             ...newSupplyPointPageRoutes,
-            ...offerSelectionPageRoutes,
-            ...supplyPointOfferPageRoutes,
             ...progressBarPageRoutes,
-            ...supplyOfferPageRoutes,
-            ...supplyPointPageRoutes,
-            ...supplyPointsPageRoutes,
-            ...supplyPointsBannerPageRoutes,
             ...recapitulationPageRoutes,
+            ...requestCardPageRoutes,
+            ...supplyOfferPageRoutes,
             ...supplyPointOfferPageRoutes,
+            ...supplyPointOverviewPageRoutes,
+            ...supplyPointPageRoutes,
+            ...supplyPointsBannerPageRoutes,
+            ...supplyPointsDetailPageRoutes,
             ...supplyPointsOfferPageRoutes,
+            ...supplyPointsPageRoutes,
             ...tablesPageRoutes,
             ...tooltipPageRoutes,
             ...typographyPageRoutes,
@@ -155,6 +169,7 @@ const routes: Routes = [
 @NgModule({
     imports: [
         AlertsPageModule,
+        BadgesPageModule,
         BannersPageModule,
         BreadcrumbPageModule,
         ButtonsPageModule,
@@ -168,16 +183,18 @@ const routes: Routes = [
         InfoBannerPageModule,
         ModalsPageModule,
         NewSupplyPointPageModule,
-        OfferSelectionPageModule,
         ProgressBarPageModule,
         RecapitulationPageModule,
+        RequestCardPageModule,
         RouterModule.forChild(routes),
         SupplyOfferPageModule,
         SupplyPointOfferPageModule,
+        SupplyPointOverviewPageModule,
         SupplyPointPageModule,
-        SupplyPointsPageModule,
         SupplyPointsBannerPageModule,
+        SupplyPointsDetailPageModule,
         SupplyPointsOfferPageModule,
+        SupplyPointsPageModule,
         TablesPageModule,
         TooltipPageModule,
         TypographyPageModule,

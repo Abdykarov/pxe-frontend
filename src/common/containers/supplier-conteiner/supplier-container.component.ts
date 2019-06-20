@@ -5,7 +5,7 @@ import {
 
 import { config } from './supplier-container.config';
 import {
-    ISupplier,
+    ISupplierLogo,
     TypeCommodity,
 } from 'src/common/ui/supplier/model/supplier.model';
 
@@ -16,7 +16,7 @@ import {
 })
 export class SupplierContainerComponent {
     @Input()
-    public config: ISupplier[] = config;
+    public config: ISupplierLogo[] = config;
 
     @Input()
     public  typeCommodity?: TypeCommodity = TypeCommodity.BOTH;

@@ -5,7 +5,10 @@ import {
     OnInit,
     SimpleChanges,
 } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import {
+    FormBuilder,
+    Validators,
+} from '@angular/forms';
 
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
@@ -13,6 +16,11 @@ import { takeUntil } from 'rxjs/operators';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { depositPaymentType } from './personal-info-form.config';
 import { IPersonalDataInputForm } from 'src/common/graphql/models/personal-data.model';
+import {
+    ISupplyPoint,
+    SubjectType,
+} from 'src/common/graphql/models/supply.model';
+import { CustomValidators } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-personal-info-form',
@@ -20,6 +28,9 @@ import { IPersonalDataInputForm } from 'src/common/graphql/models/personal-data.
     styleUrls: ['./personal-info-form.component.scss'],
 })
 export class PersonalInfoFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
+
+    @Input()
+    public supplyPoint: ISupplyPoint;
 
     @Input()
     public isIndividual = false;
@@ -55,6 +66,19 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
 
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
+
+        if (this.form) {
+            this.form.controls['deposit']
+                .setValidators(
+                    [
+                        Validators.required,
+                        CustomValidators.isDecimal,
+                        CustomValidators.minValue(
+                            this.supplyPoint.contract ?
+                                (this.supplyPoint.contract.offer.mountlyPaymentPrice - 1) : 0,
+                        ),
+                    ]);
+        }
     }
 
     public setAddress2(val) {

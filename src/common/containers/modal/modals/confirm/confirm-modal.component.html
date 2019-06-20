@@ -1,20 +1,25 @@
 <lnd-modal
+    isConfirm="true"
     [isModalOpen]="modalOpen"
     [showClose]="showClose"
     (close)="closeModal.emit(false)">
-    <div class="modal-body" [innerHTML]="instanceData?.confirmText"></div>
+    <div class="modal-body">
+        <span class="icon icon--info modal-confirm__icon"></span>
+        <h2 class="modal-confirm__title"
+            [innerHTML]="instanceData?.confirmText"></h2>
+    </div>
     <div class="modal-footer">
+        <lnd-button
+                *ngIf="showConfirm"
+                type="primary"
+                [label]="titleConfirm"
+                (action)="closeModal.emit(true)">
+        </lnd-button>
         <lnd-button
                 *ngIf="showClose"
                 type="link"
                 [label]="titleClose"
                 (action)="closeModal.emit(false)">
-        </lnd-button>
-        <lnd-button
-                *ngIf="showConfirm"
-                type="primary"
-                [label]="'Pokračovat'"
-                (action)="closeModal.emit(true)">
         </lnd-button>
     </div>
 </lnd-modal>

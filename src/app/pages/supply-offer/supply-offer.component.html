@@ -16,7 +16,7 @@
     {{row.deliveryFrom | date: 'dd.MM.yyyy'}} - {{row.deliveryTo | date: 'dd.MM.yyyy'}}
 </ng-template>
 <ng-template #actionColumnTemplate let-row="row">
-    <span>{{row.permanentPaymentPrice | number:'1.0-2'}}&nbsp;Kč</span>
+    <span>{{row.permanentPaymentPrice | number:'1.0-2'}}&nbsp;Kč/měsíc</span>
     <div *ngIf="table.openedRow !== row"
          class="action-area-div">
         <ng-template #tooltipEdit let-toggle="toggle">
@@ -113,6 +113,7 @@
     </div>
     <div class="row">
         <pxe-supply-offer-form
+                class="w-100"
                 [commodityType]="row.commodityType"
                 [formValues]="formValues"
                 [formFields]="formFields"
@@ -127,70 +128,66 @@
     </div>
 </ng-template>
 
-<div class="container-fluid">
-    <div class="container-content">
-        <pxe-layout-container pageTitle="Přehled nabídek">
-            <lnd-alert
-                    *ngIf="globalError.length"
-                    type="danger">
-                <ng-container *ngFor="let error of globalError">
-                    {{ error }}<br>
-                </ng-container>
-            </lnd-alert>
-            <ul class="text-center link-list">
-                <li class="link-list__item">
-                    <a class="link-list__link"
-                       routerLinkActive="link-list__link--active"
-                       [routerLinkActiveOptions]="{exact: true}"
-                       [routerLink]="[routePower]">Elektřina</a>
-                </li>
-                <li class="link-list__item">
-                    <a class="link-list__link"
-                       routerLinkActive="link-list__link--active"
-                       [routerLinkActiveOptions]="{exact: true}"
-                       [routerLink]="[routeGas]">Plyn</a>
-                </li>
-            </ul>
-            <ng-container>
-                <lnd-placeloader [loading]="loadingOffers && !globalError.length"></lnd-placeloader>
-                <div *ngIf="!loadingOffers && tableRows.length === 0" class="page-box">
-                    <pxe-supply-offer-form
-                            [commodityType]="commodityType"
-                            [formValues]="null"
-                            [formFields]="formFields"
-                            [formLoading]="formLoading"
-                            [formSent]="formSent"
-                            [globalError]="globalFormError"
-                            [fieldError]="fieldError"
-                            [showCancel]="false"
-                            (submitAction)="submitForm($event)"
-                            (customAction)="cancel($event)"
-                    ></pxe-supply-offer-form>
-                </div>
+<pxe-layout-container pageTitle="Přehled nabídek">
+    <lnd-alert
+            *ngIf="globalError.length"
+            type="danger">
+        <ng-container *ngFor="let error of globalError">
+            {{ error }}<br>
+        </ng-container>
+    </lnd-alert>
+    <ul class="text-center link-list">
+        <li class="link-list__item">
+            <a class="link-list__link"
+                routerLinkActive="link-list__link--active"
+                [routerLinkActiveOptions]="{exact: true}"
+                [routerLink]="[routePower]">Elektřina</a>
+        </li>
+        <li class="link-list__item">
+            <a class="link-list__link"
+                routerLinkActive="link-list__link--active"
+                [routerLinkActiveOptions]="{exact: true}"
+                [routerLink]="[routeGas]">Plyn</a>
+        </li>
+    </ul>
+    <ng-container>
+        <lnd-placeloader [loading]="loadingOffers && !globalError.length"></lnd-placeloader>
+        <div *ngIf="!loadingOffers && tableRows.length === 0" class="page-box">
+            <pxe-supply-offer-form
+                    [commodityType]="commodityType"
+                    [formValues]="null"
+                    [formFields]="formFields"
+                    [formLoading]="formLoading"
+                    [formSent]="formSent"
+                    [globalError]="globalFormError"
+                    [fieldError]="fieldError"
+                    [showCancel]="false"
+                    (submitAction)="submitForm($event)"
+                    (customAction)="cancel($event)"
+            ></pxe-supply-offer-form>
+        </div>
 
-                <div [hidden]="loadingOffers || tableRows.length === 0">
-                    <lnd-table
-                        #table
-                        [cols]="tableCols"
-                        [rows]="tableRows"
-                        [showHead]="true"
-                        [isStatic]="false"
-                        [tableWrapperClass]="['table-wrapper--advanced']"
-                        [tableClass]="['table--advanced', 'mb-0']"
-                        [rowDetailTemplate]="rowDetail"
-                        [actionColTriggersDetail]="true"
-                        [columnTemplates]="{
-                            actionColumnTemplate: actionColumnTemplate,
-                            columnTemplatePriceVT: columnTemplatePriceVT,
-                            columnTemplatePriceNT: columnTemplatePriceNT,
-                            columnTemplatePriceGas: columnTemplatePriceGas,
-                            columnTemplateValidFromTo: columnTemplateValidFromTo,
-                            columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo
-                        }">
-                    </lnd-table>
-                </div>
-            </ng-container>
+        <div [hidden]="loadingOffers || tableRows.length === 0">
+            <lnd-table
+                #table
+                [cols]="tableCols"
+                [rows]="tableRows"
+                [showHead]="true"
+                [isStatic]="false"
+                [tableWrapperClass]="['table-wrapper--advanced']"
+                [tableClass]="['table--advanced', 'mb-0']"
+                [rowDetailTemplate]="rowDetail"
+                [actionColTriggersDetail]="true"
+                [columnTemplates]="{
+                    actionColumnTemplate: actionColumnTemplate,
+                    columnTemplatePriceVT: columnTemplatePriceVT,
+                    columnTemplatePriceNT: columnTemplatePriceNT,
+                    columnTemplatePriceGas: columnTemplatePriceGas,
+                    columnTemplateValidFromTo: columnTemplateValidFromTo,
+                    columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo
+                }">
+            </lnd-table>
+        </div>
+    </ng-container>
 
-        </pxe-layout-container>
-    </div>
-</div>
+</pxe-layout-container>

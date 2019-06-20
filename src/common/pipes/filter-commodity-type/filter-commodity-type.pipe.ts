@@ -6,7 +6,7 @@ import {
 import * as R from 'ramda';
 
 import {
-    ISupplier,
+    ISupplierLogo,
     TypeCommodity,
 } from 'src/common/ui/supplier/model/supplier.model';
 
@@ -15,7 +15,7 @@ import {
     pure: false,
 })
 export class FilterCommodityTypePipe implements PipeTransform {
-    transform(value: ISupplier[], arg: TypeCommodity): ISupplier[] {
+    transform(value: ISupplierLogo[], arg: TypeCommodity): ISupplierLogo[] {
         switch (arg) {
             case TypeCommodity.BOTH:
                 return value;

@@ -167,7 +167,7 @@ textarea.form-control--not-empty {
 	}
 
 	&.is-valid {
-		border-color: $success-lighten;
+		border-color: $input-border-color;
 	}
 
 	&.is-warning {
@@ -926,6 +926,11 @@ textarea.form-control--not-empty {
 .input-subtext {
 	margin-top: ( $spacer / 4 );
 	font-size: $small-font-size;
+
+	.form-group,
+	.custom-control {
+		margin-bottom: 0;
+	}
 
 	&--disabled {
 		color: $input-disabled-color;

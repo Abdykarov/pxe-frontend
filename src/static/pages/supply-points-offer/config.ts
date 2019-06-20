@@ -1,8 +1,7 @@
-import { CommodityType } from 'src/common/graphql/models/supply.model';
+import { CommodityType, } from 'src/common/graphql/models/supply.model';
 import { Injectable } from '@angular/core';
-import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
-import { TypeCommodity } from 'src/common/ui/supplier/model/supplier.model';
+import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 
 @Injectable({
     providedIn: 'root',
@@ -28,32 +27,31 @@ export class SupplyPointsOfferPageConfig {
 }
 
 export const offerConfig1: ISupplyPointOffer = {
+    id: 0,
+    supplier: {
+        id: '',
+        name: 'PRE',
+        vatNumber: '',
+        logoPath: '',
+        sampleDocuments: [],
+    },
+    commodityType: CommodityType.POWER,
+    name: '',
+    validFrom: '2019-03-12T22:59:12.133Z',
+    validTo: new Date(new Date().getTime() + 3600 * 1000 * 24).toISOString(),
     benefits: [
         'Žárovka LED',
         'Žárovka LED žárovka',
         'Žárovka LED',
         'Žárovka LED žárovka',
     ],
-    commodityType: CommodityType.POWER,
     deliveryFrom: '',
+    deliveryTo: '',
     deliveryLength: 1,
-    id: 0,
-    name: '',
     permanentPaymentPrice: 823.00,
     priceGas: 0,
     priceNT: 3.14,
     priceVT: 3.54,
-    supplier: {
-        alt: 'logo - Alpiq CZ',
-        logoUrl: '/assets/images/suppliers/logo_alpiq.svg',
-        logoUrlHover: '/assets/images/suppliers/logo_alpiq-hover.svg',
-        supplierUrl: '',
-        name: 'PRE',
-        title: 'PRE',
-        typeCommodity: TypeCommodity.POWER,
-    },
-    validFrom: '2019-03-12T22:59:12.133Z',
-    validTo: new Date(new Date().getTime() + 3600 * 1000 * 24).toISOString(),
 };
 
 export const offerConfig2: ISupplyPointOffer = {
@@ -65,6 +63,7 @@ export const offerConfig2: ISupplyPointOffer = {
     ],
     commodityType: CommodityType.POWER,
     deliveryFrom: '',
+    deliveryTo: '',
     deliveryLength: 1,
     id: 0,
     name: '',
@@ -73,13 +72,11 @@ export const offerConfig2: ISupplyPointOffer = {
     priceNT: 2.64,
     priceVT: 6.54,
     supplier: {
-        alt: 'logo - Alpiq CZ',
-        logoUrl: '/assets/images/suppliers/logo_alpiq.svg',
-        logoUrlHover: '/assets/images/suppliers/logo_alpiq-hover.svg',
-        supplierUrl: '',
+        id: '',
         name: 'Pražská plynárenská',
-        title: 'Pražská plynárenská',
-        typeCommodity: TypeCommodity.POWER,
+        vatNumber: '',
+        logoPath: '',
+        sampleDocuments: [],
     },
     validFrom: '2019-03-12T22:59:12.133Z',
     validTo: new Date(new Date().getTime() + 3600 * 1000 * 24).toISOString(),
@@ -94,6 +91,7 @@ export const offerConfig3: ISupplyPointOffer = {
     ],
     commodityType: CommodityType.POWER,
     deliveryFrom: '',
+    deliveryTo: '',
     deliveryLength: 1,
     id: 0,
     name: '',
@@ -102,13 +100,11 @@ export const offerConfig3: ISupplyPointOffer = {
     priceNT: 2.64,
     priceVT: 6.54,
     supplier: {
-        alt: 'logo - Alpiq CZ',
-        logoUrl: '/assets/images/suppliers/logo_alpiq.svg',
-        logoUrlHover: '/assets/images/suppliers/logo_alpiq-hover.svg',
-        supplierUrl: '',
+        id: '',
         name: 'ČEZ',
-        title: 'ČEZ',
-        typeCommodity: TypeCommodity.POWER,
+        vatNumber: '',
+        logoPath: '',
+        sampleDocuments: [],
     },
     validFrom: '2019-03-12T22:59:12.133Z',
     validTo: new Date(new Date().getTime() + 3600 * 1000 * 24).toISOString(),
