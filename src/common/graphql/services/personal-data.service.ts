@@ -54,7 +54,7 @@ export class PersonalDataService {
                         query: getSupplyPoint,
                         data: { getSupplyPoint: supplyPoint},
                         variables: {
-                            supplyPointId: parseInt(String(supplyPointOld.id), 10),
+                            supplyPointId: supplyPointOld.id,
                         },
                     });
                 },

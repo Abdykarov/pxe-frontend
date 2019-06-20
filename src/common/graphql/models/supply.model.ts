@@ -66,7 +66,7 @@ export interface ISupplyPointPowerAttributes {
 }
 
 export interface ISupplyPoint {
-    id: number;
+    id: string;
     name: string;
     commodityType: string;
     supplier: ISupplier;
