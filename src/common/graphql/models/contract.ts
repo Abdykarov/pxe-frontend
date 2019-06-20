@@ -1,12 +1,16 @@
-import { ISupplyPoint } from './supply.model';
+import {
+    ISelectedOffer,
+    ISupplyPoint,
+} from './supply.model';
+import { IPersonalData } from './personal-data.model';
 
 export interface IContract {
     contractId: number;
-    offer: number;
-    supplyPoint: ISupplyPoint;
     contractStatus: string;
     deliveryFrom: string;
     deliveryTo: string;
+    offer: ISelectedOffer;
+    personalData: IPersonalData;
 }
 
 enum ContractStatus {
