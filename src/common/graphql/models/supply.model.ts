@@ -81,13 +81,29 @@ export interface ISupplyPoint {
     subject: ICodelistItem;
     lastAnnualConsumptionNT: number;
     lastAnnualConsumptionVT: number;
-    offer: IOffer;
-    contract: IContract;
-    personalData: IPersonalData;
     contractEndType: ICodelistItem;
     timeToContractEnd: number;
     timeToContractEndPeriod: ICodelistItem;
+    contract: IContract;
 }
+
+export interface ISelectedOffer {
+    id: number;
+    supplier?: ISupplier;
+    commodityType?: string;
+    name?: string;
+    validFrom: string;
+    validTo: string;
+    deliveryFrom?: string;
+    deliveryTo?: string;
+    deliveryLength: number;
+    benefits?: string;
+    priceVT?: number;
+    priceNT?: number;
+    priceGas?: number;
+    mountlyPaymentPrice?: number;
+}
+
 
 export interface ISupplyPointFindData {
     id: string;
