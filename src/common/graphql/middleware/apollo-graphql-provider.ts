@@ -23,6 +23,7 @@ import { environment } from 'src/environments/environment';
 
 const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
+    const setApiKeyAlways = ['resetPassword'];
 
     const setTokenHeader = (operation: Operation): void => {
         const token = authService.getToken();
