@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
@@ -28,4 +28,4 @@ import { SupplyPointOfferModule } from 'src/common/ui/supply-point-offer/supply-
         SupplyPointOfferModule,
     ],
 })
-export class ContractModule { }
+export class ContractModule {}

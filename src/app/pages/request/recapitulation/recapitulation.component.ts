@@ -88,7 +88,8 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             )
             .subscribe(
                 () => {
-                    this.router.navigate([ROUTES.ROUTER_REQUEST_CONTRACT], {
+                    this.router.navigate(
+                        [ROUTES.ROUTER_REQUEST_CONTRACT], {
                         queryParams: {
                             supplyPointId: this.supplyPointId,
                         },

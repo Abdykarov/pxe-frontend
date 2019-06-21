@@ -9,11 +9,11 @@ import {
     saveContractMutation,
     updateContractMutation,
 } from 'src/common/graphql/mutation/contract';
+import { getContractTermsQuery } from 'src/common/graphql/queries/contract';
 import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
 import { findSupplyPointOffersQuery } from 'src/common/graphql/queries/offer';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
-import { getContractTermsQuery } from 'src/common/graphql/queries/contract';
 import {
     sendContractConfirmationSmsMutation,
     signContractMutation,

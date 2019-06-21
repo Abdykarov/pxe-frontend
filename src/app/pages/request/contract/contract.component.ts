@@ -7,7 +7,8 @@ import {
 } from '@angular/core';
 
 import {
-    map, switchMap,
+    map,
+    switchMap,
     takeUntil,
 } from 'rxjs/operators';
 
@@ -38,14 +39,14 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public personData: IPersonalData = personData;
     public offer = offer;
 
+    public fieldError: IFieldError = {};
+    public formFields = formFields;
+    public formLoading = false;
     public formSent = false;
     public globalError: string[] = [];
-    public fieldError: IFieldError = {};
-    public formLoading = false;
-    public formFields = formFields;
 
-    public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
     public supplyPoint: ISupplyPoint;
+    public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
     @ViewChild('contractForm')
     public contractForm: ContractFormComponent;
