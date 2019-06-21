@@ -134,7 +134,7 @@ export class LoginComponent extends AbstractComponent {
                         this.cd.markForCheck();
                         return;
                     }
-                    this.router.navigate([this.routerAfterLogin(loginResponse)]);
+                    this.router.navigate([ROUTES.ROUTER_DASHBOARD]);
                 },
                 error => {
                     this.resetErrorsAndLoading();

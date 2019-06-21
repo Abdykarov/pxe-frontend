@@ -33,7 +33,8 @@
                     [class.d-block]="showOffer"
                     [class.d-none]="!showOffer">
                     <pxe-supply-point-offer
-                        [supplyPointOffer]="offer"
+                        *ngIf="supplyPoint"
+                        [supplyPointOffer]="supplyPoint.contract.offer"
                         [isNotInteractive]="true">
                     </pxe-supply-point-offer>
                 </div>
@@ -41,7 +42,8 @@
                     <div class="page-box">
                         <pxe-contract-form
                             #contractForm
-                            [personData]="personData"
+                            *ngIf="supplyPoint"
+                            [personData]="supplyPoint.contract.personalData"
                             [formFields]="formFields"
                             [formLoading]="formLoading"
                             [formSent]="formSent"

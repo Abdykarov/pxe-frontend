@@ -13,16 +13,11 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import {
-    configStepper,
-    offer,
-    personData,
-} from './contract.config';
+import { configStepper } from './contract.config';
 import { ContractFormComponent } from 'src/common/containers/form/forms/contract/contract-form.component';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { formFields } from 'src/common/containers/form/forms/contract/contract-form.config';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import { IPersonalData } from 'src/common/graphql/models/personal-data.model';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -36,8 +31,6 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public configStepper = configStepper;
     public contractTemplate;
     public showOffer = true;
-    public personData: IPersonalData = personData;
-    public offer = offer;
 
     public fieldError: IFieldError = {};
     public formFields = formFields;
@@ -66,7 +59,6 @@ export class ContractComponent extends AbstractComponent implements OnInit {
 
     ngOnInit () {
         super.ngOnInit();
-        console.log(this.supplyPointId);
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
                 takeUntil(this.destroy$),
@@ -129,8 +121,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                 },
                 (error) => {
                     this.formLoading = false;
-                    const { fieldError, globalError } = parseGraphQLErrors(error);
-                    this.fieldError = fieldError;
+                    const { globalError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.cd.markForCheck();
                 },

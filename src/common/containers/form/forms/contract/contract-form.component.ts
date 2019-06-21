@@ -2,9 +2,7 @@ import {
     ChangeDetectorRef,
     Component,
     Input,
-    OnChanges,
     OnInit,
-    SimpleChanges,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
@@ -16,7 +14,7 @@ import { IPersonalData } from 'src/common/graphql/models/personal-data.model';
     templateUrl: './contract-form.component.html',
     styleUrls: ['./contract-form.component.scss'],
 })
-export class ContractFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
+export class ContractFormComponent extends AbstractFormComponent implements OnInit {
 
     @Input()
     public personData: IPersonalData;
@@ -36,10 +34,6 @@ export class ContractFormComponent extends AbstractFormComponent implements OnIn
     ngOnInit() {
         super.ngOnInit();
         this.setDisableField('smsCode');
-    }
-
-    ngOnChanges(changes: SimpleChanges) {
-        super.ngOnChanges(changes);
     }
 
     public submitForm = () => {
