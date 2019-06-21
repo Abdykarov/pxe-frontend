@@ -9,16 +9,21 @@
     <lnd-alert
         type="info"
         customClass="mb-2">
-        Heslo jsme vám zaslali na {{wasSentToPhone ? 'telefonní číslo' : email}}
+        <ng-container *ngIf="wasSentToPhone">
+            Heslo jsme vám zaslali na telefonní číslo
+        </ng-container>
+        <ng-container *ngIf="!wasSentToPhone">
+            Heslo jsme vám zaslali na {{email}}
+        </ng-container>
     </lnd-alert>
     <div class="text-right">
-        <a *ngIf="!wasSentToPhone"
-           (click)="handleForgottenPasswordAction($event)">
-            Poslat e-mail znovu
-        </a>
-        <a *ngIf="wasSentToPhone"
-           (click)="handleForgottenPasswordAction($event)">
-            Poslat sms znovu
+        <a (click)="handleForgottenPasswordAction($event)">
+            <ng-container *ngIf="wasSentToPhone">
+                Poslat sms znovu
+            </ng-container>
+            <ng-container *ngIf="!wasSentToPhone">
+                Poslat e-mail znovu
+            </ng-container>
         </a>
     </div>
 </ng-container>
