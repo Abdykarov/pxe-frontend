@@ -1,8 +1,12 @@
 import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
+import {
     ChangeDetectorRef,
     Component,
+    OnInit,
 } from '@angular/core';
-import { Router } from '@angular/router';
 
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
@@ -26,7 +30,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     templateUrl: './supply-point.component.html',
     styleUrls: ['./supply-point.component.scss'],
 })
-export class SupplyPointComponent extends AbstractComponent {
+export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public formFields = formFields;
     public formSent = false;
     public globalError: string[] = [];
@@ -53,6 +57,7 @@ export class SupplyPointComponent extends AbstractComponent {
 
     constructor(
         private cd: ChangeDetectorRef,
+        private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
     ) {

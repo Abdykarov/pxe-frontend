@@ -26,14 +26,12 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
 
     const setTokenHeader = (operation: Operation): void => {
         const token = authService.getToken();
-        if (token) {
-            operation.setContext({
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'X-API-Key': `${environment.x_api_key}`,
-                },
-            });
-        }
+        operation.setContext({
+            headers: {
+                Authorization: token ? `Bearer ${token}` : '',
+                'X-API-Key': `${environment.x_api_key}`,
+            },
+        });
     };
 
     const http = new BatchHttpLink({
@@ -60,7 +58,7 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
                                         innerSubscription = forward(operation).subscribe(observer);
                                     },
                                     () => {
-                                        observer.error(new Error('jwt refresh failed'));
+                                        // observer.error(new Error('jwt refresh failed'));
                                         router.navigate([CONSTS.PATHS.LOGOUT]);
                                     });
                         } else {

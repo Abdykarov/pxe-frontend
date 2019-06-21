@@ -9,4 +9,10 @@
         <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
     </div>
 </div>
+<lnd-banner-ui
+    *ngIf="showBanner"
+    [data]="bannerObj"
+    buttonLabel=""
+    [showButtonLabel]="false"
+></lnd-banner-ui>
 <ng-content></ng-content>
