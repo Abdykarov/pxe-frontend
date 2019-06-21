@@ -46,10 +46,6 @@ export interface ISupplier {
     sampleDocuments: ISupplierSampleDocument[];
 }
 
-export interface IGetSupplyPointResponse {
-    getSupplyPoint: ISupplyPoint;
-}
-
 export interface ISupplierSampleDocument {
     type: string;
     url: string;

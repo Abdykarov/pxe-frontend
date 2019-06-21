@@ -1,12 +1,12 @@
 import gql from 'graphql-tag';
 
-export const loadConfig = gql`
+export const loadConfigMutation = gql`
     mutation loadConfig($config: any) {
         loadConfig(config: $config) @client
     }
 `;
 
-export const openItem = gql`
+export const openItemMutation = gql`
     mutation openItem($item: any) {
         openItem(item: $item) @client
     }

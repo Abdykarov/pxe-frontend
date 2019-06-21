@@ -4,17 +4,14 @@ import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 
 import {
-    concludeContract,
-    deleteContract,
-    saveContract,
-    updateContract,
+    concludeContractMutation,
+    deleteContractMutation,
+    saveContractMutation,
+    updateContractMutation,
 } from 'src/common/graphql/mutation/contract';
-import { getSupplyPoint } from 'src/common/graphql/queries/supply';
-import { findSupplyPointOffers } from 'src/common/graphql/queries/offer';
-import {
-    IGetSupplyPointResponse,
-    ISupplyPoint,
-} from 'src/common/graphql/models/supply.model';
+import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
+import { findSupplyPointOffersQuery } from 'src/common/graphql/queries/offer';
+import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 
 @Injectable({
@@ -29,25 +26,24 @@ export class ContractService {
     public saveContract(offerId: number, supplyPointId: string) {
         return this.apollo
             .mutate({
-                mutation: saveContract,
+                mutation: saveContractMutation,
                 variables: {
                     offerId,
                     supplyPointId,
                 },
                 update: (cache, { data }) => {
-                    const getSupplyPointResult: IGetSupplyPointResponse = cache.readQuery(
+                    const { getSupplyPoint: supplyPoint } = cache.readQuery(
                         {
-                            query: getSupplyPoint,
+                            query: getSupplyPointQuery,
                             variables: {
                                 supplyPointId: supplyPointId,
                             },
                         });
 
-                    const supplyPoint: ISupplyPoint = getSupplyPointResult.getSupplyPoint;
                     this.loadSupplyPointDetail(offerId, supplyPoint, cache, data);
 
                     cache.writeQuery({
-                        query: getSupplyPoint,
+                        query: getSupplyPointQuery,
                         data: { getSupplyPoint: supplyPoint },
                         variables: {
                             supplyPointId: supplyPointId,
@@ -60,7 +56,7 @@ export class ContractService {
     public updateContract(contractId: number) {
         return this.apollo
             .mutate({
-                mutation: updateContract,
+                mutation: updateContractMutation,
                 variables: {
                     contractId,
                 },
@@ -70,7 +66,7 @@ export class ContractService {
     public deleteContract(contractId: number) {
         return this.apollo
             .mutate({
-                mutation: deleteContract,
+                mutation: deleteContractMutation,
                 variables: {
                     contractId,
                 },
@@ -80,7 +76,7 @@ export class ContractService {
     public concludeContract(contractId: number) {
         return this.apollo
             .mutate({
-                mutation: concludeContract,
+                mutation: concludeContractMutation,
                 variables: {
                     contractId,
                 },
@@ -89,18 +85,15 @@ export class ContractService {
 
     // docasny reseni pred sync s BE
     public loadSupplyPointDetail = (offerId: number, supplyPoint: ISupplyPoint, cache, data) => {
-        const findSupplyPointOffersResponse: {
-            findSupplyPointOffers: ISupplyPointOffer[]
-        } = cache.readQuery(
+        const { findSupplyPointOffers } = cache.readQuery(
             {
-                query: findSupplyPointOffers,
+                query: findSupplyPointOffersQuery,
                 variables: {
                     ean: supplyPoint.ean,
                 },
             });
 
-        const supplyPointOffers: ISupplyPointOffer[] = findSupplyPointOffersResponse.findSupplyPointOffers;
-        const supplyPointOffer: ISupplyPointOffer = R.find(R.propEq('id', offerId))(supplyPointOffers);
+        const supplyPointOffer: ISupplyPointOffer = R.find(R.propEq('id', offerId))(findSupplyPointOffers);
 
         supplyPoint.contract = {
             contractId: data.saveContract,

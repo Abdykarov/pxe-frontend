@@ -4,14 +4,14 @@ import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 
 import {
-    deleteOffer,
-    saveGasOffer,
-    savePowerOffer,
-    updatePowerOffer,
+    deleteOfferMutation,
+    saveGasOfferMutation,
+    savePowerOfferMutation,
+    updatePowerOfferMutation,
 } from 'src/common/graphql/mutation/offer';
 import {
-    findSupplierOffers,
-    findSupplyPointOffers,
+    findSupplierOffersQuery,
+    findSupplyPointOffersQuery,
 } from 'src/common/graphql/queries/offer';
 import {
     IOfferInput,
@@ -32,7 +32,7 @@ export class OfferService {
     public findSupplierOffers() {
         return this.apollo
             .watchQuery<any>({
-                query: findSupplierOffers,
+                query: findSupplierOffersQuery,
                 // errorPolicy: 'ignore',
             })
             .valueChanges;
@@ -41,7 +41,7 @@ export class OfferService {
     public findSupplyPointOffers(ean: string) {
         return this.apollo
             .query({
-                query: findSupplyPointOffers,
+                query: findSupplyPointOffersQuery,
                 variables: {
                     ean,
                 },
@@ -51,13 +51,13 @@ export class OfferService {
     public savePowerOffer(offer: IOfferInput, powerAttributes: IOfferInputPowerAttributes) {
         return this.apollo
             .mutate({
-                mutation: savePowerOffer,
+                mutation: savePowerOfferMutation,
                 variables: {
                     offer,
                     powerAttributes,
                 },
                 refetchQueries: [{
-                    query: findSupplierOffers,
+                    query: findSupplierOffersQuery,
                 }],
             });
     }
@@ -65,13 +65,13 @@ export class OfferService {
     public saveGasOffer(offer: IOfferInput, gasAttributes: IOfferInputGasAttributes) {
         return this.apollo
             .mutate({
-                mutation: saveGasOffer,
+                mutation: saveGasOfferMutation,
                 variables: {
                     offer,
                     gasAttributes,
                 },
                 refetchQueries: [{
-                    query: findSupplierOffers,
+                    query: findSupplierOffersQuery,
                 }],
             });
     }
@@ -79,14 +79,14 @@ export class OfferService {
     public updatePowerOffer(offerId: number, offer: IOfferInput, powerAttributes: IOfferInputPowerAttributes) {
         return this.apollo
             .mutate({
-                mutation: updatePowerOffer,
+                mutation: updatePowerOfferMutation,
                 variables: {
                     offerId,
                     offer,
                     powerAttributes,
                 },
                 refetchQueries: [{
-                    query: findSupplierOffers,
+                    query: findSupplierOffersQuery,
                 }],
             });
     }
@@ -101,7 +101,7 @@ export class OfferService {
                     gasAttributes,
                 },
                 refetchQueries: [{
-                    query: findSupplierOffers,
+                    query: findSupplierOffersQuery,
                 }],
             });
     }
@@ -109,12 +109,12 @@ export class OfferService {
     public deleteOffer(offerId: number) {
         return this.apollo
             .mutate({
-                mutation: deleteOffer,
+                mutation: deleteOfferMutation,
                 variables: {
                     offerId,
                 },
                 update: (cache, {data}) => {
-                    const offers: any = cache.readQuery({ query: findSupplierOffers });
+                    const offers: any = cache.readQuery({ query: findSupplierOffersQuery });
                     const updatedData = R.map(offer => {
                         if (offer.id === data.deleteOffer.toString()) {
                             offer.status = IOfferStatus.DELETED;
@@ -122,7 +122,7 @@ export class OfferService {
                         return offer;
                     })(offers.findSupplierOffers);
                     cache.writeQuery({
-                        query: findSupplierOffers,
+                        query: findSupplierOffersQuery,
                         data: { findSupplierOffers: updatedData},
                     });
                 },

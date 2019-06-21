@@ -48,7 +48,6 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     }
 
     ngOnInit () {
-        console.log(this.supplyPointId);
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
                 takeUntil(this.destroy$),

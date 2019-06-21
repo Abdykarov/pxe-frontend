@@ -1,4 +1,4 @@
-import { getConfig } from '../queries/navigation';
+import { getConfigQuery } from '../queries/navigation';
 
 export const defaults = {
     ui: {
@@ -11,7 +11,7 @@ export const defaults = {
 export const resolvers = {
     Mutation: {
         toggleOverlay: (_, variables, {cache}) => {
-            const prev = cache.readQuery({query: getConfig});
+            const prev = cache.readQuery({query: getConfigQuery});
             const data = {
                 ui: {
                     securedLayout: prev.ui.securedLayout ? {
@@ -42,7 +42,7 @@ export const resolvers = {
             return null;
         },
         openItem: (_, variables, {cache}) => {
-            const prev = cache.readQuery({query: getConfig});
+            const prev = cache.readQuery({query: getConfigQuery});
             const data = {
                 ui: {
                     securedLayout: {

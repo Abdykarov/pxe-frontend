@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 
 import { Apollo } from 'apollo-angular';
 
-import { getConfig } from 'src/common/graphql/queries/navigation';
+import { getConfigQuery } from 'src/common/graphql/queries/navigation';
 import {
-    loadConfig,
+    loadConfigMutation,
     logout,
-    openItem,
+    openItemMutation,
 } from 'src/common/graphql/mutation/navigation';
 
 @Injectable({
@@ -20,7 +20,7 @@ export class NavigationService {
     public getConfig() {
         return this.apollo
             .watchQuery<any>({
-                query: getConfig,
+                query: getConfigQuery,
             })
             .valueChanges;
     }
@@ -28,7 +28,7 @@ export class NavigationService {
     public saveConfig(config) {
         return this.apollo
             .mutate({
-                mutation: loadConfig,
+                mutation: loadConfigMutation,
             variables: {
                 config: config,
             },
@@ -38,7 +38,7 @@ export class NavigationService {
     public toggleNavigationItem(navigationItem) {
         return this.apollo
             .mutate({
-                mutation: navigationItem.url === this.LOGOUT_URL ? logout : openItem,
+                mutation: navigationItem.url === this.LOGOUT_URL ? logout : openItemMutation,
                 variables: {
                     item: navigationItem,
                 },
