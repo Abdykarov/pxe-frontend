@@ -41,7 +41,7 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
         this.overlayService.getOverlay()
             .pipe(
                 takeUntil(this.destroy$),
-                map(R.path(['data', 'ui', 'showOverlayQuery'])),
+                map(R.path(['data', 'ui', 'showOverlay'])),
             )
             .subscribe((current: boolean) => {
                 this.showOverlay = current;

@@ -5,7 +5,10 @@ import {
 import { Router } from '@angular/router';
 
 import * as R from 'ramda';
-import { map, takeUntil } from 'rxjs/operators';
+import {
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {

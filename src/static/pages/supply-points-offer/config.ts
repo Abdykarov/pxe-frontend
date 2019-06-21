@@ -1,5 +1,6 @@
-import { CommodityType, } from 'src/common/graphql/models/supply.model';
 import { Injectable } from '@angular/core';
+
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 

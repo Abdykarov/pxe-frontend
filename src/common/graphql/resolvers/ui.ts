@@ -1,4 +1,4 @@
-import { getConfigQuery } from '../queries/navigation';
+import { getConfigQuery } from 'src/common/graphql/queries/navigation';
 
 export const defaults = {
     ui: {
