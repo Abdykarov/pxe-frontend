@@ -17,7 +17,6 @@ import { configStepper } from './contract.config';
 import { ContractFormComponent } from 'src/common/containers/form/forms/contract/contract-form.component';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { formFields } from 'src/common/containers/form/forms/contract/contract-form.config';
-import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -32,7 +31,6 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public contractTemplate;
     public showOffer = true;
 
-    public fieldError: IFieldError = {};
     public formFields = formFields;
     public formLoading = false;
     public formSent = false;
@@ -97,8 +95,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                 },
                 (error) => {
                     this.formLoading = false;
-                    const { fieldError, globalError } = parseGraphQLErrors(error);
-                    this.fieldError = fieldError;
+                    const { globalError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.cd.markForCheck();
                 },

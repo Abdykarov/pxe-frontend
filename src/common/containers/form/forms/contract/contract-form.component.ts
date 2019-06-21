@@ -1,5 +1,4 @@
 import {
-    ChangeDetectorRef,
     Component,
     Input,
     OnInit,
@@ -17,15 +16,14 @@ import { IPersonalData } from 'src/common/graphql/models/personal-data.model';
 export class ContractFormComponent extends AbstractFormComponent implements OnInit {
 
     @Input()
-    public personData: IPersonalData;
+    public contractTemplate;
 
     @Input()
-    public contractTemplate;
+    public personData: IPersonalData;
 
     public smsSend = false;
 
     constructor(
-        private cd: ChangeDetectorRef,
         protected fb: FormBuilder,
     ) {
         super(fb);
