@@ -59,6 +59,18 @@ export class AuthService {
         return !!this.token;
     }
 
+    public isSupplier(): boolean {
+        return this.currentUserValue.supplier;
+    }
+
+    public needSmsConfirm(): boolean {
+        return this.currentUserValue.needSmsConfirm;
+    }
+
+    public passwordChangeRequired(): boolean {
+        return this.currentUserValue.passwordReset;
+    }
+
     login = ({email, password}: ILoginRequest) => {
         return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { email, password })
             .pipe(
@@ -137,6 +149,7 @@ export class AuthService {
                 jwtPayload = jwtHelper.decodeToken(token);
                 const { role } = jwtPayload;
                 jwtPayload.supplier = role.indexOf(IUserRoles.PARC_SUPPLIER_P4R) !== -1;
+                jwtPayload.needSmsConfirm = role.indexOf(IUserRoles.NEEDS_SMS_CONFIRMATION) !== -1;
             } catch (e) {
                 this.token = null;
                 this.cookiesService.remove(this.cookieName);
