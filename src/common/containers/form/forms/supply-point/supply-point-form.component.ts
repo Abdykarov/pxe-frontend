@@ -127,11 +127,11 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
     public includesBothTariffs = (id: string) => DISTRIBUTION_RATES_TYPE_DEFINITION[DistributionType.BOTH].includes(id);
 
     public changeByContractEndType(changeByContractEndType: string) {
-        const configChoosedItem = this.expirationConfig[changeByContractEndType];
+        const configChosenItem = this.expirationConfig[changeByContractEndType];
 
         R.forEachObjIndexed((show: boolean, field: string) => {
             show ? this.setEnableField(field) : this.setDisableField(field);
-        }, configChoosedItem);
+        }, configChosenItem);
 
         this.cd.markForCheck();
     }
@@ -143,7 +143,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
     }
 
     public setFormByCommodity = (commodityType: CommodityType) => {
-        R.mapObjIndexed((fields, type) => {
+        R.mapObjIndexed((fields: string[], type: CommodityType) => {
             if (commodityTypeFields[type]) {
                 R.map((field) => {
                     if (type === commodityType) {

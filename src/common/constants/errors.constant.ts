@@ -169,7 +169,7 @@ export const errorFieldMessages =  {
         invalidPhoneNumberPrefix: 'Vyplňte správnou předvolbu pro ČR +420.',
     },
     smsCode: {
-        required: 'smsCode213.',
+        required: 'Vyplňte sms kód.',
     },
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',

@@ -1,4 +1,4 @@
-<ng-template #sendAgainSms>
+<ng-template #sendSmsAgain>
     <a (click)="this.customAction.emit()"
        *ngIf="smsSend">
         Poslat SMS kód znovu?
@@ -17,7 +17,7 @@
                     [error]="formError.smsCode || form.controls.smsCode.errors"
                     [formControl]="form.controls.smsCode"
                     [id]="'smsCode'"
-                    [subtextTemplate]="sendAgainSms"
+                    [subtextTemplate]="sendSmsAgain"
                     [success]="form.controls.smsCode.valid && (form.controls.smsCode.touched || formError.smsCode)"
                     [touched]="form.controls.smsCode.touched || formError.smsCode"
                     [validationMessages]="formFields.validationMessages.smsCode">

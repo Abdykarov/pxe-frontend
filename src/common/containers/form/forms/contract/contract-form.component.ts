@@ -8,12 +8,8 @@ import {
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
-import { takeUntil } from 'rxjs/operators';
-
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
-import { ContractService } from 'src/common/graphql/services/contract.service';
 import { IPersonalData } from 'src/common/graphql/models/personal-data.model';
-import { parseGraphQLErrors } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-contract-form',
@@ -32,7 +28,6 @@ export class ContractFormComponent extends AbstractFormComponent implements OnIn
 
     constructor(
         private cd: ChangeDetectorRef,
-        private contractService: ContractService,
         protected fb: FormBuilder,
     ) {
         super(fb);
