@@ -119,11 +119,13 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                     this.formLoading = false;
                     this.formSent = true;
                     this.cd.markForCheck();
-                    this.router.navigate([ROUTES.ROUTER_REQUEST_OFFER_SELECTION], {
-                        queryParams: {
-                            supplyPointId,
-                        },
-                    });
+                    this.router.navigate(
+                        [ROUTES.ROUTER_REQUEST_OFFER_SELECTION],
+                        {
+                            queryParams: {
+                                supplyPointId,
+                            },
+                        });
                 },
                 (error) => {
                     this.formLoading = false;

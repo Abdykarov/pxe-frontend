@@ -37,7 +37,7 @@ export class ContractService {
                     supplyPointId,
                 },
                 update: (cache, { data }) => {
-                    const { getSupplyPoint: supplyPoint } = cache.readQuery(
+                    const { getSupplyPoint } = cache.readQuery(
                         {
                             query: getSupplyPointQuery,
                             variables: {
@@ -45,11 +45,11 @@ export class ContractService {
                             },
                         });
 
-                    this.loadSupplyPointDetail(offerId, supplyPoint, cache, data);
+                    this.loadSupplyPointDetail(offerId, getSupplyPoint, cache, data);
 
                     cache.writeQuery({
                         query: getSupplyPointQuery,
-                        data: { getSupplyPoint: supplyPoint },
+                        data: { getSupplyPoint },
                         variables: {
                             supplyPointId: supplyPointId,
                         },

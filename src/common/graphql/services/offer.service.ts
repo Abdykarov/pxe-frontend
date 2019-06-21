@@ -40,12 +40,13 @@ export class OfferService {
 
     public findSupplyPointOffers(ean: string) {
         return this.apollo
-            .query({
+            .watchQuery<any>({
                 query: findSupplyPointOffersQuery,
                 variables: {
                     ean,
                 },
-            });
+            })
+            .valueChanges;
     }
 
     public savePowerOffer(offer: IOfferInput, powerAttributes: IOfferInputPowerAttributes) {

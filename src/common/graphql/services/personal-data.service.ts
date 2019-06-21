@@ -37,7 +37,7 @@ export class PersonalDataService {
                     personalData,
                 },
                 update: (cache, {data}) => {
-                    const { getSupplyPoint: fetchedSupplyPoint } = cache.readQuery(
+                    const { getSupplyPoint } = cache.readQuery(
                         {
                             query: getSupplyPointQuery,
                             variables: {
@@ -45,11 +45,11 @@ export class PersonalDataService {
                             },
                         });
 
-                    this.loadSupplyPoint(fetchedSupplyPoint, personalData);
+                    this.loadSupplyPoint(getSupplyPoint, personalData);
 
                     cache.writeQuery({
                         query: getSupplyPointQuery,
-                        data: { getSupplyPoint: fetchedSupplyPoint},
+                        data: { getSupplyPoint},
                         variables: {
                             supplyPointId: supplyPoint.id,
                         },
