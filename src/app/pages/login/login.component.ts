@@ -120,6 +120,7 @@ export class LoginComponent extends AbstractComponent {
                         this.state = ILoginState.CHANGE_PASSWORD;
                         this.resetErrorsAndLoading();
                         this.cd.markForCheck();
+                        return;
                     }
 
                     if (this.authService.needSmsConfirm()) {
