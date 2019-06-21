@@ -100,6 +100,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     ngOnInit() {
+        super.ngOnInit();
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.route.params
             .pipe(

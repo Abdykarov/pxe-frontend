@@ -7,21 +7,40 @@
                         <div class="row">
                             <div class="col-12">
                                 <pxe-login-form
-                                    *ngIf="!loginSmsRequired"
-                                    [formFields]="loginFormFields"
+                                    *ngIf="[LOGIN_STATE.LOGIN, LOGIN_STATE.LOGIN_AFTER_RESET].indexOf(state) !== -1"
+                                    [formFields]="formFieldsLogin.loginFormFields"
                                     [formLoading]="formLoading"
                                     [globalError]="globalError"
-                                    (submitAction)="submitFormLogin($event)"
+                                    [email]="email"
+                                    [wasSentToPhone]="wasSentToPhone"
+                                    [passwordWasSent]="passwordWasSent"
                                     (customAction)="forgottenPasswordAction($event)"
+                                    (forgottenPasswordAction)="resetPassword(email)"
+                                    (submitAction)="submitFormLogin($event)"
                                 ></pxe-login-form>
                                 <pxe-login-supply-auth-form
-                                    *ngIf="loginSmsRequired"
-                                    [formFields]="loginSupplyAuthFields"
+                                    *ngIf="state === LOGIN_STATE.CHANGE_SEND_SMS"
+                                    [formFields]="formFieldsLogin.loginSupplyAuthFields"
                                     [formLoading]="formLoading"
                                     [globalError]="globalError"
                                     (submitAction)="submitSupplierLoginSms($event)"
                                     (customAction)="resendSupplierLoginSms($event)"
                                 ></pxe-login-supply-auth-form>
+                                <pxe-reset-password-form
+                                    *ngIf="state === LOGIN_STATE.RESET"
+                                    [formFields]="formFieldsLogin.resetPassowordFields"
+                                    [formLoading]="formLoading"
+                                    [globalError]="globalError"
+                                    (submitAction)="submitResetPassword($event)">
+                                </pxe-reset-password-form>
+                                <pxe-change-password-form
+                                    *ngIf="state === LOGIN_STATE.CHANGE_PASSWORD"
+                                    [formFields]="formFieldsLogin.changePassowordFields"
+                                    [formLoading]="formLoading"
+                                    [globalError]="globalError"
+                                    (submitAction)="submitChangePassword($event)"
+                                    (customAction)="resetPassword(email)">
+                                </pxe-change-password-form>
                             </div>
                         </div>
                     </div>
