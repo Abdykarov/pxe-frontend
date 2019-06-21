@@ -11,10 +11,7 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
-import {
-    CONSTS,
-    ROUTES,
-} from 'src/app/app.constants';
+import { ROUTES } from 'src/app/app.constants';
 import {
     formFieldsLogin,
     LOGIN_STATE,
@@ -68,11 +65,13 @@ export class LoginComponent extends AbstractComponent {
             .subscribe(
                 (loginResponse: ILoginResponse) => {
                         this.authService.setToken(loginResponse);
-                        this.router.navigate([this.routerAfterLogin(loginResponse)], {
-                        state: {
-                            showBanner: true,
-                        },
-                    });
+                        this.router.navigate(
+                            [this.routerAfterLogin(loginResponse)],
+                            {
+                                state: {
+                                    showBanner: true,
+                                },
+                            });
                 },
                 error => {
                     this.resetErrorsAndLoading();
@@ -148,7 +147,6 @@ export class LoginComponent extends AbstractComponent {
                 (loginResponse: ILoginResponse) => {
                     this.authService.setToken(loginResponse);
                     this.router.navigate([this.routerAfterLogin(loginResponse)]);
-                    this.cd.markForCheck();
                 },
                 error => {
                     this.resetErrorsAndLoading();
