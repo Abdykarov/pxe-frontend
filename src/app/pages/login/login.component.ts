@@ -121,15 +121,15 @@ export class LoginComponent extends AbstractComponent {
                         this.state = ILoginState.CHANGE_PASSWORD;
                         this.resetErrorsAndLoading();
                         this.cd.markForCheck();
+                        return;
                     }
-
                     if (this.authService.needSmsConfirm()) {
                         this.state = ILoginState.SEND_SMS;
                         this.resetErrorsAndLoading();
                         this.cd.markForCheck();
-                    } else {
-                        this.router.navigate([this.routerAfterLogin(loginResponse)]);
+                        return;
                     }
+                    this.router.navigate([this.routerAfterLogin(loginResponse)]);
                 },
                 error => {
                     this.resetErrorsAndLoading();
