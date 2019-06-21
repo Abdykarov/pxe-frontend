@@ -70,10 +70,11 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
         this.offerService.findSupplyPointOffers(ean)
             .pipe(
                 takeUntil(this.destroy$),
+                map(({data}) => data.findSupplyPointOffers),
             )
             .subscribe(
-                ({data}: any) => {
-                    this.supplyPointOffers = data.findSupplyPointOffers;
+                (findSupplyPointOffers: ISupplyPointOffer[]) => {
+                    this.supplyPointOffers = findSupplyPointOffers;
                     R.map((supplyPointOffer: ISupplyPointOffer) => {
                         let benefits: string[] = [];
 
@@ -94,7 +95,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
             );
     }
 
-    saveContract = (supplyPointOffer: ISupplyPointOffer) => {
+    public saveContract = (supplyPointOffer: ISupplyPointOffer) => {
         const supplyPointId = this.supplyPoint.id;
 
         this.contractService.saveContract(supplyPointOffer.id, supplyPointId)
@@ -104,10 +105,13 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
             )
             .subscribe(
                 () => {
-                    this.router.navigate([ROUTES.ROUTER_REQUEST_RECAPITULATION], {
-                        queryParams: {
-                            supplyPointId,
-                    }});
+                    this.router.navigate(
+                        [ROUTES.ROUTER_REQUEST_RECAPITULATION],
+                        {
+                            queryParams: {
+                                supplyPointId,
+                            },
+                        });
                 },
                 (error) => {
                     this.supplyPointOffers = null;
