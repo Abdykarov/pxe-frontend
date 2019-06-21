@@ -93,10 +93,10 @@
                             [value]="form.controls.annualConsumption.value"
                     ></lnd-form-field>
 
-                    <ng-container *ngFor="let control of form.controls | keys;">
-                        {{control}}: {{form.controls[control].errors | json}}
-                        <hr>
-                    </ng-container>
+<!--                    <ng-container *ngFor="let control of form.controls | keys;">-->
+<!--                        {{control}}: {{form.controls[control].errors | json}}-->
+<!--                        <hr>-->
+<!--                    </ng-container>-->
 
                 </form>
                 <div class="row">
@@ -147,11 +147,19 @@
                         <span class="perex">{{supplyPoint.circuitBreaker.help || supplyPoint.circuitBreaker.description}}</span>
                     </div>
                     <div *ngIf="supplyPoint.expirationDate"
+                         [class.mb-5]="supplyPoint.expirationDate"
                          class="col-12">
                         <div class="mb-1">
                             <small>Dodávka do</small>
                         </div>
                         <span class="perex">{{supplyPoint.expirationDate | date: 'dd. MM. y'}}</span>
+                    </div>
+                    <div *ngIf="supplyPoint.timeToContractEnd"
+                         class="col-12">
+                        <div class="mb-1">
+                            <small>Výpovědní lhůta</small>
+                        </div>
+                        <span class="perex">{{supplyPoint.timeToContractEnd}}</span>
                     </div>
                 </div>
                 <hr>

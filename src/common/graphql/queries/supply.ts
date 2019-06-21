@@ -186,7 +186,6 @@ export const getSupplyPoint = gql`
                     deliveryTo,
                     deliveryLength,
                     benefits,
-                    permanentPaymentPrice,
                     priceVT,
                     priceNT,
                     priceGas,
