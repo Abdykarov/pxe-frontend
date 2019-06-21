@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 
 import {
-    ISupplier,
+    ISupplierLogo,
     TypeCommodity,
 } from './model/supplier.model';
 
@@ -15,7 +15,7 @@ import {
 })
 export class SupplierComponent {
     @Input()
-    public configSupplier: ISupplier[];
+    public configSupplier: ISupplierLogo[];
 
     @Input()
     public typeCommodity?: TypeCommodity = TypeCommodity.BOTH;

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const findAllSuppliers = gql`
+export const findAllSuppliersQuery = gql`
     query findAllSuppliers($commodityType:CommodityType){
         findAllSuppliers(commodityType:$commodityType){
             id,
@@ -15,7 +15,7 @@ export const findAllSuppliers = gql`
     }
 `;
 
-export const getCodelistByType = gql`
+export const getCodelistByTypeQuery = gql`
     query getCodelistByType($type: String!, $locale: String!){
         getCodelistByType(type: $type,locale: $locale){
             type,
@@ -26,7 +26,7 @@ export const getCodelistByType = gql`
     }
 `;
 
-export const findCodelistsByTypes = gql`
+export const findCodelistsByTypesQuery = gql`
     query findCodelistsByTypes($types: [String]!, $locale: String!){
         findCodelistsByTypes(types: $types,locale: $locale){
             codelistType,
@@ -40,7 +40,7 @@ export const findCodelistsByTypes = gql`
     }
 `;
 
-export const findSupplierDocumentsByComodity = gql`
+export const findSupplierDocumentsByComodityQuery = gql`
     query findSupplierDocumentsByComodity($supplierId: Int, $commodityType:CommodityType){
         findSupplierDocumentsByComodity(supplierId: $supplierId,commodityType:$commodityType){
             type,
@@ -49,7 +49,7 @@ export const findSupplierDocumentsByComodity = gql`
     }
 `;
 
-export const findSupplyPoints = gql`
+export const findSupplyPointsQuery = gql`
     query findSupplyPoints($ean: String){
         findSupplyPoints(ean: $ean){
             id,
@@ -100,7 +100,7 @@ export const findSupplyPoints = gql`
     }
 `;
 
-export const getSupplyPoint = gql`
+export const getSupplyPointQuery = gql`
     query getSupplyPoint($supplyPointId: ID!){
         getSupplyPoint(supplyPointId: $supplyPointId){
             id,
@@ -186,7 +186,6 @@ export const getSupplyPoint = gql`
                     deliveryTo,
                     deliveryLength,
                     benefits,
-                    permanentPaymentPrice,
                     priceVT,
                     priceNT,
                     priceGas,

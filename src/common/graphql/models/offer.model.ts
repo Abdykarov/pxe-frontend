@@ -1,5 +1,5 @@
 import { ICodelistItem } from './supply.model';
-import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
+import { ISupplier } from 'src/common/graphql/models/supply.model';
 
 export interface ISupplyPointOffer {
     id: number;
@@ -9,6 +9,7 @@ export interface ISupplyPointOffer {
     validFrom: string;
     validTo: string;
     deliveryFrom: string;
+    deliveryTo: string;
     deliveryLength: number;
     permanentPaymentPrice: number;
     benefits: string[] | string;

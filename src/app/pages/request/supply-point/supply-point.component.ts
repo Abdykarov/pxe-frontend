@@ -9,7 +9,10 @@ import {
 } from '@angular/core';
 
 import * as R from 'ramda';
-import { takeUntil } from 'rxjs/operators';
+import {
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -109,15 +112,20 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         saveSupplyPoint
             .pipe(
                 takeUntil(this.destroy$),
+                map(({data}) => data.savePowerSupplyPoint || data.saveGasSupplyPoint),
             )
             .subscribe(
-                (data) => {
+                (supplyPointId) => {
                     this.formLoading = false;
                     this.formSent = true;
                     this.cd.markForCheck();
-                    this.router.navigate([ROUTES.ROUTER_REQUEST_OFFER_SELECTION, {
-                        ean,
-                    }]);
+                    this.router.navigate(
+                        [ROUTES.ROUTER_REQUEST_OFFER_SELECTION],
+                        {
+                            queryParams: {
+                                supplyPointId,
+                            },
+                        });
                 },
                 (error) => {
                     this.formLoading = false;

@@ -309,15 +309,22 @@ export class CustomValidators {
         };
     }
 
-    static minValue = (min: number): ValidatorFn => {
+    static minValue = (min: number, allowEqual = false): ValidatorFn => {
         return (control: AbstractControl): ValidationErrors => {
             if (control.pristine) {
                 return null;
             }
 
-            if (R_.isNilOrEmpty(control.value) || parseFloat(control.value.toString().replace(',', '.')) > min) {
+            if (!allowEqual &&
+                (R_.isNilOrEmpty(control.value) || parseFloat(control.value.toString().replace(',', '.')) > min)) {
                 return null;
             }
+
+            if (allowEqual &&
+                (R_.isNilOrEmpty(control.value) || parseFloat(control.value.toString().replace(',', '.')) >= min)) {
+                return null;
+            }
+
 
             return {
                 min: true,

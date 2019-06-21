@@ -1,6 +1,4 @@
 import { IContract } from './contract';
-import { IOffer } from './offer.model';
-import { IPersonalData } from './personal-data.model';
 
 export enum CommodityType {
     POWER = 'POWER',
@@ -24,6 +22,7 @@ export interface IAddress {
     city: string;
     postCode: string;
     region: string;
+    __typename?: string;
 }
 
 export interface ICodelistMap {
@@ -36,9 +35,10 @@ export interface ICodelistItem {
     code: string;
     description: string;
     help: string;
+    __typename?: string;
 }
 
-interface ISupplier {
+export interface ISupplier {
     id: string;
     name: string;
     vatNumber: string;
@@ -66,7 +66,7 @@ export interface ISupplyPointPowerAttributes {
 }
 
 export interface ISupplyPoint {
-    id: number;
+    id: string;
     name: string;
     commodityType: string;
     supplier: ISupplier;
@@ -97,11 +97,12 @@ export interface ISelectedOffer {
     deliveryFrom?: string;
     deliveryTo?: string;
     deliveryLength: number;
-    benefits?: string;
+    benefits?: string | string[];
     priceVT?: number;
     priceNT?: number;
     priceGas?: number;
     mountlyPaymentPrice?: number;
+    __typename?: string;
 }
 
 
