@@ -23,7 +23,6 @@ import { environment } from 'src/environments/environment';
 
 const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
-    const setApiKeyAlways = ['resetPassword'];
 
     const setTokenHeader = (operation: Operation): void => {
         const token = authService.getToken();
@@ -59,7 +58,7 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
                                         innerSubscription = forward(operation).subscribe(observer);
                                     },
                                     () => {
-                                        observer.error(new Error('jwt refresh failed'));
+                                        // observer.error(new Error('jwt refresh failed'));
                                         router.navigate([CONSTS.PATHS.LOGOUT]);
                                     });
                         } else {

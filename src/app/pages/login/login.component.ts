@@ -27,7 +27,10 @@ import {
     LANDING_PAGE,
     PASSWORD_DESTINATION,
 } from 'src/common/graphql/models/password';
-import { parseGraphQLErrors, parseRestAPIErrors } from 'src/common/utils/';
+import {
+    parseGraphQLErrors,
+    parseRestAPIErrors,
+} from 'src/common/utils/';
 import { PasswordService } from 'src/common/graphql/services/password.service';
 
 @Component({
@@ -64,14 +67,14 @@ export class LoginComponent extends AbstractComponent {
             )
             .subscribe(
                 (loginResponse: ILoginResponse) => {
-                        this.authService.setToken(loginResponse);
-                        this.router.navigate(
-                            [this.routerAfterLogin(loginResponse)],
-                            {
-                                state: {
-                                    showBanner: true,
-                                },
-                            });
+                    this.authService.setToken(loginResponse);
+                    this.router.navigate(
+                        [this.routerAfterLogin(loginResponse)],
+                        {
+                            state: {
+                                showBanner: true,
+                            },
+                        });
                 },
                 error => {
                     this.resetErrorsAndLoading();
@@ -83,8 +86,12 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public submitResetPassword = ({email}) => {
-        this.formLoading = true;
+        this.email = email;
+        this.resetPassword(email);
+    }
 
+    public resetPassword = (email: string) => {
+        this.formLoading = true;
         this.passwordService.resetPassword(email)
             .pipe(
                 takeUntil(this.destroy$),
@@ -92,13 +99,13 @@ export class LoginComponent extends AbstractComponent {
             )
             .subscribe(
                 (passwordDestination: PASSWORD_DESTINATION) => {
-                    this.email = email;
                     this.wasSentToPhone = passwordDestination === PASSWORD_DESTINATION.PHONE;
                     this.passwordWasSent = true;
                     this.state = ILoginState.LOGIN_AFTER_RESET;
                     this.resetErrorsAndLoading();
                     this.cd.markForCheck();
-                }, error => {
+                },
+                error => {
                     this.resetErrorsAndLoading();
                     const { globalError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
@@ -109,8 +116,7 @@ export class LoginComponent extends AbstractComponent {
     public submitFormLogin = (userLogin: IUserLogin) => {
         this.password = userLogin.password;
         this.formLoading = true;
-        this.authService
-            .login(userLogin)
+        this.authService.login(userLogin)
             .pipe(
                 takeUntil(this.destroy$),
             )
@@ -138,8 +144,7 @@ export class LoginComponent extends AbstractComponent {
 
     public submitSupplierLoginSms = (confirmationCode: IConfirmationCode) => {
         this.formLoading = true;
-        this.authService
-            .confirmSupplierLoginSms(confirmationCode)
+        this.authService.confirmSupplierLoginSms(confirmationCode)
             .pipe(
                 takeUntil(this.destroy$),
             )
@@ -154,42 +159,19 @@ export class LoginComponent extends AbstractComponent {
                 });
     }
 
-
-    public submitResetPasswordAgain = () => {
-        this.formLoading = true;
-
-        this.passwordService.resetPassword(this.email)
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe(
-                res => {
-                    this.resetErrorsAndLoading();
-                    this.cd.markForCheck();
-                },
-                error => {
-                    this.resetErrorsAndLoading();
-                    const { globalError } = parseGraphQLErrors(error);
-                    this.globalError = globalError;
-                    this.cd.markForCheck();
-                },
-            );
-    }
-
     public forgottenPasswordAction = ($event) => {
         $event.preventDefault();
         this.resetErrorsAndLoading();
         if (this.authService.isLogged()) {
-            this.authService
-                .logout()
+            this.authService.logout()
                 .pipe(
                     takeUntil(this.destroy$),
                 ).subscribe(
-                    res => {
+                () => {
                         this.state = ILoginState.RESET;
                         this.cd.markForCheck();
                     },
-                    err => {
+                () => {
                         this.state = ILoginState.RESET;
                         this.cd.markForCheck();
                     },
@@ -201,8 +183,7 @@ export class LoginComponent extends AbstractComponent {
 
     public sendSupplierLoginSms() {
         this.formLoading = true;
-        this.authService
-            .sendSupplierLoginSms()
+        this.authService.sendSupplierLoginSms()
             .pipe(
                 takeUntil(this.destroy$),
             )

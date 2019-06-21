@@ -15,7 +15,7 @@
                                     [wasSentToPhone]="wasSentToPhone"
                                     [passwordWasSent]="passwordWasSent"
                                     (customAction)="forgottenPasswordAction($event)"
-                                    (forgottenPasswordAction)="submitResent($event)"
+                                    (forgottenPasswordAction)="resetPassword(email)"
                                     (submitAction)="submitFormLogin($event)"
                                 ></pxe-login-form>
                                 <pxe-login-supply-auth-form
@@ -39,7 +39,7 @@
                                     [formLoading]="formLoading"
                                     [globalError]="globalError"
                                     (submitAction)="submitChangePassword($event)"
-                                    (customAction)="submitResetPasswordAgain()">
+                                    (customAction)="resetPassword(email)">
                                 </pxe-change-password-form>
                             </div>
                         </div>
