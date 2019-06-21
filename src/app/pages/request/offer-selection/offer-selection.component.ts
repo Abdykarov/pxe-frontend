@@ -34,7 +34,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     public stepperProgressConfig: IStepperProgressItem[] = configStepper;
     public supplyPointOffers: ISupplyPointOffer[];
     public supplyPoint: ISupplyPoint;
-    public supplyPointId = this.route.snapshot.queryParams['supplyPointId'];
+    public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
     constructor(
         private cd: ChangeDetectorRef,

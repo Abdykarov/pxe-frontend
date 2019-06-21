@@ -3,6 +3,7 @@ import {
     ChangeDetectorRef,
     Component,
     OnInit,
+    ViewChild,
 } from '@angular/core';
 
 import {
@@ -16,6 +17,7 @@ import {
     offer,
     personData,
 } from './contract.config';
+import { ContractFormComponent } from 'src/common/containers/form/forms/contract/contract-form.component';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { formFields } from 'src/common/containers/form/forms/contract/contract-form.config';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
@@ -42,8 +44,11 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public formLoading = false;
     public formFields = formFields;
 
-    public supplyPointId = this.route.snapshot.paramMap.get('supplyPointId');
+    public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
     public supplyPoint: ISupplyPoint;
+
+    @ViewChild('contractForm')
+    public contractForm: ContractFormComponent;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -66,16 +71,65 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                 takeUntil(this.destroy$),
                 map(({data}) => data.getSupplyPoint),
                 switchMap( (supplyPoint: ISupplyPoint) => {
-                   return this.contractService.getContractTerms(supplyPoint.id);
+                    this.supplyPoint = supplyPoint;
+                    return this.contractService.getContractTerms(supplyPoint.contract.contractId);
                 }),
+                map(({data}) => data.getContractTerms.content),
             ).subscribe(
-                (content: any) => {
-                    console.log(content);
+                (content: string) => {
                     this.contractTemplate = content;
                     this.cd.markForCheck();
                 },
                 (error) => {
                     const { globalError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
+                },
+            );
+    }
+
+    public signContract() {
+        this.contractService.signContract(
+                this.supplyPoint.contract.contractId,
+                this.contractForm.getFieldValue('smsCode'),
+            )
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                () => {
+                    this.formLoading = false;
+                    this.formSent = true;
+                    this.cd.markForCheck();
+                },
+                (error) => {
+                    this.formLoading = false;
+                    const { fieldError, globalError } = parseGraphQLErrors(error);
+                    this.fieldError = fieldError;
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
+                },
+            );
+    }
+
+    public sendContractConfirmationSms() {
+        this.contractService.sendContractConfirmationSms(this.supplyPoint.contract.contractId)
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                () => {
+                    this.formLoading = false;
+                    this.formSent = true;
+                    this.contractForm.resetFormError();
+                    this.contractForm.setEnableField('smsCode');
+                    this.contractForm.smsSend = true;
+                    this.cd.markForCheck();
+                },
+                (error) => {
+                    this.formLoading = false;
+                    const { fieldError, globalError } = parseGraphQLErrors(error);
+                    this.fieldError = fieldError;
                     this.globalError = globalError;
                     this.cd.markForCheck();
                 },

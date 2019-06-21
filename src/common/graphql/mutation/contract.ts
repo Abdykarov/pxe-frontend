@@ -32,7 +32,7 @@ export const signContractMutation = gql`
 
 
     export const sendContractConfirmationSmsMutation = gql`
-    mutation sendContractConfirmationSms($contractId: Int!){
+    mutation sendContractConfirmationSms($contractId: ID!){
         sendContractConfirmationSms(contractId: $contractId)
     }
 `;

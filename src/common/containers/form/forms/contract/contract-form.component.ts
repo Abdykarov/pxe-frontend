@@ -52,57 +52,10 @@ export class ContractFormComponent extends AbstractFormComponent implements OnIn
         this.triggerValidation();
         if (this.form.valid || !this.smsSend) {
             if (this.smsSend) {
-                this.signContract();
+                this.submitAction.emit();
             } else {
-                this.sendContractConfirmationSms();
+                this.customAction.emit();
             }
         }
-    }
-
-    public signContract() {
-        this.contractService.signContract(1, this.getFieldValue('smsCode'))
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe((data) => {
-                    this.formLoading = false;
-                    this.formSent = true;
-                    this.cd.markForCheck();
-                },
-                (error) => {
-                    this.formLoading = false;
-                    const { fieldError, globalError } = parseGraphQLErrors(error);
-                    this.fieldError = fieldError;
-                    this.globalError = globalError;
-                    this.cd.markForCheck();
-                });
-    }
-
-    public sendContractConfirmationSms() {
-        this.contractService.sendContractConfirmationSms(1)
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe(
-                (data) => {
-                    this.formLoading = false;
-                    this.formSent = true;
-                    this.resetFormError();
-                    this.setEnableField('smsCode');
-                    this.smsSend = true;
-                    this.cd.markForCheck();
-                },
-                (error) => {
-                    this.formLoading = false;
-                    const { fieldError, globalError } = parseGraphQLErrors(error);
-                    this.fieldError = fieldError;
-                    this.globalError = globalError;
-                    this.cd.markForCheck();
-                },
-            );
-    }
-
-    public sendSms(evt) {
-        this.sendContractConfirmationSms();
     }
 }

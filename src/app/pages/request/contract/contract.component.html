@@ -40,6 +40,7 @@
                 <div class="col-12 col-xl-10 offset-xl-1">
                     <div class="page-box">
                         <pxe-contract-form
+                            #contractForm
                             [personData]="personData"
                             [formFields]="formFields"
                             [formLoading]="formLoading"
@@ -47,6 +48,8 @@
                             [globalError]="globalError"
                             [fieldError]="fieldError"
                             [contractTemplate]="contractTemplate"
+                            (submitAction)="signContract()"
+                            (customAction)="sendContractConfirmationSms()"
                         ></pxe-contract-form>
                     </div>
                 </div>

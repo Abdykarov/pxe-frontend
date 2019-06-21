@@ -69,7 +69,7 @@ export class ContractService {
             .valueChanges;
     }
 
-    public signContract(contractId: number, smsCode: string) {
+    public signContract(contractId: string, smsCode: string) {
         return this.apollo
             .mutate({
                 mutation: signContractMutation,
@@ -80,10 +80,13 @@ export class ContractService {
             });
     }
 
-    public sendContractConfirmationSms(contractId: number) {
+    public sendContractConfirmationSms(contractId: string) {
         return this.apollo
             .mutate({
                 mutation: sendContractConfirmationSmsMutation,
+                variables: {
+                    contractId,
+                },
             });
     }
 
