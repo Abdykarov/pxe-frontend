@@ -1,25 +1,30 @@
-<pxe-layout-container pageTitle="Rekapitulace">
-    <div class="row mb-6">
-        <div class="col-12 col-xl-10 offset-xl-1">
-            <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-xl-10 offset-xl-1 text-center">
-            <h2>Něco o vás</h2>
-        </div>
-        <div class="col-12 col-xl-10 offset-xl-1">
-            <div class="page-box">
-                <pxe-personal-info-form
-                    [isIndividual]="isIndividual"
-                    [fieldError]="fieldError"
-                    [formFields]="formFields"
-                    [formLoading]="formLoading"
-                    [formSent]="formSent"
-                    [globalError]="globalError"
-                    (submitAction)="submitPersonalInfoForm($event)">
-                </pxe-personal-info-form>
+<div class="container-fluid">
+    <div class="container-content">
+        <pxe-layout-container pageTitle="Rekapitulace">
+            <div class="row mb-6">
+                <div class="col-12 col-xl-10 offset-xl-1">
+                    <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
+                </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-12 col-xl-10 offset-xl-1 text-center">
+                    <h2>Něco o vás</h2>
+                </div>
+                <div class="col-12 col-xl-10 offset-xl-1">
+                    <div class="page-box">
+                        <pxe-personal-info-form
+                            [supplyPoint]="supplyPoint"
+                            [isIndividual]="isIndividual"
+                            [fieldError]="fieldError"
+                            [formFields]="formFields"
+                            [formLoading]="formLoading"
+                            [formSent]="formSent"
+                            [globalError]="globalError"
+                            (submitAction)="submitPersonalInfoForm($event)">
+                        </pxe-personal-info-form>
+                    </div>
+                </div>
+            </div>
+        </pxe-layout-container>
     </div>
-</pxe-layout-container>
+</div>

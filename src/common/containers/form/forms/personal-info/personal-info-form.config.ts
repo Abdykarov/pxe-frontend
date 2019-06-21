@@ -168,23 +168,23 @@ export const formFields: IForm = {
 
 export const depositPaymentType: IOption[] = [
     {
-        key: 1,
-        value: 1,
+        key: 'Inkaso',
+        value: 'Inkaso',
         label: 'Inkaso',
     },
     {
-        key: 2,
-        value: 2,
+        key: 'SIPO',
+        value: 'SIPO',
         label: 'SIPO',
     },
     {
-        key: 3,
-        value: 3,
+        key: 'Prikaz',
+        value: 'Prikaz',
         label: 'Příkaz k úhradě',
     },
     {
-        key: 4,
-        value: 4,
+        key: 'Slozenka',
+        value: 'Slozenka',
         label: 'Složenkou',
     },
 ];

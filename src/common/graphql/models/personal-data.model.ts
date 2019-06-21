@@ -46,4 +46,5 @@ export interface IPersonalData {
     bankCode: string;
     depositPaymentType: ICodelistItem;
     deposit: number;
+    __typename?: string;
 }

@@ -60,7 +60,7 @@ export class LandingComponent extends AbstractComponent {
         this.fieldError = {};
         this.apollo
             .mutate({
-                mutation: mutations.makeRegistration,
+                mutation: mutations.makeRegistrationMutation,
                 variables: values,
             })
             .subscribe(

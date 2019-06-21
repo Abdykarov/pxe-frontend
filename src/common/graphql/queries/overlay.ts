@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const showOverlay = gql`
+export const showOverlayQuery = gql`
     query {
         ui @client{
             showOverlay

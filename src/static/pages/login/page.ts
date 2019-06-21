@@ -6,7 +6,7 @@ import {
 
 import { configSupplier } from 'src/static/config/suppliers.config';
 import { SupplierComponent } from 'src/common/ui/supplier/supplier.component';
-import { ISupplier } from 'src/common/ui/supplier/model/supplier.model';
+import { ISupplierLogo } from 'src/common/ui/supplier/model/supplier.model';
 
 @Component({
     templateUrl: './page.html',
@@ -15,7 +15,7 @@ export class LoginPageComponent {
     @Input()
     public supplierTemplate: TemplateRef<SupplierComponent>;
 
-    public configSupplier: ISupplier[] = configSupplier;
+    public configSupplier: ISupplierLogo[] = configSupplier;
 
     submitForm(evt) {
         evt.preventDefault();
