@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 
 import { Apollo } from 'apollo-angular';
 
-import { getPersonalData } from 'src/common/graphql/queries/personal-data';
-import { getSupplyPoint } from 'src/common/graphql/queries/supply';
+import { getPersonalDataQuery } from 'src/common/graphql/queries/personal-data';
+import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { IPersonalDataInput } from 'src/common/graphql/models/personal-data.model';
-import { savePersonalData } from 'src/common/graphql/mutation/personal-data';
+import { savePersonalDataMutation } from 'src/common/graphql/mutation/personal-data';
 
 @Injectable({
     providedIn: 'root',
@@ -20,7 +20,7 @@ export class PersonalDataService {
     public getPersonalData(contractId: string) {
         return this.apollo
             .watchQuery<any>({
-                query: getPersonalData,
+                query: getPersonalDataQuery,
                 variables: {
                     contractId,
                 },
@@ -28,33 +28,30 @@ export class PersonalDataService {
             .valueChanges;
     }
 
-    public savePersonalData(supplyPointOld: ISupplyPoint, personalData: IPersonalDataInput) {
+    public savePersonalData(supplyPoint: ISupplyPoint, personalData: IPersonalDataInput) {
         return this.apollo
             .mutate({
-                mutation: savePersonalData,
+                mutation: savePersonalDataMutation,
                 variables: {
-                    contractId: supplyPointOld.contract.contractId,
+                    contractId: supplyPoint.contract.contractId,
                     personalData,
                 },
                 update: (cache, {data}) => {
-                    const getSupplyPointResult: {
-                        getSupplyPoint: ISupplyPoint
-                    } = cache.readQuery(
+                    const { getSupplyPoint: fetchedSupplyPoint } = cache.readQuery(
                         {
-                            query: getSupplyPoint,
+                            query: getSupplyPointQuery,
                             variables: {
-                                supplyPointId: supplyPointOld.id,
+                                supplyPointId: supplyPoint.id,
                             },
                         });
 
-                    const supplyPoint: ISupplyPoint = getSupplyPointResult.getSupplyPoint;
-                    this.loadSupplyPoint(supplyPoint, personalData);
+                    this.loadSupplyPoint(fetchedSupplyPoint, personalData);
 
                     cache.writeQuery({
-                        query: getSupplyPoint,
-                        data: { getSupplyPoint: supplyPoint},
+                        query: getSupplyPointQuery,
+                        data: { getSupplyPoint: fetchedSupplyPoint},
                         variables: {
-                            supplyPointId: supplyPointOld.id,
+                            supplyPointId: supplyPoint.id,
                         },
                     });
                 },

@@ -1,37 +1,37 @@
 import gql from 'graphql-tag';
 
-export const saveContract = gql`
+export const saveContractMutation = gql`
     mutation saveContract($offerId: ID!, $supplyPointId: ID!){
         saveContract(offerId: $offerId, supplyPointId: $supplyPointId)
     }
 `;
 
-export const updateContract = gql`
+export const updateContractMutation = gql`
     mutation updateContract($contractId: ID!){
         updateContract(contractId: $contractId)
     }
 `;
 
-export const deleteContract = gql`
+export const deleteContractMutation = gql`
     mutation deleteContract($contractId: ID!){
         deleteContract(contractId: $contractId)
     }
 `;
 
-export const concludeContract = gql`
+export const concludeContractMutation = gql`
     mutation concludeContract($contractId: ID!){
         concludeContract(contractId: $contractId)
     }
 `;
 
-export const signContract = gql`
+export const signContractMutation = gql`
     mutation signContract($contractId: Int!, $smsCode: String){
         signContract(contractId: $contractId, smsCode: $smsCode)
     }
 `;
 
 
-    export const sendContractConfirmationSms = gql`
+    export const sendContractConfirmationSmsMutation = gql`
     mutation sendContractConfirmationSms($contractId: Int!){
         sendContractConfirmationSms(contractId: $contractId)
     }

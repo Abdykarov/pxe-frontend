@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const toggleOverlay = gql`
+export const toggleOverlayMutation = gql`
     mutation toggleOverlay($value: Boolean) {
         toggleOverlay(value: $value) @client
     }

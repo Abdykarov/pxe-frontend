@@ -1,30 +1,30 @@
 import gql from 'graphql-tag';
 
-export const savePowerOffer = gql`
+export const savePowerOfferMutation = gql`
     mutation savePowerOffer($offer: OfferInput!, $powerAttributes: OfferInputPowerAttributes!){
         savePowerOffer(offer: $offer, powerAttributes: $powerAttributes)
     }
 `;
 
-export const saveGasOffer = gql`
+export const saveGasOfferMutation = gql`
     mutation saveGasOffer($offer: OfferInput!, $gasAttributes: OfferInputGasAttributes!){
         saveGasOffer(offer: $offer, gasAttributes: $gasAttributes)
     }
 `;
 
-export const updatePowerOffer = gql`
+export const updatePowerOfferMutation = gql`
     mutation updatePowerOffer($offerId: ID!, $offer: OfferInput!,$powerAttributes: OfferInputPowerAttributes!){
         updatePowerOffer(offerId: $offerId, offer: $offer, powerAttributes: $powerAttributes)
     }
 `;
 
-export const updateGasOffer = gql`
+export const updateGasOfferMutation = gql`
     mutation updateGasOffer($offerId: ID!, $offer: OfferInput!,$gasAttributes: OfferInputGasAttributes!){
         updateGasOffer(offerId: $offerId, offer: $offer, gasAttributes: $gasAttributes)
     }
 `;
 
-export const deleteOffer = gql`
+export const deleteOfferMutation = gql`
     mutation deleteOffer($offerId: ID!){
         deleteOffer(offerId: $offerId)
     }

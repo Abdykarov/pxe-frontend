@@ -10,16 +10,12 @@ import {
     Validators,
 } from '@angular/forms';
 
-import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { depositPaymentType } from './personal-info-form.config';
 import { IPersonalDataInputForm } from 'src/common/graphql/models/personal-data.model';
-import {
-    ISupplyPoint,
-    SubjectType,
-} from 'src/common/graphql/models/supply.model';
+import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { CustomValidators } from 'src/common/utils';
 
 @Component({
@@ -75,7 +71,8 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
                         CustomValidators.isDecimal,
                         CustomValidators.minValue(
                             this.supplyPoint.contract ?
-                                (this.supplyPoint.contract.offer.mountlyPaymentPrice - 1) : 0,
+                                (this.supplyPoint.contract.offer.mountlyPaymentPrice) : 0,
+                            true,
                         ),
                     ]);
         }

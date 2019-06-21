@@ -34,7 +34,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     public stepperProgressConfig: IStepperProgressItem[] = configStepper;
     public supplyPointOffers: ISupplyPointOffer[];
     public supplyPoint: ISupplyPoint;
-    public supplyPointId = this.route.snapshot.paramMap.get('supplyPointId');
+    public supplyPointId = this.route.snapshot.queryParams['supplyPointId'];
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -100,12 +100,14 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
         this.contractService.saveContract(supplyPointOffer.id, supplyPointId)
             .pipe(
                 takeUntil(this.destroy$),
+                map(({data}) => data.saveContract),
             )
             .subscribe(
                 () => {
-                    this.router.navigate([ROUTES.ROUTER_REQUEST_RECAPITULATION, {
-                        supplyPointId,
-                    }]);
+                    this.router.navigate([ROUTES.ROUTER_REQUEST_RECAPITULATION], {
+                        queryParams: {
+                            supplyPointId,
+                    }});
                 },
                 (error) => {
                     this.supplyPointOffers = null;

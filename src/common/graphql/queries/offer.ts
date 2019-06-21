@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const findSupplierOffers = gql`
+export const findSupplierOffersQuery = gql`
     query findSupplierOffers{
         findSupplierOffers{
             id,
@@ -57,7 +57,7 @@ export const findSupplierOffers = gql`
     }
 `;
 
-export const findSupplyPointOffers = gql`
+export const findSupplyPointOffersQuery = gql`
     query findSupplyPointOffers($ean: String!){
         findSupplyPointOffers(ean: $ean){
             id,
