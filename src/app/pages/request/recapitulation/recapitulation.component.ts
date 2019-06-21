@@ -44,7 +44,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
 
     public isIndividual = true;
     public supplyPoint: ISupplyPoint;
-    public supplyPointId = this.route.snapshot.paramMap.get('supplyPointId');
+    public supplyPointId = this.route.snapshot.queryParams['supplyPointId'];
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -84,6 +84,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         this.personalDataService.savePersonalData(this.supplyPoint, personalInfoInput)
             .pipe(
                 takeUntil(this.destroy$),
+                map(({data}) => data.savePersonalData),
             )
             .subscribe(
                 () => {

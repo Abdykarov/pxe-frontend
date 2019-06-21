@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 
 import {
@@ -10,7 +11,10 @@ import {
 } from 'src/common/graphql/mutation/contract';
 import { getSupplyPoint } from 'src/common/graphql/queries/supply';
 import { findSupplyPointOffers } from 'src/common/graphql/queries/offer';
-import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import {
+    IGetSupplyPointResponse,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 
 @Injectable({
@@ -20,10 +24,9 @@ export class ContractService {
 
     constructor(
         private apollo: Apollo,
-    ) {
-    }
+    ) {}
 
-    public saveContract(offerId: number, supplyPointId: number) {
+    public saveContract(offerId: number, supplyPointId: string) {
         return this.apollo
             .mutate({
                 mutation: saveContract,
@@ -32,9 +35,7 @@ export class ContractService {
                     supplyPointId,
                 },
                 update: (cache, { data }) => {
-                    const getSupplyPointResult: {
-                        getSupplyPoint: ISupplyPoint
-                    } = cache.readQuery(
+                    const getSupplyPointResult: IGetSupplyPointResponse = cache.readQuery(
                         {
                             query: getSupplyPoint,
                             variables: {
@@ -99,9 +100,7 @@ export class ContractService {
             });
 
         const supplyPointOffers: ISupplyPointOffer[] = findSupplyPointOffersResponse.findSupplyPointOffers;
-        const supplyPointOffer: ISupplyPointOffer = supplyPointOffers.find((spOffer: ISupplyPointOffer) => {
-            return spOffer.id === offerId;
-        });
+        const supplyPointOffer: ISupplyPointOffer = R.find(R.propEq('id', offerId))(supplyPointOffers);
 
         supplyPoint.contract = {
             contractId: data.saveContract,

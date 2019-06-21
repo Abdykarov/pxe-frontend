@@ -4,7 +4,10 @@ import { Apollo } from 'apollo-angular';
 
 import { getPersonalData } from 'src/common/graphql/queries/personal-data';
 import { getSupplyPoint } from 'src/common/graphql/queries/supply';
-import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import {
+    IGetSupplyPointResponse,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
 import { IPersonalDataInput } from 'src/common/graphql/models/personal-data.model';
 import { savePersonalData } from 'src/common/graphql/mutation/personal-data';
 
@@ -28,33 +31,31 @@ export class PersonalDataService {
             .valueChanges;
     }
 
-    public savePersonalData(supplyPointOld: ISupplyPoint, personalData: IPersonalDataInput) {
+    public savePersonalData(supplyPoint: ISupplyPoint, personalData: IPersonalDataInput) {
         return this.apollo
             .mutate({
                 mutation: savePersonalData,
                 variables: {
-                    contractId: supplyPointOld.contract.contractId,
+                    contractId: supplyPoint.contract.contractId,
                     personalData,
                 },
                 update: (cache, {data}) => {
-                    const getSupplyPointResult: {
-                        getSupplyPoint: ISupplyPoint
-                    } = cache.readQuery(
+                    const getSupplyPointResult: IGetSupplyPointResponse = cache.readQuery(
                         {
                             query: getSupplyPoint,
                             variables: {
-                                supplyPointId: supplyPointOld,
+                                supplyPointId: supplyPoint.id,
                             },
                         });
 
-                    const supplyPoint: ISupplyPoint = getSupplyPointResult.getSupplyPoint;
+                    supplyPoint = getSupplyPointResult.getSupplyPoint;
                     this.loadSupplyPoint(supplyPoint, personalData);
 
                     cache.writeQuery({
                         query: getSupplyPoint,
                         data: { getSupplyPoint: supplyPoint},
                         variables: {
-                            supplyPointId: supplyPointOld.id,
+                            supplyPointId: supplyPoint.id,
                         },
                     });
                 },
