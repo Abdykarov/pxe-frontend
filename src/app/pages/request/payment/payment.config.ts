@@ -14,7 +14,7 @@ export const configStepper: IStepperProgressItem[] = [
     },
     {
         url: ROUTES.ROUTER_REQUEST_CONTRACT,
-        done: false,
+        done: true,
         shadowStep: true,
         label: 'Smlouva',
     },

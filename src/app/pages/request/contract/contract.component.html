@@ -17,7 +17,8 @@
                     </lnd-alert>
                 </div>
             </div>
-            <div class="row">
+            <div *ngIf="supplyPoint"
+                 class="row">
                 <div class="col-12 col-xl-10 offset-xl-1 text-center">
                     <h2>Podepište smlouvu</h2>
                 </div>
@@ -25,7 +26,7 @@
                     <lnd-button
                         [label]="showOffer ? 'Skrýt nabídku' : 'Zobrazit nabídku'"
                         type="link"
-                        (click)="toggleOffer($event)">
+                        (click)="toggleOffer()">
                     </lnd-button>
                 </div>
                 <div
@@ -33,23 +34,21 @@
                     [class.d-block]="showOffer"
                     [class.d-none]="!showOffer">
                     <pxe-supply-point-offer
-                        *ngIf="supplyPoint"
                         [supplyPointOffer]="supplyPoint.contract.offer"
-                        [isNotInteractive]="true">
+                        [interactive]="true">
                     </pxe-supply-point-offer>
                 </div>
                 <div class="col-12 col-xl-10 offset-xl-1">
                     <div class="page-box">
                         <pxe-contract-form
-                            #contractForm
-                            *ngIf="supplyPoint"
                             [personData]="supplyPoint.contract.personalData"
+                            [fieldError]="fieldError"
                             [formFields]="formFields"
                             [formLoading]="formLoading"
-                            [formSent]="formSent"
+                            [smsSent]="smsSent"
                             [globalError]="globalError"
                             [contractTemplate]="contractTemplate"
-                            (submitAction)="signContract()"
+                            (submitAction)="signContract($event)"
                             (customAction)="sendContractConfirmationSms()"
                         ></pxe-contract-form>
                     </div>

@@ -1,6 +1,6 @@
-<ng-template #sendSmsAgain>
-    <a (click)="this.customAction.emit()"
-       *ngIf="smsSend">
+<ng-template #sendSmsAgainTemplate>
+    <a (click)="submitSms()"
+       *ngIf="smsSent">
         Poslat SMS kód znovu?
     </a>
 </ng-template>
@@ -8,6 +8,7 @@
 <div [innerHTML]="contractTemplate"></div>
 
 <form
+    *ngIf="personData && personData.phone"
     [formGroup]="form"
     autocomplete="off"
     (keydown)="resetCustomFieldError()"
@@ -18,24 +19,35 @@
                 <div class="col-md-auto">
                     <lnd-form-field
                         label="Kód z SMS"
-                        [disabledField]="!smsSend"
+                        [disabledField]="!smsSent"
                         [error]="formError.smsCode || form.controls.smsCode.errors"
                         [formControl]="form.controls.smsCode"
                         [id]="'smsCode'"
-                        [subtextTemplate]="sendSmsAgain"
+                        [subtextTemplate]="sendSmsAgainTemplate"
                         [success]="form.controls.smsCode.valid && (form.controls.smsCode.touched || formError.smsCode)"
                         [touched]="form.controls.smsCode.touched || formError.smsCode"
+                        [triggerFocus]="smsSent"
                         [validationMessages]="formFields.validationMessages.smsCode">
                     </lnd-form-field>
                 </div>
                 <div class="col-md-auto mt-md-4">
                     <lnd-button
-                        (action)="submitForm()"
-                        [label]="!smsSend ? 'Odeslat ověřovací kód' : 'Podepsat smlouvu'"
+                        *ngIf="!smsSent"
+                        (action)="submitSms()"
+                        [isDisabled]="!!formLoading"
+                        label="Odeslat ověřovací kód"
                         type="primary">
                     </lnd-button>
-                    <p class="small mt-2"
-                        *ngIf="!smsSend">Na číslo {{personData.phone}}<br>
+                    <lnd-button
+                        *ngIf="smsSent"
+                        (action)="submitForm()"
+                        [isDisabled]="!!formLoading"
+                        label="Podepsat smlouvu"
+                        type="primary">
+                    </lnd-button>
+                    <p *ngIf="!smsSent"
+                       class="small mt-2">
+                        Na číslo {{personData.phone}}<br>
                         odešleme ověřovací kód</p>
                 </div>
             </div>
