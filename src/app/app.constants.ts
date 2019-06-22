@@ -1,7 +1,7 @@
 import {
     CommodityType,
     DistributionType,
-    SubjectType,
+    SubjectType, TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 
@@ -92,6 +92,12 @@ export const CONTRACT_END_TYPE = {
     CONTRACT_END_TERM: 'Urcita',
     CONTRACT_END_INDEFINITE_PERIOD: 'Neurcita',
     CONTRACT_END_TERMINATE: 'Vypoved',
+    CONTRACT_END_DEFAULT: 'DEFAULT',
+};
+
+export const TIME_TO_CONTRACT_END_PERIOD_MAP = {
+    [TimeToContractEndPeriod.DAY]: 'day',
+    [TimeToContractEndPeriod.MONTH]: 'month',
 };
 
 export const SUBJECT_TYPE_TO_DIST_RATE_MAP = {

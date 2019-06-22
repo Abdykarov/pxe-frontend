@@ -8,6 +8,7 @@ import {
     OnInit,
 } from '@angular/core';
 
+import * as R from 'ramda';
 import {
     map,
     takeUntil,
@@ -15,12 +16,16 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
+    CommodityType,
     ISupplyPoint,
-    ISupplyPointFormData,
+    ISupplyPointFormData, ISupplyPointGasAttributes, ISupplyPointPowerAttributes,
 } from 'src/common/graphql/models/supply.model';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import { parseGraphQLErrors } from 'src/common/utils';
+import {
+    parseGraphQLErrors,
+    scrollToElementFnc,
+} from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { SupplyPointDetailConfig } from './supply-point-detail.config';
@@ -71,7 +76,49 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     }
 
     public updateSupplyForm = (supplyPointFormData: ISupplyPointFormData) => {
-        console.log('%c ***** supplyPointFormData *****', 'background: #bada55; color: #000; font-weight: bold', supplyPointFormData);
+        this.formLoading = true;
+        this.formSent = false;
+        this.globalError = [];
+        this.fieldError = {};
+        let updateSupplyPoint;
+
+        const supplyPoint: ISupplyPoint = R.pick([
+            'name',
+        ], supplyPointFormData);
+
+        if (supplyPointFormData.commodityType === CommodityType.POWER) {
+            const powerAttributes: ISupplyPointPowerAttributes =
+                R.pick([
+                    'annualConsumptionNT',
+                    'annualConsumptionVT',
+                ], supplyPointFormData);
+            updateSupplyPoint = this.supplyService.updatePowerSupplyPointWithContract(supplyPointFormData.id, supplyPoint, powerAttributes);
+        } else {
+            const gasAttributes: ISupplyPointGasAttributes =
+                R.pick([
+                    'annualConsumption',
+                ], supplyPointFormData);
+            updateSupplyPoint = this.supplyService.updateGasSupplyPointWithContract(supplyPointFormData.id, supplyPoint, gasAttributes);
+        }
+
+        updateSupplyPoint
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                () => {
+                    this.formLoading = false;
+                    this.formSent = true;
+                    scrollToElementFnc('top');
+                    this.cd.markForCheck();
+                },
+                (error) => {
+                    this.formLoading = false;
+                    const { fieldError, globalError } = parseGraphQLErrors(error);
+                    this.fieldError = fieldError;
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
+                });
     }
 
     public cancelUpdate = () => {

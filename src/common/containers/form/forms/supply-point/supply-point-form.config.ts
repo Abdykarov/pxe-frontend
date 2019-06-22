@@ -33,10 +33,18 @@ export const expirationConfig: IExpirationConfig = {
         'timeToContractEnd': true,
         'timeToContractEndPeriodId': true,
     },
+    [CONTRACT_END_TYPE.CONTRACT_END_DEFAULT]: {
+        'expirationDate': false,
+        'timeToContractEnd': false,
+        'timeToContractEndPeriodId': false,
+    },
 };
 
 export const formFields: IForm = {
     controls: {
+        id: [
+            null,
+        ],
         commodityType: [
             CommodityType.POWER,
             [
@@ -238,14 +246,53 @@ export const formFields: IForm = {
     },
 };
 
-export const commodityTypeFields: ICommodityTypeFields = {
-    [CommodityType.POWER]: ['ean', 'distributionRateId', 'phasesId', 'circuitBreakerId', 'annualConsumptionNT', 'annualConsumptionVT'],
-    [CommodityType.GAS]: ['eic', 'annualConsumption'],
+export const supplyPointDetailAllowedFields: ICommodityTypeFields = {
+    [CommodityType.POWER]: [
+        'id',
+        'name',
+        'annualConsumptionNT',
+        'annualConsumptionVT',
+    ],
+    [CommodityType.GAS]: [
+        'id',
+        'name',
+        'annualConsumption',
+    ],
 };
 
-export const supplyPointDetailAllowedFields: ICommodityTypeFields = {
-    [CommodityType.POWER]: ['name', 'annualConsumptionNT', 'annualConsumptionVT'],
-    [CommodityType.GAS]: ['name', 'annualConsumption'],
+export const supplyPointAllowedFields: ICommodityTypeFields = {
+    [CommodityType.POWER]: [
+        'id',
+        'commodityType',
+        'subjectTypeId',
+        'supplierId',
+        'name',
+        'ean',
+        'address',
+        'distributionRateId',
+        'circuitBreakerId',
+        'phasesId',
+        'annualConsumptionNT',
+        'annualConsumptionVT',
+        'expirationDate',
+        'contractEndTypeId',
+        'timeToContractEnd',
+        'timeToContractEndPeriodId',
+    ],
+    [CommodityType.GAS]: [
+        'id',
+        'commodityType',
+        'subjectTypeId',
+        'supplierId',
+        'name',
+        'eic',
+        'address',
+        'annualConsumption',
+        'expirationDate',
+        'contractEndTypeId',
+        'timeToContractEnd',
+        'timeToContractEndPeriodId',
+    ],
 };
 
 export const supplyDetailInfoBanner: IBannerObj = {

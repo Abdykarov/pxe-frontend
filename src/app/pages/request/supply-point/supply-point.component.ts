@@ -78,7 +78,6 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         let ean = '';
 
         const supplyPoint: ISupplyPoint = R.pick([
-            'id',
             'supplierId',
             'name',
             'address',

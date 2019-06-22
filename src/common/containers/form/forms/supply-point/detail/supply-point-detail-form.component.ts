@@ -1,28 +1,26 @@
 import {
-    ChangeDetectorRef,
     Component,
     Input,
     OnChanges,
     OnInit,
     SimpleChanges,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 import * as R from 'ramda';
 
-import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
+import { AbstractSupplyPointFormComponent } from '../abstract-supply-point-form.component';
 import {
-    DISTRIBUTION_RATES_TYPE_DEFINITION,
     SUBJECT_TYPE_OPTIONS,
+    TIME_TO_CONTRACT_END_PERIOD_MAP,
 } from 'src/app/app.constants';
 import {
     CommodityType,
-    DistributionType,
     ISupplyPoint,
 } from 'src/common/graphql/models/supply.model';
 import {
-    commodityTypeFields,
-    supplyDetailInfoBanner, supplyPointDetailAllowedFields,
+    supplyDetailInfoBanner,
+    supplyPointDetailAllowedFields,
 } from '../supply-point-form.config';
 
 @Component({
@@ -30,17 +28,19 @@ import {
     templateUrl: './supply-point-detail-form.component.html',
     styleUrls: ['./supply-point-detail-form.component.scss'],
 })
-export class SupplyPointDetailFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
+export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormComponent implements OnInit, OnChanges {
     @Input()
     public supplyPoint: ISupplyPoint;
 
+    public allowedFields = supplyPointDetailAllowedFields;
     public commodityType = CommodityType;
     public suppliers = [];
     public supplyDetailInfoBanner = supplyDetailInfoBanner;
     public subjectName = '';
+    public timeToContractEndPeriodMap = TIME_TO_CONTRACT_END_PERIOD_MAP;
+    public setFormByCommodity = this.setFormFields;
 
     constructor(
-        private cd: ChangeDetectorRef,
         protected fb: FormBuilder,
     ) {
         super(fb);
@@ -66,12 +66,14 @@ export class SupplyPointDetailFormComponent extends AbstractFormComponent implem
     }
 
     public prefillFormData = () => {
+        let id = null;
         let name = null;
         let annualConsumptionNT = null;
         let annualConsumptionVT = null;
         let annualConsumption = null;
 
         if (!R.isEmpty(this.supplyPoint)) {
+            id = this.supplyPoint.id;
             name = this.supplyPoint.name;
             annualConsumptionVT = this.supplyPoint.annualConsumptionVT &&
                 this.supplyPoint.annualConsumptionVT.toString().replace('.', ',');
@@ -81,6 +83,7 @@ export class SupplyPointDetailFormComponent extends AbstractFormComponent implem
                 this.supplyPoint.annualConsumptionVT.toString().replace('.', ',');
         }
 
+        this.form.controls['id'].setValue(id);
         this.form.controls['name'].setValue(name);
         this.form.controls['annualConsumptionVT'].setValue(annualConsumptionVT);
         this.form.controls['annualConsumptionNT'].setValue(annualConsumptionNT);
@@ -89,40 +92,12 @@ export class SupplyPointDetailFormComponent extends AbstractFormComponent implem
         this.resetFormError(false);
     }
 
-    public includesBothTariffs = (id: string) => DISTRIBUTION_RATES_TYPE_DEFINITION[DistributionType.BOTH].includes(id);
-
-    public setFormByCommodity = (commodityType: CommodityType) => {
-        // R.mapObjIndexed((fields: string[], type: CommodityType) => {
-        //     if (commodityTypeFields[type]) {
-        //         R.map((field: string) => {
-        //             const fieldControl = this.form.get(field);
-        //             console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold', field, R.indexOf(field, supplyPointDetailAllowedFields));
-        //             if (type === commodityType && R.indexOf(field, supplyPointDetailAllowedFields[type]) >= 0) {
-        //                 fieldControl.enable();
-        //             } else {
-        //                 fieldControl.disable();
-        //             }
-        //         }, fields);
-        //     }
-        // }, commodityTypeFields);
-
-        R.mapObjIndexed((fieldControl, field: string) => {
-            // const fieldControl = this.form.get(field);
-            console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold',
-                field, R.indexOf(field, supplyPointDetailAllowedFields));
-            if (R.indexOf(field, supplyPointDetailAllowedFields[commodityType]) >= 0) {
-                fieldControl.enable();
-            } else {
-                fieldControl.disable();
-            }
-        }, this.form.controls);
-    }
-
     public submitForm = () => {
         this.resetCustomFieldError();
         this.triggerValidation();
         if (this.form.valid) {
             const form: any = {
+                id: this.form.value.id,
                 name: this.form.value.name,
             };
             if (!R.isNil(this.form.value.annualConsumptionNT)) {
@@ -135,15 +110,6 @@ export class SupplyPointDetailFormComponent extends AbstractFormComponent implem
                 form.annualConsumption = parseFloat(this.form.value.annualConsumption.replace(',', '.'));
             }
             this.submitAction.emit(form);
-        }
-    }
-
-    public setAnnualConsumptionNTState = (distributionRateId: string = null) => {
-        const annualConsumptionNTControl = this.form.get('annualConsumptionNT');
-        if (this.includesBothTariffs(distributionRateId)) {
-            annualConsumptionNTControl.enable();
-        } else {
-            annualConsumptionNTControl.disable();
         }
     }
 }

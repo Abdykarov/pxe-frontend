@@ -19,6 +19,8 @@ import {
 import {
     saveGasSupplyPoint,
     savePowerSupplyPoint,
+    updateGasSupplyPointWithContract,
+    updatePowerSupplyPointWithContract,
 } from '../mutation/supply';
 
 @Injectable({
@@ -112,6 +114,50 @@ export class SupplyService {
                 variables: {
                     supplyPoint: supplyPoint,
                     gasAttributes: gasAttributes,
+                },
+                refetchQueries: [{
+                    query: findSupplyPoints,
+                    variables: {
+                        ean: null,
+                    },
+                }],
+            });
+    }
+
+    public updatePowerSupplyPointWithContract(
+        supplyPointId: number,
+        supplyPoint: ISupplyPoint,
+        powerAttributes: ISupplyPointPowerAttributes,
+    ) {
+        return this.apollo
+            .mutate({
+                mutation: updatePowerSupplyPointWithContract,
+                variables: {
+                    supplyPointId,
+                    supplyPoint,
+                    powerAttributes,
+                },
+                refetchQueries: [{
+                    query: findSupplyPoints,
+                    variables: {
+                        ean: null,
+                    },
+                }],
+            });
+    }
+
+    public updateGasSupplyPointWithContract(
+        supplyPointId: number,
+        supplyPoint: ISupplyPoint,
+        gasAttributes: ISupplyPointGasAttributes,
+    ) {
+        return this.apollo
+            .mutate({
+                mutation: updateGasSupplyPointWithContract,
+                variables: {
+                    supplyPointId,
+                    supplyPoint,
+                    gasAttributes,
                 },
                 refetchQueries: [{
                     query: findSupplyPoints,

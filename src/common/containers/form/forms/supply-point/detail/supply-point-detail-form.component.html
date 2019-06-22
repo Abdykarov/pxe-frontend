@@ -1,12 +1,3 @@
-<lnd-alert
-    *ngIf="globalError.length"
-    type="danger">
-    <ng-container *ngFor="let error of globalError">
-        {{ error }}<br>
-    </ng-container>
-</lnd-alert>
-
-
 <!--<div class="row">-->
 <!--    <div class="col-12 col-xl-10 offset-xl-1">-->
 <!--        <lnd-banner-ui-->
@@ -19,14 +10,15 @@
     <div class="col-12 col-xl-10 offset-xl-1">
         <div class="page-box">
 
-<!--            <div class="row">-->
-<!--                <div class="col-12 col-md-6 offset-md-3">-->
-<!--                    <lnd-alert type="info"-->
-<!--                               hasIcon="true">-->
-<!--                        Změny byly úspěšně uloženy-->
-<!--                    </lnd-alert>-->
-<!--                </div>-->
-<!--            </div>-->
+            <div *ngIf="formSent"
+                 class="row">
+                <div class="col-12 col-md-6 offset-md-3">
+                    <lnd-alert type="info"
+                               hasIcon="true">
+                        Změny byly úspěšně uloženy
+                    </lnd-alert>
+                </div>
+            </div>
 
             <h2 class="h1 mb-3 text-center">{{supplyPoint.name}}</h2>
             <div class="text-with-icon justify-content-center mb-5">
@@ -159,7 +151,7 @@
                         <div class="mb-1">
                             <small>Výpovědní lhůta</small>
                         </div>
-                        <span class="perex">{{supplyPoint.timeToContractEnd}}</span>
+                        <span class="perex">{{supplyPoint.timeToContractEnd}} {{supplyPoint.timeToContractEnd | plural: timeToContractEndPeriodMap[supplyPoint.timeToContractEndPeriod.code]}}</span>
                     </div>
                 </div>
                 <hr>
@@ -208,5 +200,3 @@
         </div>
     </div>
 </div>
-
-<pre>{{supplyPoint | json}}</pre>

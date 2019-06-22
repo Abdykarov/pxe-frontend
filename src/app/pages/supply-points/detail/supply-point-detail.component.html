@@ -3,7 +3,7 @@
             [type]="'danger'"
             [isDismissible]="false"
             *ngIf="globalError.length">
-        Při načítání odběrného místa došlo k chybě. Zkuste to později.<br>
+        Došlo k chybě. Zkuste to později.<br>
         <ng-container *ngFor="let message of globalError">
             {{ message }}<br>
         </ng-container>
