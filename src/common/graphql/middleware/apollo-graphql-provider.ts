@@ -27,14 +27,12 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
 
     const setTokenHeader = (operation: Operation): void => {
         const token = authService.getToken();
-        if (token) {
-            operation.setContext({
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'X-API-Key': `${environment.x_api_key}`,
-                },
-            });
-        }
+        operation.setContext({
+            headers: {
+                Authorization: token ? `Bearer ${token}` : '',
+                'X-API-Key': `${environment.x_api_key}`,
+            },
+        });
     };
 
     const http = new BatchHttpLink({

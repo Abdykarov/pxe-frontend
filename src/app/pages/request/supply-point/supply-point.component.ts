@@ -1,4 +1,8 @@
 import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
+import {
     ChangeDetectorRef,
     Component,
     Inject,
@@ -6,10 +10,12 @@ import {
     PLATFORM_ID,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Router } from '@angular/router';
 
 import * as R from 'ramda';
-import { takeUntil } from 'rxjs/operators';
+import {
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -57,6 +63,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
 
     constructor(
         private cd: ChangeDetectorRef,
+        private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
         @Inject(PLATFORM_ID) private platformId: string,
@@ -75,7 +82,6 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         this.globalError = [];
         this.fieldError = {};
         let saveSupplyPoint;
-        let ean = '';
 
         const supplyPoint: ISupplyPoint = R.pick([
             'supplierId',
@@ -86,7 +92,6 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
             'contractEndTypeId',
             'timeToContractEnd',
             'timeToContractEndPeriodId',
-
         ], supplyPointFormData);
 
         if (supplyPointFormData.commodityType === CommodityType.POWER) {
@@ -99,7 +104,6 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                     'annualConsumptionNT',
                     'annualConsumptionVT',
                 ], supplyPointFormData);
-            ean = powerAttributes.ean;
             saveSupplyPoint = this.supplyService.savePowerSupplyPoint(supplyPoint, powerAttributes);
         } else {
             const gasAttributes: ISupplyPointGasAttributes =
@@ -107,22 +111,26 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                     'eic',
                     'annualConsumption',
                 ], supplyPointFormData);
-            ean = gasAttributes.eic;
             saveSupplyPoint = this.supplyService.saveGasSupplyPoint(supplyPoint, gasAttributes);
         }
 
         saveSupplyPoint
             .pipe(
                 takeUntil(this.destroy$),
+                map(({data}) => data.savePowerSupplyPoint || data.saveGasSupplyPoint),
             )
             .subscribe(
-                (data) => {
+                (supplyPointId) => {
                     this.formLoading = false;
                     this.formSent = true;
                     this.cd.markForCheck();
-                    this.router.navigate([ROUTES.ROUTER_REQUEST_OFFER_SELECTION, {
-                        ean,
-                    }]);
+                    this.router.navigate(
+                        [ROUTES.ROUTER_REQUEST_OFFER_SELECTION],
+                        {
+                            queryParams: {
+                                supplyPointId,
+                            },
+                        });
                 },
                 (error) => {
                     this.formLoading = false;

@@ -18,7 +18,9 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CommodityType,
     ISupplyPoint,
-    ISupplyPointFormData, ISupplyPointGasAttributes, ISupplyPointPowerAttributes,
+    ISupplyPointFormData,
+    ISupplyPointGasAttributes,
+    ISupplyPointPowerAttributes,
 } from 'src/common/graphql/models/supply.model';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
@@ -35,15 +37,14 @@ import { SupplyPointDetailConfig } from './supply-point-detail.config';
     styleUrls: ['./supply-point-detail.component.scss'],
 })
 export class SupplyPointDetailComponent extends AbstractComponent implements OnInit {
+    public dataLoading = true;
+    public fieldError: IFieldError = {};
     public formFields = formFields;
+    public formLoading = false;
     public formSent = false;
     public globalError: string[] = [];
-    public fieldError: IFieldError = {};
-    public formLoading = false;
-    public dataLoading = true;
-
-    public supplyPointId = parseInt(this.route.snapshot.params.supplyPointId, 10);
     public supplyPoint = null;
+    public supplyPointId = this.route.snapshot.params.supplyPointId;
 
     constructor(
         private cd: ChangeDetectorRef,

@@ -1,4 +1,7 @@
-import { CommodityType } from 'src/common/graphql/models/supply.model';
+import {
+    CommodityType,
+    ISupplierSampleDocument,
+} from 'src/common/graphql/models/supply.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { TypeCommodity } from 'src/common/ui/supplier/model/supplier.model';
 
@@ -11,6 +14,7 @@ export const offerConfig: ISupplyPointOffer = {
     ],
     commodityType: CommodityType.POWER,
     deliveryFrom: '',
+    deliveryTo: '',
     deliveryLength: 1,
     id: 0,
     name: '',
@@ -19,13 +23,11 @@ export const offerConfig: ISupplyPointOffer = {
     priceNT: 3.14,
     priceVT: 3.54,
     supplier: {
-        alt: 'logo - Alpiq CZ',
-        logoUrl: '/assets/images/suppliers/logo_alpiq.svg',
-        logoUrlHover: '/assets/images/suppliers/logo_alpiq-hover.svg',
-        supplierUrl: '',
+        id: '',
         name: 'PRE',
-        title: 'PRE',
-        typeCommodity: TypeCommodity.POWER,
+        vatNumber: '',
+        logoPath: '',
+        sampleDocuments: [],
     },
     validFrom: '2019-03-12T22:59:12.133Z',
     validTo: new Date(new Date().getTime() + 3600 * 1000 * 24).toISOString(),

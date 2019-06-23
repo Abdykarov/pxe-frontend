@@ -309,15 +309,22 @@ export class CustomValidators {
         };
     }
 
-    static minValue = (min: number): ValidatorFn => {
+    static minValue = (min: number, allowEqual = false): ValidatorFn => {
         return (control: AbstractControl): ValidationErrors => {
             if (control.pristine) {
                 return null;
             }
 
-            if (R_.isNilOrEmpty(control.value) || parseFloat(control.value.toString().replace(',', '.')) > min) {
+            if (!allowEqual &&
+                (R_.isNilOrEmpty(control.value) || parseFloat(control.value.toString().replace(',', '.')) > min)) {
                 return null;
             }
+
+            if (allowEqual &&
+                (R_.isNilOrEmpty(control.value) || parseFloat(control.value.toString().replace(',', '.')) >= min)) {
+                return null;
+            }
+
 
             return {
                 min: true,
@@ -338,6 +345,23 @@ export class CustomValidators {
             return {
                 max: true,
             };
+        };
+    }
+
+    static passwordFormat = (password) => {
+        if (password.pristine) {
+            return null;
+        }
+
+        const PASSWORD_REGEXP =
+            /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1})(?=(.*[a-zA-Z]){8,}).*$/;
+
+        if (PASSWORD_REGEXP.test(password.value)) {
+            return null;
+        }
+
+        return {
+            pattern: true,
         };
     }
 }

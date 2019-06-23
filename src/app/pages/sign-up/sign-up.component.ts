@@ -42,7 +42,7 @@ export class SignUpComponent extends AbstractComponent {
         this.fieldError = {};
         this.apollo
             .mutate({
-                mutation: mutations.makeRegistration,
+                mutation: mutations.makeRegistrationMutation,
                 variables: values,
             })
             .subscribe(
@@ -52,14 +52,12 @@ export class SignUpComponent extends AbstractComponent {
                     this.cd.markForCheck();
                     this.router.navigate(['login'],
                         {
-                            queryParams:
-                                {
-                                    email: values.email,
-                                },
-                            state:
-                                {
-                                    isFromSignUp: true,
-                                },
+                            queryParams: {
+                                email: values.email,
+                            },
+                            state: {
+                                passwordWasSent: true,
+                            },
                         },
                     );
                 },

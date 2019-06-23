@@ -18,11 +18,15 @@ import { IBannerObj } from './models/banner-object.model';
     styleUrls: ['./banner-ui.component.scss'],
 })
 export class BannerUIComponent extends AbstractComponent {
+
     @Input()
     public buttonLabel: string;
 
     @Input()
     public data?: IBannerObj;
+
+    @Input()
+    public showButtonLabel = true;
 
     @Input()
     public staticBannerTitle?: string;

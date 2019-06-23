@@ -19,13 +19,7 @@ export class LoginSupplyAuthFormComponent extends AbstractFormComponent implemen
 
     constructor(
         protected fb: FormBuilder,
-        private route: ActivatedRoute,
     ) {
         super(fb);
     }
-
-    ngOnInit() {
-        super.ngOnInit();
-    }
-
 }

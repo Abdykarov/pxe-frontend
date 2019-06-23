@@ -1,18 +1,18 @@
 import gql from 'graphql-tag';
 
-export const savePowerSupplyPoint = gql`
+export const savePowerSupplyPointMutation = gql`
     mutation savePowerSupplyPoint($supplyPoint: SupplyPointInput!, $powerAttributes: SupplyPointInputPowerAttributes!){
         savePowerSupplyPoint(supplyPoint: $supplyPoint, powerAttributes: $powerAttributes)
     }
 `;
 
-export const saveGasSupplyPoint = gql`
+export const saveGasSupplyPointMutation = gql`
     mutation saveGasSupplyPoint($supplyPoint: SupplyPointInput!, $gasAttributes: SupplyPointInputGasAttributes!){
         saveGasSupplyPoint(supplyPoint: $supplyPoint, gasAttributes: $gasAttributes)
     }
 `;
 
-export const updatePowerSupplyPointWithContract = gql`
+export const updatePowerSupplyPointWithContractMutation = gql`
     mutation updatePowerSupplyPointWithContract(
         $supplyPointId: ID!,
         $supplyPointUpdate: SupplyPointUpdateInput!,
@@ -26,7 +26,7 @@ export const updatePowerSupplyPointWithContract = gql`
     }
 `;
 
-export const updateGasSupplyPointWithContract = gql`
+export const updateGasSupplyPointWithContractMutation = gql`
     mutation updateGasSupplyPointWithContract(
         $supplyPointId: ID!,
         $supplyPointUpdate: SupplyPointUpdateInput!,

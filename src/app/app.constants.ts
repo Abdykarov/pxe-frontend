@@ -17,11 +17,11 @@ export const CONSTS = {
     PATHS: {
         CONTRACT : 'contract',
         COOKIES_POLICY : 'cookies-policy',
+        CHANGE_PASSWORD: 'change-password',
         DASHBOARD : 'dashboard',
         EMPTY : '',
         FORGOTTEN_PASSWORD : 'forgotten-password',
         GAS: 'gas',
-        CHANGE_PASSWORD : 'change-password',
         LOGIN : 'login',
         LOGOUT : 'logout',
         NOT_FOUND : '404',
@@ -43,6 +43,7 @@ export const CONSTS = {
 };
 
 export const ROUTES = {
+    ROUTER_CHANGE_PASSWORD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CHANGE_PASSWORD}`,
     ROUTER_ROOT: '/',
     ROUTER_REQUEST: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}`,
     ROUTER_SUPPLY_POINTS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_POINTS}`,

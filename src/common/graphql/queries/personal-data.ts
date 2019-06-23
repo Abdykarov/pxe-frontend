@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const getPersonalData = gql`
+export const getPersonalDataQuery = gql`
     query getPersonalData($contractId: Int!){
         findSupplyPointOffers(contractId: $contractId) {
             name,

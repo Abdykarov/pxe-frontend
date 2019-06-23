@@ -9,18 +9,18 @@ import {
     ISupplyPointPowerAttributes,
 } from '../models/supply.model';
 import {
-    getCodelistByType,
-    getSupplyPoint,
-    findAllSuppliers,
-    findCodelistsByTypes,
-    findSupplierDocumentsByComodity,
-    findSupplyPoints,
+    getCodelistByTypeQuery,
+    getSupplyPointQuery,
+    findAllSuppliersQuery,
+    findCodelistsByTypesQuery,
+    findSupplierDocumentsByComodityQuery,
+    findSupplyPointsQuery,
 } from 'src/common/graphql/queries/supply';
 import {
-    saveGasSupplyPoint,
-    savePowerSupplyPoint,
-    updateGasSupplyPointWithContract,
-    updatePowerSupplyPointWithContract,
+    saveGasSupplyPointMutation,
+    savePowerSupplyPointMutation,
+    updateGasSupplyPointWithContractMutation,
+    updatePowerSupplyPointWithContractMutation,
 } from '../mutation/supply';
 
 @Injectable({
@@ -35,7 +35,7 @@ export class SupplyService {
     public getSuppliers(commodityType: CommodityType) {
         return this.apollo
             .watchQuery<any>({
-                query: findAllSuppliers,
+                query: findAllSuppliersQuery,
                 variables: {
                     commodityType,
                 },
@@ -46,7 +46,7 @@ export class SupplyService {
     public getCodelistByType(type: string, locale: string) {
         return this.apollo
             .watchQuery<any>({
-                query: getCodelistByType,
+                query: getCodelistByTypeQuery,
                 variables: {
                     type,
                     locale,
@@ -58,7 +58,7 @@ export class SupplyService {
     public findCodelistsByTypes(types: string[], locale: string) {
         return this.apollo
             .watchQuery<any>({
-                query: findCodelistsByTypes,
+                query: findCodelistsByTypesQuery,
                 variables: {
                     types,
                     locale,
@@ -70,7 +70,7 @@ export class SupplyService {
     public findSupplierDocumentsByComodity(supplierId: number, commodityType: CommodityType) {
         return this.apollo
             .watchQuery<any>({
-                query: findSupplierDocumentsByComodity,
+                query: findSupplierDocumentsByComodityQuery,
                 variables: {
                     supplierId,
                     commodityType,
@@ -82,7 +82,7 @@ export class SupplyService {
     public findSupplyPoints(ean: string = null) {
         return this.apollo
             .watchQuery<any>({
-                query: findSupplyPoints,
+                query: findSupplyPointsQuery,
                 variables: {
                     ean,
                 },
@@ -93,15 +93,15 @@ export class SupplyService {
     public savePowerSupplyPoint(supplyPoint: ISupplyPoint, powerAttributes: ISupplyPointPowerAttributes) {
         return this.apollo
             .mutate({
-                mutation: savePowerSupplyPoint,
+                mutation: savePowerSupplyPointMutation,
                 variables: {
                     supplyPoint: supplyPoint,
                     powerAttributes: powerAttributes,
                 },
                 refetchQueries: [{
-                    query: findSupplyPoints,
+                    query: findSupplyPointsQuery,
                     variables: {
-                        ean: null,
+                        ean: powerAttributes.ean,
                     },
                 }],
             });
@@ -110,15 +110,15 @@ export class SupplyService {
     public saveGasSupplyPoint(supplyPoint: ISupplyPoint, gasAttributes: ISupplyPointGasAttributes) {
         return this.apollo
             .mutate({
-                mutation: saveGasSupplyPoint,
+                mutation: saveGasSupplyPointMutation,
                 variables: {
                     supplyPoint: supplyPoint,
                     gasAttributes: gasAttributes,
                 },
-                refetchQueries: [{
-                    query: findSupplyPoints,
+                refetchQueries:  [{
+                    query: findSupplyPointsQuery,
                     variables: {
-                        ean: null,
+                        ean: gasAttributes.eic,
                     },
                 }],
             });
@@ -131,14 +131,14 @@ export class SupplyService {
     ) {
         return this.apollo
             .mutate({
-                mutation: updatePowerSupplyPointWithContract,
+                mutation: updatePowerSupplyPointWithContractMutation,
                 variables: {
                     supplyPointId,
                     supplyPoint,
                     powerAttributes,
                 },
                 refetchQueries: [{
-                    query: findSupplyPoints,
+                    query: findSupplyPointsQuery,
                     variables: {
                         ean: null,
                     },
@@ -153,14 +153,14 @@ export class SupplyService {
     ) {
         return this.apollo
             .mutate({
-                mutation: updateGasSupplyPointWithContract,
+                mutation: updateGasSupplyPointWithContractMutation,
                 variables: {
                     supplyPointId,
                     supplyPoint,
                     gasAttributes,
                 },
                 refetchQueries: [{
-                    query: findSupplyPoints,
+                    query: findSupplyPointsQuery,
                     variables: {
                         ean: null,
                     },
@@ -168,14 +168,14 @@ export class SupplyService {
             });
     }
 
-    public getSupplyPoint(supplyPointId: number) {
+    public getSupplyPoint(supplyPointId: string) {
         return this.apollo
             .watchQuery<any>({
-                query: getSupplyPoint,
-            variables: {
-                supplyPointId,
-            },
-        })
-        .valueChanges;
+                query: getSupplyPointQuery,
+                variables: {
+                    supplyPointId,
+                },
+            })
+            .valueChanges;
     }
 }
