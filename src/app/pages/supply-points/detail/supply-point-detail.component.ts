@@ -57,7 +57,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     }
 
     ngOnInit() {
-        this.supplyService.getSupplyPoint(this.supplyPointId)
+        this.supplyService.app.constants.tsgetSupplyPoint(this.supplyPointId)
             .pipe(
                 takeUntil(this.destroy$),
                 map(({data}) => data.getSupplyPoint),

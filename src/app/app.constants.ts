@@ -1,7 +1,8 @@
 import {
     CommodityType,
     DistributionType,
-    SubjectType, TimeToContractEndPeriod,
+    SubjectType,
+    TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 
