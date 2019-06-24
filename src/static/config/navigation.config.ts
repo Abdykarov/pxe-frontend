@@ -166,6 +166,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/full/login-after-registration',
                 },
                 {
+                    'label': 'Payment verification',
+                    'url': '/basic/payment-verification',
+                },
+                {
                     'label': 'Registration',
                     'url': '/full/registration',
                 },
