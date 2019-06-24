@@ -35,11 +35,10 @@ export class AbstractSupplyPointFormComponent extends AbstractFormComponent impl
     }
 
     public setAnnualConsumptionNTState = (distributionRateId: string = null) => {
-        const annualConsumptionNTControl = this.form.get('annualConsumptionNT');
         if (this.includesBothTariffs(distributionRateId)) {
-            annualConsumptionNTControl.enable();
+            this.setEnableField('annualConsumptionNT');
         } else {
-            annualConsumptionNTControl.disable();
+            this.setDisableField('annualConsumptionNT');
         }
     }
 
@@ -48,13 +47,19 @@ export class AbstractSupplyPointFormComponent extends AbstractFormComponent impl
     public setFormFields = (commodityType: CommodityType) => {
         R.mapObjIndexed((fieldControl, field: string) => {
             if (R.indexOf(field, this.allowedFields[commodityType]) >= 0) {
-                fieldControl.enable({
-                    emitEvent: false,
-                });
+                this.setEnableField(
+                    field,
+                    {
+                        emitEvent: false,
+                    },
+                );
             } else {
-                fieldControl.disable({
-                    emitEvent: false,
-                });
+                this.setDisableField(
+                    field,
+                    {
+                        emitEvent: false,
+                    },
+                );
             }
         }, this.form.controls);
     }

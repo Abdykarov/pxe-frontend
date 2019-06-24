@@ -20,7 +20,7 @@ import { ContractService } from 'src/common/graphql/services/contract.service';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { formFields } from 'src/common/containers/form/forms/contract/contract-form.config';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
-import { parseGraphQLErrors } from 'src/common/utils';
+import { parseGraphQLErrors, scrollToElementFnc } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
@@ -103,6 +103,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                     } else {
                         // TODO - temporary
                         this.globalError.push('Smlouvu se nepodařilo podepsat.');
+                        scrollToElementFnc('top');
                     }
                     this.cd.markForCheck();
                 },
