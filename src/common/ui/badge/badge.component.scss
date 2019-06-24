@@ -15,19 +15,38 @@
 
 
 .badge {
-	display: inline-flex;
-	align-items: center;
-	min-height: $badge-min-height;
-	line-height: $line-height-sm;
-	white-space: initial;
+	@include link-without-href {
+		display: inline-flex;
+		align-items: center;
+		min-height: $badge-min-height;
+		color: $white;
+		line-height: $line-height-sm;
+		white-space: initial;
+	}
+
+	@include link-without-href-interactive {
+		color: $white;
+		text-decoration: none;
+	}
 
 	&-light,
 	&-transparent {
-		color: $font-text;
+		@include link-without-href {
+			color: $font-text;
+		}
+
+		@include link-without-href-interactive {
+			color: $font-text;
+			text-decoration: none;
+		}
 	}
 
 	&-transparent {
 		background-color: transparent;
+	}
+
+	&--not-interactive {
+		pointer-events: none;
 	}
 }
 
