@@ -1,0 +1,56 @@
+<ng-template #sendSmsAgainTemplate>
+    <a (click)="submitSms()"
+       *ngIf="smsSent">
+        Poslat SMS kód znovu?
+    </a>
+</ng-template>
+
+<div [innerHTML]="contractTemplate"></div>
+
+<form
+    *ngIf="personData && personData.phone"
+    [formGroup]="form"
+    autocomplete="off"
+    (keydown)="resetCustomFieldError()"
+    (change)="resetCustomFieldError()">
+    <div class="row">
+        <div class="col-12 col-lg-9 offset-lg-3">
+            <div class="row justify-content-between">
+                <div class="col-md-auto">
+                    <lnd-form-field
+                        label="Kód z SMS"
+                        [disabledField]="!smsSent"
+                        [error]="formError.smsCode || form.controls.smsCode.errors"
+                        [formControl]="form.controls.smsCode"
+                        [id]="'smsCode'"
+                        [subtextTemplate]="sendSmsAgainTemplate"
+                        [success]="form.controls.smsCode.valid && (form.controls.smsCode.touched || formError.smsCode)"
+                        [touched]="form.controls.smsCode.touched || formError.smsCode"
+                        [triggerFocus]="smsSent"
+                        [validationMessages]="formFields.validationMessages.smsCode">
+                    </lnd-form-field>
+                </div>
+                <div class="col-md-auto mt-md-4">
+                    <lnd-button
+                        *ngIf="!smsSent"
+                        (action)="submitSms()"
+                        [isDisabled]="!!formLoading"
+                        label="Odeslat ověřovací kód"
+                        type="primary">
+                    </lnd-button>
+                    <lnd-button
+                        *ngIf="smsSent"
+                        (action)="submitForm()"
+                        [isDisabled]="!!formLoading"
+                        label="Podepsat smlouvu"
+                        type="primary">
+                    </lnd-button>
+                    <p *ngIf="!smsSent"
+                       class="small mt-2">
+                        Na číslo {{personData.phone}}<br>
+                        odešleme ověřovací kód</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
