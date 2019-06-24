@@ -150,6 +150,15 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     public touched = false;
 
     @Input()
+    set triggerFocus(value: any) {
+        if (this.field && !!value) {
+            setTimeout(() => {
+                this.field.nativeElement.focus();
+            });
+        }
+    }
+
+    @Input()
     public type: string = FieldTypes.INPUT;
 
     @Input()

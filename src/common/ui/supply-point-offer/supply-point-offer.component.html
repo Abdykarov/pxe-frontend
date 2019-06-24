@@ -1,6 +1,6 @@
 <a class="supply-point-offer"
    [class.supply-point-offer--owner]="isOwner"
-   [class.supply-point-offer--not-interactive]="isNotInteractive"
+   [class.supply-point-offer--not-interactive]="interactive"
    (click)="action.emit(supplyPointOffer)">
     <div class="row no-gutters">
         <div class="col-12 col-xl-7"
@@ -37,7 +37,7 @@
                 <div class="row">
                     <div class="col-12">
                         <span class="supply-point-offer__title-label">Měsíční záloha</span>
-                        <span class="supply-point-offer__title">{{supplyPointOffer.permanentPaymentPrice | number: '1.0-2'}} Kč</span>
+                        <span class="supply-point-offer__title">{{supplyPointOffer.permanentPaymentPrice || supplyPointOffer.mountlyPaymentPrice | number: '1.0-2'}} Kč</span>
                     </div>
                 </div>
                 <div class="row justify-content-between"
