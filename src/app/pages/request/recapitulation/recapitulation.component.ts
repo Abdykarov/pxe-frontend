@@ -27,8 +27,8 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
-import { ROUTES } from 'src/app/app.constants';
 import { PersonalInfoFormComponent } from 'src/common/containers/form/forms/personal-info/personal-info-form.component';
+import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
