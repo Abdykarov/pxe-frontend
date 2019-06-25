@@ -104,20 +104,20 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                     'annualConsumptionNT',
                     'annualConsumptionVT',
                 ], supplyPointFormData);
-            saveSupplyPoint = this.supplyService.savePowerSupplyPoint(supplyPoint, powerAttributes);
+            saveSupplyPoint = this.supplyService.createPowerSupplyPoint(supplyPoint, powerAttributes);
         } else {
             const gasAttributes: ISupplyPointGasAttributes =
                 R.pick([
                     'eic',
                     'annualConsumption',
                 ], supplyPointFormData);
-            saveSupplyPoint = this.supplyService.saveGasSupplyPoint(supplyPoint, gasAttributes);
+            saveSupplyPoint = this.supplyService.createGasSupplyPoint(supplyPoint, gasAttributes);
         }
 
         saveSupplyPoint
             .pipe(
                 takeUntil(this.destroy$),
-                map(({data}) => data.savePowerSupplyPoint || data.saveGasSupplyPoint),
+                map(({data}) => data.createPowerSupplyPoint || data.createGasSupplyPoint),
             )
             .subscribe(
                 (supplyPointId) => {

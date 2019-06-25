@@ -2,7 +2,6 @@
     <lnd-alert
             [type]="'danger'"
             [isDismissible]="false"
-            [hasIcon]="true"
             *ngIf="error">
         Při načítání odběrných míst došlo k chybě. Zkuste to později.<br>
         <ng-container *ngFor="let message of errorMessages">

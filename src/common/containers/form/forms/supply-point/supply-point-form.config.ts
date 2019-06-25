@@ -249,12 +249,14 @@ export const formFields: IForm = {
 export const supplyPointDetailAllowedFields: ICommodityTypeFields = {
     [CommodityType.POWER]: [
         'id',
+        'commodityType',
         'name',
         'annualConsumptionNT',
         'annualConsumptionVT',
     ],
     [CommodityType.GAS]: [
         'id',
+        'commodityType',
         'name',
         'annualConsumption',
     ],

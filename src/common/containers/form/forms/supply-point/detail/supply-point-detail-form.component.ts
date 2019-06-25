@@ -67,6 +67,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
 
     public prefillFormData = () => {
         let id = null;
+        let commodityType = null;
         let name = null;
         let annualConsumptionNT = null;
         let annualConsumptionVT = null;
@@ -74,6 +75,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
 
         if (!R.isEmpty(this.supplyPoint)) {
             id = this.supplyPoint.id;
+            commodityType = this.supplyPoint.commodityType;
             name = this.supplyPoint.name;
             annualConsumptionVT = this.supplyPoint.annualConsumptionVT &&
                 this.supplyPoint.annualConsumptionVT.toString().replace('.', ',');
@@ -84,6 +86,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         }
 
         this.form.controls['id'].setValue(id);
+        this.form.controls['commodityType'].setValue(commodityType);
         this.form.controls['name'].setValue(name);
         this.form.controls['annualConsumptionVT'].setValue(annualConsumptionVT);
         this.form.controls['annualConsumptionNT'].setValue(annualConsumptionNT);
@@ -97,8 +100,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         this.triggerValidation();
         if (this.form.valid) {
             const form: any = {
-                id: this.form.value.id,
-                name: this.form.value.name,
+                ...this.form.value,
             };
             if (!R.isNil(this.form.value.annualConsumptionNT)) {
                 form.annualConsumptionNT = parseFloat(this.form.value.annualConsumptionNT.replace(',', '.'));

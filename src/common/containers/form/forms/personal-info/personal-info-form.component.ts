@@ -13,10 +13,10 @@ import {
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
+import { CustomValidators } from 'src/common/utils';
 import { depositPaymentType } from './personal-info-form.config';
 import { IPersonalDataInputForm } from 'src/common/graphql/models/personal-data.model';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
-import { CustomValidators } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-personal-info-form',
@@ -41,7 +41,6 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
 
     ngOnInit() {
         super.ngOnInit();
-
         this.form.get('onlyAddress1')
             .valueChanges
             .pipe(takeUntil(this.destroy$))
@@ -57,6 +56,9 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         if (this.isIndividual) {
             this.setDisableField('ico');
             this.setDisableField('dic');
+        } else {
+            this.setEnableField('ico');
+            this.setEnableField('dic');
         }
     }
 
