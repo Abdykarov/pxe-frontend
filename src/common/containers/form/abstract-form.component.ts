@@ -22,10 +22,10 @@ import {
 
 export class AbstractFormComponent extends AbstractComponent implements OnInit, OnChanges {
     @Input()
-    public formSent = false;
+    public formFields: IForm;
 
     @Input()
-    public formFields: IForm;
+    public formSent = false;
 
     @Input()
     public formLoading = false;
@@ -108,6 +108,15 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
     public getFieldValue = (fieldName: string) => {
         return this.form.get(fieldName).value;
     }
+
+    public setEnableField = (fieldName: string): void => {
+        this.form.get(fieldName).enable();
+    }
+
+    public setDisableField = (fieldName: string): void => {
+        this.form.get(fieldName).disable();
+    }
+
 
     public resetFieldValue = (field, clearError = true) => {
         this.form.get(field).patchValue(null);

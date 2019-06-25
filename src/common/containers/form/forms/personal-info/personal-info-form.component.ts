@@ -105,8 +105,8 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     public setForm = () => {
         this.setAddress2(false);
         if (this.isIndividual) {
-            this.form.get('ico').disable();
-            this.form.get('dic').disable();
+            this.setDisableField('ico');
+            this.setDisableField('dic');
         }
     }
 
@@ -129,11 +129,10 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     }
 
     public setAddress2(onlyAddress1: boolean) {
-        const address2Field = this.form.get('address2');
         if (onlyAddress1) {
-            address2Field.enable();
+            this.setEnableField('address2');
         } else {
-            address2Field.disable();
+            this.setDisableField('address2');
         }
     }
 

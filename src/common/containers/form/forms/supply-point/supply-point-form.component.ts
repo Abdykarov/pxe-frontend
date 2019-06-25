@@ -127,30 +127,29 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
     public includesBothTariffs = (id: string) => DISTRIBUTION_RATES_TYPE_DEFINITION[DistributionType.BOTH].includes(id);
 
     public changeByContractEndType(changeByContractEndType: string) {
-        const selectedContractEndType = this.expirationConfig[changeByContractEndType];
+        const configchoseItem = this.expirationConfig[changeByContractEndType];
 
         R.forEachObjIndexed((show: boolean, field: string) => {
-            show ? this.form.get(field).enable() : this.form.get(field).disable();
-        }, selectedContractEndType);
+            show ? this.setEnableField(field) : this.setDisableField(field);
+        }, configchoseItem);
 
         this.cd.markForCheck();
     }
 
     public hideAllContractEndType() {
         R.forEachObjIndexed((value: string, field: string) => {
-            this.form.get(field).disable();
+            this.setDisableField(field);
         }, this.expirationConfig[CONTRACT_END_TYPE.CONTRACT_END_TERM]);
     }
 
     public setFormByCommodity = (commodityType: CommodityType) => {
         R.mapObjIndexed((fields: string[], type: CommodityType) => {
             if (commodityTypeFields[type]) {
-                R.map((field: string) => {
-                    const fieldControl = this.form.get(field);
+                R.map((field) => {
                     if (type === commodityType) {
-                        fieldControl.enable();
+                        this.setEnableField(field);
                     } else {
-                        fieldControl.disable();
+                        this.setDisableField(field);
                     }
                 }, fields);
             }
@@ -207,11 +206,10 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
     }
 
     public setAnnualConsumptionNTState = (distributionRateId: string = null) => {
-        const annualConsumptionNTControl = this.form.get('annualConsumptionNT');
         if (this.includesBothTariffs(distributionRateId)) {
-            annualConsumptionNTControl.enable();
+            this.setEnableField('annualConsumptionNT');
         } else {
-            annualConsumptionNTControl.disable();
+            this.setDisableField('annualConsumptionNT');
         }
     }
 

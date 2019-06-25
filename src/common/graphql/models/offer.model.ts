@@ -12,6 +12,7 @@ export interface ISupplyPointOffer {
     deliveryTo: string;
     deliveryLength: number;
     permanentPaymentPrice: number;
+    mountlyPaymentPrice?: number;
     benefits: string[] | string;
     priceVT: number;
     priceNT: number;
