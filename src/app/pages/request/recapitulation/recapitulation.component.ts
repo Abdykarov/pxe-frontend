@@ -6,8 +6,10 @@ import {
     ChangeDetectorRef,
     Component,
     OnInit,
+    ViewChild,
 } from '@angular/core';
 
+import * as R from 'ramda';
 import {
     map,
     takeUntil,
@@ -26,6 +28,7 @@ import {
 import { parseGraphQLErrors } from 'src/common/utils';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
 import { ROUTES } from 'src/app/app.constants';
+import { PersonalInfoFormComponent } from 'src/common/containers/form/forms/personal-info/personal-info-form.component';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -45,6 +48,9 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     public isIndividual = true;
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams['supplyPointId'];
+
+    @ViewChild('personalInfoForm')
+    public personalInfoForm: PersonalInfoFormComponent;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -66,6 +72,9 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                 (supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
                     this.isIndividual = this.supplyPoint.subject.code === SubjectType.SUBJECT_TYPE_INDIVIDUAL;
+                    if (R.path(['contract', 'personalData', 'name'], this.supplyPoint)) {
+                        this.personalInfoForm.prefillFormData(this.supplyPoint.contract.personalData);
+                    }
                     this.cd.markForCheck();
                 },
                 (error) => {
@@ -80,6 +89,10 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         this.formLoading = true;
         this.globalError = [];
         this.fieldError = {};
+
+        // todo remove after BE fix
+        // onum error fix
+        personalInfoInput.address1.orientationNumber = '5';
 
         this.personalDataService.savePersonalData(this.supplyPoint, personalInfoInput)
             .pipe(

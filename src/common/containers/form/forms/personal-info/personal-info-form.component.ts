@@ -4,17 +4,23 @@ import {
     OnChanges,
     OnInit,
     SimpleChanges,
+    ViewChild,
 } from '@angular/core';
 import {
     FormBuilder,
     Validators,
 } from '@angular/forms';
 
+import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
+import { AddressWhispererComponent } from 'src/common/containers/address-whisperer/address-whisperer.component';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { depositPaymentType } from './personal-info-form.config';
-import { IPersonalDataInputForm } from 'src/common/graphql/models/personal-data.model';
+import {
+    IPersonalData,
+    IPersonalDataInputForm,
+} from 'src/common/graphql/models/personal-data.model';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { CustomValidators } from 'src/common/utils';
 
@@ -31,6 +37,12 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     @Input()
     public isIndividual = false;
 
+    @ViewChild('address1')
+    public address1LndSelect: AddressWhispererComponent;
+
+    @ViewChild('address2')
+    public address2LndSelect: AddressWhispererComponent;
+
     public depositPaymentTypeId = depositPaymentType;
 
     constructor(
@@ -41,18 +53,56 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
 
     ngOnInit() {
         super.ngOnInit();
+        this.setForm();
 
         this.form.get('onlyAddress1')
             .valueChanges
             .pipe(takeUntil(this.destroy$))
-            .subscribe(val => {
-                this.setAddress2(val);
+            .subscribe((onlyAddress1: boolean) => {
+                this.setAddress2(onlyAddress1);
             });
-
-        this.setForm();
     }
 
-    setForm = () => {
+    public prefillFormData = (personalData: IPersonalData) => {
+        const phone = personalData.phone && personalData.phone.substr(4, 10);
+        const phonePrefix = '+420';
+        const onlyAddress1 = !personalData.address2;
+
+        this.form.controls['name'].setValue(personalData.name);
+        this.form.controls['ico'].setValue(personalData.ico);
+        this.form.controls['dic'].setValue(personalData.dic);
+
+        this.form.controls['onlyAddress1'].setValue(!onlyAddress1);
+        this.form.controls['bankAccountNumber'].setValue(personalData.bankAccountNumber);
+        this.form.controls['bankCode'].setValue(personalData.bankCode);
+        this.form.controls['phone'].setValue(phone);
+        this.form.controls['phonePrefix'].setValue(phonePrefix);
+        this.form.controls['email'].setValue(personalData.email);
+        this.form.controls['depositPaymentTypeId'].setValue(personalData.depositPaymentType.code);
+        this.form.controls['deposit'].setValue(personalData.deposit);
+
+        this.address1LndSelect.setValue({
+            key: `${personalData.address1.street} ${personalData.address1.descriptiveNumber},
+             ${personalData.address1.city}, ${personalData.address1.postCode}`,
+            value: personalData.address1,
+            label: `${personalData.address1.street} ${personalData.address1.descriptiveNumber},
+             ${personalData.address1.city}, ${personalData.address1.postCode}`,
+        });
+
+        if (!onlyAddress1) {
+            this.address2LndSelect.setValue({
+                key: `${personalData.address2.street} ${personalData.address2.descriptiveNumber},
+                 ${personalData.address2.city}, ${personalData.address2.postCode}`,
+                value: personalData.address2,
+                label: `${personalData.address2.street} ${personalData.address2.descriptiveNumber},
+                 ${personalData.address2.city}, ${personalData.address2.postCode}`,
+            });
+        }
+
+        this.resetFormError(false);
+    }
+
+    public setForm = () => {
         this.setAddress2(false);
         if (this.isIndividual) {
             this.form.get('ico').disable();
@@ -78,12 +128,12 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         }
     }
 
-    public setAddress2(val) {
-        const correspondenceAddress = this.form.get('address2');
-        if (val) {
-            correspondenceAddress.enable();
+    public setAddress2(onlyAddress1: boolean) {
+        const address2Field = this.form.get('address2');
+        if (onlyAddress1) {
+            address2Field.enable();
         } else {
-            correspondenceAddress.disable();
+            address2Field.disable();
         }
     }
 

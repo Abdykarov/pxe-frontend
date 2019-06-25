@@ -5,6 +5,7 @@ import {
     Input,
     Output,
     TemplateRef,
+    ViewChild,
 } from '@angular/core';
 import {
     FormGroup,
@@ -22,6 +23,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { AddressWhispererService } from './services/address-whisperer.service';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IValidationMessages } from 'src/common/ui/forms/models/validation-messages.model';
+import { SelectComponent } from 'src/common/ui/forms/select/select.component';
 
 @Component({
     selector: 'pxe-address-whisperer',
@@ -78,6 +80,9 @@ export class AddressWhispererComponent extends AbstractComponent {
     @Input()
     public whispererName: string;
 
+    @ViewChild('lndSelect')
+    public lndSelect: SelectComponent;
+
     public addresses: Array<IOption> = [];
     public typeahead: EventEmitter<any>;
 
@@ -106,5 +111,9 @@ export class AddressWhispererComponent extends AbstractComponent {
     public setAddresses = (addresses = []) => {
         this.addresses = addresses;
         this.cd.markForCheck();
+    }
+
+    public setValue(item: IOption) {
+        this.lndSelect.setItem(item);
     }
 }
