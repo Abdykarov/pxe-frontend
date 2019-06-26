@@ -22,7 +22,6 @@ import {
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AddressWhispererService } from './services/address-whisperer.service';
 import { IAddress } from 'src/common/graphql/models/supply.model';
-import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IValidationMessages } from 'src/common/ui/forms/models/validation-messages.model';
 
 @Component({
