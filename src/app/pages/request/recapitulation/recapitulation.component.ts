@@ -14,7 +14,6 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { configStepper } from 'src/app/pages/request/recapitulation/recapitulation.config';
 import { formFields } from 'src/common/containers/form/forms/personal-info/personal-info-form.config';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
@@ -22,11 +21,13 @@ import { IPersonalDataInput } from 'src/common/graphql/models/personal-data.mode
 import {
     ISupplyPoint,
     SubjectType,
+    SupplyPointState,
 } from 'src/common/graphql/models/supply.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { getConfigStepperByStatus } from 'src/common/utils/get-progress-stepper-config.fnc';
 
 @Component({
     selector: 'pxe-recapitulation',
@@ -34,7 +35,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./recapitulation.component.scss'],
 })
 export class RecapitulationComponent extends AbstractComponent implements OnInit {
-    public stepperProgressConfig: IStepperProgressItem[] = configStepper;
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepperByStatus(SupplyPointState.PERSONAL_INFO);
 
     public formFields = formFields;
     public formSent = false;

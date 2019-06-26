@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import {
+    supplyPointConfig,
+    supplyPointConfig2,
+} from './config';
 
 @Component({
   templateUrl: './page.html',
@@ -8,6 +12,14 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 
 export class RequestCardComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
+
+    public supplyPoint = supplyPointConfig;
+    public supplyPoint2 = supplyPointConfig2;
+
+    public submitForm(evt) {
+        evt.preventDefault();
+        console.log('CLICKED');
+    }
 
     constructor(
       ) {

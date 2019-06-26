@@ -120,17 +120,15 @@ export class NewSupplyPointPageConfig {
 
     public stepperProgressConfig: IStepperProgressItem[] = [
         {
-            url: '/basic/new-supply-point',
+            active: true,
             done: false,
             label: 'Výběr odběrného místa',
         },
         {
-            url: '/basic/menu-selection',
             done: false,
             label: 'Výběr nabídky',
         },
         {
-            url: '/basic/contract-signing',
             done: false,
             label: 'Podepsání smlouvy',
         },

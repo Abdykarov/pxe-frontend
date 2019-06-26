@@ -1,12 +1,5 @@
-import {
-    ActivatedRoute,
-    Router,
-} from '@angular/router';
-import {
-    ChangeDetectorRef,
-    Component,
-    OnInit,
-} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 import * as R from 'ramda';
 import {
@@ -18,11 +11,13 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CommodityType,
     ISupplyPoint,
-    ISupplyPointGasAttributes,
     ISupplyPointFormData,
+    ISupplyPointGasAttributes,
     ISupplyPointPowerAttributes,
+    SupplyPointState,
 } from 'src/common/graphql/models/supply.model';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
+import { getConfigStepperByStatus } from 'src/common/utils/get-progress-stepper-config.fnc';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils';
@@ -40,23 +35,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public fieldError: IFieldError = {};
     public formLoading = false;
 
-    public stepperProgressConfig: IStepperProgressItem[] = [
-        {
-            url: ROUTES.ROUTER_REQUEST_SUPPLY_POINT,
-            done: false,
-            label: 'Výběr odběrného místa',
-        },
-        {
-            url: ROUTES.ROUTER_REQUEST_OFFER_SELECTION,
-            done: false,
-            label: 'Výběr nabídky',
-        },
-        {
-            url: ROUTES.ROUTER_DASHBOARD,
-            done: false,
-            label: 'Podepsání smlouvy',
-        },
-    ];
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepperByStatus(SupplyPointState.CREATE);
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -72,7 +51,6 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         this.globalError = [];
         this.fieldError = {};
         let saveSupplyPoint;
-        let ean = '';
 
         const supplyPoint: ISupplyPoint = R.pick([
             'id',
@@ -97,7 +75,6 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                     'annualConsumptionNT',
                     'annualConsumptionVT',
                 ], supplyPointFormData);
-            ean = powerAttributes.ean;
             saveSupplyPoint = this.supplyService.savePowerSupplyPoint(supplyPoint, powerAttributes);
         } else {
             const gasAttributes: ISupplyPointGasAttributes =
@@ -105,7 +82,6 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                     'eic',
                     'annualConsumption',
                 ], supplyPointFormData);
-            ean = gasAttributes.eic;
             saveSupplyPoint = this.supplyService.saveGasSupplyPoint(supplyPoint, gasAttributes);
         }
 

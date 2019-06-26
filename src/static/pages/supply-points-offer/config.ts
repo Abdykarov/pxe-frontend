@@ -10,17 +10,15 @@ import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 export class SupplyPointsOfferPageConfig {
     public stepperProgressConfig: IStepperProgressItem[] = [
         {
-            url: '/basic/new-supply-point',
             done: true,
             label: 'Výběr odběrného místa',
         },
         {
-            url: '/basic/supply-points-offer',
+            active: true,
             done: false,
             label: 'Výběr nabídky',
         },
         {
-            url: '/basic/contract-signing',
             done: false,
             label: 'Podepsání smlouvy',
         },

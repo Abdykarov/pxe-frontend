@@ -6,7 +6,17 @@
 
 <div class="static-pages-holder">
     <div class="static-pages static-pages--bg-transparent">
-        <pxe-request-card></pxe-request-card>
+        <pxe-request-card
+            [supplyPoint]="supplyPoint"
+            (action)="submitForm($event)"
+        ></pxe-request-card>
+    </div>
+    <h3>With badge</h3>
+    <div class="static-pages static-pages--bg-transparent">
+        <pxe-request-card
+            [supplyPoint]="supplyPoint2"
+            (action)="submitForm($event,id)"
+        ></pxe-request-card>
     </div>
 </div>
 

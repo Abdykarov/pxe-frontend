@@ -5,6 +5,7 @@ import { ConsumptionPipe } from './consumption/consumption.pipe';
 import { ConsumptionIndicatorPipe } from './consumption-indicator/consumption-indicator.pipe';
 import { DateDiffPipe } from './date-diff/date-diff.pipe';
 import { FilterCommodityTypePipe } from './filter-commodity-type/filter-commodity-type.pipe';
+import { IsOfferValid } from './is-offer-valid/is-offer-valid.pipe';
 import { IsRouteActivePipe } from './is-route-active/is-route-acrive.pipe';
 import { KeysPipe } from './keys/keys.pipe';
 import { PluralPipe } from './plurar/plural.pipe';
@@ -15,16 +16,18 @@ import { ValuesPipe } from './values/values.pipe';
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,
-        IsRouteActivePipe,
         FilterCommodityTypePipe,
+        IsOfferValid,
+        IsRouteActivePipe,
         KeysPipe,
-        ValuesPipe,
         PluralPipe,
+        ValuesPipe,
     ],
     exports: [
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,
+        IsOfferValid,
         IsRouteActivePipe,
         FilterCommodityTypePipe,
         KeysPipe,
@@ -35,11 +38,12 @@ import { ValuesPipe } from './values/values.pipe';
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,
+        IsOfferValid,
         IsRouteActivePipe,
         FilterCommodityTypePipe,
         KeysPipe,
-        ValuesPipe,
         PluralPipe,
+        ValuesPipe,
     ],
 })
 export class PipesModule {}
