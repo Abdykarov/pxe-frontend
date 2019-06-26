@@ -2,7 +2,6 @@
     <lnd-alert
             [type]="'danger'"
             [isDismissible]="false"
-            [hasIcon]="true"
             *ngIf="error">
         Při načítání odběrných míst došlo k chybě. Zkuste to později.<br>
         <ng-container *ngFor="let message of errorMessages">
@@ -30,7 +29,9 @@
         <div class="supply-points">
             <ng-container *ngFor="let supplierPoint of supplierPoints">
                 <pxe-supply-point
+                    *ngIf="supplierPoint"
                     [data]="supplierPoint"
+                    (action)="navigateToSupplyPointDetail($event)"
                 ></pxe-supply-point>
             </ng-container>
         </div>

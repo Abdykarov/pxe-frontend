@@ -25,9 +25,8 @@ export class ScrollToService {
     scrollToSubscription = () => {
         this.router.navigate([CONSTS.PATHS.EMPTY])
             .then(() => {
-                const that = this;
-                setTimeout(function() {
-                    that.activeScrollTo(SCROLL_TO.LANDING_SUBSCRIPTION);
+                setTimeout(() => {
+                    this.activeScrollTo(SCROLL_TO.LANDING_SUBSCRIPTION);
                 });
             });
     }

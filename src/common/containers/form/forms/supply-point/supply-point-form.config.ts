@@ -4,9 +4,13 @@ import {
     CommodityType,
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
-import { CONTRACT_END_TYPE } from 'src/app/app.constants';
+import {
+    CONTRACT_END_TYPE,
+    ROUTES,
+} from 'src/app/app.constants';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
+import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import {
     ICommodityTypeFields,
     IExpirationConfig,
@@ -29,10 +33,18 @@ export const expirationConfig: IExpirationConfig = {
         'timeToContractEnd': true,
         'timeToContractEndPeriodId': true,
     },
+    [CONTRACT_END_TYPE.CONTRACT_END_DEFAULT]: {
+        'expirationDate': false,
+        'timeToContractEnd': false,
+        'timeToContractEndPeriodId': false,
+    },
 };
 
 export const formFields: IForm = {
     controls: {
+        id: [
+            null,
+        ],
         commodityType: [
             CommodityType.POWER,
             [
@@ -234,7 +246,59 @@ export const formFields: IForm = {
     },
 };
 
-export const commodityTypeFields: ICommodityTypeFields = {
-    [CommodityType.POWER]: ['ean', 'distributionRateId', 'phasesId', 'circuitBreakerId', 'annualConsumptionNT', 'annualConsumptionVT'],
-    [CommodityType.GAS]: ['eic', 'annualConsumption'],
+export const supplyPointDetailAllowedFields: ICommodityTypeFields = {
+    [CommodityType.POWER]: [
+        'id',
+        'commodityType',
+        'name',
+        'annualConsumptionNT',
+        'annualConsumptionVT',
+    ],
+    [CommodityType.GAS]: [
+        'id',
+        'commodityType',
+        'name',
+        'annualConsumption',
+    ],
+};
+
+export const supplyPointAllowedFields: ICommodityTypeFields = {
+    [CommodityType.POWER]: [
+        'id',
+        'commodityType',
+        'subjectTypeId',
+        'supplierId',
+        'name',
+        'ean',
+        'address',
+        'distributionRateId',
+        'circuitBreakerId',
+        'phasesId',
+        'annualConsumptionNT',
+        'annualConsumptionVT',
+        'expirationDate',
+        'contractEndTypeId',
+        'timeToContractEnd',
+        'timeToContractEndPeriodId',
+    ],
+    [CommodityType.GAS]: [
+        'id',
+        'commodityType',
+        'subjectTypeId',
+        'supplierId',
+        'name',
+        'eic',
+        'address',
+        'annualConsumption',
+        'expirationDate',
+        'contractEndTypeId',
+        'timeToContractEnd',
+        'timeToContractEndPeriodId',
+    ],
+};
+
+export const supplyDetailInfoBanner: IBannerObj = {
+    linkValue: ROUTES.ROUTER_REQUEST_SUPPLY_POINT,
+    linkData: null,
+    text: 'Platnost smlouvy končí za 60 dní',
 };
