@@ -3,9 +3,9 @@ import {
     Component,
     EventEmitter,
     Input,
+    OnInit,
     Output,
     TemplateRef,
-    ViewChild,
 } from '@angular/core';
 import {
     FormGroup,
@@ -21,16 +21,16 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AddressWhispererService } from './services/address-whisperer.service';
+import { IAddress } from 'src/common/graphql/models/supply.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IValidationMessages } from 'src/common/ui/forms/models/validation-messages.model';
-import { SelectComponent } from 'src/common/ui/forms/select/select.component';
 
 @Component({
     selector: 'pxe-address-whisperer',
     templateUrl: './address-whisperer.component.html',
     styleUrls: ['./address-whisperer.component.scss'],
 })
-export class AddressWhispererComponent extends AbstractComponent {
+export class AddressWhispererComponent extends AbstractComponent implements OnInit {
     private static readonly ADDRESS_MIN_LENGTH = 2;
     private static readonly DEBOUNCE_TIME = 200;
     private static readonly ROWS_RESPONSE = 5;
@@ -80,10 +80,7 @@ export class AddressWhispererComponent extends AbstractComponent {
     @Input()
     public whispererName: string;
 
-    @ViewChild('lndSelect')
-    public lndSelect: SelectComponent;
-
-    public addresses: Array<IOption> = [];
+    public addresses: Array<IAddress> = [];
     public typeahead: EventEmitter<any>;
 
     constructor(
@@ -101,7 +98,7 @@ export class AddressWhispererComponent extends AbstractComponent {
                 distinctUntilChanged(),
                 switchMap((term: string) => this.addressWhispererService.getPlaces(AddressWhispererComponent.ROWS_RESPONSE, term)),
             )
-            .subscribe((addresses: Array<IOption>)  => {
+            .subscribe((addresses: Array<IAddress>)  => {
                 this.setAddresses(addresses);
             }, (err) => {
                 this.setAddresses();
@@ -111,9 +108,5 @@ export class AddressWhispererComponent extends AbstractComponent {
     public setAddresses = (addresses = []) => {
         this.addresses = addresses;
         this.cd.markForCheck();
-    }
-
-    public setValue(item: IOption) {
-        this.lndSelect.setItem(item);
     }
 }

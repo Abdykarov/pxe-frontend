@@ -73,7 +73,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                     this.supplyPoint = supplyPoint;
                     this.isIndividual = this.supplyPoint.subject.code === SubjectType.SUBJECT_TYPE_INDIVIDUAL;
                     if (R.path(['contract', 'personalData', 'name'], this.supplyPoint)) {
-                        this.personalInfoForm.prefillFormData(this.supplyPoint.contract.personalData);
+                        // this.personalInfoForm.prefillFormData(this.supplyPoint.contract.personalData);
                     }
                     this.cd.markForCheck();
                 },

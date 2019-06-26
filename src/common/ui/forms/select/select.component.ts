@@ -4,16 +4,12 @@ import {
     Input,
     Output,
     TemplateRef,
-    ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import * as R from 'ramda';
-import {
-    NgSelectComponent,
-    NgSelectConfig,
-} from '@ng-select/ng-select';
+import { NgSelectConfig } from '@ng-select/ng-select';
 
 import { defaultSelectConfig } from './select.config';
 import { getErrorMessage } from 'src/common/utils';
@@ -95,14 +91,6 @@ export class SelectComponent {
 
     @Input()
     public warning?: any;
-
-    @ViewChild('select')
-    public ngSelect: NgSelectComponent;
-
-    public setItem(item: IOption) {
-        this.ngSelect.items = [item];
-        this.ngSelect.select(item);
-    }
 
     public customSearchFn = (term: string, item: any) => {
         if (!!term && term.length > 2) {
