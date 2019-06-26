@@ -1,6 +1,6 @@
 import {
     ActivatedRoute,
-    Router
+    Router,
 } from '@angular/router';
 import {
     ChangeDetectorRef,
