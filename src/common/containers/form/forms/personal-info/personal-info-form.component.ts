@@ -1,4 +1,5 @@
 import {
+    AfterViewInit,
     Component,
     Input,
     OnChanges,
@@ -10,6 +11,7 @@ import {
     Validators,
 } from '@angular/forms';
 
+import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
@@ -23,7 +25,7 @@ import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
     templateUrl: './personal-info-form.component.html',
     styleUrls: ['./personal-info-form.component.scss'],
 })
-export class PersonalInfoFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
+export class PersonalInfoFormComponent extends AbstractFormComponent implements OnInit {
 
     @Input()
     public supplyPoint: ISupplyPoint;
@@ -48,6 +50,19 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
                 this.setAddress2(val);
             });
 
+        if (this.supplyPoint.contract && this.supplyPoint.contract.offer && this.supplyPoint.contract.offer.mountlyPaymentPrice > 0) {
+            this.form.controls['deposit']
+                .setValidators(
+                    [
+                        Validators.required,
+                        CustomValidators.isDecimal,
+                        CustomValidators.minValue(this.supplyPoint.contract.offer.mountlyPaymentPrice,
+                            true,
+                            false,
+                        ),
+                    ]);
+        }
+
         this.setForm();
     }
 
@@ -59,24 +74,6 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         } else {
             this.setEnableField('ico');
             this.setEnableField('dic');
-        }
-    }
-
-    ngOnChanges(changes: SimpleChanges) {
-        super.ngOnChanges(changes);
-
-        if (this.form) {
-            this.form.controls['deposit']
-                .setValidators(
-                    [
-                        Validators.required,
-                        CustomValidators.isDecimal,
-                        CustomValidators.minValue(
-                            this.supplyPoint.contract ?
-                                (this.supplyPoint.contract.offer.mountlyPaymentPrice) : 0,
-                            true,
-                        ),
-                    ]);
         }
     }
 
@@ -94,7 +91,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         if (this.form.valid) {
             const form: IPersonalDataInputForm = {
                 ...this.form.value,
-                phone: this.form.value.phonePrefix + this.form.value.phone,
+                phone: R.concat(this.form.value.phonePrefix, this.form.value.phone),
                 deposit: parseFloat(this.form.value.deposit.replace(',', '.')),
             };
             delete form.phonePrefix;

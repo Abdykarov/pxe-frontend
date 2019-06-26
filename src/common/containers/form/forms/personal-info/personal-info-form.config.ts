@@ -162,6 +162,7 @@ export const formFields: IForm = {
             required: errorFieldMessages.deposit.required,
             decimal: errorFieldMessages.number.decimal,
             min: errorFieldMessages.number.positive,
+            minMinActual: errorFieldMessages.deposit.requiredMinValue,
         },
     },
 };
