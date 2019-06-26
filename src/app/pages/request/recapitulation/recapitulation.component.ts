@@ -15,7 +15,7 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { formFields } from 'src/common/containers/form/forms/personal-info/personal-info-form.config';
-import { getConfigStepperByStatus } from 'src/common/utils/get-progress-stepper-config.fnc';
+import { getConfigStepperByState } from 'src/common/utils/get-progress-stepper-config.fnc';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IPersonalDataInput } from 'src/common/graphql/models/personal-data.model';
@@ -35,7 +35,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./recapitulation.component.scss'],
 })
 export class RecapitulationComponent extends AbstractComponent implements OnInit {
-    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepperByStatus(SupplyPointState.PERSONAL_INFO);
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepperByState(SupplyPointState.PERSONAL_INFO);
 
     public formFields = formFields;
     public formSent = false;

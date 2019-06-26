@@ -14,7 +14,7 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractService } from 'src/common/graphql/services/contract.service';
-import { getConfigStepperByStatus } from 'src/common/utils/get-progress-stepper-config.fnc';
+import { getConfigStepperByState } from 'src/common/utils/get-progress-stepper-config.fnc';
 import {
     ISupplyPoint,
     SupplyPointState,
@@ -32,7 +32,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class OfferSelectionComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
-    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepperByStatus(SupplyPointState.CHOOSE_OFFER);
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepperByState(SupplyPointState.CHOOSE_OFFER);
     public supplyPointOffers: ISupplyPointOffer[];
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;

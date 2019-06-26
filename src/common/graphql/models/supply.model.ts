@@ -6,12 +6,12 @@ export enum CommodityType {
 }
 
 export enum SupplyPointState {
-    CREATE =  '1/3 Vytvoření odběrného místa',
-    CHOOSE_OFFER = '2/3 Volba nabídky',
-    PERSONAL_INFO = '2/3 Vyplnění osobních informací',
-    CONTRACT = '2/3 Podepsání smlouvy',
-    PAYMENT = '2/3 Platba',
-    COMPLETED = '3/3 Dokončeno',
+    CREATE =  'CREATE',
+    CHOOSE_OFFER = 'CHOOSE_OFFER',
+    PERSONAL_INFO = 'PERSONAL_INFO',
+    CONTRACT = 'CONTRACT',
+    PAYMENT = 'PAYMENT',
+    COMPLETED = 'COMPLETED',
 }
 
 export enum DistributionType {

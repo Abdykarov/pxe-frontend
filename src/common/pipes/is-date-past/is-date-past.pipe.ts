@@ -6,14 +6,11 @@ import {
 import * as moment from 'moment';
 
 @Pipe({
-    name: 'isOfferValid',
+    name: 'isDatePast',
 })
-export class IsOfferValid implements PipeTransform {
+export class IsDatePast implements PipeTransform {
 
     transform(validTo: string): boolean {
-        if (!validTo) {
-            return true;
-        }
         const to = moment(validTo);
         const now = moment();
         return to.diff(now) > 0;

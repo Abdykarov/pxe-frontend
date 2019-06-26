@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { getConfigStepperByStatus } from 'src/common/utils/get-progress-stepper-config.fnc';
+import { getConfigStepperByState } from 'src/common/utils/get-progress-stepper-config.fnc';
 import { SupplyPointState } from 'src/common/graphql/models/supply.model';
 
 @Component({
@@ -13,6 +13,6 @@ import { SupplyPointState } from 'src/common/graphql/models/supply.model';
     styleUrls: ['./payment.component.scss'],
 })
 export class PaymentComponent extends AbstractComponent implements OnInit {
-    public configStepper = getConfigStepperByStatus(SupplyPointState.PAYMENT);
+    public configStepper = getConfigStepperByState(SupplyPointState.PAYMENT);
     public globalError: string[] = [];
 }

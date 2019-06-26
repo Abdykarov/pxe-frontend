@@ -59,8 +59,9 @@ export const getSupplyPointState = (supplyPoint: ISupplyPoint): SupplyPointState
     return SupplyPointState.CONTRACT;
 };
 
-export const getConfigStepperByStatus = (activeStep: SupplyPointState): IStepperProgressItem[] => {
+export const getConfigStepperByState = (activeStep: SupplyPointState): IStepperProgressItem[] => {
     let wasFoundItem = false;
+
     return R.map((item: IStepperProgressItem) => {
         if ( item.step !== activeStep && !wasFoundItem) {
             item.done = true;
@@ -76,5 +77,5 @@ export const getConfigStepperByStatus = (activeStep: SupplyPointState): IStepper
 
         item.done = false;
         return item;
-    }, R.mergeDeepLeft({}, steps));
+    }, R.clone(steps));
 };

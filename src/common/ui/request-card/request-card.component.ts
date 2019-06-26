@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 import {
-    getConfigStepperByStatus,
+    getConfigStepperByState,
     getSupplyPointState,
 } from 'src/common/utils/get-progress-stepper-config.fnc';
 import {
@@ -34,6 +34,6 @@ export class RequestCardComponent implements OnInit {
 
     ngOnInit(): void {
         this.supplyPointState = getSupplyPointState(this.supplyPoint);
-        this.stepperProgressConfig = getConfigStepperByStatus(this.supplyPointState);
+        this.stepperProgressConfig = getConfigStepperByState(this.supplyPointState);
     }
 }
