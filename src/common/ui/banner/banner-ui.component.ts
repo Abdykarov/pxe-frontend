@@ -34,11 +34,11 @@ export class BannerUIComponent extends AbstractComponent {
     @Output()
     public staticBannerAction?: EventEmitter<any> = new EventEmitter<any>();
 
-    public bannerAction(value: string, type: string) {
+    public bannerAction(value: string, type: string, state: any = null) {
         if (type === 'external') {
             window.open(value);
         } else {
-            this.router.navigate([value]);
+            this.router.navigate([value], {state});
         }
     }
 

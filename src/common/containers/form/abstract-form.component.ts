@@ -109,12 +109,12 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         return this.form.get(fieldName).value;
     }
 
-    public setEnableField = (fieldName: string): void => {
-        this.form.get(fieldName).enable();
+    public setEnableField = (fieldName: string, opts = {}): void => {
+        this.form.get(fieldName).enable(opts);
     }
 
-    public setDisableField = (fieldName: string): void => {
-        this.form.get(fieldName).disable();
+    public setDisableField = (fieldName: string, opts = {}): void => {
+        this.form.get(fieldName).disable(opts);
     }
 
 

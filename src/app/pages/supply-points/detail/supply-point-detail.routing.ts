@@ -5,16 +5,12 @@ import {
 } from '@angular/router';
 
 import { CONSTS } from 'src/app/app.constants';
-import { SupplyPointsComponent } from './supply-points.component';
+import { SupplyPointDetailComponent } from './supply-point-detail.component';
 
 const routes: Routes = [
     {
         path: CONSTS.PATHS.EMPTY,
-        component: SupplyPointsComponent,
-    },
-    {
-        path: ':supplyPointId',
-        loadChildren: '../../pages/supply-points/detail/supply-point-detail.module#SupplyPointDetailModule',
+        component: SupplyPointDetailComponent,
     },
 ];
 
@@ -26,4 +22,4 @@ const routes: Routes = [
         RouterModule,
     ],
 })
-export class SupplyPointsRoutingModule {}
+export class NewSupplyPointRoutingModule {}
