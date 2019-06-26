@@ -30,7 +30,6 @@ import {
 } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { SupplyPointDetailConfig } from './supply-point-detail.config';
 
 @Component({
     templateUrl: './supply-point-detail.component.html',
@@ -48,7 +47,6 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
 
     constructor(
         private cd: ChangeDetectorRef,
-        public config: SupplyPointDetailConfig,
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,

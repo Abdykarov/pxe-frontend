@@ -70,7 +70,12 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
     }
 
-    public supplyPointDetail = (supplyPoint: ISupplyPoint) => {
-        this.router.navigate([supplyPoint.id], { relativeTo: this.route });
+    public navigateToSupplyPointDetail = ({id}: ISupplyPoint) => {
+        this.router.navigate(
+            [id],
+            {
+                relativeTo: this.route,
+            },
+        );
     }
 }
