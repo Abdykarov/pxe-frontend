@@ -6,10 +6,8 @@ import {
     ChangeDetectorRef,
     Component,
     OnInit,
-    ViewChild,
 } from '@angular/core';
 
-import * as R from 'ramda';
 import {
     map,
     takeUntil,
@@ -27,7 +25,6 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
-import { PersonalInfoFormComponent } from 'src/common/containers/form/forms/personal-info/personal-info-form.component';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
@@ -49,9 +46,6 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
-    @ViewChild('personalInfoForm')
-    public personalInfoForm: PersonalInfoFormComponent;
-
     constructor(
         private cd: ChangeDetectorRef,
         private personalDataService: PersonalDataService,
@@ -72,9 +66,6 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                 (supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
                     this.isIndividual = this.supplyPoint.subject.code === SubjectType.SUBJECT_TYPE_INDIVIDUAL;
-                    if (R.path(['contract', 'personalData', 'name'], this.supplyPoint)) {
-                        // this.personalInfoForm.prefillFormData(this.supplyPoint.contract.personalData);
-                    }
                     this.cd.markForCheck();
                 },
                 (error) => {
