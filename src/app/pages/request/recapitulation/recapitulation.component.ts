@@ -83,7 +83,12 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
 
         // todo remove after BE fix
         // onum error fix
-        personalInfoInput.address1.orientationNumber = '5';
+        if (personalInfoInput.address1) {
+            personalInfoInput.address1.orientationNumber = personalInfoInput.address1.orientationNumber || '0';
+        }
+        if (personalInfoInput.address2) {
+            personalInfoInput.address2.orientationNumber = personalInfoInput.address2.orientationNumber || '0';
+        }
 
         this.personalDataService.savePersonalData(this.supplyPoint, personalInfoInput)
             .pipe(
