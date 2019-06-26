@@ -15,6 +15,7 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { formFields } from 'src/common/containers/form/forms/personal-info/personal-info-form.config';
+import { getConfigStepperByStatus } from 'src/common/utils/get-progress-stepper-config.fnc';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IPersonalDataInput } from 'src/common/graphql/models/personal-data.model';
@@ -27,7 +28,6 @@ import { parseGraphQLErrors } from 'src/common/utils';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { getConfigStepperByStatus } from 'src/common/utils/get-progress-stepper-config.fnc';
 
 @Component({
     selector: 'pxe-recapitulation',

@@ -1,7 +1,11 @@
 import * as R from 'ramda';
 
+import { ContractStatus } from 'src/common/graphql/models/contract';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
-import { ISupplyPoint, SupplyPointState } from 'src/common/graphql/models/supply.model';
+import {
+    ISupplyPoint,
+    SupplyPointState,
+} from 'src/common/graphql/models/supply.model';
 
 const steps: IStepperProgressItem[] = [
     {
@@ -47,15 +51,17 @@ export const getSupplyPointState = (supplyPoint: ISupplyPoint): SupplyPointState
         return SupplyPointState.PERSONAL_INFO;
     }
 
-    // todo platba a contract a smlouva atd..
+    if (supplyPoint.contract.contractStatus === ContractStatus.CONCLUDED) {
+        return SupplyPointState.CONTRACT;
+    }
+
+    // todo platba
     return SupplyPointState.CONTRACT;
 };
 
 export const getConfigStepperByStatus = (activeStep: SupplyPointState): IStepperProgressItem[] => {
     let wasFoundItem = false;
-    return R.map((itemStep: IStepperProgressItem) => {
-        const item = R.mergeDeepLeft({}, itemStep);
-
+    return R.map((item: IStepperProgressItem) => {
         if ( item.step !== activeStep && !wasFoundItem) {
             item.done = true;
             return item;
@@ -70,5 +76,5 @@ export const getConfigStepperByStatus = (activeStep: SupplyPointState): IStepper
 
         item.done = false;
         return item;
-    }, steps);
+    }, R.mergeDeepLeft({}, steps));
 };
