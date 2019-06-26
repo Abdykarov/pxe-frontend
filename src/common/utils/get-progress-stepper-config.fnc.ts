@@ -56,7 +56,7 @@ export const getSupplyPointState = (supplyPoint: ISupplyPoint): SupplyPointState
     }
 
     // todo platba
-    return SupplyPointState.CONTRACT;
+    return SupplyPointState.COMPLETED;
 };
 
 export const getConfigStepperByState = (activeStep: SupplyPointState): IStepperProgressItem[] => {

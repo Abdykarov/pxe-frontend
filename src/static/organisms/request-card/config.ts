@@ -25,14 +25,7 @@ export const supplyPointConfig: ISupplyPoint = {
     contractEndType: null,
     timeToContractEnd: 0,
     timeToContractEndPeriod: null,
-    contract: {
-        contractId: '1',
-        contractStatus: null,
-        deliveryFrom: null,
-        deliveryTo: null,
-        offer: null,
-        personalData: null,
-    },
+    contract: null,
 };
 
 export const supplyPointConfig2: ISupplyPoint = {
