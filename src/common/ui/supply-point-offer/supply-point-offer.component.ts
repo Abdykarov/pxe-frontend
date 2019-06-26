@@ -6,6 +6,8 @@ import {
     Output,
 } from '@angular/core';
 
+import * as R_ from 'ramda-extension';
+
 import { AbstractComponent } from 'src/common/abstract.component';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
@@ -38,7 +40,7 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     public isOwner = false;
 
     @Input()
-    public isNotInteractive = false;
+    public interactive = false;
 
     @Output()
     public action: EventEmitter<any> = new EventEmitter();
@@ -62,6 +64,14 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
 
         if (this.dateDiffValidityOfOffer <= SupplyPointOfferComponent.MAX_HOURS_VALIDITY_OF_OFFER_DISPLAYED) {
             this.showValidityOfOffer = true;
+        }
+
+        if (R_.isString(this.supplyPointOffer.benefits)) {
+            try {
+                this.supplyPointOffer.benefits = JSON.parse(<string>this.supplyPointOffer.benefits);
+            } catch (e) {
+                this.supplyPointOffer.benefits = null;
+            }
         }
     }
 

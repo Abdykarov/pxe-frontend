@@ -30,6 +30,10 @@ const routes: Routes = [
                 path: CONSTS.PATHS.RECAPITULATION,
                 loadChildren: '../../pages/request/recapitulation/recapitulation.module#RecapitulationModule',
             },
+            {
+                path: CONSTS.PATHS.PAYMENT,
+                loadChildren: '../../pages/request/payment/payment.module#PaymentModule',
+            },
         ],
     },
 ];

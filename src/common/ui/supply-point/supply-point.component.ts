@@ -1,6 +1,8 @@
 import {
     Component,
+    EventEmitter,
     Input,
+    Output,
 } from '@angular/core';
 
 import { ISupplyPointFindData } from 'src/common/graphql/models/supply.model';
@@ -16,4 +18,7 @@ export class SupplyPointComponent {
 
     @Input()
     public data: ISupplyPointFindData;
+
+    @Output()
+    public action: EventEmitter<any> = new EventEmitter();
 }

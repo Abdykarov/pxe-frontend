@@ -45,7 +45,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
 
     public isIndividual = true;
     public supplyPoint: ISupplyPoint;
-    public supplyPointId = this.route.snapshot.queryParams['supplyPointId'];
+    public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -89,7 +89,12 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             )
             .subscribe(
                 () => {
-                    this.router.navigate([ROUTES.ROUTER_REQUEST_CONTRACT]);
+                    this.router.navigate(
+                        [ROUTES.ROUTER_REQUEST_CONTRACT], {
+                        queryParams: {
+                            supplyPointId: this.supplyPointId,
+                        },
+                    });
                 },
                 (error) => {
                     this.formLoading = false;

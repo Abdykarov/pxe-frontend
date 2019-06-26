@@ -1,7 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
-import * as R from 'ramda';
 import {
     map,
     takeUntil,
@@ -30,7 +29,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepperByStatus(SupplyPointState.CHOOSE_OFFER);
     public supplyPointOffers: ISupplyPointOffer[];
     public supplyPoint: ISupplyPoint;
-    public supplyPointId = this.route.snapshot.queryParams['supplyPointId'];
+    public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -71,15 +70,6 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
             .subscribe(
                 (findSupplyPointOffers: ISupplyPointOffer[]) => {
                     this.supplyPointOffers = findSupplyPointOffers;
-                    R.map((supplyPointOffer: ISupplyPointOffer) => {
-                        let benefits: string[] = [];
-
-                        try {
-                            benefits = supplyPointOffer.benefits && JSON.parse(<string>supplyPointOffer.benefits);
-                        } catch (e) {}
-
-                        supplyPointOffer.benefits = benefits;
-                    } , this.supplyPointOffers);
                     this.cd.markForCheck();
                 },
                 (error) => {

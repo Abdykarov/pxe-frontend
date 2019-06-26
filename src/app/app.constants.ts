@@ -2,6 +2,7 @@ import {
     CommodityType,
     DistributionType,
     SubjectType,
+    TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 
@@ -26,11 +27,13 @@ export const CONSTS = {
         LOGOUT : 'logout',
         NOT_FOUND : '404',
         OFFER_SELECTION : 'offer-selection',
+        PAYMENT : 'payment',
         POWER: 'power',
         PROFILE: 'profile',
         RECAPITULATION : 'recapitulation',
         REQUEST : 'request',
         REQUESTS : 'requests',
+        RESULT : 'result',
         SECURED : 'secured',
         SECURING_YOUR_DATA : 'securing-your-data',
         SIGN_UP : 'sign-up',
@@ -52,8 +55,10 @@ export const ROUTES = {
     ROUTER_SUPPLY_OFFER_GAS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_OFFER}/${CONSTS.PATHS.GAS}`,
     ROUTER_REQUEST_CONTRACT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.CONTRACT}`,
     ROUTER_REQUEST_OFFER_SELECTION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.OFFER_SELECTION}`,
+    ROUTER_REQUEST_PAYMENT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.PAYMENT}`,
     ROUTER_REQUEST_RECAPITULATION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.RECAPITULATION}`,
     ROUTER_REQUEST_SUPPLY_POINT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.SUPPLY_POINT}`,
+    ROUTER_REQUEST_RESULT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.RESULT}`,
     ROUTER_DASHBOARD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.DASHBOARD}`,
 };
 
@@ -93,6 +98,12 @@ export const CONTRACT_END_TYPE = {
     CONTRACT_END_TERM: 'Urcita',
     CONTRACT_END_INDEFINITE_PERIOD: 'Neurcita',
     CONTRACT_END_TERMINATE: 'Vypoved',
+    CONTRACT_END_DEFAULT: 'DEFAULT',
+};
+
+export const TIME_TO_CONTRACT_END_PERIOD_MAP = {
+    [TimeToContractEndPeriod.DAY]: 'day',
+    [TimeToContractEndPeriod.MONTH]: 'month',
 };
 
 export const SUBJECT_TYPE_TO_DIST_RATE_MAP = {

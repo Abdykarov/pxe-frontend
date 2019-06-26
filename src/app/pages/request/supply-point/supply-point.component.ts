@@ -1,5 +1,15 @@
-import { ActivatedRoute, Router } from '@angular/router';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
+import {
+    ChangeDetectorRef,
+    Component,
+    Inject,
+    OnInit,
+    PLATFORM_ID,
+} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import * as R from 'ramda';
 import {
@@ -42,8 +52,15 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
+    }
+
+    ngOnInit() {
+        if (isPlatformBrowser(this.platformId)) {
+            const supplyPointCopy = window.history.state.supplyPointCopy;
+        }
     }
 
     public submitSupplyForm = (supplyPointFormData: ISupplyPointFormData) => {
@@ -53,7 +70,6 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         let saveSupplyPoint;
 
         const supplyPoint: ISupplyPoint = R.pick([
-            'id',
             'supplierId',
             'name',
             'address',
@@ -62,7 +78,6 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
             'contractEndTypeId',
             'timeToContractEnd',
             'timeToContractEndPeriodId',
-
         ], supplyPointFormData);
 
         if (supplyPointFormData.commodityType === CommodityType.POWER) {
@@ -75,20 +90,20 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                     'annualConsumptionNT',
                     'annualConsumptionVT',
                 ], supplyPointFormData);
-            saveSupplyPoint = this.supplyService.savePowerSupplyPoint(supplyPoint, powerAttributes);
+            saveSupplyPoint = this.supplyService.createPowerSupplyPoint(supplyPoint, powerAttributes);
         } else {
             const gasAttributes: ISupplyPointGasAttributes =
                 R.pick([
                     'eic',
                     'annualConsumption',
                 ], supplyPointFormData);
-            saveSupplyPoint = this.supplyService.saveGasSupplyPoint(supplyPoint, gasAttributes);
+            saveSupplyPoint = this.supplyService.createGasSupplyPoint(supplyPoint, gasAttributes);
         }
 
         saveSupplyPoint
             .pipe(
                 takeUntil(this.destroy$),
-                map(({data}) => data.savePowerSupplyPoint || data.saveGasSupplyPoint),
+                map(({data}) => data.createPowerSupplyPoint || data.createGasSupplyPoint),
             )
             .subscribe(
                 (supplyPointId) => {

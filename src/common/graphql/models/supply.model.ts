@@ -24,6 +24,11 @@ export enum SubjectType {
     SUBJECT_TYPE_BUSINESSMAN = '2',
 }
 
+export enum TimeToContractEndPeriod {
+    DAY = 'Den',
+    MONTH = 'Mesic',
+}
+
 export interface IAddress {
     street: string;
     orientationNumber: string;
@@ -65,11 +70,20 @@ export interface ISupplyPointGasAttributes {
     annualConsumption: number;
 }
 
+export interface ISupplyPointUpdateGasAttributes {
+    annualConsumption: number;
+}
+
 export interface ISupplyPointPowerAttributes {
     ean: string;
     circuitBreakerId: string;
     phasesId: string;
     distributionRateId: string;
+    annualConsumptionNT: number;
+    annualConsumptionVT: number;
+}
+
+export interface ISupplyPointUpdatePowerAttributes {
     annualConsumptionNT: number;
     annualConsumptionVT: number;
 }
