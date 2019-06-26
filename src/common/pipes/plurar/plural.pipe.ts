@@ -48,6 +48,13 @@ export class PluralPipe implements PipeTransform {
             '=4' : 'roky',
             'other' : 'let',
         },
+        'month': {
+            '=1' : 'měsíc',
+            '=2' : 'měsíce',
+            '=3' : 'měsíce',
+            '=4' : 'měsíce',
+            'other' : 'měsíců',
+        },
     };
 
     constructor(

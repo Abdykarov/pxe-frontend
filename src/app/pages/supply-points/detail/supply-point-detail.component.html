@@ -1,0 +1,24 @@
+<pxe-layout-container pageTitle="Odběrná místa">
+    <lnd-alert
+            [type]="'danger'"
+            [isDismissible]="false"
+            *ngIf="globalError.length">
+        Došlo k chybě. Zkuste to později.<br>
+        <ng-container *ngFor="let message of globalError">
+            {{ message }}<br>
+        </ng-container>
+    </lnd-alert>
+    <lnd-placeloader [loading]="dataLoading && !globalError.length"></lnd-placeloader>
+    <ng-container *ngIf="supplyPoint && !dataLoading">
+        <pxe-supply-point-detail-form
+                [formFields]="formFields"
+                [formLoading]="formLoading"
+                [formSent]="formSent"
+                [globalError]="globalError"
+                [fieldError]="fieldError"
+                (submitAction)="updateSupplyForm($event)"
+                (customAction)="cancelUpdate()"
+                [supplyPoint]="supplyPoint"
+        ></pxe-supply-point-detail-form>
+    </ng-container>
+</pxe-layout-container>

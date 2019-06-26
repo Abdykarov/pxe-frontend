@@ -3,35 +3,32 @@ import {
     Component,
     OnChanges,
     OnInit,
-    SimpleChanges } from '@angular/core';
+    SimpleChanges,
+} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
-import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
+import { AbstractSupplyPointFormComponent } from './abstract-supply-point-form.component';
 import {
     CODE_LIST,
     CODE_LIST_TYPES,
     COMMODITY_TYPE_OPTIONS,
     CONTRACT_END_TYPE,
-    DISTRIBUTION_RATES_TYPE_DEFINITION,
     SUBJECT_TYPE_OPTIONS,
     SUBJECT_TYPE_TO_DIST_RATE_MAP,
 } from 'src/app/app.constants';
-import {
-    CommodityType,
-    DistributionType,
-} from 'src/common/graphql/models/supply.model';
-import {
-    commodityTypeFields,
-    expirationConfig,
-} from './supply-point-form.config';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import {
     convertArrayToObject,
     transformCodeList,
     transformSuppliers,
 } from 'src/common/utils';
+import {
+    expirationConfig,
+    supplyPointAllowedFields,
+} from './supply-point-form.config';
 import { HelpModalComponent } from 'src/common/containers/modal/modals/help/help-modal.component';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
@@ -42,7 +39,8 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     templateUrl: './supply-point-form.component.html',
     styleUrls: ['./supply-point-form.component.scss'],
 })
-export class SupplyPointFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
+export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent implements OnInit, OnChanges {
+    public allowedFields = supplyPointAllowedFields;
     public commodityTypeOptions: Array<IOption> = COMMODITY_TYPE_OPTIONS;
     public subjectTypeOptions: Array<IOption> = SUBJECT_TYPE_OPTIONS;
     public codeLists;
@@ -76,6 +74,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
                 this.setFormByCommodity(commodityType);
                 this.resetFieldValue('supplierId', false);
                 this.setAnnualConsumptionNTState(commodityType === CommodityType.POWER ? this.getFieldValue('distributionRateId') : null);
+                this.setContractEndFields(this.getFieldValue('contractEndTypeId') || CONTRACT_END_TYPE.CONTRACT_END_DEFAULT);
             });
 
         this.form.get('subjectTypeId')
@@ -102,7 +101,7 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
             .valueChanges
             .pipe(takeUntil(this.destroy$))
             .subscribe(val => {
-                this.changeByContractEndType(val);
+                this.setContractEndFields(val);
             });
 
         this.form.get('supplierId')
@@ -114,47 +113,28 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
                 this.helpDocuments = val && val.sampleDocuments ? convertArrayToObject(val.sampleDocuments, 'type') : {};
             });
 
-        this.setFormByCommodity(CommodityType.POWER);
-        this.loadCodeLists();
+        this.setFormByCommodity();
         this.setAnnualConsumptionNTState();
-        this.hideAllContractEndType();
+        this.setContractEndFields();
+        this.loadCodeLists();
     }
 
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
     }
 
-    public includesBothTariffs = (id: string) => DISTRIBUTION_RATES_TYPE_DEFINITION[DistributionType.BOTH].includes(id);
-
-    public changeByContractEndType(changeByContractEndType: string) {
-        const configchoseItem = this.expirationConfig[changeByContractEndType];
+    public setContractEndFields = (changeByContractEndType: string = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT) => {
+        const selectedContractEndType = this.expirationConfig[changeByContractEndType];
 
         R.forEachObjIndexed((show: boolean, field: string) => {
             show ? this.setEnableField(field) : this.setDisableField(field);
-        }, configchoseItem);
+        }, selectedContractEndType);
 
         this.cd.markForCheck();
     }
 
-    public hideAllContractEndType() {
-        R.forEachObjIndexed((value: string, field: string) => {
-            this.setDisableField(field);
-        }, this.expirationConfig[CONTRACT_END_TYPE.CONTRACT_END_TERM]);
-    }
-
-    public setFormByCommodity = (commodityType: CommodityType) => {
-        R.mapObjIndexed((fields: string[], type: CommodityType) => {
-            if (commodityTypeFields[type]) {
-                R.map((field) => {
-                    if (type === commodityType) {
-                        this.setEnableField(field);
-                    } else {
-                        this.setDisableField(field);
-                    }
-                }, fields);
-            }
-        }, commodityTypeFields);
-
+    public setFormByCommodity = (commodityType: CommodityType = CommodityType.POWER) => {
+        this.setFormFields(commodityType);
         this.loadSuppliers(commodityType);
     }
 
@@ -203,14 +183,6 @@ export class SupplyPointFormComponent extends AbstractFormComponent implements O
                 this.codeLists = transformCodeList(data.findCodelistsByTypes);
                 this.cd.markForCheck();
             });
-    }
-
-    public setAnnualConsumptionNTState = (distributionRateId: string = null) => {
-        if (this.includesBothTariffs(distributionRateId)) {
-            this.setEnableField('annualConsumptionNT');
-        } else {
-            this.setDisableField('annualConsumptionNT');
-        }
     }
 
     public loadSuppliers = (commodityType) => {

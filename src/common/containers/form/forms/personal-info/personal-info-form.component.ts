@@ -116,6 +116,9 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         if (this.isIndividual) {
             this.setDisableField('ico');
             this.setDisableField('dic');
+        } else {
+            this.setEnableField('ico');
+            this.setEnableField('dic');
         }
     }
 

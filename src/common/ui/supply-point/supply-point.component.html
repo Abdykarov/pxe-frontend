@@ -1,4 +1,5 @@
-<a class="supply-point">
+<a class="supply-point"
+   (click)="action.emit(data)">
     <div class="row no-gutters">
         <div class="col-12 col-xl-7">
             <div class="supply-point__inner supply-point__inner--info">
@@ -66,7 +67,8 @@
                             <div class="col-12 col-md-4 supply-point__addon">
                                 <lnd-button
                                     label="Vybrat"
-                                    type="primary">
+                                    type="primary"
+                                    (action)="$event.stopPropagation();action.emit(data)">
                                 </lnd-button>
                             </div>
                         </div>
