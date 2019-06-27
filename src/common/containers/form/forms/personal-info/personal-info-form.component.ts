@@ -58,9 +58,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             });
 
         if (this.formValues) {
-            if (this.formValues.name) {
-                this.prefillFormData();
-            }
+            this.prefillFormData();
         }
     }
 
