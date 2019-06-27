@@ -60,6 +60,10 @@ import {
     infoBannerPageRoutes,
 } from 'src/static/organisms/info-banner/page.module';
 import {
+    ListSupplyPointsPageModule,
+    listSupplyPointsPageRoutes,
+} from 'src/static/pages/list-supply-points/page.module';
+import {
     ModalsPageModule,
     modalsPageRoutes,
 } from 'src/static/organisms/modals/page.module';
@@ -142,6 +146,7 @@ const routes: Routes = [
             ...iconsPageRoutes,
             ...indicatorsPageRoutes,
             ...infoBannerPageRoutes,
+            ...listSupplyPointsPageRoutes,
             ...modalsPageRoutes,
             ...newSupplyPointPageRoutes,
             ...progressBarPageRoutes,
@@ -181,6 +186,7 @@ const routes: Routes = [
         IconsPageModule,
         IndicatorsPageModule,
         InfoBannerPageModule,
+        ListSupplyPointsPageModule,
         ModalsPageModule,
         NewSupplyPointPageModule,
         ProgressBarPageModule,

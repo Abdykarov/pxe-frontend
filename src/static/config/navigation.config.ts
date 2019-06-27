@@ -158,6 +158,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/full/landing-page',
                 },
                 {
+                    'label': 'List supply points',
+                    'url': '/basic/list-supply-points',
+                },
+                {
                     'label': 'Login',
                     'url': '/full/login',
                 },

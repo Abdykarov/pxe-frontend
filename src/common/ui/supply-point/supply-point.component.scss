@@ -37,6 +37,7 @@
 	@include link-without-href-self {
 		pointer-events: auto;
 		display: block;
+		height: calc(100% - #{$spacer});
 		margin-bottom: $spacer;
 		background-color: $white;
 		color: inherit;
