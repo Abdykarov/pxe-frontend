@@ -42,6 +42,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
     public fieldError: IFieldError = {};
     public formLoading = false;
+    public supplyPointData = null;
 
     public stepperProgressConfig: IStepperProgressItem[] = [
         {
@@ -74,6 +75,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     ngOnInit() {
         if (isPlatformBrowser(this.platformId)) {
             const supplyPointCopy = window.history.state.supplyPointCopy;
+            this.supplyPointData = supplyPointCopy;
         }
     }
 

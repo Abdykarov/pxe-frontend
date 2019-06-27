@@ -37,7 +37,7 @@ export interface ICodelistMap {
 
 export interface ICodelistItem {
     type: string;
-    code: string;
+    code: SubjectType;
     description: string;
     help: string;
     __typename?: string;
@@ -82,7 +82,7 @@ export interface ISupplyPointUpdatePowerAttributes {
 export interface ISupplyPoint {
     id: string;
     name: string;
-    commodityType: string;
+    commodityType: CommodityType;
     supplier: ISupplier;
     ean: string;
     address: IAddress;

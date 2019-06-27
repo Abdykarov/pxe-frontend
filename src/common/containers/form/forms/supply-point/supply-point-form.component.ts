@@ -1,6 +1,7 @@
 import {
     ChangeDetectorRef,
     Component,
+    Input,
     OnChanges,
     OnInit,
     SimpleChanges,
@@ -8,6 +9,10 @@ import {
 import { FormBuilder } from '@angular/forms';
 
 import * as R from 'ramda';
+import {
+    BehaviorSubject,
+    combineLatest,
+} from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractSupplyPointFormComponent } from './abstract-supply-point-form.component';
@@ -19,7 +24,11 @@ import {
     SUBJECT_TYPE_OPTIONS,
     SUBJECT_TYPE_TO_DIST_RATE_MAP,
 } from 'src/app/app.constants';
-import { CommodityType } from 'src/common/graphql/models/supply.model';
+import {
+    CommodityType,
+    ISupplyPoint,
+    SubjectType,
+} from 'src/common/graphql/models/supply.model';
 import {
     convertArrayToObject,
     transformCodeList,
@@ -40,6 +49,9 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./supply-point-form.component.scss'],
 })
 export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent implements OnInit, OnChanges {
+    @Input()
+    public formValues: ISupplyPoint = null;
+
     public allowedFields = supplyPointAllowedFields;
     public commodityTypeOptions: Array<IOption> = COMMODITY_TYPE_OPTIONS;
     public subjectTypeOptions: Array<IOption> = SUBJECT_TYPE_OPTIONS;
@@ -50,6 +62,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public suppliers = [];
     public distributionRateType: string = CODE_LIST.DIST_RATE_INDIVIDUAL;
     public expirationConfig = expirationConfig;
+
+    public codeLists$: BehaviorSubject<any> = new BehaviorSubject([]);
+    public suppliers$: BehaviorSubject<any> = new BehaviorSubject([]);
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -117,10 +132,52 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         this.setAnnualConsumptionNTState();
         this.setContractEndFields();
         this.loadCodeLists();
+
+        combineLatest(
+            this.suppliers$,
+            this.codeLists$,
+        )
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(([suppliers, codeLists]) => {
+                if (!R.isEmpty(suppliers) && !R.isEmpty(codeLists)) {
+                    console.log('%c ***** combineLatest *****', 'background: #bada55; color: #000; font-weight: bold',
+                        suppliers, codeLists, this.formValues);
+                    if (this.formValues) {
+                        this.prefillForm();
+                    }
+                }
+            });
+
     }
 
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
+    }
+
+    public prefillForm = () => {
+        let id = null;
+        let commodityType = CommodityType.POWER;
+        let subjectTypeId = SubjectType.SUBJECT_TYPE_INDIVIDUAL;
+        let supplierId = null;
+        let name = null;
+
+        if (this.formValues) {
+            id = this.formValues.id;
+            commodityType = this.formValues.commodityType;
+            subjectTypeId = this.formValues.subject && this.formValues.subject.code;
+            const supplier = R.find(R.propEq('id', this.formValues.supplier.id))(this.suppliers[commodityType]);
+            supplierId = this.formValues.supplier && supplier;
+            name = this.formValues.name;
+            console.log('%c ***** suppliers *****', 'background: #bada55; color: #000; font-weight: bold', supplier);
+        }
+
+        this.form.controls['id'].setValue(id);
+        this.form.controls['id'].setValue(commodityType);
+        this.form.controls['subjectTypeId'].setValue(subjectTypeId);
+        this.form.controls['supplierId'].setValue(supplierId);
+        this.form.controls['name'].setValue(name);
     }
 
     public setContractEndFields = (changeByContractEndType: string = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT) => {
@@ -181,6 +238,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             .pipe(takeUntil(this.destroy$))
             .subscribe(({data}) => {
                 this.codeLists = transformCodeList(data.findCodelistsByTypes);
+                this.codeLists$.next(this.codeLists);
                 this.cd.markForCheck();
             });
     }
@@ -190,6 +248,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             .pipe(takeUntil(this.destroy$))
             .subscribe(({data}) => {
                 this.suppliers[commodityType] = transformSuppliers(data.findAllSuppliers);
+                this.suppliers$.next(this.suppliers);
                 this.cd.markForCheck();
             });
     }
