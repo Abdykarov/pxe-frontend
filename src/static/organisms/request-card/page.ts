@@ -16,8 +16,7 @@ export class RequestCardComponent {
     public supplyPoint = supplyPointConfig;
     public supplyPoint2 = supplyPointConfig2;
 
-    public submitForm(evt) {
-        evt.preventDefault();
+    public submitForm() {
         console.log('CLICKED');
     }
 
