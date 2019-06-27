@@ -58,7 +58,9 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             });
 
         if (this.formValues) {
-            this.prefillFormData();
+            if (this.formValues.name) {
+                this.prefillFormData();
+            }
         }
     }
 
@@ -155,7 +157,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             const form: IPersonalDataInputForm = {
                 ...this.form.value,
                 phone: this.form.value.phonePrefix + this.form.value.phone,
-                deposit: parseFloat(this.form.value.deposit.replace(',', '.')),
+                deposit: parseFloat(String(this.form.value.deposit).replace(',', '.')),
             };
             delete form.phonePrefix;
             delete form.onlyAddress1;
