@@ -19,6 +19,7 @@
                             [fieldError]="fieldError"
                             [formFields]="formFields"
                             [formLoading]="formLoading"
+                            [formValues]="supplyPoint.contract && supplyPoint.contract.personalData"
                             [formSent]="formSent"
                             [globalError]="globalError"
                             (submitAction)="submitPersonalInfoForm($event)">
