@@ -8,12 +8,12 @@ import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import { map } from 'rxjs/operators';
 
+import { IAddress } from 'src/common/graphql/models/supply.model';
 import {
     IMapyCzResponse,
     IResultMapyCZResponse,
     IUserDataMapyCzResponse,
 } from 'src/common/containers/address-whisperer/model/address-whisperer.model';
-import { IOption } from 'src/common/ui/forms/models/option.model';
 
 @Injectable({
     providedIn: 'root',
@@ -25,24 +25,18 @@ export class AddressWhispererService {
         private http: HttpClient,
     ) {}
 
-    private responeToResult = (resultMapyCz: IResultMapyCZResponse): IOption => {
+    private responseToResult = (resultMapyCz: IResultMapyCZResponse): IAddress => {
         const userData: IUserDataMapyCzResponse = resultMapyCz.userData;
-        const numberSeparator = userData.streetNumber && userData.houseNumber ? '/' : '';
-        let address = null;
+        let address: IAddress = null;
 
         if ((userData.street || userData.ward) && userData.houseNumber && userData.municipality && userData.zipCode && userData.region) {
             address = {
-                label: `${userData.street || userData.ward} ${userData.streetNumber}${numberSeparator}${userData.houseNumber}, ` +
-                    `${userData.municipality}, ${userData.zipCode}`,
-                value: {
-                    street: userData.street || userData.ward,
-                    orientationNumber: userData.streetNumber,
-                    descriptiveNumber: userData.houseNumber,
-                    city: userData.municipality,
-                    postCode: userData.zipCode,
-                    region: userData.region,
-                },
-                key: `${userData.suggestFirstRow}, ${userData.suggestSecondRow}, ${userData.zipCode}`,
+                street: userData.street || userData.ward,
+                orientationNumber: userData.streetNumber,
+                descriptiveNumber: userData.houseNumber,
+                city: userData.municipality,
+                postCode: userData.zipCode,
+                region: userData.region,
             };
         }
         return address;
@@ -58,9 +52,9 @@ export class AddressWhispererService {
 
         return this.http.get(AddressWhispererService.MAPY_CZ_URL, options)
             .pipe(
-                map((response: IMapyCzResponse): Array<IOption> => {
+                map((response: IMapyCzResponse): Array<IAddress> => {
                     return R.pipe(
-                        R.map(this.responeToResult),
+                        R.map(this.responseToResult),
                         R.filter(R_.isNotNil),
                     )(response.result);
                 }),
