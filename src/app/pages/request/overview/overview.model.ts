@@ -1,0 +1,6 @@
+export enum OverviewState {
+    NO_REQUEST,
+    ALL_SUPPLY_POINTS_HAVE_FULL_CONTRACT,
+    CONTRACT_ENDING,
+    REQUESTS,
+}

@@ -10,20 +10,55 @@
             </lnd-alert>
         </div>
     </div>
-    <div class="row mb-5">
-        <div class="col text-center">
-            <lnd-button
-                label="Nová žádost"
-                type="secondary"
-                (action)="newRequest($event)"
-            ></lnd-button>
-        </div>
-    </div>
-    <ng-container *ngIf="supplyPoints">
-        <pxe-request-card
-            *ngFor="let supplyPoint of supplyPoints"
-            [supplyPoint]="supplyPoint"
-            (action)="completeRequest(supplyPoint)">
-        </pxe-request-card>
+    <ng-container *ngIf="state">
+        <lnd-info-banner
+            *ngIf="state == overviewStates.NO_REQUEST"
+            [bannerTitle]="'Momentálně nemáte žádné rozpracované žádosti'"
+            [bannerDescription]="'Zadejte odběrné místo a my vám hned dáme nabídky'"
+            [buttonLabel]="'Nové odběrné místo'"
+            (buttonAction)="createSupplyPoint($event)"
+        ></lnd-info-banner>
+        <lnd-info-banner
+            *ngIf="state == overviewStates.ALL_SUPPLY_POINTS_HAVE_FULL_CONTRACT"
+            [bannerImageSrc]="BANNER_IMAGE_SRC_OK"
+            [bannerTitle]="'Momentálně nemáte žádné rozpracované žádosti'"
+            [bannerDescription]="'Všechna  zadaná odběrná místa mají pokrytou dodávku na déle než 3 měsíce.<br> Pokud máte nové odběrné místo, můžete založit žádost pro novou dodávku.'"
+            [buttonLabel]="'Nové žádost'"
+            (buttonAction)="createSupplyPoint($event)"
+        ></lnd-info-banner>
+        <ng-container *ngIf="state == overviewStates.CONTRACT_ENDING">
+            <lnd-info-banner
+                [bannerTitle]="'Momentálně nemáte žádné rozpracované žádosti'"
+                bannerDescription="Ale pro {{supplyPoints.length === 1 ? 'toto odběrné místo' : 'tato odběrná místa'}} konční v následujcích 2 měsích dodávka energie"
+                [showButton]="false"
+            ></lnd-info-banner>
+            <lnd-banner-ui
+                *ngFor="let supplyPoint of supplyPoints"
+                [data]="{
+                    linkType: '',
+                    linkValue: '',
+                    linkData: 'Nová poptávka',
+                    text: supplyPoint.name + ' - ' + 'můžeme tískat již od ' + supplyPoint.contract.offer.mountlyPaymentPrice + ' Kč',
+                    title: ''
+                }"
+                buttonLabel="Nová poptávka"
+            ></lnd-banner-ui>
+        </ng-container>
+        <ng-container  *ngIf="state == overviewStates.REQUESTS">
+            <div class="row mb-5">
+                <div class="col text-center">
+                    <lnd-button
+                        label="Nová žádost"
+                        type="secondary"
+                        (action)="newRequest($event)"
+                    ></lnd-button>
+                </div>
+            </div>
+            <pxe-request-card
+                *ngFor="let supplyPoint of supplyPoints"
+                [supplyPoint]="supplyPoint"
+                (action)="completeRequest(supplyPoint)">
+            </pxe-request-card>
+        </ng-container>
     </ng-container>
 </pxe-layout-container>
