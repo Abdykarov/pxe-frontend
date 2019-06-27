@@ -19,14 +19,11 @@
             ></lnd-button>
         </div>
     </div>
-    <div class="row"
-         *ngIf="supplyPoints">
-        <div class="col-12 col-md-12"
-             *ngFor="let supplyPoint of supplyPoints">
-            <pxe-request-card
-                [supplyPoint]="supplyPoint"
-                (action)="completeRequest(supplyPoint)">
-            </pxe-request-card>
-        </div>
-    </div>
+    <ng-container *ngIf="supplyPoints">
+        <pxe-request-card
+            *ngFor="let supplyPoint of supplyPoints"
+            [supplyPoint]="supplyPoint"
+            (action)="completeRequest(supplyPoint)">
+        </pxe-request-card>
+    </ng-container>
 </pxe-layout-container>

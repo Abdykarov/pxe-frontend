@@ -17,9 +17,9 @@ import {
     ISupplyPoint,
     SupplyPointState,
 } from 'src/common/graphql/models/supply.model';
+import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { parseGraphQLErrors } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-overview',
@@ -27,6 +27,8 @@ import { parseGraphQLErrors } from 'src/common/utils';
     styleUrls: ['./overview.component.scss'],
 })
 export class OverviewComponent extends AbstractComponent implements OnInit {
+    public globalError: string[] = [];
+    public supplyPoints: ISupplyPoint[];
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -35,10 +37,6 @@ export class OverviewComponent extends AbstractComponent implements OnInit {
     ) {
         super();
     }
-
-    public globalError: string[] = [];
-
-    public supplyPoints: ISupplyPoint[];
 
     ngOnInit() {
         this.supplyService.findSupplyPointsByContractStatus(null, [ContractStatus.NOT_CONCLUDED])
