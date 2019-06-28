@@ -11,6 +11,22 @@ const steps: IStepperProgressItem[] = [
     {
         step: SupplyPointState.CREATE,
         label: 'Výběr odběrného místa',
+
+    },
+    {
+        step: SupplyPointState.NONE,
+        label: '',
+        shadowStep: true,
+    },
+    {
+        step: SupplyPointState.NONE,
+        label: '',
+        shadowStep: true,
+    },
+    {
+        step: SupplyPointState.NONE,
+        label: '',
+        shadowStep: true,
     },
     {
         step: SupplyPointState.CHOOSE_OFFER,

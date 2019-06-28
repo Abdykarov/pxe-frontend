@@ -6,6 +6,7 @@ export enum CommodityType {
 }
 
 export enum SupplyPointState {
+    NONE = 'NONE',
     CREATE =  'CREATE',
     CHOOSE_OFFER = 'CHOOSE_OFFER',
     PERSONAL_INFO = 'PERSONAL_INFO',
