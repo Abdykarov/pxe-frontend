@@ -1,0 +1,32 @@
+<pxe-layout-container pageTitle="Seznam odběrných míst">
+    <div class="row mb-6">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12">
+            <lnd-alert
+                *ngIf="globalError.length"
+                type="danger">
+                <ng-container *ngFor="let error of globalError">
+                    {{ error }}<br>
+                </ng-container>
+            </lnd-alert>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-xl-10 offset-xl-1 text-center">
+            <h2>Vyberte OM pro které chcete dostat nabídku</h2>
+        </div>
+    </div>
+<!--todo is empty all supplypoints? cis neb -->
+    <div class="supply-points"
+        *ngIf="supplyPoints">
+        <ng-container *ngFor="let supplyPoint of supplyPoints">
+            <pxe-supply-point
+                [data]="supplyPoint"
+                (action)="submitSupplyForm(supplyPoint)"></pxe-supply-point>
+        </ng-container>
+    </div>
+</pxe-layout-container>

@@ -1,14 +1,20 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { map, takeUntil } from 'rxjs/operators';
+import {
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import { getSupplyPointState } from 'src/common/utils/get-progress-stepper-config.fnc';
-import { ISupplyPoint, SupplyPointState } from 'src/common/graphql/models/supply.model';
-import { OverviewState } from './overview.model';
+import {
+    ISupplyPoint,
+    SupplyPointState,
+} from 'src/common/graphql/models/supply.model';
 import { parseGraphQLErrors } from 'src/common/utils';
+import { OverviewState } from './overview.model';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
@@ -71,7 +77,7 @@ export class OverviewComponent extends AbstractComponent implements OnInit {
 
     public newRequest = (evt): void => {
         evt.preventDefault();
-        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
+        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT_SELECTION]);
     }
 
 
@@ -93,11 +99,11 @@ export class OverviewComponent extends AbstractComponent implements OnInit {
     }
 
     public isOverviewStateContractEnding = (): boolean => {
-        return true;
+        return false;
     }
 
     public isOverviewAllSupplyPointsHaveFullCcontract = (): boolean => {
-        return true;
+        return false;
     }
 
     public getRouterForComplateRequest = (supplyPointState: SupplyPointState): string => {

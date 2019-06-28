@@ -19,6 +19,10 @@ const routes: Routes = [
                 loadChildren: '../../pages/request/overview/overview.module#OverviewModule',
             },
             {
+                path: CONSTS.PATHS.SUPPLY_POINT_SELECTION,
+                loadChildren: '../../pages/request/supply-point-selection/supply-point-selection.module#SupplyPointSelectionModule',
+            },
+            {
                 path: CONSTS.PATHS.CONTRACT,
                 loadChildren: '../../pages/request/contract/contract.module#ContractModule',
             },
