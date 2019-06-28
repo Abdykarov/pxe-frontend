@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { ConsumptionPipe } from './consumption/consumption.pipe';
 import { ConsumptionIndicatorPipe } from './consumption-indicator/consumption-indicator.pipe';
 import { DateDiffPipe } from './date-diff/date-diff.pipe';
+import { DecimalPipe } from '@angular/common';
+import { DynamicPipe } from './dynamic/dynamic.pipe';
 import { FilterCommodityTypePipe } from './filter-commodity-type/filter-commodity-type.pipe';
 import { IsRouteActivePipe } from './is-route-active/is-route-acrive.pipe';
 import { KeysPipe } from './keys/keys.pipe';
@@ -15,6 +17,7 @@ import { ValuesPipe } from './values/values.pipe';
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,
+        DynamicPipe,
         IsRouteActivePipe,
         FilterCommodityTypePipe,
         KeysPipe,
@@ -25,6 +28,7 @@ import { ValuesPipe } from './values/values.pipe';
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,
+        DynamicPipe,
         IsRouteActivePipe,
         FilterCommodityTypePipe,
         KeysPipe,
@@ -35,6 +39,8 @@ import { ValuesPipe } from './values/values.pipe';
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,
+        DecimalPipe,
+        DynamicPipe,
         IsRouteActivePipe,
         FilterCommodityTypePipe,
         KeysPipe,

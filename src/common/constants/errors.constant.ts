@@ -61,6 +61,7 @@ export const errorFieldMessages =  {
     },
     deposit: {
         required: 'Vyplňte, jakou chcete mít výši záloh.',
+        requiredMinValue: 'Minimální výše záloh je {min|number} Kč.',
     },
     depositPaymentType: {
         required: 'Vyberte ze seznamu, jak chcete platit zálohy.',

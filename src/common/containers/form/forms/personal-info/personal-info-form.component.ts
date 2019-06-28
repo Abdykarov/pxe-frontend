@@ -1,9 +1,7 @@
 import {
     Component,
     Input,
-    OnChanges,
     OnInit,
-    SimpleChanges,
 } from '@angular/core';
 import {
     FormBuilder,
@@ -27,7 +25,7 @@ import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
     templateUrl: './personal-info-form.component.html',
     styleUrls: ['./personal-info-form.component.scss'],
 })
-export class PersonalInfoFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
+export class PersonalInfoFormComponent extends AbstractFormComponent implements OnInit {
 
     @Input()
     public supplyPoint: ISupplyPoint;
@@ -59,6 +57,19 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
 
         if (this.formValues) {
             this.prefillFormData();
+        }
+
+        if (this.supplyPoint.contract && this.supplyPoint.contract.offer && this.supplyPoint.contract.offer.mountlyPaymentPrice > 0) {
+            this.form.controls['deposit']
+                .setValidators(
+                    [
+                        Validators.required,
+                        CustomValidators.isDecimal,
+                        CustomValidators.minValue(this.supplyPoint.contract.offer.mountlyPaymentPrice,
+                            true,
+                            false,
+                        ),
+                    ]);
         }
     }
 
@@ -122,26 +133,8 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         }
     }
 
-    ngOnChanges(changes: SimpleChanges) {
-        super.ngOnChanges(changes);
-
-        if (this.form) {
-            this.form.controls['deposit']
-                .setValidators(
-                    [
-                        Validators.required,
-                        CustomValidators.isDecimal,
-                        CustomValidators.minValue(
-                            this.supplyPoint.contract ?
-                                (this.supplyPoint.contract.offer.mountlyPaymentPrice) : 0,
-                            true,
-                        ),
-                    ]);
-        }
-    }
-
-    public setAddress2(onlyAddress1: boolean) {
-        if (onlyAddress1) {
+    public setAddress2(val) {
+        if (val) {
             this.setEnableField('address2');
         } else {
             this.setDisableField('address2');
@@ -154,7 +147,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         if (this.form.valid) {
             const form: IPersonalDataInputForm = {
                 ...this.form.value,
-                phone: this.form.value.phonePrefix + this.form.value.phone,
+                phone: R.concat(this.form.value.phonePrefix, this.form.value.phone),
                 deposit: parseFloat(String(this.form.value.deposit).replace(',', '.')),
             };
             delete form.phonePrefix;
