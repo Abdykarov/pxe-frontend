@@ -147,15 +147,21 @@
     <pxe-field-wrapper
         label="Telefonní číslo"
         labelFor="phonePrefix"
-        [error]="((form.controls.phone.touched || formError.phone) && (formError.phone || form.controls.phone.errors))"
-        [validationMessages]="((form.controls.phone.touched || formError.phone) && (formError.phone || form.controls.phone.errors) && formFields.validationMessages.phone)">
+        [error]="((form.controls.phonePrefix.touched || formError.phonePrefix) && (formError.phonePrefix || form.controls.phonePrefix.errors)) ||
+                 ((form.controls.phone.touched || formError.phone) && (formError.phone || form.controls.phone.errors))"
+        [validationMessages]="((form.controls.phonePrefix.touched || formError.phonePrefix) && (formError.phonePrefix || form.controls.phonePrefix.errors) && formFields.validationMessages.phonePrefix) ||
+                              ((form.controls.phone.touched || formError.phone) && (formError.phone || form.controls.phone.errors) && formFields.validationMessages.phone)">
         <div class="row no-gutters">
             <div class="col-4 pr-1">
                 <lnd-form-field
                     [disabledField]="true"
+                    [error]="formError.phonePrefix || form.controls.phonePrefix.errors"
                     [formControl]="form.controls.phonePrefix"
                     [id]="'phonePrefix'"
                     label="Telefonní číslo"
+                    [success]="form.controls.phonePrefix.valid && (form.controls.phonePrefix.touched || formError.phonePrefix)"
+                    [touched]="form.controls.phonePrefix.touched || formError.phonePrefix"
+                    [validationMessages]="formFields.validationMessages.phonePrefix"
                 ></lnd-form-field>
             </div>
             <div class="col-8 pl-1">
