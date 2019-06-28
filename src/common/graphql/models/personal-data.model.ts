@@ -6,8 +6,8 @@ import {
 export interface IPersonalDataInput {
     name: string;
     birthDate?: string;
-    ico: string;
-    dic: string;
+    ico?: string;
+    dic?: string;
     address1: IAddress;
     address2: IAddress;
     email: string;
@@ -21,8 +21,8 @@ export interface IPersonalDataInput {
 export interface IPersonalDataInputForm {
     name: string;
     birthDate?: string;
-    ico: string;
-    dic: string;
+    ico?: string;
+    dic?: string;
     address1: IAddress;
     address2: IAddress;
     email: string;
@@ -39,8 +39,8 @@ export interface IPersonalDataInputForm {
 export interface IPersonalData {
     name: string;
     birthDate?: string;
-    ico: string;
-    dic: string;
+    ico?: string;
+    dic?: string;
     address1: IAddress;
     address2: IAddress;
     email: string;
