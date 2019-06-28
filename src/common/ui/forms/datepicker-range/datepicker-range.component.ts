@@ -15,6 +15,7 @@ import {
 import { csLocale } from 'ngx-bootstrap/locale';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 
+import { DynamicPipe } from 'src/common/pipes/dynamic/dynamic.pipe';
 import { getErrorMessage } from 'src/common/utils';
 import { defaultDatepickerConfig } from './datepicker-range.config';
 import { IValidationMessages } from '../models/validation-messages.model';
@@ -80,6 +81,7 @@ export class DatepickerRangeComponent {
     public maxDate?: Date;
 
     constructor(
+        private dynamicPipe: DynamicPipe,
         private localeService: BsLocaleService,
     ) {
         csLocale.invalidDate = '';
@@ -106,5 +108,5 @@ export class DatepickerRangeComponent {
         event.dayHoverHandler = hoverWrapper;
     }
 
-    public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages);
+    public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages, this.dynamicPipe);
 }
