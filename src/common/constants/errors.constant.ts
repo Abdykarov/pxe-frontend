@@ -38,7 +38,8 @@ export const errorFieldMessages =  {
     },
     birthDate: {
         required: 'Vyplňte datum narození.',
-        bsDateMinDate: 'Musíte být plnoletý.',
+        bsDateMinDate: 'Jste příliš stará/ý :D.',
+        bsDateMaxDate: 'Nesmíte být mladší 18 let.',
     },
     circuitBreakerId: {
         required: 'Vyberte ze seznamu, jakou máte velikost jističe.',

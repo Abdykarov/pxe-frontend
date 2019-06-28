@@ -27,6 +27,8 @@ import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
     styleUrls: ['./personal-info-form.component.scss'],
 })
 export class PersonalInfoFormComponent extends AbstractFormComponent implements OnInit {
+    private static readonly MAX_AGE = 130;
+    private static readonly MIN_AGE = 18;
 
     @Input()
     public supplyPoint: ISupplyPoint;
@@ -37,7 +39,8 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     @Input()
     public formValues: IPersonalData = null;
 
-    public minDate: Date = moment().add(1, 'years').toDate();
+    public minDate: Date = moment().add(-PersonalInfoFormComponent.MAX_AGE, 'years').toDate();
+    public maxDate: Date = moment().add(-PersonalInfoFormComponent.MIN_AGE, 'years').toDate();
     public depositPaymentTypeId = depositPaymentType;
 
     constructor(
