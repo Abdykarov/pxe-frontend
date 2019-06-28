@@ -8,6 +8,7 @@ import {
     Validators,
 } from '@angular/forms';
 
+import * as moment from 'moment';
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
@@ -36,6 +37,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     @Input()
     public formValues: IPersonalData = null;
 
+    public minDate: Date = moment().add(1, 'years').toDate();
     public depositPaymentTypeId = depositPaymentType;
 
     constructor(
@@ -75,6 +77,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
 
     public prefillFormData = () => {
         let name = null;
+        let birthDate = null;
         let ico = null;
         let dic = null;
         let onlyAddress1 = null;
@@ -90,6 +93,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
 
         if (this.formValues) {
             name = this.formValues.name;
+            birthDate = this.formValues.birthDate;
             ico = this.formValues.ico;
             dic = this.formValues.dic;
             onlyAddress1 = !this.formValues.address2;
@@ -105,9 +109,9 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         }
 
         this.form.controls['name'].setValue(name);
+        this.form.controls['birthDate'].setValue(birthDate);
         this.form.controls['ico'].setValue(ico);
         this.form.controls['dic'].setValue(dic);
-
         this.form.controls['onlyAddress1'].setValue(!onlyAddress1);
         this.form.controls['bankAccountNumber'].setValue(bankAccountNumber);
         this.form.controls['bankCode'].setValue(bankCode);
@@ -127,9 +131,11 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         if (this.isIndividual) {
             this.setDisableField('ico');
             this.setDisableField('dic');
+            this.setEnableField('birthDate');
         } else {
             this.setEnableField('ico');
             this.setEnableField('dic');
+            this.setDisableField('birthDate');
         }
     }
 

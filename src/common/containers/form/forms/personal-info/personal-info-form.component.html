@@ -52,6 +52,20 @@
         [touched]="form.controls.name.touched || formError.name"
         [validationMessages]="isIndividual ? formFields.validationMessages.namePerson : formFields.validationMessages.nameCompany"
     ></lnd-form-field>
+    <lnd-datepicker
+        *ngIf="form.controls.birthDate.status !== 'DISABLED'"
+        [datepickerName]="'birthDate'"
+        [error]="formError.birthDate || form.controls.birthDate.errors"
+        id="datepicker-1"
+        label="Datum narození"
+        [parentForm]="form"
+        [placeholder]="'dd.mm.rrrr'"
+        [minDate]="minDate"
+        [success]="form.controls.birthDate.valid && (form.controls.birthDate.touched || formError.birthDate)"
+        [touched]="form.controls.birthDate.touched || formError.birthDate"
+        [validationMessages]="formFields.validationMessages.birthDate"
+    >
+    </lnd-datepicker>
     <lnd-form-field
         *ngIf="form.controls.ico.status !== 'DISABLED'"
         [error]="formError.ico || form.controls.ico.errors"
@@ -133,20 +147,15 @@
     <pxe-field-wrapper
         label="Telefonní číslo"
         labelFor="phonePrefix"
-        [error]="((form.controls.phonePrefix.touched || formError.phonePrefix) && (formError.phonePrefix || form.controls.phonePrefix.errors)) ||
-                 ((form.controls.phone.touched || formError.phone) && (formError.phone || form.controls.phone.errors))"
-        [validationMessages]="((form.controls.phonePrefix.touched || formError.phonePrefix) && (formError.phonePrefix || form.controls.phonePrefix.errors) && formFields.validationMessages.phonePrefix) ||
-                              ((form.controls.phone.touched || formError.phone) && (formError.phone || form.controls.phone.errors) && formFields.validationMessages.phone)">
+        [error]="((form.controls.phone.touched || formError.phone) && (formError.phone || form.controls.phone.errors))"
+        [validationMessages]="((form.controls.phone.touched || formError.phone) && (formError.phone || form.controls.phone.errors) && formFields.validationMessages.phone)">
         <div class="row no-gutters">
             <div class="col-4 pr-1">
                 <lnd-form-field
-                    [error]="formError.phonePrefix || form.controls.phonePrefix.errors"
+                    [disabledField]="true"
                     [formControl]="form.controls.phonePrefix"
                     [id]="'phonePrefix'"
                     label="Telefonní číslo"
-                    [success]="form.controls.phonePrefix.valid && (form.controls.phonePrefix.touched || formError.phonePrefix)"
-                    [touched]="form.controls.phonePrefix.touched || formError.phonePrefix"
-                    [validationMessages]="formFields.validationMessages.phonePrefix"
                 ></lnd-form-field>
             </div>
             <div class="col-8 pl-1">

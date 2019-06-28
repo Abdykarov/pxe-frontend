@@ -36,6 +36,10 @@ export const errorFieldMessages =  {
         required: 'Vyplňte kód banky.',
         bankCode: 'Kód banky musí obsahovat 4 číslice.',
     },
+    birthDate: {
+        required: 'Vyplňte datum narození.',
+        bsDateMinDate: 'Musíte být plnoletý.',
+    },
     circuitBreakerId: {
         required: 'Vyberte ze seznamu, jakou máte velikost jističe.',
     },

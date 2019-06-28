@@ -13,6 +13,12 @@ export const formFields: IForm = {
                 Validators.required,
             ],
         ],
+        birthDate: [
+            null,
+            [
+                Validators.required,
+            ],
+        ],
         ico: [
             null,
             [
@@ -64,7 +70,7 @@ export const formFields: IForm = {
             ],
         ],
         phonePrefix: [
-            null,
+            '+420',
             [
                 Validators.required,
                 CustomValidators.phoneNumberPrefix,
@@ -101,6 +107,12 @@ export const formFields: IForm = {
         },
         nameCompany: {
             required: errorFieldMessages.fullName.requiredCompany,
+        },
+        birthDate: {
+            required: errorFieldMessages.birthDate.required,
+            expirationDateInPast: errorFieldMessages.date.expirationDateInPast,
+            bsDate: errorFieldMessages.date.format,
+            bsDateMinDate: errorFieldMessages.birthDate.bsDateMinDate,
         },
         ico: {
             required: errorFieldMessages.ico.required,
