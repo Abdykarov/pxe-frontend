@@ -1,4 +1,8 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
 
 import {
@@ -13,17 +17,17 @@ import {
     ISupplyPoint,
     SupplyPointState,
 } from 'src/common/graphql/models/supply.model';
+import { OverviewState } from './requests-overview.model';
 import { parseGraphQLErrors } from 'src/common/utils';
-import { OverviewState } from './overview.model';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
-    selector: 'pxe-overview',
-    templateUrl: './overview.component.html',
-    styleUrls: ['./overview.component.scss'],
+    selector: 'pxe-requests-overview',
+    templateUrl: './requests-overview.component.html',
+    styleUrls: ['./requests-overview.component.scss'],
 })
-export class OverviewComponent extends AbstractComponent implements OnInit {
+export class RequestsOverviewComponent extends AbstractComponent implements OnInit {
     public readonly BANNER_IMAGE_SRC_OK = '/assets/images/illustrations/accepted.svg';
 
     public globalError: string[] = [];
@@ -67,7 +71,7 @@ export class OverviewComponent extends AbstractComponent implements OnInit {
     public completeRequest = (supplyPoint: ISupplyPoint): void => {
         const supplyPointState: SupplyPointState = getSupplyPointState(supplyPoint);
         this.router.navigate(
-            [this.getRouterForComplateRequest(supplyPointState)],
+            [this.getRouterForCompleteRequest(supplyPointState)],
             {
                 queryParams: {
                     supplyPointId: supplyPoint.id,
@@ -87,26 +91,26 @@ export class OverviewComponent extends AbstractComponent implements OnInit {
         }
 
         // todo ostranit supplypoint s timto statusem
-        if (this.isOverviewStateContractEnding()) {
+        if (this.isContractEnding()) {
             return OverviewState.CONTRACT_ENDING;
         }
 
-        if (this.isOverviewAllSupplyPointsHaveFullCcontract()) {
+        if (this.allSupplyPointsHaveFullContract()) {
             return OverviewState.ALL_SUPPLY_POINTS_HAVE_FULL_CONTRACT;
         }
 
         return OverviewState.REQUESTS;
     }
 
-    public isOverviewStateContractEnding = (): boolean => {
-        return false;
+    public isContractEnding = (): boolean => {
+        return true;
     }
 
-    public isOverviewAllSupplyPointsHaveFullCcontract = (): boolean => {
-        return false;
+    public allSupplyPointsHaveFullContract = (): boolean => {
+        return true;
     }
 
-    public getRouterForComplateRequest = (supplyPointState: SupplyPointState): string => {
+    public getRouterForCompleteRequest = (supplyPointState: SupplyPointState): string => {
         switch (supplyPointState) {
             case SupplyPointState.CHOOSE_OFFER: {
                 return ROUTES.ROUTER_REQUEST_OFFER_SELECTION;
@@ -121,8 +125,13 @@ export class OverviewComponent extends AbstractComponent implements OnInit {
                 return ROUTES.ROUTER_REQUEST_PAYMENT;
             }
             default: {
-                return ROUTES.ROUTER_REQUEST;
+                return ROUTES.ROUTER_REQUESTS;
             }
         }
+    }
+
+    public createSupplyPoint = (event) => {
+        event.stopPropagation();
+        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
     }
 }

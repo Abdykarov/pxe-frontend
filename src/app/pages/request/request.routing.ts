@@ -16,7 +16,7 @@ const routes: Routes = [
         children: [
             {
                 path: CONSTS.PATHS.EMPTY,
-                loadChildren: '../../pages/request/overview/overview.module#OverviewModule',
+                redirectTo: CONSTS.PATHS.SUPPLY_POINT,
             },
             {
                 path: CONSTS.PATHS.SUPPLY_POINT_SELECTION,
