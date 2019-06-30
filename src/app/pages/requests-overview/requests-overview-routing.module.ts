@@ -5,12 +5,12 @@ import {
 } from '@angular/router';
 
 import { CONSTS } from 'src/app/app.constants';
-import { OverviewComponent } from './overview.component';
+import { RequestsOverviewComponent } from './requests-overview.component';
 
 const routes: Routes = [
     {
         path: CONSTS.PATHS.EMPTY,
-        component: OverviewComponent,
+        component: RequestsOverviewComponent,
     },
 ];
 
@@ -22,4 +22,4 @@ const routes: Routes = [
         RouterModule,
     ],
 })
-export class OverviewRoutingModule { }
+export class RequestsOverviewRoutingModule { }

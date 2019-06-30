@@ -6,16 +6,16 @@ import { BannerUIModule } from 'src/common/ui/banner/banner-ui.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
-import { OverviewComponent } from './overview.component';
-import { OverviewRoutingModule } from './overview-routing.module';
+import { RequestsOverviewComponent } from './requests-overview.component';
+import { RequestsOverviewRoutingModule } from './requests-overview-routing.module';
 import { RequestCardModule } from 'src/common/ui/request-card/request-card.module';
 
 @NgModule({
     declarations: [
-        OverviewComponent,
+        RequestsOverviewComponent,
     ],
     exports: [
-        OverviewComponent,
+        RequestsOverviewComponent,
     ],
     imports: [
         AlertModule,
@@ -24,8 +24,8 @@ import { RequestCardModule } from 'src/common/ui/request-card/request-card.modul
         CommonModule,
         InfoBannerModule,
         LayoutContainerModule,
-        OverviewRoutingModule,
+        RequestsOverviewRoutingModule,
         RequestCardModule,
     ],
 })
-export class OverviewModule { }
+export class RequestsOverviewModule { }
