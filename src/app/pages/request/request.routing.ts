@@ -17,6 +17,7 @@ const routes: Routes = [
             {
                 path: CONSTS.PATHS.EMPTY,
                 redirectTo: CONSTS.PATHS.SUPPLY_POINT,
+                pathMatch: 'full',
             },
             {
                 path: CONSTS.PATHS.SUPPLY_POINT_SELECTION,
