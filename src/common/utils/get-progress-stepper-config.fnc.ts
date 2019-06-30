@@ -1,4 +1,5 @@
 import * as R from 'ramda';
+import * as R_ from 'ramda-extension';
 
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
@@ -76,22 +77,10 @@ export const getSupplyPointState = (supplyPoint: ISupplyPoint): SupplyPointState
 };
 
 export const getConfigStepperByState = (activeStep: SupplyPointState): IStepperProgressItem[] => {
-    let wasFoundItem = false;
-
-    return R.map((item: IStepperProgressItem) => {
-        if ( item.step !== activeStep && !wasFoundItem) {
-            item.done = true;
-            return item;
-        }
-
-        if ( item.step === activeStep && !wasFoundItem) {
-            item.done = false;
-            item.active = true;
-            wasFoundItem = true;
-            return item;
-        }
-
-        item.done = false;
+    const activeIndex = R.findIndex(R.propEq('step', activeStep))(steps);
+    return R_.mapIndexed((item: IStepperProgressItem, index: number) => {
+        item.active = index === activeIndex;
+        item.done = index < activeIndex;
         return item;
     }, R.clone(steps));
 };

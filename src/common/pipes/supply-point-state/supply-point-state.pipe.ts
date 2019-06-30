@@ -20,6 +20,6 @@ export class SupplyPointStatePipe implements PipeTransform {
     };
 
     transform(supplyPointState: SupplyPointState): string {
-        return SupplyPointStatePipe.SUPPLY_POINT_STATE_TO_TEXT[supplyPointState];
+        return SupplyPointStatePipe.SUPPLY_POINT_STATE_TO_TEXT[supplyPointState] || '';
     }
 }
