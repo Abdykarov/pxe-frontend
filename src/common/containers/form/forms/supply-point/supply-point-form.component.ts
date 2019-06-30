@@ -90,6 +90,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 this.resetFieldValue('supplierId', false);
                 this.setAnnualConsumptionNTState(commodityType === CommodityType.POWER ? this.getFieldValue('distributionRateId') : null);
                 this.setContractEndFields(this.getFieldValue('contractEndTypeId') || CONTRACT_END_TYPE.CONTRACT_END_DEFAULT);
+                this.formValues = null;
             });
 
         this.form.get('subjectTypeId')
@@ -128,7 +129,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 this.helpDocuments = val && val.sampleDocuments ? convertArrayToObject(val.sampleDocuments, 'type') : {};
             });
 
-        this.setFormByCommodity();
+        this.setFormByCommodity(this.formValues && this.formValues.commodityType);
         this.setAnnualConsumptionNTState();
         this.setContractEndFields();
         this.loadCodeLists();
@@ -142,8 +143,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             )
             .subscribe(([suppliers, codeLists]) => {
                 if (!R.isEmpty(suppliers) && !R.isEmpty(codeLists)) {
-                    console.log('%c ***** combineLatest *****', 'background: #bada55; color: #000; font-weight: bold',
-                        suppliers, codeLists, this.formValues);
                     if (this.formValues) {
                         this.prefillForm();
                     }
@@ -159,9 +158,22 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public prefillForm = () => {
         let id = null;
         let commodityType = CommodityType.POWER;
-        let subjectTypeId = SubjectType.SUBJECT_TYPE_INDIVIDUAL;
+        let subjectTypeId: string = SubjectType.SUBJECT_TYPE_INDIVIDUAL;
         let supplierId = null;
         let name = null;
+        let ean = null;
+        let eic = null;
+        let address = null;
+        let distributionRateId = null;
+        let circuitBreakerId = null;
+        let phasesId = null;
+        let annualConsumptionNT = null;
+        let annualConsumptionVT = null;
+        let annualConsumption = null;
+        let expirationDate = null;
+        let contractEndTypeId = null;
+        let timeToContractEnd = null;
+        let timeToContractEndPeriodId = null;
 
         if (this.formValues) {
             id = this.formValues.id;
@@ -170,14 +182,39 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             const supplier = R.find(R.propEq('id', this.formValues.supplier.id))(this.suppliers[commodityType]);
             supplierId = this.formValues.supplier && supplier;
             name = this.formValues.name;
-            console.log('%c ***** suppliers *****', 'background: #bada55; color: #000; font-weight: bold', supplier);
+            ean = this.formValues.commodityType === CommodityType.POWER ? this.formValues.ean : null;
+            eic = this.formValues.commodityType === CommodityType.GAS ? this.formValues.ean : null;
+            address = this.formValues.address && R.omit(['__typename'], this.formValues.address);
+            distributionRateId = this.formValues.distributionRate && this.formValues.distributionRate.code;
+            circuitBreakerId = this.formValues.circuitBreaker && this.formValues.circuitBreaker.code;
+            phasesId = this.formValues.phases && this.formValues.phases.code;
+            annualConsumptionNT = this.formValues.annualConsumptionNT && this.formValues.annualConsumptionNT.toString().replace('.', ',');
+            annualConsumptionVT = this.formValues.annualConsumptionVT && this.formValues.annualConsumptionVT.toString().replace('.', ',');
+            annualConsumption = this.formValues.annualConsumptionVT && this.formValues.annualConsumptionVT.toString().replace('.', ',');
+            expirationDate = this.formValues.expirationDate && new Date(this.formValues.expirationDate);
+            contractEndTypeId = this.formValues.contractEndType && this.formValues.contractEndType.code;
+            timeToContractEnd = this.formValues.timeToContractEnd;
+            timeToContractEndPeriodId = this.formValues.timeToContractEndPeriod && this.formValues.timeToContractEndPeriod.code;
         }
 
         this.form.controls['id'].setValue(id);
-        this.form.controls['id'].setValue(commodityType);
+        this.form.controls['commodityType'].setValue(commodityType);
         this.form.controls['subjectTypeId'].setValue(subjectTypeId);
         this.form.controls['supplierId'].setValue(supplierId);
         this.form.controls['name'].setValue(name);
+        this.form.controls['ean'].setValue(ean);
+        this.form.controls['eic'].setValue(eic);
+        this.form.controls['address'].setValue(address);
+        this.form.controls['distributionRateId'].setValue(distributionRateId);
+        this.form.controls['circuitBreakerId'].setValue(circuitBreakerId);
+        this.form.controls['phasesId'].setValue(phasesId);
+        this.form.controls['annualConsumptionNT'].setValue(annualConsumptionNT);
+        this.form.controls['annualConsumptionVT'].setValue(annualConsumptionVT);
+        this.form.controls['annualConsumption'].setValue(annualConsumption);
+        this.form.controls['expirationDate'].setValue(expirationDate);
+        this.form.controls['contractEndTypeId'].setValue(contractEndTypeId);
+        this.form.controls['timeToContractEnd'].setValue(timeToContractEnd);
+        this.form.controls['timeToContractEndPeriodId'].setValue(timeToContractEndPeriodId);
     }
 
     public setContractEndFields = (changeByContractEndType: string = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT) => {
@@ -209,13 +246,13 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 expirationDate: this.form.value.expirationDate && this.form.value.expirationDate.toISOString().split('T')[0],
             };
             if (!R.isNil(form.annualConsumptionNT)) {
-                form.annualConsumptionNT = parseFloat(form.annualConsumptionNT.replace(',', '.'));
+                form.annualConsumptionNT = parseFloat(form.annualConsumptionNT.toString().replace(',', '.'));
             }
             if (!R.isNil(form.annualConsumptionVT)) {
-                form.annualConsumptionVT = parseFloat(form.annualConsumptionVT.replace(',', '.'));
+                form.annualConsumptionVT = parseFloat(form.annualConsumptionVT.toString().replace(',', '.'));
             }
             if (!R.isNil(form.annualConsumption)) {
-                form.annualConsumption = parseFloat(form.annualConsumption.replace(',', '.'));
+                form.annualConsumption = parseFloat(form.annualConsumption.toString().replace(',', '.'));
             }
             this.submitAction.emit(form);
         }

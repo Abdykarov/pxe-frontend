@@ -46,7 +46,7 @@ export interface ICodelistMap {
 
 export interface ICodelistItem {
     type: string;
-    code: SubjectType;
+    code: string;
     description: string;
     help: string;
     __typename?: string;

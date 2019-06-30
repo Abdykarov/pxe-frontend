@@ -69,7 +69,8 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         this.formLoading = true;
         this.globalError = [];
         this.fieldError = {};
-        let saveSupplyPoint;
+        let supplyPointAction;
+        const id = supplyPointFormData.id;
 
         const supplyPoint: ISupplyPoint = R.pick([
             'supplierId',
@@ -92,20 +93,29 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                     'annualConsumptionNT',
                     'annualConsumptionVT',
                 ], supplyPointFormData);
-            saveSupplyPoint = this.supplyService.createPowerSupplyPoint(supplyPoint, powerAttributes);
+            supplyPointAction = id ?
+                this.supplyService.updatePowerSupplyPoint(id, supplyPoint, powerAttributes) :
+                this.supplyService.createPowerSupplyPoint(supplyPoint, powerAttributes);
         } else {
             const gasAttributes: ISupplyPointGasAttributes =
                 R.pick([
                     'eic',
                     'annualConsumption',
                 ], supplyPointFormData);
-            saveSupplyPoint = this.supplyService.createGasSupplyPoint(supplyPoint, gasAttributes);
+            supplyPointAction = id ?
+                this.supplyService.updateGasSupplyPoint(id, supplyPoint, gasAttributes) :
+                this.supplyService.createGasSupplyPoint(supplyPoint, gasAttributes);
         }
 
-        saveSupplyPoint
+        supplyPointAction
             .pipe(
                 takeUntil(this.destroy$),
-                map(({data}) => data.createPowerSupplyPoint || data.createGasSupplyPoint),
+                map(
+                    ({data}) => data.createPowerSupplyPoint ||
+                        data.updatePowerSupplyPoint ||
+                        data.createGasSupplyPoint ||
+                        data.updateGasSupplyPoint,
+                ),
             )
             .subscribe(
                 (supplyPointId) => {

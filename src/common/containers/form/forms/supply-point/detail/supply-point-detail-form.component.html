@@ -3,6 +3,7 @@
         <lnd-banner-ui
                 [data]="supplyDetailInfoBanner"
                 buttonLabel="Najít dodavatele"
+                (staticBannerAction)="findNewSupplier(supplyPoint)"
         ></lnd-banner-ui>
     </div>
 </div>
@@ -190,7 +191,7 @@
                     </div>
                 </div>
             </div>
-
+<pre>{{supplyPoint | json}}</pre>
         </div>
     </div>
 </div>

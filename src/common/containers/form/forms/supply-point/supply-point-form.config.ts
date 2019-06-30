@@ -16,6 +16,7 @@ import {
     IExpirationConfig,
     IForm,
 } from 'src/common/containers/form/models/form-definition.model';
+import { IShowModal } from '../../../modal/modals/model/modal.model';
 
 export const expirationConfig: IExpirationConfig = {
     [CONTRACT_END_TYPE.CONTRACT_END_TERM]: {
@@ -206,18 +207,21 @@ export const formFields: IForm = {
             decimal: errorFieldMessages.number.decimal,
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
+            'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
         },
         annualConsumptionVT: {
             required: errorFieldMessages.annualConsumptionVT.required,
             decimal: errorFieldMessages.number.decimal,
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
+            'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
         },
         annualConsumption: {
             required: errorFieldMessages.annualConsumption.required,
             decimal: errorFieldMessages.number.decimal,
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
+            'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
         },
         expirationDateGas: {
             required: errorFieldMessages.expirationDate.requiredGas,
@@ -298,7 +302,20 @@ export const supplyPointAllowedFields: ICommodityTypeFields = {
 };
 
 export const supplyDetailInfoBanner: IBannerObj = {
-    linkValue: ROUTES.ROUTER_REQUEST_SUPPLY_POINT,
-    linkData: null,
+    // linkValue: ROUTES.ROUTER_REQUEST_SUPPLY_POINT,
+    // linkData: null,
     text: 'Platnost smlouvy končí za 60 dní',
+};
+
+export const confirmFindNewSupplyPoint = 'confirmFindNewSupplyPoint';
+
+export const confirmFindNewSupplyPointConfig = (data): IShowModal => {
+    return {
+        component: 'ConfirmModalComponent',
+        modalType: confirmFindNewSupplyPoint,
+        instanceData: {
+            confirmText: `Pokračováním ztratíte neuložené změny ve formuláři`,
+            data,
+        },
+    };
 };
