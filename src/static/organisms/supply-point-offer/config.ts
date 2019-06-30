@@ -1,9 +1,5 @@
-import {
-    CommodityType,
-    ISupplierSampleDocument,
-} from 'src/common/graphql/models/supply.model';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
-import { TypeCommodity } from 'src/common/ui/supplier/model/supplier.model';
 
 export const offerConfig: ISupplyPointOffer = {
     benefits: [
@@ -29,6 +25,6 @@ export const offerConfig: ISupplyPointOffer = {
         logoPath: '',
         sampleDocuments: [],
     },
-    validFrom: '2019-03-12T22:59:12.133Z',
-    validTo: new Date(new Date().getTime() + 3600 * 1000 * 24).toISOString(),
+    validFrom: '2019-03-12',
+    validTo: new Date().toISOString().split('T')[0],
 };

@@ -5,17 +5,18 @@
 </div>
 
 <div class="static-pages-holder">
+    <h3>Normal</h3>
     <div class="static-pages static-pages--bg-transparent">
         <pxe-request-card
             [supplyPoint]="supplyPoint"
-            (action)="submitForm($event)"
+            (action)="action($event)"
         ></pxe-request-card>
     </div>
     <h3>With badge</h3>
     <div class="static-pages static-pages--bg-transparent">
         <pxe-request-card
             [supplyPoint]="supplyPoint2"
-            (action)="submitForm($event)"
+            (action)="action($event)"
         ></pxe-request-card>
     </div>
 </div>

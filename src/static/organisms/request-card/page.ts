@@ -16,18 +16,16 @@ export class RequestCardComponent {
     public supplyPoint = supplyPointConfig;
     public supplyPoint2 = supplyPointConfig2;
 
-    public submitForm(evt) {
-        evt.preventDefault();
-        console.log('CLICKED');
+    constructor() {
+        this.breadcrumbItemsSimple = [
+            {
+              label: 'Request card',
+              url: null,
+            },
+        ];
     }
 
-    constructor(
-      ) {
-          this.breadcrumbItemsSimple = [
-              {
-                  label: 'Request card',
-                  url: null,
-              },
-          ];
-      }
+    public action = (data) => {
+        console.log('CLICKED', data);
+    }
 }
