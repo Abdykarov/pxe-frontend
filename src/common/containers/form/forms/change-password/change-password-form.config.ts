@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
-import { fieldsMustMatch } from 'src/common/utils/fields-must-match.fnc';
+import { fieldsMustMatch } from 'src/common/utils/validators/fields-must-match.fnc';
 
 export const changePasswordFields: IForm = {
     controls: {
