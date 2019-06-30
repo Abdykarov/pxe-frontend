@@ -8,12 +8,14 @@ import {
     ISupplyPointGasAttributes,
     ISupplyPointPowerAttributes,
 } from '../models/supply.model';
+import { ContractStatus } from 'src/common/graphql/models/contract';
 import {
     getCodelistByTypeQuery,
     getSupplyPointQuery,
     findAllSuppliersQuery,
     findCodelistsByTypesQuery,
     findSupplierDocumentsByComodityQuery,
+    findSupplyPointsByContractStatus,
     findSupplyPointsQuery,
 } from 'src/common/graphql/queries/supply';
 import {
@@ -23,7 +25,7 @@ import {
     updateGasSupplyPointWithContractMutation,
     updatePowerSupplyPointMutation,
     updatePowerSupplyPointWithContractMutation,
-} from '../mutation/supply';
+} from 'src/common/graphql/mutation/supply';
 
 @Injectable({
     providedIn: 'root',
@@ -197,6 +199,16 @@ export class SupplyService {
             query: getSupplyPointQuery,
             variables: {
                 supplyPointId,
+            },
+        })
+        .valueChanges
+
+    public findSupplyPointsByContractStatus = (ean: string, contractStatus: ContractStatus[]) => this.apollo
+        .watchQuery<any>({
+            query: findSupplyPointsByContractStatus,
+            variables: {
+                ean,
+                contractStatus,
             },
         })
         .valueChanges
