@@ -4,10 +4,7 @@ import {
     CommodityType,
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
-import {
-    CONTRACT_END_TYPE,
-    ROUTES,
-} from 'src/app/app.constants';
+import { CONTRACT_END_TYPE } from 'src/app/app.constants';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
@@ -16,7 +13,7 @@ import {
     IExpirationConfig,
     IForm,
 } from 'src/common/containers/form/models/form-definition.model';
-import { IShowModal } from '../../../modal/modals/model/modal.model';
+import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
 
 export const expirationConfig: IExpirationConfig = {
     [CONTRACT_END_TYPE.CONTRACT_END_TERM]: {
@@ -302,8 +299,6 @@ export const supplyPointAllowedFields: ICommodityTypeFields = {
 };
 
 export const supplyDetailInfoBanner: IBannerObj = {
-    // linkValue: ROUTES.ROUTER_REQUEST_SUPPLY_POINT,
-    // linkData: null,
     text: 'Platnost smlouvy končí za 60 dní',
 };
 

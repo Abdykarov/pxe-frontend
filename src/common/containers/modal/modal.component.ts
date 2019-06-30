@@ -8,7 +8,10 @@ import {
 
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
-import { filter, takeUntil } from 'rxjs/operators';
+import {
+    filter,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AddModalDirective } from './add-modal.directive';
