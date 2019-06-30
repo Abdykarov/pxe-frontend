@@ -20,6 +20,7 @@ import {
     resolvers,
 } from '../resolvers/';
 import { environment } from 'src/environments/environment';
+import { scrollToElementFnc } from 'src/common/utils';
 
 const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
@@ -90,6 +91,11 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
 
         if (networkError) {
             // console.log('%c ***** [Network error] *****', 'background: red; color: #fff; font-weight: bold', networkError);
+        }
+
+        if (graphQLErrors || networkError) {
+            // TODO scroll to error (global or field)
+            scrollToElementFnc('top');
         }
         // response.errors = null;
     });

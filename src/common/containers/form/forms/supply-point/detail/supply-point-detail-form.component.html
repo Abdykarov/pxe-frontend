@@ -1,0 +1,196 @@
+<!--<div class="row">-->
+<!--    <div class="col-12 col-xl-10 offset-xl-1">-->
+<!--        <lnd-banner-ui-->
+<!--                [data]="supplyDetailInfoBanner"-->
+<!--                buttonLabel="Najít dodavatele"-->
+<!--        ></lnd-banner-ui>-->
+<!--    </div>-->
+<!--</div>-->
+<div class="row">
+    <div class="col-12 col-xl-10 offset-xl-1">
+        <div class="page-box">
+
+            <div *ngIf="formSent"
+                 class="row">
+                <div class="col-12 col-md-6 offset-md-3">
+                    <lnd-alert type="info"
+                               hasIcon="true">
+                        Změny byly úspěšně uloženy
+                    </lnd-alert>
+                </div>
+            </div>
+
+            <h2 class="h1 mb-3 text-center">{{supplyPoint.name}}</h2>
+            <div class="text-with-icon justify-content-center mb-5">
+                <span class="icon icon--flash text-with-icon__icon"
+                      [class.icon--flame]="supplyPoint.commodityType === commodityType.GAS"
+                      [class.icon--flash]="supplyPoint.commodityType === commodityType.POWER"
+                ></span>
+                <span class="text-with-icon__text">
+                    <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">Odběr elektřiny</ng-container>
+                    <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">Odběr plynu</ng-container>
+                </span>
+            </div>
+            <div class="form-container">
+                <form
+                    [formGroup]="form"
+                    (keydown)="resetCustomFieldError()"
+                    (change)="resetCustomFieldError()"
+                    autocomplete="off">
+                    <lnd-form-field
+                            [error]="formError.name || form.controls.name.errors"
+                            [formControl]="form.controls.name"
+                            [id]="'name'"
+                            label="Název odběrného místa"
+                            subtext="Cokoliv, podle čeho chcete místo identifikovat"
+                            [success]="form.controls.name.valid && (form.controls.name.touched || formError.name)"
+                            [touched]="form.controls.name.touched || formError.name"
+                            [validationMessages]="formFields.validationMessages.name"
+                            [value]="form.controls.name.value"
+                    ></lnd-form-field>
+                    <lnd-form-field
+                            *ngIf="form.controls.annualConsumptionNT.status !== 'DISABLED'"
+                            [error]="formError.annualConsumptionNT || form.controls.annualConsumptionNT.errors"
+                            [formControl]="form.controls.annualConsumptionNT"
+                            [id]="'annualConsumptionNT'"
+                            label="Roční spotřeba - nízký tarif"
+                            appendText="MWh"
+                            [success]="form.controls.annualConsumptionNT.valid && (form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT)"
+                            [touched]="form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT"
+                            [validationMessages]="formFields.validationMessages.annualConsumptionNT"
+                            [value]="form.controls.annualConsumptionNT.value"
+                    ></lnd-form-field>
+                    <lnd-form-field
+                            *ngIf="form.controls.annualConsumptionVT.status !== 'DISABLED'"
+                            [error]="formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors"
+                            [formControl]="form.controls.annualConsumptionVT"
+                            [id]="'annualConsumptionVT'"
+                            label="Roční spotřeba - vysoký tarif"
+                            appendText="MWh"
+                            [success]="form.controls.annualConsumptionVT.valid && (form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT)"
+                            [touched]="form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT"
+                            [validationMessages]="formFields.validationMessages.annualConsumptionVT"
+                            [value]="form.controls.annualConsumptionVT.value"
+                    ></lnd-form-field>
+                    <lnd-form-field
+                            *ngIf="form.controls.annualConsumption.status !== 'DISABLED'"
+                            [error]="formError.annualConsumption || form.controls.annualConsumption.errors"
+                            [formControl]="form.controls.annualConsumption"
+                            [id]="'annualConsumption'"
+                            label="Roční spotřeba"
+                            appendText="MWh"
+                            [success]="form.controls.annualConsumption.valid && (form.controls.annualConsumption.touched || formError.annualConsumption)"
+                            [touched]="form.controls.annualConsumption.touched || formError.annualConsumption"
+                            [validationMessages]="formFields.validationMessages.annualConsumption"
+                            [value]="form.controls.annualConsumption.value"
+                    ></lnd-form-field>
+                </form>
+                <div class="row">
+                    <div class="col-12 mb-5">
+                        <div class="mb-1">
+                            <small *ngIf="supplyPoint.commodityType === commodityType.POWER">Ean</small>
+                            <small *ngIf="supplyPoint.commodityType === commodityType.GAS">Eic</small>
+                        </div>
+                        <span class="perex">{{supplyPoint.ean}}</span>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <div class="mb-1">
+                            <small>Typ odběru</small>
+                        </div>
+                        <span class="perex">{{subjectName}}</span>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <div class="mb-1">
+                            <small>Dodavatel</small>
+                        </div>
+                        <span class="perex">{{supplyPoint.supplier.name}}</span>
+                    </div>
+                    <div class="col-12 mb-5">
+                        <div class="mb-1">
+                            <small>Území</small>
+                        </div>
+                        <span class="perex">{{supplyPoint.address.city}}</span>
+                    </div>
+                    <div *ngIf="supplyPoint.commodityType === commodityType.POWER"
+                         class="col-12 mb-5">
+                        <div class="mb-1">
+                            <small>Distribuční sazba</small>
+                        </div>
+                        <span class="perex">{{supplyPoint.distributionRate.help || supplyPoint.distributionRate.description}}</span>
+                    </div>
+                    <div *ngIf="supplyPoint.commodityType === commodityType.POWER"
+                         class="col-12 mb-5">
+                        <div class="mb-1">
+                            <small>Jistič – fáze</small>
+                        </div>
+                        <span class="perex">{{supplyPoint.phases.help || supplyPoint.phases.description}}</span>
+                    </div>
+                    <div *ngIf="supplyPoint.commodityType === commodityType.POWER"
+                         class="col-12 mb-5">
+                        <div class="mb-1">
+                            <small>Jistič – velikost</small>
+                        </div>
+                        <span class="perex">{{supplyPoint.circuitBreaker.help || supplyPoint.circuitBreaker.description}}</span>
+                    </div>
+                    <div *ngIf="supplyPoint.expirationDate"
+                         [class.mb-5]="supplyPoint.expirationDate"
+                         class="col-12">
+                        <div class="mb-1">
+                            <small>Dodávka do</small>
+                        </div>
+                        <span class="perex">{{supplyPoint.expirationDate | date: 'dd. MM. y'}}</span>
+                    </div>
+                    <div *ngIf="supplyPoint.timeToContractEnd"
+                         class="col-12">
+                        <div class="mb-1">
+                            <small>Výpovědní lhůta</small>
+                        </div>
+                        <span class="perex">{{supplyPoint.timeToContractEnd}} {{supplyPoint.timeToContractEnd | plural: timeToContractEndPeriodMap[supplyPoint.timeToContractEndPeriod.code]}}</span>
+                    </div>
+                </div>
+                <hr>
+<!--                <div class="row no-gutters align-items-end mb-5">-->
+<!--                    <div class="col-12 col-md-6">-->
+<!--                        <small>Odstoupit od smlouvy do 14 dnů od podpisu</small>-->
+<!--                    </div>-->
+<!--                    <div class="col-12 col-md-6 pl-3 text-right">-->
+<!--                        <lnd-button-->
+<!--                                label="Odstoupit"-->
+<!--                                type="link-danger"-->
+<!--                                size="sm">-->
+<!--                        </lnd-button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row no-gutters align-items-end mb-5">-->
+<!--                    <div class="col-12 col-md-6">-->
+<!--                        <small>Odstoupit od smlouvy výpovědí</small>-->
+<!--                    </div>-->
+<!--                    <div class="col-12 col-md-6 pl-3 text-right">-->
+<!--                        <lnd-button-->
+<!--                                label="Vypovědět"-->
+<!--                                type="link-danger"-->
+<!--                                size="sm">-->
+<!--                        </lnd-button>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="row text-center">
+                    <div class="col-12 mb-2">
+                        <lnd-button
+                                label="Uložit"
+                                type="primary"
+                                (action)="submitForm()">
+                        </lnd-button>
+                    </div>
+                    <div class="col-12">
+                        <lnd-button
+                                label="Storno"
+                                type="link"
+                                (action)="customAction.emit()">
+                        </lnd-button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -11,17 +11,15 @@ export class ProgressBarComponent {
 
     public stepperProgressConfigSimple1: IStepperProgressItem[] = [
         {
-            url: '/basic/progress',
+            active: true,
             done: false,
             label: 'Step #1 progress',
         },
         {
-            url: '/basic/colors',
             done: false,
             label: 'Step #2 colors',
         },
         {
-            url: '/basic/alerts',
             done: false,
             label: 'Step #3 alerts',
         },
@@ -29,17 +27,15 @@ export class ProgressBarComponent {
 
     public stepperProgressConfigSimple2: IStepperProgressItem[] = [
         {
-            url: '/basic/colors',
             done: true,
             label: 'Step #1 colors',
         },
         {
-            url: '/basic/progress',
+            active: true,
             done: false,
             label: 'Step #2 progress',
         },
         {
-            url: '/basic/alerts',
             done: false,
             label: 'Step #3 alerts',
         },
@@ -47,17 +43,15 @@ export class ProgressBarComponent {
 
     public stepperProgressConfigSimple3: IStepperProgressItem[] = [
         {
-            url: '/basic/colors',
             done: true,
             label: 'Step #1 colors',
         },
         {
-            url: '/basic/alerts',
             done: true,
             label: 'Step #2 alerts',
         },
         {
-            url: '/basic/progress',
+            active: true,
             done: false,
             label: 'Step #3 progress',
         },
@@ -65,17 +59,15 @@ export class ProgressBarComponent {
 
     public stepperProgressConfigSimple4: IStepperProgressItem[] = [
         {
-            url: '/basic/colors',
             done: true,
             label: 'Step #1 colors',
         },
         {
-            url: '/basic/alerts',
             done: true,
             label: 'Step #2 alerts',
         },
         {
-            url: '/basic/progress',
+            active: true,
             done: true,
             label: 'Step #3 progress',
         },
@@ -83,29 +75,25 @@ export class ProgressBarComponent {
 
     public stepperProgressConfigSubStep1: IStepperProgressItem[] = [
         {
-            url: '/basic/colors',
             done: true,
             label: 'Step #1 colors',
         },
         {
-            url: '/basic/alerts',
             done: true,
             label: 'Step #2 alerts',
         },
         {
-            url: '/basic/progress',
+            active: true,
             done: false,
             label: 'Step #3 progress',
             shadowStep: true,
         },
         {
-            url: '/basic/forms',
             done: false,
             label: 'Step #4 forms',
             shadowStep: true,
         },
         {
-            url: '/basic/icons',
             done: false,
             label: 'Step #5 icons',
         },
@@ -113,29 +101,25 @@ export class ProgressBarComponent {
 
     public stepperProgressConfigSubStep2: IStepperProgressItem[] = [
         {
-            url: '/basic/colors',
             done: true,
             label: 'Step #1 colors',
         },
         {
-            url: '/basic/alerts',
             done: true,
             label: 'Step #2 alerts',
         },
         {
-            url: '/basic/forms',
             done: true,
             label: 'Step #3 forms',
             shadowStep: true,
         },
         {
-            url: '/basic/progress',
+            active: true,
             done: false,
             label: 'Step #4 progress',
             shadowStep: true,
         },
         {
-            url: '/basic/icons',
             done: false,
             label: 'Step #5 icons',
         },
@@ -143,29 +127,25 @@ export class ProgressBarComponent {
 
     public stepperProgressConfigSubStep3: IStepperProgressItem[] = [
         {
-            url: '/basic/colors',
             done: true,
             label: 'Step #1 colors',
         },
         {
-            url: '/basic/alerts',
             done: true,
             label: 'Step #2 alerts',
         },
         {
-            url: '/basic/forms',
             done: true,
             label: 'Step #3 forms',
             shadowStep: true,
         },
         {
-            url: '/basic/icons',
             done: true,
             label: 'Step #4 icons',
             shadowStep: true,
         },
         {
-            url: '/basic/progress',
+            active: true,
             done: false,
             label: 'Step #5 progress',
         },
@@ -173,29 +153,25 @@ export class ProgressBarComponent {
 
     public stepperProgressConfigSubStep4: IStepperProgressItem[] = [
         {
-            url: '/basic/colors',
             done: true,
             label: 'Step #1 colors',
         },
         {
-            url: '/basic/alerts',
             done: true,
             label: 'Step #2 alerts',
         },
         {
-            url: '/basic/forms',
             done: true,
             label: 'Step #3 forms',
             shadowStep: true,
         },
         {
-            url: '/basic/icons',
             done: true,
             label: 'Step #4 icons',
             shadowStep: true,
         },
         {
-            url: '/basic/progress',
+            active: true,
             done: true,
             label: 'Step #5 progress',
         },

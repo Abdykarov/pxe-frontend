@@ -1,6 +1,7 @@
 export interface IStepperProgressItem {
-    url: string;
-    done: boolean;
+    step?: string;
+    active?: boolean;
+    done?: boolean;
     label: string;
     shadowStep?: boolean;
 }

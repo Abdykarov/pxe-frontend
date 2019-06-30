@@ -5,6 +5,15 @@ export enum CommodityType {
     GAS = 'GAS',
 }
 
+export enum SupplyPointState {
+    CREATE =  'CREATE',
+    CHOOSE_OFFER = 'CHOOSE_OFFER',
+    PERSONAL_INFO = 'PERSONAL_INFO',
+    CONTRACT = 'CONTRACT',
+    PAYMENT = 'PAYMENT',
+    COMPLETED = 'COMPLETED',
+}
+
 export enum DistributionType {
     VT = 'VT',
     BOTH = 'BOTH',
@@ -13,6 +22,11 @@ export enum DistributionType {
 export enum SubjectType {
     SUBJECT_TYPE_INDIVIDUAL = '1',
     SUBJECT_TYPE_BUSINESSMAN = '2',
+}
+
+export enum TimeToContractEndPeriod {
+    DAY = 'Den',
+    MONTH = 'Mesic',
 }
 
 export interface IAddress {
@@ -56,11 +70,20 @@ export interface ISupplyPointGasAttributes {
     annualConsumption: number;
 }
 
+export interface ISupplyPointUpdateGasAttributes {
+    annualConsumption: number;
+}
+
 export interface ISupplyPointPowerAttributes {
     ean: string;
     circuitBreakerId: string;
     phasesId: string;
     distributionRateId: string;
+    annualConsumptionNT: number;
+    annualConsumptionVT: number;
+}
+
+export interface ISupplyPointUpdatePowerAttributes {
     annualConsumptionNT: number;
     annualConsumptionVT: number;
 }

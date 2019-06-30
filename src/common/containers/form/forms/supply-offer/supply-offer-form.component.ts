@@ -152,11 +152,10 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
         R.mapObjIndexed((fields, type) => {
             if (commodityTypeFields[type]) {
                 R.map((field) => {
-                    const fieldControl = this.form.get(field);
                     if (type === commodityType) {
-                        fieldControl.enable();
+                        this.setEnableField(field);
                     } else {
-                        fieldControl.disable();
+                        this.setDisableField(field);
                     }
                 }, fields);
             }
@@ -278,12 +277,11 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
     }
 
     public setPriceNTState = (distributionRateId: string = null) => {
-        const annualConsumptionNTControl = this.form.get('priceNT');
         if (this.includesBothTariffs(distributionRateId)) {
-            annualConsumptionNTControl.enable();
+            this.setEnableField('priceNT');
         } else {
             this.resetFieldValue('priceNT');
-            annualConsumptionNTControl.disable();
+            this.setDisableField('priceNT');
             this.cd.markForCheck();
         }
     }

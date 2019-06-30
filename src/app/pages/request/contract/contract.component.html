@@ -1,2 +1,59 @@
-<pxe-layout-container pageTitle="Podepsání smlouvy">
-</pxe-layout-container>
+<div class="container-fluid">
+    <div class="container-content">
+        <pxe-layout-container pageTitle="Podepsání smlouvy">
+            <div class="row mb-6">
+                <div class="col-12 col-xl-10 offset-xl-1">
+                    <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-12">
+                    <lnd-alert
+                        *ngIf="globalError.length"
+                        type="danger">
+                        <ng-container *ngFor="let error of globalError">
+                            {{ error }}<br>
+                        </ng-container>
+                    </lnd-alert>
+                </div>
+            </div>
+            <div *ngIf="supplyPoint"
+                 class="row">
+                <div class="col-12 col-xl-10 offset-xl-1 text-center">
+                    <h2>Podepište smlouvu</h2>
+                </div>
+                <div class="col-12 text-center mb-2 d-xl-none">
+                    <lnd-button
+                        [label]="showOffer ? 'Skrýt nabídku' : 'Zobrazit nabídku'"
+                        type="link"
+                        (click)="toggleOffer()">
+                    </lnd-button>
+                </div>
+                <div
+                    class="col-12 col-xl-10 offset-xl-1 d-xl-block"
+                    [class.d-block]="showOffer"
+                    [class.d-none]="!showOffer">
+                    <pxe-supply-point-offer
+                        [supplyPointOffer]="supplyPoint.contract.offer"
+                        [interactive]="true">
+                    </pxe-supply-point-offer>
+                </div>
+                <div class="col-12 col-xl-10 offset-xl-1">
+                    <div class="page-box">
+                        <pxe-contract-form
+                            [personData]="supplyPoint.contract.personalData"
+                            [fieldError]="fieldError"
+                            [formFields]="formFields"
+                            [formLoading]="formLoading"
+                            [smsSent]="smsSent"
+                            [globalError]="globalError"
+                            [contractTemplate]="contractTemplate"
+                            (submitAction)="signContract($event)"
+                            (customAction)="sendContractConfirmationSms()"
+                        ></pxe-contract-form>
+                    </div>
+                </div>
+            </div>
+        </pxe-layout-container>
+    </div>
+</div>

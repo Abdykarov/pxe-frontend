@@ -9,10 +9,15 @@ import {
     saveContractMutation,
     updateContractMutation,
 } from 'src/common/graphql/mutation/contract';
+import { getContractTermsQuery } from 'src/common/graphql/queries/contract';
 import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
 import { findSupplyPointOffersQuery } from 'src/common/graphql/queries/offer';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
+import {
+    sendContractConfirmationSmsMutation,
+    signContractMutation,
+} from 'src/common/graphql/mutation/contract';
 
 @Injectable({
     providedIn: 'root',
@@ -49,6 +54,38 @@ export class ContractService {
                             supplyPointId: supplyPointId,
                         },
                     });
+                },
+            });
+    }
+
+    public getContractTerms(contractId: string) {
+        return this.apollo
+            .watchQuery<any>({
+                query: getContractTermsQuery,
+                variables: {
+                    contractId,
+                },
+            })
+            .valueChanges;
+    }
+
+    public signContract(contractId: string, smsCode: string) {
+        return this.apollo
+            .mutate({
+                mutation: signContractMutation,
+                variables: {
+                    contractId,
+                    smsCode,
+                },
+            });
+    }
+
+    public sendContractConfirmationSms(contractId: string) {
+        return this.apollo
+            .mutate({
+                mutation: sendContractConfirmationSmsMutation,
+                variables: {
+                    contractId,
                 },
             });
     }
@@ -117,42 +154,43 @@ export class ContractService {
                 mountlyPaymentPrice: supplyPointOffer.permanentPaymentPrice,
                 __typename: 'offer',
             },
-            personalData: {
-                name: '',
-                ico: '',
-                dic: '',
-                address1: {
-                    street: '',
-                    orientationNumber: '',
-                    descriptiveNumber: '',
-                    city: '',
-                    postCode: '',
-                    region: '',
-                    __typename: 'address1',
-                },
-                address2: {
-                    street: '',
-                    orientationNumber: '',
-                    descriptiveNumber: '',
-                    city: '',
-                    postCode: '',
-                    region: '',
-                    __typename: 'address2',
-                },
-                email: '',
-                phone: '',
-                bankAccountNumber: '',
-                bankCode: '',
-                depositPaymentType: {
-                    type: '',
-                    code: '',
-                    description: '',
-                    help: '',
-                    __typename: 'depositPaymentType',
-                },
-                deposit: null,
-                __typename: 'personalData',
-            },
+            personalData: null,
+            // personalData: {
+            //     name: '',
+            //     ico: '',
+            //     dic: '',
+            //     address1: {
+            //         street: '',
+            //         orientationNumber: '',
+            //         descriptiveNumber: '',
+            //         city: '',
+            //         postCode: '',
+            //         region: '',
+            //         __typename: 'address1',
+            //     },
+            //     address2: {
+            //         street: '',
+            //         orientationNumber: '',
+            //         descriptiveNumber: '',
+            //         city: '',
+            //         postCode: '',
+            //         region: '',
+            //         __typename: 'address2',
+            //     },
+            //     email: '',
+            //     phone: '',
+            //     bankAccountNumber: '',
+            //     bankCode: '',
+            //     depositPaymentType: {
+            //         type: '',
+            //         code: '',
+            //         description: '',
+            //         help: '',
+            //         __typename: 'depositPaymentType',
+            //     },
+            //     deposit: null,
+            //     __typename: 'personalData',
+            // },
             __typename: 'contract',
         };
     }
