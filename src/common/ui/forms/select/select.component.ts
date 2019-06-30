@@ -12,6 +12,7 @@ import * as R from 'ramda';
 import { NgSelectConfig } from '@ng-select/ng-select';
 
 import { defaultSelectConfig } from './select.config';
+import { DynamicPipe } from 'src/common/pipes/dynamic/dynamic.pipe';
 import { getErrorMessage } from 'src/common/utils';
 import { IOption } from '../models/option.model';
 import { IValidationMessages } from '../models/validation-messages.model';
@@ -98,9 +99,12 @@ export class SelectComponent {
         }
     }
 
-    public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages);
+    public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages, this.dynamicPipe);
 
-    constructor(private config: NgSelectConfig) {
+    constructor(
+        private config: NgSelectConfig,
+        private dynamicPipe: DynamicPipe,
+    ) {
         R.pipe(
             R.keys,
             R.map(key => {

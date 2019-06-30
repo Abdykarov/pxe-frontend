@@ -309,7 +309,7 @@ export class CustomValidators {
         };
     }
 
-    static minValue = (min: number, allowEqual = false): ValidatorFn => {
+    static minValue = (min: number, allowEqual = false, plainError = true): ValidatorFn => {
         return (control: AbstractControl): ValidationErrors => {
             if (control.pristine) {
                 return null;
@@ -327,23 +327,29 @@ export class CustomValidators {
 
 
             return {
-                min: true,
+                min: plainError ? true : {min, actual: control.value},
             };
         };
     }
 
-    static maxValue = (max: number): ValidatorFn => {
+    static maxValue = (max: number, allowEqual = false, plainError = true): ValidatorFn => {
         return (control: AbstractControl): ValidationErrors => {
             if (control.pristine) {
                 return null;
             }
 
-            if (R_.isNilOrEmpty(control.value) || parseFloat(control.value.toString().replace(',', '.')) < max) {
+            if (!allowEqual &&
+                (R_.isNilOrEmpty(control.value) || parseFloat(control.value.toString().replace(',', '.')) < max)) {
+                return null;
+            }
+
+            if (allowEqual &&
+                (R_.isNilOrEmpty(control.value) || parseFloat(control.value.toString().replace(',', '.')) <= max)) {
                 return null;
             }
 
             return {
-                max: true,
+                max: plainError ? true : {max, actual: control.value},
             };
         };
     }

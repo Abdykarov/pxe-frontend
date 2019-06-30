@@ -1,5 +1,19 @@
-import { Component } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+} from '@angular/core';
 
+import {
+    getConfigStepperByState,
+    getSupplyPointState,
+} from 'src/common/utils/get-progress-stepper-config.fnc';
+import {
+    ISupplyPoint,
+    SupplyPointState,
+} from 'src/common/graphql/models/supply.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 
 @Component({
@@ -7,23 +21,19 @@ import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress
     templateUrl: './request-card.component.html',
     styleUrls: ['./request-card.component.scss'],
 })
-export class RequestCardComponent {
-    public stepperProgressConfigSimple2: IStepperProgressItem[] = [
-        {
-            url: '/basic/new-supply-point',
-            done: true,
-            label: '',
-        },
-        {
-            url: '/basic/request-card',
-            done: false,
-            label: '',
-        },
-        {
-            url: '/basic/contract-signing',
-            done: false,
-            label: '',
-        },
-    ];
-}
+export class RequestCardComponent implements OnInit {
 
+    @Input()
+    public supplyPoint: ISupplyPoint;
+
+    @Output()
+    public action: EventEmitter<any> = new EventEmitter();
+
+    public supplyPointState: SupplyPointState;
+    public stepperProgressConfig: IStepperProgressItem[] = null;
+
+    ngOnInit(): void {
+        this.supplyPointState = getSupplyPointState(this.supplyPoint);
+        this.stepperProgressConfig = getConfigStepperByState(this.supplyPointState);
+    }
+}

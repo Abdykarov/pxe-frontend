@@ -1,8 +1,5 @@
-import {
-    ISelectedOffer,
-    ISupplyPoint,
-} from './supply.model';
 import { IPersonalData } from './personal-data.model';
+import { ISelectedOffer } from './supply.model';
 
 export interface IContract {
     contractId?: string;
@@ -14,7 +11,7 @@ export interface IContract {
     __typename?: string;
 }
 
-enum ContractStatus {
+export enum ContractStatus {
     CANCELED = 'CANCELED',
     NOT_CONCLUDED = 'NOT_CONCLUDED',
     CONCLUDED = 'CONCLUDED',

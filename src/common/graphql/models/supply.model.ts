@@ -5,6 +5,15 @@ export enum CommodityType {
     GAS = 'GAS',
 }
 
+export enum SupplyPointState {
+    CREATE =  'CREATE',
+    CHOOSE_OFFER = 'CHOOSE_OFFER',
+    PERSONAL_INFO = 'PERSONAL_INFO',
+    CONTRACT = 'CONTRACT',
+    PAYMENT = 'PAYMENT',
+    COMPLETED = 'COMPLETED',
+}
+
 export enum DistributionType {
     VT = 'VT',
     BOTH = 'BOTH',
