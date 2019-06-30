@@ -62,7 +62,8 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
             this.dateDiffValidityOfOffer === SupplyPointOfferComponent.ZERO_HOURS_VALIDITY_OF_OFFER ?
                 SupplyPointOfferComponent.MIN_HOURS_VALIDITY_OF_OFFER_DISPLAYED : this.dateDiffValidityOfOffer;
 
-        if (this.dateDiffValidityOfOffer <= SupplyPointOfferComponent.MAX_HOURS_VALIDITY_OF_OFFER_DISPLAYED) {
+        if (this.dateDiffValidityOfOffer <= SupplyPointOfferComponent.MAX_HOURS_VALIDITY_OF_OFFER_DISPLAYED &&
+            this.dateDiffValidityOfOffer > 0) {
             this.showValidityOfOffer = true;
         }
 
