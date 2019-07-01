@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 
-import { configStepper } from './config';
+import { 
+    configStepper,
+    transactionCols,
+    transactionRows,
+} from './config';
 
 @Component({
     templateUrl: './page.html',
@@ -8,6 +12,8 @@ import { configStepper } from './config';
 export class PaymentVerificationPageComponent {
     public stepperProgressConfig = configStepper;
     public showPaymentInfo = true;
+    public transactionCols;
+    public transactionRows;
 
     public bannerImageSrc = '/assets/images/illustrations/loading.svg';
 
@@ -16,5 +22,10 @@ export class PaymentVerificationPageComponent {
 
     public togglePaymentInfo = (event) => {
         this.showPaymentInfo = !this.showPaymentInfo;
+    }
+
+    constructor() {
+        this.transactionCols = transactionCols;
+        this.transactionRows = transactionRows;
     }
 }
