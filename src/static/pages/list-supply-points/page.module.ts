@@ -5,6 +5,7 @@ import { Routes } from '@angular/router';
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { ListSupplyPointsPageComponent } from './page';
+import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.module';
 import { SupplyPointModule } from 'src/common/ui/supply-point/supply-point.module';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { SupplyPointModule } from 'src/common/ui/supply-point/supply-point.modul
         BreadcrumbModule,
         ButtonModule,
         CommonModule,
+        ProgressBarModule,
         SupplyPointModule,
     ],
 })
