@@ -76,6 +76,8 @@ export class OverviewComponent extends AbstractComponent implements OnInit {
 
 
     public getOverviewState = (supplyPoints: ISupplyPoint[]): OverviewState => {
+       return OverviewState.REQUESTS;
+
         if (supplyPoints.length === 0) {
             return OverviewState.NO_REQUEST;
         }
