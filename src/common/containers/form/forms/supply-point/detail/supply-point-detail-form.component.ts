@@ -25,10 +25,10 @@ import {
 import {
     confirmFindNewSupplyPoint,
     confirmFindNewSupplyPointConfig,
-    supplyDetailInfoBanner,
     supplyPointDetailAllowedFields,
 } from '../supply-point-form.config';
 import {
+    CONSTS,
     ROUTES,
     SUBJECT_TYPE_OPTIONS,
     TIME_TO_CONTRACT_END_PERIOD_MAP,
@@ -45,11 +45,12 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
 
     public allowedFields = supplyPointDetailAllowedFields;
     public commodityType = CommodityType;
+    public maxDaysTillContractExpiration = CONSTS.MAX_DAYS_TILL_CONTRACT_EXPIRATION;
     public suppliers = [];
-    public supplyDetailInfoBanner = supplyDetailInfoBanner;
     public subjectName = '';
-    public timeToContractEndPeriodMap = TIME_TO_CONTRACT_END_PERIOD_MAP;
     public setFormByCommodity = this.setFormFields;
+    public timeToContractEndPeriodMap = TIME_TO_CONTRACT_END_PERIOD_MAP;
+    public today = new Date().toISOString();
 
     constructor(
         protected fb: FormBuilder,
@@ -85,6 +86,10 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
 
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
+
+        if (changes.formSent && changes.formSent.currentValue === true) {
+            this.setOriginalFormValues(this.form.value);
+        }
     }
 
     public findNewSupplier = (supplyPoint: ISupplyPoint) => {

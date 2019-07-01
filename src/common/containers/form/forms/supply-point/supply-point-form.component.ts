@@ -20,14 +20,16 @@ import {
     CODE_LIST,
     CODE_LIST_TYPES,
     COMMODITY_TYPE_OPTIONS,
+    CONSTS,
     CONTRACT_END_TYPE,
     SUBJECT_TYPE_OPTIONS,
     SUBJECT_TYPE_TO_DIST_RATE_MAP,
+    SUPPLY_POINT_EDIT_TYPE,
 } from 'src/app/app.constants';
 import {
     CommodityType,
     ISupplyPoint,
-    SubjectType,
+    SubjectType, TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import {
     convertArrayToObject,
@@ -51,6 +53,9 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent implements OnInit, OnChanges {
     @Input()
     public formValues: ISupplyPoint = null;
+
+    @Input()
+    public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
 
     public allowedFields = supplyPointAllowedFields;
     public commodityTypeOptions: Array<IOption> = COMMODITY_TYPE_OPTIONS;
@@ -176,10 +181,14 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         let timeToContractEndPeriodId = null;
 
         if (this.formValues) {
+            const supplier = R.find(R.propEq('id', this.formValues.supplier.id))(this.suppliers[commodityType]);
+            const expirationDateFromSupplyPoint = this.formValues.expirationDate && new Date(this.formValues.expirationDate);
+            const expirationDateFromContract = this.formValues.contract &&
+                this.formValues.contract.deliveryTo &&
+                new Date(this.formValues.contract.deliveryTo);
             id = this.formValues.id;
             commodityType = this.formValues.commodityType;
             subjectTypeId = this.formValues.subject && this.formValues.subject.code;
-            const supplier = R.find(R.propEq('id', this.formValues.supplier.id))(this.suppliers[commodityType]);
             supplierId = this.formValues.supplier && supplier;
             name = this.formValues.name;
             ean = this.formValues.commodityType === CommodityType.POWER ? this.formValues.ean : null;
@@ -191,10 +200,17 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             annualConsumptionNT = this.formValues.annualConsumptionNT && this.formValues.annualConsumptionNT.toString().replace('.', ',');
             annualConsumptionVT = this.formValues.annualConsumptionVT && this.formValues.annualConsumptionVT.toString().replace('.', ',');
             annualConsumption = this.formValues.annualConsumptionVT && this.formValues.annualConsumptionVT.toString().replace('.', ',');
-            expirationDate = this.formValues.expirationDate && new Date(this.formValues.expirationDate);
-            contractEndTypeId = this.formValues.contractEndType && this.formValues.contractEndType.code;
-            timeToContractEnd = this.formValues.timeToContractEnd;
-            timeToContractEndPeriodId = this.formValues.timeToContractEndPeriod && this.formValues.timeToContractEndPeriod.code;
+            if (this.editMode === SUPPLY_POINT_EDIT_TYPE.NORMAL) {
+                expirationDate = expirationDateFromSupplyPoint;
+                contractEndTypeId = this.formValues.contractEndType && this.formValues.contractEndType.code;
+                timeToContractEnd = this.formValues.timeToContractEnd;
+                timeToContractEndPeriodId = this.formValues.timeToContractEndPeriod && this.formValues.timeToContractEndPeriod.code;
+            } else {
+                expirationDate = expirationDateFromContract || expirationDateFromSupplyPoint;
+                contractEndTypeId = CONTRACT_END_TYPE.CONTRACT_END_TERM;
+                timeToContractEnd = String(CONSTS.TIME_TO_CONTRACT_END_PROLONGED);
+                timeToContractEndPeriodId = TimeToContractEndPeriod.DAY;
+            }
         }
 
         this.form.controls['id'].setValue(id);

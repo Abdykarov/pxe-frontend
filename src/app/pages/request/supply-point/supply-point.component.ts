@@ -31,7 +31,7 @@ import { getConfigStepperByState } from 'src/common/utils/get-progress-stepper-c
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils';
-import { ROUTES } from 'src/app/app.constants';
+import { ROUTES, SUPPLY_POINT_EDIT_TYPE } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -45,6 +45,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public fieldError: IFieldError = {};
     public formLoading = false;
     public supplyPointData = null;
+    public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
 
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepperByState(SupplyPointState.CREATE);
 
@@ -62,6 +63,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         if (isPlatformBrowser(this.platformId)) {
             const supplyPointCopy = window.history.state.supplyPointCopy;
             this.supplyPointData = supplyPointCopy;
+            this.editMode = SUPPLY_POINT_EDIT_TYPE.PROLONG;
         }
     }
 

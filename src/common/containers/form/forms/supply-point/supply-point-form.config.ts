@@ -7,7 +7,6 @@ import {
 import { CONTRACT_END_TYPE } from 'src/app/app.constants';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
-import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import {
     ICommodityTypeFields,
     IExpirationConfig,
@@ -296,10 +295,6 @@ export const supplyPointAllowedFields: ICommodityTypeFields = {
         'timeToContractEnd',
         'timeToContractEndPeriodId',
     ],
-};
-
-export const supplyDetailInfoBanner: IBannerObj = {
-    text: 'Platnost smlouvy končí za 60 dní',
 };
 
 export const confirmFindNewSupplyPoint = 'confirmFindNewSupplyPoint';
