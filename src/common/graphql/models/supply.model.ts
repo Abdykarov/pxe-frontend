@@ -5,7 +5,7 @@ export enum CommodityType {
     GAS = 'GAS',
 }
 
-export enum SupplyPointState {
+export enum StepOfSupplyPoint {
     CREATE =  'CREATE',
     CHOOSE_OFFER = 'CHOOSE_OFFER',
     PERSONAL_INFO = 'PERSONAL_INFO',
@@ -108,6 +108,15 @@ export interface ISupplyPoint {
     timeToContractEnd: number;
     timeToContractEndPeriod: ICodelistItem;
     contract: IContract;
+    progressStatus: ProgressStatus;
+}
+
+export enum ProgressStatus {
+    SUPPLY_POINT = 'SUPPLY_POINT',
+    OFFER_STEP = 'OFFER_STEP',
+    PERSONAL_DATA = 'PERSONAL_DATA',
+    WAITING_FOR_PAYMENT = 'WAITING_FOR_PAYMENT',
+    NOT_CONCLUDED = 'NOT_CONCLUDED',
 }
 
 export interface ISelectedOffer {

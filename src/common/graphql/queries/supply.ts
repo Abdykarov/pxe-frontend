@@ -96,6 +96,7 @@ export const findSupplyPointsQuery = gql`
             }
             lastAnnualConsumptionNT,
             lastAnnualConsumptionVT,
+            progressStatus,
         }
     }
 `;
@@ -224,6 +225,7 @@ export const getSupplyPointQuery = gql`
                     deposit,
                 }
             },
+            progressStatus,
         }
     }
 `;
@@ -350,8 +352,9 @@ export const findSupplyPointsByContractStatus = gql`
                         help
                     },
                     deposit,
-                }
+                },
             },
+            progressStatus,
         }
     }
 `;

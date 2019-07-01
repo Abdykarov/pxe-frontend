@@ -7,12 +7,12 @@ import {
 } from '@angular/core';
 
 import {
-    getConfigStepperByState,
-    getSupplyPointState,
+    getConfigStepper,
+    getStepOfSupplyPoint,
 } from 'src/common/utils/get-progress-stepper-config.fnc';
 import {
     ISupplyPoint,
-    SupplyPointState,
+    StepOfSupplyPoint,
 } from 'src/common/graphql/models/supply.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 
@@ -29,11 +29,11 @@ export class RequestCardComponent implements OnInit {
     @Output()
     public action: EventEmitter<any> = new EventEmitter();
 
-    public supplyPointState: SupplyPointState;
+    public stepOfSupplyPoint: StepOfSupplyPoint;
     public stepperProgressConfig: IStepperProgressItem[] = null;
 
     ngOnInit(): void {
-        this.supplyPointState = getSupplyPointState(this.supplyPoint);
-        this.stepperProgressConfig = getConfigStepperByState(this.supplyPointState);
+        this.stepOfSupplyPoint = getStepOfSupplyPoint(this.supplyPoint);
+        this.stepperProgressConfig = getConfigStepper(this.stepOfSupplyPoint);
     }
 }

@@ -1,6 +1,14 @@
+import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
+
 export enum OverviewState {
     NO_REQUEST,
-    ALL_SUPPLY_POINTS_HAVE_FULL_CONTRACT,
-    CONTRACT_ENDING,
+    REQUESTS_HAVE_CONTRACTS,
+    REQUESTS_END_IN_TWO_MONTHS,
     REQUESTS,
 }
+
+export interface OverviewStateWrapper {
+    overviewState: OverviewState;
+    supplyPoints: ISupplyPoint[];
+}
+

@@ -1,66 +1,69 @@
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 
-import { ContractStatus } from 'src/common/graphql/models/contract';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import {
     ISupplyPoint,
-    SupplyPointState,
+    ProgressStatus,
+    StepOfSupplyPoint,
 } from 'src/common/graphql/models/supply.model';
 
 const steps: IStepperProgressItem[] = [
     {
-        step: SupplyPointState.CREATE,
+        step: StepOfSupplyPoint.CREATE,
         label: 'Výběr odběrného místa',
     },
     {
-        step: SupplyPointState.CHOOSE_OFFER,
+        step: StepOfSupplyPoint.CHOOSE_OFFER,
         label: 'Výběr nabídky',
     },
     {
-        step: SupplyPointState.PERSONAL_INFO,
+        step: StepOfSupplyPoint.PERSONAL_INFO,
         label: 'Rekapitulace',
         shadowStep: true,
     },
     {
-        step: SupplyPointState.CONTRACT,
+        step: StepOfSupplyPoint.CONTRACT,
         label: 'Smlouva',
         shadowStep: true,
     },
     {
-        step: SupplyPointState.PAYMENT,
+        step: StepOfSupplyPoint.PAYMENT,
         label: 'Platba',
         shadowStep: true,
     },
     {
-        step: SupplyPointState.COMPLETED,
+        step: StepOfSupplyPoint.COMPLETED,
         label: 'Podepsání smlouvy',
     },
 ];
 
 
-export const getSupplyPointState = (supplyPoint: ISupplyPoint): SupplyPointState => {
+export const getStepOfSupplyPoint = (supplyPoint: ISupplyPoint): StepOfSupplyPoint => {
     if (!supplyPoint.contract) {
-        return SupplyPointState.CREATE;
+        return StepOfSupplyPoint.CREATE;
     }
 
-    if (!supplyPoint.contract.offer) {
-        return SupplyPointState.CHOOSE_OFFER;
+    if (supplyPoint.progressStatus === ProgressStatus.SUPPLY_POINT) {
+        return StepOfSupplyPoint.CHOOSE_OFFER;
     }
 
-    if (!supplyPoint.contract.personalData) {
-        return SupplyPointState.PERSONAL_INFO;
+    if (supplyPoint.progressStatus === ProgressStatus.OFFER_STEP) {
+        return StepOfSupplyPoint.PERSONAL_INFO;
     }
 
-    if (supplyPoint.contract.contractStatus === ContractStatus.CONCLUDED) {
-        return SupplyPointState.CONTRACT;
+    if (supplyPoint.contract.contractStatus === ProgressStatus.PERSONAL_DATA) {
+        return StepOfSupplyPoint.CONTRACT;
     }
 
-    // todo platba
-    return SupplyPointState.COMPLETED;
+    if (supplyPoint.progressStatus === ProgressStatus.WAITING_FOR_PAYMENT) {
+        return StepOfSupplyPoint.PAYMENT;
+    }
+
+    return StepOfSupplyPoint.COMPLETED;
 };
 
-export const getConfigStepperByState = (activeStep: SupplyPointState): IStepperProgressItem[] => {
+export const getConfigStepper = (activeStep: StepOfSupplyPoint): IStepperProgressItem[] => {
     const activeIndex = R.findIndex(R.propEq('step', activeStep))(steps);
     return R_.mapIndexed((item: IStepperProgressItem, index: number) => {
         item.active = index === activeIndex;

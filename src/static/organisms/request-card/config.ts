@@ -1,4 +1,7 @@
-import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import {
+    ISupplyPoint,
+    ProgressStatus,
+} from 'src/common/graphql/models/supply.model';
 
 export const supplyPointConfig: ISupplyPoint = {
     id: '5456',
@@ -26,6 +29,7 @@ export const supplyPointConfig: ISupplyPoint = {
     timeToContractEnd: 0,
     timeToContractEndPeriod: null,
     contract: null,
+    progressStatus: ProgressStatus.NOT_CONCLUDED,
 };
 
 export const supplyPointConfig2: ISupplyPoint = {
@@ -69,4 +73,5 @@ export const supplyPointConfig2: ISupplyPoint = {
         },
         personalData: null,
     },
+    progressStatus: ProgressStatus.SUPPLY_POINT,
 };

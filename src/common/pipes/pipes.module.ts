@@ -11,7 +11,7 @@ import { IsDatePast } from './is-date-past/is-date-past.pipe';
 import { IsRouteActivePipe } from './is-route-active/is-route-acrive.pipe';
 import { KeysPipe } from './keys/keys.pipe';
 import { PluralPipe } from './plurar/plural.pipe';
-import { SupplyPointStatePipe } from './supply-point-state/supply-point-state.pipe';
+import { StepOfSupplyPointPipe } from './step-of-supply-point/step-of-supply-point.pipe';
 import { ValuesPipe } from './values/values.pipe';
 
 @NgModule({
@@ -25,7 +25,7 @@ import { ValuesPipe } from './values/values.pipe';
         IsRouteActivePipe,
         KeysPipe,
         PluralPipe,
-        SupplyPointStatePipe,
+        StepOfSupplyPointPipe,
         ValuesPipe,
     ],
     exports: [
@@ -38,7 +38,7 @@ import { ValuesPipe } from './values/values.pipe';
         IsRouteActivePipe,
         KeysPipe,
         PluralPipe,
-        SupplyPointStatePipe,
+        StepOfSupplyPointPipe,
         ValuesPipe,
     ],
     providers: [
@@ -52,7 +52,7 @@ import { ValuesPipe } from './values/values.pipe';
         FilterCommodityTypePipe,
         KeysPipe,
         PluralPipe,
-        SupplyPointStatePipe,
+        StepOfSupplyPointPipe,
         ValuesPipe,
     ],
 })
