@@ -30,6 +30,25 @@
 				}
 			}
 		}
+		
+		.supply-point-box-addon {
+			display: flex;
+			align-items: center;
+			justify-content: center;			
+			height: calc(100% - #{$spacer});
+			padding: ( $spacer * 1.5 );
+			border-radius: $border-radius;
+			box-shadow: $box-shadow;
+
+			// Media queries
+			@include media-breakpoint-up(lg) {
+				padding: ( $spacer * 2 );
+			}
+
+			> :nth-child(n) {
+				pointer-events: auto;
+			}
+		}
 	}
 }
 

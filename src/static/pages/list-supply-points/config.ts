@@ -7,7 +7,7 @@ import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress
 export class NewSupplyPointPageConfig {
     public stepperProgressConfig: IStepperProgressItem[] = [
         {
-            url: '/basic/new-supply-point',
+            url: '/basic/list-supply-points',
             done: false,
             label: 'Výběr odběrného místa',
         },
