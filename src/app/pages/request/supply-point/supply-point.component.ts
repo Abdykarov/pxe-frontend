@@ -31,7 +31,10 @@ import { getConfigStepperByState } from 'src/common/utils/get-progress-stepper-c
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils';
-import { ROUTES, SUPPLY_POINT_EDIT_TYPE } from 'src/app/app.constants';
+import {
+    ROUTES,
+    SUPPLY_POINT_EDIT_TYPE,
+} from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
