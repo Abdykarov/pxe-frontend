@@ -10,6 +10,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import * as mutations from 'src/common/graphql/mutations';
 import { AbstractComponent } from 'src/common/abstract.component';
+import { CONSTS } from 'src/app/app.constants';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import {
     IFieldError,
@@ -36,6 +37,8 @@ export class LandingComponent extends AbstractComponent {
     public globalError: string[] = [];
     public fieldError: IFieldError = {};
     public formFields: IForm;
+
+    public images = CONSTS.IMAGES;
 
     constructor(
         private apollo: Apollo,

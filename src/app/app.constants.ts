@@ -7,14 +7,26 @@ import {
 import { IOption } from 'src/common/ui/forms/models/option.model';
 
 export const CONSTS = {
+    CURRENCY: {
+        DEFAULT: 'CZK',
+    },
     DATE_FORMAT: {
         CALENDAR: 'YYYY-MM-DD[T]HH:mm',
         SHORT: 'YYYY-MM-DD',
     },
-    CURRENCY: {
-        DEFAULT: 'CZK',
-    },
     DEFAULT_EXPIRATION: 3600,
+    IMAGES: {
+        ACCEPTED: '/assets/images/illustrations/accepted.svg',
+        DOCUMENTS : '/assets/images/illustrations/documents.svg',
+        DOCUMENTS_ALERT: '/assets/images/illustrations/documents_alert.svg',
+        HOUSE: '/assets/images/illustrations/house.svg',
+        HOUSE_ALERT: '/assets/images/illustrations/house-alert.svg',
+        LIGHT: '/assets/images/illustrations/light.svg',
+        LOADING: '/assets/images/illustrations/loading.svg',
+        MAIL_LETTER: '/assets/images/illustrations/mail-letter.svg',
+        SIGN: '/assets/images/illustrations/sign.svg',
+        UPLOAD: '/assets/images/illustrations/upload.svg',
+    },
     PATHS: {
         CONTRACT : 'contract',
         COOKIES_POLICY : 'cookies-policy',
