@@ -68,6 +68,13 @@
 					width: 10px;
 				}
 			}
+
+			& + .progress-bar__item:not(:last-child) {
+				&::before {
+					left: 0;
+					width: 125%;
+				}
+			}
 		}
 	}
 
