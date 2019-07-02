@@ -1,12 +1,22 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
 
-import { map, takeUntil } from 'rxjs/operators';
+import {
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import { getSupplyPointState } from 'src/common/utils/get-progress-stepper-config.fnc';
-import { ISupplyPoint, SupplyPointState } from 'src/common/graphql/models/supply.model';
+import {
+    ISupplyPoint,
+    SupplyPointState,
+} from 'src/common/graphql/models/supply.model';
 import { OverviewState } from './overview.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
@@ -21,9 +31,9 @@ export class OverviewComponent extends AbstractComponent implements OnInit {
     public readonly BANNER_IMAGE_SRC_OK = '/assets/images/illustrations/accepted.svg';
 
     public globalError: string[] = [];
-    public supplyPoints: ISupplyPoint[];
-    public state: OverviewState;
     public overviewStates = OverviewState;
+    public state: OverviewState;
+    public supplyPoints: ISupplyPoint[];
 
     constructor(
         private cd: ChangeDetectorRef,
