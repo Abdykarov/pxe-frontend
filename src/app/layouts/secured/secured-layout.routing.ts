@@ -25,6 +25,17 @@ const routes = [
                 },
             },
             {
+                path: CONSTS.PATHS.REQUEST,
+                loadChildren: '../../pages/request/request.module#RequestModule',
+                data: {
+                    isSimpleFooter: false,
+                    isPublic: false,
+                    isSupplier: false,
+                    loginType: LoginType.NONE,
+                    signUpType: SignType.NONE,
+                },
+            },
+            {
                 path: CONSTS.PATHS.REQUESTS,
                 loadChildren: '../../pages/requests-overview/requests-overview.module#RequestsOverviewModule',
                 data: {
