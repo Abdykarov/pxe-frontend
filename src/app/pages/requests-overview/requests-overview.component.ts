@@ -63,7 +63,6 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
             .subscribe(
                 (supplyPoints: ISupplyPoint[]) => {
                     this.setOverviewState(supplyPoints);
-                    this.supplyPoints = supplyPoints;
                     this.cd.markForCheck();
                 },
                 error => {
@@ -77,6 +76,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
 
     public completeRequest = (supplyPoint: ISupplyPoint): void => {
         const stepOfSupplyPoint: StepOfSupplyPoint = getStepOfSupplyPoint(supplyPoint);
+        console.log(stepOfSupplyPoint);
         this.router.navigate(
             [this.getRouterForCompleteRequest(stepOfSupplyPoint)],
             {
@@ -109,7 +109,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
     }
 
     public isRequest = (supplyPoint: ISupplyPoint): boolean =>
-        supplyPoint.contract && supplyPoint.contract.contractStatus !== ContractStatus.CONCLUDED
+        supplyPoint.contract === null || (supplyPoint.contract && supplyPoint.contract.contractStatus !== ContractStatus.CONCLUDED)
 
     public setOverviewState = (supplyPointsInput: ISupplyPoint[]): void => {
         const overviewStateWrapper: OverviewStateWrapper = R.cond([
@@ -125,6 +125,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
             [
                 this.isSomeRequest,
                 (supplyPoints: ISupplyPoint[]) => {
+                    console.log('this.isSomeRequest');
                     return {
                         overviewState: OverviewState.REQUESTS,
                         supplyPoints: supplyPoints,
@@ -153,6 +154,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
 
         this.state = overviewStateWrapper.overviewState;
         this.supplyPoints = overviewStateWrapper.supplyPoints;
+        console.log('NASTAVUJI');
     }
 
     public getRouterForCompleteRequest = (stepOfSupplyPoint: StepOfSupplyPoint): string => {

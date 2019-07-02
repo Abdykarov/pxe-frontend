@@ -40,11 +40,11 @@ const steps: IStepperProgressItem[] = [
 
 
 export const getStepOfSupplyPoint = (supplyPoint: ISupplyPoint): StepOfSupplyPoint => {
-    if (!supplyPoint.contract) {
+    if (!supplyPoint) {
         return StepOfSupplyPoint.CREATE;
     }
 
-    if (supplyPoint.progressStatus === ProgressStatus.SUPPLY_POINT) {
+    if (!supplyPoint.contract) {
         return StepOfSupplyPoint.CHOOSE_OFFER;
     }
 
@@ -60,7 +60,10 @@ export const getStepOfSupplyPoint = (supplyPoint: ISupplyPoint): StepOfSupplyPoi
         return StepOfSupplyPoint.PAYMENT;
     }
 
-    return StepOfSupplyPoint.COMPLETED;
+    // ??
+    if (supplyPoint.progressStatus === ProgressStatus.SUPPLY_POINT) {
+        return StepOfSupplyPoint.COMPLETED;
+    }
 };
 
 export const getConfigStepper = (activeStep: StepOfSupplyPoint): IStepperProgressItem[] => {
