@@ -4,8 +4,8 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { Injectable } from '@angular/core';
 
-import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.fnc';
+import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 
 @Injectable({
     providedIn: 'root',

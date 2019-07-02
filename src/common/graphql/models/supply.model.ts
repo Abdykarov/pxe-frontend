@@ -103,13 +103,13 @@ export interface ISupplyPoint {
 }
 
 export enum ProgressStatus {
+    COMPLETED = 'COMPLETED',
     NONE = 'NONE',
-    READY_FOR_SIGN = 'READY_FOR_SIGN',
-    SUPPLY_POINT = 'SUPPLY_POINT',
     OFFER_STEP = 'OFFER_STEP',
     PERSONAL_DATA = 'PERSONAL_DATA',
+    READY_FOR_SIGN = 'READY_FOR_SIGN',
+    SUPPLY_POINT = 'SUPPLY_POINT',
     WAITING_FOR_PAYMENT = 'WAITING_FOR_PAYMENT',
-    COMPLETED = 'COMPLETED',
 }
 
 export interface ISelectedOffer {

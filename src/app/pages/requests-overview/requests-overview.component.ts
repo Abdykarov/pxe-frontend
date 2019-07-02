@@ -1,15 +1,28 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
 
 import * as moment from 'moment';
 import * as R from 'ramda';
-import { map, takeUntil } from 'rxjs/operators';
+import {
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
-import { ISupplyPoint, ProgressStatus } from 'src/common/graphql/models/supply.model';
-import { OverviewState, OverviewStateWrapper } from './requests-overview.model';
+import {
+    ISupplyPoint,
+    ProgressStatus,
+} from 'src/common/graphql/models/supply.model';
+import {
+    OverviewState,
+    OverviewStateWrapper,
+} from './requests-overview.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -22,10 +35,10 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 export class RequestsOverviewComponent extends AbstractComponent implements OnInit {
     public readonly BANNER_IMAGE_SRC_OK = '/assets/images/illustrations/accepted.svg';
 
-    public globalError: string[] = [];
-    public supplyPoints: ISupplyPoint[];
-    public state: OverviewState;
     public overviewStates = OverviewState;
+    public globalError: string[] = [];
+    public state: OverviewState;
+    public supplyPoints: ISupplyPoint[];
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -44,7 +57,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
             ])
             .pipe(
                 takeUntil(this.destroy$),
-                map( ({data}) =>  data.findSupplyPointsByContractStatus),
+                map(({data}) =>  data.findSupplyPointsByContractStatus),
             )
             .subscribe(
                 (supplyPoints: ISupplyPoint[]) => {
@@ -84,7 +97,8 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
 
     public contractEnding = (supplyPoint: ISupplyPoint) =>
         supplyPoint.contract
-            && this.dateDiffPipe.transform(supplyPoint.contract.deliveryTo, moment().add(3 , 'month').toISOString()) < 3
+            && this.dateDiffPipe.transform(supplyPoint.contract.deliveryTo, moment().add(2 , 'month').toISOString(), 'seconds') < 0
+                && this.dateDiffPipe.transform(moment().toISOString(), supplyPoint.contract.deliveryTo, 'seconds') >= 0
 
     public isSomeRequest = (supplyPoints: ISupplyPoint[]): boolean => {
         return R.find((supplyPoint: ISupplyPoint) => {
@@ -111,7 +125,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
                 (supplyPoints: ISupplyPoint[]) => {
                     return {
                         overviewState: OverviewState.REQUESTS,
-                        supplyPoints: supplyPoints,
+                        supplyPoints: R.filter((supplyPoint: ISupplyPoint) => this.isRequest(supplyPoint), supplyPoints),
                     };
                 },
             ],

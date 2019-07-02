@@ -6,9 +6,7 @@ import {
     Output,
 } from '@angular/core';
 
-import {
-    getConfigStepper,
-} from 'src/common/utils/get-progress-stepper-config.fnc';
+import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.fnc';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 

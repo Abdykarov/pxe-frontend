@@ -52,11 +52,9 @@ const steps: IStepperProgressItem[] = [
 
 export const getConfigStepper = (activeStep: ProgressStatus): IStepperProgressItem[] => {
     const activeIndex = R.findIndex(R.propEq('step', activeStep))(steps);
-    const a = R_.mapIndexed((item: IStepperProgressItem, index: number) => {
+    return R_.mapIndexed((item: IStepperProgressItem, index: number) => {
         item.active = index === activeIndex;
         item.done = index < activeIndex;
         return item;
     }, R.clone(steps));
-    console.log(a);
-    return a;
 };
