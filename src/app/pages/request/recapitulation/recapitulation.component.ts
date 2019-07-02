@@ -22,7 +22,7 @@ import { IPersonalDataInput } from 'src/common/graphql/models/personal-data.mode
 import {
     ISupplyPoint,
     SubjectType,
-    StepOfSupplyPoint,
+    ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
@@ -35,7 +35,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./recapitulation.component.scss'],
 })
 export class RecapitulationComponent extends AbstractComponent implements OnInit {
-    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(StepOfSupplyPoint.PERSONAL_INFO);
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.PERSONAL_DATA);
 
     public formFields = formFields;
     public formSent = false;

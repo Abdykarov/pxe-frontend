@@ -3,23 +3,23 @@ import {
     PipeTransform,
 } from '@angular/core';
 
-import { StepOfSupplyPoint } from 'src/common/graphql/models/supply.model';
+import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
 @Pipe({
-    name: 'stepOfSupplyPoint',
+    name: 'progressStatus',
 })
-export class StepOfSupplyPointPipe implements PipeTransform {
+export class ProgressStatusPipe implements PipeTransform {
 
     private static readonly SUPPLY_POINT_STATE_TO_TEXT = {
-        [StepOfSupplyPoint.CREATE]: '1/3 Vytvoření odběrného místa',
-        [StepOfSupplyPoint.CHOOSE_OFFER]: '2/3 Volba nabídky',
-        [StepOfSupplyPoint.PERSONAL_INFO]: '2/3 Vyplnění osobních informací',
-        [StepOfSupplyPoint.CONTRACT]: '2/3 Podepsání smlouvy',
-        [StepOfSupplyPoint.PAYMENT]: '2/3 Platba',
-        [StepOfSupplyPoint.COMPLETED]: '3/3 Dokončeno',
+        [ProgressStatus.SUPPLY_POINT]: '1/3 Vytvoření odběrného místa',
+        [ProgressStatus.OFFER_STEP]: '2/3 Volba nabídky',
+        [ProgressStatus.PERSONAL_DATA]: '2/3 Vyplnění osobních informací',
+        [ProgressStatus.READY_FOR_SIGN]: '2/3 Podepsání smlouvy',
+        [ProgressStatus.WAITING_FOR_PAYMENT]: '2/3 Platba',
+        [ProgressStatus.COMPLETED]: '3/3 Dokončeno',
     };
 
-    transform(stepOfSupplyPoint: StepOfSupplyPoint): string {
-        return StepOfSupplyPointPipe.SUPPLY_POINT_STATE_TO_TEXT[stepOfSupplyPoint] || '';
+    transform(progressStatus: ProgressStatus): string {
+        return ProgressStatusPipe.SUPPLY_POINT_STATE_TO_TEXT[progressStatus] || '';
     }
 }

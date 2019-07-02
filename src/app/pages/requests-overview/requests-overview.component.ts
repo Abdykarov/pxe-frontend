@@ -1,29 +1,15 @@
-import {
-    ChangeDetectorRef,
-    Component,
-    OnInit,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import * as moment from 'moment';
 import * as R from 'ramda';
-import {
-    map,
-    takeUntil,
-} from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
-import { getStepOfSupplyPoint } from 'src/common/utils/get-progress-stepper-config.fnc';
-import {
-    ISupplyPoint,
-    StepOfSupplyPoint,
-} from 'src/common/graphql/models/supply.model';
-import {
-    OverviewState,
-    OverviewStateWrapper,
-} from './requests-overview.model';
+import { ISupplyPoint, ProgressStatus } from 'src/common/graphql/models/supply.model';
+import { OverviewState, OverviewStateWrapper } from './requests-overview.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -75,10 +61,8 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
     }
 
     public completeRequest = (supplyPoint: ISupplyPoint): void => {
-        const stepOfSupplyPoint: StepOfSupplyPoint = getStepOfSupplyPoint(supplyPoint);
-        console.log(stepOfSupplyPoint);
         this.router.navigate(
-            [this.getRouterForCompleteRequest(stepOfSupplyPoint)],
+            [this.getRouterForCompleteRequest(supplyPoint.progressStatus)],
             {
                 queryParams: {
                     supplyPointId: supplyPoint.id,
@@ -125,7 +109,6 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
             [
                 this.isSomeRequest,
                 (supplyPoints: ISupplyPoint[]) => {
-                    console.log('this.isSomeRequest');
                     return {
                         overviewState: OverviewState.REQUESTS,
                         supplyPoints: supplyPoints,
@@ -154,21 +137,20 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
 
         this.state = overviewStateWrapper.overviewState;
         this.supplyPoints = overviewStateWrapper.supplyPoints;
-        console.log('NASTAVUJI');
     }
 
-    public getRouterForCompleteRequest = (stepOfSupplyPoint: StepOfSupplyPoint): string => {
-        switch (stepOfSupplyPoint) {
-            case StepOfSupplyPoint.CHOOSE_OFFER: {
+    public getRouterForCompleteRequest = (progressStatus: ProgressStatus): string => {
+        switch (progressStatus) {
+            case ProgressStatus.OFFER_STEP: {
                 return ROUTES.ROUTER_REQUEST_OFFER_SELECTION;
             }
-            case StepOfSupplyPoint.PERSONAL_INFO: {
+            case ProgressStatus.PERSONAL_DATA: {
                 return ROUTES.ROUTER_REQUEST_RECAPITULATION;
             }
-            case StepOfSupplyPoint.CONTRACT: {
+            case ProgressStatus.READY_FOR_SIGN: {
                 return ROUTES.ROUTER_REQUEST_CONTRACT;
             }
-            case StepOfSupplyPoint.PAYMENT: {
+            case ProgressStatus.WAITING_FOR_PAYMENT: {
                 return ROUTES.ROUTER_REQUEST_PAYMENT;
             }
             default: {

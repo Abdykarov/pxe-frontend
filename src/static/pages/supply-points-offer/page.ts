@@ -5,8 +5,9 @@ import {
     offerConfig1,
     offerConfig2,
     offerConfig3,
-    SupplyPointsOfferPageConfig,
 } from './config';
+import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.fnc';
+import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
 @Component({
     templateUrl: './page.html',
@@ -16,9 +17,7 @@ export class SupplyPointsOfferPageComponent {
     public offer2: ISupplyPointOffer = offerConfig2;
     public offer3: ISupplyPointOffer = offerConfig3;
 
-    constructor(
-        public progressbarConfig: SupplyPointsOfferPageConfig,
-    ) {}
+    public progressbarConfig = getConfigStepper(ProgressStatus.OFFER_STEP);
 
     public click = (data) => {
         console.log('clicked', data);

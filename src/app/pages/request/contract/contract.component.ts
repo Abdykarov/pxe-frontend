@@ -21,7 +21,7 @@ import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.f
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
     ISupplyPoint,
-    StepOfSupplyPoint,
+    ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import {
     parseGraphQLErrors,
@@ -36,7 +36,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./contract.component.scss'],
 })
 export class ContractComponent extends AbstractComponent implements OnInit {
-    public configStepper = getConfigStepper(StepOfSupplyPoint.CONTRACT);
+    public configStepper = getConfigStepper(ProgressStatus.READY_FOR_SIGN);
     public contractTemplate;
     public showOffer = true;
     public fieldError: IFieldError = {};
