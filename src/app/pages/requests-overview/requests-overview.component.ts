@@ -119,7 +119,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
                 this.isSomeContractEnding,
                 (supplyPoints: ISupplyPoint[]) => {
                     return {
-                        overviewState: OverviewState.REQUESTS_END_IN_TWO_MONTHS,
+                        overviewState: OverviewState.SOME_SUPPLY_POINTS_ENDING_SUPPLY,
                         supplyPoints: R.filter((supplyPoint: ISupplyPoint) => this.contractEnding(supplyPoint), supplyPoints),
                     };
                 },
@@ -128,7 +128,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
                 R.T(),
                 (supplyPoints: ISupplyPoint[]) => {
                     return {
-                        overviewState: OverviewState.REQUESTS_HAVE_CONTRACTS,
+                        overviewState: OverviewState.ALL_SUPPLY_POINTS_HAVE_SUPPLY,
                         supplyPoints: supplyPoints,
                     };
                 },

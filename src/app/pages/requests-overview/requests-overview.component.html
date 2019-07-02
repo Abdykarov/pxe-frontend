@@ -19,14 +19,14 @@
             (buttonAction)="createSupplyPoint($event)"
         ></lnd-info-banner>
         <lnd-info-banner
-            *ngIf="state == overviewStates.REQUESTS_HAVE_CONTRACTS"
+            *ngIf="state == overviewStates.ALL_SUPPLY_POINTS_HAVE_SUPPLY"
             [bannerImageSrc]="BANNER_IMAGE_SRC_OK"
             [bannerTitle]="'Momentálně nemáte žádné rozpracované žádosti'"
             [bannerDescription]="'Všechna zadaná odběrná místa mají pokrytou dodávku na déle než 3 měsíce.<br> Pokud máte nové odběrné místo, můžete založit žádost pro novou dodávku.'"
             [buttonLabel]="'Nové žádost'"
             (buttonAction)="createSupplyPoint($event)"
         ></lnd-info-banner>
-        <ng-container *ngIf="state == overviewStates.REQUESTS_END_IN_TWO_MONTHS">
+        <ng-container *ngIf="state == overviewStates.SOME_SUPPLY_POINTS_ENDING_SUPPLY">
             <lnd-info-banner
                 [bannerTitle]="'Momentálně nemáte žádné rozpracované žádosti'"
                 bannerDescription="Ale pro {{supplyPoints.length === 1 ? 'toto odběrné místo' : 'tato odběrná místa'}} konční v následujcích 2 měsích dodávka energie"
