@@ -183,7 +183,6 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
                         (res) => {
                             // jak resit chyby pod to?
                             // kam presmerovat ted na odberny mista?
-                            console.log(res);
                         },
                     );
             // todo
@@ -192,6 +191,12 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
             // todo
             break;
             case VerificationType.REMOVE_CONTRACT:
+                this.router.navigate(
+                    [ROUTES.ROUTER_SUPPLY_POINTS], {
+                        queryParams: {
+                            deletedSupplyPoint: true,
+                        },
+                    });
             // todo
             break;
             case VerificationType.NONE:

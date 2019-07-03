@@ -26,6 +26,17 @@
                 ></lnd-button>
             </div>
         </div>
+        <!--taky nebylo reseny s Jardou-->
+        <div *ngIf="showSupplyPointDeleted"
+             class="row justify-content-center">
+            <div class="col-6">
+                <lnd-alert
+                    type="info"
+                    hasIcon="true">
+                    Odběrné místo bylo smazáno
+                </lnd-alert>
+            </div>
+        </div>
         <div class="supply-points">
             <ng-container *ngFor="let supplierPoint of supplierPoints">
                 <pxe-supply-point
