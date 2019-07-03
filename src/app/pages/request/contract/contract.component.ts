@@ -40,7 +40,6 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public showOffer = true;
     public fieldError: IFieldError = {};
     public formLoading = false;
-    public smsSent: number = null;
     public globalError: string[] = [];
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;

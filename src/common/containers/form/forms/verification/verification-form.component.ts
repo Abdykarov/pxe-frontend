@@ -20,12 +20,10 @@ import { parseGraphQLErrors } from 'src/common/utils';
 export class VerificationFormComponent extends AbstractFormComponent {
 
     public formFields = formFields;
+    public smsSent: number = null;
 
     @Input()
     public contract: IContract;
-
-    @Input()
-    public smsSent: number = null;
 
     @Input()
     public classRootWrapper = 'col-12 col-lg-9 offset-lg-3';
@@ -56,7 +54,6 @@ export class VerificationFormComponent extends AbstractFormComponent {
         this.resetCustomFieldError();
         this.triggerValidation();
         if (this.form.valid) {
-            console.log(this.form.controls.smsCode.value);
             this.submitAction.emit(this.form.controls.smsCode.value);
         }
     }

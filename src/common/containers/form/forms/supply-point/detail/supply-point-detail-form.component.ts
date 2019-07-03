@@ -24,7 +24,11 @@ import {
     CommodityType,
     ISupplyPoint,
 } from 'src/common/graphql/models/supply.model';
-import { confirmFindNewSupplyPoint, confirmFindNewSupplyPointConfig, supplyPointDetailAllowedFields } from '../supply-point-form.config';
+import {
+    confirmFindNewSupplyPoint,
+    confirmFindNewSupplyPointConfig,
+    supplyPointDetailAllowedFields,
+} from '../supply-point-form.config';
 import {
     CONSTS,
     ROUTES,
@@ -41,8 +45,6 @@ import { VerificationType } from 'src/common/containers/form/forms/supply-point/
 export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormComponent implements OnInit, OnChanges {
     @Input()
     public supplyPoint: ISupplyPoint;
-
-    public smsSent: number = null;
 
     public allowedFields = supplyPointDetailAllowedFields;
     public commodityType = CommodityType;

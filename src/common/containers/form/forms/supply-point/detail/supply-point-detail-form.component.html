@@ -187,12 +187,11 @@
                         </lnd-button>
                     </div>
                     <!-- jeslti by nestalo udelat neco ve stylu ng-template a davat na prislusny misto v podle verificationType-->
-                    <!-- po schvaleni trid bych dal defautlni todle a v contarct zmenil-->
+                    <!-- po schvaleni css trid bych dal defautlni todle a v contarct zmenil-->
                     <pxe-verification-form
                         *ngIf="verificationType === verificationDefinition.WITHDRAWAL_CONTRACT"
                         [fieldError]="fieldError"
                         [formLoading]="formLoading"
-                        [smsSent]="smsSent"
                         [contract]="supplyPoint.contract"
                         [globalError]="globalError"
                         classRootWrapper="col-12"
@@ -220,13 +219,12 @@
                         *ngIf="verificationType === verificationDefinition.TERMINATE_CONTRACT"
                         [fieldError]="fieldError"
                         [formLoading]="formLoading"
-                        [smsSent]="smsSent"
                         [contract]="supplyPoint.contract"
                         [globalError]="globalError"
                         classRootWrapper="col-12"
                         classMainWrapper="row"
                         classFirstField="col-12"
-                        classSecondField="col-12"
+                        classSecondField="col-12 text-center"
                         submitLabelText="Vypovědět smlouvu"
                         (submitAction)="submitVerification($event)"
                         (customAction)="sendContractConfirmationSms()">
@@ -234,7 +232,7 @@
                 </div>
                 <div class="row no-gutters align-items-end mb-5">
                     <div class="col-12 col-md-6">
-                        <!--todo v GN velke Odberne misto + neskoncila nabidka + confrim dialog-->
+                        <!--todo v GN -->
                         <small>Odstranit odběrné místo</small>
                     </div>
                     <div class="col-12 col-md-6 pl-3 text-right">
@@ -249,13 +247,12 @@
                         *ngIf="verificationType === verificationDefinition.REMOVE_CONTRACT"
                         [fieldError]="fieldError"
                         [formLoading]="formLoading"
-                        [smsSent]="smsSent"
                         [contract]="supplyPoint.contract"
                         [globalError]="globalError"
                         classRootWrapper="col-12"
                         classMainWrapper="row"
                         classFirstField="col-12"
-                        classSecondField="col-12"
+                        classSecondField="col-12 text-center"
                         submitLabelText="Odstranit odběrné místo"
                         (submitAction)="submitVerification($event)"
                         (customAction)="sendContractConfirmationSms()">
