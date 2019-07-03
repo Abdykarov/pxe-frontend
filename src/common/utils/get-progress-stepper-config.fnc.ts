@@ -25,11 +25,6 @@ const steps: IStepperProgressItem[] = [
         shadowStep: true,
     },
     {
-        step: SupplyPointState.NONE,
-        label: '',
-        shadowStep: true,
-    },
-    {
         step: SupplyPointState.CHOOSE_OFFER,
         label: 'Výběr nabídky',
     },
@@ -46,11 +41,6 @@ const steps: IStepperProgressItem[] = [
     {
         step: SupplyPointState.PAYMENT,
         label: 'Platba',
-        shadowStep: true,
-    },
-    {
-        step: SupplyPointState.COMPLETED,
-        label: 'Podepsání smlouvy',
     },
 ];
 
