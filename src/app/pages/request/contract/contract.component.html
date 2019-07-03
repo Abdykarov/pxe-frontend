@@ -44,11 +44,11 @@
                         <pxe-verification-form
                             *ngIf="supplyPoint.contract.personalData && supplyPoint.contract.personalData.phone"
                             [fieldError]="fieldError"
-                            [formFields]="formFields"
                             [formLoading]="formLoading"
                             [smsSent]="smsSent"
                             [contract]="supplyPoint.contract"
                             [globalError]="globalError"
+                            [showSentSmsLabelUnderFirstField]="false"
                             (submitAction)="signContract($event)"
                             (customAction)="sendContractConfirmationSms()"
                         ></pxe-verification-form>

@@ -186,20 +186,22 @@
                                 size="sm">
                         </lnd-button>
                     </div>
+                    <!-- jeslti by nestalo udelat neco ve stylu ng-template a davat na prislusny misto v podle verificationType-->
+                    <!-- po schvaleni trid bych dal defautlni todle a v contarct zmenil-->
                     <pxe-verification-form
                         *ngIf="verificationType === verificationDefinition.WITHDRAWAL_CONTRACT"
                         [fieldError]="fieldError"
-                        [formFields]="formFieldsVerification"
                         [formLoading]="formLoading"
                         [smsSent]="smsSent"
                         [contract]="supplyPoint.contract"
                         [globalError]="globalError"
                         classRootWrapper="col-12"
                         classMainWrapper="row"
-                        classFirstField="col-md-auto"
-                        classSecondField="col-md-auto"
+                        classFirstField="col-12"
+                        classSecondField="col-12 text-center"
                         submitLabelText="Odstoupit od smlouvy"
-                        (submitAction)="submitVerification()">
+                        (submitAction)="submitVerification($event)"
+                        (customAction)="sendContractConfirmationSms()">
                     </pxe-verification-form>
                 </div>
                 <div class="row no-gutters align-items-end mb-5">
@@ -217,17 +219,17 @@
                     <pxe-verification-form
                         *ngIf="verificationType === verificationDefinition.TERMINATE_CONTRACT"
                         [fieldError]="fieldError"
-                        [formFields]="formFieldsVerification"
                         [formLoading]="formLoading"
                         [smsSent]="smsSent"
                         [contract]="supplyPoint.contract"
                         [globalError]="globalError"
                         classRootWrapper="col-12"
                         classMainWrapper="row"
-                        classFirstField="col-md-auto"
-                        classSecondField="col-md-auto"
+                        classFirstField="col-12"
+                        classSecondField="col-12"
                         submitLabelText="Vypovědět smlouvu"
-                        (submitAction)="submitVerification()">
+                        (submitAction)="submitVerification($event)"
+                        (customAction)="sendContractConfirmationSms()">
                     </pxe-verification-form>
                 </div>
                 <div class="row no-gutters align-items-end mb-5">
@@ -246,17 +248,17 @@
                     <pxe-verification-form
                         *ngIf="verificationType === verificationDefinition.REMOVE_CONTRACT"
                         [fieldError]="fieldError"
-                        [formFields]="formFieldsVerification"
                         [formLoading]="formLoading"
                         [smsSent]="smsSent"
                         [contract]="supplyPoint.contract"
                         [globalError]="globalError"
                         classRootWrapper="col-12"
                         classMainWrapper="row"
-                        classFirstField="col-md-auto"
-                        classSecondField="col-md-auto"
+                        classFirstField="col-12"
+                        classSecondField="col-12"
                         submitLabelText="Odstranit odběrné místo"
-                        (submitAction)="submitVerification()">
+                        (submitAction)="submitVerification($event)"
+                        (customAction)="sendContractConfirmationSms()">
                     </pxe-verification-form>
                 </div>
                 <div class="row text-center">

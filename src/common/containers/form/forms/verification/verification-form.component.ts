@@ -8,6 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { ContractService } from 'src/common/graphql/services/contract.service';
+import { formFields } from 'src/common/containers/form/forms/verification/verification-form.config';
 import { IContract } from 'src/common/graphql/models/contract';
 import { parseGraphQLErrors } from 'src/common/utils';
 
@@ -17,6 +18,8 @@ import { parseGraphQLErrors } from 'src/common/utils';
     styleUrls: ['./verification-form.component.scss'],
 })
 export class VerificationFormComponent extends AbstractFormComponent {
+
+    public formFields = formFields;
 
     @Input()
     public contract: IContract;
@@ -39,6 +42,9 @@ export class VerificationFormComponent extends AbstractFormComponent {
     @Input()
     public submitLabelText = 'Podepsat smlouvu';
 
+    @Input()
+    public showSentSmsLabelUnderFirstField = true;
+
     constructor(
         private contractService: ContractService,
         protected fb: FormBuilder,
@@ -50,13 +56,13 @@ export class VerificationFormComponent extends AbstractFormComponent {
         this.resetCustomFieldError();
         this.triggerValidation();
         if (this.form.valid) {
+            console.log(this.form.controls.smsCode.value);
             this.submitAction.emit(this.form.controls.smsCode.value);
         }
     }
 
 
     public sendContractConfirmationSms() {
-        this.resetFormError();
         this.formLoading = true;
         this.contractService.sendContractConfirmationSms(this.contract.contractId)
             .pipe(

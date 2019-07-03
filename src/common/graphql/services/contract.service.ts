@@ -6,6 +6,7 @@ import { Apollo } from 'apollo-angular';
 import {
     concludeContractMutation,
     deleteContractMutation,
+    deleteSignedContract,
     saveContractMutation,
     updateContractMutation,
 } from 'src/common/graphql/mutation/contract';
@@ -194,4 +195,16 @@ export class ContractService {
             __typename: 'contract',
         };
     }
+
+    public deleteSignedContract(contractId: number, smsConfirmationCode: string) {
+        return this.apollo
+            .mutate({
+                mutation: deleteSignedContract,
+                variables: {
+                    contractId,
+                    smsConfirmationCode,
+                },
+            });
+    }
+    // todo cache v tudle chvili se zalozi nova verze SP popripade se mu jen zrus kontract\
 }
