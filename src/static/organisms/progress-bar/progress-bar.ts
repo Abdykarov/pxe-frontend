@@ -94,12 +94,6 @@ export class ProgressBarComponent {
             done: true,
         },
         {
-            step: SupplyPointState.NONE,
-            label: '',
-            shadowStep: true,
-            done: true,
-        },
-        {
             step: SupplyPointState.CHOOSE_OFFER,
             label: 'Step #2 colors',
             done: true,
@@ -113,11 +107,6 @@ export class ProgressBarComponent {
         {
             step: SupplyPointState.CONTRACT,
             label: 'Smlouva',
-            shadowStep: true,
-        },
-        {
-            step: SupplyPointState.PAYMENT,
-            label: 'Platba',
             shadowStep: true,
         },
         {
@@ -146,12 +135,6 @@ export class ProgressBarComponent {
             done: true,
         },
         {
-            step: SupplyPointState.NONE,
-            label: '',
-            shadowStep: true,
-            done: true,
-        },
-        {
             step: SupplyPointState.CHOOSE_OFFER,
             label: 'Step #2 colors',
             done: true,
@@ -168,11 +151,6 @@ export class ProgressBarComponent {
             shadowStep: true,
             active: true,
 
-        },
-        {
-            step: SupplyPointState.PAYMENT,
-            label: 'Platba',
-            shadowStep: true,
         },
         {
             step: SupplyPointState.COMPLETED,
@@ -200,12 +178,6 @@ export class ProgressBarComponent {
             done: true,
         },
         {
-            step: SupplyPointState.NONE,
-            label: '',
-            shadowStep: true,
-            done: true,
-        },
-        {
             step: SupplyPointState.CHOOSE_OFFER,
             label: 'Step #2 colors',
             done: true,
@@ -223,15 +195,9 @@ export class ProgressBarComponent {
             done: true,
         },
         {
-            step: SupplyPointState.PAYMENT,
-            label: 'Platba',
-            shadowStep: true,
-            active: true,
-
-        },
-        {
             step: SupplyPointState.COMPLETED,
             label: 'Step #3 alert',
+            active: true,
         },
     ];
 
@@ -255,12 +221,6 @@ export class ProgressBarComponent {
             done: true,
         },
         {
-            step: SupplyPointState.NONE,
-            label: '',
-            shadowStep: true,
-            done: true,
-        },
-        {
             step: SupplyPointState.CHOOSE_OFFER,
             label: 'Step #2 colors',
             done: true,
@@ -276,69 +236,6 @@ export class ProgressBarComponent {
             label: 'Smlouva',
             shadowStep: true,
             done: true,
-        },
-        {
-            step: SupplyPointState.PAYMENT,
-            label: 'Platba',
-            shadowStep: true,
-            done: true,
-
-        },
-        {
-            step: SupplyPointState.COMPLETED,
-            label: 'Step #3 alert',
-            active: true,
-        },
-    ];
-
-    public stepperProgressConfigSubStep5: IStepperProgressItem[] = [
-        {
-            step: SupplyPointState.CREATE,
-            label: 'Step #1 colors',
-            done: true,
-
-        },
-        {
-            step: SupplyPointState.NONE,
-            label: '',
-            shadowStep: true,
-            done: true,
-        },
-        {
-            step: SupplyPointState.NONE,
-            label: '',
-            shadowStep: true,
-            done: true,
-        },
-        {
-            step: SupplyPointState.NONE,
-            label: '',
-            shadowStep: true,
-            done: true,
-        },
-        {
-            step: SupplyPointState.CHOOSE_OFFER,
-            label: 'Step #2 colors',
-            done: true,
-        },
-        {
-            step: SupplyPointState.PERSONAL_INFO,
-            label: 'Rekapitulace',
-            shadowStep: true,
-            done: true,
-        },
-        {
-            step: SupplyPointState.CONTRACT,
-            label: 'Smlouva',
-            shadowStep: true,
-            done: true,
-        },
-        {
-            step: SupplyPointState.PAYMENT,
-            label: 'Platba',
-            shadowStep: true,
-            done: true,
-
         },
         {
             step: SupplyPointState.COMPLETED,
