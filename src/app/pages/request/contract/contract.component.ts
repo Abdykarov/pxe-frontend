@@ -1,32 +1,16 @@
-import {
-    ActivatedRoute,
-    Router,
-} from '@angular/router';
-import {
-    ChangeDetectorRef,
-    Component,
-    OnInit,
-} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
-import {
-    map,
-    switchMap,
-    takeUntil,
-} from 'rxjs/operators';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractService } from 'src/common/graphql/services/contract.service';
-import { formFields } from 'src/common/containers/form/forms/contract/contract-form.config';
+import { formFields } from 'src/common/containers/form/forms/verification/verification-form.config';
 import { getConfigStepperByState } from 'src/common/utils/get-progress-stepper-config.fnc';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import {
-    ISupplyPoint,
-    SupplyPointState,
-} from 'src/common/graphql/models/supply.model';
-import {
-    parseGraphQLErrors,
-    scrollToElementFnc,
-} from 'src/common/utils';
+import { ISupplyPoint, SupplyPointState } from 'src/common/graphql/models/supply.model';
+import { IVerificationResponse, ResponseStatus } from 'src/common/containers/form/forms/verification/verification-form.model';
+import { parseGraphQLErrors, scrollToElementFnc } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
@@ -124,23 +108,6 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     }
 
     public sendContractConfirmationSms() {
-        this.formLoading = true;
-        this.contractService.sendContractConfirmationSms(this.supplyPoint.contract.contractId)
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe(
-                () => {
-                    this.formLoading = false;
-                    this.smsSent = new Date().getTime();
-                    this.cd.markForCheck();
-                },
-                (error) => {
-                    this.formLoading = false;
-                    const { globalError } = parseGraphQLErrors(error);
-                    this.globalError = globalError;
-                    this.cd.markForCheck();
-                },
-            );
+        this.cd.markForCheck();
     }
 }

@@ -19,6 +19,7 @@ import {
     IFieldError,
     IForm,
 } from './models/form-definition.model';
+import { formFields } from 'src/common/containers/form/forms/verification/verification-form.config';
 
 export class AbstractFormComponent extends AbstractComponent implements OnInit, OnChanges {
     @Input()
@@ -36,6 +37,8 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
     @Input()
     public fieldError: IFieldError = {};
 
+    public formFieldsVerification = formFields;
+
     @Output()
     public customAction?: EventEmitter<any> = new EventEmitter<any>();
 
@@ -50,6 +53,10 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         protected fb: FormBuilder,
     ) {
         super();
+    }
+
+    public aaaa = () => {
+
     }
 
     ngOnInit() {

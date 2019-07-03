@@ -1,10 +1,10 @@
+import { DecimalPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 // own classes
 import { ConsumptionPipe } from './consumption/consumption.pipe';
 import { ConsumptionIndicatorPipe } from './consumption-indicator/consumption-indicator.pipe';
 import { DateDiffPipe } from './date-diff/date-diff.pipe';
-import { DecimalPipe } from '@angular/common';
 import { DynamicPipe } from './dynamic/dynamic.pipe';
 import { FilterCommodityTypePipe } from './filter-commodity-type/filter-commodity-type.pipe';
 import { IsDatePast } from './is-date-past/is-date-past.pipe';

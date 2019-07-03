@@ -5,16 +5,16 @@ import {
 } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
-import { ContractFormComponent } from './contract-form.component';
+import { VerificationFormComponent } from './verification-form.component';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 
 @NgModule({
     declarations: [
-        ContractFormComponent,
+        VerificationFormComponent,
     ],
     exports: [
-        ContractFormComponent,
+        VerificationFormComponent,
     ],
     imports: [
         ButtonModule,
@@ -24,4 +24,4 @@ import { FormModule } from 'src/common/ui/forms/form.module';
         ReactiveFormsModule,
     ],
 })
-export class ContractFormModule { }
+export class VerificationFormModule { }

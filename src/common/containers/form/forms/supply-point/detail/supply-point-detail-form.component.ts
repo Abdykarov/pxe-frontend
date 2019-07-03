@@ -1,38 +1,19 @@
-import {
-    Component,
-    Input,
-    OnChanges,
-    OnInit,
-    SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
-import {
-    filter,
-    takeUntil,
-} from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 
 import { AbstractSupplyPointFormComponent } from '../abstract-supply-point-form.component';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
-import {
-    CommodityType,
-    ISupplyPoint,
-} from 'src/common/graphql/models/supply.model';
-import {
-    confirmFindNewSupplyPoint,
-    confirmFindNewSupplyPointConfig,
-    supplyPointDetailAllowedFields,
-} from '../supply-point-form.config';
-import {
-    CONSTS,
-    ROUTES,
-    SUBJECT_TYPE_OPTIONS,
-    TIME_TO_CONTRACT_END_PERIOD_MAP,
-} from 'src/app/app.constants';
+import { CommodityType, ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import { confirmFindNewSupplyPoint, confirmFindNewSupplyPointConfig, supplyPointDetailAllowedFields } from '../supply-point-form.config';
+import { CONSTS, ROUTES, SUBJECT_TYPE_OPTIONS, TIME_TO_CONTRACT_END_PERIOD_MAP } from 'src/app/app.constants';
+import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { VerificationType } from 'src/common/containers/form/forms/supply-point/detail/supply-point-detail.model';
 
 @Component({
     selector: 'pxe-supply-point-detail-form',
@@ -43,6 +24,8 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     @Input()
     public supplyPoint: ISupplyPoint;
 
+    public smsSent: number = null;
+
     public allowedFields = supplyPointDetailAllowedFields;
     public commodityType = CommodityType;
     public maxDaysTillContractExpiration = CONSTS.MAX_DAYS_TILL_CONTRACT_EXPIRATION;
@@ -51,11 +34,14 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     public setFormByCommodity = this.setFormFields;
     public timeToContractEndPeriodMap = TIME_TO_CONTRACT_END_PERIOD_MAP;
     public today = new Date().toISOString();
+    public verificationType: VerificationType = VerificationType.NONE;
+    public verificationDefinition = VerificationType;
 
     constructor(
         protected fb: FormBuilder,
         private modalsService: ModalService,
         private router: Router,
+        private supplyService: SupplyService,
     ) {
         super(fb);
     }
@@ -160,5 +146,34 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
             }
             this.submitAction.emit(form);
         }
+    }
+
+    public submitVerification = () => {
+        switch (this.verificationType) {
+            case VerificationType.WITHDRAWAL_CONTRACT:
+            // todo
+            break;
+            case VerificationType.TERMINATE_CONTRACT:
+            // todo
+            break;
+            case VerificationType.REMOVE_CONTRACT:
+            // todo
+            break;
+            case VerificationType.NONE:
+            // todo
+            break;
+        }
+    }
+
+    public withdrawalContract = () => {
+        this.verificationType = VerificationType.WITHDRAWAL_CONTRACT;
+    }
+
+    public terminateContract = () => {
+        this.verificationType = VerificationType.TERMINATE_CONTRACT;
+    }
+
+    public removeSupplyPoint = () => {
+        this.verificationType = VerificationType.REMOVE_CONTRACT;
     }
 }

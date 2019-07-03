@@ -15,9 +15,13 @@ import { FormModule } from 'src/common/ui/forms/form.module';
 import { PipesModule } from 'src/common/pipes/pipes.module';
 import { SelectModule } from 'src/common/ui/forms/select/select.module';
 import { SupplyPointDetailFormComponent } from './supply-point-detail-form.component';
+import { VerificationFormModule } from 'src/common/containers/form/forms/verification/verification-form.module';
 
 @NgModule({
     declarations: [
+        SupplyPointDetailFormComponent,
+    ],
+    exports: [
         SupplyPointDetailFormComponent,
     ],
     imports: [
@@ -33,9 +37,7 @@ import { SupplyPointDetailFormComponent } from './supply-point-detail-form.compo
         PipesModule,
         ReactiveFormsModule,
         SelectModule,
-    ],
-    exports: [
-        SupplyPointDetailFormComponent,
+        VerificationFormModule,
     ],
 })
 export class SupplyPointDetailFormModule {}

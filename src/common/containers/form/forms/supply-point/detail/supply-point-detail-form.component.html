@@ -174,30 +174,91 @@
                         </div>
                     </div>
                 </ng-container>
-<!--                <div class="row no-gutters align-items-end mb-5">-->
-<!--                    <div class="col-12 col-md-6">-->
-<!--                        <small>Odstoupit od smlouvy do 14 dnů od podpisu</small>-->
-<!--                    </div>-->
-<!--                    <div class="col-12 col-md-6 pl-3 text-right">-->
-<!--                        <lnd-button-->
-<!--                                label="Odstoupit"-->
-<!--                                type="link-danger"-->
-<!--                                size="sm">-->
-<!--                        </lnd-button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="row no-gutters align-items-end mb-5">-->
-<!--                    <div class="col-12 col-md-6">-->
-<!--                        <small>Odstoupit od smlouvy výpovědí</small>-->
-<!--                    </div>-->
-<!--                    <div class="col-12 col-md-6 pl-3 text-right">-->
-<!--                        <lnd-button-->
-<!--                                label="Vypovědět"-->
-<!--                                type="link-danger"-->
-<!--                                size="sm">-->
-<!--                        </lnd-button>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <div class="row no-gutters align-items-end mb-5">
+                    <div class="col-12 col-md-6">
+                        <small>Odstoupit od smlouvy do 14 dnů od podpisu</small>
+                    </div>
+                    <div class="col-12 col-md-6 pl-3 text-right">
+                        <lnd-button
+                                (click)="withdrawalContract()"
+                                label="Odstoupit"
+                                type="link-danger"
+                                size="sm">
+                        </lnd-button>
+                    </div>
+                    <pxe-verification-form
+                        *ngIf="verificationType === verificationDefinition.WITHDRAWAL_CONTRACT"
+                        [fieldError]="fieldError"
+                        [formFields]="formFieldsVerification"
+                        [formLoading]="formLoading"
+                        [smsSent]="smsSent"
+                        [contract]="supplyPoint.contract"
+                        [globalError]="globalError"
+                        classRootWrapper="col-12"
+                        classMainWrapper="row"
+                        classFirstField="col-md-auto"
+                        classSecondField="col-md-auto"
+                        submitLabelText="Odstoupit od smlouvy"
+                        (submitAction)="submitVerification()">
+                    </pxe-verification-form>
+                </div>
+                <div class="row no-gutters align-items-end mb-5">
+                    <div class="col-12 col-md-6">
+                        <small>Odstoupit od smlouvy výpovědí</small>
+                    </div>
+                    <div class="col-12 col-md-6 pl-3 text-right">
+                        <lnd-button
+                            (click)="terminateContract()"
+                            label="Vypovědět"
+                            type="link-danger"
+                            size="sm">
+                        </lnd-button>
+                    </div>
+                    <pxe-verification-form
+                        *ngIf="verificationType === verificationDefinition.TERMINATE_CONTRACT"
+                        [fieldError]="fieldError"
+                        [formFields]="formFieldsVerification"
+                        [formLoading]="formLoading"
+                        [smsSent]="smsSent"
+                        [contract]="supplyPoint.contract"
+                        [globalError]="globalError"
+                        classRootWrapper="col-12"
+                        classMainWrapper="row"
+                        classFirstField="col-md-auto"
+                        classSecondField="col-md-auto"
+                        submitLabelText="Vypovědět smlouvu"
+                        (submitAction)="submitVerification()">
+                    </pxe-verification-form>
+                </div>
+                <div class="row no-gutters align-items-end mb-5">
+                    <div class="col-12 col-md-6">
+                        <!--todo v GN velke Odberne misto + neskoncila nabidka + confrim dialog-->
+                        <small>Odstranit odběrné místo</small>
+                    </div>
+                    <div class="col-12 col-md-6 pl-3 text-right">
+                        <lnd-button
+                            (click)="removeSupplyPoint()"
+                            label="Odstranit"
+                            type="link-danger"
+                            size="sm">
+                        </lnd-button>
+                    </div>
+                    <pxe-verification-form
+                        *ngIf="verificationType === verificationDefinition.REMOVE_CONTRACT"
+                        [fieldError]="fieldError"
+                        [formFields]="formFieldsVerification"
+                        [formLoading]="formLoading"
+                        [smsSent]="smsSent"
+                        [contract]="supplyPoint.contract"
+                        [globalError]="globalError"
+                        classRootWrapper="col-12"
+                        classMainWrapper="row"
+                        classFirstField="col-md-auto"
+                        classSecondField="col-md-auto"
+                        submitLabelText="Odstranit odběrné místo"
+                        (submitAction)="submitVerification()">
+                    </pxe-verification-form>
+                </div>
                 <div class="row text-center">
                     <div class="col-12 mb-2">
                         <lnd-button
