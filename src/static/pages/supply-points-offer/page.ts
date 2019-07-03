@@ -5,7 +5,6 @@ import {
     offerConfig1,
     offerConfig2,
     offerConfig3,
-    SupplyPointsOfferPageConfig,
 } from './config';
 import { getConfigStepperByState } from 'src/common/utils/get-progress-stepper-config.fnc';
 import { SupplyPointState } from 'src/common/graphql/models/supply.model';
