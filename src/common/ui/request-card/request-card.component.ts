@@ -18,6 +18,9 @@ import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 export class RequestCardComponent implements OnInit {
 
     @Input()
+    public isValid = true;
+
+    @Input()
     public supplyPoint: ISupplyPoint;
 
     @Output()
@@ -26,6 +29,6 @@ export class RequestCardComponent implements OnInit {
     public stepperProgressConfig: IStepperProgressItem[] = null;
 
     ngOnInit(): void {
-        this.stepperProgressConfig = getConfigStepper(this.supplyPoint.progressStatus);
+        this.stepperProgressConfig = getConfigStepper(this.supplyPoint.progressStatus, false);
     }
 }

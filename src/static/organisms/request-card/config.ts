@@ -30,7 +30,7 @@ export const supplyPointConfig: ISupplyPoint = {
     timeToContractEnd: 0,
     timeToContractEndPeriod: null,
     contract: null,
-    progressStatus: ProgressStatus.OFFER_STEP,
+    progressStatus: ProgressStatus.SUPPLY_POINT,
 };
 
 export const supplyPointConfig2: ISupplyPoint = {
@@ -74,5 +74,5 @@ export const supplyPointConfig2: ISupplyPoint = {
         },
         personalData: null,
     },
-    progressStatus: ProgressStatus.WAITING_FOR_PAYMENT,
+    progressStatus: ProgressStatus.COMPLETED,
 };

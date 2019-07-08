@@ -15,6 +15,7 @@ import {
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
+import { IsDatePast } from 'src/common/pipes/is-date-past/is-date-past.pipe';
 import {
     ISupplyPoint,
     ProgressStatus,
@@ -35,14 +36,16 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 export class RequestsOverviewComponent extends AbstractComponent implements OnInit {
     public readonly BANNER_IMAGE_SRC_OK = '/assets/images/illustrations/accepted.svg';
 
-    public overviewStates = OverviewState;
     public globalError: string[] = [];
+    public loadingRequests = true;
+    public overviewStates = OverviewState;
     public state: OverviewState;
     public supplyPoints: ISupplyPoint[];
 
     constructor(
         private cd: ChangeDetectorRef,
         private dateDiffPipe: DateDiffPipe,
+        private isDatePast: IsDatePast,
         private router: Router,
         private supplyService: SupplyService,
     ) {
@@ -61,6 +64,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
             )
             .subscribe(
                 (supplyPoints: ISupplyPoint[]) => {
+                    this.loadingRequests = false;
                     this.setOverviewState(supplyPoints);
                     this.cd.markForCheck();
                 },
@@ -74,8 +78,21 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
     }
 
     public completeRequest = (supplyPoint: ISupplyPoint): void => {
+        if (!supplyPoint.contract || this.isDatePast.transform(supplyPoint.contract.offer.validTo)) {
+            this.router.navigate(
+                [this.getRouterForCompleteRequest(supplyPoint.progressStatus)],
+                {
+                    queryParams: {
+                        supplyPointId: supplyPoint.id,
+                    },
+                });
+            return;
+        }
+
         this.router.navigate(
-            [this.getRouterForCompleteRequest(supplyPoint.progressStatus)],
+            [
+                ROUTES.ROUTER_REQUEST_OFFER_SELECTION,
+            ],
             {
                 queryParams: {
                     supplyPointId: supplyPoint.id,
@@ -83,9 +100,38 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
             });
     }
 
+    // recactoring
+    // souvisi stim contract status
     public newRequest = (evt): void => {
+        // this.loadingRequests = true; asi ne?
         evt.preventDefault();
-        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT_SELECTION]);
+        this.supplyService.findSupplyPointsByContractStatus(null,
+            [
+                ContractStatus.CONCLUDED,
+            ])
+            .pipe(
+                takeUntil(this.destroy$),
+                map(({data}) =>  data.findSupplyPointsByContractStatus),
+            )
+            .subscribe(
+                (supplyPoints: ISupplyPoint[]) => {
+                    console.log(supplyPoints);
+                    if ( supplyPoints.length !== 0) {
+                        this.router.navigate(
+                            [ROUTES.ROUTER_REQUEST_SUPPLY_POINT_SELECTION],
+                        );
+                    }
+                    this.router.navigate(
+                        [ROUTES.ROUTER_REQUEST_SUPPLY_POINT],
+                    );
+                },
+                error => {
+                    this.supplyPoints = null;
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
+                },
+            );
     }
 
     public isSomeContractEnding = (supplyPoints: ISupplyPoint[]): boolean => {

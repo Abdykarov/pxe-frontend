@@ -1,6 +1,7 @@
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 
+import { inArray } from 'src/common/utils/in-array';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
@@ -40,11 +41,32 @@ const steps: IStepperProgressItem[] = [
     },
 ];
 
-export const getConfigStepper = (activeStep: ProgressStatus): IStepperProgressItem[] => {
-    const activeIndex = R.findIndex(R.propEq('step', activeStep))(steps);
-    return R_.mapIndexed((item: IStepperProgressItem, index: number) => {
-        item.active = index === activeIndex;
-        item.done = index < activeIndex || activeStep === ProgressStatus.COMPLETED;
-        return item;
-    }, R.clone(steps));
+export const offerStepWithoutShadowSteps = R.pipe(
+    R.filter(item => !item.shadowStep),
+    R.findIndex(item => item.step === ProgressStatus.OFFER_STEP),
+)(steps);
+
+export const offersStepsIndexes = [
+    R.findIndex(R.propEq('step', ProgressStatus.OFFER_STEP))(steps),
+    R.findIndex(R.propEq('step', ProgressStatus.PERSONAL_DATA))(steps),
+    R.findIndex(R.propEq('step', ProgressStatus.READY_FOR_SIGN))(steps),
+    R.findIndex(R.propEq('step', ProgressStatus.WAITING_FOR_PAYMENT))(steps),
+];
+
+export const getConfigStepper = (activeStep: ProgressStatus, withShadowSteps = true): IStepperProgressItem[] => {
+    let activeIndex = R.findIndex(R.propEq('step', activeStep))(steps);
+
+    if ( !withShadowSteps && inArray(activeIndex, offersStepsIndexes)) {
+        activeIndex = offerStepWithoutShadowSteps;
+    }
+
+    return R.pipe(
+        R.filter(item => !item.shadowStep && !withShadowSteps),
+        R_.mapIndexed((item: IStepperProgressItem, index: number) => {
+            const itemResult: any = {};
+            itemResult.active = index === activeIndex;
+            itemResult.done = index < activeIndex || activeStep === ProgressStatus.COMPLETED;
+            return itemResult;
+        }),
+    )(steps);
 };

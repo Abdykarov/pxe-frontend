@@ -35,6 +35,7 @@ export class SupplyPointSelectionComponent extends AbstractComponent implements 
     public globalError: string[] = [];
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.SUPPLY_POINT);
     public supplyPoints: ISupplyPoint[] = null;
+    public loadingSupplyPoints = true;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -55,6 +56,7 @@ export class SupplyPointSelectionComponent extends AbstractComponent implements 
             )
             .subscribe(
                 (supplyPoints: ISupplyPoint[]) => {
+                    this.loadingSupplyPoints = false;
                     this.supplyPoints = supplyPoints;
                     this.cd.markForCheck();
                 },
@@ -67,9 +69,8 @@ export class SupplyPointSelectionComponent extends AbstractComponent implements 
             );
     }
 
-
     public newSupplyPoint() {
-
+        this.router.navigate([ ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
     }
 
     public submitSupplyForm = (supplyPointData: ISupplyPoint) => {
@@ -116,7 +117,9 @@ export class SupplyPointSelectionComponent extends AbstractComponent implements 
                 (supplyPointId) => {
                     this.cd.markForCheck();
                     this.router.navigate(
-                        [ROUTES.ROUTER_REQUEST_OFFER_SELECTION],
+                        [
+                            ROUTES.ROUTER_REQUEST_OFFER_SELECTION,
+                        ],
                         {
                             queryParams: {
                                 supplyPointId,
@@ -129,6 +132,4 @@ export class SupplyPointSelectionComponent extends AbstractComponent implements 
                     this.cd.markForCheck();
                 });
     }
-
-
 }

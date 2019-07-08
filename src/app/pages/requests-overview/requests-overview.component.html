@@ -1,4 +1,5 @@
 <pxe-layout-container pageTitle="Vaše žádosti">
+    <lnd-placeloader [loading]="loadingRequests && !globalError.length"></lnd-placeloader>
     <div class="row">
         <div class="col-12 col-md-12">
             <lnd-alert

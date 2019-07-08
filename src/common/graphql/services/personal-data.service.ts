@@ -4,7 +4,7 @@ import { Apollo } from 'apollo-angular';
 
 import { getPersonalDataQuery } from 'src/common/graphql/queries/personal-data';
 import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
-import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import { ISupplyPoint, ProgressStatus } from 'src/common/graphql/models/supply.model';
 import { IPersonalDataInput } from 'src/common/graphql/models/personal-data.model';
 import { savePersonalDataMutation } from 'src/common/graphql/mutation/personal-data';
 
@@ -60,6 +60,7 @@ export class PersonalDataService {
 
     // docasny reseni pred sync s BE
     public loadSupplyPoint = (supplyPoint: ISupplyPoint, personalData: IPersonalDataInput) => {
+        supplyPoint.progressStatus = ProgressStatus.READY_FOR_SIGN;
         supplyPoint.contract.personalData = {
             name: personalData.name,
             ico: personalData.ico ? personalData.ico : '',

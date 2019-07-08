@@ -7,17 +7,15 @@ import {
     concludeContractMutation,
     deleteContractMutation,
     saveContractMutation,
+    sendContractConfirmationSmsMutation,
+    signContractMutation,
     updateContractMutation,
 } from 'src/common/graphql/mutation/contract';
 import { getContractTermsQuery } from 'src/common/graphql/queries/contract';
 import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
 import { findSupplyPointOffersQuery } from 'src/common/graphql/queries/offer';
-import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import { ISupplyPoint, ProgressStatus } from 'src/common/graphql/models/supply.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
-import {
-    sendContractConfirmationSmsMutation,
-    signContractMutation,
-} from 'src/common/graphql/mutation/contract';
 
 @Injectable({
     providedIn: 'root',
@@ -78,6 +76,8 @@ export class ContractService {
                     smsCode,
                 },
             });
+        // todo change casche
+        // todo po ujasneni contractStatus
     }
 
     public sendContractConfirmationSms(contractId: string) {
@@ -132,6 +132,7 @@ export class ContractService {
 
         const supplyPointOffer: ISupplyPointOffer = R.find(R.propEq('id', offerId))(findSupplyPointOffers);
 
+        supplyPoint.progressStatus = ProgressStatus.PERSONAL_DATA;
         supplyPoint.contract = {
             contractId: data.saveContract,
             contractStatus: 'CONCLUDED',

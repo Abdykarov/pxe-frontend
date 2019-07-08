@@ -4,6 +4,7 @@
             <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
         </div>
     </div>
+    <lnd-placeloader [loading]="loadingSupplyPoints && !globalError.length"></lnd-placeloader>
     <div class="row">
         <div class="col-12 col-md-12">
             <lnd-alert
@@ -15,14 +16,15 @@
             </lnd-alert>
         </div>
     </div>
-    <div class="row">
+    <div class="row"
+         *ngIf="supplyPoints">
         <div class="col-12 col-xl-10 offset-xl-1 text-center">
             <h2>Vyberte odběrné místo, pro které chcete dostat nabídku</h2>
         </div>
     </div>
 <!--todo is empty all supplypoints? cis neb -->
     <div class="supply-points"
-        *ngIf="supplyPoints">
+         *ngIf="supplyPoints">
         <div class="row">
             <ng-container *ngFor="let supplyPoint of supplyPoints">
                 <div class="col-md-6">
