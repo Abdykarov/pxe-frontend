@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
-import { getConfigStepperByState } from 'src/common/utils/get-progress-stepper-config.fnc';
+import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.fnc';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { offerConfig } from './config';
-import { SupplyPointState } from 'src/common/graphql/models/supply.model';
+import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
 @Component({
     templateUrl: './page.html',
@@ -11,7 +11,7 @@ import { SupplyPointState } from 'src/common/graphql/models/supply.model';
 export class ContractSigningPageComponent {
     public offer: ISupplyPointOffer = offerConfig;
     public showOffer = false;
-    public stepperProgressConfig = getConfigStepperByState(SupplyPointState.CHOOSE_OFFER);
+    public stepperProgressConfig = getConfigStepper(ProgressStatus.OFFER_STEP);
 
     public toggleOffer = (event) => {
         this.showOffer = !this.showOffer;
