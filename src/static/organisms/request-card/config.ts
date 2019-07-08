@@ -74,5 +74,5 @@ export const supplyPointConfig2: ISupplyPoint = {
         },
         personalData: null,
     },
-    progressStatus: ProgressStatus.COMPLETED,
+    progressStatus: ProgressStatus.WAITING_FOR_PAYMENT,
 };
