@@ -34,7 +34,8 @@
 		.supply-point-box-addon {
 			display: flex;
 			align-items: center;
-			justify-content: center;			
+			justify-content: center;
+			min-height: 255px;			
 			height: calc(100% - #{$spacer});
 			padding: ( $spacer * 1.5 );
 			border-radius: $border-radius;

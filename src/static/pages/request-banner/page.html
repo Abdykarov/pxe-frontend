@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12 col-md-6 offset-md-3 text-center">
+            <h1>
+                Vaše žádosti
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <lnd-info-banner
+                [bannerTitle]="bannerTitle"
+                [bannerDescription]="bannerDescription"
+                [showButton]="false"
+            >
+            </lnd-info-banner>
+        </div>
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <lnd-banner-ui
+                [bannerText]="bannerText"
+                icon="icon--flash"
+                [buttonLabel]="buttonLabel"
+            ></lnd-banner-ui>
+        </div>
+    </div>
+</div>
