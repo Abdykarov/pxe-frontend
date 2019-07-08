@@ -32,10 +32,16 @@
 			content: '';
 			position: absolute;
 			top: ( $progress-bar-bullet-size - $progress-bar-line-height ) / 2;
-			left: 50%;
+			left: 0;
 			width: 100%;
 			height: $progress-bar-line-height;
 			background-color: $progress-bar-line-bg;
+		}
+
+		&:not(:last-child) {
+			&::before {
+				left: 50%;
+			}
 		}
 
 		&:last-child {
@@ -69,16 +75,15 @@
 				}
 			}
 
-			& + .progress-bar__item:not(:last-child) {
+			& + .progress-bar__item:not(:last-child):not(.progress-bar__item--shadow-step) {
 				&::before {
 					left: 0;
-					width: 125%;
+					width: 120%;
 				}
 			}
 
 			& + .progress-bar__item--active:not(:last-child):not(.progress-bar__item--shadow-step) {
 				&::before {
-					width: 120%;
 					background: linear-gradient(90deg, $progress-bar-line-bg-active 0%, $progress-bar-line-bg-active 40%, $progress-bar-line-bg 40%, $progress-bar-line-bg 100%);
 				}
 			}
@@ -147,7 +152,7 @@
 		line-height: ( 19 / 14 );
 	}
 
-	&--minor {
+	&.progress-bar--minor {
 		.progress-bar__item:not(.progress-bar__item--done) {
 			&::before {
 				background-color: $body-bg;
@@ -166,9 +171,8 @@
 			}
 		}
 
-		.progress-bar__item {
+		.progress-bar__item:not(.progress-bar__item--shadow-step) {
 			&::before {
-				width: 100%;
 				left: 0;
 			}
 

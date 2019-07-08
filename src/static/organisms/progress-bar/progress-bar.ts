@@ -76,59 +76,48 @@ export class ProgressBarComponent {
 
     public stepperProgressConfigSubStep1: IStepperProgressItem[] = [
         {
-            step: ProgressStatus.SUPPLY_POINT,
+            step: 'CREATE',
             label: 'Step #1 colors',
             done: true,
 
         },
         {
-            step: ProgressStatus.NONE,
+            step: 'NONE',
             label: '',
             shadowStep: true,
             done: true,
         },
         {
-            step: ProgressStatus.NONE,
+            step: 'NONE',
             label: '',
             shadowStep: true,
             done: true,
         },
         {
-            step: ProgressStatus.NONE,
-            label: '',
-            shadowStep: true,
-            done: true,
-        },
-        {
-            step: ProgressStatus.OFFER_STEP,
+            step: 'CHOOSE_OFFER',
             label: 'Step #2 colors',
             done: true,
         },
         {
-            step: ProgressStatus.PERSONAL_DATA,
+            step: 'PERSONAL_INFO',
             label: 'Rekapitulace',
             shadowStep: true,
             active: true,
         },
         {
-            step: ProgressStatus.READY_FOR_SIGN,
+            step: 'CONTRACT',
             label: 'Smlouva',
             shadowStep: true,
         },
         {
-            step: ProgressStatus.WAITING_FOR_PAYMENT,
-            label: 'Platba',
-            shadowStep: true,
-        },
-        {
-            step: ProgressStatus.COMPLETED,
+            step: 'WAINTING_FOR_PAYMENT',
             label: 'Step #3 alert',
         },
     ];
 
     public stepperProgressConfigSubStep2: IStepperProgressItem[] = [
         {
-            step: ProgressStatus.SUPPLY_POINT,
+            step: 'SUPPLY_POINT',
             label: 'Step #1 colors',
             done: true,
 
@@ -146,206 +135,115 @@ export class ProgressBarComponent {
             done: true,
         },
         {
-            step: ProgressStatus.NONE,
-            label: '',
-            shadowStep: true,
-            done: true,
-        },
-        {
-            step: ProgressStatus.OFFER_STEP,
+            step: 'OFFER_STEP',
             label: 'Step #2 colors',
             done: true,
         },
         {
-            step: ProgressStatus.PERSONAL_DATA,
+            step: 'PERSONAL_DATA',
             label: 'Rekapitulace',
             shadowStep: true,
             done: true,
         },
         {
-            step: ProgressStatus.READY_FOR_SIGN,
+            step: 'READY_FOR_SIGN',
             label: 'Smlouva',
             shadowStep: true,
             active: true,
 
         },
         {
-            step: ProgressStatus.WAITING_FOR_PAYMENT,
-            label: 'Platba',
-            shadowStep: true,
-        },
-        {
-            step: ProgressStatus.COMPLETED,
+            step: 'WAITING_FOR_PAYMENT',
             label: 'Step #3 alert',
         },
     ];
 
     public stepperProgressConfigSubStep3: IStepperProgressItem[] = [
         {
-            step: ProgressStatus.SUPPLY_POINT,
+            step: 'SUPPLY_POINT',
             label: 'Step #1 colors',
             done: true,
 
         },
         {
-            step: ProgressStatus.NONE,
+            step: 'NONE',
             label: '',
             shadowStep: true,
             done: true,
         },
         {
-            step: ProgressStatus.NONE,
+            step: 'NONE',
             label: '',
             shadowStep: true,
             done: true,
         },
         {
-            step: ProgressStatus.NONE,
-            label: '',
-            shadowStep: true,
-            done: true,
-        },
-        {
-            step: ProgressStatus.OFFER_STEP,
+            step: 'OFFER_STEP',
             label: 'Step #2 colors',
             done: true,
         },
         {
-            step: ProgressStatus.PERSONAL_DATA,
+            step: 'PERSONAL_DATA',
             label: 'Rekapitulace',
             shadowStep: true,
             done: true,
         },
         {
-            step: ProgressStatus.READY_FOR_SIGN,
+            step: 'READY_FOR_SIGN',
             label: 'Smlouva',
             shadowStep: true,
             done: true,
         },
         {
-            step: ProgressStatus.WAITING_FOR_PAYMENT,
+            step: 'WAITING_FOR_PAYMENT',
             label: 'Platba',
-            shadowStep: true,
             active: true,
-
-        },
-        {
-            step: ProgressStatus.COMPLETED,
-            label: 'Step #3 alert',
         },
     ];
 
     public stepperProgressConfigSubStep4: IStepperProgressItem[] = [
         {
-            step: ProgressStatus.SUPPLY_POINT,
+            step: 'SUPPLY_POINT',
             label: 'Step #1 colors',
             done: true,
 
         },
         {
-            step: ProgressStatus.NONE,
+            step: 'NONE',
             label: '',
             shadowStep: true,
             done: true,
         },
         {
-            step: ProgressStatus.NONE,
+            step: 'NONE',
             label: '',
             shadowStep: true,
             done: true,
         },
         {
-            step: ProgressStatus.NONE,
-            label: '',
-            shadowStep: true,
-            done: true,
-        },
-        {
-            step: ProgressStatus.OFFER_STEP,
+            step: 'OFFER_STEP',
             label: 'Step #2 colors',
             done: true,
         },
         {
-            step: ProgressStatus.PERSONAL_DATA,
+            step: 'PERSONAL_DATA',
             label: 'Rekapitulace',
             shadowStep: true,
             done: true,
         },
         {
-            step: ProgressStatus.READY_FOR_SIGN,
+            step: 'READY_FOR_SIGN',
             label: 'Smlouva',
             shadowStep: true,
             done: true,
         },
         {
-            step: ProgressStatus.WAITING_FOR_PAYMENT,
-            label: 'Platba',
-            shadowStep: true,
-            done: true,
-
-        },
-        {
-            step: ProgressStatus.COMPLETED,
-            label: 'Step #3 alert',
-            active: true,
-        },
-    ];
-
-    public stepperProgressConfigSubStep5: IStepperProgressItem[] = [
-        {
-            step: ProgressStatus.SUPPLY_POINT,
-            label: 'Step #1 colors',
-            done: true,
-
-        },
-        {
-            step: ProgressStatus.NONE,
-            label: '',
-            shadowStep: true,
-            done: true,
-        },
-        {
-            step: ProgressStatus.NONE,
-            label: '',
-            shadowStep: true,
-            done: true,
-        },
-        {
-            step: ProgressStatus.NONE,
-            label: '',
-            shadowStep: true,
-            done: true,
-        },
-        {
-            step: ProgressStatus.OFFER_STEP,
-            label: 'Step #2 colors',
-            done: true,
-        },
-        {
-            step: ProgressStatus.PERSONAL_DATA,
-            label: 'Rekapitulace',
-            shadowStep: true,
-            done: true,
-        },
-        {
-            step: ProgressStatus.READY_FOR_SIGN,
-            label: 'Smlouva',
-            shadowStep: true,
-            done: true,
-        },
-        {
-            step: ProgressStatus.WAITING_FOR_PAYMENT,
-            label: 'Platba',
-            shadowStep: true,
-            done: true,
-
-        },
-        {
-            step: ProgressStatus.COMPLETED,
+            step: 'WAITING_FOR_PAYMENT',
             label: 'Step #3 alert',
             done: true,
         },
     ];
+
 
     constructor() {
         this.breadcrumbItemsSimple = [
