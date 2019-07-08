@@ -20,7 +20,7 @@ import {
 } from 'src/common/graphql/queries/supply';
 import {
     createGasSupplyPointMutation,
-    createPowerSupplyPointMutation,
+    savePowerSupplyPoint,
     updateGasSupplyPointMutation,
     updateGasSupplyPointWithContractMutation,
     updatePowerSupplyPointMutation,
@@ -86,7 +86,7 @@ export class SupplyService {
 
     public createPowerSupplyPoint = (supplyPoint: ISupplyPoint, powerAttributes: ISupplyPointPowerAttributes) => this.apollo
         .mutate({
-            mutation: createPowerSupplyPointMutation,
+            mutation: savePowerSupplyPoint,
             variables: {
                 supplyPoint,
                 powerAttributes,

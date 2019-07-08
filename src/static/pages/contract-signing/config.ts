@@ -1,17 +1,17 @@
 import {
     CommodityType,
-    SupplyPointState,
+    ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { Injectable } from '@angular/core';
 
+import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.fnc';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
-import { getConfigStepperByState } from 'src/common/utils/get-progress-stepper-config.fnc';
 
 @Injectable({
     providedIn: 'root',
 })
 export class ContractSigningPageConfig {
-    public stepperProgressConfig =  getConfigStepperByState(SupplyPointState.CHOOSE_OFFER);
+    public stepperProgressConfig =  getConfigStepper(ProgressStatus.OFFER_STEP);
 }
 
 export const offerConfig: ISupplyPointOffer = {

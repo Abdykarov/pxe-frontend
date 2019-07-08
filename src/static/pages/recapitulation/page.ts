@@ -5,14 +5,14 @@ import {
 } from '@angular/forms';
 
 import { depositPaymentType } from 'src/common/containers/form/forms/personal-info/personal-info-form.config';
-import { getConfigStepperByState } from 'src/common/utils/get-progress-stepper-config.fnc';
-import { SupplyPointState } from 'src/common/graphql/models/supply.model';
+import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.fnc';
+import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
 @Component({
     templateUrl: './page.html',
 })
 export class RecapitulationPageComponent {
-    public config = getConfigStepperByState(SupplyPointState.PERSONAL_INFO);
+    public config = getConfigStepper(ProgressStatus.PERSONAL_DATA);
 
     public depositPaymentTypeId = depositPaymentType;
 

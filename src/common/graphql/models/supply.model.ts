@@ -5,16 +5,6 @@ export enum CommodityType {
     GAS = 'GAS',
 }
 
-export enum SupplyPointState {
-    NONE = 'NONE',
-    CREATE =  'CREATE',
-    CHOOSE_OFFER = 'CHOOSE_OFFER',
-    PERSONAL_INFO = 'PERSONAL_INFO',
-    CONTRACT = 'CONTRACT',
-    PAYMENT = 'PAYMENT',
-    COMPLETED = 'COMPLETED',
-}
-
 export enum DistributionType {
     VT = 'VT',
     BOTH = 'BOTH',
@@ -109,6 +99,17 @@ export interface ISupplyPoint {
     timeToContractEnd: number;
     timeToContractEndPeriod: ICodelistItem;
     contract: IContract;
+    progressStatus: ProgressStatus;
+}
+
+export enum ProgressStatus {
+    COMPLETED = 'COMPLETED',
+    NONE = 'NONE',
+    OFFER_STEP = 'OFFER_STEP',
+    PERSONAL_DATA = 'PERSONAL_DATA',
+    READY_FOR_SIGN = 'READY_FOR_SIGN',
+    SUPPLY_POINT = 'SUPPLY_POINT',
+    WAITING_FOR_PAYMENT = 'WAITING_FOR_PAYMENT',
 }
 
 export interface ISelectedOffer {

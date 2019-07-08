@@ -6,15 +6,9 @@ import {
     Output,
 } from '@angular/core';
 
-import {
-    getConfigStepperByState,
-    getSupplyPointState,
-} from 'src/common/utils/get-progress-stepper-config.fnc';
-import {
-    ISupplyPoint,
-    SupplyPointState,
-} from 'src/common/graphql/models/supply.model';
+import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.fnc';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
+import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 
 @Component({
     selector: 'pxe-request-card',
@@ -29,11 +23,9 @@ export class RequestCardComponent implements OnInit {
     @Output()
     public action: EventEmitter<any> = new EventEmitter();
 
-    public supplyPointState: SupplyPointState;
     public stepperProgressConfig: IStepperProgressItem[] = null;
 
     ngOnInit(): void {
-        this.supplyPointState = getSupplyPointState(this.supplyPoint);
-        this.stepperProgressConfig = getConfigStepperByState(this.supplyPointState);
+        this.stepperProgressConfig = getConfigStepper(this.supplyPoint.progressStatus);
     }
 }

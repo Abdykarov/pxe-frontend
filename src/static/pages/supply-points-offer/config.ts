@@ -1,18 +1,5 @@
-import { Injectable } from '@angular/core';
-
-import {
-    CommodityType,
-    SupplyPointState,
-} from 'src/common/graphql/models/supply.model';
-import { getConfigStepperByState } from 'src/common/utils/get-progress-stepper-config.fnc';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
-
-@Injectable({
-    providedIn: 'root',
-})
-export class SupplyPointsOfferPageConfig {
-    public stepperProgressConfig = getConfigStepperByState(SupplyPointState.CHOOSE_OFFER);
-}
 
 export const offerConfig1: ISupplyPointOffer = {
     id: 0,

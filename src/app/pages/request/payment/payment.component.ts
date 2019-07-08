@@ -4,8 +4,8 @@ import {
 } from '@angular/core';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { getConfigStepperByState } from 'src/common/utils/get-progress-stepper-config.fnc';
-import { SupplyPointState } from 'src/common/graphql/models/supply.model';
+import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.fnc';
+import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
 @Component({
     selector: 'pxe-contract',
@@ -13,6 +13,6 @@ import { SupplyPointState } from 'src/common/graphql/models/supply.model';
     styleUrls: ['./payment.component.scss'],
 })
 export class PaymentComponent extends AbstractComponent implements OnInit {
-    public configStepper = getConfigStepperByState(SupplyPointState.PAYMENT);
+    public configStepper = getConfigStepper(ProgressStatus.WAITING_FOR_PAYMENT);
     public globalError: string[] = [];
 }

@@ -24,10 +24,10 @@ import {
     ISupplyPointFormData,
     ISupplyPointGasAttributes,
     ISupplyPointPowerAttributes,
-    SupplyPointState,
+    ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
-import { getConfigStepperByState } from 'src/common/utils/get-progress-stepper-config.fnc';
+import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.fnc';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils';
@@ -45,7 +45,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public fieldError: IFieldError = {};
     public formLoading = false;
 
-    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepperByState(SupplyPointState.CREATE);
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.SUPPLY_POINT);
 
     constructor(
         private cd: ChangeDetectorRef,
