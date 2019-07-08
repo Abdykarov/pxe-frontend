@@ -174,6 +174,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/full/registration',
                 },
                 {
+                    'label': 'Request (banner)',
+                    'url': '/basic/request-banner',
+                },
+                {
                     'label': 'New supply point',
                     'url': '/basic/new-supply-point',
                 },
