@@ -21,11 +21,6 @@ const steps: IStepperProgressItem[] = [
         shadowStep: true,
     },
     {
-        step: ProgressStatus.NONE,
-        label: '',
-        shadowStep: true,
-    },
-    {
         step: ProgressStatus.OFFER_STEP,
         label: 'Výběr nabídky',
     },
@@ -42,11 +37,6 @@ const steps: IStepperProgressItem[] = [
     {
         step: ProgressStatus.WAITING_FOR_PAYMENT,
         label: 'Platba',
-        shadowStep: true,
-    },
-    {
-        step: ProgressStatus.COMPLETED,
-        label: 'Podepsání smlouvy',
     },
 ];
 
@@ -54,7 +44,7 @@ export const getConfigStepper = (activeStep: ProgressStatus): IStepperProgressIt
     const activeIndex = R.findIndex(R.propEq('step', activeStep))(steps);
     return R_.mapIndexed((item: IStepperProgressItem, index: number) => {
         item.active = index === activeIndex;
-        item.done = index < activeIndex;
+        item.done = index < activeIndex || activeStep === ProgressStatus.COMPLETED;
         return item;
     }, R.clone(steps));
 };

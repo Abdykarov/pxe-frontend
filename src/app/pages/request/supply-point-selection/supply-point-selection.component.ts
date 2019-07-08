@@ -13,14 +13,14 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractStatus } from 'src/common/graphql/models/contract';
-import { getConfigStepperByState } from 'src/common/utils/get-progress-stepper-config.fnc';
+import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.fnc';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import {
     CommodityType,
     ISupplyPoint,
     ISupplyPointGasAttributes,
     ISupplyPointPowerAttributes,
-    SupplyPointState,
+    ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
@@ -33,7 +33,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class SupplyPointSelectionComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
-    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepperByState(SupplyPointState.CREATE);
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.OFFER_STEP);
     public supplyPoints: ISupplyPoint[] = null;
 
     constructor(

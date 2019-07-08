@@ -27,5 +27,6 @@ export class RequestCardComponent implements OnInit {
 
     ngOnInit(): void {
         this.stepperProgressConfig = getConfigStepper(this.supplyPoint.progressStatus);
+        console.log(this.stepperProgressConfig);
     }
 }
