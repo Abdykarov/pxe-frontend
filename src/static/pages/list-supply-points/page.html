@@ -1,0 +1,65 @@
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12 col-md-6 offset-md-3 text-center">
+            <h1>
+                Odběrná místa
+            </h1>
+        </div>
+    </div>
+    <div class="row mb-6">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <pxe-progress-bar [config]="config.stepperProgressConfig"></pxe-progress-bar>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-xl-10 offset-xl-1 text-center">
+            <h2>Vyberte odběrné místo, pro které chcete dostat nabídku</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="supply-points">
+                <div class="row">
+                    <div class="col-md-6">
+                        <pxe-supply-point 
+                            [data]="supplyPointPower"
+                            isListItem="true">
+                        </pxe-supply-point>
+                    </div>
+                    <div class="col-md-6">
+                        <pxe-supply-point 
+                            [data]="supplyPointGas"
+                            isListItem="true">
+                        </pxe-supply-point>
+                    </div>
+                    <div class="col-md-6">
+                        <pxe-supply-point 
+                            [data]="supplyPointPower"
+                            isListItem="true">
+                        </pxe-supply-point>
+                    </div>
+                    <div class="col-md-6">
+                        <pxe-supply-point 
+                            [data]="supplyPointPower"
+                            isListItem="true">
+                        </pxe-supply-point>
+                    </div>
+                    <div class="col-md-6">
+                        <pxe-supply-point 
+                            [data]="supplyPointPower"
+                            isListItem="true">
+                        </pxe-supply-point>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="supply-point-box-addon">
+                            <lnd-button
+                                label="Nové odběrné místo"
+                                type="secondary">
+                            </lnd-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

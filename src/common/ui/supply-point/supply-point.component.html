@@ -1,7 +1,7 @@
 <a class="supply-point"
    (click)="action.emit(data)">
     <div class="row no-gutters">
-        <div class="col-12 col-xl-7">
+        <div [ngClass]="isListItem ? 'col-12' : 'col-12 col-xl-7'">
             <div class="supply-point__inner supply-point__inner--info">
                 <div class="row mb-4">
                     <div class="col-3 col-md-2 text-center">
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-xl-5">
+        <div [ngClass]="isListItem ? 'd-none' : 'col-12 col-xl-5'">
             <div class="supply-point__inner supply-point__inner--price">
                 <div class="row">
                     <div class="col-12 col-md-10 offset-md-2 col-xl-12 offset-xl-0">

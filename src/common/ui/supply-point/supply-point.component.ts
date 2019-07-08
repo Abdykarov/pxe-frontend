@@ -17,6 +17,9 @@ export class SupplyPointComponent {
     readonly UNIT_INDICATOR = 'MWh';
 
     @Input()
+    public isListItem = false;
+
+    @Input()
     public data: ISupplyPointFindData;
 
     @Output()
