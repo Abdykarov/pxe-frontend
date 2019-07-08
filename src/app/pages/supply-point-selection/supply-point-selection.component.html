@@ -23,11 +23,24 @@
 <!--todo is empty all supplypoints? cis neb -->
     <div class="supply-points"
         *ngIf="supplyPoints">
-        <ng-container *ngFor="let supplyPoint of supplyPoints">
-            <pxe-supply-point
-                [data]="supplyPoint"
-                (action)="submitSupplyForm(supplyPoint)">
-            </pxe-supply-point>
-        </ng-container>
+        <div class="row">
+            <ng-container *ngFor="let supplyPoint of supplyPoints">
+                <div class="col-md-6">
+                    <pxe-supply-point
+                        [data]="supplyPoint"
+                        [isListItem]="true"
+                        (action)="submitSupplyForm(supplyPoint)">
+                    </pxe-supply-point>
+                </div>
+            </ng-container>
+            <div class="col-md-6">
+                <div class="supply-point-box-addon">
+                    <lnd-button
+                        label="Nové odběrné místo"
+                        type="secondary">
+                    </lnd-button>
+                </div>
+            </div>
+        </div>
     </div>
 </pxe-layout-container>

@@ -25,6 +25,7 @@ import {
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { supplyPointConfigPower } from 'src/static/organisms/supply-point/config';
 
 @Component({
     selector: 'pxe-supply-point-selection',
@@ -33,8 +34,9 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class SupplyPointSelectionComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
-    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.OFFER_STEP);
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.SUPPLY_POINT);
     public supplyPoints: ISupplyPoint[] = null;
+    public supplyPointPower = supplyPointConfigPower;
 
     constructor(
         private cd: ChangeDetectorRef,

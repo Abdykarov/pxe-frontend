@@ -20,10 +20,6 @@ const routes: Routes = [
                 pathMatch: 'full',
             },
             {
-                path: CONSTS.PATHS.SUPPLY_POINT_SELECTION,
-                loadChildren: '../../pages/request/supply-point-selection/supply-point-selection.module#SupplyPointSelectionModule',
-            },
-            {
                 path: CONSTS.PATHS.CONTRACT,
                 loadChildren: '../../pages/request/contract/contract.module#ContractModule',
             },

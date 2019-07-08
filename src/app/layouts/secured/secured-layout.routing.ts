@@ -47,6 +47,17 @@ const routes = [
                 },
             },
             {
+                path: CONSTS.PATHS.SUPPLY_POINT_SELECTION,
+                loadChildren: '../../pages/supply-point-selection/supply-point-selection.module#SupplyPointSelectionModule',
+                data: {
+                    isSimpleFooter: false,
+                    isPublic: false,
+                    isSupplier: false,
+                    loginType: LoginType.NONE,
+                    signUpType: SignType.NONE,
+                },
+            },
+            {
                 path: CONSTS.PATHS.SUPPLY_POINTS,
                 loadChildren: '../../pages/supply-points/supply-points.module#SupplyPointsModule',
                 data: {
