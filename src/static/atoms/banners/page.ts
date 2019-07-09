@@ -7,8 +7,11 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 
 export class BannersPageComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
+    public defaultBannerObj = {
+        linkValue: 'basic/banners',
+        text: 'Banner longer descritpion',
+    };
 
-    public bannerText = 'Banner longer descritpion';
 
     public clicked = (evt) => {
         evt.preventDefault();

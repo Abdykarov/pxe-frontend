@@ -196,7 +196,7 @@ export class ProgressBarComponent {
         },
         {
             step: 'WAITING_FOR_PAYMENT',
-            label: 'Platba',
+            label: 'Step #3 alert',
             active: true,
         },
     ];

@@ -1,8 +1,6 @@
 import {
     Component,
-    EventEmitter,
     Input,
-    Output,
 } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -20,25 +18,16 @@ import { IBannerObj } from './models/banner-object.model';
 export class BannerUIComponent extends AbstractComponent {
 
     @Input()
-    public bannerText: string;
-
-    @Input()
     public buttonLabel: string;
 
     @Input()
     public data?: IBannerObj;
 
     @Input()
-    public icon?: string;
+    public icon = '';
 
     @Input()
     public showButtonLabel = true;
-
-    @Input()
-    public staticBannerTitle?: string;
-
-    @Output()
-    public staticBannerAction?: EventEmitter<any> = new EventEmitter<any>();
 
     public bannerAction(value: string, type: string, state: any = null) {
         if (type === 'external') {

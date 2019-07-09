@@ -41,12 +41,12 @@ const steps: IStepperProgressItem[] = [
     },
 ];
 
-export const offerStepWithoutShadowSteps = R.pipe(
+export const indexOfOfferStep = R.pipe(
     R.filter(item => !item.shadowStep),
     R.findIndex(item => item.step === ProgressStatus.OFFER_STEP),
 )(steps);
 
-export const offersStepsIndexes = [
+export const indexesOfStepSecond = [
     R.findIndex(R.propEq('step', ProgressStatus.OFFER_STEP))(steps),
     R.findIndex(R.propEq('step', ProgressStatus.PERSONAL_DATA))(steps),
     R.findIndex(R.propEq('step', ProgressStatus.READY_FOR_SIGN))(steps),
@@ -56,17 +56,18 @@ export const offersStepsIndexes = [
 export const getConfigStepper = (activeStep: ProgressStatus, withShadowSteps = true): IStepperProgressItem[] => {
     let activeIndex = R.findIndex(R.propEq('step', activeStep))(steps);
 
-    if ( !withShadowSteps && inArray(activeIndex, offersStepsIndexes)) {
-        activeIndex = offerStepWithoutShadowSteps;
+    if ( !withShadowSteps && inArray(activeIndex, indexesOfStepSecond)) {
+        activeIndex = indexOfOfferStep;
     }
 
     return R.pipe(
-        R.filter(item => !item.shadowStep && !withShadowSteps),
-        R_.mapIndexed((item: IStepperProgressItem, index: number) => {
-            const itemResult: any = {};
-            itemResult.active = index === activeIndex;
-            itemResult.done = index < activeIndex || activeStep === ProgressStatus.COMPLETED;
-            return itemResult;
-        }),
+        R.filter(item => !item.shadowStep || (item.shadowStep && withShadowSteps)),
+        R_.mapIndexed(
+            (item: IStepperProgressItem, index: number) => ({
+                active: index === activeIndex,
+                done: index < activeIndex || activeStep === ProgressStatus.COMPLETED,
+                ...item,
+            }),
+        ),
     )(steps);
 };

@@ -11,7 +11,7 @@ import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 export class ContractSigningPageComponent {
     public offer: ISupplyPointOffer = offerConfig;
     public showOffer = false;
-    public stepperProgressConfig = getConfigStepper(ProgressStatus.OFFER_STEP);
+    public stepperProgressConfig = getConfigStepper(ProgressStatus.READY_FOR_SIGN);
 
     public toggleOffer = (event) => {
         this.showOffer = !this.showOffer;

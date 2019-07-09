@@ -1,18 +1,17 @@
 <div class="banner">
     <div class="banner__content">
         <span
-            [ngClass]="[
-                icon ? icon : '']"
+            [ngClass]="icon"
             class="banner__icon icon"></span>
         <span class="banner__text">
-            {{bannerText}}
+            {{ data.text }}
         </span>
     </div>
     <div class="banner__controls"
         *ngIf="showButtonLabel">
         <lnd-button
             label="{{ buttonLabel }}"
-            (action)="buttonAction.emit($event)"
+            (action)="bannerAction(data.linkValue, data.linkType, data.linkData)"
             type="white">
         </lnd-button>
     </div>

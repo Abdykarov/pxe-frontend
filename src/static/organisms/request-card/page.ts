@@ -27,8 +27,5 @@ export class RequestCardComponent {
 
     public action = (data) => {
         console.log('CLICKED', data);
-
-        console.log(this.supplyPoint);
-        console.log(this.supplyPoint2);
     }
 }
