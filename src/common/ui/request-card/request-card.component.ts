@@ -18,9 +18,6 @@ import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 export class RequestCardComponent implements OnInit {
 
     @Input()
-    public isValid = true;
-
-    @Input()
     public supplyPoint: ISupplyPoint;
 
     @Output()

@@ -5,23 +5,19 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 
-import * as R from 'ramda';
 import {
     map,
     takeUntil,
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import {
+    ISupplyPoint,
+    ProgressStatus,
+} from 'src/common/graphql/models/supply.model';
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.fnc';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
-import {
-    CommodityType,
-    ISupplyPoint,
-    ISupplyPointGasAttributes,
-    ISupplyPointPowerAttributes,
-    ProgressStatus,
-} from 'src/common/graphql/models/supply.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -33,9 +29,9 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class SupplyPointSelectionComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
+    public loadingSupplyPoints = true;
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.SUPPLY_POINT);
     public supplyPoints: ISupplyPoint[] = null;
-    public loadingSupplyPoints = true;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -46,6 +42,7 @@ export class SupplyPointSelectionComponent extends AbstractComponent implements 
     }
 
     ngOnInit() {
+        // todo overeni s BE korektni nacitani
         this.supplyService.findSupplyPointsByContractStatus(null,
             [
                 ContractStatus.NOT_CONCLUDED,
@@ -70,66 +67,19 @@ export class SupplyPointSelectionComponent extends AbstractComponent implements 
     }
 
     public newSupplyPoint() {
-        this.router.navigate([ ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
+        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
     }
 
-    public submitSupplyForm = (supplyPointData: ISupplyPoint) => {
-        this.globalError = [];
-        let saveSupplyPoint;
-
-        const supplyPoint: ISupplyPoint = R.pick([
-            'supplierId',
-            'name',
-            'address',
-            'expirationDate',
-            'subjectTypeId',
-            'contractEndTypeId',
-            'timeToContractEnd',
-            'timeToContractEndPeriodId',
-        ], supplyPointData);
-
-        if (supplyPoint.commodityType === CommodityType.POWER) {
-            const powerAttributes: ISupplyPointPowerAttributes =
-                R.pick([
-                    'ean',
-                    'circuitBreakerId',
-                    'phasesId',
-                    'distributionRateId',
-                    'annualConsumptionNT',
-                    'annualConsumptionVT',
-                ], supplyPointData);
-            saveSupplyPoint = this.supplyService.createPowerSupplyPoint(supplyPoint, powerAttributes);
-        } else {
-            const gasAttributes: ISupplyPointGasAttributes =
-                R.pick([
-                    'eic',
-                    'annualConsumption',
-                ], supplyPointData);
-            saveSupplyPoint = this.supplyService.createGasSupplyPoint(supplyPoint, gasAttributes);
-        }
-
-        saveSupplyPoint
-            .pipe(
-                takeUntil(this.destroy$),
-                map(({data}) => data.createPowerSupplyPoint || data.createGasSupplyPoint),
-            )
-            .subscribe(
-                (supplyPointId) => {
-                    this.cd.markForCheck();
-                    this.router.navigate(
-                        [
-                            ROUTES.ROUTER_REQUEST_OFFER_SELECTION,
-                        ],
-                        {
-                            queryParams: {
-                                supplyPointId,
-                            },
-                        });
+    // tady overit jeslti se nemusi ulozit nova verze OM
+    public submitSupplyForm = ({supplyPointId}) => {
+        this.router.navigate(
+            [
+                ROUTES.ROUTER_REQUEST_OFFER_SELECTION,
+            ],
+            {
+                queryParams: {
+                    supplyPointId,
                 },
-                (error) => {
-                    const { globalError } = parseGraphQLErrors(error);
-                    this.globalError = globalError;
-                    this.cd.markForCheck();
-                });
+            });
     }
 }

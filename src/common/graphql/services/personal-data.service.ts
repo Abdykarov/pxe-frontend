@@ -4,7 +4,10 @@ import { Apollo } from 'apollo-angular';
 
 import { getPersonalDataQuery } from 'src/common/graphql/queries/personal-data';
 import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
-import { ISupplyPoint, ProgressStatus } from 'src/common/graphql/models/supply.model';
+import {
+    ISupplyPoint,
+    ProgressStatus,
+} from 'src/common/graphql/models/supply.model';
 import { IPersonalDataInput } from 'src/common/graphql/models/personal-data.model';
 import { savePersonalDataMutation } from 'src/common/graphql/mutation/personal-data';
 

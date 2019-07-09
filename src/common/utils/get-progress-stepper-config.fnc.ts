@@ -41,12 +41,12 @@ const steps: IStepperProgressItem[] = [
     },
 ];
 
-export const indexOfOfferStep = R.pipe(
+export const indexOfOfferStepWithoutShadowStep = R.pipe(
     R.filter(item => !item.shadowStep),
     R.findIndex(item => item.step === ProgressStatus.OFFER_STEP),
 )(steps);
 
-export const indexesOfStepSecond = [
+export const indexesOfSecondStep = [
     R.findIndex(R.propEq('step', ProgressStatus.OFFER_STEP))(steps),
     R.findIndex(R.propEq('step', ProgressStatus.PERSONAL_DATA))(steps),
     R.findIndex(R.propEq('step', ProgressStatus.READY_FOR_SIGN))(steps),
@@ -56,8 +56,8 @@ export const indexesOfStepSecond = [
 export const getConfigStepper = (activeStep: ProgressStatus, withShadowSteps = true): IStepperProgressItem[] => {
     let activeIndex = R.findIndex(R.propEq('step', activeStep))(steps);
 
-    if ( !withShadowSteps && inArray(activeIndex, indexesOfStepSecond)) {
-        activeIndex = indexOfOfferStep;
+    if ( !withShadowSteps && inArray(activeIndex, indexesOfSecondStep)) {
+        activeIndex = indexOfOfferStepWithoutShadowStep;
     }
 
     return R.pipe(

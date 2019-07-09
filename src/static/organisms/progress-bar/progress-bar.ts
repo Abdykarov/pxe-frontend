@@ -76,48 +76,48 @@ export class ProgressBarComponent {
 
     public stepperProgressConfigSubStep1: IStepperProgressItem[] = [
         {
-            step: 'CREATE',
+            step: '',
             label: 'Step #1 colors',
             done: true,
 
         },
         {
-            step: 'NONE',
+            step: '',
             label: '',
             shadowStep: true,
             done: true,
         },
         {
-            step: 'NONE',
+            step: '',
             label: '',
             shadowStep: true,
             done: true,
         },
         {
-            step: 'CHOOSE_OFFER',
+            step: '',
             label: 'Step #2 colors',
             done: true,
         },
         {
-            step: 'PERSONAL_INFO',
+            step: '',
             label: 'Rekapitulace',
             shadowStep: true,
             active: true,
         },
         {
-            step: 'CONTRACT',
+            step: '',
             label: 'Smlouva',
             shadowStep: true,
         },
         {
-            step: 'WAINTING_FOR_PAYMENT',
+            step: '',
             label: 'Step #3 alert',
         },
     ];
 
     public stepperProgressConfigSubStep2: IStepperProgressItem[] = [
         {
-            step: 'SUPPLY_POINT',
+            step: '',
             label: 'Step #1 colors',
             done: true,
 
@@ -135,67 +135,67 @@ export class ProgressBarComponent {
             done: true,
         },
         {
-            step: 'OFFER_STEP',
+            step: '',
             label: 'Step #2 colors',
             done: true,
         },
         {
-            step: 'PERSONAL_DATA',
+            step: '',
             label: 'Rekapitulace',
             shadowStep: true,
             done: true,
         },
         {
-            step: 'READY_FOR_SIGN',
+            step: '',
             label: 'Smlouva',
             shadowStep: true,
             active: true,
 
         },
         {
-            step: 'WAITING_FOR_PAYMENT',
+            step: '',
             label: 'Step #3 alert',
         },
     ];
 
     public stepperProgressConfigSubStep3: IStepperProgressItem[] = [
         {
-            step: 'SUPPLY_POINT',
+            step: '',
             label: 'Step #1 colors',
             done: true,
 
         },
         {
-            step: 'NONE',
+            step: '',
             label: '',
             shadowStep: true,
             done: true,
         },
         {
-            step: 'NONE',
+            step: '',
             label: '',
             shadowStep: true,
             done: true,
         },
         {
-            step: 'OFFER_STEP',
+            step: '',
             label: 'Step #2 colors',
             done: true,
         },
         {
-            step: 'PERSONAL_DATA',
+            step: '',
             label: 'Rekapitulace',
             shadowStep: true,
             done: true,
         },
         {
-            step: 'READY_FOR_SIGN',
+            step: '',
             label: 'Smlouva',
             shadowStep: true,
             done: true,
         },
         {
-            step: 'WAITING_FOR_PAYMENT',
+            step: '',
             label: 'Step #3 alert',
             active: true,
         },
@@ -203,42 +203,42 @@ export class ProgressBarComponent {
 
     public stepperProgressConfigSubStep4: IStepperProgressItem[] = [
         {
-            step: 'SUPPLY_POINT',
+            step: '',
             label: 'Step #1 colors',
             done: true,
 
         },
         {
-            step: 'NONE',
+            step: '',
             label: '',
             shadowStep: true,
             done: true,
         },
         {
-            step: 'NONE',
+            step: '',
             label: '',
             shadowStep: true,
             done: true,
         },
         {
-            step: 'OFFER_STEP',
+            step: '',
             label: 'Step #2 colors',
             done: true,
         },
         {
-            step: 'PERSONAL_DATA',
+            step: '',
             label: 'Rekapitulace',
             shadowStep: true,
             done: true,
         },
         {
-            step: 'READY_FOR_SIGN',
+            step: '',
             label: 'Smlouva',
             shadowStep: true,
             done: true,
         },
         {
-            step: 'WAITING_FOR_PAYMENT',
+            step: '',
             label: 'Step #3 alert',
             done: true,
         },
