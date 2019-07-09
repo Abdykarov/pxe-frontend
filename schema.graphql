@@ -53,6 +53,7 @@ type Mutation {
     deleteContract(contractId: ID!): Boolean
     deleteOffer(offerId: ID!): Int
     deletePersonalData(contractId: ID!): Boolean
+    deleteSignedContract(contractId: ID!, smsConfirmationCode: String!): Boolean
     makeRegistration(email: String!, preregistration: Boolean = false, termsOfConditionsApproved: Boolean!): Boolean
     resetPassword(email: String!): PasswordDestination
     saveContract(offerId: ID!, supplyPointId: ID!): ID
@@ -116,6 +117,7 @@ type Query {
     findSupplierOffers: [Offer]
     findSupplyPointOffers(ean: String!): [SupplyPointOffer]
     findSupplyPoints(ean: String): [SupplyPoint]
+    findSupplyPointsByContractStatus(contractStatus: [ContractStatus]!, ean: String): [SupplyPoint]
     getCodelistByType(locale: String, type: String!): [CodelistItem]!
     getContract(ean: String, status: String, supplyPointId: ID): Contract
     getContractTerms(contractId: ID!): ContractTerms
@@ -169,6 +171,7 @@ type SupplyPoint {
     lastAnnualConsumptionVT: Float
     name: String!
     phases: CodelistItem
+    progressStatus: ProgressStatus
     subject: CodelistItem!
     supplier: Supplier!
     timeToContractEnd: Int
@@ -200,6 +203,7 @@ enum ContractStatus {
     CANCELED
     CONCLUDED
     NOT_CONCLUDED
+    WAITING_FOR_PAYMENT
 }
 
 enum LandingPage {
@@ -216,6 +220,14 @@ enum OfferStatus {
 enum PasswordDestination {
     EMAIL
     PHONE
+}
+
+enum ProgressStatus {
+    OFFER_STEP
+    PERSONAL_DATA
+    READY_FOR_SIGN
+    SUPPLY_POINT
+    WAITING_FOR_PAYMENT
 }
 
 input AddressInput {
