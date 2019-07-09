@@ -15,7 +15,7 @@ import {
 } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { AbstractSupplyPointFormComponent } from './abstract-supply-point-form.component';
+import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/abstract-supply-point-form.component';
 import {
     CODE_LIST,
     CODE_LIST_TYPES,
@@ -29,7 +29,8 @@ import {
 import {
     CommodityType,
     ISupplyPoint,
-    SubjectType, TimeToContractEndPeriod,
+    SubjectType,
+    TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import {
     convertArrayToObject,
@@ -58,17 +59,17 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
 
     public allowedFields = supplyPointAllowedFields;
-    public commodityTypeOptions: Array<IOption> = COMMODITY_TYPE_OPTIONS;
-    public subjectTypeOptions: Array<IOption> = SUBJECT_TYPE_OPTIONS;
-    public codeLists;
     public codeList = CODE_LIST;
-    public helpDocuments = {};
-    public minDate: Date;
-    public suppliers = [];
+    public codeLists;
+    public codeLists$: BehaviorSubject<any> = new BehaviorSubject([]);
+    public commodityTypeOptions: Array<IOption> = COMMODITY_TYPE_OPTIONS;
     public distributionRateType: string = CODE_LIST.DIST_RATE_INDIVIDUAL;
     public expirationConfig = expirationConfig;
-
-    public codeLists$: BehaviorSubject<any> = new BehaviorSubject([]);
+    public formWasPrefilled = false;
+    public helpDocuments = {};
+    public minDate: Date;
+    public subjectTypeOptions: Array<IOption> = SUBJECT_TYPE_OPTIONS;
+    public suppliers = [];
     public suppliers$: BehaviorSubject<any> = new BehaviorSubject([]);
 
     constructor(
@@ -95,7 +96,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 this.resetFieldValue('supplierId', false);
                 this.setAnnualConsumptionNTState(commodityType === CommodityType.POWER ? this.getFieldValue('distributionRateId') : null);
                 this.setContractEndFields(this.getFieldValue('contractEndTypeId') || CONTRACT_END_TYPE.CONTRACT_END_DEFAULT);
-                this.formValues = null;
             });
 
         this.form.get('subjectTypeId')
@@ -148,8 +148,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             )
             .subscribe(([suppliers, codeLists]) => {
                 if (!R.isEmpty(suppliers) && !R.isEmpty(codeLists)) {
-                    if (this.formValues) {
+                    if (this.formValues && !this.formWasPrefilled) {
                         this.prefillForm();
+                        this.formWasPrefilled = true;
                     }
                 }
             });
