@@ -1,11 +1,17 @@
-<!--<div class="row">-->
-<!--    <div class="col-12 col-xl-10 offset-xl-1">-->
-<!--        <lnd-banner-ui-->
-<!--                [data]="supplyDetailInfoBanner"-->
-<!--                buttonLabel="Najít dodavatele"-->
-<!--        ></lnd-banner-ui>-->
-<!--    </div>-->
-<!--</div>-->
+<ng-container *ngIf="supplyPoint && supplyPoint.expirationDate && (today | dateDiff: supplyPoint.expirationDate) as contractEnd">
+    <div *ngIf="contractEnd <= maxDaysTillContractExpiration && contractEnd >= 0"
+         class="row">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <lnd-banner-ui
+                    buttonLabel="Najít dodavatele"
+                    [data]="{
+                        text: 'Platnost smlouvy končí za ' + contractEnd + ' ' + (contractEnd | plural: 'day')
+                    }"
+                    (customBannerAction)="findNewSupplier(supplyPoint)"
+            ></lnd-banner-ui>
+        </div>
+    </div>
+</ng-container>
 <div class="row">
     <div class="col-12 col-xl-10 offset-xl-1">
         <div class="page-box">
@@ -149,6 +155,25 @@
                     </div>
                 </div>
                 <hr>
+                <ng-container *ngIf="supplyPoint && supplyPoint.expirationDate && (today | dateDiff: supplyPoint.expirationDate) as contractEnd">
+                    <div *ngIf="contractEnd <= maxDaysTillContractExpiration && contractEnd >= 0"
+                         class="row no-gutters align-items-end mb-5">
+                        <div class="col-12 col-md-6">
+                            <small>
+                                Dodávka do<br>{{supplyPoint.expirationDate | date: 'dd. MM. y'}}
+                                <ng-container *ngIf="!supplyPoint.contract"><br>(Není ve správě PARC)</ng-container>
+                            </small>
+                        </div>
+                        <div class="col-12 col-md-6 pl-3 text-right">
+                            <lnd-button
+                                    label="Najít dodavatele"
+                                    type="link"
+                                    size="sm"
+                                    (action)="findNewSupplier(supplyPoint)">
+                            </lnd-button>
+                        </div>
+                    </div>
+                </ng-container>
 <!--                <div class="row no-gutters align-items-end mb-5">-->
 <!--                    <div class="col-12 col-md-6">-->
 <!--                        <small>Odstoupit od smlouvy do 14 dnů od podpisu</small>-->
@@ -190,7 +215,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

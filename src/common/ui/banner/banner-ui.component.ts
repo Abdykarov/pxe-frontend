@@ -28,11 +28,8 @@ export class BannerUIComponent extends AbstractComponent {
     @Input()
     public showButtonLabel = true;
 
-    @Input()
-    public staticBannerTitle?: string;
-
     @Output()
-    public staticBannerAction?: EventEmitter<any> = new EventEmitter<any>();
+    public customBannerAction?: EventEmitter<any> = new EventEmitter<any>();
 
     public bannerAction(value: string, type: string, state: any = null) {
         if (type === 'external') {
