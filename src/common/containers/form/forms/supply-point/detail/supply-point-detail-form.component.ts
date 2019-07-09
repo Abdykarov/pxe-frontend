@@ -15,7 +15,7 @@ import {
     takeUntil,
 } from 'rxjs/operators';
 
-import { AbstractSupplyPointFormComponent } from '../abstract-supply-point-form.component';
+import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/abstract-supply-point-form.component';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import {
