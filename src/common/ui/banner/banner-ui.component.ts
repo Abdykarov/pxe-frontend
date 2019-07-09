@@ -1,6 +1,8 @@
 import {
     Component,
+    EventEmitter,
     Input,
+    Output,
 } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -28,6 +30,9 @@ export class BannerUIComponent extends AbstractComponent {
 
     @Input()
     public showButtonLabel = true;
+
+    @Output()
+    public customBannerAction?: EventEmitter<any> = new EventEmitter<any>();
 
     public bannerAction(value: string, type: string, state: any = null) {
         if (type === 'external') {

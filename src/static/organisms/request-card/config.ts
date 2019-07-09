@@ -7,7 +7,7 @@ import {
 export const supplyPointConfig: ISupplyPoint = {
     id: '5456',
     name: 'Byt praha',
-    commodityType: 'POWER',
+    commodityType: CommodityType.POWER,
     supplier: {
         id: '',
         name: 'PRE',
@@ -36,7 +36,7 @@ export const supplyPointConfig: ISupplyPoint = {
 export const supplyPointConfig2: ISupplyPoint = {
     id: '5456',
     name: 'Byt praha',
-    commodityType: 'GAS',
+    commodityType: CommodityType.GAS,
     supplier: {
         id: '',
         name: 'PRE',

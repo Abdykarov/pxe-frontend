@@ -44,6 +44,7 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
 
     public form: FormGroup;
     public formError: any = {};
+    public originalFormValues: any = {};
 
     constructor(
         protected fb: FormBuilder,
@@ -135,5 +136,21 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         while (formArray.length !== 0) {
             formArray.removeAt(0);
         }
+    }
+
+    public setOriginalFormValues = (obj: any) => {
+        this.originalFormValues = Object.assign({}, obj);
+    }
+
+    public isDifferentField = (prop: string): boolean => this.originalFormValues[prop] !== this.form.value[prop];
+
+    public isDifferentForm = (): boolean => {
+        let hasChanges = false;
+        for (const prop in this.form.value) {
+            if (this.isDifferentField(prop)) {
+                hasChanges = true;
+            }
+        }
+        return hasChanges;
     }
 }

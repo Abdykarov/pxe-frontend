@@ -82,7 +82,7 @@ export interface ISupplyPointUpdatePowerAttributes {
 export interface ISupplyPoint {
     id: string;
     name: string;
-    commodityType: string;
+    commodityType: CommodityType;
     supplier: ISupplier;
     ean: string;
     address: IAddress;

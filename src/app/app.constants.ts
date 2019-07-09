@@ -16,6 +16,8 @@ export const CONSTS = {
         DEFAULT: 'CZK',
     },
     DEFAULT_EXPIRATION: 3600,
+    MAX_DAYS_TILL_CONTRACT_EXPIRATION: 60,
+    TIME_TO_CONTRACT_END_PROLONGED: 14,
     PATHS: {
         CONTRACT : 'contract',
         COOKIES_POLICY : 'cookies-policy',
@@ -199,3 +201,8 @@ export const  ANNUAL_CONSUMPTION_OPTIONS = [
         label: '45 - 63 MWh',
     },
 ];
+
+export const SUPPLY_POINT_EDIT_TYPE = {
+    NORMAL: 'NORMAL',
+    PROLONG: 'PROLONG',
+};
