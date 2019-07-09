@@ -14,7 +14,10 @@ import {
 import { getContractTermsQuery } from 'src/common/graphql/queries/contract';
 import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
 import { findSupplyPointOffersQuery } from 'src/common/graphql/queries/offer';
-import { ISupplyPoint, ProgressStatus } from 'src/common/graphql/models/supply.model';
+import {
+    ISupplyPoint,
+    ProgressStatus,
+} from 'src/common/graphql/models/supply.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 
 @Injectable({
