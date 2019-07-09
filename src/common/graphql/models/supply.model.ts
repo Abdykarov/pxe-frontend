@@ -49,6 +49,7 @@ export interface ISupplier {
     vatNumber: string;
     logoPath?: string;
     sampleDocuments: ISupplierSampleDocument[];
+    __typename?: string;
 }
 
 export interface ISupplierSampleDocument {

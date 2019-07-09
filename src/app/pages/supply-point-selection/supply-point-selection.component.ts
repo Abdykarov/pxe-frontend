@@ -28,8 +28,8 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./supply-point-selection.component.scss'],
 })
 export class SupplyPointSelectionComponent extends AbstractComponent implements OnInit {
-    public globalError: string[] = [];
     public loadingSupplyPoints = true;
+    public globalError: string[] = [];
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.SUPPLY_POINT);
     public supplyPoints: ISupplyPoint[] = null;
 
@@ -71,14 +71,14 @@ export class SupplyPointSelectionComponent extends AbstractComponent implements 
     }
 
     // tady overit jeslti se nemusi ulozit nova verze OM
-    public submitSupplyForm = ({supplyPointId}) => {
+    public submitSupplyForm = ({id}) => {
         this.router.navigate(
             [
                 ROUTES.ROUTER_REQUEST_OFFER_SELECTION,
             ],
             {
                 queryParams: {
-                    supplyPointId,
+                    supplyPointId: id,
                 },
             });
     }

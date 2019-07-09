@@ -60,6 +60,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
         this.supplyService.findSupplyPointsByContractStatus(null,
             [
                 ContractStatus.NOT_CONCLUDED,
+                // ContractStatus.WAITING_FOR_PAYMENT,
             ])
             .pipe(
                 takeUntil(this.destroy$),
@@ -119,6 +120,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
                         this.router.navigate(
                             [ROUTES.ROUTER_REQUEST_SUPPLY_POINT_SELECTION],
                         );
+                        return;
                     }
                     this.router.navigate(
                         [ROUTES.ROUTER_REQUEST_SUPPLY_POINT],

@@ -1,11 +1,11 @@
 import gql from 'graphql-tag';
 
-export const savePowerSupplyPoint = gql`
-    mutation savePowerSupplyPoint(
+export const createPowerSupplyPointMutation = gql`
+    mutation createPowerSupplyPoint(
         $supplyPoint: SupplyPointInput!,
         $powerAttributes: SupplyPointInputPowerAttributes!,
     ){
-        savePowerSupplyPoint(
+        createPowerSupplyPoint(
             supplyPoint: $supplyPoint,
             powerAttributes: $powerAttributes,
         )

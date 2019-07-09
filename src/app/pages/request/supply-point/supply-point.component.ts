@@ -1,21 +1,9 @@
-import {
-    ActivatedRoute,
-    Router,
-} from '@angular/router';
-import {
-    ChangeDetectorRef,
-    Component,
-    Inject,
-    OnInit,
-    PLATFORM_ID,
-} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 import * as R from 'ramda';
-import {
-    map,
-    takeUntil,
-} from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -31,10 +19,7 @@ import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.f
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils';
-import {
-    ROUTES,
-    SUPPLY_POINT_EDIT_TYPE,
-} from 'src/app/app.constants';
+import { ROUTES, SUPPLY_POINT_EDIT_TYPE } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -64,8 +49,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
 
     ngOnInit() {
         if (isPlatformBrowser(this.platformId)) {
-            const supplyPointCopy = window.history.state.supplyPointCopy;
-            this.supplyPointData = supplyPointCopy;
+            this.supplyPointData = window.history.state.supplyPointCopy;
             this.editMode = SUPPLY_POINT_EDIT_TYPE.PROLONG;
         }
     }

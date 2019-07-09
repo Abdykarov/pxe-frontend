@@ -33,6 +33,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class OfferSelectionComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
+    public loadingSupplyPointOffers = true;
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.OFFER_STEP);
     public supplyPointOffers: ISupplyPointOffer[];
     public supplyPoint: ISupplyPoint;
@@ -77,6 +78,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
             .subscribe(
                 (findSupplyPointOffers: ISupplyPointOffer[]) => {
                     this.supplyPointOffers = findSupplyPointOffers;
+                    this.loadingSupplyPointOffers = false;
                     this.cd.markForCheck();
                 },
                 (error) => {

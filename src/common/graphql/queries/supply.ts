@@ -236,7 +236,7 @@ export const getSupplyPointQuery = gql`
     }
 `;
 
-export const findSupplyPointsByContractStatus = gql`
+export const findSupplyPointsByContractStatusQuery = gql`
     query findSupplyPointsByContractStatus($ean: String, $contractStatus: [ContractStatus]!){
         findSupplyPointsByContractStatus(ean: $ean, contractStatus: $contractStatus){
             id,
