@@ -25,6 +25,7 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
+import { graphQLMessages } from 'src/common/constants/errors.constant';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
     parseGraphQLErrors,
@@ -166,10 +167,11 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
             (deleteSignedContract: boolean) => {
                 this.formLoading = false;
                 if (deleteSignedContract) {
+                    // TODO - navigate to REQUESTS overview
                     this.router.navigate([ROUTES.ROUTER_REQUEST]);
                 } else {
                     // TODO - temporary
-                    this.globalError.push('Od smlouvy se nepodařilo odstoupit.');
+                    this.globalError.push(graphQLMessages.cannotDeleteContract);
                     scrollToElementFnc('top');
                 }
             },

@@ -17,6 +17,7 @@ import {
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { getConfigStepperByState } from 'src/common/utils/get-progress-stepper-config.fnc';
+import { graphQLMessages } from 'src/common/constants/errors.constant';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
     ISupplyPoint,
@@ -107,7 +108,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                             });
                     } else {
                         // TODO - temporary
-                        this.globalError.push('Smlouvu se nepodařilo podepsat.');
+                        this.globalError.push(graphQLMessages.cannotSignContract);
                         scrollToElementFnc('top');
                     }
                     this.cd.markForCheck();

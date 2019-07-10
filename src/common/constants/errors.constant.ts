@@ -5,7 +5,8 @@ export const restAPIErrorCodes = {
 };
 
 export const graphQLMessages = {
-    cannotDeleteContract: 'Smlouvu se nepodařilo smazat.',
+    cannotDeleteContract: 'Od smlouvy se nepodařilo odstoupit.',
+    cannotSignContract: 'Smlouvu se nepodařilo podepsat.',
 };
 
 export const errorFieldMessages =  {

@@ -206,5 +206,5 @@ export class ContractService {
                 },
             });
     }
-    // todo cache v tudle chvili se zalozi nova verze SP popripade se mu jen zrus kontract\
+    // todo refetch all queries for all supply point overviews
 }
