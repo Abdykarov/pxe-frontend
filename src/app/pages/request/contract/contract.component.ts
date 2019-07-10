@@ -15,11 +15,14 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { configStepper } from './contract.config';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { formFields } from 'src/common/containers/form/forms/contract/contract-form.config';
+import { getConfigStepperByState } from 'src/common/utils/get-progress-stepper-config.fnc';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import {
+    ISupplyPoint,
+    SupplyPointState,
+} from 'src/common/graphql/models/supply.model';
 import {
     parseGraphQLErrors,
     scrollToElementFnc,
@@ -33,7 +36,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./contract.component.scss'],
 })
 export class ContractComponent extends AbstractComponent implements OnInit {
-    public configStepper = configStepper;
+    public configStepper = getConfigStepperByState(SupplyPointState.CONTRACT);
     public contractTemplate;
     public showOffer = true;
     public fieldError: IFieldError = {};

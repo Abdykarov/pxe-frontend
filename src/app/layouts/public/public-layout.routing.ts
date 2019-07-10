@@ -47,7 +47,6 @@ const routes = [
                 loadChildren: '../../pages/logout/logout-page.module#LogoutPageModule',
                 data: {
                     isPublic: true,
-                    isSimpleFooter: true,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
                 },

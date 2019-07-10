@@ -4,42 +4,56 @@ import { NgModule } from '@angular/core';
 import { ConsumptionPipe } from './consumption/consumption.pipe';
 import { ConsumptionIndicatorPipe } from './consumption-indicator/consumption-indicator.pipe';
 import { DateDiffPipe } from './date-diff/date-diff.pipe';
+import { DecimalPipe } from '@angular/common';
+import { DynamicPipe } from './dynamic/dynamic.pipe';
 import { FilterCommodityTypePipe } from './filter-commodity-type/filter-commodity-type.pipe';
+import { IsDatePast } from './is-date-past/is-date-past.pipe';
 import { IsRouteActivePipe } from './is-route-active/is-route-acrive.pipe';
 import { KeysPipe } from './keys/keys.pipe';
 import { PluralPipe } from './plurar/plural.pipe';
 import { ValuesPipe } from './values/values.pipe';
+import { SupplyPointStatePipe } from './supply-point-state/supply-point-state.pipe';
 
 @NgModule({
     declarations: [
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,
-        IsRouteActivePipe,
+        DynamicPipe,
         FilterCommodityTypePipe,
+        IsDatePast,
+        IsRouteActivePipe,
         KeysPipe,
-        ValuesPipe,
         PluralPipe,
+        SupplyPointStatePipe,
+        ValuesPipe,
     ],
     exports: [
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,
-        IsRouteActivePipe,
+        DynamicPipe,
         FilterCommodityTypePipe,
+        IsDatePast,
+        IsRouteActivePipe,
         KeysPipe,
         PluralPipe,
+        SupplyPointStatePipe,
         ValuesPipe,
     ],
     providers: [
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,
+        DecimalPipe,
+        DynamicPipe,
+        IsDatePast,
         IsRouteActivePipe,
         FilterCommodityTypePipe,
         KeysPipe,
-        ValuesPipe,
         PluralPipe,
+        SupplyPointStatePipe,
+        ValuesPipe,
     ],
 })
 export class PipesModule {}

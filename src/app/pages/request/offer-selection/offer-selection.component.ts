@@ -8,16 +8,18 @@ import {
     OnInit,
 } from '@angular/core';
 
-import * as R from 'ramda';
 import {
     map,
     takeUntil,
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { configStepper } from './offer-selection.config';
 import { ContractService } from 'src/common/graphql/services/contract.service';
-import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import { getConfigStepperByState } from 'src/common/utils/get-progress-stepper-config.fnc';
+import {
+    ISupplyPoint,
+    SupplyPointState,
+} from 'src/common/graphql/models/supply.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { OfferService } from 'src/common/graphql/services/offer.service';
@@ -31,7 +33,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class OfferSelectionComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
-    public stepperProgressConfig: IStepperProgressItem[] = configStepper;
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepperByState(SupplyPointState.CHOOSE_OFFER);
     public supplyPointOffers: ISupplyPointOffer[];
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;

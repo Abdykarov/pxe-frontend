@@ -154,6 +154,140 @@ export const getSupplyPointQuery = gql`
             },
             lastAnnualConsumptionNT,
             lastAnnualConsumptionVT,
+            contractEndType {
+                type,
+                code,
+                description,
+                help
+            },
+            timeToContractEnd,
+            timeToContractEndPeriod {
+                type,
+                code,
+                description,
+                help
+            },
+            contract {
+                contractId,
+                contractStatus,
+                deliveryFrom,
+                deliveryTo,
+                offer{
+                    id,
+                    supplier{
+                        id,
+                        name,
+                        vatNumber,
+                        logoPath,
+                        sampleDocuments{
+                            type,
+                            url
+                        }
+                    },
+                    commodityType,
+                    name,
+                    validFrom,
+                    validTo,
+                    deliveryFrom,
+                    deliveryTo,
+                    deliveryLength,
+                    benefits,
+                    priceVT,
+                    priceNT,
+                    priceGas,
+                    mountlyPaymentPrice,
+                },
+                personalData {
+                    name,
+                    ico,
+                    dic,
+                    address1{
+                        street,
+                        orientationNumber,
+                        descriptiveNumber,
+                        city,
+                        postCode,
+                        region,
+                    },
+                    address2{
+                        street,
+                        orientationNumber,
+                        descriptiveNumber,
+                        city,
+                        postCode,
+                        region,
+                    },
+                    email,
+                    phone,
+                    bankAccountNumber,
+                    bankCode,
+                    depositPaymentType {
+                        type,
+                        code,
+                        description,
+                        help
+                    },
+                    deposit,
+                }
+            },
+        }
+    }
+`;
+
+export const findSupplyPointsByContractStatus = gql`
+    query findSupplyPointsByContractStatus($ean: String, $contractStatus: [ContractStatus]!){
+        findSupplyPointsByContractStatus(ean: $ean, contractStatus: $contractStatus){
+            id,
+            name,
+            commodityType,
+            supplier{
+                id,
+                name,
+                vatNumber,
+                logoPath,
+                sampleDocuments{
+                    type,
+                    url
+                }
+            },
+            ean,
+            address{
+                street,
+                orientationNumber,
+                descriptiveNumber,
+                city,
+                postCode,
+                region,
+            },
+            distributionRate{
+                type,
+                code,
+                description,
+                help
+            },
+            circuitBreaker{
+                type,
+                code,
+                description,
+                help
+            },
+            phases{
+                type,
+                code,
+                description,
+                help
+            },
+            annualConsumptionNT,
+            annualConsumptionVT,
+            expirationDate,
+            subject{
+                type,
+                code,
+                description,
+                help
+            },
+            lastAnnualConsumptionNT,
+            lastAnnualConsumptionVT,
             timeToContractEnd,
             timeToContractEndPeriod {
                 type,

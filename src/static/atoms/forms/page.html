@@ -3,15 +3,16 @@
     #templateLabel
     let-item="item"
     let-index="index">
-        {{ item.label }}
+    {{ item.street }}&nbsp;{{ item.orientationNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.descriptiveNumber }},
+    {{ item.city }}, {{ item.postCode }}
 </ng-template>
 <!-- Example searched items template -->
 <ng-template
     #templateItem
     let-item="item"
     let-index="index">
-    {{ item.value.street }}&nbsp;{{ item.value.orientationNumber }}<ng-container *ngIf="item && item.value && item.value.orientationNumber && item.value.descriptiveNumber">/</ng-container>{{ item.value.descriptiveNumber }}<br>
-    {{ item.value.city }}&nbsp;{{ item.value.postCode }}
+    {{ item.street }}&nbsp;{{ item.orientationNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.descriptiveNumber }}<br>
+    {{ item.city }}&nbsp;{{ item.postCode }}
 </ng-template>
 <!-- Example link in subtext -->
 <ng-template #linkInSubtext>
