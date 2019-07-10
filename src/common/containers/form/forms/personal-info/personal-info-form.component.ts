@@ -13,6 +13,7 @@ import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
+import { CONSTS } from 'src/app/app.constants';
 import { CustomValidators } from 'src/common/utils';
 import { depositPaymentType } from './personal-info-form.config';
 import {
@@ -27,8 +28,6 @@ import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
     styleUrls: ['./personal-info-form.component.scss'],
 })
 export class PersonalInfoFormComponent extends AbstractFormComponent implements OnInit {
-    private static readonly MAX_AGE = 130;
-    private static readonly MIN_AGE = 18;
 
     @Input()
     public supplyPoint: ISupplyPoint;
@@ -39,8 +38,8 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     @Input()
     public formValues: IPersonalData = null;
 
-    public minDate: Date = moment().add(-PersonalInfoFormComponent.MAX_AGE, 'years').toDate();
-    public maxDate: Date = moment().add(-PersonalInfoFormComponent.MIN_AGE, 'years').toDate();
+    public minDate: Date = moment().year(CONSTS.FIRST_YEAR_BIRTHDAY_ACCEPTED).startOf('year').toDate();
+    public maxDate: Date = moment().add(-CONSTS.ADULTHOOD_AGE, 'years').toDate();
     public depositPaymentTypeId = depositPaymentType;
 
     constructor(
@@ -103,7 +102,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             bankAccountNumber = this.formValues.bankAccountNumber;
             bankCode = this.formValues.bankCode;
             phone = this.formValues.phone && this.formValues.phone.substr(4, 10);
-            phonePrefix = phone && '+420';
+            phonePrefix = phone && CONSTS.TELEPHONE_PREFIX;
             email = this.formValues.email;
             depositPaymentTypeId = this.formValues.depositPaymentType && this.formValues.depositPaymentType.code;
             deposit = this.formValues.deposit;
@@ -159,6 +158,9 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
                 phone: R.concat(this.form.value.phonePrefix, this.form.value.phone),
                 deposit: parseFloat(String(this.form.value.deposit).replace(',', '.')),
             };
+            if (form.birthDate) {
+                form.birthDate = this.form.value.birthDate.toISOString().split('T')[0];
+            }
             delete form.phonePrefix;
             delete form.onlyAddress1;
             this.submitAction.emit(form);

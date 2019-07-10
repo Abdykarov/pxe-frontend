@@ -1,3 +1,5 @@
+import { CONSTS } from 'src/app/app.constants';
+
 export const defaultRestAPIErrorMessage = 'Došlo k chybě. Zkuste to později.';
 
 export const restAPIErrorCodes = {
@@ -171,11 +173,11 @@ export const errorFieldMessages =  {
         landLineNumber: 'Pevná linka musí obsahovat 9 číslic.',
     },
     phonePrefix: {
-        required: 'Vyplňte předvolbu pro ČR +420.',
-        invalidPhoneNumberPrefix: 'Vyplňte správnou předvolbu pro ČR +420.',
+        required: `Vyplňte předvolbu pro ČR ${CONSTS.TELEPHONE_PREFIX}.`,
+        invalidPhoneNumberPrefix: `Vyplňte správnou předvolbu pro ČR ${CONSTS.TELEPHONE_PREFIX}.`,
     },
     smsCode: {
-        required: 'Vyplňte sms kód.',
+        required: 'Vyplňte kód, který vám přišel v SMS.',
     },
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',

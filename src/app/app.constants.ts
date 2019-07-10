@@ -7,6 +7,7 @@ import {
 import { IOption } from 'src/common/ui/forms/models/option.model';
 
 export const CONSTS = {
+    ADULTHOOD_AGE: 18,
     DATE_FORMAT: {
         CALENDAR: 'YYYY-MM-DD[T]HH:mm',
         SHORT: 'YYYY-MM-DD',
@@ -43,6 +44,8 @@ export const CONSTS = {
         TERMS_OF_USE : 'terms-of-use',
         WILD_CART  : '**',
     },
+    FIRST_YEAR_BIRTHDAY_ACCEPTED: 1900,
+    TELEPHONE_PREFIX: '+420',
 };
 
 export const ROUTES = {
