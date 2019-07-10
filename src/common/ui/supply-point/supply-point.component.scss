@@ -66,8 +66,10 @@
 		overflow: hidden;
 
 		// Media queries
-		@include media-breakpoint-down(md) {
-			pointer-events: none;
+		&:not(.supply-point--list-item) {
+			@include media-breakpoint-down(md) {
+				pointer-events: none;
+			}
 		}
 	}
 
