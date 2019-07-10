@@ -42,332 +42,94 @@
                             class="qr-code-img mr-md-6">
                     </div>
                     <div class="col-auto">
-                        <!-- <table class="table--basic">
-                            <tbody>
-                                <tr>
-                                    <th>Číslo účtu</th>
-                                    <td>123-456789</td>
-                                </tr>
-                                <tr>
-                                    <th>Banka</th>
-                                    <td>0100</td>
-                                </tr>
-                                <tr>
-                                    <th>Částka</th>
-                                    <td>50 Kč</td>
-                                </tr>
-                                <tr>
-                                    <th>Splatnost</th>
-                                    <td>15. 11. 2018</td>
-                                </tr>
-                                <tr>
-                                    <th>Variabilní symbol</th>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th>Konstatní symbol</th>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table> -->
-                        <!-- <ng-template #transactionDetail let-row="row"> -->
-                            <!-- <div class="d-none d-md-block">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="table-responsive">
-                                            <table
-                                                class="
-                                                    table
-                                                    table-striped">
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="w-50">Z účtu</td>
-                                                        <td
-                                                            class="
-                                                                w-50
-                                                                text-right
-                                                                font-weight-bold">
-                                                            {{ row.sender.account }}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="w-50">Variabilní symbol</td>
-                                                        <td
-                                                            class="
-                                                                w-50
-                                                                text-right
-                                                                font-weight-bold">
-                                                            {{ row.symbols.vs }}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="w-50">Datum zpracování</td>
-                                                        <td
-                                                            class="
-                                                                w-50
-                                                                text-right
-                                                                font-weight-bold">
-                                                            31.12.2020
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="w-50">Zpráva pro příjemce</td>
-                                                        <td
-                                                            class="
-                                                                w-50
-                                                                text-right
-                                                                font-weight-bold">
-                                                            {{ row.message }}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="w-50">Specifický symbol</td>
-                                                        <td
-                                                            class="
-                                                                w-50
-                                                                text-right
-                                                                font-weight-bold">
-                                                            {{ row.symbols.ss }}
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="table-responsive">
-                                            <table
-                                                class="
-                                                    table
-                                                    table-striped">
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="w-50">Částka v měně transakce</td>
-                                                        <td
-                                                            class="
-                                                                w-50
-                                                                text-right
-                                                                font-weight-bold">
-                                                            {{ row.amount }}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="w-50">Referenční číslo transakce</td>
-                                                        <td
-                                                            class="
-                                                                w-50
-                                                                text-right
-                                                                font-weight-bold">
-                                                            {{ row.refNo }}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="w-50">Zpráva pro plátce</td>
-                                                        <td
-                                                            class="
-                                                                w-50
-                                                                text-right
-                                                                font-weight-bold">
-                                                            {{ row.description }}
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="w-50">Konstantní symbol</td>
-                                                        <td
-                                                            class="
-                                                                w-50
-                                                                text-right
-                                                                font-weight-bold">
-                                                            {{ row.symbols.ks }}
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <!-- <div class="d-none d-sm-block d-md-none">
-                                <table
-                                    class="
-                                        table
-                                        table-striped">
-                                    <tbody>
-                                        <tr>
-                                            <td class="w-40">Z účtu</td>
-                                            <td
-                                                class="
-                                                    w-60
-                                                    font-weight-bold
-                                                    text-right">
-                                                {{ row.sender.account }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="w-40">Datum zpracování</td>
-                                            <td
-                                                class="
-                                                    w-60
-                                                    font-weight-bold
-                                                    text-right">
-                                                31. 12. 2020
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="w-40">Položka</td>
-                                            <td
-                                                class="
-                                                    w-60
-                                                    font-weight-bold
-                                                    text-right">
-                                                Úhrada
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="w-40">Zpráva pro příjemce</td>
-                                            <td
-                                                class="
-                                                    w-60
-                                                    font-weight-bold
-                                                    text-right">
-                                                {{ row.message }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="w-40">Specifický symbol</td>
-                                            <td
-                                                class="
-                                                    w-60
-                                                    font-weight-bold
-                                                    text-right">
-                                                {{ row.symbols.ss }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="w-40">Částka v měně transakce</td>
-                                            <td
-                                                class="
-                                                    w-60
-                                                    font-weight-bold
-                                                    text-right">
-                                                {{ row.amount }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="w-40">Referenční číslo transakce</td>
-                                            <td
-                                                class="
-                                                    w-60
-                                                    font-weight-bold
-                                                    text-right">
-                                                {{ row.refNo }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="w-40">Zpráva pro plátce</td>
-                                            <td
-                                                class="
-                                                    w-60
-                                                    font-weight-bold
-                                                    text-right">
-                                                {{ row.description }}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="w-40">Konstantní symbol</td>
-                                            <td
-                                                class="
-                                                    w-60
-                                                    font-weight-bold
-                                                    text-right">
-                                                {{ row.symbols.ks }}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div> -->
-                            <!-- <div class="d-block d-md-none">
-                                <table
-                                    class="
-                                        table
-                                        table-striped">
-                                    <tbody>
-                                        <tr>
-                                            <td class="w-100">
-                                                Z účtu
-                                                <span class="d-block font-weight-bold">
-                                                    {{ row.sender.account }}
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="w-100">
-                                                Datum zpracování
-                                                <span class="d-block font-weight-bold">
-                                                    31. 12. 2020
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="w-100">
-                                                Zpráva pro příjemce
-                                                <span class="d-block font-weight-bold">
-                                                    {{ row.message }}
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="w-100">
-                                                Specifický symbol
-                                                <span class="d-block font-weight-bold">
-                                                    {{ row.symbols.ss }}
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="w-100">
-                                                Částka v měně transakce
-                                                <span class="d-block font-weight-bold">
-                                                    {{ row.amount }}
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="w-100">
-                                                Referenční číslo transakce
-                                                <span class="d-block font-weight-bold">
-                                                    {{ row.refNo }}
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="w-100">
-                                                Zpráva pro plátce
-                                                <span class="d-block font-weight-bold">
-                                                    {{ row.description }}
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="w-100">
-                                                Konstantní symbol
-                                                <span class="d-block font-weight-bold">
-                                                    {{ row.symbols.ks }}
-                                                </span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </ng-template> -->
-                        <lnd-table
+                        <div class="d-none d-md-block h-100 w-100">
+                            <table class="table h-100 w-100">
+                                <tbody>
+                                    <tr>
+                                        <td class="pr-3">Číslo účtu</td>
+                                        <td>123-456789</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pr-3">Banka</td>
+                                        <td>0100</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pr-3">Částka</td>
+                                        <td>50 Kč</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pr-3">Splatnost</td>
+                                        <td>15. 11. 2018</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pr-3">Variabilní symbol</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pr-3">Konstatní symbol</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="d-block d-md-none">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td class="pb-3">
+                                            Číslo účtu
+                                            <span class="d-block">
+                                                123-456789
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-3">
+                                                Banka
+                                            <span class="d-block">
+                                                0100
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-3">
+                                            Částka
+                                            <span class="d-block">
+                                                50 Kč
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-3">
+                                            Splatnost
+                                            <span class="d-block">
+                                                15. 11. 2018
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-3">
+                                            Variabilní symbol
+                                            <span class="d-block"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pb-3">
+                                            Konstatní symbol
+                                            <span class="d-block"></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- <lnd-table
                             [cols]="transactionCols.main"
                             [rows]="transactionRows"
                             [showHead]="false"
                             [tableClass]="'table--advanced'"
                             [mobileDetailCaption]="'Detail platby'"
                             [actionColTemplate]="actionCol"
-                        ></lnd-table>
+                        ></lnd-table> -->
                     </div>
                 </div>
             </div>
