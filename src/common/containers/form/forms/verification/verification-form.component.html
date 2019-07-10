@@ -14,7 +14,7 @@
             <div [ngClass]="classMainWrapper">
                 <div [ngClass]="classFirstField">
                     <lnd-form-field
-                        label= "Kód z SMS"
+                        label="Kód z SMS"
                         [disabledField]="!smsSent"
                         [error]="formError.smsCode || form.controls.smsCode.errors"
                         [formControl]="form.controls.smsCode"

@@ -6,6 +6,7 @@ import {
 export const supplyPointConfig: ISupplyPoint = {
     id: '5456',
     name: 'Byt praha',
+    allowedOperations: [],
     commodityType: CommodityType.POWER,
     supplier: {
         id: '',
@@ -25,6 +26,7 @@ export const supplyPointConfig: ISupplyPoint = {
     subject: null,
     lastAnnualConsumptionNT: 0,
     lastAnnualConsumptionVT: 0,
+    lastVersionOfSupplyPoint: false,
     contractEndType: null,
     timeToContractEnd: 0,
     timeToContractEndPeriod: null,
@@ -34,6 +36,7 @@ export const supplyPointConfig: ISupplyPoint = {
 export const supplyPointConfig2: ISupplyPoint = {
     id: '5456',
     name: 'Byt praha',
+    allowedOperations: [],
     commodityType: CommodityType.GAS,
     supplier: {
         id: '',
@@ -53,6 +56,7 @@ export const supplyPointConfig2: ISupplyPoint = {
     subject: null,
     lastAnnualConsumptionNT: 0,
     lastAnnualConsumptionVT: 0,
+    lastVersionOfSupplyPoint: false,
     contractEndType: null,
     timeToContractEnd: 0,
     timeToContractEndPeriod: null,
