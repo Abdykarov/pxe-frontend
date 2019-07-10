@@ -60,6 +60,10 @@ import {
     infoBannerPageRoutes,
 } from 'src/static/organisms/info-banner/page.module';
 import {
+    ListSupplyPointsPageModule,
+    listSupplyPointsPageRoutes,
+} from 'src/static/pages/list-supply-points/page.module';
+import {
     ModalsPageModule,
     modalsPageRoutes,
 } from 'src/static/organisms/modals/page.module';
@@ -75,6 +79,14 @@ import {
     RecapitulationPageModule,
     recapitulationPageRoutes,
 } from 'src/static/pages/recapitulation/page.module';
+import {
+    RequestPageModule,
+    requestPageRoutes,
+} from 'src/static/pages/request/page.module';
+import {
+    RequestBannerPageModule,
+    requestBannerPageRoutes,
+} from 'src/static/pages/request-banner/page.module';
 import {
     RequestCardPageModule,
     requestCardPageRoutes,
@@ -142,10 +154,13 @@ const routes: Routes = [
             ...iconsPageRoutes,
             ...indicatorsPageRoutes,
             ...infoBannerPageRoutes,
+            ...listSupplyPointsPageRoutes,
             ...modalsPageRoutes,
             ...newSupplyPointPageRoutes,
             ...progressBarPageRoutes,
             ...recapitulationPageRoutes,
+            ...requestPageRoutes,
+            ...requestBannerPageRoutes,
             ...requestCardPageRoutes,
             ...supplyOfferPageRoutes,
             ...supplyPointOfferPageRoutes,
@@ -181,10 +196,13 @@ const routes: Routes = [
         IconsPageModule,
         IndicatorsPageModule,
         InfoBannerPageModule,
+        ListSupplyPointsPageModule,
         ModalsPageModule,
         NewSupplyPointPageModule,
         ProgressBarPageModule,
         RecapitulationPageModule,
+        RequestPageModule,
+        RequestBannerPageModule,
         RequestCardPageModule,
         RouterModule.forChild(routes),
         SupplyOfferPageModule,
