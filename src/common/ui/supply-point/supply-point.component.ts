@@ -5,7 +5,10 @@ import {
     Output,
 } from '@angular/core';
 
-import { CommodityType, ISupplyPointFindData } from 'src/common/graphql/models/supply.model';
+import {
+    CommodityType,
+    ISupplyPointFindData,
+} from 'src/common/graphql/models/supply.model';
 
 @Component({
     selector: 'pxe-supply-point',
