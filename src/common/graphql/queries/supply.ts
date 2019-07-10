@@ -154,6 +154,12 @@ export const getSupplyPointQuery = gql`
             },
             lastAnnualConsumptionNT,
             lastAnnualConsumptionVT,
+            contractEndType {
+                type,
+                code,
+                description,
+                help
+            },
             timeToContractEnd,
             timeToContractEndPeriod {
                 type,

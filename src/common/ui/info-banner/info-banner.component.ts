@@ -5,12 +5,19 @@ import {
     Output,
 } from '@angular/core';
 
+import {
+    CONSTS,
+    IMAGE_TYPE,
+} from 'src/app/app.constants';
+
 @Component({
     selector: 'lnd-info-banner',
     templateUrl: './info-banner.component.html',
     styleUrls: ['./info-banner.component.scss'],
 })
 export class InfoBannerComponent {
+
+    public imageTypes = CONSTS.IMAGES;
 
     @Input()
     public buttonLabel: string;
@@ -22,7 +29,7 @@ export class InfoBannerComponent {
     public bannerDescription: string;
 
     @Input()
-    public bannerImageSrc = '/assets/images/illustrations/house-alert.svg';
+    public bannerImageType: IMAGE_TYPE = IMAGE_TYPE.HOUSE_ALERT;
 
     @Input()
     public buttonCustomClass  = 'info-banner__btn';

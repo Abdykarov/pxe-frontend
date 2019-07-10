@@ -6,6 +6,19 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 
+export enum IMAGE_TYPE {
+    ACCEPTED = 'ACCEPTED',
+    DOCUMENTS = 'DOCUMENTS',
+    DOCUMENTS_ALERT = 'DOCUMENTS_ALERT',
+    HOUSE = 'HOUSE',
+    HOUSE_ALERT = 'HOUSE_ALERT',
+    LIGHT = 'LIGHT',
+    LOADING = 'LOADING',
+    MAIL_LETTER = 'MAIL_LETTER',
+    SIGN = 'SIGN',
+    UPLOAD = 'UPLOAD',
+}
+
 export const CONSTS = {
     CURRENCY: {
         DEFAULT: 'CZK',
@@ -16,17 +29,18 @@ export const CONSTS = {
     },
     DEFAULT_EXPIRATION: 3600,
     IMAGES: {
-        ACCEPTED: '/assets/images/illustrations/accepted.svg',
-        DOCUMENTS : '/assets/images/illustrations/documents.svg',
-        DOCUMENTS_ALERT: '/assets/images/illustrations/documents_alert.svg',
-        HOUSE: '/assets/images/illustrations/house.svg',
-        HOUSE_ALERT: '/assets/images/illustrations/house-alert.svg',
-        LIGHT: '/assets/images/illustrations/light.svg',
-        LOADING: '/assets/images/illustrations/loading.svg',
-        MAIL_LETTER: '/assets/images/illustrations/mail-letter.svg',
-        SIGN: '/assets/images/illustrations/sign.svg',
-        UPLOAD: '/assets/images/illustrations/upload.svg',
+        [IMAGE_TYPE.ACCEPTED]: '/assets/images/illustrations/accepted.svg',
+        [IMAGE_TYPE.DOCUMENTS]: '/assets/images/illustrations/documents.svg',
+        [IMAGE_TYPE.DOCUMENTS_ALERT]: '/assets/images/illustrations/documents_alert.svg',
+        [IMAGE_TYPE.HOUSE]: '/assets/images/illustrations/house.svg',
+        [IMAGE_TYPE.HOUSE_ALERT]: '/assets/images/illustrations/house-alert.svg',
+        [IMAGE_TYPE.LIGHT]: '/assets/images/illustrations/light.svg',
+        [IMAGE_TYPE.LOADING]: '/assets/images/illustrations/loading.svg',
+        [IMAGE_TYPE.MAIL_LETTER]: '/assets/images/illustrations/mail-letter.svg',
+        [IMAGE_TYPE.SIGN]: '/assets/images/illustrations/sign.svg',
+        [IMAGE_TYPE.UPLOAD]: '/assets/images/illustrations/upload.svg',
     },
+    MAX_DAYS_TILL_CONTRACT_EXPIRATION: 60,
     PATHS: {
         CONTRACT : 'contract',
         COOKIES_POLICY : 'cookies-policy',
@@ -55,6 +69,7 @@ export const CONSTS = {
         TERMS_OF_USE : 'terms-of-use',
         WILD_CART  : '**',
     },
+    TIME_TO_CONTRACT_END_PROLONGED: 14,
 };
 
 export const ROUTES = {
@@ -208,3 +223,8 @@ export const  ANNUAL_CONSUMPTION_OPTIONS = [
         label: '45 - 63 MWh',
     },
 ];
+
+export const SUPPLY_POINT_EDIT_TYPE = {
+    NORMAL: 'NORMAL',
+    PROLONG: 'PROLONG',
+};

@@ -7,7 +7,11 @@ import {
 } from '@angular/core';
 
 import * as R from 'ramda';
-import { takeUntil } from 'rxjs/operators';
+import * as R_ from 'ramda-extension';
+import {
+    filter,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AddModalDirective } from './add-modal.directive';
@@ -40,6 +44,7 @@ export class ModalComponent extends AbstractComponent {
         this.modalLoaderService.showModal$
             .pipe(
                 takeUntil(this.destroy$),
+                filter(R_.isNotNil),
             )
             .subscribe(modal => {
                 if (this.component) {
