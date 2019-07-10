@@ -44,7 +44,7 @@ export const CONSTS = {
         TERMS_OF_USE : 'terms-of-use',
         WILD_CART  : '**',
     },
-    FIRST_YEAR_BIRTHDAY_ACCEPTED: 1900,
+    FIRST_YEAR_BIRTHDAY_ACCEPT: 1900,
     TELEPHONE_PREFIX: '+420',
 };
 

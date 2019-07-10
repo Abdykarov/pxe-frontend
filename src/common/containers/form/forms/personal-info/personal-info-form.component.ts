@@ -38,7 +38,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     @Input()
     public formValues: IPersonalData = null;
 
-    public minDate: Date = moment().year(CONSTS.FIRST_YEAR_BIRTHDAY_ACCEPTED).startOf('year').toDate();
+    public minDate: Date = moment().year(CONSTS.FIRST_YEAR_BIRTHDAY_ACCEPT).startOf('year').toDate();
     public maxDate: Date = moment().add(-CONSTS.ADULTHOOD_AGE, 'years').toDate();
     public depositPaymentTypeId = depositPaymentType;
 
