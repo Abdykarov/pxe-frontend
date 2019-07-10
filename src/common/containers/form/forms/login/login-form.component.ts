@@ -31,9 +31,9 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
     public wasSentToPhone = false;
 
     @Output()
-    public forgottenPasswordAction?: EventEmitter<any> = new EventEmitter<any>();
+    public resentAction?: EventEmitter<any> = new EventEmitter<any>();
 
-    public handleForgottenPasswordAction = ($event) => this.forgottenPasswordAction.emit($event);
+    public handleResentAction = () => this.resentAction.emit(this.email);
 
     constructor(
         protected fb: FormBuilder,
@@ -58,6 +58,7 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
                     formValue.email = this.email;
                     this.form.setValue(formValue);
                 }
+                console.log(this.email);
             });
 
         if (isPlatformBrowser(this.platformId) && !this.passwordWasSent) {

@@ -74,15 +74,12 @@ export class SupplyPointSelectionComponent extends AbstractComponent implements 
         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
     }
 
-    public submitSupplyForm = ({id}) => {
-        this.router.navigate(
-            [
-                ROUTES.ROUTER_REQUEST_SUPPLY_POINT,
-            ],
-            {
-                queryParams: {
-                    supplyPointId: id,
-                },
-            });
+    public submitSupplyForm = (supplyPoint) => {
+        const state = {
+            supplyPointCopy: {
+                ...supplyPoint,
+            },
+        };
+        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT], {state});
     }
 }
