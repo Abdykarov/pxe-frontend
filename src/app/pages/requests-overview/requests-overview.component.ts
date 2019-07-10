@@ -11,12 +11,12 @@ import {
     takeUntil,
 } from 'rxjs/operators';
 
+import { AbstractComponent } from 'src/common/abstract.component';
 import {
     AllowedOperations,
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
-import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
 import { inArray } from 'src/common/utils/in-array';
@@ -26,8 +26,8 @@ import {
     OverviewState,
     OverviewStateWrapper,
 } from './requests-overview.model';
-import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { ROUTES } from 'src/app/app.constants';
+import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
     selector: 'pxe-requests-overview',

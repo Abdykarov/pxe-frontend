@@ -79,8 +79,6 @@ export class ContractService {
                     smsCode,
                 },
             });
-        // todo change casche
-        // todo po ujasneni contractStatus
     }
 
     public sendContractConfirmationSms(contractId: string) {

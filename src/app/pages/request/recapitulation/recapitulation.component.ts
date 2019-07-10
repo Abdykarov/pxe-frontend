@@ -21,8 +21,8 @@ import { IFieldError } from 'src/common/containers/form/models/form-definition.m
 import { IPersonalDataInput } from 'src/common/graphql/models/personal-data.model';
 import {
     ISupplyPoint,
-    SubjectType,
     ProgressStatus,
+    SubjectType,
 } from 'src/common/graphql/models/supply.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';

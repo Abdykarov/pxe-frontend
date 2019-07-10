@@ -16,33 +16,33 @@
             </lnd-alert>
         </div>
     </div>
-    <div class="row"
-         *ngIf="supplyPoints">
-        <div class="col-12 col-xl-10 offset-xl-1 text-center">
-            <h2>Vyberte odběrné místo, pro které chcete dostat nabídku</h2>
-        </div>
-    </div>
-    <div class="supply-points"
-         *ngIf="supplyPoints">
+    <ng-container *ngIf="supplyPoints">
         <div class="row">
-            <ng-container *ngFor="let supplyPoint of supplyPoints">
+            <div class="col-12 col-xl-10 offset-xl-1 text-center">
+                <h2>Vyberte odběrné místo, pro které chcete dostat nabídku</h2>
+            </div>
+        </div>
+        <div class="supply-points">
+            <div class="row">
+                <ng-container *ngFor="let supplyPoint of supplyPoints">
+                    <div class="col-md-6">
+                        <pxe-supply-point
+                            [data]="supplyPoint"
+                            [isListItem]="true"
+                            (action)="submitSupplyForm(supplyPoint)">
+                        </pxe-supply-point>
+                    </div>
+                </ng-container>
                 <div class="col-md-6">
-                    <pxe-supply-point
-                        [data]="supplyPoint"
-                        [isListItem]="true"
-                        (action)="submitSupplyForm(supplyPoint)">
-                    </pxe-supply-point>
-                </div>
-            </ng-container>
-            <div class="col-md-6">
-                <div class="supply-point-box-addon">
-                    <lnd-button
-                        (click)="newSupplyPoint()"
-                        label="Nové odběrné místo"
-                        type="secondary">
-                    </lnd-button>
+                    <div class="supply-point-box-addon">
+                        <lnd-button
+                            (click)="newSupplyPoint()"
+                            label="Nové odběrné místo"
+                            type="secondary">
+                        </lnd-button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </ng-container>
 </pxe-layout-container>
