@@ -102,7 +102,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             bankAccountNumber = this.formValues.bankAccountNumber;
             bankCode = this.formValues.bankCode;
             phone = this.formValues.phone && this.formValues.phone.substr(4, 10);
-            phonePrefix = phone && CONSTS.TELEPHONE_PREFIX;
+            phonePrefix = phone && CONSTS.TELEPHONE_PREFIX_CZ;
             email = this.formValues.email;
             depositPaymentTypeId = this.formValues.depositPaymentType && this.formValues.depositPaymentType.code;
             deposit = this.formValues.deposit;

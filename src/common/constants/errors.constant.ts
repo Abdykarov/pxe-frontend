@@ -173,8 +173,8 @@ export const errorFieldMessages =  {
         landLineNumber: 'Pevná linka musí obsahovat 9 číslic.',
     },
     phonePrefix: {
-        required: `Vyplňte předvolbu pro ČR ${CONSTS.TELEPHONE_PREFIX}.`,
-        invalidPhoneNumberPrefix: `Vyplňte správnou předvolbu pro ČR ${CONSTS.TELEPHONE_PREFIX}.`,
+        required: `Vyplňte předvolbu pro ČR ${CONSTS.TELEPHONE_PREFIX_CZ}.`,
+        invalidPhoneNumberPrefix: `Vyplňte správnou předvolbu pro ČR ${CONSTS.TELEPHONE_PREFIX_CZ}.`,
     },
     smsCode: {
         required: 'Vyplňte kód, který vám přišel v SMS.',

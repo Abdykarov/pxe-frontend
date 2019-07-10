@@ -71,7 +71,7 @@ export const formFields: IForm = {
             ],
         ],
         phonePrefix: [
-            CONSTS.TELEPHONE_PREFIX,
+            CONSTS.TELEPHONE_PREFIX_CZ,
             [
                 Validators.required,
                 CustomValidators.phoneNumberPrefix,

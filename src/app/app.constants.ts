@@ -45,7 +45,7 @@ export const CONSTS = {
         WILD_CART  : '**',
     },
     FIRST_YEAR_BIRTHDAY_ACCEPT: 1900,
-    TELEPHONE_PREFIX: '+420',
+    TELEPHONE_PREFIX_CZ: '+420',
 };
 
 export const ROUTES = {
