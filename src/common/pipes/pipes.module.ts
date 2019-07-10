@@ -7,6 +7,7 @@ import { ConsumptionIndicatorPipe } from './consumption-indicator/consumption-in
 import { DateDiffPipe } from './date-diff/date-diff.pipe';
 import { DynamicPipe } from './dynamic/dynamic.pipe';
 import { FilterCommodityTypePipe } from './filter-commodity-type/filter-commodity-type.pipe';
+import { IsAllowedOperationPipe } from 'src/common/pipes/is-allowed-operation/is-allowed-operation.pipe';
 import { IsDatePast } from './is-date-past/is-date-past.pipe';
 import { IsRouteActivePipe } from './is-route-active/is-route-acrive.pipe';
 import { KeysPipe } from './keys/keys.pipe';
@@ -21,6 +22,7 @@ import { SupplyPointStatePipe } from './supply-point-state/supply-point-state.pi
         DateDiffPipe,
         DynamicPipe,
         FilterCommodityTypePipe,
+        IsAllowedOperationPipe,
         IsDatePast,
         IsRouteActivePipe,
         KeysPipe,
@@ -34,6 +36,7 @@ import { SupplyPointStatePipe } from './supply-point-state/supply-point-state.pi
         DateDiffPipe,
         DynamicPipe,
         FilterCommodityTypePipe,
+        IsAllowedOperationPipe,
         IsDatePast,
         IsRouteActivePipe,
         KeysPipe,
@@ -47,9 +50,10 @@ import { SupplyPointStatePipe } from './supply-point-state/supply-point-state.pi
         DateDiffPipe,
         DecimalPipe,
         DynamicPipe,
+        FilterCommodityTypePipe,
+        IsAllowedOperationPipe,
         IsDatePast,
         IsRouteActivePipe,
-        FilterCommodityTypePipe,
         KeysPipe,
         PluralPipe,
         SupplyPointStatePipe,

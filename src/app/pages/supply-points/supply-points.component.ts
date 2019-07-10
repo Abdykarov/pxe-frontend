@@ -31,7 +31,6 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
 
     public error = false;
     public errorMessages = [];
-    public showSupplyPointDeleted = false;
     public supplierPoints: ISupplyPointFindData[];
 
     constructor(
@@ -45,7 +44,6 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
 
     ngOnInit () {
         super.ngOnInit();
-        this.showSupplyPointDeleted = this.route.snapshot.queryParams.deletedSupplyPoint;
 
         this.supplyService.findSupplyPoints()
             .pipe(

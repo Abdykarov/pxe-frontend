@@ -15,7 +15,6 @@ export const CONSTS = {
         DEFAULT: 'CZK',
     },
     DEFAULT_EXPIRATION: 3600,
-    MAX_DAYS_TILL_CONTRACT_EXPIRATION: 60,
     TIME_TO_CONTRACT_END_PROLONGED: 14,
     PATHS: {
         CONTRACT : 'contract',

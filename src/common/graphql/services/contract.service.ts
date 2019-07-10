@@ -135,7 +135,7 @@ export class ContractService {
 
         supplyPoint.contract = {
             contractId: data.saveContract,
-            contractStatus: 'CONCLUDED',
+            contractStatus: 'NOT_CONCLUDED',
             deliveryFrom: '',
             deliveryTo: '',
             offer: {
@@ -196,7 +196,7 @@ export class ContractService {
         };
     }
 
-    public deleteSignedContract(contractId: number, smsConfirmationCode: string) {
+    public deleteSignedContract(contractId: string, smsConfirmationCode: string) {
         return this.apollo
             .mutate({
                 mutation: deleteSignedContract,

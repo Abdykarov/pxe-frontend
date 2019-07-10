@@ -5,6 +5,7 @@ import {
     OnChanges,
     OnInit,
     SimpleChanges,
+    TemplateRef,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -17,25 +18,24 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/abstract-supply-point-form.component';
-import { ContractService } from 'src/common/graphql/services/contract.service';
-import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
-import { ModalService } from 'src/common/containers/modal/modal.service';
 import {
+    AllowedOperations,
     CommodityType,
     ISupplyPoint,
 } from 'src/common/graphql/models/supply.model';
+import { ContractService } from 'src/common/graphql/services/contract.service';
+import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
+import { ModalService } from 'src/common/containers/modal/modal.service';
 import {
     confirmFindNewSupplyPoint,
     confirmFindNewSupplyPointConfig,
     supplyPointDetailAllowedFields,
 } from '../supply-point-form.config';
 import {
-    CONSTS,
     ROUTES,
     SUBJECT_TYPE_OPTIONS,
     TIME_TO_CONTRACT_END_PERIOD_MAP,
 } from 'src/app/app.constants';
-import { VerificationType } from 'src/common/containers/form/forms/supply-point/detail/supply-point-detail.model';
 
 @Component({
     selector: 'pxe-supply-point-detail-form',
@@ -46,16 +46,17 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     @Input()
     public supplyPoint: ISupplyPoint;
 
+    @Input()
+    public contractActionsTemplate: TemplateRef<any>;
+
     public allowedFields = supplyPointDetailAllowedFields;
+    public allowedOperations = AllowedOperations;
     public commodityType = CommodityType;
-    public maxDaysTillContractExpiration = CONSTS.MAX_DAYS_TILL_CONTRACT_EXPIRATION;
     public suppliers = [];
     public subjectName = '';
     public setFormByCommodity = this.setFormFields;
     public timeToContractEndPeriodMap = TIME_TO_CONTRACT_END_PERIOD_MAP;
     public today = new Date().toISOString();
-    public verificationType: VerificationType = VerificationType.NONE;
-    public verificationDefinition = VerificationType;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -167,60 +168,5 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
             }
             this.submitAction.emit(form);
         }
-    }
-
-    public submitVerification = (smsCode: string) => {
-        switch (this.verificationType) {
-            // jaka sluzba na odstoupeni a jaka na vypoved?
-            case VerificationType.WITHDRAWAL_CONTRACT:
-                // fix na BE error vse ma byt string?
-                this.contractService.deleteSignedContract(Number(this.supplyPoint.id), smsCode)
-                    .pipe(
-                        takeUntil(
-                            this.destroy$,
-                        ),
-                    ).subscribe(
-                        (res) => {
-                            // jak resit chyby pod to?
-                            // kam presmerovat ted na odberny mista?
-                        },
-                    );
-            // todo
-            break;
-            case VerificationType.TERMINATE_CONTRACT:
-            // todo
-            break;
-            case VerificationType.REMOVE_CONTRACT:
-                this.router.navigate(
-                    [ROUTES.ROUTER_SUPPLY_POINTS], {
-                        queryParams: {
-                            deletedSupplyPoint: true,
-                        },
-                    });
-            // todo
-            break;
-            case VerificationType.NONE:
-            // todo (ani nemusi bejt)
-            break;
-        }
-        // tam a z5 to ztrati stav si mylsim ze je ok kdyz jde o todle
-        console.log('todo');
-        this.cd.markForCheck();
-    }
-
-    public sendContractConfirmationSms() {
-        this.cd.markForCheck();
-    }
-
-    public withdrawalContract = () => {
-        this.verificationType = VerificationType.WITHDRAWAL_CONTRACT;
-    }
-
-    public terminateContract = () => {
-        this.verificationType = VerificationType.TERMINATE_CONTRACT;
-    }
-
-    public removeSupplyPoint = () => {
-        this.verificationType = VerificationType.REMOVE_CONTRACT;
     }
 }

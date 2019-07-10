@@ -1,24 +1,16 @@
 <ng-template #sendSmsAgainTemplate>
-    <p *ngIf="smsSent && showSentSmsLabelUnderFirstField"
-       class="small"
-       [class.mt-2]="!showSentSmsLabelUnderFirstField">
-        Na číslo {{contract.personalData.phone}}<br /> odešleme ověřovací kód
-    </p>
-    <a (click)="sendContractConfirmationSms()"
+    <a (click)="submitSms()"
        *ngIf="smsSent">
         Poslat SMS kód znovu?
     </a>
 </ng-template>
-<!--csska jsem s Jardou neresil .. (treba to bude uplne jinak)-->
-<!--https://projects.invisionapp.com/d/main#/console/15651456/331773074/preview kod sms ve spatym stepu (jete neni nic poslany) -->
-<!--Jelikoz tu nebyl ani hamr neresil jsem ani jak to ma vypadat neni skym-->
 <form
     [formGroup]="form"
     autocomplete="off"
     (keydown)="resetCustomFieldError()"
     (change)="resetCustomFieldError()">
     <div class="row">
-        <div  [ngClass]="classRootWrapper">
+        <div [ngClass]="classRootWrapper">
             <div [ngClass]="classMainWrapper">
                 <div [ngClass]="classFirstField">
                     <lnd-form-field
@@ -37,7 +29,7 @@
                 <div [ngClass]="classSecondField">
                     <lnd-button
                         *ngIf="!smsSent"
-                        (action)="sendContractConfirmationSms()"
+                        (action)="submitSms()"
                         [isDisabled]="formLoading"
                         label="Odeslat ověřovací kód"
                         type="primary">

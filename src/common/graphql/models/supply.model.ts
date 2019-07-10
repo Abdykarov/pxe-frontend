@@ -6,7 +6,7 @@ export enum CommodityType {
 }
 
 export enum SupplyPointState {
-    CREATE =  'CREATE',
+    CREATE = 'CREATE',
     CHOOSE_OFFER = 'CHOOSE_OFFER',
     PERSONAL_INFO = 'PERSONAL_INFO',
     CONTRACT = 'CONTRACT',
@@ -27,6 +27,14 @@ export enum SubjectType {
 export enum TimeToContractEndPeriod {
     DAY = 'Den',
     MONTH = 'Mesic',
+}
+
+export enum AllowedOperations {
+    DELETE = 'DELETE',
+    LEAVE_CONTRACT = 'LEAVE_CONTRACT',
+    PARTIAL_EDIT = 'PARTIAL_EDIT',
+    SHOW_DELIVERY_TO = 'SHOW_DELIVERY_TO',
+    TERMINATE_CONTRACT = 'TERMINATE_CONTRACT',
 }
 
 export interface IAddress {
@@ -91,6 +99,7 @@ export interface ISupplyPointUpdatePowerAttributes {
 export interface ISupplyPoint {
     id: string;
     name: string;
+    allowedOperations: AllowedOperations[];
     commodityType: CommodityType;
     supplier: ISupplier;
     ean: string;
@@ -104,6 +113,7 @@ export interface ISupplyPoint {
     subject: ICodelistItem;
     lastAnnualConsumptionNT: number;
     lastAnnualConsumptionVT: number;
+    lastVersionOfSupplyPoint: boolean;
     contractEndType: ICodelistItem;
     timeToContractEnd: number;
     timeToContractEndPeriod: ICodelistItem;

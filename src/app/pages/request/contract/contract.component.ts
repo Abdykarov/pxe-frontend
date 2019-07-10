@@ -41,6 +41,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public fieldError: IFieldError = {};
     public formLoading = false;
     public globalError: string[] = [];
+    public smsSent: number = null;
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
@@ -120,7 +121,24 @@ export class ContractComponent extends AbstractComponent implements OnInit {
             );
     }
 
-    public sendContractConfirmationSms() {
-        this.cd.markForCheck();
+    public sendContractConfirmationSms = () => {
+        this.formLoading = true;
+        this.contractService.sendContractConfirmationSms(this.supplyPoint.contract.contractId)
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                () => {
+                    this.formLoading = false;
+                    this.smsSent = new Date().getTime();
+                    this.cd.markForCheck();
+                },
+                (error) => {
+                    this.formLoading = false;
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
+                },
+            );
     }
 }

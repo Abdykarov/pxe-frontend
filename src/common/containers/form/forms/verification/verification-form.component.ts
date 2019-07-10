@@ -4,13 +4,9 @@ import {
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
-import { takeUntil } from 'rxjs/operators';
-
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
-import { ContractService } from 'src/common/graphql/services/contract.service';
-import { formFields } from 'src/common/containers/form/forms/verification/verification-form.config';
+import { formFields } from './verification-form.config';
 import { IContract } from 'src/common/graphql/models/contract';
-import { parseGraphQLErrors } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-verification-form',
@@ -18,8 +14,7 @@ import { parseGraphQLErrors } from 'src/common/utils';
     styleUrls: ['./verification-form.component.scss'],
 })
 export class VerificationFormComponent extends AbstractFormComponent {
-
-    public formFields = formFields;
+    @Input()
     public smsSent: number = null;
 
     @Input()
@@ -43,8 +38,9 @@ export class VerificationFormComponent extends AbstractFormComponent {
     @Input()
     public showSentSmsLabelUnderFirstField = true;
 
+    public formFields = formFields;
+
     constructor(
-        private contractService: ContractService,
         protected fb: FormBuilder,
     ) {
         super(fb);
@@ -58,26 +54,8 @@ export class VerificationFormComponent extends AbstractFormComponent {
         }
     }
 
-
-    public sendContractConfirmationSms() {
-        this.formLoading = true;
-        this.contractService.sendContractConfirmationSms(this.contract.contractId)
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe(
-                () => {
-                    this.formLoading = false;
-                    this.smsSent = new Date().getTime();
-                    this.customAction.emit();
-                },
-                (error) => {
-                    this.formLoading = false;
-                    const { globalError } = parseGraphQLErrors(error);
-                    this.globalError = globalError;
-                    this.customAction.emit();
-                },
-            );
+    public submitSms = () => {
+        this.resetFormError();
+        this.customAction.emit();
     }
-
 }
