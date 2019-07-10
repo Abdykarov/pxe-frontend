@@ -5,31 +5,29 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 
-import * as moment from 'moment';
 import * as R from 'ramda';
 import {
     map,
     takeUntil,
 } from 'rxjs/operators';
 
-import { AbstractComponent } from 'src/common/abstract.component';
 import {
-    CONSTS,
-    ROUTES,
-} from 'src/app/app.constants';
-import { ContractStatus } from 'src/common/graphql/models/contract';
-import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
-import { IsDatePast } from 'src/common/pipes/is-date-past/is-date-past.pipe';
-import {
+    AllowedOperations,
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
+import { AbstractComponent } from 'src/common/abstract.component';
+import { ContractStatus } from 'src/common/graphql/models/contract';
+import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
+import { inArray } from 'src/common/utils/in-array';
+import { IsDatePast } from 'src/common/pipes/is-date-past/is-date-past.pipe';
 import { parseGraphQLErrors } from 'src/common/utils';
 import {
     OverviewState,
     OverviewStateWrapper,
 } from './requests-overview.model';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { ROUTES } from 'src/app/app.constants';
 
 @Component({
     selector: 'pxe-requests-overview',
@@ -44,6 +42,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
     public overviewStates = OverviewState;
     public state: OverviewState;
     public supplyPoints: ISupplyPoint[];
+    public sourceSupplyPoints: ISupplyPoint[] = null;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -56,11 +55,10 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
     }
 
     ngOnInit() {
-        // overit jeste pak ma byt navic waiting_for_payment status
         this.supplyService.findSupplyPointsByContractStatus(null,
             [
                 ContractStatus.NOT_CONCLUDED,
-                // ContractStatus.WAITING_FOR_PAYMENT,
+                ContractStatus.CONCLUDED,
             ])
             .pipe(
                 takeUntil(this.destroy$),
@@ -68,6 +66,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
             )
             .subscribe(
                 (supplyPoints: ISupplyPoint[]) => {
+                    this.sourceSupplyPoints = supplyPoints;
                     this.loadingRequests = false;
                     this.setOverviewState(supplyPoints);
                     this.cd.markForCheck();
@@ -82,21 +81,8 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
     }
 
     public completeRequest = (supplyPoint: ISupplyPoint): void => {
-        if (!supplyPoint.contract || this.isDatePast.transform(supplyPoint.contract.offer.validTo)) {
-            this.router.navigate(
-                [this.getRouterForCompleteRequest(supplyPoint.progressStatus)],
-                {
-                    queryParams: {
-                        supplyPointId: supplyPoint.id,
-                    },
-                });
-            return;
-        }
-
         this.router.navigate(
-            [
-                ROUTES.ROUTER_REQUEST_OFFER_SELECTION,
-            ],
+            [this.getRouterForCompleteRequest(supplyPoint.progressStatus)],
             {
                 queryParams: {
                     supplyPointId: supplyPoint.id,
@@ -106,89 +92,56 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
 
     public newRequest = (evt): void => {
         evt.preventDefault();
-        this.supplyService.findSupplyPointsByContractStatus(null,
-            [
-                ContractStatus.CONCLUDED,
-            ])
-            .pipe(
-                takeUntil(this.destroy$),
-                map(({data}) =>  data.findSupplyPointsByContractStatus),
-            )
-            .subscribe(
-                (supplyPoints: ISupplyPoint[]) => {
-                    if ( supplyPoints.length !== 0) {
-                        this.router.navigate(
-                            [ROUTES.ROUTER_REQUEST_SUPPLY_POINT_SELECTION],
-                        );
-                        return;
-                    }
-                    this.router.navigate(
-                        [ROUTES.ROUTER_REQUEST_SUPPLY_POINT],
-                    );
-                },
-                error => {
-                    this.supplyPoints = null;
-                    const { globalError } = parseGraphQLErrors(error);
-                    this.globalError = globalError;
-                    this.cd.markForCheck();
-                },
+        if (R.find(
+            (supplyPoint: ISupplyPoint) =>
+                inArray(AllowedOperations.SHOW_DELIVERY_TO, supplyPoint.allowedOperations),
+        )(this.sourceSupplyPoints)) {
+            this.router.navigate(
+                [ROUTES.ROUTER_REQUEST_SUPPLY_POINT_SELECTION],
             );
+            return;
+        }
+        this.router.navigate(
+            [ROUTES.ROUTER_REQUEST_SUPPLY_POINT],
+        );
     }
 
-    public isSomeContractEnding = (supplyPoints: ISupplyPoint[]): boolean =>
-        R.find((supplyPoint: ISupplyPoint) => this.contractEnding(supplyPoint), supplyPoints)
-
-    public contractEnding = (supplyPoint: ISupplyPoint) =>
-        supplyPoint.contract
-            && this.dateDiffPipe.transform(
-                supplyPoint.contract.deliveryTo, moment().add(CONSTS.START_CONTRACT_ENDING , 'month')
-                .toISOString(), 'seconds') < 0
-            && this.dateDiffPipe.transform(moment().toISOString(), supplyPoint.contract.deliveryTo, 'seconds') >= 0
-
-    public isSomeRequest = (supplyPoints: ISupplyPoint[]): boolean =>
+    public isAnyRequest = (supplyPoints: ISupplyPoint[]): boolean =>
         R.find((supplyPoint: ISupplyPoint) => (this.isRequest(supplyPoint)), supplyPoints)
 
-    // todo waiting for payment
+    // supplyPoint.contract === null  je ok?
     public isRequest = (supplyPoint: ISupplyPoint): boolean =>
-        supplyPoint.contract === null || supplyPoint.contract.contractStatus !== ContractStatus.CONCLUDED
+        supplyPoint.contract === null || supplyPoint.contract.contractStatus === ContractStatus.NOT_CONCLUDED
 
     public setOverviewState = (supplyPointsInput: ISupplyPoint[]): void => {
         const overviewStateWrapper: OverviewStateWrapper = R.cond([
             [
                 R.isEmpty,
-                () => {
-                    return {
-                        overviewState: OverviewState.NO_REQUEST,
-                        supplyPoints: [],
-                    };
-                },
+                () => ({
+                    overviewState: OverviewState.NO_REQUEST,
+                    supplyPoints: [],
+                }),
             ],
             [
-                this.isSomeRequest,
-                (supplyPoints: ISupplyPoint[]) => {
-                    return {
-                        overviewState: OverviewState.REQUESTS,
-                        supplyPoints: R.filter((supplyPoint: ISupplyPoint) => this.isRequest(supplyPoint), supplyPoints),
-                    };
-                },
+                this.isAnyRequest,
+                (supplyPoints: ISupplyPoint[]) => ({
+                    overviewState: OverviewState.REQUESTS,
+                    supplyPoints: R.filter((supplyPoint: ISupplyPoint) => this.isRequest(supplyPoint), supplyPoints),
+                }),
             ],
-            [
-                this.isSomeContractEnding,
-                (supplyPoints: ISupplyPoint[]) => {
-                    return {
-                        overviewState: OverviewState.SOME_SUPPLY_POINTS_ENDING_SUPPLY,
-                        supplyPoints: R.filter((supplyPoint: ISupplyPoint) => this.contractEnding(supplyPoint), supplyPoints),
-                    };
-                },
-            ],
+            // [
+            //     this.isAnyContractEnding,
+            //     (supplyPoints: ISupplyPoint[]) => ({
+            //         overviewState: OverviewState.SOME_SUPPLY_POINTS_ENDING_SUPPLY,
+            //         supplyPoints: R.filter((supplyPoint: ISupplyPoint) => this.contractEnding(supplyPoint), supplyPoints),
+            //     }),
+            // ],
             [
                 R.T(),
-                (supplyPoints: ISupplyPoint[]) => {
-                    return {
-                        overviewState: OverviewState.ALL_SUPPLY_POINTS_HAVE_SUPPLY_POINTS,
-                        supplyPoints: supplyPoints,
-                    };
-                },
+                (supplyPoints: ISupplyPoint[]) => ({
+                    overviewState: OverviewState.ALL_SUPPLY_POINTS_HAVE_SUPPLY_POINTS,
+                    supplyPoints: supplyPoints,
+                }),
             ],
         ])(supplyPointsInput);
 
@@ -220,4 +173,15 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
         event.preventDefault();
         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
     }
+
+
+    // public isAnyContractEnding = (supplyPoints: ISupplyPoint[]): boolean =>
+    //     R.find((supplyPoint: ISupplyPoint) => this.contractEnding(supplyPoint), supplyPoints)
+
+    // public contractEnding = (supplyPoint: ISupplyPoint) =>
+    //     supplyPoint.contract
+    //         && this.dateDiffPipe.transform(
+    //             supplyPoint.contract.deliveryTo, moment().add(CONSTS.START_CONTRACT_ENDING , 'month')
+    //             .toISOString(), 'seconds') <= 0
+    //         && this.dateDiffPipe.transform(moment().toISOString(), supplyPoint.contract.deliveryTo, 'seconds') >= 0
 }

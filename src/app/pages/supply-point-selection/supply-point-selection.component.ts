@@ -12,11 +12,13 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
+    AllowedOperations,
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.fnc';
+import { inArray } from 'src/common/utils/in-array';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
@@ -42,14 +44,16 @@ export class SupplyPointSelectionComponent extends AbstractComponent implements 
     }
 
     ngOnInit() {
-        // todo overeni s BE korektni nacitani
         this.supplyService.findSupplyPointsByContractStatus(null,
             [
-                ContractStatus.NOT_CONCLUDED,
+                ContractStatus.CONCLUDED,
             ])
             .pipe(
                 takeUntil(this.destroy$),
-                map( ({data}) =>  data.findSupplyPointsByContractStatus),
+                map( ({data}) =>
+                    data.findSupplyPointsByContractStatus.filter((supplyPoint: ISupplyPoint) =>
+                        inArray(AllowedOperations.SHOW_DELIVERY_TO, supplyPoint.allowedOperations),
+                )),
             )
             .subscribe(
                 (supplyPoints: ISupplyPoint[]) => {
@@ -70,11 +74,10 @@ export class SupplyPointSelectionComponent extends AbstractComponent implements 
         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
     }
 
-    // tady overit jeslti se nemusi ulozit nova verze OM
     public submitSupplyForm = ({id}) => {
         this.router.navigate(
             [
-                ROUTES.ROUTER_REQUEST_OFFER_SELECTION,
+                ROUTES.ROUTER_REQUEST_SUPPLY_POINT,
             ],
             {
                 queryParams: {
