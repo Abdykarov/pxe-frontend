@@ -30,6 +30,26 @@
 				}
 			}
 		}
+
+		.list-supply-point-addon {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			min-height: 255px;
+			height: calc(100% - #{$spacer});
+			padding: ( $spacer * 1.5 );
+			border-radius: $border-radius;
+			box-shadow: $box-shadow;
+
+			// Media queries
+			@include media-breakpoint-up(lg) {
+				padding: ( $spacer * 2 );
+			}
+
+			> :nth-child(n) {
+				pointer-events: auto;
+			}
+		}
 	}
 }
 
@@ -37,6 +57,7 @@
 	@include link-without-href-self {
 		pointer-events: auto;
 		display: block;
+		height: calc(100% - #{$spacer});
 		margin-bottom: $spacer;
 		background-color: $white;
 		color: inherit;
@@ -45,8 +66,10 @@
 		overflow: hidden;
 
 		// Media queries
-		@include media-breakpoint-down(md) {
-			pointer-events: none;
+		&:not(.supply-point--list-item) {
+			@include media-breakpoint-down(md) {
+				pointer-events: none;
+			}
 		}
 	}
 
