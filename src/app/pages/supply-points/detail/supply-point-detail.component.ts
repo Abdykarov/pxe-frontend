@@ -32,7 +32,7 @@ import {
 } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { VerificationType } from 'src/common/containers/form/forms/supply-point/detail/supply-point-detail.model';
+import { ContractActions } from '../models/supply-point-detail.model';
 
 @Component({
     templateUrl: './supply-point-detail.component.html',
@@ -49,8 +49,8 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     public smsSent: number = null;
     public supplyPoint: ISupplyPoint = null;
     public supplyPointId = this.route.snapshot.params.supplyPointId;
-    public verificationType: VerificationType = VerificationType.NONE;
-    public verificationDefinition = VerificationType;
+    public contractAction: ContractActions = ContractActions.NONE;
+    public contractActions = ContractActions;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -155,6 +155,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
 
     public submitVerification = (smsCode: string) => {
         this.formLoading = true;
+        this.globalError = [];
         this.contractService.deleteSignedContract(this.supplyPoint.contract.contractId, smsCode)
             .pipe(
                 takeUntil(
@@ -168,7 +169,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
                     this.router.navigate([ROUTES.ROUTER_REQUEST]);
                 } else {
                     // TODO - temporary
-                    this.globalError.push('Od smlouvu se nepodařilo odstoupit.');
+                    this.globalError.push('Od smlouvy se nepodařilo odstoupit.');
                     scrollToElementFnc('top');
                 }
             },
@@ -183,12 +184,12 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     }
 
     public leaveContract = () => {
-        this.verificationType = VerificationType.WITHDRAWAL_CONTRACT;
+        this.contractAction = ContractActions.LEAVE_CONTRACT;
         this.smsSent = null;
     }
 
     public terminateContract = () => {
-        this.verificationType = VerificationType.TERMINATE_CONTRACT;
+        this.contractAction = ContractActions.TERMINATE_CONTRACT;
         this.smsSent = null;
     }
 }

@@ -13,7 +13,7 @@
                     size="sm">
             </lnd-button>
         </div>
-        <div *ngIf="verificationType === verificationDefinition.WITHDRAWAL_CONTRACT"
+        <div *ngIf="contractAction === contractActions.LEAVE_CONTRACT"
              class="col-12 mt-4">
             <pxe-verification-form
                     [fieldError]="fieldError"
@@ -46,7 +46,7 @@
                     size="sm">
             </lnd-button>
         </div>
-        <div *ngIf="verificationType === verificationDefinition.TERMINATE_CONTRACT"
+        <div *ngIf="contractAction === contractActions.TERMINATE_CONTRACT"
              class="col-12 mt-4">
             <pxe-verification-form
                     [fieldError]="fieldError"

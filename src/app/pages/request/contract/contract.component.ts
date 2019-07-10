@@ -86,6 +86,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
 
     public signContract(smsCode: string) {
         this.formLoading = true;
+        this.globalError = [];
         this.contractService.signContract(
                 this.supplyPoint.contract.contractId,
                 smsCode,

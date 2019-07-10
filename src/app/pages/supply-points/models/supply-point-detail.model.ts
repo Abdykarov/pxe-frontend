@@ -1,6 +1,6 @@
-export enum VerificationType {
+export enum ContractActions {
     NONE = 'NONE',
     TERMINATE_CONTRACT = 'TERMINATE_CONTRACT',
     REMOVE_CONTRACT = 'REMOVE_CONTRACT',
-    WITHDRAWAL_CONTRACT = 'WITHDRAWAL_CONTRACT',
+    LEAVE_CONTRACT = 'LEAVE_CONTRACT',
 }
