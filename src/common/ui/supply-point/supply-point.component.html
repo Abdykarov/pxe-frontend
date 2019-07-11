@@ -1,18 +1,20 @@
 <a class="supply-point"
+   [class.supply-point--list-item]="isListItem"
    (click)="action.emit(data)">
     <div class="row no-gutters">
-        <div class="col-12 col-xl-7">
+        <div class="col-12"
+             [class.col-xl-7]="!isListItem">
             <div class="supply-point__inner supply-point__inner--info">
                 <div class="row mb-4">
                     <div class="col-3 col-md-2 text-center">
                         <span
-                            [class.icon--flame]="data.commodityType === 'GAS'"
-                            [class.icon--flash]="data.commodityType === 'POWER'"
+                            [class.icon--flame]="data.commodityType === commodityType.GAS"
+                            [class.icon--flash]="data.commodityType === commodityType.POWER"
                             class="icon supply-point__icon"></span>
                     </div>
                     <div class="col-9 col-md-10">
                         <span class="supply-point__title">{{data.name}}</span>
-                        <span *ngIf="data.commodityType === 'POWER'"
+                        <span *ngIf="data.commodityType === commodityType.POWER"
                               class="supply-point__title-subtext">
                             {{data.distributionRate.description}} ({{data.distributionRate.code}})
                         </span>
@@ -21,7 +23,7 @@
                 <div class="row">
                     <div class="col-12 col-md-10 offset-md-2">
                         <div class="row justify-content-between">
-                            <div *ngIf="data.commodityType === 'POWER'"
+                            <div *ngIf="data.commodityType === commodityType.POWER"
                                  class="col-6 col-md-auto">
                                 <div class="supply-point__value-box">
                                     <span class="supply-point__value-name">Jistič</span>
@@ -36,11 +38,11 @@
                             </div>
                             <div class="col-12 col-md-auto order-md-1">
                                 <div class="supply-point__value-box">
-                                    <span *ngIf="data.commodityType === 'POWER'"
+                                    <span *ngIf="data.commodityType === commodityType.POWER"
                                           class="supply-point__value-name">
                                         EAN
                                     </span>
-                                    <span *ngIf="data.commodityType === 'GAS'"
+                                    <span *ngIf="data.commodityType === commodityType.GAS"
                                           class="supply-point__value-name">
                                         EIC
                                     </span>
@@ -52,7 +54,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-xl-5">
+        <div *ngIf="!isListItem"
+             class="col-12 col-xl-5">
             <div class="supply-point__inner supply-point__inner--price">
                 <div class="row">
                     <div class="col-12 col-md-10 offset-md-2 col-xl-12 offset-xl-0">

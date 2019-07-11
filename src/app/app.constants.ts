@@ -8,14 +8,15 @@ import { IOption } from 'src/common/ui/forms/models/option.model';
 
 export const CONSTS = {
     ADULTHOOD_AGE: 18,
+    CURRENCY: {
+        DEFAULT: 'CZK',
+    },
     DATE_FORMAT: {
         CALENDAR: 'YYYY-MM-DD[T]HH:mm',
         SHORT: 'YYYY-MM-DD',
     },
-    CURRENCY: {
-        DEFAULT: 'CZK',
-    },
     DEFAULT_EXPIRATION: 3600,
+    MAX_DAYS_TILL_CONTRACT_EXPIRATION: 60,
     MIN_BIRTH_YEAR: 1900,
     PATHS: {
         CONTRACT : 'contract',
@@ -46,6 +47,7 @@ export const CONSTS = {
         WILD_CART  : '**',
     },
     TELEPHONE_PREFIX_CZ: '+420',
+    TIME_TO_CONTRACT_END_PROLONGED: 14,
 };
 
 export const ROUTES = {
@@ -199,3 +201,8 @@ export const  ANNUAL_CONSUMPTION_OPTIONS = [
         label: '45 - 63 MWh',
     },
 ];
+
+export const SUPPLY_POINT_EDIT_TYPE = {
+    NORMAL: 'NORMAL',
+    PROLONG: 'PROLONG',
+};

@@ -20,19 +20,22 @@ import { IBannerObj } from './models/banner-object.model';
 export class BannerUIComponent extends AbstractComponent {
 
     @Input()
+    public bannerText: string;
+
+    @Input()
     public buttonLabel: string;
 
     @Input()
     public data?: IBannerObj;
 
     @Input()
-    public showButtonLabel = true;
+    public icon?: string;
 
     @Input()
-    public staticBannerTitle?: string;
+    public showButtonLabel = true;
 
     @Output()
-    public staticBannerAction?: EventEmitter<any> = new EventEmitter<any>();
+    public customBannerAction?: EventEmitter<any> = new EventEmitter<any>();
 
     public bannerAction(value: string, type: string, state: any = null) {
         if (type === 'external') {

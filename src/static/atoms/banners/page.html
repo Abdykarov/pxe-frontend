@@ -7,8 +7,10 @@
     <div class="row">
         <div class="col">
             <lnd-banner-ui
-                [data]="bannerObj"
+                [bannerText]="bannerText"
+                icon="icon--info"
                 buttonLabel="Button label"
+                (buttonAction)="clicked($event)"
             ></lnd-banner-ui>
         </div>
     </div>
