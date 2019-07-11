@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 
 // own classes
-import { BannerTypePipe } from 'src/common/pipes/banner-type/banner-type.pipe';
 import { ConsumptionPipe } from './consumption/consumption.pipe';
 import { ConsumptionIndicatorPipe } from './consumption-indicator/consumption-indicator.pipe';
 import { DateDiffPipe } from './date-diff/date-diff.pipe';
@@ -17,7 +16,6 @@ import { SupplyPointStatePipe } from './supply-point-state/supply-point-state.pi
 
 @NgModule({
     declarations: [
-        BannerTypePipe,
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,
@@ -31,7 +29,6 @@ import { SupplyPointStatePipe } from './supply-point-state/supply-point-state.pi
         ValuesPipe,
     ],
     exports: [
-        BannerTypePipe,
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,
@@ -45,7 +42,6 @@ import { SupplyPointStatePipe } from './supply-point-state/supply-point-state.pi
         ValuesPipe,
     ],
     providers: [
-        BannerTypePipe,
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,
