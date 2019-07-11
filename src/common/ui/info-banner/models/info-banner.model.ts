@@ -1,5 +1,5 @@
-export enum BannerType {
-    ACCEPTED = 'ACCEPTED',
+export enum BannerTypeImages {
+    ACCEPTED = '/assets/images/illustrations/accepted.svg',
     DOCUMENTS = 'DOCUMENTS',
     DOCUMENTS_ALERT = 'DOCUMENTS_ALERT',
     HOUSE = 'HOUSE',

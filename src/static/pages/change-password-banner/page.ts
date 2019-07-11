@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
-import { BannerType } from 'src/static/organisms/info-banner/info-banner.model';
+import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 
 @Component({
     templateUrl: './page.html',
 })
 export class ChangePasswordBannerPageComponent {
-    public bannerType = BannerType.ACCEPTED;
+    public bannerType = BannerTypeImages;
     public bannerTitle = 'Vaše heslo bylo úspěšně změněno';
 
     public buttonLabel = 'Pokračovat';

@@ -4,7 +4,7 @@ import {
     Input,
     Output,
 } from '@angular/core';
-import { BannerType } from 'src/static/organisms/info-banner/info-banner.model';
+import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 
 @Component({
     selector: 'lnd-info-banner',
@@ -23,7 +23,7 @@ export class InfoBannerComponent {
     public bannerDescription: string;
 
     @Input()
-    public bannerType: BannerType = BannerType.HOUSE_ALERT;
+    public bannerType: BannerTypeImages = BannerTypeImages.HOUSE_ALERT;
 
     @Input()
     public buttonCustomClass  = 'info-banner__btn';
