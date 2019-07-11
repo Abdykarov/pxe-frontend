@@ -16,6 +16,7 @@ export const CONSTS = {
         DEFAULT: 'CZK',
     },
     DEFAULT_EXPIRATION: 3600,
+    MIN_BIRTH_YEAR: 1900,
     PATHS: {
         CONTRACT : 'contract',
         COOKIES_POLICY : 'cookies-policy',
@@ -44,7 +45,6 @@ export const CONSTS = {
         TERMS_OF_USE : 'terms-of-use',
         WILD_CART  : '**',
     },
-    MIN_BIRTH_YEAR: 1900,
     TELEPHONE_PREFIX_CZ: '+420',
 };
 
