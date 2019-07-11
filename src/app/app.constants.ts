@@ -7,16 +7,15 @@ import {
 import { IOption } from 'src/common/ui/forms/models/option.model';
 
 export const CONSTS = {
+    CURRENCY: {
+        DEFAULT: 'CZK',
+    },
     DATE_FORMAT: {
         CALENDAR: 'YYYY-MM-DD[T]HH:mm',
         SHORT: 'YYYY-MM-DD',
     },
-    CURRENCY: {
-        DEFAULT: 'CZK',
-    },
     DEFAULT_EXPIRATION: 3600,
     MAX_DAYS_TILL_CONTRACT_EXPIRATION: 60,
-    TIME_TO_CONTRACT_END_PROLONGED: 14,
     PATHS: {
         CONTRACT : 'contract',
         COOKIES_POLICY : 'cookies-policy',
@@ -45,6 +44,7 @@ export const CONSTS = {
         TERMS_OF_USE : 'terms-of-use',
         WILD_CART  : '**',
     },
+    TIME_TO_CONTRACT_END_PROLONGED: 14,
 };
 
 export const ROUTES = {
