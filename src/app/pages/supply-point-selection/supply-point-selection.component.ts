@@ -51,9 +51,11 @@ export class SupplyPointSelectionComponent extends AbstractComponent implements 
             .pipe(
                 takeUntil(this.destroy$),
                 map( ({data}) =>
-                    data.findSupplyPointsByContractStatus.filter((supplyPoint: ISupplyPoint) =>
-                        inArray(AllowedOperations.SHOW_DELIVERY_TO, supplyPoint.allowedOperations),
-                )),
+                    data.findSupplyPointsByContractStatus
+                        .filter(
+                            (supplyPoint: ISupplyPoint) => inArray(AllowedOperations.SHOW_DELIVERY_TO, supplyPoint.allowedOperations),
+                        ),
+                    ),
             )
             .subscribe(
                 (supplyPoints: ISupplyPoint[]) => {
@@ -70,11 +72,11 @@ export class SupplyPointSelectionComponent extends AbstractComponent implements 
             );
     }
 
-    public newSupplyPoint() {
+    public createSupplyPoint = () => {
         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
     }
 
-    public submitSupplyForm = (supplyPoint) => {
+    public navigateToSupplyPoint = (supplyPoint: ISupplyPoint) => {
         const state = {
             supplyPointCopy: {
                 ...supplyPoint,
