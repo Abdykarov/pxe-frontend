@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {
     FormControl,
-    FormGroup, Validators,
+    FormGroup,
 } from '@angular/forms';
 
 import { configStepper } from './config';
@@ -28,6 +28,7 @@ export class RecapitulationPageComponent {
         onlyAddress1: new FormControl(),
         depositPaymentTypeId: new FormControl(),
         deposit: new FormControl(),
+        birthDate: new FormControl(),
     });
 
     submitForm = (evt) => {
