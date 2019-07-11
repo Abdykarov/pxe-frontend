@@ -17,6 +17,7 @@ import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
+import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
 import { inArray } from 'src/common/utils/in-array';
@@ -35,7 +36,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./requests-overview.component.scss'],
 })
 export class RequestsOverviewComponent extends AbstractComponent implements OnInit {
-    public readonly BANNER_IMAGE_SRC_OK = '/assets/images/illustrations/accepted.svg';
+    public readonly BANNER_TYPE_ACCEPTED = BannerTypeImages.ACCEPTED;
 
     public globalError: string[] = [];
     public loadingRequests = true;
