@@ -5,7 +5,10 @@ import {
     Output,
 } from '@angular/core';
 
-import { ISupplyPointFindData } from 'src/common/graphql/models/supply.model';
+import {
+    CommodityType,
+    ISupplyPointFindData,
+} from 'src/common/graphql/models/supply.model';
 
 @Component({
     selector: 'pxe-supply-point',
@@ -24,4 +27,6 @@ export class SupplyPointComponent {
 
     @Output()
     public action: EventEmitter<any> = new EventEmitter();
+
+    public commodityType = CommodityType;
 }

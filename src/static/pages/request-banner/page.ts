@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
+
+
 @Component({
     templateUrl: './page.html',
 })
@@ -9,7 +12,7 @@ export class RequestBannerPageComponent {
 
     public buttonLabel = 'Nová poptávka';
 
-    public bannerObj = {
+    public bannerObj: IBannerObj = {
         linkValue: 'basic/request-banner',
         text: 'BYT Babička, Praha – můžete získat již od 520 Kč',
     };

@@ -30,12 +30,12 @@
 				}
 			}
 		}
-		
-		.supply-point-box-addon {
+
+		.list-supply-point-addon {
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			min-height: 255px;			
+			min-height: 255px;
 			height: calc(100% - #{$spacer});
 			padding: ( $spacer * 1.5 );
 			border-radius: $border-radius;
@@ -66,8 +66,10 @@
 		overflow: hidden;
 
 		// Media queries
-		@include media-breakpoint-down(md) {
-			pointer-events: none;
+		&:not(.supply-point--list-item) {
+			@include media-breakpoint-down(md) {
+				pointer-events: none;
+			}
 		}
 	}
 
