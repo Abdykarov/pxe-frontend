@@ -38,7 +38,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     @Input()
     public formValues: IPersonalData = null;
 
-    public minDate: Date = moment().year(CONSTS.FIRST_YEAR_BIRTHDAY_ACCEPT).startOf('year').toDate();
+    public minDate: Date = moment().year(CONSTS.MIN_BIRTH_YEAR).startOf('year').toDate();
     public maxDate: Date = moment().add(-CONSTS.ADULTHOOD_AGE, 'years').toDate();
     public depositPaymentTypeId = depositPaymentType;
 
@@ -86,7 +86,6 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         let bankAccountNumber = null;
         let bankCode = null;
         let phone = null;
-        let phonePrefix = null;
         let email = null;
         let depositPaymentTypeId = null;
         let deposit = null;
@@ -102,7 +101,6 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             bankAccountNumber = this.formValues.bankAccountNumber;
             bankCode = this.formValues.bankCode;
             phone = this.formValues.phone && this.formValues.phone.substr(4, 10);
-            phonePrefix = phone && CONSTS.TELEPHONE_PREFIX_CZ;
             email = this.formValues.email;
             depositPaymentTypeId = this.formValues.depositPaymentType && this.formValues.depositPaymentType.code;
             deposit = this.formValues.deposit;
@@ -118,7 +116,6 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         this.form.controls['bankAccountNumber'].setValue(bankAccountNumber);
         this.form.controls['bankCode'].setValue(bankCode);
         this.form.controls['phone'].setValue(phone);
-        this.form.controls['phonePrefix'].setValue(phonePrefix);
         this.form.controls['email'].setValue(email);
         this.form.controls['depositPaymentTypeId'].setValue(depositPaymentTypeId);
         this.form.controls['deposit'].setValue(deposit);
