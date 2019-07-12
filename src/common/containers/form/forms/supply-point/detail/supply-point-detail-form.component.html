@@ -178,9 +178,9 @@
                 <ng-container *ngIf="contractActionsTemplate">
                     <ng-container *ngTemplateOutlet="contractActionsTemplate"></ng-container>
                 </ng-container>
-                <div *ngIf="supplyPoint | pathValue:['allowedOperations'] | isAllowedOperation: allowedOperations.PARTIAL_EDIT"
-                     class="row text-center">
-                    <div class="col-12 mb-2">
+                <div class="row text-center">
+                    <div *ngIf="supplyPoint | isAllowedOperation: allowedOperations.PARTIAL_EDIT"
+                         class="col-12 mb-2">
                         <lnd-button
                                 label="Uložit"
                                 type="primary"
