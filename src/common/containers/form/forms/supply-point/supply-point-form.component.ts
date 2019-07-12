@@ -71,6 +71,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public subjectTypeOptions: Array<IOption> = SUBJECT_TYPE_OPTIONS;
     public suppliers = [];
     public suppliers$: BehaviorSubject<any> = new BehaviorSubject([]);
+    public contractEndType = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -95,7 +96,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 this.setFormByCommodity(commodityType);
                 this.resetFieldValue('supplierId', false);
                 this.setAnnualConsumptionNTState(commodityType === CommodityType.POWER ? this.getFieldValue('distributionRateId') : null);
-                this.setContractEndFields(this.getFieldValue('contractEndTypeId') || CONTRACT_END_TYPE.CONTRACT_END_DEFAULT);
+                this.setContractEndFields();
             });
 
         this.form.get('subjectTypeId')
@@ -106,6 +107,17 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             .subscribe((val: string) => {
                 this.resetFieldValue('distributionRateId', false);
                 this.distributionRateType = SUBJECT_TYPE_TO_DIST_RATE_MAP[val];
+                this.cd.markForCheck();
+            });
+
+
+        this.form.get('ownTerminate')
+            .valueChanges
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe((ownTerminate: boolean) => {
+                this.setOwnTerminate(ownTerminate);
                 this.cd.markForCheck();
             });
 
@@ -121,8 +133,8 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         this.form.get('contractEndTypeId')
             .valueChanges
             .pipe(takeUntil(this.destroy$))
-            .subscribe(val => {
-                this.setContractEndFields(val);
+            .subscribe(() => {
+                this.setContractEndFields();
             });
 
         this.form.get('supplierId')
@@ -234,12 +246,18 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         this.form.controls['timeToContractEndPeriodId'].setValue(timeToContractEndPeriodId);
     }
 
-    public setContractEndFields = (changeByContractEndType: string = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT) => {
-        const selectedContractEndType = this.expirationConfig[changeByContractEndType];
+    public setContractEndFields = () => {
+        if (this.getFieldValue('contractEndTypeId')) {
+            this.contractEndType = this.getFieldValue('contractEndTypeId');
+        }
+
+        if (this.form.get('ownTerminate').value) {
+            this.contractEndType = CONTRACT_END_TYPE.CONTRACT_END_REQUEST;
+        }
 
         R.forEachObjIndexed((show: boolean, field: string) => {
             show ? this.setEnableField(field) : this.setDisableField(field);
-        }, selectedContractEndType);
+        }, this.expirationConfig[this.contractEndType]);
 
         this.cd.markForCheck();
     }
@@ -271,8 +289,22 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             if (!R.isNil(form.annualConsumption)) {
                 form.annualConsumption = parseFloat(form.annualConsumption.toString().replace(',', '.'));
             }
+            if (this.contractEndType === CONTRACT_END_TYPE.CONTRACT_END_REQUEST) {
+                form.contractEndTypeId = CONTRACT_END_TYPE.CONTRACT_END_REQUEST;
+            }
+
+            R.forEachObjIndexed((show: boolean, field: string) => {
+                if (!show) {
+                    delete form[field];
+                }
+            }, this.expirationConfig[this.contractEndType]);
+
             this.submitAction.emit(form);
         }
+    }
+
+    public setOwnTerminate = (ownTerminate: boolean) => {
+        ownTerminate ? this.setDisableField('contractEndTypeId') : this.setEnableField('contractEndTypeId');
     }
 
     public showHelp = (field, title) => {

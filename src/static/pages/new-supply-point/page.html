@@ -130,6 +130,16 @@
                         label="Roční spotřeba elektřiny (vysoký tarif)"
                         appendText="MWh"
                     ></lnd-form-field>
+                    <label class="control-label-alone">
+                        Jak vypovíte stávající smlouvu?
+                    </label>
+                    <lnd-form-field
+                        [id]="'ownTerminate'"
+                        label="Vlastní výpověď"
+                        [type]="'CHECKBOX'"
+                        [customFormGroupClass]="'mb-5'"
+                        [formControl]="config.ownTerminate"
+                    ></lnd-form-field>
                     <lnd-form-field
                         [id]="'contractEndTypeId'"
                         label="Ukončení platnosti aktuální smlouvy"

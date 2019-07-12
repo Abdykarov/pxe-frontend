@@ -16,6 +16,7 @@ export const CONSTS = {
     },
     DEFAULT_EXPIRATION: 3600,
     MAX_DAYS_TILL_CONTRACT_EXPIRATION: 60,
+    OWN_TERMINATE_INIT_STATE_SUPPLY_POINT: false,
     PATHS: {
         CONTRACT : 'contract',
         COOKIES_POLICY : 'cookies-policy',
@@ -98,8 +99,9 @@ export const CODE_LIST_TYPES = [
 
 export const CONTRACT_END_TYPE = {
     CONTRACT_END_TERM: 'Urcita',
+    CONTRACT_END_TERM_WITH_PROLOGATION: 'Doba určitá s automatickou prolongací',
     CONTRACT_END_INDEFINITE_PERIOD: 'Neurcita',
-    CONTRACT_END_TERMINATE: 'Vypoved',
+    CONTRACT_END_REQUEST: 'Vypoved',
     CONTRACT_END_DEFAULT: 'DEFAULT',
 };
 

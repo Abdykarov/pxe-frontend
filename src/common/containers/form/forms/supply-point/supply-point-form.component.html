@@ -213,6 +213,16 @@
             [touched]="form.controls.annualConsumption.touched || formError.annualConsumption"
             [validationMessages]="formFields.validationMessages.annualConsumption"
         ></lnd-form-field>
+        <label class="control-label-alone">
+            Jak vypovíte stávající smlouvu?
+        </label>
+        <lnd-form-field
+            [id]="'ownTerminate'"
+            label="Vlastní výpověď"
+            [type]="'CHECKBOX'"
+            [customFormGroupClass]="'mb-5'"
+            [formControl]="form.controls.ownTerminate"
+        ></lnd-form-field>
         <lnd-form-field
             *ngIf="form.controls.contractEndTypeId.status !== 'DISABLED'"
             [error]="formError.contractEndTypeId || form.controls.contractEndTypeId.errors"
@@ -229,11 +239,11 @@
         <lnd-datepicker
             *ngIf="form.controls.expirationDate.status !== 'DISABLED'"
             [appendButtonIcon]="helpDocuments && helpDocuments['expirationDate'] ? 'icon--info' : null"
-            (appendButtonAction)="showHelp('expirationDate', 'Do kdy máte platnou aktuální smlouvu')"
+            (appendButtonAction)="showHelp('expirationDate', form.controls.contractEndTypeId.status !== 'DISABLED' ? 'Do kdy máte platnou aktuální smlouvu' : 'Datum ukončení')"
             [datepickerName]="'expirationDate'"
             [error]="formError.expirationDate || form.controls.expirationDate.errors"
             id="datepicker-1"
-            label="Do kdy máte platnou aktuální smlouvu"
+            [label]="form.controls.contractEndTypeId.status !== 'DISABLED' ? 'Do kdy máte platnou aktuální smlouvu' : 'Datum ukončení'"
             [parentForm]="form"
             [placeholder]="'dd.mm.rrrr'"
             [minDate]="minDate"
