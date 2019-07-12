@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
 import {
     FormControl,
-    FormGroup, Validators,
+    FormGroup,
 } from '@angular/forms';
 
-import { configStepper } from './config';
 import { depositPaymentType } from 'src/common/containers/form/forms/personal-info/personal-info-form.config';
+import { getConfigStepper } from 'src/common/utils';
+import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
 @Component({
     templateUrl: './page.html',
 })
 export class RecapitulationPageComponent {
-    public config = configStepper;
+    public config = getConfigStepper(ProgressStatus.PERSONAL_DATA);
 
     public depositPaymentTypeId = depositPaymentType;
 

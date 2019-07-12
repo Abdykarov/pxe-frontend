@@ -315,7 +315,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 contractEndTypeId.setValue(this.lastContractEndType);
             }
             this.setEnableField('contractEndTypeId');
-            this.resetFieldError('contractEndTypeId', false);
+            this.resetFieldError('contractEndTypeId', true);
         }
     }
 

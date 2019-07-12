@@ -15,6 +15,11 @@ const routes: Routes = [
         component: RequestComponent,
         children: [
             {
+                path: CONSTS.PATHS.EMPTY,
+                redirectTo: CONSTS.PATHS.SUPPLY_POINT,
+                pathMatch: 'full',
+            },
+            {
                 path: CONSTS.PATHS.CONTRACT,
                 loadChildren: '../../pages/request/contract/contract.module#ContractModule',
             },

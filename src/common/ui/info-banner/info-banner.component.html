@@ -1,7 +1,8 @@
 <div class="info-banner">
     <img alt="" class="info-banner__illustration" src="{{bannerType}}" title="">
     <h2 class="info-banner__title">{{bannerTitle}}</h2>
-    <p class="info-banner__description">{{bannerDescription}}</p>
+    <p class="info-banner__description"
+       [innerHTML]="bannerDescription"></p>
     <lnd-button
         *ngIf="showButton"
         (action)="buttonAction.emit($event)"

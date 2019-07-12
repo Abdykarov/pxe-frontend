@@ -18,7 +18,6 @@ import { IIconPosition } from './models/icon-position.model';
     templateUrl: './button.component.html',
     styleUrls: ['./button.component.scss'],
 })
-
 export class ButtonComponent {
     @Output()
     public action: EventEmitter<any> = new EventEmitter<any>();

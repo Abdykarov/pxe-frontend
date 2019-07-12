@@ -1,13 +1,83 @@
+<ng-template #contractActionsTemplate>
+    <div *ngIf="supplyPoint | isAllowedOperation: allowedOperations.LEAVE_CONTRACT"
+         class="row no-gutters align-items-end mb-5">
+        <div class="col-12 col-md-6">
+            <small>Odstoupit od smlouvy do 14 dnů od podpisu</small>
+        </div>
+        <div class="col-12 col-md-6 pl-3 text-right">
+            <lnd-button
+                    (click)="leaveContract()"
+                    [isDisabled]="formLoading"
+                    label="Odstoupit"
+                    type="link-danger"
+                    size="sm">
+            </lnd-button>
+        </div>
+        <div *ngIf="contractAction === contractActions.LEAVE_CONTRACT"
+             class="col-12 mt-4">
+            <pxe-verification-form
+                    [fieldError]="fieldError"
+                    [formLoading]="formLoading"
+                    [contract]="supplyPoint.contract"
+                    [globalError]="globalError"
+                    [smsSent]="smsSent"
+                    [showSentSmsLabelUnderFirstField]="false"
+                    classRootWrapper="col-12"
+                    classFirstField="col-12"
+                    classSecondField="col-12 text-center"
+                    submitLabelText="Odstoupit od smlouvy"
+                    (submitAction)="submitVerification($event)"
+                    (customAction)="sendContractConfirmationSms()">
+            </pxe-verification-form>
+        </div>
+    </div>
+    <div *ngIf="supplyPoint | isAllowedOperation: allowedOperations.TERMINATE_CONTRACT"
+         class="row no-gutters align-items-end mb-5">
+        <div class="col-12 col-md-6">
+            <small>Odstoupit od smlouvy výpovědí</small>
+        </div>
+        <div class="col-12 col-md-6 pl-3 text-right">
+            <lnd-button
+                    (click)="terminateContract()"
+                    [isDisabled]="formLoading"
+                    label="Vypovědět"
+                    type="link-danger"
+                    size="sm">
+            </lnd-button>
+        </div>
+        <div *ngIf="contractAction === contractActions.TERMINATE_CONTRACT"
+             class="col-12 mt-4">
+            <pxe-verification-form
+                    [fieldError]="fieldError"
+                    [formLoading]="formLoading"
+                    [contract]="supplyPoint.contract"
+                    [globalError]="globalError"
+                    [smsSent]="smsSent"
+                    [showSentSmsLabelUnderFirstField]="false"
+                    classRootWrapper="col-12"
+                    classFirstField="col-12"
+                    classSecondField="col-12 text-center"
+                    submitLabelText="Vypovědět smlouvu"
+                    (submitAction)="submitVerification($event)"
+                    (customAction)="sendContractConfirmationSms()">
+            </pxe-verification-form>
+        </div>
+    </div>
+</ng-template>
 <pxe-layout-container pageTitle="Odběrná místa">
-    <lnd-alert
-            [type]="'danger'"
-            [isDismissible]="false"
-            *ngIf="globalError.length">
-        Došlo k chybě. Zkuste to později.<br>
-        <ng-container *ngFor="let message of globalError">
-            {{ message }}<br>
-        </ng-container>
-    </lnd-alert>
+    <div class="row">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <lnd-alert
+                    [type]="'danger'"
+                    [isDismissible]="false"
+                    *ngIf="globalError.length">
+                Došlo k chybě. Zkuste to později.<br>
+                <ng-container *ngFor="let message of globalError">
+                    {{ message }}<br>
+                </ng-container>
+            </lnd-alert>
+        </div>
+    </div>
     <lnd-placeloader [loading]="dataLoading && !globalError.length"></lnd-placeloader>
     <ng-container *ngIf="supplyPoint && !dataLoading">
         <pxe-supply-point-detail-form
@@ -19,6 +89,7 @@
                 (submitAction)="updateSupplyForm($event)"
                 (customAction)="cancelUpdate()"
                 [supplyPoint]="supplyPoint"
+                [contractActionsTemplate]="contractActionsTemplate"
         ></pxe-supply-point-detail-form>
     </ng-container>
 </pxe-layout-container>

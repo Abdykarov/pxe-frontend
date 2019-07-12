@@ -1,9 +1,11 @@
 import {
+    ChangeDetectorRef,
     Component,
     Input,
     OnChanges,
     OnInit,
     SimpleChanges,
+    TemplateRef,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,9 +18,8 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/abstract-supply-point-form.component';
-import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
-import { ModalService } from 'src/common/containers/modal/modal.service';
 import {
+    AllowedOperations,
     CommodityType,
     ISupplyPoint,
 } from 'src/common/graphql/models/supply.model';
@@ -26,9 +27,11 @@ import {
     confirmFindNewSupplyPoint,
     confirmFindNewSupplyPointConfig,
     supplyPointDetailAllowedFields,
-} from '../supply-point-form.config';
+} from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
+import { ContractService } from 'src/common/graphql/services/contract.service';
+import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
+import { ModalService } from 'src/common/containers/modal/modal.service';
 import {
-    CONSTS,
     ROUTES,
     SUBJECT_TYPE_OPTIONS,
     TIME_TO_CONTRACT_END_PERIOD_MAP,
@@ -43,9 +46,12 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     @Input()
     public supplyPoint: ISupplyPoint;
 
+    @Input()
+    public contractActionsTemplate: TemplateRef<any>;
+
     public allowedFields = supplyPointDetailAllowedFields;
+    public allowedOperations = AllowedOperations;
     public commodityType = CommodityType;
-    public maxDaysTillContractExpiration = CONSTS.MAX_DAYS_TILL_CONTRACT_EXPIRATION;
     public suppliers = [];
     public subjectName = '';
     public setFormByCommodity = this.setFormFields;
@@ -53,6 +59,8 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     public today = new Date().toISOString();
 
     constructor(
+        private cd: ChangeDetectorRef,
+        private contractService: ContractService,
         protected fb: FormBuilder,
         private modalsService: ModalService,
         private router: Router,

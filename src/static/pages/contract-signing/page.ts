@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
-import { ContractSigningPageConfig } from './config';
+import { getConfigStepper } from 'src/common/utils';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { offerConfig } from './config';
+import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
 @Component({
     templateUrl: './page.html',
@@ -10,10 +11,7 @@ import { offerConfig } from './config';
 export class ContractSigningPageComponent {
     public offer: ISupplyPointOffer = offerConfig;
     public showOffer = false;
-
-    constructor(
-        public config: ContractSigningPageConfig,
-    ) {}
+    public stepperProgressConfig = getConfigStepper(ProgressStatus.READY_FOR_SIGN);
 
     public toggleOffer = (event) => {
         this.showOffer = !this.showOffer;
