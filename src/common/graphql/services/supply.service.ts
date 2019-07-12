@@ -212,4 +212,8 @@ export class SupplyService {
             },
         })
         .valueChanges
+
+    public removeSupplyPoint = (supplyPointId: string) => {
+    }
+
 }

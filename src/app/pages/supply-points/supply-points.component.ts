@@ -29,9 +29,9 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class SupplyPointsComponent extends AbstractComponent implements OnInit {
 
-    public supplierPoints: ISupplyPointFindData[];
     public error = false;
     public errorMessages = [];
+    public supplierPoints: ISupplyPointFindData[];
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -44,6 +44,7 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
 
     ngOnInit () {
         super.ngOnInit();
+
         this.supplyService.findSupplyPoints()
             .pipe(
                 takeUntil(this.destroy$),

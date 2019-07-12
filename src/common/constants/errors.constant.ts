@@ -4,6 +4,11 @@ export const restAPIErrorCodes = {
     'CLI0001' : 'Špatné přihlašovací údaje.',
 };
 
+export const graphQLMessages = {
+    cannotDeleteContract: 'Od smlouvy se nepodařilo odstoupit.',
+    cannotSignContract: 'Smlouvu se nepodařilo podepsat.',
+};
+
 export const errorFieldMessages =  {
     address: {
         required: 'Vyplňte adresu odběrného místa.',

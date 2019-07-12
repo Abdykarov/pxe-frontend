@@ -20,16 +20,13 @@ import { IBannerObj } from './models/banner-object.model';
 export class BannerUIComponent extends AbstractComponent {
 
     @Input()
-    public bannerText: string;
-
-    @Input()
     public buttonLabel: string;
 
     @Input()
     public data?: IBannerObj;
 
     @Input()
-    public icon?: string;
+    public icon = 'icon--info';
 
     @Input()
     public showButtonLabel = true;

@@ -4,6 +4,7 @@ import * as R_ from 'ramda-extension';
 import { ErrorResponse } from 'apollo-link-error';
 
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
+import { graphQLMessages } from 'src/common/constants/errors.constant';
 
 const mapValidationFieldArrayToValidationObj = (array) => {
     const prepareKeys = (val) => R.pipe(
@@ -12,6 +13,8 @@ const mapValidationFieldArrayToValidationObj = (array) => {
     )(val);
     return R.map(prepareKeys)(array);
 };
+
+const mapGlobalGraphQLErrorMessages = (messages: string[]): string[] => R.map((key: string) => graphQLMessages[key] || key, messages);
 
 export const parseGraphQLErrors = (error: ErrorResponse):
     {
@@ -28,7 +31,7 @@ export const parseGraphQLErrors = (error: ErrorResponse):
                     fieldError = mapValidationFieldArrayToValidationObj(errors.validationError.field);
                 }
                 if (errors.validationError.global) {
-                    globalError = errors.validationError.global;
+                    globalError = mapGlobalGraphQLErrorMessages(errors.validationError.global);
                 }
             } else {
                 globalError.push(errors.message);
