@@ -42,7 +42,7 @@
                     <div class="page-box">
                         <div [innerHTML]="contractTemplate"></div>
                         <pxe-verification-form
-                            *ngIf="supplyPoint.contract.personalData && supplyPoint.contract.personalData.phone"
+                            *ngIf="supplyPoint | pathValue:['contract', 'personalData', 'phone']"
                             [fieldError]="fieldError"
                             [formLoading]="formLoading"
                             [contract]="supplyPoint.contract"

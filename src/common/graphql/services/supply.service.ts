@@ -200,7 +200,6 @@ export class SupplyService {
             variables: {
                 supplyPointId,
             },
-            // fetchPolicy: 'network-only',
         })
         .valueChanges
 

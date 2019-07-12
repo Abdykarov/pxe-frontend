@@ -29,7 +29,7 @@ export class BannerUIComponent extends AbstractComponent {
     public data?: IBannerObj;
 
     @Input()
-    public icon?: string;
+    public icon = 'icon--info';
 
     @Input()
     public showButtonLabel = true;

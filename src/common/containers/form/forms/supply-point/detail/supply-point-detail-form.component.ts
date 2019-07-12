@@ -23,14 +23,14 @@ import {
     CommodityType,
     ISupplyPoint,
 } from 'src/common/graphql/models/supply.model';
-import { ContractService } from 'src/common/graphql/services/contract.service';
-import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
-import { ModalService } from 'src/common/containers/modal/modal.service';
 import {
     confirmFindNewSupplyPoint,
     confirmFindNewSupplyPointConfig,
     supplyPointDetailAllowedFields,
-} from '../supply-point-form.config';
+} from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
+import { ContractService } from 'src/common/graphql/services/contract.service';
+import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
+import { ModalService } from 'src/common/containers/modal/modal.service';
 import {
     ROUTES,
     SUBJECT_TYPE_OPTIONS,
