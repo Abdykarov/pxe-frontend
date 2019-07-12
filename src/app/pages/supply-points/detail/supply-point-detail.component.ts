@@ -16,13 +16,16 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
+    AllowedOperations,
     CommodityType,
     ISupplyPoint,
     ISupplyPointFormData,
     ISupplyPointGasAttributes,
     ISupplyPointPowerAttributes,
 } from 'src/common/graphql/models/supply.model';
+import { ContractService } from 'src/common/graphql/services/contract.service';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
+import { graphQLMessages } from 'src/common/constants/errors.constant';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
     parseGraphQLErrors,
@@ -30,23 +33,29 @@ import {
 } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { ContractActions } from '../models/supply-point-detail.model';
 
 @Component({
     templateUrl: './supply-point-detail.component.html',
     styleUrls: ['./supply-point-detail.component.scss'],
 })
 export class SupplyPointDetailComponent extends AbstractComponent implements OnInit {
+    public allowedOperations = AllowedOperations;
     public dataLoading = true;
     public fieldError: IFieldError = {};
     public formFields = formFields;
     public formLoading = false;
     public formSent = false;
     public globalError: string[] = [];
-    public supplyPoint = null;
+    public smsSent: number = null;
+    public supplyPoint: ISupplyPoint = null;
     public supplyPointId = this.route.snapshot.params.supplyPointId;
+    public contractAction: ContractActions = ContractActions.NONE;
+    public contractActions = ContractActions;
 
     constructor(
         private cd: ChangeDetectorRef,
+        private contractService: ContractService,
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
@@ -122,5 +131,67 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
 
     public cancelUpdate = () => {
         this.router.navigate([ROUTES.ROUTER_SUPPLY_POINTS]);
+    }
+
+    public sendContractConfirmationSms = () => {
+        this.formLoading = true;
+        this.contractService.sendContractConfirmationSms(this.supplyPoint.contract.contractId)
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                () => {
+                    this.formLoading = false;
+                    this.smsSent = new Date().getTime();
+                    this.cd.markForCheck();
+                },
+                (error) => {
+                    this.formLoading = false;
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
+                },
+            );
+    }
+
+    public submitVerification = (smsCode: string) => {
+        this.formLoading = true;
+        this.globalError = [];
+        this.contractService.deleteSignedContract(this.supplyPoint.contract.contractId, smsCode)
+            .pipe(
+                takeUntil(
+                    this.destroy$,
+                ),
+                map(({data}) => data.deleteSignedContract),
+            ).subscribe(
+            (deleteSignedContract: boolean) => {
+                this.formLoading = false;
+                if (deleteSignedContract) {
+                    // TODO - navigate to REQUESTS overview
+                    this.router.navigate([ROUTES.ROUTER_REQUEST]);
+                } else {
+                    // TODO - temporary
+                    this.globalError.push(graphQLMessages.cannotDeleteContract);
+                    scrollToElementFnc('top');
+                }
+            },
+            (error) => {
+                this.formLoading = false;
+                const { globalError } = parseGraphQLErrors(error);
+                this.globalError = globalError;
+                this.cd.markForCheck();
+            },
+        );
+        this.cd.markForCheck();
+    }
+
+    public leaveContract = () => {
+        this.contractAction = ContractActions.LEAVE_CONTRACT;
+        this.smsSent = null;
+    }
+
+    public terminateContract = () => {
+        this.contractAction = ContractActions.TERMINATE_CONTRACT;
+        this.smsSent = null;
     }
 }

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+
+import { bannerObj } from 'src/static/atoms/banners/config';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 
 @Component({
@@ -8,12 +10,7 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 export class BannersPageComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
-    public bannerText = 'Banner longer descritpion';
-
-    public clicked = (evt) => {
-        evt.preventDefault();
-        console.log('clicked');
-    }
+    public bannerObj = bannerObj;
 
     constructor() {
         this.breadcrumbItemsSimple = [

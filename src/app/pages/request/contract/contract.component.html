@@ -40,17 +40,18 @@
                 </div>
                 <div class="col-12 col-xl-10 offset-xl-1">
                     <div class="page-box">
-                        <pxe-contract-form
-                            [personData]="supplyPoint.contract.personalData"
+                        <div [innerHTML]="contractTemplate"></div>
+                        <pxe-verification-form
+                            *ngIf="supplyPoint | pathValue:['contract', 'personalData', 'phone']"
                             [fieldError]="fieldError"
-                            [formFields]="formFields"
                             [formLoading]="formLoading"
-                            [smsSent]="smsSent"
+                            [contract]="supplyPoint.contract"
                             [globalError]="globalError"
-                            [contractTemplate]="contractTemplate"
+                            [showSentSmsLabelUnderFirstField]="false"
+                            [smsSent]="smsSent"
                             (submitAction)="signContract($event)"
                             (customAction)="sendContractConfirmationSms()"
-                        ></pxe-contract-form>
+                        ></pxe-verification-form>
                     </div>
                 </div>
             </div>
