@@ -23,6 +23,7 @@
             </lnd-alert>
         </div>
     </div>
+    <lnd-placeloader [loading]="loadingSupplyPointOffers && !globalError.length"></lnd-placeloader>
     <div class="row"
             *ngIf="supplyPointOffers">
         <div class="col-12 col-md-12 supply-points-offer">

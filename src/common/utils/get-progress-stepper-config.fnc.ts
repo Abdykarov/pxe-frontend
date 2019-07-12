@@ -1,70 +1,72 @@
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 
-import { ContractStatus } from 'src/common/graphql/models/contract';
+import { inArray } from 'src/common/utils/in-array';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
-import {
-    ISupplyPoint,
-    SupplyPointState,
-} from 'src/common/graphql/models/supply.model';
+import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
 const steps: IStepperProgressItem[] = [
     {
-        step: SupplyPointState.CREATE,
+        step: ProgressStatus.SUPPLY_POINT,
         label: 'Výběr odběrného místa',
     },
     {
-        step: SupplyPointState.CHOOSE_OFFER,
+        step: ProgressStatus.NONE,
+        label: '',
+        shadowStep: true,
+    },
+    {
+        step: ProgressStatus.NONE,
+        label: '',
+        shadowStep: true,
+    },
+    {
+        step: ProgressStatus.OFFER_STEP,
         label: 'Výběr nabídky',
     },
     {
-        step: SupplyPointState.PERSONAL_INFO,
+        step: ProgressStatus.PERSONAL_DATA,
         label: 'Rekapitulace',
         shadowStep: true,
     },
     {
-        step: SupplyPointState.CONTRACT,
+        step: ProgressStatus.READY_FOR_SIGN,
         label: 'Smlouva',
         shadowStep: true,
     },
     {
-        step: SupplyPointState.PAYMENT,
+        step: ProgressStatus.WAITING_FOR_PAYMENT,
         label: 'Platba',
-        shadowStep: true,
-    },
-    {
-        step: SupplyPointState.COMPLETED,
-        label: 'Podepsání smlouvy',
     },
 ];
 
+export const indexOfOfferStepWithoutShadowStep = R.pipe(
+    R.filter(item => !item.shadowStep),
+    R.findIndex(item => item.step === ProgressStatus.OFFER_STEP),
+)(steps);
 
-export const getSupplyPointState = (supplyPoint: ISupplyPoint): SupplyPointState => {
-    if (!supplyPoint.contract) {
-        return SupplyPointState.CREATE;
+export const indexesOfSecondStep = [
+    R.findIndex(R.propEq('step', ProgressStatus.OFFER_STEP))(steps),
+    R.findIndex(R.propEq('step', ProgressStatus.PERSONAL_DATA))(steps),
+    R.findIndex(R.propEq('step', ProgressStatus.READY_FOR_SIGN))(steps),
+    R.findIndex(R.propEq('step', ProgressStatus.WAITING_FOR_PAYMENT))(steps),
+];
+
+export const getConfigStepper = (activeStep: ProgressStatus, withShadowSteps = true): IStepperProgressItem[] => {
+    let activeIndex = R.findIndex(R.propEq('step', activeStep))(steps);
+
+    if (!withShadowSteps && inArray(activeIndex, indexesOfSecondStep)) {
+        activeIndex = indexOfOfferStepWithoutShadowStep;
     }
 
-    if (!supplyPoint.contract.offer) {
-        return SupplyPointState.CHOOSE_OFFER;
-    }
-
-    if (!supplyPoint.contract.personalData) {
-        return SupplyPointState.PERSONAL_INFO;
-    }
-
-    if (supplyPoint.contract.contractStatus === ContractStatus.CONCLUDED) {
-        return SupplyPointState.CONTRACT;
-    }
-
-    // todo platba
-    return SupplyPointState.COMPLETED;
-};
-
-export const getConfigStepperByState = (activeStep: SupplyPointState): IStepperProgressItem[] => {
-    const activeIndex = R.findIndex(R.propEq('step', activeStep))(steps);
-    return R_.mapIndexed((item: IStepperProgressItem, index: number) => {
-        item.active = index === activeIndex;
-        item.done = index < activeIndex;
-        return item;
-    }, R.clone(steps));
+    return R.pipe(
+        R.filter(item => !item.shadowStep || (item.shadowStep && withShadowSteps)),
+        R_.mapIndexed(
+            (item: IStepperProgressItem, index: number) => ({
+                active: index === activeIndex,
+                done: index < activeIndex || activeStep === ProgressStatus.COMPLETED,
+                ...item,
+            }),
+        ),
+    )(steps);
 };

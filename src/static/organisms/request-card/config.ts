@@ -1,6 +1,7 @@
 import {
     CommodityType,
     ISupplyPoint,
+    ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 
 export const supplyPointConfig: ISupplyPoint = {
@@ -31,6 +32,7 @@ export const supplyPointConfig: ISupplyPoint = {
     timeToContractEnd: 0,
     timeToContractEndPeriod: null,
     contract: null,
+    progressStatus: ProgressStatus.SUPPLY_POINT,
 };
 
 export const supplyPointConfig2: ISupplyPoint = {
@@ -68,7 +70,7 @@ export const supplyPointConfig2: ISupplyPoint = {
         offer: {
             id: 0,
             supplier: null,
-            commodityType: 'GAS',
+            commodityType: CommodityType.GAS,
             name: 'Name of offer',
             validFrom: '2019-06-20',
             validTo: '2019-06-29',
@@ -76,4 +78,5 @@ export const supplyPointConfig2: ISupplyPoint = {
         },
         personalData: null,
     },
+    progressStatus: ProgressStatus.READY_FOR_SIGN,
 };

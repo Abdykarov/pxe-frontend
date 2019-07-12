@@ -9,13 +9,13 @@ import { LayoutContainerComponent } from './layout-container.component';
     declarations: [
         LayoutContainerComponent,
     ],
+    exports: [
+        LayoutContainerComponent,
+    ],
     imports: [
         BannerUIModule,
         BreadcrumbModule,
         CommonModule,
-    ],
-    exports: [
-        LayoutContainerComponent,
     ],
 })
 export class LayoutContainerModule { }

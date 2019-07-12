@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 
 
@@ -8,6 +9,7 @@ import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 export class RequestBannerPageComponent {
     public bannerTitle = 'Momentálně nemáte žádné rozpracované žádosti';
     public bannerDescription = 'Ale pro toto odběrné místo končí v následujících 2 měsících dodávka energie.';
+
     public buttonLabel = 'Nová poptávka';
 
     public bannerObj: IBannerObj = {
