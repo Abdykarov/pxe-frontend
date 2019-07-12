@@ -27,7 +27,7 @@ import {
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
-import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.fnc';
+import { getConfigStepper } from 'src/common/utils';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils';

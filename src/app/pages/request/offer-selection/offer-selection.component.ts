@@ -15,7 +15,7 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractService } from 'src/common/graphql/services/contract.service';
-import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.fnc';
+import { getConfigStepper } from 'src/common/utils';
 import {
     ISupplyPoint,
     ProgressStatus,

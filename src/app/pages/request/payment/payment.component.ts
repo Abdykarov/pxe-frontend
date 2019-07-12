@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.fnc';
+import { getConfigStepper } from 'src/common/utils';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
 @Component({

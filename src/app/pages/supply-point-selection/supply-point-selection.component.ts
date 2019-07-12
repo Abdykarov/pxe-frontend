@@ -17,8 +17,8 @@ import {
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { ContractStatus } from 'src/common/graphql/models/contract';
-import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.fnc';
-import { inArray } from 'src/common/utils/in-array';
+import { getConfigStepper } from 'src/common/utils';
+import { inArray } from 'src/common/utils';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';

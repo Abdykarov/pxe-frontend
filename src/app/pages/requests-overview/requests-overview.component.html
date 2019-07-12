@@ -20,14 +20,14 @@
             (buttonAction)="createSupplyPoint($event)"
         ></lnd-info-banner>
         <lnd-info-banner
-            *ngIf="state == overviewStates.ALL_SUPPLY_POINTS_HAVE_SUPPLY_POINTS"
+            *ngIf="state == overviewStates.NO_REQUEST_WITH_VALID_CONTRACT"
             [bannerType]="BANNER_TYPE_ACCEPTED"
             [bannerTitle]="'Momentálně nemáte žádné rozpracované žádosti'"
             [bannerDescription]="'Všechna zadaná odběrná místa mají pokrytou dodávku na déle než 3 měsíce.<br> Pokud máte nové odběrné místo, můžete založit žádost pro novou dodávku.'"
             [buttonLabel]="'Nové žádost'"
             (buttonAction)="createSupplyPoint($event)"
         ></lnd-info-banner>
-        <!--<ng-container *ngIf="state == overviewStates.SOME_SUPPLY_POINTS_ENDING_SUPPLY">-->
+        <!--<ng-container *ngIf="state == overviewStates.SOME_SUPPLY_POINTS_ARE_ENDING ">-->
             <!--<lnd-info-banner-->
                 <!--[bannerTitle]="'Momentálně nemáte žádné rozpracované žádosti'"-->
                 <!--bannerDescription="Ale pro {{supplyPoints.length === 1 ? 'toto odběrné místo' : 'tato odběrná místa'}} konční v následujcích 2 měsích dodávka energie"-->
@@ -51,14 +51,14 @@
                     <lnd-button
                         label="Nová žádost"
                         type="secondary"
-                        (action)="newRequest($event)"
+                        (action)="newRequstAction($event)"
                     ></lnd-button>
                 </div>
             </div>
             <pxe-request-card
                 *ngFor="let supplyPoint of supplyPoints"
                 [supplyPoint]="supplyPoint"
-                (action)="completeRequest(supplyPoint)">
+                (action)="completeRequestAction(supplyPoint)">
             </pxe-request-card>
         </ng-container>
     </ng-container>

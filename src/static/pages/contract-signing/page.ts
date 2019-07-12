@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.fnc';
+import { getConfigStepper } from 'src/common/utils';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { offerConfig } from './config';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';

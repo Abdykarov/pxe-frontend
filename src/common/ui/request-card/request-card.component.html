@@ -4,14 +4,14 @@
         <div class="row no-gutters">
             <div class="col-3 col-md-2 col-xl-1 text-center">
                 <span class="icon request-card__icon"
-                        [class.icon--flame]="supplyPoint.commodityType === 'GAS'"
-                        [class.icon--flash]="supplyPoint.commodityType === 'POWER'"
+                        [class.icon--flame]="supplyPoint.commodityType === commodityType.GAS"
+                        [class.icon--flash]="supplyPoint.commodityType === commodityType.POWER"
                 ></span>
             </div>
             <div class="col-9 col-md-10 col-xl-7 mb-4">
                 <span class="request-card__title">{{supplyPoint.name}}</span>
                 <span class="request-card__title-subtext">
-                    Dodávka {{supplyPoint.commodityType === 'GAS'? 'plynu' : 'elektřiny'}}
+                    Dodávka {{supplyPoint.commodityType === commodityType.GAS? 'plynu' : 'elektřiny'}}
                 </span>
             </div>
             <div class="col-12 mb-4 col-md-10 offset-md-2 col-xl-11 offset-xl-1 mb-xl-0 order-xl-3">

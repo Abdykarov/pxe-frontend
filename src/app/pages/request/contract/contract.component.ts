@@ -17,7 +17,7 @@ import {
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { formFields } from 'src/common/containers/form/forms/contract/contract-form.config';
-import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.fnc';
+import { getConfigStepper } from 'src/common/utils';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
     ISupplyPoint,

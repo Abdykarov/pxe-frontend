@@ -6,9 +6,12 @@ import {
     Output,
 } from '@angular/core';
 
-import { getConfigStepper } from 'src/common/utils/get-progress-stepper-config.fnc';
+import {
+    CommodityType,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
+import { getConfigStepper } from 'src/common/utils';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
-import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 
 @Component({
     selector: 'pxe-request-card',
@@ -22,6 +25,8 @@ export class RequestCardComponent implements OnInit {
 
     @Output()
     public action: EventEmitter<any> = new EventEmitter();
+
+    public commodityType = CommodityType;
 
     public stepperProgressConfig: IStepperProgressItem[] = null;
 

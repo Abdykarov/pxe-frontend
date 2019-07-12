@@ -1,7 +1,7 @@
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 
-import { inArray } from 'src/common/utils/in-array';
+import { inArray } from 'src/common/utils';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
@@ -9,7 +9,6 @@ const steps: IStepperProgressItem[] = [
     {
         step: ProgressStatus.SUPPLY_POINT,
         label: 'Výběr odběrného místa',
-
     },
     {
         step: ProgressStatus.NONE,
@@ -56,7 +55,7 @@ export const indexesOfSecondStep = [
 export const getConfigStepper = (activeStep: ProgressStatus, withShadowSteps = true): IStepperProgressItem[] => {
     let activeIndex = R.findIndex(R.propEq('step', activeStep))(steps);
 
-    if ( !withShadowSteps && inArray(activeIndex, indexesOfSecondStep)) {
+    if (!withShadowSteps && inArray(activeIndex, indexesOfSecondStep)) {
         activeIndex = indexOfOfferStepWithoutShadowStep;
     }
 
