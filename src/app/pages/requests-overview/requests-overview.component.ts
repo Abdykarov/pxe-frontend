@@ -90,7 +90,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
             });
     }
 
-    public newRequstAction = (evt): void => {
+    public newRequestAction = (evt): void => {
         evt.preventDefault();
         const lastSupplyPointsWithConcludedContract = R.find(
             (supplyPoint: ISupplyPoint) =>
@@ -138,7 +138,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
             //     }),
             // ],
             [
-                R.T(),
+                R.T,
                 () => ({
                     overviewState: OverviewState.NO_REQUEST_WITH_VALID_CONTRACT,
                 }),
