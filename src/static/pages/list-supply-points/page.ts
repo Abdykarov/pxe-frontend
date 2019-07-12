@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 import {
-    supplyPointConfigPower,
     supplyPointConfigGas,
+    supplyPointConfigPower,
 } from 'src/static/organisms/supply-point/config';
 
 import { NewSupplyPointPageConfig } from './config';
@@ -11,8 +11,8 @@ import { NewSupplyPointPageConfig } from './config';
     templateUrl: './page.html',
 })
 export class ListSupplyPointsPageComponent {
-    public supplyPointPower = supplyPointConfigPower;
     public supplyPointGas = supplyPointConfigGas;
+    public supplyPointPower = supplyPointConfigPower;
 
     constructor(
         public config: NewSupplyPointPageConfig,

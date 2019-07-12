@@ -13,8 +13,8 @@ import { IsRouteActivePipe } from './is-route-active/is-route-acrive.pipe';
 import { KeysPipe } from './keys/keys.pipe';
 import { PathValuePipe } from './path-value/path-value.pipe';
 import { PluralPipe } from './plurar/plural.pipe';
+import { ProgressStatusPipe } from './step-of-supply-point/step-of-supply-point.pipe';
 import { ValuesPipe } from './values/values.pipe';
-import { SupplyPointStatePipe } from './supply-point-state/supply-point-state.pipe';
 
 @NgModule({
     declarations: [
@@ -29,7 +29,7 @@ import { SupplyPointStatePipe } from './supply-point-state/supply-point-state.pi
         KeysPipe,
         PathValuePipe,
         PluralPipe,
-        SupplyPointStatePipe,
+        ProgressStatusPipe,
         ValuesPipe,
     ],
     exports: [
@@ -44,7 +44,7 @@ import { SupplyPointStatePipe } from './supply-point-state/supply-point-state.pi
         KeysPipe,
         PathValuePipe,
         PluralPipe,
-        SupplyPointStatePipe,
+        ProgressStatusPipe,
         ValuesPipe,
     ],
     providers: [
@@ -60,7 +60,7 @@ import { SupplyPointStatePipe } from './supply-point-state/supply-point-state.pi
         KeysPipe,
         PathValuePipe,
         PluralPipe,
-        SupplyPointStatePipe,
+        ProgressStatusPipe,
         ValuesPipe,
     ],
 })

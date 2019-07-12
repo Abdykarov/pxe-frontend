@@ -1,28 +1,5 @@
 import { CommodityType } from 'src/common/graphql/models/supply.model';
-import { Injectable } from '@angular/core';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
-import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
-
-@Injectable({
-    providedIn: 'root',
-})
-export class ContractSigningPageConfig {
-    public stepperProgressConfig: IStepperProgressItem[] = [
-        {
-            done: true,
-            label: 'Výběr odběrného místa',
-        },
-        {
-            done: true,
-            label: 'Výběr nabídky',
-        },
-        {
-            active: true,
-            done: false,
-            label: 'Podepsání smlouvy',
-        },
-    ];
-}
 
 export const offerConfig: ISupplyPointOffer = {
     benefits: [

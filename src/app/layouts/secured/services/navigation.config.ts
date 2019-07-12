@@ -14,7 +14,7 @@ export const navigationMenuUsers: INavigationMenu = [
     },
     {
         'class': '',
-        'url': ROUTES.ROUTER_REQUEST,
+        'url': ROUTES.ROUTER_REQUESTS,
         'label': 'ŽÁDOST',
         'icon': 'star',
         __typename : 'secured',

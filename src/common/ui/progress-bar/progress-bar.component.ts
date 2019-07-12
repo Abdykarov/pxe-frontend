@@ -16,5 +16,4 @@ export class ProgressBarComponent {
 
     @Input()
     public isMinor = false;
-
 }

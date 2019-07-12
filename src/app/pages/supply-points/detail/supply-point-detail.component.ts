@@ -167,8 +167,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
             (deleteSignedContract: boolean) => {
                 this.formLoading = false;
                 if (deleteSignedContract) {
-                    // TODO - navigate to REQUESTS overview
-                    this.router.navigate([ROUTES.ROUTER_REQUEST]);
+                    this.router.navigate([ROUTES.ROUTER_REQUESTS]);
                 } else {
                     // TODO - temporary
                     this.globalError.push(graphQLMessages.cannotDeleteContract);
