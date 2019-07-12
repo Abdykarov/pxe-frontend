@@ -199,7 +199,7 @@ export class CustomValidators {
     }
 
     static ico = (ico): {} => {
-        if (ico.pristine) {
+        if (ico.pristine || R_.isNilOrEmpty(ico.value)) {
             return null;
         }
 
@@ -216,7 +216,7 @@ export class CustomValidators {
     }
 
     static dic = (dic): {} => {
-        if (dic.pristine) {
+        if (dic.pristine || R_.isNilOrEmpty(dic.value)) {
             return null;
         }
 
