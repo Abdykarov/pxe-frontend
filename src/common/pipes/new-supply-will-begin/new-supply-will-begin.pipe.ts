@@ -3,48 +3,42 @@ import {
     PipeTransform,
 } from '@angular/core';
 
-import * as moment from 'moment';
 import * as R from 'ramda';
 
-import { CONTRACT_END_TYPE } from 'src/app/app.constants';
+import {
+    isContractEndDefault,
+    isContractEndIndefinitePeriod,
+    isContractEndTermOrRequest,
+    isContractEndTermWithProlongation,
+} from 'src/common/pipes/new-supply-will-begin/new-supply-will-begin.state.fnc';
+import {
+    contractEndIndefinitePeriodCalculate,
+    contractEndTermWithProlongationCalculate,
+    getNextDayFromExpirationDate,
+} from 'src/common/pipes/new-supply-will-begin/new-supply-will-begin.calculate.fnc';
 import { IFormSupplyPointDefinition } from 'src/common/pipes/new-supply-will-begin/new-supply-will-begin.model';
-import { TimeToContractEndPeriod } from 'src/common/graphql/models/supply.model';
 
 @Pipe({
   name: 'newSupplyWillBegin',
 })
 export class NewSupplyWillBeginPipe implements PipeTransform {
     transform(form: IFormSupplyPointDefinition): string | boolean {
-        console.log('JSEM V PIPE');
         return R.cond([
             [
-                (formDef: IFormSupplyPointDefinition) => {
-                    console.log(formDef);
-                    return R.equals(formDef.contractEndTypeId, CONTRACT_END_TYPE.CONTRACT_END_DEFAULT);
-                },
+                isContractEndDefault,
                 false,
             ],
             [
-                (formDef: IFormSupplyPointDefinition) =>
-                    R.equals(formDef.contractEndTypeId, CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLOGATION),
-                (formDef: IFormSupplyPointDefinition) => form.expirationDate && moment(form.expirationDate).add(1, 'days') &&
-                        moment().add(form.timeToContractEnd, formDef.contractEndTypeId === TimeToContractEndPeriod.DAY ? 'days' : 'month')
-                            .diff(moment()) < 0,
+                isContractEndTermWithProlongation,
+                contractEndTermWithProlongationCalculate,
             ],
             [
-                (formDef: IFormSupplyPointDefinition) =>
-                    R.equals(form.contractEndTypeId, CONTRACT_END_TYPE.CONTRACT_END_TERM) ||
-                    R.equals(form.contractEndTypeId, CONTRACT_END_TYPE.CONTRACT_END_REQUEST),
-                (formDef: IFormSupplyPointDefinition) =>
-                    form.expirationDate && moment(form.expirationDate).add(1, 'days'),
+                isContractEndTermOrRequest,
+                getNextDayFromExpirationDate,
             ],
             [
-                (formDef: IFormSupplyPointDefinition) =>
-                    R.equals(formDef.contractEndTypeId, CONTRACT_END_TYPE.CONTRACT_END_INDEFINITE_PERIOD),
-                (formDef: IFormSupplyPointDefinition) =>
-                    formDef.timeToContractEnd && moment().add(30, 'days').add(
-                        form.timeToContractEnd, formDef.contractEndTypeId === TimeToContractEndPeriod.DAY ? 'days' : 'month')
-                        .add(1, 'months').startOf('month'),
+                isContractEndIndefinitePeriod,
+                contractEndIndefinitePeriodCalculate,
             ],
         ])(form);
     }

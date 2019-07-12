@@ -72,6 +72,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public suppliers = [];
     public suppliers$: BehaviorSubject<any> = new BehaviorSubject([]);
     public contractEndType = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT;
+    public lastContractEndType = null;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -306,11 +307,15 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public setOwnTerminate = (ownTerminate: boolean) => {
         const contractEndTypeId = this.form.get('contractEndTypeId');
         if (ownTerminate) {
+            this.lastContractEndType = contractEndTypeId.value;
             this.setDisableField('contractEndTypeId');
             contractEndTypeId.setValue(CONTRACT_END_TYPE.CONTRACT_END_REQUEST);
         } else {
+            if (this.lastContractEndType !== CONTRACT_END_TYPE.CONTRACT_END_REQUEST ) {
+                contractEndTypeId.setValue(this.lastContractEndType);
+            }
             this.setEnableField('contractEndTypeId');
-            contractEndTypeId.setValue(CONTRACT_END_TYPE.CONTRACT_END_DEFAULT);
+            this.resetFieldError('contractEndTypeId', false);
         }
     }
 
