@@ -6,6 +6,7 @@ import { Apollo } from 'apollo-angular';
 import {
     concludeContractMutation,
     deleteContractMutation,
+    deleteSignedContract,
     saveContractMutation,
     sendContractConfirmationSmsMutation,
     signContractMutation,
@@ -136,7 +137,7 @@ export class ContractService {
         supplyPoint.progressStatus = ProgressStatus.PERSONAL_DATA;
         supplyPoint.contract = {
             contractId: data.saveContract,
-            contractStatus: 'CONCLUDED',
+            contractStatus: 'NOT_CONCLUDED',
             deliveryFrom: '',
             deliveryTo: '',
             offer: {
@@ -196,4 +197,16 @@ export class ContractService {
             __typename: 'contract',
         };
     }
+
+    public deleteSignedContract(contractId: string, smsConfirmationCode: string) {
+        return this.apollo
+            .mutate({
+                mutation: deleteSignedContract,
+                variables: {
+                    contractId,
+                    smsConfirmationCode,
+                },
+            });
+    }
+    // todo refetch all queries for all supply point overviews
 }

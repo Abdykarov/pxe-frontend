@@ -107,6 +107,7 @@ export const getSupplyPointQuery = gql`
         getSupplyPoint(supplyPointId: $supplyPointId){
             id,
             name,
+            allowedOperations,
             commodityType,
             supplier{
                 id,
@@ -156,6 +157,7 @@ export const getSupplyPointQuery = gql`
             },
             lastAnnualConsumptionNT,
             lastAnnualConsumptionVT,
+            lastVersionOfSupplyPoint,
             contractEndType {
                 type,
                 code,

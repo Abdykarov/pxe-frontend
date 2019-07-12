@@ -20,6 +20,9 @@ import { SupplyPointDetailFormComponent } from './supply-point-detail-form.compo
     declarations: [
         SupplyPointDetailFormComponent,
     ],
+    exports: [
+        SupplyPointDetailFormComponent,
+    ],
     imports: [
         AddressWhispererModule,
         AlertModule,
@@ -33,9 +36,6 @@ import { SupplyPointDetailFormComponent } from './supply-point-detail-form.compo
         PipesModule,
         ReactiveFormsModule,
         SelectModule,
-    ],
-    exports: [
-        SupplyPointDetailFormComponent,
     ],
 })
 export class SupplyPointDetailFormModule {}

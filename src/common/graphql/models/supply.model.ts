@@ -20,6 +20,14 @@ export enum TimeToContractEndPeriod {
     MONTH = 'Mesic',
 }
 
+export enum AllowedOperations {
+    DELETE = 'DELETE',
+    LEAVE_CONTRACT = 'LEAVE_CONTRACT',
+    PARTIAL_EDIT = 'PARTIAL_EDIT',
+    SHOW_DELIVERY_TO = 'SHOW_DELIVERY_TO',
+    TERMINATE_CONTRACT = 'TERMINATE_CONTRACT',
+}
+
 export interface IAddress {
     street: string;
     orientationNumber: string;
@@ -80,17 +88,10 @@ export interface ISupplyPointUpdatePowerAttributes {
     annualConsumptionVT: number;
 }
 
-export enum AllowedOperations {
-    TERMINATE_CONTRACT = 'TERMINATE_CONTRACT',
-    LEAVE_CONTRACT = 'LEAVE_CONTRACT',
-    PARTIAL_EDIT = 'PARTIAL_EDIT',
-    SHOW_DELIVERY_TO = 'SHOW_DELIVERY_TO',
-    DELETE = 'DELETE',
-}
-
 export interface ISupplyPoint {
     id: string;
     name: string;
+    allowedOperations: AllowedOperations[];
     commodityType: CommodityType;
     supplier: ISupplier;
     ean: string;
@@ -104,12 +105,12 @@ export interface ISupplyPoint {
     subject: ICodelistItem;
     lastAnnualConsumptionNT: number;
     lastAnnualConsumptionVT: number;
+    lastVersionOfSupplyPoint: boolean;
     contractEndType: ICodelistItem;
     timeToContractEnd: number;
     timeToContractEndPeriod: ICodelistItem;
     contract: IContract;
     progressStatus: ProgressStatus;
-    allowedOperations: AllowedOperations[];
 }
 
 export enum ProgressStatus {

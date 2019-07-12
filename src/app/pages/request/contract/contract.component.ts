@@ -16,8 +16,8 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractService } from 'src/common/graphql/services/contract.service';
-import { formFields } from 'src/common/containers/form/forms/contract/contract-form.config';
 import { getConfigStepper } from 'src/common/utils';
+import { graphQLMessages } from 'src/common/constants/errors.constant';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
     ISupplyPoint,
@@ -40,10 +40,9 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public contractTemplate;
     public showOffer = true;
     public fieldError: IFieldError = {};
-    public formFields = formFields;
     public formLoading = false;
-    public smsSent: number = null;
     public globalError: string[] = [];
+    public smsSent: number = null;
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
@@ -88,6 +87,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
 
     public signContract(smsCode: string) {
         this.formLoading = true;
+        this.globalError = [];
         this.contractService.signContract(
                 this.supplyPoint.contract.contractId,
                 smsCode,
@@ -108,7 +108,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                             });
                     } else {
                         // TODO - temporary
-                        this.globalError.push('Smlouvu se nepodařilo podepsat.');
+                        this.globalError.push(graphQLMessages.cannotSignContract);
                         scrollToElementFnc('top');
                     }
                     this.cd.markForCheck();
@@ -123,7 +123,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
             );
     }
 
-    public sendContractConfirmationSms() {
+    public sendContractConfirmationSms = () => {
         this.formLoading = true;
         this.contractService.sendContractConfirmationSms(this.supplyPoint.contract.contractId)
             .pipe(

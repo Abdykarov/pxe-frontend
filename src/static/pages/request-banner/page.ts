@@ -13,7 +13,7 @@ export class RequestBannerPageComponent {
     public buttonLabel = 'Nová poptávka';
 
     public bannerObj: IBannerObj = {
-        linkValue: 'basic/request-banner',
+        linkValue: '/basic/request-banner',
         text: 'BYT Babička, Praha – můžete získat již od 520 Kč',
     };
 }
