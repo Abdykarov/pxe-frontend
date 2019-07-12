@@ -75,6 +75,6 @@ export const supplyPointConfig2: ISupplyPoint = {
         },
         personalData: null,
     },
-    progressStatus: ProgressStatus.COMPLETED,
+    progressStatus: ProgressStatus.READY_FOR_SIGN,
     allowedOperations: null,
 };
