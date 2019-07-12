@@ -6,7 +6,10 @@ import {
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 
-import { AllowedOperations, ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import {
+    AllowedOperations,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
 
 @Pipe({
     name: 'isAllowedOperation',
