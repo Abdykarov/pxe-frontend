@@ -1,7 +1,7 @@
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 
-import { inArray } from 'src/common/utils';
+import { inArray } from 'src/common/utils/in-array';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
