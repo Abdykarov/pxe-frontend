@@ -292,6 +292,14 @@
                 </div>
             </div>
         </pxe-field-wrapper>
+        <div class="row mb-5"
+             *ngIf="form.getRawValue() | newSupplyWillBegin as newSupplyWillBegin">
+            <div class="col-12">
+                <small>Předpokládané zahájení nové dodávky od</small>
+                <br/>
+                {{newSupplyWillBegin}}
+            </div>
+        </div>
         <div class="text-center">
             <lnd-button
                 type="primary"
