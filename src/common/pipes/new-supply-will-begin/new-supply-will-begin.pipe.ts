@@ -5,7 +5,6 @@ import {
 
 import * as moment from 'moment';
 import * as R from 'ramda';
-import { unitOfTime } from 'moment';
 
 import { CONTRACT_END_TYPE } from 'src/app/app.constants';
 import { IFormSupplyPointDefinition } from 'src/common/pipes/new-supply-will-begin/new-supply-will-begin.model';
@@ -16,17 +15,21 @@ import { TimeToContractEndPeriod } from 'src/common/graphql/models/supply.model'
 })
 export class NewSupplyWillBeginPipe implements PipeTransform {
     transform(form: IFormSupplyPointDefinition): string | boolean {
+        console.log('JSEM V PIPE');
         return R.cond([
             [
-                (formDef: IFormSupplyPointDefinition) =>
-                    R.equals(formDef.contractEndTypeId, CONTRACT_END_TYPE.CONTRACT_END_DEFAULT),
+                (formDef: IFormSupplyPointDefinition) => {
+                    console.log(formDef);
+                    return R.equals(formDef.contractEndTypeId, CONTRACT_END_TYPE.CONTRACT_END_DEFAULT);
+                },
                 false,
             ],
             [
                 (formDef: IFormSupplyPointDefinition) =>
                     R.equals(formDef.contractEndTypeId, CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLOGATION),
-                (formDef: IFormSupplyPointDefinition) =>
-                    form.expirationDate && moment(form.expirationDate).add(1, 'days'),
+                (formDef: IFormSupplyPointDefinition) => form.expirationDate && moment(form.expirationDate).add(1, 'days') &&
+                        moment().add(form.timeToContractEnd, formDef.contractEndTypeId === TimeToContractEndPeriod.DAY ? 'days' : 'month')
+                            .diff(moment()) < 0,
             ],
             [
                 (formDef: IFormSupplyPointDefinition) =>

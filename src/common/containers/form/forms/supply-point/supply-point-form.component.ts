@@ -304,7 +304,14 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     }
 
     public setOwnTerminate = (ownTerminate: boolean) => {
-        ownTerminate ? this.setDisableField('contractEndTypeId') : this.setEnableField('contractEndTypeId');
+        const contractEndTypeId = this.form.get('contractEndTypeId');
+        if (ownTerminate) {
+            this.setDisableField('contractEndTypeId');
+            contractEndTypeId.setValue(CONTRACT_END_TYPE.CONTRACT_END_REQUEST);
+        } else {
+            this.setEnableField('contractEndTypeId');
+            contractEndTypeId.setValue(CONTRACT_END_TYPE.CONTRACT_END_DEFAULT);
+        }
     }
 
     public showHelp = (field, title) => {
