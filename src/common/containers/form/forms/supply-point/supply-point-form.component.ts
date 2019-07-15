@@ -9,11 +9,15 @@ import {
 import { FormBuilder } from '@angular/forms';
 
 import * as R from 'ramda';
+import * as R_ from 'ramda-extension';
 import {
     BehaviorSubject,
     combineLatest,
 } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/abstract-supply-point-form.component';
 import {
@@ -252,9 +256,17 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             this.contractEndType = this.getFieldValue('contractEndTypeId');
         }
 
+        console.log('____-------_____');
+        console.log(this.form.get('ownTerminate').value);
+
         if (this.form.get('ownTerminate').value) {
             this.contractEndType = CONTRACT_END_TYPE.CONTRACT_END_REQUEST;
         }
+
+        console.log(')_A_(');
+        console.log(this.expirationConfig);
+        console.log(this.contractEndType);
+        console.log(this.expirationConfig[this.contractEndType]);
 
         R.forEachObjIndexed((show: boolean, field: string) => {
             show ? this.setEnableField(field) : this.setDisableField(field);
@@ -333,12 +345,30 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
 
     public loadCodeLists = () => {
         this.supplyService.findCodelistsByTypes(CODE_LIST_TYPES, 'cs')
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(({data}) => {
-                this.codeLists = transformCodeList(data.findCodelistsByTypes);
+            .pipe(
+                takeUntil(this.destroy$),
+                map(({data}) => data.findCodelistsByTypes),
+                map(this.removeTerminateFromCodeList),
+            )
+            .subscribe(data => {
+                this.codeLists = transformCodeList(data);
                 this.codeLists$.next(this.codeLists);
                 this.cd.markForCheck();
             });
+    }
+
+    public removeTerminateFromCodeList = (codeLists) => {
+        const updatedContractEnding = R.compose(
+            R.map((items) => {
+                return R.cond([
+                    [R_.isArray, (array) => R.filter(({code}) => code !== CONTRACT_END_TYPE.CONTRACT_END_REQUEST)(array)],
+                    [R.T, (data) => data],
+                ])(items);
+            }),
+            R.find(R.propEq('codelistType', CODE_LIST.CONTRACT_END_TYPE)),
+        )(codeLists);
+
+        return [...codeLists, updatedContractEnding];
     }
 
     public loadSuppliers = (commodityType) => {

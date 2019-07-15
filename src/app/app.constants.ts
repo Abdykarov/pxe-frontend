@@ -102,7 +102,7 @@ export const CODE_LIST_TYPES = [
 
 export const CONTRACT_END_TYPE = {
     CONTRACT_END_TERM: 'Urcita',
-    CONTRACT_END_TERM_WITH_PROLONGATION: 'Doba určitá s automatickou prolongací',
+    CONTRACT_END_TERM_WITH_PROLONGATION: 'UrcitaProlong',
     CONTRACT_END_INDEFINITE_PERIOD: 'Neurcita',
     CONTRACT_END_REQUEST: 'Vypoved',
     CONTRACT_END_DEFAULT: 'DEFAULT',
