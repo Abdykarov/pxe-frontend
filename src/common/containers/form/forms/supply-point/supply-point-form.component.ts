@@ -229,6 +229,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 timeToContractEnd = String(CONSTS.TIME_TO_CONTRACT_END_PROLONGED);
                 timeToContractEndPeriodId = TimeToContractEndPeriod.DAY;
             }
+            if (contractEndTypeId === CONTRACT_END_TYPE.CONTRACT_END_TERMINATE) {
+                this.setOwnTerminate(true);
+            }
         }
 
         this.form.controls['id'].setValue(id);
