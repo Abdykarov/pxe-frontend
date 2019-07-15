@@ -1,4 +1,11 @@
-<span 
+<a
+    *ngIf="isLink"
+    class="badge"
+    [ngClass]="[type ? 'badge-' + type : '']">
+    <ng-content></ng-content>
+</a>
+<span
+    *ngIf="!isLink"
     class="badge"
     [ngClass]="[type ? 'badge-' + type : '']">
     <ng-content></ng-content>
