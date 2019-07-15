@@ -8,7 +8,7 @@ export const getNextDayFromExpirationDate = (form: IFormSupplyPointDefinition) =
     form.expirationDate && moment(form.expirationDate).add(1, 'days');
 
 export const contractEndTermWithProlongationCalculate = (form: IFormSupplyPointDefinition) =>
-    getNextDayFromExpirationDate(form) && calculateTerminateInterval(moment(form.expirationDate), form).diff(moment()) < 0;
+    calculateTerminateInterval(moment(form.expirationDate), form).diff(moment()) < 0 && getNextDayFromExpirationDate(form) ;
 
 export const contractEndIndefinitePeriodCalculate = (form: IFormSupplyPointDefinition) =>
     form.timeToContractEnd && form.timeToContractEndPeriodId &&

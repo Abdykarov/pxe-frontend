@@ -256,17 +256,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             this.contractEndType = this.getFieldValue('contractEndTypeId');
         }
 
-        console.log('____-------_____');
-        console.log(this.form.get('ownTerminate').value);
-
         if (this.form.get('ownTerminate').value) {
             this.contractEndType = CONTRACT_END_TYPE.CONTRACT_END_REQUEST;
         }
-
-        console.log(')_A_(');
-        console.log(this.expirationConfig);
-        console.log(this.contractEndType);
-        console.log(this.expirationConfig[this.contractEndType]);
 
         R.forEachObjIndexed((show: boolean, field: string) => {
             show ? this.setEnableField(field) : this.setDisableField(field);
@@ -348,7 +340,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             .pipe(
                 takeUntil(this.destroy$),
                 map(({data}) => data.findCodelistsByTypes),
-                map(this.removeTerminateFromCodeList),
+                map(this.removeTerminateFromContractEndType),
             )
             .subscribe(data => {
                 this.codeLists = transformCodeList(data);
@@ -357,7 +349,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             });
     }
 
-    public removeTerminateFromCodeList = (codeLists) => {
+    public removeTerminateFromContractEndType = (codeLists) => {
         const updatedContractEnding = R.compose(
             R.map((items) => {
                 return R.cond([
