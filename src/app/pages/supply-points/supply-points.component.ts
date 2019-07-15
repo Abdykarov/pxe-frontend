@@ -8,19 +8,19 @@ import {
     OnInit,
 } from '@angular/core';
 
+import * as R from 'ramda';
 import {
     map,
     takeUntil,
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import {
-    ISupplyPoint,
-    ISupplyPointFindData,
-} from 'src/common/graphql/models/supply.model';
+import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { ContractStatus } from 'src/common/graphql/models/contract';
+import { IsDatePast } from 'src/common/pipes/is-date-past/is-date-past.pipe';
 
 @Component({
     selector: 'lnd-supply-points',
@@ -31,10 +31,13 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
 
     public error = false;
     public errorMessages = [];
-    public supplierPoints: ISupplyPointFindData[];
+    public supplyPoints: ISupplyPoint[];
+    public supplyPointsFuture: ISupplyPoint[];
+    public supplyPointsActual: ISupplyPoint[];
 
     constructor(
         private cd: ChangeDetectorRef,
+        private isDatePast: IsDatePast,
         private supplyService: SupplyService,
         private route: ActivatedRoute,
         private router: Router,
@@ -45,13 +48,25 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
     ngOnInit () {
         super.ngOnInit();
 
-        this.supplyService.findSupplyPoints()
+        this.supplyService.findSupplyPointsByContractStatus(null, [
+                ContractStatus.CONCLUDED,
+            ])
             .pipe(
                 takeUntil(this.destroy$),
-                map( res => this.transportResponseToData(res)),
+                map( ({data}) => data.findSupplyPointsByContractStatus),
             ).subscribe(
-                (response: ISupplyPointFindData[]) => {
-                    this.supplierPoints = response;
+                (supplyPoints: ISupplyPoint[]) => {
+                    this.supplyPoints = supplyPoints;
+
+                    this.supplyPointsActual = R.filter((supplyPoint: ISupplyPoint) => true)(supplyPoints);
+                        // this.isDatePast.transform(supplyPoint.contract.deliveryTo))(supplyPoints);
+
+                    this.supplyPointsFuture = R.filter((supplyPoint: ISupplyPoint) => true)(supplyPoints);
+                        // !this.isDatePast.transform(supplyPoint.contract.deliveryTo))(supplyPoints);
+                    //
+                    console.log(this.supplyPointsActual);
+                    console.log(this.supplyPointsFuture);
+
                     this.cd.markForCheck();
                 },
                 (error) => {
@@ -62,9 +77,6 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
                 });
     }
 
-    private transportResponseToData = ({data}): ISupplyPointFindData[] => {
-        return data.findSupplyPoints;
-    }
 
     public createSupplyPoint = (event) => {
         event.stopPropagation();

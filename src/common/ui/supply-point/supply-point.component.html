@@ -49,6 +49,20 @@
                                     <span class="supply-point__value">{{data.ean}}</span>
                                 </div>
                             </div>
+                            <div class="col-6 col-md-auto order-md-2"
+                                        *ngIf="data.contract && !isListItem">
+                                <div class="supply-point__value-box">
+                                    <span class="supply-point__value-name">Dodávkové období</span>
+                                    <span class="supply-point__value">
+                                        {{data.contract.deliveryFrom | date: 'dd. MM. y'}} - {{data.contract.deliveryTo | date: 'dd. MM. y'}}
+                                    </span>
+                                </div>
+                            </div>
+                            <!--to be removed-->
+                            <div class="col-6 col-md-auto order-md-2"
+                                 (click)="restoreContractAction($event)">
+                                    ahoj
+                            </div>
                         </div>
                     </div>
                 </div>

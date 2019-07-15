@@ -16,7 +16,7 @@
             (buttonAction)="createSupplyPoint($event)"
         ></lnd-info-banner>
     </ng-container>
-    <ng-container *ngIf="supplierPoints && supplierPoints.length">
+    <ng-container *ngIf="supplyPoints && supplyPoints.length">
         <div class="row mb-5">
             <div class="col text-center">
                 <lnd-button
@@ -26,14 +26,25 @@
                 ></lnd-button>
             </div>
         </div>
-        <div class="supply-points">
-            <ng-container *ngFor="let supplierPoint of supplierPoints">
+        <ng-container *ngIf="supplyPointsActual">
+        <h3 class="text-center">Odběrná místa a jejich aktuální nabídky</h3>
+            <div class="supply-points">
                 <pxe-supply-point
-                    *ngIf="supplierPoint"
+                    *ngFor="let supplierPoint of supplyPointsActual"
                     [data]="supplierPoint"
                     (action)="navigateToSupplyPointDetail($event)"
                 ></pxe-supply-point>
-            </ng-container>
-        </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="supplyPointsFuture">
+            <h3 class="text-center">Odběrná místa a jejich budoucí nabídky</h3>
+            <div class="supply-points">
+                <pxe-supply-point
+                    *ngFor="let supplierPoint of supplyPointsFuture"
+                    [data]="supplierPoint"
+                    (action)="navigateToSupplyPointDetail($event)"
+                ></pxe-supply-point>
+            </div>
+        </ng-container>
     </ng-container>
 </pxe-layout-container>

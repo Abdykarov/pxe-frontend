@@ -1,9 +1,9 @@
-import { ISupplyPointFindData } from 'src/common/graphql/models/supply.model';
+import { CommodityType, ISupplyPoint } from 'src/common/graphql/models/supply.model';
 
-export const supplyPointConfigPower: ISupplyPointFindData = {
+export const supplyPointConfigPower: ISupplyPoint = {
     'id': '72',
     'name': 'Vilka',
-    'commodityType': 'POWER',
+    'commodityType': CommodityType.GAS,
     'supplier': {
         'id': '6049',
         'name': 'Test Agata',
@@ -26,6 +26,7 @@ export const supplyPointConfigPower: ISupplyPointFindData = {
         'description': 'C01d',
         'help': 'C01d',
     },
+    contract: null,
     'circuitBreaker': {
         'type': 'JISTIC',
         'code': '<= 1x25A',
@@ -43,12 +44,19 @@ export const supplyPointConfigPower: ISupplyPointFindData = {
     },
     'lastAnnualConsumptionNT': 1.25,
     'lastAnnualConsumptionVT': 1.35,
+    'allowedOperations': null,
+    'progressStatus': null,
+    'phases': null,
+    'lastVersionOfSupplyPoint': false,
+    'contractEndType': null,
+    'timeToContractEnd': null,
+    'timeToContractEndPeriod': null,
 };
 
-export const supplyPointConfigGas: ISupplyPointFindData = {
+export const supplyPointConfigGas: ISupplyPoint = {
     'id': '77',
     'name': 'Můj byt',
-    'commodityType': 'GAS',
+    'commodityType': CommodityType.GAS,
     'supplier': {
         'id': '6049',
         'name': 'Test Agata',
@@ -56,6 +64,7 @@ export const supplyPointConfigGas: ISupplyPointFindData = {
         'logoPath': '',
         'sampleDocuments': [],
     },
+    contract: null,
     'ean': '27zg700z0069625e',
     'address': {
         'street': 'Milady Horákové',
@@ -78,4 +87,11 @@ export const supplyPointConfigGas: ISupplyPointFindData = {
     },
     'lastAnnualConsumptionNT': null,
     'lastAnnualConsumptionVT': 1.35,
+    'allowedOperations': null,
+    'progressStatus': null,
+    'phases': null,
+    'lastVersionOfSupplyPoint': false,
+    'contractEndType': null,
+    'timeToContractEnd': null,
+    'timeToContractEndPeriod': null,
 };
