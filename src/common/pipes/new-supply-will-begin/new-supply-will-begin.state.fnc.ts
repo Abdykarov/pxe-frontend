@@ -10,7 +10,7 @@ export const isContractEndTerm = (form: IFormSupplyPointDefinition) =>
     R.equals(form.contractEndTypeId, CONTRACT_END_TYPE.CONTRACT_END_TERM);
 
 export const isContractEndRequest = (form: IFormSupplyPointDefinition) =>
-    R.equals(form.contractEndTypeId, CONTRACT_END_TYPE.CONTRACT_END_REQUEST);
+    R.equals(form.contractEndTypeId, CONTRACT_END_TYPE.CONTRACT_END_TERMINATE);
 
 export const isContractEndTermWithProlongation = (form: IFormSupplyPointDefinition) =>
     R.equals(form.contractEndTypeId, CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION);

@@ -33,7 +33,7 @@ export const expirationConfig: IExpirationConfig = {
         'timeToContractEnd': true,
         'timeToContractEndPeriodId': true,
     },
-    [CONTRACT_END_TYPE.CONTRACT_END_REQUEST]: {
+    [CONTRACT_END_TYPE.CONTRACT_END_TERMINATE]: {
         'expirationDate': true,
         'timeToContractEnd': false,
         'timeToContractEndPeriodId': false,

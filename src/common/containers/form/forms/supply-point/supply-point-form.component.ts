@@ -257,7 +257,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         }
 
         if (this.form.get('ownTerminate').value) {
-            this.contractEndType = CONTRACT_END_TYPE.CONTRACT_END_REQUEST;
+            this.contractEndType = CONTRACT_END_TYPE.CONTRACT_END_TERMINATE;
         }
 
         R.forEachObjIndexed((show: boolean, field: string) => {
@@ -294,8 +294,8 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             if (!R.isNil(form.annualConsumption)) {
                 form.annualConsumption = parseFloat(form.annualConsumption.toString().replace(',', '.'));
             }
-            if (this.contractEndType === CONTRACT_END_TYPE.CONTRACT_END_REQUEST) {
-                form.contractEndTypeId = CONTRACT_END_TYPE.CONTRACT_END_REQUEST;
+            if (this.contractEndType === CONTRACT_END_TYPE.CONTRACT_END_TERMINATE) {
+                form.contractEndTypeId = CONTRACT_END_TYPE.CONTRACT_END_TERMINATE;
             }
 
             R.forEachObjIndexed((show: boolean, field: string) => {
@@ -313,9 +313,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         if (ownTerminate) {
             this.lastContractEndType = contractEndTypeId.value;
             this.setDisableField('contractEndTypeId');
-            contractEndTypeId.setValue(CONTRACT_END_TYPE.CONTRACT_END_REQUEST);
+            contractEndTypeId.setValue(CONTRACT_END_TYPE.CONTRACT_END_TERMINATE);
         } else {
-            if (this.lastContractEndType !== CONTRACT_END_TYPE.CONTRACT_END_REQUEST ) {
+            if (this.lastContractEndType !== CONTRACT_END_TYPE.CONTRACT_END_TERMINATE ) {
                 contractEndTypeId.setValue(this.lastContractEndType);
             }
             this.setEnableField('contractEndTypeId');
@@ -353,7 +353,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         const updatedContractEnding = R.compose(
             R.map((items) => {
                 return R.cond([
-                    [R_.isArray, (array) => R.filter(({code}) => code !== CONTRACT_END_TYPE.CONTRACT_END_REQUEST)(array)],
+                    [R_.isArray, (array) => R.filter(({code}) => code !== CONTRACT_END_TYPE.CONTRACT_END_TERMINATE)(array)],
                     [R.T, (data) => data],
                 ])(items);
             }),
