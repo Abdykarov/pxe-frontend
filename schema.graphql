@@ -90,7 +90,7 @@ type Offer {
     priceVT: Float
     status: OfferStatus!
     subject: CodelistItem!
-    supplier: Supplier!
+    supplier: Supplier
     validFrom: Date!
     validTo: Date!
 }
@@ -191,13 +191,12 @@ type SupplyPointOffer {
     priceGas: Float
     priceNT: Float
     priceVT: Float
-    supplier: Supplier!
+    supplier: Supplier
     validFrom: Date!
     validTo: Date!
 }
 
 enum AllowedOperations {
-    DELETE
     LEAVE_CONTRACT
     PARTIAL_EDIT
     SHOW_DELIVERY_TO
