@@ -5,7 +5,6 @@ import {
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'pxe-login-supply-auth-form',

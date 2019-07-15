@@ -12,6 +12,7 @@ import {
     IExpirationConfig,
     IForm,
 } from 'src/common/containers/form/models/form-definition.model';
+import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
 
 export const expirationConfig: IExpirationConfig = {
     [CONTRACT_END_TYPE.CONTRACT_END_TERM]: {
@@ -29,10 +30,18 @@ export const expirationConfig: IExpirationConfig = {
         'timeToContractEnd': true,
         'timeToContractEndPeriodId': true,
     },
+    [CONTRACT_END_TYPE.CONTRACT_END_DEFAULT]: {
+        'expirationDate': false,
+        'timeToContractEnd': false,
+        'timeToContractEndPeriodId': false,
+    },
 };
 
 export const formFields: IForm = {
     controls: {
+        id: [
+            null,
+        ],
         commodityType: [
             CommodityType.POWER,
             [
@@ -194,18 +203,21 @@ export const formFields: IForm = {
             decimal: errorFieldMessages.number.decimal,
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
+            'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
         },
         annualConsumptionVT: {
             required: errorFieldMessages.annualConsumptionVT.required,
             decimal: errorFieldMessages.number.decimal,
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
+            'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
         },
         annualConsumption: {
             required: errorFieldMessages.annualConsumption.required,
             decimal: errorFieldMessages.number.decimal,
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
+            'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
         },
         expirationDateGas: {
             required: errorFieldMessages.expirationDate.requiredGas,
@@ -234,7 +246,66 @@ export const formFields: IForm = {
     },
 };
 
-export const commodityTypeFields: ICommodityTypeFields = {
-    [CommodityType.POWER]: ['ean', 'distributionRateId', 'phasesId', 'circuitBreakerId', 'annualConsumptionNT', 'annualConsumptionVT'],
-    [CommodityType.GAS]: ['eic', 'annualConsumption'],
+export const supplyPointDetailAllowedFields: ICommodityTypeFields = {
+    [CommodityType.POWER]: [
+        'id',
+        'commodityType',
+        'name',
+        'annualConsumptionNT',
+        'annualConsumptionVT',
+    ],
+    [CommodityType.GAS]: [
+        'id',
+        'commodityType',
+        'name',
+        'annualConsumption',
+    ],
+};
+
+export const supplyPointAllowedFields: ICommodityTypeFields = {
+    [CommodityType.POWER]: [
+        'id',
+        'commodityType',
+        'subjectTypeId',
+        'supplierId',
+        'name',
+        'ean',
+        'address',
+        'distributionRateId',
+        'circuitBreakerId',
+        'phasesId',
+        'annualConsumptionNT',
+        'annualConsumptionVT',
+        'expirationDate',
+        'contractEndTypeId',
+        'timeToContractEnd',
+        'timeToContractEndPeriodId',
+    ],
+    [CommodityType.GAS]: [
+        'id',
+        'commodityType',
+        'subjectTypeId',
+        'supplierId',
+        'name',
+        'eic',
+        'address',
+        'annualConsumption',
+        'expirationDate',
+        'contractEndTypeId',
+        'timeToContractEnd',
+        'timeToContractEndPeriodId',
+    ],
+};
+
+export const confirmFindNewSupplyPoint = 'confirmFindNewSupplyPoint';
+
+export const confirmFindNewSupplyPointConfig = (data): IShowModal => {
+    return {
+        component: 'ConfirmModalComponent',
+        modalType: confirmFindNewSupplyPoint,
+        instanceData: {
+            confirmText: `Pokračováním ztratíte neuložené změny ve formuláři`,
+            data,
+        },
+    };
 };

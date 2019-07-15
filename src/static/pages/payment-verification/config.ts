@@ -6,12 +6,13 @@ export const configStepper = [
     },
     {
         url: '/basic/menu-selection',
-            done: true,
-            label: 'Výběr nabídky',
-        },
+        done: true,
+        label: 'Výběr nabídky',
+    },
     {
         url: '/basic/payment-verification',
-            done: false,
-            label: 'Podepsání smlouvy',
-        },
+        active: true,
+        done: false,
+        label: 'Podepsání smlouvy',
+    },
 ];

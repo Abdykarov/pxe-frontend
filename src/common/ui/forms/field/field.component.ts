@@ -18,6 +18,7 @@ import {
 
 import * as R from 'ramda';
 
+import { DynamicPipe } from 'src/common/pipes/dynamic/dynamic.pipe';
 import { FieldTypes } from '../models/field-types.model';
 import { getErrorMessage } from 'src/common/utils';
 import { IOption } from '../models/option.model';
@@ -150,6 +151,15 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     public touched = false;
 
     @Input()
+    set triggerFocus(value: any) {
+        if (this.field && !!value) {
+            setTimeout(() => {
+                this.field.nativeElement.focus();
+            });
+        }
+    }
+
+    @Input()
     public type: string = FieldTypes.INPUT;
 
     @Input()
@@ -173,6 +183,7 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
 
     constructor(
         private cd: ChangeDetectorRef,
+        private dynamicPipe: DynamicPipe,
     ) {}
 
     ngAfterContentInit() {
@@ -225,5 +236,5 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
         }
     }
 
-    public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages);
+    public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages, this.dynamicPipe);
 }

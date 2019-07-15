@@ -22,10 +22,10 @@ import {
 
 export class AbstractFormComponent extends AbstractComponent implements OnInit, OnChanges {
     @Input()
-    public formSent = false;
+    public formFields: IForm;
 
     @Input()
-    public formFields: IForm;
+    public formSent = false;
 
     @Input()
     public formLoading = false;
@@ -44,6 +44,7 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
 
     public form: FormGroup;
     public formError: any = {};
+    public originalFormValues: any = {};
 
     constructor(
         protected fb: FormBuilder,
@@ -109,6 +110,15 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         return this.form.get(fieldName).value;
     }
 
+    public setEnableField = (fieldName: string, opts = {}): void => {
+        this.form.get(fieldName).enable(opts);
+    }
+
+    public setDisableField = (fieldName: string, opts = {}): void => {
+        this.form.get(fieldName).disable(opts);
+    }
+
+
     public resetFieldValue = (field, clearError = true) => {
         this.form.get(field).patchValue(null);
         this.resetFieldError(field, clearError);
@@ -126,5 +136,21 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         while (formArray.length !== 0) {
             formArray.removeAt(0);
         }
+    }
+
+    public setOriginalFormValues = (obj: any) => {
+        this.originalFormValues = Object.assign({}, obj);
+    }
+
+    public isDifferentField = (prop: string): boolean => this.originalFormValues[prop] !== this.form.value[prop];
+
+    public isDifferentForm = (): boolean => {
+        let hasChanges = false;
+        for (const prop in this.form.value) {
+            if (this.isDifferentField(prop)) {
+                hasChanges = true;
+            }
+        }
+        return hasChanges;
     }
 }

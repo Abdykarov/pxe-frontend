@@ -2,9 +2,7 @@ import {
     Component,
     Input,
 } from '@angular/core';
-import { Router } from '@angular/router';
 
-import { AbstractComponent } from 'src/common/abstract.component';
 import { IStepperProgressItem } from './models/progress.model';
 
 @Component({
@@ -12,16 +10,10 @@ import { IStepperProgressItem } from './models/progress.model';
     templateUrl: './progress-bar.component.html',
     styleUrls: ['./progress-bar.component.scss'],
 })
-export class ProgressBarComponent extends AbstractComponent {
+export class ProgressBarComponent {
     @Input()
     public config: IStepperProgressItem[] = [];
 
     @Input()
     public isMinor = false;
-
-    constructor(
-        private router: Router,
-    ) {
-        super();
-    }
 }

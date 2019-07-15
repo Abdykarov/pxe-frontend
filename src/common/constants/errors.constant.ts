@@ -4,6 +4,11 @@ export const restAPIErrorCodes = {
     'CLI0001' : 'Špatné přihlašovací údaje.',
 };
 
+export const graphQLMessages = {
+    cannotDeleteContract: 'Od smlouvy se nepodařilo odstoupit.',
+    cannotSignContract: 'Smlouvu se nepodařilo podepsat.',
+};
+
 export const errorFieldMessages =  {
     address: {
         required: 'Vyplňte adresu odběrného místa.',
@@ -61,6 +66,7 @@ export const errorFieldMessages =  {
     },
     deposit: {
         required: 'Vyplňte, jakou chcete mít výši záloh.',
+        requiredMinValue: 'Minimální výše záloh je {min|number} Kč.',
     },
     depositPaymentType: {
         required: 'Vyberte ze seznamu, jak chcete platit zálohy.',
@@ -156,9 +162,6 @@ export const errorFieldMessages =  {
             'písmena, aspoň jednu číslici a aspoň jeden speciální znak jako &_*+/#\ apod.',
         fieldsMustMatch: 'Musíte vyplnit stejná hesla.',
     },
-    subjectTypeId: {
-        required: 'Zvolte odběratele.',
-    },
     phone: {
         required: 'Vyplňte svůj telefon.',
         requiredMobile: 'Vyplňte svůj mobilní telefon.',
@@ -171,8 +174,14 @@ export const errorFieldMessages =  {
         required: 'Vyplňte předvolbu pro ČR +420.',
         invalidPhoneNumberPrefix: 'Vyplňte správnou předvolbu pro ČR +420.',
     },
+    smsCode: {
+        required: 'Vyplňte sms kód.',
+    },
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
+    },
+    subjectTypeId: {
+        required: 'Zvolte odběratele.',
     },
     contractEndTypeId: {
         required: 'Zvolte typ ukončení platnosti aktuální smlouvy.',

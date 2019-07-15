@@ -7,6 +7,7 @@ import { LayoutContainerModule } from 'src/common/containers/layout-container/la
 import { OfferSelectionComponent } from './offer-selection.component';
 import { OfferSelectionRoutingModule } from './offer-selection.routing';
 import { PipesModule } from 'src/common/pipes/pipes.module';
+import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
 import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.module';
 import { SupplyPointOfferModule } from 'src/common/ui/supply-point-offer/supply-point-offer.module';
 
@@ -21,6 +22,7 @@ import { SupplyPointOfferModule } from 'src/common/ui/supply-point-offer/supply-
         LayoutContainerModule,
         OfferSelectionRoutingModule,
         PipesModule,
+        PlaceloaderModule,
         ProgressBarModule,
         SupplyPointOfferModule,
     ],

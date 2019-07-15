@@ -1,0 +1,27 @@
+<div class="container-fluid">
+    <div class="container-content">
+        <pxe-layout-container pageTitle="Platba">
+            <div class="row mb-6">
+                <div class="col-12 col-xl-10 offset-xl-1">
+                    <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-12">
+                    <lnd-alert
+                        *ngIf="globalError.length"
+                        type="danger">
+                        <ng-container *ngFor="let error of globalError">
+                            {{ error }}<br>
+                        </ng-container>
+                    </lnd-alert>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-xl-10 offset-xl-1 text-center">
+                    <h2>Platba</h2>
+                </div>
+            </div>
+        </pxe-layout-container>
+    </div>
+</div>

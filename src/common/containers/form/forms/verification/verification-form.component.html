@@ -1,0 +1,52 @@
+<ng-template #sendSmsAgainTemplate>
+    <a (click)="submitSms()"
+       *ngIf="smsSent">
+        Poslat SMS kód znovu?
+    </a>
+</ng-template>
+<form
+    [formGroup]="form"
+    autocomplete="off"
+    (keydown)="resetCustomFieldError()"
+    (change)="resetCustomFieldError()">
+    <div class="row">
+        <div [ngClass]="classRootWrapper">
+            <div [ngClass]="classMainWrapper">
+                <div [ngClass]="classFirstField">
+                    <lnd-form-field
+                        label="Kód z SMS"
+                        [disabledField]="!smsSent"
+                        [error]="formError.smsCode || form.controls.smsCode.errors"
+                        [formControl]="form.controls.smsCode"
+                        [id]="'smsCode'"
+                        [subtextTemplate]="sendSmsAgainTemplate"
+                        [success]="form.controls.smsCode.valid && (form.controls.smsCode.touched || formError.smsCode)"
+                        [touched]="form.controls.smsCode.touched || formError.smsCode"
+                        [triggerFocus]="smsSent"
+                        [validationMessages]="formFields.validationMessages.smsCode">
+                    </lnd-form-field>
+                </div>
+                <div [ngClass]="classSecondField">
+                    <lnd-button
+                        *ngIf="!smsSent"
+                        (action)="submitSms()"
+                        [isDisabled]="formLoading"
+                        label="Odeslat ověřovací kód"
+                        type="primary">
+                    </lnd-button>
+                    <lnd-button
+                        *ngIf="smsSent"
+                        (action)="submitForm()"
+                        [isDisabled]="formLoading"
+                        [label]="submitLabelText"
+                        type="primary">
+                    </lnd-button>
+                    <p *ngIf="!smsSent && !showSentSmsLabelUnderFirstField"
+                       class="small mt-2">
+                        Na číslo {{contract.personalData.phone}}<br /> odešleme ověřovací kód
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

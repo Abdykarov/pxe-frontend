@@ -14,13 +14,14 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { configStepper } from 'src/app/pages/request/recapitulation/recapitulation.config';
 import { formFields } from 'src/common/containers/form/forms/personal-info/personal-info-form.config';
+import { getConfigStepper } from 'src/common/utils';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IPersonalDataInput } from 'src/common/graphql/models/personal-data.model';
 import {
     ISupplyPoint,
+    ProgressStatus,
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
 import { parseGraphQLErrors } from 'src/common/utils';
@@ -34,7 +35,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./recapitulation.component.scss'],
 })
 export class RecapitulationComponent extends AbstractComponent implements OnInit {
-    public stepperProgressConfig: IStepperProgressItem[] = configStepper;
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.PERSONAL_DATA);
 
     public formFields = formFields;
     public formSent = false;
@@ -44,7 +45,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
 
     public isIndividual = true;
     public supplyPoint: ISupplyPoint;
-    public supplyPointId = this.route.snapshot.queryParams['supplyPointId'];
+    public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -88,7 +89,12 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             )
             .subscribe(
                 () => {
-                    this.router.navigate([ROUTES.ROUTER_REQUEST_CONTRACT]);
+                    this.router.navigate(
+                        [ROUTES.ROUTER_REQUEST_CONTRACT], {
+                        queryParams: {
+                            supplyPointId: this.supplyPointId,
+                        },
+                    });
                 },
                 (error) => {
                     this.formLoading = false;

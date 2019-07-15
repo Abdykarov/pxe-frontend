@@ -26,19 +26,19 @@ export class BannerUIComponent extends AbstractComponent {
     public data?: IBannerObj;
 
     @Input()
-    public showButtonLabel = true;
+    public icon = 'icon--info';
 
     @Input()
-    public staticBannerTitle?: string;
+    public showButtonLabel = true;
 
     @Output()
-    public staticBannerAction?: EventEmitter<any> = new EventEmitter<any>();
+    public customBannerAction?: EventEmitter<any> = new EventEmitter<any>();
 
-    public bannerAction(value: string, type: string) {
+    public bannerAction(value: string, type: string, state: any = null) {
         if (type === 'external') {
             window.open(value);
         } else {
-            this.router.navigate([value]);
+            this.router.navigate([value], {state});
         }
     }
 

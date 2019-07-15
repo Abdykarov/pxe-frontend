@@ -1,16 +1,15 @@
-<nav class="progress-bar-holder">
-    <ol 
+ <nav class="progress-bar-holder">
+    <ol
         class="progress-bar"
         [class.progress-bar--minor]="isMinor">
         <li
             *ngFor="let item of config"
             class="progress-bar__item"
-            [class.progress-bar__item--done]="!!item.done"
-            [class.progress-bar__item--shadow-step]="!!item.shadowStep"
-            [routerLinkActive]="[ item.url ? 'progress-bar__item--active' : '' ]">
+            [class.progress-bar__item--done]="item.done"
+            [class.progress-bar__item--shadow-step]="item.shadowStep"
+            [class.progress-bar__item--active]="item.active">
             <a
-                class="progress-bar__item-inner"
-                [routerLink]="item.url ? item.url : null">
+                class="progress-bar__item-inner">
                 <span class="progress-bar__bullet">
                     <span
                         *ngIf="!!item.done"

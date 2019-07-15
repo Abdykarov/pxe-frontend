@@ -15,6 +15,19 @@ export enum SubjectType {
     SUBJECT_TYPE_BUSINESSMAN = '2',
 }
 
+export enum TimeToContractEndPeriod {
+    DAY = 'Den',
+    MONTH = 'Mesic',
+}
+
+export enum AllowedOperations {
+    DELETE = 'DELETE',
+    LEAVE_CONTRACT = 'LEAVE_CONTRACT',
+    PARTIAL_EDIT = 'PARTIAL_EDIT',
+    SHOW_DELIVERY_TO = 'SHOW_DELIVERY_TO',
+    TERMINATE_CONTRACT = 'TERMINATE_CONTRACT',
+}
+
 export interface IAddress {
     street: string;
     orientationNumber: string;
@@ -44,6 +57,7 @@ export interface ISupplier {
     vatNumber: string;
     logoPath?: string;
     sampleDocuments: ISupplierSampleDocument[];
+    __typename?: string;
 }
 
 export interface ISupplierSampleDocument {
@@ -56,6 +70,10 @@ export interface ISupplyPointGasAttributes {
     annualConsumption: number;
 }
 
+export interface ISupplyPointUpdateGasAttributes {
+    annualConsumption: number;
+}
+
 export interface ISupplyPointPowerAttributes {
     ean: string;
     circuitBreakerId: string;
@@ -65,10 +83,16 @@ export interface ISupplyPointPowerAttributes {
     annualConsumptionVT: number;
 }
 
+export interface ISupplyPointUpdatePowerAttributes {
+    annualConsumptionNT: number;
+    annualConsumptionVT: number;
+}
+
 export interface ISupplyPoint {
     id: string;
     name: string;
-    commodityType: string;
+    allowedOperations: AllowedOperations[];
+    commodityType: CommodityType;
     supplier: ISupplier;
     ean: string;
     address: IAddress;
@@ -81,10 +105,22 @@ export interface ISupplyPoint {
     subject: ICodelistItem;
     lastAnnualConsumptionNT: number;
     lastAnnualConsumptionVT: number;
+    lastVersionOfSupplyPoint: boolean;
     contractEndType: ICodelistItem;
     timeToContractEnd: number;
     timeToContractEndPeriod: ICodelistItem;
     contract: IContract;
+    progressStatus: ProgressStatus;
+}
+
+export enum ProgressStatus {
+    COMPLETED = 'COMPLETED',
+    NONE = 'NONE',
+    OFFER_STEP = 'OFFER_STEP',
+    PERSONAL_DATA = 'PERSONAL_DATA',
+    READY_FOR_SIGN = 'READY_FOR_SIGN',
+    SUPPLY_POINT = 'SUPPLY_POINT',
+    WAITING_FOR_PAYMENT = 'WAITING_FOR_PAYMENT',
 }
 
 export interface ISelectedOffer {

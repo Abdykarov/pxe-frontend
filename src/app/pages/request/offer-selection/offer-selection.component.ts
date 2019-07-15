@@ -8,16 +8,18 @@ import {
     OnInit,
 } from '@angular/core';
 
-import * as R from 'ramda';
 import {
     map,
     takeUntil,
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { configStepper } from './offer-selection.config';
 import { ContractService } from 'src/common/graphql/services/contract.service';
-import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import { getConfigStepper } from 'src/common/utils';
+import {
+    ISupplyPoint,
+    ProgressStatus,
+} from 'src/common/graphql/models/supply.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { OfferService } from 'src/common/graphql/services/offer.service';
@@ -31,10 +33,11 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class OfferSelectionComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
-    public stepperProgressConfig: IStepperProgressItem[] = configStepper;
+    public loadingSupplyPointOffers = true;
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.OFFER_STEP);
     public supplyPointOffers: ISupplyPointOffer[];
     public supplyPoint: ISupplyPoint;
-    public supplyPointId = this.route.snapshot.queryParams['supplyPointId'];
+    public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -75,15 +78,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
             .subscribe(
                 (findSupplyPointOffers: ISupplyPointOffer[]) => {
                     this.supplyPointOffers = findSupplyPointOffers;
-                    R.map((supplyPointOffer: ISupplyPointOffer) => {
-                        let benefits: string[] = [];
-
-                        try {
-                            benefits = supplyPointOffer.benefits && JSON.parse(<string>supplyPointOffer.benefits);
-                        } catch (e) {}
-
-                        supplyPointOffer.benefits = benefits;
-                    } , this.supplyPointOffers);
+                    this.loadingSupplyPointOffers = false;
                     this.cd.markForCheck();
                 },
                 (error) => {

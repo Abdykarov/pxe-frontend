@@ -5,8 +5,11 @@ import {
 import {
     ChangeDetectorRef,
     Component,
+    Inject,
     OnInit,
+    PLATFORM_ID,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import * as R from 'ramda';
 import {
@@ -18,15 +21,20 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CommodityType,
     ISupplyPoint,
-    ISupplyPointGasAttributes,
     ISupplyPointFormData,
+    ISupplyPointGasAttributes,
     ISupplyPointPowerAttributes,
+    ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
+import { getConfigStepper } from 'src/common/utils';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils';
-import { ROUTES } from 'src/app/app.constants';
+import {
+    ROUTES,
+    SUPPLY_POINT_EDIT_TYPE,
+} from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -39,43 +47,36 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
     public fieldError: IFieldError = {};
     public formLoading = false;
+    public supplyPointData = null;
+    public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
 
-    public stepperProgressConfig: IStepperProgressItem[] = [
-        {
-            url: ROUTES.ROUTER_REQUEST_SUPPLY_POINT,
-            done: false,
-            label: 'Výběr odběrného místa',
-        },
-        {
-            url: ROUTES.ROUTER_REQUEST_OFFER_SELECTION,
-            done: false,
-            label: 'Výběr nabídky',
-        },
-        {
-            url: ROUTES.ROUTER_DASHBOARD,
-            done: false,
-            label: 'Podepsání smlouvy',
-        },
-    ];
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.SUPPLY_POINT);
 
     constructor(
         private cd: ChangeDetectorRef,
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
+    }
+
+    ngOnInit() {
+        if (isPlatformBrowser(this.platformId)) {
+            this.supplyPointData = window.history.state.supplyPointCopy;
+            this.editMode = SUPPLY_POINT_EDIT_TYPE.PROLONG;
+        }
     }
 
     public submitSupplyForm = (supplyPointFormData: ISupplyPointFormData) => {
         this.formLoading = true;
         this.globalError = [];
         this.fieldError = {};
-        let saveSupplyPoint;
-        let ean = '';
+        let supplyPointAction;
+        const id = supplyPointFormData.id;
 
         const supplyPoint: ISupplyPoint = R.pick([
-            'id',
             'supplierId',
             'name',
             'address',
@@ -84,7 +85,6 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
             'contractEndTypeId',
             'timeToContractEnd',
             'timeToContractEndPeriodId',
-
         ], supplyPointFormData);
 
         if (supplyPointFormData.commodityType === CommodityType.POWER) {
@@ -97,22 +97,29 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                     'annualConsumptionNT',
                     'annualConsumptionVT',
                 ], supplyPointFormData);
-            ean = powerAttributes.ean;
-            saveSupplyPoint = this.supplyService.savePowerSupplyPoint(supplyPoint, powerAttributes);
+            supplyPointAction = id ?
+                this.supplyService.updatePowerSupplyPoint(id, supplyPoint, powerAttributes) :
+                this.supplyService.createPowerSupplyPoint(supplyPoint, powerAttributes);
         } else {
             const gasAttributes: ISupplyPointGasAttributes =
                 R.pick([
                     'eic',
                     'annualConsumption',
                 ], supplyPointFormData);
-            ean = gasAttributes.eic;
-            saveSupplyPoint = this.supplyService.saveGasSupplyPoint(supplyPoint, gasAttributes);
+            supplyPointAction = id ?
+                this.supplyService.updateGasSupplyPoint(id, supplyPoint, gasAttributes) :
+                this.supplyService.createGasSupplyPoint(supplyPoint, gasAttributes);
         }
 
-        saveSupplyPoint
+        supplyPointAction
             .pipe(
                 takeUntil(this.destroy$),
-                map(({data}) => data.savePowerSupplyPoint || data.saveGasSupplyPoint),
+                map(
+                    ({data}) => data.createPowerSupplyPoint ||
+                        data.updatePowerSupplyPoint ||
+                        data.createGasSupplyPoint ||
+                        data.updateGasSupplyPoint,
+                ),
             )
             .subscribe(
                 (supplyPointId) => {

@@ -158,6 +158,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/full/landing-page',
                 },
                 {
+                    'label': 'List supply points',
+                    'url': '/basic/list-supply-points',
+                },
+                {
                     'label': 'Login',
                     'url': '/full/login',
                 },
@@ -172,6 +176,14 @@ export const staticNavigationConfig: INavigationConfig = [
                 {
                     'label': 'Registration',
                     'url': '/full/registration',
+                },
+                {
+                    'label': 'Request',
+                    'url': '/basic/request',
+                },
+                {
+                    'label': 'Request (banner)',
+                    'url': '/basic/request-banner',
                 },
                 {
                     'label': 'New supply point',

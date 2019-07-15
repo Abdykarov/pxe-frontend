@@ -1,97 +1,50 @@
-<h3>Normal</h3>
-<div class="request-card">
+<div *ngIf="supplyPoint"
+     class="request-card">
     <div class="request-card__inner">
         <div class="row no-gutters">
-            <div class="col-12 col-xl-7 mb-4 mb-xl-0">
-                <div class="row mb-4">
-                    <div class="col-3 col-md-2 text-center">
-                        <span class="icon request-card__icon icon--flash"></span>
+            <div class="col-3 col-md-2 col-xl-1 text-center">
+                <span class="icon request-card__icon"
+                        [class.icon--flame]="supplyPoint.commodityType === commodityType.GAS"
+                        [class.icon--flash]="supplyPoint.commodityType === commodityType.POWER"
+                ></span>
+            </div>
+            <div class="col-9 col-md-10 col-xl-7 mb-4">
+                <span class="request-card__title">{{supplyPoint.name}}</span>
+                <span class="request-card__title-subtext">
+                    Dodávka {{supplyPoint.commodityType === commodityType.GAS? 'plynu' : 'elektřiny'}}
+                </span>
+            </div>
+            <div class="col-12 mb-4 col-md-10 offset-md-2 col-xl-11 offset-xl-1 mb-xl-0 order-xl-3">
+                <div class="row">
+                    <div *ngIf="this.supplyPoint.progressStatus | progressStatus as stateDescription"
+                            class="col-12 mb-2 col-md-auto mb-md-0 mr-md-2">
+                        Stav – {{stateDescription}}
                     </div>
-                    <div class="col-9 col-md-10">
-                        <span class="request-card__title">Byt - Praha</span>
-                        <span class="request-card__title-subtext">
-                            Dodávka elektřiny
-                        </span>
+                    <div class="col-12 col-md-5 col-xl-4">
+                        <pxe-progress-bar
+                            *ngIf="stepperProgressConfig"
+                            [config]="stepperProgressConfig"
+                            [isMinor]="true"
+                        ></pxe-progress-bar>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12 col-md-10 offset-md-2">
-                        <div class="row">
-                            <div class="col-12 mb-2 col-md-auto mb-md-0 mr-md-2">
-                                Stav – 2/3 Volba nabídky
-                            </div>
-                            <div class="col">
-                                <pxe-progress-bar 
-                                    [config]="stepperProgressConfigSimple2"
-                                    [isMinor]="true"
-                                ></pxe-progress-bar>
-                            </div>
+                <ng-container *ngIf="supplyPoint.contract?.offer">
+                    <div class="row mt-3"
+                            [class.d-none]="supplyPoint.contract.offer.validTo | isDatePast">
+                        <div class="col-12 col-md-10">
+                            <pxe-badge type="light">
+                                Platnost dříve vybrané nabídky bohužel již vypršela.
+                            </pxe-badge>
                         </div>
                     </div>
-                </div>
-                <div class="row mt-3 d-none">
-                    <div class="col-12 col-md-10 offset-md-2">
-                        <pxe-badge type="light">
-                            Platnost dříve vybrané nabídky bohužel již vypršela.
-                        </pxe-badge>
-                    </div>
-                </div>
+                </ng-container>
             </div>
-            <div class="col-12 col-md-10 offset-md-2 col-xl-5 offset-xl-0">
+            <div class="col-12 col-md-10 offset-md-2 col-xl-4 offset-xl-0 order-xl-2">
                 <div class="request-card__addon">
                     <lnd-button
                         label="Dokončit žádost"
-                        type="info">
-                    </lnd-button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<h3>With badge</h3>
-<div class="request-card">
-    <div class="request-card__inner">
-        <div class="row no-gutters">
-            <div class="col-12 col-xl-7 mb-4 mb-xl-0">
-                <div class="row mb-4">
-                    <div class="col-3 col-md-2 text-center">
-                        <span class="icon request-card__icon icon--flash"></span>
-                    </div>
-                    <div class="col-9 col-md-10">
-                        <span class="request-card__title">Byt - Praha</span>
-                        <span class="request-card__title-subtext">
-                            Dodávka elektřiny
-                        </span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 col-md-10 offset-md-2">
-                        <div class="row">
-                            <div class="col-12 mb-2 col-md-auto mb-md-0 mr-md-2">
-                                Stav – 2/3 Volba nabídky
-                            </div>
-                            <div class="col">
-                                <pxe-progress-bar 
-                                    [config]="stepperProgressConfigSimple2"
-                                    [isMinor]="true"
-                                ></pxe-progress-bar>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-12 col-md-10 offset-md-2">
-                        <pxe-badge type="light">
-                            Platnost dříve vybrané nabídky bohužel již vypršela.
-                        </pxe-badge>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-10 offset-md-2 col-xl-5 offset-xl-0">
-                <div class="request-card__addon">
-                    <lnd-button
-                        label="Dokončit žádost"
-                        type="info">
+                        type="primary"
+                        (click)="action.emit(supplyPoint)">
                     </lnd-button>
                 </div>
             </div>

@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 // own components
 import { InfoBannerComponent } from './info-banner.component';
 import { ButtonModule } from '../button/button.module';
+import { PipesModule } from 'src/common/pipes/pipes.module';
 
 @NgModule({
     declarations: [
@@ -12,6 +13,7 @@ import { ButtonModule } from '../button/button.module';
     imports: [
         ButtonModule,
         CommonModule,
+        PipesModule,
     ],
     exports: [
         InfoBannerComponent,

@@ -9,16 +9,16 @@
             <h2>Zadejte údaje k odběrnému místu</h2>
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
-            <div class="page-box">
-                <pxe-supply-point-form
-                    [formFields]="formFields"
-                    [formLoading]="formLoading"
-                    [formSent]="formSent"
-                    [globalError]="globalError"
-                    [fieldError]="fieldError"
-                    (submitAction)="submitSupplyForm($event)"
-                ></pxe-supply-point-form>
-            </div>
+            <pxe-supply-point-form
+                [editMode]="editMode"
+                [formFields]="formFields"
+                [formLoading]="formLoading"
+                [formSent]="formSent"
+                [formValues]="supplyPointData"
+                [globalError]="globalError"
+                [fieldError]="fieldError"
+                (submitAction)="submitSupplyForm($event)"
+            ></pxe-supply-point-form>
         </div>
     </div>
 </pxe-layout-container>

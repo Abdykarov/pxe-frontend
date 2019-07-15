@@ -12,6 +12,10 @@ const routes: Routes = [
         path: CONSTS.PATHS.EMPTY,
         component: SupplyPointsComponent,
     },
+    {
+        path: ':supplyPointId',
+        loadChildren: '../../pages/supply-points/detail/supply-point-detail.module#SupplyPointDetailModule',
+    },
 ];
 
 @NgModule({
