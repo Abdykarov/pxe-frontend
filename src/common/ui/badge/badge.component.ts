@@ -12,7 +12,6 @@ import { IBadgeType } from './models/type.model';
     templateUrl: './badge.component.html',
     styleUrls: ['./badge.component.scss'],
 })
-
 export class BadgeComponent {
     @Input()
     public type: IBadgeType;
