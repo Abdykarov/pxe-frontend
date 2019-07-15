@@ -1,7 +1,11 @@
 <div class="info-banner">
     <img alt="" class="info-banner__illustration" src="{{bannerImageSrc}}" title="">
     <h2 class="info-banner__title">{{bannerTitle}}</h2>
-    <p class="info-banner__description">{{bannerDescription}}</p>
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-7">
+            <p class="info-banner__description">{{bannerDescription}}</p>
+        </div>
+    </div>
     <lnd-button
         *ngIf="showButton"
         (action)="buttonAction.emit($event)"
