@@ -58,16 +58,14 @@
                                     </span>
                                 </div>
                             </div>
-                            <!--to be removed-->
-                            <div class="col-6 col-md-auto order-md-2"
-                                 (click)="restoreContractAction($event)">
-                                    ahoj
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <pxe-badge type="info">
-                                    Supply point status Badge
+                                <pxe-badge *ngIf="data.contract && !isListItem"
+                                           type="info"
+                                           [isLink]="true"
+                                           (action)="restoreContractAction($event)">
+                                    Platnost končí za {{data.contract.deliveryFrom | dateDiff: data.contract.deliveryTo}} dní - Obnovit smlouvu
                                 </pxe-badge>
                             </div>
                         </div>
