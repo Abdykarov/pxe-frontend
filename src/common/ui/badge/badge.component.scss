@@ -33,11 +33,7 @@
 	&-transparent {
 		@include link-without-href {
 			color: $font-text;
-		}
-
-		@include link-without-href-interactive {
-			color: $font-text;
-			text-decoration: none;
+			pointer-events: none;
 		}
 	}
 
