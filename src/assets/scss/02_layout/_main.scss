@@ -149,23 +149,6 @@
 		}
 	}
 
-	.table--basic {
-		width: 100%;
-		height: 100%;
-
-		tbody {
-			th,
-			td {
-				padding: ( $spacer / 2 );
-			}
-
-			th {
-				padding-right: 20px;
-				font-weight: 400;
-			}
-		}
-	}
-
 	.qr-code-img {
 		width: 240px;
 		max-width: 100%;
