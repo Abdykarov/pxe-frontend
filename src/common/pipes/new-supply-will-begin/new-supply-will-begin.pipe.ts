@@ -5,41 +5,54 @@ import {
 
 import * as R from 'ramda';
 
+import { CONTRACT_END_TYPE } from 'src/app/app.constants';
 import {
-    isContractEndDefault,
-    isContractEndIndefinitePeriod,
-    isContractEndTermOrRequest,
-    isContractEndTermWithProlongation,
-} from 'src/common/pipes/new-supply-will-begin/new-supply-will-begin.state.fnc';
-import {
-    contractEndIndefinitePeriodCalculate,
-    contractEndTermWithProlongationCalculate,
+    contractEndIndefinitePeriod,
+    contractEndTermWithProlongation,
     getNextDayFromExpirationDate,
-} from 'src/common/pipes/new-supply-will-begin/new-supply-will-begin.calculate.fnc';
-import { IFormSupplyPointDefinition } from 'src/common/pipes/new-supply-will-begin/new-supply-will-begin.model';
+} from 'src/common/utils/supply-point-date-calculate.fnc';
+import { ISupplyPointInput } from 'src/common/graphql/models/supply.model';
 
 @Pipe({
   name: 'newSupplyWillBegin',
 })
 export class NewSupplyWillBeginPipe implements PipeTransform {
-    transform(form: IFormSupplyPointDefinition): string | boolean {
+    isContractEndDefault = (supplyPointInput: ISupplyPointInput) =>
+        R.equals(supplyPointInput.contractEndTypeId, CONTRACT_END_TYPE.CONTRACT_END_DEFAULT)
+
+    isContractEndTerm = (supplyPointInput: ISupplyPointInput) =>
+        R.equals(supplyPointInput.contractEndTypeId, CONTRACT_END_TYPE.CONTRACT_END_TERM)
+
+    isContractEndRequest = (supplyPointInput: ISupplyPointInput) =>
+        R.equals(supplyPointInput.contractEndTypeId, CONTRACT_END_TYPE.CONTRACT_END_TERMINATE)
+
+    isContractEndTermWithProlongation = (supplyPointInput: ISupplyPointInput) =>
+        R.equals(supplyPointInput.contractEndTypeId, CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION)
+
+    isContractEndIndefinitePeriod = (supplyPointInput: ISupplyPointInput) =>
+        R.equals(supplyPointInput.contractEndTypeId, CONTRACT_END_TYPE.CONTRACT_END_INDEFINITE_PERIOD)
+
+    isContractEndTermOrRequest = (supplyPointInput: ISupplyPointInput) =>
+        this.isContractEndTerm(supplyPointInput) || this.isContractEndRequest(supplyPointInput)
+
+    transform(supplyPointInput: ISupplyPointInput): string | boolean  {
         return R.cond([
             [
-                isContractEndDefault,
+                this.isContractEndDefault,
                 false,
             ],
             [
-                isContractEndTermWithProlongation,
-                contractEndTermWithProlongationCalculate,
+                this.isContractEndTermWithProlongation,
+                contractEndTermWithProlongation,
             ],
             [
-                isContractEndTermOrRequest,
+                this.isContractEndTermOrRequest,
                 getNextDayFromExpirationDate,
             ],
             [
-                isContractEndIndefinitePeriod,
-                contractEndIndefinitePeriodCalculate,
+                this.isContractEndIndefinitePeriod,
+                contractEndIndefinitePeriod,
             ],
-        ])(form);
+        ])(supplyPointInput);
     }
 }

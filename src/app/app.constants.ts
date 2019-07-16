@@ -46,6 +46,7 @@ export const CONSTS = {
         TERMS_OF_USE : 'terms-of-use',
         WILD_CART  : '**',
     },
+    MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
     TIME_TO_CONTRACT_END_PROLONGED: 14,
 };
