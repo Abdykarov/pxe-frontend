@@ -7,16 +7,18 @@ import {
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 
-export const getNextDayFromExpirationDate = (form: ISupplyPointInput) =>
-    form.expirationDate && moment(form.expirationDate).add(1, 'days');
+export const getNextDayFromExpirationDate = (supplyPointInput: ISupplyPointInput) =>
+    supplyPointInput.expirationDate && moment(supplyPointInput.expirationDate).add(1, 'days');
 
-export const contractEndTermWithProlongation = (form: ISupplyPointInput) =>
-    calculateTerminateInterval(moment(form.expirationDate), form).diff(moment()) < 0 && getNextDayFromExpirationDate(form) ;
+export const contractEndTermWithProlongation = (supplyPointInput: ISupplyPointInput) =>
+    calculateTerminateInterval(moment(supplyPointInput.expirationDate), supplyPointInput).diff(moment()) < 0 &&
+    getNextDayFromExpirationDate(supplyPointInput) ;
 
-export const contractEndIndefinitePeriod = (form: ISupplyPointInput) =>
-    form.timeToContractEnd && form.timeToContractEndPeriodId &&
-    calculateTerminateInterval(moment().add(CONSTS.MONTH_DURATION, 'days'), form).add(1, 'months').startOf('month');
+export const contractEndIndefinitePeriod = (supplyPointInput: ISupplyPointInput) =>
+    supplyPointInput.timeToContractEnd && supplyPointInput.timeToContractEndPeriodId &&
+    calculateTerminateInterval(moment().add(CONSTS.MONTH_DURATION, 'days'), supplyPointInput).add(1, 'months').startOf('month');
 
-export const calculateTerminateInterval = (from: Moment, form: ISupplyPointInput) =>
-    moment(from).add(form.timeToContractEnd, form.timeToContractEndPeriodId === TimeToContractEndPeriod.DAY ? 'days' : 'month');
+export const calculateTerminateInterval = (from: Moment, supplyPointInput: ISupplyPointInput) =>
+    moment(from).add(supplyPointInput.timeToContractEnd,
+        supplyPointInput.timeToContractEndPeriodId === TimeToContractEndPeriod.DAY ? 'days' : 'month');
 
