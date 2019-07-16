@@ -8,6 +8,7 @@
             {{ message }}<br>
         </ng-container>
     </lnd-alert>
+    <lnd-placeloader [loading]="dataLoading && !errorMessages.length"></lnd-placeloader>
     <ng-container *ngIf="supplyPoints && !supplyPoints.length">
         <lnd-info-banner
             [bannerTitle]="'Zatím nemáte uložené žádné odběrné místo'"

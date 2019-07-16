@@ -5,6 +5,7 @@ import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
+import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
 import { SupplyPointModule } from 'src/common/ui/supply-point/supply-point.module';
 import { SupplyPointsComponent } from './supply-points.component';
 import { SupplyPointsRoutingModule } from './supply-points.routing';
@@ -19,6 +20,7 @@ import { SupplyPointsRoutingModule } from './supply-points.routing';
         CommonModule,
         InfoBannerModule,
         LayoutContainerModule,
+        PlaceloaderModule,
         SupplyPointModule,
         SupplyPointsRoutingModule,
     ],

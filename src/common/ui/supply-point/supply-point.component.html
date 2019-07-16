@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <div class="row"
-                             *ngIf="data | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO">
+                             *ngIf="(data | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO) && !isListItem">
                             <div class="col-12">
                                 <pxe-badge type="info"
                                            [isLink]="true"

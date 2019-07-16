@@ -31,6 +31,7 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
 
     public error = false;
     public errorMessages = [];
+    public dataLoading = true;
     public supplyPoints: ISupplyPoint[];
     public supplyPointsFuture: ISupplyPoint[];
     public supplyPointsActual: ISupplyPoint[];
@@ -57,6 +58,7 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
             ).subscribe(
                 (supplyPoints: ISupplyPoint[]) => {
                     this.supplyPoints = supplyPoints;
+                    this.dataLoading = false;
 
                     this.supplyPointsActual = R.filter((supplyPoint: ISupplyPoint) =>
                         this.isDatePast.transform(supplyPoint.contract.deliveryTo))(supplyPoints);
@@ -67,6 +69,7 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
                     this.cd.markForCheck();
                 },
                 (error) => {
+                    this.dataLoading = false;
                     this.error = true;
                     const { globalError } = parseGraphQLErrors(error);
                     this.errorMessages = globalError;
