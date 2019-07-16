@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="col-6 col-md-auto order-md-2"
-                                        *ngIf="data.contract && !isListItem">
+                                 *ngIf="(data | pathValue:['contract', 'deliveryTo']) && !isListItem">
                                 <div class="supply-point__value-box">
                                     <span class="supply-point__value-name">Dodávkové období</span>
                                     <span class="supply-point__value">
@@ -59,14 +59,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row"
+                             *ngIf="data | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO">
                             <div class="col-12">
-                                <pxe-badge *ngIf="data.contract && !isListItem &&
-                                                  (data.contract.deliveryTo | isDatePast) &&
-                                                  //bug
-                                                  data.contract.deliveryFrom | dateDiff: data.contract.deliveryTo:'days' >= 15 &&
-                                                  data | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO"
-                                           type="info"
+                                <pxe-badge type="info"
                                            [isLink]="true"
                                            (action)="restoreContractAction($event)">
                                     Platnost končí za {{data.contract.deliveryFrom | dateDiff: data.contract.deliveryTo}} dní - Obnovit smlouvu

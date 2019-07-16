@@ -33,6 +33,7 @@ export class SupplyPointComponent {
     public action: EventEmitter<any> = new EventEmitter();
 
     public commodityType = CommodityType;
+    public currentTime = new Date();
 
     constructor(
         private router: Router,
