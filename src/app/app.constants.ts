@@ -16,6 +16,7 @@ export const CONSTS = {
     },
     DEFAULT_EXPIRATION: 3600,
     MAX_DAYS_TILL_CONTRACT_EXPIRATION: 60,
+    OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
     PATHS: {
         CONTRACT : 'contract',
         COOKIES_POLICY : 'cookies-policy',
@@ -45,6 +46,7 @@ export const CONSTS = {
         TERMS_OF_USE : 'terms-of-use',
         WILD_CART  : '**',
     },
+    MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
     TIME_TO_CONTRACT_END_PROLONGED: 14,
 };
@@ -101,6 +103,7 @@ export const CODE_LIST_TYPES = [
 
 export const CONTRACT_END_TYPE = {
     CONTRACT_END_TERM: 'Urcita',
+    CONTRACT_END_TERM_WITH_PROLONGATION: 'UrcitaProlong',
     CONTRACT_END_INDEFINITE_PERIOD: 'Neurcita',
     CONTRACT_END_TERMINATE: 'Vypoved',
     CONTRACT_END_DEFAULT: 'DEFAULT',

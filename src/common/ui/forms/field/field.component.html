@@ -158,6 +158,7 @@
             [ngClass]="radioGroupClass">
             <span
                 class="control-label radiogroup-control-label"
+                (click)="labelClick(options[0].key)"
                 *ngIf="!hideLabel">
                     <ng-container *ngIf="label">
                         {{label}}

@@ -15,12 +15,13 @@
 	&__illustration {
 		width: 64px;
 		height: auto;
+		max-height: 64px;
 		margin-bottom: ( $spacer * .75 );
 	}
 
 	&__title {
 		font-size: 1.5rem;
-		margin-bottom: ( $spacer / 4 );
+		margin-bottom: $spacer;
 	}
 
 	// &__description {

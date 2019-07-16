@@ -4,7 +4,10 @@ import {
     CommodityType,
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
-import { CONTRACT_END_TYPE } from 'src/app/app.constants';
+import {
+    CONSTS,
+    CONTRACT_END_TYPE,
+} from 'src/app/app.constants';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import {
@@ -17,6 +20,16 @@ import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model
 export const expirationConfig: IExpirationConfig = {
     [CONTRACT_END_TYPE.CONTRACT_END_TERM]: {
         'expirationDate': true,
+        'timeToContractEnd': false,
+        'timeToContractEndPeriodId': false,
+    },
+    [CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION]: {
+        'expirationDate': true,
+        'timeToContractEnd': true,
+        'timeToContractEndPeriodId': true,
+    },
+    [CONTRACT_END_TYPE.CONTRACT_END_INDEFINITE_PERIOD]: {
+        'expirationDate': false,
         'timeToContractEnd': true,
         'timeToContractEndPeriodId': true,
     },
@@ -24,11 +37,6 @@ export const expirationConfig: IExpirationConfig = {
         'expirationDate': true,
         'timeToContractEnd': false,
         'timeToContractEndPeriodId': false,
-    },
-    [CONTRACT_END_TYPE.CONTRACT_END_INDEFINITE_PERIOD]: {
-        'expirationDate': false,
-        'timeToContractEnd': true,
-        'timeToContractEndPeriodId': true,
     },
     [CONTRACT_END_TYPE.CONTRACT_END_DEFAULT]: {
         'expirationDate': false,
@@ -111,7 +119,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isDecimal,
+                CustomValidators.isNumber(2),
                 CustomValidators.minValue(0),
             ],
         ],
@@ -119,7 +127,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isDecimal,
+                CustomValidators.isNumber(2),
                 CustomValidators.minValue(0),
             ],
         ],
@@ -127,7 +135,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isDecimal,
+                CustomValidators.isNumber(2),
                 CustomValidators.minValue(0),
             ],
         ],
@@ -147,7 +155,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber,
+                CustomValidators.isNumber(),
                 CustomValidators.minValue(0),
                 CustomValidators.maxValue(100),
             ],
@@ -157,6 +165,10 @@ export const formFields: IForm = {
             [
                 Validators.required,
             ],
+        ],
+        ownTerminate: [
+            CONSTS.OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT,
+            [],
         ],
     },
     validationMessages: {
@@ -201,6 +213,7 @@ export const formFields: IForm = {
         annualConsumptionNT: {
             required: errorFieldMessages.annualConsumptionNT.required,
             decimal: errorFieldMessages.number.decimal,
+            decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
             'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
@@ -208,6 +221,7 @@ export const formFields: IForm = {
         annualConsumptionVT: {
             required: errorFieldMessages.annualConsumptionVT.required,
             decimal: errorFieldMessages.number.decimal,
+            decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
             'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
@@ -215,6 +229,7 @@ export const formFields: IForm = {
         annualConsumption: {
             required: errorFieldMessages.annualConsumption.required,
             decimal: errorFieldMessages.number.decimal,
+            decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
             'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
@@ -280,6 +295,7 @@ export const supplyPointAllowedFields: ICommodityTypeFields = {
         'contractEndTypeId',
         'timeToContractEnd',
         'timeToContractEndPeriodId',
+        'ownTerminate',
     ],
     [CommodityType.GAS]: [
         'id',
@@ -294,6 +310,7 @@ export const supplyPointAllowedFields: ICommodityTypeFields = {
         'contractEndTypeId',
         'timeToContractEnd',
         'timeToContractEndPeriodId',
+        'ownTerminate',
     ],
 };
 
