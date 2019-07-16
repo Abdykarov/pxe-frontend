@@ -1,4 +1,7 @@
-import { CommodityType, ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import {
+    CommodityType,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
 
 export const supplyPointConfigPower: ISupplyPoint = {
     'id': '72',

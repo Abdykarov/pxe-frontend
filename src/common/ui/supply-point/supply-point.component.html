@@ -63,6 +63,7 @@
                             <div class="col-12">
                                 <pxe-badge *ngIf="data.contract && !isListItem &&
                                                   (data.contract.deliveryTo | isDatePast) &&
+                                                  //bug
                                                   data.contract.deliveryFrom | dateDiff: data.contract.deliveryTo:'days' >= 15 &&
                                                   data | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO"
                                            type="info"

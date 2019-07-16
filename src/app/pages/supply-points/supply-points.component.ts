@@ -15,12 +15,12 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { IsDatePast } from 'src/common/pipes/is-date-past/is-date-past.pipe';
+import { ContractStatus } from 'src/common/graphql/models/contract';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { ContractStatus } from 'src/common/graphql/models/contract';
-import { IsDatePast } from 'src/common/pipes/is-date-past/is-date-past.pipe';
 
 @Component({
     selector: 'lnd-supply-points',

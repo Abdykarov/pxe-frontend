@@ -1,7 +1,7 @@
 import {
     Component,
     EventEmitter,
-    Input, OnInit,
+    Input,
     Output,
 } from '@angular/core';
 
