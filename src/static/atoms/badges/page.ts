@@ -16,4 +16,8 @@ export class BadgesPageComponent {
             },
         ];
     }
+
+    public action = () => {
+        console.log('CLICKED');
+    }
 }

@@ -64,7 +64,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
                 .setValidators(
                     [
                         Validators.required,
-                        CustomValidators.isDecimal,
+                        CustomValidators.isNumber(2),
                         CustomValidators.minValue(this.supplyPoint.contract.offer.mountlyPaymentPrice,
                             true,
                             false,

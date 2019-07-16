@@ -4,7 +4,7 @@
 
 <a
     *ngIf="isLink"
-    (click)="action.emit($event)"
+    (click)="preventBubble($event);action.emit($event)"
     class="badge"
     [ngClass]="[type ? 'badge-' + type : '']">
     <ng-container *ngTemplateOutlet="ngContent"></ng-container>
