@@ -283,7 +283,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public submitForm = () => {
         this.resetCustomFieldError();
         this.triggerValidation();
-        if (this.form.valid || 1) {
+        if (this.form.valid) {
             const form = {
                 ...this.form.value,
                 supplierId: this.form.value.supplierId && parseInt(this.form.value.supplierId.id, 10),
