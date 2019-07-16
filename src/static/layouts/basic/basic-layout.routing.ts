@@ -72,6 +72,10 @@ import {
     newSupplyPointPageRoutes,
 } from 'src/static/pages/new-supply-point/page.module';
 import {
+    PaymentVerificationPageModule,
+    paymentVerificationPageRoutes,
+} from 'src/static/pages/payment-verification/page.module';
+import {
     ProgressBarPageModule,
     progressBarPageRoutes,
 } from 'src/static/organisms/progress-bar/progress-bar.module';
@@ -157,6 +161,7 @@ const routes: Routes = [
             ...listSupplyPointsPageRoutes,
             ...modalsPageRoutes,
             ...newSupplyPointPageRoutes,
+            ...paymentVerificationPageRoutes,
             ...progressBarPageRoutes,
             ...recapitulationPageRoutes,
             ...requestPageRoutes,
@@ -199,6 +204,7 @@ const routes: Routes = [
         ListSupplyPointsPageModule,
         ModalsPageModule,
         NewSupplyPointPageModule,
+        PaymentVerificationPageModule,
         ProgressBarPageModule,
         RecapitulationPageModule,
         RequestPageModule,
