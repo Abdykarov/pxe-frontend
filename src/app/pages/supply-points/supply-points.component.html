@@ -8,7 +8,7 @@
             {{ message }}<br>
         </ng-container>
     </lnd-alert>
-    <ng-container *ngIf="supplierPoints && !supplierPoints.length">
+    <ng-container *ngIf="supplyPoints && !supplyPoints.length">
         <lnd-info-banner
             [bannerTitle]="'Zatím nemáte uložené žádné odběrné místo'"
             [bannerDescription]="'Zadejte odběrné místo a my vám hned dáme nabídky'"
@@ -26,7 +26,7 @@
                 ></lnd-button>
             </div>
         </div>
-        <ng-container *ngIf="supplyPointsActual">
+        <ng-container *ngIf="supplyPointsActual && supplyPointsActual.length !== 0">
         <h3 class="text-center">Odběrná místa a jejich aktuální nabídky</h3>
             <div class="supply-points">
                 <pxe-supply-point
@@ -36,7 +36,7 @@
                 ></pxe-supply-point>
             </div>
         </ng-container>
-        <ng-container *ngIf="supplyPointsFuture">
+        <ng-container *ngIf="supplyPointsFuture && supplyPointsFuture.length !== 0">
             <h3 class="text-center">Odběrná místa a jejich budoucí nabídky</h3>
             <div class="supply-points">
                 <pxe-supply-point
