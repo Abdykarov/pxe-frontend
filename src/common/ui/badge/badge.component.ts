@@ -1,6 +1,8 @@
 import {
-    Component, EventEmitter,
-    Input, Output,
+    Component,
+    EventEmitter,
+    Input,
+    Output,
 } from '@angular/core';
 
 import * as R from 'ramda';
