@@ -27,24 +27,24 @@
             [buttonLabel]="'Nová žádost'"
             (buttonAction)="createSupplyPoint($event)"
         ></lnd-info-banner>
-        <ng-container *ngIf="state == overviewStates.SOME_SUPPLY_POINTS_ARE_ENDING ">
-            <lnd-info-banner
-                [bannerTitle]="'Momentálně nemáte žádné rozpracované žádosti'"
-                bannerDescription="Ale pro {{supplyPoints.length === 1 ? 'toto odběrné místo' : 'tato odběrná místa'}} konční v následujcích 2 měsích dodávka energie"
-                [showButton]="false"
-            ></lnd-info-banner>
-            <lnd-banner-ui
-                *ngFor="let supplyPoint of supplyPoints"
-                [data]="{
-                    linkType: '',
-                    linkValue: '',
-                    linkData: 'Nová poptávka',
-                    text: supplyPoint.name + ' - ' + 'můžeme získat již od ' + (supplyPoint.contract.offer.mountlyPaymentPrice | number) + ' Kč',
-                    title: ''
-                }"
-                buttonLabel="Nová poptávka"
-            ></lnd-banner-ui>
-        </ng-container>
+        <!--<ng-container *ngIf="state == overviewStates.SOME_SUPPLY_POINTS_ARE_ENDING ">-->
+            <!--<lnd-info-banner-->
+                <!--[bannerTitle]="'Momentálně nemáte žádné rozpracované žádosti'"-->
+                <!--bannerDescription="Ale pro {{supplyPoints.length === 1 ? 'toto odběrné místo' : 'tato odběrná místa'}} konční v následujcích 2 měsích dodávka energie"-->
+                <!--[showButton]="false"-->
+            <!--&gt;</lnd-info-banner>-->
+            <!--<lnd-banner-ui-->
+                <!--*ngFor="let supplyPoint of supplyPoints"-->
+                <!--[data]="{-->
+                    <!--linkType: '',-->
+                    <!--linkValue: '',-->
+                    <!--linkData: 'Nová poptávka',-->
+                    <!--text: supplyPoint.name + ' - ' + 'můžeme získat již od ' + (supplyPoint.contract.offer.mountlyPaymentPrice | number) + ' Kč',-->
+                    <!--title: ''-->
+                <!--}"-->
+                <!--buttonLabel="Nová poptávka"-->
+            <!--&gt;</lnd-banner-ui>-->
+        <!--</ng-container>-->
         <ng-container *ngIf="state == overviewStates.REQUESTS">
             <div class="row mb-5">
                 <div class="col text-center">
