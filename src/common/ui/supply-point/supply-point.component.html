@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="col-6 col-md-auto order-md-2"
-                                 *ngIf="(data | pathValue:['contract', 'deliveryTo']) && !isListItem">
+                                 *ngIf="data | pathValue:['contract', 'deliveryTo'] && !isListItem">
                                 <div class="supply-point__value-box">
                                     <span class="supply-point__value-name">Dodávkové období</span>
                                     <span class="supply-point__value">
