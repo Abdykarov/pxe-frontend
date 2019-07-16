@@ -22,9 +22,14 @@ export class BadgeComponent {
     public isLink = false;
 
     @Output()
-    public action: EventEmitter<string> = new EventEmitter<string>();
+    public action: EventEmitter<any> = new EventEmitter<any>();
 
     constructor() {
         this.type = R.contains(this.type, Object.values(IBadgeType)) ? this.type : IBadgeType.INFO;
+    }
+
+    public preventBubble = (event) => {
+        event.preventDefault();
+        event.cancelBubble = true;
     }
 }
