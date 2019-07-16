@@ -87,7 +87,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isDecimal,
+                CustomValidators.isNumber(2),
                 CustomValidators.minValue(0),
             ],
         ],
@@ -161,6 +161,7 @@ export const formFields: IForm = {
         deposit: {
             required: errorFieldMessages.deposit.required,
             decimal: errorFieldMessages.number.decimal,
+            decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
             minMinActual: errorFieldMessages.deposit.requiredMinValue,
         },

@@ -111,7 +111,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isDecimal,
+                CustomValidators.isNumber(2),
                 CustomValidators.minValue(0),
             ],
         ],
@@ -119,7 +119,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isDecimal,
+                CustomValidators.isNumber(2),
                 CustomValidators.minValue(0),
             ],
         ],
@@ -127,7 +127,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isDecimal,
+                CustomValidators.isNumber(2),
                 CustomValidators.minValue(0),
             ],
         ],
@@ -147,7 +147,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber,
+                CustomValidators.isNumber(),
                 CustomValidators.minValue(0),
                 CustomValidators.maxValue(100),
             ],
@@ -201,6 +201,7 @@ export const formFields: IForm = {
         annualConsumptionNT: {
             required: errorFieldMessages.annualConsumptionNT.required,
             decimal: errorFieldMessages.number.decimal,
+            decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
             'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
@@ -208,6 +209,7 @@ export const formFields: IForm = {
         annualConsumptionVT: {
             required: errorFieldMessages.annualConsumptionVT.required,
             decimal: errorFieldMessages.number.decimal,
+            decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
             'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
@@ -215,6 +217,7 @@ export const formFields: IForm = {
         annualConsumption: {
             required: errorFieldMessages.annualConsumption.required,
             decimal: errorFieldMessages.number.decimal,
+            decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
             'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
