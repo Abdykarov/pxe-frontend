@@ -19,6 +19,7 @@ export class NewSupplyPointPageComponent {
         contractEndTypeId: new FormControl(),
         timeToContractEnd: new FormControl(),
         timeToContractEndPeriodId: new FormControl(),
+        ownTerminate: new FormControl(),
     });
 
     constructor(

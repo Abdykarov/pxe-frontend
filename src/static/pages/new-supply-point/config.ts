@@ -76,12 +76,12 @@ export class NewSupplyPointPageConfig {
         {
             key: 2,
             value: 2,
-            label: 'Smlouva na dobu neurčitou',
+            label: 'Smlouva určitá s automatickou prolongací',
         },
         {
             key: 3,
             value: 3,
-            label: 'Vlastní výpověď',
+            label: 'Smlouva na dobu neurčitou',
         },
 
     ];
