@@ -40,7 +40,7 @@ export class SupplyPointComponent {
 
     public restoreContractAction(evt) {
         evt.preventDefault();
-        evt.cancelBubble = true
+        evt.cancelBubble = true;
 
         const state = {
             supplyPointCopy: {
