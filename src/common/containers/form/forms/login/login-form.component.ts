@@ -31,9 +31,9 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
     public wasSentToPhone = false;
 
     @Output()
-    public forgottenPasswordAction?: EventEmitter<any> = new EventEmitter<any>();
+    public reSentAction?: EventEmitter<any> = new EventEmitter<any>();
 
-    public handleForgottenPasswordAction = ($event) => this.forgottenPasswordAction.emit($event);
+    public handleReSentAction = () => this.reSentAction.emit(this.email);
 
     constructor(
         protected fb: FormBuilder,

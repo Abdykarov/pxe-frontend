@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import {
     supplyPointConfig,
     supplyPointConfig2,
-} from '../../organisms/request-card/config';
+} from 'src/static/organisms/request-card/config';
 
 @Component({
   templateUrl: './page.html',

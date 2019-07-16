@@ -7,22 +7,22 @@ import {
     ISupplyPoint,
     ISupplyPointGasAttributes,
     ISupplyPointPowerAttributes,
-} from '../models/supply.model';
+} from 'src/common/graphql/models/supply.model';
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import {
-    getCodelistByTypeQuery,
-    getSupplyPointQuery,
     findAllSuppliersQuery,
     findCodelistsByTypesQuery,
     findSupplierDocumentsByComodityQuery,
-    findSupplyPointsByContractStatus,
+    findSupplyPointsByContractStatusQuery,
     findSupplyPointsQuery,
+    getCodelistByTypeQuery,
+    getSupplyPointQuery,
 } from 'src/common/graphql/queries/supply';
 import {
     createGasSupplyPointMutation,
-    createPowerSupplyPointMutation,
     updateGasSupplyPointMutation,
     updateGasSupplyPointWithContractMutation,
+    createPowerSupplyPointMutation,
     updatePowerSupplyPointMutation,
     updatePowerSupplyPointWithContractMutation,
 } from 'src/common/graphql/mutation/supply';
@@ -205,11 +205,16 @@ export class SupplyService {
 
     public findSupplyPointsByContractStatus = (ean: string, contractStatus: ContractStatus[]) => this.apollo
         .watchQuery<any>({
-            query: findSupplyPointsByContractStatus,
+            fetchPolicy: 'network-only',
+            query: findSupplyPointsByContractStatusQuery,
             variables: {
                 ean,
                 contractStatus,
             },
         })
         .valueChanges
+
+    public removeSupplyPoint = (supplyPointId: string) => {
+    }
+
 }

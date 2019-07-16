@@ -30,9 +30,14 @@ export const signContractMutation = gql`
     }
 `;
 
-
-    export const sendContractConfirmationSmsMutation = gql`
+export const sendContractConfirmationSmsMutation = gql`
     mutation sendContractConfirmationSms($contractId: ID!){
         sendContractConfirmationSms(contractId: $contractId)
+    }
+`;
+
+export const deleteSignedContract = gql`
+    mutation deleteSignedContract($contractId: ID!, $smsConfirmationCode: String!){
+        deleteSignedContract(contractId: $contractId, smsConfirmationCode: $smsConfirmationCode)
     }
 `;

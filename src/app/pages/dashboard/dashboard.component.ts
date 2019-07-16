@@ -1,8 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
-import {
-    ChangeDetectorRef,
-    Component,
-} from '@angular/core';
+import { Component } from '@angular/core';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 
@@ -11,11 +7,4 @@ import { AbstractComponent } from 'src/common/abstract.component';
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent extends AbstractComponent {
-
-    constructor(
-        private cd: ChangeDetectorRef,
-    ) {
-        super();
-    }
-}
+export class DashboardComponent extends AbstractComponent {}

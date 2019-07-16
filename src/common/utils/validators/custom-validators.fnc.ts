@@ -199,7 +199,7 @@ export class CustomValidators {
     }
 
     static ico = (ico): {} => {
-        if (ico.pristine) {
+        if (ico.pristine || R_.isNilOrEmpty(ico.value)) {
             return null;
         }
 
@@ -216,7 +216,7 @@ export class CustomValidators {
     }
 
     static dic = (dic): {} => {
-        if (dic.pristine) {
+        if (dic.pristine || R_.isNilOrEmpty(dic.value)) {
             return null;
         }
 
@@ -278,34 +278,33 @@ export class CustomValidators {
         };
     }
 
-    static isNumber = (number) => {
-        const expresion = new RegExp(/^(0|-?[1-9]\d*)$/);
-        if (number.pristine) {
-            return null;
-        }
+    static isNumber = (maxDecimals: number = 0): ValidatorFn => {
+        const expresion = maxDecimals === 0 ? new RegExp(/^(0|-?[1-9]\d*)$/) : new RegExp(/^-?\d+([\.\,]?\d+)?$/);
+        return (control: AbstractControl): ValidationErrors => {
+            if (control.pristine) {
+                return null;
+            }
 
-        if (expresion.test(number.value)) {
-            return null;
-        }
+            let actualDecimals = 0;
+            if (expresion.test(control.value)) {
+                if (maxDecimals > 0) {
+                    const decimalPart = control.value.toString().split(/[,.]/)[1];
+                    actualDecimals =  decimalPart ? decimalPart.length : 0;
+                }
+                if (maxDecimals === 0 || actualDecimals <= maxDecimals) {
+                    return null;
+                }
+            }
 
-        return {
-            number: true,
-        };
-    }
-
-
-    static isDecimal = (number) => {
-        const expresion = new RegExp(/^-?\d+([\.\,]?\d+)?$/);
-        if (number.pristine) {
-            return null;
-        }
-
-        if (expresion.test(number.value)) {
-            return null;
-        }
-
-        return {
-            decimal: true,
+            if (maxDecimals === 0) {
+                return {
+                    number: true,
+                };
+            } else {
+                return {
+                    decimal: actualDecimals === 0 ? true : {count: maxDecimals, actual: actualDecimals},
+                };
+            }
         };
     }
 

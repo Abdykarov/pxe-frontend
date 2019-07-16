@@ -5,15 +5,6 @@ export enum CommodityType {
     GAS = 'GAS',
 }
 
-export enum SupplyPointState {
-    CREATE =  'CREATE',
-    CHOOSE_OFFER = 'CHOOSE_OFFER',
-    PERSONAL_INFO = 'PERSONAL_INFO',
-    CONTRACT = 'CONTRACT',
-    PAYMENT = 'PAYMENT',
-    COMPLETED = 'COMPLETED',
-}
-
 export enum DistributionType {
     VT = 'VT',
     BOTH = 'BOTH',
@@ -27,6 +18,14 @@ export enum SubjectType {
 export enum TimeToContractEndPeriod {
     DAY = 'Den',
     MONTH = 'Mesic',
+}
+
+export enum AllowedOperations {
+    DELETE = 'DELETE',
+    LEAVE_CONTRACT = 'LEAVE_CONTRACT',
+    PARTIAL_EDIT = 'PARTIAL_EDIT',
+    SHOW_DELIVERY_TO = 'SHOW_DELIVERY_TO',
+    TERMINATE_CONTRACT = 'TERMINATE_CONTRACT',
 }
 
 export interface IAddress {
@@ -58,6 +57,7 @@ export interface ISupplier {
     vatNumber: string;
     logoPath?: string;
     sampleDocuments: ISupplierSampleDocument[];
+    __typename?: string;
 }
 
 export interface ISupplierSampleDocument {
@@ -91,6 +91,7 @@ export interface ISupplyPointUpdatePowerAttributes {
 export interface ISupplyPoint {
     id: string;
     name: string;
+    allowedOperations: AllowedOperations[];
     commodityType: CommodityType;
     supplier: ISupplier;
     ean: string;
@@ -104,10 +105,22 @@ export interface ISupplyPoint {
     subject: ICodelistItem;
     lastAnnualConsumptionNT: number;
     lastAnnualConsumptionVT: number;
+    lastVersionOfSupplyPoint: boolean;
     contractEndType: ICodelistItem;
     timeToContractEnd: number;
     timeToContractEndPeriod: ICodelistItem;
     contract: IContract;
+    progressStatus: ProgressStatus;
+}
+
+export enum ProgressStatus {
+    COMPLETED = 'COMPLETED',
+    NONE = 'NONE',
+    OFFER_STEP = 'OFFER_STEP',
+    PERSONAL_DATA = 'PERSONAL_DATA',
+    READY_FOR_SIGN = 'READY_FOR_SIGN',
+    SUPPLY_POINT = 'SUPPLY_POINT',
+    WAITING_FOR_PAYMENT = 'WAITING_FOR_PAYMENT',
 }
 
 export interface ISelectedOffer {

@@ -68,7 +68,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isDecimal,
+                CustomValidators.isNumber(2),
                 CustomValidators.minValue(0),
             ],
         ],
@@ -76,7 +76,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isDecimal,
+                CustomValidators.isNumber(2),
                 CustomValidators.minValue(0),
             ],
         ],
@@ -84,7 +84,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isDecimal,
+                CustomValidators.isNumber(2),
                 CustomValidators.minValue(0),
             ],
         ],
@@ -104,7 +104,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isDecimal,
+                CustomValidators.isNumber(2),
                 CustomValidators.minValue(0),
             ],
         ],
@@ -140,21 +140,25 @@ export const formFields: IForm = {
         permanentPaymentPrice: {
             required: errorFieldMessages.offerPermanentPaymentPrice.required,
             decimal: errorFieldMessages.number.decimal,
+            decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
         },
         priceGas: {
             required: errorFieldMessages.offerPriceGas.required,
             decimal: errorFieldMessages.number.decimal,
+            decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
         },
         priceNT: {
             required: errorFieldMessages.offerPriceNT.required,
             decimal: errorFieldMessages.number.decimal,
+            decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
         },
         priceVT: {
             required: errorFieldMessages.offerPriceVT.required,
             decimal: errorFieldMessages.number.decimal,
+            decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
         },
         subjectTypeId: {

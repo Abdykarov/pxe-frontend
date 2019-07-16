@@ -6,6 +6,11 @@ export const restAPIErrorCodes = {
     'CLI0001' : 'Špatné přihlašovací údaje.',
 };
 
+export const graphQLMessages = {
+    cannotDeleteContract: 'Od smlouvy se nepodařilo odstoupit.',
+    cannotSignContract: 'Smlouvu se nepodařilo podepsat.',
+};
+
 export const errorFieldMessages =  {
     address: {
         required: 'Vyplňte adresu odběrného místa.',
@@ -40,7 +45,6 @@ export const errorFieldMessages =  {
     },
     birthDate: {
         required: 'Vyplňte datum narození.',
-        bsDateMinDate: 'Jste příliš stará/ý :D.',
         bsDateMaxDate: 'Nesmíte být mladší 18 let.',
     },
     circuitBreakerId: {
@@ -112,6 +116,7 @@ export const errorFieldMessages =  {
     },
     number: {
         decimal: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
+        decimalCount: 'Použít můžete maximálně {count} desetinná místa.',
         positive: 'Použít můžete pouze kladná čísla.',
         integer: 'Použít můžete pouze celá čísla.',
         positiveInteger: 'Použijte pouze celá a kladná čísla.',

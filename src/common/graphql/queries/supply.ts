@@ -96,6 +96,8 @@ export const findSupplyPointsQuery = gql`
             }
             lastAnnualConsumptionNT,
             lastAnnualConsumptionVT,
+            progressStatus,
+            allowedOperations,
         }
     }
 `;
@@ -105,6 +107,7 @@ export const getSupplyPointQuery = gql`
         getSupplyPoint(supplyPointId: $supplyPointId){
             id,
             name,
+            allowedOperations,
             commodityType,
             supplier{
                 id,
@@ -154,6 +157,7 @@ export const getSupplyPointQuery = gql`
             },
             lastAnnualConsumptionNT,
             lastAnnualConsumptionVT,
+            lastVersionOfSupplyPoint,
             contractEndType {
                 type,
                 code,
@@ -230,11 +234,13 @@ export const getSupplyPointQuery = gql`
                     deposit,
                 }
             },
+            progressStatus,
+            allowedOperations,
         }
     }
 `;
 
-export const findSupplyPointsByContractStatus = gql`
+export const findSupplyPointsByContractStatusQuery = gql`
     query findSupplyPointsByContractStatus($ean: String, $contractStatus: [ContractStatus]!){
         findSupplyPointsByContractStatus(ean: $ean, contractStatus: $contractStatus){
             id,
@@ -356,8 +362,10 @@ export const findSupplyPointsByContractStatus = gql`
                         help
                     },
                     deposit,
-                }
+                },
             },
+            progressStatus,
+            allowedOperations,
         }
     }
 `;

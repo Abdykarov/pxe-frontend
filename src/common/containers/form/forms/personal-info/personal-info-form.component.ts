@@ -38,7 +38,6 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     @Input()
     public formValues: IPersonalData = null;
 
-    public minDate: Date = moment().year(CONSTS.MIN_BIRTH_YEAR).startOf('year').toDate();
     public maxDate: Date = moment().add(-CONSTS.ADULTHOOD_AGE, 'years').toDate();
     public depositPaymentTypeId = depositPaymentType;
 
@@ -68,7 +67,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
                 .setValidators(
                     [
                         Validators.required,
-                        CustomValidators.isDecimal,
+                        CustomValidators.isNumber(2),
                         CustomValidators.minValue(this.supplyPoint.contract.offer.mountlyPaymentPrice,
                             true,
                             false,

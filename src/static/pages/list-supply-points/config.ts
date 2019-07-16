@@ -1,24 +1,13 @@
 import { Injectable } from '@angular/core';
+
+import { getConfigStepper } from 'src/common/utils';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
+import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
 @Injectable({
     providedIn: 'root',
 })
 export class NewSupplyPointPageConfig {
-    public stepperProgressConfig: IStepperProgressItem[] = [
-        {
-            active: true,
-            done: false,
-            label: 'Výběr odběrného místa',
-        },
-        {
-            done: false,
-            label: 'Výběr nabídky',
-        },
-        {
-            done: false,
-            label: 'Podepsání smlouvy',
-        },
-    ];
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.SUPPLY_POINT);
 }
 

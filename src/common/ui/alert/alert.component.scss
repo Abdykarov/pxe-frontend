@@ -16,6 +16,7 @@
 
 .alert {
 	color: $white;
+	word-break: break-word;
 
 	&--with-icon {
 		display: flex;
