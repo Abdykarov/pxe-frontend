@@ -354,10 +354,11 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public removeTerminateFromContractEndType = (codeLists) => {
         const updatedContractEnding = R.pipe(
             R.find(R.propEq('codelistType', CODE_LIST.CONTRACT_END_TYPE)),
-            R.map((items) => R.cond([
+            R.map(
+                R.cond([
                     [R_.isArray, (array) => R.filter(({code}) => code !== CONTRACT_END_TYPE.CONTRACT_END_TERMINATE)(array)],
                     [R.T, (data) => data],
-                ])(items),
+                ]),
             ),
         )(codeLists);
 
@@ -374,3 +375,4 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             });
     }
 }
+

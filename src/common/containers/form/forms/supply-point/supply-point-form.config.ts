@@ -168,9 +168,7 @@ export const formFields: IForm = {
         ],
         ownTerminate: [
             CONSTS.OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT,
-            [
-                Validators.required,
-            ],
+            [],
         ],
     },
     validationMessages: {
