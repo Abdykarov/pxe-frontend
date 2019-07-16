@@ -13,6 +13,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { PaymentState } from 'src/app/pages/request/payment/models/payment.model';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
+import { ContractStatus } from 'src/common/graphql/models/contract';
 
 @Component({
     selector: 'pxe-contract',
@@ -25,7 +26,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
     public paymentState = PaymentState;
     public loading = true;
-    public showPaymentInfo = false;
+    public showPaymentInfo = true;
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
@@ -57,6 +58,9 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
             .subscribe(
                 (supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
+                    if (this.supplyPoint.contract && this.supplyPoint.contract.contractStatus === ContractStatus.CONCLUDED) {
+                        this.finalizePayment();
+                    }
                     this.loading = false;
                     this.cd.markForCheck();
                 },

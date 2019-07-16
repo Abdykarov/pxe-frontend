@@ -196,6 +196,7 @@ export class SupplyService {
 
     public getSupplyPoint = (supplyPointId: string) => this.apollo
         .watchQuery<any>({
+            fetchPolicy: 'network-only',
             query: getSupplyPointQuery,
             variables: {
                 supplyPointId,
