@@ -1,13 +1,17 @@
+<ng-template #ngContent>
+    <ng-content></ng-content>
+</ng-template>
+
 <a
     *ngIf="isLink"
     (click)="action.emit($event)"
     class="badge"
     [ngClass]="[type ? 'badge-' + type : '']">
-    <ng-content></ng-content>
+    <ng-container *ngTemplateOutlet="ngContent"></ng-container>
 </a>
 <span
     *ngIf="!isLink"
     class="badge"
     [ngClass]="[type ? 'badge-' + type : '']">
-    <ng-content></ng-content>
+    <ng-container *ngTemplateOutlet="ngContent"></ng-container>
 </span>
