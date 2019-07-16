@@ -294,6 +294,7 @@ export const supplyPointAllowedFields: ICommodityTypeFields = {
         'contractEndTypeId',
         'timeToContractEnd',
         'timeToContractEndPeriodId',
+        'ownTerminate',
     ],
     [CommodityType.GAS]: [
         'id',
@@ -308,6 +309,7 @@ export const supplyPointAllowedFields: ICommodityTypeFields = {
         'contractEndTypeId',
         'timeToContractEnd',
         'timeToContractEndPeriodId',
+        'ownTerminate',
     ],
 };
 

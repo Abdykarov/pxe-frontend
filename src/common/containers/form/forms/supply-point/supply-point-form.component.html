@@ -213,7 +213,7 @@
             [touched]="form.controls.annualConsumption.touched || formError.annualConsumption"
             [validationMessages]="formFields.validationMessages.annualConsumption"
         ></lnd-form-field>
-        <label class="control-label radiogroup-control-label">
+        <label class="control-label radiogroup-control-label" [for]="'ownTerminate'">
             Jak vypovíte stávající smlouvu?
         </label>
         <lnd-form-field
