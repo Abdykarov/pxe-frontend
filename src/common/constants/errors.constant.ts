@@ -110,7 +110,7 @@ export const errorFieldMessages =  {
     },
     number: {
         decimal: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
-        decimalCount: 'Použít můžete maximálně {count} desetinná čísla.',
+        decimalCount: 'Použít můžete maximálně {count} desetinná místa.',
         positive: 'Použít můžete pouze kladná čísla.',
         integer: 'Použít můžete pouze celá čísla.',
         positiveInteger: 'Použijte pouze celá a kladná čísla.',
