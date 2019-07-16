@@ -33,7 +33,6 @@ export class SupplyPointComponent {
     public action: EventEmitter<any> = new EventEmitter();
 
     public commodityType = CommodityType;
-    public currentTime = new Date();
 
     constructor(
         private router: Router,
@@ -41,7 +40,7 @@ export class SupplyPointComponent {
 
     public restoreContractAction(evt) {
         evt.preventDefault();
-        evt.stopPropagation();
+        evt.cancelBubble = true
 
         const state = {
             supplyPointCopy: {
