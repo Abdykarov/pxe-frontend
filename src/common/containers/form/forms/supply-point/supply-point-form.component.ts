@@ -122,6 +122,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 takeUntil(this.destroy$),
             )
             .subscribe((ownTerminate: boolean) => {
+                console.log('%c ***** ownTerminate *****', 'background: #bada55; color: #000; font-weight: bold', ownTerminate);
                 this.setOwnTerminate(ownTerminate);
                 this.cd.markForCheck();
             });
@@ -140,8 +141,11 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             .pipe(
                 takeUntil(this.destroy$),
             )
-            .subscribe(() => {
-                this.setContractEndFields();
+            .subscribe((val) => {
+                if (val) {
+                    console.log('%c ***** valueChanges *****', 'background: #bada55; color: #000; font-weight: bold', val);
+                    this.setContractEndFields();
+                }
             });
 
         this.form.get('supplierId')
@@ -258,8 +262,8 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         }
     }
 
-    public setContractEndFields = () => {
-        const contractEndType = this.getFieldValue('contractEndTypeId');
+    public setContractEndFields = (type = null) => {
+        const contractEndType = this.getFieldValue('contractEndTypeId') || type;
         if (contractEndType) {
             this.contractEndType = contractEndType;
         } else if (this.form.get('ownTerminate').value) {
@@ -269,8 +273,12 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         }
 
         R.forEachObjIndexed((show: boolean, field: string) => {
+            console.log('%c ***** show *****', 'background: #bada55; color: #000; font-weight: bold', show, field);
             show ? this.setEnableField(field) : this.setDisableField(field);
         }, this.expirationConfig[this.contractEndType]);
+
+        console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold',
+            contractEndType, this.contractEndType, this.expirationConfig[this.contractEndType]);
 
         this.cd.markForCheck();
     }
@@ -314,14 +322,18 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         const contractEndTypeId = this.form.get('contractEndTypeId');
         if (ownTerminate) {
             this.lastContractEndType = contractEndTypeId.value;
-            this.setDisableField('contractEndTypeId');
-            contractEndTypeId.setValue(CONTRACT_END_TYPE.CONTRACT_END_TERMINATE);
+            // contractEndTypeId.setValue(CONTRACT_END_TYPE.CONTRACT_END_TERMINATE);
+            this.setDisableField('contractEndTypeId', {
+                emitEvent: false,
+            });
+            this.setContractEndFields(CONTRACT_END_TYPE.CONTRACT_END_TERMINATE);
         } else {
-            if (this.lastContractEndType !== CONTRACT_END_TYPE.CONTRACT_END_TERMINATE ) {
-                contractEndTypeId.setValue(this.lastContractEndType);
-            }
+            // if (this.lastContractEndType !== CONTRACT_END_TYPE.CONTRACT_END_TERMINATE ) {
+            //     contractEndTypeId.setValue(this.lastContractEndType);
+            // }
             this.setEnableField('contractEndTypeId');
-            this.resetFieldError('contractEndTypeId', true);
+            this.setContractEndFields();
+            this.resetFieldError('contractEndTypeId', false);
         }
     }
 

@@ -220,9 +220,10 @@
             [id]="'ownTerminate'"
             label="Vlastní výpověď"
             [type]="'CHECKBOX'"
-            [customFormGroupClass]="'mb-5'"
+            [customFormGroupClass]="'mb-5-'"
             [formControl]="form.controls.ownTerminate"
         ></lnd-form-field>
+
         <lnd-form-field
             *ngIf="form.controls.contractEndTypeId.status !== 'DISABLED'"
             [error]="formError.contractEndTypeId || form.controls.contractEndTypeId.errors"
