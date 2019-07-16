@@ -1,6 +1,8 @@
 import {
     Component,
+    EventEmitter,
     Input,
+    Output,
 } from '@angular/core';
 
 import * as R from 'ramda';
@@ -18,6 +20,9 @@ export class BadgeComponent {
 
     @Input()
     public isLink = false;
+
+    @Output()
+    public action: EventEmitter<string> = new EventEmitter<string>();
 
     constructor() {
         this.type = R.contains(this.type, Object.values(IBadgeType)) ? this.type : IBadgeType.INFO;

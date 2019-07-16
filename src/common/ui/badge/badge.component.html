@@ -1,5 +1,6 @@
 <a
     *ngIf="isLink"
+    (click)="action.emit($event)"
     class="badge"
     [ngClass]="[type ? 'badge-' + type : '']">
     <ng-content></ng-content>
