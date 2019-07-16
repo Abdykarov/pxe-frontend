@@ -58,14 +58,11 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
                 (supplyPoints: ISupplyPoint[]) => {
                     this.supplyPoints = supplyPoints;
 
-                    this.supplyPointsActual = R.filter((supplyPoint: ISupplyPoint) => true)(supplyPoints);
-                        // this.isDatePast.transform(supplyPoint.contract.deliveryTo))(supplyPoints);
+                    this.supplyPointsActual = R.filter((supplyPoint: ISupplyPoint) =>
+                        this.isDatePast.transform(supplyPoint.contract.deliveryTo))(supplyPoints);
 
-                    this.supplyPointsFuture = R.filter((supplyPoint: ISupplyPoint) => true)(supplyPoints);
-                        // !this.isDatePast.transform(supplyPoint.contract.deliveryTo))(supplyPoints);
-                    //
-                    console.log(this.supplyPointsActual);
-                    console.log(this.supplyPointsFuture);
+                    this.supplyPointsFuture = R.filter((supplyPoint: ISupplyPoint) =>
+                        !this.isDatePast.transform(supplyPoint.contract.deliveryTo))(supplyPoints);
 
                     this.cd.markForCheck();
                 },

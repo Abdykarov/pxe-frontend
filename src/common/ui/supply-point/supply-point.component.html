@@ -61,13 +61,14 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <!--<pxe-badge *ngIf="data.contract && !isListItem"-->
-                                <pxe-badge
+                                <pxe-badge *ngIf="data.contract && !isListItem &&
+                                                  (data.contract.deliveryTo | isDatePast) &&
+                                                  data.contract.deliveryFrom | dateDiff: data.contract.deliveryTo:'days' >= 15 &&
+                                                  data | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO"
                                            type="info"
                                            [isLink]="false"
                                            (action)="restoreContractAction($event)">
-                                    Platnost končí za Platnost končí za Platnost končí za Platnost končí za Platnost končí za
-                                    <!--Platnost končí za {{data.contract.deliveryFrom | dateDiff: data.contract.deliveryTo}} dní - Obnovit smlouvu-->
+                                    Platnost končí za {{data.contract.deliveryFrom | dateDiff: data.contract.deliveryTo}} dní - Obnovit smlouvu
                                 </pxe-badge>
                             </div>
                         </div>
