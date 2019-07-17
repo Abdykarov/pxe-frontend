@@ -96,7 +96,7 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
         );
     }
 
-    public restoreContractAction(evt, supplyPoint: ISupplyPoint) {
+    public restoreContractAction = (evt, supplyPoint: ISupplyPoint) => {
         evt.preventDefault();
         evt.cancelBubble = true;
 
