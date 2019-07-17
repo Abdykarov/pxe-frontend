@@ -17,7 +17,8 @@ export class NavigateService {
 
     public checkCorrectStep  = (supplyPoint: ISupplyPoint, canProgressStatus: ProgressStatus) => {
         if (supplyPoint && supplyPoint.progressStatus === ProgressStatus.SUPPLY_POINT &&
-            this.isAllowedOperation.transform(supplyPoint, AllowedOperations.SHOW_DELIVERY_TO)) {
+            this.isAllowedOperation.transform(supplyPoint, AllowedOperations.SHOW_DELIVERY_TO) &&
+            canProgressStatus === ProgressStatus.SUPPLY_POINT) {
             return;
         }
 
