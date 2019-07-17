@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
+import * as R from 'ramda';
+
+import { ContractStatus } from 'src/common/graphql/models/contract';
 import { indexOfSteps } from 'src/common/utils';
 import { IsAllowedOperationPipe } from 'src/common/pipes/is-allowed-operation/is-allowed-operation.pipe';
-import { AllowedOperations, ISupplyPoint, ProgressStatus } from 'src/common/graphql/models/supply.model';
+import {
+    ISupplyPoint,
+    ProgressStatus,
+} from 'src/common/graphql/models/supply.model';
 import { ROUTES } from 'src/app/app.constants';
 
 @Injectable({
@@ -16,13 +22,8 @@ export class NavigateService {
     ) {}
 
     public checkCorrectStep  = (supplyPoint: ISupplyPoint, canProgressStatus: ProgressStatus) => {
-        if (supplyPoint && supplyPoint.progressStatus === ProgressStatus.SUPPLY_POINT &&
-            this.isAllowedOperation.transform(supplyPoint, AllowedOperations.SHOW_DELIVERY_TO) &&
-            canProgressStatus === ProgressStatus.SUPPLY_POINT) {
-            return;
-        }
-
-        if (!supplyPoint && canProgressStatus === ProgressStatus.SUPPLY_POINT) {
+        if (R.path(['contract', 'contractStatus'], supplyPoint) === ContractStatus.CONCLUDED) {
+            // router to complate
             return;
         }
 
