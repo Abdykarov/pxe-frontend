@@ -23,6 +23,7 @@ import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
+import { NavigateService } from 'src/app/services/navigate.service';
 import {
     parseGraphQLErrors,
     scrollToElementFnc,
@@ -49,6 +50,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     constructor(
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
+        private navigateService: NavigateService,
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
@@ -74,6 +76,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 (content: string) => {
+                    this.navigateService.routerToCorrentRoute(this.supplyPoint);
                     this.contractTemplate = content;
                     this.cd.markForCheck();
                 },

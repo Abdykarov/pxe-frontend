@@ -24,6 +24,7 @@ import {
     ProgressStatus,
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
+import { NavigateService } from 'src/app/services/navigate.service';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
 import { ROUTES } from 'src/app/app.constants';
@@ -49,6 +50,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
 
     constructor(
         private cd: ChangeDetectorRef,
+        private navigateService: NavigateService,
         private personalDataService: PersonalDataService,
         private route: ActivatedRoute,
         private router: Router,
@@ -65,6 +67,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             )
             .subscribe(
                 (supplyPoint: ISupplyPoint) => {
+                    this.navigateService.routerToCorrentRoute(supplyPoint);
                     this.supplyPoint = supplyPoint;
                     this.isIndividual = this.supplyPoint.subject.code === SubjectType.SUBJECT_TYPE_INDIVIDUAL;
                     this.cd.markForCheck();
