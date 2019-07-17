@@ -67,7 +67,10 @@ export const supplyPointConfigGas: ISupplyPoint = {
         'logoPath': '',
         'sampleDocuments': [],
     },
-    contract: null,
+    contract: {
+        deliveryTo: '2021-08-01',
+        deliveryFrom: '2020-08-01',
+    },
     'ean': '27zg700z0069625e',
     'address': {
         'street': 'Milady Horákové',

@@ -1,3 +1,16 @@
+<ng-template #deliveryIntervalLabelTemplate let-data="data" let-isListItem="isListItem">
+    <div class="row"
+         *ngIf="(data | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO) && !isListItem">
+        <div class="col-12">
+            <pxe-badge type="info"
+                       [isLink]="true"
+                       (action)="restoreContractAction($event, data)">
+                Platnost končí za {{data.contract.deliveryFrom | dateDiff: data.contract.deliveryTo}} dní - Obnovit smlouvu
+            </pxe-badge>
+        </div>
+    </div>
+</ng-template>
+
 <pxe-layout-container pageTitle="Odběrná místa">
     <lnd-alert
             [type]="'danger'"
@@ -8,6 +21,7 @@
             {{ message }}<br>
         </ng-container>
     </lnd-alert>
+    <lnd-placeloader [loading]="dataLoading && !errorMessages.length"></lnd-placeloader>
     <ng-container *ngIf="supplyPoints && !supplyPoints.length">
         <lnd-info-banner
             [bannerTitle]="'Zatím nemáte uložené žádné odběrné místo'"
@@ -31,6 +45,7 @@
             <div class="supply-points">
                 <pxe-supply-point
                     *ngFor="let supplyPoint of supplyPointsActual"
+                    [deliveryIntervalLabelTemplate]="deliveryIntervalLabelTemplate"
                     [data]="supplyPoint"
                     (action)="navigateToSupplyPointDetail($event)"
                 ></pxe-supply-point>
@@ -41,6 +56,7 @@
             <div class="supply-points">
                 <pxe-supply-point
                     *ngFor="let supplyPoint of supplyPointsFuture"
+                    [deliveryIntervalLabelTemplate]="deliveryIntervalLabelTemplate"
                     [data]="supplyPoint"
                     (action)="navigateToSupplyPointDetail($event)"
                 ></pxe-supply-point>

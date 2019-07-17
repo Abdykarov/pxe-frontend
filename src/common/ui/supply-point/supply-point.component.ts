@@ -3,6 +3,7 @@ import {
     EventEmitter,
     Input,
     Output,
+    TemplateRef,
 } from '@angular/core';
 
 import {
@@ -11,7 +12,6 @@ import {
     ISupplyPoint,
 } from 'src/common/graphql/models/supply.model';
 import { Router } from '@angular/router';
-import { ROUTES } from 'src/app/app.constants';
 
 @Component({
     selector: 'pxe-supply-point',
@@ -24,6 +24,9 @@ export class SupplyPointComponent {
     readonly UNIT_INDICATOR = 'MWh';
 
     @Input()
+    public deliveryIntervalLabelTemplate?: TemplateRef<any>;
+
+    @Input()
     public isListItem = false;
 
     @Input()
@@ -34,23 +37,6 @@ export class SupplyPointComponent {
 
     public commodityType = CommodityType;
 
-    constructor(
-        private router: Router,
-    ) {}
-
-    public restoreContractAction(evt) {
-        evt.preventDefault();
-        evt.cancelBubble = true;
-
-        const state = {
-            supplyPointCopy: {
-                ...this.data,
-            },
-        };
-
-        this.router.navigate(
-            [ROUTES.ROUTER_REQUEST_SUPPLY_POINT],
-            {state});
-    }
+    constructor() {}
 }
 

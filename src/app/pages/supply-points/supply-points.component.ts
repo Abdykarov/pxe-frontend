@@ -1,23 +1,13 @@
-import {
-    ActivatedRoute,
-    Router,
-} from '@angular/router';
-import {
-    ChangeDetectorRef,
-    Component,
-    OnInit,
-} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 import * as R from 'ramda';
-import {
-    map,
-    takeUntil,
-} from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AllowedOperations, ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { IsDatePast } from 'src/common/pipes/is-date-past/is-date-past.pipe';
 import { ContractStatus } from 'src/common/graphql/models/contract';
-import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -29,8 +19,11 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class SupplyPointsComponent extends AbstractComponent implements OnInit {
 
+    public allowedOperations = AllowedOperations;
+    public dataLoading = true;
     public error = false;
     public errorMessages = [];
+    public loadingSupplyPoints = true;
     public supplyPoints: ISupplyPoint[];
     public supplyPointsFuture: ISupplyPoint[];
     public supplyPointsActual: ISupplyPoint[];
@@ -57,6 +50,7 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
             ).subscribe(
                 (supplyPoints: ISupplyPoint[]) => {
                     this.supplyPoints = supplyPoints;
+                    this.dataLoading = false;
 
                     this.supplyPointsActual = R.filter((supplyPoint: ISupplyPoint) =>
                         this.isDatePast.transform(supplyPoint.contract.deliveryTo))(supplyPoints);
@@ -67,6 +61,7 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
                     this.cd.markForCheck();
                 },
                 (error) => {
+                    this.dataLoading = false;
                     this.error = true;
                     const { globalError } = parseGraphQLErrors(error);
                     this.errorMessages = globalError;
@@ -87,5 +82,20 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
                 relativeTo: this.route,
             },
         );
+    }
+
+    public restoreContractAction(evt, supplyPoint: ISupplyPoint) {
+        evt.preventDefault();
+        evt.cancelBubble = true;
+
+        const state = {
+            supplyPointCopy: {
+                ...supplyPoint,
+            },
+        };
+
+        this.router.navigate(
+            [ROUTES.ROUTER_REQUEST_SUPPLY_POINT],
+            {state});
     }
 }
