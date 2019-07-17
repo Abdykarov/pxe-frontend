@@ -81,7 +81,13 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
     }
 
     public completeRequestAction = (supplyPoint: ISupplyPoint): void => {
-        this.navigateService.routerToCorrentRoute(supplyPoint);
+        this.router.navigate(
+            [this.navigateService.getNextRouteByProgressStatus(supplyPoint.progressStatus)],
+            {
+                queryParams: {
+                    supplyPointId: supplyPoint.id,
+                },
+            });
     }
 
     public newRequestAction = (evt): void => {

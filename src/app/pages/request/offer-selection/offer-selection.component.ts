@@ -15,7 +15,10 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractService } from 'src/common/graphql/services/contract.service';
-import { getConfigStepper } from 'src/common/utils';
+import {
+    getConfigStepper,
+    parseGraphQLErrors,
+} from 'src/common/utils';
 import {
     ISupplyPoint,
     ProgressStatus,
@@ -24,7 +27,6 @@ import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { NavigateService } from 'src/app/services/navigate.service';
 import { OfferService } from 'src/common/graphql/services/offer.service';
-import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
@@ -59,7 +61,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                 map(({data}) => data.getSupplyPoint),
             ).subscribe(
                 (supplyPoint: ISupplyPoint) => {
-                    this.navigateService.routerToCorrentRoute(supplyPoint);
+                    this.navigateService.checkCorrectStep(supplyPoint, ProgressStatus.OFFER_STEP);
                     this.supplyPoint = supplyPoint;
                     this.findSupplyPointOffers(this.supplyPoint.ean);
                 },

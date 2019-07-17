@@ -16,7 +16,11 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractService } from 'src/common/graphql/services/contract.service';
-import { getConfigStepper } from 'src/common/utils';
+import {
+    getConfigStepper,
+    parseGraphQLErrors,
+    scrollToElementFnc,
+} from 'src/common/utils';
 import { graphQLMessages } from 'src/common/constants/errors.constant';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
@@ -24,10 +28,6 @@ import {
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { NavigateService } from 'src/app/services/navigate.service';
-import {
-    parseGraphQLErrors,
-    scrollToElementFnc,
-} from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
@@ -76,7 +76,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 (content: string) => {
-                    this.navigateService.routerToCorrentRoute(this.supplyPoint);
+                    this.navigateService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
                     this.contractTemplate = content;
                     this.cd.markForCheck();
                 },

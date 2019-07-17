@@ -15,7 +15,10 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { formFields } from 'src/common/containers/form/forms/personal-info/personal-info-form.config';
-import { getConfigStepper } from 'src/common/utils';
+import {
+    getConfigStepper,
+    parseGraphQLErrors,
+} from 'src/common/utils';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IPersonalDataInput } from 'src/common/graphql/models/personal-data.model';
@@ -25,7 +28,6 @@ import {
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
 import { NavigateService } from 'src/app/services/navigate.service';
-import { parseGraphQLErrors } from 'src/common/utils';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -67,7 +69,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             )
             .subscribe(
                 (supplyPoint: ISupplyPoint) => {
-                    this.navigateService.routerToCorrentRoute(supplyPoint);
+                    this.navigateService.checkCorrectStep(supplyPoint, ProgressStatus.PERSONAL_DATA);
                     this.supplyPoint = supplyPoint;
                     this.isIndividual = this.supplyPoint.subject.code === SubjectType.SUBJECT_TYPE_INDIVIDUAL;
                     this.cd.markForCheck();
