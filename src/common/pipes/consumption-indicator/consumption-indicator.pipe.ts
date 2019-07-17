@@ -6,7 +6,7 @@ import {
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 
-import { ISupplyPointFindData } from 'src/common/graphql/models/supply.model';
+import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 
 @Pipe({
   name: 'consumptionIndicator',
@@ -18,7 +18,7 @@ export class ConsumptionIndicatorPipe implements PipeTransform {
         return last / (avg / 100) - 100;
     }
 
-    transform(data: ISupplyPointFindData, unit: string): number | string {
+    transform(data: ISupplyPoint, unit: string): number | string {
         const {
             annualConsumptionVT = null,
             annualConsumptionNT = null,
