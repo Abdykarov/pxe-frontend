@@ -1,13 +1,26 @@
-import { ActivatedRoute, Router } from '@angular/router';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
+import {
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+} from '@angular/core';
 
 import * as R from 'ramda';
-import { map, takeUntil } from 'rxjs/operators';
+import {
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { AllowedOperations, ISupplyPoint } from 'src/common/graphql/models/supply.model';
-import { IsDatePast } from 'src/common/pipes/is-date-past/is-date-past.pipe';
+import {
+    AllowedOperations,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
 import { ContractStatus } from 'src/common/graphql/models/contract';
+import { IsDatePast } from 'src/common/pipes/is-date-past/is-date-past.pipe';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
