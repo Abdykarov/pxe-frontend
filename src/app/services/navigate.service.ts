@@ -22,6 +22,10 @@ export class NavigateService {
             return;
         }
 
+        if (!supplyPoint && canProgressStatus === ProgressStatus.SUPPLY_POINT) {
+            return;
+        }
+
         if (indexOfSteps[supplyPoint.progressStatus] > indexOfSteps[canProgressStatus]) {
             this.router.navigate(
                 [this.getNextRouteByProgressStatus(supplyPoint.progressStatus)],
