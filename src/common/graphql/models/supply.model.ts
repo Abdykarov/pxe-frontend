@@ -65,6 +65,19 @@ export interface ISupplierSampleDocument {
     url: string;
 }
 
+export interface ISupplyPointInput {
+    address: IAddress;
+    contractEndTypeId: string;
+    expirationDate?: string;
+    name: string;
+    gasAttributes?: ISupplyPointGasAttributes;
+    powerAttributes?: ISupplyPointPowerAttributes;
+    subjectTypeId: string;
+    supplierId: number;
+    timeToContractEnd?: number;
+    timeToContractEndPeriodId?: String;
+}
+
 export interface ISupplyPointGasAttributes {
     eic: string;
     annualConsumption: number;

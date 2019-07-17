@@ -23,7 +23,6 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
     public dataLoading = true;
     public error = false;
     public errorMessages = [];
-    public loadingSupplyPoints = true;
     public supplyPoints: ISupplyPoint[];
     public supplyPointsFuture: ISupplyPoint[];
     public supplyPointsActual: ISupplyPoint[];
