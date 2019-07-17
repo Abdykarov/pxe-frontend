@@ -49,21 +49,25 @@
                                     <span class="supply-point__value">{{data.ean}}</span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <pxe-badge type="info">
-                                    Supply point status Badge
-                                </pxe-badge>
+                            <div class="col-6 col-md-auto order-md-2"
+                                 *ngIf="(data | pathValue:['contract', 'deliveryTo']) && !isListItem">
+                                <div class="supply-point__value-box">
+                                    <span class="supply-point__value-name">Dodávkové období</span>
+                                    <span class="supply-point__value">
+                                        {{data.contract.deliveryFrom | date: 'dd. MM. y'}} - {{data.contract.deliveryTo | date: 'dd. MM. y'}}
+                                    </span>
+                                </div>
                             </div>
                         </div>
+                        <ng-container *ngIf="additionalInfoTemplate">
+                            <ng-container *ngTemplateOutlet="additionalInfoTemplate; context: { data: this.data } "></ng-container>
+                        </ng-container>
                     </div>
                 </div>
             </div>
         </div>
         <div *ngIf="!isListItem"
-             [class.col-12]="!isListItem"
-             [class.col-xl-5]="!isListItem">
+             class="col-12 col-xl-5">
             <div class="supply-point__inner supply-point__inner--price">
                 <div class="row">
                     <div class="col-12 col-md-10 offset-md-2 col-xl-12 offset-xl-0">

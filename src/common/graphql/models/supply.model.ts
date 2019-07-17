@@ -154,24 +154,6 @@ export interface ISelectedOffer {
     __typename?: string;
 }
 
-
-export interface ISupplyPointFindData {
-    id: string;
-    commodityType: string;
-    name: string;
-    supplier: ISupplier;
-    ean: string;
-    address: IAddress;
-    distributionRate?: ICodelistItem;
-    circuitBreaker?: ICodelistItem;
-    annualConsumptionNT?: number;
-    annualConsumptionVT?: number;
-    expirationDate?: string;
-    subject?: ICodelistItem;
-    lastAnnualConsumptionNT?: number;
-    lastAnnualConsumptionVT?: number;
-}
-
 export interface ISupplyPointFormData {
     id: number;
     supplierId: number;
