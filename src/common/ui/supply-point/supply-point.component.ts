@@ -24,7 +24,7 @@ export class SupplyPointComponent {
     readonly UNIT_INDICATOR = 'MWh';
 
     @Input()
-    public deliveryIntervalLabelTemplate?: TemplateRef<any>;
+    public additionalInfoTemplate?: TemplateRef<any>;
 
     @Input()
     public isListItem = false;

@@ -59,8 +59,8 @@
                                 </div>
                             </div>
                         </div>
-                        <ng-container *ngIf="deliveryIntervalLabelTemplate">
-                            <ng-container *ngTemplateOutlet="deliveryIntervalLabelTemplate; context: { data: this.data,isListItem: isListItem } "></ng-container>
+                        <ng-container *ngIf="additionalInfoTemplate">
+                            <ng-container *ngTemplateOutlet="additionalInfoTemplate; context: { data: this.data } "></ng-container>
                         </ng-container>
                     </div>
                 </div>
