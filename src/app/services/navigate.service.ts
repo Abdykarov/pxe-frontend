@@ -1,36 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { inArray, indexOfSteps } from 'src/common/utils';
-import { ISupplyPoint, ProgressStatus } from 'src/common/graphql/models/supply.model';
+import { indexOfSteps } from 'src/common/utils';
+import { IsAllowedOperationPipe } from 'src/common/pipes/is-allowed-operation/is-allowed-operation.pipe';
+import { AllowedOperations, ISupplyPoint, ProgressStatus } from 'src/common/graphql/models/supply.model';
 import { ROUTES } from 'src/app/app.constants';
-import { ContractStatus } from 'src/common/graphql/models/contract';
 
 @Injectable({
     providedIn: 'root',
 })
 export class NavigateService {
     constructor(
+        private isAllowedOperation: IsAllowedOperationPipe,
         private router: Router,
     ) {}
 
     public checkCorrectStep  = (supplyPoint: ISupplyPoint, canProgressStatus: ProgressStatus) => {
-        const isEditable = !supplyPoint.contract ||
-            inArray(supplyPoint.contract.contractStatus,
-            [
-                ContractStatus.NOT_CONCLUDED,
-                ContractStatus.WAITING_FOR_PAYMENT,
-            ]);
-
-        if (!isEditable) {
-            this.router.navigate([ROUTES.ROUTER_SUPPLY_POINTS]);
+        if (this.isAllowedOperation.transform(supplyPoint, AllowedOperations.SHOW_DELIVERY_TO)) {
+            return;
         }
 
         if (indexOfSteps[supplyPoint.progressStatus] > indexOfSteps[canProgressStatus]) {
-            if (supplyPoint.contract.contractStatus === ContractStatus.CONCLUDED && canProgressStatus === ProgressStatus.COMPLETED) {
-                return true;
-            }
-
             this.router.navigate(
                 [this.getNextRouteByProgressStatus(supplyPoint.progressStatus)],
                 {
