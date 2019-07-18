@@ -53,6 +53,7 @@ import {
 import { HelpModalComponent } from 'src/common/containers/modal/modals/help/help-modal.component';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
+import { OfferService } from 'src/common/graphql/services/offer.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -86,7 +87,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
 
     constructor(
         private cd: ChangeDetectorRef,
-        private contractService: ContractService,
+        private offerService: OfferService,
         protected fb: FormBuilder,
         private modalsService: ModalService,
         private route: ActivatedRoute,
@@ -109,8 +110,8 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                     supplyPointFound = supplyPoint;
 
                     return R.path(['contract', 'contractId'])(supplyPoint) ?
-                        this.contractService.deleteContract(supplyPoint.contract.contractId)
-                        : of(supplyPoint);
+                        this.offerService.deleteOffer(supplyPoint.contract.offer.id)
+                        : of({});
                 }),
             ).subscribe(
             () => {

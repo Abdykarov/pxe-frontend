@@ -105,7 +105,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
         const supplyPointId = this.supplyPoint.id;
 
         const contractAction = this.navigateService.isPreviousStep(this.supplyPoint, this.ACTUAL_PROGRESS_STATUS) ?
-            this.contractService.deleteContract(this.supplyPoint.contract.contractId) : of({});
+            this.offerService.deleteOffer(this.supplyPoint.contract.offer.id) : of({});
 
         contractAction
             .pipe(
