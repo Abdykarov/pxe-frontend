@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import * as R from 'ramda';
 
 import { indexOfSteps } from 'src/common/utils';
-import { ContractStatus } from 'src/common/graphql/models/conteract';
+import { ContractStatus } from 'src/common/graphql/models/contract';
 import { IsAllowedOperationPipe } from 'src/common/pipes/is-allowed-operation/is-allowed-operation.pipe';
 import {
     ISupplyPoint,
