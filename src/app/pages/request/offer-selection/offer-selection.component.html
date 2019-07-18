@@ -26,6 +26,22 @@
     <lnd-placeloader [loading]="loadingSupplyPointOffers && !globalError.length"></lnd-placeloader>
     <div class="row"
             *ngIf="supplyPointOffers">
+        <div class="col-12">
+            <div class="row align-items-center mb-3">
+                <div class="col-12 mb-5 col-md-3 mb-md-0 text-center text-md-left">
+                    <lnd-button
+                        label="Krok zpět"
+                        type="secondary"
+                        (action)="navigateService.backStep(supplyPoint, PREVIOUS_PROGRESS_STATUS )">
+                    </lnd-button>
+                </div>
+                <div class="col-12 col-md-6 text-center">
+                    <h2 class="mb-0">
+                        Vyberte si nabídku
+                    </h2>
+                </div>
+            </div>
+        </div>
         <div class="col-12 col-md-12 supply-points-offer">
             <ng-container *ngIf="supplyPointOffers.length; else emptyOffers">
                 <pxe-supply-point-offer

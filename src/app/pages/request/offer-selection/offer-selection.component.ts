@@ -35,6 +35,8 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./offer-selection.component.scss'],
 })
 export class OfferSelectionComponent extends AbstractComponent implements OnInit {
+    public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.SUPPLY_POINT;
+
     public globalError: string[] = [];
     public loadingSupplyPointOffers = true;
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.OFFER_STEP);

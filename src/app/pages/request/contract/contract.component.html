@@ -19,8 +19,21 @@
             </div>
             <div *ngIf="supplyPoint"
                  class="row">
-                <div class="col-12 col-xl-10 offset-xl-1 text-center">
-                    <h2>Podepište smlouvu</h2>
+                <div class="col-10 offset-1">
+                    <div class="row align-items-center mb-3">
+                        <div class="col-12 mb-5 col-md-3 mb-md-0 text-center text-md-left">
+                            <lnd-button
+                                label="Krok zpět"
+                                type="secondary"
+                                (action)="navigateService.backStep(supplyPoint, PREVIOUS_PROGRESS_STATUS )">
+                            </lnd-button>
+                        </div>
+                        <div class="col-12 col-md-6 text-center">
+                            <h2 class="mb-0">
+                                Podepište smlouvu
+                            </h2>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-12 text-center mb-2 d-xl-none">
                     <lnd-button

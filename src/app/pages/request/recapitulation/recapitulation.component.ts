@@ -38,6 +38,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./recapitulation.component.scss'],
 })
 export class RecapitulationComponent extends AbstractComponent implements OnInit {
+    public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.OFFER_STEP;
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.PERSONAL_DATA);
 
     public formFields = formFields;
