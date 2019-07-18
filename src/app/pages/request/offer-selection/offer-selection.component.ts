@@ -9,9 +9,12 @@ import {
 } from '@angular/core';
 
 import {
+    concatMap,
     map,
     takeUntil,
 } from 'rxjs/operators';
+import { of } from 'rxjs';
+
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractService } from 'src/common/graphql/services/contract.service';
@@ -35,11 +38,12 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./offer-selection.component.scss'],
 })
 export class OfferSelectionComponent extends AbstractComponent implements OnInit {
+    public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.OFFER_STEP;
     public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.SUPPLY_POINT;
 
     public globalError: string[] = [];
     public loadingSupplyPointOffers = true;
-    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.OFFER_STEP);
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public supplyPointOffers: ISupplyPointOffer[];
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
@@ -100,9 +104,13 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     public saveContract = (supplyPointOffer: ISupplyPointOffer) => {
         const supplyPointId = this.supplyPoint.id;
 
-        this.contractService.saveContract(supplyPointOffer.id, supplyPointId)
+        const contractAction = this.navigateService.isPreviousStep(this.supplyPoint, this.ACTUAL_PROGRESS_STATUS) ?
+            this.contractService.deleteContract(this.supplyPoint.contract.contractId) : of({});
+
+        contractAction
             .pipe(
                 takeUntil(this.destroy$),
+                concatMap(() => this.contractService.saveContract(supplyPointOffer.id, supplyPointId)),
                 map(({data}) => data.saveContract),
             )
             .subscribe(

@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 
 import * as R from 'ramda';
 
-import { ContractStatus } from 'src/common/graphql/models/contract';
 import { indexOfSteps } from 'src/common/utils';
+import { ContractStatus } from 'src/common/graphql/models/conteract';
 import { IsAllowedOperationPipe } from 'src/common/pipes/is-allowed-operation/is-allowed-operation.pipe';
 import {
     ISupplyPoint,
@@ -23,7 +23,7 @@ export class NavigateService {
 
     private canGoToStep = (supplyPoint: ISupplyPoint, canProgressStatus: ProgressStatus) => {
         return true;
-        return indexOfSteps[supplyPoint.progressStatus] <= indexOfSteps[canProgressStatus];
+        return this.isPreviousStep(supplyPoint, canProgressStatus) || this.isProgressStatusStep(supplyPoint, canProgressStatus);
     }
 
     private routerToRequestStep = (supplyPoint: ISupplyPoint, progressStatus: ProgressStatus = null) => {
@@ -35,6 +35,12 @@ export class NavigateService {
                 },
             });
     }
+
+    public isPreviousStep = (supplyPoint: ISupplyPoint, canProgressStatus: ProgressStatus) => true;
+        // indexOfSteps[supplyPoint.progressStatus] < indexOfSteps[canProgressStatus]
+
+    public isProgressStatusStep = (supplyPoint: ISupplyPoint, canProgressStatus: ProgressStatus) =>
+        indexOfSteps[supplyPoint.progressStatus] === indexOfSteps[canProgressStatus]
 
     public checkCorrectStep  = (supplyPoint: ISupplyPoint, canProgressStatus: ProgressStatus) => {
         return;
@@ -55,11 +61,6 @@ export class NavigateService {
     }
 
     public backStep = (supplyPoint: ISupplyPoint, progressStatus: ProgressStatus) => {
-        console.log('ZAVOLAM SE S TEMITO PARAMETRY');
-        console.log(supplyPoint);
-        console.log(progressStatus);
-        console.log(this.canGoToStep(supplyPoint, progressStatus));
-
         if (this.canGoToStep(supplyPoint, progressStatus)) {
             this.routerToRequestStep(supplyPoint, progressStatus);
             return;

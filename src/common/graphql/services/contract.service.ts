@@ -102,7 +102,7 @@ export class ContractService {
             });
     }
 
-    public deleteContract(contractId: number) {
+    public deleteContract(contractId: string) {
         return this.apollo
             .mutate({
                 mutation: deleteContractMutation,

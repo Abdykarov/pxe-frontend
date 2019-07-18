@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import {
     ChangeDetectorRef,
     Component,
@@ -13,8 +14,10 @@ import * as R_ from 'ramda-extension';
 import {
     BehaviorSubject,
     combineLatest,
+    of,
 } from 'rxjs';
 import {
+    concatMap,
     map,
     takeUntil,
 } from 'rxjs/operators';
@@ -30,6 +33,7 @@ import {
     SUBJECT_TYPE_TO_DIST_RATE_MAP,
     SUPPLY_POINT_EDIT_TYPE,
 } from 'src/app/app.constants';
+import { ContractService } from 'src/common/graphql/services/contract.service';
 import {
     CommodityType,
     ISupplyPoint,
@@ -38,6 +42,7 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import {
     convertArrayToObject,
+    parseGraphQLErrors,
     transformCodeList,
     transformSuppliers,
 } from 'src/common/utils';
@@ -77,11 +82,14 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public suppliers$: BehaviorSubject<any> = new BehaviorSubject([]);
     public contractEndType = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT;
     public lastContractEndType = null;
+    public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
     constructor(
         private cd: ChangeDetectorRef,
+        private contractService: ContractService,
         protected fb: FormBuilder,
         private modalsService: ModalService,
+        private route: ActivatedRoute,
         private supplyService: SupplyService,
     ) {
         super(fb);
@@ -90,6 +98,31 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
 
     ngOnInit() {
         super.ngOnInit();
+
+    if (this.supplyPointId) {
+        let supplyPointFound: ISupplyPoint = null;
+        this.supplyService.getSupplyPoint(this.supplyPointId)
+            .pipe(
+                takeUntil(this.destroy$),
+                map(({data}) => data.getSupplyPoint),
+                concatMap((supplyPoint: ISupplyPoint) => {
+                    supplyPointFound = supplyPoint;
+
+                    return R.path(['contract', 'contractId'])(supplyPoint) ?
+                        this.contractService.deleteContract(supplyPoint.contract.contractId)
+                        : of(supplyPoint);
+                }),
+            ).subscribe(
+            () => {
+                this.formValues = supplyPointFound;
+            },
+            (error) => {
+                const { globalError } = parseGraphQLErrors(error);
+                this.globalError = globalError;
+                this.cd.markForCheck();
+            },
+        );
+    }
 
         this.form.get('commodityType')
             .valueChanges
