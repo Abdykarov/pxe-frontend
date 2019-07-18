@@ -2,10 +2,6 @@ import { Injectable } from '@angular/core';
 
 import { Apollo } from 'apollo-angular';
 
-import {
-    savePersonalDataMutation,
-    updatePersonalDataMutation,
-} from 'src/common/graphql/mutation/personal-data';
 import { getPersonalDataQuery } from 'src/common/graphql/queries/personal-data';
 import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
 import {
@@ -13,6 +9,10 @@ import {
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { IPersonalDataInput } from 'src/common/graphql/models/personal-data.model';
+import {
+    savePersonalDataMutation,
+    updatePersonalDataMutation,
+} from 'src/common/graphql/mutation/personal-data';
 
 @Injectable({
     providedIn: 'root',

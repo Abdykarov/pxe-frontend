@@ -114,6 +114,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 }),
             ).subscribe(
             () => {
+                // todo remove offer from SP asi manualne?
+                // z nakyho duvodu se to vola az po f5 po zeefektivneni testovani opravit (ted tam porad menit true a false hodnotu...)
+
                 this.formValues = supplyPointFound;
             },
             (error) => {
