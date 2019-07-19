@@ -91,6 +91,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
 
     ngOnInit() {
         super.ngOnInit();
+        this.form = this.fb.group(this.formFields.controls, this.formFields.options);
 
         this.form.get('commodityType')
             .valueChanges

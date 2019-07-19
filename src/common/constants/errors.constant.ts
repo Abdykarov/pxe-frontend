@@ -95,6 +95,7 @@ export const errorFieldMessages =  {
     expirationDate: {
         requiredGas: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr plynu.',
         requiredPower: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr elektřiny.',
+        isInTerminateInterval: 'Už vám byla automaticky prodloužená  smlouva.',
     },
     fullName: {
         requiredPerson: 'Vyplňte své jméno a příjmení.',

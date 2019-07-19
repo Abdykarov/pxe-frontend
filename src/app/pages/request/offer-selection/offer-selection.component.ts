@@ -60,7 +60,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     public bannerObj: IBannerObj = {
         linkValue: 'basic/banners',
         // doplnit od monci
-        text: 'Z důvodu, že Vaše nabídka končí  za méně než 31 dní jsou zobrazeny pouze nabídky od aktuálního dodavatele.',
+        text: '',
     };
 
     constructor(
@@ -83,6 +83,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
             ).subscribe(
                 (supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
+                    this.setTextBannerByContractEndType();
                     this.checkOfferSelectionConstraint$.subscribe(() => {
                         this.onlyOffersFromActualSupplier = this.validityService.validateOffer(this.supplyPoint);
                         if (!this.onlyOffersFromActualSupplier ) {
@@ -155,5 +156,17 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                     this.cd.markForCheck();
                 },
             );
+    }
+
+    public setTextBannerByContractEndType = () => {
+        if (this.validityService.validateOnlyDateExpiration(this.supplyPoint)) {
+            this.bannerObj.text =
+                'Z důvodu, že Vaše nabídka končí  za méně než 31 dní jsou zobrazeny pouze nabídky od aktuálního dodavatele.';
+        }
+
+        if (this.validityService.validateTermWithProlongation(this.supplyPoint)) {
+            this.bannerObj.text =
+                'Vypovedni doba + 30 dni.';
+        }
     }
 }
