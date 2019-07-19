@@ -15,7 +15,7 @@ import { ROUTES } from 'src/app/app.constants';
 @Injectable({
     providedIn: 'root',
 })
-export class NavigateSupplyPointService {
+export class NavigateRequestService {
     constructor(
         private isAllowedOperation: IsAllowedOperationPipe,
         private router: Router,
