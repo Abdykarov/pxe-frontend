@@ -15,11 +15,30 @@ import { ROUTES } from 'src/app/app.constants';
 @Injectable({
     providedIn: 'root',
 })
-export class NavigateService {
+export class NavigateSupplyPointService {
     constructor(
         private isAllowedOperation: IsAllowedOperationPipe,
         private router: Router,
     ) {}
+
+    private canGoToStep = (supplyPoint: ISupplyPoint, canProgressStatus: ProgressStatus) =>
+        this.isPreviousStep(supplyPoint, canProgressStatus) || this.isProgressStatusStep(supplyPoint, canProgressStatus)
+
+    public routerToRequestStep = (supplyPoint: ISupplyPoint, progressStatus: ProgressStatus = null) => {
+        this.router.navigate(
+            [this.getNextRouteByProgressStatus(progressStatus === null ? supplyPoint.progressStatus : progressStatus)],
+            {
+                queryParams: {
+                    supplyPointId: supplyPoint.id,
+                },
+            });
+        }
+
+    public isPreviousStep = (supplyPoint: ISupplyPoint, canProgressStatus: ProgressStatus) =>
+        indexOfSteps[canProgressStatus] < indexOfSteps[supplyPoint.progressStatus]
+
+    public isProgressStatusStep = (supplyPoint: ISupplyPoint, canProgressStatus: ProgressStatus) =>
+        indexOfSteps[supplyPoint.progressStatus] === indexOfSteps[canProgressStatus]
 
     public checkCorrectStep  = (supplyPoint: ISupplyPoint, canProgressStatus: ProgressStatus) => {
         if (R.path(['contract', 'contractStatus'], supplyPoint) === ContractStatus.CONCLUDED) {
@@ -27,19 +46,16 @@ export class NavigateService {
             return;
         }
 
-        if (indexOfSteps[supplyPoint.progressStatus] > indexOfSteps[canProgressStatus]) {
-            this.router.navigate(
-                [this.getNextRouteByProgressStatus(supplyPoint.progressStatus)],
-                {
-                    queryParams: {
-                        supplyPointId: supplyPoint.id,
-                    },
-                });
+        if (!this.canGoToStep(supplyPoint, canProgressStatus)) {
+            this.routerToRequestStep(supplyPoint);
         }
     }
 
     public getNextRouteByProgressStatus = (progressStatus: ProgressStatus): string => {
         switch (progressStatus) {
+            case ProgressStatus.SUPPLY_POINT: {
+                return ROUTES.ROUTER_REQUEST_SUPPLY_POINT;
+            }
             case ProgressStatus.OFFER_STEP: {
                 return ROUTES.ROUTER_REQUEST_OFFER_SELECTION;
             }

@@ -27,7 +27,7 @@ import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
-import { NavigateService } from 'src/app/services/navigate.service';
+import { NavigateSupplyPointService } from 'src/app/services/navigate-supply-point.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
@@ -50,7 +50,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     constructor(
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
-        private navigateService: NavigateService,
+        private navigateSupplyPointService: NavigateSupplyPointService,
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
@@ -70,13 +70,14 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                 map(({data}) => data.getSupplyPoint),
                 switchMap( (supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
+                    this.navigateSupplyPointService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
                     return this.contractService.getContractTerms(supplyPoint.contract.contractId);
                 }),
                 map(({data}) => data.getContractTerms.content),
             )
             .subscribe(
                 (content: string) => {
-                    this.navigateService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
+                    this.navigateSupplyPointService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
                     this.contractTemplate = content;
                     this.cd.markForCheck();
                 },

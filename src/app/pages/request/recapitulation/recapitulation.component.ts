@@ -27,7 +27,7 @@ import {
     ProgressStatus,
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
-import { NavigateService } from 'src/app/services/navigate.service';
+import { NavigateSupplyPointService } from 'src/app/services/navigate-supply-point.service';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -52,7 +52,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
 
     constructor(
         private cd: ChangeDetectorRef,
-        private navigateService: NavigateService,
+        private navigateSupplyPointService: NavigateSupplyPointService,
         private personalDataService: PersonalDataService,
         private route: ActivatedRoute,
         private router: Router,
@@ -69,7 +69,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             )
             .subscribe(
                 (supplyPoint: ISupplyPoint) => {
-                    this.navigateService.checkCorrectStep(supplyPoint, ProgressStatus.PERSONAL_DATA);
+                    this.navigateSupplyPointService.checkCorrectStep(supplyPoint, ProgressStatus.PERSONAL_DATA);
                     this.supplyPoint = supplyPoint;
                     this.isIndividual = this.supplyPoint.subject.code === SubjectType.SUBJECT_TYPE_INDIVIDUAL;
                     this.cd.markForCheck();
