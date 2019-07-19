@@ -49,6 +49,7 @@ export const CONSTS = {
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
     TIME_TO_CONTRACT_END_PROLONGED: 14,
+    REFRESH_INTERVAL: 5000,
 };
 
 export const ROUTES = {

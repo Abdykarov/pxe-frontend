@@ -8,24 +8,33 @@ import {
     OnInit,
 } from '@angular/core';
 
+
+import * as R from 'ramda';
+import { interval } from 'rxjs';
 import {
     map,
+    startWith,
     takeUntil,
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import {
+    CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { getConfigStepper } from 'src/common/utils';
 import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
+import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { OfferService } from 'src/common/graphql/services/offer.service';
 import { parseGraphQLErrors } from 'src/common/utils';
-import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { ValidityService } from 'src/app/services/validity.service';
 
 @Component({
     templateUrl: './offer-selection.component.html',
@@ -39,6 +48,19 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
+    public onlyOffersFromActualSubcriber = false;
+    public checkOfferSelectionConstraint$ = interval(CONSTS.REFRESH_INTERVAL)
+        .pipe(
+            startWith(0),
+            takeUntil(this.destroy$),
+        );
+
+    public bannerObj: IBannerObj = {
+        linkValue: 'basic/banners',
+        // doplnit od monci
+        text: 'Z důvodu, že Vaše nabídka končí  za méně než 31 dní jsou zobrazeny pouze nabídky od aktuálního dodavatele.',
+    };
+
     constructor(
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
@@ -46,6 +68,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
+        private validityService: ValidityService,
     ) {
         super();
     }
@@ -58,6 +81,13 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
             ).subscribe(
                 (supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
+                    this.checkOfferSelectionConstraint$.subscribe(() => {
+                        this.onlyOffersFromActualSubcriber = this.validityService.validateOffer(this.supplyPoint);
+                        if (!this.onlyOffersFromActualSubcriber ) {
+                            this.filterOffersOnlyActualSupplier();
+                        }
+                        this.cd.markForCheck();
+                    });
                     this.findSupplyPointOffers(this.supplyPoint.ean);
                 },
                 (error) => {
@@ -67,6 +97,14 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                     this.cd.markForCheck();
                 },
             );
+    }
+
+    public filterOffersOnlyActualSupplier = () => {
+        if (!R.isNil(this.supplyPointOffers) && R.isNil(this.supplyPoint)) {
+            this.supplyPointOffers = R.filter((supplyPointOffers: ISupplyPointOffer) =>
+                supplyPointOffers.supplier.id === this.supplyPoint.supplier.id)
+            (this.supplyPointOffers);
+        }
     }
 
     public findSupplyPointOffers = (ean) => {
@@ -116,4 +154,6 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                 },
             );
     }
+
+
 }
