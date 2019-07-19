@@ -48,7 +48,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
-    public onlyOffersFromActualSubcriber = false;
+    public onlyOffersFromActualSupplier = false;
     public checkOfferSelectionConstraint$ = interval(CONSTS.REFRESH_INTERVAL)
         .pipe(
             startWith(0),
@@ -82,8 +82,8 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                 (supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
                     this.checkOfferSelectionConstraint$.subscribe(() => {
-                        this.onlyOffersFromActualSubcriber = this.validityService.validateOffer(this.supplyPoint);
-                        if (!this.onlyOffersFromActualSubcriber ) {
+                        this.onlyOffersFromActualSupplier = this.validityService.validateOffer(this.supplyPoint);
+                        if (!this.onlyOffersFromActualSupplier ) {
                             this.filterOffersOnlyActualSupplier();
                         }
                         this.cd.markForCheck();
