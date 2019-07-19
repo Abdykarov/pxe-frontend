@@ -17,16 +17,16 @@ export class ValidityService {
         private dateDiffPipe: DateDiffPipe,
     ) {}
 
-    public validateOffer = (sp: ISupplyPoint): boolean => {
-        return R.cond([
-            [(supplyPoint: ISupplyPoint) => inArray(supplyPoint,
-                [ CONTRACT_END_TYPE.CONTRACT_END_TERM, CONTRACT_END_TYPE.CONTRACT_END_TERMINATE]),
-                this.isValidateDateExpiration],
+    public validateOffer = (supplyPoint: ISupplyPoint): boolean =>
+        R.cond([
+            [this.validateOnlyDateExpiration, this.isValidateDateExpiration],
             [R.T, this.isValidateDateExpiration],
-        ])(sp);
-    }
+        ])(supplyPoint)
 
-    private isValidateDateExpiration = (supplyPoint: ISupplyPoint) => {
-        return this.dateDiffPipe.transform(addOneMonth(moment()).toISOString(), supplyPoint.expirationDate, 'seconds') < 0;
-    }
+
+    private validateOnlyDateExpiration = (supplyPoint: ISupplyPoint): boolean =>
+        inArray(supplyPoint, [ CONTRACT_END_TYPE.CONTRACT_END_TERM, CONTRACT_END_TYPE.CONTRACT_END_TERMINATE])
+
+    private isValidateDateExpiration = (supplyPoint: ISupplyPoint): boolean =>
+        this.dateDiffPipe.transform(addOneMonth(moment()).toISOString(), supplyPoint.expirationDate, 'seconds') < 0
 }

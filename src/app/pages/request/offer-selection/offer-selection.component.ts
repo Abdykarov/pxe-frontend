@@ -12,6 +12,7 @@ import {
 import * as R from 'ramda';
 import { interval } from 'rxjs';
 import {
+    filter,
     map,
     startWith,
     takeUntil,
@@ -53,6 +54,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
         .pipe(
             startWith(0),
             takeUntil(this.destroy$),
+            filter(() => !this.onlyOffersFromActualSupplier),
         );
 
     public bannerObj: IBannerObj = {
@@ -154,6 +156,4 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                 },
             );
     }
-
-
 }

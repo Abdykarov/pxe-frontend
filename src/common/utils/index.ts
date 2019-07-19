@@ -1,5 +1,6 @@
 export * from './convert-array-to-object.fnc';
 export * from './create-string-from-template.fnc';
+export * from './convert-date-to-send-format.fnc';
 export * from './get-progress-stepper-config.fnc';
 export * from './get-error-message.fnc';
 export * from './is-router-link.fnc';

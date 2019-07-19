@@ -35,9 +35,12 @@ import {
     CommodityType,
     DistributionType,
 } from 'src/common/graphql/models/supply.model';
+import {
+    convertDateToSendFormatFnc,
+    transformCodeList,
+} from 'src/common/utils';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { transformCodeList } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-supply-offer-form',
@@ -244,12 +247,12 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
                 )(this.form.value.benefits),
             };
             if (!R.isNil(form.validFromTo)) {
-                form.validFrom = form.validFromTo[0].toISOString().split('T')[0];
-                form.validTo = form.validFromTo[1].toISOString().split('T')[0];
+                form.validFrom = convertDateToSendFormatFnc(form.validFromTo);
+                form.validTo = convertDateToSendFormatFnc(form.validFromTo[1]);
             }
             if (!R.isNil(form.deliveryFromTo)) {
-                form.deliveryFrom = form.deliveryFromTo[0].toISOString().split('T')[0];
-                form.deliveryTo = form.deliveryFromTo[1].toISOString().split('T')[0];
+                form.deliveryFrom = convertDateToSendFormatFnc(form.deliveryFromTo);
+                form.deliveryTo = convertDateToSendFormatFnc(form.deliveryFromTo);
             }
             if (!R.isNil(form.priceNT)) {
                 form.priceNT = parseFloat(form.priceNT.replace(',', '.'));
