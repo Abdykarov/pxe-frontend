@@ -77,7 +77,6 @@ export class ContractComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 (content: string) => {
-                    this.navigateSupplyPointService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
                     this.contractTemplate = content;
                     this.cd.markForCheck();
                 },
