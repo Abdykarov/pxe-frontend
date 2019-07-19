@@ -5,7 +5,6 @@ import * as R from 'ramda';
 
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import { indexOfSteps } from 'src/common/utils';
-import { IsAllowedOperationPipe } from 'src/common/pipes/is-allowed-operation/is-allowed-operation.pipe';
 import {
     ISupplyPoint,
     ProgressStatus,
@@ -17,7 +16,6 @@ import { ROUTES } from 'src/app/app.constants';
 })
 export class NavigateRequestService {
     constructor(
-        private isAllowedOperation: IsAllowedOperationPipe,
         private router: Router,
     ) {}
 
