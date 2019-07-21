@@ -12,7 +12,10 @@ import {
     signContractMutation,
     updateContractMutation,
 } from 'src/common/graphql/mutation/contract';
-import { getContractTermsQuery, getPaymentInfoQuery } from 'src/common/graphql/queries/contract';
+import {
+    getContractTermsQuery,
+    getPaymentInfoQuery,
+} from 'src/common/graphql/queries/contract';
 import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
 import { findSupplyPointOffersQuery } from 'src/common/graphql/queries/offer';
 import {
