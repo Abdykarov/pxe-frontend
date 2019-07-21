@@ -15,7 +15,7 @@
                 </tr>
                 <tr>
                     <td class="pr-3">Banka</td>
-                    <td></td>
+                    <td><!-- TODO missing --></td>
                 </tr>
                 <tr>
                     <td class="pr-3">Částka</td>
@@ -47,7 +47,7 @@
                     <td class="pb-3">
                         Banka
                         <span class="d-block">
-
+                            <!-- TODO missing -->
                         </span>
                     </td>
                 </tr>
@@ -104,6 +104,7 @@
                 <div class="col-12 col-xl-10 offset-xl-1">
                     <lnd-placeloader [loading]="loading && !globalError.length"></lnd-placeloader>
                 </div>
+                <a (click)="refresh()">xxx</a>
                     <ng-container *ngIf="supplyPoint">
 
                         <ng-container *ngIf="supplyPoint.contract?.contractStatus == paymentState.WAITING_FOR_PAYMENT && paymentInfo">

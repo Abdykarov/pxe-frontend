@@ -10,6 +10,7 @@ import { PaymentComponent } from './payment.component';
 import { PaymentRoutingModule } from './payment-routing.module';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
 import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.module';
+import { CollapseModule } from 'ngx-bootstrap';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.modul
         PaymentRoutingModule,
         PlaceloaderModule,
         ProgressBarModule,
+        CollapseModule,
     ],
 })
 export class PaymentModule {}

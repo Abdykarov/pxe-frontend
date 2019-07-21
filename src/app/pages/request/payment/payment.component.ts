@@ -8,6 +8,7 @@ import {
     OnInit,
 } from '@angular/core';
 
+import * as R from 'ramda';
 import {
     map,
     switchMap,
@@ -16,6 +17,7 @@ import {
 import { of } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from 'src/app/services/auth.service';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import {
@@ -50,6 +52,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
     constructor(
+        private authService: AuthService,
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
         private route: ActivatedRoute,
@@ -74,8 +77,9 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                     if (this.supplyPoint.contract && this.supplyPoint.contract.contractStatus === ContractStatus.CONCLUDED) {
                         this.finalizePaymentProgress();
                     }
-                    if (this.supplyPoint.contract && this.supplyPoint.contract.contractId) {
-                        return this.contractService.getPaymentInfo(this.supplyPoint.contract.contractId);
+                    if (this.supplyPoint.contract && this.supplyPoint.contract.contractStatus === ContractStatus.WAITING_FOR_PAYMENT &&
+                        this.supplyPoint.contract.contractId) {
+                            return this.contractService.getPaymentInfo(this.supplyPoint.contract.contractId);
                     } else {
                         return of({
                             data: {
@@ -85,10 +89,16 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                     }
                 }),
                 map(({data}) => data.getPaymentInfo),
+                switchMap((paymentInfo: IPayment) => {
+                    if (!R.isEmpty(paymentInfo)) {
+                        this.paymentInfo = paymentInfo;
+                        return this.authService.refreshToken();
+                    }
+                    return of({});
+                }),
             )
             .subscribe(
-                (paymentInfo: IPayment) => {
-                    this.paymentInfo = paymentInfo;
+                () => {
                     this.loading = false;
                     this.cd.markForCheck();
                 },
