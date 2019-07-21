@@ -32,19 +32,26 @@
             [typeahead]="typeahead"
             [searchFn]="customSearchFn"
             (close)="close.emit()">
-            <ng-template
+            <ng-container *ngIf="templateItem; else defaultItem">
+                <ng-template
                     ng-option-tmp
                     let-item="item"
                     let-index="index"
                     let-search="searchTerm">
-                <ng-container *ngIf="!templateItem">
+                    <div [ngOptionHighlight]="search">
+                        <ng-container *ngTemplateOutlet="templateItem; context: {item: item,index: index,search: search}"></ng-container>
+                    </div>
+                </ng-template>
+            </ng-container>
+            <ng-template #defaultItem>
+                <ng-template
+                    ng-option-tmp
+                    let-item="item"
+                    let-search="searchTerm">
                     <div [ngOptionHighlight]="search">
                         {{ item.label }}
                     </div>
-                </ng-container>
-                <ng-container *ngIf="templateItem">
-                    <ng-container *ngTemplateOutlet="templateItem; context: {item: item,index: index,search: search}"></ng-container>
-                </ng-container>
+                </ng-template>
             </ng-template>
             <ng-container *ngIf="templateLabel">
                 <ng-template ng-label-tmp let-item="item">
