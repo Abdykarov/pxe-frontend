@@ -2,7 +2,10 @@ import {
     ChangeDetectorRef,
     Component,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import {
+    NavigationExtras,
+    Router,
+} from '@angular/router';
 
 import {
     map,
@@ -11,7 +14,6 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { ROUTES } from 'src/app/app.constants';
 import {
     formFieldsLogin,
     LOGIN_STATE,
@@ -32,6 +34,7 @@ import {
     parseRestAPIErrors,
 } from 'src/common/utils/';
 import { PasswordService } from 'src/common/graphql/services/password.service';
+import { ROUTES } from 'src/app/app.constants';
 
 @Component({
     templateUrl: './login.component.html',
@@ -68,13 +71,7 @@ export class LoginComponent extends AbstractComponent {
             .subscribe(
                 (loginResponse: ILoginResponse) => {
                     this.authService.setToken(loginResponse);
-                    this.router.navigate(
-                        [this.routerAfterLogin(loginResponse)],
-                        {
-                            state: {
-                                showBanner: true,
-                            },
-                        });
+                    this.navigateAfterLogin(loginResponse, true);
                 },
                 error => {
                     this.resetErrorsAndLoading();
@@ -134,7 +131,7 @@ export class LoginComponent extends AbstractComponent {
                         this.cd.markForCheck();
                         return;
                     }
-                    this.router.navigate([this.routerAfterLogin(loginResponse)]);
+                    this.navigateAfterLogin(loginResponse);
                 },
                 error => {
                     this.resetErrorsAndLoading();
@@ -151,7 +148,7 @@ export class LoginComponent extends AbstractComponent {
             .subscribe(
                 (loginResponse: ILoginResponse) => {
                     this.authService.setToken(loginResponse);
-                    this.router.navigate([this.routerAfterLogin(loginResponse)]);
+                    this.navigateAfterLogin(loginResponse);
                 },
                 error => {
                     this.resetErrorsAndLoading();
@@ -223,6 +220,23 @@ export class LoginComponent extends AbstractComponent {
                 return ROUTES.ROUTER_REQUEST_SUPPLY_POINT;
             case LANDING_PAGE.OFFERS:
                 return ROUTES.ROUTER_SUPPLY_OFFER_POWER;
+            case LANDING_PAGE.PAYMENT:
+                return ROUTES.ROUTER_REQUEST_PAYMENT;
         }
+    }
+
+    public navigateAfterLogin = (loginResponse: ILoginResponse, changedPassword = false) => {
+        const extras: NavigationExtras = {};
+        if (changedPassword) {
+            extras.state = {
+                showBanner: true,
+            };
+        }
+        if (loginResponse.landingPage === LANDING_PAGE.PAYMENT && loginResponse.supplyPointId) {
+            extras.queryParams = {
+                supplyPointId: loginResponse.supplyPointId,
+            };
+        }
+        this.router.navigate([this.routerAfterLogin(loginResponse)], extras);
     }
 }
