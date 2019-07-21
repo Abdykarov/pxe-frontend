@@ -227,9 +227,6 @@ export class LoginComponent extends AbstractComponent {
 
     public navigateAfterLogin = (loginResponse: ILoginResponse, changedPassword = false) => {
         const extras: NavigationExtras = {};
-        //
-        // loginResponse.landingPage = LANDING_PAGE.PAYMENT;
-        // loginResponse.supplyPointId = '1142';
 
         if (changedPassword) {
             extras.state = {
