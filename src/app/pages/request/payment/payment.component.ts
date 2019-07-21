@@ -8,9 +8,7 @@ import {
     OnInit,
 } from '@angular/core';
 
-import * as R_ from 'ramda-extension';
 import {
-    filter,
     map,
     switchMap,
     takeUntil,
@@ -63,9 +61,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
 
     ngOnInit () {
         super.ngOnInit();
-        if (this.supplyPointId) {
-            this.getSupplyPointWithPayment(this.supplyPointId);
-        }
+        this.getSupplyPointWithPayment(this.supplyPointId);
     }
 
     public getSupplyPointWithPayment = (id) => {
