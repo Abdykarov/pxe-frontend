@@ -17,3 +17,24 @@ export enum ContractStatus {
     CONCLUDED = 'CONCLUDED',
     WAITING_FOR_PAYMENT = 'WAITING_FOR_PAYMENT',
 }
+
+export interface IPayment {
+    accountNumber: string;
+    amount: number;
+    currency: ICurrency;
+    dueDate: string;
+    encodedQrCode: string;
+    msg: string;
+    variableSymbol: string;
+}
+
+export interface ICurrency {
+    currencyCode: string;
+}
+
+export interface IQRCodeSetting {
+    backgroundColor: string;
+    foregroundColor: string;
+    height: number;
+    width: number;
+}

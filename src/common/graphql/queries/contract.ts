@@ -7,3 +7,18 @@ export const getContractTermsQuery = gql`
         }
     }
 `;
+
+export const getPaymentInfoQuery = gql`
+    query getPaymentInfo($contractId: ID!, $setting: QRCodeSetting!){
+        getPaymentInfo(contractId: $contractId, setting: $setting){
+            accountNumber
+            amount
+            currency {
+                currencyCode
+            }
+            dueDate
+            encodedQrCode
+            msg
+        }
+    }
+`;
