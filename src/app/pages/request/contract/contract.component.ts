@@ -29,6 +29,7 @@ import {
 } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 
 @Component({
     selector: 'pxe-contract',
@@ -84,6 +85,12 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                 },
             );
     }
+
+    bannerObj: IBannerObj = {
+        linkValue: 'basic/banners',
+        // doplnit od monci
+        text: 'assasas',
+    };
 
     public signContract(smsCode: string) {
         this.formLoading = true;
