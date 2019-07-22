@@ -6,6 +6,12 @@ import { calculateTerminateInterval } from 'src/common/utils/supply-point-date-c
 import { CONTRACT_END_TYPE } from 'src/app/app.constants';
 import { ISupplyPointInput } from 'src/common/graphql/models/supply.model';
 
+export const isAllRequiredFilled = (supplyPoint: ISupplyPointInput): boolean =>
+    !!(supplyPoint.expirationDate && supplyPoint.timeToContractEnd && supplyPoint.timeToContractEndPeriodId);
+
+export const isInTerminateInterval = (supplyPoint: ISupplyPointInput): boolean =>
+    calculateTerminateInterval(moment(), supplyPoint).diff(moment(supplyPoint.expirationDate).startOf('day'), 'seconds') <= 0;
+
 export const timeToContractEndProlonge = () => {
     return (formGroup: FormGroup) => {
         const supplyPointInput: ISupplyPointInput = formGroup.getRawValue();
@@ -21,9 +27,3 @@ export const timeToContractEndProlonge = () => {
         }
     };
 };
-
-export const isAllRequiredFilled = (supplyPoint: ISupplyPointInput): boolean =>
-    !!(supplyPoint.expirationDate && supplyPoint.timeToContractEnd && supplyPoint.timeToContractEndPeriodId);
-
-export const isInTerminateInterval = (supplyPoint: ISupplyPointInput): boolean =>
-    calculateTerminateInterval(moment(), supplyPoint).diff(moment(supplyPoint.expirationDate).startOf('day'), 'seconds') <= 0;

@@ -9,6 +9,18 @@ import {
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 
+const getTimeToContractEndPeriod = (supplyPointInput: any): TimeToContractEndPeriod => {
+    if (supplyPointInput.timeToContractEndPeriodId !== undefined) {
+        return supplyPointInput.timeToContractEndPeriodId;
+    } else {
+        if (R.empty(supplyPointInput.timeToContractEndPeriod)) {
+            return TimeToContractEndPeriod.DAY;
+        } else {
+            return supplyPointInput.timeToContractEndPeriod.code;
+        }
+    }
+};
+
 export const getNextDayFromExpirationDate = (supplyPointInput: ISupplyPointInput | ISupplyPoint) =>
     supplyPointInput.expirationDate && moment(supplyPointInput.expirationDate).add(1, 'days');
 
@@ -32,16 +44,3 @@ export const addOneMonth = (from: Moment): Moment => moment(from.startOf('day'))
 export const contractEndIndefinitePeriod = (supplyPointInput: ISupplyPointInput) =>
     supplyPointInput.timeToContractEnd && supplyPointInput.timeToContractEndPeriodId &&
     calculateTerminateInterval(addOneMonth(moment().startOf('day')), supplyPointInput).add(1, 'months').startOf('month');
-
-// to do zvazit refactor
-const getTimeToContractEndPeriod = (supplyPointInput: any): TimeToContractEndPeriod => {
-    if (supplyPointInput.timeToContractEndPeriodId !== undefined) {
-        return supplyPointInput.timeToContractEndPeriodId;
-    } else {
-        if (R.empty(supplyPointInput.timeToContractEndPeriod)) {
-            return TimeToContractEndPeriod.DAY;
-        } else {
-            return supplyPointInput.timeToContractEndPeriod.code;
-        }
-    }
-};
