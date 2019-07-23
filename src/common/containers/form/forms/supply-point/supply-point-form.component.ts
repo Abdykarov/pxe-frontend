@@ -76,9 +76,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public suppliers = [];
     public suppliers$: BehaviorSubject<any> = new BehaviorSubject([]);
     public contractEndType = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT;
-    public lastContractEndType = null;
-
-    public x = true;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -87,11 +84,11 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         private supplyService: SupplyService,
     ) {
         super(fb);
+        this.minDate = new Date();
     }
 
     ngOnInit() {
         super.ngOnInit();
-        this.minDate = new Date();
 
         this.form.get('commodityType')
             .valueChanges
@@ -321,7 +318,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         } else {
             this.setEnableField('contractEndTypeId');
             this.setContractEndFields();
-            this.resetFieldError('contractEndTypeId', false);
+            this.resetFieldError('contractEndTypeId', true);
         }
     }
 
