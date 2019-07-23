@@ -9,20 +9,12 @@ import {
 } from '@angular/core';
 
 
-import * as R from 'ramda';
-import { interval } from 'rxjs';
 import {
-    filter,
     map,
-    startWith,
     takeUntil,
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import {
-    CONSTS,
-    ROUTES,
-} from 'src/app/app.constants';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { getConfigStepper } from 'src/common/utils';
 import {
@@ -34,6 +26,7 @@ import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { OfferService } from 'src/common/graphql/services/offer.service';
 import { parseGraphQLErrors } from 'src/common/utils';
+import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { ValidityService } from 'src/app/services/validity.service';
 
@@ -50,12 +43,6 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
     public onlyOffersFromActualSupplier = false;
-    public checkOfferSelectionConstraint$ = interval(CONSTS.REFRESH_INTERVAL_RXJS)
-        .pipe(
-            startWith(0),
-            takeUntil(this.destroy$),
-            filter(() => !this.onlyOffersFromActualSupplier),
-        );
 
     public bannerObj: IBannerObj = {
         linkValue: 'basic/banners',
@@ -83,13 +70,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
             ).subscribe(
                 (supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
-                    this.checkOfferSelectionConstraint$.subscribe(() => {
-                        this.onlyOffersFromActualSupplier = this.validityService.validateOffer(this.supplyPoint);
-                        if (!this.onlyOffersFromActualSupplier ) {
-                            this.filterOffersOnlyActualSupplier();
-                        }
-                        this.cd.markForCheck();
-                    });
+                    this.onlyOffersFromActualSupplier = this.validityService.validateOffer(this.supplyPoint);
                     this.findSupplyPointOffers(this.supplyPoint.ean);
                 },
                 (error) => {
@@ -99,14 +80,6 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                     this.cd.markForCheck();
                 },
             );
-    }
-
-    public filterOffersOnlyActualSupplier = () => {
-        if (!R.isNil(this.supplyPointOffers) && R.isNil(this.supplyPoint)) {
-            this.supplyPointOffers = R.filter((supplyPointOffers: ISupplyPointOffer) =>
-                supplyPointOffers.supplier.id === this.supplyPoint.supplier.id)
-            (this.supplyPointOffers);
-        }
     }
 
     public findSupplyPointOffers = (ean) => {
