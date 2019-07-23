@@ -1,5 +1,4 @@
 <div
-
     class="form-group"
     [formGroup]="parentForm">
     <div
@@ -56,7 +55,7 @@
             </button>
         </div>
         <div
-            *ngIf="!!getErrorMessage()"
+            *ngIf="!!error && !!touched"
             [innerHtml]="getErrorMessage()"
             class="invalid-feedback">
         </div>
