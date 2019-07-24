@@ -1,3 +1,13 @@
+<ng-template #agreementTemplate>
+    Zaškrtnutím tohoto políčka
+    <br >
+    (a) souhlasíte se  <a [routerLink]="routes.ROUTER_TERMS_OF_USE">Všeobecnými obchodními podmínkami účasti na Trhu „PARC 4 U“</a>, kterými
+    se bude řídit Vaše užívání webové aplikace PARC 4 U a souvisejících služeb PXE ke
+    sjednávání sdružených služeb dodávky elektřiny/plynu na trhu PXE,
+    <br >
+    (b) berete na vědomí <a [routerLink]="routes.ROUTER_SECURING_YOUR_DATA">Informaci o zpracování osobních údajů</a>.
+</ng-template>
+
 <div class="container-fluid">
     <div class="container-content">
         <pxe-layout-container pageTitle="Registrace">
@@ -7,6 +17,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <pxe-registration-form
+                                    [agreementTemplate]="agreementTemplate"
                                     [formFields]="formFields"
                                     [formLoading]="formLoading"
                                     [formSent]="formSent"

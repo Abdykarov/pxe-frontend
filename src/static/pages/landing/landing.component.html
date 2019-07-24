@@ -2,6 +2,10 @@
     <pxe-supplier [configSupplier]="configSupplier"></pxe-supplier>
 </ng-template>
 
+<ng-template #agreementTemplate>
+    Souhlasím se <a [routerLink] = "['/full/landing-page']">zásadami bezpečnosti</a>
+</ng-template>
+
 
 <div class="landing-page">
     <div class="section about-our-benefit section--picture-second">
@@ -152,6 +156,7 @@
                             Chci mít také přístup k&nbsp;jiným cenám, možnost&nbsp;měnit dodavatele jen na&nbsp;jedno kliknutí a&nbsp;zbavit se starostí s&nbsp;převodem.
                         </h3>
                         <pxe-registration-form
+                            [agreementTemplate]="agreementTemplate"
                             [formFields]="formFields"
                             [formLoading]="formLoading"
                             [formSent]="formSent"
