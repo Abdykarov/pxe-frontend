@@ -27,7 +27,6 @@ export class SignUpComponent extends AbstractComponent {
     public globalError: string[] = [];
     public fieldError: IFieldError = {};
     public formFields: IForm;
-
     public routes = ROUTES;
 
     constructor(

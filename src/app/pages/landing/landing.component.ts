@@ -22,6 +22,7 @@ import {
 } from 'src/common/utils';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
+import { ROUTES } from 'src/app/app.constants';
 
 @Component({
     templateUrl: './landing.component.html',
@@ -36,6 +37,7 @@ export class LandingComponent extends AbstractComponent {
     public globalError: string[] = [];
     public fieldError: IFieldError = {};
     public formFields: IForm;
+    public routes = ROUTES;
 
     constructor(
         private apollo: Apollo,
