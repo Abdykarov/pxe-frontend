@@ -72,25 +72,25 @@ export class PersonalDataService {
                     contractId: supplyPoint.contract.contractId,
                     personalData,
                 },
-                update: (cache, {data}) => {
-                    const { getSupplyPoint } = cache.readQuery(
-                        {
-                            query: getSupplyPointQuery,
-                            variables: {
-                                supplyPointId: supplyPoint.id,
-                            },
-                        });
-
-                    this.loadSupplyPoint(getSupplyPoint, personalData);
-
-                    cache.writeQuery({
-                        query: getSupplyPointQuery,
-                        data: { getSupplyPoint},
-                        variables: {
-                            supplyPointId: supplyPoint.id,
-                        },
-                    });
-                },
+                // update: (cache, {data}) => {
+                //     const { getSupplyPoint } = cache.readQuery(
+                //         {
+                //             query: getSupplyPointQuery,
+                //             variables: {
+                //                 supplyPointId: supplyPoint.id,
+                //             },
+                //         });
+                //
+                //     this.loadSupplyPoint(getSupplyPoint, personalData);
+                //
+                //     cache.writeQuery({
+                //         query: getSupplyPointQuery,
+                //         data: { getSupplyPoint},
+                //         variables: {
+                //             supplyPointId: supplyPoint.id,
+                //         },
+                //     });
+                // },
             });
     }
 

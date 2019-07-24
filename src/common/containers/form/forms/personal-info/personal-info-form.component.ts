@@ -117,7 +117,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         this.form.controls['depositPaymentTypeId'].setValue(depositPaymentTypeId);
         this.form.controls['deposit'].setValue(deposit);
         this.form.controls['address1'].setValue(address1);
-        if (onlyAddress1 && onlyAddress1.city) {
+        if (this.form.controls['onlyAddress1'].value) {
             this.form.controls['address2'].setValue(address2);
         }
 
