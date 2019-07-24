@@ -6,6 +6,7 @@ import {
     ISupplyPointInput,
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
+import { unitOfTime } from 'moment';
 
 export const getNextDayFromExpirationDate = (supplyPointInput: ISupplyPointInput) =>
     supplyPointInput.expirationDate && moment(supplyPointInput.expirationDate).add(1, 'days');
@@ -25,3 +26,8 @@ export const contractEndIndefinitePeriod = (supplyPointInput: ISupplyPointInput)
     calculateTerminateInterval(addOneMonth(moment().startOf('day')), supplyPointInput).add(1, 'months').startOf('month');
 
 
+export const dateDiff = (dateFromString: string, dateToString: string, resultUnit: unitOfTime.Diff = 'days') => {
+    const from = moment(dateFromString);
+    const to = moment(dateToString);
+    return to.diff(from, resultUnit);
+};

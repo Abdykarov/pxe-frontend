@@ -3,16 +3,15 @@ import {
     PipeTransform,
 } from '@angular/core';
 
-import * as moment from 'moment';
 import { unitOfTime } from 'moment';
+
+import { dateDiff } from 'src/common/utils/supply-point-date-calculate.fnc';
 
 @Pipe({
     name: 'dateDiff',
 })
 export class DateDiffPipe implements PipeTransform {
     transform(dateFromString: string, dateToString: string, resultUnit: unitOfTime.Diff = 'days'): number {
-        const from = moment(dateFromString);
-        const to = moment(dateToString);
-        return to.diff(from, resultUnit);
+        return dateDiff(dateFromString, dateToString, resultUnit);
     }
 }

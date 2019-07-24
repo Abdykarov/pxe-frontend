@@ -36,15 +36,14 @@ import { ValidityService } from 'src/app/services/validity.service';
 export class OfferSelectionComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
     public loadingSupplyPointOffers = true;
+    public onlyOffersFromActualSupplier = false;
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.OFFER_STEP);
     public supplyPointOffers: ISupplyPointOffer[];
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
-    public onlyOffersFromActualSupplier = false;
 
     public bannerObj: IBannerObj = {
-        linkValue: 'basic/banners',
         // doplnit od monci
         text: 'Z důvodu, že Vaše nabídka končí  za méně než 31 dní jsou zobrazeny pouze nabídky od aktuálního dodavatele.',
     };
