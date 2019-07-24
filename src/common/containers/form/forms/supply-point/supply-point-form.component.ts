@@ -76,7 +76,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public suppliers = [];
     public suppliers$: BehaviorSubject<any> = new BehaviorSubject([]);
     public contractEndType = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT;
-    public lastContractEndType = null;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -140,8 +139,10 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             .pipe(
                 takeUntil(this.destroy$),
             )
-            .subscribe(() => {
-                this.setContractEndFields();
+            .subscribe((contractEndTypeId) => {
+                if (contractEndTypeId) {
+                    this.setContractEndFields();
+                }
             });
 
         this.form.get('supplierId')
@@ -258,12 +259,12 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         }
     }
 
-    public setContractEndFields = () => {
-        const contractEndType = this.getFieldValue('contractEndTypeId');
-        if (contractEndType) {
-            this.contractEndType = contractEndType;
-        } else if (this.form.get('ownTerminate').value) {
+    public setContractEndFields = (type = null) => {
+        const contractEndType = this.getFieldValue('contractEndTypeId') || type;
+        if (this.form.get('ownTerminate').value) {
             this.contractEndType = CONTRACT_END_TYPE.CONTRACT_END_TERMINATE;
+        } else if (contractEndType) {
+            this.contractEndType = contractEndType;
         } else {
             this.contractEndType = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT;
         }
@@ -311,16 +312,12 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     }
 
     public setOwnTerminate = (ownTerminate: boolean) => {
-        const contractEndTypeId = this.form.get('contractEndTypeId');
         if (ownTerminate) {
-            this.lastContractEndType = contractEndTypeId.value;
             this.setDisableField('contractEndTypeId');
-            contractEndTypeId.setValue(CONTRACT_END_TYPE.CONTRACT_END_TERMINATE);
+            this.setContractEndFields(CONTRACT_END_TYPE.CONTRACT_END_TERMINATE);
         } else {
-            if (this.lastContractEndType !== CONTRACT_END_TYPE.CONTRACT_END_TERMINATE ) {
-                contractEndTypeId.setValue(this.lastContractEndType);
-            }
             this.setEnableField('contractEndTypeId');
+            this.setContractEndFields();
             this.resetFieldError('contractEndTypeId', true);
         }
     }
