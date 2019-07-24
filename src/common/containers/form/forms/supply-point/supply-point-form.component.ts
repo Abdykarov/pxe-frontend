@@ -139,8 +139,8 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             .pipe(
                 takeUntil(this.destroy$),
             )
-            .subscribe((val) => {
-                if (val) {
+            .subscribe((contractEndTypeId) => {
+                if (contractEndTypeId) {
                     this.setContractEndFields();
                 }
             });
