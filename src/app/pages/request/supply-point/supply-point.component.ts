@@ -51,6 +51,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public formLoading = false;
     public supplyPointData = null;
     public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
+    public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
 

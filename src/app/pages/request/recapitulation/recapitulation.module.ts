@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 import { PersonalInfoFormModule } from 'src/common/containers/form/forms/personal-info/personal-info-form.module';
@@ -13,6 +14,7 @@ import { RecapitulationRoutingModule } from './recapitulation.routing';
         RecapitulationComponent,
     ],
     imports: [
+        AlertModule,
         ButtonModule,
         CommonModule,
         LayoutContainerModule,

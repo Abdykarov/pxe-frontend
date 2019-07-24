@@ -101,31 +101,31 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     ngOnInit() {
         super.ngOnInit();
 
-    if (this.supplyPointId) {
-        let supplyPointFound: ISupplyPoint = null;
-        this.supplyService.getSupplyPoint(this.supplyPointId)
-            .pipe(
-                takeUntil(this.destroy$),
-                map(({data}) => data.getSupplyPoint),
-                concatMap((supplyPoint: ISupplyPoint) => {
-                    supplyPointFound = supplyPoint;
-                    return R.path(['contract', 'contractId'])(supplyPoint) ?
-                        this.contractService.deleteSelectedOfferFromContract(supplyPoint.contract.contractId)
-                        : of({});
-                }),
-            ).subscribe(
-                () => {
-                    this.formValues = supplyPointFound;
-                    this.prefillForm();
-                    this.cd.markForCheck();
-                },
-                (error) => {
-                    const { globalError } = parseGraphQLErrors(error);
-                    this.globalError = globalError;
-                    this.cd.markForCheck();
-                },
-            );
-    }
+        if (this.supplyPointId) {
+            let supplyPointFound: ISupplyPoint = null;
+            this.supplyService.getSupplyPoint(this.supplyPointId)
+                .pipe(
+                    takeUntil(this.destroy$),
+                    map(({data}) => data.getSupplyPoint),
+                    concatMap((supplyPoint: ISupplyPoint) => {
+                        supplyPointFound = supplyPoint;
+                        return R.path(['contract', 'contractId'])(supplyPoint) ?
+                            this.contractService.deleteSelectedOfferFromContract(supplyPoint.contract.contractId) :
+                            of({});
+                    }),
+                ).subscribe(
+                    () => {
+                        this.formValues = supplyPointFound;
+                        this.prefillForm();
+                        this.cd.markForCheck();
+                    },
+                    (error) => {
+                        const { globalError } = parseGraphQLErrors(error);
+                        this.globalError = globalError;
+                        this.cd.markForCheck();
+                    },
+                );
+        }
 
         this.form.get('commodityType')
             .valueChanges
@@ -176,8 +176,10 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             .pipe(
                 takeUntil(this.destroy$),
             )
-            .subscribe(() => {
-                this.setContractEndFields();
+            .subscribe((contractEndTypeId) => {
+                if (contractEndTypeId) {
+                    this.setContractEndFields();
+                }
             });
 
         this.form.get('supplierId')
@@ -294,12 +296,12 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         }
     }
 
-    public setContractEndFields = () => {
-        const contractEndType = this.getFieldValue('contractEndTypeId');
-        if (contractEndType) {
-            this.contractEndType = contractEndType;
-        } else if (this.form.get('ownTerminate').value) {
+    public setContractEndFields = (type = null) => {
+        const contractEndType = this.getFieldValue('contractEndTypeId') || type;
+        if (this.form.get('ownTerminate').value) {
             this.contractEndType = CONTRACT_END_TYPE.CONTRACT_END_TERMINATE;
+        } else if (contractEndType) {
+            this.contractEndType = contractEndType;
         } else {
             this.contractEndType = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT;
         }
@@ -347,16 +349,12 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     }
 
     public setOwnTerminate = (ownTerminate: boolean) => {
-        const contractEndTypeId = this.form.get('contractEndTypeId');
         if (ownTerminate) {
-            this.lastContractEndType = contractEndTypeId.value;
             this.setDisableField('contractEndTypeId');
-            contractEndTypeId.setValue(CONTRACT_END_TYPE.CONTRACT_END_TERMINATE);
+            this.setContractEndFields(CONTRACT_END_TYPE.CONTRACT_END_TERMINATE);
         } else {
-            if (this.lastContractEndType !== CONTRACT_END_TYPE.CONTRACT_END_TERMINATE ) {
-                contractEndTypeId.setValue(this.lastContractEndType);
-            }
             this.setEnableField('contractEndTypeId');
+            this.setContractEndFields();
             this.resetFieldError('contractEndTypeId', true);
         }
     }

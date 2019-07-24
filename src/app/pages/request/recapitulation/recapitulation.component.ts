@@ -89,9 +89,9 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         this.globalError = [];
         this.fieldError = {};
 
-        const personalDataAction  = this.navigateRequestService.isPreviousStep(this.supplyPoint, this.ACTUAL_PROGRESS_STATUS)
-            ? this.personalDataService.updatePersonalData(this.supplyPoint, personalInfoInput)
-            : this.personalDataService.savePersonalData(this.supplyPoint, personalInfoInput);
+        const personalDataAction  = this.navigateRequestService.isPreviousStep(this.supplyPoint, this.ACTUAL_PROGRESS_STATUS) ?
+            this.personalDataService.updatePersonalData(this.supplyPoint, personalInfoInput) :
+            this.personalDataService.savePersonalData(this.supplyPoint, personalInfoInput);
 
         personalDataAction
             .pipe(
