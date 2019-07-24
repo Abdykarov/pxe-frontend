@@ -45,11 +45,19 @@ export const indexOfOfferStepWithoutShadowStep = R.pipe(
     R.findIndex(item => item.step === ProgressStatus.OFFER_STEP),
 )(steps);
 
+export const indexOfSteps = {
+    [ProgressStatus.SUPPLY_POINT]: R.findIndex(R.propEq('step', ProgressStatus.SUPPLY_POINT))(steps),
+    [ProgressStatus.OFFER_STEP]: R.findIndex(R.propEq('step', ProgressStatus.OFFER_STEP))(steps),
+    [ProgressStatus.PERSONAL_DATA]: R.findIndex(R.propEq('step', ProgressStatus.PERSONAL_DATA))(steps),
+    [ProgressStatus.READY_FOR_SIGN]: R.findIndex(R.propEq('step', ProgressStatus.READY_FOR_SIGN))(steps),
+    [ProgressStatus.WAITING_FOR_PAYMENT]: R.findIndex(R.propEq('step', ProgressStatus.WAITING_FOR_PAYMENT))(steps),
+};
+
 export const indexesOfSecondStep = [
-    R.findIndex(R.propEq('step', ProgressStatus.OFFER_STEP))(steps),
-    R.findIndex(R.propEq('step', ProgressStatus.PERSONAL_DATA))(steps),
-    R.findIndex(R.propEq('step', ProgressStatus.READY_FOR_SIGN))(steps),
-    R.findIndex(R.propEq('step', ProgressStatus.WAITING_FOR_PAYMENT))(steps),
+    indexOfSteps[ProgressStatus.OFFER_STEP],
+    indexOfSteps[ProgressStatus.PERSONAL_DATA],
+    indexOfSteps[ProgressStatus.READY_FOR_SIGN],
+    indexOfSteps[ProgressStatus.WAITING_FOR_PAYMENT],
 ];
 
 export const getConfigStepper = (activeStep: ProgressStatus, withShadowSteps = true): IStepperProgressItem[] => {

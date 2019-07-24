@@ -20,7 +20,7 @@ import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.m
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
 import { inArray } from 'src/common/utils';
-import { NavigateService } from 'src/app/services/navigate.service';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { parseGraphQLErrors } from 'src/common/utils';
 import {
     OverviewState,
@@ -47,7 +47,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
     constructor(
         private cd: ChangeDetectorRef,
         private dateDiffPipe: DateDiffPipe,
-        private navigateService: NavigateService,
+        private navigateRequestService: NavigateRequestService,
         private router: Router,
         private supplyService: SupplyService,
     ) {
@@ -81,13 +81,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
     }
 
     public completeRequestAction = (supplyPoint: ISupplyPoint): void => {
-        this.router.navigate(
-            [this.navigateService.getNextRouteByProgressStatus(supplyPoint.progressStatus)],
-            {
-                queryParams: {
-                    supplyPointId: supplyPoint.id,
-                },
-            });
+        this.navigateRequestService.routerToRequestStep(supplyPoint);
     }
 
     public newRequestAction = (evt): void => {
