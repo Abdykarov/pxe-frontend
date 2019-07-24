@@ -114,18 +114,17 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                         : of({});
                 }),
             ).subscribe(
-            () => {
-                console.log(supplyPointFound);
-                this.formValues = supplyPointFound;
-                this.prefillForm();
-                this.cd.markForCheck();
-            },
-            (error) => {
-                const { globalError } = parseGraphQLErrors(error);
-                this.globalError = globalError;
-                this.cd.markForCheck();
-            },
-        );
+                () => {
+                    this.formValues = supplyPointFound;
+                    this.prefillForm();
+                    this.cd.markForCheck();
+                },
+                (error) => {
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
+                },
+            );
     }
 
         this.form.get('commodityType')
