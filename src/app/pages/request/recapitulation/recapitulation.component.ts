@@ -27,7 +27,7 @@ import {
     ProgressStatus,
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
-import { NavigateService } from 'src/app/services/navigate.service';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -54,7 +54,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
 
     constructor(
         private cd: ChangeDetectorRef,
-        private navigateService: NavigateService,
+        private navigateRequestService: NavigateRequestService,
         private personalDataService: PersonalDataService,
         private route: ActivatedRoute,
         private router: Router,
@@ -71,7 +71,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             )
             .subscribe(
                 (supplyPoint: ISupplyPoint) => {
-                    this.navigateService.checkCorrectStep(supplyPoint, ProgressStatus.PERSONAL_DATA);
+                    this.navigateRequestService.checkCorrectStep(supplyPoint, ProgressStatus.PERSONAL_DATA);
                     this.supplyPoint = supplyPoint;
                     this.isIndividual = this.supplyPoint.subject.code === SubjectType.SUBJECT_TYPE_INDIVIDUAL;
                     this.cd.markForCheck();
@@ -89,7 +89,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         this.globalError = [];
         this.fieldError = {};
 
-        const personalDataAction  = this.navigateService.isPreviousStep(this.supplyPoint, this.ACTUAL_PROGRESS_STATUS)
+        const personalDataAction  = this.navigateRequestService.isPreviousStep(this.supplyPoint, this.ACTUAL_PROGRESS_STATUS)
             ? this.personalDataService.updatePersonalData(this.supplyPoint, personalInfoInput)
             : this.personalDataService.savePersonalData(this.supplyPoint, personalInfoInput);
 

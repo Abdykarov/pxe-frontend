@@ -28,7 +28,7 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
-import { NavigateService } from 'src/app/services/navigate.service';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { OfferService } from 'src/common/graphql/services/offer.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -51,7 +51,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     constructor(
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
-        private navigateService: NavigateService,
+        private navigateRequestService: NavigateRequestService,
         private offerService: OfferService,
         private route: ActivatedRoute,
         private router: Router,
@@ -67,7 +67,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                 map(({data}) => data.getSupplyPoint),
             ).subscribe(
                 (supplyPoint: ISupplyPoint) => {
-                    this.navigateService.checkCorrectStep(supplyPoint, ProgressStatus.OFFER_STEP);
+                    this.navigateRequestService.checkCorrectStep(supplyPoint, ProgressStatus.OFFER_STEP);
                     this.supplyPoint = supplyPoint;
                     this.findSupplyPointOffers(this.supplyPoint.ean);
                 },
@@ -104,8 +104,8 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     public saveContract = (supplyPointOffer: ISupplyPointOffer) => {
         const supplyPointId = this.supplyPoint.id;
 
-        const contractAction = this.navigateService.isPreviousStep(this.supplyPoint, this.ACTUAL_PROGRESS_STATUS) ?
-            this.offerService.deleteOffer(this.supplyPoint.contract.offer.id) : of({});
+        const contractAction = this.navigateRequestService.isPreviousStep(this.supplyPoint, this.ACTUAL_PROGRESS_STATUS) ?
+            this.contractService.deleteSelectedOfferFromContract(this.supplyPoint.contract.contractId) : of({});
 
         contractAction
             .pipe(

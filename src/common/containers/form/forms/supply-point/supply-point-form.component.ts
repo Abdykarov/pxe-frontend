@@ -87,6 +87,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
 
     constructor(
         private cd: ChangeDetectorRef,
+        private contractService: ContractService,
         private offerService: OfferService,
         protected fb: FormBuilder,
         private modalsService: ModalService,
@@ -108,17 +109,16 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 map(({data}) => data.getSupplyPoint),
                 concatMap((supplyPoint: ISupplyPoint) => {
                     supplyPointFound = supplyPoint;
-
                     return R.path(['contract', 'contractId'])(supplyPoint) ?
-                        this.offerService.deleteOffer(supplyPoint.contract.offer.id)
+                        this.contractService.deleteSelectedOfferFromContract(supplyPoint.contract.contractId)
                         : of({});
                 }),
             ).subscribe(
             () => {
-                // todo remove offer from SP asi manualne?
-                // z nakyho duvodu se to vola az po f5 po zeefektivneni testovani opravit (ted tam porad menit true a false hodnotu...)
-
+                console.log(supplyPointFound);
                 this.formValues = supplyPointFound;
+                this.prefillForm();
+                this.cd.markForCheck();
             },
             (error) => {
                 const { globalError } = parseGraphQLErrors(error);

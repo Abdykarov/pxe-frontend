@@ -92,7 +92,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             name = this.formValues.name;
             ico = this.formValues.ico;
             dic = this.formValues.dic;
-            onlyAddress1 = !this.formValues.address2;
+            onlyAddress1 = this.formValues.address2;
             bankAccountNumber = this.formValues.bankAccountNumber;
             bankCode = this.formValues.bankCode;
             phone = this.formValues.phone && this.formValues.phone.substr(4, 10);
@@ -108,7 +108,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         this.form.controls['ico'].setValue(ico);
         this.form.controls['dic'].setValue(dic);
 
-        this.form.controls['onlyAddress1'].setValue(!onlyAddress1);
+        this.form.controls['onlyAddress1'].setValue(onlyAddress1 && onlyAddress1.city !== '');
         this.form.controls['bankAccountNumber'].setValue(bankAccountNumber);
         this.form.controls['bankCode'].setValue(bankCode);
         this.form.controls['phone'].setValue(phone);
@@ -117,7 +117,9 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         this.form.controls['depositPaymentTypeId'].setValue(depositPaymentTypeId);
         this.form.controls['deposit'].setValue(deposit);
         this.form.controls['address1'].setValue(address1);
-        this.form.controls['address2'].setValue(address2);
+        if (onlyAddress1 && onlyAddress1.city) {
+            this.form.controls['address2'].setValue(address2);
+        }
 
         this.resetFormError(false);
     }
