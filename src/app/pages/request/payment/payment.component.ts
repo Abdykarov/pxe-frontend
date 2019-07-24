@@ -13,6 +13,8 @@ import { ProgressStatus } from 'src/common/graphql/models/supply.model';
     styleUrls: ['./payment.component.scss'],
 })
 export class PaymentComponent extends AbstractComponent implements OnInit {
-    public configStepper = getConfigStepper(ProgressStatus.WAITING_FOR_PAYMENT);
+    public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.WAITING_FOR_PAYMENT;
+
+    public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public globalError: string[] = [];
 }

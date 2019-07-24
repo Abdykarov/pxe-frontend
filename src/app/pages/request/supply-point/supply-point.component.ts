@@ -42,6 +42,8 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./supply-point.component.scss'],
 })
 export class SupplyPointComponent extends AbstractComponent implements OnInit {
+    public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.SUPPLY_POINT;
+
     public formFields = formFields;
     public formSent = false;
     public globalError: string[] = [];
@@ -50,7 +52,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public supplyPointData = null;
     public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
 
-    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.SUPPLY_POINT);
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
 
     constructor(
         private cd: ChangeDetectorRef,

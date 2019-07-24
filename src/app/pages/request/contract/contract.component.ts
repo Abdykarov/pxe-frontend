@@ -37,9 +37,10 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./contract.component.scss'],
 })
 export class ContractComponent extends AbstractComponent implements OnInit {
+    public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.READY_FOR_SIGN;
     public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.PERSONAL_DATA;
 
-    public configStepper = getConfigStepper(ProgressStatus.READY_FOR_SIGN);
+    public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public contractTemplate;
     public showOffer = true;
     public fieldError: IFieldError = {};
