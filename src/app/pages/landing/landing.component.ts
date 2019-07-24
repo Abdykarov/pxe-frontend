@@ -20,9 +20,9 @@ import {
     parseGraphQLErrors,
     scrollToElementFnc,
 } from 'src/common/utils';
+import { ROUTES } from 'src/app/app.constants';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
-import { ROUTES } from 'src/app/app.constants';
 
 @Component({
     templateUrl: './landing.component.html',
