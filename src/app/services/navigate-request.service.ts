@@ -19,8 +19,8 @@ export class NavigateRequestService {
         private router: Router,
     ) {}
 
-    private allowedProgressStatus = (supplyPoint: ISupplyPoint, canProgressStatus: ProgressStatus) =>
-        this.isPreviousStep(supplyPoint, canProgressStatus) || this.isProgressStatusStep(supplyPoint, canProgressStatus)
+    private canGoToStep = (supplyPoint: ISupplyPoint, allowedProgressStatus: ProgressStatus) =>
+        this.isPreviousStep(supplyPoint, allowedProgressStatus) || this.isProgressStatusStep(supplyPoint, allowedProgressStatus)
 
     public routerToRequestStep = (supplyPoint: ISupplyPoint, progressStatus: ProgressStatus = null) => {
         this.router.navigate(
@@ -32,19 +32,19 @@ export class NavigateRequestService {
             });
         }
 
-    public isPreviousStep = (supplyPoint: ISupplyPoint, canProgressStatus: ProgressStatus) =>
-        indexOfSteps[canProgressStatus] < indexOfSteps[supplyPoint.progressStatus]
+    public isPreviousStep = (supplyPoint: ISupplyPoint, allowedProgressStatus: ProgressStatus) =>
+        indexOfSteps[allowedProgressStatus] < indexOfSteps[supplyPoint.progressStatus]
 
-    public isProgressStatusStep = (supplyPoint: ISupplyPoint, canProgressStatus: ProgressStatus) =>
-        indexOfSteps[supplyPoint.progressStatus] === indexOfSteps[canProgressStatus]
+    public isProgressStatusStep = (supplyPoint: ISupplyPoint, allowedProgressStatus: ProgressStatus) =>
+        indexOfSteps[supplyPoint.progressStatus] === indexOfSteps[allowedProgressStatus]
 
-    public checkCorrectStep  = (supplyPoint: ISupplyPoint, canProgressStatus: ProgressStatus) => {
+    public checkCorrectStep  = (supplyPoint: ISupplyPoint, allowedProgressStatus: ProgressStatus) => {
         if (R.path(['contract', 'contractStatus'], supplyPoint) === ContractStatus.CONCLUDED) {
             this.routerToRequestStep(supplyPoint, ProgressStatus.WAITING_FOR_PAYMENT);
             return;
         }
 
-        if (!this.allowedProgressStatus(supplyPoint, canProgressStatus)) {
+        if (!this.canGoToStep(supplyPoint, allowedProgressStatus)) {
             this.routerToRequestStep(supplyPoint);
         }
     }
