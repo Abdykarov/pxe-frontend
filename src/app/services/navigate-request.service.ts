@@ -19,7 +19,7 @@ export class NavigateRequestService {
         private router: Router,
     ) {}
 
-    private canGoToStep = (supplyPoint: ISupplyPoint, canProgressStatus: ProgressStatus) =>
+    private allowedProgressStatus = (supplyPoint: ISupplyPoint, canProgressStatus: ProgressStatus) =>
         this.isPreviousStep(supplyPoint, canProgressStatus) || this.isProgressStatusStep(supplyPoint, canProgressStatus)
 
     public routerToRequestStep = (supplyPoint: ISupplyPoint, progressStatus: ProgressStatus = null) => {
@@ -40,11 +40,11 @@ export class NavigateRequestService {
 
     public checkCorrectStep  = (supplyPoint: ISupplyPoint, canProgressStatus: ProgressStatus) => {
         if (R.path(['contract', 'contractStatus'], supplyPoint) === ContractStatus.CONCLUDED) {
-            // router to complate
+            this.routerToRequestStep(supplyPoint, ProgressStatus.WAITING_FOR_PAYMENT);
             return;
         }
 
-        if (!this.canGoToStep(supplyPoint, canProgressStatus)) {
+        if (!this.allowedProgressStatus(supplyPoint, canProgressStatus)) {
             this.routerToRequestStep(supplyPoint);
         }
     }
