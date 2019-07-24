@@ -6,7 +6,6 @@
                     <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
                 </div>
             </div>
-            <!--todle sem styloval ja (col-10 + offset) aby se to vycentrovalo (nezabira celej grid ten bilej) -->
             <div class="row">
                 <div class="col-10 offset-1">
                     <div class="row align-items-center mb-3">
@@ -14,7 +13,7 @@
                             <lnd-button
                                 label="Krok zpět"
                                 type="secondary"
-                                (action)="navigateRequestService.backStep(supplyPoint, PREVIOUS_PROGRESS_STATUS )">
+                                (action)="navigateRequestService.backStepAction(supplyPoint, PREVIOUS_PROGRESS_STATUS )">
                             </lnd-button>
                         </div>
                         <div class="col-12 col-md-6 text-center">

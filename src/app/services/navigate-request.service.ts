@@ -72,7 +72,7 @@ export class NavigateRequestService {
         }
     }
 
-    public backStep = (supplyPoint: ISupplyPoint, progressStatus: ProgressStatus) => {
+    public backStepAction = (supplyPoint: ISupplyPoint, progressStatus: ProgressStatus) => {
         if (this.canGoToStep(supplyPoint, progressStatus)) {
             this.routerToRequestStep(supplyPoint, progressStatus);
             return;

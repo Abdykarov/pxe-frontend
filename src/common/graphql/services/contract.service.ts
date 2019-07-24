@@ -5,7 +5,8 @@ import { Apollo } from 'apollo-angular';
 
 import {
     concludeContractMutation,
-    deleteContractMutation, deleteSelectedOfferFromContractMutation,
+    deleteContractMutation,
+    deleteSelectedOfferFromContractMutation,
     deleteSignedContractMutation,
     saveContractMutation,
     sendContractConfirmationSmsMutation,
