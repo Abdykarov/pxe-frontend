@@ -18,13 +18,13 @@ import {
     formFieldsLogin,
     LOGIN_STATE,
 } from './config';
+import { ILoginResponse } from 'src/app/services/model/auth.model';
 import {
     IChangePassword,
     IConfirmationCode,
     ILoginState,
 } from './login.model';
 import {
-    ILoginResponse,
     IUserLogin,
     LANDING_PAGE,
     PASSWORD_DESTINATION,
@@ -70,7 +70,7 @@ export class LoginComponent extends AbstractComponent {
             )
             .subscribe(
                 (loginResponse: ILoginResponse) => {
-                    this.authService.setToken(loginResponse);
+                    this.authService.manageLoginResponse(loginResponse);
                     this.navigateAfterLogin(loginResponse, true);
                 },
                 error => {
@@ -147,7 +147,7 @@ export class LoginComponent extends AbstractComponent {
             )
             .subscribe(
                 (loginResponse: ILoginResponse) => {
-                    this.authService.setToken(loginResponse);
+                    this.authService.manageLoginResponse(loginResponse);
                     this.navigateAfterLogin(loginResponse);
                 },
                 error => {
@@ -220,7 +220,7 @@ export class LoginComponent extends AbstractComponent {
                 return ROUTES.ROUTER_REQUEST_SUPPLY_POINT;
             case LANDING_PAGE.OFFERS:
                 return ROUTES.ROUTER_SUPPLY_OFFER_POWER;
-            case LANDING_PAGE.PAYMENT:
+            case LANDING_PAGE.WAITING_FOR_PAYMENT:
                 return ROUTES.ROUTER_REQUEST_PAYMENT;
         }
     }
@@ -233,7 +233,7 @@ export class LoginComponent extends AbstractComponent {
                 showBanner: true,
             };
         }
-        if (loginResponse.landingPage === LANDING_PAGE.PAYMENT && loginResponse.supplyPointId) {
+        if (loginResponse.landingPage === LANDING_PAGE.WAITING_FOR_PAYMENT && loginResponse.supplyPointId) {
             extras.queryParams = {
                 supplyPointId: loginResponse.supplyPointId,
             };

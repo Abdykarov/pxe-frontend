@@ -215,10 +215,11 @@ export class ContractService {
     // todo refetch all queries for all supply point overviews
 
     public getPaymentInfo(contractId: string, setting: IQRCodeSetting = {
-        backgroundColor: '#FFF',
-        foregroundColor: '#000',
+        backgroundColor: '#FFFFFF',
+        foregroundColor: '#000000',
         height: 256,
         width: 256,
+        margin: 0,
     }) {
         return this.apollo
             .watchQuery<any>({

@@ -44,9 +44,9 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
     public configStepper = getConfigStepper(ProgressStatus.WAITING_FOR_PAYMENT);
     public bannerTypeImages = BannerTypeImages;
     public globalError: string[] = [];
+    public loading = true;
     public paymentInfo: IPayment;
     public paymentState = PaymentState;
-    public loading = true;
     public showPaymentInfo = true;
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
@@ -70,7 +70,6 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
     public getSupplyPointWithPayment = (id) => {
         this.supplyService.getSupplyPoint(id)
             .pipe(
-                takeUntil(this.destroy$),
                 map(({data}) => data.getSupplyPoint),
                 switchMap((supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
@@ -83,7 +82,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                     } else {
                         return of({
                             data: {
-                                getPaymentInfo:  {},
+                                getPaymentInfo: {},
                             },
                         });
                     }
@@ -92,10 +91,13 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                 switchMap((paymentInfo: IPayment) => {
                     if (!R.isEmpty(paymentInfo)) {
                         this.paymentInfo = paymentInfo;
-                        return this.authService.refreshToken();
+                        return this.authService.refreshToken( {
+                            supplyPointId: this.supplyPoint.id,
+                        });
                     }
                     return of({});
                 }),
+                takeUntil(this.destroy$),
             )
             .subscribe(
                 () => {

@@ -2,32 +2,34 @@
     <div class="row justify-content-center">
         <div class="col-md-auto mb-5 mb-md-0 mt-md-2 text-center">
             <img
-                    src="{{'data:image/jpeg;base64,' + paymentInfo.encodedQrCode}}"
-                    alt="qr-code"
-                    class="qr-code-img mr-md-6">
+                [attr.src]="'data:image/jpeg;base64,' + paymentInfo.encodedQrCode"
+                alt="QR kód"
+                class="qr-code-img mr-md-6">
         </div>
         <div class="col-auto d-none d-md-block">
             <table class="table-basic">
                 <tbody>
                 <tr>
                     <td class="pr-3">Číslo účtu</td>
-                    <td>{{paymentInfo.accountNumber}}</td>
+                    <td>
+                        {{paymentInfo.accountNumber.accountNumber | accountNumber: paymentInfo.accountNumber.accountPrefix}}
+                    </td>
                 </tr>
                 <tr>
                     <td class="pr-3">Banka</td>
-                    <td><!-- TODO missing --></td>
+                    <td>{{paymentInfo.accountNumber.bankCode}}</td>
                 </tr>
                 <tr>
                     <td class="pr-3">Částka</td>
-                    <td>{{paymentInfo.amount}} {{paymentInfo.currency.currencyCode}}</td>
+                    <td>{{paymentInfo.amount | currency:paymentInfo.currency.currencyCode:'symbol':'1.0'}}</td>
                 </tr>
                 <tr>
                     <td class="pr-3">Splatnost</td>
-                    <td>{{paymentInfo.dueDate | date: 'dd. MM. y'}}</td>
+                    <td>{{paymentInfo.dueDate | date:'dd. MM. y'}}</td>
                 </tr>
                 <tr>
                     <td class="pr-3">Variabilní symbol</td>
-                    <td>{{paymentInfo.variableSymbol}}</td>
+                    <td>{{paymentInfo.variableSymbol.value | number:'1.0'}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -39,7 +41,7 @@
                     <td class="pb-3">
                         Číslo účtu
                         <span class="d-block">
-                           {{paymentInfo.accountNumber}}
+                           {{paymentInfo.accountNumber.accountNumber | accountNumber: paymentInfo.accountNumber.accountPrefix}}
                         </span>
                     </td>
                 </tr>
@@ -47,7 +49,7 @@
                     <td class="pb-3">
                         Banka
                         <span class="d-block">
-                            <!-- TODO missing -->
+                            {{paymentInfo.accountNumber.bankCode}}
                         </span>
                     </td>
                 </tr>
@@ -55,7 +57,7 @@
                     <td class="pb-3">
                         Částka
                         <span class="d-block">
-                            {{paymentInfo.amount}} {{paymentInfo.currency.currencyCode}}
+                            {{paymentInfo.amount | currency:paymentInfo.currency.currencyCode:'symbol':'1.0'}}
                         </span>
                     </td>
                 </tr>
@@ -63,7 +65,7 @@
                     <td class="pb-3">
                         Splatnost
                         <span class="d-block">
-                            {{paymentInfo.dueDate | date: 'dd. MM. y'}}
+                            {{paymentInfo.dueDate | date:'dd. MM. y'}}
                         </span>
                     </td>
                 </tr>
@@ -71,7 +73,7 @@
                     <td class="pb-3">
                         Variabilní symbol
                         <span class="d-block">
-                            {{paymentInfo.variableSymbol}}
+                            {{paymentInfo.variableSymbol.value | number:'1.0'}}
                         </span>
                     </td>
                 </tr>
@@ -99,54 +101,45 @@
                     </lnd-alert>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-12 col-xl-10 offset-xl-1">
                     <lnd-placeloader [loading]="loading && !globalError.length"></lnd-placeloader>
                 </div>
-                <a (click)="refresh()">xxx</a>
-                    <ng-container *ngIf="supplyPoint">
-
-                        <ng-container *ngIf="supplyPoint.contract?.contractStatus == paymentState.WAITING_FOR_PAYMENT && paymentInfo">
-                            <div class="col-12 col-xl-10 offset-xl-1">
-                                <lnd-info-banner
-                                        [bannerTitle]="'Čekáme na doručení vaší ověřovací platby do ' + (paymentInfo.dueDate | date: 'dd.MM.y')"
-                                        [bannerDescription]="'Platba u nás může být hned, ale z některé banky to může trvat až 3 dny a my vás nechceme zdržovat. Okno aplikace můžete nyní zavřít a až platbu obdržíme, dáme vám vědět na e-mail.'"
-                                        [bannerType]="bannerTypeImages.LOADING"
-                                        [showButton]="false"
-                                ></lnd-info-banner>
-                            </div>
-
-                            <div class="col-12 col-xl-10 offset-xl-1 mb-2 text-center">
-                                <p class="mb-1 ">Zvolili jste platbu bankovní převod.</p>
-                                <lnd-button
-                                        type="link"
-                                        [label]="!showPaymentInfo ? 'Zobrazit znovu bankovní údaje' : 'Skrýt'"
-                                        (action)="togglePaymentInfo()"
-                                ></lnd-button>
-                            </div>
-
-                            <div *ngIf="showPaymentInfo"
-                                 class="col-12 col-xl-10 offset-xl-1">
-                                <div class="page-box">
-                                    <ng-container *ngTemplateOutlet="paymentInfoTemplate"></ng-container>
-                                </div>
-                            </div>
-
-                        </ng-container>
-
-                        <div *ngIf="supplyPoint.contract?.contractStatus == paymentState.CONCLUDED"
-                             class="col-12 col-xl-10 offset-xl-1">
+                <ng-container *ngIf="supplyPoint">
+                    <ng-container *ngIf="supplyPoint.contract?.contractStatus == paymentState.WAITING_FOR_PAYMENT && paymentInfo">
+                        <div class="col-12 col-xl-10 offset-xl-1">
                             <lnd-info-banner
-                                    [bannerTitle]="'Gratulujeme k výhodnému nákupu energie na vašem PARCu!'"
-                                    [bannerDescription]="'Před koncem vaší smlouvy se ozveme s dalšími výhodnými nabídkami, které vám na burze stále hlídáme.'"
-                                    [bannerType]="bannerTypeImages.ACCEPTED"
+                                    [bannerTitle]="'Čekáme na doručení vaší ověřovací platby do ' + (paymentInfo.dueDate | date: 'dd.MM.y')"
+                                    [bannerDescription]="'Platba u nás může být hned, ale z některé banky to může trvat až 3 dny a&nbsp;my vás nechceme zdržovat. Okno aplikace můžete nyní zavřít a&nbsp;až platbu obdržíme, dáme vám vědět na e-mail.'"
+                                    [bannerType]="bannerTypeImages.LOADING"
                                     [showButton]="false"
                             ></lnd-info-banner>
                         </div>
-
+                        <div class="col-12 col-xl-10 offset-xl-1 mb-2 text-center">
+                            <p class="mb-1 ">Zvolili jste platbu bankovní převod.</p>
+                            <lnd-button
+                                    type="link"
+                                    [label]="!showPaymentInfo ? 'Zobrazit znovu bankovní údaje' : 'Skrýt'"
+                                    (action)="togglePaymentInfo()"
+                            ></lnd-button>
+                        </div>
+                        <div *ngIf="showPaymentInfo"
+                             class="col-12 col-xl-10 offset-xl-1">
+                            <div class="page-box">
+                                <ng-container *ngTemplateOutlet="paymentInfoTemplate"></ng-container>
+                            </div>
+                        </div>
                     </ng-container>
-
+                    <div *ngIf="supplyPoint.contract?.contractStatus == paymentState.CONCLUDED"
+                         class="col-12 col-xl-10 offset-xl-1">
+                        <lnd-info-banner
+                                [bannerTitle]="'Gratulujeme k výhodnému nákupu energie na vašem PARCu!'"
+                                [bannerDescription]="'Před koncem vaší smlouvy se ozveme s dalšími výhodnými nabídkami, které vám na burze stále hlídáme.'"
+                                [bannerType]="bannerTypeImages.ACCEPTED"
+                                [showButton]="false"
+                        ></lnd-info-banner>
+                    </div>
+                </ng-container>
             </div>
         </pxe-layout-container>
     </div>

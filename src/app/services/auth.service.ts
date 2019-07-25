@@ -20,7 +20,7 @@ import { environment } from 'src/environments/environment';
 import {
     IJwtPayload,
     ILoginRequest,
-    ILoginResponse,
+    ILoginResponse, ILoginResponseModificator,
     IUserRoles,
 } from './model/auth.model';
 
@@ -78,7 +78,7 @@ export class AuthService {
         return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { email, password })
             .pipe(
                 map((response: ILoginResponse) => {
-                    return this.setToken(response);
+                    return this.manageLoginResponse(response);
                 }),
             );
     }
@@ -105,7 +105,7 @@ export class AuthService {
         return this.http.post<any>(`${environment.url_api}/v1.0/sms/confirm`, {confirmationCode});
     }
 
-    public refreshToken = () => {
+    public refreshToken = (responseModificators: ILoginResponseModificator = {}) => {
         return this.http.post<any>(
             `${environment.url_api}/v1.0/users/refresh`,
             {
@@ -114,7 +114,7 @@ export class AuthService {
             .pipe(
                 map((response: ILoginResponse) => {
                     // TODO refresh response !== login response -> add supplyPointId to the both
-                    return this.setToken(response);
+                    return this.manageLoginResponse(response, responseModificators);
                 }),
             );
     }
@@ -125,7 +125,7 @@ export class AuthService {
         this.currentUserSubject$.next(null);
     }
 
-    public setToken = (response) => {
+    public manageLoginResponse = (response: ILoginResponse, responseModificators: ILoginResponseModificator = {}) => {
         if (response && response.token) {
             const jwtPayload = this.getJwtPayload(response.token);
             // if (jwtPayload.exp) {
@@ -133,7 +133,7 @@ export class AuthService {
             // }
             const user = {
                 token: response.token,
-                supplyPointId: response.supplyPointId,
+                supplyPointId: response.supplyPointId || responseModificators.supplyPointId,
             };
             this.cookiesService.setObject(this.cookieName, user, this.expiresTime);
             this.checkLogin();

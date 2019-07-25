@@ -14,6 +14,13 @@ type Address {
     street: String!
 }
 
+type BankAccount {
+    accountNumber: String!
+    accountPrefix: String
+    bankCode: String!
+    iban: String
+}
+
 type CodelistItem {
     code: String!
     description: String
@@ -32,6 +39,7 @@ type Contract {
     deliveryFrom: Date
     deliveryTo: Date
     offer: SelectedOffer
+    offerValidity: Boolean!
     personalData: PersonalData
 }
 
@@ -57,6 +65,7 @@ type Mutation {
     deleteContract(contractId: ID!): Boolean
     deleteOffer(offerId: ID!): Int
     deletePersonalData(contractId: ID!): Boolean
+    deleteSelectedOfferFromContract(contractId: ID!): Boolean
     deleteSignedContract(contractId: ID!, smsConfirmationCode: String!): Boolean
     makeRegistration(email: String!, preregistration: Boolean = false, termsOfConditionsApproved: Boolean!): Boolean
     resetPassword(email: String!): PasswordDestination
@@ -94,19 +103,19 @@ type Offer {
     priceVT: Float
     status: OfferStatus!
     subject: CodelistItem!
-    supplier: Supplier!
+    supplier: Supplier
     validFrom: Date!
     validTo: Date!
 }
 
 type Payment {
-    accountNumber: String!
+    accountNumber: BankAccount!
     amount: Float!
     currency: Currency!
     dueDate: Date!
     encodedQrCode: String!
     msg: String!
-    variableSymbol: String!
+    variableSymbol: VariableSymbol!
 }
 
 type PersonalData {
@@ -206,9 +215,13 @@ type SupplyPointOffer {
     priceGas: Float
     priceNT: Float
     priceVT: Float
-    supplier: Supplier!
+    supplier: Supplier
     validFrom: Date!
     validTo: Date!
+}
+
+type VariableSymbol {
+    value: String!
 }
 
 enum AllowedOperations {
@@ -309,6 +322,7 @@ input QRCodeSetting {
     backgroundColor: String
     foregroundColor: String
     height: Int
+    margin: Int
     width: Int
 }
 

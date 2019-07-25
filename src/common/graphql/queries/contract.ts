@@ -11,7 +11,12 @@ export const getContractTermsQuery = gql`
 export const getPaymentInfoQuery = gql`
     query getPaymentInfo($contractId: ID!, $setting: QRCodeSetting!){
         getPaymentInfo(contractId: $contractId, setting: $setting){
-            accountNumber
+            accountNumber {
+                accountNumber
+                accountPrefix
+                bankCode
+                iban
+            }
             amount
             currency {
                 currencyCode
@@ -19,6 +24,9 @@ export const getPaymentInfoQuery = gql`
             dueDate
             encodedQrCode
             msg
+            variableSymbol {
+                value
+            }
         }
     }
 `;

@@ -1,3 +1,5 @@
+import { LANDING_PAGE } from 'src/common/graphql/models/password';
+
 export interface ILoginRequest {
     email: string;
     password: string;
@@ -5,7 +7,12 @@ export interface ILoginRequest {
 
 export interface ILoginResponse {
     token: string;
-    expiresTime: number;
+    landingPage: LANDING_PAGE;
+    supplyPointId: string;
+}
+
+export interface ILoginResponseModificator {
+    supplyPointId?: string;
 }
 
 export interface IJwtPayload {
@@ -40,5 +47,5 @@ export enum IUserRoles {
 export enum UserStatus {
     'NEW' = 'NEW',
     'AWAITING_VERIFICATION' = 'AWAITING_VERIFICATION',
-    'WAITING_FOR_PAYMENT' = 'WAITING_FOR_PAYMENT',
+    'VERIFIED_BY_PAYMENT' = 'VERIFIED_BY_PAYMENT',
 }
