@@ -24,16 +24,20 @@ import {
     ROUTES,
 } from 'src/app/app.constants';
 import { ContractService } from 'src/common/graphql/services/contract.service';
-import { getConfigStepper } from 'src/common/utils';
+import {
+    getConfigStepper,
+    parseGraphQLErrors,
+} from 'src/common/utils';
+import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
-import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { OfferService } from 'src/common/graphql/services/offer.service';
-import { parseGraphQLErrors } from 'src/common/utils';
+import { offerValidityMessages } from 'src/common/constants/errors.constant';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { ValidityService } from 'src/app/services/validity.service';
 
@@ -44,12 +48,12 @@ import { ValidityService } from 'src/app/services/validity.service';
 export class OfferSelectionComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
     public loadingSupplyPointOffers = true;
+    public onlyOffersFromActualSupplier = false;
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.OFFER_STEP);
     public supplyPointOffers: ISupplyPointOffer[];
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
-    public onlyOffersFromActualSupplier = false;
     public checkOfferSelectionConstraint$ = interval(CONSTS.REFRESH_INTERVAL_RXJS)
         .pipe(
             startWith(0),
@@ -58,14 +62,13 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
         );
 
     public bannerObj: IBannerObj = {
-        linkValue: 'basic/banners',
-        // doplnit od monci
         text: '',
     };
 
     constructor(
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
+        private navigateRequestService: NavigateRequestService,
         private offerService: OfferService,
         private route: ActivatedRoute,
         private router: Router,
@@ -82,6 +85,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                 map(({data}) => data.getSupplyPoint),
             ).subscribe(
                 (supplyPoint: ISupplyPoint) => {
+                    this.navigateRequestService.checkCorrectStep(supplyPoint, ProgressStatus.OFFER_STEP);
                     this.supplyPoint = supplyPoint;
                     this.setTextBannerByContractEndType();
                     this.checkOfferSelectionConstraint$.subscribe(() => {
@@ -160,13 +164,11 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
 
     public setTextBannerByContractEndType = () => {
         if (this.validityService.validateOnlyDateExpiration(this.supplyPoint)) {
-            this.bannerObj.text =
-                'Z důvodu, že Vaše nabídka končí  za méně než 31 dní jsou zobrazeny pouze nabídky od aktuálního dodavatele.';
+            this.bannerObj.text = offerValidityMessages.contractEndWithoutTerminate;
         }
 
         if (this.validityService.validateTermWithProlongation(this.supplyPoint)) {
-            this.bannerObj.text =
-                'Vypovedni doba + 30 dni.';
+            this.bannerObj.text = offerValidityMessages.contractEndWithTerminate;
         }
     }
 }
