@@ -38,6 +38,16 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class ContractComponent extends AbstractComponent implements OnInit {
 
+    public configStepper = getConfigStepper(ProgressStatus.READY_FOR_SIGN);
+    public contractTemplate;
+    public showOffer = true;
+    public fieldError: IFieldError = {};
+    public formLoading = false;
+    public globalError: string[] = [];
+    public smsSent: number = null;
+    public supplyPoint: ISupplyPoint;
+    public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
+
     constructor(
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
@@ -48,15 +58,6 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     ) {
         super();
     }
-    public configStepper = getConfigStepper(ProgressStatus.READY_FOR_SIGN);
-    public contractTemplate;
-    public showOffer = true;
-    public fieldError: IFieldError = {};
-    public formLoading = false;
-    public globalError: string[] = [];
-    public smsSent: number = null;
-    public supplyPoint: ISupplyPoint;
-    public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
     ngOnInit () {
         super.ngOnInit();
