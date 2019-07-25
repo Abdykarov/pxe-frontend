@@ -5,7 +5,7 @@ import * as R from 'ramda';
 
 import {
     addOneMonth,
-    calculateTerminateInterval,
+    addTerminateInterval,
 } from 'src/common/utils/supply-point-date-calculate.fnc';
 import { CONTRACT_END_TYPE } from 'src/app/app.constants';
 import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
@@ -32,7 +32,7 @@ export class ValidityService {
         supplyPoint.contractEndType.code === CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION
 
     public validateOnlyDateExpiration = (supplyPoint: ISupplyPoint): boolean =>
-        inArray(supplyPoint, [ CONTRACT_END_TYPE.CONTRACT_END_TERM, CONTRACT_END_TYPE.CONTRACT_END_TERMINATE])
+        inArray(supplyPoint, [CONTRACT_END_TYPE.CONTRACT_END_TERM, CONTRACT_END_TYPE.CONTRACT_END_TERMINATE])
 
     private isValidateDateExpiration = (supplyPoint: ISupplyPoint): boolean =>
         this.dateDiffPipe.transform(addOneMonth(moment()).toISOString(), supplyPoint.expirationDate, 'seconds') < 0
@@ -40,7 +40,7 @@ export class ValidityService {
     private isValidateDateProlongation = (supplyPoint: ISupplyPoint): boolean =>
         this.dateDiffPipe.transform(
             addOneMonth(
-                calculateTerminateInterval(moment(), supplyPoint),
+                addTerminateInterval(moment(), supplyPoint),
             ).toISOString(),
             supplyPoint.expirationDate,
             'seconds',

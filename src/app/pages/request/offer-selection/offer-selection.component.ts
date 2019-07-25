@@ -37,6 +37,7 @@ import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { OfferService } from 'src/common/graphql/services/offer.service';
+import { offerValidityMessages } from 'src/common/constants/errors.constant';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { ValidityService } from 'src/app/services/validity.service';
 
@@ -165,13 +166,11 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
 
     public setTextBannerByContractEndType = () => {
         if (this.validityService.validateOnlyDateExpiration(this.supplyPoint)) {
-            this.bannerObj.text =
-                'Z důvodu, že Vaše nabídka končí  za méně než 31 dní jsou zobrazeny pouze nabídky od aktuálního dodavatele.';
+            this.bannerObj.text = offerValidityMessages.contractEndWithoutTerminate;
         }
 
         if (this.validityService.validateTermWithProlongation(this.supplyPoint)) {
-            this.bannerObj.text =
-                'Vypovedni doba + 30 dni.';
+            this.bannerObj.text = offerValidityMessages.contractEndWithTerminate;
         }
     }
 }
