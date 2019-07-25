@@ -19,13 +19,13 @@ export enum ContractStatus {
 }
 
 export interface IPayment {
-    accountNumber: string;
+    accountNumber: IBankAccount;
     amount: number;
     currency: ICurrency;
     dueDate: string;
     encodedQrCode: string;
     msg: string;
-    variableSymbol: string;
+    variableSymbol: IVariableSymbol;
 }
 
 export interface ICurrency {
@@ -37,4 +37,16 @@ export interface IQRCodeSetting {
     foregroundColor: string;
     height: number;
     width: number;
+    margin: number;
+}
+
+export interface IBankAccount {
+    accountNumber: string;
+    accountPrefix?: string;
+    bankCode: string;
+    iban?: string;
+}
+
+export interface IVariableSymbol {
+    value: string;
 }

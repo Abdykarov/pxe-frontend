@@ -42,9 +42,9 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
     public configStepper = getConfigStepper(ProgressStatus.WAITING_FOR_PAYMENT);
     public bannerTypeImages = BannerTypeImages;
     public globalError: string[] = [];
+    public loading = true;
     public paymentInfo: IPayment;
     public paymentState = PaymentState;
-    public loading = true;
     public showPaymentInfo = true;
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;

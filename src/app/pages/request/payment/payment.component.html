@@ -11,23 +11,25 @@
                 <tbody>
                 <tr>
                     <td class="pr-3">Číslo účtu</td>
-                    <td>{{paymentInfo.accountNumber}}</td>
+                    <td>
+                        {{paymentInfo.accountNumber.accountNumber | accountNumber: paymentInfo.accountNumber.accountPrefix}}
+                    </td>
                 </tr>
                 <tr>
                     <td class="pr-3">Banka</td>
-                    <td></td>
+                    <td>{{paymentInfo.accountNumber.bankCode}}</td>
                 </tr>
                 <tr>
                     <td class="pr-3">Částka</td>
-                    <td>{{paymentInfo.amount}} {{paymentInfo.currency.currencyCode}}</td>
+                    <td>{{paymentInfo.amount | currency:paymentInfo.currency.currencyCode:'symbol':'1.0'}}</td>
                 </tr>
                 <tr>
                     <td class="pr-3">Splatnost</td>
-                    <td>{{paymentInfo.dueDate | date: 'dd. MM. y'}}</td>
+                    <td>{{paymentInfo.dueDate | date:'dd. MM. y'}}</td>
                 </tr>
                 <tr>
                     <td class="pr-3">Variabilní symbol</td>
-                    <td>{{paymentInfo.variableSymbol}}</td>
+                    <td>{{paymentInfo.variableSymbol.value | number:'1.0'}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -39,7 +41,7 @@
                     <td class="pb-3">
                         Číslo účtu
                         <span class="d-block">
-                           {{paymentInfo.accountNumber}}
+                           {{paymentInfo.accountNumber.accountNumber | accountNumber: paymentInfo.accountNumber.accountPrefix}}
                         </span>
                     </td>
                 </tr>
@@ -47,7 +49,7 @@
                     <td class="pb-3">
                         Banka
                         <span class="d-block">
-
+                            {{paymentInfo.accountNumber.bankCode}}
                         </span>
                     </td>
                 </tr>
@@ -55,7 +57,7 @@
                     <td class="pb-3">
                         Částka
                         <span class="d-block">
-                            {{paymentInfo.amount}} {{paymentInfo.currency.currencyCode}}
+                            {{paymentInfo.amount | currency:paymentInfo.currency.currencyCode:'symbol':'1.0'}}
                         </span>
                     </td>
                 </tr>
@@ -63,7 +65,7 @@
                     <td class="pb-3">
                         Splatnost
                         <span class="d-block">
-                            {{paymentInfo.dueDate | date: 'dd. MM. y'}}
+                            {{paymentInfo.dueDate | date:'dd. MM. y'}}
                         </span>
                     </td>
                 </tr>
@@ -71,7 +73,7 @@
                     <td class="pb-3">
                         Variabilní symbol
                         <span class="d-block">
-                            {{paymentInfo.variableSymbol}}
+                            {{paymentInfo.variableSymbol.value | number:'1.0'}}
                         </span>
                     </td>
                 </tr>
@@ -110,7 +112,7 @@
                             <div class="col-12 col-xl-10 offset-xl-1">
                                 <lnd-info-banner
                                         [bannerTitle]="'Čekáme na doručení vaší ověřovací platby do ' + (paymentInfo.dueDate | date: 'dd.MM.y')"
-                                        [bannerDescription]="'Platba u nás může být hned, ale z některé banky to může trvat až 3 dny a my vás nechceme zdržovat. Okno aplikace můžete nyní zavřít a až platbu obdržíme, dáme vám vědět na e-mail.'"
+                                        [bannerDescription]="'Platba u nás může být hned, ale z některé banky to může trvat až 3 dny a&nbsp;my vás nechceme zdržovat. Okno aplikace můžete nyní zavřít a&nbsp;až platbu obdržíme, dáme vám vědět na e-mail.'"
                                         [bannerType]="bannerTypeImages.LOADING"
                                         [showButton]="false"
                                 ></lnd-info-banner>
