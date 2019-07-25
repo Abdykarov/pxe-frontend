@@ -9,20 +9,13 @@ import {
 } from '@angular/core';
 
 
-import * as R from 'ramda';
-import { interval } from 'rxjs';
 import {
-    filter,
     map,
-    startWith,
+    switchMap,
     takeUntil,
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import {
-    CONSTS,
-    ROUTES,
-} from 'src/app/app.constants';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import {
     getConfigStepper,
@@ -38,6 +31,7 @@ import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { OfferService } from 'src/common/graphql/services/offer.service';
 import { offerValidityMessages } from 'src/common/constants/errors.constant';
+import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { ValidityService } from 'src/app/services/validity.service';
 
@@ -53,13 +47,6 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     public supplyPointOffers: ISupplyPointOffer[];
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
-
-    public checkOfferSelectionConstraint$ = interval(CONSTS.REFRESH_INTERVAL_RXJS)
-        .pipe(
-            startWith(0),
-            takeUntil(this.destroy$),
-            filter(() => !this.onlyOffersFromActualSupplier),
-        );
 
     public bannerObj: IBannerObj = {
         text: '',
@@ -83,44 +70,15 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
             .pipe(
                 takeUntil(this.destroy$),
                 map(({data}) => data.getSupplyPoint),
-            ).subscribe(
-                (supplyPoint: ISupplyPoint) => {
+                switchMap((supplyPoint: ISupplyPoint)  => {
                     this.navigateRequestService.checkCorrectStep(supplyPoint, ProgressStatus.OFFER_STEP);
                     this.supplyPoint = supplyPoint;
                     this.setTextBannerByContractEndType();
-                    this.checkOfferSelectionConstraint$.subscribe(() => {
-                        this.onlyOffersFromActualSupplier = this.validityService.validateOffer(this.supplyPoint);
-                        if (!this.onlyOffersFromActualSupplier ) {
-                            this.filterOffersOnlyActualSupplier();
-                        }
-                        this.cd.markForCheck();
-                    });
-                    this.findSupplyPointOffers(this.supplyPoint.ean);
-                },
-                (error) => {
-                    this.supplyPointOffers = null;
-                    const { globalError } = parseGraphQLErrors(error);
-                    this.globalError = globalError;
-                    this.cd.markForCheck();
-                },
-            );
-    }
-
-    public filterOffersOnlyActualSupplier = () => {
-        if (!R.isNil(this.supplyPointOffers) && R.isNil(this.supplyPoint)) {
-            this.supplyPointOffers = R.filter((supplyPointOffers: ISupplyPointOffer) =>
-                supplyPointOffers.supplier.id === this.supplyPoint.supplier.id)
-            (this.supplyPointOffers);
-        }
-    }
-
-    public findSupplyPointOffers = (ean) => {
-        this.offerService.findSupplyPointOffers(ean)
-            .pipe(
-                takeUntil(this.destroy$),
+                    this.onlyOffersFromActualSupplier = this.validityService.validateOffer(this.supplyPoint);
+                    return this.offerService.findSupplyPointOffers(this.supplyPoint.ean);
+                }),
                 map(({data}) => data.findSupplyPointOffers),
-            )
-            .subscribe(
+            ).subscribe(
                 (findSupplyPointOffers: ISupplyPointOffer[]) => {
                     this.supplyPointOffers = findSupplyPointOffers;
                     this.loadingSupplyPointOffers = false;

@@ -20,11 +20,17 @@
             <div *ngIf="supplyPoint"
                  class="row">
                 <div class="col-12 col-xl-10 offset-xl-1"
-                     *ngIf="supplyPoint.contract.offerValidity">
-                    <lnd-banner-ui [data]="bannerObj"
-                                    buttonLabel="Vybrat novou nabídku"
-                                   (customBannerAction)="chooseNewOfferAction($event)">
-                    </lnd-banner-ui>
+                     *ngIf=!"supplyPoint.contract.offerValidity">
+                        <lnd-banner-ui [data]="{
+                                            'text': 'Platnost nabídky vypršela.'
+                                        }"
+                                        buttonLabel="Vybrat novou nabídku"
+                                       (customBannerAction)="chooseNewOfferAction($event)">
+                        </lnd-banner-ui>
+                        <p>
+                            Tato nabídka již není aktivní. Dokumenty k uzavření dodávky energií/plynu dále nejsou k dispozici.
+                            Pokud máte pořád zájem o dodávku energií/plynu pro vaše odběrné místo, vyberte prosím novou nabídku
+                        </p>
                 </div>
                 <div class="col-12 col-xl-10 offset-xl-1 text-center">
                     <h2>Podepište smlouvu</h2>

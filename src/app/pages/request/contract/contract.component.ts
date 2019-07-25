@@ -30,7 +30,6 @@ import {
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 
 @Component({
     selector: 'pxe-contract',
@@ -58,10 +57,6 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public smsSent: number = null;
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
-
-    bannerObj: IBannerObj = {
-        text: 'Platnost nabídky vypršela.',
-    };
 
     ngOnInit () {
         super.ngOnInit();
@@ -95,7 +90,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
 
     public chooseNewOfferAction = (evt) => {
         evt.preventDefault();
-        console.log('CLICKED');
+        this.navigateRequestService.routerToRequestStep(this.supplyPoint, ProgressStatus.OFFER_STEP);
     }
 
     public signContract(smsCode: string) {
