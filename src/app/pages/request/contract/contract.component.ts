@@ -37,15 +37,6 @@ import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
     styleUrls: ['./contract.component.scss'],
 })
 export class ContractComponent extends AbstractComponent implements OnInit {
-    public configStepper = getConfigStepper(ProgressStatus.READY_FOR_SIGN);
-    public contractTemplate;
-    public showOffer = true;
-    public fieldError: IFieldError = {};
-    public formLoading = false;
-    public globalError: string[] = [];
-    public smsSent: number = null;
-    public supplyPoint: ISupplyPoint;
-    public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -56,10 +47,19 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     ) {
         super();
     }
+    public configStepper = getConfigStepper(ProgressStatus.READY_FOR_SIGN);
+    public contractTemplate;
+    public showOffer = true;
+    public fieldError: IFieldError = {};
+    public formLoading = false;
+    public globalError: string[] = [];
+    public smsSent: number = null;
+    public supplyPoint: ISupplyPoint;
+    public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
-    public toggleOffer = () => {
-        this.showOffer = !this.showOffer;
-    }
+    bannerObj: IBannerObj = {
+        text: 'Platnost nabídky vypršela.',
+    };
 
     ngOnInit () {
         super.ngOnInit();
@@ -86,11 +86,14 @@ export class ContractComponent extends AbstractComponent implements OnInit {
             );
     }
 
-    bannerObj: IBannerObj = {
-        linkValue: 'basic/banners',
-        // doplnit od monci
-        text: 'assasas',
-    };
+    public toggleOffer = () => {
+        this.showOffer = !this.showOffer;
+    }
+
+    public chooseNewOfferAction = (evt) => {
+        evt.preventDefault();
+        console.log('CLICKED');
+    }
 
     public signContract(smsCode: string) {
         this.formLoading = true;

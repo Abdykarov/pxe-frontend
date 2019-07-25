@@ -33,6 +33,7 @@ type Contract {
     deliveryTo: Date
     offer: SelectedOffer
     personalData: PersonalData
+    offerValidity: Boolean!
 }
 
 type ContractTerms {

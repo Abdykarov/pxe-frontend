@@ -17,14 +17,15 @@
                     </lnd-alert>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12 col-md-12">
-                    <lnd-banner-ui [data]="bannerObj">
-                    </lnd-banner-ui>
-                </div>
-            </div>
             <div *ngIf="supplyPoint"
                  class="row">
+                <div class="col-12 col-xl-10 offset-xl-1"
+                     *ngIf="supplyPoint.contract.offerValidity">
+                    <lnd-banner-ui [data]="bannerObj"
+                                    buttonLabel="Vybrat novou nabídku"
+                                   (customBannerAction)="chooseNewOfferAction($event)">
+                    </lnd-banner-ui>
+                </div>
                 <div class="col-12 col-xl-10 offset-xl-1 text-center">
                     <h2>Podepište smlouvu</h2>
                 </div>
