@@ -9,6 +9,7 @@ import {
     ISupplyPointInput,
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
+import { unitOfTime } from 'moment';
 
 const getTimeToContractEndPeriod = (supplyPointInput: ISupplyPoint | ISupplyPointInput): TimeToContractEndPeriod =>
     R.cond([
@@ -74,3 +75,8 @@ export const contractEndIndefinitePeriod = (supplyPointInput: ISupplyPointInput)
     .add(1, 'months')
     .startOf('month');
 
+export const dateDiff = (dateFromString: string, dateToString: string, resultUnit: unitOfTime.Diff = 'days') => {
+    const from = moment(dateFromString);
+    const to = moment(dateToString);
+    return to.diff(from, resultUnit);
+};

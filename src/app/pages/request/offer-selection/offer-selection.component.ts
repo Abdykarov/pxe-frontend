@@ -28,11 +28,11 @@ import {
     getConfigStepper,
     parseGraphQLErrors,
 } from 'src/common/utils';
+import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
-import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
@@ -48,12 +48,12 @@ import { ValidityService } from 'src/app/services/validity.service';
 export class OfferSelectionComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
     public loadingSupplyPointOffers = true;
+    public onlyOffersFromActualSupplier = false;
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.OFFER_STEP);
     public supplyPointOffers: ISupplyPointOffer[];
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
-    public onlyOffersFromActualSupplier = false;
     public checkOfferSelectionConstraint$ = interval(CONSTS.REFRESH_INTERVAL_RXJS)
         .pipe(
             startWith(0),
@@ -62,8 +62,6 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
         );
 
     public bannerObj: IBannerObj = {
-        linkValue: 'basic/banners',
-        // doplnit od monci
         text: '',
     };
 
