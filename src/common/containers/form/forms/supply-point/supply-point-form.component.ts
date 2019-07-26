@@ -179,7 +179,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
 
-        if (changes && changes.formValues) {
+        if (changes && changes.formValues && this.formValues) {
             this.prefillForm();
             this.formWasPrefilled = true;
         }
