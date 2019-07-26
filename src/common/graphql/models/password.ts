@@ -1,8 +1,3 @@
-export interface ILoginResponse {
-    token: string;
-    landingPage: LANDING_PAGE;
-}
-
 export interface IUserLogin {
     email: string;
     password: string;

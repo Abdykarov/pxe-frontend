@@ -5,6 +5,7 @@ import {
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
+import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
     CURRENCY: {
@@ -207,4 +208,10 @@ export const  ANNUAL_CONSUMPTION_OPTIONS = [
 export const SUPPLY_POINT_EDIT_TYPE = {
     NORMAL: 'NORMAL',
     PROLONG: 'PROLONG',
+};
+
+export const DEFAULT_QR_CODE_SETTING: IQRCodeSetting = {
+    height: 256,
+    width: 256,
+    margin: 0,
 };

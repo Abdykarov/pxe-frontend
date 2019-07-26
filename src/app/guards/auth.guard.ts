@@ -8,9 +8,9 @@ import {
 } from '@angular/router';
 
 import * as R from 'ramda';
+import { Observable } from 'rxjs';
 
 import { AuthService } from 'src/app/services/auth.service';
-import { Observable } from 'rxjs';
 import { CONSTS } from 'src/app/app.constants';
 
 @Injectable({
