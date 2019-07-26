@@ -1,4 +1,3 @@
-import { ActivatedRoute } from '@angular/router';
 import {
     ChangeDetectorRef,
     Component,
@@ -49,7 +48,6 @@ import {
 import { HelpModalComponent } from 'src/common/containers/modal/modals/help/help-modal.component';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
-import { OfferService } from 'src/common/graphql/services/offer.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -78,14 +76,11 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public suppliers = [];
     public suppliers$: BehaviorSubject<any> = new BehaviorSubject([]);
     public contractEndType = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT;
-    public lastContractEndType = null;
 
     constructor(
         private cd: ChangeDetectorRef,
-        private offerService: OfferService,
         protected fb: FormBuilder,
         private modalsService: ModalService,
-        private route: ActivatedRoute,
         private supplyService: SupplyService,
     ) {
         super(fb);
@@ -191,7 +186,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     }
 
     public prefillForm = () => {
-        console.log('prefill');
         let id = null;
         let commodityType = CommodityType.POWER;
         let subjectTypeId: string = SubjectType.SUBJECT_TYPE_INDIVIDUAL;
