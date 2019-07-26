@@ -265,9 +265,12 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         const contractEndType = this.getFieldValue('contractEndTypeId') || type;
         if (this.form.get('ownTerminate').value) {
             this.contractEndType = CONTRACT_END_TYPE.CONTRACT_END_TERMINATE;
+            console.log('1');
         } else if (contractEndType) {
+            console.log('2');
             this.contractEndType = contractEndType;
         } else {
+            console.log('3');
             this.contractEndType = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT;
         }
 
