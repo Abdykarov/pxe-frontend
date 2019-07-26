@@ -47,7 +47,6 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
     public loading = true;
     public paymentInfo: IPayment;
     public paymentState = PaymentState;
-    public showPaymentInfo = true;
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
@@ -110,10 +109,6 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                     this.cd.markForCheck();
                 },
             );
-    }
-
-    public togglePaymentInfo = () => {
-        this.showPaymentInfo = !this.showPaymentInfo;
     }
 
     public finalizePaymentProgress = () => {
