@@ -223,6 +223,8 @@ export class LoginComponent extends AbstractComponent {
                 return ROUTES.ROUTER_REQUEST_SUPPLY_POINT;
             case LANDING_PAGE.OFFERS:
                 return ROUTES.ROUTER_SUPPLY_OFFER_POWER;
+            case LANDING_PAGE.WAITING_FOR_PAYMENT:
+                return ROUTES.ROUTER_REQUEST_PAYMENT;
         }
     }
 }
