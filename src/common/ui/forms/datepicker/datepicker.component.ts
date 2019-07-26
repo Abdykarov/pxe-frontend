@@ -75,10 +75,10 @@ export class DatepickerComponent {
     public warning = false;
 
     @Input()
-    public minDate?: Date;
+    public minDate?: Date = null;
 
     @Input()
-    public maxDate?: Date;
+    public maxDate?: Date = null;
 
     constructor(
         private dynamicPipe: DynamicPipe,
@@ -126,6 +126,10 @@ export class DatepickerComponent {
             return dayHoverHandler(hoverEvent);
         };
         event.dayHoverHandler = hoverWrapper;
+        setTimeout(() => {
+            window.scrollTo(window.scrollX, window.scrollY - 1);
+            window.scrollTo(window.scrollX, window.scrollY + 1);
+        });
     }
 
     public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages, this.dynamicPipe);

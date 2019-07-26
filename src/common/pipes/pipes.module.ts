@@ -12,7 +12,7 @@ import { IsAllowedOperationPipe } from './is-allowed-operation/is-allowed-operat
 import { IsDatePast } from './is-date-past/is-date-past.pipe';
 import { IsRouteActivePipe } from './is-route-active/is-route-acrive.pipe';
 import { KeysPipe } from './keys/keys.pipe';
-import { NewSupplyWillBeginPipe } from 'src/common/pipes/new-supply-will-begin/new-supply-will-begin.pipe';
+import { NewSupplyWillBeginPipe } from './new-supply-will-begin/new-supply-will-begin.pipe';
 import { PathValuePipe } from './path-value/path-value.pipe';
 import { PluralPipe } from './plurar/plural.pipe';
 import { ProgressStatusPipe } from './step-of-supply-point/step-of-supply-point.pipe';

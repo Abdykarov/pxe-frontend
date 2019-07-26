@@ -16,17 +16,18 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractService } from 'src/common/graphql/services/contract.service';
-import { getConfigStepper } from 'src/common/utils';
+import {
+    getConfigStepper,
+    parseGraphQLErrors,
+    scrollToElementFnc,
+} from 'src/common/utils';
 import { graphQLMessages } from 'src/common/constants/errors.constant';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
-import {
-    parseGraphQLErrors,
-    scrollToElementFnc,
-} from 'src/common/utils';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
@@ -49,6 +50,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     constructor(
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
+        private navigateRequestService: NavigateRequestService,
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
@@ -67,6 +69,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                 map(({data}) => data.getSupplyPoint),
                 switchMap( (supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
+                    this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
                     return this.contractService.getContractTerms(supplyPoint.contract.contractId);
                 }),
                 map(({data}) => data.getContractTerms.content),
