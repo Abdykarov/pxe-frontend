@@ -67,7 +67,6 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     ngOnInit () {
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
-                takeUntil(this.destroy$),
                 map(({data}) => data.getSupplyPoint),
                 switchMap((supplyPoint: ISupplyPoint)  => {
                     this.navigateRequestService.checkCorrectStep(supplyPoint, ProgressStatus.OFFER_STEP);
@@ -77,6 +76,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                     return this.offerService.findSupplyPointOffers(this.supplyPoint.ean);
                 }),
                 map(({data}) => data.findSupplyPointOffers),
+                takeUntil(this.destroy$),
             ).subscribe(
                 (findSupplyPointOffers: ISupplyPointOffer[]) => {
                     this.supplyPointOffers = findSupplyPointOffers;
