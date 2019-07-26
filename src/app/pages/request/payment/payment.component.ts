@@ -32,7 +32,7 @@ import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
-import { PaymentState } from 'src/app/pages/request/payment/models/payment.model';
+import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -46,7 +46,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
     public loading = true;
     public paymentInfo: IPayment;
-    public paymentState = PaymentState;
+    public contractStatus = ContractStatus;
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
@@ -72,7 +72,9 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                 map(({data}) => data.getSupplyPoint),
                 switchMap((supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
-                    if (this.supplyPoint.contract && this.supplyPoint.contract.contractStatus === ContractStatus.CONCLUDED) {
+                    const isContractFinalized = this.supplyPoint.contract &&
+                        R.indexOf(this.supplyPoint.contract.contractStatus, [ContractStatus.CONCLUDED, ContractStatus.CANCELED]) >= 0;
+                    if (isContractFinalized) {
                         this.finalizePaymentProgress();
                     }
                     if (this.supplyPoint.contract && this.supplyPoint.contract.contractStatus === ContractStatus.WAITING_FOR_PAYMENT &&
@@ -113,5 +115,9 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
 
     public finalizePaymentProgress = () => {
         this.configStepper = getConfigStepper(ProgressStatus.COMPLETED);
+    }
+
+    public createSupplyPoint = () => {
+        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
     }
 }
