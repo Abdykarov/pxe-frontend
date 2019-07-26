@@ -2,9 +2,10 @@
     <div class="row justify-content-center">
         <div class="col-md-auto mb-5 mb-md-0 mt-md-2 text-center">
             <img
-                    src="{{'data:image/jpeg;base64,' + paymentInfo.encodedQrCode}}"
-                    alt="qr-code"
-                    class="qr-code-img mr-md-6">
+                *ngIf="paymentInfo.encodedQrCode"
+                [src]="'data:image/jpeg;base64,' + paymentInfo.encodedQrCode"
+                alt="QR kód"
+                class="qr-code-img mr-md-6">
         </div>
         <div class="col-auto d-none d-md-block">
             <table class="table-basic">
@@ -117,18 +118,7 @@
                                         [showButton]="false"
                                 ></lnd-info-banner>
                             </div>
-
-                            <div class="col-12 col-xl-10 offset-xl-1 mb-2 text-center">
-                                <p class="mb-1 ">Zvolili jste platbu bankovní převod.</p>
-                                <lnd-button
-                                        type="link"
-                                        [label]="!showPaymentInfo ? 'Zobrazit znovu bankovní údaje' : 'Skrýt'"
-                                        (action)="togglePaymentInfo()"
-                                ></lnd-button>
-                            </div>
-
-                            <div *ngIf="showPaymentInfo"
-                                 class="col-12 col-xl-10 offset-xl-1">
+                        <div class="col-12 col-xl-10 offset-xl-1">
                                 <div class="page-box">
                                     <ng-container *ngTemplateOutlet="paymentInfoTemplate"></ng-container>
                                 </div>
