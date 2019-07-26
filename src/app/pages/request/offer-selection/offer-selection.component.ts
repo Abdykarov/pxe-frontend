@@ -109,9 +109,9 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
 
         contractAction
             .pipe(
-                takeUntil(this.destroy$),
                 concatMap(() => this.contractService.saveContract(supplyPointOffer.id, supplyPointId)),
                 map(({data}) => data.saveContract),
+                takeUntil(this.destroy$),
             )
             .subscribe(
                 () => {

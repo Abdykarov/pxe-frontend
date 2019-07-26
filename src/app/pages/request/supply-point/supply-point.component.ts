@@ -13,6 +13,7 @@ import { isPlatformBrowser } from '@angular/common';
 
 import * as R from 'ramda';
 import {
+    concatMap,
     map,
     takeUntil,
 } from 'rxjs/operators';
@@ -36,6 +37,8 @@ import {
     SUPPLY_POINT_EDIT_TYPE,
 } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { of } from 'rxjs';
+import { ContractService } from 'src/common/graphql/services/contract.service';
 
 @Component({
     templateUrl: './supply-point.component.html',
@@ -57,6 +60,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
 
     constructor(
         private cd: ChangeDetectorRef,
+        private contractService: ContractService,
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
@@ -69,6 +73,31 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         if (isPlatformBrowser(this.platformId)) {
             this.supplyPointData = window.history.state.supplyPointCopy;
             this.editMode = SUPPLY_POINT_EDIT_TYPE.PROLONG;
+        }
+
+        if (this.supplyPointId) {
+            let supplyPointFound: ISupplyPoint = null;
+            this.supplyService.getSupplyPoint(this.supplyPointId)
+                .pipe(
+                    map(({data}) => data.getSupplyPoint),
+                    concatMap((supplyPoint: ISupplyPoint) => {
+                        supplyPointFound = supplyPoint;
+                        return R.path(['contract', 'contractId'])(supplyPoint) ?
+                            this.contractService.deleteSelectedOfferFromContract(supplyPoint.contract.contractId) :
+                            of({});
+                    }),
+                    takeUntil(this.destroy$),
+                ).subscribe(
+                    () => {
+                        this.supplyPointData = supplyPointFound;
+                        this.cd.markForCheck();
+                    },
+                    (error) => {
+                        const { globalError } = parseGraphQLErrors(error);
+                        this.globalError = globalError;
+                        this.cd.markForCheck();
+                    },
+                );
         }
     }
 
