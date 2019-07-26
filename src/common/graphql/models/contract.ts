@@ -33,11 +33,11 @@ export interface ICurrency {
 }
 
 export interface IQRCodeSetting {
-    backgroundColor: string;
-    foregroundColor: string;
-    height: number;
-    width: number;
-    margin: number;
+    backgroundColor?: string;
+    foregroundColor?: string;
+    height?: number;
+    width?: number;
+    margin?: number;
 }
 
 export interface IBankAccount {

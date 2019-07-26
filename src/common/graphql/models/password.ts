@@ -1,9 +1,3 @@
-// export interface ILoginResponse {
-//     token: string;
-//     landingPage: LANDING_PAGE;
-//     supplyPointId: string;
-// }
-
 export interface IUserLogin {
     email: string;
     password: string;

@@ -20,7 +20,8 @@ import { environment } from 'src/environments/environment';
 import {
     IJwtPayload,
     ILoginRequest,
-    ILoginResponse, ILoginResponseModificator,
+    ILoginResponse,
+    ILoginResponseModificator,
     IUserRoles,
 } from './model/auth.model';
 
@@ -113,7 +114,6 @@ export class AuthService {
             })
             .pipe(
                 map((response: ILoginResponse) => {
-                    // TODO refresh response !== login response -> add supplyPointId to the both
                     return this.manageLoginResponse(response, responseModificators);
                 }),
             );
