@@ -8,6 +8,7 @@ import {
     OnInit,
 } from '@angular/core';
 
+import * as R from 'ramda';
 import {
     map,
     switchMap,
@@ -16,6 +17,7 @@ import {
 import { of } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from 'src/app/services/auth.service';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import {
@@ -30,7 +32,7 @@ import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
-import { PaymentState } from 'src/app/pages/request/payment/models/payment.model';
+import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -44,11 +46,12 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
     public loading = true;
     public paymentInfo: IPayment;
-    public paymentState = PaymentState;
+    public contractStatus = ContractStatus;
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
     constructor(
+        private authService: AuthService,
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
         private route: ActivatedRoute,
@@ -66,28 +69,39 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
     public getSupplyPointWithPayment = (id) => {
         this.supplyService.getSupplyPoint(id)
             .pipe(
-                takeUntil(this.destroy$),
                 map(({data}) => data.getSupplyPoint),
                 switchMap((supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
-                    if (this.supplyPoint.contract && this.supplyPoint.contract.contractStatus === ContractStatus.CONCLUDED) {
+                    const isContractFinalized = this.supplyPoint.contract &&
+                        R.indexOf(this.supplyPoint.contract.contractStatus, [ContractStatus.CONCLUDED, ContractStatus.CANCELED]) >= 0;
+                    if (isContractFinalized) {
                         this.finalizePaymentProgress();
                     }
-                    if (this.supplyPoint.contract && this.supplyPoint.contract.contractId) {
-                        return this.contractService.getPaymentInfo(this.supplyPoint.contract.contractId);
+                    if (this.supplyPoint.contract && this.supplyPoint.contract.contractStatus === ContractStatus.WAITING_FOR_PAYMENT &&
+                        this.supplyPoint.contract.contractId) {
+                            return this.contractService.getPaymentInfo(this.supplyPoint.contract.contractId);
                     } else {
                         return of({
                             data: {
-                                getPaymentInfo:  {},
+                                getPaymentInfo: {},
                             },
                         });
                     }
                 }),
                 map(({data}) => data.getPaymentInfo),
+                switchMap((paymentInfo: IPayment) => {
+                    if (!R.isEmpty(paymentInfo)) {
+                        this.paymentInfo = paymentInfo;
+                        return this.authService.refreshToken( {
+                            supplyPointId: this.supplyPoint.id,
+                        });
+                    }
+                    return of({});
+                }),
+                takeUntil(this.destroy$),
             )
             .subscribe(
-                (paymentInfo: IPayment) => {
-                    this.paymentInfo = paymentInfo;
+                () => {
                     this.loading = false;
                     this.cd.markForCheck();
                 },
@@ -101,5 +115,9 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
 
     public finalizePaymentProgress = () => {
         this.configStepper = getConfigStepper(ProgressStatus.COMPLETED);
+    }
+
+    public createSupplyPoint = () => {
+        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
     }
 }

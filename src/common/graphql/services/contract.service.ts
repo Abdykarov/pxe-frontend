@@ -12,6 +12,7 @@ import {
     signContractMutation,
     updateContractMutation,
 } from 'src/common/graphql/mutation/contract';
+import { DEFAULT_QR_CODE_SETTING } from 'src/app/app.constants';
 import {
     getContractTermsQuery,
     getPaymentInfoQuery,
@@ -214,13 +215,7 @@ export class ContractService {
     }
     // todo refetch all queries for all supply point overviews
 
-    public getPaymentInfo(contractId: string, setting: IQRCodeSetting = {
-        backgroundColor: '#FFFFFF',
-        foregroundColor: '#000000',
-        height: 256,
-        width: 256,
-        margin: 0,
-    }) {
+    public getPaymentInfo(contractId: string, setting: IQRCodeSetting = DEFAULT_QR_CODE_SETTING) {
         return this.apollo
             .watchQuery<any>({
                 query: getPaymentInfoQuery,

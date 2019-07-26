@@ -8,9 +8,9 @@ import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 import { PaymentComponent } from './payment.component';
 import { PaymentRoutingModule } from './payment-routing.module';
+import { PipesModule } from 'src/common/pipes/pipes.module';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
 import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.module';
-import { PipesModule } from 'src/common/pipes/pipes.module';
 
 @NgModule({
     declarations: [
@@ -27,9 +27,9 @@ import { PipesModule } from 'src/common/pipes/pipes.module';
         InfoBannerModule,
         LayoutContainerModule,
         PaymentRoutingModule,
+        PipesModule,
         PlaceloaderModule,
         ProgressBarModule,
-        PipesModule,
     ],
 })
 export class PaymentModule {}

@@ -91,11 +91,11 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
 
         this.typeahead
             .pipe(
-                takeUntil(this.destroy$),
                 debounceTime(AddressWhispererComponent.DEBOUNCE_TIME),
                 filter(term => term && term.length >= AddressWhispererComponent.ADDRESS_MIN_LENGTH),
                 distinctUntilChanged(),
                 switchMap((term: string) => this.addressWhispererService.getPlaces(AddressWhispererComponent.ROWS_RESPONSE, term)),
+                takeUntil(this.destroy$),
             )
             .subscribe((addresses: Array<IAddress>)  => {
                 this.setAddresses(addresses);
