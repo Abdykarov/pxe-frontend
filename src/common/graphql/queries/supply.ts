@@ -235,7 +235,6 @@ export const getSupplyPointQuery = gql`
                 }
             },
             progressStatus,
-            allowedOperations,
         }
     }
 `;
