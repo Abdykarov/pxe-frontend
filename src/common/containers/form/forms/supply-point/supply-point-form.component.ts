@@ -38,6 +38,7 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import {
     convertArrayToObject,
+    convertDateToSendFormatFnc,
     transformCodeList,
     transformSuppliers,
 } from 'src/common/utils';
@@ -292,7 +293,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                     ...this.form.value.address,
                     orientationNumber: this.form.value.address.orientationNumber || this.form.value.address.descriptiveNumber,
                 },
-                expirationDate: this.form.value.expirationDate && this.form.value.expirationDate.toISOString().split('T')[0],
+                expirationDate: this.form.value.expirationDate && convertDateToSendFormatFnc(this.form.value.expirationDate),
             };
             if (!R.isNil(form.annualConsumptionNT)) {
                 form.annualConsumptionNT = parseFloat(form.annualConsumptionNT.toString().replace(',', '.'));
