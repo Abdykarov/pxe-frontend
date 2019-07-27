@@ -23,12 +23,14 @@ import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
+import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { OfferService } from 'src/common/graphql/services/offer.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { ValidityService } from 'src/app/services/validity.service';
 
 @Component({
     templateUrl: './offer-selection.component.html',
@@ -37,10 +39,17 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 export class OfferSelectionComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
     public loadingSupplyPointOffers = true;
+    public onlyOffersFromActualSupplier = false;
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.OFFER_STEP);
     public supplyPointOffers: ISupplyPointOffer[];
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
+
+
+    public bannerObj: IBannerObj = {
+        // doplnit od monci
+        text: 'Z důvodu, že Vaše nabídka končí  za méně než 31 dní jsou zobrazeny pouze nabídky od aktuálního dodavatele.',
+    };
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -50,6 +59,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
+        private validityService: ValidityService,
     ) {
         super();
     }
@@ -63,6 +73,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                 (supplyPoint: ISupplyPoint) => {
                     this.navigateRequestService.checkCorrectStep(supplyPoint, ProgressStatus.OFFER_STEP);
                     this.supplyPoint = supplyPoint;
+                    this.onlyOffersFromActualSupplier = this.validityService.validateOffer(this.supplyPoint);
                     this.findSupplyPointOffers(this.supplyPoint.ean);
                 },
                 (error) => {
