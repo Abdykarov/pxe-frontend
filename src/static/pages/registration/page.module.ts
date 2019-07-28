@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { Routes } from '@angular/router';
+import {
+    RouterModule,
+    Routes,
+} from '@angular/router';
 
 // own classes
 import { ButtonModule } from 'src/common/ui/button/button.module';
@@ -24,6 +27,7 @@ import {
         ButtonModule,
         CommonModule,
         FormModule,
+        RouterModule,
         SupplierModule,
     ],
 })

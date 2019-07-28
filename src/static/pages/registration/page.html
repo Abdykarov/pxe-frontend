@@ -1,8 +1,7 @@
-<ng-template #hrefToPersonalDataTemplate>
-    Souhlas se zpracováním 
-    <a (click)="action($event)">
-        osobních údajů
-    </a>
+<ng-template #agreementTemplate>
+    Souhlasím se <a [routerLink]="['/full/registration']">Všeobecnými
+    obchodními podmínkami účasti na Trhu „PARC 4 U“</a> a beru na vědomí
+    <a [routerLink]="['/full/registration']">Informaci o zpracování osobních údajů</a>.
 </ng-template>
 
 <ng-template #supplierTemplate>
@@ -28,7 +27,7 @@
                                 </lnd-form-field>
                                 <lnd-form-field
                                     [id]="'Agreement'"
-                                    [labelTemplate]="hrefToPersonalDataTemplate"
+                                    [labelTemplate]="agreementTemplate"
                                     [type]="'CHECKBOX'">
                                 </lnd-form-field>
                                 <div class="text-right">
