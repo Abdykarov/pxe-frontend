@@ -8,6 +8,7 @@ import {
     OnInit,
 } from '@angular/core';
 
+import * as moment from 'moment';
 import * as R from 'ramda';
 import {
     map,
@@ -64,11 +65,21 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
                     this.supplyPoints = supplyPoints;
                     this.dataLoading = false;
 
-                    this.supplyPointsActual = R.filter((supplyPoint: ISupplyPoint) =>
-                        this.isDatePast.transform(supplyPoint.contract.deliveryTo))(supplyPoints);
+                    this.supplyPointsActual =
+                        R.filter(
+                            (supplyPoint: ISupplyPoint) =>
+                                moment()
+                                    .isBetween(
+                                        moment(supplyPoint.contract.deliveryFrom),
+                                        moment(supplyPoint.contract.deliveryTo),
+                                    ),
+                        )(supplyPoints);
 
-                    this.supplyPointsFuture = R.filter((supplyPoint: ISupplyPoint) =>
-                        !this.isDatePast.transform(supplyPoint.contract.deliveryTo))(supplyPoints);
+                    this.supplyPointsFuture =
+                        R.filter(
+                            (supplyPoint: ISupplyPoint) =>
+                                this.isDatePast.transform(supplyPoint.contract.deliveryFrom),
+                        )(supplyPoints);
 
                     this.cd.markForCheck();
                 },
