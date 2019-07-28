@@ -1,6 +1,7 @@
 import {
     Component,
     Input,
+    TemplateRef,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
@@ -14,6 +15,9 @@ import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.
 export class RegistrationFormComponent extends AbstractFormComponent {
     @Input()
     public isSignUp = true;
+
+    @Input()
+    public agreementTemplate: TemplateRef<any>;
 
     constructor(
         protected fb: FormBuilder,
@@ -29,10 +33,5 @@ export class RegistrationFormComponent extends AbstractFormComponent {
             val.preregistration = !this.isSignUp;
             this.submitAction.emit(val);
         }
-    }
-
-    public openConsent = (evt)  => {
-        evt.preventDefault();
-        window.open('securing-your-data');
     }
 }

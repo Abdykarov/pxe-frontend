@@ -21,9 +21,4 @@ export class RegistrationPageComponent {
         evt.preventDefault();
         console.log('Submit form');
     }
-
-    public action = (evt) => {
-        evt.preventDefault();
-        window.open('/full/landing-page', '_blank');
-    }
 }
