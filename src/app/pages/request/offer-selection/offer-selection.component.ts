@@ -15,6 +15,7 @@ import {
     filter,
     map,
     startWith,
+    switchMap,
     takeUntil,
 } from 'rxjs/operators';
 
@@ -46,6 +47,7 @@ import { ValidityService } from 'src/app/services/validity.service';
     styleUrls: ['./offer-selection.component.scss'],
 })
 export class OfferSelectionComponent extends AbstractComponent implements OnInit {
+    public bannerObj: IBannerObj = {};
     public globalError: string[] = [];
     public loadingSupplyPointOffers = true;
     public onlyOffersFromActualSupplier = false;
@@ -61,9 +63,6 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
             filter(() => !this.onlyOffersFromActualSupplier),
         );
 
-    public bannerObj: IBannerObj = {
-        text: '',
-    };
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -81,21 +80,26 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     ngOnInit () {
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
-                takeUntil(this.destroy$),
                 map(({data}) => data.getSupplyPoint),
-            ).subscribe(
-                (supplyPoint: ISupplyPoint) => {
+                switchMap((supplyPoint: ISupplyPoint) => {
                     this.navigateRequestService.checkCorrectStep(supplyPoint, ProgressStatus.OFFER_STEP);
                     this.supplyPoint = supplyPoint;
+                    return this.offerService.findSupplyPointOffers(this.supplyPoint.ean);
+                }),
+                map(({data}) => data.findSupplyPointOffers),
+                takeUntil(this.destroy$),
+            ).subscribe(
+                (findSupplyPointOffers: ISupplyPointOffer[]) => {
+                    this.supplyPointOffers = findSupplyPointOffers;
+                    this.loadingSupplyPointOffers = false;
                     this.setTextBannerByContractEndType();
                     this.checkOfferSelectionConstraint$.subscribe(() => {
                         this.onlyOffersFromActualSupplier = this.validityService.validateOffer(this.supplyPoint);
-                        if (!this.onlyOffersFromActualSupplier ) {
+                        if (!this.onlyOffersFromActualSupplier) {
                             this.filterOffersOnlyActualSupplier();
                         }
                         this.cd.markForCheck();
                     });
-                    this.findSupplyPointOffers(this.supplyPoint.ean);
                 },
                 (error) => {
                     this.supplyPointOffers = null;
@@ -107,32 +111,11 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     }
 
     public filterOffersOnlyActualSupplier = () => {
-        if (!R.isNil(this.supplyPointOffers) && R.isNil(this.supplyPoint)) {
+        if (!R.isNil(this.supplyPointOffers) && !R.isNil(this.supplyPoint)) {
             this.supplyPointOffers = R.filter((supplyPointOffers: ISupplyPointOffer) =>
                 supplyPointOffers.supplier.id === this.supplyPoint.supplier.id)
             (this.supplyPointOffers);
         }
-    }
-
-    public findSupplyPointOffers = (ean) => {
-        this.offerService.findSupplyPointOffers(ean)
-            .pipe(
-                takeUntil(this.destroy$),
-                map(({data}) => data.findSupplyPointOffers),
-            )
-            .subscribe(
-                (findSupplyPointOffers: ISupplyPointOffer[]) => {
-                    this.supplyPointOffers = findSupplyPointOffers;
-                    this.loadingSupplyPointOffers = false;
-                    this.cd.markForCheck();
-                },
-                (error) => {
-                    this.supplyPointOffers = null;
-                    const { globalError } = parseGraphQLErrors(error);
-                    this.globalError = globalError;
-                    this.cd.markForCheck();
-                },
-            );
     }
 
     public saveContract = (supplyPointOffer: ISupplyPointOffer) => {

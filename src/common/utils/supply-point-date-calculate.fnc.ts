@@ -35,21 +35,21 @@ const getTimeToContractEndPeriod = (supplyPointInput: ISupplyPoint | ISupplyPoin
 
 export const addOneDay = (date: Moment | string | Date): Moment =>
     moment(date)
-    .startOf('day')
-    .add(1, 'days');
+        .startOf('day')
+        .add(1, 'days');
 
 export const addOneMonth = (from: Moment | string | Date): Moment =>
     moment(from)
-    .startOf('day')
-    .add(CONSTS.MONTH_DURATION, 'days');
+        .startOf('day')
+        .add(CONSTS.MONTH_DURATION, 'days');
 
 export const addTerminateInterval = (from: Moment | string | Date, supplyPointInput: ISupplyPointInput | ISupplyPoint) =>
     moment(from)
-    .startOf('day')
-    .add(
-        supplyPointInput.timeToContractEnd,
-        getTimeToContractEndPeriod(supplyPointInput) === TimeToContractEndPeriod.DAY ? 'days' : 'month',
-    );
+        .startOf('day')
+        .add(
+            supplyPointInput.timeToContractEnd,
+            getTimeToContractEndPeriod(supplyPointInput) === TimeToContractEndPeriod.DAY ? 'days' : 'month',
+        );
 
 export const getNextDayFromExpirationDate = (supplyPointInput: ISupplyPointInput | ISupplyPoint) =>
     supplyPointInput.expirationDate && addOneDay(supplyPointInput.expirationDate);
@@ -59,8 +59,8 @@ export const expirationDateIsInTerminateInterval = (supplyPointInput: ISupplyPoi
         moment(),
         supplyPointInput,
     );
-    const expirateDate = moment(supplyPointInput.expirationDate).startOf('day');
-    return terminateInterval.diff(expirateDate) > 0;
+    const expirationDate = moment(supplyPointInput.expirationDate).startOf('day');
+    return terminateInterval.diff(expirationDate) > 0;
 };
 
 export const contractEndTermWithProlongation = (supplyPointInput: ISupplyPointInput | ISupplyPoint) =>
@@ -72,8 +72,8 @@ export const contractEndIndefinitePeriod = (supplyPointInput: ISupplyPointInput)
         addOneMonth(moment()),
         supplyPointInput,
     )
-    .add(1, 'months')
-    .startOf('month');
+        .add(1, 'months')
+        .startOf('month');
 
 export const dateDiff = (dateFromString: string, dateToString: string, resultUnit: unitOfTime.Diff = 'days') => {
     const from = moment(dateFromString);
