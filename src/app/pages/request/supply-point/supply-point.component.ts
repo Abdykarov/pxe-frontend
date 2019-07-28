@@ -17,6 +17,7 @@ import {
     map,
     takeUntil,
 } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -27,6 +28,7 @@ import {
     ISupplyPointPowerAttributes,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
+import { ContractService } from 'src/common/graphql/services/contract.service';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { getConfigStepper } from 'src/common/utils';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
@@ -37,8 +39,6 @@ import {
     SUPPLY_POINT_EDIT_TYPE,
 } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { of } from 'rxjs';
-import { ContractService } from 'src/common/graphql/services/contract.service';
 
 @Component({
     templateUrl: './supply-point.component.html',
@@ -47,16 +47,15 @@ import { ContractService } from 'src/common/graphql/services/contract.service';
 export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.SUPPLY_POINT;
 
+    public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
+    public fieldError: IFieldError = {};
     public formFields = formFields;
+    public formLoading = false;
     public formSent = false;
     public globalError: string[] = [];
-    public fieldError: IFieldError = {};
-    public formLoading = false;
-    public supplyPointData = null;
-    public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
-    public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
-
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
+    public supplyPointData = null;
+    public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -70,11 +69,6 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (isPlatformBrowser(this.platformId)) {
-            this.supplyPointData = window.history.state.supplyPointCopy;
-            this.editMode = SUPPLY_POINT_EDIT_TYPE.PROLONG;
-        }
-
         if (this.supplyPointId) {
             let supplyPointFound: ISupplyPoint = null;
             this.supplyService.getSupplyPoint(this.supplyPointId)
@@ -98,6 +92,16 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                         this.cd.markForCheck();
                     },
                 );
+        } else {
+            if (isPlatformBrowser(this.platformId)) {
+                const supplyPointCopy = window.history.state.supplyPointCopy;
+                if (supplyPointCopy) {
+                    this.supplyPointData = supplyPointCopy;
+                    this.editMode = SUPPLY_POINT_EDIT_TYPE.PROLONG;
+                } else {
+                    this.supplyPointData = {};
+                }
+            }
         }
     }
 

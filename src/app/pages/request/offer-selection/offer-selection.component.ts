@@ -15,7 +15,6 @@ import {
 } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import {
