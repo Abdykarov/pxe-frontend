@@ -154,6 +154,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/change-password-banner',
                 },
                 {
+                    'label': 'Dashboard',
+                    'url': '/basic/dashboard',
+                },
+                {
                     'label': 'Landing page',
                     'url': '/full/landing-page',
                 },
