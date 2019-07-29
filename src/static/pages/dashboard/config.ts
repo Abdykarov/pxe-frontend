@@ -4,7 +4,7 @@ import {
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 
-export const supplyPointsEnding: ISupplyPoint[] = [{
+export const supplyPointsEndingConfig: ISupplyPoint[] = [{
     id: '5456',
     name: 'Byt praha',
     allowedOperations: [],

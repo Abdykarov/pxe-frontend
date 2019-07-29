@@ -19,7 +19,7 @@ import { SupplyPointOverviewModule } from 'src/common/ui/supply-point-overview/s
         BreadcrumbModule,
         CommonModule,
         InfoBannerModule,
-        NewsModule ,
+        NewsModule,
         SupplyPointOverviewModule,
     ],
 })
