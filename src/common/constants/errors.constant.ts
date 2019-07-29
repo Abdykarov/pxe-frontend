@@ -10,8 +10,10 @@ export const graphQLMessages = {
 };
 
 export const offerValidityMessages = {
-    contractEndWithTerminate: 'Z důvodu, že Vaše nabídka končí za méně než 31 dní jsou zobrazeny pouze nabídky od aktuálního dodavatele.',
-    contractEndWithoutTerminate: 'vypovedni doba + 30 dni',
+    contractEndWithTerminate: 'Na základě uvedeného data platnosti aktuální smlouvy můžete ' +
+        'vybírat pouze z nabídek od svého aktuálního dodavatele.',
+    contractEndWithoutTerminate: 'Na základě uvedeného data platnosti aktuální smlouvy můžete ' +
+        'vybírat pouze z nabídek od svého aktuálního dodavatele.',
 };
 
 export const errorFieldMessages =  {
@@ -100,7 +102,7 @@ export const errorFieldMessages =  {
     expirationDate: {
         requiredGas: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr plynu.',
         requiredPower: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr elektřiny.',
-        isInTerminateInterval: 'Už vám byla automaticky prodloužená  smlouva.',
+        isInTerminateInterval: 'Vaši aktuální smlouvu už máte automaticky prodlouženou.',
     },
     fullName: {
         requiredPerson: 'Vyplňte své jméno a příjmení.',
