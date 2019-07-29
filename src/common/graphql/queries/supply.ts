@@ -176,6 +176,7 @@ export const getSupplyPointQuery = gql`
                 contractStatus,
                 deliveryFrom,
                 deliveryTo,
+                offerValidity,
                 offer{
                     id,
                     supplier{
@@ -311,6 +312,7 @@ export const findSupplyPointsByContractStatusQuery = gql`
                 contractStatus,
                 deliveryFrom,
                 deliveryTo,
+                offerValidity,
                 offer{
                     id,
                     supplier{

@@ -146,6 +146,7 @@ export class ContractService {
             contractStatus: 'NOT_CONCLUDED',
             deliveryFrom: '',
             deliveryTo: '',
+            offerValidity: true,
             offer: {
                 id: offerId,
                 supplier: supplyPointOffer.supplier,

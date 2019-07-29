@@ -54,7 +54,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
 
     constructor(
         private cd: ChangeDetectorRef,
-        private navigateRequestService: NavigateRequestService,
+        public navigateRequestService: NavigateRequestService,
         private personalDataService: PersonalDataService,
         private route: ActivatedRoute,
         private router: Router,
