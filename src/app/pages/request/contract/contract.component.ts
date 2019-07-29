@@ -53,7 +53,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     constructor(
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
-        private navigateRequestService: NavigateRequestService,
+        public navigateRequestService: NavigateRequestService,
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,

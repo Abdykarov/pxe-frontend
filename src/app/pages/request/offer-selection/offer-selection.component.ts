@@ -71,7 +71,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     constructor(
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
-        private navigateRequestService: NavigateRequestService,
+        public navigateRequestService: NavigateRequestService,
         private offerService: OfferService,
         private route: ActivatedRoute,
         private router: Router,
