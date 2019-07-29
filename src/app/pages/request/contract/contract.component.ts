@@ -53,16 +53,12 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     constructor(
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
-        private navigateRequestService: NavigateRequestService,
+        public navigateRequestService: NavigateRequestService,
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
     ) {
         super();
-    }
-
-    public toggleOffer = () => {
-        this.showOffer = !this.showOffer;
     }
 
     ngOnInit () {
@@ -89,6 +85,15 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                     this.cd.markForCheck();
                 },
             );
+    }
+
+    public toggleOffer = () => {
+        this.showOffer = !this.showOffer;
+    }
+
+    public chooseNewOfferAction = (evt) => {
+        evt.preventDefault();
+        this.navigateRequestService.routerToRequestStep(this.supplyPoint, ProgressStatus.OFFER_STEP);
     }
 
     public signContract(smsCode: string) {

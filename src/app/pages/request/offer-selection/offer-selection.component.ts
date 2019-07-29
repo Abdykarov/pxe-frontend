@@ -8,18 +8,18 @@ import {
     OnInit,
 } from '@angular/core';
 
-
 import * as R from 'ramda';
-import { interval } from 'rxjs';
 import {
-    concatMap,
+    interval,
+    of,
+} from 'rxjs';
+import {
     filter,
     map,
     startWith,
     switchMap,
     takeUntil,
 } from 'rxjs/operators';
-import { of } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -68,11 +68,10 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
             filter(() => !this.onlyOffersFromActualSupplier),
         );
 
-
     constructor(
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
-        private navigateRequestService: NavigateRequestService,
+        public navigateRequestService: NavigateRequestService,
         private offerService: OfferService,
         private route: ActivatedRoute,
         private router: Router,
@@ -132,7 +131,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
 
         contractAction
             .pipe(
-                concatMap(() => this.contractService.saveContract(supplyPointOffer.id, supplyPointId)),
+                switchMap(() => this.contractService.saveContract(supplyPointOffer.id, supplyPointId)),
                 map(({data}) => data.saveContract),
                 takeUntil(this.destroy$),
             )
