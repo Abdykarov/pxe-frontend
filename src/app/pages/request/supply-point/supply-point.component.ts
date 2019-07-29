@@ -87,6 +87,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                         this.cd.markForCheck();
                     },
                     (error) => {
+                        this.supplyPointData = {};
                         const { globalError } = parseGraphQLErrors(error);
                         this.globalError = globalError;
                         this.cd.markForCheck();
