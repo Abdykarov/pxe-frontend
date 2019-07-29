@@ -5,6 +5,7 @@ import {
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
+import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
     CURRENCY: {
@@ -49,6 +50,7 @@ export const CONSTS = {
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
     TIME_TO_CONTRACT_END_PROLONGED: 14,
+    REFRESH_INTERVAL_RXJS: 5000,
 };
 
 export const ROUTES = {
@@ -63,10 +65,12 @@ export const ROUTES = {
     ROUTER_REQUEST_SUPPLY_POINT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.SUPPLY_POINT}`,
     ROUTER_REQUEST_RESULT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.RESULT}`,
     ROUTER_REQUESTS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUESTS}`,
+    ROUTER_SECURING_YOUR_DATA: `/${CONSTS.PATHS.SECURING_YOUR_DATA}`,
     ROUTER_SUPPLY_POINTS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_POINTS}`,
     ROUTER_SUPPLY_OFFER: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_OFFER}`,
     ROUTER_SUPPLY_OFFER_POWER: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_OFFER}/${CONSTS.PATHS.POWER}`,
     ROUTER_SUPPLY_OFFER_GAS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_OFFER}/${CONSTS.PATHS.GAS}`,
+    ROUTER_TERMS_OF_USE: `/${CONSTS.PATHS.TERMS_OF_USE}`,
 };
 
 export const CODE_LIST = {
@@ -207,4 +211,10 @@ export const  ANNUAL_CONSUMPTION_OPTIONS = [
 export const SUPPLY_POINT_EDIT_TYPE = {
     NORMAL: 'NORMAL',
     PROLONG: 'PROLONG',
+};
+
+export const DEFAULT_QR_CODE_SETTING: IQRCodeSetting = {
+    height: 256,
+    width: 256,
+    margin: 0,
 };

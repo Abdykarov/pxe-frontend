@@ -52,8 +52,7 @@ describe('DateDiffPipe', () => {
         expect(pipe.transform('2019-01-01T01:01:01.000Z', '2019-01-04T01:01:00.000Z', 'hours')).toEqual(71);
     });
 
-    it('2019-04-01T22:00:00.000Z diff 2019-04-02 is 24 (hours)', () => {
-        expect(pipe.transform('2019-04-01T22:00:00.000Z', '2019-04-02', 'hours')).toEqual(24);
+    it('2019-04-01T22:00:00.000Z diff 2019-04-02 is 0 (hours)', () => {
+        expect(pipe.transform('2019-04-01T22:00:00.000Z', '2019-04-02', 'hours')).toEqual(0);
     });
-
 });

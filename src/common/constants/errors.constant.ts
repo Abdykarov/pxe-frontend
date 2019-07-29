@@ -9,6 +9,11 @@ export const graphQLMessages = {
     cannotSignContract: 'Smlouvu se nepodařilo podepsat.',
 };
 
+export const offerValidityMessages = {
+    contractEndWithTerminate: 'Z důvodu, že Vaše nabídka končí za méně než 31 dní jsou zobrazeny pouze nabídky od aktuálního dodavatele.',
+    contractEndWithoutTerminate: 'vypovedni doba + 30 dni',
+};
+
 export const errorFieldMessages =  {
     address: {
         required: 'Vyplňte adresu odběrného místa.',
@@ -95,6 +100,7 @@ export const errorFieldMessages =  {
     expirationDate: {
         requiredGas: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr plynu.',
         requiredPower: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr elektřiny.',
+        isInTerminateInterval: 'Už vám byla automaticky prodloužená  smlouva.',
     },
     fullName: {
         requiredPerson: 'Vyplňte své jméno a příjmení.',

@@ -69,7 +69,6 @@ export class ContractComponent extends AbstractComponent implements OnInit {
         super.ngOnInit();
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
-                takeUntil(this.destroy$),
                 map(({data}) => data.getSupplyPoint),
                 switchMap( (supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
@@ -77,6 +76,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                     return this.contractService.getContractTerms(supplyPoint.contract.contractId);
                 }),
                 map(({data}) => data.getContractTerms.content),
+                takeUntil(this.destroy$),
             )
             .subscribe(
                 (content: string) => {

@@ -235,7 +235,6 @@ export const getSupplyPointQuery = gql`
                 }
             },
             progressStatus,
-            allowedOperations,
         }
     }
 `;
@@ -301,6 +300,12 @@ export const findSupplyPointsByContractStatusQuery = gql`
                 description,
                 help
             },
+            contractEndType {
+                type,
+                code,
+                description,
+                help
+            }
             contract {
                 contractId,
                 contractStatus,

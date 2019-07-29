@@ -36,6 +36,10 @@ export class NewSupplyWillBeginPipe implements PipeTransform {
         this.isContractEndTerm(supplyPointInput) || this.isContractEndRequest(supplyPointInput)
 
     transform(supplyPointInput: ISupplyPointInput): string | boolean  {
+        if (supplyPointInput.ownTerminate) {
+            supplyPointInput.contractEndTypeId = CONTRACT_END_TYPE.CONTRACT_END_TERMINATE;
+        }
+
         return R.cond([
             [
                 this.isContractEndDefault,

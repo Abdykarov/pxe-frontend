@@ -13,7 +13,11 @@ import {
     signContractMutation,
     updateContractMutation,
 } from 'src/common/graphql/mutation/contract';
-import { getContractTermsQuery } from 'src/common/graphql/queries/contract';
+import { DEFAULT_QR_CODE_SETTING } from 'src/app/app.constants';
+import {
+    getContractTermsQuery,
+    getPaymentInfoQuery,
+} from 'src/common/graphql/queries/contract';
 import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
 import { findSupplyPointOffersQuery } from 'src/common/graphql/queries/offer';
 import {
@@ -21,6 +25,7 @@ import {
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
+import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 @Injectable({
     providedIn: 'root',
@@ -221,4 +226,16 @@ export class ContractService {
     }
 
     // todo refetch all queries for all supply point overviews
+
+    public getPaymentInfo(contractId: string, setting: IQRCodeSetting = DEFAULT_QR_CODE_SETTING) {
+        return this.apollo
+            .watchQuery<any>({
+                query: getPaymentInfoQuery,
+                variables: {
+                    contractId,
+                    setting,
+                },
+            })
+            .valueChanges;
+    }
 }

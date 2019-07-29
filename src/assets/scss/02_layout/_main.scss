@@ -82,6 +82,61 @@
 		}
 	}
 
+	.decimal-list {
+		&,
+		ol {
+			counter-reset: item;
+
+			> li {
+				&::before {
+					content: counters(item, '.') '.';
+					counter-increment: item;
+					font-weight: 400;
+				}
+			}
+		}
+
+		> li {
+			padding-left: 0;
+			margin-bottom: ( $spacer * 2.5 );
+
+			&::before {
+				font-size: $h2-font-size;
+				line-height: ( 24 / 18 );
+			}
+
+			h2 {
+				padding-left: $list-decimal-padding-left;
+				margin-bottom: $spacer;
+			}
+
+			> ol {
+				> li {
+					display: block;
+					padding-left: $list-decimal-padding-left;
+				}
+			}
+		}
+	}
+
+	ol.upper-roman {
+		> li {
+			&::before {
+				content: counter(item, upper-roman) '.';
+			}
+		}
+	}
+
+	ol.lower-alpha {
+		> li {
+			padding-left: ( $spacer * 1.5 );
+
+			&::before {
+				content: counter(item, lower-alpha) '/';
+			}
+		}
+	}
+
 	.check-list {
 		li {
 			padding-left: ( $icon-size-small-px + ( $spacer / 2 ) );

@@ -41,7 +41,7 @@
             </div>
         </div>
         <ng-container *ngIf="supplyPointsActual && supplyPointsActual.length !== 0">
-            <h3 class="text-center">Odběrná místa a jejich aktuální nabídky</h3>
+            <p class="perex text-center mb-3">Odběrná místa a jejich aktuální dodávky</p>
             <div class="supply-points">
                 <pxe-supply-point
                     *ngFor="let supplyPoint of supplyPointsActual"
@@ -52,7 +52,7 @@
             </div>
         </ng-container>
         <ng-container *ngIf="supplyPointsFuture && supplyPointsFuture.length !== 0">
-            <h3 class="text-center">Odběrná místa a jejich budoucí nabídky</h3>
+            <p class="perex text-center mb-3 mt-5">Odběrná místa a jejich budoucí dodávky</p>
             <div class="supply-points">
                 <pxe-supply-point
                     *ngFor="let supplyPoint of supplyPointsFuture"
