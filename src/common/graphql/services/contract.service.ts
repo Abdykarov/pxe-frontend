@@ -6,7 +6,8 @@ import { Apollo } from 'apollo-angular';
 import {
     concludeContractMutation,
     deleteContractMutation,
-    deleteSignedContract,
+    deleteSelectedOfferFromContractMutation,
+    deleteSignedContractMutation,
     saveContractMutation,
     sendContractConfirmationSmsMutation,
     signContractMutation,
@@ -107,7 +108,7 @@ export class ContractService {
             });
     }
 
-    public deleteContract(contractId: number) {
+    public deleteContract(contractId: string) {
         return this.apollo
             .mutate({
                 mutation: deleteContractMutation,
@@ -206,13 +207,24 @@ export class ContractService {
     public deleteSignedContract(contractId: string, smsConfirmationCode: string) {
         return this.apollo
             .mutate({
-                mutation: deleteSignedContract,
+                mutation: deleteSignedContractMutation,
                 variables: {
                     contractId,
                     smsConfirmationCode,
                 },
             });
     }
+
+    public deleteSelectedOfferFromContract(contractId: string) {
+        return this.apollo
+            .mutate({
+                mutation: deleteSelectedOfferFromContractMutation,
+                variables: {
+                    contractId,
+                },
+            });
+    }
+
     // todo refetch all queries for all supply point overviews
 
     public getPaymentInfo(contractId: string, setting: IQRCodeSetting = DEFAULT_QR_CODE_SETTING) {

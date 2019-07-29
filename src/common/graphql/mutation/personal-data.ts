@@ -5,3 +5,9 @@ export const savePersonalDataMutation = gql`
         savePersonalData(contractId: $contractId,personalData: $personalData)
     }
 `;
+
+export const updatePersonalDataMutation = gql`
+    mutation updatePersonalData($contractId: ID!, $personalData: PersonalDataInput!) {
+        updatePersonalData(contractId: $contractId,personalData: $personalData)
+    }
+`;

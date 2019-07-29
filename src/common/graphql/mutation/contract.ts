@@ -36,8 +36,14 @@ export const sendContractConfirmationSmsMutation = gql`
     }
 `;
 
-export const deleteSignedContract = gql`
+export const deleteSignedContractMutation = gql`
     mutation deleteSignedContract($contractId: ID!, $smsConfirmationCode: String!){
         deleteSignedContract(contractId: $contractId, smsConfirmationCode: $smsConfirmationCode)
+    }
+`;
+
+export const deleteSelectedOfferFromContractMutation = gql`
+    mutation deleteSelectedOfferFromContract($contractId: ID!){
+        deleteSelectedOfferFromContract(contractId: $contractId)
     }
 `;

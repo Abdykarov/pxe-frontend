@@ -41,7 +41,9 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./payment.component.scss'],
 })
 export class PaymentComponent extends AbstractComponent implements OnInit {
-    public configStepper = getConfigStepper(ProgressStatus.WAITING_FOR_PAYMENT);
+    public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.WAITING_FOR_PAYMENT;
+
+    public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public bannerTypeImages = BannerTypeImages;
     public globalError: string[] = [];
     public loading = true;
