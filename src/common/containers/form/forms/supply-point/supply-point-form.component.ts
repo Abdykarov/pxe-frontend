@@ -200,7 +200,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         let timeToContractEnd = null;
         let timeToContractEndPeriodId = null;
 
-        if (this.formValues) {
+        if (!R.isEmpty(this.formValues)) {
             const supplier = R.find(R.propEq('id', this.formValues.supplier.id))(this.suppliers[commodityType]);
             const expirationDateFromSupplyPoint = this.formValues.expirationDate && new Date(this.formValues.expirationDate);
             const expirationDateFromContract = this.formValues.contract &&
