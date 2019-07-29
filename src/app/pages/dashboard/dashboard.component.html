@@ -1,3 +1,47 @@
 <pxe-layout-container pageTitle="Dashboard">
-
+    <lnd-placeloader [loading]="!globalError.length && loadingForm"></lnd-placeloader>
+    <div class="row">
+        <div class="col-12 col-md-12">
+            <lnd-alert
+                *ngIf="globalError.length"
+                type="danger">
+                <ng-container *ngFor="let error of globalError">
+                    {{ error }}<br>
+                </ng-container>
+            </lnd-alert>
+        </div>
+    </div>
+    <lnd-info-banner
+        *ngIf="state === overviewStates.NO_REQUEST"
+        [bannerTitle]="'Zatím nemáte uložené žádné odběrné místo'"
+        [bannerDescription]="'Zadejte odběrné místo a my vám hned dáme nabídky'"
+        [buttonLabel]="'Zadat odběrné místo'"
+        (buttonAction)="createSupplyPointAction($event)"
+    ></lnd-info-banner>
+    <lnd-banner-ui
+        *ngIf="state === overviewStates.REQUESTS"
+        buttonLabel="Dokončit žádost"
+        [data]="{
+            text: supplyPoints.length === 1 ? 'Máte rozdělanou žádost.' : 'Máte rozdě'
+        }"
+        (customBannerAction)="complateRequestAction()"
+    ></lnd-banner-ui>
+    <div class="row mt-5" *ngIf="!loadingForm">
+        <div class="col-md-6">
+            <h2>Odběrná místa</h2>
+            <pxe-supply-point-overview
+                [electricityPlacesCount]="electricityPlacesCount"
+                [electricitySumOfPerformance]="electricitySumOfPerformance"
+                [gasPlacesCount]="gasPlacesCount"
+                [gasSumOfPerformance]="gasSumOfPerformance"
+                [supplyPointsEnding]="supplyPointsEnding"
+                (newSupplierAction)="createSupplyPointAction($event)"
+                (supplyPointsListAction)="routerToListOfSupplyPointsAction($event)">
+            </pxe-supply-point-overview>
+        </div>
+        <div class="col-md-6">
+            <h2>Novinky</h2>
+            <pxe-news-container></pxe-news-container>
+        </div>
+    </div>
 </pxe-layout-container>

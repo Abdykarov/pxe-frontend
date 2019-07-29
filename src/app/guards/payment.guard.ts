@@ -7,15 +7,9 @@ import {
     UrlTree,
 } from '@angular/router';
 
-import * as R from 'ramda';
 import { Observable } from 'rxjs';
 
 import { AuthService } from 'src/app/services/auth.service';
-import {
-    CONSTS,
-    ROUTES,
-} from 'src/app/app.constants';
-import { UserStatus } from 'src/app/services/model/auth.model';
 
 @Injectable({
     providedIn: 'root',
@@ -33,21 +27,21 @@ export class PaymentGuard implements CanActivateChild {
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         this.authService.checkLogin();
 
-        if (this.authService.currentUserValue.userStatus === UserStatus.AWAITING_VERIFICATION &&
-            R.indexOf(ROUTES.ROUTER_REQUEST_PAYMENT, state.url) < 0) {
-                const supplyPointId = this.authService.getSupplyPointIdWaitingForPayment();
-                if (supplyPointId) {
-                    const extras = {
-                        queryParams: {
-                            supplyPointId: supplyPointId,
-                        },
-                    };
-                    this.router.navigate([ROUTES.ROUTER_REQUEST_PAYMENT], extras);
-                } else {
-                    this.router.navigate([CONSTS.PATHS.LOGOUT]);
-                }
-                return false;
-        }
+        // if (this.authService.currentUserValue.userStatus === UserStatus.AWAITING_VERIFICATION &&
+        //     R.indexOf(ROUTES.ROUTER_REQUEST_PAYMENT, state.url) < 0) {
+        //         const supplyPointId = this.authService.getSupplyPointIdWaitingForPayment();
+        //         if (supplyPointId) {
+        //             const extras = {
+        //                 queryParams: {
+        //                     supplyPointId: supplyPointId,
+        //                 },
+        //             };
+        //             this.router.navigate([ROUTES.ROUTER_REQUEST_PAYMENT], extras);
+        //         } else {
+        //             this.router.navigate([CONSTS.PATHS.LOGOUT]);
+        //         }
+        //         return false;
+        // }
 
         return true;
     }

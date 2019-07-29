@@ -5,7 +5,7 @@ import { Routes } from '@angular/router';
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { DashboardComponent } from 'src/static/pages/dashboard/page';
 import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
-import { NewsModule } from 'src/common/ui/news/news.module';
+import { NewsContainerModule } from 'src/common/containers/news-conteiner/news-conteiner.module';
 import { SupplyPointOverviewModule } from 'src/common/ui/supply-point-overview/supply-point-overview.module';
 
 @NgModule({
@@ -19,7 +19,7 @@ import { SupplyPointOverviewModule } from 'src/common/ui/supply-point-overview/s
         BreadcrumbModule,
         CommonModule,
         InfoBannerModule,
-        NewsModule,
+        NewsContainerModule ,
         SupplyPointOverviewModule,
     ],
 })

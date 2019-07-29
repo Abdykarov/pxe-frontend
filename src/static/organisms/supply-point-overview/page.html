@@ -9,7 +9,13 @@
     <div class="col-md-6">
         <div class="static-pages-holder">
             <div class="static-pages static-pages--bg-transparent">
-                <pxe-supply-point-overview></pxe-supply-point-overview>
+                <pxe-supply-point-overview
+                    [electricityPlacesCount]="electricityPlacesCount"
+                    [electricitySumOfPerformance]="electricitySumOfPerformance"
+                    [gasPlacesCount]="gasPlacesCount"
+                    [gasSumOfPerformance]="gasSumOfPerformance"
+                    [supplyPointsEnding]="supplyPointsEnding">
+                </pxe-supply-point-overview>
             </div>
         </div>
     </div>
