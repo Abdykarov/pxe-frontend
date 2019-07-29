@@ -300,6 +300,12 @@ export const findSupplyPointsByContractStatusQuery = gql`
                 description,
                 help
             },
+            contractEndType {
+                type,
+                code,
+                description,
+                help
+            }
             contract {
                 contractId,
                 contractStatus,
