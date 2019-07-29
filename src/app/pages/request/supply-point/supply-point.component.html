@@ -9,7 +9,9 @@
             <h2>Zadejte údaje k odběrnému místu</h2>
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
+            <lnd-placeloader [loading]="!supplyPointData"></lnd-placeloader>
             <pxe-supply-point-form
+                *ngIf="supplyPointData"
                 [editMode]="editMode"
                 [formFields]="formFields"
                 [formLoading]="formLoading"

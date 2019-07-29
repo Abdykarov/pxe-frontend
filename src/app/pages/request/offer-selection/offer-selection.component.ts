@@ -12,12 +12,14 @@ import {
 import * as R from 'ramda';
 import { interval } from 'rxjs';
 import {
+    concatMap,
     filter,
     map,
     startWith,
     switchMap,
     takeUntil,
 } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -47,11 +49,14 @@ import { ValidityService } from 'src/app/services/validity.service';
     styleUrls: ['./offer-selection.component.scss'],
 })
 export class OfferSelectionComponent extends AbstractComponent implements OnInit {
+    public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.OFFER_STEP;
+    public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.SUPPLY_POINT;
+
     public bannerObj: IBannerObj = {};
     public globalError: string[] = [];
     public loadingSupplyPointOffers = true;
     public onlyOffersFromActualSupplier = false;
-    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.OFFER_STEP);
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public supplyPointOffers: ISupplyPointOffer[];
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
@@ -121,10 +126,15 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     public saveContract = (supplyPointOffer: ISupplyPointOffer) => {
         const supplyPointId = this.supplyPoint.id;
 
-        this.contractService.saveContract(supplyPointOffer.id, supplyPointId)
+        const contractAction = this.navigateRequestService.isPreviousStep(this.supplyPoint, this.ACTUAL_PROGRESS_STATUS) ?
+            this.contractService.deleteSelectedOfferFromContract(this.supplyPoint.contract.contractId) :
+            of({});
+
+        contractAction
             .pipe(
-                takeUntil(this.destroy$),
+                concatMap(() => this.contractService.saveContract(supplyPointOffer.id, supplyPointId)),
                 map(({data}) => data.saveContract),
+                takeUntil(this.destroy$),
             )
             .subscribe(
                 () => {
