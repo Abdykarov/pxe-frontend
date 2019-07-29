@@ -11,7 +11,6 @@ import {
     CommodityType,
     ISupplyPoint,
 } from 'src/common/graphql/models/supply.model';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'pxe-supply-point',

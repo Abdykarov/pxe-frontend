@@ -76,6 +76,7 @@ export interface ISupplyPointInput {
     supplierId: number;
     timeToContractEnd?: number;
     timeToContractEndPeriodId?: String;
+    ownTerminate?: boolean;
 }
 
 export interface ISupplyPointGasAttributes {

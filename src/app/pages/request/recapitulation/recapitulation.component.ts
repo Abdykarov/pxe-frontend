@@ -38,7 +38,9 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./recapitulation.component.scss'],
 })
 export class RecapitulationComponent extends AbstractComponent implements OnInit {
-    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.PERSONAL_DATA);
+    public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.PERSONAL_DATA;
+    public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.OFFER_STEP;
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
 
     public formFields = formFields;
     public formSent = false;
@@ -87,7 +89,11 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         this.globalError = [];
         this.fieldError = {};
 
-        this.personalDataService.savePersonalData(this.supplyPoint, personalInfoInput)
+        const personalDataAction  = this.navigateRequestService.isPreviousStep(this.supplyPoint, this.ACTUAL_PROGRESS_STATUS) ?
+            this.personalDataService.updatePersonalData(this.supplyPoint, personalInfoInput) :
+            this.personalDataService.savePersonalData(this.supplyPoint, personalInfoInput);
+
+        personalDataAction
             .pipe(
                 takeUntil(this.destroy$),
                 map(({data}) => data.savePersonalData),

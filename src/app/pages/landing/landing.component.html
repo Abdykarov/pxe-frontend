@@ -1,3 +1,7 @@
+<ng-template #agreementTemplate>
+    Souhlasím se <a target="_blank" [href]="routes.ROUTER_SECURING_YOUR_DATA">zásadami bezpečnosti</a>
+</ng-template>
+
 <div class="landing-page">
     <div class="section about-our-benefit section--picture-second">
         <div class="container-fluid">
@@ -159,6 +163,7 @@
                                 Chci mít také přístup k&nbsp;jiným cenám, možnost&nbsp;měnit dodavatele jen na&nbsp;jedno kliknutí a&nbsp;zbavit se starostí s&nbsp;převodem.
                             </h3>
                             <pxe-registration-form
+                                [agreementTemplate]="agreementTemplate"
                                 [formFields]="formFields"
                                 [formLoading]="formLoading"
                                 [formSent]="formSent"

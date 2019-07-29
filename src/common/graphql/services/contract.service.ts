@@ -6,13 +6,18 @@ import { Apollo } from 'apollo-angular';
 import {
     concludeContractMutation,
     deleteContractMutation,
-    deleteSignedContract,
+    deleteSelectedOfferFromContractMutation,
+    deleteSignedContractMutation,
     saveContractMutation,
     sendContractConfirmationSmsMutation,
     signContractMutation,
     updateContractMutation,
 } from 'src/common/graphql/mutation/contract';
-import { getContractTermsQuery } from 'src/common/graphql/queries/contract';
+import { DEFAULT_QR_CODE_SETTING } from 'src/app/app.constants';
+import {
+    getContractTermsQuery,
+    getPaymentInfoQuery,
+} from 'src/common/graphql/queries/contract';
 import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
 import { findSupplyPointOffersQuery } from 'src/common/graphql/queries/offer';
 import {
@@ -20,6 +25,7 @@ import {
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
+import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 @Injectable({
     providedIn: 'root',
@@ -102,7 +108,7 @@ export class ContractService {
             });
     }
 
-    public deleteContract(contractId: number) {
+    public deleteContract(contractId: string) {
         return this.apollo
             .mutate({
                 mutation: deleteContractMutation,
@@ -202,12 +208,35 @@ export class ContractService {
     public deleteSignedContract(contractId: string, smsConfirmationCode: string) {
         return this.apollo
             .mutate({
-                mutation: deleteSignedContract,
+                mutation: deleteSignedContractMutation,
                 variables: {
                     contractId,
                     smsConfirmationCode,
                 },
             });
     }
+
+    public deleteSelectedOfferFromContract(contractId: string) {
+        return this.apollo
+            .mutate({
+                mutation: deleteSelectedOfferFromContractMutation,
+                variables: {
+                    contractId,
+                },
+            });
+    }
+
     // todo refetch all queries for all supply point overviews
+
+    public getPaymentInfo(contractId: string, setting: IQRCodeSetting = DEFAULT_QR_CODE_SETTING) {
+        return this.apollo
+            .watchQuery<any>({
+                query: getPaymentInfoQuery,
+                variables: {
+                    contractId,
+                    setting,
+                },
+            })
+            .valueChanges;
+    }
 }
