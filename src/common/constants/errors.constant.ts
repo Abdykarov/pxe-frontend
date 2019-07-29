@@ -10,8 +10,10 @@ export const graphQLMessages = {
 };
 
 export const offerValidityMessages = {
-    contractEndWithTerminate: 'Z důvodu, že Vaše nabídka končí za méně než 31 dní jsou zobrazeny pouze nabídky od aktuálního dodavatele.',
-    contractEndWithoutTerminate: 'vypovedni doba + 30 dni',
+    contractEndWithTerminate: 'Na základě uvedeného data platnosti aktuální smlouvy můžete ' +
+        'vybírat pouze z nabídek od svého aktuálního dodavatele.',
+    contractEndWithoutTerminate: 'Na základě uvedeného data platnosti aktuální smlouvy můžete ' +
+        'vybírat pouze z nabídek od svého aktuálního dodavatele.',
 };
 
 export const errorFieldMessages =  {
