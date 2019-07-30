@@ -72,6 +72,10 @@ import {
     modalsPageRoutes,
 } from 'src/static/organisms/modals/page.module';
 import {
+    NewsPageModule,
+    newsPageRoutes,
+} from 'src/static/organisms/news/page.module';
+import {
     NewSupplyPointPageModule,
     newSupplyPointPageRoutes,
 } from 'src/static/pages/new-supply-point/page.module';
@@ -165,6 +169,7 @@ const routes: Routes = [
             ...infoBannerPageRoutes,
             ...listSupplyPointsPageRoutes,
             ...modalsPageRoutes,
+            ...newsPageRoutes,
             ...newSupplyPointPageRoutes,
             ...paymentVerificationPageRoutes,
             ...progressBarPageRoutes,
@@ -209,6 +214,7 @@ const routes: Routes = [
         InfoBannerPageModule,
         ListSupplyPointsPageModule,
         ModalsPageModule,
+        NewsPageModule,
         NewSupplyPointPageModule,
         PaymentVerificationPageModule,
         ProgressBarPageModule,
