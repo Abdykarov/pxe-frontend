@@ -25,7 +25,7 @@ export class DocumentService {
         private http: HttpClient,
     ) {}
 
-    public getDocument = (contractId: number, documentType: IDocumentType) => {
+    public getDocument = (contractId: string, documentType: IDocumentType) => {
         return this.http.get<any>(
             `${environment.url_api}/v1.0/documents/${contractId}/${documentType}`,
             {

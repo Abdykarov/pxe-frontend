@@ -76,7 +76,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
 
     ngOnInit () {
         super.ngOnInit();
-        this.documentService.getDocument(1470, IDocumentType.WITHDRAWAL)
+        this.documentService.getDocument('1470', IDocumentType.WITHDRAWAL)
             .subscribe((responseDataDocument: IResponseDataDocument) => {
                 this.data = responseDataDocument;
             },
