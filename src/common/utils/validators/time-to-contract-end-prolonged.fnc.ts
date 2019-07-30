@@ -7,7 +7,7 @@ import { ISupplyPointInput } from 'src/common/graphql/models/supply.model';
 export const isAllRequiredFilled = (supplyPoint: ISupplyPointInput): boolean =>
     !!(supplyPoint.expirationDate && supplyPoint.timeToContractEnd && supplyPoint.timeToContractEndPeriodId);
 
-export const timeToContractEndProlonge = () => {
+export const timeToContractEndProlonged = () => {
     return (formGroup: FormGroup) => {
         const supplyPointInput: ISupplyPointInput = formGroup.getRawValue();
         const expirationDateControl = formGroup.controls['expirationDate'];
@@ -16,7 +16,10 @@ export const timeToContractEndProlonge = () => {
             isAllRequiredFilled(supplyPointInput) &&
             expirationDateIsInTerminateInterval(supplyPointInput)
         ) {
-            expirationDateControl .setErrors({ isInTerminateInterval: true });
+            expirationDateControl.markAsTouched({
+                onlySelf: true,
+            });
+            expirationDateControl.setErrors({ isInTerminateInterval: true });
         } else  {
             expirationDateControl.setErrors(null);
         }
