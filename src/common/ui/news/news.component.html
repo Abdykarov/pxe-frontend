@@ -2,17 +2,13 @@
     <div class="news__inner">
         <div class="row">
             <div class="col-12">
-                <div class="row mb-3" *ngFor="let novelty of news; let i = index">
-                    <div class="col-xl-4 text-xl-right">
+                <div class="row mb-4" *ngFor="let novelty of news; let i = index">
+                    <div class="col-xl-auto text-xl-right">
                         {{novelty.date}}
                     </div>
-                    <div class="col-xl-8">
-                        <h2 *ngIf="i === 0">
-                            {{novelty.text}}
-                        </h2>
-                        <ng-container *ngIf="i !== 0">
-                            {{novelty.text}}
-                        </ng-container>
+                    <div class="col"
+                         [class.perex]="i === 0">
+                        {{novelty.text}}
                     </div>
                 </div>
             </div>

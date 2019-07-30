@@ -1,5 +1,5 @@
 <pxe-layout-container pageTitle="Dashboard">
-    <lnd-placeloader [loading]="!globalError.length && loadingForm"></lnd-placeloader>
+    <lnd-placeloader [loading]="!globalError.length && loadingData"></lnd-placeloader>
     <div class="row">
         <div class="col-12 col-md-12">
             <lnd-alert
@@ -20,9 +20,9 @@
     ></lnd-info-banner>
     <lnd-banner-ui
         *ngIf="state === overviewStates.REQUESTS"
-        buttonLabel="Dokončit žádost"
+        [buttonLabel]="supplyPoints.length === 1 ? 'Dokončit žádost' : 'Přehled žádostí'"
         [data]="{
-            text: supplyPoints.length === 1 ? 'Máte rozdělanou žádost.' : 'Máte rozdě'
+            text: supplyPoints.length === 1 ? 'Máte rozdělanou žádost.' : 'Máte rozděláno více žádostí.'
         }"
         (customBannerAction)="complateRequestAction()"
     ></lnd-banner-ui>
