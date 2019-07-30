@@ -16,7 +16,7 @@ import {
     IForm,
 } from 'src/common/containers/form/models/form-definition.model';
 import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
-import { timeToContractEndProlonge } from 'src/common/utils/validators/time-to-contract-end-prolonged.fnc';
+import { timeToContractEndProlonged } from 'src/common/utils/validators/time-to-contract-end-prolonged.fnc';
 
 export const expirationConfig: IExpirationConfig = {
     [CONTRACT_END_TYPE.CONTRACT_END_TERM]: {
@@ -173,7 +173,7 @@ export const formFields: IForm = {
         ],
     },
     options: {
-        validator: timeToContractEndProlonge(),
+        validator: timeToContractEndProlonged(),
     },
     validationMessages: {
         commodityType: {
