@@ -203,6 +203,7 @@ export const getSupplyPointQuery = gql`
                 },
                 personalData {
                     name,
+                    birthDate,
                     ico,
                     dic,
                     address1{
@@ -333,6 +334,7 @@ export const findSupplyPointsByContractStatusQuery = gql`
                 },
                 personalData {
                     name,
+                    birthDate,
                     ico,
                     dic,
                     address1{

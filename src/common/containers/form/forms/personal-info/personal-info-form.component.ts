@@ -90,10 +90,11 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         let deposit = null;
         let address1 = null;
         let address2 = null;
-
         if (this.formValues) {
             name = this.formValues.name;
-            birthDate = this.formValues.birthDate;
+            if (this.formValues.birthDate) {
+                birthDate = new Date(this.formValues.birthDate);
+            }
             ico = this.formValues.ico;
             dic = this.formValues.dic;
             onlyAddress1 = !this.formValues.address2;

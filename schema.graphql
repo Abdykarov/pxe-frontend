@@ -107,6 +107,7 @@ type PersonalData {
     ico: String
     name: String!
     phone: String!
+    birthDate: String
 }
 
 "The Root Query for the application"
