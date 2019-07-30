@@ -1,12 +1,5 @@
-import {
-    ActivatedRoute,
-    Router,
-} from '@angular/router';
-import {
-    ChangeDetectorRef,
-    Component,
-    OnInit,
-} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 import * as R from 'ramda';
 import {
@@ -15,6 +8,7 @@ import {
     takeUntil,
 } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { saveAs } from 'file-saver';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
@@ -25,9 +19,14 @@ import {
     IPayment,
 } from 'src/common/graphql/models/contract';
 import {
+    DocumentService,
+    IDocumentType,
+} from 'src/app/services/document.service';
+import {
     getConfigStepper,
     parseGraphQLErrors,
 } from 'src/common/utils';
+import { IResponseDataDocument } from 'src/app/services/model/document.model';
 import {
     ISupplyPoint,
     ProgressStatus,
@@ -44,6 +43,8 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 export class PaymentComponent extends AbstractComponent implements OnInit {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.WAITING_FOR_PAYMENT;
 
+    public data: IResponseDataDocument;
+
     public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public bannerTypeImages = BannerTypeImages;
     public globalError: string[] = [];
@@ -57,6 +58,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
+        private documentService: DocumentService,
         public navigateRequestService: NavigateRequestService,
         private route: ActivatedRoute,
         private router: Router,
@@ -67,7 +69,16 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
 
     ngOnInit () {
         super.ngOnInit();
+        this.documentService.getDocument(1470, IDocumentType.WITHDRAWAL)
+            .subscribe((responseDataDocument: IResponseDataDocument) => {
+                this.data = responseDataDocument;
+            },
+        );
         this.getSupplyPointWithPayment(this.supplyPointId);
+    }
+
+    public download() {
+        saveAs(this.data.file, this.data.filename);
     }
 
     public getSupplyPointWithPayment = (id) => {
