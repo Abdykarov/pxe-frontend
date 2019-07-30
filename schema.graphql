@@ -123,7 +123,7 @@ type PersonalData {
     address2: Address
     bankAccountNumber: String!
     bankCode: String!
-    birthDate: Date!
+    birthDate: Date
     deposit: Float!
     depositPaymentType: CodelistItem!
     dic: String
