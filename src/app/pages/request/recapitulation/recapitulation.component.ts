@@ -15,7 +15,10 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { formFields } from 'src/common/containers/form/forms/personal-info/personal-info-form.config';
-import { getConfigStepper } from 'src/common/utils';
+import {
+    getConfigStepper,
+    parseGraphQLErrors,
+} from 'src/common/utils';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IPersonalDataInput } from 'src/common/graphql/models/personal-data.model';
@@ -24,7 +27,7 @@ import {
     ProgressStatus,
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
-import { parseGraphQLErrors } from 'src/common/utils';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -35,7 +38,9 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./recapitulation.component.scss'],
 })
 export class RecapitulationComponent extends AbstractComponent implements OnInit {
-    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.PERSONAL_DATA);
+    public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.PERSONAL_DATA;
+    public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.OFFER_STEP;
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
 
     public formFields = formFields;
     public formSent = false;
@@ -49,6 +54,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
 
     constructor(
         private cd: ChangeDetectorRef,
+        public navigateRequestService: NavigateRequestService,
         private personalDataService: PersonalDataService,
         private route: ActivatedRoute,
         private router: Router,
@@ -65,6 +71,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             )
             .subscribe(
                 (supplyPoint: ISupplyPoint) => {
+                    this.navigateRequestService.checkCorrectStep(supplyPoint, ProgressStatus.PERSONAL_DATA);
                     this.supplyPoint = supplyPoint;
                     this.isIndividual = this.supplyPoint.subject.code === SubjectType.SUBJECT_TYPE_INDIVIDUAL;
                     this.cd.markForCheck();
@@ -82,7 +89,11 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         this.globalError = [];
         this.fieldError = {};
 
-        this.personalDataService.savePersonalData(this.supplyPoint, personalInfoInput)
+        const personalDataAction  = this.navigateRequestService.isPreviousStep(this.supplyPoint, this.ACTUAL_PROGRESS_STATUS) ?
+            this.personalDataService.updatePersonalData(this.supplyPoint, personalInfoInput) :
+            this.personalDataService.savePersonalData(this.supplyPoint, personalInfoInput);
+
+        personalDataAction
             .pipe(
                 takeUntil(this.destroy$),
                 map(({data}) => data.savePersonalData),

@@ -4,7 +4,10 @@ import {
     CommodityType,
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
-import { CONTRACT_END_TYPE } from 'src/app/app.constants';
+import {
+    CONSTS,
+    CONTRACT_END_TYPE,
+} from 'src/app/app.constants';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import {
@@ -13,10 +16,21 @@ import {
     IForm,
 } from 'src/common/containers/form/models/form-definition.model';
 import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
+import { timeToContractEndProlonged } from 'src/common/utils/validators/time-to-contract-end-prolonged.fnc';
 
 export const expirationConfig: IExpirationConfig = {
     [CONTRACT_END_TYPE.CONTRACT_END_TERM]: {
         'expirationDate': true,
+        'timeToContractEnd': false,
+        'timeToContractEndPeriodId': false,
+    },
+    [CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION]: {
+        'expirationDate': true,
+        'timeToContractEnd': true,
+        'timeToContractEndPeriodId': true,
+    },
+    [CONTRACT_END_TYPE.CONTRACT_END_INDEFINITE_PERIOD]: {
+        'expirationDate': false,
         'timeToContractEnd': true,
         'timeToContractEndPeriodId': true,
     },
@@ -24,11 +38,6 @@ export const expirationConfig: IExpirationConfig = {
         'expirationDate': true,
         'timeToContractEnd': false,
         'timeToContractEndPeriodId': false,
-    },
-    [CONTRACT_END_TYPE.CONTRACT_END_INDEFINITE_PERIOD]: {
-        'expirationDate': false,
-        'timeToContractEnd': true,
-        'timeToContractEndPeriodId': true,
     },
     [CONTRACT_END_TYPE.CONTRACT_END_DEFAULT]: {
         'expirationDate': false,
@@ -158,6 +167,13 @@ export const formFields: IForm = {
                 Validators.required,
             ],
         ],
+        ownTerminate: [
+            CONSTS.OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT,
+            [],
+        ],
+    },
+    options: {
+        validator: timeToContractEndProlonged(),
     },
     validationMessages: {
         commodityType: {
@@ -233,6 +249,7 @@ export const formFields: IForm = {
             bsDate: errorFieldMessages.date.format,
             bsDateMinDate: errorFieldMessages.date.expirationDateInPast,
             expirationDateInPast: errorFieldMessages.date.expirationDateInPast,
+            isInTerminateInterval: errorFieldMessages.expirationDate.isInTerminateInterval,
         },
         contractEndTypeId: {
             required: errorFieldMessages.contractEndTypeId.required,
@@ -283,6 +300,7 @@ export const supplyPointAllowedFields: ICommodityTypeFields = {
         'contractEndTypeId',
         'timeToContractEnd',
         'timeToContractEndPeriodId',
+        'ownTerminate',
     ],
     [CommodityType.GAS]: [
         'id',
@@ -297,6 +315,7 @@ export const supplyPointAllowedFields: ICommodityTypeFields = {
         'contractEndTypeId',
         'timeToContractEnd',
         'timeToContractEndPeriodId',
+        'ownTerminate',
     ],
 };
 

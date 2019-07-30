@@ -1,9 +1,12 @@
-import { ISupplyPointFindData } from 'src/common/graphql/models/supply.model';
+import {
+    CommodityType,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
 
-export const supplyPointConfigPower: ISupplyPointFindData = {
+export const supplyPointConfigPower: ISupplyPoint = {
     'id': '72',
     'name': 'Vilka',
-    'commodityType': 'POWER',
+    'commodityType': CommodityType.GAS,
     'supplier': {
         'id': '6049',
         'name': 'Test Agata',
@@ -26,6 +29,7 @@ export const supplyPointConfigPower: ISupplyPointFindData = {
         'description': 'C01d',
         'help': 'C01d',
     },
+    contract: null,
     'circuitBreaker': {
         'type': 'JISTIC',
         'code': '<= 1x25A',
@@ -43,18 +47,30 @@ export const supplyPointConfigPower: ISupplyPointFindData = {
     },
     'lastAnnualConsumptionNT': 1.25,
     'lastAnnualConsumptionVT': 1.35,
+    'allowedOperations': null,
+    'progressStatus': null,
+    'phases': null,
+    'lastVersionOfSupplyPoint': false,
+    'contractEndType': null,
+    'timeToContractEnd': null,
+    'timeToContractEndPeriod': null,
 };
 
-export const supplyPointConfigGas: ISupplyPointFindData = {
+export const supplyPointConfigGas: ISupplyPoint = {
     'id': '77',
     'name': 'Můj byt',
-    'commodityType': 'GAS',
+    'commodityType': CommodityType.GAS,
     'supplier': {
         'id': '6049',
         'name': 'Test Agata',
         'vatNumber': '5348641',
         'logoPath': '',
         'sampleDocuments': [],
+    },
+    contract: {
+        offerValidity: true,
+        deliveryTo: '2021-08-01',
+        deliveryFrom: '2020-08-01',
     },
     'ean': '27zg700z0069625e',
     'address': {
@@ -78,4 +94,11 @@ export const supplyPointConfigGas: ISupplyPointFindData = {
     },
     'lastAnnualConsumptionNT': null,
     'lastAnnualConsumptionVT': 1.35,
+    'allowedOperations': null,
+    'progressStatus': null,
+    'phases': null,
+    'lastVersionOfSupplyPoint': false,
+    'contractEndType': null,
+    'timeToContractEnd': null,
+    'timeToContractEndPeriod': null,
 };

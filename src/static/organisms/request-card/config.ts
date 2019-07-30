@@ -67,6 +67,7 @@ export const supplyPointConfig2: ISupplyPoint = {
         contractStatus: null,
         deliveryFrom: null,
         deliveryTo: null,
+        offerValidity: true,
         offer: {
             id: 0,
             supplier: null,

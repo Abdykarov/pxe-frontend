@@ -14,7 +14,10 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { CONSTS } from 'src/app/app.constants';
-import { CustomValidators } from 'src/common/utils';
+import {
+    convertDateToSendFormatFnc,
+    CustomValidators,
+} from 'src/common/utils';
 import { depositPaymentType } from './personal-info-form.config';
 import {
     IPersonalData,
@@ -97,7 +100,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             }
             ico = this.formValues.ico;
             dic = this.formValues.dic;
-            onlyAddress1 = !this.formValues.address2;
+            onlyAddress1 = this.formValues.address2;
             bankAccountNumber = this.formValues.bankAccountNumber;
             bankCode = this.formValues.bankCode;
             phone = this.formValues.phone && this.formValues.phone.substr(4, 10);
@@ -112,7 +115,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         this.form.controls['birthDate'].setValue(birthDate);
         this.form.controls['ico'].setValue(ico);
         this.form.controls['dic'].setValue(dic);
-        this.form.controls['onlyAddress1'].setValue(!onlyAddress1);
+        this.form.controls['onlyAddress1'].setValue(onlyAddress1);
         this.form.controls['bankAccountNumber'].setValue(bankAccountNumber);
         this.form.controls['bankCode'].setValue(bankCode);
         this.form.controls['phone'].setValue(phone);
@@ -120,7 +123,9 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         this.form.controls['depositPaymentTypeId'].setValue(depositPaymentTypeId);
         this.form.controls['deposit'].setValue(deposit);
         this.form.controls['address1'].setValue(address1);
-        this.form.controls['address2'].setValue(address2);
+        if (this.form.controls['onlyAddress1'].value) {
+            this.form.controls['address2'].setValue(address2);
+        }
 
         this.resetFormError(false);
     }
@@ -156,7 +161,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
                 deposit: parseFloat(String(this.form.value.deposit).replace(',', '.')),
             };
             if (form.birthDate) {
-                form.birthDate = this.form.value.birthDate.toISOString().split('T')[0];
+                form.birthDate = convertDateToSendFormatFnc(this.form.value.birthDate);
             }
             delete form.phonePrefix;
             delete form.onlyAddress1;

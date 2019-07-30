@@ -11,7 +11,7 @@
         *ngIf="showButtonLabel">
         <lnd-button
             label="{{buttonLabel}}"
-            (action)="bannerAction(data.linkValue, data.linkType)"
+            (action)="data.linkValue ? bannerAction(data.linkValue, data.linkType, data.linkData) : customBannerAction.emit($event)"
             type="white">
         </lnd-button>
     </div>

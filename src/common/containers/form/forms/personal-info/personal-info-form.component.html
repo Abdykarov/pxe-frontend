@@ -23,15 +23,6 @@
     {{ item.city }}&nbsp;{{ item.postCode }}
 </ng-template>
 
-<lnd-alert
-    *ngIf="globalError.length"
-    type="danger">
-    <ng-container *ngFor="let error of globalError">
-        {{ error }}<br>
-    </ng-container>
-</lnd-alert>
-
-
 <div class="row mb-5">
     <div class="col-12 text-center">
         {{isIndividual ? 'Osobní informace' : 'Firemní informace'}}

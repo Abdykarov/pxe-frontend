@@ -7,11 +7,18 @@ schema {
 
 type Address {
     city: String!
-    descriptiveNumber: String
-    orientationNumber: String!
+    descriptiveNumber: String!
+    orientationNumber: String
     postCode: String!
     region: String!
     street: String!
+}
+
+type BankAccount {
+    accountNumber: String!
+    accountPrefix: String
+    bankCode: String!
+    iban: String
 }
 
 type CodelistItem {
@@ -32,11 +39,16 @@ type Contract {
     deliveryFrom: Date
     deliveryTo: Date
     offer: SelectedOffer
+    offerValidity: Boolean!
     personalData: PersonalData
 }
 
 type ContractTerms {
     content: String
+}
+
+type Currency {
+    currencyCode: String!
 }
 
 type LoginResponse {
@@ -53,6 +65,7 @@ type Mutation {
     deleteContract(contractId: ID!): Boolean
     deleteOffer(offerId: ID!): Int
     deletePersonalData(contractId: ID!): Boolean
+    deleteSelectedOfferFromContract(contractId: ID!): Boolean
     deleteSignedContract(contractId: ID!, smsConfirmationCode: String!): Boolean
     makeRegistration(email: String!, preregistration: Boolean = false, termsOfConditionsApproved: Boolean!): Boolean
     resetPassword(email: String!): PasswordDestination
@@ -90,9 +103,19 @@ type Offer {
     priceVT: Float
     status: OfferStatus!
     subject: CodelistItem!
-    supplier: Supplier!
+    supplier: Supplier
     validFrom: Date!
     validTo: Date!
+}
+
+type Payment {
+    accountNumber: BankAccount!
+    amount: Float!
+    currency: Currency!
+    dueDate: Date!
+    encodedQrCode: String!
+    msg: String!
+    variableSymbol: VariableSymbol!
 }
 
 type PersonalData {
@@ -100,6 +123,7 @@ type PersonalData {
     address2: Address
     bankAccountNumber: String!
     bankCode: String!
+    birthDate: Date!
     deposit: Float!
     depositPaymentType: CodelistItem!
     dic: String
@@ -107,7 +131,6 @@ type PersonalData {
     ico: String
     name: String!
     phone: String!
-    birthDate: String
 }
 
 "The Root Query for the application"
@@ -122,6 +145,7 @@ type Query {
     getCodelistByType(locale: String, type: String!): [CodelistItem]!
     getContract(ean: String, status: String, supplyPointId: ID): Contract
     getContractTerms(contractId: ID!): ContractTerms
+    getPaymentInfo(contractId: ID!, setting: QRCodeSetting!): Payment
     getPersonalData(contractId: ID!): PersonalData
     getSupplyPoint(supplyPointId: ID!): SupplyPoint
 }
@@ -192,13 +216,16 @@ type SupplyPointOffer {
     priceGas: Float
     priceNT: Float
     priceVT: Float
-    supplier: Supplier!
+    supplier: Supplier
     validFrom: Date!
     validTo: Date!
 }
 
+type VariableSymbol {
+    value: String!
+}
+
 enum AllowedOperations {
-    DELETE
     LEAVE_CONTRACT
     PARTIAL_EDIT
     SHOW_DELIVERY_TO
@@ -243,8 +270,8 @@ enum ProgressStatus {
 
 input AddressInput {
     city: String!
-    descriptiveNumber: String
-    orientationNumber: String!
+    descriptiveNumber: String!
+    orientationNumber: String
     postCode: String!
     region: String!
     street: String!
@@ -283,6 +310,7 @@ input PersonalDataInput {
     address2: AddressInput
     bankAccountNumber: String!
     bankCode: String!
+    birthDate: Date
     deposit: Float!
     depositPaymentTypeId: String!
     dic: String
@@ -290,6 +318,14 @@ input PersonalDataInput {
     ico: String
     name: String!
     phone: String!
+}
+
+input QRCodeSetting {
+    backgroundColor: String
+    foregroundColor: String
+    height: Int
+    margin: Int
+    width: Int
 }
 
 input SupplyPointInput {

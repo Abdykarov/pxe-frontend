@@ -65,6 +65,20 @@ export interface ISupplierSampleDocument {
     url: string;
 }
 
+export interface ISupplyPointInput {
+    address: IAddress;
+    contractEndTypeId: string;
+    expirationDate?: string;
+    name: string;
+    gasAttributes?: ISupplyPointGasAttributes;
+    powerAttributes?: ISupplyPointPowerAttributes;
+    subjectTypeId: string;
+    supplierId: number;
+    timeToContractEnd?: number;
+    timeToContractEndPeriodId?: String;
+    ownTerminate?: boolean;
+}
+
 export interface ISupplyPointGasAttributes {
     eic: string;
     annualConsumption: number;
@@ -139,24 +153,6 @@ export interface ISelectedOffer {
     priceGas?: number;
     mountlyPaymentPrice?: number;
     __typename?: string;
-}
-
-
-export interface ISupplyPointFindData {
-    id: string;
-    commodityType: string;
-    name: string;
-    supplier: ISupplier;
-    ean: string;
-    address: IAddress;
-    distributionRate?: ICodelistItem;
-    circuitBreaker?: ICodelistItem;
-    annualConsumptionNT?: number;
-    annualConsumptionVT?: number;
-    expirationDate?: string;
-    subject?: ICodelistItem;
-    lastAnnualConsumptionNT?: number;
-    lastAnnualConsumptionVT?: number;
 }
 
 export interface ISupplyPointFormData {

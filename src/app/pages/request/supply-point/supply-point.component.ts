@@ -13,9 +13,11 @@ import { isPlatformBrowser } from '@angular/common';
 
 import * as R from 'ramda';
 import {
+    concatMap,
     map,
     takeUntil,
 } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -26,6 +28,7 @@ import {
     ISupplyPointPowerAttributes,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
+import { ContractService } from 'src/common/graphql/services/contract.service';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { getConfigStepper } from 'src/common/utils';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
@@ -42,18 +45,21 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./supply-point.component.scss'],
 })
 export class SupplyPointComponent extends AbstractComponent implements OnInit {
+    public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.SUPPLY_POINT;
+
+    public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
+    public fieldError: IFieldError = {};
     public formFields = formFields;
+    public formLoading = false;
     public formSent = false;
     public globalError: string[] = [];
-    public fieldError: IFieldError = {};
-    public formLoading = false;
+    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public supplyPointData = null;
-    public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
-
-    public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(ProgressStatus.SUPPLY_POINT);
+    public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
     constructor(
         private cd: ChangeDetectorRef,
+        private contractService: ContractService,
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
@@ -63,9 +69,40 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (isPlatformBrowser(this.platformId)) {
-            this.supplyPointData = window.history.state.supplyPointCopy;
-            this.editMode = SUPPLY_POINT_EDIT_TYPE.PROLONG;
+        if (this.supplyPointId) {
+            let supplyPointFound: ISupplyPoint = null;
+            this.supplyService.getSupplyPoint(this.supplyPointId)
+                .pipe(
+                    map(({data}) => data.getSupplyPoint),
+                    concatMap((supplyPoint: ISupplyPoint) => {
+                        supplyPointFound = supplyPoint;
+                        return R.path(['contract', 'contractId'])(supplyPoint) ?
+                            this.contractService.deleteSelectedOfferFromContract(supplyPoint.contract.contractId) :
+                            of({});
+                    }),
+                    takeUntil(this.destroy$),
+                ).subscribe(
+                    () => {
+                        this.supplyPointData = supplyPointFound;
+                        this.cd.markForCheck();
+                    },
+                    (error) => {
+                        this.supplyPointData = {};
+                        const { globalError } = parseGraphQLErrors(error);
+                        this.globalError = globalError;
+                        this.cd.markForCheck();
+                    },
+                );
+        } else {
+            if (isPlatformBrowser(this.platformId)) {
+                const supplyPointCopy = window.history.state.supplyPointCopy;
+                if (supplyPointCopy) {
+                    this.supplyPointData = supplyPointCopy;
+                    this.editMode = SUPPLY_POINT_EDIT_TYPE.PROLONG;
+                } else {
+                    this.supplyPointData = {};
+                }
+            }
         }
     }
 

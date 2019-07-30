@@ -91,12 +91,6 @@ export class SupplyService {
                 supplyPoint,
                 powerAttributes,
             },
-            refetchQueries: [{
-                query: findSupplyPointsQuery,
-                variables: {
-                    ean: null,
-                },
-            }],
         })
 
     public createGasSupplyPoint = (supplyPoint: ISupplyPoint, gasAttributes: ISupplyPointGasAttributes) => this.apollo
@@ -106,12 +100,6 @@ export class SupplyService {
                 supplyPoint,
                 gasAttributes,
             },
-            refetchQueries:  [{
-                query: findSupplyPointsQuery,
-                variables: {
-                    ean: null,
-                },
-            }],
         })
 
     public updatePowerSupplyPoint = (
@@ -126,12 +114,6 @@ export class SupplyService {
                 supplyPoint,
                 powerAttributes,
             },
-            refetchQueries: [{
-                query: findSupplyPointsQuery,
-                variables: {
-                    ean: null,
-                },
-            }],
         })
 
     public updateGasSupplyPoint = (
@@ -146,12 +128,6 @@ export class SupplyService {
                 supplyPoint,
                 gasAttributes,
             },
-            refetchQueries:  [{
-                query: findSupplyPointsQuery,
-                variables: {
-                    ean: null,
-                },
-            }],
         })
 
     public updatePowerSupplyPointWithContract = (
@@ -166,12 +142,6 @@ export class SupplyService {
                 supplyPointUpdate,
                 attributes,
             },
-            refetchQueries: [{
-                query: findSupplyPointsQuery,
-                variables: {
-                    ean: null,
-                },
-            }],
         })
 
     public updateGasSupplyPointWithContract = (
@@ -186,16 +156,11 @@ export class SupplyService {
                 supplyPointUpdate,
                 attributes,
             },
-            refetchQueries: [{
-                query: findSupplyPointsQuery,
-                variables: {
-                    ean: null,
-                },
-            }],
         })
 
     public getSupplyPoint = (supplyPointId: string) => this.apollo
         .watchQuery<any>({
+            fetchPolicy: 'network-only',
             query: getSupplyPointQuery,
             variables: {
                 supplyPointId,

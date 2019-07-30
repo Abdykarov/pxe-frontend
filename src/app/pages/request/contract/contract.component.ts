@@ -16,17 +16,18 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractService } from 'src/common/graphql/services/contract.service';
-import { getConfigStepper } from 'src/common/utils';
+import {
+    getConfigStepper,
+    parseGraphQLErrors,
+    scrollToElementFnc,
+} from 'src/common/utils';
 import { graphQLMessages } from 'src/common/constants/errors.constant';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
-import {
-    parseGraphQLErrors,
-    scrollToElementFnc,
-} from 'src/common/utils';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
@@ -36,7 +37,10 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./contract.component.scss'],
 })
 export class ContractComponent extends AbstractComponent implements OnInit {
-    public configStepper = getConfigStepper(ProgressStatus.READY_FOR_SIGN);
+    public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.READY_FOR_SIGN;
+    public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.PERSONAL_DATA;
+
+    public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public contractTemplate;
     public showOffer = true;
     public fieldError: IFieldError = {};
@@ -49,6 +53,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     constructor(
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
+        public navigateRequestService: NavigateRequestService,
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
@@ -56,21 +61,18 @@ export class ContractComponent extends AbstractComponent implements OnInit {
         super();
     }
 
-    public toggleOffer = () => {
-        this.showOffer = !this.showOffer;
-    }
-
     ngOnInit () {
         super.ngOnInit();
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
-                takeUntil(this.destroy$),
                 map(({data}) => data.getSupplyPoint),
                 switchMap( (supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
+                    this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
                     return this.contractService.getContractTerms(supplyPoint.contract.contractId);
                 }),
                 map(({data}) => data.getContractTerms.content),
+                takeUntil(this.destroy$),
             )
             .subscribe(
                 (content: string) => {
@@ -83,6 +85,15 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                     this.cd.markForCheck();
                 },
             );
+    }
+
+    public toggleOffer = () => {
+        this.showOffer = !this.showOffer;
+    }
+
+    public chooseNewOfferAction = (evt) => {
+        evt.preventDefault();
+        this.navigateRequestService.routerToRequestStep(this.supplyPoint, ProgressStatus.OFFER_STEP);
     }
 
     public signContract(smsCode: string) {
