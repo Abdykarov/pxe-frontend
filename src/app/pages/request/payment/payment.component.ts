@@ -1,5 +1,12 @@
-import { ActivatedRoute, Router } from '@angular/router';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
+import {
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+} from '@angular/core';
 
 import * as R from 'ramda';
 import {
