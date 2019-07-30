@@ -99,7 +99,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                     this.setTextBannerByContractEndType();
                     this.checkOfferSelectionConstraint$.subscribe(() => {
                         this.onlyOffersFromActualSupplier = this.validityService.validateOffer(this.supplyPoint);
-                        if (!this.onlyOffersFromActualSupplier) {
+                        if (this.onlyOffersFromActualSupplier) {
                             this.filterOffersOnlyActualSupplier();
                         }
                         this.cd.markForCheck();

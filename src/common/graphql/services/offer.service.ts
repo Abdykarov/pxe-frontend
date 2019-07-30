@@ -41,6 +41,7 @@ export class OfferService {
     public findSupplyPointOffers(ean: string) {
         return this.apollo
             .watchQuery<any>({
+                fetchPolicy: 'network-only',
                 query: findSupplyPointOffersQuery,
                 variables: {
                     ean,
