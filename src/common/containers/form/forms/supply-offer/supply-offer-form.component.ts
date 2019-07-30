@@ -247,12 +247,12 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
                 )(this.form.value.benefits),
             };
             if (!R.isNil(form.validFromTo)) {
-                form.validFrom = convertDateToSendFormatFnc(form.validFromTo);
+                form.validFrom = convertDateToSendFormatFnc(form.validFromTo[0]);
                 form.validTo = convertDateToSendFormatFnc(form.validFromTo[1]);
             }
             if (!R.isNil(form.deliveryFromTo)) {
-                form.deliveryFrom = convertDateToSendFormatFnc(form.deliveryFromTo);
-                form.deliveryTo = convertDateToSendFormatFnc(form.deliveryFromTo);
+                form.deliveryFrom = convertDateToSendFormatFnc(form.deliveryFromTo[0]);
+                form.deliveryTo = convertDateToSendFormatFnc(form.deliveryFromTo[1]);
             }
             if (!R.isNil(form.priceNT)) {
                 form.priceNT = parseFloat(form.priceNT.replace(',', '.'));
