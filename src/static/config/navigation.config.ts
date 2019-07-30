@@ -107,6 +107,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/modals',
                 },
                 {
+                    'label': 'News',
+                    'url': '/basic/news',
+                },
+                {
                     'label': 'Progress bar',
                     'url': '/basic/progress',
                 },
