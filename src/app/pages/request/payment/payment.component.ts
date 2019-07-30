@@ -32,9 +32,9 @@ import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 
 @Component({
     selector: 'pxe-contract',
