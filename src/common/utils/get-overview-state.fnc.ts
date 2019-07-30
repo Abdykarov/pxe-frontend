@@ -8,7 +8,7 @@ import {
 } from 'src/app/pages/requests-overview/requests-overview.model';
 
 export const hasAnyRequest = (supplyPoints: ISupplyPoint[]): boolean =>
-    R.find((supplyPoint: ISupplyPoint) => (this.isSupplyPointInRequestState(supplyPoint)), supplyPoints);
+    R.find((supplyPoint: ISupplyPoint) => (isSupplyPointInRequestState(supplyPoint)), supplyPoints);
 
 export const isSupplyPointInRequestState = (supplyPoint: ISupplyPoint): boolean =>
     supplyPoint.contract === null || supplyPoint.contract.contractStatus === ContractStatus.NOT_CONCLUDED;
@@ -34,10 +34,10 @@ export const getOverviewState = (supplyPointsInput: ISupplyPoint[]): OverviewSta
             }),
         ],
         [
-            this.hasAnyRequest,
+            hasAnyRequest,
             (supplyPoints: ISupplyPoint[]) => ({
                 overviewState: OverviewState.REQUESTS,
-                supplyPoints: R.filter((supplyPoint: ISupplyPoint) => this.isSupplyPointInRequestState(supplyPoint), supplyPoints),
+                supplyPoints: R.filter((supplyPoint: ISupplyPoint) => isSupplyPointInRequestState(supplyPoint), supplyPoints),
             }),
         ],
         [

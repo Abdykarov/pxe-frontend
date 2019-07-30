@@ -1,20 +1,28 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+} from '@angular/core';
+import { Router } from '@angular/router';
+
+import * as R from 'ramda';
+import {
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
-    CommodityType,
+    AllowedOperations,
     ISupplyPoint,
-    ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
-import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { ContractStatus } from 'src/common/graphql/models/contract';
-import { map, takeUntil } from 'rxjs/operators';
-import { parseGraphQLErrors } from 'src/common/utils';
-import { OverviewState, OverviewStateWrapper } from 'src/app/pages/requests-overview/requests-overview.model';
-import { Router } from '@angular/router';
-import { NavigateRequestService } from 'src/app/services/navigate-request.service';
-import { ROUTES } from 'src/app/app.constants';
 import { getOverviewState } from 'src/common/utils/get-overview-state.fnc';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
+import { OverviewState } from 'src/app/pages/requests-overview/requests-overview.model';
+import { parseGraphQLErrors } from 'src/common/utils';
+import { ROUTES } from 'src/app/app.constants';
+import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
     selector: 'pxe-dashboard',
@@ -34,7 +42,7 @@ export class DashboardComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
     public state: OverviewState;
 
-    public loadingForm = true;
+    public loadingData = true;
     public overviewStates = OverviewState;
 
     public electricityPlacesCount = 2;
@@ -42,37 +50,39 @@ export class DashboardComponent extends AbstractComponent implements OnInit {
     public gasPlacesCount = 3;
     public gasSumOfPerformance = 4.784;
     public supplyPoints: ISupplyPoint[];
+    public supplyPointsEnding: ISupplyPoint[] = [];
 
-    public supplyPointsEnding: ISupplyPoint[] = [{
-        id: '5456',
-        name: 'Byt praha',
-        allowedOperations: [],
-        commodityType: CommodityType.POWER,
-        supplier: {
-            id: '',
-            name: 'PRE',
-            vatNumber: '',
-            logoPath: '',
-            sampleDocuments: [],
-        },
-        ean: '',
-        address: null,
-        distributionRate: null,
-        circuitBreaker: null,
-        phases: null,
-        annualConsumptionNT: 0,
-        annualConsumptionVT: 0,
-        expirationDate: '0',
-        subject: null,
-        lastAnnualConsumptionNT: 0,
-        lastAnnualConsumptionVT: 0,
-        lastVersionOfSupplyPoint: false,
-        contractEndType: null,
-        timeToContractEnd: 0,
-        timeToContractEndPeriod: null,
-        contract: null,
-        progressStatus: ProgressStatus.SUPPLY_POINT,
-    }];
+    // public supplyPointsEnding: ISupplyPoint[] = [];
+    // [{
+    //     id: '5456',
+    //     name: 'Byt praha',
+    //     allowedOperations: [],
+    //     commodityType: CommodityType.POWER,
+    //     supplier: {
+    //         id: '',
+    //         name: 'PRE',
+    //         vatNumber: '',
+    //         logoPath: '',
+    //         sampleDocuments: [],
+    //     },
+    //     ean: '',
+    //     address: null,
+    //     distributionRate: null,
+    //     circuitBreaker: null,
+    //     phases: null,
+    //     annualConsumptionNT: 0,
+    //     annualConsumptionVT: 0,
+    //     expirationDate: '0',
+    //     subject: null,
+    //     lastAnnualConsumptionNT: 0,
+    //     lastAnnualConsumptionVT: 0,
+    //     lastVersionOfSupplyPoint: false,
+    //     contractEndType: null,
+    //     timeToContractEnd: 0,
+    //     timeToContractEndPeriod: null,
+    //     contract: null,
+    //     progressStatus: ProgressStatus.SUPPLY_POINT,
+    // }];
 
     ngOnInit() {
         this.supplyService.findSupplyPointsByContractStatus(null,
@@ -86,7 +96,11 @@ export class DashboardComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 (supplyPointsSource: ISupplyPoint[]) => {
+                    this.supplyPointsEnding = R.filter((supplyPoint: ISupplyPoint) =>
+                        supplyPoint.allowedOperations === AllowedOperations.SHOW_DELIVERY_TO,
+                    )(R.clone(supplyPointsSource));
                     const { overviewState, supplyPoints } = getOverviewState(supplyPointsSource);
+                    this.loadingData = false;
                     this.supplyPoints = supplyPoints;
                     this.state = overviewState;
                     this.cd.markForCheck();
@@ -112,6 +126,22 @@ export class DashboardComponent extends AbstractComponent implements OnInit {
     }
 
     public createSupplyPointAction = () =>  {
-        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
+        const queryParams = R.cond([
+            [
+                (supplyPoints: ISupplyPoint[]) => supplyPoints.length === 1,
+                (supplyPoints: ISupplyPoint[]) =>
+                    ({
+                            supplyPointId: supplyPoints[0].id,
+                    }),
+            ],
+            [R.T, () => ({})],
+        ])(this.supplyPoints);
+
+        this.router.navigate(
+            [ROUTES.ROUTER_REQUEST_SUPPLY_POINT],
+            {
+                queryParams,
+            },
+        );
     }
 }
