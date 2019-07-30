@@ -6,15 +6,11 @@ import {
 
 import { map } from 'rxjs/operators';
 
-import { IResponseDataDocument } from 'src/app/services/model/document.model';
+import {
+    IDocumentType,
+    IResponseDataDocument,
+} from 'src/app/services/model/document.model';
 import { environment } from 'src/environments/environment';
-
-export enum IDocumentType {
-    INFORMATION = 'INFORMATION',
-    DENUNCIATION = 'DENUNCIATION',
-    WITHDRAWAL = 'WITHDRAWAL',
-    CONTRACT = 'CONTRACT',
-}
 
 @Injectable({
     providedIn: 'root',

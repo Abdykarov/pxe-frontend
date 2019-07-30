@@ -26,14 +26,14 @@ import {
     IPayment,
 } from 'src/common/graphql/models/contract';
 import {
-    DocumentService,
-    IDocumentType,
-} from 'src/app/services/document.service';
-import {
     getConfigStepper,
     parseGraphQLErrors,
 } from 'src/common/utils';
-import { IResponseDataDocument } from 'src/app/services/model/document.model';
+import { DocumentService } from 'src/app/services/document.service';
+import {
+    IDocumentType,
+    IResponseDataDocument,
+} from 'src/app/services/model/document.model';
 import {
     ISupplyPoint,
     ProgressStatus,
