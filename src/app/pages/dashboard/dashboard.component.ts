@@ -1,7 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
-import * as R from 'ramda';
-
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CommodityType,
@@ -16,6 +14,7 @@ import { OverviewState, OverviewStateWrapper } from 'src/app/pages/requests-over
 import { Router } from '@angular/router';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { ROUTES } from 'src/app/app.constants';
+import { getOverviewState } from 'src/common/utils/get-overview-state.fnc';
 
 @Component({
     selector: 'pxe-dashboard',
@@ -86,53 +85,18 @@ export class DashboardComponent extends AbstractComponent implements OnInit {
                 map(({data}) =>  data.findSupplyPointsByContractStatus),
             )
             .subscribe(
-                (supplyPoints: ISupplyPoint[]) => {
-                    this.setOverviewState(supplyPoints);
-                    console.log(this.state);
-                    console.log('123');
+                (supplyPointsSource: ISupplyPoint[]) => {
+                    const { overviewState, supplyPoints } = getOverviewState(supplyPointsSource);
+                    this.supplyPoints = supplyPoints;
+                    this.state = overviewState;
                     this.cd.markForCheck();
                 },
                 error => {
-                    console.log('2');
                     const { globalError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.cd.markForCheck();
                 },
             );
-    }
-
-    public hasAnyRequest = (supplyPoints: ISupplyPoint[]): boolean =>
-        R.find((supplyPoint: ISupplyPoint) => (this.isSupplyPointInRequestState(supplyPoint)), supplyPoints)
-
-    public isSupplyPointInRequestState = (supplyPoint: ISupplyPoint): boolean =>
-        supplyPoint.contract === null || supplyPoint.contract.contractStatus === ContractStatus.NOT_CONCLUDED
-
-    public setOverviewState = (supplyPointsInput: ISupplyPoint[]): void => {
-        const overviewStateWrapper: OverviewStateWrapper = R.cond([
-            [
-                R.isEmpty,
-                () => ({
-                    overviewState: OverviewState.NO_REQUEST,
-                    supplyPoints: [],
-                }),
-            ],
-            [
-                this.hasAnyRequest,
-                (supplyPoints: ISupplyPoint[]) => ({
-                    overviewState: OverviewState.REQUESTS,
-                    supplyPoints: R.filter((supplyPoint: ISupplyPoint) => this.isSupplyPointInRequestState(supplyPoint), supplyPoints),
-                }),
-            ],
-            [
-                R.T,
-                () => ({
-                    overviewState: OverviewState.NO_REQUEST_WITH_VALID_CONTRACT,
-                }),
-            ],
-        ])(supplyPointsInput);
-
-        this.state = overviewStateWrapper.overviewState;
-        this.supplyPoints = overviewStateWrapper.supplyPoints;
     }
 
     public routerToListOfSupplyPointsAction = () => {
