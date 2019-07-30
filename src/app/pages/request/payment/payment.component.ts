@@ -34,6 +34,7 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 
 @Component({
     selector: 'pxe-contract',
@@ -56,6 +57,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
+        public navigateRequestService: NavigateRequestService,
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
@@ -74,6 +76,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                 map(({data}) => data.getSupplyPoint),
                 switchMap((supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
+                    this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.WAITING_FOR_PAYMENT);
                     const isContractFinalized = this.supplyPoint.contract &&
                         R.indexOf(this.supplyPoint.contract.contractStatus, [ContractStatus.CONCLUDED, ContractStatus.CANCELED]) >= 0;
                     if (isContractFinalized) {
