@@ -29,6 +29,7 @@ export class RecapitulationPageComponent {
         onlyAddress1: new FormControl(),
         depositPaymentTypeId: new FormControl(),
         deposit: new FormControl(),
+        birthDate: new FormControl(),
     });
 
     submitForm = (evt) => {
