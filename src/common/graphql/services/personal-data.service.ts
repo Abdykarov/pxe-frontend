@@ -99,6 +99,7 @@ export class PersonalDataService {
         supplyPoint.progressStatus = ProgressStatus.READY_FOR_SIGN;
         supplyPoint.contract.personalData = {
             name: personalData.name,
+            birthDate: personalData.birthDate ? personalData.birthDate : '',
             ico: personalData.ico ? personalData.ico : '',
             dic: personalData.dic ? personalData.dic : '',
             address1: personalData.address1,
