@@ -22,23 +22,20 @@ export class DocumentService {
     ) {}
 
     public getDocument = (contractId: string, documentType: IDocumentType) => {
-        return this.http.get<any>(
-            `${environment.url_api}/v1.0/documents/${contractId}/${documentType}`,
-            {
-                observe: 'response',
-                responseType: 'blob',
-            })
-            .pipe(
-                map((response: HttpResponse<any>): IResponseDataDocument => {
-                    const headers = response.headers.get('content-disposition');
-                    const filename = headers.split(';')[1].split('filename')[1]
-                        .split('=')[1].trim().replace(new RegExp('"', 'g'), '');
+        return this.http.get(`${environment.url_api}/v1.0/documents/${contractId}/${documentType}`, {
+            responseType: 'blob',
+            observe: 'response',
+        }).pipe(
+            map((response: HttpResponse<any>): IResponseDataDocument => {
+                const headers = response.headers.get('content-disposition');
+                const filename = headers.split(';')[1].split('filename')[1]
+                    .split('=')[1].trim().replace(new RegExp('"', 'g'), '');
 
-                    return {
-                        file: response.body,
-                        filename,
-                    };
-                }),
-            );
+                return {
+                    file: response.body,
+                    filename,
+                };
+            }),
+        );
     }
 }

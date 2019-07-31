@@ -15,7 +15,6 @@ import {
     takeUntil,
 } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { saveAs } from 'file-saver';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
@@ -85,7 +84,8 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
     }
 
     public download() {
-        saveAs(this.data.file, this.data.filename);
+        const fileURL = URL.createObjectURL(this.data.file);
+        window.open(fileURL);
     }
 
     public getSupplyPointWithPayment = (id) => {
