@@ -213,6 +213,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Recapitulation',
                     'url': '/basic/recapitulation',
                 },
+                {
+                    'label': 'User profile',
+                    'url': '/basic/user-profile',
+                },
                 // {
                 //     'label': 'Error',
                 //     'url': '/error-404',
@@ -221,7 +225,7 @@ export const staticNavigationConfig: INavigationConfig = [
         },
         {
             'id': 'profile',
-            'label': 'Profil uživatele',
+            'label': 'Nastavení uživatelského účtu',
             'icon': 'user',
             'class': 'navigation-main__item--second',
         },

@@ -32,7 +32,6 @@ export const CONSTS = {
         OFFER_SELECTION : 'offer-selection',
         PAYMENT : 'payment',
         POWER: 'power',
-        PROFILE: 'profile',
         RECAPITULATION : 'recapitulation',
         REQUEST : 'request',
         REQUESTS : 'requests',
@@ -45,8 +44,10 @@ export const CONSTS = {
         SUPPLY_POINTS : 'supply-points',
         SUPPLY_OFFER: 'supply-offer',
         TERMS_OF_USE : 'terms-of-use',
+        USER_PROFILE: 'user-profile',
         WILD_CART  : '**',
     },
+    MAX_LENGTH_NAME: 120,
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
     TIME_TO_CONTRACT_END_PROLONGED: 14,
@@ -71,6 +72,7 @@ export const ROUTES = {
     ROUTER_SUPPLY_OFFER_POWER: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_OFFER}/${CONSTS.PATHS.POWER}`,
     ROUTER_SUPPLY_OFFER_GAS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_OFFER}/${CONSTS.PATHS.GAS}`,
     ROUTER_TERMS_OF_USE: `/${CONSTS.PATHS.TERMS_OF_USE}`,
+    ROUTER_USER_PROFILE: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.USER_PROFILE}`,
 };
 
 export const CODE_LIST = {

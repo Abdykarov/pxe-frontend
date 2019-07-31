@@ -139,6 +139,10 @@ import {
     TypographyPageModule,
     typographyPageRoutes,
 } from 'src/static/atoms/typography/page.module';
+import {
+    UserProfilePageModule,
+    userProfilePageRoutes,
+} from 'src/static/pages/user-profile/page.module';
 
 const routes: Routes = [
     {
@@ -178,6 +182,7 @@ const routes: Routes = [
             ...tablesPageRoutes,
             ...tooltipPageRoutes,
             ...typographyPageRoutes,
+            ...userProfilePageRoutes,
             {
                 path: '**',
                 redirectTo: '',
@@ -222,6 +227,7 @@ const routes: Routes = [
         TablesPageModule,
         TooltipPageModule,
         TypographyPageModule,
+        UserProfilePageModule,
     ],
     exports: [
         RouterModule,

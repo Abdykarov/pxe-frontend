@@ -1,7 +1,8 @@
 <ng-template #profileMenu let-toggle="toggle">
+    <!--pri integraci pozor na username vs firstname-->
     <lnd-button
         (click)="toggle()"
-        [label]="user?.email"
+        [label]="user?.firstname ? user?.firstname : user?.email"
         type="dropdown"
         icon="icon--triangle-down"
         customIconClass="icon--small"

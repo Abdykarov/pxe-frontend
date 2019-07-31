@@ -1,0 +1,37 @@
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { Routes } from '@angular/router';
+
+// own classes
+import { ButtonModule } from 'src/common/ui/button/button.module';
+import { FormModule } from 'src/common/ui/forms/form.module';
+import { UserProfileFormModule } from 'src/common/containers/form/forms/user-profile/user-profile-form.module';
+import { UserProfilePageComponent } from 'src/static/pages/user-profile/page';
+import { FieldWrapperModule } from 'src/common/ui/forms/field-wrapper/field-wrapper.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+@NgModule({
+    declarations: [
+        UserProfilePageComponent,
+    ],
+    exports: [
+        UserProfilePageComponent,
+    ],
+    imports: [
+        ButtonModule,
+        CommonModule,
+        FieldWrapperModule,
+        FormModule,
+        FormsModule,
+        ReactiveFormsModule,
+        UserProfileFormModule,
+    ],
+})
+export class UserProfilePageModule {}
+
+export const userProfilePageRoutes: Routes = [
+    {
+        path: 'user-profile',
+        component: UserProfilePageComponent,
+    },
+];

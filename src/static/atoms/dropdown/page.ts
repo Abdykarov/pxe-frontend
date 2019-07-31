@@ -23,7 +23,7 @@ export class DropdownPageComponent {
     constructor() {
         this.navigationItems = [];
         const item1: INavigationItem =  {
-            label: 'Profil uživatele',
+            label: 'Nastavení uživatelského účtu',
             icon: 'user',
             url: '/basic/dropdown',
         };

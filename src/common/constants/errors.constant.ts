@@ -107,6 +107,9 @@ export const errorFieldMessages =  {
     fullName: {
         requiredPerson: 'Vyplňte své jméno a příjmení.',
         requiredCompany: 'Vyplňte název společnosti.',
+        // todo monika
+        maxlength: 'Maximální délka pro jméno a příjmení je 120 znaků.',
+        pattern: 'Jméno může obsahovat pouze znaky a pomlčku.',
     },
     ico: {
         required: 'Vyplňte své IČO.',
