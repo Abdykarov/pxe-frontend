@@ -8,6 +8,7 @@ import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
+    ADULTHOOD_AGE: 18,
     CURRENCY: {
         DEFAULT: 'CZK',
     },
@@ -50,6 +51,7 @@ export const CONSTS = {
     MAX_LENGTH_NAME: 120,
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
+    TELEPHONE_PREFIX_CZ: '+420',
     TIME_TO_CONTRACT_END_PROLONGED: 14,
     REFRESH_INTERVAL_RXJS: 5000,
 };

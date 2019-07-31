@@ -4,6 +4,7 @@ export const getPersonalDataQuery = gql`
     query getPersonalData($contractId: Int!){
         findSupplyPointOffers(contractId: $contractId) {
             name,
+            birthDate,
             ico,
             dic,
             address1 {
