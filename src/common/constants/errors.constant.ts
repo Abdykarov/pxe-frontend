@@ -1,3 +1,5 @@
+import { CONSTS } from 'src/app/app.constants';
+
 export const defaultRestAPIErrorMessage = 'Došlo k chybě. Zkuste to později.';
 
 export const restAPIErrorCodes = {
@@ -47,6 +49,10 @@ export const errorFieldMessages =  {
     bankCode: {
         required: 'Vyplňte kód banky.',
         bankCode: 'Kód banky musí obsahovat 4 číslice.',
+    },
+    birthDate: {
+        required: 'Vyplňte datum narození.',
+        bsDateMaxDate: 'Nesmíte být mladší 18 let.',
     },
     circuitBreakerId: {
         required: 'Vyberte ze seznamu, jakou máte velikost jističe.',
@@ -180,11 +186,11 @@ export const errorFieldMessages =  {
         landLineNumber: 'Pevná linka musí obsahovat 9 číslic.',
     },
     phonePrefix: {
-        required: 'Vyplňte předvolbu pro ČR +420.',
-        invalidPhoneNumberPrefix: 'Vyplňte správnou předvolbu pro ČR +420.',
+        required: `Vyplňte předvolbu pro ČR ${CONSTS.TELEPHONE_PREFIX_CZ}.`,
+        invalidPhoneNumberPrefix: `Vyplňte správnou předvolbu pro ČR ${CONSTS.TELEPHONE_PREFIX_CZ}.`,
     },
     smsCode: {
-        required: 'Vyplňte sms kód.',
+        required: 'Vyplňte kód, který vám přišel v SMS.',
     },
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',

@@ -1,5 +1,6 @@
 import { Validators } from '@angular/forms';
 
+import { CONSTS } from 'src/app/app.constants';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
@@ -8,6 +9,12 @@ import { IOption } from 'src/common/ui/forms/models/option.model';
 export const formFields: IForm = {
     controls: {
         name: [
+            null,
+            [
+                Validators.required,
+            ],
+        ],
+        birthDate: [
             null,
             [
                 Validators.required,
@@ -64,7 +71,7 @@ export const formFields: IForm = {
             ],
         ],
         phonePrefix: [
-            null,
+            CONSTS.TELEPHONE_PREFIX_CZ,
             [
                 Validators.required,
                 CustomValidators.phoneNumberPrefix,
@@ -101,6 +108,11 @@ export const formFields: IForm = {
         },
         nameCompany: {
             required: errorFieldMessages.fullName.requiredCompany,
+        },
+        birthDate: {
+            required: errorFieldMessages.birthDate.required,
+            bsDate: errorFieldMessages.date.format,
+            bsDateMaxDate: errorFieldMessages.birthDate.bsDateMaxDate,
         },
         ico: {
             required: errorFieldMessages.ico.required,
