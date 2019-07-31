@@ -15,7 +15,7 @@ export class ConsumptionIndicatorPipe implements PipeTransform {
     private allNotNil = () => R.all(R_.isNotNil);
 
     private count = (avg: number, last: number) => {
-        return last / (avg / 100) - 100;
+        return avg / (last / 100) - 100;
     }
 
     transform(data: ISupplyPoint, unit: string): number | string {
@@ -45,6 +45,6 @@ export class ConsumptionIndicatorPipe implements PipeTransform {
             return this.count(annualConsumptionNT, lastAnnualConsumptionNT);
         }
 
-        return `${R.sum([lastAnnualConsumptionNT, lastAnnualConsumptionVT])} ${unit}`;
+        return `${R.sum([annualConsumptionNT, annualConsumptionVT])} ${unit}`;
     }
 }
