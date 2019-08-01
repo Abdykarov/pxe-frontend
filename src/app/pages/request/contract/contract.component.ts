@@ -15,6 +15,11 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import {
+    CommodityType,
+    ISupplyPoint,
+    ProgressStatus,
+} from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import {
     getConfigStepper,
@@ -23,10 +28,6 @@ import {
 } from 'src/common/utils';
 import { graphQLMessages } from 'src/common/constants/errors.constant';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import {
-    ISupplyPoint,
-    ProgressStatus,
-} from 'src/common/graphql/models/supply.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -40,8 +41,8 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.READY_FOR_SIGN;
     public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.PERSONAL_DATA;
 
+    public commodityType = CommodityType;
     public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
-    public contractTemplate;
     public showOffer = true;
     public fieldError: IFieldError = {};
     public formLoading = false;
@@ -66,17 +67,12 @@ export class ContractComponent extends AbstractComponent implements OnInit {
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
                 map(({data}) => data.getSupplyPoint),
-                switchMap( (supplyPoint: ISupplyPoint) => {
-                    this.supplyPoint = supplyPoint;
-                    this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
-                    return this.contractService.getContractTerms(supplyPoint.contract.contractId);
-                }),
-                map(({data}) => data.getContractTerms.content),
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                (content: string) => {
-                    this.contractTemplate = content;
+                (supplyPoint: ISupplyPoint) => {
+                    this.supplyPoint = supplyPoint;
+                    this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
                     this.cd.markForCheck();
                 },
                 (error) => {
@@ -85,6 +81,10 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                     this.cd.markForCheck();
                 },
             );
+    }
+
+    public download = (contractId: string, documentType: string) => {
+        console.log('%c ***** download *****', 'background: #bada55; color: #000; font-weight: bold', contractId, documentType);
     }
 
     public toggleOffer = () => {
