@@ -16,12 +16,17 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractService } from 'src/common/graphql/services/contract.service';
+import { DocumentService } from 'src/app/services/document.service';
 import {
     getConfigStepper,
-    parseGraphQLErrors,
+    parseGraphQLErrors, parseRestAPIErrors,
     scrollToElementFnc,
 } from 'src/common/utils';
 import { graphQLMessages } from 'src/common/constants/errors.constant';
+import {
+    IDocumentType,
+    IResponseDataDocument,
+} from 'src/app/services/model/document.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
     ISupplyPoint,
@@ -42,6 +47,8 @@ export class ContractComponent extends AbstractComponent implements OnInit {
 
     public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public contractTemplate;
+    public documentLoading = false;
+    public documentType = IDocumentType;
     public showOffer = true;
     public fieldError: IFieldError = {};
     public formLoading = false;
@@ -50,9 +57,12 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
+    public data: IResponseDataDocument;
+
     constructor(
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
+        private documentService: DocumentService,
         public navigateRequestService: NavigateRequestService,
         private route: ActivatedRoute,
         private router: Router,
@@ -63,6 +73,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
 
     ngOnInit () {
         super.ngOnInit();
+
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
                 map(({data}) => data.getSupplyPoint),
@@ -82,6 +93,25 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                 (error) => {
                     const { globalError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
+                    this.cd.markForCheck();
+                },
+            );
+    }
+
+    public openDocument(contractId: string, documentType: IDocumentType) {
+        this.documentLoading = true;
+        this.documentService.getDocument(contractId, documentType)
+            .subscribe(
+                (responseDataDocument: IResponseDataDocument) => {
+                    this.documentLoading = false;
+                    this.documentService.documentOpen(responseDataDocument);
+                    this.cd.markForCheck();
+                },
+                (error) => {
+                    const message = parseRestAPIErrors(error);
+                    this.documentLoading = false;
+                    this.globalError = [];
+                    this.globalError.push(message);
                     this.cd.markForCheck();
                 },
             );

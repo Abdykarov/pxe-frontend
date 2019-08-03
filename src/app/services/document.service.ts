@@ -1,10 +1,17 @@
-import { Injectable } from '@angular/core';
 import {
     HttpClient,
     HttpResponse,
 } from '@angular/common/http';
+import {
+    Inject,
+    Injectable,
+    PLATFORM_ID,
+} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { saveAs } from 'file-saver';
 
 import {
     IDocumentType,
@@ -19,9 +26,10 @@ export class DocumentService {
 
     constructor(
         private http: HttpClient,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {}
 
-    public getDocument = (contractId: string, documentType: IDocumentType) => {
+    public getDocument = (contractId: string, documentType: IDocumentType): Observable<IResponseDataDocument> => {
         return this.http.get(`${environment.url_api}/v1.0/documents/${contractId}/${documentType}`, {
             responseType: 'blob',
             observe: 'response',
@@ -37,5 +45,16 @@ export class DocumentService {
                 };
             }),
         );
+    }
+
+    public documentOpen = (data: IResponseDataDocument) => {
+        const fileURL = URL.createObjectURL(data.file);
+        if (isPlatformBrowser(this.platformId)) {
+            window.open(fileURL);
+        }
+    }
+
+    public documentSave = (data: IResponseDataDocument) => {
+        saveAs(data.file, data.filename);
     }
 }

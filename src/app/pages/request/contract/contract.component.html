@@ -19,6 +19,12 @@
             </div>
             <div *ngIf="supplyPoint"
                  class="row">
+                <lnd-button
+                        label="download"
+                        (action)="openDocument('717', documentType.CONTRACT)"
+                        [isDisabled]="documentLoading"
+                        type="link"
+                ></lnd-button>
                 <div class="col-10 offset-1">
                     <div class="row align-items-center mb-3">
                         <div class="col-12 mb-5 col-md-3 mb-md-0 text-center text-md-left">

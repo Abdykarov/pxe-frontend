@@ -7,11 +7,16 @@ import {
     HttpRequest,
 } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import {
+    Observable,
+    throwError,
+} from 'rxjs';
 
 // own classes
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
+import { scrollToElementFnc } from 'src/common/utils';
 
 @Injectable({
     providedIn: 'root',
@@ -45,6 +50,12 @@ export class ApiInterceptor implements HttpInterceptor {
                 });
         }
 
-        return next.handle(resultRequest);
+        return next.handle(resultRequest)
+            .pipe(
+                catchError((error, caught) => {
+                    scrollToElementFnc('top');
+                    return throwError(error);
+                }),
+            );
     }
 }

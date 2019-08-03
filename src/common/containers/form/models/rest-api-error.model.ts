@@ -7,6 +7,7 @@ export interface IRestAPIError {
     name: string;
     message: string;
     error: {
-        errorCode: string;
+        errorCode?: string;
+        message?: string;
     };
 }
