@@ -86,7 +86,7 @@
                                     <lnd-button
                                         label="Zobrazit"
                                         size="sm"
-                                        (action)="openDocument('717', documentType.INFORMATION)"
+                                        (action)="openDocument(supplyPoint.contract.contractId, documentType.INFORMATION)"
                                         [isDisabled]="documentLoading"
                                         type="link"
                                     ></lnd-button>
@@ -102,7 +102,7 @@
                                     <lnd-button
                                         label="Zobrazit"
                                         size="sm"
-                                        (action)="openDocument('717', documentType.CONTRACT)"
+                                        (action)="openDocument(supplyPoint.contract.contractId, documentType.CONTRACT)"
                                         [isDisabled]="documentLoading"
                                         type="link"
                                     ></lnd-button>
