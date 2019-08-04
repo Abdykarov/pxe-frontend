@@ -1,6 +1,6 @@
 import {
     Component,
-    Input,
+    Input, TemplateRef,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
@@ -31,6 +31,9 @@ export class VerificationFormComponent extends AbstractFormComponent {
 
     @Input()
     public classSecondField = 'col-md-auto mt-md-4';
+
+    @Input()
+    public infoTemplate: TemplateRef<any>;
 
     @Input()
     public submitLabelText = 'Podepsat smlouvu';

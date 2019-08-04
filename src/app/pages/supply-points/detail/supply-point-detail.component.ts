@@ -23,17 +23,23 @@ import {
     ISupplyPointGasAttributes,
     ISupplyPointPowerAttributes,
 } from 'src/common/graphql/models/supply.model';
+import { ContractActions } from '../models/supply-point-detail.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
+import { DocumentService } from 'src/app/services/document.service';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { graphQLMessages } from 'src/common/constants/errors.constant';
+import {
+    IDocumentType,
+    IResponseDataDocument,
+} from 'src/app/services/model/document.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
     parseGraphQLErrors,
+    parseRestAPIErrors,
     scrollToElementFnc,
 } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { ContractActions } from '../models/supply-point-detail.model';
 
 @Component({
     templateUrl: './supply-point-detail.component.html',
@@ -42,6 +48,8 @@ import { ContractActions } from '../models/supply-point-detail.model';
 export class SupplyPointDetailComponent extends AbstractComponent implements OnInit {
     public allowedOperations = AllowedOperations;
     public dataLoading = true;
+    public documentLoading = false;
+    public documentType = IDocumentType;
     public fieldError: IFieldError = {};
     public formFields = formFields;
     public formLoading = false;
@@ -56,6 +64,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     constructor(
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
+        private documentService: DocumentService,
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
@@ -192,5 +201,24 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     public terminateContract = () => {
         this.contractAction = ContractActions.TERMINATE_CONTRACT;
         this.smsSent = null;
+    }
+
+    public openDocument(contractId: string, documentType: IDocumentType) {
+        this.documentLoading = true;
+        this.globalError = [];
+        this.documentService.getDocument(contractId, documentType)
+            .subscribe(
+                (responseDataDocument: IResponseDataDocument) => {
+                    this.documentLoading = false;
+                    this.documentService.documentOpen(responseDataDocument);
+                    this.cd.markForCheck();
+                },
+                (error) => {
+                    const message = parseRestAPIErrors(error);
+                    this.documentLoading = false;
+                    this.globalError.push(message);
+                    this.cd.markForCheck();
+                },
+            );
     }
 }

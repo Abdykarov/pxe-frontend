@@ -289,6 +289,11 @@
 		}
 	}
 
+	&-sm-inline {
+		min-height: $btn-height-small-inline;
+		padding-top: 0;
+	}
+
 	&.btn-long {
 		// Media queries
 		@include media-breakpoint-up(sm) {

@@ -10,7 +10,6 @@ import {
 
 import {
     map,
-    switchMap,
     takeUntil,
 } from 'rxjs/operators';
 
@@ -24,7 +23,8 @@ import { ContractService } from 'src/common/graphql/services/contract.service';
 import { DocumentService } from 'src/app/services/document.service';
 import {
     getConfigStepper,
-    parseGraphQLErrors, parseRestAPIErrors,
+    parseGraphQLErrors,
+    parseRestAPIErrors,
     scrollToElementFnc,
 } from 'src/common/utils';
 import { graphQLMessages } from 'src/common/constants/errors.constant';
