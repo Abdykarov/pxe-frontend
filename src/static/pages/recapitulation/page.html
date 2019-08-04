@@ -52,6 +52,14 @@
                         [id]="'name'"
                         label="Jméno a příjmení"
                     ></lnd-form-field>
+                    <lnd-datepicker
+                        [parentForm]="form"
+                        [datepickerName]="'birthDate'"
+                        id="datepicker-1"
+                        label="Datum narození"
+                        [placeholder]="'dd.mm.rrrr'"
+                    >
+                    </lnd-datepicker>
                     <pxe-address-whisperer
                         [subtextTemplate]="otherAddress"
                         [label]="'Trvalá adresa'"

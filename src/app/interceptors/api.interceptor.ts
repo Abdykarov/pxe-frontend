@@ -6,6 +6,7 @@ import {
     HttpInterceptor,
     HttpRequest,
 } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { catchError } from 'rxjs/operators';
 import {
@@ -15,6 +16,7 @@ import {
 
 // own classes
 import { AuthService } from 'src/app/services/auth.service';
+import { CONSTS } from 'src/app/app.constants';
 import { environment } from 'src/environments/environment';
 import { scrollToElementFnc } from 'src/common/utils';
 
@@ -25,6 +27,7 @@ export class ApiInterceptor implements HttpInterceptor {
 
     constructor(
         private authService: AuthService,
+        private router: Router,
     ) {}
 
     intercept(
@@ -53,7 +56,11 @@ export class ApiInterceptor implements HttpInterceptor {
         return next.handle(resultRequest)
             .pipe(
                 catchError((error, caught) => {
-                    scrollToElementFnc('top');
+                    if (error.status === 401) {
+                        this.router.navigate([CONSTS.PATHS.LOGOUT]);
+                    } else {
+                        scrollToElementFnc('top');
+                    }
                     return throwError(error);
                 }),
             );

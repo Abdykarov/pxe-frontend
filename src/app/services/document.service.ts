@@ -48,13 +48,15 @@ export class DocumentService {
     }
 
     public documentOpen = (data: IResponseDataDocument) => {
-        const fileURL = URL.createObjectURL(data.file);
         if (isPlatformBrowser(this.platformId)) {
+            const fileURL = URL.createObjectURL(data.file);
             window.open(fileURL);
         }
     }
 
     public documentSave = (data: IResponseDataDocument) => {
-        saveAs(data.file, data.filename);
+        if (isPlatformBrowser(this.platformId)) {
+            saveAs(data.file, data.filename);
+        }
     }
 }

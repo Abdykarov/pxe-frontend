@@ -24,10 +24,10 @@ export class VerificationFormComponent extends AbstractFormComponent {
     public classRootWrapper = 'col-12 col-lg-9 offset-lg-3';
 
     @Input()
-    public classMainWrapper = 'row justify-content-between';
+    public classMainWrapper = 'row justify-content-end';
 
     @Input()
-    public classFirstField = 'col-md-auto';
+    public classFirstField = 'col';
 
     @Input()
     public classSecondField = 'col-md-auto mt-md-4';

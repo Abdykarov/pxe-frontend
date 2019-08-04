@@ -15,6 +15,11 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import {
+    CommodityType,
+    ISupplyPoint,
+    ProgressStatus,
+} from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { DocumentService } from 'src/app/services/document.service';
 import {
@@ -28,10 +33,6 @@ import {
     IResponseDataDocument,
 } from 'src/app/services/model/document.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import {
-    ISupplyPoint,
-    ProgressStatus,
-} from 'src/common/graphql/models/supply.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -45,19 +46,17 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.READY_FOR_SIGN;
     public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.PERSONAL_DATA;
 
+    public commodityType = CommodityType;
     public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
-    public contractTemplate;
     public documentLoading = false;
     public documentType = IDocumentType;
-    public showOffer = true;
     public fieldError: IFieldError = {};
     public formLoading = false;
     public globalError: string[] = [];
+    public showOffer = true;
     public smsSent: number = null;
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
-
-    public data: IResponseDataDocument;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -77,17 +76,12 @@ export class ContractComponent extends AbstractComponent implements OnInit {
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
                 map(({data}) => data.getSupplyPoint),
-                switchMap( (supplyPoint: ISupplyPoint) => {
-                    this.supplyPoint = supplyPoint;
-                    this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
-                    return this.contractService.getContractTerms(supplyPoint.contract.contractId);
-                }),
-                map(({data}) => data.getContractTerms.content),
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                (content: string) => {
-                    this.contractTemplate = content;
+                (supplyPoint: ISupplyPoint) => {
+                    this.supplyPoint = supplyPoint;
+                    this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
                     this.cd.markForCheck();
                 },
                 (error) => {
@@ -100,6 +94,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
 
     public openDocument(contractId: string, documentType: IDocumentType) {
         this.documentLoading = true;
+        this.globalError = [];
         this.documentService.getDocument(contractId, documentType)
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
@@ -110,7 +105,6 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                 (error) => {
                     const message = parseRestAPIErrors(error);
                     this.documentLoading = false;
-                    this.globalError = [];
                     this.globalError.push(message);
                     this.cd.markForCheck();
                 },
