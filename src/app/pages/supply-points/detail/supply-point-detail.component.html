@@ -1,3 +1,15 @@
+<ng-template #leaveContactInfoTemplate let-contract="contract">
+    <div class="col-12 mb-4 small">
+        Kliknutím na tlačítko „PODEPSAT“ souhlasíte s odstoupením od smlouvy do 14 dnů od podpisu.
+        Výpověď smlouvy naleznete <a [class.link--disabled]="documentLoading" (click)="openDocument(contract.contractId, documentType.WITHDRAWAL)">zde</a>.
+    </div>
+</ng-template>
+<ng-template #terminateContactInfoTemplate let-contract="contract">
+    <div class="col-12 mb-4 small">
+        Kliknutím na tlačítko „PODEPSAT“ souhlasíte s odstoupením od smlouvy do 15 dnů od zahájení dodávky.
+        Výpověď smlouvy naleznete <a [class.link--disabled]="documentLoading" (click)="openDocument(contract.contractId, documentType.DENUNCIATION)">zde</a>.
+    </div>
+</ng-template>
 <ng-template #contractActionsTemplate>
     <div *ngIf="supplyPoint | isAllowedOperation: allowedOperations.LEAVE_CONTRACT"
          class="row no-gutters align-items-end mb-5">
@@ -20,6 +32,7 @@
                     [formLoading]="formLoading"
                     [contract]="supplyPoint.contract"
                     [globalError]="globalError"
+                    [infoTemplate]="leaveContactInfoTemplate"
                     [smsSent]="smsSent"
                     [showSentSmsLabelUnderFirstField]="false"
                     classRootWrapper="col-12"
@@ -52,6 +65,7 @@
                     [formLoading]="formLoading"
                     [contract]="supplyPoint.contract"
                     [globalError]="globalError"
+                    [infoTemplate]="terminateContactInfoTemplate"
                     [smsSent]="smsSent"
                     [showSentSmsLabelUnderFirstField]="false"
                     classRootWrapper="col-12"
@@ -71,7 +85,6 @@
                     [type]="'danger'"
                     [isDismissible]="false"
                     *ngIf="globalError.length">
-                Došlo k chybě. Zkuste to později.<br>
                 <ng-container *ngFor="let message of globalError">
                     {{ message }}<br>
                 </ng-container>
