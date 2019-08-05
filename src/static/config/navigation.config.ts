@@ -107,6 +107,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/modals',
                 },
                 {
+                    'label': 'News',
+                    'url': '/basic/news',
+                },
+                {
                     'label': 'Progress bar',
                     'url': '/basic/progress',
                 },
@@ -152,6 +156,10 @@ export const staticNavigationConfig: INavigationConfig = [
                 {
                     'label': 'Change password (banner)',
                     'url': '/basic/change-password-banner',
+                },
+                {
+                    'label': 'Dashboard',
+                    'url': '/basic/dashboard',
                 },
                 {
                     'label': 'Landing page',

@@ -36,6 +36,10 @@ import {
     contractSigningPageRoutes,
 } from 'src/static/pages/contract-signing/page.module';
 import {
+    DashboardPageModule,
+    dashboardPageRoutes,
+} from 'src/static/pages/dashboard/page.module';
+import {
     DropdownPageModule,
     dropdownPageRoutes,
 } from 'src/static/atoms/dropdown/page.module';
@@ -67,6 +71,10 @@ import {
     ModalsPageModule,
     modalsPageRoutes,
 } from 'src/static/organisms/modals/page.module';
+import {
+    NewsPageModule,
+    newsPageRoutes,
+} from 'src/static/organisms/news/page.module';
 import {
     NewSupplyPointPageModule,
     newSupplyPointPageRoutes,
@@ -152,6 +160,7 @@ const routes: Routes = [
             ...buttonsPageRoutes,
             ...colorsPageRoutes,
             ...contractSigningPageRoutes,
+            ...dashboardPageRoutes,
             ...dropdownPageRoutes,
             ...formsPageRoutes,
             ...changePasswordBannerPageRoutes,
@@ -160,6 +169,7 @@ const routes: Routes = [
             ...infoBannerPageRoutes,
             ...listSupplyPointsPageRoutes,
             ...modalsPageRoutes,
+            ...newsPageRoutes,
             ...newSupplyPointPageRoutes,
             ...paymentVerificationPageRoutes,
             ...progressBarPageRoutes,
@@ -195,6 +205,7 @@ const routes: Routes = [
         ButtonsPageModule,
         ColorsPageModule,
         ContractSigningPageModule,
+        DashboardPageModule,
         DropdownPageModule,
         FormsPageModule,
         ChangePasswordBannerPageModule,
@@ -203,6 +214,7 @@ const routes: Routes = [
         InfoBannerPageModule,
         ListSupplyPointsPageModule,
         ModalsPageModule,
+        NewsPageModule,
         NewSupplyPointPageModule,
         PaymentVerificationPageModule,
         ProgressBarPageModule,
