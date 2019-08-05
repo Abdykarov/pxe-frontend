@@ -71,4 +71,14 @@ export class NavigateRequestService {
             }
         }
     }
+
+    public backStepAction = (supplyPoint: ISupplyPoint, progressStatus: ProgressStatus) => {
+        if (this.canGoToStep(supplyPoint, progressStatus)) {
+            this.routerToRequestStep(supplyPoint, progressStatus);
+            return;
+        }
+
+        this.routerToRequestStep(supplyPoint);
+    }
+
 }

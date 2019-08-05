@@ -6,6 +6,7 @@ import { Routes } from '@angular/router';
 import { AddressWhispererModule } from 'src/common/containers/address-whisperer/address-whisperer.module';
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
+import { DatepickerModule } from 'src/common/ui/forms/datepicker/datepicker.module';
 import { FieldWrapperModule } from 'src/common/ui/forms/field-wrapper/field-wrapper.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { PersonalInfoFormModule } from 'src/common/containers/form/forms/personal-info/personal-info-form.module';
@@ -25,6 +26,7 @@ import { SelectModule } from 'src/common/ui/forms/select/select.module';
         BreadcrumbModule,
         ButtonModule,
         CommonModule,
+        DatepickerModule,
         FieldWrapperModule,
         FormModule,
         PersonalInfoFormModule,

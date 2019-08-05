@@ -23,15 +23,6 @@
     {{ item.city }}&nbsp;{{ item.postCode }}
 </ng-template>
 
-<lnd-alert
-    *ngIf="globalError.length"
-    type="danger">
-    <ng-container *ngFor="let error of globalError">
-        {{ error }}<br>
-    </ng-container>
-</lnd-alert>
-
-
 <div class="row mb-5">
     <div class="col-12 text-center">
         {{isIndividual ? 'Osobní informace' : 'Firemní informace'}}
@@ -52,6 +43,21 @@
         [touched]="form.controls.name.touched || formError.name"
         [validationMessages]="isIndividual ? formFields.validationMessages.namePerson : formFields.validationMessages.nameCompany"
     ></lnd-form-field>
+    <lnd-datepicker
+        *ngIf="form.controls.birthDate.status !== 'DISABLED'"
+        [datepickerName]="'birthDate'"
+        [error]="formError.birthDate || form.controls.birthDate.errors"
+        id="datepicker-1"
+        label="Datum narození"
+        [parentForm]="form"
+        [placeholder]="'dd.mm.rrrr'"
+        [maxDate]="maxDate"
+        [minDate]="minDate"
+        [success]="form.controls.birthDate.valid && (form.controls.birthDate.touched || formError.birthDate)"
+        [touched]="form.controls.birthDate.touched || formError.birthDate"
+        [validationMessages]="formFields.validationMessages.birthDate"
+    >
+    </lnd-datepicker>
     <lnd-form-field
         *ngIf="form.controls.ico.status !== 'DISABLED'"
         [error]="formError.ico || form.controls.ico.errors"
@@ -140,6 +146,7 @@
         <div class="row no-gutters">
             <div class="col-4 pr-1">
                 <lnd-form-field
+                    [disabledField]="true"
                     [error]="formError.phonePrefix || form.controls.phonePrefix.errors"
                     [formControl]="form.controls.phonePrefix"
                     [id]="'phonePrefix'"

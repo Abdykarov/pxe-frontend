@@ -8,6 +8,7 @@ export interface IContract {
     deliveryTo?: string;
     offer?: ISelectedOffer;
     personalData?: IPersonalData;
+    offerValidity: Boolean;
     __typename?: string;
 }
 

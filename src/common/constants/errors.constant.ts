@@ -1,3 +1,5 @@
+import { CONSTS } from 'src/app/app.constants';
+
 export const defaultRestAPIErrorMessage = 'Došlo k chybě. Zkuste to později.';
 
 export const restAPIErrorCodes = {
@@ -7,6 +9,13 @@ export const restAPIErrorCodes = {
 export const graphQLMessages = {
     cannotDeleteContract: 'Od smlouvy se nepodařilo odstoupit.',
     cannotSignContract: 'Smlouvu se nepodařilo podepsat.',
+};
+
+export const offerValidityMessages = {
+    contractEndWithTerminate: 'Na základě uvedeného data platnosti aktuální smlouvy můžete ' +
+        'vybírat pouze z nabídek od svého aktuálního dodavatele.',
+    contractEndWithoutTerminate: 'Na základě uvedeného data platnosti aktuální smlouvy můžete ' +
+        'vybírat pouze z nabídek od svého aktuálního dodavatele.',
 };
 
 export const errorFieldMessages =  {
@@ -40,6 +49,11 @@ export const errorFieldMessages =  {
     bankCode: {
         required: 'Vyplňte kód banky.',
         bankCode: 'Kód banky musí obsahovat 4 číslice.',
+    },
+    birthDate: {
+        required: 'Vyplňte datum narození.',
+        bsDateMaxDate: 'Nesmíte být mladší 18 let.',
+        bsDateMinDate: 'Rok narození musí být minimálně 1900.',
     },
     circuitBreakerId: {
         required: 'Vyberte ze seznamu, jakou máte velikost jističe.',
@@ -95,6 +109,7 @@ export const errorFieldMessages =  {
     expirationDate: {
         requiredGas: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr plynu.',
         requiredPower: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr elektřiny.',
+        isInTerminateInterval: 'Vaši aktuální smlouvu už máte automaticky prodlouženou.',
     },
     fullName: {
         requiredPerson: 'Vyplňte své jméno a příjmení.',
@@ -172,11 +187,11 @@ export const errorFieldMessages =  {
         landLineNumber: 'Pevná linka musí obsahovat 9 číslic.',
     },
     phonePrefix: {
-        required: 'Vyplňte předvolbu pro ČR +420.',
-        invalidPhoneNumberPrefix: 'Vyplňte správnou předvolbu pro ČR +420.',
+        required: `Vyplňte předvolbu pro ČR ${CONSTS.TELEPHONE_PREFIX_CZ}.`,
+        invalidPhoneNumberPrefix: `Vyplňte správnou předvolbu pro ČR ${CONSTS.TELEPHONE_PREFIX_CZ}.`,
     },
     smsCode: {
-        required: 'Vyplňte sms kód.',
+        required: 'Vyplňte kód, který vám přišel v SMS.',
     },
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',

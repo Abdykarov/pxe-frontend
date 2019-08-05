@@ -32,6 +32,7 @@ import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
@@ -41,7 +42,9 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./payment.component.scss'],
 })
 export class PaymentComponent extends AbstractComponent implements OnInit {
-    public configStepper = getConfigStepper(ProgressStatus.WAITING_FOR_PAYMENT);
+    public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.WAITING_FOR_PAYMENT;
+
+    public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public bannerTypeImages = BannerTypeImages;
     public globalError: string[] = [];
     public loading = true;
@@ -54,6 +57,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
+        public navigateRequestService: NavigateRequestService,
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
@@ -72,6 +76,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                 map(({data}) => data.getSupplyPoint),
                 switchMap((supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
+                    this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.WAITING_FOR_PAYMENT);
                     const isContractFinalized = this.supplyPoint.contract &&
                         R.indexOf(this.supplyPoint.contract.contractStatus, [ContractStatus.CONCLUDED, ContractStatus.CANCELED]) >= 0;
                     if (isContractFinalized) {

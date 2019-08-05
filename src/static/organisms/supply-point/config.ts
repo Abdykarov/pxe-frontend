@@ -68,6 +68,7 @@ export const supplyPointConfigGas: ISupplyPoint = {
         'sampleDocuments': [],
     },
     contract: {
+        offerValidity: true,
         deliveryTo: '2021-08-01',
         deliveryFrom: '2020-08-01',
     },

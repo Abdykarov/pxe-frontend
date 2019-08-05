@@ -8,6 +8,7 @@ import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
+    ADULTHOOD_AGE: 18,
     CURRENCY: {
         DEFAULT: 'CZK',
     },
@@ -17,6 +18,9 @@ export const CONSTS = {
     },
     DEFAULT_EXPIRATION: 3600,
     MAX_DAYS_TILL_CONTRACT_EXPIRATION: 60,
+    MIN_BIRTH_DATE: '1900-01-01',
+    MONTH_DURATION: 30,
+    MONTHS_TO_CONTRACT_END: 2,
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
     PATHS: {
         CONTRACT : 'contract',
@@ -47,9 +51,9 @@ export const CONSTS = {
         TERMS_OF_USE : 'terms-of-use',
         WILD_CART  : '**',
     },
-    MONTH_DURATION: 30,
-    MONTHS_TO_CONTRACT_END: 2,
+    TELEPHONE_PREFIX_CZ: '+420',
     TIME_TO_CONTRACT_END_PROLONGED: 14,
+    REFRESH_INTERVAL_RXJS: 5000,
 };
 
 export const ROUTES = {

@@ -10,23 +10,29 @@ import {
 
 import {
     map,
-    switchMap,
     takeUntil,
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { ContractService } from 'src/common/graphql/services/contract.service';
 import {
-    getConfigStepper,
-    parseGraphQLErrors,
-    scrollToElementFnc,
-} from 'src/common/utils';
-import { graphQLMessages } from 'src/common/constants/errors.constant';
-import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import {
+    CommodityType,
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
+import { ContractService } from 'src/common/graphql/services/contract.service';
+import { DocumentService } from 'src/app/services/document.service';
+import {
+    getConfigStepper,
+    parseGraphQLErrors,
+    parseRestAPIErrors,
+    scrollToElementFnc,
+} from 'src/common/utils';
+import { graphQLMessages } from 'src/common/constants/errors.constant';
+import {
+    IDocumentType,
+    IResponseDataDocument,
+} from 'src/app/services/model/document.model';
+import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -37,12 +43,17 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./contract.component.scss'],
 })
 export class ContractComponent extends AbstractComponent implements OnInit {
-    public configStepper = getConfigStepper(ProgressStatus.READY_FOR_SIGN);
-    public contractTemplate;
-    public showOffer = true;
+    public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.READY_FOR_SIGN;
+    public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.PERSONAL_DATA;
+
+    public commodityType = CommodityType;
+    public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
+    public documentLoading = false;
+    public documentType = IDocumentType;
     public fieldError: IFieldError = {};
     public formLoading = false;
     public globalError: string[] = [];
+    public showOffer = true;
     public smsSent: number = null;
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
@@ -50,7 +61,8 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     constructor(
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
-        private navigateRequestService: NavigateRequestService,
+        private documentService: DocumentService,
+        public navigateRequestService: NavigateRequestService,
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
@@ -58,26 +70,18 @@ export class ContractComponent extends AbstractComponent implements OnInit {
         super();
     }
 
-    public toggleOffer = () => {
-        this.showOffer = !this.showOffer;
-    }
-
     ngOnInit () {
         super.ngOnInit();
+
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
                 map(({data}) => data.getSupplyPoint),
-                switchMap( (supplyPoint: ISupplyPoint) => {
-                    this.supplyPoint = supplyPoint;
-                    this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
-                    return this.contractService.getContractTerms(supplyPoint.contract.contractId);
-                }),
-                map(({data}) => data.getContractTerms.content),
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                (content: string) => {
-                    this.contractTemplate = content;
+                (supplyPoint: ISupplyPoint) => {
+                    this.supplyPoint = supplyPoint;
+                    this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
                     this.cd.markForCheck();
                 },
                 (error) => {
@@ -86,6 +90,34 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                     this.cd.markForCheck();
                 },
             );
+    }
+
+    public openDocument(contractId: string, documentType: IDocumentType) {
+        this.documentLoading = true;
+        this.globalError = [];
+        this.documentService.getDocument(contractId, documentType)
+            .subscribe(
+                (responseDataDocument: IResponseDataDocument) => {
+                    this.documentLoading = false;
+                    this.documentService.documentOpen(responseDataDocument);
+                    this.cd.markForCheck();
+                },
+                (error) => {
+                    const message = parseRestAPIErrors(error);
+                    this.documentLoading = false;
+                    this.globalError.push(message);
+                    this.cd.markForCheck();
+                },
+            );
+    }
+
+    public toggleOffer = () => {
+        this.showOffer = !this.showOffer;
+    }
+
+    public chooseNewOfferAction = (evt) => {
+        evt.preventDefault();
+        this.navigateRequestService.routerToRequestStep(this.supplyPoint, ProgressStatus.OFFER_STEP);
     }
 
     public signContract(smsCode: string) {

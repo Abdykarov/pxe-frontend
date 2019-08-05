@@ -8,11 +8,16 @@ import {
     Validators,
 } from '@angular/forms';
 
+import * as moment from 'moment';
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
-import { CustomValidators } from 'src/common/utils';
+import { CONSTS } from 'src/app/app.constants';
+import {
+    convertDateToSendFormatFnc,
+    CustomValidators,
+} from 'src/common/utils';
 import { depositPaymentType } from './personal-info-form.config';
 import {
     IPersonalData,
@@ -36,6 +41,8 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     @Input()
     public formValues: IPersonalData = null;
 
+    public maxDate: Date = moment().add(-CONSTS.ADULTHOOD_AGE, 'years').toDate();
+    public minDate: Date = new Date(CONSTS.MIN_BIRTH_DATE);
     public depositPaymentTypeId = depositPaymentType;
 
     constructor(
@@ -75,28 +82,29 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
 
     public prefillFormData = () => {
         let name = null;
+        let birthDate = null;
         let ico = null;
         let dic = null;
         let onlyAddress1 = null;
         let bankAccountNumber = null;
         let bankCode = null;
         let phone = null;
-        let phonePrefix = null;
         let email = null;
         let depositPaymentTypeId = null;
         let deposit = null;
         let address1 = null;
         let address2 = null;
-
         if (this.formValues) {
             name = this.formValues.name;
+            if (this.formValues.birthDate) {
+                birthDate = new Date(this.formValues.birthDate);
+            }
             ico = this.formValues.ico;
             dic = this.formValues.dic;
-            onlyAddress1 = !this.formValues.address2;
+            onlyAddress1 = this.formValues.address2;
             bankAccountNumber = this.formValues.bankAccountNumber;
             bankCode = this.formValues.bankCode;
             phone = this.formValues.phone && this.formValues.phone.substr(4, 10);
-            phonePrefix = phone && '+420';
             email = this.formValues.email;
             depositPaymentTypeId = this.formValues.depositPaymentType && this.formValues.depositPaymentType.code;
             deposit = this.formValues.deposit;
@@ -105,19 +113,20 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         }
 
         this.form.controls['name'].setValue(name);
+        this.form.controls['birthDate'].setValue(birthDate);
         this.form.controls['ico'].setValue(ico);
         this.form.controls['dic'].setValue(dic);
-
-        this.form.controls['onlyAddress1'].setValue(!onlyAddress1);
+        this.form.controls['onlyAddress1'].setValue(onlyAddress1);
         this.form.controls['bankAccountNumber'].setValue(bankAccountNumber);
         this.form.controls['bankCode'].setValue(bankCode);
         this.form.controls['phone'].setValue(phone);
-        this.form.controls['phonePrefix'].setValue(phonePrefix);
         this.form.controls['email'].setValue(email);
         this.form.controls['depositPaymentTypeId'].setValue(depositPaymentTypeId);
         this.form.controls['deposit'].setValue(deposit);
         this.form.controls['address1'].setValue(address1);
-        this.form.controls['address2'].setValue(address2);
+        if (this.form.controls['onlyAddress1'].value) {
+            this.form.controls['address2'].setValue(address2);
+        }
 
         this.resetFormError(false);
     }
@@ -127,9 +136,11 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         if (this.isIndividual) {
             this.setDisableField('ico');
             this.setDisableField('dic');
+            this.setEnableField('birthDate');
         } else {
             this.setEnableField('ico');
             this.setEnableField('dic');
+            this.setDisableField('birthDate');
         }
     }
 
@@ -150,6 +161,9 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
                 phone: R.concat(this.form.value.phonePrefix, this.form.value.phone),
                 deposit: parseFloat(String(this.form.value.deposit).replace(',', '.')),
             };
+            if (form.birthDate) {
+                form.birthDate = convertDateToSendFormatFnc(this.form.value.birthDate);
+            }
             delete form.phonePrefix;
             delete form.onlyAddress1;
             this.submitAction.emit(form);

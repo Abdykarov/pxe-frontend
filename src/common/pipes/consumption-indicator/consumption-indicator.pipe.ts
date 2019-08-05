@@ -14,7 +14,7 @@ import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 export class ConsumptionIndicatorPipe implements PipeTransform {
     private allNotNil = () => R.all(R_.isNotNil);
 
-    private count = (avg: number, last: number) => {
+    private count = (last: number, avg: number) => {
         return last / (avg / 100) - 100;
     }
 
@@ -45,6 +45,6 @@ export class ConsumptionIndicatorPipe implements PipeTransform {
             return this.count(annualConsumptionNT, lastAnnualConsumptionNT);
         }
 
-        return `${R.sum([lastAnnualConsumptionNT, lastAnnualConsumptionVT])} ${unit}`;
+        return `${R.sum([annualConsumptionNT, annualConsumptionVT])} ${unit}`;
     }
 }

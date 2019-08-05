@@ -90,6 +90,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
 
     ngOnInit() {
         super.ngOnInit();
+        this.form = this.fb.group(this.formFields.controls, this.formFields.options);
 
         this.form.get('commodityType')
             .valueChanges
@@ -201,7 +202,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         let timeToContractEnd = null;
         let timeToContractEndPeriodId = null;
 
-        if (this.formValues) {
+        if (!R.isEmpty(this.formValues)) {
             const supplier = R.find(R.propEq('id', this.formValues.supplier.id))(this.suppliers[commodityType]);
             const expirationDateFromSupplyPoint = this.formValues.expirationDate && new Date(this.formValues.expirationDate);
             const expirationDateFromContract = this.formValues.contract &&

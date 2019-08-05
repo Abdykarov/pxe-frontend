@@ -176,6 +176,7 @@ export const getSupplyPointQuery = gql`
                 contractStatus,
                 deliveryFrom,
                 deliveryTo,
+                offerValidity,
                 offer{
                     id,
                     supplier{
@@ -203,6 +204,7 @@ export const getSupplyPointQuery = gql`
                 },
                 personalData {
                     name,
+                    birthDate,
                     ico,
                     dic,
                     address1{
@@ -301,11 +303,18 @@ export const findSupplyPointsByContractStatusQuery = gql`
                 description,
                 help
             },
+            contractEndType {
+                type,
+                code,
+                description,
+                help
+            }
             contract {
                 contractId,
                 contractStatus,
                 deliveryFrom,
                 deliveryTo,
+                offerValidity,
                 offer{
                     id,
                     supplier{
@@ -333,6 +342,7 @@ export const findSupplyPointsByContractStatusQuery = gql`
                 },
                 personalData {
                     name,
+                    birthDate,
                     ico,
                     dic,
                     address1{
