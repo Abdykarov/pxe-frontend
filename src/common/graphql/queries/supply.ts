@@ -293,6 +293,7 @@ export const findSupplyPointsByContractStatusQuery = gql`
             },
             lastAnnualConsumptionNT,
             lastAnnualConsumptionVT,
+            lastVersionOfSupplyPoint,
             timeToContractEnd,
             timeToContractEndPeriod {
                 type,
@@ -365,6 +366,27 @@ export const findSupplyPointsByContractStatusQuery = gql`
             },
             progressStatus,
             allowedOperations,
+        }
+    }
+`;
+
+export const computeAndGetSupplyPointStatisticsQuery = gql`
+    query computeAndGetSupplyPointStatistics {
+        computeAndGetSupplyPointStatistics {
+            gasAnnualConsumptionSum,
+            gasCount,
+            notConcludedCount,
+            notConcludedItems {
+                id,
+                name,
+            },
+            powerAnnualConsumptionSum,
+            powerCount,
+            showDeliveryCount,
+            showDeliveryItems {
+                id,
+                name,
+            },
         }
     }
 `;

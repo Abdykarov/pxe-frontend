@@ -10,6 +10,7 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import {
+    computeAndGetSupplyPointStatisticsQuery,
     findAllSuppliersQuery,
     findCodelistsByTypesQuery,
     findSupplierDocumentsByComodityQuery,
@@ -215,7 +216,10 @@ export class SupplyService {
         })
         .valueChanges
 
-    public removeSupplyPoint = (supplyPointId: string) => {
-    }
-
+    public computeAndGetSupplyPointStatistics = () => this.apollo
+        .watchQuery<any>({
+            fetchPolicy: 'network-only',
+            query: computeAndGetSupplyPointStatisticsQuery,
+        })
+        .valueChanges
 }

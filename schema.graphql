@@ -123,6 +123,7 @@ type PersonalData {
     address2: Address
     bankAccountNumber: String!
     bankCode: String!
+    birthDate: Date
     deposit: Float!
     depositPaymentType: CodelistItem!
     dic: String
@@ -134,6 +135,7 @@ type PersonalData {
 
 "The Root Query for the application"
 type Query {
+    computeAndGetSupplyPointStatistics: SupplyPointStatistic
     findAllSuppliers(commodityType: CommodityType): [Supplier]!
     findCodelistsByTypes(locale: String, types: [String]!): [CodelistMap]!
     findSupplierDocumentsByComodity(commodityType: CommodityType, supplierId: Int): [SupplierSampleDocument]!
@@ -218,6 +220,22 @@ type SupplyPointOffer {
     supplier: Supplier
     validFrom: Date!
     validTo: Date!
+}
+
+type SupplyPointStatistic {
+    gasAnnualConsumptionSum: Float!
+    gasCount: Int!
+    notConcludedCount: Int!
+    notConcludedItems: [SupplyPointStatisticView!]
+    powerAnnualConsumptionSum: Float!
+    powerCount: Int!
+    showDeliveryCount: Int!
+    showDeliveryItems: [SupplyPointStatisticView!]
+}
+
+type SupplyPointStatisticView {
+    id: Int!
+    name: String!
 }
 
 type VariableSymbol {
@@ -309,6 +327,7 @@ input PersonalDataInput {
     address2: AddressInput
     bankAccountNumber: String!
     bankCode: String!
+    birthDate: Date
     deposit: Float!
     depositPaymentTypeId: String!
     dic: String

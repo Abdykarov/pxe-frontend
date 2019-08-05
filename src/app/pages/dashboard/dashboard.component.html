@@ -12,32 +12,33 @@
         </div>
     </div>
     <lnd-info-banner
-        *ngIf="state === overviewStates.NO_REQUEST"
+        *ngIf="supplyPointStatistic && supplyPointStatistic.gasCount === 0 && supplyPointStatistic.powerCount === 0"
         [bannerTitle]="'Zatím nemáte uložené žádné odběrné místo'"
         [bannerDescription]="'Zadejte odběrné místo a my vám hned dáme nabídky'"
         [buttonLabel]="'Zadat odběrné místo'"
-        (buttonAction)="createSupplyPointAction($event)"
+        (buttonAction)="createSupplyPointAction()"
     ></lnd-info-banner>
     <lnd-banner-ui
-        *ngIf="state === overviewStates.REQUESTS"
-        [buttonLabel]="supplyPoints.length === 1 ? 'Dokončit žádost' : 'Přehled žádostí'"
+        *ngIf="supplyPointStatistic && supplyPointStatistic.notConcludedCount > 0"
+        [buttonLabel]="supplyPointStatistic.notConcludedCount === 1 ? 'Dokončit žádost' : 'Přehled žádostí'"
         [data]="{
-            text: supplyPoints.length === 1 ? 'Máte rozdělanou žádost.' : 'Máte rozděláno více žádostí.'
+            text: supplyPointStatistic.notConcludedCount === 1 ? 'Máte rozdělanou žádost.' : 'Máte rozděláno více žádostí.'
         }"
-        (customBannerAction)="complateRequestAction()"
+        (customBannerAction)="completeRequestAction()"
     ></lnd-banner-ui>
-    <div class="row mt-5" *ngIf="!loadingData">
+    <div class="row mt-5" *ngIf="supplyPointStatistic && !loadingData">
         <div class="col-md-6">
             <h2>Odběrná místa</h2>
-            <pxe-supply-point-overview
-                [electricityPlacesCount]="electricityPlacesCount"
-                [electricitySumOfPerformance]="electricitySumOfPerformance"
-                [gasPlacesCount]="gasPlacesCount"
-                [gasSumOfPerformance]="gasSumOfPerformance"
-                [supplyPointsEnding]="supplyPointsEnding"
-                (newSupplierAction)="createSupplyPointAction($event)"
-                (supplyPointsListAction)="routerToListOfSupplyPointsAction($event)">
-            </pxe-supply-point-overview>
+            <pxe-supply-points-summary
+                    [powerPlacesCount]="supplyPointStatistic.powerCount"
+                    [powerPlacesConsumptionSum]="supplyPointStatistic.gasAnnualConsumptionSum"
+                [gasPlacesCount]="supplyPointStatistic.gasCount"
+                    [gasPlacesConsumptionSum]="supplyPointStatistic.powerAnnualConsumptionSum"
+                [supplyPointsEndingCount]="supplyPointStatistic.showDeliveryCount"
+                [supplyPointsEndingData]="supplyPointStatistic.showDeliveryItems"
+                (newSupplierAction)="createSupplyPointAction()"
+                (supplyPointsListAction)="routerToListOfSupplyPointsAction()">
+            </pxe-supply-points-summary>
         </div>
         <div class="col-md-6">
             <h2>Novinky</h2>

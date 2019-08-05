@@ -1,12 +1,12 @@
 import * as moment from 'moment';
 import { Moment } from 'moment';
+import { unitOfTime } from 'moment';
 
 import { CONSTS } from 'src/app/app.constants';
 import {
     ISupplyPointInput,
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
-import { unitOfTime } from 'moment';
 
 export const getNextDayFromExpirationDate = (supplyPointInput: ISupplyPointInput) =>
     supplyPointInput.expirationDate && moment(supplyPointInput.expirationDate).add(1, 'days');

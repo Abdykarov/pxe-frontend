@@ -9,7 +9,7 @@ import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 import { NewsContainerModule } from 'src/common/containers/news-conteiner/news-conteiner.module';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
-import { SupplyPointOverviewModule } from 'src/common/ui/supply-point-overview/supply-point-overview.module';
+import { SupplyPointsSummaryModule } from 'src/common/ui/supply-points-summary/supply-points-summary.module';
 
 @NgModule({
     declarations: [
@@ -24,8 +24,7 @@ import { SupplyPointOverviewModule } from 'src/common/ui/supply-point-overview/s
         LayoutContainerModule,
         NewsContainerModule ,
         PlaceloaderModule,
-        SupplyPointOverviewModule,
-
+        SupplyPointsSummaryModule,
     ],
 })
 export class DashboardModule { }

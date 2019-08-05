@@ -13,13 +13,10 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
-    AllowedOperations,
     ISupplyPoint,
+    ISupplyPointStatistic,
 } from 'src/common/graphql/models/supply.model';
-import { ContractStatus } from 'src/common/graphql/models/contract';
-import { getOverviewState } from 'src/common/utils/get-overview-state.fnc';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
-import { OverviewState } from 'src/app/pages/requests-overview/requests-overview.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -40,69 +37,20 @@ export class DashboardComponent extends AbstractComponent implements OnInit {
         super();
     }
     public globalError: string[] = [];
-    public state: OverviewState;
-
     public loadingData = true;
-    public overviewStates = OverviewState;
-
-    public electricityPlacesCount = 2;
-    public electricitySumOfPerformance = 1.002;
-    public gasPlacesCount = 3;
-    public gasSumOfPerformance = 4.784;
     public supplyPoints: ISupplyPoint[];
-    public supplyPointsEnding: ISupplyPoint[] = [];
-
-    // public supplyPointsEnding: ISupplyPoint[] = [];
-    // [{
-    //     id: '5456',
-    //     name: 'Byt praha',
-    //     allowedOperations: [],
-    //     commodityType: CommodityType.POWER,
-    //     supplier: {
-    //         id: '',
-    //         name: 'PRE',
-    //         vatNumber: '',
-    //         logoPath: '',
-    //         sampleDocuments: [],
-    //     },
-    //     ean: '',
-    //     address: null,
-    //     distributionRate: null,
-    //     circuitBreaker: null,
-    //     phases: null,
-    //     annualConsumptionNT: 0,
-    //     annualConsumptionVT: 0,
-    //     expirationDate: '0',
-    //     subject: null,
-    //     lastAnnualConsumptionNT: 0,
-    //     lastAnnualConsumptionVT: 0,
-    //     lastVersionOfSupplyPoint: false,
-    //     contractEndType: null,
-    //     timeToContractEnd: 0,
-    //     timeToContractEndPeriod: null,
-    //     contract: null,
-    //     progressStatus: ProgressStatus.SUPPLY_POINT,
-    // }];
+    public supplyPointStatistic: ISupplyPointStatistic;
 
     ngOnInit() {
-        this.supplyService.findSupplyPointsByContractStatus(null,
-            [
-                ContractStatus.NOT_CONCLUDED,
-                ContractStatus.CONCLUDED,
-            ])
+        this.supplyService.computeAndGetSupplyPointStatistics()
             .pipe(
                 takeUntil(this.destroy$),
-                map(({data}) =>  data.findSupplyPointsByContractStatus),
+                map(({data}) =>  data.computeAndGetSupplyPointStatistics),
             )
             .subscribe(
-                (supplyPointsSource: ISupplyPoint[]) => {
-                    this.supplyPointsEnding = R.filter((supplyPoint: ISupplyPoint) =>
-                        supplyPoint.allowedOperations === AllowedOperations.SHOW_DELIVERY_TO,
-                    )(R.clone(supplyPointsSource));
-                    const { overviewState, supplyPoints } = getOverviewState(supplyPointsSource);
+                (supplyPointStatistic: ISupplyPointStatistic) => {
                     this.loadingData = false;
-                    this.supplyPoints = supplyPoints;
-                    this.state = overviewState;
+                    this.supplyPointStatistic = supplyPointStatistic;
                     this.cd.markForCheck();
                 },
                 error => {
@@ -117,7 +65,7 @@ export class DashboardComponent extends AbstractComponent implements OnInit {
         this.router.navigate([ROUTES.ROUTER_REQUESTS]);
     }
 
-    public complateRequestAction = () => {
+    public completeRequestAction = () => {
         if (this.supplyPoints.length === 1) {
             this.navigateRequestService.routerToRequestStep(this.supplyPoints[0]);
         } else {

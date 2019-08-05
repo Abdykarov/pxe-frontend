@@ -9,14 +9,14 @@
                     <div class="col-12 col-md-auto mr-md-auto">
                         <div class="supply-point-overview__product-holder">
                             <span class="supply-point-overview__type">Elektřina (MWh)</span>
-                            <span class="supply-point-overview__value">{{electricitySumOfPerformance | number: '1.3-3'}}</span>
-                            <span class="supply-point-overview__quantity">{{electricityPlacesCount}} OM</span>
+                            <span class="supply-point-overview__value">{{powerPlacesConsumptionSum | number: '1.0-3'}}</span>
+                            <span class="supply-point-overview__quantity">{{powerPlacesCount}} OM</span>
                         </div>
                     </div>
                     <div class="col-12 col-md-auto">
                         <div class="supply-point-overview__product-holder">
                             <span class="supply-point-overview__type">Plyn (MWh)</span>
-                            <span class="supply-point-overview__value">{{gasSumOfPerformance | number: '1.3-3'}}</span>
+                            <span class="supply-point-overview__value">{{gasPlacesConsumptionSum | number: '1.0-3'}}</span>
                             <span class="supply-point-overview__quantity">{{gasPlacesCount}} OM</span>
                         </div>
                     </div>
@@ -26,25 +26,28 @@
                 <a (click)="supplyPointsListAction.emit($event)">Seznam Odběrných míst</a>
             </div>
         </div>
-        <div class="row" *ngIf="supplyPointsEnding.length !== 0">
+        <div class="row" *ngIf="supplyPointsEndingCount !== 0">
             <div class="col-12 col-xl-9 offset-xl-3">
                 <div class="supply-point-overview__info">
                     <span class="icon icon--info supply-point-overview__info-icon"></span>
                     <span class="supply-point-overview__info-description">
                         <ng-container
-                            *ngIf="supplyPointsEnding.length === 1; else moreSupllyPointEndingTempalte">
-                            Končí vám smlouva na {{supplyPointsEnding[0].commodityType === commodityType.POWER ? 'elekřinu' : 'plyn'}} pro
-                            odběrné místo s názvem: {{supplyPointsEnding[0].name}}
+                            *ngIf="supplyPointsEndingCount === 1; else moreSupplyPointEndingTemplate">
+                            Končí vám smlouva na {{supplyPointsEndingData[0].commodityType === commodityType.POWER ? 'elekřinu' : 'plyn'}} pro
+                            odběrné místo s názvem: {{supplyPointsEndingData[0].name}}
                         </ng-container>
-                        <ng-template #moreSupllyPointEndingTempalte>
+                        <ng-template #moreSupplyPointEndingTemplate>
                             Končí vám smlouva u vícero odběrných míst
                         </ng-template>
                     </span>
                 </div>
-                <a
-                    *ngIf="supplyPointsEnding.length === 1"
-                    (click)="newSupplierAction.emit($event)">
+                <a *ngIf="supplyPointsEndingCount === 1"
+                   (click)="newSupplierAction.emit($event)">
                     Vybrat nového dodavatele
+                </a>
+                <a *ngIf="supplyPointsEndingCount > 1"
+                   (click)="newSupplierAction.emit($event)">
+                    Zobrazit seznam odběrných míst
                 </a>
             </div>
         </div>
