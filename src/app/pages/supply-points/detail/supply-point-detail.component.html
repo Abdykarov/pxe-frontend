@@ -1,25 +1,13 @@
 <ng-template #leaveContactInfoTemplate let-contract="contract">
     <div class="col-12 mb-4 small">
-        Kliknutím na tlačítko "PODEPSAT" souhlasíte s odstoupením od smlouvy do 14 dnů od podpisu. Výpověď smlouvy naleznete <lnd-button
-            label="zde"
-            size="sm"
-            customClass="btn-sm-inline"
-            (action)="openDocument(contract.contractId, documentType.WITHDRAWAL)"
-            [isDisabled]="documentLoading"
-            type="link"
-    ></lnd-button>.
+        Kliknutím na tlačítko „PODEPSAT“ souhlasíte s odstoupením od smlouvy do 14 dnů od podpisu.
+        Výpověď smlouvy naleznete <a [class.disabled]="documentLoading" (click)="openDocument(contract.contractId, documentType.WITHDRAWAL)">zde</a>.
     </div>
 </ng-template>
 <ng-template #terminateContactInfoTemplate let-contract="contract">
     <div class="col-12 mb-4 small">
-        Kliknutím na tlačítko "PODEPSAT" souhlasíte s odstoupením od smlouvy do 15 dnů od zahájení dodávky. Výpověď smlouvy naleznete <lnd-button
-            label="zde"
-            size="sm"
-            customClass="btn-sm-inline"
-            (action)="openDocument(contract.contractId, documentType.DENUNCIATION)"
-            [isDisabled]="documentLoading"
-            type="link"
-    ></lnd-button>.
+        Kliknutím na tlačítko „PODEPSAT“ souhlasíte s odstoupením od smlouvy do 15 dnů od zahájení dodávky.
+        Výpověď smlouvy naleznete <a [class.disabled]="documentLoading" (click)="openDocument(contract.contractId, documentType.DENUNCIATION)">zde</a>.
     </div>
 </ng-template>
 <ng-template #contractActionsTemplate>

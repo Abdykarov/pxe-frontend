@@ -82,15 +82,9 @@
                             <span class="text-with-icon__text small">informace před uzavřením smlouvy o sdružených službách dodávky
                                 <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
                                 <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container>
-                                <span class="ml-0 ml-md-3 d-block d-md-inline-block">
-                                    <lnd-button
-                                        label="Zobrazit"
-                                        size="sm"
-                                        (action)="openDocument(supplyPoint.contract.contractId, documentType.INFORMATION)"
-                                        [isDisabled]="documentLoading"
-                                        type="link"
-                                    ></lnd-button>
-                                </span>
+                                <a class="ml-0 ml-md-3 mt-2 mt-md-0 d-block d-md-inline-block"
+                                   [class.disabled]="documentLoading"
+                                   (click)="openDocument(supplyPoint.contract.contractId, documentType.INFORMATION)">Zobrazit</a>
                             </span>
                         </div>
                         <div class="text-with-icon mb-5">
@@ -98,15 +92,9 @@
                             <span class="text-with-icon__text small">smlouva o sdružených službách dodávky
                                 <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
                                 <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container>
-                                <span class="ml-0 ml-md-3 d-block d-md-inline-block">
-                                    <lnd-button
-                                        label="Zobrazit"
-                                        size="sm"
-                                        (action)="openDocument(supplyPoint.contract.contractId, documentType.CONTRACT)"
-                                        [isDisabled]="documentLoading"
-                                        type="link"
-                                    ></lnd-button>
-                                </span>
+                                <a class="ml-0 ml-md-3 mt-2 mt-md-0 d-block d-md-inline-block"
+                                   [class.disabled]="documentLoading"
+                                   (click)="openDocument(supplyPoint.contract.contractId, documentType.CONTRACT)">Zobrazit</a>
                             </span>
                         </div>
                         <p>
