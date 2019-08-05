@@ -6,5 +6,5 @@ import { IRestAPIError } from 'src/common/containers/form/models/rest-api-error.
 
 export const parseRestAPIErrors = (errorObj: IRestAPIError): string => {
     const { error } = errorObj;
-    return error && error.errorCode && restAPIErrorCodes[error.errorCode] || defaultRestAPIErrorMessage;
+    return error && (error.errorCode && restAPIErrorCodes[error.errorCode] || error.message) || defaultRestAPIErrorMessage;
 };

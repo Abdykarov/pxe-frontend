@@ -43,6 +43,8 @@ win['angularDevstack']['config'] = config.config;
 // create global variables
 global['window'] = win;
 global['document'] = win.document;
+global['navigator'] = win.navigator;
+global['HTMLAnchorElement'] = () => null;
 
 // * NOTE :: leave this as require() since this file is built Dynamically from webpack
 const {

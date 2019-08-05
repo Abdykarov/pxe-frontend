@@ -6,12 +6,19 @@ import {
     HttpInterceptor,
     HttpRequest,
 } from '@angular/common/http';
+import { Router } from '@angular/router';
 
-import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import {
+    Observable,
+    throwError,
+} from 'rxjs';
 
 // own classes
 import { AuthService } from 'src/app/services/auth.service';
+import { CONSTS } from 'src/app/app.constants';
 import { environment } from 'src/environments/environment';
+import { scrollToElementFnc } from 'src/common/utils';
 
 @Injectable({
     providedIn: 'root',
@@ -20,6 +27,7 @@ export class ApiInterceptor implements HttpInterceptor {
 
     constructor(
         private authService: AuthService,
+        private router: Router,
     ) {}
 
     intercept(
@@ -45,6 +53,16 @@ export class ApiInterceptor implements HttpInterceptor {
                 });
         }
 
-        return next.handle(resultRequest);
+        return next.handle(resultRequest)
+            .pipe(
+                catchError((error, caught) => {
+                    if (error.status === 401) {
+                        this.router.navigate([CONSTS.PATHS.LOGOUT]);
+                    } else {
+                        scrollToElementFnc('top');
+                    }
+                    return throwError(error);
+                }),
+            );
     }
 }
