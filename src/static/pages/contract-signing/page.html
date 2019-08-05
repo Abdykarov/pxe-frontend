@@ -50,17 +50,27 @@
                     Návrh smlouvy o sdružených službách dodávky elektřiny/plynu, obsahuje také všeobecné obchodní 
                     podmínky dodávky a plnou moc pro dodavatele.
                 </p>
-                <div class="text-with-icon">
-                    <span class="icon icon--document"></span>
-                    <span class="text-with-icon__text small">informace před uzavřením smlouvy o sdružených službách dodávky elektřiny
-                        <a class="ml-0 ml-md-3 mt-2 mt-md-0 d-block d-md-inline-block">Zobrazit</a>
-                    </span>
+                <div class="row no-gutters mb-3">
+                    <div class="col-auto">
+                        <div class="text-with-icon mb-2">
+                            <span class="icon icon--document"></span>
+                            <span class="text-with-icon__text small">informace před uzavřením smlouvy o sdružených službách dodávky elektřiny</span>
+                        </div>
+                    </div>
+                    <div class="col-auto ml-4">
+                        <a class="small">Zobrazit</a>
+                    </div>
                 </div>
-                <div class="text-with-icon mb-5">
-                    <span class="icon icon--document"></span>
-                    <span class="text-with-icon__text small">smlouva o sdružených službách dodávky elektřiny
-                        <a class="ml-0 ml-md-3 mt-2 mt-md-0 d-block d-md-inline-block">Zobrazit</a>
-                    </span>
+                <div class="row no-gutters mb-3">
+                    <div class="col-auto">
+                        <div class="text-with-icon mb-2">
+                            <span class="icon icon--document"></span>
+                            <span class="text-with-icon__text small">smlouva o sdružených službách dodávky elektřiny</span>
+                        </div>
+                    </div>
+                    <div class="col-auto ml-4">
+                        <a class="small">Zobrazit</a>
+                    </div>
                 </div>
                 <p>
                     Kliknutím na tlačítko „PODEPSAT“ souhlasím s výše uvedeným návrhem smlouvy o sdružených službách 
@@ -72,11 +82,13 @@
                     <div class="col-12 col-lg-9 offset-lg-3">
                         <div class="row justify-content-end">
                             <div class="col">
-                                <lnd-form-field
-                                    [disabledField]="true"
-                                    id="sms-code"
-                                    label="Kód z SMS">
-                                </lnd-form-field>
+                                <div class="form-container ml-0 ml-md-auto mr-md-0">
+                                    <lnd-form-field
+                                        [disabledField]="true"
+                                        id="sms-code"
+                                        label="Kód z SMS">
+                                    </lnd-form-field>
+                                </div>
                             </div>
                             <div class="col-md-auto mt-md-4">
                                 <lnd-button
