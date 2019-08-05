@@ -113,6 +113,7 @@ export const formFields: IForm = {
             required: errorFieldMessages.birthDate.required,
             bsDate: errorFieldMessages.date.format,
             bsDateMaxDate: errorFieldMessages.birthDate.bsDateMaxDate,
+            bsDateMinDate: errorFieldMessages.birthDate.bsDateMinDate,
         },
         ico: {
             required: errorFieldMessages.ico.required,
