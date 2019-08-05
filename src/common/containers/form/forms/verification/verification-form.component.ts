@@ -1,6 +1,7 @@
 import {
     Component,
-    Input, TemplateRef,
+    Input,
+    TemplateRef,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
