@@ -17,4 +17,6 @@ export class ListSupplyPointsPageComponent {
     constructor(
         public config: NewSupplyPointPageConfig,
     ) {}
+
+    public supplyPointAction = () => console.log('Supply point clicked');
 }

@@ -1,3 +1,15 @@
+<ng-template #additionalInfoTemplate let-data="data">
+    <div class="row">
+        <div class="col-12">
+            <pxe-badge type="info"
+                        [isLink]="true"
+                        (action)="badgeAction()">
+                Platnost končí za 10 dní - Obnovit smlouvu
+            </pxe-badge>
+        </div>
+    </div>
+</ng-template>
+
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12 col-md-6 offset-md-3 text-center">
@@ -17,7 +29,11 @@
     <div class="row">
         <div class="col-12">
             <div class="supply-points">
-                <pxe-supply-point [data]="supplyPointPower"></pxe-supply-point>
+                <pxe-supply-point 
+                    [data]="supplyPointPower"
+                    (action)="supplyPointAction()"
+                    [additionalInfoTemplate]="additionalInfoTemplate">
+                </pxe-supply-point>
                 <pxe-supply-point [data]="supplyPointGas"></pxe-supply-point>
                 <pxe-supply-point [data]="supplyPointPower"></pxe-supply-point>
             </div>

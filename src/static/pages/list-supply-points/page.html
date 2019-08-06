@@ -21,9 +21,10 @@
             <div class="supply-points">
                 <div class="row">
                     <div class="col-md-6">
-                        <pxe-supply-point 
+                        <pxe-supply-point
                             [data]="supplyPointPower"
-                            isListItem="true">
+                            isListItem="true"
+                            (action)="supplyPointAction()">
                         </pxe-supply-point>
                     </div>
                     <div class="col-md-6">
