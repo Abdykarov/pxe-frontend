@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
-import { supplyPointsEndingConfig } from 'src/static/pages/dashboard/config';
+import { ISupplyPointStatistic } from 'src/common/graphql/models/supply.model';
+import {
+    supplyPointStatistic,
+    supplyPointStatisticMore,
+    supplyPointStatisticNone,
+} from 'src/static/pages/dashboard/config';
 
 @Component({
     templateUrl: './page.html',
@@ -10,12 +14,9 @@ import { supplyPointsEndingConfig } from 'src/static/pages/dashboard/config';
 export class SupplyPointOverviewComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
-    public electricityPlacesCount = 2;
-    public electricitySumOfPerformance = 1.002;
-    public gasPlacesCount = 3;
-    public gasSumOfPerformance = 4.784;
-
-    public supplyPointsEnding: ISupplyPoint[] = supplyPointsEndingConfig;
+    public supplyPointStatistic: ISupplyPointStatistic = supplyPointStatistic;
+    public supplyPointStatisticMore: ISupplyPointStatistic = supplyPointStatisticMore;
+    public supplyPointStatisticNone: ISupplyPointStatistic = supplyPointStatisticNone;
 
     constructor() {
         this.breadcrumbItemsSimple = [

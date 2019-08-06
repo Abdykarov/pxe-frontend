@@ -69,14 +69,24 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (this.supplyPointId) {
+        let supplyPointCopy,
+            supplyPointIdCopy;
+
+        if (isPlatformBrowser(this.platformId)) {
+            supplyPointCopy = window.history.state.supplyPointCopy;
+            supplyPointIdCopy = window.history.state.supplyPointId;
+        }
+
+        this.editMode = supplyPointCopy || supplyPointIdCopy ? SUPPLY_POINT_EDIT_TYPE.PROLONG : SUPPLY_POINT_EDIT_TYPE.NORMAL;
+
+        if (this.supplyPointId || supplyPointIdCopy) {
             let supplyPointFound: ISupplyPoint = null;
-            this.supplyService.getSupplyPoint(this.supplyPointId)
+            this.supplyService.getSupplyPoint(this.supplyPointId || supplyPointIdCopy)
                 .pipe(
                     map(({data}) => data.getSupplyPoint),
                     concatMap((supplyPoint: ISupplyPoint) => {
                         supplyPointFound = supplyPoint;
-                        return R.path(['contract', 'contractId'])(supplyPoint) ?
+                        return R.path(['contract', 'contractId'])(supplyPoint) && R.isNil(supplyPointIdCopy) ?
                             this.contractService.deleteSelectedOfferFromContract(supplyPoint.contract.contractId) :
                             of({});
                     }),
@@ -93,16 +103,10 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                         this.cd.markForCheck();
                     },
                 );
+        } else if (supplyPointCopy) {
+            this.supplyPointData = supplyPointCopy;
         } else {
-            if (isPlatformBrowser(this.platformId)) {
-                const supplyPointCopy = window.history.state.supplyPointCopy;
-                if (supplyPointCopy) {
-                    this.supplyPointData = supplyPointCopy;
-                    this.editMode = SUPPLY_POINT_EDIT_TYPE.PROLONG;
-                } else {
-                    this.supplyPointData = {};
-                }
-            }
+            this.supplyPointData = {};
         }
     }
 

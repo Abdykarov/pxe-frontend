@@ -186,4 +186,5 @@ export interface ISupplyPointStatisticView {
     id: number;
     name: string;
     commodityType: CommodityType;
+    progressStatus: ProgressStatus;
 }

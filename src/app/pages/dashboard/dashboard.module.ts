@@ -7,7 +7,7 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard.routing';
 import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
-import { NewsContainerModule } from 'src/common/containers/news-conteiner/news-conteiner.module';
+import { NewsContainerModule } from 'src/common/containers/news/news-conteiner.module';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
 import { SupplyPointsSummaryModule } from 'src/common/ui/supply-points-summary/supply-points-summary.module';
 

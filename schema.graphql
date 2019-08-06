@@ -234,8 +234,10 @@ type SupplyPointStatistic {
 }
 
 type SupplyPointStatisticView {
+    commodityType: CommodityType!
     id: Int!
     name: String!
+    progressStatus: ProgressStatus!
 }
 
 type VariableSymbol {

@@ -16,6 +16,7 @@ import { DOCUMENT } from '@angular/common';
 export class FooterComponent {
     @Input() isSimpleFooter = false;
 
+    public year = new Date().getFullYear();
     public scrollToTopIsVisible: boolean;
 
     @HostListener('window:scroll')

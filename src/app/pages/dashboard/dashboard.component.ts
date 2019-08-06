@@ -13,8 +13,8 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
-    ISupplyPoint,
     ISupplyPointStatistic,
+    ISupplyPointStatisticView,
 } from 'src/common/graphql/models/supply.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { parseGraphQLErrors } from 'src/common/utils';
@@ -27,6 +27,9 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent extends AbstractComponent implements OnInit {
+    public globalError: string[] = [];
+    public loadingData = true;
+    public supplyPointStatistic: ISupplyPointStatistic;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -36,10 +39,6 @@ export class DashboardComponent extends AbstractComponent implements OnInit {
     ) {
         super();
     }
-    public globalError: string[] = [];
-    public loadingData = true;
-    public supplyPoints: ISupplyPoint[];
-    public supplyPointStatistic: ISupplyPointStatistic;
 
     ngOnInit() {
         this.supplyService.computeAndGetSupplyPointStatistics()
@@ -61,35 +60,52 @@ export class DashboardComponent extends AbstractComponent implements OnInit {
             );
     }
 
-    public routerToListOfSupplyPointsAction = () => {
+    public navigateToSupplyPoints = () => {
+        this.router.navigate([ROUTES.ROUTER_SUPPLY_POINTS]);
+    }
+
+    public navigateToRequests = () => {
         this.router.navigate([ROUTES.ROUTER_REQUESTS]);
     }
 
-    public completeRequestAction = () => {
-        if (this.supplyPoints.length === 1) {
-            this.navigateRequestService.routerToRequestStep(this.supplyPoints[0]);
-        } else {
-            this.routerToListOfSupplyPointsAction();
-        }
-    }
-
-    public createSupplyPointAction = () =>  {
-        const queryParams = R.cond([
-            [
-                (supplyPoints: ISupplyPoint[]) => supplyPoints.length === 1,
-                (supplyPoints: ISupplyPoint[]) =>
-                    ({
-                            supplyPointId: supplyPoints[0].id,
-                    }),
-            ],
-            [R.T, () => ({})],
-        ])(this.supplyPoints);
-
+    public navigateToNewSupplyPoint = (supplyPointId: string | number = null) => {
+        const state = {
+            supplyPointId,
+        };
         this.router.navigate(
             [ROUTES.ROUTER_REQUEST_SUPPLY_POINT],
-            {
-                queryParams,
-            },
-        );
+            {state});
+    }
+
+    public completeRequestAction = (notConcludedItems: ISupplyPointStatisticView[]) => {
+        R.cond([
+            [
+                (items: ISupplyPointStatisticView[]) => R.equals(1, items.length),
+                (items: ISupplyPointStatisticView[]) => {
+                    const notConcludedItem = items[0];
+                    this.navigateRequestService.routerToRequestStep(notConcludedItem);
+                },
+            ],
+            [
+                R.T,
+                () => this.navigateToRequests(),
+            ],
+        ])(notConcludedItems);
+    }
+
+    public supplierAction = (showDeliveryItems: ISupplyPointStatisticView[]) =>  {
+        R.cond([
+            [
+                (items: ISupplyPointStatisticView[]) => R.equals(1, items.length),
+                (items: ISupplyPointStatisticView[]) => {
+                    const supplyPointId = items[0].id;
+                    this.navigateToNewSupplyPoint(supplyPointId);
+                },
+            ],
+            [
+                R.T,
+                () => this.navigateToNewSupplyPoint(),
+            ],
+        ])(showDeliveryItems);
     }
 }

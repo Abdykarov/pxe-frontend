@@ -7,6 +7,7 @@ import { ContractStatus } from 'src/common/graphql/models/contract';
 import { indexOfSteps } from 'src/common/utils';
 import {
     ISupplyPoint,
+    ISupplyPointStatisticView,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { ROUTES } from 'src/app/app.constants';
@@ -22,7 +23,7 @@ export class NavigateRequestService {
     private canGoToStep = (supplyPoint: ISupplyPoint, allowedProgressStatus: ProgressStatus) =>
         this.isPreviousStep(supplyPoint, allowedProgressStatus) || this.isProgressStatusStep(supplyPoint, allowedProgressStatus)
 
-    public routerToRequestStep = (supplyPoint: ISupplyPoint, progressStatus: ProgressStatus = null) => {
+    public routerToRequestStep = (supplyPoint: ISupplyPoint | ISupplyPointStatisticView, progressStatus: ProgressStatus = null) => {
         this.router.navigate(
             [this.getNextRouteByProgressStatus(progressStatus === null ? supplyPoint.progressStatus : progressStatus)],
             {

@@ -1,6 +1,9 @@
 <div class="supply-point-overview">
     <div class="supply-point-overview__inner">
-        <div class="row mb-4">
+        <div class="row"
+             [class.mb-4]="supplyPointsEndingCount !== 0"
+             [class.mb-md-0]="supplyPointsEndingCount === 0"
+             [class.mb-3]="supplyPointsEndingCount === 0">
             <div class="col-3 text-center">
                 <span class="icon icon--house supply-point-overview__icon"></span>
             </div>
@@ -26,28 +29,29 @@
                 <a (click)="supplyPointsListAction.emit($event)">Seznam Odběrných míst</a>
             </div>
         </div>
-        <div class="row" *ngIf="supplyPointsEndingCount !== 0">
+        <div *ngIf="supplyPointsEndingCount !== 0"
+             class="row mb-md-0 mb-3">
             <div class="col-12 col-xl-9 offset-xl-3">
                 <div class="supply-point-overview__info">
                     <span class="icon icon--info supply-point-overview__info-icon"></span>
                     <span class="supply-point-overview__info-description">
                         <ng-container
-                            *ngIf="supplyPointsEndingCount === 1; else moreSupplyPointEndingTemplate">
+                            *ngIf="supplyPointsEndingCount === 1; else moreSupplyPointEndingTextTemplate">
                             Končí vám smlouva na {{supplyPointsEndingData[0].commodityType === commodityType.POWER ? 'elekřinu' : 'plyn'}} pro
                             odběrné místo s názvem: {{supplyPointsEndingData[0].name}}
                         </ng-container>
-                        <ng-template #moreSupplyPointEndingTemplate>
+                        <ng-template #moreSupplyPointEndingTextTemplate>
                             Končí vám smlouva u vícero odběrných míst
                         </ng-template>
                     </span>
                 </div>
-                <a *ngIf="supplyPointsEndingCount === 1"
-                   (click)="newSupplierAction.emit($event)">
-                    Vybrat nového dodavatele
-                </a>
-                <a *ngIf="supplyPointsEndingCount > 1"
-                   (click)="newSupplierAction.emit($event)">
-                    Zobrazit seznam odběrných míst
+                <a (click)="newSupplierAction.emit(supplyPointsEndingData)">
+                    <ng-container *ngIf="supplyPointsEndingCount === 1; else moreSupplyPointEndingLinkTemplate">
+                        Vybrat nového dodavatele
+                    </ng-container>
+                    <ng-template #moreSupplyPointEndingLinkTemplate>
+                        Seznam Odběrných míst
+                    </ng-template>
                 </a>
             </div>
         </div>

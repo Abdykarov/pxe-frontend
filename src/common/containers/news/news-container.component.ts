@@ -3,7 +3,7 @@ import {
     Input,
 } from '@angular/core';
 
-import { config } from 'src/common/containers/news-conteiner/news-container.config';
+import { config } from 'src/common/containers/news/news-container.config';
 import { INews } from 'src/common/ui/news/model/news.model';
 
 @Component({

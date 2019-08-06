@@ -7,14 +7,38 @@
 <div class="row">
     <div class="col-md-6">
         <div class="static-pages-holder">
+            <h3>jedna smlouva k prodloužení</h3>
             <div class="static-pages static-pages--bg-transparent">
-                <pxe-supply-point-overview
-                        [powerPlacesCount]="electricityPlacesCount"
-                        [powerPlacesConsumptionSum]="electricitySumOfPerformance"
-                    [gasPlacesCount]="gasPlacesCount"
-                        [gasPlacesConsumptionSum]="gasSumOfPerformance"
-                    [supplyPointsEnding]="supplyPointsEnding">
-                </pxe-supply-point-overview>
+                <pxe-supply-points-summary
+                    [powerPlacesCount]="supplyPointStatistic.powerCount"
+                    [powerPlacesConsumptionSum]="supplyPointStatistic.powerAnnualConsumptionSum"
+                    [gasPlacesCount]="supplyPointStatistic.gasCount"
+                    [gasPlacesConsumptionSum]="supplyPointStatistic.gasAnnualConsumptionSum"
+                    [supplyPointsEndingCount]="supplyPointStatistic.showDeliveryCount"
+                    [supplyPointsEndingData]="supplyPointStatistic.showDeliveryItems">
+                </pxe-supply-points-summary>
+            </div>
+            <h3>více smluv k prodloužení</h3>
+            <div class="static-pages static-pages--bg-transparent">
+                <pxe-supply-points-summary
+                        [powerPlacesCount]="supplyPointStatisticMore.powerCount"
+                        [powerPlacesConsumptionSum]="supplyPointStatisticMore.powerAnnualConsumptionSum"
+                        [gasPlacesCount]="supplyPointStatisticMore.gasCount"
+                        [gasPlacesConsumptionSum]="supplyPointStatisticMore.gasAnnualConsumptionSum"
+                        [supplyPointsEndingCount]="supplyPointStatisticMore.showDeliveryCount"
+                        [supplyPointsEndingData]="supplyPointStatisticMore.showDeliveryItems">
+                </pxe-supply-points-summary>
+            </div>
+            <h3>žádná smlouva k prodloužení</h3>
+            <div class="static-pages static-pages--bg-transparent">
+                <pxe-supply-points-summary
+                        [powerPlacesCount]="supplyPointStatisticNone.powerCount"
+                        [powerPlacesConsumptionSum]="supplyPointStatisticNone.powerAnnualConsumptionSum"
+                        [gasPlacesCount]="supplyPointStatisticNone.gasCount"
+                        [gasPlacesConsumptionSum]="supplyPointStatisticNone.gasAnnualConsumptionSum"
+                        [supplyPointsEndingCount]="supplyPointStatisticNone.showDeliveryCount"
+                        [supplyPointsEndingData]="supplyPointStatisticNone.showDeliveryItems">
+                </pxe-supply-points-summary>
             </div>
         </div>
     </div>

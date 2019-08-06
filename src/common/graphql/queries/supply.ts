@@ -389,6 +389,8 @@ export const computeAndGetSupplyPointStatisticsQuery = gql`
             notConcludedItems {
                 id,
                 name,
+                commodityType,
+                progressStatus,
             },
             powerAnnualConsumptionSum,
             powerCount,
@@ -396,6 +398,8 @@ export const computeAndGetSupplyPointStatisticsQuery = gql`
             showDeliveryItems {
                 id,
                 name,
+                commodityType,
+                progressStatus,
             },
         }
     }
