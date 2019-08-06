@@ -14,10 +14,11 @@ import { DOCUMENT } from '@angular/common';
     encapsulation: ViewEncapsulation.None,
 })
 export class FooterComponent {
-    @Input() isSimpleFooter = false;
+    @Input()
+    public isSimpleFooter = false;
 
-    public year = new Date().getFullYear();
     public scrollToTopIsVisible: boolean;
+    public year = new Date().getFullYear();
 
     @HostListener('window:scroll')
     onWindowScroll() {
@@ -37,7 +38,9 @@ export class FooterComponent {
         }
     }
 
-    constructor(@Inject(DOCUMENT) private document: Document) {}
+    constructor(
+        @Inject(DOCUMENT) private document: Document,
+    ) {}
 
     public scrollToTop = () => {
         const currentScroll = this.document.documentElement.scrollTop || this.document.body.scrollTop;

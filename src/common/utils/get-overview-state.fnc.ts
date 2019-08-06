@@ -46,6 +46,13 @@ export const getOverviewState = (supplyPointsInput: ISupplyPoint[]): OverviewSta
                 supplyPoints: R.filter((supplyPoint: ISupplyPoint) => isSupplyPointInRequestState(supplyPoint), supplyPoints),
             }),
         ],
+        // [
+        //     this.isAnyContractEnding,
+        //     (supplyPoints: ISupplyPoint[]) => ({
+        //         overviewState: OverviewState.SOME_SUPPLY_POINTS_ARE_ENDING ,
+        //         supplyPoints: R.filter((supplyPoint: ISupplyPoint) => this.contractEnding(supplyPoint), supplyPoints),
+        //     }),
+        // ],
         [
             R.T,
             () => ({
