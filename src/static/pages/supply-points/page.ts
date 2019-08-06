@@ -11,4 +11,7 @@ import {
 export class SupplyPointsPageComponent {
     public supplyPointPower = supplyPointConfigPower;
     public supplyPointGas = supplyPointConfigGas;
+
+    public badgeAction = () => console.log('Badge clicked');
+    public supplyPointAction = () => console.log('Supply point clicked');
 }
