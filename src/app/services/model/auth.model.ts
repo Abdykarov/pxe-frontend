@@ -1,4 +1,4 @@
-import { LANDING_PAGE } from 'src/common/graphql/models/password';
+import { LANDING_PAGE } from 'src/common/graphql/models/user.model';
 
 export interface ILoginRequest {
     email: string;
@@ -18,7 +18,8 @@ export interface ILoginResponseModificator {
 export interface IJwtPayload {
     data: any;
     exp: number;
-    firstname: string;
+    firstName: string;
+    lastName: string;
     lastSmsConfirmTs: number;
     manageOffers: boolean;
     manageOrders: boolean;
@@ -36,6 +37,7 @@ export interface IJwtPayload {
     needSmsConfirm?: boolean;
     passwordReset?: boolean;
     userStatus: UserStatus;
+    phoneNumber?: string;
 }
 
 export enum IUserRoles {

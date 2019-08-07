@@ -23,7 +23,7 @@ export const changePasswordFields: IForm = {
         ],
     },
     options: {
-        validator: fieldsMustMatch('password', 'confirmPassword'),
+        validator: fieldsMustMatch('user.ts', 'confirmPassword'),
     },
     validationMessages: {
         password: {

@@ -48,7 +48,7 @@ export const CONSTS = {
         USER_PROFILE: 'user-profile',
         WILD_CART  : '**',
     },
-    MAX_LENGTH_NAME: 120,
+    MAX_LENGTH_NAME: 50,
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
     TELEPHONE_PREFIX_CZ: '+420',

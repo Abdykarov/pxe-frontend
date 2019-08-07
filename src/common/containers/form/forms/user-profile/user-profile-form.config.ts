@@ -8,18 +8,26 @@ import { IForm } from 'src/common/containers/form/models/form-definition.model';
 export const userProfileFormFields: IForm = {
     controls: {
         email: [
-            '',
+            null,
             [
                 Validators.required,
                 CustomValidators.email,
             ],
         ],
-        name: [
+        firstName: [
             null,
             [
                 Validators.required,
                 Validators.maxLength(CONSTS.MAX_LENGTH_NAME),
-                Validators.pattern(new RegExp(/^[\p{L}'][ \p{L}'-]*[\p{L}]$/, 'u')),
+                Validators.pattern(new RegExp(/^[\p{L}']+[ \p{L}']*$/, 'u')),
+            ],
+        ],
+        lastName: [
+            null,
+            [
+                Validators.required,
+                Validators.maxLength(CONSTS.MAX_LENGTH_NAME),
+                Validators.pattern(new RegExp(/^[\p{L}'-]*[\p{L}]$/, 'u')),
             ],
         ],
         phone: [
@@ -30,7 +38,7 @@ export const userProfileFormFields: IForm = {
             ],
         ],
         phonePrefix: [
-            CONSTS.MAX_LENGTH_NAME,
+            CONSTS.TELEPHONE_PREFIX_CZ,
             [
                 Validators.required,
                 CustomValidators.phoneNumberPrefix,
@@ -43,10 +51,15 @@ export const userProfileFormFields: IForm = {
             email: errorFieldMessages.email.email,
             invalidEmail: errorFieldMessages.email.email,
         },
-        name: {
-            required: errorFieldMessages.fullName.requiredPerson,
-            maxlengthRequiredLengthActualLength: errorFieldMessages.fullName.maxlength,
-            pattern: errorFieldMessages.fullName.pattern,
+        firstName: {
+            required: errorFieldMessages.fullName.requiredPersonFirstName,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.fullName.maxlengthFirstName,
+            pattern: errorFieldMessages.fullName.patternFirstName,
+        },
+        lastName: {
+            required: errorFieldMessages.fullName.requiredPersonLastName,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.fullName.maxlengthLastName,
+            pattern: errorFieldMessages.fullName.patternLastName,
         },
         phone: {
             required: errorFieldMessages.phone.requiredMobile,
