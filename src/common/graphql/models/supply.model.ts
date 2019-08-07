@@ -170,3 +170,21 @@ export interface ISupplyPointFormData {
     eic?: string;
     annualConsumption?: number;
 }
+
+export interface ISupplyPointStatistic {
+    gasAnnualConsumptionSum: number;
+    gasCount: number;
+    notConcludedCount: number;
+    notConcludedItems: ISupplyPointStatisticView[];
+    powerAnnualConsumptionSum: number;
+    powerCount: number;
+    showDeliveryCount: number;
+    showDeliveryItems: ISupplyPointStatisticView[];
+}
+
+export interface ISupplyPointStatisticView {
+    id: number;
+    name: string;
+    commodityType: CommodityType;
+    progressStatus: ProgressStatus;
+}

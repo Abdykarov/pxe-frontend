@@ -4,14 +4,14 @@ import { NgModule } from '@angular/core';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { IndicatorModule } from 'src/common/ui/indicator/indicator.module';
 import { PipesModule } from 'src/common/pipes/pipes.module';
-import { SupplyPointOverviewComponent } from './supply-point-overview.component';
+import { SupplyPointsSummaryComponent } from 'src/common/ui/supply-points-summary/supply-points-summary.component';
 
 @NgModule({
     declarations: [
-        SupplyPointOverviewComponent,
+        SupplyPointsSummaryComponent,
     ],
     exports: [
-        SupplyPointOverviewComponent,
+        SupplyPointsSummaryComponent,
     ],
     imports: [
         ButtonModule,
@@ -20,4 +20,4 @@ import { SupplyPointOverviewComponent } from './supply-point-overview.component'
         PipesModule,
     ],
 })
-export class SupplyPointOverviewModule {}
+export class SupplyPointsSummaryModule {}

@@ -2,6 +2,7 @@ import * as moment from 'moment';
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import { Moment } from 'moment';
+import { unitOfTime } from 'moment';
 
 import { CONSTS } from 'src/app/app.constants';
 import {
@@ -9,7 +10,6 @@ import {
     ISupplyPointInput,
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
-import { unitOfTime } from 'moment';
 
 const getTimeToContractEndPeriod = (supplyPointInput: ISupplyPoint | ISupplyPointInput): TimeToContractEndPeriod =>
     R.cond([

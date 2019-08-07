@@ -6,20 +6,28 @@
             </h1>
         </div>
     </div>
-    <lnd-info-banner
-        [bannerTitle]="'Zatím nemáte uložené žádné odběrné místo'"
-        [bannerDescription]="'Zadejte odběrné místo a my vám hned dáme nabídky'"
-        [buttonLabel]="'Zadat odběrné místo'"
-        (buttonAction)="newSupplyPointAction($event)"
-    ></lnd-info-banner>
-    <div class="row mt-5">
+    <lnd-banner-ui
+            *ngIf="supplyPointStatistic && supplyPointStatistic.notConcludedCount > 0"
+            [buttonLabel]="supplyPointStatistic.notConcludedCount === 1 ? 'Dokončit žádost' : 'Přehled žádostí'"
+            [data]="{
+            text: supplyPointStatistic.notConcludedCount === 1 ? 'Máte rozdělanou jednu žádost.' : 'Máte rozděláno více žádostí.'
+        }"
+    ></lnd-banner-ui>
+    <div class="row mt-4">
         <div class="col-md-6">
             <h2>Odběrná místa</h2>
-            <pxe-supply-point-overview></pxe-supply-point-overview>
+            <pxe-supply-points-summary
+                [powerPlacesCount]="supplyPointStatistic.powerCount"
+                [powerPlacesConsumptionSum]="supplyPointStatistic.powerAnnualConsumptionSum"
+                [gasPlacesCount]="supplyPointStatistic.gasCount"
+                [gasPlacesConsumptionSum]="supplyPointStatistic.gasAnnualConsumptionSum"
+                [supplyPointsEndingCount]="supplyPointStatistic.showDeliveryCount"
+                [supplyPointsEndingData]="supplyPointStatistic.showDeliveryItems">
+            </pxe-supply-points-summary>
         </div>
         <div class="col-md-6 mt-md-0 mt-4">
             <h2>Novinky</h2>
-            <pxe-news></pxe-news>
+            <pxe-news [news]="news"></pxe-news>
         </div>
     </div>
 </div>
