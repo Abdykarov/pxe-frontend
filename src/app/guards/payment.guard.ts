@@ -32,6 +32,7 @@ export class PaymentGuard implements CanActivateChild {
         state: RouterStateSnapshot,
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         this.authService.checkLogin();
+        console.log('%c ***** USER *****', 'background: #bada00; color: #000; font-weight: bold', this.authService.currentUserValue);
 
         if (this.authService.currentUserValue.userStatus === UserStatus.AWAITING_VERIFICATION &&
             R.indexOf(ROUTES.ROUTER_REQUEST_PAYMENT, state.url) < 0) {
@@ -44,7 +45,8 @@ export class PaymentGuard implements CanActivateChild {
                     };
                     this.router.navigate([ROUTES.ROUTER_REQUEST_PAYMENT], extras);
                 } else {
-                    this.router.navigate([CONSTS.PATHS.LOGOUT]);
+                    console.log('%c ***** LOGOUT *****', 'background: #bada55; color: #000; font-weight: bold');
+                    // this.router.navigate([CONSTS.PATHS.LOGOUT]);
                 }
                 return false;
         }

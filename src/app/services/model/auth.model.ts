@@ -18,7 +18,8 @@ export interface ILoginResponseModificator {
 export interface IJwtPayload {
     data: any;
     exp: number;
-    firstname: string;
+    firstName: string;
+    lastName: string;
     lastSmsConfirmTs: number;
     manageOffers: boolean;
     manageOrders: boolean;
@@ -36,6 +37,7 @@ export interface IJwtPayload {
     needSmsConfirm?: boolean;
     passwordReset?: boolean;
     userStatus: UserStatus;
+    firstContract: boolean;
 }
 
 export enum IUserRoles {
