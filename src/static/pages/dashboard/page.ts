@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 
+import { ISupplyPointStatistic } from 'src/common/graphql/models/supply.model';
+import { newsConfig } from 'src/static/config/news-config';
+import { supplyPointStatistic } from 'src/static/pages/dashboard/config';
+
 @Component({
   templateUrl: './page.html',
 })
 
 export class DashboardComponent {
-
-    newSupplyPointAction = (evt) => {
-        evt.preventDefault();
-        console.log('clicked');
-    }
+    public news = newsConfig;
+    public supplyPointStatistic: ISupplyPointStatistic = supplyPointStatistic;
 }
