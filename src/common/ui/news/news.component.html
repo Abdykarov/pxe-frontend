@@ -2,28 +2,13 @@
     <div class="news__inner">
         <div class="row">
             <div class="col-12">
-                <div class="row mb-4">
+                <div class="row mb-4" *ngFor="let novelty of news; let i = index">
                     <div class="col-xl-auto text-xl-right">
-                        27.6. 2018
+                        {{novelty.date}}
                     </div>
-                    <div class="col perex">
-                        Do PARC-u jsme přidali průvodce importem odběrných míst. Najdete zde podrobné infomace k spávnému vyplnění importního souboru.
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-xl-auto text-xl-right">
-                        26.6. 2018
-                    </div>
-                    <div class="col">
-                        Od 1.8. spouštíme službu vytěžení faktur, která zásadně zjednoduší správu odběrných míst. Automatický proces naplní OM podle naskenovaných faktur.
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-xl-auto text-xl-right">
-                        25.6. 2018
-                    </div>
-                    <div class="col">
-                        Do PARC-u jsme přidali průvodce importem odběrných míst…
+                    <div class="col"
+                         [class.perex]="i === 0">
+                        {{novelty.text}}
                     </div>
                 </div>
             </div>

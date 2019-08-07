@@ -49,8 +49,12 @@ export class DocumentService {
 
     public documentOpen = (data: IResponseDataDocument) => {
         if (isPlatformBrowser(this.platformId)) {
-            const fileURL = URL.createObjectURL(data.file);
-            window.open(fileURL);
+            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                window.navigator.msSaveOrOpenBlob(data.file, data.filename);
+            } else {
+                const fileURL = URL.createObjectURL(data.file);
+                window.open(fileURL);
+            }
         }
     }
 
