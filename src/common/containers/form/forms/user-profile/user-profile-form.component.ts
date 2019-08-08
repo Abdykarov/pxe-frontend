@@ -1,15 +1,13 @@
 import {
-    Component,
-    OnInit,
+    Component, Input, OnChanges,
+    OnInit, SimpleChanges,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 import * as R from 'ramda';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
-import { AuthService } from 'src/app/services/auth.service';
 import { CONSTS } from 'src/app/app.constants';
-import { IJwtPayload } from 'src/app/services/model/auth.model';
 import { IPersonalDataInputForm } from 'src/common/graphql/models/personal-data.model';
 
 @Component({
@@ -17,12 +15,12 @@ import { IPersonalDataInputForm } from 'src/common/graphql/models/personal-data.
     templateUrl: './user-profile-form.component.html',
     styleUrls: ['./user-profile-form.component.scss'],
 })
-export class UserProfileFormComponent extends AbstractFormComponent implements OnInit {
+export class UserProfileFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
 
-    public currentUserValue: IJwtPayload;
+    @Input()
+    public formValues = null;
 
     constructor(
-        private authService: AuthService,
         protected fb: FormBuilder,
     ) {
         super(fb);
@@ -30,17 +28,23 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
 
     ngOnInit() {
         super.ngOnInit();
-        this.fillForm();
+        this.prefillForm();
     }
 
-    public fillForm = () => {
-        this.currentUserValue = this.authService.currentUserValue;
-        this.form.get('email').setValue(this.currentUserValue.email);
-        this.form.get('firstName').setValue(this.currentUserValue.firstName);
-        this.form.get('lastName').setValue(this.currentUserValue.lastName);
+    ngOnChanges(changes: SimpleChanges) {
+        super.ngOnChanges(changes);
+        if (changes.formValues && this.form) {
+            this.prefillForm();
+        }
+    }
 
-        const phone = this.currentUserValue.phoneNumber && this.currentUserValue.phoneNumber.indexOf(CONSTS.TELEPHONE_PREFIX_CZ) >= 0 ?
-            this.currentUserValue.phoneNumber.substr(4, 10) : this.currentUserValue.phoneNumber;
+    public prefillForm = () => {
+        this.form.get('email').setValue(this.formValues.email);
+        this.form.get('firstName').setValue(this.formValues.firstName);
+        this.form.get('lastName').setValue(this.formValues.lastName);
+
+        const phone = this.formValues.phoneNumber && this.formValues.phoneNumber.indexOf(CONSTS.TELEPHONE_PREFIX_CZ) >= 0 ?
+            this.formValues.phoneNumber.substr(4, 10) : this.formValues.phoneNumber;
         this.form.get('phone').setValue(phone);
     }
 
@@ -50,7 +54,7 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
         if (this.form.valid) {
             const form: IPersonalDataInputForm = {
                 ...this.form.value,
-                phoneNumber: R.concat(this.form.value.phonePrefix, this.form.value.phone),
+                phoneNumber: R.concat(CONSTS.TELEPHONE_PREFIX_CZ, this.form.value.phone),
             };
             this.submitAction.emit(form);
         }

@@ -225,7 +225,7 @@ export const staticNavigationConfig: INavigationConfig = [
         },
         {
             'id': 'profile',
-            'label': 'Nastavení uživatelského účtu',
+            'label': 'Profil uživatele',
             'icon': 'user',
             'class': 'navigation-main__item--second',
         },

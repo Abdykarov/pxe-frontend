@@ -33,7 +33,6 @@ export class HeaderComponent extends AbstractComponent implements OnInit {
     public signTypeNone = SignType.NONE;
     public loginTypeNone = LoginType.NONE;
 
-
     @ViewChild('userProfile')
     public userProfile: DropdownComponent;
 

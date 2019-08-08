@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 
 // own classes
+import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { UserProfileFormModule } from 'src/common/containers/form/forms/user-profile/user-profile-form.module';
@@ -18,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         UserProfilePageComponent,
     ],
     imports: [
+        AlertModule,
         ButtonModule,
         CommonModule,
         FieldWrapperModule,

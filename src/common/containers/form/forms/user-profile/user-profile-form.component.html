@@ -60,7 +60,7 @@
     ></lnd-form-field>
     <pxe-field-wrapper
         label="Telefonní číslo"
-        labelFor="phonePrefix"
+        labelFor="phone"
         [error]="((form.controls.phonePrefix.touched || formError.phonePrefix) && (formError.phonePrefix || form.controls.phonePrefix.errors)) ||
                  ((form.controls.phone.touched || formError.phone) && (formError.phone || form.controls.phone.errors))"
         [validationMessages]="((form.controls.phonePrefix.touched || formError.phonePrefix) && (formError.phonePrefix || form.controls.phonePrefix.errors) && formFields.validationMessages.phonePrefix) ||

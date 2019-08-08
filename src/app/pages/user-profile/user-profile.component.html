@@ -1,4 +1,4 @@
-<pxe-layout-container pageTitle="Uživatelský profil">
+<pxe-layout-container pageTitle="Nastavení uživatelského účtu">
     <div class="row">
         <div class="col-12 col-md-12">
             <lnd-alert
@@ -17,6 +17,7 @@
                     [formFields]="formFields"
                     [formLoading]="formLoading"
                     [formSent]="formSent"
+                    [formValues]="formValues"
                     [globalError]="globalError"
                     [fieldError]="fieldError"
                     (submitAction)="submitForm($event)">

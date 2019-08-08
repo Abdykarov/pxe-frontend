@@ -19,7 +19,7 @@ export const userProfileFormFields: IForm = {
             [
                 Validators.required,
                 Validators.maxLength(CONSTS.MAX_LENGTH_NAME),
-                Validators.pattern(new RegExp(/^[\p{L}']+[ \p{L}']*$/, 'u')),
+                Validators.pattern(new RegExp(/^[\p{L}']+([ ][\p{L}']+)*$/, 'u')),
             ],
         ],
         lastName: [

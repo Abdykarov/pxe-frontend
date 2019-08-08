@@ -22,12 +22,14 @@ import {
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 import { staticNavigationConfig } from 'src/static/config/navigation.config';
+import { IJwtPayload } from 'src/app/services/model/auth.model';
 
 @Component({
     templateUrl: './basic-layout.component.html',
 })
 export class BasicLayoutComponent extends AbstractComponent implements OnInit {
 
+    public currentUser: IJwtPayload = null;
     public isMenuOpen = false;
     public itemOpened = null;
 

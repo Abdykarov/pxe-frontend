@@ -33,7 +33,7 @@ export const navigationMenuSuppliers: INavigationMenu = [];
 export const navigationMenuUserActions: INavigationMenu = [
     {
         'class': 'navigation-main__item--second',
-        'label': 'Nastavení uživatelského účtu',
+        'label': 'Profil uživatele',
         'icon': 'user',
         'url': ROUTES.ROUTER_USER_PROFILE,
         __typename: 'profile',

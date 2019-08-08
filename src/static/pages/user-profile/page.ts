@@ -12,9 +12,10 @@ import { CONSTS } from 'src/app/app.constants';
 export class UserProfilePageComponent {
 
     public form: FormGroup = new FormGroup({
-        name: new FormControl(),
+        firstName: new FormControl(),
+        lastName: new FormControl(),
         telephone: new FormControl(),
-        telephonePrefix: new FormControl([CONSTS.MAX_LENGTH_NAME]),
+        telephonePrefix: new FormControl([CONSTS.TELEPHONE_PREFIX_CZ]),
         email: new FormControl(['ukazka@email.cz']),
     });
 
