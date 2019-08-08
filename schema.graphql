@@ -235,8 +235,10 @@ type SupplyPointStatistic {
 }
 
 type SupplyPointStatisticView {
+    commodityType: CommodityType!
     id: Int!
     name: String!
+    progressStatus: ProgressStatus!
 }
 
 type VariableSymbol {
@@ -388,10 +390,9 @@ input SupplyPointUpdatePowerAttributes {
 
 input UserDetailInput {
     email: String
-    firstName: String
-    lastName: String
-    passwordReset: Boolean
-    phoneNumber: String
+    firstName: String!
+    lastName: String!
+    phoneNumber: String!
     userName: String!
 }
 
