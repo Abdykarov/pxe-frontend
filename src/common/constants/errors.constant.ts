@@ -119,7 +119,7 @@ export const errorFieldMessages =  {
         maxlengthFirstName: 'Maximální délka pro jméno je 50 znaků.',
         maxlengthLastName: 'Maximální délka pro příjmení je 50 znaků.',
         patternFirstName: 'Jméno může obsahovat pouze písmena a mezery.',
-        patternLastName: 'Jméno může obsahovat pouze písmena a pomlčku.',
+        patternLastName: 'Příjmení může obsahovat pouze písmena a pomlčku.',
     },
     ico: {
         required: 'Vyplňte své IČO.',
