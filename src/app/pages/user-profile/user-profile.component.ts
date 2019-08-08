@@ -13,11 +13,11 @@ import {
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
+import { IJwtPayload } from 'src/app/services/model/auth.model';
 import { IUserDetailInput } from 'src/common/graphql/models/user.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { userProfileFormFields } from 'src/common/containers/form/forms/user-profile/user-profile-form.config';
 import { UserService } from 'src/common/graphql/services/user.service';
-import { IJwtPayload } from 'src/app/services/model/auth.model';
 
 @Component({
     templateUrl: './user-profile.component.html',

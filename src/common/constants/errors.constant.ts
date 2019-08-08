@@ -188,8 +188,8 @@ export const errorFieldMessages =  {
         required: 'Vyplňte svůj telefon.',
         requiredMobile: 'Vyplňte svůj mobilní telefon.',
         requiredLandLine: 'Vyplňte svoji pevnou linku.',
-        phoneNumber: 'Telefon musí obsahovat 9 číslic.',
-        mobilePhoneNumber: 'Mobilní telefon musí obsahovat 9 číslic.',
+        phoneNumber: 'Telefon musí obsaMobilní telefon musí obsahovat 9 číslic.hovat 9 číslic.',
+        mobilePhoneNumber: '',
         landLineNumber: 'Pevná linka musí obsahovat 9 číslic.',
     },
     phonePrefix: {

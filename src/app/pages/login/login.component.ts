@@ -33,8 +33,8 @@ import {
     parseGraphQLErrors,
     parseRestAPIErrors,
 } from 'src/common/utils/';
-import { UserService } from 'src/common/graphql/services/user.service';
 import { ROUTES } from 'src/app/app.constants';
+import { UserService } from 'src/common/graphql/services/user.service';
 
 @Component({
     templateUrl: './login.component.html',

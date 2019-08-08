@@ -16,13 +16,13 @@ import { fromEvent } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { CONSTS } from 'src/app/app.constants';
+import { IJwtPayload } from 'src/app/services/model/auth.model';
 import {
     ISettings,
     LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 import { staticNavigationConfig } from 'src/static/config/navigation.config';
-import { IJwtPayload } from 'src/app/services/model/auth.model';
 
 @Component({
     templateUrl: './basic-layout.component.html',
