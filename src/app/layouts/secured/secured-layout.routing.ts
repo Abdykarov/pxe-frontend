@@ -69,6 +69,17 @@ const routes = [
                 },
             },
             {
+                path: CONSTS.PATHS.USER_PROFILE,
+                loadChildren: '../../pages/user-profile/user-profile.module#UserProfileModule',
+                data: {
+                    isSimpleFooter: false,
+                    isPublic: false,
+                    isSupplier: false,
+                    loginType: LoginType.NONE,
+                    signUpType: SignType.NONE,
+                },
+            },
+            {
                 path: CONSTS.PATHS.SUPPLY_OFFER,
                 redirectTo: CONSTS.PATHS.SUPPLY_OFFER + '/',
             },

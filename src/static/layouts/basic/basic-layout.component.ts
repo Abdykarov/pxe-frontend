@@ -16,6 +16,7 @@ import { fromEvent } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { CONSTS } from 'src/app/app.constants';
+import { IJwtPayload } from 'src/app/services/model/auth.model';
 import {
     ISettings,
     LoginType,
@@ -28,6 +29,7 @@ import { staticNavigationConfig } from 'src/static/config/navigation.config';
 })
 export class BasicLayoutComponent extends AbstractComponent implements OnInit {
 
+    public currentUser: IJwtPayload = null;
     public isMenuOpen = false;
     public itemOpened = null;
 
