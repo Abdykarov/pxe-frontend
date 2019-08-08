@@ -52,6 +52,7 @@
         [parentForm]="form"
         [placeholder]="'dd.mm.rrrr'"
         [maxDate]="maxDate"
+        [minDate]="minDate"
         [success]="form.controls.birthDate.valid && (form.controls.birthDate.touched || formError.birthDate)"
         [touched]="form.controls.birthDate.touched || formError.birthDate"
         [validationMessages]="formFields.validationMessages.birthDate"

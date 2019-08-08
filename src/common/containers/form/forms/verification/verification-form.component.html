@@ -26,6 +26,9 @@
                         [validationMessages]="formFields.validationMessages.smsCode">
                     </lnd-form-field>
                 </div>
+                <ng-container *ngIf="infoTemplate && smsSent">
+                    <ng-container *ngTemplateOutlet="infoTemplate; context: { contract: this.contract }"></ng-container>
+                </ng-container>
                 <div [ngClass]="classSecondField">
                     <lnd-button
                         *ngIf="!smsSent"

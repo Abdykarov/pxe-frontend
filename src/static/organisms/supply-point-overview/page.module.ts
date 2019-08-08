@@ -4,7 +4,7 @@ import { Routes } from '@angular/router';
 
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { SupplyPointOverviewComponent } from './page';
-import { SupplyPointOverviewModule } from 'src/common/ui/supply-point-overview/supply-point-overview.module';
+import { SupplyPointsSummaryModule } from 'src/common/ui/supply-points-summary/supply-points-summary.module';
 
 @NgModule({
     declarations: [
@@ -16,7 +16,7 @@ import { SupplyPointOverviewModule } from 'src/common/ui/supply-point-overview/s
     imports: [
         BreadcrumbModule,
         CommonModule,
-        SupplyPointOverviewModule,
+        SupplyPointsSummaryModule,
     ],
 })
 export class SupplyPointOverviewPageModule {}

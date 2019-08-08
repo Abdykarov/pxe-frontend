@@ -42,6 +42,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     public formValues: IPersonalData = null;
 
     public maxDate: Date = moment().add(-CONSTS.ADULTHOOD_AGE, 'years').toDate();
+    public minDate: Date = new Date(CONSTS.MIN_BIRTH_DATE);
     public depositPaymentTypeId = depositPaymentType;
 
     constructor(
