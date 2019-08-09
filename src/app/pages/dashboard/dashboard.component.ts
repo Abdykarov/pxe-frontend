@@ -104,7 +104,7 @@ export class DashboardComponent extends AbstractComponent implements OnInit {
             ],
             [
                 R.T,
-                () => this.navigateToNewSupplyPoint(),
+                () => this.navigateToSupplyPoints(),
             ],
         ])(showDeliveryItems);
     }
