@@ -7,6 +7,12 @@ import { fieldsMustMatch } from 'src/common/utils/validators/fields-must-match.f
 
 export const changePasswordFields: IForm = {
     controls: {
+        currentPassword: [
+            '',
+            [
+                Validators.required,
+            ],
+        ],
         password: [
             '',
             [
@@ -26,6 +32,9 @@ export const changePasswordFields: IForm = {
         validator: fieldsMustMatch('password', 'confirmPassword'),
     },
     validationMessages: {
+        currentPassword: {
+            required: errorFieldMessages.password.required,
+        },
         password: {
             required: errorFieldMessages.password.required,
             pattern: errorFieldMessages.password.pattern,
