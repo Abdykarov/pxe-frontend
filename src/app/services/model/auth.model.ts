@@ -38,6 +38,7 @@ export interface IJwtPayload {
     passwordReset?: boolean;
     userStatus: UserStatus;
     firstContract: boolean;
+    firstContractId: number;
 }
 
 export enum IUserRoles {

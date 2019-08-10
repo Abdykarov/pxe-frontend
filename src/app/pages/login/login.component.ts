@@ -233,10 +233,14 @@ export class LoginComponent extends AbstractComponent {
                 showBanner: true,
             };
         }
-        if (loginResponse.landingPage === LANDING_PAGE.WAITING_FOR_PAYMENT && loginResponse.supplyPointId) {
-            extras.queryParams = {
-                supplyPointId: loginResponse.supplyPointId,
-            };
+        if (loginResponse.landingPage === LANDING_PAGE.WAITING_FOR_PAYMENT) {
+            const supplyPointId = loginResponse.supplyPointId ||
+                (this.authService.currentUserValue.firstContract && this.authService.currentUserValue.firstContractId);
+            if (supplyPointId) {
+                extras.queryParams = {
+                    supplyPointId,
+                };
+            }
         }
         this.router.navigate([this.routerAfterLogin(loginResponse)], extras);
     }
