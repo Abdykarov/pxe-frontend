@@ -7,8 +7,12 @@
     <lnd-header
         [settings]="settings"
         (homeRedirect)="homeRedirect()"
+        [isMenuOpen]="isMenuOpen"
         (loginAction)="login()"
-        (signUpAction)="signUp()">
+        (signUpAction)="signUp()"
+        (supplierChangeAction)="supplierChange()"
+        (coverageMapAction)="coverageMap()"
+        (toggleMenu)="toggleMenuOpen($event)">
     </lnd-header>
     <main class="main">
         <router-outlet></router-outlet>

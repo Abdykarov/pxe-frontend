@@ -29,36 +29,100 @@
                         </a>
                     </div>
                     <div
-                        class="registration-holder"
-                        *ngIf="settings.signUpType !== signTypeNone">
+                        class="public-menu-holder"
+                        *ngIf="settings.isPublic && !settings.isStatic">
+                        <lnd-button
+                            label="Změna dodavatele"
+                            customClass="mr-4"
+                            type="link"
+                            (click)="supplierChangeAction.emit()">
+                        </lnd-button>
+                        <lnd-button
+                            label="Pokrytí"
+                            customClass="mr-4"
+                            type="link"
+                            (click)="coverageMapAction.emit()">
+                        </lnd-button>
+                        <lnd-button
+                            label="Přihlásit"
+                            customClass="mr-4"
+                            type="link"
+                            (click)="loginAction.emit()">
+                        </lnd-button>
                         <lnd-button
                             label="Registrace"
                             type="primary"
                             (click)="signUpAction.emit()">
                         </lnd-button>
                     </div>
-                    <div
-                        class="registration-holder"
-                        *ngIf="settings.loginType !== loginTypeNone">
-                        <lnd-button
-                            label="Přihlášení"
-                            type="link"
-                            (click)="loginAction.emit()">
-                        </lnd-button>
-                    </div>
+<!--                    <div-->
+<!--                        class="registration-holder"-->
+<!--                        *ngIf="settings.signUpType !== signTypeNone">-->
+<!--                        <lnd-button-->
+<!--                            label="Registrace"-->
+<!--                            type="primary"-->
+<!--                            (click)="signUpAction.emit()">-->
+<!--                        </lnd-button>-->
+<!--                    </div>-->
+<!--                    <div-->
+<!--                        class="registration-holder"-->
+<!--                        *ngIf="settings.loginType !== loginTypeNone">-->
+<!--                        <lnd-button-->
+<!--                            label="Přihlášení"-->
+<!--                            type="link"-->
+<!--                            (click)="loginAction.emit()">-->
+<!--                        </lnd-button>-->
+<!--                    </div>-->
                     <div
                         class="menu-holder"
                         *ngIf="!settings.isPublic || settings.isStatic">
                         <a
                             class="menu-toggle"
                             [class.menu-toggle--open]="isMenuOpen"
-                            (click)="toggleMenu.emit()">
+                            (click)="toggleMenu.emit(!isMenuOpen)">
                             <span class="menu-toggle__line"></span>
                             <span class="menu-toggle__line"></span>
                             <span class="menu-toggle__line"></span>
                             <span class="menu-toggle__line"></span>
                             <span class="menu-toggle__label">Menu</span>
                         </a>
+                    </div>
+                    <div class="menu-holder"
+                         *ngIf="settings.isPublic">
+                        <ng-template #dropdown3 let-toggle="toggle" let-isOpen="isOpen">
+                            <a
+                                class="menu-toggle"
+                                [class.menu-toggle--open]="isOpen"
+                                (click)="toggle()">
+                                <span class="menu-toggle__line"></span>
+                                <span class="menu-toggle__line"></span>
+                                <span class="menu-toggle__line"></span>
+                                <span class="menu-toggle__line"></span>
+                                <span class="menu-toggle__label">Menu</span>
+                            </a>
+                        </ng-template>
+                        <lnd-dropdown
+                            #publicMenu
+                            [actionTemplate]="dropdown3"
+                            (toggleOverlayerAction)="toggleMenu.emit($event)"
+                            menuDirection="right">
+                            <a class="dropdown-item"
+                               (click)="supplierChangeAction.emit()">
+                                Změna dodatavatele
+                            </a>
+                            <a class="dropdown-item"
+                               (click)="coverageMapAction.emit()">
+                                Pokrytí
+                            </a>
+                            <a class="dropdown-item"
+                               (click)="loginAction.emit()">
+                                Přihlásit
+                            </a>
+                            <a class="dropdown-item"
+                               (click)="signUpAction.emit()">
+                                Registrace
+                            </a>
+                        </lnd-dropdown>
                     </div>
                     <div
                         class="user-holder"
@@ -67,7 +131,7 @@
                         <lnd-dropdown
                             #userProfile
                             [actionTemplate]="profileMenu"
-                            (toggleOverlayerAction)="toggleMenu.emit()"
+                            (toggleOverlayerAction)="toggleMenu.emit($event)"
                             menuDirection="right">
                             <a *ngFor="let item of userMenu"
                                 [ngClass]="item.class"

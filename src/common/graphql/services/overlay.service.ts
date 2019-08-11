@@ -13,6 +13,7 @@ export class OverlayService {
     constructor(private apollo: Apollo) { }
 
     public toggleOverlay(value = null) {
+        console.log('%c ***** TOGGLE *****', 'background: #bada55; color: #000; font-weight: bold', value);
         return this.apollo
             .mutate({
                 mutation: toggleOverlayMutation,

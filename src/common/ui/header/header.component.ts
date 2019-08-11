@@ -33,9 +33,11 @@ export class HeaderComponent extends AbstractComponent implements OnInit {
     public signTypeNone = SignType.NONE;
     public loginTypeNone = LoginType.NONE;
 
-
     @ViewChild('userProfile')
     public userProfile: DropdownComponent;
+
+    @ViewChild('publicMenu')
+    public publicMenu: DropdownComponent;
 
     @Input()
     public user: IJwtPayload = null;
@@ -50,6 +52,9 @@ export class HeaderComponent extends AbstractComponent implements OnInit {
     public isMenuOpen: boolean;
 
     @Output()
+    public coverageMapAction: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
     public loginAction: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
@@ -57,6 +62,9 @@ export class HeaderComponent extends AbstractComponent implements OnInit {
 
     @Output()
     public signUpAction: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
+    public supplierChangeAction: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
     public toggleMenu: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -81,5 +89,13 @@ export class HeaderComponent extends AbstractComponent implements OnInit {
                 this.cd.markForCheck();
             }
         });
+        this.resizeEvent$.subscribe(() => {
+            if (this.publicMenu && this.publicMenu.isOpen) {
+                this.publicMenu.toggle();
+                this.cd.markForCheck();
+            }
+        });
     }
+
+    test = () => {};
 }

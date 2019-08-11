@@ -38,16 +38,32 @@
 	margin-right: auto;
 }
 
-.registration-holder {
+.public-menu-holder {
+	display: none;
 	order: 2;
+
+	// Media queries
+	@include media-breakpoint-up(lg) {
+		display: block;
+	}
+}
+
+.registration-holder {
+	display: none;
+	order: 3;
+
+	// Media queries
+	@include media-breakpoint-up(lg) {
+		display: block;
+	}
 }
 
 .notification-holder {
-	order: 2;
+	order: 3;
 }
 
 .menu-holder {
-	order: 3;
+	order: 4;
 	margin-left: $spacer;
 
 	// Media queries

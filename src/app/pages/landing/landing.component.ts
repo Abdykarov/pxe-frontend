@@ -1,9 +1,10 @@
 import {
-    Component,
     ChangeDetectorRef,
+    Component,
     ElementRef,
     ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
 import { takeUntil } from 'rxjs/operators';
@@ -29,8 +30,14 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 })
 export class LandingComponent extends AbstractComponent {
 
-    @ViewChild('pxe_subscription')
-    public pxeSubscriptionForm: ElementRef;
+    @ViewChild('subscription')
+    public subscriptionElement: ElementRef;
+
+    @ViewChild('mapCoverage')
+    public mapCoverageElement: ElementRef;
+
+    @ViewChild('supplierChange')
+    public supplierChangeElement: ElementRef;
 
     public formLoading = false;
     public formSent = false;
@@ -42,16 +49,23 @@ export class LandingComponent extends AbstractComponent {
     constructor(
         private apollo: Apollo,
         private cd: ChangeDetectorRef,
+        private router: Router,
         private scrollToService: ScrollToService,
     ) {
         super();
-        this.formFields = createRegistrationFormFields(SignUpType.NewsSubscription);
+        this.formFields = createRegistrationFormFields(SignUpType.SignUp);
 
         this.scrollToService.getScrollStream()
             .pipe(takeUntil(this.destroy$))
             .subscribe((scrollTo: SCROLL_TO) => {
                 if (scrollTo === SCROLL_TO.LANDING_SUBSCRIPTION) {
-                    scrollToElementFnc(this.pxeSubscriptionForm.nativeElement);
+                    scrollToElementFnc(this.subscriptionElement.nativeElement);
+                }
+                if (scrollTo === SCROLL_TO.MAP_COVERAGE) {
+                    scrollToElementFnc(this.mapCoverageElement.nativeElement);
+                }
+                if (scrollTo === SCROLL_TO.SUPPLIER_CHANGE) {
+                    scrollToElementFnc(this.supplierChangeElement.nativeElement);
                 }
             });
     }
@@ -67,18 +81,32 @@ export class LandingComponent extends AbstractComponent {
             })
             .subscribe(
                 () => {
+                    // this.formLoading = false;
+                    // this.formSent = true;
+                    // this.cd.markForCheck();
                     this.formLoading = false;
                     this.formSent = true;
                     this.cd.markForCheck();
+                    this.router.navigate(['login'],
+                        {
+                            queryParams: {
+                                email: values.email,
+                            },
+                            state: {
+                                passwordWasSent: true,
+                            },
+                        },
+                    );
                 },
                 (error) => {
                     this.formLoading = false;
                     const { fieldError, globalError } = parseGraphQLErrors(error);
                     this.fieldError = fieldError;
                     this.globalError = globalError;
+                    scrollToElementFnc(this.subscriptionElement.nativeElement);
                     this.cd.markForCheck();
                 });
     }
 
-    public scrollToNewSubscription = () => this.scrollToService.scrollToSubscription();
+    public scrollToNewSubscription = () => this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
 }

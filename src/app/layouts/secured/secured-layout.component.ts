@@ -5,7 +5,6 @@ import {
 import {
     ChangeDetectorRef,
     Component,
-    OnInit,
 } from '@angular/core';
 
 import * as R from 'ramda';
@@ -32,9 +31,8 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 @Component({
     templateUrl: './secured-layout.component.html',
 })
-export class SecuredLayoutComponent extends AbstractLayoutComponent implements OnInit {
+export class SecuredLayoutComponent extends AbstractLayoutComponent {
     public currentUser: IJwtPayload = this.authService.currentUserValue;
-    public isMenuOpen = false;
     public itemOpened = null;
     public navConfig: INavigationConfig = [];
     public navigationMenuUserActions: INavigationMenu = navigationMenuUserActions;
@@ -42,7 +40,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
     constructor(
         protected apollo: Apollo,
         protected authService: AuthService,
-        private cd: ChangeDetectorRef,
+        protected cd: ChangeDetectorRef,
         private navigationApolloService: NavigationApolloService,
         private navigationService: NavigationService,
         protected overlayService: OverlayService,
@@ -53,6 +51,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
         super(
             apollo,
             authService,
+            cd,
             overlayService,
             route,
             router,
@@ -67,19 +66,13 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
                 map(R.path(['data', 'ui'])),
             )
             .subscribe((current: IStoreUi)  => {
+                console.log('%c ***** current *****', 'background: #bada55; color: #000; font-weight: bold', current);
                 if (current.securedLayout) {
                     this.navConfig = current.securedLayout.navigationConfig;
                     this.showOverlay = current.showOverlay;
+                    this.cd.markForCheck();
                 }
             });
-    }
-
-    ngOnInit() {
-        this.resizeEvent$.subscribe(() => {
-            if (this.isMenuOpen) {
-                this.toggleMenuOpen();
-            }
-        });
     }
 
     public toggleNavigationItem (navigationItem) {
@@ -89,14 +82,15 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
             )
             .subscribe( res => {
                 this.isMenuOpen = false;
+                this.cd.markForCheck();
             });
     }
 
-    public toggleMenuOpen = () => {
-        this.isMenuOpen = !this.isMenuOpen;
-        this.overlayService.toggleOverlay( (res) => {
-            this.showOverlay = true;
-            this.cd.markForCheck();
-        });
-    }
+    // public toggleMenuOpen = () => {
+    //     this.isMenuOpen = !this.isMenuOpen;
+    //     this.overlayService.toggleOverlay( (res) => {
+    //         this.showOverlay = true;
+    //         this.cd.markForCheck();
+    //     });
+    // }
 }
