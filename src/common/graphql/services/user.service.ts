@@ -19,34 +19,28 @@ export class UserService {
         private apollo: Apollo,
     ) {}
 
-    public resetPassword(email: string) {
-        return this.apollo
-            .mutate({
-                mutation: resetPasswordMutation,
-                variables: {
-                    email,
-                },
-            });
-    }
+    public resetPassword = (email: string)  => this.apollo
+        .mutate({
+            mutation: resetPasswordMutation,
+            variables: {
+                email,
+            },
+        })
 
-    changePassword(oldPassword: string, newPassword: string) {
-        return this.apollo
-            .mutate({
-                mutation: changePasswordMutation,
-                variables: {
-                    oldPassword,
-                    newPassword,
-                },
-            });
-    }
+    public changePassword = (oldPassword: string, newPassword: string) => this.apollo
+        .mutate({
+            mutation: changePasswordMutation,
+            variables: {
+                oldPassword,
+                newPassword,
+            },
+        })
 
-    updateUserProfile(userDetail: IUserDetailInput) {
-        return this.apollo
-            .mutate({
-                mutation: updateUserProfileMutation,
-                variables: {
-                    userDetail,
-                },
-            });
-    }
+    public updateUserProfile = (userDetail: IUserDetailInput) => this.apollo
+        .mutate({
+            mutation: updateUserProfileMutation,
+            variables: {
+                userDetail,
+            },
+        })
 }
