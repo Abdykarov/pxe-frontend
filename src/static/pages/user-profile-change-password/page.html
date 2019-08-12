@@ -1,0 +1,51 @@
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12 col-md-6 offset-md-3 text-center">
+            <h1>Změna hesla</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-xl-7 col-lg-5">
+            <div class="page-box">
+                <form
+                    [formGroup]="form"
+                    autocomplete="off"
+                    class="form-container">
+                    <div class="row">
+                        <div class="col">
+                            <lnd-alert type="info"
+                                       hasIcon="true">
+                                Změny byly úspěšně uloženy
+                            </lnd-alert>
+                        </div>
+                    </div>
+                    <lnd-form-field
+                        [formControl]="form.controls.currentPassword"
+                        [id]="'currentPassword'"
+                        label="Současné heslo"
+                        type="PASSWORD"
+                    ></lnd-form-field>
+                    <lnd-form-field
+                        [formControl]="form.controls.password"
+                        [id]="'password'"
+                        label="Nové heslo"
+                        type="PASSWORD"
+                    ></lnd-form-field>
+                    <lnd-form-field
+                        [formControl]="form.controls.confirmPassword"
+                        [id]="'confirmPassword'"
+                        label="Potvrďte nové heslo"
+                        type="PASSWORD"
+                    ></lnd-form-field>
+                    <div class="text-center">
+                        <lnd-button
+                            type="primary"
+                            (action)="submitForm($event)"
+                            label="Změnit heslo">
+                        </lnd-button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

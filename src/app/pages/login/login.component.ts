@@ -54,8 +54,8 @@ export class LoginComponent extends AbstractComponent {
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
-        private passwordService: UserService,
         private router: Router,
+        private userService: UserService,
     ) {
         super();
     }
@@ -63,7 +63,7 @@ export class LoginComponent extends AbstractComponent {
     public submitChangePassword = (changePassword: IChangePassword) => {
         this.formLoading = true;
 
-        this.passwordService.changePassword(this.password, changePassword.password)
+        this.userService.changePassword(this.password, changePassword.password)
             .pipe(
                 takeUntil(this.destroy$),
                 map(({data}) => data.changePassword),
@@ -89,7 +89,7 @@ export class LoginComponent extends AbstractComponent {
 
     public resetPassword = (email: string) => {
         this.formLoading = true;
-        this.passwordService.resetPassword(email)
+        this.userService.resetPassword(email)
             .pipe(
                 takeUntil(this.destroy$),
                 map(({data}) => data.resetPassword),

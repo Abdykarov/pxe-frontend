@@ -150,8 +150,12 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/full/cookies',
                 },
                 {
-                    'label': 'Change password',
+                    'label': 'Change password (old)',
                     'url': '/full/change-password',
+                },
+                {
+                    'label': 'Change password',
+                    'url': '/basic/user-profile-change-password',
                 },
                 {
                     'label': 'Change password (banner)',

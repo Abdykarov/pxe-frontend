@@ -180,6 +180,7 @@ export const errorFieldMessages =  {
     },
     password: {
         required: 'Vyplňte heslo.',
+        currentRequired: 'Vyplňte heslo.',
         pattern: '	Vaše heslo musí mít minimálně 8 písmen, musí obsahovat malá a velká ' +
             'písmena, aspoň jednu číslici a aspoň jeden speciální znak jako &_*+/#\ apod.',
         fieldsMustMatch: 'Musíte vyplnit stejná hesla.',

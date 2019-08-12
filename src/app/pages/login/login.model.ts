@@ -13,6 +13,7 @@ export interface IConfirmationCode {
 }
 
 export interface IChangePassword {
+    currentPassword?: string;
     password: string;
     confirmPassword: string;
 }

@@ -6,6 +6,13 @@
                     <div class="page-box">
                         <div class="row">
                             <div class="col-12">
+                                <lnd-alert
+                                        *ngIf="globalError.length"
+                                        type="danger">
+                                    <ng-container *ngFor="let error of globalError">
+                                        {{ error }}<br>
+                                    </ng-container>
+                                </lnd-alert>
                                 <pxe-login-form
                                     *ngIf="[LOGIN_STATE.LOGIN, LOGIN_STATE.LOGIN_AFTER_RESET].indexOf(state) !== -1"
                                     [formFields]="formFieldsLogin.loginFormFields"

@@ -42,7 +42,7 @@ export const navigationMenuUserActions: INavigationMenu = [
         'class': 'navigation-main__item--second',
         'label': 'Změna hesla',
         'icon': 'lock-close',
-        'url': `/${CONSTS.PATHS.CHANGE_PASSWORD}`,
+        'url': `/${ROUTES.ROUTER_USER_CHANGE_PASSWORD}`,
         __typename: 'change-password',
 
     },
