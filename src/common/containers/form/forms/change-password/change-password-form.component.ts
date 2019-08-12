@@ -18,6 +18,9 @@ import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.
     styleUrls: ['./change-password-form.component.scss'],
 })
 export class ChangePasswordFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
+    @Input()
+    public isPublic = true;
+
     public form: FormGroup;
 
     constructor(
@@ -29,6 +32,9 @@ export class ChangePasswordFormComponent extends AbstractFormComponent implement
     ngOnInit() {
         super.ngOnInit();
         this.form = this.fb.group(this.formFields.controls, this.formFields.options);
+        if (this.isPublic) {
+            this.setDisableField('currentPassword');
+        }
     }
 
     ngOnChanges(changes: SimpleChanges) {

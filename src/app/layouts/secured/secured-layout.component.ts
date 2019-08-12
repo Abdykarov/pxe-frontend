@@ -16,7 +16,6 @@ import {
 
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { IJwtPayload } from 'src/app/services/model/auth.model';
 import {
     INavigationConfig,
     INavigationMenu,
@@ -32,14 +31,14 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
     templateUrl: './secured-layout.component.html',
 })
 export class SecuredLayoutComponent extends AbstractLayoutComponent {
-    public currentUser: IJwtPayload = this.authService.currentUserValue;
+    public isMenuOpen = false;
     public itemOpened = null;
     public navConfig: INavigationConfig = [];
     public navigationMenuUserActions: INavigationMenu = navigationMenuUserActions;
 
     constructor(
         protected apollo: Apollo,
-        protected authService: AuthService,
+        public authService: AuthService,
         protected cd: ChangeDetectorRef,
         private navigationApolloService: NavigationApolloService,
         private navigationService: NavigationService,

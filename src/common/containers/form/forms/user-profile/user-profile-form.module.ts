@@ -5,23 +5,27 @@ import {
 } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
+import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
+import { FieldWrapperModule } from 'src/common/ui/forms/field-wrapper/field-wrapper.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
-import { LoginSupplyAuthFormComponent } from './login-supply-auth-form.component';
+import { UserProfileFormComponent } from 'src/common/containers/form/forms/user-profile/user-profile-form.component';
 
 @NgModule({
     declarations: [
-        LoginSupplyAuthFormComponent,
+        UserProfileFormComponent,
+    ],
+    exports: [
+        UserProfileFormComponent,
     ],
     imports: [
+        AlertModule,
         ButtonModule,
         CommonModule,
+        FieldWrapperModule,
         FormModule,
         FormsModule,
         ReactiveFormsModule,
     ],
-    exports: [
-        LoginSupplyAuthFormComponent,
-    ],
 })
-export class LoginSupplyAuthFormModule {}
+export class UserProfileFormModule {}

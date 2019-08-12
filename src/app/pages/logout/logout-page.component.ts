@@ -40,7 +40,10 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
             .subscribe(
                 data => {
                     this.apollo.getClient().resetStore();
-                    this.router.navigate([CONSTS.PATHS.EMPTY]);
+                    this.router.navigate([CONSTS.PATHS.EMPTY])
+                        .then(() => {
+                            location.reload();
+                        });
                 },
                 error => {
                     this.error = true;

@@ -1,10 +1,3 @@
-<lnd-alert
-    *ngIf="globalError.length"
-    type="danger">
-    <ng-container *ngFor="let error of globalError">
-        {{ error }}<br>
-    </ng-container>
-</lnd-alert>
 <ng-container *ngIf="passwordWasSent">
     <lnd-alert
         type="info"

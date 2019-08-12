@@ -83,6 +83,7 @@ type Mutation {
     updatePowerOffer(offer: OfferInput!, offerId: ID!, powerAttributes: OfferInputPowerAttributes!): Int
     updatePowerSupplyPoint(powerAttributes: SupplyPointInputPowerAttributes!, supplyPoint: SupplyPointInput!, supplyPointId: ID!): Int
     updatePowerSupplyPointWithContract(attributes: SupplyPointUpdatePowerAttributes, supplyPointId: ID!, supplyPointUpdate: SupplyPointUpdate): Int
+    updateUserProfile(userDetail: UserDetailInput!): Boolean
 }
 
 type Offer {
@@ -385,6 +386,14 @@ input SupplyPointUpdateGasAttributes {
 input SupplyPointUpdatePowerAttributes {
     annualConsumptionNT: Float
     annualConsumptionVT: Float!
+}
+
+input UserDetailInput {
+    email: String
+    firstName: String!
+    lastName: String!
+    phoneNumber: String!
+    userName: String!
 }
 
 

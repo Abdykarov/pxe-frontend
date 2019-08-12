@@ -100,18 +100,19 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
         // response.errors = null;
     });
 
-    // TODO restLink, retryLink?
-
     cache.writeData({
         data: defaults,
     });
 
-    return {
+    const link = from([error, auth, http]);
+    const client = {
         cache,
         resolvers,
-        link: from([error, auth, http]),
+        link,
         connectToDevTools: !environment.production,
     };
+
+    return client;
 };
 
 export const ApolloGraphQLProvider = {

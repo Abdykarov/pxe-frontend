@@ -1,9 +1,22 @@
-import { ActivatedRoute, NavigationEnd, Router, } from '@angular/router';
-import { ChangeDetectorRef, OnInit, } from '@angular/core';
+import {
+    ActivatedRoute,
+    NavigationEnd,
+    Router,
+} from '@angular/router';
+import {
+    ChangeDetectorRef,
+    OnInit,
+} from '@angular/core';
 
 import { Apollo } from 'apollo-angular';
-import { debounceTime, takeUntil, } from 'rxjs/operators';
-import { fromEvent, Subscription, } from 'rxjs';
+import {
+    debounceTime,
+    takeUntil,
+} from 'rxjs/operators';
+import {
+    fromEvent,
+    Subscription,
+} from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
