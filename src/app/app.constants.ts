@@ -18,6 +18,7 @@ export const CONSTS = {
     },
     DEFAULT_EXPIRATION: 3600,
     MAX_DAYS_TILL_CONTRACT_EXPIRATION: 60,
+    MAX_LENGTH_NAME: 50,
     MIN_BIRTH_DATE: '1900-01-01',
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
@@ -36,7 +37,6 @@ export const CONSTS = {
         OFFER_SELECTION : 'offer-selection',
         PAYMENT : 'payment',
         POWER: 'power',
-        PROFILE: 'profile',
         RECAPITULATION : 'recapitulation',
         REQUEST : 'request',
         REQUESTS : 'requests',
@@ -49,6 +49,7 @@ export const CONSTS = {
         SUPPLY_POINTS : 'supply-points',
         SUPPLY_OFFER: 'supply-offer',
         TERMS_OF_USE : 'terms-of-use',
+        USER_PROFILE: 'user-profile',
         WILD_CART  : '**',
     },
     TELEPHONE_PREFIX_CZ: '+420',
@@ -74,6 +75,8 @@ export const ROUTES = {
     ROUTER_SUPPLY_OFFER_POWER: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_OFFER}/${CONSTS.PATHS.POWER}`,
     ROUTER_SUPPLY_OFFER_GAS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_OFFER}/${CONSTS.PATHS.GAS}`,
     ROUTER_TERMS_OF_USE: `/${CONSTS.PATHS.TERMS_OF_USE}`,
+    ROUTER_USER_CHANGE_PASSWORD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CHANGE_PASSWORD}`,
+    ROUTER_USER_PROFILE: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.USER_PROFILE}`,
 };
 
 export const CODE_LIST = {

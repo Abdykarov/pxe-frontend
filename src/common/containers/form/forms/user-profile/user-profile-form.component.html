@@ -1,0 +1,102 @@
+<form
+    [formGroup]="form"
+    (keydown)="resetCustomFieldError()"
+    (change)="resetCustomFieldError()"
+    autocomplete="off"
+    class="form-container">
+    <div *ngIf="formSent"
+         class="row">
+        <div class="col">
+            <lnd-alert type="info"
+                       hasIcon="true">
+                Změny byly úspěšně uloženy
+            </lnd-alert>
+        </div>
+    </div>
+    <pxe-field-wrapper
+        label="Jméno a příjmení"
+        labelFor="firstName"
+        [error]="((form.controls.firstName.touched || formError.firstName) && (formError.firstName || form.controls.firstName.errors)) ||
+                 ((form.controls.lastName.touched || formError.lastName) && (formError.lastName || form.controls.lastName.errors))"
+        [validationMessages]="((form.controls.firstName.touched || formError.firstName) && (formError.firstName || form.controls.firstName.errors) && formFields.validationMessages.firstName) ||
+                              ((form.controls.lastName.touched || formError.lastName) && (formError.lastName || form.controls.lastName.errors) && formFields.validationMessages.lastName)">
+        <div class="row no-gutters">
+            <div class="col-6 pr-1">
+                <lnd-form-field
+                    [error]="formError.firstName || form.controls.firstName.errors"
+                    [formControl]="form.controls.firstName"
+                    [id]="'firstName'"
+                    [label]="'Jméno'"
+                    [success]="form.controls.firstName.valid && (form.controls.firstName.touched || formError.firstName)"
+                    [touched]="form.controls.firstName.touched || formError.firstName"
+                    [validationMessages]="formFields.validationMessages.firstName"
+                ></lnd-form-field>
+            </div>
+            <div class="col-6 pl-1">
+                <lnd-form-field
+                    [error]="formError.lastName || form.controls.lastName.errors"
+                    [formControl]="form.controls.lastName"
+                    [id]="'name'"
+                    [label]="'Příjmení'"
+                    [success]="form.controls.lastName.valid && (form.controls.lastName.touched || formError.lastName)"
+                    [touched]="form.controls.lastName.touched || formError.lastName"
+                    [validationMessages]="formFields.validationMessages.lastName"
+                ></lnd-form-field>
+            </div>
+        </div>
+    </pxe-field-wrapper>
+
+
+    <lnd-form-field
+        [error]="formError.email || form.controls.email.errors"
+        [formControl]="form.controls.email"
+        [disabledField]="true"
+        [id]="'email'"
+        label="Email"
+        [success]="form.controls.email.valid && (form.controls.email.touched || formError.email)"
+        [touched]="form.controls.email.touched || formError.email"
+        [validationMessages]="formFields.validationMessages.email"
+    ></lnd-form-field>
+    <pxe-field-wrapper
+        label="Telefonní číslo"
+        labelFor="phone"
+        [error]="((form.controls.phonePrefix.touched || formError.phonePrefix) && (formError.phonePrefix || form.controls.phonePrefix.errors)) ||
+                 ((form.controls.phone.touched || formError.phone) && (formError.phone || form.controls.phone.errors))"
+        [validationMessages]="((form.controls.phonePrefix.touched || formError.phonePrefix) && (formError.phonePrefix || form.controls.phonePrefix.errors) && formFields.validationMessages.phonePrefix) ||
+                              ((form.controls.phone.touched || formError.phone) && (formError.phone || form.controls.phone.errors) && formFields.validationMessages.phone)">
+        <div class="row no-gutters">
+            <div class="col-4 pr-1">
+                <lnd-form-field
+                    [disabledField]="true"
+                    [error]="formError.phonePrefix || form.controls.phonePrefix.errors"
+                    [formControl]="form.controls.phonePrefix"
+                    [id]="'phonePrefix'"
+                    label="Telefonní číslo"
+                    [success]="form.controls.phonePrefix.valid && (form.controls.phonePrefix.touched || formError.phonePrefix)"
+                    [touched]="form.controls.phonePrefix.touched || formError.phonePrefix"
+                    [validationMessages]="formFields.validationMessages.phonePrefix"
+                ></lnd-form-field>
+            </div>
+            <div class="col-8 pl-1">
+                <lnd-form-field
+                    [error]="formError.phone || form.controls.phone.errors"
+                    [formControl]="form.controls.phone"
+                    [id]="'phone'"
+                    label=""
+                    [success]="form.controls.phone.valid && (form.controls.phone.touched || formError.phone)"
+                    [touched]="form.controls.phone.touched || formError.phone"
+                    [validationMessages]="formFields.validationMessages.phone"
+                ></lnd-form-field>
+            </div>
+        </div>
+    </pxe-field-wrapper>
+
+    <div class="text-center">
+        <lnd-button
+            type="primary"
+            (action)="submitForm()"
+            [isDisabled]="formLoading"
+            label="Uložit">
+        </lnd-button>
+    </div>
+</form>

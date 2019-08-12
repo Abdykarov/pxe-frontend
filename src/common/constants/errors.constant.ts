@@ -113,7 +113,13 @@ export const errorFieldMessages =  {
     },
     fullName: {
         requiredPerson: 'Vyplňte své jméno a příjmení.',
+        requiredPersonFirstName: 'Vyplňte své jméno.',
+        requiredPersonLastName: 'Vyplňte své příjmení.',
         requiredCompany: 'Vyplňte název společnosti.',
+        maxlengthFirstName: 'Maximální délka pro jméno je 50 znaků.',
+        maxlengthLastName: 'Maximální délka pro příjmení je 50 znaků.',
+        patternFirstName: 'Jméno může obsahovat pouze písmena a mezery.',
+        patternLastName: 'Příjmení může obsahovat pouze písmena a pomlčku.',
     },
     ico: {
         required: 'Vyplňte své IČO.',
@@ -174,6 +180,7 @@ export const errorFieldMessages =  {
     },
     password: {
         required: 'Vyplňte heslo.',
+        currentRequired: 'Vyplňte heslo.',
         pattern: '	Vaše heslo musí mít minimálně 8 písmen, musí obsahovat malá a velká ' +
             'písmena, aspoň jednu číslici a aspoň jeden speciální znak jako &_*+/#\ apod.',
         fieldsMustMatch: 'Musíte vyplnit stejná hesla.',
@@ -182,8 +189,8 @@ export const errorFieldMessages =  {
         required: 'Vyplňte svůj telefon.',
         requiredMobile: 'Vyplňte svůj mobilní telefon.',
         requiredLandLine: 'Vyplňte svoji pevnou linku.',
-        phoneNumber: 'Telefon musí obsahovat 9 číslic.',
-        mobilePhoneNumber: 'Mobilní telefon musí obsahovat 9 číslic.',
+        phoneNumber: 'Telefon musí obsaMobilní telefon musí obsahovat 9 číslic.hovat 9 číslic.',
+        mobilePhoneNumber: '',
         landLineNumber: 'Pevná linka musí obsahovat 9 číslic.',
     },
     phonePrefix: {

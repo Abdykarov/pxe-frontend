@@ -1,4 +1,4 @@
-import { LANDING_PAGE } from 'src/common/graphql/models/password';
+import { LANDING_PAGE } from 'src/common/graphql/models/user.model';
 
 export interface ILoginRequest {
     email: string;
@@ -37,6 +37,7 @@ export interface IJwtPayload {
     needSmsConfirm?: boolean;
     passwordReset?: boolean;
     userStatus: UserStatus;
+    phoneNumber?: string;
     firstContract: boolean;
     firstContractId: number;
 }
