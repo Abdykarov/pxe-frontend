@@ -19,6 +19,7 @@ const routes = [
                 data: {
                     isPublic: true,
                     isSimpleFooter: true,
+                    isLandingPage: true,
                     loginType: LoginType.NAVIGATE,
                     signUpType: SignType.SCROLL,
                 },

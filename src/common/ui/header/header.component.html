@@ -32,12 +32,14 @@
                         class="public-menu-holder"
                         *ngIf="settings.isPublic && !settings.isStatic">
                         <lnd-button
+                            *ngIf="settings.isLandingPage"
                             label="Změna dodavatele"
                             customClass="mr-4"
                             type="link"
                             (click)="supplierChangeAction.emit()">
                         </lnd-button>
                         <lnd-button
+                            *ngIf="settings.isLandingPage"
                             label="Pokrytí"
                             customClass="mr-4"
                             type="link"
@@ -55,51 +57,20 @@
                             (click)="signUpAction.emit()">
                         </lnd-button>
                     </div>
-<!--                    <div-->
-<!--                        class="registration-holder"-->
-<!--                        *ngIf="settings.signUpType !== signTypeNone">-->
-<!--                        <lnd-button-->
-<!--                            label="Registrace"-->
-<!--                            type="primary"-->
-<!--                            (click)="signUpAction.emit()">-->
-<!--                        </lnd-button>-->
-<!--                    </div>-->
-<!--                    <div-->
-<!--                        class="registration-holder"-->
-<!--                        *ngIf="settings.loginType !== loginTypeNone">-->
-<!--                        <lnd-button-->
-<!--                            label="Přihlášení"-->
-<!--                            type="link"-->
-<!--                            (click)="loginAction.emit()">-->
-<!--                        </lnd-button>-->
-<!--                    </div>-->
-                    <div
-                        class="menu-holder"
-                        *ngIf="!settings.isPublic || settings.isStatic">
-                        <a
-                            class="menu-toggle"
-                            [class.menu-toggle--open]="isMenuOpen"
-                            (click)="toggleMenu.emit(!isMenuOpen)">
-                            <span class="menu-toggle__line"></span>
-                            <span class="menu-toggle__line"></span>
-                            <span class="menu-toggle__line"></span>
-                            <span class="menu-toggle__line"></span>
-                            <span class="menu-toggle__label">Menu</span>
-                        </a>
+                    <div *ngIf="!settings.isPublic || settings.isStatic"
+                         class="menu-holder">
+                        <pxe-hamburger
+                            [isMenuOpen]="isMenuOpen"
+                            (toggleMenu)="toggleMenu.emit($event)"
+                        ></pxe-hamburger>
                     </div>
-                    <div class="menu-holder"
-                         *ngIf="settings.isPublic">
+                    <div *ngIf="settings.isPublic"
+                         class="menu-holder">
                         <ng-template #dropdown3 let-toggle="toggle" let-isOpen="isOpen">
-                            <a
-                                class="menu-toggle"
-                                [class.menu-toggle--open]="isOpen"
-                                (click)="toggle()">
-                                <span class="menu-toggle__line"></span>
-                                <span class="menu-toggle__line"></span>
-                                <span class="menu-toggle__line"></span>
-                                <span class="menu-toggle__line"></span>
-                                <span class="menu-toggle__label">Menu</span>
-                            </a>
+                            <pxe-hamburger
+                                [isMenuOpen]="isOpen"
+                                (toggleMenu)="toggle()"
+                            ></pxe-hamburger>
                         </ng-template>
                         <lnd-dropdown
                             #publicMenu
@@ -107,10 +78,12 @@
                             (toggleOverlayerAction)="toggleMenu.emit($event)"
                             menuDirection="right">
                             <a class="dropdown-item"
+                               *ngIf="settings.isLandingPage"
                                (click)="supplierChangeAction.emit()">
                                 Změna dodatavatele
                             </a>
                             <a class="dropdown-item"
+                               *ngIf="settings.isLandingPage"
                                (click)="coverageMapAction.emit()">
                                 Pokrytí
                             </a>

@@ -35,6 +35,7 @@ export class BasicLayoutComponent extends AbstractComponent implements OnInit {
 
     public settings: ISettings = {
         isPublic: true,
+        isLandingPage: false,
         isSimpleFooter: true,
         isStatic: true,
         loginType: LoginType.NONE,

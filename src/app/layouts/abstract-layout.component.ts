@@ -27,6 +27,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
 
     public settings: ISettings = {
         isPublic: false,
+        isLandingPage: false,
         isSimpleFooter: false,
         isStatic: false,
         loginType: LoginType.NONE,
