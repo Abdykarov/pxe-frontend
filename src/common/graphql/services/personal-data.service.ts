@@ -23,76 +23,70 @@ export class PersonalDataService {
         private apollo: Apollo,
     ) {}
 
-    public getPersonalData(contractId: string) {
-        return this.apollo
-            .watchQuery<any>({
-                query: getPersonalDataQuery,
-                variables: {
-                    contractId,
-                },
-            })
-            .valueChanges;
-    }
+    public getPersonalData = (contractId: string) => this.apollo
+        .watchQuery<any>({
+            query: getPersonalDataQuery,
+            variables: {
+                contractId,
+            },
+        })
+        .valueChanges
 
-    public savePersonalData(supplyPoint: ISupplyPoint, personalData: IPersonalDataInput) {
-        return this.apollo
-            .mutate({
-                mutation: savePersonalDataMutation,
-                variables: {
-                    contractId: supplyPoint.contract.contractId,
-                    personalData,
-                },
-                update: (cache, {data}) => {
-                    const { getSupplyPoint } = cache.readQuery(
-                        {
-                            query: getSupplyPointQuery,
-                            variables: {
-                                supplyPointId: supplyPoint.id,
-                            },
-                        });
-
-                    this.loadSupplyPoint(getSupplyPoint, personalData);
-
-                    cache.writeQuery({
+    public savePersonalData = (supplyPoint: ISupplyPoint, personalData: IPersonalDataInput) => this.apollo
+        .mutate({
+            mutation: savePersonalDataMutation,
+            variables: {
+                contractId: supplyPoint.contract.contractId,
+                personalData,
+            },
+            update: (cache, {data}) => {
+                const { getSupplyPoint } = cache.readQuery(
+                    {
                         query: getSupplyPointQuery,
-                        data: { getSupplyPoint},
                         variables: {
                             supplyPointId: supplyPoint.id,
                         },
                     });
-                },
-            });
-    }
 
-    public updatePersonalData(supplyPoint: ISupplyPoint, personalData: IPersonalDataInput) {
-        return this.apollo
-            .mutate({
-                mutation: updatePersonalDataMutation,
-                variables: {
-                    contractId: supplyPoint.contract.contractId,
-                    personalData,
-                },
-                // update: (cache, {data}) => {
-                //     const { getSupplyPoint } = cache.readQuery(
-                //         {
-                //             query: getSupplyPointQuery,
-                //             variables: {
-                //                 supplyPointId: supplyPoint.id,
-                //             },
-                //         });
-                //
-                //     this.loadSupplyPoint(getSupplyPoint, personalData);
-                //
-                //     cache.writeQuery({
-                //         query: getSupplyPointQuery,
-                //         data: { getSupplyPoint},
-                //         variables: {
-                //             supplyPointId: supplyPoint.id,
-                //         },
-                //     });
-                // },
-            });
-    }
+                this.loadSupplyPoint(getSupplyPoint, personalData);
+
+                cache.writeQuery({
+                    query: getSupplyPointQuery,
+                    data: { getSupplyPoint},
+                    variables: {
+                        supplyPointId: supplyPoint.id,
+                    },
+                });
+            },
+        })
+
+    public updatePersonalData = (supplyPoint: ISupplyPoint, personalData: IPersonalDataInput) => this.apollo
+        .mutate({
+            mutation: updatePersonalDataMutation,
+            variables: {
+                contractId: supplyPoint.contract.contractId,
+                personalData,
+            },
+            // update: (cache, {data}) => {
+            //     const { getSupplyPoint } = cache.readQuery(
+            //         {
+            //             query: getSupplyPointQuery,
+            //             variables: {
+            //                 supplyPointId: supplyPoint.id,
+            //             },
+            //         });
+            //
+            //     this.loadSupplyPoint(getSupplyPoint, personalData);
+            //
+            //     cache.writeQuery({
+            //         query: getSupplyPointQuery,
+            //         data: { getSupplyPoint},
+            //         variables: {
+            //             supplyPointId: supplyPoint.id,
+            //         },
+            //     });
+            // },
+        })
 
     // docasny reseni pred sync s BE
     public loadSupplyPoint = (supplyPoint: ISupplyPoint, personalData: IPersonalDataInput) => {

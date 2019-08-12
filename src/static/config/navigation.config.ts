@@ -221,6 +221,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Recapitulation',
                     'url': '/basic/recapitulation',
                 },
+                {
+                    'label': 'User profile',
+                    'url': '/basic/user-profile',
+                },
                 // {
                 //     'label': 'Error',
                 //     'url': '/error-404',

@@ -14,3 +14,13 @@ export enum LANDING_PAGE {
     NEW_SUPPLY_POINT = 'NEW_SUPPLY_POINT',
     WAITING_FOR_PAYMENT = 'WAITING_FOR_PAYMENT',
 }
+
+
+export interface IUserDetailInput {
+    email?: string;
+    firstName?: string;
+    lastName?: string;
+    passwordReset?: boolean;
+    phoneNumber?: string;
+    userName: string;
+}

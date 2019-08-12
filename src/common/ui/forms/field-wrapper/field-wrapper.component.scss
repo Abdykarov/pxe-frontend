@@ -27,6 +27,7 @@
 		.field-wrapper-content {
 			label,
 			.input-subtext,
+			.form-control-wrapper.invalid-input ~ .invalid-feedback,
 			.invalid-feedback {
 				display: none;
 			}
