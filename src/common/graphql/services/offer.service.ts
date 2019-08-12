@@ -29,106 +29,91 @@ export class OfferService {
         private apollo: Apollo,
     ) {}
 
-    public findSupplierOffers() {
-        return this.apollo
-            .watchQuery<any>({
+    public findSupplierOffers = () => this.apollo
+        .watchQuery<any>({
+            query: findSupplierOffersQuery,
+            // errorPolicy: 'ignore',
+        })
+        .valueChanges
+
+    public findSupplyPointOffers = (ean: string) => this.apollo
+        .watchQuery<any>({
+            fetchPolicy: 'network-only',
+            query: findSupplyPointOffersQuery,
+            variables: {
+                ean,
+            },
+        })
+        .valueChanges
+
+    public savePowerOffer = (offer: IOfferInput, powerAttributes: IOfferInputPowerAttributes) => this.apollo
+        .mutate({
+            mutation: savePowerOfferMutation,
+            variables: {
+                offer,
+                powerAttributes,
+            },
+            refetchQueries: [{
                 query: findSupplierOffersQuery,
-                // errorPolicy: 'ignore',
-            })
-            .valueChanges;
-    }
+            }],
+        })
 
-    public findSupplyPointOffers(ean: string) {
-        return this.apollo
-            .watchQuery<any>({
-                fetchPolicy: 'network-only',
-                query: findSupplyPointOffersQuery,
-                variables: {
-                    ean,
-                },
-            })
-            .valueChanges;
-    }
+    public saveGasOffer = (offer: IOfferInput, gasAttributes: IOfferInputGasAttributes) => this.apollo
+        .mutate({
+            mutation: saveGasOfferMutation,
+            variables: {
+                offer,
+                gasAttributes,
+            },
+            refetchQueries: [{
+                query: findSupplierOffersQuery,
+            }],
+        })
 
-    public savePowerOffer(offer: IOfferInput, powerAttributes: IOfferInputPowerAttributes) {
-        return this.apollo
-            .mutate({
-                mutation: savePowerOfferMutation,
-                variables: {
-                    offer,
-                    powerAttributes,
-                },
-                refetchQueries: [{
+    public updatePowerOffer = (offerId: number, offer: IOfferInput, powerAttributes: IOfferInputPowerAttributes) => this.apollo
+        .mutate({
+            mutation: updatePowerOfferMutation,
+            variables: {
+                offerId,
+                offer,
+                powerAttributes,
+            },
+            refetchQueries: [{
+                query: findSupplierOffersQuery,
+            }],
+        })
+
+    public updateGasOffer = (offerId: number, offer: IOfferInput, gasAttributes: IOfferInputGasAttributes) => this.apollo
+        .mutate({
+            mutation: gasAttributes,
+            variables: {
+                offerId,
+                offer,
+                gasAttributes,
+            },
+            refetchQueries: [{
+                query: findSupplierOffersQuery,
+            }],
+        })
+
+    public deleteOffer = (offerId: number) => this.apollo
+        .mutate({
+            mutation: deleteOfferMutation,
+            variables: {
+                offerId,
+            },
+            update: (cache, {data}) => {
+                const offers: any = cache.readQuery({ query: findSupplierOffersQuery });
+                const updatedData = R.map(offer => {
+                    if (offer.id === data.deleteOffer.toString()) {
+                        offer.status = IOfferStatus.DELETED;
+                    }
+                    return offer;
+                })(offers.findSupplierOffers);
+                cache.writeQuery({
                     query: findSupplierOffersQuery,
-                }],
-            });
-    }
-
-    public saveGasOffer(offer: IOfferInput, gasAttributes: IOfferInputGasAttributes) {
-        return this.apollo
-            .mutate({
-                mutation: saveGasOfferMutation,
-                variables: {
-                    offer,
-                    gasAttributes,
-                },
-                refetchQueries: [{
-                    query: findSupplierOffersQuery,
-                }],
-            });
-    }
-
-    public updatePowerOffer(offerId: number, offer: IOfferInput, powerAttributes: IOfferInputPowerAttributes) {
-        return this.apollo
-            .mutate({
-                mutation: updatePowerOfferMutation,
-                variables: {
-                    offerId,
-                    offer,
-                    powerAttributes,
-                },
-                refetchQueries: [{
-                    query: findSupplierOffersQuery,
-                }],
-            });
-    }
-
-    public updateGasOffer(offerId: number, offer: IOfferInput, gasAttributes: IOfferInputGasAttributes) {
-        return this.apollo
-            .mutate({
-                mutation: gasAttributes,
-                variables: {
-                    offerId,
-                    offer,
-                    gasAttributes,
-                },
-                refetchQueries: [{
-                    query: findSupplierOffersQuery,
-                }],
-            });
-    }
-
-    public deleteOffer(offerId: number) {
-        return this.apollo
-            .mutate({
-                mutation: deleteOfferMutation,
-                variables: {
-                    offerId,
-                },
-                update: (cache, {data}) => {
-                    const offers: any = cache.readQuery({ query: findSupplierOffersQuery });
-                    const updatedData = R.map(offer => {
-                        if (offer.id === data.deleteOffer.toString()) {
-                            offer.status = IOfferStatus.DELETED;
-                        }
-                        return offer;
-                    })(offers.findSupplierOffers);
-                    cache.writeQuery({
-                        query: findSupplierOffersQuery,
-                        data: { findSupplierOffers: updatedData},
-                    });
-                },
-            });
-    }
-
+                    data: { findSupplierOffers: updatedData},
+                });
+            },
+        })
 }

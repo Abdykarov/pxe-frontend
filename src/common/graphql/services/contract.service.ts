@@ -14,12 +14,12 @@ import {
     updateContractMutation,
 } from 'src/common/graphql/mutation/contract';
 import { DEFAULT_QR_CODE_SETTING } from 'src/app/app.constants';
+import { findSupplyPointOffersQuery } from 'src/common/graphql/queries/offer';
 import {
     getContractTermsQuery,
     getPaymentInfoQuery,
 } from 'src/common/graphql/queries/contract';
 import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
-import { findSupplyPointOffersQuery } from 'src/common/graphql/queries/offer';
 import {
     ISupplyPoint,
     ProgressStatus,
@@ -36,97 +36,83 @@ export class ContractService {
         private apollo: Apollo,
     ) {}
 
-    public saveContract(offerId: number, supplyPointId: string) {
-        return this.apollo
-            .mutate({
-                mutation: saveContractMutation,
-                variables: {
-                    offerId,
-                    supplyPointId,
-                },
-                update: (cache, { data }) => {
-                    const { getSupplyPoint } = cache.readQuery(
-                        {
-                            query: getSupplyPointQuery,
-                            variables: {
-                                supplyPointId: supplyPointId,
-                            },
-                        });
-
-                    this.loadSupplyPointDetail(offerId, getSupplyPoint, cache, data);
-
-                    cache.writeQuery({
+    public saveContract = (offerId: number, supplyPointId: string) => this.apollo
+        .mutate({
+            mutation: saveContractMutation,
+            variables: {
+                offerId,
+                supplyPointId,
+            },
+            update: (cache, { data }) => {
+                const { getSupplyPoint } = cache.readQuery(
+                    {
                         query: getSupplyPointQuery,
-                        data: { getSupplyPoint },
                         variables: {
                             supplyPointId: supplyPointId,
                         },
                     });
-                },
-            });
-    }
 
-    public getContractTerms(contractId: string) {
-        return this.apollo
-            .watchQuery<any>({
-                query: getContractTermsQuery,
-                variables: {
-                    contractId,
-                },
-            })
-            .valueChanges;
-    }
+                this.loadSupplyPointDetail(offerId, getSupplyPoint, cache, data);
 
-    public signContract(contractId: string, smsCode: string) {
-        return this.apollo
-            .mutate({
-                mutation: signContractMutation,
-                variables: {
-                    contractId,
-                    smsCode,
-                },
-            });
-    }
+                cache.writeQuery({
+                    query: getSupplyPointQuery,
+                    data: { getSupplyPoint },
+                    variables: {
+                        supplyPointId: supplyPointId,
+                    },
+                });
+            },
+        })
 
-    public sendContractConfirmationSms(contractId: string) {
-        return this.apollo
-            .mutate({
-                mutation: sendContractConfirmationSmsMutation,
-                variables: {
-                    contractId,
-                },
-            });
-    }
+    public getContractTerms = (contractId: string) => this.apollo
+        .watchQuery<any>({
+            query: getContractTermsQuery,
+            variables: {
+                contractId,
+            },
+        })
+        .valueChanges
 
-    public updateContract(contractId: number) {
-        return this.apollo
-            .mutate({
-                mutation: updateContractMutation,
-                variables: {
-                    contractId,
-                },
-            });
-    }
+    public signContract = (contractId: string, smsCode: string) => this.apollo
+        .mutate({
+            mutation: signContractMutation,
+            variables: {
+                contractId,
+                smsCode,
+            },
+        })
 
-    public deleteContract(contractId: string) {
-        return this.apollo
-            .mutate({
-                mutation: deleteContractMutation,
-                variables: {
-                    contractId,
-                },
-            });
-    }
+    public sendContractConfirmationSms = (contractId: string) => this.apollo
+        .mutate({
+            mutation: sendContractConfirmationSmsMutation,
+            variables: {
+                contractId,
+            },
+        })
 
-    public concludeContract(contractId: number) {
-        return this.apollo
-            .mutate({
-                mutation: concludeContractMutation,
-                variables: {
-                    contractId,
-                },
-            });
-    }
+    public updateContract = (contractId: number) => this.apollo
+        .mutate({
+            mutation: updateContractMutation,
+            variables: {
+                contractId,
+            },
+        })
+
+    public deleteContract = (contractId: string) => this.apollo
+        .mutate({
+            mutation: deleteContractMutation,
+            variables: {
+                contractId,
+            },
+        })
+
+    public concludeContract = (contractId: number) => this.apollo
+        .mutate({
+            mutation: concludeContractMutation,
+            variables: {
+                contractId,
+            },
+        })
 
     // docasny reseni pred sync s BE
     public loadSupplyPointDetail = (offerId: number, supplyPoint: ISupplyPoint, cache, data) => {
@@ -205,38 +191,30 @@ export class ContractService {
         };
     }
 
-    public deleteSignedContract(contractId: string, smsConfirmationCode: string) {
-        return this.apollo
-            .mutate({
-                mutation: deleteSignedContractMutation,
-                variables: {
-                    contractId,
-                    smsConfirmationCode,
-                },
-            });
-    }
+    public deleteSignedContract = (contractId: string, smsConfirmationCode: string) => this.apollo
+        .mutate({
+            mutation: deleteSignedContractMutation,
+            variables: {
+                contractId,
+                smsConfirmationCode,
+            },
+        })
 
-    public deleteSelectedOfferFromContract(contractId: string) {
-        return this.apollo
-            .mutate({
-                mutation: deleteSelectedOfferFromContractMutation,
-                variables: {
-                    contractId,
-                },
-            });
-    }
+    public deleteSelectedOfferFromContract = (contractId: string) => this.apollo
+        .mutate({
+            mutation: deleteSelectedOfferFromContractMutation,
+            variables: {
+                contractId,
+            },
+        })
 
-    // todo refetch all queries for all supply point overviews
-
-    public getPaymentInfo(contractId: string, setting: IQRCodeSetting = DEFAULT_QR_CODE_SETTING) {
-        return this.apollo
-            .watchQuery<any>({
-                query: getPaymentInfoQuery,
-                variables: {
-                    contractId,
-                    setting,
-                },
-            })
-            .valueChanges;
-    }
+    public getPaymentInfo = (contractId: string, setting: IQRCodeSetting = DEFAULT_QR_CODE_SETTING) => this.apollo
+        .watchQuery<any>({
+            query: getPaymentInfoQuery,
+            variables: {
+                contractId,
+                setting,
+            },
+        })
+        .valueChanges
 }

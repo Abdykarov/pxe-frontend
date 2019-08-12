@@ -5,7 +5,7 @@
     [class.body-inner--overlay-aside]="showOverlay || isMenuOpen"
     [class.body-inner--overlay-full]="showOverlay">
     <lnd-header
-        [user]="currentUser"
+        [user]="authService.currentUser$ | async"
         [userMenu]="navigationMenuUserActions"
         [isMenuOpen]="isMenuOpen"
         [settings]="settings"
@@ -21,10 +21,10 @@
                 [class.d-lg-none]="settings.hideLeftNavigation"
                 [class.col-lg-2]="!settings.hideLeftNavigation">
                 <lnd-navigation
-                [config]="navConfig"
-                [isMenuOpen]="isMenuOpen"
-                [itemOpened]="itemOpened"
-                (openItem)="toggleNavigationItem($event)">
+                    [config]="navConfig"
+                    [isMenuOpen]="isMenuOpen"
+                    [itemOpened]="itemOpened"
+                    (openItem)="toggleNavigationItem($event)">
                 </lnd-navigation>
             </div>
             <div class="container-content"
