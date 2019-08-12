@@ -28,8 +28,8 @@ export class SupplyPointDetailGuard implements CanActivateChild {
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         const isNotSupplyPoint = R.pathSatisfies(R_.isNilOrEmpty, ['queryParams', 'supplyPointId'], childRoute);
         if (isNotSupplyPoint) {
-            this.router.navigate([ROUTES.ROUTER_REQUESTS]);
-            return false;
+            // this.router.navigate([ROUTES.ROUTER_REQUESTS]);
+            // return false;
         }
         return true;
     }

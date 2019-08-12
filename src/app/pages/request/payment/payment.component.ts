@@ -68,6 +68,14 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
     ngOnInit () {
         super.ngOnInit();
         this.getSupplyPointWithPayment(this.supplyPointId);
+        // this.supplyService.findSupplyPoints()
+        //     .pipe(
+        //         map(({data}) => data.findSupplyPoints),
+        //         takeUntil(this.destroy$),
+        //     )
+        //     .subscribe((data) => {
+        //         console.log('%c ***** data *****', 'background: #bada55; color: #000; font-weight: bold', data);
+        //     });
     }
 
     public getSupplyPointWithPayment = (id) => {
