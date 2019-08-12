@@ -5,6 +5,7 @@ import { Apollo } from 'apollo-angular';
 
 import {
     concludeContractMutation,
+    confirmFirstContractViewMutation,
     deleteContractMutation,
     deleteSelectedOfferFromContractMutation,
     deleteSignedContractMutation,
@@ -239,4 +240,9 @@ export class ContractService {
             })
             .valueChanges;
     }
+
+    public confirmFirstContractView = () => this.apollo
+        .mutate({
+            mutation: confirmFirstContractViewMutation,
+        })
 }

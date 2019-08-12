@@ -86,7 +86,11 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                     this.supplyPoint = supplyPoint;
                     this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.WAITING_FOR_PAYMENT);
                     const isContractFinalized = this.supplyPoint.contract &&
-                        R.indexOf(this.supplyPoint.contract.contractStatus, [ContractStatus.CONCLUDED, ContractStatus.CANCELED]) >= 0;
+                        R.indexOf(this.supplyPoint.contract.contractStatus, [
+                            ContractStatus.CONCLUDED,
+                            ContractStatus.CANCELED,
+                            ContractStatus.TO_BE_CANCELED,
+                        ]) >= 0;
                     if (isContractFinalized) {
                         this.finalizePaymentProgress();
                     }
@@ -103,8 +107,23 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                 }),
                 map(({data}) => data.getPaymentInfo),
                 switchMap((paymentInfo: IPayment) => {
-                    if (!R.isEmpty(paymentInfo)) {
-                        this.paymentInfo = paymentInfo;
+                    const firstContract = this.authService.currentUserValue.firstContract;
+                    this.paymentInfo = paymentInfo;
+                    // TODO check
+                    if (firstContract || 1) {
+                        return this.contractService.confirmFirstContractView();
+                    } else {
+                        return of({
+                            data: {
+                                confirmFirstContractView: false,
+                            },
+                        });
+                    }
+                }),
+                map(({data}) => data.confirmFirstContractView),
+                switchMap((changed: boolean) => {
+                    console.log('%c ***** changed *****', 'background: #bada55; color: #000; font-weight: bold', changed);
+                    if (!R.isEmpty(this.paymentInfo) || changed) {
                         return this.authService.refreshToken( {
                             supplyPointId: this.supplyPoint.id,
                         });
