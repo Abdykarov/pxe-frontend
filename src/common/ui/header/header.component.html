@@ -34,19 +34,19 @@
                         <lnd-button
                             label="Změna dodavatele"
                             customClass="mr-4"
-                            type="link"
+                            type="link-text"
                             (click)="supplierChangeAction.emit()">
                         </lnd-button>
                         <lnd-button
                             label="Pokrytí"
                             customClass="mr-4"
-                            type="link"
+                            type="link-text"
                             (click)="coverageMapAction.emit()">
                         </lnd-button>
                         <lnd-button
                             label="Přihlásit"
                             customClass="mr-4"
-                            type="link"
+                            type="link-text"
                             (click)="loginAction.emit()">
                         </lnd-button>
                         <lnd-button
@@ -106,19 +106,19 @@
                             [actionTemplate]="dropdown3"
                             (toggleOverlayerAction)="toggleMenu.emit($event)"
                             menuDirection="right">
-                            <a class="dropdown-item"
+                            <a class="dropdown-item dropdown-item--without-icon"
                                (click)="supplierChangeAction.emit()">
                                 Změna dodatavatele
                             </a>
-                            <a class="dropdown-item"
+                            <a class="dropdown-item dropdown-item--without-icon"
                                (click)="coverageMapAction.emit()">
                                 Pokrytí
                             </a>
-                            <a class="dropdown-item"
+                            <a class="dropdown-item dropdown-item--without-icon"
                                (click)="loginAction.emit()">
                                 Přihlásit
                             </a>
-                            <a class="dropdown-item"
+                            <a class="dropdown-item dropdown-item--without-icon"
                                (click)="signUpAction.emit()">
                                 Registrace
                             </a>

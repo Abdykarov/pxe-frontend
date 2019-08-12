@@ -160,6 +160,10 @@
 			color: $dropdown-link-disabled-color;
 			background-color: transparent;
 		}
+
+		&--without-icon {
+			padding-left: $dropdown-item-padding-x;
+		}
 	}
 
 	.dropdown-item-icon {
