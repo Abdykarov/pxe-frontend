@@ -7,6 +7,10 @@ import { Apollo } from 'apollo-angular';
 
 import * as mutations from 'src/common/graphql/mutations';
 import { AbstractComponent } from 'src/common/abstract.component';
+import {
+    CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import {
     IFieldError,
@@ -15,7 +19,6 @@ import {
 } from 'src/common/containers/form/models/form-definition.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { Router } from '@angular/router';
-import { ROUTES } from 'src/app/app.constants';
 
 @Component({
     templateUrl: './sign-up.component.html',
@@ -52,7 +55,7 @@ export class SignUpComponent extends AbstractComponent {
                     this.formLoading = false;
                     this.formSent = true;
                     this.cd.markForCheck();
-                    this.router.navigate(['login'],
+                    this.router.navigate([CONSTS.PATHS.LOGIN],
                         {
                             queryParams: {
                                 email: values.email,

@@ -1,7 +1,3 @@
-<!--<ng-template #agreementTemplate>-->
-<!--    Souhlasím se <a target="_blank" [href]="routes.ROUTER_SECURING_YOUR_DATA">zásadami bezpečnosti</a>-->
-<!--</ng-template>-->
-
 <ng-template #agreementTemplate>
     Souhlasím se <a target="_blank" [href]="routes.ROUTER_TERMS_OF_USE">Všeobecnými
     obchodními podmínkami účasti na Trhu „PARC 4 U“</a> a beru na vědomí
@@ -191,34 +187,19 @@
             <div class="row">
                 <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-3 col-lg-4 offset-lg-4">
                     <div class="px-3 px-md-0">
-                        <ng-container *ngIf="!formSent">
-                            <h3 class="h3--public">
-                                Chci mít také přístup k&nbsp;jiným cenám, možnost&nbsp;měnit dodavatele jen na&nbsp;jedno kliknutí a&nbsp;zbavit se starostí s&nbsp;převodem.
-                            </h3>
-                            <pxe-registration-form
-                                [agreementTemplate]="agreementTemplate"
-                                [formFields]="formFields"
-                                [formLoading]="formLoading"
-                                [formSent]="formSent"
-                                [globalError]="globalError"
-                                [fieldError]="fieldError"
-                                (submitAction)="submitForm($event)"
-                                [lightTheme]="true"
-                            ></pxe-registration-form>
-                        </ng-container>
-<!--                        <ng-container *ngIf="!!formSent">-->
-<!--                            <img-->
-<!--                                class="mb-2"-->
-<!--                                width="122"-->
-<!--                                height="129"-->
-<!--                                src="/assets/images/illustrations/mail-letter.svg"-->
-<!--                                title="Děkujeme za váš zájem"-->
-<!--                                alt="Děkujeme za váš zájem">-->
-<!--                            <h3 class="h3&#45;&#45;public mb-0">-->
-<!--                                Děkujeme za váš zájem.<br>-->
-<!--                                Hned jak službu spustíme, tak se vám ozveme.-->
-<!--                            </h3>-->
-<!--                        </ng-container>-->
+                        <h3 class="h3--public">
+                            Chci mít také přístup k&nbsp;jiným cenám, možnost&nbsp;měnit dodavatele jen na&nbsp;jedno kliknutí a&nbsp;zbavit se starostí s&nbsp;převodem.
+                        </h3>
+                        <pxe-registration-form
+                            [agreementTemplate]="agreementTemplate"
+                            [formFields]="formFields"
+                            [formLoading]="formLoading"
+                            [formSent]="formSent"
+                            [globalError]="globalError"
+                            [fieldError]="fieldError"
+                            (submitAction)="submitForm($event)"
+                            [lightTheme]="true"
+                        ></pxe-registration-form>
                     </div>
                 </div>
             </div>

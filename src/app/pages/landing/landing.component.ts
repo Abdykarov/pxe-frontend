@@ -11,6 +11,10 @@ import { takeUntil } from 'rxjs/operators';
 
 import * as mutations from 'src/common/graphql/mutations';
 import { AbstractComponent } from 'src/common/abstract.component';
+import {
+    CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import {
     IFieldError,
@@ -21,7 +25,6 @@ import {
     parseGraphQLErrors,
     scrollToElementFnc,
 } from 'src/common/utils';
-import { ROUTES } from 'src/app/app.constants';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
@@ -81,13 +84,10 @@ export class LandingComponent extends AbstractComponent {
             })
             .subscribe(
                 () => {
-                    // this.formLoading = false;
-                    // this.formSent = true;
-                    // this.cd.markForCheck();
                     this.formLoading = false;
                     this.formSent = true;
                     this.cd.markForCheck();
-                    this.router.navigate(['login'],
+                    this.router.navigate([CONSTS.PATHS.LOGIN],
                         {
                             queryParams: {
                                 email: values.email,
