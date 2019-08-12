@@ -1,6 +1,9 @@
 import {
-    Component, Input, OnChanges,
-    OnInit, SimpleChanges,
+    Component,
+    Input,
+    OnChanges,
+    OnInit,
+    SimpleChanges,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 

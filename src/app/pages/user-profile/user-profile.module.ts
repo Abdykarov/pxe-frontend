@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-
 import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';

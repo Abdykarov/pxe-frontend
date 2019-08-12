@@ -17,31 +17,25 @@ export class NavigationService {
 
     constructor(private apollo: Apollo) { }
 
-    public getConfig() {
-        return this.apollo
-            .watchQuery<any>({
-                query: getConfigQuery,
-            })
-            .valueChanges;
-    }
+    public getConfig = () => this.apollo
+        .watchQuery<any>({
+            query: getConfigQuery,
+        })
+        .valueChanges
 
-    public saveConfig(config) {
-        return this.apollo
-            .mutate({
-                mutation: loadConfigMutation,
+    public saveConfig = (config) => this.apollo
+        .mutate({
+            mutation: loadConfigMutation,
             variables: {
                 config: config,
             },
-        });
-    }
+        })
 
-    public toggleNavigationItem(navigationItem) {
-        return this.apollo
-            .mutate({
-                mutation: navigationItem.url === this.LOGOUT_URL ? logout : openItemMutation,
-                variables: {
-                    item: navigationItem,
-                },
-        });
-    }
+    public toggleNavigationItem = (navigationItem) => this.apollo
+        .mutate({
+            mutation: navigationItem.url === this.LOGOUT_URL ? logout : openItemMutation,
+            variables: {
+                item: navigationItem,
+            },
+        })
 }
