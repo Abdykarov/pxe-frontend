@@ -15,6 +15,9 @@ export class HamburgerComponent {
     @Input()
     public isMenuOpen = false;
 
+    @Input()
+    public disableAction = false;
+
     @Output()
     public toggleMenu: EventEmitter<boolean> = new EventEmitter<boolean>();
 }

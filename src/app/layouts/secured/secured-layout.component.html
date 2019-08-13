@@ -2,8 +2,7 @@
     id="top"
     class="body-inner"
     [class.body-inner--overlay]="showOverlay || isMenuOpen"
-    [class.body-inner--overlay-aside]="showOverlay || isMenuOpen"
-    [class.body-inner--overlay-full-]="showOverlay">
+    [class.body-inner--overlay-aside]="showOverlay || isMenuOpen">
     <lnd-header
         [user]="authService.currentUser$ | async"
         [userMenu]="navigationMenuUserActions"
@@ -24,7 +23,9 @@
                     [config]="navConfig"
                     [isMenuOpen]="isMenuOpen"
                     [itemOpened]="itemOpened"
-                    (openItem)="toggleNavigationItem($event)">
+                    (openItem)="toggleNavigationItem($event)"
+                    (lndOffClick)="toggleMenuOpen(!isMenuOpen)"
+                    [offClickEnabled]="isMenuOpen">
                 </lnd-navigation>
             </div>
             <div class="container-content"

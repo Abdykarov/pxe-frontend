@@ -1,9 +1,7 @@
 <div
     id="top"
     class="body-inner full-layout"
-    [ngClass]="{
-        'body-inner--overlay' : showOverlay
-    }">
+    [class.body-inner--overlay]="showOverlay">
     <lnd-header
         [settings]="settings"
         (homeRedirect)="homeRedirect()"

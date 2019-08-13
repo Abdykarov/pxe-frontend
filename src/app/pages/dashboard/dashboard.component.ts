@@ -41,23 +41,32 @@ export class DashboardComponent extends AbstractComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.supplyService.computeAndGetSupplyPointStatistics()
+        // this.supplyService.computeAndGetSupplyPointStatistics()
+        //     .pipe(
+        //         takeUntil(this.destroy$),
+        //         map(({data}) =>  data.computeAndGetSupplyPointStatistics),
+        //     )
+        //     .subscribe(
+        //         (supplyPointStatistic: ISupplyPointStatistic) => {
+        //             this.loadingData = false;
+        //             this.supplyPointStatistic = supplyPointStatistic;
+        //             this.cd.markForCheck();
+        //         },
+        //         error => {
+        //             const { globalError } = parseGraphQLErrors(error);
+        //             this.globalError = globalError;
+        //             this.cd.markForCheck();
+        //         },
+        //     );
+
+        this.supplyService.findSupplyPoints()
             .pipe(
+                map(({data}) => data.findSupplyPoints),
                 takeUntil(this.destroy$),
-                map(({data}) =>  data.computeAndGetSupplyPointStatistics),
             )
-            .subscribe(
-                (supplyPointStatistic: ISupplyPointStatistic) => {
-                    this.loadingData = false;
-                    this.supplyPointStatistic = supplyPointStatistic;
-                    this.cd.markForCheck();
-                },
-                error => {
-                    const { globalError } = parseGraphQLErrors(error);
-                    this.globalError = globalError;
-                    this.cd.markForCheck();
-                },
-            );
+            .subscribe((data) => {
+                console.log('%c ***** data *****', 'background: #bada55; color: #000; font-weight: bold', data);
+            });
     }
 
     public navigateToSupplyPoints = () => {

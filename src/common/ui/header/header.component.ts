@@ -1,5 +1,4 @@
 import {
-    ChangeDetectorRef,
     Component,
     EventEmitter,
     Input,
@@ -16,12 +15,8 @@ import { fromEvent } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { DropdownComponent } from 'src/common/ui/dropdown/dropdown.component';
-import {
-    ISettings,
-    LoginType,
-    SignType,
-} from 'src/app/layouts/models/router-data.model';
 import { IJwtPayload } from 'src/app/services/model/auth.model';
+import { ISettings } from 'src/app/layouts/models/router-data.model';
 import { INavigationMenu } from 'src/common/ui/navigation/models/navigation.model';
 
 @Component({
@@ -30,9 +25,6 @@ import { INavigationMenu } from 'src/common/ui/navigation/models/navigation.mode
     styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent extends AbstractComponent implements OnInit {
-    public signTypeNone = SignType.NONE;
-    public loginTypeNone = LoginType.NONE;
-
     @ViewChild('userProfile')
     public userProfile: DropdownComponent;
 
@@ -75,27 +67,15 @@ export class HeaderComponent extends AbstractComponent implements OnInit {
             debounceTime(200),
         );
 
-    constructor(
-        private cd: ChangeDetectorRef,
-    ) {
-        super();
-    }
-
     ngOnInit () {
         super.ngOnInit();
         this.resizeEvent$.subscribe(() => {
-             if (this.userProfile && this.userProfile.isOpen) {
+            if (this.userProfile && this.userProfile.isOpen) {
                 this.userProfile.toggle();
-                this.cd.markForCheck();
             }
-        });
-        this.resizeEvent$.subscribe(() => {
             if (this.publicMenu && this.publicMenu.isOpen) {
                 this.publicMenu.toggle();
-                this.cd.markForCheck();
             }
         });
     }
-
-    test = () => {};
 }

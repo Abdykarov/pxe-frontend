@@ -35,20 +35,20 @@
                             *ngIf="settings.isLandingPage"
                             label="Změna dodavatele"
                             customClass="mr-4"
-                            type="link"
+                            type="link-text"
                             (click)="supplierChangeAction.emit()">
                         </lnd-button>
                         <lnd-button
                             *ngIf="settings.isLandingPage"
                             label="Pokrytí"
                             customClass="mr-4"
-                            type="link"
+                            type="link-text"
                             (click)="coverageMapAction.emit()">
                         </lnd-button>
                         <lnd-button
                             label="Přihlásit"
                             customClass="mr-4"
-                            type="link"
+                            type="link-text"
                             (click)="loginAction.emit()">
                         </lnd-button>
                         <lnd-button
@@ -61,22 +61,13 @@
                          class="menu-holder">
                         <pxe-hamburger
                             [isMenuOpen]="isMenuOpen"
+                            [disableAction]="isMenuOpen"
                             (toggleMenu)="toggleMenu.emit($event)"
                         ></pxe-hamburger>
                     </div>
                     <div *ngIf="settings.isPublic"
                          class="menu-holder">
                         <ng-template #dropdown3 let-toggle="toggle" let-isOpen="isOpen">
-<!--                            <a-->
-<!--                                class="menu-toggle"-->
-<!--                                [class.menu-toggle&#45;&#45;open]="isOpen"-->
-<!--                                (click)="toggle()">-->
-<!--                                <span class="menu-toggle__line"></span>-->
-<!--                                <span class="menu-toggle__line"></span>-->
-<!--                                <span class="menu-toggle__line"></span>-->
-<!--                                <span class="menu-toggle__line"></span>-->
-<!--                                <span class="menu-toggle__label">Menu</span>-->
-<!--                            </a>-->
                             <pxe-hamburger
                                 [isMenuOpen]="isOpen"
                                 (toggleMenu)="toggle()"
@@ -87,21 +78,21 @@
                             [actionTemplate]="dropdown3"
                             (toggleOverlayerAction)="toggleMenu.emit($event)"
                             menuDirection="right">
-                            <a class="dropdown-item"
+                            <a class="dropdown-item dropdown-item--without-icon"
                                *ngIf="settings.isLandingPage"
                                (click)="supplierChangeAction.emit()">
                                 Změna dodatavatele
                             </a>
-                            <a class="dropdown-item"
+                            <a class="dropdown-item dropdown-item--without-icon"
                                *ngIf="settings.isLandingPage"
                                (click)="coverageMapAction.emit()">
                                 Pokrytí
                             </a>
-                            <a class="dropdown-item"
+                            <a class="dropdown-item dropdown-item--without-icon"
                                (click)="loginAction.emit()">
                                 Přihlásit
                             </a>
-                            <a class="dropdown-item"
+                            <a class="dropdown-item dropdown-item--without-icon"
                                (click)="signUpAction.emit()">
                                 Registrace
                             </a>

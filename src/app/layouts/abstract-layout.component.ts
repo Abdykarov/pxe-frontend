@@ -3,10 +3,7 @@ import {
     NavigationEnd,
     Router,
 } from '@angular/router';
-import {
-    ChangeDetectorRef,
-    OnInit,
-} from '@angular/core';
+import { OnInit } from '@angular/core';
 
 import { Apollo } from 'apollo-angular';
 import {
@@ -57,7 +54,6 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
     protected constructor(
         protected apollo: Apollo,
         protected authService: AuthService,
-        protected cd: ChangeDetectorRef,
         protected overlayService: OverlayService,
         protected route: ActivatedRoute,
         protected router: Router,
@@ -66,7 +62,6 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         super();
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
-                console.log('%c ***** NavigationEnd *****', 'background: #bada55; color: #000; font-weight: bold', this.showOverlay);
                 if (this.showOverlay) {
                     this.toggleSubscription = this.overlayService.toggleOverlay(false)
                         .subscribe();
@@ -110,13 +105,11 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
     }
 
     public toggleMenuOpen = (open: boolean) => {
-        console.log('%c ***** toggle *****', 'background: #bada55; color: #000; font-weight: bold', open);
         this.isMenuOpen = open;
         this.overlayService.toggleOverlay(open)
             .pipe(
                 takeUntil(this.destroy$),
             )
             .subscribe();
-        this.cd.markForCheck();
     }
 }

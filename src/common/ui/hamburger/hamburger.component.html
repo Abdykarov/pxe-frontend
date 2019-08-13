@@ -1,10 +1,13 @@
-<a
-    class="menu-toggle"
-    [class.menu-toggle--open]="isMenuOpen"
-    (click)="toggleMenu.emit(!isMenuOpen)">
-    <span class="menu-toggle__line"></span>
-    <span class="menu-toggle__line"></span>
-    <span class="menu-toggle__line"></span>
-    <span class="menu-toggle__line"></span>
-    <span class="menu-toggle__label">Menu</span>
+<a class="menu-toggle">
+    <span
+        class="menu-toggle__holder"
+        [class.menu-toggle--none]="disableAction"
+        [class.menu-toggle--open]="isMenuOpen"
+        (click)="toggleMenu.emit(!isMenuOpen)">
+        <span class="menu-toggle__line"></span>
+        <span class="menu-toggle__line"></span>
+        <span class="menu-toggle__line"></span>
+        <span class="menu-toggle__line"></span>
+        <span class="menu-toggle__label">Menu</span>
+    </span>
 </a>

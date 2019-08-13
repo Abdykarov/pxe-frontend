@@ -18,6 +18,16 @@
 	cursor: pointer;
 	overflow: hidden;
 
+	&__holder {
+		display: block;
+		width: $menu-width;
+		height: $menu-height;
+	}
+
+	&--none {
+		pointer-events: none;
+	}
+
 	&__line {
 		position: absolute;
 		left: $menu-toggle-line-center;

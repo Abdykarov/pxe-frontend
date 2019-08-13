@@ -26,6 +26,7 @@ import { navigationMenuUserActions } from './services/navigation.config';
 import { NavigationService } from './services/navigation.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
+import { logger } from 'codelyzer/util/logger';
 
 @Component({
     templateUrl: './secured-layout.component.html',
@@ -39,7 +40,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent {
     constructor(
         protected apollo: Apollo,
         public authService: AuthService,
-        protected cd: ChangeDetectorRef,
+        private cd: ChangeDetectorRef,
         private navigationApolloService: NavigationApolloService,
         private navigationService: NavigationService,
         protected overlayService: OverlayService,
@@ -50,7 +51,6 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent {
         super(
             apollo,
             authService,
-            cd,
             overlayService,
             route,
             router,
@@ -65,7 +65,6 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent {
                 map(R.path(['data', 'ui'])),
             )
             .subscribe((current: IStoreUi)  => {
-                console.log('%c ***** current *****', 'background: #bada55; color: #000; font-weight: bold', current);
                 if (current.securedLayout) {
                     this.navConfig = current.securedLayout.navigationConfig;
                     this.showOverlay = current.showOverlay;
@@ -85,11 +84,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent {
             });
     }
 
-    // public toggleMenuOpen = () => {
-    //     this.isMenuOpen = !this.isMenuOpen;
-    //     this.overlayService.toggleOverlay( (res) => {
-    //         this.showOverlay = true;
-    //         this.cd.markForCheck();
-    //     });
-    // }
+    public test = (x) => {
+        console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold', x);
+    }
 }
