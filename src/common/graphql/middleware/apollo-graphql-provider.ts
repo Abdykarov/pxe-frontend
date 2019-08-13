@@ -106,19 +106,6 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     });
 
     const link = from([error, auth, http]);
-    // const client = new ApolloClient({
-    //     cache,
-    //     resolvers,
-    //     link,
-    //     connectToDevTools: !environment.production,
-    // });
-    //
-    // client.onResetStore( () => {
-    //     cache.writeData({
-    //         data: defaults,
-    //     });
-    // });
-
     const client = {
         cache,
         resolvers,
@@ -127,24 +114,6 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     };
 
     return client;
-
-    // const createApolloClient = () =>
-    //     new ApolloClient({
-    //         cache,
-    //         resolvers,
-    //         link: ApolloLink.from([error, auth, http]),
-    //         connectToDevTools: !environment.production,
-    //     });
-    //
-    // const apolloClient = createApolloClient();
-    //
-    // apolloClient.onResetStore(() => {
-    //     cache.writeData({
-    //         data: defaults,
-    //     });
-    // });
-    //
-    // return apolloClient;
 };
 
 export const ApolloGraphQLProvider = {
