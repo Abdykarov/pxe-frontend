@@ -26,7 +26,6 @@ import { navigationMenuUserActions } from './services/navigation.config';
 import { NavigationService } from './services/navigation.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
-import { logger } from 'codelyzer/util/logger';
 
 @Component({
     templateUrl: './secured-layout.component.html',
@@ -82,9 +81,5 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent {
                 this.isMenuOpen = false;
                 this.cd.markForCheck();
             });
-    }
-
-    public test = (x) => {
-        console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold', x);
     }
 }
