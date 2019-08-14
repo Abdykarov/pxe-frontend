@@ -56,6 +56,7 @@ export class UserChangePasswordComponent extends AbstractComponent {
                 (loginResponse: ILoginResponse) => {
                     this.authService.manageLoginResponse(loginResponse);
                     this.formSent = true;
+                    this.formLoading = false;
                     this.cd.markForCheck();
                 },
                 error => {

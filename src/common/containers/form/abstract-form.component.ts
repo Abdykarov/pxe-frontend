@@ -118,7 +118,6 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         this.form.get(fieldName).disable(opts);
     }
 
-
     public resetFieldValue = (field, clearError = true) => {
         this.form.get(field).patchValue(null);
         this.resetFieldError(field, clearError);
