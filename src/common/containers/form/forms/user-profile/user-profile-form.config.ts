@@ -19,7 +19,7 @@ export const userProfileFormFields: IForm = {
             [
                 Validators.required,
                 Validators.maxLength(CONSTS.MAX_LENGTH_NAME),
-                Validators.pattern(new RegExp(/^[\p{L}']+([ ][\p{L}']+)*$/, 'u')),
+                CustomValidators.firstName,
             ],
         ],
         lastName: [
@@ -27,7 +27,7 @@ export const userProfileFormFields: IForm = {
             [
                 Validators.required,
                 Validators.maxLength(CONSTS.MAX_LENGTH_NAME),
-                Validators.pattern(new RegExp(/^[\p{L}'-]*[\p{L}]$/, 'u')),
+                CustomValidators.lastName,
             ],
         ],
         phone: [
@@ -54,12 +54,12 @@ export const userProfileFormFields: IForm = {
         firstName: {
             required: errorFieldMessages.fullName.requiredPersonFirstName,
             maxlengthRequiredLengthActualLength: errorFieldMessages.fullName.maxlengthFirstName,
-            pattern: errorFieldMessages.fullName.patternFirstName,
+            firstName: errorFieldMessages.fullName.patternFirstName,
         },
         lastName: {
             required: errorFieldMessages.fullName.requiredPersonLastName,
             maxlengthRequiredLengthActualLength: errorFieldMessages.fullName.maxlengthLastName,
-            pattern: errorFieldMessages.fullName.patternLastName,
+            lastName: errorFieldMessages.fullName.patternLastName,
         },
         phone: {
             required: errorFieldMessages.phone.requiredMobile,

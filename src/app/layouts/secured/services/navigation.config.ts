@@ -42,7 +42,7 @@ export const navigationMenuUserActions: INavigationMenu = [
         'class': 'navigation-main__item--second',
         'label': 'Změna hesla',
         'icon': 'lock-close',
-        'url': `/${ROUTES.ROUTER_USER_CHANGE_PASSWORD}`,
+        'url': ROUTES.ROUTER_USER_CHANGE_PASSWORD,
         __typename: 'change-password',
 
     },
@@ -50,7 +50,7 @@ export const navigationMenuUserActions: INavigationMenu = [
         'class': 'navigation-main__item--second link--logout',
         'label': 'Odhlášení',
         'icon': 'power',
-        'url' : `/${CONSTS.PATHS.LOGOUT}`,
+        'url' : CONSTS.PATHS.LOGOUT,
         __typename: 'logout',
     },
 ];
