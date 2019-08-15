@@ -7,7 +7,6 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
-
 .menu-toggle {
 	display: block;
 	width: $menu-width;
@@ -17,6 +16,11 @@
 	margin-right: -$menu-toggle-line-center;
 	cursor: pointer;
 	overflow: hidden;
+
+	// Media queries
+	@include media-breakpoint-up(md) {
+		margin-top: ( $menu-height - $logo-height-tablet );
+	}
 
 	&__holder {
 		display: block;
@@ -52,12 +56,12 @@
 	}
 
 	&--open {
-		height: $logo-height-mobile;
-		margin-top: 0;
+		height: $menu-toggle-line-width-rotate;
+		margin-top: -( $logo-height-mobile - $menu-toggle-line-width-rotate );
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			height: $logo-height-tablet;
+			margin-top: -( $logo-height-tablet - $menu-toggle-line-width-rotate );
 		}
 
 		.menu-toggle__line {
