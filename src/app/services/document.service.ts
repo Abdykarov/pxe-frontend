@@ -47,13 +47,20 @@ export class DocumentService {
         );
     }
 
-    public documentOpen = (data: IResponseDataDocument) => {
+    public documentOpen = (data: IResponseDataDocument, windowReference: Window = null): boolean => {
         if (isPlatformBrowser(this.platformId)) {
             if (window.navigator && window.navigator.msSaveOrOpenBlob) {
                 window.navigator.msSaveOrOpenBlob(data.file, data.filename);
+                return true;
             } else {
                 const fileURL = URL.createObjectURL(data.file);
-                window.open(fileURL);
+                if (windowReference) {
+                    windowReference.location.assign(fileURL);
+                    return false;
+                } else {
+                    window.open(fileURL);
+                    return true;
+                }
             }
         }
     }
