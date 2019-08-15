@@ -47,10 +47,14 @@ export class DocumentService {
         );
     }
 
-    public documentOpen = (data: IResponseDataDocument) => {
+    public documentOpen = (data: IResponseDataDocument, windowReference: Window = null) => {
         if (isPlatformBrowser(this.platformId)) {
             const fileURL = URL.createObjectURL(data.file);
-            window.open(fileURL);
+            if (windowReference) {
+                windowReference.location.assign(fileURL);
+            } else {
+                window.open(fileURL);
+            }
         }
     }
 
