@@ -2,7 +2,7 @@
     class="menu-toggle"
     [class.menu-toggle--none]="disableAction"
     [class.menu-toggle--open]="isMenuOpen">
-    <span
+    <div
         class="menu-toggle__holder"
         (click)="toggleMenu.emit(!isMenuOpen)">
         <span class="menu-toggle__line"></span>
@@ -10,5 +10,5 @@
         <span class="menu-toggle__line"></span>
         <span class="menu-toggle__line"></span>
         <span class="menu-toggle__label">Menu</span>
-    </span>
+</div>
 </a>
