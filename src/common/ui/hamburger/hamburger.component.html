@@ -1,9 +1,9 @@
 <a 
     class="menu-toggle"
-    [class.menu-toggle--none]="disableAction"
     [class.menu-toggle--open]="isMenuOpen">
     <div
         class="menu-toggle__holder"
+        [class.menu-toggle--none]="disableAction"
         (click)="toggleMenu.emit(!isMenuOpen)">
         <span class="menu-toggle__line"></span>
         <span class="menu-toggle__line"></span>
