@@ -214,7 +214,10 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
                     this.documentLoading = false;
-                    this.documentService.documentOpen(responseDataDocument, windowReference);
+                    const canBeClosed = this.documentService.documentOpen(responseDataDocument, windowReference);
+                    if (windowReference && canBeClosed) {
+                        windowReference.close();
+                    }
                     this.cd.markForCheck();
                 },
                 (error) => {
