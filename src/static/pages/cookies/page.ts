@@ -12,7 +12,7 @@ export class CookiesPageComponent {
     constructor() {
         this.breadcrumbItemsSimple = [
             {
-                label: 'Homepage',
+                label: 'Domů',
                 url: '/full/landing-page',
             },
             {

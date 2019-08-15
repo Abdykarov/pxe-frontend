@@ -32,6 +32,13 @@
                         class="public-menu-holder"
                         *ngIf="settings.isPublic && !settings.isStatic">
                         <lnd-button
+                            *ngIf="!settings.isLandingPage"
+                            label="Domů"
+                            customClass="mr-4"
+                            type="link-text"
+                            (click)="homeRedirect.emit()">
+                        </lnd-button>
+                        <lnd-button
                             *ngIf="settings.isLandingPage"
                             label="Změna dodavatele"
                             customClass="mr-4"
@@ -57,17 +64,9 @@
                             (click)="signUpAction.emit()">
                         </lnd-button>
                     </div>
-                    <div *ngIf="!settings.isPublic || settings.isStatic"
-                         class="menu-holder">
-                        <pxe-hamburger
-                            [isMenuOpen]="isMenuOpen"
-                            [disableAction]="isMenuOpen"
-                            (toggleMenu)="toggleMenu.emit($event)"
-                        ></pxe-hamburger>
-                    </div>
                     <div *ngIf="settings.isPublic"
                          class="menu-holder">
-                        <ng-template #dropdown3 let-toggle="toggle" let-isOpen="isOpen">
+                        <ng-template #publicMenuHamburgerTemplate let-toggle="toggle" let-isOpen="isOpen">
                             <pxe-hamburger
                                 [isMenuOpen]="isOpen"
                                 (toggleMenu)="toggle()"
@@ -75,9 +74,14 @@
                         </ng-template>
                         <lnd-dropdown
                             #publicMenu
-                            [actionTemplate]="dropdown3"
+                            [actionTemplate]="publicMenuHamburgerTemplate"
                             (toggleOverlayerAction)="toggleMenu.emit($event)"
                             menuDirection="right">
+                            <a class="dropdown-item dropdown-item--without-icon"
+                               *ngIf="!settings.isLandingPage"
+                               (click)="homeRedirect.emit()">
+                                Domů
+                            </a>
                             <a class="dropdown-item dropdown-item--without-icon"
                                *ngIf="settings.isLandingPage"
                                (click)="supplierChangeAction.emit()">
@@ -98,9 +102,17 @@
                             </a>
                         </lnd-dropdown>
                     </div>
+                    <div *ngIf="!settings.isPublic"
+                         class="menu-holder">
+                        <pxe-hamburger
+                                [isMenuOpen]="isMenuOpen"
+                                [disableAction]="isMenuOpen"
+                                (toggleMenu)="toggleMenu.emit($event)"
+                        ></pxe-hamburger>
+                    </div>
                     <div
                         class="user-holder"
-                        *ngIf="!settings.isPublic">
+                        *ngIf="!settings.isPublic && !settings.isStatic">
                         <span class="icon icon--favourite-stroke text-color--secondary"></span>
                         <lnd-dropdown
                             #userProfile
