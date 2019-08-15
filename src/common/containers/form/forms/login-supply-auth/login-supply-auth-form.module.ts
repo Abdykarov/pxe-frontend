@@ -5,7 +5,6 @@ import {
 } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
-import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { LoginSupplyAuthFormComponent } from './login-supply-auth-form.component';
@@ -15,7 +14,6 @@ import { LoginSupplyAuthFormComponent } from './login-supply-auth-form.component
         LoginSupplyAuthFormComponent,
     ],
     imports: [
-        AlertModule,
         ButtonModule,
         CommonModule,
         FormModule,

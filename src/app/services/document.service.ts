@@ -47,13 +47,20 @@ export class DocumentService {
         );
     }
 
-    public documentOpen = (data: IResponseDataDocument, windowReference: Window = null) => {
+    public documentOpen = (data: IResponseDataDocument, windowReference: Window = null): boolean => {
         if (isPlatformBrowser(this.platformId)) {
-            const fileURL = URL.createObjectURL(data.file);
-            if (windowReference) {
-                windowReference.location.assign(fileURL);
+            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                window.navigator.msSaveOrOpenBlob(data.file, data.filename);
+                return true;
             } else {
-                window.open(fileURL);
+                const fileURL = URL.createObjectURL(data.file);
+                if (windowReference) {
+                    windowReference.location.assign(fileURL);
+                    return false;
+                } else {
+                    window.open(fileURL);
+                    return true;
+                }
             }
         }
     }

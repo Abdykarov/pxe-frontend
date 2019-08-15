@@ -160,6 +160,8 @@ $list-bullet-size:                 3px;
 $lists-margin-bottom:              $spacer;
 $list-decimal-padding-left:        ( $spacer * 2.25 );
 
+$checklist-lp-before-size:         50px;
+
 $border-radius:                    5px;
 $box-shadow:                       0 2px 5px 0 rgba($body-color, .16);
 
@@ -175,8 +177,10 @@ $link-hover-decoration:            underline;
 $icon-path:                        '../fonts/icons';
 $icon-size:                        1.25rem;
 $icon-size-small:                  .625rem;
+$icon-size-large:                  1.875rem;
 $icon-size-px:                     20px;
 $icon-size-small-px:               10px;
+$icon-size-large-px:               30px;
 
 
 $images-path:                      '../../../assets/images/';

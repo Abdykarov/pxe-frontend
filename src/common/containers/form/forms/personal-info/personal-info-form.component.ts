@@ -42,6 +42,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     public formValues: IPersonalData = null;
 
     public maxDate: Date = moment().add(-CONSTS.ADULTHOOD_AGE, 'years').toDate();
+    public minDate: Date = new Date(CONSTS.MIN_BIRTH_DATE);
     public depositPaymentTypeId = depositPaymentType;
 
     constructor(
@@ -157,7 +158,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         if (this.form.valid) {
             const form: IPersonalDataInputForm = {
                 ...this.form.value,
-                phone: R.concat(this.form.value.phonePrefix, this.form.value.phone),
+                phone: R.concat(CONSTS.TELEPHONE_PREFIX_CZ, this.form.value.phone),
                 deposit: parseFloat(String(this.form.value.deposit).replace(',', '.')),
             };
             if (form.birthDate) {

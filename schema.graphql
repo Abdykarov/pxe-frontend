@@ -83,6 +83,7 @@ type Mutation {
     updatePowerOffer(offer: OfferInput!, offerId: ID!, powerAttributes: OfferInputPowerAttributes!): Int
     updatePowerSupplyPoint(powerAttributes: SupplyPointInputPowerAttributes!, supplyPoint: SupplyPointInput!, supplyPointId: ID!): Int
     updatePowerSupplyPointWithContract(attributes: SupplyPointUpdatePowerAttributes, supplyPointId: ID!, supplyPointUpdate: SupplyPointUpdate): Int
+    updateUserProfile(userDetail: UserDetailInput!): Boolean
 }
 
 type Offer {
@@ -135,6 +136,7 @@ type PersonalData {
 
 "The Root Query for the application"
 type Query {
+    computeAndGetSupplyPointStatistics: SupplyPointStatistic
     findAllSuppliers(commodityType: CommodityType): [Supplier]!
     findCodelistsByTypes(locale: String, types: [String]!): [CodelistMap]!
     findSupplierDocumentsByComodity(commodityType: CommodityType, supplierId: Int): [SupplierSampleDocument]!
@@ -219,6 +221,24 @@ type SupplyPointOffer {
     supplier: Supplier
     validFrom: Date!
     validTo: Date!
+}
+
+type SupplyPointStatistic {
+    gasAnnualConsumptionSum: Float!
+    gasCount: Int!
+    notConcludedCount: Int!
+    notConcludedItems: [SupplyPointStatisticView!]
+    powerAnnualConsumptionSum: Float!
+    powerCount: Int!
+    showDeliveryCount: Int!
+    showDeliveryItems: [SupplyPointStatisticView!]
+}
+
+type SupplyPointStatisticView {
+    commodityType: CommodityType!
+    id: Int!
+    name: String!
+    progressStatus: ProgressStatus!
 }
 
 type VariableSymbol {
@@ -366,6 +386,14 @@ input SupplyPointUpdateGasAttributes {
 input SupplyPointUpdatePowerAttributes {
     annualConsumptionNT: Float
     annualConsumptionVT: Float!
+}
+
+input UserDetailInput {
+    email: String
+    firstName: String!
+    lastName: String!
+    phoneNumber: String!
+    userName: String!
 }
 
 

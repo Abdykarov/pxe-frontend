@@ -53,6 +53,7 @@ export const errorFieldMessages =  {
     birthDate: {
         required: 'Vyplňte datum narození.',
         bsDateMaxDate: 'Nesmíte být mladší 18 let.',
+        bsDateMinDate: 'Rok narození musí být minimálně 1900.',
     },
     circuitBreakerId: {
         required: 'Vyberte ze seznamu, jakou máte velikost jističe.',
@@ -112,7 +113,13 @@ export const errorFieldMessages =  {
     },
     fullName: {
         requiredPerson: 'Vyplňte své jméno a příjmení.',
+        requiredPersonFirstName: 'Vyplňte své jméno.',
+        requiredPersonLastName: 'Vyplňte své příjmení.',
         requiredCompany: 'Vyplňte název společnosti.',
+        maxlengthFirstName: 'Maximální délka pro jméno je 50 znaků.',
+        maxlengthLastName: 'Maximální délka pro příjmení je 50 znaků.',
+        patternFirstName: 'Jméno může obsahovat pouze písmena a mezery.',
+        patternLastName: 'Příjmení může obsahovat pouze písmena a pomlčku.',
     },
     ico: {
         required: 'Vyplňte své IČO.',
@@ -173,6 +180,7 @@ export const errorFieldMessages =  {
     },
     password: {
         required: 'Vyplňte heslo.',
+        currentRequired: 'Vyplňte heslo.',
         pattern: '	Vaše heslo musí mít minimálně 8 písmen, musí obsahovat malá a velká ' +
             'písmena, aspoň jednu číslici a aspoň jeden speciální znak jako &_*+/#\ apod.',
         fieldsMustMatch: 'Musíte vyplnit stejná hesla.',

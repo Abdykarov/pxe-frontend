@@ -28,13 +28,13 @@ import {
     IUserLogin,
     LANDING_PAGE,
     PASSWORD_DESTINATION,
-} from 'src/common/graphql/models/password';
+} from 'src/common/graphql/models/user.model';
 import {
     parseGraphQLErrors,
     parseRestAPIErrors,
 } from 'src/common/utils/';
-import { PasswordService } from 'src/common/graphql/services/password.service';
 import { ROUTES } from 'src/app/app.constants';
+import { UserService } from 'src/common/graphql/services/user.service';
 
 @Component({
     templateUrl: './login.component.html',
@@ -54,8 +54,8 @@ export class LoginComponent extends AbstractComponent {
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
-        private passwordService: PasswordService,
         private router: Router,
+        private userService: UserService,
     ) {
         super();
     }
@@ -63,7 +63,7 @@ export class LoginComponent extends AbstractComponent {
     public submitChangePassword = (changePassword: IChangePassword) => {
         this.formLoading = true;
 
-        this.passwordService.changePassword(this.password, changePassword.password)
+        this.userService.changePassword(this.password, changePassword.password)
             .pipe(
                 takeUntil(this.destroy$),
                 map(({data}) => data.changePassword),
@@ -89,7 +89,7 @@ export class LoginComponent extends AbstractComponent {
 
     public resetPassword = (email: string) => {
         this.formLoading = true;
-        this.passwordService.resetPassword(email)
+        this.userService.resetPassword(email)
             .pipe(
                 takeUntil(this.destroy$),
                 map(({data}) => data.resetPassword),

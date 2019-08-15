@@ -36,6 +36,10 @@ import {
     contractSigningPageRoutes,
 } from 'src/static/pages/contract-signing/page.module';
 import {
+    DashboardPageModule,
+    dashboardPageRoutes,
+} from 'src/static/pages/dashboard/page.module';
+import {
     DropdownPageModule,
     dropdownPageRoutes,
 } from 'src/static/atoms/dropdown/page.module';
@@ -67,6 +71,10 @@ import {
     ModalsPageModule,
     modalsPageRoutes,
 } from 'src/static/organisms/modals/page.module';
+import {
+    NewsPageModule,
+    newsPageRoutes,
+} from 'src/static/organisms/news/page.module';
 import {
     NewSupplyPointPageModule,
     newSupplyPointPageRoutes,
@@ -139,6 +147,14 @@ import {
     TypographyPageModule,
     typographyPageRoutes,
 } from 'src/static/atoms/typography/page.module';
+import {
+    UserProfilePageModule,
+    userProfilePageRoutes,
+} from 'src/static/pages/user-profile/page.module';
+import {
+    UserProfileChangePasswordPageModule,
+    userProfileChangePasswordPageRoutes,
+} from 'src/static/pages/user-profile-change-password/page.module';
 
 const routes: Routes = [
     {
@@ -152,6 +168,7 @@ const routes: Routes = [
             ...buttonsPageRoutes,
             ...colorsPageRoutes,
             ...contractSigningPageRoutes,
+            ...dashboardPageRoutes,
             ...dropdownPageRoutes,
             ...formsPageRoutes,
             ...changePasswordBannerPageRoutes,
@@ -160,6 +177,7 @@ const routes: Routes = [
             ...infoBannerPageRoutes,
             ...listSupplyPointsPageRoutes,
             ...modalsPageRoutes,
+            ...newsPageRoutes,
             ...newSupplyPointPageRoutes,
             ...paymentVerificationPageRoutes,
             ...progressBarPageRoutes,
@@ -178,6 +196,8 @@ const routes: Routes = [
             ...tablesPageRoutes,
             ...tooltipPageRoutes,
             ...typographyPageRoutes,
+            ...userProfilePageRoutes,
+            ...userProfileChangePasswordPageRoutes,
             {
                 path: '**',
                 redirectTo: '',
@@ -195,6 +215,7 @@ const routes: Routes = [
         ButtonsPageModule,
         ColorsPageModule,
         ContractSigningPageModule,
+        DashboardPageModule,
         DropdownPageModule,
         FormsPageModule,
         ChangePasswordBannerPageModule,
@@ -203,6 +224,7 @@ const routes: Routes = [
         InfoBannerPageModule,
         ListSupplyPointsPageModule,
         ModalsPageModule,
+        NewsPageModule,
         NewSupplyPointPageModule,
         PaymentVerificationPageModule,
         ProgressBarPageModule,
@@ -222,6 +244,8 @@ const routes: Routes = [
         TablesPageModule,
         TooltipPageModule,
         TypographyPageModule,
+        UserProfilePageModule,
+        UserProfileChangePasswordPageModule,
     ],
     exports: [
         RouterModule,

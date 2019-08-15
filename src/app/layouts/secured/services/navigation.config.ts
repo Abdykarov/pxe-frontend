@@ -35,14 +35,14 @@ export const navigationMenuUserActions: INavigationMenu = [
         'class': 'navigation-main__item--second',
         'label': 'Profil uživatele',
         'icon': 'user',
-        'url': `/${CONSTS.PATHS.PROFILE}`,
+        'url': ROUTES.ROUTER_USER_PROFILE,
         __typename: 'profile',
     },
     {
         'class': 'navigation-main__item--second',
         'label': 'Změna hesla',
         'icon': 'lock-close',
-        'url': `/${CONSTS.PATHS.CHANGE_PASSWORD}`,
+        'url': ROUTES.ROUTER_USER_CHANGE_PASSWORD,
         __typename: 'change-password',
 
     },
