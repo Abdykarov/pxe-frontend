@@ -8,7 +8,6 @@ export interface ILoginRequest {
 export interface ILoginResponse {
     token: string;
     landingPage: LANDING_PAGE;
-    supplyPointId: string;
 }
 
 export interface ILoginResponseModificator {
@@ -39,7 +38,7 @@ export interface IJwtPayload {
     userStatus: UserStatus;
     phoneNumber?: string;
     firstContract: boolean;
-    firstContractId: number;
+    evaluatedSupplyPoint: number;
 }
 
 export enum IUserRoles {

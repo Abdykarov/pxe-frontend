@@ -234,8 +234,7 @@ export class LoginComponent extends AbstractComponent {
             };
         }
         if (loginResponse.landingPage === LANDING_PAGE.WAITING_FOR_PAYMENT) {
-            const supplyPointId = loginResponse.supplyPointId ||
-                (this.authService.currentUserValue.firstContract && this.authService.currentUserValue.firstContractId);
+            const supplyPointId = this.authService.currentUserValue.evaluatedSupplyPoint;
             if (supplyPointId) {
                 extras.queryParams = {
                     supplyPointId,

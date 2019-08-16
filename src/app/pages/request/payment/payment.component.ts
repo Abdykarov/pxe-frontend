@@ -110,7 +110,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                     const firstContract = this.authService.currentUserValue.firstContract;
                     this.paymentInfo = paymentInfo;
                     // TODO check
-                    if (firstContract || 1) {
+                    if (firstContract && 0) {
                         return this.contractService.confirmFirstContractView();
                     } else {
                         return of({
@@ -123,7 +123,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                 map(({data}) => data.confirmFirstContractView),
                 switchMap((changed: boolean) => {
                     console.log('%c ***** changed *****', 'background: #bada55; color: #000; font-weight: bold', changed);
-                    if (!R.isEmpty(this.paymentInfo) || changed) {
+                    if (!R.isEmpty(this.paymentInfo) || changed || 1) {
                         return this.authService.refreshToken( {
                             supplyPointId: this.supplyPoint.id,
                         });
