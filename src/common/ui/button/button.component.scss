@@ -140,7 +140,8 @@
 	}
 
 	&.btn-link,
-	&.btn-link-danger {
+	&.btn-link-danger,
+	&.btn-link-text {
 		min-width: auto;
 		padding-left: 0;
 		padding-right: 0;
@@ -173,6 +174,12 @@
 	&-link-danger {
 		.btn__text {
 			color: $danger;
+		}
+	}
+
+	&-link-text {
+		.btn__text {
+			color: $body-color;
 		}
 	}
 

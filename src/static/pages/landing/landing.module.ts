@@ -39,6 +39,7 @@ export const landingPageRoutes: Routes = [
         component: LandingComponent,
         data: {
             isPublic: true,
+            isLandingPage: true,
             isSimpleFooter: true,
             loginType: LoginType.NONE,
             signUpType: SignType.STATIC,

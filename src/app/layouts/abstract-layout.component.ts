@@ -3,6 +3,7 @@ import {
     NavigationEnd,
     Router,
 } from '@angular/router';
+import { OnInit } from '@angular/core';
 
 import { Apollo } from 'apollo-angular';
 import {
@@ -15,25 +16,28 @@ import {
 } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from 'src/app/services/auth.service';
+import {
+    CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
 import {
     ISettings,
     LoginType,
     SignType,
 } from './models/router-data.model';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
-import {
-    CONSTS,
-    ROUTES,
-} from '../app.constants';
-import { ScrollToService } from '../services/scroll-to.service';
-import { AuthService } from '../services/auth.service';
+import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
+import { ScrollToService } from 'src/app/services/scroll-to.service';
 
-export abstract class AbstractLayoutComponent extends AbstractComponent {
+export abstract class AbstractLayoutComponent extends AbstractComponent implements OnInit {
+    public isMenuOpen = false;
     public showOverlay = false;
     public toggleSubscription: Subscription;
 
     public settings: ISettings = {
         isPublic: false,
+        isLandingPage: false,
         isSimpleFooter: false,
         isStatic: false,
         loginType: LoginType.NONE,
@@ -68,9 +72,17 @@ export abstract class AbstractLayoutComponent extends AbstractComponent {
         });
     }
 
+    ngOnInit() {
+        this.resizeEvent$.subscribe(() => {
+            if (this.isMenuOpen) {
+                this.toggleMenuOpen(false);
+            }
+        });
+    }
+
     public signUp = () => {
         if (this.settings.signUpType === SignType.SCROLL) {
-            this.scrollToService.scrollToSubscription();
+            this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
         } else if (this.settings.signUpType === SignType.NAVIGATE) {
             this.router.navigate([CONSTS.PATHS.SIGN_UP]);
         }
@@ -90,5 +102,14 @@ export abstract class AbstractLayoutComponent extends AbstractComponent {
         } else {
             this.router.navigate([ROUTES.ROUTER_DASHBOARD]);
         }
+    }
+
+    public toggleMenuOpen = (open: boolean) => {
+        this.isMenuOpen = open;
+        this.overlayService.toggleOverlay(open)
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe();
     }
 }

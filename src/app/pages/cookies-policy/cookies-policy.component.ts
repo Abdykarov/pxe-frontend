@@ -13,7 +13,7 @@ export class CookiesPolicyComponent {
     constructor() {
         this.breadcrumbItemsSimple = [
             {
-                label: 'Homepage',
+                label: 'Domů',
                 url: '/',
             },
             {

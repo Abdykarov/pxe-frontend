@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { DropdownModule } from '../dropdown/dropdown.module';
+import { HamburgerModule } from 'src/common/ui/hamburger/hamburger.module';
 import { HeaderComponent } from './header.component';
 import { NavigationModule } from '../navigation/navigation.module';
 
@@ -18,6 +19,7 @@ import { NavigationModule } from '../navigation/navigation.module';
         ButtonModule,
         CommonModule,
         DropdownModule,
+        HamburgerModule,
         RouterModule,
         NavigationModule,
     ],

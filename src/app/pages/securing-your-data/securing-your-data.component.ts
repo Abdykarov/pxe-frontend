@@ -13,7 +13,7 @@ export class SecuringYourDataComponent {
     constructor() {
         this.breadcrumbItemsSimple = [
             {
-                label: 'Homepage',
+                label: 'Domů',
                 url: '/',
             },
             {

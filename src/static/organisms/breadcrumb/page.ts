@@ -23,14 +23,14 @@ export class BreadcrumbPageComponent {
 
         this.breadcrumbItemsMultiple0 = [
             {
-                label: 'Homepage',
+                label: 'Domů',
                 url: '',
             },
         ];
 
         this.breadcrumbItemsMultiple1 = [
             {
-                label: 'Homepage',
+                label: 'Domů',
                 url: '/',
             },
             {
@@ -41,7 +41,7 @@ export class BreadcrumbPageComponent {
 
         this.breadcrumbItemsMultiple2 = [
             {
-                label: 'Homepage',
+                label: 'Domů',
                 url: '/',
             },
             {

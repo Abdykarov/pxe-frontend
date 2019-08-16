@@ -5,7 +5,6 @@ import {
 import {
     ChangeDetectorRef,
     Component,
-    OnInit,
 } from '@angular/core';
 
 import * as R from 'ramda';
@@ -31,7 +30,7 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 @Component({
     templateUrl: './secured-layout.component.html',
 })
-export class SecuredLayoutComponent extends AbstractLayoutComponent implements OnInit {
+export class SecuredLayoutComponent extends AbstractLayoutComponent {
     public isMenuOpen = false;
     public itemOpened = null;
     public navConfig: INavigationConfig = [];
@@ -68,16 +67,9 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
                 if (current.securedLayout) {
                     this.navConfig = current.securedLayout.navigationConfig;
                     this.showOverlay = current.showOverlay;
+                    this.cd.markForCheck();
                 }
             });
-    }
-
-    ngOnInit() {
-        this.resizeEvent$.subscribe(() => {
-            if (this.isMenuOpen) {
-                this.toggleMenuOpen();
-            }
-        });
     }
 
     public toggleNavigationItem (navigationItem) {
@@ -87,14 +79,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
             )
             .subscribe( res => {
                 this.isMenuOpen = false;
+                this.cd.markForCheck();
             });
-    }
-
-    public toggleMenuOpen = () => {
-        this.isMenuOpen = !this.isMenuOpen;
-        this.overlayService.toggleOverlay( (res) => {
-            this.showOverlay = true;
-            this.cd.markForCheck();
-        });
     }
 }

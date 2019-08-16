@@ -4,6 +4,7 @@ export enum IButtonType {
     LIGHT = 'light',
     LINK = 'link',
     LINK_DANGER = 'link-danger',
+    LINK_TEXT = 'link-text',
     PRIMARY = 'primary',
     SECONDARY = 'secondary',
     SUCCESS = 'success',

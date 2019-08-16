@@ -1,5 +1,7 @@
 <ng-template #agreementTemplate>
-    Souhlasím se <a target="_blank" [href]="routes.ROUTER_SECURING_YOUR_DATA">zásadami bezpečnosti</a>
+    Souhlasím se <a target="_blank" [href]="routes.ROUTER_TERMS_OF_USE">Všeobecnými
+    obchodními podmínkami účasti na Trhu „PARC 4 U“</a> a beru na vědomí
+    <a target="_blank" [href]="routes.ROUTER_SECURING_YOUR_DATA">Informaci o zpracování osobních údajů</a>.
 </ng-template>
 
 <div class="landing-page">
@@ -45,7 +47,70 @@
                 alt="Plaťte za energie chytře díky burze">
         </div>
     </div>
-    <div class="section what-you-can-expect bg--white text-center">
+    <div class="section what-you-can-get bg--white">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="px-3 px-md-0">
+                        <h2 class="h2--public text-center mb-6 mb-lg-7">
+                            Co můžete získát
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-10 offset-md-1">
+                    <ul class="check-list check-list--lp-section">
+                        <li><span class="h3--public">Měníte dodavatele na jedno kliknutí</span></li>
+                        <li><span class="h3--public">Neřešíte papírování a chození na pobočky</span></li>
+                        <li><span class="h3--public">Jste chráněni před nekalostmi ve smlouvě</span></li>
+                        <li><span class="h3--public">Dostáváte férové ceny bez skrytých poplatků</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div #supplierChange
+         class="section shortcut bg--white section--picture-first">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-md-4 offset-md-7">
+                    <div class="px-3 px-md-0">
+                        <h3 class="h3--public">
+                            Cesta k&nbsp;nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC
+                        </h3>
+                        <ul class="check-list">
+                            <li>
+                                Nechte dodavatele ať&nbsp;se o&nbsp;vás poperou
+                            </li>
+                            <li>
+                                Přestaňte se bát skrytých poplatků a&nbsp;jiných kliček
+                            </li>
+                            <li>
+                                Neluštěte zbytečně z&nbsp;faktur nic, co jde zjistit i&nbsp;jinak
+                            </li>
+                            <li>
+                                Vydejte se snadnou a&nbsp;bezpečnou cestou přes&nbsp;PARC
+                            </li>
+                        </ul>
+                        <lnd-button
+                                label="Chci do PARCu"
+                                type="primary"
+                                (action)="scrollToNewSubscription()">
+                        </lnd-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-picture-holder">
+            <img
+                    class="section-picture"
+                    src="/assets/images/landing-page/picture-shortcut.jpg"
+                    title="Cesta k nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC"
+                    alt="Cesta k nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC">
+        </div>
+    </div>
+    <div class="section what-you-can-expect text-center">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -111,81 +176,29 @@
             </div>
         </div>
     </div>
-    <div class="section shortcut bg--white section--picture-first">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 col-md-4 offset-md-7">
-                    <div class="px-3 px-md-0">
-                        <h3 class="h3--public">
-                            Cesta k&nbsp;nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC
-                        </h3>
-                        <ul class="check-list">
-                            <li>
-                                Nechte dodavatele ať&nbsp;se o&nbsp;vás poperou
-                            </li>
-                            <li>
-                                Přestaňte se bát skrytých poplatků a&nbsp;jiných kliček
-                            </li>
-                            <li>
-                                Neluštěte zbytečně z&nbsp;faktur nic, co jde zjistit i&nbsp;jinak
-                            </li>
-                            <li>
-                                Vydejte se snadnou a&nbsp;bezpečnou cestou přes&nbsp;PARC
-                            </li>
-                        </ul>
-                        <lnd-button
-                            label="Chci do PARCu"
-                            type="primary"
-                            (action)="scrollToNewSubscription()">
-                        </lnd-button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="section-picture-holder">
-            <img
-                class="section-picture"
-                src="/assets/images/landing-page/picture-shortcut.jpg"
-                title="Cesta k nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC"
-                alt="Cesta k nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC">
-        </div>
+    <div #mapCoverage>
+        <pxe-map-coverage-container></pxe-map-coverage-container>
     </div>
-    <pxe-map-coverage-container></pxe-map-coverage-container>
     <div
-        #pxe_subscription
+        #subscription
         class="section stay-in-touch">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-3 col-lg-4 offset-lg-4">
                     <div class="px-3 px-md-0">
-                        <ng-container *ngIf="!formSent">
-                            <h3 class="h3--public">
-                                Chci mít také přístup k&nbsp;jiným cenám, možnost&nbsp;měnit dodavatele jen na&nbsp;jedno kliknutí a&nbsp;zbavit se starostí s&nbsp;převodem.
-                            </h3>
-                            <pxe-registration-form
-                                [agreementTemplate]="agreementTemplate"
-                                [formFields]="formFields"
-                                [formLoading]="formLoading"
-                                [formSent]="formSent"
-                                [globalError]="globalError"
-                                [fieldError]="fieldError"
-                                (submitAction)="submitForm($event)"
-                                [isSignUp]="false"
-                            ></pxe-registration-form>
-                        </ng-container>
-                        <ng-container *ngIf="!!formSent">
-                            <img
-                                class="mb-2"
-                                width="122"
-                                height="129"
-                                src="/assets/images/illustrations/mail-letter.svg"
-                                title="Děkujeme za váš zájem"
-                                alt="Děkujeme za váš zájem">
-                            <h3 class="h3--public mb-0">
-                                Děkujeme za váš zájem.<br>
-                                Hned jak službu spustíme, tak se vám ozveme.
-                            </h3>
-                        </ng-container>
+                        <h3 class="h3--public">
+                            Chci mít také přístup k&nbsp;jiným cenám, možnost&nbsp;měnit dodavatele jen na&nbsp;jedno kliknutí a&nbsp;zbavit se starostí s&nbsp;převodem.
+                        </h3>
+                        <pxe-registration-form
+                            [agreementTemplate]="agreementTemplate"
+                            [formFields]="formFields"
+                            [formLoading]="formLoading"
+                            [formSent]="formSent"
+                            [globalError]="globalError"
+                            [fieldError]="fieldError"
+                            (submitAction)="submitForm($event)"
+                            [lightTheme]="true"
+                        ></pxe-registration-form>
                     </div>
                 </div>
             </div>
