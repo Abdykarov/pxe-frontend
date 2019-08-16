@@ -18,6 +18,7 @@ import {
 export class FullLayoutComponent {
     public settings: ISettings = {
         isPublic: true,
+        isLandingPage: false,
         isSimpleFooter: true,
         isSupplier: false,
         isStatic: true,

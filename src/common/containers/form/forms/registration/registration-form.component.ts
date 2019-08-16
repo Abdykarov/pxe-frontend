@@ -17,6 +17,9 @@ export class RegistrationFormComponent extends AbstractFormComponent {
     public isSignUp = true;
 
     @Input()
+    public lightTheme = false;
+
+    @Input()
     public agreementTemplate: TemplateRef<any>;
 
     constructor(
