@@ -10,6 +10,8 @@ import {
     FormGroup,
 } from '@angular/forms';
 
+import * as R from 'ramda';
+
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 
 @Component({
@@ -39,13 +41,10 @@ export class ChangePasswordFormComponent extends AbstractFormComponent implement
 
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
-    }
-
-    public submitForm = () => {
-        this.resetCustomFieldError();
-        this.triggerValidation();
-        if (this.form.valid) {
-            this.submitAction.emit(this.form.value);
+        if (changes.formSent && changes.formSent.currentValue && this.form) {
+            const defaultValues = R.map(R.head, this.formFields.controls);
+            this.form.reset(defaultValues);
+            this.resetFormError();
         }
     }
 }

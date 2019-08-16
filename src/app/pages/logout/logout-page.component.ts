@@ -11,6 +11,7 @@ import { first } from 'rxjs/operators';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { CONSTS } from 'src/app/app.constants';
+import { defaults } from 'src/common/graphql/resolvers';
 
 @Component({
     templateUrl: './logout-page.component.html',
@@ -38,11 +39,17 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
         this.authService.logout()
             .pipe(first())
             .subscribe(
-                data => {
-                    this.apollo.getClient().resetStore();
-                    this.router.navigate([CONSTS.PATHS.EMPTY]);
+                () => {
+                    const apolloClient = this.apollo.getClient();
+                    apolloClient.resetStore()
+                        .then(() => {
+                            apolloClient.cache.writeData({
+                                data: defaults,
+                            });
+                            this.router.navigate([CONSTS.PATHS.EMPTY]);
+                        });
                 },
-                error => {
+                () => {
                     this.error = true;
                     this.cd.markForCheck();
                 });

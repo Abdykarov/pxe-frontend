@@ -19,7 +19,8 @@ const routes = [
                 data: {
                     isPublic: true,
                     isSimpleFooter: true,
-                    loginType: LoginType.NONE,
+                    isLandingPage: true,
+                    loginType: LoginType.NAVIGATE,
                     signUpType: SignType.SCROLL,
                 },
             },
@@ -29,7 +30,7 @@ const routes = [
                 data: {
                     isPublic: true,
                     isSimpleFooter: false,
-                    loginType: LoginType.NONE,
+                    loginType: LoginType.NAVIGATE,
                     signUpType: SignType.SCROLL,
                 },
             },
@@ -67,7 +68,7 @@ const routes = [
                 data: {
                     isPublic: true,
                     isSimpleFooter: false,
-                    loginType: LoginType.NONE,
+                    loginType: LoginType.NAVIGATE,
                     signUpType: SignType.SCROLL,
                 },
             },

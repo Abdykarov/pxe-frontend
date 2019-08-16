@@ -9,7 +9,7 @@
         [user]="currentUser"
         [settings]="settings"
         [isMenuOpen]="isMenuOpen"
-        (toggleMenu)="toggleMenuOpen()"
+        (toggleMenu)="toggleMenuOpen(!isMenuOpen)"
         (homeRedirect)="homeRedirect()"
     >
     </lnd-header>
@@ -20,7 +20,9 @@
                     [config]="navigationConfig"
                     [isMenuOpen]="isMenuOpen"
                     [itemOpened]="itemOpened"
-                    (openItem)="toggleOpenItem($event)">
+                    (openItem)="toggleOpenItem($event)"
+                    (lndOffClick)="toggleMenuOpen(!isMenuOpen)"
+                    [offClickEnabled]="isMenuOpen">
                 </lnd-navigation>
             </div>
             <div class="col-lg-8 container-content">

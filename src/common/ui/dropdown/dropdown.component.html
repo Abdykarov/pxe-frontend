@@ -9,7 +9,7 @@
     [offClickEnabled]="isOpen"
     >
     <div class="dropdown-toggle">
-        <ng-container *ngTemplateOutlet="actionTemplate; context: { toggle: this.toggle } "></ng-container>
+        <ng-container *ngTemplateOutlet="actionTemplate; context: { toggle: this.toggle, isOpen: this.isOpen } "></ng-container>
     </div>
     <div
         class="dropdown-menu"
@@ -19,6 +19,6 @@
             menuDirection ? 'dropdown-menu-' + menuDirection : ''
         ]">
         <ng-content></ng-content>
-        <ng-container *ngTemplateOutlet="contentTemplate; context: { toggle: this.toggle } "></ng-container>
+        <ng-container *ngTemplateOutlet="contentTemplate; context: { toggle: this.toggle, isOpen: this.isOpen } "></ng-container>
     </div>
 </div>

@@ -13,7 +13,7 @@ export class TermsOfUseComponent {
     constructor() {
         this.breadcrumbItemsSimple = [
             {
-                label: 'Homepage',
+                label: 'Domů',
                 url: '/',
             },
             {

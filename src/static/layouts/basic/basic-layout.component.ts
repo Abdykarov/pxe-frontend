@@ -36,7 +36,8 @@ export class BasicLayoutComponent extends AbstractComponent implements OnInit {
     public navigationConfig = [];
 
     public settings: ISettings = {
-        isPublic: true,
+        isPublic: false,
+        isLandingPage: false,
         isSimpleFooter: true,
         isStatic: true,
         loginType: LoginType.NONE,
@@ -66,13 +67,13 @@ export class BasicLayoutComponent extends AbstractComponent implements OnInit {
     ngOnInit() {
         this.resizeEvent$.subscribe(() => {
             if (this.isMenuOpen) {
-                this.toggleMenuOpen();
+                this.toggleMenuOpen(this.isMenuOpen);
             }
         });
     }
 
-    public toggleMenuOpen = () => {
-        this.isMenuOpen = !this.isMenuOpen;
+    public toggleMenuOpen = (open: boolean) => {
+        this.isMenuOpen = open;
         this.cd.markForCheck();
     }
 
