@@ -75,10 +75,4 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
             }
         }
     }
-
-    public toggleBenefits = (event) => {
-        event.preventDefault();
-        event.cancelBubble = true;
-        this.showBenefits = !this.showBenefits;
-    }
 }

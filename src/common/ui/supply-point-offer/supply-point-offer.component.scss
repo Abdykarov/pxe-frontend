@@ -175,37 +175,27 @@
 		flex-direction: column;
 		margin-bottom: $spacer;
 		margin-right: $spacer;
+
+		&--price {
+			margin-bottom: ( $spacer * 2 );
+			margin-right: ( $spacer * 2 );
+
+			.supply-point-offer__value {
+				font-size: 18px;
+			}
+		}
 	}
 
 	&__value-name {
 		margin-bottom: ( $spacer / 2 );
 	}
 
-	&__addon {
-		text-align: center;
-
-		// Media queries
-		@include media-breakpoint-up(md) {
-			text-align: right;
-		}
-		@include media-breakpoint-up(xl) {
-			display: none;
-		}
-
-		> :nth-child(n) {
-			margin: ( $spacer / 2 );
-			pointer-events: auto;
-		}
-	}
-
 	&__benefits-list {
-		display: none;
 		padding: ( $spacer * 1.25 ) $supply-point-offer-inner-padding $spacer;
 		margin-bottom: 0;
 
 		// Media queries
 		@include media-breakpoint-up(xl) {
-			display: block;
 			padding: $spacer ( $spacer * 3 ) ( $spacer * .75 );
 		}
 
