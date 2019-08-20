@@ -15,7 +15,8 @@
                             {{ error }}<br>
                         </ng-container>
                     </lnd-alert>
-                    <div class="row align-items-center mb-3">
+                    <div *ngIf="supplyPoint"
+                         class="row align-items-center mb-3">
                         <div class="col-12 mb-5 col-md-3 mb-md-0 text-center text-md-left">
                             <lnd-button
                                 label="Krok zpět"
@@ -29,12 +30,14 @@
                             </h2>
                         </div>
                     </div>
+                    <lnd-placeloader [loading]="!supplyPoint"></lnd-placeloader>
                 </div>
-                <div class="col-12 col-xl-10 offset-xl-1">
-                    <div *ngIf="supplyPoint"
-                         class="page-box">
+                <div *ngIf="supplyPoint"
+                     class="col-12 col-xl-10 offset-xl-1">
+                    <div class="page-box">
                         <pxe-personal-info-form
                             [supplyPoint]="supplyPoint"
+                            [codeLists]="codeLists"
                             [isIndividual]="isIndividual"
                             [fieldError]="fieldError"
                             [formFields]="formFields"
