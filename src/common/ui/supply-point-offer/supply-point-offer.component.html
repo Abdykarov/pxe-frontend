@@ -1,7 +1,6 @@
 <div class="supply-point-offer"
    [class.supply-point-offer--owner]="isOwner"
-   [class.supply-point-offer--not-interactive]="interactive"
-   (click)="action.emit(supplyPointOffer)">
+   [class.supply-point-offer--not-interactive]="interactive">
     <div class="row no-gutters">
         <div class="col-12 col-xl-7"
              [class.col-md-6]="isOwner">
@@ -33,30 +32,39 @@
         </div>
         <div class="col-12 col-xl-5"
              [class.col-md-6]="isOwner">
-            <div class="supply-point-offer__inner supply-point-offer__inner--price">
+            <div class="supply-point-offer__inner supply-point-offer__inner--price"
+                 [class.pb-0]="showPriceDecomposition">
                 <div class="row">
                     <div class="col-12">
                         <span class="supply-point-offer__title-label">Měsíční záloha</span>
-                        <span class="supply-point-offer__title">{{supplyPointOffer.permanentPaymentPrice || supplyPointOffer.mountlyPaymentPrice | number: '1.0-2'}} Kč</span>
                     </div>
-                </div>
-                <div class="row justify-content-between"
-                     *ngIf="!isOwner">
-                    <div class="col-12 col-md-auto supply-point-offer__addon">
+                    <div class="col-12 col-md-8 col-xl-12 supply-point-offer__addon">
+                        <span class="supply-point-offer__title"
+                              (click)="togglePriceDecomposition($event)">
+                            {{supplyPointOffer.permanentPaymentPrice || supplyPointOffer.mountlyPaymentPrice | number: '1.0-2'}} Kč
+                            <span class="icon icon--info supply-point-offer__info-icon"></span>
+                        </span>
+                    </div>
+                    <div class="col-12 col-md-4 col-xl-12"
+                         [class.d-none]="showPriceDecomposition"
+                         [class.d-xl-block]="showPriceDecomposition"
+                         *ngIf="!isOwner">
                         <lnd-button
                             label="Vybrat nabídku"
                             type="primary"
-                            (action)="$event.stopPropagation();action.emit(supplyPointOffer)">
+                            (click)="action.emit(supplyPointOffer)">
                         </lnd-button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12">
+        <div class="col-12"
+            [class.d-block]="showPriceDecomposition"
+            [class.d-none]="!showPriceDecomposition">
             <div class="supply-point-offer__inner supply-point-offer__inner--price">
-                <div class="row mb-4">
+                <div class="row no-gutters align-items-center">
                     <div class="col">
-                        <h3 class="mb-0">Rozklad ceny za distribuci</h3>
+                        <span class="supply-point-offer__decomposition-title">Rozklad ceny za distribuci</span>
                     </div>
                     <div class="col-auto">
                         <lnd-button
@@ -67,7 +75,7 @@
                         </lnd-button>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mb-3 mb-xl-0">
                     <div class="col-auto col-md-4"
                             *ngIf="supplyPointOffer.priceVT && supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
                         <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
@@ -123,6 +131,15 @@
                             <span class="supply-point-offer__value-name">Cena za kWh</span>
                             <span class="supply-point-offer__value">{{supplyPointOffer.priceGas | number: '1.0-2'}} Kč</span>
                         </div>
+                    </div>
+                </div>
+                <div class="row no-gutters pt-4 border-top d-xl-none">
+                    <div class="col-12">
+                        <lnd-button
+                            label="Vybrat"
+                            type="primary"
+                            (click)="action.emit(supplyPointOffer)">
+                        </lnd-button>
                     </div>
                 </div>
             </div>

@@ -23,7 +23,7 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     private static readonly MIN_HOURS_VALIDITY_OF_OFFER_DISPLAYED = 1;
     private static readonly ZERO_HOURS_VALIDITY_OF_OFFER = 0;
 
-    public showBenefits = false;
+    public showPriceDecomposition = false;
 
     public currentTime = new Date();
 
@@ -74,5 +74,11 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
                 this.supplyPointOffer.benefits = null;
             }
         }
+    }
+
+    public togglePriceDecomposition = (event) => {
+        event.preventDefault();
+        event.cancelBubble = true;
+        this.showPriceDecomposition = !this.showPriceDecomposition;
     }
 }
