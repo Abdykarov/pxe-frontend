@@ -10,10 +10,6 @@ export interface ILoginResponse {
     landingPage: LANDING_PAGE;
 }
 
-export interface ILoginResponseModificator {
-    supplyPointId?: string;
-}
-
 export interface IJwtPayload {
     data: any;
     exp: number;

@@ -68,14 +68,6 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
     ngOnInit () {
         super.ngOnInit();
         this.getSupplyPointWithPayment(this.supplyPointId);
-        // this.supplyService.findSupplyPoints()
-        //     .pipe(
-        //         map(({data}) => data.findSupplyPoints),
-        //         takeUntil(this.destroy$),
-        //     )
-        //     .subscribe((data) => {
-        //         console.log('%c ***** data *****', 'background: #bada55; color: #000; font-weight: bold', data);
-        //     });
     }
 
     public getSupplyPointWithPayment = (id) => {
@@ -109,8 +101,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                 switchMap((paymentInfo: IPayment) => {
                     const firstContract = this.authService.currentUserValue.firstContract;
                     this.paymentInfo = paymentInfo;
-                    // TODO check
-                    if (firstContract && 0) {
+                    if (firstContract) {
                         return this.contractService.confirmFirstContractView();
                     } else {
                         return of({
@@ -121,12 +112,9 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                     }
                 }),
                 map(({data}) => data.confirmFirstContractView),
-                switchMap((changed: boolean) => {
-                    console.log('%c ***** changed *****', 'background: #bada55; color: #000; font-weight: bold', changed);
-                    if (!R.isEmpty(this.paymentInfo) || changed || 1) {
-                        return this.authService.refreshToken( {
-                            supplyPointId: this.supplyPoint.id,
-                        });
+                switchMap((firstContractChanged: boolean) => {
+                    if (!R.isEmpty(this.paymentInfo) || firstContractChanged) {
+                        return this.authService.refreshToken();
                     }
                     return of({});
                 }),

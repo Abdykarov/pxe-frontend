@@ -21,7 +21,6 @@ import {
     IJwtPayload,
     ILoginRequest,
     ILoginResponse,
-    ILoginResponseModificator,
     IUserRoles,
 } from './model/auth.model';
 
@@ -34,7 +33,6 @@ export class AuthService {
     public currentUser$: Observable<IJwtPayload>;
     private expiresTime = new Date().getTime() + (CONSTS.DEFAULT_EXPIRATION * 1000);
     private token: string;
-    private supplyPointIdWaitingForPayment: string;
 
     constructor(
         private cookiesService: CookiesService,
@@ -52,10 +50,8 @@ export class AuthService {
     checkLogin = () => {
         if (this.cookiesService.has(this.cookieName)) {
             this.token = (<any>this.cookiesService.getObject(this.cookieName)).token;
-            this.supplyPointIdWaitingForPayment = (<any>this.cookiesService.getObject(this.cookieName)).supplyPointId;
         } else {
             this.token = null;
-            this.supplyPointIdWaitingForPayment = null;
         }
     }
 
@@ -106,7 +102,7 @@ export class AuthService {
         return this.http.post<any>(`${environment.url_api}/v1.0/sms/confirm`, {confirmationCode});
     }
 
-    public refreshToken = (responseModificators: ILoginResponseModificator = {}) => {
+    public refreshToken = () => {
         return this.http.post<any>(
             `${environment.url_api}/v1.0/users/refresh`,
             {
@@ -114,7 +110,7 @@ export class AuthService {
             })
             .pipe(
                 map((response: ILoginResponse) => {
-                    return this.manageLoginResponse(response, responseModificators);
+                    return this.manageLoginResponse(response);
                 }),
             );
     }
@@ -125,7 +121,7 @@ export class AuthService {
         this.currentUserSubject$.next(null);
     }
 
-    public manageLoginResponse = (response: ILoginResponse, responseModificators: ILoginResponseModificator = {}) => {
+    public manageLoginResponse = (response: ILoginResponse) => {
         if (response && response.token) {
             const jwtPayload = this.getJwtPayload(response.token);
             // if (jwtPayload.exp) {
@@ -133,7 +129,6 @@ export class AuthService {
             // }
             const user = {
                 token: response.token,
-                supplyPointId: response.supplyPointId || responseModificators.supplyPointId,
             };
             this.cookiesService.setObject(this.cookieName, user, this.expiresTime);
             this.checkLogin();
@@ -143,8 +138,6 @@ export class AuthService {
     }
 
     public getToken = (): string => this.token;
-
-    public getSupplyPointIdWaitingForPayment = (): string => this.supplyPointIdWaitingForPayment;
 
     private getJwtPayload = (token: string = null): IJwtPayload => {
         this.checkLogin();
