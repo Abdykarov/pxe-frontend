@@ -104,7 +104,8 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                     const { globalError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.cd.markForCheck();
-                });
+                },
+            );
     }
 
     public submitPersonalInfoForm = (personalInfoInput: IPersonalDataInput) => {
@@ -136,6 +137,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                     this.fieldError = fieldError;
                     this.globalError = globalError;
                     this.cd.markForCheck();
-                });
+                },
+            );
     }
 }

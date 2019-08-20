@@ -14,7 +14,10 @@ import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
-import { CODE_LIST, CONSTS } from 'src/app/app.constants';
+import {
+    CODE_LIST,
+    CONSTS,
+} from 'src/app/app.constants';
 import {
     convertDateToSendFormatFnc,
     CustomValidators,
