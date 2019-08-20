@@ -47,3 +47,9 @@ export const deleteSelectedOfferFromContractMutation = gql`
         deleteSelectedOfferFromContract(contractId: $contractId)
     }
 `;
+
+export const confirmFirstContractViewMutation = gql`
+    mutation confirmFirstContractView{
+        confirmFirstContractView
+    }
+`;

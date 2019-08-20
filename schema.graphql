@@ -60,6 +60,7 @@ type LoginResponse {
 type Mutation {
     changePassword(newPassword: String!, oldPassword: String!): LoginResponse
     concludeContract(contractId: ID!): Boolean
+    confirmFirstContractView: Boolean
     createGasSupplyPoint(gasAttributes: SupplyPointInputGasAttributes!, supplyPoint: SupplyPointInput!): Int
     createPowerSupplyPoint(powerAttributes: SupplyPointInputPowerAttributes!, supplyPoint: SupplyPointInput!): Int
     deleteContract(contractId: ID!): Boolean
@@ -261,6 +262,7 @@ enum ContractStatus {
     CANCELED
     CONCLUDED
     NOT_CONCLUDED
+    TO_BE_CANCELED
     WAITING_FOR_PAYMENT
 }
 
