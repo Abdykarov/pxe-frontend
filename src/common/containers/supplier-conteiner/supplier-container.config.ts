@@ -9,7 +9,7 @@ export const config: ISupplierLogo[] = [
         logoUrl: '/assets/images/suppliers/logo_alpiq.svg',
         logoUrlHover: '/assets/images/suppliers/logo_alpiq-hover.svg',
         supplierUrl: '',
-        title: 'Alpiq CZzzzzzz',
+        title: 'Alpiq CZ',
         width: '81',
         typeCommodity: TypeCommodity.POWER,
     },
