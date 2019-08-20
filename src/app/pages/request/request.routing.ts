@@ -8,6 +8,7 @@ import {
     CONSTS,
 } from 'src/app/app.constants';
 import { RequestComponent } from './request.component';
+import { SupplyPointDetailGuard } from 'src/app/guards/supply-point-detail.guard';
 
 const routes: Routes = [
     {
@@ -21,6 +22,9 @@ const routes: Routes = [
             },
             {
                 path: CONSTS.PATHS.CONTRACT,
+                canActivateChild: [
+                    SupplyPointDetailGuard,
+                ],
                 loadChildren: '../../pages/request/contract/contract.module#ContractModule',
             },
             {
@@ -29,14 +33,23 @@ const routes: Routes = [
             },
             {
                 path: CONSTS.PATHS.OFFER_SELECTION,
+                canActivateChild: [
+                    SupplyPointDetailGuard,
+                ],
                 loadChildren: '../../pages/request/offer-selection/offer-selection.module#OfferSelectionModule',
             },
             {
                 path: CONSTS.PATHS.RECAPITULATION,
+                canActivateChild: [
+                    SupplyPointDetailGuard,
+                ],
                 loadChildren: '../../pages/request/recapitulation/recapitulation.module#RecapitulationModule',
             },
             {
                 path: CONSTS.PATHS.PAYMENT,
+                canActivateChild: [
+                    SupplyPointDetailGuard,
+                ],
                 loadChildren: '../../pages/request/payment/payment.module#PaymentModule',
             },
         ],

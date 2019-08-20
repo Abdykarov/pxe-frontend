@@ -8,11 +8,6 @@ export interface ILoginRequest {
 export interface ILoginResponse {
     token: string;
     landingPage: LANDING_PAGE;
-    supplyPointId: string;
-}
-
-export interface ILoginResponseModificator {
-    supplyPointId?: string;
 }
 
 export interface IJwtPayload {
@@ -38,6 +33,8 @@ export interface IJwtPayload {
     passwordReset?: boolean;
     userStatus: UserStatus;
     phoneNumber?: string;
+    firstContract: boolean;
+    evaluatedSupplyPoint: number;
 }
 
 export enum IUserRoles {

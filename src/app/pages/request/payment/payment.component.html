@@ -131,7 +131,7 @@
                                 [showButton]="false"
                         ></lnd-info-banner>
                     </div>
-                    <div *ngIf="supplyPoint.contract?.contractStatus == contractStatus.CANCELED"
+                    <div *ngIf="supplyPoint.contract?.contractStatus == contractStatus.CANCELED || supplyPoint.contract?.contractStatus == contractStatus.TO_BE_CANCELED"
                          class="col-12 col-xl-10 offset-xl-1">
                         <lnd-info-banner
                                 [bannerTitle]="'Bohužel jsme neobdrželi vaši platbu. Smlouva byla stornována.'"

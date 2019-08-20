@@ -78,7 +78,11 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                     this.supplyPoint = supplyPoint;
                     this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.WAITING_FOR_PAYMENT);
                     const isContractFinalized = this.supplyPoint.contract &&
-                        R.indexOf(this.supplyPoint.contract.contractStatus, [ContractStatus.CONCLUDED, ContractStatus.CANCELED]) >= 0;
+                        R.indexOf(this.supplyPoint.contract.contractStatus, [
+                            ContractStatus.CONCLUDED,
+                            ContractStatus.CANCELED,
+                            ContractStatus.TO_BE_CANCELED,
+                        ]) >= 0;
                     if (isContractFinalized) {
                         this.finalizePaymentProgress();
                     }
@@ -95,11 +99,22 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                 }),
                 map(({data}) => data.getPaymentInfo),
                 switchMap((paymentInfo: IPayment) => {
-                    if (!R.isEmpty(paymentInfo)) {
-                        this.paymentInfo = paymentInfo;
-                        return this.authService.refreshToken( {
-                            supplyPointId: this.supplyPoint.id,
+                    const firstContract = this.authService.currentUserValue.firstContract;
+                    this.paymentInfo = paymentInfo;
+                    if (firstContract) {
+                        return this.contractService.confirmFirstContractView();
+                    } else {
+                        return of({
+                            data: {
+                                confirmFirstContractView: false,
+                            },
                         });
+                    }
+                }),
+                map(({data}) => data.confirmFirstContractView),
+                switchMap((firstContractChanged: boolean) => {
+                    if (!R.isEmpty(this.paymentInfo) || firstContractChanged) {
+                        return this.authService.refreshToken();
                     }
                     return of({});
                 }),
