@@ -180,27 +180,3 @@ export const formFields: IForm = {
         },
     },
 };
-
-export const depositPaymentType: IOption[] = [
-    {
-        key: 'Inkaso',
-        value: 'Inkaso',
-        label: 'Inkaso',
-    },
-    {
-        key: 'SIPO',
-        value: 'SIPO',
-        label: 'SIPO',
-    },
-    {
-        key: 'Prikaz',
-        value: 'Prikaz',
-        label: 'Příkaz k úhradě',
-    },
-    {
-        key: 'Slozenka',
-        value: 'Slozenka',
-        label: 'Složenkou',
-    },
-];
-

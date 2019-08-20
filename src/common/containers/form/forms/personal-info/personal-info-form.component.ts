@@ -1,4 +1,5 @@
 import {
+    ChangeDetectorRef,
     Component,
     Input,
     OnInit,
@@ -13,17 +14,23 @@ import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
-import { CONSTS } from 'src/app/app.constants';
+import {
+    CODE_LIST,
+    CONSTS,
+} from 'src/app/app.constants';
 import {
     convertDateToSendFormatFnc,
     CustomValidators,
 } from 'src/common/utils';
-import { depositPaymentType } from './personal-info-form.config';
+import {
+    ICodelistOption,
+    ICodelistOptions,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
 import {
     IPersonalData,
     IPersonalDataInputForm,
 } from 'src/common/graphql/models/personal-data.model';
-import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 
 @Component({
     selector: 'pxe-personal-info-form',
@@ -41,9 +48,12 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     @Input()
     public formValues: IPersonalData = null;
 
+    @Input()
+    public codeLists: ICodelistOptions;
+
+    public depositPaymentTypeId: ICodelistOption;
     public maxDate: Date = moment().add(-CONSTS.ADULTHOOD_AGE, 'years').toDate();
     public minDate: Date = new Date(CONSTS.MIN_BIRTH_DATE);
-    public depositPaymentTypeId = depositPaymentType;
 
     constructor(
         protected fb: FormBuilder,
@@ -54,6 +64,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     ngOnInit() {
         super.ngOnInit();
         this.setForm();
+        this.depositPaymentTypeId = this.codeLists[CODE_LIST.DEPOSIT_PAYMENT_TYPE];
 
         this.form.get('onlyAddress1')
             .valueChanges
