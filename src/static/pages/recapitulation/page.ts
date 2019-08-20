@@ -4,7 +4,7 @@ import {
     FormGroup,
 } from '@angular/forms';
 
-import { depositPaymentType } from 'src/common/containers/form/forms/personal-info/personal-info-form.config';
+import { depositPaymentType } from 'src/static/pages/recapitulation/config';
 import { getConfigStepper } from 'src/common/utils';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 

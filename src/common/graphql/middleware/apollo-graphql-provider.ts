@@ -21,7 +21,6 @@ import {
 } from '../resolvers/';
 import { environment } from 'src/environments/environment';
 import { scrollToElementFnc } from 'src/common/utils';
-import ApolloClient from 'apollo-client';
 
 const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
