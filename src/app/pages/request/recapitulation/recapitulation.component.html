@@ -30,7 +30,7 @@
                             </h2>
                         </div>
                     </div>
-                    <lnd-placeloader [loading]="!supplyPoint"></lnd-placeloader>
+                    <lnd-placeloader [loading]="!supplyPoint && !globalError.length"></lnd-placeloader>
                 </div>
                 <div *ngIf="supplyPoint"
                      class="col-12 col-xl-10 offset-xl-1">
