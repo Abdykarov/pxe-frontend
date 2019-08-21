@@ -1,8 +1,12 @@
+import {
+    ActivatedRouteSnapshot,
+    Resolve,
+    RouterStateSnapshot,
+} from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Resolve } from '@angular/router';
 
 import * as moment from 'moment';
-import { of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { AuthService } from 'src/app/services/auth.service';
 import { CONSTS } from 'src/app/app.constants';
@@ -14,13 +18,13 @@ export class RefreshTokenResolver implements Resolve<any> {
         private authService: AuthService,
     ) {}
 
-    resolve() {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | any {
         const currentUser = this.authService.currentUserValue;
         const expTime = new Date(currentUser.exp * 1000);
         const timeToTokenEnd = dateDiff(moment().toISOString(), expTime.toISOString(), 'ms');
-        if (timeToTokenEnd <= CONSTS.REFRESH_INTERVAL_TOKEN) {
+        if (timeToTokenEnd <= CONSTS.REFRESH_INTERVAL_TOKEN && timeToTokenEnd > 0) {
             return this.authService.refreshToken();
         }
-        return of({});
+        return null;
     }
 }
