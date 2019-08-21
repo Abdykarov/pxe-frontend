@@ -9,6 +9,7 @@ import {
 } from 'src/app/app.constants';
 import { RequestComponent } from './request.component';
 import { SupplyPointDetailGuard } from 'src/app/guards/supply-point-detail.guard';
+import { RefreshTokenResolver } from 'src/app/resolvers/refresh-token.resolver';
 
 const routes: Routes = [
     {
@@ -26,10 +27,16 @@ const routes: Routes = [
                     SupplyPointDetailGuard,
                 ],
                 loadChildren: '../../pages/request/contract/contract.module#ContractModule',
+                resolve: {
+                    refreshToken: RefreshTokenResolver,
+                },
             },
             {
                 path: CONSTS.PATHS.SUPPLY_POINT,
                 loadChildren: '../../pages/request/supply-point/supply-point.module#SupplyPointModule',
+                resolve: {
+                    refreshToken: RefreshTokenResolver,
+                },
             },
             {
                 path: CONSTS.PATHS.OFFER_SELECTION,
@@ -37,6 +44,9 @@ const routes: Routes = [
                     SupplyPointDetailGuard,
                 ],
                 loadChildren: '../../pages/request/offer-selection/offer-selection.module#OfferSelectionModule',
+                resolve: {
+                    refreshToken: RefreshTokenResolver,
+                },
             },
             {
                 path: CONSTS.PATHS.RECAPITULATION,
@@ -44,6 +54,9 @@ const routes: Routes = [
                     SupplyPointDetailGuard,
                 ],
                 loadChildren: '../../pages/request/recapitulation/recapitulation.module#RecapitulationModule',
+                resolve: {
+                    refreshToken: RefreshTokenResolver,
+                },
             },
             {
                 path: CONSTS.PATHS.PAYMENT,
@@ -51,6 +64,9 @@ const routes: Routes = [
                     SupplyPointDetailGuard,
                 ],
                 loadChildren: '../../pages/request/payment/payment.module#PaymentModule',
+                resolve: {
+                    refreshToken: RefreshTokenResolver,
+                },
             },
         ],
     },

@@ -9,6 +9,7 @@ import { NavigationService } from './services/navigation.service';
 import { ModalModule } from 'src/common/containers/modal/modal.module';
 import { SecuredLayoutComponent } from './secured-layout.component';
 import { SecuredLayoutRoutingModule } from './secured-layout.routing';
+import { RefreshTokenResolver } from 'src/app/resolvers/refresh-token.resolver';
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import { SecuredLayoutRoutingModule } from './secured-layout.routing';
     ],
     providers: [
         NavigationService,
+        RefreshTokenResolver,
     ],
 })
 export class SecuredLayoutModule { }
