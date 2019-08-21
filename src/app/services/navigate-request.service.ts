@@ -40,7 +40,16 @@ export class NavigateRequestService {
         indexOfSteps[supplyPoint.progressStatus] === indexOfSteps[allowedProgressStatus]
 
     public checkCorrectStep  = (supplyPoint: ISupplyPoint, allowedProgressStatus: ProgressStatus) => {
-        if (R.path(['contract', 'contractStatus'], supplyPoint) === ContractStatus.CONCLUDED) {
+        const currentStatus = R.path(['contract', 'contractStatus'], supplyPoint);
+        const isFinishedRequest = R.indexOf(
+            currentStatus,
+            [
+                ContractStatus.CONCLUDED,
+                ContractStatus.CANCELED,
+                ContractStatus.TO_BE_CANCELED,
+            ],
+        ) >= 0;
+        if (isFinishedRequest) {
             this.routerToRequestStep(supplyPoint, ProgressStatus.WAITING_FOR_PAYMENT);
             return;
         }

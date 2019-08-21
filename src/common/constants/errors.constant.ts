@@ -1,6 +1,6 @@
 import { CONSTS } from 'src/app/app.constants';
 
-export const defaultRestAPIErrorMessage = 'Došlo k chybě. Zkuste to později.';
+export const defaultErrorMessage = 'Došlo k chybě. Zkuste to později.';
 
 export const restAPIErrorCodes = {
     'CLI0001' : 'Špatné přihlašovací údaje.',

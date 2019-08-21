@@ -3,8 +3,11 @@ import * as R_ from 'ramda-extension';
 
 import { ErrorResponse } from 'apollo-link-error';
 
+import {
+    defaultErrorMessage,
+    graphQLMessages,
+} from 'src/common/constants/errors.constant';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import { graphQLMessages } from 'src/common/constants/errors.constant';
 
 const mapValidationFieldArrayToValidationObj = (array) => {
     const prepareKeys = (val) => R.pipe(
@@ -41,7 +44,7 @@ export const parseGraphQLErrors = (error: ErrorResponse):
             globalError.push(networkError.message);
         }
         if (!networkError && !graphQLErrors) {
-            globalError.push('Something went wrong!');
+            globalError.push(defaultErrorMessage);
         }
         return {
             fieldError,
