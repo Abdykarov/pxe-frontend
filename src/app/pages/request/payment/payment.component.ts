@@ -51,6 +51,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
     public paymentInfo: IPayment;
     public contractStatus = ContractStatus;
     public supplyPoint: ISupplyPoint;
+    public supplyPointNewVersion: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
     constructor(
@@ -118,10 +119,27 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                     }
                     return of({});
                 }),
+                switchMap(() => {
+                    if (this.supplyPoint.contract && this.supplyPoint.contract.contractStatus === ContractStatus.TO_BE_CANCELED) {
+                        return this.supplyService.findSupplyPointsByContractStatus(
+                            this.supplyPoint.ean,
+                            [
+                                ContractStatus.NOT_CONCLUDED,
+                            ],
+                        );
+                    }
+                    return of({
+                        data: {
+                            findSupplyPointsByContractStatus: [],
+                        },
+                    });
+                }),
+                map(({data}) => R.head(data.findSupplyPointsByContractStatus)),
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                () => {
+                (supplyPointNewVersion: ISupplyPoint) => {
+                    this.supplyPointNewVersion = supplyPointNewVersion
                     this.loading = false;
                     this.cd.markForCheck();
                 },
@@ -137,7 +155,11 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
         this.configStepper = getConfigStepper(ProgressStatus.COMPLETED);
     }
 
-    public createSupplyPoint = () => {
-        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
+    public navigateToRequest = (supplyPoint: ISupplyPoint) => {
+        if (supplyPoint) {
+            this.navigateRequestService.routerToRequestStep(supplyPoint);
+        } else {
+            this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
+        }
     }
 }
