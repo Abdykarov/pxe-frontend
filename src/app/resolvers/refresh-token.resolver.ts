@@ -18,7 +18,7 @@ export class RefreshTokenResolver implements Resolve<any> {
         const currentUser = this.authService.currentUserValue;
         const expTime = new Date(currentUser.exp * 1000);
         const timeToTokenEnd = dateDiff(moment().toISOString(), expTime.toISOString(), 'ms');
-        if (timeToTokenEnd <= CONSTS.REFRESH_INTERVAL_TOKEN) {
+        if (timeToTokenEnd <= CONSTS.REFRESH_INTERVAL_TOKEN && timeToTokenEnd > 0) {
             return this.authService.refreshToken();
         }
         return of({});
