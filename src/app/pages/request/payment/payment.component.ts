@@ -139,7 +139,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 (supplyPointNewVersion: ISupplyPoint) => {
-                    this.supplyPointNewVersion = supplyPointNewVersion
+                    this.supplyPointNewVersion = supplyPointNewVersion;
                     this.loading = false;
                     this.cd.markForCheck();
                 },
