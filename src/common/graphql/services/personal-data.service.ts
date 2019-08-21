@@ -52,7 +52,7 @@ export class PersonalDataService {
 
                 cache.writeQuery({
                     query: getSupplyPointQuery,
-                    data: { getSupplyPoint},
+                    data: { getSupplyPoint },
                     variables: {
                         supplyPointId: supplyPoint.id,
                     },
