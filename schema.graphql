@@ -60,6 +60,7 @@ type LoginResponse {
 type Mutation {
     changePassword(newPassword: String!, oldPassword: String!): LoginResponse
     concludeContract(contractId: ID!): Boolean
+    confirmFirstContractView: Boolean
     createGasSupplyPoint(gasAttributes: SupplyPointInputGasAttributes!, supplyPoint: SupplyPointInput!): Int
     createPowerSupplyPoint(powerAttributes: SupplyPointInputPowerAttributes!, supplyPoint: SupplyPointInput!): Int
     deleteContract(contractId: ID!): Boolean
@@ -153,18 +154,31 @@ type Query {
 }
 
 type SelectedOffer {
+    accountingRegulatedPrice: Float
     benefits: String
     commodityType: CommodityType!
+    consumptionPriceNT: Float
+    consumptionPriceVT: Float
     deliveryFrom: Date
     deliveryLength: Int!
     deliveryTo: Date
+    distributionPriceByCapacity: Float
+    distributionPriceByConsumptionNT: Float
+    distributionPriceByConsumptionVT: Float
+    energyTaxRegulatedPrice: Float
     id: ID!
+    marketOrganizerRegulatedPrice: Float
+    monthlyConsumptionFee: Float
     mountlyPaymentPrice: Float
     name: String!
     priceGas: Float
     priceNT: Float
     priceVT: Float
+    renewableEnergyRegulatedPrice: Float
     supplier: Supplier!
+    systemServicesRegulatedPrice: Float
+    totalPrice: Float
+    unit: String
     validFrom: Date!
     validTo: Date!
 }
@@ -208,17 +222,30 @@ type SupplyPoint {
 }
 
 type SupplyPointOffer {
+    accountingRegulatedPrice: Float
     benefits: String
     commodityType: CommodityType!
+    consumptionPriceNT: Float
+    consumptionPriceVT: Float
     deliveryFrom: Date
     deliveryLength: Int!
+    distributionPriceByCapacity: Float
+    distributionPriceByConsumptionNT: Float
+    distributionPriceByConsumptionVT: Float
+    energyTaxRegulatedPrice: Float
     id: ID!
+    marketOrganizerRegulatedPrice: Float
+    monthlyConsumptionFee: Float
     name: String!
     permanentPaymentPrice: Float!
     priceGas: Float
     priceNT: Float
     priceVT: Float
+    renewableEnergyRegulatedPrice: Float
     supplier: Supplier
+    systemServicesRegulatedPrice: Float
+    totalPrice: Float
+    unit: String
     validFrom: Date!
     validTo: Date!
 }
@@ -261,6 +288,7 @@ enum ContractStatus {
     CANCELED
     CONCLUDED
     NOT_CONCLUDED
+    TO_BE_CANCELED
     WAITING_FOR_PAYMENT
 }
 
@@ -389,7 +417,6 @@ input SupplyPointUpdatePowerAttributes {
 }
 
 input UserDetailInput {
-    email: String
     firstName: String!
     lastName: String!
     phoneNumber: String!
