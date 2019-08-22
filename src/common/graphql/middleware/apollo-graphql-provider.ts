@@ -42,7 +42,6 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
 
     const auth = new ApolloLink((operation: Operation, forward: NextLink) => {
         setTokenHeader(operation);
-        const supplyPointId = authService.getSupplyPointIdWaitingForPayment();
 
         return new Observable(observer => {
             let subscription, innerSubscription;
@@ -52,7 +51,7 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
                     complete: observer.complete.bind(observer),
                     error: networkError => {
                         if (networkError.status === 401 || networkError.statusCode === 401) {
-                            authService.refreshToken({supplyPointId})
+                            authService.refreshToken()
                                 .subscribe(
                                     () => {
                                         setTokenHeader(operation);
@@ -100,18 +99,19 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
         // response.errors = null;
     });
 
-    // TODO restLink, retryLink?
-
     cache.writeData({
         data: defaults,
     });
 
-    return {
+    const link = from([error, auth, http]);
+    const client = {
         cache,
         resolvers,
-        link: from([error, auth, http]),
+        link,
         connectToDevTools: !environment.production,
     };
+
+    return client;
 };
 
 export const ApolloGraphQLProvider = {

@@ -1,4 +1,5 @@
 import { IContract } from './contract';
+import { IOption } from 'src/common/ui/forms/models/option.model';
 
 export enum CommodityType {
     POWER = 'POWER',
@@ -50,6 +51,12 @@ export interface ICodelistItem {
     help: string;
     __typename?: string;
 }
+
+export interface ICodelistOptions {
+    [key: string]: ICodelistOption;
+}
+
+export interface ICodelistOption extends ICodelistItem, IOption {}
 
 export interface ISupplier {
     id: string;

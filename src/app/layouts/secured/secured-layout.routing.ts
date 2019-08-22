@@ -7,6 +7,7 @@ import {
     SignType,
 } from '../models/router-data.model';
 import { SecuredLayoutComponent } from './secured-layout.component';
+import { RefreshTokenResolver } from 'src/app/resolvers/refresh-token.resolver';
 
 const routes = [
     {
@@ -16,6 +17,9 @@ const routes = [
             {
                 path: CONSTS.PATHS.DASHBOARD,
                 loadChildren: '../../pages/dashboard/dashboard.module#DashboardModule',
+                resolve: {
+                    refreshToken: RefreshTokenResolver,
+                },
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
@@ -38,6 +42,9 @@ const routes = [
             {
                 path: CONSTS.PATHS.REQUESTS,
                 loadChildren: '../../pages/requests-overview/requests-overview.module#RequestsOverviewModule',
+                resolve: {
+                    refreshToken: RefreshTokenResolver,
+                },
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
@@ -49,6 +56,9 @@ const routes = [
             {
                 path: CONSTS.PATHS.SUPPLY_POINT_SELECTION,
                 loadChildren: '../../pages/supply-point-selection/supply-point-selection.module#SupplyPointSelectionModule',
+                resolve: {
+                    refreshToken: RefreshTokenResolver,
+                },
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
@@ -60,6 +70,9 @@ const routes = [
             {
                 path: CONSTS.PATHS.SUPPLY_POINTS,
                 loadChildren: '../../pages/supply-points/supply-points.module#SupplyPointsModule',
+                resolve: {
+                    refreshToken: RefreshTokenResolver,
+                },
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
@@ -71,6 +84,9 @@ const routes = [
             {
                 path: CONSTS.PATHS.USER_PROFILE,
                 loadChildren: '../../pages/user-profile/user-profile.module#UserProfileModule',
+                resolve: {
+                    refreshToken: RefreshTokenResolver,
+                },
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
@@ -82,6 +98,9 @@ const routes = [
             {
                 path: CONSTS.PATHS.CHANGE_PASSWORD,
                 loadChildren: '../../pages/user-change-password/user-change-password.module#UserChangePasswordModule',
+                resolve: {
+                    refreshToken: RefreshTokenResolver,
+                },
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
@@ -97,6 +116,9 @@ const routes = [
             {
                 path: CONSTS.PATHS.SUPPLY_OFFER + '/:commodityType',
                 loadChildren: '../../pages/supply-offer/supply-offer.module#SupplyOfferModule',
+                resolve: {
+                    refreshToken: RefreshTokenResolver,
+                },
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,

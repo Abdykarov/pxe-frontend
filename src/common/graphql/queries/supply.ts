@@ -65,6 +65,13 @@ export const findSupplyPointsQuery = gql`
                     url
                 }
             },
+            contract {
+                contractId,
+                contractStatus,
+                deliveryFrom,
+                deliveryTo,
+                offerValidity,
+            },
             ean,
             address{
                 street,

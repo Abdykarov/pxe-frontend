@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
 import {
     ActivatedRoute,
     Router,
 } from '@angular/router';
+import {
+    ChangeDetectorRef,
+    Component,
+} from '@angular/core';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
@@ -14,6 +17,7 @@ import {
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
@@ -24,6 +28,7 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
     constructor(
         protected apollo: Apollo,
         protected authService: AuthService,
+        private cd: ChangeDetectorRef,
         protected overlayService: OverlayService,
         protected route: ActivatedRoute,
         protected router: Router,
@@ -45,6 +50,11 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
             )
             .subscribe((current: boolean) => {
                 this.showOverlay = current;
+                this.cd.markForCheck();
             });
     }
+
+    public supplierChange = () => this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.SUPPLIER_CHANGE);
+
+    public coverageMap = () => this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.MAP_COVERAGE);
 }

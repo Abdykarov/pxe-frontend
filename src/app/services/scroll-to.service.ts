@@ -16,17 +16,17 @@ export class ScrollToService {
         private router: Router,
     ) {}
 
-    getScrollStream = () => this.scrollRegister.asObservable();
+    public getScrollStream = () => this.scrollRegister.asObservable();
 
-    activeScrollTo = (scrollTo: SCROLL_TO) => {
+    public activeScrollTo = (scrollTo: SCROLL_TO) => {
         this.scrollRegister.next(scrollTo);
     }
 
-    scrollToSubscription = () => {
+    public scrollToLandingPageFragment = (fragment: SCROLL_TO = SCROLL_TO.LANDING_SUBSCRIPTION) => {
         this.router.navigate([CONSTS.PATHS.EMPTY])
             .then(() => {
                 setTimeout(() => {
-                    this.activeScrollTo(SCROLL_TO.LANDING_SUBSCRIPTION);
+                    this.activeScrollTo(fragment);
                 });
             });
     }

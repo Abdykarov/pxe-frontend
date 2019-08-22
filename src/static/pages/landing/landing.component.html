@@ -3,9 +3,10 @@
 </ng-template>
 
 <ng-template #agreementTemplate>
-    Souhlasím se <a>zásadami bezpečnosti</a>
+    Souhlasím se <a target="_blank" [href]="">Všeobecnými
+    obchodními podmínkami účasti na Trhu „PARC 4 U“</a> a beru na vědomí
+    <a target="_blank" [href]="">Informaci o zpracování osobních údajů</a>.
 </ng-template>
-
 
 <div class="landing-page">
     <div class="section about-our-benefit section--picture-second">
@@ -116,7 +117,7 @@
                 <div class="col-12">
                     <div class="px-3 px-md-0">
                         <h2 class="h2--public mb-6 mb-lg-7">
-                            Jak se PARCu daří
+                            Co vás v&nbsp;PARCu čeká
                         </h2>
                     </div>
                 </div>
@@ -186,7 +187,7 @@
                             [globalError]="globalError"
                             [fieldError]="fieldError"
                             (submitAction)="submitForm($event)"
-                            [isSignUp]="false"
+                            [lightTheme]="true"
                         ></pxe-registration-form>
                     </div>
                 </div>
