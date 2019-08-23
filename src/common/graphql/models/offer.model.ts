@@ -9,7 +9,7 @@ export interface ISupplyPointOffer {
     validFrom: string;
     validTo: string;
     deliveryFrom: string;
-    deliveryTo: string;
+    deliveryTo?: string;
     deliveryLength: number;
     permanentPaymentPrice: number;
     mountlyPaymentPrice?: number;
@@ -17,6 +17,19 @@ export interface ISupplyPointOffer {
     priceVT: number;
     priceNT: number;
     priceGas: number;
+    accountingRegulatedPrice: number;
+    consumptionPriceNT: number;
+    consumptionPriceVT: number;
+    distributionPriceByCapacity: number;
+    distributionPriceByConsumptionNT: number;
+    distributionPriceByConsumptionVT: number;
+    energyTaxRegulatedPrice: number;
+    marketOrganizerRegulatedPrice: number;
+    monthlyConsumptionFee: number;
+    renewableEnergyRegulatedPrice: number;
+    systemServicesRegulatedPrice: number;
+    totalPrice: number;
+    unit: string;
 }
 
 export interface IOffer {

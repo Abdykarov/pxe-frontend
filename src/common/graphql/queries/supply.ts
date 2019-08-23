@@ -1,5 +1,166 @@
 import gql from 'graphql-tag';
 
+export const addressFragment = gql`
+    fragment addressFragment on Address {
+        street,
+        orientationNumber,
+        descriptiveNumber,
+        city,
+        postCode,
+        region,
+    }
+`;
+
+export const supplyPointFragment = gql`
+        fragment SupplyPointFragment on SupplyPoint {
+            id,
+            name,
+            commodityType,
+            supplier{
+                id,
+                name,
+                vatNumber,
+                logoPath,
+                sampleDocuments{
+                    type,
+                    url
+                }
+            },
+            ean,
+            address{
+                street,
+                orientationNumber,
+                descriptiveNumber,
+                city,
+                postCode,
+                region,
+            },
+            distributionRate{
+                type,
+                code,
+                description,
+                help
+            },
+            circuitBreaker{
+                type,
+                code,
+                description,
+                help
+            },
+            phases{
+                type,
+                code,
+                description,
+                help
+            },
+            annualConsumptionNT,
+            annualConsumptionVT,
+            expirationDate,
+            subject{
+                type,
+                code,
+                description,
+                help
+            },
+            lastAnnualConsumptionNT,
+            lastAnnualConsumptionVT,
+            lastVersionOfSupplyPoint,
+            timeToContractEnd,
+            timeToContractEndPeriod {
+                type,
+                code,
+                description,
+                help
+            },
+            contractEndType {
+                type,
+                code,
+                description,
+                help
+            }
+            contract {
+                contractId,
+                contractStatus,
+                deliveryFrom,
+                deliveryTo,
+                offerValidity,
+                offer{
+                    id,
+                    supplier{
+                        id,
+                        name,
+                        vatNumber,
+                        logoPath,
+                        sampleDocuments{
+                            type,
+                            url
+                        }
+                    },
+                    commodityType,
+                    name,
+                    validFrom,
+                    validTo,
+                    deliveryFrom,
+                    deliveryTo,
+                    deliveryLength,
+                    benefits,
+                    priceVT,
+                    priceNT,
+                    priceGas,
+                    mountlyPaymentPrice,
+                    accountingRegulatedPrice,
+                    consumptionPriceNT,
+                    consumptionPriceVT,
+                    distributionPriceByCapacity,
+                    distributionPriceByConsumptionNT,
+                    distributionPriceByConsumptionVT,
+                    energyTaxRegulatedPrice,
+                    marketOrganizerRegulatedPrice,
+                    monthlyConsumptionFee,
+                    renewableEnergyRegulatedPrice,
+                    systemServicesRegulatedPrice,
+                    totalPrice,
+                    unit,
+                },
+                personalData {
+                    name,
+                    birthDate,
+                    ico,
+                    dic,
+                    address1{
+                        street,
+                        orientationNumber,
+                        descriptiveNumber,
+                        city,
+                        postCode,
+                        region,
+                    },
+                    address2{
+                        street,
+                        orientationNumber,
+                        descriptiveNumber,
+                        city,
+                        postCode,
+                        region,
+                    },
+                    email,
+                    phone,
+                    bankAccountNumber,
+                    bankCode,
+                    depositPaymentType {
+                        type,
+                        code,
+                        description,
+                        help
+                    },
+                    deposit,
+                },
+            },
+            progressStatus,
+            allowedOperations,
+        }
+    `;
+
 export const findAllSuppliersQuery = gql`
     query findAllSuppliers($commodityType:CommodityType){
         findAllSuppliers(commodityType:$commodityType){
@@ -208,6 +369,19 @@ export const getSupplyPointQuery = gql`
                     priceNT,
                     priceGas,
                     mountlyPaymentPrice,
+                    accountingRegulatedPrice,
+                    consumptionPriceNT,
+                    consumptionPriceVT,
+                    distributionPriceByCapacity,
+                    distributionPriceByConsumptionNT,
+                    distributionPriceByConsumptionVT,
+                    energyTaxRegulatedPrice,
+                    marketOrganizerRegulatedPrice,
+                    monthlyConsumptionFee,
+                    renewableEnergyRegulatedPrice,
+                    systemServicesRegulatedPrice,
+                    totalPrice,
+                    unit,
                 },
                 personalData {
                     name,
@@ -249,6 +423,15 @@ export const getSupplyPointQuery = gql`
 `;
 
 export const findSupplyPointsByContractStatusQuery = gql`
+    query findSupplyPointsByContractStatus($ean: String, $contractStatus: [ContractStatus]!){
+        findSupplyPointsByContractStatus(ean: $ean, contractStatus: $contractStatus){
+            ...SupplyPointFragment
+        }
+    }
+    ${supplyPointFragment}
+`;
+
+export const _findSupplyPointsByContractStatusQuery = gql`
     query findSupplyPointsByContractStatus($ean: String, $contractStatus: [ContractStatus]!){
         findSupplyPointsByContractStatus(ean: $ean, contractStatus: $contractStatus){
             id,
@@ -346,6 +529,19 @@ export const findSupplyPointsByContractStatusQuery = gql`
                     priceNT,
                     priceGas,
                     mountlyPaymentPrice,
+                    accountingRegulatedPrice,
+                    consumptionPriceNT,
+                    consumptionPriceVT,
+                    distributionPriceByCapacity,
+                    distributionPriceByConsumptionNT,
+                    distributionPriceByConsumptionVT,
+                    energyTaxRegulatedPrice,
+                    marketOrganizerRegulatedPrice,
+                    monthlyConsumptionFee,
+                    renewableEnergyRegulatedPrice,
+                    systemServicesRegulatedPrice,
+                    totalPrice,
+                    unit,
                 },
                 personalData {
                     name,
