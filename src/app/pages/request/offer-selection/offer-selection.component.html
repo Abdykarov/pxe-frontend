@@ -51,14 +51,16 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-12 supply-points-offer">
-            <ng-container *ngIf="supplyPointOffers.length; else emptyOffers">
-                <pxe-supply-point-offer
-                    (action)="saveContract(supplyPointOffer)"
-                    *ngFor="let supplyPointOffer of supplyPointOffers"
-                    [supplyPointOffer]="supplyPointOffer">
-                </pxe-supply-point-offer>
-            </ng-container>
+        <div class="col-12 col-md-12">
+            <div class="supply-points-offer">
+                <ng-container *ngIf="supplyPointOffers.length; else emptyOffers">
+                    <pxe-supply-point-offer
+                        (action)="saveContract(supplyPointOffer)"
+                        *ngFor="let supplyPointOffer of supplyPointOffers"
+                        [supplyPointOffer]="supplyPointOffer">
+                    </pxe-supply-point-offer>
+                </ng-container>
+            </div>
         </div>
     </div>
 </pxe-layout-container>
