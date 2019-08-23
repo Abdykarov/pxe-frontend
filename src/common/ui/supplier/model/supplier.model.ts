@@ -8,7 +8,7 @@ export interface ISupplierLogo {
     alt: string;
     typeCommodity: TypeCommodity;
     name?: string;
-    width?: string;
+    width: string;
 }
 
 export enum TypeCommodity {
