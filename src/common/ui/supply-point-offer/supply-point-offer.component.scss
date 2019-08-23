@@ -49,7 +49,9 @@
 
 		// Media queries
 		@include media-breakpoint-up(xl) {
-			box-shadow: 0 10px 20px rgba($box-shadow-color, .2);
+			&:not(.supply-point-offer--not-interactive) {
+				box-shadow: 0 10px 20px rgba($box-shadow-color, .2);
+			}
 		}
 	}
 
@@ -92,9 +94,9 @@
 	}
 
 	&.supply-point-offer--not-interactive {
-		@include link-without-href-self {
-			pointer-events: none;
-		}
+		//@include link-without-href-self {
+		//	pointer-events: none;
+		//}
 
 		.supply-point-offer__addon {
 			// Media queries

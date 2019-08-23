@@ -40,7 +40,7 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     public isOwner = false;
 
     @Input()
-    public interactive = false;
+    public interactive = true;
 
     @Output()
     public action: EventEmitter<any> = new EventEmitter();
