@@ -1,50 +1,38 @@
+<ng-template #images let-data="data">
+    <img
+        class="suppliers-overview__picture"
+        [ngClass]="[
+            data.size ? 'suppliers-overview__picture--' + data.size : ''
+        ]"
+        [src]="data.logoUrl"
+        [title]="data.title"
+        [alt]="data.alt"
+        [width]="data.width">
+    <img
+        class="suppliers-overview__picture-hover"
+        [ngClass]="[
+            data.size ? 'suppliers-overview__picture-hover--' + data.size : ''
+        ]"
+        [src]="data.logoUrlHover"
+        [title]="data.title"
+        [alt]="data.alt">
+</ng-template>
+
 <div class="suppliers-holder">
     <ul class="suppliers-overview">
         <li class="suppliers-overview__item"
-            *ngFor="let supplier of configSupplier | filterCommodity: typeCommodity ">
+            *ngFor="let supplierLogoData of configSupplier | filterCommodity: typeCommodity ">
             <a
-                *ngIf="supplier.supplierUrl"
-                href="{{supplier.supplierUrl}}"
+                *ngIf="supplierLogoData.supplierUrl"
+                [href]="supplierLogoData.supplierUrl"
                 target="_blank"
                 class="suppliers-overview__content">
-                <img
-                    class="suppliers-overview__picture"
-                    [ngClass]="[
-                                supplier.size ? 'suppliers-overview__picture--' + supplier.size : ''
-                            ]"
-                    src="{{supplier.logoUrl}}"
-                    title="{{supplier.title}}"
-                    alt="{{supplier.alt}}"
-                    width="{{supplier.width}}">
-                <img
-                    class="suppliers-overview__picture-hover"
-                    [ngClass]="[
-                                supplier.size ? 'suppliers-overview__picture-hover--' + supplier.size : ''
-                            ]"
-                    src="{{supplier.logoUrlHover}}"
-                    title="{{supplier.title}}"
-                    alt="{{supplier.alt}}">
+                <ng-container *ngTemplateOutlet="images; context: { data: supplierLogoData }"></ng-container>
             </a>
             <span
-                *ngIf="!supplier.supplierUrl"
+                *ngIf="!supplierLogoData.supplierUrl"
                 class="suppliers-overview__content">
-                <img
-                    class="suppliers-overview__picture"
-                    [ngClass]="[
-                        supplier.size ? 'suppliers-overview__picture--' + supplier.size : ''
-                    ]"
-                    src="{{supplier.logoUrl}}"
-                    title="{{supplier.title}}"
-                    alt="{{supplier.alt}}"
-                    width="{{supplier.width}}">
-                <img
-                    class="suppliers-overview__picture-hover"
-                    [ngClass]="[
-                        supplier.size ? 'suppliers-overview__picture-hover--' + supplier.size : ''
-                    ]"
-                    src="{{supplier.logoUrlHover}}"
-                    title="{{supplier.title}}"
-                    alt="{{supplier.alt}}">
+                <ng-container *ngTemplateOutlet="images; context: { data: supplierLogoData }"></ng-container>
             </span>
         </li>
     </ul>
