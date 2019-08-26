@@ -157,7 +157,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="row no-gutters pt-4 border-top d-xl-none">
+                <div *ngIf="interactive"
+                     class="row no-gutters pt-4 border-top d-xl-none">
                     <div class="col-12">
                         <lnd-button
                             label="Vybrat"
