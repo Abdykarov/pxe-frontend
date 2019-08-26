@@ -107,6 +107,7 @@
             [formControl]="form.controls.eic"
             [id]="'eic'"
             label="EIC"
+            subtext="Unikátní identifikační číslo odběrného místa"
             [success]="form.controls.eic.valid && (form.controls.eic.touched || formError.eic)"
             [touched]="form.controls.eic.touched || formError.eic"
             [validationMessages]="formFields.validationMessages.eic"
