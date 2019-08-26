@@ -9,6 +9,8 @@
 	flex-wrap: wrap;
 
 	&__item {
+		// display: inline-flex;
+		// align-items: flex-end;
 		@include reset-list;
 		margin: 0 $spacer ( $spacer * 2 );
 
@@ -26,16 +28,16 @@
 		display: block;
 		position: relative;
 
-		&:hover,
-		&:focus {
-			.suppliers-overview__picture {
-				visibility: hidden;
-			}
+		// &:hover,
+		// &:focus {
+		// 	.suppliers-overview__picture {
+		// 		visibility: hidden;
+		// 	}
 
-			.suppliers-overview__picture-hover {
-				display: block;
-			}
-		}
+		// 	.suppliers-overview__picture-hover {
+		// 		display: block;
+		// 	}
+		// }
 	}
 
 	&__picture,

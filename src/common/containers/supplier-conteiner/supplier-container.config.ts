@@ -29,7 +29,7 @@ export const config: ISupplierLogo[] = [
         supplierUrl: '',
         size: 'sm',
         title: 'Bohemia Energy entity s.r.o.',
-        width: '208',
+        width: '190',
         typeCommodity: TypeCommodity.BOTH,
     },
     {
@@ -48,7 +48,7 @@ export const config: ISupplierLogo[] = [
         supplierUrl: '',
         size: 'sm',
         title: 'Skupina E.ON',
-        width: '116',
+        width: '75',
         typeCommodity: TypeCommodity.BOTH,
     },
     {
@@ -57,7 +57,7 @@ export const config: ISupplierLogo[] = [
         logoUrlHover: '/assets/images/suppliers/logo_ep-energy-trading-hover.svg',
         supplierUrl: '',
         title: 'EP Energy Trading a.s.',
-        width: '92',
+        width: '75',
         typeCommodity: TypeCommodity.BOTH,
     },
     {
@@ -77,7 +77,7 @@ export const config: ISupplierLogo[] = [
         supplierUrl: '',
         size: 'sm',
         title: 'MND a.s.',
-        width: '116',
+        width: '75',
         typeCommodity: TypeCommodity.BOTH,
     },
     {
@@ -95,7 +95,7 @@ export const config: ISupplierLogo[] = [
         logoUrlHover: '/assets/images/suppliers/logo_nano-energies-hover.svg',
         supplierUrl: '',
         title: 'Nano Energies a. s.',
-        width: '87',
+        width: '75',
         typeCommodity: TypeCommodity.POWER,
     },
     {
@@ -132,7 +132,7 @@ export const config: ISupplierLogo[] = [
         logoUrlHover: '/assets/images/suppliers/logo_veolia-hover.svg',
         supplierUrl: '',
         title: 'Skupina Veolia',
-        width: '138',
+        width: '115',
         typeCommodity: TypeCommodity.POWER,
     },
 ];
