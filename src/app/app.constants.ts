@@ -150,12 +150,12 @@ export const SUBJECT_TYPE_OPTIONS: Array<IOption> = [
     {
         key: SubjectType.SUBJECT_TYPE_INDIVIDUAL,
         value: SubjectType.SUBJECT_TYPE_INDIVIDUAL,
-        label: 'Domácnost',
+        label: 'domácnost',
     },
     {
         key: SubjectType.SUBJECT_TYPE_BUSINESSMAN,
         value: SubjectType.SUBJECT_TYPE_BUSINESSMAN,
-        label: 'Firma',
+        label: 'firma',
     },
 ];
 
