@@ -9,16 +9,14 @@
 	flex-wrap: wrap;
 
 	&__item {
+		display: inline-flex;
+		align-items: flex-end;
 		@include reset-list;
+		margin: 0 $spacer ( $spacer * 2 );
 
-		&:nth-child(n + 2) {
-			margin-left: ( $spacer * 2 );
-			margin-bottom: ( $spacer * 2 );
-
-			// Media queries
-			@include media-breakpoint-up(md) {
-				margin-left: ( $spacer * 2.5 );
-			}
+		// Media queries
+		@include media-breakpoint-up(md) {
+			margin: 0 ( $spacer * 1.25 ) ( $spacer * 2 );
 		}
 
 		&::before {
@@ -30,22 +28,21 @@
 		display: block;
 		position: relative;
 
-		&:hover,
-		&:focus {
-			.suppliers-overview__picture {
-				visibility: hidden;
-			}
+		// &:hover,
+		// &:focus {
+		// 	.suppliers-overview__picture {
+		// 		visibility: hidden;
+		// 	}
 
-			.suppliers-overview__picture-hover {
-				display: block;
-			}
-		}
+		// 	.suppliers-overview__picture-hover {
+		// 		display: block;
+		// 	}
+		// }
 	}
 
 	&__picture,
 	&__picture-hover {
 		max-width: 100%;
-		height: 34px;
 	}
 
 	&__picture-hover {
