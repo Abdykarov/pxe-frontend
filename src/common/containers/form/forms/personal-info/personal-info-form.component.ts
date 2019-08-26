@@ -77,13 +77,14 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             this.prefillFormData();
         }
 
-        if (this.supplyPoint.contract && this.supplyPoint.contract.offer && this.supplyPoint.contract.offer.mountlyPaymentPrice > 0) {
+        if (this.supplyPoint.contract && this.supplyPoint.contract.offer && this.supplyPoint.contract.offer.totalPrice > 0) {
             this.form.controls['deposit']
                 .setValidators(
                     [
                         Validators.required,
                         CustomValidators.isNumber(2),
-                        CustomValidators.minValue(this.supplyPoint.contract.offer.mountlyPaymentPrice,
+                        CustomValidators.minValue(
+                            this.supplyPoint.contract.offer.totalPrice,
                             true,
                             false,
                         ),

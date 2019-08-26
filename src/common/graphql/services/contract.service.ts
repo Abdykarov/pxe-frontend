@@ -44,25 +44,25 @@ export class ContractService {
                 offerId,
                 supplyPointId,
             },
-            update: (cache, { data }) => {
-                const { getSupplyPoint } = cache.readQuery(
-                    {
-                        query: getSupplyPointQuery,
-                        variables: {
-                            supplyPointId: supplyPointId,
-                        },
-                    });
-
-                this.loadSupplyPointDetail(offerId, getSupplyPoint, cache, data);
-
-                cache.writeQuery({
-                    query: getSupplyPointQuery,
-                    data: { getSupplyPoint },
-                    variables: {
-                        supplyPointId: supplyPointId,
-                    },
-                });
-            },
+            // update: (cache, { data }) => {
+            //     const { getSupplyPoint } = cache.readQuery(
+            //         {
+            //             query: getSupplyPointQuery,
+            //             variables: {
+            //                 supplyPointId: supplyPointId,
+            //             },
+            //         });
+            //
+            //     this.loadSupplyPointDetail(offerId, getSupplyPoint, cache, data);
+            //
+            //     cache.writeQuery({
+            //         query: getSupplyPointQuery,
+            //         data: { getSupplyPoint },
+            //         variables: {
+            //             supplyPointId: supplyPointId,
+            //         },
+            //     });
+            // },
         })
 
     public getContractTerms = (contractId: string) => this.apollo
