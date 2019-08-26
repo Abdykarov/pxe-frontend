@@ -7,6 +7,7 @@ import {
     defaultErrorMessage,
     graphQLMessages,
 } from 'src/common/constants/errors.constant';
+import { environment } from 'src/environments/environment';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 
 const mapValidationFieldArrayToValidationObj = (array) => {
@@ -37,7 +38,7 @@ export const parseGraphQLErrors = (error: ErrorResponse):
                     globalError = mapGlobalGraphQLErrorMessages(errors.validationError.global);
                 }
             } else {
-                globalError.push(errors.message);
+                globalError.push(environment.production ? defaultErrorMessage : errors.message);
             }
         }
         if (networkError) {
