@@ -195,8 +195,6 @@
 	}
 
 	&__addon {
-		text-align: center;
-
 		// Media queries
 		@include media-breakpoint-up(md) {
 			padding-top: ( ( $supply-point-title-line-height-px - $btn-height ) / 2 );

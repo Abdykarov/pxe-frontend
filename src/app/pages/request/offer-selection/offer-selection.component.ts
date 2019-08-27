@@ -146,7 +146,6 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                         });
                 },
                 (error) => {
-                    this.supplyPointOffers = null;
                     const { globalError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.cd.markForCheck();

@@ -159,6 +159,19 @@ export interface ISelectedOffer {
     priceNT?: number;
     priceGas?: number;
     mountlyPaymentPrice?: number;
+    accountingRegulatedPrice: number;
+    consumptionPriceNT: number;
+    consumptionPriceVT: number;
+    distributionPriceByCapacity: number;
+    distributionPriceByConsumptionNT: number;
+    distributionPriceByConsumptionVT: number;
+    energyTaxRegulatedPrice: number;
+    marketOrganizerRegulatedPrice: number;
+    monthlyConsumptionFee: number;
+    renewableEnergyRegulatedPrice: number;
+    systemServicesRegulatedPrice: number;
+    totalPrice: number;
+    unit: string;
     __typename?: string;
 }
 
