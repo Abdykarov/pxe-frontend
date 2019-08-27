@@ -44,25 +44,25 @@ export class ContractService {
                 offerId,
                 supplyPointId,
             },
-            update: (cache, { data }) => {
-                const { getSupplyPoint } = cache.readQuery(
-                    {
-                        query: getSupplyPointQuery,
-                        variables: {
-                            supplyPointId: supplyPointId,
-                        },
-                    });
-
-                this.loadSupplyPointDetail(offerId, getSupplyPoint, cache, data);
-
-                cache.writeQuery({
-                    query: getSupplyPointQuery,
-                    data: { getSupplyPoint },
-                    variables: {
-                        supplyPointId: supplyPointId,
-                    },
-                });
-            },
+            // update: (cache, { data }) => {
+            //     const { getSupplyPoint } = cache.readQuery(
+            //         {
+            //             query: getSupplyPointQuery,
+            //             variables: {
+            //                 supplyPointId: supplyPointId,
+            //             },
+            //         });
+            //
+            //     this.loadSupplyPointDetail(offerId, getSupplyPoint, cache, data);
+            //
+            //     cache.writeQuery({
+            //         query: getSupplyPointQuery,
+            //         data: { getSupplyPoint },
+            //         variables: {
+            //             supplyPointId: supplyPointId,
+            //         },
+            //     });
+            // },
         })
 
     public getContractTerms = (contractId: string) => this.apollo
@@ -148,7 +148,20 @@ export class ContractService {
                 priceVT: supplyPointOffer.priceVT,
                 priceNT: supplyPointOffer.priceNT,
                 priceGas: supplyPointOffer.priceGas,
-                mountlyPaymentPrice: supplyPointOffer.permanentPaymentPrice,
+                mountlyPaymentPrice: supplyPointOffer.mountlyPaymentPrice,
+                accountingRegulatedPrice: supplyPointOffer.accountingRegulatedPrice,
+                consumptionPriceNT: supplyPointOffer.consumptionPriceNT,
+                consumptionPriceVT: supplyPointOffer.consumptionPriceVT,
+                distributionPriceByCapacity: supplyPointOffer.distributionPriceByCapacity,
+                distributionPriceByConsumptionNT: supplyPointOffer.distributionPriceByConsumptionNT,
+                distributionPriceByConsumptionVT: supplyPointOffer.distributionPriceByConsumptionVT,
+                energyTaxRegulatedPrice: supplyPointOffer.energyTaxRegulatedPrice,
+                marketOrganizerRegulatedPrice: supplyPointOffer.marketOrganizerRegulatedPrice,
+                monthlyConsumptionFee: supplyPointOffer.monthlyConsumptionFee,
+                renewableEnergyRegulatedPrice: supplyPointOffer.renewableEnergyRegulatedPrice,
+                systemServicesRegulatedPrice: supplyPointOffer.systemServicesRegulatedPrice,
+                totalPrice: supplyPointOffer.totalPrice,
+                unit: supplyPointOffer.unit,
                 __typename: 'offer',
             },
             personalData: null,

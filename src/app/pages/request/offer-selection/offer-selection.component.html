@@ -34,7 +34,7 @@
     </div>
     <lnd-placeloader [loading]="loadingSupplyPointOffers && !globalError.length"></lnd-placeloader>
     <div class="row"
-            *ngIf="supplyPointOffers">
+        *ngIf="supplyPointOffers">
         <div class="col-12">
             <div class="row align-items-center mb-3">
                 <div class="col-12 mb-5 col-md-3 mb-md-0 text-center text-md-left">
@@ -51,14 +51,16 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-12 supply-points-offer">
-            <ng-container *ngIf="supplyPointOffers.length; else emptyOffers">
-                <pxe-supply-point-offer
-                    (action)="saveContract(supplyPointOffer)"
-                    *ngFor="let supplyPointOffer of supplyPointOffers"
-                    [supplyPointOffer]="supplyPointOffer">
-                </pxe-supply-point-offer>
-            </ng-container>
+        <div class="col-12 col-md-12">
+            <div class="supply-points-offer">
+                <ng-container *ngIf="supplyPointOffers.length; else emptyOffers">
+                    <pxe-supply-point-offer
+                        (action)="saveContract(supplyPointOffer)"
+                        *ngFor="let supplyPointOffer of supplyPointOffers"
+                        [supplyPointOffer]="supplyPointOffer">
+                    </pxe-supply-point-offer>
+                </ng-container>
+            </div>
         </div>
     </div>
 </pxe-layout-container>

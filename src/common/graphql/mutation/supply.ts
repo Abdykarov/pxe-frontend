@@ -72,7 +72,7 @@ export const updateGasSupplyPointWithContractMutation = gql`
         $supplyPointUpdate: SupplyPointUpdate,
         $attributes: SupplyPointUpdateGasAttributes,
     ){
-        updatePowerSupplyPointWithContract(
+        updateGasSupplyPointWithContract(
             supplyPointId: $supplyPointId,
             supplyPointUpdate: $supplyPointUpdate,
             attributes: $attributes,

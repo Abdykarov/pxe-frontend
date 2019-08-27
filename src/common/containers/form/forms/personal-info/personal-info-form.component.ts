@@ -1,5 +1,5 @@
 import {
-    ChangeDetectorRef,
+    AfterViewInit,
     Component,
     Input,
     OnInit,
@@ -37,7 +37,7 @@ import {
     templateUrl: './personal-info-form.component.html',
     styleUrls: ['./personal-info-form.component.scss'],
 })
-export class PersonalInfoFormComponent extends AbstractFormComponent implements OnInit {
+export class PersonalInfoFormComponent extends AbstractFormComponent implements OnInit, AfterViewInit {
 
     @Input()
     public supplyPoint: ISupplyPoint;
@@ -66,28 +66,39 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         this.setForm();
         this.depositPaymentTypeId = this.codeLists[CODE_LIST.DEPOSIT_PAYMENT_TYPE];
 
-        this.form.get('onlyAddress1')
-            .valueChanges
+        this.form.get('onlyAddress1').valueChanges
             .pipe(takeUntil(this.destroy$))
             .subscribe((onlyAddress1: boolean) => {
                 this.setAddress2(onlyAddress1);
             });
 
-        if (this.formValues) {
-            this.prefillFormData();
-        }
-
-        if (this.supplyPoint.contract && this.supplyPoint.contract.offer && this.supplyPoint.contract.offer.mountlyPaymentPrice > 0) {
+        if (R.path(['contract', 'offer', 'totalPrice'], this.supplyPoint) > 0) {
             this.form.controls['deposit']
                 .setValidators(
                     [
                         Validators.required,
                         CustomValidators.isNumber(2),
-                        CustomValidators.minValue(this.supplyPoint.contract.offer.mountlyPaymentPrice,
+                        CustomValidators.minValue(
+                            this.supplyPoint.contract.offer.totalPrice,
                             true,
                             false,
                         ),
                     ]);
+        }
+
+        if (this.formValues) {
+            this.prefillFormData();
+        }
+    }
+
+    ngAfterViewInit() {
+        if (R.path(['contract', 'offer', 'totalPrice'], this.supplyPoint) > 0 && this.formValues) {
+            const depositControl = this.form.controls['deposit'];
+            const depositControlValue = depositControl.value;
+            if (!R.isNil(depositControlValue)) {
+                depositControl.patchValue(depositControl.value);
+                depositControl.updateValueAndValidity({onlySelf: true, emitEvent: true});
+            }
         }
     }
 

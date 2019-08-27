@@ -82,6 +82,19 @@ export const findSupplyPointOffersQuery = gql`
             priceVT,
             priceNT,
             priceGas,
+            accountingRegulatedPrice,
+            consumptionPriceNT,
+            consumptionPriceVT,
+            distributionPriceByCapacity,
+            distributionPriceByConsumptionNT,
+            distributionPriceByConsumptionVT,
+            energyTaxRegulatedPrice,
+            marketOrganizerRegulatedPrice,
+            monthlyConsumptionFee,
+            renewableEnergyRegulatedPrice,
+            systemServicesRegulatedPrice,
+            totalPrice,
+            unit,
         }
     }
 `;
