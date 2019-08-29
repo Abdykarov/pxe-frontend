@@ -8,9 +8,9 @@
     </div>
     <lnd-banner-ui
             *ngIf="supplyPointStatistic && supplyPointStatistic.notConcludedCount > 0"
-            [buttonLabel]="supplyPointStatistic.notConcludedCount === 1 ? 'Pokračovat v žádosti' : 'Rozpracované smlouvy'"
+            [buttonLabel]="supplyPointStatistic.notConcludedCount === 1 ? 'Pokračovat ve smlouvě' : 'Rozpracované smlouvy'"
             [data]="{
-            text: supplyPointStatistic.notConcludedCount === 1 ? 'Máte jednu rozpracovanou žádost.' : 'Máte rozděláno více žádostí.'
+            text: supplyPointStatistic.notConcludedCount === 1 ? 'Máte jednu rozpracovanou smlouvu.' : 'Máte rozpracováno více smluv.'
         }"
     ></lnd-banner-ui>
     <div class="row mt-4">

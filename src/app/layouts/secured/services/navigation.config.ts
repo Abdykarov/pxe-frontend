@@ -10,13 +10,7 @@ export const navigationMenuUsers: INavigationMenu = [
         'url': ROUTES.ROUTER_DASHBOARD,
         'label': 'NÁSTĚNKA',
         'icon': 'notice-board',
-        'children': [
-            {
-                'label': 'Empty',
-                'url': '/empty',
-                __typename : 'securedChild',
-            },
-        ],
+        'children': [],
         __typename : 'secured',
     },
     {
@@ -58,13 +52,7 @@ export const navigationMenuUsers: INavigationMenu = [
         'url': ROUTES.ROUTER_SUPPLY_POINTS,
         'label': 'PLATNÉ SMLOUVY',
         'icon': 'pin',
-        'children': [
-            {
-                'label': 'Empty',
-                'url': '/empty',
-                __typename : 'securedChild',
-            },
-        ],
+        'children': [],
         __typename : 'secured',
     },
 ];
@@ -77,13 +65,7 @@ export const navigationMenuUserActions: INavigationMenu = [
         'label': 'Profil uživatele',
         'icon': 'user',
         'url': ROUTES.ROUTER_USER_PROFILE,
-        'children': [
-            {
-                'label': 'Empty',
-                'url': '/empty',
-                __typename : 'securedChild',
-            },
-        ],
+        'children': [],
         __typename: 'profile',
     },
     {
@@ -91,13 +73,7 @@ export const navigationMenuUserActions: INavigationMenu = [
         'label': 'Změna hesla',
         'icon': 'lock-close',
         'url': ROUTES.ROUTER_USER_CHANGE_PASSWORD,
-        'children': [
-            {
-                'label': 'Empty',
-                'url': '/empty',
-                __typename : 'securedChild',
-            },
-        ],
+        'children': [],
         __typename: 'change-password',
 
     },
@@ -106,13 +82,7 @@ export const navigationMenuUserActions: INavigationMenu = [
         'label': 'Odhlášení',
         'icon': 'power',
         'url' : `/${CONSTS.PATHS.LOGOUT}`,
-        'children': [
-            {
-                'label': 'Empty',
-                'url': '/empty',
-                __typename : 'securedChild',
-            },
-        ],
+        'children': [],
         __typename: 'logout',
     },
 ];
@@ -123,13 +93,7 @@ export const navigationMenuSuppliersActions: INavigationMenu = [
         'label': 'Odhlášení',
         'icon': 'power',
         'url' : `/${CONSTS.PATHS.LOGOUT}`,
-        'children': [
-            {
-                'label': 'Empty',
-                'url': '/empty',
-                __typename : 'securedChild',
-            },
-        ],
+        'children': [],
         __typename: 'logout',
     },
 ];

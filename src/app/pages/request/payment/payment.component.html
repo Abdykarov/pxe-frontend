@@ -83,67 +83,63 @@
         </div>
     </div>
 </ng-template>
-<div class="container-fluid">
-    <div class="container-content">
-        <pxe-layout-container pageTitle="Platba">
-            <div class="row mb-6">
-                <div class="col-12 col-xl-10 offset-xl-1">
-                    <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-xl-10 offset-xl-1">
-                    <lnd-alert
-                        *ngIf="globalError.length"
-                        type="danger">
-                        <ng-container *ngFor="let error of globalError">
-                            {{ error }}<br>
-                        </ng-container>
-                    </lnd-alert>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-xl-10 offset-xl-1">
-                    <lnd-placeloader [loading]="loading && !globalError.length"></lnd-placeloader>
-                </div>
-                <ng-container *ngIf="supplyPoint">
-                    <ng-container *ngIf="supplyPoint.contract?.contractStatus == contractStatus.WAITING_FOR_PAYMENT && paymentInfo">
-                        <div class="col-12 col-xl-10 offset-xl-1">
-                            <lnd-info-banner
-                                    [bannerTitle]="'Čekáme na doručení vaší ověřovací platby do ' + (paymentInfo.dueDate | date: 'dd.MM.y')"
-                                    [bannerDescription]="'Platba u nás může být hned, ale z některé banky to může trvat až 3 dny a&nbsp;my vás nechceme zdržovat. Okno aplikace můžete nyní zavřít a&nbsp;až platbu obdržíme, dáme vám vědět na e-mail.'"
-                                    [bannerType]="bannerTypeImages.LOADING"
-                                    [showButton]="false"
-                            ></lnd-info-banner>
-                        </div>
-                        <div class="col-12 col-xl-10 offset-xl-1">
-                            <div class="page-box">
-                                <ng-container *ngTemplateOutlet="paymentInfoTemplate"></ng-container>
-                            </div>
-                        </div>
-                    </ng-container>
-                    <div *ngIf="supplyPoint.contract?.contractStatus == contractStatus.CONCLUDED"
-                         class="col-12 col-xl-10 offset-xl-1">
-                        <lnd-info-banner
-                                [bannerTitle]="'Gratulujeme k výhodnému nákupu energie na vašem PARCu!'"
-                                [bannerDescription]="'Před koncem vaší smlouvy se ozveme s dalšími výhodnými nabídkami, které vám na burze stále hlídáme.'"
-                                [buttonLabel]="'Přejít na přehled platných smluv'"
-                                [bannerType]="bannerTypeImages.ACCEPTED"
-                                (buttonAction)="navigateToContracts()"
-                        ></lnd-info-banner>
-                    </div>
-                    <div *ngIf="supplyPoint.contract?.contractStatus == contractStatus.CANCELED || supplyPoint.contract?.contractStatus == contractStatus.TO_BE_CANCELED"
-                         class="col-12 col-xl-10 offset-xl-1">
-                        <lnd-info-banner
-                                [bannerTitle]="'Bohužel jsme neobdrželi vaši platbu. Smlouva byla stornována.'"
-                                [bannerDescription]="'Pokud máte stále zájem o dodávku elektřiny nebo plynu, vyberte si prosím novou nabídku.'"
-                                [buttonLabel]="'Pokračovat zadáním odběrného místa'"
-                                [bannerType]="bannerTypeImages.REJECTED"
-                                (buttonAction)="navigateToRequest(supplyPointNewVersion)"
-                        ></lnd-info-banner>
-                    </div>
-                </ng-container>
-            </div>
-        </pxe-layout-container>
+<pxe-layout-container pageTitle="Platba">
+    <div class="row mb-6">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <lnd-alert
+                *ngIf="globalError.length"
+                type="danger">
+                <ng-container *ngFor="let error of globalError">
+                    {{ error }}<br>
+                </ng-container>
+            </lnd-alert>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <lnd-placeloader [loading]="loading && !globalError.length"></lnd-placeloader>
+        </div>
+        <ng-container *ngIf="supplyPoint">
+            <ng-container *ngIf="supplyPoint.contract?.contractStatus == contractStatus.WAITING_FOR_PAYMENT && paymentInfo">
+                <div class="col-12 col-xl-10 offset-xl-1">
+                    <lnd-info-banner
+                            [bannerTitle]="'Čekáme na doručení vaší ověřovací platby do ' + (paymentInfo.dueDate | date: 'dd.MM.y')"
+                            [bannerDescription]="'Platba u nás může být hned, ale z některé banky to může trvat až 3 dny a&nbsp;my vás nechceme zdržovat. Okno aplikace můžete nyní zavřít a&nbsp;až platbu obdržíme, dáme vám vědět na e-mail.'"
+                            [bannerType]="bannerTypeImages.LOADING"
+                            [showButton]="false"
+                    ></lnd-info-banner>
+                </div>
+                <div class="col-12 col-xl-10 offset-xl-1">
+                    <div class="page-box">
+                        <ng-container *ngTemplateOutlet="paymentInfoTemplate"></ng-container>
+                    </div>
+                </div>
+            </ng-container>
+            <div *ngIf="supplyPoint.contract?.contractStatus == contractStatus.CONCLUDED"
+                 class="col-12 col-xl-10 offset-xl-1">
+                <lnd-info-banner
+                        [bannerTitle]="'Gratulujeme k výhodnému nákupu energie na vašem PARCu!'"
+                        [bannerDescription]="'Před koncem vaší smlouvy se ozveme s dalšími výhodnými nabídkami, které vám na burze stále hlídáme.'"
+                        [buttonLabel]="'Přejít na přehled platných smluv'"
+                        [bannerType]="bannerTypeImages.ACCEPTED"
+                        (buttonAction)="navigateToContracts()"
+                ></lnd-info-banner>
+            </div>
+            <div *ngIf="supplyPoint.contract?.contractStatus == contractStatus.CANCELED || supplyPoint.contract?.contractStatus == contractStatus.TO_BE_CANCELED"
+                 class="col-12 col-xl-10 offset-xl-1">
+                <lnd-info-banner
+                        [bannerTitle]="'Bohužel jsme neobdrželi vaši platbu. Smlouva byla stornována.'"
+                        [bannerDescription]="'Pokud máte stále zájem o dodávku elektřiny nebo plynu, vyberte si prosím novou nabídku.'"
+                        [buttonLabel]="'Pokračovat zadáním odběrného místa'"
+                        [bannerType]="bannerTypeImages.REJECTED"
+                        (buttonAction)="navigateToRequest(supplyPointNewVersion)"
+                ></lnd-info-banner>
+            </div>
+        </ng-container>
+    </div>
+</pxe-layout-container>

@@ -38,7 +38,12 @@ export const resolvers = {
                     __typename: 'ui',
                 },
             };
-            cache.writeData({data});
+            cache.writeQuery(
+                {
+                    query: getConfigQuery,
+                    data,
+                },
+            );
             return data;
         },
         openItem: (_, variables, {cache}) => {
@@ -54,7 +59,12 @@ export const resolvers = {
                     __typename: 'ui',
                 },
             };
-            cache.writeData({data});
+            cache.writeQuery(
+                {
+                    query: getConfigQuery,
+                    data,
+                },
+            );
             return data;
         },
         logout: (_, variables, {cache}) => {
