@@ -100,7 +100,8 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
                     queryParams: {
                         reset: new Date().getTime(),
                     },
-                    skipLocationChange: true};
+                    skipLocationChange: true,
+                };
             }
             this.router.navigate([CONSTS.PATHS.LOGIN], extras);
         }

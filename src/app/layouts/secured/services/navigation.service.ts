@@ -47,7 +47,7 @@ export class NavigationService {
         )
         .subscribe((config: INavigationConfig) => {
             this.saveConfigToStore(config);
-            return of(<INavigationConfig>config);
+            return of(config);
         })
 
     public saveConfigToStore = (config: INavigationConfig) => {

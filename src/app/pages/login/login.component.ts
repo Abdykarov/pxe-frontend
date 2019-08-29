@@ -55,8 +55,8 @@ export class LoginComponent extends AbstractComponent {
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
-        private router: Router,
         private route: ActivatedRoute,
+        private router: Router,
         private userService: UserService,
     ) {
         super();
