@@ -21,6 +21,7 @@ import {
 } from '../resolvers/';
 import { environment } from 'src/environments/environment';
 import { scrollToElementFnc } from 'src/common/utils';
+import { clientSchema } from 'src/common/graphql/middleware/client-schema';
 
 const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
@@ -108,6 +109,7 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
         cache,
         resolvers,
         link,
+        typeDefs: clientSchema,
         connectToDevTools: !environment.production,
     };
 

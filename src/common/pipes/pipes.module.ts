@@ -10,6 +10,7 @@ import { DynamicPipe } from './dynamic/dynamic.pipe';
 import { FilterCommodityTypePipe } from './filter-commodity-type/filter-commodity-type.pipe';
 import { IsAllowedOperationPipe } from './is-allowed-operation/is-allowed-operation.pipe';
 import { IsDatePast } from './is-date-past/is-date-past.pipe';
+import { IsMenuItemActivePipe } from './is-menu-item-active/is-menu-item-active.pipe';
 import { IsRouteActivePipe } from './is-route-active/is-route-acrive.pipe';
 import { KeysPipe } from './keys/keys.pipe';
 import { NewSupplyWillBeginPipe } from './new-supply-will-begin/new-supply-will-begin.pipe';
@@ -28,6 +29,7 @@ import { ValuesPipe } from './values/values.pipe';
         FilterCommodityTypePipe,
         IsAllowedOperationPipe,
         IsDatePast,
+        IsMenuItemActivePipe,
         IsRouteActivePipe,
         KeysPipe,
         NewSupplyWillBeginPipe,
@@ -45,6 +47,7 @@ import { ValuesPipe } from './values/values.pipe';
         FilterCommodityTypePipe,
         IsAllowedOperationPipe,
         IsDatePast,
+        IsMenuItemActivePipe,
         IsRouteActivePipe,
         KeysPipe,
         NewSupplyWillBeginPipe,
@@ -63,6 +66,7 @@ import { ValuesPipe } from './values/values.pipe';
         FilterCommodityTypePipe,
         IsAllowedOperationPipe,
         IsDatePast,
+        IsMenuItemActivePipe,
         IsRouteActivePipe,
         KeysPipe,
         NewSupplyWillBeginPipe,

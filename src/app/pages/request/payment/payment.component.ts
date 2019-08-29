@@ -162,4 +162,8 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
             this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
         }
     }
+
+    public navigateToContracts = () => {
+        this.router.navigate([ROUTES.ROUTER_SUPPLY_POINTS]);
+    }
 }

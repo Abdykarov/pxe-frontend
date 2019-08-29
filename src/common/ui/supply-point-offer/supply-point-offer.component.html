@@ -41,7 +41,12 @@
                     <div class="col-12 col-md-8 col-xl-12">
                         <span class="supply-point-offer__title"
                               (click)="togglePriceDecomposition($event)">
-                            {{(supplyPointOffer.totalPrice | number: '1.0-2') || 0}}&nbsp;Kč
+                            <ng-container *ngIf="deposit; else totalPrice">
+                                {{(deposit | number: '1.0-2') || 0}}&nbsp;Kč
+                            </ng-container>
+                            <ng-template #totalPrice>
+                                {{(supplyPointOffer.totalPrice | number: '1.0-2') || 0}}&nbsp;Kč
+                            </ng-template>
                             <span class="icon icon--info supply-point-offer__info-icon"></span>
                         </span>
                     </div>

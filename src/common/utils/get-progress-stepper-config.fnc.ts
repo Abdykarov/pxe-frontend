@@ -8,7 +8,7 @@ import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 const steps: IStepperProgressItem[] = [
     {
         step: ProgressStatus.SUPPLY_POINT,
-        label: 'Výběr odběrného místa',
+        label: 'Odběrné místo',
     },
     {
         step: ProgressStatus.NONE,

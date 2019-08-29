@@ -39,7 +39,7 @@ const routes = [
                 loadChildren: '../../pages/login/login.module#LoginModule',
                 data: {
                     isPublic: true,
-                    loginType: LoginType.NONE,
+                    loginType: LoginType.RELOAD,
                     signUpType: SignType.NAVIGATE,
                 },
             },

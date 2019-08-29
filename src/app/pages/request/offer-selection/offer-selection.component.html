@@ -6,14 +6,14 @@
     </lnd-info-banner>
 </ng-template>
 
-<pxe-layout-container pageTitle="Nová nabídka">
+<pxe-layout-container pageTitle="Výběr nabídky">
     <div class="row mb-6">
         <div class="col-12 col-xl-10 offset-xl-1">
             <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
         </div>
     </div>
     <div class="row">
-        <div class="col-12 col-md-12">
+        <div class="col-12 col-xl-10 offset-xl-1">
             <lnd-banner-ui
                 *ngIf="onlyOffersFromActualSupplier && supplyPointOffers.length && bannerObj && bannerObj.text"
                 [data]="bannerObj"
@@ -22,7 +22,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12 col-md-12">
+        <div class="col-12 col-xl-10 offset-xl-1">
             <lnd-alert
                 *ngIf="globalError.length"
                 type="danger">
@@ -35,7 +35,7 @@
     <lnd-placeloader [loading]="loadingSupplyPointOffers && !globalError.length"></lnd-placeloader>
     <div class="row"
         *ngIf="supplyPointOffers">
-        <div class="col-12">
+        <div class="col-12 col-xl-10 offset-xl-1">
             <div class="row align-items-center mb-3">
                 <div class="col-12 mb-5 col-md-3 mb-md-0 text-center text-md-left">
                     <lnd-button
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-12">
+        <div class="col-12 col-xl-10 offset-xl-1">
             <div class="supply-points-offer">
                 <ng-container *ngIf="supplyPointOffers.length; else emptyOffers">
                     <pxe-supply-point-offer
