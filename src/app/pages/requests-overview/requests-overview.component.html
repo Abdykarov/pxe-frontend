@@ -1,4 +1,4 @@
-<pxe-layout-container pageTitle="Vaše žádosti">
+<pxe-layout-container pageTitle="Rozpracované smlouvy">
     <lnd-placeloader [loading]="loadingRequests && !globalError.length"></lnd-placeloader>
     <div class="row">
         <div class="col-12 col-md-12">
@@ -24,7 +24,7 @@
             [bannerType]="BANNER_TYPE_ACCEPTED"
             [bannerTitle]="'Momentálně nemáte žádné rozpracované žádosti'"
             [bannerDescription]="'Všechna zadaná odběrná místa mají pokrytou dodávku na déle než 3 měsíce.<br> Pokud máte nové odběrné místo, můžete založit žádost pro novou dodávku.'"
-            [buttonLabel]="'Nová žádost'"
+            [buttonLabel]="'Nové odběrné místo'"
             (buttonAction)="createSupplyPoint($event)"
         ></lnd-info-banner>
         <!--<ng-container *ngIf="state == overviewStates.SOME_SUPPLY_POINTS_ARE_ENDING ">-->
@@ -49,7 +49,7 @@
             <div class="row mb-5">
                 <div class="col text-center">
                     <lnd-button
-                        label="Nová žádost"
+                        label="Nové odběrné místo"
                         type="secondary"
                         (action)="newRequestAction($event)"
                     ></lnd-button>

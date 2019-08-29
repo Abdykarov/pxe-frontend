@@ -1,10 +1,12 @@
 import {
     ActivatedRoute,
     NavigationEnd,
+    NavigationExtras,
     Router,
 } from '@angular/router';
 import { OnInit } from '@angular/core';
 
+import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 import {
     debounceTime,
@@ -31,6 +33,7 @@ import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 export abstract class AbstractLayoutComponent extends AbstractComponent implements OnInit {
+    public activeUrl: string;
     public isMenuOpen = false;
     public showOverlay = false;
     public toggleSubscription: Subscription;
@@ -68,6 +71,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
                     this.toggleSubscription.unsubscribe();
                 }
                 this.settings = <ISettings>this.route.snapshot.firstChild.data;
+                this.activeUrl = this.router.url;
             }
         });
     }
@@ -89,8 +93,17 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
     }
 
     public login = () => {
-        if (this.settings.loginType === LoginType.NAVIGATE) {
-            this.router.navigate([CONSTS.PATHS.LOGIN]);
+        if (R.indexOf(this.settings.loginType, [LoginType.RELOAD, LoginType.NAVIGATE]) >= 0) {
+            let extras: NavigationExtras = {};
+            if (this.settings.loginType === LoginType.RELOAD) {
+                extras = {
+                    queryParams: {
+                        reset: new Date().getTime(),
+                    },
+                    skipLocationChange: true,
+                };
+            }
+            this.router.navigate([CONSTS.PATHS.LOGIN], extras);
         }
     }
 

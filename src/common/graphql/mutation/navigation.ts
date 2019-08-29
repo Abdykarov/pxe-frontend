@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const loadConfigMutation = gql`
-    mutation loadConfig($config: any) {
+    mutation loadConfig($config: NavigationConfigInput) {
         loadConfig(config: $config) @client
     }
 `;

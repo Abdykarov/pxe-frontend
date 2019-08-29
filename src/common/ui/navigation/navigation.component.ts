@@ -17,6 +17,9 @@ import {
 })
 export class NavigationComponent {
     @Input()
+    public activeUrl = '';
+
+    @Input()
     public config: INavigationConfig;
 
     @Input()

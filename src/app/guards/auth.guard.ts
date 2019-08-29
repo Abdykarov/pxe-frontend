@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivateChild {
         this.authService.checkLogin();
 
         if (!this.authService.isLogged()) {
-            this.router.navigate([CONSTS.PATHS.EMPTY]);
+            this.router.navigate([CONSTS.PATHS.LOGOUT]);
             return false;
         }
 

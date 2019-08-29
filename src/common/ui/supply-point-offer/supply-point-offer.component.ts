@@ -34,6 +34,9 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     public dateDiffValidityOfOffer = Number.MIN_VALUE;
 
     @Input()
+    public deposit: number;
+
+    @Input()
     public supplyPointOffer: ISupplyPointOffer;
 
     @Input()

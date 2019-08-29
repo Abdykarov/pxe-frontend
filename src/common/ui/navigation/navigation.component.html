@@ -7,7 +7,7 @@
             <li
                 *ngFor="let item of menu"
                 class="navigation-main__item"
-                [routerLinkActive]="[item.url ? 'navigation-main__item--active' : '']"
+                [class.navigation-main__item--active]="item | isMenuItemActive: activeUrl"
                 [class.navigation-main__item--sub]="item.children"
                 [class.navigation-main__item--open]="item === itemOpened"
                 [ngClass]="item.class">

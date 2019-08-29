@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 
 import { getConfigQuery } from 'src/common/graphql/queries/navigation';
+import { INavigationConfig } from 'src/common/ui/navigation/models/navigation.model';
 import {
     loadConfigMutation,
     logout,
@@ -23,11 +24,11 @@ export class NavigationService {
         })
         .valueChanges
 
-    public saveConfig = (config) => this.apollo
+    public saveConfig = (config: INavigationConfig) => this.apollo
         .mutate({
             mutation: loadConfigMutation,
             variables: {
-                config: config,
+                config,
             },
         })
 

@@ -22,10 +22,7 @@ import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
 import { inArray } from 'src/common/utils';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { parseGraphQLErrors } from 'src/common/utils';
-import {
-    OverviewState,
-    OverviewStateWrapper,
-} from './requests-overview.model';
+import { OverviewState } from './requests-overview.model';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { getOverviewState } from 'src/common/utils/get-overview-state.fnc';

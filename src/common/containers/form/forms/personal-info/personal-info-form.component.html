@@ -105,7 +105,7 @@
     <pxe-field-wrapper
         label="Bankovní účet"
         labelFor="bankAccountNumber"
-        subtext="Číslo bankovního účtu obsahujcí prefix uveďte prosím ve tvaru XXXXX-XXXXXXXXXX"
+        subtext="Číslo bankovního účtu s předčíslím uveďte ve tvaru XX-XXXXXXXXXX"
         [error]="((form.controls.bankAccountNumber.touched || formError.bankAccountNumber) && (formError.bankAccountNumber || form.controls.bankAccountNumber.errors)) ||
                  ((form.controls.bankCode.touched || formError.bankCode) && (formError.bankCode || form.controls.bankCode.errors))"
         [validationMessages]="((form.controls.bankAccountNumber.touched || formError.bankAccountNumber) && (formError.bankAccountNumber || form.controls.bankAccountNumber.errors) && formFields.validationMessages.bankAccountNumber) ||
@@ -117,7 +117,7 @@
                         [formControl]="form.controls.bankAccountNumber"
                         [id]="'bankAccountNumber'"
                         label="Bankovní účet"
-                        subtext="Číslo bankovního účtu obsahujcí prefix uveďte prosím ve tvaru XXXXX-XXXXXXXXXX"
+                        subtext="Číslo bankovního účtu s předčíslím uveďte ve tvaru XX-XXXXXXXXXX"
                         [success]="form.controls.bankAccountNumber.valid && (form.controls.bankAccountNumber.touched || formError.bankAccountNumber)"
                         [touched]="form.controls.bankAccountNumber.touched || formError.bankAccountNumber"
                         [validationMessages]="formFields.validationMessages.bankAccountNumber"
@@ -173,7 +173,7 @@
         [error]="formError.email || form.controls.email.errors"
         [formControl]="form.controls.email"
         [id]="'email'"
-        label="Email"
+        label="E-mail"
         [success]="form.controls.email.valid && (form.controls.email.touched || formError.email)"
         [touched]="form.controls.email.touched || formError.email"
         [validationMessages]="formFields.validationMessages.email"

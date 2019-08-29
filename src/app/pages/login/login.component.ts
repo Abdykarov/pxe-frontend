@@ -1,11 +1,12 @@
 import {
-    ChangeDetectorRef,
-    Component,
-} from '@angular/core';
-import {
+    ActivatedRoute,
     NavigationExtras,
     Router,
 } from '@angular/router';
+import {
+    ChangeDetectorRef,
+    Component,
+} from '@angular/core';
 
 import {
     map,
@@ -54,10 +55,21 @@ export class LoginComponent extends AbstractComponent {
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
+        private route: ActivatedRoute,
         private router: Router,
         private userService: UserService,
     ) {
         super();
+
+        this.route.queryParams
+            .pipe(
+                takeUntil(
+                    this.destroy$,
+                ),
+            )
+            .subscribe(() => {
+                this.state = ILoginState.LOGIN;
+            });
     }
 
     public submitChangePassword = (changePassword: IChangePassword) => {

@@ -9,11 +9,15 @@ export const getConfigQuery = gql`
                     icon,
                     url,
                     class,
+                    children {
+                        label,
+                        url,
+                    }
                 }
                 navigationItemOpened{
                     label,
                     icon,
-                    url
+                    url,
                 }
             }
             showOverlay
