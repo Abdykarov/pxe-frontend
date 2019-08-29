@@ -29,6 +29,7 @@ import { staticNavigationConfig } from 'src/static/config/navigation.config';
 })
 export class BasicLayoutComponent extends AbstractComponent implements OnInit {
 
+    public activeUrl: string;
     public currentUser: IJwtPayload = null;
     public isMenuOpen = false;
     public itemOpened = null;
@@ -60,6 +61,7 @@ export class BasicLayoutComponent extends AbstractComponent implements OnInit {
         router.events.subscribe((val) => {
             if (val instanceof NavigationEnd) {
                 this.isMenuOpen = false;
+                this.activeUrl = this.router.url;
             }
         });
     }

@@ -75,8 +75,9 @@
                             <div class="col-12">
                                 <span class="supply-point__price-label">Cena</span>
                             </div>
-                            <div class="col-12 col-md-8 col-xl-12 mb-4 mb-md-0">
-                                <span class="supply-point__price">0 Kč</span>
+                            <div *ngIf="(data | pathValue:['contract', 'personalData', 'deposit']) as deposit"
+                                 class="col-12 col-md-8 col-xl-12 mb-4 mb-md-0">
+                                <span class="supply-point__price">{{deposit | number: '1.0-2'}} Kč</span>
                                 / měsíc ({{data.supplier.name}})
                             </div>
                             <div class="col-12 col-md-4 supply-point__addon">

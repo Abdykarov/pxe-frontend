@@ -16,6 +16,7 @@ import {
     navigationMenuUsers,
     navigationMenuUserActions,
     navigationMenuSuppliers,
+    navigationMenuSuppliersActions,
 } from './navigation.config';
 import { NavigationService as NavigationApolloService } from 'src/common/graphql/services/navigation.service';
 
@@ -24,12 +25,13 @@ import { NavigationService as NavigationApolloService } from 'src/common/graphql
 })
 export class NavigationService {
 
-    get = () => {
+    get = (): Observable<INavigationConfig> => {
         const currentUser = this.authService.currentUserValue;
-        const navigationMenuUser = currentUser && currentUser.supplier ? navigationMenuSuppliers : navigationMenuUsers ;
+        const navigationMenu = currentUser && currentUser.supplier ? navigationMenuSuppliers : navigationMenuUsers;
+        const navigationMenuActions = currentUser && currentUser.supplier ? navigationMenuSuppliersActions : navigationMenuUserActions;
 
         return new Observable<INavigationConfig>((subscriber: Subscriber<INavigationConfig>) => subscriber.next([
-            R.concat(navigationMenuUser, navigationMenuUserActions),
+            R.concat(navigationMenu, navigationMenuActions),
         ]));
     }
 
@@ -39,16 +41,16 @@ export class NavigationService {
         private navigationApolloService: NavigationApolloService,
     ) {}
 
-    getNavigationConfig = () => this.get()
+    public getNavigationConfig = () => this.get()
         .pipe(
             catchError(error => throwError(error)),
         )
-        .subscribe(config => {
+        .subscribe((config: INavigationConfig) => {
             this.saveConfigToStore(config);
             return of(<INavigationConfig>config);
         })
 
-    saveConfigToStore(config: any) {
+    public saveConfigToStore = (config: INavigationConfig) => {
         this.navigationApolloService.saveConfig(config).subscribe();
     }
 }

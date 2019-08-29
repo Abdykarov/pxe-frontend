@@ -39,7 +39,7 @@ export const resolvers = {
                 },
             };
             cache.writeData({data});
-            return null;
+            return data;
         },
         openItem: (_, variables, {cache}) => {
             const prev = cache.readQuery({query: getConfigQuery});

@@ -5,6 +5,7 @@ import {
 import {
     ChangeDetectorRef,
     Component,
+    OnInit,
 } from '@angular/core';
 
 import * as R from 'ramda';
@@ -22,7 +23,12 @@ import {
 } from 'src/common/ui/navigation/models/navigation.model';
 import { IStoreUi } from 'src/common/graphql/models/store.model';
 import { NavigationService as NavigationApolloService} from 'src/common/graphql/services/navigation.service';
-import { navigationMenuUserActions } from './services/navigation.config';
+import {
+    navigationMenuSuppliers,
+    navigationMenuSuppliersActions,
+    navigationMenuUserActions,
+    navigationMenuUsers
+} from './services/navigation.config';
 import { NavigationService } from './services/navigation.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
@@ -30,11 +36,11 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 @Component({
     templateUrl: './secured-layout.component.html',
 })
-export class SecuredLayoutComponent extends AbstractLayoutComponent {
+export class SecuredLayoutComponent extends AbstractLayoutComponent implements OnInit {
     public isMenuOpen = false;
     public itemOpened = null;
     public navConfig: INavigationConfig = [];
-    public navigationMenuUserActions: INavigationMenu = navigationMenuUserActions;
+    public navigationMenuUserActions: INavigationMenu;
 
     constructor(
         protected apollo: Apollo,
@@ -72,10 +78,17 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent {
             });
     }
 
-    public toggleNavigationItem (navigationItem) {
+    ngOnInit() {
+        super.ngOnInit();
+        const currentUser = this.authService.currentUserValue;
+        this.navigationMenuUserActions = currentUser && currentUser.supplier ? navigationMenuSuppliersActions : navigationMenuUserActions;
+    }
+
+    public toggleNavigationItem = (navigationItem) => {
         this.navigationApolloService.toggleNavigationItem(navigationItem)
             .pipe(
                 takeUntil(this.destroy$),
+                map(R.path(['data', 'openItem', 'ui', 'securedLayout'])),
             )
             .subscribe( res => {
                 this.isMenuOpen = false;

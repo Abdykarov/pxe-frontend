@@ -46,7 +46,10 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
                             apolloClient.cache.writeData({
                                 data: defaults,
                             });
-                            this.router.navigate([CONSTS.PATHS.EMPTY]);
+                            this.router.navigate([CONSTS.PATHS.EMPTY])
+                                .then(() => {
+                                    window.location.reload();
+                                });
                         });
                 },
                 () => {

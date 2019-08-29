@@ -20,5 +20,6 @@ export enum LoginType {
     NONE,
     NAVIGATE,
     STATIC,
+    RELOAD,
 }
 

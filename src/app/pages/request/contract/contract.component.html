@@ -7,7 +7,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-md-12">
+                <div class="col-12 col-xl-10 offset-xl-1">
                     <lnd-alert
                         *ngIf="globalError.length"
                         type="danger">
@@ -19,7 +19,7 @@
             </div>
             <div *ngIf="supplyPoint"
                  class="row">
-                <div class="col-10 offset-1">
+                <div class="col-12 col-xl-10 offset-xl-1">
                     <div class="row align-items-center mb-3">
                         <div class="col-12 mb-5 col-md-3 mb-md-0 text-center text-md-left">
                             <lnd-button
@@ -62,6 +62,7 @@
                     [class.d-none]="!showOffer">
                     <pxe-supply-point-offer
                         [supplyPointOffer]="supplyPoint.contract.offer"
+                        [deposit]="supplyPoint.contract.personalData.deposit"
                         [interactive]="false">
                     </pxe-supply-point-offer>
                 </div>

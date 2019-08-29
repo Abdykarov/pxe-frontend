@@ -92,7 +92,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-md-12">
+                <div class="col-12 col-xl-10 offset-xl-1">
                     <lnd-alert
                         *ngIf="globalError.length"
                         type="danger">
@@ -127,8 +127,9 @@
                         <lnd-info-banner
                                 [bannerTitle]="'Gratulujeme k výhodnému nákupu energie na vašem PARCu!'"
                                 [bannerDescription]="'Před koncem vaší smlouvy se ozveme s dalšími výhodnými nabídkami, které vám na burze stále hlídáme.'"
+                                [buttonLabel]="'Přejít na přehled platných smluv'"
                                 [bannerType]="bannerTypeImages.ACCEPTED"
-                                [showButton]="false"
+                                (buttonAction)="navigateToContracts()"
                         ></lnd-info-banner>
                     </div>
                     <div *ngIf="supplyPoint.contract?.contractStatus == contractStatus.CANCELED || supplyPoint.contract?.contractStatus == contractStatus.TO_BE_CANCELED"
