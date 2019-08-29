@@ -24,10 +24,8 @@ import {
 import { IStoreUi } from 'src/common/graphql/models/store.model';
 import { NavigationService as NavigationApolloService} from 'src/common/graphql/services/navigation.service';
 import {
-    navigationMenuSuppliers,
     navigationMenuSuppliersActions,
     navigationMenuUserActions,
-    navigationMenuUsers
 } from './services/navigation.config';
 import { NavigationService } from './services/navigation.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
