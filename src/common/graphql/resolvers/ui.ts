@@ -23,7 +23,12 @@ export const resolvers = {
                     __typename: 'ui',
                 },
             };
-            cache.writeData({data});
+            cache.writeQuery(
+                {
+                    query: getConfigQuery,
+                    data,
+                },
+            );
             return data;
         },
         loadConfig: (_, variables, {cache}) => {
