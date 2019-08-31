@@ -9,9 +9,11 @@ import {
 import * as R_ from 'ramda-extension';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { CommodityType } from 'src/common/graphql/models/supply.model';
+import {
+    CommodityType,
+    ISelectedOffer,
+} from 'src/common/graphql/models/supply.model';
 import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
-import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 
 @Component({
     selector: 'pxe-supply-point-offer',
@@ -34,10 +36,7 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     public dateDiffValidityOfOffer = Number.MIN_VALUE;
 
     @Input()
-    public deposit: number;
-
-    @Input()
-    public supplyPointOffer: ISupplyPointOffer;
+    public supplyPointOffer: ISelectedOffer;
 
     @Input()
     public isOwner = false;

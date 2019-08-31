@@ -172,6 +172,7 @@ export interface ISelectedOffer {
     systemServicesRegulatedPrice: number;
     totalPrice: number;
     unit: string;
+    prepayment: number;
     __typename?: string;
 }
 
