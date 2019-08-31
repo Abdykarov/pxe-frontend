@@ -26,6 +26,7 @@ import {
     COMMODITY_TYPE_OPTIONS,
     CONSTS,
     CONTRACT_END_TYPE,
+    CONTRACT_END_TYPE_ORDER,
     SUBJECT_TYPE_OPTIONS,
     SUBJECT_TYPE_TO_DIST_RATE_MAP,
     SUPPLY_POINT_EDIT_TYPE,
@@ -351,11 +352,20 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     }
 
     public removeTerminateFromContractEndType = (codeLists) => {
+        const sortEndOFContract = (a, b) => {
+            return CONTRACT_END_TYPE_ORDER.indexOf(a.code) - CONTRACT_END_TYPE_ORDER.indexOf(b.code);
+        };
         const updatedContractEnding = R.pipe(
             R.find(R.propEq('codelistType', CODE_LIST.CONTRACT_END_TYPE)),
             R.map(
                 R.cond([
-                    [R_.isArray, (array) => R.filter(({code}) => code !== CONTRACT_END_TYPE.CONTRACT_END_TERMINATE)(array)],
+                    [
+                        R_.isArray,
+                        (array) => R.pipe(
+                            R.filter(({code}) => code !== CONTRACT_END_TYPE.CONTRACT_END_TERMINATE),
+                            R.sort(sortEndOFContract),
+                        )(array),
+                    ],
                     [R.T, (data) => data],
                 ]),
             ),

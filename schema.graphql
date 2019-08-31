@@ -76,7 +76,6 @@ type Mutation {
     savePowerOffer(offer: OfferInput!, powerAttributes: OfferInputPowerAttributes!): Int
     sendContractConfirmationSms(contractId: ID!): Boolean
     signContract(contractId: Int!, smsCode: String): Boolean
-    updateContract(contractId: ID!): Boolean
     updateGasOffer(gasAttributes: OfferInputGasAttributes!, offer: OfferInput!, offerId: ID!): Int
     updateGasSupplyPoint(gasAttributes: SupplyPointInputGasAttributes!, supplyPoint: SupplyPointInput!, supplyPointId: ID!): Int
     updateGasSupplyPointWithContract(attributes: SupplyPointUpdateGasAttributes, supplyPointId: ID!, supplyPointUpdate: SupplyPointUpdate): Int
@@ -171,6 +170,7 @@ type SelectedOffer {
     monthlyConsumptionFee: Float
     mountlyPaymentPrice: Float
     name: String!
+    prepayment: Float
     priceGas: Float
     priceNT: Float
     priceVT: Float
@@ -251,6 +251,8 @@ type SupplyPointOffer {
 }
 
 type SupplyPointStatistic {
+    concludedCount: Int!
+    concludedItems: [SupplyPointStatisticView!]
     gasAnnualConsumptionSum: Float!
     gasCount: Int!
     notConcludedCount: Int!
