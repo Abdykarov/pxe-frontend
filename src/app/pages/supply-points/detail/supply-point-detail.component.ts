@@ -22,6 +22,7 @@ import {
     ISupplyPointFormData,
     ISupplyPointGasAttributes,
     ISupplyPointPowerAttributes,
+    SubjectType,
 } from 'src/common/graphql/models/supply.model';
 import { ContractActions } from '../models/supply-point-detail.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
@@ -56,6 +57,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     public formSent = false;
     public globalError: string[] = [];
     public smsSent: number = null;
+    public subjectType = SubjectType;
     public supplyPoint: ISupplyPoint = null;
     public supplyPointId = this.route.snapshot.params.supplyPointId;
     public contractAction: ContractActions = ContractActions.NONE;

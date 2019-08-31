@@ -86,7 +86,8 @@
                            (click)="openDocument(supplyPoint.contract.contractId, documentType.INFORMATION)">Zobrazit</a>
                     </span>
                 </div>
-                <div class="text-with-icon align-items-start align-items-md-center mb-5">
+                <div *ngIf="supplyPoint.subject.code === subjectType.SUBJECT_TYPE_INDIVIDUAL"
+                     class="text-with-icon align-items-start align-items-md-center mb-5">
                     <span class="icon icon--document mt-1 mt-md-0"></span>
                     <span class="text-with-icon__text small">smlouva o sdružených službách dodávky
                         <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
