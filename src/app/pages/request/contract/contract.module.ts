@@ -8,6 +8,7 @@ import { ContractComponent } from './contract.component';
 import { ContractRoutingModule } from './contract-routing.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 import { PipesModule } from 'src/common/pipes/pipes.module';
+import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
 import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.module';
 import { SupplyPointOfferModule } from 'src/common/ui/supply-point-offer/supply-point-offer.module';
 import { VerificationFormModule } from 'src/common/containers/form/forms/verification/verification-form.module';
@@ -27,6 +28,7 @@ import { VerificationFormModule } from 'src/common/containers/form/forms/verific
         ContractRoutingModule,
         LayoutContainerModule,
         PipesModule,
+        PlaceloaderModule,
         ProgressBarModule,
         SupplyPointOfferModule,
         VerificationFormModule,
