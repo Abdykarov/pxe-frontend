@@ -11,7 +11,7 @@ import * as R_ from 'ramda-extension';
 })
 export class SumPipe implements PipeTransform {
     transform(values: number[]): number {
-        if (!values || !R_.isArray(values)) {
+        if (!R_.isArray(values)) {
             return null;
         }
         return R.sum(values);
