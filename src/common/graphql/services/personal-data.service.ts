@@ -90,6 +90,12 @@ export class PersonalDataService {
 
     // docasny reseni pred sync s BE
     public loadSupplyPoint = (supplyPoint: ISupplyPoint, personalData: IPersonalDataInput) => {
+        // zkusit nak zautomatizovat pri pridani casche (pres funkci s argumentem typu interface? )
+        // interface Foo {
+        //    prop1: number;
+        //    prop2: string;
+        // }
+        // const x = keyof Foo;
         supplyPoint.progressStatus = ProgressStatus.READY_FOR_SIGN;
         supplyPoint.contract.personalData = {
             name: personalData.name,
@@ -100,6 +106,8 @@ export class PersonalDataService {
             address2: personalData.address2,
             email: personalData.email,
             phone: personalData.phone,
+            signatoryName: personalData.signatoryName ? personalData.signatoryName : '',
+            signatoryPosition: personalData.signatoryPosition ? personalData.signatoryPosition : '',
             bankAccountNumber: personalData.bankAccountNumber,
             bankCode: personalData.bankCode,
             depositPaymentType: {

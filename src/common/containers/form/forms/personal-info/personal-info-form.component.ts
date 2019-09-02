@@ -63,6 +63,8 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
 
     ngOnInit() {
         super.ngOnInit();
+        // todo delete
+        this.isIndividual = !this.isIndividual;
         this.setForm();
         this.depositPaymentTypeId = this.codeLists[CODE_LIST.DEPOSIT_PAYMENT_TYPE];
 
@@ -110,6 +112,8 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         let onlyAddress1 = null;
         let bankAccountNumber = null;
         let bankCode = null;
+        let signatoryPosition = null;
+        let signatoryName = null;
         let phone = null;
         let email = null;
         let depositPaymentTypeId = null;
@@ -121,6 +125,8 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             if (this.formValues.birthDate) {
                 birthDate = new Date(this.formValues.birthDate);
             }
+            signatoryPosition = this.formValues.signatoryPosition;
+            signatoryName = this.formValues.signatoryName;
             ico = this.formValues.ico;
             dic = this.formValues.dic;
             onlyAddress1 = this.formValues.address2;
@@ -146,6 +152,9 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         this.form.controls['depositPaymentTypeId'].setValue(depositPaymentTypeId);
         this.form.controls['deposit'].setValue(deposit);
         this.form.controls['address1'].setValue(address1);
+        // overt vsecky prekliky v jeslti dibre bnakopirovany vsude
+        this.form.controls['signatoryName'].setValue(signatoryName);
+        this.form.controls['signatoryPosition'].setValue(signatoryPosition);
         if (this.form.controls['onlyAddress1'].value) {
             this.form.controls['address2'].setValue(address2);
         }
@@ -156,16 +165,19 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     public setForm = () => {
         this.setAddress2(false);
         if (this.isIndividual) {
+            this.setDisableField('signatoryPosition');
+            this.setDisableField('signatoryName');
             this.setDisableField('ico');
             this.setDisableField('dic');
             this.setEnableField('birthDate');
         } else {
+            this.setEnableField('signatoryPosition');
+            this.setEnableField('signatoryName');
             this.setEnableField('ico');
             this.setEnableField('dic');
             this.setDisableField('birthDate');
         }
     }
-
     public setAddress2(val) {
         if (val) {
             this.setEnableField('address2');

@@ -16,6 +16,8 @@ export interface IPersonalDataInput {
     bankCode: string;
     depositPaymentTypeId: string;
     deposit: number;
+    signatoryName?: string;
+    signatoryPosition?: string;
 }
 
 export interface IPersonalDataInputForm {
@@ -33,6 +35,8 @@ export interface IPersonalDataInputForm {
     depositPaymentTypeId: string;
     deposit: number;
     onlyAddress1: string;
+    signatoryName?: string;
+    signatoryPosition?: string;
 }
 
 
@@ -49,5 +53,7 @@ export interface IPersonalData {
     bankCode: string;
     depositPaymentType: ICodelistItem;
     deposit: number;
+    signatoryName?: string;
+    signatoryPosition?: string;
     __typename?: string;
 }

@@ -197,6 +197,14 @@ export const errorFieldMessages =  {
         required: `Vyplňte předvolbu pro ČR ${CONSTS.TELEPHONE_PREFIX_CZ}.`,
         invalidPhoneNumberPrefix: `Vyplňte správnou předvolbu pro ČR ${CONSTS.TELEPHONE_PREFIX_CZ}.`,
     },
+    signatoryPosition: {
+        // po nacrtku zadan na Moniku
+        required: 'Vyplňte pozici.',
+    },
+    signatoryName: {
+        // po nacrtku zadan na Moniku
+        required: 'Vyplňte jméno.',
+    },
     smsCode: {
         required: 'Vyplňte kód, který vám přišel v SMS.',
     },

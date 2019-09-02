@@ -59,6 +59,27 @@
     >
     </lnd-datepicker>
     <lnd-form-field
+        *ngIf="form.controls.signatoryName.status !== 'DISABLED'"
+        [error]="formError.signatoryName || form.controls.signatoryName.errors"
+        [formControl]="form.controls.signatoryName"
+        [id]="'signatoryName'"
+        label="Jméno podepisující osoby"
+        [success]="form.controls.signatoryName.valid && (form.controls.signatoryName.touched || formError.signatoryName)"
+        [touched]="form.controls.signatoryName.touched || formError.signatoryName"
+        [validationMessages]="formFields.validationMessages.signatoryName"
+    ></lnd-form-field>
+    <lnd-form-field
+        *ngIf="form.controls.signatoryPosition.status !== 'DISABLED'"
+        [error]="formError.signatoryPosition || form.controls.signatoryPosition.errors"
+        [formControl]="form.controls.signatoryPosition"
+        [id]="'position'"
+        label="Funkce podepisující osoby"
+        [success]="form.controls.signatoryPosition.valid && (form.controls.signatoryPosition.touched || formError.signatoryPosition)"
+        [touched]="form.controls.signatoryPosition.touched || formError.signatoryPosition"
+        [validationMessages]="formFields.validationMessages.signatoryPosition"
+    ></lnd-form-field>
+
+    <lnd-form-field
         *ngIf="form.controls.ico.status !== 'DISABLED'"
         [error]="formError.ico || form.controls.ico.errors"
         [formControl]="form.controls.ico"
