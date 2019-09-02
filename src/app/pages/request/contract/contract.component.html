@@ -15,6 +15,7 @@
             </lnd-alert>
         </div>
     </div>
+    <lnd-placeloader [loading]="loadingSupplyPoint && !globalError.length"></lnd-placeloader>
     <div *ngIf="supplyPoint"
          class="row">
         <div class="col-12 col-xl-10 offset-xl-1">

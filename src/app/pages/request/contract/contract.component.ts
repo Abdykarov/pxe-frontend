@@ -53,6 +53,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public fieldError: IFieldError = {};
     public formLoading = false;
     public globalError: string[] = [];
+    public loadingSupplyPoint = true;
     public showOffer = true;
     public smsSent: number = null;
     public supplyPoint: ISupplyPoint;
@@ -80,6 +81,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 (supplyPoint: ISupplyPoint) => {
+                    this.loadingSupplyPoint = false;
                     this.supplyPoint = supplyPoint;
                     this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
                     this.cd.markForCheck();
