@@ -90,7 +90,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                     this.supplyPoint = supplyPoint;
                     return this.offerService.findSupplyPointOffers(this.supplyPoint.ean);
                 }),
-                map(({data}) => data.findSupplyPointOffers),
+                map(({data}) => R.sort(R.ascend(R.prop('totalPrice')))(data.findSupplyPointOffers)),
                 takeUntil(this.destroy$),
             ).subscribe(
                 (findSupplyPointOffers: ISupplyPointOffer[]) => {

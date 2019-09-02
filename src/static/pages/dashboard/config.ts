@@ -5,6 +5,15 @@ import {
 } from 'src/common/graphql/models/supply.model';
 
 export const supplyPointStatistic: ISupplyPointStatistic = {
+    'concludedCount': 1,
+    'concludedItems': [
+        {
+            'id': 1578,
+            'name': 'doba urcita s prolog',
+            'commodityType': CommodityType.POWER,
+            'progressStatus': ProgressStatus.OFFER_STEP,
+        },
+    ],
     'gasAnnualConsumptionSum': 21.5,
     'gasCount': 2,
     'notConcludedCount': 1,
@@ -30,6 +39,8 @@ export const supplyPointStatistic: ISupplyPointStatistic = {
 };
 
 export const supplyPointStatisticMore: ISupplyPointStatistic = {
+    'concludedCount': 0,
+    'concludedItems': [],
     'gasAnnualConsumptionSum': 21.5,
     'gasCount': 2,
     'notConcludedCount': 2,
@@ -67,6 +78,8 @@ export const supplyPointStatisticMore: ISupplyPointStatistic = {
 };
 
 export const supplyPointStatisticNone: ISupplyPointStatistic = {
+    'concludedCount': 0,
+    'concludedItems': [],
     'gasAnnualConsumptionSum': 21.5,
     'gasCount': 2,
     'notConcludedCount': 0,
