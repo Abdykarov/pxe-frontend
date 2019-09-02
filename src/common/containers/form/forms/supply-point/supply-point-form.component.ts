@@ -352,7 +352,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     }
 
     public removeTerminateFromContractEndType = (codeLists) => {
-        const sortEndOFContract = (a, b) => {
+        const sortEndOfContract = (a, b) => {
             return CONTRACT_END_TYPE_ORDER.indexOf(a.code) - CONTRACT_END_TYPE_ORDER.indexOf(b.code);
         };
         const updatedContractEnding = R.pipe(
@@ -363,7 +363,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                         R_.isArray,
                         R.pipe(
                             R.filter(({code}) => code !== CONTRACT_END_TYPE.CONTRACT_END_TERMINATE),
-                            R.sort(sortEndOFContract),
+                            R.sort(sortEndOfContract),
                         ),
                     ],
                     [
