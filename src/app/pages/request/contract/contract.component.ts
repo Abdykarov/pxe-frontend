@@ -18,6 +18,7 @@ import {
     CommodityType,
     ISupplyPoint,
     ProgressStatus,
+    SubjectType,
 } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { DocumentService } from 'src/app/services/document.service';
@@ -55,6 +56,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
     public showOffer = true;
     public smsSent: number = null;
+    public subjectType = SubjectType;
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
