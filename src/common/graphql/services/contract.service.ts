@@ -162,6 +162,7 @@ export class ContractService {
                 systemServicesRegulatedPrice: supplyPointOffer.systemServicesRegulatedPrice,
                 totalPrice: supplyPointOffer.totalPrice,
                 unit: supplyPointOffer.unit,
+                prepayment: null,
                 __typename: 'offer',
             },
             personalData: null,

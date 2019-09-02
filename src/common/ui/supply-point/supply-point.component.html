@@ -72,14 +72,15 @@
                 <div class="row">
                     <div class="col-12 col-md-10 offset-md-2 col-xl-12 offset-xl-0">
                         <div class="row">
-                            <div class="col-12">
-                                <span class="supply-point__price-label">Cena</span>
-                            </div>
-                            <div *ngIf="(data | pathValue:['contract', 'personalData', 'deposit']) as deposit"
-                                 class="col-12 col-md-8 col-xl-12 mb-4 mb-md-0">
-                                <span class="supply-point__price">{{deposit | number: '1.0-2'}} Kč</span>
-                                / měsíc ({{data.supplier.name}})
-                            </div>
+                            <ng-container *ngIf="(data | pathValue:['contract', 'offer', 'prepayment']) as prepayment">
+                                <div class="col-12">
+                                    <span class="supply-point__price-label">Cena</span>
+                                </div>
+                                <div class="col-12 col-md-8 col-xl-12 mb-4 mb-md-0">
+                                    <span class="supply-point__price">{{prepayment | number: '1.0-2'}} Kč</span>
+                                    / měsíc ({{data.supplier.name}})
+                                </div>
+                            </ng-container>
                             <div class="col-12 col-md-4 supply-point__addon">
                                 <lnd-button
                                     label="Vybrat"
