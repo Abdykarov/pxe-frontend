@@ -25,8 +25,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-xl-9 offset-xl-3">
+            <div *ngIf="concludedPlacesCount"
+                 class="col-12 col-xl-9 offset-xl-3">
                 <a (click)="supplyPointsListAction.emit($event)">Seznam Odběrných míst</a>
+            </div>
+            <div *ngIf="notConcludedPlacesCount"
+                 class="col-12 col-xl-9 offset-xl-3">
+                <a (click)="requestListAction.emit($event)">Seznam rozpracovaných žádostí</a>
             </div>
         </div>
         <div *ngIf="supplyPointsEndingCount !== 0"

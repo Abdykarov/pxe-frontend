@@ -16,7 +16,7 @@
                     <div class="col-auto">
                         <div class="supply-point-offer__value-box">
                             <span class="supply-point-offer__value-name">Dodávka</span>
-                            <span class="supply-point-offer__value">{{supplyPointOffer.deliveryLength}} {{supplyPointOffer.deliveryLength | plural: 'year' | titlecase}}</span>
+                            <span class="supply-point-offer__value">{{supplyPointOffer.deliveryLength * 12}} {{supplyPointOffer.deliveryLength * 12 | plural: 'month'}}</span>
                         </div>
                     </div>
                     <ng-container *ngIf="showValidityOfOffer">
