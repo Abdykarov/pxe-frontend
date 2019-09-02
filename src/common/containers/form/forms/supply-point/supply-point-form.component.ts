@@ -361,12 +361,15 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 R.cond([
                     [
                         R_.isArray,
-                        (array) => R.pipe(
+                        R.pipe(
                             R.filter(({code}) => code !== CONTRACT_END_TYPE.CONTRACT_END_TERMINATE),
                             R.sort(sortEndOFContract),
-                        )(array),
+                        ),
                     ],
-                    [R.T, (data) => data],
+                    [
+                        R.T,
+                        (data) => data,
+                    ],
                 ]),
             ),
         )(codeLists);
