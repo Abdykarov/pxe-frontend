@@ -85,7 +85,6 @@ export const supplyPointFragment = gql`
                 deliveryTo,
                 offerValidity,
                 offer{
-                    id,
                     supplier{
                         id,
                         name,
