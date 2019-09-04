@@ -32,8 +32,8 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
     public loading = true;
     public state: DeleteAccountState = DeleteAccountState.NOT_LOADED;
     public supplyPoints: ISupplyPoint[] = null;
-    public currentUser: IJwtPayload = null;
-    public showCancelAccount = false;
+    public smsSent = false;
+    public currentUser: IJwtPayload;
 
     constructor(
         private authService: AuthService,
@@ -74,6 +74,7 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
     }
 
     public sendConfirmationSms = () => {
+        this.smsSent = true;
     }
 
     public submitVerification = (smsCode: string) => {
@@ -83,7 +84,6 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
     }
 
     public cancelAccountAction = () => {
-        this.showCancelAccount = true;
     }
 
     public backAction = () => {

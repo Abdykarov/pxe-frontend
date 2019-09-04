@@ -1,36 +1,29 @@
 <ng-template #canBeDelteddTemplate>
     <div class="col-12 mb-3">
-        Dobrý den, {{currentUser.firstName}},
+        Mrzí nás, že PARC opouštíte, ale bránit vám v tom nemůžeme.
         <br><br>
-        mrzí nás, že opouštíte aplikaci PARC.
+        Zrušení účtu a smazání veškerých svých dat v PARCu provedete ověřovacím SMS kódem.
         <br><br>
-        K dnešnímu datumu nemáte platnou žádnou smlouvu a z vaší strany není nutná další akce.
-        <br><br>
-        Zrušení účtu a smazání veškerých dat potvrdíte ověrovacím SMS kódem.
     </div>
     <div class="col-12 text-center">
-        <lnd-button
-            *ngIf="!showCancelAccount"
-            class="mr-4"
-            label="Zrušit účet"
-            type="link"
-            (click)="cancelAccountAction()">
-        </lnd-button>
-        <lnd-button
-            *ngIf="!showCancelAccount"
-            class="mr-4"
-            label="Zpět na profil"
-            type="primary"
-            (click)="backAction()">
-        </lnd-button>
-        <div class="row">
-            <div class="col-12">
+        <div class="d-flex">
+            <div class="mr-auto p-1 mt-3">
+                <lnd-button
+                    label="Zústat v PARCu"
+                    type="link"
+                    (click)="backAction()">
+                </lnd-button>
+            </div>
+            <div class="p-1">
                 <pxe-verification-form
-                    *ngIf="showCancelAccount"
-                    classFirstField="col-6"
-                    classSecondField="col-6"
-                    submitLabelText="Odstoupit od smlouvy"
-                    (submitAction)="submitVerification()"
+                    submitSentSmsLabel="Odeslat ověřovací kód"
+                    submitLabelText="Zrušit účet"
+                    classRootWrapper="col-12"
+                    [globalError]="globalError"
+                    [smsSent]="smsSent"
+                    [phone]="currentUser.phoneNumber"
+                    [showSentSmsLabelUnderFirstField]="false"
+                    (submitAction)="cancelAccountAction()"
                     (customAction)="sendConfirmationSms()">
                 </pxe-verification-form>
             </div>
@@ -38,33 +31,34 @@
     </div>
 </ng-template>
 
+<!--kouknout oc je p2-->
 <ng-template #cantBeDeltedTemplate>
     <div class="col-12 mb-3">
-        Dobrý den, {{currentUser.firstName}},
+        Mrzí nás, že PARC opouštíte, ale bránit vám v tom nemůžeme.
         <br><br>
-        mrzí nás, že opouštíte aplikaci PARC.
+        K dnešnímu dni u nás máte aktivní smlouvy na dodávku energií, které je potřeba, před zrušením účtu, vypovědět.
         <br><br>
-        K dnešnímu datumu evidujeme zasmluvněnou dodávku elektřiny nebo plynu.
-        <br><br>
-        Před zrušením účtu prosíme o kontrolu a vypovězení všech platných smluv k probíhajícím i plánovaným dodávkám:
         <ul>
             <li *ngFor="let supplyPoint of supplyPoints">
                 {{supplyPoint.name}}
             </li>
         </ul>
     </div>
-    <div class="text-center col-12">
-        <lnd-button
-            class="mr-4"
-            label="Zpět"
-            type="link"
-            (click)="backAction()">
-        </lnd-button>
-        <lnd-button
-            label="Zkontrolovat smlouvy"
-            type="primary"
-            (click)="checkContractsAction()">
-        </lnd-button>
+    <div class="d-flex">
+        <div class="mr-auto p-1">
+            <lnd-button
+                label="Zústat v PARCu"
+                type="link"
+                (click)="backAction()">
+            </lnd-button>
+        </div>
+        <div class="p-1">
+            <lnd-button
+                label="Přejít na smlouvy"
+                type="primary"
+                (click)="checkContractsAction()">
+            </lnd-button>
+        </div>
     </div>
 </ng-template>
 

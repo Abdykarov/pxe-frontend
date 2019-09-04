@@ -34,7 +34,7 @@
                         *ngIf="!smsSent"
                         (action)="submitSms()"
                         [isDisabled]="formLoading"
-                        label="Odeslat ověřovací kód"
+                        [label]="submitSentSmsLabel"
                         type="primary">
                     </lnd-button>
                     <lnd-button
@@ -46,7 +46,8 @@
                     </lnd-button>
                     <p *ngIf="!smsSent && !showSentSmsLabelUnderFirstField"
                        class="small mt-2">
-                        Ověřovací kód odešleme na číslo<br>{{contract.personalData.phone}}
+                        <!--mozna refactor-->
+                        Ověřovací kód odešleme na číslo<br>{{phone ? phone : contract.personalData.phone}}
                     </p>
                 </div>
             </div>
