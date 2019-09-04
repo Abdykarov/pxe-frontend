@@ -112,6 +112,7 @@
                     [formLoading]="formLoading"
                     [contract]="supplyPoint.contract"
                     [globalError]="globalError"
+                    [phone]="supplyPoint.contract.personalData.phone"
                     [showSentSmsLabelUnderFirstField]="false"
                     [smsSent]="smsSent"
                     (submitAction)="signContract($event)"
