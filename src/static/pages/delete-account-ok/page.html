@@ -1,0 +1,41 @@
+<div class="container-content">
+    <div class="container-fluid">
+        <div class="row text-center mb-md-6">
+            <div class="col-12 col-md-6 offset-md-3">
+                <h1>Zrušení uživatelského účtu </h1>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-10 offset-xl-1">
+                <div class="page-box">
+                    <div class="col-12 mb-3">
+                        Mrzí nás, že PARC opouštíte, ale bránit vám v tom nemůžeme.
+                        <br><br>
+                        Zrušení účtu a smazání veškerých svých dat v PARCu provedete ověřovacím SMS kódem.
+                        <br><br>
+                    </div>
+                    <div class="col-12 text-center">
+                        <div class="d-flex">
+                            <div class="mr-auto p-1 mt-3">
+                                <lnd-button
+                                    label="Zústat v PARCu"
+                                    type="link"
+                                    (click)="redirectToUserProfile($event)">
+                                </lnd-button>
+                            </div>
+                            <div class="p-1">
+                                <pxe-verification-form
+                                    submitSentSmsLabel="Odeslat ověřovací kód"
+                                    submitLabelText="Zrušit účet"
+                                    classRootWrapper="col-12"
+                                    [phone]="phone"
+                                    (customAction)="sendConfirmationSms()">
+                                </pxe-verification-form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

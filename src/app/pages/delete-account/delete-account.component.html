@@ -11,7 +11,7 @@
                 <lnd-button
                     label="Zústat v PARCu"
                     type="link"
-                    (click)="backAction()">
+                    (click)="redirectToUserProfile()">
                 </lnd-button>
             </div>
             <div class="p-1">
@@ -31,7 +31,6 @@
     </div>
 </ng-template>
 
-<!--kouknout oc je p2-->
 <ng-template #cantBeDeltedTemplate>
     <div class="col-12 mb-3">
         Mrzí nás, že PARC opouštíte, ale bránit vám v tom nemůžeme.
@@ -49,14 +48,14 @@
             <lnd-button
                 label="Zústat v PARCu"
                 type="link"
-                (click)="backAction()">
+                (click)="redirectToUserProfile()">
             </lnd-button>
         </div>
         <div class="p-1">
             <lnd-button
                 label="Přejít na smlouvy"
                 type="primary"
-                (click)="checkContractsAction()">
+                (click)="redirectToConcludedContract()">
             </lnd-button>
         </div>
     </div>
@@ -78,9 +77,8 @@
         <div *ngIf="canBeDeletedAccount !== null"
               class="col-12 col-xl-10 offset-xl-1">
             <div class="page-box">
-                <ng-container *ngTemplateOutlet="!canBeDeletedAccount ? canBeDelteddTemplate : cantBeDeltedTemplate"></ng-container>
+                <ng-container *ngTemplateOutlet="canBeDeletedAccount ? canBeDelteddTemplate : cantBeDeltedTemplate"></ng-container>
             </div>
         </div>
     </div>
-
 </pxe-layout-container>

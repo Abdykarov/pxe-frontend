@@ -40,6 +40,14 @@ import {
     dashboardPageRoutes,
 } from 'src/static/pages/dashboard/page.module';
 import {
+    deleteAccountOkPageRoutes,
+    DeleteAccountOkPageModule,
+} from 'src/static/pages/delete-account-ok/page.module';
+import {
+    deleteAccountFailedPageRoutes,
+    DeleteAccountFailedPageModule,
+} from 'src/static/pages/delete-account-failed/page.module';
+import {
     DropdownPageModule,
     dropdownPageRoutes,
 } from 'src/static/atoms/dropdown/page.module';
@@ -169,6 +177,8 @@ const routes: Routes = [
             ...colorsPageRoutes,
             ...contractSigningPageRoutes,
             ...dashboardPageRoutes,
+            ...deleteAccountFailedPageRoutes,
+            ...deleteAccountOkPageRoutes,
             ...dropdownPageRoutes,
             ...formsPageRoutes,
             ...changePasswordBannerPageRoutes,
@@ -215,6 +225,8 @@ const routes: Routes = [
         ButtonsPageModule,
         ColorsPageModule,
         ContractSigningPageModule,
+        DeleteAccountFailedPageModule,
+        DeleteAccountOkPageModule,
         DashboardPageModule,
         DropdownPageModule,
         FormsPageModule,

@@ -12,7 +12,6 @@ import {
 import { AuthService } from 'src/app/services/auth.service';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ContractStatus } from 'src/common/graphql/models/contract';
-import { DeleteAccountState } from 'src/app/pages/delete-account/delete-account.model';
 import { IJwtPayload } from 'src/app/services/model/auth.model';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { parseGraphQLErrors } from 'src/common/utils';
@@ -30,7 +29,6 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
     public canBeDeletedAccount = null;
     public globalError: string[] = [];
     public loading = true;
-    public state: DeleteAccountState = DeleteAccountState.NOT_LOADED;
     public supplyPoints: ISupplyPoint[] = null;
     public smsSent = false;
     public currentUser: IJwtPayload;
@@ -48,7 +46,6 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
     ngOnInit() {
         this.supplyService.findSupplyPointsByContractStatus(null,
             [
-                // overit
                 ContractStatus.CONCLUDED,
             ])
             .pipe(
@@ -59,8 +56,6 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
                 (supplyPoints: ISupplyPoint[]) => {
                     this.supplyPoints = supplyPoints;
                     this.loading = false;
-                    this.state = supplyPoints.length === 0 ?
-                        DeleteAccountState.WITH_CONCLUDED_CONTRACT :  DeleteAccountState.WITHOUT_CONCLUDED_CONTRACT;
                     this.canBeDeletedAccount = supplyPoints.length === 0;
                     this.cd.markForCheck();
                 },
@@ -86,11 +81,11 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
     public cancelAccountAction = () => {
     }
 
-    public backAction = () => {
+    public redirectToUserProfile = () => {
         this.router.navigate([ROUTES.ROUTER_USER_PROFILE]);
     }
 
-    public checkContractsAction = () => {
+    public redirectToConcludedContract = () => {
         this.router.navigate([ROUTES.ROUTER_SUPPLY_POINTS]);
     }
 }

@@ -1,5 +1,0 @@
-export enum DeleteAccountState {
-    NOT_LOADED,
-    WITHOUT_CONCLUDED_CONTRACT,
-    WITH_CONCLUDED_CONTRACT,
-}

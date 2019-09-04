@@ -166,6 +166,14 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/dashboard',
                 },
                 {
+                    'label': 'Delete account ok',
+                    'url': '/basic/delete-account-ok',
+                },
+                {
+                    'label': 'Delete account failed',
+                    'url': '/basic/delete-account-failed',
+                },
+                {
                     'label': 'Landing page',
                     'url': '/full/landing-page',
                 },
