@@ -14,7 +14,10 @@
                             <span class="supply-point-overview__type">Elektřina (MWh)</span>
                             <span class="supply-point-overview__value">{{powerPlacesConsumptionSum | number: '1.0-3'}}</span>
                             <span class="supply-point-overview__quantity">
-                                {{powerPlacesCount}} {{powerPlacesCount | plural:'supplyPoint'}}
+                                <ng-container *ngIf="powerPlacesCount">
+                                    {{powerPlacesCount}}
+                                </ng-container>
+                                {{powerPlacesCount | plural:'supplyPoint'}}
                             </span>
                         </div>
                     </div>
