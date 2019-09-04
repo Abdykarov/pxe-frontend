@@ -1,3 +1,92 @@
-<p>
-  delete-profile works!
-</p>
+<ng-template #canBeDelteddTemplate>
+    <div class="col-12 mb-3">
+        Dobrý den, {{currentUser.firstName}},
+        <br><br>
+        mrzí nás, že opouštíte aplikaci PARC.
+        <br><br>
+        K dnešnímu datumu nemáte platnou žádnou smlouvu a z vaší strany není nutná další akce.
+        <br><br>
+        Zrušení účtu a smazání veškerých dat potvrdíte ověrovacím SMS kódem.
+    </div>
+    <div class="col-12 text-center">
+        <lnd-button
+            *ngIf="!showCancelAccount"
+            class="mr-4"
+            label="Zrušit účet"
+            type="link"
+            (click)="cancelAccountAction()">
+        </lnd-button>
+        <lnd-button
+            *ngIf="!showCancelAccount"
+            class="mr-4"
+            label="Zpět na profil"
+            type="primary"
+            (click)="backAction()">
+        </lnd-button>
+        <div class="row">
+            <div class="col-12">
+                <pxe-verification-form
+                    *ngIf="showCancelAccount"
+                    classFirstField="col-6"
+                    classSecondField="col-6"
+                    submitLabelText="Odstoupit od smlouvy"
+                    (submitAction)="submitVerification()"
+                    (customAction)="sendConfirmationSms()">
+                </pxe-verification-form>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #cantBeDeltedTemplate>
+    <div class="col-12 mb-3">
+        Dobrý den, {{currentUser.firstName}},
+        <br><br>
+        mrzí nás, že opouštíte aplikaci PARC.
+        <br><br>
+        K dnešnímu datumu evidujeme zasmluvněnou dodávku elektřiny nebo plynu.
+        <br><br>
+        Před zrušením účtu prosíme o kontrolu a vypovězení všech platných smluv k probíhajícím i plánovaným dodávkám:
+        <ul>
+            <li *ngFor="let supplyPoint of supplyPoints">
+                {{supplyPoint.name}}
+            </li>
+        </ul>
+    </div>
+    <div class="text-center col-12">
+        <lnd-button
+            class="mr-4"
+            label="Zpět"
+            type="link"
+            (click)="backAction()">
+        </lnd-button>
+        <lnd-button
+            label="Zkontrolovat smlouvy"
+            type="primary"
+            (click)="checkContractsAction()">
+        </lnd-button>
+    </div>
+</ng-template>
+
+<pxe-layout-container pageTitle="Zrušení uživatelského účtu">
+    <lnd-placeloader [loading]="loading && !globalError.length"></lnd-placeloader>
+    <div class="row">
+        <!--sjednosti s app-->
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <lnd-alert
+                *ngIf="globalError.length"
+                type="danger">
+                <ng-container *ngFor="let error of globalError">
+                    {{ error }}<br>
+                </ng-container>
+            </lnd-alert>
+        </div>
+        <div *ngIf="canBeDeletedAccount !== null"
+              class="col-12 col-xl-10 offset-xl-1">
+            <div class="page-box">
+                <ng-container *ngTemplateOutlet="!canBeDeletedAccount ? canBeDelteddTemplate : cantBeDeltedTemplate"></ng-container>
+            </div>
+        </div>
+    </div>
+
+</pxe-layout-container>
