@@ -25,7 +25,6 @@ import { ROUTES } from 'src/app/app.constants';
     styleUrls: ['./delete-account.component.scss'],
 })
 export class DeleteAccountComponent extends AbstractComponent implements OnInit {
-    // doresit reduktanci
     public canBeDeletedAccount = null;
     public globalError: string[] = [];
     public loading = true;
@@ -72,13 +71,7 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
         this.smsSent = true;
     }
 
-    public submitVerification = (smsCode: string) => {
-        this.loading = true;
-        this.globalError = [];
-        this.cd.markForCheck();
-    }
-
-    public cancelAccountAction = () => {
+    public cancelAccountAction = (smsCode: string) => {
     }
 
     public redirectToUserProfile = () => {
