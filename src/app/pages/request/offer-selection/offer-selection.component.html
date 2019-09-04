@@ -61,15 +61,15 @@
             </div>
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
-            <div class="supply-points-offer">
-                <ng-container *ngIf="supplyPointOffers.length; else emptyOffers">
+            <ng-container *ngIf="supplyPointOffers.length; else emptyOffers">
+                <div class="supply-points-offer">
                     <pxe-supply-point-offer
                         (action)="saveContract(supplyPointOffer)"
                         *ngFor="let supplyPointOffer of supplyPointOffers"
                         [supplyPointOffer]="supplyPointOffer">
                     </pxe-supply-point-offer>
-                </ng-container>
-            </div>
+                </div>
+            </ng-container>
         </div>
     </div>
 </pxe-layout-container>
