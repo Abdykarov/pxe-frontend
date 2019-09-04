@@ -26,16 +26,16 @@ import { ROUTES } from 'src/app/app.constants';
 })
 export class DeleteAccountComponent extends AbstractComponent implements OnInit {
     public canBeDeletedAccount = null;
+    public currentUser: IJwtPayload;
     public globalError: string[] = [];
     public loading = true;
     public supplyPoints: ISupplyPoint[] = null;
     public smsSent = false;
-    public currentUser: IJwtPayload;
 
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
-        public router: Router,
+        private router: Router,
         private supplyService: SupplyService,
     ) {
         super();
