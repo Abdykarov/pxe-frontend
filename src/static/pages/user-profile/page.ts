@@ -23,4 +23,9 @@ export class UserProfilePageComponent {
         evt.preventDefault();
         console.log('CLICKED');
     }
+
+    public actionDeleteAccount = (evt) => {
+        evt.preventDefault();
+        console.log('CLICKED');
+    }
 }
