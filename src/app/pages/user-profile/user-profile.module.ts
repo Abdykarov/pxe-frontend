@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { AlertModule } from 'src/common/ui/alert/alert.module';
+import { ButtonModule } from 'src/common/ui/button/button.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
 import { UserProfileComponent } from 'src/app/pages/user-profile/user-profile.component';
@@ -17,6 +18,7 @@ import { UserProfileRouting } from 'src/app/pages/user-profile/user-profile.rout
     ],
     imports: [
         AlertModule,
+        ButtonModule,
         CommonModule,
         LayoutContainerModule,
         PlaceloaderModule,

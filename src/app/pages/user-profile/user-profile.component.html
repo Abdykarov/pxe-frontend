@@ -26,3 +26,24 @@
         </div>
     </div>
 </pxe-layout-container>
+<pxe-layout-container pageTitle="Zrušení uživatelského účtu">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-xl-7 col-lg-5">
+            <div class="page-box">
+                <div class="row">
+                    <div class="col-12 text-center mb-4">
+                        Přeji si zrušit svůj uživatelský účet a opustit aplikaci PARC
+                    </div>
+                </div>
+                <div class="col-12 text-center">
+                    <lnd-button
+                        type="primary"
+                        (action)="redirectToDeleteProfile()"
+                        [isDisabled]="formLoading"
+                        label="Zrušit účet">
+                    </lnd-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</pxe-layout-container>
