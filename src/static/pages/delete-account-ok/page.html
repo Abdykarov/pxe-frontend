@@ -14,7 +14,7 @@
                         Zrušení účtu a smazání veškerých svých dat v PARCu provedete ověřovacím SMS kódem.
                         <br><br>
                     </div>
-                    <div class="col-12 text-center">
+                    <div class="col-12">
                         <div class="d-flex">
                             <div class="mr-auto p-1 mt-3">
                                 <lnd-button
@@ -27,6 +27,7 @@
                                 <pxe-verification-form
                                     submitLabelText="Zrušit účet"
                                     classRootWrapper="col-12"
+                                    [showSentSmsLabelUnderFirstField]="false"
                                     [phone]="phone"
                                     (customAction)="sendConfirmationSms()">
                                 </pxe-verification-form>
