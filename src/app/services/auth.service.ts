@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
     HttpClient,
 } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import {
     BehaviorSubject,
@@ -37,6 +38,7 @@ export class AuthService {
     constructor(
         private cookiesService: CookiesService,
         private http: HttpClient,
+        private router: Router,
     ) {
         const jwtPayload = this.getJwtPayload();
         this.currentUserSubject$ = new BehaviorSubject<IJwtPayload>(jwtPayload);
@@ -138,6 +140,16 @@ export class AuthService {
     }
 
     public getToken = (): string => this.token;
+
+    public logoutForced = () => {
+        const state = {
+            refresh: true,
+        };
+        return this.router.navigate(
+            [CONSTS.PATHS.LOGOUT],
+            {state},
+        );
+    }
 
     private getJwtPayload = (token: string = null): IJwtPayload => {
         this.checkLogin();
