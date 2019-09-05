@@ -26,7 +26,7 @@ import { ROUTES } from 'src/app/app.constants';
     styleUrls: ['./delete-account.component.scss'],
 })
 export class DeleteAccountComponent extends AbstractComponent implements OnInit {
-    private readonly MAX_SUPPLY_POINTS_OF_RESULT_IN_CANT_DELETE_TEMPLATE = 5;
+    public readonly MAX_SUPPLY_POINTS_OF_RESULT_IN_CANT_DELETE_TEMPLATE = 5;
 
     public currentUser: IJwtPayload;
     public globalError: string[] = [];
@@ -59,8 +59,7 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
                     R.pipe(
                         this.sortByNameCaseInsensitive,
                         R.uniqBy(R.prop('name')),
-                    )([{name: 'ahoj'}, {name: 'CCc'}, {name: 'ahoj'}, {name: 'ahoj1'},
-                        {name: 'ahoj1'}, {name: 'aaa'}, {name: 'Bbb'}, {name: 'bqweqwebb'}, ])),
+                    )(supplyPoints)),
             )
             .subscribe(
                 (supplyPoints: any) => {
