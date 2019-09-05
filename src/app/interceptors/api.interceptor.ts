@@ -16,7 +16,6 @@ import {
 
 // own classes
 import { AuthService } from 'src/app/services/auth.service';
-import { CONSTS } from 'src/app/app.constants';
 import { environment } from 'src/environments/environment';
 import { scrollToElementFnc } from 'src/common/utils';
 
@@ -57,7 +56,7 @@ export class ApiInterceptor implements HttpInterceptor {
             .pipe(
                 catchError((error, caught) => {
                     if (error.status === 401) {
-                        this.router.navigate([CONSTS.PATHS.LOGOUT]);
+                        this.authService.logoutForced();
                     } else {
                         scrollToElementFnc('top');
                     }

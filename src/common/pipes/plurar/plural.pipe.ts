@@ -55,6 +55,14 @@ export class PluralPipe implements PipeTransform {
             '=4' : 'měsíce',
             'other' : 'měsíců',
         },
+        'supplyPoint': {
+            '=0' : 'žádné odběrné místo',
+            '=1' : 'odběrné místo',
+            '=2' : 'odběrná místa',
+            '=3' : 'odběrná místa',
+            '=4' : 'odběrná místa',
+            'other' : 'odběrných míst',
+        },
     };
 
     constructor(
