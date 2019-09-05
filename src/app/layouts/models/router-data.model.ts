@@ -7,6 +7,7 @@ export interface ISettings {
     loginType: LoginType;
     hideLeftNavigation?: boolean;
     signUpType: SignType;
+    hideLogin?: boolean;
 }
 
 export enum SignType {

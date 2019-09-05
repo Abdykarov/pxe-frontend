@@ -29,6 +29,7 @@ export const CONSTS = {
         CHANGE_PASSWORD: 'change-password',
         DASHBOARD : 'dashboard',
         DELETE_ACCOUNT: 'delete-account',
+        DELETED_ACCOUNT: 'deleted-account',
         EMPTY : '',
         FORGOTTEN_PASSWORD : 'forgotten-password',
         GAS: 'gas',

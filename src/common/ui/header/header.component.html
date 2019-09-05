@@ -53,6 +53,7 @@
                             (click)="coverageMapAction.emit()">
                         </lnd-button>
                         <lnd-button
+                            *ngIf="!settings.hideLogin"
                             label="Přihlásit"
                             customClass="mr-4"
                             type="link-text"
@@ -93,6 +94,7 @@
                                 Pokrytí
                             </a>
                             <a class="dropdown-item dropdown-item--without-icon"
+                               *ngIf="!settings.hideLogin"
                                (click)="loginAction.emit()">
                                 Přihlásit
                             </a>

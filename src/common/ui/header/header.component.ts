@@ -69,6 +69,7 @@ export class HeaderComponent extends AbstractComponent implements OnInit {
 
     ngOnInit () {
         super.ngOnInit();
+        console.log(this.settings);
         this.resizeEvent$.subscribe(() => {
             if (this.userProfile && this.userProfile.isOpen) {
                 this.userProfile.toggle();
