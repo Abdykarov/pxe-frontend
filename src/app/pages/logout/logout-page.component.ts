@@ -1,8 +1,11 @@
 import {
     ChangeDetectorRef,
     Component,
+    Inject,
     OnInit,
+    PLATFORM_ID,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
@@ -18,8 +21,7 @@ import { defaults } from 'src/common/graphql/resolvers';
 })
 export class LogoutPageComponent extends AbstractComponent implements OnInit {
     public error = false;
-
-    public counter = 0;
+    public refresh = true;
     public visible = false;
 
     constructor(
@@ -27,8 +29,12 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private router: Router,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
+        if (isPlatformBrowser(this.platformId)) {
+            this.refresh = window.history.state.refresh;
+        }
     }
 
     ngOnInit() {
@@ -48,7 +54,9 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
                             });
                             this.router.navigate([CONSTS.PATHS.EMPTY])
                                 .then(() => {
-                                    window.location.reload();
+                                    if (this.refresh) {
+                                        window.location.reload();
+                                    }
                                 });
                         });
                 },

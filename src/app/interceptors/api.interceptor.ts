@@ -57,7 +57,7 @@ export class ApiInterceptor implements HttpInterceptor {
             .pipe(
                 catchError((error, caught) => {
                     if (error.status === 401) {
-                        this.router.navigate([CONSTS.PATHS.LOGOUT]);
+                        this.authService.logoutForced();
                     } else {
                         scrollToElementFnc('top');
                     }
