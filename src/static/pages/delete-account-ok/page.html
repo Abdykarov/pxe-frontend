@@ -27,6 +27,7 @@
                                 <pxe-verification-form
                                     submitLabelText="Zrušit účet"
                                     classRootWrapper="col-12"
+                                    [showSentSmsLabelUnderFirstField]="false"
                                     [phone]="phone"
                                     (customAction)="sendConfirmationSms()">
                                 </pxe-verification-form>
