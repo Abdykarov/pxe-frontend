@@ -75,7 +75,7 @@
         <div *ngIf="supplyPoints !== null"
               class="col-12 col-xl-10 offset-xl-1">
             <div class="page-box">
-                <ng-container *ngTemplateOutlet="this.supplyPoints.length === 0 ?
+                <ng-container *ngTemplateOutlet="this.supplyPoints.length !== 1 ?
                     canBeDeletedTemplate : cantBeDeletedTemplate"></ng-container>
             </div>a
         </div>
