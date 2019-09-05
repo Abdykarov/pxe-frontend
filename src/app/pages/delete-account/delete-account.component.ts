@@ -26,6 +26,8 @@ import { ROUTES } from 'src/app/app.constants';
     styleUrls: ['./delete-account.component.scss'],
 })
 export class DeleteAccountComponent extends AbstractComponent implements OnInit {
+    private readonly MAX_SUPPLY_POINTS_OF_RESULT_IN_CANT_DELETE_TEMPLATE = 5;
+
     public currentUser: IJwtPayload;
     public globalError: string[] = [];
     public loading = true;
@@ -46,8 +48,7 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
         if (!this.currentUser.phoneNumber) {
             this.router.navigate([ROUTES.ROUTER_USER_PROFILE]);
         }
-        this.supplyService.findSupplyPointsByContractStatus(null,
-            [
+        this.supplyService.findSupplyPointsByContractStatus([
                 ContractStatus.CONCLUDED,
                 ContractStatus.WAITING_FOR_PAYMENT,
             ])
@@ -58,8 +59,8 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
                     R.pipe(
                         this.sortByNameCaseInsensitive,
                         R.uniqBy(R.prop('name')),
-                        R.slice(0, 5),
-                    )(supplyPoints)),
+                    )([{name: 'ahoj'}, {name: 'CCc'}, {name: 'ahoj'}, {name: 'ahoj1'},
+                        {name: 'ahoj1'}, {name: 'aaa'}, {name: 'Bbb'}, {name: 'bqweqwebb'}, ])),
             )
             .subscribe(
                 (supplyPoints: any) => {
@@ -76,7 +77,7 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
             );
     }
 
-    public sortByNameCaseInsensitive = (supplyPoints: ISupplyPoint[]) => R.sortBy(R.compose(R.toLower, R.prop('name')))(supplyPoints);
+    private sortByNameCaseInsensitive = (supplyPoints: ISupplyPoint[]) => R.sortBy(R.compose(R.toLower, R.prop('name')))(supplyPoints);
 
     public sendConfirmationSms = () => {
         this.smsSent = true;
