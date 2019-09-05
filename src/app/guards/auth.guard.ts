@@ -11,7 +11,6 @@ import * as R from 'ramda';
 import { Observable } from 'rxjs';
 
 import { AuthService } from 'src/app/services/auth.service';
-import { CONSTS } from 'src/app/app.constants';
 
 @Injectable({
     providedIn: 'root',
@@ -30,7 +29,7 @@ export class AuthGuard implements CanActivateChild {
         this.authService.checkLogin();
 
         if (!this.authService.isLogged()) {
-            this.router.navigate([CONSTS.PATHS.LOGOUT]);
+            this.authService.logoutForced();
             return false;
         }
 

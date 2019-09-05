@@ -63,7 +63,7 @@
             *ngIf="form.controls.supplierId.status !== 'DISABLED'"
             [bindValue]="null"
             [error]="formError.supplierId || form.controls.supplierId.errors"
-            label="Dodavatel"
+            label="Stávající dodavatel"
             [options]="suppliers && suppliers[form.controls.commodityType.value]"
             [parentForm]="form"
             [selectName]="'supplierId'"
@@ -219,7 +219,7 @@
         </label>
         <lnd-form-field
             [id]="'ownTerminate'"
-            label="Vlastní výpověď"
+            label="Vypovím si sám (sama)"
             [type]="'CHECKBOX'"
             [customFormGroupClass]="'mb-5'"
             [formControl]="form.controls.ownTerminate"
@@ -255,7 +255,7 @@
         </lnd-datepicker>
         <pxe-field-wrapper
                 *ngIf="form.controls.timeToContractEnd.status !== 'DISABLED' && form.controls.timeToContractEndPeriodId.status !== 'DISABLED'"
-                label="Výpovědní lhůta"
+                label="Jak dlouhou máte výpovědní lhůtu?"
                 labelFor="timeToContractEnd"
                 [error]="((form.controls.timeToContractEnd.touched || formError.timeToContractEnd) && (formError.timeToContractEnd || form.controls.timeToContractEnd.errors)) ||
                          ((form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId) && (formError.timeToContractEndPeriodId || form.controls.timeToContractEndPeriodId.errors))"
@@ -270,7 +270,7 @@
                         [error]="formError.timeToContractEnd || form.controls.timeToContractEnd.errors"
                         [formControl]="form.controls.timeToContractEnd"
                         [id]="'timeToContractEnd'"
-                        label="Výpovědní lhůta"
+                        label="Jak dlouhou máte výpovědní lhůtu?"
                         [success]="form.controls.timeToContractEnd.valid && (form.controls.timeToContractEnd.touched || formError.timeToContractEnd)"
                         [touched]="form.controls.timeToContractEnd.touched || formError.timeToContractEnd"
                         [validationMessages]="formFields.validationMessages.timeToContractEnd"

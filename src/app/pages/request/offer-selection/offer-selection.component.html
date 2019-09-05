@@ -1,9 +1,14 @@
 <ng-template #emptyOffers>
     <lnd-info-banner
-        bannerTitle="Litujeme pro Vaše odběrné místo neexistuje žádná nabídka."
-        [showButton]="false"
+        bannerTitle="Litujeme, ale pro zadané odběrné místo nemáme nyní vhodnou nabídku."
+        bannerDescription="Zadali jste správně informace ohledně Vašeho odběrného místa?"
+        buttonLabel="Zkontrolovat zadané informace"
+        (buttonAction)="navigateRequestService.backStepAction(supplyPoint, PREVIOUS_PROGRESS_STATUS)"
     >
     </lnd-info-banner>
+</ng-template>
+<ng-template #noOfferTextTemplate>
+    Neexistuje vhodná nabídka
 </ng-template>
 
 <pxe-layout-container pageTitle="Výběr nabídky">
@@ -37,30 +42,34 @@
         *ngIf="supplyPointOffers">
         <div class="col-12 col-xl-10 offset-xl-1">
             <div class="row align-items-center mb-3">
-                <div class="col-12 mb-5 col-md-3 mb-md-0 text-center text-md-left">
+                <div *ngIf="supplyPointOffers && supplyPointOffers.length"
+                     class="col-12 mb-5 col-md-3 mb-md-0 text-center text-md-left">
                     <lnd-button
                         label="Krok zpět"
                         type="secondary"
-                        (action)="navigateRequestService.backStepAction(supplyPoint, PREVIOUS_PROGRESS_STATUS )">
+                        (action)="navigateRequestService.backStepAction(supplyPoint, PREVIOUS_PROGRESS_STATUS)">
                     </lnd-button>
                 </div>
-                <div class="col-12 col-md-6 text-center">
+                <div class="col-12 text-center"
+                     [class.col-md-6]="supplyPointOffers && supplyPointOffers.length">
                     <h2 class="mb-0">
-                        Vyberte si nabídku
+                        <ng-container *ngIf="supplyPointOffers && supplyPointOffers.length; else noOfferTextTemplate">
+                            Vyberte si nabídku
+                        </ng-container>
                     </h2>
                 </div>
             </div>
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
-            <div class="supply-points-offer">
-                <ng-container *ngIf="supplyPointOffers.length; else emptyOffers">
+            <ng-container *ngIf="supplyPointOffers.length; else emptyOffers">
+                <div class="supply-points-offer">
                     <pxe-supply-point-offer
                         (action)="saveContract(supplyPointOffer)"
                         *ngFor="let supplyPointOffer of supplyPointOffers"
                         [supplyPointOffer]="supplyPointOffer">
                     </pxe-supply-point-offer>
-                </ng-container>
-            </div>
+                </div>
+            </ng-container>
         </div>
     </div>
 </pxe-layout-container>
