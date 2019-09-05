@@ -142,6 +142,10 @@ export const staticNavigationConfig: INavigationConfig = [
             'icon': 'component-high',
             'children': [
                 {
+                    'label': 'Account deleted',
+                    'url': '/full/account-deleted',
+                },
+                {
                     'label': 'Contract signing',
                     'url': '/basic/contract-signing',
                 },
