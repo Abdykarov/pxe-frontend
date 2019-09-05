@@ -78,7 +78,6 @@
         [touched]="form.controls.signatoryPosition.touched || formError.signatoryPosition"
         [validationMessages]="formFields.validationMessages.signatoryPosition"
     ></lnd-form-field>
-
     <lnd-form-field
         *ngIf="form.controls.ico.status !== 'DISABLED'"
         [error]="formError.ico || form.controls.ico.errors"
