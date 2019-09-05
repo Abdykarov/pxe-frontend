@@ -81,7 +81,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
         super();
     }
 
-    ngOnInit () {
+    ngOnInit() {
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
                 map(({data}) => data.getSupplyPoint),

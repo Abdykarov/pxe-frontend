@@ -14,7 +14,6 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { onError } from 'apollo-link-error';
 
 import { AuthService } from 'src/app/services/auth.service';
-import { CONSTS } from 'src/app/app.constants';
 import {
     defaults,
     resolvers,
@@ -60,7 +59,7 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
                                     },
                                     () => {
                                         // observer.error(new Error('jwt refresh failed'));
-                                        router.navigate([CONSTS.PATHS.LOGOUT]);
+                                        this.authService.logoutForced();
                                     });
                         } else {
                             observer.error(networkError);
