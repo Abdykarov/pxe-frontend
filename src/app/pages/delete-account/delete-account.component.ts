@@ -11,8 +11,8 @@ import {
     takeUntil,
 } from 'rxjs/operators';
 
-import { AuthService } from 'src/app/services/auth.service';
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from 'src/app/services/auth.service';
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import { IJwtPayload } from 'src/app/services/model/auth.model';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
