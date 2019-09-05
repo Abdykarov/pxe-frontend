@@ -54,7 +54,7 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
     ngOnInit () {
         super.ngOnInit();
 
-        this.supplyService.findSupplyPointsByContractStatus(null, [
+        this.supplyService.findSupplyPointsByContractStatus([
                 ContractStatus.CONCLUDED,
             ])
             .pipe(

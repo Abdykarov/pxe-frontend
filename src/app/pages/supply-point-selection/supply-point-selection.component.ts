@@ -44,8 +44,7 @@ export class SupplyPointSelectionComponent extends AbstractComponent implements 
     }
 
     ngOnInit() {
-        this.supplyService.findSupplyPointsByContractStatus(null,
-            [
+        this.supplyService.findSupplyPointsByContractStatus([
                 ContractStatus.CONCLUDED,
             ])
             .pipe(
