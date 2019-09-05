@@ -13,11 +13,14 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
+import {
+    CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IJwtPayload } from 'src/app/services/model/auth.model';
 import { IUserDetailInput } from 'src/common/graphql/models/user.model';
 import { parseGraphQLErrors } from 'src/common/utils';
-import { ROUTES } from 'src/app/app.constants';
 import { userProfileFormFields } from 'src/common/containers/form/forms/user-profile/user-profile-form.config';
 import { UserService } from 'src/common/graphql/services/user.service';
 
@@ -82,6 +85,9 @@ export class UserProfileComponent extends AbstractComponent {
     }
 
     public redirectToDeleteProfile = () => {
+        this.authService.logoutForced(CONSTS.PATHS.DELETED_ACCOUNT);
+        return;
+
         if (!this.formValues.phoneNumber) {
             this.cancelAccountAction();
             return;

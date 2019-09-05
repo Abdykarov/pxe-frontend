@@ -15,13 +15,15 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { CONSTS } from 'src/app/app.constants';
 import { defaults } from 'src/common/graphql/resolvers';
+import { defaultState } from 'src/app/pages/logout/logout-page.config';
+import { IState } from 'src/app/pages/logout/logout-page.model';
 
 @Component({
     templateUrl: './logout-page.component.html',
 })
 export class LogoutPageComponent extends AbstractComponent implements OnInit {
     public error = false;
-    public refresh = true;
+    public state: IState = defaultState;
     public visible = false;
 
     constructor(
@@ -33,7 +35,7 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
     ) {
         super();
         if (isPlatformBrowser(this.platformId)) {
-            this.refresh = window.history.state.refresh;
+            this.state = window.history.state;
         }
     }
 
@@ -52,9 +54,13 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
                             apolloClient.cache.writeData({
                                 data: defaults,
                             });
-                            this.router.navigate([CONSTS.PATHS.EMPTY])
+                            this.router.navigate(
+                                [
+                                    this.state.finishRoute ?
+                                        this.state.finishRoute : CONSTS.PATHS.EMPTY,
+                                ])
                                 .then(() => {
-                                    if (this.refresh) {
+                                    if (this.state.refresh) {
                                         window.location.reload();
                                     }
                                 });

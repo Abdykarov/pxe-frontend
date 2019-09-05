@@ -141,9 +141,10 @@ export class AuthService {
 
     public getToken = (): string => this.token;
 
-    public logoutForced = () => {
+    public logoutForced = (finishRoute = CONSTS.PATHS.EMPTY) => {
         const state = {
             refresh: true,
+            finishRoute,
         };
         return this.router.navigate(
             [CONSTS.PATHS.LOGOUT],
