@@ -9,7 +9,7 @@ export const isAllRequiredFilled = (supplyPoint: ISupplyPointInput): boolean =>
 
 export const timeToContractEndProlonged = () => {
     return (formGroup: FormGroup) => {
-        const supplyPointInput: ISupplyPointInput = formGroup.getRawValue();
+        const supplyPointInput: ISupplyPointInput = formGroup.value;
         const expirationDateControl = formGroup.controls['expirationDate'];
 
         if (supplyPointInput.contractEndTypeId === CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION &&
