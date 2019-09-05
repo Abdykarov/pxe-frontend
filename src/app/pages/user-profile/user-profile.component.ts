@@ -82,6 +82,13 @@ export class UserProfileComponent extends AbstractComponent {
     }
 
     public redirectToDeleteProfile = () => {
+        if (!this.formValues.phoneNumber) {
+            this.cancelAccountAction();
+            return;
+        }
         this.router.navigate([ROUTES.ROUTER_DELETE_ACCOUNT]);
+    }
+
+    public cancelAccountAction = () => {
     }
 }

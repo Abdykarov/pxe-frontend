@@ -3,7 +3,9 @@ import {
     Component,
     OnInit,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
+import * as R from 'ramda';
 import {
     map,
     takeUntil,
@@ -16,7 +18,6 @@ import { IJwtPayload } from 'src/app/services/model/auth.model';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { Router } from '@angular/router';
 import { ROUTES } from 'src/app/app.constants';
 
 @Component({
@@ -25,7 +26,6 @@ import { ROUTES } from 'src/app/app.constants';
     styleUrls: ['./delete-account.component.scss'],
 })
 export class DeleteAccountComponent extends AbstractComponent implements OnInit {
-    public canBeDeletedAccount = null;
     public currentUser: IJwtPayload;
     public globalError: string[] = [];
     public loading = true;
@@ -43,19 +43,28 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
     }
 
     ngOnInit() {
+        if (!this.currentUser.phoneNumber) {
+            this.router.navigate([ROUTES.ROUTER_USER_PROFILE]);
+        }
         this.supplyService.findSupplyPointsByContractStatus(null,
             [
                 ContractStatus.CONCLUDED,
+                ContractStatus.WAITING_FOR_PAYMENT,
             ])
             .pipe(
                 takeUntil(this.destroy$),
                 map(({data}) =>  data.findSupplyPointsByContractStatus),
+                map((supplyPoints: ISupplyPoint[]) =>
+                    R.pipe(
+                        this.sortByNameCaseInsensitive,
+                        R.uniqBy(R.prop('name')),
+                        R.slice(0, 5),
+                    )(supplyPoints)),
             )
             .subscribe(
-                (supplyPoints: ISupplyPoint[]) => {
+                (supplyPoints: any) => {
                     this.supplyPoints = supplyPoints;
                     this.loading = false;
-                    this.canBeDeletedAccount = supplyPoints.length === 0;
                     this.cd.markForCheck();
                 },
                 error => {
@@ -66,6 +75,8 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
                 },
             );
     }
+
+    public sortByNameCaseInsensitive = (supplyPoints: ISupplyPoint[]) => R.sortBy(R.compose(R.toLower, R.prop('name')))(supplyPoints);
 
     public sendConfirmationSms = () => {
         this.smsSent = true;
