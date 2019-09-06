@@ -9,7 +9,6 @@ import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
-import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ApolloService } from 'src/app/services/apollo-service';
@@ -46,9 +45,6 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
 
     public logout = () => {
         this.authService.logout()
-            .pipe(
-                takeUntil(this.destroy$),
-            )
             .subscribe(
                 () => {
                     this.apolloService.resetStore().then(() => {

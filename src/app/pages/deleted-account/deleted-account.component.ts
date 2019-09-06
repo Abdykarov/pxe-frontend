@@ -5,7 +5,6 @@ import {
 import { Location } from '@angular/common';
 
 import { Apollo } from 'apollo-angular';
-import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ApolloService } from 'src/app/services/apollo-service';
@@ -30,9 +29,6 @@ export class DeletedAccountComponent extends AbstractComponent implements OnInit
         super.ngOnInit();
         this.location.go(CONSTS.PATHS.EMPTY);
         this.authService.logout()
-            .pipe(
-                takeUntil(this.destroy$),
-            )
             .subscribe(
                 () => {
                     this.apolloService.resetStore();
