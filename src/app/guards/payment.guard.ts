@@ -11,11 +11,8 @@ import * as R from 'ramda';
 import { Observable } from 'rxjs';
 
 import { AuthService } from 'src/app/services/auth.service';
-import {
-    CONSTS,
-    ROUTES,
-} from 'src/app/app.constants';
 import { UserStatus } from 'src/app/services/model/auth.model';
+import { ROUTES } from 'src/app/app.constants';
 
 @Injectable({
     providedIn: 'root',
@@ -47,7 +44,7 @@ export class PaymentGuard implements CanActivateChild {
                     };
                     this.router.navigate([ROUTES.ROUTER_REQUEST_PAYMENT], extras);
                 } else {
-                    this.router.navigate([CONSTS.PATHS.LOGOUT]);
+                    this.authService.logoutForced();
                 }
                 return false;
         }
