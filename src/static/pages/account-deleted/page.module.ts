@@ -31,7 +31,6 @@ export const accountDeletedPageRoutes: Routes = [
         component: AccountDeletedComponent,
         data: {
             isPublic: true,
-            hideLogin: true,
             signUpType: SignType.STATIC,
         },
     },

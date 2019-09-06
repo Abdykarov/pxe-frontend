@@ -39,7 +39,6 @@ const routes = [
                 loadChildren: '../../pages/deleted-account/deleted-account.module#DeletedAccountModule',
                 data: {
                     isPublic: true,
-                    hideLogin: true,
                     signUpType: SignType.NAVIGATE,
                 },
             },
