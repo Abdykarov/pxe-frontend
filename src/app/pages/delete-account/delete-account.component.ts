@@ -42,12 +42,13 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
     ) {
         super();
         this.currentUser = this.authService.currentUserValue;
-        if (!this.currentUser.phoneNumber) {
-            this.router.navigate([ROUTES.ROUTER_USER_PROFILE]);
-        }
     }
 
     ngOnInit() {
+        if (!this.currentUser.phoneNumber) {
+            this.router.navigate([ROUTES.ROUTER_USER_PROFILE]);
+        }
+
         this.supplyService.findSupplyPointsByContractStatus([
                 ContractStatus.CONCLUDED,
                 ContractStatus.WAITING_FOR_PAYMENT,
@@ -62,7 +63,7 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
                     )(supplyPoints)),
             )
             .subscribe(
-                (supplyPoints: any) => {
+                (supplyPoints: ISupplyPoint[]) => {
                     this.supplyPoints = supplyPoints;
                     this.loading = false;
                     this.cd.markForCheck();

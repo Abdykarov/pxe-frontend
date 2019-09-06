@@ -88,7 +88,6 @@ export class UserProfileComponent extends AbstractComponent {
         // todo delete acc
         this.router.navigate([CONSTS.PATHS.DELETED_ACCOUNT]);
         return;
-
         if (!this.formValues.phoneNumber) {
             this.cancelAccountAction();
             return;

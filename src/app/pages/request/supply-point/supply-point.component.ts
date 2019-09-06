@@ -173,7 +173,6 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                             queryParams: {
                                 supplyPointId,
                             },
-                            skipLocationChange: true,
                         });
                 },
                 (error) => {
