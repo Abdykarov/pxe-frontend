@@ -84,8 +84,9 @@ export class UserProfileComponent extends AbstractComponent {
             );
     }
 
-    public redirectToDeleteProfile = () => {
-        this.authService.logoutForced(CONSTS.PATHS.DELETED_ACCOUNT);
+    public deleteProfileAction = () => {
+        // todo delete acc
+        this.router.navigate([CONSTS.PATHS.DELETED_ACCOUNT]);
         return;
 
         if (!this.formValues.phoneNumber) {

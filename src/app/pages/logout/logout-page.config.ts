@@ -1,5 +1,5 @@
-import { IState } from 'src/app/pages/logout/logout-page.model';
+import { IStateRouter } from 'src/app/pages/logout/logout-page.model';
 
-export const defaultState: IState = {
+export const defaultState: IStateRouter = {
     refresh: true,
 };

@@ -1,4 +1,3 @@
-export interface IState {
+export interface IStateRouter {
     refresh: boolean;
-    finishRoute?: string;
 }

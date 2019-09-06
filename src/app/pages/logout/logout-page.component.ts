@@ -9,25 +9,26 @@ import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
-import { first } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { ApolloService } from 'src/app/services/apollo-service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CONSTS } from 'src/app/app.constants';
-import { defaults } from 'src/common/graphql/resolvers';
 import { defaultState } from 'src/app/pages/logout/logout-page.config';
-import { IState } from 'src/app/pages/logout/logout-page.model';
+import { IStateRouter } from 'src/app/pages/logout/logout-page.model';
 
 @Component({
     templateUrl: './logout-page.component.html',
 })
 export class LogoutPageComponent extends AbstractComponent implements OnInit {
     public error = false;
-    public state: IState = defaultState;
+    public state: IStateRouter = defaultState;
     public visible = false;
 
     constructor(
         private apollo: Apollo,
+        private apolloService: ApolloService,
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private router: Router,
@@ -45,26 +46,20 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
 
     public logout = () => {
         this.authService.logout()
-            .pipe(first())
+            .pipe(
+                takeUntil(this.destroy$),
+            )
             .subscribe(
                 () => {
-                    const apolloClient = this.apollo.getClient();
-                    apolloClient.resetStore()
-                        .then(() => {
-                            apolloClient.cache.writeData({
-                                data: defaults,
+                    this.apolloService.resetStore().then(() => {
+                        this.router.navigate([CONSTS.PATHS.EMPTY])
+                            .then(() => {
+                                if (this.state.refresh) {
+                                    window.location.reload();
+                                }
                             });
-                            this.router.navigate(
-                                [
-                                    this.state.finishRoute ?
-                                        this.state.finishRoute : CONSTS.PATHS.EMPTY,
-                                ])
-                                .then(() => {
-                                    if (this.state.refresh) {
-                                        window.location.reload();
-                                    }
-                                });
-                        });
+
+                    });
                 },
                 () => {
                     this.error = true;
