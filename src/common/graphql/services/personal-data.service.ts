@@ -107,6 +107,7 @@ export class PersonalDataService {
             email: personalData.email,
             phone: personalData.phone,
             signatoryName: personalData.signatoryName ? personalData.signatoryName : '',
+            signatorySurname: personalData.signatorySurname ? personalData.signatorySurname : '',
             signatoryPosition: personalData.signatoryPosition ? personalData.signatoryPosition : '',
             bankAccountNumber: personalData.bankAccountNumber,
             bankCode: personalData.bankCode,

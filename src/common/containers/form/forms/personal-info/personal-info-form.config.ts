@@ -110,6 +110,16 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
+                Validators.maxLength(CONSTS.MAX_LENGTH_NAME),
+                CustomValidators.firstName,
+            ],
+        ],
+        signatorySurname: [
+            null,
+            [
+                Validators.required,
+                Validators.maxLength(CONSTS.MAX_LENGTH_NAME),
+                CustomValidators.lastName,
             ],
         ],
     },
@@ -170,7 +180,14 @@ export const formFields: IForm = {
             required: errorFieldMessages.signatoryPosition.required,
         },
         signatoryName: {
-            required: errorFieldMessages.signatoryName.required,
+            required: errorFieldMessages.fullName.requiredSignatoryFirstName,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.fullName.maxlengthFirstName,
+            firstName: errorFieldMessages.fullName.patternFirstName,
+        },
+        signatorySurname: {
+            required: errorFieldMessages.fullName.requiredSignatoryLastName,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.fullName.maxlengthLastName,
+            lastName: errorFieldMessages.fullName.patternLastName,
         },
         phone: {
             required: errorFieldMessages.phone.requiredMobile,

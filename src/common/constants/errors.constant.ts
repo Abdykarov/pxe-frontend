@@ -116,6 +116,8 @@ export const errorFieldMessages =  {
         requiredPerson: 'Vyplňte své jméno a příjmení.',
         requiredPersonFirstName: 'Vyplňte své jméno.',
         requiredPersonLastName: 'Vyplňte své příjmení.',
+        requiredSignatoryFirstName: 'Vyplňte jméno podepisující osoby.',
+        requiredSignatoryLastName: 'Vyplňte příjmení podepisující osoby.',
         requiredCompany: 'Vyplňte název společnosti.',
         maxlengthFirstName: 'Maximální délka pro jméno je 50 znaků.',
         maxlengthLastName: 'Maximální délka pro příjmení je 50 znaků.',
@@ -199,12 +201,7 @@ export const errorFieldMessages =  {
         invalidPhoneNumberPrefix: `Vyplňte správnou předvolbu pro ČR ${CONSTS.TELEPHONE_PREFIX_CZ}.`,
     },
     signatoryPosition: {
-        // po nacrtku zadan na Moniku
-        required: 'Vyplňte pozici.',
-    },
-    signatoryName: {
-        // po nacrtku zadan na Moniku
-        required: 'Vyplňte jméno.',
+        required: 'Vyplňte funkci ve společnosti podepisující osoby.',
     },
     smsCode: {
         required: 'Vyplňte kód, který vám přišel v SMS.',

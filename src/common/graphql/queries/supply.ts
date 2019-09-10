@@ -124,6 +124,9 @@ export const supplyPointFragment = gql`
                 },
                 personalData {
                     name,
+                    signatoryName,
+                    signatorySurname,
+                    signatoryPosition,
                     birthDate,
                     ico,
                     dic,

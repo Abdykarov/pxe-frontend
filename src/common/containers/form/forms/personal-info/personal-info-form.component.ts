@@ -112,6 +112,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         let bankCode = null;
         let signatoryPosition = null;
         let signatoryName = null;
+        let signatorySurname = null;
         let phone = null;
         let email = null;
         let depositPaymentTypeId = null;
@@ -125,6 +126,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             }
             signatoryPosition = this.formValues.signatoryPosition;
             signatoryName = this.formValues.signatoryName;
+            signatorySurname = this.formValues.signatorySurname;
             ico = this.formValues.ico;
             dic = this.formValues.dic;
             onlyAddress1 = this.formValues.address2;
@@ -151,6 +153,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         this.form.controls['deposit'].setValue(deposit);
         this.form.controls['address1'].setValue(address1);
         this.form.controls['signatoryName'].setValue(signatoryName);
+        this.form.controls['signatorySurname'].setValue(signatorySurname);
         this.form.controls['signatoryPosition'].setValue(signatoryPosition);
         if (this.form.controls['onlyAddress1'].value) {
             this.form.controls['address2'].setValue(address2);
@@ -164,12 +167,14 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         if (this.isIndividual) {
             this.setDisableField('signatoryPosition');
             this.setDisableField('signatoryName');
+            this.setDisableField('signatorySurname');
             this.setDisableField('ico');
             this.setDisableField('dic');
             this.setEnableField('birthDate');
         } else {
             this.setEnableField('signatoryPosition');
             this.setEnableField('signatoryName');
+            this.setEnableField('signatorySurname');
             this.setEnableField('ico');
             this.setEnableField('dic');
             this.setDisableField('birthDate');
