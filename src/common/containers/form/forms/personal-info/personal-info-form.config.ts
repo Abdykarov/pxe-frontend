@@ -4,7 +4,6 @@ import { CONSTS } from 'src/app/app.constants';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
-import { IOption } from 'src/common/ui/forms/models/option.model';
 
 export const formFields: IForm = {
     controls: {
@@ -77,6 +76,12 @@ export const formFields: IForm = {
                 CustomValidators.phoneNumberPrefix,
             ],
         ],
+        signatoryPosition: [
+            null,
+            [
+                Validators.required,
+            ],
+        ],
         email: [
             '',
             [
@@ -100,6 +105,22 @@ export const formFields: IForm = {
         ],
         onlyAddress1: [
             false,
+        ],
+        signatoryName: [
+            null,
+            [
+                Validators.required,
+                Validators.maxLength(CONSTS.MAX_LENGTH_NAME),
+                CustomValidators.firstName,
+            ],
+        ],
+        signatorySurname: [
+            null,
+            [
+                Validators.required,
+                Validators.maxLength(CONSTS.MAX_LENGTH_NAME),
+                CustomValidators.lastName,
+            ],
         ],
     },
     validationMessages: {
@@ -154,6 +175,19 @@ export const formFields: IForm = {
         bankCode: {
             required: errorFieldMessages.bankCode.required,
             bankCode: errorFieldMessages.bankCode.bankCode,
+        },
+        signatoryPosition: {
+            required: errorFieldMessages.signatoryPosition.required,
+        },
+        signatoryName: {
+            required: errorFieldMessages.fullName.requiredSignatoryFirstName,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.fullName.maxlengthFirstName,
+            firstName: errorFieldMessages.fullName.patternFirstName,
+        },
+        signatorySurname: {
+            required: errorFieldMessages.fullName.requiredSignatoryLastName,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.fullName.maxlengthLastName,
+            lastName: errorFieldMessages.fullName.patternLastName,
         },
         phone: {
             required: errorFieldMessages.phone.requiredMobile,

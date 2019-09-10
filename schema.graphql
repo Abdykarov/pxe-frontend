@@ -132,6 +132,9 @@ type PersonalData {
     ico: String
     name: String!
     phone: String!
+    signatoryName: String
+    signatoryPosition: String
+    signatorySurname: String
 }
 
 "The Root Query for the application"
@@ -368,6 +371,9 @@ input PersonalDataInput {
     ico: String
     name: String!
     phone: String!
+    signatoryName: String
+    signatoryPosition: String
+    signatorySurname: String
 }
 
 input QRCodeSetting {
