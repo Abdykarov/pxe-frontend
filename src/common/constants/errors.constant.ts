@@ -67,7 +67,8 @@ export const errorFieldMessages =  {
     },
     consent: {
         signUp: {
-            required: 'Nezapomeňte na souhlas se zpracováním osobních údajů.',
+            required: 'Nezapomeňte na souhlas s Všeobecnými obchodními podmínkami „PARC 4 U“ a na vzetí na ' +
+                'vědomí informací o Ochraně osobních údajů.',
         },
         newsSubscription: {
             required: 'Nezapomeňte na souhlas se zásadami bezpečnosti.',
@@ -109,7 +110,7 @@ export const errorFieldMessages =  {
     expirationDate: {
         requiredGas: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr plynu.',
         requiredPower: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr elektřiny.',
-        isInTerminateInterval: 'Vaši aktuální smlouvu už máte automaticky prodlouženou.',
+        isInTerminateInterval: 'Vložte správné datum.',
     },
     fullName: {
         requiredPerson: 'Vyplňte své jméno a příjmení.',

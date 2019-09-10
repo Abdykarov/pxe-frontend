@@ -13,20 +13,35 @@
                         <div class="supply-point-overview__product-holder">
                             <span class="supply-point-overview__type">Elektřina (MWh)</span>
                             <span class="supply-point-overview__value">{{powerPlacesConsumptionSum | number: '1.0-3'}}</span>
-                            <span class="supply-point-overview__quantity">{{powerPlacesCount}} OM</span>
+                            <span class="supply-point-overview__quantity">
+                                <ng-container *ngIf="powerPlacesCount">
+                                    {{powerPlacesCount}}
+                                </ng-container>
+                                {{powerPlacesCount | plural:'supplyPoint'}}
+                            </span>
                         </div>
                     </div>
                     <div class="col-12 col-md-auto">
                         <div class="supply-point-overview__product-holder">
                             <span class="supply-point-overview__type">Plyn (MWh)</span>
                             <span class="supply-point-overview__value">{{gasPlacesConsumptionSum | number: '1.0-3'}}</span>
-                            <span class="supply-point-overview__quantity">{{gasPlacesCount}} OM</span>
+                            <span class="supply-point-overview__quantity">
+                                <ng-container *ngIf="gasPlacesCount">
+                                    {{gasPlacesCount}}
+                                </ng-container>
+                                {{gasPlacesCount | plural:'supplyPoint'}}
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-xl-9 offset-xl-3">
+            <div *ngIf="concludedPlacesCount"
+                 class="col-12 col-xl-9 offset-xl-3">
                 <a (click)="supplyPointsListAction.emit($event)">Seznam Odběrných míst</a>
+            </div>
+            <div *ngIf="notConcludedPlacesCount"
+                 class="col-12 col-xl-9 offset-xl-3">
+                <a (click)="requestListAction.emit($event)">Seznam rozpracovaných žádostí</a>
             </div>
         </div>
         <div *ngIf="supplyPointsEndingCount !== 0"

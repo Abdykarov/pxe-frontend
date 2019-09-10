@@ -172,6 +172,7 @@ export interface ISelectedOffer {
     systemServicesRegulatedPrice: number;
     totalPrice: number;
     unit: string;
+    prepayment: number;
     __typename?: string;
 }
 
@@ -192,6 +193,8 @@ export interface ISupplyPointFormData {
 }
 
 export interface ISupplyPointStatistic {
+    concludedCount: number;
+    concludedItems: ISupplyPointStatisticView[];
     gasAnnualConsumptionSum: number;
     gasCount: number;
     notConcludedCount: number;

@@ -85,7 +85,6 @@ export const supplyPointFragment = gql`
                 deliveryTo,
                 offerValidity,
                 offer{
-                    id,
                     supplier{
                         id,
                         name,
@@ -121,6 +120,7 @@ export const supplyPointFragment = gql`
                     systemServicesRegulatedPrice,
                     totalPrice,
                     unit,
+                    prepayment,
                 },
                 personalData {
                     name,
@@ -309,6 +309,13 @@ export const computeAndGetSupplyPointStatisticsQuery = gql`
                 commodityType,
                 progressStatus,
             },
+            concludedCount,
+            concludedItems {
+                id,
+                name,
+                commodityType,
+                progressStatus,
+            }
         }
     }
 `;

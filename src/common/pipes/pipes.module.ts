@@ -17,6 +17,7 @@ import { NewSupplyWillBeginPipe } from './new-supply-will-begin/new-supply-will-
 import { PathValuePipe } from './path-value/path-value.pipe';
 import { PluralPipe } from './plurar/plural.pipe';
 import { ProgressStatusPipe } from './step-of-supply-point/step-of-supply-point.pipe';
+import { SumPipe } from 'src/common/pipes/sum/sum.pipe';
 import { ValuesPipe } from './values/values.pipe';
 
 @NgModule({
@@ -36,6 +37,7 @@ import { ValuesPipe } from './values/values.pipe';
         PathValuePipe,
         PluralPipe,
         ProgressStatusPipe,
+        SumPipe,
         ValuesPipe,
     ],
     exports: [
@@ -54,6 +56,7 @@ import { ValuesPipe } from './values/values.pipe';
         PathValuePipe,
         PluralPipe,
         ProgressStatusPipe,
+        SumPipe,
         ValuesPipe,
     ],
     providers: [
@@ -73,6 +76,7 @@ import { ValuesPipe } from './values/values.pipe';
         PathValuePipe,
         PluralPipe,
         ProgressStatusPipe,
+        SumPipe,
         ValuesPipe,
     ],
 })

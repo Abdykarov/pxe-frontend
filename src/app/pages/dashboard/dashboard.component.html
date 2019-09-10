@@ -1,4 +1,4 @@
-<pxe-layout-container pageTitle="Dashboard">
+<pxe-layout-container pageTitle="Nástěnka">
     <lnd-placeloader [loading]="!globalError.length && loadingData"></lnd-placeloader>
     <div class="row">
         <div class="col-12 col-md-12">
@@ -35,12 +35,15 @@
         <div class="col-md-6">
             <h2>Odběrná místa</h2>
             <pxe-supply-points-summary
+                [concludedPlacesCount]="supplyPointStatistic.concludedCount"
+                [notConcludedPlacesCount]="supplyPointStatistic.notConcludedCount"
                 [powerPlacesCount]="supplyPointStatistic.powerCount"
                 [powerPlacesConsumptionSum]="supplyPointStatistic.powerAnnualConsumptionSum"
                 [gasPlacesCount]="supplyPointStatistic.gasCount"
                 [gasPlacesConsumptionSum]="supplyPointStatistic.gasAnnualConsumptionSum"
                 [supplyPointsEndingCount]="supplyPointStatistic.showDeliveryCount"
                 [supplyPointsEndingData]="supplyPointStatistic.showDeliveryItems"
+                (requestListAction)="navigateToRequests()"
                 (newSupplierAction)="supplierAction(supplyPointStatistic.showDeliveryItems)"
                 (supplyPointsListAction)="navigateToSupplyPoints()">
             </pxe-supply-points-summary>

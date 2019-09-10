@@ -16,11 +16,9 @@ import {
     styleUrls: ['./supply-points-summary.component.scss'],
 })
 export class SupplyPointsSummaryComponent {
-    @Input()
-    public powerPlacesConsumptionSum = 0;
 
     @Input()
-    public powerPlacesCount = 0;
+    public concludedPlacesCount = 0;
 
     @Input()
     public gasPlacesConsumptionSum = 0;
@@ -29,7 +27,19 @@ export class SupplyPointsSummaryComponent {
     public gasPlacesCount = 0;
 
     @Input()
+    public notConcludedPlacesCount = 0;
+
+    @Input()
+    public powerPlacesConsumptionSum = 0;
+
+    @Input()
+    public powerPlacesCount = 0;
+
+    @Input()
     public supplyPointsEndingCount = 0;
+
+    @Output()
+    public requestListAction: EventEmitter<any> = new EventEmitter();
 
     @Input()
     public supplyPointsEndingData: ISupplyPointStatisticView[];
