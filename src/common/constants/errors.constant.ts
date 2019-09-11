@@ -119,10 +119,10 @@ export const errorFieldMessages =  {
         requiredSignatoryFirstName: 'Vyplňte jméno podepisující osoby.',
         requiredSignatoryLastName: 'Vyplňte příjmení podepisující osoby.',
         requiredCompany: 'Vyplňte název společnosti.',
-        maxlengthFirstName: 'Maximální délka pro jméno je 50 znaků.',
-        maxlengthLastName: 'Maximální délka pro příjmení je 50 znaků.',
-        patternFirstName: 'Jméno může obsahovat pouze písmena a mezery.',
-        patternLastName: 'Příjmení může obsahovat pouze písmena a pomlčku.',
+        maxlengthFirstName: 'Použít můžete maximálně 50 znaků.',
+        maxlengthLastName: 'Použít můžete maximálně 50 znaků.',
+        patternFirstName: 'Použít můžete pouze písmena a mezery.',
+        patternLastName: 'Použít můžete pouze písmena a pomlčky.',
     },
     ico: {
         required: 'Vyplňte své IČO.',
@@ -183,7 +183,7 @@ export const errorFieldMessages =  {
     },
     password: {
         required: 'Vyplňte heslo.',
-        currentRequired: 'Vyplňte heslo.',
+        currentRequired: 'Vyplňte své současné heslo.',
         pattern: '	Vaše heslo musí mít minimálně 8 písmen, musí obsahovat malá a velká ' +
             'písmena, aspoň jednu číslici a aspoň jeden speciální znak jako &_*+/#\ apod.',
         fieldsMustMatch: 'Musíte vyplnit stejná hesla.',
@@ -201,8 +201,8 @@ export const errorFieldMessages =  {
         invalidPhoneNumberPrefix: `Vyplňte správnou předvolbu pro ČR ${CONSTS.TELEPHONE_PREFIX_CZ}.`,
     },
     signatoryPosition: {
-        required: 'Vyplňte funkci ve společnosti podepisující osoby.',
-        maxlengthSignatoryPosition: 'Maximální délka pro funkci ve společnosti podepisující osoby je 80 znaků.',
+        required: 'Vyplňte funkci, kterou má ve společnosti podepisující osoba.',
+        maxlengthSignatoryPosition: 'Použít můžete maximálně 80 znaků.',
     },
     smsCode: {
         required: 'Vyplňte kód, který vám přišel v SMS.',
