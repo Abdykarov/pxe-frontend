@@ -202,6 +202,7 @@ export const errorFieldMessages =  {
     },
     signatoryPosition: {
         required: 'Vyplňte funkci ve společnosti podepisující osoby.',
+        maxlengthSignatoryPosition: 'Maximální délka pro funkci ve společnosti podepisující osoby je 80 znaků.',
     },
     smsCode: {
         required: 'Vyplňte kód, který vám přišel v SMS.',
