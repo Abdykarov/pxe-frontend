@@ -80,6 +80,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
+                Validators.maxLength(CONSTS.MAX_LENGTH_POSITION),
             ],
         ],
         email: [
@@ -178,6 +179,7 @@ export const formFields: IForm = {
         },
         signatoryPosition: {
             required: errorFieldMessages.signatoryPosition.required,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.signatoryPosition.maxlengthSignatoryPosition,
         },
         signatoryName: {
             required: errorFieldMessages.fullName.requiredSignatoryFirstName,
