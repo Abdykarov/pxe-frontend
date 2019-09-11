@@ -85,13 +85,13 @@ export class UserProfileComponent extends AbstractComponent {
     }
 
     public deleteProfileAction = () => {
-        // todo delete acc
-        this.router.navigate([CONSTS.PATHS.DELETED_ACCOUNT]);
-        return;
-        if (!this.formValues.phoneNumber) {
-            this.cancelAccountAction();
-            return;
-        }
+        // // todo delete acc
+        // this.router.navigate([CONSTS.PATHS.DELETED_ACCOUNT]);
+        // return;
+        // if (!this.formValues.phoneNumber) {
+        //     this.cancelAccountAction();
+        //     return;
+        // }
         this.router.navigate([ROUTES.ROUTER_DELETE_ACCOUNT]);
     }
 

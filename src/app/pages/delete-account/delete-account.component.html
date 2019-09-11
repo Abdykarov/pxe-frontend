@@ -1,43 +1,48 @@
 <ng-template #canBeDeletedTemplate>
     <div class="col-12 mb-3">
-        Mrzí nás, že PARC opouštíte, ale bránit vám v tom nemůžeme.
-        <br><br>
-        Zrušení účtu a smazání veškerých svých dat v PARCu provedete ověřovacím SMS kódem.
-        <br><br>
+        <p [class.mb-3]="currentUser.phoneNumber">Mrzí nás, že PARC opouštíte, ale bránit vám v tom nemůžeme.</p>
+        <p *ngIf="currentUser.phoneNumber">Zrušení účtu a smazání veškerých svých dat v PARCu provedete ověřovacím SMS kódem.</p>
     </div>
     <div class="col-12">
         <div class="d-flex">
-            <div class="mr-auto p-1 mt-3">
+            <div class="mr-auto">
                 <lnd-button
                     label="Zůstat v PARCu"
                     type="link"
                     (click)="redirectToUserProfile()">
                 </lnd-button>
             </div>
-            <div class="p-1">
+            <div>
                 <pxe-verification-form
+                    *ngIf="currentUser.phoneNumber"
                     submitLabelText="Zrušit účet"
                     classRootWrapper="col-12"
+                    [formLoading]="formLoading"
                     [globalError]="globalError"
                     [smsSent]="smsSent"
                     [phone]="currentUser.phoneNumber"
                     [showSentSmsLabelUnderFirstField]="false"
-                    (submitAction)="cancelAccountAction()"
-                    (customAction)="sendConfirmationSms()">
-                </pxe-verification-form>
+                    (submitAction)="submitVerification()"
+                    (customAction)="sendConfirmationSms()"
+                ></pxe-verification-form>
+                <ng-container *ngIf="!currentUser.phoneNumber">
+                    <lnd-button
+                        label="Zrušit účet"
+                        (action)="submitVerification()"
+                        [isDisabled]="formLoading"
+                        type="primary"
+                    ></lnd-button>
+                </ng-container>
             </div>
         </div>
     </div>
 </ng-template>
-
 <ng-template #cantBeDeletedTemplate>
     <div class="col-12 mb-3">
-        Mrzí nás, že PARC opouštíte, ale bránit vám v tom nemůžeme.
-        <br><br>
-        K dnešnímu dni u nás máte aktivní smlouvy na dodávku energií, které je potřeba, před zrušením účtu, vypovědět.
-        <br><br>
-        <ul>
-            <li *ngFor="let supplyPoint of supplyPoints | slice:0:MAX_SUPPLY_POINTS_OF_RESULT_IN_CANT_DELETE_TEMPLATE ">
+        <p class="mb-3">Mrzí nás, že PARC opouštíte, ale bránit vám v tom nemůžeme.</p>
+        <p class="mb-3">K dnešnímu dni u nás máte aktivní smlouvy na dodávku energií, které je potřeba, před zrušením účtu, vypovědět.</p>
+        <ul class="check-list check-list--less-offset">
+            <li *ngFor="let supplyPoint of supplyPoints | slice:0:MAX_SUPPLY_POINTS_OF_RESULT_IN_CANT_DELETE_TEMPLATE">
                 {{supplyPoint.name}}
             </li>
             <li *ngIf="supplyPoints.length > MAX_SUPPLY_POINTS_OF_RESULT_IN_CANT_DELETE_TEMPLATE">a další</li>
@@ -60,7 +65,6 @@
         </div>
     </div>
 </ng-template>
-
 <pxe-layout-container pageTitle="Zrušení uživatelského účtu">
     <lnd-placeloader [loading]="loading && !globalError.length"></lnd-placeloader>
     <div class="row">
