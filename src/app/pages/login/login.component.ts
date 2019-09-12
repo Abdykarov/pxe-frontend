@@ -69,7 +69,8 @@ export class LoginComponent extends AbstractComponent {
             )
             .subscribe(() => {
                 this.state = ILoginState.LOGIN;
-                this.globalError = [];
+                this.resetErrorsAndLoading();
+                this.passwordWasSent = false;
             });
     }
 
