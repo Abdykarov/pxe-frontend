@@ -136,6 +136,9 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     public rows = 3;
 
     @Input()
+    public showErrorMessage = true;
+
+    @Input()
     public subtext?: string;
 
     @Input()

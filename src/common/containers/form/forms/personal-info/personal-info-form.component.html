@@ -59,6 +59,7 @@
     >
     </lnd-datepicker>
     <pxe-field-wrapper
+            *ngIf="form.controls.signatoryName.status !== 'DISABLED' && form.controls.signatorySurname.status !== 'DISABLED'"
             label="Jméno a příjmení podepisující osoby"
             labelFor="signatoryName"
             [error]="((form.controls.signatoryName.touched || formError.signatoryName) && (formError.signatoryName || form.controls.signatoryName.errors)) ||
@@ -73,6 +74,7 @@
                     [formControl]="form.controls.signatoryName"
                     [id]="'signatoryName'"
                     label="Jméno podepisující osoby"
+                    [showErrorMessage]="false"
                     [success]="form.controls.signatoryName.valid && (form.controls.signatoryName.touched || formError.signatoryName)"
                     [touched]="form.controls.signatoryName.touched || formError.signatoryName"
                     [validationMessages]="formFields.validationMessages.signatoryName"
@@ -85,6 +87,7 @@
                     [formControl]="form.controls.signatorySurname"
                     [id]="'signatorySurname'"
                     label="Příjmení podepisující osoby"
+                    [showErrorMessage]="false"
                     [success]="form.controls.signatorySurname.valid && (form.controls.signatorySurname.touched || formError.signatorySurname)"
                     [touched]="form.controls.signatorySurname.touched || formError.signatorySurname"
                     [validationMessages]="formFields.validationMessages.signatorySurname"
@@ -162,6 +165,7 @@
                         [id]="'bankAccountNumber'"
                         label="Bankovní účet"
                         subtext="Číslo bankovního účtu s předčíslím uveďte ve tvaru XX-XXXXXXXXXX"
+                        [showErrorMessage]="false"
                         [success]="form.controls.bankAccountNumber.valid && (form.controls.bankAccountNumber.touched || formError.bankAccountNumber)"
                         [touched]="form.controls.bankAccountNumber.touched || formError.bankAccountNumber"
                         [validationMessages]="formFields.validationMessages.bankAccountNumber"
@@ -173,6 +177,7 @@
                         [formControl]="form.controls.bankCode"
                         [id]="'bankCode'"
                         label=""
+                        [showErrorMessage]="false"
                         [success]="form.controls.bankCode.valid && (form.controls.bankCode.touched || formError.bankCode)"
                         [touched]="form.controls.bankCode.touched || formError.bankCode"
                         [validationMessages]="formFields.validationMessages.bankCode"
@@ -195,6 +200,7 @@
                     [formControl]="form.controls.phonePrefix"
                     [id]="'phonePrefix'"
                     label="Telefonní číslo"
+                    [showErrorMessage]="false"
                     [success]="form.controls.phonePrefix.valid && (form.controls.phonePrefix.touched || formError.phonePrefix)"
                     [touched]="form.controls.phonePrefix.touched || formError.phonePrefix"
                     [validationMessages]="formFields.validationMessages.phonePrefix"
@@ -206,6 +212,7 @@
                     [formControl]="form.controls.phone"
                     [id]="'phone'"
                     label=""
+                    [showErrorMessage]="false"
                     [success]="form.controls.phone.valid && (form.controls.phone.touched || formError.phone)"
                     [touched]="form.controls.phone.touched || formError.phone"
                     [validationMessages]="formFields.validationMessages.phone"
