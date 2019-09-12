@@ -22,7 +22,7 @@
                                     [wasSentToPhone]="wasSentToPhone"
                                     [passwordWasSent]="passwordWasSent"
                                     (customAction)="forgottenPasswordAction($event)"
-                                    (reSentAction)="resetPassword(email)"
+                                    (reSentAction)="resetPassword($event)"
                                     (submitAction)="submitFormLogin($event)"
                                 ></pxe-login-form>
                                 <pxe-login-supply-auth-form
@@ -35,18 +35,17 @@
                                 ></pxe-login-supply-auth-form>
                                 <pxe-reset-password-form
                                     *ngIf="state === LOGIN_STATE.RESET"
-                                    [formFields]="formFieldsLogin.resetPassowordFields"
+                                    [formFields]="formFieldsLogin.resetPasswordFields"
                                     [formLoading]="formLoading"
                                     [globalError]="globalError"
                                     (submitAction)="submitResetPassword($event)">
                                 </pxe-reset-password-form>
                                 <pxe-change-password-form
                                     *ngIf="state === LOGIN_STATE.CHANGE_PASSWORD"
-                                    [formFields]="formFieldsLogin.changePassowordFields"
+                                    [formFields]="formFieldsLogin.changePasswordFields"
                                     [formLoading]="formLoading"
                                     [globalError]="globalError"
-                                    (submitAction)="submitChangePassword($event)"
-                                    (customAction)="resetPassword(email)">
+                                    (submitAction)="submitChangePassword($event)">
                                 </pxe-change-password-form>
                             </div>
                         </div>
