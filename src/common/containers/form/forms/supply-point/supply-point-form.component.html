@@ -271,6 +271,7 @@
                         [formControl]="form.controls.timeToContractEnd"
                         [id]="'timeToContractEnd'"
                         label="Jak dlouhou máte výpovědní lhůtu?"
+                        [showErrorMessage]="false"
                         [success]="form.controls.timeToContractEnd.valid && (form.controls.timeToContractEnd.touched || formError.timeToContractEnd)"
                         [touched]="form.controls.timeToContractEnd.touched || formError.timeToContractEnd"
                         [validationMessages]="formFields.validationMessages.timeToContractEnd"
@@ -286,6 +287,7 @@
                         [options]="codeLists && codeLists[codeList.TIME_TO_CONTRACT_END_PERIOD]"
                         [parentForm]="form"
                         [selectName]="'timeToContractEndPeriodId'"
+                        [showErrorMessage]="false"
                         [success]="form.controls.timeToContractEndPeriodId.valid && (form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId)"
                         [touched]="form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId"
                         [validationMessages]="formFields.validationMessages.timeToContractEndPeriodId">

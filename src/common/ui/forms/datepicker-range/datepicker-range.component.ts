@@ -63,6 +63,9 @@ export class DatepickerRangeComponent {
     public placeholder: string;
 
     @Input()
+    public showErrorMessage = true;
+
+    @Input()
     public success = false;
 
     @Input()

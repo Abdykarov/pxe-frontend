@@ -55,7 +55,7 @@
             </button>
         </div>
         <div
-            *ngIf="!!error && !!touched"
+            *ngIf="!!error && !!touched && showErrorMessage"
             [innerHtml]="getErrorMessage()"
             class="invalid-feedback">
         </div>
