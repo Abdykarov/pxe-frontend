@@ -103,7 +103,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 this.setFormByCommodity(commodityType);
                 this.resetFieldValue('supplierId', false);
                 this.setAnnualConsumptionNTState(commodityType === CommodityType.POWER ? this.getFieldValue('distributionRateId') : null);
-                this.setContractEndFields();
+                this.setOwnTerminate(this.form.get('ownTerminate').value);
             });
 
         this.form.get('subjectTypeId')
@@ -204,15 +204,15 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         let timeToContractEndPeriodId = null;
 
         if (!R.isEmpty(this.formValues)) {
+            commodityType = this.formValues.commodityType;
             const supplier = R.find(R.propEq('id', this.formValues.supplier.id))(this.suppliers[commodityType]);
             const expirationDateFromSupplyPoint = this.formValues.expirationDate && new Date(this.formValues.expirationDate);
             const expirationDateFromContract = this.formValues.contract &&
                 this.formValues.contract.deliveryTo &&
                 new Date(this.formValues.contract.deliveryTo);
             id = this.formValues.id;
-            commodityType = this.formValues.commodityType;
             subjectTypeId = this.formValues.subject && this.formValues.subject.code;
-            supplierId = this.formValues.supplier && supplier;
+            supplierId = this.formValues.supplier && this.suppliers[commodityType] && supplier;
             name = this.formValues.name;
             ean = this.formValues.commodityType === CommodityType.POWER ? this.formValues.ean : null;
             eic = this.formValues.commodityType === CommodityType.GAS ? this.formValues.ean : null;

@@ -243,6 +243,7 @@ export const formFields: IForm = {
             bsDate: errorFieldMessages.date.format,
             bsDateMinDate: errorFieldMessages.date.expirationDateInPast,
             expirationDateInPast: errorFieldMessages.date.expirationDateInPast,
+            isInTerminateInterval: errorFieldMessages.expirationDate.isInTerminateInterval,
         },
         expirationDatePower: {
             required: errorFieldMessages.expirationDate.requiredPower,
