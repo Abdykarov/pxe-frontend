@@ -12,8 +12,8 @@ import {
 export const formFieldsLogin: IFormFieldsLogin = {
     loginFormFields: loginFormFields,
     loginSupplyAuthFields: loginSupplyAuthFormFields,
-    resetPassowordFields: emailFormFields,
-    changePassowordFields: changePasswordFields,
+    resetPasswordFields: emailFormFields,
+    changePasswordFields: changePasswordFields,
 };
 
 export const LOGIN_STATE = {

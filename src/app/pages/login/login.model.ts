@@ -21,6 +21,6 @@ export interface IChangePassword {
 export interface IFormFieldsLogin {
     loginFormFields: IForm;
     loginSupplyAuthFields: IForm;
-    resetPassowordFields: IForm;
-    changePassowordFields: IForm;
+    resetPasswordFields: IForm;
+    changePasswordFields: IForm;
 }
