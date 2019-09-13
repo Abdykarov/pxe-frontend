@@ -12,11 +12,8 @@ export class PaymentVerificationPageComponent {
     public showPaymentInfo = true;
 
     public bannerType = BannerTypeImages;
-    public bannerTitle = 'Čekáme na doručení vaší ověřovací platby do 15.11.2018';
-    public bannerDescription = 'Platba u nás může být hned, ale z některé banky to může trvat až 3 dny a my vás nechceme zdržovat.' +
-        'Okno aplikace můžete nyní zavřít a až platbu obdržíme, dáme vám vědět na e-mail.';
-
-    public togglePaymentInfo = (event) => {
-        this.showPaymentInfo = !this.showPaymentInfo;
-    }
+    public bannerTitle = 'Nyní potřebujeme ověřit vaši totožnost pomocí tzv. mikrotransakce nebo-li ověřovací platby.';
+    public bannerDescription = '<p>Na doručení této ověřovací platby čekáme do 15.11.2018, proto ji odešlete raději hned teď.' +
+        'Platba u nás může být během chvíle, ale z některé banky to může trvat až 3 dny a&nbsp;my vás nechceme zdržovat.</p>' +
+        '<p>Okno aplikace můžete nyní zavřít a až platbu obdržíme, dáme vám vědět na e-mail.</p>';
 }
