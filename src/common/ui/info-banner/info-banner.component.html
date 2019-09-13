@@ -8,6 +8,7 @@
                [innerHTML]="bannerDescription"></p>
         </div>
     </div>
+    <ng-content></ng-content>
     <lnd-button
         *ngIf="showButton"
         (action)="buttonAction.emit($event)"
