@@ -7,6 +7,7 @@ import {
     deleteOfferMutation,
     saveGasOfferMutation,
     savePowerOfferMutation,
+    updateGasOfferMutation,
     updatePowerOfferMutation,
 } from 'src/common/graphql/mutation/offer';
 import {
@@ -85,7 +86,7 @@ export class OfferService {
 
     public updateGasOffer = (offerId: number, offer: IOfferInput, gasAttributes: IOfferInputGasAttributes) => this.apollo
         .mutate({
-            mutation: gasAttributes,
+            mutation: updateGasOfferMutation,
             variables: {
                 offerId,
                 offer,

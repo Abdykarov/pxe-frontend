@@ -176,7 +176,11 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.distributionLocation ? row.distributionLocation.code : ''}`,
+                        content: (row) => {
+                            return row.distributionLocation ?
+                                R.find(R.propEq('value', row.distributionLocation.code))(codeLists[CODE_LIST.DISTRIBUTION_GAS]).label :
+                                '';
+                        },
                     },
                 ],
             },

@@ -24,7 +24,6 @@ export const changePasswordFields: IForm = {
             '',
             [
                 Validators.required,
-                CustomValidators.passwordFormat,
             ],
         ],
     },
