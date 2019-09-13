@@ -241,7 +241,7 @@ export class CustomValidators {
             return null;
         }
 
-        const LAST_NAME_REGEXP = new RegExp(`^[${CustomValidators.alphaCharacters}-]*[${CustomValidators.alphaCharacters}]$`);
+        const LAST_NAME_REGEXP = new RegExp(`^([${CustomValidators.alphaCharacters}]+[- ]?)*[${CustomValidators.alphaCharacters}]+$`);
         if (LAST_NAME_REGEXP.test(lastName.value)) {
             return null;
         }
