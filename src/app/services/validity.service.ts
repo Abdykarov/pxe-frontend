@@ -21,7 +21,7 @@ export class ValidityService {
             [this.validateOnlyDateExpiration, this.isValidateDateExpiration],
             [this.validateTermWithProlongation, this.isValidateDateProlongation],
             // [R.T, this.isValidateDateExpiration],
-            [R.T, R.always(true)],
+            [R.T, R.always(false)],
         ])(supplyPoint)
 
     public validateOnlyDateExpiration = (supplyPoint: ISupplyPoint): boolean =>
