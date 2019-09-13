@@ -90,6 +90,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
             (this.form.controls['benefits'] as FormArray).push(this.addBenefit());
         }, SupplyOfferFormComponent.benefitCount);
         this.form.controls['commodityType'].setValue(this.commodityType);
+        this.distributionLocationType = COMMODITY_TO_DISTRIBUTION_MAP[this.commodityType];
 
         this.form.valueChanges
             .pipe(

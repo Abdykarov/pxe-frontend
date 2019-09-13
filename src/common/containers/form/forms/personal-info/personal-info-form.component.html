@@ -246,6 +246,7 @@
         [formControl]="form.controls.deposit"
         [id]="'deposit'"
         label="Výše záloh"
+        appendText="Kč/měsíc"
         [success]="form.controls.deposit.valid && (form.controls.deposit.touched || formError.deposit)"
         [touched]="form.controls.deposit.touched || formError.deposit"
         [validationMessages]="formFields.validationMessages.deposit"
