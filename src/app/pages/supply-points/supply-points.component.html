@@ -16,7 +16,6 @@
             [type]="'danger'"
             [isDismissible]="false"
             *ngIf="error">
-        Při načítání odběrných míst došlo k chybě. Zkuste to později.<br>
         <ng-container *ngFor="let message of errorMessages">
             {{ message }}<br>
         </ng-container>
@@ -24,11 +23,38 @@
     <lnd-placeloader [loading]="dataLoading && !errorMessages.length"></lnd-placeloader>
     <ng-container *ngIf="supplyPoints && !supplyPoints.length">
         <lnd-info-banner
-            [bannerTitle]="'Zatím nemáte uložené žádné odběrné místo'"
-            [bannerDescription]="'Zadejte odběrné místo a my vám hned dáme nabídky'"
-            [buttonLabel]="'Zadat odběrné místo'"
-            (buttonAction)="createSupplyPoint($event)"
-        ></lnd-info-banner>
+            [bannerTitle]="'Zatím nemáte uzavřenou žádnou platnou smlouvu.'"
+            [showButton]="false"
+        >
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <p>
+                        V případě zájmu o dodávku energií pro nové odběrné místo, pokračujte prosím zadáním odběrného místa.
+                        <ng-container *ngIf="supplyPointStatistic.notConcludedCount">
+                            Pokud už máte vytvořené odběrné místo, můžete se vrátit k vaší rozpracované smlouvě a dokončit proces.
+                        </ng-container>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div *ngIf="supplyPointStatistic.notConcludedCount"
+                     class="col-md-4 offset-md-2">
+                    <lnd-button
+                        (action)="completeRequestAction(supplyPointStatistic.notConcludedItems)"
+                        [label]="supplyPointStatistic.notConcludedCount > 1 ? 'Seznam rozpracovaných žádostí' : 'Dokončit rozpracovanou smlouvu'"
+                        type="link">
+                    </lnd-button>
+                </div>
+                <div class="col-md-4"
+                     [class.offset-md-4]="!supplyPointStatistic.notConcludedCount">
+                    <lnd-button
+                        (action)="createSupplyPoint($event)"
+                        label="Zadat odběrné místo"
+                        type="primary">
+                    </lnd-button>
+                </div>
+            </div>
+        </lnd-info-banner>
     </ng-container>
     <ng-container *ngIf="supplyPoints && supplyPoints.length">
         <div class="row mb-5">
