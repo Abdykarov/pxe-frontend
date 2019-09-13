@@ -51,7 +51,7 @@ export const navigationMenuUsers: INavigationMenu = [
         'class': '',
         'url': ROUTES.ROUTER_SUPPLY_POINTS,
         'label': 'PLATNÉ SMLOUVY',
-        'icon': 'pin',
+        'icon': 'document',
         'children': [],
         __typename : 'secured',
     },
