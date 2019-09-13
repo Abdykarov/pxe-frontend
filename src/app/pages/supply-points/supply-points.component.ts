@@ -12,16 +12,20 @@ import * as moment from 'moment';
 import * as R from 'ramda';
 import {
     map,
+    switchMap,
     takeUntil,
 } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
     AllowedOperations,
     ISupplyPoint,
+    ISupplyPointStatistic, ISupplyPointStatisticView,
 } from 'src/common/graphql/models/supply.model';
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import { IsDatePast } from 'src/common/pipes/is-date-past/is-date-past.pipe';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -40,10 +44,12 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
     public supplyPoints: ISupplyPoint[];
     public supplyPointsFuture: ISupplyPoint[];
     public supplyPointsActual: ISupplyPoint[];
+    public supplyPointStatistic: ISupplyPointStatistic;
 
     constructor(
         private cd: ChangeDetectorRef,
         private isDatePast: IsDatePast,
+        private navigateRequestService: NavigateRequestService,
         private supplyService: SupplyService,
         private route: ActivatedRoute,
         private router: Router,
@@ -58,12 +64,9 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
                 ContractStatus.CONCLUDED,
             ])
             .pipe(
-                takeUntil(this.destroy$),
                 map( ({data}) => data.findSupplyPointsByContractStatus),
-            ).subscribe(
-                (supplyPoints: ISupplyPoint[]) => {
+                switchMap((supplyPoints: ISupplyPoint[]) => {
                     this.supplyPoints = supplyPoints;
-                    this.dataLoading = false;
 
                     this.supplyPointsActual =
                         R.filter(
@@ -81,6 +84,21 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
                                 this.isDatePast.transform(supplyPoint.contract.deliveryFrom),
                         )(supplyPoints);
 
+                    if (this.supplyPoints.length) {
+                        return of({
+                            data: {
+                                computeAndGetSupplyPointStatistics: {},
+                            },
+                        });
+                    }
+                    return this.supplyService.computeAndGetSupplyPointStatistics();
+                }),
+                map(({data}) =>  data.computeAndGetSupplyPointStatistics),
+                takeUntil(this.destroy$),
+            ).subscribe(
+            (supplyPointStatistic: ISupplyPointStatistic) => {
+                    this.dataLoading = false;
+                    this.supplyPointStatistic = supplyPointStatistic;
                     this.cd.markForCheck();
                 },
                 (error) => {
@@ -120,5 +138,25 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
         this.router.navigate(
             [ROUTES.ROUTER_REQUEST_SUPPLY_POINT],
             {state});
+    }
+
+    public completeRequestAction = (notConcludedItems: ISupplyPointStatisticView[]) => {
+        R.cond([
+            [
+                (items: ISupplyPointStatisticView[]) => R.equals(1, items.length),
+                (items: ISupplyPointStatisticView[]) => {
+                    const notConcludedItem = items[0];
+                    this.navigateRequestService.routerToRequestStep(notConcludedItem);
+                },
+            ],
+            [
+                R.T,
+                () => this.navigateToRequests(),
+            ],
+        ])(notConcludedItems);
+    }
+
+    public navigateToRequests = () => {
+        this.router.navigate([ROUTES.ROUTER_REQUESTS]);
     }
 }
