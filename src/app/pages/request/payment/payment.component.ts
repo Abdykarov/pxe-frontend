@@ -35,6 +35,7 @@ import {
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { getOverviewState } from 'src/common/utils/get-overview-state.fnc';
 
 @Component({
     selector: 'pxe-contract',
@@ -69,6 +70,29 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
     ngOnInit () {
         super.ngOnInit();
         this.getSupplyPointWithPayment(this.supplyPointId);
+        this.supplyService.findSupplyPointsByContractStatus(null,
+            [
+                ContractStatus.CONCLUDED,
+                ContractStatus.WAITING_FOR_PAYMENT,
+                ContractStatus.CANCELED,
+                ContractStatus.TO_BE_CANCELED,
+            ])
+            .pipe(
+                takeUntil(this.destroy$),
+                map(({data}) =>  data.findSupplyPointsByContractStatus),
+            )
+            .subscribe(
+                (supplyPointsSource: ISupplyPoint[]) => {
+                    console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold', supplyPointsSource);
+                    this.cd.markForCheck();
+                },
+                error => {
+
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
+                },
+            );
     }
 
     public getSupplyPointWithPayment = (id) => {

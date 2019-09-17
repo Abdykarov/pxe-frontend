@@ -3,7 +3,7 @@ import { INews } from 'src/common/ui/news/model/news.model';
 export const newsConfig: INews = [
     {
         date: '27.6. 2018',
-        text: 'Do PARC-u jsme přidali průvodce importem odběrných míst. Najdete ' +
+        text: 'Do PARC4U jsme přidali průvodce importem odběrných míst. Najdete ' +
             'zde podrobné infomace k spávnému vyplnění importního souboru.',
     },
     {
@@ -13,6 +13,6 @@ export const newsConfig: INews = [
     },
     {
         date: '25.6. 2018',
-        text: 'Do PARC-u jsme přidali průvodce importem odběrných míst…',
+        text: 'Do PARC4U jsme přidali průvodce importem odběrných míst…',
     },
 ];
