@@ -11,7 +11,7 @@
     </div>
 </ng-template>
 
-<pxe-layout-container pageTitle="Platné smlouvy">
+<pxe-layout-container pageTitle="Uzavřené smlouvy">
     <lnd-alert
             [type]="'danger'"
             [isDismissible]="false"
@@ -23,7 +23,7 @@
     <lnd-placeloader [loading]="dataLoading && !errorMessages.length"></lnd-placeloader>
     <ng-container *ngIf="supplyPoints && !supplyPoints.length">
         <lnd-info-banner
-            [bannerTitle]="'Zatím nemáte uzavřenou žádnou platnou smlouvu.'"
+            [bannerTitle]="'Zatím nemáte žádnou uzavřenou smlouvu.'"
             [showButton]="false"
         >
             <div class="row">

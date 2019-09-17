@@ -70,29 +70,6 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
     ngOnInit () {
         super.ngOnInit();
         this.getSupplyPointWithPayment(this.supplyPointId);
-        this.supplyService.findSupplyPointsByContractStatus(null,
-            [
-                ContractStatus.CONCLUDED,
-                ContractStatus.WAITING_FOR_PAYMENT,
-                ContractStatus.CANCELED,
-                ContractStatus.TO_BE_CANCELED,
-            ])
-            .pipe(
-                takeUntil(this.destroy$),
-                map(({data}) =>  data.findSupplyPointsByContractStatus),
-            )
-            .subscribe(
-                (supplyPointsSource: ISupplyPoint[]) => {
-                    console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold', supplyPointsSource);
-                    this.cd.markForCheck();
-                },
-                error => {
-
-                    const { globalError } = parseGraphQLErrors(error);
-                    this.globalError = globalError;
-                    this.cd.markForCheck();
-                },
-            );
     }
 
     public getSupplyPointWithPayment = (id) => {

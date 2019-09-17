@@ -240,11 +240,11 @@
         <lnd-datepicker
             *ngIf="form.controls.expirationDate.status !== 'DISABLED'"
             [appendButtonIcon]="helpDocuments && helpDocuments['expirationDate'] ? 'icon--info' : null"
-            (appendButtonAction)="showHelp('expirationDate', form.controls.contractEndTypeId.status !== 'DISABLED' ? 'Do kdy máte platnou aktuální smlouvu' : 'Datum ukončení')"
+            (appendButtonAction)="showHelp('expirationDate', form.controls.contractEndTypeId.status !== 'DISABLED' ? 'Do kdy máte uzavřenou aktuální smlouvu' : 'Datum ukončení')"
             [datepickerName]="'expirationDate'"
             [error]="formError.expirationDate || form.controls.expirationDate.errors"
             id="datepicker-1"
-            [label]="form.controls.contractEndTypeId.status !== 'DISABLED' ? 'Do kdy máte platnou aktuální smlouvu' : 'Datum ukončení'"
+            [label]="form.controls.contractEndTypeId.status !== 'DISABLED' ? 'Do kdy máte uzavřenou aktuální smlouvu' : 'Datum ukončení'"
             [parentForm]="form"
             [placeholder]="'dd.mm.rrrr'"
             [minDate]="minDate"
@@ -300,7 +300,7 @@
             <div class="col-12">
                 <small>Předpokládané zahájení nové dodávky od:</small>
                 <br/>
-                {{newSupplyWillBegin | date: 'dd. MM. y'}}
+                {{newSupplyWillBegin | date:'d.&nbsp;M.&nbsp;y'}}
             </div>
         </div>
         <div class="text-center">

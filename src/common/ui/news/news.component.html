@@ -4,7 +4,7 @@
             <div class="col-12">
                 <div class="row mb-4" *ngFor="let novelty of news; let i = index">
                     <div class="col-xl-auto text-xl-right">
-                        {{novelty.date}}
+                        {{novelty.date | date:'d.&nbsp;M.&nbsp;y'}}
                     </div>
                     <div class="col"
                          [class.perex]="i === 0">
