@@ -37,11 +37,11 @@
             </div>
             <div *ngIf="concludedPlacesCount"
                  class="col-12 col-xl-9 offset-xl-3">
-                <a (click)="supplyPointsListAction.emit($event)">Seznam Odběrných míst</a>
+                <a (click)="supplyPointsListAction.emit($event)">Seznam uzavřených smluv</a>
             </div>
             <div *ngIf="notConcludedPlacesCount"
                  class="col-12 col-xl-9 offset-xl-3">
-                <a (click)="requestListAction.emit($event)">Seznam rozpracovaných žádostí</a>
+                <a (click)="requestListAction.emit($event)">Seznam rozpracovaných smluv</a>
             </div>
         </div>
         <div *ngIf="supplyPointsEndingCount !== 0"
@@ -65,7 +65,7 @@
                         Vybrat nového dodavatele
                     </ng-container>
                     <ng-template #moreSupplyPointEndingLinkTemplate>
-                        Seznam Odběrných míst
+                        Seznam uzavřených smluv
                     </ng-template>
                 </a>
             </div>

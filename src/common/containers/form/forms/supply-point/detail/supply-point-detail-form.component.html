@@ -146,7 +146,7 @@
                         <div class="mb-1">
                             <small>Dodávka do</small>
                         </div>
-                        <span class="perex">{{supplyPoint.expirationDate | date: 'dd. MM. y'}}</span>
+                        <span class="perex">{{supplyPoint.expirationDate | date:'d.&nbsp;M.&nbsp;y'}}</span>
                     </div>
                     <div *ngIf="supplyPoint.timeToContractEnd"
                          class="col-12">
@@ -161,7 +161,7 @@
                     <div class="row no-gutters align-items-end mb-5">
                         <div class="col-12 col-md-6">
                             <small>
-                                Dodávka do<br>{{supplyPoint.contract.deliveryTo | date: 'dd. MM. y'}}
+                                Dodávka do<br>{{supplyPoint.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}
                             </small>
                         </div>
                         <div class="col-12 col-md-6 pl-3 text-right">

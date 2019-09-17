@@ -69,19 +69,25 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
                     this.supplyPoints = supplyPoints;
 
                     this.supplyPointsActual =
-                        R.filter(
-                            (supplyPoint: ISupplyPoint) =>
-                                moment()
-                                    .isBetween(
-                                        moment(supplyPoint.contract.deliveryFrom),
-                                        moment(supplyPoint.contract.deliveryTo),
-                                    ),
+                        R.pipe(
+                            R.filter(
+                                (supplyPoint: ISupplyPoint) =>
+                                    moment()
+                                        .isBetween(
+                                            moment(supplyPoint.contract.deliveryFrom),
+                                            moment(supplyPoint.contract.deliveryTo),
+                                        ),
+                            ),
+                            R.sort(R.ascend(R.path(['contract', 'deliveryFrom']))),
                         )(supplyPoints);
 
                     this.supplyPointsFuture =
-                        R.filter(
-                            (supplyPoint: ISupplyPoint) =>
-                                this.isDatePast.transform(supplyPoint.contract.deliveryFrom),
+                        R.pipe(
+                            R.filter(
+                                (supplyPoint: ISupplyPoint) =>
+                                    this.isDatePast.transform(supplyPoint.contract.deliveryFrom),
+                            ),
+                            R.sort(R.ascend(R.path(['contract', 'deliveryFrom']))),
                         )(supplyPoints);
 
                     if (this.supplyPoints.length) {

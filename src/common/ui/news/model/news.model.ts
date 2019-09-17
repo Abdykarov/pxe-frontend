@@ -1,6 +1,6 @@
 export interface INews extends Array<INew> {}
 
 export interface INew {
-    date: string;
+    date: Date;
     text: string;
 }
