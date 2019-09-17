@@ -26,7 +26,7 @@
                 </tr>
                 <tr>
                     <td class="pr-3">Splatnost</td>
-                    <td>{{paymentInfo.dueDate | date:'dd.MM.y'}}</td>
+                    <td>{{paymentInfo.dueDate | date:'d.&nbsp;M.&nbsp;y'}}</td>
                 </tr>
                 <tr>
                     <td class="pr-3">Variabilní symbol</td>
@@ -66,7 +66,7 @@
                     <td class="pb-3">
                         Splatnost
                         <span class="d-block">
-                            {{paymentInfo.dueDate | date:'dd.MM.y'}}
+                            {{paymentInfo.dueDate | date:'d.&nbsp;M.&nbsp;y'}}
                         </span>
                     </td>
                 </tr>
@@ -109,7 +109,7 @@
                 <div class="col-12 col-xl-10 offset-xl-1">
                     <lnd-info-banner
                             [bannerTitle]="'Nyní potřebujeme ověřit vaši totožnost pomocí tzv. mikrotransakce nebo-li ověřovací platby.'"
-                            [bannerDescription]="'<p>Na doručení této ověřovací platby čekáme do ' + (paymentInfo.dueDate | date: 'dd.MM.y') + ', proto ji odešlete raději hned teď. Platba u nás může být během chvíle, ale z některé banky to může trvat až 3 dny a&nbsp;my vás nechceme zdržovat.</p><p>Okno aplikace můžete nyní zavřít a až platbu obdržíme, dáme vám vědět na e-mail.</p>'"
+                            [bannerDescription]="'<p>Na doručení této ověřovací platby čekáme do ' + (paymentInfo.dueDate | date:'d.&nbsp;M.&nbsp;y') + ', proto ji odešlete raději hned teď. Platba u nás může být během chvíle, ale z některé banky to může trvat až 3 dny a&nbsp;my vás nechceme zdržovat.</p><p>Okno aplikace můžete nyní zavřít a až platbu obdržíme, dáme vám vědět na e-mail.</p>'"
                             [bannerType]="bannerTypeImages.LOADING"
                             [showButton]="false"
                     ></lnd-info-banner>
@@ -123,9 +123,9 @@
             <div *ngIf="supplyPoint.contract?.contractStatus == contractStatus.CONCLUDED"
                  class="col-12 col-xl-10 offset-xl-1">
                 <lnd-info-banner
-                        [bannerTitle]="'Gratulujeme k výhodnému nákupu energie na vašem PARCu!'"
+                        [bannerTitle]="'Gratulujeme k výhodnému nákupu energie na vašem PARC4U!'"
                         [bannerDescription]="'Před koncem vaší smlouvy se ozveme s dalšími výhodnými nabídkami, které vám na burze stále hlídáme.'"
-                        [buttonLabel]="'Přejít na přehled platných smluv'"
+                        [buttonLabel]="'Přejít na přehled uzavřených smluv'"
                         [bannerType]="bannerTypeImages.ACCEPTED"
                         (buttonAction)="navigateToContracts()"
                 ></lnd-info-banner>

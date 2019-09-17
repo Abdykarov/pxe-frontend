@@ -8,7 +8,7 @@ export const navigationMenuUsers: INavigationMenu = [
     {
         'class': '',
         'url': ROUTES.ROUTER_DASHBOARD,
-        'label': 'NÁSTĚNKA',
+        'label': 'PŘEHLED',
         'icon': 'notice-board',
         'children': [],
         __typename : 'secured',
@@ -50,7 +50,7 @@ export const navigationMenuUsers: INavigationMenu = [
     {
         'class': '',
         'url': ROUTES.ROUTER_SUPPLY_POINTS,
-        'label': 'PLATNÉ SMLOUVY',
+        'label': 'UZAVŘENÉ SMLOUVY',
         'icon': 'document',
         'children': [],
         __typename : 'secured',
