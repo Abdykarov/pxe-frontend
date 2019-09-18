@@ -25,6 +25,7 @@ import {
     IConfirmationCode,
     ILoginState,
 } from './login.model';
+import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
     IUserLogin,
     LANDING_PAGE,
@@ -45,6 +46,7 @@ export class LoginComponent extends AbstractComponent {
     public email = '';
     public formFieldsLogin = formFieldsLogin;
     public formLoading = false;
+    public fieldError: IFieldError = {};
     public globalError: string[] = [];
     public LOGIN_STATE = LOGIN_STATE;
     public passwordWasSent = false;
@@ -118,7 +120,11 @@ export class LoginComponent extends AbstractComponent {
                 },
                 error => {
                     this.resetErrorsAndLoading();
-                    const { globalError } = parseGraphQLErrors(error);
+                    const { fieldError, globalError } = parseGraphQLErrors(error);
+                    console.log('field a pak global');
+                    console.log(fieldError);
+                    console.log(globalError);
+                    this.fieldError = fieldError;
                     this.globalError = globalError;
                     this.cd.markForCheck();
                 });
