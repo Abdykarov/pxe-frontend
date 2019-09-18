@@ -34,6 +34,9 @@ export class AppComponent {
                 return;
             }
 
+            // script.src = 'https://www.googletagmanager.com/gtag/js?id=' + environment.gaId; pro GA
+            // pridat do enviroments
+
             const script = this.document.createElement('script');
             script.async = true;
             script.src = 'https://www.googletagmanager.com/gtm.js?id=' + environment.gtmId;
@@ -44,6 +47,7 @@ export class AppComponent {
             this.router.events.subscribe(event => {
                 if (event instanceof NavigationEnd) {
                     gtmService.gtm(event);
+                // gaService.gtm(event);
                 }
             });
         }

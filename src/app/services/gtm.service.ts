@@ -11,6 +11,6 @@ export class GTMService {
     }
 
     public gtm = (event): void => {
-            (<any>window).dataLayer.push({event: 'pageview', page_path: event.urlAfterRedirects});
+        (<any>window).dataLayer.push({event: 'pageview', page_path: event.urlAfterRedirects});
     }
 }
