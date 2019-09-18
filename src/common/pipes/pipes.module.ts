@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 // own classes
 import { AccountNumberPipe } from './account-number/account-number.pipe';
+import { CeilPipe } from 'src/common/pipes/ceil-number/simple-number.pipe';
 import { ConsumptionPipe } from './consumption/consumption.pipe';
 import { ConsumptionIndicatorPipe } from './consumption-indicator/consumption-indicator.pipe';
 import { DateDiffPipe } from './date-diff/date-diff.pipe';
@@ -24,6 +25,7 @@ import { ValuesPipe } from './values/values.pipe';
 @NgModule({
     declarations: [
         AccountNumberPipe,
+        CeilPipe,
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,
@@ -44,6 +46,7 @@ import { ValuesPipe } from './values/values.pipe';
     ],
     exports: [
         AccountNumberPipe,
+        CeilPipe,
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,
@@ -64,6 +67,7 @@ import { ValuesPipe } from './values/values.pipe';
     ],
     providers: [
         AccountNumberPipe,
+        CeilPipe,
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,

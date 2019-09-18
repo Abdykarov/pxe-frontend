@@ -684,18 +684,20 @@ td {
 				</tr>
 			</tbody>
 		</table>
-		<table class="mb-70" data-value="@supplier-contact-two-name@supplier-contact-two-function">
+		@supplier-contact-two-comment-start
+		<table>
 			<tbody>
-				<tr data-value="@supplier-contact-two-name">
+				<tr>
 					<th>Jméno</th>
 					<td>@supplier-contact-two-name</td>
 				</tr>
-				<tr data-value="@supplier-contact-two-function">
+				<tr>
 					<th>Funkce</th>
 					<td>@supplier-contact-two-function</td>
 				</tr>
 			</tbody>
 		</table>
+		@supplier-contact-two-comment-end
 
 		<h2>Za Zákazníka</h2>
 		<p>V @client-permanent-address-town , dne @date</p>
@@ -711,6 +713,7 @@ td {
 				</tr>
 			</tbody>
 		</table>
+		@client-contacttwo-comment-start
 		<table>
 			<tbody>
 				<tr>
@@ -723,6 +726,7 @@ td {
 				</tr>
 			</tbody>
 		</table>
+		@client-contacttwo-comment-end
 	</div>
 
 	<h1 class="mb-20">Všeobecné obchodní podmínky PXE pro dodávky elektřiny</h1>
