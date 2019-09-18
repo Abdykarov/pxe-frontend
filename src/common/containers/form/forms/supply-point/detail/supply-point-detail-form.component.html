@@ -140,6 +140,13 @@
                         </div>
                         <span class="perex">{{supplyPoint.circuitBreaker.help || supplyPoint.circuitBreaker.description}}</span>
                     </div>
+                    <div *ngIf="supplyPoint.lastVersionOfSupplyPoint && contractEndType.CONTRACT_END_TERM_WITH_PROLONGATION === supplyPoint.contractEndType.code"
+                        class="col-12 mb-5">
+                        <div class="mb-1">
+                            <small>Ukončení platnosti aktuální smlouvy</small>
+                        </div>
+                        <span class="perex">{{supplyPoint.contractEndType.description}}</span>
+                    </div>
                     <div *ngIf="supplyPoint.expirationDate"
                          [class.mb-5]="supplyPoint.expirationDate"
                          class="col-12">
@@ -149,11 +156,18 @@
                         <span class="perex">{{supplyPoint.expirationDate | date:'d.&nbsp;M.&nbsp;y'}}</span>
                     </div>
                     <div *ngIf="supplyPoint.timeToContractEnd"
+                         [class.mb-5]="!supplyPoint.lastVersionOfSupplyPoint && contractEndType.CONTRACT_END_TERM_WITH_PROLONGATION === supplyPoint.contractEndType.code"
                          class="col-12">
                         <div class="mb-1">
                             <small>Výpovědní lhůta</small>
                         </div>
                         <span class="perex">{{supplyPoint.timeToContractEnd}} {{supplyPoint.timeToContractEnd | plural: timeToContractEndPeriodMap[supplyPoint.timeToContractEndPeriod.code]}}</span>
+                    </div>
+                    <div *ngIf="!supplyPoint.lastVersionOfSupplyPoint && contractEndType.CONTRACT_END_TERM_WITH_PROLONGATION === supplyPoint.contractEndType.code"
+                         class="col-12">
+                        <div class="mb-1">
+                            <small>Tato smlouva bude nahrazena smlouvou budouci.</small>
+                        </div>
                     </div>
                 </div>
                 <hr>
