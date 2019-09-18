@@ -23,12 +23,13 @@
                 [bsConfig]="config"
                 [minDate]="minDate"
                 [maxDate]="maxDate"
-                [class.is-invalid]="!!error && !!touched"
+                [class.is-invalid]="!!error && !!touched && !datepicker.isOpen"
                 [class.is-valid]="success"
-                [class.is-warning]="warning"
+                [class.is-warning]="warning && !datepicker.isOpen"
                 [attr.disabled]="!!disabledField ? 'disabled' : null"
                 [attr.autocomplete]="'off'"
-                (onShown)="onShowPicker($event)">
+                (onShown)="onShowPicker($event)"
+                (onHidden)="onHidePicker($event)">
                 <div class="input-group-append">
                     <span class="icon icon--calendar input-group-icon"></span>
                 </div>
@@ -54,7 +55,7 @@
             </button>
         </div>
         <div
-            *ngIf="!!getErrorMessage() && showErrorMessage"
+            *ngIf="!!getErrorMessage() && showErrorMessage && !datepicker.isOpen"
             [innerHtml]="getErrorMessage()"
             class="invalid-feedback">
         </div>
