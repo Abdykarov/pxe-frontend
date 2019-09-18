@@ -3,7 +3,7 @@
 
 window.angularDevstack = {
     "config": {
-        "gtmId": "UA-137974323-1",
+        "gtmId": "",
         "production": false,
         "url_graphql": "http://localhost:4200/graphql",
         "url_api": "http://localhost:4200/api",

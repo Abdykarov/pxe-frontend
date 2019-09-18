@@ -3,7 +3,7 @@
 
 window.angularDevstack = {
     "config": {
-        "gtmId": "UA-137974323-1",
+        "gtmId": "",
         "production": true,
         "url_graphql": "https://pxeparc-preview.lnd.bz/graphql",
         "url_api": "https://pxeparc-preview.lnd.bz/api",

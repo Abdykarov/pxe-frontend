@@ -30,10 +30,16 @@ export class AppComponent {
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         if (isPlatformBrowser(this.platformId)) {
+            if (!environment.gtmId) {
+                return;
+            }
+
             const script = this.document.createElement('script');
             script.async = true;
-            script.src = 'https://www.googletagmanager.com/gtag/js?id=' + environment.gtmId;
+            script.src = 'https://www.googletagmanager.com/gtm.js?id=' + environment.gtmId;
             this.document.head.prepend(script);
+
+            this.gtmService.init();
 
             this.router.events.subscribe(event => {
                 if (event instanceof NavigationEnd) {
