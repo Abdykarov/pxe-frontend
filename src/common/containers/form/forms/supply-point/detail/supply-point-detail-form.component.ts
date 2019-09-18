@@ -28,14 +28,15 @@ import {
     confirmFindNewSupplyPointConfig,
     supplyPointDetailAllowedFields,
 } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
-import { ContractService } from 'src/common/graphql/services/contract.service';
-import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
-import { ModalService } from 'src/common/containers/modal/modal.service';
 import {
+    CONTRACT_END_TYPE,
     ROUTES,
     SUBJECT_TYPE_OPTIONS,
     TIME_TO_CONTRACT_END_PERIOD_MAP,
 } from 'src/app/app.constants';
+import { ContractService } from 'src/common/graphql/services/contract.service';
+import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
+import { ModalService } from 'src/common/containers/modal/modal.service';
 
 @Component({
     selector: 'pxe-supply-point-detail-form',
@@ -51,6 +52,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
 
     public allowedFields = supplyPointDetailAllowedFields;
     public allowedOperations = AllowedOperations;
+    public contractEndType = CONTRACT_END_TYPE;
     public commodityType = CommodityType;
     public suppliers = [];
     public subjectName = '';
