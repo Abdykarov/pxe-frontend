@@ -7,6 +7,7 @@ export const restAPIErrorCodes = {
 };
 
 export const graphQLMessages = {
+    cannotUnregistration: 'Účet se nepodařilo smazat.',
     cannotDeleteContract: 'Od smlouvy se nepodařilo odstoupit.',
     cannotSignContract: 'Smlouvu se nepodařilo podepsat.',
 };

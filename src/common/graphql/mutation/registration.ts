@@ -5,3 +5,10 @@ export const makeRegistrationMutation = gql`
         makeRegistration(email: $email, termsOfConditionsApproved: $consent, preregistration: $preregistration)
     }
 `;
+
+export const makeUnregistrationMutation = gql`
+    mutation makeUnregistration($smsCode: String!) {
+        makeUnregistration(smsCode: $smsCode)
+    }
+`;
+

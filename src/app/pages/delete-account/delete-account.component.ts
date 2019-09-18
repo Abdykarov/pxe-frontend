@@ -20,8 +20,13 @@ import {
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import { IJwtPayload } from 'src/app/services/model/auth.model';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
-import { parseGraphQLErrors } from 'src/common/utils';
+import {
+    parseGraphQLErrors,
+    scrollToElementFnc,
+} from 'src/common/utils';
+import { RegistrationService } from 'src/common/graphql/services/registration.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { graphQLMessages } from 'src/common/constants/errors.constant';
 
 @Component({
     selector: 'pxe-delete-account',
@@ -41,6 +46,7 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
+        private registrationService: RegistrationService,
         private router: Router,
         private supplyService: SupplyService,
     ) {
@@ -82,9 +88,31 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
     }
 
     public submitVerification = () => {
-        // TODO delete account and redirect to the result page with logout
         this.formLoading = true;
-        // this.router.navigate([CONSTS.PATHS.DELETED_ACCOUNT]);
+        this.registrationService.makeUnregistration('465')
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                (result: boolean) => {
+                    this.loading = false;
+                    if (result) {
+                        this.router.navigate([CONSTS.PATHS.DELETED_ACCOUNT]);
+                    } else {
+                        // TODO - temporary
+                        // TODO check s monikou - konkretni zneni zpravy
+                        this.globalError.push(graphQLMessages.cannotUnregistration);
+                        scrollToElementFnc('top');
+                    }
+                    this.cd.markForCheck();
+                },
+                error => {
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.loading = false;
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
+                },
+            );
     }
 
     public redirectToUserProfile = () => {

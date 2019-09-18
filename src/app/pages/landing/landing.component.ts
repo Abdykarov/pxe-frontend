@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { takeUntil } from 'rxjs/operators';
 
-import * as mutations from 'src/common/graphql/mutations';
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CONSTS,
@@ -25,6 +24,7 @@ import {
     parseGraphQLErrors,
     scrollToElementFnc,
 } from 'src/common/utils';
+import { RegistrationService } from 'src/common/graphql/services/registration.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
@@ -53,6 +53,7 @@ export class LandingComponent extends AbstractComponent {
         private apollo: Apollo,
         private cd: ChangeDetectorRef,
         private router: Router,
+        private registrationService: RegistrationService,
         private scrollToService: ScrollToService,
     ) {
         super();
@@ -77,11 +78,7 @@ export class LandingComponent extends AbstractComponent {
         this.formLoading = true;
         this.globalError = [];
         this.fieldError = {};
-        this.apollo
-            .mutate({
-                mutation: mutations.makeRegistrationMutation,
-                variables: values,
-            })
+        this.registrationService.makeRegistration(values)
             .subscribe(
                 () => {
                     this.formLoading = false;
