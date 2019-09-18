@@ -41,7 +41,7 @@
                     class="form-container">
                     <lnd-form-field
                         [id]="'commodityType'"
-                        label="Komodita"
+                        label="Druh energie"
                         [type]="'RADIOGROUP'"
                         [customFormGroupClass]="'mb-3'"
                         [radioGroupItemClass]="'custom-control-inline'"
@@ -57,7 +57,7 @@
                     ></lnd-form-field>
                     <lnd-select
                         [bindValue]="null"
-                        label="Stávající dodavatel"
+                        label="Současný dodavatel"
                         [options]="config.suppliersOptions"
                         [parentForm]="form"
                         [selectName]="'supplierId'"
@@ -68,7 +68,7 @@
                         [appendButtonIcon]="'icon--info'"
                         (appendButtonAction)="openModal()"
                         [id]="'name'"
-                        label="Název odběrného místa"
+                        label="Vaše pojmenování odběrného místa     "
                         subtext="Cokoliv, podle čeho chcete místo identifikovat"
                     ></lnd-form-field>
                     <lnd-form-field
