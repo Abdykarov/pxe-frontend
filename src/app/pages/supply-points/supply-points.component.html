@@ -59,15 +59,17 @@
     <ng-container *ngIf="supplyPoints && supplyPoints.length">
         <div class="row mb-5">
             <div class="col text-center">
+                <p class="mb-2">Pokud máte zájem o dodávku energií pro další odběrné místo, doporučujeme zkontrolovat, zda k němu nemáte rozpracovanou smlouvu.</p>
+                <p>Pokud ne, pokračujte založením nového odběrného místa.</p>
                 <lnd-button
-                    label="Nové odběrné místo"
+                    label="ZALOŽIT NOVÉ ODBĚRNÉ MÍSTO"
                     type="secondary"
                     (action)="createSupplyPoint($event)"
                 ></lnd-button>
             </div>
         </div>
         <ng-container *ngIf="supplyPointsActual && supplyPointsActual.length !== 0">
-            <p class="perex text-center mb-3">Odběrná místa a jejich aktuální dodávky</p>
+            <p class="perex text-center mb-3">Odběrná místa s aktivní dodávkou energií</p>
             <div class="supply-points">
                 <pxe-supply-point
                     *ngFor="let supplyPoint of supplyPointsActual"
@@ -78,7 +80,7 @@
             </div>
         </ng-container>
         <ng-container *ngIf="supplyPointsFuture && supplyPointsFuture.length !== 0">
-            <p class="perex text-center mb-3 mt-5">Odběrná místa a jejich budoucí dodávky</p>
+            <p class="perex text-center mb-3 mt-5">Odběrná místa s budoucí dodávkou energií</p>
             <div class="supply-points">
                 <pxe-supply-point
                     *ngFor="let supplyPoint of supplyPointsFuture"
