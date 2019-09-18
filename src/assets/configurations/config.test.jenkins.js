@@ -3,6 +3,7 @@
 
 window.angularDevstack = {
     "config": {
+        "gaId": "",
         "gtmId": "",
         "production": false,
         "url_graphql": "http://mock:9002/graphql",

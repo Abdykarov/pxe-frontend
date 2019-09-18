@@ -3,6 +3,7 @@
 
 window.angularDevstack = {
     "config": {
+        "gaId": "",
         "gtmId": "",
         "production": true,
         "url_graphql": "https://pxeparc-preview.lnd.bz/graphql",
