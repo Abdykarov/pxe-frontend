@@ -121,9 +121,6 @@ export class LoginComponent extends AbstractComponent {
                 error => {
                     this.resetErrorsAndLoading();
                     const { fieldError, globalError } = parseGraphQLErrors(error);
-                    console.log('field a pak global');
-                    console.log(fieldError);
-                    console.log(globalError);
                     this.fieldError = fieldError;
                     this.globalError = globalError;
                     this.cd.markForCheck();
