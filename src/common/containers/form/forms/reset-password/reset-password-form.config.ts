@@ -18,6 +18,7 @@ export const emailFormFields: IForm = {
         email: {
             required: errorFieldMessages.email.required,
             email: errorFieldMessages.email.email,
+            emailNotRegistered: errorFieldMessages.email.emailNotRegistered,
             invalidEmail: errorFieldMessages.email.email,
             alreadyRegisteredEmail: errorFieldMessages.email.alreadyRegisteredEmail,
         },

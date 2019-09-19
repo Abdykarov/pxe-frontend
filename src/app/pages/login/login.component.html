@@ -37,6 +37,7 @@
                                     *ngIf="state === LOGIN_STATE.RESET"
                                     [formFields]="formFieldsLogin.resetPasswordFields"
                                     [formLoading]="formLoading"
+                                    [fieldError]="fieldError"
                                     [globalError]="globalError"
                                     (submitAction)="submitResetPassword($event)">
                                 </pxe-reset-password-form>
