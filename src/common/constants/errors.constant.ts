@@ -9,6 +9,8 @@ export const restAPIErrorCodes = {
 export const graphQLMessages = {
     cannotDeleteContract: 'Omlouváme se, ale z neočekávaného důvodu se odstoupení od smlouvy nepodařilo. Zkuste to prosím znovu později.',
     cannotSignContract: 'Omlouváme se, ale z neočekávaného důvodu se nepodařilo smlouvu podepsat. Zkuste to prosím znovu později.',
+    invalidSupplyPointId: 'Hledané odběrné místo neexistuje nebo pro přístup k němu nemáte oprávnění.',
+    forbiddenUpdateOfSupplyPoint: 'Omlouváme se, ale toto odběrné místo není možné nyní upravit. Zkuste to prosím znovu později.',
 };
 
 export const offerValidityMessages = {
@@ -123,7 +125,7 @@ export const errorFieldMessages =  {
         maxlengthFirstName: 'Použít můžete maximálně {requiredLength} znaků.',
         maxlengthLastName: 'Použít můžete maximálně {requiredLength} znaků.',
         maxlengthFullName: 'Použít můžete maximálně {requiredLength} znaků.',
-        patternFirstName: 'Použít můžete pouze písmena a mezery.',
+        patternFirstName: 'Použít můžete pouze písmena, pomlčky a mezery.',
         patternLastName: 'Použít můžete pouze písmena, pomlčky a mezery.',
     },
     ico: {
