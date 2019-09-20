@@ -151,6 +151,11 @@ export const COMMODITY_TO_DISTRIBUTION_MAP = {
     [CommodityType.GAS]: CODE_LIST.DISTRIBUTION_GAS,
 };
 
+export const commodityTypes = {
+    power: CommodityType.POWER,
+    gas: CommodityType.GAS,
+};
+
 export const DISTRIBUTION_RATES_TYPE_DEFINITION = {
     [DistributionType.VT] : [
         'C01d', 'C02d', 'C03d', 'C60d', 'C61d', 'C62d', 'D01d', 'D02d',

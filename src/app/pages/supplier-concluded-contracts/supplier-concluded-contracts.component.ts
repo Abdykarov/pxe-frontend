@@ -2,18 +2,25 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import * as R from 'ramda';
-import { BehaviorSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { CommodityType, ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import {
+    CommodityType,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
+import {
+    commodityTypes,
+    ROUTES,
+} from 'src/app/app.constants';
 import { DocumentService } from 'src/app/services/document.service';
-import { IDocumentType, IResponseDataDocument } from 'src/app/services/model/document.model';
+import {
+    IDocumentType,
+    IResponseDataDocument,
+} from 'src/app/services/model/document.model';
 import { IsDatePast } from 'src/common/pipes/is-date-past/is-date-past.pipe';
 import { parseRestAPIErrors } from 'src/common/utils';
-import { ROUTES } from 'src/app/app.constants';
 import { SupplierConcludedContractsConfig, supplyPointsSource } from './supplier-concluded-contracts.config';
-import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 
 @Component({
     selector: 'lnd-supplier-concluded-contracts',
@@ -59,12 +66,11 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                 takeUntil(this.destroy$),
             )
             .subscribe(params => {
-                const supplyOfferCommodityTypes = this.supplierConcludedContractsConfig.supplyOfferCommodityTypes;
-                if (R.indexOf(params.commodityType, R.keys(supplyOfferCommodityTypes)) < 0) {
+                if (R.indexOf(params.commodityType, R.keys(commodityTypes)) < 0) {
                     this.router.navigate([this.routePower]);
                     return;
                 }
-                this.commodityType = supplyOfferCommodityTypes[params.commodityType];
+                this.commodityType = commodityTypes[params.commodityType];
                 this.tableCols = this.supplierConcludedContractsConfig.getTableCols(this.commodityType );
                 // nutno zamyslet se nad stavama po ubteragaci skuzeb + prepinani mezi
                 // commodity a aktualnost (prebliknuti zmena textace atd nez se to nacte dodelani loading?)

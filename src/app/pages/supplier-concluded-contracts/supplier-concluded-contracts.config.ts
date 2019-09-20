@@ -10,6 +10,7 @@ import {
     ISupplyPoint,
 } from 'src/common/graphql/models/supply.model';
 
+// tslint:disable:max-line-length
 @Injectable({
     providedIn: 'root',
 })
@@ -18,12 +19,6 @@ export class SupplierConcludedContractsConfig {
     constructor(
         @Inject(LOCALE_ID) private locale: string,
     ) {}
-
-    // refactoring duplicitni
-    public readonly supplyOfferCommodityTypes = {
-        power: CommodityType.POWER,
-        gas: CommodityType.GAS,
-    };
 
     public getTableCols = (commodityType: CommodityType) => ([
         {
