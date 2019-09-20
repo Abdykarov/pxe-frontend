@@ -7,8 +7,8 @@ export const restAPIErrorCodes = {
 };
 
 export const graphQLMessages = {
-    cannotDeleteContract: 'Od smlouvy se nepodařilo odstoupit.',
-    cannotSignContract: 'Smlouvu se nepodařilo podepsat.',
+    cannotDeleteContract: 'Omlouváme se, ale z neočekávaného důvodu se odstoupení od smlouvy nepodařilo. Zkuste to prosím znovu později.',
+    cannotSignContract: 'Omlouváme se, ale z neočekávaného důvodu se nepodařilo smlouvu podepsat. Zkuste to prosím znovu později.',
 };
 
 export const offerValidityMessages = {
@@ -106,7 +106,7 @@ export const errorFieldMessages =  {
         required: 'Vyplňte svůj e-mail.',
         email: 'Použijte pouze písmena bez diakritiky, číslice, tečku (.) a zavináč (@).',
         emailNotRegistered: 'Tento e-mail v aplikaci neexistuje.',
-        alreadyRegisteredEmail: 'Tento e-mail již registrujeme.',
+        alreadyRegisteredEmail: 'Tento e-mail je již v aplikaci zaregistrovaný.',
     },
     expirationDate: {
         requiredGas: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr plynu.',
