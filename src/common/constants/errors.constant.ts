@@ -7,8 +7,8 @@ export const restAPIErrorCodes = {
 };
 
 export const graphQLMessages = {
-    cannotDeleteContract: 'Od smlouvy se nepodařilo odstoupit.',
-    cannotSignContract: 'Smlouvu se nepodařilo podepsat.',
+    cannotDeleteContract: 'Omlouváme se, ale z neočekávaného důvodu se odstoupení od smlouvy nepodařilo. Zkuste to prosím znovu později.',
+    cannotSignContract: 'Omlouváme se, ale z neočekávaného důvodu se nepodařilo smlouvu podepsat. Zkuste to prosím znovu později.',
 };
 
 export const offerValidityMessages = {
