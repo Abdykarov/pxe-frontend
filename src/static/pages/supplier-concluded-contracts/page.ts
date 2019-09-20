@@ -1,19 +1,22 @@
 import { Component } from '@angular/core';
 
-import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
-import { tableCols } from './config';
+import { SupplierConcludedContractsConfig } from './config';
 
 @Component({
     templateUrl: './page.html',
 })
 export class SupplierConcludedContractsComponent {
-    public readonly ITEMS_PER_PAGE = 50;
+    public readonly ITEMS_PER_PAGE = 20;
     public readonly MAX_SIZE = 5;
     public readonly SHOW_BOUNDARY_LINKS = true;
 
-    public supplyPoint: ISupplyPoint[] = [];
-    public totalItems = 1108;
-    public tableCols = tableCols;
+    public supplyPoint: any[] = this.supplierConcludedContractsConfig.supplyPointsSource;
+    public totalItems = this.supplierConcludedContractsConfig.supplyPointsSource.length;
+    public tableCols = this.supplierConcludedContractsConfig.tableCols;
+
+    constructor(
+        private supplierConcludedContractsConfig: SupplierConcludedContractsConfig,
+    ) {}
 
     public pageChanged = (evt) => {
         evt.preventDefault();

@@ -203,7 +203,11 @@ export const staticNavigationConfig: INavigationConfig = [
                 },
                 {
                     'label': 'supplier-concluded-contracts',
-                    'url': '/full/supplier-concluded-contracts',
+                    'url': '/basic/supplier-concluded-contracts',
+                },
+                {
+                    'label': 'supplier-concluded-contracts-empty',
+                    'url': '/basic/supplier-concluded-contract-empty',
                 },
                 {
                     'label': 'supply offer',

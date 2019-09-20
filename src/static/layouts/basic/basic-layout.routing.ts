@@ -104,6 +104,14 @@ import {
     requestCardPageRoutes,
 } from 'src/static/organisms/request-card/page.module';
 import {
+    SupplierConcludedContractsEmptyModule,
+    supplierConcludedContractsEmptyRoutes,
+} from 'src/static/pages/supplier-concluded-contracts-empty/page.module';
+import {
+    SupplierConcludedContractsModule,
+    supplierConcludedContractsRoutes,
+} from 'src/static/pages/supplier-concluded-contracts/page.module';
+import {
     SupplyOfferPageModule,
     supplyOfferPageRoutes,
 } from 'src/static/organisms/supply-offer/page.module';
@@ -185,6 +193,8 @@ const routes: Routes = [
             ...requestPageRoutes,
             ...requestBannerPageRoutes,
             ...requestCardPageRoutes,
+            ...supplierConcludedContractsEmptyRoutes,
+            ...supplierConcludedContractsRoutes,
             ...supplyOfferPageRoutes,
             ...supplyPointOfferPageRoutes,
             ...supplyPointOverviewPageRoutes,
@@ -233,6 +243,8 @@ const routes: Routes = [
         RequestBannerPageModule,
         RequestCardPageModule,
         RouterModule.forChild(routes),
+        SupplierConcludedContractsEmptyModule,
+        SupplierConcludedContractsModule,
         SupplyOfferPageModule,
         SupplyPointOfferPageModule,
         SupplyPointOverviewPageModule,

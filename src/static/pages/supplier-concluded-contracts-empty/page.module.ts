@@ -2,33 +2,31 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 
+import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
 import {
     LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
-import { PaginationModule } from 'ngx-bootstrap';
-import { SupplierConcludedContractsComponent } from './page';
-import { TableModule } from 'src/common/ui/table/table.module';
+import { SupplierConcludedContractsEmptyComponent } from './page';
 
 @NgModule({
     declarations: [
-        SupplierConcludedContractsComponent,
+        SupplierConcludedContractsEmptyComponent,
     ],
     exports: [
-        SupplierConcludedContractsComponent,
+        SupplierConcludedContractsEmptyComponent,
     ],
     imports: [
         CommonModule,
-        PaginationModule.forRoot(),
-        TableModule,
+        InfoBannerModule,
     ],
 })
-export class SupplierConcludedContractsModule {}
+export class SupplierConcludedContractsEmptyModule {}
 
-export const supplierConcludedContractsRoutes: Routes = [
+export const supplierConcludedContractsEmptyRoutes: Routes = [
     {
-        path: 'supplier-concluded-contracts',
-        component: SupplierConcludedContractsComponent,
+        path: 'supplier-concluded-contract-empty',
+        component: SupplierConcludedContractsEmptyComponent,
         data: {
             isSimpleFooter: false,
             isPublic: false,

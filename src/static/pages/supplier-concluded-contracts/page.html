@@ -9,61 +9,59 @@
     </div>
 </ng-template>
 
-<div class="container-content">
-    <div class="container-fluid">
-        <div class="row mb-3">
-            <div class="col-12 col-md-6 offset-md-3 text-center">
-                <h1>
-                    Vaše uzavřené smlouvy
-                </h1>
-            </div>
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12 col-md-6 offset-md-3 text-center">
+            <h1>
+                Uzavřené smlouvy
+            </h1>
         </div>
-        <div class="row">
-            <div class="col-12 col-xl-10 offset-xl-1 text-center">
-                <ul class="link-list mb-0">
-                    <li class="link-list__item">
-                        <a
-                            class="link-list__link link-list__link--active"
-                            href="#">
-                            Elektřina
-                        </a>
-                    </li>
-                    <li class="link-list__item">
-                        <a
-                            class="link-list__link"
-                            href="#">
-                            Plyn
-                        </a>
-                    </li>
-                </ul>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-xl-10 offset-xl-1 text-center">
+            <ul class="link-list mb-0">
+                <li class="link-list__item">
+                    <a
+                        class="link-list__link link-list__link--active"
+                        href="#">
+                        Elektřina
+                    </a>
+                </li>
+                <li class="link-list__item">
+                    <a
+                        class="link-list__link"
+                        href="#">
+                        Plyn
+                    </a>
+                </li>
+            </ul>
         </div>
-        <div class="row">
-            <div class="col-12 col-lg-10 offset-lg-1">
-                <lnd-table
-                    [cols]="tableCols"
-                    [rows]="supplyPoint"
-                    [showHead]="true"
-                    [tableWrapperClass]="['table-wrapper--advanced']"
-                    [tableClass]="['table--advanced', 'mb-0']"
-                    [mobileDetailCaption]="'Show more...'"
-                    [columnTemplates]="{
-                        downloadPdfTemplate: downloadPdfTemplate
-                    }"
-                ></lnd-table>
-                <div class="float-right">
-                    <pagination
-                        [boundaryLinks]="SHOW_BOUNDARY_LINKS"
-                        [itemsPerPage]="ITEMS_PER_PAGE"
-                        [maxSize]="MAX_SIZE"
-                        (pageChanged)="pageChanged($event)"
-                        [totalItems]="totalItems"
-                        firstText="&laquo;"
-                        previousText="&lsaquo;"
-                        nextText="&rsaquo;"
-                        lastText="&raquo;"
-                    ></pagination>
-                </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-10 offset-lg-1">
+            <lnd-table
+                [cols]="tableCols"
+                [rows]="supplyPoint"
+                [showHead]="true"
+                [tableWrapperClass]="['table-wrapper--advanced']"
+                [tableClass]="['table--advanced', 'mb-0']"
+                [mobileDetailCaption]="'Show more...'"
+                [columnTemplates]="{
+                    downloadPdfTemplate: downloadPdfTemplate
+                }"
+            ></lnd-table>
+            <div class="float-right">
+                <pagination
+                    [boundaryLinks]="SHOW_BOUNDARY_LINKS"
+                    [itemsPerPage]="ITEMS_PER_PAGE"
+                    [maxSize]="MAX_SIZE"
+                    (pageChanged)="pageChanged($event)"
+                    [totalItems]="totalItems"
+                    firstText="&laquo;"
+                    previousText="&lsaquo;"
+                    nextText="&rsaquo;"
+                    lastText="&raquo;"
+                ></pagination>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-<pxe-layout-container pageTitle="Přehled uzavřených smluv">
+<pxe-layout-container pageTitle="Uzavřené smlouvy">
     <lnd-alert
         *ngIf="globalError.length"
         type="danger">
@@ -34,6 +34,7 @@
     <div class="row">
         <div class="col-12 col-lg-10 offset-lg-1">
             <ng-container  *ngIf="supplyPointResult !== null && supplyPointResult.length > 0">
+                <!--show more je vsude je ok?-->
                 <lnd-table
                     [cols]="tableCols"
                     [rows]="supplyPointResult"
