@@ -106,7 +106,7 @@ export const errorFieldMessages =  {
         required: 'Vyplňte svůj e-mail.',
         email: 'Použijte pouze písmena bez diakritiky, číslice, tečku (.) a zavináč (@).',
         emailNotRegistered: 'Tento e-mail v aplikaci neexistuje.',
-        alreadyRegisteredEmail: 'Tento e-mail již registrujeme.',
+        alreadyRegisteredEmail: 'Tento e-mail je již v aplikaci zaregistrovaný.',
     },
     expirationDate: {
         requiredGas: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr plynu.',
