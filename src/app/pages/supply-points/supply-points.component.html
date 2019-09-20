@@ -21,7 +21,7 @@
         </ng-container>
     </lnd-alert>
     <lnd-placeloader [loading]="dataLoading && !errorMessages.length"></lnd-placeloader>
-    <ng-container *ngIf="supplyPoints && !supplyPoints.length">
+    <ng-container *ngIf="!dataLoading && supplyPoints && !supplyPoints.length">
         <lnd-info-banner
             [bannerTitle]="'Zatím nemáte žádnou uzavřenou smlouvu.'"
             [showButton]="false"
@@ -30,14 +30,14 @@
                 <div class="col-md-8 offset-md-2">
                     <p>
                         V případě zájmu o dodávku energií pro nové odběrné místo, pokračujte prosím zadáním odběrného místa.
-                        <ng-container *ngIf="supplyPointStatistic.notConcludedCount">
+                        <ng-container *ngIf="supplyPointStatistic && supplyPointStatistic.notConcludedCount">
                             Pokud už máte vytvořené odběrné místo, můžete se vrátit k vaší rozpracované smlouvě a dokončit proces.
                         </ng-container>
                     </p>
                 </div>
             </div>
             <div class="row">
-                <div *ngIf="supplyPointStatistic.notConcludedCount"
+                <div *ngIf="supplyPointStatistic && supplyPointStatistic.notConcludedCount"
                      class="col-md-4 offset-md-2">
                     <lnd-button
                         (action)="completeRequestAction(supplyPointStatistic.notConcludedItems)"
@@ -46,7 +46,7 @@
                     </lnd-button>
                 </div>
                 <div class="col-md-4"
-                     [class.offset-md-4]="!supplyPointStatistic.notConcludedCount">
+                     [class.offset-md-4]="supplyPointStatistic && !supplyPointStatistic.notConcludedCount">
                     <lnd-button
                         (action)="createSupplyPoint($event)"
                         label="Zadat odběrné místo"
@@ -56,7 +56,7 @@
             </div>
         </lnd-info-banner>
     </ng-container>
-    <ng-container *ngIf="supplyPoints && supplyPoints.length">
+    <ng-container *ngIf="!dataLoading && supplyPoints && supplyPoints.length">
         <div class="row mb-5">
             <div class="col text-center">
                 <p class="mb-2">Pokud máte zájem o dodávku energií pro další odběrné místo, doporučujeme zkontrolovat, zda k němu nemáte rozpracovanou smlouvu.</p>
