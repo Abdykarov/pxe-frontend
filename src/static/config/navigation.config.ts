@@ -202,6 +202,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/new-supply-point',
                 },
                 {
+                    'label': 'supplier-concluded-contracts',
+                    'url': '/full/supplier-concluded-contracts',
+                },
+                {
                     'label': 'supply offer',
                     'url': '/full/supply-offer',
                 },

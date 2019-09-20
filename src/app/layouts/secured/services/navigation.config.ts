@@ -89,6 +89,22 @@ export const navigationMenuUserActions: INavigationMenu = [
 
 export const navigationMenuSuppliersActions: INavigationMenu = [
     {
+        'class': 'house-alert',
+        'label': 'Nabidky',
+        'icon': 'power',
+        'url' : `/${ROUTES.ROUTER_SUPPLIER_OFFER}`,
+        'children': [],
+        __typename: 'logout',
+    },
+    {
+        'class': 'link--documents',
+        'label': 'Smlouvy',
+        'icon': 'power',
+        'url' : `/${ROUTES.ROUTER_SUPPLIER_CONCLUDED_CONTRACTS}`,
+        'children': [],
+        __typename: 'logout',
+    },
+    {
         'class': 'link--logout',
         'label': 'Odhlášení',
         'icon': 'power',

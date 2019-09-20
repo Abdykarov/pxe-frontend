@@ -13,6 +13,10 @@ import { LoginPageModule, loginPageRoutes } from 'src/static/pages/login/page.mo
 import { LoginAfterRegistrationPageModule, loginAfterRegistrationPageRoutes } from 'src/static/pages/login-after-registration/page.module';
 import { RegistrationPageModule, registrationPageRoutes } from 'src/static/pages/registration/page.module';
 import { SupplyOfferPageModule, supplyOfferPageRoutes } from 'src/static/pages/supply-offer/page.module';
+import {
+    SupplierConcludedContractsModule,
+    supplierConcludedContractsRoutes,
+} from 'src/static/pages/supplier-concluded-contracts/page.module';
 
 const routes: Routes = [
     {
@@ -25,6 +29,7 @@ const routes: Routes = [
             ...loginPageRoutes,
             ...loginAfterRegistrationPageRoutes,
             ...registrationPageRoutes,
+            ...supplierConcludedContractsRoutes,
             ...supplyOfferPageRoutes,
             {
                 path: '**',
@@ -43,6 +48,7 @@ const routes: Routes = [
         LoginAfterRegistrationPageModule,
         RegistrationPageModule,
         RouterModule.forChild(routes),
+        SupplierConcludedContractsModule,
         SupplyOfferPageModule,
     ],
     exports: [
