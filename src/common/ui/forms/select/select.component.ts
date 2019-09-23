@@ -10,7 +10,10 @@ import {
 import { FormGroup } from '@angular/forms';
 
 import * as R from 'ramda';
-import { NgSelectComponent, NgSelectConfig } from '@ng-select/ng-select';
+import {
+    NgSelectComponent,
+    NgSelectConfig,
+} from '@ng-select/ng-select';
 
 import { defaultSelectConfig } from './select.config';
 import { DynamicPipe } from 'src/common/pipes/dynamic/dynamic.pipe';

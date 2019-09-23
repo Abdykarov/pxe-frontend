@@ -59,6 +59,7 @@ export const addressWhispererByHandFields: IForm = {
         },
         zipCode: {
             required: errorFieldMessages.zipCode.required,
+            // remocve custom ...
             zipCode: errorFieldMessages.zipCode.pattern,
         },
     },

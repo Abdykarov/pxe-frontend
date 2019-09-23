@@ -26,11 +26,7 @@ export class AddressWhispererByHandFormComponent extends AbstractFormComponent i
     public form: FormGroup;
     public regions: any;
 
-    public regionOptions = R.map((region) => ({
-        key: region.key,
-        value: region.label,
-        label: region.label,
-    }), REGIONS);
+    public regionOptions = REGIONS;
 
     constructor(
         protected fb: FormBuilder,
