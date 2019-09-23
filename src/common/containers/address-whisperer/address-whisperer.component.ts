@@ -100,7 +100,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     public whispererName: string;
 
     @Output()
-    public filledAddressBySelfAction: EventEmitter<any> = new EventEmitter<any>();
+    public userFillingAddressBySelfAction: EventEmitter<any> = new EventEmitter<any>();
 
     private showForm = false;
     public addresses: Array<IAddress> = [];
@@ -120,6 +120,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
                 tap((term) => {
                     this.isStartedSearching = !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(term);
                     this.showForm = false;
+                    this.cd.markForCheck();
                 }),
                 filter(term => term && term.length >= AddressWhispererComponent.ADDRESS_MIN_LENGTH),
                 distinctUntilChanged(),
@@ -141,14 +142,13 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     public fillAddressBySelf = (evt) => {
         this.lndSelect.hideDialog();
         this.showForm = true;
-        this.filledAddressBySelfAction.emit(this.showForm);
+        this.userFillingAddressBySelfAction.emit(this.showForm);
         this.cd.markForCheck();
     }
 
     public fillAddressWhispererIfIsValid = (value) => {
         this.parentForm.get(this.whispererName).setValue(value);
         this.showForm = false;
-        // kouknout se kde co jak
-        this.cd.markForCheck();
+        this.userFillingAddressBySelfAction.emit(this.showForm);
     }
 }

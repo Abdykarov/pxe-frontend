@@ -68,6 +68,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         super(fb);
         this.minDate = new Date();
     }
+
     @Input()
     public formValues: ISupplyPoint = null;
 
@@ -89,7 +90,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public suppliers$: BehaviorSubject<any> = new BehaviorSubject([]);
     public contractEndType = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT;
 
-    public showErrorAddress = true;
+    public showErrorAddressField = true;
 
     ngOnInit() {
         super.ngOnInit();
@@ -289,7 +290,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public submitForm = () => {
         this.resetCustomFieldError();
         this.triggerValidation();
-        this.showErrorAddress = true;
         if (this.form.valid) {
             const form = {
                 ...this.form.value,
@@ -316,11 +316,10 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             this.submitAction.emit(form);
         }
     }
-    // krajni pripady
-    public ahoj = (aaa: boolean) => {
-        if (aaa) {
-            this.showErrorAddress = false;
-        }
+
+    public userFillingAddressBySelf = (isFormShowed: boolean) => {
+        this.showErrorAddressField = !isFormShowed;
+        this.cd.markForCheck();
     }
 
     public setOwnTerminate = (ownTerminate: boolean) => {

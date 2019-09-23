@@ -2,7 +2,8 @@
     [formGroup]="form"
     class="form-container"
     autocomplete="off"
-    (keydown)="resetCustomFieldError();isValid();">
+    (keydown)="resetCustomFieldError();isValid();"
+    (change)="resetCustomFieldError();isValid();">
     <lnd-form-field
         [error]="form.controls.city.errors"
         [formControl]="form.controls.city"
