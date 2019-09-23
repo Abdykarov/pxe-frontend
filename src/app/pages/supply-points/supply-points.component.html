@@ -21,7 +21,7 @@
         </ng-container>
     </lnd-alert>
     <lnd-placeloader [loading]="dataLoading && !errorMessages.length"></lnd-placeloader>
-    <ng-container *ngIf="supplyPoints && !supplyPoints.length">
+    <ng-container *ngIf="!dataLoading && supplyPoints && !supplyPoints.length && supplyPointStatistic">
         <lnd-info-banner
             [bannerTitle]="'Zatím nemáte žádnou uzavřenou smlouvu.'"
             [showButton]="false"
@@ -56,7 +56,7 @@
             </div>
         </lnd-info-banner>
     </ng-container>
-    <ng-container *ngIf="supplyPoints && supplyPoints.length">
+    <ng-container *ngIf="!dataLoading && supplyPoints && supplyPoints.length">
         <div class="row mb-5">
             <div class="col text-center">
                 <p class="mb-2">Pokud máte zájem o dodávku energií pro další odběrné místo, doporučujeme zkontrolovat, zda k němu nemáte rozpracovanou smlouvu.</p>
