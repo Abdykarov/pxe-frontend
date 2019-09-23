@@ -58,6 +58,16 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./supply-point-form.component.scss'],
 })
 export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent implements OnInit, OnChanges {
+
+    constructor(
+        private cd: ChangeDetectorRef,
+        protected fb: FormBuilder,
+        private modalsService: ModalService,
+        private supplyService: SupplyService,
+    ) {
+        super(fb);
+        this.minDate = new Date();
+    }
     @Input()
     public formValues: ISupplyPoint = null;
 
@@ -79,15 +89,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public suppliers$: BehaviorSubject<any> = new BehaviorSubject([]);
     public contractEndType = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT;
 
-    constructor(
-        private cd: ChangeDetectorRef,
-        protected fb: FormBuilder,
-        private modalsService: ModalService,
-        private supplyService: SupplyService,
-    ) {
-        super(fb);
-        this.minDate = new Date();
-    }
+    public showErrorAddress = true;
 
     ngOnInit() {
         super.ngOnInit();
@@ -287,6 +289,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public submitForm = () => {
         this.resetCustomFieldError();
         this.triggerValidation();
+        this.showErrorAddress = true;
         if (this.form.valid) {
             const form = {
                 ...this.form.value,
@@ -311,6 +314,12 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             }
 
             this.submitAction.emit(form);
+        }
+    }
+    // krajni pripady
+    public ahoj = (aaa: boolean) => {
+        if (aaa) {
+            this.showErrorAddress = false;
         }
     }
 

@@ -1,0 +1,79 @@
+<form
+    [formGroup]="form"
+    class="form-container"
+    autocomplete="off"
+    (keydown)="resetCustomFieldError();isValid();">
+    <lnd-form-field
+        [error]="form.controls.city.errors"
+        [formControl]="form.controls.city"
+        [id]="'city'"
+        label="Město / Obec"
+        [success]="form.controls.city.valid && form.controls.city.touched"
+        [touched]="form.controls.city.touched"
+        [validationMessages]="formFields.validationMessages.city"
+    ></lnd-form-field>
+    <lnd-form-field
+        [error]="form.controls.street.errors"
+        [formControl]="form.controls.street"
+        [id]="'street'"
+        label="Ulice"
+        [success]="form.controls.street.valid && form.controls.street.touched"
+        [touched]="form.controls.street.touched"
+        [validationMessages]="formFields.validationMessages.street"
+    ></lnd-form-field>
+    <!--davat form error + zkontrolovat dobre nakopirovany validatory-->
+    <pxe-field-wrapper
+        label=""
+        labelFor="descriptiveNumber"
+        [error]="((form.controls.descriptiveNumber.touched || formError.descriptiveNumber) && (formError.descriptiveNumber || form.controls.descriptiveNumber.errors)) ||
+                         ((form.controls.orientationNumber.touched || formError.orientationNumber) && (formError.orientationNumber || form.controls.orientationNumber.errors))"
+        [validationMessages]="((form.controls.descriptiveNumber.touched || formError.descriptiveNumber) && (formError.descriptiveNumber || form.controls.descriptiveNumber.errors) && formFields.validationMessages.descriptiveNumber) ||
+                                      ((form.controls.orientationNumber.touched || formError.orientationNumber) && (formError.orientationNumber || form.controls.orientationNumber.errors) && formFields.validationMessages.orientationNumber)">
+        <div class="row align-items-end no-gutters">
+            <div class="col-6 pr-1">
+                <lnd-form-field
+                    [error]="formError.descriptiveNumber || form.controls.descriptiveNumber.errors"
+                    [formControl]="form.controls.descriptiveNumber"
+                    [id]="'descriptiveNumber'"
+                    label="Číslo popisné"
+                    [showErrorMessage]="false"
+                    [success]="form.controls.descriptiveNumber.valid && (form.controls.descriptiveNumber.touched || formError.descriptiveNumber)"
+                    [touched]="form.controls.descriptiveNumber.touched || formError.descriptiveNumber"
+                    [validationMessages]="formFields.validationMessages.descriptiveNumber"
+                ></lnd-form-field>
+            </div>
+            <div class="col-6 pl-1">
+                <lnd-form-field
+                    [error]="formError.orientationNumber || form.controls.orientationNumber.errors"
+                    [formControl]="form.controls.orientationNumber"
+                    [id]="'orientationNumber'"
+                    label="Číslo orientační"
+                    [showErrorMessage]="false"
+                    [success]="form.controls.orientationNumber.valid && (form.controls.orientationNumber.touched || formError.orientationNumber)"
+                    [touched]="form.controls.orientationNumber.touched || formError.orientationNumber"
+                    [validationMessages]="formFields.validationMessages.orientationNumber"
+                ></lnd-form-field>
+            </div>
+        </div>
+    </pxe-field-wrapper>
+    <lnd-form-field
+        [error]="form.controls.zipCode.errors"
+        [formControl]="form.controls.zipCode"
+        [id]="'zipCode'"
+        label="PSČ"
+        [success]="form.controls.zipCode.valid && form.controls.zipCode.touched"
+        [touched]="form.controls.zipCode.touched"
+        [validationMessages]="formFields.validationMessages.zipCode"
+    ></lnd-form-field>
+    <lnd-select
+        [bindValue]="null"
+        [error]="form.controls.region.errors"
+        label="Region"
+        [options]="regions"
+        [parentForm]="form"
+        [selectName]="'region'"
+        [success]="form.controls.region.valid && form.controls.region.touched"
+        [touched]="form.controls.region.touched"
+        [validationMessages]="formFields.validationMessages.region">
+    </lnd-select>
+</form>

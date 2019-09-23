@@ -22,6 +22,7 @@ import {
     isValidTelephoneNumber,
 } from './phone.validator.fnc';
 import { verifyIC } from './ico-validator.fnc';
+import { isValidZipCode } from 'src/common/utils/validators/zip-code.validator.fnc';
 
 export class CustomValidators {
 
@@ -263,6 +264,21 @@ export class CustomValidators {
         return {
             ean: true,
         };
+    }
+
+    static zipCode = (zipCode): {} => {
+        if (zipCode.pristine || R_.isNilOrEmpty(zipCode.value)) {
+            return null;
+        }
+
+        if (isValidZipCode(zipCode.value)) {
+            return null;
+        }
+
+        return {
+            zipCode: true,
+        };
+
     }
 
     static ico = (ico): {} => {

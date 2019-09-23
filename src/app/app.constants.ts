@@ -234,3 +234,20 @@ export const DEFAULT_QR_CODE_SETTING: IQRCodeSetting = {
     width: 256,
     margin: 0,
 };
+
+export const REGIONS = [
+    {'label': 'Praha', 'key': '0'},
+    {'label': 'Jihočeský kraj', 'key': '1'},
+    {'label': 'Jihomoravský kraj', 'key': '2'},
+    {'label': 'Karlovarský kraj', 'key': '3'},
+    {'label': 'Královéhradecký kraj', 'key': '5'},
+    {'label': 'Liberecký kraj', 'key': '6'},
+    {'label': 'Moravskoslezský kraj', 'key': '7'},
+    {'label': 'Olomoucký kraj', 'key': '8'},
+    {'label': 'Pardubický kraj', 'key': '9'},
+    {'label': 'Plzeňský kraj', 'key': '10'},
+    {'label': 'Středočeský kraj', 'key': '11'},
+    {'label': 'Ústecký kraj', 'key': '12'},
+    {'label': 'Vysočina', 'key': '4'},
+    {'label': 'Zlínský kraj', 'key': '13'},
+];

@@ -6,22 +6,6 @@
         [formControl]="form.controls.onlyAddress1">
     </lnd-form-field>
 </ng-template>
-<!-- Example custom lael template -->
-<ng-template
-    #templateLabel
-    let-item="item"
-    let-index="index">
-    {{ item.street }}&nbsp;{{ item.orientationNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.descriptiveNumber }},
-    {{ item.city }}, {{ item.postCode }}
-</ng-template>
-<!-- Example searched items template -->
-<ng-template
-    #templateItem
-    let-item="item"
-    let-index="index">
-    {{ item.street }}&nbsp;{{ item.orientationNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.descriptiveNumber }}<br>
-    {{ item.city }}&nbsp;{{ item.postCode }}
-</ng-template>
 
 <div class="row mb-5">
     <div class="col-12 text-center">
@@ -131,8 +115,6 @@
         [parentForm]="form"
         [success]="form.controls.address1.valid && (form.controls.address1.touched || formError.address1)"
         [subtextTemplate]="otherAddress"
-        [templateItem]="templateItem"
-        [templateLabel]="templateLabel"
         [touched]="form.controls.address1.touched || formError.address1"
         [validationMessages]="isIndividual ? formFields.validationMessages.address1Person : formFields.validationMessages.address1Company"
         [whispererName]="'address1'">
@@ -143,8 +125,6 @@
         [label]="isIndividual ? 'Korespondeční adresa' : 'Fakturační adresa'"
         [parentForm]="form"
         [success]="form.controls.address2.valid && (form.controls.address2.touched || formError.address2)"
-        [templateItem]="templateItem"
-        [templateLabel]="templateLabel"
         [touched]="form.controls.address2.touched || formError.address2"
         [validationMessages]="isIndividual ? formFields.validationMessages.address2Person : formFields.validationMessages.address2Company"
         [whispererName]="'address2'">

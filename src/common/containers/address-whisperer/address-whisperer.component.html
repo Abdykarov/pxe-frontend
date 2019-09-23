@@ -1,4 +1,27 @@
+<ng-template
+    #templateNotFoundDefault
+    let-searchTerm="searchTerm">
+    Adresu jsme nenašli. Možná jste se překlepli, zkuste to znovu nebo <a (click)="fillAddressBySelf($event)"> vyplňte adresu ručně</a>.
+</ng-template>
+
+<ng-template
+    #templateItemDefault
+    let-item="item"
+    let-index="index">
+    {{ item.street }}&nbsp;{{ item.orientationNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.descriptiveNumber }}<br>
+    {{ item.city }}&nbsp;{{ item.postCode }}
+</ng-template>
+
+<ng-template
+    #templateLabelDefault
+    let-item="item"
+    let-index="index">
+    {{ item.street }}&nbsp;{{ item.orientationNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.descriptiveNumber }},
+    {{ item.city }}, {{ item.postCode }}
+</ng-template>
+
 <lnd-select
+    #lndSelect
     [addTag]="false"
     [subtextTemplate]="subtextTemplate"
     [appendButtonIcon]="appendButtonIcon"
@@ -14,11 +37,18 @@
     [options]="addresses"
     [parentForm]="parentForm"
     [success]="success"
-    [templateItem]="templateItem"
-    [templateLabel]="templateLabel"
+    [templateItem]="templateItem || templateItemDefault"
+    [templateLabel]="templateLabel || templateLabelDefault"
+    [templateNotFound]="templateNotFound || templateNotFoundDefault"
     [touched]="touched"
     [typeahead]="typeahead"
     [validationMessages]="validationMessages"
     customClass="ng-select-custom--address"
 >
 </lnd-select>
+<pxe-address-whisperer-by-hand-form
+    *ngIf="showForm"
+    [formFields]="formFields"
+    (sendDataIfValidAction)="fillAddressWhispererIfIsValid($event)"
+>
+</pxe-address-whisperer-by-hand-form>

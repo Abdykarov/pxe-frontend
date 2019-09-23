@@ -98,7 +98,7 @@ export class OfferService {
         })
 
     public deleteOffer = (offerId: number) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: deleteOfferMutation,
             variables: {
                 offerId,

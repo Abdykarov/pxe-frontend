@@ -6,6 +6,7 @@ import {
     OnInit,
     Output,
     TemplateRef,
+    ViewChild,
 } from '@angular/core';
 import {
     FormGroup,
@@ -16,13 +17,17 @@ import {
     distinctUntilChanged,
     filter,
     switchMap,
-    takeUntil,
+    takeUntil, tap,
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import {
+    addressWhispererByHandFields,
+} from 'src/common/containers/form/forms/address-whisperer-by-hand/address-whisperer-by-hand-form.config';
 import { AddressWhispererService } from './services/address-whisperer.service';
 import { IAddress } from 'src/common/graphql/models/supply.model';
 import { IValidationMessages } from 'src/common/ui/forms/models/validation-messages.model';
+import { SelectComponent } from 'src/common/ui/forms/select/select.component';
 
 @Component({
     selector: 'pxe-address-whisperer',
@@ -33,6 +38,9 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     private static readonly ADDRESS_MIN_LENGTH = 2;
     private static readonly DEBOUNCE_TIME = 200;
     private static readonly ROWS_RESPONSE = 5;
+
+    @ViewChild('lndSelect')
+    public lndSelect: SelectComponent;
 
     @Output()
     public appendButtonAction?: EventEmitter<any> = new EventEmitter();
@@ -45,6 +53,9 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
 
     @Input()
     public error?: any;
+
+    @Input()
+    public formFields = addressWhispererByHandFields;
 
     @Input()
     public label: string;
@@ -60,6 +71,9 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
 
     @Input()
     public templateLabel?: TemplateRef<any>;
+
+    @Input()
+    public templateNotFound?: TemplateRef<any>;
 
     @Input()
     public touched = false;
@@ -79,6 +93,10 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     @Input()
     public whispererName: string;
 
+    @Output()
+    public fillAddressBySelfChoose: EventEmitter<any> = new EventEmitter<any>();
+
+    private showForm = false;
     public addresses: Array<IAddress> = [];
     public typeahead: EventEmitter<any>;
 
@@ -92,6 +110,10 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
         this.typeahead
             .pipe(
                 debounceTime(AddressWhispererComponent.DEBOUNCE_TIME),
+                tap(() => {
+                    this.showForm = false;
+                    this.cd.markForCheck();
+                }),
                 filter(term => term && term.length >= AddressWhispererComponent.ADDRESS_MIN_LENGTH),
                 distinctUntilChanged(),
                 switchMap((term: string) => this.addressWhispererService.getPlaces(AddressWhispererComponent.ROWS_RESPONSE, term)),
@@ -106,6 +128,20 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
 
     public setAddresses = (addresses = []) => {
         this.addresses = addresses;
+        this.cd.markForCheck();
+    }
+
+    public fillAddressBySelf = (evt) => {
+        this.lndSelect.hideDialog();
+        this.showForm = true;
+        this.fillAddressBySelfChoose.emit(this.showForm);
+        this.cd.markForCheck();
+    }
+
+    public fillAddressWhispererIfIsValid = (value) => {
+        this.parentForm.get(this.whispererName).setValue(value);
+        this.showForm = false;
+        // kouknout se kde co jak
         this.cd.markForCheck();
     }
 }
