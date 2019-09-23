@@ -221,33 +221,18 @@ export class CustomValidators {
         };
     }
 
-    static firstName = (firstName) => {
-        if (firstName.pristine) {
+    static username = (username) => {
+        if (username.pristine) {
             return null;
         }
 
-        const FIRST_NAME_REGEXP = new RegExp(`^[${CustomValidators.alphaCharacters}]+([ ][${CustomValidators.alphaCharacters}]+)*$`);
-        if (FIRST_NAME_REGEXP.test(firstName.value)) {
-            return null;
-        }
-
-        return {
-            firstName: true,
-        };
-    }
-
-    static lastName = (lastName) => {
-        if (lastName.pristine) {
-            return null;
-        }
-
-        const LAST_NAME_REGEXP = new RegExp(`^([${CustomValidators.alphaCharacters}]+[- ]?)*[${CustomValidators.alphaCharacters}]+$`);
-        if (LAST_NAME_REGEXP.test(lastName.value)) {
+        const USER_NAME_REGEXP = new RegExp(`^([${CustomValidators.alphaCharacters}]+[- ]?)*[${CustomValidators.alphaCharacters}]+$`);
+        if (USER_NAME_REGEXP.test(username.value)) {
             return null;
         }
 
         return {
-            lastName: true,
+            username: true,
         };
     }
 
