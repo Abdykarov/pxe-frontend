@@ -1,13 +1,13 @@
 <ng-template
-    #templateNotFoundDefault
+    #templateNotFoundFillBySelfDefault
     let-searchTerm="searchTerm">
     Adresu jsme nenašli. Možná jste se překlepli, zkuste to znovu nebo <a (click)="fillAddressBySelf($event)"> vyplňte adresu ručně</a>.
 </ng-template>
 
 <ng-template
-    #templateNotPatternNotAcceptedFoundDefault
+    #templateNotFoundFewArgumentsDefault
     let-searchTerm="searchTerm">
-    Upřesněte adresu.
+    Upřesněte adresu musí obsahovat  cislo mezeru nebo čárku a číslici.
 </ng-template>
 
 
@@ -46,16 +46,16 @@
     [success]="success"
     [templateItem]="templateItem || templateItemDefault"
     [templateLabel]="templateLabel || templateLabelDefault"
-    [templateNotFound]="isNotFoundTemplate ? templateNotFound || templateNotFoundDefault : templateNotPatternNotAcceptedFound || templateNotPatternNotAcceptedFoundDefault"
+    [templateNotFound]="isStartedSearching ? templateNotFoundFillBySelf || templateNotFoundFillBySelfDefault : templateNotFoundFewArguments || templateNotFoundFewArgumentsDefault"
     [touched]="touched"
     [typeahead]="typeahead"
     [validationMessages]="validationMessages"
     customClass="ng-select-custom--address"
 >
 </lnd-select>
-<pxe-address-whisperer-by-hand-form
+<pxe-address-whisperer-by-self-form
     *ngIf="showForm"
     [formFields]="formFields"
     (sendDataIfValidAction)="fillAddressWhispererIfIsValid($event)"
 >
-</pxe-address-whisperer-by-hand-form>
+</pxe-address-whisperer-by-self-form>

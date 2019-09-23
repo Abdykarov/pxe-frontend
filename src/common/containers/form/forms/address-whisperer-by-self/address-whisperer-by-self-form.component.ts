@@ -15,11 +15,11 @@ import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.
 import { REGIONS } from 'src/app/app.constants';
 
 @Component({
-    selector: 'pxe-address-whisperer-by-hand-form',
-    templateUrl: './address-whisperer-by-hand-form.component.html',
-    styleUrls: ['./address-whisperer-by-hand-form.component.scss'],
+    selector: 'pxe-address-whisperer-by-self-form',
+    templateUrl: './address-whisperer-by-self-form.component.html',
+    styleUrls: ['./address-whisperer-by-self-form.component.scss'],
 })
-export class AddressWhispererByHandFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
+export class AddressWhispererBySelfFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
     @Output()
     public sendDataIfValidAction: EventEmitter<any> = new EventEmitter();
 

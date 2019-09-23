@@ -4,7 +4,7 @@ import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
 
-export const addressWhispererByHandFields: IForm = {
+export const addressWhispererBySelfFields: IForm = {
     controls: {
         city: [
             '',

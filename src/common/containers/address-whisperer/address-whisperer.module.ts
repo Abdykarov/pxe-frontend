@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AddressWhispererComponent } from './address-whisperer.component';
 import {
-    AddressWhispererByHandFormModule,
-} from 'src/common/containers/form/forms/address-whisperer-by-hand/address-whisperer-by-hand-form.module';
+    AddressWhispererBySelfFormModule,
+} from 'src/common/containers/form/forms/address-whisperer-by-self/address-whisperer-by-self-form.module';
 import { SelectModule } from 'src/common/ui/forms/select/select.module';
 
 @NgModule({
@@ -15,7 +15,7 @@ import { SelectModule } from 'src/common/ui/forms/select/select.module';
         AddressWhispererComponent,
     ],
     imports: [
-        AddressWhispererByHandFormModule,
+        AddressWhispererBySelfFormModule,
         CommonModule,
         SelectModule,
     ],

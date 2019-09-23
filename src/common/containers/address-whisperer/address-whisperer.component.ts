@@ -23,8 +23,8 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
-    addressWhispererByHandFields,
-} from 'src/common/containers/form/forms/address-whisperer-by-hand/address-whisperer-by-hand-form.config';
+    addressWhispererBySelfFields,
+} from 'src/common/containers/form/forms/address-whisperer-by-self/address-whisperer-by-self-form.config';
 import { AddressWhispererService } from './services/address-whisperer.service';
 import { IAddress } from 'src/common/graphql/models/supply.model';
 import { IValidationMessages } from 'src/common/ui/forms/models/validation-messages.model';
@@ -40,7 +40,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     private static readonly DEBOUNCE_TIME = 200;
     private static readonly ROWS_RESPONSE = 5;
 
-    private static readonly PATTER_NOT_FOUND = /^([a-z]+[ ,]+[0-9]+.*)|([0-9]+[ ,]+[a-z]+.*)$/;
+    private static readonly PATTER_START_SEARCHING = /^([a-z]+[ ,]+[0-9]+.*)|([0-9]+[ ,]+[a-z]+.*)$/;
 
     @ViewChild('lndSelect')
     public lndSelect: SelectComponent;
@@ -58,7 +58,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     public error?: any;
 
     @Input()
-    public formFields = addressWhispererByHandFields;
+    public formFields = addressWhispererBySelfFields;
 
     @Input()
     public label: string;
@@ -76,10 +76,10 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     public templateLabel?: TemplateRef<any>;
 
     @Input()
-    public templateNotFound: TemplateRef<any>;
+    public templateNotFoundFillBySelf: TemplateRef<any>;
 
     @Input()
-    public templateNotPatternNotAcceptedFound?: TemplateRef<any>;
+    public templateNotFoundFewArguments?: TemplateRef<any>;
 
     @Input()
     public touched = false;
@@ -100,12 +100,12 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     public whispererName: string;
 
     @Output()
-    public fillAddressBySelfChoose: EventEmitter<any> = new EventEmitter<any>();
+    public filledAddressBySelfAction: EventEmitter<any> = new EventEmitter<any>();
 
     private showForm = false;
     public addresses: Array<IAddress> = [];
     public typeahead: EventEmitter<any>;
-    public isNotFoundTemplate = false;
+    public isStartedSearching = false;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -118,7 +118,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
             .pipe(
                 debounceTime(AddressWhispererComponent.DEBOUNCE_TIME),
                 tap((term) => {
-                    this.isNotFoundTemplate = !!AddressWhispererComponent.PATTER_NOT_FOUND.exec(term);
+                    this.isStartedSearching = !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(term);
                     this.showForm = false;
                 }),
                 filter(term => term && term.length >= AddressWhispererComponent.ADDRESS_MIN_LENGTH),
@@ -141,7 +141,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     public fillAddressBySelf = (evt) => {
         this.lndSelect.hideDialog();
         this.showForm = true;
-        this.fillAddressBySelfChoose.emit(this.showForm);
+        this.filledAddressBySelfAction.emit(this.showForm);
         this.cd.markForCheck();
     }
 
