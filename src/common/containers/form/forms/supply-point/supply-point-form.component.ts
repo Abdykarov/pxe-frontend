@@ -51,6 +51,7 @@ import { HelpModalComponent } from 'src/common/containers/modal/modals/help/help
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { ValidateAddressWhispererService } from 'src/app/services/validate.address-whisperer.service';
 
 @Component({
     selector: 'pxe-supply-point-form',
@@ -64,6 +65,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         protected fb: FormBuilder,
         private modalsService: ModalService,
         private supplyService: SupplyService,
+        private validateAddressWhispererService: ValidateAddressWhispererService,
     ) {
         super(fb);
         this.minDate = new Date();
@@ -290,6 +292,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public submitForm = () => {
         this.resetCustomFieldError();
         this.triggerValidation();
+        this.validateAddressWhispererService.validateBySelfForms();
         if (this.form.valid) {
             const form = {
                 ...this.form.value,

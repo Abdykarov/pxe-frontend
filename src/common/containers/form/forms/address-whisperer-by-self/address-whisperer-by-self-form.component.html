@@ -1,9 +1,10 @@
 <form
+    *ngIf="showForm"
     [formGroup]="form"
     class="form-container"
     autocomplete="off"
-    (keydown)="resetCustomFieldError();isValid();"
-    (change)="resetCustomFieldError();isValid();">
+    (keydown)="changedForm();"
+    (change)="changedForm()">
     <lnd-form-field
         [error]="form.controls.city.errors"
         [formControl]="form.controls.city"
@@ -67,7 +68,7 @@
         [validationMessages]="formFields.validationMessages.zipCode"
     ></lnd-form-field>
     <lnd-select
-        [bindValue]="null"
+        (change)="changedForm($event)"
         [error]="form.controls.region.errors"
         label="Region"
         [options]="regionOptions"

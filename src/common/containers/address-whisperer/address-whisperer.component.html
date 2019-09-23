@@ -54,7 +54,7 @@
 >
 </lnd-select>
 <pxe-address-whisperer-by-self-form
-    *ngIf="showForm"
+    [showForm]="showForm"
     [formFields]="formFields"
     (sendDataIfValidAction)="fillAddressWhispererIfIsValid($event)"
 >

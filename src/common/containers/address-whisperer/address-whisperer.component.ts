@@ -106,6 +106,9 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     public addresses: Array<IAddress> = [];
     public typeahead: EventEmitter<any>;
     public isStartedSearching = false;
+    public term = '';
+
+    public hasTermGoodLength = term => term && term.length >= AddressWhispererComponent.ADDRESS_MIN_LENGTH;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -118,11 +121,14 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
             .pipe(
                 debounceTime(AddressWhispererComponent.DEBOUNCE_TIME),
                 tap((term) => {
-                    this.isStartedSearching = !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(term);
-                    this.showForm = false;
-                    this.cd.markForCheck();
+                    this.term = term;
+                    if ( !this.hasTermGoodLength(term)) {
+                        this.isStartedSearching = !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(term);
+                        this.showForm = false;
+                        this.cd.markForCheck();
+                    }
                 }),
-                filter(term => term && term.length >= AddressWhispererComponent.ADDRESS_MIN_LENGTH),
+                filter(this.hasTermGoodLength),
                 distinctUntilChanged(),
                 switchMap((term: string) => this.addressWhispererService.getPlaces(AddressWhispererComponent.ROWS_RESPONSE, term)),
                 takeUntil(this.destroy$),
@@ -135,7 +141,9 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     }
 
     public setAddresses = (addresses = []) => {
+        this.isStartedSearching = !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(this.term);
         this.addresses = addresses;
+        this.showForm = false;
         this.cd.markForCheck();
     }
 

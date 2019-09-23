@@ -235,7 +235,7 @@ export const DEFAULT_QR_CODE_SETTING: IQRCodeSetting = {
     margin: 0,
 };
 
-export const REGIONS = [
+export const REGIONS: Array<IOption> = [
     {'label': 'Praha', 'value': 'Praha', 'key': '0'},
     {'label': 'Jihočeský kraj', 'value': 'Jihočeský kraj', 'key': '1'},
     {'label': 'Jihomoravský kraj', 'value': 'Jihomoravský kraj', 'key': '2'},
