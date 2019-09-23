@@ -5,6 +5,13 @@
 </ng-template>
 
 <ng-template
+    #templateNotPatternNotAcceptedFoundDefault
+    let-searchTerm="searchTerm">
+    Upřesněte adresu.
+</ng-template>
+
+
+<ng-template
     #templateItemDefault
     let-item="item"
     let-index="index">
@@ -39,7 +46,7 @@
     [success]="success"
     [templateItem]="templateItem || templateItemDefault"
     [templateLabel]="templateLabel || templateLabelDefault"
-    [templateNotFound]="templateNotFound || templateNotFoundDefault"
+    [templateNotFound]="isNotFoundTemplate ? templateNotFound || templateNotFoundDefault : templateNotPatternNotAcceptedFound || templateNotPatternNotAcceptedFoundDefault"
     [touched]="touched"
     [typeahead]="typeahead"
     [validationMessages]="validationMessages"

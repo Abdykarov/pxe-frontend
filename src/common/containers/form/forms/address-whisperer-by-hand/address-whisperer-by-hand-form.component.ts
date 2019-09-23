@@ -25,15 +25,12 @@ export class AddressWhispererByHandFormComponent extends AbstractFormComponent i
 
     public form: FormGroup;
     public regions: any;
-    // refactoring
-    public regionOptions = R.map((region) => {
-        const test = {
-            key: region.key,
-            value: region.label,
-            label: region.label,
-        };
-        return test;
-    }, REGIONS);
+
+    public regionOptions = R.map((region) => ({
+        key: region.key,
+        value: region.label,
+        label: region.label,
+    }), REGIONS);
 
     constructor(
         protected fb: FormBuilder,
@@ -44,7 +41,6 @@ export class AddressWhispererByHandFormComponent extends AbstractFormComponent i
     ngOnInit() {
         super.ngOnInit();
         this.form = this.fb.group(this.formFields.controls, this.formFields.options);
-        this.regions = this.regionOptions;
     }
 
     ngOnChanges(changes: SimpleChanges) {

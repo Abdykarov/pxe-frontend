@@ -39,6 +39,8 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     private static readonly DEBOUNCE_TIME = 200;
     private static readonly ROWS_RESPONSE = 5;
 
+    private static readonly PATTER_NOT_FOUND = /^([a-z]+[ ,]+[0-9]+.*)|([0-9]+[ ,]+[a-z]+.*)$/;
+
     @ViewChild('lndSelect')
     public lndSelect: SelectComponent;
 
@@ -73,7 +75,10 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     public templateLabel?: TemplateRef<any>;
 
     @Input()
-    public templateNotFound?: TemplateRef<any>;
+    public templateNotFound: TemplateRef<any>;
+
+    @Input()
+    public templateNotPatternNotAcceptedFound?: TemplateRef<any>;
 
     @Input()
     public touched = false;
@@ -99,6 +104,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     private showForm = false;
     public addresses: Array<IAddress> = [];
     public typeahead: EventEmitter<any>;
+    public isNotFoundTemplate = false;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -110,7 +116,8 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
         this.typeahead
             .pipe(
                 debounceTime(AddressWhispererComponent.DEBOUNCE_TIME),
-                tap(() => {
+                tap((term) => {
+                    this.isNotFoundTemplate = !!AddressWhispererComponent.PATTER_NOT_FOUND.exec(term);
                     this.showForm = false;
                     this.cd.markForCheck();
                 }),
