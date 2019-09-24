@@ -21,7 +21,7 @@ import {
     isValidMobilePhoneNumber,
     isValidTelephoneNumber,
 } from './phone.validator.fnc';
-import { isValidZipCode } from 'src/common/utils/validators/zip-code.validator.fnc';
+import { isValidPostCode } from 'src/common/utils/validators/post-code.validator.fnc';
 import { verifyIC } from './ico-validator.fnc';
 
 export class CustomValidators {
@@ -266,17 +266,17 @@ export class CustomValidators {
         };
     }
 
-    static zipCode = (zipCode): {} => {
-        if (zipCode.pristine || R_.isNilOrEmpty(zipCode.value)) {
+    static postCode = (postCode): {} => {
+        if (postCode.pristine || R_.isNilOrEmpty(postCode.value)) {
             return null;
         }
 
-        if (isValidZipCode(zipCode.value)) {
+        if (isValidPostCode(postCode.value)) {
             return null;
         }
 
         return {
-            zipCode: true,
+            postCode: true,
         };
 
     }

@@ -34,11 +34,11 @@ export const addressWhispererBySelfFields: IForm = {
                 Validators.required,
             ],
         ],
-        zipCode: [
+        postCode: [
             '',
             [
                 Validators.required,
-                CustomValidators.zipCode,
+                CustomValidators.postCode,
             ],
         ],
 
@@ -57,9 +57,9 @@ export const addressWhispererBySelfFields: IForm = {
         region: {
             required: errorFieldMessages.region.required,
         },
-        zipCode: {
-            required: errorFieldMessages.zipCode.required,
-            zipCode: errorFieldMessages.zipCode.pattern,
+        postCode: {
+            required: errorFieldMessages.postCode.required,
+            postCode: errorFieldMessages.postCode.pattern,
         },
     },
 };

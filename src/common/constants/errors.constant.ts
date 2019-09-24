@@ -238,7 +238,7 @@ export const errorFieldMessages =  {
     timeToContractEndPeriodId: {
         required: 'Vyberte ze seznamu odpovídající časový údaj.',
     },
-    zipCode: {
+    postCode: {
         required: 'Vyplňte PSČ.',
         pattern: 'Vypňte správný formát.',
     },

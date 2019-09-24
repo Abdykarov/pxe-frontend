@@ -53,13 +53,13 @@
         </div>
     </pxe-field-wrapper>
     <lnd-form-field
-        [error]="parentForm.controls[whispererName].controls.zipCode.errors"
-        [formControl]="parentForm.controls[whispererName].controls.zipCode"
-        [id]="'zipCode'"
+        [error]="parentForm.controls[whispererName].controls.postCode.errors"
+        [formControl]="parentForm.controls[whispererName].controls.postCode"
+        [id]="'postCode'"
         label="PSČ"
-        [success]="parentForm.controls[whispererName].controls.zipCode.valid && parentForm.controls[whispererName].controls.zipCode.touched"
-        [touched]="parentForm.controls[whispererName].controls.zipCode.touched"
-        [validationMessages]="formFields.validationMessages.zipCode"
+        [success]="parentForm.controls[whispererName].controls.postCode.valid && parentForm.controls[whispererName].controls.postCode.touched"
+        [touched]="parentForm.controls[whispererName].controls.postCode.touched"
+        [validationMessages]="formFields.validationMessages.postCode"
     ></lnd-form-field>
     <lnd-select
         [error]="parentForm.controls[whispererName].controls.region.errors"
