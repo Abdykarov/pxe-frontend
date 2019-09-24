@@ -6,9 +6,9 @@ import { SupplierConcludedContractsConfig } from './config';
     templateUrl: './page.html',
 })
 export class SupplierConcludedContractsComponent {
-    public readonly ITEMS_PER_PAGE = 20;
-    public readonly MAX_SIZE = 5;
-    public readonly SHOW_BOUNDARY_LINKS = true;
+    public readonly itemsPerPage = 20;
+    public readonly maxSize = 5;
+    public readonly showBoundaryLinks = true;
 
     public supplyPoint: any[] = this.supplierConcludedContractsConfig.supplyPointsSource;
     public totalItems = this.supplierConcludedContractsConfig.supplyPointsSource.length;

@@ -12,6 +12,7 @@ import { HeaderModule } from 'src/common/ui/header/header.module';
 import { NavigationModule } from 'src/common/ui/navigation/navigation.module';
 import { StaticRoutingModule } from './static.routing';
 import { StaticComponent } from './static.component';
+import { PaginationModule } from 'ngx-bootstrap';
 import { registerLocaleData } from '@angular/common';
 
 @NgModule({
@@ -24,6 +25,7 @@ import { registerLocaleData } from '@angular/common';
         HeaderModule,
         HttpClientModule,
         NavigationModule,
+        PaginationModule.forRoot(),
         StaticRoutingModule,
     ],
     providers: [

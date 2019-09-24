@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 
-import { PaginationModule } from 'ngx-bootstrap';
+import { PaginationNgxModule } from 'src/common/ui/pagination/pagination.module';
 import { SupplierConcludedContractsComponent } from './page';
 import { TableModule } from 'src/common/ui/table/table.module';
 
@@ -15,7 +15,7 @@ import { TableModule } from 'src/common/ui/table/table.module';
     ],
     imports: [
         CommonModule,
-        PaginationModule.forRoot(),
+        PaginationNgxModule,
         TableModule,
     ],
 })

@@ -40,9 +40,9 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
     }
     public readonly routePower = ROUTES.ROUTER_SUPPLIER_CONCLUDED_CONTRACTS_POWER;
     public readonly routeGas = ROUTES.ROUTER_SUPPLIER_CONCLUDED_CONTRACTS_GAS;
-    public readonly ITEMS_PER_PAGE = 50;
-    public readonly SHOW_BOUNDARY_LINKS = true;
-    public readonly MAX_SIZE = 5;
+    public readonly itemsPerPage = 50;
+    public readonly showBoundaryLinks = true;
+    public readonly maxSize = 5;
     public supplyPoints: any[] = supplyPointsSource;
     public tableCols = null;
     public COMMODITY_TYPE_POWER = CommodityType.POWER;

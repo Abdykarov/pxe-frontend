@@ -7,7 +7,7 @@ import { PaginationPageComponent } from './page';
 
 // own modules
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
-import { PaginationModule } from 'src/common/ui/pagination/pagination.module';
+import { PaginationNgxModule } from 'src/common/ui/pagination/pagination.module';
 
 @NgModule({
     declarations: [
@@ -19,7 +19,7 @@ import { PaginationModule } from 'src/common/ui/pagination/pagination.module';
     imports: [
         BreadcrumbModule,
         CommonModule,
-        PaginationModule,
+        PaginationNgxModule,
     ],
 })
 export class PaginationPageModule {}

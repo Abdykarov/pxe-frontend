@@ -3,19 +3,24 @@
         <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
     </div>
 </div>
+<h3>Basic</h3>
 <div class="static-pages">
     <lnd-pagination
-        [allItems]="108"
-        [pageSize]="12"
-        label="Další položky">
+        [totalItems]="totalItems"
+        [itemsPerPage]="itemsPerPage"
+    >
     </lnd-pagination>
 </div>
-<h3>With shown</h3>
+<h3>Advanced</h3>
 <div class="static-pages">
     <lnd-pagination
-        [allItems]="250"
-        [hasOptions]="true"
-        label="Další položky"
-        optionsLabel="Položek na stránce">
+        [totalItems]="totalItems"
+        [itemsPerPage]="itemsPerPage"
+        [showBoundaryLinks]="true"
+        [firstText] = "firstText"
+        [previousText] = "previousText"
+        [nextText] = "nextText"
+        [lastText] = "lastText"
+    >
     </lnd-pagination>
 </div>

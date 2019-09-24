@@ -80,6 +80,10 @@ import {
     newSupplyPointPageRoutes,
 } from 'src/static/pages/new-supply-point/page.module';
 import {
+    PaginationPageModule,
+    paginationPageRoutes,
+} from 'src/static/atoms/pagination/page.module';
+import {
     PaymentVerificationPageModule,
     paymentVerificationPageRoutes,
 } from 'src/static/pages/payment-verification/page.module';
@@ -187,6 +191,7 @@ const routes: Routes = [
             ...modalsPageRoutes,
             ...newsPageRoutes,
             ...newSupplyPointPageRoutes,
+            ...paginationPageRoutes,
             ...paymentVerificationPageRoutes,
             ...progressBarPageRoutes,
             ...recapitulationPageRoutes,
@@ -236,6 +241,7 @@ const routes: Routes = [
         ModalsPageModule,
         NewsPageModule,
         NewSupplyPointPageModule,
+        PaginationPageModule,
         PaymentVerificationPageModule,
         ProgressBarPageModule,
         RecapitulationPageModule,

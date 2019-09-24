@@ -7,6 +7,12 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 
 export class PaginationPageComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
+    public readonly totalItems = 108;
+    public readonly itemsPerPage = 5;
+    public readonly firstText = '&laquo;';
+    public readonly previousText = '&lsaquo;';
+    public readonly nextText = '&rsaquo;';
+    public readonly lastText = '&raquo;';
 
     constructor() {
         this.breadcrumbItemsSimple = [

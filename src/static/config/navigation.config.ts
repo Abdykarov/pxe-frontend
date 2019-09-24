@@ -55,10 +55,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Indicators',
                     'url': '/basic/indicators',
                 },
-                // {
-                //     'label': 'Pagination',
-                //     'url': '/pagination',
-                // },
+                {
+                    'label': 'Pagination',
+                    'url': '/basic/pagination',
+                },
                 // {
                 //     'label': 'Placeloader',
                 //     'url': '/placeloader',
