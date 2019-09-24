@@ -1,6 +1,6 @@
 import {
     ChangeDetectorRef,
-    Component,
+    Component, ElementRef,
     EventEmitter,
     Input,
     OnInit,
@@ -29,6 +29,7 @@ import { AddressWhispererService } from './services/address-whisperer.service';
 import { IAddress } from 'src/common/graphql/models/supply.model';
 import { IValidationMessages } from 'src/common/ui/forms/models/validation-messages.model';
 import { SelectComponent } from 'src/common/ui/forms/select/select.component';
+import { scrollToElementFnc } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-address-whisperer',
@@ -46,6 +47,9 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
 
     @ViewChild('lndSelect')
     public lndSelect: SelectComponent;
+
+    @ViewChild('selectWrapper')
+    public lndSelectWrapper: ElementRef;
 
     @Output()
     public appendButtonAction?: EventEmitter<any> = new EventEmitter();
@@ -157,6 +161,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
         this.parentForm.get(this.whispererName).markAsUntouched({
             onlySelf: true,
         });
+        setTimeout(() => scrollToElementFnc(this.lndSelectWrapper.nativeElement), 0);
     }
 
     public fillAddressBySelf = (evt) => {

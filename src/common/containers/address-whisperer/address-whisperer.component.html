@@ -27,32 +27,34 @@
     {{ item.city }}, {{ item.postCode }}
 </ng-template>
 
-<lnd-select
-    #lndSelect
-    [addTag]="false"
-    [subtextTemplate]="subtextTemplate"
-    [appendButtonIcon]="appendButtonIcon"
-    (appendButtonAction)="appendButtonAction.emit()"
-    [bindValue]="null"
-    (close)="setAddresses()"
-    [disabledField]="disabled"
-    [error]="error"
-    [label]="label"
-    [placeholder]="placeholder"
-    [searchable]="true"
-    [selectName]="whispererName"
-    [options]="addresses"
-    [parentForm]="parentForm"
-    [success]="success"
-    [templateItem]="templateItem || templateItemDefault"
-    [templateLabel]="templateLabel || templateLabelDefault"
-    [templateNotFound]="isStartedSearching ? templateNotFoundFillBySelf || templateNotFoundFillBySelfDefault : templateNotFoundFewArguments || templateNotFoundFewArgumentsDefault"
-    [touched]="touched"
-    [typeahead]="typeahead"
-    [validationMessages]="validationMessages"
-    customClass="ng-select-custom--address"
->
-</lnd-select>
+<div #selectWrapper>
+    <lnd-select
+        #lndSelect
+        [addTag]="false"
+        [subtextTemplate]="subtextTemplate"
+        [appendButtonIcon]="appendButtonIcon"
+        (appendButtonAction)="appendButtonAction.emit()"
+        [bindValue]="null"
+        (close)="setAddresses()"
+        [disabledField]="disabled"
+        [error]="error"
+        [label]="label"
+        [placeholder]="placeholder"
+        [searchable]="true"
+        [selectName]="whispererName"
+        [options]="addresses"
+        [parentForm]="parentForm"
+        [success]="success"
+        [templateItem]="templateItem || templateItemDefault"
+        [templateLabel]="templateLabel || templateLabelDefault"
+        [templateNotFound]="isStartedSearching ? templateNotFoundFillBySelf || templateNotFoundFillBySelfDefault : templateNotFoundFewArguments || templateNotFoundFewArgumentsDefault"
+        [touched]="touched"
+        [typeahead]="typeahead"
+        [validationMessages]="validationMessages"
+        customClass="ng-select-custom--address"
+    >
+    </lnd-select>
+</div>
 <pxe-address-whisperer-by-self-form
     *ngIf="showForm"
     [parentForm]="parentForm"
