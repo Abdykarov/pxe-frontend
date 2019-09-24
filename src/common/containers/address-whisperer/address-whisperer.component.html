@@ -1,13 +1,17 @@
 <ng-template
     #templateNotFoundFillBySelfDefault
     let-searchTerm="searchTerm">
-    Adresu jsme nenašli. Možná jste se překlepli, zkuste to znovu nebo <a (click)="fillAddressBySelf($event)"> vyplňte adresu ručně</a>.
+    <div class="ml-2 mr-2">
+        Adresu jsme nenašli. Možná jste se překlepli, zkuste to znovu nebo <a (click)="fillAddressBySelf($event)"> vyplňte adresu ručně</a>.
+    </div>
 </ng-template>
 
 <ng-template
     #templateNotFoundFewArgumentsDefault
     let-searchTerm="searchTerm">
-    Začněte psát a my vám našeptáme adresu.
+    <div class="ml-2 mr-2">
+        Začněte psát a my vám našeptáme adresu.
+    </div>
 </ng-template>
 
 
@@ -59,7 +63,7 @@
     *ngIf="showForm"
     [parentForm]="parentForm"
     [formFields]="formFields"
-    [whispererName]="whispererName + END_NAME_OF_FORM"
-    (sendDataIfValidAction)="fillAddressWhispererIfIsValid($event)"
+    [whispererName]="whispererName + UNIQUE_FIELD_NAME_END"
+    (sendValidAddressAction)="sendValidAddress($event)"
 >
 </pxe-address-whisperer-by-self-form>

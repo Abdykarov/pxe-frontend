@@ -18,36 +18,35 @@
         [touched]="parentForm.controls[whispererName].controls.street.touched"
         [validationMessages]="formFields.validationMessages.street"
     ></lnd-form-field>
-    <!--davat form error + zkontrolovat dobre nakopirovany validatory-->
     <pxe-field-wrapper
         label=""
         labelFor="descriptiveNumber"
-        [error]="((parentForm.controls[whispererName].controls.descriptiveNumber.touched || formError.descriptiveNumber) && (formError.descriptiveNumber || parentForm.controls[whispererName].controls.descriptiveNumber.errors)) ||
-                         ((parentForm.controls[whispererName].controls.orientationNumber.touched || formError.orientationNumber) && (formError.orientationNumber || parentForm.controls[whispererName].controls.orientationNumber.errors))"
-        [validationMessages]="((parentForm.controls[whispererName].controls.descriptiveNumber.touched || formError.descriptiveNumber) && (formError.descriptiveNumber || parentForm.controls[whispererName].controls.descriptiveNumber.errors) && formFields.validationMessages.descriptiveNumber) ||
-                                      ((parentForm.controls[whispererName].controls.orientationNumber.touched || formError.orientationNumber) && (formError.orientationNumber || parentForm.controls[whispererName].controls.orientationNumber.errors) && formFields.validationMessages.orientationNumber)">
+        [error]="(parentForm.controls[whispererName].controls.descriptiveNumber.touched && parentForm.controls[whispererName].controls.descriptiveNumber.errors) ||
+                         (parentForm.controls[whispererName].controls.orientationNumber.touched && parentForm.controls[whispererName].controls.orientationNumber.errors)"
+        [validationMessages]="(parentForm.controls[whispererName].controls.descriptiveNumber.touched && parentForm.controls[whispererName].controls.descriptiveNumber.errors && formFields.validationMessages.descriptiveNumber) ||
+                                      (parentForm.controls[whispererName].controls.orientationNumber.touched && parentForm.controls[whispererName].controls.orientationNumber.errors && formFields.validationMessages.orientationNumber)">
         <div class="row align-items-end no-gutters">
             <div class="col-6 pr-1">
                 <lnd-form-field
-                    [error]="formError.descriptiveNumber || parentForm.controls[whispererName].controls.descriptiveNumber.errors"
+                    [error]="parentForm.controls[whispererName].controls.descriptiveNumber.errors"
                     [formControl]="parentForm.controls[whispererName].controls.descriptiveNumber"
                     [id]="'descriptiveNumber'"
                     label="Číslo popisné"
                     [showErrorMessage]="false"
-                    [success]="parentForm.controls[whispererName].controls.descriptiveNumber.valid && (parentForm.controls[whispererName].controls.descriptiveNumber.touched || formError.descriptiveNumber)"
-                    [touched]="parentForm.controls[whispererName].controls.descriptiveNumber.touched || formError.descriptiveNumber"
+                    [success]="parentForm.controls[whispererName].controls.descriptiveNumber.valid && parentForm.controls[whispererName].controls.descriptiveNumber.touched"
+                    [touched]="parentForm.controls[whispererName].controls.descriptiveNumber.touched"
                     [validationMessages]="formFields.validationMessages.descriptiveNumber"
                 ></lnd-form-field>
             </div>
             <div class="col-6 pl-1">
                 <lnd-form-field
-                    [error]="formError.orientationNumber || parentForm.controls[whispererName].controls.orientationNumber.errors"
+                    [error]="parentForm.controls[whispererName].controls.orientationNumber.errors"
                     [formControl]="parentForm.controls[whispererName].controls.orientationNumber"
                     [id]="'orientationNumber'"
                     label="Číslo orientační"
                     [showErrorMessage]="false"
-                    [success]="parentForm.controls[whispererName].controls.orientationNumber.valid && (parentForm.controls[whispererName].controls.orientationNumber.touched || formError.orientationNumber)"
-                    [touched]="parentForm.controls[whispererName].controls.orientationNumber.touched || formError.orientationNumber"
+                    [success]="parentForm.controls[whispererName].controls.orientationNumber.valid && parentForm.controls[whispererName].controls.orientationNumber.touched"
+                    [touched]="parentForm.controls[whispererName].controls.orientationNumber.touched"
                     [validationMessages]="formFields.validationMessages.orientationNumber"
                 ></lnd-form-field>
             </div>

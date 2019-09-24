@@ -1,6 +1,7 @@
 import {
     ChangeDetectorRef,
-    Component, ElementRef,
+    Component,
+    ElementRef,
     EventEmitter,
     Input,
     OnInit,
@@ -9,7 +10,8 @@ import {
     ViewChild,
 } from '@angular/core';
 import {
-    FormGroup, Validators,
+    FormGroup,
+    Validators,
 } from '@angular/forms';
 
 import {
@@ -29,7 +31,7 @@ import { AddressWhispererService } from './services/address-whisperer.service';
 import { IAddress } from 'src/common/graphql/models/supply.model';
 import { IValidationMessages } from 'src/common/ui/forms/models/validation-messages.model';
 import { SelectComponent } from 'src/common/ui/forms/select/select.component';
-import { scrollToElementFnc } from 'src/common/utils';
+import { CustomValidators, scrollToElementFnc } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-address-whisperer',
@@ -41,9 +43,10 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     private static readonly DEBOUNCE_TIME = 200;
     private static readonly ROWS_RESPONSE = 5;
 
-    private static readonly PATTER_START_SEARCHING = /^([a-z]+[ ,]+[0-9]+.*)|([0-9]+[ ,]+[a-z]+.*)$/;
+    private static readonly PATTER_START_SEARCHING =
+        new RegExp(`^([${CustomValidators.alphaCharacters}].*?[ ,].*?[0-9].*?)|([0-9].*?[ ,].*?[${CustomValidators.alphaCharacters}].*?)$`);
 
-    public END_NAME_OF_FORM = 'by_self123';
+    public readonly UNIQUE_FIELD_NAME_END = '_by_self';
 
     @ViewChild('lndSelect')
     public lndSelect: SelectComponent;
@@ -105,14 +108,10 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     @Input()
     public whispererName: string;
 
-    @Output()
-    public userFillingAddressBySelfAction: EventEmitter<any> = new EventEmitter<any>();
-
     private showForm = false;
     public addresses: Array<IAddress> = [];
     public typeahead: EventEmitter<any>;
     public isStartedSearching = false;
-    public term = '';
 
     public hasTermGoodLength = term => term && term.length >= AddressWhispererComponent.ADDRESS_MIN_LENGTH;
 
@@ -125,16 +124,13 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
 
         this.typeahead
             .pipe(
-                debounceTime(AddressWhispererComponent.DEBOUNCE_TIME),
                 tap((term) => {
-                    this.term = term;
-                    if ( !this.hasTermGoodLength(term)) {
-                        this.isStartedSearching = !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(term);
-                        this.showForm = false;
-                        this.setAddressValidator(true);
-                        this.cd.markForCheck();
-                    }
+                    this.isStartedSearching = !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(term);
+                    this.showForm = false;
+                    this.setAddressValidator(true);
+                    this.cd.markForCheck();
                 }),
+                debounceTime(AddressWhispererComponent.DEBOUNCE_TIME),
                 filter(this.hasTermGoodLength),
                 distinctUntilChanged(),
                 switchMap((term: string) => this.addressWhispererService.getPlaces(AddressWhispererComponent.ROWS_RESPONSE, term)),
@@ -148,7 +144,6 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     }
 
     public setAddresses = (addresses = []) => {
-        this.isStartedSearching = !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(this.term);
         this.addresses = addresses;
         this.showForm = false;
         this.setAddressValidator(true);
@@ -168,17 +163,13 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
         this.lndSelect.hideDialog();
         this.showForm = true;
         this.setAddressValidator(false);
-        this.userFillingAddressBySelfAction.emit(this.showForm);
-        this.isStartedSearching = false;
         this.cd.markForCheck();
     }
 
-    public fillAddressWhispererIfIsValid = (value) => {
-        this.isStartedSearching = false;
+    public sendValidAddress = (value) => {
         this.showForm = false;
         this.setAddressValidator(true);
         this.parentForm.get(this.whispererName).setValue(value);
-        this.userFillingAddressBySelfAction.emit(this.showForm);
         this.cd.markForCheck();
     }
 }

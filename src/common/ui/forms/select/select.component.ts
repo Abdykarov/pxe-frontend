@@ -35,9 +35,6 @@ export class SelectComponent {
     @Output()
     public appendButtonAction?: EventEmitter<any> = new EventEmitter();
 
-    @Output()
-    public change: EventEmitter<any> = new EventEmitter();
-
     @Input()
     public addTag = false;
 

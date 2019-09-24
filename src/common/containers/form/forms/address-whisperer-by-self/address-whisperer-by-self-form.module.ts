@@ -27,7 +27,6 @@ import { SelectModule } from 'src/common/ui/forms/select/select.module';
         FormModule,
         FormsModule,
         ReactiveFormsModule,
-        // overit jestli musi bejt
         SelectModule,
     ],
 })

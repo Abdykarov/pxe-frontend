@@ -6,7 +6,7 @@ import {
     OnInit,
     SimpleChanges,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
@@ -59,16 +59,6 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent implements OnInit, OnChanges {
 
-    constructor(
-        private cd: ChangeDetectorRef,
-        protected fb: FormBuilder,
-        private modalsService: ModalService,
-        private supplyService: SupplyService,
-    ) {
-        super(fb);
-        this.minDate = new Date();
-    }
-
     @Input()
     public formValues: ISupplyPoint = null;
 
@@ -89,6 +79,16 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public suppliers = [];
     public suppliers$: BehaviorSubject<any> = new BehaviorSubject([]);
     public contractEndType = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT;
+
+    constructor(
+        private cd: ChangeDetectorRef,
+        protected fb: FormBuilder,
+        private modalsService: ModalService,
+        private supplyService: SupplyService,
+    ) {
+        super(fb);
+        this.minDate = new Date();
+    }
 
     ngOnInit() {
         super.ngOnInit();

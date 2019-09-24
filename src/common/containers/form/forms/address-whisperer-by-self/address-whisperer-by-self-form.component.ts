@@ -1,9 +1,11 @@
 import {
-    Component, ElementRef,
-    EventEmitter, Input,
-    OnChanges, OnDestroy,
-    OnInit, Output,
-    SimpleChanges, ViewChild,
+    Component,
+    EventEmitter,
+    Input,
+    OnDestroy,
+    OnInit,
+    Output,
+    ViewChild,
 } from '@angular/core';
 import {
     FormBuilder,
@@ -45,14 +47,13 @@ export class AddressWhispererBySelfFormComponent extends AbstractComponent imple
     public whispererName: string;
 
     @Output()
-    public sendDataIfValidAction: EventEmitter<any> = new EventEmitter();
+    public sendValidAddressAction: EventEmitter<any> = new EventEmitter();
 
     public regionOptions: Array<IOption> = REGIONS;
 
     public addedControls = false;
 
     public form: FormGroup;
-    public formError: any = {};
 
     constructor(
         protected fb: FormBuilder,
@@ -62,7 +63,6 @@ export class AddressWhispererBySelfFormComponent extends AbstractComponent imple
 
     ngOnInit() {
         super.ngOnInit();
-
         this.parentForm.addControl( this.whispererName, this.fb.group(this.formFields.controls, this.formFields.options));
         this.addedControls = true;
         this.parentForm.get(this.whispererName)
@@ -71,7 +71,7 @@ export class AddressWhispererBySelfFormComponent extends AbstractComponent imple
                 takeUntil(this.destroy$),
             ).subscribe(() => {
                 if ( this.parentForm.get(this.whispererName).valid) {
-                    this.sendDataIfValidAction.emit(this.parentForm.get(this.whispererName).value);
+                    this.sendValidAddressAction.emit(this.parentForm.get(this.whispererName).value);
                     this.addedControls = false;
                     this.parentForm.removeControl( this.whispererName);
                 }
@@ -83,5 +83,4 @@ export class AddressWhispererBySelfFormComponent extends AbstractComponent imple
         this.parentForm.removeControl( this.whispererName);
         super.ngOnDestroy();
     }
-
 }
