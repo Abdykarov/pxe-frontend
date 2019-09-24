@@ -1,7 +1,7 @@
 import {
     Component, ElementRef,
     EventEmitter, Input,
-    OnChanges,
+    OnChanges, OnDestroy,
     OnInit, Output,
     SimpleChanges, ViewChild,
 } from '@angular/core';
@@ -10,23 +10,21 @@ import {
     FormGroup,
 } from '@angular/forms';
 
-import * as R from 'ramda';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
-import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { FieldComponent } from 'src/common/ui/forms/field/field.component';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { REGIONS } from 'src/app/app.constants';
 import { ValidateAddressWhispererService } from 'src/app/services/validate.address-whisperer.service';
+import { AbstractComponent } from 'src/common/abstract.component';
+import { IForm } from 'src/common/containers/form/models/form-definition.model';
 
 @Component({
     selector: 'pxe-address-whisperer-by-self-form',
     templateUrl: './address-whisperer-by-self-form.component.html',
     styleUrls: ['./address-whisperer-by-self-form.component.scss'],
 })
-// je zde potreba abstract from component
-export class AddressWhispererBySelfFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
-
+export class AddressWhispererBySelfFormComponent extends AbstractComponent implements OnDestroy, OnInit {
 
     private _cityInput: FieldComponent;
 
@@ -39,7 +37,7 @@ export class AddressWhispererBySelfFormComponent extends AbstractFormComponent i
     }
 
     @Input()
-    public showForm;
+    public formFields: IForm;
 
     @Input()
     public parentForm: FormGroup;
@@ -50,51 +48,43 @@ export class AddressWhispererBySelfFormComponent extends AbstractFormComponent i
     @Output()
     public sendDataIfValidAction: EventEmitter<any> = new EventEmitter();
 
-    public form: FormGroup;
-
-    public subscription: any;
-
     public regionOptions: Array<IOption> = REGIONS;
+
+    public addedControls = false;
+
+    public form: FormGroup;
+    public formError: any = {};
 
     constructor(
         protected fb: FormBuilder,
-        private validateAddressWhispererService: ValidateAddressWhispererService,
     ) {
-        super(fb);
+        super();
     }
 
     ngOnInit() {
         super.ngOnInit();
 
-        this.validateAddressWhispererService.submitFormSubjects$
+        this.parentForm.addControl( this.whispererName, this.fb.group(this.formFields.controls, this.formFields.options));
+        this.addedControls = true;
+        this.parentForm.get(this.whispererName)
+            .valueChanges
             .pipe(
                 takeUntil(this.destroy$),
             ).subscribe(() => {
-                this.resetCustomFieldError();
-                this.triggerValidation();
+                if ( this.parentForm.get(this.whispererName).valid) {
+                    this.sendDataIfValidAction.emit(this.parentForm.get(this.whispererName).value);
+                    this.addedControls = false;
+                    this.parentForm.removeControl( this.whispererName);
+                    this.addedControls = false;
+                }
             });
     }
 
-    ngOnChanges(changes: SimpleChanges) {
-        super.ngOnChanges(changes);
-        if (changes.showForm && changes.showForm.currentValue === true) {
-            this.parentForm.addControl( this.whispererName, this.fb.group(this.formFields.controls, this.formFields.options));
-
-            this.subscription = this.parentForm.get(this.whispererName)
-                .valueChanges
-                .pipe(
-                    takeUntil(this.destroy$),
-                ).subscribe(() => {
-                    if ( this.parentForm.get(this.whispererName).valid) {
-                        this.sendDataIfValidAction.emit(this.parentForm.get(this.whispererName).value);
-                        this.parentForm.removeControl( this.whispererName);
-                        this.subscription.unsubscribe();
-                    }
-                });
-        }
-
-        if ( changes.showForm.currentValue === false) {
-            this.parentForm.removeControl( this.whispererName);
-        }
+    ngOnDestroy() {
+        this.addedControls = false;
+        this.parentForm.removeControl( this.whispererName);
+        this.addedControls = false;
+        super.ngOnDestroy();
     }
+
 }

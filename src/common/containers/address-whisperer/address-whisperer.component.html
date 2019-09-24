@@ -54,7 +54,7 @@
 >
 </lnd-select>
 <pxe-address-whisperer-by-self-form
-    [showForm]="showForm"
+    *ngIf="showForm"
     [parentForm]="parentForm"
     [formFields]="formFields"
     [whispererName]="whispererName + END_NAME_OF_FORM"
