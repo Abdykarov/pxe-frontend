@@ -51,7 +51,6 @@ import { HelpModalComponent } from 'src/common/containers/modal/modals/help/help
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { ValidateAddressWhispererService } from 'src/app/services/validate.address-whisperer.service';
 
 @Component({
     selector: 'pxe-supply-point-form',
@@ -65,7 +64,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         protected fb: FormBuilder,
         private modalsService: ModalService,
         private supplyService: SupplyService,
-        private validateAddressWhispererService: ValidateAddressWhispererService,
     ) {
         super(fb);
         this.minDate = new Date();
@@ -91,8 +89,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public suppliers = [];
     public suppliers$: BehaviorSubject<any> = new BehaviorSubject([]);
     public contractEndType = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT;
-
-    public showErrorAddressField = true;
 
     ngOnInit() {
         super.ngOnInit();
@@ -292,7 +288,8 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public submitForm = () => {
         this.resetCustomFieldError();
         this.triggerValidation();
-        this.triggerValidationCustom(this.form.controls['addressby_self']);
+        console.log(this.form);
+        this.triggerValidationCustom(this.form.controls['addressby_self123']);
 
         if (this.form.valid) {
             const form = {
@@ -319,11 +316,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
 
             this.submitAction.emit(form);
         }
-    }
-
-    public userFillingAddressBySelf = (isFormShowed: boolean) => {
-        this.showErrorAddressField = !isFormShowed;
-        this.cd.markForCheck();
     }
 
     public setOwnTerminate = (ownTerminate: boolean) => {

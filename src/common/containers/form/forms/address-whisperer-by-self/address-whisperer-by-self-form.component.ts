@@ -12,12 +12,11 @@ import {
 
 import { takeUntil } from 'rxjs/operators';
 
+import { AbstractComponent } from 'src/common/abstract.component';
 import { FieldComponent } from 'src/common/ui/forms/field/field.component';
+import { IForm } from 'src/common/containers/form/models/form-definition.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { REGIONS } from 'src/app/app.constants';
-import { ValidateAddressWhispererService } from 'src/app/services/validate.address-whisperer.service';
-import { AbstractComponent } from 'src/common/abstract.component';
-import { IForm } from 'src/common/containers/form/models/form-definition.model';
 
 @Component({
     selector: 'pxe-address-whisperer-by-self-form',

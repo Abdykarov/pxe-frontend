@@ -9,7 +9,7 @@ import {
     ViewChild,
 } from '@angular/core';
 import {
-    FormGroup,
+    FormGroup, Validators,
 } from '@angular/forms';
 
 import {
@@ -42,7 +42,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
 
     private static readonly PATTER_START_SEARCHING = /^([a-z]+[ ,]+[0-9]+.*)|([0-9]+[ ,]+[a-z]+.*)$/;
 
-    public END_NAME_OF_FORM = 'by_self';
+    public END_NAME_OF_FORM = 'by_self123';
 
     @ViewChild('lndSelect')
     public lndSelect: SelectComponent;
@@ -127,6 +127,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
                     if ( !this.hasTermGoodLength(term)) {
                         this.isStartedSearching = !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(term);
                         this.showForm = false;
+                        this.setAddressValidator(true);
                         this.cd.markForCheck();
                     }
                 }),
@@ -146,18 +147,29 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
         this.isStartedSearching = !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(this.term);
         this.addresses = addresses;
         this.showForm = false;
+        this.setAddressValidator(true);
         this.cd.markForCheck();
+    }
+
+    public setAddressValidator = (required: boolean) => {
+        this.parentForm.get(this.whispererName)
+            .setValidators(required ? [Validators.required] : []);
+        this.parentForm.get(this.whispererName).markAsUntouched({
+            onlySelf: true,
+        });
     }
 
     public fillAddressBySelf = (evt) => {
         this.lndSelect.hideDialog();
         this.showForm = true;
+        this.setAddressValidator(false);
         this.userFillingAddressBySelfAction.emit(this.showForm);
         this.cd.markForCheck();
     }
 
     public fillAddressWhispererIfIsValid = (value) => {
         this.showForm = false;
+        this.setAddressValidator(true);
         this.parentForm.get(this.whispererName).setValue(value);
         this.userFillingAddressBySelfAction.emit(this.showForm);
     }
