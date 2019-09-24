@@ -165,13 +165,12 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     }
 
     public fillAddressBySelf = (evt) => {
-        this.isStartedSearching = false;
         this.lndSelect.hideDialog();
         this.showForm = true;
         this.setAddressValidator(false);
         this.userFillingAddressBySelfAction.emit(this.showForm);
+        this.isStartedSearching = false;
         this.cd.markForCheck();
-        console.log('AHJ');
     }
 
     public fillAddressWhispererIfIsValid = (value) => {

@@ -288,8 +288,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public submitForm = () => {
         this.resetCustomFieldError();
         this.triggerValidation();
-        console.log(this.form);
-        this.triggerValidationCustom(this.form.controls['addressby_self123']);
 
         if (this.form.valid) {
             const form = {
