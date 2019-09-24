@@ -55,7 +55,9 @@
 </lnd-select>
 <pxe-address-whisperer-by-self-form
     [showForm]="showForm"
+    [parentForm]="parentForm"
     [formFields]="formFields"
+    [whispererName]="whispererName + END_NAME_OF_FORM"
     (sendDataIfValidAction)="fillAddressWhispererIfIsValid($event)"
 >
 </pxe-address-whisperer-by-self-form>

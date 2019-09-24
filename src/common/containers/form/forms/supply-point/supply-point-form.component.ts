@@ -6,7 +6,7 @@ import {
     OnInit,
     SimpleChanges,
 } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
@@ -292,7 +292,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public submitForm = () => {
         this.resetCustomFieldError();
         this.triggerValidation();
-        this.validateAddressWhispererService.validateBySelfForms();
+        this.validateAddressWhispererService.submitForm();
         if (this.form.valid) {
             const form = {
                 ...this.form.value,

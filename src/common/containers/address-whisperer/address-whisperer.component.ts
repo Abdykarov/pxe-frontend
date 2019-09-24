@@ -42,6 +42,8 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
 
     private static readonly PATTER_START_SEARCHING = /^([a-z]+[ ,]+[0-9]+.*)|([0-9]+[ ,]+[a-z]+.*)$/;
 
+    public END_NAME_OF_FORM = 'by_self';
+
     @ViewChild('lndSelect')
     public lndSelect: SelectComponent;
 
@@ -155,8 +157,8 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     }
 
     public fillAddressWhispererIfIsValid = (value) => {
-        this.parentForm.get(this.whispererName).setValue(value);
         this.showForm = false;
+        this.parentForm.get(this.whispererName).setValue(value);
         this.userFillingAddressBySelfAction.emit(this.showForm);
     }
 }
