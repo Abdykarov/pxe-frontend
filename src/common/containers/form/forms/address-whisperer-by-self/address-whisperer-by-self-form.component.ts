@@ -75,7 +75,6 @@ export class AddressWhispererBySelfFormComponent extends AbstractComponent imple
                     this.sendDataIfValidAction.emit(this.parentForm.get(this.whispererName).value);
                     this.addedControls = false;
                     this.parentForm.removeControl( this.whispererName);
-                    this.addedControls = false;
                 }
             });
     }
@@ -83,7 +82,6 @@ export class AddressWhispererBySelfFormComponent extends AbstractComponent imple
     ngOnDestroy() {
         this.addedControls = false;
         this.parentForm.removeControl( this.whispererName);
-        this.addedControls = false;
         super.ngOnDestroy();
     }
 
