@@ -292,7 +292,8 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public submitForm = () => {
         this.resetCustomFieldError();
         this.triggerValidation();
-        this.validateAddressWhispererService.submitForm();
+        this.triggerValidationCustom(this.form.controls['addressby_self']);
+
         if (this.form.valid) {
             const form = {
                 ...this.form.value,

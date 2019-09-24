@@ -106,17 +106,17 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         )(this.form.controls);
     }
 
-    public triggerValidationCustom = (controls) => {
+    public triggerValidationCustom = (form) => {
         R.pipe(
             R.keys,
             R.map((field) => {
-                this.form
+                form
                     .get(field)
                     .markAsTouched({
                         onlySelf: true,
                     });
             }),
-        )(controls);
+        )(form.controls);
     }
 
 
