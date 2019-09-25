@@ -48,8 +48,10 @@
         <ng-container *ngIf="state == overviewStates.REQUESTS">
             <div class="row mb-5">
                 <div class="col text-center">
+                    <p class="mb-2">Pokud máte zájem o dodávku energií pro další odběrné místo, doporučujeme zkontrolovat, zda k němu již nemáte uzavřenou smlouvu.</p>
+                    <p>Pokud ne, pokračujte založením nové žádosti.</p>
                     <lnd-button
-                        label="Nové odběrné místo"
+                        label="ZALOŽIT NOVOU ŽÁDOST"
                         type="secondary"
                         (action)="newRequestAction($event)"
                     ></lnd-button>

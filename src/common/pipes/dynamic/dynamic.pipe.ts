@@ -8,6 +8,8 @@ import {
 
 import * as R from 'ramda';
 
+import { CeilPipe } from 'src/common/pipes/ceil-number/simple-number.pipe';
+
 @Pipe({
     name: 'dynamic',
 })
@@ -15,6 +17,7 @@ export class DynamicPipe implements PipeTransform {
 
     private pipesMapping = {
         'number': DecimalPipe,
+        'ceil': CeilPipe,
     };
 
     public constructor(
@@ -31,7 +34,7 @@ export class DynamicPipe implements PipeTransform {
         if (!pipeName || R.isNil(pipeToken)) {
             return value;
         } else {
-            if (pipeName === 'number') {
+            if (R.indexOf(pipeName, ['number', 'ceil']) >= 0) {
                 value = value.toString().replace(',', '.');
             }
             const pipe = this.injector.get(pipeToken as Type<any>);

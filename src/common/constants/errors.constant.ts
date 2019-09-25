@@ -8,8 +8,11 @@ export const restAPIErrorCodes = {
 
 export const graphQLMessages = {
     cannotUnregistration: 'Účet se nepodařilo smazat.',
-    cannotDeleteContract: 'Od smlouvy se nepodařilo odstoupit.',
-    cannotSignContract: 'Smlouvu se nepodařilo podepsat.',
+    cannotSendSms: 'Účet se nepodařilo smazat.',
+    cannotDeleteContract: 'Omlouváme se, ale z neočekávaného důvodu se odstoupení od smlouvy nepodařilo. Zkuste to prosím znovu později.',
+    cannotSignContract: 'Omlouváme se, ale z neočekávaného důvodu se nepodařilo smlouvu podepsat. Zkuste to prosím znovu později.',
+    invalidSupplyPointId: 'Hledané odběrné místo neexistuje nebo pro přístup k němu nemáte oprávnění.',
+    forbiddenUpdateOfSupplyPoint: 'Omlouváme se, ale toto odběrné místo není možné nyní upravit. Zkuste to prosím znovu později.',
 };
 
 export const offerValidityMessages = {
@@ -68,7 +71,7 @@ export const errorFieldMessages =  {
     },
     consent: {
         signUp: {
-            required: 'Nezapomeňte na souhlas s Všeobecnými obchodními podmínkami „PARC 4 U“ a na vzetí na ' +
+            required: 'Nezapomeňte na souhlas s Všeobecnými obchodními podmínkami PARC4U a na vzetí na ' +
                 'vědomí informací o Ochraně osobních údajů.',
         },
         newsSubscription: {
@@ -82,7 +85,7 @@ export const errorFieldMessages =  {
     },
     deposit: {
         required: 'Vyplňte, jakou chcete mít výši záloh.',
-        requiredMinValue: 'Minimální výše záloh je {min|number} Kč.',
+        requiredMinValue: 'Minimální výše záloh je {min|ceil:2:1.0-2} Kč.',
     },
     depositPaymentType: {
         required: 'Vyberte ze seznamu, jak chcete platit zálohy.',
@@ -106,12 +109,13 @@ export const errorFieldMessages =  {
     email: {
         required: 'Vyplňte svůj e-mail.',
         email: 'Použijte pouze písmena bez diakritiky, číslice, tečku (.) a zavináč (@).',
-        alreadyRegisteredEmail: 'Tento e-mail již registrujeme.',
+        emailNotRegistered: 'Tento e-mail v aplikaci neexistuje.',
+        alreadyRegisteredEmail: 'Tento e-mail je již v aplikaci zaregistrovaný.',
     },
     expirationDate: {
         requiredGas: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr plynu.',
         requiredPower: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr elektřiny.',
-        isInTerminateInterval: 'Vložte správné datum.',
+        isInTerminateInterval: 'Vaši aktuální smlouvu už máte automaticky prodlouženou. Vložte správné datum.',
     },
     fullName: {
         requiredPerson: 'Vyplňte své jméno a příjmení.',
@@ -120,10 +124,11 @@ export const errorFieldMessages =  {
         requiredSignatoryFirstName: 'Vyplňte jméno podepisující osoby.',
         requiredSignatoryLastName: 'Vyplňte příjmení podepisující osoby.',
         requiredCompany: 'Vyplňte název společnosti.',
-        maxlengthFirstName: 'Maximální délka pro jméno je 50 znaků.',
-        maxlengthLastName: 'Maximální délka pro příjmení je 50 znaků.',
-        patternFirstName: 'Jméno může obsahovat pouze písmena a mezery.',
-        patternLastName: 'Příjmení může obsahovat pouze písmena a pomlčku.',
+        maxlengthFirstName: 'Použít můžete maximálně {requiredLength} znaků.',
+        maxlengthLastName: 'Použít můžete maximálně {requiredLength} znaků.',
+        maxlengthFullName: 'Použít můžete maximálně {requiredLength} znaků.',
+        patternFirstName: 'Použít můžete pouze písmena, pomlčky a mezery.',
+        patternLastName: 'Použít můžete pouze písmena, pomlčky a mezery.',
     },
     ico: {
         required: 'Vyplňte své IČO.',
@@ -184,7 +189,7 @@ export const errorFieldMessages =  {
     },
     password: {
         required: 'Vyplňte heslo.',
-        currentRequired: 'Vyplňte heslo.',
+        currentRequired: 'Vyplňte své současné heslo.',
         pattern: '	Vaše heslo musí mít minimálně 8 písmen, musí obsahovat malá a velká ' +
             'písmena, aspoň jednu číslici a aspoň jeden speciální znak jako &_*+/#\ apod.',
         fieldsMustMatch: 'Musíte vyplnit stejná hesla.',
@@ -202,7 +207,8 @@ export const errorFieldMessages =  {
         invalidPhoneNumberPrefix: `Vyplňte správnou předvolbu pro ČR ${CONSTS.TELEPHONE_PREFIX_CZ}.`,
     },
     signatoryPosition: {
-        required: 'Vyplňte funkci ve společnosti podepisující osoby.',
+        required: 'Vyplňte funkci, kterou má ve společnosti podepisující osoba.',
+        maxlengthSignatoryPosition: 'Použít můžete maximálně 80 znaků.',
     },
     smsCode: {
         required: 'Vyplňte kód, který vám přišel v SMS.',

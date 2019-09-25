@@ -1,4 +1,5 @@
 import {
+    ChangeDetectorRef,
     Component,
     EventEmitter,
     Input,
@@ -63,6 +64,9 @@ export class DatepickerRangeComponent {
     public placeholder: string;
 
     @Input()
+    public showErrorMessage = true;
+
+    @Input()
     public success = false;
 
     @Input()
@@ -81,6 +85,7 @@ export class DatepickerRangeComponent {
     public maxDate?: Date;
 
     constructor(
+        private cd: ChangeDetectorRef,
         private dynamicPipe: DynamicPipe,
         private localeService: BsLocaleService,
     ) {
@@ -107,6 +112,8 @@ export class DatepickerRangeComponent {
         };
         event.dayHoverHandler = hoverWrapper;
     }
+
+    public onHidePicker = (event) => this.cd.markForCheck();
 
     public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages, this.dynamicPipe);
 }

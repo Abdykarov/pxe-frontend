@@ -35,6 +35,7 @@ import {
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { getOverviewState } from 'src/common/utils/get-overview-state.fnc';
 
 @Component({
     selector: 'pxe-contract',

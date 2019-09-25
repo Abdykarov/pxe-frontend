@@ -1,4 +1,5 @@
 import {
+    ChangeDetectorRef,
     Component,
     EventEmitter,
     Input,
@@ -63,6 +64,9 @@ export class DatepickerComponent {
     public placeholder: string;
 
     @Input()
+    public showErrorMessage = true;
+
+    @Input()
     public success = false;
 
     @Input()
@@ -81,6 +85,7 @@ export class DatepickerComponent {
     public maxDate?: Date = null;
 
     constructor(
+        private cd: ChangeDetectorRef,
         private dynamicPipe: DynamicPipe,
         private localeService: BsLocaleService,
     ) {
@@ -131,6 +136,8 @@ export class DatepickerComponent {
             window.scrollTo(window.scrollX, window.scrollY + 1);
         });
     }
+
+    public onHidePicker = (event) => this.cd.markForCheck();
 
     public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages, this.dynamicPipe);
 }

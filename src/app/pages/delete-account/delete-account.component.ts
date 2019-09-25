@@ -82,22 +82,36 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
     }
 
     public sendConfirmationSms = () => {
+        this.loading = true;
         this.registrationService.sendUnregisterSms()
             .pipe(
                 takeUntil(this.destroy$),
                 map(({data}) =>  data.sendUnregisterSms),
             )
-            .subscribe((smsSended: boolean) => {
-                console.log(smsSended);
-            });
-        // TODO send sms
-        // this.formLoading = true;
+            .subscribe((smsSended: boolean) => (result: boolean) => {
+                    this.loading = false;
+                    if (result) {
+                        this.router.navigate([CONSTS.PATHS.DELETED_ACCOUNT]);
+                    } else {
+                        this.globalError.push(graphQLMessages.cannotSendSms);
+                        scrollToElementFnc('top');
+                    }
+                    this.cd.markForCheck();
+                },
+                error => {
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.loading = false;
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
+                },
+            );
         this.smsSent = true;
     }
 
-    public submitVerification = () => {
+    public submitVerification = (smsCode: string = null) => {
+        console.log(smsCode);
         this.formLoading = true;
-        this.registrationService.makeUnregistration('465')
+        this.registrationService.makeUnregistration(smsCode)
             .pipe(
                 takeUntil(this.destroy$),
                 map(({data}) =>  data.makeUnregistration),
@@ -105,6 +119,7 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
             .subscribe(
                 (result: boolean) => {
                     this.loading = false;
+                    this.formLoading = false;
                     if (result) {
                         this.router.navigate([CONSTS.PATHS.DELETED_ACCOUNT]);
                     } else {
@@ -118,6 +133,7 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
                 error => {
                     const { globalError } = parseGraphQLErrors(error);
                     this.loading = false;
+                    this.formLoading = false;
                     this.globalError = globalError;
                     this.cd.markForCheck();
                 },

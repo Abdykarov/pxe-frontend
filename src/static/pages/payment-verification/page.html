@@ -21,14 +21,6 @@
             >
             </lnd-info-banner>
         </div>
-        <div class="col-12 col-xl-10 offset-xl-1 mb-2 text-center">
-            <p class="mb-1 ">Zvolili jste platbu bankovní převod.</p>
-            <lnd-button
-                label="Skrýt"
-                type="link"
-                (click)="togglePaymentInfo($event)">
-            </lnd-button>
-        </div>
         <div 
             class="col-12 col-xl-10 offset-xl-1"
             [class.d-block]="showPaymentInfo"
@@ -58,15 +50,11 @@
                                 </tr>
                                 <tr>
                                     <td class="pr-3">Splatnost</td>
-                                    <td>15. 11. 2018</td>
+                                    <td>15.11.2018</td>
                                 </tr>
                                 <tr>
                                     <td class="pr-3">Variabilní symbol</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="pr-3">Konstatní symbol</td>
-                                    <td></td>
+                                    <td>115</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -102,20 +90,14 @@
                                     <td class="pb-3">
                                         Splatnost
                                         <span class="d-block">
-                                            15. 11. 2018
+                                            15.11.2018
                                         </span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="pb-3">
                                         Variabilní symbol
-                                        <span class="d-block"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="pb-3">
-                                        Konstatní symbol
-                                        <span class="d-block"></span>
+                                        <span class="d-block">115</span>
                                     </td>
                                 </tr>
                             </tbody>

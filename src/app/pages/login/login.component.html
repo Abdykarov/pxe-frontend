@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="container-content">
-        <pxe-layout-container pageTitle="LOG-IN">
+        <pxe-layout-container pageTitle="PŘIHLÁŠENÍ">
             <div class="row mb-6">
                 <div class="col-12 col-md-8 offset-md-2 col-xl-5 offset-xl-0 col-lg-3 order-xl-last">
                     <div class="page-box">
@@ -22,7 +22,7 @@
                                     [wasSentToPhone]="wasSentToPhone"
                                     [passwordWasSent]="passwordWasSent"
                                     (customAction)="forgottenPasswordAction($event)"
-                                    (reSentAction)="resetPassword(email)"
+                                    (reSentAction)="resetPassword($event)"
                                     (submitAction)="submitFormLogin($event)"
                                 ></pxe-login-form>
                                 <pxe-login-supply-auth-form
@@ -35,18 +35,18 @@
                                 ></pxe-login-supply-auth-form>
                                 <pxe-reset-password-form
                                     *ngIf="state === LOGIN_STATE.RESET"
-                                    [formFields]="formFieldsLogin.resetPassowordFields"
+                                    [formFields]="formFieldsLogin.resetPasswordFields"
                                     [formLoading]="formLoading"
+                                    [fieldError]="fieldError"
                                     [globalError]="globalError"
                                     (submitAction)="submitResetPassword($event)">
                                 </pxe-reset-password-form>
                                 <pxe-change-password-form
                                     *ngIf="state === LOGIN_STATE.CHANGE_PASSWORD"
-                                    [formFields]="formFieldsLogin.changePassowordFields"
+                                    [formFields]="formFieldsLogin.changePasswordFields"
                                     [formLoading]="formLoading"
                                     [globalError]="globalError"
-                                    (submitAction)="submitChangePassword($event)"
-                                    (customAction)="resetPassword(email)">
+                                    (submitAction)="submitChangePassword($event)">
                                 </pxe-change-password-form>
                             </div>
                         </div>
@@ -54,12 +54,12 @@
                 </div>
                 <div class="col-10 offset-1 col-md-8 offset-md-2 col-xl-5 offset-xl-1 col-lg-3 offset-lg-3 order-xl-first">
                     <div class="check-list-wrapper">
-                        <h2 class="h3--public">Nakupujte elektřinu a plyn přímo na burze</h2>
+                        <h2 class="h3--public">V PARC4U máte přístup k jiným cenám za energie</h2>
                         <ul class="check-list">
-                            <li>Měňte dodavatele na jedno kliknutí</li>
-                            <li>Neřešte papírování a chození na pobočky</li>
-                            <li>Buďte chráněni před nekalostmi ve smlouvě</li>
-                            <li>Dostávejte férové ceny bez skrytých poplatků</li>
+                            <li>Měníte dodavatele na jedno kliknutí</li>
+                            <li>Neřešíte papírování a chození na pobočky</li>
+                            <li>Jste chráněni před nekalostmi ve smlouvě</li>
+                            <li>Dostáváte férové ceny bez skrytých poplatků</li>
                         </ul>
                     </div>
                 </div>

@@ -80,6 +80,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
+                Validators.maxLength(CONSTS.MAX_LENGTH_POSITION),
             ],
         ],
         email: [
@@ -111,7 +112,7 @@ export const formFields: IForm = {
             [
                 Validators.required,
                 Validators.maxLength(CONSTS.MAX_LENGTH_NAME),
-                CustomValidators.firstName,
+                CustomValidators.username,
             ],
         ],
         signatorySurname: [
@@ -119,7 +120,7 @@ export const formFields: IForm = {
             [
                 Validators.required,
                 Validators.maxLength(CONSTS.MAX_LENGTH_NAME),
-                CustomValidators.lastName,
+                CustomValidators.username,
             ],
         ],
     },
@@ -178,16 +179,17 @@ export const formFields: IForm = {
         },
         signatoryPosition: {
             required: errorFieldMessages.signatoryPosition.required,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.signatoryPosition.maxlengthSignatoryPosition,
         },
         signatoryName: {
             required: errorFieldMessages.fullName.requiredSignatoryFirstName,
             maxlengthRequiredLengthActualLength: errorFieldMessages.fullName.maxlengthFirstName,
-            firstName: errorFieldMessages.fullName.patternFirstName,
+            username: errorFieldMessages.fullName.patternFirstName,
         },
         signatorySurname: {
             required: errorFieldMessages.fullName.requiredSignatoryLastName,
             maxlengthRequiredLengthActualLength: errorFieldMessages.fullName.maxlengthLastName,
-            lastName: errorFieldMessages.fullName.patternLastName,
+            username: errorFieldMessages.fullName.patternLastName,
         },
         phone: {
             required: errorFieldMessages.phone.requiredMobile,

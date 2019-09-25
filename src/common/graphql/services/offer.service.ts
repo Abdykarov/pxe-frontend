@@ -85,7 +85,7 @@ export class OfferService {
         })
 
     public updateGasOffer = (offerId: number, offer: IOfferInput, gasAttributes: IOfferInputGasAttributes) => this.apollo
-        .mutate<any>({
+        .mutate({
             mutation: updateGasOfferMutation,
             variables: {
                 offerId,

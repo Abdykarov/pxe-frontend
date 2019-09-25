@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 
-import { environment } from 'src/environments/environment';
-
-declare const gtag;
-
 @Injectable({
     providedIn: 'root',
 })
 export class GTMService {
+
+    public init = () => {
+        (<any>window).dataLayer = (<any>window).dataLayer || [];
+        (<any>window).dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+    }
+
     public gtm = (event): void => {
-        gtag('config', environment.gtmId, {
-            'page_path': event.urlAfterRedirects,
-        });
+        (<any>window).dataLayer.push({event: 'pageview', page_path: event.urlAfterRedirects});
     }
 }

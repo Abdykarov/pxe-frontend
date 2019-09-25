@@ -55,6 +55,9 @@ export class SelectComponent {
     public parentForm: FormGroup;
 
     @Input()
+    public showErrorMessage = true;
+
+    @Input()
     public selectName: string;
 
     @Input()

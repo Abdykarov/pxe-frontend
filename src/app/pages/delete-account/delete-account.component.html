@@ -22,7 +22,7 @@
                     [smsSent]="smsSent"
                     [phone]="currentUser.phoneNumber"
                     [showSentSmsLabelUnderFirstField]="false"
-                    (submitAction)="submitVerification()"
+                    (submitAction)="submitVerification($event)"
                     (customAction)="sendConfirmationSms()"
                 ></pxe-verification-form>
                 <ng-container *ngIf="!currentUser.phoneNumber">

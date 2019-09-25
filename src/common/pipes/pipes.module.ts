@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 // own classes
 import { AccountNumberPipe } from './account-number/account-number.pipe';
+import { CeilPipe } from 'src/common/pipes/ceil-number/simple-number.pipe';
 import { ConsumptionPipe } from './consumption/consumption.pipe';
 import { ConsumptionIndicatorPipe } from './consumption-indicator/consumption-indicator.pipe';
 import { DateDiffPipe } from './date-diff/date-diff.pipe';
@@ -17,12 +18,14 @@ import { NewSupplyWillBeginPipe } from './new-supply-will-begin/new-supply-will-
 import { PathValuePipe } from './path-value/path-value.pipe';
 import { PluralPipe } from './plurar/plural.pipe';
 import { ProgressStatusPipe } from './step-of-supply-point/step-of-supply-point.pipe';
+import { SimpleNumberPipe } from 'src/common/pipes/simple-number/simple-number.pipe';
 import { SumPipe } from 'src/common/pipes/sum/sum.pipe';
 import { ValuesPipe } from './values/values.pipe';
 
 @NgModule({
     declarations: [
         AccountNumberPipe,
+        CeilPipe,
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,
@@ -37,11 +40,13 @@ import { ValuesPipe } from './values/values.pipe';
         PathValuePipe,
         PluralPipe,
         ProgressStatusPipe,
+        SimpleNumberPipe,
         SumPipe,
         ValuesPipe,
     ],
     exports: [
         AccountNumberPipe,
+        CeilPipe,
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,
@@ -56,11 +61,13 @@ import { ValuesPipe } from './values/values.pipe';
         PathValuePipe,
         PluralPipe,
         ProgressStatusPipe,
+        SimpleNumberPipe,
         SumPipe,
         ValuesPipe,
     ],
     providers: [
         AccountNumberPipe,
+        CeilPipe,
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,
@@ -76,6 +83,7 @@ import { ValuesPipe } from './values/values.pipe';
         PathValuePipe,
         PluralPipe,
         ProgressStatusPipe,
+        SimpleNumberPipe,
         SumPipe,
         ValuesPipe,
     ],

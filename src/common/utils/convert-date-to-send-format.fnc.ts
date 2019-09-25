@@ -1,10 +1,5 @@
-export const getTwoDecimalNumber = (number: number): string => {
-    if (number < 10) {
-        return `0${number}`;
-    }
+import * as moment from 'moment';
 
-    return String(number);
-};
+import { CONSTS } from 'src/app/app.constants';
 
-export const convertDateToSendFormatFnc = (date: Date) =>
-    `${date.getFullYear()}-${getTwoDecimalNumber(date.getUTCMonth() + 1)}-${getTwoDecimalNumber(date.getDate())}`;
+export const convertDateToSendFormatFnc = (date: Date) => moment(date).format(CONSTS.DATE_FORMAT.SHORT);
