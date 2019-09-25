@@ -59,8 +59,6 @@ export class NewSupplyWillBeginPipe implements PipeTransform {
                 contractEndIndefinitePeriod,
             ],
         ])(supplyPointInput);
-        // console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold',
-        //     result, result && (<Moment>result).toDate());
         return result && (<Moment>result).isValid() ? (<Moment>result).toDate() : null;
     }
 }
