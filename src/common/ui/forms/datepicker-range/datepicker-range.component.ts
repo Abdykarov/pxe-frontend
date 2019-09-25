@@ -84,15 +84,21 @@ export class DatepickerRangeComponent {
     @Input()
     public maxDate?: Date;
 
+    public inputFocused = false;
+
     constructor(
         private cd: ChangeDetectorRef,
         private dynamicPipe: DynamicPipe,
         private localeService: BsLocaleService,
     ) {
-        csLocale.invalidDate = '';
+        this.resetDatepickerLocale();
+        this.config = defaultDatepickerConfig;
+    }
+
+    public resetDatepickerLocale = (invalidMessage = '') => {
+        csLocale.invalidDate = invalidMessage;
         defineLocale(locale, csLocale);
         this.localeService.use(locale);
-        this.config = defaultDatepickerConfig;
     }
 
     public onShowPicker = (event) => {

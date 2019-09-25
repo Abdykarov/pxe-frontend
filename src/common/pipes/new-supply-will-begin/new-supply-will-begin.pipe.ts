@@ -12,6 +12,7 @@ import {
     getNextDayFromExpirationDate,
 } from 'src/common/utils/supply-point-date-calculate.fnc';
 import { ISupplyPointInput } from 'src/common/graphql/models/supply.model';
+import { Moment } from 'moment';
 
 @Pipe({
   name: 'newSupplyWillBegin',
@@ -35,12 +36,12 @@ export class NewSupplyWillBeginPipe implements PipeTransform {
     isContractEndTermOrRequest = (supplyPointInput: ISupplyPointInput) =>
         this.isContractEndTerm(supplyPointInput) || this.isContractEndRequest(supplyPointInput)
 
-    transform(supplyPointInput: ISupplyPointInput): string | boolean  {
+    transform(supplyPointInput: ISupplyPointInput): Date | boolean  {
         if (supplyPointInput.ownTerminate) {
             supplyPointInput.contractEndTypeId = CONTRACT_END_TYPE.CONTRACT_END_TERMINATE;
         }
 
-        return R.cond([
+        const result: Moment | boolean = R.cond([
             [
                 this.isContractEndDefault,
                 false,
@@ -58,5 +59,8 @@ export class NewSupplyWillBeginPipe implements PipeTransform {
                 contractEndIndefinitePeriod,
             ],
         ])(supplyPointInput);
+        // console.log('%c ***** VALUE *****', 'background: #bada55; color: #000; font-weight: bold',
+        //     result, result && (<Moment>result).toDate());
+        return result && (<Moment>result).isValid() ? (<Moment>result).toDate() : null;
     }
 }

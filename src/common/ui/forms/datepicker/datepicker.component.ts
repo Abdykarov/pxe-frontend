@@ -84,14 +84,14 @@ export class DatepickerComponent {
     @Input()
     public maxDate?: Date = null;
 
+    public inputFocused = false;
+
     constructor(
         private cd: ChangeDetectorRef,
         private dynamicPipe: DynamicPipe,
         private localeService: BsLocaleService,
     ) {
-        csLocale.invalidDate = '';
-        defineLocale(locale, csLocale);
-        this.localeService.use(locale);
+        this.resetDatepickerLocale();
         this.config = defaultDatepickerConfig;
     }
 
@@ -104,15 +104,28 @@ export class DatepickerComponent {
             if (date) {
                 this.datepicker.bsValue = new Date(date);
             } else {
-                // IE walkaround
-                this.datepicker.bsValue = null;
-                this.datepicker.bsValue = undefined;
-                this.parentForm.controls[this.datepickerName].setErrors({
-                    'bsDate': true,
-                });
-                this.datepicker.isOpen = false;
+                this.resetDatepickerOnError(stringDate);
             }
+        } else {
+            this.resetDatepickerOnError(stringDate);
         }
+    }
+
+    public resetDatepickerLocale = (invalidMessage = '') => {
+        csLocale.invalidDate = invalidMessage;
+        defineLocale(locale, csLocale);
+        this.localeService.use(locale);
+    }
+
+    public resetDatepickerOnError = (value: string) => {
+        this.resetDatepickerLocale(value);
+        // IE walkaround
+        // this.datepicker.bsValue = null;
+        // this.datepicker.bsValue = undefined;
+        this.parentForm.controls[this.datepickerName].setErrors({
+            'bsDate': true,
+        });
+        this.datepicker.isOpen = false;
     }
 
     public onShowPicker = (event) => {

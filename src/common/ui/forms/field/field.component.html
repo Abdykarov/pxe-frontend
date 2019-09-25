@@ -59,13 +59,14 @@
         </div>
         <div
             class="form-control-wrapper"
+            [class.focused-input]="inputFocused"
             [class.invalid-input]="!!error && !!touched"
             [class.disabled-input]="!!disabledField">
             <input
                 *ngSwitchDefault
                 #field
                 type="text"
-                (blur)="blur.emit($event)"
+                (blur)="blurAction();blur.emit($event)"
                 class="form-control"
                 [class.form-control--light]="lightField"
                 [class.form-control--not-empty]="!!value"
@@ -74,6 +75,7 @@
                 [class.is-valid]="success"
                 [class.is-warning]="warning"
                 [disabled]="disabledField"
+                (focus)="focusAction();focus.emit($event)"
                 [id]="id"
                 [name]="name"
                 [ngClass]="customFieldClass"
@@ -87,6 +89,7 @@
                 *ngSwitchCase="'NUMBER'"
                 #field
                 type="number"
+                (blur)="blurAction();blur.emit($event)"
                 class="form-control"
                 [class.form-control--light]="lightField"
                 [class.form-control--not-empty]="!!value"
@@ -95,6 +98,7 @@
                 [class.is-valid]="success"
                 [class.is-warning]="warning"
                 [disabled]="disabledField"
+                (focus)="focusAction();focus.emit($event)"
                 [id]="id"
                 [name]="name"
                 [ngClass]="customFieldClass"
@@ -108,7 +112,7 @@
                 *ngSwitchCase="'PASSWORD'"
                 #field
                 type="password"
-                (blur)="blur.emit($event)"
+                (blur)="blurAction();blur.emit($event)"
                 class="form-control"
                 [class.form-control--light]="lightField"
                 [class.form-control--not-empty]="!!value"
@@ -117,6 +121,7 @@
                 [class.is-valid]="success"
                 [class.is-warning]="warning"
                 [disabled]="disabledField"
+                (focus)="focusAction();focus.emit($event)"
                 [id]="id"
                 [name]="name"
                 [ngClass]="customFieldClass"
@@ -138,7 +143,7 @@
             *ngSwitchCase="'FILE'"
             #field
             type="file"
-            (blur)="blur.emit($event)"
+            (blur)="blurAction();blur.emit($event)"
             class="custom-file-input"
             [class.form-control--light]="lightField"
             [class.form-control--not-empty]="!!value"
@@ -147,6 +152,7 @@
             [class.is-valid]="success"
             [class.is-warning]="warning"
             [disabled]="disabledField"
+            (focus)="focusAction();focus.emit($event)"
             [id]="id"
             [ngClass]="customFieldClass"
             [(ngModel)]="value"
@@ -173,7 +179,7 @@
                 [ngClass]="radioGroupItemClass">
                 <input
                     type="radio"
-                    (blur)="blur.emit($event)"
+                    (blur)="blurAction();blur.emit($event)"
                     class="custom-control-input"
                     [class.form-control--light]="lightField"
                     [class.form-control--not-empty]="value === option.key"
@@ -183,6 +189,7 @@
                     [class.is-warning]="warning"
                     (change)="changeRadioGroupAction(option.key)"
                     [disabled]="option.disabled"
+                    (focus)="focusAction();focus.emit($event)"
                     [checked]="value === option.key"
                     [ngClass]="customFieldClass"
                     [readonly]="readonly"
@@ -200,7 +207,7 @@
             *ngSwitchCase="'CHECKBOX'"
             #field
             type="checkbox"
-            (blur)="blur.emit($event)"
+            (blur)="blurAction();blur.emit($event)"
             class="custom-control-input"
             [class.form-control--light]="lightField"
             [class.form-control--not-empty]="!!value"
@@ -209,6 +216,7 @@
             [class.is-valid]="success"
             [class.is-warning]="warning"
             [disabled]="disabledField"
+            (focus)="focusAction();focus.emit($event)"
             [checked]="checked"
             [id]="id"
             [ngClass]="customFieldClass"
@@ -220,7 +228,7 @@
             *ngSwitchCase="'SWITCH'"
             #field
             type="checkbox"
-            (blur)="blur.emit($event)"
+            (blur)="blurAction();blur.emit($event)"
             class="custom-control-input"
             [class.form-control--light]="lightField"
             [class.form-control--not-empty]="!!value"
@@ -229,6 +237,7 @@
             [class.is-valid]="success"
             [class.is-warning]="warning"
             [disabled]="disabledField"
+            (focus)="focusAction();focus.emit($event)"
             [checked]="checked"
             [id]="id"
             [ngClass]="customFieldClass"
@@ -256,7 +265,7 @@
                 class="custom-control custom-radio custom-radio--switch">
                 <input
                     type="radio"
-                    (blur)="blur.emit($event)"
+                    (blur)="blurAction();blur.emit($event)"
                     class="custom-control-input"
                     [class.form-control--light]="lightField"
                     [class.form-control--not-empty]="value === option.key"
@@ -264,8 +273,9 @@
                     [class.is-invalid]="!!error && !!touched"
                     [class.is-valid]="success"
                     [class.is-warning]="warning"
-                    (change)="changeRadioGroupAction(option.key)"
                     [disabled]="option.disabled"
+                    (focus)="focusAction();focus.emit($event)"
+                    (change)="changeRadioGroupAction(option.key)"
                     [checked]="value === option.key"
                     [ngClass]="customFieldClass"
                     [readonly]="readonly"
@@ -282,6 +292,7 @@
         <textarea
             *ngSwitchCase="'TEXTAREA'"
             #field
+            (blur)="blurAction();blur.emit($event)"
             class="form-control"
             [class.form-control--light]="lightField"
             [class.form-control--not-empty]="!!value"
@@ -290,6 +301,7 @@
             [class.is-valid]="success"
             [class.is-warning]="warning"
             [disabled]="disabledField"
+            (focus)="focusAction();focus.emit($event)"
             [id]="id"
             [ngClass]="customFieldClass"
             [(ngModel)]="value"
@@ -303,6 +315,7 @@
         <select
             *ngSwitchCase="'SELECT'"
             #field
+            (blur)="blurAction();blur.emit($event)"
             class="form-control"
             [class.form-control--light]="lightField"
             [class.form-control--not-empty]="!!value"
@@ -310,6 +323,7 @@
             [class.is-invalid]="!!error && !!touched"
             [class.is-valid]="success"
             [class.is-warning]="warning"
+            (focus)="focusAction();focus.emit($event)"
             [disabled]="disabledField"
             (change)="changeSelect($event)"
             [id]="id"

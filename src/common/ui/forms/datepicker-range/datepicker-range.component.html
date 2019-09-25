@@ -1,5 +1,4 @@
 <div
-
     class="form-group"
     [formGroup]="parentForm">
     <div
@@ -9,12 +8,15 @@
         [class.input-group--append-button-icon]="!!appendButtonIcon">
         <div
             class="form-control-wrapper"
+            [class.focused-input]="inputFocused"
             [class.invalid-input]="!!error && !!touched"
             [class.disabled-input]="!!disabledField">
             <input
                 bsDaterangepicker
                 #datepicker="bsDaterangepicker"
                 type="text"
+                (blur)="inputFocused = false"
+                (focus)="inputFocused = true"
                 class="form-control"
                 [class.form-control--not-empty]="!!parentForm.controls[datepickerName].value"
                 [id]="id"
