@@ -26,7 +26,7 @@ import {
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
     addressWhispererBySelfFields,
-} from 'src/common/containers/form/forms/address-whisperer-by-self/address-whisperer-by-self-form.config';
+} from 'src/common/ui/address-whisperer-by-self/address-whisperer-by-self-form.config';
 import { AddressWhispererService } from './services/address-whisperer.service';
 import { IAddress } from 'src/common/graphql/models/supply.model';
 import { IValidationMessages } from 'src/common/ui/forms/models/validation-messages.model';
@@ -113,6 +113,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     public addresses: Array<IAddress> = [];
     public typeahead: EventEmitter<any>;
     public isStartedSearching = false;
+    public term = '';
 
     public hasTermGoodLength = term => term && term.length >= AddressWhispererComponent.ADDRESS_MIN_LENGTH;
 
@@ -126,10 +127,13 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
         this.typeahead
             .pipe(
                 tap((term) => {
-                    this.isStartedSearching = !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(term);
-                    this.showForm = false;
-                    this.setAddressValidator(true);
-                    this.cd.markForCheck();
+                    this.term = term;
+                    if (!this.hasTermGoodLength) {
+                        this.isStartedSearching = !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(term);
+                        this.showForm = false;
+                        this.setAddressValidator(true);
+                        this.cd.markForCheck();
+                    }
                 }),
                 debounceTime(AddressWhispererComponent.DEBOUNCE_TIME),
                 filter(this.hasTermGoodLength),
@@ -145,6 +149,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     }
 
     public setAddresses = (addresses = []) => {
+        this.isStartedSearching = !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(this.term);
         this.addresses = addresses;
         this.showForm = false;
         this.setAddressValidator(true);
