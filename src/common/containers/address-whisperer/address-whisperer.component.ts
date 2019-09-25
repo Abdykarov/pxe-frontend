@@ -44,7 +44,8 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     private static readonly ROWS_RESPONSE = 5;
 
     private static readonly PATTER_START_SEARCHING =
-        new RegExp(`^([${CustomValidators.alphaCharacters}].*?[ ,].*?[0-9].*?)|([0-9].*?[ ,].*?[${CustomValidators.alphaCharacters}].*?)$`);
+        new RegExp('^(.*?[' + CustomValidators.alphaCharacters + '].*?[ ,].*?[0-9].*?)|' +
+            '(.*?[0-9].*?[ ,].*?[' + CustomValidators.alphaCharacters + '].*?)$');
 
     public readonly UNIQUE_FIELD_NAME_END = '_by_self';
 
