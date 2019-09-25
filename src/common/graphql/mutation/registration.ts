@@ -12,3 +12,9 @@ export const makeUnregistrationMutation = gql`
     }
 `;
 
+export const sendUnregisterSmsMutation = gql`
+    mutation sendUnregisterSms{
+        sendUnregisterSms
+    }
+`;
+

@@ -5,6 +5,7 @@ import { Apollo } from 'apollo-angular';
 import {
     makeRegistrationMutation,
     makeUnregistrationMutation,
+    sendUnregisterSmsMutation,
 } from 'src/common/graphql/mutations';
 
 
@@ -18,7 +19,7 @@ export class RegistrationService {
     ) {}
 
     public makeRegistration = (values: any)  => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: makeRegistrationMutation,
             variables: {
                 values,
@@ -26,10 +27,15 @@ export class RegistrationService {
         })
 
     public makeUnregistration = (smsCode: string) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: makeUnregistrationMutation,
             variables: {
                 smsCode,
             },
+        })
+
+    public sendUnregisterSms = () => this.apollo
+        .mutate<any>({
+            mutation: sendUnregisterSmsMutation,
         })
 }

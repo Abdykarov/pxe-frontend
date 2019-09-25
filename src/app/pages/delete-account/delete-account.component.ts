@@ -82,6 +82,14 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
     }
 
     public sendConfirmationSms = () => {
+        this.registrationService.sendUnregisterSms()
+            .pipe(
+                takeUntil(this.destroy$),
+                map(({data}) =>  data.sendUnregisterSms),
+            )
+            .subscribe((smsSended: boolean) => {
+                console.log(smsSended);
+            });
         // TODO send sms
         // this.formLoading = true;
         this.smsSent = true;
@@ -92,6 +100,7 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
         this.registrationService.makeUnregistration('465')
             .pipe(
                 takeUntil(this.destroy$),
+                map(({data}) =>  data.makeUnregistration),
             )
             .subscribe(
                 (result: boolean) => {
