@@ -299,7 +299,6 @@
              *ngIf="form.getRawValue() | newSupplyWillBegin as newSupplyWillBegin">
             <div *ngIf="newSupplyWillBegin" class="col-12">
                 <small>Předpokládané zahájení nové dodávky od:</small>
-                <br/> {{newSupplyWillBegin | json}}
                 {{newSupplyWillBegin | date:'d.&nbsp;M.&nbsp;y'}}
             </div>
         </div>
