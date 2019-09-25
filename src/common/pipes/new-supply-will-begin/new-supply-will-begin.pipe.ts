@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 
 import * as R from 'ramda';
+import { Moment } from 'moment';
 
 import { CONTRACT_END_TYPE } from 'src/app/app.constants';
 import {
@@ -12,7 +13,6 @@ import {
     getNextDayFromExpirationDate,
 } from 'src/common/utils/supply-point-date-calculate.fnc';
 import { ISupplyPointInput } from 'src/common/graphql/models/supply.model';
-import { Moment } from 'moment';
 
 @Pipe({
   name: 'newSupplyWillBegin',
@@ -36,7 +36,7 @@ export class NewSupplyWillBeginPipe implements PipeTransform {
     isContractEndTermOrRequest = (supplyPointInput: ISupplyPointInput) =>
         this.isContractEndTerm(supplyPointInput) || this.isContractEndRequest(supplyPointInput)
 
-    transform(supplyPointInput: ISupplyPointInput): Date | boolean  {
+    transform(supplyPointInput: ISupplyPointInput): Date  {
         if (supplyPointInput.ownTerminate) {
             supplyPointInput.contractEndTypeId = CONTRACT_END_TYPE.CONTRACT_END_TERMINATE;
         }

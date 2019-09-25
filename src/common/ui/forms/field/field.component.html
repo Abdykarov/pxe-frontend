@@ -60,7 +60,7 @@
         <div
             class="form-control-wrapper"
             [class.focused-input]="inputFocused"
-            [class.invalid-input]="!!error && !!touched"
+            [class.invalid-input]="(!!error && !!touched) && !inputFocused"
             [class.disabled-input]="!!disabledField">
             <input
                 *ngSwitchDefault
