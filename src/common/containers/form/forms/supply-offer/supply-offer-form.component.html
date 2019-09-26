@@ -108,7 +108,7 @@
         <div *ngIf="form.controls.priceVT.status !== 'DISABLED'"
              class="col-4 col-xl-3">
             <lnd-form-field
-                    appendText="kWh/Kč"
+                    appendText="Kč/MWh (bez DPH)"
                     [error]="formError.priceVT || form.controls.priceVT.errors"
                     [formControl]="form.controls.priceVT"
                     [id]="'priceVT'"
@@ -122,7 +122,7 @@
         <div *ngIf="form.controls.priceNT.status !== 'DISABLED' || commodityType === COMMODITY_TYPE_POWER"
              class="col-4 col-xl-3">
             <lnd-form-field
-                    appendText="kWh/Kč"
+                    appendText="Kč/MWh (bez DPH)"
                     [disabledField]="form.controls.priceNT.status === 'DISABLED'"
                     [error]="formError.priceNT || form.controls.priceNT.errors"
                     [formControl]="form.controls.priceNT"
@@ -137,7 +137,7 @@
         <div *ngIf="form.controls.priceGas.status !== 'DISABLED'"
              class="col-4 col-xl-3">
             <lnd-form-field
-                    appendText="kWh/Kč"
+                    appendText="Kč/MWh (bez DPH)"
                     [error]="formError.priceGas || form.controls.priceGas.errors"
                     [formControl]="form.controls.priceGas"
                     [id]="'priceGas'"
@@ -182,7 +182,7 @@
              class="col-4 col-xl-3">
             <lnd-form-field
                     *ngIf="form.controls.permanentPaymentPrice.status !== 'DISABLED'"
-                    appendText="Kč/měsíc"
+                    appendText="Kč/měsíc (bez DPH)"
                     [error]="formError.permanentPaymentPrice || form.controls.permanentPaymentPrice.errors"
                     [formControl]="form.controls.permanentPaymentPrice"
                     [id]="'permanentPaymentPrice'"
