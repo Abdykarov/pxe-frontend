@@ -9,34 +9,33 @@
 
 
 .footer {
-	background-color: $footer-bg;
-	font-size: .75rem;
-	color: $gray-400;
+	position: relative;
+	padding: ( $spacer * 5 ) 0 $spacer;
+	font-size: $small-font-size;
+	text-align: center;
 
 	// Media queries
 	@include media-breakpoint-up(md) {
-		height: $footer-height;
-		margin-top: -$footer-height;
+		height: $footer-height-tablet;
+		padding-bottom: ( $spacer * 1.5 );
 	}
-}
 
-.footer-container {
-	// Media queries
-	@include media-breakpoint-up(lg) {
-		padding-left: ( $aside-width + $spacer );
+	&--public {
+		background-color: $white;
+	}
+
+	.copy-holder,
+	.logo-holder {
+		margin-bottom: ( $spacer / 2 );
+	}
+
+	.logo {
+		width: $logo-width-mobile;
+		height: $logo-height-mobile;
 	}
 }
 
 .footer-navigation {
-	padding: $spacer ( $spacer / 2 );
-	border-bottom: 1px solid $body-bg;
-
-	// Media queries
-	@include media-breakpoint-up(sm) {
-		border-bottom: none;
-		padding: ( $spacer / 2 ) 0;
-	}
-
 	&__list {
 		@include reset-list;
 		display: flex;
@@ -45,93 +44,21 @@
 		text-align: center;
 
 		// Media queries
-		@include media-breakpoint-up(sm) {
-			text-align: left;
-			flex-direction: row;
-			justify-content: flex-start;
-		}
 		@include media-breakpoint-up(md) {
-			justify-content: flex-end;
+			flex-direction: row;
 		}
 	}
 
 	&__item {
 		&:nth-child(n + 2) {
-			// Media queries
-			@include media-breakpoint-up(sm) {
-				position: relative;
-				margin-left: ( $spacer / 1.5 );
+			margin-top: ( $spacer / 2 );
 
-				&::before {
-					position: relative;
-					left: -( $spacer / 3 );
-					content: '|';
-				}
+			// Media queries
+			@include media-breakpoint-up(md) {
+				position: relative;
+				margin-top: 0;
+				margin-left: ( $spacer * 2 );
 			}
 		}
-	}
-
-	&__link {
-		&,
-		&:visited {
-			color: $gray-400;
-			line-height: ( $footer-height - $spacer );
-		}
-	}
-}
-
-.copy-holder {
-	display: block;
-	padding: ( $spacer / 2 ) 0;
-	line-height: ( $footer-height - $spacer );
-	text-align: right;
-
-	// Media queries
-	@include media-breakpoint-up(sm) {
-		text-align: left;
-	}
-}
-
-.btn-scroll-top {
-	&,
-	&:visited {
-		display: none;
-		position: absolute;
-		top: -( $scroll-top-size / 2 );
-		right: ( $spacer / 2 );
-		width: $scroll-top-size;
-		height: $scroll-top-size;
-		line-height: $scroll-top-size;
-		background-color: $primary;
-		text-align: center;
-		text-decoration: none;
-		color: $white;
-
-		// Media queries
-		@include media-breakpoint-up(md) {
-			top: -( $scroll-top-size / 1.5 );
-		}
-	}
-
-	&:hover,
-	&:focus {
-		background-color: $primary-dark;
-		color: $white;
-		cursor: pointer;
-	}
-
-	&:active,
-	&:active:focus {
-		background-color: darken($primary, 10%);
-		color: $white;
-	}
-
-	.icon {
-		font-size: .625rem;
-	}
-
-	&--visible {
-		display: block;
-		transition: all ease-in $animation-speed;
 	}
 }

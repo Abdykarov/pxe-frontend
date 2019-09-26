@@ -1,25 +1,31 @@
 import { NgModule } from '@angular/core';
 import {
+    PreloadAllModules,
     Routes,
     RouterModule,
 } from '@angular/router';
 
-import { environment } from 'src/environments/environment';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { AuthService } from 'src/app/services/auth.service';
+import { CONSTS } from './app.constants';
+import { environment } from 'src/environments/environment';
+import { PaymentGuard } from 'src/app/guards/payment.guard';
 
 const routes: Routes = [
     {
-        path: 'secured',
-        canActivate: [AuthGuard],
-        loadChildren: './layouts/secured/secured-layout.module#SecuredLayoutModule',
-    },
-    {
-        path: '',
+        path: CONSTS.PATHS.EMPTY,
         loadChildren: './layouts/public/public-layout.module#PublicLayoutModule',
     },
     {
-        path: '**',
+        path: CONSTS.PATHS.SECURED,
+        canActivateChild: [
+            AuthGuard,
+            PaymentGuard,
+        ],
+        loadChildren: './layouts/secured/secured-layout.module#SecuredLayoutModule',
+    },
+    {
+        path: CONSTS.PATHS.WILD_CART,
         redirectTo: '',
     },
 ];
@@ -29,7 +35,10 @@ const routes: Routes = [
         RouterModule.forRoot(
             routes,
             {
-                enableTracing: !environment.production,
+                enableTracing: environment.production || false,
+                preloadingStrategy: PreloadAllModules,
+                initialNavigation: 'enabled',
+                scrollPositionRestoration: 'top',
             },
         ),
     ],

@@ -15,9 +15,13 @@
 @import '~bootstrap/scss/custom-forms';
 @import '~bootstrap/scss/input-group';
 
+.form-container {
+	max-width: $input-width;
+	margin: 0 auto;
+}
+
 .form-group {
 	position: relative;
-	padding-top: $form-group-padding-top;
 
 	&--with-currency {
 		.input-group-append {
@@ -36,7 +40,6 @@
 
 		.input-group-append {
 			padding-top: 0;
-			height: $input-height - ( $input-border-width-interactive * 2 );
 		}
 	}
 }
@@ -44,41 +47,39 @@
 .form-control {
 	border-width: 0;
 	border-bottom-width: $input-border-width;
-	padding-top: ( $input-padding-y + $input-border-width );
 	cursor: pointer;
 	@include box-shadow(none);
+	@include placeholder($input-placeholder-color);
 
-	&:focus,
-	&.focus,
-	&:hover {
-		padding-bottom: ( $spacer / 8 );
-		border-color: $input-color-interactive;
-		border-bottom-width: $input-border-width-interactive;
-
-		& + .control-label {
-			color: $input-color-interactive;
-		}
+	&:hover:not(:focus) {
+		border-color: $input-border-color-interactive;
 	}
 
 	&:focus,
 	&.focus {
 		box-shadow: none;
-		@include placeholder($titanium-gray);
+
+		& ~ .input-group-append {
+			color: $input-color;
+		}
 	}
 
 	&[disabled],
 	&[readonly],
 	fieldset[disabled] & {
 		color: $input-disabled-color;
-		border-bottom-color: $input-disabled-color;
+		border-bottom-color: $input-disabled-border-color;
 		cursor: not-allowed;
 		pointer-events: none;
+
+		& ~ .input-group-append {
+			color: $input-disabled-color;
+		}
 	}
 
 	&[disabled],
 	&[readonly] {
 		& + .control-label {
-			color: $input-disabled-color;
 			cursor: not-allowed;
 			pointer-events: none;
 		}
@@ -86,6 +87,17 @@
 
 	&[readonly] {
 		color: $input-color;
+	}
+
+	&::-ms-clear {
+		display: none;
+	}
+
+	&--light {
+		&,
+		&:focus {
+			background-color: $white;
+		}
 	}
 }
 
@@ -106,7 +118,6 @@ textarea.form-control {
 	&.focus,
 	&:hover {
 		padding: ( $spacer * 2 );
-		border-width: $input-border-width-interactive;
 	}
 
 	& + .control-label {
@@ -116,17 +127,6 @@ textarea.form-control {
 
 	&[disabled] {
 		@include placeholder($input-disabled-color);
-	}
-}
-
-.form-control:focus:not(select),
-.form-control.focus:not(select),
-.form-control--not-empty {
-	& + .control-label {
-		font-size: $input-label-active-font-size;
-		font-weight: $font-weight-semibold;
-		transform: translateY(-( $input-label-active-font-size * 2 ));
-		pointer-events: auto;
 	}
 }
 
@@ -141,17 +141,12 @@ textarea.form-control--not-empty {
 
 .control-label {
 	position: absolute;
-	display: flex;
-	align-items: center;
 	width: 100%;
-	height: $input-height;
-	top: $form-group-padding-top;
+	top: 0;
 	left: 0;
 	margin: 0;
-	color: $blue;
+	font-size: $input-font-size;
 	cursor: pointer;
-	pointer-events: none;
-	transition: all ease $animation-speed;
 	@include smart-short-text;
 }
 
@@ -159,66 +154,80 @@ textarea.form-control--not-empty {
 	position: relative;
 	display: block;
 	top: 0;
-	margin-bottom: ( $spacer * 2 );
+	margin-bottom: ( $spacer / 2 );
 }
 
 // States
 .form-control {
-	&,
+	&.is-valid,
+	&.is-warning,
+	&.is-invalid {
+		padding-right: $spacer;
+		background-image: none;
+	}
+
+	&.is-valid {
+		border-color: $input-border-color;
+	}
+
+	&.is-warning {
+		border-color: $warning;
+	}
+
+	&.is-invalid {
+		border-color: $danger;
+	}
+
 	&:focus,
 	&.focus,
 	&:hover {
 		&.is-valid,
 		&.is-warning,
 		&.is-invalid {
-			&:focus {
-				box-shadow: none;
-			}
+			box-shadow: none;
 		}
 
 		&.is-valid {
-			& + .control-label {
-				color: $primary;
-			}
+			border-color: $success;
 		}
 
 		&.is-warning {
 			border-color: $input-color-interactive-warning;
-
-			& + .control-label {
-				color: $input-color-interactive-warning;
-			}
 		}
 
 		&.is-invalid {
 			border-color: $input-color-interactive-invalid;
-
-			& + .control-label {
-				color: $input-color-interactive-invalid;
-			}
 		}
 	}
 }
 
-.form-control--not-empty {
-	& + .control-label {
-		color: $titanium-gray;
-		font-weight: $font-weight-semibold;
+.form-control-case {
+	position: relative;
+	max-width: $input-width;
+	padding-top: $form-group-padding-top;
+}
+
+.form-control-wrapper {
+	width: 100%;
+	position: relative;
+	border-radius: $input-border-radius;
+	overflow: hidden;
+
+	&.disabled-input {
+		& + .control-label {
+			cursor: not-allowed;
+			pointer-events: none;
+		}
 	}
-}
 
-.form-control--placeholder {
-	@include placeholder($titanium-gray);
-}
-
-.form-control {
 	& ~ .invalid-feedback {
 		display: none;
-		margin-top: -( $spacer / 6 );
-		font-size: .75rem;
+		margin-top: ( $spacer / 4 );
+		font-size: $small-font-size;
+		max-width: $input-width;
 	}
 
-	&.is-invalid {
+	&.invalid-input {
 		& ~ .invalid-feedback {
 			display: block;
 		}
@@ -241,6 +250,12 @@ textarea.form-control--not-empty {
 
 // Input group
 .input-group {
+	&--append {
+		.form-control {
+			padding-right: ( $spacer * 2.5 );
+		}
+	}
+
 	.btn {
 		min-width: auto;
 		background-color: transparent;
@@ -262,26 +277,26 @@ textarea.form-control--not-empty {
 	.control-label {
 		top: 0;
 	}
+
+	&--append-button-icon {
+		// Media queries
+		@include media-breakpoint-down(xs) {
+			padding-right: $input-height;
+		}
+	}
 }
 
 .input-group-prepend,
 .input-group-append {
+	align-items: center;
 	position: absolute;
 	top: 0;
-	padding-top: $form-group-padding-top;
-	height: $input-height - ( $input-border-width-interactive * 2 ) + $form-group-padding-top;
-	line-height: $input-line-height;
-	background-color: $input-bg;
+	padding: 0 ( $spacer * .75 );
+	height: ( $input-height - $input-border-width );
+	line-height: ( $input-height - $input-border-width + 1 );
+	color: $gray-100;
+	font-size: $input-font-size;
 	pointer-events: none;
-
-	&::after {
-		position: absolute;
-		top: 0;
-		content: '';
-		width: ( $spacer * 4 );
-		height: 100%;
-		background: linear-gradient(90deg, rgba($white, 0%) 0%, rgba($white, 100%) 60%);
-	}
 
 	&:focus,
 	& > button:focus {
@@ -291,6 +306,39 @@ textarea.form-control--not-empty {
 	&:hover,
 	& > button:hover {
 		cursor: pointer;
+	}
+}
+
+.input-group-append-help {
+	position: absolute;
+	top: $form-group-padding-top;
+	right: -( $input-height );
+	width: $input-height;
+	height: $input-height;
+	line-height: $input-height;
+	text-align: center;
+
+	// Media queries
+	@include media-breakpoint-down(xs) {
+		right: 0;
+	}
+
+	.btn {
+		@include reset-pa-ma;
+		background-color: transparent;
+		border: none;
+		color: $font-text;
+		height: $icon-size-px;
+		line-height: $icon-size-px;
+
+		.icon {
+			vertical-align: sub;
+		}
+
+		&:focus,
+		&.focus {
+			color: $input-focus-border-color;
+		}
 	}
 }
 
@@ -309,23 +357,12 @@ textarea.form-control--not-empty {
 .input-group-append {
 	right: 0;
 
-	&::after {
-		right: 100%;
-	}
-
 	.btn {
 		padding-right: 0;
 	}
 }
 
-.input-group-icon {
-	padding-top: ( $spacer / 3 );
-	color: $gray-300;
-}
-
 .input-group-switch__text {
-	color: $titanium-gray;
-
 	&--prepend {
 		margin-right: ( $spacer * 5 );
 	}
@@ -336,7 +373,6 @@ textarea.form-control--not-empty {
 
 	&--active {
 		color: $primary;
-		font-weight: $font-weight-semibold;
 	}
 
 	&--disabled {
@@ -346,19 +382,30 @@ textarea.form-control--not-empty {
 	}
 }
 
-// Radio Checkbox
+.custom-control-inline {
+	&:last-child {
+		margin-right: 0;
+	}
+}
+
+// Radio & Checkbox
 .custom-control {
 	min-height: auto;
-	margin-bottom: ( $spacer / 2 );
+	padding-left: 0;
+	margin-bottom: $spacer;
 }
 
 .custom-control-input[type='checkbox'],
 .custom-control-input[type='radio'] {
 	&:focus,
 	&.focus {
-		& + .custom-control-label {
-			&::after {
-				background-color: $custom-control-indicator-bg-interactive;
+		&,
+		&.is-valid {
+			& + .custom-control-label {
+				&::before {
+					border-color: $custom-control-indicator-focus-border-color;
+					box-shadow: none;
+				}
 			}
 		}
 
@@ -370,37 +417,26 @@ textarea.form-control--not-empty {
 
 		&.is-invalid + .custom-control-label {
 			&::before {
+				border-color: $custom-control-indicator-bg-check-interactive-invalid;
 				box-shadow: none;
 			}
-
-			&::after {
-				background-color: $custom-control-indicator-bg-interactive-error;
-			}
 		}
 	}
 
-	&,
-	&.is-valid,
-	&.is-warning,
-	&.is-invalid {
-		& + .custom-control-label {
-			&::before {
-				background-color: transparent;
-			}
-		}
-	}
-
-	& + .custom-control-label {
+	&.is-valid + .custom-control-label {
 		&:hover {
 			&::before {
-				background-color: $custom-control-indicator-bg-interactive;
+				border-color: $custom-control-indicator-hover-border-color;
 			}
+		}
+
+		&::before {
+			background-color: transparent;
+			border-color: $custom-control-indicator-border-color;
 		}
 	}
 
 	&.is-warning + .custom-control-label {
-		color: $input-color;
-
 		&:hover {
 			&::before {
 				background-color: $custom-control-indicator-bg-interactive-warning;
@@ -413,14 +449,12 @@ textarea.form-control--not-empty {
 	}
 
 	&.is-invalid + .custom-control-label {
+		color: $input-color;
+
 		&:hover {
 			&::before {
-				background-color: $custom-control-indicator-bg-interactive-error;
+				border-color: $custom-control-indicator-bg-check-interactive-invalid;
 			}
-		}
-
-		&::after {
-			border-color: $custom-control-indicator-bg-invalid;
 		}
 	}
 
@@ -430,116 +464,81 @@ textarea.form-control--not-empty {
 			cursor: not-allowed;
 			pointer-events: none;
 
-			&::after {
-				background-color: $custom-control-indicator-disabled-bg;
+			&::before {
 				border-color: $custom-control-indicator-disabled-border;
+			}
+		}
+	}
+
+	& + .custom-control-label {
+		&:hover {
+			&::before {
+				border-color: $custom-control-indicator-hover-border-color;
 			}
 		}
 	}
 }
 
 .custom-control-label {
-	padding-left: ( $custom-control-indicator-size-px + $spacer );
-	margin-bottom: ( $spacer / 2 );
+	padding-left: ( $custom-control-indicator-size-px + ( $spacer / 2 ) );
 	color: $input-color;
+	font-size: $input-font-size;
 	cursor: pointer;
+
+	&:hover {
+		&::before {
+			border-color: $custom-control-indicator-hover-border-color;
+		}
+	}
 
 	&::before,
 	&::after {
 		top: $custom-control-indicator-top;
+		left: 0;
 	}
 }
 
 // Radio
-.custom-radio {
-	.custom-control-label {
-		&::before {
-			left: 0;
-		}
-
-		&::after {
-			border: $custom-control-indicator-border-width $custom-control-indicator-border-type $green-300;
-			border-radius: $custom-radio-border-radius;
-			transition: all ease-in $animation-speed;
-		}
-	}
-
-	.custom-control-input:checked {
-		& + .custom-control-label {
-			&::before {
-				background-color: $white;
-			}
-
-			&::after {
-				background-image: none;
-			}
-		}
-	}
-}
-
 .custom-control-input[type='radio']:checked {
 	&:focus,
 	&.focus {
-		& + .custom-control-label {
-			&::after {
-				background-color: $custom-control-indicator-bg-check-interactive;
-				border-color: $custom-control-indicator-bg-check-interactive;
-			}
-		}
-
 		&.is-warning + .custom-control-label {
-			&::after {
-				background-color: $custom-control-indicator-bg-check-interactive-warning;
+			&::before {
 				border-color: $custom-control-indicator-bg-check-interactive-warning;
 			}
 		}
 
 		&.is-invalid + .custom-control-label {
-			&::after {
-				background-color: $custom-control-indicator-bg-check-interactive-invalid;
+			&::before {
 				border-color: $custom-control-indicator-bg-check-interactive-invalid;
 			}
 		}
 	}
 
 	& + .custom-control-label {
-		&::before {
-			position: absolute;
-			top: 12px;
-			left: ( $custom-control-indicator-size-px / 2 - $custom-radio-filling-size / 2 - 1px );
-			width: $custom-radio-filling-size;
-			height: $custom-radio-filling-size;
-			border-radius: $custom-radio-border-radius;
-			z-index: $zindex-input-group-form-control;
-
-			// Media queries
-			@include media-breakpoint-up(xl) {
-				top: 13px;
-				left: ( $custom-control-indicator-size-px / 2 - $custom-radio-filling-size / 2 );
-			}
+		&::before,
+		&::after {
+			transition: all ease-in $animation-speed;
 		}
 
 		&::after {
-			background-color: $custom-control-indicator-bg;
-		}
-
-		&:hover {
-			&::after {
-				background-color: $custom-control-indicator-bg-check-interactive;
-				border-color: $custom-control-indicator-bg-check-interactive;
-			}
+			top: ( $custom-control-indicator-size-px / 2 - $custom-radio-filling-size / 2 + $custom-control-indicator-top);
+			left: ( $custom-control-indicator-size-px / 2 - $custom-radio-filling-size / 2);
+			width: $custom-radio-filling-size;
+			height: $custom-radio-filling-size;
+			background-color: $custom-radio-control-indicator-checked-bg;
+			border-radius: $custom-radio-indicator-border-radius;
 		}
 	}
 
 	&.is-warning {
 		& + .custom-control-label {
-			&::after {
-				background-color: $custom-control-indicator-bg-warning;
+			&::before {
+				border-color: $custom-control-indicator-bg-warning;
 			}
 
 			&:hover {
-				&::after {
-					background-color: $custom-control-indicator-bg-check-interactive-warning;
+				&::before {
 					border-color: $custom-control-indicator-bg-check-interactive-warning;
 				}
 			}
@@ -572,24 +571,11 @@ textarea.form-control--not-empty {
 	.custom-control-label {
 		&::before,
 		&::after {
-			border-radius: $custom-checkbox-indicator-border-radius;
-			transition: background-color ease-in $animation-speed, border ease-in $animation-speed;
+			transition: border ease-in $animation-speed;
 		}
 
 		&::before {
-			left: $custom-control-gutter;
-		}
-
-		&::after {
-			border: $custom-control-indicator-border-width $custom-control-indicator-border-type $green-300;
-		}
-	}
-
-	.custom-control-input:checked {
-		& + .custom-control-label {
-			&::after {
-				background-image: none;
-			}
+			border-radius: $custom-checkbox-indicator-border-radius;
 		}
 	}
 }
@@ -597,66 +583,55 @@ textarea.form-control--not-empty {
 .custom-control-input[type='checkbox']:checked {
 	&:focus,
 	&.focus {
-		& + .custom-control-label {
-			&::before,
+		&.is-valid {
 			&::after {
-				background-color: $custom-control-indicator-bg-check-interactive;
-				border-color: $custom-control-indicator-bg-check-interactive;
+				background-color: $custom-control-indicator-bg;
 			}
 		}
 
 		&.is-warning + .custom-control-label {
-			&::before,
-			&::after {
-				background-color: $custom-control-indicator-bg-check-interactive-warning;
+			&::before {
 				border-color: $custom-control-indicator-bg-check-interactive-warning;
 			}
 		}
 
 		&.is-invalid + .custom-control-label {
-			&::before,
-			&::after {
-				background-color: $custom-control-indicator-bg-check-interactive-invalid;
+			&::before {
 				border-color: $custom-control-indicator-bg-check-interactive-invalid;
+			}
+
+			&::after {
+				background-color: transparent;
 			}
 		}
 	}
 
 	& + .custom-control-label {
-		&::before,
-		&::after {
-			background-color: $custom-control-indicator-bg;
-		}
-
 		&::after {
 			@include icon;
-			content: '\e907';
+			content: '\e906';
 			font-size: $custom-checkbox-icon-size;
-			line-height: ( $custom-control-indicator-size-px - 4px );
+			line-height: $custom-control-indicator-size-px;
 			text-align: center;
-			color: $white;
 		}
+	}
 
-		&:hover {
-			&::before,
-			&::after {
-				background-color: $custom-control-indicator-bg-check-interactive;
-				border-color: $custom-control-indicator-bg-check-interactive;
+	&.is-valid {
+		& + .custom-control-label {
+			&::before {
+				background-color: $custom-control-indicator-checked-bg;
 			}
 		}
 	}
 
 	&.is-warning {
 		& + .custom-control-label {
-			&::before,
-			&::after {
-				background-color: $custom-control-indicator-bg-warning;
+			&::before {
+				border-color: $custom-control-indicator-bg-warning;
 			}
 
 			&:hover {
-				&::before,
-				&::after {
-					background-color: $custom-control-indicator-bg-check-interactive-warning;
+				&::before {
 					border-color: $custom-control-indicator-bg-check-interactive-warning;
 				}
 			}
@@ -665,15 +640,13 @@ textarea.form-control--not-empty {
 
 	&.is-invalid {
 		& + .custom-control-label {
-			&::before,
-			&::after {
-				background-color: $custom-control-indicator-bg-invalid;
+			&::before {
+				background-color: transparent;
+				border-color: $custom-control-indicator-bg-invalid;
 			}
 
 			&:hover {
-				&::before,
-				&::after {
-					background-color: $custom-control-indicator-bg-check-interactive-invalid;
+				&::before {
 					border-color: $custom-control-indicator-bg-check-interactive-invalid;
 				}
 			}
@@ -699,7 +672,6 @@ textarea.form-control--not-empty {
 				height: $custom-switch-height;
 				min-width: $custom-switch-width;
 				margin: -9px 0 0 10px;
-				background-color: $night-blue;
 				border-radius: $custom-switch-height;
 			}
 
@@ -711,7 +683,7 @@ textarea.form-control--not-empty {
 				left: auto;
 				transform: translate(0, -50%);
 				background-color: $white;
-				border-radius: $custom-radio-border-radius;
+				border-radius: $custom-radio-indicator-border-radius;
 				box-shadow: $custom-switch-shadow;
 				transition: all $animation-speed ease-in;
 			}
@@ -748,10 +720,6 @@ textarea.form-control--not-empty {
 	&:hover,
 	&:focus-within {
 		.custom-control-input:not([disabled]) {
-			& + .custom-control-label::before {
-				background-color: $titanium-gray;
-			}
-
 			&:checked {
 				& + .custom-control-label::before {
 					background-color: $custom-switch-bg-interactive;
@@ -867,19 +835,16 @@ textarea.form-control--not-empty {
 	}
 }
 
-
 // Selectbox
 .select {
 	position: relative;
 
 	.select-icon {
 		position: absolute;
-		top: ( $input-height / 2 ) - ( $custom-select-icon-size / 2 );
+		top: ( $input-height / 2 );
 		right: 0;
 		padding-right: ( $spacer / 2 );
-		font-size: $custom-select-icon-size;
 		font-weight: $font-weight-bold;
-		color: $titanium-gray;
 		pointer-events: none;
 	}
 
@@ -895,36 +860,12 @@ textarea.form-control--not-empty {
 		&:focus,
 		&.focus,
 		&:hover {
-			&.is-valid {
-				border-color: $input-color-interactive;
-
-				& ~ .select-icon {
-					color: $input-color-interactive;
-				}
-			}
-
-			&.is-warning {
-				border-color: $input-color-interactive-warning;
-
-				& ~ .select-icon {
-					color: $input-color-interactive-warning;
-				}
-			}
-
 			&.is-invalid {
 				border-color: $input-color-interactive-invalid;
 
 				& ~ .select-icon {
 					color: $input-color-interactive-invalid;
 				}
-			}
-		}
-
-		&.is-valid {
-			border-color: $titanium-gray;
-
-			& ~ .select-icon {
-				color: $titanium-gray;
 			}
 		}
 
@@ -983,8 +924,13 @@ textarea.form-control--not-empty {
 }
 
 .input-subtext {
-	color: $blue;
-	font-size: .75rem;
+	margin-top: ( $spacer / 4 );
+	font-size: $small-font-size;
+
+	.form-group,
+	.custom-control {
+		margin-bottom: 0;
+	}
 
 	&--disabled {
 		color: $input-disabled-color;

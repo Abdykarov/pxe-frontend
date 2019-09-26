@@ -1,0 +1,18 @@
+<div class="row text-center mb-md-6">
+    <div class="col-12 col-md-6 offset-md-3">
+        <h1>{{pageTitle}}</h1>
+    </div>
+</div>
+<div *ngIf="breadcrumbItemsSimple"
+        class="row">
+    <div class="col">
+        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+    </div>
+</div>
+<lnd-banner-ui
+    *ngIf="showBanner"
+    [data]="bannerObj"
+    buttonLabel=""
+    [showButtonLabel]="false"
+></lnd-banner-ui>
+<ng-content></ng-content>

@@ -1,11 +1,11 @@
 <button
     type="button"
-    class="btn w-100"
+    class="btn"
     [ngClass]="[
         type !== null && !hasOutline ? 'btn-' + type : '',
         hasOutline ? 'btn-outline-' + type : '',
         size ? 'btn-' + size : '',
-        variant === 'dots' ? 'btn--raw' : '',
+        variant === 'dots' || variant === 'icon' ? 'btn--raw' : '',
         customClass ? customClass : ''
     ]"
     [disabled]="isDisabled"
@@ -25,6 +25,14 @@
         class="icon btn__icon btn__icon--alone"
         [ngClass]="[
             dotsDirection ? 'icon--dots-' + dotsDirection : 'icon--dots-vertical',
+            customIconClass ? customIconClass : ''
+        ]">
+    </span>
+    <span
+        *ngIf="variant === 'icon'"
+        class="icon btn__icon btn__icon--alone"
+        [ngClass]="[
+            icon ? icon : '',
             customIconClass ? customIconClass : ''
         ]">
     </span>

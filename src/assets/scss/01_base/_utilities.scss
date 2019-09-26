@@ -30,12 +30,51 @@
 		color: $link-hover-color;
 		text-decoration: $link-hover-decoration;
 	}
+
+	&--logout {
+		&.dropdown-item,
+		.navigation-main__link {
+			@include link-without-href-self {
+				background-color: rgba($secondary, .05);
+			}
+
+			&:focus,
+			&:hover,
+			&:active {
+				background-color: rgba($secondary, .15);
+			}
+		}
+	}
+
+	&--disabled {
+		opacity: .4;
+		pointer-events: none;
+	}
 }
 
 .cursor-pointer {
 	cursor: pointer;
 }
 
+.text-with-icon {
+	display: flex;
+	align-items: center;
+	margin-bottom: $spacer;
+
+	& &__icon {
+		color: $icons-primary;
+		font-size: 1.625rem;
+	}
+
+	&__text {
+		margin-left: ( $spacer / 2 );
+	}
+}
+
+
+.document-font {
+	font-family: $font-family-sans-serif-document;
+}
 
 //
 // Overwriting default - Extend new definition `table-row-group` for default Bootstrap
@@ -135,6 +174,7 @@ $colors: (
 	light:                         $light,
 	light-dark:                    $light-dark,
 	light-darken:                  $light-darken,
+	body:                          $body-bg,
 	disabled:                      $disabled,
 	icons-primary:                 $icons-primary,
 	icons-active:                  $icons-active,

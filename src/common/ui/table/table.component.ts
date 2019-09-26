@@ -8,12 +8,13 @@ import {
     TemplateRef,
 } from '@angular/core';
 import { Router } from '@angular/router';
+
 import * as R from 'ramda';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { isRouterLink } from 'src/common/utils';
-import { viewBreakpoints } from 'src/common/constants/breakpoints.constant';
 import { ITableColumnConfig } from './models/table.model';
+import { viewBreakpoints } from 'src/common/constants/breakpoints.constant';
 
 @Component({
     selector: 'lnd-table',
@@ -27,6 +28,7 @@ export class TableComponent extends AbstractComponent implements OnChanges {
     @Input() caption?: string;
     @Input() mobileDetailCaption?: string;
     @Input() showHead?: boolean;
+    @Input() tableWrapperClass?: string;
     @Input() tableClass?: string;
     @Input() rowSelectorFn?: (row: any) => boolean;
     @Input() isStatic = false;
@@ -38,6 +40,7 @@ export class TableComponent extends AbstractComponent implements OnChanges {
     // html template for action column
     @Input() actionColTemplate?: TemplateRef<any>;
     @Input() actionColClass?: string;
+    @Input() actionColTriggersDetail = false;
     // html custom template for caption
     @Input() customCaptionTemplate?: TemplateRef<any>;
     // html templates for individual columns

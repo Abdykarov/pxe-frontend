@@ -4,13 +4,26 @@
  -
  */
 
+.static-pages-holder {
+	.breadcrumb {
+		/* stylelint-disable declaration-no-important */
+		justify-content: flex-start !important;
+		/* stylelint-enable declaration-no-important */
+	}
+}
+
 .static-pages {
 	background-color: $white;
-	padding: $spacer ( $spacer / 2 );
+	padding: ( $spacer * 2 ) $spacer;
 	margin-bottom: $spacer;
 
 	&:last-child {
 		margin-bottom: 0;
+	}
+
+	&--bg-transparent {
+		background-color: transparent;
+		border: 1px solid $white;
 	}
 
 	.icon-boxes {
@@ -33,9 +46,23 @@
 		margin: ( $spacer / 2 );
 		text-align: center;
 
-		&__symbol {
+		&--double {
+			width: ( 96px * 1.5 + $spacer );
+			height: ( 96px * 1.5 + $spacer );
+		}
+
+		&__symbol,
+		&__illustration-holder {
 			display: block;
 			margin-bottom: ( $spacer / 3 );
+		}
+		&__illustration {
+			width: 50%;
+			height: auto;
+			max-height: 80px;
+		}
+
+		&__symbol {
 			color: $blue-400;
 		}
 

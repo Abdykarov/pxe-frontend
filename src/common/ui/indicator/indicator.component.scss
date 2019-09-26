@@ -7,47 +7,39 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
+// Component variables
+@import 'indicator.component.variables.scss';
+
 
 .indicator {
-	position: relative;
-	top: -2px;
-	width: $indicator-width;
-	height: $indicator-height;
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
+	font-size: $indicator-font-size-mobil;
+	line-height: $indicator-line-height-mobil;
 
-	.badge & {
-		top: -1px;
+	// Media queries
+	@include media-breakpoint-up(xl) {
+		font-size: $indicator-font-size-tablet;
+		line-height: $indicator-line-height-tablet;
 	}
 
-	&::before {
-		content: '';
-		width: 0;
-		height: 0;
-		border-style: solid;
-		position: absolute;
-		top: 0;
-		left: 0;
+	&--positive {
+		color: $positive;
 	}
 
-	&--up {
-		&::before {
-			border-width: 0 ( $indicator-width / 2 ) $indicator-height ( $indicator-width / 2 );
-			border-color: transparent transparent $success transparent;
-
-			.badge & {
-				border-color: transparent transparent $white transparent;
-			}
-		}
+	&--negative {
+		color: $danger;
 	}
 
-	&--down {
-		&::before {
-			border-width: $indicator-height ( $indicator-width / 2 ) 0 ( $indicator-width / 2 );
-			border-color: $danger transparent transparent transparent;
+	.icon {
+		font-size: ( $indicator-font-size-mobil / 2 );
+		line-height: $indicator-line-height-mobil;
+		padding-right: ( $spacer * .75 );
 
-			.badge & {
-				border-color: $white transparent transparent transparent;
-			}
+		// Media queries
+		@include media-breakpoint-up(md) {
+			font-size: ( $indicator-font-size-tablet / 2 );
+			line-height: $indicator-line-height-tablet;
 		}
 	}
 }

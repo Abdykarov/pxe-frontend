@@ -1,0 +1,51 @@
+<div class="row static-pages-holder">
+    <div class="col">
+        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="static-pages-holder">
+            <h3>jedna smlouva k prodloužení</h3>
+            <div class="static-pages static-pages--bg-transparent">
+                <pxe-supply-points-summary
+                    [concludedPlacesCount]="supplyPointStatistic.concludedCount"
+                    [notConcludedPlacesCount]="supplyPointStatistic.notConcludedCount"
+                    [powerPlacesCount]="supplyPointStatistic.powerCount"
+                    [powerPlacesConsumptionSum]="supplyPointStatistic.powerAnnualConsumptionSum"
+                    [gasPlacesCount]="supplyPointStatistic.gasCount"
+                    [gasPlacesConsumptionSum]="supplyPointStatistic.gasAnnualConsumptionSum"
+                    [supplyPointsEndingCount]="supplyPointStatistic.showDeliveryCount"
+                    [supplyPointsEndingData]="supplyPointStatistic.showDeliveryItems">
+                </pxe-supply-points-summary>
+            </div>
+            <h3>více smluv k prodloužení</h3>
+            <div class="static-pages static-pages--bg-transparent">
+                <pxe-supply-points-summary
+                    [concludedPlacesCount]="supplyPointStatisticMore.concludedCount"
+                    [notConcludedPlacesCount]="supplyPointStatisticMore.notConcludedCount"
+                    [powerPlacesCount]="supplyPointStatisticMore.powerCount"
+                    [powerPlacesConsumptionSum]="supplyPointStatisticMore.powerAnnualConsumptionSum"
+                    [gasPlacesCount]="supplyPointStatisticMore.gasCount"
+                    [gasPlacesConsumptionSum]="supplyPointStatisticMore.gasAnnualConsumptionSum"
+                    [supplyPointsEndingCount]="supplyPointStatisticMore.showDeliveryCount"
+                    [supplyPointsEndingData]="supplyPointStatisticMore.showDeliveryItems">
+                </pxe-supply-points-summary>
+            </div>
+            <h3>žádná smlouva k prodloužení</h3>
+            <div class="static-pages static-pages--bg-transparent">
+                <pxe-supply-points-summary
+                    [concludedPlacesCount]="supplyPointStatisticNone.concludedCount"
+                    [notConcludedPlacesCount]="supplyPointStatisticNone.notConcludedCount"
+                    [powerPlacesCount]="supplyPointStatisticNone.powerCount"
+                    [powerPlacesConsumptionSum]="supplyPointStatisticNone.powerAnnualConsumptionSum"
+                    [gasPlacesCount]="supplyPointStatisticNone.gasCount"
+                    [gasPlacesConsumptionSum]="supplyPointStatisticNone.gasAnnualConsumptionSum"
+                    [supplyPointsEndingCount]="supplyPointStatisticNone.showDeliveryCount"
+                    [supplyPointsEndingData]="supplyPointStatisticNone.showDeliveryItems">
+                </pxe-supply-points-summary>
+            </div>
+        </div>
+    </div>
+</div>

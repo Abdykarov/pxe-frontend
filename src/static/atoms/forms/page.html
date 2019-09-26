@@ -1,0 +1,395 @@
+<!-- Example custom lael template -->
+<ng-template
+    #templateLabel
+    let-item="item"
+    let-index="index">
+    {{ item.street }}&nbsp;{{ item.orientationNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.descriptiveNumber }},
+    {{ item.city }}, {{ item.postCode }}
+</ng-template>
+<!-- Example searched items template -->
+<ng-template
+    #templateItem
+    let-item="item"
+    let-index="index">
+    {{ item.street }}&nbsp;{{ item.orientationNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.descriptiveNumber }}<br>
+    {{ item.city }}&nbsp;{{ item.postCode }}
+</ng-template>
+<!-- Example link in subtext -->
+<ng-template #linkInSubtext>
+    <a (click)="clickAction()">
+        Link
+    </a>
+</ng-template>
+<!-- Example checkbox in subtext -->
+<ng-template #checkboxInSubtext>
+    <lnd-form-field
+        [id]="'checkbox-in-subtext'"
+        label="Checkbox"
+        [type]="'CHECKBOX'">
+    </lnd-form-field>
+</ng-template>
+
+<div class="row static-pages-holder">
+    <div class="col">
+        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+    </div>
+</div>
+<h3>Inputs with help icon</h3>
+<div class="static-pages">
+    <div class="row">
+        <div class="col-12">
+            <lnd-form-field
+                id="normal-input"
+                label="Normal"
+                [appendButtonIcon]="true ? 'icon--info' : null"
+                (appendButtonAction)="trigger()">
+            </lnd-form-field>
+        </div>
+        <div class="col-12">
+            <lnd-form-field
+                id="appendtext-input"
+                label="With appendtext"
+                appendText="CZK"
+                [appendButtonIcon]="true ? 'icon--info' : null"
+                (appendButtonAction)="trigger()">
+            </lnd-form-field>
+        </div>
+        <div class="col-12">
+            <lnd-select
+                label="Searchable selectbox"
+                [options]="config.selectOptions"
+                [parentForm]="selectBoxes"
+                searchable="true"
+                [selectName]="'searchableSelect'"
+                placeholder="placeholder"
+                [appendButtonIcon]="true ? 'icon--info' : null"
+                (appendButtonAction)="trigger()">
+            </lnd-select>
+        </div>
+        <div class="col-12">
+            <lnd-datepicker
+                [parentForm]="datepickers"
+                [datepickerName]="'datepicker'"
+                [placeholder]="'Datepicker'"
+                label="Datepicker"
+                id="datepicker-1"
+                [appendButtonIcon]="true ? 'icon--info' : null"
+                (appendButtonAction)="trigger()">
+            </lnd-datepicker>
+        </div>
+    </div>
+</div>
+<h3>Inputs</h3>
+<div class="static-pages">
+    <h4>Normal</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-form-field
+                id="normal-input"
+                label="Label">
+            </lnd-form-field>
+        </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                id="error-input"
+                label="Label error"
+                error="This field is required"
+                [touched]="true">
+            </lnd-form-field>
+        </div>
+    </div>
+    <h4>Filled</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-form-field
+                id="normal-input"
+                label="Normal input"
+                placeholder="Placeholder text"
+                [touched]="true"
+                value="Filled input">
+            </lnd-form-field>
+        </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                id="error-input"
+                label="Normal error"
+                value="Filled input"
+                error="This field is required field is required field is required field."
+                [touched]="true">
+            </lnd-form-field>
+        </div>
+    </div>
+    <h4>Input with appendtext</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-form-field
+                id="appendtext-input"
+                label="Input s appendtext"
+                placeholder="Placeholder text"
+                appendText="CZK">
+            </lnd-form-field>
+        </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                [disabledField]="true"
+                id="appendtext-input"
+                label="Input s appendtext"
+                placeholder="Placeholder text"
+                appendText="CZK">
+            </lnd-form-field>
+        </div>
+    </div>
+    <h4>Light</h4>
+    <div class="row bg--body pt-3 mb-4">
+        <div class="col-md-4">
+            <lnd-form-field
+                id="light-input"
+                label="Normal input"
+                [lightField]="true">
+            </lnd-form-field>
+        </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                id="error-input"
+                label="Normal error"
+                error="This field is required"
+                [touched]="true"
+                [lightField]="true">
+            </lnd-form-field>
+        </div>
+    </div>
+    <h4>Input with appendtext</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-form-field
+                id="appendtext-input"
+                label="Input s appendtext"
+                placeholder="Placeholder text"
+                appendText="CZK">
+            </lnd-form-field>
+        </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                [disabledField]="true"
+                id="appendtext-input"
+                label="Input s appendtext"
+                placeholder="Placeholder text"
+                appendText="CZK">
+            </lnd-form-field>
+        </div>
+    </div>
+    <h4>Disabled</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-form-field
+                [disabledField]="true"
+                id="disabled-input"
+                label="Disabled input">
+            </lnd-form-field>
+        </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                [disabledField]="true"
+                id="disabled-input-filled"
+                label="Disabled input"
+                value="Disabled">
+            </lnd-form-field>
+        </div>
+    </div>
+    <h4>Types subtext</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-form-field
+                id="input-normal-subtext"
+                label="Normal subtext"
+                subtext="Subtext">
+            </lnd-form-field>
+        </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                id="input-link-in-subtext"
+                label="Link in subtext"
+                [subtextTemplate]="linkInSubtext">
+            </lnd-form-field>
+        </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                id="input-checkbox-in-subtext"
+                label="Checkbox in subtext"
+                [subtextTemplate]="checkboxInSubtext">
+            </lnd-form-field>
+        </div>
+    </div>
+</div>
+<h3>Selectbox</h3>
+<div class="static-pages">
+    <h4>Normal</h4>
+    <form [formGroup]="selectBoxes">
+        <div class="row">
+            <div class="col-md-4">
+                <lnd-select
+                    label="Simple selectbox"
+                    subtext="Select subtext"
+                    [options]="config.selectOptions"
+                    [parentForm]="selectBoxes"
+                    [selectName]="'simpleSelect'"
+                    placeholder="placeholder">
+                </lnd-select>
+            </div>
+            <div class="col-md-4">
+                <lnd-select
+                    label="Searchable selectbox"
+                    subtext="Select subtext"
+                    [options]="config.selectOptions"
+                    [parentForm]="selectBoxes"
+                    searchable="true"
+                    [selectName]="'searchableSelect'"
+                    placeholder="placeholder">
+                </lnd-select>
+            </div>
+            <div class="col-md-4">
+                <lnd-select
+                    label="Error selectbox"
+                    [options]="config.selectOptions"
+                    [parentForm]="selectBoxes"
+                    searchable="true"
+                    [error]="'Error message'"
+                    [selectName]="'errorSelect'"
+                    placeholder="Error"
+                    touched="true">
+                </lnd-select>
+            </div>
+        </div>
+    </form>
+</div>
+<h3>Address whisperer</h3>
+<div class="static-pages">
+    <form [formGroup]="addressWhisperer" class="row">
+        <div class="col-md-4">
+            <pxe-address-whisperer
+                [label]="'Adresa'"
+                [placeholder]="'Address whisperer placeholder'"
+                [parentForm]="addressWhisperer"
+                [whispererName]="'address'"
+                [templateItem]="templateItem"
+                [templateLabel]="templateLabel">
+            </pxe-address-whisperer>
+        </div>
+    </form>
+</div>
+<h3>Datepickers</h3>
+<div class="static-pages">
+    <form [formGroup]="datepickers" class="row">
+        <div class="col-md-4">
+            <lnd-datepicker
+                [parentForm]="datepickers"
+                [datepickerName]="'datepicker'"
+                [placeholder]="'Datepicker'"
+                label="Datepicker"
+                id="datepicker-1"
+                >
+            </lnd-datepicker>
+        </div>
+        <div class="col-4">
+            <lnd-datepicker-range
+                [parentForm]="datepickers"
+                [datepickerName]="'datepicker'"
+                [placeholder]="'Datepicker range'"
+                label="Datepicker range"
+                id="datepicker-1-range"
+                [appendButtonIcon]="true ? 'icon--info' : null"
+                (appendButtonAction)="trigger()">
+            </lnd-datepicker-range>
+        </div>
+        <div class="col-md-4">
+            <lnd-datepicker
+                [parentForm]="datepickers"
+                [datepickerName]="'errorDatepicker'"
+                [placeholder]="'Datepicker'"
+                label="Datepicker"
+                id="datepicker-2"
+                error="This field is required"
+                [touched]="true"
+                >
+            </lnd-datepicker>
+        </div>
+        <div class="col-md-4">
+            <lnd-datepicker
+                [parentForm]="datepickers"
+                [datepickerName]="'disabledDatepicker'"
+                [placeholder]="'Datepicker'"
+                label="Disabled datepicker"
+                id="disabledDatepicker"
+                [disabledField]="true"
+                >
+            </lnd-datepicker>
+        </div>
+    </form>
+</div>
+<h3>Radio</h3>
+<div class="static-pages">
+    <h4>Normal</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-form-field
+                id="normal-radio"
+                label="Radio label"
+                [type]="'RADIOGROUP'"
+                [options]="config.options"
+                [defaultRadioGroupValue]="config.options[1].key">
+            </lnd-form-field>
+        </div>
+    </div>
+</div>
+<h3>Checkbox</h3>
+<div class="static-pages">
+    <h4>Normal</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-form-field
+                [id]="'normal-checkbox'"
+                label="Checkbox label"
+                [type]="'CHECKBOX'">
+            </lnd-form-field>
+        </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                [id]="'checked-checkbox'"
+                label="Checked checkbox"
+                [type]="'CHECKBOX'"
+                value="1"
+                [checked]="true">
+            </lnd-form-field>
+        </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                [id]="'error-checkbox'"
+                label="Error checkbox"
+                error="This field is required"
+                [touched]="true"
+                [type]="'CHECKBOX'">
+            </lnd-form-field>
+        </div>
+    </div>
+    <h4>Disabled</h4>
+    <div class="row">
+        <div class="col-md-4">
+            <lnd-form-field
+                [disabledField]="true"
+                id="disabled-checkbox"
+                label="Disabled checkbox"
+                [type]="'CHECKBOX'">
+            </lnd-form-field>
+        </div>
+        <div class="col-md-4">
+            <lnd-form-field
+                [disabledField]="true"
+                [id]="'disabled-checkbox-checked'"
+                label="Disabled checkbox checked"
+                value="1"
+                [checked]="true"
+                [type]="'CHECKBOX'">
+            </lnd-form-field>
+        </div>
+    </div>
+</div>

@@ -7,6 +7,9 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
+// Component variables
+@import 'modal.component.variables.scss';
+
 // Bootstrap imports
 @import '~bootstrap/scss/modal';
 @import '~bootstrap/scss/close';
@@ -18,64 +21,19 @@
 }
 
 .modal-header {
-	padding: ( $modal-header-padding-md * 2 ) $modal-header-padding 0;
+	position: relative;
+	padding: $modal-header-padding;
 
 	// Media queries
 	@include media-breakpoint-up(md) {
-		padding: $modal-header-padding-md $modal-header-padding-md 0;
+		padding: $modal-header-padding-md;
 		display: flex;
 		justify-content: space-between;
-	}
-
-	.close {
-		@include reset-pa-ma;
-		margin-top: -( $spacer * 1.5 );
-		color: $body-color;
-
-		// Media queries
-		@include media-breakpoint-up(md) {
-			margin-top: -( $spacer / 2 );
-			margin-right: -( $spacer / 2 );
-		}
-	}
-
-	&__logo-holder {
-		position: absolute;
-		top: ( $spacer / 2 );
-		left: ( $spacer / 2 );
-		width: $modal-logo-holder-width;
-		height: $modal-logo-holder-height;
-
-		// Media queries
-		@include media-breakpoint-up(md) {
-			position: relative;
-			top: 0;
-			left: auto;
-			text-align: center;
-		}
-	}
-
-	&__logo {
-		height: 100%;
-		width: auto;
-		max-width: 100%;
-	}
-
-	&--with-logo {
-		.modal-title {
-			padding-top: ( $spacer / 2 );
-
-			// Media queries
-			@include media-breakpoint-up(md) {
-				padding-top: 0;
-				padding-right: ( $spacer * 5 );
-			}
-		}
 	}
 }
 
 .modal-body {
-	padding: $modal-inner-padding $modal-inner-padding ( $modal-inner-padding * 2 );
+	padding: $modal-inner-padding;
 
 	// Media queries
 	@include media-breakpoint-up(md) {
@@ -94,7 +52,7 @@
 
 .modal-footer {
 	display: block;
-	padding: 0 $modal-header-padding $modal-header-padding-md;
+	padding: 0 $modal-header-padding $modal-header-padding;
 
 	// Media queries
 	@include media-breakpoint-up(sm) {
@@ -124,6 +82,62 @@
 		@include media-breakpoint-up(sm) {
 			margin-top: 0;
 			margin-left: ( $spacer / 3 );
+		}
+	}
+}
+
+.modal {
+	& &__close {
+		overflow: hidden;
+		float: none;
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: $icon-size-px * 2;
+		height: $icon-size-px * 2;
+		line-height: $icon-size-px * 2;
+		@include reset-pa-ma;
+		font-family: $font-family-sans-serif;
+		color: $body-color;
+		font-size: ( $icon-size-px * 1.5 );
+		z-index: $zindex-modal;
+	}
+}
+
+.modal-confirm {
+	&__icon {
+		display: block;
+		margin-bottom: $spacer;
+		color: $icons-primary;
+		font-size: 3rem;
+	}
+
+	&__title {
+		margin-bottom: $spacer;
+		font-size: 1.5rem;
+	}
+
+	.modal-body {
+		text-align: center;
+
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			padding: $modal-inner-padding-md ( $spacer * 4 );
+		}
+	}
+
+	.modal-footer {
+		flex-direction: column;
+		justify-content: center;
+		margin-bottom: $spacer;
+
+		> :not(:last-child) {
+			margin-bottom: ( $spacer / 2 );
+			margin-right: 0;
+		}
+
+		> :not(:first-child) {
+			margin-left: 0;
 		}
 	}
 }

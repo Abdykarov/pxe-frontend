@@ -1,0 +1,49 @@
+/*
+ -  Badge
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+// Component variables
+@import 'badge.component.variables.scss';
+
+// Bootstrap alert and close import
+@import '~bootstrap/scss/badge';
+
+
+.badge {
+	@include link-without-href {
+		display: inline-flex;
+		align-items: center;
+		min-height: $badge-min-height;
+		margin-bottom: $spacer;
+		color: $white;
+		line-height: $line-height-sm;
+		white-space: initial;
+	}
+
+	@include link-without-href-interactive {
+		color: $white;
+		text-decoration: none;
+	}
+
+	&-light,
+	&-transparent {
+		@include link-without-href {
+			color: $font-text;
+			pointer-events: none;
+		}
+	}
+
+	&-transparent {
+		background-color: transparent;
+	}
+
+	&--not-interactive {
+		pointer-events: none;
+	}
+}
+

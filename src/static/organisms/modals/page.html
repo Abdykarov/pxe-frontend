@@ -1,0 +1,102 @@
+<div class="row static-pages-holder">
+    <div class="col">
+        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+    </div>
+</div>
+<div class="static-pages">
+    <div class="row">
+        <div class="col-12 col-md-6 mb-3">
+            <lnd-button
+                type="primary"
+                (action)="toggleNormalModal()"
+                label="Normal modal">
+            </lnd-button>
+        </div>
+        <div class="col-6 col-md-6 mb-3">
+            <lnd-button
+                type="primary"
+                (action)="toggleLargeModal()"
+                label="Large modal">
+            </lnd-button>
+        </div>
+        <div class="col-12 col-md-6 mb-3 mb-md-0">
+            <lnd-button
+                type="primary"
+                (action)="toggleConfirmModal()"
+                label="Confirm modal">
+            </lnd-button>
+        </div>
+    </div>
+
+    <!-- Normal modal to show -->
+    <lnd-modal
+        title="Normal modal title"
+        [isModalOpen]="isNormalModalOpen"
+        (close)="toggleNormalModal()">
+        <div class="modal-body">
+            <p>Normal modal body content body content body content body content body content body content body content body content body content body content.</p>
+        </div>
+        <div class="modal-footer">
+            <lnd-button
+                type="primary"
+                (action)="toggleNormalModal()"
+                label="Yes">
+            </lnd-button>
+            <lnd-button
+                type="secondary"
+                (action)="toggleNormalModal()"
+                label="No">
+            </lnd-button>
+        </div>
+    </lnd-modal>
+
+    <!-- Large modal to show -->
+    <lnd-modal
+        title="Large modal title"
+        size="lg"
+        [isModalOpen]="isLargeModalOpen"
+        (close)="toggleLargeModal()">
+        <div class="modal-body">
+            <p>Normal modal body content body content body content body content body content body content body content body content body content body content.</p>
+        </div>
+        <div class="modal-footer">
+            <lnd-button
+                type="primary"
+                (action)="toggleLargeModal()"
+                label="Yes">
+            </lnd-button>
+            <lnd-button
+                type="secondary"
+                (action)="toggleLargeModal()"
+                label="No">
+            </lnd-button>
+        </div>
+    </lnd-modal>
+
+    <!-- Confirm modal to show -->
+    <lnd-modal
+        title=""
+        size="lg"
+        isConfirm="true"
+        [isModalOpen]="isConfirmModalOpen"
+        (close)="toggleConfirmModal()">
+        <div class="modal-body">
+            <span class="icon icon--info modal-confirm__icon"></span>
+            <h2 class="modal-confirm__title">
+                Pokračováním ztratíte neuložené změny ve formuláři.
+            </h2>
+        </div>
+        <div class="modal-footer">
+            <lnd-button
+                type="primary"
+                (action)="toggleConfirmModal()"
+                label="Pokračovat">
+            </lnd-button>
+            <lnd-button
+                type="link"
+                (action)="toggleConfirmModal()"
+                label="Zpět">
+            </lnd-button>
+        </div>
+    </lnd-modal>
+</div>

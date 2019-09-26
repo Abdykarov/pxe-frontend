@@ -1,0 +1,39 @@
+<ng-template #rowDetail let-row="row">
+    <div class="row">
+        <div class="col-6">
+            Detail
+        </div>
+    </div>
+</ng-template>
+<ng-template #actionCol>
+    <ng-template #dropdown let-toggle="toggle">
+        <lnd-button
+            (click)="$event.stopPropagation(); toggle()"
+            variant="dots"
+        ></lnd-button>
+    </ng-template>
+</ng-template>
+
+<div class="row static-pages-holder">
+    <div class="col">
+        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+    </div>
+</div>
+<div class="static-pages-holder">
+    <div class="static-pages static-pages--bg-transparent">
+        <!-- <h4 class="d-block d-sm-none">XS view</h4>
+        <h4 class="d-none d-sm-block d-md-none">SM view</h4>
+        <h4 class="d-none d-md-block d-xl-none">MD, LG view</h4>
+        <h4 class="d-none d-xl-block">XL view</h4> -->
+        <lnd-table
+            [cols]="tableCols.main"
+            [rows]="tableRows.main"
+            [showHead]="true"
+            [tableWrapperClass]="['table-wrapper--advanced']"
+            [tableClass]="['table--advanced', 'mb-0']"
+            [mobileDetailCaption]="'Show more...'"
+            [rowDetailTemplate]="rowDetail"
+            [actionColTemplate]="actionCol"
+        ></lnd-table>
+    </div>
+</div>

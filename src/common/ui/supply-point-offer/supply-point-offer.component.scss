@@ -1,0 +1,293 @@
+/*
+ -  Supply point
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+// Component variables
+@import 'supply-point-offer.component.variables.scss';
+@import '../supply-point/supply-point.component.variables.scss';
+
+
+::ng-deep {
+	.supply-points-offer {
+		pointer-events: none;
+
+		&:hover .supply-point-offer:not(:hover):not(.supply-point-offer--owner) {
+			@include link-without-href-self {
+				// Media queries
+				@include media-breakpoint-up(xl) {
+					background-color: $body-bg;
+				}
+			}
+
+			.supply-point-offer__inner--price {
+				// Media queries
+				@include media-breakpoint-up(xl) {
+					background-color: rgba($white, .5);
+				}
+			}
+		}
+	}
+}
+
+.supply-point-offer {
+	@include link-without-href-self {
+		display: block;
+		margin-bottom: $spacer;
+		background-color: $white;
+		color: inherit;
+		border-radius: $border-radius;
+		box-shadow: 0 2px 5px rgba($box-shadow-color, .16);
+		overflow: hidden;
+		pointer-events: none;
+	}
+
+	&:not(.supply-point-offer--owner) {
+		@include link-without-href-self {
+			pointer-events: auto;
+		}
+	}
+
+	@include link-without-href-interactive {
+		color: inherit;
+		text-decoration: none;
+
+		// Media queries
+		@include media-breakpoint-up(xl) {
+			&:not(.supply-point-offer--not-interactive):not(.supply-point-offer--owner) {
+				box-shadow: 0 10px 20px rgba($box-shadow-color, .2);
+			}
+		}
+	}
+
+	&.supply-point-offer--owner {
+		@include link-without-href-self {
+			background-color: transparent;
+			text-align: center;
+			box-shadow: none;
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				text-align: left;
+			}
+		}
+
+		.supply-point-offer__inner--price {
+			padding-top: $spacer;
+
+			.supply-point-offer__title {
+				font-size: $supply-point-label-font-size;
+
+				// Media queries
+				@include media-breakpoint-up(md) {
+					font-size: $supply-point-title-font-size;
+				}
+			}
+		}
+
+		.supply-point-offer__inner {
+			// Media queries
+			@include media-breakpoint-up(md) {
+				padding-top: $supply-point-offer-inner-padding;
+			}
+		}
+
+		.supply-point-offer__title {
+			margin-bottom: 0;
+			font-size: $supply-point-title-font-size;
+		}
+
+		.supply-point-offer__info-icon {
+			display: none;
+		}
+	}
+
+	&.supply-point-offer--not-interactive {
+		//@include link-without-href-self {
+		//	pointer-events: none;
+		//}
+
+		.supply-point-offer__addon {
+			// Media queries
+			@include media-breakpoint-down(md) {
+				text-align: right;
+			}
+			@include media-breakpoint-down(xl) {
+				text-align: left;
+			}
+		}
+	}
+
+	&__inner {
+		position: relative;
+		height: 100%;
+		padding: $supply-point-offer-inner-padding $supply-point-offer-inner-padding-horizontal-mobil $supply-point-offer-inner-padding-bottom;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			padding: ( $spacer * 2.5 ) $supply-point-offer-inner-padding-horizontal ( $spacer * 1.5 );
+		}
+
+		&--price {
+			padding-bottom: ( $spacer * 1.5 );
+			background-color: rgba($body-bg, .5);
+
+			.supply-point-offer__title,
+			.supply-point-offer__info-icon {
+				// Media queries
+				@include media-breakpoint-up(xl) {
+					font-size: $supply-point-offer-price-font-size-xl;
+				}
+			}
+
+			.supply-point-offer__title {
+				margin-bottom: $spacer;
+
+				// Media queries
+				@include media-breakpoint-up(md) {
+					margin-bottom: 0;
+				}
+				@include media-breakpoint-up(xl) {
+					margin-bottom: ( $spacer * 1.5 );
+				}
+
+				&:focus,
+				&:hover {
+					color: $primary;
+					cursor: pointer;
+				}
+			}
+		}
+
+		&--price-decomposition {
+			// Media queries
+			@include media-breakpoint-up(md) {
+				padding-bottom: ( $spacer * 2.5 );
+			}
+
+			&::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: $supply-point-offer-inner-padding-horizontal-mobil;
+				width: calc( 100% - ( #{$supply-point-offer-inner-padding-horizontal-mobil} * 2 ) );
+				height: 1px;
+				background-color: $border-color;
+
+				// Media queries
+				@include media-breakpoint-up(md) {
+					top: 20px;
+					left: $supply-point-offer-inner-padding-horizontal;
+					width: calc( 100% - ( #{$supply-point-offer-inner-padding-horizontal} * 2 ) );
+				}
+				@include media-breakpoint-up(xl) {
+					display: none;
+				}
+			}
+		}
+	}
+
+	&__title,
+	&__value {
+		font-size: $supply-point-label-font-size;
+		line-height: $supply-point-label-line-height;
+	}
+
+	&__title-label,
+	&__value-name {
+		display: block;
+		line-height: ( 18 / 14 );
+		text-transform: uppercase;
+	}
+
+	&__title-label {
+		margin-bottom: ( $spacer / 4 );
+	}
+
+	&__title {
+		display: block;
+		margin-bottom: ( $spacer * 1.5 );
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			font-size: $supply-point-title-font-size;
+			line-height: $supply-point-title-line-height;
+		}
+	}
+
+	&__info-icon {
+		// Media queries
+		@include media-breakpoint-up(md) {
+			font-size: $icon-size-large-px;
+		}
+	}
+
+	&__value-box {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: $spacer;
+		margin-right: $spacer;
+
+		&--price {
+			margin-top: ( $spacer * 1.5 );
+			margin-bottom: 0;
+			margin-right: ( $spacer * 2 );
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				margin-top: ( $spacer * 2 );
+			}
+
+			.supply-point-offer__value {
+				font-size: $supply-point-offer-decomposition-font-size;
+			}
+		}
+	}
+
+	&__value-name {
+		margin-bottom: ( $spacer / 2 );
+	}
+
+	&__decomposition-title {
+		text-transform: uppercase;
+
+		// Media queries
+		@include media-breakpoint-up(xl) {
+			font-size: $supply-point-offer-decomposition-font-size;
+		}
+	}
+
+	&__addon {
+		// Media queries
+		@include media-breakpoint-up(md) {
+			text-align: right;
+		}
+		@include media-breakpoint-up(xl) {
+			text-align: left;
+		}
+	}
+
+	&__benefits-list {
+		padding: ( $spacer * 1.25 ) $spacer $spacer;
+		margin-bottom: 0;
+
+		// Media queries
+		@include media-breakpoint-up(xl) {
+			padding: $spacer ( $spacer * 3 ) ( $spacer * .75 );
+		}
+
+		li {
+			padding-bottom: ( $spacer / 2 );
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				display: inline-block;
+				margin-right: ( $spacer * 3 );
+			}
+		}
+	}
+}

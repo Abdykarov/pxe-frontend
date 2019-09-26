@@ -1,29 +1,44 @@
 <div
     id="top"
     class="body-inner"
-    [ngClass]="{
-        'body-inner--overlay' : (mobileMenuOpened$ | async) || (showOverlay$ | async),
-        'body-inner--overlay-full' : (showOverlay$ | async) && !(isOverlayFromHeader$ | async),
-        'body-inner--overlay-header body-inner--overlay-aside' : (showOverlay$ | async) && (isOverlayFromHeader$ | async)
-    }">
+    [class.body-inner--overlay]="showOverlay || isMenuOpen"
+    [class.body-inner--overlay-aside]="showOverlay || isMenuOpen">
     <lnd-header
-        [isMenuOpen]="mobileMenuOpened$ | async"
-        (toggleMenu)="toggleMenuOpen()">
-    </lnd-header>
+        [user]="authService.currentUser$ | async"
+        [userMenu]="navigationMenuUserActions"
+        [isMenuOpen]="isMenuOpen"
+        [settings]="settings"
+        (loginAction)="login()"
+        (signUpAction)="signUp()"
+        (homeRedirect)="homeRedirect()"
+        (toggleMenu)="toggleMenuOpen($event)"
+    ></lnd-header>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12 container-content">
+            <div
+                class="container-aside"
+                [class.d-lg-none]="settings.hideLeftNavigation"
+                [class.col-lg-2]="!settings.hideLeftNavigation">
+                <lnd-navigation
+                    [activeUrl]="activeUrl"
+                    [config]="navConfig"
+                    [isMenuOpen]="isMenuOpen"
+                    [itemOpened]="itemOpened"
+                    (openItem)="toggleNavigationItem($event)"
+                    (lndOffClick)="toggleMenuOpen(!isMenuOpen)"
+                    [offClickEnabled]="isMenuOpen">
+                </lnd-navigation>
+            </div>
+            <div class="container-content"
+                [class.col-lg-8]="!settings.hideLeftNavigation"
+                [class.col-lg-10]="settings.hideLeftNavigation"
+                [class.offset-lg-1]="settings.hideLeftNavigation">
                 <main class="main">
                     <router-outlet></router-outlet>
+                    <lnd-modal-dynamic></lnd-modal-dynamic>
                 </main>
             </div>
-            <lnd-navigation
-                [config]="navigationConfig$ | async"
-                [isMenuOpen]="mobileMenuOpened$ | async"
-                [itemOpened]="navigationItemOpened$ | async"
-                (openItem)="toggleOpenItem($event)">
-            </lnd-navigation>
         </div>
+        <lnd-footer [isSimpleFooter]="settings.isSimpleFooter"></lnd-footer>
     </div>
-    <lnd-footer [isMenuOpen]="mobileMenuOpened$ | async"></lnd-footer>
 </div>

@@ -7,6 +7,9 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
+// Component variables
+@import 'button.component.variables.scss';
+
 // Bootstrap button import
 @import '~bootstrap/scss/buttons';
 
@@ -21,19 +24,12 @@
 
 .btn {
 	position: relative;
-	width: 100%;
+	min-width: $btn-width;
 	min-height: $btn-height;
-	text-transform: uppercase;
 	text-decoration: none;
 	white-space: normal;
 	box-shadow: none;
 	border: none;
-
-	// Media queries
-	@include media-breakpoint-up(sm) {
-		min-width: $btn-width;
-		width: auto;
-	}
 
 	&:focus,
 	&.focus {
@@ -48,7 +44,6 @@
 	}
 
 	&.btn-primary,
-	&.btn-secondary,
 	&.btn-success,
 	&.btn-warning,
 	&.btn-danger,
@@ -57,25 +52,28 @@
 	}
 
 	&.btn-primary {
-		&:focus,
-		&.focus,
 		&:hover,
-		&:active {
+		&:active,
+		&:focus:active {
 			background-color: $primary-dark;
 		}
 	}
 
 	&.btn-secondary {
+		color: $btn-secondary-color;
+		background-color: $btn-secondary-bg;
+		border: 2px solid $btn-secondary-color;
+
 		&:focus,
 		&.focus,
 		&:hover,
-		&:active {
-			background-color: $secondary-dark;
-		}
-
+		&:active,
+		&:focus:active,
 		&:not(:disabled):not(.disabled):active,
 		&:not(:disabled):not(.disabled).active {
-			background-color: $blue-400;
+			color: inherit;
+			background-color: $btn-secondary-bg-hover;
+			border-color: inherit;
 		}
 	}
 
@@ -119,17 +117,93 @@
 	}
 
 	&.btn-white {
-		color: $gray-400;
-		background-color: $white;
+		color: $white;
+		background-color: $secondary;
+		border: 2px solid $white;
 
 		&:focus,
-		&.focus,
-		&:hover {
-			background-color: $gray-150;
+		&.focus {
+			box-shadow: 0 0 8px 0 rgba($white, .8);
 		}
 
-		&:not(:disabled):not(.disabled):active {
-			background-color: $gray-200;
+		&:hover,
+		&:active,
+		&:focus:active {
+			background-color: $secondary-dark;
+		}
+
+		&:not(:disabled):not(.disabled):active,
+		&:not(:disabled):not(.disabled).active {
+			background-color: $secondary-dark;
+			box-shadow: 0 0 8px 0 rgba($white, .8);
+		}
+	}
+
+	&.btn-link,
+	&.btn-link-danger,
+	&.btn-link-text {
+		min-width: auto;
+		padding-left: 0;
+		padding-right: 0;
+
+		.btn__text {
+			text-decoration: $link-decoration;
+		}
+
+		@include link-without-href-interactive {
+			.btn__text {
+				text-decoration: $link-hover-decoration;
+			}
+		}
+
+		&:focus,
+		&:active,
+		&:not(:disabled):not(.disabled):focus,
+		&:not(:disabled):not(.disabled):active,
+		&:not(:disabled):not(.disabled):active:focus {
+			box-shadow: none;
+		}
+	}
+
+	&-link {
+		.btn__text {
+			color: $link-color;
+		}
+	}
+
+	&-link-danger {
+		.btn__text {
+			color: $danger;
+		}
+	}
+
+	&-link-text {
+		.btn__text {
+			color: $body-color;
+		}
+	}
+
+	&-dropdown {
+		min-width: auto;
+		padding-left: ( $spacer / 2 );
+		text-transform: uppercase;
+
+		&:focus,
+		&:hover,
+		&:active,
+		&:not(:disabled):not(.disabled):focus,
+		&:not(:disabled):not(.disabled):active,
+		&:not(:disabled):not(.disabled):active:focus {
+			box-shadow: none;
+
+			.btn__icon {
+				color: $primary;
+			}
+		}
+
+		.btn__icon {
+			flex-direction: column;
+			width: auto;
 		}
 	}
 
@@ -202,16 +276,15 @@
 		@include button-ghost-color($gray-200);
 	}
 
-	&.btn-sm {
+	&-sm {
 		min-width: auto;
 		min-height: $btn-height-small;
+		padding: ( $spacer / 4 ) ( $spacer / 2 );
+		font-size: $small-font-size;
+		line-height: $line-height-sm;
 
 		.btn__icon {
 			font-size: $icon-size-small-px;
-
-			& + .btn__text {
-				padding-left: ( $spacer / 1.5 );
-			}
 
 			&--left {
 				padding-left: ( $spacer / 3 );
@@ -239,12 +312,12 @@
 	}
 
 	&__icon {
+		width: $btn-width-icon;
 		position: absolute;
 		top: 0;
 		height: 100%;
 		display: flex;
 		justify-content: center;
-		flex-direction: column;
 
 		& + .btn__text {
 			text-align: left;
@@ -253,19 +326,11 @@
 		&--left {
 			left: 0;
 			padding-left: ( $spacer / 2 );
-
-			& + .btn__text {
-				padding-left: ( $icon-size-px + ( $spacer / 2 ) );
-			}
 		}
 
 		&--right {
 			right: 0;
 			padding-right: ( $spacer / 2 );
-
-			& + .btn__text {
-				padding-right: ( $icon-size-px + ( $spacer / 2 ) );
-			}
 		}
 
 		&--alone {
@@ -275,16 +340,10 @@
 		}
 	}
 
-	&.dropdown-toggle {
-		text-align: left;
-	}
-
 	&.disabled,
 	&.btn-disabled,
 	&[disabled],
 	fieldset[disabled] & {
-		background: $gray-200;
-		color: rgba($white, .6);
 		pointer-events: none;
 	}
 
@@ -298,6 +357,20 @@
 		// Media queries
 		@include media-breakpoint-up(sm) {
 			min-width: 0;
+		}
+	}
+
+	&.btn-icon {
+		width: $btn-width-icon;
+		color: $icons-secondary;
+
+		&:focus,
+		&.focus,
+		&:hover,
+		&:active,
+		&:not(:disabled):not(.disabled):active:focus {
+			color: $icons-hover;
+			box-shadow: none;
 		}
 	}
 }

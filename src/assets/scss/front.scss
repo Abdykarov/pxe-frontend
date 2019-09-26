@@ -12,6 +12,7 @@
 /* -------------------------- */
 
 @import '01_base/core';                                                       // Core CSS
+@import '~@ng-select/ng-select/themes/material.theme'; /* stylelint-disable-line scss/at-import-partial-extension-whitelist */
 
 /* ------------------------- */
 /*   2. LAYOUT               */
@@ -26,7 +27,7 @@
 /*   3. COMPONENTS           */
 /* ------------------------- */
 
-// Seperate and sort partials into blocks with different concerns if there's too much partials
+@import '03_components/page-box';                                             // Page box
 
 /* ------------------------- */
 /*   4. MODULES              */
@@ -38,4 +39,5 @@
 /*   5. TEMPLATES & PAGES    */
 /* ------------------------- */
 
-
+@import '05_pages/landing-page';                                             // Landind page(s)
+@import '05_pages/login-registration-pages';                                 // Login & registration page

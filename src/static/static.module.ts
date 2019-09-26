@@ -1,14 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import {
+    LOCALE_ID,
+    NgModule,
+} from '@angular/core';
+import localeCs from '@angular/common/locales/cs';
+import localeCsExtra from '@angular/common/locales/extra/cs';
 
-// This app's ngModules
 import { FooterModule } from 'src/common/ui/footer/footer.module';
 import { HeaderModule } from 'src/common/ui/header/header.module';
 import { NavigationModule } from 'src/common/ui/navigation/navigation.module';
-
 import { StaticRoutingModule } from './static.routing';
 import { StaticComponent } from './static.component';
+import { registerLocaleData } from '@angular/common';
 
 @NgModule({
     declarations: [
@@ -22,9 +26,19 @@ import { StaticComponent } from './static.component';
         NavigationModule,
         StaticRoutingModule,
     ],
-    providers: [],
+    providers: [
+        {
+            provide: LOCALE_ID,
+            useValue: 'cs-CZ',
+        },
+    ],
     bootstrap: [
         StaticComponent,
     ],
 })
-export class StaticModule {}
+export class StaticModule {
+
+    constructor() {
+        registerLocaleData(localeCs, localeCsExtra);
+    }
+}

@@ -1,27 +1,26 @@
-<div class="modal"
-     [ngClass]="{ 'modal--open' : isModalOpen }"
-     tabindex="-1"
-     role="dialog">
-    <div class="modal-dialog modal-dialog-centered"
-         [ngClass]="size ? 'modal-' + size : ''"
-         role="document">
+<div
+    class="modal"
+    [class.modal--open]="!!isModalOpen"
+    [class.modal-confirm]="isConfirm"
+    tabindex="-1"
+    role="dialog">
+    <div
+        class="modal-dialog modal-dialog-centered"
+        [ngClass]="size ? 'modal-' + size : ''"
+        role="document">
         <div class="modal-content">
-            <div class="modal-header"
-                 [ngClass]="{ 'modal-header--with-logo' : logoSrc }">
-                <h3 class="modal-title">
+            <div class="modal-header">
+                <h3
+                    *ngIf="!!title"
+                    class="modal-title">
                     {{ title }}
                 </h3>
-                <div
-                    *ngIf="logoSrc"
-                    class="modal-header__logo-holder">
-                    <img
-                        [src]="domSanitizer.bypassSecurityTrustUrl(logoSrc)"
-                        [attr.title]="logoTitle"
-                        [attr.alt]="logoAlt"
-                        class="modal-header__logo">
-                </div>
-                <button type="button" class="close" (click)="close.emit($event)">
-                    <span class="icon icon--remove"></span>
+                <button
+                    *ngIf="showClose"
+                    type="button"
+                    class="close modal__close"
+                    (click)="close.emit($event)">
+                    &times;
                 </button>
             </div>
             <ng-content></ng-content>

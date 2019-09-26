@@ -14,6 +14,32 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.h1--public,
+.h2--public,
+.h3--public {
+	font-family: $font-family-sans-serif-public;
+}
+
+.h1--public,
+.h3--public {
+	text-transform: none;
+}
+
+.h1--public {
+	font-size: $h1-font-size-public;
+	line-height: ( 40 / 36 );
+}
+
+.h2--public {
+	font-size: $h2-font-size-public;
+	line-height: ( 36 / 30 );
+}
+
+.h3--public {
+	font-size: $h3-font-size-public;
+	line-height: ( 30 / 24 );
+}
+
 h1,
 h2,
 h3,
@@ -34,24 +60,18 @@ h6,
 }
 
 h1,
-h2,
 h3,
 .h1,
-.h2,
 .h3 {
 	text-transform: uppercase;
 }
 
-h4,
-h5,
-h6,
-.h4,
-.h5,
-.h6 {
-	color: $gray-400;
-	font-weight: 700;
-	margin-bottom: ( $headings-margin-bottom / 2 );
-}
+// h2,
+// h3,
+// .h2,
+// .h3 {
+// margin-bottom: $spacer;
+// }
 
 h1,
 .h1 {
@@ -62,24 +82,31 @@ h1,
 
 h2,
 .h2 {
+	line-height: ( 24 / 18 );
+
 	& > .h2__sub-text {
 		font-size: $h2-font-size-snd;
 	}
 }
 
-.table-entry {
-	display: flex;
-	flex-wrap: nowrap;
-	background-color: $table-accent-bg;
+h3,
+.h3 {
+	line-height: ( 20 / 14 );
+}
 
-	&--white {
-		background-color: $white;
-	}
+.perex {
+	font-size: $perex-font-size;
+	line-height: ( 28 / 18 );
+}
 
-	&__cell {
-		flex-grow: 1;
-		padding: $table-cell-padding-vert $table-cell-padding;
-	}
+hr {
+	margin: ( $spacer * 2 ) 0;
+	border-color: $border-color;
+}
+
+small,
+.small {
+	line-height: $line-height-sm;
 }
 
 blockquote,
@@ -127,11 +154,17 @@ a {
 	@include link-without-href {
 		cursor: pointer;
 		color: $link-color;
-		text-decoration: $link-decoration;
 	}
 
 	@include link-without-href-interactive {
 		color: $link-hover-color;
 		text-decoration: $link-hover-decoration;
+	}
+}
+
+button {
+	&:focus,
+	&.focus {
+		@include clear-outline;
 	}
 }

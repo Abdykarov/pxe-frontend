@@ -1,0 +1,206 @@
+/*
+ -  Progress bar / stepper
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+// Component variables
+@import 'progress-bar.component.variables.scss';
+
+.progress-bar-holder {
+	margin-bottom: $progress-bar-margin-bottom;
+}
+
+.progress-bar {
+	@include reset-list(none, 0, 0);
+	display: flex;
+	flex-wrap: nowrap;
+	flex-flow: row;
+	justify-content: center;
+
+	& &__item {
+		@include reset-list;
+		position: relative;
+		width: 100%;
+		flex-grow: 3;
+		flex-basis: 0;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: ( $progress-bar-bullet-size - $progress-bar-line-height ) / 2;
+			left: 0;
+			width: 100%;
+			height: $progress-bar-line-height;
+			background-color: $progress-bar-line-bg;
+		}
+
+		&:not(:last-child) {
+			&::before {
+				left: 50%;
+			}
+		}
+
+		&:last-child {
+			&::before {
+				left: 0;
+				width: 50%;
+			}
+
+			&.progress-bar__item--active {
+				&::before {
+					background-color: $progress-bar-line-bg-done;
+				}
+			}
+		}
+
+		&--done {
+			&::before {
+				background-color: $progress-bar-line-bg-done;
+			}
+		}
+
+		&--shadow-step {
+			flex-grow: 1;
+
+			.progress-bar__item-inner {
+				visibility: hidden;
+
+				// Media queries
+				@include media-breakpoint-down(sm) {
+					width: 10px;
+				}
+			}
+
+			& + .progress-bar__item:not(:last-child):not(.progress-bar__item--shadow-step) {
+				&::before {
+					left: 0;
+					width: 120%;
+				}
+			}
+
+			& + .progress-bar__item--active:not(:last-child):not(.progress-bar__item--shadow-step) {
+				&::before {
+					background: linear-gradient(90deg, $progress-bar-line-bg-active 0%, $progress-bar-line-bg-active 40%, $progress-bar-line-bg 40%, $progress-bar-line-bg 100%);
+				}
+			}
+		}
+	}
+
+	&__item-inner {
+		@include link-without-href-self {
+			pointer-events: none; // Temporary disable link
+			display: block;
+			text-align: center;
+			color: $font-text;
+		}
+	}
+
+	&__bullet {
+		z-index: 3;
+		display: block;
+		position: relative;
+		width: $progress-bar-bullet-size;
+		height: $progress-bar-bullet-size;
+		border-radius: $progress-bar-bullet-size;
+		margin: 0 auto;
+		background-color: $progress-bar-line-bg;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: ( ( $progress-bar-bullet-size - $progress-bar-bullet-size-inner ) / 2 );
+			left: ( ( $progress-bar-bullet-size - $progress-bar-bullet-size-inner ) / 2 );
+			width: $progress-bar-bullet-size-inner;
+			height: $progress-bar-bullet-size-inner;
+			line-height: $progress-bar-bullet-size-inner;
+			border-radius: $progress-bar-bullet-size-inner;
+			background-color: $body-bg;
+		}
+
+		.progress-bar__item--active & {
+			background-color: $progress-bar-line-bg-active;
+		}
+
+		.progress-bar__item--done & {
+			background-color: $progress-bar-line-bg-done;
+
+			&::before {
+				background-color: $progress-bar-line-bg-done;
+			}
+		}
+	}
+
+	&__icon {
+		z-index: 4;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: $progress-bar-bullet-size;
+		height: $progress-bar-bullet-size;
+		line-height: $progress-bar-bullet-size;
+		font-size: $progress-bar-icon-size;
+		color: $progress-bar-icon-color;
+	}
+
+	&__label {
+		display: block;
+		padding: ( $spacer / 2 ) ( $spacer / 2 ) 0;
+		line-height: ( 19 / 14 );
+	}
+
+	&.progress-bar--minor {
+		.progress-bar__item:not(.progress-bar__item--done) {
+			&::before {
+				background-color: $body-bg;
+			}
+
+			.progress-bar__bullet {
+				&::before {
+					background-color: $white;
+				}
+			}
+		}
+
+		.progress-bar__item:not(.progress-bar__item--done):not(.progress-bar__item--active) {
+			.progress-bar__bullet {
+				background-color: $body-bg;
+			}
+		}
+
+		.progress-bar__item:not(.progress-bar__item--shadow-step) {
+			&::before {
+				left: 0;
+			}
+
+			&:first-child {
+				&::before {
+					left: 10px;
+				}
+			}
+
+			&:last-child {
+				flex-grow: 0;
+
+				&::before {
+					display: none;
+				}
+			}
+
+			.progress-bar__bullet {
+				margin-left: 0;
+			}
+
+			.progress-bar__label {
+				display: none;
+			}
+
+			&--shadow-step {
+				flex-grow: 2;
+			}
+		}
+	}
+}

@@ -1,0 +1,97 @@
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12 col-md-6 offset-md-3 text-center">
+            <h1>
+                Podepsání smlouvy
+            </h1>
+        </div>
+    </div>
+    <div class="row mb-6">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <div class="row align-items-center mb-1 mb-xl-3">
+                <div class="col-12 text-center mb-5 col-md-3 text-md-left mb-md-0">
+                    <lnd-button
+                        label="Krok zpět"
+                        type="secondary">
+                    </lnd-button>
+                </div>
+                <div class="col-12 col-md-6 text-center">
+                    <h2 class="mb-0">
+                        Podepište smlouvu
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 text-center mb-2 d-xl-none">
+            <lnd-button
+                [label]="showOffer ? 'Skrýt nabídku' : 'Zobrazit nabídku'"
+                type="link"
+                (click)="toggleOffer($event)">
+            </lnd-button>
+        </div>
+        <div
+            class="col-12 col-xl-10 offset-xl-1 d-xl-block"
+            [class.d-block]="showOffer"
+            [class.d-none]="!showOffer">
+            <pxe-supply-point-offer
+                [supplyPointOffer]="offer"
+                [interactive]="false">
+            </pxe-supply-point-offer>
+        </div>
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <div class="page-box">
+                <p>
+                    Níže naleznete dokumenty, které jsou potřebné k uzavření dodávky energií/plynu pro budoucí období.
+                    Návrh smlouvy o <strong>sdružených službách dodávky elektřiny/plynu</strong> obsahuje také <strong>všeobecné obchodní
+                    podmínky</strong> dodávky a <strong>plnou moc</strong> pro dodavatele.
+                </p>
+                <div class="text-with-icon align-items-start align-items-md-center">
+                    <span class="icon icon--document mt-1 mt-md-0"></span>
+                    <span class="text-with-icon__text small">Informace před uzavřením smlouvy o sdružených službách dodávky elektřiny
+                        <a class="ml-0 ml-md-3 mt-2 mt-md-0 d-block d-md-inline-block">Zobrazit</a>
+                    </span>
+                </div>
+                <div class="text-with-icon align-items-start align-items-md-center mb-5">
+                    <span class="icon icon--document mt-1 mt-md-0"></span>
+                    <span class="text-with-icon__text small">Smlouva o sdružených službách dodávky elektřiny
+                        <a class="ml-0 ml-md-3 mt-2 mt-md-0 d-block d-md-inline-block">Zobrazit</a>
+                    </span>
+                </div>
+                <p>
+                    Kliknutím na tlačítko „Podepsat smlouvu“ souhlasím s výše uvedeným návrhem smlouvy o sdružených službách
+                    dodávky elektřiny/plynu, včetně přiložených všeobecných obchodních podmínek dodávky a uděluji 
+                    dodavateli plnou moc, která je přílohou návrhu smlouvy. Potvrzuji, že jsem se s obsahem těchto 
+                    dokumentů seznámil/a a že jsem obdržel/a dokument "Informace před uzavřením smlouvy o sdružených službách dodávky elektřiny".
+                </p>
+                <div class="row">
+                    <div class="col-12 col-lg-9 offset-lg-3">
+                        <div class="row justify-content-end">
+                            <div class="col">
+                                <div class="form-container ml-0 ml-md-auto mr-md-0">
+                                    <lnd-form-field
+                                        [disabledField]="true"
+                                        id="sms-code"
+                                        label="Kód z SMS">
+                                    </lnd-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-auto mt-md-4">
+                                <lnd-button
+                                    label="Odeslat ověřovací kód"
+                                    type="primary">
+                                </lnd-button>
+                                <p class="small mt-2">Ověřovací kód odešleme na číslo<br>
+                                    +420 777 666 555</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

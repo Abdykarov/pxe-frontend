@@ -1,26 +1,132 @@
-<header class="header"
-        [ngClass]="{ 'header--sticked' : isHeaderSticked }">
+<ng-template #profileMenu let-toggle="toggle">
+    <lnd-button
+        (click)="toggle()"
+        [label]="user?.firstName && user?.lastName ? user.firstName + ' ' + user.lastName : user?.email ? user.email : ''"
+        type="dropdown"
+        icon="icon--triangle-down"
+        customIconClass="icon--small"
+        iconPosition="right"
+    ></lnd-button>
+</ng-template>
+
+<header
+    class="header"
+    [class.header--public]="settings.isPublic"
+    [class.header--secured]="!settings.isPublic">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="header-inner">
-                    <div class="menu-toggle-holder">
-                        <a
-                            class="menu-toggle"
-                            [ngClass]="{ 'menu-toggle--open' : isMenuOpen }"
-                            (click)="toggleMenu.emit()">
-                            <span class="menu-toggle__line"></span>
-                            <span class="menu-toggle__line"></span>
-                            <span class="menu-toggle__line"></span>
-                            <span class="menu-toggle__line"></span>
-                        </a>
-                    </div>
                     <div class="logo-holder">
                         <a
-                            [routerLink]="['/secured/dashboard']"
-                            class="logo">
-                            Angular Devstack
+                            (click)="homeRedirect.emit()"
+                            class="logo-link">
+                            <img
+                                src="/assets/images/layout/logo-pxe.svg"
+                                class="logo"
+                                title="PXE"
+                                alt="logo PXE">
                         </a>
+                    </div>
+                    <div
+                        class="public-menu-holder"
+                        *ngIf="settings.isPublic && !settings.isStatic">
+                        <lnd-button
+                            *ngIf="!settings.isLandingPage"
+                            label="Domů"
+                            customClass="mr-4"
+                            type="link-text"
+                            (click)="homeRedirect.emit()">
+                        </lnd-button>
+                        <lnd-button
+                            *ngIf="settings.isLandingPage"
+                            label="Změna dodavatele"
+                            customClass="mr-4"
+                            type="link-text"
+                            (click)="supplierChangeAction.emit()">
+                        </lnd-button>
+                        <lnd-button
+                            *ngIf="settings.isLandingPage"
+                            label="Pokrytí"
+                            customClass="mr-4"
+                            type="link-text"
+                            (click)="coverageMapAction.emit()">
+                        </lnd-button>
+                        <lnd-button
+                            label="Přihlášení"
+                            customClass="mr-4"
+                            type="link-text"
+                            (click)="loginAction.emit()">
+                        </lnd-button>
+                        <lnd-button
+                            label="Registrace"
+                            type="primary"
+                            (click)="signUpAction.emit()">
+                        </lnd-button>
+                    </div>
+                    <div *ngIf="settings.isPublic"
+                         class="menu-holder">
+                        <ng-template #publicMenuHamburgerTemplate let-toggle="toggle" let-isOpen="isOpen">
+                            <pxe-hamburger
+                                [isMenuOpen]="isOpen"
+                                (toggleMenu)="toggle()"
+                            ></pxe-hamburger>
+                        </ng-template>
+                        <lnd-dropdown
+                            #publicMenu
+                            [actionTemplate]="publicMenuHamburgerTemplate"
+                            (toggleOverlayerAction)="toggleMenu.emit($event)"
+                            menuDirection="right">
+                            <a class="dropdown-item dropdown-item--without-icon"
+                               *ngIf="!settings.isLandingPage"
+                               (click)="homeRedirect.emit()">
+                                Domů
+                            </a>
+                            <a class="dropdown-item dropdown-item--without-icon"
+                               *ngIf="settings.isLandingPage"
+                               (click)="supplierChangeAction.emit()">
+                                Změna dodatavatele
+                            </a>
+                            <a class="dropdown-item dropdown-item--without-icon"
+                               *ngIf="settings.isLandingPage"
+                               (click)="coverageMapAction.emit()">
+                                Pokrytí
+                            </a>
+                            <a class="dropdown-item dropdown-item--without-icon"
+                               (click)="loginAction.emit()">
+                                Přihlášení
+                            </a>
+                            <a class="dropdown-item dropdown-item--without-icon"
+                               (click)="signUpAction.emit()">
+                                Registrace
+                            </a>
+                        </lnd-dropdown>
+                    </div>
+                    <div *ngIf="!settings.isPublic"
+                         class="menu-holder">
+                        <pxe-hamburger
+                                [isMenuOpen]="isMenuOpen"
+                                [disableAction]="isMenuOpen"
+                                (toggleMenu)="toggleMenu.emit($event)"
+                        ></pxe-hamburger>
+                    </div>
+                    <div
+                        class="user-holder"
+                        *ngIf="!settings.isPublic && !settings.isStatic">
+                        <span class="icon icon--favourite-stroke text-color--secondary"></span>
+                        <lnd-dropdown
+                            #userProfile
+                            [actionTemplate]="profileMenu"
+                            (toggleOverlayerAction)="toggleMenu.emit($event)"
+                            menuDirection="right">
+                            <a *ngFor="let item of userMenu"
+                                [ngClass]="item.class"
+                                class="dropdown-item"
+                                [routerLink]="item.url">
+                                <span [ngClass]="'dropdown-item-icon icon icon--' + item.icon"></span>
+                                {{ item.label }}
+                            </a>
+                        </lnd-dropdown>
                     </div>
                 </div>
             </div>

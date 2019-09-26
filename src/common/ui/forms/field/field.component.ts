@@ -7,7 +7,9 @@ import {
     forwardRef,
     Input,
     Output,
+    TemplateRef,
     ViewChild,
+    ViewEncapsulation,
 } from '@angular/core';
 import {
     ControlValueAccessor,
@@ -15,16 +17,18 @@ import {
 } from '@angular/forms';
 
 import * as R from 'ramda';
-import * as R_ from 'ramda-extension';
 
-import { ErrorMessages } from '../form.constants';
+import { DynamicPipe } from 'src/common/pipes/dynamic/dynamic.pipe';
 import { FieldTypes } from '../models/field-types.model';
+import { getErrorMessage } from 'src/common/utils';
 import { IOption } from '../models/option.model';
+import { IValidationMessages } from '../models/validation-messages.model';
 
 @Component({
     selector: 'lnd-form-field',
     templateUrl: 'field.component.html',
     styleUrls: ['./field.component.scss'],
+    encapsulation: ViewEncapsulation.None,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -54,7 +58,7 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     public appendText?: string;
 
     @Input()
-    public autocomplete?: string;
+    public autocomplete = 'off';
 
     @Output()
     public blur?: EventEmitter<any> = new EventEmitter();
@@ -70,6 +74,9 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
 
     @Input()
     public disabledField = false;
+
+    @Input()
+    public lightField = false;
 
     @Input()
     public error?: any;
@@ -94,6 +101,9 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
 
     @Input()
     public label = '';
+
+    @Input()
+    public labelTemplate?: TemplateRef<any>;
 
     @Input()
     public name?: string;
@@ -126,7 +136,13 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     public rows = 3;
 
     @Input()
+    public showErrorMessage = true;
+
+    @Input()
     public subtext?: string;
+
+    @Input()
+    public subtextTemplate?: TemplateRef<any>;
 
     @Input()
     public success = false;
@@ -138,7 +154,19 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     public touched = false;
 
     @Input()
+    set triggerFocus(value: any) {
+        if (this.field && !!value) {
+            setTimeout(() => {
+                this.field.nativeElement.focus();
+            });
+        }
+    }
+
+    @Input()
     public type: string = FieldTypes.INPUT;
+
+    @Input()
+    public validationMessages?: IValidationMessages;
 
     @Input()
     public warning = false;
@@ -158,11 +186,11 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
 
     constructor(
         private cd: ChangeDetectorRef,
+        private dynamicPipe: DynamicPipe,
     ) {}
 
     ngAfterContentInit() {
         this.name = !!this.name ? this.name : this.id;
-        this.placeholder = !!this.placeholder ? this.placeholder : this.label;
         this.cd.markForCheck();
 
         if (!!this.defaultRadioGroupValue) {
@@ -211,27 +239,5 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
         }
     }
 
-    private formatErrorObjectValues = (obj: object) => {
-        R.map(key => {
-            if (R_.isNumber(obj[key])) {
-                obj[key] = obj[key];
-            }
-        }, R.keys(obj));
-        return obj;
-    }
-
-    public getErrorMessage = () => {
-        if (R.isNil(this.error)) {
-            return;
-        }
-
-        if (R_.isString(this.error)) {
-            return this.error;
-        }
-
-        if (R_.isObject(this.error)) {
-            const errorType = Object.keys(this.error)[0];
-            return this.formatErrorObjectValues(this.error[errorType]);
-        }
-    }
+    public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages, this.dynamicPipe);
 }

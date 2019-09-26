@@ -17,7 +17,7 @@ RUN yarn build:$APP
 ##
 ## Stage 2 - Create image with frontend javascript chunks which serves nginx
 ##
-FROM docker.lnd.bz/nginx:1.14
+FROM docker.lnd.bz/nginx:1.14-spa
 
 ## important! declare ARGS for each stage where you need to use it
 ARG APP

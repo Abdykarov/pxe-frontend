@@ -1,6 +1,14 @@
-{
-    "/graphql": {
-        "target": "http://localhost:4201/graphql",
+[
+    {
+        "context": "/api",
+        "logLevel": "debug",
+        "target": "http://localhost:4203",
+        "secure": false
+    },
+    {
+        "context": "/graphql",
+        "logLevel": "debug",
+        "target": "http://localhost:4201",
         "secure": false
     }
-}
+]

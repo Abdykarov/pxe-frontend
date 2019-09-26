@@ -5,10 +5,9 @@ import {
     Output,
     ViewEncapsulation,
 } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+
 import * as R from 'ramda';
 
-// own models
 import { IModalSize } from './models/size.model';
 
 @Component({
@@ -19,26 +18,24 @@ import { IModalSize } from './models/size.model';
 })
 export class ModalComponent {
     @Input()
-    public logoAlt?: string;
+    public isModalOpen: boolean;
 
     @Input()
-    public logoTitle?: string;
+    public showClose = true;
 
     @Input()
-    public logoSrc?: string;
+    public title?: string;
 
-    @Input() isModalOpen: boolean;
+    @Input()
+    public size?: IModalSize;
 
-    @Input() title: string;
-
-    @Input() size?: IModalSize;
+    @Input()
+    public isConfirm = false;
 
     @Output()
-    public close: EventEmitter<string> = new EventEmitter<string>();
+    public close: EventEmitter<any> = new EventEmitter<any>();
 
-    constructor(
-        public domSanitizer: DomSanitizer,
-    ) {
+    constructor() {
         this.size = R.contains(this.size, Object.values(IModalSize)) ? this.size : null;
     }
 }

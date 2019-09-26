@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col">
+        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+    </div>
+</div>
+<h3>Basic table vertically</h3>
+<div class="static-pages">
+    <div class="table-responsive">
+        <lnd-table
+            [cols]="config.vertical"
+            [rows]="config.rows"
+            [showHead]="true"
+            [caption]="tableCaption"
+            [tableClass]="['table-striped', 'table-hover']"
+        ></lnd-table>
+    </div>
+</div>
+<h3>Basic table horizontally</h3>
+<div class="static-pages">
+    <div class="table-responsive">
+        <lnd-table
+            [cols]="config.horizontal"
+            [rows]="config.rows"
+            [caption]="tableCaption"
+            [tableClass]="['table-striped', 'table-hover']"
+        ></lnd-table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6 col-md-3">
+        <h3>Basic table horizontally variant B</h3>
+        <div class="static-pages">
+            <div class="table-responsive">
+                <lnd-table
+                    [cols]="config.variantA"
+                    [rows]="config.rows"
+                    [caption]="tableCaption"
+                    [tableClass]="['table-striped', 'table-hover']"
+                ></lnd-table>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <h3>Basic table horizontally variant A</h3>
+        <div class="static-pages">
+            <div class="table-responsive">
+                <lnd-table
+                    [cols]="config.variantB"
+                    [rows]="config.rows"
+                    [caption]="tableCaption"
+                    [tableClass]="['table-striped', 'table-hover']"
+                ></lnd-table>
+            </div>
+        </div>
+    </div>
+</div>

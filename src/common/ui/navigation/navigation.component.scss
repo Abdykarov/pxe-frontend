@@ -7,53 +7,52 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
+// Component variables
+@import 'navigation.component.variables.scss';
+
 
 .aside {
-	display: block;
-	position: fixed;
+	display: none;
+	position: absolute;
 	z-index: 2010;
-	top: $header-height;
-	bottom: 0;
-	left: 0;
-	transform: translateX(-($aside-width));
-	width: $aside-width;
+	top: ( ( $header-height / 2 ) + ( $menu-toggle-line-width-rotate - ( $logo-height-mobile / 2 ) ) + ( $spacer * .75 ) );
+	right: $aside-right-offset-mobile;
+	width: $aside-width-mobile;
 	overflow-x: hidden;
 	overflow-y: auto;
 	color: $white;
-	background-color: $aside-bg;
+	background-color: $white;
+	border-radius: 4px;
+	box-shadow: $box-shadow;
 	transition: transform ease-in $animation-speed;
 
 	// Media queries
+	@include media-breakpoint-up(md) {
+		top: ( ( $header-height / 2 ) + ( $menu-toggle-line-width-rotate - ( $logo-height-tablet / 2 ) ) + ( $spacer * .75 ) );
+	}
+	@include media-breakpoint-down(lg) {
+		max-height: calc( 100vh - ( ( ( #{$header-height} / 2 ) + ( #{$menu-toggle-line-width-rotate} - ( #{$logo-height-mobile} / 2 ) ) + ( #{$spacer} * .75 ) ) + #{$aside-right-offset-mobile} ) );
+	}
 	@include media-breakpoint-up(lg) {
-		transform: translateX(0);
+		position: fixed;
+		display: block;
+		top: $header-height;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		width: $aside-width-desktop;
+		background-color: $aside-bg;
+		border-radius: 0;
+		box-shadow: none;
 	}
 
 	&--open {
-		transform: translateX(0);
-	}
-
-	.navigation {
-		margin-left: -( $spacer / 2 );
-		margin-right: -( $spacer / 2 );
+		display: block;
 	}
 
 	.avatar {
 		width: $icon-size-px;
 		height: $icon-size-px;
-	}
-}
-
-.aside,
-.navigation {
-	&::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		width: $aside-line-width;
-		height: 100%;
-		background-color: $aside-bg-secondary;
 	}
 }
 
@@ -65,8 +64,12 @@
 	position: relative;
 	z-index: 1;
 	@include reset-list;
-	padding-top: ( $spacer / 1.5 );
-	padding-bottom: ( $spacer / 1.5 );
+
+	// Media queries
+	@include media-breakpoint-up(lg) {
+		padding-top: ( $spacer / 1.5 );
+		padding-bottom: ( $spacer / 1.5 );
+	}
 
 	&:nth-child(n + 2) {
 		border-top: 1px solid rgba($gray-400, .4);
@@ -76,15 +79,42 @@
 .navigation-main__item {
 	&--active,
 	&--open {
-		background-color: $aside-bg-secondary;
-
 		.navigation-main__sub-icon {
 			transform: rotate(-180deg);
+		}
+
+		.navigation-main__link {
+			&,
+			&:visited {
+				background-color: rgba($font-text, .1);
+
+				// Media queries
+				@include media-breakpoint-up(lg) {
+					background-color: rgba($secondary, .05);
+				}
+			}
+		}
+	}
+
+	&--second {
+		&:first-of-type {
+			margin-top: $spacer;
+		}
+
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			display: none;
+		}
+
+		.navigation-main__link-label,
+		.navigation-main-sub__link {
+			text-transform: none;
 		}
 	}
 }
 
 .navigation-main__sub-icon {
+	display: none;
 	font-size: $icon-size-small;
 	position: absolute;
 	top: 50%;
@@ -97,22 +127,60 @@
 	&:visited {
 		position: relative;
 		display: block;
-		padding: ( $spacer / 3 ) $spacer ( $spacer / 3 ) ( $aside-line-width + ( $spacer / 2 ) );
+		padding: $spacer $spacer $spacer ( $spacer * 3 );
 		text-decoration: none;
-		color: $white;
+		color: $font-text;
 		cursor: pointer;
 		@include smart-short-text;
+
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			padding: ( $spacer * 1.5 ) $spacer ( $spacer * 1.5 ) ( $spacer * 4 );
+		}
 	}
 
 	&:hover,
-	&:focus {
-		color: $white;
-		background-color: rgba($white, .08);
+	&:focus,
+	&:active {
+		background-color: rgba($font-text, .1);
+
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			color: $font-text;
+			background-color: rgba($secondary, .05);
+		}
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 3px;
+		height: 100%;
+		background-color: transparent;
+
+		.navigation-main__item--active & {
+			background-color: $secondary-lighten;
+		}
 	}
 }
 
-.navigation-main__link-label {
+.navigation-main__link-label,
+.navigation-main-sub__link {
 	text-transform: uppercase;
+}
+
+.navigation-main__link-label,
+.navigation-main-sub__link {
+	font-size: $small-font-size;
+	line-height: $line-height-sm;
+
+	// Media queries
+	@include media-breakpoint-up(lg) {
+		font-size: $font-size-base;
+		line-height: $line-height-base;
+	}
 
 	& + .badge {
 		margin-left: ( $spacer / 3 );
@@ -122,14 +190,13 @@
 .navigation-main__link-icon {
 	position: absolute;
 	top: 50%;
-	left: ( $spacer / 2 );
+	left: $spacer;
 	margin-top: -( $icon-size-px / 2 );
-	opacity: .9;
-	color: $gray-300;
+	color: $secondary;
 
-	.navigation-main__item--open & {
-		color: $white;
-		opacity: 1;
+	// Media queries
+	@include media-breakpoint-up(lg) {
+		left: ( $spacer * 2 );
 	}
 }
 
@@ -142,11 +209,16 @@
 	&:visited {
 		position: relative;
 		display: block;
-		padding: ( $spacer / 3 ) $spacer ( $spacer / 3 ) ( $aside-line-width + ( $spacer / 2 ) );
+		color: $font-text;
+		padding: $spacer $spacer $spacer ( $spacer * 3 );
 		text-decoration: none;
-		color: $white;
 		cursor: pointer;
 		@include smart-short-text;
+
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			padding: $spacer $spacer $spacer ( $spacer * 4 );
+		}
 	}
 
 	&:hover,
@@ -156,10 +228,20 @@
 
 	.navigation-main-sub__item--active & {
 		color: $font-text;
-		background-color: $body-bg;
+		background-color: rgba($secondary, .05);
 	}
-}
 
-.navigation-main-sub__link-label {
-	text-transform: uppercase;
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 3px;
+		height: 100%;
+		background-color: transparent;
+
+		.navigation-main-sub__item--active & {
+			background-color: $secondary-lighten;
+		}
+	}
 }

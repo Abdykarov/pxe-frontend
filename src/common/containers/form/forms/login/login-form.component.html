@@ -1,0 +1,61 @@
+<ng-container *ngIf="passwordWasSent">
+    <lnd-alert
+        type="info"
+        customClass="mb-2">
+        <ng-container *ngIf="wasSentToPhone">
+            Heslo jsme vám zaslali na telefonní číslo
+        </ng-container>
+        <ng-container *ngIf="!wasSentToPhone">
+            Heslo jsme vám zaslali na {{email}}
+        </ng-container>
+    </lnd-alert>
+    <div class="text-right">
+        <a (click)="handleReSentAction()">
+            <ng-container *ngIf="wasSentToPhone">
+                Poslat sms znovu
+            </ng-container>
+            <ng-container *ngIf="!wasSentToPhone">
+                Poslat e-mail znovu
+            </ng-container>
+        </a>
+    </div>
+</ng-container>
+<ng-template #forgottenPassword>
+    <a  *ngIf="!passwordWasSent"
+        (click)="handleCustomAction($event)">
+        Zapomněli jste heslo?
+    </a>
+</ng-template>
+<form
+    [formGroup]="form"
+    class="form-container"
+    autocomplete="off">
+    <lnd-form-field
+        [error]="form.controls.email.errors"
+        [formControl]="form.controls.email"
+        [id]="'email'"
+        label="E-mail"
+        [success]="form.controls.email.valid && form.controls.email.touched"
+        [touched]="form.controls.email.touched"
+        [validationMessages]="formFields.validationMessages.email"
+    ></lnd-form-field>
+    <lnd-form-field
+        [error]="form.controls.password.errors"
+        [formControl]="form.controls.password"
+        [id]="'password'"
+        label="Heslo"
+        [success]="form.controls.password.valid && form.controls.password.touched"
+        type="PASSWORD"
+        [touched]="form.controls.password.touched"
+        [validationMessages]="formFields.validationMessages.password"
+        [subtextTemplate]="forgottenPassword"
+    ></lnd-form-field>
+    <div class="text-right">
+        <lnd-button
+            type="primary"
+            (action)="submitForm()"
+            [isDisabled]="!!formLoading"
+            label="Přihlásit se">
+        </lnd-button>
+    </div>
+</form>

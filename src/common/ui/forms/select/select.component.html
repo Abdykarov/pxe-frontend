@@ -1,0 +1,83 @@
+<div
+    [hidden]="disabledField"
+    [formGroup]="parentForm"
+    class="form-group ng-select-custom"
+    [ngClass]="customClass">
+    <div
+        class="input-group"
+        [class.input-group--append]="!!appendButtonIcon"
+        [class.input-group--append-button-icon]="!!appendButtonIcon">
+        <label
+            (click)="select.open()"
+            class="ng-select-label">
+            {{ label }}
+        </label>
+        <ng-select
+            #select
+            [addTag]="addTag"
+            [items]="options"
+            [selectOnTab]="true"
+            [searchable]="searchable"
+            [formControl]="parentForm.controls[selectName]"
+            [bindValue]="bindValue"
+            bindLabel="label"
+            [placeholder]="placeholder"
+            [class.is-disabled]="disabledField"
+            [attr.tabindex]="!!disabledField ? '-1' : null"
+            [attr.disabled]="!!disabledField ? 'disabled' : null"
+            [class.is-invalid]="!!error && !!touched"
+            [class.is-valid]="success"
+            [class.is-warning]="warning"
+            notFoundText="Nenalezeny žádné záznamy"
+            [typeahead]="typeahead"
+            [searchFn]="customSearchFn"
+            (close)="close.emit()">
+            <ng-template
+                    ng-option-tmp
+                    let-item="item"
+                    let-index="index"
+                    let-search="searchTerm">
+                <ng-container *ngIf="!templateItem">
+                    <div [ngOptionHighlight]="search">
+                        {{ item.label }}
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="templateItem">
+                    <ng-container *ngTemplateOutlet="templateItem; context: {item: item,index: index,search: search}"></ng-container>
+                </ng-container>
+            </ng-template>
+            <ng-container *ngIf="templateLabel">
+                <ng-template ng-label-tmp let-item="item">
+                    <ng-container *ngTemplateOutlet="templateLabel; context: {item: item}"></ng-container>
+                </ng-template>
+            </ng-container>
+        </ng-select>
+        <div
+            *ngIf="!!appendButtonIcon"
+            class="input-group-append-help">
+            <button
+                (click)="appendButtonAction.emit()"
+                type="button"
+                class="btn">
+                <span
+                    class="icon"
+                    [ngClass]="appendButtonIcon">
+                </span>
+            </button>
+        </div>
+        <div
+            *ngIf="!!subtext || subtextTemplate"
+            class="input-subtext"
+            [class.input-subtext--disabled]="!!disabledField">
+            {{ subtext }}
+            <ng-container *ngIf="subtextTemplate"
+                          [ngTemplateOutlet]="subtextTemplate">
+            </ng-container>
+        </div>
+        <div
+            *ngIf="!!getErrorMessage() && showErrorMessage"
+            [innerHtml]="getErrorMessage()"
+            class="invalid-feedback">
+        </div>
+    </div>
+</div>

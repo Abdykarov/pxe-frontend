@@ -1,0 +1,150 @@
+<div class="section where-we-are bg--white text-center">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="px-3 px-md-0">
+                    <h2 class="h2--public">
+                        Jak se PARC4U daří
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <lnd-tabs>
+            <lnd-tab tabTitle="ELEKTŘINA">
+                <div class="row">
+                    <div class="col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
+                        <div class="boxes">
+                            <div class="box-info">
+                                <div class="box-info__holder">
+                                    <div class="box-info__label">
+                                        Aktuální<br class="d-lg-none d-xl-none"> pokrytí
+                                    </div>
+                                    <div class="box-info__value">
+                                        <div class="box-info__number">
+                                            {{configCoverage.power.places}}
+                                        </div>
+                                        <div class="box-info__unit">
+                                            {{configCoverage.power.places | plural:'place'}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-info box-info--primary">
+                                <div class="box-info__holder">
+                                    <div class="box-info__label">
+                                        Práce<br class="d-lg-none d-xl-none"> Temelína
+                                    </div>
+                                    <div class="box-info__value">
+                                        <div class="box-info__number">
+                                            {{configCoverage.power.temelinPerformance}}
+                                        </div>
+                                        <div class="box-info__unit">
+                                            {{configCoverage.power.temelinPerformance | plural: 'day'}} v kuse
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-info box-info--secondary">
+                                <div class="box-info__holder">
+                                    <div class="box-info__label">
+                                        Celkový<br class="d-lg-none d-xl-none"> odběr
+                                    </div>
+                                    <div class="box-info__value">
+                                        <div class="box-info__number">
+                                            {{configCoverage.power.consumption | consumption: RESULT_TYPE_CONSUMPTION_VALUE}}
+                                        </div>
+                                        <div class="box-info__unit">
+                                            {{configCoverage.power.consumption | consumption: RESULT_TYPE_CONSUMPTION_UNIT}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="px-3 px-md-0">
+                            <h3>
+                                V JEDNÁNÍ
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-10 offset-md-1">
+                        <ng-container *ngTemplateOutlet="supplierTemplatePower"></ng-container>
+                    </div>
+                </div>
+            </lnd-tab>
+            <lnd-tab tabTitle="PLYN">
+                <div class="row">
+                    <div class="col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
+                        <div class="boxes">
+                            <div class="box-info">
+                                <div class="box-info__holder">
+                                    <div class="box-info__label">
+                                        Aktuální<br class="d-lg-none d-xl-none"> pokrytí
+                                    </div>
+                                    <div class="box-info__value">
+                                        <div class="box-info__number">
+                                            {{configCoverage.gas.places}}
+                                        </div>
+                                        <div class="box-info__unit">
+                                            {{configCoverage.gas.places | plural:'place'}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-info box-info--primary">
+                                <div class="box-info__holder">
+                                    <div class="box-info__label">
+                                        Spotřeba největších zásobníků
+                                    </div>
+                                    <div class="box-info__value">
+                                        <div class="box-info__number">
+                                            {{configCoverage.gas.stackCapacity}}
+                                        </div>
+                                        <div class="box-info__unit">
+                                            {{configCoverage.gas.stackCapacity | plural:'stackCapacity'}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-info box-info--secondary">
+                                <div class="box-info__holder">
+                                    <div class="box-info__label">
+                                        Celkový<br class="d-lg-none d-xl-none"> odběr
+                                    </div>
+                                    <div class="box-info__value">
+                                        <div class="box-info__number">
+                                            {{configCoverage.gas.consumption | consumption: RESULT_TYPE_CONSUMPTION_VALUE}}
+                                        </div>
+                                        <div class="box-info__unit">
+                                            {{configCoverage.gas.consumption | consumption: RESULT_TYPE_CONSUMPTION_UNIT}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="px-3 px-md-0">
+                            <h3>
+                                V JEDNÁNÍ
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-10 offset-md-1">
+                        <ng-container *ngTemplateOutlet="supplierTemplateGas"></ng-container>
+                    </div>
+                </div>
+            </lnd-tab>
+        </lnd-tabs>
+    </div>
+</div>
+
