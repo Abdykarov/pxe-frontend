@@ -5,7 +5,7 @@ import {
 } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
-import { AddressWhispererBySelfFormComponent } from './address-whisperer-by-self-form.component';
+import { AddressNotFoundComponent } from './address-not-found.component';
 import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FieldWrapperModule } from 'src/common/ui/forms/field-wrapper/field-wrapper.module';
@@ -14,10 +14,10 @@ import { SelectModule } from 'src/common/ui/forms/select/select.module';
 
 @NgModule({
     declarations: [
-        AddressWhispererBySelfFormComponent,
+        AddressNotFoundComponent,
     ],
     exports: [
-        AddressWhispererBySelfFormComponent,
+        AddressNotFoundComponent,
     ],
     imports: [
         AlertModule,
@@ -30,4 +30,4 @@ import { SelectModule } from 'src/common/ui/forms/select/select.module';
         SelectModule,
     ],
 })
-export class AddressWhispererBySelfFormModule { }
+export class AddressNotFoundModule { }

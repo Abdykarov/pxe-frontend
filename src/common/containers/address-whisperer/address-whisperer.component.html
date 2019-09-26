@@ -1,19 +1,10 @@
 <ng-template
-    #templateNotFoundFillBySelfDefault
+    #templateNotFoundDefault
     let-searchTerm="searchTerm">
-    <div class="ml-2 mr-2">
+    <div class="ml-2 mr-2 small">
         Adresu jsme nenašli. Možná jste se překlepli, zkuste to znovu nebo <a (click)="fillAddressBySelf($event)"> vyplňte adresu ručně</a>.
     </div>
 </ng-template>
-
-<ng-template
-    #templateNotFoundFewArgumentsDefault
-    let-searchTerm="searchTerm">
-    <div class="ml-2 mr-2">
-        Začněte psát a my vám našeptáme adresu.
-    </div>
-</ng-template>
-
 
 <ng-template
     #templateItemDefault
@@ -31,39 +22,63 @@
     {{ item.city }}, {{ item.postCode }}
 </ng-template>
 
-<div #selectWrapper>
-    <lnd-select
-        #lndSelect
-        [addTag]="false"
-        [subtextTemplate]="subtextTemplate"
-        [appendButtonIcon]="appendButtonIcon"
-        (appendButtonAction)="appendButtonAction.emit()"
-        [bindValue]="null"
-        (close)="setAddresses()"
-        [disabledField]="disabled"
-        [error]="error"
-        [label]="label"
-        [placeholder]="placeholder"
-        [searchable]="true"
-        [selectName]="whispererName"
-        [options]="addresses"
+<ng-template #subtextTemplate>
+    <p class="small mt-0 mb-1" *ngIf="!disabled">
+        Začněte psát a my vám našeptáme adresu.
+    </p>
+</ng-template>
+
+<div class="address-whisperer">
+    <div #selectWrapper
+         class="select-wrapper">
+        <lnd-select
+            #lndSelect
+            [class.is-started-searching]="!isStartedSearching"
+            [addTag]="false"
+            (blur)="onBlur($event)"
+            [subtextTemplate]="subtextTemplate"
+            [appendButtonIcon]="appendButtonIcon"
+            (appendButtonAction)="appendButtonAction.emit()"
+            [bindValue]="null"
+            (close)="setAddresses()"
+            [disabledField]="disabled"
+            [error]="error"
+            [label]="label"
+            [placeholder]="placeholder"
+            [searchable]="true"
+            [selectName]="whispererName"
+            [options]="addresses"
+            [parentForm]="parentForm"
+            [success]="success"
+            [templateItem]="templateItem || templateItemDefault"
+            [templateLabel]="templateLabel || templateLabelDefault"
+            [templateNotFound]="templateNotFound || templateNotFoundDefault"
+            [touched]="touched"
+            [typeahead]="typeahead"
+            [validationMessages]="validationMessages"
+            customClass="ng-select-custom--address"
+        >
+        </lnd-select>
+    </div>
+
+    <div *ngIf="!showForm">
+        <ng-container *ngIf="checkboxTemplate">
+            <ng-container *ngTemplateOutlet="checkboxTemplate"></ng-container>
+        </ng-container>
+    </div>
+    <pxe-address-not-found
+        *ngIf="showForm && !disabled"
         [parentForm]="parentForm"
-        [success]="success"
-        [templateItem]="templateItem || templateItemDefault"
-        [templateLabel]="templateLabel || templateLabelDefault"
-        [templateNotFound]="isStartedSearching ? templateNotFoundFillBySelf || templateNotFoundFillBySelfDefault : templateNotFoundFewArguments || templateNotFoundFewArgumentsDefault"
-        [touched]="touched"
-        [typeahead]="typeahead"
-        [validationMessages]="validationMessages"
-        customClass="ng-select-custom--address"
+        [formFields]="formFields"
+        [whispererName]="nameOfTemporaryWhisererFormGroup"
+        (sendValidAddressAction)="sendValidAddress($event)"
     >
-    </lnd-select>
+    </pxe-address-not-found>
+    <div *ngIf="showForm">
+        <div
+            class="align-checkbox-to-upper-element-in-address"
+            *ngIf="checkboxTemplate">
+            <ng-container *ngTemplateOutlet="checkboxTemplate"></ng-container>
+        </div>
+    </div>
 </div>
-<pxe-address-whisperer-by-self-form
-    *ngIf="showForm"
-    [parentForm]="parentForm"
-    [formFields]="formFields"
-    [whispererName]="whispererName + UNIQUE_FIELD_NAME_END"
-    (sendValidAddressAction)="sendValidAddress($event)"
->
-</pxe-address-whisperer-by-self-form>

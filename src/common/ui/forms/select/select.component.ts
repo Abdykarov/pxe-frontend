@@ -50,6 +50,12 @@ export class SelectComponent {
     @Output()
     public close?: EventEmitter<any> = new EventEmitter();
 
+    @Output()
+    public typeaheadOnBlur?: EventEmitter<any> = new EventEmitter();
+
+    @Output()
+    public blur?: EventEmitter<any> = new EventEmitter();
+
     @Input()
     public customClass?: string;
 

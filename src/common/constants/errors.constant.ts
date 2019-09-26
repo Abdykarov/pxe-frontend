@@ -60,6 +60,7 @@ export const errorFieldMessages =  {
     },
     city: {
         required: 'Zadejte město.',
+        maxlengthCity: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     commodityType: {
         required: 'Zvolte komoditu.',
@@ -91,6 +92,7 @@ export const errorFieldMessages =  {
     },
     descriptiveNumber: {
         required: 'Vyplňte číslo popisné.',
+        maxlengthDescriptiveNumber: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     dic: {
         dicPrefix: 'Vyplňte své DIČ.',
@@ -186,7 +188,9 @@ export const errorFieldMessages =  {
     offerValidFromTo: {
         required: 'Vyplňte odkdy dokdy je nabídka platná.',
     },
-    orientationNumber: {},
+    orientationNumber: {
+        maxlengthOrientationNumber: 'Použít můžete maximálně {requiredLength} znaků.',
+    },
     phasesId: {
         required: 'Vyberte ze seznamu, jakou máte fázi.',
     },
@@ -221,6 +225,7 @@ export const errorFieldMessages =  {
     },
     street: {
         required: 'Zadejte ulici.',
+        maxlengthStreet: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
