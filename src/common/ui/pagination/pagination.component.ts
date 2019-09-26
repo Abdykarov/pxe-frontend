@@ -1,12 +1,14 @@
 import {
     Component, EventEmitter,
     Input, Output,
+    ViewEncapsulation,
 } from '@angular/core';
 
 @Component({
     selector: 'lnd-pagination',
     templateUrl: './pagination.component.html',
     styleUrls: ['./pagination.component.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class PaginationComponent {
     @Input()

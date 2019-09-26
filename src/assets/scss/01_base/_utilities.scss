@@ -63,11 +63,26 @@
 
 	& &__icon {
 		color: $icons-primary;
-		font-size: 1.625rem;
+		font-size: $icon-size-large;
 	}
 
 	&__text {
 		margin-left: ( $spacer / 2 );
+	}
+
+	&--link {
+		@include link-without-href-interactive {
+			text-decoration: none;
+
+			.text-with-icon__text {
+				text-decoration: underline;
+			}
+		}
+
+		.text-with-icon__icon {
+			font-size: $small-font-size;
+			color: $font-text;
+		}
 	}
 }
 
