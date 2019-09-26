@@ -2,6 +2,7 @@ import {
     Component,
     EventEmitter,
     Input,
+    OnDestroy,
     OnInit,
     Output,
     ViewChild,
@@ -21,7 +22,7 @@ import { REGIONS } from 'src/app/app.constants';
     templateUrl: './address-not-found.component.html',
     styleUrls: ['./address-not-found.component.scss'],
 })
-export class AddressNotFoundComponent extends AbstractComponent implements OnInit {
+export class AddressNotFoundComponent extends AbstractComponent implements OnDestroy, OnInit {
 
     private _cityInput: FieldComponent;
 
@@ -35,6 +36,9 @@ export class AddressNotFoundComponent extends AbstractComponent implements OnIni
 
     @Input()
     public formFields: IForm;
+
+    @Input()
+    public nameOfTemporaryWhisererFormGroup: string;
 
     @Input()
     public parentForm: FormGroup;
@@ -60,5 +64,9 @@ export class AddressNotFoundComponent extends AbstractComponent implements OnIni
                     this.sendValidAddressAction.emit(this.parentForm.get(this.whispererName).value);
                 }
             });
+    }
+
+    ngOnDestroy() {
+        this.parentForm.removeControl( this.whispererName);
     }
 }

@@ -119,11 +119,13 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     private _showForm = false;
 
     set showForm(showForm: boolean) {
-        showForm ? this.parentForm.addControl(
+        // delete v not-found kvuli disable
+        if (showForm) {
+            this.parentForm.addControl(
                 this.nameOfTemporaryWhisererFormGroup,
                 this.fb.group(this.formFields.controls, this.formFields.options),
-            ) :
-            this.parentForm.removeControl( this.nameOfTemporaryWhisererFormGroup);
+            );
+        }
         this._showForm = showForm;
     }
 
@@ -146,11 +148,9 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
             .pipe(
                 tap((term) => {
                     this.term = term;
-                    if (this.hasTermGoodLength(term) && this.isStartedSearching) {
-                        this.showForm = false;
-                        this.setAddressValidator(true);
-                        this.cd.markForCheck();
-                    }
+                    this.isStartedSearching = !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(this.term);
+                    this.showForm = false;
+                    this.setAddressValidator(true);
                 }),
                 debounceTime(AddressWhispererComponent.DEBOUNCE_TIME),
                 filter(this.hasTermGoodLength),
@@ -166,16 +166,11 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     }
 
     public setAddresses = (addresses = []) => {
-        console.log('VOLAM SET ADDRESS');
         this.addresses = addresses;
-        this.isStartedSearching = !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(this.term);
-        this.showForm = false;
-        this.setAddressValidator(true);
         this.cd.markForCheck();
     }
 
     public setAddressValidator = (required: boolean) => {
-        console.log('setAddressValidator' + required + '__');
         this.parentForm.get(this.whispererName)
             .setValidators(required ? [Validators.required] : []);
         this.parentForm.get(this.whispererName).markAsUntouched({
@@ -184,9 +179,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     }
 
     public fillAddressBySelf = (evt) => {
-        console.log('FILLADDRESS');
         this.setAddressValidator(false);
-        console.log(this.parentForm);
         this.lndSelect.hideDialog();
         this.showForm = true;
         this.cd.markForCheck();
@@ -195,9 +188,5 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     public sendValidAddress = (value) => {
         this.parentForm.get(this.whispererName).setValue(value);
         this.cd.markForCheck();
-    }
-
-    public onBlur(evt) {
-        this.setAddressValidator(false);
     }
 }

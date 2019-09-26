@@ -59,7 +59,7 @@ export const errorFieldMessages =  {
         required: 'Vyberte ze seznamu, jakou máte velikost jističe.',
     },
     city: {
-        required: 'Zadejte město.',
+        required: 'Vyplňte město nebo obec.',
         maxlengthCity: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     commodityType: {
@@ -224,7 +224,7 @@ export const errorFieldMessages =  {
         required: 'Vyplňte kód, který vám přišel v SMS.',
     },
     street: {
-        required: 'Zadejte ulici.',
+        required: 'Vyplňte ulici.',
         maxlengthStreet: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     supplierId: {
@@ -245,6 +245,6 @@ export const errorFieldMessages =  {
     },
     postCode: {
         required: 'Vyplňte PSČ.',
-        pattern: 'Vypňte správný formát.',
+        pattern: 'Použít můžete pouze 5 číslic.',
     },
 };

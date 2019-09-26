@@ -24,10 +24,9 @@
 
 <ng-template #subtextTemplate>
     <p class="small mt-0 mb-1" *ngIf="!disabled">
-        Začněte psát a my vám našeptáme adresu.
+        Začněte psát a my vám našeptáme kompletní adresu.
     </p>
 </ng-template>
-
 <div class="address-whisperer">
     <div #selectWrapper
          class="select-wrapper">
@@ -35,12 +34,10 @@
             #lndSelect
             [class.is-started-searching]="!isStartedSearching"
             [addTag]="false"
-            (blur)="onBlur($event)"
             [subtextTemplate]="subtextTemplate"
             [appendButtonIcon]="appendButtonIcon"
             (appendButtonAction)="appendButtonAction.emit()"
             [bindValue]="null"
-            (close)="setAddresses()"
             [disabledField]="disabled"
             [error]="error"
             [label]="label"
@@ -62,9 +59,9 @@
     </div>
 
     <div *ngIf="!showForm">
-        <ng-container *ngIf="checkboxTemplate">
+        <div class="align-checkbox-to-upper-element-in-address" *ngIf="checkboxTemplate">
             <ng-container *ngTemplateOutlet="checkboxTemplate"></ng-container>
-        </ng-container>
+        </div>
     </div>
     <pxe-address-not-found
         *ngIf="showForm && !disabled"

@@ -17,8 +17,6 @@
             [addTag]="addTag"
             [items]="options"
             [selectOnTab]="true"
-            (blur)="blur.emit($event)"
-            (typeaheadOnBlur)="typeaheadOnBlur.emit($event)"
             [searchable]="searchable"
             [formControl]="parentForm.controls[selectName]"
             [bindValue]="bindValue"
