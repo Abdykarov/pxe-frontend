@@ -27,9 +27,9 @@
         Začněte psát a my vám našeptáme kompletní adresu.
     </p>
 </ng-template>
+
 <div class="address-whisperer">
-    <div #selectWrapper
-         class="select-wrapper">
+    <div class="select-wrapper">
         <lnd-select
             #lndSelect
             [class.is-started-searching]="!isStartedSearching"
@@ -57,7 +57,6 @@
         >
         </lnd-select>
     </div>
-
     <div *ngIf="!showForm">
         <div class="align-checkbox-to-upper-element-in-address" *ngIf="checkboxTemplate">
             <ng-container *ngTemplateOutlet="checkboxTemplate"></ng-container>
