@@ -20,7 +20,7 @@ export class UserService {
     ) {}
 
     public resetPassword = (email: string)  => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: resetPasswordMutation,
             variables: {
                 email,
@@ -28,7 +28,7 @@ export class UserService {
         })
 
     public changePassword = (oldPassword: string, newPassword: string) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: changePasswordMutation,
             variables: {
                 oldPassword,
@@ -37,7 +37,7 @@ export class UserService {
         })
 
     public updateUserProfile = (userDetail: IUserDetailInput) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: updateUserProfileMutation,
             variables: {
                 userDetail,
