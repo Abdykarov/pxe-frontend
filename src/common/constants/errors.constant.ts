@@ -214,7 +214,7 @@ export const errorFieldMessages =  {
         invalidPhoneNumberPrefix: `Vyplňte správnou předvolbu pro ČR ${CONSTS.TELEPHONE_PREFIX_CZ}.`,
     },
     region: {
-        required: 'Vyplňte kraj.',
+        required: 'Vyberte ze seznamu kraj.',
     },
     signatoryPosition: {
         required: 'Vyplňte funkci, kterou má ve společnosti podepisující osoba.',
