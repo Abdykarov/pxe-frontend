@@ -51,6 +51,7 @@ export class LoginComponent extends AbstractComponent {
     public LOGIN_STATE = LOGIN_STATE;
     public passwordWasSent = false;
     public password: string;
+    public phoneNumber: string;
     public state = ILoginState.LOGIN;
     public wasSentToPhone = false;
 
@@ -144,6 +145,7 @@ export class LoginComponent extends AbstractComponent {
                     }
                     if (this.authService.needSmsConfirm()) {
                         this.state = ILoginState.SEND_SMS;
+                        this.phoneNumber = this.authService.currentUserValue.phoneNumber;
                         this.resetErrorsAndLoading();
                         this.cd.markForCheck();
                         return;
