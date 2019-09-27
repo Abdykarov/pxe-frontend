@@ -109,9 +109,10 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
     }
 
     public submitVerification = (smsCode: string = null) => {
-        console.log(smsCode);
         this.formLoading = true;
-        this.registrationService.makeUnregistration(smsCode)
+        const makeUnregistrationObservable = smsCode ? this.registrationService.makeUnregistration(smsCode) :
+            this.registrationService.makeUnregistrationWithoutSms();
+        makeUnregistrationObservable
             .pipe(
                 takeUntil(this.destroy$),
                 map(({data}) =>  data.makeUnregistration),

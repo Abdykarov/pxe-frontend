@@ -7,8 +7,14 @@ export const makeRegistrationMutation = gql`
 `;
 
 export const makeUnregistrationMutation = gql`
-    mutation makeUnregistration($smsCode: String!) {
+    mutation makeUnregistration($smsCode: String) {
         makeUnregistration(smsCode: $smsCode)
+    }
+`;
+
+export const makeUnregistrationWithoutSmsMutation = gql`
+    mutation makeUnregistration {
+        makeUnregistration
     }
 `;
 
