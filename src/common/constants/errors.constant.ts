@@ -8,7 +8,7 @@ export const restAPIErrorCodes = {
 
 export const graphQLMessages = {
     cannotUnregistration: 'Účet se nepodařilo smazat.',
-    cannotSendSms: 'Účet se nepodařilo smazat.',
+    cannotSendSms: 'SMS se nepodařilo poslat.',
     cannotDeleteContract: 'Omlouváme se, ale z neočekávaného důvodu se odstoupení od smlouvy nepodařilo. Zkuste to prosím znovu později.',
     cannotSignContract: 'Omlouváme se, ale z neočekávaného důvodu se nepodařilo smlouvu podepsat. Zkuste to prosím znovu později.',
     invalidSupplyPointId: 'Hledané odběrné místo neexistuje nebo pro přístup k němu nemáte oprávnění.',
