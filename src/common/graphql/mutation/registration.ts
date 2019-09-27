@@ -12,12 +12,6 @@ export const makeUnregistrationMutation = gql`
     }
 `;
 
-export const makeUnregistrationWithoutSmsMutation = gql`
-    mutation makeUnregistration {
-        makeUnregistration
-    }
-`;
-
 export const sendUnregisterSmsMutation = gql`
     mutation sendUnregisterSms{
         sendUnregisterSms

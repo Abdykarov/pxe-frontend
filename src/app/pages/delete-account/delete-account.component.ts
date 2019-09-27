@@ -88,7 +88,7 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
                 takeUntil(this.destroy$),
                 map(({data}) =>  data.sendUnregisterSms),
             )
-            .subscribe((smsSended: boolean) => (result: boolean) => {
+            .subscribe((result: boolean) => {
                     this.loading = false;
                     if (result) {
                         this.router.navigate([CONSTS.PATHS.DELETED_ACCOUNT]);
@@ -110,9 +110,7 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
 
     public submitVerification = (smsCode: string = null) => {
         this.formLoading = true;
-        const makeUnregistrationObservable = smsCode ? this.registrationService.makeUnregistration(smsCode) :
-            this.registrationService.makeUnregistrationWithoutSms();
-        makeUnregistrationObservable
+        this.registrationService.makeUnregistration(smsCode)
             .pipe(
                 takeUntil(this.destroy$),
                 map(({data}) =>  data.makeUnregistration),
