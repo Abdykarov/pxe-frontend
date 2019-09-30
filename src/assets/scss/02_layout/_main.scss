@@ -88,8 +88,6 @@
 			counter-reset: item;
 
 			> li {
-				padding-bottom: ( $lists-margin-bottom / 2 );
-
 				&::before {
 					content: counters(item, '.') '.';
 					counter-increment: item;
