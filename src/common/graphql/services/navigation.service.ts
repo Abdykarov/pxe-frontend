@@ -25,7 +25,7 @@ export class NavigationService {
         .valueChanges
 
     public saveConfig = (config: INavigationConfig) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: loadConfigMutation,
             variables: {
                 config,
@@ -33,7 +33,7 @@ export class NavigationService {
         })
 
     public toggleNavigationItem = (navigationItem) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: navigationItem.url === this.LOGOUT_URL ? logout : openItemMutation,
             variables: {
                 item: navigationItem,
