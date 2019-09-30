@@ -14,6 +14,9 @@ import { SupplierComponent } from '../supplier/supplier.component';
     styleUrls: ['./map-coverage.component.scss'],
 })
 export class MapCoverageComponent {
+    public MAX_SUPPLY_POINTS_OF_GAS = 2835737;
+    public MAX_SUPPLY_POINTS_OF_POWER = 5878039;
+
     @Input()
     public configCoverage: IMapCoverageConfig;
 

@@ -21,10 +21,10 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            500
+                                            {{configCoverage.power.actualOffers | number}}
                                         </div>
                                         <div class="box-info__unit">
-                                            nabídek
+                                            {{configCoverage.power.actualOffers | plural:'offer'}}
                                         </div>
                                     </div>
                                 </div>
@@ -36,10 +36,10 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            5 878 039
+                                            {{MAX_SUPPLY_POINTS_OF_POWER | number}}
                                         </div>
                                         <div class="box-info__unit">
-                                            odběrných míst
+                                            {{MAX_SUPPLY_POINTS_OF_POWER | plural:'supplyPoint'}}
                                         </div>
                                     </div>
                                 </div>
@@ -51,10 +51,10 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            500
+                                            {{configCoverage.power.actualSupplyPoints | number}}
                                         </div>
                                         <div class="box-info__unit">
-                                            odběrných míst
+                                            {{configCoverage.power.actualSupplyPoints | plural:'supplyPoint'}}
                                         </div>
                                     </div>
                                 </div>
@@ -84,11 +84,14 @@
                             <div class="box-info">
                                 <div class="box-info__holder">
                                     <div class="box-info__label">
-                                        Počet nabídek
+                                        Nabízeme více jak
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            500
+                                            {{configCoverage.gas.actualOffers | number}}
+                                        </div>
+                                        <div class="box-info__unit">
+                                            {{configCoverage.gas.actualOffers | plural:'offer'}}
                                         </div>
                                     </div>
                                 </div>
@@ -96,14 +99,14 @@
                             <div class="box-info box-info--primary">
                                 <div class="box-info__holder">
                                     <div class="box-info__label">
-                                        Jsme schopni dodat do
+                                        Jsme schopni dodat plyn do
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            2 835 737
+                                            {{MAX_SUPPLY_POINTS_OF_GAS | number}}
                                         </div>
                                         <div class="box-info__unit">
-                                            odběrných míst
+                                            {{MAX_SUPPLY_POINTS_OF_GAS | plural:'supplyPoint'}}
                                         </div>
                                     </div>
                                 </div>
@@ -111,11 +114,14 @@
                             <div class="box-info box-info--secondary">
                                 <div class="box-info__holder">
                                     <div class="box-info__label">
-                                        Počet odběrných míst
+                                        Evidujeme více jak
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            500
+                                            {{configCoverage.gas.actualSupplyPoints | number}}
+                                        </div>
+                                        <div class="box-info__unit">
+                                            {{configCoverage.gas.actualSupplyPoints | plural:'supplyPoint'}}
                                         </div>
                                     </div>
                                 </div>

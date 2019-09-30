@@ -108,13 +108,21 @@
 	}
 
 	&__number {
-		font-size: $h4-font-size;
+		font-size: $h2-font-size;
 		line-height: 1;
 
 		// Media queries
 		@include media-breakpoint-up(xl) {
 			font-size: 1.7rem;
 			line-height: ( 48 / 36 );
+		}
+	}
+
+	&__unit {
+		font-size: 0.80rem;
+
+		@include media-breakpoint-up(xl) {
+			font-size: $h1-font-size-snd;
 		}
 	}
 }
