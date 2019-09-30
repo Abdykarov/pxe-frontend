@@ -78,7 +78,7 @@ export class LandingComponent extends AbstractComponent {
         this.globalError = [];
         this.fieldError = {};
         this.apollo
-            .mutate<any>({
+            .mutate({
                 mutation: mutations.makeRegistrationMutation,
                 variables: values,
             })
