@@ -194,12 +194,15 @@ export const formFields: IForm = {
             ean: errorFieldMessages.ean.ean,
             invalidEan: errorFieldMessages.ean.ean,
             eanFormat: errorFieldMessages.ean.ean,
+            duplicateSupplyPoint: errorFieldMessages.ean.nonUniqueEan,
         },
         eic: {
             required: errorFieldMessages.eic.required,
             eic: errorFieldMessages.eic.eic,
             invalidEic: errorFieldMessages.eic.eic,
             eicFormat: errorFieldMessages.eic.eic,
+            duplicateSupplyPoint: errorFieldMessages.eic.nonUniqueEic,
+            invalidEicOnFifthToSeventhPosition: errorFieldMessages.eic.invalidEicOnPosition,
         },
         address: {
             required: errorFieldMessages.address.required,

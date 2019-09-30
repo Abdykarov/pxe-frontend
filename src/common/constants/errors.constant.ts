@@ -99,10 +99,13 @@ export const errorFieldMessages =  {
         required: 'Vyplňte unikátní 18místné identifikační číslo odběrného místa.',
         ean: 'Správné identifikační číslo odběrného místa má 18 znaků, obsahuje pouze čísla a vždy začíná 8591824.',
         invalidEan: 'Správné identifikační číslo odběrného místa má 18 znaků, obsahuje pouze čísla a vždy začíná 8591824.',
+        nonUniqueEan: 'Ean již evidujeme.',
     },
     eic: {
         required:  'Vyplňte unikátní 16místný identifikační kód odběrného místa.',
         eic: 'Správný identifikační kód odběrného místa má 16 znaků, obsahuje pouze čísla a písmena a vždy začíná 27ZG.',
+        nonUniqueEic: 'EIC již evidujeme.',
+        invalidEicOnPosition: 'Vyplňen nevalidní EIC.',
     },
     email: {
         required: 'Vyplňte svůj e-mail.',
