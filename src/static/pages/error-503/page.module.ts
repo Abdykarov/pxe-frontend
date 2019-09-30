@@ -5,6 +5,10 @@ import { Routes } from '@angular/router';
 // own classes
 import { Error503PageComponent } from './page';
 import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
+import {
+    LoginType,
+    SignType,
+} from 'src/app/layouts/models/router-data.model';
 
 @NgModule({
     declarations: [
@@ -24,5 +28,13 @@ export const error503PageRoutes: Routes = [
     {
         path: 'error-503',
         component: Error503PageComponent,
+        data: {
+            isPublic: true,
+            isPublicEmptyPage: true,
+            isLandingPage: false,
+            isSimpleFooter: true,
+            loginType: LoginType.NONE,
+            signUpType: SignType.NONE,
+        },
     },
 ];

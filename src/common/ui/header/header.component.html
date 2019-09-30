@@ -32,33 +32,35 @@
                         class="public-menu-holder"
                         *ngIf="settings.isPublic && !settings.isStatic">
                         <lnd-button
-                            *ngIf="!settings.isLandingPage"
+                            *ngIf="!settings.isLandingPage && !settings.isPublicEmptyPage"
                             label="Domů"
                             customClass="mr-4"
                             type="link-text"
                             (click)="homeRedirect.emit()">
                         </lnd-button>
                         <lnd-button
-                            *ngIf="settings.isLandingPage"
+                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
                             label="Změna dodavatele"
                             customClass="mr-4"
                             type="link-text"
                             (click)="supplierChangeAction.emit()">
                         </lnd-button>
                         <lnd-button
-                            *ngIf="settings.isLandingPage"
+                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
                             label="Pokrytí"
                             customClass="mr-4"
                             type="link-text"
                             (click)="coverageMapAction.emit()">
                         </lnd-button>
                         <lnd-button
+                            *ngIf="!settings.isPublicEmptyPage"
                             label="Přihlášení"
                             customClass="mr-4"
                             type="link-text"
                             (click)="loginAction.emit()">
                         </lnd-button>
                         <lnd-button
+                            *ngIf="!settings.isPublicEmptyPage"
                             label="Registrace"
                             type="primary"
                             (click)="signUpAction.emit()">
@@ -78,25 +80,27 @@
                             (toggleOverlayerAction)="toggleMenu.emit($event)"
                             menuDirection="right">
                             <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="!settings.isLandingPage"
+                               *ngIf="!settings.isLandingPage && !settings.isPublicEmptyPage"
                                (click)="homeRedirect.emit()">
                                 Domů
                             </a>
                             <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="settings.isLandingPage"
+                               *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
                                (click)="supplierChangeAction.emit()">
                                 Změna dodatavatele
                             </a>
                             <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="settings.isLandingPage"
+                               *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
                                (click)="coverageMapAction.emit()">
                                 Pokrytí
                             </a>
                             <a class="dropdown-item dropdown-item--without-icon"
-                               (click)="loginAction.emit()">
+                               *ngIf="!settings.isPublicEmptyPage"
+                               (click)="loginAction.emit() ">
                                 Přihlášení
                             </a>
                             <a class="dropdown-item dropdown-item--without-icon"
+                               *ngIf="!settings.isPublicEmptyPage"
                                (click)="signUpAction.emit()">
                                 Registrace
                             </a>
