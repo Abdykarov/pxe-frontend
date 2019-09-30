@@ -39,6 +39,9 @@ export class DatepickerRangeComponent {
     @Input()
     public appendButtonIcon?: string;
 
+    @Output()
+    public blur?: EventEmitter<any> = new EventEmitter();
+
     @Input()
     public config: Partial<BsDatepickerConfig> = new BsDatepickerConfig();
 
@@ -50,6 +53,9 @@ export class DatepickerRangeComponent {
 
     @Input()
     public error?: any;
+
+    @Output()
+    public focus?: EventEmitter<any> = new EventEmitter();
 
     @Input()
     public id: string;

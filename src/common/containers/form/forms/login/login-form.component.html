@@ -21,13 +21,14 @@
     </div>
 </ng-container>
 <ng-template #forgottenPassword>
-    <a  *ngIf="!passwordWasSent"
-        (click)="handleCustomAction($event)">
+    <a *ngIf="!passwordWasSent"
+       (click)="handleCustomAction($event)">
         Zapomněli jste heslo?
     </a>
 </ng-template>
 <form
     [formGroup]="form"
+    (keydown.enter)="submitForm($event);false"
     class="form-container"
     autocomplete="off">
     <lnd-form-field
@@ -54,7 +55,7 @@
         <lnd-button
             type="primary"
             [submit]="true"
-            (action)="submitForm()"
+            (action)="submitForm($event)"
             [isDisabled]="!!formLoading"
             label="Přihlásit se">
         </lnd-button>

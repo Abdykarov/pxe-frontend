@@ -174,6 +174,7 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     @Input()
     public warning = false;
 
+    @Input()
     public inputFocused = false;
 
     onChange: any = () => {};
@@ -215,14 +216,6 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
         if (!R.isNil(value)) {
             this.value = value;
         }
-    }
-
-    public focusAction = () => {
-        this.inputFocused = true;
-    }
-
-    public blurAction = () => {
-        this.inputFocused = false;
     }
 
     public changeSelect = (event) => {

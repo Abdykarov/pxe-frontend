@@ -16,8 +16,8 @@
                 bsDatepicker
                 #datepicker="bsDatepicker"
                 type="text"
-                (blur)="inputFocused = false"
-                (focus)="inputFocused = true"
+                (blur)="inputFocused = false;focus.emit($event)"
+                (focus)="inputFocused = true;blur.emit($event)"
                 class="form-control"
                 [class.form-control--not-empty]="!!parentForm.controls[datepickerName].value"
                 [id]="id"

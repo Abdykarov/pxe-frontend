@@ -205,7 +205,10 @@ textarea.form-control--not-empty {
 	}
 
 	&:focus,
-	&.focus {
+	&.focus:not([disabled]),
+	&.focus:hover:not([disabled]) {
+		border-color: $primary;
+
 		&.is-invalid {
 			border-color: $primary;
 		}

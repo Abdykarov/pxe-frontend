@@ -25,7 +25,8 @@
 
 	.ng-select,
 	.ng-select-opened {
-		&.ng-select-focused .ng-select-container {
+		&.ng-select-focused .ng-select-container,
+		&.focus .ng-select-container {
 			&,
 			&:hover {
 				&::after {

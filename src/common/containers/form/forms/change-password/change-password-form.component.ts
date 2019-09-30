@@ -44,7 +44,7 @@ export class ChangePasswordFormComponent extends AbstractFormComponent implement
         if (changes.formSent && changes.formSent.currentValue && this.form) {
             const defaultValues = R.map(R.head, this.formFields.controls);
             this.form.reset(defaultValues);
-            this.resetFormError();
+            this.resetFormError(false);
         }
     }
 }

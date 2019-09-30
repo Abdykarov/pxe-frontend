@@ -36,6 +36,9 @@ export class SelectComponent {
     @Input()
     public bindValue = 'key';
 
+    @Output()
+    public blur?: EventEmitter<any> = new EventEmitter();
+
     @Input()
     public disabledField = false;
 
@@ -47,6 +50,12 @@ export class SelectComponent {
 
     @Input()
     public error?: any;
+
+    @Output()
+    public focus?: EventEmitter<any> = new EventEmitter();
+
+    @Input()
+    public inputFocused = false;
 
     @Input()
     public label?: string;
@@ -95,8 +104,6 @@ export class SelectComponent {
 
     @Input()
     public warning?: any;
-
-    public inputFocused = false;
 
     public customSearchFn = (term: string, item: any) => {
         if (!!term && term.length > 2) {
