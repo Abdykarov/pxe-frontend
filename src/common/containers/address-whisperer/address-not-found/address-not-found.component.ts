@@ -30,7 +30,7 @@ export class AddressNotFoundComponent extends AbstractComponent implements OnDes
     set cityInput(cityInput: FieldComponent) {
         this._cityInput = cityInput;
         if (this._cityInput) {
-            setTimeout(() => this._cityInput.triggerFocus = 'TRIG', 0);
+            setTimeout(() => this._cityInput.triggerFocus = 'TRIG');
         }
     }
 
@@ -67,6 +67,6 @@ export class AddressNotFoundComponent extends AbstractComponent implements OnDes
     }
 
     ngOnDestroy() {
-        this.parentForm.removeControl( this.whispererName);
+        this.parentForm.removeControl(this.whispererName);
     }
 }

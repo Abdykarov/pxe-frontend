@@ -304,5 +304,6 @@ export const REGIONS: Array<IOption> = [
     {
         'label': 'Zlínský kraj',
         'value': 'Zlínský kraj',
-        'key': 'Zlínský kraj'},
+        'key': 'Zlínský kraj',
+    },
 ];

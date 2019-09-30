@@ -98,7 +98,10 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     public subtext?: string;
 
     @Input()
-    public checkboxTemplate?: TemplateRef<any>;
+    public addressSubtextTemplate?: TemplateRef<any>;
+
+    @Input()
+    public subtextTemplate?: TemplateRef<any>;
 
     @Input()
     public success = false;

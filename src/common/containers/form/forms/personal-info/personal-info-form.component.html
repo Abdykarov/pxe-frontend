@@ -114,7 +114,7 @@
         [label]="isIndividual ? 'Trvalá adresa' : 'Sídlo firmy'"
         [parentForm]="form"
         [success]="form.controls.address1.valid && (form.controls.address1.touched || formError.address1)"
-        [checkboxTemplate]="otherAddress"
+        [addressSubtextTemplate]="otherAddress"
         [touched]="form.controls.address1.touched || formError.address1"
         [validationMessages]="isIndividual ? formFields.validationMessages.address1Person : formFields.validationMessages.address1Company"
         [whispererName]="'address1'">
