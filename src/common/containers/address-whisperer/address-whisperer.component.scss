@@ -1,4 +1,13 @@
-// revize jardou
+/*
+ -  Address whisperer
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+
 .address-whisperer {
 	.select-wrapper {
 		.is-started-searching {
@@ -8,7 +17,7 @@
 		}
 	}
 
-	.align-checkbox-to-upper-element-in-address {
-		margin-top: -30px;
+	.check-other-correspondence-address {
+		margin-top: -( $spacer * 1.5 );
 	}
 }
