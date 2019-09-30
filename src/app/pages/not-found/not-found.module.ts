@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 // own classes
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
-import { ErrorPage404Module } from 'src/common/ui/error-page-404/error-page-404.module';
 import { NotFoundComponent } from './not-found.component';
 import { NotFoundRoutingModule } from './not-found.routing';
 
@@ -17,7 +16,6 @@ import { NotFoundRoutingModule } from './not-found.routing';
     imports: [
         BreadcrumbModule,
         CommonModule,
-        ErrorPage404Module,
         NotFoundRoutingModule,
     ],
 })

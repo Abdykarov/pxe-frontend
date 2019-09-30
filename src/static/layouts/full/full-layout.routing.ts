@@ -13,6 +13,9 @@ import { LoginPageModule, loginPageRoutes } from 'src/static/pages/login/page.mo
 import { LoginAfterRegistrationPageModule, loginAfterRegistrationPageRoutes } from 'src/static/pages/login-after-registration/page.module';
 import { RegistrationPageModule, registrationPageRoutes } from 'src/static/pages/registration/page.module';
 import { SupplyOfferPageModule, supplyOfferPageRoutes } from 'src/static/pages/supply-offer/page.module';
+import { Error404PageModule, error404PageRoutes } from 'src/static/pages/error-404/page.module';
+import { Error500PageModule, error500PageRoutes } from 'src/static/pages/error-500/page.module';
+import { Error503PageModule, error503PageRoutes } from 'src/static/pages/error-503/page.module';
 
 const routes: Routes = [
     {
@@ -21,6 +24,9 @@ const routes: Routes = [
         children: [
             ...cookiesPageRoutes,
             ...changePasswordPageRoutes,
+            ...error404PageRoutes,
+            ...error500PageRoutes,
+            ...error503PageRoutes,
             ...landingPageRoutes,
             ...loginPageRoutes,
             ...loginAfterRegistrationPageRoutes,
@@ -38,6 +44,9 @@ const routes: Routes = [
     imports: [
         CookiesPageModule,
         ChangePasswordPageModule,
+        Error404PageModule,
+        Error500PageModule,
+        Error503PageModule,
         LandingModule,
         LoginPageModule,
         LoginAfterRegistrationPageModule,

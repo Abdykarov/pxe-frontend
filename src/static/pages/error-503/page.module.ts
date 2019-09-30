@@ -3,26 +3,28 @@ import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 
 // own classes
-import { Error404PageComponent } from './page';
+import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
+import { Error503PageComponent } from './page';
 import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
 
 @NgModule({
     declarations: [
-        Error404PageComponent,
+        Error503PageComponent,
     ],
     exports: [
-        Error404PageComponent,
+        Error503PageComponent,
     ],
     imports: [
         CommonModule,
+        BreadcrumbModule,
         InfoBannerModule,
     ],
 })
-export class Error404PageModule {}
+export class Error503PageModule {}
 
-export const error404PageRoutes: Routes = [
+export const error503PageRoutes: Routes = [
     {
-        path: 'error-404',
-        component: Error404PageComponent,
+        path: 'error-503',
+        component: Error503PageComponent,
     },
 ];

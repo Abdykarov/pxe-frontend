@@ -229,10 +229,18 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'User profile',
                     'url': '/basic/user-profile',
                 },
-                // {
-                //     'label': 'Error',
-                //     'url': '/error-404',
-                // },
+                {
+                    'label': 'Error 404',
+                    'url': '/full/error-404',
+                },
+                {
+                    'label': 'Error 500',
+                    'url': '/full/error-500',
+                },
+                {
+                    'label': 'Error 503',
+                    'url': '/full/error-503',
+                },
             ],
         },
         {

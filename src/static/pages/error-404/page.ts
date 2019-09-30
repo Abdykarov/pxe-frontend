@@ -1,20 +1,19 @@
 import { Component } from '@angular/core';
 
-import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 
 @Component({
     templateUrl: './page.html',
 })
 
-export class ErrorPageComponent {
-    public breadcrumbItemsSimple: IBreadcrumbItems;
+export class Error404PageComponent {
+    public bannerType = BannerTypeImages;
+    public bannerTitle = 'Je nám líto, ale tato stránka neexistuje';
+    public bannerDescription = 'Pravděpodobně byla odstraněna, nebo jste zadali špatnou URL adresu.';
 
-    constructor() {
-        this.breadcrumbItemsSimple = [
-            {
-                label: '404 - Stránka nenalezena',
-                url: null,
-            },
-        ];
+    public buttonLabel = 'Zobrazit úvodní stránku';
+
+    public clicked = (evt) => {
+        evt.preventDefault();
     }
 }

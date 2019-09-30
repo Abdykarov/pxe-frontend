@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="97px" viewBox="0 0 64 97" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Group 8</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M27,78.9689081 C32.9554941,78.9689081 42.9252086,74.8081165 42.9252086,63.6831884 C42.9252086,48.5493959 54,37.5983447 54,23.2277813 L46.7501386,24.8598601 L40.07242,8.29523859 L36,12.2429593 L32,6.26443291 L25.116342,16.5031928 L17,0.429171798 L11.1256579,12.2429593 L5.99299962,6.26443291 C2.24480517,10.9003028 0,16.8018909 0,23.2277813 C0,37.5983447 11.1256579,48.5493959 11.1256579,63.7829575 C11.1256579,74.8595701 21.0671036,78.9689081 27,78.9689081 Z" id="path-1"></path>
+        <filter x="-15.7%" y="-8.3%" width="131.5%" height="121.6%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.170084227   0 0 0 0 0.299500553   0 0 0 0 0.428916879  0 0 0 0.161175272 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <ellipse id="path-3" cx="27" cy="85.2277813" rx="5" ry="3"></ellipse>
+        <filter x="-85.0%" y="-108.3%" width="270.0%" height="383.3%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.170084227   0 0 0 0 0.299500553   0 0 0 0 0.428916879  0 0 0 0.208014642 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <path d="M11,64.1692842 L43,64.1692842 L43,75.1692842 C43,80.6921317 38.5228475,85.1692842 33,85.1692842 L21,85.1692842 C15.4771525,85.1692842 11,80.6921317 11,75.1692842 L11,64.1692842 L11,64.1692842 Z" id="path-5"></path>
+        <filter x="-26.6%" y="-31.0%" width="153.1%" height="181.0%" filterUnits="objectBoundingBox" id="filter-6">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.170084227   0 0 0 0 0.299500553   0 0 0 0 0.428916879  0 0 0 0.161175272 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Service" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="500" transform="translate(-928.000000, -110.000000)">
+            <g id="Group-8" transform="translate(933.000000, 112.000000)">
+                <g id="Oval-Copy">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#F6FAFD" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <g id="outline-info-24px" transform="translate(27.000000, 39.000000) rotate(-180.000000) translate(-27.000000, -39.000000) translate(15.000000, 27.000000)">
+                    <g id="Bounding_Boxes">
+                        <polygon id="Shape" points="0 0 24 0 24 24 0 24"></polygon>
+                    </g>
+                    <g id="Outline" transform="translate(2.000000, 2.000000)" fill="#2B4762" fill-rule="nonzero">
+                        <g id="Group">
+                            <rect id="Rectangle-path" x="9" y="5" width="2" height="2"></rect>
+                            <rect id="Rectangle-path" x="9" y="9" width="2" height="6"></rect>
+                            <path d="M10,0 C4.48,0 0,4.48 0,10 C0,15.52 4.48,20 10,20 C15.52,20 20,15.52 20,10 C20,4.48 15.52,0 10,0 Z M10,18 C5.59,18 2,14.41 2,10 C2,5.59 5.59,2 10,2 C14.41,2 18,5.59 18,10 C18,14.41 14.41,18 10,18 Z" id="Shape"></path>
+                        </g>
+                    </g>
+                </g>
+                <g id="Oval">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                    <use fill="#DDE4EB" fill-rule="evenodd" xlink:href="#path-3"></use>
+                </g>
+                <g id="Combined-Shape">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-6)" xlink:href="#path-5"></use>
+                    <use fill="#DDE4EB" fill-rule="evenodd" xlink:href="#path-5"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
