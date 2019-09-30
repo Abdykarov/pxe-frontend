@@ -48,7 +48,7 @@ export class OfferService {
         .valueChanges
 
     public savePowerOffer = (offer: IOfferInput, powerAttributes: IOfferInputPowerAttributes) => this.apollo
-        .mutate<any>({
+        .mutate({
             mutation: savePowerOfferMutation,
             variables: {
                 offer,
@@ -60,7 +60,7 @@ export class OfferService {
         })
 
     public saveGasOffer = (offer: IOfferInput, gasAttributes: IOfferInputGasAttributes) => this.apollo
-        .mutate<any>({
+        .mutate({
             mutation: saveGasOfferMutation,
             variables: {
                 offer,
@@ -72,7 +72,7 @@ export class OfferService {
         })
 
     public updatePowerOffer = (offerId: number, offer: IOfferInput, powerAttributes: IOfferInputPowerAttributes) => this.apollo
-        .mutate<any>({
+        .mutate({
             mutation: updatePowerOfferMutation,
             variables: {
                 offerId,
@@ -98,7 +98,7 @@ export class OfferService {
         })
 
     public deleteOffer = (offerId: number) => this.apollo
-        .mutate<any>({
+        .mutate({
             mutation: deleteOfferMutation,
             variables: {
                 offerId,

@@ -16,7 +16,7 @@ export class OverlayService {
 
     public toggleOverlay(value = null) {
         return this.apollo
-            .mutate<any>({
+            .mutate({
                 mutation: toggleOverlayMutation,
                 variables: {
                     value: value,

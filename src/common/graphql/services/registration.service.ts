@@ -19,7 +19,7 @@ export class RegistrationService {
     ) {}
 
     public makeRegistration = (values: any)  => this.apollo
-        .mutate<any>({
+        .mutate({
             mutation: makeRegistrationMutation,
             variables: {
                 ...values,
@@ -27,7 +27,7 @@ export class RegistrationService {
         })
 
     public makeUnregistration = (smsCode: string) => this.apollo
-        .mutate<any>({
+        .mutate({
             mutation: makeUnregistrationMutation,
             variables: {
                 smsCode,
@@ -37,7 +37,7 @@ export class RegistrationService {
 
 
     public sendUnregisterSms = () => this.apollo
-        .mutate<any>({
+        .mutate({
             mutation: sendUnregisterSmsMutation,
         })
 }
