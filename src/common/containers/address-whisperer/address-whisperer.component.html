@@ -65,11 +65,9 @@
         (sendValidAddressAction)="sendValidAddress($event)"
     >
     </pxe-address-not-found>
-    <div>
-        <div
-            class="align-checkbox-to-upper-element-in-address"
-            *ngIf="addressSubtextTemplate">
-            <ng-container *ngTemplateOutlet="addressSubtextTemplate"></ng-container>
-        </div>
+    <div
+        class="check-other-correspondence-address"
+        *ngIf="addressSubtextTemplate">
+        <ng-container *ngTemplateOutlet="addressSubtextTemplate"></ng-container>
     </div>
 </div>
