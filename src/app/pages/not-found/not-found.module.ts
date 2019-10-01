@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { NotFoundComponent } from './not-found.component';
 import { NotFoundRoutingModule } from './not-found.routing';
+import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
+import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 
 @NgModule({
     declarations: [
@@ -16,6 +18,8 @@ import { NotFoundRoutingModule } from './not-found.routing';
     imports: [
         BreadcrumbModule,
         CommonModule,
+        InfoBannerModule,
+        LayoutContainerModule,
         NotFoundRoutingModule,
     ],
 })

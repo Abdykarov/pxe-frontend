@@ -1,5 +1,18 @@
-<div class="row">
-    <div class="col">
-        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItems"></lnd-breadcrumb>
+<div class="container-fluid">
+    <div class="container-content">
+        <pxe-layout-container pageTitle="404">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <lnd-info-banner
+                        [bannerType]="bannerType.DOCUMENTS_ALERT"
+                        [bannerTitle]="bannerTitle"
+                        [bannerDescription]="bannerDescription"
+                        [buttonLabel]="buttonLabel"
+                        (buttonAction)="redirectToDashboard($event)"
+                    >
+                    </lnd-info-banner>
+                </div>
+            </div>
+        </pxe-layout-container>
     </div>
 </div>
