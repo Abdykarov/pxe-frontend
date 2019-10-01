@@ -70,6 +70,7 @@
                          class="menu-holder">
                         <ng-template #publicMenuHamburgerTemplate let-toggle="toggle" let-isOpen="isOpen">
                             <pxe-hamburger
+                                *ngIf="!settings.hideHamburger"
                                 [isMenuOpen]="isOpen"
                                 (toggleMenu)="toggle()"
                             ></pxe-hamburger>
@@ -109,6 +110,7 @@
                     <div *ngIf="!settings.isPublic"
                          class="menu-holder">
                         <pxe-hamburger
+                                *ngIf="!settings.hideHamburger"
                                 [isMenuOpen]="isMenuOpen"
                                 [disableAction]="isMenuOpen"
                                 (toggleMenu)="toggleMenu.emit($event)"

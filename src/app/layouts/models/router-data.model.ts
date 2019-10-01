@@ -7,6 +7,7 @@ export interface ISettings {
     isSupplier?: boolean;
     loginType: LoginType;
     hideLeftNavigation?: boolean;
+    hideHamburger?: boolean;
     signUpType: SignType;
 }
 

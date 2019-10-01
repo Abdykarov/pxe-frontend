@@ -30,6 +30,7 @@ export class NotFoundComponent extends AbstractComponent {
         loginType: LoginType.NONE,
         signUpType: SignType.NONE,
         isStatic: false,
+        hideHamburger: true,
     };
 
     constructor(
