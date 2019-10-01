@@ -1,5 +1,6 @@
 export interface ISettings {
     isPublic: boolean;
+    isPublicEmptyPage?: boolean;
     isLandingPage: boolean;
     isSimpleFooter: boolean;
     isStatic: boolean;

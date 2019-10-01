@@ -15,7 +15,7 @@ import {
 } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { CONSTS } from 'src/app/app.constants';
+import { CONSTS, ROUTES } from 'src/app/app.constants';
 import { CookiesService } from './cookies.service';
 import { environment } from 'src/environments/environment';
 import {
@@ -169,5 +169,15 @@ export class AuthService {
 
         }
         return jwtPayload;
+    }
+
+    public homeRedirect = () => {
+        if (!this.isLogged()) {
+            this.router.navigate([CONSTS.PATHS.EMPTY]);
+        } else if (this.currentUserValue.supplier) {
+            this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER]);
+        } else {
+            this.router.navigate([ROUTES.ROUTER_DASHBOARD]);
+        }
     }
 }

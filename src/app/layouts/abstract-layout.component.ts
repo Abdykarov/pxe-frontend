@@ -19,10 +19,7 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
-import {
-    CONSTS,
-    ROUTES,
-} from 'src/app/app.constants';
+import { CONSTS } from 'src/app/app.constants';
 import {
     ISettings,
     LoginType,
@@ -41,6 +38,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
     public settings: ISettings = {
         isPublic: false,
         isLandingPage: false,
+        isPublicEmptyPage: false,
         isSimpleFooter: false,
         isStatic: false,
         loginType: LoginType.NONE,
@@ -108,13 +106,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
     }
 
     public homeRedirect = () => {
-        if (!this.authService.isLogged()) {
-            this.router.navigate([CONSTS.PATHS.EMPTY]);
-        } else if (this.authService.currentUserValue.supplier) {
-            this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER]);
-        } else {
-            this.router.navigate([ROUTES.ROUTER_DASHBOARD]);
-        }
+        this.authService.homeRedirect();
     }
 
     public toggleMenuOpen = (open: boolean) => {

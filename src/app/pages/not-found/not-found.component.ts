@@ -5,8 +5,13 @@ import { Router } from '@angular/router';
 import { AbstractComponent } from 'src/common/abstract.component';
 
 // own modules
+import { AuthService } from 'src/app/services/auth.service';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
-import { ROUTES } from 'src/app/app.constants';
+import {
+    ISettings,
+    LoginType,
+    SignType,
+} from 'src/app/layouts/models/router-data.model';
 
 @Component({
     templateUrl: './not-found.component.html',
@@ -17,13 +22,24 @@ export class NotFoundComponent extends AbstractComponent {
     public bannerDescription = 'Pravděpodobně byla odstraněna, nebo jste zadali špatnou URL adresu.';
     public buttonLabel = 'Zobrazit úvodní stránku';
 
+    public settings: ISettings = {
+        isPublic: true,
+        isPublicEmptyPage: true,
+        isLandingPage: false,
+        isSimpleFooter: true,
+        loginType: LoginType.NONE,
+        signUpType: SignType.NONE,
+        isStatic: false,
+    };
+
     constructor(
+        private authService: AuthService,
         private router: Router,
     ) {
         super();
     }
 
-    public redirectToDashboard = (evt) => {
-        this.router.navigate([ROUTES.ROUTER_DASHBOARD]);
+    public homeRedirect = () => {
+        this.authService.homeRedirect();
     }
 }
