@@ -4,9 +4,14 @@ import {
     OnInit,
 } from '@angular/core';
 
+import {
+    map,
+    takeUntil,
+} from 'rxjs/operators';
+
 import { AbstractComponent } from 'src/common/abstract.component';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { map, takeUntil } from 'rxjs/operators';
+import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
 
 @Component({
     selector: 'pxe-map-coverage-container',
@@ -14,6 +19,8 @@ import { map, takeUntil } from 'rxjs/operators';
     styleUrls: ['./map-coverage-container.component.scss'],
 })
 export class MapCoverageContainerComponent extends AbstractComponent implements OnInit {
+
+    public configCoverage: IMapCoverageConfig;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -29,8 +36,9 @@ export class MapCoverageContainerComponent extends AbstractComponent implements 
                 map(({data}) => data.getSupplyPointGlobalStatistics),
                 takeUntil(this.destroy$),
             ).subscribe(
-                (jidlo: any) => {
-                    console.log(jidlo);
+                (configCoverage: IMapCoverageConfig) => {
+                    this.configCoverage = configCoverage;
+                    this.cd.markForCheck();
                 },
                 (error) => {
                 },

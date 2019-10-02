@@ -1,10 +1,11 @@
-<!--<ng-template #supplierTemplate>-->
-    <!--<pxe-supplier-container></pxe-supplier-container>-->
-<!--</ng-template>-->
+<ng-template #supplierTemplate>
+    <pxe-supplier-container></pxe-supplier-container>
+</ng-template>
 
-<!--<pxe-map-coverage-->
-    <!--[configCoverage]="configCoverage"-->
-    <!--[supplierTemplateGas]="supplierTemplate"-->
-    <!--[supplierTemplatePower]="supplierTemplate"-->
-<!--&gt;-->
-<!--</pxe-map-coverage>-->
+<pxe-map-coverage
+    *ngIf="configCoverage"
+    [configCoverage]="configCoverage"
+    [supplierTemplateGas]="supplierTemplate"
+    [supplierTemplatePower]="supplierTemplate"
+>
+</pxe-map-coverage>

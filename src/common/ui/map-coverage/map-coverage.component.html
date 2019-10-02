@@ -21,10 +21,10 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            {{configCoverage.power.actualOffers | number}}
+                                            {{configCoverage.powerOfferCount | number}}
                                         </div>
                                         <div class="box-info__unit">
-                                            {{configCoverage.power.actualOffers | plural:'offer'}}
+                                            {{configCoverage.powerOfferCount | plural:'offer'}}
                                         </div>
                                     </div>
                                 </div>
@@ -36,10 +36,10 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            {{MAX_SUPPLY_POINTS_OF_POWER | number}}
+                                            {{configCoverage.totalPossibleDeliveryCountPower | number}}
                                         </div>
                                         <div class="box-info__unit">
-                                            {{MAX_SUPPLY_POINTS_OF_POWER | plural:'supplyPoint'}}
+                                            {{configCoverage.totalPossibleDeliveryCountPower | plural:'supplyPoint'}}
                                         </div>
                                     </div>
                                 </div>
@@ -51,11 +51,10 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            <lnd-placeloader [loading]="true"> </lnd-placeloader>
-                                            {{configCoverage.power.actualSupplyPoints | number}}
+                                            {{configCoverage.powerDeliveryCount | number}}
                                         </div>
                                         <div class="box-info__unit">
-                                            {{configCoverage.power.actualSupplyPoints | plural:'supplyPoint'}}
+                                            {{configCoverage.powerDeliveryCount | plural:'supplyPoint'}}
                                         </div>
                                     </div>
                                 </div>
@@ -89,10 +88,10 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            {{configCoverage.gas.actualOffers | number}}
+                                            {{configCoverage.gasOfferCount | number}}
                                         </div>
                                         <div class="box-info__unit">
-                                            {{configCoverage.gas.actualOffers | plural:'offer'}}
+                                            {{configCoverage.gasOfferCount | plural:'offer'}}
                                         </div>
                                     </div>
                                 </div>
@@ -104,10 +103,10 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            {{MAX_SUPPLY_POINTS_OF_GAS | number}}
+                                            {{configCoverage.totalPossibleDeliveryCountGas | number}}
                                         </div>
                                         <div class="box-info__unit">
-                                            {{MAX_SUPPLY_POINTS_OF_GAS | plural:'supplyPoint'}}
+                                            {{configCoverage.totalPossibleDeliveryCountGas | plural:'supplyPoint'}}
                                         </div>
                                     </div>
                                 </div>
@@ -119,10 +118,10 @@
                                     </div>
                                     <div class="box-info__value">
                                         <div class="box-info__number">
-                                            {{configCoverage.gas.actualSupplyPoints | number}}
+                                            {{configCoverage.gasDeliveryCount | number}}
                                         </div>
                                         <div class="box-info__unit">
-                                            {{configCoverage.gas.actualSupplyPoints | plural:'supplyPoint'}}
+                                            {{configCoverage.gasDeliveryCount | plural:'supplyPoint'}}
                                         </div>
                                     </div>
                                 </div>

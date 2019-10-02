@@ -330,8 +330,8 @@ export const getSupplyPointGlobalStatisticsQuery = gql`
             powerOfferCount,
             gasDeliveryCount,
             powerDeliveryCount,
-            totalPossibleDeliveryCount,
-            registeredDeliveryCount,
+            totalPossibleDeliveryCountGas,
+            totalPossibleDeliveryCountPower,
         }
     }
 
