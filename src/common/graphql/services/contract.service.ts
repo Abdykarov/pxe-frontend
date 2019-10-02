@@ -20,7 +20,6 @@ import {
     getContractTermsQuery,
     getPaymentInfoQuery,
 } from 'src/common/graphql/queries/contract';
-import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
 import {
     ISupplyPoint,
     ProgressStatus,
@@ -38,7 +37,7 @@ export class ContractService {
     ) {}
 
     public saveContract = (offerId: number, supplyPointId: string) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: saveContractMutation,
             variables: {
                 offerId,
@@ -75,7 +74,7 @@ export class ContractService {
         .valueChanges
 
     public signContract = (contractId: string, smsCode: string) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: signContractMutation,
             variables: {
                 contractId,
@@ -84,7 +83,7 @@ export class ContractService {
         })
 
     public sendContractConfirmationSms = (contractId: string) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: sendContractConfirmationSmsMutation,
             variables: {
                 contractId,
@@ -92,7 +91,7 @@ export class ContractService {
         })
 
     public updateContract = (contractId: number) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: updateContractMutation,
             variables: {
                 contractId,
@@ -100,7 +99,7 @@ export class ContractService {
         })
 
     public deleteContract = (contractId: string) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: deleteContractMutation,
             variables: {
                 contractId,
@@ -108,7 +107,7 @@ export class ContractService {
         })
 
     public concludeContract = (contractId: number) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: concludeContractMutation,
             variables: {
                 contractId,
@@ -207,7 +206,7 @@ export class ContractService {
     }
 
     public deleteSignedContract = (contractId: string, smsConfirmationCode: string) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: deleteSignedContractMutation,
             variables: {
                 contractId,
@@ -216,7 +215,7 @@ export class ContractService {
         })
 
     public deleteSelectedOfferFromContract = (contractId: string) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: deleteSelectedOfferFromContractMutation,
             variables: {
                 contractId,
@@ -234,7 +233,7 @@ export class ContractService {
         .valueChanges
 
     public confirmFirstContractView = () => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: confirmFirstContractViewMutation,
         })
 }
