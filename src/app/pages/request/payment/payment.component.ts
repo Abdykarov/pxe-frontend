@@ -35,7 +35,6 @@ import {
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { getOverviewState } from 'src/common/utils/get-overview-state.fnc';
 
 @Component({
     selector: 'pxe-contract',
@@ -45,16 +44,16 @@ import { getOverviewState } from 'src/common/utils/get-overview-state.fnc';
 export class PaymentComponent extends AbstractComponent implements OnInit {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.WAITING_FOR_PAYMENT;
 
-    public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public bannerTypeImages = BannerTypeImages;
+    public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
+    public contractStatus = ContractStatus;
     public globalError: string[] = [];
+    public isContractFinalized = false;
     public loading = true;
     public paymentInfo: IPayment;
-    public contractStatus = ContractStatus;
     public supplyPoint: ISupplyPoint;
     public supplyPointNewVersion: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
-    public isContractFinalized = false;
 
     constructor(
         private authService: AuthService,
