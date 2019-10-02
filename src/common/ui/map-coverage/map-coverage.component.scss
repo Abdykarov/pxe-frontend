@@ -113,13 +113,13 @@
 
 		// Media queries
 		@include media-breakpoint-up(xl) {
-			font-size: 1.7rem;
+			font-size: $h1-font-size;
 			line-height: ( 48 / 36 );
 		}
 	}
 
 	&__unit {
-		font-size: 0.80rem;
+		font-size: $small-font-size;
 
 		@include media-breakpoint-up(xl) {
 			font-size: $h1-font-size-snd;
