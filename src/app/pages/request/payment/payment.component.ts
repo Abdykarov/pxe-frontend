@@ -54,6 +54,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
     public supplyPoint: ISupplyPoint;
     public supplyPointNewVersion: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
+    public isContractFinalized = false;
 
     constructor(
         private authService: AuthService,
@@ -79,13 +80,13 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                 switchMap((supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
                     this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.WAITING_FOR_PAYMENT);
-                    const isContractFinalized = this.supplyPoint.contract &&
+                    this.isContractFinalized = this.supplyPoint.contract &&
                         R.indexOf(this.supplyPoint.contract.contractStatus, [
                             ContractStatus.CONCLUDED,
                             ContractStatus.CANCELED,
                             ContractStatus.TO_BE_CANCELED,
                         ]) >= 0;
-                    if (isContractFinalized) {
+                    if (this.isContractFinalized) {
                         this.finalizePaymentProgress();
                     }
                     if (this.supplyPoint.contract && this.supplyPoint.contract.contractStatus === ContractStatus.WAITING_FOR_PAYMENT &&
@@ -103,7 +104,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                 switchMap((paymentInfo: IPayment) => {
                     const firstContract = this.authService.currentUserValue.firstContract;
                     this.paymentInfo = paymentInfo;
-                    if (firstContract) {
+                    if (firstContract && this.isContractFinalized) {
                         return this.contractService.confirmFirstContractView();
                     } else {
                         return of({
