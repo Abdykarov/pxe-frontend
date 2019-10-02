@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 
 import { MapCoverageComponent } from './map-coverage.component';
 import { PipesModule } from 'src/common/pipes/pipes.module';
+import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
 import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
 import { TabsModule } from 'src/common/ui/tabs/tabs.module';
 
@@ -18,6 +19,7 @@ import { TabsModule } from 'src/common/ui/tabs/tabs.module';
     ],
     imports: [
         CommonModule,
+        PlaceloaderModule,
         PipesModule,
         SupplierModule,
         TabsModule,

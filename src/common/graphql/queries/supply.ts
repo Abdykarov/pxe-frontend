@@ -322,3 +322,17 @@ export const computeAndGetSupplyPointStatisticsQuery = gql`
         }
     }
 `;
+
+export const getSupplyPointGlobalStatisticsQuery = gql`
+    query getSupplyPointGlobalStatistics($input: Boolean){
+        getSupplyPointGlobalStatistics(includeHistoryData:$input) {
+            gasOfferCount,
+            powerOfferCount,
+            gasDeliveryCount,
+            powerDeliveryCount,
+            totalPossibleDeliveryCount,
+            registeredDeliveryCount,
+        }
+    }
+
+`;

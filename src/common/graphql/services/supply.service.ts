@@ -17,6 +17,7 @@ import {
     findSupplyPointsByContractStatusQuery,
     findSupplyPointsQuery,
     getCodelistByTypeQuery,
+    getSupplyPointGlobalStatisticsQuery,
     getSupplyPointQuery,
 } from 'src/common/graphql/queries/supply';
 import {
@@ -184,6 +185,16 @@ export class SupplyService {
         .watchQuery<any>({
             fetchPolicy: 'network-only',
             query: computeAndGetSupplyPointStatisticsQuery,
+        })
+        .valueChanges
+
+    public getSupplyPointGlobalStatistics = (input: boolean = false) => this.apollo
+        .watchQuery<any>({
+            fetchPolicy: 'network-only',
+            query: getSupplyPointGlobalStatisticsQuery,
+            variables: {
+                input,
+            },
         })
         .valueChanges
 }
