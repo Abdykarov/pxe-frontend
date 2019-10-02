@@ -59,7 +59,8 @@ export class AddressNotFoundComponent extends AbstractComponent implements OnDes
             .valueChanges
             .pipe(
                 takeUntil(this.destroy$),
-            ).subscribe(() => {
+            )
+            .subscribe(() => {
                 if (this.parentForm.get(this.whispererName).valid) {
                     this.sendValidAddressAction.emit(this.parentForm.get(this.whispererName).value);
                 }

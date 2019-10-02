@@ -50,7 +50,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
         new RegExp('^(.*?[' + CustomValidators.alphaCharacters + '].*?[ ,].*?[0-9].*?)|' +
             '(.*?[0-9].*?[ ,].*?[' + CustomValidators.alphaCharacters + '].*?)$');
 
-    public readonly UNIQUE_FIELD_NAME_END = '_not_found' + new Date().toTimeString();
+    public static readonly UNIQUE_FIELD_NAME_END = '_not_found_unique';
 
     @ViewChild('lndSelect')
     public lndSelect: SelectComponent;
@@ -117,7 +117,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     public typeahead: EventEmitter<any>;
     public isStartedSearching = false;
     public term = '';
-    public nameOfTemporaryWhisererFormGroup = this.whispererName + this.UNIQUE_FIELD_NAME_END;
+    public nameOfTemporaryWhisererFormGroup = '';
 
     private _showForm = false;
 
@@ -129,6 +129,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
                 this.fb.group(this.formFields.controls, this.formFields.options),
             );
         }
+
         this._showForm = showForm;
     }
 
@@ -166,6 +167,11 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
             }, (err) => {
                 this.setAddresses();
             });
+    }
+
+    ngOnInit() {
+        super.ngOnInit();
+        this.nameOfTemporaryWhisererFormGroup = this.whispererName + AddressWhispererComponent.UNIQUE_FIELD_NAME_END;
     }
 
     public setAddresses = (addresses = []) => {
