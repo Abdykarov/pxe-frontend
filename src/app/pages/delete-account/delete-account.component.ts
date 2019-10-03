@@ -90,12 +90,7 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
             )
             .subscribe((result: boolean) => {
                     this.loading = false;
-                    if (result) {
-                        this.router.navigate([CONSTS.PATHS.DELETED_ACCOUNT]);
-                    } else {
-                        this.globalError.push(graphQLMessages.cannotSendSms);
-                        scrollToElementFnc('top');
-                    }
+                    this.smsSent = true;
                     this.cd.markForCheck();
                 },
                 error => {
@@ -105,7 +100,6 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
                     this.cd.markForCheck();
                 },
             );
-        this.smsSent = true;
     }
 
     public submitVerification = (smsCode: string = null) => {
@@ -119,14 +113,7 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
                 (result: boolean) => {
                     this.loading = false;
                     this.formLoading = false;
-                    if (result) {
-                        this.router.navigate([CONSTS.PATHS.DELETED_ACCOUNT]);
-                    } else {
-                        // TODO - temporary
-                        // TODO check s monikou - konkretni zneni zpravy
-                        this.globalError.push(graphQLMessages.cannotUnregistration);
-                        scrollToElementFnc('top');
-                    }
+                    this.router.navigate([CONSTS.PATHS.DELETED_ACCOUNT]);
                     this.cd.markForCheck();
                 },
                 error => {
