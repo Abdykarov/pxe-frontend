@@ -2,6 +2,12 @@
  *	Error page(s)
  */
 
+// Core component import
+@import '../01_base/base.scss';
+
+@import 'src/common/ui/button/button.component.scss';
+
+
 .error-page {
 	background: $white;
 
