@@ -1,13 +1,13 @@
 <ng-template #canBeDeletedTemplate>
     <div class="col-12 mb-3">
-        <p [class.mb-3]="currentUser.phoneNumber">Mrzí nás, že PARC opouštíte, ale bránit vám v tom nemůžeme.</p>
-        <p *ngIf="currentUser.phoneNumber">Zrušení účtu a smazání veškerých svých dat v PARCu provedete ověřovacím SMS kódem.</p>
+        <p [class.mb-3]="currentUser.phoneNumber">Mrzí nás, že PARC4U opouštíte, ale bránit vám v tom nemůžeme.</p>
+        <p *ngIf="currentUser.phoneNumber">Zrušení účtu a smazání veškerých svých dat v PARC4U provedete ověřovacím SMS kódem.</p>
     </div>
     <div class="col-12">
         <div class="d-flex">
             <div class="mr-auto">
                 <lnd-button
-                    label="Zůstat v PARCu"
+                    label="Zůstat v PARC4U"
                     type="link"
                     (click)="redirectToUserProfile()">
                 </lnd-button>
@@ -39,7 +39,7 @@
 </ng-template>
 <ng-template #cantBeDeletedTemplate>
     <div class="col-12 mb-3">
-        <p class="mb-3">Mrzí nás, že PARC opouštíte, ale bránit vám v tom nemůžeme.</p>
+        <p class="mb-3">Mrzí nás, že PARC4U opouštíte, ale bránit vám v tom nemůžeme.</p>
         <p class="mb-3">K dnešnímu dni u nás máte aktivní smlouvy na dodávku energií, které je potřeba, před zrušením účtu, vypovědět.</p>
         <ul class="check-list check-list--less-offset">
             <li *ngFor="let supplyPoint of supplyPoints | slice:0:MAX_SUPPLY_POINTS_OF_RESULT_IN_CANT_DELETE_TEMPLATE">
@@ -51,7 +51,7 @@
     <div class="d-flex">
         <div class="mr-auto p-1">
             <lnd-button
-                label="Zůstat v PARCu"
+                label="Zůstat v PARC4U"
                 type="link"
                 (click)="redirectToUserProfile()">
             </lnd-button>

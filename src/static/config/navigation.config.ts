@@ -170,11 +170,15 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/dashboard',
                 },
                 {
-                    'label': 'Delete account ok',
-                    'url': '/basic/delete-account-ok',
+                    'label': 'Delete account - simple',
+                    'url': '/basic/delete-account-ok-simple',
                 },
                 {
-                    'label': 'Delete account failed',
+                    'label': 'Delete account - phone',
+                    'url': '/basic/delete-account-ok-with-phone',
+                },
+                {
+                    'label': 'Delete account - failed',
                     'url': '/basic/delete-account-failed',
                 },
                 {

@@ -40,9 +40,13 @@ import {
     dashboardPageRoutes,
 } from 'src/static/pages/dashboard/page.module';
 import {
-    deleteAccountOkPageRoutes,
-    DeleteAccountOkPageModule,
-} from 'src/static/pages/delete-account-ok/page.module';
+    deleteAccountOkWithPhonePageRoutes,
+    DeleteAccountOkWithPhonePageModule,
+} from 'src/static/pages/delete-account-ok-with-phone/page.module';
+import {
+    deleteAccountOkSimplePageRoutes,
+    DeleteAccountOkSimplePageModule,
+} from 'src/static/pages/delete-account-ok-simple/page.module';
 import {
     deleteAccountFailedPageRoutes,
     DeleteAccountFailedPageModule,
@@ -178,7 +182,8 @@ const routes: Routes = [
             ...contractSigningPageRoutes,
             ...dashboardPageRoutes,
             ...deleteAccountFailedPageRoutes,
-            ...deleteAccountOkPageRoutes,
+            ...deleteAccountOkSimplePageRoutes,
+            ...deleteAccountOkWithPhonePageRoutes,
             ...dropdownPageRoutes,
             ...formsPageRoutes,
             ...changePasswordBannerPageRoutes,
@@ -226,7 +231,8 @@ const routes: Routes = [
         ColorsPageModule,
         ContractSigningPageModule,
         DeleteAccountFailedPageModule,
-        DeleteAccountOkPageModule,
+        DeleteAccountOkSimplePageModule,
+        DeleteAccountOkWithPhonePageModule,
         DashboardPageModule,
         DropdownPageModule,
         FormsPageModule,

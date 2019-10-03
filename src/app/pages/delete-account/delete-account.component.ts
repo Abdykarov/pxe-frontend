@@ -20,13 +20,9 @@ import {
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import { IJwtPayload } from 'src/app/services/model/auth.model';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
-import {
-    parseGraphQLErrors,
-    scrollToElementFnc,
-} from 'src/common/utils';
+import { parseGraphQLErrors } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { graphQLMessages } from 'src/common/constants/errors.constant';
 
 @Component({
     selector: 'pxe-delete-account',
@@ -61,7 +57,7 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
             ])
             .pipe(
                 takeUntil(this.destroy$),
-                map(({data}) =>  data.findSupplyPointsByContractStatus),
+                map(({data}) => data.findSupplyPointsByContractStatus),
                 map(R.pipe(
                     R.sortBy(R.compose(R.toLower, R.prop('name'))),
                     R.uniqBy(R.prop('name')),
@@ -88,7 +84,8 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
                 takeUntil(this.destroy$),
                 map(({data}) =>  data.sendUnregisterSms),
             )
-            .subscribe((result: boolean) => {
+            .subscribe(
+                (result: boolean) => {
                     this.loading = false;
                     this.smsSent = true;
                     this.cd.markForCheck();
@@ -107,7 +104,7 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
         this.registrationService.makeUnregistration(smsCode)
             .pipe(
                 takeUntil(this.destroy$),
-                map(({data}) =>  data.makeUnregistration),
+                map(({data}) => data.makeUnregistration),
             )
             .subscribe(
                 (result: boolean) => {

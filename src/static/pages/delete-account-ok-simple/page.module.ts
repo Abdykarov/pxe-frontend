@@ -4,7 +4,7 @@ import { Routes } from '@angular/router';
 
 // own classes
 import { ButtonModule } from 'src/common/ui/button/button.module';
-import { DeleteAccountOkComponent } from './page';
+import { DeleteAccountOkSimpleComponent } from './page';
 import {
     LoginType,
     SignType,
@@ -13,10 +13,10 @@ import { VerificationFormModule } from 'src/common/containers/form/forms/verific
 
 @NgModule({
     declarations: [
-        DeleteAccountOkComponent,
+        DeleteAccountOkSimpleComponent,
     ],
     exports: [
-        DeleteAccountOkComponent,
+        DeleteAccountOkSimpleComponent,
     ],
     imports: [
         ButtonModule,
@@ -24,12 +24,12 @@ import { VerificationFormModule } from 'src/common/containers/form/forms/verific
         VerificationFormModule,
     ],
 })
-export class DeleteAccountOkPageModule {}
+export class DeleteAccountOkSimplePageModule {}
 
-export const deleteAccountOkPageRoutes: Routes = [
+export const deleteAccountOkSimplePageRoutes: Routes = [
     {
-        path: 'delete-account-ok',
-        component: DeleteAccountOkComponent,
+        path: 'delete-account-ok-simple',
+        component: DeleteAccountOkSimpleComponent,
         data: {
             isPublic: true,
             loginType: LoginType.NONE,

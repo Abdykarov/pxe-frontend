@@ -8,7 +8,6 @@ import {
     sendUnregisterSmsMutation,
 } from 'src/common/graphql/mutations';
 
-
 @Injectable({
     providedIn: 'root',
 })
@@ -34,7 +33,6 @@ export class RegistrationService {
                 withSmsCode: !!smsCode,
             },
         })
-
 
     public sendUnregisterSms = () => this.apollo
         .mutate({
