@@ -58,6 +58,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./supply-point-form.component.scss'],
 })
 export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent implements OnInit, OnChanges {
+
     @Input()
     public formValues: ISupplyPoint = null;
 
@@ -287,14 +288,11 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public submitForm = () => {
         this.resetCustomFieldError();
         this.triggerValidation();
+
         if (this.form.valid) {
             const form = {
                 ...this.form.value,
                 supplierId: this.form.value.supplierId && parseInt(this.form.value.supplierId.id, 10),
-                address: {
-                    ...this.form.value.address,
-                    orientationNumber: this.form.value.address.orientationNumber || this.form.value.address.descriptiveNumber,
-                },
                 expirationDate: this.form.value.expirationDate && convertDateToSendFormatFnc(this.form.value.expirationDate),
             };
             if (!R.isNil(form.annualConsumptionNT)) {
