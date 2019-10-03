@@ -9,28 +9,28 @@
                 </div>
             </div>
         </div>
-            <div *ngIf="loadingData"
-                 class="row">
-                <div class="col-12">
-                    <div class="loading">
-                        <lnd-placeloader [loading]="true"></lnd-placeloader>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="px-3 px-md-0">
-                                <h3>
-                                    V JEDNÁNÍ
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-md-10 offset-md-1">
-                            <ng-container *ngTemplateOutlet="supplierTemplatePower"></ng-container>
+        <div *ngIf="loadingData"
+             class="row">
+            <div class="col-12">
+                <div class="loading">
+                    <lnd-placeloader [loading]="true"></lnd-placeloader>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="px-3 px-md-0">
+                            <h3>
+                                V JEDNÁNÍ
+                            </h3>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12 col-md-10 offset-md-1">
+                        <ng-container *ngTemplateOutlet="supplierTemplatePower"></ng-container>
+                    </div>
+                </div>
             </div>
+        </div>
         <div class="row"
              *ngIf="!loadingData && globalError.length">
             <div class="col-12">
