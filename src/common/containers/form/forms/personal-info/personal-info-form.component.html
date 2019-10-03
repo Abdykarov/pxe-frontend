@@ -111,6 +111,7 @@
     ></lnd-form-field>
     <pxe-address-whisperer
         [error]="formError.address1 || form.controls.address1.errors"
+        [formFieldsParentForm]="formFields"
         [label]="isIndividual ? 'Trvalá adresa' : 'Sídlo firmy'"
         [parentForm]="form"
         [success]="form.controls.address1.valid && (form.controls.address1.touched || formError.address1)"
@@ -122,6 +123,7 @@
     <pxe-address-whisperer
         [disabled]="!getFieldValue('onlyAddress1')"
         [error]="formError.address2 || form.controls.address2.errors"
+        [formFieldsParentForm]="formFields"
         [label]="isIndividual ? 'Korespondeční adresa' : 'Fakturační adresa'"
         [parentForm]="form"
         [success]="form.controls.address2.valid && (form.controls.address2.touched || formError.address2)"

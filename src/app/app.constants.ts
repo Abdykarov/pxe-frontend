@@ -241,9 +241,9 @@ export const DEFAULT_QR_CODE_SETTING: IQRCodeSetting = {
 
 export const REGIONS: Array<IOption> = [
     {
-        'label': 'Praha',
-        'value': 'Praha',
-        'key': 'Praha',
+        'label': 'Hlavní město Praha',
+        'value': 'Hlavní město Praha',
+        'key': 'Hlavní město Praha',
     },
     {
         'label': 'Jihočeský kraj',
@@ -258,15 +258,18 @@ export const REGIONS: Array<IOption> = [
     {
         'label': 'Karlovarský kraj',
         'value': 'Karlovarský kraj',
-        'key': 'Karlovarský kraj'},
+        'key': 'Karlovarský kraj',
+    },
     {
         'label': 'Královéhradecký kraj',
         'value': 'Královéhradecký kraj',
-        'key': 'Královéhradecký kraj'},
+        'key': 'Královéhradecký kraj',
+    },
     {
         'label': 'Liberecký kraj',
         'value': 'Liberecký kraj',
-        'key': 'Liberecký kraj'},
+        'key': 'Liberecký kraj',
+    },
     {
         'label': 'Moravskoslezský kraj',
         'value': 'Moravskoslezský kraj',
@@ -275,7 +278,8 @@ export const REGIONS: Array<IOption> = [
     {
         'label': 'Olomoucký kraj',
         'value': 'Olomoucký kraj',
-        'key': 'Olomoucký kraj'},
+        'key': 'Olomoucký kraj',
+    },
     {
         'label': 'Pardubický kraj',
         'value': 'Pardubický kraj',
@@ -297,9 +301,9 @@ export const REGIONS: Array<IOption> = [
         'key': 'Ústecký kraj',
     },
     {
-        'label': 'Vysočina',
-        'value': 'Vysočina',
-        'key': 'Vysočina',
+        'label': 'Kraj Vysočina',
+        'value': 'Kraj Vysočina',
+        'key': 'Kraj Vysočina',
     },
     {
         'label': 'Zlínský kraj',

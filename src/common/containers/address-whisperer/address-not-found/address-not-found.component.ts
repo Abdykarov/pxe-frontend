@@ -7,7 +7,6 @@ import {
     Output,
     ViewChild,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 
 import { takeUntil } from 'rxjs/operators';
 
@@ -38,10 +37,10 @@ export class AddressNotFoundComponent extends AbstractComponent implements OnDes
     public formFields: IForm;
 
     @Input()
-    public nameOfTemporaryWhisererFormGroup: string;
+    public nameOfTemporaryWhispererFormGroup: string;
 
     @Input()
-    public parentForm: FormGroup;
+    public parentForm: any;
 
     @Input()
     public whispererName: string;
@@ -50,8 +49,6 @@ export class AddressNotFoundComponent extends AbstractComponent implements OnDes
     public sendValidAddressAction: EventEmitter<any> = new EventEmitter();
 
     public regionOptions: Array<IOption> = REGIONS;
-
-    public form: FormGroup;
 
     ngOnInit() {
         super.ngOnInit();

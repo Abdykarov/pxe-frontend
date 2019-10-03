@@ -13,9 +13,9 @@ import {
 import {
     FormBuilder,
     FormGroup,
-    Validators,
 } from '@angular/forms';
 
+import * as R from 'ramda';
 import {
     debounceTime,
     distinctUntilChanged,
@@ -74,6 +74,9 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     public formFields = addressNotFoundFields;
 
     @Input()
+    public formFieldsParentForm = null;
+
+    @Input()
     public label: string;
 
     @Input()
@@ -112,12 +115,11 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     @Input()
     public whispererName: string;
 
-
     public addresses: Array<IAddress> = [];
     public typeahead: EventEmitter<any>;
     public isStartedSearching = false;
     public term = '';
-    public nameOfTemporaryWhisererFormGroup = '';
+    public nameOfTemporaryWhispererFormGroup = '';
 
     private _showForm = false;
 
@@ -125,7 +127,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
         // delete v not-found kvuli disable
         if (showForm) {
             this.parentForm.addControl(
-                this.nameOfTemporaryWhisererFormGroup,
+                this.nameOfTemporaryWhispererFormGroup,
                 this.fb.group(this.formFields.controls, this.formFields.options),
             );
         }
@@ -136,7 +138,6 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     get showForm() {
         return this._showForm;
     }
-
 
     public hasTermGoodLength = term => term && term.length >= AddressWhispererComponent.ADDRESS_MIN_LENGTH;
 
@@ -152,7 +153,11 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
             .pipe(
                 tap((term) => {
                     this.term = term;
-                    this.isStartedSearching = !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(this.term);
+                    if (this.hasTermGoodLength(this.term) && !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(this.term)) {
+                        this.isStartedSearching = false;
+                    } else {
+                        this.isStartedSearching = !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(this.term);
+                    }
                     this.showForm = false;
                     this.setAddressValidator(true);
                 }),
@@ -171,20 +176,26 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
 
     ngOnInit() {
         super.ngOnInit();
-        this.nameOfTemporaryWhisererFormGroup = this.whispererName + AddressWhispererComponent.UNIQUE_FIELD_NAME_END;
+        this.nameOfTemporaryWhispererFormGroup = this.whispererName + AddressWhispererComponent.UNIQUE_FIELD_NAME_END;
     }
 
     public setAddresses = (addresses = []) => {
+        this.isStartedSearching = !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(this.term);
         this.addresses = addresses;
         this.cd.markForCheck();
     }
 
     public setAddressValidator = (required: boolean) => {
-        this.parentForm.get(this.whispererName)
-            .setValidators(required ? [Validators.required] : []);
-        this.parentForm.get(this.whispererName).markAsUntouched({
-            onlySelf: true,
-        });
+        if (this.formFieldsParentForm) {
+            let updatedValidators =  this.formFieldsParentForm.controls[this.whispererName][1];
+            if (!required) {
+                updatedValidators = R.omit(['required'], updatedValidators);
+            }
+            this.parentForm.controls[this.whispererName].setValidators(updatedValidators);
+            this.parentForm.get(this.whispererName).markAsUntouched({
+                onlySelf: true,
+            });
+        }
     }
 
     public fillAddressBySelf = (evt) => {

@@ -293,10 +293,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             const form = {
                 ...this.form.value,
                 supplierId: this.form.value.supplierId && parseInt(this.form.value.supplierId.id, 10),
-                address: {
-                    ...this.form.value.address,
-                    orientationNumber: this.form.value.address.orientationNumber || this.form.value.address.descriptiveNumber,
-                },
                 expirationDate: this.form.value.expirationDate && convertDateToSendFormatFnc(this.form.value.expirationDate),
             };
             if (!R.isNil(form.annualConsumptionNT)) {

@@ -102,6 +102,7 @@
             [error]="formError.address || form.controls.address.errors"
             [label]="'Adresa odběrného místa'"
             [parentForm]="form"
+            [formFieldsParentForm]="formFields"
             [success]="form.controls.address.valid && (form.controls.address.touched || formError.address)"
             [touched]="form.controls.address.touched || formError.address"
             [validationMessages]="formFields.validationMessages.address"
