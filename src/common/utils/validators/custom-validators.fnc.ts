@@ -21,11 +21,12 @@ import {
     isValidMobilePhoneNumber,
     isValidTelephoneNumber,
 } from './phone.validator.fnc';
+import { isValidPostCode } from 'src/common/utils/validators/post-code.validator.fnc';
 import { verifyIC } from './ico-validator.fnc';
 
 export class CustomValidators {
 
-    private static alphaCharacters = 'A-Za-z\u00AA\u00B5\u00BA\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC' +
+    public static alphaCharacters = 'A-Za-z\u00AA\u00B5\u00BA\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC' +
         '\u02EE\u0370-\u0374\u0376\u0377\u037A-\u037D\u037F\u0386\u0388-\u038A\u038C\u038E-\u03A1\u03A3-\u03F5\u03F7-\u0481\u048A-\u052F' +
         '\u0531-\u0556\u0559\u0561-\u0587\u05D0-\u05EA\u05F0-\u05F2\u0620-\u064A\u066E\u066F\u0671-\u06D3\u06D5\u06E5\u06E6\u06EE\u06EF' +
         '\u06FA-\u06FC\u06FF\u0710\u0712-\u072F\u074D-\u07A5\u07B1\u07CA-\u07EA\u07F4\u07F5\u07FA\u0800-\u0815\u081A\u0824\u0828' +
@@ -248,6 +249,21 @@ export class CustomValidators {
         return {
             ean: true,
         };
+    }
+
+    static postCode = (postCode): {} => {
+        if (postCode.pristine || R_.isNilOrEmpty(postCode.value)) {
+            return null;
+        }
+
+        if (isValidPostCode(postCode.value)) {
+            return null;
+        }
+
+        return {
+            postCode: true,
+        };
+
     }
 
     static ico = (ico): {} => {
