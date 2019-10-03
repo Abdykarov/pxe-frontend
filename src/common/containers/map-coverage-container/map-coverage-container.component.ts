@@ -39,11 +39,9 @@ export class MapCoverageContainerComponent extends AbstractComponent implements 
                 takeUntil(this.destroy$),
             ).subscribe(
                 (configCoverage: IMapCoverageConfig) => {
-                    setTimeout(() => {
                         this.loadingData = false;
                         this.configCoverage = configCoverage;
                         this.cd.markForCheck();
-                    }, 8000);
                 },
                 (error) => {
                     const { globalError } = parseGraphQLErrors(error);

@@ -46,6 +46,16 @@
 	}
 }
 
+.error-map-coverage {
+	height: 405px;
+	margin-top: 200px;
+
+	@include media-breakpoint-up(md) {
+		height: 245px;
+		margin-top: 110px;
+	}
+}
+
 .box-info {
 	position: relative;
 	width: 150px;

@@ -9,10 +9,9 @@
                 </div>
             </div>
         </div>
-        <ng-container *ngIf="loadingData">
-            <div class="row">
+            <div *ngIf="loadingData"
+                 class="row">
                 <div class="col-12">
-
                     <div class="loading">
                         <lnd-placeloader [loading]="true"></lnd-placeloader>
                     </div>
@@ -32,8 +31,32 @@
                     </div>
                 </div>
             </div>
-        </ng-container>
-        <lnd-tabs *ngIf="!loadingData">
+        <div class="row"
+             *ngIf="!loadingData && globalError.length">
+            <div class="col-12">
+                <div class="error-map-coverage">
+                    <lnd-info-banner
+                        [bannerTitle]="bannerTitle"
+                        [showButton]="false"
+                    ></lnd-info-banner>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="px-3 px-md-0">
+                            <h3>
+                                V JEDNÁNÍ
+                            </h3>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-12 col-md-10 offset-md-1">
+                            <ng-container *ngTemplateOutlet="supplierTemplatePower"></ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <lnd-tabs *ngIf="!loadingData && !globalError.length">
             <lnd-tab tabTitle="ELEKTŘINA">
                 <div class="row">
                     <div class="col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">

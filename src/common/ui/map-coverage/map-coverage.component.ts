@@ -15,6 +15,9 @@ import { SupplierComponent } from '../supplier/supplier.component';
 export class MapCoverageComponent {
 
     @Input()
+    public globalError: string[] = [];
+
+    @Input()
     public loadingData;
 
     @Input()
@@ -26,4 +29,5 @@ export class MapCoverageComponent {
     @Input()
     public supplierTemplatePower: TemplateRef<SupplierComponent>;
 
+    public readonly bannerTitle = 'Data se bohužel nepodařilo načíst.';
 }
