@@ -36,6 +36,16 @@
 	}
 }
 
+.loading {
+	height: 390px;
+	margin-top: 225px;
+
+	@include media-breakpoint-up(md) {
+		height: 205px;
+		margin-top: 150px;
+	}
+}
+
 .box-info {
 	position: relative;
 	width: 150px;

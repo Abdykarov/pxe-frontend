@@ -15,6 +15,9 @@ import { SupplierComponent } from '../supplier/supplier.component';
 export class MapCoverageComponent {
 
     @Input()
+    public loadingData;
+
+    @Input()
     public configCoverage: IMapCoverageConfig;
 
     @Input()

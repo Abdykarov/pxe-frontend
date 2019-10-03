@@ -12,6 +12,7 @@ import {
 import { AbstractComponent } from 'src/common/abstract.component';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
+import { parseGraphQLErrors } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-map-coverage-container',
@@ -19,8 +20,9 @@ import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.mo
     styleUrls: ['./map-coverage-container.component.scss'],
 })
 export class MapCoverageContainerComponent extends AbstractComponent implements OnInit {
-
+    public globalError: string[] = [];
     public configCoverage: IMapCoverageConfig;
+    public loadingData = true;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -37,10 +39,17 @@ export class MapCoverageContainerComponent extends AbstractComponent implements 
                 takeUntil(this.destroy$),
             ).subscribe(
                 (configCoverage: IMapCoverageConfig) => {
-                    this.configCoverage = configCoverage;
-                    this.cd.markForCheck();
+                    setTimeout(() => {
+                        this.loadingData = false;
+                        this.configCoverage = configCoverage;
+                        this.cd.markForCheck();
+                    }, 8000);
                 },
                 (error) => {
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.loadingData = false;
+                    this.cd.markForCheck();
                 },
             );
 
