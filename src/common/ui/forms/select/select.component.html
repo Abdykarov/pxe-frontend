@@ -54,6 +54,11 @@
                     <ng-container *ngTemplateOutlet="templateLabel; context: {item: item}"></ng-container>
                 </ng-template>
             </ng-container>
+            <ng-container *ngIf="templateNotFound">
+                <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
+                    <ng-container *ngTemplateOutlet="templateNotFound; context: {searchTerm: searchTerm}"></ng-container>
+                </ng-template>
+            </ng-container>
         </ng-select>
         <div
             *ngIf="!!appendButtonIcon"

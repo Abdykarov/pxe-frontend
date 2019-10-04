@@ -4,12 +4,16 @@ import {
     Input,
     Output,
     TemplateRef,
+    ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import * as R from 'ramda';
-import { NgSelectConfig } from '@ng-select/ng-select';
+import {
+    NgSelectComponent,
+    NgSelectConfig,
+} from '@ng-select/ng-select';
 
 import { defaultSelectConfig } from './select.config';
 import { DynamicPipe } from 'src/common/pipes/dynamic/dynamic.pipe';
@@ -24,6 +28,10 @@ import { IValidationMessages } from '../models/validation-messages.model';
     encapsulation: ViewEncapsulation.None,
 })
 export class SelectComponent {
+
+    @ViewChild('select')
+    private select: NgSelectComponent;
+
     @Output()
     public appendButtonAction?: EventEmitter<any> = new EventEmitter();
 
@@ -97,6 +105,9 @@ export class SelectComponent {
     public templateLabel?: TemplateRef<any>;
 
     @Input()
+    public templateNotFound?: TemplateRef<any>;
+
+    @Input()
     public typeahead?: EventEmitter<any>;
 
     @Input()
@@ -112,6 +123,14 @@ export class SelectComponent {
     }
 
     public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages, this.dynamicPipe);
+
+    public hideDialog = () => {
+        this.select.close();
+        setTimeout(() => {
+            window.scrollTo(window.scrollX, window.scrollY - 1);
+            window.scrollTo(window.scrollX, window.scrollY + 1);
+        });
+    }
 
     constructor(
         private config: NgSelectConfig,
