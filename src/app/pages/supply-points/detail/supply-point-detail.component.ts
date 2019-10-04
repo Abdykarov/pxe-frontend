@@ -205,8 +205,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
         this.smsSent = null;
     }
 
-    public openDocument(contractId: string, documentType: IDocumentType) {
-        const windowReference = window && window.open();
+    public saveDocument(contractId: string, documentType: IDocumentType) {
         this.documentLoading = true;
         this.globalError = [];
         this.documentService.getDocument(contractId, documentType)
@@ -216,19 +215,13 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
                     this.documentLoading = false;
-                    const canBeClosed = this.documentService.documentOpen(responseDataDocument, windowReference);
-                    if (windowReference && canBeClosed) {
-                        windowReference.close();
-                    }
+                    this.documentService.documentSave(responseDataDocument);
                     this.cd.markForCheck();
                 },
                 (error) => {
                     const message = parseRestAPIErrors(error);
                     this.documentLoading = false;
                     this.globalError.push(message);
-                    if (windowReference) {
-                        windowReference.close();
-                    }
                     this.cd.markForCheck();
                 },
             );
