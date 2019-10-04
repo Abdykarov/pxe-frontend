@@ -37,22 +37,18 @@
 }
 
 .loading {
-	height: 390px;
-	margin-top: 225px;
+	margin: ( $spacer * 10.5 ) 0 ( $spacer * 13 );
 
 	@include media-breakpoint-up(md) {
-		height: 205px;
-		margin-top: 150px;
+		margin: ( $spacer * 7.5 ) 0 ( $spacer * 7.75 );
 	}
 }
 
 .error-map-coverage {
-	height: 405px;
-	margin-top: 200px;
+	margin: ( $spacer * 8 ) 0 ( $spacer * 12 );
 
 	@include media-breakpoint-up(md) {
-		height: 245px;
-		margin-top: 110px;
+		margin: ( $spacer * 5.5 ) 0 ( $spacer * 6.75 );
 	}
 }
 
