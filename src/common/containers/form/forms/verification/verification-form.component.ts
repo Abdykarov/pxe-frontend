@@ -55,7 +55,7 @@ export class VerificationFormComponent extends AbstractFormComponent {
     }
 
     public submitSms = () => {
-        this.resetFormError();
+        this.resetFormError(false);
         this.customAction.emit();
     }
 }
