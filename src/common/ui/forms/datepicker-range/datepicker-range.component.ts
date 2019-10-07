@@ -39,6 +39,9 @@ export class DatepickerRangeComponent {
     @Input()
     public appendButtonIcon?: string;
 
+    @Output()
+    public blur?: EventEmitter<any> = new EventEmitter();
+
     @Input()
     public config: Partial<BsDatepickerConfig> = new BsDatepickerConfig();
 
@@ -50,6 +53,9 @@ export class DatepickerRangeComponent {
 
     @Input()
     public error?: any;
+
+    @Output()
+    public focus?: EventEmitter<any> = new EventEmitter();
 
     @Input()
     public id: string;
@@ -84,15 +90,21 @@ export class DatepickerRangeComponent {
     @Input()
     public maxDate?: Date;
 
+    public inputFocused = false;
+
     constructor(
         private cd: ChangeDetectorRef,
         private dynamicPipe: DynamicPipe,
         private localeService: BsLocaleService,
     ) {
-        csLocale.invalidDate = '';
+        this.resetDatepickerLocale();
+        this.config = defaultDatepickerConfig;
+    }
+
+    public resetDatepickerLocale = (invalidMessage = '') => {
+        csLocale.invalidDate = invalidMessage;
         defineLocale(locale, csLocale);
         this.localeService.use(locale);
-        this.config = defaultDatepickerConfig;
     }
 
     public onShowPicker = (event) => {

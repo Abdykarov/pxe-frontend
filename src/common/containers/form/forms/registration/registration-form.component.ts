@@ -28,13 +28,9 @@ export class RegistrationFormComponent extends AbstractFormComponent {
         super(fb);
     }
 
-    public submitForm = () => {
-        this.resetCustomFieldError();
-        this.triggerValidation();
-        if (this.form.valid) {
-            const val = this.form.value;
-            val.preregistration = !this.isSignUp;
-            this.submitAction.emit(val);
-        }
+    public submitValidForm = () => {
+        const val = this.form.value;
+        val.preregistration = !this.isSignUp;
+        this.submitAction.emit(val);
     }
 }

@@ -46,6 +46,7 @@
             *ngIf="form.controls.signatoryName.status !== 'DISABLED' && form.controls.signatorySurname.status !== 'DISABLED'"
             label="Jméno a příjmení podepisující osoby"
             labelFor="signatoryName"
+            [wrapperFocused]="(fieldWrapperFocused$ | async) === 'signatoryName' || (fieldWrapperFocused$ | async) === 'signatorySurname'"
             [error]="((form.controls.signatoryName.touched || formError.signatoryName) && (formError.signatoryName || form.controls.signatoryName.errors)) ||
                      ((form.controls.signatorySurname.touched || formError.signatorySurname) && (formError.signatorySurname || form.controls.signatorySurname.errors))"
             [validationMessages]="((form.controls.signatoryName.touched || formError.signatoryName) && (formError.signatoryName || form.controls.signatoryName.errors) && formFields.validationMessages.signatoryName) ||
@@ -57,6 +58,9 @@
                     [error]="formError.signatoryName || form.controls.signatoryName.errors"
                     [formControl]="form.controls.signatoryName"
                     [id]="'signatoryName'"
+                    (focus)="fieldWrapperFocus('signatoryName')"
+                    (blur)="fieldWrapperBlur()"
+                    [inputFocused]="(fieldWrapperFocused$ | async) === 'signatoryName' || (fieldWrapperFocused$ | async) === 'signatorySurname'"
                     label="Jméno podepisující osoby"
                     [showErrorMessage]="false"
                     [success]="form.controls.signatoryName.valid && (form.controls.signatoryName.touched || formError.signatoryName)"
@@ -70,6 +74,9 @@
                     [error]="formError.signatorySurname || form.controls.signatorySurname.errors"
                     [formControl]="form.controls.signatorySurname"
                     [id]="'signatorySurname'"
+                    (focus)="fieldWrapperFocus('signatorySurname')"
+                    (blur)="fieldWrapperBlur()"
+                    [inputFocused]="(fieldWrapperFocused$ | async) === 'signatoryName' || (fieldWrapperFocused$ | async) === 'signatorySurname'"
                     label="Příjmení podepisující osoby"
                     [showErrorMessage]="false"
                     [success]="form.controls.signatorySurname.valid && (form.controls.signatorySurname.touched || formError.signatorySurname)"
@@ -135,6 +142,7 @@
         label="Bankovní účet"
         labelFor="bankAccountNumber"
         subtext="Číslo bankovního účtu s předčíslím uveďte ve tvaru XX-XXXXXXXXXX"
+        [wrapperFocused]="(fieldWrapperFocused$ | async) === 'bankAccountNumber' || (fieldWrapperFocused$ | async) === 'bankCode'"
         [error]="((form.controls.bankAccountNumber.touched || formError.bankAccountNumber) && (formError.bankAccountNumber || form.controls.bankAccountNumber.errors)) ||
                  ((form.controls.bankCode.touched || formError.bankCode) && (formError.bankCode || form.controls.bankCode.errors))"
         [validationMessages]="((form.controls.bankAccountNumber.touched || formError.bankAccountNumber) && (formError.bankAccountNumber || form.controls.bankAccountNumber.errors) && formFields.validationMessages.bankAccountNumber) ||
@@ -147,6 +155,9 @@
                         [id]="'bankAccountNumber'"
                         label="Bankovní účet"
                         subtext="Číslo bankovního účtu s předčíslím uveďte ve tvaru XX-XXXXXXXXXX"
+                        (focus)="fieldWrapperFocus('bankAccountNumber')"
+                        (blur)="fieldWrapperBlur()"
+                        [inputFocused]="(fieldWrapperFocused$ | async) === 'bankAccountNumber' || (fieldWrapperFocused$ | async) === 'bankCode'"
                         [showErrorMessage]="false"
                         [success]="form.controls.bankAccountNumber.valid && (form.controls.bankAccountNumber.touched || formError.bankAccountNumber)"
                         [touched]="form.controls.bankAccountNumber.touched || formError.bankAccountNumber"
@@ -159,6 +170,9 @@
                         [formControl]="form.controls.bankCode"
                         [id]="'bankCode'"
                         label=""
+                        (focus)="fieldWrapperFocus('bankCode')"
+                        (blur)="fieldWrapperBlur()"
+                        [inputFocused]="(fieldWrapperFocused$ | async) === 'bankAccountNumber' || (fieldWrapperFocused$ | async) === 'bankCode'"
                         [showErrorMessage]="false"
                         [success]="form.controls.bankCode.valid && (form.controls.bankCode.touched || formError.bankCode)"
                         [touched]="form.controls.bankCode.touched || formError.bankCode"
@@ -170,6 +184,7 @@
     <pxe-field-wrapper
         label="Telefonní číslo"
         labelFor="phonePrefix"
+        [wrapperFocused]="(fieldWrapperFocused$ | async) === 'phonePrefix' || (fieldWrapperFocused$ | async) === 'phone'"
         [error]="((form.controls.phonePrefix.touched || formError.phonePrefix) && (formError.phonePrefix || form.controls.phonePrefix.errors)) ||
                  ((form.controls.phone.touched || formError.phone) && (formError.phone || form.controls.phone.errors))"
         [validationMessages]="((form.controls.phonePrefix.touched || formError.phonePrefix) && (formError.phonePrefix || form.controls.phonePrefix.errors) && formFields.validationMessages.phonePrefix) ||
@@ -182,6 +197,9 @@
                     [formControl]="form.controls.phonePrefix"
                     [id]="'phonePrefix'"
                     label="Telefonní číslo"
+                    (focus)="fieldWrapperFocus('phonePrefix')"
+                    (blur)="fieldWrapperBlur()"
+                    [inputFocused]="(fieldWrapperFocused$ | async) === 'phonePrefix' || (fieldWrapperFocused$ | async) === 'phone'"
                     [showErrorMessage]="false"
                     [success]="form.controls.phonePrefix.valid && (form.controls.phonePrefix.touched || formError.phonePrefix)"
                     [touched]="form.controls.phonePrefix.touched || formError.phonePrefix"
@@ -194,6 +212,9 @@
                     [formControl]="form.controls.phone"
                     [id]="'phone'"
                     label=""
+                    (focus)="fieldWrapperFocus('phonePrefix')"
+                    (blur)="fieldWrapperBlur()"
+                    [inputFocused]="(fieldWrapperFocused$ | async) === 'phonePrefix' || (fieldWrapperFocused$ | async) === 'phone'"
                     [showErrorMessage]="false"
                     [success]="form.controls.phone.valid && (form.controls.phone.touched || formError.phone)"
                     [touched]="form.controls.phone.touched || formError.phone"

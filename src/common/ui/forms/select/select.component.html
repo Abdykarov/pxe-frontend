@@ -8,7 +8,7 @@
         [class.input-group--append]="!!appendButtonIcon"
         [class.input-group--append-button-icon]="!!appendButtonIcon">
         <label
-            (click)="select.open()"
+            (click)="select.open();"
             class="ng-select-label">
             {{ label }}
         </label>
@@ -20,18 +20,21 @@
             [searchable]="searchable"
             [formControl]="parentForm.controls[selectName]"
             [bindValue]="bindValue"
+            (blur)="inputFocused = false;blur.emit($event)"
+            (focus)="inputFocused = true;focus.emit($event)"
             bindLabel="label"
             [placeholder]="placeholder"
             [class.is-disabled]="disabledField"
             [attr.tabindex]="!!disabledField ? '-1' : null"
             [attr.disabled]="!!disabledField ? 'disabled' : null"
-            [class.is-invalid]="!!error && !!touched"
+            [class.is-invalid]="(!!error && !!touched) && !inputFocused"
+            [class.focus]="inputFocused"
             [class.is-valid]="success"
             [class.is-warning]="warning"
             notFoundText="Nenalezeny žádné záznamy"
             [typeahead]="typeahead"
             [searchFn]="customSearchFn"
-            (close)="close.emit()">
+            (close)="close.emit();">
             <ng-template
                     ng-option-tmp
                     let-item="item"
