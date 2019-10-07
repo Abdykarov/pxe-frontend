@@ -60,6 +60,10 @@ export const errorFieldMessages =  {
     circuitBreakerId: {
         required: 'Vyberte ze seznamu, jakou máte velikost jističe.',
     },
+    city: {
+        required: 'Vyplňte město nebo obec.',
+        maxlengthCity: 'Použít můžete maximálně {requiredLength} znaků.',
+    },
     commodityType: {
         required: 'Zvolte komoditu.',
     },
@@ -87,6 +91,10 @@ export const errorFieldMessages =  {
     },
     depositPaymentType: {
         required: 'Vyberte ze seznamu, jak chcete platit zálohy.',
+    },
+    descriptiveNumber: {
+        required: 'Vyplňte číslo popisné.',
+        maxlengthDescriptiveNumber: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     dic: {
         dicPrefix: 'Vyplňte své DIČ.',
@@ -183,6 +191,9 @@ export const errorFieldMessages =  {
     offerValidFromTo: {
         required: 'Vyplňte odkdy dokdy je nabídka platná.',
     },
+    orientationNumber: {
+        maxlengthOrientationNumber: 'Použít můžete maximálně {requiredLength} znaků.',
+    },
     phasesId: {
         required: 'Vyberte ze seznamu, jakou máte fázi.',
     },
@@ -206,12 +217,19 @@ export const errorFieldMessages =  {
         required: `Vyplňte předvolbu pro ČR ${CONSTS.TELEPHONE_PREFIX_CZ}.`,
         invalidPhoneNumberPrefix: `Vyplňte správnou předvolbu pro ČR ${CONSTS.TELEPHONE_PREFIX_CZ}.`,
     },
+    region: {
+        required: 'Vyberte ze seznamu kraj.',
+    },
     signatoryPosition: {
         required: 'Vyplňte funkci, kterou má ve společnosti podepisující osoba.',
         maxlengthSignatoryPosition: 'Použít můžete maximálně 80 znaků.',
     },
     smsCode: {
         required: 'Vyplňte kód, který vám přišel v SMS.',
+    },
+    street: {
+        required: 'Vyplňte ulici.',
+        maxlengthStreet: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
@@ -228,5 +246,9 @@ export const errorFieldMessages =  {
     },
     timeToContractEndPeriodId: {
         required: 'Vyberte ze seznamu odpovídající časový údaj.',
+    },
+    postCode: {
+        required: 'Vyplňte PSČ.',
+        pattern: 'Použít můžete pouze 5 číslic.',
     },
 };
