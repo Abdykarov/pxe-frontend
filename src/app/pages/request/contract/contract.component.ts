@@ -96,7 +96,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
             );
     }
 
-    public saveDocument(contractId: string, documentType: IDocumentType) {
+    public saveDocument = (contractId: string, documentType: IDocumentType) => {
         this.documentLoading = true;
         this.globalError = [];
         this.documentService.getDocument(contractId, documentType)
@@ -119,7 +119,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     }
 
     // v pripade budouci zmeny
-    public openDocument(contractId: string, documentType: IDocumentType) {
+    public openDocument = (contractId: string, documentType: IDocumentType) => {
         const windowReference = window && window.open();
         this.documentLoading = true;
         this.globalError = [];
