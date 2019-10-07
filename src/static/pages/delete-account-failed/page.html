@@ -1,46 +1,37 @@
-<div class="container-content">
-    <div class="container-fluid">
-        <div class="row text-center mb-md-6">
-            <div class="col-12 col-md-6 offset-md-3">
-                <h1>Zrušení uživatelského účtu </h1>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-12 col-xl-10 offset-xl-1">
-                <div class="page-box">
-                    <div class="col-12 mb-3">
-                        <p class="mb-3">
-                        Mrzí nás, že PARC4U opouštíte, ale bránit vám v tom nemůžeme.
-                        </p>
-                        <p class="mb-3">
-                        K dnešnímu dni u nás máte aktivní smlouvy na dodávku energií, které je potřeba, před zrušením účtu, vypovědět.
-                        </p>
-                        <ul class="check-list check-list--less-offset">
-                            <li>Byt - Praha</li>
-                            <li>Byt - Brno</li>
-                        </ul>
-                    </div>
-                    <div class="d-flex">
-                        <div class="mr-auto p-1">
-                            <lnd-button
-                                label="Zůstat v PARC4U"
-                                type="link"
-                                (click)="redirectToUserProfile($event)">
-                            </lnd-button>
-                        </div>
-                        <div class="p-1">
-                            <lnd-button
-                                label="Přejít na smlouvy"
-                                type="primary"
-                                (click)="redirectToConcludedContract($event)">
-                            </lnd-button>
-                        </div>
-                    </div>
+<div class="row text-center mb-md-6">
+    <div class="col-12 col-lg-6 offset-lg-3">
+        <h1>Zrušení uživatelského účtu </h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-xl-10 offset-xl-1">
+        <div class="page-box">
+            <p class="mb-3">
+                Mrzí nás, že PARC4U opouštíte, ale bránit vám v tom nemůžeme.
+            </p>
+            <p>
+                K dnešnímu dni u nás máte aktivní smlouvy na dodávku energií, které je potřeba, před zrušením účtu, vypovědět.
+            </p>
+            <ul class="check-list check-list--less-offset">
+                <li>Byt - Praha</li>
+                <li>Byt - Brno</li>
+            </ul>
+            <div class="row justify-content-between">
+                <div class="col-auto mr-3 mb-3 mb-md-0">
+                    <lnd-button
+                        label="Zůstat v PARC4U"
+                        type="link"
+                        (click)="redirectToUserProfile($event)">
+                    </lnd-button>
+                </div>
+                <div class="col-auto">
+                    <lnd-button
+                        label="Přejít na smlouvy"
+                        type="primary"
+                        (click)="redirectToConcludedContract($event)">
+                    </lnd-button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
