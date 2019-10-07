@@ -18,7 +18,7 @@ export class MapCoverageComponent {
     public globalError: string[] = [];
 
     @Input()
-    public loadingData;
+    public loadingData = false;
 
     @Input()
     public configCoverage: IMapCoverageConfig;
