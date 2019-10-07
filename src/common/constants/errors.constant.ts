@@ -103,9 +103,11 @@ export const errorFieldMessages =  {
     },
     eic: {
         required:  'Vyplňte unikátní 16místný identifikační kód odběrného místa.',
-        eic: 'Správný identifikační kód odběrného místa má 16 znaků, obsahuje pouze čísla a písmena a vždy začíná 27ZG.',
-        nonUniqueEic: 'EIC již evidujeme.',
-        invalidEicOnPosition: 'Vyplňen nevalidní EIC.',
+        eic: 'Správný identifikační kód odběrného místa má 16 znaků, obsahuje pouze čísla a písmena, ' +
+            'vždy začíná 27ZG a na 5.-7. pozici nesmí mít číslo 800.',
+        nonUniqueEic: 'Vyplněný identifikační kód odběrného místa již registrujeme.',
+        invalidEicOnPosition: 'Správný identifikační kód odběrného místa má 16 znaků, obsahuje pouze čísla' +
+            ' a písmena, vždy začíná 27ZG a na 5.-7. pozici nesmí mít číslo 800.',
     },
     email: {
         required: 'Vyplňte svůj e-mail.',
