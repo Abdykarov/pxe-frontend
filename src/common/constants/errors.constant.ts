@@ -97,9 +97,10 @@ export const errorFieldMessages =  {
     },
     ean: {
         required: 'Vyplňte unikátní 18místné identifikační číslo odběrného místa.',
-        ean: 'Správné identifikační číslo odběrného místa má 18 znaků, obsahuje pouze čísla a vždy začíná 8591824.',
-        invalidEan: 'Správné identifikační číslo odběrného místa má 18 znaků, obsahuje pouze čísla a vždy začíná 8591824.',
-        invalidEanOnTenthPosition: 'EAN nesmí obsahovat 0 a 9 na desáté pozici.',
+        ean: 'Správné identifikační číslo odběrného místa má 18 znaků, obsahuje pouze čísla,' +
+            ' vždy začíná 8591824 a na 10. pozici nesmí mít číslici 0 ani 9.\t',
+        invalidEan: 'Správné identifikační číslo odběrného místa má 18 znaků, obsahuje pouze' +
+            ' čísla, vždy začíná 8591824 a na 10. pozici nesmí mít číslici 0 ani 9.\t',
     },
     eic: {
         required:  'Vyplňte unikátní 16místný identifikační kód odběrného místa.',
