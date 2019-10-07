@@ -87,7 +87,7 @@ export class SupplyService {
         .valueChanges
 
     public createPowerSupplyPoint = (supplyPoint: ISupplyPoint, powerAttributes: ISupplyPointPowerAttributes) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: createPowerSupplyPointMutation,
             variables: {
                 supplyPoint,
@@ -96,7 +96,7 @@ export class SupplyService {
         })
 
     public createGasSupplyPoint = (supplyPoint: ISupplyPoint, gasAttributes: ISupplyPointGasAttributes) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: createGasSupplyPointMutation,
             variables: {
                 supplyPoint,
@@ -109,7 +109,7 @@ export class SupplyService {
         supplyPoint: ISupplyPoint,
         powerAttributes: ISupplyPointPowerAttributes,
     ) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: updatePowerSupplyPointMutation,
             variables: {
                 supplyPointId,
@@ -123,7 +123,7 @@ export class SupplyService {
         supplyPoint: ISupplyPoint,
         gasAttributes: ISupplyPointGasAttributes,
     ) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: updateGasSupplyPointMutation,
             variables: {
                 supplyPointId,
@@ -137,7 +137,7 @@ export class SupplyService {
         supplyPointUpdate: ISupplyPoint,
         attributes: ISupplyPointPowerAttributes,
     ) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: updatePowerSupplyPointWithContractMutation,
             variables: {
                 supplyPointId,
@@ -151,7 +151,7 @@ export class SupplyService {
         supplyPointUpdate: ISupplyPoint,
         attributes: ISupplyPointGasAttributes,
     ) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: updateGasSupplyPointWithContractMutation,
             variables: {
                 supplyPointId,

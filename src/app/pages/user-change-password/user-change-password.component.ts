@@ -62,8 +62,9 @@ export class UserChangePasswordComponent extends AbstractComponent {
                 error => {
                     this.globalError = [];
                     this.formLoading = false;
-                    const { globalError } = parseGraphQLErrors(error);
+                    const { globalError, fieldError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
+                    this.fieldError = fieldError;
                     this.cd.markForCheck();
                 },
             );
