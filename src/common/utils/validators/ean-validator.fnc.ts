@@ -9,7 +9,7 @@ export class EanValidator {
             return false;
         }
 
-        return EanValidator.validateGtin(barcode) && EanValidator.validateCharAtTenPosition(barcode);
+        return EanValidator.validateGtin(barcode) && EanValidator.validateCharInTenthPosition(barcode);
     }
 
     static validateGtin = (value): boolean => {
@@ -36,7 +36,7 @@ export class EanValidator {
         return calcChecksum === checksum;
     }
 
-    static validateCharAtTenPosition = (ean: string): boolean => {
+    static validateCharInTenthPosition = (ean: string): boolean => {
         if (ean.length < 10) {
             return true;
         }
