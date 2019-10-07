@@ -226,4 +226,35 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
                 },
             );
     }
+
+    // v pripade budouci zmeny
+    public openDocument(contractId: string, documentType: IDocumentType) {
+        const windowReference = window && window.open();
+        this.documentLoading = true;
+        this.globalError = [];
+        this.documentService.getDocument(contractId, documentType)
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                (responseDataDocument: IResponseDataDocument) => {
+                    this.documentLoading = false;
+                    const canBeClosed = this.documentService.documentOpen(responseDataDocument, windowReference);
+                    if (windowReference && canBeClosed) {
+                        windowReference.close();
+                    }
+                    this.cd.markForCheck();
+                },
+                (error) => {
+                    const message = parseRestAPIErrors(error);
+                    this.documentLoading = false;
+                    this.globalError.push(message);
+                    if (windowReference) {
+                        windowReference.close();
+                    }
+                    this.cd.markForCheck();
+                },
+            );
+    }
+
 }
