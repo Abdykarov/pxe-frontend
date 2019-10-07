@@ -12,7 +12,7 @@ import { Apollo } from 'apollo-angular';
 import { first } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { ApolloService } from 'src/app/services/apollo-service';
+import { ApolloService } from 'src/app/services/apollo.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CONSTS } from 'src/app/app.constants';
 import { defaultState } from 'src/app/pages/logout/logout-page.config';
