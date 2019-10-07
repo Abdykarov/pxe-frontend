@@ -34,6 +34,7 @@ export class AuthService {
     public currentUser$: Observable<IJwtPayload>;
     private expiresTime = new Date().getTime() + (CONSTS.DEFAULT_EXPIRATION * 1000);
     private token: string;
+    private uuid: string = null;
 
     constructor(
         private cookiesService: CookiesService,
@@ -57,6 +58,12 @@ export class AuthService {
         }
     }
 
+    checkUuid = () => {
+        this.uuid = window.sessionStorage.getItem('uuid');
+    }
+
+    generateUuid = () => 'CCCCC';
+
     isLogged = (): boolean  => {
         return !!this.token;
     }
@@ -77,7 +84,9 @@ export class AuthService {
         return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { email, password })
             .pipe(
                 map((response: ILoginResponse) => {
-                    return this.manageLoginResponse(response);
+                    console.log('%c ***** LOGIN *****', 'background: #bada55; color: #000; font-weight: bold');
+                    const uuid = this.generateUuid();
+                    return this.manageLoginResponse(response, uuid);
                 }),
             );
     }
@@ -119,11 +128,13 @@ export class AuthService {
 
     public cleanUserData = () => {
         this.token = null;
+        this.uuid = null;
+        window.sessionStorage.clear();
         this.cookiesService.remove(this.cookieName);
         this.currentUserSubject$.next(null);
     }
 
-    public manageLoginResponse = (response: ILoginResponse) => {
+    public manageLoginResponse = (response: ILoginResponse, uuid: string = this.uuid) => {
         if (response && response.token) {
             const jwtPayload = this.getJwtPayload(response.token);
             // if (jwtPayload.exp) {
@@ -131,7 +142,9 @@ export class AuthService {
             // }
             const user = {
                 token: response.token,
+                uuid: uuid,
             };
+            window.sessionStorage.setItem('uuid', uuid);
             this.cookiesService.setObject(this.cookieName, user, this.expiresTime);
             this.checkLogin();
             this.currentUserSubject$.next(jwtPayload);
@@ -140,6 +153,8 @@ export class AuthService {
     }
 
     public getToken = (): string => this.token;
+
+    public getUuid = (): string => this.uuid;
 
     public logoutForced = () => {
         const state = {
