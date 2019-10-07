@@ -57,6 +57,11 @@ export class EicValidator {
 
         const cc = EicValidator.calcCheckChar(str);
 
-        return !(str[15] !== cc || (str[15] === cc && cc === '-')) && !(str.substr(4, 3) === '800');
+        return !(str[15] !== cc || (str[15] === cc && cc === '-')) && EicValidator.validateDistributionPositions(str.substr(4, 3));
+    }
+
+    public static validateDistributionPositions = (str: string): boolean => {
+        const allowValues = [100, 200, 300, 400, 500, 600, 700, 900];
+        return allowValues.includes(Number(str));
     }
 }
