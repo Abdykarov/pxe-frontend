@@ -256,5 +256,4 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
                 },
             );
     }
-
 }
