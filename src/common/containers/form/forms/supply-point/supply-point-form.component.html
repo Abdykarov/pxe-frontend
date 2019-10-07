@@ -103,7 +103,7 @@
             *ngIf="form.controls.eic.status !== 'DISABLED'"
             [appendButtonIcon]="helpDocuments && helpDocuments['eic'] ? 'icon--info' : null"
             (appendButtonAction)="showHelp('eic', 'EIC')"
-            [error]="formError.eic || form.controls.eic.errors"
+            [error]="formError.eic || formError.ean || form.controls.eic.errors"
             [formControl]="form.controls.eic"
             [id]="'eic'"
             label="EIC"

@@ -57,6 +57,6 @@ export class EicValidator {
 
         const cc = EicValidator.calcCheckChar(str);
 
-        return !(str[15] !== cc || (str[15] === cc && cc === '-')) && !(eic.substr(4, 3) === '800');
+        return !(str[15] !== cc || (str[15] === cc && cc === '-')) && !(str.substr(4, 3) === '800');
     }
 }
