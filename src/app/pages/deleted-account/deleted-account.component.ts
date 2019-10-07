@@ -7,7 +7,7 @@ import { Location } from '@angular/common';
 import { Apollo } from 'apollo-angular';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { ApolloService } from 'src/app/services/apollo-service';
+import { ApolloService } from 'src/app/services/apollo.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CONSTS } from 'src/app/app.constants';
 
