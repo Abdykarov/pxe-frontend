@@ -20,16 +20,20 @@
 <pxe-field-wrapper
     label=""
     labelFor="descriptiveNumber"
+    [wrapperFocused]="(fieldWrapperFocused$ | async) === whispererName + 'descriptiveNumber' || (fieldWrapperFocused$ | async) === whispererName + 'orientationNumber'"
     [error]="(parentForm.controls[whispererName].controls.descriptiveNumber.touched && parentForm.controls[whispererName].controls.descriptiveNumber.errors) ||
-                     (parentForm.controls[whispererName].controls.orientationNumber.touched && parentForm.controls[whispererName].controls.orientationNumber.errors)"
+             (parentForm.controls[whispererName].controls.orientationNumber.touched && parentForm.controls[whispererName].controls.orientationNumber.errors)"
     [validationMessages]="(parentForm.controls[whispererName].controls.descriptiveNumber.touched && parentForm.controls[whispererName].controls.descriptiveNumber.errors && formFields.validationMessages.descriptiveNumber) ||
-                                  (parentForm.controls[whispererName].controls.orientationNumber.touched && parentForm.controls[whispererName].controls.orientationNumber.errors && formFields.validationMessages.orientationNumber)">
+                          (parentForm.controls[whispererName].controls.orientationNumber.touched && parentForm.controls[whispererName].controls.orientationNumber.errors && formFields.validationMessages.orientationNumber)">
     <div class="row align-items-end no-gutters">
         <div class="col-6 pr-1">
             <lnd-form-field
                 [error]="parentForm.controls[whispererName].controls.descriptiveNumber.errors"
                 [formControl]="parentForm.controls[whispererName].controls.descriptiveNumber"
-                [id]="'descriptiveNumber'"
+                [id]="whispererName + 'descriptiveNumber'"
+                (focus)="fieldWrapperFocus(whispererName + 'descriptiveNumber')"
+                (blur)="fieldWrapperBlur()"
+                [inputFocused]="(fieldWrapperFocused$ | async) === whispererName + 'descriptiveNumber' || (fieldWrapperFocused$ | async) === whispererName + 'orientationNumber'"
                 label="Číslo popisné"
                 [showErrorMessage]="false"
                 [success]="parentForm.controls[whispererName].controls.descriptiveNumber.valid && parentForm.controls[whispererName].controls.descriptiveNumber.touched"
@@ -41,7 +45,10 @@
             <lnd-form-field
                 [error]="parentForm.controls[whispererName].controls.orientationNumber.errors"
                 [formControl]="parentForm.controls[whispererName].controls.orientationNumber"
-                [id]="'orientationNumber'"
+                [id]="whispererName + 'orientationNumber'"
+                (focus)="fieldWrapperFocus(whispererName + 'orientationNumber')"
+                (blur)="fieldWrapperBlur()"
+                [inputFocused]="(fieldWrapperFocused$ | async) === whispererName + 'descriptiveNumber' || (fieldWrapperFocused$ | async) === whispererName + 'orientationNumber'"
                 label="Číslo orientační"
                 [showErrorMessage]="false"
                 [success]="parentForm.controls[whispererName].controls.orientationNumber.valid && parentForm.controls[whispererName].controls.orientationNumber.touched"

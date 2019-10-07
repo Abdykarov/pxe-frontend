@@ -50,6 +50,9 @@ export class ButtonComponent {
     public size?: IButtonSize;
 
     @Input()
+    public submit = false;
+
+    @Input()
     public type?: IButtonType;
 
     @Input()

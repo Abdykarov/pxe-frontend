@@ -8,6 +8,7 @@
     [formGroup]="form"
     autocomplete="off"
     (keydown)="resetCustomFieldError()"
+    (keydown.enter)="submitForm($event);false"
     (change)="resetCustomFieldError()">
     <div class="row">
         <div [ngClass]="classRootWrapper">
@@ -39,7 +40,8 @@
                     </lnd-button>
                     <lnd-button
                         *ngIf="smsSent"
-                        (action)="submitForm()"
+                        [submit]="true"
+                        (action)="submitForm($event)"
                         [isDisabled]="formLoading"
                         [label]="submitLabelText"
                         type="primary">
