@@ -195,12 +195,15 @@ export const formFields: IForm = {
             invalidEan: errorFieldMessages.ean.ean,
             eanFormat: errorFieldMessages.ean.ean,
             invalidEanOnTenthPosition: errorFieldMessages.ean.ean,
+            duplicateSupplyPoint: errorFieldMessages.ean.nonUniqueEan,
         },
         eic: {
             required: errorFieldMessages.eic.required,
             eic: errorFieldMessages.eic.eic,
             invalidEic: errorFieldMessages.eic.eic,
             eicFormat: errorFieldMessages.eic.eic,
+            duplicateSupplyPoint: errorFieldMessages.eic.nonUniqueEic,
+            invalidEicOnFifthToSeventhPosition: errorFieldMessages.eic.eic,
         },
         address: {
             required: errorFieldMessages.address.required,
