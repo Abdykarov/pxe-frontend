@@ -33,7 +33,7 @@ export class PersonalDataService {
         .valueChanges
 
     public savePersonalData = (supplyPoint: ISupplyPoint, personalData: IPersonalDataInput) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: savePersonalDataMutation,
             variables: {
                 contractId: supplyPoint.contract.contractId,
@@ -61,7 +61,7 @@ export class PersonalDataService {
         })
 
     public updatePersonalData = (supplyPoint: ISupplyPoint, personalData: IPersonalDataInput) => this.apollo
-        .mutate({
+        .mutate<any>({
             mutation: updatePersonalDataMutation,
             variables: {
                 contractId: supplyPoint.contract.contractId,

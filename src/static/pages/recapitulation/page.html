@@ -6,22 +6,6 @@
         [formControl]="form.controls.onlyAddress1">
     </lnd-form-field>
 </ng-template>
-<!-- Example custom lael template -->
-<ng-template
-    #templateLabel
-    let-item="item"
-    let-index="index">
-    {{ item.street }}&nbsp;{{ item.orientationNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.descriptiveNumber }},
-    {{ item.city }}, {{ item.postCode }}
-</ng-template>
-<!-- Example searched items template -->
-<ng-template
-    #templateItem
-    let-item="item"
-    let-index="index">
-    {{ item.street }}&nbsp;{{ item.orientationNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.descriptiveNumber }}<br>
-    {{ item.city }}&nbsp;{{ item.postCode }}
-</ng-template>
 
 <div class="container-fluid">
     <div class="row mb-4">
@@ -61,11 +45,9 @@
                     >
                     </lnd-datepicker>
                     <pxe-address-whisperer
-                        [subtextTemplate]="otherAddress"
                         [label]="'Trvalá adresa'"
+                        [addressSubtextTemplate]="otherAddress"
                         [parentForm]="form"
-                        [templateItem]="templateItem"
-                        [templateLabel]="templateLabel"
                         [whispererName]="'permanentAddress'">
                     </pxe-address-whisperer>
                     <pxe-field-wrapper

@@ -60,6 +60,10 @@ export const errorFieldMessages =  {
     circuitBreakerId: {
         required: 'Vyberte ze seznamu, jakou máte velikost jističe.',
     },
+    city: {
+        required: 'Vyplňte město nebo obec.',
+        maxlengthCity: 'Použít můžete maximálně {requiredLength} znaků.',
+    },
     commodityType: {
         required: 'Zvolte komoditu.',
     },
@@ -88,6 +92,10 @@ export const errorFieldMessages =  {
     depositPaymentType: {
         required: 'Vyberte ze seznamu, jak chcete platit zálohy.',
     },
+    descriptiveNumber: {
+        required: 'Vyplňte číslo popisné.',
+        maxlengthDescriptiveNumber: 'Použít můžete maximálně {requiredLength} znaků.',
+    },
     dic: {
         dicPrefix: 'Vyplňte své DIČ.',
         dicDecimal: 'Správné DIČ pro ČR obsahuje CZ a 8-10 číslic.',
@@ -99,6 +107,7 @@ export const errorFieldMessages =  {
         required: 'Vyplňte unikátní 18místné identifikační číslo odběrného místa.',
         ean: 'Správné identifikační číslo odběrného místa má 18 znaků, obsahuje pouze čísla a vždy začíná 8591824.',
         invalidEan: 'Správné identifikační číslo odběrného místa má 18 znaků, obsahuje pouze čísla a vždy začíná 8591824.',
+        invalidEanOnTenthPosition: 'Identifikační číslo odběrného místa nesmí obsahovat na desáté pozici číslo 0 ani 9.',
     },
     eic: {
         required:  'Vyplňte unikátní 16místný identifikační kód odběrného místa.',
@@ -108,6 +117,7 @@ export const errorFieldMessages =  {
         required: 'Vyplňte svůj e-mail.',
         email: 'Použijte pouze písmena bez diakritiky, číslice, tečku (.) a zavináč (@).',
         emailNotRegistered: 'Tento e-mail v aplikaci neexistuje.',
+        usernameNotRegistered: 'Toto přihlašovací jméno v aplikaci neexistuje.',
         alreadyRegisteredEmail: 'Tento e-mail je již v aplikaci zaregistrovaný.',
     },
     expirationDate: {
@@ -182,6 +192,9 @@ export const errorFieldMessages =  {
     offerValidFromTo: {
         required: 'Vyplňte odkdy dokdy je nabídka platná.',
     },
+    orientationNumber: {
+        maxlengthOrientationNumber: 'Použít můžete maximálně {requiredLength} znaků.',
+    },
     phasesId: {
         required: 'Vyberte ze seznamu, jakou máte fázi.',
     },
@@ -191,6 +204,7 @@ export const errorFieldMessages =  {
         pattern: '	Vaše heslo musí mít minimálně 8 písmen, musí obsahovat malá a velká ' +
             'písmena, aspoň jednu číslici a aspoň jeden speciální znak jako &_*+/#\ apod.',
         fieldsMustMatch: 'Musíte vyplnit stejná hesla.',
+        invalidCurrentPassword: 'Vyplněné heslo se s vaším současným heslem neshoduje.',
     },
     phone: {
         required: 'Vyplňte svůj telefon.',
@@ -204,12 +218,19 @@ export const errorFieldMessages =  {
         required: `Vyplňte předvolbu pro ČR ${CONSTS.TELEPHONE_PREFIX_CZ}.`,
         invalidPhoneNumberPrefix: `Vyplňte správnou předvolbu pro ČR ${CONSTS.TELEPHONE_PREFIX_CZ}.`,
     },
+    region: {
+        required: 'Vyberte ze seznamu kraj.',
+    },
     signatoryPosition: {
         required: 'Vyplňte funkci, kterou má ve společnosti podepisující osoba.',
         maxlengthSignatoryPosition: 'Použít můžete maximálně 80 znaků.',
     },
     smsCode: {
         required: 'Vyplňte kód, který vám přišel v SMS.',
+    },
+    street: {
+        required: 'Vyplňte ulici.',
+        maxlengthStreet: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
@@ -226,5 +247,9 @@ export const errorFieldMessages =  {
     },
     timeToContractEndPeriodId: {
         required: 'Vyberte ze seznamu odpovídající časový údaj.',
+    },
+    postCode: {
+        required: 'Vyplňte PSČ.',
+        pattern: 'Použít můžete pouze 5 číslic.',
     },
 };
