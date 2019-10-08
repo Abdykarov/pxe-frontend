@@ -212,13 +212,13 @@ export class CustomValidators {
 
         const dateArrayValue = dateArray.value;
 
-        if (dateArray.value.length === 2 && dateArrayValue[0] && dateArrayValue[1]) {
+        if (dateArrayValue && dateArrayValue.length && dateArray.value.length === 2 && dateArrayValue[0] && dateArrayValue[1]) {
             const timeFrom =  dateArrayValue[0].getTime();
             const timeTo =  dateArrayValue[1].getTime();
 
-            const diffTime = Math.abs(timeTo - timeFrom);
+            const diffTime = timeTo - timeFrom;
 
-            if (diffTime > 0) {
+            if (diffTime < 0) {
                 return {
                     formatIntervalDiff: true,
                 };
