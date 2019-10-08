@@ -73,8 +73,8 @@ export class AuthService {
         return this.currentUserValue.passwordReset;
     }
 
-    public login = ({email, password}: ILoginRequest) => {
-        return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { email, password })
+    public login = ({login, password}: ILoginRequest) => {
+        return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { login, password })
             .pipe(
                 map((response: ILoginResponse) => {
                     return this.manageLoginResponse(response);
