@@ -5,7 +5,9 @@ import {
 import {
     ChangeDetectorRef,
     Component,
+    ElementRef,
     OnInit,
+    ViewChild,
 } from '@angular/core';
 
 import {
@@ -28,7 +30,6 @@ import {
     parseRestAPIErrors,
     scrollToElementFnc,
 } from 'src/common/utils';
-import { graphQLMessages } from 'src/common/constants/errors.constant';
 import {
     IDocumentType,
     IResponseDataDocument,
@@ -46,6 +47,9 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 export class ContractComponent extends AbstractComponent implements OnInit {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.READY_FOR_SIGN;
     public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.PERSONAL_DATA;
+
+    @ViewChild('pxeVerificationFormWrapper')
+    public pxeVerificationFormWrapper: ElementRef;
 
     public commodityType = CommodityType;
     public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
@@ -146,27 +150,22 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                 map(({data}) => data.signContract),
             )
             .subscribe(
-                (signedContract: boolean) => {
-                    this.formLoading = false;
-                    if (signedContract) {
-                        this.router.navigate(
-                            [ROUTES.ROUTER_REQUEST_PAYMENT], {
-                                queryParams: {
-                                    supplyPointId: this.supplyPointId,
-                                },
-                            });
-                    } else {
-                        // TODO - temporary
-                        this.globalError.push(graphQLMessages.cannotSignContract);
-                        scrollToElementFnc('top');
-                    }
-                    this.cd.markForCheck();
+                () => {
+                    this.router.navigate(
+                        [ROUTES.ROUTER_REQUEST_PAYMENT], {
+                            queryParams: {
+                                supplyPointId: this.supplyPointId,
+                            },
+                        });
                 },
                 (error) => {
                     this.formLoading = false;
                     const { globalError, fieldError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.fieldError = fieldError;
+                    if (Object.keys(this.fieldError).length) {
+                        scrollToElementFnc(this.pxeVerificationFormWrapper.nativeElement);
+                    }
                     this.cd.markForCheck();
                 },
             );

@@ -226,6 +226,7 @@ export const errorFieldMessages =  {
     },
     smsCode: {
         required: 'Vyplňte kód, který vám přišel v SMS.',
+        invalidSmsCode: 'Zadel jste špatný ověřovací kód.',
     },
     street: {
         required: 'Vyplňte ulici.',

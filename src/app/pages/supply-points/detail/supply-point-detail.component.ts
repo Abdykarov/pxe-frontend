@@ -4,8 +4,8 @@ import {
 } from '@angular/router';
 import {
     ChangeDetectorRef,
-    Component,
-    OnInit,
+    Component, ElementRef,
+    OnInit, ViewChild,
 } from '@angular/core';
 
 import * as R from 'ramda';
@@ -28,7 +28,6 @@ import { ContractActions } from '../models/supply-point-detail.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { DocumentService } from 'src/app/services/document.service';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
-import { graphQLMessages } from 'src/common/constants/errors.constant';
 import {
     IDocumentType,
     IResponseDataDocument,
@@ -62,6 +61,14 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     public supplyPointId = this.route.snapshot.params.supplyPointId;
     public contractAction: ContractActions = ContractActions.NONE;
     public contractActions = ContractActions;
+
+    public contractActionsWrapper: ElementRef;
+
+    @ViewChild('contractActionsWrapper') set content(contractActionsWrapper: ElementRef) {
+        if (contractActionsWrapper) {
+            this.contractActionsWrapper = contractActionsWrapper;
+        }
+    }
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -175,20 +182,18 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
                 ),
                 map(({data}) => data.deleteSignedContract),
             ).subscribe(
-            (deleteSignedContract: boolean) => {
+            () => {
                 this.formLoading = false;
-                if (deleteSignedContract) {
-                    this.router.navigate([ROUTES.ROUTER_REQUESTS]);
-                } else {
-                    // TODO - temporary
-                    this.globalError.push(graphQLMessages.cannotDeleteContract);
-                    scrollToElementFnc('top');
-                }
+                this.router.navigate([ROUTES.ROUTER_REQUESTS]);
             },
             (error) => {
                 this.formLoading = false;
-                const { globalError } = parseGraphQLErrors(error);
+                const { globalError , fieldError } = parseGraphQLErrors(error);
                 this.globalError = globalError;
+                this.fieldError = fieldError;
+                if (Object.keys(this.fieldError).length) {
+                    scrollToElementFnc(this.contractActionsWrapper.nativeElement);
+                }
                 this.cd.markForCheck();
             },
         );
@@ -198,11 +203,15 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     public leaveContract = () => {
         this.contractAction = ContractActions.LEAVE_CONTRACT;
         this.smsSent = null;
+        this.fieldError = {};
+        this.globalError = [];
     }
 
     public terminateContract = () => {
         this.contractAction = ContractActions.TERMINATE_CONTRACT;
         this.smsSent = null;
+        this.fieldError = {};
+        this.globalError = [];
     }
 
     public openDocument(contractId: string, documentType: IDocumentType) {
