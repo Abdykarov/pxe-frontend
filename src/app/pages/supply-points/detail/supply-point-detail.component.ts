@@ -4,8 +4,10 @@ import {
 } from '@angular/router';
 import {
     ChangeDetectorRef,
-    Component, ElementRef,
-    OnInit, ViewChild,
+    Component,
+    ElementRef,
+    OnInit,
+    ViewChild,
 } from '@angular/core';
 
 import * as R from 'ramda';
