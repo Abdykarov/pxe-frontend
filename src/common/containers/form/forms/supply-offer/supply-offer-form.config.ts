@@ -92,14 +92,14 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.dateRangeFromTo,
+                CustomValidators.formatIntervalDiff,
             ],
         ],
         deliveryFromTo: [
             null,
             [
                 Validators.required,
-                CustomValidators.dateRangeFromTo,
+                CustomValidators.formatIntervalDiff,
             ],
         ],
         permanentPaymentPrice: [
@@ -126,7 +126,7 @@ export const formFields: IForm = {
             required: errorFieldMessages.offerDeliveryFromTo.required,
             bsDate: errorFieldMessages.date.formatInterval,
             bsDateMinDate: errorFieldMessages.date.expirationDateInPast,
-            dateFromToDiff: errorFieldMessages.dateRange.dateFromToDiff,
+            formatIntervalDiff: errorFieldMessages.date.formatIntervalDiff,
         },
         deliveryLength: {
             required: errorFieldMessages.offerDeliveryLength.required,
@@ -174,7 +174,7 @@ export const formFields: IForm = {
             required: errorFieldMessages.offerValidFromTo.required,
             bsDate: errorFieldMessages.date.formatInterval,
             bsDateMinDate: errorFieldMessages.date.expirationDateInPast,
-            dateFromToDiff: errorFieldMessages.dateRange.dateFromToDiff,
+            formatIntervalDiff: errorFieldMessages.date.formatIntervalDiff,
         },
     },
 };

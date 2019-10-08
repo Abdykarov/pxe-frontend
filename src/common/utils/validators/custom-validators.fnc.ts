@@ -205,13 +205,14 @@ export class CustomValidators {
         };
     }
 
-    static dateRangeFromTo = (dateArray) => {
+    static formatIntervalDiff = (dateArray) => {
         if (dateArray.pristine) {
             return null;
         }
 
-        try {
-            const dateArrayValue = dateArray.value;
+        const dateArrayValue = dateArray.value;
+
+        if (dateArray.value.length === 2 && dateArrayValue[0] && dateArrayValue[1]) {
             const timeFrom =  dateArrayValue[0].getTime();
             const timeTo =  dateArrayValue[1].getTime();
 
@@ -219,13 +220,12 @@ export class CustomValidators {
 
             if (diffTime > 0) {
                 return {
-                    dateFromToDiff: true,
+                    formatIntervalDiff: true,
                 };
             }
-            return null;
-        } catch (e) {
-            return null;
         }
+
+        return null;
     }
 
     static email = (email) => {
