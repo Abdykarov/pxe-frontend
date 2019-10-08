@@ -86,7 +86,7 @@ export const errorFieldMessages =  {
         expirationDateInPast: 'Zadat můžete pouze budoucí datum.',
     },
     dateRange: {
-        dateFromToDiff: 'bla bla bla.',
+        dateFromToDiff: 'Datum from musí být stejný nebo větší než datum to.',
     },
     deposit: {
         required: 'Vyplňte, jakou chcete mít výši záloh.',
