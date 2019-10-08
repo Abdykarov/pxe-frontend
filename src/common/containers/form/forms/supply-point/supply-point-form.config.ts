@@ -194,7 +194,7 @@ export const formFields: IForm = {
             ean: errorFieldMessages.ean.ean,
             invalidEan: errorFieldMessages.ean.ean,
             eanFormat: errorFieldMessages.ean.ean,
-            invalidEanOnTenthPosition: errorFieldMessages.ean.invalidEanOnTenthPosition,
+            invalidEanOnTenthPosition: errorFieldMessages.ean.ean,
             duplicateSupplyPoint: errorFieldMessages.ean.nonUniqueEan,
         },
         eic: {
@@ -203,7 +203,7 @@ export const formFields: IForm = {
             invalidEic: errorFieldMessages.eic.eic,
             eicFormat: errorFieldMessages.eic.eic,
             duplicateSupplyPoint: errorFieldMessages.eic.nonUniqueEic,
-            invalidEicOnFifthToSeventhPosition: errorFieldMessages.eic.invalidEicOnPosition,
+            invalidEicOnFifthToSeventhPosition: errorFieldMessages.eic.eic,
         },
         address: {
             required: errorFieldMessages.address.required,
