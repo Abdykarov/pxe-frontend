@@ -205,6 +205,29 @@ export class CustomValidators {
         };
     }
 
+    static dateRangeFromTo = (dateArray) => {
+        if (dateArray.pristine) {
+            return null;
+        }
+
+        try {
+            const dateArrayValue = dateArray.value;
+            const timeFrom =  dateArrayValue[0].getTime();
+            const timeTo =  dateArrayValue[1].getTime();
+
+            const diffTime = Math.abs(timeTo - timeFrom);
+
+            if (diffTime > 0) {
+                return {
+                    dateFromToDiff: true,
+                };
+            }
+            return null;
+        } catch (e) {
+            return null;
+        }
+    }
+
     static email = (email) => {
         if (email.pristine) {
             return null;

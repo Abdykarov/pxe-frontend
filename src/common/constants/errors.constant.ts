@@ -85,6 +85,9 @@ export const errorFieldMessages =  {
         formatInterval: 'Datum vyplňte jako interval ve formátu dd.mm.rrrr - dd.mm.rrrr.',
         expirationDateInPast: 'Zadat můžete pouze budoucí datum.',
     },
+    dateRange: {
+        dateFromToDiff: 'bla bla bla.',
+    },
     deposit: {
         required: 'Vyplňte, jakou chcete mít výši záloh.',
         requiredMinValue: 'Minimální výše záloh je {min|ceil:2:1.0-2} Kč.',
