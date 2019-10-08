@@ -35,6 +35,7 @@ export class AuthService {
     private expiresTime = new Date().getTime() + (CONSTS.DEFAULT_EXPIRATION * 1000);
     private token: string;
     private uuid: string = null;
+    private sessionUuid: string = null;
 
     constructor(
         private cookiesService: CookiesService,
@@ -53,19 +54,21 @@ export class AuthService {
     checkLogin = () => {
         if (this.cookiesService.has(this.cookieName)) {
             this.token = (<any>this.cookiesService.getObject(this.cookieName)).token;
+            this.uuid = (<any>this.cookiesService.getObject(this.cookieName)).uuid;
         } else {
             this.token = null;
+            this.uuid = null;
         }
     }
 
     checkUuid = () => {
-        this.uuid = window.sessionStorage.getItem('uuid');
+        this.sessionUuid = window.sessionStorage.getItem('uuid');
     }
 
-    generateUuid = () => 'CCCCC';
+    generateUuid = () => new Date().getTime();
 
     isLogged = (): boolean  => {
-        return !!this.token;
+        return !!this.token && this.sessionUuid === this.uuid;
     }
 
     public isSupplier(): boolean {
@@ -185,4 +188,21 @@ export class AuthService {
         }
         return jwtPayload;
     }
+
+    // private  generateUUID = () => { // Public Domain/MIT
+    //     var d = new Date().getTime(); // Timestamp
+    //     // Time in microseconds since page-load or 0 if unsupported
+    //     var d2 = (performance && performance.now && (performance.now() * 1000)) || 0;
+    //     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    //         var r = Math.random() * 16; // random number between 0 and 16
+    //         if (d > 0) { // Use timestamp until depleted
+    //             r = (d + r) % 16 | 0;
+    //             d = Math.floor(d/16);
+    //         } else { // Use microseconds since page-load if supported
+    //             r = (d2 + r) % 16 | 0;
+    //             d2 = Math.floor(d2 / 16);
+    //         }
+    //         return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    //     });
+    // }
 }

@@ -27,6 +27,7 @@ export class AuthGuard implements CanActivateChild {
         state: RouterStateSnapshot,
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         this.authService.checkLogin();
+        this.authService.checkUuid();
 
         if (!this.authService.isLogged()) {
             this.authService.logoutForced();
