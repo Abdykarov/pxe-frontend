@@ -13,10 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { changePasswordFields } from 'src/common/containers/form/forms/change-password/change-password-form.config';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IChangePassword } from 'src/app/pages/login/login.model';
-import {
-    IJwtPayload,
-    ILoginResponse,
-} from 'src/app/services/model/auth.model';
+import { ILoginResponse } from 'src/app/services/model/auth.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { UserService } from 'src/common/graphql/services/user.service';
 
@@ -29,7 +26,6 @@ export class UserChangePasswordComponent extends AbstractComponent {
     public formFields = changePasswordFields;
     public formLoading = false;
     public formSent = false;
-    public formValues: IJwtPayload;
     public globalError: string[] = [];
 
     constructor(
@@ -38,7 +34,6 @@ export class UserChangePasswordComponent extends AbstractComponent {
         private userService: UserService,
     ) {
         super();
-        this.formValues = this.authService.currentUserValue;
     }
 
     public submitForm = (changePassword: IChangePassword) => {
@@ -62,8 +57,9 @@ export class UserChangePasswordComponent extends AbstractComponent {
                 error => {
                     this.globalError = [];
                     this.formLoading = false;
-                    const { globalError } = parseGraphQLErrors(error);
+                    const { globalError, fieldError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
+                    this.fieldError = fieldError;
                     this.cd.markForCheck();
                 },
             );

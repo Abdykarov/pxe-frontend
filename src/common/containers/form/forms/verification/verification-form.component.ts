@@ -53,16 +53,12 @@ export class VerificationFormComponent extends AbstractFormComponent {
         super(fb);
     }
 
-    public submitForm = () => {
-        this.resetCustomFieldError();
-        this.triggerValidation();
-        if (this.form.valid) {
-            this.submitAction.emit(this.form.controls.smsCode.value);
-        }
+    public submitValidForm = () => {
+        this.submitAction.emit(this.form.controls.smsCode.value);
     }
 
     public submitSms = () => {
-        this.resetFormError();
+        this.resetFormError(false);
         this.customAction.emit();
     }
 }

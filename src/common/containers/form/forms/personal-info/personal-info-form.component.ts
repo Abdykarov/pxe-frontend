@@ -14,6 +14,7 @@ import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
+import { AddressWhispererComponent } from 'src/common/containers/address-whisperer/address-whisperer.component';
 import {
     CODE_LIST,
     CONSTS,
@@ -188,21 +189,20 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         }
     }
 
-    public submitForm = () => {
-        this.resetCustomFieldError();
-        this.triggerValidation();
-        if (this.form.valid) {
-            const form: IPersonalDataInputForm = {
-                ...this.form.value,
-                phone: R.concat(CONSTS.TELEPHONE_PREFIX_CZ, this.form.value.phone),
-                deposit: parseFloat(String(this.form.value.deposit).replace(',', '.')),
-            };
-            if (form.birthDate) {
-                form.birthDate = convertDateToSendFormatFnc(this.form.value.birthDate);
-            }
-            delete form.phonePrefix;
-            delete form.onlyAddress1;
-            this.submitAction.emit(form);
+    public submitValidForm = () => {
+        const form: IPersonalDataInputForm = {
+            ...this.form.value,
+            phone: R.concat(CONSTS.TELEPHONE_PREFIX_CZ, this.form.value.phone),
+            deposit: parseFloat(String(this.form.value.deposit).replace(',', '.')),
+        };
+        if (form.birthDate) {
+            form.birthDate = convertDateToSendFormatFnc(this.form.value.birthDate);
         }
+        delete form.phonePrefix;
+        delete form['address1' + AddressWhispererComponent.UNIQUE_FIELD_NAME_END];
+        delete form['address2' + AddressWhispererComponent.UNIQUE_FIELD_NAME_END];
+        delete form.phonePrefix;
+        delete form.onlyAddress1;
+        this.submitAction.emit(form);
     }
 }

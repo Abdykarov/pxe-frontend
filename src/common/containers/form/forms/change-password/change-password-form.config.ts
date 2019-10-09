@@ -33,6 +33,7 @@ export const changePasswordFields: IForm = {
     validationMessages: {
         currentPassword: {
             required: errorFieldMessages.password.currentRequired,
+            invalidCurrentPassword: errorFieldMessages.password.invalidCurrentPassword,
         },
         password: {
             required: errorFieldMessages.password.required,

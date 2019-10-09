@@ -42,6 +42,12 @@
 			padding-top: 0;
 		}
 	}
+
+	&--focused {
+		.invalid-feedback {
+			display: none;
+		}
+	}
 }
 
 .form-control {
@@ -187,16 +193,28 @@ textarea.form-control--not-empty {
 			box-shadow: none;
 		}
 
-		&.is-valid {
-			border-color: $success;
-		}
-
 		&.is-warning {
 			border-color: $input-color-interactive-warning;
 		}
+	}
 
+	&:hover {
 		&.is-invalid {
 			border-color: $input-color-interactive-invalid;
+		}
+	}
+
+	&:focus,
+	&.focus:not([disabled]),
+	&.focus:hover:not([disabled]) {
+		border-color: $primary;
+
+		&.is-invalid {
+			border-color: $primary;
+		}
+
+		&.is-valid {
+			border-color: $input-focus-border-color;
 		}
 	}
 }
@@ -233,6 +251,12 @@ textarea.form-control--not-empty {
 		}
 
 		&.form-control--without-feedback ~ .invalid-feedback {
+			display: none;
+		}
+	}
+
+	&.focused-input {
+		& ~ .invalid-feedback {
 			display: none;
 		}
 	}

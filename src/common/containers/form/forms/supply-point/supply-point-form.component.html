@@ -1,20 +1,3 @@
-<!-- Example custom lael template -->
-<ng-template
-    #templateLabel
-    let-item="item"
-    let-index="index">
-    {{ item.street }}&nbsp;{{ item.orientationNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.descriptiveNumber }},
-    {{ item.city }}, {{ item.postCode }}
-</ng-template>
-<!-- Example searched items template -->
-<ng-template
-    #templateItem
-    let-item="item"
-    let-index="index">
-    {{ item.street }}&nbsp;{{ item.orientationNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.descriptiveNumber }}<br>
-    {{ item.city }}&nbsp;{{ item.postCode }}
-</ng-template>
-
 <lnd-alert
     *ngIf="globalError.length"
     type="danger">
@@ -103,7 +86,7 @@
             *ngIf="form.controls.eic.status !== 'DISABLED'"
             [appendButtonIcon]="helpDocuments && helpDocuments['eic'] ? 'icon--info' : null"
             (appendButtonAction)="showHelp('eic', 'EIC')"
-            [error]="formError.eic || form.controls.eic.errors"
+            [error]="formError.eic || formError.ean || form.controls.eic.errors"
             [formControl]="form.controls.eic"
             [id]="'eic'"
             label="EIC"
@@ -119,9 +102,8 @@
             [error]="formError.address || form.controls.address.errors"
             [label]="'Adresa odběrného místa'"
             [parentForm]="form"
+            [formFieldsParentForm]="formFields"
             [success]="form.controls.address.valid && (form.controls.address.touched || formError.address)"
-            [templateItem]="templateItem"
-            [templateLabel]="templateLabel"
             [touched]="form.controls.address.touched || formError.address"
             [validationMessages]="formFields.validationMessages.address"
             [whispererName]="'address'">
@@ -257,6 +239,7 @@
                 *ngIf="form.controls.timeToContractEnd.status !== 'DISABLED' && form.controls.timeToContractEndPeriodId.status !== 'DISABLED'"
                 label="Jak dlouhou máte výpovědní lhůtu?"
                 labelFor="timeToContractEnd"
+                [wrapperFocused]="(fieldWrapperFocused$ | async) === 'timeToContractEnd' || (fieldWrapperFocused$ | async) === 'timeToContractEndPeriodId'"
                 [error]="((form.controls.timeToContractEnd.touched || formError.timeToContractEnd) && (formError.timeToContractEnd || form.controls.timeToContractEnd.errors)) ||
                          ((form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId) && (formError.timeToContractEndPeriodId || form.controls.timeToContractEndPeriodId.errors))"
                 [validationMessages]="((form.controls.timeToContractEnd.touched || formError.timeToContractEnd) && (formError.timeToContractEnd || form.controls.timeToContractEnd.errors) && formFields.validationMessages.timeToContractEnd) ||
@@ -270,6 +253,9 @@
                         [error]="formError.timeToContractEnd || form.controls.timeToContractEnd.errors"
                         [formControl]="form.controls.timeToContractEnd"
                         [id]="'timeToContractEnd'"
+                        (focus)="fieldWrapperFocus('timeToContractEnd')"
+                        (blur)="fieldWrapperBlur()"
+                        [inputFocused]="(fieldWrapperFocused$ | async) === 'timeToContractEnd' || (fieldWrapperFocused$ | async) === 'timeToContractEndPeriodId'"
                         label="Jak dlouhou máte výpovědní lhůtu?"
                         [showErrorMessage]="false"
                         [success]="form.controls.timeToContractEnd.valid && (form.controls.timeToContractEnd.touched || formError.timeToContractEnd)"
@@ -284,6 +270,9 @@
                         (appendButtonAction)="showHelp('timeToContractEndPeriodId', 'Jistič')"
                         [error]="formError.timeToContractEndPeriodId || form.controls.timeToContractEndPeriodId.errors"
                         label=""
+                        (focus)="fieldWrapperFocus('timeToContractEndPeriodId')"
+                        (blur)="fieldWrapperBlur()"
+                        [inputFocused]="(fieldWrapperFocused$ | async) === 'timeToContractEnd' || (fieldWrapperFocused$ | async) === 'timeToContractEndPeriodId'"
                         [options]="codeLists && codeLists[codeList.TIME_TO_CONTRACT_END_PERIOD]"
                         [parentForm]="form"
                         [selectName]="'timeToContractEndPeriodId'"
@@ -297,9 +286,8 @@
         </pxe-field-wrapper>
         <div class="row mb-5"
              *ngIf="form.getRawValue() | newSupplyWillBegin as newSupplyWillBegin">
-            <div class="col-12">
+            <div *ngIf="newSupplyWillBegin" class="col-12">
                 <small>Předpokládané zahájení nové dodávky od:</small>
-                <br/>
                 {{newSupplyWillBegin | date:'d.&nbsp;M.&nbsp;y'}}
             </div>
         </div>
