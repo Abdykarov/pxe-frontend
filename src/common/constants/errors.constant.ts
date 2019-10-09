@@ -229,6 +229,7 @@ export const errorFieldMessages =  {
     },
     smsCode: {
         required: 'Vyplňte kód, který vám přišel v SMS.',
+        invalidSmsCode: 'Vyplněný kód se neshoduje s kódem, který vám přišel v SMS.',
     },
     street: {
         required: 'Vyplňte ulici.',
