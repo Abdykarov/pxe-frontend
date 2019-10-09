@@ -212,7 +212,7 @@ export class CustomValidators {
 
         const dateArrayValue = dateArray.value;
 
-        if (dateArrayValue && dateArrayValue.length && dateArray.value.length === 2 && dateArrayValue[0] && dateArrayValue[1]) {
+        if (dateArrayValue && dateArrayValue.length === 2 && dateArrayValue[0] && dateArrayValue[1]) {
             const timeFrom =  dateArrayValue[0].getTime();
             const timeTo =  dateArrayValue[1].getTime();
 
