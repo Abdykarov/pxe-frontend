@@ -2,6 +2,7 @@ import { Validators } from '@angular/forms';
 
 import { CONSTS } from 'src/app/app.constants';
 import { CustomValidators } from 'src/common/utils';
+import { DEPOSIT_DEFAULT_TYPE } from 'src/static/pages/recapitulation/config';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
 
@@ -91,7 +92,7 @@ export const formFields: IForm = {
             ],
         ],
         depositPaymentTypeId: [
-            null,
+            DEPOSIT_DEFAULT_TYPE,
             [
                 Validators.required,
             ],

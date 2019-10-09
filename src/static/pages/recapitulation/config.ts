@@ -12,3 +12,6 @@ export const depositPaymentType: IOption[] = [
         label: 'Příkaz k úhradě',
     },
 ];
+
+
+export const DEPOSIT_DEFAULT_TYPE = 'Prikaz';
