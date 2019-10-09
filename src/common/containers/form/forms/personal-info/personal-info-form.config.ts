@@ -91,7 +91,7 @@ export const formFields: IForm = {
             ],
         ],
         depositPaymentTypeId: [
-            'Prikaz',
+            null,
             [
                 Validators.required,
             ],
