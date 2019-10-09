@@ -1,7 +1,9 @@
 import {
     ChangeDetectorRef,
     Component,
+    ElementRef,
     OnInit,
+    ViewChild,
 } from '@angular/core';
 
 import {
@@ -12,7 +14,10 @@ import {
 import { AbstractComponent } from 'src/common/abstract.component';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
-import { parseGraphQLErrors } from 'src/common/utils';
+import {
+    parseGraphQLErrors,
+    scrollToElementFnc,
+} from 'src/common/utils';
 
 @Component({
     selector: 'pxe-map-coverage-container',
@@ -23,6 +28,9 @@ export class MapCoverageContainerComponent extends AbstractComponent implements 
     public globalError: string[] = [];
     public configCoverage: IMapCoverageConfig;
     public loadingData = true;
+
+    @ViewChild('pxeMapCoverageWrapper')
+    public pxeMapCoverageWrapper: ElementRef;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -48,10 +56,9 @@ export class MapCoverageContainerComponent extends AbstractComponent implements 
                     const { globalError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.loadingData = false;
+                    scrollToElementFnc(this.pxeMapCoverageWrapper.nativeElement);
                     this.cd.markForCheck();
                 },
             );
-
-
     }
 }

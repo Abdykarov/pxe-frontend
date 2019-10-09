@@ -2,11 +2,13 @@
     <pxe-supplier-container></pxe-supplier-container>
 </ng-template>
 
-<pxe-map-coverage
-    [configCoverage]="configCoverage"
-    [loadingData]="loadingData"
-    [globalError]="globalError"
-    [supplierTemplateGas]="supplierTemplate"
-    [supplierTemplatePower]="supplierTemplate"
->
-</pxe-map-coverage>
+<div #pxeMapCoverageWrapper>
+    <pxe-map-coverage
+        [configCoverage]="configCoverage"
+        [loadingData]="loadingData"
+        [globalError]="globalError"
+        [supplierTemplateGas]="supplierTemplate"
+        [supplierTemplatePower]="supplierTemplate"
+    >
+    </pxe-map-coverage>
+</div>
