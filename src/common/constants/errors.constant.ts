@@ -84,6 +84,7 @@ export const errorFieldMessages =  {
         format: 'Vyplňte platný formát data.',
         formatInterval: 'Datum vyplňte jako interval ve formátu dd.mm.rrrr - dd.mm.rrrr.',
         expirationDateInPast: 'Zadat můžete pouze budoucí datum.',
+        formatIntervalDiff: 'Odkdy musí být dřívější než dokdy.',
     },
     deposit: {
         required: 'Vyplňte, jakou chcete mít výši záloh.',
