@@ -187,10 +187,10 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
             ).subscribe(
             (deleteSignedContract: boolean) => {
                 if (deleteSignedContract) {
-                    this.formLoading = false;
                     this.router.navigate([ROUTES.ROUTER_REQUESTS]);
                 } else {
                     this.globalError = [defaultErrorMessage];
+                    this.formLoading = false;
                     this.cd.markForCheck();
                 }
             },

@@ -161,6 +161,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                             });
                     } else {
                         this.globalError = [defaultErrorMessage];
+                        this.formLoading = false;
                         this.cd.markForCheck();
                     }
                 },
