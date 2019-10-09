@@ -56,18 +56,18 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-auto"
-                                 *ngIf="supplyPointOffer.priceVT && supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
+                                 *ngIf="supplyPointOffer.consumptionPriceVT && supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
                                 <div class="supply-point-offer__value-box">
                                     <span class="supply-point-offer__value-name">Cena za vysoký tarif</span>
-                                    <span class="supply-point-offer__value">{{supplyPointOffer.priceVT | number: '1.0-2'}} Kč/MWh</span>
+                                    <span class="supply-point-offer__value">{{supplyPointOffer.consumptionPriceVT | number: '1.0-2'}} Kč/MWh</span>
                                     <span class="icon icon--info supply-point-offer__info-icon"></span>
                                 </div>
                             </div>
                             <div class="col-auto"
-                                 *ngIf="supplyPointOffer.priceNT && supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
+                                 *ngIf="supplyPointOffer.consumptionPriceNT && supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
                                 <div class="supply-point-offer__value-box">
                                     <span class="supply-point-offer__value-name">Cena za nízký tarif</span>
-                                    <span class="supply-point-offer__value">{{supplyPointOffer.priceNT | number: '1.0-2'}} Kč/MWh</span>
+                                    <span class="supply-point-offer__value">{{supplyPointOffer.consumptionPriceNT | number: '1.0-2'}} Kč/MWh</span>
                                 </div>
                             </div>
                             <div class="col-auto"
@@ -119,18 +119,33 @@
                     </div>
                 </div>
                 <div class="row mb-3 mb-md-0">
-
-                    <ng-container *ngIf="([
-                        supplyPointOffer.distributionPriceByConsumptionVT,
-                        supplyPointOffer.distributionPriceByConsumptionNT,
-                        supplyPointOffer.distributionPriceByCapacity
-                    ] | sum) as ditributionPrice">
-                        <div class="col-auto">
-                            <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
-                                <span class="supply-point-offer__value-name">Distribuce</span>
-                                <span class="supply-point-offer__value">{{ditributionPrice | number: '1.0-2'}} Kč/měsíc</span>
+                    <ng-container *ngIf="supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
+                        <ng-container *ngIf="([
+                            supplyPointOffer.distributionPriceByConsumptionVT,
+                            supplyPointOffer.distributionPriceByConsumptionNT,
+                            supplyPointOffer.distributionPriceByCapacity
+                        ] | sum) as ditributionPricePower">
+                            <div class="col-auto">
+                                <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
+                                    <span class="supply-point-offer__value-name">Distribuce</span>
+                                    <span class="supply-point-offer__value">{{ditributionPricePower | number: '1.0-2'}} Kč/měsíc</span>
+                                </div>
                             </div>
-                        </div>
+                        </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="supplyPointOffer.commodityType === COMMODITY_TYPE_GAS">
+                        <ng-container *ngIf="([
+                            supplyPointOffer.distributionPriceByConsumptionVT,
+                            supplyPointOffer.distributionPriceByCapacity,
+                            supplyPointOffer.accountingRegulatedPrice
+                        ] | sum) as ditributionPriceGas">
+                            <div class="col-auto">
+                                <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
+                                    <span class="supply-point-offer__value-name">Distribuce</span>
+                                    <span class="supply-point-offer__value">{{ditributionPriceGas | number: '1.0-2'}} Kč/měsíc</span>
+                                </div>
+                            </div>
+                        </ng-container>
                     </ng-container>
                     <ng-container *ngIf="supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
                         <ng-container *ngIf="([
