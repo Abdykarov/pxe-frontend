@@ -28,6 +28,7 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { ContractActions } from '../models/supply-point-detail.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
+import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import {
@@ -184,9 +185,14 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
                 ),
                 map(({data}) => data.deleteSignedContract),
             ).subscribe(
-            () => {
-                this.formLoading = false;
-                this.router.navigate([ROUTES.ROUTER_REQUESTS]);
+            (deleteSignedContract: boolean) => {
+                if (deleteSignedContract) {
+                    this.formLoading = false;
+                    this.router.navigate([ROUTES.ROUTER_REQUESTS]);
+                } else {
+                    this.globalError = [defaultErrorMessage];
+                    this.cd.markForCheck();
+                }
             },
             (error) => {
                 this.formLoading = false;

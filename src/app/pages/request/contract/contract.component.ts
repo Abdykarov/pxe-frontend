@@ -23,6 +23,7 @@ import {
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
+import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
 import {
     getConfigStepper,
@@ -150,13 +151,18 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                 map(({data}) => data.signContract),
             )
             .subscribe(
-                () => {
-                    this.router.navigate(
-                        [ROUTES.ROUTER_REQUEST_PAYMENT], {
-                            queryParams: {
-                                supplyPointId: this.supplyPointId,
-                            },
-                        });
+                (deleteSignedContract: boolean) => {
+                    if (deleteSignedContract) {
+                        this.router.navigate(
+                            [ROUTES.ROUTER_REQUEST_PAYMENT], {
+                                queryParams: {
+                                    supplyPointId: this.supplyPointId,
+                                },
+                            });
+                    } else {
+                        this.globalError = [defaultErrorMessage];
+                        this.cd.markForCheck();
+                    }
                 },
                 (error) => {
                     this.formLoading = false;
