@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {
     ActivatedRouteSnapshot,
     CanActivateChild,
-    Router,
     RouterStateSnapshot,
     UrlTree,
 } from '@angular/router';
@@ -19,7 +18,6 @@ export class AuthGuard implements CanActivateChild {
 
     constructor(
         private authService: AuthService,
-        private router: Router,
     ) {}
 
     canActivateChild(
@@ -27,7 +25,6 @@ export class AuthGuard implements CanActivateChild {
         state: RouterStateSnapshot,
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         this.authService.checkLogin();
-        this.authService.checkUuid();
 
         if (!this.authService.isLogged()) {
             this.authService.logoutForced();

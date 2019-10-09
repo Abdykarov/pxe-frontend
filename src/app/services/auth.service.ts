@@ -15,7 +15,7 @@ import {
 } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { CONSTS } from 'src/app/app.constants';
+import { CONSTS, ROUTES } from 'src/app/app.constants';
 import { CookiesService } from './cookies.service';
 import { environment } from 'src/environments/environment';
 import {
@@ -51,7 +51,7 @@ export class AuthService {
         return this.currentUserSubject$.value;
     }
 
-    checkLogin = () => {
+    public checkLogin = () => {
         if (this.cookiesService.has(this.cookieName)) {
             this.token = (<any>this.cookiesService.getObject(this.cookieName)).token;
             this.uuid = (<any>this.cookiesService.getObject(this.cookieName)).uuid;
@@ -59,20 +59,11 @@ export class AuthService {
             this.token = null;
             this.uuid = null;
         }
+        this.sessionUuid = window.sessionStorage && window.sessionStorage.getItem('uuid');
     }
 
-    checkUuid = () => {
-        this.sessionUuid = window.sessionStorage.getItem('uuid');
-    }
-
-    generateUuid = () => new Date().getTime();
-
-    isLogged = (): boolean  => {
+    public isLogged = (): boolean  => {
         return !!this.token && this.sessionUuid === this.uuid;
-    }
-
-    public isSupplier(): boolean {
-        return this.currentUserValue.supplier;
     }
 
     public needSmsConfirm(): boolean {
@@ -87,7 +78,6 @@ export class AuthService {
         return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { email, password })
             .pipe(
                 map((response: ILoginResponse) => {
-                    console.log('%c ***** LOGIN *****', 'background: #bada55; color: #000; font-weight: bold');
                     const uuid = this.generateUuid();
                     return this.manageLoginResponse(response, uuid);
                 }),
@@ -132,7 +122,10 @@ export class AuthService {
     public cleanUserData = () => {
         this.token = null;
         this.uuid = null;
-        window.sessionStorage.clear();
+        this.sessionUuid = null;
+        if (window.sessionStorage) {
+            window.sessionStorage.clear();
+        }
         this.cookiesService.remove(this.cookieName);
         this.currentUserSubject$.next(null);
     }
@@ -147,7 +140,9 @@ export class AuthService {
                 token: response.token,
                 uuid: uuid,
             };
-            window.sessionStorage.setItem('uuid', uuid);
+            if (window.sessionStorage) {
+                window.sessionStorage.setItem('uuid', uuid);
+            }
             this.cookiesService.setObject(this.cookieName, user, this.expiresTime);
             this.checkLogin();
             this.currentUserSubject$.next(jwtPayload);
@@ -189,20 +184,11 @@ export class AuthService {
         return jwtPayload;
     }
 
-    // private  generateUUID = () => { // Public Domain/MIT
-    //     var d = new Date().getTime(); // Timestamp
-    //     // Time in microseconds since page-load or 0 if unsupported
-    //     var d2 = (performance && performance.now && (performance.now() * 1000)) || 0;
-    //     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    //         var r = Math.random() * 16; // random number between 0 and 16
-    //         if (d > 0) { // Use timestamp until depleted
-    //             r = (d + r) % 16 | 0;
-    //             d = Math.floor(d/16);
-    //         } else { // Use microseconds since page-load if supported
-    //             r = (d2 + r) % 16 | 0;
-    //             d2 = Math.floor(d2 / 16);
-    //         }
-    //         return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-    //     });
-    // }
+    private generateUuid = () => {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            // tslint:disable-next-line:no-bitwise
+            const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
 }
