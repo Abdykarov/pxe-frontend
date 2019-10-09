@@ -8,7 +8,7 @@
     [formGroup]="form"
     autocomplete="off"
     (keydown)="resetCustomFieldError()"
-<!--zkontrolovat soubor...-->
+    (keydown.enter)="submitForm($event);false"
     (change)="resetCustomFieldError()">
     <div [ngClass]="classMainWrapper">
         <div [ngClass]="classFirstField">
@@ -38,14 +38,13 @@
             </lnd-button>
             <lnd-button
                 *ngIf="smsSent"
-                [submit]="true"
-                (action)="submitForm($event)"
+                (action)="submitForm()"
                 [isDisabled]="formLoading"
                 [label]="submitLabelText"
                 type="primary">
             </lnd-button>
             <p *ngIf="!smsSent && !showSentSmsLabelUnderFirstField"
-                class="small text-center mt-2">
+                class="small mt-2">
                 Ověřovací kód odešleme na číslo<br>{{phone}}
             </p>
         </div>
