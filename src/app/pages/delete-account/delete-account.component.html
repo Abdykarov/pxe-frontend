@@ -6,6 +6,7 @@
             <lnd-button
                 label="Zůstat v PARC4U"
                 type="link"
+                [customClass]="currentUser.phoneNumber ? 'mt-md-4' : ''"
                 (click)="redirectToUserProfile()">
             </lnd-button>
         </div>
