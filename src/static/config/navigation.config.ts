@@ -237,10 +237,6 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Error 500',
                     'url': '/full/error-500',
                 },
-                {
-                    'label': 'Error 503',
-                    'url': '/full/error-503',
-                },
             ],
         },
         {

@@ -1,5 +1,60 @@
-<div class="row">
-    <div class="col">
-        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItems"></lnd-breadcrumb>
-    </div>
+<div
+    id="top"
+    class="body-inner full-layout">
+    <lnd-header
+        [settings]="settings"
+        (homeRedirect)="homeRedirect()">
+    </lnd-header>
+    <div class="container-fluid">
+            <div class="container-content">
+                <pxe-layout-container pageTitle="404">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <lnd-info-banner
+                                [bannerType]="bannerType.DOCUMENTS_ALERT"
+                                [bannerTitle]="bannerTitle"
+                                [bannerDescription]="bannerDescription"
+                                [buttonLabel]="buttonLabel"
+                                (buttonAction)="homeRedirect($event)"
+                            >
+                            </lnd-info-banner>
+                        </div>
+                    </div>
+                </pxe-layout-container>
+            </div>
+        </div>
+    <lnd-footer
+        [isSimpleFooter]="settings.isSimpleFooter">
+        <ul class="footer-navigation__list">
+            <li class="footer-navigation__item">
+                <a routerLink="/terms-of-use"
+                   class="footer-navigation__link"
+                >
+                    Všeobecné obchodní podmínky PARC4U
+                </a>
+            </li>
+            <li class="footer-navigation__item">
+                <a routerLink="/cookies-policy"
+                   class="footer-navigation__link"
+                >
+                    Cookies policy
+                </a>
+            </li>
+            <li class="footer-navigation__item">
+                <a routerLink="/securing-your-data"
+                   class="footer-navigation__link"
+                >
+                    Ochrana osobních údajů
+                </a>
+            </li>
+            <li class="footer-navigation__item">
+                <a href="https://www.pxe.cz/"
+                   target="_blank"
+                   class="footer-navigation__link"
+                >
+                    O PXE
+                </a>
+            </li>
+        </ul>
+    </lnd-footer>
 </div>

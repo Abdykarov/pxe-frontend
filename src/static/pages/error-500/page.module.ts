@@ -7,6 +7,7 @@ import { ButtonModule } from 'src/common/ui/button/button.module';
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { Error500PageComponent } from './page';
 import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
+import { LoginType, SignType } from 'src/app/layouts/models/router-data.model';
 
 
 @NgModule({
@@ -29,5 +30,13 @@ export const error500PageRoutes: Routes = [
     {
         path: 'error-500',
         component: Error500PageComponent,
+        data: {
+            isPublic: true,
+            isPublicEmptyPage: true,
+            isLandingPage: false,
+            isSimpleFooter: true,
+            loginType: LoginType.NONE,
+            signUpType: SignType.NONE,
+        },
     },
 ];
