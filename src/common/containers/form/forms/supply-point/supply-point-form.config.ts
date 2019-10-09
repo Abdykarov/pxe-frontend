@@ -194,7 +194,7 @@ export const formFields: IForm = {
             ean: errorFieldMessages.ean.ean,
             invalidEan: errorFieldMessages.ean.ean,
             eanFormat: errorFieldMessages.ean.ean,
-            invalidEanOnTenthPosition: errorFieldMessages.ean.invalidEanOnTenthPosition,
+            invalidEanOnTenthPosition: errorFieldMessages.ean.ean,
         },
         eic: {
             required: errorFieldMessages.eic.required,
