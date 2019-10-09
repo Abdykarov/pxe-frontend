@@ -73,7 +73,6 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             this.form.controls['depositPaymentTypeId'].setValue(CONSTS.DEFAULT_DEPOSIT_PAYMENT_TYPE_ID);
         }
 
-
         this.form.get('onlyAddress1').valueChanges
             .pipe(takeUntil(this.destroy$))
             .subscribe((onlyAddress1: boolean) => {
