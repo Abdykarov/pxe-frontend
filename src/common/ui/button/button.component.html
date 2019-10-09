@@ -1,5 +1,5 @@
 <button
-    type="button"
+    [type]="submit ? 'submit' : 'button'"
     class="btn"
     [ngClass]="[
         type !== null && !hasOutline ? 'btn-' + type : '',

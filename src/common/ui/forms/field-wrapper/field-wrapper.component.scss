@@ -33,4 +33,8 @@
 			}
 		}
 	}
+
+	&.field-wrapper--focused .invalid-feedback {
+		display: none;
+	}
 }

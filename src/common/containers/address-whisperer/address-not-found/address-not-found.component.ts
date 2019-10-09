@@ -7,12 +7,12 @@ import {
     Output,
     ViewChild,
 } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 import { takeUntil } from 'rxjs/operators';
 
-import { AbstractComponent } from 'src/common/abstract.component';
+import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { FieldComponent } from 'src/common/ui/forms/field/field.component';
-import { IForm } from 'src/common/containers/form/models/form-definition.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { REGIONS } from 'src/app/app.constants';
 
@@ -21,7 +21,7 @@ import { REGIONS } from 'src/app/app.constants';
     templateUrl: './address-not-found.component.html',
     styleUrls: ['./address-not-found.component.scss'],
 })
-export class AddressNotFoundComponent extends AbstractComponent implements OnDestroy, OnInit {
+export class AddressNotFoundComponent extends AbstractFormComponent implements OnDestroy, OnInit {
 
     private _cityInput: FieldComponent;
 
@@ -32,9 +32,6 @@ export class AddressNotFoundComponent extends AbstractComponent implements OnDes
             setTimeout(() => this._cityInput.triggerFocus = 'TRIG');
         }
     }
-
-    @Input()
-    public formFields: IForm;
 
     @Input()
     public nameOfTemporaryWhispererFormGroup: string;
@@ -50,8 +47,13 @@ export class AddressNotFoundComponent extends AbstractComponent implements OnDes
 
     public regionOptions: Array<IOption> = REGIONS;
 
+    constructor(
+        protected fb: FormBuilder,
+    ) {
+        super(fb);
+    }
+
     ngOnInit() {
-        super.ngOnInit();
         this.parentForm.get(this.whispererName)
             .valueChanges
             .pipe(
