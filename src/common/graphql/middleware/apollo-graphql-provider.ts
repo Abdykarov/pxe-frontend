@@ -14,14 +14,14 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { onError } from 'apollo-link-error';
 
 import { AuthService } from 'src/app/services/auth.service';
-import { CONSTS } from 'src/app/app.constants';
+import { clientSchema } from 'src/common/graphql/middleware/client-schema';
 import {
     defaults,
     resolvers,
 } from '../resolvers/';
 import { environment } from 'src/environments/environment';
+import { OPERATIONS_WITHOUT_SCROLL_ON_ERRORS } from 'src/app/app.constants';
 import { scrollToElementFnc } from 'src/common/utils';
-import { clientSchema } from 'src/common/graphql/middleware/client-schema';
 
 const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
@@ -81,7 +81,7 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
         });
     });
 
-    const error = onError(({ graphQLErrors, networkError, response }) => {
+    const error = onError(({ graphQLErrors, networkError, operation }) => {
         if (graphQLErrors) {
             graphQLErrors.map(({ message, locations, path }) => {
                 // console.log('%c ***** [GraphQL error] *****', 'background: red; color: #fff; font-weight: bold',
@@ -95,7 +95,9 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
 
         if (graphQLErrors || networkError) {
             // TODO scroll to error (global or field)
-            scrollToElementFnc('top');
+            if (!OPERATIONS_WITHOUT_SCROLL_ON_ERRORS.includes(operation.operationName)) {
+                scrollToElementFnc('top');
+            }
         }
         // response.errors = null;
     });
