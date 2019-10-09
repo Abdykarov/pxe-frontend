@@ -15,7 +15,7 @@ import {
 } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { CONSTS, ROUTES } from 'src/app/app.constants';
+import { CONSTS } from 'src/app/app.constants';
 import { CookiesService } from './cookies.service';
 import { environment } from 'src/environments/environment';
 import {
