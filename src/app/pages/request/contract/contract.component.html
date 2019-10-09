@@ -106,17 +106,19 @@
                     <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
                     <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container>"</ng-container>.
                 </p>
-                <pxe-verification-form
-                    *ngIf="supplyPoint | pathValue:['contract', 'personalData', 'phone']"
-                    [fieldError]="fieldError"
-                    [formLoading]="formLoading"
-                    [contract]="supplyPoint.contract"
-                    [globalError]="globalError"
-                    [showSentSmsLabelUnderFirstField]="false"
-                    [smsSent]="smsSent"
-                    (submitAction)="signContract($event)"
-                    (customAction)="sendContractConfirmationSms()"
-                ></pxe-verification-form>
+                <div #pxeVerificationFormWrapper>
+                    <pxe-verification-form
+                        *ngIf="supplyPoint | pathValue:['contract', 'personalData', 'phone']"
+                        [fieldError]="fieldError"
+                        [formLoading]="formLoading"
+                        [contract]="supplyPoint.contract"
+                        [globalError]="globalError"
+                        [showSentSmsLabelUnderFirstField]="false"
+                        [smsSent]="smsSent"
+                        (submitAction)="signContract($event)"
+                        (customAction)="sendContractConfirmationSms()"
+                    ></pxe-verification-form>
+                </div>
             </div>
         </div>
     </div>

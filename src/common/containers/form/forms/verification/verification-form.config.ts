@@ -15,6 +15,7 @@ export const formFields: IForm = {
     validationMessages: {
         smsCode: {
             required: errorFieldMessages.smsCode.required,
+            invalidSmsCode: errorFieldMessages.smsCode.invalidSmsCode,
         },
     },
 };
