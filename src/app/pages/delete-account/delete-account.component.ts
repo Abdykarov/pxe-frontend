@@ -94,7 +94,6 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
     }
 
     public sendConfirmationSms = () => {
-        this.loading = true;
         this.registrationService.sendUnregisterSms()
             .pipe(
                 takeUntil(this.destroy$),
@@ -102,13 +101,11 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
             )
             .subscribe(
                 (result: boolean) => {
-                    this.loading = false;
                     this.smsSent = true;
                     this.cd.markForCheck();
                 },
                 error => {
                     const { globalError } = parseGraphQLErrors(error);
-                    this.loading = false;
                     this.globalError = globalError;
                     this.cd.markForCheck();
                 },
