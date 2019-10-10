@@ -96,6 +96,20 @@ const routes = [
                 },
             },
             {
+                path: CONSTS.PATHS.DELETE_ACCOUNT,
+                loadChildren: '../../pages/delete-account/delete-account.module#DeleteAccountModule',
+                resolve: {
+                    refreshToken: RefreshTokenResolver,
+                },
+                data: {
+                    isSimpleFooter: false,
+                    isPublic: false,
+                    isSupplier: false,
+                    loginType: LoginType.NONE,
+                    signUpType: SignType.NONE,
+                },
+            },
+            {
                 path: CONSTS.PATHS.CHANGE_PASSWORD,
                 loadChildren: '../../pages/user-change-password/user-change-password.module#UserChangePasswordModule',
                 resolve: {

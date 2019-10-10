@@ -3,27 +3,24 @@ import { NgModule } from '@angular/core';
 
 import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
+import { DeleteAccountComponent } from './delete-account.component';
+import { DeleteAccountRoutingModule } from './delete-account-routing.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
-import { UserProfileComponent } from 'src/app/pages/user-profile/user-profile.component';
-import { UserProfileFormModule } from 'src/common/containers/form/forms/user-profile/user-profile-form.module';
-import { UserProfileRouting } from 'src/app/pages/user-profile/user-profile.routing';
+import { VerificationFormModule } from 'src/common/containers/form/forms/verification/verification-form.module';
 
 @NgModule({
     declarations: [
-        UserProfileComponent,
-    ],
-    exports: [
-        UserProfileComponent,
+        DeleteAccountComponent,
     ],
     imports: [
         AlertModule,
         ButtonModule,
         CommonModule,
+        DeleteAccountRoutingModule,
         LayoutContainerModule,
         PlaceloaderModule,
-        UserProfileFormModule,
-        UserProfileRouting,
+        VerificationFormModule,
     ],
 })
-export class UserProfileModule { }
+export class DeleteAccountModule { }

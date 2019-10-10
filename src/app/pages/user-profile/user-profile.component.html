@@ -25,4 +25,28 @@
             </div>
         </div>
     </div>
+    <div class="row mt-4">
+        <div class="col-12 col-xl-6 offset-xl-3 text-center">
+            <h1>Zrušení uživatelského účtu</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-xl-7 col-lg-5">
+            <div class="page-box">
+                <div class="row">
+                    <div class="col-12 text-center mb-4">
+                        Chci zrušit svůj uživatelský účet a přestat využívat aplikaci PARC4U.
+                    </div>
+                </div>
+                <div class="col-12 text-center">
+                    <lnd-button
+                        type="primary"
+                        (action)="redirectToDeleteProfile()"
+                        [isDisabled]="formLoading"
+                        label="Zrušit účet">
+                    </lnd-button>
+                </div>
+            </div>
+        </div>
+    </div>
 </pxe-layout-container>
