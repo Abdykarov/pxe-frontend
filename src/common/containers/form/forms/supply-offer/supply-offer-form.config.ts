@@ -126,7 +126,7 @@ export const formFields: IForm = {
             required: errorFieldMessages.offerDeliveryFromTo.required,
             bsDate: errorFieldMessages.date.formatInterval,
             bsDateMinDate: errorFieldMessages.date.expirationDateInPast,
-            formatIntervalDiff: errorFieldMessages.date.formatIntervalDiff,
+            formatIntervalDiff: errorFieldMessages.offerDeliveryFromTo.formatIntervalDiff,
         },
         deliveryLength: {
             required: errorFieldMessages.offerDeliveryLength.required,
@@ -174,7 +174,7 @@ export const formFields: IForm = {
             required: errorFieldMessages.offerValidFromTo.required,
             bsDate: errorFieldMessages.date.formatInterval,
             bsDateMinDate: errorFieldMessages.date.expirationDateInPast,
-            formatIntervalDiff: errorFieldMessages.date.formatIntervalDiff,
+            formatIntervalDiff: errorFieldMessages.offerValidFromTo.formatIntervalDiff,
         },
     },
 };
