@@ -66,10 +66,11 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         super.ngOnInit();
         this.setForm();
         this.depositPaymentTypeId = this.codeLists[CODE_LIST.DEPOSIT_PAYMENT_TYPE];
-        const numberValuesOfDefaultType = R.filter(
+        const filteredValuesOfDefaultType = R.filter(
             (depositType) => depositType.value === CONSTS.DEFAULT_DEPOSIT_PAYMENT_TYPE_ID
         , this.depositPaymentTypeId);
-        if (Object.keys(numberValuesOfDefaultType).length > 0) {
+
+        if (filteredValuesOfDefaultType.length) {
             this.form.controls['depositPaymentTypeId'].setValue(CONSTS.DEFAULT_DEPOSIT_PAYMENT_TYPE_ID);
         }
 
