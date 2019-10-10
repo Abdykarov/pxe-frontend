@@ -8,4 +8,9 @@ export class DeleteAccountOkSimpleComponent {
         evt.preventDefault();
         console.log('CLICKED');
     }
+
+    redirectToUserProfile = (evt) => {
+        evt.preventDefault();
+        console.log('CLICKED');
+    }
 }
