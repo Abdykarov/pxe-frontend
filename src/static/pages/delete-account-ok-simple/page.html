@@ -1,0 +1,30 @@
+<div class="row text-center mb-md-6">
+    <div class="col-12 col-xl-6 offset-xl-3">
+        <h1>Zrušení uživatelského účtu </h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-xl-10 offset-xl-1">
+        <div class="page-box">
+            <p>
+                Mrzí nás, že PARC4U opouštíte, ale bránit vám v tom nemůžeme.
+            </p>
+            <div class="row justify-content-between">
+                <div class="col-auto mr-3 mb-3 mb-md-0">
+                    <lnd-button
+                        label="Zůstat v PARC4U"
+                        type="link"
+                        (click)="redirectToUserProfile()">
+                    </lnd-button>
+                </div>
+                <div class="col-auto">
+                    <lnd-button
+                        label="Zrušit účet"
+                        (action)="submitVerification($event)"
+                        type="primary"
+                    ></lnd-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,6 +11,7 @@ import {
 } from 'rxjs';
 import {
     catchError,
+    first,
     map,
 } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -24,6 +25,7 @@ import {
     ILoginResponse,
     IUserRoles,
 } from './model/auth.model';
+import { IStateRouter } from 'src/app/pages/logout/logout-page.model';
 
 @Injectable({
     providedIn: 'root',
@@ -93,6 +95,7 @@ export class AuthService {
                     this.cleanUserData();
                     return of(error);
                 }),
+                first(),
             );
     }
 
@@ -142,7 +145,7 @@ export class AuthService {
     public getToken = (): string => this.token;
 
     public logoutForced = () => {
-        const state = {
+        const state: IStateRouter = {
             refresh: true,
         };
         return this.router.navigate(

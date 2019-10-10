@@ -35,6 +35,15 @@ const routes = [
                 },
             },
             {
+                path: CONSTS.PATHS.DELETED_ACCOUNT,
+                loadChildren: '../../pages/deleted-account/deleted-account.module#DeletedAccountModule',
+                data: {
+                    isPublic: true,
+                    loginType: LoginType.NAVIGATE,
+                    signUpType: SignType.NAVIGATE,
+                },
+            },
+            {
                 path: CONSTS.PATHS.LOGIN,
                 loadChildren: '../../pages/login/login.module#LoginModule',
                 data: {

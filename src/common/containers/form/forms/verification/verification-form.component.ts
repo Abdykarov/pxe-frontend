@@ -22,9 +22,6 @@ export class VerificationFormComponent extends AbstractFormComponent {
     public contract: IContract;
 
     @Input()
-    public classRootWrapper = 'col-12 col-lg-9 offset-lg-3';
-
-    @Input()
     public classMainWrapper = 'row justify-content-end';
 
     @Input()
@@ -41,6 +38,12 @@ export class VerificationFormComponent extends AbstractFormComponent {
 
     @Input()
     public showSentSmsLabelUnderFirstField = true;
+
+    @Input()
+    public sendSmsLabel = 'Odeslat ověřovací kód';
+
+    @Input()
+    public phone = null;
 
     public formFields = formFields;
 
