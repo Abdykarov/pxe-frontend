@@ -50,6 +50,7 @@
                                 <ng-template #totalPrice>
                                     {{supplyPointOffer.totalPrice | number: '1.0-2'}}&nbsp;Kč
                                 </ng-template>
+                                <span class="icon icon--info supply-point-offer__info-icon"></span>
                             </span>
                         </div>
                     </ng-container>
@@ -60,7 +61,6 @@
                                 <div class="supply-point-offer__value-box">
                                     <span class="supply-point-offer__value-name">Cena za vysoký tarif</span>
                                     <span class="supply-point-offer__value">{{supplyPointOffer.consumptionPriceVT | number: '1.0-2'}} Kč/MWh</span>
-                                    <span class="icon icon--info supply-point-offer__info-icon"></span>
                                 </div>
                             </div>
                             <div class="col-auto"
@@ -75,7 +75,6 @@
                                 <div class="supply-point-offer__value-box">
                                     <span class="supply-point-offer__value-name">Cena</span>
                                     <span class="supply-point-offer__value">{{supplyPointOffer.priceGas | number: '1.0-2'}} Kč/MWh</span>
-                                    <span class="icon icon--info supply-point-offer__info-icon"></span>
                                 </div>
                             </div>
                             <div class="col-auto"
