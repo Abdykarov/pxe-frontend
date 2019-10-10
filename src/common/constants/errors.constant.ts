@@ -84,7 +84,6 @@ export const errorFieldMessages =  {
         format: 'Vyplňte platný formát data.',
         formatInterval: 'Datum vyplňte jako interval ve formátu dd.mm.rrrr - dd.mm.rrrr.',
         expirationDateInPast: 'Zadat můžete pouze budoucí datum.',
-        formatIntervalDiff: 'Odkdy musí být dřívější než dokdy.',
     },
     deposit: {
         required: 'Vyplňte, jakou chcete mít výši záloh.',
@@ -163,6 +162,7 @@ export const errorFieldMessages =  {
     },
     offerDeliveryFromTo: {
         required: 'Vyplňte datum dodávkového období.',
+        formatIntervalDiff: 'Datum začátku dodávkového období musí být dřívější než jeho konec.',
     },
     offerDeliveryLength: {
         required: 'Vyberte ze seznamu délku dodávky.',
@@ -193,6 +193,7 @@ export const errorFieldMessages =  {
     },
     offerValidFromTo: {
         required: 'Vyplňte odkdy dokdy je nabídka platná.',
+        formatIntervalDiff: 'Datum začátku platnosti nabídky musí být dřívější než její konec.',
     },
     orientationNumber: {
         maxlengthOrientationNumber: 'Použít můžete maximálně {requiredLength} znaků.',
