@@ -42,8 +42,8 @@
                             </span>
                         </div>
                         <div class="col-12 col-md-8 col-xl-12">
-                            <span class="supply-point-offer__title"
-                                  (click)="togglePriceDecomposition($event)">
+                            <!-- TODO remove hover effect from supply-point-offer__title and supply-point-offer__info-icon removed -->
+                            <span class="supply-point-offer__title">
                                 <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
                                     {{supplyPointOffer.prepayment | number: '1.0-2'}}&nbsp;Kč
                                 </ng-container>
@@ -57,9 +57,11 @@
                         <div class="row">
                             <div class="col-auto"
                                  *ngIf="supplyPointOffer.consumptionPriceVT && supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
-                                <div class="supply-point-offer__value-box">
+                                <div class="supply-point-offer__value-box"
+                                     (click)="togglePriceDecomposition($event)">
                                     <span class="supply-point-offer__value-name">Cena za vysoký tarif</span>
                                     <span class="supply-point-offer__value">{{supplyPointOffer.consumptionPriceVT | number: '1.0-2'}} Kč/MWh</span>
+                                    <!-- TODO add support for icon here + hover effect -->
                                     <span class="icon icon--info supply-point-offer__info-icon"></span>
                                 </div>
                             </div>
@@ -72,9 +74,11 @@
                             </div>
                             <div class="col-auto"
                                  *ngIf="supplyPointOffer.priceGas && supplyPointOffer.commodityType === COMMODITY_TYPE_GAS">
-                                <div class="supply-point-offer__value-box">
+                                <div class="supply-point-offer__value-box"
+                                     (click)="togglePriceDecomposition($event)">
                                     <span class="supply-point-offer__value-name">Cena</span>
                                     <span class="supply-point-offer__value">{{supplyPointOffer.priceGas | number: '1.0-2'}} Kč/MWh</span>
+                                    <!-- TODO add support for icon here + hover effect -->
                                     <span class="icon icon--info supply-point-offer__info-icon"></span>
                                 </div>
                             </div>
