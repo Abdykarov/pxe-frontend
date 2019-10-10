@@ -1,7 +1,9 @@
 import {
     ChangeDetectorRef,
     Component,
+    ElementRef,
     OnInit,
+    ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -18,9 +20,14 @@ import {
     ROUTES,
 } from 'src/app/app.constants';
 import { ContractStatus } from 'src/common/graphql/models/contract';
+import { defaultErrorMessage } from 'src/common/constants/errors.constant';
+import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IJwtPayload } from 'src/app/services/model/auth.model';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
-import { parseGraphQLErrors } from 'src/common/utils';
+import {
+    parseGraphQLErrors,
+    scrollToElementFnc,
+} from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
@@ -34,10 +41,19 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
 
     public currentUser: IJwtPayload;
     public formLoading = false;
+    public fieldError: IFieldError = {};
     public globalError: string[] = [];
     public loading = true;
     public supplyPoints: ISupplyPoint[] = null;
     public smsSent = false;
+
+    public pxeVerificationFormWrapper: ElementRef;
+
+    @ViewChild('pxeVerificationFormWrapper') set content(pxeVerificationFormWrapper: ElementRef) {
+        if (pxeVerificationFormWrapper) {
+            this.pxeVerificationFormWrapper = pxeVerificationFormWrapper;
+        }
+    }
 
     constructor(
         private authService: AuthService,
@@ -107,17 +123,23 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
                 map(({data}) => data.makeUnregistration),
             )
             .subscribe(
-                (result: boolean) => {
-                    this.loading = false;
-                    this.formLoading = false;
-                    this.router.navigate([CONSTS.PATHS.DELETED_ACCOUNT]);
-                    this.cd.markForCheck();
+                (deletedAccount: boolean) => {
+                    if (deletedAccount) {
+                        this.router.navigate([CONSTS.PATHS.DELETED_ACCOUNT]);
+                    } else {
+                        this.globalError = [defaultErrorMessage];
+                        this.formLoading = false;
+                        this.cd.markForCheck();
+                    }
                 },
                 error => {
-                    const { globalError } = parseGraphQLErrors(error);
-                    this.loading = false;
                     this.formLoading = false;
+                    const { globalError, fieldError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
+                    this.fieldError = fieldError;
+                    if (Object.keys(this.fieldError).length) {
+                        scrollToElementFnc(this.pxeVerificationFormWrapper.nativeElement);
+                    }
                     this.cd.markForCheck();
                 },
             );
