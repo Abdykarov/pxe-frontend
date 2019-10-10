@@ -76,10 +76,10 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     public disabledField = false;
 
     @Input()
-    public lightField = false;
-
-    @Input()
     public error?: any;
+
+    @Output()
+    public focus?: EventEmitter<any> = new EventEmitter();
 
     @Input()
     public hideLabel = false;
@@ -92,6 +92,9 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
 
     @Input()
     public inlineLabel = false;
+
+    @Input()
+    public lightField = false;
 
     @Input()
     public radioGroupClass?: string;
@@ -170,6 +173,9 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
 
     @Input()
     public warning = false;
+
+    @Input()
+    public inputFocused = false;
 
     onChange: any = () => {};
     onTouched: any = () => {};

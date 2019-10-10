@@ -25,7 +25,8 @@
 
 	.ng-select,
 	.ng-select-opened {
-		&.ng-select-focused .ng-select-container {
+		&.ng-select-focused .ng-select-container,
+		&.focus .ng-select-container {
 			&,
 			&:hover {
 				&::after {
@@ -242,8 +243,7 @@
 
 	// Error state
 	.is-invalid {
-		&,
-		&.ng-select-focused {
+		& {
 			.ng-select-container {
 				&::after {
 					background-color: $danger;
@@ -255,6 +255,10 @@
 					background-color: $input-color-interactive-invalid;
 				}
 			}
+		}
+
+		&.ng-select-focused ~ .invalid-feedback {
+			display: none;
 		}
 	}
 

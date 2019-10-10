@@ -51,15 +51,11 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
         this.form.get('phone').setValue(phone);
     }
 
-    public submitForm = () => {
-        this.resetCustomFieldError();
-        this.triggerValidation();
-        if (this.form.valid) {
-            const form: IPersonalDataInputForm = {
-                ...this.form.value,
-                phoneNumber: R.concat(CONSTS.TELEPHONE_PREFIX_CZ, this.form.value.phone),
-            };
-            this.submitAction.emit(form);
-        }
+    public submitValidForm = () => {
+        const form: IPersonalDataInputForm = {
+            ...this.form.value,
+            phoneNumber: R.concat(CONSTS.TELEPHONE_PREFIX_CZ, this.form.value.phone),
+        };
+        this.submitAction.emit(form);
     }
 }

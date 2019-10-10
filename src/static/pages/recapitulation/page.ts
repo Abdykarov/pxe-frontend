@@ -27,7 +27,7 @@ export class RecapitulationPageComponent {
         telephonePrefix: new FormControl(),
         email: new FormControl(),
         onlyAddress1: new FormControl(),
-        depositPaymentTypeId: new FormControl(),
+        depositPaymentTypeId: new FormControl('Prikaz'),
         deposit: new FormControl(),
         birthDate: new FormControl(),
     });

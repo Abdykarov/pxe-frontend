@@ -11,6 +11,7 @@ import {
 } from 'rxjs';
 import {
     catchError,
+    first,
     map,
 } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -24,6 +25,7 @@ import {
     ILoginResponse,
     IUserRoles,
 } from './model/auth.model';
+import { IStateRouter } from 'src/app/pages/logout/logout-page.model';
 
 @Injectable({
     providedIn: 'root',
@@ -34,6 +36,8 @@ export class AuthService {
     public currentUser$: Observable<IJwtPayload>;
     private expiresTime = new Date().getTime() + (CONSTS.DEFAULT_EXPIRATION * 1000);
     private token: string;
+    private uuid: string = null;
+    private sessionUuid: string = null;
 
     constructor(
         private cookiesService: CookiesService,
@@ -49,20 +53,19 @@ export class AuthService {
         return this.currentUserSubject$.value;
     }
 
-    checkLogin = () => {
+    public checkLogin = () => {
         if (this.cookiesService.has(this.cookieName)) {
             this.token = (<any>this.cookiesService.getObject(this.cookieName)).token;
+            this.uuid = (<any>this.cookiesService.getObject(this.cookieName)).uuid;
         } else {
             this.token = null;
+            this.uuid = null;
         }
+        this.sessionUuid = window.sessionStorage && window.sessionStorage.getItem('uuid');
     }
 
-    isLogged = (): boolean  => {
-        return !!this.token;
-    }
-
-    public isSupplier(): boolean {
-        return this.currentUserValue.supplier;
+    public isLogged = (): boolean  => {
+        return !!this.token && this.sessionUuid === this.uuid;
     }
 
     public needSmsConfirm(): boolean {
@@ -77,7 +80,8 @@ export class AuthService {
         return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { email, password })
             .pipe(
                 map((response: ILoginResponse) => {
-                    return this.manageLoginResponse(response);
+                    const uuid = this.generateUuid();
+                    return this.manageLoginResponse(response, uuid);
                 }),
             );
     }
@@ -93,6 +97,7 @@ export class AuthService {
                     this.cleanUserData();
                     return of(error);
                 }),
+                first(),
             );
     }
 
@@ -119,11 +124,16 @@ export class AuthService {
 
     public cleanUserData = () => {
         this.token = null;
+        this.uuid = null;
+        this.sessionUuid = null;
+        if (window.sessionStorage) {
+            window.sessionStorage.clear();
+        }
         this.cookiesService.remove(this.cookieName);
         this.currentUserSubject$.next(null);
     }
 
-    public manageLoginResponse = (response: ILoginResponse) => {
+    public manageLoginResponse = (response: ILoginResponse, uuid: string = this.uuid) => {
         if (response && response.token) {
             const jwtPayload = this.getJwtPayload(response.token);
             // if (jwtPayload.exp) {
@@ -131,7 +141,11 @@ export class AuthService {
             // }
             const user = {
                 token: response.token,
+                uuid: uuid,
             };
+            if (window.sessionStorage) {
+                window.sessionStorage.setItem('uuid', uuid);
+            }
             this.cookiesService.setObject(this.cookieName, user, this.expiresTime);
             this.checkLogin();
             this.currentUserSubject$.next(jwtPayload);
@@ -141,8 +155,10 @@ export class AuthService {
 
     public getToken = (): string => this.token;
 
+    public getUuid = (): string => this.uuid;
+
     public logoutForced = () => {
-        const state = {
+        const state: IStateRouter = {
             refresh: true,
         };
         return this.router.navigate(
@@ -169,5 +185,13 @@ export class AuthService {
 
         }
         return jwtPayload;
+    }
+
+    private generateUuid = () => {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            // tslint:disable-next-line:no-bitwise
+            const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
     }
 }
