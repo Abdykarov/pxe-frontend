@@ -34,7 +34,7 @@ export const error500PageRoutes: Routes = [
             isPublic: true,
             isPublicEmptyPage: true,
             isLandingPage: false,
-            isSimpleFooter: true,
+            isSimpleFooter: false,
             loginType: LoginType.NONE,
             signUpType: SignType.NONE,
         },

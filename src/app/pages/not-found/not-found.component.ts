@@ -6,7 +6,6 @@ import { AbstractComponent } from 'src/common/abstract.component';
 
 // own modules
 import { AuthService } from 'src/app/services/auth.service';
-import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import {
     ISettings,
     LoginType,
@@ -15,13 +14,9 @@ import {
 
 @Component({
     templateUrl: './not-found.component.html',
+    styleUrls: ['../../../assets/scss/05_pages/error-page.scss'],
 })
 export class NotFoundComponent extends AbstractComponent {
-    public bannerType = BannerTypeImages;
-    public bannerTitle = 'Je nám líto, ale tato stránka neexistuje';
-    public bannerDescription = 'Pravděpodobně byla odstraněna, nebo jste zadali špatnou URL adresu.';
-    public buttonLabel = 'Zobrazit úvodní stránku';
-
     public settings: ISettings = {
         isPublic: true,
         isPublicEmptyPage: true,

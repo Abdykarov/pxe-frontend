@@ -4,7 +4,6 @@ import { Routes } from '@angular/router';
 
 // own classes
 import { Error404PageComponent } from './page';
-import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
 import { LoginType, SignType } from 'src/app/layouts/models/router-data.model';
 
 @NgModule({
@@ -16,7 +15,6 @@ import { LoginType, SignType } from 'src/app/layouts/models/router-data.model';
     ],
     imports: [
         CommonModule,
-        InfoBannerModule,
     ],
 })
 export class Error404PageModule {}
@@ -29,7 +27,7 @@ export const error404PageRoutes: Routes = [
             isPublic: true,
             isPublicEmptyPage: true,
             isLandingPage: false,
-            isSimpleFooter: true,
+            isSimpleFooter: false,
             loginType: LoginType.NONE,
             signUpType: SignType.NONE,
         },

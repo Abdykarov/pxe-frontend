@@ -7,7 +7,6 @@ import { FooterModule } from 'src/common/ui/footer/footer.module';
 import { HeaderModule } from 'src/common/ui/header/header.module';
 import { NotFoundComponent } from './not-found.component';
 import { NotFoundRoutingModule } from './not-found.routing';
-import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 
 @NgModule({
@@ -22,7 +21,6 @@ import { LayoutContainerModule } from 'src/common/containers/layout-container/la
         CommonModule,
         FooterModule,
         HeaderModule,
-        InfoBannerModule,
         LayoutContainerModule,
         NotFoundRoutingModule,
     ],
