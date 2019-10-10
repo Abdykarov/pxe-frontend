@@ -10,5 +10,4 @@ export enum BannerTypeImages {
     REJECTED = '/assets/images/illustrations/rejected.svg',
     SIGN = '/assets/images/illustrations/sign.svg',
     UPLOAD = '/assets/images/illustrations/upload.svg',
-    BROKEN_BULB = '/assets/images/illustrations/broken-bulb.svg',
 }
