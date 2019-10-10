@@ -16,6 +16,7 @@ export const emailFormFields: IForm = {
         login: {
             required: errorFieldMessages.email.required,
             emailNotRegistered: errorFieldMessages.email.emailNotRegistered,
+            usernameNotRegistered: errorFieldMessages.email.usernameNotRegistered,
             invalidEmail: errorFieldMessages.email.email,
             alreadyRegisteredEmail: errorFieldMessages.email.alreadyRegisteredEmail,
         },
