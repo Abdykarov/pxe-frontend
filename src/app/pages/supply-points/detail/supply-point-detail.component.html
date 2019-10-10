@@ -11,74 +11,76 @@
     </div>
 </ng-template>
 <ng-template #contractActionsTemplate>
-    <ng-container *ngIf="supplyPoint.subject.code === subjectType.SUBJECT_TYPE_INDIVIDUAL">
-        <div *ngIf="supplyPoint | isAllowedOperation: allowedOperations.LEAVE_CONTRACT"
-             class="row no-gutters align-items-end mb-5">
-            <div class="col-12 col-md-6">
-                <small>Odstoupit od smlouvy do 14 dnů od podpisu</small>
+    <div #contractActionsWrapper>
+        <ng-container *ngIf="supplyPoint.subject.code === subjectType.SUBJECT_TYPE_INDIVIDUAL">
+            <div *ngIf="supplyPoint | isAllowedOperation: allowedOperations.LEAVE_CONTRACT"
+                 class="row no-gutters align-items-end mb-5">
+                <div class="col-12 col-md-6">
+                    <small>Odstoupit od smlouvy do 14 dnů od podpisu</small>
+                </div>
+                <div class="col-12 col-md-6 pl-3 text-right">
+                    <lnd-button
+                            (click)="leaveContract()"
+                            [isDisabled]="formLoading"
+                            label="Odstoupit"
+                            type="link-danger"
+                            size="sm">
+                    </lnd-button>
+                </div>
+                <div *ngIf="contractAction === contractActions.LEAVE_CONTRACT"
+                     class="col-12 mt-4">
+                    <pxe-verification-form
+                            [fieldError]="fieldError"
+                            [formLoading]="formLoading"
+                            [contract]="supplyPoint.contract"
+                            [globalError]="globalError"
+                            [infoTemplate]="leaveContactInfoTemplate"
+                            [phone]="supplyPoint.contract.personalData.phone"
+                            [smsSent]="smsSent"
+                            [showSentSmsLabelUnderFirstField]="false"
+                            classFirstField="col-12"
+                            classSecondField="col-12 text-center"
+                            submitLabelText="Odstoupit od smlouvy"
+                            (submitAction)="submitVerification($event)"
+                            (customAction)="sendContractConfirmationSms()">
+                    </pxe-verification-form>
+                </div>
             </div>
-            <div class="col-12 col-md-6 pl-3 text-right">
-                <lnd-button
-                        (click)="leaveContract()"
-                        [isDisabled]="formLoading"
-                        label="Odstoupit"
-                        type="link-danger"
-                        size="sm">
-                </lnd-button>
+            <div *ngIf="supplyPoint | isAllowedOperation: allowedOperations.TERMINATE_CONTRACT"
+                 class="row no-gutters align-items-end mb-5">
+                <div class="col-12 col-md-6">
+                    <small>Odstoupit od smlouvy výpovědí</small>
+                </div>
+                <div class="col-12 col-md-6 pl-3 text-right">
+                    <lnd-button
+                            (click)="terminateContract()"
+                            [isDisabled]="formLoading"
+                            label="Vypovědět"
+                            type="link-danger"
+                            size="sm">
+                    </lnd-button>
+                </div>
+                <div *ngIf="contractAction === contractActions.TERMINATE_CONTRACT"
+                     class="col-12 mt-4">
+                    <pxe-verification-form
+                            [fieldError]="fieldError"
+                            [formLoading]="formLoading"
+                            [contract]="supplyPoint.contract"
+                            [phone]="supplyPoint.contract.personalData.phone"
+                            [globalError]="globalError"
+                            [infoTemplate]="terminateContactInfoTemplate"
+                            [smsSent]="smsSent"
+                            [showSentSmsLabelUnderFirstField]="false"
+                            classFirstField="col-12"
+                            classSecondField="col-12 text-center"
+                            submitLabelText="Vypovědět smlouvu"
+                            (submitAction)="submitVerification($event)"
+                            (customAction)="sendContractConfirmationSms()">
+                    </pxe-verification-form>
+                </div>
             </div>
-            <div *ngIf="contractAction === contractActions.LEAVE_CONTRACT"
-                 class="col-12 mt-4">
-                <pxe-verification-form
-                        [fieldError]="fieldError"
-                        [formLoading]="formLoading"
-                        [contract]="supplyPoint.contract"
-                        [globalError]="globalError"
-                        [infoTemplate]="leaveContactInfoTemplate"
-                        [phone]="supplyPoint.contract.personalData.phone"
-                        [smsSent]="smsSent"
-                        [showSentSmsLabelUnderFirstField]="false"
-                        classFirstField="col-12"
-                        classSecondField="col-12 text-center"
-                        submitLabelText="Odstoupit od smlouvy"
-                        (submitAction)="submitVerification($event)"
-                        (customAction)="sendContractConfirmationSms()">
-                </pxe-verification-form>
-            </div>
-        </div>
-        <div *ngIf="supplyPoint | isAllowedOperation: allowedOperations.TERMINATE_CONTRACT"
-             class="row no-gutters align-items-end mb-5">
-            <div class="col-12 col-md-6">
-                <small>Odstoupit od smlouvy výpovědí</small>
-            </div>
-            <div class="col-12 col-md-6 pl-3 text-right">
-                <lnd-button
-                        (click)="terminateContract()"
-                        [isDisabled]="formLoading"
-                        label="Vypovědět"
-                        type="link-danger"
-                        size="sm">
-                </lnd-button>
-            </div>
-            <div *ngIf="contractAction === contractActions.TERMINATE_CONTRACT"
-                 class="col-12 mt-4">
-                <pxe-verification-form
-                        [fieldError]="fieldError"
-                        [formLoading]="formLoading"
-                        [contract]="supplyPoint.contract"
-                        [phone]="supplyPoint.contract.personalData.phone"
-                        [globalError]="globalError"
-                        [infoTemplate]="terminateContactInfoTemplate"
-                        [smsSent]="smsSent"
-                        [showSentSmsLabelUnderFirstField]="false"
-                        classFirstField="col-12"
-                        classSecondField="col-12 text-center"
-                        submitLabelText="Vypovědět smlouvu"
-                        (submitAction)="submitVerification($event)"
-                        (customAction)="sendContractConfirmationSms()">
-                </pxe-verification-form>
-            </div>
-        </div>
-    </ng-container>
+        </ng-container>
+    </div>
 </ng-template>
 <pxe-layout-container pageTitle="Odběrná místa">
     <div class="row">

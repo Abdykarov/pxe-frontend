@@ -18,7 +18,8 @@ const mapValidationFieldArrayToValidationObj = (array) => {
     return R.map(prepareKeys)(array);
 };
 
-const mapGlobalGraphQLErrorMessages = (messages: string[]): string[] => R.map((key: string) => graphQLMessages[key] || key, messages);
+const mapGlobalGraphQLErrorMessages = (messages: string[]): string[] =>
+    R.map((key: string) => graphQLMessages[key] || defaultErrorMessage, messages);
 
 export const parseGraphQLErrors = (error: ErrorResponse):
     {
