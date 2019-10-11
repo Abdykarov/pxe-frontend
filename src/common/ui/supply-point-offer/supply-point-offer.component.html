@@ -57,7 +57,6 @@
                                  *ngIf="supplyPointOffer.consumptionPriceVT && supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
                                 <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
                                     <span class="supply-point-offer__value-name">Cena za vysoký tarif</span>
-                                    <!-- TODO add support for icon here + hover effect -->
                                     <span class="supply-point-offer__value supply-point-offer__value--interactive"
                                           (click)="togglePriceDecomposition($event)">
                                         {{supplyPointOffer.consumptionPriceVT | number: '1.0-2'}} Kč/MWh
