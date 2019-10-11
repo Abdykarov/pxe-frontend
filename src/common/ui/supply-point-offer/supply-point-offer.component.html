@@ -32,8 +32,7 @@
         </div>
         <div class="col-12 col-xl-5"
              [class.col-md-6]="isOwner">
-            <div class="supply-point-offer__inner supply-point-offer__inner--price"
-                 [class.pb-0]="showPriceDecomposition">
+            <div class="supply-point-offer__inner supply-point-offer__inner--price">
                 <div class="row">
                     <ng-container *ngIf="supplyPointOffer.prepayment || supplyPointOffer.totalPrice">
                         <div class="col-12">
@@ -42,7 +41,6 @@
                             </span>
                         </div>
                         <div class="col-12 col-md-8 col-xl-12">
-                            <!-- TODO remove hover effect from supply-point-offer__title and supply-point-offer__info-icon removed -->
                             <span class="supply-point-offer__title">
                                 <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
                                     {{supplyPointOffer.prepayment | number: '1.0-2'}}&nbsp;Kč
@@ -53,14 +51,14 @@
                             </span>
                         </div>
                     </ng-container>
-                    <div class="col-12">
+                    <div class="col-12 order-md-2">
                         <div class="row">
                             <div class="col-auto"
                                  *ngIf="supplyPointOffer.consumptionPriceVT && supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
-                                <div class="supply-point-offer__value-box">
+                                <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
                                     <span class="supply-point-offer__value-name">Cena za vysoký tarif</span>
                                     <!-- TODO add support for icon here + hover effect -->
-                                    <span class="supply-point-offer__value"
+                                    <span class="supply-point-offer__value supply-point-offer__value--interactive"
                                           (click)="togglePriceDecomposition($event)">
                                         {{supplyPointOffer.consumptionPriceVT | number: '1.0-2'}} Kč/MWh
                                         <span class="icon icon--info supply-point-offer__info-icon"></span>
@@ -89,7 +87,7 @@
                             </div>
                             <div class="col-auto"
                                  *ngIf="supplyPointOffer.monthlyConsumptionFee">
-                                <div class="supply-point-offer__value-box">
+                                <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
                                     <span class="supply-point-offer__value-name">Poplatek za Odběrné místo</span>
                                     <span class="supply-point-offer__value">{{supplyPointOffer.monthlyConsumptionFee | number: '1.0-2'}} Kč/měsíc</span>
                                 </div>
@@ -97,7 +95,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-4 col-xl-12 supply-point-offer__addon"
+                    <div class="col-12 col-md-4 col-xl-12 order-xl-3 supply-point-offer__addon"
                          [class.d-none]="showPriceDecomposition"
                          [class.d-md-block]="showPriceDecomposition"
                          *ngIf="!isOwner && interactive">
@@ -113,7 +111,7 @@
         <div *ngIf="showPriceDecomposition"
              class="col-12">
             <div class="supply-point-offer__inner supply-point-offer__inner--price  supply-point-offer__inner--price-decomposition">
-                <div class="row no-gutters align-items-center">
+                <div class="row no-gutters align-items-center mb-4 mb-md-5">
                     <div class="col">
                         <span class="supply-point-offer__decomposition-title">Regulovaná část ceny</span>
                     </div>

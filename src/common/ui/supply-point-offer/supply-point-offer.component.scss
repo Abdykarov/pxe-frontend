@@ -136,39 +136,17 @@
 			padding-bottom: ( $spacer * 1.5 );
 			background-color: rgba($body-bg, .5);
 
-			.supply-point-offer__title,
-			.supply-point-offer__info-icon {
-				// Media queries
-				@include media-breakpoint-up(xl) {
-					font-size: $supply-point-offer-price-font-size-xl;
-				}
-			}
-
 			.supply-point-offer__title {
 				margin-bottom: $spacer;
 
 				// Media queries
 				@include media-breakpoint-up(md) {
-					margin-bottom: 0;
-				}
-				@include media-breakpoint-up(xl) {
 					margin-bottom: ( $spacer * 1.5 );
-				}
-
-				&:focus,
-				&:hover {
-					color: $primary;
-					cursor: pointer;
 				}
 			}
 		}
 
 		&--price-decomposition {
-			// Media queries
-			@include media-breakpoint-up(md) {
-				padding-bottom: ( $spacer * 2.5 );
-			}
-
 			&::before {
 				content: '';
 				position: absolute;
@@ -220,10 +198,7 @@
 	}
 
 	&__info-icon {
-		// Media queries
-		@include media-breakpoint-up(md) {
-			font-size: $icon-size-large-px;
-		}
+		margin-left: ( $spacer / 2 );
 	}
 
 	&__value-box {
@@ -233,14 +208,14 @@
 		margin-right: $spacer;
 
 		&--price {
-			margin-top: ( $spacer * 1.5 );
-			margin-bottom: 0;
-			margin-right: ( $spacer * 2 );
+			// margin-top: ( $spacer * 1.5 );
+			// margin-bottom: 0;
+			// margin-right: ( $spacer * 2 );
 
-			// Media queries
-			@include media-breakpoint-up(md) {
-				margin-top: ( $spacer * 2 );
-			}
+			// // Media queries
+			// @include media-breakpoint-up(md) {
+			// 	margin-top: ( $spacer * 2 );
+			// }
 
 			.supply-point-offer__value {
 				font-size: $supply-point-offer-decomposition-font-size;
@@ -250,6 +225,19 @@
 
 	&__value-name {
 		margin-bottom: ( $spacer / 2 );
+	}
+
+	&__value {
+		display: flex;
+		align-items: center;
+
+		&--interactive {
+			&:focus,
+			&:hover {
+				color: $primary;
+				cursor: pointer;
+			}
+		}
 	}
 
 	&__decomposition-title {
@@ -262,8 +250,11 @@
 	}
 
 	&__addon {
+		margin-top: ( $spacer / 2 );
+
 		// Media queries
 		@include media-breakpoint-up(md) {
+			margin-top: 0;
 			text-align: right;
 		}
 		@include media-breakpoint-up(xl) {
