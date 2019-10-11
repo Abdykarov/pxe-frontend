@@ -137,20 +137,6 @@
 		}
 	}
 
-	ol.ol--centered {
-		li {
-			padding-bottom: ( $spacer / 4 );
-			padding-left: 0;
-
-			&::before {
-				position: relative;
-				left: 0;
-				margin-right: ( $spacer / 2 );
-				font-weight: 400;
-			}
-		}
-	}
-
 	.check-list {
 		li {
 			padding-left: ( $icon-size-small-px + ( $spacer / 2 ) );
