@@ -2,7 +2,11 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import * as R from 'ramda';
-import { takeUntil } from 'rxjs/operators';
+import {
+    filter,
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -14,13 +18,15 @@ import {
     ROUTES,
 } from 'src/app/app.constants';
 import { DocumentService } from 'src/app/services/document.service';
+import { IContractWithNameAndSupplyPointEan } from 'src/common/graphql/models/suppplier.model';
 import {
     IDocumentType,
     IResponseDataDocument,
 } from 'src/app/services/model/document.model';
 import { IsDatePast } from 'src/common/pipes/is-date-past/is-date-past.pipe';
 import { parseRestAPIErrors } from 'src/common/utils';
-import { SupplierConcludedContractsConfig, supplyPointsSource } from './supplier-concluded-contracts.config';
+import { SupplierConcludedContractsConfig} from './supplier-concluded-contracts.config';
+import { SupplierService } from 'src/common/graphql/services/supplier.service';
 
 @Component({
     selector: 'lnd-supplier-concluded-contracts',
@@ -35,6 +41,7 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
         private router: Router,
         private route: ActivatedRoute,
         private supplierConcludedContractsConfig: SupplierConcludedContractsConfig,
+        private supplierService: SupplierService,
     ) {
         super();
     }
@@ -43,7 +50,7 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
     public readonly itemsPerPage = 50;
     public readonly showBoundaryLinks = true;
     public readonly maxSize = 5;
-    public supplyPoints: any[] = supplyPointsSource;
+    public supplyPoints: any[] = null;
     public tableCols = null;
     public COMMODITY_TYPE_POWER = CommodityType.POWER;
 
@@ -64,6 +71,9 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
         this.route.params
             .pipe(
                 takeUntil(this.destroy$),
+                filter(
+                    () => !!this.supplyPoints,
+                ),
             )
             .subscribe(params => {
                 if (R.indexOf(params.commodityType, R.keys(commodityTypes)) < 0) {
@@ -78,16 +88,25 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                     (supplyPoint: ISupplyPoint) =>
                         supplyPoint.commodityType === this.commodityType,
                     this.supplyPoints);
-                console.log(this.commodityType);
                 this.cd.markForCheck();
+            });
+
+        this.supplierService.getListSupplierContractsBasedOnOffers()
+            .pipe(
+                takeUntil(this.destroy$),
+                map(({data}) => data.getListSupplierContractsBasedOnOffers),
+            )
+            .subscribe((contractWithNameAndSupplyPointEan: IContractWithNameAndSupplyPointEan) => {
+                console.log(contractWithNameAndSupplyPointEan);
             });
 
     }
 
-    downloadPdf = (contractId: string) => {
+    downloadPDF = (contractId: string) => {
         this.openDocument(contractId, IDocumentType.CONTRACT);
     }
 
+    // save
     public openDocument(contractId: string, documentType: IDocumentType) {
         const windowReference = window && window.open();
         this.formLoading = true;
