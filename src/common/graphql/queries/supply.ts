@@ -324,8 +324,8 @@ export const computeAndGetSupplyPointStatisticsQuery = gql`
 `;
 
 export const getSupplyPointGlobalStatisticsQuery = gql`
-    query getSupplyPointGlobalStatistics($input: Boolean){
-        getSupplyPointGlobalStatistics(includeHistoryData:$input) {
+    query getSupplyPointGlobalStatistics($includeHistoryData: Boolean){
+        getSupplyPointGlobalStatistics(includeHistoryData:$includeHistoryData) {
             gasOfferCount,
             powerOfferCount,
             gasDeliveryCount,

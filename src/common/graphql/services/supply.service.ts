@@ -188,12 +188,12 @@ export class SupplyService {
         })
         .valueChanges
 
-    public getSupplyPointGlobalStatistics = (input: boolean = false) => this.apollo
+    public getSupplyPointGlobalStatistics = (includeHistoryData: boolean = false) => this.apollo
         .watchQuery<any>({
             fetchPolicy: 'network-only',
             query: getSupplyPointGlobalStatisticsQuery,
             variables: {
-                input,
+                includeHistoryData,
             },
         })
         .valueChanges
