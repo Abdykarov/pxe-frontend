@@ -3,6 +3,7 @@ import {
     Input, Output,
     ViewEncapsulation,
 } from '@angular/core';
+import { PageChangedEvent } from 'ngx-bootstrap';
 
 @Component({
     selector: 'lnd-pagination',
@@ -36,5 +37,5 @@ export class PaginationComponent {
     public lastText = '';
 
     @Output()
-    public pageChanged: EventEmitter<any> = new EventEmitter();
+    public pageChanged: EventEmitter<PageChangedEvent> = new EventEmitter();
 }

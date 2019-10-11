@@ -3,30 +3,33 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import * as R from 'ramda';
 import {
-    filter,
+    BehaviorSubject,
+    combineLatest,
+} from 'rxjs';
+import {
     map,
+    switchMap,
     takeUntil,
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import {
-    CommodityType,
-    ISupplyPoint,
-} from 'src/common/graphql/models/supply.model';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import {
     commodityTypes,
     ROUTES,
 } from 'src/app/app.constants';
+import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
 import { IContractWithNameAndSupplyPointEan } from 'src/common/graphql/models/suppplier.model';
 import {
     IDocumentType,
     IResponseDataDocument,
 } from 'src/app/services/model/document.model';
-import { IsDatePast } from 'src/common/pipes/is-date-past/is-date-past.pipe';
 import { parseRestAPIErrors } from 'src/common/utils';
 import { SupplierConcludedContractsConfig} from './supplier-concluded-contracts.config';
 import { SupplierService } from 'src/common/graphql/services/supplier.service';
+import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
+import { PageChangedEvent } from 'ngx-bootstrap';
 
 @Component({
     selector: 'lnd-supplier-concluded-contracts',
@@ -35,10 +38,51 @@ import { SupplierService } from 'src/common/graphql/services/supplier.service';
 })
 export class SupplierConcludedContractsComponent extends AbstractComponent implements OnInit {
 
+    private _commodityType: CommodityType = null;
+
+    public COMMODITY_TYPE_POWER = CommodityType.POWER;
+
+    // page setting
+    public readonly bannerType = BannerTypeImages.SUPPLIER_NULL;
+    public readonly routePower = ROUTES.ROUTER_SUPPLIER_CONCLUDED_CONTRACTS_POWER;
+    public readonly routeGas = ROUTES.ROUTER_SUPPLIER_CONCLUDED_CONTRACTS_GAS;
+
+    // subjects
+    public commodityTypeSubject$: BehaviorSubject<CommodityType> = new BehaviorSubject(CommodityType.POWER);
+    public commodityType$ = this.commodityTypeSubject$.asObservable();
+    public numberOfPageSubject$: BehaviorSubject<number> = new BehaviorSubject(1);
+    public numberOfPage$ = this.commodityTypeSubject$.asObservable();
+
+    // pagination setting
+    public readonly itemsPerPage = 50;
+    public readonly showBoundaryLinks = true;
+    public readonly maxSize = 5;
+    public readonly firstText = '<span class="arrow-text">first</span>';
+    public readonly previousText = '<span class="arrow-text">prev</span>';
+    public readonly nextText = '<span class="arrow-text">next</span>';
+    public readonly lastText = '<span class="arrow-text">last</span>';
+
+    // table
+    public contractsWithNameAndSupplyPointEan: IContractWithNameAndSupplyPointEan[] = null;
+    public tableCols = null;
+    public totalItems: number = null;
+
+    // errors
+    public formLoading = false;
+    public globalError: string[] = [];
+
+    get commodityType(): any {
+        return this._commodityType;
+    }
+
+    set commodityType(value: any) {
+        this._commodityType = value;
+        this.commodityTypeSubject$.next(value);
+    }
+
     constructor(
         private cd: ChangeDetectorRef,
         private documentService: DocumentService,
-        private isDatePast: IsDatePast,
         private router: Router,
         private route: ActivatedRoute,
         private supplierConcludedContractsConfig: SupplierConcludedContractsConfig,
@@ -47,63 +91,49 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
         super();
     }
 
-    public readonly routePower = ROUTES.ROUTER_SUPPLIER_CONCLUDED_CONTRACTS_POWER;
-    public readonly routeGas = ROUTES.ROUTER_SUPPLIER_CONCLUDED_CONTRACTS_GAS;
-    public readonly itemsPerPage = 50;
-    public readonly showBoundaryLinks = true;
-    public readonly maxSize = 5;
-    public supplyPoints: any[] = null;
-    public tableCols = null;
-    public COMMODITY_TYPE_POWER = CommodityType.POWER;
-
-    public totalItems = 1108;
-    public formLoading = false;
-    public globalError: string[] = [];
-
-    public supplyPointResult: ISupplyPoint[] = null;
-    public commodityType = CommodityType.POWER;
-
-    public pageChanged = ($event) => {
-        console.log($event);
-    }
-
-
     ngOnInit() {
-        this.supplierService.getListSupplierContractsBasedOnOffers()
-            .pipe(
-                takeUntil(this.destroy$),
-                map(({data}) => data.getListSupplierContractsBasedOnOffers),
-            )
-            .subscribe((contractWithNameAndSupplyPointEan: IContractWithNameAndSupplyPointEan) => {
-                console.log(contractWithNameAndSupplyPointEan);
-            });
+        combineLatest(this.commodityType$, this.numberOfPage$).pipe(
+            switchMap(([commodityType, numberOfPage]) => this.getListSupplierContractsBasedOnOffers(commodityType, numberOfPage)),
+            map(({data}) =>  data.getListSupplierContractsBasedOnOffers),
+            takeUntil(this.destroy$),
+        ).subscribe((contractWithNameAndSupplyPointEan: IContractWithNameAndSupplyPointEan[]) => {
+            this.contractsWithNameAndSupplyPointEan = contractWithNameAndSupplyPointEan;
+            this.totalItems = contractWithNameAndSupplyPointEan.length;
+            this.cd.markForCheck();
+        });
 
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.route.params
             .pipe(
                 takeUntil(this.destroy$),
-                filter(
-                    () => !!this.supplyPoints,
-                ),
             )
             .subscribe(params => {
                 if (R.indexOf(params.commodityType, R.keys(commodityTypes)) < 0) {
                     this.router.navigate([this.routePower]);
                     return;
                 }
-                this.commodityType = commodityTypes[params.commodityType];
                 this.tableCols = this.supplierConcludedContractsConfig.getTableCols(this.commodityType );
-                // nutno zamyslet se nad stavama po ubteragaci skuzeb + prepinani mezi
-                // commodity a aktualnost (prebliknuti zmena textace atd nez se to nacte dodelani loading?)
-                this.supplyPointResult = R.filter(
-                    (supplyPoint: ISupplyPoint) =>
-                        supplyPoint.commodityType === this.commodityType,
-                    this.supplyPoints);
+                this.commodityType = commodityTypes[params.commodityType];
                 this.cd.markForCheck();
             });
     }
 
-    downloadPDF = (contractId: string) => {
+    public getListSupplierContractsBasedOnOffers = (commodityType: CommodityType, numberOfPage: any) => {
+        return this.supplierService.getListSupplierContractsBasedOnOffers(commodityType, numberOfPage, this.itemsPerPage)
+            .pipe(
+                takeUntil(this.destroy$),
+            );
+    }
+
+    public pageChanged = ($event: PageChangedEvent) => {
+        if ($event.page) {
+            this.numberOfPageSubject$.next($event.page);
+        } else {
+            this.globalError.push(defaultErrorMessage);
+        }
+    }
+
+    public downloadPDF = (contractId: string) => {
         this.documentService.getDocument(contractId, IDocumentType.CONTRACT)
             .pipe(
                 takeUntil(this.destroy$),
@@ -154,7 +184,7 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
     public redirectToOffer = (evt) => {
         evt.preventDefault();
         this.router.navigate([
-            this.commodityType === CommodityType.POWER ? ROUTES.ROUTER_SUPPLY_OFFER_POWER : ROUTES.ROUTER_SUPPLY_OFFER_GAS,
+            this._commodityType === CommodityType.POWER ? ROUTES.ROUTER_SUPPLY_OFFER_POWER : ROUTES.ROUTER_SUPPLY_OFFER_GAS,
         ]);
     }
 }

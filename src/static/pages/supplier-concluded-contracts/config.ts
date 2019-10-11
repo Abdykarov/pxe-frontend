@@ -6,8 +6,6 @@ import {
 import { formatDate } from '@angular/common';
 
 import { IContractWithNameAndSupplyPointEan } from 'src/common/graphql/models/suppplier.model';
-import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
-import { IContract } from 'src/common/graphql/models/contract';
 
 @Injectable({
     providedIn: 'root',
@@ -63,15 +61,44 @@ export class SupplierConcludedContractsConfig {
     ];
 
 
-    public readonly contractsWithNameAndSupplyPointEan: [IContractWithNameAndSupplyPointEan] = [
+    public readonly contractsWithNameAndSupplyPointEan: IContractWithNameAndSupplyPointEan[] = [
         {
             offerId: '1',
-            name: 'AHOJ',
+            name: 'Jaroslav Dvořák',
             ean: '8591',
             contract: {
                 offerValidity: true,
                 deliveryTo: '2021-08-01',
                 deliveryFrom: '2020-08-01',
+                personalData: {
+                    name: '',
+                    birthDate: '',
+                    ico: '',
+                    dic: '',
+                    address1: null,
+                    address2: null,
+                    email: '',
+                    phone: '',
+                    bankAccountNumber: '',
+                    bankCode: '',
+                    depositPaymentType: {
+                        type: '',
+                        code: '',
+                        description: '',
+                        help: '',
+                    },
+                    deposit: 1000,
+                },
+            },
+        },
+        {
+            offerId: '2',
+            name: 'Jaroslav Dvořák',
+            ean: '8591',
+            contract: {
+                offerValidity: true,
+                deliveryTo: '2021-09-01',
+                deliveryFrom: '2020-09-01',
                 personalData: {
                     name: '',
                     birthDate: '',

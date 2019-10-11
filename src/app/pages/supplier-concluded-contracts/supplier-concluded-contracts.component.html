@@ -47,24 +47,24 @@
                     }"
                 ></lnd-table>
                 <div class="float-right">
-                    <!--<pagination-->
-                        <!--[boundaryLinks]="showBoundaryLinks"-->
-                        <!--[itemsPerPage]="itemsPerPage"-->
-                        <!--[maxSize]="maxSize"-->
-                        <!--(pageChanged)="pageChanged($event)"-->
-                        <!--[totalItems]="totalItems"-->
-                        <!--firstText="&laquo;"-->
-                        <!--previousText="&lsaquo;"-->
-                        <!--nextText="&rsaquo;"-->
-                        <!--lastText="&raquo;"-->
-                    <!--&gt;</pagination>-->
+                    <lnd-pagination
+                        [showBoundaryLinks]="showBoundaryLinks"
+                        [itemsPerPage]="itemsPerPage"
+                        [maxSize]="maxSize"
+                        (pageChanged)="pageChanged($event)"
+                        [totalItems]="totalItems"
+                        [firstText] = "firstText"
+                        [previousText] = "previousText"
+                        [nextText] = "nextText"
+                        [lastText] = "lastText"
+                    ></lnd-pagination>
                 </div>
             </ng-container>
-            <!-- puvodni dokument neni - logo - aspon jsem ho nenasel-->
             <lnd-info-banner
                 *ngIf="supplyPointResult !== null && supplyPointResult.length === 0"
-                [bannerTitle]="'Žádný zákazník u vás momentálně nemá zasmluvněnou dodávku ' + (commodityType === COMMODITY_TYPE_POWER ? 'elektřiny': 'plynu') + '.'"
                 [bannerDescription]="'Vytvořte nabídku a uvidíte, že zájemců se objeví brzo mnoho.'"
+                [bannerTitle]="'Žádný zákazník u vás momentálně nemá zasmluvněnou dodávku ' + (commodityType === COMMODITY_TYPE_POWER ? 'elektřiny': 'plynu') + '.'"
+                [bannerType]="bannerType"
                 [buttonLabel]="'Vytvořte nabídku'"
                 (buttonAction)="redirectToOffer($event)"
             ></lnd-info-banner>

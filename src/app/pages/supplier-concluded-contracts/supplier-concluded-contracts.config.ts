@@ -5,10 +5,8 @@ import {
     LOCALE_ID,
 } from '@angular/core';
 
-import {
-    CommodityType,
-    ISupplyPoint,
-} from 'src/common/graphql/models/supply.model';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
+import { IContractWithNameAndSupplyPointEan } from 'src/common/graphql/models/suppplier.model';
 
 // tslint:disable:max-line-length
 @Injectable({
@@ -27,7 +25,7 @@ export class SupplierConcludedContractsConfig {
                 {
                     headingClass: [''],
                     cellClass: [''],
-                    content: (row: ISupplyPoint) => `${row.name}`,
+                    content: (row: IContractWithNameAndSupplyPointEan) => `${row.name}`,
                 },
             ],
         },
@@ -37,7 +35,7 @@ export class SupplierConcludedContractsConfig {
                 {
                     headingClass: [''],
                     cellClass: [''],
-                    content: (row: ISupplyPoint) => `${row.ean}`,
+                    content: (row: IContractWithNameAndSupplyPointEan) => `${row.ean}`,
                 },
             ],
         },
@@ -47,7 +45,7 @@ export class SupplierConcludedContractsConfig {
                 {
                     headingClass: [''],
                     cellClass: [''],
-                    content: (row: ISupplyPoint) =>
+                    content: (row: IContractWithNameAndSupplyPointEan) =>
                         `${formatDate(row.contract.deliveryFrom, 'dd. MM. yyyy', this.locale)} -
                         ${formatDate(row.contract.deliveryTo, 'dd. MM. yyyy', this.locale)}`,
                 },
