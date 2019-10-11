@@ -69,12 +69,14 @@ type Mutation {
     deleteSelectedOfferFromContract(contractId: ID!): Boolean
     deleteSignedContract(contractId: ID!, smsConfirmationCode: String!): Boolean
     makeRegistration(email: String!, preregistration: Boolean = false, termsOfConditionsApproved: Boolean!): Boolean
+    makeUnregistration(smsCode: String): Boolean
     resetPassword(email: String!): PasswordDestination
     saveContract(offerId: ID!, supplyPointId: ID!): ID
     saveGasOffer(gasAttributes: OfferInputGasAttributes!, offer: OfferInput!): Int
     savePersonalData(contractId: ID!, personalData: PersonalDataInput!): Boolean
     savePowerOffer(offer: OfferInput!, powerAttributes: OfferInputPowerAttributes!): Int
     sendContractConfirmationSms(contractId: ID!): Boolean
+    sendUnregisterSms: Boolean
     signContract(contractId: Int!, smsCode: String): Boolean
     updateGasOffer(gasAttributes: OfferInputGasAttributes!, offer: OfferInput!, offerId: ID!): Int
     updateGasSupplyPoint(gasAttributes: SupplyPointInputGasAttributes!, supplyPoint: SupplyPointInput!, supplyPointId: ID!): Int
@@ -153,6 +155,7 @@ type Query {
     getPaymentInfo(contractId: ID!, setting: QRCodeSetting!): Payment
     getPersonalData(contractId: ID!): PersonalData
     getSupplyPoint(supplyPointId: ID!): SupplyPoint
+    getSupplyPointGlobalStatistics(includeHistoryData: Boolean): SupplyPointGlobalStatistic
 }
 
 type SelectedOffer {
@@ -222,6 +225,15 @@ type SupplyPoint {
     supplier: Supplier!
     timeToContractEnd: Int
     timeToContractEndPeriod: CodelistItem
+}
+
+type SupplyPointGlobalStatistic {
+    gasDeliveryCount: Int!
+    gasOfferCount: Int!
+    powerDeliveryCount: Int!
+    powerOfferCount: Int!
+    totalPossibleDeliveryCountGas: Int!
+    totalPossibleDeliveryCountPower: Int!
 }
 
 type SupplyPointOffer {
@@ -301,6 +313,7 @@ enum LandingPage {
     DASHBOARD
     NEW_SUPPLY_POINT
     OFFERS
+    WAITING_FOR_PAYMENT
 }
 
 enum OfferStatus {
