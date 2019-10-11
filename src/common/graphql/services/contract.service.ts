@@ -20,7 +20,6 @@ import {
     getContractTermsQuery,
     getPaymentInfoQuery,
 } from 'src/common/graphql/queries/contract';
-import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
 import {
     ISupplyPoint,
     ProgressStatus,

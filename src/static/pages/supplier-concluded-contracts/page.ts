@@ -14,8 +14,8 @@ export class SupplierConcludedContractsComponent {
     public readonly nextText = '<span class="arrow-text">next</span>';
     public readonly lastText = '<span class="arrow-text">last</span>';
 
-    public supplyPoint: any[] = this.supplierConcludedContractsConfig.supplyPointsSource;
-    public totalItems = this.supplierConcludedContractsConfig.supplyPointsSource.length;
+    public supplyPoint: any[] = this.supplierConcludedContractsConfig.contractsWithNameAndSupplyPointEan;
+    public totalItems = this.supplierConcludedContractsConfig.contractsWithNameAndSupplyPointEan.length;
     public tableCols = this.supplierConcludedContractsConfig.tableCols;
 
     constructor(

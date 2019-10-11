@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 
 import * as R from 'ramda';
+import { Moment } from 'moment';
 
 import { CONTRACT_END_TYPE } from 'src/app/app.constants';
 import {
@@ -35,12 +36,12 @@ export class NewSupplyWillBeginPipe implements PipeTransform {
     isContractEndTermOrRequest = (supplyPointInput: ISupplyPointInput) =>
         this.isContractEndTerm(supplyPointInput) || this.isContractEndRequest(supplyPointInput)
 
-    transform(supplyPointInput: ISupplyPointInput): string | boolean  {
+    transform(supplyPointInput: ISupplyPointInput): Date  {
         if (supplyPointInput.ownTerminate) {
             supplyPointInput.contractEndTypeId = CONTRACT_END_TYPE.CONTRACT_END_TERMINATE;
         }
 
-        return R.cond([
+        const result: Moment | boolean = R.cond([
             [
                 this.isContractEndDefault,
                 false,
@@ -58,5 +59,6 @@ export class NewSupplyWillBeginPipe implements PipeTransform {
                 contractEndIndefinitePeriod,
             ],
         ])(supplyPointInput);
+        return result && (<Moment>result).isValid() ? (<Moment>result).toDate() : null;
     }
 }

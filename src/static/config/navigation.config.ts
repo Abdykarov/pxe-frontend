@@ -142,6 +142,10 @@ export const staticNavigationConfig: INavigationConfig = [
             'icon': 'component-high',
             'children': [
                 {
+                    'label': 'Account deleted',
+                    'url': '/full/account-deleted',
+                },
+                {
                     'label': 'Contract signing',
                     'url': '/basic/contract-signing',
                 },
@@ -164,6 +168,18 @@ export const staticNavigationConfig: INavigationConfig = [
                 {
                     'label': 'Dashboard',
                     'url': '/basic/dashboard',
+                },
+                {
+                    'label': 'Delete account - simple',
+                    'url': '/basic/delete-account-ok-simple',
+                },
+                {
+                    'label': 'Delete account - phone',
+                    'url': '/basic/delete-account-ok-with-phone',
+                },
+                {
+                    'label': 'Delete account - failed',
+                    'url': '/basic/delete-account-failed',
                 },
                 {
                     'label': 'Landing page',

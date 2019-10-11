@@ -35,7 +35,6 @@ import {
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { getOverviewState } from 'src/common/utils/get-overview-state.fnc';
 
 @Component({
     selector: 'pxe-contract',
@@ -45,12 +44,13 @@ import { getOverviewState } from 'src/common/utils/get-overview-state.fnc';
 export class PaymentComponent extends AbstractComponent implements OnInit {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.WAITING_FOR_PAYMENT;
 
-    public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public bannerTypeImages = BannerTypeImages;
+    public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
+    public contractStatus = ContractStatus;
     public globalError: string[] = [];
+    public isContractFinalized = false;
     public loading = true;
     public paymentInfo: IPayment;
-    public contractStatus = ContractStatus;
     public supplyPoint: ISupplyPoint;
     public supplyPointNewVersion: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
@@ -79,13 +79,13 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                 switchMap((supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
                     this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.WAITING_FOR_PAYMENT);
-                    const isContractFinalized = this.supplyPoint.contract &&
+                    this.isContractFinalized = this.supplyPoint.contract &&
                         R.indexOf(this.supplyPoint.contract.contractStatus, [
                             ContractStatus.CONCLUDED,
                             ContractStatus.CANCELED,
                             ContractStatus.TO_BE_CANCELED,
                         ]) >= 0;
-                    if (isContractFinalized) {
+                    if (this.isContractFinalized) {
                         this.finalizePaymentProgress();
                     }
                     if (this.supplyPoint.contract && this.supplyPoint.contract.contractStatus === ContractStatus.WAITING_FOR_PAYMENT &&
@@ -103,7 +103,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                 switchMap((paymentInfo: IPayment) => {
                     const firstContract = this.authService.currentUserValue.firstContract;
                     this.paymentInfo = paymentInfo;
-                    if (firstContract) {
+                    if (firstContract && this.isContractFinalized) {
                         return this.contractService.confirmFirstContractView();
                     } else {
                         return of({
@@ -123,10 +123,10 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                 switchMap(() => {
                     if (this.supplyPoint.contract && this.supplyPoint.contract.contractStatus === ContractStatus.TO_BE_CANCELED) {
                         return this.supplyService.findSupplyPointsByContractStatus(
-                            this.supplyPoint.ean,
                             [
                                 ContractStatus.NOT_CONCLUDED,
                             ],
+                            this.supplyPoint.ean,
                         );
                     }
                     return of({

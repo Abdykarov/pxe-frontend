@@ -34,6 +34,7 @@ import { SupplierService } from 'src/common/graphql/services/supplier.service';
     styleUrls: ['./supplier-concluded-contracts.component.scss'],
 })
 export class SupplierConcludedContractsComponent extends AbstractComponent implements OnInit {
+
     constructor(
         private cd: ChangeDetectorRef,
         private documentService: DocumentService,
@@ -45,6 +46,7 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
     ) {
         super();
     }
+
     public readonly routePower = ROUTES.ROUTER_SUPPLIER_CONCLUDED_CONTRACTS_POWER;
     public readonly routeGas = ROUTES.ROUTER_SUPPLIER_CONCLUDED_CONTRACTS_GAS;
     public readonly itemsPerPage = 50;
@@ -67,6 +69,15 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
 
 
     ngOnInit() {
+        this.supplierService.getListSupplierContractsBasedOnOffers()
+            .pipe(
+                takeUntil(this.destroy$),
+                map(({data}) => data.getListSupplierContractsBasedOnOffers),
+            )
+            .subscribe((contractWithNameAndSupplyPointEan: IContractWithNameAndSupplyPointEan) => {
+                console.log(contractWithNameAndSupplyPointEan);
+            });
+
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.route.params
             .pipe(
@@ -90,23 +101,27 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                     this.supplyPoints);
                 this.cd.markForCheck();
             });
-
-        this.supplierService.getListSupplierContractsBasedOnOffers()
-            .pipe(
-                takeUntil(this.destroy$),
-                map(({data}) => data.getListSupplierContractsBasedOnOffers),
-            )
-            .subscribe((contractWithNameAndSupplyPointEan: IContractWithNameAndSupplyPointEan) => {
-                console.log(contractWithNameAndSupplyPointEan);
-            });
-
     }
 
     downloadPDF = (contractId: string) => {
-        this.openDocument(contractId, IDocumentType.CONTRACT);
+        this.documentService.getDocument(contractId, IDocumentType.CONTRACT)
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                (responseDataDocument: IResponseDataDocument) => {
+                    this.documentService.documentSave(responseDataDocument);
+                    this.cd.markForCheck();
+                },
+                (error) => {
+                    const message = parseRestAPIErrors(error);
+                    this.globalError.push(message);
+                    this.cd.markForCheck();
+                },
+            );
     }
 
-    // save
+    // do budoucna
     public openDocument(contractId: string, documentType: IDocumentType) {
         const windowReference = window && window.open();
         this.formLoading = true;

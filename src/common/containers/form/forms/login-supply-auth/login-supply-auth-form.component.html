@@ -1,5 +1,5 @@
 <ng-template #reSendAuthSupplySms>
-    Na číslo {{telephoneNumber}} jsme vám poslali čtyřmístný  autentikační kód.
+    Na číslo {{telephoneNumber}} jsme vám poslali čtyřmístný autentizační kód.
     <br>
     <a (click)="handleCustomAction($event)">
         Poslat znovu
@@ -8,6 +8,7 @@
 
 <form
     [formGroup]="form"
+    (keydown.enter)="submitForm($event);false"
     class="form-container"
     autocomplete="off">
     <lnd-form-field
@@ -23,7 +24,8 @@
     <div class="text-right">
         <lnd-button
             type="primary"
-            (action)="submitForm()"
+            [submit]="true"
+            (action)="submitForm($event)"
             [isDisabled]="!!formLoading"
             label="Přihlásit se">
         </lnd-button>

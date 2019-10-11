@@ -1,0 +1,35 @@
+<div class="row text-center mb-md-6">
+    <div class="col-12 col-xl-6 offset-xl-3">
+        <h1>Zrušení uživatelského účtu </h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-xl-10 offset-xl-1">
+        <div class="page-box">
+            <p class="mb-3">
+                Mrzí nás, že PARC4U opouštíte, ale bránit vám v tom nemůžeme.
+            </p>
+            <p>
+                Zrušení účtu a smazání veškerých svých dat v PARC4U provedete ověřovacím SMS kódem.
+            </p>
+            <div class="row justify-content-between">
+                <div class="col-12 col-md-auto mb-4">
+                    <lnd-button
+                        label="Zůstat v PARC4U"
+                        type="link"
+                        customClass="mt-md-4"
+                        (click)="redirectToUserProfile($event)">
+                    </lnd-button>
+                </div>
+                <div class="col-12 col-md-auto">
+                    <pxe-verification-form
+                        submitLabelText="Zrušit účet"
+                        [showSentSmsLabelUnderFirstField]="false"
+                        [phone]="phone"
+                        (customAction)="sendConfirmationSms()">
+                    </pxe-verification-form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

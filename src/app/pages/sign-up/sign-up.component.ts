@@ -5,7 +5,6 @@ import {
 
 import { Apollo } from 'apollo-angular';
 
-import * as mutations from 'src/common/graphql/mutations';
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CONSTS,
@@ -18,6 +17,7 @@ import {
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
 import { parseGraphQLErrors } from 'src/common/utils';
+import { RegistrationService } from 'src/common/graphql/services/registration.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -35,6 +35,7 @@ export class SignUpComponent extends AbstractComponent {
     constructor(
         private apollo: Apollo,
         private cd: ChangeDetectorRef,
+        private registrationService: RegistrationService,
         private router: Router,
     ) {
         super();
@@ -45,11 +46,7 @@ export class SignUpComponent extends AbstractComponent {
         this.formLoading = true;
         this.globalError = [];
         this.fieldError = {};
-        this.apollo
-            .mutate<any>({
-                mutation: mutations.makeRegistrationMutation,
-                variables: values,
-            })
+        this.registrationService.makeRegistration(values)
             .subscribe(
                 () => {
                     this.formLoading = false;

@@ -284,34 +284,26 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         this.loadSuppliers(commodityType);
     }
 
-    public submitForm = () => {
-        this.resetCustomFieldError();
-        this.triggerValidation();
-        if (this.form.valid) {
-            const form = {
-                ...this.form.value,
-                supplierId: this.form.value.supplierId && parseInt(this.form.value.supplierId.id, 10),
-                address: {
-                    ...this.form.value.address,
-                    orientationNumber: this.form.value.address.orientationNumber || this.form.value.address.descriptiveNumber,
-                },
-                expirationDate: this.form.value.expirationDate && convertDateToSendFormatFnc(this.form.value.expirationDate),
-            };
-            if (!R.isNil(form.annualConsumptionNT)) {
-                form.annualConsumptionNT = parseFloat(form.annualConsumptionNT.toString().replace(',', '.'));
-            }
-            if (!R.isNil(form.annualConsumptionVT)) {
-                form.annualConsumptionVT = parseFloat(form.annualConsumptionVT.toString().replace(',', '.'));
-            }
-            if (!R.isNil(form.annualConsumption)) {
-                form.annualConsumption = parseFloat(form.annualConsumption.toString().replace(',', '.'));
-            }
-            if (this.contractEndType === CONTRACT_END_TYPE.CONTRACT_END_TERMINATE) {
-                form.contractEndTypeId = CONTRACT_END_TYPE.CONTRACT_END_TERMINATE;
-            }
-
-            this.submitAction.emit(form);
+    public submitValidForm = () => {
+        const form = {
+            ...this.form.value,
+            supplierId: this.form.value.supplierId && parseInt(this.form.value.supplierId.id, 10),
+            expirationDate: this.form.value.expirationDate && convertDateToSendFormatFnc(this.form.value.expirationDate),
+        };
+        if (!R.isNil(form.annualConsumptionNT)) {
+            form.annualConsumptionNT = parseFloat(form.annualConsumptionNT.toString().replace(',', '.'));
         }
+        if (!R.isNil(form.annualConsumptionVT)) {
+            form.annualConsumptionVT = parseFloat(form.annualConsumptionVT.toString().replace(',', '.'));
+        }
+        if (!R.isNil(form.annualConsumption)) {
+            form.annualConsumption = parseFloat(form.annualConsumption.toString().replace(',', '.'));
+        }
+        if (this.contractEndType === CONTRACT_END_TYPE.CONTRACT_END_TERMINATE) {
+            form.contractEndTypeId = CONTRACT_END_TYPE.CONTRACT_END_TERMINATE;
+        }
+
+        this.submitAction.emit(form);
     }
 
     public setOwnTerminate = (ownTerminate: boolean) => {

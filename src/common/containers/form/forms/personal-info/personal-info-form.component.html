@@ -6,22 +6,6 @@
         [formControl]="form.controls.onlyAddress1">
     </lnd-form-field>
 </ng-template>
-<!-- Example custom lael template -->
-<ng-template
-    #templateLabel
-    let-item="item"
-    let-index="index">
-    {{ item.street }}&nbsp;{{ item.orientationNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.descriptiveNumber }},
-    {{ item.city }}, {{ item.postCode }}
-</ng-template>
-<!-- Example searched items template -->
-<ng-template
-    #templateItem
-    let-item="item"
-    let-index="index">
-    {{ item.street }}&nbsp;{{ item.orientationNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.descriptiveNumber }}<br>
-    {{ item.city }}&nbsp;{{ item.postCode }}
-</ng-template>
 
 <div class="row mb-5">
     <div class="col-12 text-center">
@@ -62,6 +46,7 @@
             *ngIf="form.controls.signatoryName.status !== 'DISABLED' && form.controls.signatorySurname.status !== 'DISABLED'"
             label="Jméno a příjmení podepisující osoby"
             labelFor="signatoryName"
+            [wrapperFocused]="(fieldWrapperFocused$ | async) === 'signatoryName' || (fieldWrapperFocused$ | async) === 'signatorySurname'"
             [error]="((form.controls.signatoryName.touched || formError.signatoryName) && (formError.signatoryName || form.controls.signatoryName.errors)) ||
                      ((form.controls.signatorySurname.touched || formError.signatorySurname) && (formError.signatorySurname || form.controls.signatorySurname.errors))"
             [validationMessages]="((form.controls.signatoryName.touched || formError.signatoryName) && (formError.signatoryName || form.controls.signatoryName.errors) && formFields.validationMessages.signatoryName) ||
@@ -73,6 +58,9 @@
                     [error]="formError.signatoryName || form.controls.signatoryName.errors"
                     [formControl]="form.controls.signatoryName"
                     [id]="'signatoryName'"
+                    (focus)="fieldWrapperFocus('signatoryName')"
+                    (blur)="fieldWrapperBlur()"
+                    [inputFocused]="(fieldWrapperFocused$ | async) === 'signatoryName' || (fieldWrapperFocused$ | async) === 'signatorySurname'"
                     label="Jméno podepisující osoby"
                     [showErrorMessage]="false"
                     [success]="form.controls.signatoryName.valid && (form.controls.signatoryName.touched || formError.signatoryName)"
@@ -86,6 +74,9 @@
                     [error]="formError.signatorySurname || form.controls.signatorySurname.errors"
                     [formControl]="form.controls.signatorySurname"
                     [id]="'signatorySurname'"
+                    (focus)="fieldWrapperFocus('signatorySurname')"
+                    (blur)="fieldWrapperBlur()"
+                    [inputFocused]="(fieldWrapperFocused$ | async) === 'signatoryName' || (fieldWrapperFocused$ | async) === 'signatorySurname'"
                     label="Příjmení podepisující osoby"
                     [showErrorMessage]="false"
                     [success]="form.controls.signatorySurname.valid && (form.controls.signatorySurname.touched || formError.signatorySurname)"
@@ -127,12 +118,11 @@
     ></lnd-form-field>
     <pxe-address-whisperer
         [error]="formError.address1 || form.controls.address1.errors"
+        [formFieldsParentForm]="formFields"
         [label]="isIndividual ? 'Trvalá adresa' : 'Sídlo firmy'"
         [parentForm]="form"
         [success]="form.controls.address1.valid && (form.controls.address1.touched || formError.address1)"
-        [subtextTemplate]="otherAddress"
-        [templateItem]="templateItem"
-        [templateLabel]="templateLabel"
+        [addressSubtextTemplate]="otherAddress"
         [touched]="form.controls.address1.touched || formError.address1"
         [validationMessages]="isIndividual ? formFields.validationMessages.address1Person : formFields.validationMessages.address1Company"
         [whispererName]="'address1'">
@@ -140,11 +130,10 @@
     <pxe-address-whisperer
         [disabled]="!getFieldValue('onlyAddress1')"
         [error]="formError.address2 || form.controls.address2.errors"
+        [formFieldsParentForm]="formFields"
         [label]="isIndividual ? 'Korespondeční adresa' : 'Fakturační adresa'"
         [parentForm]="form"
         [success]="form.controls.address2.valid && (form.controls.address2.touched || formError.address2)"
-        [templateItem]="templateItem"
-        [templateLabel]="templateLabel"
         [touched]="form.controls.address2.touched || formError.address2"
         [validationMessages]="isIndividual ? formFields.validationMessages.address2Person : formFields.validationMessages.address2Company"
         [whispererName]="'address2'">
@@ -153,6 +142,7 @@
         label="Bankovní účet"
         labelFor="bankAccountNumber"
         subtext="Číslo bankovního účtu s předčíslím uveďte ve tvaru XX-XXXXXXXXXX"
+        [wrapperFocused]="(fieldWrapperFocused$ | async) === 'bankAccountNumber' || (fieldWrapperFocused$ | async) === 'bankCode'"
         [error]="((form.controls.bankAccountNumber.touched || formError.bankAccountNumber) && (formError.bankAccountNumber || form.controls.bankAccountNumber.errors)) ||
                  ((form.controls.bankCode.touched || formError.bankCode) && (formError.bankCode || form.controls.bankCode.errors))"
         [validationMessages]="((form.controls.bankAccountNumber.touched || formError.bankAccountNumber) && (formError.bankAccountNumber || form.controls.bankAccountNumber.errors) && formFields.validationMessages.bankAccountNumber) ||
@@ -165,6 +155,9 @@
                         [id]="'bankAccountNumber'"
                         label="Bankovní účet"
                         subtext="Číslo bankovního účtu s předčíslím uveďte ve tvaru XX-XXXXXXXXXX"
+                        (focus)="fieldWrapperFocus('bankAccountNumber')"
+                        (blur)="fieldWrapperBlur()"
+                        [inputFocused]="(fieldWrapperFocused$ | async) === 'bankAccountNumber' || (fieldWrapperFocused$ | async) === 'bankCode'"
                         [showErrorMessage]="false"
                         [success]="form.controls.bankAccountNumber.valid && (form.controls.bankAccountNumber.touched || formError.bankAccountNumber)"
                         [touched]="form.controls.bankAccountNumber.touched || formError.bankAccountNumber"
@@ -177,6 +170,9 @@
                         [formControl]="form.controls.bankCode"
                         [id]="'bankCode'"
                         label=""
+                        (focus)="fieldWrapperFocus('bankCode')"
+                        (blur)="fieldWrapperBlur()"
+                        [inputFocused]="(fieldWrapperFocused$ | async) === 'bankAccountNumber' || (fieldWrapperFocused$ | async) === 'bankCode'"
                         [showErrorMessage]="false"
                         [success]="form.controls.bankCode.valid && (form.controls.bankCode.touched || formError.bankCode)"
                         [touched]="form.controls.bankCode.touched || formError.bankCode"
@@ -188,6 +184,7 @@
     <pxe-field-wrapper
         label="Telefonní číslo"
         labelFor="phonePrefix"
+        [wrapperFocused]="(fieldWrapperFocused$ | async) === 'phonePrefix' || (fieldWrapperFocused$ | async) === 'phone'"
         [error]="((form.controls.phonePrefix.touched || formError.phonePrefix) && (formError.phonePrefix || form.controls.phonePrefix.errors)) ||
                  ((form.controls.phone.touched || formError.phone) && (formError.phone || form.controls.phone.errors))"
         [validationMessages]="((form.controls.phonePrefix.touched || formError.phonePrefix) && (formError.phonePrefix || form.controls.phonePrefix.errors) && formFields.validationMessages.phonePrefix) ||
@@ -200,6 +197,9 @@
                     [formControl]="form.controls.phonePrefix"
                     [id]="'phonePrefix'"
                     label="Telefonní číslo"
+                    (focus)="fieldWrapperFocus('phonePrefix')"
+                    (blur)="fieldWrapperBlur()"
+                    [inputFocused]="(fieldWrapperFocused$ | async) === 'phonePrefix' || (fieldWrapperFocused$ | async) === 'phone'"
                     [showErrorMessage]="false"
                     [success]="form.controls.phonePrefix.valid && (form.controls.phonePrefix.touched || formError.phonePrefix)"
                     [touched]="form.controls.phonePrefix.touched || formError.phonePrefix"
@@ -212,6 +212,9 @@
                     [formControl]="form.controls.phone"
                     [id]="'phone'"
                     label=""
+                    (focus)="fieldWrapperFocus('phonePrefix')"
+                    (blur)="fieldWrapperBlur()"
+                    [inputFocused]="(fieldWrapperFocused$ | async) === 'phonePrefix' || (fieldWrapperFocused$ | async) === 'phone'"
                     [showErrorMessage]="false"
                     [success]="form.controls.phone.valid && (form.controls.phone.touched || formError.phone)"
                     [touched]="form.controls.phone.touched || formError.phone"
