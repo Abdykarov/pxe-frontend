@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { IPaginatedContractsWithNameAndSupplyPointEan } from 'src/common/graphql/models/suppplier.model';
 import { SupplierConcludedContractsConfig } from './config';
 
 @Component({
@@ -14,8 +15,9 @@ export class SupplierConcludedContractsComponent {
     public readonly nextText = '<span class="arrow-text">next</span>';
     public readonly lastText = '<span class="arrow-text">last</span>';
 
-    public supplyPoint: any[] = this.supplierConcludedContractsConfig.contractsWithNameAndSupplyPointEan;
-    public totalItems = this.supplierConcludedContractsConfig.contractsWithNameAndSupplyPointEan.length;
+    public paginatedContractsWithNameAndSupplyPointEan: IPaginatedContractsWithNameAndSupplyPointEan =
+        this.supplierConcludedContractsConfig.paginatedContractsWithNameAndSupplyPointEan;
+
     public tableCols = this.supplierConcludedContractsConfig.tableCols;
 
     constructor(

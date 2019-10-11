@@ -33,15 +33,15 @@
     </ng-template>
     <div class="row">
         <div class="col-12 col-lg-10 offset-lg-1">
-            <ng-container  *ngIf="supplyPointResult !== null && supplyPointResult.length > 0">
-                <!--show more je vsude je ok?-->
+            <ng-container *ngIf="(contractsWithNameAndSupplyPointEan | pathValue:['contractsWithNameAndEan']) &&
+                                  contractsWithNameAndSupplyPointEan.contractsWithNameAndEan !== null &&
+                                  contractsWithNameAndSupplyPointEan.contractsWithNameAndEan.length > 0">
                 <lnd-table
                     [cols]="tableCols"
-                    [rows]="supplyPointResult"
+                    [rows]="contractsWithNameAndSupplyPointEan.contractsWithNameAndEan"
                     [showHead]="true"
                     [tableWrapperClass]="['table-wrapper--advanced']"
                     [tableClass]="['table--advanced', 'mb-0']"
-                    [mobileDetailCaption]="'Show more...'"
                     [columnTemplates]="{
                         downloadPdfTemplate: downloadPdfTemplate
                     }"
@@ -52,7 +52,7 @@
                         [itemsPerPage]="itemsPerPage"
                         [maxSize]="maxSize"
                         (pageChanged)="pageChanged($event)"
-                        [totalItems]="totalItems"
+                        [totalItems]="contractsWithNameAndSupplyPointEan.totalItems"
                         [firstText] = "firstText"
                         [previousText] = "previousText"
                         [nextText] = "nextText"
@@ -61,9 +61,11 @@
                 </div>
             </ng-container>
             <lnd-info-banner
-                *ngIf="supplyPointResult !== null && supplyPointResult.length === 0"
+                *ngIf="(contractsWithNameAndSupplyPointEan | pathValue:['contractsWithNameAndEan']) &&
+                        contractsWithNameAndSupplyPointEan.contractsWithNameAndEan !== null &&
+                        contractsWithNameAndSupplyPointEan.contractsWithNameAndEan.length === 0"
                 [bannerDescription]="'Vytvořte nabídku a uvidíte, že zájemců se objeví brzo mnoho.'"
-                [bannerTitle]="'Žádný zákazník u vás momentálně nemá zasmluvněnou dodávku ' + (commodityType === COMMODITY_TYPE_POWER ? 'elektřiny': 'plynu') + '.'"
+                [bannerTitle]="'Žádný zákazník u vás momentálně nemá zasmluvněnou dodávku ' + (commodityType$ | async) === COMMODITY_TYPE_POWER ? 'elektřiny': 'plynu' + '.'"
                 [bannerType]="bannerType"
                 [buttonLabel]="'Vytvořte nabídku'"
                 (buttonAction)="redirectToOffer($event)"

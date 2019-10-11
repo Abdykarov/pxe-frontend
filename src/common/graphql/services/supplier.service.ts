@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 
 import { Apollo } from 'apollo-angular';
 
+import {
+    IContractsBasedOnOffersFilter,
+    IPaginationFilter,
+} from 'src/common/graphql/models/suppplier.model';
 import { listSupplierContractsBasedOnOffersQuery } from 'src/common/graphql/queries/supplier';
-import { CommodityType } from 'src/common/graphql/models/supply.model';
 
 
 @Injectable({
@@ -16,9 +19,8 @@ export class SupplierService {
     ) {}
 
     public getListSupplierContractsBasedOnOffers = (
-            commodityType: CommodityType,
-            numberOfPage: number,
-            itemsPerPage: number,
+            contractsBasedOnOffersFilter: IContractsBasedOnOffersFilter,
+            paginationFilter: IPaginationFilter,
         ) => this.apollo
                 .watchQuery<any>({
                     query: listSupplierContractsBasedOnOffersQuery,

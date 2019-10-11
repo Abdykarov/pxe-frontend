@@ -42,11 +42,10 @@
         <div class="col-12 col-lg-10 offset-lg-1">
             <lnd-table
                 [cols]="tableCols"
-                [rows]="supplyPoint"
+                [rows]="paginatedContractsWithNameAndSupplyPointEan.contractsWithNameAndEan"
                 [showHead]="true"
                 [tableWrapperClass]="['table-wrapper--advanced']"
                 [tableClass]="['table--advanced', 'mb-0']"
-                [mobileDetailCaption]="'Show more...'"
                 [columnTemplates]="{
                     downloadPdfTemplate: downloadPdfTemplate
                 }"
@@ -57,7 +56,7 @@
                     [itemsPerPage]="itemsPerPage"
                     [maxSize]="maxSize"
                     (pageChanged)="pageChanged($event)"
-                    [totalItems]="totalItems"
+                    [totalItems]="paginatedContractsWithNameAndSupplyPointEan.totalRecords"
                     [firstText] = "firstText"
                     [previousText] = "previousText"
                     [nextText] = "nextText"
