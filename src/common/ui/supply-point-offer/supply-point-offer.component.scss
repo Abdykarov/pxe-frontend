@@ -208,15 +208,6 @@
 		margin-right: $spacer;
 
 		&--price {
-			// margin-top: ( $spacer * 1.5 );
-			// margin-bottom: 0;
-			// margin-right: ( $spacer * 2 );
-
-			// // Media queries
-			// @include media-breakpoint-up(md) {
-			// 	margin-top: ( $spacer * 2 );
-			// }
-
 			.supply-point-offer__value {
 				font-size: $supply-point-offer-decomposition-font-size;
 			}
