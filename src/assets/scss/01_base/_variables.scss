@@ -177,10 +177,10 @@ $link-hover-decoration:            underline;
 $icon-path:                        '../fonts/icons';
 $icon-size:                        1.25rem;
 $icon-size-small:                  .625rem;
-$icon-size-large:                  1.875rem;
+$icon-size-large:                  1.625rem;
 $icon-size-px:                     20px;
 $icon-size-small-px:               10px;
-$icon-size-large-px:               30px;
+$icon-size-large-px:               26px;
 
 
 $images-path:                      '../../../assets/images/';
@@ -273,21 +273,19 @@ $card-list-item-dot-size:           10px;
 
 
 // Pagination
-$pagination-padding-y:              0;
-$pagination-padding-x:              0;
-$pagination-color:                  $gray-400;
+$pagination-padding-y:              ( $spacer / 4 );
+$pagination-padding-x:              ( $spacer / 4 );
+$pagination-color:                  $link-color;
+$pagination-bg:                     transparent;
 $pagination-border-width:           0;
-$pagination-link-width:             40px;
-$pagination-link-height:            40px;
-$pagination-link-line-height:       $pagination-link-height;
-$pagination-link-radius:            2px;
-
-$pagination-hover-color:            $primary-dark;
-$pagination-hover-bg:               $gray-100;
-$pagination-focus-color:            $pagination-hover-color;
-$pagination-hover-decoration:       underline;
+$pagination-line-height:            1;
+       
+$pagination-hover-bg:               transparent;
 $pagination-focus-box-shadow:       none;
-$pagination-active-bg-gradient:     linear-gradient(90deg, $gradient-green-light, $gradient-green-light);
+
+$pagination-active-color:           $font-text;
+$pagination-active-bg:              transparent;
+$pagination-disabled-bg:            transparent;
 
 
 // Placeloader
