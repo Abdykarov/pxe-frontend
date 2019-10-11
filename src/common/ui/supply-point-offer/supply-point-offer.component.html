@@ -68,17 +68,16 @@
                             </div>
                             <div class="col-auto"
                                  *ngIf="supplyPointOffer.consumptionPriceNT && supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
-                                <div class="supply-point-offer__value-box">
+                                <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
                                     <span class="supply-point-offer__value-name">Cena za nízký tarif</span>
                                     <span class="supply-point-offer__value">{{supplyPointOffer.consumptionPriceNT | number: '1.0-2'}} Kč/MWh</span>
                                 </div>
                             </div>
                             <div class="col-auto"
                                  *ngIf="supplyPointOffer.priceGas && supplyPointOffer.commodityType === COMMODITY_TYPE_GAS">
-                                <div class="supply-point-offer__value-box">
+                                <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
                                     <span class="supply-point-offer__value-name">Cena</span>
-                                    <!-- TODO add support for icon here + hover effect -->
-                                    <span class="supply-point-offer__value"
+                                    <span class="supply-point-offer__value supply-point-offer__value--interactive"
                                           (click)="togglePriceDecomposition($event)">
                                         {{supplyPointOffer.priceGas | number: '1.0-2'}} Kč/MWh
                                         <span class="icon icon--info supply-point-offer__info-icon"></span>

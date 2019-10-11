@@ -80,11 +80,12 @@
 			padding-top: $spacer;
 
 			.supply-point-offer__title {
+				margin-bottom: ( $spacer * 1.5 );
 				font-size: $supply-point-label-font-size;
 
 				// Media queries
 				@include media-breakpoint-up(md) {
-					font-size: $supply-point-title-font-size;
+					font-size: $supply-point-offer-price-font-size-xl;
 				}
 			}
 		}
@@ -137,12 +138,14 @@
 			background-color: rgba($body-bg, .5);
 
 			.supply-point-offer__title {
-				margin-bottom: $spacer;
-
 				// Media queries
-				@include media-breakpoint-up(md) {
-					margin-bottom: ( $spacer * 1.5 );
+				@include media-breakpoint-up(xl) {
+					font-size: $supply-point-offer-price-font-size-xl;
 				}
+			}
+
+			.supply-point-offer__title {
+				margin-bottom: ( $spacer * 1.5 );
 			}
 		}
 
