@@ -24,6 +24,10 @@ export class SupplierService {
         ) => this.apollo
                 .watchQuery<any>({
                     query: listSupplierContractsBasedOnOffersQuery,
+                    variables: {
+                        contractsBasedOnOffersFilter,
+                        paginationFilter,
+                    },
                 })
                 .valueChanges
 

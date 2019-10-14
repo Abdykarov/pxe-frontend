@@ -2,27 +2,24 @@ import gql from 'graphql-tag';
 
 export const listSupplierContractsBasedOnOffersQuery = gql`
     query listSupplierContractsBasedOnOffers(
-        $offerId: ID,
-        $supplierId: ID,
-        $signDateFrom: Date,
-        $signDateTo: Date
+        $filter: ContractsBasedOnOffersFilter,
+        $paginationFilter: PaginationFilter,
     ){
         listSupplierContractsBasedOnOffers(
-            offerId: $offerId,
-            supplierId: $supplierId,
-            signDateFrom: $signDateFrom,
-            signDateTo: $signDateTo
+            filter: $filter,
+            paginationFilter: $paginationFilter,
         ){
-            contract {
-                contractId,
-                contractStatus,
-                deliveryFrom,
-                deliveryTo,
-                offerValidity,
-            },
-            name,
-            ean,
-            offerId,
+            contractsWithNameAndEan {
+                contract {
+                    contractId,
+                    contractStatus,
+                    deliveryFrom,
+                    deliveryTo,
+                },
+                name,
+                ean,
+            }
+            totalRecords,
         }
     }
 `;

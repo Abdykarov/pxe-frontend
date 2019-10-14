@@ -73,7 +73,6 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                 switchMap(([commodityType, numberOfPage]) => {
                     this.globalError = [];
                     this.formLoading = true;
-                    this.commodityType = commodityType;
                     return this.supplierService.getListSupplierContractsBasedOnOffers(
                             {
                                 commodityType,
@@ -85,12 +84,13 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                         );
                     },
                 ),
-                map(({data}) =>  data.getListSupplierContractsBasedOnOffers),
+                map(({data}) =>  data.listSupplierContractsBasedOnOffers),
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                (paginatedContractsWithNameAndSupplyPointEan: IPaginatedContractsWithNameAndSupplyPointEan) => {
+                (paginatedContractsWithNameAndSupplyPointEan: any) => {
                     this.contractsWithNameAndSupplyPointEan = paginatedContractsWithNameAndSupplyPointEan;
+                    this.tableCols = this.supplierConcludedContractsConfig.getTableCols(this.commodityType);
                     this.formLoading = false;
                     this.cd.markForCheck();
                 },
@@ -112,8 +112,8 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                     this.router.navigate([this.routePower]);
                     return;
                 }
-                this.tableCols = this.supplierConcludedContractsConfig.getTableCols(this.commodityType);
-                this.commodityTypeSubject$.next(commodityTypes[params.commodityType]);
+                this.commodityType = params.commodityType;
+                this.commodityTypeSubject$.next(commodityTypes[this.commodityType]);
                 this.cd.markForCheck();
             });
     }

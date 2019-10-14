@@ -6,7 +6,6 @@
             {{ error }}<br>
         </ng-container>
     </lnd-alert>
-    <lnd-placeloader [loading]="formLoading && !globalError.length"></lnd-placeloader>
     <ul class="text-center link-list">
         <li class="link-list__item">
             <a class="link-list__link"
@@ -21,6 +20,7 @@
                [routerLink]="[routeGas]">Plyn</a>
         </li>
     </ul>
+    <lnd-placeloader [loading]="formLoading && !globalError.length"></lnd-placeloader>
     <ng-template #downloadPdfTemplate let-row="row">
         <div class="icon-box" title="document">
             <span class="icon-box__symbol">
@@ -34,8 +34,8 @@
     <div class="row">
         <div class="col-12 col-lg-10 offset-lg-1">
             <ng-container *ngIf="(contractsWithNameAndSupplyPointEan | pathValue:['contractsWithNameAndEan']) &&
-                                  contractsWithNameAndSupplyPointEan.contractsWithNameAndEan !== null &&
-                                  contractsWithNameAndSupplyPointEan.contractsWithNameAndEan.length > 0">
+                                  contractsWithNameAndSupplyPointEan.contractsWithNameAndEan.length &&
+                                  tableCols">
                 <lnd-table
                     [cols]="tableCols"
                     [rows]="contractsWithNameAndSupplyPointEan.contractsWithNameAndEan"
@@ -62,7 +62,6 @@
             </ng-container>
             <lnd-info-banner
                 *ngIf="(contractsWithNameAndSupplyPointEan | pathValue:['contractsWithNameAndEan']) &&
-                        contractsWithNameAndSupplyPointEan.contractsWithNameAndEan !== null &&
                         contractsWithNameAndSupplyPointEan.contractsWithNameAndEan.length === 0"
                 [bannerDescription]="'Vytvořte nabídku a uvidíte, že zájemců se objeví brzo mnoho.'"
                 [bannerTitle]="'Žádný zákazník u vás momentálně nemá zasmluvněnou dodávku ' + commodityType === COMMODITY_TYPE_POWER ? 'elektřiny' : 'plynu' + '.'"

@@ -30,7 +30,7 @@ export class SupplierConcludedContractsConfig {
             ],
         },
         {
-            label: commodityType === CommodityType.POWER ? 'EAN' : 'EIC',
+            label: commodityType === CommodityType.POWER.toLowerCase() ? 'EAN' : 'EIC',
             views: [
                 {
                     headingClass: [''],
