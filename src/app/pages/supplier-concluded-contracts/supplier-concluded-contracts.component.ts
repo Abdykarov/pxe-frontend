@@ -1,44 +1,19 @@
-import { AsyncPipe } from '@angular/common';
-import {
-    ChangeDetectorRef,
-    Component,
-    OnInit,
-} from '@angular/core';
-import {
-    ActivatedRoute,
-    Router,
-} from '@angular/router';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import * as R from 'ramda';
-import {
-    BehaviorSubject,
-    combineLatest,
-} from 'rxjs';
-import {
-    map,
-    switchMap,
-    takeUntil,
-} from 'rxjs/operators';
+import { BehaviorSubject, combineLatest } from 'rxjs';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
-import {
-    commodityTypes,
-    ROUTES,
-} from 'src/app/app.constants';
+import { commodityTypes, ROUTES } from 'src/app/app.constants';
 import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
-import {
-    IContractsBasedOnOffersFilter,
-    IContractWithNameAndSupplyPointEan,
-    IPaginatedContractsWithNameAndSupplyPointEan, IPaginationFilter,
-} from 'src/common/graphql/models/suppplier.model';
-import {
-    IDocumentType,
-    IResponseDataDocument,
-} from 'src/app/services/model/document.model';
+import { IPaginatedContractsWithNameAndSupplyPointEan } from 'src/common/graphql/models/suppplier.model';
+import { IDocumentType, IResponseDataDocument } from 'src/app/services/model/document.model';
 import { parseGraphQLErrors, parseRestAPIErrors } from 'src/common/utils';
-import { SupplierConcludedContractsConfig} from './supplier-concluded-contracts.config';
+import { SupplierConcludedContractsConfig } from './supplier-concluded-contracts.config';
 import { SupplierService } from 'src/common/graphql/services/supplier.service';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import { PageChangedEvent } from 'ngx-bootstrap';
@@ -62,6 +37,7 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
     public commodityType$ = this.commodityTypeSubject$.asObservable();
     public numberOfPageSubject$: BehaviorSubject<number> = new BehaviorSubject(1);
     public numberOfPage$ = this.numberOfPageSubject$.asObservable();
+    public commodityType: CommodityType = null;
 
     // pagination setting
     public readonly itemsPerPage = 50;
@@ -81,7 +57,6 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
     public globalError: string[] = [];
 
     constructor(
-        private asyncPipe: AsyncPipe,
         private cd: ChangeDetectorRef,
         private documentService: DocumentService,
         private router: Router,
@@ -98,6 +73,7 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                 switchMap(([commodityType, numberOfPage]) => {
                     this.globalError = [];
                     this.formLoading = true;
+                    this.commodityType = commodityType;
                     return this.supplierService.getListSupplierContractsBasedOnOffers(
                             {
                                 commodityType,
@@ -136,14 +112,14 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                     this.router.navigate([this.routePower]);
                     return;
                 }
-                this.tableCols = this.supplierConcludedContractsConfig.getTableCols(this.asyncPipe.transform(this.commodityType$));
+                this.tableCols = this.supplierConcludedContractsConfig.getTableCols(this.commodityType);
                 this.commodityTypeSubject$.next(commodityTypes[params.commodityType]);
                 this.cd.markForCheck();
             });
     }
 
     public pageChanged = ($event: PageChangedEvent) => {
-        if ($event.page) {
+        if ($event && $event.page) {
             this.numberOfPageSubject$.next($event.page);
         } else {
             this.globalError = [defaultErrorMessage];
@@ -207,7 +183,7 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
     public redirectToOffer = (evt) => {
         evt.preventDefault();
         this.router.navigate([
-            this.asyncPipe.transform(this.commodityType$) === CommodityType.POWER ?
+            this.commodityType === CommodityType.POWER ?
                 ROUTES.ROUTER_SUPPLY_OFFER_POWER : ROUTES.ROUTER_SUPPLY_OFFER_GAS,
         ]);
     }
