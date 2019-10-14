@@ -99,6 +99,7 @@ export const errorFieldMessages =  {
         required: 'Vyplňte unikátní 18místné identifikační číslo odběrného místa.',
         ean: 'Správné identifikační číslo odběrného místa má 18 znaků, obsahuje pouze čísla a vždy začíná 8591824.',
         invalidEan: 'Správné identifikační číslo odběrného místa má 18 znaků, obsahuje pouze čísla a vždy začíná 8591824.',
+        invalidEanOnTenthPosition: 'Identifikační číslo odběrného místa nesmí obsahovat na desáté pozici číslo 0 ani 9.',
     },
     eic: {
         required:  'Vyplňte unikátní 16místný identifikační kód odběrného místa.',
@@ -191,6 +192,7 @@ export const errorFieldMessages =  {
         pattern: '	Vaše heslo musí mít minimálně 8 písmen, musí obsahovat malá a velká ' +
             'písmena, aspoň jednu číslici a aspoň jeden speciální znak jako &_*+/#\ apod.',
         fieldsMustMatch: 'Musíte vyplnit stejná hesla.',
+        invalidCurrentPassword: 'Vyplněné heslo se s vaším současným heslem neshoduje.',
     },
     phone: {
         required: 'Vyplňte svůj telefon.',
