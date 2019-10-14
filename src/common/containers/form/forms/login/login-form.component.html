@@ -32,13 +32,13 @@
     class="form-container"
     autocomplete="off">
     <lnd-form-field
-        [error]="form.controls.login.errors"
-        [formControl]="form.controls.login"
-        [id]="'login'"
+        [error]="form.controls.email.errors"
+        [formControl]="form.controls.email"
+        [id]="'email'"
         label="E-mail (přihlašovací jméno)"
-        [success]="form.controls.login.valid && form.controls.login.touched"
-        [touched]="form.controls.login.touched"
-        [validationMessages]="formFields.validationMessages.login"
+        [success]="form.controls.email.valid && form.controls.email.touched"
+        [touched]="form.controls.email.touched"
+        [validationMessages]="formFields.validationMessages.email"
     ></lnd-form-field>
     <lnd-form-field
         [error]="form.controls.password.errors"

@@ -25,7 +25,7 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
     public passwordWasSent = false;
 
     @Input()
-    public login = '';
+    public email = '';
 
     @Input()
     public wasSentToPhone = false;
@@ -33,7 +33,7 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
     @Output()
     public reSentAction?: EventEmitter<any> = new EventEmitter<any>();
 
-    public handleReSentAction = () => this.reSentAction.emit(this.login);
+    public handleReSentAction = () => this.reSentAction.emit(this.email);
 
     constructor(
         protected fb: FormBuilder,
@@ -50,12 +50,12 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
                 takeUntil(this.destroy$),
             )
             .subscribe(params => {
-                if (this.login  === '') {
-                    this.login = params['login'];
+                if (this.email  === '') {
+                    this.email = params['email'];
                 }
-                if (this.login) {
+                if (this.email) {
                     const formValue = this.form.value;
-                    formValue.login = this.login;
+                    formValue.login = this.email;
                     this.form.setValue(formValue);
                 }
             });
