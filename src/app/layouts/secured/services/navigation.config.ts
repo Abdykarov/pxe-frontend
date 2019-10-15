@@ -89,17 +89,17 @@ export const navigationMenuUserActions: INavigationMenu = [
 
 export const navigationMenuSuppliersActions: INavigationMenu = [
     {
-        'class': 'house-alert',
+        'class': 'navigation-main__item--second',
         'label': 'Nabidky',
-        'icon': 'power',
+        'icon': 'lock-close',
         'url' : `/${ROUTES.ROUTER_SUPPLIER_OFFER}`,
         'children': [],
         __typename: 'logout',
     },
     {
-        'class': 'link--documents',
+        'class': 'navigation-main__item--second',
         'label': 'Smlouvy',
-        'icon': 'power',
+        'icon': 'lock-close',
         'url' : `/${ROUTES.ROUTER_SUPPLIER_CONCLUDED_CONTRACTS}`,
         'children': [],
         __typename: 'logout',
