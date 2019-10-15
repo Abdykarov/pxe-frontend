@@ -137,7 +137,6 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
                     this.documentService.documentSave(responseDataDocument);
-                    this.globalError = [];
                     this.formLoading = false;
                     this.cd.markForCheck();
                 },
