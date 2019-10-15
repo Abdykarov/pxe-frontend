@@ -91,7 +91,7 @@ export const navigationMenuSuppliersActions: INavigationMenu = [
     {
         'class': 'navigation-main__item--second',
         'label': 'Nabidky',
-        'icon': 'lock-close',
+        'icon': 'star',
         'url' : `/${ROUTES.ROUTER_SUPPLIER_OFFER}`,
         'children': [],
         __typename: 'logout',
@@ -99,7 +99,7 @@ export const navigationMenuSuppliersActions: INavigationMenu = [
     {
         'class': 'navigation-main__item--second',
         'label': 'Smlouvy',
-        'icon': 'lock-close',
+        'icon': 'document',
         'url' : `/${ROUTES.ROUTER_SUPPLIER_CONCLUDED_CONTRACTS}`,
         'children': [],
         __typename: 'logout',
