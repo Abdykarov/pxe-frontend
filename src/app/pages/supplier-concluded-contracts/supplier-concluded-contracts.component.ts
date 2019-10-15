@@ -78,7 +78,7 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                                 commodityType,
                             },
                             {
-                                first: numberOfPage,
+                                first: this.itemsPerPage * (numberOfPage - 1),
                                 offset: this.itemsPerPage,
                             },
                         );
