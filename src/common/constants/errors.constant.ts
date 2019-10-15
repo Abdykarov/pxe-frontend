@@ -4,6 +4,7 @@ export const defaultErrorMessage = 'Došlo k chybě. Zkuste to později.';
 
 export const restAPIErrorCodes = {
     'CLI0001' : 'Špatné přihlašovací údaje.',
+    'VAL00001' : 'Vyplněný kód se neshoduje s kódem, který vám přišel v SMS.',
 };
 
 export const graphQLMessages = {
@@ -121,6 +122,7 @@ export const errorFieldMessages =  {
         required: 'Vyplňte svůj e-mail.',
         email: 'Použijte pouze písmena bez diakritiky, číslice, tečku (.) a zavináč (@).',
         emailNotRegistered: 'Tento e-mail v aplikaci neexistuje.',
+        usernameNotRegistered: 'Toto přihlašovací jméno v aplikaci neexistuje.',
         alreadyRegisteredEmail: 'Tento e-mail je již v aplikaci zaregistrovaný.',
     },
     expirationDate: {
