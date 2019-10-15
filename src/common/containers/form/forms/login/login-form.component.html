@@ -6,7 +6,7 @@
             Heslo jsme vám zaslali na telefonní číslo
         </ng-container>
         <ng-container *ngIf="!wasSentToPhone">
-            Heslo jsme vám zaslali na {{email}}
+            Heslo jsme vám zaslali na {{login}}
         </ng-container>
     </lnd-alert>
     <div class="text-right">
@@ -32,13 +32,13 @@
     class="form-container"
     autocomplete="off">
     <lnd-form-field
-        [error]="form.controls.email.errors"
-        [formControl]="form.controls.email"
-        [id]="'email'"
+        [error]="form.controls.login.errors"
+        [formControl]="form.controls.login"
+        [id]="'login'"
         label="E-mail (přihlašovací jméno)"
-        [success]="form.controls.email.valid && form.controls.email.touched"
-        [touched]="form.controls.email.touched"
-        [validationMessages]="formFields.validationMessages.email"
+        [success]="form.controls.login.valid && form.controls.login.touched"
+        [touched]="form.controls.login.touched"
+        [validationMessages]="formFields.validationMessages.login"
     ></lnd-form-field>
     <lnd-form-field
         [error]="form.controls.password.errors"

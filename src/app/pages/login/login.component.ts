@@ -43,7 +43,7 @@ import { UserService } from 'src/common/graphql/services/user.service';
     styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent extends AbstractComponent {
-    public email = '';
+    public login = '';
     public formFieldsLogin = formFieldsLogin;
     public formLoading = false;
     public fieldError: IFieldError = {};
@@ -99,14 +99,14 @@ export class LoginComponent extends AbstractComponent {
             );
     }
 
-    public submitResetPassword = ({email}) => {
-        this.email = email;
-        this.resetPassword(email);
+    public submitResetPassword = ({login}) => {
+        this.login = login;
+        this.resetPassword(login);
     }
 
-    public resetPassword = (email: string) => {
+    public resetPassword = (login: string) => {
         this.formLoading = true;
-        this.userService.resetPassword(email)
+        this.userService.resetPassword(login)
             .pipe(
                 takeUntil(this.destroy$),
                 map(({data}) => data.resetPassword),
