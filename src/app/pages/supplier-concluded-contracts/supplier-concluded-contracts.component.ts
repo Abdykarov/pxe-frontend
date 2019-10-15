@@ -1,18 +1,41 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
+import {
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+} from '@angular/core';
 
 import * as R from 'ramda';
-import { BehaviorSubject, combineLatest } from 'rxjs';
-import { map, switchMap, takeUntil } from 'rxjs/operators';
+import {
+    BehaviorSubject,
+    combineLatest,
+} from 'rxjs';
+import {
+    map,
+    switchMap,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
-import { commodityTypes, ROUTES } from 'src/app/app.constants';
+import {
+    commodityTypes,
+    ROUTES,
+} from 'src/app/app.constants';
 import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
 import { IPaginatedContractsWithNameAndSupplyPointEan } from 'src/common/graphql/models/suppplier.model';
-import { IDocumentType, IResponseDataDocument } from 'src/app/services/model/document.model';
-import { parseGraphQLErrors, parseRestAPIErrors } from 'src/common/utils';
+import {
+    IDocumentType,
+    IResponseDataDocument,
+} from 'src/app/services/model/document.model';
+import {
+    parseGraphQLErrors,
+    parseRestAPIErrors,
+} from 'src/common/utils';
 import { SupplierConcludedContractsConfig } from './supplier-concluded-contracts.config';
 import { SupplierService } from 'src/common/graphql/services/supplier.service';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
