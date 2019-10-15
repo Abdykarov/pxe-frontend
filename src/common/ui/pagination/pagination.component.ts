@@ -1,8 +1,11 @@
 import {
-    Component, EventEmitter,
-    Input, Output,
+    Component,
+    EventEmitter,
+    Input,
+    Output,
     ViewEncapsulation,
 } from '@angular/core';
+
 import { PageChangedEvent } from 'ngx-bootstrap';
 
 @Component({

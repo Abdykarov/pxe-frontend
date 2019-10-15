@@ -55,7 +55,7 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
                 }
                 if (this.email) {
                     const formValue = this.form.value;
-                    formValue.login = this.email;
+                    formValue.email = this.email;
                     this.form.setValue(formValue);
                 }
             });

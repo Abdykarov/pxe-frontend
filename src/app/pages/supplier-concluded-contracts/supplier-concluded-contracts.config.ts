@@ -8,7 +8,6 @@ import {
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { IContractWithNameAndSupplyPointEan } from 'src/common/graphql/models/suppplier.model';
 
-// tslint:disable:max-line-length
 @Injectable({
     providedIn: 'root',
 })

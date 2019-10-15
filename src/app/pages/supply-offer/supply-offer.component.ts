@@ -94,7 +94,6 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         private offerService: OfferService,
         private route: ActivatedRoute,
         private router: Router,
-        // predelat na servisu a rovnou v ni udealt pipu misto funkce (vlastni
         public supplyOfferConfig: SupplyOfferConfig,
         private supplyService: SupplyService,
     ) {
