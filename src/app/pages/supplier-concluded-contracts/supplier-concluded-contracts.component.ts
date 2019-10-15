@@ -59,8 +59,8 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
     constructor(
         private cd: ChangeDetectorRef,
         private documentService: DocumentService,
-        private router: Router,
         private route: ActivatedRoute,
+        private router: Router,
         private supplierConcludedContractsConfig: SupplierConcludedContractsConfig,
         private supplierService: SupplierService,
     ) {

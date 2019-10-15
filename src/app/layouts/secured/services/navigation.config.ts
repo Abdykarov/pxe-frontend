@@ -92,7 +92,7 @@ export const navigationMenuSuppliersActions: INavigationMenu = [
         'class': 'navigation-main__item--second',
         'label': 'Nabidky',
         'icon': 'star',
-        'url' : `/${ROUTES.ROUTER_SUPPLIER_OFFER}`,
+        'url' : `/${ROUTES.ROUTER_SUPPLY_OFFER}`,
         'children': [],
         __typename: 'logout',
     },
