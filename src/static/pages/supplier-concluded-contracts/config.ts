@@ -133,6 +133,6 @@ export class SupplierConcludedContractsConfig {
                 },
             },
         ],
-        totalRecords: 1000,
+        totalRecords: 2,
     };
 }
