@@ -20,6 +20,7 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import {
     commodityTypes,
@@ -28,18 +29,18 @@ import {
 import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
 import { IPaginatedContractsWithNameAndSupplyPointEan } from 'src/common/graphql/models/suppplier.model';
+import { IPaginationConfig } from 'src/app/pages/supplier-concluded-contracts/supplier-concluded-contracts.model';
 import {
     IDocumentType,
     IResponseDataDocument,
 } from 'src/app/services/model/document.model';
+import { PageChangedEvent } from 'ngx-bootstrap';
 import {
     parseGraphQLErrors,
     parseRestAPIErrors,
 } from 'src/common/utils';
 import { SupplierConcludedContractsConfig } from './supplier-concluded-contracts.config';
 import { SupplierService } from 'src/common/graphql/services/supplier.service';
-import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
-import { PageChangedEvent } from 'ngx-bootstrap';
 
 @Component({
     selector: 'lnd-supplier-concluded-contracts',
@@ -50,32 +51,21 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
 
     public COMMODITY_TYPE_POWER = CommodityType.POWER;
 
-    // page setting
     public readonly bannerType = BannerTypeImages.SUPPLIER_NULL;
     public readonly routePower = ROUTES.ROUTER_SUPPLIER_CONCLUDED_CONTRACTS_POWER;
     public readonly routeGas = ROUTES.ROUTER_SUPPLIER_CONCLUDED_CONTRACTS_GAS;
 
-    // subjects
     public commodityTypeSubject$: BehaviorSubject<CommodityType> = new BehaviorSubject(CommodityType.POWER);
     public commodityType$ = this.commodityTypeSubject$.asObservable();
-    public numberOfPageSubject$: BehaviorSubject<number> = new BehaviorSubject(1);
-    public numberOfPage$ = this.numberOfPageSubject$.asObservable();
+    public numberOfPagesSubject$: BehaviorSubject<number> = new BehaviorSubject(1);
+    public numberOfPages$ = this.numberOfPagesSubject$.asObservable();
     public commodityType: CommodityType = null;
 
-    // pagination setting
-    public readonly itemsPerPage = 50;
-    public readonly showBoundaryLinks = true;
-    public readonly maxSize = 5;
-    public readonly firstText = '<span class="arrow-text">first</span>';
-    public readonly previousText = '<span class="arrow-text">prev</span>';
-    public readonly nextText = '<span class="arrow-text">next</span>';
-    public readonly lastText = '<span class="arrow-text">last</span>';
+    public paginationConfig: IPaginationConfig = null;
 
-    // table
     public contractsWithNameAndSupplyPointEan: IPaginatedContractsWithNameAndSupplyPointEan = null;
     public tableCols = null;
 
-    // errors
     public formLoading = false;
     public globalError: string[] = [];
 
@@ -91,7 +81,9 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
     }
 
     ngOnInit() {
-        combineLatest(this.commodityType$, this.numberOfPage$)
+        this.paginationConfig = this.supplierConcludedContractsConfig.paginationConfig;
+
+        combineLatest(this.commodityType$, this.numberOfPages$)
             .pipe(
                 switchMap(([commodityType, numberOfPage]) => {
                     this.globalError = [];
@@ -101,8 +93,8 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                                 commodityType,
                             },
                             {
-                                first: this.itemsPerPage * (numberOfPage - 1),
-                                offset: this.itemsPerPage,
+                                first: this.paginationConfig.itemsPerPage * (numberOfPage - 1),
+                                offset: this.paginationConfig.itemsPerPage,
                             },
                         );
                     },
@@ -143,7 +135,7 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
 
     public pageChanged = ($event: PageChangedEvent) => {
         if ($event && $event.page) {
-            this.numberOfPageSubject$.next($event.page);
+            this.numberOfPagesSubject$.next($event.page);
         } else {
             this.globalError = [defaultErrorMessage];
             this.cd.markForCheck();

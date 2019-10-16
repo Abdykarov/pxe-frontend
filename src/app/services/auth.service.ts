@@ -77,7 +77,7 @@ export class AuthService {
     }
 
     public login = ({email, password}: ILoginRequest) => {
-        return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { login: email, password })
+        return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { email, password })
             .pipe(
                 map((response: ILoginResponse) => {
                     const uuid = this.generateUuid();

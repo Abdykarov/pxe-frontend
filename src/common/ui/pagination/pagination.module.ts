@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { PaginationModule } from 'ngx-bootstrap';
+import { PaginationModule as BoostrapPaginationModule } from 'ngx-bootstrap';
+
 
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
@@ -12,13 +13,14 @@ import { PaginationComponent } from './pagination.component';
         PaginationComponent,
     ],
     imports: [
+        BoostrapPaginationModule,
         ButtonModule,
         CommonModule,
         FormModule,
-        PaginationModule,
+        BoostrapPaginationModule.forRoot(),
     ],
     exports: [
         PaginationComponent,
     ],
 })
-export class PaginationNgxModule {}
+export class PaginationModule {}

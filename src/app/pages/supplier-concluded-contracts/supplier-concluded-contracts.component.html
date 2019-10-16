@@ -57,15 +57,15 @@
                 ></lnd-table>
                 <div class="float-right">
                     <lnd-pagination
-                        [showBoundaryLinks]="showBoundaryLinks"
-                        [itemsPerPage]="itemsPerPage"
-                        [maxSize]="maxSize"
+                        [showBoundaryLinks]="paginationConfig.showBoundaryLinks"
+                        [itemsPerPage]="paginationConfig.itemsPerPage"
+                        [maxSize]="paginationConfig.maxSize"
                         (pageChanged)="pageChanged($event)"
                         [totalItems]="contractsWithNameAndSupplyPointEan.totalRecords"
-                        [firstText] = "firstText"
-                        [previousText] = "previousText"
-                        [nextText] = "nextText"
-                        [lastText] = "lastText"
+                        [firstText]="paginationConfig.firstText"
+                        [previousText]="paginationConfig.previousText"
+                        [nextText]="paginationConfig.nextText"
+                        [lastText]="paginationConfig.lastText"
                     ></lnd-pagination>
                 </div>
             </ng-container>

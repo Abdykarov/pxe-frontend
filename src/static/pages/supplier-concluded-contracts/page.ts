@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { IPaginationConfig } from 'src/app/pages/supplier-concluded-contracts/supplier-concluded-contracts.model';
 import { IPaginatedContractsWithNameAndSupplyPointEan } from 'src/common/graphql/models/suppplier.model';
 import { SupplierConcludedContractsConfig } from './config';
 
@@ -7,13 +8,7 @@ import { SupplierConcludedContractsConfig } from './config';
     templateUrl: './page.html',
 })
 export class SupplierConcludedContractsComponent {
-    public readonly itemsPerPage = 20;
-    public readonly maxSize = 5;
-    public readonly showBoundaryLinks = true;
-    public readonly firstText = '<span class="arrow-text">first</span>';
-    public readonly previousText = '<span class="arrow-text">prev</span>';
-    public readonly nextText = '<span class="arrow-text">next</span>';
-    public readonly lastText = '<span class="arrow-text">last</span>';
+    public paginationConfig: IPaginationConfig = this.supplierConcludedContractsConfig.paginationConfig;
 
     public paginatedContractsWithNameAndSupplyPointEan: IPaginatedContractsWithNameAndSupplyPointEan =
         this.supplierConcludedContractsConfig.paginatedContractsWithNameAndSupplyPointEan;
