@@ -44,8 +44,12 @@
                 (customBannerAction)="chooseNewOfferAction($event)">
             </lnd-banner-ui>
             <p class="mt-5">
-                Tato nabídka již není aktivní. Dokumenty k uzavření dodávky energií/plynu dále nejsou k dispozici.
-                Pokud máte pořád zájem o dodávku energií/plynu pro vaše odběrné místo, vyberte prosím novou nabídku.
+                Tato nabídka již není aktivní. Dokumenty k uzavření dodávky
+                <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
+                <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container> dále nejsou k dispozici.
+                Pokud máte pořád zájem o dodávku
+                <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
+                <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container> pro vaše odběrné místo, vyberte prosím novou nabídku.
             </p>
         </div>
         <div class="col-12 text-center mb-2 d-xl-none">
@@ -69,7 +73,7 @@
             <div class="page-box">
                 <p>
                     Níže naleznete dokumenty, které jsou potřebné k uzavření dodávky
-                    <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">energií</ng-container>
+                    <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
                     <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container> pro budoucí období.
                     Návrh <strong>smlouvy o sdružených službách dodávky <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
                     <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container></strong> obsahuje také <strong>všeobecné obchodní
