@@ -19,11 +19,11 @@ export class UserService {
         private apollo: Apollo,
     ) {}
 
-    public resetPassword = (email: string)  => this.apollo
+    public resetPassword = (login: string)  => this.apollo
         .mutate<any>({
             mutation: resetPasswordMutation,
             variables: {
-                email,
+                login,
             },
         })
 

@@ -24,7 +24,7 @@
     </div>
     <lnd-banner-ui
         *ngIf="supplyPointStatistic && supplyPointStatistic.notConcludedCount > 0"
-        [buttonLabel]="supplyPointStatistic.notConcludedCount === 1 ? 'Pokračovat ve smlouvě' : 'Rozpracované smlouvy'"
+        [buttonLabel]="supplyPointStatistic.notConcludedCount === 1 ? 'Pokračovat' : 'Rozpracované smlouvy'"
         [data]="{
             text: supplyPointStatistic.notConcludedCount === 1 ? 'Máte jednu rozpracovanou smlouvu.' : 'Máte rozpracováno více smluv.'
         }"

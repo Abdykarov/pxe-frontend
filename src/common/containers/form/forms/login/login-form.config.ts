@@ -5,7 +5,7 @@ import { IForm } from 'src/common/containers/form/models/form-definition.model';
 
 export const loginFormFields: IForm = {
     controls: {
-        email: [
+        login: [
             '',
             [
                 Validators.required,

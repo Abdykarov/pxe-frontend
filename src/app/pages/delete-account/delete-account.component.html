@@ -10,26 +10,30 @@
                 (click)="redirectToUserProfile()">
             </lnd-button>
         </div>
-        <div class="col-12 col-md-auto">
-            <pxe-verification-form
-                *ngIf="currentUser.phoneNumber"
-                submitLabelText="Zrušit účet"
-                [formLoading]="formLoading"
-                [globalError]="globalError"
-                [smsSent]="smsSent"
-                [phone]="currentUser.phoneNumber"
-                [showSentSmsLabelUnderFirstField]="false"
-                (submitAction)="submitVerification($event)"
-                (customAction)="sendConfirmationSms()"
-            ></pxe-verification-form>
-            <ng-container *ngIf="!currentUser.phoneNumber">
-                <lnd-button
-                    label="Zrušit účet"
-                    (action)="submitVerification()"
-                    [isDisabled]="formLoading"
-                    type="primary"
-                ></lnd-button>
-            </ng-container>
+        <div #pxeVerificationFormWrapper
+             class="row">
+            <div class="col-12 col-md-auto">
+                <pxe-verification-form
+                    *ngIf="currentUser.phoneNumber"
+                    submitLabelText="Zrušit účet"
+                    [formLoading]="formLoading"
+                    [fieldError]="fieldError"
+                    [globalError]="globalError"
+                    [smsSent]="smsSent"
+                    [phone]="currentUser.phoneNumber"
+                    [showSentSmsLabelUnderFirstField]="false"
+                    (submitAction)="submitVerification($event)"
+                    (customAction)="sendConfirmationSms()"
+                ></pxe-verification-form>
+                <ng-container *ngIf="!currentUser.phoneNumber">
+                    <lnd-button
+                        label="Zrušit účet"
+                        (action)="submitVerification()"
+                        [isDisabled]="formLoading"
+                        type="primary"
+                    ></lnd-button>
+                </ng-container>
+            </div>
         </div>
     </div>
 </ng-template>
