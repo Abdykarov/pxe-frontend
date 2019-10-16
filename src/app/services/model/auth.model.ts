@@ -1,7 +1,7 @@
 import { LANDING_PAGE } from 'src/common/graphql/models/user.model';
 
 export interface ILoginRequest {
-    email: string;
+    login: string;
     password: string;
 }
 
