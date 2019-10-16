@@ -105,6 +105,7 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public resetPassword = (email: string) => {
+        console.log(email);
         this.formLoading = true;
         this.userService.resetPassword(email)
             .pipe(
