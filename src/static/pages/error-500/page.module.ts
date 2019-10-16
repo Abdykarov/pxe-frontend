@@ -7,7 +7,10 @@ import { ButtonModule } from 'src/common/ui/button/button.module';
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { Error500PageComponent } from './page';
 import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
-import { LoginType, SignType } from 'src/app/layouts/models/router-data.model';
+import {
+    LoginType,
+    SignType,
+} from 'src/app/layouts/models/router-data.model';
 
 
 @NgModule({

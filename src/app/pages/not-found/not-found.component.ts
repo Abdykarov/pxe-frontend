@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 // own classes
 import { AbstractComponent } from 'src/common/abstract.component';
@@ -21,7 +20,7 @@ export class NotFoundComponent extends AbstractComponent {
         isPublic: true,
         isPublicEmptyPage: true,
         isLandingPage: false,
-        isSimpleFooter: true,
+        isSimpleFooter: false,
         loginType: LoginType.NONE,
         signUpType: SignType.NONE,
         isStatic: false,
@@ -30,12 +29,12 @@ export class NotFoundComponent extends AbstractComponent {
 
     constructor(
         private authService: AuthService,
-        private router: Router,
     ) {
         super();
     }
 
-    public homeRedirect = () => {
+    public homeRedirect = (evt) => {
+        evt.preventDefault();
         this.authService.homeRedirect();
     }
 }

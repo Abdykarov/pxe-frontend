@@ -4,7 +4,10 @@ import { Routes } from '@angular/router';
 
 // own classes
 import { Error404PageComponent } from './page';
-import { LoginType, SignType } from 'src/app/layouts/models/router-data.model';
+import {
+    LoginType,
+    SignType,
+} from 'src/app/layouts/models/router-data.model';
 
 @NgModule({
     declarations: [

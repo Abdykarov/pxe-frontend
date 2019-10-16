@@ -16,8 +16,9 @@
                             alt="Error page 404">
                         <h2 class="error-page__title">Je nám líto, ale tato stránka neexistuje</h2>
                         <p class="mb-4">Pravděpodobně byla odstraněna, nebo jste zadali špatnou URL adresu.</p>
-                        <a 
-                            href="#" 
+                        <a
+                            href="#"
+                            (click)="homeRedirect($event)"
                             class="error-page__control">
                             Zobrazit úvodní stránku
                         </a>
