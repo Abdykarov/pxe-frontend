@@ -22,7 +22,7 @@ export const clientSchema = gql`
         id: String
         badge: String
         class: String
-        type: Boolean
+        type: String
         children: [NavigationChildItem]
     }
 
@@ -33,7 +33,7 @@ export const clientSchema = gql`
         id: String
         badge: String
         class: String
-        type: Boolean
+        type: String
         children: [NavigationChildItemInput]
     }
 
