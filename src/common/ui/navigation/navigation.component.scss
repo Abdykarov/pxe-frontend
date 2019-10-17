@@ -95,7 +95,6 @@
 			}
 		}
 	}
-
 	&--second {
 		&:first-of-type {
 			margin-top: $spacer;
@@ -162,6 +161,27 @@
 
 		.navigation-main__item--active & {
 			background-color: $secondary-lighten;
+		}
+	}
+}
+
+
+.navigation-main__is-label-only  {
+	&,
+	&:visited {
+		position: relative;
+		display: block;
+		padding: $spacer $spacer;
+		text-decoration: none;
+		color: $info;
+		cursor: auto;
+		font-weight: 500;
+		pointer-events: none;
+		@include smart-short-text;
+
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			padding: ( $spacer * 1.5 ) ( $spacer * 1.5 ) ( $spacer * 1.5 ) ( $spacer * 2 );
 		}
 	}
 }

@@ -1,3 +1,4 @@
+import { INavigationItemType } from 'src/app/app.constants';
 
 export interface INavigationConfig extends Array<INavigationMenu> {}
 
@@ -10,6 +11,7 @@ export interface INavigationItem {
     id?: string;
     badge?: string;
     class?: string;
+    type?: INavigationItemType;
     children?: Array<INavigationChildItem>;
     __typename?: string;
 }
