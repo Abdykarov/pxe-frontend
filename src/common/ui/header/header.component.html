@@ -30,37 +30,35 @@
                     </div>
                     <div
                         class="public-menu-holder"
-                        *ngIf="settings.isPublic && !settings.isStatic">
+                        *ngIf="settings.isPublic && !settings.isStatic && !settings.isPublicEmptyPage">
                         <lnd-button
-                            *ngIf="!settings.isLandingPage && !settings.isPublicEmptyPage"
+                            *ngIf="!settings.isLandingPage"
                             label="Domů"
                             customClass="mr-4"
                             type="link-text"
                             (click)="homeRedirect.emit()">
                         </lnd-button>
                         <lnd-button
-                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                            *ngIf="settings.isLandingPage"
                             label="Změna dodavatele"
                             customClass="mr-4"
                             type="link-text"
                             (click)="supplierChangeAction.emit()">
                         </lnd-button>
                         <lnd-button
-                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                            *ngIf="settings.isLandingPage"
                             label="Pokrytí"
                             customClass="mr-4"
                             type="link-text"
                             (click)="coverageMapAction.emit()">
                         </lnd-button>
                         <lnd-button
-                            *ngIf="!settings.isPublicEmptyPage"
                             label="Přihlášení"
                             customClass="mr-4"
                             type="link-text"
                             (click)="loginAction.emit()">
                         </lnd-button>
                         <lnd-button
-                            *ngIf="!settings.isPublicEmptyPage"
                             label="Registrace"
                             type="primary"
                             (click)="signUpAction.emit()">
