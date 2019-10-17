@@ -12,7 +12,7 @@
                 [class.navigation-main__item--open]="item === itemOpened"
                 [ngClass]="item.class">
                 <a
-                    [class.navigation-main__is-label-only]="item && item.type === navigationItemType.ONLY_LABEL"
+                    [class.navigation-main__is-label-only]="item.type === navigationItemType.ONLY_LABEL"
                     [class.navigation-main__link]="(item.type === undefined) || item.type === navigationItemType.NORMAL"
                     [routerLink]="item.url ? item.url : null"
                     [attr.aria-expanded]="item.children ? item === itemOpened : null"
