@@ -92,7 +92,6 @@ export const ROUTES = {
 export enum INavigationItemType {
     NORMAL,
     ONLY_LABEL,
-    ONLY_LABEL_ONLY_ON_MOBILE,
 }
 
 export const CODE_LIST = {
