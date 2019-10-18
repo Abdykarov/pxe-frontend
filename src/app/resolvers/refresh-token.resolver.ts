@@ -5,7 +5,11 @@ import {
 } from '@angular/router';
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import {
+    Observable,
+    of,
+} from 'rxjs';
 
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -16,9 +20,11 @@ export class RefreshTokenResolver implements Resolve<any> {
         private authService: AuthService,
     ) {}
 
-    // kouknout cokkie x localstore
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | any {
         this.authService.startRefreshTokenInterval();
-        return this.authService.refreshToken();
+        return this.authService.refreshToken()
+            .pipe(
+                catchError(() => of()),
+            );
     }
 }

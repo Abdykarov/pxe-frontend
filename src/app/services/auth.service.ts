@@ -44,7 +44,7 @@ export class AuthService {
     private uuid: string = null;
     private sessionUuid: string = null;
 
-    private wasFirstCallRefreshInterva = false;
+    private wasFirstCallRefreshInterval = false;
     private readonly startRefreshTokenIntervalSubject = new Subject<void>();
     private readonly stopRefreshTokenIntervalSubject = new Subject<void>();
     private readonly stopMessageInterval = 'STOP_INTERVAL';
@@ -53,8 +53,8 @@ export class AuthService {
         interval(CONSTS.REFRESH_INTERVAL_TOKEN)
             .pipe(
                 switchMap((number) => {
-                    if (!this.wasFirstCallRefreshInterva) {
-                        this.wasFirstCallRefreshInterva = true;
+                    if (!this.wasFirstCallRefreshInterval) {
+                        this.wasFirstCallRefreshInterval = true;
                         if ( this.token) {
                             return this.refreshToken();
                         } else {
@@ -86,10 +86,7 @@ export class AuthService {
         this.currentUserSubject$ = new BehaviorSubject<IJwtPayload>(jwtPayload);
         this.currentUser$ = this.currentUserSubject$.asObservable();
         this.observable$
-            .subscribe(() => {
-                console.log(new Date().toTimeString());
-                console.log(new Date().toISOString());
-            });
+            .subscribe();
     }
 
     startRefreshTokenInterval = () => {
