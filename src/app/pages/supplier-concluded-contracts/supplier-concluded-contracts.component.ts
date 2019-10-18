@@ -128,12 +128,15 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                     return;
                 }
                 this.commodityType = params.commodityType;
+                console.log('VOLAM SE');
+                console.log(commodityTypes[this.commodityType]);
                 this.commodityTypeSubject$.next(commodityTypes[this.commodityType]);
                 this.cd.markForCheck();
             });
     }
 
     public pageChanged = ($event: PageChangedEvent) => {
+        console.log('PAGE CHANGED');
         if ($event && $event.page) {
             this.numberOfPagesSubject$.next($event.page);
         } else {

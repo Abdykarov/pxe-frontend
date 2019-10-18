@@ -1,4 +1,3 @@
-import { formatDate } from '@angular/common';
 import {
     Inject,
     Injectable,
@@ -55,9 +54,7 @@ export class SupplierConcludedContractsConfig {
                 {
                     headingClass: [''],
                     cellClass: [''],
-                    content: (row: IContractWithNameAndSupplyPointEan) =>
-                        `${formatDate(row.contract.deliveryFrom, 'dd. MM. yyyy', this.locale)} -
-                        ${formatDate(row.contract.deliveryTo, 'dd. MM. yyyy', this.locale)}`,
+                    contentTemplateName: 'columnTemplateDeliveryTime',
                 },
             ],
         },
