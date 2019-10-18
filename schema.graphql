@@ -155,6 +155,7 @@ type Query {
     getPaymentInfo(contractId: ID!, setting: QRCodeSetting!): Payment
     getPersonalData(contractId: ID!): PersonalData
     getSupplyPoint(supplyPointId: ID!): SupplyPoint
+    getSupplyPointGlobalStatistics(includeHistoryData: Boolean): SupplyPointGlobalStatistic
 }
 
 type SelectedOffer {
@@ -224,6 +225,15 @@ type SupplyPoint {
     supplier: Supplier!
     timeToContractEnd: Int
     timeToContractEndPeriod: CodelistItem
+}
+
+type SupplyPointGlobalStatistic {
+    gasDeliveryCount: Int!
+    gasOfferCount: Int!
+    powerDeliveryCount: Int!
+    powerOfferCount: Int!
+    totalPossibleDeliveryCountGas: Int!
+    totalPossibleDeliveryCountPower: Int!
 }
 
 type SupplyPointOffer {
