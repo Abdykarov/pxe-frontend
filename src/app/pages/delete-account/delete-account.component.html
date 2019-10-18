@@ -10,30 +10,31 @@
                 (click)="redirectToUserProfile()">
             </lnd-button>
         </div>
-        <div #pxeVerificationFormWrapper
-             class="row">
-            <div class="col-12 col-md-auto">
-                <pxe-verification-form
-                    *ngIf="currentUser.phoneNumber"
-                    submitLabelText="Zrušit účet"
-                    [formLoading]="formLoading"
-                    [fieldError]="fieldError"
-                    [globalError]="globalError"
-                    [smsSent]="smsSent"
-                    [phone]="currentUser.phoneNumber"
-                    [showSentSmsLabelUnderFirstField]="false"
-                    (submitAction)="submitVerification($event)"
-                    (customAction)="sendConfirmationSms()"
-                ></pxe-verification-form>
-                <ng-container *ngIf="!currentUser.phoneNumber">
-                    <lnd-button
-                        label="Zrušit účet"
-                        (action)="submitVerification()"
-                        [isDisabled]="formLoading"
-                        type="primary"
-                    ></lnd-button>
-                </ng-container>
-            </div>
+        <div 
+            class="col-12"
+            [class.col-md-auto]="!currentUser.phoneNumber"
+            [class.col-md-9]="currentUser.phoneNumber"
+            #pxeVerificationFormWrapper>
+            <pxe-verification-form
+                *ngIf="currentUser.phoneNumber"
+                submitLabelText="Zrušit účet"
+                [formLoading]="formLoading"
+                [fieldError]="fieldError"
+                [globalError]="globalError"
+                [smsSent]="smsSent"
+                [phone]="currentUser.phoneNumber"
+                [showSentSmsLabelUnderFirstField]="false"
+                (submitAction)="submitVerification($event)"
+                (customAction)="sendConfirmationSms()"
+            ></pxe-verification-form>
+            <ng-container *ngIf="!currentUser.phoneNumber">
+                <lnd-button
+                    label="Zrušit účet"
+                    (action)="submitVerification()"
+                    [isDisabled]="formLoading"
+                    type="primary"
+                ></lnd-button>
+            </ng-container>
         </div>
     </div>
 </ng-template>

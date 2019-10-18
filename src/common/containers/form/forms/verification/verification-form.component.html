@@ -12,18 +12,20 @@
     (change)="resetCustomFieldError()">
     <div [ngClass]="classMainWrapper">
         <div [ngClass]="classFirstField">
-            <lnd-form-field
-                label="Kód z SMS"
-                [disabledField]="!smsSent"
-                [error]="formError.smsCode || form.controls.smsCode.errors"
-                [formControl]="form.controls.smsCode"
-                [id]="'smsCode'"
-                [subtextTemplate]="sendSmsAgainTemplate"
-                [success]="form.controls.smsCode.valid && (form.controls.smsCode.touched || formError.smsCode)"
-                [touched]="form.controls.smsCode.touched || formError.smsCode"
-                [triggerFocus]="smsSent"
-                [validationMessages]="formFields.validationMessages.smsCode">
-            </lnd-form-field>
+            <div class="form-container ml-0 ml-md-auto mr-md-0">
+                <lnd-form-field
+                    label="Kód z SMS"
+                    [disabledField]="!smsSent"
+                    [error]="formError.smsCode || form.controls.smsCode.errors"
+                    [formControl]="form.controls.smsCode"
+                    [id]="'smsCode'"
+                    [subtextTemplate]="sendSmsAgainTemplate"
+                    [success]="form.controls.smsCode.valid && (form.controls.smsCode.touched || formError.smsCode)"
+                    [touched]="form.controls.smsCode.touched || formError.smsCode"
+                    [triggerFocus]="smsSent"
+                    [validationMessages]="formFields.validationMessages.smsCode">
+                </lnd-form-field>
+            </div>
         </div>
         <ng-container *ngIf="infoTemplate && smsSent">
             <ng-container *ngTemplateOutlet="infoTemplate; context: { contract: this.contract }"></ng-container>
