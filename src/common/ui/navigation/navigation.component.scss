@@ -207,6 +207,20 @@
 	}
 }
 
+@media (max-width: 1199.99px){
+	.navigation-main__item{
+		a:not(.navigation-main__is-label-only) {
+			.navigation-main__link-label {
+				text-transform: lowercase;
+
+				&:first-letter {
+					text-transform: uppercase;
+				}
+			}
+		}
+	}
+}
+
 .navigation-main__link-icon {
 	position: absolute;
 	top: 50%;

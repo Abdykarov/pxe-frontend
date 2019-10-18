@@ -76,7 +76,7 @@ export const navigationMenuUserActions: INavigationMenu = [
     {
         'class': 'navigation-main__item--second d-lg-none d-xl-block',
         'url': '',
-        'label': 'Účet',
+        'label': 'ÚČET',
         'type': INavigationItemType.ONLY_LABEL,
         'icon': '',
         'children': [],
