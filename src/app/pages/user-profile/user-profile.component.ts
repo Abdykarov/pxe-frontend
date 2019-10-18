@@ -2,6 +2,7 @@ import {
     Component,
     ChangeDetectorRef,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 import * as R from 'ramda';
 import {
@@ -16,6 +17,7 @@ import { IFieldError } from 'src/common/containers/form/models/form-definition.m
 import { IJwtPayload } from 'src/app/services/model/auth.model';
 import { IUserDetailInput } from 'src/common/graphql/models/user.model';
 import { parseGraphQLErrors } from 'src/common/utils';
+import { ROUTES } from 'src/app/app.constants';
 import { userProfileFormFields } from 'src/common/containers/form/forms/user-profile/user-profile-form.config';
 import { UserService } from 'src/common/graphql/services/user.service';
 
@@ -35,6 +37,7 @@ export class UserProfileComponent extends AbstractComponent {
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
+        private router: Router,
         private userService: UserService,
     ) {
         super();
@@ -76,5 +79,9 @@ export class UserProfileComponent extends AbstractComponent {
                     this.cd.markForCheck();
                 },
             );
+    }
+
+    public redirectToDeleteProfile = () => {
+        this.router.navigate([ROUTES.ROUTER_DELETE_ACCOUNT]);
     }
 }

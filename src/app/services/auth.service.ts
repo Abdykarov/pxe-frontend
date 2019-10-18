@@ -11,6 +11,7 @@ import {
 } from 'rxjs';
 import {
     catchError,
+    first,
     map,
 } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -27,6 +28,7 @@ import {
     ILoginResponse,
     IUserRoles,
 } from './model/auth.model';
+import { IStateRouter } from 'src/app/pages/logout/logout-page.model';
 
 @Injectable({
     providedIn: 'root',
@@ -77,8 +79,8 @@ export class AuthService {
         return this.currentUserValue.passwordReset;
     }
 
-    public login = ({email, password}: ILoginRequest) => {
-        return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { email, password })
+    public login = ({login, password}: ILoginRequest) => {
+        return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { login, password })
             .pipe(
                 map((response: ILoginResponse) => {
                     const uuid = this.generateUuid();
@@ -98,6 +100,7 @@ export class AuthService {
                     this.cleanUserData();
                     return of(error);
                 }),
+                first(),
             );
     }
 
@@ -158,7 +161,7 @@ export class AuthService {
     public getUuid = (): string => this.uuid;
 
     public logoutForced = () => {
-        const state = {
+        const state: IStateRouter = {
             refresh: true,
         };
         return this.router.navigate(

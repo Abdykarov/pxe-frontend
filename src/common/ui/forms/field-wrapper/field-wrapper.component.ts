@@ -40,6 +40,9 @@ export class FieldWrapperComponent implements OnChanges {
     @Input()
     public validationMessages?: IValidationMessages;
 
+    @Input()
+    public wrapperFocused = false;
+
     public errorMessage = null;
 
     constructor(
@@ -48,8 +51,7 @@ export class FieldWrapperComponent implements OnChanges {
     ) {}
 
     ngOnChanges(changes: SimpleChanges) {
-        this.errorMessage = null;
-        if (changes && changes.error && changes.error.currentValue) {
+        if (changes && changes.error) {
             this.errorMessage = getErrorMessage(changes.error.currentValue, this.validationMessages, this.dynamicPipe);
             this.cd.markForCheck();
         }

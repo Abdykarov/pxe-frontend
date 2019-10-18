@@ -152,23 +152,19 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         this.resetFormError(false);
     }
 
-    public submitForm = () => {
-        this.resetCustomFieldError();
-        this.triggerValidation();
-        if (this.form.valid) {
-            const form: any = {
-                ...this.form.value,
-            };
-            if (!R.isNil(this.form.value.annualConsumptionNT)) {
-                form.annualConsumptionNT = parseFloat(this.form.value.annualConsumptionNT.toString().replace(',', '.'));
-            }
-            if (!R.isNil(this.form.value.annualConsumptionVT)) {
-                form.annualConsumptionVT = parseFloat(this.form.value.annualConsumptionVT.toString().replace(',', '.'));
-            }
-            if (!R.isNil(this.form.value.annualConsumption)) {
-                form.annualConsumption = parseFloat(this.form.value.annualConsumption.toString().replace(',', '.'));
-            }
-            this.submitAction.emit(form);
+    public submitValidForm = () => {
+        const form: any = {
+            ...this.form.value,
+        };
+        if (!R.isNil(this.form.value.annualConsumptionNT)) {
+            form.annualConsumptionNT = parseFloat(this.form.value.annualConsumptionNT.toString().replace(',', '.'));
         }
+        if (!R.isNil(this.form.value.annualConsumptionVT)) {
+            form.annualConsumptionVT = parseFloat(this.form.value.annualConsumptionVT.toString().replace(',', '.'));
+        }
+        if (!R.isNil(this.form.value.annualConsumption)) {
+            form.annualConsumption = parseFloat(this.form.value.annualConsumption.toString().replace(',', '.'));
+        }
+        this.submitAction.emit(form);
     }
 }

@@ -53,8 +53,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
     }
 
     ngOnInit() {
-        this.supplyService.findSupplyPointsByContractStatus(null,
-            [
+        this.supplyService.findSupplyPointsByContractStatus([
                 ContractStatus.NOT_CONCLUDED,
                 ContractStatus.CONCLUDED,
             ])

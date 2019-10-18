@@ -108,7 +108,7 @@
             <ng-container *ngIf="supplyPoint.contract?.contractStatus == contractStatus.WAITING_FOR_PAYMENT && paymentInfo">
                 <div class="col-12 col-xl-10 offset-xl-1">
                     <lnd-info-banner
-                            [bannerTitle]="'Nyní potřebujeme ověřit vaši totožnost pomocí tzv. mikrotransakce nebo-li ověřovací platby.'"
+                            [bannerTitle]="'Nyní potřebujeme ověřit vaši totožnost pomocí tzv. mikrotransakce nebo\&\#8209;li ověřovací platby.'"
                             [bannerDescription]="'<p>Na doručení této ověřovací platby čekáme do ' + (paymentInfo.dueDate | date:'d.&nbsp;M.&nbsp;y') + ', proto ji odešlete raději hned teď. Platba u nás může být během chvíle, ale z některé banky to může trvat až 3 dny a&nbsp;my vás nechceme zdržovat.</p><p>Okno aplikace můžete nyní zavřít a až platbu obdržíme, dáme vám vědět na e-mail.</p>'"
                             [bannerType]="bannerTypeImages.LOADING"
                             [showButton]="false"

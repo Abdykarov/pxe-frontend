@@ -123,10 +123,10 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                 switchMap(() => {
                     if (this.supplyPoint.contract && this.supplyPoint.contract.contractStatus === ContractStatus.TO_BE_CANCELED) {
                         return this.supplyService.findSupplyPointsByContractStatus(
-                            this.supplyPoint.ean,
                             [
                                 ContractStatus.NOT_CONCLUDED,
                             ],
+                            this.supplyPoint.ean,
                         );
                     }
                     return of({

@@ -6,6 +6,7 @@ import {
 
 import { FullLayoutComponent } from './full-layout.component';
 
+import { AccountDeletedPageModule, accountDeletedPageRoutes } from 'src/static/pages/account-deleted/page.module';
 import { CookiesPageModule, cookiesPageRoutes } from 'src/static/pages/cookies/page.module';
 import { ChangePasswordPageModule, changePasswordPageRoutes } from 'src/static/pages/change-password/page.module';
 import { LandingModule, landingPageRoutes } from 'src/static/pages/landing/landing.module';
@@ -21,6 +22,7 @@ const routes: Routes = [
         path: '',
         component: FullLayoutComponent,
         children: [
+            ...accountDeletedPageRoutes,
             ...cookiesPageRoutes,
             ...changePasswordPageRoutes,
             ...error404PageRoutes,
@@ -40,6 +42,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
+        AccountDeletedPageModule,
         CookiesPageModule,
         ChangePasswordPageModule,
         Error404PageModule,

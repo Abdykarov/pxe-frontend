@@ -13,6 +13,7 @@ import {
 } from '@angular/forms';
 
 import * as R from 'ramda';
+import { BehaviorSubject } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -42,6 +43,7 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
     @Output()
     public submitAction: EventEmitter<any> = new EventEmitter<any>();
 
+    public fieldWrapperFocused$: BehaviorSubject<any> = new BehaviorSubject(null);
     public form: FormGroup;
     public formError: any = {};
     public originalFormValues: any = {};
@@ -65,12 +67,19 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
 
     public handleCustomAction = ($event) => this.customAction.emit($event);
 
-    public submitForm = () => {
+    public submitForm = (event = null) => {
+        if (event) {
+            event.target.blur();
+        }
         this.resetCustomFieldError();
         this.triggerValidation();
         if (this.form.valid) {
-            this.submitAction.emit(this.form.value);
+            this.submitValidForm();
         }
+    }
+
+    public submitValidForm = () => {
+        this.submitAction.emit(this.form.value);
     }
 
     public resetFormError = (clearError = true) => {
@@ -94,16 +103,23 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
     }
 
     public triggerValidation = () => {
+        this.triggerValidationOnForm(this.form);
+    }
+
+    public triggerValidationOnForm = (form) => {
         R.pipe(
             R.keys,
             R.map((field) => {
-                this.form
-                    .get(field)
-                    .markAsTouched({
-                        onlySelf: true,
-                    });
+                if (this.form.get(field) instanceof FormGroup) {
+                    this.triggerValidationOnForm(this.form.get(field));
+                } else {
+                    form.get(field)
+                        .markAsTouched({
+                            onlySelf: true,
+                        });
+                }
             }),
-        )(this.form.controls);
+        )(form.controls);
     }
 
     public getFieldValue = (fieldName: string) => {
@@ -151,5 +167,13 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
             }
         }
         return hasChanges;
+    }
+
+    public fieldWrapperFocus = (name: string) => {
+        this.fieldWrapperFocused$.next(name);
+    }
+
+    public fieldWrapperBlur = () => {
+        this.fieldWrapperFocused$.next(null);
     }
 }

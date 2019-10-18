@@ -44,8 +44,12 @@
                 (customBannerAction)="chooseNewOfferAction($event)">
             </lnd-banner-ui>
             <p class="mt-5">
-                Tato nabídka již není aktivní. Dokumenty k uzavření dodávky energií/plynu dále nejsou k dispozici.
-                Pokud máte pořád zájem o dodávku energií/plynu pro vaše odběrné místo, vyberte prosím novou nabídku.
+                Tato nabídka již není aktivní. Dokumenty k uzavření dodávky
+                <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
+                <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container> dále nejsou k dispozici.
+                Pokud máte pořád zájem o dodávku
+                <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
+                <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container> pro vaše odběrné místo, vyberte prosím novou nabídku.
             </p>
         </div>
         <div class="col-12 text-center mb-2 d-xl-none">
@@ -60,6 +64,7 @@
             [class.d-block]="showOffer"
             [class.d-none]="!showOffer">
             <pxe-supply-point-offer
+                [isFromContract]="true"
                 [supplyPointOffer]="supplyPoint.contract.offer"
                 [interactive]="false">
             </pxe-supply-point-offer>
@@ -69,7 +74,7 @@
             <div class="page-box">
                 <p>
                     Níže naleznete dokumenty, které jsou potřebné k uzavření dodávky
-                    <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">energií</ng-container>
+                    <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
                     <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container> pro budoucí období.
                     Návrh <strong>smlouvy o sdružených službách dodávky <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
                     <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container></strong> obsahuje také <strong>všeobecné obchodní
@@ -83,7 +88,7 @@
                         <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container>
                         <a class="ml-0 ml-md-3 mt-2 mt-md-0 d-block d-md-inline-block"
                            [class.link--disabled]="documentLoading"
-                           (click)="openDocument(supplyPoint.contract.contractId, documentType.INFORMATION)">Zobrazit</a>
+                           (click)="saveDocument(supplyPoint.contract.contractId, documentType.INFORMATION)">Zobrazit</a>
                     </span>
                 </div>
                 <div class="text-with-icon align-items-start align-items-md-center mb-5">
@@ -93,7 +98,7 @@
                         <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container>
                         <a class="ml-0 ml-md-3 mt-2 mt-md-0 d-block d-md-inline-block"
                            [class.link--disabled]="documentLoading"
-                           (click)="openDocument(supplyPoint.contract.contractId, documentType.CONTRACT)">Zobrazit</a>
+                           (click)="saveDocument(supplyPoint.contract.contractId, documentType.CONTRACT)">Zobrazit</a>
                     </span>
                 </div>
                 <p>
@@ -106,17 +111,23 @@
                     <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">elektřiny</ng-container>
                     <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">plynu</ng-container>"</ng-container>.
                 </p>
-                <pxe-verification-form
-                    *ngIf="supplyPoint | pathValue:['contract', 'personalData', 'phone']"
-                    [fieldError]="fieldError"
-                    [formLoading]="formLoading"
-                    [contract]="supplyPoint.contract"
-                    [globalError]="globalError"
-                    [showSentSmsLabelUnderFirstField]="false"
-                    [smsSent]="smsSent"
-                    (submitAction)="signContract($event)"
-                    (customAction)="sendContractConfirmationSms()"
-                ></pxe-verification-form>
+                <div #pxeVerificationFormWrapper
+                    class="row">
+                    <div class="col-12 col-lg-9 offset-lg-3">
+                        <pxe-verification-form
+                            *ngIf="supplyPoint | pathValue:['contract', 'personalData', 'phone']"
+                            [fieldError]="fieldError"
+                            [formLoading]="formLoading"
+                            [contract]="supplyPoint.contract"
+                            [globalError]="globalError"
+                            [phone]="supplyPoint.contract.personalData.phone"
+                            [showSentSmsLabelUnderFirstField]="false"
+                            [smsSent]="smsSent"
+                            (submitAction)="signContract($event)"
+                            (customAction)="sendContractConfirmationSms()"
+                        ></pxe-verification-form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
