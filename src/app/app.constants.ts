@@ -326,3 +326,5 @@ export const REGIONS: Array<IOption> = [
         'key': 'Zlínský kraj',
     },
 ];
+
+export const OPERATIONS_WITHOUT_SCROLL_ON_ERRORS = ['getSupplyPointGlobalStatistics', 'makeRegistration'];
