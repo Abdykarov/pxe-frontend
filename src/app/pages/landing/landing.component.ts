@@ -100,7 +100,6 @@ export class LandingComponent extends AbstractComponent {
                     const { fieldError, globalError } = parseGraphQLErrors(error);
                     this.fieldError = fieldError;
                     this.globalError = globalError;
-                    scrollToElementFnc(this.subscriptionElement.nativeElement);
                     this.cd.markForCheck();
                 });
     }

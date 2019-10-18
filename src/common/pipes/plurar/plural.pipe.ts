@@ -13,6 +13,13 @@ import {
 export class PluralPipe implements PipeTransform {
 
     public itemPluralMapping = {
+        'offer': {
+            '=1' : 'nabídka',
+            '=2' : 'nabídky',
+            '=3' : 'nabídky',
+            '=4' : 'nabídky',
+            'other' : 'nabídek',
+        },
         'day': {
             '=1' : 'den',
             '=2' : 'dny',
