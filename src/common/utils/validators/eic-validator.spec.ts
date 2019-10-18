@@ -7,11 +7,11 @@ describe('EIC validator', () => {
     });
 
     it('10X1001A1001A094 should be true', () => {
-        expect(EicValidator.validate( '10X1001A1001A094')).toEqual(true);
+        expect(EicValidator.validate( '10X1001A1001A094')).toEqual(false);
     });
 
-    it('10X1001A1001A39W should be true', () => {
-        expect(EicValidator.validate( '10X1001A1001A39W')).toEqual(true);
+    it('10X1001A1001A39W should be false', () => {
+        expect(EicValidator.validate( '10X1001A1001A39W')).toEqual(false);
     });
 
     it('10X1001A1001AW should be false', () => {

@@ -4,12 +4,15 @@ export const defaultErrorMessage = 'Došlo k chybě. Zkuste to později.';
 
 export const restAPIErrorCodes = {
     'CLI0001' : 'Špatné přihlašovací údaje.',
+    'VAL00001' : 'Vyplněný kód se neshoduje s kódem, který vám přišel v SMS.',
 };
 
 export const graphQLMessages = {
+    activeContractPresent: 'Ucet nelze smazat, protoze jsou aktivni smlouvy.',
     cannotDeleteContract: 'Omlouváme se, ale z neočekávaného důvodu se odstoupení od smlouvy nepodařilo. Zkuste to prosím znovu později.',
     cannotSignContract: 'Omlouváme se, ale z neočekávaného důvodu se nepodařilo smlouvu podepsat. Zkuste to prosím znovu později.',
     invalidSupplyPointId: 'Hledané odběrné místo neexistuje nebo pro přístup k němu nemáte oprávnění.',
+    noActiveAccountAvailable: 'Ucet nelze smazat, protoze neexistuje.',
     forbiddenUpdateOfSupplyPoint: 'Omlouváme se, ale toto odběrné místo není možné nyní upravit. Zkuste to prosím znovu později.',
 };
 
@@ -105,18 +108,21 @@ export const errorFieldMessages =  {
     },
     ean: {
         required: 'Vyplňte unikátní 18místné identifikační číslo odběrného místa.',
-        ean: 'Správné identifikační číslo odběrného místa má 18 znaků, obsahuje pouze čísla a vždy začíná 8591824.',
-        invalidEan: 'Správné identifikační číslo odběrného místa má 18 znaků, obsahuje pouze čísla a vždy začíná 8591824.',
-        invalidEanOnTenthPosition: 'Identifikační číslo odběrného místa nesmí obsahovat na desáté pozici číslo 0 ani 9.',
+        ean: 'Správné identifikační číslo odběrného místa má 18 znaků, obsahuje pouze čísla,' +
+            ' vždy začíná 8591824 a na 10. pozici nesmí mít číslici 0 ani 9.',
+        nonUniqueEan: 'Vyplněné identifikační číslo odběrného místa již registrujeme.',
     },
     eic: {
         required:  'Vyplňte unikátní 16místný identifikační kód odběrného místa.',
-        eic: 'Správný identifikační kód odběrného místa má 16 znaků, obsahuje pouze čísla a písmena a vždy začíná 27ZG.',
+        eic: 'Správný identifikační kód odběrného místa má 16 znaků, obsahuje pouze čísla a písmena, ' +
+            'vždy začíná 27ZG a na 5.-7. pozici nesmí mít číslo 800.',
+        nonUniqueEic: 'Vyplněný identifikační kód odběrného místa již registrujeme.',
     },
     email: {
         required: 'Vyplňte svůj e-mail.',
         email: 'Použijte pouze písmena bez diakritiky, číslice, tečku (.) a zavináč (@).',
         emailNotRegistered: 'Tento e-mail v aplikaci neexistuje.',
+        usernameNotRegistered: 'Toto přihlašovací jméno v aplikaci neexistuje.',
         alreadyRegisteredEmail: 'Tento e-mail je již v aplikaci zaregistrovaný.',
     },
     expirationDate: {
@@ -160,6 +166,7 @@ export const errorFieldMessages =  {
     },
     offerDeliveryFromTo: {
         required: 'Vyplňte datum dodávkového období.',
+        formatIntervalDiff: 'Datum začátku dodávkového období musí být dřívější než jeho konec.',
     },
     offerDeliveryLength: {
         required: 'Vyberte ze seznamu délku dodávky.',
@@ -190,6 +197,7 @@ export const errorFieldMessages =  {
     },
     offerValidFromTo: {
         required: 'Vyplňte odkdy dokdy je nabídka platná.',
+        formatIntervalDiff: 'Datum začátku platnosti nabídky musí být dřívější než její konec.',
     },
     orientationNumber: {
         maxlengthOrientationNumber: 'Použít můžete maximálně {requiredLength} znaků.',
@@ -226,6 +234,7 @@ export const errorFieldMessages =  {
     },
     smsCode: {
         required: 'Vyplňte kód, který vám přišel v SMS.',
+        invalidSmsCode: 'Vyplněný kód se neshoduje s kódem, který vám přišel v SMS.',
     },
     street: {
         required: 'Vyplňte ulici.',

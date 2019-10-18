@@ -170,7 +170,7 @@ export class SupplyService {
         })
         .valueChanges
 
-    public findSupplyPointsByContractStatus = (ean: string, contractStatus: ContractStatus[]) => this.apollo
+    public findSupplyPointsByContractStatus = (contractStatus: ContractStatus[], ean: string = null) => this.apollo
         .watchQuery<any>({
             fetchPolicy: 'network-only',
             query: findSupplyPointsByContractStatusQuery,

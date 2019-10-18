@@ -9,7 +9,7 @@ export class EanValidator {
             return false;
         }
 
-        return EanValidator.validateGtin(barcode);
+        return EanValidator.validateGtin(barcode) && EanValidator.validateCharInTenthPosition(barcode);
     }
 
     static validateGtin = (value): boolean => {
@@ -34,5 +34,15 @@ export class EanValidator {
         calcChecksum = (calcSum === 0) ? 0 : (10 - calcSum);
 
         return calcChecksum === checksum;
+    }
+
+    static validateCharInTenthPosition = (ean: string): boolean => {
+        if (ean.length < 10) {
+            return true;
+        }
+        const forbiddenCharAtTenPosition = [0, 9];
+        const tenPosition = 9;
+        const chatAtTenPostion = ean.charAt(tenPosition);
+        return !forbiddenCharAtTenPosition.includes(Number(chatAtTenPostion));
     }
 }

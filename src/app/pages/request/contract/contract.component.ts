@@ -5,7 +5,9 @@ import {
 import {
     ChangeDetectorRef,
     Component,
+    ElementRef,
     OnInit,
+    ViewChild,
 } from '@angular/core';
 
 import {
@@ -21,6 +23,7 @@ import {
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
+import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
 import {
     getConfigStepper,
@@ -28,7 +31,6 @@ import {
     parseRestAPIErrors,
     scrollToElementFnc,
 } from 'src/common/utils';
-import { graphQLMessages } from 'src/common/constants/errors.constant';
 import {
     IDocumentType,
     IResponseDataDocument,
@@ -46,6 +48,9 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 export class ContractComponent extends AbstractComponent implements OnInit {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.READY_FOR_SIGN;
     public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.PERSONAL_DATA;
+
+    @ViewChild('pxeVerificationFormWrapper')
+    public pxeVerificationFormWrapper: ElementRef;
 
     public commodityType = CommodityType;
     public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
@@ -96,7 +101,30 @@ export class ContractComponent extends AbstractComponent implements OnInit {
             );
     }
 
-    public openDocument(contractId: string, documentType: IDocumentType) {
+    public saveDocument = (contractId: string, documentType: IDocumentType) => {
+        this.documentLoading = true;
+        this.globalError = [];
+        this.documentService.getDocument(contractId, documentType)
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                (responseDataDocument: IResponseDataDocument) => {
+                    this.documentLoading = false;
+                    this.documentService.documentSave(responseDataDocument);
+                    this.cd.markForCheck();
+                },
+                (error) => {
+                    const message = parseRestAPIErrors(error);
+                    this.documentLoading = false;
+                    this.globalError.push(message);
+                    this.cd.markForCheck();
+                },
+            );
+    }
+
+    // v pripade budouci zmeny
+    public openDocument = (contractId: string, documentType: IDocumentType) => {
         const windowReference = window && window.open();
         this.documentLoading = true;
         this.globalError = [];
@@ -146,9 +174,8 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                 map(({data}) => data.signContract),
             )
             .subscribe(
-                (signedContract: boolean) => {
-                    this.formLoading = false;
-                    if (signedContract) {
+                (deleteSignedContract: boolean) => {
+                    if (deleteSignedContract) {
                         this.router.navigate(
                             [ROUTES.ROUTER_REQUEST_PAYMENT], {
                                 queryParams: {
@@ -156,17 +183,19 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                                 },
                             });
                     } else {
-                        // TODO - temporary
-                        this.globalError.push(graphQLMessages.cannotSignContract);
-                        scrollToElementFnc('top');
+                        this.globalError = [defaultErrorMessage];
+                        this.formLoading = false;
+                        this.cd.markForCheck();
                     }
-                    this.cd.markForCheck();
                 },
                 (error) => {
                     this.formLoading = false;
                     const { globalError, fieldError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.fieldError = fieldError;
+                    if (Object.keys(this.fieldError).length) {
+                        scrollToElementFnc(this.pxeVerificationFormWrapper.nativeElement);
+                    }
                     this.cd.markForCheck();
                 },
             );
