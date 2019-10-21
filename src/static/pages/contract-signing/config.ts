@@ -40,4 +40,7 @@ export const offerConfig: ISupplyPointOffer = {
     systemServicesRegulatedPrice: 0.06,
     totalPrice: 145.72,
     unit: 'MWh',
+    priceGasWithVAT: 11,
+    priceNTWithVAT: 0,
+    priceVTWithVAT: 1.92,
 };
