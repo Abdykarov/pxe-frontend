@@ -44,6 +44,7 @@ export class AuthService {
     private uuid: string = null;
     private sessionUuid: string = null;
 
+    public dontRefreshToken = false;
     private wasRefreshCallRefreshInterval = false;
     private readonly startRefreshTokenIntervalSubject$ = new Subject<void>();
     private readonly stopRefreshTokenIntervalSubject$ = new Subject<void>();
@@ -85,8 +86,7 @@ export class AuthService {
         const jwtPayload = this.getJwtPayload();
         this.currentUserSubject$ = new BehaviorSubject<IJwtPayload>(jwtPayload);
         this.currentUser$ = this.currentUserSubject$.asObservable();
-        this.refreshTokenInterval$
-            .subscribe();
+        this.refreshTokenInterval$.subscribe();
     }
 
     startRefreshTokenInterval = () => {
@@ -126,6 +126,7 @@ export class AuthService {
     }
 
     public login = ({login, password}: ILoginRequest) => {
+        this.dontRefreshToken = true;
         return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { login, password })
             .pipe(
                 map((response: ILoginResponse) => {

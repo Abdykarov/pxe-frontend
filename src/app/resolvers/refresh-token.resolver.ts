@@ -22,7 +22,8 @@ export class RefreshTokenResolver implements Resolve<any> {
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | any {
         this.authService.startRefreshTokenInterval();
-        if (route.queryParams.isFromLogin) {
+        if (this.authService.dontRefreshToken) {
+            this.authService.dontRefreshToken = false;
             return of({});
         } else {
             return this.authService.refreshToken()

@@ -262,11 +262,6 @@ export class LoginComponent extends AbstractComponent {
             }
         }
 
-        extras.queryParams = {
-            isFromLogin: true,
-            ...extras.queryParams,
-        };
-
         this.router.navigate([this.routerAfterLogin(loginResponse)], extras);
     }
 }
