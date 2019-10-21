@@ -38,6 +38,7 @@ import { PageChangedEvent } from 'ngx-bootstrap';
 import {
     parseGraphQLErrors,
     parseRestAPIErrors,
+    scrollToElementFnc,
 } from 'src/common/utils';
 import { SupplierConcludedContractsConfig } from './supplier-concluded-contracts.config';
 import { SupplierService } from 'src/common/graphql/services/supplier.service';
@@ -63,7 +64,7 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
 
     public paginationConfig: IPaginationConfig = null;
 
-    public contractsWithNameAndSupplyPointEan: IPaginatedContractsWithNameAndSupplyPointEan = null;
+    public paginatedContractsWithNameAndSupplyPointEan: IPaginatedContractsWithNameAndSupplyPointEan = null;
     public tableCols = null;
 
     public formLoading = false;
@@ -83,40 +84,6 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
     ngOnInit() {
         this.paginationConfig = this.supplierConcludedContractsConfig.paginationConfig;
 
-        combineLatest(this.commodityType$, this.numberOfPages$)
-            .pipe(
-                switchMap(([commodityType, numberOfPage]) => {
-                    this.globalError = [];
-                    this.formLoading = true;
-                    return this.supplierService.getListSupplierContractsBasedOnOffers(
-                            {
-                                commodityType,
-                            },
-                            {
-                                first: this.paginationConfig.itemsPerPage * (numberOfPage - 1),
-                                offset: this.paginationConfig.itemsPerPage,
-                            },
-                        );
-                    },
-                ),
-                map(({data}) =>  data.listSupplierContractsBasedOnOffers),
-                takeUntil(this.destroy$),
-            )
-            .subscribe(
-                (paginatedContractsWithNameAndSupplyPointEan: any) => {
-                    this.contractsWithNameAndSupplyPointEan = paginatedContractsWithNameAndSupplyPointEan;
-                    this.tableCols = this.supplierConcludedContractsConfig.getTableCols(this.commodityType);
-                    this.formLoading = false;
-                    this.cd.markForCheck();
-                },
-                (error) => {
-                    const { globalError } = parseGraphQLErrors(error);
-                    this.globalError = globalError;
-                    this.formLoading = false;
-                    this.cd.markForCheck();
-                },
-            );
-
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.route.params
             .pipe(
@@ -128,15 +95,47 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                     return;
                 }
                 this.commodityType = params.commodityType;
-                console.log('VOLAM SE');
-                console.log(commodityTypes[this.commodityType]);
                 this.commodityTypeSubject$.next(commodityTypes[this.commodityType]);
                 this.cd.markForCheck();
             });
+
+        combineLatest(this.commodityType$, this.numberOfPages$)
+            .pipe(
+                switchMap(([commodityType, numberOfPage]) => {
+                    this.globalError = [];
+                    this.formLoading = true;
+                    return this.supplierService.getListSupplierContractsBasedOnOffers(
+                            {
+                                commodityType,
+                                pagination: {
+                                    first: this.paginationConfig.itemsPerPage * (numberOfPage - 1),
+                                    offset: this.paginationConfig.itemsPerPage,
+                                },
+                            },
+                        );
+                    },
+                ),
+                map(({data}) =>  data.listSupplierContractsBasedOnOffers),
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                (paginatedContractsWithNameAndSupplyPointEan: IPaginatedContractsWithNameAndSupplyPointEan) => {
+                    this.paginatedContractsWithNameAndSupplyPointEan = paginatedContractsWithNameAndSupplyPointEan;
+                    this.tableCols = this.supplierConcludedContractsConfig.getTableCols(this.commodityType);
+                    scrollToElementFnc('top');
+                    this.formLoading = false;
+                    this.cd.markForCheck();
+                },
+                (error) => {
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.formLoading = false;
+                    this.cd.markForCheck();
+                },
+            );
     }
 
     public pageChanged = ($event: PageChangedEvent) => {
-        console.log('PAGE CHANGED');
         if ($event && $event.page) {
             this.numberOfPagesSubject$.next($event.page);
         } else {
@@ -147,7 +146,6 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
 
     public downloadPDF = (contractId: string) => {
         this.globalError = [];
-        this.formLoading = true;
         this.documentService.getDocument(contractId, IDocumentType.CONTRACT)
             .pipe(
                 takeUntil(this.destroy$),
@@ -161,7 +159,6 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                 (error) => {
                     const message = parseRestAPIErrors(error);
                     this.globalError = [message];
-                    this.formLoading = false;
                     this.cd.markForCheck();
                 },
             );

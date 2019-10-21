@@ -1,8 +1,8 @@
-import { IContract } from 'src/common/graphql/models/contract';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
+import { IContract } from 'src/common/graphql/models/contract';
 
 export interface IPaginatedContractsWithNameAndSupplyPointEan {
-    contractsWithNameAndEan: IContractWithNameAndSupplyPointEan[];
+    page: IContractWithNameAndSupplyPointEan[];
     totalRecords: number;
 }
 
@@ -18,9 +18,10 @@ export interface IContractsBasedOnOffersFilter {
     signDateFrom?: string;
     signDateTo?: string;
     commodityType?: CommodityType;
+    pagination?: IPagination;
 }
 
-export interface IPaginationFilter {
+export interface IPagination {
     first: number;
     offset: number;
 }

@@ -4,7 +4,6 @@ import { Apollo } from 'apollo-angular';
 
 import {
     IContractsBasedOnOffersFilter,
-    IPaginationFilter,
 } from 'src/common/graphql/models/suppplier.model';
 import { listSupplierContractsBasedOnOffersQuery } from 'src/common/graphql/queries/supplier';
 
@@ -19,16 +18,17 @@ export class SupplierService {
     ) {}
 
     public getListSupplierContractsBasedOnOffers = (
-            contractsBasedOnOffersFilter: IContractsBasedOnOffersFilter,
-            paginationFilter: IPaginationFilter,
-        ) => this.apollo
-                .watchQuery<any>({
-                    query: listSupplierContractsBasedOnOffersQuery,
-                    variables: {
-                        contractsBasedOnOffersFilter,
-                        paginationFilter,
-                    },
-                })
-                .valueChanges
+        contractsBasedOnOffersFilter: IContractsBasedOnOffersFilter,
+    ) => this.apollo
+        .watchQuery<any>({
+            query: listSupplierContractsBasedOnOffersQuery,
+            variables: {
+                filter: {
+                    ...contractsBasedOnOffersFilter,
+                },
+            },
+            fetchPolicy: 'network-only',
+        })
+        .valueChanges
 
 }

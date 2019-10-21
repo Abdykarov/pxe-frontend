@@ -75,7 +75,7 @@ export class SupplierConcludedContractsConfig {
     ];
 
     public readonly paginatedContractsWithNameAndSupplyPointEan: IPaginatedContractsWithNameAndSupplyPointEan = {
-        contractsWithNameAndEan: [
+        page: [
             {
                 name: 'Jaroslav Dvořák',
                 ean: '8591',
