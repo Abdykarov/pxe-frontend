@@ -9,7 +9,7 @@ export const navigationMenuUsers: INavigationMenu = [
     {
         'class': '',
         'url': ROUTES.ROUTER_DASHBOARD,
-        'label': 'PŘEHLED',
+        'label': 'Přehled',
         'icon': 'notice-board',
         'type': INavigationItemType.NORMAL,
         'children': [],
@@ -18,7 +18,7 @@ export const navigationMenuUsers: INavigationMenu = [
     {
         'class': '',
         'url': '',
-        'label': 'SMLOUVY',
+        'label': 'Smlouvy',
         'type': INavigationItemType.ONLY_LABEL,
         'icon': '',
         'children': [],
@@ -27,7 +27,7 @@ export const navigationMenuUsers: INavigationMenu = [
     {
         'class': '',
         'url': ROUTES.ROUTER_REQUESTS,
-        'label': 'ROZPRACOVANÉ',
+        'label': 'Rozpracované',
         'type': INavigationItemType.NORMAL,
         'icon': 'star',
         'children': [
@@ -62,7 +62,7 @@ export const navigationMenuUsers: INavigationMenu = [
     {
         'class': '',
         'url': ROUTES.ROUTER_SUPPLY_POINTS,
-        'label': 'UZAVŘENÉ',
+        'label': 'Uzavřené',
         'type': INavigationItemType.NORMAL,
         'icon': 'document',
         'children': [],
@@ -74,9 +74,9 @@ export const navigationMenuSuppliers: INavigationMenu = [];
 
 export const navigationMenuUserActions: INavigationMenu = [
     {
-        'class': 'navigation-main__item--second d-lg-none d-xl-block',
+        'class': 'd-lg-none',
         'url': '',
-        'label': 'ÚČET',
+        'label': 'Účet',
         'type': INavigationItemType.ONLY_LABEL,
         'icon': '',
         'children': [],

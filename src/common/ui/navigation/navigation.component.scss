@@ -95,6 +95,7 @@
 			}
 		}
 	}
+
 	&--second {
 		&:first-of-type {
 			margin-top: $spacer;
@@ -171,11 +172,12 @@
 	&:visited {
 		position: relative;
 		display: block;
-		padding: $spacer $spacer;
-		text-decoration: none;
+		padding: $spacer;
 		color: $info;
-		cursor: auto;
 		font-weight: 500;
+		text-transform: uppercase;
+		text-decoration: none;
+		cursor: auto;
 		pointer-events: none;
 		@include smart-short-text;
 
@@ -188,11 +190,6 @@
 
 .navigation-main__link-label,
 .navigation-main-sub__link {
-	text-transform: uppercase;
-}
-
-.navigation-main__link-label,
-.navigation-main-sub__link {
 	font-size: $small-font-size;
 	line-height: $line-height-sm;
 
@@ -200,24 +197,11 @@
 	@include media-breakpoint-up(lg) {
 		font-size: $font-size-base;
 		line-height: $line-height-base;
+		text-transform: uppercase;
 	}
 
 	& + .badge {
 		margin-left: ( $spacer / 3 );
-	}
-}
-
-@media (max-width: 1199.99px){
-	.navigation-main__item{
-		a:not(.navigation-main__is-label-only) {
-			.navigation-main__link-label {
-				text-transform: lowercase;
-
-				&:first-letter {
-					text-transform: uppercase;
-				}
-			}
-		}
 	}
 }
 
