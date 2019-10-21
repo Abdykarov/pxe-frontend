@@ -90,13 +90,14 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                 takeUntil(this.destroy$),
             )
             .subscribe(params => {
-                if (R.indexOf(params.commodityType, R.keys(commodityTypes)) < 0) {
-                    this.router.navigate([this.routePower]);
-                    return;
-                }
-                this.commodityType = params.commodityType;
-                this.commodityTypeSubject$.next(commodityTypes[this.commodityType]);
-                this.cd.markForCheck();
+                console.log(params);
+                // if (R.indexOf(params.commodityType, R.keys(commodityTypes)) < 0) {
+                //     this.router.navigate([this.routePower]);
+                //     return;
+                // }
+                // this.commodityType = params.commodityType;
+                // this.commodityTypeSubject$.next(commodityTypes[this.commodityType]);
+                // this.cd.markForCheck();
             });
 
         combineLatest(this.commodityType$, this.numberOfPages$)
@@ -122,7 +123,6 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                 (paginatedContractsWithNameAndSupplyPointEan: IPaginatedContractsWithNameAndSupplyPointEan) => {
                     this.paginatedContractsWithNameAndSupplyPointEan = paginatedContractsWithNameAndSupplyPointEan;
                     this.tableCols = this.supplierConcludedContractsConfig.getTableCols(this.commodityType);
-                    scrollToElementFnc('top');
                     this.formLoading = false;
                     this.cd.markForCheck();
                 },
@@ -137,7 +137,7 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
 
     public pageChanged = ($event: PageChangedEvent) => {
         if ($event && $event.page) {
-            this.numberOfPagesSubject$.next($event.page);
+            this.router.navigate([(this.commodityType ? this.routePower : this.routeGas) + '/' + $event.page]);
         } else {
             this.globalError = [defaultErrorMessage];
             this.cd.markForCheck();

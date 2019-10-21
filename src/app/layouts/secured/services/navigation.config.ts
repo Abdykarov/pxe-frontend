@@ -90,7 +90,7 @@ export const navigationMenuUserActions: INavigationMenu = [
 export const navigationMenuSuppliersActions: INavigationMenu = [
     {
         'class': 'navigation-main__item--second',
-        'label': 'Nabidky',
+        'label': 'Nabídky',
         'icon': 'star',
         'url' : `/${ROUTES.ROUTER_SUPPLY_OFFER}`,
         'children': [],
