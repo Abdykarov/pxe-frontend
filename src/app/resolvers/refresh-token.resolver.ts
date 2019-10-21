@@ -22,9 +22,13 @@ export class RefreshTokenResolver implements Resolve<any> {
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | any {
         this.authService.startRefreshTokenInterval();
-        return this.authService.refreshToken()
-            .pipe(
-                catchError(() => of()),
-            );
+        if (route.queryParams.isFromLogin) {
+            return of({});
+        } else {
+            return this.authService.refreshToken()
+                .pipe(
+                    catchError(() => of()),
+                );
+        }
     }
 }

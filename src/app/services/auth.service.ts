@@ -44,17 +44,17 @@ export class AuthService {
     private uuid: string = null;
     private sessionUuid: string = null;
 
-    private wasFirstCallRefreshInterval = false;
-    private readonly startRefreshTokenIntervalSubject = new Subject<void>();
-    private readonly stopRefreshTokenIntervalSubject = new Subject<void>();
+    private wasRefreshCallRefreshInterval = false;
+    private readonly startRefreshTokenIntervalSubject$ = new Subject<void>();
+    private readonly stopRefreshTokenIntervalSubject$ = new Subject<void>();
     private readonly stopMessageInterval = 'STOP_INTERVAL';
 
-    public observable$ =
+    public refreshTokenInterval$ =
         interval(CONSTS.REFRESH_INTERVAL_TOKEN)
             .pipe(
                 switchMap((number) => {
-                    if (!this.wasFirstCallRefreshInterval) {
-                        this.wasFirstCallRefreshInterval = true;
+                    if (!this.wasRefreshCallRefreshInterval) {
+                        this.wasRefreshCallRefreshInterval = true;
                         if ( this.token) {
                             return this.refreshToken();
                         } else {
@@ -65,8 +65,8 @@ export class AuthService {
                 }),
                 catchError(() => of(this.stopMessageInterval)),
                 take(10),
-                takeUntil(this.stopRefreshTokenIntervalSubject),
-                repeatWhen(() => this.startRefreshTokenIntervalSubject),
+                takeUntil(this.stopRefreshTokenIntervalSubject$),
+                repeatWhen(() => this.startRefreshTokenIntervalSubject$),
                 filter((num) => {
                     if (num === this.stopMessageInterval) {
                         this.stopRefreshTokenInterval();
@@ -85,17 +85,17 @@ export class AuthService {
         const jwtPayload = this.getJwtPayload();
         this.currentUserSubject$ = new BehaviorSubject<IJwtPayload>(jwtPayload);
         this.currentUser$ = this.currentUserSubject$.asObservable();
-        this.observable$
+        this.refreshTokenInterval$
             .subscribe();
     }
 
     startRefreshTokenInterval = () => {
         this.stopRefreshTokenInterval();
-        this.startRefreshTokenIntervalSubject.next();
+        this.startRefreshTokenIntervalSubject$.next();
     }
 
     stopRefreshTokenInterval = () => {
-        this.stopRefreshTokenIntervalSubject.next();
+        this.stopRefreshTokenIntervalSubject$.next();
     }
 
     public get currentUserValue(): IJwtPayload {
