@@ -6,7 +6,7 @@
             Heslo jsme vám zaslali na telefonní číslo
         </ng-container>
         <ng-container *ngIf="!wasSentToPhone">
-            Heslo jsme vám zaslali na {{email}}
+            Heslo jsme vám zaslali na {{login}}
         </ng-container>
     </lnd-alert>
     <div class="text-right">
@@ -21,23 +21,24 @@
     </div>
 </ng-container>
 <ng-template #forgottenPassword>
-    <a  *ngIf="!passwordWasSent"
-        (click)="handleCustomAction($event)">
+    <a *ngIf="!passwordWasSent"
+       (click)="handleCustomAction($event)">
         Zapomněli jste heslo?
     </a>
 </ng-template>
 <form
     [formGroup]="form"
+    (keydown.enter)="submitForm($event);false"
     class="form-container"
     autocomplete="off">
     <lnd-form-field
-        [error]="form.controls.email.errors"
-        [formControl]="form.controls.email"
-        [id]="'email'"
-        label="E-mail (Dodavatel - přihlašovací jméno)"
-        [success]="form.controls.email.valid && form.controls.email.touched"
-        [touched]="form.controls.email.touched"
-        [validationMessages]="formFields.validationMessages.email"
+        [error]="form.controls.login.errors"
+        [formControl]="form.controls.login"
+        [id]="'login'"
+        label="E-mail (přihlašovací jméno)"
+        [success]="form.controls.login.valid && form.controls.login.touched"
+        [touched]="form.controls.login.touched"
+        [validationMessages]="formFields.validationMessages.login"
     ></lnd-form-field>
     <lnd-form-field
         [error]="form.controls.password.errors"
@@ -53,7 +54,8 @@
     <div class="text-right">
         <lnd-button
             type="primary"
-            (action)="submitForm()"
+            [submit]="true"
+            (action)="submitForm($event)"
             [isDisabled]="!!formLoading"
             label="Přihlásit se">
         </lnd-button>

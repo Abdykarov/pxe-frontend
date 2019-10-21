@@ -17,10 +17,15 @@ export const CONSTS = {
         SHORT: 'YYYY-MM-DD',
     },
     DEFAULT_EXPIRATION: 3600,
+    DEFAULT_DEPOSIT_PAYMENT_TYPE_ID: 'Prikaz',
     MAX_DAYS_TILL_CONTRACT_EXPIRATION: 60,
+    MAX_LENGTH_CITY: 255,
+    MAX_LENGTH_DESCRIPTIVE_NUMBER: 16,
     MAX_LENGTH_WHOLE_NAME: 150,
     MAX_LENGTH_NAME: 50,
+    MAX_LENGTH_ORIENTATION_NUMBERR: 16,
     MAX_LENGTH_POSITION: 80,
+    MAX_LENGTH_STREET: 255,
     MIN_BIRTH_DATE: '1900-01-01',
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
@@ -30,6 +35,8 @@ export const CONSTS = {
         COOKIES_POLICY : 'cookies-policy',
         CHANGE_PASSWORD: 'change-password',
         DASHBOARD : 'dashboard',
+        DELETE_ACCOUNT: 'delete-account',
+        DELETED_ACCOUNT: 'deleted-account',
         EMPTY : '',
         FORGOTTEN_PASSWORD : 'forgotten-password',
         GAS: 'gas',
@@ -63,6 +70,7 @@ export const CONSTS = {
 export const ROUTES = {
     ROUTER_ROOT: '/',
     ROUTER_DASHBOARD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.DASHBOARD}`,
+    ROUTER_DELETE_ACCOUNT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.DELETE_ACCOUNT}`,
     ROUTER_REQUEST_SUPPLY_POINT_SELECTION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_POINT_SELECTION}`,
     ROUTER_REQUEST_CONTRACT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.CONTRACT}`,
     ROUTER_REQUEST_OFFER_SELECTION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.OFFER_SELECTION}`,
@@ -234,3 +242,78 @@ export const DEFAULT_QR_CODE_SETTING: IQRCodeSetting = {
     width: 256,
     margin: 0,
 };
+
+export const REGIONS: Array<IOption> = [
+    {
+        'label': 'Hlavní město Praha',
+        'value': 'Hlavní město Praha',
+        'key': 'Hlavní město Praha',
+    },
+    {
+        'label': 'Jihočeský kraj',
+        'value': 'Jihočeský kraj',
+        'key': 'Jihočeský kraj',
+    },
+    {
+        'label': 'Jihomoravský kraj',
+        'value': 'Jihomoravský kraj',
+        'key': 'Jihomoravský kraj',
+    },
+    {
+        'label': 'Karlovarský kraj',
+        'value': 'Karlovarský kraj',
+        'key': 'Karlovarský kraj',
+    },
+    {
+        'label': 'Královéhradecký kraj',
+        'value': 'Královéhradecký kraj',
+        'key': 'Královéhradecký kraj',
+    },
+    {
+        'label': 'Liberecký kraj',
+        'value': 'Liberecký kraj',
+        'key': 'Liberecký kraj',
+    },
+    {
+        'label': 'Moravskoslezský kraj',
+        'value': 'Moravskoslezský kraj',
+        'key': 'Moravskoslezský kraj',
+    },
+    {
+        'label': 'Olomoucký kraj',
+        'value': 'Olomoucký kraj',
+        'key': 'Olomoucký kraj',
+    },
+    {
+        'label': 'Pardubický kraj',
+        'value': 'Pardubický kraj',
+        'key': 'Pardubický kraj',
+    },
+    {
+        'label': 'Plzeňský kraj',
+        'value': 'Plzeňský kraj',
+        'key': 'Plzeňský kraj',
+    },
+    {
+        'label': 'Středočeský kraj',
+        'value': 'Středočeský kraj',
+        'key': 'Středočeský kraj',
+    },
+    {
+        'label': 'Ústecký kraj',
+        'value': 'Ústecký kraj',
+        'key': 'Ústecký kraj',
+    },
+    {
+        'label': 'Kraj Vysočina',
+        'value': 'Kraj Vysočina',
+        'key': 'Kraj Vysočina',
+    },
+    {
+        'label': 'Zlínský kraj',
+        'value': 'Zlínský kraj',
+        'key': 'Zlínský kraj',
+    },
+];
+
+export const OPERATIONS_WITHOUT_SCROLL_ON_ERRORS = ['getSupplyPointGlobalStatistics', 'makeRegistration'];

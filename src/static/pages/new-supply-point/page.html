@@ -1,20 +1,3 @@
-<!-- Example custom lael template -->
-<ng-template
-    #templateLabel
-    let-item="item"
-    let-index="index">
-    {{ item.street }}&nbsp;{{ item.orientationNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.descriptiveNumber }},
-    {{ item.city }}, {{ item.postCode }}
-</ng-template>
-<!-- Example searched items template -->
-<ng-template
-    #templateItem
-    let-item="item"
-    let-index="index">
-    {{ item.street }}&nbsp;{{ item.orientationNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.descriptiveNumber }}<br>
-    {{ item.city }}&nbsp;{{ item.postCode }}
-</ng-template>
-
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12 col-md-6 offset-md-3 text-center">
@@ -81,9 +64,7 @@
                     <pxe-address-whisperer
                         [label]="'Adresa'"
                         [parentForm]="form"
-                        [whispererName]="'address'"
-                        [templateItem]="templateItem"
-                        [templateLabel]="templateLabel">
+                        [whispererName]="'address'">
                     </pxe-address-whisperer>
                     <lnd-select
                         [appendButtonIcon]="'icon--info'"

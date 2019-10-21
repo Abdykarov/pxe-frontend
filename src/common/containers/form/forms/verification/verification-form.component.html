@@ -8,48 +8,47 @@
     [formGroup]="form"
     autocomplete="off"
     (keydown)="resetCustomFieldError()"
+    (keydown.enter)="submitForm($event);false"
     (change)="resetCustomFieldError()">
-    <div class="row">
-        <div [ngClass]="classRootWrapper">
-            <div [ngClass]="classMainWrapper">
-                <div [ngClass]="classFirstField">
-                    <lnd-form-field
-                        label="Kód z SMS"
-                        [disabledField]="!smsSent"
-                        [error]="formError.smsCode || form.controls.smsCode.errors"
-                        [formControl]="form.controls.smsCode"
-                        [id]="'smsCode'"
-                        [subtextTemplate]="sendSmsAgainTemplate"
-                        [success]="form.controls.smsCode.valid && (form.controls.smsCode.touched || formError.smsCode)"
-                        [touched]="form.controls.smsCode.touched || formError.smsCode"
-                        [triggerFocus]="smsSent"
-                        [validationMessages]="formFields.validationMessages.smsCode">
-                    </lnd-form-field>
-                </div>
-                <ng-container *ngIf="infoTemplate && smsSent">
-                    <ng-container *ngTemplateOutlet="infoTemplate; context: { contract: this.contract }"></ng-container>
-                </ng-container>
-                <div [ngClass]="classSecondField">
-                    <lnd-button
-                        *ngIf="!smsSent"
-                        (action)="submitSms()"
-                        [isDisabled]="formLoading"
-                        label="Odeslat ověřovací kód"
-                        type="primary">
-                    </lnd-button>
-                    <lnd-button
-                        *ngIf="smsSent"
-                        (action)="submitForm()"
-                        [isDisabled]="formLoading"
-                        [label]="submitLabelText"
-                        type="primary">
-                    </lnd-button>
-                    <p *ngIf="!smsSent && !showSentSmsLabelUnderFirstField"
-                       class="small text-center mt-2">
-                        Ověřovací kód odešleme na číslo<br>{{contract.personalData.phone}}
-                    </p>
-                </div>
+    <div [ngClass]="classMainWrapper">
+        <div [ngClass]="classFirstField">
+            <div class="form-container ml-0 ml-md-auto mr-md-0">
+                <lnd-form-field
+                    label="Kód z SMS"
+                    [disabledField]="!smsSent"
+                    [error]="formError.smsCode || form.controls.smsCode.errors"
+                    [formControl]="form.controls.smsCode"
+                    [id]="'smsCode'"
+                    [subtextTemplate]="sendSmsAgainTemplate"
+                    [success]="form.controls.smsCode.valid && (form.controls.smsCode.touched || formError.smsCode)"
+                    [touched]="form.controls.smsCode.touched || formError.smsCode"
+                    [triggerFocus]="smsSent"
+                    [validationMessages]="formFields.validationMessages.smsCode">
+                </lnd-form-field>
             </div>
+        </div>
+        <ng-container *ngIf="infoTemplate && smsSent">
+            <ng-container *ngTemplateOutlet="infoTemplate; context: { contract: this.contract }"></ng-container>
+        </ng-container>
+        <div [ngClass]="classSecondField">
+            <lnd-button
+                *ngIf="!smsSent"
+                (action)="submitSms()"
+                [isDisabled]="formLoading"
+                [label]="sendSmsLabel"
+                type="primary">
+            </lnd-button>
+            <lnd-button
+                *ngIf="smsSent"
+                (action)="submitForm()"
+                [isDisabled]="formLoading"
+                [label]="submitLabelText"
+                type="primary">
+            </lnd-button>
+            <p *ngIf="!smsSent && !showSentSmsLabelUnderFirstField"
+                class="small mt-2">
+                Ověřovací kód odešleme na číslo<br>{{phone}}
+            </p>
         </div>
     </div>
 </form>

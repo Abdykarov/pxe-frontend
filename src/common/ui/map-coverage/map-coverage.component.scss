@@ -36,6 +36,22 @@
 	}
 }
 
+.loading {
+	margin: ( $spacer * 10.5 ) 0 ( $spacer * 13 );
+
+	@include media-breakpoint-up(md) {
+		margin: ( $spacer * 7.5 ) 0 ( $spacer * 7.75 );
+	}
+}
+
+.error-map-coverage {
+	margin: ( $spacer * 8 ) 0 ( $spacer * 12 );
+
+	@include media-breakpoint-up(md) {
+		margin: ( $spacer * 5.5 ) 0 ( $spacer * 6.75 );
+	}
+}
+
 .box-info {
 	position: relative;
 	width: 150px;
@@ -108,13 +124,21 @@
 	}
 
 	&__number {
-		font-size: $h3-font-size-public;
+		font-size: $h2-font-size;
 		line-height: 1;
 
 		// Media queries
 		@include media-breakpoint-up(xl) {
-			font-size: $h1-font-size-public;
+			font-size: $h1-font-size;
 			line-height: ( 48 / 36 );
+		}
+	}
+
+	&__unit {
+		font-size: $small-font-size;
+
+		@include media-breakpoint-up(xl) {
+			font-size: $h1-font-size-snd;
 		}
 	}
 }

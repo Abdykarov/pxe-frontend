@@ -234,41 +234,37 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
         this.resetFormError(false);
     }
 
-    public submitForm = () => {
-        this.resetCustomFieldError();
-        this.triggerValidation();
-        if (this.form.valid) {
-            const form = {
-                ...this.form.value,
-                benefits: R.pipe(
-                    R.map(R.values),
-                    R.flatten,
-                    R.filter(R_.isNotNil),
-                    JSON.stringify,
-                )(this.form.value.benefits),
-            };
-            if (!R.isNil(form.validFromTo)) {
-                form.validFrom = convertDateToSendFormatFnc(form.validFromTo[0]);
-                form.validTo = convertDateToSendFormatFnc(form.validFromTo[1]);
-            }
-            if (!R.isNil(form.deliveryFromTo)) {
-                form.deliveryFrom = convertDateToSendFormatFnc(form.deliveryFromTo[0]);
-                form.deliveryTo = convertDateToSendFormatFnc(form.deliveryFromTo[1]);
-            }
-            if (!R.isNil(form.priceNT)) {
-                form.priceNT = parseFloat(form.priceNT.replace(',', '.'));
-            }
-            if (!R.isNil(form.priceVT)) {
-                form.priceVT = parseFloat(form.priceVT.replace(',', '.'));
-            }
-            if (!R.isNil(form.priceGas)) {
-                form.priceGas = parseFloat(form.priceGas.replace(',', '.'));
-            }
-            if (!R.isNil(form.permanentPaymentPrice)) {
-                form.permanentPaymentPrice = parseFloat(form.permanentPaymentPrice.replace(',', '.'));
-            }
-            this.submitAction.emit(form);
+    public submitValidForm = () => {
+        const form = {
+            ...this.form.value,
+            benefits: R.pipe(
+                R.map(R.values),
+                R.flatten,
+                R.filter(R_.isNotNil),
+                JSON.stringify,
+            )(this.form.value.benefits),
+        };
+        if (!R.isNil(form.validFromTo)) {
+            form.validFrom = convertDateToSendFormatFnc(form.validFromTo[0]);
+            form.validTo = convertDateToSendFormatFnc(form.validFromTo[1]);
         }
+        if (!R.isNil(form.deliveryFromTo)) {
+            form.deliveryFrom = convertDateToSendFormatFnc(form.deliveryFromTo[0]);
+            form.deliveryTo = convertDateToSendFormatFnc(form.deliveryFromTo[1]);
+        }
+        if (!R.isNil(form.priceNT)) {
+            form.priceNT = parseFloat(form.priceNT.replace(',', '.'));
+        }
+        if (!R.isNil(form.priceVT)) {
+            form.priceVT = parseFloat(form.priceVT.replace(',', '.'));
+        }
+        if (!R.isNil(form.priceGas)) {
+            form.priceGas = parseFloat(form.priceGas.replace(',', '.'));
+        }
+        if (!R.isNil(form.permanentPaymentPrice)) {
+            form.permanentPaymentPrice = parseFloat(form.permanentPaymentPrice.replace(',', '.'));
+        }
+        this.submitAction.emit(form);
     }
 
     public loadCodeLists = () => {

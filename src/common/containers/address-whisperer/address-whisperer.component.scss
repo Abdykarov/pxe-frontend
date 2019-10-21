@@ -1,0 +1,23 @@
+/*
+ -  Address whisperer
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+
+.address-whisperer {
+	.select-wrapper {
+		.is-started-searching {
+			.ng-dropdown-panel-items.scroll-host {
+				display: none;
+			}
+		}
+	}
+
+	.check-other-correspondence-address {
+		margin-top: -( $spacer * 1.5 );
+	}
+}

@@ -16,7 +16,6 @@ import {
 
 // own classes
 import { AuthService } from 'src/app/services/auth.service';
-import { CONSTS } from 'src/app/app.constants';
 import { environment } from 'src/environments/environment';
 import { scrollToElementFnc } from 'src/common/utils';
 
