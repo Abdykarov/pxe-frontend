@@ -55,24 +55,24 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-auto"
-                                 *ngIf="supplyPointOffer.consumptionPriceVT && supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
+                                 *ngIf="supplyPointOffer.priceVTWithVAT && supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
                                 <div class="supply-point-offer__value-box">
                                     <span class="supply-point-offer__value-name">Cena za vysoký tarif</span>
-                                    <span class="supply-point-offer__value">{{supplyPointOffer.consumptionPriceVT | number: '1.0-2'}} Kč/MWh</span>
+                                    <span class="supply-point-offer__value">{{supplyPointOffer.priceVTWithVAT | number: '1.0-2'}} Kč/MWh</span>
                                 </div>
                             </div>
                             <div class="col-auto"
-                                 *ngIf="supplyPointOffer.consumptionPriceNT && supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
+                                 *ngIf="supplyPointOffer.priceNTWithVAT && supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
                                 <div class="supply-point-offer__value-box">
                                     <span class="supply-point-offer__value-name">Cena za nízký tarif</span>
-                                    <span class="supply-point-offer__value">{{supplyPointOffer.consumptionPriceNT | number: '1.0-2'}} Kč/MWh</span>
+                                    <span class="supply-point-offer__value">{{supplyPointOffer.priceNTWithVAT | number: '1.0-2'}} Kč/MWh</span>
                                 </div>
                             </div>
                             <div class="col-auto"
-                                 *ngIf="supplyPointOffer.priceGas && supplyPointOffer.commodityType === COMMODITY_TYPE_GAS">
+                                 *ngIf="supplyPointOffer.priceGasWithVAT && supplyPointOffer.commodityType === COMMODITY_TYPE_GAS">
                                 <div class="supply-point-offer__value-box">
                                     <span class="supply-point-offer__value-name">Cena</span>
-                                    <span class="supply-point-offer__value">{{supplyPointOffer.priceGas | number: '1.0-2'}} Kč/MWh</span>
+                                    <span class="supply-point-offer__value">{{supplyPointOffer.priceGasWithVAT | number: '1.0-2'}} Kč/MWh</span>
                                 </div>
                             </div>
                             <div class="col-auto"
