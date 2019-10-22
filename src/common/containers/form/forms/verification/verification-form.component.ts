@@ -40,7 +40,7 @@ export class VerificationFormComponent extends AbstractFormComponent {
     public showSentSmsLabelUnderFirstField = true;
 
     @Input()
-    public sendSmsLabel = 'Odeslat ověřovací kód';
+    public sendSmsLabel = 'Odeslat SMS kód';
 
     @Input()
     public phone = null;
