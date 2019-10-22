@@ -252,6 +252,7 @@ export class LoginComponent extends AbstractComponent {
                 showBanner: true,
             };
         }
+
         if (loginResponse.landingPage === LANDING_PAGE.WAITING_FOR_PAYMENT) {
             const supplyPointId = this.authService.currentUserValue.evaluatedSupplyPoint;
             if (supplyPointId) {
@@ -260,6 +261,7 @@ export class LoginComponent extends AbstractComponent {
                 };
             }
         }
+
         this.router.navigate([this.routerAfterLogin(loginResponse)], extras);
     }
 }
