@@ -9,6 +9,7 @@ import {
     INavigationConfig,
     INavigationItem,
 } from './models/navigation.model';
+import { INavigationItemType } from 'src/app/app.constants';
 
 @Component({
     selector: 'lnd-navigation',
@@ -16,6 +17,8 @@ import {
     styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent {
+    public navigationItemType = INavigationItemType;
+
     @Input()
     public activeUrl = '';
 
