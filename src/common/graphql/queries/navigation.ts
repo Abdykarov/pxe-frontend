@@ -9,6 +9,7 @@ export const getConfigQuery = gql`
                     icon,
                     url,
                     class,
+                    type,
                     children {
                         label,
                         url,
