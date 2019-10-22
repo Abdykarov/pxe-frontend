@@ -65,7 +65,7 @@ export class AuthService {
                     return of(number);
                 }),
                 catchError(() => of(this.stopMessageInterval)),
-                take(10),
+                take(CONSTS.REFRESH_TOKEN_COUNT),
                 takeUntil(this.stopRefreshTokenIntervalSubject$),
                 repeatWhen(() => this.startRefreshTokenIntervalSubject$),
                 filter((num) => {
