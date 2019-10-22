@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
-import {
-    HttpClient,
-} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import {
     BehaviorSubject,
+    interval,
     Observable,
     of,
+    Subject,
 } from 'rxjs';
 import {
     catchError,
+    filter,
     first,
     map,
+    repeatWhen,
+    switchMap,
+    take,
+    takeUntil,
 } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -42,6 +47,40 @@ export class AuthService {
     private uuid: string = null;
     private sessionUuid: string = null;
 
+    public dontRefreshToken = false;
+    private wasRefreshCallRefreshInterval = false;
+    private readonly startRefreshTokenIntervalSubject$ = new Subject<void>();
+    private readonly stopRefreshTokenIntervalSubject$ = new Subject<void>();
+    private readonly stopMessageInterval = 'STOP_INTERVAL';
+
+    public refreshTokenInterval$ =
+        interval(CONSTS.REFRESH_INTERVAL_TOKEN)
+            .pipe(
+                switchMap((number) => {
+                    if (!this.wasRefreshCallRefreshInterval) {
+                        this.wasRefreshCallRefreshInterval = true;
+                        if ( this.token) {
+                            return this.refreshToken();
+                        } else {
+                            return of(this.stopMessageInterval);
+                        }
+                    }
+                    return of(number);
+                }),
+                catchError(() => of(this.stopMessageInterval)),
+                take(CONSTS.REFRESH_TOKEN_COUNT),
+                takeUntil(this.stopRefreshTokenIntervalSubject$),
+                repeatWhen(() => this.startRefreshTokenIntervalSubject$),
+                filter((num) => {
+                    if (num === this.stopMessageInterval) {
+                        this.stopRefreshTokenInterval();
+                        return false;
+                    }
+                    return true;
+                }),
+                switchMap(() => this.refreshToken()),
+            );
+
     constructor(
         private cookiesService: CookiesService,
         private http: HttpClient,
@@ -50,6 +89,16 @@ export class AuthService {
         const jwtPayload = this.getJwtPayload();
         this.currentUserSubject$ = new BehaviorSubject<IJwtPayload>(jwtPayload);
         this.currentUser$ = this.currentUserSubject$.asObservable();
+        this.refreshTokenInterval$.subscribe();
+    }
+
+    startRefreshTokenInterval = () => {
+        this.stopRefreshTokenInterval();
+        this.startRefreshTokenIntervalSubject$.next();
+    }
+
+    stopRefreshTokenInterval = () => {
+        this.stopRefreshTokenIntervalSubject$.next();
     }
 
     public get currentUserValue(): IJwtPayload {
@@ -80,16 +129,20 @@ export class AuthService {
     }
 
     public login = ({login, password}: ILoginRequest) => {
+        this.dontRefreshToken = true;
         return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { login, password })
             .pipe(
                 map((response: ILoginResponse) => {
                     const uuid = this.generateUuid();
-                    return this.manageLoginResponse(response, uuid);
+                    const loginResponse =  this.manageLoginResponse(response, uuid);
+                    this.startRefreshTokenInterval();
+                    return loginResponse;
                 }),
             );
     }
 
     public logout = () => {
+        this.stopRefreshTokenInterval();
         return this.http.delete<any>(`${environment.url_api}/v1.0/users/logout`)
             .pipe(
                 map(response => {
