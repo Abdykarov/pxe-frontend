@@ -10,7 +10,7 @@
 	padding-top: $header-height;
 
 	// Media queries
-	@include media-breakpoint-up(lg) {
+	@include media-breakpoint-up(md) {
 		min-height: calc(100vh - #{$footer-height-tablet});
 		padding-top: ( ( $header-height - $logo-height-tablet ) / 2 );
 	}

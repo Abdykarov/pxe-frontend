@@ -3,29 +3,36 @@ import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 
 // own classes
-import { Error404PageComponent } from './page';
+import { ButtonModule } from 'src/common/ui/button/button.module';
+import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
+import { Error500PageComponent } from './page';
+import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
 import {
     LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
 
+
 @NgModule({
     declarations: [
-        Error404PageComponent,
+        Error500PageComponent,
     ],
     exports: [
-        Error404PageComponent,
+        Error500PageComponent,
     ],
     imports: [
+        ButtonModule,
+        BreadcrumbModule,
         CommonModule,
+        InfoBannerModule,
     ],
 })
-export class Error404PageModule {}
+export class Error500PageModule {}
 
-export const error404PageRoutes: Routes = [
+export const error500PageRoutes: Routes = [
     {
-        path: 'error-404',
-        component: Error404PageComponent,
+        path: 'error-500',
+        component: Error500PageComponent,
         data: {
             isPublic: true,
             isPublicEmptyPage: true,

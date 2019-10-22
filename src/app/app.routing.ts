@@ -26,7 +26,7 @@ const routes: Routes = [
     },
     {
         path: CONSTS.PATHS.WILD_CART,
-        redirectTo: '',
+        loadChildren: './pages/not-found/not-found.module#NotFoundModule',
     },
 ];
 

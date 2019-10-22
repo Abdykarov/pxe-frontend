@@ -19,7 +19,7 @@
                 <div class="header-inner">
                     <div class="logo-holder">
                         <a
-                            (click)="homeRedirect.emit()"
+                            (click)="homeRedirect.emit($event)"
                             class="logo-link">
                             <img
                                 src="/assets/images/layout/logo-pxe.svg"
@@ -30,13 +30,13 @@
                     </div>
                     <div
                         class="public-menu-holder"
-                        *ngIf="settings.isPublic && !settings.isStatic">
+                        *ngIf="settings.isPublic && !settings.isStatic && !settings.isPublicEmptyPage">
                         <lnd-button
                             *ngIf="!settings.isLandingPage"
                             label="Domů"
                             customClass="mr-4"
                             type="link-text"
-                            (click)="homeRedirect.emit()">
+                            (click)="homeRedirect.emit($event)">
                         </lnd-button>
                         <lnd-button
                             *ngIf="settings.isLandingPage"
@@ -68,6 +68,7 @@
                          class="menu-holder">
                         <ng-template #publicMenuHamburgerTemplate let-toggle="toggle" let-isOpen="isOpen">
                             <pxe-hamburger
+                                *ngIf="!settings.hideHamburger"
                                 [isMenuOpen]="isOpen"
                                 (toggleMenu)="toggle()"
                             ></pxe-hamburger>
@@ -78,25 +79,27 @@
                             (toggleOverlayerAction)="toggleMenu.emit($event)"
                             menuDirection="right">
                             <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="!settings.isLandingPage"
-                               (click)="homeRedirect.emit()">
+                               *ngIf="!settings.isLandingPage && !settings.isPublicEmptyPage"
+                               (click)="homeRedirect.emit($event)">
                                 Domů
                             </a>
                             <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="settings.isLandingPage"
+                               *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
                                (click)="supplierChangeAction.emit()">
                                 Změna dodatavatele
                             </a>
                             <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="settings.isLandingPage"
+                               *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
                                (click)="coverageMapAction.emit()">
                                 Pokrytí
                             </a>
                             <a class="dropdown-item dropdown-item--without-icon"
-                               (click)="loginAction.emit()">
+                               *ngIf="!settings.isPublicEmptyPage"
+                               (click)="loginAction.emit() ">
                                 Přihlášení
                             </a>
                             <a class="dropdown-item dropdown-item--without-icon"
+                               *ngIf="!settings.isPublicEmptyPage"
                                (click)="signUpAction.emit()">
                                 Registrace
                             </a>
@@ -105,6 +108,7 @@
                     <div *ngIf="!settings.isPublic"
                          class="menu-holder">
                         <pxe-hamburger
+                                *ngIf="!settings.hideHamburger"
                                 [isMenuOpen]="isMenuOpen"
                                 [disableAction]="isMenuOpen"
                                 (toggleMenu)="toggleMenu.emit($event)"
