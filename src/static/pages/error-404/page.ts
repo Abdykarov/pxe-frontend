@@ -1,20 +1,12 @@
 import { Component } from '@angular/core';
 
-import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-
 @Component({
     templateUrl: './page.html',
+    styleUrls: ['../../../assets/scss/05_pages/error-page.scss'],
 })
 
-export class ErrorPageComponent {
-    public breadcrumbItemsSimple: IBreadcrumbItems;
-
-    constructor() {
-        this.breadcrumbItemsSimple = [
-            {
-                label: '404 - Stránka nenalezena',
-                url: null,
-            },
-        ];
+export class Error404PageComponent {
+    public clicked = (evt) => {
+        evt.preventDefault();
     }
 }
