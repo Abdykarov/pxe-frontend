@@ -12,10 +12,6 @@ const routes: Routes = [
         path: CONSTS.PATHS.EMPTY,
         component: SupplierConcludedContractsComponent,
     },
-    {
-        path: CONSTS.PATHS.WILD_CART,
-        component: SupplierConcludedContractsComponent,
-    },
 ];
 
 @NgModule({
