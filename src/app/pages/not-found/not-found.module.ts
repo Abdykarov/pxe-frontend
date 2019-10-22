@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 
 // own classes
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
-import { ErrorPage404Module } from 'src/common/ui/error-page-404/error-page-404.module';
+import { FooterModule } from 'src/common/ui/footer/footer.module';
+import { HeaderModule } from 'src/common/ui/header/header.module';
 import { NotFoundComponent } from './not-found.component';
 import { NotFoundRoutingModule } from './not-found.routing';
+import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 
 @NgModule({
     declarations: [
@@ -17,7 +19,9 @@ import { NotFoundRoutingModule } from './not-found.routing';
     imports: [
         BreadcrumbModule,
         CommonModule,
-        ErrorPage404Module,
+        FooterModule,
+        HeaderModule,
+        LayoutContainerModule,
         NotFoundRoutingModule,
     ],
 })

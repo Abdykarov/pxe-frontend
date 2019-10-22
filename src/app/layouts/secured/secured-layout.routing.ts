@@ -146,19 +146,6 @@ const routes = [
                 path: CONSTS.PATHS.EMPTY,
                 redirectTo: CONSTS.PATHS.DASHBOARD,
             },
-            {
-                path: CONSTS.PATHS.NOT_FOUND,
-                loadChildren: '../../pages/not-found/not-found.module#NotFoundModule',
-                data: {
-                    isSimpleFooter: false,
-                    loginType: LoginType.NONE,
-                    signUpType: SignType.NONE,
-                },
-            },
-            {
-                path: CONSTS.PATHS.WILD_CART,
-                redirectTo: CONSTS.PATHS.NOT_FOUND,
-            },
         ],
     },
 ];
