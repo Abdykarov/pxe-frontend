@@ -89,7 +89,7 @@ export class AuthService {
         const jwtPayload = this.getJwtPayload();
         this.currentUserSubject$ = new BehaviorSubject<IJwtPayload>(jwtPayload);
         this.currentUser$ = this.currentUserSubject$.asObservable();
-        this.refreshTokenInterval$.subscribe();
+        // this.refreshTokenInterval$.subscribe();
     }
 
     startRefreshTokenInterval = () => {
