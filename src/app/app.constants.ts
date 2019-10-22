@@ -9,7 +9,6 @@ import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
     ADULTHOOD_AGE: 18,
-    COUNT_OF_REFRESH_TOKENS_WITHOUT_ACTION: 10,
     CURRENCY: {
         DEFAULT: 'CZK',
     },
