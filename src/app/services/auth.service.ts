@@ -1,4 +1,9 @@
-import { Injectable } from '@angular/core';
+import {
+    Inject,
+    Injectable,
+    PLATFORM_ID,
+} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -85,11 +90,14 @@ export class AuthService {
         private cookiesService: CookiesService,
         private http: HttpClient,
         private router: Router,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         const jwtPayload = this.getJwtPayload();
         this.currentUserSubject$ = new BehaviorSubject<IJwtPayload>(jwtPayload);
         this.currentUser$ = this.currentUserSubject$.asObservable();
-        // this.refreshTokenInterval$.subscribe();
+        if (isPlatformBrowser(this.platformId)) {
+            this.refreshTokenInterval$.subscribe();
+        }
     }
 
     startRefreshTokenInterval = () => {
