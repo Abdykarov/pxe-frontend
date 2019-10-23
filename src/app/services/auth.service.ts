@@ -89,8 +89,8 @@ export class AuthService {
     constructor(
         private cookiesService: CookiesService,
         private http: HttpClient,
-        @Inject(PLATFORM_ID) private platformId: string,
         private router: Router,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         const jwtPayload = this.getJwtPayload();
         this.currentUserSubject$ = new BehaviorSubject<IJwtPayload>(jwtPayload);
