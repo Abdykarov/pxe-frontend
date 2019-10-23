@@ -1,7 +1,7 @@
 export enum BannerTypeImages {
     ACCEPTED = '/assets/images/illustrations/accepted.svg',
     DOCUMENTS = '/assets/images/illustrations/documents.svg',
-    DOCUMENTS_ALERT = '/assets/images/illustrations/documents_alert.svg',
+    DOCUMENTS_ALERT = '/assets/images/illustrations/documents-alert.svg',
     HOUSE = '/assets/images/illustrations/house.svg',
     HOUSE_ALERT = '/assets/images/illustrations/house-alert.svg',
     LIGHT = '/assets/images/illustrations/light.svg',

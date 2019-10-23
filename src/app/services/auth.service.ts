@@ -26,7 +26,10 @@ import {
 } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { CONSTS } from 'src/app/app.constants';
+import {
+    CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
 import { CookiesService } from './cookies.service';
 import { environment } from 'src/environments/environment';
 import {
@@ -254,5 +257,15 @@ export class AuthService {
             const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
             return v.toString(16);
         });
+    }
+
+    public homeRedirect = () => {
+        if (!this.isLogged()) {
+            this.router.navigate([CONSTS.PATHS.EMPTY]);
+        } else if (this.currentUserValue.supplier) {
+            this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER]);
+        } else {
+            this.router.navigate([ROUTES.ROUTER_DASHBOARD]);
+        }
     }
 }

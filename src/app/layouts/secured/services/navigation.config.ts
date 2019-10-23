@@ -1,5 +1,6 @@
 import {
     CONSTS,
+    INavigationItemType,
     ROUTES,
 } from 'src/app/app.constants';
 import { INavigationMenu } from 'src/common/ui/navigation/models/navigation.model';
@@ -8,15 +9,26 @@ export const navigationMenuUsers: INavigationMenu = [
     {
         'class': '',
         'url': ROUTES.ROUTER_DASHBOARD,
-        'label': 'PŘEHLED',
+        'label': 'Přehled',
         'icon': 'notice-board',
+        'type': INavigationItemType.NORMAL,
+        'children': [],
+        __typename : 'secured',
+    },
+    {
+        'class': '',
+        'url': '',
+        'label': 'Smlouvy',
+        'type': INavigationItemType.ONLY_LABEL,
+        'icon': '',
         'children': [],
         __typename : 'secured',
     },
     {
         'class': '',
         'url': ROUTES.ROUTER_REQUESTS,
-        'label': 'ROZPRACOVANÉ SMLOUVY',
+        'label': 'Rozpracované',
+        'type': INavigationItemType.NORMAL,
         'icon': 'star',
         'children': [
             {
@@ -50,7 +62,8 @@ export const navigationMenuUsers: INavigationMenu = [
     {
         'class': '',
         'url': ROUTES.ROUTER_SUPPLY_POINTS,
-        'label': 'UZAVŘENÉ SMLOUVY',
+        'label': 'Uzavřené',
+        'type': INavigationItemType.NORMAL,
         'icon': 'document',
         'children': [],
         __typename : 'secured',
@@ -61,8 +74,18 @@ export const navigationMenuSuppliers: INavigationMenu = [];
 
 export const navigationMenuUserActions: INavigationMenu = [
     {
+        'class': 'd-lg-none',
+        'url': '',
+        'label': 'Účet',
+        'type': INavigationItemType.ONLY_LABEL,
+        'icon': '',
+        'children': [],
+        __typename : 'secured',
+    },
+    {
         'class': 'navigation-main__item--second',
         'label': 'Profil uživatele',
+        'type': INavigationItemType.NORMAL,
         'icon': 'user',
         'url': ROUTES.ROUTER_USER_PROFILE,
         'children': [],
@@ -71,6 +94,7 @@ export const navigationMenuUserActions: INavigationMenu = [
     {
         'class': 'navigation-main__item--second',
         'label': 'Změna hesla',
+        'type': INavigationItemType.NORMAL,
         'icon': 'lock-close',
         'url': ROUTES.ROUTER_USER_CHANGE_PASSWORD,
         'children': [],
@@ -80,6 +104,7 @@ export const navigationMenuUserActions: INavigationMenu = [
     {
         'class': 'navigation-main__item--second link--logout',
         'label': 'Odhlášení',
+        'type': INavigationItemType.NORMAL,
         'icon': 'power',
         'url' : `/${CONSTS.PATHS.LOGOUT}`,
         'children': [],
@@ -91,6 +116,7 @@ export const navigationMenuSuppliersActions: INavigationMenu = [
     {
         'class': 'link--logout',
         'label': 'Odhlášení',
+        'type': INavigationItemType.NORMAL,
         'icon': 'power',
         'url' : `/${CONSTS.PATHS.LOGOUT}`,
         'children': [],

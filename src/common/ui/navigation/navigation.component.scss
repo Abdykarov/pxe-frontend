@@ -166,9 +166,26 @@
 	}
 }
 
-.navigation-main__link-label,
-.navigation-main-sub__link {
-	text-transform: uppercase;
+
+.navigation-main__is-label-only  {
+	&,
+	&:visited {
+		position: relative;
+		display: block;
+		padding: $spacer;
+		color: $info;
+		font-weight: 500;
+		text-transform: uppercase;
+		text-decoration: none;
+		cursor: auto;
+		pointer-events: none;
+		@include smart-short-text;
+
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			padding: ( $spacer * 1.5 ) ( $spacer * 1.5 ) ( $spacer * 1.5 ) ( $spacer * 2 );
+		}
+	}
 }
 
 .navigation-main__link-label,
@@ -180,6 +197,7 @@
 	@include media-breakpoint-up(lg) {
 		font-size: $font-size-base;
 		line-height: $line-height-base;
+		text-transform: uppercase;
 	}
 
 	& + .badge {

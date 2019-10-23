@@ -90,6 +90,11 @@ export const ROUTES = {
     ROUTER_USER_PROFILE: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.USER_PROFILE}`,
 };
 
+export enum INavigationItemType {
+    NORMAL,
+    ONLY_LABEL,
+}
+
 export const CODE_LIST = {
     DIST_RATE: 'DSTSAZ',
     DIST_RATE_COMPANY: 'DSTSA1',
@@ -316,3 +321,5 @@ export const REGIONS: Array<IOption> = [
         'key': 'Zlínský kraj',
     },
 ];
+
+export const OPERATIONS_WITHOUT_SCROLL_ON_ERRORS = ['getSupplyPointGlobalStatistics', 'makeRegistration'];
