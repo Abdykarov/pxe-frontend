@@ -30,6 +30,9 @@ export interface ISupplyPointOffer {
     systemServicesRegulatedPrice: number;
     totalPrice: number;
     unit: string;
+    priceVTWithVAT?: number;
+    priceNTWithVAT?: number;
+    priceGasWithVAT?: number;
 }
 
 export interface IOffer {
@@ -53,6 +56,9 @@ export interface IOffer {
     circuitBreaker: ICodelistItem;
     priceGas: number;
     annualConsumption: ICodelistItem;
+    priceVTWithVAT?: number;
+    priceNTWithVAT?: number;
+    priceGasWithVAT?: number;
 }
 
 export interface IOfferInput {

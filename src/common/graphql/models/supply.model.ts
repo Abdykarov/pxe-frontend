@@ -173,6 +173,9 @@ export interface ISelectedOffer {
     totalPrice: number;
     unit: string;
     prepayment: number;
+    priceVTWithVAT?: number;
+    priceNTWithVAT?: number;
+    priceGasWithVAT?: number;
     __typename?: string;
 }
 

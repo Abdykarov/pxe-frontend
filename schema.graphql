@@ -70,7 +70,7 @@ type Mutation {
     deleteSignedContract(contractId: ID!, smsConfirmationCode: String!): Boolean
     makeRegistration(email: String!, preregistration: Boolean = false, termsOfConditionsApproved: Boolean!): Boolean
     makeUnregistration(smsCode: String): Boolean
-    resetPassword(email: String!): PasswordDestination
+    resetPassword(login: String!): PasswordDestination
     saveContract(offerId: ID!, supplyPointId: ID!): ID
     saveGasOffer(gasAttributes: OfferInputGasAttributes!, offer: OfferInput!): Int
     savePersonalData(contractId: ID!, personalData: PersonalDataInput!): Boolean
@@ -102,8 +102,11 @@ type Offer {
     name: String!
     permanentPaymentPrice: Float!
     priceGas: Float
+    priceGasWithVAT: Float
     priceNT: Float
+    priceNTWithVAT: Float
     priceVT: Float
+    priceVTWithVAT: Float
     status: OfferStatus!
     subject: CodelistItem!
     supplier: Supplier
@@ -178,8 +181,11 @@ type SelectedOffer {
     name: String!
     prepayment: Float
     priceGas: Float
+    priceGasWithVAT: Float
     priceNT: Float
+    priceNTWithVAT: Float
     priceVT: Float
+    priceVTWithVAT: Float
     renewableEnergyRegulatedPrice: Float
     supplier: Supplier!
     systemServicesRegulatedPrice: Float
@@ -254,8 +260,11 @@ type SupplyPointOffer {
     name: String!
     permanentPaymentPrice: Float!
     priceGas: Float
+    priceGasWithVAT: Float
     priceNT: Float
+    priceNTWithVAT: Float
     priceVT: Float
+    priceVTWithVAT: Float
     renewableEnergyRegulatedPrice: Float
     supplier: Supplier
     systemServicesRegulatedPrice: Float

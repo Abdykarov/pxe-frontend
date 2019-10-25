@@ -53,6 +53,9 @@ export const findSupplierOffersQuery = gql`
                 description,
                 help,
             },
+            priceVTWithVAT,
+            priceNTWithVAT,
+            priceGasWithVAT,
         }
     }
 `;
@@ -95,6 +98,9 @@ export const findSupplyPointOffersQuery = gql`
             systemServicesRegulatedPrice,
             totalPrice,
             unit,
+            priceVTWithVAT,
+            priceNTWithVAT,
+            priceGasWithVAT,
         }
     }
 `;
