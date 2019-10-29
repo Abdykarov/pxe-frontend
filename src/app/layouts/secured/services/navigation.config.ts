@@ -114,6 +114,22 @@ export const navigationMenuUserActions: INavigationMenu = [
 
 export const navigationMenuSuppliersActions: INavigationMenu = [
     {
+        'class': 'navigation-main__item--second',
+        'label': 'Nabídky',
+        'icon': 'star',
+        'url' : `/${ROUTES.ROUTER_SUPPLY_OFFER}`,
+        'children': [],
+        __typename: 'logout',
+    },
+    {
+        'class': 'navigation-main__item--second',
+        'label': 'Smlouvy',
+        'icon': 'document',
+        'url' : `/${ROUTES.ROUTER_SUPPLIER_CONCLUDED_CONTRACTS}`,
+        'children': [],
+        __typename: 'logout',
+    },
+    {
         'class': 'link--logout',
         'label': 'Odhlášení',
         'type': INavigationItemType.NORMAL,

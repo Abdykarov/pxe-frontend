@@ -47,6 +47,12 @@ type ContractTerms {
     content: String
 }
 
+type ContractWithNameAndSupplyPointEan {
+    contract: Contract!
+    ean: String!
+    name: String!
+}
+
 type Currency {
     currencyCode: String!
 }
@@ -114,6 +120,11 @@ type Offer {
     validTo: Date!
 }
 
+type PaginatedContractsWithNameAndSupplyPointEan {
+    page: [ContractWithNameAndSupplyPointEan!]!
+    totalRecords: Int!
+}
+
 type Payment {
     accountNumber: BankAccount!
     amount: Float!
@@ -159,6 +170,7 @@ type Query {
     getPersonalData(contractId: ID!): PersonalData
     getSupplyPoint(supplyPointId: ID!): SupplyPoint
     getSupplyPointGlobalStatistics(includeHistoryData: Boolean): SupplyPointGlobalStatistic
+    listSupplierContractsBasedOnOffers(filter: ContractsBasedOnOffersFilter): PaginatedContractsWithNameAndSupplyPointEan
 }
 
 type SelectedOffer {
@@ -352,6 +364,15 @@ input AddressInput {
     street: String!
 }
 
+input ContractsBasedOnOffersFilter {
+    commodityType: CommodityType
+    offerId: ID
+    pagination: Pagination
+    signDateFrom: Date
+    signDateTo: Date
+    supplierId: ID
+}
+
 input OfferInput {
     benefits: String
     deliveryFrom: Date!
@@ -378,6 +399,11 @@ input OfferInputPowerAttributes {
     distributionRateId: String!
     priceNT: Float
     priceVT: Float!
+}
+
+input Pagination {
+    first: Int!
+    offset: Int!
 }
 
 input PersonalDataInput {
