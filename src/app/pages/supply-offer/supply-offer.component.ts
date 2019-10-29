@@ -25,6 +25,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CODE_LIST_TYPES,
+    commodityTypes,
     ROUTES,
 } from 'src/app/app.constants';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
@@ -107,12 +108,11 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                 takeUntil(this.destroy$),
             )
             .subscribe(params => {
-                const supplyOfferCommodityTypes = this.supplyOfferConfig.supplyOfferCommodityTypes;
-                if (R.indexOf(params.commodityType, R.keys(supplyOfferCommodityTypes)) < 0) {
+                if (R.indexOf(params.commodityType, R.keys(commodityTypes)) < 0) {
                     this.router.navigate([this.routePower]);
                     return;
                 }
-                this.commodityType = supplyOfferCommodityTypes[params.commodityType];
+                this.commodityType = commodityTypes[params.commodityType];
                 this.commodityType$.next(this.commodityType);
             });
 

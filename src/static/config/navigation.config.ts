@@ -55,10 +55,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Indicators',
                     'url': '/basic/indicators',
                 },
-                // {
-                //     'label': 'Pagination',
-                //     'url': '/pagination',
-                // },
+                {
+                    'label': 'Pagination',
+                    'url': '/basic/pagination',
+                },
                 // {
                 //     'label': 'Placeloader',
                 //     'url': '/placeloader',
@@ -216,6 +216,14 @@ export const staticNavigationConfig: INavigationConfig = [
                 {
                     'label': 'New supply point',
                     'url': '/basic/new-supply-point',
+                },
+                {
+                    'label': 'supplier-concluded-contracts',
+                    'url': '/basic/supplier-concluded-contracts',
+                },
+                {
+                    'label': 'supplier-concluded-contracts-empty',
+                    'url': '/basic/supplier-concluded-contract-empty',
                 },
                 {
                     'label': 'supply offer',
