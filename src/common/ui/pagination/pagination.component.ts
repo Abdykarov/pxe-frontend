@@ -8,6 +8,8 @@ import {
 
 import { PageChangedEvent } from 'ngx-bootstrap';
 
+import { paginationConfig } from 'src/common/ui/pagination/pagination.config';
+
 @Component({
     selector: 'lnd-pagination',
     templateUrl: './pagination.component.html',
@@ -16,28 +18,28 @@ import { PageChangedEvent } from 'ngx-bootstrap';
 })
 export class PaginationComponent {
     @Input()
-    public itemsPerPage = 50;
+    public itemsPerPage = paginationConfig.itemsPerPage;
 
     @Input()
-    public showBoundaryLinks = false;
+    public showBoundaryLinks = paginationConfig.showBoundaryLinks;
 
     @Input()
-    public maxSize = 5;
+    public maxSize = paginationConfig.maxSize;
 
     @Input()
-    public totalItems = 100;
+    public totalItems = paginationConfig.totalItems;
 
     @Input()
-    public firstText = '';
+    public firstText = paginationConfig.firstText;
 
     @Input()
-    public previousText = '';
+    public previousText = paginationConfig.previousText;
 
     @Input()
-    public nextText = '';
+    public nextText = paginationConfig.nextText;
 
     @Input()
-    public lastText = '';
+    public lastText = paginationConfig.lastText;
 
     @Output()
     public pageChanged: EventEmitter<PageChangedEvent> = new EventEmitter();

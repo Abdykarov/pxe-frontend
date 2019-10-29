@@ -78,7 +78,7 @@ export class SupplierConcludedContractsConfig {
         page: [
             {
                 name: 'Jaroslav Dvořák',
-                ean: '8591',
+                ean: '859182407150233062',
                 contract: {
                     offerValidity: true,
                     deliveryTo: '2021-08-01',
@@ -106,7 +106,7 @@ export class SupplierConcludedContractsConfig {
             },
             {
                 name: 'Jaroslav Dvořák',
-                ean: '8591',
+                ean: '859182407150233563',
                 contract: {
                     offerValidity: true,
                     deliveryTo: '2021-09-01',

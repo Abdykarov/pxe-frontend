@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Apollo } from 'apollo-angular';
 
-import {
-    IContractsBasedOnOffersFilter,
-} from 'src/common/graphql/models/suppplier.model';
+import { IContractsBasedOnOffersFilter } from 'src/common/graphql/models/suppplier.model';
 import { listSupplierContractsBasedOnOffersQuery } from 'src/common/graphql/queries/supplier';
 
 

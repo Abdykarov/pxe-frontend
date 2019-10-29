@@ -1,3 +1,8 @@
+<ng-template #columnTemplateDeliveryTime
+             let-row="row">
+    {{row.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}} - {{row.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}
+</ng-template>
+
 <ng-template #downloadPdfTemplate let-row="row">
     <a 
         (click)="downloadPDF(row.contract.contractId)"
@@ -42,11 +47,12 @@
         <div class="col-12 col-lg-10 offset-lg-1">
             <lnd-table
                 [cols]="tableCols"
-                [rows]="paginatedContractsWithNameAndSupplyPointEan.contractsWithNameAndEan"
+                [rows]="paginatedContractsWithNameAndSupplyPointEan.page"
                 [showHead]="true"
                 [tableWrapperClass]="['table-wrapper--advanced']"
                 [tableClass]="['table--advanced', 'mb-0']"
                 [columnTemplates]="{
+                    columnTemplateDeliveryTime: columnTemplateDeliveryTime,
                     downloadPdfTemplate: downloadPdfTemplate
                 }"
             ></lnd-table>
