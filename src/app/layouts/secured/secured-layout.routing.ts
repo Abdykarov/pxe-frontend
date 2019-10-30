@@ -143,6 +143,26 @@ const routes = [
                 },
             },
             {
+                path: CONSTS.PATHS.SUPPLIER_CONCLUDED_CONTRACTS,
+                redirectTo: CONSTS.PATHS.SUPPLIER_CONCLUDED_CONTRACTS + '/',
+            },
+            {
+                path: CONSTS.PATHS.SUPPLIER_CONCLUDED_CONTRACTS + '/:commodityType',
+                loadChildren:
+                    '../../pages/supplier-concluded-contracts/supplier-concluded-contracts.module#SupplierConcludedContractsModule',
+                resolve: {
+                    refreshToken: RefreshTokenResolver,
+                },
+                data: {
+                    isSimpleFooter: false,
+                    isPublic: false,
+                    isSupplier: true,
+                    loginType: LoginType.NONE,
+                    signUpType: SignType.NONE,
+                    hideLeftNavigation: true,
+                },
+            },
+            {
                 path: CONSTS.PATHS.EMPTY,
                 redirectTo: CONSTS.PATHS.DASHBOARD,
             },

@@ -31,7 +31,7 @@
 			counter-increment: error-next-steps-counter;
 
 			&::before {
-				content: counter(error-next-steps-counter) ".";
+				content: counter(error-next-steps-counter) '.';
 				position: relative;
 				left: 0;
 				margin-right: ( $spacer / 2 );
@@ -53,7 +53,7 @@
 			border: none;
 			border-radius: $btn-border-radius;
 		}
-	
+
 		&:focus,
 		&.focus {
 			box-shadow: $btn-focus-box-shadow;
@@ -93,7 +93,7 @@
 			color: $link-color;
 			text-decoration: $link-decoration;
 		}
-	
+
 		&:focus,
 		&:hover {
 			color: $link-hover-color;

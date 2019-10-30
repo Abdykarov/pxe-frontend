@@ -92,6 +92,10 @@ import {
     newSupplyPointPageRoutes,
 } from 'src/static/pages/new-supply-point/page.module';
 import {
+    PaginationPageModule,
+    paginationPageRoutes,
+} from 'src/static/atoms/pagination/page.module';
+import {
     PaymentVerificationPageModule,
     paymentVerificationPageRoutes,
 } from 'src/static/pages/payment-verification/page.module';
@@ -115,6 +119,14 @@ import {
     RequestCardPageModule,
     requestCardPageRoutes,
 } from 'src/static/organisms/request-card/page.module';
+import {
+    SupplierConcludedContractsEmptyModule,
+    supplierConcludedContractsEmptyRoutes,
+} from 'src/static/pages/supplier-concluded-contracts-empty/page.module';
+import {
+    SupplierConcludedContractsModule,
+    supplierConcludedContractsRoutes,
+} from 'src/static/pages/supplier-concluded-contracts/page.module';
 import {
     SupplyOfferPageModule,
     supplyOfferPageRoutes,
@@ -194,12 +206,15 @@ const routes: Routes = [
             ...modalsPageRoutes,
             ...newsPageRoutes,
             ...newSupplyPointPageRoutes,
+            ...paginationPageRoutes,
             ...paymentVerificationPageRoutes,
             ...progressBarPageRoutes,
             ...recapitulationPageRoutes,
             ...requestPageRoutes,
             ...requestBannerPageRoutes,
             ...requestCardPageRoutes,
+            ...supplierConcludedContractsEmptyRoutes,
+            ...supplierConcludedContractsRoutes,
             ...supplyOfferPageRoutes,
             ...supplyPointOfferPageRoutes,
             ...supplyPointOverviewPageRoutes,
@@ -244,6 +259,7 @@ const routes: Routes = [
         ModalsPageModule,
         NewsPageModule,
         NewSupplyPointPageModule,
+        PaginationPageModule,
         PaymentVerificationPageModule,
         ProgressBarPageModule,
         RecapitulationPageModule,
@@ -251,6 +267,8 @@ const routes: Routes = [
         RequestBannerPageModule,
         RequestCardPageModule,
         RouterModule.forChild(routes),
+        SupplierConcludedContractsEmptyModule,
+        SupplierConcludedContractsModule,
         SupplyOfferPageModule,
         SupplyPointOfferPageModule,
         SupplyPointOverviewPageModule,
