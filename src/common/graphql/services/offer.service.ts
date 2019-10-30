@@ -33,7 +33,6 @@ export class OfferService {
     public findSupplierOffers = () => this.apollo
         .watchQuery<any>({
             query: findSupplierOffersQuery,
-            // errorPolicy: 'ignore',
         })
         .valueChanges
 
@@ -54,9 +53,13 @@ export class OfferService {
                 offer,
                 powerAttributes,
             },
-            refetchQueries: [{
-                query: findSupplierOffersQuery,
-            }],
+            update: (cache, {data}) => {
+                const offers: any = cache.readQuery({ query: findSupplierOffersQuery });
+                cache.writeQuery({
+                    query: findSupplierOffersQuery,
+                    data: { findSupplierOffers: [...offers.findSupplierOffers, data.savePowerOffer]},
+                });
+            },
         })
 
     public saveGasOffer = (offer: IOfferInput, gasAttributes: IOfferInputGasAttributes) => this.apollo
@@ -66,9 +69,13 @@ export class OfferService {
                 offer,
                 gasAttributes,
             },
-            refetchQueries: [{
-                query: findSupplierOffersQuery,
-            }],
+            update: (cache, {data}) => {
+                const offers: any = cache.readQuery({ query: findSupplierOffersQuery });
+                cache.writeQuery({
+                    query: findSupplierOffersQuery,
+                    data: { findSupplierOffers: [...offers.findSupplierOffers, data.saveGasOffer]},
+                });
+            },
         })
 
     public updatePowerOffer = (offerId: number, offer: IOfferInput, powerAttributes: IOfferInputPowerAttributes) => this.apollo
@@ -79,9 +86,20 @@ export class OfferService {
                 offer,
                 powerAttributes,
             },
-            refetchQueries: [{
-                query: findSupplierOffersQuery,
-            }],
+            update: (cache, {data}) => {
+                const offers: any = cache.readQuery({ query: findSupplierOffersQuery });
+                const updatedData = R.map(offerInMap => {
+                    if (offerInMap.id === data.updatePowerOffer.id) {
+                        offerInMap = data.updatePowerOffer;
+                    }
+                    return offerInMap;
+                })(offers.findSupplierOffers);
+
+                cache.writeQuery({
+                    query: findSupplierOffersQuery,
+                    data: { findSupplierOffers: updatedData},
+                });
+            },
         })
 
     public updateGasOffer = (offerId: number, offer: IOfferInput, gasAttributes: IOfferInputGasAttributes) => this.apollo
@@ -92,9 +110,20 @@ export class OfferService {
                 offer,
                 gasAttributes,
             },
-            refetchQueries: [{
-                query: findSupplierOffersQuery,
-            }],
+            update: (cache, {data}) => {
+                const offers: any = cache.readQuery({ query: findSupplierOffersQuery });
+                const updatedData = R.map(offerInMap => {
+                    if (offerInMap.id === data.updateGasOffer.id) {
+                        offerInMap = data.updateGasOffer;
+                    }
+                    return offerInMap;
+                })(offers.findSupplierOffers);
+
+                cache.writeQuery({
+                    query: findSupplierOffersQuery,
+                    data: { findSupplierOffers: updatedData},
+                });
+            },
         })
 
     public deleteOffer = (offerId: number) => this.apollo
