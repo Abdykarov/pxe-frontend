@@ -7,7 +7,6 @@ import {
     DELIVERY_LENGTH_OPTIONS,
     SUBJECT_TYPE_OPTIONS,
 } from 'src/app/app.constants';
-import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { IOfferTableRows } from './models/supply-pffer.model';
 import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
 
@@ -18,11 +17,6 @@ export class SupplyOfferConfig {
 
     public confirmDeleteOffer = 'confirmDeleteOffer';
     public confirmCancelOffer = 'confirmCancelOffer';
-
-    public supplyOfferCommodityTypes = {
-        power: CommodityType.POWER,
-        gas: CommodityType.GAS,
-    };
 
     public tableCols = (codeLists): IOfferTableRows => ({
         POWER: [

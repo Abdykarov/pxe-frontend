@@ -8,9 +8,10 @@ import {
 import localeCsExtra from '@angular/common/locales/extra/cs';
 import { ReactiveFormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
+
 import { ApolloModule } from 'apollo-angular';
-import { HttpLinkModule } from 'apollo-angular-link-http';
 import { CookieModule } from 'ngx-cookie';
+import { HttpLinkModule } from 'apollo-angular-link-http';
 
 // own classes
 import { ApolloGraphQLProvider } from 'src/common/graphql/middleware/apollo-graphql-provider';

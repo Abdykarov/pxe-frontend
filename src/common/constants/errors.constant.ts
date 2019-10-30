@@ -5,6 +5,9 @@ export const defaultErrorMessage = 'Došlo k chybě. Zkuste to později.';
 export const restAPIErrorCodes = {
     'CLI0001' : 'Špatné přihlašovací údaje.',
     'VAL00001' : 'Vyplněný kód se neshoduje s kódem, který vám přišel v SMS.',
+    'unknownDocument' : 'Požadovaný dokument neexistuje.',
+    'pdfNotAvailableTryLater' : 'Vytvoření dokumentu je právě v procesu. Zkuste ho zobrazit později.',
+    'accessDenied' : 'K tomuto dokumentu nemáte oprávnění.',
 };
 
 export const graphQLMessages = {
@@ -12,6 +15,7 @@ export const graphQLMessages = {
     cannotDeleteContract: 'Omlouváme se, ale z neočekávaného důvodu se odstoupení od smlouvy nepodařilo. Zkuste to prosím znovu později.',
     cannotSignContract: 'Omlouváme se, ale z neočekávaného důvodu se nepodařilo smlouvu podepsat. Zkuste to prosím znovu později.',
     invalidSupplyPointId: 'Hledané odběrné místo neexistuje nebo pro přístup k němu nemáte oprávnění.',
+    unknownSupplyPoint: 'Hledané odběrné místo neexistuje nebo pro přístup k němu nemáte oprávnění.',
     noActiveAccountAvailable: 'Ucet nelze smazat, protoze neexistuje.',
     forbiddenUpdateOfSupplyPoint: 'Omlouváme se, ale toto odběrné místo není možné nyní upravit. Zkuste to prosím znovu později.',
 };
