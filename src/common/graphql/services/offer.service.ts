@@ -57,7 +57,12 @@ export class OfferService {
                 const offers: any = cache.readQuery({ query: findSupplierOffersQuery });
                 cache.writeQuery({
                     query: findSupplierOffersQuery,
-                    data: { findSupplierOffers: [...offers.findSupplierOffers, data.savePowerOffer]},
+                    data: {
+                        findSupplierOffers: [
+                            ...offers.findSupplierOffers,
+                            data.savePowerOffer,
+                        ],
+                    },
                 });
             },
         })
@@ -73,7 +78,12 @@ export class OfferService {
                 const offers: any = cache.readQuery({ query: findSupplierOffersQuery });
                 cache.writeQuery({
                     query: findSupplierOffersQuery,
-                    data: { findSupplierOffers: [...offers.findSupplierOffers, data.saveGasOffer]},
+                    data: {
+                        findSupplierOffers: [
+                            ...offers.findSupplierOffers,
+                            data.saveGasOffer,
+                        ],
+                    },
                 });
             },
         })
@@ -114,7 +124,9 @@ export class OfferService {
                 })(offers.findSupplierOffers);
                 cache.writeQuery({
                     query: findSupplierOffersQuery,
-                    data: { findSupplierOffers: updatedData},
+                    data: {
+                        findSupplierOffers: updatedData,
+                    },
                 });
             },
         })
