@@ -116,18 +116,20 @@ export const navigationMenuSuppliersActions: INavigationMenu = [
     {
         'class': 'navigation-main__item--second',
         'label': 'Nabídky',
+        'type': INavigationItemType.NORMAL,
         'icon': 'star',
         'url' : `/${ROUTES.ROUTER_SUPPLY_OFFER}`,
         'children': [],
-        __typename: 'logout',
+        __typename: 'supply-offers',
     },
     {
         'class': 'navigation-main__item--second',
         'label': 'Smlouvy',
+        'type': INavigationItemType.NORMAL,
         'icon': 'document',
         'url' : `/${ROUTES.ROUTER_SUPPLIER_CONCLUDED_CONTRACTS}`,
         'children': [],
-        __typename: 'logout',
+        __typename: 'contracts',
     },
     {
         'class': 'link--logout',
