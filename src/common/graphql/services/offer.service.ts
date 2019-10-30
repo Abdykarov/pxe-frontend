@@ -86,20 +86,6 @@ export class OfferService {
                 offer,
                 powerAttributes,
             },
-            update: (cache, {data}) => {
-                const offers: any = cache.readQuery({ query: findSupplierOffersQuery });
-                const updatedData = R.map(offerInMap => {
-                    if (offerInMap.id === data.updatePowerOffer.id) {
-                        offerInMap = data.updatePowerOffer;
-                    }
-                    return offerInMap;
-                })(offers.findSupplierOffers);
-
-                cache.writeQuery({
-                    query: findSupplierOffersQuery,
-                    data: { findSupplierOffers: updatedData},
-                });
-            },
         })
 
     public updateGasOffer = (offerId: number, offer: IOfferInput, gasAttributes: IOfferInputGasAttributes) => this.apollo
@@ -109,20 +95,6 @@ export class OfferService {
                 offerId,
                 offer,
                 gasAttributes,
-            },
-            update: (cache, {data}) => {
-                const offers: any = cache.readQuery({ query: findSupplierOffersQuery });
-                const updatedData = R.map(offerInMap => {
-                    if (offerInMap.id === data.updateGasOffer.id) {
-                        offerInMap = data.updateGasOffer;
-                    }
-                    return offerInMap;
-                })(offers.findSupplierOffers);
-
-                cache.writeQuery({
-                    query: findSupplierOffersQuery,
-                    data: { findSupplierOffers: updatedData},
-                });
             },
         })
 
