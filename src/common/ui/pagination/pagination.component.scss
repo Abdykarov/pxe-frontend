@@ -11,6 +11,9 @@
 	align-items: center;
 
 	.page-item {
+		&::before {
+			display: none;
+		}
 		padding-bottom: 0;
 		padding-left: 0;
 	}
