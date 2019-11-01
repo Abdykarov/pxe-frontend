@@ -116,6 +116,7 @@ export const navigationMenuSuppliersActions: INavigationMenu = [
     {
         'class': 'navigation-main__item--second',
         'label': 'Nabídky',
+        'type': INavigationItemType.NORMAL,
         'icon': 'star',
         'url' : `/${ROUTES.ROUTER_SUPPLY_OFFER}`,
         'children': [],
@@ -124,6 +125,7 @@ export const navigationMenuSuppliersActions: INavigationMenu = [
     {
         'class': 'navigation-main__item--second',
         'label': 'Smlouvy',
+        'type': INavigationItemType.NORMAL,
         'icon': 'document',
         'url' : `/${ROUTES.ROUTER_SUPPLIER_CONCLUDED_CONTRACTS}`,
         'children': [],

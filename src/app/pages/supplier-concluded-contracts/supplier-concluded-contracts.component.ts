@@ -50,7 +50,7 @@ import { SupplierService } from 'src/common/graphql/services/supplier.service';
 })
 export class SupplierConcludedContractsComponent extends AbstractComponent implements OnInit {
 
-    public COMMODITY_TYPE_POWER = CommodityType.POWER;
+    public COMMODITY_TYPE_POWER = CommodityType.POWER.toLowerCase();
 
     public readonly bannerType = BannerTypeImages.SUPPLIER_NULL;
     public readonly routePower = ROUTES.ROUTER_SUPPLIER_CONCLUDED_CONTRACTS_POWER;
