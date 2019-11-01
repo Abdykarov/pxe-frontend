@@ -3,11 +3,11 @@ import { CONSTS } from 'src/app/app.constants';
 export const defaultErrorMessage = 'Došlo k chybě. Zkuste to později.';
 
 export const restAPIErrorCodes = {
-    'CLI0001' : 'Špatné přihlašovací údaje.',
-    'VAL00001' : 'Vyplněný kód se neshoduje s kódem, který vám přišel v SMS.',
-    'unknownDocument' : 'Požadovaný dokument neexistuje.',
-    'pdfNotAvailableTryLater' : 'Vytvoření dokumentu je právě v procesu. Zkuste ho zobrazit později.',
-    'accessDenied' : 'K tomuto dokumentu nemáte oprávnění.',
+    'CLI0001': 'Špatné přihlašovací údaje.',
+    'VAL00001': 'Vyplněný kód se neshoduje s kódem, který vám přišel v SMS.',
+    'unknownDocument': 'Požadovaný dokument neexistuje.',
+    'pdfNotAvailableTryLater': 'Vytvoření dokumentu je právě v procesu. Zkuste ho zobrazit později.',
+    'accessDenied': 'K tomuto dokumentu nemáte oprávnění.',
 };
 
 export const graphQLMessages = {

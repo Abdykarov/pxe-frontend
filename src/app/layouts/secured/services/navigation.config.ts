@@ -120,7 +120,7 @@ export const navigationMenuSuppliersActions: INavigationMenu = [
         'icon': 'star',
         'url' : `/${ROUTES.ROUTER_SUPPLY_OFFER}`,
         'children': [],
-        __typename: 'logout',
+        __typename: 'supply-offers',
     },
     {
         'class': 'navigation-main__item--second',
@@ -129,7 +129,7 @@ export const navigationMenuSuppliersActions: INavigationMenu = [
         'icon': 'document',
         'url' : `/${ROUTES.ROUTER_SUPPLIER_CONCLUDED_CONTRACTS}`,
         'children': [],
-        __typename: 'logout',
+        __typename: 'contracts',
     },
     {
         'class': 'link--logout',
