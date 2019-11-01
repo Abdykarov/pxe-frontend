@@ -8,88 +8,89 @@
 @import 'src/assets/scss/01_base/base.scss';
 
 .pagination {
-    align-items: center;
+	align-items: center;
 
-    .page-item {
-        padding-bottom: 0;
-        padding-left: 0;
-    }
+	.page-item {
+		padding-bottom: 0;
+		padding-left: 0;
+	}
 
-    .page-link {
-        &:focus,
-        &:hover {
-            text-decoration: underline;
-        }
-    }
+	.page-link {
+		&:focus,
+		&:hover {
+			text-decoration: underline;
+		}
+	}
 
-    .pagination-first,
-    .pagination-prev,
-    .pagination-next,
-    .pagination-last {
-        .page-link {
-            height: ( ( $spacer / 2 ) + $icon-size-small-px );
-            color: $font-text;
-            font-size: $icon-size-small-px;
+	.pagination-first,
+	.pagination-prev,
+	.pagination-next,
+	.pagination-last {
+		.page-link {
+			height: ( ( $spacer / 2 ) + $icon-size-small-px );
+			color: $font-text;
+			font-size: $icon-size-small-px;
 
-            &::before {
-                content: '';
-                font-family: 'icons';
-            }
+			&::before {
+				content: '';
+				@include icon;
+				font-size: $icon-size-small-px;
+			}
 
-            &:focus,
-            &:hover {
-                color: $pagination-color;
-                text-decoration: none;
-            }
-        }
-    }
+			&:focus,
+			&:hover {
+				color: $pagination-color;
+				text-decoration: none;
+			}
+		}
+	}
 
-    .pagination-first {
-        .page-link {
-            &::before {
-                content: '\e927';
-            }
-        }
-    }
+	.pagination-first {
+		.page-link {
+			&::before {
+				content: '\e927';
+			}
+		}
+	}
 
-    .pagination-last {
-        .page-link {
-            &::before {
-                content: '\e928';
-            }
-        }
-    }
+	.pagination-last {
+		.page-link {
+			&::before {
+				content: '\e928';
+			}
+		}
+	}
 
-    .pagination-prev {
-        .page-link {
-            &::before {
-                content: '\e925';
-            }
-        }
-    }
+	.pagination-prev {
+		.page-link {
+			&::before {
+				content: '\e925';
+			}
+		}
+	}
 
-    .pagination-next {
-        .page-link {
-            &::before {
-                content: '\e926';
-            }
-        }
-    }
+	.pagination-next {
+		.page-link {
+			&::before {
+				content: '\e926';
+			}
+		}
+	}
 
-    .arrow-text {
-        display: inline-block;
-        text-indent: -999999999px;
-    }
+	.arrow-text {
+		display: inline-block;
+		text-indent: -999999999px;
+	}
 
-    .active {
-        .page-link {
-            pointer-events: none;
-        }
-    }
+	.active {
+		.page-link {
+			pointer-events: none;
+		}
+	}
 
-    .disabled {
-        .page-link {
-            opacity: .3;
-        }
-    }
+	.disabled {
+		.page-link {
+			opacity: .3;
+		}
+	}
 }
