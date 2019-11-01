@@ -13,6 +13,10 @@
     .page-item {
         padding-bottom: 0;
         padding-left: 0;
+
+        &::before {
+            display: none;
+        }
     }
 
     .page-link {
