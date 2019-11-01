@@ -49,7 +49,6 @@ import { SupplierService } from 'src/common/graphql/services/supplier.service';
     styleUrls: ['./supplier-concluded-contracts.component.scss'],
 })
 export class SupplierConcludedContractsComponent extends AbstractComponent implements OnInit {
-
     public COMMODITY_TYPE_POWER = CommodityType.POWER;
 
     public readonly bannerType = BannerTypeImages.SUPPLIER_NULL;
@@ -95,7 +94,7 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                     this.router.navigate([this.routePower]);
                     return;
                 }
-                this.commodityType = commodityTypes[this.commodityType];
+                this.commodityType = commodityTypes[params.commodityType];
                 this.commodityTypeSubject$.next(this.commodityType);
                 this.cd.markForCheck();
             });
