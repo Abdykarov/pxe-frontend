@@ -78,17 +78,17 @@ type Mutation {
     makeUnregistration(smsCode: String): Boolean
     resetPassword(login: String!): PasswordDestination
     saveContract(offerId: ID!, supplyPointId: ID!): ID
-    saveGasOffer(gasAttributes: OfferInputGasAttributes!, offer: OfferInput!): Int
+    saveGasOffer(gasAttributes: OfferInputGasAttributes!, offer: OfferInput!): Offer
     savePersonalData(contractId: ID!, personalData: PersonalDataInput!): Boolean
-    savePowerOffer(offer: OfferInput!, powerAttributes: OfferInputPowerAttributes!): Int
+    savePowerOffer(offer: OfferInput!, powerAttributes: OfferInputPowerAttributes!): Offer
     sendContractConfirmationSms(contractId: ID!): Boolean
     sendUnregisterSms: Boolean
     signContract(contractId: Int!, smsCode: String): Boolean
-    updateGasOffer(gasAttributes: OfferInputGasAttributes!, offer: OfferInput!, offerId: ID!): Int
+    updateGasOffer(gasAttributes: OfferInputGasAttributes!, offer: OfferInput!, offerId: ID!): Offer
     updateGasSupplyPoint(gasAttributes: SupplyPointInputGasAttributes!, supplyPoint: SupplyPointInput!, supplyPointId: ID!): Int
     updateGasSupplyPointWithContract(attributes: SupplyPointUpdateGasAttributes, supplyPointId: ID!, supplyPointUpdate: SupplyPointUpdate): Int
     updatePersonalData(contractId: ID!, personalData: PersonalDataInput!): Boolean
-    updatePowerOffer(offer: OfferInput!, offerId: ID!, powerAttributes: OfferInputPowerAttributes!): Int
+    updatePowerOffer(offer: OfferInput!, offerId: ID!, powerAttributes: OfferInputPowerAttributes!): Offer
     updatePowerSupplyPoint(powerAttributes: SupplyPointInputPowerAttributes!, supplyPoint: SupplyPointInput!, supplyPointId: ID!): Int
     updatePowerSupplyPointWithContract(attributes: SupplyPointUpdatePowerAttributes, supplyPointId: ID!, supplyPointUpdate: SupplyPointUpdate): Int
     updateUserProfile(userDetail: UserDetailInput!): Boolean
