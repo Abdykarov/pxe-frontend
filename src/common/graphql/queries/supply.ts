@@ -1,5 +1,7 @@
 import gql from 'graphql-tag';
 
+import { offerFragment } from 'src/common/graphql/queries/offer';
+
 export const addressFragment = gql`
     fragment addressFragment on Address {
         street,
@@ -85,44 +87,7 @@ export const supplyPointFragment = gql`
                 deliveryTo,
                 offerValidity,
                 offer{
-                    supplier{
-                        id,
-                        name,
-                        vatNumber,
-                        logoPath,
-                        sampleDocuments{
-                            type,
-                            url
-                        }
-                    },
-                    commodityType,
-                    name,
-                    priceVTWithVAT,
-                    priceNTWithVAT,
-                    priceGasWithVAT,
-                    validFrom,
-                    validTo,
-                    deliveryFrom,
-                    deliveryTo,
-                    deliveryLength,
-                    benefits,
-                    priceVT,
-                    priceNT,
-                    priceGas,
-                    accountingRegulatedPrice,
-                    consumptionPriceNT,
-                    consumptionPriceVT,
-                    distributionPriceByCapacity,
-                    distributionPriceByConsumptionNT,
-                    distributionPriceByConsumptionVT,
-                    energyTaxRegulatedPrice,
-                    marketOrganizerRegulatedPrice,
-                    monthlyConsumptionFee,
-                    renewableEnergyRegulatedPrice,
-                    systemServicesRegulatedPrice,
-                    totalPrice,
-                    unit,
-                    prepayment,
+                    ...offerFragment
                 },
                 personalData {
                     name,
@@ -164,7 +129,8 @@ export const supplyPointFragment = gql`
             progressStatus,
             allowedOperations,
         }
-    `;
+        ${offerFragment}
+`;
 
 export const findAllSuppliersQuery = gql`
     query findAllSuppliers($commodityType:CommodityType){

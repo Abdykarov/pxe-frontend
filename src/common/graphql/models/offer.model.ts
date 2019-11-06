@@ -4,7 +4,7 @@ import { ISupplier } from 'src/common/graphql/models/supply.model';
 export interface IOffer {
     id: number;
     supplier?: ISupplier;
-    status: string;
+    status?: string;
     commodityType: string;
     name: string;
     validFrom: string;
@@ -12,10 +12,10 @@ export interface IOffer {
     deliveryFrom?: string;
     deliveryTo?: string;
     deliveryLength: number;
-    distributionLocation?: string;
     permanentPaymentPrice: number;
     subject: ICodelistItem;
     benefits?: string | string[];
+    distributionLocation?: string;
     priceVT?: number;
     priceNT?: number;
     distributionRate?: ICodelistItem;
