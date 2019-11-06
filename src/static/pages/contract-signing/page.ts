@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { getConfigStepper } from 'src/common/utils';
-import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
+import { IOffer } from 'src/common/graphql/models/offer.model';
 import { offerConfig } from './config';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
@@ -9,7 +9,7 @@ import { ProgressStatus } from 'src/common/graphql/models/supply.model';
     templateUrl: './page.html',
 })
 export class ContractSigningPageComponent {
-    public offer: ISupplyPointOffer = offerConfig;
+    public offer: IOffer = offerConfig;
     public showOffer = false;
     public stepperProgressConfig = getConfigStepper(ProgressStatus.READY_FOR_SIGN);
 

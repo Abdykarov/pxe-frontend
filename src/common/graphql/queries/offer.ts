@@ -55,6 +55,20 @@ export const offerFragment = gql`
         priceVTWithVAT,
         priceNTWithVAT,
         priceGasWithVAT,
+        prepayment,
+        unit,
+        accountingRegulatedPrice,
+        monthlyConsumptionFee,
+        totalPrice,
+        energyTaxRegulatedPrice,
+        marketOrganizerRegulatedPrice,
+        renewableEnergyRegulatedPrice,
+        distributionPriceByCapacity,
+        distributionPriceByConsumptionVT,
+        distributionPriceByConsumptionNT,
+        systemServicesRegulatedPrice,
+        consumptionPriceVT,
+        consumptionPriceNT
     }
 `;
 

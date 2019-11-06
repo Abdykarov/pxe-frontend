@@ -109,7 +109,6 @@ export const supplyPointFragment = gql`
                     priceVT,
                     priceNT,
                     priceGas,
-                    mountlyPaymentPrice,
                     accountingRegulatedPrice,
                     consumptionPriceNT,
                     consumptionPriceVT,
