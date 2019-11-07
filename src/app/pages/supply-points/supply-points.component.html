@@ -1,6 +1,6 @@
 <ng-template #additionalInfoTemplate let-data="data">
-    <div class="row"
-         *ngIf="(data | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO)">
+    <div *ngIf="(data | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO)"
+         class="row">
         <div *ngIf="(data | pathValue:['contract', 'deliveryTo']) && (today | dateDiff: data.contract.deliveryTo) as contractEndInDays"
              class="col-12">
             <pxe-badge type="info"
