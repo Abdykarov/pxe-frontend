@@ -1,11 +1,12 @@
 <ng-template #additionalInfoTemplate let-data="data">
     <div class="row"
          *ngIf="(data | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO)">
-        <div class="col-12">
+        <div class="col-12"
+             *ngIf="(today | dateDiff: data.contract.deliveryTo) as contractEndInDays">
             <pxe-badge type="info"
                        [isLink]="true"
                        (action)="restoreContractAction($event, data)">
-                Platnost končí za {{data.contract.deliveryFrom | dateDiff: data.contract.deliveryTo}} dní - Obnovit smlouvu
+                Platnost končí za {{contractEndInDays}} {{contractEndInDays | plural: 'day'}} - Obnovit smlouvu
             </pxe-badge>
         </div>
     </div>
