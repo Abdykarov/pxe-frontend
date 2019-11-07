@@ -2,7 +2,7 @@
     <div class="row"
          *ngIf="(data | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO)">
         <div class="col-12"
-             *ngIf="(today | dateDiff: data.contract.deliveryTo) as contractEndInDays">
+             *ngIf="(data | pathValue:['contract', 'deliveryTo']) && (today | dateDiff: data.contract.deliveryTo) as contractEndInDays">
             <pxe-badge type="info"
                        [isLink]="true"
                        (action)="restoreContractAction($event, data)">
