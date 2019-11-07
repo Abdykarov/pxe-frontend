@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
+import { IOffer } from 'src/common/graphql/models/offer.model';
 import {
     offerConfig1,
     offerConfig2,
@@ -13,9 +13,9 @@ import { ProgressStatus } from 'src/common/graphql/models/supply.model';
     templateUrl: './page.html',
 })
 export class SupplyPointsOfferPageComponent {
-    public offer1: ISupplyPointOffer = offerConfig1;
-    public offer2: ISupplyPointOffer = offerConfig2;
-    public offer3: ISupplyPointOffer = offerConfig3;
+    public offer1: IOffer = offerConfig1;
+    public offer2: IOffer = offerConfig2;
+    public offer3: IOffer = offerConfig3;
 
     public progressbarConfig = getConfigStepper(ProgressStatus.OFFER_STEP);
 

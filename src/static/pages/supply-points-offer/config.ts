@@ -1,7 +1,7 @@
 import { CommodityType } from 'src/common/graphql/models/supply.model';
-import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
+import { IOffer } from 'src/common/graphql/models/offer.model';
 
-export const offerConfig1: ISupplyPointOffer = {
+export const offerConfig1: IOffer = {
     id: 0,
     supplier: {
         id: '',
@@ -43,9 +43,13 @@ export const offerConfig1: ISupplyPointOffer = {
     systemServicesRegulatedPrice: 0.06,
     totalPrice: 145.72,
     unit: 'MWh',
+    status: null,
+    subject: null,
 };
 
-export const offerConfig2: ISupplyPointOffer = {
+export const offerConfig2: IOffer = {
+    status: null,
+    subject: null,
     benefits: [
         'LED Lorem žárovka',
         'LED Lorem',
@@ -89,7 +93,9 @@ export const offerConfig2: ISupplyPointOffer = {
     unit: 'MWh',
 };
 
-export const offerConfig3: ISupplyPointOffer = {
+export const offerConfig3: IOffer = {
+    status: null,
+    subject: null,
     benefits: [
         'LED Lorem žárovka',
         'LED Lorem',

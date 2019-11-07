@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
+import { IOffer } from 'src/common/graphql/models/offer.model';
 import { offerConfig } from './config';
 
 @Component({
@@ -9,7 +9,7 @@ import { offerConfig } from './config';
 })
 export class SupplyPointOfferComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
-    public supplyPointOffer: ISupplyPointOffer = offerConfig;
+    public supplyPointOffer: IOffer = offerConfig;
 
     constructor() {
         this.breadcrumbItemsSimple = [

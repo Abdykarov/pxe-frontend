@@ -38,7 +38,7 @@ type Contract {
     contractStatus: ContractStatus
     deliveryFrom: Date
     deliveryTo: Date
-    offer: SelectedOffer
+    offer: Offer
     offerValidity: Boolean!
     personalData: PersonalData
 }
@@ -95,27 +95,41 @@ type Mutation {
 }
 
 type Offer {
+    accountingRegulatedPrice: Float
     annualConsumption: CodelistItem
     benefits: String
     circuitBreaker: CodelistItem
     commodityType: CommodityType!
+    consumptionPriceNT: Float
+    consumptionPriceVT: Float
     deliveryFrom: Date
     deliveryLength: Int!
     deliveryTo: Date
     distributionLocation: CodelistItem
+    distributionPriceByCapacity: Float
+    distributionPriceByConsumptionNT: Float
+    distributionPriceByConsumptionVT: Float
     distributionRate: CodelistItem
+    energyTaxRegulatedPrice: Float
     id: ID!
+    marketOrganizerRegulatedPrice: Float
+    monthlyConsumptionFee: Float
     name: String!
-    permanentPaymentPrice: Float!
+    permanentPaymentPrice: Float
+    prepayment: Float
     priceGas: Float
     priceGasWithVAT: Float
     priceNT: Float
     priceNTWithVAT: Float
     priceVT: Float
     priceVTWithVAT: Float
-    status: OfferStatus!
-    subject: CodelistItem!
+    renewableEnergyRegulatedPrice: Float
+    status: OfferStatus
+    subject: CodelistItem
     supplier: Supplier
+    systemServicesRegulatedPrice: Float
+    totalPrice: Float
+    unit: String
     validFrom: Date!
     validTo: Date!
 }
@@ -160,7 +174,7 @@ type Query {
     findCodelistsByTypes(locale: String, types: [String]!): [CodelistMap]!
     findSupplierDocumentsByComodity(commodityType: CommodityType, supplierId: Int): [SupplierSampleDocument]!
     findSupplierOffers: [Offer]
-    findSupplyPointOffers(ean: String!): [SupplyPointOffer]
+    findSupplyPointOffers(ean: String!): [Offer]
     findSupplyPoints(ean: String): [SupplyPoint]
     findSupplyPointsByContractStatus(contractStatus: [ContractStatus]!, ean: String): [SupplyPoint]
     getCodelistByType(locale: String, type: String!): [CodelistItem]!
@@ -171,40 +185,6 @@ type Query {
     getSupplyPoint(supplyPointId: ID!): SupplyPoint
     getSupplyPointGlobalStatistics(includeHistoryData: Boolean): SupplyPointGlobalStatistic
     listSupplierContractsBasedOnOffers(filter: ContractsBasedOnOffersFilter): PaginatedContractsWithNameAndSupplyPointEan
-}
-
-type SelectedOffer {
-    accountingRegulatedPrice: Float
-    benefits: String
-    commodityType: CommodityType!
-    consumptionPriceNT: Float
-    consumptionPriceVT: Float
-    deliveryFrom: Date
-    deliveryLength: Int!
-    deliveryTo: Date
-    distributionPriceByCapacity: Float
-    distributionPriceByConsumptionNT: Float
-    distributionPriceByConsumptionVT: Float
-    energyTaxRegulatedPrice: Float
-    id: ID!
-    marketOrganizerRegulatedPrice: Float
-    monthlyConsumptionFee: Float
-    mountlyPaymentPrice: Float
-    name: String!
-    prepayment: Float
-    priceGas: Float
-    priceGasWithVAT: Float
-    priceNT: Float
-    priceNTWithVAT: Float
-    priceVT: Float
-    priceVTWithVAT: Float
-    renewableEnergyRegulatedPrice: Float
-    supplier: Supplier!
-    systemServicesRegulatedPrice: Float
-    totalPrice: Float
-    unit: String
-    validFrom: Date!
-    validTo: Date!
 }
 
 type Supplier {
@@ -252,38 +232,6 @@ type SupplyPointGlobalStatistic {
     powerOfferCount: Int!
     totalPossibleDeliveryCountGas: Int!
     totalPossibleDeliveryCountPower: Int!
-}
-
-type SupplyPointOffer {
-    accountingRegulatedPrice: Float
-    benefits: String
-    commodityType: CommodityType!
-    consumptionPriceNT: Float
-    consumptionPriceVT: Float
-    deliveryFrom: Date
-    deliveryLength: Int!
-    distributionPriceByCapacity: Float
-    distributionPriceByConsumptionNT: Float
-    distributionPriceByConsumptionVT: Float
-    energyTaxRegulatedPrice: Float
-    id: ID!
-    marketOrganizerRegulatedPrice: Float
-    monthlyConsumptionFee: Float
-    name: String!
-    permanentPaymentPrice: Float!
-    priceGas: Float
-    priceGasWithVAT: Float
-    priceNT: Float
-    priceNTWithVAT: Float
-    priceVT: Float
-    priceVTWithVAT: Float
-    renewableEnergyRegulatedPrice: Float
-    supplier: Supplier
-    systemServicesRegulatedPrice: Float
-    totalPrice: Float
-    unit: String
-    validFrom: Date!
-    validTo: Date!
 }
 
 type SupplyPointStatistic {
