@@ -12,7 +12,7 @@ export interface IOffer {
     deliveryFrom?: string;
     deliveryTo?: string;
     deliveryLength: number;
-    permanentPaymentPrice: number;
+    permanentPaymentPrice?: number;
     subject: ICodelistItem;
     benefits?: string | string[];
     distributionLocation?: string;
