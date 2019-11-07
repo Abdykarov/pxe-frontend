@@ -1,64 +1,45 @@
 import { ICodelistItem } from './supply.model';
 import { ISupplier } from 'src/common/graphql/models/supply.model';
 
-export interface ISupplyPointOffer {
-    id: number;
-    supplier: ISupplier;
-    commodityType: string;
-    name: string;
-    validFrom: string;
-    validTo: string;
-    deliveryFrom: string;
-    deliveryTo?: string;
-    deliveryLength: number;
-    permanentPaymentPrice: number;
-    mountlyPaymentPrice?: number;
-    benefits: string[] | string;
-    priceVT: number;
-    priceNT: number;
-    priceGas: number;
-    accountingRegulatedPrice: number;
-    consumptionPriceNT: number;
-    consumptionPriceVT: number;
-    distributionPriceByCapacity: number;
-    distributionPriceByConsumptionNT: number;
-    distributionPriceByConsumptionVT: number;
-    energyTaxRegulatedPrice: number;
-    marketOrganizerRegulatedPrice: number;
-    monthlyConsumptionFee: number;
-    renewableEnergyRegulatedPrice: number;
-    systemServicesRegulatedPrice: number;
-    totalPrice: number;
-    unit: string;
-    priceVTWithVAT?: number;
-    priceNTWithVAT?: number;
-    priceGasWithVAT?: number;
-}
-
 export interface IOffer {
     id: number;
-    supplier: ISupplier;
-    status: string;
+    supplier?: ISupplier;
+    status?: string;
     commodityType: string;
     name: string;
     validFrom: string;
     validTo: string;
-    deliveryFrom: string;
-    deliveryTo: string;
+    deliveryFrom?: string;
+    deliveryTo?: string;
     deliveryLength: number;
-    distributionLocation: string;
-    permanentPaymentPrice: number;
+    permanentPaymentPrice?: number;
     subject: ICodelistItem;
-    benefits: string;
-    priceVT: number;
-    priceNT: number;
-    distributionRate: ICodelistItem;
-    circuitBreaker: ICodelistItem;
-    priceGas: number;
-    annualConsumption: ICodelistItem;
+    benefits?: string | string[];
+    distributionLocation?: string;
+    priceVT?: number;
+    priceNT?: number;
+    distributionRate?: ICodelistItem;
+    circuitBreaker?: ICodelistItem;
+    priceGas?: number;
+    annualConsumption?: ICodelistItem;
     priceVTWithVAT?: number;
     priceNTWithVAT?: number;
     priceGasWithVAT?: number;
+    accountingRegulatedPrice?: number;
+    consumptionPriceNT?: number;
+    consumptionPriceVT?: number;
+    distributionPriceByCapacity?: number;
+    distributionPriceByConsumptionNT?: number;
+    distributionPriceByConsumptionVT?: number;
+    energyTaxRegulatedPrice?: number;
+    marketOrganizerRegulatedPrice?: number;
+    monthlyConsumptionFee?: number;
+    renewableEnergyRegulatedPrice?: number;
+    systemServicesRegulatedPrice?: number;
+    totalPrice?: number;
+    unit?: string;
+    prepayment?: number;
+    __typename?: string;
 }
 
 export interface IOfferInput {

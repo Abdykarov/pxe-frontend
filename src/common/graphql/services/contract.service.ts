@@ -24,8 +24,8 @@ import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
-import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
+import { IOffer } from 'src/common/graphql/models/offer.model';
 
 @Injectable({
     providedIn: 'root',
@@ -124,7 +124,7 @@ export class ContractService {
                 },
             });
 
-        const supplyPointOffer: ISupplyPointOffer = R.find(R.propEq('id', offerId))(findSupplyPointOffers);
+        const supplyPointOffer: IOffer = R.find(R.propEq('id', offerId))(findSupplyPointOffers);
 
         supplyPoint.progressStatus = ProgressStatus.PERSONAL_DATA;
         supplyPoint.contract = {
@@ -147,7 +147,6 @@ export class ContractService {
                 priceVT: supplyPointOffer.priceVT,
                 priceNT: supplyPointOffer.priceNT,
                 priceGas: supplyPointOffer.priceGas,
-                mountlyPaymentPrice: supplyPointOffer.mountlyPaymentPrice,
                 accountingRegulatedPrice: supplyPointOffer.accountingRegulatedPrice,
                 consumptionPriceNT: supplyPointOffer.consumptionPriceNT,
                 consumptionPriceVT: supplyPointOffer.consumptionPriceVT,
@@ -162,6 +161,9 @@ export class ContractService {
                 monthlyConsumptionFee: supplyPointOffer.monthlyConsumptionFee,
                 renewableEnergyRegulatedPrice: supplyPointOffer.renewableEnergyRegulatedPrice,
                 systemServicesRegulatedPrice: supplyPointOffer.systemServicesRegulatedPrice,
+                status: supplyPointOffer.status,
+                permanentPaymentPrice: supplyPointOffer.permanentPaymentPrice,
+                subject: supplyPointOffer.subject,
                 totalPrice: supplyPointOffer.totalPrice,
                 unit: supplyPointOffer.unit,
                 prepayment: null,

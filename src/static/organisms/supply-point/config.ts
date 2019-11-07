@@ -53,6 +53,9 @@ export const supplyPointConfigPower: ISupplyPoint = {
             deposit: 1000,
         },
         offer: {
+            status: null,
+            subject: null,
+            permanentPaymentPrice: 0,
             benefits: [
                 'Žárovka LED Lorem',
                 'Žárovka LED Lorem',
@@ -155,6 +158,9 @@ export const supplyPointConfigGas: ISupplyPoint = {
             deposit: 1000,
         },
         offer: {
+            status: null,
+            subject: null,
+            permanentPaymentPrice: 0,
             benefits: [
                 'Žárovka LED Lorem',
                 'Žárovka LED Lorem',

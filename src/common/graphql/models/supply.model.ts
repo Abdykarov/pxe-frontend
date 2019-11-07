@@ -144,41 +144,6 @@ export enum ProgressStatus {
     WAITING_FOR_PAYMENT = 'WAITING_FOR_PAYMENT',
 }
 
-export interface ISelectedOffer {
-    id: number;
-    supplier?: ISupplier;
-    commodityType?: string;
-    name?: string;
-    validFrom: string;
-    validTo: string;
-    deliveryFrom?: string;
-    deliveryTo?: string;
-    deliveryLength: number;
-    benefits?: string | string[];
-    priceVT?: number;
-    priceNT?: number;
-    priceGas?: number;
-    mountlyPaymentPrice?: number;
-    accountingRegulatedPrice: number;
-    consumptionPriceNT: number;
-    consumptionPriceVT: number;
-    distributionPriceByCapacity: number;
-    distributionPriceByConsumptionNT: number;
-    distributionPriceByConsumptionVT: number;
-    energyTaxRegulatedPrice: number;
-    marketOrganizerRegulatedPrice: number;
-    monthlyConsumptionFee: number;
-    renewableEnergyRegulatedPrice: number;
-    systemServicesRegulatedPrice: number;
-    totalPrice: number;
-    unit: string;
-    prepayment: number;
-    priceVTWithVAT?: number;
-    priceNTWithVAT?: number;
-    priceGasWithVAT?: number;
-    __typename?: string;
-}
-
 export interface ISupplyPointFormData {
     id: number;
     supplierId: number;

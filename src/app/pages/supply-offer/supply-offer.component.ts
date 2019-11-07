@@ -36,7 +36,8 @@ import {
     IOffer,
     IOfferInput,
     IOfferInputGasAttributes,
-    IOfferInputPowerAttributes, IOfferStatus,
+    IOfferInputPowerAttributes,
+    IOfferStatus,
 } from 'src/common/graphql/models/offer.model';
 import { ITableColumnConfig } from 'src/common/ui/table/models/table.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';

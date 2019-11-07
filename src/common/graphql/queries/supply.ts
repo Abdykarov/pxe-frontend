@@ -109,7 +109,6 @@ export const supplyPointFragment = gql`
                     priceVT,
                     priceNT,
                     priceGas,
-                    mountlyPaymentPrice,
                     accountingRegulatedPrice,
                     consumptionPriceNT,
                     consumptionPriceVT,
@@ -165,7 +164,7 @@ export const supplyPointFragment = gql`
             progressStatus,
             allowedOperations,
         }
-    `;
+`;
 
 export const findAllSuppliersQuery = gql`
     query findAllSuppliers($commodityType:CommodityType){
