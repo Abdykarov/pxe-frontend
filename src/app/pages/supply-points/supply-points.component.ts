@@ -45,6 +45,7 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
     public supplyPointsFuture: ISupplyPoint[];
     public supplyPointsActual: ISupplyPoint[];
     public supplyPointStatistic: ISupplyPointStatistic;
+    public today = new Date().toISOString();
 
     constructor(
         private cd: ChangeDetectorRef,
