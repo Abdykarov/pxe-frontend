@@ -36,7 +36,7 @@ import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
-import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
+import { IOffer } from 'src/common/graphql/models/offer.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { OfferService } from 'src/common/graphql/services/offer.service';
@@ -57,7 +57,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     public loadingSupplyPointOffers = true;
     public onlyOffersFromActualSupplier = false;
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
-    public supplyPointOffers: ISupplyPointOffer[];
+    public supplyPointOffers: IOffer[];
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
@@ -93,7 +93,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                 map(({data}) => R.sort(R.ascend(R.prop('totalPrice')))(data.findSupplyPointOffers)),
                 takeUntil(this.destroy$),
             ).subscribe(
-                (findSupplyPointOffers: ISupplyPointOffer[]) => {
+                (findSupplyPointOffers: IOffer[]) => {
                     this.supplyPointOffers = findSupplyPointOffers;
                     this.loadingSupplyPointOffers = false;
                     this.setTextBannerByContractEndType();
@@ -116,13 +116,13 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
 
     public filterOffersOnlyActualSupplier = () => {
         if (!R.isNil(this.supplyPointOffers) && !R.isNil(this.supplyPoint)) {
-            this.supplyPointOffers = R.filter((supplyPointOffers: ISupplyPointOffer) =>
+            this.supplyPointOffers = R.filter((supplyPointOffers: IOffer) =>
                 supplyPointOffers.supplier.id === this.supplyPoint.supplier.id)
             (this.supplyPointOffers);
         }
     }
 
-    public saveContract = (supplyPointOffer: ISupplyPointOffer) => {
+    public saveContract = (supplyPointOffer: IOffer) => {
         const supplyPointId = this.supplyPoint.id;
 
         const contractAction = this.navigateRequestService.isPreviousStep(this.supplyPoint, this.ACTUAL_PROGRESS_STATUS) ?

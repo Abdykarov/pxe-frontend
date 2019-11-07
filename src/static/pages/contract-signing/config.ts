@@ -1,7 +1,9 @@
 import { CommodityType } from 'src/common/graphql/models/supply.model';
-import { ISupplyPointOffer } from 'src/common/graphql/models/offer.model';
+import { IOffer } from 'src/common/graphql/models/offer.model';
 
-export const offerConfig: ISupplyPointOffer = {
+export const offerConfig: IOffer = {
+    status: null,
+    subject: null,
     benefits: [
         'Žárovka LED Lorem',
         'Žárovka LED Lorem',

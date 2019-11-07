@@ -55,6 +55,20 @@ export const offerFragment = gql`
         priceVTWithVAT,
         priceNTWithVAT,
         priceGasWithVAT,
+        prepayment,
+        unit,
+        accountingRegulatedPrice,
+        monthlyConsumptionFee,
+        totalPrice,
+        energyTaxRegulatedPrice,
+        marketOrganizerRegulatedPrice,
+        renewableEnergyRegulatedPrice,
+        distributionPriceByCapacity,
+        distributionPriceByConsumptionVT,
+        distributionPriceByConsumptionNT,
+        systemServicesRegulatedPrice,
+        consumptionPriceVT,
+        consumptionPriceNT
     }
 `;
 
@@ -71,44 +85,8 @@ export const findSupplierOffersQuery = gql`
 export const findSupplyPointOffersQuery = gql`
     query findSupplyPointOffers($ean: String!){
         findSupplyPointOffers(ean: $ean){
-            id,
-            supplier{
-                id,
-                name,
-                vatNumber,
-                logoPath,
-                sampleDocuments{
-                    type,
-                    url
-                }
-            },
-            commodityType,
-            name,
-            validFrom,
-            validTo,
-            deliveryFrom,
-            deliveryLength,
-            permanentPaymentPrice,
-            benefits,
-            priceVT,
-            priceNT,
-            priceGas,
-            accountingRegulatedPrice,
-            consumptionPriceNT,
-            consumptionPriceVT,
-            distributionPriceByCapacity,
-            distributionPriceByConsumptionNT,
-            distributionPriceByConsumptionVT,
-            energyTaxRegulatedPrice,
-            marketOrganizerRegulatedPrice,
-            monthlyConsumptionFee,
-            renewableEnergyRegulatedPrice,
-            systemServicesRegulatedPrice,
-            totalPrice,
-            unit,
-            priceVTWithVAT,
-            priceNTWithVAT,
-            priceGasWithVAT,
+            ...offerFragment
         }
     }
+    ${offerFragment}
 `;

@@ -1,12 +1,12 @@
+import { IOffer } from 'src/common/graphql/models/offer.model';
 import { IPersonalData } from './personal-data.model';
-import { ISelectedOffer } from './supply.model';
 
 export interface IContract {
     contractId?: string;
     contractStatus?: string;
     deliveryFrom?: string;
     deliveryTo?: string;
-    offer?: ISelectedOffer;
+    offer?: IOffer;
     personalData?: IPersonalData;
     offerValidity: Boolean;
     __typename?: string;
