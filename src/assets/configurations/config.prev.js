@@ -5,7 +5,7 @@ window.angularDevstack = {
     "config": {
         "gaId": "",
         "gtmId": "",
-        "production": false,
+        "production": true,
         "url_graphql": "https://pxeparc-preview.lnd.bz/graphql",
         "url_api": "https://pxeparc-preview.lnd.bz/api",
         "web_api_key": "preview-api-key",
