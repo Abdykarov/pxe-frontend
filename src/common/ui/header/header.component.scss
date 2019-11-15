@@ -19,6 +19,7 @@
 
 	.logo {
 		vertical-align: top;
+		height: 100%;
 	}
 }
 
@@ -88,12 +89,10 @@ a.logo-link {
 	&,
 	&:visited {
 		display: block;
-		width: $logo-width-mobile;
 		height: $logo-height-mobile;
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			width: $logo-width-tablet;
 			height: $logo-height-tablet;
 		}
 	}
