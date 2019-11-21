@@ -18,6 +18,7 @@ import { NewSupplyWillBeginPipe } from './new-supply-will-begin/new-supply-will-
 import { PathValuePipe } from './path-value/path-value.pipe';
 import { PluralPipe } from './plurar/plural.pipe';
 import { ProgressStatusPipe } from './step-of-supply-point/step-of-supply-point.pipe';
+import { SafePipe } from 'src/common/pipes/safe/safe.pipe';
 import { SimpleNumberPipe } from 'src/common/pipes/simple-number/simple-number.pipe';
 import { SumPipe } from 'src/common/pipes/sum/sum.pipe';
 import { ValuesPipe } from './values/values.pipe';
@@ -40,6 +41,7 @@ import { ValuesPipe } from './values/values.pipe';
         PathValuePipe,
         PluralPipe,
         ProgressStatusPipe,
+        SafePipe,
         SimpleNumberPipe,
         SumPipe,
         ValuesPipe,
@@ -61,6 +63,7 @@ import { ValuesPipe } from './values/values.pipe';
         PathValuePipe,
         PluralPipe,
         ProgressStatusPipe,
+        SafePipe,
         SimpleNumberPipe,
         SumPipe,
         ValuesPipe,

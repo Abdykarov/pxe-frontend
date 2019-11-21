@@ -9,11 +9,16 @@ import {
     OnInit,
     ViewChild,
 } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import {
     map,
+    switchMap,
     takeUntil,
 } from 'rxjs/operators';
+import {
+    combineLatest,
+} from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -65,6 +70,8 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public subjectType = SubjectType;
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
+    public documentTypeContract = null;
+    public documentTypeInformation = null;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -73,6 +80,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
         public navigateRequestService: NavigateRequestService,
         private route: ActivatedRoute,
         private router: Router,
+        private sanitizer: DomSanitizer,
         private supplyService: SupplyService,
     ) {
         super();
@@ -84,16 +92,32 @@ export class ContractComponent extends AbstractComponent implements OnInit {
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
                 map(({data}) => data.getSupplyPoint),
-                takeUntil(this.destroy$),
-            )
-            .subscribe(
-                (supplyPoint: ISupplyPoint) => {
+                switchMap((supplyPoint: ISupplyPoint) => {
+                    this.supplyPoint = supplyPoint;
                     this.loadingSupplyPoint = false;
                     this.supplyPoint = supplyPoint;
                     this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
+                    return combineLatest(
+                        // todoo catch TEST ERROR
+                        // https://stackoverflow.com/questions/496
+                        // 08678/how-to-have-a-separate-error-handling-for-each-function-in-combinelatest (edited)
+                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.INFORMATION),
+                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.CONTRACT),
+                    );
+                }),
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                ([documentTypeInformation, documentTypeContract]) => {
+                    console.log(documentTypeContract);
+                    // isPlatformBrowser(this.platformId
+                    this.documentTypeInformation = window.URL.createObjectURL(documentTypeInformation.file);
+                    this.documentTypeContract = window.URL.createObjectURL(documentTypeContract.file);
+                    this.loadingSupplyPoint = false;
                     this.cd.markForCheck();
                 },
                 (error) => {
+                    console.log(error);
                     const { globalError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.cd.markForCheck();
