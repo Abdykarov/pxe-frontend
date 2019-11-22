@@ -24,7 +24,7 @@ export const supplyPointConfigPower: ISupplyPoint = {
         region: 'Pardubický kraj',
     },
     distributionRate: {
-        type: 'DSTSAZ',
+        type: 'DSTP4R',
         code: 'C01d',
         description: 'C01d',
         help: 'C01d',
