@@ -8,7 +8,8 @@ import {
 
 import {
     CommodityType,
-    ISupplyPoint, ProgressStatus,
+    ISupplyPoint,
+    ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { getConfigStepper } from 'src/common/utils';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
