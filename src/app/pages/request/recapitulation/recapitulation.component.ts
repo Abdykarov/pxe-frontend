@@ -140,4 +140,9 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                 },
             );
     }
+
+    public chooseNewOfferAction = (evt) => {
+        evt.preventDefault();
+        this.navigateRequestService.routerToRequestStep(this.supplyPoint, ProgressStatus.OFFER_STEP);
+    }
 }
