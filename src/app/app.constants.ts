@@ -102,7 +102,7 @@ export enum INavigationItemType {
 }
 
 export const CODE_LIST = {
-    DIST_RATE: 'DSTSAZ',
+    DIST_RATE: 'DSTP4R',
     DIST_RATE_COMPANY: 'DSTSA1',
     DIST_RATE_INDIVIDUAL: 'DSTSA2',
     CIRCUIT_BREAKER: 'JISTIC',
