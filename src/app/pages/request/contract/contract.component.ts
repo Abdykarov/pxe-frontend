@@ -111,12 +111,14 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                 ([documentTypeInformation, documentTypeContract]) => {
                     console.log(documentTypeContract);
                     // isPlatformBrowser(this.platformId
-                    this.documentTypeInformation = window.URL.createObjectURL(documentTypeInformation.file);
-                    this.documentTypeContract = window.URL.createObjectURL(documentTypeContract.file);
+                    this.documentTypeInformation = window.navigator.msSaveOrOpenBlob(documentTypeInformation.file, 'asdads');
+                    this.documentTypeContract = window.navigator.msSaveOrOpenBlob(documentTypeContract.file, 'asdads');
+                    console.log(this.documentTypeInformation);
                     this.loadingSupplyPoint = false;
                     this.cd.markForCheck();
                 },
                 (error) => {
+                    console.log('ERROR');
                     console.log(error);
                     const { globalError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
