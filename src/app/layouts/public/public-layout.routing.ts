@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { CONSTS } from 'src/app/app.constants';
+import { CONSTS, ROUTES } from 'src/app/app.constants';
 import { PublicLayoutComponent } from './public-layout.component';
 import {
     LoginType,
@@ -74,6 +74,16 @@ const routes = [
             {
                 path: CONSTS.PATHS.TERMS_OF_USE,
                 loadChildren: '../../pages/terms-of-use/terms-of-use.module#TermsOfUseModule',
+                data: {
+                    isPublic: true,
+                    isSimpleFooter: false,
+                    loginType: LoginType.NAVIGATE,
+                    signUpType: SignType.SCROLL,
+                },
+            },
+            {
+                path: CONSTS.PATHS.PATTERNS_OF_CONTRACTS,
+                loadChildren: '../../pages/patterns-of-contracts/patterns-of-contracts.module#PatternsOfContractsModule',
                 data: {
                     isPublic: true,
                     isSimpleFooter: false,

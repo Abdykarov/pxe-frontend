@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <div class="container-content">
+        <pxe-layout-container pageTitle="Podmínky užívání" [breadcrumbItemsSimple]="breadcrumbItemsSimple">
+            <ul class="text-center link-list">
+                <li class="link-list__item">
+                    <a class="link-list__link"
+                       routerLinkActive="link-list__link--active"
+                       [routerLinkActiveOptions]="{exact: true}"
+                       [routerLink]="[routePower]">
+                        Elektřina
+                    </a>
+                </li>
+                <li class="link-list__item">
+                    <a class="link-list__link"
+                       routerLinkActive="link-list__link--active"
+                       [routerLinkActiveOptions]="{exact: true}"
+                       [routerLink]="[routeGas]">
+                        Plyn
+                    </a>
+                </li>
+            </ul>
+            <!--<div class="row">-->
+                <!--<div class="col-12 col-xl-8 offset-xl-2">-->
+                    <!--<div class="page-box text-justify">-->
+                        <!--<div class="row">-->
+                            <!--<div class="col-12">-->
+                                <!--&lt;!&ndash;include document&ndash;&gt;-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </pxe-layout-container>
+    </div>
+</div>
