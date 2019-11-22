@@ -12,7 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
-    commodityTypes,
+    commodityTypes, CONSTS,
     ROUTES,
 } from 'src/app/app.constants';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
@@ -51,12 +51,11 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
                 takeUntil(this.destroy$),
             )
             .subscribe(params => {
-                // if (R.indexOf(params.commodityType, R.keys(commodityTypes)) < 0) {
-                //     this.router.navigate([this.routePower]);
-                //     return;
-                // }
-                // this.commodityType = commodityTypes[params.commodityType];
-                // this.commodityType$.next(this.commodityType);
+                console.log('%c ***** params *****', 'background: #bada55; color: #000; font-weight: bold', params);
+                if (R.indexOf(params.type, ['a', 'b']) < 0) {
+                    this.router.navigate([CONSTS.PATHS.PATTERNS_OF_CONTRACTS + '/a']);
+                    return;
+                }
             });
     }
 }

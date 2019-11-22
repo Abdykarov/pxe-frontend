@@ -83,6 +83,10 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.PATTERNS_OF_CONTRACTS,
+                redirectTo: CONSTS.PATHS.PATTERNS_OF_CONTRACTS + '/',
+            },
+            {
+                path: CONSTS.PATHS.PATTERNS_OF_CONTRACTS + '/:type',
                 loadChildren: '../../pages/patterns-of-contracts/patterns-of-contracts.module#PatternsOfContractsModule',
                 data: {
                     isPublic: true,
