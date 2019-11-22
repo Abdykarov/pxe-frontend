@@ -20,7 +20,7 @@ export class NavigateRequestService {
         private router: Router,
     ) {}
 
-    private canGoToStep = (supplyPoint: ISupplyPoint, allowedProgressStatus: ProgressStatus) =>
+    public canGoToStep = (supplyPoint: ISupplyPoint, allowedProgressStatus: ProgressStatus) =>
         this.isPreviousStep(supplyPoint, allowedProgressStatus) || this.isProgressStatusStep(supplyPoint, allowedProgressStatus)
 
     public routerToRequestStep = (supplyPoint: ISupplyPoint | ISupplyPointStatisticView, progressStatus: ProgressStatus = null) => {
