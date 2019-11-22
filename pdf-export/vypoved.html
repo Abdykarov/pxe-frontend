@@ -1,0 +1,235 @@
+<html lang="cs-cz">
+<head>
+	<style>
+		@page {
+			size: a4;
+			margin: 40px 60px 60px;
+			padding-top: 20px;
+
+			@top-left {
+				vertical-align: bottom;
+				background-image: url(https://parc4u.cz/assets/images/layout/logo-parc4u.png);
+				background-position: left bottom;
+				background-repeat: no-repeat;
+				background-size: auto 20px;
+				width: 100px;
+				height: 20px;
+			}
+
+			@top-right {
+				content: 'Výpověď smlouvy podle ustanovení § 11a odst. 3 energetického zákona';
+				padding-top: 18px;
+				vertical-align: top;
+				font-size: 10px;
+				font-family: 'Roboto', sans-serif;
+			}
+			
+			@bottom-left {
+				content: '© POWER EXCHANGE CENTRAL EUROPE, a.s. @year';
+				padding-bottom: 20px;
+				vertical-align: bottom;
+				font-size: 10px;
+				font-family: 'Roboto', sans-serif;
+				font-weight: 400;
+			}
+
+			@bottom-right {
+				content: counter(page) ' / ' counter(pages);
+				padding-bottom: 20px;
+				vertical-align: bottom;
+				font-size: 10px;
+				font-family: 'Roboto', sans-serif;
+			}
+		}
+
+		/* Element styles */
+		body {
+			margin: 0;
+			color: #2b4762;
+			font-family: 'Roboto', sans-serif;
+		}
+
+		h1 {
+			margin-top: 0;
+			font-size: 20px;
+		}
+
+		h2 {
+			margin-top: 0;
+			margin-bottom: 10px;
+			font-size: 14px;
+			font-weight: normal;
+		}
+
+		div,
+		p {
+			margin: 0;
+			font-size: 10px;
+			line-height: 16px;
+			text-align: justify;
+		}
+
+		p {
+			margin-bottom: 10px;
+		}
+
+		/* Table */
+		.table-label {
+			display: block;
+			padding-bottom: 8px;
+			font-size: 10px;
+		}
+
+		table {
+			width: 100%;
+			margin-bottom: 15px;
+			text-align: left;
+		}
+
+		thead th {
+			padding-bottom: 5px;
+			padding-left: 0;
+			margin-left: 0;
+		}
+
+		tbody th {
+			width: 45%;
+			color: #aab5bf;
+			padding-left: 0;
+			margin-left: 0;
+		}
+
+		td, th {
+			padding-bottom: 0;
+			font-size: 10px;
+		}
+
+		th {
+			font-weight: normal;
+		}
+
+		/* Lists */
+		.list__item {
+			margin-bottom: 10px;
+			font-size: 10px;
+		}
+
+		/* Signatures */
+		.signatures-text {
+			width: 100%;
+		}
+
+		.date {
+			display: inline-block;
+			width: 45%;
+			vertical-align: top;
+		}
+
+		.signature {
+			display: inline-block;
+			width: 50%;
+			padding-top: 40px;
+			text-align: center;
+		}
+
+		/* Utilities */
+		.mb-0 {
+			margin-bottom: 0;
+		}
+
+		.mb-5 {
+			margin-bottom: 5px;
+		}
+
+		.mb-10 {
+			margin-bottom: 10px;
+		}
+
+		.mb-20 {
+			margin-bottom: 20px;
+		}
+
+		.mb-30 {
+			margin-bottom: 30px;
+		}
+
+		.mb-40 {
+			margin-bottom: 40px;
+		}
+
+		.mb-70 {
+			margin-bottom: 70px;
+		}
+	</style>
+</head>
+<body>
+	<h1 class="mb-20">Výpověď smlouvy podle ustanovení § 11a odst. 3 energetického zákona</h1>
+	<div class="list mb-40">
+		<div class="list__item">
+			<h2>A. Smluvní strany</h2>
+			<span class="table-label">Dodavatel</span>
+			<table>
+				<tbody>
+					<tr>
+						<th>Název/obchodní firma</th>
+						<td>@contractor-business-name</td>
+					</tr>
+					<tr>
+						<th>Adresa sídla - ulice a číslo popisné / orientační</th>
+						<td>@registered-address-street</td>
+					</tr>
+					<tr>
+						<th>Adresa sídla - obec a PSČ</th>
+						<td>@registered-address-town</td>
+					</tr>
+				</tbody>
+			</table>
+			<span class="table-label">Zákazník vypovídající smlouvu:</span>
+			<table class="mb-0">
+				<tbody>
+					<tr>
+						<th>Titul, jméno a příjmení</th>
+						<td>@client-name</td>
+					</tr>
+					<tr>
+						<th>Datum narození</th>
+						<td>@client-birthdate</td>
+					</tr>
+					<tr>
+						<th>Adresa bydliště</th>
+						<td>@client-home-address</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="list__item">
+			<h2>B. Smlouva o sdružených službách dodávky:</h2>
+			<table> 
+				<tbody>
+					<tr>
+						<th>Datum uzavření</th>
+						<td>@closure-date</td>
+					</tr>
+					<tr>
+						<th>Komodita</th>
+						<td>@commodity</td>
+					</tr>
+					<tr>
+						<th>Odběrné místo - číslo EAN / EIC</th>
+						<td>@supply-point</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Tímto vypovídám shora uvedenou Smlouvu o sdružených službách dodávky v souladu s&nbsp;ustanovením § 11a odst. 3 zákona č. 458/2000 Sb., energetický zákon, ve znění pozdějších předpisů (dále jen „EZ“).
+			</p>
+			<p>Výpovědní doba činí 15 dnů a počíná běžet prvním dnem měsíce následujícího po doručení této výpovědi. </p>
+			<p>Žádám vás o písemné potvrzení ukončení smluvního vztahu.</p>
+		</div>
+	</div>
+	<p>S pozdravem</p>
+	<div class="signatures-text">
+		<span class="date">Datum:</span>
+		<span class="signature">Titul, jméno a příjmení</span>
+	</div>
+</body>
+</html>

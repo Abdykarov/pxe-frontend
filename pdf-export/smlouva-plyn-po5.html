@@ -1,246 +1,251 @@
 <html lang="cs-cz">
 <head>
-<style>
-@page {
-	size: a4;
-	margin: 105px 110px 120px;
-	padding-top: 60px;
+	<style>
+		@page {
+			size: a4;
+			margin: 40px 60px 60px;
+			padding-top: 20px;
 
-	@top-left {
-		vertical-align: bottom;
-		background-image: url(https://www.pxe.cz/images/logo-pxe.png);
-		background-position: left bottom;
-		background-repeat: no-repeat;
-		background-size: auto 30px;
-		width: 80px;
-		height: 30px;
-	}
+			@top-left {
+				vertical-align: bottom;
+				background-image: url(https://parc4u.cz/assets/images/layout/logo-parc4u.png);
+				background-position: left bottom;
+				background-repeat: no-repeat;
+				background-size: auto 20px;
+				width: 100px;
+				height: 20px;
+			}
 
-	@top-right {
-		content: 'Smlouva o sdružených službách dodávky plynu';
-		padding-top: 71px;
-		vertical-align: top;
-		font-size: 14px;
-		font-family: 'Roboto', sans-serif;
-	}
-	
-	@bottom-left {
-		content: '© POWER EXCHANGE CENTRAL EUROPE, a.s. 2018';
-		padding-bottom: 50px;
-		vertical-align: bottom;
-		font-size: 14px;
-		font-family: 'Roboto', sans-serif;
-		font-weight: 400;
-	}
+			@top-right {
+				content: 'Smlouva o sdružených službách dodávky plynu';
+				padding-top: 18px;
+				vertical-align: top;
+				font-size: 10px;
+				font-family: 'Roboto', sans-serif;
+			}
+			
+			@bottom-left {
+				content: '© POWER EXCHANGE CENTRAL EUROPE, a.s. @year';
+				padding-bottom: 20px;
+				vertical-align: bottom;
+				font-size: 10px;
+				font-family: 'Roboto', sans-serif;
+				font-weight: 400;
+			}
 
-	@bottom-right {
-		content: counter(page) ' / ' counter(pages);
-		padding-bottom: 50px;
-		vertical-align: bottom;
-		font-size: 14px;
-		font-family: 'Roboto', sans-serif;
-	}
-}
+			@bottom-right {
+				content: counter(page) ' / ' counter(pages);
+				padding-bottom: 20px;
+				vertical-align: bottom;
+				font-size: 10px;
+				font-family: 'Roboto', sans-serif;
+			}
+		}
 
-/* Element styles */
-body {
-	margin: 0;
-	color: #2b4762;
-	font-family: 'Roboto', sans-serif;
-}
+		/* Element styles */
+		body {
+			margin: 0;
+			color: #2b4762;
+			font-family: 'Roboto', sans-serif;
+		}
 
-h1 {
-	margin-top: 0;
-	font-size: 36px;
-}
+		h1 {
+			margin-top: 0;
+			font-size: 20px;
+		}
 
-h2 {
-	margin-bottom: 20px;
-	font-size: 18px;
-	font-weight: normal;
-}
+		h2 {
+			margin-top: 0;
+			margin-bottom: 10px;
+			font-size: 14px;
+			font-weight: normal;
+		}
 
-h3 {
-	margin-top: 0;
-	margin-bottom: 10px;
-	font-size: 14px;
-	font-weight: normal;
-}
+		h3 {
+			margin-top: 0;
+			margin-bottom: 5px;
+			font-size: 10px;
+			font-weight: normal;
+		}
 
-p {
-	margin: 0;
-	font-size: 14px;
-	line-height: 24px;
-}
+		div,
+		p {
+			margin: 0;
+			font-size: 10px;
+			line-height: 16px;
+			text-align: justify;
+		}
 
-/* Forms */
-.checkbox-wrapper {
-	position: relative;
-	padding-left: 26px;
-}
+		/* Forms */
+		.checkbox-wrapper {
+			position: relative;
+			padding-left: 26px;
+		}
 
-.checkbox {
-	position: absolute;
-	display: block;
-	top: 2px;
-	left: 0;
-	width: 12px;
-	height: 12px;
-	border: 2px solid #cbd4de;
-	border-radius: 3px;
-}
+		.checkbox {
+			position: absolute;
+			display: block;
+			top: 0;
+			left: 0;
+			width: 12px;
+			height: 12px;
+			border: 2px solid #cbd4de;
+			border-radius: 3px;
+		}
 
-.checkbox.checked::before {
-	content: '';
-	display: block;
-	width: 3px;
-	height: 6px;
-	margin-left: 4px;
-	border: solid #000;
-	border-width: 0 2px 2px 0;
-	transform: rotate(45deg);
-}
+		.checkbox.checked::before {
+			content: '';
+			display: block;
+			width: 3px;
+			height: 6px;
+			margin-left: 4px;
+			border: solid #000;
+			border-width: 0 2px 2px 0;
+			transform: rotate(45deg);
+		}
 
-.control-label {
-	vertical-align: top;
-}
+		.control-label {
+			vertical-align: top;
+		}
 
-/* Table */
-.table-label {
-	display: block;
-	padding-bottom: 10px;
-	font-size: 14px;
-}
+		/* Table */
+		.table-label {
+			display: block;
+			padding-bottom: 8px;
+			font-size: 10px;
+		}
 
-table {
-	width: 100%;
-	margin-bottom: 20px;
-	text-align: left;
-}
+		table {
+			width: 100%;
+			margin-bottom: 15px;
+			text-align: left;
+		}
 
-thead th {
-	padding-bottom: 10px;
-	padding-left: 0;
-	margin-left: 0;
-}
+		thead th {
+			padding-bottom: 5px;
+			padding-left: 0;
+			margin-left: 0;
+		}
 
-tbody th {
-	width: 45%;
-	color: #aab5bf;
-	padding-left: 0;
-	margin-left: 0;
-}
+		tbody th {
+			width: 45%;
+			color: #aab5bf;
+			padding-left: 0;
+			margin-left: 0;
+		}
 
-td, th {
-	padding-bottom: 5px;
-	font-size: 14px;
-}
+		td, th {
+			padding-bottom: 0;
+			font-size: 10px;
+		}
 
-th {
-	font-weight: normal;
-}
+		th {
+			font-weight: normal;
+		}
 
-td {
-	padding-left: 20px;
-}
+		td {
+			padding-left: 20px;
+		}
 
-/* Lists */
-.list__item {
-	margin-bottom: 70px;
-	font-size: 14px;
-}
+		.address-title {
+			padding-top: 5px;
+			color: #647685;
+		}
 
-/* Lower alpha list */
-.lower-alpha__item {
-	position: relative;
-	padding-left: 25px;
-	margin: 10px 0;
-}
+		/* Lists */
+		.list__item {
+			margin-bottom: 20px;
+			font-size: 10px;
+		}
 
-.lower-alpha__item--number {
-	padding-left: 35px;
-}
+		/* Lower alpha list */
+		.lower-alpha__item {
+			position: relative;
+			padding-left: 20px;
+			margin: 5px 0;
+		}
 
-.lower-alpha__letter {
-	position: absolute;
-	left: 0;
-}
+		.lower-alpha__item--number {
+			padding-left: 35px;
+		}
 
-/* Signatures */
-.signatures-text {
-	width: 100%;
-	margin-top: 70px;
-	font-size: 14px;
-}
+		.lower-alpha__letter {
+			position: absolute;
+			left: 0;
+		}
 
-.date {
-	display: inline-block;
-	width: 45%;
-	vertical-align: top;
-}
+		/* Signatures */
+		.signatures-text {
+			width: 100%;
+		}
 
-.signature {
-	display: inline-block;
-	width: 50%;
-	padding-top: 40px;
-	text-align: center;
-}
+		.date {
+			display: inline-block;
+			width: 45%;
+			vertical-align: top;
+		}
 
-/* Utilities */
-.small {
-	font-size: 12px;
-}
+		.signature {
+			display: inline-block;
+			width: 50%;
+			text-align: center;
+		}
 
-.mb-0 {
-	margin-bottom: 0px;
-}
+		/* Utilities */
+		.d-inline-block {
+			display: inline-block;
+		}
 
-.mb-10 {
-	margin-bottom: 10px;
-}
+		.page-break-before {
+			page-break-before: always;
+		}
 
-.mb-20 {
-	margin-bottom: 20px;
-}
+		.small {
+			font-size: 9px;
+		}
 
-.mb-40 {
-	margin-bottom: 40px;
-}
+		.pt-40 {
+			padding-top: 40px;
+		}
 
-.mb-70 {
-	margin-bottom: 70px;
-}
+		.mb-0 {
+			margin-bottom: 0px;
+		}
 
-.mb-100 {
-	margin-bottom: 100px;
-}
+		.mb-5 {
+			margin-bottom: 5px;
+		}
 
-.mb-150 {
-	margin-bottom: 150px;
-}
+		.mb-10 {
+			margin-bottom: 10px;
+		}
 
-.page-end {
-	padding-bottom: 570px;
-}
+		.mb-20 {
+			margin-bottom: 20px;
+		}
 
-.page-end-2 {
-	padding-bottom: 400px;
-}
+		.mb-30 {
+			margin-bottom: 30px;
+		}
 
-.separation-max {
-	margin-top: 130px;
-}
 
-[data-value=""] {
-	display: none;
-}
+		.mb-40 {
+			margin-bottom: 40px;
+		}
 
-</style>
+		.mb-70 {
+			margin-bottom: 70px;
+		}
+
+		[data-value=""] {
+			display: none;
+		}
+	</style>
 </head>
 <body>
-	<h1 class="mb-20">Smlouva o sdružených službách dodávky plynu</h1>
-	<p class="mb-20">Uzavřená na trhu PARC4U společnosti Power Exchange Central Europe, a.s. (dále jen “PXE”) </p>
-	<p class="mb-70">uzavřená níže uvedeného dne, měsíce a roku mezi dále uvedenými smluvními stranami:</p>
+	<h1 class="mb-10">Smlouva o sdružených službách dodávky plynu</h1>
+	<p class="mb-5">Uzavřená na trhu PARC4U spol. Power Exchange Central Europe, a.s. (dále jen “PXE”) </p>
+	<p class="mb-20">uzavřená níže uvedeného dne, měsíce a roku mezi dále uvedenými smluvními stranami:</p>
 	<div class="list">
 		<div class="list__item">
 			<h2>A. Smluvní strany</h2>
@@ -272,7 +277,7 @@ td {
 						<td>@supplier-bank-account</td>
 					</tr>
 					<tr>
-						<th>Zákaznická linka - tel</th>
+						<th>Zákaznická linka</th>
 						<td>@supplier-customer-hotline</td>
 					</tr>
 					<tr>
@@ -289,15 +294,19 @@ td {
 			<table class="mb-0">
 				<tbody>
 					<tr>
-						<th>Název právnické osoby</th>
+						<th>Název právnické osoby / jméno a příjmení podnikající osoby</th>
 						<td>@client-name</td>
 					</tr>
 					<tr>
 						<th>IČO</th>
 						<td>@client-ico</td>
 					</tr>
+				</tbody>
+			</table>
+			<table>
+				<tbody>
 					<tr>
-						<th>Sídlo</th>
+						<th class="address-title">Sídlo</th>
 						<td></td>
 					</tr>
 					<tr>
@@ -317,7 +326,7 @@ td {
 						<td>@client-permanent-zip-code</td>
 					</tr>
 					<tr>
-						<th>Korespondenční adresa</th>
+						<th class="address-title">Korespondenční adresa</th>
 						<td></td>
 					</tr>
 					<tr>
@@ -350,7 +359,13 @@ td {
 		</div>
 		<div class="list__item">
 			<h2>B. Předmět smlouvy</h2>
-			<p>Za podmínek uvedených v této smlouvě a ve „Všeobecných obchodních podmínkách PXE pro dodávky plynu“ připojených v příloze této smlouvy(dále též „VOP“), se Dodavatel zavazuje poskytovat Zákazníkovi sdružené služby dodávky plynu, tj. dodávat Zákazníkovi plyn do odběrného místa Zákazníka specifikovaného v této smlouvě (dále též „OM Zákazníka“) a zajistit na vlastní jméno a vlastní účet související služby v plynárenství, zejména zajistit distribuci plynu do OM Zákazníka, a Zákazník se zavazuje odebrat Dodavatelem dodaný plyn do OM Zákazníka a zaplatit Dodavateli sjednanou cenu za dodávku plynu a regulovanou cenu související služby v plynárenství. Zahájením dodávky plynu na základě této smlouvy dochází k přenesení odpovědnosti za odchylku v OM Zákazníka na Dodavatele. </p>
+			<p>Za podmínek uvedených v této smlouvě (dále též „Smlouva“) a v „Obchodních podmínkách PXE pro dodávky plynu“ připojených v 
+				příloze této Smlouvy (dále též „OP“), se Dodavatel zavazuje poskytovat Zákazníkovi sdružené služby dodávky plynu, 
+				tj. dodávat Zákazníkovi plyn do odběrného místa Zákazníka specifikovaného v této Smlouvě (dále též „OM Zákazníka“) 
+				a zajistit na vlastní jméno a vlastní účet související služby v plynárenství, zejména zajistit distribuci plynu 
+				do OM Zákazníka. Zákazník se zavazuje odebrat Dodavatelem dodaný plyn do OM Zákazníka a zaplatit Dodavateli 
+				sjednanou cenu za dodávku plynu a regulovanou cenu související služby v plynárenství. Zahájením dodávky plynu, 
+				na základě této Smlouvy, dochází k přenesení odpovědnosti za odchylku v OM Zákazníka na Dodavatele. </p>
 		</div>
 		<div class="list__item">
 			<h2>C. Specifikace odběrného místa Zákazníka</h2>
@@ -377,7 +392,7 @@ td {
 						<td>@client-ean</td>
 					</tr>
 					<tr>
-						<th>Předpokládaná spotřeba (kWh/rok)</th>
+						<th>Předpokládaná spotřeba (MWh/rok)</th>
 						<td>@client-expected-vt-consumption</td>
 					</tr>
 				</tbody>
@@ -389,48 +404,26 @@ td {
 			<table>
 				<tbody>
 					<tr>
-						<th>Cena za dodávku plynu činí (Kč/kWh)</th>
+						<th>Cena za dodávku plynu činí (Kč/MWh)</th>
 						<td>@high-tariff</td>
 					</tr>
 					<tr>
-						<th>Výše stálého měsíčního platu za odběrné místo činí</th>
+						<th>Výše stálé měsíční playby za odběrné místo činí</th>
 						<td>@monthly-amount-salary-om Kč</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-		<div class="list__item mb-150">
+		<div class="list__item">
 			<h2>E.Platební údaje</h2>
 			<table>
 				<tbody>
 					<tr>
-						<th>Úhrada záloh</th>
-						<td>
-							<div class="checkbox-wrapper">
-								<span class="checkbox @order-to-pay-advances"></span>
-								<span class="control-label">Příkaz k úhradě</span>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th></th>
-						<td>
-							<div class="checkbox-wrapper">
-								<span class="checkbox @payment-direct-debit-advances"></span>
-								<span class="control-label">Inkaso</span>
-							</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<table>
-				<tbody>
-					<tr>
-						<th>Úhrada doplatků z vyúčtování</th>
+						<th>Způsob úhrada záloh a doplatků z vyúčtování</th>
 						<td>
 							<div class="checkbox-wrapper">
 								<span class="checkbox @order-for-payment-balance-payments"></span>
-								<span class="control-label">Příkaz k úhradě</span>
+								<span class="control-label">Příkazem k úhradě</span>
 							</div>
 						</td>
 					</tr>
@@ -439,16 +432,7 @@ td {
 						<td>
 							<div class="checkbox-wrapper">
 								<span class="checkbox @settlement-balance-payments"></span>
-								<span class="control-label">Inkaso</span>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<th></th>
-						<td>
-							<div class="checkbox-wrapper">
-								<span class="checkbox @payment-balance-payments-by-postal-order"></span>
-								<span class="control-label">Složenkou</span>
+								<span class="control-label">Inkasem z účtu</span>
 							</div>
 						</td>
 					</tr>
@@ -458,7 +442,7 @@ td {
 					</tr>
 					<tr>
 						<th>Číslo bankovního účtu Zákazníka pro platby</th>
-						<td>@client-account-payments-number / @bank-number</td>
+						<td>@client-account-payments-number/@bank-number</td>
 					</tr>
 					<tr>
 						<th>Frekvence záloh</th>
@@ -506,7 +490,9 @@ td {
 						<td>
 							<div class="checkbox-wrapper">
 								<span class="checkbox @existing-contractual-obligation-if-date-to"></span>
-								<span class="control-label">Na dobu určitou do @do s automatickým prodloužením, pokud zákazník smlouvu nevypoví @dnů/měsíců dnů/měsíců před koncem platnosti</span>
+								<span class="control-label">Na dobu určitou do @do s automatickým prodloužením, pokud zákazník 
+									smlouvu nevypoví @notice-period @unit-time-notice-period 
+									před koncem platnosti</span>
 							</div>
 						</td>
 					</tr>
@@ -515,21 +501,32 @@ td {
 						<td>
 							<div class="checkbox-wrapper">
 								<span class="checkbox @existing-contractual-obligation-indefinitely"></span>
-								<span class="control-label">Na dobu neurčitou s výpovědní dobou @dnů/měsíců dnů/měsíců</span>
+								<span class="control-label">Na dobu neurčitou s výpovědní dobou 
+									@notice-period @unit-time-notice-period</span>
 							</div>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 			<h3>F.2 Sankce</h3>
-			<p>Zákazník se zavazuje, že v době, kdy má být zahájena podle této smlouvy dodávka plynu do OM Zákazníka, nebude ve smluvním vztahu s jiným dodavatelem plynu, na základě kterého se uskutečňuje dodávka plynu do OM Zákazníka. Pokud Zákazník tento závazek poruší a nepůjde o vinu Dodavatele, má Dodavatel právo požadovat po Zákazníkovi smluvní pokutu ve výši násobku částky 200,- Kč a počtu kalendářních měsíců sjednané doby trvání smlouvy. Právo smluvních stran na náhradu škody v plné výši není ujednáními o smluvní pokutě dotčeno.</p>
+			<p>Zákazník se zavazuje, že v době, kdy má být zahájena podle této Smlouvy dodávka plynu do OM Zákazníka, 
+			nebude s jiným dodavatelem plynu, než se shora uvedeným současným dodavatelem, ve smluvním vztahu, na základě kterého se uskutečňuje dodávka plynu do OM Zákazníka. 
+			Pokud Zákazník tento závazek poruší a nepůjde o vinu Dodavatele, má Dodavatel právo požadovat po Zákazníkovi smluvní 
+			pokutu ve výši násobku částky 200,- Kč a počtu kalendářních měsíců sjednané doby trvání Smlouvy. Právo smluvních 
+			stran na náhradu škody v plné výši není ujednáními o smluvní pokutě dotčeno.</p>
 		</div>
-		<div class="list__item mb-40">
+		<div class="list__item">
 			<h2>G. Vznik a doba trvání závazku</h2>
 			<h3>G.1 Platnost a účinnost</h3>
-			<p class="mb-20">Tato smlouva se uzavírá dnem, kdy bude splněna poslední z dále uvedených podmínek: (i) Zákazník vyjádřil s návrhem této smlouvy souhlas, (ii) byla včas provedena mikrotransakce za účelem ověření totožnosti Zákazníka (viz bod 3.2 VOP) a (iii) Dodavatel a Zákazník obdrželi notifikaci o splnění obou podmínek dle bodů (i) a (ii). Smlouva nabývá účinnosti dnem zahájení dodávky do OM Zákazníka; ustanovení G.2 a I. této Smlouvy však nabývají účinnosti již dnem uzavření této smlouvy.</p>
+			<p class="mb-20">Tato Smlouva se uzavírá dnem, kdy bude splněna poslední z dále uvedených podmínek: (i) Zákazník 
+			vyjádřil s návrhem této Smlouvy souhlas, (ii) byla včas provedena mikrotransakce za účelem poskytnutí údajů o totožnosti 
+			Zákazníka (viz bod 3.9 OP) (pouze v případě první smlouvy o sdružených službách dodávky uzavírané prostřednictvím webové 
+			aplikace parc4u) a (iii) Dodavatel a Zákazník obdrželi notifikaci o splnění obou podmínek dle bodů (i) a (ii). 
+			Smlouva nabývá účinnosti dnem zahájení dodávky do OM Zákazníka; ustanovení G.2 a I. této Smlouvy však nabývají 
+			účinnosti již dnem uzavření této Smlouvy. Smlouva zaniká, pokud se ani do 3 měsíců od předpokládaného data zahájení 
+			dodávky nepodaří zahájit dodávku do OM Zákazníka podle této Smlouvy (podrobnosti viz bod 8.2 OP).</p>
 			<h3>G.2 Zahájení dodávky</h3>
-			<p>Dodavatel zahájí dodávku do OM Zákazníka v souladu s touto smlouvou:</p>
+			<p>Dodavatel zahájí dodávku do OM Zákazníka v souladu s touto Smlouvou:</p>
 			<div class="lower-alpha__item">
 				<span class="lower-alpha__letter">a/</span>
 				v případě přechodu Zákazníka od jiného dodavatele, dnem bezprostředně následujícím po dni, kdy je ukončena dodávka do OM Zákazníka ze strany současného dodavatele,
@@ -538,9 +535,9 @@ td {
 				<span class="lower-alpha__letter">b/</span>
 				v případě, že stávajícím dodavatelem je Dodavatel, dnem bezprostředně následujícím po dni, kdy je ukončen stávající smluvní závazek u Dodavatele, nedohodnou-li se smluvní strany jinak,
 			</div>
-			<div class="lower-alpha__item">
+			<div class="lower-alpha__item mb-20">
 				<span class="lower-alpha__letter">c/</span>
-				v ostatních případech dnem, který je dohodnut mezi smluvními stranami.
+				v ostatních, mimořádných, případech dnem, který je dohodnut mezi smluvními stranami.
 			</div>
 			<h3>G.3 Předpokládané datum zahájení dodávky</h3>
 			<table>
@@ -551,7 +548,7 @@ td {
 					</tr>
 				</tbody>
 			</table>
-			<h3>G.4 Doba trvání dodávky</h3>
+			<h3 class="page-break-before">G.4 Doba trvání dodávky</h3>
 			<table>
 				<tbody>
 					<tr>
@@ -559,7 +556,7 @@ td {
 						<td>
 							<div class="checkbox-wrapper">
 								<span class="checkbox @delivery-time-12-months"></span>
-								<span class="control-label">12 měsíců</span>
+								<span class="control-label">12 měsíců *</span>
 							</div>
 						</td>
 					</tr>
@@ -568,19 +565,39 @@ td {
 						<td>
 							<div class="checkbox-wrapper">
 								<span class="checkbox @delivery-time-24-months"></span>
-								<span class="control-label">24 měsíců</span>
+								<span class="control-label">24 měsíců *</span>
 							</div>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-			<p class="mb-20">Tato doba počíná běžet dnem zahájení dodávky do OM Zákazníka a končí dnem, kdy uplyne výše uvedený počet měsíců od předpokládaného data zahájení dodávky. Pokud den, kdy uplyne tato doba, není posledním dnem kalendářního měsíce, prodlužuje se účinnost smlouvy až do bezprostředně následujícího posledního dne kalendářního měsíce.</p>
-			<h3>G.5 Automatické prodloužení smlouvy o rok za ceníkovou cenu Dodavatele</h3>
-			<p>Pokud Zákazník nejpozději 14 dní před uplynutím doby trvání této Smlouvy nebo prodloužené doby trvání této Smlouvy neoznámí písemně druhé smluvní straně, že trvá na jejím ukončení, prodlužuje se trvání této Smlouvy na dobu dalších 12 měsíců (dále též „Nové období“) s tím, že (i) pro Nové období platí Všeobecné obchodní podmínky PXE pro dodávky plynu pro smlouvy uzavřené na Trhu PARC4U aktuální ke dni, který o 14 dní předchází zahájení Nového období a (ii) cena dodávky pro Nové období se sjednává ve výši uvedené v oficiálním ceníku Dodavatele, platném v době odběru plynu, relevantní pro Nové období a dané parametry OM Zákazníka. Nebude-li Zákazník chtít, aby došlo k automatickému prodloužení Smlouvy za ceníkovou cenu, může mimo jiné přijmout také některou z nabídek aktuálně dostupných na trhu PXE „PARC4U“, kde Zákazník provede i zrušení této Smlouvy. Pro vyloučení pochybností platí, že uzavře-li Zákazník s Dodavatelem nejpozději 14 dní před uplynutím doby trvání této Smlouvy smlouvu o sdružených službách dodávky pro OM Zákazníka na dodávkové období bezprostředně navazující na dodávkové období sjednané v této Smlouvě, tato Smlouva se na Nové období neprodlouží a Zákazník již nemusí oznamovat Dodavateli, že na jejím ukončení trvá.</p>
-		</div>
-		<div class="lower-alpha__item mb-70">
-			<span class="lower-alpha__letter">*/</span>
-			<span class="small">Skutečná doba trvání smlouvy se může lišit zejména v případě, že se předpokládané datum zahájení dodávky neshoduje se skutečným datem zahájení 	dodávky. Skutečná doba je uvedena v následujícím odstavci bodu G.4.</span>
+			<p class="mb-20">Tato doba počíná běžet dnem zahájení dodávky do OM Zákazníka a končí dnem, kdy uplyne výše uvedený počet 
+			měsíců od předpokládaného data zahájení dodávky. Pokud den, kdy uplyne tato doba, není posledním dnem kalendářního měsíce, 
+			prodlužuje se účinnost Smlouvy až do bezprostředně následujícího posledního dne kalendářního měsíce.</p>
+			<div class="lower-alpha__item mb-20">
+				<span class="lower-alpha__letter">*/</span>
+				<span class="small">
+					Skutečná doba trvání smlouvy se může lišit zejména v případě, že se předpokládané datum zahájení 
+					dodávky neshoduje se skutečným datem zahájení 	dodávky. Skutečná doba je uvedena v bodu G.4.
+					</span>
+			</div>
+
+			<h3>G.5 Automatické prodloužení Smlouvy o rok za ceníkovou cenu Dodavatele</h3>
+			<p>Pokud Zákazník nejpozději 30 dní před uplynutím doby trvání této Smlouvy nebo prodloužené doby trvání této 
+				Smlouvy neoznámí písemně či prostřednictvím webové aplikace parc4u druhé smluvní straně, že trvá na jejím ukončení, 
+				prodlužuje se trvání této Smlouvy na dobu dalších 12 měsíců (dále též „Nové období“) s tím, že (i) pro Nové období platí Obchodní 
+				podmínky PXE pro dodávky plynu pro smlouvy uzavřené na trhu PARC4U aktuální ke dni zahájení Nového období a (ii) cena dodávky pro Nové období se sjednává ve výši uvedené v oficiálním ceníku 
+				Dodavatele, platném v době odběru plynu, relevantní pro Nové období a dané parametry OM Zákazníka.
+				Oficiálním ceníkem Dodavatele dle této Smlouvy se rozumí cena dle odpovídající nabídky Dodavatele publikované ve webové 
+				aplikaci parc4u. Nedodrží-li však Dodavatel svoji povinnost umístit do webové aplikace parc4u Nabídku, která bude stejně 
+				výhodná nebo výhodnější než veřejná ceníková nabídka Dodavatele pro shodný produkt (tj. nabídka uvedená na jeho webových 
+				stránkách), rozumí se oficiálním ceníkem dle této Smlouvy ceníková nabídka uvedená na webových stránkách Dodavatele.
+				Nebude-li Zákazník chtít, aby došlo k automatickému prodloužení Smlouvy za cenu dle oficiálního ceníku, může mimo jiné 
+				přijmout také některou z nabídek aktuálně dostupných na trhu PARC4U, kde Zákazník provede i zrušení této 
+				Smlouvy. Pro vyloučení pochybností platí, že uzavře-li Zákazník s Dodavatelem nejpozději 30 dní před uplynutím doby 
+				trvání této Smlouvy smlouvu o sdružených službách dodávky pro OM Zákazníka na dodávkové období bezprostředně 
+				navazující na dodávkové období sjednané v této Smlouvě, tato Smlouva se na Nové období neprodlouží a Zákazník již 
+				nemusí oznamovat Dodavateli, že na jejím ukončení trvá.</p>
 		</div>
 		<div class="list__item">
 			<h2>H. Doplňkové služby</h2>
@@ -598,19 +615,22 @@ td {
 				</tbody>
 			</table>
 		</div>
-		<div class="list__item mb-100">
+		<div class="list__item">
 			<h2>I. Plná moc pro dodavatele</h2>
 			<h3>I.1 Ukončení smlouvy se stávajícím dodavatelem</h3>
 			<div class="checkbox-wrapper mb-20">
 				<span class="checkbox @supplier-represented"></span>
-				<span class="control-label">Zákazník požaduje, aby jej dodavatel zastupoval přI ukončení smlouvy se současným dodavatelem</span>
+				<span class="control-label">Zákazník požaduje, aby jej dodavatel zastupoval při ukončení smlouvy se současným dodavatelem</span>
 			</div>
 			<h3>I.2 Plná moc</h3>
 			<p>Zákazník uděluje Dodavateli plnou moc uvedenou v příloze této smlouvy. </p>
 		</div>
 		<div class="list__item">
 			<h2>J. Závěrečná ustanovení</h2>
-			<p>Tato Smlouva se uzavírá v souladu s ustanovením § 72 odst. 2 zák. č. 458/2000 Sb., energetický zákon a § 1746 odst. 2 občanský zákoník č. 89/2012 Sb., ve znění pozdějších předpisů. Zákazník potvrzuje, že se seznámil se Všeobecnými obchodními podmínkami PXE pro dodávky plynu tvořícími přílohu a součást této smlouvy, zavazuje se tuto smlouvu dodržovat a potvrzuje správnost a pravdivost údajů v ní uvedených. </p>
+			<p>Tato Smlouva se uzavírá v souladu s ustanovením § 72 odst. 2 zák. č. 458/2000 Sb., energetický zákon a § 1746 
+			odst. 2 občanský zákoník č. 89/2012 Sb., ve znění pozdějších předpisů. Zákazník potvrzuje, že se seznámil s
+			Obchodními podmínkami PXE pro dodávky plynu tvořícími přílohu a součást této Smlouvy, zavazuje se tuto Smlouvu 
+			dodržovat a potvrzuje správnost a pravdivost údajů v ní uvedených. </p>
 		</div>
 		<div class="list__item">
 			<h2>K. Práva z vadného plnění</h2>
@@ -621,8 +641,8 @@ td {
 			<table>
 				<tbody>
 					<tr>
-						<th>Přílohy a součást této smlouvy tvoří</th>
-						<td>Všeobecné obchodní podmínky PXE pro dodávky elektřiny</td>
+						<th>Přílohy a součást této Smlouvy tvoří</th>
+						<td>Obchodní podmínky PXE pro dodávky plynu</td>
 					</tr>
 					<tr>
 						<th></th>
@@ -633,13 +653,13 @@ td {
 		</div>
 	</div>
 
-	<div class="signatures-text page-end">
+	<div class="signatures-text page-break-before">
 		<h2>Za Dodavatele</h2>
-		<p class="mb-40">V @place , dne @date</p>
-		<table class="mb-20">
+		<p class="mb-5">V @place, dne @date</p>
+		<table class="mb-10">
 			<tbody>
 				<tr>
-					<th>Jméno</th>
+					<th>Jméno a příjmení</th>
 					<td>@supplier-contact-name</td>
 				</tr>
 				<tr>
@@ -652,7 +672,7 @@ td {
 		<table>
 			<tbody>
 				<tr>
-					<th>Jméno</th>
+					<th>Jméno a příjmení</th>
 					<td>@supplier-contact-two-name</td>
 				</tr>
 				<tr>
@@ -663,16 +683,16 @@ td {
 		</table>
 		@supplier-contact-two-comment-end
 
-		<h2>Za Zákazníka</h2>
-		<p class="mb-40">V @client-permanent-address-town , dne @date</p>
-		<table class="mb-20">
+		<h2 class="pt-40">Zákazník / Za Zákazníka</h2>
+		<p class="mb-5">V @client-permanent-address-town, dne @date</p>
+		<table class="mb-10">
 			<tbody>
 				<tr>
-					<th>Jméno osoby jednající za Zákazníka</th>
+					<th>Jméno Zákazníka / Jméno a příjmení osoby jednající za Zákazníka</th>
 					<td>@client-contact-name</td>
 				</tr>
 				<tr>
-					<th>Funkce</th>
+					<th>Funkce osoby jednající za Zákazníka</th>
 					<td>@client-contact-function</td>
 				</tr>
 			</tbody>
@@ -681,27 +701,35 @@ td {
 		<table>
 			<tbody>
 				<tr>
-					<th>Jméno osoby jednající za Zákazníka</th>
+					<th>Jméno Zákazníka / Jméno a příjmení osoby jednající za Zákazníka</th>
 					<td>@client-contacttwo-name</td>
 				</tr>
 				<tr>
-					<th>Funkce</th>
+					<th>Funkce osoby jednající za Zákazníka</th>
 					<td>@client-contacttwo-function</td>
 				</tr>
 			</tbody>
 		</table>
 		@client-contacttwo-comment-end
+		<table>
+			<tbody>
+				<tr>
+					<th>Podepsáno pomocí SMS kódu v aplikaci parc4u.cz v</th>
+					<td>@timestamp</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 
-	<h1 class="mb-20">Všeobecné obchodní podmínky PXE pro dodávky plynu</h1>
-	<p class="mb-70">Pro smlouvy uzavřené na trhu PARC4U</p>
-	<div class="list page-end-2">
+	<h1 class="mb-10 page-break-before">Obchodní podmínky PXE pro dodávky plynu</h1>
+	<p class="mb-20">Pro smlouvy uzavřené na trhu PARC4U</p>
+	<div class="list">
 		<div class="list__item">
 			<h2>I. Základní ustanovení</h2>
 			<div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">1.1.</span>
-					Tyto obchodní podmínky (dále jen „VOP“) upravují práva a povinnosti Dodavatele a Zákazníka založené Smlouvou o sdružených službách dodávky plynu uzavřenou mezi Dodavatelem a Zákazníkem na trhu PARC4U zprostředkovatele - společnosti POWER EXCHANGE CENTRAL EUROPE, a.s., se sídlem Rybná 14/682, 110 05 Praha 1 (dále jen „PXE“). Pokud se v těchto VOP hovoří o Smlouvě, rozumí se tím výše uvedená smlouva o sdružených službách dodávky plynu spolu se všemi jejími přílohami, včetně těchto VOP (dále jen „Smlouva“).
+					Tyto obchodní podmínky (dále jen „OP“) upravují práva a povinnosti Dodavatele a Zákazníka založené Smlouvou o sdružených službách dodávky plynu uzavřenou mezi Dodavatelem a Zákazníkem na trhu PARC4U zprostředkovatele - společnosti POWER EXCHANGE CENTRAL EUROPE, a.s., se sídlem Rybná 14/682, 110 05 Praha 1 (dále jen „PXE“). Pokud se v těchto OP hovoří o Smlouvě, rozumí se tím výše uvedená smlouva o sdružených službách dodávky plynu spolu se všemi jejími přílohami, včetně těchto OP (dále jen „Smlouva“).
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">1.2.</span>
@@ -709,12 +737,12 @@ td {
 				</div>
 			</div>
 		</div>
-		<div class="list__item mb-0">
+		<div class="list__item">
 			<h2>II. Proces uzavření Smlouvy</h2>
 			<div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">2.1.</span>
-					Smlouva o sdružených službách dodávky plynu na trhu PARC4U (dále též „Trh PXE“) se uzavírá elektronicky, prostřednictvím zabezpečené webové aplikace na internetových stránkách PXE (dále jen „Webová aplikace“), a to způsobem, který je popsán ve Všeobecných podmínkách účasti na trhu PARC4U provozovaného PXE.
+					Smlouva o sdružených službách dodávky plynu na trhu PARC4U (dále též „Trh PXE“) se uzavírá elektronicky, prostřednictvím zabezpečené webové aplikace na internetových stránkách PXE (dále jen „Webová aplikace“), a to způsobem, který je popsán v části III. těchto OP.
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">2.2.</span>
@@ -727,43 +755,98 @@ td {
 			<div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">3.1.</span>
-					Zákazník vyjadřuje souhlas s návrhem Smlouvy (dále jen „Nabídka“) elektronickým potvrzením návrhu ve Webové aplikaci. Smlouva je uzavřena splněním poslední z těchto podmínek: (i) Zákazník vyjádřil s Nabídkou souhlas, (ii) byla provedena včas mikrotransakce za účelem ověření totožnosti Zákazníka podle následujícího odstavce a (iii) Dodavatel a Zákazník obdrželi notifikaci o splnění obou podmínek dle bodů (i) a (ii).
+					Do Webové aplikace může každý registrovaný dodavatel umístit svůj návrh na uzavření Smlouvy (dále jen „Nabídka“).
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">3.2.</span>
-					Zákazník za účelem ověření svojí totožnosti provede převod peněžní částky ve výši 1,- Kč ze svého peněžního účtu na účet PXE vedený u České spořitelny, a.s. č. 8017122/0800 (dále též „Mikrotransakce“) do 5 pracovních dnů po vyjádření souhlasu Zákazníka s návrhem Smlouvy ve Webové aplikaci. To neplatí, pokud Mikrotransakce byla provedena Zákazníkem již dříve v souvislosti s uzavřením jiné smlouvy na Trhu PXE, a to bez ohledu na to, zda šlo o včasnou nebo pozdně provedenou Mikrotransakci, která jinak z důvodu prodlení k uzavření této jiné smlouvy nevedla. Mikrotransakce je provedena připsáním dané částky na účet PXE. 
+					Umístěním Nabídky do Webové aplikace je učiněn návrh registrovaného dodavatele na uzavření Smlouvy ve formě veřejné nabídky s tím, že Smlouva je uzavřena s každým, kdo Nabídku přijme, jsou-li splněny všechny ostatní podmínky pro její uzavření (viz níže). 
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">3.3.</span>
-					Navazuje-li dodávka do OM Zákazníka dle Nabídky bezprostředně na předchozí dodávku dle smlouvy o sdružených službách dodávky uzavřené rovněž prostřednictvím Webové aplikace, pak k uzavření Smlouvy na základě takové Nabídky nedojde v těchto případech:
+					Nabídka musí obsahovat
 					<div class="lower-alpha__item">
 						<span class="lower-alpha__letter">a/</span>
-						v okamžiku vyjádření souhlasu s Nabídkou Zákazníkem zbývá méně než 30 dní do ukončení smluvního závazku Zákazníka ke stávajícímu dodavateli, kterým není Dodavatel, nebo
+						cenu plynu
 					</div>
 					<div class="lower-alpha__item">
 						<span class="lower-alpha__letter">b/</span>
-						v okamžiku vyjádření souhlasu s Nabídkou Zákazníkem nebyl dosud učiněn úkon směřující k ukončení smluvního závazku Zákazníka ke stávajícímu dodavateli, kterým není Dodavatel, a zbývá méně než 30 dní do posledního dne, kdy Zákazník může ještě včas a bez sankce takový závazek ukončit, nebo
+						výši stálého měsíčního platu za odběrné místo s tím, že nulová výše tohoto platu je přípustná,
 					</div>
 					<div class="lower-alpha__item">
 						<span class="lower-alpha__letter">c/</span>
-						v okamžiku vyjádření souhlasu s Nabídkou Zákazníkem nebyl dosud učiněn úkon směřující k ukončení smluvního závazku Zákazníka ke stávajícímu dodavateli, kterým je Dodavatel, a závazek již Zákazník nemůže včas a bez sankce ukončit.
+						distribuční sazbu a případně hodnotu jističe, na kterou se Nabídka vztahuje,
+					</div>
+					<div class="lower-alpha__item">
+						<span class="lower-alpha__letter">d/</span>
+						dobu, na kterou se sjednává dodávka,
+					</div>
+					<div class="lower-alpha__item">
+						<span class="lower-alpha__letter">e/</span>
+						dobu platnosti Nabídky,
+					</div>
+					<div class="lower-alpha__item">
+						<span class="lower-alpha__letter">f/</span>
+						případně další omezující podmínky dle aktuální funkcionality Webové aplikace.
 					</div>
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">3.4.</span>
-					Nenavazuje-li dodávka do OM Zákazníka dle Smlouvy bezprostředně na předchozí dodávku na základě smlouvy o sdružených službách dodávky uzavřené rovněž prostřednictvím Webové aplikace (tj. zejména jde-li o první Smlouvu pro dané OM Zákazníka, uzavřenou přes Webovou aplikaci), pak k uzavření Smlouvy na základě takové Nabídky nedojde, pokud:
-					<div class="lower-alpha__item">
-						<span class="lower-alpha__letter">a/</span>
-						v okamžiku vyjádření souhlasu s Nabídkou Zákazníkem zbývá méně než 30 dní do ukončení smluvního závazku Zákazníka ke stávajícímu dodavateli, a to i když je jím Dodavatel, nebo
-					</div>
-					<div class="lower-alpha__item">
-						<span class="lower-alpha__letter">b/</span>
-						v okamžiku vyjádření souhlasu s Nabídkou Zákazníkem nebyl dosud učiněn úkon směřující k ukončení smluvního závazku Zákazníka ke stávajícímu dodavateli, a to i když je jím Dodavatel, a zbývá méně než 30 dní do posledního dne, kdy Zákazník může ještě včas a bez sankce takový závazek ukončit 
-					</div>
-					a zároveň Dodavatel do 15 dnů od vyjádření souhlasu Zákazníka s Nabídkou písemně Zákazníkovi sdělil, že z tohoto důvodu k uzavření Smlouvy nedošlo.
+					Doba platnosti Nabídky může být omezena.
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">3.5.</span>
+					Nabídka může obsahovat nabídku doplňkových služeb či jiných doplňkových plnění poskytovaných vedle sdružených služeb dodávky. Obsahuje-li Nabídka nabídku doplňkových služeb nebo jiných doplňkových plnění, musí definovat podmínky jejich poskytování.
+				</div>
+				<div class="lower-alpha__item lower-alpha__item--number">
+					<span class="lower-alpha__letter">3.6.</span>
+					Po registraci musí Zákazník pro zobrazení dostupných Nabídek vyplnit ve Webové aplikaci předepsaný formulář, kde uvede pravdivé údaje o svém odběrném místě, kam dodávku plynu požaduje a o smluvním vztahu se stávajícím dodavatelem. Zákazník dále ve formuláři volí např. způsob placení, a zda požaduje, aby jej Dodavatel zastupoval při ukončení vztahu se stávajícím dodavatelem. 
+				</div>
+				<div class="lower-alpha__item lower-alpha__item--number">
+					<span class="lower-alpha__letter">3.7.</span>
+					Zákazník může ve Webové aplikaci pro své zadané odběrné místo zvolit dodavatele plynu výběrem jedné z aktuálních Nabídek. Zákazníkovi budou zobrazeny pouze takové Nabídky, pokud odpovídají jím zvolenému datu zahájení dodávky a parametrům jeho odběrného místa. Zákazníkovi zpravidla nebudou zobrazeny rovněž takové Nabídky, které Webová aplikace na základě Zákazníkem zadaných údajů, vyhodnotí tak, že nemohou vést k uzavření Smlouvy ve smyslu bodu 3.12 nebo 3.13 těchto OP.
+				</div>
+				<div class="lower-alpha__item lower-alpha__item--number">
+					<span class="lower-alpha__letter">3.8.</span>
+					Po výběru Nabídky zadá Zákazník své osobní údaje, pokud již nebyly zadány dříve, a následně je automaticky vygenerován písemný návrh Smlouvy, který Zákazník může akceptovat výhradně elektronickým potvrzením svého souhlasu se Smlouvou. Elektronické potvrzení souhlasu může probíhat dle možností Webové aplikace prostřednictvím touchpadu nebo jiného obdobného zařízení pro snímání vlastnoručního podpisu, prostřednictvím sms, nebo jiným vhodným způsobem.
+				</div>
+				<div class="lower-alpha__item lower-alpha__item--number">
+					<span class="lower-alpha__letter">3.9.</span>
+					Zákazník za účelem ověřeníposkytnutí údajů o svojí totožnosti provede převod peněžní částky ve výši 1,- Kč ze svého peněžního účtu na účet PXE vedený u České spořitelny, a.s. č. 8017122/0800 (dále též „Mikrotransakce“) do 5 pracovních dnů po vyjádření souhlasu Zákazníka s návrhem Smlouvy ve Webové aplikaci. To neplatí, pokud Mikrotransakce byla provedena Zákazníkem již dříve v souvislosti s uzavřením jiné smlouvy na Trhu PXE, a to bez ohledu na to, zda šlo o včasnou nebo pozdně provedenou Mikrotransakci, která jinak z důvodu prodlení k uzavření této jiné smlouvy nevedla. Mikrotransakce je provedena připsáním dané částky na účet PXE. 
+				</div>
+				<div class="lower-alpha__item lower-alpha__item--number">
+					<span class="lower-alpha__letter">3.10.</span>
+					Smlouva je uzavřena splněním poslední z těchto podmínek: (i) Zákazník vyjádřil s návrhem Smlouvy souhlas ve Webové aplikaci, (ii) byla provedena včas mikrotransakce za účelem poskytnutí údajů o totožnosti Zákazníka podle předchozího odstavce (pouze v případě, jde-li o první smlouvu uzavřenou Zákazníkem ve Webové aplikaci) a (iii) Dodavatel a Zákazník obdrželi notifikaci o splnění obou podmínek dle bodů (i) a (ii).
+				</div>
+				<div class="lower-alpha__item lower-alpha__item--number">
+					<span class="lower-alpha__letter">3.11.</span>
+					Smlouva je tvořena (i) Nabídkou, (ii) údaji o Zákazníkovi a jeho odběrném místě zadanými Zákazníkem ve Webové aplikaci, (iii) ujednáními obsaženými ve vzorové smlouvě o sdružených službách dodávky umístěné ve Webové aplikaci, platné ke dni, kdy zákazník vyjádřil s  návrhem Smlouvy ve Webové aplikaci souhlas a (iv) obchodními podmínkami dodávky umístěnými ve Webové aplikaci, platnými ke dni, kdy zákazník vyjádřil s  návrhem Smlouvy ve Webové aplikaci souhlas.
+				</div>
+				<div class="lower-alpha__item lower-alpha__item--number">
+					<span class="lower-alpha__letter">3.12.</span>
+					Navazuje-li dodávka do OM Zákazníka dle Nabídky bezprostředně na předchozí dodávku dle smlouvy o sdružených službách dodávky uzavřené rovněž prostřednictvím Webové aplikace, pak k uzavření Smlouvy na základě takové Nabídky nedojde, pokud v okamžiku vyjádření souhlasu s Nabídkou Zákazníkem zbývá méně než:
+					<div class="lower-alpha__item">
+						<span class="lower-alpha__letter">a/</span>
+						30 dní do sjednaného konce doby trvání dodávky u stávajícího dodavatele, kterým není Dodavatel, nebo
+					</div>
+					<div class="lower-alpha__item">
+						<span class="lower-alpha__letter">b/</span>
+						15 dní do sjednaného konce doby trvání dodávky u stávajícího dodavatele, kterým je Dodavatel.
+					</div>
+				</div>
+				<div class="lower-alpha__item lower-alpha__item--number">
+					<span class="lower-alpha__letter">3.13.</span>
+					Nenavazuje-li dodávka do OM Zákazníka dle Smlouvy bezprostředně na předchozí dodávku na základě smlouvy o sdružených službách dodávky uzavřené rovněž prostřednictvím Webové aplikace (tj. zejména jde-li o první Smlouvu pro dané OM Zákazníka, uzavřenou přes Webovou aplikaci), pak k uzavření Smlouvy na základě takové Nabídky nedojde, pokud v okamžiku vyjádření souhlasu s Nabídkou Zákazníkem zbývá méně než:
+					<div class="lower-alpha__item">
+						<span class="lower-alpha__letter">a/</span>
+						30 dní do sjednaného konce doby trvání dodávky u stávajícího dodavatele, a to i když je jím Dodavatel, nebo
+					</div>
+					<div class="lower-alpha__item">
+						<span class="lower-alpha__letter">b/</span>
+						30 dní do posledního dne, kdy Zákazník může ještě včas a bez sankce ukončit smluvní závazek ke stávajícímu dodavateli, a to i když je jím Dodavatel. 
+					</div>
+				</div>
+				<div class="lower-alpha__item lower-alpha__item--number">
+					<span class="lower-alpha__letter">3.14.</span>
 					V případě sporu o existenci smluvního vztahu mezi Dodavatelem a Zákazníkem, se považuje zaplacení první zálohové platby nebo platby za vyúčtování dodávky plynu (podle toho, která skutečnost nastane dříve) za souhlasný projev vůle Zákazníka s uzavřením Smlouvy.
 				</div>
 			</div>
@@ -777,14 +860,14 @@ td {
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">4.2.</span>
-					Byl-li k tomu Dodavatel Zákazníkem zmocněn, je Dodavatel povinen ukončit za Zákazníka smluvní vztah se stávajícím dodavatelem tak, aby dodávka do OM Zákazníka ze strany Dodavatele mohla být zahájena ke sjednanému datu nebo, nebylo-li takové datum sjednáno, bez zbytečného odkladu po uzavření Smlouvy; v nezbytných případech na vyžádání Dodavatele je Zákazník povinen Dodavateli bezodkladně udělit k takovému úkonu plnou moc v listinné podobě.
+					Byl-li k tomu Dodavatel Zákazníkem zmocněn, je Dodavatel povinen ukončit za Zákazníka smluvní vztah se stávajícím dodavatelem tak, aby dodávka do OM Zákazníka ze strany Dodavatele mohla být zahájena ke sjednanému datu nebo, nebylo-li takové datum sjednáno, bez zbytečného odkladu po uzavření Smlouvy; v nezbytných případech na vyžádání Dodavatele je Zákazník povinen Dodavateli bezodkladně udělit k takovému úkonu plnou moc v listinné podobě anebo v listinné podobě s úředně ověřeným podpisem.
 				</div>
 			</div>
 		</div>
 		<div class="list__item">
 			<h2>V. Práva a povinnosti Smluvních stran po zahájení dodávky plynu</h2>
 			<div>
-				<div class="lower-alpha__item lower-alpha__item--number mb-20">
+				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">5.1.</span>
 					Dodavatel se zavazuje 
 					<div class="lower-alpha__item">
@@ -805,7 +888,9 @@ td {
 					Zákazník se zavazuje
 					<div class="lower-alpha__item">
 						<span class="lower-alpha__letter">a/</span>
-						zaplatit Dodavateli cenu za dodaný plyn, stálý měsíční plat za odběrné místo (je-li sjednán), cenu za související služby v plynárenství a rovněž všechny povinné daně a ostatní platby, zejména daň z plynu a daň z přidané hodnoty (dále společně též „Celková cena“);
+						zaplatit Dodavateli cenu za dodaný plyn, stálou měsíční platbu za odběrné místo (je-li sjednána), 
+						cenu za související služby v plynárenství a rovněž všechny povinné daně a ostatní platby, zejména daň 
+						z plynu a daň z přidané hodnoty (dále společně též „Celková cena“);
 					</div>
 					<div class="lower-alpha__item">
 						<span class="lower-alpha__letter">b/</span>
@@ -813,7 +898,9 @@ td {
 					</div>
 					<div class="lower-alpha__item">
 						<span class="lower-alpha__letter">c/</span>
-						strpět v nezbytném rozsahu omezení nebo přerušení dodávky plynu při předcházení stavu nouze, při stavu nouze a při odstraňování stavu nouze a v dalších případech stanovených zákonem a dodržovat opatření přijímaná v těchto případech, včetně pokynů Distributora;
+						strpět v nezbytném rozsahu omezení nebo přerušení dodávky plynu při předcházení stavu nouze, 
+						při stavu nouze a při odstraňování stavu nouze a v dalších případech stanovených zákonem a dodržovat 
+						opatření přijímaná v těchto případech, včetně pokynů Distributora;
 					</div>
 					<div class="lower-alpha__item">
 						<span class="lower-alpha__letter">d/</span>
@@ -826,12 +913,12 @@ td {
 				</div>
 			</div>
 		</div>
-		<div class="list__item">
+		<div class="list__item page-break-before">
 			<h2>VI.	Cena a platební podmínky</h2>
 			<div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">6.1.</span>
-					Cena za dodávku plynu a stálý měsíční plat za odběrné místo jsou uvedeny ve Smlouvě, a to v úrovni bez DPH. Cena za služby distribuční soustavy a další regulované platby je stanovena cenovými rozhodnutími Energetického regulačního úřadu. Dodavatel je oprávněn k těmto cenám připočíst DPH v sazbě platné ke dni zdanitelného plnění.
+					Cena za dodávku plynu a stálou měsíční platbu za odběrné místo jsou uvedeny ve Smlouvě, a to v úrovni včetně DPH. Cena za služby distribuční soustavy a další regulované platby je stanovena cenovými rozhodnutími Energetického regulačního úřadu. V případě změny sazby DPH, Dodavatel ode dne účinnosti této změny upraví sjednané ceny tak, že k cenám v úrovni bez DPH připočte DPH v nové sazbě platné ke dni zdanitelného plnění.
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">6.2.</span>
@@ -839,7 +926,7 @@ td {
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">6.3.</span>
-					Zákazník je povinen hradit Dodavateli zálohy na Celkovou cenu. Výše záloh je uvedena ve Smlouvě. V případě výraznější změny spotřeby Zákazníka oproti spotřebě předpokládané je Dodavatel oprávněn upravit výši anebo četnost záloh pro následující fakturační období. Změnu je Dodavatel povinen Zákazníkovi předem oznámit. 
+					Zákazník je povinen hradit Dodavateli zálohy na Celkovou cenu. Výše záloh je uvedena ve Smlouvě. V případě, že údaj o předpokládané spotřebě Zákazníka uvedený ve Smlouvě je neadekvátní skutečné spotřebě Zákazníka zjištěné z údajů Distributora pro předchozí období, je Dodavatel oprávněn výši záloh pro první fakturační období upravit tak, aby se skutečnou spotřebou korespondovala. Neadekvátním údajem se rozumí, pokud se skutečná spotřeba v předchozím období odlišuje od předpokládané spotřeby uvedené ve Smlouvě o více než 30%. V případě výraznější změny spotřeby Zákazníka oproti spotřebě předpokládané je Dodavatel oprávněn upravit výši anebo četnost záloh též pro následující fakturační období. Změnu výše nebo četnosti záloh je Dodavatel povinen Zákazníkovi předem oznámit e-mailem.
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">6.4.</span>
@@ -851,11 +938,11 @@ td {
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">6.6.</span>
-					Na základě odečtu stavu Plynoměru budou Zákazníkem zaplacené zálohy v příslušném fakturačním období zúčtovány v příslušné faktuře. 
+					Na základě odečtu stavu Plynoměru budou Zákazníkem zaplacené zálohy v příslušném fakturačním období zúčtovány v příslušné faktuře. Přeplatek záloh může dodavatel v rámci zúčtování vrátit Zákazníkovi nebo převést do dalšího fakturačního období pro úhradu budoucích záloh.
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">6.7.</span>
-					Není-li dohodnuto jinak, jsou faktury splatné do čtrnácti (14) dnů od data vystavení faktury. 
+					Není-li dohodnuto jinak, jsou faktury splatné do 14 dnů od data vystavení faktury. 
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">6.8.</span>
@@ -867,7 +954,7 @@ td {
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">6.10.</span>
-					Platby provádí Zákazník způsobem sjednaným ve Smlouvě. Způsob placení může Zákazník měnit. Způsob vrácení případného přeplatku je určen ve Smlouvě.
+					Platby provádí Zákazník způsobem sjednaným ve Smlouvě. Způsob placení může Zákazník měnit. Provedenou změnu způsobu placení Dodavatel bez zbytečného odkladu potvrdí Zákazníkovi e-mailem. Způsob vrácení případného přeplatku je určen ve Smlouvě.
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">6.11.</span>
@@ -879,7 +966,7 @@ td {
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">6.13.</span>
-					Zákazník má v případě zjištění chyby ve vyúčtování plateb, zejména při zjištění chyby ve faktuře, právo chybu písemně reklamovat na kontaktní adrese Dodavatele, ve lhůtě nejpozději do 30 kalendářních dnů ode dne splatnosti předmětné platby. Reklamace nemá odkladný účinek na splatnost platby, nedohodnou-li se smluvní strany jinak. Reklamaci Dodavatel prověří a výsledek šetření oznámí Zákazníkovi do 15 kalendářních dnů od obdržení reklamace. Tato lhůta může být v odůvodněných případech prodloužena. Bude-li reklamace oprávněná, vystaví Dodavatel nové vyúčtování.
+					Zákazník má v případě zjištění chyby ve vyúčtování plateb, zejména při zjištění chyby ve faktuře, právo chybu písemně reklamovat na kontaktní adrese Dodavatele, ve lhůtě nejpozději do 30 kalendářních dnů ode dne splatnosti předmětné platby. Reklamace nemá odkladný účinek na splatnost platby, nedohodnou-li se smluvní strany jinak. Reklamaci Dodavatel prověří a výsledek šetření oznámí Zákazníkovi do 1530 kalendářních dnů od obdržení reklamace. Tato lhůta může být v odůvodněných případech prodloužena. Bude-li reklamace oprávněná, vystaví Dodavatel nové vyúčtování nebo opravný daňový doklad.
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">6.14.</span>
@@ -891,7 +978,7 @@ td {
 				</div>
 			</div>
 		</div>
-		<div class="list__item mb-40">
+		<div class="list__item">
 			<h2>VII. Zákaznická podpora</h2>
 			<div>
 				<div class="lower-alpha__item lower-alpha__item--number">
@@ -907,12 +994,16 @@ td {
 		<div class="list__item">
 			<h2>VIII. Zánik smlouvy</h2>
 			<div>
-				<div class="lower-alpha__item lower-alpha__item--number mb-20">
+				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">8.1.</span>
 					Smluvní strany mohou Smlouvu ukončit písemnou dohodou.
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">8.2.</span>
+					Smlouva zaniká, pokud se ani do 3 měsíců od předpokládaného data zahájení dodávky nepodaří zahájit dodávku do OM Zákazníka podle Smlouvy. Smlouva zanikne marným uplynutím výše uvedené lhůty. Právo na smluvní pokutu a náhradu škody zánikem Smlouvy není dotčeno. Dodavatel je povinen e-mailem Zákazníkovi potvrdit zánik Smlouvy nejpozději do 5 pracovních dnů od zániku Smlouvy.
+				</div>
+				<div class="lower-alpha__item lower-alpha__item--number">
+					<span class="lower-alpha__letter">8.3.</span>
 					Zákazník je oprávněn vypovědět Smlouvu bez výpovědní doby v případě, že:
 					<div class="lower-alpha__item">
 						<span class="lower-alpha__letter">a)</span>
@@ -921,7 +1012,7 @@ td {
 							<span class="lower-alpha__letter">(i)</span>
 							do OM Zákazníka nebude včas zahájena dodávka plynu nebo bude přerušena dodávka plynu, vyjma případů, kdy se bude jednat o mimořádnou nepředvídatelnou a nepřekonatelnou překážku vzniklou nezávisle na vůli Dodavatele (§ 2913 odst. 2 obč. zák.) nebo o situaci, kdy je dle zákona Dodavatel oprávněn přerušit nebo omezit dodávku plynu, nebo
 						</div>
-						<div class="lower-alpha__item">
+						<div class="lower-alpha__item page-break-before">
 							<span class="lower-alpha__letter">(ii)</span>
 							bude v prodlení se zaplacením splatného závazku, který neuhradí ani po písemném upozornění Zákazníka, nebo
 						</div>
@@ -940,7 +1031,7 @@ td {
 					</div>
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
-					<span class="lower-alpha__letter">8.3.</span>
+					<span class="lower-alpha__letter">8.4.</span>
 					Dodavatel je oprávněn vypovědět Smlouvu bez výpovědní doby, pokud:
 					<div class="lower-alpha__item">
 						<span class="lower-alpha__letter">a/</span>
@@ -948,44 +1039,47 @@ td {
 					</div>
 					<div class="lower-alpha__item">
 						<span class="lower-alpha__letter">b/</span>
-						Zákazník neoprávněně odebírá či odebíral plyn,
+						Zákazník při uzavření Smlouvy uvedl chybné údaje o OM Zákazníka a tyto chybné údaje měly vliv na Dodavatelem nabídnutou cenu, zejména chybnou distribuční sazbu nebo hodnotu jističe; z tohoto důvodu lze Smlouvu vypovědět nejpozději do zahájení dodávky,
 					</div>
 					<div class="lower-alpha__item">
 						<span class="lower-alpha__letter">c/</span>
-						Zákazník neukončil smlouvu s předchozím dodavatelem nejpozději do zahájení dodávky plynu dle Smlouvy, pokud nezmocnil Zákazník k tomuto úkonu Dodavatele;
+						Zákazník neoprávněně odebírá či odebíral plyn,
 					</div>
 					<div class="lower-alpha__item">
 						<span class="lower-alpha__letter">d/</span>
-						Zákazník opakovaně neposkytne součinnost nezbytnou pro řádné plnění závazků Dodavatelem, a to i přesto, že byl Dodavatelem písemně upozorněn a nebude Zákazníkem sjednána náprava ani v dodatečné přiměřené lhůtě stanovené Dodavatelem, nebo
+						Zákazník neukončil smlouvu s předchozím dodavatelem nejpozději do zahájení dodávky plynu dle Smlouvy, pokud nezmocnil Zákazník k tomuto úkonu Dodavatele;
 					</div>
 					<div class="lower-alpha__item">
 						<span class="lower-alpha__letter">e/</span>
+						Zákazník opakovaně neposkytne součinnost nezbytnou pro řádné plnění závazků Dodavatelem, a to i přesto, že byl Dodavatelem písemně upozorněn a nebude Zákazníkem sjednána náprava ani v dodatečné přiměřené lhůtě stanovené Dodavatelem, nebo
+					</div>
+					<div class="lower-alpha__item">
+						<span class="lower-alpha__letter">f/</span>
 						bylo soudem rozhodnuto o úpadku Zákazníka a jeho řešení konkursem nebo oddlužením, nebo o zamítnutí insolvenčního návrhu pro nedostatek majetku Zákazníka anebo o zrušení konkursu, protože majetek Zákazníka je zcela nepostačující podle zák. č. 182/2006 Sb., o úpadku a způsobech jeho řešení.
 					</div>
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
-					<span class="lower-alpha__letter">8.4.</span>
+					<span class="lower-alpha__letter">8.5.</span>
 					Účinky výpovědi Smlouvy bez výpovědní doby nastávají doručením písemného sdělení o výpovědi druhé smluvní straně.
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
-					<span class="lower-alpha__letter">8.5.</span>
+					<span class="lower-alpha__letter">8.6.</span>
 					Změna odběratele v OM Zákazníka bez přerušení dodávky a bez změny dodavatele je podmíněna řádným ukončením předchozího smluvního vztahu a vyrovnáním veškerých závazků Zákazníka vůči Dodavateli.
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
-					<span class="lower-alpha__letter">8.6.</span>
+					<span class="lower-alpha__letter">8.7.</span>
 					Dochází-li k ukončení Smlouvy, může Zákazník ke dni zániku Smlouvy provést kontrolní odečet Plynoměru („Samoodečet“) a doručit jej Dodavateli. Pokud však nebudou splněny zákonné podmínky pro Samoodečet, nebude k němu Dodavatel přihlížet.
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
-					<span class="lower-alpha__letter">8.7.</span>
+					<span class="lower-alpha__letter">8.8.</span>
 					Hodlá-li Zákazník ukončit odběr plynu v OM Zákazníka, je povinen provést předem odhlášení odběru a dohodnout termín odpojení Plynoměru. Neumožní-li Zákazník Distributorovi provést konečný odečet nebo odpojit Plynoměr, odpovídá za celý odběr až do té doby, než umožní tyto úkony provést.
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
-					<span class="lower-alpha__letter">8.8.</span>
+					<span class="lower-alpha__letter">8.9.</span>
 					Zákazník, který je spotřebitelem, je oprávněn Smlouvu bez uvedení důvodu ukončit za podmínek uvedených v § 11a zákona č. 458/2000 Sb., energetický zákon (viz též poučení v textu Smlouvy). Dodavatel je povinen Zákazníkovi takové ukončení Smlouvy, došlo-li k němu elektronicky ve Webové aplikaci nebo na internetu prostřednictvím webového formuláře, potvrdit v textové podobě.
 				</div>
 			</div>
 		</div>
-
 		<div class="list__item">
 			<h2>IX.	Ochrana osobních údajů</h2>
 			<div>
@@ -993,7 +1087,7 @@ td {
 					<span class="lower-alpha__letter">9.1.</span>
 					Z důvodu plnění smluvních povinností, povinností uložených právními předpisy a z důvodu ochrany oprávněných zájmů Dodavatele, zpracovává Dodavatel identifikační a kontaktní údaje a některé další údaje o Zákazníkovi a osobách jednajících za Zákazníka, které v souvislosti s uzavřením Smlouvy Zákazník uvedl. Tyto údaje Dodavatel zpracovává pro účely uzavření Smlouvy, poskytování plnění podle Smlouvy, ukončení Smlouvy a uplatňování práv ze Smlouvy.
 				</div>
-				<div class="lower-alpha__item lower-alpha__item--number mb-20">
+				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">9.2.</span>
 					Proti zpracování osobních údajů na základě oprávněných zájmů Dodavatele je Zákazník oprávněn kdykoliv podat námitku.
 				</div>
@@ -1016,9 +1110,9 @@ td {
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">10.2.</span>
-					V případě soudního řízení, jehož účastníkem je Zákazník, který má sídlo, bydliště či místo podnikání v zahraničí, je místně příslušný soud dle sídla Dodavatele a rozhodným právem je právo České republiky.
+					V případě soudního řízení, jehož účastníkem je Zákazník, který  není spotřebitelem, je místně příslušný soud dle sídla Dodavatele a rozhodným právem je právo České republiky.
 				</div>
-				<div class="lower-alpha__item lower-alpha__item--number full-page">
+				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">10.3.</span>
 					Spory mezi Dodavatelem a Zákazníkem v postavení spotřebitele vyplývající ze Smlouvy lze řešit mimosoudně u Energetického regulačního úřadu, se sídlem Masarykovo náměstí 5, 586 01 Jihlava, www.eru.cz.
 				</div>
@@ -1026,14 +1120,14 @@ td {
 		</div>
 	</div>
 
-	<h1>Plná moc pro dodavatele plynu</h1>
-	<p class="mb-70">Příloha smlouvy uzavřené na trhu PARC4U</p>
+	<h1 class="mb-10 page-break-before">Plná moc pro dodavatele plynu</h1>
+	<p class="mb-20">Příloha smlouvy uzavřené na trhu PARC4U</p>
 
-	<h2 class="mb-20">Zmocnitel - zákazník</h2>
-	<table class="mb-40">
+	<h2>Zmocněnec - zákazník</h2>
+	<table class="mb-20">
 		<tbody>
 			<tr>
-				<th>Název právnické osoby</th>
+				<th>Název právnické osoby / jméno a příjmení podnikající fyzické osoby</th>
 				<td>@client-name</td>
 			</tr>
 			<tr>
@@ -1041,7 +1135,7 @@ td {
 				<td>@client-ico</td>
 			</tr>
 			<tr>
-				<th>Se sídlem</th>
+				<th class="address-title">Sídlo</th>
 				<td></td>
 			</tr>
 			<tr>
@@ -1063,8 +1157,8 @@ td {
 		</tbody>
 	</table>
 
-	<h2 class="mb-20">Zmocněnec – dodavatel</h2>
-	<table class="mb-40">
+	<h2>Zmocnitel – dodavatel</h2>
+	<table class="mb-20">
 		<tbody>
 			<tr>
 				<th>Název</th>
@@ -1089,47 +1183,63 @@ td {
 		</tbody>
 	</table>
 
-	<h2 class="mb-20">Specifikace odběrného místa</h2>
-	<table class="mb-70">
+	<h2>Specifikace odběrného místa</h2>
+	<table>
 		<tbody>
 			<tr>
 				<th>Komodita</th>
 				<td>Plyn</td>
 			</tr>
 			<tr>
-				<th>EAN</th>
+				<th>EIC</th>
 				<td>@client-ean</td>
 			</tr>
 		</tbody>
 	</table>
 
-	<h2 class="mb-20">Plná moc k ukončení smlouvy se současným dodavatelem</h2>
-	<p class="mb-20">
+	<h2>Plná moc k ukončení smlouvy se současným dodavatelem</h2>
+	<p class="mb-10">
 		Zákazník zmocňuje dodavatele, aby za něj ukončil smlouvu o sdružených službách dodávky se současným dodavatelem plynu pro výše uvedené odběrné místo.
 	</p>
-	<div class="mb-40">Ano/ne</div>
+	<div class="mb-20">@power-attorney-to-terminate-contract</div>
 
-	<h2 class="mb-20">Plná moc k ostatním úkonům</h2>
-	<div class="mb-20">
+	<h2>Plná moc k ostatním úkonům</h2>
+	<div class="mb-10">
 		Zákazník uděluje Dodavateli plnou moc k vyžádání a přijímání jakýchkoli informací týkajících se výše uvedeného odběrného místa Zákazníka a stávajícího smluvního závazku Zákazníka od stávajícího dodavatele, provozovatele distribuční soustavy a OTE, a.s., včetně informace o datu ukončení dodávky plynu. Dále Zákazník uděluje Dodavateli plnou moc k uzavření/změně/ukončení smlouvy o zajištění služby distribuční soustavy či smlouvy o připojení k distribuční soustavě ve věci odběrného místa Zákazníka s příslušným provozovatelem distribuční soustavy. Zákazník prohlašuje, že pokud jeho stávající dodavatel podá ve smyslu ustanovení vyhl. č. 349/2015 Sb. žádost o pozastavení procesu změny dodavatele, tak i přes tuto skutečnost na změně dodavatele trvá.
 	</div>
-	<div class="mb-70">Ano</div>
+	<div class="mb-20">Ano</div>
 	<div class="signatures-text">
-		<h2>Za Zákazníka</h2>
-		<p class="mb-40">V @client-permanent-address-town , dne @date</p>
-		<table class="mb-40">
+		<h2>Zákazník / Za Zákazníka</h2>
+		<p class="mb-5">V @client-permanent-address-town, dne @date</p>
+		<table class="mb-10">
 			<tbody>
 				<tr>
-					<th>Jméno osoby jednající za Zákazníka</th>
+					<th>Jméno a Zákazníka / osoby jednající za Zákazníka</th>
 					<td>@client-contact-name</td>
+				</tr>
+				<tr>
+					<th>Funkce osoby jednající za Zákazníka</th>
+					<td>@client-standby-function</td>
 				</tr>
 			</tbody>
 		</table>
-		<table class="mb-40">
+		<!-- <table>
 			<tbody>
 				<tr>
-					<th>Jméno osoby jednající za Zákazníka</th>
-					<td>@client-contact-function</td>
+					<th>Jméno a Zákazníka / osoby jednající za Zákazníka</th>
+					<td>@client-second-contact-name</td>
+				</tr>
+				<tr>
+					<th>Funkce osoby jednající za Zákazníka</th>
+					<td>@client-second-standby-function</td>
+				</tr>
+			</tbody>
+		</table> -->
+		<table>
+			<tbody>
+				<tr>
+					<th>Podepsáno pomocí SMS kódu v aplikaci parc4u.cz v</th>
+					<td>@timestamp</td>
 				</tr>
 			</tbody>
 		</table>
