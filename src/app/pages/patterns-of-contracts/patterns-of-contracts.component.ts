@@ -7,15 +7,11 @@ import {
     OnInit,
 } from '@angular/core';
 
-import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import {
-    commodityTypes, CONSTS,
-    ROUTES,
-} from 'src/app/app.constants';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { CommodityType, SubjectType } from 'src/common/graphql/models/supply.model';
 
 @Component({
     selector: 'pxe-patterns-of-contracts',
@@ -25,8 +21,11 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 export class PatternsOfContractsComponent extends AbstractComponent implements OnInit {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
-    public routePower = ROUTES.ROUTER_PATTERNS_OF_CONTRACTS_POWER;
-    public routeGas = ROUTES.ROUTER_PATTERNS_OF_CONTRACTS_GAS;
+    public readonly COMMODITY_TYPE_GAS = CommodityType.GAS;
+    public readonly COMMODITY_TYPE_POWER = CommodityType.POWER;
+
+    public commodityType = CommodityType.POWER;
+    public subjectType = SubjectType.SUBJECT_TYPE_INDIVIDUAL;
 
     constructor(
         private route: ActivatedRoute,
@@ -51,11 +50,16 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
                 takeUntil(this.destroy$),
             )
             .subscribe(params => {
-                console.log('%c ***** params *****', 'background: #bada55; color: #000; font-weight: bold', params);
-                if (R.indexOf(params.type, ['a', 'b']) < 0) {
-                    this.router.navigate([CONSTS.PATHS.PATTERNS_OF_CONTRACTS + '/a']);
-                    return;
-                }
+                this.commodityType = params.commodityType.toLowerCase();
+                this.subjectType = params.subjectType.toLowerCase();
             });
+    }
+
+    public routeToSubjectType = () => {
+
+    }
+
+    public routeToCommodityType = (commodityType: string) => {
+
     }
 }

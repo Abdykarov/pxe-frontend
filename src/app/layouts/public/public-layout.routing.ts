@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { CONSTS, ROUTES } from 'src/app/app.constants';
+import { CONSTS } from 'src/app/app.constants';
 import { PublicLayoutComponent } from './public-layout.component';
 import {
     LoginType,
@@ -86,7 +86,7 @@ const routes = [
                 redirectTo: CONSTS.PATHS.PATTERNS_OF_CONTRACTS + '/',
             },
             {
-                path: CONSTS.PATHS.PATTERNS_OF_CONTRACTS + '/:type',
+                path: CONSTS.PATHS.PATTERNS_OF_CONTRACTS + '/:commodityType/:subjectType',
                 loadChildren: '../../pages/patterns-of-contracts/patterns-of-contracts.module#PatternsOfContractsModule',
                 data: {
                     isPublic: true,
