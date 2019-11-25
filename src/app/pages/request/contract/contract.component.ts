@@ -9,16 +9,16 @@ import {
     OnInit,
     ViewChild,
 } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 
+import {
+    combineLatest,
+} from 'rxjs';
 import {
     map,
     switchMap,
     takeUntil,
 } from 'rxjs/operators';
-import {
-    combineLatest,
-} from 'rxjs';
+import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -44,8 +44,6 @@ import { IFieldError } from 'src/common/containers/form/models/form-definition.m
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { defaultOptions } from 'ngx-extended-pdf-viewer';
-import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
 
 @Component({
     selector: 'pxe-contract',
@@ -89,7 +87,6 @@ export class ContractComponent extends AbstractComponent implements OnInit {
         public navigateRequestService: NavigateRequestService,
         private route: ActivatedRoute,
         private router: Router,
-        private sanitizer: DomSanitizer,
         private supplyService: SupplyService,
     ) {
         super();
@@ -107,7 +104,6 @@ export class ContractComponent extends AbstractComponent implements OnInit {
 
     ngOnInit () {
         super.ngOnInit();
-        defaultOptions.workerSrc = './assets/pdf.worker-es5.js';
 
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
@@ -118,9 +114,6 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                     this.supplyPoint = supplyPoint;
                     this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
                     return combineLatest(
-                        // todoo catch TEST ERROR
-                        // https://stackoverflow.com/questions/496
-                        // 08678/how-to-have-a-separate-error-handling-for-each-function-in-combinelatest (edited)
                         this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.INFORMATION),
                         this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.CONTRACT),
                     );
@@ -131,21 +124,13 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                 ([documentTypeInformation, documentTypeContract]) => {
                     this.documentTypeInformation = documentTypeInformation.file;
                     this.documentTypeContract = documentTypeContract.file;
-
-                    console.log('%c ***** pdfInformation *****', 'background: #bada55; color: #000; font-weight: bold',
-                        this.pdfInformation, this.documentTypeInformation);
-                    if (this.pdfInformation) {
-                        this.pdfInformation.pdfSrc = this.documentTypeInformation; // pdfSrc can be Blob or Uint8Array
-                        this.pdfInformation.refresh(); // Ask pdf viewer to load/refresh pdf
-                    }
-
-                    // this.documentTypeInformationURL = window.navigator.msSaveOrOpenBlob(documentTypeContract, 'as');
                     this.loadingSupplyPoint = false;
                     this.cd.markForCheck();
+                    setTimeout(() => {
+                        this.showPdfs();
+                    });
                 },
                 (error) => {
-                    console.log('ERROR');
-                    console.log(error);
                     const { globalError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.cd.markForCheck();
@@ -153,15 +138,14 @@ export class ContractComponent extends AbstractComponent implements OnInit {
             );
     }
 
-    // only for testing
-    public open = () => {
+    public showPdfs = () => {
         if (this.pdfInformation) {
-            this.pdfInformation.pdfSrc = this.documentTypeInformation; // pdfSrc can be Blob or Uint8Array
-            this.pdfInformation.refresh(); // Ask pdf viewer to load/refresh pdf
+            this.pdfInformation.pdfSrc = this.documentTypeInformation;
+            this.pdfInformation.refresh();
         }
         if (this.pdfContract) {
-            this.pdfContract.pdfSrc = this.documentTypeContract; // pdfSrc can be Blob or Uint8Array
-            this.pdfContract.refresh(); // Ask pdf viewer to load/refresh pdf
+            this.pdfContract.pdfSrc = this.documentTypeContract;
+            this.pdfContract.refresh();
         }
     }
 

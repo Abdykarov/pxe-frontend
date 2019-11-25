@@ -30,21 +30,6 @@
                                 "output": "js"
                             },
                             {
-                                "glob": "pdf.worker-es5.js",
-                                "input": "node_modules/ngx-extended-pdf-viewer/assets",
-                                "output": "/assets/"
-                            },
-                            {
-                                "glob": "**/*",
-                                "input": "node_modules/ngx-extended-pdf-viewer/assets/locale",
-                                "output": "/assets/locale/"
-                            },
-                            {
-                                "glob": "**/*",
-                                "input": "node_modules/ngx-extended-pdf-viewer/assets/images",
-                                "output": "/assets/images/"
-                            },
-                            {
                                 "glob": "**/*",
                                 "input": "node_modules/ng2-pdfjs-viewer/pdfjs",
                                 "output": "/assets/pdfjs"
@@ -56,10 +41,7 @@
                         "styles": [
                             "src/assets/scss/front.scss"
                         ],
-                        "scripts": [
-                            "node_modules/ngx-extended-pdf-viewer/assets/pdf-es5.js",
-                            "node_modules/ngx-extended-pdf-viewer/assets/viewer-es5.js"
-                        ]
+                        "scripts": []
                     },
                     "configurations": {
                         "production": {
@@ -147,21 +129,6 @@
                             },
                             {
                                 "glob": "**/*",
-                                "input": "node_modules/ngx-extended-pdf-viewer/assets/locale",
-                                "output": "/assets/locale/"
-                            },
-                            {
-                                "glob": "**/*",
-                                "input": "node_modules/ngx-extended-pdf-viewer/assets/images",
-                                "output": "/assets/images/"
-                            },
-                            {
-                                "glob": "**/pdf.worker*.js",
-                                "input": "node_modules/ngx-extended-pdf-viewer/assets",
-                                "output": "/assets/"
-                            },
-                            {
-                                "glob": "**/*",
                                 "input": "node_modules/ng2-pdfjs-viewer/pdfjs",
                                 "output": "/assets/pdfjs"
                             },
@@ -220,21 +187,6 @@
                             },
                             {
                                 "glob": "**/*",
-                                "input": "node_modules/ngx-extended-pdf-viewer/assets/locale",
-                                "output": "/assets/locale/"
-                            },
-                            {
-                                "glob": "**/*",
-                                "input": "node_modules/ngx-extended-pdf-viewer/assets/images",
-                                "output": "/assets/images/"
-                            },
-                            {
-                                "glob": "**/pdf.worker*.js",
-                                "input": "node_modules/ngx-extended-pdf-viewer/assets",
-                                "output": "/assets/"
-                            },
-                            {
-                                "glob": "**/*",
                                 "input": "node_modules/ng2-pdfjs-viewer/pdfjs",
                                 "output": "/assets/pdfjs"
                             },
@@ -245,10 +197,7 @@
                         "styles": [
                             "src/assets/scss/front.scss"
                         ],
-                        "scripts": [
-                            "node_modules/ngx-extended-pdf-viewer/assets/pdf-es5.js",
-                            "node_modules/ngx-extended-pdf-viewer/assets/viewer-es5.js"
-                        ]
+                        "scripts": []
                     },
                     "configurations": {
                         "production": {
@@ -326,21 +275,6 @@
                             },
                             {
                                 "glob": "**/*",
-                                "input": "node_modules/ngx-extended-pdf-viewer/assets/locale",
-                                "output": "/assets/locale/"
-                            },
-                            {
-                                "glob": "**/*",
-                                "input": "node_modules/ngx-extended-pdf-viewer/assets/images",
-                                "output": "/assets/images/"
-                            },
-                            {
-                                "glob": "**/pdf.worker*.js",
-                                "input": "node_modules/ngx-extended-pdf-viewer/assets",
-                                "output": "/assets/"
-                            },
-                            {
-                                "glob": "**/*",
                                 "input": "node_modules/ng2-pdfjs-viewer/pdfjs",
                                 "output": "/assets/pdfjs"
                             },
@@ -350,10 +284,7 @@
                         "styles": [
                             "src/500/assets/scss/front.scss"
                         ],
-                        "scripts": [
-                            "node_modules/ngx-extended-pdf-viewer/assets/pdf-es5.js",
-                            "node_modules/ngx-extended-pdf-viewer/assets/viewer-es5.js"
-                        ]
+                        "scripts": []
                     },
                     "configurations": {
                         "production": {
