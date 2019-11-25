@@ -263,11 +263,6 @@
                                 "input": "src/500/assets/",
                                 "output": "src/500/assets/"
                             },
-                            {
-                                "glob": "**/*",
-                                "input": "node_modules/ng2-pdfjs-viewer/pdfjs",
-                                "output": "/assets/pdfjs"
-                            },
                             "src/500/assets/images/",
                             "src/500/assets/favicon.ico"
                         ],
