@@ -19,6 +19,8 @@ import {
 } from 'src/app/services/model/document.model';
 import { environment } from 'src/environments/environment';
 
+import * as PDFJS from 'pdfjs-dist';
+
 @Injectable({
     providedIn: 'root',
 })

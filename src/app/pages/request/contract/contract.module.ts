@@ -7,6 +7,8 @@ import { ButtonModule } from 'src/common/ui/button/button.module';
 import { ContractComponent } from './contract.component';
 import { ContractRoutingModule } from './contract-routing.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
+// import { PdfViewerModule } from 'src/common/containers/pdf-viewer/pdf-viewer.module';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { PipesModule } from 'src/common/pipes/pipes.module';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
 import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.module';
@@ -27,6 +29,8 @@ import { VerificationFormModule } from 'src/common/containers/form/forms/verific
         CommonModule,
         ContractRoutingModule,
         LayoutContainerModule,
+        NgxExtendedPdfViewerModule,
+        // PdfViewerModule,
         PipesModule,
         PlaceloaderModule,
         ProgressBarModule,

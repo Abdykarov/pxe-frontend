@@ -91,14 +91,19 @@
                             </span>
                         </div>
                     </div>
-                    <div class="row mt-2">
-                        <div class="col-12 col-md-12">
-                            <!--<object class="col-md-12" [data]="documentTypeInformation | safe" type="application/pdf" style="height: 500px;">-->
-                                <!--<embed class="col-md-12" [src]="documentTypeInformation | safe" type="application/pdf" />-->
-                            <!--</object>-->
-
-                        </div>
-                    </div>
+                    <ngx-extended-pdf-viewer
+                        *ngIf="documentTypeInformation"
+                        [src]="documentTypeInformation"
+                        backgroundColor="#ffffff"
+                        [height]="'60vh'"
+                        [useBrowserLocale]="true"
+                        [showOpenFileButton]="false"
+                        [showBookmarkButton]="false"
+                        [showFindButton]="false"
+                        [handTool]="false"
+                        [showHandToolButton]="true"
+                    >
+                    </ngx-extended-pdf-viewer>
                 </div>
                 <div class="text-with-icon align-items-start align-items-md-center mb-5" style="display: block">
                     <div class="row">
@@ -112,9 +117,20 @@
                     </div>
                     <div class="row mt-2">
                         <div class="col-12 col-md-12">
-                            <object class="col-md-12" [data]="documentTypeContract | safe" type="application/pdf" style="height: 500px;">
-                                <embed class="col-md-12" [src]="documentTypeContract | safe" type="application/pdf" />
-                            </object>
+                            <ngx-extended-pdf-viewer
+                                #documentTypeContractChild
+                                *ngIf="documentTypeContract"
+                                [src]="documentTypeContract"
+                                backgroundColor="#ffffff"
+                                [height]="'90vh'"
+                                [useBrowserLocale]="true"
+                                [showOpenFileButton]="false"
+                                [showBookmarkButton]="false"
+                                [showFindButton]="false"
+                                [handTool]="false"
+                                [showHandToolButton]="true"
+                            >
+                            </ngx-extended-pdf-viewer>
                         </div>
                     </div>
                 </div>

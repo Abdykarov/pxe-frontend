@@ -44,6 +44,7 @@ import { IFieldError } from 'src/common/containers/form/models/form-definition.m
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { defaultOptions } from 'ngx-extended-pdf-viewer';
 
 @Component({
     selector: 'pxe-contract',
@@ -72,6 +73,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
     public documentTypeContract = null;
     public documentTypeInformation = null;
+    public documentTypeInformationURL = null;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -86,8 +88,19 @@ export class ContractComponent extends AbstractComponent implements OnInit {
         super();
     }
 
+
+    public documentTypeContractChild: ElementRef;
+
+    @ViewChild('documentTypeContractChild')
+    set content(documentTypeContractChild: ElementRef) {
+        if (documentTypeContractChild) {
+            this.documentTypeContractChild = documentTypeContractChild;
+        }
+    }
+
     ngOnInit () {
         super.ngOnInit();
+        defaultOptions.workerSrc = './assets/pdf.worker-es5.js';
 
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
@@ -109,11 +122,9 @@ export class ContractComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 ([documentTypeInformation, documentTypeContract]) => {
-                    console.log(documentTypeContract);
-                    // isPlatformBrowser(this.platformId
-                    this.documentTypeInformation = window.navigator.msSaveOrOpenBlob(documentTypeInformation.file, 'asdads');
-                    this.documentTypeContract = window.navigator.msSaveOrOpenBlob(documentTypeContract.file, 'asdads');
-                    console.log(this.documentTypeInformation);
+                    this.documentTypeInformation = documentTypeInformation.file;
+                    this.documentTypeContract = documentTypeContract.file;
+                    // this.documentTypeInformationURL = window.navigator.msSaveOrOpenBlob(documentTypeContract, 'as');
                     this.loadingSupplyPoint = false;
                     this.cd.markForCheck();
                 },
