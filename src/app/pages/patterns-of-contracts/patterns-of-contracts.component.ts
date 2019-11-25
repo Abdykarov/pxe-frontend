@@ -9,9 +9,16 @@ import {
 
 import { takeUntil } from 'rxjs/operators';
 
+import {
+    CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-import { CommodityType, SubjectType } from 'src/common/graphql/models/supply.model';
+import {
+    CommodityType,
+    SubjectType,
+} from 'src/common/graphql/models/supply.model';
 
 @Component({
     selector: 'pxe-patterns-of-contracts',
@@ -21,11 +28,13 @@ import { CommodityType, SubjectType } from 'src/common/graphql/models/supply.mod
 export class PatternsOfContractsComponent extends AbstractComponent implements OnInit {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
-    public readonly COMMODITY_TYPE_GAS = CommodityType.GAS;
-    public readonly COMMODITY_TYPE_POWER = CommodityType.POWER;
+    public readonly COMMODITY_TYPE = CommodityType;
+    public readonly SUBJECT_TYPE = SubjectType;
 
-    public commodityType = CommodityType.POWER;
-    public subjectType = SubjectType.SUBJECT_TYPE_INDIVIDUAL;
+    public commodityType = this.COMMODITY_TYPE.POWER;
+    public subjectType = this.SUBJECT_TYPE.SUBJECT_TYPE_INDIVIDUAL;
+
+    public urlPdfContract = '/assets/pdfs/static/smlouva.pdf';
 
     constructor(
         private route: ActivatedRoute,
@@ -50,16 +59,22 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
                 takeUntil(this.destroy$),
             )
             .subscribe(params => {
-                this.commodityType = params.commodityType.toLowerCase();
-                this.subjectType = params.subjectType.toLowerCase();
+                this.commodityType = params.commodityType;
+                this.subjectType = params.subjectType;
             });
     }
 
-    public routeToSubjectType = () => {
-
+    public routeToSubjectType = (subjectType: SubjectType) => {
+        this.subjectType = subjectType;
+        this.navigateToCurrentUrl();
     }
 
-    public routeToCommodityType = (commodityType: string) => {
+    public routeToCommodityType = (commodityType: CommodityType) => {
+        this.commodityType = commodityType;
+        this.navigateToCurrentUrl();
+    }
 
+    public navigateToCurrentUrl = () => {
+        this.router.navigate([`${CONSTS.PATHS.PATTERNS_OF_CONTRACTS}/${this.commodityType}/${this.subjectType}`]);
     }
 }

@@ -8,6 +8,7 @@ import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 import { PatternsOfContractsComponent } from 'src/app/pages/patterns-of-contracts/patterns-of-contracts.component';
 import { PatternsOfContractsRoutingModule } from 'src/app/pages/patterns-of-contracts/patterns-of-contracts-routing.module';
+import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import { PipesModule } from 'src/common/pipes/pipes.module';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
 
@@ -26,6 +27,7 @@ import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module'
         CommonModule,
         InfoBannerModule,
         LayoutContainerModule,
+        PdfJsViewerModule,
         PipesModule,
         PlaceloaderModule,
         PatternsOfContractsRoutingModule,

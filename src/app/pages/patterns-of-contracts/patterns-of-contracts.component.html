@@ -4,16 +4,16 @@
             <ul class="text-center link-list">
                 <li class="link-list__item">
                     <span class="link-list__link cursor-pointer"
-                       [class.link-list__link--active]="commodityType == 'power'"
-                       (click)="routeToCommodityType('power')">
+                       [class.link-list__link--active]="commodityType == COMMODITY_TYPE.POWER"
+                       (click)="routeToCommodityType(COMMODITY_TYPE.POWER)">
                         Elektřina
                     </span>
                 </li>
                 <li class="link-list__item">
                     <span class="link-list__link cursor-pointer"
                         routerLinkActive="link-list__link--active"
-                        [class.link-list__link--active]="commodityType == 'gas'"
-                        (click)="routeToCommodityType('GAS')">
+                        [class.link-list__link--active]="commodityType == COMMODITY_TYPE.GAS"
+                        (click)="routeToCommodityType(COMMODITY_TYPE.GAS)">
                         Plyn
                     </span>
                 </li>
@@ -22,23 +22,28 @@
                 <li class="link-list__item">
                     <span class="link-list__link cursor-pointer"
                           routerLinkActive="link-list__link--active"
-                          [class.link-list__link--active]="subjectType == '1'"
-                          (click)="routeToSubjectType('1')">
+                          [class.link-list__link--active]="subjectType == SUBJECT_TYPE.SUBJECT_TYPE_INDIVIDUAL"
+                          (click)="routeToSubjectType(SUBJECT_TYPE.SUBJECT_TYPE_INDIVIDUAL)">
                            Domácnost
                     </span>
                 </li>
                 <li class="link-list__item">
                     <span class="link-list__link cursor-pointer"
                         routerLinkActive="link-list__link--active"
-                        [class.link-list__link--active]="subjectType == '2'"
-                        (click)="routeToSubjectType('2')">
+                        [class.link-list__link--active]="subjectType == SUBJECT_TYPE.SUBJECT_TYPE_BUSINESSMAN"
+                        (click)="routeToSubjectType(SUBJECT_TYPE.SUBJECT_TYPE_BUSINESSMAN)">
                          Firma
                     </span>
                 </li>
             </ul>
             <div class="row mt-2">
                 <div class="col-md-12 col-lg-8 offset-lg-2">
-                    <embed class="col-lg-12"  height="900px" [src]="'/assets/images/123.pdf' | safe" type="application/pdf" />
+                    <ng2-pdfjs-viewer
+                        [pdfSrc]="urlPdfContract"
+                        [openFile]="false"
+                        [viewBookmark]="false"
+                        zoom="100">
+                    ></ng2-pdfjs-viewer>
                 </div>
             </div>
         </pxe-layout-container>
