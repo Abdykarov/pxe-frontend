@@ -37,12 +37,11 @@
                 </li>
             </ul>
             <div class="row mt-2">
-                <div class="col-md-12 col-lg-8 offset-lg-2">
+                <div class="col-md-12 col-lg-8 offset-lg-2 pdf-height">
                     <ng2-pdfjs-viewer
-                        [pdfSrc]="urlPdfContract"
+                        [pdfSrc]="urlToPdfs[this.commodityType][this.subjectType]"
                         [openFile]="false"
-                        [viewBookmark]="false"
-                        zoom="100">
+                        [viewBookmark]="false">
                     ></ng2-pdfjs-viewer>
                 </div>
             </div>

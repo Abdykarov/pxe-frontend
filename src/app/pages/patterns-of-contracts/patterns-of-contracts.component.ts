@@ -9,12 +9,9 @@ import {
 
 import { takeUntil } from 'rxjs/operators';
 
-import {
-    CONSTS,
-    ROUTES,
-} from 'src/app/app.constants';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { CONSTS } from 'src/app/app.constants';
 import {
     CommodityType,
     SubjectType,
@@ -34,7 +31,17 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
     public commodityType = this.COMMODITY_TYPE.POWER;
     public subjectType = this.SUBJECT_TYPE.SUBJECT_TYPE_INDIVIDUAL;
 
-    public urlPdfContract = '/assets/pdfs/static/smlouva.pdf';
+    public urlToPdfs = {
+        [this.COMMODITY_TYPE.POWER]: {
+            [this.SUBJECT_TYPE.SUBJECT_TYPE_INDIVIDUAL]: '/assets/pdfs/static/smlouva.pdf',
+            [this.SUBJECT_TYPE.SUBJECT_TYPE_BUSINESSMAN]: '/assets/pdfs/static/smlouva.pdf',
+        },
+        [this.COMMODITY_TYPE.GAS]: {
+            [this.SUBJECT_TYPE.SUBJECT_TYPE_INDIVIDUAL]: '/assets/pdfs/static/smlouva.pdf',
+            [this.SUBJECT_TYPE.SUBJECT_TYPE_BUSINESSMAN]: '/assets/pdfs/static/smlouva2.pdf',
+
+        },
+    };
 
     constructor(
         private route: ActivatedRoute,
