@@ -73,15 +73,15 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
 
     public routeToSubjectType = (subjectType: SubjectType) => {
         this.subjectType = subjectType;
-        this.navigateToCurrentUrl();
+        this.navigateToCorrectUrl();
     }
 
     public routeToCommodityType = (commodityType: CommodityType) => {
         this.commodityType = commodityType;
-        this.navigateToCurrentUrl();
+        this.navigateToCorrectUrl();
     }
 
-    public navigateToCurrentUrl = () => {
+    public navigateToCorrectUrl = () => {
         this.router.navigate([`${CONSTS.PATHS.PATTERNS_OF_CONTRACTS}/${this.commodityType}/${this.subjectType}`]);
     }
 }
