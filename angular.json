@@ -25,11 +25,6 @@
                                 "output": "src/assets/"
                             },
                             {
-                                "glob": "**/*.*",
-                                "input": "assets/js/",
-                                "output": "js"
-                            },
-                            {
                                 "glob": "**/*",
                                 "input": "node_modules/ng2-pdfjs-viewer/pdfjs",
                                 "output": "/assets/pdfjs"
@@ -179,11 +174,6 @@
                                 "glob": "src/**/*.!(scss)",
                                 "input": "src/assets/",
                                 "output": "src/assets/"
-                            },
-                            {
-                                "glob": "**/*.*",
-                                "input": "assets/js/",
-                                "output": "js"
                             },
                             {
                                 "glob": "**/*",

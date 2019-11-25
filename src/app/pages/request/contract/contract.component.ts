@@ -55,18 +55,20 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.PERSONAL_DATA;
 
     @ViewChild('pxeVerificationFormWrapper')
-    public pxeVerificationFormWrapper: PdfJsViewerComponent;
+    public pxeVerificationFormWrapper: ElementRef;
 
     @ViewChild('pdfInformation')
-    public pdfInformation: any; // should be PdfJsViewerComponent ?
+    public pdfInformation: PdfJsViewerComponent ;
 
     @ViewChild('pdfContract')
-    public pdfContract: any; // should be PdfJsViewerComponent ?
+    public pdfContract: PdfJsViewerComponent;
 
     public commodityType = CommodityType;
     public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public documentLoading = false;
     public documentType = IDocumentType;
+    public documentTypeContract = null;
+    public documentTypeInformation = null;
     public fieldError: IFieldError = {};
     public formLoading = false;
     public globalError: string[] = [];
@@ -76,9 +78,6 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public subjectType = SubjectType;
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
-    public documentTypeContract = null;
-    public documentTypeInformation = null;
-    public documentTypeInformationURL = null;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -90,16 +89,6 @@ export class ContractComponent extends AbstractComponent implements OnInit {
         private supplyService: SupplyService,
     ) {
         super();
-    }
-
-
-    public documentTypeContractChild: ElementRef;
-
-    @ViewChild('documentTypeContractChild')
-    set content(documentTypeContractChild: ElementRef) {
-        if (documentTypeContractChild) {
-            this.documentTypeContractChild = documentTypeContractChild;
-        }
     }
 
     ngOnInit () {
@@ -242,7 +231,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                     this.globalError = globalError;
                     this.fieldError = fieldError;
                     if (Object.keys(this.fieldError).length) {
-                        // scrollToElementFnc(this.pxeVerificationFormWrapper.nativeElement);
+                        scrollToElementFnc(this.pxeVerificationFormWrapper.nativeElement);
                     }
                     this.cd.markForCheck();
                 },
