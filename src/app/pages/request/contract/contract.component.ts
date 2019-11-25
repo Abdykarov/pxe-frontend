@@ -45,6 +45,7 @@ import { NavigateRequestService } from 'src/app/services/navigate-request.servic
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { defaultOptions } from 'ngx-extended-pdf-viewer';
+import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
 
 @Component({
     selector: 'pxe-contract',
@@ -56,7 +57,13 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.PERSONAL_DATA;
 
     @ViewChild('pxeVerificationFormWrapper')
-    public pxeVerificationFormWrapper: ElementRef;
+    public pxeVerificationFormWrapper: PdfJsViewerComponent;
+
+    @ViewChild('pdfInformation')
+    public pdfInformation: any; // should be PdfJsViewerComponent ?
+
+    @ViewChild('pdfContract')
+    public pdfContract: any; // should be PdfJsViewerComponent ?
 
     public commodityType = CommodityType;
     public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
@@ -124,6 +131,14 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                 ([documentTypeInformation, documentTypeContract]) => {
                     this.documentTypeInformation = documentTypeInformation.file;
                     this.documentTypeContract = documentTypeContract.file;
+
+                    console.log('%c ***** pdfInformation *****', 'background: #bada55; color: #000; font-weight: bold',
+                        this.pdfInformation, this.documentTypeInformation);
+                    if (this.pdfInformation) {
+                        this.pdfInformation.pdfSrc = this.documentTypeInformation; // pdfSrc can be Blob or Uint8Array
+                        this.pdfInformation.refresh(); // Ask pdf viewer to load/refresh pdf
+                    }
+
                     // this.documentTypeInformationURL = window.navigator.msSaveOrOpenBlob(documentTypeContract, 'as');
                     this.loadingSupplyPoint = false;
                     this.cd.markForCheck();
@@ -136,6 +151,18 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                     this.cd.markForCheck();
                 },
             );
+    }
+
+    // only for testing
+    public open = () => {
+        if (this.pdfInformation) {
+            this.pdfInformation.pdfSrc = this.documentTypeInformation; // pdfSrc can be Blob or Uint8Array
+            this.pdfInformation.refresh(); // Ask pdf viewer to load/refresh pdf
+        }
+        if (this.pdfContract) {
+            this.pdfContract.pdfSrc = this.documentTypeContract; // pdfSrc can be Blob or Uint8Array
+            this.pdfContract.refresh(); // Ask pdf viewer to load/refresh pdf
+        }
     }
 
     public saveDocument = (contractId: string, documentType: IDocumentType) => {
@@ -231,7 +258,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                     this.globalError = globalError;
                     this.fieldError = fieldError;
                     if (Object.keys(this.fieldError).length) {
-                        scrollToElementFnc(this.pxeVerificationFormWrapper.nativeElement);
+                        // scrollToElementFnc(this.pxeVerificationFormWrapper.nativeElement);
                     }
                     this.cd.markForCheck();
                 },

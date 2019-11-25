@@ -14,6 +14,7 @@ import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module'
 import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.module';
 import { SupplyPointOfferModule } from 'src/common/ui/supply-point-offer/supply-point-offer.module';
 import { VerificationFormModule } from 'src/common/containers/form/forms/verification/verification-form.module';
+import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import { VerificationFormModule } from 'src/common/containers/form/forms/verific
         LayoutContainerModule,
         NgxExtendedPdfViewerModule,
         // PdfViewerModule,
+        PdfJsViewerModule,
         PipesModule,
         PlaceloaderModule,
         ProgressBarModule,

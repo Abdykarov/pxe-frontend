@@ -44,6 +44,11 @@
                                 "input": "node_modules/ngx-extended-pdf-viewer/assets/images",
                                 "output": "/assets/images/"
                             },
+                            {
+                                "glob": "**/*",
+                                "input": "node_modules/ng2-pdfjs-viewer/pdfjs",
+                                "output": "/assets/pdfjs"
+                            },
                             "src/assets/configurations/config.js",
                             "src/assets/images/",
                             "src/assets/favicon.ico"
@@ -155,6 +160,11 @@
                                 "input": "node_modules/ngx-extended-pdf-viewer/assets",
                                 "output": "/assets/"
                             },
+                            {
+                                "glob": "**/*",
+                                "input": "node_modules/ng2-pdfjs-viewer/pdfjs",
+                                "output": "/assets/pdfjs"
+                            },
                             "src/assets/favicon.ico"
                         ],
                         "styles": [
@@ -222,6 +232,11 @@
                                 "glob": "**/pdf.worker*.js",
                                 "input": "node_modules/ngx-extended-pdf-viewer/assets",
                                 "output": "/assets/"
+                            },
+                            {
+                                "glob": "**/*",
+                                "input": "node_modules/ng2-pdfjs-viewer/pdfjs",
+                                "output": "/assets/pdfjs"
                             },
                             "src/assets/configurations/config.js",
                             "src/assets/images/",
@@ -323,6 +338,11 @@
                                 "glob": "**/pdf.worker*.js",
                                 "input": "node_modules/ngx-extended-pdf-viewer/assets",
                                 "output": "/assets/"
+                            },
+                            {
+                                "glob": "**/*",
+                                "input": "node_modules/ng2-pdfjs-viewer/pdfjs",
+                                "output": "/assets/pdfjs"
                             },
                             "src/500/assets/images/",
                             "src/500/assets/favicon.ico"
