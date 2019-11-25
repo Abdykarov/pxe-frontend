@@ -61,6 +61,7 @@
     "moment": "^2.22.2",
     "ngx-bootstrap": "^4.3.0",
     "ngx-cookie": "^4.1.2",
+    "ng2-pdfjs-viewer": "5.0.1",
     "ramda": "^0.26.1",
     "ramda-extension": "^0.7.2",
     "rxjs": "^6.3.3",

@@ -11,9 +11,14 @@ import {
 } from '@angular/core';
 
 import {
+    combineLatest,
+} from 'rxjs';
+import {
     map,
+    switchMap,
     takeUntil,
 } from 'rxjs/operators';
+import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -52,10 +57,18 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     @ViewChild('pxeVerificationFormWrapper')
     public pxeVerificationFormWrapper: ElementRef;
 
+    @ViewChild('pdfInformation')
+    public pdfInformation: PdfJsViewerComponent ;
+
+    @ViewChild('pdfContract')
+    public pdfContract: PdfJsViewerComponent;
+
     public commodityType = CommodityType;
     public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public documentLoading = false;
     public documentType = IDocumentType;
+    public documentTypeContract = null;
+    public documentTypeInformation = null;
     public fieldError: IFieldError = {};
     public formLoading = false;
     public globalError: string[] = [];
@@ -84,14 +97,27 @@ export class ContractComponent extends AbstractComponent implements OnInit {
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
                 map(({data}) => data.getSupplyPoint),
-                takeUntil(this.destroy$),
-            )
-            .subscribe(
-                (supplyPoint: ISupplyPoint) => {
+                switchMap((supplyPoint: ISupplyPoint) => {
+                    this.supplyPoint = supplyPoint;
                     this.loadingSupplyPoint = false;
                     this.supplyPoint = supplyPoint;
                     this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
+                    return combineLatest(
+                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.INFORMATION),
+                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.CONTRACT),
+                    );
+                }),
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                ([documentTypeInformation, documentTypeContract]) => {
+                    this.documentTypeInformation = documentTypeInformation.file;
+                    this.documentTypeContract = documentTypeContract.file;
+                    this.loadingSupplyPoint = false;
                     this.cd.markForCheck();
+                    setTimeout(() => {
+                        this.showPdfs();
+                    });
                 },
                 (error) => {
                     const { globalError } = parseGraphQLErrors(error);
@@ -99,6 +125,17 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                     this.cd.markForCheck();
                 },
             );
+    }
+
+    public showPdfs = () => {
+        if (this.pdfInformation) {
+            this.pdfInformation.pdfSrc = this.documentTypeInformation;
+            this.pdfInformation.refresh();
+        }
+        if (this.pdfContract) {
+            this.pdfContract.pdfSrc = this.documentTypeContract;
+            this.pdfContract.refresh();
+        }
     }
 
     public saveDocument = (contractId: string, documentType: IDocumentType) => {
