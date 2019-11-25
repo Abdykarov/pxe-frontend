@@ -11,9 +11,8 @@
                 </li>
                 <li class="link-list__item">
                     <span class="link-list__link cursor-pointer"
-                        routerLinkActive="link-list__link--active"
-                        [class.link-list__link--active]="commodityType == COMMODITY_TYPE.GAS"
-                        (click)="routeToCommodityType(COMMODITY_TYPE.GAS)">
+                          [class.link-list__link--active]="commodityType == COMMODITY_TYPE.GAS"
+                          (click)="routeToCommodityType(COMMODITY_TYPE.GAS)">
                         Plyn
                     </span>
                 </li>
@@ -21,18 +20,16 @@
             <ul class="text-center link-list">
                 <li class="link-list__item">
                     <span class="link-list__link cursor-pointer"
-                          routerLinkActive="link-list__link--active"
                           [class.link-list__link--active]="subjectType == SUBJECT_TYPE.SUBJECT_TYPE_INDIVIDUAL"
                           (click)="routeToSubjectType(SUBJECT_TYPE.SUBJECT_TYPE_INDIVIDUAL)">
-                           Domácnost
+                        Domácnost
                     </span>
                 </li>
                 <li class="link-list__item">
                     <span class="link-list__link cursor-pointer"
-                        routerLinkActive="link-list__link--active"
-                        [class.link-list__link--active]="subjectType == SUBJECT_TYPE.SUBJECT_TYPE_BUSINESSMAN"
-                        (click)="routeToSubjectType(SUBJECT_TYPE.SUBJECT_TYPE_BUSINESSMAN)">
-                         Firma
+                          [class.link-list__link--active]="subjectType == SUBJECT_TYPE.SUBJECT_TYPE_BUSINESSMAN"
+                          (click)="routeToSubjectType(SUBJECT_TYPE.SUBJECT_TYPE_BUSINESSMAN)">
+                        Firma
                     </span>
                 </li>
             </ul>
