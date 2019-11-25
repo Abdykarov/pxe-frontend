@@ -31,6 +31,7 @@
                             },
                             "src/assets/configurations/config.js",
                             "src/assets/images/",
+                            "src/assets/pdfs/",
                             "src/assets/favicon.ico"
                         ],
                         "styles": [
@@ -127,6 +128,7 @@
                                 "input": "node_modules/ng2-pdfjs-viewer/pdfjs",
                                 "output": "/assets/pdfjs"
                             },
+                            "src/assets/pdfs/",
                             "src/assets/favicon.ico"
                         ],
                         "styles": [
@@ -181,6 +183,7 @@
                                 "output": "/assets/pdfjs"
                             },
                             "src/assets/configurations/config.js",
+                            "src/assets/pdfs/",
                             "src/assets/images/",
                             "src/assets/favicon.ico"
                         ],
