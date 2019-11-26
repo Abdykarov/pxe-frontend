@@ -7,7 +7,6 @@ import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
 @Component({
     templateUrl: './page.html',
-    styleUrls: ['./page.scss'],
 })
 export class ContractSigningPageComponent {
     public offer: IOffer = offerConfig;
