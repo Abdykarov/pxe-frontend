@@ -12,6 +12,7 @@ import {
 
 import {
     combineLatest,
+    of,
 } from 'rxjs';
 import {
     map,
@@ -103,7 +104,13 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                     this.supplyPoint = supplyPoint;
                     this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
                     return combineLatest(
-                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.INFORMATION),
+                        supplyPoint.subject.code === this.subjectType.SUBJECT_TYPE_INDIVIDUAL ?
+                            this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.INFORMATION) :
+                            of(
+                                {
+                                    file: null,
+                                },
+                            ),
                         this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.CONTRACT),
                     );
                 }),
