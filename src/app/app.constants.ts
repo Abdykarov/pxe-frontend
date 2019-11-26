@@ -74,6 +74,7 @@ export const ROUTES = {
     ROUTER_ROOT: '/',
     ROUTER_DASHBOARD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.DASHBOARD}`,
     ROUTER_DELETE_ACCOUNT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.DELETE_ACCOUNT}`,
+    ROUTER_NOT_FOUND: '/not_found',
     ROUTER_REQUEST_SUPPLY_POINT_SELECTION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_POINT_SELECTION}`,
     ROUTER_REQUEST_CONTRACT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.CONTRACT}`,
     ROUTER_REQUEST_OFFER_SELECTION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.OFFER_SELECTION}`,
@@ -168,9 +169,24 @@ export const COMMODITY_TO_DISTRIBUTION_MAP = {
     [CommodityType.GAS]: CODE_LIST.DISTRIBUTION_GAS,
 };
 
+export enum CommodityTypesString {
+    POWER = 'power',
+    GAS = 'gas',
+}
+
 export const commodityTypes = {
-    power: CommodityType.POWER,
-    gas: CommodityType.GAS,
+    [CommodityTypesString.POWER]: CommodityType.POWER,
+    [CommodityTypesString.GAS]: CommodityType.GAS,
+};
+
+export enum SubjectTypeString {
+    INDIVIDUAL = 'individual',
+    BUSINESSMAN = 'businessman',
+}
+
+export const SubjectTypesTypes = {
+    [SubjectTypeString.INDIVIDUAL]: SubjectType.SUBJECT_TYPE_INDIVIDUAL,
+    [SubjectTypeString.BUSINESSMAN]: SubjectType.SUBJECT_TYPE_BUSINESSMAN,
 };
 
 export const DISTRIBUTION_RATES_TYPE_DEFINITION = {

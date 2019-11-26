@@ -17,9 +17,9 @@ import {
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
-    CommodityType,
-    SubjectType,
-} from 'src/common/graphql/models/supply.model';
+    CommodityTypesString,
+    SubjectTypeString,
+} from 'src/app/app.constants';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
@@ -29,8 +29,8 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
     styleUrls: ['./public-layout.component.scss'],
 })
 export class PublicLayoutComponent extends AbstractLayoutComponent {
-    public commodityTypePower = CommodityType.POWER;
-    public subjectTypeIndividual = SubjectType.SUBJECT_TYPE_INDIVIDUAL;
+    public commodityTypePower = CommodityTypesString.POWER;
+    public subjectTypeIndividual = SubjectTypeString.INDIVIDUAL;
 
     constructor(
         protected apollo: Apollo,

@@ -3,34 +3,38 @@
         <pxe-layout-container pageTitle="Podmínky užívání" [breadcrumbItemsSimple]="breadcrumbItemsSimple">
             <ul class="text-center link-list">
                 <li class="link-list__item">
-                    <span class="link-list__link cursor-pointer"
-                       [class.link-list__link--active]="commodityType == COMMODITY_TYPE.POWER"
-                       (click)="routeToCommodityType(COMMODITY_TYPE.POWER)">
-                        Elektřina
-                    </span>
+                    <a class="link-list__link"
+                       href="#"
+                       [class.link-list__link--active]="subjectType == SUBJECT_TYPE.INDIVIDUAL"
+                       (click)="routeToSubjectType($event,SUBJECT_TYPE.INDIVIDUAL)">
+                        Domácnost
+                    </a>
                 </li>
                 <li class="link-list__item">
-                    <span class="link-list__link cursor-pointer"
-                          [class.link-list__link--active]="commodityType == COMMODITY_TYPE.GAS"
-                          (click)="routeToCommodityType(COMMODITY_TYPE.GAS)">
-                        Plyn
-                    </span>
+                    <a class="link-list__link"
+                       href="#"
+                       [class.link-list__link--active]="subjectType == SUBJECT_TYPE.BUSINESSMAN"
+                       (click)="routeToSubjectType($event,SUBJECT_TYPE.BUSINESSMAN)">
+                        Firma
+                    </a>
                 </li>
             </ul>
             <ul class="text-center link-list">
                 <li class="link-list__item">
-                    <span class="link-list__link cursor-pointer"
-                          [class.link-list__link--active]="subjectType == SUBJECT_TYPE.SUBJECT_TYPE_INDIVIDUAL"
-                          (click)="routeToSubjectType(SUBJECT_TYPE.SUBJECT_TYPE_INDIVIDUAL)">
-                        Domácnost
-                    </span>
+                    <a class="link-list__link"
+                       href="#"
+                       [class.link-list__link--active]="commodityType == COMMODITY_TYPE.POWER"
+                       (click)="routeToCommodityType($event,COMMODITY_TYPE.POWER)">
+                        Elektřina
+                    </a>
                 </li>
                 <li class="link-list__item">
-                    <span class="link-list__link cursor-pointer"
-                          [class.link-list__link--active]="subjectType == SUBJECT_TYPE.SUBJECT_TYPE_BUSINESSMAN"
-                          (click)="routeToSubjectType(SUBJECT_TYPE.SUBJECT_TYPE_BUSINESSMAN)">
-                        Firma
-                    </span>
+                    <a class="link-list__link"
+                       href="#"
+                       [class.link-list__link--active]="commodityType == COMMODITY_TYPE.GAS"
+                       (click)="routeToCommodityType($event,COMMODITY_TYPE.GAS)">
+                        Plyn
+                    </a>
                 </li>
             </ul>
             <div class="row mt-2">

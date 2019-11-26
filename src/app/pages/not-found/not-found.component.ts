@@ -6,9 +6,9 @@ import { AbstractComponent } from 'src/common/abstract.component';
 // own modules
 import { AuthService } from 'src/app/services/auth.service';
 import {
-    CommodityType,
-    SubjectType,
-} from 'src/common/graphql/models/supply.model';
+    CommodityTypesString,
+    SubjectTypeString,
+} from 'src/app/app.constants';
 import {
     ISettings,
     LoginType,
@@ -20,8 +20,8 @@ import {
     styleUrls: ['../../../assets/scss/05_pages/error-page.scss'],
 })
 export class NotFoundComponent extends AbstractComponent {
-    public commodityTypePower = CommodityType.POWER;
-    public subjectTypeIndividual = SubjectType.SUBJECT_TYPE_INDIVIDUAL;
+    public commodityTypePower = CommodityTypesString.POWER;
+    public subjectTypeIndividual = SubjectTypeString.INDIVIDUAL;
 
     public settings: ISettings = {
         isPublic: true,
