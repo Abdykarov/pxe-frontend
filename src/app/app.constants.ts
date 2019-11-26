@@ -83,9 +83,6 @@ export const ROUTES = {
     ROUTER_REQUEST_SUPPLY_POINT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.SUPPLY_POINT}`,
     ROUTER_REQUEST_RESULT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.RESULT}`,
     ROUTER_REQUESTS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUESTS}`,
-    ROUTER_PATTERNS_OF_CONTRACTS: `${CONSTS.PATHS.PATTERNS_OF_CONTRACTS}`,
-    ROUTER_PATTERNS_OF_CONTRACTS_POWER: `${CONSTS.PATHS.PATTERNS_OF_CONTRACTS}/${CONSTS.PATHS.POWER}`,
-    ROUTER_PATTERNS_OF_CONTRACTS_GAS: `${CONSTS.PATHS.PATTERNS_OF_CONTRACTS}/${CONSTS.PATHS.GAS}`,
     ROUTER_SECURING_YOUR_DATA: `/${CONSTS.PATHS.SECURING_YOUR_DATA}`,
     ROUTER_SUPPLIER_CONCLUDED_CONTRACTS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLIER_CONCLUDED_CONTRACTS}`,
     ROUTER_SUPPLIER_CONCLUDED_CONTRACTS_POWER:
@@ -169,24 +166,24 @@ export const COMMODITY_TO_DISTRIBUTION_MAP = {
     [CommodityType.GAS]: CODE_LIST.DISTRIBUTION_GAS,
 };
 
-export enum CommodityTypesString {
+export enum CommodityTypesLowerCase {
     POWER = 'power',
     GAS = 'gas',
 }
 
 export const commodityTypes = {
-    [CommodityTypesString.POWER]: CommodityType.POWER,
-    [CommodityTypesString.GAS]: CommodityType.GAS,
+    [CommodityTypesLowerCase.POWER]: CommodityType.POWER,
+    [CommodityTypesLowerCase.GAS]: CommodityType.GAS,
 };
 
-export enum SubjectTypeString {
+export enum SubjectTypeLowerCase {
     INDIVIDUAL = 'individual',
     BUSINESSMAN = 'businessman',
 }
 
 export const SubjectTypesTypes = {
-    [SubjectTypeString.INDIVIDUAL]: SubjectType.SUBJECT_TYPE_INDIVIDUAL,
-    [SubjectTypeString.BUSINESSMAN]: SubjectType.SUBJECT_TYPE_BUSINESSMAN,
+    [SubjectTypeLowerCase.INDIVIDUAL]: SubjectType.SUBJECT_TYPE_INDIVIDUAL,
+    [SubjectTypeLowerCase.BUSINESSMAN]: SubjectType.SUBJECT_TYPE_BUSINESSMAN,
 };
 
 export const DISTRIBUTION_RATES_TYPE_DEFINITION = {

@@ -6,8 +6,8 @@ import { AbstractComponent } from 'src/common/abstract.component';
 // own modules
 import { AuthService } from 'src/app/services/auth.service';
 import {
-    CommodityTypesString,
-    SubjectTypeString,
+    CommodityTypesLowerCase,
+    SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import {
     ISettings,
@@ -20,8 +20,8 @@ import {
     styleUrls: ['../../../assets/scss/05_pages/error-page.scss'],
 })
 export class NotFoundComponent extends AbstractComponent {
-    public commodityTypePower = CommodityTypesString.POWER;
-    public subjectTypeIndividual = SubjectTypeString.INDIVIDUAL;
+    public commodityTypePower = CommodityTypesLowerCase.POWER;
+    public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
 
     public settings: ISettings = {
         isPublic: true,

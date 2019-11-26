@@ -12,10 +12,10 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
-    CommodityTypesString,
+    CommodityTypesLowerCase,
     CONSTS,
     ROUTES,
-    SubjectTypeString,
+    SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 
@@ -27,8 +27,8 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 export class PatternsOfContractsComponent extends AbstractComponent implements OnInit {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
-    public readonly COMMODITY_TYPE = CommodityTypesString;
-    public readonly SUBJECT_TYPE = SubjectTypeString;
+    public readonly COMMODITY_TYPE = CommodityTypesLowerCase;
+    public readonly SUBJECT_TYPE = SubjectTypeLowerCase;
 
     public commodityType = this.COMMODITY_TYPE.POWER;
     public subjectType = this.SUBJECT_TYPE.INDIVIDUAL;
@@ -75,13 +75,13 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
             });
     }
 
-    public routeToSubjectType = (evt, subjectType: SubjectTypeString) => {
+    public routeToSubjectType = (evt, subjectType: SubjectTypeLowerCase) => {
         evt.preventDefault();
         this.subjectType = subjectType;
         this.navigateToCorrectUrl();
     }
 
-    public routeToCommodityType = (evt, commodityType: CommodityTypesString) => {
+    public routeToCommodityType = (evt, commodityType: CommodityTypesLowerCase) => {
         evt.preventDefault();
         this.commodityType = commodityType;
         this.navigateToCorrectUrl();
