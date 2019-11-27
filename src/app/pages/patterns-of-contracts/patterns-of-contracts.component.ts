@@ -35,12 +35,12 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
 
     public urlToPdfs = {
         [this.COMMODITY_TYPE.POWER]: {
-            [this.SUBJECT_TYPE.INDIVIDUAL]: '/assets/pdfs/static/contract.pdf',
-            [this.SUBJECT_TYPE.BUSINESSMAN]: '/assets/pdfs/static/contract.pdf',
+            [this.SUBJECT_TYPE.INDIVIDUAL]: '/assets/pdfs/static/contract-power-fo.pdf',
+            [this.SUBJECT_TYPE.BUSINESSMAN]: '/assets/pdfs/static/contract-power-po.pdf',
         },
         [this.COMMODITY_TYPE.GAS]: {
-            [this.SUBJECT_TYPE.INDIVIDUAL]: '/assets/pdfs/static/contract.pdf',
-            [this.SUBJECT_TYPE.BUSINESSMAN]: '/assets/pdfs/static/smlouva2.pdf',
+            [this.SUBJECT_TYPE.INDIVIDUAL]: '/assets/pdfs/static/contract-gas-fo.pdf',
+            [this.SUBJECT_TYPE.BUSINESSMAN]: '/assets/pdfs/static/contract-gas-po.pdf',
         },
     };
 

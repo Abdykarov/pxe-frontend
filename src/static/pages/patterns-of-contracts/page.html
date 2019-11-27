@@ -5,45 +5,51 @@
                 <h1>Patters of contracts</h1>
             </div>
         </div>
-        <ul class="text-center link-list">
-            <li class="link-list__item">
-                <a class="link-list__link link-list__link--active"
-                   href="#"
-                   (click)="routerTo($event)">
-                    Elektřina
-                </a>
-            </li>
-            <li class="link-list__item">
-                <a class="link-list__link"
-                   href="#"
-                   (click)="routerTo($event)">
-                    Plyn
-                </a>
-            </li>
-        </ul>
-        <ul class="text-center link-list">
-            <li class="link-list__item">
-                <a class="link-list__link link-list__link--active"
-                   href="#"
-                   (click)="routerTo($event)">
-                    Domácnost
-                </a>
-            </li>
-            <li class="link-list__item">
-                <a class="link-list__link"
-                   href="#"
-                   (click)="routerTo($event)">
-                    Firma
-                </a>
-            </li>
-        </ul>
-        <div class="row mt-2">
-            <div class="col-md-12 col-lg-8 offset-lg-2 pdf-height" style="height: 900px;">
-                <ng2-pdfjs-viewer
-                    [pdfSrc]="urlPdfPatterOfContracts"
-                    [openFile]="false"
-                    [viewBookmark]="false">
-                ></ng2-pdfjs-viewer>
+        <div class="row">
+            <div class="col-12">
+                <ul class="text-center link-list">
+                    <li class="link-list__item">
+                        <a class="link-list__link link-list__link--active"
+                            href="#"
+                            (click)="routerTo($event)">
+                            Elektřina
+                        </a>
+                    </li>
+                    <li class="link-list__item">
+                        <a class="link-list__link"
+                            href="#"
+                            (click)="routerTo($event)">
+                            Plyn
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-12 mb-2">
+                <ul class="text-center link-list">
+                    <li class="link-list__item">
+                        <a class="link-list__link link-list__link--active"
+                            href="#"
+                            (click)="routerTo($event)">
+                            Domácnost
+                        </a>
+                    </li>
+                    <li class="link-list__item">
+                        <a class="link-list__link"
+                            href="#"
+                            (click)="routerTo($event)">
+                            Firma
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-12 col-xl-8 offset-xl-2 col-xl-8 offset-xl-2">
+                <div class="pdf-holder pdf-holder--large px-3 px-xl-0">
+                    <ng2-pdfjs-viewer
+                        [pdfSrc]="urlPdfPatterOfContracts"
+                        [openFile]="false"
+                        [viewBookmark]="false">
+                    ></ng2-pdfjs-viewer>
+                </div>
             </div>
         </div>
     </div>
