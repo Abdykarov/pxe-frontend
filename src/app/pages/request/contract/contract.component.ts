@@ -124,6 +124,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                     this.cd.markForCheck();
                     setTimeout(() => {
                         this.showPdfs();
+                        this.cd.markForCheck();
                     });
                 },
                 (error) => {
