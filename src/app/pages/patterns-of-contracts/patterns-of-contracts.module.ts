@@ -12,7 +12,6 @@ import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import { PipesModule } from 'src/common/pipes/pipes.module';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
 
-
 @NgModule({
     declarations: [
         PatternsOfContractsComponent,

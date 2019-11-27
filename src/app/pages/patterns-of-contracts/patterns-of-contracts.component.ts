@@ -43,7 +43,6 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
             [this.COMMODITY_TYPE.POWER]: '/assets/pdfs/static/contract-power-po.pdf',
             [this.COMMODITY_TYPE.GAS]: '/assets/pdfs/static/contract-gas-po.pdf',
         },
-
     };
 
     constructor(
