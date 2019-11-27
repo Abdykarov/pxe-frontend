@@ -42,7 +42,6 @@ export const CONSTS = {
         GAS: 'gas',
         LOGIN : 'login',
         LOGOUT : 'logout',
-        NOT_FOUND : '404',
         OFFER_SELECTION : 'offer-selection',
         PATTERNS_OF_CONTRACTS: 'patterns-of-contracts',
         PAYMENT : 'payment',
@@ -74,7 +73,6 @@ export const ROUTES = {
     ROUTER_ROOT: '/',
     ROUTER_DASHBOARD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.DASHBOARD}`,
     ROUTER_DELETE_ACCOUNT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.DELETE_ACCOUNT}`,
-    ROUTER_NOT_FOUND: '/not_found',
     ROUTER_REQUEST_SUPPLY_POINT_SELECTION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_POINT_SELECTION}`,
     ROUTER_REQUEST_CONTRACT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.CONTRACT}`,
     ROUTER_REQUEST_OFFER_SELECTION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.OFFER_SELECTION}`,
@@ -178,7 +176,7 @@ export const commodityTypes = {
 
 export enum SubjectTypeLowerCase {
     INDIVIDUAL = 'individual',
-    BUSINESSMAN = 'businessman',
+    BUSINESSMAN = 'business',
 }
 
 export const SubjectTypesTypes = {

@@ -3,6 +3,7 @@ import {
     Router,
 } from '@angular/router';
 import {
+    ChangeDetectorRef,
     Component,
     OnInit,
 } from '@angular/core';
@@ -14,7 +15,6 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CommodityTypesLowerCase,
     CONSTS,
-    ROUTES,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
@@ -32,19 +32,22 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
 
     public commodityType = this.COMMODITY_TYPE.POWER;
     public subjectType = this.SUBJECT_TYPE.INDIVIDUAL;
+    public loading = true;
 
     public urlToPdfs = {
-        [this.COMMODITY_TYPE.POWER]: {
-            [this.SUBJECT_TYPE.INDIVIDUAL]: '/assets/pdfs/static/contract-power-fo.pdf',
-            [this.SUBJECT_TYPE.BUSINESSMAN]: '/assets/pdfs/static/contract-power-po.pdf',
+        [this.SUBJECT_TYPE.INDIVIDUAL]: {
+            [this.COMMODITY_TYPE.POWER]: '/assets/pdfs/static/contract-power-fo.pdf',
+            [this.COMMODITY_TYPE.GAS]: '/assets/pdfs/static/contract-gas-fo.pdf',
         },
-        [this.COMMODITY_TYPE.GAS]: {
-            [this.SUBJECT_TYPE.INDIVIDUAL]: '/assets/pdfs/static/contract-gas-fo.pdf',
-            [this.SUBJECT_TYPE.BUSINESSMAN]: '/assets/pdfs/static/contract-gas-po.pdf',
+        [this.SUBJECT_TYPE.BUSINESSMAN]: {
+            [this.COMMODITY_TYPE.POWER]: '/assets/pdfs/static/contract-power-po.pdf',
+            [this.COMMODITY_TYPE.GAS]: '/assets/pdfs/static/contract-gas-po.pdf',
         },
+
     };
 
     constructor(
+        private cd: ChangeDetectorRef,
         private route: ActivatedRoute,
         private router: Router,
     ) {
@@ -67,11 +70,15 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
                 takeUntil(this.destroy$),
             )
             .subscribe(params => {
-                this.commodityType = params.commodityType;
                 this.subjectType = params.subjectType;
-                if (!R.path([this.commodityType, this.subjectType], this.urlToPdfs)) {
-                    this.router.navigate([ROUTES.ROUTER_NOT_FOUND]);
+                this.commodityType = params.commodityType;
+                if (!R.path([this.subjectType, this.commodityType], this.urlToPdfs)) {
+                    this.commodityType = this.COMMODITY_TYPE.POWER;
+                    this.subjectType = this.SUBJECT_TYPE.INDIVIDUAL;
+                    this.navigateToCorrectUrl();
+                    return;
                 }
+                this.cd.markForCheck();
             });
     }
 
@@ -88,6 +95,6 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
     }
 
     public navigateToCorrectUrl = () => {
-        this.router.navigate([`${CONSTS.PATHS.PATTERNS_OF_CONTRACTS}/${this.commodityType}/${this.subjectType}`]);
+        this.router.navigate([`${CONSTS.PATHS.PATTERNS_OF_CONTRACTS}/${this.subjectType}/${this.commodityType}`]);
     }
 }
