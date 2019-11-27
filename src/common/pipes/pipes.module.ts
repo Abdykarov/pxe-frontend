@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 // own classes
 import { AccountNumberPipe } from './account-number/account-number.pipe';
+import { AllowProgressStepPipe } from 'src/common/pipes/allow-progress-step/allow-progress-step.pipe';
 import { CeilPipe } from 'src/common/pipes/ceil-number/simple-number.pipe';
 import { ConsumptionPipe } from './consumption/consumption.pipe';
 import { ConsumptionIndicatorPipe } from './consumption-indicator/consumption-indicator.pipe';
@@ -25,6 +26,7 @@ import { ValuesPipe } from './values/values.pipe';
 @NgModule({
     declarations: [
         AccountNumberPipe,
+        AllowProgressStepPipe,
         CeilPipe,
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
@@ -46,6 +48,7 @@ import { ValuesPipe } from './values/values.pipe';
     ],
     exports: [
         AccountNumberPipe,
+        AllowProgressStepPipe,
         CeilPipe,
         ConsumptionPipe,
         ConsumptionIndicatorPipe,

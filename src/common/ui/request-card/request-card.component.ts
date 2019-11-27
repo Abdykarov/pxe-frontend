@@ -9,6 +9,7 @@ import {
 import {
     CommodityType,
     ISupplyPoint,
+    ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { getConfigStepper } from 'src/common/utils';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
@@ -29,6 +30,8 @@ export class RequestCardComponent implements OnInit {
     public commodityType = CommodityType;
 
     public stepperProgressConfig: IStepperProgressItem[] = null;
+
+    public allowPersonalDataStep = ProgressStatus.PERSONAL_DATA;
 
     ngOnInit(): void {
         this.stepperProgressConfig = getConfigStepper(this.supplyPoint.progressStatus, false);
