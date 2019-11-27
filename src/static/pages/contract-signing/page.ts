@@ -12,6 +12,8 @@ export class ContractSigningPageComponent {
     public offer: IOffer = offerConfig;
     public showOffer = false;
     public stepperProgressConfig = getConfigStepper(ProgressStatus.READY_FOR_SIGN);
+    public urlPdfInformation = '/assets/pdfs/static/information.pdf';
+    public urlPdfContract = '/assets/pdfs/static/contract.pdf';
 
     public toggleOffer = (event) => {
         this.showOffer = !this.showOffer;
