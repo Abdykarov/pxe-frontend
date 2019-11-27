@@ -82,6 +82,20 @@ const routes = [
                 },
             },
             {
+                path: CONSTS.PATHS.PATTERNS_OF_CONTRACTS,
+                redirectTo: CONSTS.PATHS.PATTERNS_OF_CONTRACTS + '/',
+            },
+            {
+                path: CONSTS.PATHS.PATTERNS_OF_CONTRACTS + '/:subjectType/:commodityType',
+                loadChildren: '../../pages/patterns-of-contracts/patterns-of-contracts.module#PatternsOfContractsModule',
+                data: {
+                    isPublic: true,
+                    isSimpleFooter: false,
+                    loginType: LoginType.NAVIGATE,
+                    signUpType: SignType.SCROLL,
+                },
+            },
+            {
                 path: CONSTS.PATHS.SIGN_UP,
                 loadChildren: '../../pages/sign-up/sign-up.module#SignUpModule',
                 data: {
