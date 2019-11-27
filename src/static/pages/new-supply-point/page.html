@@ -1,3 +1,9 @@
+<ng-template #phraseHelpTemplate>
+    <p class="small mt-0 mb-1">
+        V případě, že zde není přesně vaše hodnota, zadejte nejbližší vyšší hodnotu
+    </p>
+</ng-template>
+
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12 col-md-6 offset-md-3 text-center">
@@ -74,29 +80,33 @@
                         [parentForm]="form"
                         [selectName]="'distributionRateId'">
                     </lnd-select>
-                    <div class="row no-gutters">
-                        <div class="col-12 mb-2">
-                            <small>Jistič</small>
+                    <pxe-field-wrapper
+                        labelFor="phasesId"
+                        [subtextTemplate]="phraseHelpTemplate">
+                        <div class="row no-gutters">
+                            <div class="col-12 mb-2">
+                                <small>Jistič</small>
+                            </div>
+                            <div class="col-12 col-md-6 pr-md-1">
+                                <lnd-select
+                                    label="fáze"
+                                    [options]="config.circuitBreakerPhaseOptions"
+                                    [parentForm]="form"
+                                    [selectName]="'phasesId'">
+                                </lnd-select>
+                            </div>
+                            <div class="col-12 col-md-6 pl-md-1">
+                                <lnd-select
+                                    [appendButtonIcon]="'icon--info'"
+                                    (appendButtonAction)="openModal()"
+                                    label="velikost"
+                                    [options]="config.circuitBreakerSizeOptions"
+                                    [parentForm]="form"
+                                    [selectName]="'circuitBreakerId'">
+                                </lnd-select>
+                            </div>
                         </div>
-                        <div class="col-12 col-md-6 pr-md-1">
-                            <lnd-select
-                                label="fáze"
-                                [options]="config.circuitBreakerPhaseOptions"
-                                [parentForm]="form"
-                                [selectName]="'phasesId'">
-                            </lnd-select>
-                        </div>
-                        <div class="col-12 col-md-6 pl-md-1">
-                            <lnd-select
-                                [appendButtonIcon]="'icon--info'"
-                                (appendButtonAction)="openModal()"
-                                label="velikost"
-                                [options]="config.circuitBreakerSizeOptions"
-                                [parentForm]="form"
-                                [selectName]="'circuitBreakerId'">
-                            </lnd-select>
-                        </div>
-                    </div>
+                    </pxe-field-wrapper>
                     <lnd-form-field
                         [appendButtonIcon]="'icon--info'"
                         (appendButtonAction)="openModal()"

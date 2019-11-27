@@ -92,6 +92,7 @@
         [formControl]="form.controls.signatoryPosition"
         [id]="'position'"
         label="Funkce podepisující osoby ve společnosti"
+        subtext="V případě živnostníků, prosím doplňte OSVČ"
         [success]="form.controls.signatoryPosition.valid && (form.controls.signatoryPosition.touched || formError.signatoryPosition)"
         [touched]="form.controls.signatoryPosition.touched || formError.signatoryPosition"
         [validationMessages]="formFields.validationMessages.signatoryPosition"
