@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 
+import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
+
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { ContractSigningPageComponent } from './page';
@@ -19,6 +21,7 @@ import { SupplyPointOfferModule } from 'src/common/ui/supply-point-offer/supply-
         ButtonModule,
         CommonModule,
         FormModule,
+        PdfJsViewerModule,
         ProgressBarModule,
         SupplyPointOfferModule,
     ],
