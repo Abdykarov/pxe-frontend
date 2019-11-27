@@ -198,6 +198,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/full/login-after-registration',
                 },
                 {
+                    'label': 'Patterns of contracts',
+                    'url': '/full/patterns-of-contracts',
+                },
+                {
                     'label': 'Payment verification',
                     'url': '/basic/payment-verification',
                 },

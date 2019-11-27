@@ -6,6 +6,10 @@ import { AbstractComponent } from 'src/common/abstract.component';
 // own modules
 import { AuthService } from 'src/app/services/auth.service';
 import {
+    CommodityTypesLowerCase,
+    SubjectTypeLowerCase,
+} from 'src/app/app.constants';
+import {
     ISettings,
     LoginType,
     SignType,
@@ -16,6 +20,9 @@ import {
     styleUrls: ['../../../assets/scss/05_pages/error-page.scss'],
 })
 export class NotFoundComponent extends AbstractComponent {
+    public commodityTypePower = CommodityTypesLowerCase.POWER;
+    public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
+
     public settings: ISettings = {
         isPublic: true,
         isPublicEmptyPage: true,
