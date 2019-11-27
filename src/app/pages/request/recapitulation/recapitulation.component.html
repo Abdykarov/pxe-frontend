@@ -4,6 +4,16 @@
             <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
         </div>
     </div>
+    <div *ngIf="supplyPoint && supplyPoint.contract && !supplyPoint.contract.offerValidity"
+         class="col-12 col-xl-10 offset-xl-1">
+        <lnd-banner-ui
+            [data]="{
+                    text: 'Platnost nabídky vypršela.'
+                }"
+            buttonLabel="Vybrat novou nabídku"
+            (customBannerAction)="chooseNewOfferAction($event)">
+        </lnd-banner-ui>
+    </div>
     <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1">
             <lnd-alert
