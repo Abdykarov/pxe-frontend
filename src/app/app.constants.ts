@@ -42,8 +42,8 @@ export const CONSTS = {
         GAS: 'gas',
         LOGIN : 'login',
         LOGOUT : 'logout',
-        NOT_FOUND : '404',
         OFFER_SELECTION : 'offer-selection',
+        PATTERNS_OF_CONTRACTS: 'patterns-of-contracts',
         PAYMENT : 'payment',
         POWER: 'power',
         RECAPITULATION : 'recapitulation',
@@ -164,9 +164,24 @@ export const COMMODITY_TO_DISTRIBUTION_MAP = {
     [CommodityType.GAS]: CODE_LIST.DISTRIBUTION_GAS,
 };
 
+export enum CommodityTypesLowerCase {
+    POWER = 'power',
+    GAS = 'gas',
+}
+
 export const commodityTypes = {
-    power: CommodityType.POWER,
-    gas: CommodityType.GAS,
+    [CommodityTypesLowerCase.POWER]: CommodityType.POWER,
+    [CommodityTypesLowerCase.GAS]: CommodityType.GAS,
+};
+
+export enum SubjectTypeLowerCase {
+    INDIVIDUAL = 'individual',
+    BUSINESSMAN = 'business',
+}
+
+export const SubjectTypesTypes = {
+    [SubjectTypeLowerCase.INDIVIDUAL]: SubjectType.SUBJECT_TYPE_INDIVIDUAL,
+    [SubjectTypeLowerCase.BUSINESSMAN]: SubjectType.SUBJECT_TYPE_BUSINESSMAN,
 };
 
 export const DISTRIBUTION_RATES_TYPE_DEFINITION = {

@@ -12,6 +12,7 @@ import { ChangePasswordPageModule, changePasswordPageRoutes } from 'src/static/p
 import { LandingModule, landingPageRoutes } from 'src/static/pages/landing/landing.module';
 import { LoginPageModule, loginPageRoutes } from 'src/static/pages/login/page.module';
 import { LoginAfterRegistrationPageModule, loginAfterRegistrationPageRoutes } from 'src/static/pages/login-after-registration/page.module';
+import { PatternsOfContractsPageModule, patternsOfContractsPageRoutes } from 'src/static/pages/patterns-of-contracts/page.module';
 import { RegistrationPageModule, registrationPageRoutes } from 'src/static/pages/registration/page.module';
 import { SupplyOfferPageModule, supplyOfferPageRoutes } from 'src/static/pages/supply-offer/page.module';
 import { Error404PageModule, error404PageRoutes } from 'src/static/pages/error-404/page.module';
@@ -30,6 +31,7 @@ const routes: Routes = [
             ...landingPageRoutes,
             ...loginPageRoutes,
             ...loginAfterRegistrationPageRoutes,
+            ...patternsOfContractsPageRoutes,
             ...registrationPageRoutes,
             ...supplyOfferPageRoutes,
             {
@@ -50,6 +52,7 @@ const routes: Routes = [
         LandingModule,
         LoginPageModule,
         LoginAfterRegistrationPageModule,
+        PatternsOfContractsPageModule,
         RegistrationPageModule,
         RouterModule.forChild(routes),
         SupplyOfferPageModule,
