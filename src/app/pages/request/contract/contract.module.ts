@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
+
 import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { BannerUIModule } from 'src/common/ui/banner/banner-ui.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
@@ -27,6 +29,7 @@ import { VerificationFormModule } from 'src/common/containers/form/forms/verific
         CommonModule,
         ContractRoutingModule,
         LayoutContainerModule,
+        PdfJsViewerModule,
         PipesModule,
         PlaceloaderModule,
         ProgressBarModule,
