@@ -80,7 +80,7 @@ export const errorFieldMessages =  {
     },
     consent: {
         signUp: {
-            required: 'Nezapomeňte na souhlas s Všeobecnými obchodními podmínkami PARC4U a na vzetí na ' +
+            required: 'Nezapomeňte na souhlas s Obchodními podmínkami PARC4U a na vzetí na ' +
                 'vědomí informací o Ochraně osobních údajů.',
         },
         newsSubscription: {
