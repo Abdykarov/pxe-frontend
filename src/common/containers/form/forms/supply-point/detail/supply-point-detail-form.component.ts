@@ -22,6 +22,7 @@ import {
     AllowedOperations,
     CommodityType,
     ISupplyPoint,
+    TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import {
     confirmFindNewSupplyPoint,
@@ -29,7 +30,9 @@ import {
     supplyPointDetailAllowedFields,
 } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import {
+    CONSTS,
     CONTRACT_END_TYPE,
+    CONTRACT_END_TYPE_TRANSLATE_MAP,
     ROUTES,
     SUBJECT_TYPE_OPTIONS,
     TIME_TO_CONTRACT_END_PERIOD_MAP,
@@ -52,13 +55,17 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
 
     public allowedFields = supplyPointDetailAllowedFields;
     public allowedOperations = AllowedOperations;
-    public contractEndType = CONTRACT_END_TYPE;
     public commodityType = CommodityType;
+    public contractEndType = CONTRACT_END_TYPE;
+    public contractEndTypeTranslate = CONTRACT_END_TYPE_TRANSLATE_MAP;
     public suppliers = [];
     public subjectName = '';
+    public supplyPointContractEndType = CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION;
     public setFormByCommodity = this.setFormFields;
     public timeToContractEndPeriodMap = TIME_TO_CONTRACT_END_PERIOD_MAP;
     public today = new Date().toISOString();
+    public timeToContractEnd = CONSTS.TIME_TO_CONTRACT_END_PROLONGED;
+    public timeToContractEndPeriod = TimeToContractEndPeriod.DAY;
 
     constructor(
         private cd: ChangeDetectorRef,

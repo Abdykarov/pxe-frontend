@@ -107,11 +107,12 @@
                         </div>
                         <span class="perex text-capitalize">{{subjectName}}</span>
                     </div>
-                    <div class="col-12 mb-5">
+                    <div *ngIf="(supplyPoint | pathValue:['contract', 'offer', 'supplier', 'name'])"
+                         class="col-12 mb-5">
                         <div class="mb-1">
                             <small>Dodavatel</small>
                         </div>
-                        <span class="perex">{{supplyPoint.supplier.name}}</span>
+                        <span class="perex">{{supplyPoint.contract.offer.supplier.name}}</span>
                     </div>
                     <div class="col-12 mb-5">
                         <div class="mb-1">
@@ -140,30 +141,29 @@
                         </div>
                         <span class="perex">{{supplyPoint.circuitBreaker.help || supplyPoint.circuitBreaker.description}}</span>
                     </div>
-                    <div *ngIf="supplyPoint.lastVersionOfSupplyPoint && supplyPoint.contractEndType && contractEndType.CONTRACT_END_TERM_WITH_PROLONGATION === supplyPoint.contractEndType.code"
+                    <div *ngIf="supplyPoint.lastVersionOfSupplyPoint && contractEndType.CONTRACT_END_TERM_WITH_PROLONGATION === supplyPointContractEndType"
                         class="col-12 mb-5">
                         <div class="mb-1">
                             <small>Ukončení platnosti aktuální smlouvy</small>
                         </div>
-                        <span class="perex">{{supplyPoint.contractEndType.description}}</span>
+                        <span class="perex">{{contractEndTypeTranslate[supplyPointContractEndType]}}</span>
                     </div>
-                    <div *ngIf="supplyPoint.expirationDate"
-                         [class.mb-5]="supplyPoint.expirationDate"
+                    <div *ngIf="(supplyPoint | pathValue:['contract', 'deliveryTo'])"
+                         [class.mb-5]="supplyPoint.contract.deliveryTo"
                          class="col-12">
                         <div class="mb-1">
                             <small>Dodávka do</small>
                         </div>
-                        <span class="perex">{{supplyPoint.expirationDate | date:'d.&nbsp;M.&nbsp;y'}}</span>
+                        <span class="perex">{{supplyPoint.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}</span>
                     </div>
-                    <div *ngIf="supplyPoint.timeToContractEnd"
-                         [class.mb-5]="!supplyPoint.lastVersionOfSupplyPoint && supplyPoint.contractEndType && contractEndType.CONTRACT_END_TERM_WITH_PROLONGATION === supplyPoint.contractEndType.code"
+                    <div [class.mb-5]="!supplyPoint.lastVersionOfSupplyPoint && contractEndType.CONTRACT_END_TERM_WITH_PROLONGATION === supplyPointContractEndType"
                          class="col-12">
                         <div class="mb-1">
                             <small>Výpovědní lhůta</small>
                         </div>
-                        <span class="perex">{{supplyPoint.timeToContractEnd}} {{supplyPoint.timeToContractEnd | plural: timeToContractEndPeriodMap[supplyPoint.timeToContractEndPeriod.code]}}</span>
+                        <span class="perex">{{timeToContractEnd}} {{timeToContractEnd | plural: timeToContractEndPeriodMap[timeToContractEndPeriod]}}</span>
                     </div>
-                    <div *ngIf="!supplyPoint.lastVersionOfSupplyPoint && supplyPoint.contractEndType && contractEndType.CONTRACT_END_TERM_WITH_PROLONGATION === supplyPoint.contractEndType.code"
+                    <div *ngIf="!supplyPoint.lastVersionOfSupplyPoint && contractEndType.CONTRACT_END_TERM_WITH_PROLONGATION === supplyPointContractEndType"
                          class="col-12">
                         <div class="mb-1">
                             <small>Tato smlouva bude nahrazena smlouvou budouci.</small>
