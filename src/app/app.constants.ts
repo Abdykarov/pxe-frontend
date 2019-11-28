@@ -149,6 +149,13 @@ export const CONTRACT_END_TYPE_ORDER = [
     CONTRACT_END_TYPE.CONTRACT_END_INDEFINITE_PERIOD,
 ];
 
+export const CONTRACT_END_TYPE_TRANSLATE_MAP  = {
+    [CONTRACT_END_TYPE.CONTRACT_END_TERM]: 'Smlouva na dobu určitou',
+    [CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION]: 'Smlouva určitá s automatickou prolongací',
+    [CONTRACT_END_TYPE.CONTRACT_END_INDEFINITE_PERIOD]: 'Smlouva na dobu neurčitou',
+    [CONTRACT_END_TYPE.CONTRACT_END_TERMINATE]: 'Vlastní výpověď',
+};
+
 export const TIME_TO_CONTRACT_END_PERIOD_MAP = {
     [TimeToContractEndPeriod.DAY]: 'day',
     [TimeToContractEndPeriod.MONTH]: 'month',
