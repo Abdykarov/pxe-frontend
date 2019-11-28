@@ -72,7 +72,7 @@
                 <div class="row">
                     <div class="col-12 col-md-10 offset-md-2 col-xl-12 offset-xl-0">
                         <div class="row">
-                            <ng-container *ngIf="(data | pathValue:['contract', 'offer', 'prepayment']) as prepayment">
+                            <ng-container *ngIf="(data | pathValue:['contract', 'offer', 'supplier','name']) && (data | pathValue:['contract', 'offer', 'prepayment']) as prepayment">
                                 <div class="col-12">
                                     <span class="supply-point__price-label">Cena</span>
                                 </div>
