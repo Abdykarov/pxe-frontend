@@ -7,6 +7,6 @@ interface IPdfSettingSubject {
 }
 
 interface IPdfFile {
-    sourceSrc: string;
+    sourceUrl: string;
     downloadName: string;
 }

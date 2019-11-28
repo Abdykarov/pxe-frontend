@@ -45,7 +45,7 @@
                 <div *ngIf="(pdfSetting | pathValue:[this.subjectType, this.commodityType])"
                      class="col-md-12 col-lg-8 offset-lg-2 pdf-holder pdf-holder--large px-4">
                     <ng2-pdfjs-viewer
-                        [pdfSrc]="pdfSetting[this.subjectType][this.commodityType].sourceSrc"
+                        [pdfSrc]="pdfSetting[this.subjectType][this.commodityType].sourceUrl"
                         [downloadFileName]="pdfSetting[this.subjectType][this.commodityType].downloadName"
                         [openFile]="false"
                         [viewBookmark]="false"

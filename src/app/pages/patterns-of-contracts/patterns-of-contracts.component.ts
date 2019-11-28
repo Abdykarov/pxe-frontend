@@ -38,21 +38,21 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
     public pdfSetting: IPdfSetting = {
         [this.SUBJECT_TYPE.INDIVIDUAL]: {
             [this.COMMODITY_TYPE.POWER]: {
-                sourceSrc: '/assets/pdfs/static/contract-power-fo.pdf',
+                sourceUrl: '/assets/pdfs/static/contract-power-fo.pdf',
                 downloadName: 'Vzorová smlouva domácnost - elektřina',
             },
             [this.COMMODITY_TYPE.GAS]: {
-                sourceSrc: '/assets/pdfs/static/contract-gas-fo.pdf',
+                sourceUrl: '/assets/pdfs/static/contract-gas-fo.pdf',
                 downloadName: 'Vzorová smlouva domácnost - plyn',
             },
         },
         [this.SUBJECT_TYPE.BUSINESSMAN]: {
             [this.COMMODITY_TYPE.POWER]: {
-                sourceSrc: '/assets/pdfs/static/contract-power-po.pdf',
+                sourceUrl: '/assets/pdfs/static/contract-power-po.pdf',
                 downloadName: 'Vzorová smlouva firma - elektřina',
             },
             [this.COMMODITY_TYPE.GAS]: {
-                sourceSrc: '/assets/pdfs/static/contract-gas-po.pdf',
+                sourceUrl: '/assets/pdfs/static/contract-gas-po.pdf',
                 downloadName: 'Vzorová smlouva firma - plyn',
             },
         },
