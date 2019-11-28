@@ -107,7 +107,6 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
     }
 
     public navigateToCorrectUrl = () => {
-        console.log('WTF');
         this.router.navigate([`${CONSTS.PATHS.PATTERNS_OF_CONTRACTS}/${this.subjectType}/${this.commodityType}`]);
     }
 }
