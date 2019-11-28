@@ -18,6 +18,7 @@ import {
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { IPdfSetting } from './patterns-of-contracts.model';
 
 @Component({
     selector: 'pxe-patterns-of-contracts',
@@ -34,14 +35,26 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
     public subjectType = this.SUBJECT_TYPE.INDIVIDUAL;
     public loading = true;
 
-    public urlToPdfs = {
+    public pdfSetting: IPdfSetting = {
         [this.SUBJECT_TYPE.INDIVIDUAL]: {
-            [this.COMMODITY_TYPE.POWER]: '/assets/pdfs/static/contract-power-fo.pdf',
-            [this.COMMODITY_TYPE.GAS]: '/assets/pdfs/static/contract-gas-fo.pdf',
+            [this.COMMODITY_TYPE.POWER]: {
+                sourceSrc: '/assets/pdfs/static/contract-power-fo.pdf',
+                downloadName: 'Vzorová smlouva domácnost - elektřina',
+            },
+            [this.COMMODITY_TYPE.GAS]: {
+                sourceSrc: '/assets/pdfs/static/contract-gas-fo.pdf',
+                downloadName: 'Vzorová smlouva domácnost - plyn',
+            },
         },
         [this.SUBJECT_TYPE.BUSINESSMAN]: {
-            [this.COMMODITY_TYPE.POWER]: '/assets/pdfs/static/contract-power-po.pdf',
-            [this.COMMODITY_TYPE.GAS]: '/assets/pdfs/static/contract-gas-po.pdf',
+            [this.COMMODITY_TYPE.POWER]: {
+                sourceSrc: '/assets/pdfs/static/contract-power-po.pdf',
+                downloadName: 'Vzorová smlouva firma - elektřina',
+            },
+            [this.COMMODITY_TYPE.GAS]: {
+                sourceSrc: '/assets/pdfs/static/contract-gas-po.pdf',
+                downloadName: 'Vzorová smlouva firma - plyn',
+            },
         },
     };
 
@@ -71,7 +84,7 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
             .subscribe(params => {
                 this.subjectType = params.subjectType;
                 this.commodityType = params.commodityType;
-                if (!R.path([this.subjectType, this.commodityType], this.urlToPdfs)) {
+                if (!R.path([this.subjectType, this.commodityType], this.pdfSetting)) {
                     this.commodityType = this.COMMODITY_TYPE.POWER;
                     this.subjectType = this.SUBJECT_TYPE.INDIVIDUAL;
                     this.navigateToCorrectUrl();
@@ -94,6 +107,7 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
     }
 
     public navigateToCorrectUrl = () => {
+        console.log('WTF');
         this.router.navigate([`${CONSTS.PATHS.PATTERNS_OF_CONTRACTS}/${this.subjectType}/${this.commodityType}`]);
     }
 }
