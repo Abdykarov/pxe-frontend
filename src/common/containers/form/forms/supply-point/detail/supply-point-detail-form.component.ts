@@ -57,7 +57,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     public allowedOperations = AllowedOperations;
     public commodityType = CommodityType;
     public contractEndType = CONTRACT_END_TYPE;
-    public contractEndTypeTranslate = CONTRACT_END_TYPE_TRANSLATE_MAP;
+    public contractEndTypeTranslateMap = CONTRACT_END_TYPE_TRANSLATE_MAP;
     public suppliers = [];
     public subjectName = '';
     public supplyPointContractEndType = CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION;

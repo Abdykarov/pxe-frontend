@@ -146,7 +146,7 @@
                         <div class="mb-1">
                             <small>Ukončení platnosti aktuální smlouvy</small>
                         </div>
-                        <span class="perex">{{contractEndTypeTranslate[supplyPointContractEndType]}}</span>
+                        <span class="perex">{{contractEndTypeTranslateMap[supplyPointContractEndType]}}</span>
                     </div>
                     <div *ngIf="(supplyPoint | pathValue:['contract', 'deliveryTo'])"
                          [class.mb-5]="supplyPoint.contract.deliveryTo"
