@@ -54,6 +54,8 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 export class ContractComponent extends AbstractComponent implements OnInit {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.READY_FOR_SIGN;
     public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.PERSONAL_DATA;
+    public readonly DOWNLOAD_NAME_CONTRACT = 'Informace.pdf';
+    public readonly DOWNLOAD_NAME_INFORMATION = 'Smlouva.pdf';
 
     @ViewChild('pxeVerificationFormWrapper')
     public pxeVerificationFormWrapper: ElementRef;
