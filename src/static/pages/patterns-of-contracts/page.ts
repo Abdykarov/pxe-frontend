@@ -8,7 +8,7 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 
 export class PatternsOfContractsPageComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
-    public urlPdfPatterOfContracts = '/assets/pdfs/static/contract-power-fo.pdf';
+    public urlPdfPatterOfContracts = '/assets/pdfs/patterns-of-contracts/contract-power-po.pdf';
     public downloadFileName = 'Vzorová smlouva domácnost - elektřina';
 
     constructor() {
