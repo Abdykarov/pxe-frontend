@@ -42,10 +42,11 @@
                         </li>
                     </ul>
                 </div>
-                <div *ngIf="(urlToPdfs | pathValue:[this.subjectType, this.commodityType])"
+                <div *ngIf="(pdfSetting | pathValue:[this.subjectType, this.commodityType]) as pdf"
                      class="col-md-12 col-lg-8 offset-lg-2 pdf-holder pdf-holder--large px-4">
                     <ng2-pdfjs-viewer
-                        [pdfSrc]="urlToPdfs[this.subjectType][this.commodityType]"
+                        [pdfSrc]="pdf.sourceUrl"
+                        [downloadFileName]="pdf.downloadName"
                         [openFile]="false"
                         [viewBookmark]="false"
                         zoom="page-width">
