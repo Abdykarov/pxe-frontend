@@ -68,8 +68,8 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public documentLoading = false;
     public documentType = IDocumentType;
-    public documentTypeContract = null;
-    public documentTypeInformation = null;
+    public documentTypeContract: IResponseDataDocument = null;
+    public documentTypeInformation: IResponseDataDocument = null;
     public fieldError: IFieldError = {};
     public formLoading = false;
     public globalError: string[] = [];
@@ -109,6 +109,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                             of(
                                 {
                                     file: null,
+                                    filename: null,
                                 },
                             ),
                         this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.CONTRACT),
@@ -118,8 +119,8 @@ export class ContractComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 ([documentTypeInformation, documentTypeContract]) => {
-                    this.documentTypeInformation = documentTypeInformation.file;
-                    this.documentTypeContract = documentTypeContract.file;
+                    this.documentTypeInformation = documentTypeInformation;
+                    this.documentTypeContract = documentTypeContract;
                     this.loadingSupplyPoint = false;
                     this.cd.markForCheck();
                     setTimeout(() => {
@@ -137,11 +138,13 @@ export class ContractComponent extends AbstractComponent implements OnInit {
 
     public showPdfs = () => {
         if (this.pdfInformation) {
-            this.pdfInformation.pdfSrc = this.documentTypeInformation;
+            this.pdfInformation.pdfSrc = this.documentTypeInformation.file;
+            this.pdfInformation.downloadFileName = this.documentTypeInformation.filename;
             this.pdfInformation.refresh();
         }
         if (this.pdfContract) {
-            this.pdfContract.pdfSrc = this.documentTypeContract;
+            this.pdfContract.pdfSrc = this.documentTypeContract.file;
+            this.pdfContract.downloadFileName = this.documentTypeContract.filename;
             this.pdfContract.refresh();
         }
     }
