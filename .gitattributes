@@ -12,3 +12,5 @@ Dockerfile*  text eol=lf
 *.zip binary
 *.ttf binary
 *.woff binary
+*.pdf binary
+
