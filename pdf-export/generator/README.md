@@ -1,0 +1,3 @@
+- PDF.jar slouzi ke generovani PDF
+- Java 9! (Na Jave 8 nejde)
+- Spustenni java -jar pdf.jar "{nazev-souboru}"
