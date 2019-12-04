@@ -23,7 +23,7 @@
         [formControl]="form.controls.name"
         [id]="'name'"
         [label]="isIndividual ? 'Jméno a příjmení' : 'Název společnosti'"
-        subtext="Právnická osoba uvede svůj název vč. právní formy. Fyzická podnikající osoba uvede své jméno a příjmení"
+        [subtext]="isIndividual ?  '' : 'Právnická osoba uvede svůj název vč. právní formy. Fyzická podnikající osoba uvede své jméno a příjmení'"
         [success]="form.controls.name.valid && (form.controls.name.touched || formError.name)"
         [touched]="form.controls.name.touched || formError.name"
         [validationMessages]="isIndividual ? formFields.validationMessages.namePerson : formFields.validationMessages.nameCompany"
