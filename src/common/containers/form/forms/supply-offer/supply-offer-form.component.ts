@@ -140,12 +140,10 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
         super.ngOnChanges(changes);
         if (changes.formValues) {
             if (!R.isNil(changes.formValues.currentValue)) {
-                console.log('FIRST TIME');
                 this.prefillForm = true;
             }
             if (this.form && this.form.controls) {
                 this.prefillFormData();
-                console.log('SECOND TIME');
             }
         }
     }
