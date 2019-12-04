@@ -1,6 +1,6 @@
 <ng-template #columnTemplateDeliveryTime
              let-row="row">
-    {{row.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}} - {{row.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}
+    {{row.contract.deliveryFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}
 </ng-template>
 
 <ng-template #downloadPdfTemplate let-row="row">
