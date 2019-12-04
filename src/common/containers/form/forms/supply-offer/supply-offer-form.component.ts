@@ -16,7 +16,6 @@ import {
 } from '@angular/forms';
 
 import * as R from 'ramda';
-import * as R_ from 'ramda-extension';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
@@ -30,7 +29,7 @@ import {
 } from 'src/app/app.constants';
 import {
     commodityTypeFields,
-} from './supply-offer-form.config';
+} from 'src/common/containers/form/forms/supply-offer/configs/supply-offer-form.config';
 import {
     CommodityType,
     DistributionType,
@@ -39,7 +38,10 @@ import {
     convertDateToSendFormatFnc,
     transformCodeList,
 } from 'src/common/utils';
+import { formFieldsBenefit } from 'src/common/containers/form/forms/supply-offer/configs/supply-offer-benefit-form.config';
+import { IBenefit } from 'src/common/graphql/models/offer.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
+import { IForm } from 'src/common/containers/form/models/form-definition.model';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -61,6 +63,8 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
 
     @Output()
     public currentFormValues: EventEmitter<any> = new EventEmitter<any>();
+
+    public formFieldsBenefit: IForm = formFieldsBenefit;
 
     public codeLists;
     public COMMODITY_TYPE_POWER = CommodityType.POWER;
@@ -145,9 +149,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
     }
 
     public addBenefit = () => {
-        return this.fb.group({
-            benefit: [null],
-        });
+        return this.fb.group(formFieldsBenefit.controls, formFieldsBenefit.options);
     }
 
     public includesBothTariffs = (id: string) => DISTRIBUTION_RATES_TYPE_DEFINITION[DistributionType.BOTH].includes(id);
@@ -228,7 +230,10 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
 
         R.times((n: number) => {
             const benefit = benefits && benefits[n] || null;
-            (this.benefitsFormArray.controls[n] as FormGroup).controls['benefit'].setValue(benefit);
+            if (benefit && benefit.name) {
+                (this.benefitsFormArray.controls[n] as FormGroup).controls.name.setValue(benefit.name);
+                (this.benefitsFormArray.controls[n] as FormGroup).controls.url.setValue(benefit.url);
+            }
         }, SupplyOfferFormComponent.benefitCount);
 
         this.resetFormError(false);
@@ -237,12 +242,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
     public submitValidForm = () => {
         const form = {
             ...this.form.value,
-            benefits: R.pipe(
-                R.map(R.values),
-                R.flatten,
-                R.filter(R_.isNotNil),
-                JSON.stringify,
-            )(this.form.value.benefits),
+            benefits: JSON.stringify(R.filter((benefit: IBenefit) => benefit.name, this.benefitsFormArray.value)),
         };
         if (!R.isNil(form.validFromTo)) {
             form.validFrom = convertDateToSendFormatFnc(form.validFromTo[0]);

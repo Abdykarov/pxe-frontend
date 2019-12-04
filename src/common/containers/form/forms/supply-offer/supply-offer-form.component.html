@@ -10,7 +10,6 @@
     (keydown)="resetCustomFieldError()"
     (change)="resetCustomFieldError()"
     autocomplete="off">
-
     <div class="row">
         <div *ngIf="form.controls.name.status !== 'DISABLED'"
              class="col-4 col-xl-3">
@@ -195,15 +194,38 @@
         </div>
     </div>
     <div class="row">
-        <ng-container *ngFor="let benefit of benefitsFormArray.controls; let i = index"
+        <ng-container *ngFor="let benefit of (form | valueOfForm: 'benefits').controls; let i = index"
+        formArrayName="benefits">
+            <ng-container [formGroupName]="i">
+                    <div class="col-4 col-xl-3">
+                        <lnd-form-field
+                            formControlName="name"
+                            [error]="benefit.controls.name.errors"
+                            [id]="'benefit' + i"
+                            [label]="'Benefit ' + (i + 1)"
+                            [value]="benefit.value.name"
+                            [success]="benefit.controls.name.valid && benefit.controls.name.touched"
+                            [touched]="benefit.controls.name.touched"
+                            [validationMessages]="formFieldsBenefit.validationMessages.name"
+                        ></lnd-form-field>
+                    </div>
+            </ng-container>
+        </ng-container>
+    </div>
+    <div class="row">
+        <ng-container *ngFor="let benefit of (form | valueOfForm: 'benefits').controls; let i = index"
                       formArrayName="benefits">
             <ng-container [formGroupName]="i">
                 <div class="col-4 col-xl-3">
                     <lnd-form-field
-                            formControlName="benefit"
-                            [id]="'benefit' + i"
-                            [label]="'Benefit ' + (i + 1)"
-                            [value]="benefit.value.benefit"
+                        formControlName="url"
+                        [error]="benefit.controls.url.errors"
+                        [id]="'url' + i"
+                        [label]="'URL na podmínky benefitu ' + (i + 1)"
+                        [value]="benefit.value.url"
+                        [success]="benefit.controls.url.valid && benefit.controls.url.touched"
+                        [touched]="benefit.controls.url.touched"
+                        [validationMessages]="formFieldsBenefit.validationMessages.url"
                     ></lnd-form-field>
                 </div>
             </ng-container>

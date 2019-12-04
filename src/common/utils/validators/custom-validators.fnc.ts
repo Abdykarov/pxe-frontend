@@ -245,6 +245,24 @@ export class CustomValidators {
         };
     }
 
+    static URL = (url) => {
+        if (!url.value || url.pristine) {
+            return null;
+        }
+
+        const URL_REGEXP = new RegExp('(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA' +
+            '-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:ww' +
+            'w\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})');
+
+        if (URL_REGEXP.test(url.value)) {
+            return null;
+        }
+
+        return {
+            url: true,
+        };
+    }
+
     static username = (username) => {
         if (username.pristine) {
             return null;

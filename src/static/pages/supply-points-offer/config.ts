@@ -15,10 +15,22 @@ export const offerConfig1: IOffer = {
     validFrom: '2019-03-12T22:59:12.133Z',
     validTo: new Date(new Date().getTime() + 3600 * 1000 * 24).toISOString(),
     benefits: [
-        'Žárovka LED',
-        'Žárovka LED žárovka',
-        'Žárovka LED',
-        'Žárovka LED žárovka',
+        {
+            name: 'Žárovka LED Lorem',
+            url: 'https://www.seznam.cz/',
+        },
+        {
+            name: 'Žárovka LED Lorem',
+            url: 'https://www.seznam.cz/',
+        },
+        {
+            name: 'Žárovka LED Lorem',
+            url: 'https://www.seznam.cz/',
+        },
+        {
+            name: 'Žárovka LED Lorem',
+            url: 'https://www.seznam.cz/',
+        },
     ],
     deliveryFrom: '',
     deliveryTo: '',
@@ -51,10 +63,18 @@ export const offerConfig2: IOffer = {
     status: null,
     subject: null,
     benefits: [
-        'LED Lorem žárovka',
-        'LED Lorem',
-        'LED Lorem žárovka',
-        'LED Lorem',
+        {
+            name: 'Žárovka LED Lorem',
+            url: 'https://www.seznam.cz/',
+        },
+        {
+            name: 'Žárovka LED Lorem',
+            url: 'https://www.seznam.cz/',
+        },
+        {
+            name: 'Žárovka LED Lorem',
+            url: 'https://www.seznam.cz/',
+        },
     ],
     commodityType: CommodityType.GAS,
     deliveryFrom: '',
@@ -97,10 +117,22 @@ export const offerConfig3: IOffer = {
     status: null,
     subject: null,
     benefits: [
-        'LED Lorem žárovka',
-        'LED Lorem',
-        'LED Lorem žárovka',
-        'LED Lorem',
+        {
+            name: 'Žárovka LED Lorem',
+            url: 'https://www.seznam.cz/',
+        },
+        {
+            name: 'Žárovka LED Lorem',
+            url: 'https://www.seznam.cz/',
+        },
+        {
+            name: 'Žárovka LED Lorem',
+            url: 'https://www.seznam.cz/',
+        },
+        {
+            name: 'Žárovka LED Lorem',
+            url: 'https://www.seznam.cz/',
+        },
     ],
     commodityType: CommodityType.POWER,
     deliveryFrom: '',

@@ -14,7 +14,7 @@ export interface IOffer {
     deliveryLength: number;
     permanentPaymentPrice?: number;
     subject: ICodelistItem;
-    benefits?: string | string[];
+    benefits?: string | string[] | IBenefit[];
     distributionLocation?: string;
     priceVT?: number;
     priceNT?: number;
@@ -73,4 +73,9 @@ export interface IOfferInputGasAttributes {
 export enum IOfferStatus {
     DELETED = 'DELETED',
     ACTIVE = 'ACTIVE',
+}
+
+export interface IBenefit {
+    name: string;
+    url: string;
 }
