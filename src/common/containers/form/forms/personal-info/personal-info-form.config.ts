@@ -31,8 +31,8 @@ export const formFields: IForm = {
         dic: [
             null,
             [
-                Validators.minLength(8),
-                Validators.maxLength(10),
+                Validators.minLength(10),
+                Validators.maxLength(12),
                 CustomValidators.dic,
             ],
         ],
