@@ -24,8 +24,8 @@ export const formFieldsBenefit: IForm = {
             requireIfFieldHaveValue: errorFieldMessages.benefitName.requireIfFieldHaveValue,
         },
         url: {
-            url: errorFieldMessages.benefitName.url,
             requireIfFieldHaveValue: errorFieldMessages.benefitName.requireIfFieldHaveValue,
+            url: errorFieldMessages.benefitName.url,
         },
     },
 };

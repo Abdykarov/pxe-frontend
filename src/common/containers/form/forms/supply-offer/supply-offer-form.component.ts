@@ -140,10 +140,12 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
         super.ngOnChanges(changes);
         if (changes.formValues) {
             if (!R.isNil(changes.formValues.currentValue)) {
+                console.log('FIRST TIME');
                 this.prefillForm = true;
             }
             if (this.form && this.form.controls) {
                 this.prefillFormData();
+                console.log('SECOND TIME');
             }
         }
     }
@@ -230,9 +232,13 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
 
         R.times((n: number) => {
             const benefit = benefits && benefits[n] || null;
+            // refactoring
             if (benefit && benefit.name) {
                 (this.benefitsFormArray.controls[n] as FormGroup).controls.name.setValue(benefit.name);
                 (this.benefitsFormArray.controls[n] as FormGroup).controls.url.setValue(benefit.url);
+            } else {
+                (this.benefitsFormArray.controls[n] as FormGroup).controls.name.setValue(null);
+                (this.benefitsFormArray.controls[n] as FormGroup).controls.url.setValue(null);
             }
         }, SupplyOfferFormComponent.benefitCount);
 
