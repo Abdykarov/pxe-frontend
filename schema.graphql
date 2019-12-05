@@ -265,6 +265,11 @@ enum AllowedOperations {
     TERMINATE_CONTRACT
 }
 
+enum ContractDeleteReason{
+    LEAVING,
+    TERMINATION
+}
+
 enum CommodityType {
     GAS
     POWER
