@@ -57,10 +57,10 @@ export const supplyPointConfigPower: ISupplyPoint = {
             subject: null,
             permanentPaymentPrice: 0,
             benefits: [
-                'Žárovka LED Lorem',
-                'Žárovka LED Lorem',
-                'Žárovka LED Lorem',
-                'Žárovka LED Lorem',
+                {
+                    name: 'Žárovka LED Lorem',
+                    url: 'https://www.seznam.cz/',
+                },
             ],
             commodityType: CommodityType.POWER,
             deliveryFrom: '',
@@ -162,10 +162,10 @@ export const supplyPointConfigGas: ISupplyPoint = {
             subject: null,
             permanentPaymentPrice: 0,
             benefits: [
-                'Žárovka LED Lorem',
-                'Žárovka LED Lorem',
-                'Žárovka LED Lorem',
-                'Žárovka LED Lorem',
+                {
+                    name: 'Žárovka LED Lorem',
+                    url: 'https://www.seznam.cz/',
+                },
             ],
             commodityType: CommodityType.POWER,
             deliveryFrom: '',

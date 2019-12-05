@@ -59,6 +59,12 @@ export const errorFieldMessages =  {
         required: 'Vyplňte kód banky.',
         bankCode: 'Kód banky musí obsahovat 4 číslice.',
     },
+    benefitName: {
+        required: 'Vyplňte benefit.',
+    },
+    benefitUrl: {
+        url: 'Vyplňte validní URL adresu.',
+    },
     birthDate: {
         required: 'Vyplňte datum narození.',
         bsDateMaxDate: 'Nesmíte být mladší 18 let.',

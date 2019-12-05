@@ -7,7 +7,7 @@ import {
     DELIVERY_LENGTH_OPTIONS,
     SUBJECT_TYPE_OPTIONS,
 } from 'src/app/app.constants';
-import { IOfferTableRows } from './models/supply-pffer.model';
+import { IOfferTableRows } from './models/supply-offer.model';
 import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
 
 @Injectable({

@@ -21,6 +21,7 @@ import { PluralPipe } from './plurar/plural.pipe';
 import { ProgressStatusPipe } from './step-of-supply-point/step-of-supply-point.pipe';
 import { SimpleNumberPipe } from 'src/common/pipes/simple-number/simple-number.pipe';
 import { SumPipe } from 'src/common/pipes/sum/sum.pipe';
+import { ValueOfFormPipe } from 'src/common/pipes/value-of-form/value-of-form.pipe';
 import { ValuesPipe } from './values/values.pipe';
 
 @NgModule({
@@ -44,6 +45,7 @@ import { ValuesPipe } from './values/values.pipe';
         ProgressStatusPipe,
         SimpleNumberPipe,
         SumPipe,
+        ValueOfFormPipe,
         ValuesPipe,
     ],
     exports: [
@@ -66,6 +68,7 @@ import { ValuesPipe } from './values/values.pipe';
         ProgressStatusPipe,
         SimpleNumberPipe,
         SumPipe,
+        ValueOfFormPipe,
         ValuesPipe,
     ],
     providers: [
@@ -88,6 +91,7 @@ import { ValuesPipe } from './values/values.pipe';
         ProgressStatusPipe,
         SimpleNumberPipe,
         SumPipe,
+        ValueOfFormPipe,
         ValuesPipe,
     ],
 })
