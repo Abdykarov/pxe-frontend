@@ -230,7 +230,6 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
 
         R.times((n: number) => {
             const benefit = benefits && benefits[n] || null;
-            // refactoring
             if (benefit && benefit.name) {
                 (this.benefitsFormArray.controls[n] as FormGroup).controls.name.setValue(benefit.name);
                 (this.benefitsFormArray.controls[n] as FormGroup).controls.url.setValue(benefit.url);
