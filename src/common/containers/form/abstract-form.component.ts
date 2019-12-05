@@ -112,6 +112,10 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
             R.map((field) => {
                 if (this.form.get(field) instanceof FormGroup) {
                     this.triggerValidationOnForm(this.form.get(field));
+                } else if (this.form.get(field) instanceof FormArray) {
+                    R.map((formGroup) => {
+                        this.triggerValidationOnForm(formGroup);
+                    }, this.form.get(field)['controls']);
                 } else {
                     form.get(field)
                         .markAsTouched({

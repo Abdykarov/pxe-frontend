@@ -199,7 +199,7 @@
              *ngIf="!isOwner && supplyPointOffer.benefits && supplyPointOffer.benefits.length">
             <ul class="check-list supply-point-offer__benefits-list">
                 <ng-container *ngFor="let benefit of supplyPointOffer.benefits">
-                    <li *ngIf="benefit">{{benefit}}</li>
+                    <li *ngIf="benefit && benefit.name">{{benefit.name}}</li>
                 </ng-container>
             </ul>
         </div>
