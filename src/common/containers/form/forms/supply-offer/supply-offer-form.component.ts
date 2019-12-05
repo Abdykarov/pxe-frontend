@@ -245,7 +245,10 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
     public submitValidForm = () => {
         const form = {
             ...this.form.value,
-            benefits: JSON.stringify(R.filter((benefit: IBenefit) => benefit.name, this.benefitsFormArray.value)),
+            benefits: R.pipe(
+                R.filter((benefit: IBenefit) => benefit.name),
+                JSON.stringify,
+            )(this.benefitsFormArray.value),
         };
         if (!R.isNil(form.validFromTo)) {
             form.validFrom = convertDateToSendFormatFnc(form.validFromTo[0]);

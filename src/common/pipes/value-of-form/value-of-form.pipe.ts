@@ -19,5 +19,3 @@ export class ValueOfFormPipe implements PipeTransform {
         return form.get(path);
     }
 }
-
-

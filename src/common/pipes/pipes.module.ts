@@ -91,8 +91,8 @@ import { ValuesPipe } from './values/values.pipe';
         ProgressStatusPipe,
         SimpleNumberPipe,
         SumPipe,
-        ValuesPipe,
         ValueOfFormPipe,
+        ValuesPipe,
     ],
 })
 export class PipesModule {}
