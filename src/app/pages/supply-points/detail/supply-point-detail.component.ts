@@ -179,7 +179,8 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     public submitVerification = (smsCode: string) => {
         this.formLoading = true;
         this.globalError = [];
-        this.contractService.deleteSignedContract(
+        this.contractService.deleteSignedContract
+            (
                 this.supplyPoint.contract.contractId,
                 smsCode,
                 this.contractAction === ContractActions.LEAVE_CONTRACT ? ContractDeleteReason.LEAVING : ContractDeleteReason.TERMINATION,

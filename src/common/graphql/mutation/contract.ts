@@ -45,7 +45,7 @@ export const deleteSignedContractMutation = gql`
         deleteSignedContract(
             contractId: $contractId,
             smsConfirmationCode: $smsConfirmationCode,
-            contractDeleteReason :$contractDeleteReason
+            contractDeleteReason: $contractDeleteReason
         )
     }
 `;
