@@ -180,35 +180,36 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
         this.formLoading = true;
         this.globalError = [];
         this.contractService.deleteSignedContract(
-                this.supplyPoint.contract.contractId,
-                smsCode,
-                this.contractAction === ContractActions.LEAVE_CONTRACT ? ContractDeleteReason.LEAVING : ContractDeleteReason.TERMINATION,
-            )
+            this.supplyPoint.contract.contractId,
+            smsCode,
+            this.contractAction === ContractActions.LEAVE_CONTRACT ? ContractDeleteReason.LEAVING : ContractDeleteReason.TERMINATION,
+        )
             .pipe(
                 takeUntil(
                     this.destroy$,
                 ),
                 map(({data}) => data.deleteSignedContract),
-            ).subscribe(
-            (deleteSignedContract: boolean) => {
-                if (deleteSignedContract) {
-                    this.router.navigate([ROUTES.ROUTER_REQUESTS]);
-                } else {
-                    this.globalError = [defaultErrorMessage];
+            )
+            .subscribe(
+                (deleteSignedContract: boolean) => {
+                    if (deleteSignedContract) {
+                        this.router.navigate([ROUTES.ROUTER_REQUESTS]);
+                    } else {
+                        this.globalError = [defaultErrorMessage];
+                        this.formLoading = false;
+                        this.cd.markForCheck();
+                    }
+                },
+                (error) => {
                     this.formLoading = false;
+                    const { globalError , fieldError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.fieldError = fieldError;
+                    if (Object.keys(this.fieldError).length) {
+                        scrollToElementFnc(this.contractActionsWrapper.nativeElement);
+                    }
                     this.cd.markForCheck();
-                }
-            },
-            (error) => {
-                this.formLoading = false;
-                const { globalError , fieldError } = parseGraphQLErrors(error);
-                this.globalError = globalError;
-                this.fieldError = fieldError;
-                if (Object.keys(this.fieldError).length) {
-                    scrollToElementFnc(this.contractActionsWrapper.nativeElement);
-                }
-                this.cd.markForCheck();
-            },
+                },
         );
         this.cd.markForCheck();
     }
