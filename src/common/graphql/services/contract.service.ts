@@ -14,6 +14,10 @@ import {
     signContractMutation,
     updateContractMutation,
 } from 'src/common/graphql/mutation/contract';
+import {
+    ContractDeleteReason,
+    IQRCodeSetting,
+} from 'src/common/graphql/models/contract';
 import { DEFAULT_QR_CODE_SETTING } from 'src/app/app.constants';
 import { findSupplyPointOffersQuery } from 'src/common/graphql/queries/offer';
 import {
@@ -24,7 +28,6 @@ import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
-import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 import { IOffer } from 'src/common/graphql/models/offer.model';
 
 @Injectable({
@@ -210,12 +213,17 @@ export class ContractService {
         };
     }
 
-    public deleteSignedContract = (contractId: string, smsConfirmationCode: string) => this.apollo
+    public deleteSignedContract = (
+        contractId: string,
+        smsConfirmationCode: string,
+        contractDeleteReason: ContractDeleteReason,
+    ) => this.apollo
         .mutate<any>({
             mutation: deleteSignedContractMutation,
             variables: {
                 contractId,
                 smsConfirmationCode,
+                contractDeleteReason,
             },
         })
 

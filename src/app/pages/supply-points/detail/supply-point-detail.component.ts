@@ -27,6 +27,7 @@ import {
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
 import { ContractActions } from '../models/supply-point-detail.model';
+import { ContractDeleteReason } from 'src/common/graphql/models/contract';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
@@ -178,32 +179,37 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     public submitVerification = (smsCode: string) => {
         this.formLoading = true;
         this.globalError = [];
-        this.contractService.deleteSignedContract(this.supplyPoint.contract.contractId, smsCode)
+        this.contractService.deleteSignedContract(
+            this.supplyPoint.contract.contractId,
+            smsCode,
+            this.contractAction === ContractActions.LEAVE_CONTRACT ? ContractDeleteReason.LEAVING : ContractDeleteReason.TERMINATION,
+        )
             .pipe(
                 takeUntil(
                     this.destroy$,
                 ),
                 map(({data}) => data.deleteSignedContract),
-            ).subscribe(
-            (deleteSignedContract: boolean) => {
-                if (deleteSignedContract) {
-                    this.router.navigate([ROUTES.ROUTER_REQUESTS]);
-                } else {
-                    this.globalError = [defaultErrorMessage];
+            )
+            .subscribe(
+                (deleteSignedContract: boolean) => {
+                    if (deleteSignedContract) {
+                        this.router.navigate([ROUTES.ROUTER_REQUESTS]);
+                    } else {
+                        this.globalError = [defaultErrorMessage];
+                        this.formLoading = false;
+                        this.cd.markForCheck();
+                    }
+                },
+                (error) => {
                     this.formLoading = false;
+                    const { globalError , fieldError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.fieldError = fieldError;
+                    if (Object.keys(this.fieldError).length) {
+                        scrollToElementFnc(this.contractActionsWrapper.nativeElement);
+                    }
                     this.cd.markForCheck();
-                }
-            },
-            (error) => {
-                this.formLoading = false;
-                const { globalError , fieldError } = parseGraphQLErrors(error);
-                this.globalError = globalError;
-                this.fieldError = fieldError;
-                if (Object.keys(this.fieldError).length) {
-                    scrollToElementFnc(this.contractActionsWrapper.nativeElement);
-                }
-                this.cd.markForCheck();
-            },
+                },
         );
         this.cd.markForCheck();
     }
