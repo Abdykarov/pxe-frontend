@@ -52,3 +52,9 @@ export interface IBankAccount {
 export interface IVariableSymbol {
     value: string;
 }
+
+export enum ContractDeleteReason {
+    LEAVING = 'LEAVING',
+    TERMINATION = 'TERMINATION',
+}
+

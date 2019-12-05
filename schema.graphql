@@ -73,7 +73,7 @@ type Mutation {
     deleteOffer(offerId: ID!): Int
     deletePersonalData(contractId: ID!): Boolean
     deleteSelectedOfferFromContract(contractId: ID!): Boolean
-    deleteSignedContract(contractId: ID!, smsConfirmationCode: String!): Boolean
+    deleteSignedContract(contractId: ID!, smsConfirmationCode: String!, contractDeleteReason: ContractDeleteReason!): Boolean
     makeRegistration(email: String!, preregistration: Boolean = false, termsOfConditionsApproved: Boolean!): Boolean
     makeUnregistration(smsCode: String): Boolean
     resetPassword(login: String!): PasswordDestination
@@ -263,6 +263,11 @@ enum AllowedOperations {
     PARTIAL_EDIT
     SHOW_DELIVERY_TO
     TERMINATE_CONTRACT
+}
+
+enum ContractDeleteReason{
+    LEAVING,
+    TERMINATION
 }
 
 enum CommodityType {
