@@ -21,11 +21,11 @@ export const formFieldsBenefit: IForm = {
     },
     validationMessages: {
         name: {
-            requireIfFieldHaveValue: errorFieldMessages.benefitName.requireIfFieldHaveValue,
+            requireIfFieldHaveValueFirstControl: errorFieldMessages.benefitName.required,
         },
         url: {
-            requireIfFieldHaveValue: errorFieldMessages.benefitName.requireIfFieldHaveValue,
-            url: errorFieldMessages.benefitName.url,
+            requireIfFieldHaveValueSecondControl: errorFieldMessages.benefitUrl.url,
+            url: errorFieldMessages.benefitUrl.url,
         },
     },
 };

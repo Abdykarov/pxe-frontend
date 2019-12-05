@@ -60,11 +60,10 @@ export const errorFieldMessages =  {
         bankCode: 'Kód banky musí obsahovat 4 číslice.',
     },
     benefitName: {
-        url: 'Vyplňte validní URL adresu.',
-        requireIfFieldHaveValue: 'Vyplňte benefit.',
+        required: 'Vyplňte benefit.',
     },
     benefitUrl: {
-        requireIfFieldHaveValue: 'Vyplňte URL.',
+        url: 'Vyplňte validní URL adresu.',
     },
     birthDate: {
         required: 'Vyplňte datum narození.',

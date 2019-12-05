@@ -10,12 +10,17 @@ export const requireIfFieldHaveValue = (firstControlName: string, secondControlN
         const firstValue = firstControl.value;
         const secondValue = secondControl.value;
 
+        if (!firstValue && !secondValue) {
+            firstControl.setErrors(null);
+            secondControl.setErrors(null);
+        }
+
         if (firstValue && !secondValue) {
-            secondControl.setErrors({requireIfFieldHaveValue: true});
+            secondControl.setErrors({requireIfFieldHaveValueSecondControl: true});
         }
 
         if (!firstValue && secondValue) {
-            firstControl.setErrors({requireIfFieldHaveValue: true});
+            firstControl.setErrors({requireIfFieldHaveValueFirstControl: true});
         }
     };
 };
