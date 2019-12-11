@@ -67,7 +67,7 @@ const routes = [
                 data: {
                     isPublic: true,
                     isSimpleFooter: false,
-                    loginType: LoginType.NONE,
+                    loginType: LoginType.NAVIGATE,
                     signUpType: SignType.SCROLL,
                 },
             },
