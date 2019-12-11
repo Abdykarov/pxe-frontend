@@ -70,7 +70,7 @@
             <lnd-select
                     [error]="formError.circuitBreakerId || form.controls.circuitBreakerId.errors"
                     label="Jistič"
-                    [options]="codeLists && codeLists['JISTIC']"
+                    [options]="codeLists && codeLists[CODE_LIST_CIRCUIT_BREAKER]"
                     [parentForm]="form"
                     [selectName]="'circuitBreakerId'"
                     [success]="form.controls.circuitBreakerId.valid && (form.controls.circuitBreakerId.touched || formError.circuitBreakerId)"
