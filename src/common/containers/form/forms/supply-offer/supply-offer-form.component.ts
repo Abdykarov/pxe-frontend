@@ -51,18 +51,6 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./supply-offer-form.component.scss'],
 })
 export class SupplyOfferFormComponent extends AbstractFormComponent implements OnInit, OnChanges, AfterViewInit {
-
-    get benefitsFormArray() {
-        return <FormArray>this.form.get('benefits');
-    }
-
-    constructor(
-        private cd: ChangeDetectorRef,
-        protected fb: FormBuilder,
-        private supplyService: SupplyService,
-    ) {
-        super(fb);
-    }
     private static readonly benefitCount = 4;
     public readonly CODE_LIST_CIRCUIT_BREAKER = CODE_LIST.CIRCUIT_BREAKER;
 
@@ -88,6 +76,18 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
     public prefillForm = false;
     public subjectTypeOptions: Array<IOption> = SUBJECT_TYPE_OPTIONS;
     public suppliers = [];
+
+    get benefitsFormArray() {
+        return <FormArray>this.form.get('benefits');
+    }
+
+    constructor(
+        private cd: ChangeDetectorRef,
+        protected fb: FormBuilder,
+        private supplyService: SupplyService,
+    ) {
+        super(fb);
+    }
 
     ngOnInit() {
         super.ngOnInit();
