@@ -54,7 +54,7 @@ export class AuthService {
 
     public startExpirationOfToken: Date = null;
     public dontRefreshToken = false;
-    private wasRefreshCallRefreshInterval = false;
+    public wasRefreshCallRefreshInterval = false;
     private readonly startRefreshTokenIntervalSubject$ = new Subject<void>();
     private readonly stopRefreshTokenIntervalSubject$ = new Subject<void>();
     private readonly stopMessageInterval = 'STOP_INTERVAL';
@@ -63,9 +63,13 @@ export class AuthService {
         interval(CONSTS.REFRESH_INTERVAL_TOKEN)
             .pipe(
                 switchMap((number) => {
+                    console.log('aaa' + this.wasRefreshCallRefreshInterval);
                     if (!this.wasRefreshCallRefreshInterval) {
                         this.wasRefreshCallRefreshInterval = true;
+                        console.log('___');
+                        console.log(this.token);
                         if ( this.token) {
+                            console.log(1);
                             return this.refreshToken();
                         } else {
                             return of(this.stopMessageInterval);
