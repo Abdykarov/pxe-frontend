@@ -66,7 +66,7 @@ export class AuthService {
                     if (!this.wasRefreshCallRefreshInterval) {
                         this.wasRefreshCallRefreshInterval = true;
                         if ( this.token) {
-                            this.refreshToken();
+                            return this.refreshToken();
                         } else {
                             return of(this.stopMessageInterval);
                         }
@@ -82,7 +82,6 @@ export class AuthService {
                         this.stopRefreshTokenInterval();
                         return false;
                     }
-                    console.log('2');
                     return true;
                 }),
                 switchMap(() => this.refreshToken()),
