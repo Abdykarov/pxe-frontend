@@ -20,6 +20,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import {
+    CODE_LIST,
     CODE_LIST_TYPES,
     COMMODITY_TO_DISTRIBUTION_MAP,
     DELIVERY_LENGTH_OPTIONS,
@@ -51,6 +52,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class SupplyOfferFormComponent extends AbstractFormComponent implements OnInit, OnChanges, AfterViewInit {
     private static readonly benefitCount = 4;
+    public readonly CODE_LIST_CIRCUIT_BREAKER = CODE_LIST.CIRCUIT_BREAKER;
 
     @Input()
     public commodityType = CommodityType.POWER;
