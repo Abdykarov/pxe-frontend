@@ -54,7 +54,7 @@ export class AuthService {
 
     public startExpirationOfToken: Date = null;
     public dontRefreshToken = false;
-    public wasRefreshCallRefreshInterval = false;
+    private wasRefreshCallRefreshInterval = false;
     private readonly startRefreshTokenIntervalSubject$ = new Subject<void>();
     private readonly stopRefreshTokenIntervalSubject$ = new Subject<void>();
     private readonly stopMessageInterval = 'STOP_INTERVAL';
