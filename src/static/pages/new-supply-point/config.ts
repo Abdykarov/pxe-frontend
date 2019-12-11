@@ -90,12 +90,7 @@ export class NewSupplyPointPageConfig {
         {
             key: 1,
             value: 1,
-            label: '1-fázový',
-        },
-        {
-            key: 2,
-            value: 2,
-            label: '3-fázový',
+            label: 'Bez ohledu na kapacitu',
         },
     ];
 
