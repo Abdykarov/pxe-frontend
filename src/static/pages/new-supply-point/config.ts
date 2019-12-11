@@ -86,6 +86,14 @@ export class NewSupplyPointPageConfig {
 
     ];
 
+    public circuitBreakerOptions = [
+        {
+            key: 1,
+            value: 1,
+            label: 'Bez ohledu na kapacitu',
+        },
+    ];
+
     public circuitBreakerPhaseOptions = [
         {
             key: 1,
