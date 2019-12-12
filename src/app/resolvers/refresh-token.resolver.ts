@@ -56,9 +56,8 @@ export class RefreshTokenResolver implements Resolve<any> {
                             this.authService.startExpirationOfToken = new Date();
                         }),
                     );
-            } else {
-                return of({});
             }
         }
+        return of({});
     }
 }
