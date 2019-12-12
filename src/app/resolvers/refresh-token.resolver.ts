@@ -29,18 +29,14 @@ export class RefreshTokenResolver implements Resolve<any> {
     ) >= CONSTS.REFRESH_TOKEN_DONT_REFRESH_TIME_IN_MINUTES
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | any {
-        if (this.authService.dontRefreshToken) {
+        if (!this.authService.dontRefreshToken && this.needRefreshToken()) {
             this.authService.dontRefreshToken = false;
-        } else {
-            if (this.needRefreshToken() && !this.authService.wasRefreshCallRefreshInterval) {
-                this.authService.startRefreshTokenInterval();
-                this.authService.startExpirationOfToken = new Date();
-                console.log(2);
-                return this.authService.refreshToken()
-                    .pipe(
-                        catchError(() => of()),
-                    );
-            }
+            this.authService.startRefreshTokenInterval();
+            this.authService.startExpirationOfToken = new Date();
+            return this.authService.refreshToken()
+                .pipe(
+                    catchError(() => of()),
+                );
         }
         return of({});
     }

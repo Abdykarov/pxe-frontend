@@ -12,7 +12,7 @@ import {
     interval,
     Observable,
     of,
-    Subject,
+    Subject, timer,
 } from 'rxjs';
 import {
     catchError,
@@ -20,6 +20,7 @@ import {
     first,
     map,
     repeatWhen,
+    startWith,
     switchMap,
     take,
     takeUntil,
@@ -53,7 +54,7 @@ export class AuthService {
     private sessionUuid: string = null;
 
     public startExpirationOfToken: Date = null;
-    public dontRefreshToken = false;
+    public dontRefreshToken = true;
     public wasRefreshCallRefreshInterval = false;
     private readonly startRefreshTokenIntervalSubject$ = new Subject<void>();
     private readonly stopRefreshTokenIntervalSubject$ = new Subject<void>();
@@ -62,14 +63,10 @@ export class AuthService {
     public refreshTokenInterval$ =
         interval(CONSTS.REFRESH_INTERVAL_TOKEN)
             .pipe(
+                startWith(0),
                 switchMap((number) => {
-                    console.log('aaa' + this.wasRefreshCallRefreshInterval);
                     if (!this.wasRefreshCallRefreshInterval) {
-                        this.wasRefreshCallRefreshInterval = true;
-                        console.log('___');
-                        console.log(this.token);
                         if ( this.token) {
-                            console.log(1);
                             return this.refreshToken();
                         } else {
                             return of(this.stopMessageInterval);
@@ -86,9 +83,19 @@ export class AuthService {
                         this.stopRefreshTokenInterval();
                         return false;
                     }
+                    if (!this.wasRefreshCallRefreshInterval) {
+                        this.wasRefreshCallRefreshInterval = true;
+                        return false;
+                    }
                     return true;
                 }),
-                switchMap(() => this.refreshToken()),
+                switchMap((callRefreshToken) => {
+                    if (callRefreshToken) {
+                        console.log('AA__C__AA');
+                        return this.refreshToken();
+                    }
+                    return of({});
+                }),
             );
 
     constructor(
