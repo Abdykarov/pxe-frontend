@@ -20,7 +20,6 @@ import {
     first,
     map,
     repeatWhen,
-    startWith,
     switchMap,
     take,
     takeUntil,
