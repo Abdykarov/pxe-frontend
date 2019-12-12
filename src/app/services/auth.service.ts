@@ -12,7 +12,7 @@ import {
     interval,
     Observable,
     of,
-    Subject, timer,
+    Subject,
 } from 'rxjs';
 import {
     catchError,
@@ -63,12 +63,9 @@ export class AuthService {
     public refreshTokenInterval$ =
         interval(CONSTS.REFRESH_INTERVAL_TOKEN)
             .pipe(
-                startWith(0),
                 switchMap((number) => {
                     if (!this.wasRefreshCallRefreshInterval) {
-                        if ( this.token) {
-                            return this.refreshToken();
-                        } else {
+                        if (!this.token) {
                             return of(this.stopMessageInterval);
                         }
                     }
@@ -83,19 +80,9 @@ export class AuthService {
                         this.stopRefreshTokenInterval();
                         return false;
                     }
-                    if (!this.wasRefreshCallRefreshInterval) {
-                        this.wasRefreshCallRefreshInterval = true;
-                        return false;
-                    }
                     return true;
                 }),
-                switchMap((callRefreshToken) => {
-                    if (callRefreshToken) {
-                        console.log('AA__C__AA');
-                        return this.refreshToken();
-                    }
-                    return of({});
-                }),
+                switchMap(() => this.refreshToken()),
             );
 
     constructor(
@@ -150,6 +137,7 @@ export class AuthService {
 
     public login = ({login, password}: ILoginRequest) => {
         this.dontRefreshToken = true;
+        this.wasRefreshCallRefreshInterval = true;
         return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { login, password })
             .pipe(
                 map((response: ILoginResponse) => {
