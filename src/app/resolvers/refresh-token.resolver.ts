@@ -9,13 +9,13 @@ import {
     catchError,
     tap,
 } from 'rxjs/operators';
-import { CONSTS } from 'src/app/app.constants';
 import {
     Observable,
     of,
 } from 'rxjs';
 
 import { AuthService } from 'src/app/services/auth.service';
+import { CONSTS } from 'src/app/app.constants';
 import { dateDiff } from 'src/common/utils/supply-point-date-calculate.fnc';
 
 @Injectable()
