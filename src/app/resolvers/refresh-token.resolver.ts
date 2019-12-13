@@ -41,9 +41,8 @@ export class RefreshTokenResolver implements Resolve<any> {
             this.authService.wasRefreshCallRefreshInterval = true;
         } else if (this.needRefreshToken()) {
             return this.refreshToken();
-        } else {
-            return of({});
         }
+        return of({});
     }
 
     private refreshToken = () => {
