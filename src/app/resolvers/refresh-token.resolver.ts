@@ -35,29 +35,25 @@ export class RefreshTokenResolver implements Resolve<any> {
         if (!this.authService.wasRefreshCallRefreshInterval) {
             this.authService.dontRefreshToken = false;
             this.authService.wasRefreshCallRefreshInterval = true;
-            this.authService.startRefreshTokenInterval();
-            return this.authService.refreshToken()
-                .pipe(
-                    catchError(() => of()),
-                    tap(() => {
-                        this.authService.startExpirationOfToken = new Date();
-                    }),
-                );
+            return this.refreshToken();
         } else if (this.authService.dontRefreshToken) {
             this.authService.dontRefreshToken = false;
             this.authService.wasRefreshCallRefreshInterval = true;
+        } else if (this.needRefreshToken()) {
+            return this.refreshToken();
         } else {
-            if (this.needRefreshToken()) {
-                this.authService.startRefreshTokenInterval();
-                return this.authService.refreshToken()
-                    .pipe(
-                        catchError(() => of()),
-                        tap(() => {
-                            this.authService.startExpirationOfToken = new Date();
-                        }),
-                    );
-            }
+            return of({});
         }
-        return of({});
+    }
+
+    private refreshToken = () => {
+        this.authService.startRefreshTokenInterval();
+        return this.authService.refreshToken()
+            .pipe(
+                catchError(() => of()),
+                tap(() => {
+                    this.authService.startExpirationOfToken = new Date();
+                }),
+            );
     }
 }
