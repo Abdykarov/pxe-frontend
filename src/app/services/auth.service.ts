@@ -52,8 +52,9 @@ export class AuthService {
     private uuid: string = null;
     private sessionUuid: string = null;
 
-    public dontRefreshToken = false;
-    private wasRefreshCallRefreshInterval = false;
+    public startExpirationOfToken: Date = null;
+    public dontRefreshToken = true;
+    public wasRefreshCallRefreshInterval = false;
     private readonly startRefreshTokenIntervalSubject$ = new Subject<void>();
     private readonly stopRefreshTokenIntervalSubject$ = new Subject<void>();
     private readonly stopMessageInterval = 'STOP_INTERVAL';
@@ -63,10 +64,7 @@ export class AuthService {
             .pipe(
                 switchMap((number) => {
                     if (!this.wasRefreshCallRefreshInterval) {
-                        this.wasRefreshCallRefreshInterval = true;
-                        if ( this.token) {
-                            return this.refreshToken();
-                        } else {
+                        if (!this.token) {
                             return of(this.stopMessageInterval);
                         }
                     }
@@ -138,12 +136,14 @@ export class AuthService {
 
     public login = ({login, password}: ILoginRequest) => {
         this.dontRefreshToken = true;
+        this.wasRefreshCallRefreshInterval = true;
         return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { login, password })
             .pipe(
                 map((response: ILoginResponse) => {
                     const uuid = this.generateUuid();
                     const loginResponse =  this.manageLoginResponse(response, uuid);
                     this.startRefreshTokenInterval();
+                    this.startExpirationOfToken = new Date();
                     return loginResponse;
                 }),
             );
