@@ -5,13 +5,18 @@ import {
 } from '@angular/router';
 import { Injectable } from '@angular/core';
 
-import { catchError } from 'rxjs/operators';
+import {
+    catchError,
+    tap,
+} from 'rxjs/operators';
 import {
     Observable,
     of,
 } from 'rxjs';
 
 import { AuthService } from 'src/app/services/auth.service';
+import { CONSTS } from 'src/app/app.constants';
+import { dateDiff } from 'src/common/utils/supply-point-date-calculate.fnc';
 
 @Injectable()
 export class RefreshTokenResolver implements Resolve<any> {
@@ -20,16 +25,34 @@ export class RefreshTokenResolver implements Resolve<any> {
         private authService: AuthService,
     ) {}
 
+    private needRefreshToken = () => !this.authService.startExpirationOfToken || dateDiff(
+        this.authService.startExpirationOfToken.toISOString(),
+        new Date().toISOString(),
+        'minutes',
+    ) >= CONSTS.REFRESH_TOKEN_DONT_REFRESH_TIME_IN_MINUTES
+
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | any {
-        this.authService.startRefreshTokenInterval();
-        if (this.authService.dontRefreshToken) {
+        if (!this.authService.wasRefreshCallRefreshInterval) {
             this.authService.dontRefreshToken = false;
-            return of({});
-        } else {
-            return this.authService.refreshToken()
-                .pipe(
-                    catchError(() => of()),
-                );
+            this.authService.wasRefreshCallRefreshInterval = true;
+            return this.refreshToken();
+        } else if (this.authService.dontRefreshToken) {
+            this.authService.dontRefreshToken = false;
+            this.authService.wasRefreshCallRefreshInterval = true;
+        } else if (this.needRefreshToken()) {
+            return this.refreshToken();
         }
+        return of({});
+    }
+
+    private refreshToken = () => {
+        this.authService.startRefreshTokenInterval();
+        return this.authService.refreshToken()
+            .pipe(
+                catchError(() => of()),
+                tap(() => {
+                    this.authService.startExpirationOfToken = new Date();
+                }),
+            );
     }
 }
