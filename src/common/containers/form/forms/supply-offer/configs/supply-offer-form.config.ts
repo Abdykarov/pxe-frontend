@@ -3,8 +3,8 @@ import {
     Validators,
 } from '@angular/forms';
 
-import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { CONSTS } from 'src/app/app.constants';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import {

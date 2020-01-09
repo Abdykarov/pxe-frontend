@@ -22,8 +22,8 @@ import {
     isValidTelephoneNumber,
 } from './phone.validator.fnc';
 import { isValidPostCode } from 'src/common/utils/validators/post-code.validator.fnc';
-import { verifyIC } from './ico-validator.fnc';
 import { totalDigitLengthValidator } from 'src/common/utils/validators/total-digit-length-validator.fnc';
+import { verifyIC } from './ico-validator.fnc';
 
 export class CustomValidators {
 

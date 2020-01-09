@@ -1,9 +1,9 @@
 import { Validators } from '@angular/forms';
-import { CONSTS } from 'src/app/app.constants';
-import { IForm } from 'src/common/containers/form/models/form-definition.model';
 
+import { CONSTS } from 'src/app/app.constants';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
+import { IForm } from 'src/common/containers/form/models/form-definition.model';
 import { requireIfFieldHaveValue } from 'src/common/utils/validators/requireIfFieldHaveValue.fnc';
 
 export const formFieldsBenefit: IForm = {
