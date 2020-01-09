@@ -463,7 +463,6 @@ export class CustomValidators {
         };
     }
 
-
     static totalDigitLength = (maxLength: number): ValidatorFn => {
         return (control: AbstractControl): ValidationErrors => {
             if (control.pristine) {
