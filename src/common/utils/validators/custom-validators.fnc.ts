@@ -23,6 +23,7 @@ import {
 } from './phone.validator.fnc';
 import { isValidPostCode } from 'src/common/utils/validators/post-code.validator.fnc';
 import { verifyIC } from './ico-validator.fnc';
+import { totalDigitLengthValidator } from 'src/common/utils/validators/total-digit-length-validator.fnc';
 
 export class CustomValidators {
 
@@ -226,23 +227,6 @@ export class CustomValidators {
         }
 
         return null;
-    }
-
-    static email = (email) => {
-        if (email.pristine) {
-            return null;
-        }
-
-        const EMAIL_REGEXP = new RegExp('^[a-zA-Z0-9!#$%&amp;&apos;\*+/=?^_`{|}~-]+(\.[a-zA-Z0-9!#$%&amp;' +
-            '&apos;\*+/=?^_`{|}~-]+)*@(([a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9]+)?){1,63}\.)+([a-zA-Z0-9](' +
-            '[-a-zA-Z0-9]*[a-zA-Z0-9]+)?){2,63}$');
-        if (EMAIL_REGEXP.test(email.value)) {
-            return null;
-        }
-
-        return {
-            email: true,
-        };
     }
 
     static URL = (url) => {
@@ -476,6 +460,25 @@ export class CustomValidators {
 
         return {
             pattern: true,
+        };
+    }
+
+
+    static totalDigitLength = (maxLength: number): ValidatorFn => {
+        return (control: AbstractControl): ValidationErrors => {
+            if (control.pristine) {
+                return null;
+            }
+
+            if (totalDigitLengthValidator(control.value, maxLength)) {
+                return null;
+            }
+
+            return {
+                totalDigitLength: {
+                    maxLength: maxLength
+                },
+            };
         };
     }
 }

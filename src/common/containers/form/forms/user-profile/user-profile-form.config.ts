@@ -11,14 +11,14 @@ export const userProfileFormFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.email,
+                Validators.email,
             ],
         ],
         firstName: [
             null,
             [
                 Validators.required,
-                Validators.maxLength(CONSTS.MAX_LENGTH_NAME),
+                Validators.maxLength(CONSTS.MAX_LENGTH_USER_PROFILE_NAME),
                 CustomValidators.username,
             ],
         ],
@@ -26,7 +26,7 @@ export const userProfileFormFields: IForm = {
             null,
             [
                 Validators.required,
-                Validators.maxLength(CONSTS.MAX_LENGTH_NAME),
+                Validators.maxLength(CONSTS.MAX_LENGTH_USER_PROFILE_NAME),
                 CustomValidators.username,
             ],
         ],

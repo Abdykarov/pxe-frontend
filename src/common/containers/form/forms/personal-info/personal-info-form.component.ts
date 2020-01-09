@@ -86,12 +86,13 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
                 .setValidators(
                     [
                         Validators.required,
-                        CustomValidators.isNumber(2),
+                        CustomValidators.isNumber(CONSTS.MAX_DIGIT),
                         CustomValidators.minValue(
                             this.supplyPoint.contract.offer.totalPrice,
                             true,
                             false,
                         ),
+                        CustomValidators.totalDigitLength(CONSTS.COUNT_NUMBER_DEPOSIT),
                     ]);
         }
 

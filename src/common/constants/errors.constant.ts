@@ -42,12 +42,15 @@ export const errorFieldMessages =  {
     },
     annualConsumption: {
         required: 'Vyplňte roční spotřebu plynu.',
+        totalDigitLength: 'Použít můžete maximálně {maxLength} čísel, včetně čísel za desetinnou čárkou.',
     },
     annualConsumptionNT: {
         required: 'Vyplňte roční spotřebu elektřiny v nízkém tarifu.',
+        totalDigitLength: 'Použít můžete maximálně {maxLength} čísel, včetně čísel za desetinnou čárkou.',
     },
     annualConsumptionVT: {
         required: 'Vyplňte roční spotřebu elektřiny ve vysokém tarifu.',
+        totalDigitLength: 'Použít můžete maximálně {maxLength} čísel, včetně čísel za desetinnou čárkou.',
     },
     bankAccountNumber: {
         required: 'Vyplňte číslo účtu.',
@@ -61,9 +64,11 @@ export const errorFieldMessages =  {
     },
     benefitName: {
         required: 'Vyplňte benefit.',
+        maxlength: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     benefitUrl: {
         url: 'Vyplňte validní URL adresu.',
+        maxlength: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     birthDate: {
         required: 'Vyplňte datum narození.',
@@ -101,6 +106,7 @@ export const errorFieldMessages =  {
     deposit: {
         required: 'Vyplňte, jakou chcete mít výši záloh.',
         requiredMinValue: 'Minimální výše záloh je {min|ceil:2:1.0-2} Kč.',
+        totalDigitLength: 'Použít můžete maximálně {maxLength} čísel, včetně čísel za desetinnou čárkou.',
     },
     depositPaymentType: {
         required: 'Vyberte ze seznamu, jak chcete platit zálohy.',
@@ -134,6 +140,7 @@ export const errorFieldMessages =  {
         emailNotRegistered: 'Tento e-mail v aplikaci neexistuje.',
         usernameNotRegistered: 'Toto přihlašovací jméno v aplikaci neexistuje.',
         alreadyRegisteredEmail: 'Tento e-mail je již v aplikaci zaregistrovaný.',
+        maxlength: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     expirationDate: {
         requiredGas: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr plynu.',
@@ -152,6 +159,7 @@ export const errorFieldMessages =  {
         maxlengthFullName: 'Použít můžete maximálně {requiredLength} znaků.',
         patternFirstName: 'Použít můžete pouze písmena, pomlčky a mezery.',
         patternLastName: 'Použít můžete pouze písmena, pomlčky a mezery.',
+        maxlength: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     ico: {
         required: 'Vyplňte své IČO.',
@@ -189,18 +197,23 @@ export const errorFieldMessages =  {
     },
     offerName: {
         required: 'Vyplňte libovolný název pro označení nabídky.',
+        maxlength: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     offerPriceGas: {
         required: 'Vyplňte cenu plynu.',
+        totalDigitLength: 'Použít můžete maximálně {maxLength} čísel, včetně čísel za desetinnou čárkou.',
     },
     offerPriceNT: {
         required: 'Vyplňte cenu elektřiny v nízkém tarifu.',
+        totalDigitLength: 'Použít můžete maximálně {maxLength} čísel, včetně čísel za desetinnou čárkou.',
     },
     offerPriceVT: {
         required: 'Vyplňte cenu elektřiny ve vysokém tarifu.',
+        totalDigitLength: 'Použít můžete maximálně {maxLength} čísel, včetně čísel za desetinnou čárkou.',
     },
     offerPermanentPaymentPrice: {
         required: 'Vyplňte stálou platbu.',
+        totalDigitLength: 'Použít můžete maximálně {maxLength} čísel, včetně čísel za desetinnou čárkou.',
     },
     offerSubjectTypeId: {
         required: 'Vyberte ze seznamu typ odběratele.',

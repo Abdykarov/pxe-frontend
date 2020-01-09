@@ -4,6 +4,7 @@ import {
 } from '@angular/forms';
 
 import { CommodityType } from 'src/common/graphql/models/supply.model';
+import { CONSTS } from 'src/app/app.constants';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import {
@@ -32,6 +33,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
+                Validators.maxLength(CONSTS.MAX_LENGTH_OFFER_NAME),
             ],
         ],
         distributionLocation: [
@@ -68,24 +70,27 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(2),
+                CustomValidators.isNumber(CONSTS.MAX_DIGIT),
                 CustomValidators.minValue(0),
+                CustomValidators.totalDigitLength(CONSTS.COUNT_NUMBER_CONSUMPTION_THIRTEEN),
             ],
         ],
         priceVT: [
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(2),
+                CustomValidators.isNumber(CONSTS.MAX_DIGIT),
                 CustomValidators.minValue(0),
+                CustomValidators.totalDigitLength(CONSTS.COUNT_NUMBER_CONSUMPTION_THIRTEEN),
             ],
         ],
         priceGas: [
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(2),
+                CustomValidators.isNumber(CONSTS.MAX_DIGIT),
                 CustomValidators.minValue(0),
+                CustomValidators.totalDigitLength(CONSTS.COUNT_NUMBER_CONSUMPTION_THIRTEEN),
             ],
         ],
         validFromTo: [
@@ -106,8 +111,9 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(2),
+                CustomValidators.isNumber(CONSTS.MAX_DIGIT),
                 CustomValidators.minValue(0),
+                CustomValidators.totalDigitLength(CONSTS.COUNT_NUMBER_CONSUMPTION_THIRTEEN),
             ],
         ],
         benefits: new FormArray([]),
@@ -139,30 +145,35 @@ export const formFields: IForm = {
         },
         name: {
             required: errorFieldMessages.offerName.required,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.offerName.maxlength,
         },
         permanentPaymentPrice: {
             required: errorFieldMessages.offerPermanentPaymentPrice.required,
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
+            totalDigitLength: errorFieldMessages.offerPermanentPaymentPrice.totalDigitLength,
         },
         priceGas: {
             required: errorFieldMessages.offerPriceGas.required,
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
+            totalDigitLength: errorFieldMessages.offerPriceGas.totalDigitLength,
         },
         priceNT: {
             required: errorFieldMessages.offerPriceNT.required,
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
+            totalDigitLength: errorFieldMessages.offerPriceNT.totalDigitLength,
         },
         priceVT: {
             required: errorFieldMessages.offerPriceVT.required,
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
+            totalDigitLength: errorFieldMessages.offerPriceVT.totalDigitLength,
         },
         subjectTypeId: {
             required: errorFieldMessages.offerSubjectTypeId.required,

@@ -73,7 +73,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                Validators.maxLength(50),
+                Validators.maxLength(CONSTS.MAX_LENGTH_OFFER_NAME),
             ],
         ],
         ean: [
@@ -120,24 +120,27 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(2),
+                CustomValidators.isNumber(CONSTS.MAX_DIGIT),
                 CustomValidators.minValue(0),
+                CustomValidators.totalDigitLength(CONSTS.COUNT_NUMBER_CONSUMPTION_FOURTEEN),
             ],
         ],
         annualConsumptionVT: [
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(2),
+                CustomValidators.isNumber(CONSTS.MAX_DIGIT),
                 CustomValidators.minValue(0),
+                CustomValidators.totalDigitLength(CONSTS.COUNT_NUMBER_CONSUMPTION_FOURTEEN),
             ],
         ],
         annualConsumption: [
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(2),
+                CustomValidators.isNumber(CONSTS.MAX_DIGIT),
                 CustomValidators.minValue(0),
+                CustomValidators.totalDigitLength(CONSTS.COUNT_NUMBER_CONSUMPTION_FOURTEEN),
             ],
         ],
         expirationDate: [
@@ -157,8 +160,8 @@ export const formFields: IForm = {
             [
                 Validators.required,
                 CustomValidators.isNumber(),
-                CustomValidators.minValue(0),
-                CustomValidators.maxValue(100),
+                CustomValidators.minValue(CONSTS.TIME_TO_CONTRACT_END_MIN),
+                CustomValidators.maxValue(CONSTS.TIME_TO_CONTRACT_END_MAX),
             ],
         ],
         timeToContractEndPeriodId: [
@@ -225,6 +228,7 @@ export const formFields: IForm = {
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
             'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
+            totalDigitLength: errorFieldMessages.annualConsumptionNT.totalDigitLength,
         },
         annualConsumptionVT: {
             required: errorFieldMessages.annualConsumptionVT.required,
@@ -233,6 +237,7 @@ export const formFields: IForm = {
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
             'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
+            totalDigitLength: errorFieldMessages.annualConsumptionVT.totalDigitLength,
         },
         annualConsumption: {
             required: errorFieldMessages.annualConsumption.required,
@@ -241,6 +246,7 @@ export const formFields: IForm = {
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
             'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
+            totalDigitLength: errorFieldMessages.annualConsumption.totalDigitLength,
         },
         expirationDateGas: {
             required: errorFieldMessages.expirationDate.requiredGas,

@@ -31,7 +31,7 @@ export const addressNotFoundFields: IForm = {
         orientationNumber: [
             '',
             [
-                Validators.maxLength(CONSTS.MAX_LENGTH_ORIENTATION_NUMBERR),
+                Validators.maxLength(CONSTS.MAX_LENGTH_ORIENTATION_NUMBER),
             ],
         ],
         region: [

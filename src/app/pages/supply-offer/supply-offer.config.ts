@@ -25,7 +25,7 @@ export class SupplyOfferConfig {
                 views: [
                     {
                         headingClass: [''],
-                        cellClass: [''],
+                        cellClass: ['text-break'],
                         content: (row) => `${row.name}`,
                     },
                 ],
