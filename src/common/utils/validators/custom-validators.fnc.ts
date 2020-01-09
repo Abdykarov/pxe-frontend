@@ -475,7 +475,7 @@ export class CustomValidators {
 
             return {
                 totalDigitLength: {
-                    maxLength: maxLength
+                    maxLength: maxLength,
                 },
             };
         };
