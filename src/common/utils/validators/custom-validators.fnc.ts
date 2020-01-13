@@ -471,7 +471,6 @@ export class CustomValidators {
                 return null;
             }
 
-
             if (totalDigitLengthBeforeDecimalPointValidator(control.value, maxLength)) {
                 return null;
             }

@@ -54,9 +54,9 @@ export const CONSTS = {
         WILD_CART  : '**',
     },
     REFRESH_TOKEN: {
-        INTERVAL_TOKEN: 300000,
-        TOKEN_COUNT: 4,
-        TOKEN_DONT_REFRESH_TIME_IN_MINUTES: 2,
+        INTERVAL: 300000,
+        COUNT: 4,
+        DONT_REFRESH_TIME_IN_MINUTES: 2,
     },
     VALIDATORS: {
         ADULTHOOD_AGE: 18,
