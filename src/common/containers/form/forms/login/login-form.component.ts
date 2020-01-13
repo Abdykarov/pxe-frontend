@@ -66,8 +66,4 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
             this.passwordWasSent = !!window.history.state.passwordWasSent;
         }
     }
-
-    public submitForm = (event = null) => {
-        super.submitForm(event);
-    }
 }

@@ -52,7 +52,7 @@ export class LoginComponent extends AbstractComponent {
     public passwordWasSent = false;
     public password: string;
     public phoneNumber: string;
-    public state = ILoginState.EMAIL_LOGIN;
+    public state = ILoginState.LOGIN;
     public wasSentToPhone = false;
 
     constructor(
@@ -71,7 +71,7 @@ export class LoginComponent extends AbstractComponent {
                 ),
             )
             .subscribe(() => {
-                this.state = ILoginState.EMAIL_LOGIN;
+                this.state = ILoginState.LOGIN;
                 this.resetErrorsAndLoading();
                 this.passwordWasSent = false;
             });

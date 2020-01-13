@@ -31,7 +31,7 @@ export const CONSTS = {
         EMPTY : '',
         FORGOTTEN_PASSWORD : 'forgotten-password',
         GAS: 'gas',
-        EMAIL_LOGIN : 'login',
+        LOGIN : 'login',
         LOGOUT : 'logout',
         OFFER_SELECTION : 'offer-selection',
         PATTERNS_OF_CONTRACTS: 'patterns-of-contracts',

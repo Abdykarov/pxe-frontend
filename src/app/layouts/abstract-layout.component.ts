@@ -101,7 +101,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
                     skipLocationChange: true,
                 };
             }
-            this.router.navigate([CONSTS.PATHS.EMAIL_LOGIN], extras);
+            this.router.navigate([CONSTS.PATHS.LOGIN], extras);
         }
     }
 

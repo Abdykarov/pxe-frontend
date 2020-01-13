@@ -44,7 +44,7 @@ const routes = [
                 },
             },
             {
-                path: CONSTS.PATHS.EMAIL_LOGIN,
+                path: CONSTS.PATHS.LOGIN,
                 loadChildren: '../../pages/login/login.module#LoginModule',
                 data: {
                     isPublic: true,

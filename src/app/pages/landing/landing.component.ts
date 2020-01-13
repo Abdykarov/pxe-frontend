@@ -84,7 +84,7 @@ export class LandingComponent extends AbstractComponent {
                     this.formLoading = false;
                     this.formSent = true;
                     this.cd.markForCheck();
-                    this.router.navigate([CONSTS.PATHS.EMAIL_LOGIN],
+                    this.router.navigate([CONSTS.PATHS.LOGIN],
                         {
                             queryParams: {
                                 email: values.email,
