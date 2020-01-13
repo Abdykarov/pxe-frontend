@@ -10,14 +10,13 @@ export const loginFormFields: IForm = {
             '',
             [
                 Validators.required,
-                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.LOGIN),
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.EMAIL_LOGIN),
             ],
         ],
         password: [
             '',
             [
                 Validators.required,
-                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.PASSWORD),
             ],
         ],
     },

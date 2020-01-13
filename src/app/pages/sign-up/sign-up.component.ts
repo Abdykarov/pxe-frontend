@@ -52,7 +52,7 @@ export class SignUpComponent extends AbstractComponent {
                     this.formLoading = false;
                     this.formSent = true;
                     this.cd.markForCheck();
-                    this.router.navigate([CONSTS.PATHS.LOGIN],
+                    this.router.navigate([CONSTS.PATHS.EMAIL_LOGIN],
                         {
                             queryParams: {
                                 email: values.email,

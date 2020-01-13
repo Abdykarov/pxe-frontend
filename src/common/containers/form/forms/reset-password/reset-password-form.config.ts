@@ -10,7 +10,6 @@ export const emailFormFields: IForm = {
             '',
             [
                 Validators.required,
-                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.LOGIN),
             ],
         ],
     },

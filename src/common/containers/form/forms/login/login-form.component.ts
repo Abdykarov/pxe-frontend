@@ -8,12 +8,14 @@ import {
     Output,
     PLATFORM_ID,
 } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
 
 import { takeUntil } from 'rxjs/operators';
+import { CONSTS } from 'src/app/app.constants';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
+import { CustomValidators, isUserName } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-login-form',
@@ -63,5 +65,9 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
         if (isPlatformBrowser(this.platformId) && !this.passwordWasSent) {
             this.passwordWasSent = !!window.history.state.passwordWasSent;
         }
+    }
+
+    public submitForm = (event = null) => {
+        super.submitForm(event);
     }
 }

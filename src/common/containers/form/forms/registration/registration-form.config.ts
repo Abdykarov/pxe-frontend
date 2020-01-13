@@ -16,7 +16,7 @@ export function createRegistrationFormFields(signUpType: SignUpType): IForm {
                 '',
                 [
                     Validators.required,
-                    Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.LOGIN),
+                    Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.EMAIL_LOGIN),
                     Validators.email,
                 ],
             ],
