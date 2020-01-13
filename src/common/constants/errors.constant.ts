@@ -42,13 +42,13 @@ export const errorFieldMessages =  {
     },
     annualConsumption: {
         required: 'Vyplňte roční spotřebu plynu.',
-},
+    },
     annualConsumptionNT: {
         required: 'Vyplňte roční spotřebu elektřiny v nízkém tarifu.',
-},
+    },
     annualConsumptionVT: {
         required: 'Vyplňte roční spotřebu elektřiny ve vysokém tarifu.',
-},
+    },
     bankAccountNumber: {
         required: 'Vyplňte číslo účtu.',
         accountNumber: 'Vyplňte správné číslo účtu včetně případného předčíslí s pomlčkou.',
@@ -100,7 +100,7 @@ export const errorFieldMessages =  {
     deposit: {
         required: 'Vyplňte, jakou chcete mít výši záloh.',
         requiredMinValue: 'Minimální výše záloh je {min|ceil:2:1.0-2} Kč.',
-},
+    },
     depositPaymentType: {
         required: 'Vyberte ze seznamu, jak chcete platit zálohy.',
     },
@@ -187,16 +187,16 @@ export const errorFieldMessages =  {
     },
     offerPriceGas: {
         required: 'Vyplňte cenu plynu.',
-},
+    },
     offerPriceNT: {
         required: 'Vyplňte cenu elektřiny v nízkém tarifu.',
-},
+    },
     offerPriceVT: {
         required: 'Vyplňte cenu elektřiny ve vysokém tarifu.',
-},
+    },
     offerPermanentPaymentPrice: {
         required: 'Vyplňte stálou platbu.',
-},
+    },
     offerSubjectTypeId: {
         required: 'Vyberte ze seznamu typ odběratele.',
     },
