@@ -1,12 +1,12 @@
 import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
+import {
     ChangeDetectorRef,
     Component,
     OnInit,
 } from '@angular/core';
-import {
-    ActivatedRoute,
-    Router,
-} from '@angular/router';
 
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
@@ -21,8 +21,8 @@ import {
     takeUntil,
 } from 'rxjs/operators';
 
-import { AuthService } from 'src/app/services/auth.service';
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from 'src/app/services/auth.service';
 import {
     CODE_LIST_TYPES,
     commodityTypes,
