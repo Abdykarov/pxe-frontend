@@ -70,7 +70,7 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
 
     public handleCustomAction = ($event) => this.customAction.emit($event);
 
-    private setLoginValidator = () => {
+    public setLoginValidator = (evt) => {
         this.form.controls['login']
             .setValidators(
                 [

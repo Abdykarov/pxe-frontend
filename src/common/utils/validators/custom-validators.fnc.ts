@@ -477,7 +477,7 @@ export class CustomValidators {
 
             return {
                 totalDigitLengthBeforeDecimalPoint: {
-                    maxLength: maxLength,
+                    maxLength,
                 },
             };
         };
