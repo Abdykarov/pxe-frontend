@@ -18,7 +18,7 @@ export const userProfileFormFields: IForm = {
             null,
             [
                 Validators.required,
-                Validators.maxLength(CONSTS.MAX_LENGTH_USER_PROFILE_NAME),
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.USER_PROFILE_NAME),
                 CustomValidators.username,
             ],
         ],
@@ -26,7 +26,7 @@ export const userProfileFormFields: IForm = {
             null,
             [
                 Validators.required,
-                Validators.maxLength(CONSTS.MAX_LENGTH_USER_PROFILE_NAME),
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.USER_PROFILE_NAME),
                 CustomValidators.username,
             ],
         ],
@@ -53,12 +53,12 @@ export const userProfileFormFields: IForm = {
         },
         firstName: {
             required: errorFieldMessages.fullName.requiredPersonFirstName,
-            maxlengthRequiredLengthActualLength: errorFieldMessages.fullName.maxlengthFirstName,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
             username: errorFieldMessages.fullName.patternFirstName,
         },
         lastName: {
             required: errorFieldMessages.fullName.requiredPersonLastName,
-            maxlengthRequiredLengthActualLength: errorFieldMessages.fullName.maxlengthLastName,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
             username: errorFieldMessages.fullName.patternLastName,
         },
         phone: {

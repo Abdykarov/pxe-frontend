@@ -22,7 +22,9 @@ import {
     isValidTelephoneNumber,
 } from './phone.validator.fnc';
 import { isValidPostCode } from 'src/common/utils/validators/post-code.validator.fnc';
-import { totalDigitLengthValidator } from 'src/common/utils/validators/total-digit-length-validator.fnc';
+import {
+    totalDigitLengthBeforeDecimalPointValidator,
+} from 'src/common/utils/validators/total-digit-length-before-decimal-point-validator.fnc';
 import { verifyIC } from './ico-validator.fnc';
 
 export class CustomValidators {
@@ -463,18 +465,19 @@ export class CustomValidators {
         };
     }
 
-    static totalDigitLength = (maxLength: number): ValidatorFn => {
+    static totalDigitLengthBeforeDecimalPoint = (maxLength: number): ValidatorFn => {
         return (control: AbstractControl): ValidationErrors => {
             if (control.pristine) {
                 return null;
             }
 
-            if (totalDigitLengthValidator(control.value, maxLength)) {
+
+            if (totalDigitLengthBeforeDecimalPointValidator(control.value, maxLength)) {
                 return null;
             }
 
             return {
-                totalDigitLength: {
+                totalDigitLengthBeforeDecimalPoint: {
                     maxLength: maxLength,
                 },
             };

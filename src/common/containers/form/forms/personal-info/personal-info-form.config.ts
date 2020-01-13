@@ -11,7 +11,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                Validators.maxLength(CONSTS.MAX_LENGTH_RECAPITULATION_NAME),
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.RECAPITULATION_NAME),
             ],
         ],
         birthDate: [
@@ -24,16 +24,16 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                Validators.minLength(CONSTS.ICO_LENGTH),
-                Validators.maxLength(CONSTS.ICO_LENGTH),
+                Validators.minLength(CONSTS.VALIDATORS.ICO_LENGTH),
+                Validators.maxLength(CONSTS.VALIDATORS.ICO_LENGTH),
                 CustomValidators.ico,
             ],
         ],
         dic: [
             null,
             [
-                Validators.minLength(CONSTS.MIN_LENGTH_DIC),
-                Validators.maxLength(CONSTS.MAX_LENGTH_DIC),
+                Validators.minLength(CONSTS.VALIDATORS.MIN_LENGTH.DIC),
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.DIC),
                 CustomValidators.dic,
             ],
         ],
@@ -81,14 +81,14 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                Validators.maxLength(CONSTS.MAX_LENGTH_POSITION),
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.POSITION),
             ],
         ],
         email: [
             '',
             [
                 Validators.required,
-                Validators.maxLength(CONSTS.MAX_LENGTH_EMAIL_RECAPITULATION),
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.EMAIL_RECAPITULATION),
                 Validators.email,
             ],
         ],
@@ -102,9 +102,9 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(CONSTS.MAX_DIGIT),
+                CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT),
                 CustomValidators.minValue(0),
-                CustomValidators.totalDigitLength(CONSTS.COUNT_NUMBER_DEPOSIT),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
             ],
         ],
         onlyAddress1: [
@@ -114,7 +114,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                Validators.maxLength(CONSTS.MAX_LENGTH_USER_PROFILE_NAME),
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.USER_PROFILE_NAME),
                 CustomValidators.username,
             ],
         ],
@@ -122,7 +122,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                Validators.maxLength(CONSTS.MAX_LENGTH_USER_PROFILE_NAME),
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.USER_PROFILE_NAME),
                 CustomValidators.username,
             ],
         ],
@@ -130,7 +130,7 @@ export const formFields: IForm = {
     validationMessages: {
         namePerson: {
             required: errorFieldMessages.fullName.requiredPerson,
-            maxlengthRequiredLengthActualLength: errorFieldMessages.fullName.maxlength,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
         nameCompany: {
             required: errorFieldMessages.fullName.requiredCompany,
@@ -187,12 +187,12 @@ export const formFields: IForm = {
         },
         signatoryName: {
             required: errorFieldMessages.fullName.requiredSignatoryFirstName,
-            maxlengthRequiredLengthActualLength: errorFieldMessages.fullName.maxlengthFirstName,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
             username: errorFieldMessages.fullName.patternFirstName,
         },
         signatorySurname: {
             required: errorFieldMessages.fullName.requiredSignatoryLastName,
-            maxlengthRequiredLengthActualLength: errorFieldMessages.fullName.maxlengthLastName,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
             username: errorFieldMessages.fullName.patternLastName,
         },
         phone: {
@@ -207,7 +207,7 @@ export const formFields: IForm = {
             required: errorFieldMessages.email.required,
             email: errorFieldMessages.email.email,
             invalidEmail: errorFieldMessages.email.email,
-            maxlengthRequiredLengthActualLength: errorFieldMessages.email.maxlength,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
         depositPaymentTypeId: {
             required: errorFieldMessages.depositPaymentType.required,
@@ -218,7 +218,7 @@ export const formFields: IForm = {
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
             minMinActual: errorFieldMessages.deposit.requiredMinValue,
-            totalDigitLength: errorFieldMessages.deposit.totalDigitLength,
+            totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
     },
 };

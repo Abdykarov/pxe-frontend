@@ -1,5 +1,6 @@
 import { Validators } from '@angular/forms';
 
+import { CONSTS } from 'src/app/app.constants';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
 
@@ -9,21 +10,25 @@ export const loginFormFields: IForm = {
             '',
             [
                 Validators.required,
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.LOGIN),
             ],
         ],
         password: [
             '',
             [
                 Validators.required,
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.PASSWORD),
             ],
         ],
     },
     validationMessages: {
-        username: {
+        login: {
             required: errorFieldMessages.email.required,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
         password: {
             required: errorFieldMessages.password.required,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
     },
 };
@@ -34,12 +39,14 @@ export const loginSupplyAuthFormFields: IForm = {
             '',
             [
                 Validators.required,
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.SMS_CODE),
             ],
         ],
     },
     validationMessages: {
         confirmationCode: {
             required: errorFieldMessages.confirmationCode.required,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
     },
 };

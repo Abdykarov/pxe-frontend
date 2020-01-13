@@ -53,8 +53,8 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     public codeLists: ICodelistOptions;
 
     public depositPaymentTypeId: ICodelistOption;
-    public maxDate: Date = moment().add(-CONSTS.ADULTHOOD_AGE, 'years').toDate();
-    public minDate: Date = new Date(CONSTS.MIN_BIRTH_DATE);
+    public maxDate: Date = moment().add(-CONSTS.VALIDATORS.ADULTHOOD_AGE, 'years').toDate();
+    public minDate: Date = new Date(CONSTS.VALIDATORS.MIN_BIRTH_DATE);
 
     constructor(
         protected fb: FormBuilder,
@@ -86,13 +86,13 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
                 .setValidators(
                     [
                         Validators.required,
-                        CustomValidators.isNumber(CONSTS.MAX_DIGIT),
+                        CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT),
                         CustomValidators.minValue(
                             this.supplyPoint.contract.offer.totalPrice,
                             true,
                             false,
                         ),
-                        CustomValidators.totalDigitLength(CONSTS.COUNT_NUMBER_DEPOSIT),
+                        CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
                     ]);
         }
 

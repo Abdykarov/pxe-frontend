@@ -10,13 +10,13 @@ export const formFieldsBenefit: IForm = {
     controls: {
         name: [
             null,
-            Validators.maxLength(CONSTS.MAX_LENGTH_BENEFIT_NAME),
+            Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_NAME),
         ],
         url: [
             null,
             [
                 CustomValidators.URL,
-                Validators.maxLength(CONSTS.MAX_LENGTH_BENEFIT_URL),
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_URL),
             ],
         ],
     },
@@ -26,12 +26,12 @@ export const formFieldsBenefit: IForm = {
     validationMessages: {
         name: {
             requireIfFieldHaveValueFirstControl: errorFieldMessages.benefitName.required,
-            maxlengthRequiredLengthActualLength: errorFieldMessages.benefitName.maxlength,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
         url: {
             requireIfFieldHaveValueSecondControl: errorFieldMessages.benefitUrl.url,
             url: errorFieldMessages.benefitUrl.url,
-            maxlengthRequiredLengthActualLength: errorFieldMessages.benefitUrl.maxlength,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
     },
 };

@@ -33,7 +33,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                Validators.maxLength(CONSTS.MAX_LENGTH_OFFER_NAME),
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.OFFER_NAME),
             ],
         ],
         distributionLocation: [
@@ -70,27 +70,27 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(CONSTS.MAX_DIGIT),
+                CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT),
                 CustomValidators.minValue(0),
-                CustomValidators.totalDigitLength(CONSTS.COUNT_NUMBER_CONSUMPTION_THIRTEEN),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
             ],
         ],
         priceVT: [
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(CONSTS.MAX_DIGIT),
+                CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT),
                 CustomValidators.minValue(0),
-                CustomValidators.totalDigitLength(CONSTS.COUNT_NUMBER_CONSUMPTION_THIRTEEN),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
             ],
         ],
         priceGas: [
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(CONSTS.MAX_DIGIT),
+                CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT),
                 CustomValidators.minValue(0),
-                CustomValidators.totalDigitLength(CONSTS.COUNT_NUMBER_CONSUMPTION_THIRTEEN),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
             ],
         ],
         validFromTo: [
@@ -111,9 +111,9 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(CONSTS.MAX_DIGIT),
+                CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT),
                 CustomValidators.minValue(0),
-                CustomValidators.totalDigitLength(CONSTS.COUNT_NUMBER_CONSUMPTION_THIRTEEN),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
             ],
         ],
         benefits: new FormArray([]),
@@ -145,35 +145,35 @@ export const formFields: IForm = {
         },
         name: {
             required: errorFieldMessages.offerName.required,
-            maxlengthRequiredLengthActualLength: errorFieldMessages.offerName.maxlength,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
         permanentPaymentPrice: {
             required: errorFieldMessages.offerPermanentPaymentPrice.required,
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
-            totalDigitLength: errorFieldMessages.offerPermanentPaymentPrice.totalDigitLength,
+            totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
         priceGas: {
             required: errorFieldMessages.offerPriceGas.required,
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
-            totalDigitLength: errorFieldMessages.offerPriceGas.totalDigitLength,
+            totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
         priceNT: {
             required: errorFieldMessages.offerPriceNT.required,
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
-            totalDigitLength: errorFieldMessages.offerPriceNT.totalDigitLength,
+            totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
         priceVT: {
             required: errorFieldMessages.offerPriceVT.required,
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
-            totalDigitLength: errorFieldMessages.offerPriceVT.totalDigitLength,
+            totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
         subjectTypeId: {
             required: errorFieldMessages.offerSubjectTypeId.required,

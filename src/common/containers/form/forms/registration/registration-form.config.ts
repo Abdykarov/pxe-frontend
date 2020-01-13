@@ -16,7 +16,7 @@ export function createRegistrationFormFields(signUpType: SignUpType): IForm {
                 '',
                 [
                     Validators.required,
-                    Validators.maxLength(CONSTS.MAX_LENGTH_EMAIL_SIGN_UP),
+                    Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.LOGIN),
                     Validators.email,
                 ],
             ],
@@ -33,7 +33,7 @@ export function createRegistrationFormFields(signUpType: SignUpType): IForm {
                 email: errorFieldMessages.email.email,
                 invalidEmail: errorFieldMessages.email.email,
                 alreadyRegisteredEmail: errorFieldMessages.email.alreadyRegisteredEmail,
-                maxlengthRequiredLengthActualLength: errorFieldMessages.email.maxlength,
+                maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
             },
             consent: {
                 required: R.path(

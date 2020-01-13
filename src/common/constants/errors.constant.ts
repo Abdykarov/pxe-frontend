@@ -42,16 +42,13 @@ export const errorFieldMessages =  {
     },
     annualConsumption: {
         required: 'Vyplňte roční spotřebu plynu.',
-        totalDigitLength: 'Použít můžete maximálně {maxLength} čísel, včetně čísel za desetinnou čárkou.',
-    },
+},
     annualConsumptionNT: {
         required: 'Vyplňte roční spotřebu elektřiny v nízkém tarifu.',
-        totalDigitLength: 'Použít můžete maximálně {maxLength} čísel, včetně čísel za desetinnou čárkou.',
-    },
+},
     annualConsumptionVT: {
         required: 'Vyplňte roční spotřebu elektřiny ve vysokém tarifu.',
-        totalDigitLength: 'Použít můžete maximálně {maxLength} čísel, včetně čísel za desetinnou čárkou.',
-    },
+},
     bankAccountNumber: {
         required: 'Vyplňte číslo účtu.',
         accountNumber: 'Vyplňte správné číslo účtu včetně případného předčíslí s pomlčkou.',
@@ -64,11 +61,9 @@ export const errorFieldMessages =  {
     },
     benefitName: {
         required: 'Vyplňte benefit.',
-        maxlength: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     benefitUrl: {
         url: 'Vyplňte validní URL adresu.',
-        maxlength: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     birthDate: {
         required: 'Vyplňte datum narození.',
@@ -80,7 +75,6 @@ export const errorFieldMessages =  {
     },
     city: {
         required: 'Vyplňte město nebo obec.',
-        maxlengthCity: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     commodityType: {
         required: 'Zvolte komoditu.',
@@ -106,14 +100,12 @@ export const errorFieldMessages =  {
     deposit: {
         required: 'Vyplňte, jakou chcete mít výši záloh.',
         requiredMinValue: 'Minimální výše záloh je {min|ceil:2:1.0-2} Kč.',
-        totalDigitLength: 'Použít můžete maximálně {maxLength} čísel, včetně čísel za desetinnou čárkou.',
-    },
+},
     depositPaymentType: {
         required: 'Vyberte ze seznamu, jak chcete platit zálohy.',
     },
     descriptiveNumber: {
         required: 'Vyplňte číslo popisné.',
-        maxlengthDescriptiveNumber: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     dic: {
         dicPrefix: 'Vyplňte své DIČ.',
@@ -140,7 +132,6 @@ export const errorFieldMessages =  {
         emailNotRegistered: 'Tento e-mail v aplikaci neexistuje.',
         usernameNotRegistered: 'Toto přihlašovací jméno v aplikaci neexistuje.',
         alreadyRegisteredEmail: 'Tento e-mail je již v aplikaci zaregistrovaný.',
-        maxlength: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     expirationDate: {
         requiredGas: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr plynu.',
@@ -154,12 +145,8 @@ export const errorFieldMessages =  {
         requiredSignatoryFirstName: 'Vyplňte jméno podepisující osoby.',
         requiredSignatoryLastName: 'Vyplňte příjmení podepisující osoby.',
         requiredCompany: 'Vyplňte název společnosti.',
-        maxlengthFirstName: 'Použít můžete maximálně {requiredLength} znaků.',
-        maxlengthLastName: 'Použít můžete maximálně {requiredLength} znaků.',
-        maxlengthFullName: 'Použít můžete maximálně {requiredLength} znaků.',
         patternFirstName: 'Použít můžete pouze písmena, pomlčky a mezery.',
         patternLastName: 'Použít můžete pouze písmena, pomlčky a mezery.',
-        maxlength: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     ico: {
         required: 'Vyplňte své IČO.',
@@ -167,7 +154,6 @@ export const errorFieldMessages =  {
     },
     name: {
         required: 'Vyplňte libovolný název odběrného místa (např. Byt dcera) v maximální délce 50 znaků.',
-        maxlength: 'Maximální délka pro název odběrného místa je 50 znaků.',
     },
     number: {
         decimal: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
@@ -175,6 +161,7 @@ export const errorFieldMessages =  {
         positive: 'Použít můžete pouze kladná čísla.',
         integer: 'Použít můžete pouze celá čísla.',
         positiveInteger: 'Použijte pouze celá a kladná čísla.',
+        totalDigitLengthBeforeDecimalPoint: 'Použít můžete maximálně {maxLength} čísel před desetinnou čárkou.',
     },
     offerAnnualConsumptionId: {
         required: 'Vyberte ze seznamu spotřebu.',
@@ -197,24 +184,19 @@ export const errorFieldMessages =  {
     },
     offerName: {
         required: 'Vyplňte libovolný název pro označení nabídky.',
-        maxlength: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     offerPriceGas: {
         required: 'Vyplňte cenu plynu.',
-        totalDigitLength: 'Použít můžete maximálně {maxLength} čísel, včetně čísel za desetinnou čárkou.',
-    },
+},
     offerPriceNT: {
         required: 'Vyplňte cenu elektřiny v nízkém tarifu.',
-        totalDigitLength: 'Použít můžete maximálně {maxLength} čísel, včetně čísel za desetinnou čárkou.',
-    },
+},
     offerPriceVT: {
         required: 'Vyplňte cenu elektřiny ve vysokém tarifu.',
-        totalDigitLength: 'Použít můžete maximálně {maxLength} čísel, včetně čísel za desetinnou čárkou.',
-    },
+},
     offerPermanentPaymentPrice: {
         required: 'Vyplňte stálou platbu.',
-        totalDigitLength: 'Použít můžete maximálně {maxLength} čísel, včetně čísel za desetinnou čárkou.',
-    },
+},
     offerSubjectTypeId: {
         required: 'Vyberte ze seznamu typ odběratele.',
     },
@@ -222,9 +204,7 @@ export const errorFieldMessages =  {
         required: 'Vyplňte odkdy dokdy je nabídka platná.',
         formatIntervalDiff: 'Datum začátku platnosti nabídky musí být dřívější než její konec.',
     },
-    orientationNumber: {
-        maxlengthOrientationNumber: 'Použít můžete maximálně {requiredLength} znaků.',
-    },
+    orientationNumber: {},
     phasesId: {
         required: 'Vyberte ze seznamu, jakou máte fázi.',
     },
@@ -261,7 +241,9 @@ export const errorFieldMessages =  {
     },
     street: {
         required: 'Vyplňte ulici.',
-        maxlengthStreet: 'Použít můžete maximálně {requiredLength} znaků.',
+    },
+    string: {
+        maxlength: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
