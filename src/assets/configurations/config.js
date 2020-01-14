@@ -5,6 +5,7 @@ window.angularDevstack = {
     "config": {
         "gaId": "",
         "gtmId": "",
+        "sAnalyticsTId": "SA-00080-1",
         "production": false,
         "url_graphql": "http://localhost:4200/graphql",
         "url_api": "http://localhost:4200/api",

@@ -12,6 +12,7 @@ import {
     NavigationEnd,
     Router,
 } from '@angular/router';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 import { environment } from 'src/environments/environment';
 import { GTMService } from './services/gtm.service';
@@ -26,10 +27,15 @@ export class AppComponent {
     constructor(
         private gtmService: GTMService,
         private router: Router,
+        private sAnalyticsService: SAnalyticsService,
         @Inject(DOCUMENT) private document: Document,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         if (isPlatformBrowser(this.platformId)) {
+            if (environment.sAnalyticsTId) {
+                this.sAnalyticsService.init();
+            }
+
             if (!environment.gtmId) {
                 return;
             }
