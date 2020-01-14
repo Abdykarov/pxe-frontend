@@ -63,6 +63,7 @@ export const CONSTS = {
         MAX_DIGIT_BEFORE_DECIMAL_POINT: 7,
         MAX_DIGIT_AFTER_DECIMAL_POINT: 2,
         MAX_LENGTH: {
+            NUMBER_INPUT_WITH_HINT: 10,
             BENEFIT_NAME: 100,
             BENEFIT_URL: 5000,
             CITY: 255,

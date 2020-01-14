@@ -10,6 +10,8 @@ import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.
 })
 export class ResetPasswordFormComponent extends AbstractFormComponent {
 
+    public readonly LOGIN_FORM_NAME = 'login';
+
     constructor(
         protected fb: FormBuilder,
     ) {
