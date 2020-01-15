@@ -166,7 +166,9 @@
                     (customAction)="cancel($event)"
             ></pxe-supply-offer-form>
         </div>
-        <div [hidden]="loadingOffers || tableRows.length === 0">
+        <div
+            class="mb-4" 
+            [hidden]="loadingOffers || tableRows.length === 0">
             <lnd-table
                 #table
                 [cols]="tableCols"
@@ -186,7 +188,8 @@
                     columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo
                 }">
             </lnd-table>
-        </div>
+        </div
+        >
     </ng-container>
 
 </pxe-layout-container>
