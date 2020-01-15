@@ -112,6 +112,9 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     public name?: string;
 
     @Input()
+    public maxlength?: string;
+
+    @Input()
     public options?: Array<IOption>;
 
     @Input()

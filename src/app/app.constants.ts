@@ -54,15 +54,16 @@ export const CONSTS = {
         WILD_CART  : '**',
     },
     REFRESH_TOKEN: {
-        INTERVAL_TOKEN: 300000,
-        TOKEN_COUNT: 4,
-        TOKEN_DONT_REFRESH_TIME_IN_MINUTES: 2,
+        INTERVAL: 300000,
+        COUNT: 4,
+        DONT_REFRESH_TIME_IN_MINUTES: 2,
     },
     VALIDATORS: {
         ADULTHOOD_AGE: 18,
         MAX_DIGIT_BEFORE_DECIMAL_POINT: 7,
         MAX_DIGIT_AFTER_DECIMAL_POINT: 2,
         MAX_LENGTH: {
+            NUMBER_INPUT_WITH_HINT: 10,
             BENEFIT_NAME: 100,
             BENEFIT_URL: 5000,
             CITY: 255,

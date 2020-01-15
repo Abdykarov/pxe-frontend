@@ -40,6 +40,8 @@ import {
 })
 export class PersonalInfoFormComponent extends AbstractFormComponent implements OnInit, AfterViewInit {
 
+    public readonly MAX_LENGTH_NUMBER_INPUT_WITH_HINT = CONSTS.VALIDATORS.MAX_LENGTH.NUMBER_INPUT_WITH_HINT;
+
     @Input()
     public supplyPoint: ISupplyPoint;
 

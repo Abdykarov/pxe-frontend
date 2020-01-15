@@ -1,1 +1,1 @@
-export const isUserName = (userName: string): boolean => userName.includes('@')
+export const isUserName = (userName: string): boolean =>  userName.indexOf('@') >= 0;

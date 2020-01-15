@@ -70,15 +70,15 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
 
     public handleCustomAction = ($event) => this.customAction.emit($event);
 
-    private setLoginValidator = () => {
-        this.form.controls['login']
+    public setLoginValidator = (formName) => {
+        this.form.controls[formName]
             .setValidators(
                 [
                     Validators.required,
-                    Validators.maxLength(isUserName(this.form.controls['login'].value) ?
+                    Validators.maxLength(isUserName(this.form.controls[formName].value) ?
                         CONSTS.VALIDATORS.MAX_LENGTH.EMAIL_LOGIN : CONSTS.VALIDATORS.MAX_LENGTH.USER_NAME_LOGIN),
                 ]);
-        this.form.controls['login']
+        this.form.controls[formName]
             .updateValueAndValidity();
     }
 

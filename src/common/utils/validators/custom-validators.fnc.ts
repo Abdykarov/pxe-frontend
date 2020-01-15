@@ -471,14 +471,13 @@ export class CustomValidators {
                 return null;
             }
 
-
             if (totalDigitLengthBeforeDecimalPointValidator(control.value, maxLength)) {
                 return null;
             }
 
             return {
                 totalDigitLengthBeforeDecimalPoint: {
-                    maxLength: maxLength,
+                    maxLength,
                 },
             };
         };

@@ -243,7 +243,7 @@ export const errorFieldMessages =  {
         required: 'Vyplňte ulici.',
     },
     string: {
-        maxlength: 'Použít můžete maximálně {requiredLength} znaků.',
+        maxlength: 'Použít můžete maximálně {requiredLength|number:1.0-3} znaků.',
     },
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
