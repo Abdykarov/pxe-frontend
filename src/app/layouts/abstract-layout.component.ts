@@ -74,6 +74,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
                         .subscribe();
                     this.toggleSubscription.unsubscribe();
                 }
+                console.log(event.urlAfterRedirects);
                 if (
                     isPlatformBrowser(this.platformId) &&
                     (
@@ -83,12 +84,12 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
                     environment.sAnalyticsTId
                 ) {
                     this.sAnalyticsService.init();
-                    if (
-                        inArray(event.urlAfterRedirects, S_ANALYTICS.ALLOWED_S_APM) ||
-                        inArray(event.urlAfterRedirects.split('?')[0], S_ANALYTICS.ALLOWED_ROUTES)
-                    ) {
-                        this.sAnalyticsService.initSApm();
-                    }
+                    // if (
+                    //     inArray(event.urlAfterRedirects, S_ANALYTICS.ALLOWED_S_APM) ||
+                    //     inArray(event.urlAfterRedirects.split('?')[0], S_ANALYTICS.ALLOWED_ROUTES)
+                    // ) {
+                    //     this.sAnalyticsService.initSApm();
+                    // }
                 }
                 this.settings = <ISettings>this.route.snapshot.firstChild.data;
                 this.activeUrl = this.router.url;

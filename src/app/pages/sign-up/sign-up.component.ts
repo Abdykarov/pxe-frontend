@@ -8,7 +8,7 @@ import { Apollo } from 'apollo-angular';
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CONSTS,
-    ROUTES,
+    ROUTES, S_ANALYTICS,
 } from 'src/app/app.constants';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import {
@@ -19,6 +19,7 @@ import {
 import { parseGraphQLErrors } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
 import { Router } from '@angular/router';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Component({
     templateUrl: './sign-up.component.html',
@@ -35,6 +36,7 @@ export class SignUpComponent extends AbstractComponent {
     constructor(
         private apollo: Apollo,
         private cd: ChangeDetectorRef,
+        private sAnalyticsService: SAnalyticsService,
         private registrationService: RegistrationService,
         private router: Router,
     ) {
@@ -51,6 +53,16 @@ export class SignUpComponent extends AbstractComponent {
                 () => {
                     this.formLoading = false;
                     this.formSent = true;
+                    this.sAnalyticsService.sendWebData(
+                        {},
+                        {
+                            email: values.email,
+                        },
+                        {},
+                        {
+                            ACTION: S_ANALYTICS.ACTIONS.SIGN_UP,
+                        },
+                    );
                     this.cd.markForCheck();
                     this.router.navigate([CONSTS.PATHS.LOGIN],
                         {

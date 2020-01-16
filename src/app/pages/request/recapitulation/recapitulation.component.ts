@@ -21,11 +21,12 @@ import {
     map,
     takeUntil,
 } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth.service';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CODE_LIST_TYPES,
-    ROUTES,
+    ROUTES, S_ANALYTICS,
 } from 'src/app/app.constants';
 import { formFields } from 'src/common/containers/form/forms/personal-info/personal-info-form.config';
 import {
@@ -80,12 +81,13 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         );
 
     constructor(
+        private authService: AuthService,
         private cd: ChangeDetectorRef,
         public navigateRequestService: NavigateRequestService,
         private personalDataService: PersonalDataService,
         private route: ActivatedRoute,
         private router: Router,
-        private sAnalytics: SAnalyticsService,
+        private sAnalyticsService: SAnalyticsService,
         private supplyService: SupplyService,
         @Inject(PLATFORM_ID) private platformId: string,
 
@@ -95,8 +97,8 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
 
     ngOnInit () {
         if (isPlatformBrowser(this.platformId)) {
-            this.sAnalytics.initSBiometrics('recapitulation-form');
-            this.sAnalytics.initSForm('recapitulation-form');
+            this.sAnalyticsService.initSBiometrics('recapitulation-form');
+            this.sAnalyticsService.initSForm('recapitulation-form');
         }
 
         combineLatest(this.codeLists$, this.supplyPoint$)
@@ -137,6 +139,17 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             )
             .subscribe(
                 () => {
+                    this.sAnalyticsService.sendWebData(
+                        {},
+                        {
+                            email: this.authService.currentUserValue.email,
+                        },
+                        {},
+                        {
+                            ACTION: S_ANALYTICS.ACTIONS.RECAPITULATION,
+                            personalDataAction,
+                        },
+                    );
                     this.router.navigate(
                         [ROUTES.ROUTER_REQUEST_CONTRACT], {
                         queryParams: {
@@ -162,8 +175,8 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     ngOnDestroy() {
         super.ngOnDestroy();
         if (isPlatformBrowser(this.platformId)) {
-            this.sAnalytics.unTractSBiometrics();
-            this.sAnalytics.unTractSForm();
+            this.sAnalyticsService.unTractSBiometrics();
+            this.sAnalyticsService.unTractSForm();
         }
     }
 

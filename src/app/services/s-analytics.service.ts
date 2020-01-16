@@ -5,6 +5,8 @@ import {
 } from '@angular/core';
 import { SAnalyticsPlugins } from 'src/app/services/model/s-analytics.model';
 
+import * as uuid from 'uuid/v4';
+
 import { environment } from 'src/environments/environment';
 
 declare const sa;
@@ -14,28 +16,43 @@ declare const sa;
 })
 export class SAnalyticsService {
 
+    private UUID: string = null;
+
     constructor(
         @Inject(DOCUMENT) private document: Document,
     ) {}
 
     public init = () => {
         this.downloadSAnalytics();
-        setTimeout(() => {
-            sa('create', environment.sAnalyticsTId);
-            sa('send', 'pageview');
-            sa('send', 'register', 'deadbeef-dead-dead-dead-deaddeafbeef');
+        sa('create', environment.sAnalyticsTId);
+        this.registrationApplication();
+        sa('send', 'pageview');
+    }
 
-            const applicationWebData = {
-                'applicationId': 'deadbeef-dead-dead-dead-deaddeafbeef',
-                'loanInfo': {
-                    'type': 'string',
-                    'amount': 1,
-                    'monthlyPayment': 1,
-                    'numberOfInstallments': 1,
-                },
-            };
-            sa('send', 'webdata', applicationWebData);
-        });
+    public registrationApplication = () => {
+        this.UUID = uuid();
+        sa('send', 'register', 'deadbeef-dead-dead-dead' + this.UUID);
+    }
+
+    public sendWebData = (
+        loanInfo = {},
+        borrower = {},
+        coborrower = {},
+        webdata = {},
+    ) => {
+        const applicationWebData = {
+            tid: environment.sAnalyticsTId,
+            applicationId: 'deadbeef-dead-dead-dead' + this.UUID,
+            sa: 'I DONT KNOW WHAT I AM',
+            said: 'I DONT KNOW WHAT I AM',
+            clientTimestamp: new Date().getTime(),
+            'loanInfo': {},
+            borrower,
+            coborrower,
+            webdata,
+        };
+        sa('send', 'webdata', applicationWebData);
+        this.registrationApplication();
     }
 
     private installPlugin = (sAnalyticsPlugins: SAnalyticsPlugins) => {
@@ -49,26 +66,22 @@ export class SAnalyticsService {
     public initSApm = () =>
         this.installPlugin(SAnalyticsPlugins.sApm)
 
-    public initSBiometrics = (formName, selectors = 'input[type=text], textarea') => setTimeout(() => {
+    public initSBiometrics = (formName, selectors = 'input[type=text], textarea') => {
         this.installPlugin(SAnalyticsPlugins.sBiometrics);
-        sa('include', 's-biometrics', {formName: formName});
+        sa('include', 's-biometrics', { formName: formName });
         sa('s-biometrics:track', {
             fields: selectors,
         });
-    })
+    }
 
-    public initSForm = (formName, selectors = 'input[type=text], textarea, button') => setTimeout(() => {
+    public initSForm = (formName, selectors = 'input[type=text], textarea, button') => {
         this.installPlugin(SAnalyticsPlugins.sForm);
         sa('include', 's-form', formName ? {formName: formName} : null);
-        sa('s-form:track', {
-            fields: selectors,
-        });
+        sa('s-form:track');
         sa('s-form:start');
-    })
-
-    public unTractSBiometrics = () => {
-        sa('s-biometrics:untrack');
     }
+
+    public unTractSBiometrics = () => sa('s-biometrics:untrack');
 
     public unTractSForm = () => {
         sa('s-form:end');

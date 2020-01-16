@@ -35,7 +35,11 @@ import {
     parseGraphQLErrors,
     parseRestAPIErrors,
 } from 'src/common/utils/';
-import { ROUTES } from 'src/app/app.constants';
+import {
+    ROUTES,
+    S_ANALYTICS,
+} from 'src/app/app.constants';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { UserService } from 'src/common/graphql/services/user.service';
 
 @Component({
@@ -60,6 +64,7 @@ export class LoginComponent extends AbstractComponent {
         private cd: ChangeDetectorRef,
         private route: ActivatedRoute,
         private router: Router,
+        private sAnalyticsService: SAnalyticsService,
         private userService: UserService,
     ) {
         super();
@@ -150,6 +155,16 @@ export class LoginComponent extends AbstractComponent {
                         this.cd.markForCheck();
                         return;
                     }
+                    this.sAnalyticsService.sendWebData(
+                        {},
+                        {
+                            email: userLogin.login,
+                        },
+                        {},
+                        {
+                            ACTION: S_ANALYTICS.ACTIONS.LOGIN,
+                        },
+                    );
                     this.navigateAfterLogin(loginResponse);
                 },
                 error => {

@@ -12,7 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CONSTS,
-    ROUTES,
+    ROUTES, S_ANALYTICS,
 } from 'src/app/app.constants';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import {
@@ -84,6 +84,16 @@ export class LandingComponent extends AbstractComponent implements OnInit, OnDes
             .subscribe(
                 () => {
                     this.formLoading = false;
+                    this.sAnalyticsService.sendWebData(
+                        {},
+                        {
+                            email: values.email,
+                        },
+                        {},
+                        {
+                            ACTION: S_ANALYTICS.ACTIONS.SIGN_UP,
+                        },
+                    );
                     this.formSent = true;
                     this.cd.markForCheck();
                     this.router.navigate([CONSTS.PATHS.LOGIN],

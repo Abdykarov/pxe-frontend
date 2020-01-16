@@ -21,10 +21,12 @@ import {
     takeUntil,
 } from 'rxjs/operators';
 
+import { AuthService } from 'src/app/services/auth.service';
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CONSTS,
     ROUTES,
+    S_ANALYTICS,
 } from 'src/app/app.constants';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import {
@@ -41,6 +43,7 @@ import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { OfferService } from 'src/common/graphql/services/offer.service';
 import { offerValidityMessages } from 'src/common/constants/errors.constant';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { ValidityService } from 'src/app/services/validity.service';
 
@@ -69,12 +72,14 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
         );
 
     constructor(
+        private authService: AuthService,
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
         public navigateRequestService: NavigateRequestService,
         private offerService: OfferService,
         private route: ActivatedRoute,
         private router: Router,
+        private sAnalyticsService: SAnalyticsService,
         private supplyService: SupplyService,
         private validityService: ValidityService,
     ) {
@@ -137,6 +142,17 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
             )
             .subscribe(
                 () => {
+                    this.sAnalyticsService.sendWebData(
+                        {},
+                        {
+                            email: this.authService.currentUserValue.email,
+                        },
+                        {},
+                        {
+                            ACTION: S_ANALYTICS.ACTIONS.CHOOSE_OFFER,
+                            supplyPointOffer,
+                        },
+                    );
                     this.router.navigate(
                         [ROUTES.ROUTER_REQUEST_RECAPITULATION],
                         {
