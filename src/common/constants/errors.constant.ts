@@ -218,8 +218,7 @@ export const errorFieldMessages =  {
     password: {
         required: 'Vyplňte heslo.',
         currentRequired: 'Vyplňte své současné heslo.',
-        pattern: '	Vaše heslo musí mít minimálně 8 písmen, musí obsahovat malá a velká ' +
-            'písmena, aspoň jednu číslici a aspoň jeden speciální znak jako &_*+/#\ apod.',
+        pattern: '	Vaše heslo musí mít minimálně 10 znaků.',
         fieldsMustMatch: 'Musíte vyplnit stejná hesla.',
         invalidCurrentPassword: 'Vyplněné heslo se s vaším současným heslem neshoduje.',
     },

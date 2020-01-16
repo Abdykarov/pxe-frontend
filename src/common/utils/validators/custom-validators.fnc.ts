@@ -10,6 +10,7 @@ import {
     accountNumberValidator,
     accountNumberPrefixValidator,
 } from './account-number.fnc';
+import { CONSTS } from 'src/app/app.constants';
 import {
     DICError,
     verifyDIC,
@@ -467,10 +468,7 @@ export class CustomValidators {
             return null;
         }
 
-        const PASSWORD_REGEXP =
-            /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1})(?=(.*[a-zA-Z]){8,}).*$/;
-
-        if (PASSWORD_REGEXP.test(password.value)) {
+        if (password.value.toString().length >= CONSTS.MIN_LENGTH_PASSWORD) {
             return null;
         }
 
