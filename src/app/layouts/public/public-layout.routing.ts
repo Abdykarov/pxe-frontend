@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { CONSTS } from 'src/app/app.constants';
-import { PublicLayoutComponent } from './public-layout.component';
 import {
     LoginType,
     SignType,
 } from '../models/router-data.model';
+import { PublicLayoutComponent } from './public-layout.component';
 
 const routes = [
     {
@@ -22,6 +22,7 @@ const routes = [
                     isLandingPage: true,
                     loginType: LoginType.NAVIGATE,
                     signUpType: SignType.SCROLL,
+                    sApm: true,
                 },
             },
             {

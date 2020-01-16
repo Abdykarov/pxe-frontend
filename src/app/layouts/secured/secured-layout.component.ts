@@ -4,8 +4,8 @@ import {
 } from '@angular/router';
 import {
     ChangeDetectorRef,
-    Component,
-    OnInit,
+    Component, Inject,
+    OnInit, PLATFORM_ID,
 } from '@angular/core';
 
 import * as R from 'ramda';
@@ -17,6 +17,7 @@ import {
 
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import {
     INavigationConfig,
     INavigationMenu,
@@ -47,16 +48,20 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
         private navigationApolloService: NavigationApolloService,
         private navigationService: NavigationService,
         protected overlayService: OverlayService,
+        @Inject(PLATFORM_ID) protected platformId: string,
         protected route: ActivatedRoute,
         protected router: Router,
+        protected sAnalyticsService: SAnalyticsService,
         protected scrollToService: ScrollToService,
     ) {
         super(
             apollo,
             authService,
             overlayService,
+            platformId,
             route,
             router,
+            sAnalyticsService,
             scrollToService,
         );
 

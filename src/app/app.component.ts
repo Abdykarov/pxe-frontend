@@ -1,17 +1,7 @@
-import {
-    Component,
-    ChangeDetectionStrategy,
-    Inject,
-    PLATFORM_ID,
-} from '@angular/core';
-import {
-    DOCUMENT,
-    isPlatformBrowser,
-} from '@angular/common';
-import {
-    NavigationEnd,
-    Router,
-} from '@angular/router';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Inject, PLATFORM_ID } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { SAnalyticsPlugins } from 'src/app/services/model/s-analytics.model';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 import { environment } from 'src/environments/environment';
@@ -27,15 +17,10 @@ export class AppComponent {
     constructor(
         private gtmService: GTMService,
         private router: Router,
-        private sAnalyticsService: SAnalyticsService,
         @Inject(DOCUMENT) private document: Document,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         if (isPlatformBrowser(this.platformId)) {
-            if (environment.sAnalyticsTId) {
-                this.sAnalyticsService.init();
-            }
-
             if (!environment.gtmId) {
                 return;
             }

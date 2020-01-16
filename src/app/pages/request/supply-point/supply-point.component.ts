@@ -5,7 +5,7 @@ import {
 import {
     ChangeDetectorRef,
     Component,
-    Inject,
+    Inject, OnDestroy,
     OnInit,
     PLATFORM_ID,
 } from '@angular/core';
@@ -38,13 +38,14 @@ import {
     ROUTES,
     SUPPLY_POINT_EDIT_TYPE,
 } from 'src/app/app.constants';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
     templateUrl: './supply-point.component.html',
     styleUrls: ['./supply-point.component.scss'],
 })
-export class SupplyPointComponent extends AbstractComponent implements OnInit {
+export class SupplyPointComponent extends AbstractComponent implements OnDestroy, OnInit {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.SUPPLY_POINT;
 
     public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
@@ -63,12 +64,21 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
+        private sAnalytics: SAnalyticsService,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
     }
 
     ngOnInit() {
+        setTimeout(() =>{
+            if (isPlatformBrowser(this.platformId)) {
+                console.log('NACITAM SE');
+                this.sAnalytics.initSBiometrics('supply-form');
+                this.sAnalytics.initSForm('supply-form');
+            }
+        });
+
         let supplyPointCopy,
             supplyPointIdCopy;
 
@@ -182,5 +192,13 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                     this.globalError = globalError;
                     this.cd.markForCheck();
                 });
+    }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        if (isPlatformBrowser(this.platformId)) {
+            this.sAnalytics.unTractSBiometrics();
+            this.sAnalytics.unTractSForm();
+        }
     }
 }

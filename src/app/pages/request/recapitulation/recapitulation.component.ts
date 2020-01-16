@@ -1,3 +1,4 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
     ActivatedRoute,
     Router,
@@ -5,7 +6,10 @@ import {
 import {
     ChangeDetectorRef,
     Component,
+    Inject,
+    OnDestroy,
     OnInit,
+    PLATFORM_ID,
 } from '@angular/core';
 
 import * as R from 'ramda';
@@ -40,6 +44,7 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -47,7 +52,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     templateUrl: './recapitulation.component.html',
     styleUrls: ['./recapitulation.component.scss'],
 })
-export class RecapitulationComponent extends AbstractComponent implements OnInit {
+export class RecapitulationComponent extends AbstractComponent implements OnInit, OnDestroy {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.PERSONAL_DATA;
     public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.OFFER_STEP;
 
@@ -80,12 +85,20 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         private personalDataService: PersonalDataService,
         private route: ActivatedRoute,
         private router: Router,
+        private sAnalytics: SAnalyticsService,
         private supplyService: SupplyService,
+        @Inject(PLATFORM_ID) private platformId: string,
+
     ) {
         super();
     }
 
     ngOnInit () {
+        if (isPlatformBrowser(this.platformId)) {
+            this.sAnalytics.initSBiometrics('recapitulation-form');
+            this.sAnalytics.initSForm('recapitulation-form');
+        }
+
         combineLatest(this.codeLists$, this.supplyPoint$)
             .pipe(
                 takeUntil(this.destroy$),
@@ -145,4 +158,14 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         evt.preventDefault();
         this.navigateRequestService.routerToRequestStep(this.supplyPoint, ProgressStatus.OFFER_STEP);
     }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        if (isPlatformBrowser(this.platformId)) {
+            this.sAnalytics.unTractSBiometrics();
+            this.sAnalytics.unTractSForm();
+        }
+    }
+
+
 }

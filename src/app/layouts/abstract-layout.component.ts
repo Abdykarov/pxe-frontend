@@ -1,10 +1,11 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
     ActivatedRoute,
     NavigationEnd,
     NavigationExtras,
     Router,
 } from '@angular/router';
-import { OnInit } from '@angular/core';
+import { Inject, OnInit, PLATFORM_ID } from '@angular/core';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
@@ -16,10 +17,13 @@ import {
     fromEvent,
     Subscription,
 } from 'rxjs';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { CONSTS } from 'src/app/app.constants';
+import { CONSTS, S_ANALYTICS } from 'src/app/app.constants';
+import { inArray } from 'src/common/utils';
+import { environment } from 'src/environments/environment';
 import {
     ISettings,
     LoginType,
@@ -56,8 +60,10 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         protected apollo: Apollo,
         protected authService: AuthService,
         protected overlayService: OverlayService,
+        protected platformId: string,
         protected route: ActivatedRoute,
         protected router: Router,
+        protected sAnalyticsService: SAnalyticsService,
         protected scrollToService: ScrollToService,
     ) {
         super();
@@ -67,6 +73,22 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
                     this.toggleSubscription = this.overlayService.toggleOverlay(false)
                         .subscribe();
                     this.toggleSubscription.unsubscribe();
+                }
+                if (
+                    isPlatformBrowser(this.platformId) &&
+                    (
+                        inArray(event.urlAfterRedirects, S_ANALYTICS.ALLOWED_ROUTES) ||
+                        inArray(event.urlAfterRedirects.split('?')[0], S_ANALYTICS.ALLOWED_ROUTES)
+                    ) &&
+                    environment.sAnalyticsTId
+                ) {
+                    this.sAnalyticsService.init();
+                    if (
+                        inArray(event.urlAfterRedirects, S_ANALYTICS.ALLOWED_S_APM) ||
+                        inArray(event.urlAfterRedirects.split('?')[0], S_ANALYTICS.ALLOWED_ROUTES)
+                    ) {
+                        this.sAnalyticsService.initSApm();
+                    }
                 }
                 this.settings = <ISettings>this.route.snapshot.firstChild.data;
                 this.activeUrl = this.router.url;

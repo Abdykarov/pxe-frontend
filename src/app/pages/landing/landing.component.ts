@@ -1,7 +1,7 @@
 import {
     ChangeDetectorRef,
     Component,
-    ElementRef,
+    ElementRef, OnDestroy, OnInit,
     ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
@@ -25,13 +25,14 @@ import {
     scrollToElementFnc,
 } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
     templateUrl: './landing.component.html',
 })
-export class LandingComponent extends AbstractComponent {
+export class LandingComponent extends AbstractComponent implements OnInit, OnDestroy {
 
     @ViewChild('subscription')
     public subscriptionElement: ElementRef;
@@ -54,6 +55,7 @@ export class LandingComponent extends AbstractComponent {
         private cd: ChangeDetectorRef,
         private router: Router,
         private registrationService: RegistrationService,
+        private sAnalyticsService: SAnalyticsService,
         private scrollToService: ScrollToService,
     ) {
         super();
@@ -105,4 +107,16 @@ export class LandingComponent extends AbstractComponent {
     }
 
     public scrollToNewSubscription = () => this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
+
+    ngOnInit () {
+        super.ngOnInit();
+        this.sAnalyticsService.initSForm(null, 'input[type=text]');
+        this.sAnalyticsService.initSBiometrics(null, 'input[type=text]');
+    }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        this.sAnalyticsService.unTractSForm();
+        this.sAnalyticsService.unTractSBiometrics();
+    }
 }
