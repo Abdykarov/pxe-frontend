@@ -62,7 +62,10 @@
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
             <ng-container *ngIf="supplyPointOffers.length; else emptyOffers">
-                <div class="supply-points-offer">
+                <div class="supply-points-offer"
+                     (mouseenter)="sAnalyticsService.sFormBlur($event)"
+                     (mouseleave)="sAnalyticsService.sFormFocus($event)"
+                >
                     <pxe-supply-point-offer
                         (action)="saveContract(supplyPointOffer)"
                         *ngFor="let supplyPointOffer of supplyPointOffers"

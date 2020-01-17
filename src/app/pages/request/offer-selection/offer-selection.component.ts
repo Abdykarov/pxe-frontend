@@ -4,7 +4,7 @@ import {
 } from '@angular/router';
 import {
     ChangeDetectorRef,
-    Component,
+    Component, OnDestroy,
     OnInit,
 } from '@angular/core';
 
@@ -51,7 +51,7 @@ import { ValidityService } from 'src/app/services/validity.service';
     templateUrl: './offer-selection.component.html',
     styleUrls: ['./offer-selection.component.scss'],
 })
-export class OfferSelectionComponent extends AbstractComponent implements OnInit {
+export class OfferSelectionComponent extends AbstractComponent implements OnInit, OnDestroy {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.OFFER_STEP;
     public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.SUPPLY_POINT;
 
@@ -79,7 +79,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
         private offerService: OfferService,
         private route: ActivatedRoute,
         private router: Router,
-        private sAnalyticsService: SAnalyticsService,
+        public sAnalyticsService: SAnalyticsService,
         private supplyService: SupplyService,
         private validityService: ValidityService,
     ) {
@@ -87,6 +87,8 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     }
 
     ngOnInit() {
+        this.sAnalyticsService.installSForm();
+
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
                 map(({data}) => data.getSupplyPoint),
@@ -177,5 +179,10 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
         if (this.validityService.validateTermWithProlongation(this.supplyPoint)) {
             this.bannerObj.text = offerValidityMessages.contractEndWithTerminate;
         }
+    }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        this.sAnalyticsService.unTractSForm();
     }
 }

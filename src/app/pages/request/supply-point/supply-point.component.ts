@@ -74,12 +74,6 @@ export class SupplyPointComponent extends AbstractComponent implements OnDestroy
     }
 
     ngOnInit() {
-        setTimeout(() => {
-            if (isPlatformBrowser(this.platformId)) {
-                this.sAnalytics.initSBiometrics();
-                this.sAnalytics.initSForm();
-            }
-        });
 
         let supplyPointCopy,
             supplyPointIdCopy;
@@ -209,9 +203,5 @@ export class SupplyPointComponent extends AbstractComponent implements OnDestroy
 
     ngOnDestroy() {
         super.ngOnDestroy();
-        if (isPlatformBrowser(this.platformId)) {
-            this.sAnalytics.unTractSBiometrics();
-            this.sAnalytics.unTractSForm();
-        }
     }
 }

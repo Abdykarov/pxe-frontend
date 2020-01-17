@@ -1,7 +1,7 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {
     Inject,
-    Injectable,
+    Injectable, PLATFORM_ID,
 } from '@angular/core';
 import { SAnalyticsPlugins } from 'src/app/services/model/s-analytics.model';
 
@@ -18,15 +18,16 @@ export class SAnalyticsService {
 
     private UUID: string = null;
 
-    private includedSApm = false;
-    private includedSForm = false;
-    private includedSBiometrics = false;
-
     constructor(
         @Inject(DOCUMENT) private document: Document,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {}
 
     public init = () => {
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
+
         this.downloadSAnalytics();
         sa('create', environment.sAnalyticsTId);
         this.registrationApplication();
@@ -34,6 +35,10 @@ export class SAnalyticsService {
     }
 
     public registrationApplication = () => {
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
+
         this.UUID = uuid();
         sa('send', 'register', 'deadbeef-dead-dead-dead' + this.UUID);
     }
@@ -44,6 +49,10 @@ export class SAnalyticsService {
         coborrower = {},
         webdata = {},
     ) => {
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
+
         const applicationWebData = {
             tid: environment.sAnalyticsTId,
             applicationId: 'deadbeef-dead-dead-dead' + this.UUID,
@@ -60,6 +69,10 @@ export class SAnalyticsService {
     }
 
     private installPlugin = (sAnalyticsPlugins: SAnalyticsPlugins) => {
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
+
         sa('include', sAnalyticsPlugins);
         const script = this.document.createElement('script');
         script.async = true;
@@ -67,32 +80,103 @@ export class SAnalyticsService {
         this.document.head.prepend(script);
     }
 
-    public initSApm = () =>
-        this.installPlugin(SAnalyticsPlugins.sApm)
+    public initSApm = () => {
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
+
+        this.installPlugin(SAnalyticsPlugins.sApm);
+    }
+
+    public installSForm  = () => {
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
+
+        this.installPlugin(SAnalyticsPlugins.sForm);
+    }
+
+    public installSBiometrics = () => {
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
+
+        this.installPlugin(SAnalyticsPlugins.sBiometrics);
+    }
 
     public initSBiometrics = (formName = null, selectors = 'input[type=text], textarea') => {
-        this.installPlugin(SAnalyticsPlugins.sBiometrics);
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
+
         sa('include', 's-biometrics', formName ? {formName: formName} : null);
         sa('s-biometrics:track', {
             fields: selectors,
         });
     }
 
-    public initSForm = (formName = null, selectors = 'input[type=text], textarea, button') => {
-        this.installPlugin(SAnalyticsPlugins.sForm);
+    public initSForm = (formName = null, selectors = 'input, textarea, button') => {
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
+
         sa('include', 's-form', formName ? {formName: formName} : null);
         sa('s-form:track');
         sa('s-form:start');
     }
 
-    public unTractSBiometrics = () => sa('s-biometrics:untrack');
+    public unTractSBiometrics = () => {
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
+
+        sa('s-biometrics:untrack');
+    }
 
     public unTractSForm = () => {
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
+
         sa('s-form:end');
         sa('s-form:untrack');
     }
 
+    public sFormBlur = ($event) => {
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
+
+        console.log('blur');
+
+        sa('s-form:blur', { $event });
+    }
+
+    public sFormChange = ($event) => {
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
+
+        console.log('change');
+
+        sa('s-form:change', { $event });
+    }
+
+    public sFormFocus = ($event) => {
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
+
+        console.log('FOCUS');
+
+        sa('s-form:focus', { $event });
+    }
+
     private downloadSAnalytics = () => {
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
+
         const script = this.document.createElement('script');
         script.async = true;
         script.text = `(function(i, s, o, g, r, a, m) {i['SAnalyticsObject'] = r; i[r] = i[r] || function() {

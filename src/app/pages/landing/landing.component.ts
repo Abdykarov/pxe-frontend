@@ -120,6 +120,8 @@ export class LandingComponent extends AbstractComponent implements OnInit, OnDes
 
     ngOnInit () {
         super.ngOnInit();
+        this.sAnalyticsService.installSForm();
+        this.sAnalyticsService.installSBiometrics();
         this.sAnalyticsService.initSForm(null, 'input[type=text]');
         this.sAnalyticsService.initSBiometrics(null, 'input[type=text]');
     }

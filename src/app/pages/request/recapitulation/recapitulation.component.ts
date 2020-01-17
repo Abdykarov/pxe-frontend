@@ -96,10 +96,8 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     }
 
     ngOnInit () {
-        if (isPlatformBrowser(this.platformId)) {
-            this.sAnalyticsService.initSBiometrics('recapitulation-form');
-            this.sAnalyticsService.initSForm('recapitulation-form');
-        }
+        this.sAnalyticsService.installSBiometrics();
+        this.sAnalyticsService.installSForm();
 
         combineLatest(this.codeLists$, this.supplyPoint$)
             .pipe(
@@ -112,6 +110,8 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                         this.supplyPoint = supplyPoint;
                         this.isIndividual = this.supplyPoint.subject.code === SubjectType.SUBJECT_TYPE_INDIVIDUAL;
                         this.codeLists = codeLists;
+                        this.sAnalyticsService.initSBiometrics();
+                        this.sAnalyticsService.initSForm();
                         this.cd.markForCheck();
                     }
                 },

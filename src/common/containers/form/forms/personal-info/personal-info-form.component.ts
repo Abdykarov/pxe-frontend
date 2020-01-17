@@ -32,6 +32,7 @@ import {
     IPersonalData,
     IPersonalDataInputForm,
 } from 'src/common/graphql/models/personal-data.model';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Component({
     selector: 'pxe-personal-info-form',
@@ -58,6 +59,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
 
     constructor(
         protected fb: FormBuilder,
+        public sAnalyticsService: SAnalyticsService,
     ) {
         super(fb);
     }
