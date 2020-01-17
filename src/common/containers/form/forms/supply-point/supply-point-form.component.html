@@ -15,8 +15,6 @@
 <div *ngIf="codeLists && suppliers && suppliers[form.controls.commodityType.value]"
      class="page-box">
     <form
-        id="supply-form"
-        name="supply-form"
         [formGroup]="form"
         (keydown)="resetCustomFieldError()"
         (change)="resetCustomFieldError()"

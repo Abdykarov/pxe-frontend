@@ -149,8 +149,6 @@ export class SAnalyticsService {
             return;
         }
 
-        console.log('blur');
-
         sa('s-form:blur', { $event });
     }
 
@@ -159,8 +157,6 @@ export class SAnalyticsService {
             return;
         }
 
-        console.log('change');
-
         sa('s-form:change', { $event });
     }
 
@@ -168,8 +164,6 @@ export class SAnalyticsService {
         if (!this.canUseSAnalytics()) {
             return;
         }
-
-        console.log('FOCUS');
 
         sa('s-form:focus', { $event });
     }
