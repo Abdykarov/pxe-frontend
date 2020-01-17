@@ -76,8 +76,8 @@ export class SupplyPointComponent extends AbstractComponent implements OnDestroy
     ngOnInit() {
         setTimeout(() => {
             if (isPlatformBrowser(this.platformId)) {
-                this.sAnalytics.initSBiometrics('supply-form');
-                this.sAnalytics.initSForm('supply-form');
+                this.sAnalytics.initSBiometrics();
+                this.sAnalytics.initSForm();
             }
         });
 

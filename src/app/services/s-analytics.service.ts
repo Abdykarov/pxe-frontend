@@ -18,6 +18,10 @@ export class SAnalyticsService {
 
     private UUID: string = null;
 
+    private includedSApm = false;
+    private includedSForm = false;
+    private includedSBiometrics = false;
+
     constructor(
         @Inject(DOCUMENT) private document: Document,
     ) {}
@@ -68,7 +72,7 @@ export class SAnalyticsService {
 
     public initSBiometrics = (formName, selectors = 'input[type=text], textarea') => {
         this.installPlugin(SAnalyticsPlugins.sBiometrics);
-        sa('include', 's-biometrics', { formName: formName });
+        sa('include', 's-biometrics', formName ? {formName: formName} : null);
         sa('s-biometrics:track', {
             fields: selectors,
         });

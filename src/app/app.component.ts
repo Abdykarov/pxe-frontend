@@ -17,10 +17,13 @@ export class AppComponent {
     constructor(
         private gtmService: GTMService,
         private router: Router,
+        private sAnalyticsService: SAnalyticsService,
         @Inject(DOCUMENT) private document: Document,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         if (isPlatformBrowser(this.platformId)) {
+            this.sAnalyticsService.init();
+
             if (!environment.gtmId) {
                 return;
             }
