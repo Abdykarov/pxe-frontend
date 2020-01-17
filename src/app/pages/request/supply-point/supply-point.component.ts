@@ -67,7 +67,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
-        private sAnalytics: SAnalyticsService,
+        private sAnalyticsService: SAnalyticsService,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
@@ -171,7 +171,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                 (supplyPointId) => {
                     this.formLoading = false;
                     this.formSent = true;
-                    this.sAnalytics.sendWebData(
+                    this.sAnalyticsService.sendWebData(
                         {},
                         {
                             email: this.authService.currentUserValue.email,
