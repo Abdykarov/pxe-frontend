@@ -65,7 +65,7 @@ export class SAnalyticsService {
             sa: 'I DONT KNOW WHAT I AM',
             said: 'I DONT KNOW WHAT I AM',
             clientTimestamp: new Date().getTime(),
-            'loanInfo': {},
+            loanInfo,
             borrower,
             coborrower,
             webdata,
