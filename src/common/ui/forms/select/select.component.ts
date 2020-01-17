@@ -14,6 +14,7 @@ import {
     NgSelectComponent,
     NgSelectConfig,
 } from '@ng-select/ng-select';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 import { defaultSelectConfig } from './select.config';
 import { DynamicPipe } from 'src/common/pipes/dynamic/dynamic.pipe';
@@ -117,6 +118,9 @@ export class SelectComponent {
     public typeahead?: EventEmitter<any>;
 
     @Input()
+    public useApmForm = false;
+
+    @Input()
     public validationMessages?: IValidationMessages;
 
     @Input()
@@ -138,9 +142,28 @@ export class SelectComponent {
         });
     }
 
+    public sAnalyticsChange = (evt) => {
+        if (this.useApmForm) {
+            this.sAnalyticsService.sFormChange(evt);
+        }
+    }
+
+    public sAnalyticsBlur = (evt) => {
+        if (this.useApmForm) {
+            this.sAnalyticsService.sFormBlur(evt);
+        }
+    }
+
+    public sAnalyticsFocus = (evt) => {
+        if (this.useApmForm) {
+            this.sAnalyticsService.sFormFocus(evt);
+        }
+    }
+
     constructor(
         private config: NgSelectConfig,
         private dynamicPipe: DynamicPipe,
+        private sAnalyticsService: SAnalyticsService,
     ) {
         R.pipe(
             R.keys,

@@ -32,13 +32,11 @@
     ></lnd-form-field>
     <lnd-datepicker
         *ngIf="form.controls.birthDate.status !== 'DISABLED'"
+        [useApmForm]="true"
         [datepickerName]="'birthDate'"
         [error]="formError.birthDate || form.controls.birthDate.errors"
         id="datepicker-1"
         label="Datum narození"
-        (focus)="sAnalyticsService.sFormFocus($event)"
-        (change)="sAnalyticsService.sFormChange($event)"
-        (hide)="sAnalyticsService.sFormBlur($event)"
         [parentForm]="form"
         [placeholder]="'dd.mm.rrrr'"
         [maxDate]="maxDate"

@@ -32,9 +32,9 @@
                 [attr.disabled]="!!disabledField ? 'disabled' : null"
                 [attr.autocomplete]="'off'"
                 (keyup)="checkValue($event)"
-                (onShown)="onShowPicker($event)"
-                (bsValueChange)="change.emit($event)"
-                (onHidden)="hide.emit($event);onHidePicker($event)">
+                (onShown)="onShowPicker($event);sAnalyticsFocus($event);"
+                (bsValueChange)="change.emit($event);sAnalyticsChange($event);"
+                (onHidden)="hide.emit($event);onHidePicker($event);sAnalyticsBlur($event);">
                 <div class="input-group-append">
                     <span class="icon icon--calendar input-group-icon"></span>
                 </div>
