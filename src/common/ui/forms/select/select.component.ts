@@ -116,11 +116,7 @@ export class SelectComponent {
     @Input()
     public warning?: any;
 
-    public customSearchFn = (term: string, item: any) => {
-        if (!!term && term.length > 2) {
-            return item.label.toLocaleLowerCase().indexOf(term) > -1 || item.label.indexOf(term) > -1;
-        }
-    }
+    public customSearchFn = (term: string, item: any) => item.label.toLocaleLowerCase().indexOf(term) > -1 || item.label.indexOf(term) > -1;
 
     public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages, this.dynamicPipe);
 
