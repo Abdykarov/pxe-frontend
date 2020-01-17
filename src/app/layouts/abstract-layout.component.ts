@@ -4,9 +4,7 @@ import {
     NavigationExtras,
     Router,
 } from '@angular/router';
-import {
-    OnInit,
-} from '@angular/core';
+import { OnInit } from '@angular/core';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
