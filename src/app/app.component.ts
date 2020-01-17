@@ -1,11 +1,21 @@
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, PLATFORM_ID } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { SAnalyticsPlugins } from 'src/app/services/model/s-analytics.model';
-import { SAnalyticsService } from 'src/app/services/s-analytics.service';
+import {
+    DOCUMENT,
+    isPlatformBrowser,
+} from '@angular/common';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    Inject,
+    PLATFORM_ID,
+} from '@angular/core';
+import {
+    NavigationEnd,
+    Router,
+} from '@angular/router';
 
 import { environment } from 'src/environments/environment';
 import { GTMService } from './services/gtm.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Component({
     selector: 'lnd-root',

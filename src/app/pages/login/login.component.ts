@@ -35,10 +35,7 @@ import {
     parseGraphQLErrors,
     parseRestAPIErrors,
 } from 'src/common/utils/';
-import {
-    ROUTES,
-    S_ANALYTICS,
-} from 'src/app/app.constants';
+import { ROUTES } from 'src/app/app.constants';
 import { UserService } from 'src/common/graphql/services/user.service';
 
 @Component({

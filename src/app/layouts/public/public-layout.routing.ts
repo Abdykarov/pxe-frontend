@@ -22,7 +22,6 @@ const routes = [
                     isLandingPage: true,
                     loginType: LoginType.NAVIGATE,
                     signUpType: SignType.SCROLL,
-                    sApm: true,
                 },
             },
             {

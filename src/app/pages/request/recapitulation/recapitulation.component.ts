@@ -1,4 +1,3 @@
-import { isPlatformBrowser } from '@angular/common';
 import {
     ActivatedRoute,
     Router,
@@ -6,10 +5,8 @@ import {
 import {
     ChangeDetectorRef,
     Component,
-    Inject,
     OnDestroy,
     OnInit,
-    PLATFORM_ID,
 } from '@angular/core';
 
 import * as R from 'ramda';
@@ -21,9 +18,9 @@ import {
     map,
     takeUntil,
 } from 'rxjs/operators';
-import { AuthService } from 'src/app/services/auth.service';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from 'src/app/services/auth.service';
 import {
     CODE_LIST_TYPES,
     ROUTES, S_ANALYTICS,
@@ -89,15 +86,13 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         private router: Router,
         private sAnalyticsService: SAnalyticsService,
         private supplyService: SupplyService,
-        @Inject(PLATFORM_ID) private platformId: string,
-
     ) {
         super();
     }
 
     ngOnInit () {
-        this.sAnalyticsService.installSBiometrics();
-        this.sAnalyticsService.installSForm();
+        this.sAnalyticsService.installSBiometrics("recapitulation-form");
+        this.sAnalyticsService.installSForm("recapitulation-form");
 
         combineLatest(this.codeLists$, this.supplyPoint$)
             .pipe(
@@ -174,10 +169,8 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
 
     ngOnDestroy() {
         super.ngOnDestroy();
-        if (isPlatformBrowser(this.platformId)) {
-            this.sAnalyticsService.unTractSBiometrics();
-            this.sAnalyticsService.unTractSForm();
-        }
+        this.sAnalyticsService.unTractSBiometrics();
+        this.sAnalyticsService.unTractSForm();
     }
 
 

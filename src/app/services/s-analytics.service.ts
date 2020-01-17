@@ -1,7 +1,11 @@
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import {
+    DOCUMENT,
+    isPlatformBrowser,
+} from '@angular/common';
 import {
     Inject,
-    Injectable, PLATFORM_ID,
+    Injectable,
+    PLATFORM_ID,
 } from '@angular/core';
 import { SAnalyticsPlugins } from 'src/app/services/model/s-analytics.model';
 
@@ -23,8 +27,10 @@ export class SAnalyticsService {
         @Inject(PLATFORM_ID) private platformId: string,
     ) {}
 
+    private canUseSAnalytics = () => isPlatformBrowser(this.platformId) && environment.sAnalyticsTId;
+
     public init = () => {
-        if (!isPlatformBrowser(this.platformId)) {
+        if (!this.canUseSAnalytics()) {
             return;
         }
 
@@ -35,7 +41,7 @@ export class SAnalyticsService {
     }
 
     public registrationApplication = () => {
-        if (!isPlatformBrowser(this.platformId)) {
+        if (!this.canUseSAnalytics()) {
             return;
         }
 
@@ -49,7 +55,7 @@ export class SAnalyticsService {
         coborrower = {},
         webdata = {},
     ) => {
-        if (!isPlatformBrowser(this.platformId)) {
+        if (!this.canUseSAnalytics()) {
             return;
         }
 
@@ -69,10 +75,6 @@ export class SAnalyticsService {
     }
 
     private installPlugin = (sAnalyticsPlugins: SAnalyticsPlugins) => {
-        if (!isPlatformBrowser(this.platformId)) {
-            return;
-        }
-
         sa('include', sAnalyticsPlugins);
         const script = this.document.createElement('script');
         script.async = true;
@@ -81,7 +83,7 @@ export class SAnalyticsService {
     }
 
     public initSApm = () => {
-        if (!isPlatformBrowser(this.platformId)) {
+        if (!this.canUseSAnalytics()) {
             return;
         }
 
@@ -89,7 +91,7 @@ export class SAnalyticsService {
     }
 
     public installSForm  = () => {
-        if (!isPlatformBrowser(this.platformId)) {
+        if (!this.canUseSAnalytics()) {
             return;
         }
 
@@ -97,7 +99,7 @@ export class SAnalyticsService {
     }
 
     public installSBiometrics = () => {
-        if (!isPlatformBrowser(this.platformId)) {
+        if (!this.canUseSAnalytics()) {
             return;
         }
 
@@ -105,7 +107,7 @@ export class SAnalyticsService {
     }
 
     public initSBiometrics = (formName = null, selectors = 'input[type=text], textarea') => {
-        if (!isPlatformBrowser(this.platformId)) {
+        if (!this.canUseSAnalytics()) {
             return;
         }
 
@@ -116,7 +118,7 @@ export class SAnalyticsService {
     }
 
     public initSForm = (formName = null, selectors = 'input, textarea, button') => {
-        if (!isPlatformBrowser(this.platformId)) {
+        if (!this.canUseSAnalytics()) {
             return;
         }
 
@@ -126,7 +128,7 @@ export class SAnalyticsService {
     }
 
     public unTractSBiometrics = () => {
-        if (!isPlatformBrowser(this.platformId)) {
+        if (!this.canUseSAnalytics()) {
             return;
         }
 
@@ -134,7 +136,7 @@ export class SAnalyticsService {
     }
 
     public unTractSForm = () => {
-        if (!isPlatformBrowser(this.platformId)) {
+        if (!this.canUseSAnalytics()) {
             return;
         }
 
@@ -143,7 +145,7 @@ export class SAnalyticsService {
     }
 
     public sFormBlur = ($event) => {
-        if (!isPlatformBrowser(this.platformId)) {
+        if (!this.canUseSAnalytics()) {
             return;
         }
 
@@ -153,7 +155,7 @@ export class SAnalyticsService {
     }
 
     public sFormChange = ($event) => {
-        if (!isPlatformBrowser(this.platformId)) {
+        if (!this.canUseSAnalytics()) {
             return;
         }
 
@@ -163,7 +165,7 @@ export class SAnalyticsService {
     }
 
     public sFormFocus = ($event) => {
-        if (!isPlatformBrowser(this.platformId)) {
+        if (!this.canUseSAnalytics()) {
             return;
         }
 
@@ -173,10 +175,6 @@ export class SAnalyticsService {
     }
 
     private downloadSAnalytics = () => {
-        if (!isPlatformBrowser(this.platformId)) {
-            return;
-        }
-
         const script = this.document.createElement('script');
         script.async = true;
         script.text = `(function(i, s, o, g, r, a, m) {i['SAnalyticsObject'] = r; i[r] = i[r] || function() {

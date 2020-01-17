@@ -5,7 +5,8 @@ import {
 import {
     ChangeDetectorRef,
     Component,
-    Inject, OnDestroy,
+    Inject,
+    OnDestroy,
     OnInit,
     PLATFORM_ID,
 } from '@angular/core';
@@ -74,7 +75,6 @@ export class SupplyPointComponent extends AbstractComponent implements OnDestroy
     }
 
     ngOnInit() {
-
         let supplyPointCopy,
             supplyPointIdCopy;
 

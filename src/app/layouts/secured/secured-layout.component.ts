@@ -4,8 +4,10 @@ import {
 } from '@angular/router';
 import {
     ChangeDetectorRef,
-    Component, Inject,
-    OnInit, PLATFORM_ID,
+    Component,
+    Inject,
+    OnInit,
+    PLATFORM_ID,
 } from '@angular/core';
 
 import * as R from 'ramda';
@@ -17,7 +19,6 @@ import {
 
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import {
     INavigationConfig,
     INavigationMenu,
@@ -30,6 +31,7 @@ import {
 } from './services/navigation.config';
 import { NavigationService } from './services/navigation.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({

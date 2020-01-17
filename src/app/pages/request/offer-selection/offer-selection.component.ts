@@ -4,7 +4,8 @@ import {
 } from '@angular/router';
 import {
     ChangeDetectorRef,
-    Component, OnDestroy,
+    Component,
+    OnDestroy,
     OnInit,
 } from '@angular/core';
 
@@ -21,8 +22,8 @@ import {
     takeUntil,
 } from 'rxjs/operators';
 
-import { AuthService } from 'src/app/services/auth.service';
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
     ROUTES,

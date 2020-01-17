@@ -8,7 +8,7 @@ import { Apollo } from 'apollo-angular';
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CONSTS,
-    ROUTES, S_ANALYTICS,
+    ROUTES,
 } from 'src/app/app.constants';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import {

@@ -6,6 +6,8 @@
     </ng-container>
 </lnd-alert>
 <form
+    id="registration-form"
+    name="registration-form"
     [formGroup]="form"
     (keydown)="resetCustomFieldError()"
     (keydown.enter)="submitForm($event);false"

@@ -1,11 +1,12 @@
-import { isPlatformBrowser } from '@angular/common';
 import {
     ActivatedRoute,
     NavigationEnd,
     NavigationExtras,
     Router,
 } from '@angular/router';
-import { Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import {
+    OnInit,
+} from '@angular/core';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
@@ -17,19 +18,21 @@ import {
     fromEvent,
     Subscription,
 } from 'rxjs';
-import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { CONSTS, S_ANALYTICS } from 'src/app/app.constants';
+import {
+    CONSTS,
+    S_ANALYTICS,
+} from 'src/app/app.constants';
 import { inArray } from 'src/common/utils';
-import { environment } from 'src/environments/environment';
 import {
     ISettings,
     LoginType,
     SignType,
 } from './models/router-data.model';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
