@@ -70,7 +70,7 @@ export class SAnalyticsService {
     public initSApm = () =>
         this.installPlugin(SAnalyticsPlugins.sApm)
 
-    public initSBiometrics = (formName, selectors = 'input[type=text], textarea') => {
+    public initSBiometrics = (formName = null, selectors = 'input[type=text], textarea') => {
         this.installPlugin(SAnalyticsPlugins.sBiometrics);
         sa('include', 's-biometrics', formName ? {formName: formName} : null);
         sa('s-biometrics:track', {
@@ -78,7 +78,7 @@ export class SAnalyticsService {
         });
     }
 
-    public initSForm = (formName, selectors = 'input[type=text], textarea, button') => {
+    public initSForm = (formName = null, selectors = 'input[type=text], textarea, button') => {
         this.installPlugin(SAnalyticsPlugins.sForm);
         sa('include', 's-form', formName ? {formName: formName} : null);
         sa('s-form:track');
