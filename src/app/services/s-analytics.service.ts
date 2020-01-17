@@ -61,7 +61,7 @@ export class SAnalyticsService {
 
         const applicationWebData = {
             tid: environment.sAnalyticsTId,
-            applicationId: 'deadbeef-dead-dead-dead' + this.UUID,
+            applicationId: '0' + this.UUID + '0',
             sa: 'I DONT KNOW WHAT I AM',
             said: 'I DONT KNOW WHAT I AM',
             clientTimestamp: new Date().getTime(),

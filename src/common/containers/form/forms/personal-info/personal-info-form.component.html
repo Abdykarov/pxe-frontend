@@ -131,6 +131,7 @@
         [addressSubtextTemplate]="otherAddress"
         [touched]="form.controls.address1.touched || formError.address1"
         [validationMessages]="isIndividual ? formFields.validationMessages.address1Person : formFields.validationMessages.address1Company"
+        [useApmForm]="true"
         [whispererName]="'address1'">
     </pxe-address-whisperer>
     <pxe-address-whisperer
@@ -142,6 +143,7 @@
         [success]="form.controls.address2.valid && (form.controls.address2.touched || formError.address2)"
         [touched]="form.controls.address2.touched || formError.address2"
         [validationMessages]="isIndividual ? formFields.validationMessages.address2Person : formFields.validationMessages.address2Company"
+        [useApmForm]="true"
         [whispererName]="'address2'">
     </pxe-address-whisperer>
     <pxe-field-wrapper

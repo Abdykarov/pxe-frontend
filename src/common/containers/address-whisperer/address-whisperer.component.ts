@@ -98,6 +98,9 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     public touched = false;
 
     @Input()
+    public useApmForm = false;
+
+    @Input()
     public subtext?: string;
 
     @Input()

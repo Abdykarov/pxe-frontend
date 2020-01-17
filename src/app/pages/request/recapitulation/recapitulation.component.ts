@@ -23,7 +23,8 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CODE_LIST_TYPES,
-    ROUTES, S_ANALYTICS,
+    ROUTES,
+    S_ANALYTICS,
 } from 'src/app/app.constants';
 import { formFields } from 'src/common/containers/form/forms/personal-info/personal-info-form.config';
 import {

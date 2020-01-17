@@ -62,14 +62,14 @@
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
             <ng-container *ngIf="supplyPointOffers.length; else emptyOffers">
-                <div class="supply-points-offer"
-                     (mouseenter)="sAnalyticsService.sFormBlur($event)"
-                     (mouseleave)="sAnalyticsService.sFormFocus($event)"
-                >
+                <div class="supply-points-offer">
                     <pxe-supply-point-offer
                         (action)="saveContract(supplyPointOffer)"
                         *ngFor="let supplyPointOffer of supplyPointOffers"
-                        [supplyPointOffer]="supplyPointOffer">
+                        [supplyPointOffer]="supplyPointOffer"
+                        (mouseenter)="sAnalyticsService.sFormFocus($event);sAnalyticsService.sFormChange(supplyPointOffer)"
+                        (mouseleave)="sAnalyticsService.sFormBlur($event)"
+                    >
                     </pxe-supply-point-offer>
                 </div>
             </ng-container>

@@ -6,7 +6,6 @@ import {
     ChangeDetectorRef,
     Component,
     Inject,
-    OnDestroy,
     OnInit,
     PLATFORM_ID,
 } from '@angular/core';
@@ -48,7 +47,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     templateUrl: './supply-point.component.html',
     styleUrls: ['./supply-point.component.scss'],
 })
-export class SupplyPointComponent extends AbstractComponent implements OnDestroy, OnInit {
+export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.SUPPLY_POINT;
 
     public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
@@ -199,9 +198,5 @@ export class SupplyPointComponent extends AbstractComponent implements OnDestroy
                     this.globalError = globalError;
                     this.cd.markForCheck();
                 });
-    }
-
-    ngOnDestroy() {
-        super.ngOnDestroy();
     }
 }
