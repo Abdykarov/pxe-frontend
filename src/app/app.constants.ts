@@ -84,6 +84,7 @@ export const CONSTS = {
         MIN_BIRTH_DATE: '1900-01-01',
         MIN_LENGTH: {
             DIC: 10,
+            PASSWORD: 10,
         },
         ICO_LENGTH: 8,
         TIME_TO_CONTRACT_END_MIN: 0,
