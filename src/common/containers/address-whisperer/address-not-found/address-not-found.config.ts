@@ -11,27 +11,27 @@ export const addressNotFoundFields: IForm = {
             '',
             [
                 Validators.required,
-                Validators.maxLength(CONSTS.MAX_LENGTH_CITY),
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.CITY),
             ],
         ],
         street: [
             '',
             [
                 Validators.required,
-                Validators.maxLength(CONSTS.MAX_LENGTH_STREET),
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.STREET),
             ],
         ],
         descriptiveNumber: [
             '',
             [
                 Validators.required,
-                Validators.maxLength(CONSTS.MAX_LENGTH_DESCRIPTIVE_NUMBER),
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.DESCRIPTIVE_NUMBER),
             ],
         ],
         orientationNumber: [
             '',
             [
-                Validators.maxLength(CONSTS.MAX_LENGTH_ORIENTATION_NUMBERR),
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.ORIENTATION_NUMBER),
             ],
         ],
         region: [
@@ -52,18 +52,18 @@ export const addressNotFoundFields: IForm = {
     validationMessages: {
         city: {
             required: errorFieldMessages.city.required,
-            maxlengthRequiredLengthActualLength: errorFieldMessages.city.maxlengthCity,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
         street: {
             required: errorFieldMessages.street.required,
-            maxlengthRequiredLengthActualLength: errorFieldMessages.street.maxlengthStreet,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
         orientationNumber: {
-            maxlengthRequiredLengthActualLength: errorFieldMessages.orientationNumber.maxlengthOrientationNumber,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
         descriptiveNumber: {
             required: errorFieldMessages.descriptiveNumber.required,
-            maxlengthRequiredLengthActualLength: errorFieldMessages.descriptiveNumber.maxlengthDescriptiveNumber,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
         region: {
             required: errorFieldMessages.region.required,

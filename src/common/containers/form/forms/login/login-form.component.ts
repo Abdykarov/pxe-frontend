@@ -21,6 +21,9 @@ import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.
     styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent extends AbstractFormComponent implements OnInit {
+
+    public readonly LOGIN_FORM_NAME = 'login';
+
     @Input()
     public passwordWasSent = false;
 
