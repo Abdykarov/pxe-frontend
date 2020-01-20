@@ -468,7 +468,7 @@ export class CustomValidators {
             return null;
         }
 
-        if (password.value.toString().length >= CONSTS.MIN_LENGTH_PASSWORD) {
+        if (password.value.length >= CONSTS.MIN_LENGTH_PASSWORD) {
             return null;
         }
 
