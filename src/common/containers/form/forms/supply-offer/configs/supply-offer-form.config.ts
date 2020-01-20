@@ -3,6 +3,7 @@ import {
     Validators,
 } from '@angular/forms';
 
+import { CONSTS } from 'src/app/app.constants';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
@@ -32,6 +33,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.OFFER_NAME),
             ],
         ],
         distributionLocation: [
@@ -68,24 +70,27 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(2),
+                CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT),
                 CustomValidators.minValue(0),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
             ],
         ],
         priceVT: [
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(2),
+                CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT),
                 CustomValidators.minValue(0),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
             ],
         ],
         priceGas: [
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(2),
+                CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT),
                 CustomValidators.minValue(0),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
             ],
         ],
         validFromTo: [
@@ -106,8 +111,9 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(2),
+                CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT),
                 CustomValidators.minValue(0),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
             ],
         ],
         benefits: new FormArray([]),
@@ -139,30 +145,35 @@ export const formFields: IForm = {
         },
         name: {
             required: errorFieldMessages.offerName.required,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
         permanentPaymentPrice: {
             required: errorFieldMessages.offerPermanentPaymentPrice.required,
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
+            totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
         priceGas: {
             required: errorFieldMessages.offerPriceGas.required,
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
+            totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
         priceNT: {
             required: errorFieldMessages.offerPriceNT.required,
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
+            totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
         priceVT: {
             required: errorFieldMessages.offerPriceVT.required,
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
+            totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
         subjectTypeId: {
             required: errorFieldMessages.offerSubjectTypeId.required,

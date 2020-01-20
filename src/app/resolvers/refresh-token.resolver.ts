@@ -29,7 +29,7 @@ export class RefreshTokenResolver implements Resolve<any> {
         this.authService.startExpirationOfToken.toISOString(),
         new Date().toISOString(),
         'minutes',
-    ) >= CONSTS.REFRESH_TOKEN_DONT_REFRESH_TIME_IN_MINUTES
+    ) >= CONSTS.REFRESH_TOKEN.DONT_REFRESH_TIME_IN_MINUTES
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | any {
         if (!this.authService.wasRefreshCallRefreshInterval) {

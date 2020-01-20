@@ -75,7 +75,6 @@ export const errorFieldMessages =  {
     },
     city: {
         required: 'Vyplňte město nebo obec.',
-        maxlengthCity: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     commodityType: {
         required: 'Zvolte komoditu.',
@@ -107,7 +106,6 @@ export const errorFieldMessages =  {
     },
     descriptiveNumber: {
         required: 'Vyplňte číslo popisné.',
-        maxlengthDescriptiveNumber: 'Použít můžete maximálně {requiredLength} znaků.',
     },
     dic: {
         dicPrefix: 'Vyplňte své DIČ.',
@@ -147,9 +145,6 @@ export const errorFieldMessages =  {
         requiredSignatoryFirstName: 'Vyplňte jméno podepisující osoby.',
         requiredSignatoryLastName: 'Vyplňte příjmení podepisující osoby.',
         requiredCompany: 'Vyplňte název společnosti.',
-        maxlengthFirstName: 'Použít můžete maximálně {requiredLength} znaků.',
-        maxlengthLastName: 'Použít můžete maximálně {requiredLength} znaků.',
-        maxlengthFullName: 'Použít můžete maximálně {requiredLength} znaků.',
         patternFirstName: 'Použít můžete pouze písmena, pomlčky a mezery.',
         patternLastName: 'Použít můžete pouze písmena, pomlčky a mezery.',
     },
@@ -159,7 +154,6 @@ export const errorFieldMessages =  {
     },
     name: {
         required: 'Vyplňte libovolný název odběrného místa (např. Byt dcera) v maximální délce 50 znaků.',
-        maxlength: 'Maximální délka pro název odběrného místa je 50 znaků.',
     },
     number: {
         decimal: 'Použít můžete pouze čísla a pro desetinné místo čárku nebo tečku.',
@@ -167,6 +161,7 @@ export const errorFieldMessages =  {
         positive: 'Použít můžete pouze kladná čísla.',
         integer: 'Použít můžete pouze celá čísla.',
         positiveInteger: 'Použijte pouze celá a kladná čísla.',
+        totalDigitLengthBeforeDecimalPoint: 'Použít můžete maximálně {maxLength} čísel před desetinnou čárkou.',
     },
     offerAnnualConsumptionId: {
         required: 'Vyberte ze seznamu spotřebu.',
@@ -209,9 +204,7 @@ export const errorFieldMessages =  {
         required: 'Vyplňte odkdy dokdy je nabídka platná.',
         formatIntervalDiff: 'Datum začátku platnosti nabídky musí být dřívější než její konec.',
     },
-    orientationNumber: {
-        maxlengthOrientationNumber: 'Použít můžete maximálně {requiredLength} znaků.',
-    },
+    orientationNumber: {},
     phasesId: {
         required: 'Vyberte ze seznamu, jakou máte fázi.',
     },
@@ -248,7 +241,9 @@ export const errorFieldMessages =  {
     },
     street: {
         required: 'Vyplňte ulici.',
-        maxlengthStreet: 'Použít můžete maximálně {requiredLength} znaků.',
+    },
+    string: {
+        maxlength: 'Použít můžete maximálně {requiredLength|number:1.0-3} znaků.',
     },
     supplierId: {
         required: 'Vyberte ze seznamu jakého máte dodavatele.',
