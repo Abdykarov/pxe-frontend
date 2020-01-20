@@ -24,8 +24,8 @@ export class SupplyOfferConfig {
                 label: 'Název produktu',
                 views: [
                     {
-                        headingClass: [''],
-                        cellClass: [''],
+                        headingClass: ['product-name-min-width'],
+                        cellClass: ['text-break'],
                         content: (row) => `${row.name}`,
                     },
                 ],

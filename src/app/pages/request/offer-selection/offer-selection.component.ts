@@ -61,7 +61,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     public supplyPoint: ISupplyPoint;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
-    public checkOfferSelectionConstraint$ = interval(CONSTS.REFRESH_INTERVAL_RXJS)
+    public checkOfferSelectionConstraint$ = interval(CONSTS.INTERVAL_RXJS)
         .pipe(
             startWith(0),
             takeUntil(this.destroy$),
