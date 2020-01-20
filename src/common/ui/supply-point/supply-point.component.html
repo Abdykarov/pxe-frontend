@@ -13,7 +13,7 @@
                             class="icon supply-point__icon"></span>
                     </div>
                     <div class="col-9 col-md-10">
-                        <span class="supply-point__title">{{data.name}}</span>
+                        <span class="supply-point__title text-break">{{data.name}}</span>
                         <span *ngIf="data.commodityType === commodityType.POWER"
                               class="supply-point__title-subtext">
                             {{data.distributionRate.description}} ({{data.distributionRate.code}})
