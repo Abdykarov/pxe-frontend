@@ -92,9 +92,6 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     }
 
     ngOnInit () {
-        this.sAnalyticsService.installSBiometrics();
-        this.sAnalyticsService.installSForm();
-
         combineLatest(this.codeLists$, this.supplyPoint$)
             .pipe(
                 takeUntil(this.destroy$),
@@ -106,6 +103,8 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                         this.supplyPoint = supplyPoint;
                         this.isIndividual = this.supplyPoint.subject.code === SubjectType.SUBJECT_TYPE_INDIVIDUAL;
                         this.codeLists = codeLists;
+                        this.sAnalyticsService.installSBiometrics();
+                        this.sAnalyticsService.installSForm();
                         this.sAnalyticsService.initSBiometrics('recapitulation-form');
                         this.sAnalyticsService.initSForm('recapitulation-form');
                         this.cd.markForCheck();

@@ -22,6 +22,11 @@ export class SAnalyticsService {
 
     private UUID: string = null;
 
+    private installedSApm = false;
+    private installedSForm = false;
+    private installedSBio = false;
+    private installed = false;
+
     constructor(
         @Inject(DOCUMENT) private document: Document,
         @Inject(PLATFORM_ID) private platformId: string,
@@ -30,7 +35,7 @@ export class SAnalyticsService {
     private canUseSAnalytics = () => isPlatformBrowser(this.platformId) && environment.sAnalyticsTId;
 
     public init = () => {
-        if (!this.canUseSAnalytics()) {
+        if (!this.canUseSAnalytics() || this.installed) {
             return;
         }
 
@@ -38,6 +43,7 @@ export class SAnalyticsService {
         sa('create', environment.sAnalyticsTId);
         this.registrationApplication();
         sa('send', 'pageview');
+        this.installed = true;
     }
 
     public registrationApplication = () => {
@@ -46,7 +52,7 @@ export class SAnalyticsService {
         }
 
         this.UUID = uuid();
-        sa('send', 'register', 'deadbeef-dead-dead-dead' + this.UUID);
+        sa('send', 'register', '0' + this.UUID + '0');
     }
 
     public sendWebData = (
@@ -75,7 +81,6 @@ export class SAnalyticsService {
     }
 
     private installPlugin = (sAnalyticsPlugins: SAnalyticsPlugins) => {
-        sa('include', sAnalyticsPlugins);
         const script = this.document.createElement('script');
         script.async = true;
         script.src = `https://sa-sdp.lnd.bz/versions/stable/${sAnalyticsPlugins}.plugin.min.js`;
@@ -83,27 +88,31 @@ export class SAnalyticsService {
     }
 
     public initSApm = () => {
-        if (!this.canUseSAnalytics()) {
+        if (!this.canUseSAnalytics() || this.installedSApm) {
             return;
         }
 
+        sa('include', SAnalyticsPlugins.sApm);
         this.installPlugin(SAnalyticsPlugins.sApm);
+        this.installedSApm = true;
     }
 
     public installSForm  = () => {
-        if (!this.canUseSAnalytics()) {
+        if (!this.canUseSAnalytics() || this.installedSForm) {
             return;
         }
 
         this.installPlugin(SAnalyticsPlugins.sForm);
+        this.installedSForm = true;
     }
 
     public installSBiometrics = () => {
-        if (!this.canUseSAnalytics()) {
+        if (!this.canUseSAnalytics() || this.installedSBio) {
             return;
         }
 
         this.installPlugin(SAnalyticsPlugins.sBiometrics);
+        this.installedSBio = true;
     }
 
     public initSBiometrics = (formName = null, selectors = 'input[type=text], textarea') => {
@@ -111,7 +120,7 @@ export class SAnalyticsService {
             return;
         }
 
-        sa('include', 's-biometrics', formName ? {formName: formName} : null);
+        sa('include', 's-biometrics');
         sa('s-biometrics:track', {
             fields: selectors,
         });
@@ -122,7 +131,7 @@ export class SAnalyticsService {
             return;
         }
 
-        sa('include', 's-form', formName ? {formName: formName} : null);
+        // sa('include', 's-form', formName ? {formName: formName} : null);
         sa('s-form:track');
         sa('s-form:start');
     }

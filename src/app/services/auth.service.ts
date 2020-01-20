@@ -7,6 +7,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+import * as uuidFn from 'uuid/v4';
 import {
     BehaviorSubject,
     interval,
@@ -140,8 +141,7 @@ export class AuthService {
         return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { login, password })
             .pipe(
                 map((response: ILoginResponse) => {
-                    const uuid = this.generateUuid();
-                    const loginResponse =  this.manageLoginResponse(response, uuid);
+                    const loginResponse =  this.manageLoginResponse(response, uuidFn());
                     this.startRefreshTokenInterval();
                     this.startExpirationOfToken = new Date();
                     return loginResponse;
