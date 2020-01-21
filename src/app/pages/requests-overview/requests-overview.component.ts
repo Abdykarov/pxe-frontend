@@ -15,7 +15,10 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { AllowedOperations, ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import {
+    AllowedOperations,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import { ContractActions } from 'src/app/pages/supply-points/models/supply-point-detail.model';
 import { ContractStatus } from 'src/common/graphql/models/contract';
