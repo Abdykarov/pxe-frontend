@@ -13,19 +13,22 @@ import {
     map,
     takeUntil,
 } from 'rxjs/operators';
-import { ROUTES } from 'src/app/app.constants';
-import { ContractActions } from 'src/app/pages/supply-points/models/supply-point-detail.model';
-import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { ContractStatus } from 'src/common/graphql/models/contract';
 import { AllowedOperations, ISupplyPoint } from 'src/common/graphql/models/supply.model';
-import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
-import { inArray, parseGraphQLErrors } from 'src/common/utils';
+import { ContractActions } from 'src/app/pages/supply-points/models/supply-point-detail.model';
+import { ContractStatus } from 'src/common/graphql/models/contract';
+import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
 import { getOverviewState } from 'src/common/utils/get-overview-state.fnc';
+import {
+    inArray,
+    parseGraphQLErrors,
+} from 'src/common/utils';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { OverviewState } from './requests-overview.model';
+import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { ROUTES } from 'src/app/app.constants';
 
 @Component({
     selector: 'pxe-requests-overview',
