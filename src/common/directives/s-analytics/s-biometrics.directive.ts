@@ -1,8 +1,8 @@
 import {
     Directive,
-    ElementRef,
-    HostListener, ViewContainerRef,
+    HostListener,
 } from '@angular/core';
+
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Directive({

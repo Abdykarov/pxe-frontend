@@ -2,6 +2,7 @@ import {
     Directive,
     HostListener,
 } from '@angular/core';
+
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Directive({
