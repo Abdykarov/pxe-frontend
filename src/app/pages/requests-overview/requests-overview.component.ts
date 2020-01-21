@@ -1,31 +1,22 @@
-import {
-    ChangeDetectorRef,
-    Component,
-    OnInit,
-} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 
 import * as R from 'ramda';
-import {
-    map,
-    takeUntil,
-} from 'rxjs/operators';
+import { map, takeUntil, windowWhen } from 'rxjs/operators';
+import { ROUTES } from 'src/app/app.constants';
+import { ContractActions } from 'src/app/pages/supply-points/models/supply-point-detail.model';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import {
-    AllowedOperations,
-    ISupplyPoint,
-} from 'src/common/graphql/models/supply.model';
-import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import { ContractStatus } from 'src/common/graphql/models/contract';
-import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
-import { inArray } from 'src/common/utils';
-import { NavigateRequestService } from 'src/app/services/navigate-request.service';
-import { parseGraphQLErrors } from 'src/common/utils';
-import { OverviewState } from './requests-overview.model';
-import { ROUTES } from 'src/app/app.constants';
+import { AllowedOperations, ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
+import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
+import { inArray, parseGraphQLErrors } from 'src/common/utils';
 import { getOverviewState } from 'src/common/utils/get-overview-state.fnc';
+import { OverviewState } from './requests-overview.model';
 
 @Component({
     selector: 'pxe-requests-overview',
@@ -41,6 +32,8 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
     public state: OverviewState;
     public supplyPoints: ISupplyPoint[];
     public sourceSupplyPoints: ISupplyPoint[] = null;
+    public contractActions = ContractActions;
+    public contractAction = ContractActions.NONE;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -48,11 +41,18 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
         private navigateRequestService: NavigateRequestService,
         private router: Router,
         private supplyService: SupplyService,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
     }
 
     ngOnInit() {
+        if (isPlatformBrowser(this.platformId)) {
+            console.log(window.history.state);
+            console.log(R.path(['history', 'state', 'contractAction'], window) );
+            this.contractAction = R.path(['history', 'state', 'contractAction'], window) || ContractActions.NONE;
+        }
+
         this.supplyService.findSupplyPointsByContractStatus([
                 ContractStatus.NOT_CONCLUDED,
                 ContractStatus.CONCLUDED,

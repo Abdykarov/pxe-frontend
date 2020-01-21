@@ -193,7 +193,15 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
             .subscribe(
                 (deleteSignedContract: boolean) => {
                     if (deleteSignedContract) {
-                        this.router.navigate([ROUTES.ROUTER_REQUESTS]);
+                        this.router.navigate([
+                                ROUTES.ROUTER_REQUESTS,
+                            ],
+                            {
+                                state: {
+                                    contractAction: this.contractAction,
+                                },
+                            },
+                        );
                     } else {
                         this.globalError = [defaultErrorMessage];
                         this.formLoading = false;
