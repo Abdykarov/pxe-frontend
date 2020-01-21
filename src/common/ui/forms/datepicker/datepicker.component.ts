@@ -20,7 +20,6 @@ import { DynamicPipe } from 'src/common/pipes/dynamic/dynamic.pipe';
 import { getErrorMessage } from 'src/common/utils';
 import { defaultDatepickerConfig } from './datepicker.config';
 import { IValidationMessages } from '../models/validation-messages.model';
-import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 const locale = 'cs';
 
@@ -86,9 +85,6 @@ export class DatepickerComponent {
     public touched = false;
 
     @Input()
-    public useApmForm = false;
-
-    @Input()
     public validationMessages?: IValidationMessages;
 
     @Input()
@@ -106,7 +102,6 @@ export class DatepickerComponent {
         private cd: ChangeDetectorRef,
         private dynamicPipe: DynamicPipe,
         private localeService: BsLocaleService,
-        private sAnalyticsService: SAnalyticsService,
     ) {
         this.resetDatepickerLocale();
         this.config = defaultDatepickerConfig;
@@ -165,24 +160,6 @@ export class DatepickerComponent {
             window.scrollTo(window.scrollX, window.scrollY - 1);
             window.scrollTo(window.scrollX, window.scrollY + 1);
         });
-    }
-
-    public sAnalyticsChange = (evt) => {
-        if (this.useApmForm) {
-            this.sAnalyticsService.sFormChange(evt);
-        }
-    }
-
-    public sAnalyticsBlur = (evt) => {
-        if (this.useApmForm) {
-            this.sAnalyticsService.sFormBlur(evt);
-        }
-    }
-
-    public sAnalyticsFocus = (evt) => {
-        if (this.useApmForm) {
-            this.sAnalyticsService.sFormFocus(evt);
-        }
     }
 
     public onHidePicker = (event) => this.cd.markForCheck();

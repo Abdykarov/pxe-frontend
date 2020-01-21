@@ -76,6 +76,7 @@
             [validationMessages]="formFields.validationMessages.name"
         ></lnd-form-field>
         <lnd-form-field
+            lndSFormDirective
             *ngIf="form.controls.ean.status !== 'DISABLED'"
             [appendButtonIcon]="helpDocuments && helpDocuments['ean'] ? 'icon--info' : null"
             (appendButtonAction)="showHelp('ean', 'EAN')"

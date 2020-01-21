@@ -115,66 +115,100 @@ export class SAnalyticsService {
         this.installedSBio = true;
     }
 
-    public initSBiometrics = (formName = null, selectors = 'input[type=text], textarea') => {
+    public initSBiometrics = () => {
         if (!this.canUseSAnalytics()) {
             return;
         }
 
         sa('include', 's-biometrics');
-        sa('s-biometrics:track', {
-            fields: selectors,
-        });
     }
 
-    public initSForm = (formName = null, selectors = 'input, textarea, button') => {
+    public initSForm = () => {
         if (!this.canUseSAnalytics()) {
             return;
         }
 
-        // sa('include', 's-form', formName ? {formName: formName} : null);
-        sa('s-form:track');
+        sa('include', 's-form');
         sa('s-form:start');
     }
 
-    public unTractSBiometrics = () => {
-        if (!this.canUseSAnalytics()) {
-            return;
-        }
-
-        sa('s-biometrics:untrack');
-    }
-
-    public unTractSForm = () => {
+    public sFormEnd = () => {
         if (!this.canUseSAnalytics()) {
             return;
         }
 
         sa('s-form:end');
-        sa('s-form:untrack');
     }
 
-    public sFormBlur = ($event) => {
+    public sFormBlur = (event) => {
+        if (!this.canUseSAnalytics()) {
+            return;
+        }
+        sa('s-form:blur', { event });
+    }
+
+    public sFormChange = (event) => {
         if (!this.canUseSAnalytics()) {
             return;
         }
 
-        sa('s-form:blur', { $event });
+        sa('s-form:change', { event });
     }
 
-    public sFormChange = ($event) => {
+    public sFormClick = (event) => {
         if (!this.canUseSAnalytics()) {
             return;
         }
 
-        sa('s-form:change', { $event });
+        sa('s-form:click', {event });
     }
 
-    public sFormFocus = ($event) => {
+    public sFormSubmit = (event) => {
         if (!this.canUseSAnalytics()) {
             return;
         }
 
-        sa('s-form:focus', { $event });
+        sa('s-form:submit', {event });
+    }
+
+    public sFormFocus = (event) => {
+        if (!this.canUseSAnalytics()) {
+            return;
+        }
+
+        sa('s-form:focus', { event });
+    }
+
+    public sBioFocus = (event) => {
+        if (!this.canUseSAnalytics()) {
+            return;
+        }
+
+        sa('s-biometrics:focus', { event });
+    }
+
+    public sBioKeyDown = (event) => {
+        if (!this.canUseSAnalytics()) {
+            return;
+        }
+
+        sa('s-biometrics:keydown', { event });
+    }
+
+    public sBioKeyUp = (event) => {
+        if (!this.canUseSAnalytics()) {
+            return;
+        }
+
+        sa('s-biometrics:keyup', { event });
+    }
+
+    public sBioBlur = (event) => {
+        if (!this.canUseSAnalytics()) {
+            return;
+        }
+
+        sa('s-biometrics:blur', { event });
     }
 
     private downloadSAnalytics = () => {

@@ -184,6 +184,6 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
 
     ngOnDestroy() {
         super.ngOnDestroy();
-        this.sAnalyticsService.unTractSForm();
+        this.sAnalyticsService.sFormEnd();
     }
 }
