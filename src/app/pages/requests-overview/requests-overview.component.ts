@@ -1,9 +1,18 @@
+import {
+    ChangeDetectorRef,
+    Component,
+    Inject,
+    OnInit,
+    PLATFORM_ID,
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 
 import * as R from 'ramda';
-import { map, takeUntil, windowWhen } from 'rxjs/operators';
+import {
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 import { ROUTES } from 'src/app/app.constants';
 import { ContractActions } from 'src/app/pages/supply-points/models/supply-point-detail.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
