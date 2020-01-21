@@ -63,8 +63,6 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
 
     ngOnInit() {
         if (isPlatformBrowser(this.platformId)) {
-            console.log(window.history.state);
-            console.log(R.path(['history', 'state', 'contractAction'], window) );
             this.contractAction = R.path(['history', 'state', 'contractAction'], window) || ContractActions.NONE;
         }
 
