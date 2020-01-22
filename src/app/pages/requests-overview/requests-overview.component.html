@@ -1,6 +1,6 @@
 <pxe-layout-container pageTitle="Rozpracované smlouvy">
     <lnd-banner-ui
-        *ngIf="contractAction === contractActions.TERMINATE_CONTRACT"
+        *ngIf="requestsOverviewBannerShow === RequestsOverviewBannersShow.TERMINATE_CONTRACT"
         class="mb-2"
         [data]="{
             text: 'Smlouvu jste vypověděli. Výpověď byla odeslána na e-mail dodavatele a rovněž na váš e-mail.'
@@ -9,7 +9,7 @@
         [showButtonLabel]="false"
     ></lnd-banner-ui>
     <lnd-banner-ui
-        *ngIf="contractAction === contractActions.LEAVE_CONTRACT"
+        *ngIf="requestsOverviewBannerShow === RequestsOverviewBannersShow.LEAVE_CONTRACT"
         class="mb-2"
         [data]="{
             text: 'Odstoupili jste od smlouvy. Odstoupení od smlouvy bylo odesláno na e-mail dodavatele a rovněž na váš e-mail.'

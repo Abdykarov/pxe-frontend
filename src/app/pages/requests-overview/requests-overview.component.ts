@@ -20,7 +20,6 @@ import {
     ISupplyPoint,
 } from 'src/common/graphql/models/supply.model';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
-import { ContractActions } from 'src/app/pages/supply-points/models/supply-point-detail.model';
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
 import { getOverviewState } from 'src/common/utils/get-overview-state.fnc';
@@ -30,8 +29,11 @@ import {
 } from 'src/common/utils';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { OverviewState } from './requests-overview.model';
+import {
+    RequestsOverviewBannerShow,
+    ROUTES,
+} from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { ROUTES } from 'src/app/app.constants';
 
 @Component({
     selector: 'pxe-requests-overview',
@@ -44,11 +46,11 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
     public globalError: string[] = [];
     public loadingRequests = true;
     public overviewStates = OverviewState;
+    public requestsOverviewBannerShow = RequestsOverviewBannerShow.NONE;
+    public RequestsOverviewBannersShow = RequestsOverviewBannerShow;
     public state: OverviewState;
     public supplyPoints: ISupplyPoint[];
     public sourceSupplyPoints: ISupplyPoint[] = null;
-    public contractActions = ContractActions;
-    public contractAction = ContractActions.NONE;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -63,7 +65,8 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
 
     ngOnInit() {
         if (isPlatformBrowser(this.platformId)) {
-            this.contractAction = R.path(['history', 'state', 'contractAction'], window) || ContractActions.NONE;
+            this.requestsOverviewBannerShow =
+                R.path(['history', 'state', 'requestsOverviewBannerShow'], window) || RequestsOverviewBannerShow.NONE;
         }
 
         this.supplyService.findSupplyPointsByContractStatus([
