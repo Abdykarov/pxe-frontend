@@ -2,6 +2,8 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    OnDestroy,
+    OnInit,
     ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
@@ -13,6 +15,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CONSTS,
     ROUTES,
+    S_ANALYTICS,
 } from 'src/app/app.constants';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import {
@@ -25,13 +28,14 @@ import {
     scrollToElementFnc,
 } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
     templateUrl: './landing.component.html',
 })
-export class LandingComponent extends AbstractComponent {
+export class LandingComponent extends AbstractComponent implements OnInit, OnDestroy {
 
     @ViewChild('subscription')
     public subscriptionElement: ElementRef;
@@ -54,6 +58,7 @@ export class LandingComponent extends AbstractComponent {
         private cd: ChangeDetectorRef,
         private router: Router,
         private registrationService: RegistrationService,
+        private sAnalyticsService: SAnalyticsService,
         private scrollToService: ScrollToService,
     ) {
         super();
@@ -82,6 +87,16 @@ export class LandingComponent extends AbstractComponent {
             .subscribe(
                 () => {
                     this.formLoading = false;
+                    this.sAnalyticsService.sendWebData(
+                        {},
+                        {
+                            email: values.email,
+                        },
+                        {},
+                        {
+                            ACTION: S_ANALYTICS.ACTIONS.SIGN_UP,
+                        },
+                    );
                     this.formSent = true;
                     this.cd.markForCheck();
                     this.router.navigate([CONSTS.PATHS.LOGIN],
@@ -105,4 +120,17 @@ export class LandingComponent extends AbstractComponent {
     }
 
     public scrollToNewSubscription = () => this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
+
+    ngOnInit () {
+        super.ngOnInit();
+        this.sAnalyticsService.installSForm();
+        this.sAnalyticsService.installSBiometrics();
+        this.sAnalyticsService.initSForm();
+        this.sAnalyticsService.initSBiometrics();
+    }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        this.sAnalyticsService.sFormEnd();
+    }
 }

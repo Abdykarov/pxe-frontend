@@ -5,6 +5,8 @@ import {
 import {
     ChangeDetectorRef,
     Component,
+    Inject,
+    PLATFORM_ID,
 } from '@angular/core';
 
 import * as R from 'ramda';
@@ -21,6 +23,7 @@ import {
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
@@ -37,16 +40,20 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
         protected authService: AuthService,
         private cd: ChangeDetectorRef,
         protected overlayService: OverlayService,
+        @Inject(PLATFORM_ID) protected platformId: string,
         protected route: ActivatedRoute,
         protected router: Router,
+        protected sAnalyticsService: SAnalyticsService,
         protected scrollToService: ScrollToService,
     ) {
         super(
             apollo,
             authService,
             overlayService,
+            platformId,
             route,
             router,
+            sAnalyticsService,
             scrollToService,
         );
 

@@ -1,5 +1,6 @@
 <ng-template #otherAddress>
     <lnd-form-field
+        lndSFormDirective
         [id]="'checkbox-in-subtext'"
         [label]="isIndividual ? 'Mám jinou korespondenční adresu' : 'Mám jinou fakturační adresu'"
         [type]="'CHECKBOX'"
@@ -13,12 +14,16 @@
     </div>
 </div>
 <form
+    id="recapitulation-form"
+    name="recapitulation-form"
     [formGroup]="form"
     (keydown)="resetCustomFieldError()"
     (change)="resetCustomFieldError()"
     autocomplete="off"
     class="form-container">
     <lnd-form-field
+        lndSFormDirective
+        lndSBiometricsDirective
         [error]="formError.name || form.controls.name.errors"
         [formControl]="form.controls.name"
         [id]="'name'"
@@ -30,6 +35,8 @@
     ></lnd-form-field>
     <lnd-datepicker
         *ngIf="form.controls.birthDate.status !== 'DISABLED'"
+        lndSFormDirective
+        lndSBiometricsDirective
         [datepickerName]="'birthDate'"
         [error]="formError.birthDate || form.controls.birthDate.errors"
         id="datepicker-1"
@@ -57,6 +64,8 @@
             <div class="col-6 pr-1">
                 <lnd-form-field
                     *ngIf="form.controls.signatoryName.status !== 'DISABLED'"
+                    lndSFormDirective
+                    lndSBiometricsDirective
                     [error]="formError.signatoryName || form.controls.signatoryName.errors"
                     [formControl]="form.controls.signatoryName"
                     [id]="'signatoryName'"
@@ -73,6 +82,8 @@
             <div class="col-6 pl-1">
                 <lnd-form-field
                     *ngIf="form.controls.signatorySurname.status !== 'DISABLED'"
+                    lndSFormDirective
+                    lndSBiometricsDirective
                     [error]="formError.signatorySurname || form.controls.signatorySurname.errors"
                     [formControl]="form.controls.signatorySurname"
                     [id]="'signatorySurname'"
@@ -90,6 +101,8 @@
     </pxe-field-wrapper>
     <lnd-form-field
         *ngIf="form.controls.signatoryPosition.status !== 'DISABLED'"
+        lndSFormDirective
+        lndSBiometricsDirective
         [error]="formError.signatoryPosition || form.controls.signatoryPosition.errors"
         [formControl]="form.controls.signatoryPosition"
         [id]="'position'"
@@ -101,6 +114,8 @@
     ></lnd-form-field>
     <lnd-form-field
         *ngIf="form.controls.ico.status !== 'DISABLED'"
+        lndSFormDirective
+        lndSBiometricsDirective
         [error]="formError.ico || form.controls.ico.errors"
         [formControl]="form.controls.ico"
         [id]="'ico'"
@@ -111,6 +126,8 @@
     ></lnd-form-field>
     <lnd-form-field
         *ngIf="form.controls.dic.status !== 'DISABLED'"
+        lndSFormDirective
+        lndSBiometricsDirective
         [error]="formError.dic || form.controls.dic.errors"
         [formControl]="form.controls.dic"
         [id]="'dic'"
@@ -120,6 +137,8 @@
         [validationMessages]="formFields.validationMessages.dic"
     ></lnd-form-field>
     <pxe-address-whisperer
+        lndSFormDirective
+        lndSBiometricsDirective
         [error]="formError.address1 || form.controls.address1.errors"
         [formFieldsParentForm]="formFields"
         [label]="isIndividual ? 'Trvalá adresa' : 'Sídlo firmy'"
@@ -131,6 +150,8 @@
         [whispererName]="'address1'">
     </pxe-address-whisperer>
     <pxe-address-whisperer
+        lndSFormDirective
+        lndSBiometricsDirective
         [disabled]="!getFieldValue('onlyAddress1')"
         [error]="formError.address2 || form.controls.address2.errors"
         [formFieldsParentForm]="formFields"
@@ -153,33 +174,37 @@
         <div class="row no-gutters">
             <div class="col-8 pr-1">
                 <lnd-form-field
-                        [error]="formError.bankAccountNumber || form.controls.bankAccountNumber.errors"
-                        [formControl]="form.controls.bankAccountNumber"
-                        [id]="'bankAccountNumber'"
-                        label="Bankovní účet"
-                        subtext="Číslo bankovního účtu s předčíslím uveďte ve tvaru XX-XXXXXXXXXX"
-                        (focus)="fieldWrapperFocus('bankAccountNumber')"
-                        (blur)="fieldWrapperBlur()"
-                        [inputFocused]="(fieldWrapperFocused$ | async) === 'bankAccountNumber' || (fieldWrapperFocused$ | async) === 'bankCode'"
-                        [showErrorMessage]="false"
-                        [success]="form.controls.bankAccountNumber.valid && (form.controls.bankAccountNumber.touched || formError.bankAccountNumber)"
-                        [touched]="form.controls.bankAccountNumber.touched || formError.bankAccountNumber"
-                        [validationMessages]="formFields.validationMessages.bankAccountNumber"
+                    lndSFormDirective
+                    lndSBiometricsDirective
+                    [error]="formError.bankAccountNumber || form.controls.bankAccountNumber.errors"
+                    [formControl]="form.controls.bankAccountNumber"
+                    [id]="'bankAccountNumber'"
+                    label="Bankovní účet"
+                    subtext="Číslo bankovního účtu s předčíslím uveďte ve tvaru XX-XXXXXXXXXX"
+                    (focus)="fieldWrapperFocus('bankAccountNumber')"
+                    (blur)="fieldWrapperBlur()"
+                    [inputFocused]="(fieldWrapperFocused$ | async) === 'bankAccountNumber' || (fieldWrapperFocused$ | async) === 'bankCode'"
+                    [showErrorMessage]="false"
+                    [success]="form.controls.bankAccountNumber.valid && (form.controls.bankAccountNumber.touched || formError.bankAccountNumber)"
+                    [touched]="form.controls.bankAccountNumber.touched || formError.bankAccountNumber"
+                    [validationMessages]="formFields.validationMessages.bankAccountNumber"
                 ></lnd-form-field>
             </div>
             <div class="col-4 pl-1">
                 <lnd-form-field
-                        [error]="formError.bankCode || form.controls.bankCode.errors"
-                        [formControl]="form.controls.bankCode"
-                        [id]="'bankCode'"
-                        label=""
-                        (focus)="fieldWrapperFocus('bankCode')"
-                        (blur)="fieldWrapperBlur()"
-                        [inputFocused]="(fieldWrapperFocused$ | async) === 'bankAccountNumber' || (fieldWrapperFocused$ | async) === 'bankCode'"
-                        [showErrorMessage]="false"
-                        [success]="form.controls.bankCode.valid && (form.controls.bankCode.touched || formError.bankCode)"
-                        [touched]="form.controls.bankCode.touched || formError.bankCode"
-                        [validationMessages]="formFields.validationMessages.bankCode"
+                    lndSFormDirective
+                    lndSBiometricsDirective
+                    [error]="formError.bankCode || form.controls.bankCode.errors"
+                    [formControl]="form.controls.bankCode"
+                    [id]="'bankCode'"
+                    label=""
+                    (focus)="fieldWrapperFocus('bankCode')"
+                    (blur)="fieldWrapperBlur()"
+                    [inputFocused]="(fieldWrapperFocused$ | async) === 'bankAccountNumber' || (fieldWrapperFocused$ | async) === 'bankCode'"
+                    [showErrorMessage]="false"
+                    [success]="form.controls.bankCode.valid && (form.controls.bankCode.touched || formError.bankCode)"
+                    [touched]="form.controls.bankCode.touched || formError.bankCode"
+                    [validationMessages]="formFields.validationMessages.bankCode"
                 ></lnd-form-field>
             </div>
         </div>
@@ -195,6 +220,8 @@
         <div class="row no-gutters">
             <div class="col-4 pr-1">
                 <lnd-form-field
+                    lndSFormDirective
+                    lndSBiometricsDirective
                     [disabledField]="true"
                     [error]="formError.phonePrefix || form.controls.phonePrefix.errors"
                     [formControl]="form.controls.phonePrefix"
@@ -211,6 +238,8 @@
             </div>
             <div class="col-8 pl-1">
                 <lnd-form-field
+                    lndSFormDirective
+                    lndSBiometricsDirective
                     [error]="formError.phone || form.controls.phone.errors"
                     [formControl]="form.controls.phone"
                     [id]="'phone'"
@@ -227,6 +256,8 @@
         </div>
     </pxe-field-wrapper>
     <lnd-form-field
+        lndSFormDirective
+        lndSBiometricsDirective
         [error]="formError.email || form.controls.email.errors"
         [formControl]="form.controls.email"
         [id]="'email'"
@@ -237,6 +268,7 @@
     ></lnd-form-field>
     <lnd-select
         *ngIf="form.controls.depositPaymentTypeId.status !== 'DISABLED'"
+        lndSFormDirective
         [error]="formError.depositPaymentTypeId || form.controls.depositPaymentTypeId.errors"
         label="Způsob placení záloh"
         [options]="depositPaymentTypeId"
@@ -248,6 +280,8 @@
     </lnd-select>
     <lnd-form-field
         *ngIf="form.controls.deposit.status !== 'DISABLED'"
+        lndSFormDirective
+        lndSBiometricsDirective
         [error]="formError.deposit || form.controls.deposit.errors"
         [formControl]="form.controls.deposit"
         [id]="'deposit'"
@@ -261,7 +295,7 @@
     <div class="text-center">
         <lnd-button
             type="primary"
-            (action)="submitForm()"
+            (action)="submitForm();sAnalyticsService.sFormClick($event);"
             [isDisabled]="formLoading"
             label="Pokračovat">
         </lnd-button>

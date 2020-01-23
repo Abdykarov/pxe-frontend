@@ -19,13 +19,18 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { CONSTS } from 'src/app/app.constants';
+import {
+    CONSTS,
+    S_ANALYTICS,
+} from 'src/app/app.constants';
+import { inArray } from 'src/common/utils';
 import {
     ISettings,
     LoginType,
     SignType,
 } from './models/router-data.model';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
@@ -56,8 +61,10 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         protected apollo: Apollo,
         protected authService: AuthService,
         protected overlayService: OverlayService,
+        protected platformId: string,
         protected route: ActivatedRoute,
         protected router: Router,
+        protected sAnalyticsService: SAnalyticsService,
         protected scrollToService: ScrollToService,
     ) {
         super();
@@ -67,6 +74,12 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
                     this.toggleSubscription = this.overlayService.toggleOverlay(false)
                         .subscribe();
                     this.toggleSubscription.unsubscribe();
+                }
+                if (
+                    inArray(event.urlAfterRedirects, S_ANALYTICS.ALLOWED_S_APM) ||
+                    inArray(event.urlAfterRedirects.split('?')[0], S_ANALYTICS.ALLOWED_S_APM)
+                ) {
+                    this.sAnalyticsService.initSApm();
                 }
                 this.settings = <ISettings>this.route.snapshot.firstChild.data;
                 this.activeUrl = this.router.url;

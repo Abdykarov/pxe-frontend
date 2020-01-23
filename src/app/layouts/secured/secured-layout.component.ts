@@ -5,7 +5,9 @@ import {
 import {
     ChangeDetectorRef,
     Component,
+    Inject,
     OnInit,
+    PLATFORM_ID,
 } from '@angular/core';
 
 import * as R from 'ramda';
@@ -29,6 +31,7 @@ import {
 } from './services/navigation.config';
 import { NavigationService } from './services/navigation.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
@@ -47,16 +50,20 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
         private navigationApolloService: NavigationApolloService,
         private navigationService: NavigationService,
         protected overlayService: OverlayService,
+        @Inject(PLATFORM_ID) protected platformId: string,
         protected route: ActivatedRoute,
         protected router: Router,
+        protected sAnalyticsService: SAnalyticsService,
         protected scrollToService: ScrollToService,
     ) {
         super(
             apollo,
             authService,
             overlayService,
+            platformId,
             route,
             router,
+            sAnalyticsService,
             scrollToService,
         );
 

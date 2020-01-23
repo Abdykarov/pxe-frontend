@@ -277,7 +277,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         R.forEachObjIndexed((show: boolean, field: string) => {
             show ? this.setEnableField(field) : this.setDisableField(field);
         }, this.expirationConfig[this.contractEndType]);
-
         this.cd.markForCheck();
     }
 

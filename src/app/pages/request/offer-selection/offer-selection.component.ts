@@ -5,6 +5,7 @@ import {
 import {
     ChangeDetectorRef,
     Component,
+    OnDestroy,
     OnInit,
 } from '@angular/core';
 
@@ -22,9 +23,11 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
     ROUTES,
+    S_ANALYTICS,
 } from 'src/app/app.constants';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import {
@@ -41,6 +44,7 @@ import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { OfferService } from 'src/common/graphql/services/offer.service';
 import { offerValidityMessages } from 'src/common/constants/errors.constant';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { ValidityService } from 'src/app/services/validity.service';
 
@@ -48,7 +52,7 @@ import { ValidityService } from 'src/app/services/validity.service';
     templateUrl: './offer-selection.component.html',
     styleUrls: ['./offer-selection.component.scss'],
 })
-export class OfferSelectionComponent extends AbstractComponent implements OnInit {
+export class OfferSelectionComponent extends AbstractComponent implements OnInit, OnDestroy {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.OFFER_STEP;
     public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.SUPPLY_POINT;
 
@@ -69,12 +73,14 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
         );
 
     constructor(
+        private authService: AuthService,
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
         public navigateRequestService: NavigateRequestService,
         private offerService: OfferService,
         private route: ActivatedRoute,
         private router: Router,
+        public sAnalyticsService: SAnalyticsService,
         private supplyService: SupplyService,
         private validityService: ValidityService,
     ) {
@@ -82,6 +88,8 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
     }
 
     ngOnInit() {
+        this.sAnalyticsService.installSForm();
+
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
                 map(({data}) => data.getSupplyPoint),
@@ -137,6 +145,17 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
             )
             .subscribe(
                 () => {
+                    this.sAnalyticsService.sendWebData(
+                        {},
+                        {
+                            email: this.authService.currentUserValue.email,
+                        },
+                        {},
+                        {
+                            ACTION: S_ANALYTICS.ACTIONS.CHOOSE_OFFER,
+                            supplyPointOffer,
+                        },
+                    );
                     this.router.navigate(
                         [ROUTES.ROUTER_REQUEST_RECAPITULATION],
                         {
@@ -161,5 +180,10 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
         if (this.validityService.validateTermWithProlongation(this.supplyPoint)) {
             this.bannerObj.text = offerValidityMessages.contractEndWithTerminate;
         }
+    }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        this.sAnalyticsService.sFormEnd();
     }
 }
