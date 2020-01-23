@@ -26,23 +26,26 @@ import {
     ISupplyPointPowerAttributes,
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
+import { defaultErrorMessage } from 'src/common/constants/errors.constant';
+import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { ContractActions } from '../models/supply-point-detail.model';
 import { ContractDeleteReason } from 'src/common/graphql/models/contract';
 import { ContractService } from 'src/common/graphql/services/contract.service';
-import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
-import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
+import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
     IDocumentType,
     IResponseDataDocument,
 } from 'src/app/services/model/document.model';
-import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
     parseGraphQLErrors,
     parseRestAPIErrors,
     scrollToElementFnc,
 } from 'src/common/utils';
-import { ROUTES } from 'src/app/app.constants';
+import {
+    RequestsOverviewBannerShow,
+    ROUTES,
+} from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -193,7 +196,16 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
             .subscribe(
                 (deleteSignedContract: boolean) => {
                     if (deleteSignedContract) {
-                        this.router.navigate([ROUTES.ROUTER_REQUESTS]);
+                        this.router.navigate([
+                                ROUTES.ROUTER_REQUESTS,
+                            ],
+                            {
+                                state: {
+                                    requestsOverviewBannerShow: this.contractAction === ContractActions.LEAVE_CONTRACT ?
+                                        RequestsOverviewBannerShow.LEAVE_CONTRACT : RequestsOverviewBannerShow.TERMINATE_CONTRACT,
+                                },
+                            },
+                        );
                     } else {
                         this.globalError = [defaultErrorMessage];
                         this.formLoading = false;

@@ -1,8 +1,11 @@
 import {
     ChangeDetectorRef,
     Component,
+    Inject,
     OnInit,
+    PLATFORM_ID,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 
 import * as R from 'ramda';
@@ -19,13 +22,18 @@ import {
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import { ContractStatus } from 'src/common/graphql/models/contract';
 import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
-import { inArray } from 'src/common/utils';
-import { NavigateRequestService } from 'src/app/services/navigate-request.service';
-import { parseGraphQLErrors } from 'src/common/utils';
-import { OverviewState } from './requests-overview.model';
-import { ROUTES } from 'src/app/app.constants';
-import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { getOverviewState } from 'src/common/utils/get-overview-state.fnc';
+import {
+    inArray,
+    parseGraphQLErrors,
+} from 'src/common/utils';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
+import { OverviewState } from './requests-overview.model';
+import {
+    RequestsOverviewBannerShow,
+    ROUTES,
+} from 'src/app/app.constants';
+import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
     selector: 'pxe-requests-overview',
@@ -38,6 +46,8 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
     public globalError: string[] = [];
     public loadingRequests = true;
     public overviewStates = OverviewState;
+    public requestsOverviewBannerShow = RequestsOverviewBannerShow.NONE;
+    public RequestsOverviewBannersShow = RequestsOverviewBannerShow;
     public state: OverviewState;
     public supplyPoints: ISupplyPoint[];
     public sourceSupplyPoints: ISupplyPoint[] = null;
@@ -48,11 +58,17 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
         private navigateRequestService: NavigateRequestService,
         private router: Router,
         private supplyService: SupplyService,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
     }
 
     ngOnInit() {
+        if (isPlatformBrowser(this.platformId)) {
+            this.requestsOverviewBannerShow =
+                R.path(['history', 'state', 'requestsOverviewBannerShow'], window) || RequestsOverviewBannerShow.NONE;
+        }
+
         this.supplyService.findSupplyPointsByContractStatus([
                 ContractStatus.NOT_CONCLUDED,
                 ContractStatus.CONCLUDED,
