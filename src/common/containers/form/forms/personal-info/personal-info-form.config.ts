@@ -134,6 +134,7 @@ export const formFields: IForm = {
         },
         nameCompany: {
             required: errorFieldMessages.fullName.requiredCompany,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
         birthDate: {
             required: errorFieldMessages.birthDate.required,
