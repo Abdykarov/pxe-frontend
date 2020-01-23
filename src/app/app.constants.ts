@@ -382,3 +382,9 @@ export const REGIONS: Array<IOption> = [
 ];
 
 export const OPERATIONS_WITHOUT_SCROLL_ON_ERRORS = ['getSupplyPointGlobalStatistics', 'makeRegistration'];
+
+export enum RequestsOverviewBannerShow {
+    NONE = 'NONE',
+    TERMINATE_CONTRACT = 'TERMINATE_CONTRACT',
+    LEAVE_CONTRACT = 'LEAVE_CONTRACT',
+}
