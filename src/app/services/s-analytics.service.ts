@@ -47,12 +47,13 @@ export class SAnalyticsService {
     }
 
     public registrationApplication = () => {
-        if (!this.canUseSAnalytics()) {
-            return;
-        }
-
-        this.UUID = uuid();
-        sa('send', 'register', '0' + this.UUID + '0');
+        return;
+        // if (!this.canUseSAnalytics()) {
+        //     return;
+        // }
+        //
+        // this.UUID = uuid();
+        // sa('send', 'register', '0' + this.UUID + '0');
     }
 
     public sendWebData = (
@@ -67,9 +68,7 @@ export class SAnalyticsService {
 
         const applicationWebData = {
             tid: environment.sAnalyticsTId,
-            applicationId: '0' + this.UUID + '0',
-            sa: 'I DONT KNOW WHAT I AM',
-            said: 'I DONT KNOW WHAT I AM',
+            applicationId: sa('get', 'userInfo').said,
             clientTimestamp: new Date().getTime(),
             loanInfo,
             borrower,

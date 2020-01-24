@@ -154,6 +154,7 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                         {
                             ACTION: S_ANALYTICS.ACTIONS.CHOOSE_OFFER,
                             supplyPointOffer,
+                            supplyPoint: this.supplyPoint,
                         },
                     );
                     this.router.navigate(
