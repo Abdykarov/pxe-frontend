@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import {
     ActivatedRoute,
     NavigationExtras,
@@ -15,6 +16,10 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
+import {
+    CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
 import {
     formFieldsLogin,
     LOGIN_STATE,
@@ -35,7 +40,6 @@ import {
     parseGraphQLErrors,
     parseRestAPIErrors,
 } from 'src/common/utils/';
-import { ROUTES } from 'src/app/app.constants';
 import { UserService } from 'src/common/graphql/services/user.service';
 
 @Component({
@@ -58,11 +62,13 @@ export class LoginComponent extends AbstractComponent {
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
+        private titleService: Title,
         private route: ActivatedRoute,
         private router: Router,
         private userService: UserService,
     ) {
         super();
+        this.titleService.setTitle(CONSTS.TITLES.LOGIN);
 
         this.route.queryParams
             .pipe(

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
+import { CONSTS } from 'src/app/app.constants';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 
 @Component({
@@ -10,7 +12,10 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 export class TermsOfUseComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
-    constructor() {
+    constructor(
+        private titleService: Title,
+    ) {
+        this.titleService.setTitle(CONSTS.TITLES.TERMS_OF_USE);
         this.breadcrumbItemsSimple = [
             {
                 label: 'Domů',

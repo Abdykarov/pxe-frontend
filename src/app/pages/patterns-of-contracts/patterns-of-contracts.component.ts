@@ -7,6 +7,7 @@ import {
     Component,
     OnInit,
 } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
@@ -61,9 +62,11 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
     constructor(
         private cd: ChangeDetectorRef,
         private route: ActivatedRoute,
+        private titleService: Title,
         private router: Router,
     ) {
         super();
+        this.titleService.setTitle(CONSTS.TITLES.PATTERNS_OF_CONTRACTS);
         this.breadcrumbItemsSimple = [
             {
                 label: 'Domů',

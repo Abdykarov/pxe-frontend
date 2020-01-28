@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://test.parc4u.cz</loc>
+    </url>
+    <url>
+        <loc>https://test.parc4u.cz/terms-of-use</loc>
+    </url>
+    <url>
+        <loc>https://test.parc4u.cz/cookies-policy</loc>
+    </url>
+    <url>
+        <loc>https://test.parc4u.cz/securing-your-data</loc>
+    </url>
+    <url>
+        <loc>https://test.parc4u.cz/login</loc>
+    </url>
+    <url>
+        <loc>https://test.parc4u.cz/sign-up</loc>
+    </url>
+    <url>
+        <loc>https://test.parc4u.cz/patterns-of-contracts/individual/power</loc>
+    </url>
+    <url>
+        <loc>https://test.parc4u.cz/patterns-of-contracts/individual/gas</loc>
+    </url>
+    <url>
+        <loc>https://test.parc4u.cz/patterns-of-contracts/business/power</loc>
+    </url>
+    <url>
+        <loc>https://test.parc4u.cz/patterns-of-contracts/business/gas</loc>
+    </url>
+</urlset>

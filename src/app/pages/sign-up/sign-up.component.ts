@@ -2,6 +2,7 @@ import {
     Component,
     ChangeDetectorRef,
 } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { Apollo } from 'apollo-angular';
 
@@ -37,8 +38,10 @@ export class SignUpComponent extends AbstractComponent {
         private cd: ChangeDetectorRef,
         private registrationService: RegistrationService,
         private router: Router,
+        private titleService: Title,
     ) {
         super();
+        this.titleService.setTitle(CONSTS.TITLES.SIGN_UP);
         this.formFields = createRegistrationFormFields(SignUpType.SignUp);
     }
 

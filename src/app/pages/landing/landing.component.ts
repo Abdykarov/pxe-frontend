@@ -5,6 +5,7 @@ import {
     ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { Apollo } from 'apollo-angular';
 import { takeUntil } from 'rxjs/operators';
@@ -52,11 +53,13 @@ export class LandingComponent extends AbstractComponent {
     constructor(
         private apollo: Apollo,
         private cd: ChangeDetectorRef,
+        private titleService: Title,
         private router: Router,
         private registrationService: RegistrationService,
         private scrollToService: ScrollToService,
     ) {
         super();
+        this.titleService.setTitle(CONSTS.TITLES.LANDING_PAGE);
         this.formFields = createRegistrationFormFields(SignUpType.SignUp);
 
         this.scrollToService.getScrollStream()

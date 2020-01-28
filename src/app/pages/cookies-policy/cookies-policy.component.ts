@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CONSTS } from 'src/app/app.constants';
+import { Title } from '@angular/platform-browser';
 
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 
@@ -10,7 +12,10 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 export class CookiesPolicyComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
-    constructor() {
+    constructor(
+        private titleService: Title,
+    ) {
+        this.titleService.setTitle(CONSTS.TITLES.COOKIES_POLICY);
         this.breadcrumbItemsSimple = [
             {
                 label: 'Domů',
