@@ -145,6 +145,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                         {
                             ACTION: S_ANALYTICS.ACTIONS.RECAPITULATION,
                             personalDataAction,
+                            supplyPoint: this.supplyPoint,
                         },
                     );
                     this.router.navigate(
