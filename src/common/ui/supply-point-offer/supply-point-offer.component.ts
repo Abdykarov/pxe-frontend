@@ -12,6 +12,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
 import { IOffer } from 'src/common/graphql/models/offer.model';
+import { WindowService } from 'src/app/services/window.service';
 
 @Component({
     selector: 'pxe-supply-point-offer',
@@ -50,6 +51,7 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
 
     constructor(
         private dateDiffPipe: DateDiffPipe,
+        private windowService: WindowService,
     ) {
         super();
     }
@@ -83,5 +85,9 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
         event.preventDefault();
         event.cancelBubble = true;
         this.showPriceDecomposition = !this.showPriceDecomposition;
+    }
+
+    public goToLink = (url: string): void => {
+        this.windowService.goToLink(url);
     }
 }
