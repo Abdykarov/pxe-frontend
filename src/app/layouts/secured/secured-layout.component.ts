@@ -62,6 +62,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
             router,
             scrollToService,
         );
+        this.titleService.setTitle(CONSTS.TITLES.DEFAULT);
         this.navigationService.getNavigationConfig();
 
         this.navigationApolloService.getConfig()

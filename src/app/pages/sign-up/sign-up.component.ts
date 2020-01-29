@@ -49,7 +49,7 @@ export class SignUpComponent extends AbstractComponent {
         this.titleService.setTitle(CONSTS.TITLES.SIGN_UP);
         this.metaService.addTags([
             {name: 'keywords', content: [
-                    ...SEO.META_KEYWORDS.LANDING_AGE,
+                    ...SEO.META_KEYWORDS.LANDING_PAGE,
                     ...SEO.META_KEYWORDS.SIGN_UP,
                 ].toString(),
             },

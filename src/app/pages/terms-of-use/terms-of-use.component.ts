@@ -25,7 +25,7 @@ export class TermsOfUseComponent {
         this.titleService.setTitle(CONSTS.TITLES.TERMS_OF_USE);
         this.metaService.addTags([
             {name: 'keywords', content: [
-                    ...SEO.META_KEYWORDS.LANDING_AGE,
+                    ...SEO.META_KEYWORDS.LANDING_PAGE,
                     ...SEO.META_KEYWORDS.TERMS_OF_USE,
                 ].toString(),
             },

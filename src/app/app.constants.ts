@@ -139,7 +139,7 @@ export const SEO = {
             'trvalé cookies',
             'informace',
         ],
-        LANDING_AGE: [
+        LANDING_PAGE: [
             'elektřina',
             'plyn',
             'dodavatel',

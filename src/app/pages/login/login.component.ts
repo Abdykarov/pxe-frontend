@@ -76,7 +76,7 @@ export class LoginComponent extends AbstractComponent {
         this.titleService.setTitle(CONSTS.TITLES.LOGIN);
         this.metaService.addTags([
             {name: 'keywords', content: [
-                    ...SEO.META_KEYWORDS.LANDING_AGE,
+                    ...SEO.META_KEYWORDS.LANDING_PAGE,
                     ...SEO.META_KEYWORDS.LOGIN,
                 ].toString(),
             },

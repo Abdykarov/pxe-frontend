@@ -25,7 +25,7 @@ export class CookiesPolicyComponent {
         this.titleService.setTitle(CONSTS.TITLES.COOKIES_POLICY);
         this.metaService.addTags([
             {name: 'keywords', content: [
-                    ...SEO.META_KEYWORDS.LANDING_AGE,
+                    ...SEO.META_KEYWORDS.LANDING_PAGE,
                     ...SEO.META_KEYWORDS.COOKIES_POLICY,
                 ].toString(),
             },
