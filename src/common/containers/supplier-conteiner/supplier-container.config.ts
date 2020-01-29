@@ -6,7 +6,7 @@ import {
 export const config: ISupplierLogo[] = [
     {
         alt: 'logo - Alpiq CZ',
-        logoUrl: '/assets/images/suppliers/logo_alpiq.svg',
+        logoUrl: '/assets/images/suppliers/logo_alpiq-hover.svg',
         logoUrlHover: '/assets/images/suppliers/logo_alpiq-hover.svg',
         supplierUrl: '',
         title: 'Alpiq CZ',
@@ -15,7 +15,7 @@ export const config: ISupplierLogo[] = [
     },
     {
         alt: 'logo - Bohemia Energy entity s.r.o.',
-        logoUrl: '/assets/images/suppliers/logo_bohemia-energy.svg',
+        logoUrl: '/assets/images/suppliers/logo_bohemia-energy-hover.svg',
         logoUrlHover: '/assets/images/suppliers/logo_bohemia-energy-hover.svg',
         supplierUrl: '',
         size: 'sm',
@@ -25,7 +25,7 @@ export const config: ISupplierLogo[] = [
     },
     {
         alt: 'logo - EP Energy Trading a.s.',
-        logoUrl: '/assets/images/suppliers/logo_ep-energy-trading.svg',
+        logoUrl: '/assets/images/suppliers/logo_ep-energy-trading-hover.svg',
         logoUrlHover: '/assets/images/suppliers/logo_ep-energy-trading-hover.svg',
         supplierUrl: '',
         title: 'EP Energy Trading a.s.',
@@ -34,12 +34,22 @@ export const config: ISupplierLogo[] = [
     },
     {
         alt: 'logo - CARBOUNION BOHEMIA, spol. s r. o.',
-        logoUrl: '/assets/images/suppliers/logo_carbounion-bohemia@2x.png',
+        logoUrl: '/assets/images/suppliers/logo_carbounion-bohemia@2x-hover.png',
         logoUrlHover: '/assets/images/suppliers/logo_carbounion-bohemia@2x-hover.png',
         supplierUrl: '',
         size: 'xl',
         title: 'CARBOUNION BOHEMIA, spol. s r. o.',
         width: 70,
+        typeCommodity: TypeCommodity.BOTH,
+    },
+    {
+        alt: 'logo - Yello Energy',
+        logoUrl: '/assets/images/suppliers/yello_energy-hover.png',
+        logoUrlHover: '/assets/images/suppliers/yello_energy-hover.png',
+        supplierUrl: '',
+        size: 'xl',
+        title: 'Yello Energy',
+        width: 54,
         typeCommodity: TypeCommodity.BOTH,
     },
 ];
