@@ -7,7 +7,10 @@ import {
     Component,
     OnInit,
 } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import {
+    Meta,
+    Title,
+} from '@angular/platform-browser';
 
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
@@ -16,6 +19,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CommodityTypesLowerCase,
     CONSTS,
+    SEO,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
@@ -61,12 +65,22 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
 
     constructor(
         private cd: ChangeDetectorRef,
+        private metaService: Meta,
         private route: ActivatedRoute,
-        private titleService: Title,
         private router: Router,
+        private titleService: Title,
     ) {
         super();
         this.titleService.setTitle(CONSTS.TITLES.PATTERNS_OF_CONTRACTS);
+        this.metaService.addTags([
+            {name: 'keywords', content: [
+                    ...SEO.META_KEYWORDS.LANDING_AGE,
+                    ...SEO.META_KEYWORDS.PATTERNS_OF_CONTRACTS,
+                ].toString(),
+            },
+            {name: 'description', content: SEO.META_DESCRIPTION},
+        ]);
+
         this.breadcrumbItemsSimple = [
             {
                 label: 'Domů',

@@ -1,4 +1,3 @@
-import { Title } from '@angular/platform-browser';
 import {
     ActivatedRoute,
     NavigationExtras,
@@ -8,6 +7,10 @@ import {
     ChangeDetectorRef,
     Component,
 } from '@angular/core';
+import {
+    Meta,
+    Title,
+} from '@angular/platform-browser';
 
 import {
     map,
@@ -19,6 +22,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
     ROUTES,
+    SEO,
 } from 'src/app/app.constants';
 import {
     formFieldsLogin,
@@ -62,14 +66,22 @@ export class LoginComponent extends AbstractComponent {
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
-        private titleService: Title,
+        private metaService: Meta,
         private route: ActivatedRoute,
         private router: Router,
         private userService: UserService,
+        private titleService: Title,
     ) {
         super();
         this.titleService.setTitle(CONSTS.TITLES.LOGIN);
-
+        this.metaService.addTags([
+            {name: 'keywords', content: [
+                    ...SEO.META_KEYWORDS.LANDING_AGE,
+                    ...SEO.META_KEYWORDS.LOGIN,
+                ].toString(),
+            },
+            {name: 'description', content: SEO.META_DESCRIPTION},
+        ]);
         this.route.queryParams
             .pipe(
                 takeUntil(

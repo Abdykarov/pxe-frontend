@@ -131,6 +131,39 @@ export const ROUTES = {
     ROUTER_USER_PROFILE: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.USER_PROFILE}`,
 };
 
+export const SEO = {
+    META_KEYWORDS: {
+        COOKIES_POLICY: ['Cookies policy | PARC4U'],
+        LANDING_AGE: [
+            'elektřina',
+            'plyn',
+            'dodavatel',
+            'dodavateli',
+            'nabídka',
+            'komoditní burza',
+            'odběrné místo',
+            'změna dodavatele',
+            'cena plynu',
+            'cena elektřiny',
+            'cena za kwh',
+            'nejlevnějši elektřina',
+            'nejlevnějši plyn',
+            'distribuce plynu',
+            'distribuce elektřiny',
+        ],
+        LOGIN: ['Přihlášení | PARC4U'],
+        PATTERNS_OF_CONTRACTS: ['Vzory smluv o dodávce | PARC4U'],
+        TERMS_OF_USE: [
+            'obchodní podmínky',
+            'PARC4U',
+        ],
+        SECURING_YOUR_DATA: ['Ochrana osobních údajů | PARC4U'],
+        SIGN_UP: ['Registrace | PARC4U'],
+    },
+    META_DESCRIPTION: 'Měňte dodavatele energií na 1 klik. Neřešte papírování a chození na pobočky.' +
+        ' Chraňte se před nekalostmi ve smlouvě. Energie za férové ceny bez skrytých poplatků.',
+};
+
 export enum INavigationItemType {
     NORMAL,
     ONLY_LABEL,

@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
-import { CONSTS } from 'src/app/app.constants';
-import { Title } from '@angular/platform-browser';
+import {
+    Meta,
+    Title,
+} from '@angular/platform-browser';
 
+import {
+    CONSTS,
+    SEO,
+} from 'src/app/app.constants';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 
 @Component({
@@ -14,8 +20,17 @@ export class CookiesPolicyComponent {
 
     constructor(
         private titleService: Title,
+        private metaService: Meta,
     ) {
         this.titleService.setTitle(CONSTS.TITLES.COOKIES_POLICY);
+        this.metaService.addTags([
+            {name: 'keywords', content: [
+                    ...SEO.META_KEYWORDS.LANDING_AGE,
+                    ...SEO.META_KEYWORDS.COOKIES_POLICY,
+                ].toString(),
+            },
+            {name: 'description', content: SEO.META_DESCRIPTION},
+        ]);
         this.breadcrumbItemsSimple = [
             {
                 label: 'Domů',

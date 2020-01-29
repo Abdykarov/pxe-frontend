@@ -76,6 +76,8 @@ export class UserProfileComponent extends AbstractComponent {
                     const { globalError, fieldError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.fieldError = fieldError;
+                    console.log(this.globalError);
+                    console.log(this.fieldError);
                     this.cd.markForCheck();
                 },
             );

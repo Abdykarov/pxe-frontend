@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import {
+    Meta,
+    Title,
+} from '@angular/platform-browser';
 
-import { CONSTS } from 'src/app/app.constants';
+import {
+    CONSTS,
+    SEO,
+} from 'src/app/app.constants';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 
 @Component({
@@ -13,9 +19,19 @@ export class SecuringYourDataComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
     constructor(
+        private metaService: Meta,
         private titleService: Title,
     ) {
         this.titleService.setTitle(CONSTS.TITLES.SECURING_YOUR_DATA);
+        this.metaService.addTags([
+            {name: 'keywords', content: [
+                    ...SEO.META_KEYWORDS.LANDING_AGE,
+                    ...SEO.META_KEYWORDS.SECURING_YOUR_DATA,
+                ].toString(),
+            },
+            {name: 'description', content: SEO.META_DESCRIPTION},
+        ]);
+
         this.breadcrumbItemsSimple = [
             {
                 label: 'Domů',
