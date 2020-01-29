@@ -253,6 +253,7 @@
         [id]="'deposit'"
         label="Výše záloh"
         appendText="Kč/měsíc"
+        [maxlength]="MAX_LENGTH_NUMBER_INPUT_WITH_HINT"
         [success]="form.controls.deposit.valid && (form.controls.deposit.touched || formError.deposit)"
         [touched]="form.controls.deposit.touched || formError.deposit"
         [validationMessages]="formFields.validationMessages.deposit"

@@ -1,18 +1,22 @@
-import { IForm } from 'src/common/containers/form/models/form-definition.model';
+import { Validators } from '@angular/forms';
 
+import { CONSTS } from 'src/app/app.constants';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
+import { IForm } from 'src/common/containers/form/models/form-definition.model';
 import { requireIfFieldHaveValue } from 'src/common/utils/validators/requireIfFieldHaveValue.fnc';
 
 export const formFieldsBenefit: IForm = {
     controls: {
         name: [
             null,
+            Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_NAME),
         ],
         url: [
             null,
             [
                 CustomValidators.URL,
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_URL),
             ],
         ],
     },
@@ -22,10 +26,12 @@ export const formFieldsBenefit: IForm = {
     validationMessages: {
         name: {
             requireIfFieldHaveValueFirstControl: errorFieldMessages.benefitName.required,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
         url: {
             requireIfFieldHaveValueSecondControl: errorFieldMessages.benefitUrl.url,
             url: errorFieldMessages.benefitUrl.url,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
     },
 };

@@ -32,6 +32,7 @@
     class="form-container"
     autocomplete="off">
     <lnd-form-field
+        (change)="setLoginValidator(LOGIN_FORM_NAME, $event)"
         [error]="form.controls.login.errors"
         [formControl]="form.controls.login"
         [id]="'login'"

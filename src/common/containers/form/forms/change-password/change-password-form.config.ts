@@ -1,5 +1,6 @@
 import { Validators } from '@angular/forms';
 
+import { CONSTS } from 'src/app/app.constants';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import { IForm } from 'src/common/containers/form/models/form-definition.model';
@@ -11,6 +12,7 @@ export const changePasswordFields: IForm = {
             '',
             [
                 Validators.required,
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.PASSWORD),
             ],
         ],
         password: [
@@ -18,6 +20,7 @@ export const changePasswordFields: IForm = {
             [
                 Validators.required,
                 CustomValidators.passwordFormat,
+                Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.PASSWORD),
             ],
         ],
         confirmPassword: [
@@ -34,10 +37,12 @@ export const changePasswordFields: IForm = {
         currentPassword: {
             required: errorFieldMessages.password.currentRequired,
             invalidCurrentPassword: errorFieldMessages.password.invalidCurrentPassword,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
         password: {
             required: errorFieldMessages.password.required,
             pattern: errorFieldMessages.password.pattern,
+            maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
         confirmPassword: {
             required: errorFieldMessages.password.required,

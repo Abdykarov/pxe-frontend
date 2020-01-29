@@ -10,12 +10,15 @@ import {
     FormArray,
     FormBuilder,
     FormGroup,
+    Validators,
 } from '@angular/forms';
 
 import * as R from 'ramda';
 import { BehaviorSubject } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { CONSTS } from 'src/app/app.constants';
+import { isUserName } from 'src/common/utils';
 import {
     IFieldError,
     IForm,
@@ -66,6 +69,18 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
     }
 
     public handleCustomAction = ($event) => this.customAction.emit($event);
+
+    public setLoginValidator = (formName, $event) => {
+        this.form.controls[formName]
+            .setValidators(
+                [
+                    Validators.required,
+                    Validators.maxLength(isUserName($event.target.value) ?
+                        CONSTS.VALIDATORS.MAX_LENGTH.EMAIL_LOGIN : CONSTS.VALIDATORS.MAX_LENGTH.USER_NAME_LOGIN),
+                ]);
+        this.form.controls[formName]
+            .updateValueAndValidity();
+    }
 
     public submitForm = (event = null) => {
         if (event) {

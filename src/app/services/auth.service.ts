@@ -60,7 +60,7 @@ export class AuthService {
     private readonly stopMessageInterval = 'STOP_INTERVAL';
 
     public refreshTokenInterval$ =
-        interval(CONSTS.REFRESH_INTERVAL_TOKEN)
+        interval(CONSTS.REFRESH_TOKEN.INTERVAL)
             .pipe(
                 switchMap((number) => {
                     if (!this.wasRefreshCallRefreshInterval) {
@@ -71,7 +71,7 @@ export class AuthService {
                     return of(number);
                 }),
                 catchError(() => of(this.stopMessageInterval)),
-                take(CONSTS.REFRESH_TOKEN_COUNT),
+                take(CONSTS.REFRESH_TOKEN.COUNT),
                 takeUntil(this.stopRefreshTokenIntervalSubject$),
                 repeatWhen(() => this.startRefreshTokenIntervalSubject$),
                 filter((num) => {

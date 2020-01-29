@@ -8,7 +8,6 @@ import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
-    ADULTHOOD_AGE: 18,
     CURRENCY: {
         DEFAULT: 'CZK',
     },
@@ -18,15 +17,8 @@ export const CONSTS = {
     },
     DEFAULT_EXPIRATION: 3600,
     DEFAULT_DEPOSIT_PAYMENT_TYPE_ID: 'Prikaz',
-    MAX_DAYS_TILL_CONTRACT_EXPIRATION: 60,
-    MAX_LENGTH_CITY: 255,
-    MAX_LENGTH_DESCRIPTIVE_NUMBER: 16,
-    MAX_LENGTH_WHOLE_NAME: 150,
-    MAX_LENGTH_NAME: 50,
-    MAX_LENGTH_ORIENTATION_NUMBERR: 16,
-    MAX_LENGTH_POSITION: 80,
-    MAX_LENGTH_STREET: 255,
-    MIN_BIRTH_DATE: '1900-01-01',
+    INTERVAL_RXJS: 5000,
+    LOGIN_FORM_NAME: 'login',
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
@@ -62,12 +54,45 @@ export const CONSTS = {
         USER_PROFILE: 'user-profile',
         WILD_CART  : '**',
     },
+    REFRESH_TOKEN: {
+        INTERVAL: 300000,
+        COUNT: 4,
+        DONT_REFRESH_TIME_IN_MINUTES: 2,
+    },
+    VALIDATORS: {
+        ADULTHOOD_AGE: 18,
+        MAX_DIGIT_BEFORE_DECIMAL_POINT: 7,
+        MAX_DIGIT_AFTER_DECIMAL_POINT: 2,
+        MAX_LENGTH: {
+            NUMBER_INPUT_WITH_HINT: 10,
+            BENEFIT_NAME: 100,
+            BENEFIT_URL: 5000,
+            CITY: 255,
+            DIC: 12,
+            DESCRIPTIVE_NUMBER: 16,
+            EMAIL_LOGIN: 40,
+            USER_NAME_LOGIN: 28,
+            PASSWORD: 50,
+            EMAIL_RECAPITULATION: 50,
+            OFFER_NAME: 50,
+            ORIENTATION_NUMBER: 16,
+            POSITION: 80,
+            RECAPITULATION_NAME: 150,
+            STREET: 255,
+            USER_PROFILE_NAME: 50,
+            SMS_CODE: 10,
+        },
+        MIN_BIRTH_DATE: '1900-01-01',
+        MIN_LENGTH: {
+            DIC: 10,
+            PASSWORD: 10,
+        },
+        ICO_LENGTH: 8,
+        TIME_TO_CONTRACT_END_MIN: 0,
+        TIME_TO_CONTRACT_END_MAX: 100,
+    },
     TELEPHONE_PREFIX_CZ: '+420',
     TIME_TO_CONTRACT_END_PROLONGED: 30,
-    REFRESH_INTERVAL_RXJS: 5000,
-    REFRESH_INTERVAL_TOKEN: 300000,
-    REFRESH_TOKEN_COUNT: 4,
-    REFRESH_TOKEN_DONT_REFRESH_TIME_IN_MINUTES: 2,
 };
 
 export const ROUTES = {
@@ -357,3 +382,9 @@ export const REGIONS: Array<IOption> = [
 ];
 
 export const OPERATIONS_WITHOUT_SCROLL_ON_ERRORS = ['getSupplyPointGlobalStatistics', 'makeRegistration'];
+
+export enum RequestsOverviewBannerShow {
+    NONE = 'NONE',
+    TERMINATE_CONTRACT = 'TERMINATE_CONTRACT',
+    LEAVE_CONTRACT = 'LEAVE_CONTRACT',
+}
