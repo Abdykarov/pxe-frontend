@@ -95,6 +95,7 @@ export const CONSTS = {
     TIME_TO_CONTRACT_END_PROLONGED: 30,
     TITLES: {
         COOKIES_POLICY: 'Cookies policy | PARC4U',
+        DEFAULT: 'PARC4U',
         LANDING_PAGE: 'Získejte svobodu nad energií | PARC4U',
         LOGIN: 'Přihlášení | PARC4U',
         PATTERNS_OF_CONTRACTS: 'Vzory smluv o dodávce | PARC4U',

@@ -7,6 +7,7 @@ import {
     Component,
     OnInit,
 } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
@@ -17,6 +18,7 @@ import {
 
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { CONSTS } from 'src/app/app.constants';
 import {
     INavigationConfig,
     INavigationMenu,
@@ -49,6 +51,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
         protected overlayService: OverlayService,
         protected route: ActivatedRoute,
         protected router: Router,
+        private titleService: Title,
         protected scrollToService: ScrollToService,
     ) {
         super(
@@ -59,6 +62,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
             router,
             scrollToService,
         );
+        this.titleService.setTitle(CONSTS.TITLES.DEFAULT);
 
         this.navigationService.getNavigationConfig();
 
