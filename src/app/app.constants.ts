@@ -133,7 +133,11 @@ export const ROUTES = {
 
 export const SEO = {
     META_KEYWORDS: {
-        COOKIES_POLICY: ['Cookies policy | PARC4U'],
+        COOKIES_POLICY: [
+            'funkční cookies',
+            'trvalé cookies',
+            'informace',
+        ],
         LANDING_AGE: [
             'elektřina',
             'plyn',
@@ -151,14 +155,27 @@ export const SEO = {
             'distribuce plynu',
             'distribuce elektřiny',
         ],
-        LOGIN: ['Přihlášení | PARC4U'],
-        PATTERNS_OF_CONTRACTS: ['Vzory smluv o dodávce | PARC4U'],
+        LOGIN: [
+            'přihlášení',
+            'kliknutí',
+        ],
+        PATTERNS_OF_CONTRACTS: [
+            'komodita',
+            'nabídka',
+        ],
         TERMS_OF_USE: [
             'obchodní podmínky',
             'PARC4U',
         ],
-        SECURING_YOUR_DATA: ['Ochrana osobních údajů | PARC4U'],
-        SIGN_UP: ['Registrace | PARC4U'],
+        SECURING_YOUR_DATA: [
+            'chráníme',
+            'zpracování údajů',
+        ],
+        SIGN_UP: [
+            'registrace',
+            'kliknutí',
+            'obchodními podmínkami',
+        ],
     },
     META_DESCRIPTION: 'Měňte dodavatele energií na 1 klik. Neřešte papírování a chození na pobočky.' +
         ' Chraňte se před nekalostmi ve smlouvě. Energie za férové ceny bez skrytých poplatků.',

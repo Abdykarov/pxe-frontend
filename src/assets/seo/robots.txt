@@ -1,3 +1,0 @@
-User-agent: *
-Disallow: /secured/
-Sitemap: http://localhost:4200/sitemap.xml
