@@ -82,6 +82,7 @@ export class LoginComponent extends AbstractComponent {
             },
             {name: 'description', content: SEO.META_DESCRIPTION},
         ]);
+
         this.route.queryParams
             .pipe(
                 takeUntil(

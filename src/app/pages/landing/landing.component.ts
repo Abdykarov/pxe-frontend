@@ -69,6 +69,7 @@ export class LandingComponent extends AbstractComponent {
             {name: 'keywords', content: SEO.META_KEYWORDS.LANDING_AGE.toString()},
             {name: 'description', content: SEO.META_DESCRIPTION},
         ]);
+
         this.formFields = createRegistrationFormFields(SignUpType.SignUp);
 
         this.scrollToService.getScrollStream()

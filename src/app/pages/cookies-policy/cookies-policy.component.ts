@@ -31,6 +31,7 @@ export class CookiesPolicyComponent {
             },
             {name: 'description', content: SEO.META_DESCRIPTION},
         ]);
+
         this.breadcrumbItemsSimple = [
             {
                 label: 'Domů',
