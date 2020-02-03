@@ -65,10 +65,13 @@ export class LandingComponent extends AbstractComponent {
     ) {
         super();
         this.titleService.setTitle(CONSTS.TITLES.LANDING_PAGE);
-        this.metaService.addTags([
-            {name: 'keywords', content: SEO.META_KEYWORDS.LANDING_PAGE.toString()},
+        this.metaService.addTag(
             {name: 'description', content: SEO.META_DESCRIPTION},
-        ]);
+        );
+        this.metaService.updateTag({
+            name: 'keywords',
+            content: SEO.META_KEYWORDS.LANDING_PAGE.toString(),
+        });
 
         this.formFields = createRegistrationFormFields(SignUpType.SignUp);
 

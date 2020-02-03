@@ -23,14 +23,16 @@ export class CookiesPolicyComponent {
         private metaService: Meta,
     ) {
         this.titleService.setTitle(CONSTS.TITLES.COOKIES_POLICY);
-        this.metaService.addTags([
-            {name: 'keywords', content: [
-                    ...SEO.META_KEYWORDS.LANDING_PAGE,
-                    ...SEO.META_KEYWORDS.COOKIES_POLICY,
-                ].toString(),
-            },
+        this.metaService.addTag(
             {name: 'description', content: SEO.META_DESCRIPTION},
-        ]);
+        );
+        this.metaService.updateTag({
+            name: 'keywords',
+            content: [
+                ...SEO.META_KEYWORDS.LANDING_PAGE,
+                ...SEO.META_KEYWORDS.COOKIES_POLICY,
+            ].toString(),
+        });
 
         this.breadcrumbItemsSimple = [
             {

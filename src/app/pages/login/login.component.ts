@@ -74,14 +74,17 @@ export class LoginComponent extends AbstractComponent {
     ) {
         super();
         this.titleService.setTitle(CONSTS.TITLES.LOGIN);
-        this.metaService.addTags([
-            {name: 'keywords', content: [
+        this.metaService.addTag(
+            {name: 'description', content: SEO.META_DESCRIPTION},
+        );
+        this.metaService.updateTag({
+                name: 'keywords',
+                content: [
                     ...SEO.META_KEYWORDS.LANDING_PAGE,
                     ...SEO.META_KEYWORDS.LOGIN,
                 ].toString(),
             },
-            {name: 'description', content: SEO.META_DESCRIPTION},
-        ]);
+        );
 
         this.route.queryParams
             .pipe(

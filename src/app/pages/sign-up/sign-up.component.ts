@@ -47,14 +47,16 @@ export class SignUpComponent extends AbstractComponent {
     ) {
         super();
         this.titleService.setTitle(CONSTS.TITLES.SIGN_UP);
-        this.metaService.addTags([
-            {name: 'keywords', content: [
-                    ...SEO.META_KEYWORDS.LANDING_PAGE,
-                    ...SEO.META_KEYWORDS.SIGN_UP,
-                ].toString(),
-            },
+        this.metaService.addTag(
             {name: 'description', content: SEO.META_DESCRIPTION},
-        ]);
+        );
+        this.metaService.updateTag({
+            name: 'keywords',
+            content: [
+                ...SEO.META_KEYWORDS.LANDING_PAGE,
+                ...SEO.META_KEYWORDS.SIGN_UP,
+            ].toString(),
+        });
 
         this.formFields = createRegistrationFormFields(SignUpType.SignUp);
     }

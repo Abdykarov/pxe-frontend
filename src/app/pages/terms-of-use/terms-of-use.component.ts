@@ -23,14 +23,16 @@ export class TermsOfUseComponent {
         private titleService: Title,
     ) {
         this.titleService.setTitle(CONSTS.TITLES.TERMS_OF_USE);
-        this.metaService.addTags([
-            {name: 'keywords', content: [
-                    ...SEO.META_KEYWORDS.LANDING_PAGE,
-                    ...SEO.META_KEYWORDS.TERMS_OF_USE,
-                ].toString(),
-            },
+        this.metaService.addTag(
             {name: 'description', content: SEO.META_DESCRIPTION},
-        ]);
+        );
+        this.metaService.updateTag({
+            name: 'keywords',
+            content: [
+                ...SEO.META_KEYWORDS.LANDING_PAGE,
+                ...SEO.META_KEYWORDS.TERMS_OF_USE,
+            ].toString(),
+        });
 
         this.breadcrumbItemsSimple = [
             {
