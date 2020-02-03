@@ -65,9 +65,10 @@ export class LandingComponent extends AbstractComponent {
     ) {
         super();
         this.titleService.setTitle(CONSTS.TITLES.LANDING_PAGE);
-        this.metaService.addTag(
-            {name: 'description', content: SEO.META_DESCRIPTION},
-        );
+        this.metaService.addTag({
+            name: 'description',
+            content: SEO.META_DESCRIPTION,
+        });
         this.metaService.updateTag({
             name: 'keywords',
             content: SEO.META_KEYWORDS.LANDING_PAGE.toString(),

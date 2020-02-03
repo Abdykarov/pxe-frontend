@@ -23,9 +23,10 @@ export class CookiesPolicyComponent {
         private metaService: Meta,
     ) {
         this.titleService.setTitle(CONSTS.TITLES.COOKIES_POLICY);
-        this.metaService.addTag(
-            {name: 'description', content: SEO.META_DESCRIPTION},
-        );
+        this.metaService.addTag({
+            name: 'description',
+            content: SEO.META_DESCRIPTION,
+        });
         this.metaService.updateTag({
             name: 'keywords',
             content: [

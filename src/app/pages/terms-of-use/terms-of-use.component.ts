@@ -23,9 +23,10 @@ export class TermsOfUseComponent {
         private titleService: Title,
     ) {
         this.titleService.setTitle(CONSTS.TITLES.TERMS_OF_USE);
-        this.metaService.addTag(
-            {name: 'description', content: SEO.META_DESCRIPTION},
-        );
+        this.metaService.addTag({
+            name: 'description',
+            content: SEO.META_DESCRIPTION,
+        });
         this.metaService.updateTag({
             name: 'keywords',
             content: [

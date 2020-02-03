@@ -72,9 +72,10 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
     ) {
         super();
         this.titleService.setTitle(CONSTS.TITLES.PATTERNS_OF_CONTRACTS);
-        this.metaService.addTag(
-            {name: 'description', content: SEO.META_DESCRIPTION},
-        );
+        this.metaService.addTag({
+            name: 'description',
+            content: SEO.META_DESCRIPTION,
+        });
         this.metaService.updateTag({
             name: 'keywords',
             content: [
