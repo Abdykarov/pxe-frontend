@@ -117,13 +117,16 @@ export class SelectComponent {
     public typeahead?: EventEmitter<any>;
 
     @Input()
+    public withoutConditionalAtLength = true;
+
+    @Input()
     public validationMessages?: IValidationMessages;
 
     @Input()
     public warning?: any;
 
     public customSearchFn = (term: string, item: any) => {
-        if (!!term && term.length > 2) {
+        if (this.withoutConditionalAtLength || !!term && term.length > 2) {
             return item.label.toLocaleLowerCase().indexOf(term) > -1 || item.label.indexOf(term) > -1;
         }
     }

@@ -41,6 +41,8 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 })
 export class PersonalInfoFormComponent extends AbstractFormComponent implements OnInit, AfterViewInit {
 
+    public readonly MAX_LENGTH_NUMBER_INPUT_WITH_HINT = CONSTS.VALIDATORS.MAX_LENGTH.NUMBER_INPUT_WITH_HINT;
+
     @Input()
     public supplyPoint: ISupplyPoint;
 
@@ -54,8 +56,8 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     public codeLists: ICodelistOptions;
 
     public depositPaymentTypeId: ICodelistOption;
-    public maxDate: Date = moment().add(-CONSTS.ADULTHOOD_AGE, 'years').toDate();
-    public minDate: Date = new Date(CONSTS.MIN_BIRTH_DATE);
+    public maxDate: Date = moment().add(-CONSTS.VALIDATORS.ADULTHOOD_AGE, 'years').toDate();
+    public minDate: Date = new Date(CONSTS.VALIDATORS.MIN_BIRTH_DATE);
 
     constructor(
         protected fb: FormBuilder,
@@ -88,12 +90,13 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
                 .setValidators(
                     [
                         Validators.required,
-                        CustomValidators.isNumber(2),
+                        CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT),
                         CustomValidators.minValue(
                             this.supplyPoint.contract.offer.totalPrice,
                             true,
                             false,
                         ),
+                        CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
                     ]);
         }
 

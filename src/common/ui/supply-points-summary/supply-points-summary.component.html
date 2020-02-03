@@ -12,7 +12,7 @@
                     <div class="col-12 col-md-auto mr-md-auto">
                         <div class="supply-point-overview__product-holder">
                             <span class="supply-point-overview__type"><span class="text-uppercase">Elekřina</span> (MWh)</span>
-                            <span class="supply-point-overview__value">{{powerPlacesConsumptionSum | number: '1.0-3'}}</span>
+                            <span class="supply-point-overview__value text-break">{{powerPlacesConsumptionSum | number: '1.0-3'}}</span>
                             <span class="supply-point-overview__quantity">
                                 <ng-container *ngIf="powerPlacesCount">
                                     {{powerPlacesCount}}
@@ -24,7 +24,7 @@
                     <div class="col-12 col-md-auto">
                         <div class="supply-point-overview__product-holder">
                             <span class="supply-point-overview__type"><span class="text-uppercase">Plyn</span> (MWh)</span>
-                            <span class="supply-point-overview__value">{{gasPlacesConsumptionSum | number: '1.0-3'}}</span>
+                            <span class="supply-point-overview__value text-break">{{gasPlacesConsumptionSum | number: '1.0-3'}}</span>
                             <span class="supply-point-overview__quantity">
                                 <ng-container *ngIf="gasPlacesCount">
                                     {{gasPlacesCount}}

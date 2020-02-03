@@ -23,6 +23,7 @@ import {
     CODE_LIST,
     CODE_LIST_TYPES,
     COMMODITY_TO_DISTRIBUTION_MAP,
+    CONSTS,
     DELIVERY_LENGTH_OPTIONS,
     DISTRIBUTION_RATES_TYPE_DEFINITION,
     SUBJECT_TYPE_OPTIONS,
@@ -53,6 +54,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 export class SupplyOfferFormComponent extends AbstractFormComponent implements OnInit, OnChanges, AfterViewInit {
     private static readonly benefitCount = 4;
     public readonly CODE_LIST_CIRCUIT_BREAKER = CODE_LIST.CIRCUIT_BREAKER;
+    public readonly MAX_LENGTH_NUMBER_INPUT_WITH_HINT = CONSTS.VALIDATORS.MAX_LENGTH.NUMBER_INPUT_WITH_HINT;
 
     @Input()
     public commodityType = CommodityType.POWER;
