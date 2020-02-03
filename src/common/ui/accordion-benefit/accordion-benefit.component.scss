@@ -1,0 +1,115 @@
+/*
+ -  Accordion
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+.accordion-benefit {
+	margin-bottom: ( $spacer / 2 );
+	background-color: $white;
+
+	&__header {
+		padding: $spacer ( $spacer / 2 );
+		border-bottom: 1px solid $gray-100;
+	}
+
+	&__header-title {
+		margin-bottom: 0;
+	}
+
+	&__item {
+		border-top: 1px solid $gray-100;
+
+		&:nth-of-type(n + 3) {
+			display: none;
+		}
+
+		&:first-of-type {
+			border-top: none;
+		}
+
+		&--active {
+			.accordion__content {
+				display: block;
+			}
+
+			.accordion__toggle-icon {
+				transform: translateY(-50%) rotate(180deg);
+			}
+		}
+	}
+
+	&__toggle {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: ( $spacer / 1.5 ) ( $spacer / .75 ) ( $spacer / 1.5 ) ( $spacer / 2 );
+
+		&:focus,
+		&:hover {
+			background-color: rgba($blue-200, .05);
+			cursor: pointer;
+		}
+	}
+
+	&__toggle-icon {
+		position: absolute;
+		top: 50%;
+		right: 0;
+		padding: 0 ( $spacer / 2 );
+		font-size: $icon-size-small;
+		transform: translateY(-50%);
+	}
+
+	&__content {
+		display: none;
+		padding: ( $spacer / 2 );
+
+		p {
+			&:last-of-type {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	&__footer {
+		padding: ( $spacer / 2 );
+		text-align: center;
+		border-top: 1px solid $gray-100;
+	}
+
+	&__footer-link {
+		position: relative;
+		padding-right: ( $spacer / 1.5 );
+		color: $link-color;
+		cursor: pointer;
+
+		&:focus,
+		&:hover {
+			color: $primary-dark;
+		}
+	}
+
+	&__footer-icon {
+		position: absolute;
+		top: calc( 50% + 1px );
+		right: 0;
+		font-size: $icon-size-small;
+		transform: translateY(-50%);
+	}
+
+	&--more-open {
+		.accordion__item {
+			display: block;
+		}
+
+		.accordion__footer-icon {
+			top: 50%;
+			transform: translateY(-50%) rotate(180deg);
+		}
+	}
+}
