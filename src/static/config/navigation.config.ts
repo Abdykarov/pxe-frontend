@@ -103,8 +103,12 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/info-banner',
                 },
                 {
-                    'label': 'Modals',
-                    'url': '/basic/modals',
+                    'label': 'News',
+                    'url': '/basic/news',
+                },
+                {
+                    'label': 'List of notifications',
+                    'url': '/basic/list-of-notifications',
                 },
                 {
                     'label': 'News',

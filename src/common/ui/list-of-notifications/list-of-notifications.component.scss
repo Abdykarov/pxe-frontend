@@ -1,0 +1,31 @@
+/*
+ -  ListOfNotifications
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+
+.list-of-notifications {
+	background-color: $white;
+	border-radius: 4px;
+	width: 100%;
+
+	&--header {
+		border-bottom: 1px solid $gray-100;
+	}
+
+	ul {
+		list-style-type: none;
+		li {
+			padding-left: 0;
+			font-size: $small-font-size;
+			padding-bottom: ( $spacer / 5 );
+			&::before {
+				width: 0;
+			}
+		}
+	}
+}

@@ -3,12 +3,12 @@ import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress
 export const stepperProgressConfig: IStepperProgressItem[] = [
     {
         label: 'Nahrání',
-        active: true,
-        done: true,
+        active: false,
+        done: false,
     },
     {
         label: 'Kontrola',
-        active: true,
+        active: false,
         done: false,
     },
     {

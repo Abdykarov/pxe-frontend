@@ -1,5 +1,60 @@
-<div class="row mb-6">
+<!--doladit mt- pak podle ifu...-->
+<div class="row">
     <div class="col-12 col-xl-10 offset-xl-1">
         <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
+        <div class="row mt-5 mb-3">
+            <div class="col-xl-8 offset-xl-2 text-center">
+                <p *ngIf="false">
+                    Opravte si tabulku podle seznamu chyb a pak jí nahrajte znovu.
+                </p>
+                <ng-container *ngIf="true">
+                    <p class="mb-1">
+                        Import nabídek provedete nahráním vyplněné  excelovské tabulky.
+                    </p>
+                    <lnd-button
+                        label="Stáhnout vzorovou tabulku"
+                        type="secondary"
+                        (click)="downloadExampleImportFile($event)">
+                    </lnd-button>
+                </ng-container>
+            </div>
+        </div>
+        <div class="row mb-5 mt-2">
+            <div class="col-xl-8 offset-xl-2 text-center">
+                <div
+                    ng2FileDrop
+                    class="pt-5 pb-5 well my-drop-zone"
+                    style="width: 100%"
+                    [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+                    (fileOver)="fileOverBase($event)"
+                    [uploader]="uploader">
+                    <p>
+                        Přetáhněte excelovskou tabulku
+                    </p>
+                    <p>
+                        nebo
+                    </p>
+                    <lnd-button class="btn btn-primary"
+                        label="nahrát ze zařízení"
+                        type="primary">
+                    </lnd-button>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-xl-8 offset-xl-2">
+                <pxe-list-of-notifications
+                    [headerText]="listOfErrorsHeaderText"
+                    [notifications]="listOfErrors">
+                </pxe-list-of-notifications>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-8 offset-xl-2 text text-center">
+                <a [routerLink]="['/','secured','supply-offer',commodityType | lowercase]">
+                    zpět
+                </a>
+            </div>
+        </div>
     </div>
 </div>
