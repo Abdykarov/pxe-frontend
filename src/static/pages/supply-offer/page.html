@@ -308,6 +308,28 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-12 col-lg-10 offset-lg-1 text-right">
+                <lnd-button
+                    label="Přidat nabídku"
+                    customClass="mr-2"
+                    type="link"
+                    (action)="click.emit($event)"
+                ></lnd-button>
+                <lnd-button
+                    label="Import nabídek"
+                    customClass="mr-2"
+                    type="secondary"
+                    (action)="click.emit($event)"
+                ></lnd-button>
+                <lnd-button
+                    label="Export nabídek"
+                    customClass="mr-2"
+                    type="primary"
+                    (action)="click.emit($event)"
+                ></lnd-button>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-12 col-lg-10 offset-lg-1">
                 <lnd-table
                     #table

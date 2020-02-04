@@ -1,3 +1,4 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
     ActivatedRoute,
     Router,
@@ -5,7 +6,9 @@ import {
 import {
     ChangeDetectorRef,
     Component,
+    Inject,
     OnInit,
+    PLATFORM_ID,
 } from '@angular/core';
 
 import * as R from 'ramda';
@@ -57,6 +60,9 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     ],
 })
 export class SupplyOfferComponent extends AbstractComponent implements OnInit {
+    public bannerTitle = 'Nemáte žádnou nabídku elektřiny.';
+    public bannerDescription = 'Proveďte import nabídek nahráním excelovské tabulky, nebo přidejte nabídku ručně.';
+    public buttonLabel = 'Import nabídek';
     public commodityType = CommodityType.POWER;
     public currentOfferFormValues = {};
     public deleteDisabled: boolean[] = [];
@@ -68,6 +74,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
     public globalFormError: string[] = [];
     public loadingOffers = true;
+    public offerFormInEmptyPage = false;
     public tableRows: IOffer[] = [];
     public tableCols: ITableColumnConfig[] = [];
     public routePower = ROUTES.ROUTER_SUPPLY_OFFER_POWER;
@@ -97,6 +104,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         private router: Router,
         public supplyOfferConfig: SupplyOfferConfig,
         private supplyService: SupplyService,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
     }
@@ -169,6 +177,36 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                     this.toggleRow(modal.data.table, modal.data.row);
                 }
             });
+    }
+
+    public toggleOfferFormInEmptyPage = (evt) => {
+        evt.preventDefault();
+        this.offerFormInEmptyPage = !this.offerFormInEmptyPage;
+    }
+
+    newOffer = (evt) => {
+        evt.preventDefault();
+        if (isPlatformBrowser(this.platformId)) {
+            const firstCreateOfferElement = document.getElementsByClassName('new-offer-button')[0] as HTMLElement;
+            firstCreateOfferElement.click();
+        }
+    }
+
+    public navigateToImportOffer = (evt) => {
+        evt.preventDefault();
+        this.router.navigate([
+                ROUTES.ROUTER_IMPORT_UPLOAD,
+            ],
+            {
+                queryParams: {
+                    commodityType: this.commodityType,
+                },
+            },
+        );
+    }
+
+    public exportOffers = (evt) => {
+        evt.preventDefault();
     }
 
     public edit = (table, row) => {

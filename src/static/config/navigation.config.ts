@@ -182,6 +182,14 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/delete-account-failed',
                 },
                 {
+                    'label': 'Import approval',
+                    'url': '/basic/import-approval',
+                },
+                {
+                    'label': 'Import upload',
+                    'url': '/basic/import-upload',
+                },
+                {
                     'label': 'Landing page',
                     'url': '/full/landing-page',
                 },
@@ -232,6 +240,10 @@ export const staticNavigationConfig: INavigationConfig = [
                 {
                     'label': 'supply offer',
                     'url': '/full/supply-offer',
+                },
+                {
+                    'label': 'supply offer empty',
+                    'url': '/full/supply-offer-empty',
                 },
                 {
                     'label': 'Supply points',

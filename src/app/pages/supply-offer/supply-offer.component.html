@@ -33,7 +33,7 @@
 
         <ng-template #tooltipNew let-toggle="toggle">
             <lnd-button
-                    icon="icon--add-new"
+                    icon="icon--add-new new-offer-button"
                     type="icon"
                     variant="icon"
                     (action)="toggle();create(table, row)"
@@ -76,6 +76,7 @@
             <ng-template #tooltipNewDetail let-toggle="toggle">
                 <lnd-button
                         icon="icon--add-new"
+                        customClass="new-offer-button"
                         type="icon"
                         variant="icon"
                         (action)="toggle();create(table, row)"
@@ -152,7 +153,27 @@
     </ul>
     <ng-container>
         <lnd-placeloader [loading]="loadingOffers && !globalError.length"></lnd-placeloader>
-        <div *ngIf="!loadingOffers && tableRows.length === 0" class="page-box">
+        <ng-container *ngIf="!loadingOffers && tableRows.length === 0">
+            <div class="row mt-5">
+                <div class="col-12">
+                    <lnd-info-banner
+                        [bannerTitle]="bannerTitle"
+                        [bannerDescription]="bannerDescription"
+                        [buttonLabel]="buttonLabel"
+                        (buttonAction)="navigateToImportOffer($event)"
+                    >
+                    </lnd-info-banner>
+                </div>
+            </div>
+            <div class="row mt-2 mb-2">
+                <div class="col-12 text-center">
+                    <a href="#">
+                        <span (click)="toggleOfferFormInEmptyPage($event)">{{offerFormInEmptyPage ? 'Skrýt formulář' : 'Přidat nabídku'}}</span>
+                    </a>
+                </div>
+            </div>
+        </ng-container>
+        <div *ngIf="!loadingOffers && offerFormInEmptyPage" class="page-box">
             <pxe-supply-offer-form
                     [commodityType]="commodityType"
                     [formValues]="null"
@@ -169,6 +190,28 @@
         <div
             class="mb-4" 
             [hidden]="loadingOffers || tableRows.length === 0">
+            <div class="row">
+                <div class="col-12 text-right">
+                    <lnd-button
+                        label="Přidat nabídku"
+                        customClass="mr-2"
+                        type="link"
+                        (action)="newOffer($event)"
+                    ></lnd-button>
+                    <lnd-button
+                        label="Import nabídek"
+                        customClass="mr-2"
+                        type="secondary"
+                        (action)="navigateToImportOffer($event)"
+                    ></lnd-button>
+                    <lnd-button
+                        label="Export nabídek"
+                        customClass="mr-2"
+                        type="primary"
+                        (click)="exportOffers($event)"
+                    ></lnd-button>
+                </div>
+            </div>
             <lnd-table
                 #table
                 [cols]="tableCols"

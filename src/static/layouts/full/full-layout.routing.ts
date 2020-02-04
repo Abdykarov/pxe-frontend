@@ -15,6 +15,7 @@ import { LoginAfterRegistrationPageModule, loginAfterRegistrationPageRoutes } fr
 import { PatternsOfContractsPageModule, patternsOfContractsPageRoutes } from 'src/static/pages/patterns-of-contracts/page.module';
 import { RegistrationPageModule, registrationPageRoutes } from 'src/static/pages/registration/page.module';
 import { SupplyOfferPageModule, supplyOfferPageRoutes } from 'src/static/pages/supply-offer/page.module';
+import { SupplyOfferEmptyPageModule, supplyOfferEmptyPageRoutes } from 'src/static/pages/supply-offer-empty/page.module';
 import { Error404PageModule, error404PageRoutes } from 'src/static/pages/error-404/page.module';
 import { Error500PageModule, error500PageRoutes } from 'src/static/pages/error-500/page.module';
 
@@ -34,6 +35,7 @@ const routes: Routes = [
             ...patternsOfContractsPageRoutes,
             ...registrationPageRoutes,
             ...supplyOfferPageRoutes,
+            ...supplyOfferEmptyPageRoutes,
             {
                 path: '**',
                 redirectTo: '',
@@ -55,6 +57,7 @@ const routes: Routes = [
         PatternsOfContractsPageModule,
         RegistrationPageModule,
         RouterModule.forChild(routes),
+        SupplyOfferEmptyPageModule,
         SupplyOfferPageModule,
     ],
     exports: [

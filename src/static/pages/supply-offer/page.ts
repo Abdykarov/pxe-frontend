@@ -43,6 +43,11 @@ export class SupplyOfferComponent {
         ];
     }
 
+    public click = (evt) => {
+        evt.preventDefault();
+        console.log('click');
+    }
+
     public action = (table, row) => {
         if (table.openedRow !== row) {
             table.openRow(row);
