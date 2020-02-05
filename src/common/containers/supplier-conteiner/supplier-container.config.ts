@@ -44,8 +44,8 @@ export const config: ISupplierLogo[] = [
     },
     {
         alt: 'logo - Yello Energy',
-        logoUrl: '/assets/images/suppliers/yello_energy-hover.png',
-        logoUrlHover: '/assets/images/suppliers/yello_energy-hover.png',
+        logoUrl: '/assets/images/suppliers/logo_yello-energy-hover.svg',
+        logoUrlHover: '/assets/images/suppliers/logo_yello-energy-hover.svg',
         supplierUrl: '',
         size: 'xl',
         title: 'Yello Energy',
