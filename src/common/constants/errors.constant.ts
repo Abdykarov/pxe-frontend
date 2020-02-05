@@ -2,6 +2,11 @@ import { CONSTS } from 'src/app/app.constants';
 
 export const defaultErrorMessage = 'Došlo k chybě. Zkuste to později.';
 
+export const importErrorCodes = {
+    [CONSTS.IMPORT_ERROR_CODES.FILE_TYPE]: 'Vložit můžete pouze csv formát.',
+    [CONSTS.IMPORT_ERROR_CODES.MAX_NUMBER_OF_FILES]: 'Vložit můžeze pouze jeden soubor.',
+};
+
 export const restAPIErrorCodes = {
     'CLI0001': 'Špatné přihlašovací údaje.',
     'VAL00001': 'Vyplněný kód se neshoduje s kódem, který vám přišel v SMS.',

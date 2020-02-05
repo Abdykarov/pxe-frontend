@@ -8,6 +8,7 @@ import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
+    ALLOWED_TYOE_OF_IMPORT_FILES: ['csv'],
     CURRENCY: {
         DEFAULT: 'CZK',
     },
@@ -17,6 +18,10 @@ export const CONSTS = {
     },
     DEFAULT_EXPIRATION: 3600,
     DEFAULT_DEPOSIT_PAYMENT_TYPE_ID: 'Prikaz',
+    IMPORT_ERROR_CODES: {
+        FILE_TYPE: 'FILE_TYPE',
+        MAX_NUMBER_OF_FILES: 'MAX_NUMBER_OF_FILES',
+    },
     INTERVAL_RXJS: 5000,
     LOGIN_FORM_NAME: 'login',
     MONTH_DURATION: 30,
@@ -74,17 +79,18 @@ export const CONSTS = {
             DIC: 12,
             DESCRIPTIVE_NUMBER: 16,
             EMAIL_LOGIN: 40,
-            USER_NAME_LOGIN: 28,
-            PASSWORD: 50,
             EMAIL_RECAPITULATION: 50,
             OFFER_NAME: 50,
             ORIENTATION_NUMBER: 16,
+            PASSWORD: 50,
             POSITION: 80,
             RECAPITULATION_NAME: 150,
             STREET: 255,
+            USER_NAME_LOGIN: 28,
             USER_PROFILE_NAME: 50,
             SMS_CODE: 10,
         },
+        MAX_IMPORT_FILES: 1,
         MIN_BIRTH_DATE: '1900-01-01',
         MIN_LENGTH: {
             DIC: 10,

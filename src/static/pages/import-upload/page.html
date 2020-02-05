@@ -25,21 +25,10 @@
     </div>
     <div class="row mb-3 mt-2">
         <div class="col-xl-8 offset-xl-2 text-center">
-            <div
-                ng2FileDrop
-                class="pt-5 pb-5 w-100 drop-zone">
-                <p>
-                    Přetáhněte excelovskou tabulku
-                </p>
-                <p>
-                    nebo
-                </p>
-                <lnd-button
-                    label="nahrát ze zařízení"
-                    type="primary"
-                    (action)="uploadFile($event)">
-                </lnd-button>
-            </div>
+            <pxe-file-uploader
+                [uploader]="uploader"
+                (fileSelectAction)="uploadFile($event)">
+            </pxe-file-uploader>
         </div>
     </div>
     <div class="row">

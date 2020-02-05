@@ -1,21 +1,25 @@
 import { Component } from '@angular/core';
 
-import { stepperProgressConfig } from 'src/static/pages/import-upload/config';
+import { FileUploader } from 'ng2-file-upload';
+
+import {
+    fileUploader,
+    stepperProgressConfig,
+} from 'src/static/pages/import-upload/config';
 
 @Component({
     templateUrl: './page.html',
-    styleUrls: ['./page.scss'],
 })
 export class ImportUploadComponent {
     configStepper = stepperProgressConfig;
+    uploader = fileUploader;
 
     downloadExampleFile = (evt) => {
         evt.preventDefault();
         console.log('downloadExampleFile');
     }
 
-    uploadFile = (evt) => {
-        evt.preventDefault();
+    uploadFile = (file: FileUploader) => {
         console.log('upload');
     }
 

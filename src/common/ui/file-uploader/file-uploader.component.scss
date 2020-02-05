@@ -1,0 +1,29 @@
+/*
+ -  FileUploader
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+//// Component variables
+@import 'src/common/ui/button/button.component.variables.scss';
+
+// Bootstrap button import
+@import '~bootstrap/scss/buttons';
+
+
+.drop-zone {
+	border: dashed 3px $light-dark;
+	background: $white;
+	border-radius: 10px;
+}
+
+.file-over {
+	border: dashed 3px $red;
+}
+
+.btn-primary {
+	cursor: pointer;
+}
