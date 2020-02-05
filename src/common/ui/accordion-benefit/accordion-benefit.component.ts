@@ -4,6 +4,8 @@ import {
     TemplateRef,
 } from '@angular/core';
 
+import * as R from 'ramda';
+
 import { IAccordionItem } from './models/accordion-item.model';
 
 @Component({
@@ -14,6 +16,8 @@ import { IAccordionItem } from './models/accordion-item.model';
 
 export class AccordionBenefitComponent {
 
+    // public showBenefitContent = false;
+
     @Input()
     public title?: string;
 
@@ -21,20 +25,17 @@ export class AccordionBenefitComponent {
     public accordionItems: IAccordionItem[] = [];
 
     @Input()
-    public isMoreOpen = false;
-
-    @Input()
-    public moreOpenItemsCount = 2;
-
-    @Input()
-    public showAll = true;
-
-    @Input()
     public accordionContentTemplate?: TemplateRef<any>;
 
-    @Input()
-    public footerMoreLabel = 'Zobrazit vše';
+    public setActive = (index: Number) => {
+        R.mapObjIndexed((item: IAccordionItem, key: string) => {
+            item.isActive = index === parseInt(key, 10);
+        }, this.accordionItems)
+    }
 
-    @Input()
-    public footerLessLabel = 'Zobrazit méně';
+    // public toggleBenefitContent = (event) => {
+    //     event.preventDefault();
+    //     event.cancelBubble = true;
+    //     this.showBenefitContent = !this.showBenefitContent;
+    // }
 }
