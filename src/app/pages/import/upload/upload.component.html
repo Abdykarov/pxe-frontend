@@ -3,10 +3,16 @@
         <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
         <div class="row mt-5 mb-3">
             <div class="col-xl-8 offset-xl-2 text-center">
-                <p *ngIf="false">
+                <p *ngIf="true">
+                    <lnd-info-banner
+                        [bannerTitle]="'Import nabídek jsme nemohli dokončit. <br /> V tabulce jsme nalezli 4 chyby.'"
+                        [bannerType]="bannerTypeImages.HOUSE_ALERT"
+                        [showButton]="false"
+                    >
+                    </lnd-info-banner>
                     Opravte si tabulku podle seznamu chyb a pak jí nahrajte znovu.
                 </p>
-                <ng-container *ngIf="true">
+                <ng-container *ngIf="false">
                     <p class="mb-1">
                         Import nabídek provedete nahráním vyplněné  excelovské tabulky.
                     </p>

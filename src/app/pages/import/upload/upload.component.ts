@@ -26,6 +26,7 @@ import {
 } from 'src/common/constants/errors.constant';
 import { fileUploaderOptions } from 'src/app/pages/import/upload/upload.config';
 import { FILE_UPLOAD_CONFIG, FileUploadService } from 'src/app/services/file-upload.service';
+import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import {
     getConfigStepper,
     inArray,
@@ -50,6 +51,7 @@ export class UploadComponent extends AbstractComponent implements OnInit {
     public readonly listOfErrorsHeaderText = 'Seznam chyb';
     public fileErrors: string[] = [];
     public tryToUploadFile = false;
+    public bannerTypeImages = BannerTypeImages;
     public listOfErrors = [
         'Řádek 1, buňka D (distribuční sazba): pole je vyplněno, ale hodnota není správná',
         'Řádek 1, buňka F (cena za VF): pole není vyplněno',
