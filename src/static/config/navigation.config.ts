@@ -187,7 +187,7 @@ export const staticNavigationConfig: INavigationConfig = [
                 },
                 {
                     'label': 'Import approval',
-                    'url': '/basic/import-approval',
+                    'url': '/full/import-approval',
                 },
                 {
                     'label': 'Import upload',

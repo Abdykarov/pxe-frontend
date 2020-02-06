@@ -1,30 +1,12 @@
 import { Injectable } from '@angular/core';
 
+import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
-import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 
 @Injectable({
     providedIn: 'root',
 })
 export class ApprovalConfig {
-    public stepperProgressConfig: IStepperProgressItem[] = [
-        {
-            label: 'Nahrání',
-            active: true,
-            done: true,
-        },
-        {
-            label: 'Kontrola',
-            active: true,
-            done: true,
-        },
-        {
-            label: 'Schválení',
-            active: true,
-            done: false,
-        },
-    ];
-
     public tableCols = {
         POWER: [
             {

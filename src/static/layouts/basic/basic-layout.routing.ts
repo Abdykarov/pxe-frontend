@@ -71,10 +71,6 @@ import {
     iconsPageRoutes,
 } from 'src/static/atoms/icons/page.module';
 import {
-    ImportApprovalModule,
-    importApprovalPageRoutes,
-} from 'src/static/pages/import-approval/page.module';
-import {
     ImportUploadPageModule,
     importUploadPageRoutes,
 } from 'src/static/pages/import-upload/page.module';
@@ -211,7 +207,6 @@ const routes: Routes = [
             ...formsPageRoutes,
             ...changePasswordBannerPageRoutes,
             ...iconsPageRoutes,
-            ...importApprovalPageRoutes,
             ...importUploadPageRoutes,
             ...indicatorsPageRoutes,
             ...infoBannerPageRoutes,
@@ -267,7 +262,6 @@ const routes: Routes = [
         FormsPageModule,
         ChangePasswordBannerPageModule,
         IconsPageModule,
-        ImportApprovalModule,
         ImportUploadPageModule,
         IndicatorsPageModule,
         InfoBannerPageModule,
