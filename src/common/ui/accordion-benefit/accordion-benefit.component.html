@@ -16,7 +16,7 @@
                 variant="icon"
                 type="icon"
                 class="close accordion-benefit__content-close"
-                (action)="toggleBenefitContent($event)">
+                (click)='closeActive(item)'>
             </lnd-button>
             <ng-container *ngTemplateOutlet="accordionContentTemplate || defaultTemplate; context: { $implicit: item.data }">
             </ng-container>

@@ -16,8 +16,6 @@ import { IAccordionItem } from './models/accordion-item.model';
 
 export class AccordionBenefitComponent {
 
-    // public showBenefitContent = false;
-
     @Input()
     public title?: string;
 
@@ -29,13 +27,11 @@ export class AccordionBenefitComponent {
 
     public setActive = (index: Number) => {
         R.mapObjIndexed((item: IAccordionItem, key: string) => {
-            item.isActive = index === parseInt(key, 10);
+            item.isActive = index === parseInt(key, 10) && !item.isActive;
         }, this.accordionItems)
     }
 
-    // public toggleBenefitContent = (event) => {
-    //     event.preventDefault();
-    //     event.cancelBubble = true;
-    //     this.showBenefitContent = !this.showBenefitContent;
-    // }
+    public closeActive = (item: IAccordionItem) => {
+        item.isActive = false;
+    }
 }
