@@ -23,9 +23,9 @@ export class SecuringYourDataComponent {
         private titleService: Title,
     ) {
         this.titleService.setTitle(CONSTS.TITLES.SECURING_YOUR_DATA);
-        this.metaService.addTag({
+        this.metaService.updateTag({
             name: 'description',
-            content: SEO.META_DESCRIPTION,
+            content: SEO.META_DESCRIPTION.SECURING_YOUR_DATA,
         });
         this.metaService.updateTag({
             name: 'keywords',
