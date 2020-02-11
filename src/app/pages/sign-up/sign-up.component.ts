@@ -47,7 +47,7 @@ export class SignUpComponent extends AbstractComponent {
     ) {
         super();
         this.titleService.setTitle(CONSTS.TITLES.SIGN_UP);
-        this.metaService.addTag({
+        this.metaService.updateTag({
             name: 'description',
             content: SEO.META_DESCRIPTION.SIGN_UP,
         });

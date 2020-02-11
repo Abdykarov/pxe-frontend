@@ -21,7 +21,10 @@ import {
 
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { CONSTS, SEO } from 'src/app/app.constants';
+import {
+    CONSTS,
+    SEO,
+} from 'src/app/app.constants';
 import {
     INavigationConfig,
     INavigationMenu,
