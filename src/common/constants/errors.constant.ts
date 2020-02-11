@@ -11,7 +11,7 @@ export const restAPIErrorCodes = {
 };
 
 export const graphQLMessages = {
-    activeContractPresent: 'Ucet nelze smazat, protoze jsou aktivni smlouvy.',
+    activeContractPresent: 'Účet nelze smazat, protože jsou aktivní smlouvy.',
     applicationError: 'Jen role Manager vidí cizí uživatele.',
     cannotDeleteContract: 'Omlouváme se, ale z neočekávaného důvodu se odstoupení od smlouvy nepodařilo. Zkuste to prosím znovu později.',
     cannotSignContract: 'Omlouváme se, ale z neočekávaného důvodu se nepodařilo smlouvu podepsat. Zkuste to prosím znovu později.',
