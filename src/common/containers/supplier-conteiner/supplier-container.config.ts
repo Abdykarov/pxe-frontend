@@ -59,7 +59,7 @@ export const config: ISupplierLogo[] = [
         supplierUrl: '',
         size: 'xl',
         title: 'Pražská plynárenská a.s.',
-        width: 124,
+        width: 134,
         typeCommodity: TypeCommodity.BOTH,
     },
 ];
