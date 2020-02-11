@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /secured/
+Sitemap: https://www.parc4u.cz/sitemap.xml
