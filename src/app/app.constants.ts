@@ -155,6 +155,8 @@ export const SEO = {
             'nejlevnějši plyn',
             'distribuce plynu',
             'distribuce elektřiny',
+            'parc4u',
+            'pxe',
         ],
         LOGIN: [
             'přihlášení',
