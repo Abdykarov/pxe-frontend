@@ -12,7 +12,7 @@ export const restAPIErrorCodes = {
 
 export const graphQLMessages = {
     activeContractPresent: 'Účet nelze smazat, protože jsou aktivní smlouvy.',
-    applicationError: 'Jen role Manager vidí cizí uživatele.',
+    applicationError: 'Došlo k chybě. Zkuste to později.',
     cannotDeleteContract: 'Omlouváme se, ale z neočekávaného důvodu se odstoupení od smlouvy nepodařilo. Zkuste to prosím znovu později.',
     cannotSignContract: 'Omlouváme se, ale z neočekávaného důvodu se nepodařilo smlouvu podepsat. Zkuste to prosím znovu později.',
     forbiddenUpdateOfSupplyPoint: 'Omlouváme se, ale toto odběrné místo není možné nyní upravit. Zkuste to prosím znovu později.',
