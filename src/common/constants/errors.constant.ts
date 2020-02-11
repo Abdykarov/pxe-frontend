@@ -12,12 +12,14 @@ export const restAPIErrorCodes = {
 
 export const graphQLMessages = {
     activeContractPresent: 'Ucet nelze smazat, protoze jsou aktivni smlouvy.',
+    applicationError: 'Jen role Manager vidí cizí uživatele.',
     cannotDeleteContract: 'Omlouváme se, ale z neočekávaného důvodu se odstoupení od smlouvy nepodařilo. Zkuste to prosím znovu později.',
     cannotSignContract: 'Omlouváme se, ale z neočekávaného důvodu se nepodařilo smlouvu podepsat. Zkuste to prosím znovu později.',
-    invalidSupplyPointId: 'Hledané odběrné místo neexistuje nebo pro přístup k němu nemáte oprávnění.',
-    unknownSupplyPoint: 'Hledané odběrné místo neexistuje nebo pro přístup k němu nemáte oprávnění.',
-    noActiveAccountAvailable: 'Ucet nelze smazat, protoze neexistuje.',
     forbiddenUpdateOfSupplyPoint: 'Omlouváme se, ale toto odběrné místo není možné nyní upravit. Zkuste to prosím znovu později.',
+    invalidSupplyPointId: 'Hledané odběrné místo neexistuje nebo pro přístup k němu nemáte oprávnění.',
+    noActiveAccountAvailable: 'Účet nelze smazat, protože neexistuje.',
+    obsoleteSupplyPointVersion: 'Kontrakt lze uzavřít pouze na nejnovější verzi OM.',
+    unknownSupplyPoint: 'Hledané odběrné místo neexistuje nebo pro přístup k němu nemáte oprávnění.',
 };
 
 export const offerValidityMessages = {
