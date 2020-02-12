@@ -18,10 +18,18 @@
         <tr>
             <ng-container *ngFor="let column of cols">
                 <th
-                    *ngFor="let view of column.views"
-                    [ngClass]="view.headingClass"
-                    [innerHtml]="column.label">
+                    *ngIf="column.contentTemplateHeaderName"
+                >
+                    <ng-container *ngTemplateOutlet="columnTemplates[column.contentTemplateHeaderName]; context: {column: column}"></ng-container>
                 </th>
+                <ng-container
+                    *ngIf="!column.contentTemplateHeaderName">
+                    <th
+                        *ngFor="let view of column.views"
+                        [ngClass]="view.headingClass"
+                        [innerHtml]="column.label">
+                    </th>
+                </ng-container>
             </ng-container>
             <th
                 *ngIf="actionColTemplate"

@@ -1,5 +1,5 @@
 import {
-    Component,
+    Component, ComponentRef,
     EventEmitter,
     HostListener,
     Input,

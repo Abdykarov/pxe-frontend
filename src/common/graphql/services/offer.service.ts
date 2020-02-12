@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
+import { of } from 'rxjs';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 
 import {
     deleteOfferMutation,
@@ -15,6 +17,7 @@ import {
     findSupplyPointOffersQuery,
 } from 'src/common/graphql/queries/offer';
 import {
+    IOffer,
     IOfferInput,
     IOfferInputGasAttributes,
     IOfferInputPowerAttributes,
@@ -130,4 +133,55 @@ export class OfferService {
                 });
             },
         })
+
+
+    public markAll = (mark: boolean) => {
+        const client = this.apollo.getClient();
+        const offers: any = client.readQuery({ query: findSupplierOffersQuery });
+        const markedOffers = R.map((offer: IOffer) => {
+            offer.marked = mark;
+            return offer;
+        }, offers.findSupplierOffers);
+        client.writeQuery({
+            query: findSupplierOffersQuery,
+            data: {
+                findSupplierOffers: markedOffers,
+            },
+        });
+        return markedOffers.length;
+    }
+
+    public markOne = (id: number) => {
+        let numberOfMarked = 0;
+        const client = this.apollo.getClient();
+        const offers: any = client.readQuery({ query: findSupplierOffersQuery });
+        const updatedOffers = R.map((offer: IOffer) => {
+            if (offer.id === id) {
+                offer.marked = !offer.marked;
+            }
+            if (offer.marked) {
+                numberOfMarked++;
+            }
+            return offer;
+        }, offers.findSupplierOffers);
+        client.writeQuery({
+            query: findSupplierOffersQuery,
+            data: {
+                findSupplierOffers: updatedOffers,
+            },
+        });
+        return numberOfMarked;
+    }
+
+    public deleteMarkedOffer = (commodityType: CommodityType) => {
+        const client = this.apollo.getClient();
+        const offers: any = client.readQuery({ query: findSupplierOffersQuery });
+        const offerObservableForDelete = [];
+        R.map((offer: IOffer) => {
+            if (offer.marked && offer.status === IOfferStatus.ACTIVE && commodityType === offer.commodityType) {
+                offerObservableForDelete.push(this.deleteOffer(offer.id));
+            }
+        }, offers.findSupplierOffers);
+        return offerObservableForDelete;
+    }
 }

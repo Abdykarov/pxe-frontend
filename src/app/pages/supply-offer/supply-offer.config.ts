@@ -14,19 +14,18 @@ import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model
     providedIn: 'root',
 })
 export class SupplyOfferConfig {
-
     public confirmDeleteOffer = 'confirmDeleteOffer';
     public confirmCancelOffer = 'confirmCancelOffer';
+    public confirmDeleteMarked = 'confirmDeleteMarked';
 
     public tableCols = (codeLists): IOfferTableRows => ({
         POWER: [
             {
-                label: 'Název produktu',
+                label: 'Označit vše',
+                contentTemplateHeaderName: 'columnTemplateMarkAll',
                 views: [
                     {
-                        headingClass: ['product-name-min-width'],
-                        cellClass: ['text-break'],
-                        content: (row) => `${row.name}`,
+                        contentTemplateName: 'columnTemplateMark',
                     },
                 ],
             },
@@ -144,6 +143,15 @@ export class SupplyOfferConfig {
             },
         ],
         GAS: [
+            {
+                label: 'Označit vše',
+                contentTemplateHeaderName: 'columnTemplateMarkAll',
+                views: [
+                    {
+                        contentTemplateName: 'columnTemplateMark',
+                    },
+                ],
+            },
             {
                 label: 'Název produktu',
                 views: [
@@ -265,6 +273,17 @@ export class SupplyOfferConfig {
                 confirmText: `Opravdu chcete zrušit vytváření nabídky<strong>${space}${name}</strong>?`,
                 titleConfirm: 'ANO ZRUŠIT',
                 data,
+            },
+        };
+    }
+
+    public confirmDeleteMarkedConfig = (numberOfOffers = 0): IShowModal => {
+        return {
+            component: 'ConfirmModalComponent',
+            modalType: this.confirmDeleteMarked,
+            instanceData: {
+                confirmText: `Opravdu chcete odstranit ${numberOfOffers} nabídky elektřiny?`,
+                titleConfirm: 'ANO',
             },
         };
     }

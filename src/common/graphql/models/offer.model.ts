@@ -40,6 +40,7 @@ export interface IOffer {
     unit?: string;
     prepayment?: number;
     __typename?: string;
+    marked?: boolean;
 }
 
 export interface IOfferInput {

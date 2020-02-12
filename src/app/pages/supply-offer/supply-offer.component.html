@@ -1,3 +1,19 @@
+<ng-template #columnTemplateMarkAll>
+    <lnd-form-field
+        label="Označit vše"
+        [value]="markedAll"
+        (click)="markAll($event)"
+        [type]="'CHECKBOX'">
+    </lnd-form-field>
+</ng-template>
+<ng-template #columnTemplateMark let-row="row">
+    <lnd-form-field
+        label="&nbsp;"
+        [value]="!!row.marked"
+        (click)="markOne(row.id)"
+        [type]="'CHECKBOX'">
+    </lnd-form-field>
+</ng-template>
 <ng-template #columnTemplatePriceVT let-row="row">
     {{row.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
 </ng-template>
@@ -169,6 +185,25 @@
         <div
             class="mb-4" 
             [hidden]="loadingOffers || tableRows.length === 0">
+            <lnd-banner-ui
+                *ngIf="numberOfMarked >= 1"
+                icon="icon--info"
+                [showButtonLabel]="false"
+                [data]="{
+                    text: 'Počet označených nabídek: ' + numberOfMarked
+                }"
+            ></lnd-banner-ui>
+            <div *ngIf="numberOfMarked >= 1"
+                 class="col-12">
+                <lnd-button
+                    label="Odstranit nabídky"
+                    type="icon"
+                    variant="icon"
+                    icon="icon--delete"
+                    customClass="ml-2"
+                    (action)="deleteMarkedOffers()"
+                ></lnd-button>
+            </div>
             <lnd-table
                 #table
                 [cols]="tableCols"
@@ -185,10 +220,11 @@
                     columnTemplatePriceNT: columnTemplatePriceNT,
                     columnTemplatePriceGas: columnTemplatePriceGas,
                     columnTemplateValidFromTo: columnTemplateValidFromTo,
-                    columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo
+                    columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo,
+                    columnTemplateMark: columnTemplateMark,
+                    columnTemplateMarkAll: columnTemplateMarkAll
                 }">
             </lnd-table>
         </div>
     </ng-container>
-
 </pxe-layout-container>

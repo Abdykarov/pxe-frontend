@@ -9,6 +9,11 @@ export const defaults = {
 };
 
 export const resolvers = {
+    Offer: {
+        marked(_, variables, {cache}) {
+            return false;
+        },
+    },
     Mutation: {
         toggleOverlay: (_, variables, {cache}) => {
             const prev = cache.readQuery({query: getConfigQuery});
