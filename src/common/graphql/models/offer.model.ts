@@ -39,8 +39,8 @@ export interface IOffer {
     totalPrice?: number;
     unit?: string;
     prepayment?: number;
-    __typename?: string;
     marked?: boolean;
+    __typename?: string;
 }
 
 export interface IOfferInput {

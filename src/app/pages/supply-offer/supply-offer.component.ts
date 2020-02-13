@@ -32,8 +32,8 @@ import {
 } from 'src/app/app.constants';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { formFields } from 'src/common/containers/form/forms/supply-offer/configs/supply-offer-form.config';
-import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
+import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
     IOffer,
     IOfferInput,
