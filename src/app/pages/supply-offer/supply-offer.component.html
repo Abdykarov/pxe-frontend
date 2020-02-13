@@ -1,7 +1,7 @@
 <ng-template #columnTemplateMarkAll>
     <lnd-form-field
         label="Označit vše"
-        [value]="markedAll && tableRows.length === numberOfMarked"
+        [value]="tableRows.length === numberOfMarked"
         (click)="markAll($event)"
         [type]="'CHECKBOX'">
     </lnd-form-field>

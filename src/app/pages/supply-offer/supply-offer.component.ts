@@ -22,7 +22,6 @@ import {
     takeUntil,
 } from 'rxjs/operators';
 
-
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { cantDeleteAllMarkedOffers } from 'src/common/constants/errors.constant';
@@ -31,9 +30,9 @@ import {
     commodityTypes,
     ROUTES,
 } from 'src/app/app.constants';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { formFields } from 'src/common/containers/form/forms/supply-offer/configs/supply-offer-form.config';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import { ModalService } from 'src/common/containers/modal/modal.service';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import {
     IOffer,
@@ -42,12 +41,15 @@ import {
     IOfferInputPowerAttributes,
     IOfferStatus,
 } from 'src/common/graphql/models/offer.model';
-import { CommodityType } from 'src/common/graphql/models/supply.model';
-import { OfferService } from 'src/common/graphql/services/offer.service';
-import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { ITableColumnConfig } from 'src/common/ui/table/models/table.model';
-import { parseGraphQLErrors, transformCodeList } from 'src/common/utils';
+import { ModalService } from 'src/common/containers/modal/modal.service';
+import { OfferService } from 'src/common/graphql/services/offer.service';
+import {
+    parseGraphQLErrors,
+    transformCodeList,
+} from 'src/common/utils';
 import { SupplyOfferConfig } from './supply-offer.config';
+import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
     selector: 'pxe-supply-offer',
@@ -69,7 +71,6 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public globalFormError: string[] = [];
     public loadingOffers = true;
     public numberOfMarked = 0;
-    private markedAll = false;
     public tableRows: IOffer[] = [];
     public tableCols: ITableColumnConfig[] = [];
     public routePower = ROUTES.ROUTER_SUPPLY_OFFER_POWER;
@@ -119,6 +120,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                 this.commodityType = commodityTypes[params.commodityType];
                 this.commodityType$.next(this.commodityType);
             });
+
         combineLatest(this.codeLists$, this.offers$, this.commodityType$)
             .pipe(
                 takeUntil(this.destroy$),
@@ -329,7 +331,6 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public markAll = (evt) => {
         evt.preventDefault();
         evt.cancelBubble = false;
-        this.markedAll = !(this.markedAll && this.tableRows.length === this.numberOfMarked);
-        this.numberOfMarked = this.offerService.markAll(this.markedAll, this.commodityType);
+        this.numberOfMarked = this.offerService.markAll(this.tableRows.length !== this.numberOfMarked, this.commodityType);
     }
 }
