@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 import { catchError } from 'rxjs/operators';
+import { Observable } from 'apollo-client/util/Observable';
 import { of } from 'rxjs';
 
 import { CommodityType } from 'src/common/graphql/models/supply.model';
@@ -136,7 +137,7 @@ export class OfferService {
         })
 
 
-    public markAll = (mark: boolean, commodityType: CommodityType) => {
+    public markAll = (mark: boolean, commodityType: CommodityType): number => {
         const client = this.apollo.getClient();
         const offers: any = client.readQuery({ query: findSupplierOffersQuery });
         let numberOfMarked = 0;
@@ -156,7 +157,7 @@ export class OfferService {
         return mark ? numberOfMarked : 0;
     }
 
-    public markOne = (id: number, commodityType: CommodityType) => {
+    public markOne = (id: number, commodityType: CommodityType): number => {
         let numberOfMarked = 0;
         const client = this.apollo.getClient();
         const offers: any = client.readQuery({ query: findSupplierOffersQuery });
@@ -178,20 +179,20 @@ export class OfferService {
         return numberOfMarked;
     }
 
-    public deleteMarkedOffer = (commodityType: CommodityType) => {
+    public deleteMarkedOffer = (commodityType: CommodityType): Observable<any>[] => {
         const client = this.apollo.getClient();
         const offers: any = client.readQuery({ query: findSupplierOffersQuery });
         const offerObservableForDelete = [];
-        R.map((offer: IOffer) => {
-            if (offer.marked && offer.status === IOfferStatus.ACTIVE && commodityType === offer.commodityType) {
-                offerObservableForDelete.push(
-                    this.deleteOffer(offer.id)
-                        .pipe(
-                            catchError((err) => of({isError: true, error: err})),
-                        ),
-                );
-            }
-        }, offers.findSupplierOffers);
+        // R.map((offer: IOffer) => {
+        //     if (offer.marked && offer.status === IOfferStatus.ACTIVE && commodityType === offer.commodityType) {
+        //         offerObservableForDelete.push(
+        //             this.deleteOffer(offer.id)
+        //                 .pipe(
+        //                     catchError((err) => of({isError: true, error: err})),
+        //                 ),
+        //         );
+        //     }
+        // }, offers.findSupplierOffers);
         return offerObservableForDelete;
     }
 }

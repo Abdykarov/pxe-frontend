@@ -178,6 +178,9 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                 }
                 if (modal.modalType === this.supplyOfferConfig.confirmDeleteMarked) {
                     const offersObserversForDeleting = this.offerService.deleteMarkedOffer(this.commodityType);
+                    if (offersObserversForDeleting.length === 0) {
+                        return;
+                    }
                     this.loadingOffers = true;
                     forkJoin(offersObserversForDeleting)
                         .pipe(

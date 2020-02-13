@@ -1,12 +1,20 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, OnChanges, Output, TemplateRef } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    HostListener,
+    Input,
+    OnChanges,
+    Output,
+    TemplateRef,
+} from '@angular/core';
 import { Router } from '@angular/router';
 
 import * as R from 'ramda';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { viewBreakpoints } from 'src/common/constants/breakpoints.constant';
 import { isRouterLink } from 'src/common/utils';
 import { ITableColumnConfig } from './models/table.model';
+import { viewBreakpoints } from 'src/common/constants/breakpoints.constant';
 
 @Component({
     selector: 'lnd-table',

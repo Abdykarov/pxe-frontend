@@ -50,7 +50,6 @@ export class SupplyOfferComponent {
         }
     }
 
-
     public click = (evt) => {
         evt.preventDefault();
         console.log('click');
