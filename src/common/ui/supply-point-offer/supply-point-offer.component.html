@@ -39,6 +39,9 @@
                             <span class="supply-point-offer__title-label">
                                 {{isFromContract ? 'Sjednaná měsíční záloha' : 'Vypočtená měsíční platba'}}
                             </span>
+                            <span *ngIf="!supplyPointOffer.greenEnergy">
+                                Zelená energie
+                            </span>
                         </div>
                         <div class="col-12 col-md-8 col-xl-12">
                             <span class="supply-point-offer__title text-break">
@@ -99,7 +102,7 @@
                          *ngIf="!isOwner && interactive">
                         <lnd-button
                             label="Vybrat nabídku"
-                            type="primary"
+                            [type]="supplyPointOffer.greenEnergy ? 'success' : 'primary'"
                             (action)="action.emit(supplyPointOffer)">
                         </lnd-button>
                     </div>
@@ -189,6 +192,7 @@
                         <lnd-button
                             label="Vybrat nabídku"
                             type="primary"
+                            [type]="supplyPointOffer.greenEnergy ? 'success' : 'primary'"
                             (action)="action.emit(supplyPointOffer)">
                         </lnd-button>
                     </div>

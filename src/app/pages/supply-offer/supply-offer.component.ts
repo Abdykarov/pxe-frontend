@@ -273,6 +273,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
             'permanentPaymentPrice',
             'subjectTypeId',
             'benefits',
+            'greenEnergy',
         ], supplyOfferFormData);
 
         offer.supplierId = this.authService.currentUserValue.subjectId;

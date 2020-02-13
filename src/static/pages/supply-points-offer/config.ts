@@ -57,6 +57,7 @@ export const offerConfig1: IOffer = {
     unit: 'MWh',
     status: null,
     subject: null,
+    greenEnergy: false,
 };
 
 export const offerConfig2: IOffer = {
@@ -111,6 +112,7 @@ export const offerConfig2: IOffer = {
     systemServicesRegulatedPrice: 0.06,
     totalPrice: 145.72,
     unit: 'MWh',
+    greenEnergy: false,
 };
 
 export const offerConfig3: IOffer = {
@@ -169,4 +171,5 @@ export const offerConfig3: IOffer = {
     priceVTWithVAT: 1.92,
     totalPrice: 145.72,
     unit: 'MWh',
+    greenEnergy: true,
 };

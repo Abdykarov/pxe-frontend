@@ -237,6 +237,7 @@ export class SupplyOfferOrganismConfig {
     public tableRows = [
         {
             id: 1,
+            greenEnergy: false,
             commodityType: CommodityType.POWER,
             name: 'Variant 36',
             subject: {
@@ -295,6 +296,7 @@ export class SupplyOfferOrganismConfig {
         },
         {
             id: 3,
+            greenEnergy: true,
             commodityType: CommodityType.GAS,
             name: 'Název 1',
             subject: {
@@ -324,6 +326,7 @@ export class SupplyOfferOrganismConfig {
         },
         {
             id: 4,
+            greenEnergy: false,
             commodityType: CommodityType.POWER,
             name: 'Variant 36',
             subject: {
@@ -382,6 +385,7 @@ export class SupplyOfferOrganismConfig {
         },
         {
             id: 6,
+            greenEnergy: false,
             commodityType: CommodityType.POWER,
             name: 'Název 1',
             subject: {

@@ -11,6 +11,9 @@
         (click)="click($event)"
         [type]="'CHECKBOX'">
     </lnd-form-field>
+    <span *ngIf="row.greenEnergy"
+          class="icon icon--arrow-natural">
+    </span>
 </ng-template>
 <ng-template #columnTemplatePriceVT let-row="row">
     {{row.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
@@ -126,6 +129,14 @@
             <lnd-form-field
                     [id]="'name'"
                     label="Název produktu"
+            ></lnd-form-field>
+        </div>
+        <div class="col-4 col-xl-3 offset-xl-3">
+            <lnd-form-field
+                [id]="'greenEnery'"
+                label="Zelená energie"
+                type="CHECKBOX"
+                [customFormGroupClass]="'mb-5'"
             ></lnd-form-field>
         </div>
     </div>

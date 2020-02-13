@@ -13,6 +13,9 @@
         (click)="markOne(row.id,$event)"
         [type]="'CHECKBOX'">
     </lnd-form-field>
+    <span *ngIf="row.greenEnergy"
+          class="icon icon--arrow-natural">
+    </span>
 </ng-template>
 <ng-template #columnTemplatePriceVT let-row="row">
     {{row.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
