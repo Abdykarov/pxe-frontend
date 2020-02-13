@@ -39,7 +39,7 @@
                             <span class="supply-point-offer__title-label">
                                 {{isFromContract ? 'Sjednaná měsíční záloha' : 'Vypočtená měsíční platba'}}
                             </span>
-                            <span *ngIf="!supplyPointOffer.greenEnergy">
+                            <span *ngIf="supplyPointOffer.greenEnergy">
                                 Zelená energie
                             </span>
                         </div>
