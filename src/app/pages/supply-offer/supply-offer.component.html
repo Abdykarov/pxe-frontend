@@ -186,6 +186,14 @@
             class="mb-4" 
             [hidden]="loadingOffers || tableRows.length === 0">
             <lnd-banner-ui
+                *ngIf="showDeletedOfferBanner"
+                icon="icon--icon"
+                [showButtonLabel]="false"
+                [data]="{
+                    text: 'Odstranili jste ' + numberOfDeletedOffers + ' ' + (numberOfDeletedOffers | plural: 'offer_delete') + '.'
+                }"
+            ></lnd-banner-ui>
+            <lnd-banner-ui
                 *ngIf="numberOfMarked >= 1"
                 icon="icon--info"
                 [showButtonLabel]="false"

@@ -165,7 +165,7 @@ export class OfferService {
             if (offer.id === id) {
                 offer.marked = !offer.marked;
             }
-            if (offer.marked && offer.commodityType === commodityType) {
+            if (offer.marked && offer.commodityType === commodityType && offer.status === IOfferStatus.ACTIVE) {
                 numberOfMarked++;
             }
             return offer;
@@ -183,16 +183,16 @@ export class OfferService {
         const client = this.apollo.getClient();
         const offers: any = client.readQuery({ query: findSupplierOffersQuery });
         const offerObservableForDelete = [];
-        // R.map((offer: IOffer) => {
-        //     if (offer.marked && offer.status === IOfferStatus.ACTIVE && commodityType === offer.commodityType) {
-        //         offerObservableForDelete.push(
-        //             this.deleteOffer(offer.id)
-        //                 .pipe(
-        //                     catchError((err) => of({isError: true, error: err})),
-        //                 ),
-        //         );
-        //     }
-        // }, offers.findSupplierOffers);
+        R.map((offer: IOffer) => {
+            if (offer.marked && offer.status === IOfferStatus.ACTIVE && commodityType === offer.commodityType) {
+                offerObservableForDelete.push(
+                    this.deleteOffer(offer.id)
+                        .pipe(
+                            catchError((err) => of({isError: true, error: err})),
+                        ),
+                );
+            }
+        }, offers.findSupplierOffers);
         return offerObservableForDelete;
     }
 }

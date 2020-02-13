@@ -9,6 +9,7 @@ import { DatepickerModule } from 'src/common/ui/forms/datepicker/datepicker.modu
 import { DropdownModule } from 'src/common/ui/dropdown/dropdown.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
+import { PipesModule } from 'src/common/pipes/pipes.module';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
 import { SelectModule } from 'src/common/ui/forms/select/select.module';
 import { SupplyOfferComponent } from './supply-offer.component';
@@ -30,6 +31,7 @@ import { TooltipModule } from 'src/common/ui/tooltip/tooltip.module';
         DropdownModule,
         FormModule,
         LayoutContainerModule,
+        PipesModule,
         PlaceloaderModule,
         ReactiveFormsModule,
         SelectModule,

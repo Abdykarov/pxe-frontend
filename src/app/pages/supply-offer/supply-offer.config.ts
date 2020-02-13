@@ -7,6 +7,7 @@ import {
     DELIVERY_LENGTH_OPTIONS,
     SUBJECT_TYPE_OPTIONS,
 } from 'src/app/app.constants';
+import { PluralPipe } from 'src/common/pipes/plurar/plural.pipe';
 import { IOfferTableRows } from './models/supply-offer.model';
 import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
 
@@ -17,6 +18,10 @@ export class SupplyOfferConfig {
     public confirmDeleteOffer = 'confirmDeleteOffer';
     public confirmCancelOffer = 'confirmCancelOffer';
     public confirmDeleteMarked = 'confirmDeleteMarked';
+
+    constructor(
+        private pluralPipe: PluralPipe,
+    ) {}
 
     public tableCols = (codeLists): IOfferTableRows => ({
         POWER: [
@@ -282,7 +287,8 @@ export class SupplyOfferConfig {
             component: 'ConfirmModalComponent',
             modalType: this.confirmDeleteMarked,
             instanceData: {
-                confirmText: `Opravdu chcete odstranit ${numberOfOffers} nabídky elektřiny?`,
+                confirmText:
+                    `Opravdu chcete odstranit ${numberOfOffers} ${this.pluralPipe.transform(numberOfOffers, 'offer_delete')} elektřiny?`,
                 titleConfirm: 'ANO',
             },
         };
