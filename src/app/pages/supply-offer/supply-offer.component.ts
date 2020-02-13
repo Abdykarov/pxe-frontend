@@ -1,14 +1,36 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
+import {
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+} from '@angular/core';
 
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { filter, map, takeUntil } from 'rxjs/operators';
-import { CODE_LIST_TYPES, commodityTypes, ROUTES } from 'src/app/app.constants';
-import { AuthService } from 'src/app/services/auth.service';
+import {
+    BehaviorSubject,
+    combineLatest,
+    forkJoin,
+    Observable,
+} from 'rxjs';
+import {
+    filter,
+    map,
+    takeUntil,
+} from 'rxjs/operators';
+
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { cantDeleteAllMarkedOffers } from 'src/common/constants/errors.constant';
+import {
+    CODE_LIST_TYPES,
+    commodityTypes,
+    ROUTES,
+} from 'src/app/app.constants';
 import { formFields } from 'src/common/containers/form/forms/supply-offer/configs/supply-offer-form.config';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
@@ -52,6 +74,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public tableCols: ITableColumnConfig[] = [];
     public routePower = ROUTES.ROUTER_SUPPLY_OFFER_POWER;
     public routeGas = ROUTES.ROUTER_SUPPLY_OFFER_GAS;
+    private initRows: boolean;
 
     private commodityType$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
     private codeLists$: Observable<any> = this.supplyService.findCodelistsByTypes(CODE_LIST_TYPES, 'cs')
@@ -96,7 +119,6 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                 this.commodityType = commodityTypes[params.commodityType];
                 this.commodityType$.next(this.commodityType);
             });
-
         combineLatest(this.codeLists$, this.offers$, this.commodityType$)
             .pipe(
                 takeUntil(this.destroy$),
@@ -105,7 +127,11 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                 ([codeLists, offers, commodityType]) => {
                     if (codeLists && offers) {
                         this.tableRows = offers;
-                        this.tableCols = this.supplyOfferConfig.tableCols(codeLists)[commodityType];
+                        if (!this.initRows) {
+                            this.tableCols = this.supplyOfferConfig.tableCols(codeLists)[commodityType];
+                            this.numberOfMarked = this.offerService.markAll(false, this.commodityType);
+                            this.initRows = true;
+                        }
                         this.loadingOffers = false;
                         this.deleteDisabled = [];
                         this.cd.markForCheck();
@@ -150,12 +176,22 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                 }
                 if (modal.modalType === this.supplyOfferConfig.confirmDeleteMarked) {
                     const offersObserversForDeleting = this.offerService.deleteMarkedOffer(this.commodityType);
-                    // R.forEach((offerObserver) => {
-                    //     offerObserver
-                    //         .pipe(
-                    //             takeUntil(this.destroy$),
-                    //         ).subscribe();
-                    // }, offersObserversForDeleting);
+                    this.loadingOffers = true;
+                    forkJoin(offersObserversForDeleting)
+                        .pipe(
+                            takeUntil(this.destroy$),
+                        )
+                        .subscribe(
+                            next => {
+                                this.loadingOffers = false;
+                                this.cd.markForCheck();
+                            },
+                            error => {
+                                this.loadingOffers = false;
+                                this.globalError = [cantDeleteAllMarkedOffers];
+                                this.cd.markForCheck();
+                            },
+                        );
                     this.numberOfMarked = 0;
                 }
             });
@@ -284,14 +320,16 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
             .showModal$.next(this.supplyOfferConfig.confirmDeleteMarkedConfig(this.numberOfMarked));
     }
 
-    public markOne = (id: number) => {
-        this.numberOfMarked = this.offerService.markOne(id);
+    public markOne = (id: number, evt) => {
+        evt.preventDefault();
+        evt.cancelBubble = false;
+        this.numberOfMarked = this.offerService.markOne(id, this.commodityType);
     }
 
     public markAll = (evt) => {
         evt.preventDefault();
-        this.markedAll = !this.markedAll;
-        const numberOfMarked = this.offerService.markAll(this.markedAll);
-        this.numberOfMarked = this.markedAll ? numberOfMarked : 0;
+        evt.cancelBubble = false;
+        this.markedAll = !(this.markedAll && this.tableRows.length === this.numberOfMarked);
+        this.numberOfMarked = this.offerService.markAll(this.markedAll, this.commodityType);
     }
 }

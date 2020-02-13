@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
+import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { CommodityType } from 'src/common/graphql/models/supply.model';
 
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import {
     deleteOfferMutation,
     saveGasOfferMutation,
@@ -135,11 +136,15 @@ export class OfferService {
         })
 
 
-    public markAll = (mark: boolean) => {
+    public markAll = (mark: boolean, commodityType: CommodityType) => {
         const client = this.apollo.getClient();
         const offers: any = client.readQuery({ query: findSupplierOffersQuery });
+        let numberOfMarked = 0;
         const markedOffers = R.map((offer: IOffer) => {
             offer.marked = mark;
+            if (offer.commodityType === commodityType) {
+                numberOfMarked++;
+            }
             return offer;
         }, offers.findSupplierOffers);
         client.writeQuery({
@@ -148,10 +153,10 @@ export class OfferService {
                 findSupplierOffers: markedOffers,
             },
         });
-        return markedOffers.length;
+        return mark ? numberOfMarked : 0;
     }
 
-    public markOne = (id: number) => {
+    public markOne = (id: number, commodityType: CommodityType) => {
         let numberOfMarked = 0;
         const client = this.apollo.getClient();
         const offers: any = client.readQuery({ query: findSupplierOffersQuery });
@@ -159,7 +164,7 @@ export class OfferService {
             if (offer.id === id) {
                 offer.marked = !offer.marked;
             }
-            if (offer.marked) {
+            if (offer.marked && offer.commodityType === commodityType) {
                 numberOfMarked++;
             }
             return offer;
@@ -179,7 +184,12 @@ export class OfferService {
         const offerObservableForDelete = [];
         R.map((offer: IOffer) => {
             if (offer.marked && offer.status === IOfferStatus.ACTIVE && commodityType === offer.commodityType) {
-                offerObservableForDelete.push(this.deleteOffer(offer.id));
+                offerObservableForDelete.push(
+                    this.deleteOffer(offer.id)
+                        .pipe(
+                            catchError((err) => of({isError: true, error: err})),
+                        ),
+                );
             }
         }, offers.findSupplierOffers);
         return offerObservableForDelete;

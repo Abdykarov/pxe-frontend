@@ -1,3 +1,17 @@
+<ng-template #columnTemplateMarkAll>
+    <lnd-form-field
+        label="Označit vše"
+        (click)="click($event)"
+        [type]="'CHECKBOX'">
+    </lnd-form-field>
+</ng-template>
+<ng-template #columnTemplateMark let-row="row">
+    <lnd-form-field
+        label="&nbsp;"
+        (click)="click($event)"
+        [type]="'CHECKBOX'">
+    </lnd-form-field>
+</ng-template>
 <ng-template #columnTemplatePriceVT let-row="row">
     {{row.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
 </ng-template>
@@ -278,7 +292,9 @@
                     columnTemplatePriceNT: columnTemplatePriceNT,
                     columnTemplatePriceGas: columnTemplatePriceGas,
                     columnTemplateValidFromTo: columnTemplateValidFromTo,
-                    columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo
+                    columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo,
+                    columnTemplateMarkAll: columnTemplateMarkAll,
+                    columnTemplateMark: columnTemplateMark
                 }">
             ></lnd-table>
         </div>

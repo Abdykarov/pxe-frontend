@@ -20,6 +20,8 @@ export const graphQLMessages = {
     forbiddenUpdateOfSupplyPoint: 'Omlouváme se, ale toto odběrné místo není možné nyní upravit. Zkuste to prosím znovu později.',
 };
 
+export const cantDeleteAllMarkedOffers = 'Nepodařilo se nám smazat veškeré označené nabídky, prosím zkuste to znovu.';
+
 export const offerValidityMessages = {
     contractEndWithTerminate: 'Na základě uvedeného data platnosti aktuální smlouvy můžete ' +
         'vybírat pouze z nabídek od svého aktuálního dodavatele.',

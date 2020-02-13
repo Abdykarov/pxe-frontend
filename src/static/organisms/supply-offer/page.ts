@@ -52,4 +52,9 @@ export class SupplyOfferComponent {
             table.selectRow(row);
         }
     }
+
+    public click = (evt) => {
+        evt.preventDefault();
+        console.log('click');
+    }
 }
