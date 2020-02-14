@@ -16,7 +16,7 @@
 	// Media queries
 	@include media-breakpoint-up(md) {
 		display: flex;
-		flex-direction: initial;
+		flex-direction: row;
 		flex-wrap: wrap;
 	}
 
@@ -38,7 +38,6 @@
 		&:focus,
 		&:hover {
 			color: $font-text;
-			// background-color: rgba($blue-200, .05);
 			cursor: pointer;
 		}
 
