@@ -189,10 +189,18 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                             takeUntil(this.destroy$),
                         )
                         .subscribe(
-                            next => {
-                                this.numberOfDeletedOffers = next.length;
-                                this.numberOfMarked = this.numberOfMarked - next.length;
-                                this.showDeletedOfferBanner = true;
+                            (respones: []) => {
+                                let numberOfDeletedOffers = 0;
+                                R.forEach((response) => {
+                                    if (response.isError) {
+                                        this.globalError = [cantDeleteAllMarkedOffers];
+                                    } else {
+                                        numberOfDeletedOffers++;
+                                        this.showDeletedOfferBanner = true;
+                                    }
+                                })(respones);
+                                this.numberOfDeletedOffers = numberOfDeletedOffers;
+                                this.numberOfMarked = this.numberOfMarked - numberOfDeletedOffers;
                                 this.loadingOffers = false;
                                 this.cd.markForCheck();
                             },
