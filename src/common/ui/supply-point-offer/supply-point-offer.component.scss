@@ -24,6 +24,10 @@
 				}
 			}
 
+			.accordion-benefit {
+				background-color: $body-bg;
+			}
+
 			.supply-point-offer__inner--price {
 				// Media queries
 				@include media-breakpoint-up(xl) {

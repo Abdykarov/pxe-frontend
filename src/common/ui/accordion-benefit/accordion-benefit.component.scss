@@ -26,6 +26,7 @@
 		flex-direction: column;
 		justify-content: center;
 		padding: ( $spacer / 1.5 ) ( $spacer / .75 ) ( $spacer / 1.5 ) ( $spacer / 2 );
+		color: $primary;
 		border-bottom: 1px solid $border-color;
 
 		// Media queries
@@ -36,7 +37,7 @@
 
 		&:focus,
 		&:hover {
-			color: $primary;
+			color: $font-text;
 			// background-color: rgba($blue-200, .05);
 			cursor: pointer;
 		}
@@ -47,6 +48,7 @@
 		}
 
 		&--active {
+			color: $font-text;
 			font-weight: 700;
 			border-color: none;
 
