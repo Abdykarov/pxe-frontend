@@ -33,6 +33,7 @@ import {
 } from 'src/app/app.constants';
 import {
     CommodityType,
+    ISupplierSampleDocument,
     ISupplyPoint,
     SubjectType,
     TimeToContractEndPeriod,
@@ -156,7 +157,11 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 takeUntil(this.destroy$),
             )
             .subscribe(val => {
-                this.helpDocuments = val && val.sampleDocuments ? convertArrayToObject(val.sampleDocuments, 'type') : {};
+                const helpDocumentsBothCommodity = val && val.sampleDocuments ? convertArrayToObject(val.sampleDocuments, 'type') : {};
+                this.helpDocuments = R.filter(
+                        (sampleDocument: ISupplierSampleDocument) =>
+                            sampleDocument.commodityType === <CommodityType>this.form.get('commodityType').value
+                    , helpDocumentsBothCommodity);
             });
 
         this.setFormByCommodity(this.formValues && this.formValues.commodityType);
