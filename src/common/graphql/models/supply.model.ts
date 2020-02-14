@@ -70,6 +70,7 @@ export interface ISupplier {
 export interface ISupplierSampleDocument {
     type: string;
     url: string;
+    commodityType: CommodityType;
 }
 
 export interface ISupplyPointInput {
