@@ -1,13 +1,13 @@
 <div class="list-of-notifications">
     <div class="row">
-        <div class="offset-1 col-10 text-center mt-4 mb-2 list-of-notifications--header">
+        <div class="offset-1 col-10 text-center mt-4 mb-2">
             <h2 class="mb-2">{{headerText}}</h2>
         </div>
     </div>
     <div class="row mt-2 pb-5">
         <div *ngIf="notifications.length"
             class="offset-1 col-10">
-            <ul style="list-style-type:none;">
+            <ul>
                 <li *ngFor="let notification of notifications | slice:0:maxShowNotifications">
                     {{notification }}
                 </li>

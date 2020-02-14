@@ -167,9 +167,11 @@
             </div>
             <div class="row mt-2 mb-2">
                 <div class="col-12 text-center">
-                    <a href="#">
-                        <span (click)="toggleOfferFormInEmptyPage($event)">{{offerFormInEmptyPage ? 'Skrýt formulář' : 'Přidat nabídku'}}</span>
-                    </a>
+                    <lnd-button
+                        label="{{offerFormInEmptyPage ? 'Skrýt formulář' : 'Přidat nabídku'}}"
+                        type="secondary"
+                        (action)="toggleOfferFormInEmptyPage($event)">
+                    </lnd-button>
                 </div>
             </div>
         </ng-container>
@@ -195,7 +197,7 @@
                     <lnd-button
                         label="Přidat nabídku"
                         customClass="mr-2"
-                        type="link"
+                        type="secondary"
                         (action)="newOffer($event)"
                     ></lnd-button>
                     <lnd-button

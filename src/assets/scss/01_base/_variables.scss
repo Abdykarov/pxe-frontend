@@ -53,6 +53,7 @@ $positive:                         #0aa374;                    // Positive color
 $info:                             $secondary;                   // Info color
 $light:                            #eef2f6;                    // Light color
 $light-dark:                       darken($light, 15%);
+$light-dark-little-darken:         darken($light, 5%);
 $light-darken:                     darken($light, 25%);
 $disabled:                         #f7f9fb;                    // Disabled color
 

@@ -8,18 +8,25 @@ import {
 } from '@angular/core';
 
 import * as R from 'ramda';
-import { takeUntil } from 'rxjs/operators';
+import * as R_ from 'ramda-extension';
 import { ApprovalConfig } from 'src/app/pages/import/approval/approval.config';
+import {
+    filter,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
+import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import { ITableColumnConfig } from 'src/common/ui/table/models/table.model';
+import { ImportProgressStep } from 'src/app/pages/import/import.model';
+import { ModalService } from 'src/common/containers/modal/modal.service';
 import {
     getConfigStepper,
+    parseGraphQLErrors,
     TypeStepper,
 } from 'src/common/utils';
-import { ImportProgressStep } from 'src/app/pages/import/import.model';
 import { ROUTES } from 'src/app/app.constants';
 
 @Component({
@@ -39,6 +46,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
 
     constructor(
         private approvalConfig: ApprovalConfig,
+        private modalsService: ModalService,
         private route: ActivatedRoute,
         private router: Router,
     ) {
@@ -58,6 +66,19 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                 this.commodityType = commodityType;
                 this.tableCols = this.approvalConfig.tableCols[this.commodityType];
             });
+
+        this.modalsService.closeModalData$
+            .pipe(
+                takeUntil(
+                    this.destroy$,
+                ),
+                filter(R_.isNotNil),
+                filter((modal: ICloseModalData) => modal.confirmed),
+            )
+            .subscribe(modal => {
+                // todo
+            });
+
     }
 
     backAction = (evt) => {
