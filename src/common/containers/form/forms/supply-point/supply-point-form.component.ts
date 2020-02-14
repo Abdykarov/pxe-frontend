@@ -161,9 +161,8 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             .subscribe(val => {
                 const helpDocumentsBothCommodities = val && val.sampleDocuments ? convertArrayToObject(val.sampleDocuments, 'type') : {};
                 this.helpDocuments = R.filter(
-                        (sampleDocument: ISupplierSampleDocument) =>
-                            sampleDocument.commodityType === this.commodityType
-                    , helpDocumentsBothCommodities);
+                    (sampleDocument: ISupplierSampleDocument) => sampleDocument.commodityType === this.commodityType,
+                helpDocumentsBothCommodities);
             });
 
         this.setFormByCommodity(this.formValues && this.formValues.commodityType);
