@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import * as R from 'ramda';
 
 import {
-    CODE_LIST,
+    CODE_LIST, CONSTS,
     DELIVERY_LENGTH_OPTIONS,
     SUBJECT_TYPE_OPTIONS,
 } from 'src/app/app.constants';
@@ -14,10 +14,6 @@ import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model
     providedIn: 'root',
 })
 export class SupplyOfferConfig {
-
-    public confirmDeleteOffer = 'confirmDeleteOffer';
-    public confirmCancelOffer = 'confirmCancelOffer';
-
     public tableCols = (codeLists): IOfferTableRows => ({
         POWER: [
             {
@@ -247,7 +243,7 @@ export class SupplyOfferConfig {
 
     public confirmDeleteOfferConfig = (data): IShowModal => ({
         component: 'ConfirmModalComponent',
-        modalType: this.confirmDeleteOffer,
+        modalType: CONSTS.MODAL_TYPE.CONFIRM_DELETE_OFFER,
         instanceData: {
             confirmText: `Opravdu chcete smazat nabídku <strong>${data.currentOfferFormValues.name}</strong>?`,
             titleConfirm: 'ANO SMAZAT',
@@ -260,7 +256,7 @@ export class SupplyOfferConfig {
         const space = name ? ' ' : '';
         return {
             component: 'ConfirmModalComponent',
-            modalType: this.confirmCancelOffer,
+            modalType: CONSTS.MODAL_TYPE.CONFIRM_CANCEL_OFFER,
             instanceData: {
                 confirmText: `Opravdu chcete zrušit vytváření nabídky<strong>${space}${name}</strong>?`,
                 titleConfirm: 'ANO ZRUŠIT',

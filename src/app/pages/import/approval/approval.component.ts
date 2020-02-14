@@ -27,7 +27,7 @@ import {
     parseGraphQLErrors,
     TypeStepper,
 } from 'src/common/utils';
-import { ROUTES } from 'src/app/app.constants';
+import { CONSTS, ROUTES } from 'src/app/app.constants';
 
 @Component({
     selector: 'pxe-approval',
@@ -41,6 +41,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
     public tableRows = this.approvalConfig.tableRows;
     public bannerTypeImages = BannerTypeImages;
     public numberOfNewOffers = 5;
+    // po sluzbach sjendotit s mnozstvi table rows
     public globalError: string[] = [];
     public offerDeleted = null;
 
@@ -76,22 +77,24 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                 filter((modal: ICloseModalData) => modal.confirmed),
             )
             .subscribe(modal => {
-                // todo
+                if (modal.modalType === CONSTS.MODAL_TYPE.CONFIRM_BACK_IMPORT) {
+                    this.router.navigate([
+                            ROUTES.ROUTER_IMPORT_UPLOAD,
+                        ],
+                        {
+                            queryParams: {
+                                commodityType: this.commodityType,
+                            },
+                        },
+                    );
+                }
             });
-
     }
 
     backAction = (evt) => {
         evt.preventDefault();
-        this.router.navigate([
-                ROUTES.ROUTER_IMPORT_UPLOAD,
-            ],
-            {
-                queryParams: {
-                    commodityType: this.commodityType,
-                },
-            },
-        );
+        this.modalsService
+            .showModal$.next(this.approvalConfig.confirmBackActionConfig({size: 'xl'}));
     }
 
     approvalAction = (evt) => {

@@ -83,11 +83,12 @@
 </div>
 <div class="row">
     <div class="col-12 text-center">
-        <a
-            class="ml-5"
-            (click)="backAction($event)">
-            zpět
-        </a>
+        <lnd-button
+            customClass="ml-5"
+            label="zpět"
+            type="link"
+            (action)="backAction($event)">>
+        </lnd-button>
         <lnd-button
             customClass="ml-5"
             label="Schválit nabídky"

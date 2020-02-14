@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CONSTS } from 'src/app/app.constants';
 
 import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
@@ -270,4 +271,15 @@ export class ApprovalConfig {
             permanentPaymentPrice: 3650,
         },
     ];
+
+    public confirmBackActionConfig = (data): IShowModal => ({
+        component: 'ConfirmModalComponent',
+        modalType: CONSTS.MODAL_TYPE.CONFIRM_BACK_IMPORT,
+        instanceData: {
+            confirmText: `Vrácením o krok zpět ztratíte nahrané nabídky.<br />Opravdu chcete pokračovat?`,
+            titleConfirm: 'Ano',
+            titleClose: 'Ne',
+            size: 'xl',
+        },
+    })
 }

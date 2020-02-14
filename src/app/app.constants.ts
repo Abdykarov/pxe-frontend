@@ -27,6 +27,11 @@ export const CONSTS = {
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
+    MODAL_TYPE: {
+        CONFIRM_DELETE_OFFER: 'confirmDeleteOffer',
+        CONFIRM_CANCEL_OFFER: 'confirmCancelOffer',
+        CONFIRM_BACK_IMPORT: 'confirmBackImportOffer',
+    },
     PATHS: {
         APPROVAL: 'approval',
         CONTRACT : 'contract',

@@ -28,7 +28,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CODE_LIST_TYPES,
-    commodityTypes,
+    commodityTypes, CONSTS,
     ROUTES,
 } from 'src/app/app.constants';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
@@ -155,7 +155,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                 filter((modal: ICloseModalData) => modal.confirmed),
             )
             .subscribe(modal => {
-                if (modal.modalType === this.supplyOfferConfig.confirmDeleteOffer) {
+                if (modal.modalType === CONSTS.MODAL_TYPE.CONFIRM_DELETE_OFFER) {
                     this.deleteDisabled[modal.data.row.id] = true;
                     this.offerService.deleteOffer(modal.data.row.id)
                         .pipe(
@@ -173,7 +173,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                             },
                         );
                 }
-                if (modal.modalType === this.supplyOfferConfig.confirmCancelOffer) {
+                if (modal.modalType === CONSTS.MODAL_TYPE.CONFIRM_CANCEL_OFFER) {
                     this.toggleRow(modal.data.table, modal.data.row);
                 }
             });
