@@ -33,6 +33,7 @@ import {
 } from 'src/app/app.constants';
 import {
     CommodityType,
+    ISupplierSampleDocument,
     ISupplyPoint,
     SubjectType,
     TimeToContractEndPeriod,
@@ -70,7 +71,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public codeList = CODE_LIST;
     public codeLists;
     public codeLists$: BehaviorSubject<any> = new BehaviorSubject([]);
+    public commodityType = CommodityType.POWER;
     public commodityTypeOptions: Array<IOption> = COMMODITY_TYPE_OPTIONS;
+    public contractEndType = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT;
     public distributionRateType: string = CODE_LIST.DIST_RATE_INDIVIDUAL;
     public expirationConfig = expirationConfig;
     public formWasPrefilled = false;
@@ -79,7 +82,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public subjectTypeOptions: Array<IOption> = SUBJECT_TYPE_OPTIONS;
     public suppliers = [];
     public suppliers$: BehaviorSubject<any> = new BehaviorSubject([]);
-    public contractEndType = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -101,6 +103,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 takeUntil(this.destroy$),
             )
             .subscribe((commodityType: CommodityType) => {
+                this.commodityType = commodityType;
                 this.resetFormError(false);
                 this.setFormByCommodity(commodityType);
                 this.resetFieldValue('supplierId', false);
@@ -156,7 +159,12 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 takeUntil(this.destroy$),
             )
             .subscribe(val => {
-                this.helpDocuments = val && val.sampleDocuments ? convertArrayToObject(val.sampleDocuments, 'type') : {};
+                this.helpDocuments = val && val.sampleDocuments ?
+                    convertArrayToObject(
+                        val.sampleDocuments,
+                        'type',
+                        (sampleDocument: ISupplierSampleDocument) => sampleDocument.commodityType === this.commodityType,
+                    ) : {};
             });
 
         this.setFormByCommodity(this.formValues && this.formValues.commodityType);
