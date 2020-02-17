@@ -341,7 +341,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public deleteMarkedOffers = () => {
         this.showDeletedOfferBanner = false;
         this.modalsService
-            .showModal$.next(this.supplyOfferConfig.confirmDeleteMarkedConfig(this.numberOfMarked));
+            .showModal$.next(this.supplyOfferConfig.confirmDeleteMarkedConfig(this.numberOfMarked, this.commodityType));
     }
 
     public markOne = (id: number, evt) => {
