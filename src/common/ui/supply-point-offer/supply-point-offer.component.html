@@ -1,3 +1,9 @@
+<ng-template #benefitContentTemplate let-data>
+    K téhle nabídce od PRE získáte benfit {{data.name}}.
+    Více informaci o benefitu naleznete v obchodních podmínkách
+    <a [href]="data.url" target="_blank">zde</a>.
+</ng-template>
+
 <div class="supply-point-offer"
    [class.supply-point-offer--owner]="isOwner"
    [class.supply-point-offer--not-interactive]="!interactive">
@@ -195,13 +201,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-12"
-             *ngIf="!isOwner && supplyPointOffer.benefits && supplyPointOffer.benefits.length">
-            <ul class="check-list supply-point-offer__benefits-list">
-                <ng-container *ngFor="let benefit of supplyPointOffer.benefits">
-                    <li *ngIf="benefit && benefit.name">{{benefit.name}}</li>
-                </ng-container>
-            </ul>
-        </div>
+        <lnd-accordion-benefit
+            *ngIf="!isOwner && supplyPointOffer.benefits && supplyPointOffer.benefits.length"
+            class="col-12 supply-point-offer__benefits-list"
+            [accordionItems]="supplyPointOffer.benefits | accordionBenefits"
+            [accordionContentTemplate]="benefitContentTemplate"
+        >
+        </lnd-accordion-benefit>
     </div>
 </div>
+

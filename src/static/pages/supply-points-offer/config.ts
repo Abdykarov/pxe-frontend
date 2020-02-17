@@ -16,19 +16,19 @@ export const offerConfig1: IOffer = {
     validTo: new Date(new Date().getTime() + 3600 * 1000 * 24).toISOString(),
     benefits: [
         {
-            name: 'Žárovka LED Lorem',
+            name: 'Žárovka LED 1',
             url: 'https://www.seznam.cz/',
         },
         {
-            name: 'Žárovka LED Lorem',
+            name: 'Žárovka LED 2',
             url: 'https://www.seznam.cz/',
         },
         {
-            name: 'Žárovka LED Lorem',
+            name: 'Žárovka LED 3',
             url: 'https://www.seznam.cz/',
         },
         {
-            name: 'Žárovka LED Lorem',
+            name: 'Žárovka LED 4',
             url: 'https://www.seznam.cz/',
         },
     ],
