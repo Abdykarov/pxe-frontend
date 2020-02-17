@@ -57,7 +57,7 @@ export const offerConfig1: IOffer = {
     unit: 'MWh',
     status: null,
     subject: null,
-    greenEnergy: false,
+    greenEnergy: true,
 };
 
 export const offerConfig2: IOffer = {
