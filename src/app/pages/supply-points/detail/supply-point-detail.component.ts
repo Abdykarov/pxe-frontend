@@ -240,6 +240,20 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
         this.globalError = [];
     }
 
+    public transferSupplyPoint = () => {
+        this.contractAction = ContractActions.TRANSFER_SUPPLY_POINT;
+        this.smsSent = null;
+        this.fieldError = {};
+        this.globalError = [];
+    }
+
+    public interruptAutomaticProlongation = () => {
+        this.contractAction = ContractActions.INTERRUPT_AUTOMATIC_PROLONGATION;
+        this.smsSent = null;
+        this.fieldError = {};
+        this.globalError = [];
+    }
+
     public saveDocument = (contractId: string, documentType: IDocumentType) => {
         this.documentLoading = true;
         this.globalError = [];
