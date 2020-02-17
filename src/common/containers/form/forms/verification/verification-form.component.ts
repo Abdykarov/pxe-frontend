@@ -1,6 +1,7 @@
 import {
     Component,
     Input,
+    OnChanges, SimpleChanges,
     TemplateRef,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
@@ -14,7 +15,7 @@ import { IContract } from 'src/common/graphql/models/contract';
     templateUrl: './verification-form.component.html',
     styleUrls: ['./verification-form.component.scss'],
 })
-export class VerificationFormComponent extends AbstractFormComponent {
+export class VerificationFormComponent extends AbstractFormComponent implements OnChanges {
     @Input()
     public smsSent: number = null;
 
@@ -34,7 +35,13 @@ export class VerificationFormComponent extends AbstractFormComponent {
     public infoTemplate: TemplateRef<any>;
 
     @Input()
+    public labelInput = 'Kód z SMS';
+
+    @Input()
     public submitLabelText = 'Podepsat smlouvu';
+
+    @Input()
+    public showDisabledInput = true;
 
     @Input()
     public showSentSmsLabelUnderFirstField = true;
@@ -51,6 +58,14 @@ export class VerificationFormComponent extends AbstractFormComponent {
         protected fb: FormBuilder,
     ) {
         super(fb);
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        super.ngOnChanges(changes);
+        if (this.form && changes.smsSent && changes.smsSent.currentValue !== changes.smsSent.previousValue) {
+            this.form.reset();
+            this.resetFormError(false);
+        }
     }
 
     public submitValidForm = () => {

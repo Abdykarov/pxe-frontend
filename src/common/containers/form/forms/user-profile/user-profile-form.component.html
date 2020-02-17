@@ -1,3 +1,9 @@
+<ng-template #confirmCodeInfoTemplate>
+    <div class="col-12 mb-4 small">
+        Pro ověření výše zadaného telefonního čísla vám byl zaslán ověřovací sms kód.
+    </div>
+</ng-template>
+
 <form
     [formGroup]="form"
     (keydown)="resetCustomFieldError()"
@@ -53,8 +59,6 @@
             </div>
         </div>
     </pxe-field-wrapper>
-
-
     <lnd-form-field
         [error]="formError.email || form.controls.email.errors"
         [formControl]="form.controls.email"
@@ -107,12 +111,20 @@
     </pxe-field-wrapper>
 
     <div class="text-center">
-        <lnd-button
-            type="primary"
-            [submit]="true"
-            (action)="submitForm($event)"
-            [isDisabled]="formLoading"
-            label="Uložit">
-        </lnd-button>
+        <pxe-verification-form
+            [showDisabledInput]="false"
+            sendSmsLabel="Uložit"
+            classMainWrapper="row justify-content-center"
+            [phone]="form | valueOfForm: ['phonePrefix','phone']"
+            [fieldError]="fieldError"
+            [formLoading]="formLoading"
+            [globalError]="globalError"
+            [smsSent]="smsSent"
+            submitLabelText="Uložit"
+            [infoTemplate]="confirmCodeInfoTemplate"
+            (submitAction)="processSaveButton($event)"
+            (customAction)="processSaveButton($event)"
+        >
+        ></pxe-verification-form>
     </div>
 </form>

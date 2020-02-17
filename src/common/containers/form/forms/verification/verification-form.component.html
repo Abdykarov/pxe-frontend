@@ -11,7 +11,8 @@
     (keydown.enter)="submitForm($event);false"
     (change)="resetCustomFieldError()">
     <div [ngClass]="classMainWrapper">
-        <div [ngClass]="classFirstField">
+        <div *ngIf="showDisabledInput || smsSent"
+             [ngClass]="classFirstField">
             <div class="form-container ml-0 ml-md-auto mr-md-0">
                 <lnd-form-field
                     label="Kód z SMS"

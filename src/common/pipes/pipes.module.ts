@@ -7,6 +7,7 @@ import { AllowProgressStepPipe } from 'src/common/pipes/allow-progress-step/allo
 import { CeilPipe } from 'src/common/pipes/ceil-number/simple-number.pipe';
 import { ConsumptionPipe } from './consumption/consumption.pipe';
 import { ConsumptionIndicatorPipe } from './consumption-indicator/consumption-indicator.pipe';
+import { ControlOfFormPipe } from 'src/common/pipes/control-of-form/control-of-form.pipe';
 import { DateDiffPipe } from './date-diff/date-diff.pipe';
 import { DynamicPipe } from './dynamic/dynamic.pipe';
 import { FilterCommodityTypePipe } from './filter-commodity-type/filter-commodity-type.pipe';
@@ -31,6 +32,7 @@ import { ValuesPipe } from './values/values.pipe';
         CeilPipe,
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
+        ControlOfFormPipe,
         DateDiffPipe,
         DynamicPipe,
         FilterCommodityTypePipe,
@@ -54,6 +56,7 @@ import { ValuesPipe } from './values/values.pipe';
         CeilPipe,
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
+        ControlOfFormPipe,
         DateDiffPipe,
         DynamicPipe,
         FilterCommodityTypePipe,
@@ -76,6 +79,7 @@ import { ValuesPipe } from './values/values.pipe';
         CeilPipe,
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
+        ControlOfFormPipe,
         DateDiffPipe,
         DecimalPipe,
         DynamicPipe,
