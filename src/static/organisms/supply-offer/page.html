@@ -1,13 +1,15 @@
 <ng-template #columnTemplateMarkAll>
     <lnd-form-field
         label="Označit vše"
+        customFormGroupClass="form-group form-group--alone"
         (click)="click($event)"
         [type]="'CHECKBOX'">
     </lnd-form-field>
 </ng-template>
 <ng-template #columnTemplateMark let-row="row">
     <lnd-form-field
-        label="&nbsp;"
+        label="&#8203;"
+        customFormGroupClass="form-group form-group--alone"
         (click)="click($event)"
         [type]="'CHECKBOX'">
     </lnd-form-field>

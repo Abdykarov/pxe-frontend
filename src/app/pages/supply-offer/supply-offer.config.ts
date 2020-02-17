@@ -7,9 +7,10 @@ import {
     DELIVERY_LENGTH_OPTIONS,
     SUBJECT_TYPE_OPTIONS,
 } from 'src/app/app.constants';
+import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { PluralPipe } from 'src/common/pipes/plurar/plural.pipe';
 import { IOfferTableRows } from './models/supply-offer.model';
-import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
 
 @Injectable({
     providedIn: 'root',
@@ -282,13 +283,14 @@ export class SupplyOfferConfig {
         };
     }
 
-    public confirmDeleteMarkedConfig = (numberOfOffers = 0): IShowModal => {
+    public confirmDeleteMarkedConfig = (numberOfOffers = 0, commodityType: CommodityType): IShowModal => {
         return {
             component: 'ConfirmModalComponent',
             modalType: this.confirmDeleteMarked,
             instanceData: {
                 confirmText:
-                    `Opravdu chcete odstranit ${numberOfOffers} ${this.pluralPipe.transform(numberOfOffers, 'offer_delete')} elektřiny?`,
+                    `Opravdu chcete odstranit ${numberOfOffers} ${this.pluralPipe.transform(numberOfOffers, 'offer_delete')}
+                        ${commodityType === CommodityType.GAS ? 'plynu' : 'elektřiny'}?`,
                 titleConfirm: 'ANO',
             },
         };

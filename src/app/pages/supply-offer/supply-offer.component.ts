@@ -69,15 +69,15 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public formValues = <IOffer>{};
     public globalError: string[] = [];
     public globalFormError: string[] = [];
+    private initRows: boolean;
     public loadingOffers = true;
     public numberOfDeletedOffers = 0;
-    public showDeletedOfferBanner = false;
     public numberOfMarked = 0;
+    public showDeletedOfferBanner = false;
     public tableRows: IOffer[] = [];
     public tableCols: ITableColumnConfig[] = [];
     public routePower = ROUTES.ROUTER_SUPPLY_OFFER_POWER;
     public routeGas = ROUTES.ROUTER_SUPPLY_OFFER_GAS;
-    private initRows: boolean;
 
     private commodityType$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
     private codeLists$: Observable<any> = this.supplyService.findCodelistsByTypes(CODE_LIST_TYPES, 'cs')
@@ -189,10 +189,18 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                             takeUntil(this.destroy$),
                         )
                         .subscribe(
-                            next => {
-                                this.numberOfDeletedOffers = next.length;
-                                this.numberOfMarked = this.numberOfMarked - next.length;
-                                this.showDeletedOfferBanner = true;
+                            (respones: []) => {
+                                let numberOfDeletedOffers = 0;
+                                R.forEach((response) => {
+                                    if (response.isError) {
+                                        this.globalError = [cantDeleteAllMarkedOffers];
+                                    } else {
+                                        numberOfDeletedOffers++;
+                                        this.showDeletedOfferBanner = true;
+                                    }
+                                })(respones);
+                                this.numberOfDeletedOffers = numberOfDeletedOffers;
+                                this.numberOfMarked = this.numberOfMarked - numberOfDeletedOffers;
                                 this.loadingOffers = false;
                                 this.cd.markForCheck();
                             },
@@ -255,6 +263,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public submitForm = (supplyOfferFormData: any, table = null, row = null) => {
+        this.showDeletedOfferBanner = false;
         this.formLoading = true;
         this.globalFormError = [];
         this.fieldError = {};
@@ -319,6 +328,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public cancel = (event, table = null, row = null) => {
+        this.showDeletedOfferBanner = false;
         if (table && row) {
             this.toggleRow(table, row);
         }
@@ -330,11 +340,13 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public deleteMarkedOffers = () => {
+        this.showDeletedOfferBanner = false;
         this.modalsService
             .showModal$.next(this.supplyOfferConfig.confirmDeleteMarkedConfig(this.numberOfMarked));
     }
 
     public markOne = (id: number, evt) => {
+        this.showDeletedOfferBanner = false;
         evt.preventDefault();
         evt.cancelBubble = false;
         this.showDeletedOfferBanner = false;
@@ -342,6 +354,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public markAll = (evt) => {
+        this.showDeletedOfferBanner = false;
         evt.preventDefault();
         evt.cancelBubble = false;
         this.showDeletedOfferBanner = false;

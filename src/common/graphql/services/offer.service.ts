@@ -60,12 +60,14 @@ export class OfferService {
             },
             update: (cache, {data}) => {
                 const offers: any = cache.readQuery({ query: findSupplierOffersQuery });
+                const createdOffer: IOffer = data.savePowerOffer;
+                createdOffer.marked = false;
                 cache.writeQuery({
                     query: findSupplierOffersQuery,
                     data: {
                         findSupplierOffers: [
                             ...offers.findSupplierOffers,
-                            data.savePowerOffer,
+                            createdOffer,
                         ],
                     },
                 });
@@ -81,12 +83,14 @@ export class OfferService {
             },
             update: (cache, {data}) => {
                 const offers: any = cache.readQuery({ query: findSupplierOffersQuery });
+                const createdOffer: IOffer = data.saveGasOffer;
+                createdOffer.marked = false;
                 cache.writeQuery({
                     query: findSupplierOffersQuery,
                     data: {
                         findSupplierOffers: [
                             ...offers.findSupplierOffers,
-                            data.saveGasOffer,
+                            createdOffer,
                         ],
                     },
                 });
@@ -142,9 +146,9 @@ export class OfferService {
         const offers: any = client.readQuery({ query: findSupplierOffersQuery });
         let numberOfMarked = 0;
         const markedOffers = R.map((offer: IOffer) => {
-            offer.marked = mark;
             if (offer.commodityType === commodityType) {
                 numberOfMarked++;
+                offer.marked = mark;
             }
             return offer;
         }, offers.findSupplierOffers);
