@@ -52,4 +52,14 @@ export const config: ISupplierLogo[] = [
         width: 54,
         typeCommodity: TypeCommodity.BOTH,
     },
+    {
+        alt: 'logo - Pražská plynárenská a.s.',
+        logoUrl: '/assets/images/suppliers/logo_prazska-plynarenska-hover.svg',
+        logoUrlHover: '/assets/images/suppliers/logo_prazska-plynarenska-hover.svg',
+        supplierUrl: '',
+        size: 'xl',
+        title: 'Pražská plynárenská a.s.',
+        width: 134,
+        typeCommodity: TypeCommodity.BOTH,
+    },
 ];

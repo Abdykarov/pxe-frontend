@@ -2,6 +2,10 @@ import {
     Component,
     ChangeDetectorRef,
 } from '@angular/core';
+import {
+    Meta,
+    Title,
+} from '@angular/platform-browser';
 
 import { Apollo } from 'apollo-angular';
 
@@ -9,6 +13,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CONSTS,
     ROUTES,
+    SEO,
 } from 'src/app/app.constants';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import {
@@ -35,10 +40,25 @@ export class SignUpComponent extends AbstractComponent {
     constructor(
         private apollo: Apollo,
         private cd: ChangeDetectorRef,
+        private metaService: Meta,
         private registrationService: RegistrationService,
         private router: Router,
+        private titleService: Title,
     ) {
         super();
+        this.titleService.setTitle(CONSTS.TITLES.SIGN_UP);
+        this.metaService.updateTag({
+            name: 'description',
+            content: SEO.META_DESCRIPTION.SIGN_UP,
+        });
+        this.metaService.updateTag({
+            name: 'keywords',
+            content: [
+                ...SEO.META_KEYWORDS.LANDING_PAGE,
+                ...SEO.META_KEYWORDS.SIGN_UP,
+            ].toString(),
+        });
+
         this.formFields = createRegistrationFormFields(SignUpType.SignUp);
     }
 
