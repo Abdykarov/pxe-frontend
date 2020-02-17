@@ -88,10 +88,6 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         }
         this.resetCustomFieldError();
         this.triggerValidation();
-        console.log('    public submitForm = (event = null) => ');
-        console.log(this.form.valid);
-        console.log(this.form.getRawValue());
-        console.log(this.form.errors);
         if (this.form.valid) {
             this.submitValidForm();
         }
