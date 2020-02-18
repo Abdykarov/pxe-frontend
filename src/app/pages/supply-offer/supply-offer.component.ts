@@ -338,11 +338,11 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         table.selectRow(row);
     }
 
-    public deleteMarkedOffers = () => {
-        this.showDeletedOfferBanner = false;
-        this.modalsService
-            .showModal$.next(this.supplyOfferConfig.confirmDeleteMarkedConfig(this.numberOfMarked));
-    }
+    // public deleteMarkedOffers = () => {
+    //     this.showDeletedOfferBanner = false;
+    //     this.modalsService
+    //         .showModal$.next(this.supplyOfferConfig.confirmDeleteMarkedConfig(this.numberOfMarked));
+    // }
 
     public markOne = (id: number, evt) => {
         this.showDeletedOfferBanner = false;

@@ -1,7 +1,7 @@
 <ng-template #columnTemplateMarkAll>
     <lnd-form-field
         label="Označit vše"
-        customFormGroupClass="form-group form-group--alone"
+        customFormGroupClass="form-group form-group--in-table"
         (click)="click($event)"
         [type]="'CHECKBOX'">
     </lnd-form-field>
@@ -9,7 +9,7 @@
 <ng-template #columnTemplateMark let-row="row">
     <lnd-form-field
         label="&#8203;"
-        customFormGroupClass="form-group form-group--alone"
+        customFormGroupClass="form-group form-group--in-table"
         (click)="click($event)"
         [type]="'CHECKBOX'">
     </lnd-form-field>
@@ -323,6 +323,19 @@
                 </ul>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-12 col-lg-10 offset-lg-1">
+                <lnd-button
+                    label="Odstranit nabídky"
+                    type="link-danger"
+                    icon="icon--bin"
+                    iconPosition="left"
+                    customIconClass="icon--small">
+                </lnd-button>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-12 col-lg-10 offset-lg-1">
                 <lnd-table
