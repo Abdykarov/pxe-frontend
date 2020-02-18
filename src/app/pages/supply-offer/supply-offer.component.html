@@ -1,6 +1,6 @@
 <ng-template #columnTemplateMarkAll>
     <lnd-form-field
-        customFormGroupClass="form-group form-group--alone"
+        customFormGroupClass="form-group form-group--in-table"
         label="Označit vše"
         [value]="tableRows.length === numberOfMarked"
         (click)="markAll($event)"
@@ -10,7 +10,7 @@
 <ng-template #columnTemplateMark let-row="row">
     <lnd-form-field
         label="&#8203;"
-        customFormGroupClass="form-group form-group--alone"
+        customFormGroupClass="form-group form-group--in-table"
         [value]="!!row.marked"
         (click)="markOne(row.id,$event)"
         [type]="'CHECKBOX'">

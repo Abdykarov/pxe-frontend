@@ -337,7 +337,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         table.openRow(row);
         table.selectRow(row);
     }
-
+    
     public deleteMarkedOffers = () => {
         this.showDeletedOfferBanner = false;
         this.modalsService
