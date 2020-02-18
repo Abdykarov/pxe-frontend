@@ -7,10 +7,10 @@ import {
     DELIVERY_LENGTH_OPTIONS,
     SUBJECT_TYPE_OPTIONS,
 } from 'src/app/app.constants';
-import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
-import { PluralPipe } from 'src/common/pipes/plurar/plural.pipe';
 import { IOfferTableRows } from './models/supply-offer.model';
+import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
+import { PluralPipe } from 'src/common/pipes/plurar/plural.pipe';
 
 @Injectable({
     providedIn: 'root',
