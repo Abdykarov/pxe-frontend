@@ -146,7 +146,7 @@ export class OfferService {
         const offers: any = client.readQuery({ query: findSupplierOffersQuery });
         let numberOfMarked = 0;
         const markedOffers = R.map((offer: IOffer) => {
-            if (offer.commodityType === commodityType) {
+            if (offer.commodityType === commodityType && offer.status === IOfferStatus.ACTIVE) {
                 numberOfMarked++;
                 offer.marked = mark;
             }
