@@ -18,22 +18,25 @@ import {
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import { CONSTS } from 'src/app/app.constants';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import {
     defaultErrorMessage,
     importErrorCodes,
 } from 'src/common/constants/errors.constant';
+import {
+    FILE_UPLOAD_CONFIG,
+    FileUploadService,
+} from 'src/app/services/file-upload.service';
 import { fileUploaderOptions } from 'src/app/pages/import/upload/upload.config';
-import { FILE_UPLOAD_CONFIG, FileUploadService } from 'src/app/services/file-upload.service';
-import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import {
     getConfigStepper,
     inArray,
     TypeStepper,
 } from 'src/common/utils';
 import { ImportProgressStep } from 'src/app/pages/import/import.model';
-
+// add refresh atd...
 @Component({
     selector: 'pxe-upload',
     templateUrl: './upload.component.html',
@@ -49,17 +52,12 @@ import { ImportProgressStep } from 'src/app/pages/import/import.model';
 export class UploadComponent extends AbstractComponent implements OnInit {
     public readonly configStepper = getConfigStepper(ImportProgressStep.UPLOAD, false, TypeStepper.IMPORT);
     public readonly listOfErrorsHeaderText = 'Seznam chyb';
-    public fileErrors: string[] = [];
-    public tryToUploadFile = false;
     public bannerTypeImages = BannerTypeImages;
-    public listOfErrors = [
-        'Řádek 1, buňka D (distribuční sazba): pole je vyplněno, ale hodnota není správná',
-        'Řádek 1, buňka F (cena za VF): pole není vyplněno',
-        'Řádek 2, buňka D (distribuční sazba): pole je vyplněno, ale hodnota není správná',
-        'Řádek 2, buňka F (cena za VF): pole není vyplněno',
-    ];
-
     public commodityType = CommodityType.POWER;
+    public fileErrors: string[] = [];
+    public isInitState = true;
+    public listOfErrors = [];
+    public tryToUploadFile = false;
 
     constructor (
         private fileUploadService: FileUploadService,
@@ -84,7 +82,7 @@ export class UploadComponent extends AbstractComponent implements OnInit {
         this.fileUploadService.fileUploader.onAfterAddingFile = (fileItem: FileItem) => {
             const fileName = fileItem._file.name;
             const type = fileName.substr(fileName.lastIndexOf('.') + 1);
-            if (!inArray(type, CONSTS.ALLOWED_TYOE_OF_IMPORT_FILES)) {
+            if (!inArray(type, CONSTS.ALLOWED_TYPE_OF_IMPORT_FILES)) {
                 this.fileUploadService.fileUploader.queue = [];
                 this.fileErrors = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.FILE_TYPE]];
                 this.tryToUploadFile = false;
@@ -94,14 +92,29 @@ export class UploadComponent extends AbstractComponent implements OnInit {
         };
 
         this.fileUploadService.fileUploader.onCompleteItem = (item, response, status, header) => {
-            console.log('onCompleteItem');
+            if (status === 200) {
+                this.isInitState = false;
+                this.listOfErrors = [
+                    'Řádek 1, buňka D (distribuční sazba): pole je vyplněno, ale hodnota není správná',
+                    'Řádek 1, buňka F (cena za VF): pole není vyplněno',
+                    'Řádek 2, buňka D (distribuční sazba): pole je vyplněno, ale hodnota není správná',
+                    'Řádek 2, buňka F (cena za VF): pole není vyplněno',
+                ];
+                this.fileUploadService.fileUploader.clearQueue();
+            } else if (status === 401) {
+            } else {
+                this.isInitState = false;
+                this.fileUploadService.fileUploader.clearQueue();
+            }
+            // console.log(item);
+            // console.log(response);
+            // console.log(status);
+            // console.log(header);
         };
 
     }
 
     uploadFile = (file: FileUploader) => {
-        console.log('tryToUploadFile2');
-        console.log(this.tryToUploadFile);
         if (!this.tryToUploadFile) {
             return;
         }

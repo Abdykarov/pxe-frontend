@@ -6,10 +6,6 @@ import { ImportProgressStep } from 'src/app/pages/import/import.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
-export enum TypeStepper {
-    IMPORT, REQUEST,
-}
-
 const stepsImport: IStepperProgressItem[] = [
     {
         step: ImportProgressStep.UPLOAD,
@@ -104,3 +100,7 @@ export const getConfigStepper = (
         ),
     )(getSteps(typeStepper));
 };
+
+export enum TypeStepper {
+    IMPORT, REQUEST,
+}

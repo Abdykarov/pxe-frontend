@@ -8,7 +8,7 @@ import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
-    ALLOWED_TYOE_OF_IMPORT_FILES: ['csv'],
+    ALLOWED_TYPE_OF_IMPORT_FILES: ['csv'],
     CURRENCY: {
         DEFAULT: 'CZK',
     },
@@ -22,6 +22,7 @@ export const CONSTS = {
         FILE_TYPE: 'FILE_TYPE',
         MAX_NUMBER_OF_FILES: 'MAX_NUMBER_OF_FILES',
     },
+    IMPORT_OFFERS_TYPE: 'text/csv',
     INTERVAL_RXJS: 5000,
     LOGIN_FORM_NAME: 'login',
     MONTH_DURATION: 30,

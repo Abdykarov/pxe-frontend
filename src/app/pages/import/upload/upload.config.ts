@@ -1,7 +1,10 @@
 import { FileUploaderOptions } from 'ng2-file-upload';
 
+import { environment } from 'src/environments/environment';
+
 export const fileUploaderOptions: FileUploaderOptions = {
-    url: 'ahoj url',
+    url: `${environment.url_api}/v1.0/offer/batch-import`,
+    method: 'POST',
     disableMultipart: true,
     formatDataFunctionIsAsync: true,
     formatDataFunction: async (item) => {
@@ -9,10 +12,8 @@ export const fileUploaderOptions: FileUploaderOptions = {
             resolve({
                     name: item._file.name,
                     length: item._file.size,
-                    contentType: item._file.type,
                     date: new Date(),
                 });
             });
         },
 };
-
