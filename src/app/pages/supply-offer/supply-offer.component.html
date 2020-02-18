@@ -8,16 +8,18 @@
     </lnd-form-field>
 </ng-template>
 <ng-template #columnTemplateMark let-row="row">
-    <lnd-form-field
-        label="&#8203;"
-        customFormGroupClass="form-group form-group--alone"
-        [value]="!!row.marked"
-        (click)="markOne(row.id,$event)"
-        [type]="'CHECKBOX'">
-    </lnd-form-field>
-    <span *ngIf="row.greenEnergy"
-          class="icon icon--arrow-natural">
-    </span>
+    <div class="d-flex justify-content-start pr-3">
+        <lnd-form-field
+            label="&#8203;"
+            customFormGroupClass="form-group form-group--alone"
+            [value]="!!row.marked"
+            (click)="markOne(row.id,$event)"
+            [type]="'CHECKBOX'">
+        </lnd-form-field>
+        <span *ngIf="row.greenEnergy"
+            class="icon icon--leaf icon--green ml-auto">
+        </span>
+    </div>
 </ng-template>
 <ng-template #columnTemplatePriceVT let-row="row">
     {{row.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
