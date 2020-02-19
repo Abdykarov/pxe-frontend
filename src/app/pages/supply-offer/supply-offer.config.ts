@@ -36,6 +36,16 @@ export class SupplyOfferConfig {
                 ],
             },
             {
+                label: 'Název produktu',
+                views: [
+                    {
+                        headingClass: ['product-name-min-width'],
+                        cellClass: ['text-break'],
+                        content: (row) => `${row.name}`,
+                    },
+                ],
+            },
+            {
                 label: 'Odběratel',
                 views: [
                     {

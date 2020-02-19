@@ -1,23 +1,21 @@
 <ng-template #columnTemplateMarkAll>
     <lnd-form-field
         label="Označit vše"
-        customFormGroupClass="form-group form-group--alone"
+        customFormGroupClass="form-group form-group--in-table"
         (click)="click($event)"
         [type]="'CHECKBOX'">
     </lnd-form-field>
 </ng-template>
 <ng-template #columnTemplateMark let-row="row">
-    <div class="d-flex justify-content-start pr-3">
-        <lnd-form-field
-            label="&#8203;"
-            customFormGroupClass="form-group form-group--alone"
-            (click)="click($event)"
-            [type]="'CHECKBOX'">
-        </lnd-form-field>
-        <span *ngIf="row.greenEnergy"
-            class="icon icon--leaf icon--green ml-auto">
+    <lnd-form-field
+        label="&#8203;"
+        customFormGroupClass="form-group form-group--in-table"
+        (click)="click($event)"
+        [type]="'CHECKBOX'">
+    </lnd-form-field>
+    <span *ngIf="row.greenEnergy"
+          class="icon icon--leaf icon--green ml-auto">
         </span>
-    </div>
 </ng-template>
 <ng-template #columnTemplatePriceVT let-row="row">
     {{row.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
@@ -334,6 +332,17 @@
                         </a>
                     </li>
                 </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-10 offset-lg-1">
+                <lnd-button
+                    label="Odstranit nabídky"
+                    type="link-danger"
+                    icon="icon--bin"
+                    iconPosition="left"
+                    customIconClass="icon--small">
+                </lnd-button>
             </div>
         </div>
         <div class="row">

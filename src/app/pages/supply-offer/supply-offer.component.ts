@@ -69,7 +69,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public formValues = <IOffer>{};
     public globalError: string[] = [];
     public globalFormError: string[] = [];
-    private initRows: boolean;
+    private initRows = false;
     public loadingOffers = true;
     public numberOfDeletedOffers = 0;
     public numberOfMarked = 0;
@@ -189,7 +189,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                             takeUntil(this.destroy$),
                         )
                         .subscribe(
-                            (respones: []) => {
+                            (respones: any[]) => {
                                 let numberOfDeletedOffers = 0;
                                 R.forEach((response) => {
                                     if (response.isError) {
