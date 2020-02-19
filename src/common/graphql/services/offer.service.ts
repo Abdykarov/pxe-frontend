@@ -59,14 +59,14 @@ export class OfferService {
                 powerAttributes,
             },
             update: (cache, {data}) => {
-                const offers: any = cache.readQuery({ query: findSupplierOffersQuery });
+                const { findSupplierOffers: offers } = cache.readQuery({ query: findSupplierOffersQuery });
                 const createdOffer: IOffer = data.savePowerOffer;
                 createdOffer.marked = false;
                 cache.writeQuery({
                     query: findSupplierOffersQuery,
                     data: {
                         findSupplierOffers: [
-                            ...offers.findSupplierOffers,
+                            ...offers,
                             createdOffer,
                         ],
                     },
@@ -82,14 +82,14 @@ export class OfferService {
                 gasAttributes,
             },
             update: (cache, {data}) => {
-                const offers: any = cache.readQuery({ query: findSupplierOffersQuery });
+                const { findSupplierOffers: offers } = cache.readQuery({ query: findSupplierOffersQuery });
                 const createdOffer: IOffer = data.saveGasOffer;
                 createdOffer.marked = false;
                 cache.writeQuery({
                     query: findSupplierOffersQuery,
                     data: {
                         findSupplierOffers: [
-                            ...offers.findSupplierOffers,
+                            ...offers,
                             createdOffer,
                         ],
                     },
@@ -124,13 +124,13 @@ export class OfferService {
                 offerId,
             },
             update: (cache, {data}) => {
-                const offers: any = cache.readQuery({ query: findSupplierOffersQuery });
+                const { findSupplierOffers: offers } = cache.readQuery({ query: findSupplierOffersQuery });
                 const updatedData = R.map(offer => {
                     if (offer.id === data.deleteOffer.toString()) {
                         offer.status = IOfferStatus.DELETED;
                     }
                     return offer;
-                })(offers.findSupplierOffers);
+                })(offers);
                 cache.writeQuery({
                     query: findSupplierOffersQuery,
                     data: {
@@ -143,7 +143,7 @@ export class OfferService {
 
     public markAll = (mark: boolean, commodityType: CommodityType): number => {
         const client = this.apollo.getClient();
-        const offers: any = client.readQuery({ query: findSupplierOffersQuery });
+        const { findSupplierOffers: offers } = client.readQuery({ query: findSupplierOffersQuery });
         let numberOfMarked = 0;
         const markedOffers = R.map((offer: IOffer) => {
             if (offer.commodityType === commodityType && offer.status === IOfferStatus.ACTIVE) {
@@ -151,7 +151,7 @@ export class OfferService {
                 offer.marked = mark;
             }
             return offer;
-        }, offers.findSupplierOffers);
+        }, offers);
         client.writeQuery({
             query: findSupplierOffersQuery,
             data: {
@@ -164,7 +164,7 @@ export class OfferService {
     public markOne = (id: number, commodityType: CommodityType): number => {
         let numberOfMarked = 0;
         const client = this.apollo.getClient();
-        const offers: any = client.readQuery({ query: findSupplierOffersQuery });
+        const { findSupplierOffers: offers } = client.readQuery({ query: findSupplierOffersQuery });
         const updatedOffers = R.map((offer: IOffer) => {
             if (offer.id === id) {
                 offer.marked = !offer.marked;
@@ -173,7 +173,7 @@ export class OfferService {
                 numberOfMarked++;
             }
             return offer;
-        }, offers.findSupplierOffers);
+        }, offers);
         client.writeQuery({
             query: findSupplierOffersQuery,
             data: {
@@ -185,7 +185,7 @@ export class OfferService {
 
     public deleteMarkedOffer = (commodityType: CommodityType): Observable<any>[] => {
         const client = this.apollo.getClient();
-        const offers: any = client.readQuery({ query: findSupplierOffersQuery });
+        const { findSupplierOffers: offers } = client.readQuery({ query: findSupplierOffersQuery });
         const offerObservableForDelete = [];
         R.map((offer: IOffer) => {
             if (offer.marked && offer.status === IOfferStatus.ACTIVE && commodityType === offer.commodityType) {
@@ -196,7 +196,7 @@ export class OfferService {
                         ),
                 );
             }
-        }, offers.findSupplierOffers);
+        }, offers);
         return offerObservableForDelete;
     }
 }
