@@ -1,7 +1,7 @@
 <ng-template #columnTemplateMarkAll>
     <lnd-form-field
         customFormGroupClass="form-group form-group--in-table"
-        label="Označit vše"
+        label="Označit"
         [value]="tableRows.length === numberOfMarked"
         (click)="markAll($event)"
         [type]="'CHECKBOX'">
@@ -192,31 +192,23 @@
             [hidden]="loadingOffers || tableRows.length === 0">
             <div class="row">
                 <div class="col-12">
-                    <lnd-banner-ui
-                        *ngIf="showDeletedOfferBanner"
-                        icon="icon--icon"
-                        [showButtonLabel]="false"
-                        [data]="{
-                            text: 'Odstranili jste ' + numberOfDeletedOffers + ' ' + (numberOfDeletedOffers | plural: 'offer_delete') + '.'
-                        }"
-                    ></lnd-banner-ui>
-                    <ng-container *ngIf="numberOfMarked >= 1">
-                        <lnd-banner-ui
-                            icon="icon--info"
-                            [showButtonLabel]="false"
-                            [data]="{
-                                text: 'Počet označených nabídek: ' + numberOfMarked
-                            }"
-                        ></lnd-banner-ui>
-                        <lnd-button
-                            label="Odstranit nabídky"
-                            type="icon"
-                            variant="icon"
-                            icon="icon--delete"
-                            customClass="ml-2"
-                            (action)="deleteMarkedOffers()"
-                        ></lnd-button>
-                    </ng-container>
+                    <lnd-alert *ngIf="showDeletedOfferBanner"
+                               type="info">
+                        Odstranili jste {{numberOfDeletedOffers}} {{(numberOfDeletedOffers | plural: 'offer_delete')}}.
+                    </lnd-alert>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1">
+                    <lnd-button
+                        [isDisabled]="!numberOfMarked"
+                        label="Odstranit"
+                        type="warning"
+                        (action)="deleteMarkedOffers()"
+                    ></lnd-button>
+                </div>
+                <div class="col-lg-10 text-center">
+                    Počet označených nabídek: {{numberOfMarked}}
                 </div>
             </div>
             <lnd-table
@@ -229,6 +221,7 @@
                 [tableClass]="['table--advanced', 'mb-0']"
                 [rowDetailTemplate]="rowDetail"
                 [actionColTriggersDetail]="true"
+                [whiteBackgroundPropertyCondition]="'marked'"
                 [columnTemplates]="{
                     actionColumnTemplate: actionColumnTemplate,
                     columnTemplatePriceVT: columnTemplatePriceVT,

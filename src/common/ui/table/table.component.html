@@ -40,6 +40,7 @@
     <tbody [ngClass]="desktopLayoutClasses">
         <ng-container *ngFor="let row of rows">
             <tr
+                [class.table__tr--main__white-background]="whiteBackgroundPropertyCondition && row[whiteBackgroundPropertyCondition]"
                 [class.table__tr--main]="isAdvanced"
                 [class.table__tr--active]="isAdvanced && openedRow === row"
                 (click)="!actionColTriggersDetail && openRow(row); !actionColTriggersDetail && selectRow(row)"

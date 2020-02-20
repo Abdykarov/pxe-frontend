@@ -1,6 +1,6 @@
 <ng-template #columnTemplateMarkAll>
     <lnd-form-field
-        label="Označit vše"
+        label="Označit"
         customFormGroupClass="form-group form-group--in-table"
         (click)="click($event)"
         [type]="'CHECKBOX'">
@@ -336,17 +336,19 @@
         </div>
         <div class="row">
             <div class="col-12 col-lg-10 offset-lg-1">
-                <lnd-button
-                    label="Odstranit nabídky"
-                    type="link-danger"
-                    icon="icon--bin"
-                    iconPosition="left"
-                    customIconClass="icon--small">
-                </lnd-button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-lg-10 offset-lg-1">
+                <div class="row">
+                    <div class="col-lg-1">
+                        <lnd-button
+                            [isDisabled]="true"
+                            label="Odstranit"
+                            type="warning"
+                            (action)="click($event)"
+                        ></lnd-button>
+                    </div>
+                    <div class="col-lg-10 text-center">
+                        Počet označených nabídek: 0
+                    </div>
+                </div>
                 <lnd-table
                     #table
                     [cols]="supplyOfferConfig.tableCols[commodityType]"

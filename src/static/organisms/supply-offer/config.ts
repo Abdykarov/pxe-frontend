@@ -18,7 +18,7 @@ export class SupplyOfferOrganismConfig {
     public tableCols = {
         POWER: [
             {
-                label: 'Označit vše',
+                label: 'Označit',
                 contentTemplateHeaderName: 'columnTemplateMarkAll',
                 views: [
                     {

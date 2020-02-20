@@ -27,7 +27,7 @@ export class SupplyOfferConfig {
     public tableCols = (codeLists): IOfferTableRows => ({
         POWER: [
             {
-                label: 'Označit vše',
+                label: 'Označit',
                 contentTemplateHeaderName: 'columnTemplateMarkAll',
                 views: [
                     {
@@ -160,7 +160,7 @@ export class SupplyOfferConfig {
         ],
         GAS: [
             {
-                label: 'Označit vše',
+                label: 'Označit',
                 contentTemplateHeaderName: 'columnTemplateMarkAll',
                 views: [
                     {
