@@ -1,7 +1,7 @@
 <ng-template #benefitContentTemplate let-data>
     K téhle nabídce od PRE získáte benfit {{data.name}}.
     Více informaci o benefitu naleznete v obchodních podmínkách
-    <a (click)="goToLink(data.url)">zde</a>.
+    <a [href]="data.url" target="_blank">zde</a>.
 </ng-template>
 
 <div class="supply-point-offer"

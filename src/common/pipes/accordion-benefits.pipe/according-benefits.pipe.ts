@@ -5,8 +5,8 @@ import {
 
 import * as R from 'ramda';
 
-import { IBenefit } from 'src/common/graphql/models/offer.model';
 import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
+import { IBenefit } from 'src/common/graphql/models/offer.model';
 
 @Pipe({
     name: 'accordionBenefits',
