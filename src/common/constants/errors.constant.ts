@@ -8,6 +8,25 @@ export const importErrorCodes = {
     [CONSTS.IMPORT_ERROR_CODES.NO_OFFERS_IN_IMPORT]: 'Pro zvolenou komoditu nebyl nalezen žádný záznam.',
 };
 
+export const defaultErrorMessageViolation  = 'Neznáma chyba.';
+
+export const importErrorViolations = {
+    'must-not-be-blank': 'Nesmí být prázdný.',
+    'distribution-rate-is-required': 'Povinný atribut.',
+    'circuit-breaker-is-required': 'Povinný atribut.',
+    'phase-is-required': 'Povinný atribut.',
+    'annual-consumption-must-be-positive-number': 'Povinný atribut.',
+    'price-must-be-positive-number': 'Povinný atribut.',
+    'price-vt-must-be-positive-number': 'Povinný atribut.',
+    'price-nt-must-be-positive-number': 'Povinný atribut.',
+    'permanent-price-must-be-positive-number': 'Povinný atribut.',
+    'mustNotBeBlank': 'Nesmí být prázdný.',
+    'mustNotBeEmpty': 'Nesmí být prázdný.',
+    'mustNotBeNull': 'Nesmí být prázdný.',
+    'annual-consumption-is-required': 'Povinný',
+    'invalidOffer': 'Neplatný číselník',
+};
+
 export const restAPIErrorCodes = {
     'CLI0001': 'Špatné přihlašovací údaje.',
     'VAL00001': 'Vyplněný kód se neshoduje s kódem, který vám přišel v SMS.',

@@ -34,12 +34,16 @@ import {
     FileUploader,
 } from 'src/common/utils/file-upload';
 import { fileUploaderFactory } from 'src/app/pages/import/upload/upload.config';
-import { ImportProgressStep } from 'src/app/pages/import/import.model';
 import {
     getConfigStepper,
     inArray,
+    parseViolation,
     TypeStepper,
 } from 'src/common/utils';
+import {
+    ImportProgressStep,
+    IOfferImportInput,
+} from 'src/app/pages/import/import.model';
 
 @Component({
     selector: 'pxe-upload',
@@ -108,12 +112,19 @@ export class UploadComponent extends AbstractComponent implements OnInit {
             if (status === 200) {
                 const allOffers = JSON.parse(response);
 
+                let i = 1;
                 const offersWithGoodCommodity = R.filter(({offerInput}) => {
+                    offerInput.line = i;
+                    i++;
                     if (this.commodityType === CommodityType.POWER) {
                         return offerInput.powerAttributes;
                     }
                     return offerInput.gasAttributes;
                 })(allOffers);
+
+                if (this.analyzeErrorsViolations(offersWithGoodCommodity)) {
+                    return;
+                }
 
                 if (!offersWithGoodCommodity.length) {
                     this.globalError = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.NO_OFFERS_IN_IMPORT]];
@@ -142,12 +153,6 @@ export class UploadComponent extends AbstractComponent implements OnInit {
                 this.globalError = [defaultErrorMessage];
                 this.fileUploader.clearQueue();
             }
-
-            this.authService.refreshToken()
-                .pipe(
-                    takeUntil(this.destroy$),
-                )
-                .subscribe();
             this.cd.markForCheck();
         };
 
@@ -176,5 +181,21 @@ export class UploadComponent extends AbstractComponent implements OnInit {
         if (isPlatformBrowser(this.platformId)) {
             window.open('/assets/csv/example-import-offers.csv');
         }
+    }
+
+    public analyzeErrorsViolations = (offersImportInput: IOfferImportInput[]): boolean => {
+        this.listOfErrors = R.reduce((listOfErrors: string[], offerImportInput: IOfferImportInput) => {
+            if (offerImportInput.violations.length) {
+                R.forEach((violation: string) => {
+                    listOfErrors.push(`Řádek ${offerImportInput.offerInput.line}: ${parseViolation(violation)}`);
+                })(offerImportInput.violations);
+            }
+            return listOfErrors;
+        }, [], offersImportInput);
+
+        this.isInitState = true;
+        this.fileUploader.clearQueue();
+        this.cd.markForCheck();
+        return !!this.listOfErrors.length;
     }
 }

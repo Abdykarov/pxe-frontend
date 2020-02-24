@@ -160,7 +160,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
 
     public setNumberOfDuplicateOffers = () => {
         this.numberOfDuplicateOffers = R.reduce((sum: number, offerImportInput: IOfferImportInput) => {
-            return (offerImportInput.duplicity ? ++sum : ++sum);
+            return (offerImportInput.duplicity ? ++sum : sum);
         }, 0, this.tableRows);
     }
 }
