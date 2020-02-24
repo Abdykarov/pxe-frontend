@@ -84,6 +84,13 @@ export class PluralPipe implements PipeTransform {
             '=4' : 'nové nabídky',
             'other' : 'nových nabídek',
         },
+        'duplicity' : {
+            '=1' : 'duplicitu',
+            '=2' : 'duplicity',
+            '=3' : 'duplicity',
+            '=4' : 'duplicity',
+            'other' : 'diplicit',
+        },
     };
 
     constructor(

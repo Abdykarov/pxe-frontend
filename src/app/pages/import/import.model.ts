@@ -14,4 +14,5 @@ export enum ImportProgressStep {
 export interface IOfferImportInput {
     offerInput: IOfferInput;
     duplicity: boolean;
+    violations: string[];
 }

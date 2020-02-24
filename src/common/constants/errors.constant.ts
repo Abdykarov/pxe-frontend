@@ -5,6 +5,7 @@ export const defaultErrorMessage = 'Došlo k chybě. Zkuste to později.';
 export const importErrorCodes = {
     [CONSTS.IMPORT_ERROR_CODES.FILE_TYPE]: 'Vložit můžete pouze csv formát.',
     [CONSTS.IMPORT_ERROR_CODES.MAX_NUMBER_OF_FILES]: 'Vložit můžeze pouze jeden soubor.',
+    [CONSTS.IMPORT_ERROR_CODES.NO_OFFERS_IN_IMPORT]: 'Pro zvolenou komoditu nebyl nalezen žádný záznam.',
 };
 
 export const restAPIErrorCodes = {
@@ -23,7 +24,6 @@ export const graphQLMessages = {
     unknownSupplyPoint: 'Hledané odběrné místo neexistuje nebo pro přístup k němu nemáte oprávnění.',
     noActiveAccountAvailable: 'Ucet nelze smazat, protoze neexistuje.',
     forbiddenUpdateOfSupplyPoint: 'Omlouváme se, ale toto odběrné místo není možné nyní upravit. Zkuste to prosím znovu později.',
-    noOffersInImport: 'Pro zvolenou komoditu nebyl nalezen žádný záznam.',
 };
 
 export const offerValidityMessages = {

@@ -1,4 +1,3 @@
-import { isPlatformBrowser } from '@angular/common';
 import {
     ActivatedRoute,
     Router,
@@ -10,6 +9,7 @@ import {
     OnInit,
     PLATFORM_ID,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
@@ -26,9 +26,11 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import {
     CODE_LIST_TYPES,
-    commodityTypes, CONSTS,
+    commodityTypes,
+    CONSTS,
     ROUTES,
 } from 'src/app/app.constants';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
@@ -60,9 +62,10 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     ],
 })
 export class SupplyOfferComponent extends AbstractComponent implements OnInit {
-    public bannerTitle = 'Nemáte žádnou nabídku elektřiny.';
-    public bannerDescription = 'Proveďte import nabídek nahráním excelovské tabulky, nebo přidejte nabídku ručně.';
-    public buttonLabel = 'Import nabídek';
+    public readonly bannerTypeImages = BannerTypeImages;
+    public readonly bannerTitle = 'Nemáte žádnou nabídku elektřiny.';
+    public readonly bannerDescription = 'Proveďte import nabídek nahráním CSV souboru, nebo přidejte nabídku ručně.';
+    public readonly buttonLabel = 'Import nabídek';
     public commodityType = CommodityType.POWER;
     public currentOfferFormValues = {};
     public deleteDisabled: boolean[] = [];

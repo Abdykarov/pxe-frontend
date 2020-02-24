@@ -25,9 +25,9 @@ export const fileUploaderFactory = (authService: AuthService): FileUploader => {
             },
         ],
         formatDataFunction: async (item) => {
-            const text = await item._file.text();
+            const csvContent = await item._file.text();
             return new Promise( (resolve, reject) => {
-                resolve(text);
+                resolve(csvContent);
             });
         },
     });

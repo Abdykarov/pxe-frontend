@@ -46,6 +46,7 @@
         </lnd-alert>
         <div class="mt-5">
             <lnd-info-banner
+                *ngIf="!offerDeleted"
                 bannerTitle="Úspěšně jsme nahráli {{tableRows.length}} nové nabídky. <br /> Po schválení se nabídky zobrazí vašim zákazníkům."
                 [showButton]="false"
                 [bannerType]="bannerTypeImages.ACCEPTED"
@@ -53,9 +54,16 @@
             </lnd-info-banner>
         </div>
         <lnd-alert
+            *ngIf="numberOfDuplicateOffers"
+            type="info"
+            customClass="text-center"
+        >
+            Seznam nabídek obsahuje {{numberOfDuplicateOffers}} {{numberOfDuplicateOffers | plural: 'duplicity'}}.
+        </lnd-alert>
+        <lnd-alert
             *ngIf="offerDeleted"
             type="info"
-           hasIcon="true"
+            hasIcon="true"
         >
             Nabídka {{offerDeleted}} byla smazána.
         </lnd-alert>

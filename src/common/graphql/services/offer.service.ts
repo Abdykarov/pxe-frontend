@@ -21,7 +21,6 @@ import {
     IOfferInputPowerAttributes,
     IOfferStatus,
 } from 'src/common/graphql/models/offer.model';
-import { IOfferImportInput } from 'src/app/pages/import/import.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -135,8 +134,8 @@ export class OfferService {
             },
         })
 
-    public batchImport = (offers: IOfferImportInput[]) => this.http.post<any>(
+    public batchImport = (offers: IOfferInput[]) => this.http.post<any>(
         `${environment.url_api}/v1.0/offer/batch-import`,
-        [offers[0].offerInput],
+        offers,
     )
 }

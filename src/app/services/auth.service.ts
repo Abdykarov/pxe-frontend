@@ -22,7 +22,7 @@ import {
     repeatWhen,
     switchMap,
     take,
-    takeUntil,
+    takeUntil, tap,
 } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -96,6 +96,17 @@ export class AuthService {
         if (isPlatformBrowser(this.platformId)) {
             this.refreshTokenInterval$.subscribe();
         }
+    }
+
+    public refreshTokenInterval = () => {
+        this.startRefreshTokenInterval();
+        return this.refreshToken()
+            .pipe(
+                catchError(() => of()),
+                tap(() => {
+                    this.startExpirationOfToken = new Date();
+                }),
+            );
     }
 
     startRefreshTokenInterval = () => {

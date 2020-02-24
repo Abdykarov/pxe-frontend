@@ -56,14 +56,14 @@ import {
     ],
 })
 export class UploadComponent extends AbstractComponent implements OnInit {
+    public readonly bannerTypeImages = BannerTypeImages;
     public readonly configStepper = getConfigStepper(ImportProgressStep.UPLOAD, false, TypeStepper.IMPORT);
     public readonly listOfErrorsHeaderText = 'Seznam chyb';
-    public bannerTypeImages = BannerTypeImages;
     public commodityType = CommodityType.POWER;
     public globalError: string[] = [];
     public fileErrors: string[] = [];
     public isInitState = true;
-    public listOfErrors = [];
+    public listOfErrors: string[] = [];
     public loading = false;
     public tryToUploadFile = false;
 
@@ -94,7 +94,7 @@ export class UploadComponent extends AbstractComponent implements OnInit {
             this.globalError = [];
             const fileName = fileItem._file.name;
             const type = fileName.substr(fileName.lastIndexOf('.') + 1);
-            if (!inArray(type, CONSTS.ALLOWED_TYPE_OF_IMPORT_FILES)) {
+            if (!inArray(type, CONSTS.ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES)) {
                 this.fileUploader.queue = [];
                 this.fileErrors = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.FILE_TYPE]];
                 this.tryToUploadFile = false;
@@ -107,14 +107,18 @@ export class UploadComponent extends AbstractComponent implements OnInit {
             this.loading = false;
             if (status === 200) {
                 const allOffers = JSON.parse(response);
+
                 const offersWithGoodCommodity = R.filter(({offerInput}) => {
                     if (this.commodityType === CommodityType.POWER) {
                         return offerInput.powerAttributes;
                     }
                     return offerInput.gasAttributes;
                 })(allOffers);
+
                 if (!offersWithGoodCommodity.length) {
-                    this.globalError = [graphQLMessages.noOffersInImport];
+                    this.globalError = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.NO_OFFERS_IN_IMPORT]];
+                    this.isInitState = true;
+                    this.fileUploader.clearQueue();
                 } else {
                     this.router.navigate([ROUTES.ROUTER_IMPORT_APPROVAL], {
                         queryParams: {
@@ -138,6 +142,12 @@ export class UploadComponent extends AbstractComponent implements OnInit {
                 this.globalError = [defaultErrorMessage];
                 this.fileUploader.clearQueue();
             }
+
+            this.authService.refreshToken()
+                .pipe(
+                    takeUntil(this.destroy$),
+                )
+                .subscribe();
             this.cd.markForCheck();
         };
 
@@ -158,6 +168,7 @@ export class UploadComponent extends AbstractComponent implements OnInit {
         } else {
             this.fileErrors = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.MAX_NUMBER_OF_FILES]];
         }
+        this.cd.markForCheck();
     }
 
     downloadExampleImportFile = (evt) => {

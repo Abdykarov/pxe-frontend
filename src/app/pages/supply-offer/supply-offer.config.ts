@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import * as R from 'ramda';
 
 import {
-    CODE_LIST, CONSTS,
+    CODE_LIST,
+    CONSTS,
     DELIVERY_LENGTH_OPTIONS,
     SUBJECT_TYPE_OPTIONS,
 } from 'src/app/app.constants';
