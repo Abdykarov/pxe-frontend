@@ -23,6 +23,7 @@ export const graphQLMessages = {
     unknownSupplyPoint: 'Hledané odběrné místo neexistuje nebo pro přístup k němu nemáte oprávnění.',
     noActiveAccountAvailable: 'Ucet nelze smazat, protoze neexistuje.',
     forbiddenUpdateOfSupplyPoint: 'Omlouváme se, ale toto odběrné místo není možné nyní upravit. Zkuste to prosím znovu později.',
+    noOffersInImport: 'Pro zvolenou komoditu nebyl nalezen žádný záznam.',
 };
 
 export const offerValidityMessages = {

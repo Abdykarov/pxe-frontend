@@ -1,21 +1,45 @@
+import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
+import {
+    ChangeDetectorRef,
+    Component,
+    Inject,
+    OnInit,
+    PLATFORM_ID,
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
-import { CONSTS, FILE_UPLOAD_CONFIG, ROUTES } from 'src/app/app.constants';
-import { ApprovalConfig } from 'src/app/pages/import/approval/approval.config';
-import { ImportProgressStep } from 'src/app/pages/import/import.model';
-import { fileUploaderFactory } from 'src/app/pages/import/upload/upload.config';
-import { AuthService } from 'src/app/services/auth.service';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { defaultErrorMessage, importErrorCodes } from 'src/common/constants/errors.constant';
-import { CommodityType } from 'src/common/graphql/models/supply.model';
+import { ApprovalConfig } from 'src/app/pages/import/approval/approval.config';
+import { AuthService } from 'src/app/services/auth.service';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
-import { getConfigStepper, inArray, TypeStepper } from 'src/common/utils';
-import { FileItem, FileUploader } from 'src/common/utils/file-upload';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
+import {
+    CONSTS,
+    FILE_UPLOAD_CONFIG,
+    ROUTES,
+} from 'src/app/app.constants';
+import {
+    defaultErrorMessage,
+    graphQLMessages,
+    importErrorCodes,
+} from 'src/common/constants/errors.constant';
+import {
+    FileItem,
+    FileUploader,
+} from 'src/common/utils/file-upload';
+import { fileUploaderFactory } from 'src/app/pages/import/upload/upload.config';
+import { ImportProgressStep } from 'src/app/pages/import/import.model';
+import {
+    getConfigStepper,
+    inArray,
+    TypeStepper,
+} from 'src/common/utils';
 
 @Component({
     selector: 'pxe-upload',
@@ -89,14 +113,18 @@ export class UploadComponent extends AbstractComponent implements OnInit {
                     }
                     return offerInput.gasAttributes;
                 })(allOffers);
-                this.router.navigate([ROUTES.ROUTER_IMPORT_APPROVAL], {
-                    queryParams: {
-                        commodityType: this.commodityType,
-                    },
-                    state: {
-                        offers: offersWithGoodCommodity,
-                    },
-                });
+                if (!offersWithGoodCommodity.length) {
+                    this.globalError = [graphQLMessages.noOffersInImport];
+                } else {
+                    this.router.navigate([ROUTES.ROUTER_IMPORT_APPROVAL], {
+                        queryParams: {
+                            commodityType: this.commodityType,
+                        },
+                        state: {
+                            offers: offersWithGoodCommodity,
+                        },
+                    });
+                }
             } else if (status === 401) {
                 this.authService.logoutForced();
             } else if (status === 500) {

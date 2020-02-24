@@ -137,8 +137,6 @@ export class OfferService {
 
     public batchImport = (offers: IOfferImportInput[]) => this.http.post<any>(
         `${environment.url_api}/v1.0/offer/batch-import`,
-        {
-            offers,
-        },
+        [offers[0].offerInput],
     )
 }

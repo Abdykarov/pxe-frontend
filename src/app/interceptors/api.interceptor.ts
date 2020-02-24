@@ -42,7 +42,6 @@ export class ApiInterceptor implements HttpInterceptor {
 
         if (request.url.match(/api\//) &&
             request.url.indexOf('login') < 0 &&
-            request.url.indexOf('batch-import') < 0 &&
             request.url.indexOf('refresh') < 0) {
                 resultRequest = request.clone({
                     headers: new HttpHeaders({
