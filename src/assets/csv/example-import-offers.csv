@@ -1,2 +1,3 @@
-a,b,c
-d,e,f
+name,validFrom,validTo,deliveryFrom,deliveryTo,deliveryLength,distributionLocation,permanentPaymentPrice,subjectTypeId,Benefit1,URL1,Benefit2,URL2,Benefit3,URL3,Benefit4,URL4,priceGas,annualConsumptionId,priceVT,priceNT,distributionRateId,circuitBreakerId
+power offer,2020-02-25,2020-03-24,2020-04-01,2021-03-31,1,E.ON,140.5,1,benefit1,http://benefit1.cz,benefit2,http://benefit2.cz,,,,,,,152.20,137.40,D25d,<= 1x25A
+gas offer,2020-02-20,2020-05-31,2020-06-01,2021-05-31,1,E.ON,138.7,2,ben1,http://ben1.cz,,,,,,,1.2587,,,,,

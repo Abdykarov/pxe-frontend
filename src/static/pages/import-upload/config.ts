@@ -1,6 +1,6 @@
-import { FileUploader } from 'ng2-file-upload';
 
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
+import { FileUploader } from 'src/common/utils/file-upload';
 
 export const stepperProgressConfig: IStepperProgressItem[] = [
     {

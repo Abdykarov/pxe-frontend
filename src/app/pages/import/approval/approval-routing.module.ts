@@ -6,11 +6,15 @@ import {
 
 import { ApprovalComponent } from 'src/app/pages/import/approval/approval.component';
 import { CONSTS } from 'src/app/app.constants';
+import { RefreshTokenResolver } from 'src/app/resolvers/refresh-token.resolver';
 
 const routes: Routes = [
     {
         path: CONSTS.PATHS.EMPTY,
         component: ApprovalComponent,
+        resolve: {
+            refreshToken: RefreshTokenResolver,
+        },
     },
 ];
 

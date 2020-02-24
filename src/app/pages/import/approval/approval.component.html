@@ -1,22 +1,22 @@
 <ng-template #columnTemplatePriceVT let-row="row">
-    {{row.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
+    {{row.offerInput.powerAttributes.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
 </ng-template>
 <ng-template #columnTemplatePriceNT let-row="row">
-    <ng-container *ngIf="row.priceNT !== null">
-        {{row.priceNT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
+    <ng-container *ngIf="row.offerInput.powerAttributes.priceNT !== null">
+        {{row.offerInput.powerAttributes.priceNT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
     </ng-container>
 </ng-template>
 <ng-template #columnTemplatePriceGas let-row="row">
-    {{row.priceGas | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
+    {{row.offerInput.gasAttributes.priceGas | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
 </ng-template>
 <ng-template #columnTemplateValidFromTo let-row="row">
-    {{row.validFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.validTo | date:'d.&nbsp;M.&nbsp;y'}}
+    {{row.offerInput.validFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.offerInput.validTo | date:'d.&nbsp;M.&nbsp;y'}}
 </ng-template>
 <ng-template #columnTemplateDeliveryFromTo let-row="row">
-    {{row.deliveryFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}
+    {{row.offerInput.deliveryFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.offerInput.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}
 </ng-template>
-<ng-template #actionColumnTemplate let-row="row">
-    <span>{{row.permanentPaymentPrice | number:'1.0-2'}}&nbsp;Kč/měsíc (bez&nbsp;DPH)</span>
+<ng-template #actionColumnTemplate let-row="row" let-index="index">
+    <span>{{row.offerInput.permanentPaymentPrice | number:'1.0-2'}}&nbsp;Kč/měsíc (bez&nbsp;DPH)</span>
     <div class="row action-area-div">
         <div class="col-12">
             <ng-template #tooltipDelete let-toggle="toggle">
@@ -24,7 +24,7 @@
                     icon="icon--delete"
                     type="icon"
                     variant="icon"
-                    (action)="toggle();delete(row)"
+                    (action)="toggle();delete(row,index)"
                 ></lnd-button>
             </ng-template>
             <lnd-tooltip [actionTemplate]="tooltipDelete" direction="bottom">
@@ -33,32 +33,33 @@
         </div>
     </div>
 </ng-template>
-<div class="col-12 col-xl-10 offset-xl-1">
-    <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
-    <lnd-alert
-        *ngIf="globalError.length"
-        type="danger">
-        <ng-container *ngFor="let error of globalError">
-            {{ error }}<br>
-        </ng-container>
-    </lnd-alert>
-    <div class="mt-5">
-        <lnd-info-banner
-            bannerTitle="Úspěšně jsme nahráli {{numberOfNewOffers}} nové nabídky. <br /> Po schválení se nabídky zobrazí vašim zákazníkům."
-            [showButton]="false"
-            [bannerType]="bannerTypeImages.ACCEPTED"
+<div class="row"
+     *ngIf="tableRows && tableRows.length">
+    <div class="col-12 col-xl-10 offset-xl-1">
+        <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
+        <lnd-alert
+            *ngIf="globalError.length"
+            type="danger">
+            <ng-container *ngFor="let error of globalError">
+                {{ error }}<br>
+            </ng-container>
+        </lnd-alert>
+        <div class="mt-5">
+            <lnd-info-banner
+                bannerTitle="Úspěšně jsme nahráli {{tableRows.length}} nové nabídky. <br /> Po schválení se nabídky zobrazí vašim zákazníkům."
+                [showButton]="false"
+                [bannerType]="bannerTypeImages.ACCEPTED"
+            >
+            </lnd-info-banner>
+        </div>
+        <lnd-alert
+            *ngIf="offerDeleted"
+            type="info"
+           hasIcon="true"
         >
-        </lnd-info-banner>
+            Nabídka {{offerDeleted}} byla smazána.
+        </lnd-alert>
     </div>
-    <lnd-alert
-        *ngIf="offerDeleted"
-        type="info"
-       hasIcon="true"
-    >
-        Nabídka {{offerDeleted}} byla smazána.
-    </lnd-alert>
-</div>
-<div class="row">
     <div class="col-12 col-lg-10 offset-lg-1">
         <lnd-table
             #table
@@ -80,8 +81,6 @@
             >
         </lnd-table>
     </div>
-</div>
-<div class="row">
     <div class="col-12 text-center">
         <lnd-button
             customClass="ml-5"

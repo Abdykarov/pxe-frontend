@@ -1,42 +1,22 @@
-import {
-    ActivatedRoute,
-    Router,
-} from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
-import {
-    Component,
-    Inject,
-    OnInit,
-    PLATFORM_ID,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import * as R from 'ramda';
-import {
-    FileItem,
-    FileUploader,
-} from 'ng2-file-upload';
 import { takeUntil } from 'rxjs/operators';
+import { CONSTS, FILE_UPLOAD_CONFIG, ROUTES } from 'src/app/app.constants';
+import { ApprovalConfig } from 'src/app/pages/import/approval/approval.config';
+import { ImportProgressStep } from 'src/app/pages/import/import.model';
+import { fileUploaderFactory } from 'src/app/pages/import/upload/upload.config';
+import { AuthService } from 'src/app/services/auth.service';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
-import { CONSTS } from 'src/app/app.constants';
+import { defaultErrorMessage, importErrorCodes } from 'src/common/constants/errors.constant';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
-import {
-    defaultErrorMessage,
-    importErrorCodes,
-} from 'src/common/constants/errors.constant';
-import {
-    FILE_UPLOAD_CONFIG,
-    FileUploadService,
-} from 'src/app/services/file-upload.service';
-import { fileUploaderOptions } from 'src/app/pages/import/upload/upload.config';
-import {
-    getConfigStepper,
-    inArray,
-    TypeStepper,
-} from 'src/common/utils';
-import { ImportProgressStep } from 'src/app/pages/import/import.model';
-// add refresh atd...
+import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
+import { getConfigStepper, inArray, TypeStepper } from 'src/common/utils';
+import { FileItem, FileUploader } from 'src/common/utils/file-upload';
+
 @Component({
     selector: 'pxe-upload',
     templateUrl: './upload.component.html',
@@ -44,9 +24,11 @@ import { ImportProgressStep } from 'src/app/pages/import/import.model';
     providers: [
         {
             provide: FILE_UPLOAD_CONFIG,
-            useValue: fileUploaderOptions,
+            useFactory: fileUploaderFactory,
+            deps: [
+                AuthService,
+            ],
         },
-        FileUploadService,
     ],
 })
 export class UploadComponent extends AbstractComponent implements OnInit {
@@ -54,15 +36,20 @@ export class UploadComponent extends AbstractComponent implements OnInit {
     public readonly listOfErrorsHeaderText = 'Seznam chyb';
     public bannerTypeImages = BannerTypeImages;
     public commodityType = CommodityType.POWER;
+    public globalError: string[] = [];
     public fileErrors: string[] = [];
     public isInitState = true;
     public listOfErrors = [];
+    public loading = false;
     public tryToUploadFile = false;
 
     constructor (
-        private fileUploadService: FileUploadService,
+        private approvalConfig: ApprovalConfig,
+        private authService: AuthService,
+        private cd: ChangeDetectorRef,
         private route: ActivatedRoute,
         private router: Router,
+        @Inject(FILE_UPLOAD_CONFIG) private fileUploader: FileUploader,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
@@ -79,11 +66,12 @@ export class UploadComponent extends AbstractComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.fileUploadService.fileUploader.onAfterAddingFile = (fileItem: FileItem) => {
+        this.fileUploader.onAfterAddingFile = (fileItem: FileItem) => {
+            this.globalError = [];
             const fileName = fileItem._file.name;
             const type = fileName.substr(fileName.lastIndexOf('.') + 1);
             if (!inArray(type, CONSTS.ALLOWED_TYPE_OF_IMPORT_FILES)) {
-                this.fileUploadService.fileUploader.queue = [];
+                this.fileUploader.queue = [];
                 this.fileErrors = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.FILE_TYPE]];
                 this.tryToUploadFile = false;
                 return;
@@ -91,25 +79,38 @@ export class UploadComponent extends AbstractComponent implements OnInit {
             this.tryToUploadFile = true;
         };
 
-        this.fileUploadService.fileUploader.onCompleteItem = (item, response, status, header) => {
+        this.fileUploader.onCompleteItem = (item, response, status, header) => {
+            this.loading = false;
             if (status === 200) {
-                this.isInitState = false;
-                this.listOfErrors = [
-                    'Řádek 1, buňka D (distribuční sazba): pole je vyplněno, ale hodnota není správná',
-                    'Řádek 1, buňka F (cena za VF): pole není vyplněno',
-                    'Řádek 2, buňka D (distribuční sazba): pole je vyplněno, ale hodnota není správná',
-                    'Řádek 2, buňka F (cena za VF): pole není vyplněno',
-                ];
-                this.fileUploadService.fileUploader.clearQueue();
+                const allOffers = JSON.parse(response);
+                const offersWithGoodCommodity = R.filter(({offerInput}) => {
+                    if (this.commodityType === CommodityType.POWER) {
+                        return offerInput.powerAttributes;
+                    }
+                    return offerInput.gasAttributes;
+                })(allOffers);
+                this.router.navigate([ROUTES.ROUTER_IMPORT_APPROVAL], {
+                    queryParams: {
+                        commodityType: this.commodityType,
+                    },
+                    state: {
+                        offers: offersWithGoodCommodity,
+                    },
+                });
             } else if (status === 401) {
+                this.authService.logoutForced();
+            } else if (status === 500) {
+                const jsonResponse = JSON.parse(response);
+                this.listOfErrors = [
+                    jsonResponse.message,
+                ];
+                this.fileUploader.clearQueue();
             } else {
                 this.isInitState = false;
-                this.fileUploadService.fileUploader.clearQueue();
+                this.globalError = [defaultErrorMessage];
+                this.fileUploader.clearQueue();
             }
-            // console.log(item);
-            // console.log(response);
-            // console.log(status);
-            // console.log(header);
+            this.cd.markForCheck();
         };
 
     }
@@ -124,6 +125,7 @@ export class UploadComponent extends AbstractComponent implements OnInit {
             this.fileErrors = [defaultErrorMessage];
         } else if (numberOfFiles <= CONSTS.VALIDATORS.MAX_IMPORT_FILES) {
             this.fileErrors = [];
+            this.loading = true;
             file.uploadItem(file.queue[0]);
         } else {
             this.fileErrors = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.MAX_NUMBER_OF_FILES]];

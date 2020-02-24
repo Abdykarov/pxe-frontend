@@ -30,7 +30,7 @@
         </tr>
     </thead>
     <tbody [ngClass]="desktopLayoutClasses">
-        <ng-container *ngFor="let row of rows">
+        <ng-container *ngFor="let row of rows; let i = index" [attr.data-index]="i">
             <tr
                 [class.table__tr--main]="isAdvanced"
                 [class.table__tr--active]="isAdvanced && openedRow === row"
@@ -46,28 +46,28 @@
                         <td
                             *ngIf="view.contentTemplateName"
                             [ngClass]="!!view.cellClass ? view.cellClass : ''">
-                            <ng-container *ngTemplateOutlet="columnTemplates[view.contentTemplateName]; context: {row: row}"></ng-container>
+                            <ng-container *ngTemplateOutlet="columnTemplates[view.contentTemplateName]; context: {row: row,index: i}"></ng-container>
                         </td>
                     </ng-container>
                 </ng-container>
                 <td
                     *ngIf="actionColTemplate"
                     [ngClass]="actionColClass">
-                    <ng-container *ngTemplateOutlet="actionColTemplate; context: {row: row}"></ng-container>
+                    <ng-container *ngTemplateOutlet="actionColTemplate; context: {row: row,index: i}"></ng-container>
                 </td>
             </tr>
             <tr
                 *ngIf="rowDetailTemplate && openedRow === row"
                 class="table__tr--detail table__tr--show">
                     <td [attr.colspan]="cols.length + (actionColTemplate ? 1 : 0)">
-                        <ng-container *ngTemplateOutlet="rowDetailTemplate; context: {row: row}"></ng-container>
+                        <ng-container *ngTemplateOutlet="rowDetailTemplate; context: {row: row,index: i}"></ng-container>
                     </td>
             </tr>
         </ng-container>
     </tbody>
     <ng-container *ngIf="mobileCols.length">
         <tbody
-            *ngFor="let row of rows"
+            *ngFor="let row of rows; let i = index" [attr.data-index]="i"
             class="tbody--mobile"
             [ngClass]="mobileLayoutClasses">
             <ng-container *ngFor="let column of mobileCols">
@@ -82,13 +82,13 @@
                         [innerHtml]="view.content(row)">
                     </td>
                     <td *ngIf="view.contentTemplateName">
-                        <ng-container *ngTemplateOutlet="columnTemplates[view.contentTemplateName]; context: {row: row}"></ng-container>
+                        <ng-container *ngTemplateOutlet="columnTemplates[view.contentTemplateName]; context: {row: row,index: i}"></ng-container>
                     </td>
                 </tr>
             </ng-container>
             <tr *ngIf="actionColTemplate">
                 <td colspan="2">
-                    <ng-container *ngTemplateOutlet="actionColTemplate; context: {row: row}"></ng-container>
+                    <ng-container *ngTemplateOutlet="actionColTemplate; context: {row: row,index: i}"></ng-container>
                 </td>
             </tr>
             <tr *ngIf="rowDetailTemplate">
@@ -107,7 +107,7 @@
                     *ngIf="openedRow === row"
                     colspan="2"
                     class="w-100 px-0">
-                    <ng-container *ngTemplateOutlet="rowDetailTemplate; context: {row: row}"></ng-container>
+                    <ng-container *ngTemplateOutlet="rowDetailTemplate; context: {row: row,index: i}"></ng-container>
                 </td>
             </tr>
         </tbody>

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { CONSTS } from 'src/app/app.constants';
 
+import { CONSTS } from 'src/app/app.constants';
+import { IOfferImportInput } from 'src/app/pages/import/import.model';
 import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
-import { CommodityType } from 'src/common/graphql/models/supply.model';
 
 @Injectable({
     providedIn: 'root',
@@ -16,7 +16,7 @@ export class ApprovalConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.name}`,
+                        content: (row) => `${row.offerInput.name}`,
                     },
                 ],
             },
@@ -26,7 +26,7 @@ export class ApprovalConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.subject}`,
+                        content: (row: IOfferImportInput) => `${row.offerInput.subjectTypeId}`,
                     },
                 ],
             },
@@ -36,7 +36,7 @@ export class ApprovalConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.distributionLocation}`,
+                        content: (row: IOfferImportInput) => `${row.offerInput.distributionLocation}`,
                     },
                 ],
             },
@@ -46,7 +46,7 @@ export class ApprovalConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.distributionRate}`,
+                        content: (row: IOfferImportInput) => `${row.offerInput.distributionLocation}`,
                     },
                 ],
             },
@@ -56,7 +56,7 @@ export class ApprovalConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.circuitBreaker}`,
+                        content: (row: IOfferImportInput) => `${row.offerInput.powerAttributes.circuitBreakerId}`,
                     },
                 ],
             },
@@ -106,7 +106,7 @@ export class ApprovalConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.deliveryLength}`,
+                        content: (row: IOfferImportInput) => `${row.offerInput.deliveryLength}`,
                     },
                 ],
             },
@@ -128,7 +128,7 @@ export class ApprovalConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.name}`,
+                        content: (row: IOfferImportInput) => `${row.offerInput.name}`,
                     },
                 ],
             },
@@ -138,7 +138,7 @@ export class ApprovalConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.subject}`,
+                        content: (row: IOfferImportInput) => `${row.offerInput.subjectTypeId}`,
                     },
                 ],
             },
@@ -148,7 +148,7 @@ export class ApprovalConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.distributionLocation}`,
+                        content: (row: IOfferImportInput) => `${row.offerInput.distributionLocation}`,
                     },
                 ],
             },
@@ -158,7 +158,7 @@ export class ApprovalConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.annualConsumption}`,
+                        content: (row: IOfferImportInput) => `${row.offerInput.gasAttributes.annualConsumptionId}`,
                     },
                 ],
             },
@@ -198,7 +198,7 @@ export class ApprovalConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.deliveryLength}`,
+                        content: (row: IOfferImportInput) => `${row.offerInput.deliveryLength}`,
                     },
                 ],
             },
@@ -214,63 +214,6 @@ export class ApprovalConfig {
             },
         ],
     };
-
-    public tableRows = [
-        {
-            id: 1,
-            commodityType: CommodityType.POWER,
-            name: 'Variant 36',
-            subject: 'Domácnost',
-            distributionLocation: 'EON',
-            distributionRate: 'C25d',
-            circuitBreaker: 'nad 3X80A do 3x100A včetně',
-            priceVT: 3.75,
-            priceNT: 3.75,
-            priceGas: 3.75,
-            validFrom: '2019-06-06',
-            validTo: '2019-07-06',
-            deliveryFrom: '2019-06-06',
-            deliveryTo: '2019-10-06',
-            deliveryLength: 1,
-            permanentPaymentPrice: 650,
-        },
-        {
-            id: 2,
-            commodityType: CommodityType.POWER,
-            name: 'Zelená usporám od&nbsp;1.1.2019 do&nbsp;12.12.2019',
-            subject: 'Firma',
-            distributionLocation: 'CEZ',
-            distributionRate: 'C25d',
-            circuitBreaker: 'nad 3X80A do 3x100A včetně',
-            priceVT: 3.75,
-            priceNT: 3.75,
-            priceGas: 3.75,
-            validFrom: '2019-06-06',
-            validTo: '2019-07-06',
-            deliveryFrom: '2019-06-06',
-            deliveryTo: '2019-10-06',
-            deliveryLength: 2,
-            permanentPaymentPrice: 250,
-        },
-        {
-            id: 3,
-            commodityType: CommodityType.POWER,
-            name: 'Název 1',
-            subject: 'domácnost',
-            distributionLocation: 'ALL',
-            distributionRate: 'C25d',
-            circuitBreaker: 'nad 3X80A do 3x100A včetně',
-            priceVT: 5.75,
-            priceNT: 3.75,
-            priceGas: 3.75,
-            validFrom: '2019-06-06',
-            validTo: '2019-07-06',
-            deliveryFrom: '2019-06-06',
-            deliveryTo: '2019-10-06',
-            deliveryLength: 1,
-            permanentPaymentPrice: 3650,
-        },
-    ];
 
     public confirmBackActionConfig = (data): IShowModal => ({
         component: 'ConfirmModalComponent',

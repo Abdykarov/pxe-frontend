@@ -18,6 +18,7 @@ import { ApolloGraphQLProvider } from 'src/common/graphql/middleware/apollo-grap
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { InterceptorProviders } from './interceptors';
+import { FileUploadModule } from 'src/common/utils/file-upload';
 import { PipesModule } from 'src/common/pipes/pipes.module';
 
 @NgModule({
@@ -31,6 +32,7 @@ import { PipesModule } from 'src/common/pipes/pipes.module';
             appId: 'pxe-pacr4retail',
         }),
         CookieModule.forRoot(),
+        FileUploadModule,
         HttpClientModule,
         HttpLinkModule,
         PipesModule,

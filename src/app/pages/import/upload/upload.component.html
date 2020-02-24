@@ -3,9 +3,16 @@
         <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
         <div class="row mt-5 mb-3">
             <div class="col-xl-8 offset-xl-2 text-center">
+                <lnd-alert
+                    *ngIf="globalError.length"
+                    type="danger">
+                    <ng-container *ngFor="let error of globalError">
+                        {{ error }}<br>
+                    </ng-container>
+                </lnd-alert>
                 <p *ngIf="!isInitState">
                     <lnd-info-banner
-                        [bannerTitle]="'Import nabídek jsme nemohli dokončit. <br /> V tabulce jsme nalezli 4 chyby.'"
+                        [bannerTitle]="'Import nabídek jsme nemohli dokončit. <br /> V tabulce jsme nalezli '+ (listOfErrors.length) + ' ' + (listOfErrors.length | plural: 'error')"
                         [bannerType]="bannerTypeImages.IMPORT_ERROR"
                         [showButton]="false"
                     >
@@ -14,17 +21,17 @@
                 </p>
                 <ng-container *ngIf="isInitState">
                     <p class="mb-1">
-                        Import nabídek provedete nahráním vyplněné  excelovské tabulky.
+                        Import nabídek provedete nahráním CSV souboru.
                     </p>
                     <lnd-button
-                        label="Stáhnout vzorovou tabulku"
+                        label="Stáhnout vzorový soubor"
                         type="secondary"
                         (click)="downloadExampleImportFile($event)">
                     </lnd-button>
                 </ng-container>
             </div>
         </div>
-        <div class="row mb-5 mt-2">
+        <div class="row mb-5 mt-4">
             <div class="col-xl-8 offset-xl-2 text-center">
                 <lnd-alert
                     *ngIf="fileErrors.length"
@@ -33,8 +40,10 @@
                         {{ error }}<br>
                     </ng-container>
                 </lnd-alert>
+                <lnd-placeloader [loading]="loading"></lnd-placeloader>
                 <pxe-file-uploader
-                    [uploader]="fileUploadService.fileUploader"
+                    *ngIf="!loading"
+                    [uploader]="fileUploader"
                     (fileSelectAction)="uploadFile($event)">
                 ></pxe-file-uploader>
             </div>

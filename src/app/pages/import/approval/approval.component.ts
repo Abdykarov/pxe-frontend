@@ -1,10 +1,15 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
     ActivatedRoute,
     Router,
 } from '@angular/router';
 import {
+    ChangeDetectorRef,
     Component,
+    HostListener,
+    Inject,
     OnInit,
+    PLATFORM_ID,
 } from '@angular/core';
 
 import * as R from 'ramda';
@@ -18,16 +23,20 @@ import {
 import { AbstractComponent } from 'src/common/abstract.component';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
+import {
+    CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import { ITableColumnConfig } from 'src/common/ui/table/models/table.model';
-import { ImportProgressStep } from 'src/app/pages/import/import.model';
+import { ImportProgressStep, IOfferImportInput } from 'src/app/pages/import/import.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import {
     getConfigStepper,
-    parseGraphQLErrors,
+    parseRestAPIErrors,
     TypeStepper,
 } from 'src/common/utils';
-import { CONSTS, ROUTES } from 'src/app/app.constants';
+import { OfferService } from 'src/common/graphql/services/offer.service';
 
 @Component({
     selector: 'pxe-approval',
@@ -35,39 +44,44 @@ import { CONSTS, ROUTES } from 'src/app/app.constants';
     styleUrls: ['./approval.component.scss'],
 })
 export class ApprovalComponent extends AbstractComponent implements OnInit {
+    public readonly bannerTypeImages = BannerTypeImages;
     public readonly configStepper = getConfigStepper(ImportProgressStep.APPROVAL, false, TypeStepper.IMPORT);
     public commodityType = CommodityType.POWER;
-    public tableCols: ITableColumnConfig[] = [];
-    public tableRows = this.approvalConfig.tableRows;
-    public bannerTypeImages = BannerTypeImages;
-    public numberOfNewOffers = 5;
-    // po sluzbach sjendotit s mnozstvi table rows
     public globalError: string[] = [];
     public offerDeleted = null;
+    public tableCols: ITableColumnConfig[] = [];
+    public tableRows: IOfferImportInput[] = [];
 
     constructor(
         private approvalConfig: ApprovalConfig,
+        private cd: ChangeDetectorRef,
         private modalsService: ModalService,
+        private offerService: OfferService,
         private route: ActivatedRoute,
         private router: Router,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
     }
 
     ngOnInit() {
-        this.route.queryParams
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe(params => {
-                const commodityType = params['commodityType'];
-                if (!commodityType || !CommodityType[commodityType]) {
-                    this.commodityType = CommodityType.POWER;
-                }
-                this.commodityType = commodityType;
-                this.tableCols = this.approvalConfig.tableCols[this.commodityType];
-            });
-
+        this.commodityType = this.route.snapshot.queryParams['commodityType'];
+        if (isPlatformBrowser(this.platformId)) {
+            if (!window.history.state.offers) {
+                this.router.navigate([
+                        ROUTES.ROUTER_IMPORT_UPLOAD,
+                    ],
+                    {
+                        queryParams: {
+                            commodityType: this.commodityType,
+                        },
+                    },
+                );
+                return;
+            }
+        }
+        this.tableCols = this.approvalConfig.tableCols[this.commodityType];
+        this.tableRows = window.history.state.offers;
         this.modalsService.closeModalData$
             .pipe(
                 takeUntil(
@@ -89,6 +103,12 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                     );
                 }
             });
+        }
+
+    @HostListener('window:beforeunload', ['$event'])
+    beforeunloadHandler(event) {
+        event.preventDefault();
+        event.returnValue = '';
     }
 
     backAction = (evt) => {
@@ -99,15 +119,27 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
 
     approvalAction = (evt) => {
         evt.preventDefault();
-        this.router.navigate([
-                this.commodityType === CommodityType.POWER ?
-                    ROUTES.ROUTER_SUPPLY_OFFER_POWER : ROUTES.ROUTER_SUPPLY_OFFER_GAS,
-            ],
-        );
+        this.offerService.batchImport(this.tableRows)
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                () => {
+                    this.router.navigate([
+                            this.commodityType === CommodityType.POWER ?
+                                ROUTES.ROUTER_SUPPLY_OFFER_POWER : ROUTES.ROUTER_SUPPLY_OFFER_GAS,
+                        ],
+                    );
+                },
+                error => {
+                    const message = parseRestAPIErrors(error);
+                    this.globalError.push(message);
+                    this.cd.markForCheck();
+                });
     }
 
-    public delete = (deletingWow) => {
-        this.offerDeleted = deletingWow.name;
-        this.tableRows = R.filter((row => row.id !==  deletingWow.id), this.tableRows);
+    public delete = (deletingRow, index) => {
+        this.offerDeleted = deletingRow.name;
+        this.tableRows.splice(index, 1);
     }
 }

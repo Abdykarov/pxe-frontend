@@ -70,6 +70,20 @@ export class PluralPipe implements PipeTransform {
             '=4' : 'odběrná místa',
             'other' : 'odběrných míst',
         },
+        'error'  : {
+            '=1' : 'chybu',
+            '=2' : 'chyby',
+            '=3' : 'chyby',
+            '=4' : 'chyby',
+            'other' : 'chyb',
+        },
+        'new_offer' : {
+            '=1' : 'novou nabídku',
+            '=2' : 'nové nabídky',
+            '=3' : 'nové nabídky',
+            '=4' : 'nové nabídky',
+            'other' : 'nových nabídek',
+        },
     };
 
     constructor(

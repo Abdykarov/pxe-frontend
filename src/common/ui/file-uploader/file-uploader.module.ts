@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FileUploadModule } from 'src/common/utils/file-upload';
 
-import { FileUploadModule } from 'ng2-file-upload';
 
 import { FileUploaderComponent } from './file-uploader.component';
 

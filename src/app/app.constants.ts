@@ -465,3 +465,5 @@ export enum RequestsOverviewBannerShow {
     TERMINATE_CONTRACT = 'TERMINATE_CONTRACT',
     LEAVE_CONTRACT = 'LEAVE_CONTRACT',
 }
+
+export const FILE_UPLOAD_CONFIG = 'file_upload_config';

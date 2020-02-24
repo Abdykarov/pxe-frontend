@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import * as R from 'ramda';
@@ -20,6 +21,8 @@ import {
     IOfferInputPowerAttributes,
     IOfferStatus,
 } from 'src/common/graphql/models/offer.model';
+import { IOfferImportInput } from 'src/app/pages/import/import.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -28,6 +31,7 @@ export class OfferService {
 
     constructor(
         private apollo: Apollo,
+        private http: HttpClient,
     ) {}
 
     public findSupplierOffers = () => this.apollo
@@ -130,4 +134,11 @@ export class OfferService {
                 });
             },
         })
+
+    public batchImport = (offers: IOfferImportInput[]) => this.http.post<any>(
+        `${environment.url_api}/v1.0/offer/batch-import`,
+        {
+            offers,
+        },
+    )
 }
