@@ -39,6 +39,8 @@ export interface IOffer {
     totalPrice?: number;
     unit?: string;
     prepayment?: number;
+    marked?: boolean;
+    greenEnergy: boolean;
     __typename?: string;
 }
 
@@ -55,6 +57,7 @@ export interface IOfferInput {
     subjectTypeId: string;
     benefits: string;
     line?: number;
+    greenEnergy: boolean;
     powerAttributes: IOfferInputPowerAttributes;
     gasAttributes: IOfferInputGasAttributes;
 }

@@ -18,10 +18,18 @@
         <tr>
             <ng-container *ngFor="let column of cols">
                 <th
-                    *ngFor="let view of column.views"
-                    [ngClass]="view.headingClass"
-                    [innerHtml]="column.label">
+                    *ngIf="column.contentTemplateHeaderName"
+                >
+                    <ng-container *ngTemplateOutlet="columnTemplates[column.contentTemplateHeaderName]; context: {column: column}"></ng-container>
                 </th>
+                <ng-container
+                    *ngIf="!column.contentTemplateHeaderName">
+                    <th
+                        *ngFor="let view of column.views"
+                        [ngClass]="view.headingClass"
+                        [innerHtml]="column.label">
+                    </th>
+                </ng-container>
             </ng-container>
             <th
                 *ngIf="actionColTemplate"
@@ -32,6 +40,7 @@
     <tbody [ngClass]="desktopLayoutClasses">
         <ng-container *ngFor="let row of rows; let i = index" [attr.data-index]="i">
             <tr
+                [class.table__tr--main__white-background]="whiteBackgroundPropertyCondition && row[whiteBackgroundPropertyCondition]"
                 [class.table__tr--main]="isAdvanced"
                 [class.table__tr--active]="isAdvanced && openedRow === row"
                 (click)="!actionColTriggersDetail && openRow(row); !actionColTriggersDetail && selectRow(row)"

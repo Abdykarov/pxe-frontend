@@ -16,6 +16,7 @@ import * as R_ from 'ramda-extension';
 import {
     BehaviorSubject,
     combineLatest,
+    forkJoin,
     Observable,
 } from 'rxjs';
 import {
@@ -28,6 +29,7 @@ import { ILoginResponse } from 'src/app/services/model/auth.model';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
+import { cantDeleteAllMarkedOffers } from 'src/common/constants/errors.constant';
 import {
     CODE_LIST_TYPES,
     commodityTypes,
@@ -77,7 +79,11 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public formValues = <IOffer>{};
     public globalError: string[] = [];
     public globalFormError: string[] = [];
+    private initRows = false;
     public loadingOffers = true;
+    public numberOfDeletedOffers = 0;
+    public numberOfMarked = 0;
+    public showDeletedOfferBanner = false;
     public offerFormInEmptyPage = false;
     public tableRows: IOffer[] = [];
     public tableCols: ITableColumnConfig[] = [];
@@ -137,7 +143,11 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                 ([codeLists, offers, commodityType]) => {
                     if (codeLists && offers) {
                         this.tableRows = offers;
-                        this.tableCols = this.supplyOfferConfig.tableCols(codeLists)[commodityType];
+                        if (!this.initRows) {
+                            this.tableCols = this.supplyOfferConfig.tableCols(codeLists)[commodityType];
+                            this.numberOfMarked = this.offerService.markAll(false, this.commodityType);
+                            this.initRows = true;
+                        }
                         this.loadingOffers = false;
                         this.deleteDisabled = [];
                         this.cd.markForCheck();
@@ -179,6 +189,39 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                 }
                 if (modal.modalType === CONSTS.MODAL_TYPE.CONFIRM_CANCEL_OFFER) {
                     this.toggleRow(modal.data.table, modal.data.row);
+                }
+                if (modal.modalType === CONSTS.MODAL_TYPE.CONFIRM_DELETE_MARKED) {
+                    const offersObserversForDeleting = this.offerService.deleteMarkedOffer(this.commodityType);
+                    if (offersObserversForDeleting.length === 0) {
+                        return;
+                    }
+                    this.loadingOffers = true;
+                    forkJoin(offersObserversForDeleting)
+                        .pipe(
+                            takeUntil(this.destroy$),
+                        )
+                        .subscribe(
+                            (respones: any[]) => {
+                                let numberOfDeletedOffers = 0;
+                                R.forEach((response) => {
+                                    if (response.isError) {
+                                        this.globalError = [cantDeleteAllMarkedOffers];
+                                    } else {
+                                        numberOfDeletedOffers++;
+                                        this.showDeletedOfferBanner = true;
+                                    }
+                                })(respones);
+                                this.numberOfDeletedOffers = numberOfDeletedOffers;
+                                this.numberOfMarked = this.numberOfMarked - numberOfDeletedOffers;
+                                this.loadingOffers = false;
+                                this.cd.markForCheck();
+                            },
+                            error => {
+                                this.loadingOffers = false;
+                                this.globalError = [cantDeleteAllMarkedOffers];
+                                this.cd.markForCheck();
+                            },
+                        );
                 }
             });
     }
@@ -226,6 +269,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public edit = (table, row) => {
+        this.showDeletedOfferBanner = false;
         this.globalFormError = [];
         this.formValues = {
             ...row,
@@ -236,6 +280,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public create = (table, row) => {
+        this.showDeletedOfferBanner = false;
         this.globalFormError = [];
         this.formValues = <IOffer>{};
         if (table.openedRow !== row) {
@@ -244,6 +289,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public duplicate = (table, row) => {
+        this.showDeletedOfferBanner = false;
         this.globalFormError = [];
         this.formValues = {
             ...row,
@@ -255,6 +301,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public delete = (table, row, currentOfferFormValues = row) => {
+        this.showDeletedOfferBanner = false;
         if (R_.isNilOrEmptyString(currentOfferFormValues.id)) {
             this.modalsService
                 .showModal$.next(this.supplyOfferConfig.confirmCancelOfferConfig({table, row, currentOfferFormValues}));
@@ -270,6 +317,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public submitForm = (supplyOfferFormData: any, table = null, row = null) => {
+        this.showDeletedOfferBanner = false;
         this.formLoading = true;
         this.globalFormError = [];
         this.fieldError = {};
@@ -288,6 +336,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
             'permanentPaymentPrice',
             'subjectTypeId',
             'benefits',
+            'greenEnergy',
         ], supplyOfferFormData);
 
         offer.supplierId = this.authService.currentUserValue.subjectId;
@@ -333,6 +382,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public cancel = (event, table = null, row = null) => {
+        this.showDeletedOfferBanner = false;
         if (table && row) {
             this.toggleRow(table, row);
         }
@@ -341,5 +391,27 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public toggleRow = (table, row) => {
         table.openRow(row);
         table.selectRow(row);
+    }
+
+    public deleteMarkedOffers = () => {
+        this.showDeletedOfferBanner = false;
+        this.modalsService
+            .showModal$.next(this.supplyOfferConfig.confirmDeleteMarkedConfig(this.numberOfMarked, this.commodityType));
+    }
+
+    public markOne = (id: number, evt) => {
+        this.showDeletedOfferBanner = false;
+        evt.preventDefault();
+        evt.cancelBubble = false;
+        this.showDeletedOfferBanner = false;
+        this.numberOfMarked = this.offerService.markOne(id, this.commodityType);
+    }
+
+    public markAll = (evt) => {
+        this.showDeletedOfferBanner = false;
+        evt.preventDefault();
+        evt.cancelBubble = false;
+        this.showDeletedOfferBanner = false;
+        this.numberOfMarked = this.offerService.markAll(this.tableRows.length !== this.numberOfMarked, this.commodityType);
     }
 }

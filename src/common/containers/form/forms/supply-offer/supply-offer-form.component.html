@@ -24,6 +24,16 @@
                     [value]="form.controls.name.value"
             ></lnd-form-field>
         </div>
+        <div *ngIf="form.controls.greenEnergy.status !== 'DISABLED'"
+             class="col-4 col-xl-3 offset-xl-3">
+            <lnd-form-field
+                [id]="'greenEnergy'"
+                label="Zelená energie"
+                [type]="'CHECKBOX'"
+                [customFormGroupClass]="'mb-5'"
+                [formControl]="form.controls.greenEnergy"
+            ></lnd-form-field>
+        </div>
     </div>
     <div class="row">
         <div *ngIf="form.controls.subjectTypeId.status !== 'DISABLED'"

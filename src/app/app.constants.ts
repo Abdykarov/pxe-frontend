@@ -26,6 +26,7 @@ export const CONSTS = {
     IMPORT_OFFERS_TYPE: 'text/csv',
     INTERVAL_RXJS: 5000,
     LOGIN_FORM_NAME: 'login',
+    MAX_REQUEST_IN_BATCH_LINK: 200,
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
@@ -33,6 +34,7 @@ export const CONSTS = {
         CONFIRM_DELETE_OFFER: 'confirmDeleteOffer',
         CONFIRM_CANCEL_OFFER: 'confirmCancelOffer',
         CONFIRM_BACK_IMPORT: 'confirmBackImportOffer',
+        CONFIRM_DELETE_MARKED: 'confirmDeleteMarked',
     },
     PATHS: {
         APPROVAL: 'approval',

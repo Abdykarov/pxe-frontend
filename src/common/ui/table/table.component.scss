@@ -156,6 +156,15 @@
 			}
 		}
 
+		&__white-background{
+			box-shadow: $table-active-shadow;
+
+			& > th,
+			& > td {
+				background-color: $table-hover-bg;
+			}
+		}
+
 		&:hover {
 			box-shadow: $table-active-shadow;
 

@@ -1,3 +1,22 @@
+<ng-template #columnTemplateMarkAll>
+    <lnd-form-field
+        label="Označit"
+        customFormGroupClass="form-group form-group--in-table"
+        (click)="click($event)"
+        [type]="'CHECKBOX'">
+    </lnd-form-field>
+</ng-template>
+<ng-template #columnTemplateMark let-row="row">
+    <lnd-form-field
+        label="&#8203;"
+        customFormGroupClass="form-group form-group--in-table"
+        (click)="click($event)"
+        [type]="'CHECKBOX'">
+    </lnd-form-field>
+    <span *ngIf="row.greenEnergy"
+          class="icon icon--leaf icon--green ml-auto">
+        </span>
+</ng-template>
 <ng-template #columnTemplatePriceVT let-row="row">
     {{row.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
 </ng-template>
@@ -112,6 +131,14 @@
             <lnd-form-field
                     [id]="'name'"
                     label="Název produktu"
+            ></lnd-form-field>
+        </div>
+        <div class="col-4 col-xl-3 offset-xl-3">
+            <lnd-form-field
+                [id]="'greenEnery'"
+                label="Zelená energie"
+                type="CHECKBOX"
+                [customFormGroupClass]="'mb-5'"
             ></lnd-form-field>
         </div>
     </div>
@@ -331,6 +358,19 @@
         </div>
         <div class="row">
             <div class="col-12 col-lg-10 offset-lg-1">
+                <div class="row">
+                    <div class="col-lg-1">
+                        <lnd-button
+                            [isDisabled]="true"
+                            label="Odstranit"
+                            type="warning"
+                            (action)="click($event)"
+                        ></lnd-button>
+                    </div>
+                    <div class="col-lg-10 text-center">
+                        Počet označených nabídek: 0
+                    </div>
+                </div>
                 <lnd-table
                     #table
                     [cols]="supplyOfferConfig.tableCols[commodityType]"
@@ -347,7 +387,9 @@
                         columnTemplatePriceNT: columnTemplatePriceNT,
                         columnTemplatePriceGas: columnTemplatePriceGas,
                         columnTemplateValidFromTo: columnTemplateValidFromTo,
-                        columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo
+                        columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo,
+                        columnTemplateMarkAll: columnTemplateMarkAll,
+                        columnTemplateMark: columnTemplateMark
                     }">
                 </lnd-table>
             </div>

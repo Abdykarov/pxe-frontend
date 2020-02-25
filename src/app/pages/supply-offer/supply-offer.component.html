@@ -1,3 +1,24 @@
+<ng-template #columnTemplateMarkAll>
+    <lnd-form-field
+        customFormGroupClass="form-group form-group--in-table"
+        label="Označit"
+        [value]="tableRows.length === numberOfMarked"
+        (click)="markAll($event)"
+        [type]="'CHECKBOX'">
+    </lnd-form-field>
+</ng-template>
+<ng-template #columnTemplateMark let-row="row">
+    <lnd-form-field
+        label="&#8203;"
+        customFormGroupClass="form-group form-group--in-table"
+        [value]="!!row.marked"
+        (click)="markOne(row.id, $event)"
+        [type]="'CHECKBOX'">
+    </lnd-form-field>
+    <span *ngIf="row.greenEnergy"
+          class="icon icon--leaf icon--green ml-auto">
+        </span>
+</ng-template>
 <ng-template #columnTemplatePriceVT let-row="row">
     {{row.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
 </ng-template>
@@ -194,7 +215,26 @@
             class="mb-4" 
             [hidden]="loadingOffers || tableRows.length === 0">
             <div class="row">
-                <div class="col-12 text-right">
+                <div class="col-12">
+                    <lnd-alert *ngIf="showDeletedOfferBanner"
+                               type="info">
+                        Odstranili jste {{numberOfDeletedOffers}} {{(numberOfDeletedOffers | plural: 'offer_delete')}}.
+                    </lnd-alert>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1 text-center text-lg-right">
+                    <lnd-button
+                        [isDisabled]="!numberOfMarked"
+                        label="Odstranit"
+                        type="warning"
+                        (action)="deleteMarkedOffers()"
+                    ></lnd-button>
+                </div>
+                <div class="col-lg-2 offset-lg-4 text-lg-center">
+                    Počet označených nabídek: {{numberOfMarked}}
+                </div>
+                <div class="col-lg-5 text-center text-lg-right">
                     <lnd-button
                         label="Přidat nabídku"
                         customClass="mr-2"
@@ -225,16 +265,18 @@
                 [tableClass]="['table--advanced', 'mb-0']"
                 [rowDetailTemplate]="rowDetail"
                 [actionColTriggersDetail]="true"
+                [whiteBackgroundPropertyCondition]="'marked'"
                 [columnTemplates]="{
                     actionColumnTemplate: actionColumnTemplate,
                     columnTemplatePriceVT: columnTemplatePriceVT,
                     columnTemplatePriceNT: columnTemplatePriceNT,
                     columnTemplatePriceGas: columnTemplatePriceGas,
                     columnTemplateValidFromTo: columnTemplateValidFromTo,
-                    columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo
+                    columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo,
+                    columnTemplateMark: columnTemplateMark,
+                    columnTemplateMarkAll: columnTemplateMarkAll
                 }">
             </lnd-table>
         </div>
     </ng-container>
-
 </pxe-layout-container>

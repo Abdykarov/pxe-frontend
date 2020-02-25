@@ -8,15 +8,30 @@ import {
     DELIVERY_LENGTH_OPTIONS,
     SUBJECT_TYPE_OPTIONS,
 } from 'src/app/app.constants';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { IOfferTableRows } from './models/supply-offer.model';
 import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
+import { PluralPipe } from 'src/common/pipes/plurar/plural.pipe';
 
 @Injectable({
     providedIn: 'root',
 })
 export class SupplyOfferConfig {
+    constructor(
+        private pluralPipe: PluralPipe,
+    ) {}
+
     public tableCols = (codeLists): IOfferTableRows => ({
         POWER: [
+            {
+                label: 'Označit',
+                contentTemplateHeaderName: 'columnTemplateMarkAll',
+                views: [
+                    {
+                        contentTemplateName: 'columnTemplateMark',
+                    },
+                ],
+            },
             {
                 label: 'Název produktu',
                 views: [
@@ -142,6 +157,15 @@ export class SupplyOfferConfig {
         ],
         GAS: [
             {
+                label: 'Označit',
+                contentTemplateHeaderName: 'columnTemplateMarkAll',
+                views: [
+                    {
+                        contentTemplateName: 'columnTemplateMark',
+                    },
+                ],
+            },
+            {
                 label: 'Název produktu',
                 views: [
                     {
@@ -262,6 +286,19 @@ export class SupplyOfferConfig {
                 confirmText: `Opravdu chcete zrušit vytváření nabídky<strong>${space}${name}</strong>?`,
                 titleConfirm: 'ANO ZRUŠIT',
                 data,
+            },
+        };
+    }
+
+    public confirmDeleteMarkedConfig = (numberOfOffers = 0, commodityType: CommodityType): IShowModal => {
+        return {
+            component: 'ConfirmModalComponent',
+            modalType: CONSTS.MODAL_TYPE.CONFIRM_DELETE_MARKED,
+            instanceData: {
+                confirmText:
+                    `Opravdu chcete odstranit ${numberOfOffers} ${this.pluralPipe.transform(numberOfOffers, 'offer_delete')}
+                        ${commodityType === CommodityType.GAS ? 'plynu' : 'elektřiny'}?`,
+                titleConfirm: 'ANO',
             },
         };
     }
