@@ -196,16 +196,17 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-1">
+                <div class="col-12 col-xl-6 text-center mb-3 mb-xl-0 order-xl-2">
+                    Počet označených nabídek: {{numberOfMarked}}
+                </div>
+                <div class="col-12 col-xl-3 order-xl-1">
                     <lnd-button
                         [isDisabled]="!numberOfMarked"
                         label="Odstranit"
-                        type="warning"
+                        type="danger"
+                        hasOutline="true"
                         (action)="deleteMarkedOffers()"
                     ></lnd-button>
-                </div>
-                <div class="col-lg-10 text-center">
-                    Počet označených nabídek: {{numberOfMarked}}
                 </div>
             </div>
             <lnd-table
