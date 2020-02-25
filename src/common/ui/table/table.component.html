@@ -56,21 +56,21 @@
                         <td
                             *ngIf="view.contentTemplateName"
                             [ngClass]="!!view.cellClass ? view.cellClass : ''">
-                            <ng-container *ngTemplateOutlet="columnTemplates[view.contentTemplateName]; context: {row: row,index: i}"></ng-container>
+                            <ng-container *ngTemplateOutlet="columnTemplates[view.contentTemplateName]; context: {row: row, index: i}"></ng-container>
                         </td>
                     </ng-container>
                 </ng-container>
                 <td
                     *ngIf="actionColTemplate"
                     [ngClass]="actionColClass">
-                    <ng-container *ngTemplateOutlet="actionColTemplate; context: {row: row,index: i}"></ng-container>
+                    <ng-container *ngTemplateOutlet="actionColTemplate; context: {row: row, index: i}"></ng-container>
                 </td>
             </tr>
             <tr
                 *ngIf="rowDetailTemplate && openedRow === row"
                 class="table__tr--detail table__tr--show">
                     <td [attr.colspan]="cols.length + (actionColTemplate ? 1 : 0)">
-                        <ng-container *ngTemplateOutlet="rowDetailTemplate; context: {row: row,index: i}"></ng-container>
+                        <ng-container *ngTemplateOutlet="rowDetailTemplate; context: {row: row, index: i}"></ng-container>
                     </td>
             </tr>
         </ng-container>
@@ -92,13 +92,13 @@
                         [innerHtml]="view.content(row)">
                     </td>
                     <td *ngIf="view.contentTemplateName">
-                        <ng-container *ngTemplateOutlet="columnTemplates[view.contentTemplateName]; context: {row: row,index: i}"></ng-container>
+                        <ng-container *ngTemplateOutlet="columnTemplates[view.contentTemplateName]; context: {row: row, index: i}"></ng-container>
                     </td>
                 </tr>
             </ng-container>
             <tr *ngIf="actionColTemplate">
                 <td colspan="2">
-                    <ng-container *ngTemplateOutlet="actionColTemplate; context: {row: row,index: i}"></ng-container>
+                    <ng-container *ngTemplateOutlet="actionColTemplate; context: {row: row, index: i}"></ng-container>
                 </td>
             </tr>
             <tr *ngIf="rowDetailTemplate">
@@ -117,7 +117,7 @@
                     *ngIf="openedRow === row"
                     colspan="2"
                     class="w-100 px-0">
-                    <ng-container *ngTemplateOutlet="rowDetailTemplate; context: {row: row,index: i}"></ng-container>
+                    <ng-container *ngTemplateOutlet="rowDetailTemplate; context: {row: row, index: i}"></ng-container>
                 </td>
             </tr>
         </tbody>

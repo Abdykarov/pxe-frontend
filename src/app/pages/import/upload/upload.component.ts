@@ -64,8 +64,8 @@ export class UploadComponent extends AbstractComponent implements OnInit {
     public readonly configStepper = getConfigStepper(ImportProgressStep.UPLOAD, false, TypeStepper.IMPORT);
     public readonly listOfErrorsHeaderText = 'Seznam chyb';
     public commodityType = CommodityType.POWER;
-    public globalError: string[] = [];
     public fileErrors: string[] = [];
+    public globalError: string[] = [];
     public isInitState = true;
     public listOfErrors: string[] = [];
     public loading = false;
@@ -98,9 +98,9 @@ export class UploadComponent extends AbstractComponent implements OnInit {
             this.globalError = [];
             const fileName = fileItem._file.name;
             const type = fileName.substr(fileName.lastIndexOf('.') + 1);
-            if (!inArray(type, CONSTS.ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES)) {
-                this.fileUploader.queue = [];
+            if (!inArray(type, CONSTS.ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES) || type === fileName) {
                 this.fileErrors = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.FILE_TYPE]];
+                this.fileUploader.clearQueue();
                 this.tryToUploadFile = false;
                 return;
             }
@@ -158,18 +158,20 @@ export class UploadComponent extends AbstractComponent implements OnInit {
 
     }
 
-    uploadFile = (file: FileUploader) => {
+    uploadFile = (fileUploader: FileUploader) => {
         if (!this.tryToUploadFile) {
             return;
         }
 
-        const numberOfFiles: number = R.path(['queue', 'length'], file) || 0;
+        const numberOfFiles: number = R.path(['queue', 'length'], fileUploader) || 0;
         if (numberOfFiles === 0) {
             this.fileErrors = [defaultErrorMessage];
         } else if (numberOfFiles <= CONSTS.VALIDATORS.MAX_IMPORT_FILES) {
             this.fileErrors = [];
             this.loading = true;
-            file.uploadItem(file.queue[0]);
+            R.forEach((fileItem: FileItem) => {
+                fileUploader.uploadItem(fileItem);
+            }, fileUploader.queue);
         } else {
             this.fileErrors = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.MAX_NUMBER_OF_FILES]];
         }

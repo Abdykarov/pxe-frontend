@@ -1,3 +1,6 @@
-name,validFrom,validTo,deliveryFrom,deliveryTo,deliveryLength,distributionLocation,permanentPaymentPrice,subjectTypeId,Benefit1,URL1,Benefit2,URL2,Benefit3,URL3,Benefit4,URL4,priceGas,annualConsumptionId,priceVT,priceNT,distributionRateId,circuitBreakerId
-power offer,2020-02-25,2020-03-24,2020-04-01,2021-03-31,1,E.ON,140.5,1,benefit1,http://benefit1.cz,benefit2,http://benefit2.cz,,,,,,,152.20,137.40,D25d,<= 1x25A
-gas offer,2020-02-20,2020-05-31,2020-06-01,2021-05-31,1,E.ON,138.7,2,ben1,http://ben1.cz,,,,,,,1.2587,,,,,
+name,validFrom,validTo,deliveryFrom,deliveryTo,deliveryLength,distributionLocation,permanentPaymentPrice,subjectTypeId,greenEnergy,Benefit1,URL1,Benefit2,URL2,Benefit3,URL3,Benefit4,URL4,priceGas,annualConsumptionId,priceVT,priceNT,distributionRateId,circuitBreakerId
+valid power offer,2020-02-25,2020-03-24,2020-04-01,2021-03-31,1,E.ON,140.5,1,true,benefit1,http://benefit1.cz,benefit2,http://benefit2.cz,,,,,,,152.20,137.40,C25d,<= 1x25A
+valid gas offer,2020-02-20,2020-05-31,2020-06-01,2021-05-31,1,E.ON,138.7,2,false,ben1,http://ben1.cz,,,,,,,1.2587,3,,,,
+invalid power offer,2021-01-01,2021-12-31,2022-01-01,2023-12-31,2,ČEZ,150,2,false,benefit1,http://url1.cz,benefit2,http://url2.cz,benefit3,http://url3.cz,,,,,160,120,,
+invalid gas offer,2020-06-01,2020-08-31,2021-01-01,2021-12-31,1,PRE,130.50,1,true,gbenefit1,http://gurl1.cz,,,,,,,0.70,7,,,,
+valid gas offer,2020-02-20,2020-05-31,2020-06-01,2021-05-31,1,E.ON,138.7,2,false,ben1,http://ben1.cz,,,,,,,1.2587,3,,,,

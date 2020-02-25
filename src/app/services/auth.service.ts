@@ -22,7 +22,8 @@ import {
     repeatWhen,
     switchMap,
     take,
-    takeUntil, tap,
+    takeUntil,
+    tap,
 } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 

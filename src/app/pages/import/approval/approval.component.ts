@@ -132,7 +132,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                 },
                 error => {
                     const message = parseRestAPIErrors(error);
-                    this.globalError.push(message);
+                    this.globalError = [message];
                     this.cd.markForCheck();
                 });
     }

@@ -66,10 +66,8 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public readonly bannerTypeImages = BannerTypeImages;
-    public readonly bannerTitle = 'Nemáte žádnou nabídku elektřiny.';
-    public readonly bannerDescription = 'Proveďte import nabídek nahráním CSV souboru, nebo přidejte nabídku ručně.';
-    public readonly buttonLabel = 'Import nabídek';
     public commodityType = CommodityType.POWER;
+    public commodityTypeOptions = CommodityType;
     public currentOfferFormValues = {};
     public deleteDisabled: boolean[] = [];
     public fieldError: IFieldError = {};
@@ -143,7 +141,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
             .subscribe(
                 ([codeLists, offers, commodityType]) => {
                     if (codeLists && offers) {
-                        this.tableRows = offers;
+                        this.tableRows = [];
                         if (!this.initRows) {
                             this.tableCols = this.supplyOfferConfig.tableCols(codeLists)[commodityType];
                             this.numberOfMarked = this.offerService.markAll(false, this.commodityType);

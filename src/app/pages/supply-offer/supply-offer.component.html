@@ -178,10 +178,11 @@
             <div class="row mt-5">
                 <div class="col-12">
                     <lnd-info-banner
-                        [bannerTitle]="bannerTitle"
+                        [bannerTitle]="this.commodityType === commodityTypeOptions.POWER ?
+                                            'Nemáte žádnou nabídku elektřiny.' : 'Nemáte žádnou nabídku plynu.'"
                         [bannerType]="bannerTypeImages.IMPORT_ERROR"
-                        [bannerDescription]="bannerDescription"
-                        [buttonLabel]="buttonLabel"
+                        bannerDescription="Proveďte import nabídek nahráním CSV souboru, nebo přidejte nabídku ručně."
+                        buttonLabel="Import nabídek"
                         (buttonAction)="navigateToImportOffer($event)"
                     >
                     </lnd-info-banner>

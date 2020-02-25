@@ -15,6 +15,7 @@ import {
     updateGasOfferMutation,
     updatePowerOfferMutation,
 } from 'src/common/graphql/mutation/offer';
+import { environment } from 'src/environments/environment';
 import {
     findSupplierOffersQuery,
     findSupplyPointOffersQuery,
@@ -26,7 +27,6 @@ import {
     IOfferInputPowerAttributes,
     IOfferStatus,
 } from 'src/common/graphql/models/offer.model';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -153,7 +153,6 @@ export class OfferService {
         `${environment.url_api}/v1.0/offer/export-csv`,
         {},
     )
-
 
     public markAll = (mark: boolean, commodityType: CommodityType): number => {
         const client = this.apollo.getClient();
