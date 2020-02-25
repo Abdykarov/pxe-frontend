@@ -165,6 +165,15 @@
 			}
 		}
 
+		&__danger-background{
+			box-shadow: $table-active-shadow;
+
+			& > th,
+			& > td {
+				background-color: $table-danger-bg;
+			}
+		}
+
 		&:hover {
 			box-shadow: $table-active-shadow;
 

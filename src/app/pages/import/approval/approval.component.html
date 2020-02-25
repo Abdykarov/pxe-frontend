@@ -47,25 +47,20 @@
         <div class="mt-5">
             <lnd-info-banner
                 *ngIf="!offerDeleted"
-                bannerTitle="Úspěšně jsme nahráli {{tableRows.length}} nové nabídky. <br /> Po schválení se nabídky zobrazí vašim zákazníkům."
+                bannerTitle="Úspěšně jsme nahráli {{tableRows.length}} {{tableRows.length | plural: 'new_offer'}}. <br /> Po schválení se nabídky zobrazí vašim zákazníkům."
                 [showButton]="false"
                 [bannerType]="bannerTypeImages.ACCEPTED"
             >
             </lnd-info-banner>
         </div>
         <lnd-alert
-            *ngIf="numberOfDuplicateOffers"
-            type="info"
+            *ngIf="offerDeleted || numberOfDuplicateOffers"
             customClass="text-center"
-        >
-            Seznam nabídek obsahuje {{numberOfDuplicateOffers}} {{numberOfDuplicateOffers | plural: 'duplicity'}}.
-        </lnd-alert>
-        <lnd-alert
-            *ngIf="offerDeleted"
             type="info"
-            hasIcon="true"
         >
-            Nabídka {{offerDeleted}} byla smazána.
+            {{(offerDeleted ? ('Nabídka ' + offerDeleted + ' byla smazána.') : '')}}
+            <br *ngIf="offerDeleted && numberOfDuplicateOffers" />
+            {{numberOfDuplicateOffers ? ('Seznam nabídek obsahuje ' + numberOfDuplicateOffers + ' ' + (numberOfDuplicateOffers | plural: 'duplicity') + '.') : ''}}
         </lnd-alert>
     </div>
     <div class="col-12 col-lg-10 offset-lg-1">
@@ -78,6 +73,7 @@
             [tableWrapperClass]="['table-wrapper--advanced']"
             [tableClass]="['table--advanced', 'mb-0']"
             [actionColTriggersDetail]="false"
+            [dangerBackgroundPropertyCondition]="'duplicity'"
             [columnTemplates]="{
                     actionColumnTemplate: actionColumnTemplate,
                     columnTemplatePriceVT: columnTemplatePriceVT,

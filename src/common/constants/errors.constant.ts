@@ -25,6 +25,27 @@ export const importErrorViolations = {
     'mustNotBeNull': 'Nesmí být prázdný.',
     'annual-consumption-is-required': 'Povinný',
     'invalidOffer': 'Neplatný číselník',
+    'circuitBreakerIdMustNotBeBlank': 'Jistič nesmí být prázdný.',
+    'distributionRateIdMustNotBeBlank': 'Distribuční území nesmí být prázdné',
+    'priceVTMustNotBeNull': 'Vysoký tarif nesmí být prázdný.',
+    'priceGasMustNotBeNull': 'Cena nesmí být prázdná.',
+    'annualConsumptionIdMustNotBeBlank': 'Spotřeba nesmí být prázdná.',
+    'greenEnergyMustNotBeNull': 'Zelená elektřina nesmí být prázdná.',
+    'subjectTypeIdMustNotBeBlank': 'Subjekt nesmí bý prázdný.',
+    'permanentPaymentPriceMustNotBeNull': 'Pernamentní cena nesmí být prázdná.',
+    'distributionLocationMustNotBeBlank': 'Distribuční území nesmí být prázdné',
+    'deliveryLengthMustNotBeNull': 'deliveryLengthMustNotBeNull',
+    'deliveryToMustNotBeNull': 'deliveryToMustNotBeNull',
+    'deliveryFromMustNotBeNull': 'deliveryFromMustNotBeNull',
+    'validToMustNotBeNull': 'validToMustNotBeNull',
+    'validFromMustNotBeNull': 'validFromMustNotBeNull',
+    'supplierIdMustNotBeNull': 'supplierIdMustNotBeNull',
+    'nameMustNotBeBlank': 'nameMustNotBeBlank',
+    'invalidDistributionLocation': 'ahoj',
+    'invalidSubjectTypeId': 'invalidSubjectTypeId',
+    'invalidDistributionRateId': 'invalidDistributionRateId',
+    'invalidCircuitBreakerId': 'invalidCircuitBreakerId',
+    'invalidAnnualConsumptionId': 'invalidAnnualConsumptionId',
 };
 
 export const restAPIErrorCodes = {
@@ -36,7 +57,7 @@ export const restAPIErrorCodes = {
 };
 
 export const graphQLMessages = {
-    activeContractPresent: 'Ucet nelze smazat, protoze jsou aktivni smlouvy.',
+    activeContractPresent: 'Úcet nelze smazat, protože jsou aktivní smlouvy.',
     cannotDeleteContract: 'Omlouváme se, ale z neočekávaného důvodu se odstoupení od smlouvy nepodařilo. Zkuste to prosím znovu později.',
     cannotSignContract: 'Omlouváme se, ale z neočekávaného důvodu se nepodařilo smlouvu podepsat. Zkuste to prosím znovu později.',
     invalidSupplyPointId: 'Hledané odběrné místo neexistuje nebo pro přístup k němu nemáte oprávnění.',

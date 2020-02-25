@@ -96,7 +96,7 @@ export class PluralPipe implements PipeTransform {
             '=2' : 'duplicity',
             '=3' : 'duplicity',
             '=4' : 'duplicity',
-            'other' : 'diplicit',
+            'other' : 'duplicit',
         },
     };
 
