@@ -193,7 +193,7 @@ export class UploadComponent extends AbstractComponent implements OnInit {
             return listOfErrors;
         }, [], offersImportInput);
 
-        this.isInitState = true;
+        this.isInitState = false;
         this.fileUploader.clearQueue();
         this.cd.markForCheck();
         return !!this.listOfErrors.length;

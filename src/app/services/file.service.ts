@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { CONSTS } from 'src/app/app.constants';
+
 @Injectable({
     providedIn: 'root',
 })
@@ -10,7 +12,7 @@ export class FileService {
             url = window.URL.createObjectURL(blob);
 
         a.href = url;
-        a.download = 'myFile.csv';
+        a.download = `${CONSTS.EXPORT.FILE_NAME}_${new Date().toISOString()}.${CONSTS.EXPORT.TYPE}`;
         a.click();
         window.URL.revokeObjectURL(url);
         a.remove();

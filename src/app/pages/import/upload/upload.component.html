@@ -12,12 +12,12 @@
                 </lnd-alert>
                 <p *ngIf="!isInitState">
                     <lnd-info-banner
-                        [bannerTitle]="'Import nabídek jsme nemohli dokončit. <br /> V tabulce jsme nalezli '+ (listOfErrors.length) + ' ' + (listOfErrors.length | plural: 'error')"
+                        [bannerTitle]="'Import nabídek jsme nemohli dokončit. <br /> V souboru jsme nalezli '+ (listOfErrors.length) + ' ' + (listOfErrors.length | plural: 'error')"
                         [bannerType]="bannerTypeImages.IMPORT_ERROR"
                         [showButton]="false"
                     >
                     </lnd-info-banner>
-                    Opravte si tabulku podle seznamu chyb a pak jí nahrajte znovu.
+                    Opravte si soubor podle seznamu chyb a pak jí nahrajte znovu.
                 </p>
                 <ng-container *ngIf="isInitState">
                     <p class="mb-1">

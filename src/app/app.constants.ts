@@ -18,6 +18,10 @@ export const CONSTS = {
     },
     DEFAULT_EXPIRATION: 3600,
     DEFAULT_DEPOSIT_PAYMENT_TYPE_ID: 'Prikaz',
+    EXPORT: {
+        FILE_NAME: 'export',
+        TYPE: 'csv',
+    },
     IMPORT_ERROR_CODES: {
         FILE_TYPE: 'FILE_TYPE',
         MAX_NUMBER_OF_FILES: 'MAX_NUMBER_OF_FILES',

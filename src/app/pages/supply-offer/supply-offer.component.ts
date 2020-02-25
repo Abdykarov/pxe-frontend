@@ -260,7 +260,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                (csvContent) => {
+                (csvContent: string) => {
                     this.fileService.saveAsCSV(csvContent);
                 },
                 error => {

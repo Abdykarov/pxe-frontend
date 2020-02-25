@@ -60,7 +60,9 @@ export class ApiInterceptor implements HttpInterceptor {
                     'Authorization': 'Bearer ' + this.authService.getToken(),
                     'Content-Type': 'text/csv',
                     'X-API-Key': `${environment.x_api_key}`,
+                    'Accept': 'text/csv',
                 }),
+                responseType: 'text',
             });
         }
 

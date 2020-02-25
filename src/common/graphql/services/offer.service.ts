@@ -149,7 +149,7 @@ export class OfferService {
         offers,
     )
 
-    public exportCSV = () => this.http.post<any>(
+    public exportCSV = () => this.http.post<string>(
         `${environment.url_api}/v1.0/offer/export-csv`,
         {},
     )
