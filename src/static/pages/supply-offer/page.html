@@ -335,40 +335,38 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 col-lg-10 offset-lg-1 text-right">
-                <lnd-button
-                    label="Přidat nabídku"
-                    customClass="mr-2"
-                    type="secondary"
-                    (action)="click.emit($event)"
-                ></lnd-button>
-                <lnd-button
-                    label="Import nabídek"
-                    customClass="mr-2"
-                    type="secondary"
-                    (action)="click.emit($event)"
-                ></lnd-button>
-                <lnd-button
-                    label="Export nabídek"
-                    customClass="mr-2"
-                    type="primary"
-                    (action)="click.emit($event)"
-                ></lnd-button>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-12 col-lg-10 offset-lg-1">
                 <div class="row">
-                    <div class="col-lg-1">
+                    <div class="col-lg-1 text-center text-lg-right">
                         <lnd-button
                             [isDisabled]="true"
                             label="Odstranit"
                             type="warning"
-                            (action)="click($event)"
+                            (action)="click()"
                         ></lnd-button>
                     </div>
-                    <div class="col-lg-10 text-center">
+                    <div class="col-lg-2 offset-lg-4 text-center">
                         Počet označených nabídek: 0
+                    </div>
+                    <div class="col-lg-5 text-center text-lg-right">
+                        <lnd-button
+                            label="Přidat nabídku"
+                            customClass="mr-2"
+                            type="secondary"
+                            (action)="click($event)"
+                        ></lnd-button>
+                        <lnd-button
+                            label="Import nabídek"
+                            customClass="mr-2"
+                            type="secondary"
+                            (action)="click($event)"
+                        ></lnd-button>
+                        <lnd-button
+                            label="Export nabídek"
+                            customClass="mr-2"
+                            type="primary"
+                            (click)="click($event)"
+                        ></lnd-button>
                     </div>
                 </div>
                 <lnd-table
