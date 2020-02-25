@@ -151,16 +151,6 @@
 </ng-template>
 
 <pxe-layout-container pageTitle="Přehled nabídek">
-    <lnd-alert
-            *ngIf="numberOfImportedOffers"
-            type="info"
-            [hasIcon]="true">
-        Přidali jsme {{numberOfImportedOffers}} {{(numberOfImportedOffers | plural: 'new_offer')}}.
-    </lnd-alert>
-    <lnd-alert *ngIf="showDeletedOfferBanner"
-               type="info">
-        Odstranili jste {{numberOfDeletedOffers}} {{(numberOfDeletedOffers | plural: 'offer_delete')}}.
-    </lnd-alert>
     <ul class="text-center link-list">
         <li class="link-list__item">
             <a class="link-list__link"
@@ -218,11 +208,21 @@
         <div
             class="mb-4" 
             [hidden]="loadingOffers || tableRows.length === 0">
-            <div class="row">
+            <div class="row"
+                 *ngIf="showDeletedOfferBanner">
                 <div class="col-12">
-                    <lnd-alert *ngIf="showDeletedOfferBanner"
-                               type="info">
+                    <lnd-alert type="info">
                         Odstranili jste {{numberOfDeletedOffers}} {{(numberOfDeletedOffers | plural: 'offer_delete')}}.
+                    </lnd-alert>
+                </div>
+            </div>
+            <div class="row"
+                 *ngIf="numberOfImportedOffers && !showDeletedOfferBanner">
+                <div class="col-12">
+                    <lnd-alert
+                        type="info"
+                        [hasIcon]="true">
+                        Přidali jsme {{numberOfImportedOffers}} {{(numberOfImportedOffers | plural: 'new_offer')}}.
                     </lnd-alert>
                 </div>
             </div>
