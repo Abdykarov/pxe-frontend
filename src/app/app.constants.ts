@@ -175,6 +175,8 @@ export const SEO = {
             'nejlevnějši plyn',
             'distribuce plynu',
             'distribuce elektřiny',
+            'parc4u',
+            'pxe',
         ],
         LOGIN: [
             'přihlášení',
@@ -198,8 +200,17 @@ export const SEO = {
             'obchodními podmínkami',
         ],
     },
-    META_DESCRIPTION: 'Měňte dodavatele energií na 1 klik. Neřešte papírování a chození na pobočky.' +
-        ' Chraňte se před nekalostmi ve smlouvě. Energie za férové ceny bez skrytých poplatků.',
+    META_DESCRIPTION: {
+        COOKIES_POLICY: 'Co jsou cookies a proč je na stránkách PARC4U používáme?',
+        LANDING_PAGE: 'Měňte dodavatele energií na 1 klik. Neřešte papírování a chození na' +
+            ' pobočky. Chraňte se před nekalostmi ve smlouvě. Energie za férové ceny bez skrytých poplatků.',
+        LOGIN: 'Přihlášení do PARC4U, kde máte snadný přístup k jiným cenám za energie.',
+        PATTERNS_OF_CONTRACTS: 'Vzor smlouvy k dodávce uzavřené přes PARC4U.',
+        TERMS_OF_USE: 'Obchodní podmínky k pravidlům registrace dodavatelů a odběratelů na trhu PARC4U.',
+        SECURING_YOUR_DATA: 'Jak v PARC4U pracujeme s osobními údaji a jak je chráníme.',
+        SIGN_UP: 'Registrace do PARC4U, kde kliknutím měníte dodavatele energií,' +
+            ' nemusíte na pobočky a dostáváte konečné ceny bez skrytých poplatků.',
+    },
 };
 
 export enum INavigationItemType {

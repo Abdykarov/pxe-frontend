@@ -74,9 +74,9 @@ export class LoginComponent extends AbstractComponent {
     ) {
         super();
         this.titleService.setTitle(CONSTS.TITLES.LOGIN);
-        this.metaService.addTag({
+        this.metaService.updateTag({
             name: 'description',
-            content: SEO.META_DESCRIPTION,
+            content: SEO.META_DESCRIPTION.LOGIN,
         });
         this.metaService.updateTag({
                 name: 'keywords',
