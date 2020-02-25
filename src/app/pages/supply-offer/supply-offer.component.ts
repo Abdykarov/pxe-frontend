@@ -141,7 +141,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
             .subscribe(
                 ([codeLists, offers, commodityType]) => {
                     if (codeLists && offers) {
-                        this.tableRows = [];
+                        this.tableRows = offers;
                         if (!this.initRows) {
                             this.tableCols = this.supplyOfferConfig.tableCols(codeLists)[commodityType];
                             this.numberOfMarked = this.offerService.markAll(false, this.commodityType);
