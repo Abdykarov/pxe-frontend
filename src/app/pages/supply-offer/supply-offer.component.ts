@@ -24,7 +24,7 @@ import {
     map,
     takeUntil,
 } from 'rxjs/operators';
-import { ILoginResponse } from 'src/app/services/model/auth.model';
+import { FileService } from 'src/app/services/file.service';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
@@ -108,6 +108,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
+        private fileService: FileService,
         private modalsService: ModalService,
         private offerService: OfferService,
         private route: ActivatedRoute,
@@ -260,6 +261,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 (csvContent) => {
+                    this.fileService.saveAsCSV(csvContent);
                 },
                 error => {
                     const { globalError } = parseGraphQLErrors(error);
