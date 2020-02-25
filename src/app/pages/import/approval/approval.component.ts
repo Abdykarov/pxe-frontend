@@ -128,6 +128,11 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                             this.commodityType === CommodityType.POWER ?
                                 ROUTES.ROUTER_SUPPLY_OFFER_POWER : ROUTES.ROUTER_SUPPLY_OFFER_GAS,
                         ],
+                        {
+                            state: {
+                                numberOfImportedOffers: offersImportInput.length,
+                            },
+                        },
                     );
                 },
                 error => {

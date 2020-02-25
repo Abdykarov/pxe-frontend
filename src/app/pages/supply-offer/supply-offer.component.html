@@ -152,11 +152,14 @@
 
 <pxe-layout-container pageTitle="Přehled nabídek">
     <lnd-alert
-            *ngIf="globalError.length"
-            type="danger">
-        <ng-container *ngFor="let error of globalError">
-            {{ error }}<br>
-        </ng-container>
+            *ngIf="numberOfImportedOffers"
+            type="info"
+            [hasIcon]="true">
+        Přidali jsme {{numberOfImportedOffers}} {{(numberOfImportedOffers | plural: 'new_offer')}}.
+    </lnd-alert>
+    <lnd-alert *ngIf="showDeletedOfferBanner"
+               type="info">
+        Odstranili jste {{numberOfDeletedOffers}} {{(numberOfDeletedOffers | plural: 'offer_delete')}}.
     </lnd-alert>
     <ul class="text-center link-list">
         <li class="link-list__item">
