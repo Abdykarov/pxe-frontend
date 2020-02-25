@@ -23,6 +23,7 @@ import {
     map,
     takeUntil,
 } from 'rxjs/operators';
+import { ILoginResponse } from 'src/app/services/model/auth.model';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
@@ -210,6 +211,18 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
 
     public exportOffers = (evt) => {
         evt.preventDefault();
+        this.offerService.exportCSV()
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                (csvContent) => {
+                },
+                error => {
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
+                });
     }
 
     public edit = (table, row) => {

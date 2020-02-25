@@ -139,4 +139,9 @@ export class OfferService {
         `${environment.url_api}/v1.0/offer/batch-import`,
         offers,
     )
+
+    public exportCSV = () => this.http.post<any>(
+        `${environment.url_api}/v1.0/offer/export-csv`,
+        {},
+    )
 }
