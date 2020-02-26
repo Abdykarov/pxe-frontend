@@ -222,9 +222,7 @@
                     <lnd-alert
                         type="info"
                         [hasIcon]="true">
-                        <ng-container *ngIf="numberOfImportedOffers">
-                            Přidali jsme {{numberOfImportedOffers}} {{(numberOfImportedOffers | plural: 'new_offer')}}
-                        </ng-container>
+                        Přidali jsme {{numberOfImportedOffers}} {{(numberOfImportedOffers | plural: 'new_offer')}}
                         <ng-container *ngIf="numberOfDuplicateOffers">
                             a z důvodu duplicit
                             {{numberOfDuplicateOffers | plural: 'was'}}
