@@ -105,6 +105,20 @@ export class PluralPipe implements PipeTransform {
             '=4' : 'byly',
             'other' : 'bylo',
         },
+        'omitted': {
+            '=1' : 'vynechána',
+            '=2' : 'vynechány',
+            '=3' : 'vynechány',
+            '=4' : 'vynechány',
+            'other' : 'vynecháno',
+        },
+        'willNotImported': {
+            '=1' : ', která nebude naimportována',
+            '=2' : ', které nebude naimportovány',
+            '=3' : ', které nebude naimportovány',
+            '=4' : ', které nebude naimportovány',
+            'other' : ', které nebudou naimportovány',
+        },
     };
 
     constructor(

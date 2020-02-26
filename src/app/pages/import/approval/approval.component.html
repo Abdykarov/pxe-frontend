@@ -60,8 +60,16 @@
             type="info"
         >
             {{(offerDeleted ? ('Nabídka ' + offerDeleted + ' byla smazána.') : '')}}
-            <br *ngIf="offerDeleted && numberOfDuplicateOffers" />
-            {{numberOfDuplicateOffers ? ('Seznam nabídek obsahuje ' + numberOfDuplicateOffers + ' ' + (numberOfDuplicateOffers | plural: 'duplicity') + ', které nebudou naimportovány.') : ''}}
+                <br *ngIf="offerDeleted && numberOfDuplicateOffers" />
+                {{
+                    numberOfDuplicateOffers ?
+                        ('Seznam nabídek obsahuje ' +
+                            numberOfDuplicateOffers +
+                            ' ' +
+                            (numberOfDuplicateOffers | plural: 'duplicity') +
+                            (numberOfDuplicateOffers | plural: 'willNotImported')+
+                            '.'
+                        ) : ''}}
         </lnd-alert>
     </div>
     <div class="col-12 col-lg-10 offset-lg-1">

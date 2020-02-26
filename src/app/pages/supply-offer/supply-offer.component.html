@@ -223,7 +223,11 @@
                         type="info"
                         [hasIcon]="true">
                         Přidali jsme {{numberOfImportedOffers}} {{(numberOfImportedOffers | plural: 'new_offer')}}<ng-container *ngIf="numberOfDuplicateOffers">
-                        a vynecháno z důvodu duplicit {{numberOfDuplicateOffers | plural: 'was'}} {{numberOfDuplicateOffers}} {{numberOfDuplicateOffers | plural: 'offer'}}</ng-container>.
+                        a z důvodu duplicit
+                        {{numberOfDuplicateOffers | plural: 'was'}}
+                        {{numberOfDuplicateOffers | plural: 'omitted'}}
+                        {{numberOfDuplicateOffers}}
+                        {{numberOfDuplicateOffers | plural: 'offer'}}</ng-container>.
                     </lnd-alert>
                 </div>
             </div>
