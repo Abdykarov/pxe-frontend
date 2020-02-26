@@ -25,11 +25,11 @@ export class FileUploaderComponent {
         this.hasBaseDropZoneOver = e;
     }
 
-    fileDrop = () => {
+    fileDrop = (evt) => {
         this.fileSelectAction.emit(this.uploader);
     }
 
-    fileSelected = () => {
+    fileSelected = (evt) => {
         this.fileSelectAction.emit(this.uploader);
     }
 }
