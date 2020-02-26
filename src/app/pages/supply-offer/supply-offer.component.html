@@ -210,7 +210,7 @@
             [hidden]="loadingOffers || tableRows.length === 0">
             <div class="row"
                  *ngIf="showDeletedOfferBanner">
-                <div class="col-12">
+                <div class="col-12 text-center">
                     <lnd-alert type="info">
                         Odstranili jste {{numberOfDeletedOffers}} {{(numberOfDeletedOffers | plural: 'offer_delete')}}.
                     </lnd-alert>
@@ -222,7 +222,8 @@
                     <lnd-alert
                         type="info"
                         [hasIcon]="true">
-                        Přidali jsme {{numberOfImportedOffers}} {{(numberOfImportedOffers | plural: 'new_offer')}}.
+                        Přidali jsme {{numberOfImportedOffers}} {{(numberOfImportedOffers | plural: 'new_offer')}}<ng-container *ngIf="numberOfDuplicateOffers">
+                        a vynecháno z důvodu duplicit {{numberOfDuplicateOffers | plural: 'was'}} {{numberOfDuplicateOffers}} {{numberOfDuplicateOffers | plural: 'offer'}}</ng-container>.
                     </lnd-alert>
                 </div>
             </div>

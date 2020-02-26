@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { FileUploader } from 'src/common/utils/file-upload';
 
 import {
     fileUploader,
     stepperProgressConfig,
 } from 'src/static/pages/import-upload/config';
+import { FileUploader } from 'src/third-sides/file-upload';
 
 @Component({
     templateUrl: './page.html',

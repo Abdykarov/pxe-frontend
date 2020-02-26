@@ -5,8 +5,7 @@ import {
     Output,
 } from '@angular/core';
 
-import { FileUploader } from 'src/common/utils/file-upload';
-
+import { FileUploader } from 'src/third-sides/file-upload';
 
 @Component({
     selector: 'pxe-file-uploader',

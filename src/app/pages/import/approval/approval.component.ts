@@ -123,7 +123,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                () => {
+                (duplicateOffers: number[]) => {
                     this.router.navigate([
                             this.commodityType === CommodityType.POWER ?
                                 ROUTES.ROUTER_SUPPLY_OFFER_POWER : ROUTES.ROUTER_SUPPLY_OFFER_GAS,
@@ -131,6 +131,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                         {
                             state: {
                                 numberOfImportedOffers: offersImportInput.length,
+                                numberOfDuplicateOffers: duplicateOffers.length,
                             },
                         },
                     );
@@ -139,7 +140,8 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                     const message = parseRestAPIErrors(error);
                     this.globalError = [message];
                     this.cd.markForCheck();
-                });
+                },
+            );
     }
 
     public navigationBack = () => {

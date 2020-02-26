@@ -17,7 +17,8 @@
 </ng-template>
 <ng-template #actionColumnTemplate let-row="row" let-index="index">
     <span>{{row.offerInput.permanentPaymentPrice | number:'1.0-2'}}&nbsp;Kč/měsíc (bez&nbsp;DPH)</span>
-    <div class="row action-area-div">
+    <div class="row action-area-div"
+         *ngIf="!row.duplicity">
         <div class="col-12">
             <ng-template #tooltipDelete let-toggle="toggle">
                 <lnd-button
@@ -60,7 +61,7 @@
         >
             {{(offerDeleted ? ('Nabídka ' + offerDeleted + ' byla smazána.') : '')}}
             <br *ngIf="offerDeleted && numberOfDuplicateOffers" />
-            {{numberOfDuplicateOffers ? ('Seznam nabídek obsahuje ' + numberOfDuplicateOffers + ' ' + (numberOfDuplicateOffers | plural: 'duplicity') + '.') : ''}}
+            {{numberOfDuplicateOffers ? ('Seznam nabídek obsahuje ' + numberOfDuplicateOffers + ' ' + (numberOfDuplicateOffers | plural: 'duplicity') + ', které nebudou naimportovány.') : ''}}
         </lnd-alert>
     </div>
     <div class="col-12 col-lg-10 offset-lg-1">

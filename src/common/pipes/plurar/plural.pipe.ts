@@ -98,6 +98,13 @@ export class PluralPipe implements PipeTransform {
             '=4' : 'duplicity',
             'other' : 'duplicit',
         },
+        'was'  : {
+            '=1' : 'byla',
+            '=2' : 'byly',
+            '=3' : 'byly',
+            '=4' : 'byly',
+            'other' : 'bylo',
+        },
     };
 
     constructor(

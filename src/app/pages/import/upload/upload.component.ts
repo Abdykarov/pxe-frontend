@@ -32,7 +32,7 @@ import {
 import {
     FileItem,
     FileUploader,
-} from 'src/common/utils/file-upload';
+} from 'src/third-sides/file-upload';
 import { fileUploaderFactory } from 'src/app/pages/import/upload/upload.config';
 import {
     getConfigStepper,

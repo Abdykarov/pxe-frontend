@@ -1,7 +1,6 @@
-
 import { AuthService } from 'src/app/services/auth.service';
 import { CONSTS } from 'src/app/app.constants';
-import { FileUploader } from 'src/common/utils/file-upload';
+import { FileUploader } from 'src/third-sides/file-upload';
 import { environment } from 'src/environments/environment';
 
 export const fileUploaderFactory = (authService: AuthService): FileUploader => {

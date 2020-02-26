@@ -3,7 +3,7 @@
     class="pt-5 pb-5 w-100 drop-zone"
     [ngClass]="{'file-over': hasBaseDropZoneOver}"
     (fileOver)="fileOverBase($event)"
-    (onFileDrop)="fileDrop($event)"
+    (fileDrop)="fileDrop($event)"
     [uploader]="uploader"
 >
     <p class="mb-5">
@@ -23,7 +23,7 @@
                ng2FileSelect
                type="file"
                [uploader]="uploader"
-               (onFileSelected)="fileSelected($event)"
+               (fileSelected)="fileSelected($event)"
                hidden
         />
     </label>

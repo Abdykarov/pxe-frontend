@@ -17,8 +17,8 @@ import { HttpLinkModule } from 'apollo-angular-link-http';
 import { ApolloGraphQLProvider } from 'src/common/graphql/middleware/apollo-graphql-provider';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
+import { FileUploadModule } from 'src/third-sides/file-upload';
 import { InterceptorProviders } from './interceptors';
-import { FileUploadModule } from 'src/common/utils/file-upload';
 import { PipesModule } from 'src/common/pipes/pipes.module';
 
 @NgModule({

@@ -1,4 +1,5 @@
 import { EventEmitter } from '@angular/core';
+
 import { FileLikeObject } from './file-like-object.class';
 import { FileItem } from './file-item.class';
 import { FileType } from './file-type.class';
@@ -372,7 +373,7 @@ export class FileUploader {
       xhr.setRequestHeader(this.authTokenHeader, this.authToken);
     }
     xhr.onreadystatechange = function () {
-      if (xhr.readyState == XMLHttpRequest.DONE) {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
         that.response.emit(xhr.responseText);
       }
     };
