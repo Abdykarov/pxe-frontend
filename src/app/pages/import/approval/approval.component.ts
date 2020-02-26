@@ -124,13 +124,17 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 (duplicateOffers: number[]) => {
+                    const numberOfImportedOffers = offersImportInput.length - duplicateOffers.length;
+                    if (numberOfImportedOffers) {
+                        return;
+                    }
                     this.router.navigate([
                             this.commodityType === CommodityType.POWER ?
                                 ROUTES.ROUTER_SUPPLY_OFFER_POWER : ROUTES.ROUTER_SUPPLY_OFFER_GAS,
                         ],
                         {
                             state: {
-                                numberOfImportedOffers: offersImportInput.length,
+                                numberOfImportedOffers: numberOfImportedOffers,
                                 numberOfDuplicateOffers: duplicateOffers.length,
                             },
                         },

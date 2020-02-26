@@ -217,17 +217,20 @@
                 </div>
             </div>
             <div class="row"
-                 *ngIf="numberOfImportedOffers && !showDeletedOfferBanner">
+                 *ngIf="(numberOfImportedOffers || numberOfDuplicateOffers)&& !showDeletedOfferBanner">
                 <div class="col-12">
                     <lnd-alert
                         type="info"
                         [hasIcon]="true">
-                        Přidali jsme {{numberOfImportedOffers}} {{(numberOfImportedOffers | plural: 'new_offer')}}<ng-container *ngIf="numberOfDuplicateOffers">
-                        a z důvodu duplicit
-                        {{numberOfDuplicateOffers | plural: 'was'}}
-                        {{numberOfDuplicateOffers | plural: 'omitted'}}
-                        {{numberOfDuplicateOffers}}
-                        {{numberOfDuplicateOffers | plural: 'offer'}}</ng-container>.
+                        <ng-container *ngIf="numberOfImportedOffers">
+                            Přidali jsme {{numberOfImportedOffers}} {{(numberOfImportedOffers | plural: 'new_offer')}}
+                        </ng-container>
+                        <ng-container *ngIf="numberOfDuplicateOffers">
+                            a z důvodu duplicit
+                            {{numberOfDuplicateOffers | plural: 'was'}}
+                            {{numberOfDuplicateOffers | plural: 'omitted'}}
+                            {{numberOfDuplicateOffers}}
+                            {{numberOfDuplicateOffers | plural: 'offer'}}</ng-container>.
                     </lnd-alert>
                 </div>
             </div>
