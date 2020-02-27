@@ -7,6 +7,10 @@ import {
     ChangeDetectorRef,
     Component,
 } from '@angular/core';
+import {
+    Meta,
+    Title,
+} from '@angular/platform-browser';
 
 import {
     map,
@@ -15,6 +19,11 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
+import {
+    CONSTS,
+    ROUTES,
+    SEO,
+} from 'src/app/app.constants';
 import {
     formFieldsLogin,
     LOGIN_STATE,
@@ -35,7 +44,6 @@ import {
     parseGraphQLErrors,
     parseRestAPIErrors,
 } from 'src/common/utils/';
-import { ROUTES } from 'src/app/app.constants';
 import { UserService } from 'src/common/graphql/services/user.service';
 
 @Component({
@@ -58,11 +66,26 @@ export class LoginComponent extends AbstractComponent {
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
+        private metaService: Meta,
         private route: ActivatedRoute,
         private router: Router,
         private userService: UserService,
+        private titleService: Title,
     ) {
         super();
+        this.titleService.setTitle(CONSTS.TITLES.LOGIN);
+        this.metaService.updateTag({
+            name: 'description',
+            content: SEO.META_DESCRIPTION.LOGIN,
+        });
+        this.metaService.updateTag({
+                name: 'keywords',
+                content: [
+                    ...SEO.META_KEYWORDS.LANDING_PAGE,
+                    ...SEO.META_KEYWORDS.LOGIN,
+                ].toString(),
+            },
+        );
 
         this.route.queryParams
             .pipe(

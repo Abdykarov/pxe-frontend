@@ -176,6 +176,7 @@ export const findAllSuppliersQuery = gql`
             sampleDocuments{
                 type,
                 url,
+                commodityType
             }
         }
     }

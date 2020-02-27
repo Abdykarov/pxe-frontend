@@ -73,7 +73,7 @@ type Mutation {
     deleteOffer(offerId: ID!): Int
     deletePersonalData(contractId: ID!): Boolean
     deleteSelectedOfferFromContract(contractId: ID!): Boolean
-    deleteSignedContract(contractId: ID!, smsConfirmationCode: String!, contractDeleteReason: ContractDeleteReason!): Boolean
+    deleteSignedContract(contractDeleteReason: ContractDeleteReason!, contractId: ID!, smsConfirmationCode: String!): Boolean
     makeRegistration(email: String!, preregistration: Boolean = false, termsOfConditionsApproved: Boolean!): Boolean
     makeUnregistration(smsCode: String): Boolean
     resetPassword(login: String!): PasswordDestination
@@ -196,6 +196,7 @@ type Supplier {
 }
 
 type SupplierSampleDocument {
+    commodityType: CommodityType!
     type: String
     url: String
 }
@@ -265,14 +266,14 @@ enum AllowedOperations {
     TERMINATE_CONTRACT
 }
 
-enum ContractDeleteReason{
-    LEAVING,
-    TERMINATION
-}
-
 enum CommodityType {
     GAS
     POWER
+}
+
+enum ContractDeleteReason {
+    LEAVING
+    TERMINATION
 }
 
 enum ContractStatus {
