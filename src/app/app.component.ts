@@ -57,6 +57,8 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.elementRef.nativeElement.removeAttribute('ng-version');
+        if (environment.production) {
+            this.elementRef.nativeElement.removeAttribute('ng-version');
+        }
     }
 }
