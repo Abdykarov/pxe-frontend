@@ -3,6 +3,8 @@ import {
     ChangeDetectionStrategy,
     Inject,
     PLATFORM_ID,
+    ElementRef,
+    OnInit,
 } from '@angular/core';
 import {
     DOCUMENT,
@@ -22,8 +24,9 @@ import { GTMService } from './services/gtm.service';
     styleUrls: ['./app.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     constructor(
+        private _elementRef: ElementRef,
         private gtmService: GTMService,
         private router: Router,
         @Inject(DOCUMENT) private document: Document,
@@ -51,5 +54,9 @@ export class AppComponent {
                 }
             });
         }
+    }
+
+    ngOnInit(): void {
+        this._elementRef.nativeElement.removeAttribute('ng-version');
     }
 }

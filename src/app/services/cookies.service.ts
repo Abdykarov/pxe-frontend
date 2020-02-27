@@ -36,6 +36,7 @@ export class CookiesService {
         const options: CookieOptions = {
             expires: d.toUTCString(),
             path: '/',
+            secure: true,
         };
         return options;
     }
