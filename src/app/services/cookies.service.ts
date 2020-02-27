@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
+
 import {
     CookieOptions,
     CookieService,
 } from 'ngx-cookie';
+
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -30,14 +33,13 @@ export class CookiesService {
 
     remove = (name: string) => this.cookieService.remove(name);
 
-    private createCookieOptions = (expires: number) => {
+    private createCookieOptions = (expires: number): CookieOptions => {
         const d = new Date();
         d.setTime(expires);
-        const options: CookieOptions = {
+        return {
             expires: d.toUTCString(),
             path: '/',
-            secure: true,
+            secure: environment.production,
         };
-        return options;
     }
 }
