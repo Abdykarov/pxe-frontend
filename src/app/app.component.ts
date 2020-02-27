@@ -26,7 +26,7 @@ import { GTMService } from './services/gtm.service';
 })
 export class AppComponent implements OnInit {
     constructor(
-        private _elementRef: ElementRef,
+        private elementRef: ElementRef,
         private gtmService: GTMService,
         private router: Router,
         @Inject(DOCUMENT) private document: Document,
@@ -57,6 +57,6 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this._elementRef.nativeElement.removeAttribute('ng-version');
+        this.elementRef.nativeElement.removeAttribute('ng-version');
     }
 }
