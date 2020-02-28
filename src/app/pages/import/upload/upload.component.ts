@@ -5,9 +5,11 @@ import {
 import {
     ChangeDetectorRef,
     Component,
+    ElementRef,
     Inject,
     OnInit,
     PLATFORM_ID,
+    ViewChild,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -38,6 +40,7 @@ import {
     getConfigStepper,
     inArray,
     parseViolation,
+    scrollToElementFnc,
     TypeStepper,
 } from 'src/common/utils';
 import {
@@ -67,9 +70,13 @@ export class UploadComponent extends AbstractComponent implements OnInit {
     public fileErrors: string[] = [];
     public globalError: string[] = [];
     public isInitState = true;
+    public errorInParsing = false;
     public listOfErrors: string[] = [];
     public loading = false;
     public tryToUploadFile = false;
+
+    @ViewChild('listOfNotificationsRow')
+    public listOfNotificationsRow: ElementRef;
 
     constructor (
         private approvalConfig: ApprovalConfig,
@@ -109,44 +116,31 @@ export class UploadComponent extends AbstractComponent implements OnInit {
 
         this.fileUploader.onCompleteItem = (item, response, status, header) => {
             this.loading = false;
+            this.errorInParsing = false;
             if (status === 200) {
-                const allOffers = JSON.parse(response);
-
-                let i = 1;
-                const offersWithGoodCommodity = R.filter(({offerInput}) => {
-                    offerInput.line = i;
-                    i++;
-                    if (this.commodityType === CommodityType.POWER) {
-                        return offerInput.powerAttributes;
-                    }
-                    return offerInput.gasAttributes;
-                })(allOffers);
-
-                if (this.analyzeErrorsViolations(offersWithGoodCommodity)) {
+                const offers: IOfferImportInput[] = JSON.parse(response);
+                if (this.analyzeErrorsViolations(offers)) {
                     return;
                 }
 
-                if (!offersWithGoodCommodity.length) {
+                if (!offers.length) {
                     this.globalError = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.NO_OFFERS_IN_IMPORT]];
                     this.isInitState = true;
                     this.fileUploader.clearQueue();
                 } else {
-                    this.router.navigate([ROUTES.ROUTER_IMPORT_APPROVAL], {
-                        queryParams: {
-                            commodityType: this.commodityType,
-                        },
+                    this.router.navigate([ROUTES.ROUTER_IMPORT_APPROVAL_POWER], {
                         state: {
-                            offers: offersWithGoodCommodity,
+                            offers,
                         },
                     });
                 }
             } else if (status === 401) {
                 this.authService.logoutForced();
             } else if (status === 500) {
-                const jsonResponse = JSON.parse(response);
-                this.listOfErrors = [
-                    jsonResponse.message,
-                ];
+                this.errorInParsing = true;
+                this.isInitState = true;
+                // const jsonResponse = JSON.parse(response);
+                // this.listOfErrors = jsonResponse.message;
                 this.fileUploader.clearQueue();
             } else {
                 this.isInitState = false;
@@ -185,13 +179,20 @@ export class UploadComponent extends AbstractComponent implements OnInit {
         }
     }
 
+    scrollToErrors = (evt) => {
+        evt.preventDefault();
+        scrollToElementFnc(this.listOfNotificationsRow.nativeElement);
+    }
+
     public analyzeErrorsViolations = (offersImportInput: IOfferImportInput[]): boolean => {
+        let row = 1;
         this.listOfErrors = R.reduce((listOfErrors: string[], offerImportInput: IOfferImportInput) => {
             if (offerImportInput.violations.length) {
-                R.forEach((violation: string) => {
-                    listOfErrors.push(`Řádek ${offerImportInput.offerInput.line}: ${parseViolation(violation)}`);
+                R.forEachObjIndexed((violation: string) => {
+                    listOfErrors.push(`Řádek ${row}: ${parseViolation(violation)}`);
                 })(offerImportInput.violations);
             }
+            row++;
             return listOfErrors;
         }, [], offersImportInput);
 

@@ -10,14 +10,21 @@
                         {{ error }}<br>
                     </ng-container>
                 </lnd-alert>
+                <lnd-alert
+                    *ngIf="errorInParsing"
+                    type="danger">
+                    Importovaný dokument se nepodařilo nahrát. Formát vyplněných dat nesplňuje požadovaný formát.
+                    Ukázku požadovaného formátu dokumentu si můžete stáhnout níže.
+                </lnd-alert>
                 <p *ngIf="!isInitState">
                     <lnd-info-banner
-                        [bannerTitle]="'Import nabídek jsme nemohli dokončit. <br /> V souboru jsme nalezli '+ (listOfErrors.length) + ' ' + (listOfErrors.length | plural: 'error')"
+                        [bannerTitle]="'Import nabídek jsme nemohli dokončit. <br />' +
+                         ' V souboru jsme nalezli '+ (listOfErrors.length) + ' ' + (listOfErrors.length | plural: 'error') + '.'"
                         [bannerType]="bannerTypeImages.IMPORT_ERROR"
                         [showButton]="false"
                     >
                     </lnd-info-banner>
-                    Opravte si soubor podle seznamu chyb a pak jí nahrajte znovu.
+                    Opravte si soubor podle <a (click)="scrollToErrors($event)">seznamu chyb</a> a pak jí nahrajte znovu.
                 </p>
                 <ng-container *ngIf="isInitState">
                     <p class="mb-1">
@@ -48,7 +55,8 @@
                 ></pxe-file-uploader>
             </div>
         </div>
-        <div class="row mb-2"
+        <div #listOfNotificationsRow
+             class="row mb-2"
              *ngIf="listOfErrors && listOfErrors.length">
             <div class="col-xl-8 offset-xl-2">
                 <pxe-list-of-notifications

@@ -72,11 +72,29 @@
                         ) : ''}}
         </lnd-alert>
     </div>
+</div>
+    <ul class="text-center link-list">
+        <li *ngIf="numberOfPowerOffers"
+            class="link-list__item">
+            <a class="link-list__link"
+               routerLinkActive="link-list__link--active"
+               [routerLinkActiveOptions]="{exact: true}"
+               [routerLink]="[routePower]">Elektřina</a>
+        </li>
+        <li *ngIf="numberOfGasOffers"
+            class="link-list__item">
+            <a class="link-list__link"
+               routerLinkActive="link-list__link--active"
+               [routerLinkActiveOptions]="{exact: true}"
+               [routerLink]="[routeGas]">Plyn</a>
+        </li>
+    </ul>
+<div>
     <div class="col-12 col-lg-10 offset-lg-1">
         <lnd-table
             #table
             [cols]="tableCols"
-            [rows]="tableRows"
+            [rows]="tableRows | offersByCommodityType: commodityType"
             [showHead]="true"
             [isStatic]="false"
             [tableWrapperClass]="['table-wrapper--advanced']"

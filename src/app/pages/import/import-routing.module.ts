@@ -23,8 +23,13 @@ const routes: Routes = [
             },
             {
                 path: CONSTS.PATHS.APPROVAL,
+                redirectTo: CONSTS.PATHS.APPROVAL + '/',
+            },
+            {
+                path: CONSTS.PATHS.APPROVAL + '/:commodityType',
                 loadChildren: '../../pages/import/approval/approval.module#ApprovalModule',
             },
+
         ],
     },
 ];

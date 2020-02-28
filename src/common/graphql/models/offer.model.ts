@@ -56,7 +56,6 @@ export interface IOfferInput {
     permanentPaymentPrice: number;
     subjectTypeId: string;
     benefits: string;
-    line?: number;
     greenEnergy: boolean;
     powerAttributes: IOfferInputPowerAttributes;
     gasAttributes: IOfferInputGasAttributes;

@@ -149,9 +149,8 @@ export class OfferService {
         offers,
     )
 
-    public exportCSV = () => this.http.post<string>(
+    public exportCSV = () => this.http.get<string>(
         `${environment.url_api}/v1.0/offer/export-csv`,
-        {},
     )
 
     public markAll = (mark: boolean, commodityType: CommodityType): number => {
