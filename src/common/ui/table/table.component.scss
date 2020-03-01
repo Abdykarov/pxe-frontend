@@ -156,15 +156,6 @@
 			}
 		}
 
-		&__white-background{
-			box-shadow: $table-active-shadow;
-
-			& > th,
-			& > td {
-				background-color: $table-hover-bg;
-			}
-		}
-
 		&:hover {
 			box-shadow: $table-active-shadow;
 
@@ -172,6 +163,15 @@
 			& > td {
 				background-color: $table-hover-bg;
 			}
+		}
+	}
+
+	&--bg-white {
+		box-shadow: $table-active-shadow;
+
+		& > th,
+		& > td {
+			background-color: $table-hover-bg;
 		}
 	}
 
