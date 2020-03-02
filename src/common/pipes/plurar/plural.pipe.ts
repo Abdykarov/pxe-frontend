@@ -48,13 +48,6 @@ export class PluralPipe implements PipeTransform {
             '=4' : 'místa',
             'other' : 'míst',
         },
-        'stackCapacity': {
-            '=1' : 'zásobník',
-            '=2' : 'zásobníky',
-            '=3' : 'zásobníky',
-            '=4' : 'zásobníky',
-            'other' : 'zásobníků',
-        },
         'year': {
             '=1' : 'rok',
             '=2' : 'roky',
@@ -97,20 +90,6 @@ export class PluralPipe implements PipeTransform {
             '=3' : 'duplicity',
             '=4' : 'duplicity',
             'other' : 'duplicit',
-        },
-        'was'  : {
-            '=1' : 'byla',
-            '=2' : 'byly',
-            '=3' : 'byly',
-            '=4' : 'byly',
-            'other' : 'bylo',
-        },
-        'omitted': {
-            '=1' : 'vynechána',
-            '=2' : 'vynechány',
-            '=3' : 'vynechány',
-            '=4' : 'vynechány',
-            'other' : 'vynecháno',
         },
         'willNotImported': {
             '=1' : ', která nebude naimportována',

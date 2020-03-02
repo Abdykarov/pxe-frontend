@@ -126,7 +126,6 @@ export class UploadComponent extends AbstractComponent implements OnInit {
                 }
 
                 if (!offers.length) {
-                    console.log('Asdasd - ____');
                     this.globalError = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.NO_OFFERS_IN_IMPORT]];
                     this.isInitState = true;
                     this.fileUploader.clearQueue();
