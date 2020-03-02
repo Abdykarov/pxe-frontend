@@ -25,17 +25,13 @@ import {
     COMMODITY_TO_DISTRIBUTION_MAP,
     CONSTS,
     DELIVERY_LENGTH_OPTIONS,
-    DISTRIBUTION_RATES_TYPE_DEFINITION,
     SUBJECT_TYPE_OPTIONS,
     SUBJECT_TYPE_TO_DIST_RATE_MAP,
 } from 'src/app/app.constants';
 import {
     commodityTypeFields,
 } from 'src/common/containers/form/forms/supply-offer/configs/supply-offer-form.config';
-import {
-    CommodityType,
-    DistributionType,
-} from 'src/common/graphql/models/supply.model';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import {
     convertDateToSendFormatFnc,
     transformCodeList,
@@ -156,7 +152,19 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
         return this.fb.group(formFieldsBenefit.controls, formFieldsBenefit.options);
     }
 
-    public includesBothTariffs = (id: string) => DISTRIBUTION_RATES_TYPE_DEFINITION[DistributionType.BOTH].includes(id);
+    public includesBothTariffs = (id: string) => this.codeLists &&
+        R.includes(
+            {
+                type: 'DS2P4R',
+                code: id,
+                description: id,
+                help: id,
+                __typename: 'CodelistItem',
+                key: id,
+                value: id,
+                label: id,
+            },
+            this.codeLists[CODE_LIST.DISTRIBUTION_RATE_BOTH])
 
     public setFormByCommodity = (commodityType: CommodityType) => {
         R.mapObjIndexed((fields, type) => {
@@ -285,6 +293,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
             .pipe(takeUntil(this.destroy$))
             .subscribe(({data}) => {
                 this.codeLists = transformCodeList(data.findCodelistsByTypes);
+                this.setPriceNTState(this.getFieldValue('distributionRateId'));
                 this.cd.markForCheck();
             });
     }
@@ -293,8 +302,8 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
         if (this.includesBothTariffs(distributionRateId)) {
             this.setEnableField('priceNT');
         } else {
-            this.resetFieldValue('priceNT');
             this.setDisableField('priceNT');
+            this.resetFieldError('priceNT', true);
             this.cd.markForCheck();
         }
     }

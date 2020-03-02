@@ -1,6 +1,5 @@
 import {
     CommodityType,
-    DistributionType,
     SubjectType,
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
@@ -238,6 +237,8 @@ export const CODE_LIST = {
     DISTRIBUTION_POWER: 'PDISTR',
     DISTRIBUTION_GAS: 'GDISTR',
     DEPOSIT_PAYMENT_TYPE: 'PAYTY2',
+    DISTRIBUTION_RATE_VT: 'DS1P4R',
+    DISTRIBUTION_RATE_BOTH: 'DS2P4R',
 };
 
 export const CODE_LIST_TYPES = [
@@ -255,6 +256,8 @@ export const CODE_LIST_TYPES = [
     CODE_LIST.DISTRIBUTION_POWER,
     CODE_LIST.DISTRIBUTION_GAS,
     CODE_LIST.TIME_TO_CONTRACT_END_PERIOD,
+    CODE_LIST.DISTRIBUTION_RATE_VT,
+    CODE_LIST.DISTRIBUTION_RATE_BOTH,
 ];
 
 export const CONTRACT_END_TYPE = {
@@ -311,16 +314,6 @@ export enum SubjectTypeLowerCase {
 export const SubjectTypesTypes = {
     [SubjectTypeLowerCase.INDIVIDUAL]: SubjectType.SUBJECT_TYPE_INDIVIDUAL,
     [SubjectTypeLowerCase.BUSINESSMAN]: SubjectType.SUBJECT_TYPE_BUSINESSMAN,
-};
-
-export const DISTRIBUTION_RATES_TYPE_DEFINITION = {
-    [DistributionType.VT] : [
-        'C01d', 'C02d', 'C03d', 'C60d', 'C61d', 'C62d', 'D01d', 'D02d',
-    ],
-    [DistributionType.BOTH] : [
-        'C25d', 'C26d', 'C27d', 'C35d', 'C45d', 'C46d', 'C55d', 'C56d',
-        'D25d', 'D26d', 'D27d', 'D35d', 'D45d', 'D56d', 'D57d', 'D61d',
-    ],
 };
 
 export const SUBJECT_TYPE_OPTIONS: Array<IOption> = [

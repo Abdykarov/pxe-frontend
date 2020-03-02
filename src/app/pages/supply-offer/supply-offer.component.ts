@@ -227,6 +227,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                             },
                         );
                 }
+                this.modalsService.closeModalData$.next(null);
             });
     }
 

@@ -57,7 +57,7 @@
         </div>
         <div #listOfNotificationsRow
              class="row mb-2"
-             *ngIf="listOfErrors && listOfErrors.length">
+             *ngIf="listOfErrors && listOfErrors.length && !isInitState">
             <div class="col-xl-8 offset-xl-2">
                 <pxe-list-of-notifications
                     [headerText]="listOfErrorsHeaderText"

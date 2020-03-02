@@ -47,6 +47,7 @@ import {
     ImportProgressStep,
     IOfferImportInput,
 } from 'src/app/pages/import/import.model';
+import { ModalService } from 'src/common/containers/modal/modal.service';
 
 @Component({
     selector: 'pxe-upload',
@@ -82,6 +83,7 @@ export class UploadComponent extends AbstractComponent implements OnInit {
         private approvalConfig: ApprovalConfig,
         private authService: AuthService,
         private cd: ChangeDetectorRef,
+        private modalsService: ModalService,
         private route: ActivatedRoute,
         private router: Router,
         @Inject(FILE_UPLOAD_CONFIG) private fileUploader: FileUploader,
@@ -124,6 +126,7 @@ export class UploadComponent extends AbstractComponent implements OnInit {
                 }
 
                 if (!offers.length) {
+                    console.log('Asdasd - ____');
                     this.globalError = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.NO_OFFERS_IN_IMPORT]];
                     this.isInitState = true;
                     this.fileUploader.clearQueue();
@@ -196,7 +199,9 @@ export class UploadComponent extends AbstractComponent implements OnInit {
             return listOfErrors;
         }, [], offersImportInput);
 
-        this.isInitState = false;
+        if (this.listOfErrors.length) {
+            this.isInitState = false;
+        }
         this.fileUploader.clearQueue();
         this.cd.markForCheck();
         return !!this.listOfErrors.length;

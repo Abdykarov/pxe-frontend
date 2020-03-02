@@ -8,13 +8,13 @@ import {
 } from '@angular/core';
 
 import * as R from 'ramda';
+import { CODE_LIST } from 'src/app/app.constants';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import {
     CommodityType,
-    DistributionType,
+    ICodelistOptions,
 } from 'src/common/graphql/models/supply.model';
-import { DISTRIBUTION_RATES_TYPE_DEFINITION } from 'src/app/app.constants';
 import { ICommodityTypeFields } from 'src/common/containers/form/models/form-definition.model';
 
 export class AbstractSupplyPointFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
@@ -34,15 +34,27 @@ export class AbstractSupplyPointFormComponent extends AbstractFormComponent impl
         super.ngOnChanges(changes);
     }
 
-    public setAnnualConsumptionNTState = (distributionRateId: string = null) => {
-        if (this.includesBothTariffs(distributionRateId)) {
+    public setAnnualConsumptionNTState = (distributionRateId: string = null, codeLists: ICodelistOptions = null) => {
+        if (this.includesBothTariffs(distributionRateId, codeLists)) {
             this.setEnableField('annualConsumptionNT');
         } else {
             this.setDisableField('annualConsumptionNT');
         }
     }
 
-    public includesBothTariffs = (id: string) => DISTRIBUTION_RATES_TYPE_DEFINITION[DistributionType.BOTH].includes(id);
+    public includesBothTariffs = (id: string, codeLists: ICodelistOptions = null) => codeLists &&
+        R.includes(
+            {
+                type: 'DS2P4R',
+                code: id,
+                description: id,
+                help: id,
+                __typename: 'CodelistItem',
+                key: id,
+                value: id,
+                label: id,
+            },
+            codeLists[CODE_LIST.DISTRIBUTION_RATE_BOTH])
 
     public setFormFields = (commodityType: CommodityType) => {
         R.mapObjIndexed((fieldControl, field: string) => {

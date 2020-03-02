@@ -16,11 +16,18 @@ import { isPlatformBrowser } from '@angular/common';
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import {
+    BehaviorSubject,
+    combineLatest,
+    Observable,
+} from 'rxjs';
+import {
     filter,
+    map,
     takeUntil,
 } from 'rxjs/operators';
 
 import {
+    CODE_LIST_TYPES,
     commodityTypes,
     CONSTS,
     ROUTES,
@@ -29,6 +36,13 @@ import { ApprovalConfig } from 'src/app/pages/import/approval/approval.config';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
+import {
+    getConfigStepper,
+    parseGraphQLErrors,
+    parseRestAPIErrors,
+    transformCodeList,
+    TypeStepper,
+} from 'src/common/utils';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import {
     ImportProgressStep,
@@ -38,11 +52,7 @@ import { ITableColumnConfig } from 'src/common/ui/table/models/table.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { OffersByCommodityTypePipe } from 'src/common/pipes/offers-by-commodity-type/offers-by-commodity-type.pipe';
 import { OfferService } from 'src/common/graphql/services/offer.service';
-import {
-    getConfigStepper,
-    parseRestAPIErrors,
-    TypeStepper,
-} from 'src/common/utils';
+import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
     selector: 'pxe-approval',
@@ -56,6 +66,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
     public readonly routeGas = ROUTES.ROUTER_IMPORT_APPROVAL_GAS;
     public commodityTypeAfterRender: CommodityType;
     public commodityType = CommodityType.POWER;
+    private commodityType$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
     public globalError: string[] = [];
     public numberOfDuplicateOffers = 0;
     public numberOfGasOffers = 0;
@@ -72,10 +83,16 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
         private offerService: OfferService,
         private route: ActivatedRoute,
         private router: Router,
+        private supplyService: SupplyService,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
     }
+
+    private codeLists$: Observable<any> = this.supplyService.findCodelistsByTypes(CODE_LIST_TYPES, 'cs')
+        .pipe(
+            map(({data}) => transformCodeList(data.findCodelistsByTypes)),
+        );
 
     ngOnInit() {
         this.tableRows = window.history.state.offers;
@@ -102,14 +119,11 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                     this.router.navigate([this.routePower]);
                     return;
                 }
-                this.setStateOfNavigationLink();
                 this.commodityType = commodityTypes[params.commodityType];
-                this.tableCols = this.approvalConfig.tableCols[this.commodityType];
-                this.setNumberOfDuplicateOffers();
                 if (!this.commodityTypeAfterRender) {
                     this.commodityTypeAfterRender = commodityTypes[params.commodityType];
                 }
-                this.cd.markForCheck();
+                this.commodityType$.next(this.commodityType);
             });
 
         this.modalsService.closeModalData$
@@ -124,8 +138,27 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                 if (modal.modalType === CONSTS.MODAL_TYPE.CONFIRM_BACK_IMPORT) {
                     this.navigationBack();
                 }
+                this.modalsService.closeModalData$.next(null);
             });
-        }
+
+        combineLatest(this.codeLists$, this.commodityType$)
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                ([codeLists, commodityType]) => {
+                    this.tableCols = this.approvalConfig.tableCols(codeLists)[commodityType];
+                    this.setStateOfNavigationLink();
+                    this.setNumberOfDuplicateOffers();
+                    this.cd.markForCheck();
+                },
+                error => {
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
+                });
+
+    }
 
     @HostListener('window:beforeunload', ['$event'])
     public beforeunloadHandler(event) {
@@ -178,21 +211,27 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
             ],
             {
                 queryParams: {
-                    commodityType: this.commodityTypeAfterRender,
+                    commodityType: this.commodityTypeAfterRender.toUpperCase(),
                 },
             },
         );
     }
 
-    public delete = (deletingRow, index) => {
+    public delete = (deletingRow) => {
         this.offerDeleted = deletingRow.offerInput.name;
-        this.tableRows.splice(index, 1);
-        if (!this.tableRows.length) {
-            this.navigationBack();
-        }
+        this.tableRows = R.filter((offerImportInput: IOfferImportInput) => {
+            return JSON.stringify(deletingRow) !== JSON.stringify(offerImportInput);
+        })(this.tableRows);
         this.setNumberOfDuplicateOffers();
         this.setStateOfNavigationLink();
+        if (!this.tableRows.length || this.isZeroOffersToImportedWithoutDuplicity()) {
+            this.navigationBack();
+        }
+        this.cd.markForCheck();
     }
+
+    public isZeroOffersToImportedWithoutDuplicity = (): boolean =>
+        (this.numberOfPowerOffers + this.numberOfGasOffers) === this.numberOfDuplicateOffers
 
     public setNumberOfDuplicateOffers = () => {
         this.numberOfDuplicateOffers = R.reduce((sum: number, offerImportInput: IOfferImportInput) => {
