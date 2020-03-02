@@ -1,3 +1,21 @@
+<ng-template #columnTemplateMarkAll>
+    <lnd-form-field
+        customFormGroupClass="form-group form-group--in-table"
+        label="Označit"
+        [value]="tableRows.length === numberOfMarked"
+        (click)="markAll($event)"
+        [type]="'CHECKBOX'">
+    </lnd-form-field>
+</ng-template>
+<ng-template #columnTemplateMark let-row="row">
+    <lnd-form-field
+        label="&#8203;"
+        customFormGroupClass="form-group form-group--in-table"
+        [value]="!!row.marked"
+        (click)="markOne(row.id, $event)"
+        [type]="'CHECKBOX'">
+    </lnd-form-field>
+</ng-template>
 <ng-template #columnTemplatePriceVT let-row="row">
     {{row.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
 </ng-template>
@@ -169,6 +187,28 @@
         <div
             class="mb-4" 
             [hidden]="loadingOffers || tableRows.length === 0">
+            <div class="row">
+                <div class="col-12">
+                    <lnd-alert *ngIf="showDeletedOfferBanner"
+                               type="info">
+                        Odstranili jste {{numberOfDeletedOffers}} {{(numberOfDeletedOffers | plural: 'offer_delete')}}.
+                    </lnd-alert>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-xl-6 text-center mb-3 mb-xl-0 order-xl-2">
+                    Počet označených nabídek: {{numberOfMarked}}
+                </div>
+                <div class="col-12 col-xl-3 order-xl-1">
+                    <lnd-button
+                        [isDisabled]="!numberOfMarked"
+                        label="Odstranit"
+                        type="danger"
+                        hasOutline="true"
+                        (action)="deleteMarkedOffers()"
+                    ></lnd-button>
+                </div>
+            </div>
             <lnd-table
                 #table
                 [cols]="tableCols"
@@ -179,16 +219,18 @@
                 [tableClass]="['table--advanced', 'mb-0']"
                 [rowDetailTemplate]="rowDetail"
                 [actionColTriggersDetail]="true"
+                [whiteBackgroundPropertyCondition]="'marked'"
                 [columnTemplates]="{
                     actionColumnTemplate: actionColumnTemplate,
                     columnTemplatePriceVT: columnTemplatePriceVT,
                     columnTemplatePriceNT: columnTemplatePriceNT,
                     columnTemplatePriceGas: columnTemplatePriceGas,
                     columnTemplateValidFromTo: columnTemplateValidFromTo,
-                    columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo
+                    columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo,
+                    columnTemplateMark: columnTemplateMark,
+                    columnTemplateMarkAll: columnTemplateMarkAll
                 }">
             </lnd-table>
         </div>
     </ng-container>
-
 </pxe-layout-container>

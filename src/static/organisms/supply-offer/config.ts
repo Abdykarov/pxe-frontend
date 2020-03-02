@@ -18,6 +18,15 @@ export class SupplyOfferOrganismConfig {
     public tableCols = {
         POWER: [
             {
+                label: 'Označit',
+                contentTemplateHeaderName: 'columnTemplateMarkAll',
+                views: [
+                    {
+                        contentTemplateName: 'columnTemplateMark',
+                    },
+                ],
+            },
+            {
                 label: 'Název produktu',
                 views: [
                     {

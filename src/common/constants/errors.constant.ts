@@ -22,6 +22,8 @@ export const graphQLMessages = {
     unknownSupplyPoint: 'Hledané odběrné místo neexistuje nebo pro přístup k němu nemáte oprávnění.',
 };
 
+export const cantDeleteAllMarkedOffers = 'Nepodařilo se nám smazat veškeré označené nabídky, prosím zkuste to znovu.';
+
 export const offerValidityMessages = {
     contractEndWithTerminate: 'Na základě uvedeného data platnosti aktuální smlouvy můžete ' +
         'vybírat pouze z nabídek od svého aktuálního dodavatele.',

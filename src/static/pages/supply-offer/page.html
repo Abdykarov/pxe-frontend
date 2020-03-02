@@ -1,3 +1,19 @@
+<ng-template #columnTemplateMarkAll>
+    <lnd-form-field
+        label="Označit"
+        customFormGroupClass="form-group form-group--in-table"
+        (click)="click($event)"
+        [type]="'CHECKBOX'">
+    </lnd-form-field>
+</ng-template>
+<ng-template #columnTemplateMark let-row="row">
+    <lnd-form-field
+        label="&#8203;"
+        customFormGroupClass="form-group form-group--in-table"
+        (click)="click($event)"
+        [type]="'CHECKBOX'">
+    </lnd-form-field>
+</ng-template>
 <ng-template #columnTemplatePriceVT let-row="row">
     {{row.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
 </ng-template>
@@ -287,7 +303,7 @@
                 </h1>
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-4">
             <div class="col-12 col-xl-10 offset-xl-1 text-center">
                 <ul class="link-list mb-0">
                     <li class="link-list__item">
@@ -309,6 +325,19 @@
         </div>
         <div class="row">
             <div class="col-12 col-lg-10 offset-lg-1">
+                <div class="row mb-3">
+                    <div class="col-12 col-xl-6 text-center mb-3 mb-xl-0 order-xl-2">
+                        Počet označených nabídek: 0
+                    </div>
+                    <div class="col-12 col-xl-3 order-xl-1">
+                        <lnd-button
+                            label="Odstranit"
+                            type="danger"
+                            hasOutline="true"
+                            (action)="click($event)"
+                        ></lnd-button>
+                    </div>
+                </div>
                 <lnd-table
                     #table
                     [cols]="supplyOfferConfig.tableCols[commodityType]"
@@ -325,7 +354,9 @@
                         columnTemplatePriceNT: columnTemplatePriceNT,
                         columnTemplatePriceGas: columnTemplatePriceGas,
                         columnTemplateValidFromTo: columnTemplateValidFromTo,
-                        columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo
+                        columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo,
+                        columnTemplateMarkAll: columnTemplateMarkAll,
+                        columnTemplateMark: columnTemplateMark
                     }">
                 </lnd-table>
             </div>
