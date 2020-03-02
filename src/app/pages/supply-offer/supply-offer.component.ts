@@ -165,7 +165,11 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                         )
                         .subscribe(
                             () => {
+                                if (R.path(['data', 'row', 'marked'], modal)) {
+                                    this.numberOfMarked--;
+                                }
                                 this.deleteDisabled = [];
+                                this.cd.markForCheck();
                             },
                             (error) => {
                                 this.deleteDisabled = [];
@@ -211,6 +215,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                             },
                         );
                 }
+                this.modalsService.closeModalData$.next(null);
             });
     }
 
