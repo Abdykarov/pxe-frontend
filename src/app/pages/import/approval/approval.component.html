@@ -79,14 +79,20 @@
             <a class="link-list__link"
                routerLinkActive="link-list__link--active"
                [routerLinkActiveOptions]="{exact: true}"
-               [routerLink]="[routePower]">Elektřina</a>
+               [routerLink]="[routePower]"
+               [state]="{
+                    offers: tableRows
+               }">Elektřina</a>
         </li>
         <li *ngIf="numberOfGasOffers"
             class="link-list__item">
             <a class="link-list__link"
                routerLinkActive="link-list__link--active"
                [routerLinkActiveOptions]="{exact: true}"
-               [routerLink]="[routeGas]">Plyn</a>
+               [routerLink]="[routeGas]"
+               [state]="{
+                    offers: tableRows
+               }">Plyn</a>
         </li>
     </ul>
 <div>

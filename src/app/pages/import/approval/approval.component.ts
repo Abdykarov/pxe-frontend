@@ -95,7 +95,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
         );
 
     ngOnInit() {
-        this.tableRows = window.history.state.offers;
+        console.log('INIT');
         if (isPlatformBrowser(this.platformId)) {
             if (!window.history.state.offers) {
                 this.router.navigate([
@@ -109,7 +109,10 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                 );
                 return;
             }
+            this.tableRows = window.history.state.offers;
         }
+
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.route.params
             .pipe(
                 takeUntil(this.destroy$),
@@ -184,15 +187,14 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                () => {
-                    const numberOfImportedOffers = offersImportInput.length;
+                (duplicateOffers) => {
                     this.router.navigate([
                             this.commodityType === CommodityType.POWER ?
                                 ROUTES.ROUTER_SUPPLY_OFFER_POWER : ROUTES.ROUTER_SUPPLY_OFFER_GAS,
                         ],
                         {
                             state: {
-                                numberOfImportedOffers,
+                                numberOfImportedOffers: offersImportInput.length - this.numberOfDuplicateOffers,
                             },
                         },
                     );

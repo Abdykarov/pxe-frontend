@@ -170,6 +170,7 @@ export class UploadComponent extends AbstractComponent implements OnInit {
             }, fileUploader.queue);
         } else {
             this.fileErrors = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.MAX_NUMBER_OF_FILES]];
+            this.fileUploader.clearQueue();
         }
         this.cd.markForCheck();
     }
