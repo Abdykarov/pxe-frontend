@@ -1,5 +1,5 @@
 <ng-template #benefitContentTemplate let-data>
-    K téhle nabídce od PRE získáte benefit {{data.name}}.
+    K téhle nabídce od {{data.supplyPointOffer.supplier.name}} získáte benefit {{data.benefit.name}}.
     Více informaci o benefitu naleznete v obchodních podmínkách
     <a [href]="data.url" target="_blank">zde</a>.
 </ng-template>
@@ -204,7 +204,7 @@
         <lnd-accordion-benefit
             *ngIf="!isOwner && supplyPointOffer.benefits && supplyPointOffer.benefits.length"
             class="col-12 supply-point-offer__benefits-list"
-            [accordionItems]="supplyPointOffer.benefits | accordionBenefits"
+            [accordionItems]="supplyPointOffer.benefits | accordionBenefits:supplyPointOffer"
             [accordionContentTemplate]="benefitContentTemplate"
         >
         </lnd-accordion-benefit>
