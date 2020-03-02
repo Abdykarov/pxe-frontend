@@ -1,7 +1,7 @@
 <ng-template #benefitContentTemplate let-data>
     K téhle nabídce od {{data?.supplyPointOffer?.supplier?.name}} získáte benefit {{data?.benefit?.name}}.
     Více informaci o benefitu naleznete v obchodních podmínkách
-    <a [href]="data.benefit.url" target="_blank">zde</a>.
+    <a [href]="data?.benefit?.url" target="_blank">zde</a>.
 </ng-template>
 
 <div class="supply-point-offer"
