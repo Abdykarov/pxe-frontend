@@ -80,7 +80,7 @@
 
 		.custom-control-label {
 			padding-right: ( $icon-size-px + ( $spacer / 2 ) );
-			z-index: 9;
+			z-index: $zindex-custom-control;
 		}
 	}
 }
