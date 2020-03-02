@@ -93,6 +93,16 @@ export const CONSTS = {
     },
     TELEPHONE_PREFIX_CZ: '+420',
     TIME_TO_CONTRACT_END_PROLONGED: 30,
+    TITLES: {
+        COOKIES_POLICY: 'Cookies policy | PARC4U',
+        DEFAULT: 'PARC4U',
+        LANDING_PAGE: 'Získejte svobodu nad energií | PARC4U',
+        LOGIN: 'Přihlášení | PARC4U',
+        PATTERNS_OF_CONTRACTS: 'Vzory smluv o dodávce | PARC4U',
+        TERMS_OF_USE: 'Podmínky užívání | PARC4U',
+        SECURING_YOUR_DATA: 'Ochrana osobních údajů | PARC4U',
+        SIGN_UP: 'Registrace | PARC4U',
+    },
 };
 
 export const ROUTES = {
@@ -120,6 +130,67 @@ export const ROUTES = {
     ROUTER_TERMS_OF_USE: `/${CONSTS.PATHS.TERMS_OF_USE}`,
     ROUTER_USER_CHANGE_PASSWORD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CHANGE_PASSWORD}`,
     ROUTER_USER_PROFILE: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.USER_PROFILE}`,
+};
+
+export const SEO = {
+    META_KEYWORDS: {
+        COOKIES_POLICY: [
+            'funkční cookies',
+            'trvalé cookies',
+            'informace',
+        ],
+        LANDING_PAGE: [
+            'elektřina',
+            'plyn',
+            'dodavatel',
+            'dodavateli',
+            'nabídka',
+            'komoditní burza',
+            'odběrné místo',
+            'změna dodavatele',
+            'cena plynu',
+            'cena elektřiny',
+            'cena za kwh',
+            'nejlevnějši elektřina',
+            'nejlevnějši plyn',
+            'distribuce plynu',
+            'distribuce elektřiny',
+            'parc4u',
+            'pxe',
+        ],
+        LOGIN: [
+            'přihlášení',
+            'kliknutí',
+        ],
+        PATTERNS_OF_CONTRACTS: [
+            'komodita',
+            'nabídka',
+        ],
+        TERMS_OF_USE: [
+            'obchodní podmínky',
+            'PARC4U',
+        ],
+        SECURING_YOUR_DATA: [
+            'chráníme',
+            'zpracování údajů',
+        ],
+        SIGN_UP: [
+            'registrace',
+            'kliknutí',
+            'obchodními podmínkami',
+        ],
+    },
+    META_DESCRIPTION: {
+        COOKIES_POLICY: 'Co jsou cookies a proč je na stránkách PARC4U používáme?',
+        LANDING_PAGE: 'Měňte dodavatele energií na 1 klik. Neřešte papírování a chození na' +
+            ' pobočky. Chraňte se před nekalostmi ve smlouvě. Energie za férové ceny bez skrytých poplatků.',
+        LOGIN: 'Přihlášení do PARC4U, kde máte snadný přístup k jiným cenám za energie.',
+        PATTERNS_OF_CONTRACTS: 'Vzor smlouvy k dodávce uzavřené přes PARC4U.',
+        TERMS_OF_USE: 'Obchodní podmínky k pravidlům registrace dodavatelů a odběratelů na trhu PARC4U.',
+        SECURING_YOUR_DATA: 'Jak v PARC4U pracujeme s osobními údaji a jak je chráníme.',
+        SIGN_UP: 'Registrace do PARC4U, kde kliknutím měníte dodavatele energií,' +
+            ' nemusíte na pobočky a dostáváte konečné ceny bez skrytých poplatků.',
+    },
 };
 
 export enum INavigationItemType {

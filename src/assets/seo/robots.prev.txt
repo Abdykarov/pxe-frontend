@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /
+Sitemap: https://pxeparc-preview.lnd.bz/sitemap.xml
