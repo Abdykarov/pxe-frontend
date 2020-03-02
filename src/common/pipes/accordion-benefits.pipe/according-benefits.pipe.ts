@@ -6,20 +6,26 @@ import {
 import * as R from 'ramda';
 
 import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
-import { IBenefit } from 'src/common/graphql/models/offer.model';
+import {
+    IBenefit,
+    IOffer,
+} from 'src/common/graphql/models/offer.model';
 
 @Pipe({
     name: 'accordionBenefits',
 })
 export class AccordionBenefitsPipe implements PipeTransform {
-    transform(benefits: IBenefit[]): IAccordionItem[] {
+    transform(benefits: IBenefit[], supplyPointOffer: IOffer): IAccordionItem[] {
         if (!benefits) {
             return [];
         }
 
         return R.map((benefit: IBenefit): IAccordionItem => ({
             label: benefit.name,
-            data: benefit,
+            data: {
+                benefit,
+                supplyPointOffer,
+            },
             isActive: false,
         }), benefits);
     }
