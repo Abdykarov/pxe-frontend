@@ -14,7 +14,7 @@
         [type]="'CHECKBOX'">
     </lnd-form-field>
     <span *ngIf="row.greenEnergy"
-          class="icon icon--leaf icon--green ml-auto">
+          class="icon icon--leaf icon--green ml-2 align-bottom">
         </span>
 </ng-template>
 <ng-template #columnTemplatePriceVT let-row="row">
@@ -126,7 +126,7 @@
             </lnd-tooltip>
         </div>
     </div>
-    <div class="row">
+    <div class="row align-items-center">
         <div class="col-4 col-xl-3">
             <lnd-form-field
                     [id]="'name'"
@@ -138,7 +138,7 @@
                 [id]="'greenEnery'"
                 label="Zelená energie"
                 type="CHECKBOX"
-                [customFormGroupClass]="'mb-5'"
+                [customFormGroupClass]="'form-group--with-green-energy-icon mb-0'"
             ></lnd-form-field>
         </div>
     </div>
