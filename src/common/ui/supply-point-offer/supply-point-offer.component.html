@@ -10,8 +10,8 @@
                         <span class="supply-point-offer__title-label">{{isOwner ? 'Váš stávající dodavatel' : 'Dodavatel'}}</span>
                         <span class="supply-point-offer__title text-break">{{supplyPointOffer.supplier?.name}}</span>
                     </div>
-                    <div  *ngIf="supplyPointOffer.greenEnergy"
-                          class="col-auto">
+                    <div *ngIf="supplyPointOffer.greenEnergy"
+                         class="col-auto">
                         <div class="supply-point-offer__green-box">
                             <span class="icon icon--leaf supply-point-offer__green-icon"></span>
                             <span class="supply-point-offer__green-text">Zelená<br> energie</span>

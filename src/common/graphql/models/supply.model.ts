@@ -132,7 +132,6 @@ export interface ISupplyPoint {
     timeToContractEndPeriod: ICodelistItem;
     contract: IContract;
     progressStatus: ProgressStatus;
-    greenEnergy: boolean;
 }
 
 export enum ProgressStatus {
