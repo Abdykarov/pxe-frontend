@@ -29,6 +29,7 @@ export class SupplyOfferComponent {
         deliveryFrom: new FormControl(),
         deliveryTo: new FormControl(),
         deliveryFromTo: new FormControl(),
+        greenEnergy: new FormControl(),
     });
 
     constructor(

@@ -68,7 +68,8 @@ export const offerFragment = gql`
         distributionPriceByConsumptionNT,
         systemServicesRegulatedPrice,
         consumptionPriceVT,
-        consumptionPriceNT
+        consumptionPriceNT,
+        greenEnergy
     }
 `;
 

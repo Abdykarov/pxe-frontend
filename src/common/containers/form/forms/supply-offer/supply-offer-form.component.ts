@@ -188,6 +188,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
         let deliveryFromTo = null;
         let permanentPaymentPrice = null;
         let benefits = null;
+        let greenEnergy = null;
 
         if (!R.isEmpty(this.formValues)) {
             id = this.formValues.id;
@@ -198,6 +199,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
             annualConsumptionId = this.formValues.annualConsumption && this.formValues.annualConsumption.code;
             circuitBreakerId = this.formValues.circuitBreaker && this.formValues.circuitBreaker.code;
             deliveryLength = this.formValues.deliveryLength;
+            greenEnergy = this.formValues.greenEnergy;
             priceVT = this.formValues.priceVT && this.formValues.priceVT.toString().replace('.', ',');
             priceNT = this.formValues.priceNT && this.formValues.priceNT.toString().replace('.', ',');
             priceGas = this.formValues.priceGas && this.formValues.priceGas.toString().replace('.', ',');
@@ -231,6 +233,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
         this.form.controls['validFromTo'].setValue(validFromTo);
         this.form.controls['deliveryFromTo'].setValue(deliveryFromTo);
         this.form.controls['permanentPaymentPrice'].setValue(permanentPaymentPrice);
+        this.form.controls['greenEnergy'].setValue(greenEnergy);
 
         R.times((n: number) => {
             const benefit = benefits && benefits[n] || null;

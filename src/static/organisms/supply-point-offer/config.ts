@@ -45,4 +45,5 @@ export const offerConfig: IOffer = {
     systemServicesRegulatedPrice: 0.06,
     totalPrice: 145.72,
     unit: 'MWh',
+    greenEnergy: false,
 };
