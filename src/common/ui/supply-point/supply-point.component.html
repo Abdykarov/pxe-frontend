@@ -20,7 +20,8 @@
                         </span>
                     </div>
                     <div class="col-9 col-md-10 offset-3 offset-md-2 mt-2">
-                        <div class="green-energy">
+                        <div *ngIf="data?.contract?.offer?.greenEnergy"
+                             class="green-energy">
                             <span class="icon icon--leaf green-energy__icon"></span>
                             <span class="green-energy__text">Zelená energie</span>
                         </div>
