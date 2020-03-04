@@ -125,6 +125,12 @@ export const formFields: IForm = {
                 CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
             ],
         ],
+        annualConsumptionNTUnit: [
+            CONSTS.UNIT_OF_PRICES.KWH,
+            [
+                Validators.required,
+            ],
+        ],
         annualConsumptionVT: [
             null,
             [
@@ -134,6 +140,12 @@ export const formFields: IForm = {
                 CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
             ],
         ],
+        annualConsumptionVTUnit: [
+            CONSTS.UNIT_OF_PRICES.KWH,
+            [
+                Validators.required,
+            ],
+        ],
         annualConsumption: [
             null,
             [
@@ -141,6 +153,12 @@ export const formFields: IForm = {
                 CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT),
                 CustomValidators.minValue(0),
                 CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
+            ],
+        ],
+        annualConsumptionUnit: [
+            CONSTS.UNIT_OF_PRICES.KWH,
+            [
+                Validators.required,
             ],
         ],
         expirationDate: [
@@ -307,6 +325,8 @@ export const supplyPointAllowedFields: ICommodityTypeFields = {
         'phasesId',
         'annualConsumptionNT',
         'annualConsumptionVT',
+        'annualConsumptionNTUnit',
+        'annualConsumptionVTUnit',
         'expirationDate',
         'contractEndTypeId',
         'timeToContractEnd',
@@ -322,6 +342,7 @@ export const supplyPointAllowedFields: ICommodityTypeFields = {
         'eic',
         'address',
         'annualConsumption',
+        'annualConsumptionUnit',
         'expirationDate',
         'contractEndTypeId',
         'timeToContractEnd',

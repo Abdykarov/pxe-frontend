@@ -30,6 +30,7 @@ import {
     SUBJECT_TYPE_OPTIONS,
     SUBJECT_TYPE_TO_DIST_RATE_MAP,
     SUPPLY_POINT_EDIT_TYPE,
+    UNIT_OF_PRICES,
 } from 'src/app/app.constants';
 import {
     CommodityType,
@@ -82,6 +83,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public subjectTypeOptions: Array<IOption> = SUBJECT_TYPE_OPTIONS;
     public suppliers = [];
     public suppliers$: BehaviorSubject<any> = new BehaviorSubject([]);
+    public UNIT_OF_PRICES = UNIT_OF_PRICES;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -212,6 +214,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         let contractEndTypeId = null;
         let timeToContractEnd = null;
         let timeToContractEndPeriodId = null;
+        let annualConsumptionNTUnit = null;
+        let annualConsumptionVTUnit = null;
+        let annualConsumptionUnit = null;
 
         if (!R.isEmpty(this.formValues)) {
             commodityType = this.formValues.commodityType;
@@ -233,6 +238,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             annualConsumptionNT = this.formValues.annualConsumptionNT && this.formValues.annualConsumptionNT.toString().replace('.', ',');
             annualConsumptionVT = this.formValues.annualConsumptionVT && this.formValues.annualConsumptionVT.toString().replace('.', ',');
             annualConsumption = this.formValues.annualConsumptionVT && this.formValues.annualConsumptionVT.toString().replace('.', ',');
+            annualConsumptionNTUnit = this.formValues.annualConsumptionNTUnit;
+            annualConsumptionVTUnit = this.formValues.annualConsumptionVTUnit;
+            annualConsumptionUnit = this.formValues.annualConsumptionVTUnit;
             if (this.editMode === SUPPLY_POINT_EDIT_TYPE.NORMAL) {
                 expirationDate = expirationDateFromSupplyPoint;
                 contractEndTypeId = this.formValues.contractEndType && this.formValues.contractEndType.code;
@@ -244,6 +252,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 timeToContractEnd = String(CONSTS.TIME_TO_CONTRACT_END_PROLONGED);
                 timeToContractEndPeriodId = TimeToContractEndPeriod.DAY;
             }
+            this.form.controls['annualConsumptionNTUnit'].setValue(annualConsumptionNTUnit);
+            this.form.controls['annualConsumptionVTUnit'].setValue(annualConsumptionVTUnit);
+            this.form.controls['annualConsumptionUnit'].setValue(annualConsumptionUnit);
         }
 
         const filteredContractEndTypeId = contractEndTypeId === CONTRACT_END_TYPE.CONTRACT_END_TERMINATE ? null : contractEndTypeId;

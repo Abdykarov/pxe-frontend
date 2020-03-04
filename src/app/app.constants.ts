@@ -103,6 +103,10 @@ export const CONSTS = {
         SECURING_YOUR_DATA: 'Ochrana osobních údajů | PARC4U',
         SIGN_UP: 'Registrace | PARC4U',
     },
+    UNIT_OF_PRICES: {
+        MWH: 'MWh',
+        KWH: 'kWh',
+    },
 };
 
 export const ROUTES = {
@@ -378,6 +382,19 @@ export const DEFAULT_QR_CODE_SETTING: IQRCodeSetting = {
     width: 256,
     margin: 0,
 };
+
+export const UNIT_OF_PRICES: Array<IOption> = [
+    {
+        'label': CONSTS.UNIT_OF_PRICES.MWH,
+        'value': CONSTS.UNIT_OF_PRICES.MWH,
+        'key': CONSTS.UNIT_OF_PRICES.MWH,
+    },
+    {
+        'label': CONSTS.UNIT_OF_PRICES.KWH,
+        'value': CONSTS.UNIT_OF_PRICES.KWH,
+        'key': CONSTS.UNIT_OF_PRICES.KWH,
+    },
+];
 
 export const REGIONS: Array<IOption> = [
     {
