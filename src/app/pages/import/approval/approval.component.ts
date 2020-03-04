@@ -1,58 +1,25 @@
-import {
-    ActivatedRoute,
-    Router,
-} from '@angular/router';
-import {
-    ChangeDetectorRef,
-    Component,
-    HostListener,
-    Inject,
-    OnInit,
-    PLATFORM_ID,
-    ViewChild,
-} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { ChangeDetectorRef, Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
-import {
-    BehaviorSubject,
-    combineLatest,
-    Observable,
-} from 'rxjs';
-import {
-    filter,
-    map,
-    takeUntil,
-} from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { filter, map, takeUntil } from 'rxjs/operators';
 
-import {
-    CODE_LIST_TYPES,
-    commodityTypes,
-    CONSTS,
-    ROUTES,
-} from 'src/app/app.constants';
+import { CODE_LIST_TYPES, commodityTypes, CONSTS, ROUTES } from 'src/app/app.constants';
 import { ApprovalConfig } from 'src/app/pages/import/approval/approval.config';
+import { ImportProgressStep, IOfferCounts, IOfferImportInput } from 'src/app/pages/import/import.model';
 import { AbstractComponent } from 'src/common/abstract.component';
-import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
-import { CommodityType } from 'src/common/graphql/models/supply.model';
-import {
-    getConfigStepper,
-    parseGraphQLErrors,
-    parseRestAPIErrors,
-    transformCodeList,
-    TypeStepper,
-} from 'src/common/utils';
-import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
-import {
-    ImportProgressStep, IOfferCounts,
-    IOfferImportInput,
-} from 'src/app/pages/import/import.model';
-import { ITableColumnConfig } from 'src/common/ui/table/models/table.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
-import { OffersByCommodityTypePipe } from 'src/common/pipes/offers-by-commodity-type/offers-by-commodity-type.pipe';
+import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { OfferService } from 'src/common/graphql/services/offer.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { OffersByCommodityTypePipe } from 'src/common/pipes/offers-by-commodity-type/offers-by-commodity-type.pipe';
+import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
+import { ITableColumnConfig } from 'src/common/ui/table/models/table.model';
+import { getConfigStepper, parseGraphQLErrors, parseRestAPIErrors, transformCodeList, TypeStepper } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-approval',
@@ -79,13 +46,13 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
     public readonly configStepper = getConfigStepper(ImportProgressStep.APPROVAL, false, TypeStepper.IMPORT);
     public readonly routePower = ROUTES.ROUTER_IMPORT_APPROVAL_POWER;
     public readonly routeGas = ROUTES.ROUTER_IMPORT_APPROVAL_GAS;
-    public commodityTypeAfterRender: CommodityType;
     public commodityType = CommodityType.POWER;
-    private commodityType$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+    public commodityTypeAfterApprove: CommodityType;
+    public commodityType$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
     public globalError: string[] = [];
-    public numberOfDuplicateOffers = 0;
-    public numberOfGasOffers = 0;
-    public numberOfPowerOffers = 0;
+    public countOfDuplicateOffers = 0;
+    public countOfGasOffers = 0;
+    public countOfPowerOffers = 0;
     public offerDeleted = null;
     public tableCols: ITableColumnConfig[] = [];
     public tableRows: IOfferImportInput[] = [];
@@ -104,6 +71,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
     ngOnInit() {
         if (isPlatformBrowser(this.platformId)) {
             const offers: IOfferImportInput[] = window.history.state.offers;
+            const commodityTypeAfterApprove: CommodityType = window.history.state.commodityTypeAfterApprove;
             if (R.isNil(offers)) {
                 this.router.navigate([
                         ROUTES.ROUTER_IMPORT_UPLOAD,
@@ -118,6 +86,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
             }
             if (!R.isNil(offers)) {
                 this.tableRows = offers;
+                this.commodityTypeAfterApprove = commodityTypeAfterApprove || CommodityType.POWER;
             }
         }
 
@@ -132,9 +101,6 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                     return;
                 }
                 this.commodityType = commodityTypes[params.commodityType];
-                if (!this.commodityTypeAfterRender) {
-                    this.commodityTypeAfterRender = commodityTypes[params.commodityType];
-                }
                 this.commodityType$.next(this.commodityType);
             });
 
@@ -161,25 +127,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                 ([codeLists, commodityType]) => {
                     if (codeLists && commodityType) {
                         this.tableCols = this.approvalConfig.tableCols(codeLists)[commodityType];
-                        const {
-                            numberOfDuplicateOffers,
-                            numberOfGasOffers,
-                            numberOfPowerOffers,
-                        } = this.getOfferCounts(this.tableRows);
-
-                        this.numberOfDuplicateOffers = numberOfDuplicateOffers;
-                        this.numberOfGasOffers = numberOfGasOffers;
-                        this.numberOfPowerOffers = numberOfPowerOffers;
-
-                        if (this.numberOfPowerOffers === 0) {
-                            this.router.navigate([this.routeGas]);
-                            return;
-                        }
-
-                        if (this.numberOfGasOffers === 0) {
-                            this.router.navigate([this.routePower]);
-                            return;
-                        }
+                        this.setCountsAndValidateCountsOfOffers();
                         this.cd.markForCheck();
                     }
                 },
@@ -189,6 +137,38 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                     this.cd.markForCheck();
                 });
 
+    }
+
+    private setCountsAndValidateCountsOfOffers = () => {
+        const {
+            countOfDuplicateOffers,
+            countOfGasOffers,
+            countOfPowerOffers,
+        } = this.getOfferCounts(this.tableRows);
+
+        this.countOfDuplicateOffers = countOfDuplicateOffers;
+        this.countOfGasOffers = countOfGasOffers;
+        this.countOfPowerOffers = countOfPowerOffers;
+
+        if (this.countOfPowerOffers === 0) {
+            this.router.navigate([this.routeGas], {
+                state: {
+                    commodityTypeAfterApprove: this.commodityTypeAfterApprove,
+                    offers: this.tableRows,
+                },
+            });
+            return;
+        }
+
+        if (this.countOfGasOffers === 0) {
+            this.router.navigate([this.routePower], {
+                state: {
+                    commodityTypeAfterApprove: this.commodityTypeAfterApprove,
+                    offers: this.tableRows,
+                },
+            });
+            return;
+        }
     }
 
     public backAction = (evt) => {
@@ -211,12 +191,12 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
             .subscribe(
                 () => {
                     this.router.navigate([
-                            this.commodityType === CommodityType.POWER ?
+                            this.commodityTypeAfterApprove === CommodityType.POWER ?
                                 ROUTES.ROUTER_SUPPLY_OFFER_POWER : ROUTES.ROUTER_SUPPLY_OFFER_GAS,
                         ],
                         {
                             state: {
-                                numberOfImportedOffers: offersImportInput.length - this.numberOfDuplicateOffers,
+                                countOfImportedOffers: offersImportInput.length - this.countOfDuplicateOffers,
                             },
                         },
                     );
@@ -235,7 +215,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
             ],
             {
                 queryParams: {
-                    commodityType: this.commodityTypeAfterRender.toUpperCase(),
+                    commodityType: this.commodityTypeAfterApprove.toUpperCase(),
                 },
             },
         );
@@ -247,25 +227,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
             return JSON.stringify(deletingRow) !== JSON.stringify(offerImportInput);
         })(this.tableRows);
 
-        const {
-            numberOfDuplicateOffers,
-            numberOfGasOffers,
-            numberOfPowerOffers,
-        } = this.getOfferCounts(this.tableRows);
-
-        this.numberOfDuplicateOffers = numberOfDuplicateOffers;
-        this.numberOfGasOffers = numberOfGasOffers;
-        this.numberOfPowerOffers = numberOfPowerOffers;
-
-        if (this.numberOfPowerOffers === 0) {
-            this.router.navigate([this.routeGas]);
-            return;
-        }
-
-        if (this.numberOfGasOffers === 0) {
-            this.router.navigate([this.routePower]);
-            return;
-        }
+        this.setCountsAndValidateCountsOfOffers();
 
         if (!this.tableRows.length || this.isZeroOffersToImportedWithoutDuplicity()) {
             this.navigationBack();
@@ -274,17 +236,17 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
     }
 
     public isZeroOffersToImportedWithoutDuplicity = (): boolean =>
-        (this.numberOfPowerOffers + this.numberOfGasOffers) === this.numberOfDuplicateOffers
+        (this.countOfPowerOffers + this.countOfGasOffers) === this.countOfDuplicateOffers
 
     public getOfferCounts = (offers: IOfferImportInput[]): IOfferCounts => {
-        const numberOfDuplicateOffers =
+        const countOfDuplicateOffers =
             R.reduce((sum: number, offerImportInput: IOfferImportInput) => (offerImportInput.duplicity ? ++sum : sum), 0, offers);
-        const numberOfGasOffers = this.offersByCommodityTypePipe.transform(offers, CommodityType.GAS).length;
-        const numberOfPowerOffers = this.offersByCommodityTypePipe.transform(offers, CommodityType.POWER).length;
+        const countOfGasOffers = this.offersByCommodityTypePipe.transform(offers, CommodityType.GAS).length;
+        const countOfPowerOffers = this.offersByCommodityTypePipe.transform(offers, CommodityType.POWER).length;
         return {
-            numberOfDuplicateOffers,
-            numberOfGasOffers,
-            numberOfPowerOffers,
+            countOfDuplicateOffers,
+            countOfGasOffers,
+            countOfPowerOffers,
         };
     }
 }

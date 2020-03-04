@@ -60,43 +60,45 @@
             </lnd-info-banner>
         </div>
         <lnd-alert
-            *ngIf="offerDeleted || numberOfDuplicateOffers"
+            *ngIf="offerDeleted || countOfDuplicateOffers"
             customClass="text-center"
             type="info"
         >
             {{(offerDeleted ? ('Nabídka ' + offerDeleted + ' byla smazána.') : '')}}
-                <br *ngIf="offerDeleted && numberOfDuplicateOffers" />
+                <br *ngIf="offerDeleted && countOfDuplicateOffers" />
                 {{
-                    numberOfDuplicateOffers ?
+                    countOfDuplicateOffers ?
                         ('Seznam nabídek obsahuje ' +
-                            numberOfDuplicateOffers +
+                            countOfDuplicateOffers +
                             ' ' +
-                            (numberOfDuplicateOffers | plural: 'duplicity') +
-                            (numberOfDuplicateOffers | plural: 'willNotImported')+
+                            (countOfDuplicateOffers | plural: 'duplicity') +
+                            (countOfDuplicateOffers | plural: 'willNotImported')+
                             '.'
                         ) : ''}}
         </lnd-alert>
     </div>
 </div>
     <ul class="text-center link-list">
-        <li *ngIf="numberOfPowerOffers"
+        <li *ngIf="countOfPowerOffers"
             class="link-list__item">
             <a class="link-list__link"
                routerLinkActive="link-list__link--active"
                [routerLinkActiveOptions]="{exact: true}"
                [routerLink]="[routePower]"
                [state]="{
-                    offers: tableRows
+                    offers: tableRows,
+                    commodityTypeAfterApprove: commodityTypeAfterApprove
                }">Elektřina</a>
         </li>
-        <li *ngIf="numberOfGasOffers"
+        <li *ngIf="countOfGasOffers"
             class="link-list__item">
             <a class="link-list__link"
                routerLinkActive="link-list__link--active"
                [routerLinkActiveOptions]="{exact: true}"
                [routerLink]="[routeGas]"
                [state]="{
-                    offers: tableRows
+                    offers: tableRows,
+                    commodityTypeAfterApprove: commodityTypeAfterApprove
                }">Plyn</a>
         </li>
     </ul>

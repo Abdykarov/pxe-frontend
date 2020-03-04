@@ -139,6 +139,7 @@ export class UploadComponent extends AbstractComponent implements OnInit {
                     this.router.navigate([ROUTES.ROUTER_IMPORT_APPROVAL_POWER], {
                         state: {
                             offers,
+                            commodityTypeAfterApprove: this.commodityType
                         },
                     });
                 }
@@ -163,10 +164,10 @@ export class UploadComponent extends AbstractComponent implements OnInit {
             return;
         }
 
-        const numberOfFiles: number = R.path(['queue', 'length'], fileUploader) || 0;
-        if (numberOfFiles === 0) {
+        const countOfFiles: number = R.path(['queue', 'length'], fileUploader) || 0;
+        if (countOfFiles === 0) {
             this.fileErrors = [defaultErrorMessage];
-        } else if (numberOfFiles <= CONSTS.VALIDATORS.MAX_IMPORT_FILES) {
+        } else if (countOfFiles <= CONSTS.VALIDATORS.MAX_IMPORT_FILES) {
             this.fileErrors = [];
             this.loading = true;
             R.forEach((fileItem: FileItem) => {

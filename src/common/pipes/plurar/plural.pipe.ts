@@ -93,9 +93,9 @@ export class PluralPipe implements PipeTransform {
         },
         'willNotImported': {
             '=1' : ', která nebude naimportována',
-            '=2' : ', které nebude naimportovány',
-            '=3' : ', které nebude naimportovány',
-            '=4' : ', které nebude naimportovány',
+            '=2' : ', které nebudou naimportovány',
+            '=3' : ', které nebudou naimportovány',
+            '=4' : ', které nebudou naimportovány',
             'other' : ', které nebudou naimportovány',
         },
     };

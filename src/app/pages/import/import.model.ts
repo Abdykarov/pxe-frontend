@@ -14,7 +14,7 @@ export interface IOfferImportInput {
 }
 
 export interface IOfferCounts {
-    numberOfDuplicateOffers: number;
-    numberOfGasOffers: number;
-    numberOfPowerOffers: number;
+    countOfDuplicateOffers: number;
+    countOfGasOffers: number;
+    countOfPowerOffers: number;
 }
