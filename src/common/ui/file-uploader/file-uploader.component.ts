@@ -22,17 +22,14 @@ export class FileUploaderComponent {
     public hasBaseDropZoneOver = false;
 
     public fileOverBase = (evt) => {
-        evt.preventDefault();
         this.hasBaseDropZoneOver = evt;
     }
 
-    public fileDrop = (evt) => {
-        evt.preventDefault();
+    public fileDrop = () => {
         this.fileSelectAction.emit(this.uploader);
     }
 
-    public fileSelected = (evt) => {
-        evt.preventDefault();
+    public fileSelected = () => {
         this.fileSelectAction.emit(this.uploader);
     }
 }

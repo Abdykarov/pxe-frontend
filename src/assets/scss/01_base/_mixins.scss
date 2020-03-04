@@ -224,19 +224,23 @@
 
 
 @mixin button-ghost-color($color) {
+	&:focus,
+	&.focus,
+	&:hover,
+	&:active,
+	&:focus:active,
 	&:not(:disabled):not(.disabled):active,
 	&:not(:disabled):not(.disabled).active {
-		&:focus {
-			color: $color;
-		}
+		background-color: transparent;
+		color: $color;
+		border-color: $color;
 	}
 
 	&:focus,
 	&.focus,
-	&:hover,
-	&:active {
-		color: $color;
-		border-color: $color;
+	&:not(:disabled):not(.disabled):active,
+	&:not(:disabled):not(.disabled).active {
+		box-shadow: $btn-focus-box-shadow-size $color;
 	}
 }
 

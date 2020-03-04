@@ -68,7 +68,7 @@
 
 			th,
 			td {
-				opacity: .5;
+				color: rgba($font-header, .5);
 				font-weight: 400;
 				background-color: transparent;
 				padding: $table-adv-cell-padding-hor $table-adv-cell-padding-vert;
@@ -156,7 +156,7 @@
 			}
 		}
 
-		&__white-background {
+		&--bg-white {
 			box-shadow: $table-active-shadow;
 
 			& > th,
@@ -165,7 +165,7 @@
 			}
 		}
 
-		&__danger-background {
+		&--bg--danger {
 			box-shadow: $table-active-shadow;
 
 			& > th,

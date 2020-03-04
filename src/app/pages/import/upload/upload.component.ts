@@ -147,8 +147,6 @@ export class UploadComponent extends AbstractComponent implements OnInit {
             } else if (status === 500) {
                 this.errorInParsing = true;
                 this.isInitState = true;
-                // const jsonResponse = JSON.parse(response);
-                // this.listOfErrors = jsonResponse.message;
                 this.fileUploader.clearQueue();
             } else {
                 this.isInitState = false;

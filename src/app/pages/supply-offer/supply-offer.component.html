@@ -16,8 +16,8 @@
         [type]="'CHECKBOX'">
     </lnd-form-field>
     <span *ngIf="row.greenEnergy"
-          class="icon icon--leaf icon--green ml-auto">
-        </span>
+          class="icon icon--leaf icon--green ml-2 align-bottom">
+    </span>
 </ng-template>
 <ng-template #columnTemplatePriceVT let-row="row">
     {{row.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
@@ -237,18 +237,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-1 text-center text-lg-right">
-                    <lnd-button
-                        [isDisabled]="!numberOfMarked"
-                        label="Odstranit"
-                        type="warning"
-                        (action)="deleteMarkedOffers()"
-                    ></lnd-button>
-                </div>
-                <div class="col-lg-2 offset-lg-4 text-center">
-                    Počet označených nabídek: {{numberOfMarked}}
-                </div>
-                <div class="col-lg-5 text-center text-lg-right">
+                <div class="col-12 col-xl-5 order-xl-3">
                     <lnd-button
                         label="Přidat nabídku"
                         customClass="mr-2"
@@ -266,6 +255,18 @@
                         customClass="mr-2"
                         type="primary"
                         (click)="exportOffers($event)"
+                    ></lnd-button>
+                </div>
+                <div class="col-12 col-xl-2 offset-xl-3 text-center mb-3 mb-xl-0 order-xl-2">
+                    Počet označených nabídek: {{numberOfMarked}}
+                </div>
+                <div class="col-12 col-xl-2 order-xl-1">
+                    <lnd-button
+                        [isDisabled]="!numberOfMarked"
+                        label="Odstranit"
+                        type="danger"
+                        hasOutline="true"
+                        (action)="deleteMarkedOffers()"
                     ></lnd-button>
                 </div>
             </div>

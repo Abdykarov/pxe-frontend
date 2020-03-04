@@ -1,3 +1,4 @@
-name,validFrom,validTo,deliveryFrom,deliveryTo,deliveryLength,distributionLocation,permanentPaymentPrice,subjectTypeId,greenEnergy,Benefit1,URL1,Benefit2,URL2,Benefit3,URL3,Benefit4,URL4,priceGas,annualConsumptionId,priceVT,priceNT,distributionRateId,circuitBreakerId
+NAME,VALIDFROM,VALIDTO,DELIVERYFROM,DELIVERYTO,DELIVERYLENGTH,DISTRIBUTIONLOCATION,PERMANENTPAYMENTPRICE,SUBJECTTYPEID,GREENENERGY,BENEFIT1,URL1,BENEFIT2,URL2,BENEFIT3,URL3,BENEFIT4,URL4,PRICEGAS,ANNUALCONSUMPTIONID,PRICEVT,PRICENT,DISTRIBUTIONRATEID,CIRCUITBREAKERID
 valid power offer,2020-02-25,2020-03-24,2020-04-01,2021-03-31,1,E.ON,140.5,1,true,benefit1,http://benefit1.cz,benefit2,http://benefit2.cz,,,,,,,152.20,137.40,C25d,<= 1x25A
+valid gas offer,2020-02-20,2020-05-31,2020-06-01,2021-05-31,1,E.ON,138.7,2,false,ben1,http://ben1.cz,,,,,,,1.2587,3,,,,
 valid gas offer,2020-02-20,2020-05-31,2020-06-01,2021-05-31,1,E.ON,138.7,2,false,ben1,http://ben1.cz,,,,,,,1.2587,3,,,,
