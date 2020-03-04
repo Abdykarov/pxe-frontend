@@ -16,11 +16,11 @@ export class OffersByCommodityTypePipe implements PipeTransform {
         if (!offerImportInput) {
             return [];
         }
-        return R.filter(({offerInput}) => {
+        return R.filter(({offer}) => {
             if (commodityType === CommodityType.POWER) {
-                return offerInput.powerAttributes;
+                return offer.powerAttributes;
             }
-            return offerInput.gasAttributes;
+            return offer.gasAttributes;
         })(offerImportInput);
     }
 }

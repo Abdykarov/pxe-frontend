@@ -74,6 +74,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
     ) {
         super();
     }
+
     public readonly bannerTypeImages = BannerTypeImages;
     public readonly configStepper = getConfigStepper(ImportProgressStep.APPROVAL, false, TypeStepper.IMPORT);
     public readonly routePower = ROUTES.ROUTER_IMPORT_APPROVAL_POWER;
@@ -200,7 +201,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
         evt.preventDefault();
         const offersImportInput =
             R.map(
-                (offerImportInput: IOfferImportInput) => offerImportInput.offerInput,
+                (offerImportInput: IOfferImportInput) => offerImportInput.offer,
             )(this.tableRows);
 
         this.offerService.batchImport(offersImportInput)
@@ -241,7 +242,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
     }
 
     public delete = (deletingRow) => {
-        this.offerDeleted = deletingRow.offerInput.name;
+        this.offerDeleted = deletingRow.offer.name;
         this.tableRows = R.filter((offerImportInput: IOfferImportInput) => {
             return JSON.stringify(deletingRow) !== JSON.stringify(offerImportInput);
         })(this.tableRows);

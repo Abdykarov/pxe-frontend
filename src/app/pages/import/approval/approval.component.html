@@ -4,24 +4,24 @@
     </span>
 </ng-template>
 <ng-template #columnTemplatePriceVT let-row="row">
-    {{row.offerInput.powerAttributes.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
+    {{row.offer.powerAttributes.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
 </ng-template>
 <ng-template #columnTemplatePriceNT let-row="row">
-    <ng-container *ngIf="row.offerInput.powerAttributes.priceNT !== null">
-        {{row.offerInput.powerAttributes.priceNT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
+    <ng-container *ngIf="row.offer.powerAttributes.priceNT !== null">
+        {{row.offer.powerAttributes.priceNT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
     </ng-container>
 </ng-template>
 <ng-template #columnTemplatePriceGas let-row="row">
-    {{row.offerInput.gasAttributes.priceGas | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
+    {{row.offer.gasAttributes.priceGas | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
 </ng-template>
 <ng-template #columnTemplateValidFromTo let-row="row">
-    {{row.offerInput.validFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.offerInput.validTo | date:'d.&nbsp;M.&nbsp;y'}}
+    {{row.offer.validFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.offer.validTo | date:'d.&nbsp;M.&nbsp;y'}}
 </ng-template>
 <ng-template #columnTemplateDeliveryFromTo let-row="row">
-    {{row.offerInput.deliveryFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.offerInput.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}
+    {{row.offer.deliveryFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.offer.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}
 </ng-template>
 <ng-template #actionColumnTemplate let-row="row" let-index="index">
-    <span>{{row.offerInput.permanentPaymentPrice | number:'1.0-2'}}&nbsp;Kč/měsíc (bez&nbsp;DPH)</span>
+    <span>{{row.offer.permanentPaymentPrice | number:'1.0-2'}}&nbsp;Kč/měsíc (bez&nbsp;DPH)</span>
     <div class="row action-area-div"
          *ngIf="!row.duplicity">
         <div class="col-12">

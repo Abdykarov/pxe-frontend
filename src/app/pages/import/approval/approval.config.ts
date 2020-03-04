@@ -34,7 +34,7 @@ export class ApprovalConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${row.offerInput.name}`,
+                        content: (row) => `${row.offer.name}`,
                     },
                 ],
             },
@@ -45,7 +45,7 @@ export class ApprovalConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row: IOfferImportInput) =>
-                            `${R.find(R.propEq('value', row.offerInput.subjectTypeId))(SUBJECT_TYPE_OPTIONS).label}`,
+                            `${R.find(R.propEq('value', row.offer.subjectTypeId))(SUBJECT_TYPE_OPTIONS).label}`,
                     },
                 ],
             },
@@ -56,8 +56,8 @@ export class ApprovalConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row: IOfferImportInput) => {
-                            return row.offerInput.distributionLocation ?
-                                R.find(R.propEq('value', row.offerInput.distributionLocation))
+                            return row.offer.distributionLocation ?
+                                R.find(R.propEq('value', row.offer.distributionLocation))
                                     (codeLists[CODE_LIST.DISTRIBUTION_POWER]).label :
                                     '';
                         },
@@ -71,8 +71,8 @@ export class ApprovalConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row: IOfferImportInput) => {
-                            return row.offerInput.powerAttributes.distributionRateId ?
-                                R.find(R.propEq('value', row.offerInput.powerAttributes.distributionRateId))
+                            return row.offer.powerAttributes.distributionRateId ?
+                                R.find(R.propEq('value', row.offer.powerAttributes.distributionRateId))
                                 (codeLists[CODE_LIST.DIST_RATE]).label :
                                 '';
                         },
@@ -87,8 +87,8 @@ export class ApprovalConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row: IOfferImportInput) => {
-                            return row.offerInput.powerAttributes.circuitBreakerId ?
-                                R.find(R.propEq('value', row.offerInput.powerAttributes.circuitBreakerId))
+                            return row.offer.powerAttributes.circuitBreakerId ?
+                                R.find(R.propEq('value', row.offer.powerAttributes.circuitBreakerId))
                                 (codeLists[CODE_LIST.CIRCUIT_BREAKER]).label :
                                 '';
                         },
@@ -143,7 +143,7 @@ export class ApprovalConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row: IOfferImportInput) =>
-                            `${R.find(R.propEq('value', row.offerInput.deliveryLength))(DELIVERY_LENGTH_OPTIONS).label}`,
+                            `${R.find(R.propEq('value', row.offer.deliveryLength))(DELIVERY_LENGTH_OPTIONS).label}`,
                     },
                 ],
             },
@@ -175,7 +175,7 @@ export class ApprovalConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row: IOfferImportInput) => `${row.offerInput.name}`,
+                        content: (row: IOfferImportInput) => `${row.offer.name}`,
                     },
                 ],
             },
@@ -186,7 +186,7 @@ export class ApprovalConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row: IOfferImportInput) =>
-                            `${R.find(R.propEq('value', row.offerInput.subjectTypeId))(SUBJECT_TYPE_OPTIONS).label}`,
+                            `${R.find(R.propEq('value', row.offer.subjectTypeId))(SUBJECT_TYPE_OPTIONS).label}`,
                     },
                 ],
             },
@@ -197,8 +197,8 @@ export class ApprovalConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row: IOfferImportInput) => {
-                            return row.offerInput.distributionLocation ?
-                                R.find(R.propEq('value', row.offerInput.distributionLocation))
+                            return row.offer.distributionLocation ?
+                                R.find(R.propEq('value', row.offer.distributionLocation))
                                 (codeLists[CODE_LIST.DISTRIBUTION_POWER]).label :
                                 '';
                         },
@@ -212,8 +212,8 @@ export class ApprovalConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row: IOfferImportInput) => {
-                            return row.offerInput.gasAttributes.annualConsumptionId ?
-                                R.find(R.propEq('value', row.offerInput.gasAttributes.annualConsumptionId))
+                            return row.offer.gasAttributes.annualConsumptionId ?
+                                R.find(R.propEq('value', row.offer.gasAttributes.annualConsumptionId))
                                 (codeLists[CODE_LIST.CONSUMPTION]).label :
                                 '';
                         },
@@ -257,7 +257,7 @@ export class ApprovalConfig {
                         headingClass: [''],
                         cellClass: [''],
                         content: (row: IOfferImportInput) =>
-                            `${R.find(R.propEq('value', row.offerInput.deliveryLength))(DELIVERY_LENGTH_OPTIONS).label}`,
+                            `${R.find(R.propEq('value', row.offer.deliveryLength))(DELIVERY_LENGTH_OPTIONS).label}`,
                     },
                 ],
             },

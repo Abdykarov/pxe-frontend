@@ -1,8 +1,4 @@
-import {
-    IOfferInput,
-    IOfferInputGasAttributes,
-    IOfferInputPowerAttributes,
-} from 'src/common/graphql/models/offer.model';
+import { IOfferImport } from 'src/common/graphql/models/offer.model';
 
 export enum ImportProgressStep {
     APPROVAL = 'APPROVAL',
@@ -12,7 +8,7 @@ export enum ImportProgressStep {
 }
 
 export interface IOfferImportInput {
-    offerInput: IOfferInput;
+    offer: IOfferImport;
     duplicity: boolean;
     violations: string[];
 }
