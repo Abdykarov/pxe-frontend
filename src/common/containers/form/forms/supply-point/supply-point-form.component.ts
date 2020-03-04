@@ -6,7 +6,7 @@ import {
     OnInit,
     SimpleChanges,
 } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
@@ -41,7 +41,7 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import {
     convertArrayToObject,
-    convertDateToSendFormatFnc,
+    convertDateToSendFormatFnc, isUserName,
     transformCodeList,
     transformSuppliers,
 } from 'src/common/utils';
@@ -53,6 +53,12 @@ import { HelpModalComponent } from 'src/common/containers/modal/modals/help/help
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+
+export const TypeOfAnnualConsumptionMapping =  {
+    'annualConsumptionNTUnit': 'prevAnnualConsumptionNTUnit',
+    'annualConsumptionVTUnit': 'prevAnnualConsumptionVTUnit',
+    'annualConsumptionUnit': 'prevAnnualConsumptionUnit',
+};
 
 @Component({
     selector: 'pxe-supply-point-form',
@@ -80,6 +86,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public formWasPrefilled = false;
     public helpDocuments = {};
     public minDate: Date;
+    public prevAnnualConsumptionNTUnit: string;
+    public prevAnnualConsumptionVTUnit: string;
+    public prevAnnualConsumptionUnit: string;
     public subjectTypeOptions: Array<IOption> = SUBJECT_TYPE_OPTIONS;
     public suppliers = [];
     public suppliers$: BehaviorSubject<any> = new BehaviorSubject([]);
@@ -98,6 +107,16 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     ngOnInit() {
         super.ngOnInit();
         this.form = this.fb.group(this.formFields.controls, this.formFields.options);
+
+        this.form.valueChanges
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(({annualConsumptionNTUnit, annualConsumptionVTUnit, annualConsumptionUnit}) => {
+                this.detectChangesForAnnualConsumption('annualConsumptionNTUnit', annualConsumptionNTUnit);
+                this.detectChangesForAnnualConsumption('annualConsumptionVTUnit', annualConsumptionVTUnit);
+                this.detectChangesForAnnualConsumption('annualConsumptionUnit', annualConsumptionUnit);
+            });
 
         this.form.get('commodityType')
             .valueChanges
@@ -193,6 +212,29 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
 
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
+    }
+
+    public detectChangesForAnnualConsumption = (typeOfAnnualConsumption: string, annualConsumptionUnit: string) => {
+        const wasPrevNull = this.prevAnnualConsumptionVTUnit;
+        if (this.prevAnnualConsumptionVTUnit !== annualConsumptionUnit) {
+            this[TypeOfAnnualConsumptionMapping[typeOfAnnualConsumption]] = annualConsumptionUnit;
+            this.form.controls[typeOfAnnualConsumption]
+                .setValidators(
+                    [
+                        Validators.required,
+                        Validators.maxLength(isUserName($event.target.value) ?
+                            CONSTS.VALIDATORS.MAX_LENGTH.EMAIL_LOGIN : CONSTS.VALIDATORS.MAX_LENGTH.USER_NAME_LOGIN),
+                    ]);
+            this.form.controls[formName]
+                .updateValueAndValidity();
+
+            // if (wasPrevNull) {
+            //     if (annualConsumptionUnit === CONSTS.UNIT_OF_PRICES.KWH) {
+            //         this.form.get(typeOfAnnualConsumption).setValue(this.form.get(typeOfAnnualConsumption).value * 1000);
+            //     }
+            //     return;
+            // }
+        }
     }
 
     public prefillForm = () => {
