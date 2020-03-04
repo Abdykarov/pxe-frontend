@@ -1,25 +1,58 @@
+import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
+import {
+    ChangeDetectorRef,
+    Component,
+    HostListener,
+    Inject,
+    OnInit,
+    PLATFORM_ID,
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { ChangeDetectorRef, Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { filter, map, takeUntil } from 'rxjs/operators';
+import {
+    BehaviorSubject,
+    combineLatest,
+    Observable,
+} from 'rxjs';
+import {
+    filter,
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 
-import { CODE_LIST_TYPES, commodityTypes, CONSTS, ROUTES } from 'src/app/app.constants';
-import { ApprovalConfig } from 'src/app/pages/import/approval/approval.config';
-import { ImportProgressStep, IOfferCounts, IOfferImportInput } from 'src/app/pages/import/import.model';
 import { AbstractComponent } from 'src/common/abstract.component';
-import { ModalService } from 'src/common/containers/modal/modal.service';
-import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
-import { CommodityType } from 'src/common/graphql/models/supply.model';
-import { OfferService } from 'src/common/graphql/services/offer.service';
-import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { OffersByCommodityTypePipe } from 'src/common/pipes/offers-by-commodity-type/offers-by-commodity-type.pipe';
+import { ApprovalConfig } from 'src/app/pages/import/approval/approval.config';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
+import {
+    CODE_LIST_TYPES,
+    commodityTypes,
+    CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
+import {
+    getConfigStepper,
+    parseGraphQLErrors,
+    parseRestAPIErrors,
+    transformCodeList,
+    TypeStepper,
+} from 'src/common/utils';
+import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
+import {
+    ImportProgressStep,
+    IOfferCounts,
+    IOfferImportInput,
+} from 'src/app/pages/import/import.model';
 import { ITableColumnConfig } from 'src/common/ui/table/models/table.model';
-import { getConfigStepper, parseGraphQLErrors, parseRestAPIErrors, transformCodeList, TypeStepper } from 'src/common/utils';
+import { ModalService } from 'src/common/containers/modal/modal.service';
+import { OfferService } from 'src/common/graphql/services/offer.service';
+import { OffersByCommodityTypePipe } from 'src/common/pipes/offers-by-commodity-type/offers-by-commodity-type.pipe';
+import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
     selector: 'pxe-approval',
