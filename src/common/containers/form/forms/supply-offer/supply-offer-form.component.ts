@@ -31,9 +31,13 @@ import {
 import {
     commodityTypeFields,
 } from 'src/common/containers/form/forms/supply-offer/configs/supply-offer-form.config';
-import { CommodityType } from 'src/common/graphql/models/supply.model';
+import {
+    CommodityType,
+    ICodelistOptions,
+} from 'src/common/graphql/models/supply.model';
 import {
     convertDateToSendFormatFnc,
+    includesBothTariffs,
     transformCodeList,
 } from 'src/common/utils';
 import { formFieldsBenefit } from 'src/common/containers/form/forms/supply-offer/configs/supply-offer-benefit-form.config';
@@ -66,7 +70,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
 
     public formFieldsBenefit: IForm = formFieldsBenefit;
 
-    public codeLists;
+    public codeLists: ICodelistOptions;
     public COMMODITY_TYPE_POWER = CommodityType.POWER;
     public deliveryLengthOptions: Array<IOption> = DELIVERY_LENGTH_OPTIONS;
     public distributionRateType = '';
@@ -126,7 +130,6 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
 
         this.setFormByCommodity(this.commodityType);
         this.loadCodeLists();
-        this.setPriceNTState();
         this.currentFormValues.emit(this.form.value);
     }
 
@@ -151,20 +154,6 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
     public addBenefit = () => {
         return this.fb.group(formFieldsBenefit.controls, formFieldsBenefit.options);
     }
-
-    public includesBothTariffs = (id: string) => this.codeLists &&
-        R.includes(
-            {
-                type: 'DS2P4R',
-                code: id,
-                description: id,
-                help: id,
-                __typename: 'CodelistItem',
-                key: id,
-                value: id,
-                label: id,
-            },
-            this.codeLists[CODE_LIST.DISTRIBUTION_RATE_BOTH])
 
     public setFormByCommodity = (commodityType: CommodityType) => {
         R.mapObjIndexed((fields, type) => {
@@ -299,7 +288,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
     }
 
     public setPriceNTState = (distributionRateId: string = null) => {
-        if (this.includesBothTariffs(distributionRateId)) {
+        if (includesBothTariffs(distributionRateId, this.codeLists)) {
             this.setEnableField('priceNT');
         } else {
             this.setDisableField('priceNT');

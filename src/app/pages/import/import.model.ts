@@ -16,3 +16,9 @@ export interface IOfferImportInput {
     duplicity: boolean;
     violations: string[];
 }
+
+export interface IOfferCounts {
+    numberOfDuplicateOffers: number;
+    numberOfGasOffers: number;
+    numberOfPowerOffers: number;
+}

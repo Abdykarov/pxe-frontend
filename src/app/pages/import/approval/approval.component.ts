@@ -45,7 +45,7 @@ import {
 } from 'src/common/utils';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import {
-    ImportProgressStep,
+    ImportProgressStep, IOfferCounts,
     IOfferImportInput,
 } from 'src/app/pages/import/import.model';
 import { ITableColumnConfig } from 'src/common/ui/table/models/table.model';
@@ -60,6 +60,20 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./approval.component.scss'],
 })
 export class ApprovalComponent extends AbstractComponent implements OnInit {
+
+    constructor(
+        private approvalConfig: ApprovalConfig,
+        private cd: ChangeDetectorRef,
+        private modalsService: ModalService,
+        private offersByCommodityTypePipe: OffersByCommodityTypePipe,
+        private offerService: OfferService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private supplyService: SupplyService,
+        @Inject(PLATFORM_ID) private platformId: string,
+    ) {
+        super();
+    }
     public readonly bannerTypeImages = BannerTypeImages;
     public readonly configStepper = getConfigStepper(ImportProgressStep.APPROVAL, false, TypeStepper.IMPORT);
     public readonly routePower = ROUTES.ROUTER_IMPORT_APPROVAL_POWER;
@@ -75,29 +89,21 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
     public tableCols: ITableColumnConfig[] = [];
     public tableRows: IOfferImportInput[] = [];
 
-    constructor(
-        private approvalConfig: ApprovalConfig,
-        private cd: ChangeDetectorRef,
-        private modalsService: ModalService,
-        private offersByCommodityTypePipe: OffersByCommodityTypePipe,
-        private offerService: OfferService,
-        private route: ActivatedRoute,
-        private router: Router,
-        private supplyService: SupplyService,
-        @Inject(PLATFORM_ID) private platformId: string,
-    ) {
-        super();
-    }
-
     private codeLists$: Observable<any> = this.supplyService.findCodelistsByTypes(CODE_LIST_TYPES, 'cs')
         .pipe(
             map(({data}) => transformCodeList(data.findCodelistsByTypes)),
         );
 
+    @HostListener('window:beforeunload', ['$event'])
+    public beforeunloadHandler(event) {
+        event.preventDefault();
+        event.returnValue = '';
+    }
+
     ngOnInit() {
-        console.log('INIT');
         if (isPlatformBrowser(this.platformId)) {
-            if (!window.history.state.offers) {
+            const offers: IOfferImportInput[] = window.history.state.offers;
+            if (R.isNil(offers)) {
                 this.router.navigate([
                         ROUTES.ROUTER_IMPORT_UPLOAD,
                     ],
@@ -109,7 +115,9 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                 );
                 return;
             }
-            this.tableRows = window.history.state.offers;
+            if (!R.isNil(offers)) {
+                this.tableRows = offers;
+            }
         }
 
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -150,10 +158,29 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 ([codeLists, commodityType]) => {
-                    this.tableCols = this.approvalConfig.tableCols(codeLists)[commodityType];
-                    this.setStateOfNavigationLink();
-                    this.setNumberOfDuplicateOffers();
-                    this.cd.markForCheck();
+                    if (codeLists && commodityType) {
+                        this.tableCols = this.approvalConfig.tableCols(codeLists)[commodityType];
+                        const {
+                            numberOfDuplicateOffers,
+                            numberOfGasOffers,
+                            numberOfPowerOffers,
+                        } = this.getOfferCounts(this.tableRows);
+
+                        this.numberOfDuplicateOffers = numberOfDuplicateOffers;
+                        this.numberOfGasOffers = numberOfGasOffers;
+                        this.numberOfPowerOffers = numberOfPowerOffers;
+
+                        if (this.numberOfPowerOffers === 0) {
+                            this.router.navigate([this.routeGas]);
+                            return;
+                        }
+
+                        if (this.numberOfGasOffers === 0) {
+                            this.router.navigate([this.routePower]);
+                            return;
+                        }
+                        this.cd.markForCheck();
+                    }
                 },
                 error => {
                     const { globalError } = parseGraphQLErrors(error);
@@ -163,16 +190,10 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
 
     }
 
-    @HostListener('window:beforeunload', ['$event'])
-    public beforeunloadHandler(event) {
-        event.preventDefault();
-        event.returnValue = '';
-    }
-
     public backAction = (evt) => {
         evt.preventDefault();
         this.modalsService
-            .showModal$.next(this.approvalConfig.confirmBackActionConfig({size: 'xl'}));
+            .showModal$.next(this.approvalConfig.confirmBackActionConfig());
     }
 
     public approvalAction = (evt) => {
@@ -187,7 +208,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                (duplicateOffers) => {
+                () => {
                     this.router.navigate([
                             this.commodityType === CommodityType.POWER ?
                                 ROUTES.ROUTER_SUPPLY_OFFER_POWER : ROUTES.ROUTER_SUPPLY_OFFER_GAS,
@@ -224,8 +245,27 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
         this.tableRows = R.filter((offerImportInput: IOfferImportInput) => {
             return JSON.stringify(deletingRow) !== JSON.stringify(offerImportInput);
         })(this.tableRows);
-        this.setNumberOfDuplicateOffers();
-        this.setStateOfNavigationLink();
+
+        const {
+            numberOfDuplicateOffers,
+            numberOfGasOffers,
+            numberOfPowerOffers,
+        } = this.getOfferCounts(this.tableRows);
+
+        this.numberOfDuplicateOffers = numberOfDuplicateOffers;
+        this.numberOfGasOffers = numberOfGasOffers;
+        this.numberOfPowerOffers = numberOfPowerOffers;
+
+        if (this.numberOfPowerOffers === 0) {
+            this.router.navigate([this.routeGas]);
+            return;
+        }
+
+        if (this.numberOfGasOffers === 0) {
+            this.router.navigate([this.routePower]);
+            return;
+        }
+
         if (!this.tableRows.length || this.isZeroOffersToImportedWithoutDuplicity()) {
             this.navigationBack();
         }
@@ -235,22 +275,15 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
     public isZeroOffersToImportedWithoutDuplicity = (): boolean =>
         (this.numberOfPowerOffers + this.numberOfGasOffers) === this.numberOfDuplicateOffers
 
-    public setNumberOfDuplicateOffers = () => {
-        this.numberOfDuplicateOffers = R.reduce((sum: number, offerImportInput: IOfferImportInput) => {
-            return (offerImportInput.duplicity ? ++sum : sum);
-        }, 0, this.tableRows);
-    }
-
-    public setStateOfNavigationLink = () => {
-        this.numberOfGasOffers = this.offersByCommodityTypePipe.transform(this.tableRows, CommodityType.GAS).length;
-        this.numberOfPowerOffers = this.offersByCommodityTypePipe.transform(this.tableRows, CommodityType.POWER).length;
-        if (this.numberOfPowerOffers === 0) {
-            this.router.navigate([this.routeGas]);
-            return;
-        }
-        if (this.numberOfGasOffers === 0) {
-            this.router.navigate([this.routePower]);
-            return;
-        }
+    public getOfferCounts = (offers: IOfferImportInput[]): IOfferCounts => {
+        const numberOfDuplicateOffers =
+            R.reduce((sum: number, offerImportInput: IOfferImportInput) => (offerImportInput.duplicity ? ++sum : sum), 0, offers);
+        const numberOfGasOffers = this.offersByCommodityTypePipe.transform(offers, CommodityType.GAS).length;
+        const numberOfPowerOffers = this.offersByCommodityTypePipe.transform(offers, CommodityType.POWER).length;
+        return {
+            numberOfDuplicateOffers,
+            numberOfGasOffers,
+            numberOfPowerOffers,
+        };
     }
 }

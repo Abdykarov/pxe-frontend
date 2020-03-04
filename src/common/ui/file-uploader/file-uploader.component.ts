@@ -14,22 +14,25 @@ import { FileUploader } from 'src/third-sides/file-upload';
 })
 export class FileUploaderComponent {
     @Input()
-    uploader: FileUploader;
+    public uploader: FileUploader;
 
     @Output()
     public fileSelectAction: EventEmitter<any> = new EventEmitter();
 
-    hasBaseDropZoneOver = false;
+    public hasBaseDropZoneOver = false;
 
-    public fileOverBase(e: any): void {
-        this.hasBaseDropZoneOver = e;
+    public fileOverBase = (evt) => {
+        evt.preventDefault();
+        this.hasBaseDropZoneOver = evt;
     }
 
-    fileDrop = (evt) => {
+    public fileDrop = (evt) => {
+        evt.preventDefault();
         this.fileSelectAction.emit(this.uploader);
     }
 
-    fileSelected = (evt) => {
+    public fileSelected = (evt) => {
+        evt.preventDefault();
         this.fileSelectAction.emit(this.uploader);
     }
 }

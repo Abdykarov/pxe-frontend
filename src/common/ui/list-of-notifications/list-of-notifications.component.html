@@ -9,7 +9,7 @@
             class="offset-1 col-10">
             <ul>
                 <li *ngFor="let notification of notifications | slice:0:maxShowNotifications">
-                    {{notification }}
+                    {{notification}}
                 </li>
                 <li *ngIf="notifications.length > maxShowNotifications">a další</li>
             </ul>

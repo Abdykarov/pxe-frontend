@@ -14,6 +14,7 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 
 import * as R from 'ramda';
+import { saveAs } from 'file-saver';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
@@ -31,6 +32,7 @@ import {
     graphQLMessages,
     importErrorCodes,
 } from 'src/common/constants/errors.constant';
+import { DocumentService } from 'src/app/services/document.service';
 import {
     FileItem,
     FileUploader,
@@ -66,7 +68,6 @@ import { ModalService } from 'src/common/containers/modal/modal.service';
 export class UploadComponent extends AbstractComponent implements OnInit {
     public readonly bannerTypeImages = BannerTypeImages;
     public readonly configStepper = getConfigStepper(ImportProgressStep.UPLOAD, false, TypeStepper.IMPORT);
-    public readonly listOfErrorsHeaderText = 'Seznam chyb';
     public commodityType = CommodityType.POWER;
     public fileErrors: string[] = [];
     public globalError: string[] = [];
@@ -83,6 +84,7 @@ export class UploadComponent extends AbstractComponent implements OnInit {
         private approvalConfig: ApprovalConfig,
         private authService: AuthService,
         private cd: ChangeDetectorRef,
+        private documentService: DocumentService,
         private modalsService: ModalService,
         private route: ActivatedRoute,
         private router: Router,
@@ -121,7 +123,11 @@ export class UploadComponent extends AbstractComponent implements OnInit {
             this.errorInParsing = false;
             if (status === 200) {
                 const offers: IOfferImportInput[] = JSON.parse(response);
-                if (this.analyzeErrorsViolations(offers)) {
+                this.listOfErrors = this.getErrorsViolations(offers);
+                if (this.listOfErrors.length) {
+                    this.isInitState = false;
+                    this.fileUploader.clearQueue();
+                    this.cd.markForCheck();
                     return;
                 }
 
@@ -154,7 +160,7 @@ export class UploadComponent extends AbstractComponent implements OnInit {
 
     }
 
-    uploadFile = (fileUploader: FileUploader) => {
+    public uploadFile = (fileUploader: FileUploader) => {
         if (!this.tryToUploadFile) {
             return;
         }
@@ -175,21 +181,21 @@ export class UploadComponent extends AbstractComponent implements OnInit {
         this.cd.markForCheck();
     }
 
-    downloadExampleImportFile = (evt) => {
+    public downloadExampleImportFile = (evt) => {
         evt.preventDefault();
         if (isPlatformBrowser(this.platformId)) {
-            window.open('/assets/csv/example-import-offers.csv');
+            saveAs(CONSTS.EXAMPLE_OF_IMPORT_OFFER_FILE.PATH, CONSTS.EXAMPLE_OF_IMPORT_OFFER_FILE.FILENAME);
         }
     }
 
-    scrollToErrors = (evt) => {
+    public scrollToErrors = (evt) => {
         evt.preventDefault();
         scrollToElementFnc(this.listOfNotificationsRow.nativeElement);
     }
 
-    public analyzeErrorsViolations = (offersImportInput: IOfferImportInput[]): boolean => {
+    public getErrorsViolations = (offersImportInput: IOfferImportInput[]): string[] => {
         let row = 1;
-        this.listOfErrors = R.reduce((listOfErrors: string[], offerImportInput: IOfferImportInput) => {
+        return R.reduce((listOfErrors: string[], offerImportInput: IOfferImportInput) => {
             if (offerImportInput.violations.length) {
                 R.forEachObjIndexed((violation: string) => {
                     listOfErrors.push(`Řádek ${row}: ${parseViolation(violation)}`);
@@ -198,12 +204,5 @@ export class UploadComponent extends AbstractComponent implements OnInit {
             row++;
             return listOfErrors;
         }, [], offersImportInput);
-
-        if (this.listOfErrors.length) {
-            this.isInitState = false;
-        }
-        this.fileUploader.clearQueue();
-        this.cd.markForCheck();
-        return !!this.listOfErrors.length;
     }
 }

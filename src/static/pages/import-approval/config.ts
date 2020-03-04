@@ -31,6 +31,16 @@ export class ApprovalConfig {
     public tableCols = {
         POWER: [
             {
+                label: '',
+                views: [
+                    {
+                        headingClass: [''],
+                        cellClass: [''],
+                        contentTemplateName: 'columnTemplateGreenEnergy',
+                    },
+                ],
+            },
+            {
                 label: 'Název produktu',
                 views: [
                     {
@@ -143,6 +153,24 @@ export class ApprovalConfig {
         ],
         GAS: [
             {
+                label: '',
+                views: [
+                    {
+                        headingClass: [''],
+                        cellClass: [''],
+                        contentTemplateName: 'columnTemplateGreenEnergy',
+                    },
+                ],
+            },
+            {
+                label: '',
+                views: [
+                    {
+                        columnTemplateGreenEnergy: 'columnTemplateGreenEnergy',
+                    },
+                ],
+            },
+            {
                 label: 'Název produktu',
                 views: [
                     {
@@ -253,6 +281,7 @@ export class ApprovalConfig {
             deliveryTo: '2019-10-06',
             deliveryLength: 1,
             permanentPaymentPrice: 650,
+            greenEnergy: false,
         },
         {
             id: 2,
@@ -271,6 +300,7 @@ export class ApprovalConfig {
             deliveryTo: '2019-10-06',
             deliveryLength: 2,
             permanentPaymentPrice: 250,
+            greenEnergy: true,
         },
         {
             id: 3,
@@ -289,6 +319,7 @@ export class ApprovalConfig {
             deliveryTo: '2019-10-06',
             deliveryLength: 1,
             permanentPaymentPrice: 3650,
+            greenEnergy: false,
         },
     ];
 }

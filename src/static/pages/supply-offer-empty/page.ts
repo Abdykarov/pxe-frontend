@@ -10,11 +10,11 @@ export class SupplyOfferEmptyComponent {
     public bannerTypeImages = BannerTypeImages;
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
-    bannerTitle = 'Nemáte žádnou nabídku elektřiny.';
+    public bannerTitle = 'Nemáte žádnou nabídku elektřiny.';
 
-    bannerDescription = 'Proveďte import nabídek nahráním CSV souboru, nebo přidejte nabídku ručně.';
+    public bannerDescription = 'Proveďte import nabídek nahráním CSV souboru nebo přidejte nabídku ručně.';
 
-    buttonLabel = 'Import nabídek';
+    public buttonLabel = 'Import nabídek';
 
     constructor() {
         this.breadcrumbItemsSimple = [

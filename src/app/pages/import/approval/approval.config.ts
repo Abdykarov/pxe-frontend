@@ -19,6 +19,16 @@ export class ApprovalConfig {
     public tableCols = (codeLists): IOfferTableRows => ({
         POWER: [
             {
+                label: '',
+                views: [
+                    {
+                        headingClass: [''],
+                        cellClass: [''],
+                        contentTemplateName: 'columnTemplateGreenEnergy',
+                    },
+                ],
+            },
+            {
                 label: 'Název produktu',
                 views: [
                     {
@@ -150,6 +160,16 @@ export class ApprovalConfig {
         ],
         GAS: [
             {
+                label: '',
+                views: [
+                    {
+                        headingClass: [''],
+                        cellClass: [''],
+                        contentTemplateName: 'columnTemplateGreenEnergy',
+                    },
+                ],
+            },
+            {
                 label: 'Název produktu',
                 views: [
                     {
@@ -254,7 +274,7 @@ export class ApprovalConfig {
         ],
     })
 
-    public confirmBackActionConfig = (data): IShowModal => ({
+    public confirmBackActionConfig = (): IShowModal => ({
         component: 'ConfirmModalComponent',
         modalType: CONSTS.MODAL_TYPE.CONFIRM_BACK_IMPORT,
         instanceData: {

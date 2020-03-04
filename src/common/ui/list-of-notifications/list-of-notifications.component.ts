@@ -19,5 +19,5 @@ export class ListOfNotificationsComponent {
     public notifications: string[];
 
     @Input()
-    public emptyNotifications = 'Žádné oznámení neexituje.';
+    public emptyNotifications = 'Žádná hláška není k dispozici.';
 }

@@ -24,7 +24,7 @@
                         [showButton]="false"
                     >
                     </lnd-info-banner>
-                    Opravte si soubor podle <a (click)="scrollToErrors($event)">seznamu chyb</a> a pak jí nahrajte znovu.
+                    Opravte si soubor podle <a (click)="scrollToErrors($event)">seznamu chyb</a> a pak ho nahrajte znovu.
                 </p>
                 <ng-container *ngIf="isInitState">
                     <p class="mb-1">
@@ -60,7 +60,7 @@
              *ngIf="listOfErrors && listOfErrors.length && !isInitState">
             <div class="col-xl-8 offset-xl-2">
                 <pxe-list-of-notifications
-                    [headerText]="listOfErrorsHeaderText"
+                    [headerText]="'Seznam chyb'"
                     [notifications]="listOfErrors">
                 </pxe-list-of-notifications>
             </div>

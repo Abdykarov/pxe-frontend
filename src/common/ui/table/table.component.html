@@ -38,7 +38,8 @@
         </tr>
     </thead>
     <tbody [ngClass]="desktopLayoutClasses">
-        <ng-container *ngFor="let row of rows; let i = index" [attr.data-index]="i">
+        <ng-container *ngFor="let row of rows; let i = index"
+                      [attr.data-index]="i">
             <tr
                 [class.table__tr--main__white-background]="whiteBackgroundPropertyCondition && row[whiteBackgroundPropertyCondition]"
                 [class.table__tr--main__danger-background]="dangerBackgroundPropertyCondition && row[dangerBackgroundPropertyCondition]"
@@ -77,7 +78,8 @@
     </tbody>
     <ng-container *ngIf="mobileCols.length">
         <tbody
-            *ngFor="let row of rows; let i = index" [attr.data-index]="i"
+            *ngFor="let row of rows; let i = index"
+            [attr.data-index]="i"
             class="tbody--mobile"
             [ngClass]="mobileLayoutClasses">
             <ng-container *ngFor="let column of mobileCols">

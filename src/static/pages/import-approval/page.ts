@@ -21,7 +21,7 @@ export class ImportApprovalComponent {
         console.log('click');
     }
 
-    backAction = (evt) => {
+    public backAction = (evt) => {
         evt.preventDefault();
         console.log('back');
     }

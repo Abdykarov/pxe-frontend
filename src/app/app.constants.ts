@@ -21,6 +21,10 @@ export const CONSTS = {
         FILE_NAME: 'export',
         TYPE: 'csv',
     },
+    EXAMPLE_OF_IMPORT_OFFER_FILE: {
+        PATH: '/assets/csv/example-import-offers.csv',
+        FILENAME: 'example_import_offers.csv',
+    },
     IMPORT_ERROR_CODES: {
         FILE_TYPE: 'FILE_TYPE',
         MAX_NUMBER_OF_FILES: 'MAX_NUMBER_OF_FILES',

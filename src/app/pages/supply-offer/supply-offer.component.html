@@ -167,6 +167,17 @@
     </ul>
     <ng-container>
         <lnd-placeloader [loading]="loadingOffers && !globalError.length"></lnd-placeloader>
+        <div class="row">
+            <div class="col-12 col-md-12">
+                <lnd-alert
+                    *ngIf="globalError.length"
+                    type="danger">
+                    <ng-container *ngFor="let error of globalError">
+                        {{ error }}<br>
+                    </ng-container>
+                </lnd-alert>
+            </div>
+        </div>
         <ng-container *ngIf="!loadingOffers && tableRows.length === 0">
             <div class="row mt-5">
                 <div class="col-12">
@@ -174,7 +185,7 @@
                         [bannerTitle]="this.commodityType === commodityTypeOptions.POWER ?
                                             'Nemáte žádnou nabídku elektřiny.' : 'Nemáte žádnou nabídku plynu.'"
                         [bannerType]="bannerTypeImages.IMPORT_ERROR"
-                        bannerDescription="Proveďte import nabídek nahráním CSV souboru, nebo přidejte nabídku ručně."
+                        bannerDescription="Proveďte import nabídek nahráním CSV souboru nebo přidejte nabídku ručně."
                         buttonLabel="Import nabídek"
                         (buttonAction)="navigateToImportOffer($event)"
                     >

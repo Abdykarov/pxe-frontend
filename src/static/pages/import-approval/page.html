@@ -1,3 +1,8 @@
+<ng-template #columnTemplateGreenEnergy let-row="row">
+    <span *ngIf="row.greenEnergy"
+          class="icon icon--leaf icon--green ml-auto">
+    </span>
+</ng-template>
 <ng-template #columnTemplatePriceVT let-row="row">
     {{row.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
 </ng-template>
@@ -89,6 +94,7 @@
                 [actionColTriggersDetail]="false"
                 [columnTemplates]="{
                     actionColumnTemplate: actionColumnTemplate,
+                    columnTemplateGreenEnergy: columnTemplateGreenEnergy,
                     columnTemplatePriceVT: columnTemplatePriceVT,
                     columnTemplatePriceNT: columnTemplatePriceNT,
                     columnTemplatePriceGas: columnTemplatePriceGas,

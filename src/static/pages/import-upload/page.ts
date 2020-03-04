@@ -10,19 +10,19 @@ import { FileUploader } from 'src/third-sides/file-upload';
     templateUrl: './page.html',
 })
 export class ImportUploadComponent {
-    configStepper = stepperProgressConfig;
-    uploader = fileUploader;
+    public configStepper = stepperProgressConfig;
+    public uploader = fileUploader;
 
-    downloadExampleFile = (evt) => {
+    public downloadExampleFile = (evt) => {
         evt.preventDefault();
         console.log('downloadExampleFile');
     }
 
-    uploadFile = (file: FileUploader) => {
+    public uploadFile = (file: FileUploader) => {
         console.log('upload');
     }
 
-    backAction = (evt) => {
+    public backAction = (evt) => {
         evt.preventDefault();
         console.log('back');
     }

@@ -24,7 +24,7 @@ import {
     map,
     takeUntil,
 } from 'rxjs/operators';
-import { FileService } from 'src/app/services/file.service';
+import { saveAs } from 'file-saver';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
@@ -37,6 +37,7 @@ import {
     ROUTES,
 } from 'src/app/app.constants';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
+import { DocumentService } from 'src/app/services/document.service';
 import { formFields } from 'src/common/containers/form/forms/supply-offer/configs/supply-offer-form.config';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
@@ -107,7 +108,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
-        private fileService: FileService,
+        private documentService: DocumentService,
         private modalsService: ModalService,
         private offerService: OfferService,
         private route: ActivatedRoute,
@@ -236,7 +237,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         this.offerFormInEmptyPage = !this.offerFormInEmptyPage;
     }
 
-    newOffer = (evt) => {
+    public newOffer = (evt) => {
         evt.preventDefault();
         if (isPlatformBrowser(this.platformId)) {
             const firstCreateOfferElement = document.getElementsByClassName('new-offer-button')[0] as HTMLElement;
@@ -264,8 +265,11 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                (csvContent: string) => {
-                    this.fileService.saveAsCSV(csvContent);
+                (contentCsv: string) => {
+                    const blob = new Blob([contentCsv], {
+                        type: 'text/plain;charset=utf-8',
+                    });
+                    saveAs(blob, `${CONSTS.EXPORT.FILE_NAME}_${new Date().toISOString()}.${CONSTS.EXPORT.TYPE}`);
                 },
                 error => {
                     const { globalError } = parseGraphQLErrors(error);
