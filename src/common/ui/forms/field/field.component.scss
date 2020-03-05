@@ -483,6 +483,8 @@ textarea.form-control--not-empty {
 	}
 
 	&.is-valid + .custom-control-label {
+		color: $font-text;
+
 		&:hover {
 			&::before {
 				border-color: $custom-control-indicator-hover-border-color;

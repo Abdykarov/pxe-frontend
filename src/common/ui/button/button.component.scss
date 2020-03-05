@@ -84,6 +84,13 @@
 		&:active {
 			background-color: $success-dark;
 		}
+
+		&:not(:disabled):not(.disabled):active,
+		&:not(:disabled):not(.disabled).active {
+			&:focus {
+				box-shadow: $btn-focus-box-shadow-size $success-dark;
+			}
+		}
 	}
 
 	&.btn-warning {
