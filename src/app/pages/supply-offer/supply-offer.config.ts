@@ -27,11 +27,21 @@ export class SupplyOfferConfig {
     public tableCols = (codeLists): IOfferTableRows => ({
         POWER: [
             {
-                label: 'Označit vše',
+                label: 'Označit',
                 contentTemplateHeaderName: 'columnTemplateMarkAll',
                 views: [
                     {
                         contentTemplateName: 'columnTemplateMark',
+                    },
+                ],
+            },
+            {
+                label: 'Název produktu',
+                views: [
+                    {
+                        headingClass: ['product-name-min-width'],
+                        cellClass: ['text-break'],
+                        content: (row) => `${row.name}`,
                     },
                 ],
             },
@@ -150,7 +160,7 @@ export class SupplyOfferConfig {
         ],
         GAS: [
             {
-                label: 'Označit vše',
+                label: 'Označit',
                 contentTemplateHeaderName: 'columnTemplateMarkAll',
                 views: [
                     {

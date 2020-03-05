@@ -5,10 +5,17 @@
         <div class="col-12 col-xl-7"
              [class.col-md-6]="isOwner">
             <div class="supply-point-offer__inner">
-                <div class="row">
-                    <div class="col-12">
+                <div class="row justify-content-between">
+                    <div class="col">
                         <span class="supply-point-offer__title-label">{{isOwner ? 'Váš stávající dodavatel' : 'Dodavatel'}}</span>
                         <span class="supply-point-offer__title text-break">{{supplyPointOffer.supplier?.name}}</span>
+                    </div>
+                    <div *ngIf="supplyPointOffer.greenEnergy"
+                         class="col-auto">
+                        <div class="supply-point-offer__green-box">
+                            <span class="icon icon--leaf supply-point-offer__green-icon"></span>
+                            <span class="supply-point-offer__green-text">Zelená<br> energie</span>
+                        </div>
                     </div>
                 </div>
                 <div *ngIf="!isOwner"
@@ -38,9 +45,6 @@
                         <div class="col-12">
                             <span class="supply-point-offer__title-label">
                                 {{isFromContract ? 'Sjednaná měsíční záloha' : 'Vypočtená měsíční platba'}}
-                            </span>
-                            <span *ngIf="supplyPointOffer.greenEnergy">
-                                Zelená energie
                             </span>
                         </div>
                         <div class="col-12 col-md-8 col-xl-12">

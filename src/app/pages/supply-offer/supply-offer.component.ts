@@ -69,7 +69,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public formValues = <IOffer>{};
     public globalError: string[] = [];
     public globalFormError: string[] = [];
-    private initRows: boolean;
+    private initRows = false;
     public loadingOffers = true;
     public numberOfDeletedOffers = 0;
     public numberOfMarked = 0;
@@ -165,7 +165,11 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                         )
                         .subscribe(
                             () => {
+                                if (R.path(['data', 'row', 'marked'], modal)) {
+                                    this.numberOfMarked--;
+                                }
                                 this.deleteDisabled = [];
+                                this.cd.markForCheck();
                             },
                             (error) => {
                                 this.deleteDisabled = [];
@@ -189,7 +193,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                             takeUntil(this.destroy$),
                         )
                         .subscribe(
-                            (respones: []) => {
+                            (respones: any[]) => {
                                 let numberOfDeletedOffers = 0;
                                 R.forEach((response) => {
                                     if (response.isError) {
@@ -211,6 +215,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                             },
                         );
                 }
+                this.modalsService.closeModalData$.next(null);
             });
     }
 

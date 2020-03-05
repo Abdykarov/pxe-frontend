@@ -6,8 +6,8 @@
 
 
 $btn-font-weight:                  400;
-$btn-focus-box-shadow-color:       rgba($primary, .8);
 $btn-focus-box-shadow-size:        0 0 8px 0;
+$btn-focus-box-shadow-color:       rgba($primary, .8);
 $btn-focus-box-shadow:             $btn-focus-box-shadow-size $btn-focus-box-shadow-color;
 $btn-active-box-shadow:            $btn-focus-box-shadow;
 $btn-disabled-opacity:             .3;

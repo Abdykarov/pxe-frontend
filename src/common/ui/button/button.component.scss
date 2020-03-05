@@ -130,7 +130,7 @@
 
 		&:focus,
 		&.focus {
-			box-shadow: 0 0 8px 0 rgba($white, .8);
+			box-shadow: $btn-focus-box-shadow-size rgba($white, .8);
 		}
 
 		&:hover,
@@ -142,7 +142,7 @@
 		&:not(:disabled):not(.disabled):active,
 		&:not(:disabled):not(.disabled).active {
 			background-color: $secondary-dark;
-			box-shadow: 0 0 8px 0 rgba($white, .8);
+			box-shadow: $btn-focus-box-shadow-size rgba($white, .8);
 		}
 	}
 
@@ -210,6 +210,7 @@
 
 		.btn__icon {
 			flex-direction: column;
+			justify-content: center;
 			width: auto;
 		}
 	}
@@ -221,7 +222,7 @@
 	&.btn-outline-danger,
 	&.btn-outline-light,
 	&.btn-outline-white {
-		border: 1px solid;
+		border: 2px solid;
 
 		&:focus,
 		&.focus,
@@ -265,7 +266,9 @@
 	}
 
 	&.btn-outline-danger {
-		@include button-ghost-color($danger-dark);
+		color: $danger-lighten;
+		border-color: $danger-lighten;
+		@include button-ghost-color($danger);
 	}
 
 	&.btn-outline-light {
@@ -324,7 +327,7 @@
 		top: 0;
 		height: 100%;
 		display: flex;
-		justify-content: center;
+		align-items: center;
 
 		& + .btn__text {
 			text-align: left;
