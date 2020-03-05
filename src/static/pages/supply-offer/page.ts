@@ -11,6 +11,7 @@ import { SupplyOfferOrganismConfig } from 'src/static/organisms/supply-offer/con
 
 @Component({
     templateUrl: './page.html',
+    styleUrls: ['../../../assets/scss/05_pages/supply-offer.scss'],
 })
 
 export class SupplyOfferComponent {

@@ -336,40 +336,43 @@
         </div>
         <div class="row">
             <div class="col-12 col-lg-10 offset-lg-1">
+                <div class="row mb-4">
+                    <div class="col-12 text-center">
+                        <div class="supply-offer-controls">
+                            <div class="supply-offer-controls__btn-holder mb-2 mb-md-0">
+                                <lnd-button
+                                    label="Přidat nabídku"
+                                    type="secondary"
+                                    customClass="mb-3 mb-md-0 mr-md-3"
+                                    (action)="newOffer($event)"
+                                ></lnd-button>
+                                <lnd-button
+                                    label="Import nabídek"
+                                    type="secondary"
+                                    customClass="mb-3 mb-md-0 mr-md-3"
+                                    (action)="navigateToImportOffer($event)"
+                                ></lnd-button>
+                                <lnd-button
+                                    label="Export nabídek"
+                                    type="primary"
+                                    customClass="mb-3 mb-md-0"
+                                    (click)="exportOffers($event)"
+                                ></lnd-button>
+                            </div>
+                            <lnd-button
+                                [isDisabled]="!numberOfMarked"
+                                label="Odstranit"
+                                type="danger"
+                                hasOutline="true"
+                                customClass="w-100"
+                                (action)="deleteMarkedOffers()"
+                            ></lnd-button>
+                        </div>
+                    </div>
+                </div>
                 <div class="row mb-3">
-                    <div class="col-12 col-xl-6 text-center mb-3 mb-xl-0 order-xl-2">
-                        Počet označených nabídek: 0
-                    </div>
-                    <div class="col-12 col-xl-3 order-xl-1">
-                        <lnd-button
-                            label="Odstranit"
-                            type="danger"
-                            hasOutline="true"
-                            (action)="click($event)"
-                        ></lnd-button>
-                    </div>
-                    <div class="col-lg-2 offset-lg-4 text-center">
-                        Počet označených nabídek: 0
-                    </div>
-                    <div class="col-lg-5 text-center text-lg-right">
-                        <lnd-button
-                            label="Přidat nabídku"
-                            customClass="mr-2"
-                            type="secondary"
-                            (action)="click($event)"
-                        ></lnd-button>
-                        <lnd-button
-                            label="Import nabídek"
-                            customClass="mr-2"
-                            type="secondary"
-                            (action)="click($event)"
-                        ></lnd-button>
-                        <lnd-button
-                            label="Export nabídek"
-                            customClass="mr-2"
-                            type="primary"
-                            (click)="click($event)"
-                        ></lnd-button>
+                    <div class="col-12 text-center">
+                        Počet označených nabídek: {{numberOfMarked}}
                     </div>
                 </div>
                 <lnd-table
