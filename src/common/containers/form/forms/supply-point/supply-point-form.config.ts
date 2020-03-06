@@ -7,6 +7,8 @@ import {
 import {
     CONSTS,
     CONTRACT_END_TYPE,
+    UNIT_OF_PRICES,
+    UNIT_OF_PRICES_OPTIONS,
 } from 'src/app/app.constants';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
@@ -120,13 +122,13 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_ANNUAL_CONSUMPTION),
+                CustomValidators.isNumber(),
                 CustomValidators.minValue(0),
-                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_ANNUAL_CONSUMPTION),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
             ],
         ],
         annualConsumptionNTUnit: [
-            CONSTS.UNIT_OF_PRICES.KWH,
+            UNIT_OF_PRICES.KWH,
             [
                 Validators.required,
             ],
@@ -135,13 +137,13 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_ANNUAL_CONSUMPTION),
+                CustomValidators.isNumber(),
                 CustomValidators.minValue(0),
-                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_ANNUAL_CONSUMPTION),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
             ],
         ],
         annualConsumptionVTUnit: [
-            CONSTS.UNIT_OF_PRICES.KWH,
+            UNIT_OF_PRICES.KWH,
             [
                 Validators.required,
             ],
@@ -150,13 +152,13 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_ANNUAL_CONSUMPTION),
+                CustomValidators.isNumber(),
                 CustomValidators.minValue(0),
-                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_ANNUAL_CONSUMPTION),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
             ],
         ],
         annualConsumptionUnit: [
-            CONSTS.UNIT_OF_PRICES.KWH,
+            UNIT_OF_PRICES.KWH,
             [
                 Validators.required,
             ],
@@ -245,6 +247,7 @@ export const formFields: IForm = {
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
+            number: errorFieldMessages.number.positiveInteger,
             'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
             totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
@@ -253,6 +256,7 @@ export const formFields: IForm = {
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
+            number: errorFieldMessages.number.positiveInteger,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
             'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
             totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
@@ -263,6 +267,7 @@ export const formFields: IForm = {
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
+            number: errorFieldMessages.number.positiveInteger,
             'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
             totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },

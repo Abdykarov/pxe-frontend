@@ -104,10 +104,6 @@ export const CONSTS = {
         SECURING_YOUR_DATA: 'Ochrana osobních údajů | PARC4U',
         SIGN_UP: 'Registrace | PARC4U',
     },
-    UNIT_OF_PRICES: {
-        MWH: 'MWh',
-        KWH: 'kWh',
-    },
 };
 
 export const ROUTES = {
@@ -384,16 +380,21 @@ export const DEFAULT_QR_CODE_SETTING: IQRCodeSetting = {
     margin: 0,
 };
 
-export const UNIT_OF_PRICES: Array<IOption> = [
+export enum UNIT_OF_PRICES {
+    MWH = 'MWh',
+    KWH = 'kWh',
+}
+
+export const UNIT_OF_PRICES_OPTIONS: Array<IOption> = [
     {
-        'label': CONSTS.UNIT_OF_PRICES.MWH,
-        'value': CONSTS.UNIT_OF_PRICES.MWH,
-        'key': CONSTS.UNIT_OF_PRICES.MWH,
+        'label': UNIT_OF_PRICES.MWH,
+        'value': UNIT_OF_PRICES.MWH,
+        'key': UNIT_OF_PRICES.MWH,
     },
     {
-        'label': CONSTS.UNIT_OF_PRICES.KWH,
-        'value': CONSTS.UNIT_OF_PRICES.KWH,
-        'key': CONSTS.UNIT_OF_PRICES.KWH,
+        'label': UNIT_OF_PRICES.KWH,
+        'value': UNIT_OF_PRICES.KWH,
+        'key': UNIT_OF_PRICES.KWH,
     },
 ];
 
@@ -477,3 +478,27 @@ export enum RequestsOverviewBannerShow {
     TERMINATE_CONTRACT = 'TERMINATE_CONTRACT',
     LEAVE_CONTRACT = 'LEAVE_CONTRACT',
 }
+
+export enum ANNUAL_CONSUMPTION_TYPES {
+    ANNUAL_CONSUMPTION_NT = 'annualConsumptionNT',
+    ANNUAL_CONSUMPTION_VT = 'annualConsumptionVT',
+    ANNUAL_CONSUMPTION = 'annualConsumption',
+}
+
+export enum ANNUAL_CONSUMPTION_UNIT_TYPES {
+    ANNUAL_CONSUMPTION_NT_UNIT = 'annualConsumptionNTUnit',
+    ANNUAL_CONSUMPTION_VT_UNIT = 'annualConsumptionVTUnit',
+    ANNUAL_CONSUMPTION_UNIT = 'annualConsumptionUnit',
+}
+
+export const TypeOfAnnualConsumptionUnitMapping =  {
+    ANNUAL_CONSUMPTION_NT_UNIT: 'prevAnnualConsumptionNTUnit',
+    ANNUAL_CONSUMPTION_UNIT: 'prevAnnualConsumptionUnit',
+    ANNUAL_CONSUMPTION_VT_UNIT: 'prevAnnualConsumptionVTUnit',
+};
+
+export const TypeOfAnnualConsumptionValueMapping =  {
+    annualConsumptionNT: 'prevAnnualConsumptionNTValue',
+    annualConsumptionVT: 'prevAnnualConsumptionVTValue',
+    annualConsumption: 'prevAnnualConsumptionValue',
+};

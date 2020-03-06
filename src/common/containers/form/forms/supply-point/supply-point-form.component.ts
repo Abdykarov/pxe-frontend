@@ -31,6 +31,7 @@ import {
     SUBJECT_TYPE_TO_DIST_RATE_MAP,
     SUPPLY_POINT_EDIT_TYPE,
     UNIT_OF_PRICES,
+    UNIT_OF_PRICES_OPTIONS,
 } from 'src/app/app.constants';
 import {
     CommodityType,
@@ -41,7 +42,7 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import {
     convertArrayToObject,
-    convertDateToSendFormatFnc, isUserName,
+    convertDateToSendFormatFnc, CustomValidators, isUserName,
     transformCodeList,
     transformSuppliers,
 } from 'src/common/utils';
@@ -54,10 +55,28 @@ import { IOption } from 'src/common/ui/forms/models/option.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
-export const TypeOfAnnualConsumptionMapping =  {
-    'annualConsumptionNTUnit': 'prevAnnualConsumptionNTUnit',
-    'annualConsumptionVTUnit': 'prevAnnualConsumptionVTUnit',
-    'annualConsumptionUnit': 'prevAnnualConsumptionUnit',
+export enum ANNUAL_CONSUMPTION_TYPES {
+    ANNUAL_CONSUMPTION_NT = 'annualConsumptionNT',
+    ANNUAL_CONSUMPTION_VT = 'annualConsumptionVT',
+    ANNUAL_CONSUMPTION = 'annualConsumption',
+}
+
+export enum ANNUAL_CONSUMPTION_UNIT_TYPES {
+    ANNUAL_CONSUMPTION_NT_UNIT = 'annualConsumptionNTUnit',
+    ANNUAL_CONSUMPTION_VT_UNIT = 'annualConsumptionVTUnit',
+    ANNUAL_CONSUMPTION_UNIT = 'annualConsumptionUnit',
+}
+
+export const TypeOfAnnualConsumptionUnitMapping =  {
+    ANNUAL_CONSUMPTION_NT_UNIT: 'prevAnnualConsumptionNTUnit',
+    ANNUAL_CONSUMPTION_UNIT: 'prevAnnualConsumptionUnit',
+    ANNUAL_CONSUMPTION_VT_UNIT: 'prevAnnualConsumptionVTUnit',
+};
+
+export const TypeOfAnnualConsumptionValueMapping =  {
+    annualConsumptionNT: 'prevAnnualConsumptionNTValue',
+    annualConsumptionVT: 'prevAnnualConsumptionVTValue',
+    annualConsumption: 'prevAnnualConsumptionValue',
 };
 
 @Component({
@@ -86,13 +105,10 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public formWasPrefilled = false;
     public helpDocuments = {};
     public minDate: Date;
-    public prevAnnualConsumptionNTUnit: string;
-    public prevAnnualConsumptionVTUnit: string;
-    public prevAnnualConsumptionUnit: string;
     public subjectTypeOptions: Array<IOption> = SUBJECT_TYPE_OPTIONS;
     public suppliers = [];
     public suppliers$: BehaviorSubject<any> = new BehaviorSubject([]);
-    public UNIT_OF_PRICES = UNIT_OF_PRICES;
+    public UNIT_OF_PRICES_OPTIONS = UNIT_OF_PRICES_OPTIONS;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -108,14 +124,43 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         super.ngOnInit();
         this.form = this.fb.group(this.formFields.controls, this.formFields.options);
 
-        this.form.valueChanges
+        this.form.get('annualConsumptionNTUnit')
+            .valueChanges
             .pipe(
                 takeUntil(this.destroy$),
             )
-            .subscribe(({annualConsumptionNTUnit, annualConsumptionVTUnit, annualConsumptionUnit}) => {
-                this.detectChangesForAnnualConsumption('annualConsumptionNTUnit', annualConsumptionNTUnit);
-                this.detectChangesForAnnualConsumption('annualConsumptionVTUnit', annualConsumptionVTUnit);
-                this.detectChangesForAnnualConsumption('annualConsumptionUnit', annualConsumptionUnit);
+            .subscribe((annualConsumptionNTUnit: UNIT_OF_PRICES) => {
+                this.detectChangesForAnnualConsumption(
+                    ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_NT,
+                    ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_NT_UNIT,
+                    annualConsumptionNTUnit,
+                );
+            });
+
+        this.form.get('annualConsumptionVTUnit')
+            .valueChanges
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe((annualConsumptionVTUnit: UNIT_OF_PRICES) => {
+                this.detectChangesForAnnualConsumption(
+                    ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_VT,
+                    ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_VT_UNIT,
+                    annualConsumptionVTUnit,
+                );
+            });
+
+        this.form.get('annualConsumptionUnit')
+            .valueChanges
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe((annualConsumptionUnit: UNIT_OF_PRICES) => {
+                this.detectChangesForAnnualConsumption(
+                    ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION,
+                    ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_UNIT,
+                    annualConsumptionUnit,
+                );
             });
 
         this.form.get('commodityType')
@@ -214,28 +259,45 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         super.ngOnChanges(changes);
     }
 
-    public detectChangesForAnnualConsumption = (typeOfAnnualConsumption: string, annualConsumptionUnit: string) => {
-        const wasPrevNull = this.prevAnnualConsumptionVTUnit;
-        if (this.prevAnnualConsumptionVTUnit !== annualConsumptionUnit) {
-            this[TypeOfAnnualConsumptionMapping[typeOfAnnualConsumption]] = annualConsumptionUnit;
+    public detectChangesForAnnualConsumption = (
+        typeOfAnnualConsumption: ANNUAL_CONSUMPTION_TYPES,
+        typeOfAnnualConsumptionUnit: ANNUAL_CONSUMPTION_UNIT_TYPES,
+        annualConsumptionUnit: UNIT_OF_PRICES,
+    ) => {
+        this[TypeOfAnnualConsumptionUnitMapping[typeOfAnnualConsumptionUnit]] = annualConsumptionUnit;
+        const annualAnnualConsumption = this.form.controls[typeOfAnnualConsumption].value;
+        if (annualConsumptionUnit === UNIT_OF_PRICES.KWH) {
             this.form.controls[typeOfAnnualConsumption]
                 .setValidators(
                     [
                         Validators.required,
-                        Validators.maxLength(isUserName($event.target.value) ?
-                            CONSTS.VALIDATORS.MAX_LENGTH.EMAIL_LOGIN : CONSTS.VALIDATORS.MAX_LENGTH.USER_NAME_LOGIN),
+                        CustomValidators.isNumber(),
+                        CustomValidators.minValue(0),
+                        CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
                     ]);
-            this.form.controls[formName]
-                .updateValueAndValidity();
-
-            // if (wasPrevNull) {
-            //     if (annualConsumptionUnit === CONSTS.UNIT_OF_PRICES.KWH) {
-            //         this.form.get(typeOfAnnualConsumption).setValue(this.form.get(typeOfAnnualConsumption).value * 1000);
-            //     }
-            //     return;
-            // }
+            this.form.controls[typeOfAnnualConsumption].setValue(this.operationOnNumber(annualAnnualConsumption, (num) => num * 1000));
+        } else {
+            this.form.controls[typeOfAnnualConsumption]
+                .setValidators(
+                    [
+                        Validators.required,
+                        CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_ANNUAL_CONSUMPTION),
+                        CustomValidators.minValue(0),
+                        CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
+                    ]);
+            this.form.controls[typeOfAnnualConsumption].setValue(this.operationOnNumber(annualAnnualConsumption, (num) => num / 1000));
         }
+        this.form.controls[typeOfAnnualConsumption].updateValueAndValidity();
     }
+// todo jeslti carku nebo teck
+    public operationOnNumber = (number: string | number, fnc: any) => R.pipe(
+        (num: string | number): string => num.toString(),
+        R.replace(',', '.'),
+        parseFloat,
+        fnc,
+        (num: number): string => num.toString(),
+        R.replace('.', ','),
+    )(number)
 
     public prefillForm = () => {
         let id = null;
