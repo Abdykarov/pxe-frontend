@@ -6,7 +6,10 @@ import {
     OnInit,
     SimpleChanges,
 } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+    FormBuilder,
+    Validators,
+} from '@angular/forms';
 
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
@@ -21,6 +24,8 @@ import {
 
 import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/abstract-supply-point-form.component';
 import {
+    ANNUAL_CONSUMPTION_TYPES,
+    ANNUAL_CONSUMPTION_UNIT_TYPES,
     CODE_LIST,
     CODE_LIST_TYPES,
     COMMODITY_TYPE_OPTIONS,
@@ -30,6 +35,7 @@ import {
     SUBJECT_TYPE_OPTIONS,
     SUBJECT_TYPE_TO_DIST_RATE_MAP,
     SUPPLY_POINT_EDIT_TYPE,
+    TypeOfAnnualConsumptionUnitMapping,
     UNIT_OF_PRICES,
     UNIT_OF_PRICES_OPTIONS,
 } from 'src/app/app.constants';
@@ -54,30 +60,6 @@ import { HelpModalComponent } from 'src/common/containers/modal/modals/help/help
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-
-export enum ANNUAL_CONSUMPTION_TYPES {
-    ANNUAL_CONSUMPTION_NT = 'annualConsumptionNT',
-    ANNUAL_CONSUMPTION_VT = 'annualConsumptionVT',
-    ANNUAL_CONSUMPTION = 'annualConsumption',
-}
-
-export enum ANNUAL_CONSUMPTION_UNIT_TYPES {
-    ANNUAL_CONSUMPTION_NT_UNIT = 'annualConsumptionNTUnit',
-    ANNUAL_CONSUMPTION_VT_UNIT = 'annualConsumptionVTUnit',
-    ANNUAL_CONSUMPTION_UNIT = 'annualConsumptionUnit',
-}
-
-export const TypeOfAnnualConsumptionUnitMapping =  {
-    ANNUAL_CONSUMPTION_NT_UNIT: 'prevAnnualConsumptionNTUnit',
-    ANNUAL_CONSUMPTION_UNIT: 'prevAnnualConsumptionUnit',
-    ANNUAL_CONSUMPTION_VT_UNIT: 'prevAnnualConsumptionVTUnit',
-};
-
-export const TypeOfAnnualConsumptionValueMapping =  {
-    annualConsumptionNT: 'prevAnnualConsumptionNTValue',
-    annualConsumptionVT: 'prevAnnualConsumptionVTValue',
-    annualConsumption: 'prevAnnualConsumptionValue',
-};
 
 @Component({
     selector: 'pxe-supply-point-form',
@@ -289,15 +271,23 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         }
         this.form.controls[typeOfAnnualConsumption].updateValueAndValidity();
     }
-// todo jeslti carku nebo teck
-    public operationOnNumber = (number: string | number, fnc: any) => R.pipe(
-        (num: string | number): string => num.toString(),
-        R.replace(',', '.'),
-        parseFloat,
-        fnc,
-        (num: number): string => num.toString(),
-        R.replace('.', ','),
-    )(number)
+
+    public operationOnNumber = (number: string | number, fnc: any) => {
+        const hadComma = number.toString().includes(',');
+        return R.pipe(
+            (num: string | number): string => num.toString(),
+            R.replace(',', '.'),
+            parseFloat,
+            fnc,
+            (num: number): string => num.toString(),
+            (num: string) => {
+                if (hadComma) {
+                    return R.replace('.', ',', num);
+                }
+                return num;
+            },
+        )(number);
+    }
 
     public prefillForm = () => {
         let id = null;
@@ -427,6 +417,15 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         if (this.contractEndType === CONTRACT_END_TYPE.CONTRACT_END_TERMINATE) {
             form.contractEndTypeId = CONTRACT_END_TYPE.CONTRACT_END_TERMINATE;
         }
+        if (form.annualConsumptionUnit === UNIT_OF_PRICES.KWH) {
+            form.annualConsumption = form.annualConsumption / 1000;
+        }
+        if (form.annualConsumptionVTUnit === UNIT_OF_PRICES.KWH) {
+            form.annualConsumptionVT = form.annualConsumptionVT / 1000;
+        }
+        if (form.annualConsumptionNTUnit === UNIT_OF_PRICES.KWH) {
+            form.annualConsumptionNT = form.annualConsumptionNT / 1000;
+        }
 
         this.submitAction.emit(form);
     }
@@ -504,4 +503,3 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             });
     }
 }
-

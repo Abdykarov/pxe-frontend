@@ -495,10 +495,4 @@ export const TypeOfAnnualConsumptionUnitMapping =  {
     ANNUAL_CONSUMPTION_NT_UNIT: 'prevAnnualConsumptionNTUnit',
     ANNUAL_CONSUMPTION_UNIT: 'prevAnnualConsumptionUnit',
     ANNUAL_CONSUMPTION_VT_UNIT: 'prevAnnualConsumptionVTUnit',
-};
-
-export const TypeOfAnnualConsumptionValueMapping =  {
-    annualConsumptionNT: 'prevAnnualConsumptionNTValue',
-    annualConsumptionVT: 'prevAnnualConsumptionVTValue',
-    annualConsumption: 'prevAnnualConsumptionValue',
-};
+}
