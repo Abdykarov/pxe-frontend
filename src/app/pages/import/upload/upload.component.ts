@@ -139,7 +139,7 @@ export class UploadComponent extends AbstractComponent implements OnInit {
                     this.router.navigate([ROUTES.ROUTER_IMPORT_APPROVAL_POWER], {
                         state: {
                             offers,
-                            commodityTypeAfterApprove: this.commodityType
+                            commodityTypeAfterApprove: this.commodityType,
                         },
                     });
                 }
