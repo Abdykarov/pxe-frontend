@@ -344,35 +344,35 @@
                                     label="Přidat nabídku"
                                     type="secondary"
                                     customClass="mb-3 mb-md-0 mr-md-3"
-                                    (action)="newOffer($event)"
+                                    (action)="click($event)"
                                 ></lnd-button>
                                 <lnd-button
                                     label="Import nabídek"
                                     type="secondary"
                                     customClass="mb-3 mb-md-0 mr-md-3"
-                                    (action)="navigateToImportOffer($event)"
+                                    (action)="click($event)"
                                 ></lnd-button>
                                 <lnd-button
                                     label="Export nabídek"
                                     type="primary"
                                     customClass="mb-3 mb-md-0"
-                                    (click)="exportOffers($event)"
+                                    (click)="click($event)"
                                 ></lnd-button>
                             </div>
                             <lnd-button
-                                [isDisabled]="!numberOfMarked"
+                                [isDisabled]="true"
                                 label="Odstranit"
                                 type="danger"
                                 hasOutline="true"
                                 customClass="w-100"
-                                (action)="deleteMarkedOffers()"
+                                (action)="click()"
                             ></lnd-button>
                         </div>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-12 text-center">
-                        Počet označených nabídek: {{numberOfMarked}}
+                        Počet označených nabídek: 0
                     </div>
                 </div>
                 <lnd-table
@@ -385,6 +385,7 @@
                     [tableClass]="['table--advanced', 'mb-0']"
                     [rowDetailTemplate]="rowDetail"
                     [actionColTriggersDetail]="true"
+                    [whiteBackgroundPropertyCondition]="'marked'"
                     [columnTemplates]="{
                         actionColumnTemplate: actionColumnTemplate,
                         columnTemplatePriceVT: columnTemplatePriceVT,

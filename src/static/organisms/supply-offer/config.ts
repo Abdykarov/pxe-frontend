@@ -264,6 +264,7 @@ export class SupplyOfferOrganismConfig {
             deliveryTo: '2019-10-06',
             deliveryLength: 1,
             permanentPaymentPrice: 650,
+            marked: true,
         },
         {
             id: 2,
@@ -293,6 +294,7 @@ export class SupplyOfferOrganismConfig {
             deliveryTo: '2019-10-06',
             deliveryLength: 2,
             permanentPaymentPrice: 250,
+            marked: true,
         },
         {
             id: 3,

@@ -236,62 +236,72 @@
                     </lnd-alert>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12 col-xl-5 order-xl-3 text-right">
-                    <lnd-button
-                        label="Přidat nabídku"
-                        customClass="mr-2"
-                        type="secondary"
-                        (action)="newOffer($event)"
-                    ></lnd-button>
-                    <lnd-button
-                        label="Import nabídek"
-                        customClass="mr-2"
-                        type="secondary"
-                        (action)="navigateToImportOffer($event)"
-                    ></lnd-button>
-                    <lnd-button
-                        label="Export nabídek"
-                        customClass="mr-2"
-                        type="primary"
-                        (click)="exportOffers($event)"
-                    ></lnd-button>
+        </div>
+        <div class="row"
+             [hidden]="loadingOffers || tableRows.length === 0">
+            <div class="col-12 col-lg-12">
+                <div class="row mb-4">
+                    <div class="col-12 text-center">
+                        <div class="supply-offer-controls">
+                            <div class="supply-offer-controls__btn-holder mb-2 mb-md-0">
+                                <lnd-button
+                                    label="Přidat nabídku"
+                                    type="secondary"
+                                    customClass="mb-3 mb-md-0 mr-md-3"
+                                    (action)="newOffer($event)"
+                                ></lnd-button>
+                                <lnd-button
+                                    label="Import nabídek"
+                                    type="secondary"
+                                    customClass="mb-3 mb-md-0 mr-md-3"
+                                    (action)="navigateToImportOffer($event)"
+                                ></lnd-button>
+                                <lnd-button
+                                    label="Export nabídek"
+                                    type="primary"
+                                    customClass="mb-3 mb-md-0"
+                                    (click)="exportOffers($event)"
+                                ></lnd-button>
+                            </div>
+                            <lnd-button
+                                [isDisabled]="!numberOfMarked"
+                                label="Odstranit"
+                                type="danger"
+                                hasOutline="true"
+                                customClass="w-100"
+                                (action)="deleteMarkedOffers()"
+                            ></lnd-button>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-12 col-xl-2 offset-xl-3 text-center mb-3 mb-xl-0 order-xl-2">
-                    Počet označených nabídek: {{numberOfMarked}}
+                <div class="row mb-3">
+                    <div class="col-12 text-center">
+                        Počet označených nabídek: {{numberOfMarked}}
+                    </div>
                 </div>
-                <div class="col-12 col-xl-2 order-xl-1">
-                    <lnd-button
-                        [isDisabled]="!numberOfMarked"
-                        label="Odstranit"
-                        type="danger"
-                        hasOutline="true"
-                        (action)="deleteMarkedOffers()"
-                    ></lnd-button>
-                </div>
+                <lnd-table
+                    #table
+                    [cols]="tableCols"
+                    [rows]="tableRows"
+                    [showHead]="true"
+                    [isStatic]="false"
+                    [tableWrapperClass]="['table-wrapper--advanced']"
+                    [tableClass]="['table--advanced', 'mb-0']"
+                    [rowDetailTemplate]="rowDetail"
+                    [actionColTriggersDetail]="true"
+                    [whiteBackgroundPropertyCondition]="'marked'"
+                    [columnTemplates]="{
+                        actionColumnTemplate: actionColumnTemplate,
+                        columnTemplatePriceVT: columnTemplatePriceVT,
+                        columnTemplatePriceNT: columnTemplatePriceNT,
+                        columnTemplatePriceGas: columnTemplatePriceGas,
+                        columnTemplateValidFromTo: columnTemplateValidFromTo,
+                        columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo,
+                        columnTemplateMark: columnTemplateMark,
+                        columnTemplateMarkAll: columnTemplateMarkAll
+                    }">
+                </lnd-table>
             </div>
-            <lnd-table
-                #table
-                [cols]="tableCols"
-                [rows]="tableRows"
-                [showHead]="true"
-                [isStatic]="false"
-                [tableWrapperClass]="['table-wrapper--advanced']"
-                [tableClass]="['table--advanced', 'mb-0']"
-                [rowDetailTemplate]="rowDetail"
-                [actionColTriggersDetail]="true"
-                [whiteBackgroundPropertyCondition]="'marked'"
-                [columnTemplates]="{
-                    actionColumnTemplate: actionColumnTemplate,
-                    columnTemplatePriceVT: columnTemplatePriceVT,
-                    columnTemplatePriceNT: columnTemplatePriceNT,
-                    columnTemplatePriceGas: columnTemplatePriceGas,
-                    columnTemplateValidFromTo: columnTemplateValidFromTo,
-                    columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo,
-                    columnTemplateMark: columnTemplateMark,
-                    columnTemplateMarkAll: columnTemplateMarkAll
-                }">
-            </lnd-table>
         </div>
     </ng-container>
 </pxe-layout-container>

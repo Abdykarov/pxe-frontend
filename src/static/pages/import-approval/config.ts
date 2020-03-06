@@ -281,7 +281,7 @@ export class ApprovalConfig {
             deliveryTo: '2019-10-06',
             deliveryLength: 1,
             permanentPaymentPrice: 650,
-            greenEnergy: false,
+            greenEnergy: true,
         },
         {
             id: 2,

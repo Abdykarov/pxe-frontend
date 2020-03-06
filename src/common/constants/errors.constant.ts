@@ -71,6 +71,7 @@ export const importErrorViolations = {
     'benefitUrl4InvalidSize': 'Benefit 4 použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_NAME + ' znaků',
     'benefitUrl4InvalidFormat': 'Benefit 4 vyplňte validní URL adresu',
     'benefitWithUrl4Invalid': 'Benefit 4 není validní',
+    'benefitsNotSetInOrder': 'Benefity nejsou ve správném pořadí',
 };
 
 export const restAPIErrorCodes = {
