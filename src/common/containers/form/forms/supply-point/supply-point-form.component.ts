@@ -273,6 +273,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     }
 
     public operationOnNumber = (number: string | number, fnc: any) => {
+        if (!number) {
+            return number;
+        }
         const hadComma = number.toString().includes(',');
         return R.pipe(
             (num: string | number): string => num.toString(),
