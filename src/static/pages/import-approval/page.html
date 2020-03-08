@@ -22,7 +22,7 @@
 </ng-template>
 <ng-template #actionColumnTemplate let-row="row">
     <span>{{row.permanentPaymentPrice | number:'1.0-2'}}&nbsp;Kč/měsíc (bez&nbsp;DPH)</span>
-    <div class="row action-area-div">
+    <div class="row no-gutters action-area-div">
         <div class="col-12">
         <ng-template #tooltipDelete let-toggle="toggle">
             <lnd-button
@@ -39,18 +39,22 @@
     </div>
 </ng-template>
 
-<div class="container-fluid">
-    <div class="row mb-4">
-        <div class="col-12 col-md-6 offset-md-3 text-center">
-            <h1>
-                Import nabídek
-            </h1>
+<div class="container-content">
+    <div class="container-fluid">
+        <div class="row mb-4">
+            <div class="col-12 col-md-6 offset-md-3 text-center">
+                <h1>
+                    Import nabídek
+                </h1>
+            </div>
         </div>
-    </div>
-    <div class="row mb-5">
-        <div class="col-12 col-xl-10 offset-xl-1">
-            <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
-            <div class="mt-5">
+        <div class="row mb-5">
+            <div class="col-12 col-xl-10 offset-xl-1">
+                <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-12 col-xl-10 offset-xl-1">
                 <lnd-info-banner
                     bannerTitle="Úspěšně jsme nahráli 3 nové nabídky. <br /> Po schválení se nabídky zobrazí vašim zákazníkům."
                     [showButton]="false"
@@ -59,63 +63,61 @@
                 </lnd-info-banner>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-xl-10 offset-xl-1 text-center">
-            <ul class="link-list mb-0">
-                <li class="link-list__item">
-                    <a
-                        class="link-list__link link-list__link--active"
-                        href="#">
-                        Elektřina
-                    </a>
-                </li>
-                <li class="link-list__item">
-                    <a
-                        class="link-list__link"
-                        href="#">
-                        Plyn
-                    </a>
-                </li>
-            </ul>
+        <div class="row">
+            <div class="col-12 col-xl-10 offset-xl-1 text-center">
+                <ul class="link-list mb-0">
+                    <li class="link-list__item">
+                        <a
+                            class="link-list__link link-list__link--active"
+                            href="#">
+                            Elektřina
+                        </a>
+                    </li>
+                    <li class="link-list__item">
+                        <a
+                            class="link-list__link"
+                            href="#">
+                            Plyn
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12 col-lg-10 offset-lg-1">
-            <lnd-table
-                #table
-                [cols]="approvalConfig.tableCols[commodityType]"
-                [rows]="approvalConfig.tableRows"
-                [showHead]="true"
-                [isStatic]="false"
-                [tableWrapperClass]="['table-wrapper--advanced']"
-                [tableClass]="['table--advanced', 'mb-0']"
-                [dangerBackgroundPropertyCondition]="'greenEnergy'"
-                [actionColTriggersDetail]="false"
-                [columnTemplates]="{
-                    actionColumnTemplate: actionColumnTemplate,
-                    columnTemplateGreenEnergy: columnTemplateGreenEnergy,
-                    columnTemplatePriceVT: columnTemplatePriceVT,
-                    columnTemplatePriceNT: columnTemplatePriceNT,
-                    columnTemplatePriceGas: columnTemplatePriceGas,
-                    columnTemplateValidFromTo: columnTemplateValidFromTo,
-                    columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo
-                }">
-            >
-            </lnd-table>
+        <div class="row mb-4">
+            <div class="col-12 col-lg-10 offset-lg-1">
+                <lnd-table
+                    #table
+                    [cols]="approvalConfig.tableCols[commodityType]"
+                    [rows]="approvalConfig.tableRows"
+                    [showHead]="true"
+                    [isStatic]="false"
+                    [tableWrapperClass]="['table-wrapper--advanced']"
+                    [tableClass]="['table--advanced', 'mb-0']"
+                    [dangerBackgroundPropertyCondition]="'greenEnergy'"
+                    [actionColTriggersDetail]="false"
+                    [columnTemplates]="{
+                        actionColumnTemplate: actionColumnTemplate,
+                        columnTemplateGreenEnergy: columnTemplateGreenEnergy,
+                        columnTemplatePriceVT: columnTemplatePriceVT,
+                        columnTemplatePriceNT: columnTemplatePriceNT,
+                        columnTemplatePriceGas: columnTemplatePriceGas,
+                        columnTemplateValidFromTo: columnTemplateValidFromTo,
+                        columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo
+                    }">
+                >
+                </lnd-table>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12 text-center">
-            <a (click)="backAction($event)">
-                zpět
-            </a>
-            <lnd-button
-                customClass="ml-5"
-                label="Schválit nabídky"
-                type="primary"
-                (action)="click($event)">>
-            </lnd-button>
+        <div class="row">
+            <div class="col-12 text-center">
+                <a href="#" (click)="backAction($event)">zpět</a>
+                <lnd-button
+                    customClass="ml-5"
+                    label="Schválit nabídky"
+                    type="primary"
+                    (action)="click($event)">>
+                </lnd-button>
+            </div>
         </div>
     </div>
 </div>

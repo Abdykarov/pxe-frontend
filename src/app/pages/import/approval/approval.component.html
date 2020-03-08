@@ -22,7 +22,7 @@
 </ng-template>
 <ng-template #actionColumnTemplate let-row="row" let-index="index">
     <span>{{row.offer.permanentPaymentPrice | number:'1.0-2'}}&nbsp;Kč/měsíc (bez&nbsp;DPH)</span>
-    <div class="row action-area-div"
+    <div class="row no-gutters action-area-div"
          *ngIf="!row.duplicity">
         <div class="col-12">
             <ng-template #tooltipDelete let-toggle="toggle">
