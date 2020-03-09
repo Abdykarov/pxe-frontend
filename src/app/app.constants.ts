@@ -57,7 +57,7 @@ export const CONSTS = {
     REFRESH_TOKEN: {
         INTERVAL: 300000,
         COUNT: 16,
-        DONT_REFRESH_TIME_IN_MINUTES: 2,
+        DONT_REFRESH_TIME_IN_MINUTES: 1,
     },
     VALIDATORS: {
         ADULTHOOD_AGE: 18,
