@@ -13,14 +13,11 @@ import { IOfferImportInput } from 'src/app/pages/import/import.model';
 })
 export class OffersByCommodityTypePipe implements PipeTransform {
     transform(offerImportInput: IOfferImportInput[], commodityType: CommodityType): IOfferImportInput[] {
-        if (!offerImportInput) {
-            return [];
-        }
-        return R.filter(({offer}) => {
-            if (commodityType === CommodityType.POWER) {
-                return offer.powerAttributes;
-            }
-            return offer.gasAttributes;
-        })(offerImportInput);
+        return offerImportInput ?
+            R.filter(
+                ({ offer: { powerAttributes, gasAttributes } }) =>
+                    commodityType === CommodityType.POWER ? powerAttributes : gasAttributes
+            )(offerImportInput) :
+            [];
     }
 }

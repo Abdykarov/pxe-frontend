@@ -48,7 +48,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${R.find(R.propEq('value', row.subject.code))(SUBJECT_TYPE_OPTIONS).label}`,
+                        content: (row) => R.find(R.propEq('value', row.subject.code))(SUBJECT_TYPE_OPTIONS).label,
                     },
                 ],
             },
@@ -98,8 +98,8 @@ export class SupplyOfferConfig {
                 label: 'Cena za VT',
                 views: [
                     {
-                        headingClass: ['', 'text-right'],
-                        cellClass: ['', 'text-right'],
+                        headingClass: ['text-right'],
+                        cellClass: ['text-right'],
                         contentTemplateName: 'columnTemplatePriceVT',
                     },
                 ],
@@ -108,8 +108,8 @@ export class SupplyOfferConfig {
                 label: 'Cena za NT',
                 views: [
                     {
-                        headingClass: ['', 'text-right'],
-                        cellClass: ['', 'text-right'],
+                        headingClass: ['text-right'],
+                        cellClass: ['text-right'],
                         contentTemplateName: 'columnTemplatePriceNT',
                     },
                 ],
@@ -140,7 +140,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${R.find(R.propEq('value', row.deliveryLength))(DELIVERY_LENGTH_OPTIONS).label}`,
+                        content: (row) => R.find(R.propEq('value', row.deliveryLength))(DELIVERY_LENGTH_OPTIONS).label,
                     },
                 ],
             },
@@ -148,8 +148,8 @@ export class SupplyOfferConfig {
                 label: 'Stálá platba',
                 views: [
                     {
-                        headingClass: ['', 'text-right'],
-                        cellClass: ['', 'text-right', 'table--advanced__action-area'],
+                        headingClass: ['text-right'],
+                        cellClass: ['text-right', 'table--advanced__action-area'],
                         contentTemplateName: 'actionColumnTemplate',
                     },
                 ],
@@ -181,7 +181,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${R.find(R.propEq('value', row.subject.code))(SUBJECT_TYPE_OPTIONS).label}`,
+                        content: (row) => R.find(R.propEq('value', row.subject.code))(SUBJECT_TYPE_OPTIONS).label,
                     },
                 ],
             },
@@ -217,8 +217,8 @@ export class SupplyOfferConfig {
                 label: 'Cena',
                 views: [
                     {
-                        headingClass: ['', 'text-right'],
-                        cellClass: ['', 'text-right'],
+                        headingClass: ['text-right'],
+                        cellClass: ['text-right'],
                         contentTemplateName: 'columnTemplatePriceGas',
                     },
                 ],
@@ -249,7 +249,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${R.find(R.propEq('value', row.deliveryLength))(DELIVERY_LENGTH_OPTIONS).label}`,
+                        content: (row) => R.find(R.propEq('value', row.deliveryLength))(DELIVERY_LENGTH_OPTIONS).label,
                     },
                 ],
             },
@@ -257,8 +257,8 @@ export class SupplyOfferConfig {
                 label: 'Stálá platba',
                 views: [
                     {
-                        headingClass: ['', 'text-right'],
-                        cellClass: ['', 'text-right', 'table--advanced__action-area'],
+                        headingClass: ['text-right'],
+                        cellClass: ['text-right', 'table--advanced__action-area'],
                         contentTemplateName: 'actionColumnTemplate',
                     },
                 ],

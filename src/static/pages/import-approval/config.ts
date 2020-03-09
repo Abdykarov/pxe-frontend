@@ -94,8 +94,8 @@ export class ApprovalConfig {
                 label: 'Cena za VT',
                 views: [
                     {
-                        headingClass: ['', 'text-right'],
-                        cellClass: ['', 'text-right'],
+                        headingClass: ['text-right'],
+                        cellClass: ['text-right'],
                         contentTemplateName: 'columnTemplatePriceVT',
                     },
                 ],
@@ -104,8 +104,8 @@ export class ApprovalConfig {
                 label: 'Cena za NT',
                 views: [
                     {
-                        headingClass: ['', 'text-right'],
-                        cellClass: ['', 'text-right'],
+                        headingClass: ['text-right'],
+                        cellClass: ['text-right'],
                         contentTemplateName: 'columnTemplatePriceNT',
                     },
                 ],
@@ -144,8 +144,8 @@ export class ApprovalConfig {
                 label: 'Stálá platba',
                 views: [
                     {
-                        headingClass: ['', 'text-right'],
-                        cellClass: ['', 'text-right', 'table--advanced__action-area'],
+                        headingClass: ['text-right'],
+                        cellClass: ['text-right', 'table--advanced__action-area'],
                         contentTemplateName: 'actionColumnTemplate',
                     },
                 ],
@@ -214,8 +214,8 @@ export class ApprovalConfig {
                 label: 'Cena',
                 views: [
                     {
-                        headingClass: ['', 'text-right'],
-                        cellClass: ['', 'text-right'],
+                        headingClass: ['text-right'],
+                        cellClass: ['text-right'],
                         contentTemplateName: 'columnTemplatePriceGas',
                     },
                 ],
@@ -254,8 +254,8 @@ export class ApprovalConfig {
                 label: 'Stálá platba',
                 views: [
                     {
-                        headingClass: ['', 'text-right'],
-                        cellClass: ['', 'text-right', 'table--advanced__action-area'],
+                        headingClass: ['text-right'],
+                        cellClass: ['text-right', 'table--advanced__action-area'],
                         contentTemplateName: 'actionColumnTemplate',
                     },
                 ],

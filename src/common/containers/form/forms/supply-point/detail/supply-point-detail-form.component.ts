@@ -102,9 +102,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
 
         this.modalsService.closeModalData$
             .pipe(
-                takeUntil(
-                    this.destroy$,
-                ),
+                takeUntil(this.destroy$),
                 filter(R_.isNotNil),
                 filter((modal: ICloseModalData) => modal.confirmed),
             )

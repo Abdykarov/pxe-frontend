@@ -3,10 +3,9 @@ import { Injectable } from '@angular/core';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { Observable } from 'apollo-client/util/Observable';
 import { of } from 'rxjs';
-import { IDocumentType, IResponseDataDocument } from 'src/app/services/model/document.model';
 
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import {

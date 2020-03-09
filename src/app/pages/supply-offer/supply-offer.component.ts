@@ -7,7 +7,7 @@ import {
     Component,
     Inject,
     OnInit,
-    PLATFORM_ID,
+    PLATFORM_ID, ViewChild,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -51,6 +51,7 @@ import {
 import { ITableColumnConfig } from 'src/common/ui/table/models/table.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { OfferService } from 'src/common/graphql/services/offer.service';
+import { TableComponent } from 'src/common/ui/table/table.component';
 import {
     parseGraphQLErrors,
     transformCodeList,
@@ -66,6 +67,10 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     ],
 })
 export class SupplyOfferComponent extends AbstractComponent implements OnInit {
+
+    @ViewChild('table')
+    public lndTable: TableComponent;
+
     public readonly bannerTypeImages = BannerTypeImages;
     public commodityType = CommodityType.POWER;
     public commodityTypeOptions = CommodityType;
@@ -130,12 +135,15 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         this.route.params
             .pipe(
                 takeUntil(this.destroy$),
+                filter((params) => {
+                    if (R.indexOf(params.commodityType, R.keys(commodityTypes)) < 0) {
+                        this.router.navigate([this.routePower]);
+                        return false;
+                    }
+                    return true;
+                }),
             )
             .subscribe(params => {
-                if (R.indexOf(params.commodityType, R.keys(commodityTypes)) < 0) {
-                    this.router.navigate([this.routePower]);
-                    return;
-                }
                 this.commodityType = commodityTypes[params.commodityType];
                 this.commodityType$.next(this.commodityType);
             });
@@ -143,20 +151,19 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         combineLatest(this.codeLists$, this.offers$, this.commodityType$)
             .pipe(
                 takeUntil(this.destroy$),
+                filter(([codeLists, offers, commodityType]) => !!(codeLists && offers)),
             )
             .subscribe(
                 ([codeLists, offers, commodityType]) => {
-                    if (codeLists && offers) {
-                        this.tableRows = offers;
-                        if (!this.initRows) {
-                            this.tableCols = this.supplyOfferConfig.tableCols(codeLists)[commodityType];
-                            this.numberOfMarked = this.offerService.markAll(false, this.commodityType);
-                            this.initRows = true;
-                        }
-                        this.loadingOffers = false;
-                        this.deleteDisabled = [];
-                        this.cd.markForCheck();
+                    this.tableRows = offers;
+                    if (!this.initRows) {
+                        this.tableCols = this.supplyOfferConfig.tableCols(codeLists)[commodityType];
+                        this.numberOfMarked = this.offerService.markAll(false, this.commodityType);
+                        this.initRows = true;
                     }
+                    this.loadingOffers = false;
+                    this.deleteDisabled = [];
+                    this.cd.markForCheck();
                 },
                 error => {
                     this.deleteDisabled = [];
@@ -167,9 +174,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
 
         this.modalsService.closeModalData$
             .pipe(
-                takeUntil(
-                    this.destroy$,
-                ),
+                takeUntil(this.destroy$),
                 filter(R_.isNotNil),
                 filter((modal: ICloseModalData) => modal.confirmed),
             )
@@ -241,11 +246,10 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         this.offerFormInEmptyPage = !this.offerFormInEmptyPage;
     }
 
-    public newOffer = (evt) => {
+    public createNewOffer = (evt) => {
         evt.preventDefault();
         if (isPlatformBrowser(this.platformId)) {
-            const firstCreateOfferElement = document.getElementsByClassName('new-offer-button')[0] as HTMLElement;
-            firstCreateOfferElement.click();
+            this.create(this.lndTable, this.tableRows[0]);
         }
     }
 

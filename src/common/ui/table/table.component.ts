@@ -6,7 +6,7 @@ import {
     OnChanges,
     Output,
     Pipe,
-    TemplateRef,
+    TemplateRef, ViewChildren,
 } from '@angular/core';
 import { Router } from '@angular/router';
 

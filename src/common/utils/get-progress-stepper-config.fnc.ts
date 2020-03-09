@@ -6,6 +6,9 @@ import { ImportProgressStep } from 'src/app/pages/import/import.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 
+const getStatusIndex = (status: string, steps: IStepperProgressItem[]) =>
+    R.findIndex(R.propEq('step', status))(steps);
+
 export enum TypeStepper {
     IMPORT, REQUEST,
 }
@@ -66,11 +69,11 @@ export const indexOfOfferStepWithoutShadowStep = R.pipe(
 )(stepsRequests);
 
 export const indexOfSteps = {
-    [ProgressStatus.SUPPLY_POINT]: R.findIndex(R.propEq('step', ProgressStatus.SUPPLY_POINT))(stepsRequests),
-    [ProgressStatus.OFFER_STEP]: R.findIndex(R.propEq('step', ProgressStatus.OFFER_STEP))(stepsRequests),
-    [ProgressStatus.PERSONAL_DATA]: R.findIndex(R.propEq('step', ProgressStatus.PERSONAL_DATA))(stepsRequests),
-    [ProgressStatus.READY_FOR_SIGN]: R.findIndex(R.propEq('step', ProgressStatus.READY_FOR_SIGN))(stepsRequests),
-    [ProgressStatus.WAITING_FOR_PAYMENT]: R.findIndex(R.propEq('step', ProgressStatus.WAITING_FOR_PAYMENT))(stepsRequests),
+    [ProgressStatus.SUPPLY_POINT]: getStatusIndex(ProgressStatus.SUPPLY_POINT, stepsRequests),
+    [ProgressStatus.OFFER_STEP]: getStatusIndex(ProgressStatus.OFFER_STEP, stepsRequests),
+    [ProgressStatus.PERSONAL_DATA]: getStatusIndex(ProgressStatus.PERSONAL_DATA, stepsRequests),
+    [ProgressStatus.READY_FOR_SIGN]: getStatusIndex(ProgressStatus.READY_FOR_SIGN, stepsRequests),
+    [ProgressStatus.WAITING_FOR_PAYMENT]: getStatusIndex(ProgressStatus.WAITING_FOR_PAYMENT, stepsRequests),
 };
 
 export const indexesOfSecondStep = [
