@@ -5,8 +5,7 @@ import {
     Input,
     OnChanges,
     Output,
-    Pipe,
-    TemplateRef, ViewChildren,
+    TemplateRef,
 } from '@angular/core';
 import { Router } from '@angular/router';
 
