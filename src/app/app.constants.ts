@@ -56,7 +56,7 @@ export const CONSTS = {
     },
     REFRESH_TOKEN: {
         INTERVAL: 300000,
-        COUNT: 4,
+        COUNT: 16,
         DONT_REFRESH_TIME_IN_MINUTES: 2,
     },
     VALIDATORS: {
