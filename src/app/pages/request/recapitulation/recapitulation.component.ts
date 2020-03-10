@@ -51,7 +51,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     templateUrl: './recapitulation.component.html',
     styleUrls: ['./recapitulation.component.scss'],
 })
-export class RecapitulationComponent extends AbstractComponent implements OnInit, OnDestroy {
+export class RecapitulationComponent extends AbstractComponent implements OnInit {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.PERSONAL_DATA;
     public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.OFFER_STEP;
 
@@ -163,9 +163,5 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     public chooseNewOfferAction = (evt) => {
         evt.preventDefault();
         this.navigateRequestService.routerToRequestStep(this.supplyPoint, ProgressStatus.OFFER_STEP);
-    }
-
-    ngOnDestroy() {
-        super.ngOnDestroy();
     }
 }
