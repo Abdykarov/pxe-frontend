@@ -15,7 +15,7 @@ export const CONSTS = {
         CALENDAR: 'YYYY-MM-DD[T]HH:mm',
         SHORT: 'YYYY-MM-DD',
     },
-    DEFAULT_EXPIRATION: 3600,
+    DEFAULT_EXPIRATION: 5450,
     DEFAULT_DEPOSIT_PAYMENT_TYPE_ID: 'Prikaz',
     INTERVAL_RXJS: 5000,
     LOGIN_FORM_NAME: 'login',
