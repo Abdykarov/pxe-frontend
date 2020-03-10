@@ -8,6 +8,7 @@ import { NgModule } from '@angular/core';
 import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { ChangePasswordFormComponent } from './change-password-form.component';
+import { DirectivesModule } from 'src/common/directives/directives.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { FormModule } from 'src/common/ui/forms/form.module';
         AlertModule,
         ButtonModule,
         CommonModule,
+        DirectivesModule,
         FormModule,
         FormsModule,
         ReactiveFormsModule,

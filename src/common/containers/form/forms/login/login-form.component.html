@@ -32,6 +32,8 @@
     class="form-container"
     autocomplete="off">
     <lnd-form-field
+        lndSFormDirective
+        lndSBiometricsDirective
         (change)="setLoginValidator(LOGIN_FORM_NAME, $event)"
         [error]="form.controls.login.errors"
         [formControl]="form.controls.login"
@@ -42,6 +44,8 @@
         [validationMessages]="formFields.validationMessages.login"
     ></lnd-form-field>
     <lnd-form-field
+        lndSFormDirective
+        lndSBiometricsDirective
         [error]="form.controls.password.errors"
         [formControl]="form.controls.password"
         [id]="'password'"
@@ -56,7 +60,7 @@
         <lnd-button
             type="primary"
             [submit]="true"
-            (action)="submitForm($event)"
+            (action)="submitForm($event);sAnalyticsService.sFormClick($event);"
             [isDisabled]="!!formLoading"
             label="Přihlásit se">
         </lnd-button>

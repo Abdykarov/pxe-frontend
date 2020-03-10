@@ -68,23 +68,22 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         protected scrollToService: ScrollToService,
     ) {
         super();
-        this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd) {
-                if (this.showOverlay) {
-                    this.toggleSubscription = this.overlayService.toggleOverlay(false)
-                        .subscribe();
-                    this.toggleSubscription.unsubscribe();
-                }
-                if (
-                    inArray(event.urlAfterRedirects, S_ANALYTICS.ALLOWED_S_APM) ||
-                    inArray(event.urlAfterRedirects.split('?')[0], S_ANALYTICS.ALLOWED_S_APM)
-                ) {
-                    this.sAnalyticsService.initSApm();
-                }
-                this.settings = <ISettings>this.route.snapshot.firstChild.data;
-                this.activeUrl = this.router.url;
-            }
-        });
+        this.router.events
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(
+                event => {
+                    if (event instanceof NavigationEnd) {
+                        if (this.showOverlay) {
+                            this.toggleSubscription = this.overlayService.toggleOverlay(false)
+                                .subscribe();
+                            this.toggleSubscription.unsubscribe();
+                        }
+                        this.sAnalyticsService.pageView();
+                        this.settings = <ISettings>this.route.snapshot.firstChild.data;
+                        this.activeUrl = this.router.url;
+                    }
+                },
+            );
     }
 
     ngOnInit() {

@@ -42,7 +42,7 @@ export class SAnalyticsService {
         this.downloadSAnalytics();
         sa('create', environment.sAnalyticsTId);
         this.registrationApplication();
-        sa('send', 'pageview');
+        this.pageView();
         this.installed = true;
     }
 
@@ -159,7 +159,7 @@ export class SAnalyticsService {
             return;
         }
 
-        sa('s-form:click', {event });
+        sa('s-form:click', {event});
     }
 
     public sFormSubmit = (event) => {
@@ -208,6 +208,10 @@ export class SAnalyticsService {
         }
 
         sa('s-biometrics:blur', { event });
+    }
+
+    public pageView = () => {
+        sa('send', 'pageview');
     }
 
     private downloadSAnalytics = () => {

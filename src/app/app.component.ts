@@ -33,6 +33,11 @@ export class AppComponent {
     ) {
         if (isPlatformBrowser(this.platformId)) {
             this.sAnalyticsService.init();
+            this.sAnalyticsService.installSForm();
+            this.sAnalyticsService.installSBiometrics();
+            this.sAnalyticsService.initSBiometrics();
+            this.sAnalyticsService.initSForm();
+            this.sAnalyticsService.initSApm();
 
             if (!environment.gtmId) {
                 return;

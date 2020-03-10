@@ -18,6 +18,7 @@ import {
     map,
     takeUntil,
 } from 'rxjs/operators';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/abstract-supply-point-form.component';
 import {
@@ -85,6 +86,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         private cd: ChangeDetectorRef,
         protected fb: FormBuilder,
         private modalsService: ModalService,
+        private sAnalyticsService: SAnalyticsService,
         private supplyService: SupplyService,
     ) {
         super(fb);

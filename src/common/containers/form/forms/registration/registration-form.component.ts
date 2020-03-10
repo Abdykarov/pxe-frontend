@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 
 @Component({
@@ -23,6 +24,7 @@ export class RegistrationFormComponent extends AbstractFormComponent {
     public agreementTemplate: TemplateRef<any>;
 
     constructor(
+        private sAnalyticsService: SAnalyticsService,
         protected fb: FormBuilder,
     ) {
         super(fb);

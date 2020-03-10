@@ -4,6 +4,7 @@ import {
     EventEmitter,
     Inject,
     Input,
+    OnDestroy,
     OnInit,
     Output,
     PLATFORM_ID,
@@ -13,6 +14,7 @@ import { isPlatformBrowser } from '@angular/common';
 
 import { takeUntil } from 'rxjs/operators';
 
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { CONSTS } from 'src/app/app.constants';
 
@@ -42,6 +44,7 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
     constructor(
         protected fb: FormBuilder,
         private route: ActivatedRoute,
+        private sAnalyticsService: SAnalyticsService,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super(fb);
