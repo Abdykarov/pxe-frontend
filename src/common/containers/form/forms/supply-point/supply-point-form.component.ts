@@ -2,7 +2,8 @@ import {
     ChangeDetectorRef,
     Component,
     Input,
-    OnChanges, OnDestroy,
+    OnChanges,
+    OnDestroy,
     OnInit,
     SimpleChanges,
 } from '@angular/core';

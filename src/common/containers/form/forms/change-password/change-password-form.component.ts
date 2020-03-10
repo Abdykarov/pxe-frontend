@@ -45,7 +45,6 @@ export class ChangePasswordFormComponent extends AbstractFormComponent implement
 
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
-        this.sAnalyticsService.sFormEnd();
         if (changes.formSent && changes.formSent.currentValue && this.form) {
             const defaultValues = R.map(R.head, this.formFields.controls);
             this.form.reset(defaultValues);
