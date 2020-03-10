@@ -1,0 +1,11 @@
+// remove and replace
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css" />
+
+<carousel (activeSlideChange)="activeSlideChange.emit($event)" [interval]="interval">
+    <slide *ngFor="let item of carouselItems">
+        <img [src]="item.src" [alt]="item.alt">
+        <div class="carousel-caption">
+            <p *ngIf="item && item.label">{{item.label}}</p>
+        </div>
+    </slide>
+</carousel>
