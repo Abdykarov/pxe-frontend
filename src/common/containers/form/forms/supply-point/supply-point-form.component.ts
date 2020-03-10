@@ -2,7 +2,7 @@ import {
     ChangeDetectorRef,
     Component,
     Input,
-    OnChanges,
+    OnChanges, OnDestroy,
     OnInit,
     SimpleChanges,
 } from '@angular/core';
@@ -58,7 +58,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     templateUrl: './supply-point-form.component.html',
     styleUrls: ['./supply-point-form.component.scss'],
 })
-export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent implements OnInit, OnChanges {
+export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent implements OnInit, OnDestroy, OnChanges {
     public readonly MAX_LENGTH_NUMBER_INPUT_WITH_HINT = CONSTS.VALIDATORS.MAX_LENGTH.NUMBER_INPUT_WITH_HINT;
 
     @Input()
@@ -96,6 +96,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     ngOnInit() {
         super.ngOnInit();
         this.form = this.fb.group(this.formFields.controls, this.formFields.options);
+        this.sAnalyticsService.sFormStart();
 
         this.form.get('commodityType')
             .valueChanges
@@ -380,6 +381,11 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 this.suppliers$.next(this.suppliers);
                 this.cd.markForCheck();
             });
+    }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        this.sAnalyticsService.sFormEnd();
     }
 }
 

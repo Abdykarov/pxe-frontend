@@ -128,6 +128,13 @@ export class SAnalyticsService {
         }
 
         sa('include', 's-form');
+    }
+
+    public sFormStart = () => {
+        if (!this.canUseSAnalytics()) {
+            return;
+        }
+
         sa('s-form:start');
     }
 

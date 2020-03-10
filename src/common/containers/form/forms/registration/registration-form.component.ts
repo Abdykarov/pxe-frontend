@@ -1,6 +1,7 @@
 import {
     Component,
     Input,
+    OnDestroy,
     TemplateRef,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
@@ -13,7 +14,7 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
     templateUrl: './registration-form.component.html',
     styleUrls: ['./registration-form.component.scss'],
 })
-export class RegistrationFormComponent extends AbstractFormComponent {
+export class RegistrationFormComponent extends AbstractFormComponent implements OnDestroy {
     @Input()
     public isSignUp = true;
 
@@ -28,11 +29,17 @@ export class RegistrationFormComponent extends AbstractFormComponent {
         protected fb: FormBuilder,
     ) {
         super(fb);
+        sAnalyticsService.sFormStart();
     }
 
     public submitValidForm = () => {
         const val = this.form.value;
         val.preregistration = !this.isSignUp;
         this.submitAction.emit(val);
+    }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        this.sAnalyticsService.sFormEnd();
     }
 }

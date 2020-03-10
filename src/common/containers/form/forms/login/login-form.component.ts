@@ -3,7 +3,7 @@ import {
     Component,
     EventEmitter,
     Inject,
-    Input,
+    Input, OnDestroy,
     OnInit,
     Output,
     PLATFORM_ID,
@@ -22,7 +22,7 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
     templateUrl: './login-form.component.html',
     styleUrls: ['./login-form.component.scss'],
 })
-export class LoginFormComponent extends AbstractFormComponent implements OnInit {
+export class LoginFormComponent extends AbstractFormComponent implements OnInit, OnDestroy {
 
     public readonly LOGIN_FORM_NAME = CONSTS.LOGIN_FORM_NAME;
 
@@ -51,6 +51,7 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
 
     ngOnInit() {
         super.ngOnInit();
+        this.sAnalyticsService.sFormStart();
         this.route.queryParams
             .pipe(
                 takeUntil(this.destroy$),
@@ -69,5 +70,10 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
         if (isPlatformBrowser(this.platformId) && !this.passwordWasSent) {
             this.passwordWasSent = !!window.history.state.passwordWasSent;
         }
+    }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        this.sAnalyticsService.sFormEnd();
     }
 }
