@@ -5,10 +5,10 @@ export const offerConfig: IOffer = {
     status: null,
     subject: null,
     benefits: [
-        {
-            name: 'Žárovka LED Lorem',
-            url: 'https://www.seznam.cz/',
-        },
+        // {
+        //     name: 'Žárovka LED Lorem',
+        //     url: 'https://www.seznam.cz/',
+        // },
     ],
     commodityType: CommodityType.POWER,
     deliveryFrom: '',
