@@ -174,7 +174,7 @@
 	
 			& > th,
 			& > td {
-				z-index: 1;
+				z-index: $zindex-tr-detail;
 				position: relative;
 				background-color: $table-adv-detail-bg;
 				border-radius: $border-radius;

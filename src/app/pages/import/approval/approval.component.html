@@ -78,30 +78,30 @@
         </lnd-alert>
     </div>
 </div>
-    <ul class="text-center link-list">
-        <li *ngIf="countOfPowerOffers"
-            class="link-list__item">
-            <a class="link-list__link"
-               routerLinkActive="link-list__link--active"
-               [routerLinkActiveOptions]="{exact: true}"
-               [routerLink]="[routePower]"
-               [state]="{
-                    offers: tableRows,
-                    commodityTypeAfterApprove: commodityTypeAfterApprove
-               }">Elektřina</a>
-        </li>
-        <li *ngIf="countOfGasOffers"
-            class="link-list__item">
-            <a class="link-list__link"
-               routerLinkActive="link-list__link--active"
-               [routerLinkActiveOptions]="{exact: true}"
-               [routerLink]="[routeGas]"
-               [state]="{
-                    offers: tableRows,
-                    commodityTypeAfterApprove: commodityTypeAfterApprove
-               }">Plyn</a>
-        </li>
-    </ul>
+<ul class="text-center link-list">
+    <li *ngIf="countOfPowerOffers"
+        class="link-list__item">
+        <a class="link-list__link"
+            routerLinkActive="link-list__link--active"
+            [routerLinkActiveOptions]="{exact: true}"
+            [routerLink]="[routePower]"
+            [state]="{
+                offers: tableRows,
+                commodityTypeAfterApprove: commodityTypeAfterApprove
+            }">Elektřina</a>
+    </li>
+    <li *ngIf="countOfGasOffers"
+        class="link-list__item">
+        <a class="link-list__link"
+            routerLinkActive="link-list__link--active"
+            [routerLinkActiveOptions]="{exact: true}"
+            [routerLink]="[routeGas]"
+            [state]="{
+                offers: tableRows,
+                commodityTypeAfterApprove: commodityTypeAfterApprove
+            }">Plyn</a>
+    </li>
+</ul>
 <div>
     <div class="col-12 col-lg-10 offset-lg-1">
         <lnd-table
