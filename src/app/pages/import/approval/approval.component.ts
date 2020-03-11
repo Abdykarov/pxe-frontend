@@ -247,7 +247,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
         this.offerDeleted = deletingRow.offer.name;
         this.tableRows =
             R.filter(
-                (offerImportInput: IOfferImportInput) => JSON.stringify(deletingRow) !== JSON.stringify(offerImportInput)
+                (offerImportInput: IOfferImportInput) => JSON.stringify(deletingRow) !== JSON.stringify(offerImportInput),
             )(this.tableRows);
 
         this.setCountsAndValidateCountsOfOffers();

@@ -54,7 +54,7 @@
 
         <ng-template #tooltipNew let-toggle="toggle">
             <lnd-button
-                    icon="icon--add-new new-offer-button"
+                    icon="icon--add-new"
                     type="icon"
                     variant="icon"
                     (action)="toggle();create(table, row)"
@@ -97,7 +97,6 @@
             <ng-template #tooltipNewDetail let-toggle="toggle">
                 <lnd-button
                         icon="icon--add-new"
-                        customClass="new-offer-button"
                         type="icon"
                         variant="icon"
                         (action)="toggle();create(table, row)"
@@ -168,7 +167,7 @@
     <ng-container>
         <lnd-placeloader [loading]="loadingOffers && !globalError.length"></lnd-placeloader>
         <div class="row">
-            <div class="col-12 col-md-12">
+            <div class="col-12">
                 <lnd-alert
                     *ngIf="globalError.length"
                     type="danger">
@@ -239,7 +238,7 @@
         </div>
         <div class="row"
              [hidden]="loadingOffers || tableRows.length === 0">
-            <div class="col-12 col-lg-12">
+            <div class="col-12">
                 <div class="row mb-4">
                     <div class="col-12 text-center">
                         <div class="supply-offer-controls">
