@@ -13,17 +13,10 @@
 // Bootstrap button import
 @import '~bootstrap/scss/buttons';
 
-
 .drop-zone {
 	position: relative;
 	width: 100%;
 	padding: ( $spacer * 2.5 ) 0;
-
-	&:hover {
-		&::after {
-			background-color: rgba($light-dark, .3);
-		}
-	}
 
 	&::after {
 		content:'';
@@ -32,19 +25,16 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
-		background: 
+		background:
 			linear-gradient(90deg, $drop-zone-border-color 100%, transparent 100%) top left no-repeat,
 			linear-gradient(90deg, transparent ($drop-zone-border-gap-width / 2), $drop-zone-border-color ($drop-zone-border-gap-width / 2), $drop-zone-border-color ($drop-zone-border-gap-width / 2 + $drop-zone-border-dash-width), transparent ($drop-zone-border-gap-width / 2 + $drop-zone-border-dash-width)) top center repeat-x,
 			linear-gradient(90deg, $drop-zone-border-color 100%, transparent 100%) top right no-repeat,
-			
 			linear-gradient(0deg, $drop-zone-border-color 100%, transparent 100%) top left no-repeat,
 			linear-gradient(0deg, transparent ($drop-zone-border-gap-width / 2), $drop-zone-border-color ($drop-zone-border-gap-width / 2), $drop-zone-border-color ($drop-zone-border-gap-width / 2 + $drop-zone-border-dash-width), transparent ($drop-zone-border-gap-width / 2 + $drop-zone-border-dash-width)) center left repeat-y,
 			linear-gradient(0deg, $drop-zone-border-color 100%, transparent 100%) bottom left no-repeat,
-			
 			linear-gradient(90deg, $drop-zone-border-color 100%, transparent 100%) bottom left no-repeat,
 			linear-gradient(90deg, transparent ($drop-zone-border-gap-width / 2), $drop-zone-border-color ($drop-zone-border-gap-width / 2), $drop-zone-border-color ($drop-zone-border-gap-width / 2 + $drop-zone-border-dash-width), transparent ($drop-zone-border-gap-width / 2 + $drop-zone-border-dash-width)) bottom center repeat-x,
 			linear-gradient(90deg, $drop-zone-border-color 100%, transparent 100%) bottom right no-repeat,
-			
 			linear-gradient(0deg, $drop-zone-border-color 100%, transparent 100%) top right no-repeat,
 			linear-gradient(0deg, transparent ($drop-zone-border-gap-width / 2), $drop-zone-border-color ($drop-zone-border-gap-width / 2), $drop-zone-border-color ($drop-zone-border-gap-width / 2 + $drop-zone-border-dash-width), transparent ($drop-zone-border-gap-width / 2 + $drop-zone-border-dash-width)) center right repeat-y,
 			linear-gradient(0deg, $drop-zone-border-color 100%, transparent 100%) bottom right no-repeat;
@@ -55,6 +45,10 @@
 	&__control {
 		box-shadow: none;
 		cursor: pointer;
+	}
+
+	&--interactive {
+		background-color: rgba($light-dark, .3);
 	}
 }
 

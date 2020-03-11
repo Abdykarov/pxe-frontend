@@ -21,12 +21,12 @@
 		font-size: $small-font-size;
 
 		&::before {
-			content: "0" counter(items)".";
+			content: '0' counter(items)'.';
 			font-weight: 400;
 		}
 
 		&:nth-child(n+10):before {
-			content: counter(items)".";
+			content: counter(items)'.';
 		}
 	}
 }

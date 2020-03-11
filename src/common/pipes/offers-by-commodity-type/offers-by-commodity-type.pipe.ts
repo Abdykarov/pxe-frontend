@@ -16,7 +16,7 @@ export class OffersByCommodityTypePipe implements PipeTransform {
         return offerImportInput ?
             R.filter(
                 ({ offer: { powerAttributes, gasAttributes } }) =>
-                    commodityType === CommodityType.POWER ? powerAttributes : gasAttributes
+                    commodityType === CommodityType.POWER ? powerAttributes : gasAttributes,
             )(offerImportInput) :
             [];
     }

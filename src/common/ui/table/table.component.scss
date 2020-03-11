@@ -144,23 +144,23 @@
 		&--main {
 			vertical-align: top;
 			border-top: 1px solid $body-bg;
-	
+
 			& > th,
 			& > td {
 				&:first-child {
 					border-top-left-radius: $border-radius;
 					border-bottom-left-radius: $border-radius;
 				}
-	
+
 				&:last-child {
 					border-top-right-radius: $border-radius;
 					border-bottom-right-radius: $border-radius;
 				}
 			}
-	
+
 			&:hover {
 				box-shadow: $table-active-shadow;
-	
+
 				& > th,
 				& > td {
 					background-color: $table-hover-bg;
@@ -171,7 +171,7 @@
 
 		&--detail {
 			display: none;
-	
+
 			& > th,
 			& > td {
 				z-index: $zindex-tr-detail;

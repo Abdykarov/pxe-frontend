@@ -1,7 +1,9 @@
 <div class="row">
     <div class="col-12 col-xl-10 offset-xl-1">
-        <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
-        <div class="row mt-5 mb-3">
+        <pxe-progress-bar class="mb-6"
+                          [config]="configStepper">
+        </pxe-progress-bar>
+        <div class="row mb-3">
             <div class="col-xl-8 offset-xl-2 text-center">
                 <lnd-alert
                     *ngIf="globalError.length"
@@ -27,7 +29,7 @@
                     Opravte si soubor podle <a (click)="scrollToErrors($event)">seznamu chyb</a> a pak ho nahrajte znovu.
                 </p>
                 <ng-container *ngIf="isInitState">
-                    <p class="mb-1">
+                    <p class="mb-3">
                         Import nabídek provedete nahráním CSV souboru.
                     </p>
                     <lnd-button
