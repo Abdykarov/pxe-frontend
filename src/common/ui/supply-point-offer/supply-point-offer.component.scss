@@ -24,10 +24,6 @@
 				}
 			}
 
-			.accordion-benefit {
-				background-color: $body-bg;
-			}
-
 			.supply-point-offer__inner--price {
 				// Media queries
 				@include media-breakpoint-up(xl) {
@@ -281,11 +277,22 @@
 	}
 
 	&__benefits-list {
-		padding: $supply-point-offer-inner-padding $supply-point-offer-inner-padding-horizontal-mobil 0;
+		padding: ( $spacer * 1.25 ) $spacer $spacer;
+		margin-bottom: 0;
 
 		// Media queries
-		@include media-breakpoint-up(md) {
-			padding: $spacer $supply-point-offer-inner-padding-horizontal 0;
+		@include media-breakpoint-up(xl) {
+			padding: $spacer ( $spacer * 3 ) ( $spacer * .75 );
+		}
+
+		li {
+			padding-bottom: ( $spacer / 2 );
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				display: inline-block;
+				margin-right: ( $spacer * 3 );
+			}
 		}
 	}
 }

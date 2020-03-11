@@ -15,7 +15,7 @@ export const offerConfig: IOffer = {
     deliveryTo: '',
     deliveryLength: 1,
     id: 0,
-    name: '',
+    name: 'Bohemia plus',
     permanentPaymentPrice: 823.00,
     priceGas: 0,
     priceNT: 3.14,
@@ -45,5 +45,5 @@ export const offerConfig: IOffer = {
     systemServicesRegulatedPrice: 0.06,
     totalPrice: 145.72,
     unit: 'MWh',
-    greenEnergy: false,
+    greenEnergy: true,
 };
