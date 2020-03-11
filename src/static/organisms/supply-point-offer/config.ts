@@ -5,10 +5,22 @@ export const offerConfig: IOffer = {
     status: null,
     subject: null,
     benefits: [
-        // {
-        //     name: 'Žárovka LED Lorem',
-        //     url: 'https://www.seznam.cz/',
-        // },
+        {
+            name: 'Žárovka LED Lorem',
+            url: 'https://www.seznam.cz/',
+        },
+        {
+            name: 'Žárovka Zlatá',
+            url: 'https://www.seznam.cz/',
+        },
+        {
+            name: 'Žárovka Stříbrná',
+            url: 'https://www.seznam.cz/',
+        },
+        {
+            name: 'Žárovka Bronzová',
+            url: 'https://www.seznam.cz/',
+        },
     ],
     commodityType: CommodityType.POWER,
     deliveryFrom: '',
@@ -27,7 +39,7 @@ export const offerConfig: IOffer = {
         logoPath: '',
         sampleDocuments: [],
     },
-    validFrom: '2019-03-12',
+    validFrom: '2019-06-12',
     validTo: new Date().toISOString().split('T')[0],
     accountingRegulatedPrice: 0,
     consumptionPriceNT: 0,
@@ -36,14 +48,14 @@ export const offerConfig: IOffer = {
     distributionPriceByConsumptionNT: 0,
     distributionPriceByConsumptionVT: 1.92,
     priceGasWithVAT: 11,
-    priceNTWithVAT: 0,
+    priceNTWithVAT: 54.5,
     priceVTWithVAT: 1.92,
     energyTaxRegulatedPrice: 0.02,
     marketOrganizerRegulatedPrice: 6.93,
     monthlyConsumptionFee: 100,
     renewableEnergyRegulatedPrice: 0.41,
     systemServicesRegulatedPrice: 0.06,
-    totalPrice: 145.72,
+    totalPrice: 145.79,
     unit: 'MWh',
     greenEnergy: true,
 };

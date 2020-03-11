@@ -46,10 +46,10 @@
                             <div class="col-12 col-md-8 col-xl-12">
                                 <span class="supply-point-offer__title text-break">
                                     <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
-                                        {{supplyPointOffer.prepayment | number: '1.0-2'}}&nbsp;Kč
+                                        {{supplyPointOffer.prepayment | number: '1.0-2'}}&nbsp;Kč<small>&nbsp;VČETNĚ&nbsp;DPH</small>
                                     </ng-container>
                                     <ng-template #totalPrice>
-                                        {{supplyPointOffer.totalPrice | number: '1.0-2'}}&nbsp;Kč
+                                        {{supplyPointOffer.totalPrice | number: '1.0-2'}}&nbsp;Kč<small>&nbsp;VČETNĚ&nbsp;DPH</small>
                                     </ng-template>
                                 </span>
                             </div>
@@ -58,23 +58,6 @@
                 </div>
             </div>
         </div>
-        <!--<div *ngIf="!isOwner"-->
-             <!--class="row">-->
-            <!--<div class="col-auto">-->
-                <!--<div class="supply-point-offer__value-box">-->
-                    <!--<span class="supply-point-offer__value-name">Dodavatel</span>-->
-                    <!--<span class="supply-point-offer__value">{{supplyPointOffer?.supplier?.name}}</span>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<ng-container *ngIf="showValidityOfOffer">-->
-                <!--<div class="col-auto">-->
-                    <!--<div class="supply-point-offer__value-box">-->
-                        <!--<span class="supply-point-offer__value-name">Platnost nabídky</span>-->
-                        <!--<span class="supply-point-offer__value text-color&#45;&#45;danger">{{dateDiffValidityOfOffer}} {{dateDiffValidityOfOffer | plural: 'hour'}}</span>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</ng-container>-->
-        <!--</div>-->
         <div class="col-12 supply-point-offer__inner">
             <div class="row">
                 <div class="col-12 col-xl-6">
@@ -99,18 +82,79 @@
         </div>
         <div *ngIf="showPriceDecomposition"
              class="col-12">
-            <div class="supply-point-offer__inner supply-point-offer__inner--price  supply-point-offer__inner--price-decomposition">
+            <div class="supply-point-offer__inner supply-point-offer__inner--price">
                 <div class="row mb-3 mb-md-0">
+                    <div class="col-12 col-md-6 col-xl-4"
+                         *ngIf="supplyPointOffer.prepayment || supplyPointOffer.totalPrice">
+                        <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
+                            <span class="supply-point-offer__value-name"> {{isFromContract ? 'Sjednaná měsíční záloha' : 'Vypočtená měsíční platba'}} </span>
+                            <span class="supply-point-offer__value text-break">
+                                <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
+                                    {{supplyPointOffer.prepayment | number: '1.0-2'}}&nbsp;Kč<small>&nbsp;</small>
+                                </ng-container>
+                                <ng-template #totalPrice>
+                                    {{supplyPointOffer.totalPrice | number: '1.0-2'}}&nbsp;Kč<small>&nbsp;</small>
+                                </ng-template>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-4"
+                         *ngIf="supplyPointOffer.prepayment || supplyPointOffer.totalPrice">
+                        <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
+                            <span class="supply-point-offer__value-name"> {{isFromContract ? 'Sjednaná roční záloha' : 'Vypočtená roční platba'}} </span>
+                            <span class="supply-point-offer__value text-break">
+                                <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
+                                    {{supplyPointOffer.prepayment * 12 | number: '1.0-2'}}&nbsp;Kč<small>&nbsp;</small>
+                                </ng-container>
+                                <ng-template #totalPrice>
+                                    {{supplyPointOffer.totalPrice * 12 | number: '1.0-2'}}&nbsp;Kč<small>&nbsp;</small>
+                                </ng-template>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-4"
+                         *ngIf="supplyPointOffer.priceVTWithVAT && supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
+                        <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
+                            <span class="supply-point-offer__value-name">Cena za vysoký tarif</span>
+                            <span class="supply-point-offer__value text-break">
+                                    {{supplyPointOffer.priceVTWithVAT | number: '1.0-2'}}&nbsp;Kč/MWh<small>&nbsp;</small>
+                                </span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-4"
+                         *ngIf="supplyPointOffer.priceNTWithVAT && supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
+                        <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
+                            <span class="supply-point-offer__value-name">Cena za nízký tarif</span>
+                            <span class="supply-point-offer__value text-break">{{supplyPointOffer.priceNTWithVAT | number: '1.0-2'}}&nbsp;Kč/MWh<small>&nbsp;</small></span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-4"
+                         *ngIf="supplyPointOffer.priceGasWithVAT && supplyPointOffer.commodityType === COMMODITY_TYPE_GAS">
+                        <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
+                            <span class="supply-point-offer__value-name">Cena</span>
+                            <span class="supply-point-offer__value supply-point-offer__value--interactive text-break"
+                                  (click)="togglePriceDecomposition($event)">
+                                            {{supplyPointOffer.priceGasWithVAT | number: '1.0-2'}}&nbsp;Kč/MWh<small>&nbsp;</small>
+                                        </span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-4"
+                         *ngIf="supplyPointOffer.monthlyConsumptionFee">
+                        <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
+                            <span class="supply-point-offer__value-name">Poplatek za Odběrné místo</span>
+                            <span class="supply-point-offer__value text-break">{{supplyPointOffer.monthlyConsumptionFee | number: '1.0-2'}}&nbsp;Kč/měsíc<small>&nbsp;</small></span>
+                        </div>
+                    </div>
                     <ng-container *ngIf="supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
                         <ng-container *ngIf="([
                             supplyPointOffer.distributionPriceByConsumptionVT,
                             supplyPointOffer.distributionPriceByConsumptionNT,
                             supplyPointOffer.distributionPriceByCapacity
                         ] | sum) as ditributionPricePower">
-                            <div class="col-auto">
+                            <div class="col-12 col-md-6 col-xl-4">
                                 <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
                                     <span class="supply-point-offer__value-name">Distribuce</span>
-                                    <span class="supply-point-offer__value text-break">{{ditributionPricePower | number: '1.0-2'}} Kč/měsíc</span>
+                                    <span class="supply-point-offer__value text-break">{{ditributionPricePower | number: '1.0-2'}}&nbsp;Kč/měsíc<small>&nbsp;</small></span>
                                 </div>
                             </div>
                         </ng-container>
@@ -121,10 +165,10 @@
                             supplyPointOffer.distributionPriceByCapacity,
                             supplyPointOffer.accountingRegulatedPrice
                         ] | sum) as ditributionPriceGas">
-                            <div class="col-auto">
+                            <div class="col-12 col-md-6 col-xl-4">
                                 <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
                                     <span class="supply-point-offer__value-name">Distribuce</span>
-                                    <span class="supply-point-offer__value text-break">{{ditributionPriceGas | number: '1.0-2'}} Kč/měsíc</span>
+                                    <span class="supply-point-offer__value text-break">{{ditributionPriceGas | number: '1.0-2'}}&nbsp;Kč/měsíc<small>&nbsp;</small></span>
                                 </div>
                             </div>
                         </ng-container>
@@ -136,29 +180,28 @@
                             supplyPointOffer.marketOrganizerRegulatedPrice,
                             supplyPointOffer.accountingRegulatedPrice
                         ] | sum) as otherServicesPrice">
-                            <div class="col-auto">
+                            <div class="col-12 col-md-6 col-xl-4">
                                 <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
                                     <span class="supply-point-offer__value-name">Ostatní regulované služby</span>
-                                    <span class="supply-point-offer__value text-break">{{otherServicesPrice | number: '1.0-2'}} Kč/měsíc</span>
+                                    <span class="supply-point-offer__value text-break">{{otherServicesPrice | number: '1.0-2'}}&nbsp;Kč/měsíc<small>&nbsp;</small></span>
                                 </div>
                             </div>
                         </ng-container>
                     </ng-container>
                     <div *ngIf="supplyPointOffer.marketOrganizerRegulatedPrice && supplyPointOffer.commodityType === COMMODITY_TYPE_GAS"
-                         class="col-auto">
+                         class="col-12 col-md-6 col-xl-4">
                         <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
                             <span class="supply-point-offer__value-name">Činnosti operátora trhu OTE a.s.</span>
-                            <span class="supply-point-offer__value text-break">{{supplyPointOffer.marketOrganizerRegulatedPrice | number: '1.0-2'}} Kč/měsíc</span>
+                            <span class="supply-point-offer__value text-break">{{supplyPointOffer.marketOrganizerRegulatedPrice | number:'1.0-2'}}&nbsp;Kč/měsíc<small>&nbsp;</small></span>
                         </div>
                     </div>
                     <div *ngIf="supplyPointOffer.energyTaxRegulatedPrice"
-                         class="col-auto">
+                         class="col-12 col-md-6 col-xl-4">
                         <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
                             <span class="supply-point-offer__value-name">Daň z {{supplyPointOffer.commodityType === COMMODITY_TYPE_POWER ? 'elektřiny' : 'plynu'}}</span>
-                            <span class="supply-point-offer__value text-break">{{supplyPointOffer.energyTaxRegulatedPrice | number: '1.0-2'}} Kč/měsíc</span>
+                            <span class="supply-point-offer__value text-break">{{supplyPointOffer.energyTaxRegulatedPrice | number: '1.0-2'}}&nbsp;Kč/měsíc<small>&nbsp;</small></span>
                         </div>
                     </div>
-
                 </div>
                 <div *ngIf="interactive"
                      class="row no-gutters pt-4 border-top d-md-none">
