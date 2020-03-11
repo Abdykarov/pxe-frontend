@@ -47,7 +47,7 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
                 downloadName: 'Vzorová smlouva domácnost - elektřina',
             },
             [this.COMMODITY_TYPE.GAS]: {
-                sourceUrl: '/assets/pdfs/patterns-of-contracts/contract-gas-fo.pdf',
+                sourceUrl: '/assets/pdfs/patterns-of-contracts/contract-gas-po.pdf',
                 downloadName: 'Vzorová smlouva domácnost - plyn',
             },
         },
