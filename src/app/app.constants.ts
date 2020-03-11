@@ -23,7 +23,7 @@ export const CONSTS = {
     },
     EXAMPLE_OF_IMPORT_OFFER_FILE: {
         PATH: '/assets/csv/example-import-offers.csv',
-        FILENAME: 'example_import_offers.csv',
+        FILE_NAME: 'example_import_offers.csv',
     },
     IMPORT_ERROR_CODES: {
         FILE_TYPE: 'FILE_TYPE',

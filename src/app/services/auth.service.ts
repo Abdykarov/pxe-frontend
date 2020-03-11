@@ -4,7 +4,10 @@ import {
     PLATFORM_ID,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import {
+    HttpClient,
+    HttpHeaders,
+} from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import {
@@ -212,9 +215,6 @@ export class AuthService {
     public manageLoginResponse = (response: ILoginResponse, uuid: string = this.uuid) => {
         if (response && response.token) {
             const jwtPayload = this.getJwtPayload(response.token);
-            // if (jwtPayload.exp) {
-            //     this.expiresTime = jwtPayload.exp * 1000;
-            // }
             const user = {
                 token: response.token,
                 uuid: uuid,
@@ -270,6 +270,14 @@ export class AuthService {
             return v.toString(16);
         });
     }
+
+    public getAuthorizationHeaders = (contentType: string, accept: string = '*/*'): HttpHeaders =>
+        new HttpHeaders({
+            'Authorization': 'Bearer ' + this.getToken(),
+            'Content-Type': contentType,
+            'X-API-Key': `${environment.x_api_key}`,
+            accept,
+        })
 
     public homeRedirect = () => {
         if (!this.isLogged()) {

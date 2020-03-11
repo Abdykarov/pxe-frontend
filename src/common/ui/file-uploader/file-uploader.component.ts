@@ -20,16 +20,4 @@ export class FileUploaderComponent {
     public fileSelectAction: EventEmitter<any> = new EventEmitter();
 
     public hasBaseDropZoneOver = false;
-
-    public fileOverBase = (evt) => {
-        this.hasBaseDropZoneOver = evt;
-    }
-
-    public fileDrop = () => {
-        this.fileSelectAction.emit(this.uploader);
-    }
-
-    public fileSelected = () => {
-        this.fileSelectAction.emit(this.uploader);
-    }
 }

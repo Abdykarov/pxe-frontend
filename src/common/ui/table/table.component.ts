@@ -5,7 +5,6 @@ import {
     Input,
     OnChanges,
     Output,
-    Pipe,
     TemplateRef,
 } from '@angular/core';
 import { Router } from '@angular/router';

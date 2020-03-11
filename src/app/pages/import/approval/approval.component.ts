@@ -61,20 +61,6 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class ApprovalComponent extends AbstractComponent implements OnInit {
 
-    constructor(
-        private approvalConfig: ApprovalConfig,
-        private cd: ChangeDetectorRef,
-        private modalsService: ModalService,
-        private offersByCommodityTypePipe: OffersByCommodityTypePipe,
-        private offerService: OfferService,
-        private route: ActivatedRoute,
-        private router: Router,
-        private supplyService: SupplyService,
-        @Inject(PLATFORM_ID) private platformId: string,
-    ) {
-        super();
-    }
-
     public readonly bannerTypeImages = BannerTypeImages;
     public readonly configStepper = getConfigStepper(ImportProgressStep.APPROVAL, false, TypeStepper.IMPORT);
     public readonly routePower = ROUTES.ROUTER_IMPORT_APPROVAL_POWER;
@@ -101,7 +87,23 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
         event.returnValue = '';
     }
 
+    constructor(
+        private approvalConfig: ApprovalConfig,
+        private cd: ChangeDetectorRef,
+        private modalsService: ModalService,
+        private offersByCommodityTypePipe: OffersByCommodityTypePipe,
+        private offerService: OfferService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private supplyService: SupplyService,
+        @Inject(PLATFORM_ID) private platformId: string,
+    ) {
+        super();
+    }
+
     ngOnInit() {
+        let shouldInitPage = true;
+
         if (isPlatformBrowser(this.platformId)) {
             const offers: IOfferImportInput[] = window.history.state.offers;
             const commodityTypeAfterApprove: CommodityType = window.history.state.commodityTypeAfterApprove;
@@ -115,61 +117,62 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                         },
                     },
                 );
-                return;
-            }
-            if (!R.isNil(offers)) {
+                shouldInitPage = false;
+            } else {
                 this.tableRows = offers;
                 this.commodityTypeAfterApprove = commodityTypeAfterApprove || CommodityType.POWER;
             }
         }
 
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.route.params
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe(params => {
-                if (R.indexOf(params.commodityType, R.keys(commodityTypes)) < 0) {
-                    this.router.navigate([this.routePower]);
-                    return;
-                }
-                this.commodityType = commodityTypes[params.commodityType];
-                this.commodityType$.next(this.commodityType);
-            });
-
-        this.modalsService.closeModalData$
-            .pipe(
-                takeUntil(
-                    this.destroy$,
-                ),
-                filter(R_.isNotNil),
-                filter((modal: ICloseModalData) => modal.confirmed),
-            )
-            .subscribe(modal => {
-                if (modal.modalType === CONSTS.MODAL_TYPE.CONFIRM_BACK_IMPORT) {
-                    this.navigationBack();
-                }
-                this.modalsService.closeModalData$.next(null);
-            });
-
-        combineLatest(this.codeLists$, this.commodityType$)
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe(
-                ([codeLists, commodityType]) => {
-                    if (codeLists && commodityType) {
-                        this.tableCols = this.approvalConfig.tableCols(codeLists)[commodityType];
-                        this.setCountsAndValidateCountsOfOffers();
-                        this.cd.markForCheck();
-                    }
-                },
-                error => {
-                    const { globalError } = parseGraphQLErrors(error);
-                    this.globalError = globalError;
-                    this.cd.markForCheck();
+        if (shouldInitPage) {
+            this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+            this.route.params
+                .pipe(
+                    takeUntil(this.destroy$),
+                    filter((params) => {
+                        if (R.indexOf(params.commodityType, R.keys(commodityTypes)) < 0) {
+                            this.router.navigate([this.routePower]);
+                            return false;
+                        }
+                        return true;
+                    }),
+                )
+                .subscribe(params => {
+                    this.commodityType = commodityTypes[params.commodityType];
+                    this.commodityType$.next(this.commodityType);
                 });
 
+            this.modalsService.closeModalData$
+                .pipe(
+                    takeUntil(this.destroy$),
+                    filter(R_.isNotNil),
+                    filter((modal: ICloseModalData) => modal.confirmed),
+                )
+                .subscribe(modal => {
+                    if (modal.modalType === CONSTS.MODAL_TYPE.CONFIRM_BACK_IMPORT) {
+                        this.navigationBack();
+                    }
+                    this.modalsService.closeModalData$.next(null);
+                });
+
+            combineLatest(this.codeLists$, this.commodityType$)
+                .pipe(
+                    takeUntil(this.destroy$),
+                )
+                .subscribe(
+                    ([codeLists, commodityType]) => {
+                        if (codeLists && commodityType) {
+                            this.tableCols = this.approvalConfig.tableCols(codeLists)[commodityType];
+                            this.setCountsAndValidateCountsOfOffers();
+                            this.cd.markForCheck();
+                        }
+                    },
+                    error => {
+                        const { globalError } = parseGraphQLErrors(error);
+                        this.globalError = globalError;
+                        this.cd.markForCheck();
+                    });
+        }
     }
 
     private setCountsAndValidateCountsOfOffers = () => {
@@ -183,24 +186,13 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
         this.countOfGasOffers = countOfGasOffers;
         this.countOfPowerOffers = countOfPowerOffers;
 
-        if (this.countOfPowerOffers === 0) {
-            this.router.navigate([this.routeGas], {
+        if (this.countOfPowerOffers === 0 || this.countOfGasOffers === 0) {
+            this.router.navigate([this.countOfPowerOffers ? this.routeGas : this.routePower], {
                 state: {
                     commodityTypeAfterApprove: this.commodityTypeAfterApprove,
                     offers: this.tableRows,
                 },
             });
-            return;
-        }
-
-        if (this.countOfGasOffers === 0) {
-            this.router.navigate([this.routePower], {
-                state: {
-                    commodityTypeAfterApprove: this.commodityTypeAfterApprove,
-                    offers: this.tableRows,
-                },
-            });
-            return;
         }
     }
 
@@ -212,10 +204,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
 
     public approvalAction = (evt) => {
         evt.preventDefault();
-        const offersImportInput =
-            R.map(
-                (offerImportInput: IOfferImportInput) => offerImportInput.offer,
-            )(this.tableRows);
+        const offersImportInput = R.map(R.prop('offer'))(this.tableRows);
 
         this.offerService.batchImport(offersImportInput)
             .pipe(
@@ -256,9 +245,10 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
 
     public delete = (deletingRow) => {
         this.offerDeleted = deletingRow.offer.name;
-        this.tableRows = R.filter((offerImportInput: IOfferImportInput) => {
-            return JSON.stringify(deletingRow) !== JSON.stringify(offerImportInput);
-        })(this.tableRows);
+        this.tableRows =
+            R.filter(
+                (offerImportInput: IOfferImportInput) => JSON.stringify(deletingRow) !== JSON.stringify(offerImportInput)
+            )(this.tableRows);
 
         this.setCountsAndValidateCountsOfOffers();
 

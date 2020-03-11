@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import {
     ActivatedRoute,
     Router,
@@ -113,9 +114,9 @@ export class UploadComponent extends AbstractComponent implements OnInit {
                 this.fileErrors = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.FILE_TYPE]];
                 this.fileUploader.clearQueue();
                 this.tryToUploadFile = false;
-                return;
+            } else {
+                this.tryToUploadFile = true;
             }
-            this.tryToUploadFile = true;
         };
 
         this.fileUploader.onCompleteItem = (item, response, status, header) => {
@@ -126,64 +127,56 @@ export class UploadComponent extends AbstractComponent implements OnInit {
                 this.listOfErrors = this.getErrorsViolations(offers);
                 if (this.listOfErrors.length) {
                     this.isInitState = false;
-                    this.fileUploader.clearQueue();
-                    this.cd.markForCheck();
-                    return;
-                }
-
-                if (!offers.length) {
-                    this.globalError = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.NO_OFFERS_IN_IMPORT]];
-                    this.isInitState = true;
-                    this.fileUploader.clearQueue();
                 } else {
-                    this.router.navigate([ROUTES.ROUTER_IMPORT_APPROVAL_POWER], {
-                        state: {
-                            offers,
-                            commodityTypeAfterApprove: this.commodityType,
-                        },
-                    });
+                    if (!offers.length) {
+                        this.globalError = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.NO_OFFERS_IN_IMPORT]];
+                        this.isInitState = true;
+                    } else {
+                        this.router.navigate([ROUTES.ROUTER_IMPORT_APPROVAL_POWER], {
+                            state: {
+                                offers,
+                                commodityTypeAfterApprove: this.commodityType,
+                            },
+                        });
+                    }
                 }
             } else if (status === 401) {
                 this.authService.logoutForced();
             } else if (status === 500) {
                 this.errorInParsing = true;
                 this.isInitState = true;
-                this.fileUploader.clearQueue();
             } else {
                 this.isInitState = false;
                 this.globalError = [defaultErrorMessage];
-                this.fileUploader.clearQueue();
             }
+            this.fileUploader.clearQueue();
             this.cd.markForCheck();
         };
-
     }
 
     public uploadFile = (fileUploader: FileUploader) => {
-        if (!this.tryToUploadFile) {
-            return;
+        if (this.tryToUploadFile) {
+            const countOfFiles: number = R.path(['queue', 'length'], fileUploader) || 0;
+            if (countOfFiles === 0) {
+                this.fileErrors = [defaultErrorMessage];
+            } else if (countOfFiles <= CONSTS.VALIDATORS.MAX_IMPORT_FILES) {
+                this.fileErrors = [];
+                this.loading = true;
+                R.forEach((fileItem: FileItem) => {
+                    fileUploader.uploadItem(fileItem);
+                }, fileUploader.queue);
+            } else {
+                this.fileErrors = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.MAX_NUMBER_OF_FILES]];
+                this.fileUploader.clearQueue();
+            }
+            this.cd.markForCheck();
         }
-
-        const countOfFiles: number = R.path(['queue', 'length'], fileUploader) || 0;
-        if (countOfFiles === 0) {
-            this.fileErrors = [defaultErrorMessage];
-        } else if (countOfFiles <= CONSTS.VALIDATORS.MAX_IMPORT_FILES) {
-            this.fileErrors = [];
-            this.loading = true;
-            R.forEach((fileItem: FileItem) => {
-                fileUploader.uploadItem(fileItem);
-            }, fileUploader.queue);
-        } else {
-            this.fileErrors = [importErrorCodes[CONSTS.IMPORT_ERROR_CODES.MAX_NUMBER_OF_FILES]];
-            this.fileUploader.clearQueue();
-        }
-        this.cd.markForCheck();
     }
 
     public downloadExampleImportFile = (evt) => {
         evt.preventDefault();
         if (isPlatformBrowser(this.platformId)) {
-            saveAs(CONSTS.EXAMPLE_OF_IMPORT_OFFER_FILE.PATH, CONSTS.EXAMPLE_OF_IMPORT_OFFER_FILE.FILENAME);
+            saveAs(CONSTS.EXAMPLE_OF_IMPORT_OFFER_FILE.PATH, CONSTS.EXAMPLE_OF_IMPORT_OFFER_FILE.FILE_NAME);
         }
     }
 
