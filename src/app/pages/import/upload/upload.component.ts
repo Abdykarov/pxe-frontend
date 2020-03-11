@@ -186,7 +186,7 @@ export class UploadComponent extends AbstractComponent implements OnInit {
     }
 
     public getErrorsViolations = (offersImportInput: IOfferImportInput[]): string[] => {
-        let row = 1;
+        let row = 2;
         return R.reduce((listOfErrors: string[], offerImportInput: IOfferImportInput) => {
             if (offerImportInput.violations.length) {
                 R.forEachObjIndexed((violation: string) => {
