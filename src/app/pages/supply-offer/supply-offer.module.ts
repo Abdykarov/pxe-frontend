@@ -8,6 +8,7 @@ import { ButtonModule } from 'src/common/ui/button/button.module';
 import { DatepickerModule } from 'src/common/ui/forms/datepicker/datepicker.module';
 import { DropdownModule } from 'src/common/ui/dropdown/dropdown.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
+import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 import { PipesModule } from 'src/common/pipes/pipes.module';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
@@ -30,6 +31,7 @@ import { TooltipModule } from 'src/common/ui/tooltip/tooltip.module';
         DatepickerModule,
         DropdownModule,
         FormModule,
+        InfoBannerModule,
         LayoutContainerModule,
         PipesModule,
         PlaceloaderModule,

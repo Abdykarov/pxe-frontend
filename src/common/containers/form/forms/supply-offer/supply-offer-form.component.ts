@@ -25,7 +25,6 @@ import {
     COMMODITY_TO_DISTRIBUTION_MAP,
     CONSTS,
     DELIVERY_LENGTH_OPTIONS,
-    DISTRIBUTION_RATES_TYPE_DEFINITION,
     SUBJECT_TYPE_OPTIONS,
     SUBJECT_TYPE_TO_DIST_RATE_MAP,
 } from 'src/app/app.constants';
@@ -34,10 +33,11 @@ import {
 } from 'src/common/containers/form/forms/supply-offer/configs/supply-offer-form.config';
 import {
     CommodityType,
-    DistributionType,
+    ICodelistOptions,
 } from 'src/common/graphql/models/supply.model';
 import {
     convertDateToSendFormatFnc,
+    includesBothTariffs,
     transformCodeList,
 } from 'src/common/utils';
 import { formFieldsBenefit } from 'src/common/containers/form/forms/supply-offer/configs/supply-offer-benefit-form.config';
@@ -70,7 +70,7 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
 
     public formFieldsBenefit: IForm = formFieldsBenefit;
 
-    public codeLists;
+    public codeLists: ICodelistOptions;
     public COMMODITY_TYPE_POWER = CommodityType.POWER;
     public deliveryLengthOptions: Array<IOption> = DELIVERY_LENGTH_OPTIONS;
     public distributionRateType = '';
@@ -130,7 +130,6 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
 
         this.setFormByCommodity(this.commodityType);
         this.loadCodeLists();
-        this.setPriceNTState();
         this.currentFormValues.emit(this.form.value);
     }
 
@@ -155,8 +154,6 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
     public addBenefit = () => {
         return this.fb.group(formFieldsBenefit.controls, formFieldsBenefit.options);
     }
-
-    public includesBothTariffs = (id: string) => DISTRIBUTION_RATES_TYPE_DEFINITION[DistributionType.BOTH].includes(id);
 
     public setFormByCommodity = (commodityType: CommodityType) => {
         R.mapObjIndexed((fields, type) => {
@@ -285,16 +282,17 @@ export class SupplyOfferFormComponent extends AbstractFormComponent implements O
             .pipe(takeUntil(this.destroy$))
             .subscribe(({data}) => {
                 this.codeLists = transformCodeList(data.findCodelistsByTypes);
+                this.setPriceNTState(this.getFieldValue('distributionRateId'));
                 this.cd.markForCheck();
             });
     }
 
     public setPriceNTState = (distributionRateId: string = null) => {
-        if (this.includesBothTariffs(distributionRateId)) {
+        if (includesBothTariffs(distributionRateId, this.codeLists)) {
             this.setEnableField('priceNT');
         } else {
-            this.resetFieldValue('priceNT');
             this.setDisableField('priceNT');
+            this.resetFieldError('priceNT', true);
             this.cd.markForCheck();
         }
     }

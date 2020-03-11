@@ -1,3 +1,4 @@
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import * as R from 'ramda';
@@ -14,6 +15,7 @@ import {
     updateGasOfferMutation,
     updatePowerOfferMutation,
 } from 'src/common/graphql/mutation/offer';
+import { environment } from 'src/environments/environment';
 import {
     findSupplierOffersQuery,
     findSupplyPointOffersQuery,
@@ -33,11 +35,13 @@ export class OfferService {
 
     constructor(
         private apollo: Apollo,
+        private http: HttpClient,
     ) {}
 
     public findSupplierOffers = () => this.apollo
         .watchQuery<any>({
             query: findSupplierOffersQuery,
+            fetchPolicy: 'network-only',
         })
         .valueChanges
 
@@ -140,6 +144,14 @@ export class OfferService {
             },
         })
 
+    public batchImport = (offers: IOfferInput[]) => this.http.post<any>(
+        `${environment.url_api}/v1.0/offer/batch-import`,
+        offers,
+    )
+
+    public exportCSV = () => this.http.get<string>(
+        `${environment.url_api}/v1.0/offer/export-csv`,
+    )
 
     public markAll = (mark: boolean, commodityType: CommodityType): number => {
         const client = this.apollo.getClient();

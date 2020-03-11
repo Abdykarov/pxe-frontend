@@ -4,6 +4,7 @@ import * as R from 'ramda';
 
 import {
     CODE_LIST,
+    CONSTS,
     DELIVERY_LENGTH_OPTIONS,
     SUBJECT_TYPE_OPTIONS,
 } from 'src/app/app.constants';
@@ -16,10 +17,6 @@ import { PluralPipe } from 'src/common/pipes/plurar/plural.pipe';
     providedIn: 'root',
 })
 export class SupplyOfferConfig {
-    public confirmDeleteOffer = 'confirmDeleteOffer';
-    public confirmCancelOffer = 'confirmCancelOffer';
-    public confirmDeleteMarked = 'confirmDeleteMarked';
-
     constructor(
         private pluralPipe: PluralPipe,
     ) {}
@@ -51,7 +48,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${R.find(R.propEq('value', row.subject.code))(SUBJECT_TYPE_OPTIONS).label}`,
+                        content: (row) => R.find(R.propEq('value', row.subject.code))(SUBJECT_TYPE_OPTIONS).label,
                     },
                 ],
             },
@@ -101,8 +98,8 @@ export class SupplyOfferConfig {
                 label: 'Cena za VT',
                 views: [
                     {
-                        headingClass: ['', 'text-right'],
-                        cellClass: ['', 'text-right'],
+                        headingClass: ['text-right'],
+                        cellClass: ['text-right'],
                         contentTemplateName: 'columnTemplatePriceVT',
                     },
                 ],
@@ -111,8 +108,8 @@ export class SupplyOfferConfig {
                 label: 'Cena za NT',
                 views: [
                     {
-                        headingClass: ['', 'text-right'],
-                        cellClass: ['', 'text-right'],
+                        headingClass: ['text-right'],
+                        cellClass: ['text-right'],
                         contentTemplateName: 'columnTemplatePriceNT',
                     },
                 ],
@@ -143,7 +140,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${R.find(R.propEq('value', row.deliveryLength))(DELIVERY_LENGTH_OPTIONS).label}`,
+                        content: (row) => R.find(R.propEq('value', row.deliveryLength))(DELIVERY_LENGTH_OPTIONS).label,
                     },
                 ],
             },
@@ -151,8 +148,8 @@ export class SupplyOfferConfig {
                 label: 'Stálá platba',
                 views: [
                     {
-                        headingClass: ['', 'text-right'],
-                        cellClass: ['', 'text-right', 'table--advanced__action-area'],
+                        headingClass: ['text-right'],
+                        cellClass: ['text-right', 'table--advanced__action-area'],
                         contentTemplateName: 'actionColumnTemplate',
                     },
                 ],
@@ -184,7 +181,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${R.find(R.propEq('value', row.subject.code))(SUBJECT_TYPE_OPTIONS).label}`,
+                        content: (row) => R.find(R.propEq('value', row.subject.code))(SUBJECT_TYPE_OPTIONS).label,
                     },
                 ],
             },
@@ -220,8 +217,8 @@ export class SupplyOfferConfig {
                 label: 'Cena',
                 views: [
                     {
-                        headingClass: ['', 'text-right'],
-                        cellClass: ['', 'text-right'],
+                        headingClass: ['text-right'],
+                        cellClass: ['text-right'],
                         contentTemplateName: 'columnTemplatePriceGas',
                     },
                 ],
@@ -252,7 +249,7 @@ export class SupplyOfferConfig {
                     {
                         headingClass: [''],
                         cellClass: [''],
-                        content: (row) => `${R.find(R.propEq('value', row.deliveryLength))(DELIVERY_LENGTH_OPTIONS).label}`,
+                        content: (row) => R.find(R.propEq('value', row.deliveryLength))(DELIVERY_LENGTH_OPTIONS).label,
                     },
                 ],
             },
@@ -260,8 +257,8 @@ export class SupplyOfferConfig {
                 label: 'Stálá platba',
                 views: [
                     {
-                        headingClass: ['', 'text-right'],
-                        cellClass: ['', 'text-right', 'table--advanced__action-area'],
+                        headingClass: ['text-right'],
+                        cellClass: ['text-right', 'table--advanced__action-area'],
                         contentTemplateName: 'actionColumnTemplate',
                     },
                 ],
@@ -271,7 +268,7 @@ export class SupplyOfferConfig {
 
     public confirmDeleteOfferConfig = (data): IShowModal => ({
         component: 'ConfirmModalComponent',
-        modalType: this.confirmDeleteOffer,
+        modalType: CONSTS.MODAL_TYPE.CONFIRM_DELETE_OFFER,
         instanceData: {
             confirmText: `Opravdu chcete smazat nabídku <strong>${data.currentOfferFormValues.name}</strong>?`,
             titleConfirm: 'ANO SMAZAT',
@@ -284,7 +281,7 @@ export class SupplyOfferConfig {
         const space = name ? ' ' : '';
         return {
             component: 'ConfirmModalComponent',
-            modalType: this.confirmCancelOffer,
+            modalType: CONSTS.MODAL_TYPE.CONFIRM_CANCEL_OFFER,
             instanceData: {
                 confirmText: `Opravdu chcete zrušit vytváření nabídky<strong>${space}${name}</strong>?`,
                 titleConfirm: 'ANO ZRUŠIT',
@@ -296,7 +293,7 @@ export class SupplyOfferConfig {
     public confirmDeleteMarkedConfig = (numberOfOffers = 0, commodityType: CommodityType): IShowModal => {
         return {
             component: 'ConfirmModalComponent',
-            modalType: this.confirmDeleteMarked,
+            modalType: CONSTS.MODAL_TYPE.CONFIRM_DELETE_MARKED,
             instanceData: {
                 confirmText:
                     `Opravdu chcete odstranit ${numberOfOffers} ${this.pluralPipe.transform(numberOfOffers, 'offer_delete')}

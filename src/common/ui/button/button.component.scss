@@ -29,7 +29,7 @@
 	text-decoration: none;
 	white-space: normal;
 	box-shadow: none;
-	border: none;
+	border-color: transparent;
 
 	&:focus,
 	&.focus {
@@ -56,13 +56,14 @@
 		&:active,
 		&:focus:active {
 			background-color: $primary-dark;
+			border-color: $primary-dark;
 		}
 	}
 
 	&.btn-secondary {
 		color: $btn-secondary-color;
 		background-color: $btn-secondary-bg;
-		border: 2px solid $btn-secondary-color;
+		border-color: $btn-secondary-color;
 
 		&:focus,
 		&.focus,
@@ -83,6 +84,7 @@
 		&:hover,
 		&:active {
 			background-color: $success-dark;
+			border-color: $success-dark;
 		}
 
 		&:not(:disabled):not(.disabled):active,
@@ -99,6 +101,7 @@
 		&:hover,
 		&:active {
 			background-color: $warning-dark;
+			border-color: $warning-dark;
 		}
 	}
 
@@ -108,6 +111,7 @@
 		&:hover,
 		&:active {
 			background-color: $danger-dark;
+			border-color: $danger-dark;
 		}
 	}
 
@@ -116,17 +120,19 @@
 		&.focus,
 		&:hover {
 			background-color: $light-dark;
+			border-color: $light-dark;
 		}
 
 		&:not(:disabled):not(.disabled):active {
 			background-color: $light-darken;
+			border-color: $light-darken;
 		}
 	}
 
 	&.btn-white {
 		color: $white;
 		background-color: $secondary;
-		border: 2px solid $white;
+		border-color: $white;
 
 		&:focus,
 		&.focus {

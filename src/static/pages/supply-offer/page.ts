@@ -11,6 +11,7 @@ import { SupplyOfferOrganismConfig } from 'src/static/organisms/supply-offer/con
 
 @Component({
     templateUrl: './page.html',
+    styleUrls: ['../../../assets/scss/05_pages/supply-offer.scss'],
 })
 
 export class SupplyOfferComponent {
@@ -44,15 +45,15 @@ export class SupplyOfferComponent {
         ];
     }
 
+    public click = (evt) => {
+        evt.preventDefault();
+        console.log('click');
+    }
+
     public action = (table, row) => {
         if (table.openedRow !== row) {
             table.openRow(row);
             table.selectRow(row);
         }
-    }
-
-    public click = (evt) => {
-        evt.preventDefault();
-        console.log('click');
     }
 }

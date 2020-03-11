@@ -1,0 +1,32 @@
+/*
+ -  ListOfNotifications
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+
+.list-of-notifications {
+	&__list {
+		list-style: none;
+		counter-reset: items;
+	}
+
+	&__item {
+		counter-increment: items;
+		padding-left: ( $spacer * 1.5 );
+		padding-bottom: ( $spacer / 5 );
+		font-size: $small-font-size;
+
+		&::before {
+			content: '0' counter(items)'.';
+			font-weight: 400;
+		}
+
+		&:nth-child(n+10):before {
+			content: counter(items)'.';
+		}
+	}
+}
