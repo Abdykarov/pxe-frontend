@@ -1,30 +1,30 @@
 <div
     ng2FileDrop
-    class="pt-5 pb-5 w-100 drop-zone"
-    [ngClass]="{'file-over': hasBaseDropZoneOver}"
+    class="drop-zone"
     (fileOver)="fileOverBase($event)"
     (fileDrop)="fileDrop()"
     [uploader]="uploader"
 >
-    <p class="mb-5">
-        <span class="icon-box__illustration-holder">
-            <img alt="" class="icon-box__illustration" src="/assets/images/illustrations/upload.svg" title="">
-        </span>
+    <img 
+        class="drop-zone__svg mb-2" 
+        src="/assets/images/illustrations/upload.svg" 
+        alt="upload ikona" 
+        title="upload ikona"
+    >
+    <p class="mb-1">
+        Přetáhněte vyplněnou excelovskou tabulku
     </p>
-    <p class="mb-2">
-        Přetáhněte CSV soubor
-    </p>
-    <p class="mb-2">
+    <p class="mb-3">
         nebo
     </p>
-    <label for="file-upload" class="btn btn-primary">
+    <input id="file-upload"
+        ng2FileSelect
+        type="file"
+        [uploader]="uploader"
+        (fileSelected)="fileSelected()"
+        hidden
+    />
+    <label for="file-upload" class="btn btn-primary drop-zone__control">
         nahrát ze zařízení
-        <input id="file-upload"
-               ng2FileSelect
-               type="file"
-               [uploader]="uploader"
-               (fileSelected)="fileSelected()"
-               hidden
-        />
     </label>
 </div>
