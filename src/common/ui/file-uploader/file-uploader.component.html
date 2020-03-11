@@ -1,6 +1,7 @@
 <div
     ng2FileDrop
     class="drop-zone"
+    [ngClass]="{'drop-zone--interactive': hasBaseDropZoneOver}"
     (fileOver)="hasBaseDropZoneOver = $event"
     (fileDrop)="fileSelectAction.emit(uploader)"
     [uploader]="uploader"

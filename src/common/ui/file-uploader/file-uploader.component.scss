@@ -13,16 +13,13 @@
 // Bootstrap button import
 @import '~bootstrap/scss/buttons';
 
-
 .drop-zone {
 	position: relative;
 	width: 100%;
 	padding: ( $spacer * 2.5 ) 0;
 
-	&:hover {
-		&::after {
-			background-color: rgba($light-dark-little-darken, .8);
-		}
+	&--interactive {
+		background-color: rgba($light-dark-little-darken, .8);
 	}
 
 	&::after {
