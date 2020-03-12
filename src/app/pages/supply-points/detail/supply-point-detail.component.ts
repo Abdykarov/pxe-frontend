@@ -182,47 +182,55 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     public submitVerification = (smsCode: string) => {
         this.formLoading = true;
         this.globalError = [];
-        this.contractService.deleteSignedContract(
-            this.supplyPoint.contract.contractId,
-            smsCode,
-            this.contractAction === ContractActions.LEAVE_CONTRACT ? ContractDeleteReason.LEAVING : ContractDeleteReason.TERMINATION,
-        )
-            .pipe(
-                takeUntil(
-                    this.destroy$,
-                ),
-                map(({data}) => data.deleteSignedContract),
+        if (this.contractAction === ContractActions.UNSET_PROLONGATION ) {
+            this.contractService.deleteSignedContract(
+                this.supplyPoint.contract.contractId,
+                smsCode,
+                this.contractAction === ContractActions.LEAVE_CONTRACT ? ContractDeleteReason.LEAVING : ContractDeleteReason.TERMINATION,
             )
-            .subscribe(
-                (deleteSignedContract: boolean) => {
-                    if (deleteSignedContract) {
-                        this.router.navigate([
-                                ROUTES.ROUTER_REQUESTS,
-                            ],
-                            {
-                                state: {
-                                    requestsOverviewBannerShow: this.contractAction === ContractActions.LEAVE_CONTRACT ?
-                                        RequestsOverviewBannerShow.LEAVE_CONTRACT : RequestsOverviewBannerShow.TERMINATE_CONTRACT,
+                .pipe(
+                    takeUntil(
+                        this.destroy$,
+                    ),
+                    map(({data}) => data.deleteSignedContract),
+                )
+                .subscribe(
+                    (deleteSignedContract: boolean) => {
+                        if (deleteSignedContract) {
+                            this.router.navigate([
+                                    ROUTES.ROUTER_REQUESTS,
+                                ],
+                                {
+                                    state: {
+                                        requestsOverviewBannerShow: this.contractAction === ContractActions.LEAVE_CONTRACT ?
+                                            RequestsOverviewBannerShow.LEAVE_CONTRACT : RequestsOverviewBannerShow.TERMINATE_CONTRACT,
+                                    },
                                 },
-                            },
-                        );
-                    } else {
-                        this.globalError = [defaultErrorMessage];
+                            );
+                        } else {
+                            this.globalError = [defaultErrorMessage];
+                            this.formLoading = false;
+                            this.cd.markForCheck();
+                        }
+                    },
+                    (error) => {
                         this.formLoading = false;
+                        const { globalError , fieldError } = parseGraphQLErrors(error);
+                        this.globalError = globalError;
+                        this.fieldError = fieldError;
+                        if (Object.keys(this.fieldError).length) {
+                            scrollToElementFnc(this.contractActionsWrapper.nativeElement);
+                        }
                         this.cd.markForCheck();
-                    }
-                },
-                (error) => {
-                    this.formLoading = false;
-                    const { globalError , fieldError } = parseGraphQLErrors(error);
-                    this.globalError = globalError;
-                    this.fieldError = fieldError;
-                    if (Object.keys(this.fieldError).length) {
-                        scrollToElementFnc(this.contractActionsWrapper.nativeElement);
-                    }
-                    this.cd.markForCheck();
-                },
+                    },
         );
+        } else {
+            this.contractService.setContractProlongation(
+                this.supplyPoint.contract.contractId,
+                smsCode,
+            )
+
+        }
         this.cd.markForCheck();
     }
 
@@ -248,7 +256,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     }
 
     public interruptAutomaticProlongation = () => {
-        this.contractAction = ContractActions.INTERRUPT_AUTOMATIC_PROLONGATION;
+        this.contractAction = ContractActions.UNSET_PROLONGATION;
         this.smsSent = null;
         this.fieldError = {};
         this.globalError = [];

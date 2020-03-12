@@ -61,3 +61,9 @@ export const confirmFirstContractViewMutation = gql`
         confirmFirstContractView
     }
 `;
+
+export const setContractProlongationMutation = gql`
+    mutation setContractProlongation($contractId: ID!, $prolong: Boolean!){
+        setContractProlongation(contractId: $contractId, prolong: $prolong)
+    }
+`;

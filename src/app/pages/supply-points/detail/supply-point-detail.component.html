@@ -24,7 +24,7 @@
 </ng-template>
 <ng-template #contractActionsTemplate>
     <div #contractActionsWrapper>
-        <div *ngIf="supplyPoint | isAllowedOperation: allowedOperations.TERMINATE_CONTRACT"
+        <div *ngIf="supplyPoint | isAllowedOperation: allowedOperations.UNSET_PROLONGATION"
              class="row no-gutters align-items-end mb-5">
             <div class="col-12 col-md-6">
                 <small>Zrušit automatické prodloužení smlouvy</small>
@@ -38,7 +38,7 @@
                     size="sm">
                 </lnd-button>
             </div>
-            <div *ngIf="contractAction === contractActions.INTERRUPT_AUTOMATIC_PROLONGATION"
+            <div *ngIf="contractAction === contractActions.UNSET_PROLONGATION"
                  class="col-12 mt-4">
                 <pxe-verification-form
                     [fieldError]="fieldError"
@@ -123,39 +123,39 @@
                 </pxe-verification-form>
             </div>
         </div>
-        <div *ngIf="supplyPoint | isAllowedOperation: allowedOperations.TERMINATE_CONTRACT"
-             class="row no-gutters align-items-end mb-5">
-            <div class="col-12 col-md-6">
-                <small>Převést odběrné místo na jiného odběratele</small>
-            </div>
-            <div class="col-12 col-md-6 pl-3 text-right">
-                <lnd-button
-                    (click)="transferSupplyPoint()"
-                    [isDisabled]="formLoading"
-                    label="Převést"
-                    type="link-danger"
-                    size="sm">
-                </lnd-button>
-            </div>
-            <div *ngIf="contractAction === contractActions.TRANSFER_SUPPLY_POINT"
-                 class="col-12 mt-4">
-                <pxe-verification-form
-                    [fieldError]="fieldError"
-                    [formLoading]="formLoading"
-                    [contract]="supplyPoint.contract"
-                    [phone]="supplyPoint.contract.personalData.phone"
-                    [globalError]="globalError"
-                    [infoTemplate]="terminateContactInfoTemplate"
-                    [smsSent]="smsSent"
-                    [showSentSmsLabelUnderFirstField]="false"
-                    classFirstField="col-12"
-                    classSecondField="col-12 text-center"
-                    submitLabelText="Převést odběrné místo na jiného odběratele"
-                    (submitAction)="submitVerification($event)"
-                    (customAction)="sendContractConfirmationSms()">
-                </pxe-verification-form>
-            </div>
-        </div>
+        <!--<div *ngIf="supplyPoint | isAllowedOperation: allowedOperations.TERMINATE_CONTRACT"-->
+             <!--class="row no-gutters align-items-end mb-5">-->
+            <!--<div class="col-12 col-md-6">-->
+                <!--<small>Převést odběrné místo na jiného odběratele</small>-->
+            <!--</div>-->
+            <!--<div class="col-12 col-md-6 pl-3 text-right">-->
+                <!--<lnd-button-->
+                    <!--(click)="transferSupplyPoint()"-->
+                    <!--[isDisabled]="formLoading"-->
+                    <!--label="Převést"-->
+                    <!--type="link-danger"-->
+                    <!--size="sm">-->
+                <!--</lnd-button>-->
+            <!--</div>-->
+            <!--<div *ngIf="contractAction === contractActions.TRANSFER_SUPPLY_POINT"-->
+                 <!--class="col-12 mt-4">-->
+                <!--<pxe-verification-form-->
+                    <!--[fieldError]="fieldError"-->
+                    <!--[formLoading]="formLoading"-->
+                    <!--[contract]="supplyPoint.contract"-->
+                    <!--[phone]="supplyPoint.contract.personalData.phone"-->
+                    <!--[globalError]="globalError"-->
+                    <!--[infoTemplate]="terminateContactInfoTemplate"-->
+                    <!--[smsSent]="smsSent"-->
+                    <!--[showSentSmsLabelUnderFirstField]="false"-->
+                    <!--classFirstField="col-12"-->
+                    <!--classSecondField="col-12 text-center"-->
+                    <!--submitLabelText="Převést odběrné místo na jiného odběratele"-->
+                    <!--(submitAction)="submitVerification($event)"-->
+                    <!--(customAction)="sendContractConfirmationSms()">-->
+                <!--</pxe-verification-form>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
 </ng-template>
 <pxe-layout-container pageTitle="Odběrná místa">

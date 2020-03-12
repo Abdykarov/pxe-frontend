@@ -11,6 +11,7 @@ import {
     deleteSignedContractMutation,
     saveContractMutation,
     sendContractConfirmationSmsMutation,
+    setContractProlongationMutation,
     signContractMutation,
     updateContractMutation,
 } from 'src/common/graphql/mutation/contract';
@@ -248,5 +249,14 @@ export class ContractService {
     public confirmFirstContractView = () => this.apollo
         .mutate<any>({
             mutation: confirmFirstContractViewMutation,
+        })
+
+    public setContractProlongation = () => (contractId: string, prolong: boolean) => this.apollo
+        .mutate({
+            mutation: setContractProlongationMutation,
+            variables: {
+                contractId,
+                prolong,
+            },
         })
 }
