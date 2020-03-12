@@ -20,7 +20,8 @@
                     [formValues]="formValues"
                     [globalError]="globalError"
                     [fieldError]="fieldError"
-                    (submitAction)="submitForm($event)">
+                    (submitAction)="submitForm($event)"
+                    (customAction)="sendChangePhoneNumberSmsMutation($event)">
                 </pxe-user-form>
             </div>
         </div>

@@ -381,7 +381,12 @@ export const REGIONS: Array<IOption> = [
     },
 ];
 
-export const OPERATIONS_WITHOUT_SCROLL_ON_ERRORS = ['getSupplyPointGlobalStatistics', 'makeRegistration'];
+export const OPERATIONS_WITHOUT_SCROLL_ON_ERRORS = [
+    'getSupplyPointGlobalStatistics',
+    'makeRegistration',
+    'updateUserProfile',
+    'sendChangePhoneNumberSmsMutation',
+];
 
 export enum RequestsOverviewBannerShow {
     NONE = 'NONE',

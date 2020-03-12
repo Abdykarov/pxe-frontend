@@ -16,6 +16,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IJwtPayload } from 'src/app/services/model/auth.model';
 import { IUserDetailInput } from 'src/common/graphql/models/user.model';
+import { IUserProfileModelForm } from 'src/common/containers/form/forms/user-profile/user-profile-form.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { userProfileFormFields } from 'src/common/containers/form/forms/user-profile/user-profile-form.config';
@@ -44,16 +45,16 @@ export class UserProfileComponent extends AbstractComponent {
         this.formValues = this.authService.currentUserValue;
     }
 
-    public submitForm = (values) => {
+    public submitForm = (userProfileModelForm: IUserProfileModelForm) => {
         this.formLoading = true;
         this.formSent = false;
         this.fieldError = {};
         this.globalError = [];
 
-        const userDetailInput: IUserDetailInput = R.pick(['firstName', 'lastName', 'phoneNumber'], values);
+        const userDetailInput: IUserDetailInput = R.pick(['firstName', 'lastName', 'phoneNumber'], userProfileModelForm);
         userDetailInput.userName = this.authService.currentUserValue.email;
 
-        this.userService.updateUserProfile(userDetailInput)
+        this.userService.updateUserProfile(userDetailInput, userProfileModelForm.smsCode)
             .pipe(
                 map(({data}) => data.updateUserProfile),
                 switchMap((profileChanged: boolean) => {
@@ -80,6 +81,27 @@ export class UserProfileComponent extends AbstractComponent {
                 },
             );
     }
+
+    public sendChangePhoneNumberSmsMutation = (phoneNumber: string) => {
+        this.userService.sendChangePhoneNumberSmsMutation(phoneNumber)
+            .pipe(
+                map(({data}) => data.sendChangePhoneNumberSmsMutation),
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                () => {
+                    this.formLoading = false;
+                },
+                error => {
+                    this.formLoading = false;
+                    const { globalError, fieldError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.fieldError = fieldError;
+                    this.cd.markForCheck();
+                },
+            );
+    }
+
 
     public redirectToDeleteProfile = () => {
         this.router.navigate([ROUTES.ROUTER_DELETE_ACCOUNT]);

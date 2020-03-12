@@ -72,18 +72,19 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
         this.form.get('phone').setValue(phone);
     }
 
-    public processSaveButton = (smsCode: string) => {
-        if (this.oldPhone === this.phoneNumber || smsCode) {
-            this.submitValidForm();
-        } else {
-            // todo sluzba
+    public processSaveButton = (event) => {
+        if (this.oldPhone !== this.phoneNumber && !this.smsSent || R.path('resend', event)) {
+            this.customAction.emit(this.form.value.phone);
             this.smsSent = true;
+        } else {
+            this.submitValidForm(event);
         }
     }
 
-    public submitValidForm = () => {
+    public submitValidForm = (event) => {
         const form: IPersonalDataInputForm = {
             ...this.form.value,
+            smsCode: R.path('smsCode', event) ? R.path('smsCode', event) : '',
             phoneNumber: R.concat(CONSTS.TELEPHONE_PREFIX_CZ, this.form.value.phone),
         };
         this.submitAction.emit(form);
