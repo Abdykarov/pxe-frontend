@@ -46,10 +46,10 @@
                             <div class="col-12 col-md-8 col-xl-12">
                                 <span class="supply-point-offer__title text-break">
                                     <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
-                                        {{supplyPointOffer.prepayment | number: '1.0-2'}}&nbsp;Kč<small>&nbsp;VČETNĚ&nbsp;DPH</small>
+                                        {{supplyPointOffer.prepayment | number: '1.0-0'}}&nbsp;Kč<small>&nbsp;VČETNĚ&nbsp;DPH</small>
                                     </ng-container>
                                     <ng-template #totalPrice>
-                                        {{supplyPointOffer.totalPrice | number: '1.0-2'}}&nbsp;Kč<small>&nbsp;VČETNĚ&nbsp;DPH</small>
+                                        {{supplyPointOffer.totalPrice | number: '1.0-0'}}&nbsp;Kč<small>&nbsp;VČETNĚ&nbsp;DPH</small>
                                     </ng-template>
                                 </span>
                             </div>
@@ -90,10 +90,10 @@
                             <span class="supply-point-offer__value-name"> Odhadovaná cena za rok při zadané spotřebě </span>
                             <span class="supply-point-offer__value text-break">
                                 <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
-                                    {{supplyPointOffer.prepayment * 12 | number: '1.0-2'}}&nbsp;Kč<small>&nbsp;</small>
+                                    {{(supplyPointOffer.prepayment | number: '1.0-0') * 12}}&nbsp;Kč<small>&nbsp;VČETNĚ DPH</small>
                                 </ng-container>
                                 <ng-template #totalPrice>
-                                    {{supplyPointOffer.totalPrice * 12 | number: '1.0-2'}}&nbsp;Kč<small>&nbsp;</small>
+                                    {{(supplyPointOffer.totalPrice  | number: '1.0-0') * 12}}&nbsp;Kč<small>&nbsp;VČETNĚ DPH</small>
                                 </ng-template>
                             </span>
                         </div>
@@ -189,17 +189,6 @@
                         </div>
                     </div>
                 </div>
-                <div *ngIf="interactive"
-                     class="row no-gutters pt-4 border-top d-md-none">
-                    <div class="col-12">
-                        <lnd-button
-                            label="Vybrat nabídku"
-                            type="primary"
-                            [type]="supplyPointOffer.greenEnergy ? 'success' : 'primary'"
-                            (action)="action.emit(supplyPointOffer)">
-                        </lnd-button>
-                    </div>
-                </div>
             </div>
         </div>
         <div *ngIf="showPriceDecomposition && !isOwner && supplyPointOffer.benefits && supplyPointOffer.benefits.length"
@@ -228,12 +217,14 @@
                 <div class="col-12 text-right"
                      [class.col-xl-6]="!showPriceDecomposition && !isOwner && supplyPointOffer.benefits && supplyPointOffer.benefits.length">
                     <lnd-button
+                        *ngIf="!isOwner"
                         class="mr-3"
                         [label]="showPriceDecomposition ? 'Zavřít detail nabídky' : 'Detail nabídky'"
                         [type]="'link'"
                         (action)="togglePriceDecomposition($event)">
                     </lnd-button>
                     <lnd-button
+                        *ngIf="!isOwner"
                         label="Vybrat nabídku"
                         [type]="'primary'"
                         (action)="action.emit(supplyPointOffer)">
