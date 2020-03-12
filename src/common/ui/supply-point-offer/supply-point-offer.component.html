@@ -40,7 +40,7 @@
                         <ng-container *ngIf="supplyPointOffer.prepayment || supplyPointOffer.totalPrice">
                             <div class="col-12">
                                 <span class="supply-point-offer__title-label">
-                                    {{isFromContract ? 'Měsíční záloha' : 'Měsíční platba'}}
+                                    {{isFromContract ? 'Sjednaná měsíční záloha' : 'Vypočtená měsíční platba'}}
                                 </span>
                             </div>
                             <div class="col-12 col-md-8 col-xl-12">
@@ -87,21 +87,7 @@
                     <div class="col-12 col-md-6 col-xl-4"
                          *ngIf="supplyPointOffer.prepayment || supplyPointOffer.totalPrice">
                         <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
-                            <span class="supply-point-offer__value-name"> {{isFromContract ? 'Sjednaná měsíční záloha' : 'Vypočtená měsíční platba'}} </span>
-                            <span class="supply-point-offer__value text-break">
-                                <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
-                                    {{supplyPointOffer.prepayment | number: '1.0-2'}}&nbsp;Kč<small>&nbsp;</small>
-                                </ng-container>
-                                <ng-template #totalPrice>
-                                    {{supplyPointOffer.totalPrice | number: '1.0-2'}}&nbsp;Kč<small>&nbsp;</small>
-                                </ng-template>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-xl-4"
-                         *ngIf="supplyPointOffer.prepayment || supplyPointOffer.totalPrice">
-                        <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
-                            <span class="supply-point-offer__value-name"> {{isFromContract ? 'Sjednaná roční záloha' : 'Vypočtená roční platba'}} </span>
+                            <span class="supply-point-offer__value-name"> Odhadovaná cena za rok při zadané spotřebě </span>
                             <span class="supply-point-offer__value text-break">
                                 <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
                                     {{supplyPointOffer.prepayment * 12 | number: '1.0-2'}}&nbsp;Kč<small>&nbsp;</small>
