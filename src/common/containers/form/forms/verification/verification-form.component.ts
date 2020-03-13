@@ -74,8 +74,6 @@ export class VerificationFormComponent extends AbstractFormComponent implements 
 
     public submitSms = () => {
         this.resetFormError(false);
-        this.customAction.emit({
-            resend: true,
-        });
+        this.customAction.emit();
     }
 }

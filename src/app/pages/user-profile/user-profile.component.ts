@@ -13,6 +13,7 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IJwtPayload } from 'src/app/services/model/auth.model';
 import { IUserDetailInput } from 'src/common/graphql/models/user.model';
@@ -33,6 +34,8 @@ export class UserProfileComponent extends AbstractComponent {
     public formSent = false;
     public formValues: IJwtPayload;
     public globalError: string[] = [];
+    public oldPhone = this.authService.currentUserValue.phoneNumber;
+    public smsSent = false;
     public profileChanged = false;
 
     constructor(
@@ -67,6 +70,8 @@ export class UserProfileComponent extends AbstractComponent {
                 () => {
                     this.formLoading = false;
                     if (this.profileChanged) {
+                        this.smsSent = false;
+                        this.oldPhone = this.authService.currentUserValue.phoneNumber;
                         this.formSent = true;
                         this.formValues = this.authService.currentUserValue;
                         this.cd.markForCheck();
@@ -85,14 +90,22 @@ export class UserProfileComponent extends AbstractComponent {
     public sendChangePhoneNumberSmsMutation = (phoneNumber: string) => {
         this.userService.sendChangePhoneNumberSmsMutation(phoneNumber)
             .pipe(
-                map(({data}) => data.sendChangePhoneNumberSmsMutation),
+                map(({data}) => data.sendChangePhoneNumberSms),
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                () => {
+                (sendChangePhoneNumberSms) => {
                     this.formLoading = false;
+                    this.smsSent = false;
+                    if (!sendChangePhoneNumberSms) {
+                        this.globalError = [defaultErrorMessage];
+                    } else {
+                        this.smsSent = true;
+                    }
+                    this.cd.markForCheck();
                 },
                 error => {
+                    this.smsSent = false;
                     this.formLoading = false;
                     const { globalError, fieldError } = parseGraphQLErrors(error);
                     this.globalError = globalError;

@@ -1,5 +1,5 @@
 <ng-template #confirmCodeInfoTemplate>
-    <div class="col-12 mb-4 small">
+    <div class="col-12 small">
         Pro ověření výše zadaného telefonního čísla vám byl zaslán ověřovací sms kód.
     </div>
 </ng-template>
@@ -122,8 +122,8 @@
             [smsSent]="smsSent"
             submitLabelText="Uložit"
             [infoTemplate]="confirmCodeInfoTemplate"
-            (submitAction)="processSaveButton($event)"
-            (customAction)="processSaveButton($event)"
+            (submitAction)="processSaveButton($event, true)"
+            (customAction)="processSaveButton($event, false)"
         >
         ></pxe-verification-form>
     </div>

@@ -26,7 +26,10 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
     @Input()
     public formValues = null;
 
+    @Input()
     public oldPhone = '';
+
+    @Input()
     public smsSent = false;
     public phoneNumber = '';
 
@@ -36,7 +39,6 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
         private valueOfFormPipe: ValueOfFormPipe,
     ) {
         super(fb);
-        this.oldPhone = this.authService.currentUserValue.phoneNumber;
     }
 
     ngOnInit() {
@@ -72,10 +74,11 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
         this.form.get('phone').setValue(phone);
     }
 
-    public processSaveButton = (event) => {
-        if (this.oldPhone !== this.phoneNumber && !this.smsSent || R.path('resend', event)) {
+    public processSaveButton = (event, submitValidFormAction = true) => {
+        if (
+            this.oldPhone !== this.phoneNumber && (!submitValidFormAction || !this.smsSent)
+        ) {
             this.customAction.emit(this.form.value.phone);
-            this.smsSent = true;
         } else {
             this.submitValidForm(event);
         }
@@ -84,7 +87,7 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
     public submitValidForm = (event) => {
         const form: IPersonalDataInputForm = {
             ...this.form.value,
-            smsCode: R.path('smsCode', event) ? R.path('smsCode', event) : '',
+            smsCode: event,
             phoneNumber: R.concat(CONSTS.TELEPHONE_PREFIX_CZ, this.form.value.phone),
         };
         this.submitAction.emit(form);
