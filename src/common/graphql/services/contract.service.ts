@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Apollo } from 'apollo-angular';
 
 import * as R from 'ramda';
-import { DEFAULT_QR_CODE_SETTING } from 'src/app/app.constants';
-import { ContractDeleteReason, IQRCodeSetting } from 'src/common/graphql/models/contract';
-import { IOffer } from 'src/common/graphql/models/offer.model';
-import { AllowedOperations, ISupplyPoint, ProgressStatus } from 'src/common/graphql/models/supply.model';
+import { Apollo } from 'apollo-angular';
 
+import {
+    AllowedOperations,
+    ISupplyPoint,
+    ProgressStatus,
+} from 'src/common/graphql/models/supply.model';
 import {
     concludeContractMutation,
     confirmFirstContractViewMutation,
@@ -19,7 +20,16 @@ import {
     unsetContractProlongationMutation,
     updateContractMutation,
 } from 'src/common/graphql/mutation/contract';
-import { getContractTermsQuery, getPaymentInfoQuery } from 'src/common/graphql/queries/contract';
+import {
+    ContractDeleteReason,
+    IQRCodeSetting,
+} from 'src/common/graphql/models/contract';
+import { DEFAULT_QR_CODE_SETTING } from 'src/app/app.constants';
+import {
+    getContractTermsQuery,
+    getPaymentInfoQuery,
+} from 'src/common/graphql/queries/contract';
+import { IOffer } from 'src/common/graphql/models/offer.model';
 import { findSupplyPointOffersQuery } from 'src/common/graphql/queries/offer';
 import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
 

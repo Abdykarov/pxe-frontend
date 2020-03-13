@@ -1,17 +1,23 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    OnInit,
+    ViewChild,
+} from '@angular/core';
+import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
 
 import * as R from 'ramda';
-import { map, takeUntil } from 'rxjs/operators';
-import { RequestsOverviewBannerShow, ROUTES } from 'src/app/app.constants';
-import { DocumentService } from 'src/app/services/document.service';
-import { IDocumentType, IResponseDataDocument } from 'src/app/services/model/document.model';
+import {
+    map,
+    takeUntil,
+} from 'rxjs/operators';
+
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { defaultErrorMessage } from 'src/common/constants/errors.constant';
-import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
-import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import { ContractDeleteReason } from 'src/common/graphql/models/contract';
 import {
     AllowedOperations,
     CommodityType,
@@ -21,14 +27,27 @@ import {
     ISupplyPointPowerAttributes,
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
+import { ContractActions } from '../models/supply-point-detail.model';
+import { ContractDeleteReason } from 'src/common/graphql/models/contract';
 import { ContractService } from 'src/common/graphql/services/contract.service';
-import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { defaultErrorMessage } from 'src/common/constants/errors.constant';
+import { DocumentService } from 'src/app/services/document.service';
+import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
+import {
+    IDocumentType,
+    IResponseDataDocument,
+} from 'src/app/services/model/document.model';
+import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
     parseGraphQLErrors,
     parseRestAPIErrors,
     scrollToElementFnc,
 } from 'src/common/utils';
-import { ContractActions } from '../models/supply-point-detail.model';
+import {
+    RequestsOverviewBannerShow,
+    ROUTES,
+} from 'src/app/app.constants';
+import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
     templateUrl: './supply-point-detail.component.html',

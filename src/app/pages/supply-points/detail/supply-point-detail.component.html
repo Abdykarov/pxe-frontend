@@ -18,11 +18,11 @@
         <a [class.link--disabled]="documentLoading" (click)="saveDocument(contract.contractId, documentType.UNSET_PROLONGATION)">zde</a>.
     </div>
 </ng-template>
-<ng-template #transferSupplyPointTemplate let-contract="contract">
-    <div class="col-12 mb-4 small">
-        Kliknutím na tlačítko „Převést“ převedete....
-    </div>
-</ng-template>
+<!--<ng-template #transferSupplyPointTemplate let-contract="contract">-->
+    <!--<div class="col-12 mb-4 small">-->
+        <!--Kliknutím na tlačítko „Převést“ převedete....-->
+    <!--</div>-->
+<!--</ng-template>-->
 <ng-template #contractActionsTemplate>
     <div #contractActionsWrapper>
         <div *ngIf="supplyPoint | isAllowedOperation: allowedOperations.UNSET_AUTOMATIC_PROLONGATION"
