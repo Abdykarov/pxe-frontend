@@ -160,6 +160,7 @@ export const supplyPointFragment = gql`
                     },
                     deposit,
                 },
+                prolong,
             },
             progressStatus,
             allowedOperations,

@@ -60,7 +60,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     public contractEndTypeTranslateMap = CONTRACT_END_TYPE_TRANSLATE_MAP;
     public suppliers = [];
     public subjectName = '';
-    public supplyPointContractEndType = CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION;
+    public supplyPointContractEndTypes = CONTRACT_END_TYPE;
     public setFormByCommodity = this.setFormFields;
     public timeToContractEndPeriodMap = TIME_TO_CONTRACT_END_PERIOD_MAP;
     public today = new Date().toISOString();

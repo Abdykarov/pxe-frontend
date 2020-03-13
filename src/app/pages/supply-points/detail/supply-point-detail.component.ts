@@ -1,22 +1,17 @@
-import {
-    ActivatedRoute,
-    Router,
-} from '@angular/router';
-import {
-    ChangeDetectorRef,
-    Component,
-    ElementRef,
-    OnInit,
-    ViewChild,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import * as R from 'ramda';
-import {
-    map,
-    takeUntil,
-} from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
+import { RequestsOverviewBannerShow, ROUTES } from 'src/app/app.constants';
+import { DocumentService } from 'src/app/services/document.service';
+import { IDocumentType, IResponseDataDocument } from 'src/app/services/model/document.model';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { defaultErrorMessage } from 'src/common/constants/errors.constant';
+import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
+import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
+import { ContractDeleteReason } from 'src/common/graphql/models/contract';
 import {
     AllowedOperations,
     CommodityType,
@@ -26,27 +21,14 @@ import {
     ISupplyPointPowerAttributes,
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
-import { defaultErrorMessage } from 'src/common/constants/errors.constant';
-import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
-import { ContractActions } from '../models/supply-point-detail.model';
-import { ContractDeleteReason } from 'src/common/graphql/models/contract';
 import { ContractService } from 'src/common/graphql/services/contract.service';
-import { DocumentService } from 'src/app/services/document.service';
-import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import {
-    IDocumentType,
-    IResponseDataDocument,
-} from 'src/app/services/model/document.model';
+import { SupplyService } from 'src/common/graphql/services/supply.service';
 import {
     parseGraphQLErrors,
     parseRestAPIErrors,
     scrollToElementFnc,
 } from 'src/common/utils';
-import {
-    RequestsOverviewBannerShow,
-    ROUTES,
-} from 'src/app/app.constants';
-import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { ContractActions } from '../models/supply-point-detail.model';
 
 @Component({
     templateUrl: './supply-point-detail.component.html',
@@ -147,6 +129,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
                 },
                 (error) => {
                     this.formLoading = false;
+                    this.formSent = false;
                     const { fieldError, globalError } = parseGraphQLErrors(error);
                     this.fieldError = fieldError;
                     this.globalError = globalError;
@@ -226,6 +209,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
         );
         } else {
             this.contractService.unsetContractProlongation(
+                this.supplyPoint.id,
                 this.supplyPoint.contract.contractId,
                 smsCode,
             )
@@ -233,21 +217,16 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
                 takeUntil(
                     this.destroy$,
                 ),
-                map(({data}) => data.setContractProlongation),
+                map(({data}) => data.unsetContractProlongation),
             )
             .subscribe(
                 (unsetContractProlongation: boolean) => {
                     if (unsetContractProlongation) {
-                        this.router.navigate([
-                                ROUTES.ROUTER_REQUESTS,
-                            ],
-                            {
-                                state: {
-                                    requestsOverviewBannerShow: this.contractAction === ContractActions.LEAVE_CONTRACT ?
-                                        RequestsOverviewBannerShow.LEAVE_CONTRACT : RequestsOverviewBannerShow.TERMINATE_CONTRACT,
-                                },
-                            },
-                        );
+                        this.globalError = [];
+                        this.formSent = true;
+                        this.contractAction = ContractActions.NONE;
+                        this.formLoading = false;
+                        scrollToElementFnc('top');
                     } else {
                         this.globalError = [defaultErrorMessage];
                         this.formLoading = false;
@@ -283,12 +262,12 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
         this.globalError = [];
     }
 
-    public transferSupplyPoint = () => {
-        this.contractAction = ContractActions.TRANSFER_SUPPLY_POINT;
-        this.smsSent = null;
-        this.fieldError = {};
-        this.globalError = [];
-    }
+    // public transferSupplyPoint = () => {
+    //     this.contractAction = ContractActions.TRANSFER_SUPPLY_POINT;
+    //     this.smsSent = null;
+    //     this.fieldError = {};
+    //     this.globalError = [];
+    // }
 
     public interruptAutomaticProlongation = () => {
         this.contractAction = ContractActions.UNSET_PROLONGATION;

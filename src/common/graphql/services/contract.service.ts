@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Apollo } from 'apollo-angular';
 
 import * as R from 'ramda';
-import { Apollo } from 'apollo-angular';
+import { DEFAULT_QR_CODE_SETTING } from 'src/app/app.constants';
+import { ContractDeleteReason, IQRCodeSetting } from 'src/common/graphql/models/contract';
+import { IOffer } from 'src/common/graphql/models/offer.model';
+import { AllowedOperations, ISupplyPoint, ProgressStatus } from 'src/common/graphql/models/supply.model';
 
 import {
     concludeContractMutation,
@@ -15,21 +19,9 @@ import {
     unsetContractProlongationMutation,
     updateContractMutation,
 } from 'src/common/graphql/mutation/contract';
-import {
-    ContractDeleteReason,
-    IQRCodeSetting,
-} from 'src/common/graphql/models/contract';
-import { DEFAULT_QR_CODE_SETTING } from 'src/app/app.constants';
+import { getContractTermsQuery, getPaymentInfoQuery } from 'src/common/graphql/queries/contract';
 import { findSupplyPointOffersQuery } from 'src/common/graphql/queries/offer';
-import {
-    getContractTermsQuery,
-    getPaymentInfoQuery,
-} from 'src/common/graphql/queries/contract';
-import {
-    ISupplyPoint,
-    ProgressStatus,
-} from 'src/common/graphql/models/supply.model';
-import { IOffer } from 'src/common/graphql/models/offer.model';
+import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
 
 @Injectable({
     providedIn: 'root',
@@ -251,12 +243,38 @@ export class ContractService {
             mutation: confirmFirstContractViewMutation,
         })
 
-    public unsetContractProlongation = (contractId: string, smsCode: string) => this.apollo
-        .mutate({
+    public unsetContractProlongation = (supplyPointId: string, contractId: string, smsCode: string) => this.apollo
+        .mutate<any>({
             mutation: unsetContractProlongationMutation,
             variables: {
                 contractId,
                 smsCode,
+            },
+            update: (cache, { data }) => {
+                const { getSupplyPoint } = cache.readQuery(
+                    {
+                        query: getSupplyPointQuery,
+                        variables: {
+                            supplyPointId,
+                        },
+                    });
+
+                getSupplyPoint.contract.prolong = false;
+                console.log(getSupplyPoint.allowedOperations);
+
+                getSupplyPoint.allowedOperations = getSupplyPoint.allowedOperations.filter(
+                    (allowedOperation: AllowedOperations) => allowedOperation !== AllowedOperations.UNSET_AUTOMATIC_PROLONGATION,
+                );
+
+                console.log(getSupplyPoint.allowedOperations);
+
+                cache.writeQuery({
+                    query: getSupplyPointQuery,
+                    data: { getSupplyPoint },
+                    variables: {
+                        supplyPointId,
+                    },
+                });
             },
         })
 }

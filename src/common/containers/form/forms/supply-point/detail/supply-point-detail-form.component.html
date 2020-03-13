@@ -140,13 +140,17 @@
                         </div>
                         <span class="perex">{{supplyPoint.circuitBreaker.help || supplyPoint.circuitBreaker.description}}</span>
                     </div>
-                    <!--Ponechano pro pripadne dalsi upravy-->
-                    <div *ngIf="supplyPoint.lastVersionOfSupplyPoint && contractEndType.CONTRACT_END_TERM_WITH_PROLONGATION === supplyPointContractEndType"
+                    <div *ngIf="supplyPoint.lastVersionOfSupplyPoint"
                         class="col-12 mb-5">
                         <div class="mb-1">
                             <small>Ukončení platnosti aktuální smlouvy</small>
                         </div>
-                        <span class="perex">{{contractEndTypeTranslateMap[supplyPointContractEndType]}}</span>
+                        <span class="perex">{{contractEndTypeTranslateMap[
+                            supplyPoint?.contract?.prolong ?
+                                supplyPointContractEndTypes.CONTRACT_END_TERM_WITH_PROLONGATION :
+                                supplyPointContractEndTypes.CONTRACT_END_TERM
+                            ]}}
+                        </span>
                     </div>
                     <div *ngIf="(supplyPoint | pathValue:['contract', 'deliveryTo'])"
                          [class.mb-5]="supplyPoint.contract.deliveryTo"
@@ -156,14 +160,14 @@
                         </div>
                         <span class="perex">{{supplyPoint.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}</span>
                     </div>
-                    <div [class.mb-5]="!supplyPoint.lastVersionOfSupplyPoint && contractEndType.CONTRACT_END_TERM_WITH_PROLONGATION === supplyPointContractEndType"
+                    <div [class.mb-5]="!supplyPoint.lastVersionOfSupplyPoint"
                          class="col-12">
                         <div class="mb-1">
                             <small>Výpovědní lhůta</small>
                         </div>
                         <span class="perex">{{timeToContractEnd}} {{timeToContractEnd | plural: timeToContractEndPeriodMap[timeToContractEndPeriod]}}</span>
                     </div>
-                    <div *ngIf="!supplyPoint.lastVersionOfSupplyPoint && contractEndType.CONTRACT_END_TERM_WITH_PROLONGATION === supplyPointContractEndType"
+                    <div *ngIf="!supplyPoint.lastVersionOfSupplyPoint"
                          class="col-12">
                         <div class="mb-1">
                             <small>Tato smlouva bude nahrazena smlouvou budouci.</small>
