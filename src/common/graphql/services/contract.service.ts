@@ -260,13 +260,10 @@ export class ContractService {
                     });
 
                 getSupplyPoint.contract.prolong = false;
-                console.log(getSupplyPoint.allowedOperations);
 
-                getSupplyPoint.allowedOperations = getSupplyPoint.allowedOperations.filter(
+                getSupplyPoint.allowedOperations = [...getSupplyPoint.allowedOperations.filter(
                     (allowedOperation: AllowedOperations) => allowedOperation !== AllowedOperations.UNSET_AUTOMATIC_PROLONGATION,
-                );
-
-                console.log(getSupplyPoint.allowedOperations);
+                )];
 
                 cache.writeQuery({
                     query: getSupplyPointQuery,
