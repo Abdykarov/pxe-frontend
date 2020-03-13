@@ -188,47 +188,83 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
                 smsCode,
                 this.contractAction === ContractActions.LEAVE_CONTRACT ? ContractDeleteReason.LEAVING : ContractDeleteReason.TERMINATION,
             )
-                .pipe(
-                    takeUntil(
-                        this.destroy$,
-                    ),
-                    map(({data}) => data.deleteSignedContract),
-                )
-                .subscribe(
-                    (deleteSignedContract: boolean) => {
-                        if (deleteSignedContract) {
-                            this.router.navigate([
-                                    ROUTES.ROUTER_REQUESTS,
-                                ],
-                                {
-                                    state: {
-                                        requestsOverviewBannerShow: this.contractAction === ContractActions.LEAVE_CONTRACT ?
-                                            RequestsOverviewBannerShow.LEAVE_CONTRACT : RequestsOverviewBannerShow.TERMINATE_CONTRACT,
-                                    },
+            .pipe(
+                takeUntil(
+                    this.destroy$,
+                ),
+                map(({data}) => data.deleteSignedContract),
+            )
+            .subscribe(
+                (deleteSignedContract: boolean) => {
+                    if (deleteSignedContract) {
+                        this.router.navigate([
+                                ROUTES.ROUTER_REQUESTS,
+                            ],
+                            {
+                                state: {
+                                    requestsOverviewBannerShow: this.contractAction === ContractActions.LEAVE_CONTRACT ?
+                                        RequestsOverviewBannerShow.LEAVE_CONTRACT : RequestsOverviewBannerShow.TERMINATE_CONTRACT,
                                 },
-                            );
-                        } else {
-                            this.globalError = [defaultErrorMessage];
-                            this.formLoading = false;
-                            this.cd.markForCheck();
-                        }
-                    },
-                    (error) => {
+                            },
+                        );
+                    } else {
+                        this.globalError = [defaultErrorMessage];
                         this.formLoading = false;
-                        const { globalError , fieldError } = parseGraphQLErrors(error);
-                        this.globalError = globalError;
-                        this.fieldError = fieldError;
-                        if (Object.keys(this.fieldError).length) {
-                            scrollToElementFnc(this.contractActionsWrapper.nativeElement);
-                        }
                         this.cd.markForCheck();
-                    },
+                    }
+                },
+                (error) => {
+                    this.formLoading = false;
+                    const { globalError , fieldError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.fieldError = fieldError;
+                    if (Object.keys(this.fieldError).length) {
+                        scrollToElementFnc(this.contractActionsWrapper.nativeElement);
+                    }
+                    this.cd.markForCheck();
+                },
         );
         } else {
-            // this.contractService.setContractProlongation(
-            //     this.supplyPoint.contract.contractId,
-            //     smsCode,
-            // )
+            this.contractService.unsetContractProlongation(
+                this.supplyPoint.contract.contractId,
+                smsCode,
+            )
+            .pipe(
+                takeUntil(
+                    this.destroy$,
+                ),
+                map(({data}) => data.setContractProlongation),
+            )
+            .subscribe(
+                (unsetContractProlongation: boolean) => {
+                    if (unsetContractProlongation) {
+                        this.router.navigate([
+                                ROUTES.ROUTER_REQUESTS,
+                            ],
+                            {
+                                state: {
+                                    requestsOverviewBannerShow: this.contractAction === ContractActions.LEAVE_CONTRACT ?
+                                        RequestsOverviewBannerShow.LEAVE_CONTRACT : RequestsOverviewBannerShow.TERMINATE_CONTRACT,
+                                },
+                            },
+                        );
+                    } else {
+                        this.globalError = [defaultErrorMessage];
+                        this.formLoading = false;
+                        this.cd.markForCheck();
+                    }
+                },
+                (error) => {
+                    this.formLoading = false;
+                    const { globalError , fieldError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.fieldError = fieldError;
+                    if (Object.keys(this.fieldError).length) {
+                        scrollToElementFnc(this.contractActionsWrapper.nativeElement);
+                    }
+                    this.cd.markForCheck();
+                },
+            );
         }
         this.cd.markForCheck();
     }
