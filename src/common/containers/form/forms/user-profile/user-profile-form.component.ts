@@ -75,9 +75,7 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
     }
 
     public processSaveButton = (event, submitValidFormAction = true) => {
-        if (
-            this.oldPhone !== this.phoneNumber && (!submitValidFormAction || !this.smsSent)
-        ) {
+        if (this.oldPhone !== this.phoneNumber && (!submitValidFormAction || !this.smsSent)) {
             this.customAction.emit(this.form.value.phone);
         } else {
             this.submitValidForm(event);
@@ -88,7 +86,7 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
         const form: IPersonalDataInputForm = {
             ...this.form.value,
             smsCode: event,
-            phoneNumber: R.concat(CONSTS.TELEPHONE_PREFIX_CZ, this.form.value.phone),
+            phoneNumber: this.phoneNumber,
         };
         this.submitAction.emit(form);
     }
