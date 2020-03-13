@@ -182,7 +182,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     public submitVerification = (smsCode: string) => {
         this.formLoading = true;
         this.globalError = [];
-        if (this.contractAction === ContractActions.UNSET_PROLONGATION ) {
+        if (this.contractAction !== ContractActions.UNSET_PROLONGATION ) {
             this.contractService.deleteSignedContract(
                 this.supplyPoint.contract.contractId,
                 smsCode,
@@ -225,11 +225,10 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
                     },
         );
         } else {
-            this.contractService.setContractProlongation(
-                this.supplyPoint.contract.contractId,
-                smsCode,
-            )
-
+            // this.contractService.setContractProlongation(
+            //     this.supplyPoint.contract.contractId,
+            //     smsCode,
+            // )
         }
         this.cd.markForCheck();
     }
