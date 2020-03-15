@@ -30,7 +30,7 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
         const token = authService.getToken();
         operation.setContext({
             headers: {
-                Authorization: token ? `Bearer ${token}` : '',
+                ...(!!token) && {Authorization: `Bearer ${token}`},
                 'X-API-Key': `${environment.x_api_key}`,
             },
         });

@@ -129,6 +129,8 @@ export class LoginComponent extends AbstractComponent {
 
     public resetPassword = (login: string) => {
         this.formLoading = true;
+
+        this.authService.cleanUserData();
         this.userService.resetPassword(login)
             .pipe(
                 takeUntil(this.destroy$),
