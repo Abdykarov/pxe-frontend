@@ -28,7 +28,7 @@ export class AccordionBenefitComponent {
     public setActive = (index: Number) => {
         R.mapObjIndexed((item: IAccordionItem, key: string) => {
             item.isActive = index === parseInt(key, 10) && !item.isActive;
-        }, this.accordionItems)
+        }, this.accordionItems);
     }
 
     public closeActive = (item: IAccordionItem) => {
