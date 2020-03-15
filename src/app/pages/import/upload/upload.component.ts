@@ -140,7 +140,6 @@ export class UploadComponent extends AbstractComponent implements OnInit {
                         });
                     }
                 }
-
             } else if (status === 401) {
                 this.authService.logoutForced();
             } else if (status === 500) {
