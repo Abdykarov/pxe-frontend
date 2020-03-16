@@ -43,9 +43,10 @@ export class ApiInterceptor implements HttpInterceptor {
         if (request.url.match(/api\//) &&
             request.url.indexOf('login') < 0 &&
             request.url.indexOf('refresh') < 0) {
+                const token = this.authService.getToken();
                 resultRequest = request.clone({
                     headers: new HttpHeaders({
-                        'Authorization': 'Bearer ' + this.authService.getToken(),
+                        ...(!!token) && {Authorization: `Bearer ${token}`},
                         'Content-Type': 'application/json',
                         'X-API-Key': `${environment.x_api_key}`,
                     }),
