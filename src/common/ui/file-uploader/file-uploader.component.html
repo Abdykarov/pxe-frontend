@@ -22,7 +22,7 @@
         ng2FileSelect
         type="file"
         [uploader]="uploader"
-        (fileSelected)="fileSelectAction.emit($event)"
+        (fileSelected)="fileSelectAction.emit(uploader)"
         hidden
     />
     <label for="file-upload" class="btn btn-primary drop-zone__control">

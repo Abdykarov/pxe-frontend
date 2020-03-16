@@ -159,6 +159,7 @@ export class UploadComponent extends AbstractComponent implements OnInit {
             const countOfFiles: number = R.path(['queue', 'length'], fileUploader) || 0;
             if (countOfFiles === 0) {
                 this.fileErrors = [defaultErrorMessage];
+                this.fileUploader.clearQueue();
             } else if (countOfFiles <= CONSTS.VALIDATORS.MAX_IMPORT_FILES) {
                 this.fileErrors = [];
                 this.loading = true;
