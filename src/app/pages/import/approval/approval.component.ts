@@ -187,7 +187,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
         this.countOfPowerOffers = countOfPowerOffers;
 
         if (this.countOfPowerOffers === 0 || this.countOfGasOffers === 0) {
-            this.router.navigate([this.countOfPowerOffers ? this.routeGas : this.routePower], {
+            this.router.navigate([this.countOfPowerOffers ? this.routePower : this.routeGas], {
                 state: {
                     commodityTypeAfterApprove: this.commodityTypeAfterApprove,
                     offers: this.tableRows,
