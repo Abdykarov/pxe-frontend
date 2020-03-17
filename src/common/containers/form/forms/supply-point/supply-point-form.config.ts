@@ -8,7 +8,6 @@ import {
     CONSTS,
     CONTRACT_END_TYPE,
     UNIT_OF_PRICES,
-    UNIT_OF_PRICES_OPTIONS,
 } from 'src/app/app.constants';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
@@ -124,7 +123,7 @@ export const formFields: IForm = {
                 Validators.required,
                 CustomValidators.isNumber(),
                 CustomValidators.minValue(0),
-                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
             ],
         ],
         annualConsumptionNTUnit: [
@@ -139,7 +138,7 @@ export const formFields: IForm = {
                 Validators.required,
                 CustomValidators.isNumber(),
                 CustomValidators.minValue(0),
-                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
             ],
         ],
         annualConsumptionVTUnit: [
@@ -154,13 +153,7 @@ export const formFields: IForm = {
                 Validators.required,
                 CustomValidators.isNumber(),
                 CustomValidators.minValue(0),
-                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
-            ],
-        ],
-        annualConsumptionUnit: [
-            UNIT_OF_PRICES.KWH,
-            [
-                Validators.required,
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
             ],
         ],
         expirationDate: [
@@ -346,8 +339,8 @@ export const supplyPointAllowedFields: ICommodityTypeFields = {
         'name',
         'eic',
         'address',
-        'annualConsumption',
-        'annualConsumptionUnit',
+        'annualConsumptionVT',
+        'annualConsumptionVTUnit',
         'expirationDate',
         'contractEndTypeId',
         'timeToContractEnd',

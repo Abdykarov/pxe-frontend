@@ -55,6 +55,8 @@ export const supplyPointFragment = gql`
             },
             annualConsumptionNT,
             annualConsumptionVT,
+            annualConsumptionNTUnit,
+            annualConsumptionVTUnit,
             expirationDate,
             subject{
                 type,

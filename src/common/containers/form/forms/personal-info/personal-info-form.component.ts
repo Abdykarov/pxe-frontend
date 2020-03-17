@@ -94,7 +94,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
                             true,
                             false,
                         ),
-                        CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
+                        CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
                     ]);
         }
 

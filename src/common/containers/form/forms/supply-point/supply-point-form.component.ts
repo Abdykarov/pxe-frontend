@@ -37,7 +37,6 @@ import {
     SUPPLY_POINT_EDIT_TYPE,
     TypeOfAnnualConsumptionUnitMapping,
     UNIT_OF_PRICES,
-    UNIT_OF_PRICES_OPTIONS,
 } from 'src/app/app.constants';
 import {
     CommodityType,
@@ -80,6 +79,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public codeLists;
     public codeLists$: BehaviorSubject<any> = new BehaviorSubject([]);
     public commodityType = CommodityType.POWER;
+    public CommodityTypes = CommodityType;
     public commodityTypeOptions: Array<IOption> = COMMODITY_TYPE_OPTIONS;
     public contractEndType = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT;
     public distributionRateType: string = CODE_LIST.DIST_RATE_INDIVIDUAL;
@@ -90,7 +90,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public subjectTypeOptions: Array<IOption> = SUBJECT_TYPE_OPTIONS;
     public suppliers = [];
     public suppliers$: BehaviorSubject<any> = new BehaviorSubject([]);
-    public UNIT_OF_PRICES_OPTIONS = UNIT_OF_PRICES_OPTIONS;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -129,19 +128,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                     ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_VT,
                     ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_VT_UNIT,
                     annualConsumptionVTUnit,
-                );
-            });
-
-        this.form.get('annualConsumptionUnit')
-            .valueChanges
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe((annualConsumptionUnit: UNIT_OF_PRICES) => {
-                this.detectChangesForAnnualConsumption(
-                    ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION,
-                    ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_UNIT,
-                    annualConsumptionUnit,
                 );
             });
 
@@ -255,7 +241,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                         Validators.required,
                         CustomValidators.isNumber(),
                         CustomValidators.minValue(0),
-                        CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
+                        CustomValidators.totalDigitLengthBeforeDecimalPoint(
+                            CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION,
+                        ),
                     ]);
             this.form.controls[typeOfAnnualConsumption].setValue(this.operationOnNumber(annualAnnualConsumption, (num) => num * 1000));
         } else {
@@ -265,7 +253,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                         Validators.required,
                         CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_ANNUAL_CONSUMPTION),
                         CustomValidators.minValue(0),
-                        CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
+                        CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
                     ]);
             this.form.controls[typeOfAnnualConsumption].setValue(this.operationOnNumber(annualAnnualConsumption, (num) => num / 1000));
         }
@@ -313,7 +301,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         let timeToContractEndPeriodId = null;
         let annualConsumptionNTUnit = null;
         let annualConsumptionVTUnit = null;
-        let annualConsumptionUnit = null;
 
         if (!R.isEmpty(this.formValues)) {
             commodityType = this.formValues.commodityType;
@@ -332,12 +319,24 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             distributionRateId = this.formValues.distributionRate && this.formValues.distributionRate.code;
             circuitBreakerId = this.formValues.circuitBreaker && this.formValues.circuitBreaker.code;
             phasesId = this.formValues.phases && this.formValues.phases.code;
-            annualConsumptionNT = this.formValues.annualConsumptionNT && this.formValues.annualConsumptionNT.toString().replace('.', ',');
-            annualConsumptionVT = this.formValues.annualConsumptionVT && this.formValues.annualConsumptionVT.toString().replace('.', ',');
-            annualConsumption = this.formValues.annualConsumptionVT && this.formValues.annualConsumptionVT.toString().replace('.', ',');
             annualConsumptionNTUnit = this.formValues.annualConsumptionNTUnit;
             annualConsumptionVTUnit = this.formValues.annualConsumptionVTUnit;
-            annualConsumptionUnit = this.formValues.annualConsumptionVTUnit;
+            annualConsumptionVT = this.formValues.annualConsumptionVT;
+            annualConsumptionNT = this.formValues.annualConsumptionNT;
+            annualConsumption = this.formValues.annualConsumptionVT;
+
+            if (annualConsumptionVTUnit === UNIT_OF_PRICES.KWH) {
+                annualConsumptionVT *= 1000;
+            }
+
+            if (annualConsumptionNTUnit === UNIT_OF_PRICES.KWH) {
+                annualConsumptionNT *= 1000;
+            }
+
+            annualConsumptionNT = this.normalizationAnnualConsumption(annualConsumptionNT);
+            annualConsumptionVT = this.normalizationAnnualConsumption(annualConsumptionVT);
+            annualConsumption = this.normalizationAnnualConsumption(annualConsumption);
+
             if (this.editMode === SUPPLY_POINT_EDIT_TYPE.NORMAL) {
                 expirationDate = expirationDateFromSupplyPoint;
                 contractEndTypeId = this.formValues.contractEndType && this.formValues.contractEndType.code;
@@ -351,7 +350,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             }
             this.form.controls['annualConsumptionNTUnit'].setValue(annualConsumptionNTUnit);
             this.form.controls['annualConsumptionVTUnit'].setValue(annualConsumptionVTUnit);
-            this.form.controls['annualConsumptionUnit'].setValue(annualConsumptionUnit);
         }
 
         const filteredContractEndTypeId = contractEndTypeId === CONTRACT_END_TYPE.CONTRACT_END_TERMINATE ? null : contractEndTypeId;
@@ -379,6 +377,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             this.form.controls['ownTerminate'].setValue(true);
         }
     }
+
+    public normalizationAnnualConsumption = (annualConsumption: string | number): string =>
+        annualConsumption && annualConsumption.toString().replace('.', ',')
 
     public setContractEndFields = (type = null) => {
         const contractEndType = this.getFieldValue('contractEndTypeId') || type;
@@ -414,20 +415,17 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         if (!R.isNil(form.annualConsumptionVT)) {
             form.annualConsumptionVT = parseFloat(form.annualConsumptionVT.toString().replace(',', '.'));
         }
-        if (!R.isNil(form.annualConsumption)) {
-            form.annualConsumption = parseFloat(form.annualConsumption.toString().replace(',', '.'));
-        }
         if (this.contractEndType === CONTRACT_END_TYPE.CONTRACT_END_TERMINATE) {
             form.contractEndTypeId = CONTRACT_END_TYPE.CONTRACT_END_TERMINATE;
         }
-        if (form.annualConsumptionUnit === UNIT_OF_PRICES.KWH) {
-            form.annualConsumption = form.annualConsumption / 1000;
+        if (form.commodityType === CommodityType.GAS) {
+            form.annualConsumption = form.annualConsumptionVT / 1000;
+        } else {
+            form.annualConsumption = form.annualConsumptionVT;
         }
+
         if (form.annualConsumptionVTUnit === UNIT_OF_PRICES.KWH) {
             form.annualConsumptionVT = form.annualConsumptionVT / 1000;
-        }
-        if (form.annualConsumptionNTUnit === UNIT_OF_PRICES.KWH) {
-            form.annualConsumptionNT = form.annualConsumptionNT / 1000;
         }
 
         this.submitAction.emit(form);

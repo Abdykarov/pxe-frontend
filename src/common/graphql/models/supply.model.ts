@@ -135,7 +135,6 @@ export interface ISupplyPoint {
     progressStatus: ProgressStatus;
     annualConsumptionNTUnit?: string;
     annualConsumptionVTUnit?: string;
-    annualConsumptionUnit?: string;
 }
 
 export enum ProgressStatus {
@@ -164,7 +163,6 @@ export interface ISupplyPointFormData {
     annualConsumption?: number;
     annualConsumptionNTUnit?: string;
     annualConsumptionVTUnit?: string;
-    annualConsumptionUnit?: string;
 }
 
 export interface ISupplyPointStatistic {

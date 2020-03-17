@@ -61,7 +61,8 @@ export const CONSTS = {
     },
     VALIDATORS: {
         ADULTHOOD_AGE: 18,
-        MAX_DIGIT_BEFORE_DECIMAL_POINT: 7,
+        MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION: 10,
+        MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT: 7,
         MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT: 2,
         MAX_DIGIT_AFTER_DECIMAL_POINT_ANNUAL_CONSUMPTION: 3,
         MAX_LENGTH: {
@@ -200,6 +201,7 @@ export enum INavigationItemType {
 }
 
 export const CODE_LIST = {
+    ANNUAL_CONSUMPTION_UNITS: 'UNITS',
     DIST_RATE: 'DSTP4R',
     DIST_RATE_COMPANY: 'DSTSA1',
     DIST_RATE_INDIVIDUAL: 'DSTSA2',
@@ -217,6 +219,7 @@ export const CODE_LIST = {
 };
 
 export const CODE_LIST_TYPES = [
+    CODE_LIST.ANNUAL_CONSUMPTION_UNITS,
     CODE_LIST.DIST_RATE,
     CODE_LIST.DIST_RATE_INDIVIDUAL,
     CODE_LIST.DIST_RATE_COMPANY,
@@ -385,19 +388,6 @@ export enum UNIT_OF_PRICES {
     KWH = 'kWh',
 }
 
-export const UNIT_OF_PRICES_OPTIONS: Array<IOption> = [
-    {
-        'label': UNIT_OF_PRICES.MWH,
-        'value': UNIT_OF_PRICES.MWH,
-        'key': UNIT_OF_PRICES.MWH,
-    },
-    {
-        'label': UNIT_OF_PRICES.KWH,
-        'value': UNIT_OF_PRICES.KWH,
-        'key': UNIT_OF_PRICES.KWH,
-    },
-];
-
 export const REGIONS: Array<IOption> = [
     {
         'label': 'Hlavní město Praha',
@@ -488,11 +478,10 @@ export enum ANNUAL_CONSUMPTION_TYPES {
 export enum ANNUAL_CONSUMPTION_UNIT_TYPES {
     ANNUAL_CONSUMPTION_NT_UNIT = 'annualConsumptionNTUnit',
     ANNUAL_CONSUMPTION_VT_UNIT = 'annualConsumptionVTUnit',
-    ANNUAL_CONSUMPTION_UNIT = 'annualConsumptionUnit',
 }
 
 export const TypeOfAnnualConsumptionUnitMapping =  {
     ANNUAL_CONSUMPTION_NT_UNIT: 'prevAnnualConsumptionNTUnit',
     ANNUAL_CONSUMPTION_UNIT: 'prevAnnualConsumptionUnit',
     ANNUAL_CONSUMPTION_VT_UNIT: 'prevAnnualConsumptionVTUnit',
-}
+};
