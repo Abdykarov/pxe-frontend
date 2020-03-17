@@ -47,7 +47,8 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import {
     convertArrayToObject,
-    convertDateToSendFormatFnc, CustomValidators, isUserName,
+    convertDateToSendFormatFnc,
+    CustomValidators,
     transformCodeList,
     transformSuppliers,
 } from 'src/common/utils';
