@@ -196,7 +196,7 @@
                 </div>
                 <div class="col-12 col-md-7 pr-md-1">
                     <lnd-form-field
-                        customTypeClass="pt-0"
+                        label="spotřeba"
                         [formControl]="form.controls.annualConsumptionNT"
                         (focus)="fieldWrapperFocus('annualConsumptionNT')"
                         (blur)="fieldWrapperBlur()"
@@ -217,6 +217,7 @@
                         [showErrorMessage]="false"
                         [options]="codeLists && codeLists[codeList.ANNUAL_CONSUMPTION_UNITS]"
                         [clearable]="false"
+                        label="jednotka"
                         [parentForm]="form"
                         [selectName]="'annualConsumptionNTUnit'"
                         [success]="form.controls.annualConsumptionNTUnit.valid && (form.controls.annualConsumptionNTUnit.touched || formError.annualConsumptionNTUnit)"
@@ -239,7 +240,7 @@
                 </div>
                 <div class="col-12 col-md-7 pr-md-1">
                     <lnd-form-field
-                        customTypeClass="pt-0"
+                        label="spotřeba"
                         [formControl]="form.controls.annualConsumptionVT"
                         (focus)="fieldWrapperFocus('annualConsumptionVT')"
                         (blur)="fieldWrapperBlur()"
@@ -251,6 +252,7 @@
                 </div>
                 <div class="col-12 col-md-5 pl-md-1">
                     <lnd-select
+                        label="jednotka"
                         [appendButtonIcon]="helpDocuments && helpDocuments[commodityType === CommodityTypes.POWER ? 'annualConsumptionVT' : 'annualConsumption'] ? 'icon--info' : null"
                         (appendButtonAction)="showHelp(commodityType === CommodityTypes.POWER ? 'annualConsumptionVT' : 'annualConsumption', commodityType === CommodityTypes.POWER ? 'Roční spotřeba - vysoký tarif' : 'Roční spotřeba')"
                         [id]="'annualConsumptionVTUnit'"
