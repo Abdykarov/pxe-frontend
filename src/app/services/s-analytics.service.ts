@@ -42,7 +42,7 @@ export class SAnalyticsService {
         this.downloadSAnalytics();
         sa('create', environment.sAnalyticsTId);
         this.registrationApplication();
-        sa('send', 'pageview');
+        this.pageView();
         this.installed = true;
     }
 
@@ -69,6 +69,8 @@ export class SAnalyticsService {
         const applicationWebData = {
             tid: environment.sAnalyticsTId,
             applicationId: sa('get', 'userInfo').said,
+            sa: sa('get', 'userInfo').sa,
+            said: sa('get', 'userInfo').said,
             clientTimestamp: new Date().getTime(),
             loanInfo,
             borrower,
@@ -128,6 +130,13 @@ export class SAnalyticsService {
         }
 
         sa('include', 's-form');
+    }
+
+    public sFormStart = () => {
+        if (!this.canUseSAnalytics()) {
+            return;
+        }
+
         sa('s-form:start');
     }
 
@@ -159,7 +168,7 @@ export class SAnalyticsService {
             return;
         }
 
-        sa('s-form:click', {event });
+        sa('s-form:click', {event});
     }
 
     public sFormSubmit = (event) => {
@@ -208,6 +217,10 @@ export class SAnalyticsService {
         }
 
         sa('s-biometrics:blur', { event });
+    }
+
+    public pageView = () => {
+        sa('send', 'pageview');
     }
 
     private downloadSAnalytics = () => {

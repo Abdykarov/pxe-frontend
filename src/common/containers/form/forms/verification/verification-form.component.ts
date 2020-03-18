@@ -1,6 +1,7 @@
 import {
     Component,
     Input,
+    OnDestroy,
     TemplateRef,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
@@ -8,13 +9,14 @@ import { FormBuilder } from '@angular/forms';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { formFields } from './verification-form.config';
 import { IContract } from 'src/common/graphql/models/contract';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Component({
     selector: 'pxe-verification-form',
     templateUrl: './verification-form.component.html',
     styleUrls: ['./verification-form.component.scss'],
 })
-export class VerificationFormComponent extends AbstractFormComponent {
+export class VerificationFormComponent extends AbstractFormComponent implements OnDestroy {
     @Input()
     public smsSent: number = null;
 
@@ -49,8 +51,15 @@ export class VerificationFormComponent extends AbstractFormComponent {
 
     constructor(
         protected fb: FormBuilder,
+        private sAnalyticsService: SAnalyticsService,
     ) {
         super(fb);
+        sAnalyticsService.sFormStart();
+    }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        this.sAnalyticsService.sFormEnd();
     }
 
     public submitValidForm = () => {

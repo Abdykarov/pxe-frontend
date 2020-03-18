@@ -2,8 +2,6 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
-    OnDestroy,
-    OnInit,
     ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
@@ -35,7 +33,7 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 @Component({
     templateUrl: './landing.component.html',
 })
-export class LandingComponent extends AbstractComponent implements OnInit, OnDestroy {
+export class LandingComponent extends AbstractComponent {
 
     @ViewChild('subscription')
     public subscriptionElement: ElementRef;
@@ -120,17 +118,4 @@ export class LandingComponent extends AbstractComponent implements OnInit, OnDes
     }
 
     public scrollToNewSubscription = () => this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
-
-    ngOnInit () {
-        super.ngOnInit();
-        this.sAnalyticsService.installSForm();
-        this.sAnalyticsService.installSBiometrics();
-        this.sAnalyticsService.initSForm();
-        this.sAnalyticsService.initSBiometrics();
-    }
-
-    ngOnDestroy() {
-        super.ngOnDestroy();
-        this.sAnalyticsService.sFormEnd();
-    }
 }

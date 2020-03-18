@@ -14,6 +14,8 @@
         <div [ngClass]="classFirstField">
             <div class="form-container ml-0 ml-md-auto mr-md-0">
                 <lnd-form-field
+                    lndSFormDirective
+                    lndSBiometricsDirective
                     label="Kód z SMS"
                     [disabledField]="!smsSent"
                     [error]="formError.smsCode || form.controls.smsCode.errors"
@@ -33,14 +35,14 @@
         <div [ngClass]="classSecondField">
             <lnd-button
                 *ngIf="!smsSent"
-                (action)="submitSms()"
+                (action)="submitSms();sAnalyticsService.sFormClick($event)"
                 [isDisabled]="formLoading"
                 [label]="sendSmsLabel"
                 type="primary">
             </lnd-button>
             <lnd-button
                 *ngIf="smsSent"
-                (action)="submitForm()"
+                (action)="submitForm();sAnalyticsService.sFormClick($event)"
                 [isDisabled]="formLoading"
                 [label]="submitLabelText"
                 type="primary">

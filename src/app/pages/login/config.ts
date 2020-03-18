@@ -1,5 +1,5 @@
-import { changePasswordFields } from 'src/common/containers/form/forms/change-password/change-password-form.config';
 import { emailFormFields } from 'src/common/containers/form/forms/reset-password/reset-password-form.config';
+import { changePasswordFields } from 'src/common/containers/form/forms/change-password/change-password-form.config';
 import {
     IFormFieldsLogin,
     ILoginState,

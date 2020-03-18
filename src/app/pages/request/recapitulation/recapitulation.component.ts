@@ -51,7 +51,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     templateUrl: './recapitulation.component.html',
     styleUrls: ['./recapitulation.component.scss'],
 })
-export class RecapitulationComponent extends AbstractComponent implements OnInit, OnDestroy {
+export class RecapitulationComponent extends AbstractComponent implements OnInit {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.PERSONAL_DATA;
     public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.OFFER_STEP;
 
@@ -92,9 +92,6 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     }
 
     ngOnInit () {
-        this.sAnalyticsService.installSBiometrics();
-        this.sAnalyticsService.installSForm();
-
         combineLatest(this.codeLists$, this.supplyPoint$)
             .pipe(
                 takeUntil(this.destroy$),
@@ -106,8 +103,6 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                         this.supplyPoint = supplyPoint;
                         this.isIndividual = this.supplyPoint.subject.code === SubjectType.SUBJECT_TYPE_INDIVIDUAL;
                         this.codeLists = codeLists;
-                        this.sAnalyticsService.initSBiometrics();
-                        this.sAnalyticsService.initSForm();
                         this.cd.markForCheck();
                     }
                 },
@@ -169,11 +164,4 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         evt.preventDefault();
         this.navigateRequestService.routerToRequestStep(this.supplyPoint, ProgressStatus.OFFER_STEP);
     }
-
-    ngOnDestroy() {
-        super.ngOnDestroy();
-        this.sAnalyticsService.sFormEnd();
-    }
-
-
 }
