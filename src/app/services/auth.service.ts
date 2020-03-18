@@ -275,7 +275,7 @@ export class AuthService {
         const token = this.getToken();
         return new HttpHeaders({
             ...(!!token) && {Authorization: `Bearer ${token}`},
-            'Content-Type': contentType,
+            ...(!!contentType) && {'Content-Type': contentType},
             'X-API-Key': `${environment.x_api_key}`,
             accept,
         });
