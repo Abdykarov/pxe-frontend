@@ -274,7 +274,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 (contentCsv: string) => {
-                    const blob = new Blob([contentCsv], {
+                    const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), contentCsv], {
                         type: 'text/plain;charset=utf-8',
                     });
                     saveAs(blob, `${CONSTS.EXPORT.FILE_NAME}_${new Date().toISOString()}.${CONSTS.EXPORT.TYPE}`);
