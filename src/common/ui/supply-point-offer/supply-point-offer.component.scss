@@ -238,6 +238,26 @@
 		}
 	}
 
+	&__green-box {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		color: $success;
+	}
+
+	&__green-icon {
+		margin-bottom: ( $spacer / 4 );
+		font-size: $icon-size-large-px;
+	}
+
+	&__green-text {
+		font-size: $small-font-size;
+		font-weight: 700;
+		line-height: $line-height-sm;
+		text-transform: uppercase;
+		text-align: center;
+	}
+
 	&__decomposition-title {
 		text-transform: uppercase;
 

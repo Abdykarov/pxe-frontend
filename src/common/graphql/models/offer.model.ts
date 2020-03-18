@@ -39,7 +39,33 @@ export interface IOffer {
     totalPrice?: number;
     unit?: string;
     prepayment?: number;
+    marked?: boolean;
+    greenEnergy: boolean;
     __typename?: string;
+}
+
+export interface IOfferImport {
+    benefit1: string;
+    urlBenefit1: string;
+    benefit2: string;
+    urlBenefit2: string;
+    benefit3: string;
+    urlBenefit3: string;
+    benefit4: string;
+    urlBenefit4: string;
+    name: string;
+    supplierId: number;
+    validFrom: string;
+    validTo: string;
+    deliveryFrom: string;
+    deliveryTo: string;
+    deliveryLength: number;
+    distributionLocation: string;
+    permanentPaymentPrice: number;
+    subjectTypeId: string;
+    greenEnergy: boolean;
+    powerAttributes: IOfferInputPowerAttributes;
+    gasAttributes: IOfferInputGasAttributes;
 }
 
 export interface IOfferInput {
@@ -54,6 +80,7 @@ export interface IOfferInput {
     permanentPaymentPrice: number;
     subjectTypeId: string;
     benefits: string;
+    greenEnergy: boolean;
     powerAttributes: IOfferInputPowerAttributes;
     gasAttributes: IOfferInputGasAttributes;
 }

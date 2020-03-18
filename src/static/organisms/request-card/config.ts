@@ -99,6 +99,7 @@ export const supplyPointConfig2: ISupplyPoint = {
             totalPrice: 145.72,
             unit: 'MWh',
             prepayment: 1000,
+            greenEnergy: true,
         },
         personalData: null,
     },

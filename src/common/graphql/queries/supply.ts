@@ -125,6 +125,7 @@ export const supplyPointFragment = gql`
                     totalPrice,
                     unit,
                     prepayment,
+                    greenEnergy
                 },
                 personalData {
                     name,

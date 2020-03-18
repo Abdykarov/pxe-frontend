@@ -142,7 +142,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 this.resetFormError(false);
                 this.setFormByCommodity(commodityType);
                 this.resetFieldValue('supplierId', false);
-                this.setAnnualConsumptionNTState(commodityType === CommodityType.POWER ? this.getFieldValue('distributionRateId') : null);
+                this.setAnnualConsumptionNTState(
+                    commodityType === CommodityType.POWER ? this.getFieldValue('distributionRateId') : null, this.codeLists,
+                    );
                 this.setOwnTerminate(this.form.get('ownTerminate').value);
             });
 
@@ -174,7 +176,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 takeUntil(this.destroy$),
             )
             .subscribe(val => {
-                this.setAnnualConsumptionNTState(val);
+                this.setAnnualConsumptionNTState(val, this.codeLists);
             });
 
         this.form.get('contractEndTypeId')
@@ -465,6 +467,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             .subscribe(data => {
                 this.codeLists = transformCodeList(data);
                 this.codeLists$.next(this.codeLists);
+                this.setAnnualConsumptionNTState(this.getFieldValue('distributionRateId'), this.codeLists);
                 this.cd.markForCheck();
             });
     }

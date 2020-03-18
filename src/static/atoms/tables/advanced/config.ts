@@ -74,8 +74,8 @@ export const tableCols = {
             label: 'Last column',
             views: [
                 {
-                    headingClass: ['', 'text-right'],
-                    cellClass: ['', 'text-right'],
+                    headingClass: ['text-right'],
+                    cellClass: ['text-right'],
                     content: (row) => `${row.last.value}`,
                 },
             ],
