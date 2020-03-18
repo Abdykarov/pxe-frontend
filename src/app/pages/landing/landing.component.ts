@@ -4,6 +4,10 @@ import {
     ElementRef,
     ViewChild,
 } from '@angular/core';
+import {
+    Meta,
+    Title,
+} from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
@@ -13,6 +17,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CONSTS,
     ROUTES,
+    SEO,
 } from 'src/app/app.constants';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import {
@@ -52,11 +57,23 @@ export class LandingComponent extends AbstractComponent {
     constructor(
         private apollo: Apollo,
         private cd: ChangeDetectorRef,
+        private metaService: Meta,
         private router: Router,
         private registrationService: RegistrationService,
         private scrollToService: ScrollToService,
+        private titleService: Title,
     ) {
         super();
+        this.titleService.setTitle(CONSTS.TITLES.LANDING_PAGE);
+        this.metaService.updateTag({
+            name: 'description',
+            content: SEO.META_DESCRIPTION.LANDING_PAGE,
+        });
+        this.metaService.updateTag({
+            name: 'keywords',
+            content: SEO.META_KEYWORDS.LANDING_PAGE.toString(),
+        });
+
         this.formFields = createRegistrationFormFields(SignUpType.SignUp);
 
         this.scrollToService.getScrollStream()

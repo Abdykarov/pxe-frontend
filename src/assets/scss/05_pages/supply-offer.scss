@@ -1,0 +1,31 @@
+/*
+ -  Supply offer page
+ -
+ -
+ */
+
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+.supply-offer-controls {
+	&,
+	&__btn-holder {
+		display: inline-flex;
+		flex-direction: column;
+	}
+
+	// Media queries
+	@include media-breakpoint-up(md) {
+		display: flex;
+		flex-direction: row-reverse;
+		justify-content: space-between;
+	}
+
+	&__btn-holder {
+		// Media queries
+		@include media-breakpoint-up(md) {
+			flex-direction: row;
+		}
+	}
+}

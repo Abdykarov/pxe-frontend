@@ -9,6 +9,7 @@ export interface ITableColumnViewConfig {
 
 export interface ITableColumnConfig {
     label?: string;
+    contentTemplateHeaderName?: string;
     views: Array<ITableColumnViewConfig>;
     mobileViews?: Array<ITableColumnViewConfig>;
 }

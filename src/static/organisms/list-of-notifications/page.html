@@ -1,0 +1,10 @@
+<div class="static-pages-holder">
+    <div class="static-pages static-pages--bg-transparent col-6">
+        <pxe-list-of-notifications
+            *ngIf="listOfNotificationsConfig"
+            [headerText]="listOfNotificationsConfig.headerText"
+            [maxShowNotifications]="listOfNotificationsConfig.maxShowNotifications"
+            [notifications]="listOfNotificationsConfig.notifications">
+        </pxe-list-of-notifications>
+    </div>
+</div>

@@ -1,6 +1,5 @@
 import {
     CommodityType,
-    DistributionType,
     SubjectType,
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
@@ -8,6 +7,7 @@ import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
+    ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],
     CURRENCY: {
         DEFAULT: 'CZK',
     },
@@ -15,14 +15,36 @@ export const CONSTS = {
         CALENDAR: 'YYYY-MM-DD[T]HH:mm',
         SHORT: 'YYYY-MM-DD',
     },
-    DEFAULT_EXPIRATION: 3600,
+    DEFAULT_EXPIRATION: 5450,
     DEFAULT_DEPOSIT_PAYMENT_TYPE_ID: 'Prikaz',
+    EXPORT: {
+        FILE_NAME: 'export',
+        TYPE: 'csv',
+    },
+    EXAMPLE_OF_IMPORT_OFFER_FILE: {
+        PATH: '/assets/csv/example-import-offers.csv',
+        FILE_NAME: 'example_import_offers.csv',
+    },
+    IMPORT_ERROR_CODES: {
+        FILE_TYPE: 'FILE_TYPE',
+        MAX_NUMBER_OF_FILES: 'MAX_NUMBER_OF_FILES',
+        NO_OFFERS_IN_IMPORT: 'NO_OFFERS_IN_IMPORT',
+    },
+    IMPORT_OFFERS_TYPE: 'text/csv',
     INTERVAL_RXJS: 5000,
     LOGIN_FORM_NAME: 'login',
+    MAX_REQUEST_IN_BATCH_LINK: 200,
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
+    MODAL_TYPE: {
+        CONFIRM_DELETE_OFFER: 'confirmDeleteOffer',
+        CONFIRM_CANCEL_OFFER: 'confirmCancelOffer',
+        CONFIRM_BACK_IMPORT: 'confirmBackImportOffer',
+        CONFIRM_DELETE_MARKED: 'confirmDeleteMarked',
+    },
     PATHS: {
+        APPROVAL: 'approval',
         CONTRACT : 'contract',
         COOKIES_POLICY : 'cookies-policy',
         CHANGE_PASSWORD: 'change-password',
@@ -30,6 +52,7 @@ export const CONSTS = {
         DELETE_ACCOUNT: 'delete-account',
         DELETED_ACCOUNT: 'deleted-account',
         EMPTY : '',
+        IMPORT : 'import',
         FORGOTTEN_PASSWORD : 'forgotten-password',
         GAS: 'gas',
         LOGIN : 'login',
@@ -51,12 +74,13 @@ export const CONSTS = {
         SUPPLY_OFFER: 'supply-offer',
         SUPPLIER_CONCLUDED_CONTRACTS: 'concluded-contracts',
         TERMS_OF_USE : 'terms-of-use',
+        UPLOAD: 'upload',
         USER_PROFILE: 'user-profile',
         WILD_CART  : '**',
     },
     REFRESH_TOKEN: {
         INTERVAL: 300000,
-        COUNT: 4,
+        COUNT: 16,
         DONT_REFRESH_TIME_IN_MINUTES: 2,
     },
     VALIDATORS: {
@@ -71,17 +95,18 @@ export const CONSTS = {
             DIC: 12,
             DESCRIPTIVE_NUMBER: 16,
             EMAIL_LOGIN: 40,
-            USER_NAME_LOGIN: 28,
-            PASSWORD: 50,
             EMAIL_RECAPITULATION: 50,
             OFFER_NAME: 50,
             ORIENTATION_NUMBER: 16,
+            PASSWORD: 50,
             POSITION: 80,
             RECAPITULATION_NAME: 150,
             STREET: 255,
+            USER_NAME_LOGIN: 28,
             USER_PROFILE_NAME: 50,
             SMS_CODE: 10,
         },
+        MAX_IMPORT_FILES: 1,
         MIN_BIRTH_DATE: '1900-01-01',
         MIN_LENGTH: {
             DIC: 10,
@@ -93,12 +118,23 @@ export const CONSTS = {
     },
     TELEPHONE_PREFIX_CZ: '+420',
     TIME_TO_CONTRACT_END_PROLONGED: 30,
+    TITLES: {
+        COOKIES_POLICY: 'Cookies policy | PARC4U',
+        DEFAULT: 'PARC4U',
+        LANDING_PAGE: 'Získejte svobodu nad energií | PARC4U',
+        LOGIN: 'Přihlášení | PARC4U',
+        PATTERNS_OF_CONTRACTS: 'Vzory smluv o dodávce | PARC4U',
+        TERMS_OF_USE: 'Podmínky užívání | PARC4U',
+        SECURING_YOUR_DATA: 'Ochrana osobních údajů | PARC4U',
+        SIGN_UP: 'Registrace | PARC4U',
+    },
 };
 
 export const ROUTES = {
     ROUTER_ROOT: '/',
     ROUTER_DASHBOARD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.DASHBOARD}`,
     ROUTER_DELETE_ACCOUNT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.DELETE_ACCOUNT}`,
+    ROUTER_IMPORT_UPLOAD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.IMPORT}/${CONSTS.PATHS.UPLOAD}`,
     ROUTER_REQUEST_SUPPLY_POINT_SELECTION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_POINT_SELECTION}`,
     ROUTER_REQUEST_CONTRACT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.CONTRACT}`,
     ROUTER_REQUEST_OFFER_SELECTION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.OFFER_SELECTION}`,
@@ -117,9 +153,72 @@ export const ROUTES = {
     ROUTER_SUPPLY_OFFER: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_OFFER}`,
     ROUTER_SUPPLY_OFFER_POWER: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_OFFER}/${CONSTS.PATHS.POWER}`,
     ROUTER_SUPPLY_OFFER_GAS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_OFFER}/${CONSTS.PATHS.GAS}`,
+    ROUTER_IMPORT_APPROVAL_POWER: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.IMPORT}/${CONSTS.PATHS.APPROVAL}/${CONSTS.PATHS.POWER}`,
+    ROUTER_IMPORT_APPROVAL_GAS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.IMPORT}/${CONSTS.PATHS.APPROVAL}/${CONSTS.PATHS.GAS}`,
     ROUTER_TERMS_OF_USE: `/${CONSTS.PATHS.TERMS_OF_USE}`,
     ROUTER_USER_CHANGE_PASSWORD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CHANGE_PASSWORD}`,
     ROUTER_USER_PROFILE: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.USER_PROFILE}`,
+};
+
+export const SEO = {
+    META_KEYWORDS: {
+        COOKIES_POLICY: [
+            'funkční cookies',
+            'trvalé cookies',
+            'informace',
+        ],
+        LANDING_PAGE: [
+            'elektřina',
+            'plyn',
+            'dodavatel',
+            'dodavateli',
+            'nabídka',
+            'komoditní burza',
+            'odběrné místo',
+            'změna dodavatele',
+            'cena plynu',
+            'cena elektřiny',
+            'cena za kwh',
+            'nejlevnějši elektřina',
+            'nejlevnějši plyn',
+            'distribuce plynu',
+            'distribuce elektřiny',
+            'parc4u',
+            'pxe',
+        ],
+        LOGIN: [
+            'přihlášení',
+            'kliknutí',
+        ],
+        PATTERNS_OF_CONTRACTS: [
+            'komodita',
+            'nabídka',
+        ],
+        TERMS_OF_USE: [
+            'obchodní podmínky',
+            'PARC4U',
+        ],
+        SECURING_YOUR_DATA: [
+            'chráníme',
+            'zpracování údajů',
+        ],
+        SIGN_UP: [
+            'registrace',
+            'kliknutí',
+            'obchodními podmínkami',
+        ],
+    },
+    META_DESCRIPTION: {
+        COOKIES_POLICY: 'Co jsou cookies a proč je na stránkách PARC4U používáme?',
+        LANDING_PAGE: 'Měňte dodavatele energií na 1 klik. Neřešte papírování a chození na' +
+            ' pobočky. Chraňte se před nekalostmi ve smlouvě. Energie za férové ceny bez skrytých poplatků.',
+        LOGIN: 'Přihlášení do PARC4U, kde máte snadný přístup k jiným cenám za energie.',
+        PATTERNS_OF_CONTRACTS: 'Vzor smlouvy k dodávce uzavřené přes PARC4U.',
+        TERMS_OF_USE: 'Obchodní podmínky k pravidlům registrace dodavatelů a odběratelů na trhu PARC4U.',
+        SECURING_YOUR_DATA: 'Jak v PARC4U pracujeme s osobními údaji a jak je chráníme.',
+        SIGN_UP: 'Registrace do PARC4U, kde kliknutím měníte dodavatele energií,' +
+            ' nemusíte na pobočky a dostáváte konečné ceny bez skrytých poplatků.',
+    },
 };
 
 export enum INavigationItemType {
@@ -142,6 +241,8 @@ export const CODE_LIST = {
     DISTRIBUTION_POWER: 'PDISTR',
     DISTRIBUTION_GAS: 'GDISTR',
     DEPOSIT_PAYMENT_TYPE: 'PAYTY2',
+    DISTRIBUTION_RATE_VT: 'DS1P4R',
+    DISTRIBUTION_RATE_BOTH: 'DS2P4R',
 };
 
 export const CODE_LIST_TYPES = [
@@ -159,6 +260,8 @@ export const CODE_LIST_TYPES = [
     CODE_LIST.DISTRIBUTION_POWER,
     CODE_LIST.DISTRIBUTION_GAS,
     CODE_LIST.TIME_TO_CONTRACT_END_PERIOD,
+    CODE_LIST.DISTRIBUTION_RATE_VT,
+    CODE_LIST.DISTRIBUTION_RATE_BOTH,
 ];
 
 export const CONTRACT_END_TYPE = {
@@ -215,16 +318,6 @@ export enum SubjectTypeLowerCase {
 export const SubjectTypesTypes = {
     [SubjectTypeLowerCase.INDIVIDUAL]: SubjectType.SUBJECT_TYPE_INDIVIDUAL,
     [SubjectTypeLowerCase.BUSINESSMAN]: SubjectType.SUBJECT_TYPE_BUSINESSMAN,
-};
-
-export const DISTRIBUTION_RATES_TYPE_DEFINITION = {
-    [DistributionType.VT] : [
-        'C01d', 'C02d', 'C03d', 'C60d', 'C61d', 'C62d', 'D01d', 'D02d',
-    ],
-    [DistributionType.BOTH] : [
-        'C25d', 'C26d', 'C27d', 'C35d', 'C45d', 'C46d', 'C55d', 'C56d',
-        'D25d', 'D26d', 'D27d', 'D35d', 'D45d', 'D56d', 'D57d', 'D61d',
-    ],
 };
 
 export const SUBJECT_TYPE_OPTIONS: Array<IOption> = [
@@ -388,3 +481,5 @@ export enum RequestsOverviewBannerShow {
     TERMINATE_CONTRACT = 'TERMINATE_CONTRACT',
     LEAVE_CONTRACT = 'LEAVE_CONTRACT',
 }
+
+export const FILE_UPLOAD_CONFIG = 'file_upload_config';

@@ -191,9 +191,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
                 this.contractAction === ContractActions.LEAVE_CONTRACT ? ContractDeleteReason.LEAVING : ContractDeleteReason.TERMINATION,
             )
             .pipe(
-                takeUntil(
-                    this.destroy$,
-                ),
+                takeUntil(this.destroy$),
                 map(({data}) => data.deleteSignedContract),
             )
             .subscribe(

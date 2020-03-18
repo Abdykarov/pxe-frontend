@@ -173,6 +173,7 @@ export class ContractService {
                 totalPrice: supplyPointOffer.totalPrice,
                 unit: supplyPointOffer.unit,
                 prepayment: null,
+                greenEnergy: supplyPointOffer.greenEnergy,
                 __typename: 'offer',
             },
             personalData: null,

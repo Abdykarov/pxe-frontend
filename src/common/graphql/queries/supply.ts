@@ -123,6 +123,7 @@ export const supplyPointFragment = gql`
                     totalPrice,
                     unit,
                     prepayment,
+                    greenEnergy
                 },
                 personalData {
                     name,
@@ -177,6 +178,7 @@ export const findAllSuppliersQuery = gql`
             sampleDocuments{
                 type,
                 url,
+                commodityType
             }
         }
     }

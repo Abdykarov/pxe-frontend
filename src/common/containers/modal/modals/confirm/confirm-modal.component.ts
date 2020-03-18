@@ -27,6 +27,7 @@ export class ConfirmModalComponent implements OnInit {
     public showConfirm = true;
     public titleClose = 'Zpět';
     public titleConfirm = 'Pokračovat';
+    public size = '';
 
     ngOnInit() {
         this.showClose = this.instanceData && !R.isNil(this.instanceData.showClose) ?
@@ -37,5 +38,7 @@ export class ConfirmModalComponent implements OnInit {
             this.instanceData.titleClose : this.titleClose;
         this.titleConfirm = this.instanceData && !R.isNil(this.instanceData.titleConfirm) ?
             this.instanceData.titleConfirm : this.titleConfirm;
+        this.size = this.instanceData && !R.isNil(this.instanceData.size) ?
+            this.instanceData.size : this.size;
     }
 }

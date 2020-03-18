@@ -94,6 +94,7 @@ export const supplyPointConfigPower: ISupplyPoint = {
             totalPrice: 145.72,
             unit: 'MWh',
             prepayment: 1000,
+            greenEnergy: false,
         },
     },
     circuitBreaker: {
@@ -199,6 +200,7 @@ export const supplyPointConfigGas: ISupplyPoint = {
             totalPrice: 145.72,
             unit: 'MWh',
             prepayment: 1000,
+            greenEnergy: true,
         },
     },
     ean: '27zg700z0069625e',

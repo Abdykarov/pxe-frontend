@@ -275,8 +275,8 @@ enum CommodityType {
     POWER
 }
 
-enum ContractDeleteReason {
-    LEAVING
+enum ContractDeleteReason{
+    LEAVING,
     TERMINATION
 }
 

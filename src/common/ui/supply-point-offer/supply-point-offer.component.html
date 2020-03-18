@@ -1,3 +1,9 @@
+<ng-template #benefitContentTemplate let-data>
+    K téhle nabídce od {{data?.supplyPointOffer?.supplier?.name}} získáte benefit {{data?.benefit?.name}}.
+    Více informaci o benefitu naleznete v obchodních podmínkách
+    <a [href]="data?.benefit?.url" target="_blank">zde</a>.
+</ng-template>
+
 <div class="supply-point-offer"
    [class.supply-point-offer--owner]="isOwner"
    [class.supply-point-offer--not-interactive]="!interactive">
@@ -5,10 +11,17 @@
         <div class="col-12 col-xl-7"
              [class.col-md-6]="isOwner">
             <div class="supply-point-offer__inner">
-                <div class="row">
-                    <div class="col-12">
+                <div class="row justify-content-between">
+                    <div class="col">
                         <span class="supply-point-offer__title-label">{{isOwner ? 'Váš stávající dodavatel' : 'Dodavatel'}}</span>
                         <span class="supply-point-offer__title text-break">{{supplyPointOffer.supplier?.name}}</span>
+                    </div>
+                    <div *ngIf="supplyPointOffer.greenEnergy"
+                         class="col-auto">
+                        <div class="supply-point-offer__green-box">
+                            <span class="icon icon--leaf supply-point-offer__green-icon"></span>
+                            <span class="supply-point-offer__green-text">Zelená<br> energie</span>
+                        </div>
                     </div>
                 </div>
                 <div *ngIf="!isOwner"
@@ -99,7 +112,7 @@
                          *ngIf="!isOwner && interactive">
                         <lnd-button
                             label="Vybrat nabídku"
-                            type="primary"
+                            [type]="supplyPointOffer.greenEnergy ? 'success' : 'primary'"
                             (action)="action.emit(supplyPointOffer)">
                         </lnd-button>
                     </div>
@@ -189,19 +202,20 @@
                         <lnd-button
                             label="Vybrat nabídku"
                             type="primary"
+                            [type]="supplyPointOffer.greenEnergy ? 'success' : 'primary'"
                             (action)="action.emit(supplyPointOffer)">
                         </lnd-button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-12"
-             *ngIf="!isOwner && supplyPointOffer.benefits && supplyPointOffer.benefits.length">
-            <ul class="check-list supply-point-offer__benefits-list">
-                <ng-container *ngFor="let benefit of supplyPointOffer.benefits">
-                    <li *ngIf="benefit && benefit.name">{{benefit.name}}</li>
-                </ng-container>
-            </ul>
-        </div>
+        <lnd-accordion-benefit
+            *ngIf="!isOwner && supplyPointOffer.benefits && supplyPointOffer.benefits.length"
+            class="col-12 supply-point-offer__benefits-list"
+            [accordionItems]="supplyPointOffer.benefits | accordionBenefits:supplyPointOffer"
+            [accordionContentTemplate]="benefitContentTemplate"
+        >
+        </lnd-accordion-benefit>
     </div>
 </div>
+
