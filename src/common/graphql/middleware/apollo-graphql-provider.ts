@@ -16,11 +16,14 @@ import { onError } from 'apollo-link-error';
 import { AuthService } from 'src/app/services/auth.service';
 import { clientSchema } from 'src/common/graphql/middleware/client-schema';
 import {
+    CONSTS,
+    OPERATIONS_WITHOUT_SCROLL_ON_ERRORS,
+} from 'src/app/app.constants';
+import {
     defaults,
     resolvers,
 } from '../resolvers/';
 import { environment } from 'src/environments/environment';
-import { OPERATIONS_WITHOUT_SCROLL_ON_ERRORS } from 'src/app/app.constants';
 import { scrollToElementFnc } from 'src/common/utils';
 
 const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
@@ -39,6 +42,7 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     const http = new BatchHttpLink({
         uri: `${environment.url_graphql}/`,
         fetch: fetch,
+        batchMax: CONSTS.MAX_REQUEST_IN_BATCH_LINK,
     });
 
     const auth = new ApolloLink((operation: Operation, forward: NextLink) => {

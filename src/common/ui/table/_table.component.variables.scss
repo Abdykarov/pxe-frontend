@@ -23,6 +23,7 @@ $table-dark-accent-bg:           $table-accent-bg;
 $table-dark-hover-bg:            $table-hover-bg;
 $table-dark-color:               $table-head-color;
 $table-striped-order:            odd;
+$table-danger-bg:                rgba($danger, .3);
 
 $table-adv-cell-padding-hor:     ( $spacer * .75 );
 $table-adv-cell-padding-vert:    ( $spacer / 2 );

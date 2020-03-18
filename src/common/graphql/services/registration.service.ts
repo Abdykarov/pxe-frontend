@@ -6,7 +6,7 @@ import {
     makeRegistrationMutation,
     makeUnregistrationMutation,
     sendUnregisterSmsMutation,
-} from 'src/common/graphql/mutations';
+} from 'src/common/graphql/mutation/registration';
 
 @Injectable({
     providedIn: 'root',

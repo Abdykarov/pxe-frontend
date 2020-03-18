@@ -89,9 +89,7 @@ export class LoginComponent extends AbstractComponent {
 
         this.route.queryParams
             .pipe(
-                takeUntil(
-                    this.destroy$,
-                ),
+                takeUntil(this.destroy$),
             )
             .subscribe(() => {
                 this.state = ILoginState.LOGIN;

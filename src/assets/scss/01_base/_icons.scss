@@ -29,6 +29,10 @@ $icon-version: random();
 		color: $icons-active;
 	}
 
+	&--green {
+		color: $success;
+	}
+
 	&__holder-small {
 		position: relative;
 		display: inline-block;
@@ -92,6 +96,7 @@ $icons: (
 	triangle-right:        \e926,
 	double-triangle-left:  \e927,
 	double-triangle-right: \e928,
+	leaf:                  \e929,
 );
 
 // Icons aplication to class
