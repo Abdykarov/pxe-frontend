@@ -48,9 +48,22 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
             let subscription, innerSubscription;
             try {
                 subscription = forward(operation).subscribe({
-                    next: observer.next.bind(observer),
+                    next: result => {
+                        if (result.errors) {
+                            for (const err of result.errors) {
+                                switch (err.type) {
+                                    case 'AccessDeniedException':
+                                        authService.logoutForced();
+                                        break;
+                                }
+                            }
+                        }
+                        observer.next(result);
+                    },
                     complete: observer.complete.bind(observer),
                     error: networkError => {
+                        console.log('networkError');
+                        console.log(JSON.stringify(networkError));
                         if (networkError.status === 401 || networkError.statusCode === 401) {
                             authService.refreshToken()
                                 .subscribe(
