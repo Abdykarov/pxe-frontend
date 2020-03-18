@@ -14,6 +14,7 @@ import {
     combineLatest,
 } from 'rxjs';
 import {
+    filter,
     map,
     switchMap,
     takeUntil,
@@ -88,12 +89,15 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
         this.route.params
             .pipe(
                 takeUntil(this.destroy$),
+                filter((params) => {
+                    if (R.indexOf(params.commodityType, R.keys(commodityTypes)) < 0) {
+                        this.router.navigate([this.routePower]);
+                        return false;
+                    }
+                    return true;
+                }),
             )
             .subscribe(params => {
-                if (R.indexOf(params.commodityType, R.keys(commodityTypes)) < 0) {
-                    this.router.navigate([this.routePower]);
-                    return;
-                }
                 this.commodityType = commodityTypes[params.commodityType];
                 this.commodityTypeSubject$.next(this.commodityType);
                 this.cd.markForCheck();

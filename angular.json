@@ -30,6 +30,7 @@
                                 "output": "/assets/pdfjs"
                             },
                             "src/assets/configurations/config.js",
+                            "src/assets/csv/",
                             "src/assets/images/",
                             "src/assets/pdfs/",
                             "src/assets/favicon.ico",
@@ -187,6 +188,7 @@
                                 "output": "/assets/pdfjs"
                             },
                             "src/assets/configurations/config.js",
+                            "src/assets/csv/",
                             "src/assets/pdfs/",
                             "src/assets/images/",
                             "src/assets/favicon.ico"

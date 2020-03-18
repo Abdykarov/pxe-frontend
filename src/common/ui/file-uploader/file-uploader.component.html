@@ -1,0 +1,31 @@
+<div
+    ng2FileDrop
+    class="drop-zone"
+    [class.drop-zone--interactive]="hasBaseDropZoneOver"
+    (fileOver)="hasBaseDropZoneOver = $event"
+    (fileDrop)="fileSelectAction.emit(uploader)"
+    [uploader]="uploader"
+>
+    <img 
+        class="drop-zone__svg mb-2" 
+        src="/assets/images/illustrations/upload.svg" 
+        alt="upload ikona" 
+        title="upload ikona"
+    >
+    <p class="mb-1">
+        Přetáhněte vyplněnou excelovskou tabulku
+    </p>
+    <p class="mb-3">
+        nebo
+    </p>
+    <input id="file-upload"
+        ng2FileSelect
+        type="file"
+        [uploader]="uploader"
+        (fileSelected)="fileSelectAction.emit(uploader)"
+        hidden
+    />
+    <label for="file-upload" class="btn btn-primary drop-zone__control">
+        nahrát ze zařízení
+    </label>
+</div>

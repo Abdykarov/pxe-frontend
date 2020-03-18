@@ -11,6 +11,7 @@ import { SupplyOfferOrganismConfig } from 'src/static/organisms/supply-offer/con
 
 @Component({
     templateUrl: './page.html',
+    styleUrls: ['../../../assets/scss/05_pages/supply-offer.scss'],
 })
 
 export class SupplyOfferComponent {
@@ -29,6 +30,7 @@ export class SupplyOfferComponent {
         deliveryFrom: new FormControl(),
         deliveryTo: new FormControl(),
         deliveryFromTo: new FormControl(),
+        greenEnergy: new FormControl(),
     });
 
     constructor(
@@ -41,6 +43,11 @@ export class SupplyOfferComponent {
                 url: null,
             },
         ];
+    }
+
+    public click = (evt) => {
+        evt.preventDefault();
+        console.log('click');
     }
 
     public action = (table, row) => {

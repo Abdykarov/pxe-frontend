@@ -111,6 +111,7 @@ type Offer {
     distributionPriceByConsumptionVT: Float
     distributionRate: CodelistItem
     energyTaxRegulatedPrice: Float
+    greenEnergy: Boolean!
     id: ID!
     marketOrganizerRegulatedPrice: Float
     monthlyConsumptionFee: Float
@@ -334,6 +335,7 @@ input OfferInput {
     deliveryTo: Date!
     distributionLocation: String!
     gasAttributes: OfferInputGasAttributes
+    greenEnergy: Boolean!
     name: String!
     permanentPaymentPrice: Float!
     powerAttributes: OfferInputPowerAttributes
