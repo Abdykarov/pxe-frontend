@@ -36,7 +36,10 @@ import {
     IOfferInputPowerAttributes,
     IOfferStatus,
 } from 'src/common/graphql/models/offer.model';
-import { IDocumentType, IResponseDataDocument } from 'src/app/services/model/document.model';
+import {
+    IDocumentType,
+    IResponseDataDocument,
+} from 'src/app/services/model/document.model';
 
 @Injectable({
     providedIn: 'root',
