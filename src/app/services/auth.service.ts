@@ -271,10 +271,10 @@ export class AuthService {
         });
     }
 
-    public getAuthorizationHeaders = (contentType: string, accept: string = '*/*'): HttpHeaders =>
+    public getAuthorizationHeaders = (contentType: string = null, accept: string = '*/*'): HttpHeaders =>
         new HttpHeaders({
             'Authorization': 'Bearer ' + this.getToken(),
-            'Content-Type': contentType,
+            ...(contentType) && {'Content-Type': contentType},
             'X-API-Key': `${environment.x_api_key}`,
             accept,
         })
