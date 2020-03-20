@@ -7,7 +7,8 @@ import {
     Component,
     Inject,
     OnInit,
-    PLATFORM_ID, ViewChild,
+    PLATFORM_ID,
+    ViewChild,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -24,7 +25,6 @@ import {
     map,
     takeUntil,
 } from 'rxjs/operators';
-import { saveAs } from 'file-saver';
 import { IResponseDataDocument } from 'src/app/services/model/document.model';
 
 import { AbstractComponent } from 'src/common/abstract.component';
@@ -54,7 +54,8 @@ import { ModalService } from 'src/common/containers/modal/modal.service';
 import { OfferService } from 'src/common/graphql/services/offer.service';
 import { TableComponent } from 'src/common/ui/table/table.component';
 import {
-    parseGraphQLErrors, parseRestAPIErrors,
+    parseGraphQLErrors,
+    parseRestAPIErrors,
     transformCodeList,
 } from 'src/common/utils';
 import { SupplyOfferConfig } from './supply-offer.config';
