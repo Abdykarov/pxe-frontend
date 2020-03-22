@@ -16,7 +16,6 @@ import {
     takeUntil,
 } from 'rxjs/operators';
 
-
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
     AllowedOperations,

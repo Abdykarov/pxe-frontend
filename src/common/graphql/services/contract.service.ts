@@ -272,9 +272,9 @@ export class ContractService {
 
                 getSupplyPoint.contract.prolong = false;
 
-                getSupplyPoint.allowedOperations = [...getSupplyPoint.allowedOperations.filter(
+                getSupplyPoint.allowedOperations = getSupplyPoint.allowedOperations.filter(
                     (allowedOperation: AllowedOperations) => allowedOperation !== AllowedOperations.UNSET_AUTOMATIC_PROLONGATION,
-                )];
+                );
 
                 cache.writeQuery({
                     query: getSupplyPointQuery,

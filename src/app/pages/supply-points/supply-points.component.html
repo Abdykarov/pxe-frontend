@@ -1,5 +1,5 @@
 <ng-template #additionalInfoTemplate let-data="data">
-    <div *ngIf="(data | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO)"
+    <div *ngIf="(data && data.allowedOperations | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO)"
          class="row">
         <div *ngIf="(data | pathValue:['contract', 'deliveryTo']) && (today | dateDiff: data.contract.deliveryTo) as contractEndInDays"
              class="col-12">
