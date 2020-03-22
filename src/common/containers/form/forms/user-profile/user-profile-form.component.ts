@@ -7,12 +7,12 @@ import {
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
-import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { CONSTS } from 'src/app/app.constants';
+import { IUserProfileModelForm } from 'src/common/containers/form/forms/user-profile/user-profile-form.model';
 import { IPersonalDataInputForm } from 'src/common/graphql/models/personal-data.model';
 import { ValueOfFormPipe } from 'src/common/pipes/value-of-form/value-of-form.pipe';
 
@@ -46,11 +46,9 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
 
         this.form.get('phone')
             .valueChanges
-            .pipe(
-                takeUntil(this.destroy$),
-            )
+            .pipe(takeUntil(this.destroy$))
             .subscribe(() => {
-                this.phoneNumber = this.valueOfFormPipe.transform(this.form, ['phonePrefix', 'phone']);
+                this.phoneNumber = this.getFieldValue('phonePrefix') + '' + this.getFieldValue('phone');
                 this.smsSent = false;
             });
 
@@ -74,18 +72,24 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
         this.form.get('phone').setValue(phone);
     }
 
-    public processSaveButton = (event, submitValidFormAction = true) => {
-        if (this.oldPhone !== this.phoneNumber && (!submitValidFormAction || !this.smsSent)) {
-            this.customAction.emit(this.form.value.phone);
-        } else {
-            this.submitValidForm(event);
+    public processSaveButton = (value: IUserProfileModelForm, submitValidFormAction = true) => {
+        this.resetCustomFieldError();
+        this.triggerValidation();
+        if (this.form.valid) {
+            if (this.oldPhone !== this.phoneNumber && (!submitValidFormAction || !this.smsSent) && this.phoneNumber) {
+                console.log('JSEM tu ok');
+                console.log(this.form.value.phone);
+                this.customAction.emit(this.form.value.phone);
+            } else {
+                this.submitValidForm(value);
+            }
         }
     }
 
-    public submitValidForm = (event) => {
+    public submitValidForm = (smsCode) => {
         const form: IPersonalDataInputForm = {
             ...this.form.value,
-            smsCode: event,
+            smsCode,
             phoneNumber: this.phoneNumber,
         };
         this.submitAction.emit(form);

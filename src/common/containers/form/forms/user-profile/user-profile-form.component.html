@@ -114,7 +114,7 @@
             [showDisabledInput]="false"
             sendSmsLabel="Uložit"
             classMainWrapper="row justify-content-center"
-            [phone]="form | valueOfForm: ['phonePrefix','phone']"
+            [phone]="form.controls.phonePrefix.value + '' + form.controls.phone.value"
             [fieldError]="fieldError"
             [formLoading]="formLoading"
             [globalError]="globalError"

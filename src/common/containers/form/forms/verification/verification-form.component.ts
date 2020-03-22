@@ -1,7 +1,8 @@
 import {
     Component,
     Input,
-    OnChanges, SimpleChanges,
+    OnChanges,
+    SimpleChanges,
     TemplateRef,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
