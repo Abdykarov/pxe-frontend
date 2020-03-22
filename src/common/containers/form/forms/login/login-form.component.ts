@@ -37,18 +37,18 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit 
     @Output()
     public reSentAction?: EventEmitter<any> = new EventEmitter<any>();
 
-    public handleReSentAction = () => {
-        this.form.controls.password.setValue(null);
-        this.resetFormError(false);
-        return this.reSentAction.emit(this.login);
-    }
-
     constructor(
         protected fb: FormBuilder,
         private route: ActivatedRoute,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super(fb);
+    }
+
+    public handleReSentAction = () => {
+        this.form.controls['password'].setValue('');
+        this.resetFormError(false);
+        return this.reSentAction.emit(this.login);
     }
 
     ngOnInit() {
