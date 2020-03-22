@@ -1,6 +1,7 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+import * as R from 'ramda';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import {
     ApolloLink,
@@ -57,12 +58,13 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
                 subscription = forward(operation).subscribe({
                     next: result => {
                         if (result.errors) {
-                            for (const err of result.errors) {
-                                switch (err.type) {
-                                    case 'AccessDeniedException':
-                                        authService.logoutForced();
-                                        break;
-                                }
+                            const isAccessDeniedException = R.pipe(
+                                R.filter((err) => err && err.type === 'AccessDeniedException'),
+                                R.head,
+                            )(result.errors);
+
+                            if (isAccessDeniedException) {
+                                authService.logoutForced();
                             }
                         }
                         observer.next(result);

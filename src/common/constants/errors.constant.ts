@@ -56,6 +56,7 @@ export const importErrorViolations = {
     'deliveryFromWrongFormat': 'Dodávkové období od není validní',
     'deliveryToWrongFormat': 'Dodávkové období do není validní',
     'deliveryLengthWrongFormat': 'Dodávka není validní',
+    'priceGasWrongFormat': 'Cena plynu není validní',
     'permanentPaymentPriceWrongFormat': 'Stála platba není validní',
     'benefit1InvalidSize': 'Benefit 1 použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_URL + ' znaků',
     'benefitUrl1InvalidSize': 'Benefit 1 použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_NAME + ' znaků',

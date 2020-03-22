@@ -7,7 +7,8 @@ import {
     Component,
     Inject,
     OnInit,
-    PLATFORM_ID, ViewChild,
+    PLATFORM_ID,
+    ViewChild,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -24,7 +25,6 @@ import {
     map,
     takeUntil,
 } from 'rxjs/operators';
-import { saveAs } from 'file-saver';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
@@ -48,12 +48,14 @@ import {
     IOfferInputPowerAttributes,
     IOfferStatus,
 } from 'src/common/graphql/models/offer.model';
+import { IResponseDataDocument } from 'src/app/services/model/document.model';
 import { ITableColumnConfig } from 'src/common/ui/table/models/table.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { OfferService } from 'src/common/graphql/services/offer.service';
 import { TableComponent } from 'src/common/ui/table/table.component';
 import {
     parseGraphQLErrors,
+    parseRestAPIErrors,
     transformCodeList,
 } from 'src/common/utils';
 import { SupplyOfferConfig } from './supply-offer.config';
@@ -269,21 +271,18 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public exportOffers = (evt) => {
         evt.preventDefault();
         this.offerService.exportCSV()
-            .pipe(
-                takeUntil(this.destroy$),
-            )
+            .pipe(takeUntil(this.destroy$))
             .subscribe(
-                (contentCsv: string) => {
-                    const blob = new Blob([contentCsv], {
-                        type: 'text/plain;charset=utf-8',
-                    });
-                    saveAs(blob, `${CONSTS.EXPORT.FILE_NAME}_${new Date().toISOString()}.${CONSTS.EXPORT.TYPE}`);
-                },
-                error => {
-                    const { globalError } = parseGraphQLErrors(error);
-                    this.globalError = globalError;
+                (responseDataDocument: IResponseDataDocument) => {
+                    this.documentService.documentSave(responseDataDocument);
                     this.cd.markForCheck();
-                });
+                },
+                (error) => {
+                    const message = parseRestAPIErrors(error);
+                    this.globalError.push(message);
+                    this.cd.markForCheck();
+                },
+            );
     }
 
     public edit = (table, row) => {

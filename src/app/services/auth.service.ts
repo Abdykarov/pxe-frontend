@@ -271,7 +271,7 @@ export class AuthService {
         });
     }
 
-    public getAuthorizationHeaders = (contentType: string, accept: string = '*/*'): HttpHeaders => {
+    public getAuthorizationHeaders = (contentType: string = null, accept: string = '*/*'): HttpHeaders => {
         const token = this.getToken();
         return new HttpHeaders({
             ...(!!token) && {Authorization: `Bearer ${token}`},
