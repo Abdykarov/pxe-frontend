@@ -421,14 +421,15 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         if (this.contractEndType === CONTRACT_END_TYPE.CONTRACT_END_TERMINATE) {
             form.contractEndTypeId = CONTRACT_END_TYPE.CONTRACT_END_TERMINATE;
         }
-        if (form.commodityType === CommodityType.GAS) {
-            form.annualConsumption = form.annualConsumptionVT / 1000;
-        } else {
-            form.annualConsumption = form.annualConsumptionVT;
-        }
-
         if (form.annualConsumptionVTUnit === UNIT_OF_PRICES.KWH) {
             form.annualConsumptionVT = form.annualConsumptionVT / 1000;
+        }
+        if (form.annualConsumptionNTUnit === UNIT_OF_PRICES.KWH) {
+            form.annualConsumptionNT = form.annualConsumptionNT / 1000;
+        }
+        if (form.commodityType === CommodityType.GAS) {
+            form.annualConsumption = form.annualConsumptionVT;
+            form.annualConsumptionUnit = form.annualConsumptionVTUnit;
         }
 
         this.submitAction.emit(form);

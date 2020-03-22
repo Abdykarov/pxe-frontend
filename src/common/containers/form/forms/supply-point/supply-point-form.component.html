@@ -203,8 +203,10 @@
                         [inputFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionNT' || (fieldWrapperFocused$ | async) === 'annualConsumptionNTUnit'"
                         [id]="'annualConsumptionNT'"
                         [success]="form.controls.annualConsumptionNT.valid && (form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT)"
-                        [touched]="form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT">
-                        ></lnd-form-field>
+                        [touched]="form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT"
+                        [error]="formError.annualConsumptionNT || form.controls.annualConsumptionNT.errors"
+                        [validationMessages]="formFields.validationMessages.annualConsumptionNT"
+                    ></lnd-form-field>
                 </div>
                 <div class="col-12 col-md-5 pl-md-1">
                     <lnd-select
@@ -247,7 +249,9 @@
                         [inputFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionVT' || (fieldWrapperFocused$ | async) === 'annualConsumptionVTUnit'"
                         [id]="'annualConsumptionVT'"
                         [success]="form.controls.annualConsumptionVT.valid && (form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT)"
-                        [touched]="form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT">
+                        [touched]="form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT"
+                        [error]="formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors"
+                        [validationMessages]="formFields.validationMessages.annualConsumptionVT"
                     ></lnd-form-field>
                 </div>
                 <div class="col-12 col-md-5 pl-md-1">

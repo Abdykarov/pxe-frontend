@@ -148,7 +148,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                 R.pick([
                     'eic',
                     'annualConsumption',
-                    'annualConsumptionVTUnit',
+                    'annualConsumptionUnit',
                 ], supplyPointFormData);
             supplyPointAction = id ?
                 this.supplyService.updateGasSupplyPoint(id, supplyPoint, gasAttributes) :
