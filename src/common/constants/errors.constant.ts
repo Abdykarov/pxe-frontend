@@ -75,7 +75,7 @@ export const importErrorViolations = {
     'benefitUrl4InvalidFormat': 'Benefit 4 vyplňte validní URL adresu',
     'benefitWithUrl4Invalid': 'Benefit 4 není validní',
     'benefitsNotSetInOrder': 'Benefity nejsou ve správném pořadí',
-    'nameInvalidSize' : 'Použít můžete maximálně' + CONSTS.VALIDATORS.MAX_LENGTH.OFFER_NAME + 'znaků.',
+    'nameInvalidSize' : 'Použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.OFFER_NAME + ' znaků.',
     'priceGasInvalidFormat' : 'Cena plyn použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT
         + ' desetinná místa a ' + CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT + ' celých čísel.',
     'priceVTInvalidFormat': 'Cena za VT použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT
@@ -85,7 +85,7 @@ export const importErrorViolations = {
     'permanentPaymentPriceFormat': 'Stálá cena použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT
         + ' desetinná místa a ' + CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT + ' celých čísel.',
     'validFromMustBeBeforeValidTo': 'Datum začátku platnosti nabídky musí být dřívější než její konec.',
-    'deliveryFromMustBeBeforeDeliveryTo': 'Datum začátku platnosti nabídky musí být dřívější než její konec.',
+    'deliveryFromMustBeBeforeDeliveryTo': 'Datum začátku dodávkového období musí být dřívější než jeho konec.',
 };
 
 export const restAPIErrorCodes = {
