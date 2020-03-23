@@ -221,7 +221,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                         ],
                         {
                             state: {
-                                countOfImportedOffers: offersImportInput.length - this.countOfDuplicateOffers,
+                                countOfImportedOffers: offersImportInput.length,
                             },
                         },
                     );
