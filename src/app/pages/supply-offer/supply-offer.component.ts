@@ -88,7 +88,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     private initRows = false;
     public loadingOffers = true;
     public numberOfDeletedOffers = 0;
-    public numberOfImportedOffers = 0;
+    public countOfImportedOffers = 0;
     public numberOfMarked = 0;
     public showDeletedOfferBanner = false;
     public offerFormInEmptyPage = false;
@@ -130,7 +130,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     ngOnInit() {
         super.ngOnInit();
         if (isPlatformBrowser(this.platformId)) {
-            this.numberOfImportedOffers = window.history.state.numberOfImportedOffers;
+            this.countOfImportedOffers = window.history.state.countOfImportedOffers;
         }
 
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
