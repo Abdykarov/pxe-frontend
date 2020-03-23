@@ -25,7 +25,7 @@ export class RegistrationFormComponent extends AbstractFormComponent implements 
     public agreementTemplate: TemplateRef<any>;
 
     constructor(
-        private sAnalyticsService: SAnalyticsService,
+        public sAnalyticsService: SAnalyticsService,
         protected fb: FormBuilder,
     ) {
         super(fb);

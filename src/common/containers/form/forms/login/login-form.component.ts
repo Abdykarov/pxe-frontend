@@ -42,7 +42,7 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit,
 
     constructor(
         protected fb: FormBuilder,
-        private sAnalyticsService: SAnalyticsService,
+        public sAnalyticsService: SAnalyticsService,
         private route: ActivatedRoute,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
