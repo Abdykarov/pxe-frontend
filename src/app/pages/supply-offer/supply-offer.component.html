@@ -227,11 +227,11 @@
                 </div>
             </div>
             <div class="row"
-                 *ngIf="numberOfImportedOffers && !showDeletedOfferBanner">
+                 *ngIf="countOfImportedOffers && !showDeletedOfferBanner">
                 <div class="col-12">
                     <lnd-alert
                         type="info"
-                        [hasIcon]="true">Přidali jsme {{numberOfImportedOffers}} {{(numberOfImportedOffers | plural: 'new_offer')}}.
+                        [hasIcon]="true">Přidali jsme {{countOfImportedOffers}} {{(countOfImportedOffers | plural: 'new_offer')}}.
                     </lnd-alert>
                 </div>
             </div>

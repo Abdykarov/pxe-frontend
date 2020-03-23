@@ -58,23 +58,34 @@ export const importErrorViolations = {
     'deliveryLengthWrongFormat': 'Dodávka není validní',
     'priceGasWrongFormat': 'Cena plynu není validní',
     'permanentPaymentPriceWrongFormat': 'Stála platba není validní',
-    'benefit1InvalidSize': 'Benefit 1 použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_URL + ' znaků',
-    'benefitUrl1InvalidSize': 'Benefit 1 použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_NAME + ' znaků',
+    'benefit1InvalidSize': 'Benefit 1 - pro URL můžete použít maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_URL + ' znaků',
+    'benefitUrl1InvalidSize': 'Benefit 1 - pro název můžete použít maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_NAME + ' znaků',
     'benefitUrl1InvalidFormat': 'Benefit 1 vyplňte validní URL adresu',
     'benefitWithUrl1Invalid': 'Benefit 1 není validní',
-    'benefit2InvalidSize': 'Benefit 2 použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_URL + ' znaků',
-    'benefitUrl2InvalidSize': 'Benefit 2 použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_NAME + ' znaků',
+    'benefit2InvalidSize': 'Benefit 2 - pro URL můžete použít maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_URL + ' znaků',
+    'benefitUrl2InvalidSize': 'Benefit 2 - pro název můžete použít maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_NAME + ' znaků',
     'benefitUrl2InvalidFormat': 'Benefit 2 vyplňte validní URL adresu',
     'benefitWithUrl2Invalid': 'Benefit 2 není validní',
-    'benefit3InvalidSize': 'Benefit 3 použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_URL + ' znaků',
-    'benefitUrl3InvalidSize': 'Benefit 3 použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_NAME + ' znaků',
+    'benefit3InvalidSize': 'Benefit 3 - pro URL můžete použít maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_URL + ' znaků',
+    'benefitUrl3InvalidSize': 'Benefit 3 - pro název můžete použít maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_NAME + ' znaků',
     'benefitUrl3InvalidFormat': 'Benefit 3 vyplňte validní URL adresu.',
     'benefitWithUrl3Invalid': 'Benefit 3 není validní',
-    'benefit4InvalidSize': 'Benefit 4 použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_URL + ' znaků',
-    'benefitUrl4InvalidSize': 'Benefit 4 použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_NAME + ' znaků',
+    'benefit4InvalidSize': 'Benefit 4 - pro URL můžete použít maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_URL + ' znaků',
+    'benefitUrl4InvalidSize': 'Benefit 4 - pro název můžete použít maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.BENEFIT_NAME + ' znaků',
     'benefitUrl4InvalidFormat': 'Benefit 4 vyplňte validní URL adresu',
     'benefitWithUrl4Invalid': 'Benefit 4 není validní',
     'benefitsNotSetInOrder': 'Benefity nejsou ve správném pořadí',
+    'nameInvalidSize' : 'Název nabídky -  použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.OFFER_NAME + ' znaků.',
+    'priceGasInvalidFormat' : 'Cena plyn - použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT
+        + ' desetinná místa a ' + CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT + ' celých čísel.',
+    'priceVTInvalidFormat': 'Cena za VT - použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT
+        + ' desetinná místa a ' + CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT + ' celých čísel.',
+    'priceNTInvalidFormat': 'Cena za NT - použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT
+        + ' desetinná místa a ' + CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT + ' celých čísel.',
+    'permanentPaymentPriceFormat': 'Stálá cena - použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT
+        + ' desetinná místa a ' + CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT + ' celých čísel.',
+    'validFromMustBeBeforeValidTo': 'Datum začátku platnosti nabídky musí být dřívější než její konec.',
+    'deliveryFromMustBeBeforeDeliveryTo': 'Datum začátku dodávkového období musí být dřívější než jeho konec.',
 };
 
 export const restAPIErrorCodes = {
