@@ -10,7 +10,7 @@
 .accordion-benefit {
 	display: flex;
 	flex-direction: column;
-	background-color: $white;
+	background-color: transparent;
 
 	// Media queries
 	@include media-breakpoint-up(md) {
@@ -32,7 +32,7 @@
 		// Media queries
 		@include media-breakpoint-up(md) {
 			display: inline-flex;
-			padding-bottom: $spacer;
+			padding-left: $spacer;
 			border-bottom: none;
 			order: 1;
 		}

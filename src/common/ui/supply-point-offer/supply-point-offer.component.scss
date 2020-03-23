@@ -80,7 +80,6 @@
 			padding-top: $spacer;
 
 			.supply-point-offer__title {
-				margin-bottom: ( $spacer * 1.5 );
 				font-size: $supply-point-label-font-size;
 
 				// Media queries
@@ -196,16 +195,21 @@
 			font-size: $supply-point-title-font-size;
 			line-height: $supply-point-title-line-height;
 		}
+
+		&--supplier {
+			font-size: $supply-point-offer-price-font-size-xl;
+		}
 	}
 
 	&__info-icon {
-		margin-left: ( $spacer / 2 );
+		display: inline;
+		color: $primary;
 	}
 
 	&__value-box {
 		display: flex;
 		flex-direction: column;
-		margin-bottom: $spacer;
+		margin-bottom: ( $spacer * 1.5 );
 		margin-right: $spacer;
 
 		&--price {
@@ -274,17 +278,19 @@
 		}
 	}
 
-	&__benefits-list {
-		margin-bottom: 0;
+	&__benefits-description-wrapper {
+		display: flex;
+		align-items: center;
+		height: 100%;
+	}
 
-		li {
-			padding-bottom: ( $spacer / 2 );
+	&__benefits-description {
+		display: flex;
+	}
 
-			// Media queries
-			@include media-breakpoint-up(md) {
-				display: inline-block;
-				margin-right: ( $spacer * 3 );
-			}
-		}
+	&__benefits-text {
+		display: inline-block;
+		margin-left: ( $spacer / 2 );
+		text-transform: uppercase;
 	}
 }
