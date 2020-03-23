@@ -204,7 +204,10 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
 
     public approvalAction = (evt) => {
         evt.preventDefault();
-        const offersImportInput = R.map(R.prop('offer'))(this.tableRows);
+        const offersImportInput = R.pipe(
+            R.filter((row) => !row.duplicity),
+            R.map(R.prop('offer')),
+        )(this.tableRows);
 
         this.offerService.batchImport(offersImportInput)
             .pipe(
