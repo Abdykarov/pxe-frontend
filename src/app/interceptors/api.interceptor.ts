@@ -40,11 +40,22 @@ export class ApiInterceptor implements HttpInterceptor {
         if (
             request.url.match(/api\//) &&
             request.url.indexOf('login') < 0 &&
+            request.url.indexOf('export-csv') < 0 &&
             request.url.indexOf('refresh') < 0
         ) {
                 resultRequest = request.clone({
                     headers: this.authService.getAuthorizationHeaders('application/json'),
                 });
+        }
+
+        if (
+            request.url.match(/api\//) &&
+            request.url.indexOf('export-csv') > 0
+        ) {
+            resultRequest = request.clone({
+                headers: this.authService.getAuthorizationHeaders('application/json', 'text/csv'),
+                responseType: 'text',
+            });
         }
 
         return next.handle(resultRequest)
