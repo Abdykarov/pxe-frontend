@@ -26,7 +26,7 @@
 <!--</ng-template>-->
 <ng-template #contractActionsTemplate>
     <div #contractActionsWrapper>
-        <div *ngIf="supplyPoint && supplyPoint.allowedOperations | isAllowedOperation: allowedOperations.UNSET_AUTOMATIC_PROLONGATION"
+        <div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.UNSET_AUTOMATIC_PROLONGATION"
              class="row no-gutters align-items-end mb-5">
             <div class="col-12 col-md-6">
                 <small>Zrušit automatické prodloužení smlouvy</small>
@@ -59,7 +59,7 @@
                 </pxe-verification-form>
             </div>
         </div>
-        <div *ngIf="supplyPoint && supplyPoint.allowedOperations | isAllowedOperation: allowedOperations.LEAVE_CONTRACT"
+        <div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.LEAVE_CONTRACT"
              class="row no-gutters align-items-end mb-5">
             <div class="col-12 col-md-6">
                 <small>Odstoupit od smlouvy do 14 dnů od podpisu</small>
@@ -92,7 +92,7 @@
                 </pxe-verification-form>
             </div>
         </div>
-        <div *ngIf="supplyPoint && supplyPoint.allowedOperations | isAllowedOperation: allowedOperations.TERMINATE_CONTRACT"
+        <div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.TERMINATE_CONTRACT"
              class="row no-gutters align-items-end mb-5">
             <div class="col-12 col-md-6">
                 <small>Vypovědět smlouvu</small>
@@ -125,7 +125,7 @@
                 </pxe-verification-form>
             </div>
         </div>
-        <!--<div *ngIf="supplyPoint && supplyPoint.allowedOperations | isAllowedOperation: allowedOperations.TERMINATE_CONTRACT"-->
+        <!--<div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.TERMINATE_CONTRACT"-->
              <!--class="row no-gutters align-items-end mb-5">-->
             <!--<div class="col-12 col-md-6">-->
                 <!--<small>Převést odběrné místo na jiného odběratele</small>-->

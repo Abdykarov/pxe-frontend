@@ -222,7 +222,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
                     }
                     this.cd.markForCheck();
                 },
-        );
+            );
         } else {
             this.contractService.unsetContractProlongation(
                 this.supplyPoint.id,

@@ -1,4 +1,4 @@
-<ng-container *ngIf="supplyPoint && supplyPoint.allowedOperations | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO">
+<ng-container *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO">
     <ng-container *ngIf="(supplyPoint | pathValue:['contract', 'deliveryTo']) && (today | dateDiff: supplyPoint.contract.deliveryTo) as contractEndInDays">
         <div *ngIf="contractEndInDays >= 0"
              class="row">
@@ -181,7 +181,7 @@
                     </div>
                 </div>
                 <hr>
-                <ng-container *ngIf="supplyPoint && supplyPoint.allowedOperations | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO">
+                <ng-container *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO">
                     <div class="row no-gutters align-items-end mb-5">
                         <div class="col-12 col-md-6">
                             <small>
@@ -203,7 +203,7 @@
                     <ng-container *ngTemplateOutlet="contractActionsTemplate"></ng-container>
                 </ng-container>
                 <div class="row text-center">
-                    <div *ngIf="supplyPoint && supplyPoint.allowedOperations | isAllowedOperation: allowedOperations.PARTIAL_EDIT"
+                    <div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.PARTIAL_EDIT"
                          class="col-12 mb-2">
                         <lnd-button
                                 label="Uložit"
