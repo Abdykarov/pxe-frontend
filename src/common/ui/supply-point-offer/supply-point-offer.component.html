@@ -56,10 +56,10 @@
                         <div class="col-12 col-md-8 col-xl-12">
                             <span class="supply-point-offer__title text-break">
                                 <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
-                                    {{supplyPointOffer.prepayment | number: '1.0-2'}}&nbsp;Kč
+                                    {{supplyPointOffer.prepayment | number: '1.0-0'}}&nbsp;Kč<small>&nbsp;VČETNĚ&nbsp;DPH</small>
                                 </ng-container>
                                 <ng-template #totalPrice>
-                                    {{supplyPointOffer.totalPrice | number: '1.0-2'}}&nbsp;Kč
+                                    {{supplyPointOffer.totalPrice | number: '1.0-0'}}&nbsp;Kč<small>&nbsp;VČETNĚ&nbsp;DPH</small>
                                 </ng-template>
                             </span>
                         </div>
