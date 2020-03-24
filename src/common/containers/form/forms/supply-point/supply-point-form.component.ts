@@ -46,6 +46,7 @@ import {
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import {
+    anyToString,
     convertArrayToObject,
     convertDateToSendFormatFnc,
     CustomValidators,
@@ -263,23 +264,17 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         this.form.controls[typeOfAnnualConsumption].updateValueAndValidity();
     }
 
-    public operationOnNumber = (number: string | number, fnc: any) => {
+    public operationOnNumber = (number: string | number, fnc: any): string => {
         if (!number) {
-            return number;
+            return '';
         }
-        const hadComma = number.toString().includes(',');
         return R.pipe(
-            (num: string | number): string => num.toString(),
+            anyToString,
             R.replace(',', '.'),
             parseFloat,
             fnc,
-            (num: number): string => num.toString(),
-            (num: string) => {
-                if (hadComma) {
-                    return R.replace('.', ',', num);
-                }
-                return num;
-            },
+            anyToString,
+            R.replace('.', ','),
         )(number);
     }
 
