@@ -110,6 +110,18 @@ const routes = [
                 },
             },
             {
+                path: CONSTS.PATHS.IMPORT,
+                loadChildren: '../../pages/import/import.module#ImportModule',
+                data: {
+                    isSimpleFooter: false,
+                    isPublic: false,
+                    isSupplier: true,
+                    loginType: LoginType.NONE,
+                    signUpType: SignType.NONE,
+                    hideLeftNavigation: true,
+                },
+            },
+            {
                 path: CONSTS.PATHS.CHANGE_PASSWORD,
                 loadChildren: '../../pages/user-change-password/user-change-password.module#UserChangePasswordModule',
                 resolve: {

@@ -23,6 +23,12 @@ export const formFields: IForm = {
                 Validators.required,
             ],
         ],
+        greenEnergy: [
+            false,
+            [
+                Validators.required,
+            ],
+        ],
         subjectTypeId: [
             null,
             [

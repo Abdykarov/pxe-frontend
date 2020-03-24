@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import {
     HttpEvent,
     HttpHandler,
-    HttpHeaders,
     HttpInterceptor,
     HttpRequest,
 } from '@angular/common/http';
-import { Router } from '@angular/router';
 
 import { catchError } from 'rxjs/operators';
 import {
@@ -26,7 +24,6 @@ export class ApiInterceptor implements HttpInterceptor {
 
     constructor(
         private authService: AuthService,
-        private router: Router,
     ) {}
 
     intercept(
@@ -40,15 +37,13 @@ export class ApiInterceptor implements HttpInterceptor {
             },
         });
 
-        if (request.url.match(/api\//) &&
+        if (
+            request.url.match(/api\//) &&
             request.url.indexOf('login') < 0 &&
-            request.url.indexOf('refresh') < 0) {
+            request.url.indexOf('refresh') < 0
+        ) {
                 resultRequest = request.clone({
-                    headers: new HttpHeaders({
-                        'Authorization': 'Bearer ' + this.authService.getToken(),
-                        'Content-Type': 'application/json',
-                        'X-API-Key': `${environment.x_api_key}`,
-                    }),
+                    headers: this.authService.getAuthorizationHeaders('application/json'),
                 });
         }
 

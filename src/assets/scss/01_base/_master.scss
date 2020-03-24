@@ -83,6 +83,7 @@ h1,
 h2,
 .h2 {
 	line-height: ( 24 / 18 );
+	text-transform: none;
 
 	& > .h2__sub-text {
 		font-size: $h2-font-size-snd;

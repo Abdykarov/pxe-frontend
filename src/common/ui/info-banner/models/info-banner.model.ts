@@ -4,6 +4,7 @@ export enum BannerTypeImages {
     DOCUMENTS_ALERT = '/assets/images/illustrations/documents-alert.svg',
     HOUSE = '/assets/images/illustrations/house.svg',
     HOUSE_ALERT = '/assets/images/illustrations/house-alert.svg',
+    IMPORT_ERROR = '/assets/images/illustrations/import-error.svg',
     LIGHT = '/assets/images/illustrations/light.svg',
     LOADING = '/assets/images/illustrations/loading.svg',
     MAIL_LETTER = '/assets/images/illustrations/mail-letter.svg',

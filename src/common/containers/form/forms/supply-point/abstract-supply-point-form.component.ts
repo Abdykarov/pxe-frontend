@@ -12,10 +12,10 @@ import * as R from 'ramda';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import {
     CommodityType,
-    DistributionType,
+    ICodelistOptions,
 } from 'src/common/graphql/models/supply.model';
-import { DISTRIBUTION_RATES_TYPE_DEFINITION } from 'src/app/app.constants';
 import { ICommodityTypeFields } from 'src/common/containers/form/models/form-definition.model';
+import { includesBothTariffs } from 'src/common/utils';
 
 export class AbstractSupplyPointFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
     public allowedFields: ICommodityTypeFields;
@@ -34,15 +34,13 @@ export class AbstractSupplyPointFormComponent extends AbstractFormComponent impl
         super.ngOnChanges(changes);
     }
 
-    public setAnnualConsumptionNTState = (distributionRateId: string = null) => {
-        if (this.includesBothTariffs(distributionRateId)) {
+    public setAnnualConsumptionNTState = (distributionRateId: string = null, codeLists: ICodelistOptions = null) => {
+        if (includesBothTariffs(distributionRateId, codeLists)) {
             this.setEnableField('annualConsumptionNT');
         } else {
             this.setDisableField('annualConsumptionNT');
         }
     }
-
-    public includesBothTariffs = (id: string) => DISTRIBUTION_RATES_TYPE_DEFINITION[DistributionType.BOTH].includes(id);
 
     public setFormFields = (commodityType: CommodityType) => {
         R.mapObjIndexed((fieldControl, field: string) => {

@@ -9,6 +9,10 @@ import {
     OnInit,
     PLATFORM_ID,
 } from '@angular/core';
+import {
+    Meta,
+    Title,
+} from '@angular/platform-browser';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
@@ -19,6 +23,10 @@ import {
 
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { AuthService } from 'src/app/services/auth.service';
+import {
+    CONSTS,
+    SEO,
+} from 'src/app/app.constants';
 import {
     INavigationConfig,
     INavigationMenu,
@@ -47,14 +55,16 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
         protected apollo: Apollo,
         public authService: AuthService,
         private cd: ChangeDetectorRef,
+        private metaService: Meta,
         private navigationApolloService: NavigationApolloService,
         private navigationService: NavigationService,
         protected overlayService: OverlayService,
-        @Inject(PLATFORM_ID) protected platformId: string,
         protected route: ActivatedRoute,
         protected router: Router,
         protected sAnalyticsService: SAnalyticsService,
         protected scrollToService: ScrollToService,
+        private titleService: Title,
+        @Inject(PLATFORM_ID) protected platformId: string,
     ) {
         super(
             apollo,
@@ -66,6 +76,15 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
             sAnalyticsService,
             scrollToService,
         );
+        this.titleService.setTitle(CONSTS.TITLES.DEFAULT);
+        this.metaService.updateTag({
+            name: 'description',
+            content: SEO.META_DESCRIPTION.LANDING_PAGE,
+        });
+        this.metaService.updateTag({
+            name: 'keywords',
+            content: SEO.META_KEYWORDS.LANDING_PAGE.toString(),
+        });
 
         this.navigationService.getNavigationConfig();
 

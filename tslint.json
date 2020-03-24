@@ -134,7 +134,9 @@
             "attribute",
             [
                 "lnd",
-                "pxe"
+                "pxe",
+                "ng2FileDrop",
+                "ng2FileSelect"
             ],
             "camelCase"
         ],
