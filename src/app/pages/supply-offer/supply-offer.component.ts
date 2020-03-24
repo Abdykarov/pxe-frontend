@@ -25,7 +25,6 @@ import {
     map,
     takeUntil,
 } from 'rxjs/operators';
-import { IResponseDataDocument } from 'src/app/services/model/document.model';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
@@ -49,6 +48,7 @@ import {
     IOfferInputPowerAttributes,
     IOfferStatus,
 } from 'src/common/graphql/models/offer.model';
+import { IResponseDataDocument } from 'src/app/services/model/document.model';
 import { ITableColumnConfig } from 'src/common/ui/table/models/table.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { OfferService } from 'src/common/graphql/services/offer.service';

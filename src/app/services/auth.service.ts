@@ -271,13 +271,15 @@ export class AuthService {
         });
     }
 
-    public getAuthorizationHeaders = (contentType: string = null, accept: string = '*/*'): HttpHeaders =>
-        new HttpHeaders({
-            'Authorization': 'Bearer ' + this.getToken(),
-            ...(contentType) && {'Content-Type': contentType},
+    public getAuthorizationHeaders = (contentType: string = null, accept: string = '*/*'): HttpHeaders => {
+        const token = this.getToken();
+        return new HttpHeaders({
+            ...(!!token) && {Authorization: `Bearer ${token}`},
+            ...(!!contentType) && {'Content-Type': contentType},
             'X-API-Key': `${environment.x_api_key}`,
             accept,
-        })
+        });
+    }
 
     public homeRedirect = () => {
         if (!this.isLogged()) {
