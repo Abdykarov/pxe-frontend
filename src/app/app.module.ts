@@ -17,6 +17,7 @@ import { HttpLinkModule } from 'apollo-angular-link-http';
 import { ApolloGraphQLProvider } from 'src/common/graphql/middleware/apollo-graphql-provider';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
+import { FileUploadModule } from 'src/third-sides/file-upload';
 import { InterceptorProviders } from './interceptors';
 import { PipesModule } from 'src/common/pipes/pipes.module';
 
@@ -31,6 +32,7 @@ import { PipesModule } from 'src/common/pipes/pipes.module';
             appId: 'pxe-pacr4retail',
         }),
         CookieModule.forRoot(),
+        FileUploadModule,
         HttpClientModule,
         HttpLinkModule,
         PipesModule,

@@ -21,6 +21,7 @@ import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/for
 import {
     AllowedOperations,
     CommodityType,
+    ICodelistOptions,
     ISupplyPoint,
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
@@ -30,6 +31,7 @@ import {
     supplyPointDetailAllowedFields,
 } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import {
+    CODE_LIST_TYPES,
     CONSTS,
     CONTRACT_END_TYPE,
     CONTRACT_END_TYPE_TRANSLATE_MAP,
@@ -40,6 +42,8 @@ import {
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
+import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { transformCodeList } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-supply-point-detail-form',
@@ -56,6 +60,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     public allowedFields = supplyPointDetailAllowedFields;
     public allowedOperations = AllowedOperations;
     public commodityType = CommodityType;
+    public codeLists: ICodelistOptions;
     public contractEndType = CONTRACT_END_TYPE;
     public contractEndTypeTranslateMap = CONTRACT_END_TYPE_TRANSLATE_MAP;
     public suppliers = [];
@@ -73,23 +78,31 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         protected fb: FormBuilder,
         private modalsService: ModalService,
         private router: Router,
+        private supplyService: SupplyService,
     ) {
         super(fb);
     }
 
     ngOnInit() {
         super.ngOnInit();
-
         this.setFormByCommodity(this.commodityType[this.supplyPoint.commodityType]);
-        this.setAnnualConsumptionNTState(this.supplyPoint.distributionRate && this.supplyPoint.distributionRate.code);
         this.subjectName = R.find(R.propEq('value', this.supplyPoint.subject.code))(SUBJECT_TYPE_OPTIONS).label;
         this.prefillFormData();
 
+        this.supplyService.findCodelistsByTypes(CODE_LIST_TYPES, 'cs')
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(({data}) => {
+                this.codeLists = transformCodeList(data.findCodelistsByTypes);
+                this.setAnnualConsumptionNTState(
+                    this.supplyPoint.distributionRate && this.supplyPoint.distributionRate.code,
+                    this.codeLists,
+                );
+                this.cd.markForCheck();
+            });
+
         this.modalsService.closeModalData$
             .pipe(
-                takeUntil(
-                    this.destroy$,
-                ),
+                takeUntil(this.destroy$),
                 filter(R_.isNotNil),
                 filter((modal: ICloseModalData) => modal.confirmed),
             )
