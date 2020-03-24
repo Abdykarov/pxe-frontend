@@ -86,6 +86,7 @@ type Mutation {
     sendConfirmUnsetContractProlongationSms: Boolean
     sendContractConfirmationSms(contractId: ID!): Boolean
     sendUnregisterSms: Boolean
+    setContractProlongation(contractId: ID!, prolong: Boolean!): Boolean
     signContract(contractId: Int!, smsCode: String): Boolean
     unsetContractProlongation(contractId: ID!, smsCode: String!): Boolean
     updateGasOffer(gasAttributes: OfferInputGasAttributes!, offer: OfferInput!, offerId: ID!): Offer
@@ -279,8 +280,8 @@ enum CommodityType {
     POWER
 }
 
-enum ContractDeleteReason {
-    LEAVING
+enum ContractDeleteReason{
+    LEAVING,
     TERMINATION
 }
 
