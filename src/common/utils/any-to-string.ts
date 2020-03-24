@@ -1,1 +1,1 @@
-export const anyToString = (text: any): boolean =>  text.toString();
+export const anyToString = (text: any): boolean => text.toString();

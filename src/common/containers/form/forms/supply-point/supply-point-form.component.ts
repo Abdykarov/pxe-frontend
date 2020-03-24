@@ -264,7 +264,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         this.form.controls[typeOfAnnualConsumption].updateValueAndValidity();
     }
 
-    public operationOnNumber = (number: string | number, fnc: any): string => {
+    public operationOnNumber = (number: string | number, fnc: Function): string => {
         if (!number) {
             return '';
         }
