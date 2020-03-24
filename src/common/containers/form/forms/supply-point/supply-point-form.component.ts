@@ -143,9 +143,8 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 this.resetFormError(false);
                 this.setFormByCommodity(commodityType);
                 this.resetFieldValue('supplierId', false);
-                this.setAnnualConsumptionNTState(
-                    commodityType === CommodityType.POWER ? this.getFieldValue('distributionRateId') : null, this.codeLists,
-                    );
+                const distributionRateId = commodityType === CommodityType.POWER ? this.getFieldValue('distributionRateId') : null;
+                this.setAnnualConsumptionNTState(distributionRateId, this.codeLists);
                 this.setOwnTerminate(this.form.get('ownTerminate').value);
             });
 
@@ -249,7 +248,8 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                             CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION,
                         ),
                     ]);
-            this.form.controls[typeOfAnnualConsumption].setValue(this.operationOnNumber(annualAnnualConsumption, (num) => num * 1000));
+            const typeOfAnnualConsumptionValue = this.operationOnNumber(annualAnnualConsumption, (num) => num * 1000);
+            this.form.controls[typeOfAnnualConsumption].setValue(typeOfAnnualConsumptionValue);
         } else {
             this.form.controls[typeOfAnnualConsumption]
                 .setValidators(
@@ -259,7 +259,8 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                         CustomValidators.minValue(0),
                         CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
                     ]);
-            this.form.controls[typeOfAnnualConsumption].setValue(this.operationOnNumber(annualAnnualConsumption, (num) => num / 1000));
+            const typeOfAnnualConsumptionValue = this.operationOnNumber(annualAnnualConsumption, (num) => num / 1000);
+            this.form.controls[typeOfAnnualConsumption].setValue(typeOfAnnualConsumptionValue);
         }
         this.form.controls[typeOfAnnualConsumption].updateValueAndValidity();
     }
