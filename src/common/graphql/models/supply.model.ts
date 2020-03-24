@@ -128,6 +128,8 @@ export interface ISupplyPoint {
     timeToContractEndPeriod: ICodelistItem;
     contract: IContract;
     progressStatus: ProgressStatus;
+    annualConsumptionNTUnit?: string;
+    annualConsumptionVTUnit?: string;
 }
 
 export enum ProgressStatus {
@@ -154,6 +156,8 @@ export interface ISupplyPointFormData {
     annualConsumptionVT?: number;
     eic?: string;
     annualConsumption?: number;
+    annualConsumptionNTUnit?: string;
+    annualConsumptionVTUnit?: string;
 }
 
 export interface ISupplyPointStatistic {

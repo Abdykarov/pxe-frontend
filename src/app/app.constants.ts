@@ -84,8 +84,10 @@ export const CONSTS = {
     },
     VALIDATORS: {
         ADULTHOOD_AGE: 18,
-        MAX_DIGIT_BEFORE_DECIMAL_POINT: 7,
-        MAX_DIGIT_AFTER_DECIMAL_POINT: 2,
+        MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION: 10,
+        MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT: 7,
+        MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT: 2,
+        MAX_DIGIT_AFTER_DECIMAL_POINT_ANNUAL_CONSUMPTION: 3,
         MAX_LENGTH: {
             NUMBER_INPUT_WITH_HINT: 10,
             BENEFIT_NAME: 100,
@@ -226,6 +228,7 @@ export enum INavigationItemType {
 }
 
 export const CODE_LIST = {
+    ANNUAL_CONSUMPTION_UNITS: 'UNITS',
     DIST_RATE: 'DSTP4R',
     DIST_RATE_COMPANY: 'DSTSA1',
     DIST_RATE_INDIVIDUAL: 'DSTSA2',
@@ -245,6 +248,7 @@ export const CODE_LIST = {
 };
 
 export const CODE_LIST_TYPES = [
+    CODE_LIST.ANNUAL_CONSUMPTION_UNITS,
     CODE_LIST.DIST_RATE,
     CODE_LIST.DIST_RATE_INDIVIDUAL,
     CODE_LIST.DIST_RATE_COMPANY,
@@ -400,6 +404,11 @@ export const DEFAULT_QR_CODE_SETTING: IQRCodeSetting = {
     margin: 0,
 };
 
+export enum UNIT_OF_PRICES {
+    MWH = 'MWh',
+    KWH = 'kWh',
+}
+
 export const REGIONS: Array<IOption> = [
     {
         'label': 'Hlavní město Praha',
@@ -480,5 +489,20 @@ export enum RequestsOverviewBannerShow {
     TERMINATE_CONTRACT = 'TERMINATE_CONTRACT',
     LEAVE_CONTRACT = 'LEAVE_CONTRACT',
 }
-
 export const FILE_UPLOAD_CONFIG = 'file_upload_config';
+
+export enum ANNUAL_CONSUMPTION_TYPES {
+    ANNUAL_CONSUMPTION_NT = 'annualConsumptionNT',
+    ANNUAL_CONSUMPTION_VT = 'annualConsumptionVT',
+}
+
+export enum ANNUAL_CONSUMPTION_UNIT_TYPES {
+    ANNUAL_CONSUMPTION_NT_UNIT = 'annualConsumptionNTUnit',
+    ANNUAL_CONSUMPTION_VT_UNIT = 'annualConsumptionVTUnit',
+}
+
+export const TypeOfAnnualConsumptionUnitMapping =  {
+    ANNUAL_CONSUMPTION_NT_UNIT: 'prevAnnualConsumptionNTUnit',
+    ANNUAL_CONSUMPTION_UNIT: 'prevAnnualConsumptionUnit',
+    ANNUAL_CONSUMPTION_VT_UNIT: 'prevAnnualConsumptionVTUnit',
+};
