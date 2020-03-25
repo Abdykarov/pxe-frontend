@@ -10,7 +10,6 @@ import { FormBuilder } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
-import { AuthService } from 'src/app/services/auth.service';
 import { CONSTS } from 'src/app/app.constants';
 import { IUserProfileModelForm } from 'src/common/containers/form/forms/user-profile/user-profile-form.model';
 import { IPersonalDataInputForm } from 'src/common/graphql/models/personal-data.model';
@@ -34,9 +33,7 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
     public phoneNumber = '';
 
     constructor(
-        private authService: AuthService,
         protected fb: FormBuilder,
-        private valueOfFormPipe: ValueOfFormPipe,
     ) {
         super(fb);
     }
