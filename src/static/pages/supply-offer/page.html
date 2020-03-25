@@ -1,3 +1,22 @@
+<ng-template #columnTemplateMarkAll>
+    <lnd-form-field
+        label="Označit"
+        customFormGroupClass="form-group form-group--in-table"
+        (click)="click($event)"
+        [type]="'CHECKBOX'">
+    </lnd-form-field>
+</ng-template>
+<ng-template #columnTemplateMark let-row="row">
+    <lnd-form-field
+        label="&#8203;"
+        customFormGroupClass="form-group form-group--in-table"
+        (click)="click($event)"
+        [type]="'CHECKBOX'">
+    </lnd-form-field>
+    <span *ngIf="row.greenEnergy"
+          class="icon icon--leaf icon--green ml-2 align-bottom">
+        </span>
+</ng-template>
 <ng-template #columnTemplatePriceVT let-row="row">
     {{row.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
 </ng-template>
@@ -107,11 +126,19 @@
             </lnd-tooltip>
         </div>
     </div>
-    <div class="row">
+    <div class="row align-items-center">
         <div class="col-4 col-xl-3">
             <lnd-form-field
                     [id]="'name'"
                     label="Název produktu"
+            ></lnd-form-field>
+        </div>
+        <div class="col-4 col-xl-3 offset-xl-3">
+            <lnd-form-field
+                [id]="'greenEnery'"
+                label="Zelená energie"
+                type="CHECKBOX"
+                [customFormGroupClass]="'form-group--with-green-energy-icon mb-0'"
             ></lnd-form-field>
         </div>
     </div>
@@ -287,7 +314,7 @@
                 </h1>
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-4">
             <div class="col-12 col-xl-10 offset-xl-1 text-center">
                 <ul class="link-list mb-0">
                     <li class="link-list__item">
@@ -309,6 +336,45 @@
         </div>
         <div class="row">
             <div class="col-12 col-lg-10 offset-lg-1">
+                <div class="row mb-4">
+                    <div class="col-12 text-center">
+                        <div class="supply-offer-controls">
+                            <div class="supply-offer-controls__btn-holder mb-2 mb-md-0">
+                                <lnd-button
+                                    label="Přidat nabídku"
+                                    type="secondary"
+                                    customClass="mb-3 mb-md-0 mr-md-3"
+                                    (action)="click($event)"
+                                ></lnd-button>
+                                <lnd-button
+                                    label="Import nabídek"
+                                    type="secondary"
+                                    customClass="mb-3 mb-md-0 mr-md-3"
+                                    (action)="click($event)"
+                                ></lnd-button>
+                                <lnd-button
+                                    label="Export nabídek"
+                                    type="primary"
+                                    customClass="mb-3 mb-md-0"
+                                    (click)="click($event)"
+                                ></lnd-button>
+                            </div>
+                            <lnd-button
+                                [isDisabled]="true"
+                                label="Odstranit"
+                                type="danger"
+                                hasOutline="true"
+                                customClass="w-100"
+                                (action)="click($event)"
+                            ></lnd-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12 text-center">
+                        Počet označených nabídek: 0
+                    </div>
+                </div>
                 <lnd-table
                     #table
                     [cols]="supplyOfferConfig.tableCols[commodityType]"
@@ -319,13 +385,16 @@
                     [tableClass]="['table--advanced', 'mb-0']"
                     [rowDetailTemplate]="rowDetail"
                     [actionColTriggersDetail]="true"
+                    [whiteBackgroundPropertyCondition]="'marked'"
                     [columnTemplates]="{
                         actionColumnTemplate: actionColumnTemplate,
                         columnTemplatePriceVT: columnTemplatePriceVT,
                         columnTemplatePriceNT: columnTemplatePriceNT,
                         columnTemplatePriceGas: columnTemplatePriceGas,
                         columnTemplateValidFromTo: columnTemplateValidFromTo,
-                        columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo
+                        columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo,
+                        columnTemplateMarkAll: columnTemplateMarkAll,
+                        columnTemplateMark: columnTemplateMark
                     }">
                 </lnd-table>
             </div>

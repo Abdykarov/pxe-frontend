@@ -32,6 +32,8 @@ export class TableComponent extends AbstractComponent implements OnChanges {
     @Input() tableClass?: string;
     @Input() rowSelectorFn?: (row: any) => boolean;
     @Input() isStatic = false;
+    @Input() whiteBackgroundPropertyCondition?: string;
+    @Input() dangerBackgroundPropertyCondition?: string;
 
     // where to switch between mobile and desktop layout
     @Input() mobileLayoutBreakpoint = 'md';

@@ -16,19 +16,19 @@ export const offerConfig1: IOffer = {
     validTo: new Date(new Date().getTime() + 3600 * 1000 * 24).toISOString(),
     benefits: [
         {
-            name: 'Žárovka LED Lorem',
+            name: 'Žárovka LED 1',
             url: 'https://www.seznam.cz/',
         },
         {
-            name: 'Žárovka LED Lorem',
+            name: 'Žárovka LED 2',
             url: 'https://www.seznam.cz/',
         },
         {
-            name: 'Žárovka LED Lorem',
+            name: 'Žárovka LED 3',
             url: 'https://www.seznam.cz/',
         },
         {
-            name: 'Žárovka LED Lorem',
+            name: 'Žárovka LED 4',
             url: 'https://www.seznam.cz/',
         },
     ],
@@ -57,6 +57,7 @@ export const offerConfig1: IOffer = {
     unit: 'MWh',
     status: null,
     subject: null,
+    greenEnergy: true,
 };
 
 export const offerConfig2: IOffer = {
@@ -111,6 +112,7 @@ export const offerConfig2: IOffer = {
     systemServicesRegulatedPrice: 0.06,
     totalPrice: 145.72,
     unit: 'MWh',
+    greenEnergy: false,
 };
 
 export const offerConfig3: IOffer = {
@@ -169,4 +171,5 @@ export const offerConfig3: IOffer = {
     priceVTWithVAT: 1.92,
     totalPrice: 145.72,
     unit: 'MWh',
+    greenEnergy: true,
 };
