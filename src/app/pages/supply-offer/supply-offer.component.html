@@ -1,3 +1,24 @@
+<ng-template #columnTemplateMarkAll>
+    <lnd-form-field
+        customFormGroupClass="form-group form-group--in-table"
+        label="Označit"
+        [value]="tableRows.length === numberOfMarked"
+        (click)="markAll($event)"
+        [type]="'CHECKBOX'">
+    </lnd-form-field>
+</ng-template>
+<ng-template #columnTemplateMark let-row="row">
+    <lnd-form-field
+        label="&#8203;"
+        customFormGroupClass="form-group form-group--in-table"
+        [value]="!!row.marked"
+        (click)="markOne(row.id, $event)"
+        [type]="'CHECKBOX'">
+    </lnd-form-field>
+    <span *ngIf="row.greenEnergy"
+          class="icon icon--leaf icon--green ml-2 align-bottom">
+    </span>
+</ng-template>
 <ng-template #columnTemplatePriceVT let-row="row">
     {{row.priceVT | number:'1.0-2'}}&nbsp;Kč/MWh (bez&nbsp;DPH)
 </ng-template>
@@ -129,13 +150,6 @@
 </ng-template>
 
 <pxe-layout-container pageTitle="Přehled nabídek">
-    <lnd-alert
-            *ngIf="globalError.length"
-            type="danger">
-        <ng-container *ngFor="let error of globalError">
-            {{ error }}<br>
-        </ng-container>
-    </lnd-alert>
     <ul class="text-center link-list">
         <li class="link-list__item">
             <a class="link-list__link"
@@ -152,7 +166,42 @@
     </ul>
     <ng-container>
         <lnd-placeloader [loading]="loadingOffers && !globalError.length"></lnd-placeloader>
-        <div *ngIf="!loadingOffers && tableRows.length === 0" class="page-box">
+        <div class="row">
+            <div class="col-12">
+                <lnd-alert
+                    *ngIf="globalError.length"
+                    type="danger">
+                    <ng-container *ngFor="let error of globalError">
+                        {{ error }}<br>
+                    </ng-container>
+                </lnd-alert>
+            </div>
+        </div>
+        <ng-container *ngIf="!loadingOffers && tableRows.length === 0">
+            <div class="row mt-5">
+                <div class="col-12">
+                    <lnd-info-banner
+                        [bannerTitle]="this.commodityType === commodityTypeOptions.POWER ?
+                                            'Nemáte žádnou nabídku elektřiny.' : 'Nemáte žádnou nabídku plynu.'"
+                        [bannerType]="bannerTypeImages.IMPORT_ERROR"
+                        bannerDescription="Proveďte import nabídek nahráním CSV souboru nebo přidejte nabídku ručně."
+                        buttonLabel="Import nabídek"
+                        (buttonAction)="navigateToImportOffer($event)"
+                    >
+                    </lnd-info-banner>
+                </div>
+            </div>
+            <div class="row mt-2 mb-2">
+                <div class="col-12 text-center">
+                    <lnd-button
+                        label="{{offerFormInEmptyPage ? 'Skrýt formulář' : 'Přidat nabídku'}}"
+                        type="secondary"
+                        (action)="toggleOfferFormInEmptyPage($event)">
+                    </lnd-button>
+                </div>
+            </div>
+        </ng-container>
+        <div *ngIf="!loadingOffers && offerFormInEmptyPage" class="page-box">
             <pxe-supply-offer-form
                     [commodityType]="commodityType"
                     [formValues]="null"
@@ -169,26 +218,89 @@
         <div
             class="mb-4" 
             [hidden]="loadingOffers || tableRows.length === 0">
-            <lnd-table
-                #table
-                [cols]="tableCols"
-                [rows]="tableRows"
-                [showHead]="true"
-                [isStatic]="false"
-                [tableWrapperClass]="['table-wrapper--advanced']"
-                [tableClass]="['table--advanced', 'mb-0']"
-                [rowDetailTemplate]="rowDetail"
-                [actionColTriggersDetail]="true"
-                [columnTemplates]="{
-                    actionColumnTemplate: actionColumnTemplate,
-                    columnTemplatePriceVT: columnTemplatePriceVT,
-                    columnTemplatePriceNT: columnTemplatePriceNT,
-                    columnTemplatePriceGas: columnTemplatePriceGas,
-                    columnTemplateValidFromTo: columnTemplateValidFromTo,
-                    columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo
-                }">
-            </lnd-table>
+            <div class="row"
+                 *ngIf="showDeletedOfferBanner">
+                <div class="col-12 text-center">
+                    <lnd-alert type="info">
+                        Odstranili jste {{numberOfDeletedOffers}} {{(numberOfDeletedOffers | plural: 'offer_delete')}}.
+                    </lnd-alert>
+                </div>
+            </div>
+            <div class="row"
+                 *ngIf="countOfImportedOffers && !showDeletedOfferBanner">
+                <div class="col-12">
+                    <lnd-alert
+                        type="info"
+                        [hasIcon]="true">Přidali jsme {{countOfImportedOffers}} {{(countOfImportedOffers | plural: 'new_offer')}}.
+                    </lnd-alert>
+                </div>
+            </div>
+        </div>
+        <div class="row"
+             [hidden]="loadingOffers || tableRows.length === 0">
+            <div class="col-12">
+                <div class="row mb-4">
+                    <div class="col-12 text-center">
+                        <div class="supply-offer-controls">
+                            <div class="supply-offer-controls__btn-holder mb-2 mb-md-0">
+                                <lnd-button
+                                    label="Přidat nabídku"
+                                    type="secondary"
+                                    customClass="mb-3 mb-md-0 mr-md-3"
+                                    (action)="createNewOffer($event)"
+                                ></lnd-button>
+                                <lnd-button
+                                    label="Import nabídek"
+                                    type="secondary"
+                                    customClass="mb-3 mb-md-0 mr-md-3"
+                                    (action)="navigateToImportOffer($event)"
+                                ></lnd-button>
+                                <lnd-button
+                                    label="Export nabídek"
+                                    type="primary"
+                                    customClass="mb-3 mb-md-0"
+                                    (click)="exportOffers($event)"
+                                ></lnd-button>
+                            </div>
+                            <lnd-button
+                                [isDisabled]="!numberOfMarked"
+                                label="Odstranit"
+                                type="danger"
+                                hasOutline="true"
+                                customClass="w-100"
+                                (action)="deleteMarkedOffers()"
+                            ></lnd-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12 text-center">
+                        Počet označených nabídek: {{numberOfMarked}}
+                    </div>
+                </div>
+                <lnd-table
+                    #table
+                    [cols]="tableCols"
+                    [rows]="tableRows"
+                    [showHead]="true"
+                    [isStatic]="false"
+                    [tableWrapperClass]="['table-wrapper--advanced']"
+                    [tableClass]="['table--advanced', 'mb-0']"
+                    [rowDetailTemplate]="rowDetail"
+                    [actionColTriggersDetail]="true"
+                    [whiteBackgroundPropertyCondition]="'marked'"
+                    [columnTemplates]="{
+                        actionColumnTemplate: actionColumnTemplate,
+                        columnTemplatePriceVT: columnTemplatePriceVT,
+                        columnTemplatePriceNT: columnTemplatePriceNT,
+                        columnTemplatePriceGas: columnTemplatePriceGas,
+                        columnTemplateValidFromTo: columnTemplateValidFromTo,
+                        columnTemplateDeliveryFromTo: columnTemplateDeliveryFromTo,
+                        columnTemplateMark: columnTemplateMark,
+                        columnTemplateMarkAll: columnTemplateMarkAll
+                    }">
+                </lnd-table>
+            </div>
         </div>
     </ng-container>
-
 </pxe-layout-container>

@@ -89,9 +89,7 @@ export class LoginComponent extends AbstractComponent {
 
         this.route.queryParams
             .pipe(
-                takeUntil(
-                    this.destroy$,
-                ),
+                takeUntil(this.destroy$),
             )
             .subscribe(() => {
                 this.state = ILoginState.LOGIN;
@@ -129,6 +127,8 @@ export class LoginComponent extends AbstractComponent {
 
     public resetPassword = (login: string) => {
         this.formLoading = true;
+
+        this.authService.cleanUserData();
         this.userService.resetPassword(login)
             .pipe(
                 takeUntil(this.destroy$),

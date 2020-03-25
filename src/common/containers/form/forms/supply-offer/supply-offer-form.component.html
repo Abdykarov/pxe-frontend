@@ -24,6 +24,16 @@
                     [value]="form.controls.name.value"
             ></lnd-form-field>
         </div>
+        <div *ngIf="form.controls.greenEnergy.status !== 'DISABLED'"
+             class="col-4 col-xl-3 offset-xl-3">
+            <lnd-form-field
+                [id]="'greenEnergy'"
+                label="Zelená energie"
+                [type]="'CHECKBOX'"
+                [customFormGroupClass]="'form-group--in-table form-group--with-green-energy-icon mb-2'"
+                [formControl]="form.controls.greenEnergy"
+            ></lnd-form-field>
+        </div>
     </div>
     <div class="row">
         <div *ngIf="form.controls.subjectTypeId.status !== 'DISABLED'"
@@ -199,7 +209,7 @@
     </div>
     <div class="row">
         <ng-container *ngFor="let benefit of (form | valueOfForm: 'benefits').controls; let i = index"
-        formArrayName="benefits">
+            formArrayName="benefits">
             <ng-container [formGroupName]="i">
                     <div class="col-4 col-xl-3">
                         <lnd-form-field
@@ -218,7 +228,7 @@
     </div>
     <div class="row">
         <ng-container *ngFor="let benefit of (form | valueOfForm: 'benefits').controls; let i = index"
-                      formArrayName="benefits">
+            formArrayName="benefits">
             <ng-container [formGroupName]="i">
                 <div class="col-4 col-xl-3">
                     <lnd-form-field

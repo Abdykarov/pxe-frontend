@@ -68,7 +68,8 @@ export const offerFragment = gql`
         distributionPriceByConsumptionNT,
         systemServicesRegulatedPrice,
         consumptionPriceVT,
-        consumptionPriceNT
+        consumptionPriceNT,
+        greenEnergy
     }
 `;
 
@@ -76,7 +77,8 @@ export const offerFragment = gql`
 export const findSupplierOffersQuery = gql`
     query findSupplierOffers{
         findSupplierOffers{
-            ...offerFragment
+            ...offerFragment,
+            marked @client,
         }
     }
     ${offerFragment}

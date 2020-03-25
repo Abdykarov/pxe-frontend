@@ -32,6 +32,7 @@ export class SupplyOfferComponent {
         deliveryFrom: new FormControl(),
         deliveryTo: new FormControl(),
         deliveryFromTo: new FormControl(),
+        greenEnergy: new FormControl(),
     });
 
     constructor(
@@ -51,5 +52,10 @@ export class SupplyOfferComponent {
             table.openRow(row);
             table.selectRow(row);
         }
+    }
+
+    public click = (evt) => {
+        evt.preventDefault();
+        console.log('click');
     }
 }
