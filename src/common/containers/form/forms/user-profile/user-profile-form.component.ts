@@ -13,7 +13,6 @@ import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.
 import { CONSTS } from 'src/app/app.constants';
 import { IUserProfileModelForm } from 'src/common/containers/form/forms/user-profile/user-profile-form.model';
 import { IPersonalDataInputForm } from 'src/common/graphql/models/personal-data.model';
-import { ValueOfFormPipe } from 'src/common/pipes/value-of-form/value-of-form.pipe';
 
 @Component({
     selector: 'pxe-user-form',
