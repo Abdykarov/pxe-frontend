@@ -48,6 +48,9 @@ export class SelectComponent {
     public blur?: EventEmitter<any> = new EventEmitter();
 
     @Input()
+    public clearable = true;
+
+    @Input()
     public disabledField = false;
 
     @Output()

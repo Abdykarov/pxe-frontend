@@ -25,6 +25,7 @@
         [class.select]="type === 'SELECT'"
         [class.custom-checkbox--switch]="type === 'SWITCH'"
         [class.select--inline-label]="inlineLabel"
+        [ngClass]="customTypeClass"
         [ngSwitch]="type">
         <div
             *ngIf="!!prependIcon"
