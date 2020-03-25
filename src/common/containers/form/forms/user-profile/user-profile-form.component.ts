@@ -77,8 +77,6 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
         this.triggerValidation();
         if (this.form.valid) {
             if (this.oldPhone !== this.phoneNumber && (!submitValidFormAction || !this.smsSent) && this.phoneNumber) {
-                console.log('JSEM tu ok');
-                console.log(this.form.value.phone);
                 this.customAction.emit(this.form.value.phone);
             } else {
                 this.submitValidForm(value);
