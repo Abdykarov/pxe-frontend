@@ -6,10 +6,7 @@ import {
     OnInit,
     SimpleChanges,
 } from '@angular/core';
-import {
-    FormBuilder,
-    Validators,
-} from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';

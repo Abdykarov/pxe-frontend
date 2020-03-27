@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 
 import * as R from 'ramda';
-import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import {
@@ -19,7 +18,8 @@ import {
 } from 'src/common/utils';
 import {
     ANNUAL_CONSUMPTION_TYPES,
-    ANNUAL_CONSUMPTION_UNIT_TYPES, CONSTS,
+    ANNUAL_CONSUMPTION_UNIT_TYPES,
+    CONSTS,
     TypeOfAnnualConsumptionUnitMapping,
     UNIT_OF_PRICES,
 } from 'src/app/app.constants';
