@@ -152,7 +152,6 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         if (changes.formSent && changes.formSent.currentValue === true) {
             this.setOriginalFormValues(this.form.value);
         }
-        console.log(this.form);
     }
 
     public findNewSupplier = (supplyPoint: ISupplyPoint) => {

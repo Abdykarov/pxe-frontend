@@ -116,7 +116,7 @@
                                   ((form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT) && (formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors) && formFields.validationMessages.annualConsumptionVT)">
                         <div class="row no-gutters">
                             <div class="col-12 mb-2">
-                                <small>{{commodityType === commodityType.POWER ? 'Roční spotřeba - vysoký tarif' : 'Roční spotřeba'}}</small>
+                                <small>{{supplyPoint.commodityType === commodityType.POWER ? 'Roční spotřeba - vysoký tarif' : 'Roční spotřeba'}}</small>
                             </div>
                             <div class="col-12 col-md-7 pr-md-1">
                                 <lnd-form-field
