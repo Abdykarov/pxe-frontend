@@ -300,12 +300,15 @@ export const supplyPointDetailAllowedFields: ICommodityTypeFields = {
         'name',
         'annualConsumptionNT',
         'annualConsumptionVT',
+        'annualConsumptionNTUnit',
+        'annualConsumptionVTUnit',
     ],
     [CommodityType.GAS]: [
         'id',
         'commodityType',
         'name',
-        'annualConsumption',
+        'annualConsumptionVT',
+        'annualConsumptionVTUnit',
     ],
 };
 
