@@ -31,6 +31,7 @@ import {
     supplyPointDetailAllowedFields,
 } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import {
+    CODE_LIST,
     CODE_LIST_TYPES,
     CONSTS,
     CONTRACT_END_TYPE,
@@ -38,6 +39,7 @@ import {
     ROUTES,
     SUBJECT_TYPE_OPTIONS,
     TIME_TO_CONTRACT_END_PERIOD_MAP,
+    UNIT_OF_PRICES,
 } from 'src/app/app.constants';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
@@ -60,6 +62,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     public allowedFields = supplyPointDetailAllowedFields;
     public allowedOperations = AllowedOperations;
     public commodityType = CommodityType;
+    public codeList = CODE_LIST;
     public codeLists: ICodelistOptions;
     public contractEndType = CONTRACT_END_TYPE;
     public contractEndTypeTranslateMap = CONTRACT_END_TYPE_TRANSLATE_MAP;
@@ -176,15 +179,24 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         const form: any = {
             ...this.form.value,
         };
-        if (!R.isNil(this.form.value.annualConsumptionNT)) {
-            form.annualConsumptionNT = parseFloat(this.form.value.annualConsumptionNT.toString().replace(',', '.'));
+
+        if (!R.isNil(form.annualConsumptionNT)) {
+            form.annualConsumptionNT = parseFloat(form.annualConsumptionNT.toString().replace(',', '.'));
         }
-        if (!R.isNil(this.form.value.annualConsumptionVT)) {
-            form.annualConsumptionVT = parseFloat(this.form.value.annualConsumptionVT.toString().replace(',', '.'));
+        if (!R.isNil(form.annualConsumptionVT)) {
+            form.annualConsumptionVT = parseFloat(form.annualConsumptionVT.toString().replace(',', '.'));
         }
-        if (!R.isNil(this.form.value.annualConsumption)) {
-            form.annualConsumption = parseFloat(this.form.value.annualConsumption.toString().replace(',', '.'));
+        if (form.annualConsumptionVTUnit === UNIT_OF_PRICES.KWH) {
+            form.annualConsumptionVT = form.annualConsumptionVT / 1000;
         }
+        if (form.annualConsumptionNTUnit === UNIT_OF_PRICES.KWH) {
+            form.annualConsumptionNT = form.annualConsumptionNT / 1000;
+        }
+        if (form.commodityType === CommodityType.GAS) {
+            form.annualConsumption = form.annualConsumptionVT;
+            form.annualConsumptionUnit = form.annualConsumptionVTUnit;
+        }
+
         this.submitAction.emit(form);
     }
 }

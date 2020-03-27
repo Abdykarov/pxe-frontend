@@ -123,13 +123,16 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
             const powerAttributes: ISupplyPointPowerAttributes =
                 R.pick([
                     'annualConsumptionNT',
+                    'annualConsumptionNTUnit',
                     'annualConsumptionVT',
+                    'annualConsumptionVTUnit',
                 ], supplyPointFormData);
             updateSupplyPoint = this.supplyService.updatePowerSupplyPointWithContract(supplyPointFormData.id, supplyPoint, powerAttributes);
         } else {
             const gasAttributes: ISupplyPointGasAttributes =
                 R.pick([
                     'annualConsumption',
+                    'annualConsumptionUnit',
                 ], supplyPointFormData);
             updateSupplyPoint = this.supplyService.updateGasSupplyPointWithContract(supplyPointFormData.id, supplyPoint, gasAttributes);
         }
