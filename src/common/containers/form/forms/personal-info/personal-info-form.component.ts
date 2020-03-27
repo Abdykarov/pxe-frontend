@@ -101,6 +101,14 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         if (this.formValues) {
             this.prefillFormData();
         }
+
+        this.form.valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((formValue) => {
+                console.log('__AA__');
+                console.log(formValue);
+            });
+
     }
 
     ngAfterViewInit() {
