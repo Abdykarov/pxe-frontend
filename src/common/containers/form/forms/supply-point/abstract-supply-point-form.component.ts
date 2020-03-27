@@ -54,7 +54,6 @@ export class AbstractSupplyPointFormComponent extends AbstractFormComponent impl
         }
     }
 
-
     public normalizationAnnualConsumption = (annualConsumption: string | number): string =>
         annualConsumption && annualConsumption.toString().replace('.', ',')
 
