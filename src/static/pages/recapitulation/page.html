@@ -1,3 +1,7 @@
+<ng-template #depositLabelTemplate>
+    Výše záloh <small>včetně DPH</small>
+</ng-template>
+
 <ng-template #otherAddress>
     <lnd-form-field
         [id]="'checkbox-in-subtext'"
@@ -106,7 +110,7 @@
                     <lnd-form-field
                         [formControl]="form.controls.deposit"
                         [id]="'deposit'"
-                        label="Výše záloh"
+                        [labelTemplate]="depositLabelTemplate"
                         appendText="Kč/měsíc"
                     ></lnd-form-field>
                     <div class="text-center">
