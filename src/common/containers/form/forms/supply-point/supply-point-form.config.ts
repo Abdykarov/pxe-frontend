@@ -307,7 +307,7 @@ export const supplyPointDetailAllowedFields: ICommodityTypeFields = {
         'id',
         'commodityType',
         'name',
-        'annualConsumption',
+        'annualConsumptionVT',
         'annualConsumptionVTUnit',
     ],
 };

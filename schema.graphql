@@ -410,6 +410,7 @@ input SupplyPointInput {
 
 input SupplyPointInputGasAttributes {
     annualConsumption: Float!
+    annualConsumptionUnit: String!
     eic: String!
 }
 
@@ -430,6 +431,7 @@ input SupplyPointUpdate {
 
 input SupplyPointUpdateGasAttributes {
     annualConsumption: Float!
+    annualConsumptionUnit: String!
 }
 
 input SupplyPointUpdatePowerAttributes {

@@ -124,7 +124,6 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
                 takeUntil(this.destroy$),
             )
             .subscribe((annualConsumptionVTUnit: UNIT_OF_PRICES) => {
-                console.log('CHANGE');
                 this.detectChangesForAnnualConsumption(
                     ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_VT,
                     ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_VT_UNIT,
@@ -214,8 +213,6 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         this.form.controls['annualConsumptionVT'].setValue(annualConsumptionVT);
         this.form.controls['annualConsumptionNT'].setValue(annualConsumptionNT);
         this.form.controls['annualConsumption'].setValue(annualConsumption);
-        console.log('___');
-        console.log(this.form);
 
         this.setOriginalFormValues(this.form.value);
         this.resetFormError(false);
