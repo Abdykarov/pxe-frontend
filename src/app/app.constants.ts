@@ -501,9 +501,3 @@ export enum ANNUAL_CONSUMPTION_UNIT_TYPES {
     ANNUAL_CONSUMPTION_NT_UNIT = 'annualConsumptionNTUnit',
     ANNUAL_CONSUMPTION_VT_UNIT = 'annualConsumptionVTUnit',
 }
-
-export const TypeOfAnnualConsumptionUnitMapping =  {
-    ANNUAL_CONSUMPTION_NT_UNIT: 'prevAnnualConsumptionNTUnit',
-    ANNUAL_CONSUMPTION_UNIT: 'prevAnnualConsumptionUnit',
-    ANNUAL_CONSUMPTION_VT_UNIT: 'prevAnnualConsumptionVTUnit',
-};

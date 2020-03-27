@@ -20,7 +20,6 @@ import {
     ANNUAL_CONSUMPTION_TYPES,
     ANNUAL_CONSUMPTION_UNIT_TYPES,
     CONSTS,
-    TypeOfAnnualConsumptionUnitMapping,
     UNIT_OF_PRICES,
 } from 'src/app/app.constants';
 import {
@@ -62,7 +61,6 @@ export class AbstractSupplyPointFormComponent extends AbstractFormComponent impl
         typeOfAnnualConsumptionUnit: ANNUAL_CONSUMPTION_UNIT_TYPES,
         annualConsumptionUnit: UNIT_OF_PRICES,
     ) => {
-        this[TypeOfAnnualConsumptionUnitMapping[typeOfAnnualConsumptionUnit]] = annualConsumptionUnit;
         const annualAnnualConsumption = this.form.controls[typeOfAnnualConsumption].value;
         if (annualConsumptionUnit === UNIT_OF_PRICES.KWH) {
             this.form.controls[typeOfAnnualConsumption]
