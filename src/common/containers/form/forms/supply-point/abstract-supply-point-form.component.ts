@@ -106,7 +106,6 @@ export class AbstractSupplyPointFormComponent extends AbstractFormComponent impl
         )(number);
     }
 
-
     public setFormFields = (commodityType: CommodityType) => {
         R.mapObjIndexed((fieldControl, field: string) => {
             if (R.indexOf(field, this.allowedFields[commodityType]) >= 0) {
