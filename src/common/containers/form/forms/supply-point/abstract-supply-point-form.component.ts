@@ -40,32 +40,6 @@ export class AbstractSupplyPointFormComponent extends AbstractFormComponent impl
 
     ngOnInit() {
         super.ngOnInit();
-
-        this.form.get('annualConsumptionNTUnit')
-            .valueChanges
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe((annualConsumptionNTUnit: UNIT_OF_PRICES) => {
-                this.detectChangesForAnnualConsumption(
-                    ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_NT,
-                    ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_NT_UNIT,
-                    annualConsumptionNTUnit,
-                );
-            });
-
-        this.form.get('annualConsumptionVTUnit')
-            .valueChanges
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe((annualConsumptionVTUnit: UNIT_OF_PRICES) => {
-                this.detectChangesForAnnualConsumption(
-                    ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_VT,
-                    ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_VT_UNIT,
-                    annualConsumptionVTUnit,
-                );
-            });
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -79,6 +53,10 @@ export class AbstractSupplyPointFormComponent extends AbstractFormComponent impl
             this.setDisableField('annualConsumptionNT');
         }
     }
+
+
+    public normalizationAnnualConsumption = (annualConsumption: string | number): string =>
+        annualConsumption && annualConsumption.toString().replace('.', ',')
 
     public detectChangesForAnnualConsumption = (
         typeOfAnnualConsumption: ANNUAL_CONSUMPTION_TYPES,

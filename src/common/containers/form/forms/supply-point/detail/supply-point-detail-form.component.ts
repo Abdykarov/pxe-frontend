@@ -31,6 +31,8 @@ import {
     supplyPointDetailAllowedFields,
 } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import {
+    ANNUAL_CONSUMPTION_TYPES,
+    ANNUAL_CONSUMPTION_UNIT_TYPES,
     CODE_LIST,
     CODE_LIST_TYPES,
     CONSTS,
@@ -103,6 +105,33 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
                 this.cd.markForCheck();
             });
 
+        this.form.get('annualConsumptionNTUnit')
+            .valueChanges
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe((annualConsumptionNTUnit: UNIT_OF_PRICES) => {
+                this.detectChangesForAnnualConsumption(
+                    ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_NT,
+                    ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_NT_UNIT,
+                    annualConsumptionNTUnit,
+                );
+            });
+
+        this.form.get('annualConsumptionVTUnit')
+            .valueChanges
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe((annualConsumptionVTUnit: UNIT_OF_PRICES) => {
+                console.log('CHANGE');
+                this.detectChangesForAnnualConsumption(
+                    ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_VT,
+                    ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_VT_UNIT,
+                    annualConsumptionVTUnit,
+                );
+            });
+
         this.modalsService.closeModalData$
             .pipe(
                 takeUntil(this.destroy$),
@@ -123,6 +152,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         if (changes.formSent && changes.formSent.currentValue === true) {
             this.setOriginalFormValues(this.form.value);
         }
+        console.log(this.form);
     }
 
     public findNewSupplier = (supplyPoint: ISupplyPoint) => {
@@ -148,6 +178,8 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         let id = null;
         let commodityType = null;
         let name = null;
+        let annualConsumptionNTUnit = null;
+        let annualConsumptionVTUnit = null;
         let annualConsumptionNT = null;
         let annualConsumptionVT = null;
         let annualConsumption = null;
@@ -156,20 +188,35 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
             id = this.supplyPoint.id;
             commodityType = this.supplyPoint.commodityType;
             name = this.supplyPoint.name;
-            annualConsumptionVT = this.supplyPoint.annualConsumptionVT &&
-                this.supplyPoint.annualConsumptionVT.toString().replace('.', ',');
-            annualConsumptionNT = this.supplyPoint.annualConsumptionNT &&
-                this.supplyPoint.annualConsumptionNT.toString().replace('.', ',');
-            annualConsumption = this.supplyPoint.annualConsumptionVT &&
-                this.supplyPoint.annualConsumptionVT.toString().replace('.', ',');
-        }
+            annualConsumptionNTUnit = this.supplyPoint.annualConsumptionNTUnit;
+            annualConsumptionVTUnit = this.supplyPoint.annualConsumptionVTUnit;
+            annualConsumptionVT = this.supplyPoint.annualConsumptionVT;
+            annualConsumptionNT = this.supplyPoint.annualConsumptionNT;
+            annualConsumption = this.supplyPoint.annualConsumptionVT;
 
+            if (annualConsumptionVTUnit === UNIT_OF_PRICES.KWH) {
+                annualConsumptionVT *= 1000;
+            }
+
+            if (annualConsumptionNTUnit === UNIT_OF_PRICES.KWH) {
+                annualConsumptionNT *= 1000;
+            }
+
+            annualConsumptionNT = this.normalizationAnnualConsumption(annualConsumptionNT);
+            annualConsumptionVT = this.normalizationAnnualConsumption(annualConsumptionVT);
+            annualConsumption = this.normalizationAnnualConsumption(annualConsumption);
+
+            this.form.controls['annualConsumptionNTUnit'].setValue(annualConsumptionNTUnit);
+            this.form.controls['annualConsumptionVTUnit'].setValue(annualConsumptionVTUnit);
+        }
         this.form.controls['id'].setValue(id);
         this.form.controls['commodityType'].setValue(commodityType);
         this.form.controls['name'].setValue(name);
         this.form.controls['annualConsumptionVT'].setValue(annualConsumptionVT);
         this.form.controls['annualConsumptionNT'].setValue(annualConsumptionNT);
         this.form.controls['annualConsumption'].setValue(annualConsumption);
+        console.log('___');
+        console.log(this.form);
 
         this.setOriginalFormValues(this.form.value);
         this.resetFormError(false);
