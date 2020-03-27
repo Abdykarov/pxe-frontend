@@ -35,7 +35,6 @@ import {
     SUBJECT_TYPE_OPTIONS,
     SUBJECT_TYPE_TO_DIST_RATE_MAP,
     SUPPLY_POINT_EDIT_TYPE,
-    TypeOfAnnualConsumptionUnitMapping,
     UNIT_OF_PRICES,
 } from 'src/app/app.constants';
 import {
@@ -46,10 +45,8 @@ import {
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import {
-    anyToString,
     convertArrayToObject,
     convertDateToSendFormatFnc,
-    CustomValidators,
     transformCodeList,
     transformSuppliers,
 } from 'src/common/utils';
@@ -228,55 +225,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
 
     ngOnChanges(changes: SimpleChanges) {
         super.ngOnChanges(changes);
-    }
-
-    public detectChangesForAnnualConsumption = (
-        typeOfAnnualConsumption: ANNUAL_CONSUMPTION_TYPES,
-        typeOfAnnualConsumptionUnit: ANNUAL_CONSUMPTION_UNIT_TYPES,
-        annualConsumptionUnit: UNIT_OF_PRICES,
-    ) => {
-        this[TypeOfAnnualConsumptionUnitMapping[typeOfAnnualConsumptionUnit]] = annualConsumptionUnit;
-        const annualAnnualConsumption = this.form.controls[typeOfAnnualConsumption].value;
-        if (annualConsumptionUnit === UNIT_OF_PRICES.KWH) {
-            this.form.controls[typeOfAnnualConsumption]
-                .setValidators(
-                    [
-                        Validators.required,
-                        CustomValidators.isNumber(),
-                        CustomValidators.minValue(0),
-                        CustomValidators.totalDigitLengthBeforeDecimalPoint(
-                            CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION,
-                        ),
-                    ]);
-            const typeOfAnnualConsumptionValue = this.operationOnNumber(annualAnnualConsumption, (num) => num * 1000);
-            this.form.controls[typeOfAnnualConsumption].setValue(typeOfAnnualConsumptionValue);
-        } else {
-            this.form.controls[typeOfAnnualConsumption]
-                .setValidators(
-                    [
-                        Validators.required,
-                        CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_ANNUAL_CONSUMPTION),
-                        CustomValidators.minValue(0),
-                        CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
-                    ]);
-            const typeOfAnnualConsumptionValue = this.operationOnNumber(annualAnnualConsumption, (num) => num / 1000);
-            this.form.controls[typeOfAnnualConsumption].setValue(typeOfAnnualConsumptionValue);
-        }
-        this.form.controls[typeOfAnnualConsumption].updateValueAndValidity();
-    }
-
-    public operationOnNumber = (number: string | number, fnc: Function): string => {
-        if (!number) {
-            return '';
-        }
-        return R.pipe(
-            anyToString,
-            R.replace(',', '.'),
-            parseFloat,
-            fnc,
-            anyToString,
-            R.replace('.', ','),
-        )(number);
     }
 
     public prefillForm = () => {
