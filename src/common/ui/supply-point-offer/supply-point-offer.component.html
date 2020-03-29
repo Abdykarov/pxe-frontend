@@ -8,9 +8,8 @@
    [class.supply-point-offer--owner]="isOwner"
    [class.supply-point-offer--not-interactive]="!interactive">
     <div class="row no-gutters">
-        <div class="col-12 order-md-1 supply-point-offer__inner pb-md-2"
-             [class.col-md-7]="!isOwner"
-             [class.col-md-6]="isOwner">
+        <div class="col-12 col-md-7 order-md-1 supply-point-offer__inner pb-md-2"
+             [class.d-none]="isOwner">
             <div class="row">
                 <div class="col-12">
                     <span class="supply-point-offer__title-label">Název nabídky</span>
@@ -30,29 +29,35 @@
                 col-12
                 order-md-3
                 supply-point-offer__inner 
-                pt-0 
-                pb-5
-                pt-md-4">
+                pb-5"
+             [class.col-12]="!isOwner"
+             [class.col-6]="isOwner"
+             [class.order-md-3]="!isOwner"
+             [class.order-md-1]="isOwner"
+             [class.pt-0]="!isOwner"
+             [class.pt-md-4]="!isOwner">
             <div class="row">
-                <div class="col-12 col-md-6">
+                <div class="col-12"
+                     [class.col-md-6]="!isOwner">
                     <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
                         <span class="supply-point-offer__title-label">{{isOwner ? 'Váš stávající dodavatel' : 'Dodavatel'}}</span>
                         <span class="
-                                supply-point-offer__title 
-                                supply-point-offer__title--supplier 
+                                supply-point-offer__title
                                 mb-0 
                                 text-break">
                             {{supplyPointOffer.supplier?.name}}&nbsp;<span class="icon icon--info supply-point-offer__info-icon"></span>
                         </span>
                     </div>
                 </div>
-                <div class="col-auto">
+                <div class="col-auto"
+                     [class.d-none]="isOwner">
                     <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
                         <span class="supply-point-offer__value-name">Dodávka</span>
                         <span class="supply-point-offer__value">{{supplyPointOffer.deliveryLength }} {{supplyPointOffer.deliveryLength | plural: 'year'}}</span>
                     </div>
                 </div>
-                <div class="col-auto">
+                <div class="col-auto"
+                     [class.d-none]="isOwner">
                     <div class="supply-point-offer__value-box supply-point-offer__value-box--price ml-0">
                         <span class="supply-point-offer__value-name">Platnost nabídky</span>
                         <span class="supply-point-offer__value text-color--danger">{{dateDiffValidityOfOffer}} {{dateDiffValidityOfOffer | plural: 'hour'}}</span>

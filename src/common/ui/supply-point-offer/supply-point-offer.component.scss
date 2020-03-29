@@ -173,6 +173,15 @@
 	&__value {
 		font-size: $supply-point-label-font-size;
 		line-height: $supply-point-label-line-height;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			font-size: $supply-point-title-font-size;
+			line-height: $supply-point-title-line-height;
+		}
+		@include media-breakpoint-up(xl) {
+			font-size: $supply-point-offer-price-font-size-xl;
+		}
 	}
 
 	&__title-label,
@@ -189,16 +198,6 @@
 	&__title {
 		display: block;
 		margin-bottom: ( $spacer * .75 );
-
-		// Media queries
-		@include media-breakpoint-up(md) {
-			font-size: $supply-point-title-font-size;
-			line-height: $supply-point-title-line-height;
-		}
-
-		&--supplier {
-			font-size: $supply-point-offer-price-font-size-xl;
-		}
 	}
 
 	&__info-icon {
@@ -214,7 +213,7 @@
 
 		&--price {
 			.supply-point-offer__value {
-				font-size: $supply-point-offer-decomposition-font-size;
+				//font-size: $supply-point-offer-decomposition-font-size;
 			}
 		}
 	}
@@ -234,26 +233,6 @@
 				cursor: pointer;
 			}
 		}
-	}
-
-	&__green-box {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		color: $success;
-	}
-
-	&__green-icon {
-		margin-bottom: ( $spacer / 4 );
-		font-size: $icon-size-large-px;
-	}
-
-	&__green-text {
-		font-size: $small-font-size;
-		font-weight: 700;
-		line-height: $line-height-sm;
-		text-transform: uppercase;
-		text-align: center;
 	}
 
 	&__decomposition-title {
