@@ -221,7 +221,8 @@ export class AuthService {
             if (window.sessionStorage) {
                 window.sessionStorage.setItem('uuid', uuid);
             }
-            this.cookiesService.setObject(this.cookieName, user, new Date().getTime() + (CONSTS.DEFAULT_EXPIRATION * 1000));
+            const expiration = new Date().getTime() + CONSTS.DEFAULT_EXPIRATION * 1000;
+            this.cookiesService.setObject(this.cookieName, user, expiration);
             this.checkLogin();
             this.currentUserSubject$.next(jwtPayload);
         }
