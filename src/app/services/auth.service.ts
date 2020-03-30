@@ -51,7 +51,6 @@ export class AuthService {
     private cookieName = 'user';
     private currentUserSubject$: BehaviorSubject<IJwtPayload>;
     public currentUser$: Observable<IJwtPayload>;
-    private expiresTime = new Date().getTime() + (CONSTS.DEFAULT_EXPIRATION * 1000);
     private token: string;
     private uuid: string = null;
     private sessionUuid: string = null;
@@ -222,7 +221,7 @@ export class AuthService {
             if (window.sessionStorage) {
                 window.sessionStorage.setItem('uuid', uuid);
             }
-            this.cookiesService.setObject(this.cookieName, user, this.expiresTime);
+            this.cookiesService.setObject(this.cookieName, user, new Date().getTime() + (CONSTS.DEFAULT_EXPIRATION * 1000));
             this.checkLogin();
             this.currentUserSubject$.next(jwtPayload);
         }
