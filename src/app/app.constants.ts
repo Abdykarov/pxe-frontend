@@ -15,7 +15,7 @@ export const CONSTS = {
         CALENDAR: 'YYYY-MM-DD[T]HH:mm',
         SHORT: 'YYYY-MM-DD',
     },
-    DEFAULT_EXPIRATION: 5450,
+    DEFAULT_EXPIRATION: 700000,
     DEFAULT_DEPOSIT_PAYMENT_TYPE_ID: 'Prikaz',
     EXPORT: {
         FILE_NAME: 'export',
