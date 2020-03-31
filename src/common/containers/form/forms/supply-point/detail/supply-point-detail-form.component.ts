@@ -21,6 +21,7 @@ import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/for
 import {
     AllowedOperations,
     CommodityType,
+    ICodelistOptions,
     ISupplyPoint,
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
@@ -30,16 +31,23 @@ import {
     supplyPointDetailAllowedFields,
 } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import {
+    ANNUAL_CONSUMPTION_TYPES,
+    ANNUAL_CONSUMPTION_UNIT_TYPES,
+    CODE_LIST,
+    CODE_LIST_TYPES,
     CONSTS,
     CONTRACT_END_TYPE,
     CONTRACT_END_TYPE_TRANSLATE_MAP,
     ROUTES,
     SUBJECT_TYPE_OPTIONS,
     TIME_TO_CONTRACT_END_PERIOD_MAP,
+    UNIT_OF_PRICES,
 } from 'src/app/app.constants';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
+import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { transformCodeList } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-supply-point-detail-form',
@@ -56,11 +64,13 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     public allowedFields = supplyPointDetailAllowedFields;
     public allowedOperations = AllowedOperations;
     public commodityType = CommodityType;
+    public codeList = CODE_LIST;
+    public codeLists: ICodelistOptions;
     public contractEndType = CONTRACT_END_TYPE;
     public contractEndTypeTranslateMap = CONTRACT_END_TYPE_TRANSLATE_MAP;
     public suppliers = [];
     public subjectName = '';
-    public supplyPointContractEndType = CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION;
+    public supplyPointContractEndTypes = CONTRACT_END_TYPE;
     public setFormByCommodity = this.setFormFields;
     public timeToContractEndPeriodMap = TIME_TO_CONTRACT_END_PERIOD_MAP;
     public today = new Date().toISOString();
@@ -73,23 +83,57 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         protected fb: FormBuilder,
         private modalsService: ModalService,
         private router: Router,
+        private supplyService: SupplyService,
     ) {
         super(fb);
     }
 
     ngOnInit() {
         super.ngOnInit();
-
         this.setFormByCommodity(this.commodityType[this.supplyPoint.commodityType]);
-        this.setAnnualConsumptionNTState(this.supplyPoint.distributionRate && this.supplyPoint.distributionRate.code);
         this.subjectName = R.find(R.propEq('value', this.supplyPoint.subject.code))(SUBJECT_TYPE_OPTIONS).label;
         this.prefillFormData();
 
+        this.supplyService.findCodelistsByTypes(CODE_LIST_TYPES, 'cs')
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(({data}) => {
+                this.codeLists = transformCodeList(data.findCodelistsByTypes);
+                this.setAnnualConsumptionNTState(
+                    this.supplyPoint.distributionRate && this.supplyPoint.distributionRate.code,
+                    this.codeLists,
+                );
+                this.cd.markForCheck();
+            });
+
+        this.form.get('annualConsumptionNTUnit')
+            .valueChanges
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe((annualConsumptionNTUnit: UNIT_OF_PRICES) => {
+                this.detectChangesForAnnualConsumption(
+                    ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_NT,
+                    ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_NT_UNIT,
+                    annualConsumptionNTUnit,
+                );
+            });
+
+        this.form.get('annualConsumptionVTUnit')
+            .valueChanges
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe((annualConsumptionVTUnit: UNIT_OF_PRICES) => {
+                this.detectChangesForAnnualConsumption(
+                    ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_VT,
+                    ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_VT_UNIT,
+                    annualConsumptionVTUnit,
+                );
+            });
+
         this.modalsService.closeModalData$
             .pipe(
-                takeUntil(
-                    this.destroy$,
-                ),
+                takeUntil(this.destroy$),
                 filter(R_.isNotNil),
                 filter((modal: ICloseModalData) => modal.confirmed),
             )
@@ -132,6 +176,8 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         let id = null;
         let commodityType = null;
         let name = null;
+        let annualConsumptionNTUnit = null;
+        let annualConsumptionVTUnit = null;
         let annualConsumptionNT = null;
         let annualConsumptionVT = null;
         let annualConsumption = null;
@@ -140,14 +186,27 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
             id = this.supplyPoint.id;
             commodityType = this.supplyPoint.commodityType;
             name = this.supplyPoint.name;
-            annualConsumptionVT = this.supplyPoint.annualConsumptionVT &&
-                this.supplyPoint.annualConsumptionVT.toString().replace('.', ',');
-            annualConsumptionNT = this.supplyPoint.annualConsumptionNT &&
-                this.supplyPoint.annualConsumptionNT.toString().replace('.', ',');
-            annualConsumption = this.supplyPoint.annualConsumptionVT &&
-                this.supplyPoint.annualConsumptionVT.toString().replace('.', ',');
-        }
+            annualConsumptionNTUnit = this.supplyPoint.annualConsumptionNTUnit;
+            annualConsumptionVTUnit = this.supplyPoint.annualConsumptionVTUnit;
+            annualConsumptionVT = this.supplyPoint.annualConsumptionVT;
+            annualConsumptionNT = this.supplyPoint.annualConsumptionNT;
+            annualConsumption = this.supplyPoint.annualConsumptionVT;
 
+            if (annualConsumptionVTUnit === UNIT_OF_PRICES.KWH) {
+                annualConsumptionVT *= 1000;
+            }
+
+            if (annualConsumptionNTUnit === UNIT_OF_PRICES.KWH) {
+                annualConsumptionNT *= 1000;
+            }
+
+            annualConsumptionNT = this.normalizationAnnualConsumption(annualConsumptionNT);
+            annualConsumptionVT = this.normalizationAnnualConsumption(annualConsumptionVT);
+            annualConsumption = this.normalizationAnnualConsumption(annualConsumption);
+
+            this.form.controls['annualConsumptionNTUnit'].setValue(annualConsumptionNTUnit);
+            this.form.controls['annualConsumptionVTUnit'].setValue(annualConsumptionVTUnit);
+        }
         this.form.controls['id'].setValue(id);
         this.form.controls['commodityType'].setValue(commodityType);
         this.form.controls['name'].setValue(name);
@@ -163,15 +222,24 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         const form: any = {
             ...this.form.value,
         };
-        if (!R.isNil(this.form.value.annualConsumptionNT)) {
-            form.annualConsumptionNT = parseFloat(this.form.value.annualConsumptionNT.toString().replace(',', '.'));
+
+        if (!R.isNil(form.annualConsumptionNT)) {
+            form.annualConsumptionNT = parseFloat(form.annualConsumptionNT.toString().replace(',', '.'));
         }
-        if (!R.isNil(this.form.value.annualConsumptionVT)) {
-            form.annualConsumptionVT = parseFloat(this.form.value.annualConsumptionVT.toString().replace(',', '.'));
+        if (!R.isNil(form.annualConsumptionVT)) {
+            form.annualConsumptionVT = parseFloat(form.annualConsumptionVT.toString().replace(',', '.'));
         }
-        if (!R.isNil(this.form.value.annualConsumption)) {
-            form.annualConsumption = parseFloat(this.form.value.annualConsumption.toString().replace(',', '.'));
+        if (form.annualConsumptionVTUnit === UNIT_OF_PRICES.KWH) {
+            form.annualConsumptionVT = form.annualConsumptionVT / 1000;
         }
+        if (form.annualConsumptionNTUnit === UNIT_OF_PRICES.KWH) {
+            form.annualConsumptionNT = form.annualConsumptionNT / 1000;
+        }
+        if (form.commodityType === CommodityType.GAS) {
+            form.annualConsumption = form.annualConsumptionVT;
+            form.annualConsumptionUnit = form.annualConsumptionVTUnit;
+        }
+
         this.submitAction.emit(form);
     }
 }

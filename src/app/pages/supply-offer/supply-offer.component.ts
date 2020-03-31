@@ -5,8 +5,12 @@ import {
 import {
     ChangeDetectorRef,
     Component,
+    Inject,
     OnInit,
+    PLATFORM_ID,
+    ViewChild,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
@@ -24,13 +28,16 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import { cantDeleteAllMarkedOffers } from 'src/common/constants/errors.constant';
 import {
     CODE_LIST_TYPES,
     commodityTypes,
+    CONSTS,
     ROUTES,
 } from 'src/app/app.constants';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
+import { DocumentService } from 'src/app/services/document.service';
 import { formFields } from 'src/common/containers/form/forms/supply-offer/configs/supply-offer-form.config';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
@@ -41,11 +48,14 @@ import {
     IOfferInputPowerAttributes,
     IOfferStatus,
 } from 'src/common/graphql/models/offer.model';
+import { IResponseDataDocument } from 'src/app/services/model/document.model';
 import { ITableColumnConfig } from 'src/common/ui/table/models/table.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { OfferService } from 'src/common/graphql/services/offer.service';
+import { TableComponent } from 'src/common/ui/table/table.component';
 import {
     parseGraphQLErrors,
+    parseRestAPIErrors,
     transformCodeList,
 } from 'src/common/utils';
 import { SupplyOfferConfig } from './supply-offer.config';
@@ -59,7 +69,13 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     ],
 })
 export class SupplyOfferComponent extends AbstractComponent implements OnInit {
+
+    @ViewChild('table')
+    public lndTable: TableComponent;
+
+    public readonly bannerTypeImages = BannerTypeImages;
     public commodityType = CommodityType.POWER;
+    public commodityTypeOptions = CommodityType;
     public currentOfferFormValues = {};
     public deleteDisabled: boolean[] = [];
     public fieldError: IFieldError = {};
@@ -72,8 +88,10 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     private initRows = false;
     public loadingOffers = true;
     public numberOfDeletedOffers = 0;
+    public countOfImportedOffers = 0;
     public numberOfMarked = 0;
     public showDeletedOfferBanner = false;
+    public offerFormInEmptyPage = false;
     public tableRows: IOffer[] = [];
     public tableCols: ITableColumnConfig[] = [];
     public routePower = ROUTES.ROUTER_SUPPLY_OFFER_POWER;
@@ -97,28 +115,37 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
+        private documentService: DocumentService,
         private modalsService: ModalService,
         private offerService: OfferService,
         private route: ActivatedRoute,
         private router: Router,
         public supplyOfferConfig: SupplyOfferConfig,
         private supplyService: SupplyService,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
     }
 
     ngOnInit() {
         super.ngOnInit();
+        if (isPlatformBrowser(this.platformId)) {
+            this.countOfImportedOffers = window.history.state.countOfImportedOffers;
+        }
+
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.route.params
             .pipe(
                 takeUntil(this.destroy$),
+                filter((params) => {
+                    if (R.indexOf(params.commodityType, R.keys(commodityTypes)) < 0) {
+                        this.router.navigate([this.routePower]);
+                        return false;
+                    }
+                    return true;
+                }),
             )
             .subscribe(params => {
-                if (R.indexOf(params.commodityType, R.keys(commodityTypes)) < 0) {
-                    this.router.navigate([this.routePower]);
-                    return;
-                }
                 this.commodityType = commodityTypes[params.commodityType];
                 this.commodityType$.next(this.commodityType);
             });
@@ -126,20 +153,19 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         combineLatest(this.codeLists$, this.offers$, this.commodityType$)
             .pipe(
                 takeUntil(this.destroy$),
+                filter(([codeLists, offers, commodityType]) => !!(codeLists && offers)),
             )
             .subscribe(
                 ([codeLists, offers, commodityType]) => {
-                    if (codeLists && offers) {
-                        this.tableRows = offers;
-                        if (!this.initRows) {
-                            this.tableCols = this.supplyOfferConfig.tableCols(codeLists)[commodityType];
-                            this.numberOfMarked = this.offerService.markAll(false, this.commodityType);
-                            this.initRows = true;
-                        }
-                        this.loadingOffers = false;
-                        this.deleteDisabled = [];
-                        this.cd.markForCheck();
+                    this.tableRows = offers;
+                    if (!this.initRows) {
+                        this.tableCols = this.supplyOfferConfig.tableCols(codeLists)[commodityType];
+                        this.numberOfMarked = this.offerService.markAll(false, this.commodityType);
+                        this.initRows = true;
                     }
+                    this.loadingOffers = false;
+                    this.deleteDisabled = [];
+                    this.cd.markForCheck();
                 },
                 error => {
                     this.deleteDisabled = [];
@@ -150,14 +176,12 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
 
         this.modalsService.closeModalData$
             .pipe(
-                takeUntil(
-                    this.destroy$,
-                ),
+                takeUntil(this.destroy$),
                 filter(R_.isNotNil),
                 filter((modal: ICloseModalData) => modal.confirmed),
             )
             .subscribe(modal => {
-                if (modal.modalType === this.supplyOfferConfig.confirmDeleteOffer) {
+                if (modal.modalType === CONSTS.MODAL_TYPE.CONFIRM_DELETE_OFFER) {
                     this.deleteDisabled[modal.data.row.id] = true;
                     this.offerService.deleteOffer(modal.data.row.id)
                         .pipe(
@@ -179,10 +203,10 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                             },
                         );
                 }
-                if (modal.modalType === this.supplyOfferConfig.confirmCancelOffer) {
+                if (modal.modalType === CONSTS.MODAL_TYPE.CONFIRM_CANCEL_OFFER) {
                     this.toggleRow(modal.data.table, modal.data.row);
                 }
-                if (modal.modalType === this.supplyOfferConfig.confirmDeleteMarked) {
+                if (modal.modalType === CONSTS.MODAL_TYPE.CONFIRM_DELETE_MARKED) {
                     const offersObserversForDeleting = this.offerService.deleteMarkedOffer(this.commodityType);
                     if (offersObserversForDeleting.length === 0) {
                         return;
@@ -217,6 +241,48 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                 }
                 this.modalsService.closeModalData$.next(null);
             });
+    }
+
+    public toggleOfferFormInEmptyPage = (evt) => {
+        evt.preventDefault();
+        this.offerFormInEmptyPage = !this.offerFormInEmptyPage;
+    }
+
+    public createNewOffer = (evt) => {
+        evt.preventDefault();
+        if (isPlatformBrowser(this.platformId)) {
+            this.create(this.lndTable, this.tableRows[0]);
+        }
+    }
+
+    public navigateToImportOffer = (evt) => {
+        evt.preventDefault();
+        this.router.navigate([
+                ROUTES.ROUTER_IMPORT_UPLOAD,
+            ],
+            {
+                queryParams: {
+                    commodityType: this.commodityType,
+                },
+            },
+        );
+    }
+
+    public exportOffers = (evt) => {
+        evt.preventDefault();
+        this.offerService.exportCSV()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(
+                (responseDataDocument: IResponseDataDocument) => {
+                    this.documentService.documentSave(responseDataDocument);
+                    this.cd.markForCheck();
+                },
+                (error) => {
+                    const message = parseRestAPIErrors(error);
+                    this.globalError.push(message);
+                    this.cd.markForCheck();
+                },
+            );
     }
 
     public edit = (table, row) => {

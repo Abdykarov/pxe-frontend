@@ -12,9 +12,54 @@
         <a [class.link--disabled]="documentLoading" (click)="saveDocument(contract.contractId, documentType.DENUNCIATION)">zde</a>.
     </div>
 </ng-template>
+<ng-template #interruptAutomaticProlongationTemplate let-contract="contract">
+    <div class="col-12 mb-4 small">
+        Kliknutím na tlačítko „Zrušit“ přerušíte automatickou prolongaci. Text přerušení automaticke prolongace naleznete
+        <a [class.link--disabled]="documentLoading" (click)="saveDocument(contract.contractId, documentType.UNSET_PROLONGATION)">zde</a>.
+    </div>
+</ng-template>
+<!--budu odkomentovano v tasku pro prevod OM na jiny ucet-->
+<!--<ng-template #transferSupplyPointTemplate let-contract="contract">-->
+    <!--<div class="col-12 mb-4 small">-->
+        <!--Kliknutím na tlačítko „Převést“ převedete....-->
+    <!--</div>-->
+<!--</ng-template>-->
 <ng-template #contractActionsTemplate>
     <div #contractActionsWrapper>
-        <div *ngIf="supplyPoint | isAllowedOperation: allowedOperations.LEAVE_CONTRACT"
+        <div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.UNSET_AUTOMATIC_PROLONGATION"
+             class="row no-gutters align-items-end mb-5">
+            <div class="col-12 col-md-6">
+                <small>Zrušit automatické prodloužení smlouvy</small>
+            </div>
+            <div class="col-12 col-md-6 pl-3 text-right">
+                <lnd-button
+                    (click)="interruptAutomaticProlongation()"
+                    [isDisabled]="formLoading"
+                    label="Zrušit"
+                    type="link-danger"
+                    size="sm">
+                </lnd-button>
+            </div>
+            <div *ngIf="contractAction === contractActions.UNSET_PROLONGATION"
+                 class="col-12 mt-4">
+                <pxe-verification-form
+                    [fieldError]="fieldError"
+                    [formLoading]="formLoading"
+                    [contract]="supplyPoint.contract"
+                    [phone]="supplyPoint.contract.personalData.phone"
+                    [globalError]="globalError"
+                    [infoTemplate]="interruptAutomaticProlongationTemplate"
+                    [smsSent]="smsSent"
+                    [showSentSmsLabelUnderFirstField]="false"
+                    classFirstField="col-12"
+                    classSecondField="col-12 text-center"
+                    submitLabelText="Zrušit automatické prodloužení smlouvy"
+                    (submitAction)="submitVerification($event)"
+                    (customAction)="sendContractConfirmationSms()">
+                </pxe-verification-form>
+            </div>
+        </div>
+        <div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.LEAVE_CONTRACT"
              class="row no-gutters align-items-end mb-5">
             <div class="col-12 col-md-6">
                 <small>Odstoupit od smlouvy do 14 dnů od podpisu</small>
@@ -47,7 +92,7 @@
                 </pxe-verification-form>
             </div>
         </div>
-        <div *ngIf="supplyPoint | isAllowedOperation: allowedOperations.TERMINATE_CONTRACT"
+        <div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.TERMINATE_CONTRACT"
              class="row no-gutters align-items-end mb-5">
             <div class="col-12 col-md-6">
                 <small>Vypovědět smlouvu</small>
@@ -80,6 +125,39 @@
                 </pxe-verification-form>
             </div>
         </div>
+        <!--<div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.TERMINATE_CONTRACT"-->
+             <!--class="row no-gutters align-items-end mb-5">-->
+            <!--<div class="col-12 col-md-6">-->
+                <!--<small>Převést odběrné místo na jiného odběratele</small>-->
+            <!--</div>-->
+            <!--<div class="col-12 col-md-6 pl-3 text-right">-->
+                <!--<lnd-button-->
+                    <!--(click)="transferSupplyPoint()"-->
+                    <!--[isDisabled]="formLoading"-->
+                    <!--label="Převést"-->
+                    <!--type="link-danger"-->
+                    <!--size="sm">-->
+                <!--</lnd-button>-->
+            <!--</div>-->
+            <!--<div *ngIf="contractAction === contractActions.TRANSFER_SUPPLY_POINT"-->
+                 <!--class="col-12 mt-4">-->
+                <!--<pxe-verification-form-->
+                    <!--[fieldError]="fieldError"-->
+                    <!--[formLoading]="formLoading"-->
+                    <!--[contract]="supplyPoint.contract"-->
+                    <!--[phone]="supplyPoint.contract.personalData.phone"-->
+                    <!--[globalError]="globalError"-->
+                    <!--[infoTemplate]="terminateContactInfoTemplate"-->
+                    <!--[smsSent]="smsSent"-->
+                    <!--[showSentSmsLabelUnderFirstField]="false"-->
+                    <!--classFirstField="col-12"-->
+                    <!--classSecondField="col-12 text-center"-->
+                    <!--submitLabelText="Převést odběrné místo na jiného odběratele"-->
+                    <!--(submitAction)="submitVerification($event)"-->
+                    <!--(customAction)="sendContractConfirmationSms()">-->
+                <!--</pxe-verification-form>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
 </ng-template>
 <pxe-layout-container pageTitle="Odběrná místa">

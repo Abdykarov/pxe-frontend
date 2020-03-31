@@ -4,7 +4,10 @@ import {
     PLATFORM_ID,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import {
+    HttpClient,
+    HttpHeaders,
+} from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import {
@@ -23,6 +26,7 @@ import {
     switchMap,
     take,
     takeUntil,
+    tap,
 } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -47,7 +51,6 @@ export class AuthService {
     private cookieName = 'user';
     private currentUserSubject$: BehaviorSubject<IJwtPayload>;
     public currentUser$: Observable<IJwtPayload>;
-    private expiresTime = new Date().getTime() + (CONSTS.DEFAULT_EXPIRATION * 1000);
     private token: string;
     private uuid: string = null;
     private sessionUuid: string = null;
@@ -96,6 +99,17 @@ export class AuthService {
         if (isPlatformBrowser(this.platformId)) {
             this.refreshTokenInterval$.subscribe();
         }
+    }
+
+    public refreshTokenInterval = () => {
+        this.startRefreshTokenInterval();
+        return this.refreshToken()
+            .pipe(
+                catchError(() => of()),
+                tap(() => {
+                    this.startExpirationOfToken = new Date();
+                }),
+            );
     }
 
     startRefreshTokenInterval = () => {
@@ -200,9 +214,6 @@ export class AuthService {
     public manageLoginResponse = (response: ILoginResponse, uuid: string = this.uuid) => {
         if (response && response.token) {
             const jwtPayload = this.getJwtPayload(response.token);
-            // if (jwtPayload.exp) {
-            //     this.expiresTime = jwtPayload.exp * 1000;
-            // }
             const user = {
                 token: response.token,
                 uuid: uuid,
@@ -210,7 +221,8 @@ export class AuthService {
             if (window.sessionStorage) {
                 window.sessionStorage.setItem('uuid', uuid);
             }
-            this.cookiesService.setObject(this.cookieName, user, this.expiresTime);
+            const expiration = new Date().getTime() + CONSTS.DEFAULT_EXPIRATION;
+            this.cookiesService.setObject(this.cookieName, user, expiration);
             this.checkLogin();
             this.currentUserSubject$.next(jwtPayload);
         }
@@ -256,6 +268,16 @@ export class AuthService {
             // tslint:disable-next-line:no-bitwise
             const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
             return v.toString(16);
+        });
+    }
+
+    public getAuthorizationHeaders = (contentType: string = null, accept: string = '*/*'): HttpHeaders => {
+        const token = this.getToken();
+        return new HttpHeaders({
+            ...(!!token) && {Authorization: `Bearer ${token}`},
+            ...(!!contentType) && {'Content-Type': contentType},
+            'X-API-Key': `${environment.x_api_key}`,
+            accept,
         });
     }
 

@@ -1,0 +1,52 @@
+<div class="container-content">
+    <div class="container-fluid">
+        <div class="row mb-3">
+            <div class="col-12 col-md-6 offset-md-3 text-center">
+                <h1>
+                    Nabídky
+                </h1>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-12 col-xl-10 offset-xl-1 text-center">
+                <ul class="link-list mb-0">
+                    <li class="link-list__item">
+                        <a
+                            class="link-list__link link-list__link--active"
+                            href="#">
+                            Elektřina
+                        </a>
+                    </li>
+                    <li class="link-list__item">
+                        <a
+                            class="link-list__link"
+                            href="#">
+                            Plyn
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-12">
+                <lnd-info-banner
+                    [bannerType]="bannerTypeImages.IMPORT_ERROR"
+                    [bannerTitle]="bannerTitle"
+                    [bannerDescription]="bannerDescription"
+                    [buttonLabel]="buttonLabel"
+                    (buttonAction)="clicked($event)"
+                >
+                </lnd-info-banner>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <lnd-button
+                    label="Přidat nabídku"
+                    type="secondary"
+                    (action)="clicked($event)">
+                </lnd-button>
+            </div>
+        </div>
+    </div>
+</div>

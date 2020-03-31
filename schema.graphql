@@ -41,6 +41,7 @@ type Contract {
     offer: Offer
     offerValidity: Boolean!
     personalData: PersonalData
+    prolong: Boolean
 }
 
 type ContractTerms {
@@ -81,9 +82,13 @@ type Mutation {
     saveGasOffer(gasAttributes: OfferInputGasAttributes!, offer: OfferInput!): Offer
     savePersonalData(contractId: ID!, personalData: PersonalDataInput!): Boolean
     savePowerOffer(offer: OfferInput!, powerAttributes: OfferInputPowerAttributes!): Offer
+    sendChangePhoneNumberSms(phoneNumber: String!): Boolean
+    sendConfirmUnsetContractProlongationSms: Boolean
     sendContractConfirmationSms(contractId: ID!): Boolean
     sendUnregisterSms: Boolean
+    setContractProlongation(contractId: ID!, prolong: Boolean!): Boolean
     signContract(contractId: Int!, smsCode: String): Boolean
+    unsetContractProlongation(contractId: ID!, smsCode: String!): Boolean
     updateGasOffer(gasAttributes: OfferInputGasAttributes!, offer: OfferInput!, offerId: ID!): Offer
     updateGasSupplyPoint(gasAttributes: SupplyPointInputGasAttributes!, supplyPoint: SupplyPointInput!, supplyPointId: ID!): Int
     updateGasSupplyPointWithContract(attributes: SupplyPointUpdateGasAttributes, supplyPointId: ID!, supplyPointUpdate: SupplyPointUpdate): Int
@@ -91,7 +96,7 @@ type Mutation {
     updatePowerOffer(offer: OfferInput!, offerId: ID!, powerAttributes: OfferInputPowerAttributes!): Offer
     updatePowerSupplyPoint(powerAttributes: SupplyPointInputPowerAttributes!, supplyPoint: SupplyPointInput!, supplyPointId: ID!): Int
     updatePowerSupplyPointWithContract(attributes: SupplyPointUpdatePowerAttributes, supplyPointId: ID!, supplyPointUpdate: SupplyPointUpdate): Int
-    updateUserProfile(userDetail: UserDetailInput!): Boolean
+    updateUserProfile(smsCode: String, userDetail: UserDetailInput!): Boolean
 }
 
 type Offer {
@@ -206,7 +211,9 @@ type SupplyPoint {
     address: Address!
     allowedOperations: [AllowedOperations!]
     annualConsumptionNT: Float
+    annualConsumptionNTUnit: String
     annualConsumptionVT: Float
+    annualConsumptionVTUnit: String!
     circuitBreaker: CodelistItem
     commodityType: CommodityType!
     contract: Contract
@@ -265,6 +272,7 @@ enum AllowedOperations {
     PARTIAL_EDIT
     SHOW_DELIVERY_TO
     TERMINATE_CONTRACT
+    UNSET_AUTOMATIC_PROLONGATION
 }
 
 enum CommodityType {
@@ -272,8 +280,8 @@ enum CommodityType {
     POWER
 }
 
-enum ContractDeleteReason {
-    LEAVING
+enum ContractDeleteReason{
+    LEAVING,
     TERMINATION
 }
 
@@ -403,12 +411,15 @@ input SupplyPointInput {
 
 input SupplyPointInputGasAttributes {
     annualConsumption: Float!
+    annualConsumptionUnit: String!
     eic: String!
 }
 
 input SupplyPointInputPowerAttributes {
     annualConsumptionNT: Float
+    annualConsumptionNTUnit: String
     annualConsumptionVT: Float!
+    annualConsumptionVTUnit: String!
     circuitBreakerId: String!
     distributionRateId: String!
     ean: String!
@@ -421,11 +432,14 @@ input SupplyPointUpdate {
 
 input SupplyPointUpdateGasAttributes {
     annualConsumption: Float!
+    annualConsumptionUnit: String!
 }
 
 input SupplyPointUpdatePowerAttributes {
     annualConsumptionNT: Float
+    annualConsumptionNTUnit: String
     annualConsumptionVT: Float!
+    annualConsumptionVTUnit: String!
 }
 
 input UserDetailInput {

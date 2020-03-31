@@ -117,7 +117,7 @@
                 supply-point-offer__inner--second 
                 pb-0
                 pb-md-4">
-            <h3 class="supply-point-offer__decomposition-title">Regulovaná část ceny</h3>
+            <h3 class="supply-point-offer__decomposition-title">Regulovaná část ceny <small>(veškeré ceny jsou&nbsp;VČETNĚ&nbsp;DPH)</small></h3>
             <div class="row mb-4">
                 <div class="col-12 col-md-6 col-xl-4"
                         *ngIf="supplyPointOffer.prepayment || supplyPointOffer.totalPrice">
@@ -202,7 +202,7 @@
                 </div>
             </div>
             <h3 class="supply-point-offer__decomposition-title">Obchodní část ceny</h3>
-            <div class="row mb-3">
+            <div class="row mb-4">
                 <div class="col-12 col-md-6 col-xl-4"
                      *ngIf="supplyPointOffer.priceVTWithVAT && supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
                     <div class="supply-point-offer__value-box supply-point-offer__value-box--price">

@@ -1,6 +1,5 @@
 import {
     CommodityType,
-    DistributionType,
     SubjectType,
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
@@ -8,6 +7,7 @@ import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
+    ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],
     CURRENCY: {
         DEFAULT: 'CZK',
     },
@@ -15,15 +15,35 @@ export const CONSTS = {
         CALENDAR: 'YYYY-MM-DD[T]HH:mm',
         SHORT: 'YYYY-MM-DD',
     },
-    DEFAULT_EXPIRATION: 5450,
+    DEFAULT_EXPIRATION: 700000,
     DEFAULT_DEPOSIT_PAYMENT_TYPE_ID: 'Prikaz',
+    EXPORT: {
+        FILE_NAME: 'export',
+        TYPE: 'csv',
+    },
+    EXAMPLE_OF_IMPORT_OFFER_FILE: {
+        PATH: '/assets/csv/example-import-offers.csv',
+        FILE_NAME: 'example_import_offers.csv',
+    },
+    IMPORT_ERROR_CODES: {
+        FILE_TYPE: 'FILE_TYPE',
+        MAX_NUMBER_OF_FILES: 'MAX_NUMBER_OF_FILES',
+        NO_OFFERS_IN_IMPORT: 'NO_OFFERS_IN_IMPORT',
+    },
     INTERVAL_RXJS: 5000,
     LOGIN_FORM_NAME: 'login',
     MAX_REQUEST_IN_BATCH_LINK: 200,
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
+    MODAL_TYPE: {
+        CONFIRM_DELETE_OFFER: 'confirmDeleteOffer',
+        CONFIRM_CANCEL_OFFER: 'confirmCancelOffer',
+        CONFIRM_BACK_IMPORT: 'confirmBackImportOffer',
+        CONFIRM_DELETE_MARKED: 'confirmDeleteMarked',
+    },
     PATHS: {
+        APPROVAL: 'approval',
         CONTRACT : 'contract',
         COOKIES_POLICY : 'cookies-policy',
         CHANGE_PASSWORD: 'change-password',
@@ -31,6 +51,7 @@ export const CONSTS = {
         DELETE_ACCOUNT: 'delete-account',
         DELETED_ACCOUNT: 'deleted-account',
         EMPTY : '',
+        IMPORT : 'import',
         FORGOTTEN_PASSWORD : 'forgotten-password',
         GAS: 'gas',
         LOGIN : 'login',
@@ -52,6 +73,7 @@ export const CONSTS = {
         SUPPLY_OFFER: 'supply-offer',
         SUPPLIER_CONCLUDED_CONTRACTS: 'concluded-contracts',
         TERMS_OF_USE : 'terms-of-use',
+        UPLOAD: 'upload',
         USER_PROFILE: 'user-profile',
         WILD_CART  : '**',
     },
@@ -62,8 +84,10 @@ export const CONSTS = {
     },
     VALIDATORS: {
         ADULTHOOD_AGE: 18,
-        MAX_DIGIT_BEFORE_DECIMAL_POINT: 7,
-        MAX_DIGIT_AFTER_DECIMAL_POINT: 2,
+        MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION: 10,
+        MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT: 7,
+        MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT: 2,
+        MAX_DIGIT_AFTER_DECIMAL_POINT_ANNUAL_CONSUMPTION: 3,
         MAX_LENGTH: {
             NUMBER_INPUT_WITH_HINT: 10,
             BENEFIT_NAME: 100,
@@ -72,17 +96,18 @@ export const CONSTS = {
             DIC: 12,
             DESCRIPTIVE_NUMBER: 16,
             EMAIL_LOGIN: 40,
-            USER_NAME_LOGIN: 28,
-            PASSWORD: 50,
             EMAIL_RECAPITULATION: 50,
             OFFER_NAME: 50,
             ORIENTATION_NUMBER: 16,
+            PASSWORD: 50,
             POSITION: 80,
             RECAPITULATION_NAME: 150,
             STREET: 255,
+            USER_NAME_LOGIN: 28,
             USER_PROFILE_NAME: 50,
             SMS_CODE: 10,
         },
+        MAX_IMPORT_FILES: 1,
         MIN_BIRTH_DATE: '1900-01-01',
         MIN_LENGTH: {
             DIC: 10,
@@ -110,6 +135,7 @@ export const ROUTES = {
     ROUTER_ROOT: '/',
     ROUTER_DASHBOARD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.DASHBOARD}`,
     ROUTER_DELETE_ACCOUNT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.DELETE_ACCOUNT}`,
+    ROUTER_IMPORT_UPLOAD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.IMPORT}/${CONSTS.PATHS.UPLOAD}`,
     ROUTER_REQUEST_SUPPLY_POINT_SELECTION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_POINT_SELECTION}`,
     ROUTER_REQUEST_CONTRACT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.CONTRACT}`,
     ROUTER_REQUEST_OFFER_SELECTION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.OFFER_SELECTION}`,
@@ -128,6 +154,8 @@ export const ROUTES = {
     ROUTER_SUPPLY_OFFER: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_OFFER}`,
     ROUTER_SUPPLY_OFFER_POWER: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_OFFER}/${CONSTS.PATHS.POWER}`,
     ROUTER_SUPPLY_OFFER_GAS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_OFFER}/${CONSTS.PATHS.GAS}`,
+    ROUTER_IMPORT_APPROVAL_POWER: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.IMPORT}/${CONSTS.PATHS.APPROVAL}/${CONSTS.PATHS.POWER}`,
+    ROUTER_IMPORT_APPROVAL_GAS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.IMPORT}/${CONSTS.PATHS.APPROVAL}/${CONSTS.PATHS.GAS}`,
     ROUTER_TERMS_OF_USE: `/${CONSTS.PATHS.TERMS_OF_USE}`,
     ROUTER_USER_CHANGE_PASSWORD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CHANGE_PASSWORD}`,
     ROUTER_USER_PROFILE: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.USER_PROFILE}`,
@@ -200,6 +228,7 @@ export enum INavigationItemType {
 }
 
 export const CODE_LIST = {
+    ANNUAL_CONSUMPTION_UNITS: 'UNITS',
     DIST_RATE: 'DSTP4R',
     DIST_RATE_COMPANY: 'DSTSA1',
     DIST_RATE_INDIVIDUAL: 'DSTSA2',
@@ -214,9 +243,12 @@ export const CODE_LIST = {
     DISTRIBUTION_POWER: 'PDISTR',
     DISTRIBUTION_GAS: 'GDISTR',
     DEPOSIT_PAYMENT_TYPE: 'PAYTY2',
+    DISTRIBUTION_RATE_VT: 'DS1P4R',
+    DISTRIBUTION_RATE_BOTH: 'DS2P4R',
 };
 
 export const CODE_LIST_TYPES = [
+    CODE_LIST.ANNUAL_CONSUMPTION_UNITS,
     CODE_LIST.DIST_RATE,
     CODE_LIST.DIST_RATE_INDIVIDUAL,
     CODE_LIST.DIST_RATE_COMPANY,
@@ -231,6 +263,8 @@ export const CODE_LIST_TYPES = [
     CODE_LIST.DISTRIBUTION_POWER,
     CODE_LIST.DISTRIBUTION_GAS,
     CODE_LIST.TIME_TO_CONTRACT_END_PERIOD,
+    CODE_LIST.DISTRIBUTION_RATE_VT,
+    CODE_LIST.DISTRIBUTION_RATE_BOTH,
 ];
 
 export const CONTRACT_END_TYPE = {
@@ -249,7 +283,7 @@ export const CONTRACT_END_TYPE_ORDER = [
 
 export const CONTRACT_END_TYPE_TRANSLATE_MAP  = {
     [CONTRACT_END_TYPE.CONTRACT_END_TERM]: 'Smlouva na dobu určitou',
-    [CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION]: 'Smlouva určitá s automatickou prolongací',
+    [CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION]: 'Smlouva na dobu určitou s automatickou prolongací',
     [CONTRACT_END_TYPE.CONTRACT_END_INDEFINITE_PERIOD]: 'Smlouva na dobu neurčitou',
     [CONTRACT_END_TYPE.CONTRACT_END_TERMINATE]: 'Vlastní výpověď',
 };
@@ -287,16 +321,6 @@ export enum SubjectTypeLowerCase {
 export const SubjectTypesTypes = {
     [SubjectTypeLowerCase.INDIVIDUAL]: SubjectType.SUBJECT_TYPE_INDIVIDUAL,
     [SubjectTypeLowerCase.BUSINESSMAN]: SubjectType.SUBJECT_TYPE_BUSINESSMAN,
-};
-
-export const DISTRIBUTION_RATES_TYPE_DEFINITION = {
-    [DistributionType.VT] : [
-        'C01d', 'C02d', 'C03d', 'C60d', 'C61d', 'C62d', 'D01d', 'D02d',
-    ],
-    [DistributionType.BOTH] : [
-        'C25d', 'C26d', 'C27d', 'C35d', 'C45d', 'C46d', 'C55d', 'C56d',
-        'D25d', 'D26d', 'D27d', 'D35d', 'D45d', 'D56d', 'D57d', 'D61d',
-    ],
 };
 
 export const SUBJECT_TYPE_OPTIONS: Array<IOption> = [
@@ -380,6 +404,11 @@ export const DEFAULT_QR_CODE_SETTING: IQRCodeSetting = {
     margin: 0,
 };
 
+export enum UNIT_OF_PRICES {
+    MWH = 'MWh',
+    KWH = 'kWh',
+}
+
 export const REGIONS: Array<IOption> = [
     {
         'label': 'Hlavní město Praha',
@@ -453,10 +482,25 @@ export const REGIONS: Array<IOption> = [
     },
 ];
 
-export const OPERATIONS_WITHOUT_SCROLL_ON_ERRORS = ['getSupplyPointGlobalStatistics', 'makeRegistration'];
+export const OPERATIONS_WITHOUT_SCROLL_ON_ERRORS = [
+    'getSupplyPointGlobalStatistics',
+    'makeRegistration',
+    'sendChangePhoneNumberSmsMutation',
+];
 
 export enum RequestsOverviewBannerShow {
     NONE = 'NONE',
     TERMINATE_CONTRACT = 'TERMINATE_CONTRACT',
     LEAVE_CONTRACT = 'LEAVE_CONTRACT',
+}
+export const FILE_UPLOAD_CONFIG = 'file_upload_config';
+
+export enum ANNUAL_CONSUMPTION_TYPES {
+    ANNUAL_CONSUMPTION_NT = 'annualConsumptionNT',
+    ANNUAL_CONSUMPTION_VT = 'annualConsumptionVT',
+}
+
+export enum ANNUAL_CONSUMPTION_UNIT_TYPES {
+    ANNUAL_CONSUMPTION_NT_UNIT = 'annualConsumptionNTUnit',
+    ANNUAL_CONSUMPTION_VT_UNIT = 'annualConsumptionVTUnit',
 }

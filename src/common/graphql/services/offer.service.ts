@@ -1,10 +1,20 @@
+import {
+    HttpClient,
+    HttpResponse,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
-import { catchError } from 'rxjs/operators';
+import {
+    catchError,
+    map,
+} from 'rxjs/operators';
 import { Observable } from 'apollo-client/util/Observable';
-import { of } from 'rxjs';
+import {
+    Observable as ObservableRxjs,
+    of,
+} from 'rxjs';
 
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import {
@@ -14,6 +24,7 @@ import {
     updateGasOfferMutation,
     updatePowerOfferMutation,
 } from 'src/common/graphql/mutation/offer';
+import { environment } from 'src/environments/environment';
 import {
     findSupplierOffersQuery,
     findSupplyPointOffersQuery,
@@ -25,6 +36,7 @@ import {
     IOfferInputPowerAttributes,
     IOfferStatus,
 } from 'src/common/graphql/models/offer.model';
+import { IResponseDataDocument } from 'src/app/services/model/document.model';
 
 @Injectable({
     providedIn: 'root',
@@ -33,11 +45,13 @@ export class OfferService {
 
     constructor(
         private apollo: Apollo,
+        private http: HttpClient,
     ) {}
 
     public findSupplierOffers = () => this.apollo
         .watchQuery<any>({
             query: findSupplierOffersQuery,
+            fetchPolicy: 'network-only',
         })
         .valueChanges
 
@@ -140,6 +154,28 @@ export class OfferService {
             },
         })
 
+    public batchImport = (offers: IOfferInput[]) => this.http.post<any>(
+        `${environment.url_api}/v1.0/offer/batch-import`,
+        offers,
+    )
+
+    public exportCSV = (): ObservableRxjs<IResponseDataDocument> => {
+        return this.http.get(`${environment.url_api}/v1.0/offer/export-csv`, {
+            responseType: 'blob',
+            observe: 'response',
+        }).pipe(
+            map((response: HttpResponse<any>): IResponseDataDocument => {
+                const headers = response.headers.get('content-disposition');
+                const filename = headers.split(';')[1].split('filename')[1]
+                    .split('=')[1].trim().replace(new RegExp('"', 'g'), '');
+
+                return {
+                    file: response.body,
+                    filename,
+                };
+            }),
+        );
+    }
 
     public markAll = (mark: boolean, commodityType: CommodityType): number => {
         const client = this.apollo.getClient();

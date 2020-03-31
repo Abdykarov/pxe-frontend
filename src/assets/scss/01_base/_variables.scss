@@ -251,6 +251,8 @@ $zindex-field-wrapper-control-label: 5;
 $zindex-graph-tabs-active-after:     99;
 $zindex-tooltip-content:             3000;
 $zindex-tooltip-beak:                3001;
+$zindex-drop-zone-bg-image:          -1;
+$zindex-tr-detail:                   1;
 
 
 // Card
@@ -305,3 +307,10 @@ $landing-page-process-arrow-width-mobile:         46px;
 $landing-page-process-arrow-height-mobile:        18px;
 $landing-page-process-arrow-width-desktop:        70px;
 $landing-page-process-arrow-height-desktop:       24px;
+
+
+// Drop zone
+$drop-zone-border-color:       $light-dark;
+$drop-zone-border-size:        3px;
+$drop-zone-border-dash-width:  15px;
+$drop-zone-border-gap-width:   15px;

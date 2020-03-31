@@ -1,5 +1,6 @@
 import {
     FormBuilder,
+    Validators,
 } from '@angular/forms';
 import {
     OnChanges,
@@ -11,10 +12,20 @@ import * as R from 'ramda';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import {
+    anyToString,
+    CustomValidators,
+    includesBothTariffs,
+} from 'src/common/utils';
+import {
+    ANNUAL_CONSUMPTION_TYPES,
+    ANNUAL_CONSUMPTION_UNIT_TYPES,
+    CONSTS,
+    UNIT_OF_PRICES,
+} from 'src/app/app.constants';
+import {
     CommodityType,
-    DistributionType,
+    ICodelistOptions,
 } from 'src/common/graphql/models/supply.model';
-import { DISTRIBUTION_RATES_TYPE_DEFINITION } from 'src/app/app.constants';
 import { ICommodityTypeFields } from 'src/common/containers/form/models/form-definition.model';
 
 export class AbstractSupplyPointFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
@@ -34,15 +45,64 @@ export class AbstractSupplyPointFormComponent extends AbstractFormComponent impl
         super.ngOnChanges(changes);
     }
 
-    public setAnnualConsumptionNTState = (distributionRateId: string = null) => {
-        if (this.includesBothTariffs(distributionRateId)) {
+    public setAnnualConsumptionNTState = (distributionRateId: string = null, codeLists: ICodelistOptions = null) => {
+        if (includesBothTariffs(distributionRateId, codeLists)) {
             this.setEnableField('annualConsumptionNT');
         } else {
             this.setDisableField('annualConsumptionNT');
         }
     }
 
-    public includesBothTariffs = (id: string) => DISTRIBUTION_RATES_TYPE_DEFINITION[DistributionType.BOTH].includes(id);
+    public normalizationAnnualConsumption = (annualConsumption: string | number): string =>
+        annualConsumption && annualConsumption.toString().replace('.', ',')
+
+    public detectChangesForAnnualConsumption = (
+        typeOfAnnualConsumption: ANNUAL_CONSUMPTION_TYPES,
+        typeOfAnnualConsumptionUnit: ANNUAL_CONSUMPTION_UNIT_TYPES,
+        annualConsumptionUnit: UNIT_OF_PRICES,
+    ) => {
+        const annualAnnualConsumption = this.form.controls[typeOfAnnualConsumption].value;
+        if (annualConsumptionUnit === UNIT_OF_PRICES.KWH) {
+            this.form.controls[typeOfAnnualConsumption]
+                .setValidators(
+                    [
+                        Validators.required,
+                        CustomValidators.isNumber(),
+                        CustomValidators.minValue(0),
+                        CustomValidators.totalDigitLengthBeforeDecimalPoint(
+                            CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION,
+                        ),
+                    ]);
+            const typeOfAnnualConsumptionValue = this.operationOnNumber(annualAnnualConsumption, (num) => num * 1000);
+            this.form.controls[typeOfAnnualConsumption].setValue(typeOfAnnualConsumptionValue);
+        } else {
+            this.form.controls[typeOfAnnualConsumption]
+                .setValidators(
+                    [
+                        Validators.required,
+                        CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_ANNUAL_CONSUMPTION),
+                        CustomValidators.minValue(0),
+                        CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
+                    ]);
+            const typeOfAnnualConsumptionValue = this.operationOnNumber(annualAnnualConsumption, (num) => num / 1000);
+            this.form.controls[typeOfAnnualConsumption].setValue(typeOfAnnualConsumptionValue);
+        }
+        this.form.controls[typeOfAnnualConsumption].updateValueAndValidity();
+    }
+
+    public operationOnNumber = (number: string | number, fnc: Function): string => {
+        if (!number) {
+            return '';
+        }
+        return R.pipe(
+            anyToString,
+            R.replace(',', '.'),
+            parseFloat,
+            fnc,
+            anyToString,
+            R.replace('.', ','),
+        )(number);
+    }
 
     public setFormFields = (commodityType: CommodityType) => {
         R.mapObjIndexed((fieldControl, field: string) => {

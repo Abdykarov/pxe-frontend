@@ -1,5 +1,7 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+import * as R from 'ramda';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import {
     ApolloLink,
@@ -30,11 +32,13 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
 
     const setTokenHeader = (operation: Operation): void => {
-        const token = authService.getToken();
+        const headers: HttpHeaders = authService.getAuthorizationHeaders(null);
+        const xAPIKey = headers.get('X-API-Key');
+        const Authorization = headers.get('Authorization');
         operation.setContext({
             headers: {
-                Authorization: token ? `Bearer ${token}` : '',
-                'X-API-Key': `${environment.x_api_key}`,
+                ...(!!Authorization) && {Authorization},
+                'X-API-Key': xAPIKey,
             },
         });
     };
@@ -52,7 +56,19 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
             let subscription, innerSubscription;
             try {
                 subscription = forward(operation).subscribe({
-                    next: observer.next.bind(observer),
+                    next: result => {
+                        if (result.errors) {
+                            const isAccessDeniedException = R.pipe(
+                                R.filter((err) => err && err.type === 'AccessDeniedException'),
+                                R.head,
+                            )(result.errors);
+
+                            if (isAccessDeniedException) {
+                                authService.logoutForced();
+                            }
+                        }
+                        observer.next(result);
+                    },
                     complete: observer.complete.bind(observer),
                     error: networkError => {
                         if (networkError.status === 401 || networkError.statusCode === 401) {

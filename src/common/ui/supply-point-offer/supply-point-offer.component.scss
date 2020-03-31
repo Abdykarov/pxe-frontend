@@ -236,12 +236,8 @@
 	}
 
 	&__decomposition-title {
+		font-size: $supply-point-offer-decomposition-font-size;
 		text-transform: uppercase;
-
-		// Media queries
-		@include media-breakpoint-up(xl) {
-			font-size: $supply-point-offer-decomposition-font-size;
-		}
 	}
 
 	&__addon {
