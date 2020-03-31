@@ -5,6 +5,7 @@ export interface IResponseDataDocument {
 
 export enum IDocumentType {
     INFORMATION = 'INFORMATION',
+    UNSET_PROLONGATION = 'UNSET_PROLONGATION',
     DENUNCIATION = 'DENUNCIATION',
     WITHDRAWAL = 'WITHDRAWAL',
     CONTRACT = 'CONTRACT',

@@ -1,5 +1,6 @@
 import {
     FormBuilder,
+    Validators,
 } from '@angular/forms';
 import {
     OnChanges,
@@ -11,11 +12,21 @@ import * as R from 'ramda';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import {
+    anyToString,
+    CustomValidators,
+    includesBothTariffs,
+} from 'src/common/utils';
+import {
+    ANNUAL_CONSUMPTION_TYPES,
+    ANNUAL_CONSUMPTION_UNIT_TYPES,
+    CONSTS,
+    UNIT_OF_PRICES,
+} from 'src/app/app.constants';
+import {
     CommodityType,
     ICodelistOptions,
 } from 'src/common/graphql/models/supply.model';
 import { ICommodityTypeFields } from 'src/common/containers/form/models/form-definition.model';
-import { includesBothTariffs } from 'src/common/utils';
 
 export class AbstractSupplyPointFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
     public allowedFields: ICommodityTypeFields;
@@ -40,6 +51,57 @@ export class AbstractSupplyPointFormComponent extends AbstractFormComponent impl
         } else {
             this.setDisableField('annualConsumptionNT');
         }
+    }
+
+    public normalizationAnnualConsumption = (annualConsumption: string | number): string =>
+        annualConsumption && annualConsumption.toString().replace('.', ',')
+
+    public detectChangesForAnnualConsumption = (
+        typeOfAnnualConsumption: ANNUAL_CONSUMPTION_TYPES,
+        typeOfAnnualConsumptionUnit: ANNUAL_CONSUMPTION_UNIT_TYPES,
+        annualConsumptionUnit: UNIT_OF_PRICES,
+    ) => {
+        const annualAnnualConsumption = this.form.controls[typeOfAnnualConsumption].value;
+        if (annualConsumptionUnit === UNIT_OF_PRICES.KWH) {
+            this.form.controls[typeOfAnnualConsumption]
+                .setValidators(
+                    [
+                        Validators.required,
+                        CustomValidators.isNumber(),
+                        CustomValidators.minValue(0),
+                        CustomValidators.totalDigitLengthBeforeDecimalPoint(
+                            CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION,
+                        ),
+                    ]);
+            const typeOfAnnualConsumptionValue = this.operationOnNumber(annualAnnualConsumption, (num) => num * 1000);
+            this.form.controls[typeOfAnnualConsumption].setValue(typeOfAnnualConsumptionValue);
+        } else {
+            this.form.controls[typeOfAnnualConsumption]
+                .setValidators(
+                    [
+                        Validators.required,
+                        CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_ANNUAL_CONSUMPTION),
+                        CustomValidators.minValue(0),
+                        CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
+                    ]);
+            const typeOfAnnualConsumptionValue = this.operationOnNumber(annualAnnualConsumption, (num) => num / 1000);
+            this.form.controls[typeOfAnnualConsumption].setValue(typeOfAnnualConsumptionValue);
+        }
+        this.form.controls[typeOfAnnualConsumption].updateValueAndValidity();
+    }
+
+    public operationOnNumber = (number: string | number, fnc: Function): string => {
+        if (!number) {
+            return '';
+        }
+        return R.pipe(
+            anyToString,
+            R.replace(',', '.'),
+            parseFloat,
+            fnc,
+            anyToString,
+            R.replace('.', ','),
+        )(number);
     }
 
     public setFormFields = (commodityType: CommodityType) => {

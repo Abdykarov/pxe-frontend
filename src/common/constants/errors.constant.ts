@@ -76,14 +76,14 @@ export const importErrorViolations = {
     'benefitWithUrl4Invalid': 'Benefit 4 není validní',
     'benefitsNotSetInOrder': 'Benefity nejsou ve správném pořadí',
     'nameInvalidSize' : 'Název nabídky -  použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_LENGTH.OFFER_NAME + ' znaků.',
-    'priceGasInvalidFormat' : 'Cena plyn - použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT
-        + ' desetinná místa a ' + CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT + ' celých čísel.',
-    'priceVTInvalidFormat': 'Cena za VT - použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT
-        + ' desetinná místa a ' + CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT + ' celých čísel.',
-    'priceNTInvalidFormat': 'Cena za NT - použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT
-        + ' desetinná místa a ' + CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT + ' celých čísel.',
-    'permanentPaymentPriceFormat': 'Stálá cena - použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT
-        + ' desetinná místa a ' + CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT + ' celých čísel.',
+    'priceGasInvalidFormat' : 'Cena plyn - použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT
+        + ' desetinná místa a ' + CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT + ' celých čísel.',
+    'priceVTInvalidFormat': 'Cena za VT - použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT
+        + ' desetinná místa a ' + CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT  + ' celých čísel.',
+    'priceNTInvalidFormat': 'Cena za NT - použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT
+        + ' desetinná místa a ' + CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT  + ' celých čísel.',
+    'permanentPaymentPriceFormat': 'Stálá cena - použít můžete maximálně ' + CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT
+        + ' desetinná místa a ' + CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT + ' celých čísel.',
     'validFromMustBeBeforeValidTo': 'Datum začátku platnosti nabídky musí být dřívější než její konec.',
     'deliveryFromMustBeBeforeDeliveryTo': 'Datum začátku dodávkového období musí být dřívější než jeho konec.',
 };
