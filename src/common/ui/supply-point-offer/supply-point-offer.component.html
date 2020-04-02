@@ -56,10 +56,10 @@
                         <div class="col-12 col-md-8 col-xl-12">
                             <span class="supply-point-offer__title text-break">
                                 <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
-                                    {{supplyPointOffer.prepayment | number: '1.0-2'}}&nbsp;Kč
+                                    {{supplyPointOffer.prepayment | number: '1.0-0'}}&nbsp;Kč<small>&nbsp;VČETNĚ&nbsp;DPH</small>
                                 </ng-container>
                                 <ng-template #totalPrice>
-                                    {{supplyPointOffer.totalPrice | number: '1.0-2'}}&nbsp;Kč
+                                    {{supplyPointOffer.totalPrice | number: '1.0-0'}}&nbsp;Kč<small>&nbsp;VČETNĚ&nbsp;DPH</small>
                                 </ng-template>
                             </span>
                         </div>
@@ -124,7 +124,7 @@
             <div class="supply-point-offer__inner supply-point-offer__inner--price  supply-point-offer__inner--price-decomposition">
                 <div class="row no-gutters align-items-center mb-4 mb-md-5">
                     <div class="col">
-                        <span class="supply-point-offer__decomposition-title">Regulovaná část ceny</span>
+                        <span class="supply-point-offer__decomposition-title">Regulovaná část ceny <small>(veškeré ceny jsou&nbsp;VČETNĚ&nbsp;DPH)</small></span>
                     </div>
                     <div class="col-auto">
                         <lnd-button

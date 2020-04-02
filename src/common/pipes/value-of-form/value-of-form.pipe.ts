@@ -9,13 +9,14 @@ import {
 } from '@angular/core';
 
 @Pipe({
-  name: 'valueOfForm',
+    name: 'valueOfForm',
 })
 export class ValueOfFormPipe implements PipeTransform {
     transform(form: FormGroup, path: string): FormArray | AbstractControl {
         if (!form || !path) {
             return null;
         }
+
         return form.get(path);
     }
 }
