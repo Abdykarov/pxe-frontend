@@ -25,12 +25,14 @@
             </div>
         </div>
         <div class="section-video-holder">
-            <!-- <img
+            <img
+                *ngIf="!isMoreThanXlResolution"
                 class="video-picture"
                 src="/assets/images/landing-page/video-image.jpg"
                 title="Plaťte za energie chytře díky burze"
-                alt="Plaťte za energie chytře díky burze"> -->
+                alt="Plaťte za energie chytře díky burze">
             <video
+                *ngIf="isMoreThanXlResolution"
                 class="section-video"
                 autoplay
                 loop

@@ -103,6 +103,7 @@ export const CONSTS = {
         SECURING_YOUR_DATA: 'Ochrana osobních údajů | PARC4U',
         SIGN_UP: 'Registrace | PARC4U',
     },
+    XL_RESOLUTION: 992,
 };
 
 export const ROUTES = {

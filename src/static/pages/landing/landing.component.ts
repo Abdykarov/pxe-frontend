@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import {
+    Component,
+    HostListener,
+} from '@angular/core';
+import { $ } from 'protractor';
+import { CONSTS } from 'src/app/app.constants';
 
 import { configCoverage } from 'src/static/config/map-coverage.config';
 import { configSupplier } from 'src/static/config/suppliers.config';
@@ -30,8 +35,15 @@ export class LandingComponent {
     public fieldError: IFieldError = {};
     public items = carouselItems;
     public interval = interval;
+    public isMoreThanXlResolution = false;
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+        this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+    }
 
     constructor() {
+        this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
         this.breadcrumbItemsSimple = [
             {
               label: 'Landing page',
