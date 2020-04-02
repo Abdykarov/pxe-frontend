@@ -6,8 +6,14 @@ import {
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
+import * as CryptoJS from 'crypto-js';
+
 export const CONSTS = {
     ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],
+    CRYPTO: {
+        SALT: CryptoJS.lib.WordArray.random(128 / 8),
+        IV: CryptoJS.lib.WordArray.random(128 / 8),
+    },
     CURRENCY: {
         DEFAULT: 'CZK',
     },
@@ -32,6 +38,10 @@ export const CONSTS = {
     },
     IMPORT_OFFERS_TYPE: 'text/csv',
     INTERVAL_RXJS: 5000,
+    LOCAL_STORAGE: {
+        PERSONAL_INFO_PARTIAL_FORM_PREFIX: 'PERSONAL_INFO_',
+        SUPPLY_POINT_PARTIAL_FORM: 'SUPPLY_POINT',
+    },
     LOGIN_FORM_NAME: 'login',
     MAX_REQUEST_IN_BATCH_LINK: 200,
     MONTH_DURATION: 30,

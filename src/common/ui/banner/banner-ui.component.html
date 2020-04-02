@@ -14,5 +14,12 @@
             (action)="data.linkValue ? bannerAction(data.linkValue, data.linkType, data.linkData) : customBannerAction.emit($event)"
             type="white">
         </lnd-button>
+        <lnd-button
+            class="ml-3"
+            *ngIf="showSecondButtonLabel"
+            label="{{secondButtonLabel}}"
+            (action)="data.secondLinkValue ? bannerAction(data.secondLinkValue, data.secondLinkType, data.secondLinkData) : customSecondBannerAction.emit($event)"
+            type="white">
+        </lnd-button>
     </div>
 </div>

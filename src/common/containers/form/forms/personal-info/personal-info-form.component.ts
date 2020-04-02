@@ -32,6 +32,7 @@ import {
     IPersonalData,
     IPersonalDataInputForm,
 } from 'src/common/graphql/models/personal-data.model';
+import { PersonalInfoLocalStorageService } from 'src/app/services/personal-info-local-storage.service';
 
 @Component({
     selector: 'pxe-personal-info-form',
@@ -60,6 +61,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
 
     constructor(
         protected fb: FormBuilder,
+        private personalInfoLocalStorageService: PersonalInfoLocalStorageService,
     ) {
         super(fb);
     }
@@ -100,15 +102,18 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
 
         if (this.formValues) {
             this.prefillFormData();
+        } else {
+            const personalInfoUnfinished = this.personalInfoLocalStorageService.getPersonalInfo(this.supplyPoint.id);
+            if (personalInfoUnfinished &&  !R.isEmpty(personalInfoUnfinished)) {
+                this.form.setValue(personalInfoUnfinished);
+            }
         }
 
         this.form.valueChanges
             .pipe(takeUntil(this.destroy$))
-            .subscribe((formValue) => {
-                console.log('__AA__');
-                console.log(formValue);
+            .subscribe(_ => {
+                this.personalInfoLocalStorageService.addPersonalInfo(this.supplyPoint.id, this.form.getRawValue());
             });
-
     }
 
     ngAfterViewInit() {

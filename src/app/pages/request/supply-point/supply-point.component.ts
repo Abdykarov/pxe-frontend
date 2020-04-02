@@ -18,6 +18,7 @@ import {
     takeUntil,
 } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { SupplyPointLocalStorageService } from 'src/app/services/supply-point-local-storage.service';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -30,6 +31,7 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
+import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import { getConfigStepper } from 'src/common/utils';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
@@ -54,8 +56,13 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public formSent = false;
     public globalError: string[] = [];
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
+    public showBannerOfContinueInPreviousForm = false;
     public supplyPointData = null;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
+
+    public bannerObj: IBannerObj = {
+        text: 'Chcete pokračovat na předchozím OM?',
+    };
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -63,6 +70,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
+        private supplyPointLocalStorageService: SupplyPointLocalStorageService,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
@@ -91,7 +99,8 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                             of({});
                     }),
                     takeUntil(this.destroy$),
-                ).subscribe(
+                )
+                .subscribe(
                     () => {
                         this.supplyPointData = supplyPointFound;
                         this.cd.markForCheck();
@@ -106,8 +115,19 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         } else if (supplyPointCopy) {
             this.supplyPointData = supplyPointCopy;
         } else {
+            this.showBannerOfContinueInPreviousForm = !R.isEmpty(this.supplyPointLocalStorageService.getSupplyPoint());
             this.supplyPointData = {};
         }
+    }
+
+    public continueInPreviousFormBannerAction = () => {
+        this.supplyPointLocalStorageService.loadSupplyPoint();
+        this.showBannerOfContinueInPreviousForm = false;
+    }
+
+    public removePreviousFormBannerAction = () => {
+        this.supplyPointLocalStorageService.removeSupplyPoint();
+        this.showBannerOfContinueInPreviousForm = false;
     }
 
     public submitSupplyForm = (supplyPointFormData: ISupplyPointFormData) => {
@@ -164,6 +184,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 (supplyPointId) => {
+                    this.supplyPointLocalStorageService.removeSupplyPoint();
                     this.formLoading = false;
                     this.formSent = true;
                     this.cd.markForCheck();
@@ -176,6 +197,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                         });
                 },
                 (error) => {
+                    this.supplyPointLocalStorageService.removeSupplyPoint();
                     this.formLoading = false;
                     const { fieldError, globalError } = parseGraphQLErrors(error);
                     this.fieldError = fieldError;

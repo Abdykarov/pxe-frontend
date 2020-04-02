@@ -23,6 +23,9 @@ export class BannerUIComponent extends AbstractComponent {
     public buttonLabel: string;
 
     @Input()
+    public secondButtonLabel = '';
+
+    @Input()
     public data?: IBannerObj;
 
     @Input()
@@ -31,8 +34,14 @@ export class BannerUIComponent extends AbstractComponent {
     @Input()
     public showButtonLabel = true;
 
+    @Input()
+    public showSecondButtonLabel = false;
+
     @Output()
     public customBannerAction?: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
+    public customSecondBannerAction?: EventEmitter<any> = new EventEmitter<any>();
 
     public bannerAction(value: string, type: string, state: any = null) {
         if (type === 'external') {

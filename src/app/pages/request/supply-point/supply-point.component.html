@@ -5,6 +5,20 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <lnd-banner-ui
+                *ngIf="showBannerOfContinueInPreviousForm"
+                [buttonLabel]="'Ano'"
+                [secondButtonLabel]="'Smazat'"
+                [showSecondButtonLabel]="true"
+                (customBannerAction)="continueInPreviousFormBannerAction()"
+                (customSecondBannerAction)="removePreviousFormBannerAction()"
+                [data]="bannerObj"
+            >
+            </lnd-banner-ui>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1 text-center">
             <h2>Zadejte údaje k odběrnému místu</h2>
         </div>
