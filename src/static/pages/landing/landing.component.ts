@@ -1,6 +1,7 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
     Component,
-    HostListener,
+    HostListener, Inject, PLATFORM_ID,
 } from '@angular/core';
 import { $ } from 'protractor';
 import { CONSTS } from 'src/app/app.constants';
@@ -42,8 +43,13 @@ export class LandingComponent {
         this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
     }
 
-    constructor() {
-        this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+    constructor(
+        @Inject(PLATFORM_ID) private platformId: string,
+    ) {
+        if (isPlatformBrowser(this.platformId)) {
+            this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+        }
+
         this.breadcrumbItemsSimple = [
             {
               label: 'Landing page',

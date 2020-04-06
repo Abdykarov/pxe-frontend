@@ -80,7 +80,7 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
             window.scrollY ||
             window.pageYOffset ||
             document.body.scrollTop + (document.documentElement && document.documentElement.scrollTop || 0);
-        this.wasLastTimeScrollToTop = scrollTop > this.lastScrollTop;
+        this.wasLastTimeScrollToTop = scrollTop < this.lastScrollTop;
         this.lastScrollTop = scrollTop;
     }
 

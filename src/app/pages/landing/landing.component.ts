@@ -1,7 +1,8 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
     ChangeDetectorRef,
     Component,
-    ElementRef,
+    ElementRef, HostListener, Inject, PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
 import {
@@ -54,6 +55,13 @@ export class LandingComponent extends AbstractComponent {
     public formFields: IForm;
     public routes = ROUTES;
 
+    public isMoreThanXlResolution = false;
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+        this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+    }
+
     constructor(
         private apollo: Apollo,
         private cd: ChangeDetectorRef,
@@ -62,8 +70,13 @@ export class LandingComponent extends AbstractComponent {
         private registrationService: RegistrationService,
         private scrollToService: ScrollToService,
         private titleService: Title,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
+        if (isPlatformBrowser(this.platformId)) {
+            this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+        }
+
         this.titleService.setTitle(CONSTS.TITLES.LANDING_PAGE);
         this.metaService.updateTag({
             name: 'description',
