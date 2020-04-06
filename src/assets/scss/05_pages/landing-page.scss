@@ -31,7 +31,7 @@
 				padding-top: ( $spacer * 2 ) + $landing-page-picture-height-mobile;
 			}
 			@include media-breakpoint-up(xl) {
-				margin: ( $spacer * 4.5 ) 0 ( $spacer * 5.5 );
+				margin-bottom: ( $spacer * 5.5 );
 			}
 		}
 
@@ -297,8 +297,14 @@
 
 			// Media queries
 			@include media-breakpoint-up(md) {
-				bottom: 16%;
+				bottom: 32%;
 				margin-left: ( 100% / $grid-columns );
+			}
+			@include media-breakpoint-up(xl) {
+				bottom: 40%;
+			}
+			@include media-breakpoint-up(lg) {
+				bottom: 48%;
 			}
 
 			& > li {

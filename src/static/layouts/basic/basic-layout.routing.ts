@@ -31,10 +31,6 @@ import {
     buttonsPageRoutes,
 } from 'src/static/atoms/buttons/page.module';
 import {
-    CarouselPageModule,
-    carouselPageComponent,
-} from 'src/static/organisms/carousel/page.module';
-import {
     ColorsPageModule,
     colorsPageRoutes,
 } from 'src/static/atoms/colors/page.module';
@@ -201,7 +197,6 @@ const routes: Routes = [
             ...bannersPageRoutes,
             ...breadcrumbPageRoutes,
             ...buttonsPageRoutes,
-            ...carouselPageComponent,
             ...colorsPageRoutes,
             ...contractSigningPageRoutes,
             ...dashboardPageRoutes,
@@ -257,7 +252,6 @@ const routes: Routes = [
         BannersPageModule,
         BreadcrumbPageModule,
         ButtonsPageModule,
-        CarouselPageModule,
         ColorsPageModule,
         ContractSigningPageModule,
         DeleteAccountFailedPageModule,

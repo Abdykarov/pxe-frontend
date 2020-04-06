@@ -2,17 +2,20 @@ import { ICarouselItem } from 'src/common/ui/carousel/models/data.model';
 
 export const carouselItems: ICarouselItem[] = [
     {
-        label: 'Maybe you’ve heard these different marketing terms, maybe you haven’t. Either way, let me help to clarify the difference between them.',
+        title: 'Nejdříve se seznámíme',
+        label: 'Představíte sebe i vaše odběrné místo nebo nahrajete fakturu, ať máme potřebné informace.',
         alt: 'carousel obrázel - drag and drop funkce',
         src: '/assets/images/landing-page/laptop-dragdrop.png',
     },
     {
-        label: 'Maybe you’ve heard these different marketing terms, maybe you haven’t. Either way, let me help to clarify the difference between them.',
+        title: 'Dostanete nabídky',
+        label: 'Získáme pro vás ty nejzajímavější nabídky od dodavatelů, které před tím důkladně prověříme, ať se nemusíte ničeho bát.',
         alt: 'carousel obrázel - zajímavé nabídky',
         src: '/assets/images/landing-page/laptop-offers.png',
     },
     {
-        label: 'Maybe you’ve heard these different marketing terms, maybe you haven’t. Either way, let me help to clarify the difference between them.',
+        title: 'Vyberete si a je to',
+        label: 'Nejlákavější nabídku potvrdíte jedním kliknutím a potřebný převod už za vás zařídíme my.',
         alt: 'carousel obrázel - skvělý přehled',
         src: '/assets/images/landing-page/laptop-overview.png',
     },
