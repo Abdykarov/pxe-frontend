@@ -15,7 +15,8 @@ import {
     of,
 } from 'rxjs';
 import {
-    map, retry,
+    map,
+    retry,
     switchMap,
     takeUntil,
 } from 'rxjs/operators';
@@ -28,6 +29,10 @@ import {
     ProgressStatus,
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
+import {
+    CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
@@ -44,7 +49,6 @@ import {
 } from 'src/app/services/model/document.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
-import { CONSTS, ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
