@@ -66,9 +66,10 @@
                 </div>
             </div>
             <div
-                *ngIf="!showPriceDecomposition && !isOwner && supplyPointOffer.benefits && supplyPointOffer.benefits.length" 
+                *ngIf="!showPriceDecomposition && !isOwner"
                 class="row">
-                <div class="col">
+                <div *ngIf="supplyPointOffer.benefits && supplyPointOffer.benefits.length"
+                      class="col">
                     <div class="supply-point-offer__benefits-description-wrapper">
                         <div class="supply-point-offer__benefits-description">
                             <span class="icon icon--star"></span>
@@ -120,20 +121,6 @@
                 pb-md-4">
             <h3 class="supply-point-offer__decomposition-title">Regulovaná část ceny <small>(veškeré ceny jsou&nbsp;VČETNĚ&nbsp;DPH)</small></h3>
             <div class="row mb-4">
-                <div class="col-12 col-md-6 col-xl-4"
-                        *ngIf="supplyPointOffer.prepayment || supplyPointOffer.totalPrice">
-                    <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
-                        <span class="supply-point-offer__value-name">Odhadovaná cena za rok při zadané spotřebě</span>
-                        <span class="supply-point-offer__value text-break">
-                            <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
-                                {{(supplyPointOffer.prepayment | number: '1.0-0') * 12}}&nbsp;Kč<small>&nbsp;VČETNĚ DPH</small>
-                            </ng-container>
-                            <ng-template #totalPrice>
-                                {{(supplyPointOffer.totalPrice  | number: '1.0-0') * 12}}&nbsp;Kč<small>&nbsp;VČETNĚ DPH</small>
-                            </ng-template>
-                        </span>
-                    </div>
-                </div>
                 <div class="col-12 col-md-6 col-xl-4"
                         *ngIf="supplyPointOffer.priceGasWithVAT && supplyPointOffer.commodityType === COMMODITY_TYPE_GAS">
                     <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
@@ -229,11 +216,17 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-auto offset-md-6 offset-md-8">
-                    <span class="supply-point-offer__title-label">Vypočtená roční cena</span>
-                    <span class="supply-point-offer__title text-break">10 000&nbsp;Kč</span>
-                </div>
+            <div class="col-auto offset-md-6 offset-md-8"
+                 *ngIf="supplyPointOffer.prepayment || supplyPointOffer.totalPrice">
+                <span class="supply-point-offer__title-label">Vypočtená roční cena</span>
+                <span class="supply-point-offer__title text-break">
+                    <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
+                        {{(supplyPointOffer.prepayment | number: '1.0-0') * 12}}&nbsp;Kč<
+                    </ng-container>
+                    <ng-template #totalPrice>
+                        {{(supplyPointOffer.totalPrice  | number: '1.0-0') * 12}}&nbsp;Kč
+                    </ng-template>
+                </span>
             </div>
         </div>
         <div 
@@ -260,7 +253,7 @@
                 </div>
             </div>
         </div>
-        <div 
+        <div
             class="col-12 order-md-3 d-md-none"
             [class.d-md-block]="showPriceDecomposition">
             <div class="supply-point-offer__inner supply-point-offer__inner--second pt-0">
