@@ -1,4 +1,9 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    Output,
+} from '@angular/core';
 
 import { ICarouselItem } from 'src/common/ui/carousel/models/data.model';
 
