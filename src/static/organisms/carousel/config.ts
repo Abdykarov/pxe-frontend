@@ -4,17 +4,17 @@ export const carouselItems: ICarouselItem[] = [
     {
         label: 'picture-about-our-benefit',
         alt: 'picture-about-our-benefit',
-        src: '/assets/images/landing-page/picture-about-our-benefit.jpg',
+        src: '/assets/images/landing-page/laptop-dragdrop.jpg',
     },
     {
         label: 'picture-shortcut',
         alt: 'picture-shortcut',
-        src: '/assets/images/landing-page/picture-shortcut.jpg',
+        src: '/assets/images/landing-page/laptop-offers.jpg',
     },
     {
         label: 'picture-to-silhouette',
         alt: 'picture-to-silhouette',
-        src: '/assets/images/landing-page/picture-to-silhouette.svg',
+        src: '/assets/images/landing-page/laptop-overview.jpg',
     },
 ];
 

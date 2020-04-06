@@ -250,3 +250,30 @@ $colors: (
 /* Generate progress bars */
 @include generate-progress;                              // width
 @include generate-progress(height, progress-h);          // height
+
+
+/*
+ *	Animation slide to right
+ */
+
+@keyframes slideToRightFaster {
+	from {
+		transform: translate3d(-10%, 0, 0);
+		visibility: visible;
+	}
+
+	to {
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes slideToRightSlower {
+	from {
+		transform: translate3d(-20%, 0, 0);
+		visibility: visible;
+	}
+
+	to {
+		transform: translate3d(0, 0, 0);
+	}
+}

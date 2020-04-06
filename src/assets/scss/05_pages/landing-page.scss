@@ -221,37 +221,52 @@
 		}
 
 		&-item {
-			padding: ( ( $spacer * 2 ) + $landing-page-picture-height-mobile ) ( $spacer * 1.5 ) 0 ( $spacer * 1.5 );
+			padding: 0 ( $spacer * 1.5 );
 	
 			// Media queries
 			@include media-breakpoint-up(md) {
-				padding: ( $spacer * 6 ) 0;
+				padding: 0;
 			}
 		}
 
 		&-item-img {
-			width: 100%;
+			width: 130%;
 			height: auto;
+			animation: slideToRightFaster .9s forwards;
+		}
+
+		&-item-content {
+			animation: slideToRightSlower 1.25s forwards;
+			transition-timing-function: ease-out;
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				padding-bottom: 15%;
+			}
+		}
+
+		.carousel-control {
+			display: none;
 		}
 
 		.carousel-indicators {
+			margin-left: ( $spacer * 1.5 );
+			right: auto;
 			margin-bottom: 0;
 
 			// Media queries
 			@include media-breakpoint-up(md) {
-				left: 0;
-				width: 50%;
-				margin-bottom: ( $spacer * 1.5 );
+				margin-left: ( 100% / $grid-columns );
 			}
 
 			& > li {
-				width: 16px;
-				height: 16px;
+				width: $carousel-indicators-item-size;
+				height: $carousel-indicators-item-size;
 				padding: 0;
 				margin: 0 $spacer 0 0;
 				background-color: $light;
 				border: none;
-				border-radius: 16px;
+				border-radius: $carousel-indicators-item-size;
 				opacity: 1;
 
 				&:last-child {

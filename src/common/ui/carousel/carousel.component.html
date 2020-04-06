@@ -2,20 +2,22 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css" />
 
 <carousel
-    (activeSlideChange)="activeSlideChange.emit($event)"
-    [interval]="interval">
-    <slide *ngFor="let item of carouselItems">
-        <div class="row">
-            <div class="col-12 col-md-4 offset-md-1">
-                <h3 class="h3--public">3. Založíte si účet a vytvoříte odběrné místo</h3>
-                <p *ngIf="item && item.label">{{item.label}}</p>
-            </div>
-        </div>
-        <div class="section-picture-holder">
-            <img
-                class="carousel-item-img section-picture"
-                [src]="item.src"
-                [alt]="item.alt">
-        </div>
-    </slide>
+	(activeSlideChange)="activeSlideChange.emit($event)"
+	[interval]="interval">
+	<slide *ngFor="let item of carouselItems">
+		<div class="row align-items-center no-gutters">
+			<div class="col-12 col-md-6 offset-md-1 order-md-2">
+				<img
+					class="carousel-item-img"
+					[src]="item.src"
+					[alt]="item.alt">
+			</div>
+			<div class="col-12 col-md-4 offset-md-1 order-md-1">
+				<div class="carousel-item-content">
+					<h3 class="h3--public">3. Založíte si účet a vytvoříte odběrné místo</h3>
+					<p *ngIf="item && item.label">{{item.label}}</p>
+				</div>
+			</div>
+		</div>
+	</slide>
 </carousel>
