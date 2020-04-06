@@ -76,7 +76,7 @@ export class NewSupplyPointPageConfig {
         {
             key: 2,
             value: 2,
-            label: 'Smlouva určitá s automatickou prolongací',
+            label: 'Smlouva na dobu určitou s automatickou prolongací',
         },
         {
             key: 3,

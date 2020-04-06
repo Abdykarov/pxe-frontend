@@ -5,7 +5,7 @@
 	(activeSlideChange)="activeSlideChange.emit($event)"
 	[interval]="interval">
 	<slide *ngFor="let item of carouselItems">
-		<div class="row align-items-center no-gutters">
+		<div class="row no-gutters">
 			<div class="col-12 col-md-6 offset-md-1 order-md-2">
 				<img
 					class="carousel-item-img"
@@ -15,7 +15,11 @@
 			<div class="col-12 col-md-4 offset-md-1 order-md-1">
 				<div class="carousel-item-content">
 					<h3 class="h3--public">3. Založíte si účet a vytvoříte odběrné místo</h3>
-					<p *ngIf="item && item.label">{{item.label}}</p>
+					<p 
+						*ngIf="item && item.label"
+						class="mb-0">
+						{{item.label}}
+					</p>
 				</div>
 			</div>
 		</div>

@@ -182,48 +182,98 @@
                 </div>
             </div>
         </pxe-field-wrapper>
-        <lnd-form-field
+        <pxe-field-wrapper
             *ngIf="form.controls.annualConsumptionNT.status !== 'DISABLED'"
-            [appendButtonIcon]="helpDocuments && helpDocuments['annualConsumptionNT'] ? 'icon--info' : null"
-            (appendButtonAction)="showHelp('annualConsumptionNT', 'Roční spotřeba - nízký tarif')"
-            [error]="formError.annualConsumptionNT || form.controls.annualConsumptionNT.errors"
-            [formControl]="form.controls.annualConsumptionNT"
-            [id]="'annualConsumptionNT'"
-            label="Roční spotřeba - nízký tarif"
-            appendText="MWh"
-            [maxlength]="MAX_LENGTH_NUMBER_INPUT_WITH_HINT"
-            [success]="form.controls.annualConsumptionNT.valid && (form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT)"
-            [touched]="form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT"
-            [validationMessages]="formFields.validationMessages.annualConsumptionNT"
-        ></lnd-form-field>
-        <lnd-form-field
+            labelFor="annualConsumptionNTUnit"
+            [wrapperFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionNTUnit' || (fieldWrapperFocused$ | async) === 'annualConsumptionNT'"
+            [error]="((form.controls.annualConsumptionNTUnit.touched || formError.annualConsumptionNTUnit) && (formError.annualConsumptionNTUnit || form.controls.annualConsumptionNTUnit.errors)) ||
+                     ((form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT) && (formError.annualConsumptionNT || form.controls.annualConsumptionNT.errors))"
+            [validationMessages]="((form.controls.annualConsumptionNTUnit.touched || formError.annualConsumptionNTUnit) && (formError.annualConsumptionNTUnit || form.controls.annualConsumptionNTUnit.errors) && formFields.validationMessages.annualConsumptionNTUnit) ||
+                                  ((form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT) && (formError.annualConsumptionNT || form.controls.annualConsumptionNT.errors) && formFields.validationMessages.annualConsumptionNT)">
+            <div class="row no-gutters">
+                <div class="col-12 mb-2">
+                    <small>Roční spotřeba - nízký tarif</small>
+                </div>
+                <div class="col-12 col-md-7 pr-md-1">
+                    <lnd-form-field
+                        label="spotřeba"
+                        [formControl]="form.controls.annualConsumptionNT"
+                        (focus)="fieldWrapperFocus('annualConsumptionNT')"
+                        (blur)="fieldWrapperBlur()"
+                        [inputFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionNT' || (fieldWrapperFocused$ | async) === 'annualConsumptionNTUnit'"
+                        [id]="'annualConsumptionNT'"
+                        [success]="form.controls.annualConsumptionNT.valid && (form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT)"
+                        [touched]="form.controls.annualConsumptionNT.touched || formError.annualConsumptionNT"
+                        [error]="formError.annualConsumptionNT || form.controls.annualConsumptionNT.errors"
+                        [validationMessages]="formFields.validationMessages.annualConsumptionNT"
+                    ></lnd-form-field>
+                </div>
+                <div class="col-12 col-md-5 pl-md-1">
+                    <lnd-select
+                        [appendButtonIcon]="helpDocuments && helpDocuments['annualConsumptionNT'] ? 'icon--info' : null"
+                        (appendButtonAction)="showHelp('annualConsumptionNT', 'Roční spotřeba - nízký tarif')"
+                        [id]="'annualConsumptionNTUnit'"
+                        (focus)="fieldWrapperFocus('annualConsumptionNTUnit')"
+                        (blur)="fieldWrapperBlur()"
+                        [inputFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionNTUnit' || (fieldWrapperFocused$ | async) === 'annualConsumptionNT'"
+                        [showErrorMessage]="false"
+                        [options]="codeLists && codeLists[codeList.ANNUAL_CONSUMPTION_UNITS]"
+                        [clearable]="false"
+                        label="jednotka"
+                        [parentForm]="form"
+                        [selectName]="'annualConsumptionNTUnit'"
+                        [success]="form.controls.annualConsumptionNTUnit.valid && (form.controls.annualConsumptionNTUnit.touched || formError.annualConsumptionNTUnit)"
+                        [touched]="form.controls.annualConsumptionNTUnit.touched || formError.annualConsumptionNTUnit">
+                    </lnd-select>
+                </div>
+            </div>
+        </pxe-field-wrapper>
+        <pxe-field-wrapper
             *ngIf="form.controls.annualConsumptionVT.status !== 'DISABLED'"
-            [appendButtonIcon]="helpDocuments && helpDocuments['annualConsumptionVT'] ? 'icon--info' : null"
-            (appendButtonAction)="showHelp('annualConsumptionVT', 'Roční spotřeba - vysoký tarif')"
-            [error]="formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors"
-            [formControl]="form.controls.annualConsumptionVT"
-            [id]="'annualConsumptionVT'"
-            label="Roční spotřeba - vysoký tarif"
-            appendText="MWh"
-            [maxlength]="MAX_LENGTH_NUMBER_INPUT_WITH_HINT"
-            [success]="form.controls.annualConsumptionVT.valid && (form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT)"
-            [touched]="form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT"
-            [validationMessages]="formFields.validationMessages.annualConsumptionVT"
-        ></lnd-form-field>
-        <lnd-form-field
-            *ngIf="form.controls.annualConsumption.status !== 'DISABLED'"
-            [appendButtonIcon]="helpDocuments && helpDocuments['annualConsumption'] ? 'icon--info' : null"
-            (appendButtonAction)="showHelp('annualConsumption', 'Roční spotřeba')"
-            [error]="formError.annualConsumption || form.controls.annualConsumption.errors"
-            [formControl]="form.controls.annualConsumption"
-            [id]="'annualConsumption'"
-            label="Roční spotřeba"
-            appendText="MWh"
-            [maxlength]="MAX_LENGTH_NUMBER_INPUT_WITH_HINT"
-            [success]="form.controls.annualConsumption.valid && (form.controls.annualConsumption.touched || formError.annualConsumption)"
-            [touched]="form.controls.annualConsumption.touched || formError.annualConsumption"
-            [validationMessages]="formFields.validationMessages.annualConsumption"
-        ></lnd-form-field>
+            labelFor="annualConsumptionVTUnit"
+            [wrapperFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionVTUnit' || (fieldWrapperFocused$ | async) === 'annualConsumptionVT'"
+            [error]="((form.controls.annualConsumptionVTUnit.touched || formError.annualConsumptionVTUnit) && (formError.annualConsumptionVTUnit || form.controls.annualConsumptionVTUnit.errors)) ||
+                     ((form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT) && (formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors))"
+            [validationMessages]="((form.controls.annualConsumptionVTUnit.touched || formError.annualConsumptionVTUnit) && (formError.annualConsumptionVTUnit || form.controls.annualConsumptionVTUnit.errors) && formFields.validationMessages.annualConsumptionVTUnit) ||
+                                  ((form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT) && (formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors) && formFields.validationMessages.annualConsumptionVT)">
+            <div class="row no-gutters">
+                <div class="col-12 mb-2">
+                    <small>{{commodityType === CommodityTypes.POWER ? 'Roční spotřeba - vysoký tarif' : 'Roční spotřeba'}}</small>
+                </div>
+                <div class="col-12 col-md-7 pr-md-1">
+                    <lnd-form-field
+                        label="spotřeba"
+                        [formControl]="form.controls.annualConsumptionVT"
+                        (focus)="fieldWrapperFocus('annualConsumptionVT')"
+                        (blur)="fieldWrapperBlur()"
+                        [inputFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionVT' || (fieldWrapperFocused$ | async) === 'annualConsumptionVTUnit'"
+                        [id]="'annualConsumptionVT'"
+                        [success]="form.controls.annualConsumptionVT.valid && (form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT)"
+                        [touched]="form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT"
+                        [error]="formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors"
+                        [validationMessages]="formFields.validationMessages.annualConsumptionVT"
+                    ></lnd-form-field>
+                </div>
+                <div class="col-12 col-md-5 pl-md-1">
+                    <lnd-select
+                        label="jednotka"
+                        [appendButtonIcon]="helpDocuments && helpDocuments[commodityType === CommodityTypes.POWER ? 'annualConsumptionVT' : 'annualConsumption'] ? 'icon--info' : null"
+                        (appendButtonAction)="showHelp(commodityType === CommodityTypes.POWER ? 'annualConsumptionVT' : 'annualConsumption', commodityType === CommodityTypes.POWER ? 'Roční spotřeba - vysoký tarif' : 'Roční spotřeba')"
+                        [id]="'annualConsumptionVTUnit'"
+                        (focus)="fieldWrapperFocus('annualConsumptionVTUnit')"
+                        (blur)="fieldWrapperBlur()"
+                        [inputFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionVTUnit' || (fieldWrapperFocused$ | async) === 'annualConsumptionVT'"
+                        [showErrorMessage]="false"
+                        [options]="codeLists && codeLists[codeList.ANNUAL_CONSUMPTION_UNITS]"
+                        [clearable]="false"
+                        [parentForm]="form"
+                        [selectName]="'annualConsumptionVTUnit'"
+                        [success]="form.controls.annualConsumptionVTUnit.valid && (form.controls.annualConsumptionVTUnit.touched || formError.annualConsumptionVTUnit)"
+                        [touched]="form.controls.annualConsumptionVTUnit.touched || formError.annualConsumptionVTUnit">
+                    </lnd-select>
+                </div>
+            </div>
+        </pxe-field-wrapper>
         <label class="control-label radiogroup-control-label" [for]="'ownTerminate'">
             Jak vypovíte stávající smlouvu?
         </label>

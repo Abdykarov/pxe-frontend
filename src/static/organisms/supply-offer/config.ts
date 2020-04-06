@@ -18,6 +18,15 @@ export class SupplyOfferOrganismConfig {
     public tableCols = {
         POWER: [
             {
+                label: 'Označit',
+                contentTemplateHeaderName: 'columnTemplateMarkAll',
+                views: [
+                    {
+                        contentTemplateName: 'columnTemplateMark',
+                    },
+                ],
+            },
+            {
                 label: 'Název produktu',
                 views: [
                     {
@@ -71,8 +80,8 @@ export class SupplyOfferOrganismConfig {
                 label: 'Cena za VT',
                 views: [
                     {
-                        headingClass: ['', 'text-right'],
-                        cellClass: ['', 'text-right'],
+                        headingClass: ['text-right'],
+                        cellClass: ['text-right'],
                         contentTemplateName: 'columnTemplatePriceVT',
                     },
                 ],
@@ -81,8 +90,8 @@ export class SupplyOfferOrganismConfig {
                 label: 'Cena za NT',
                 views: [
                     {
-                        headingClass: ['', 'text-right'],
-                        cellClass: ['', 'text-right'],
+                        headingClass: ['text-right'],
+                        cellClass: ['text-right'],
                         contentTemplateName: 'columnTemplatePriceNT',
                     },
                 ],
@@ -121,8 +130,8 @@ export class SupplyOfferOrganismConfig {
                 label: 'Stálá platba',
                 views: [
                     {
-                        headingClass: ['', 'text-right'],
-                        cellClass: ['', 'text-right', 'table--advanced__action-area'],
+                        headingClass: ['text-right'],
+                        cellClass: ['text-right', 'table--advanced__action-area'],
                         contentTemplateName: 'actionColumnTemplate',
                     },
                 ],
@@ -176,8 +185,8 @@ export class SupplyOfferOrganismConfig {
                 label: 'Cena',
                 views: [
                     {
-                        headingClass: ['', 'text-right'],
-                        cellClass: ['', 'text-right'],
+                        headingClass: ['text-right'],
+                        cellClass: ['text-right'],
                         contentTemplateName: 'columnTemplatePriceGas',
                     },
                 ],
@@ -216,8 +225,8 @@ export class SupplyOfferOrganismConfig {
                 label: 'Stálá platba',
                 views: [
                     {
-                        headingClass: ['', 'text-right'],
-                        cellClass: ['', 'text-right', 'table--advanced__action-area'],
+                        headingClass: ['text-right'],
+                        cellClass: ['text-right', 'table--advanced__action-area'],
                         contentTemplateName: 'actionColumnTemplate',
                     },
                 ],
@@ -228,6 +237,7 @@ export class SupplyOfferOrganismConfig {
     public tableRows = [
         {
             id: 1,
+            greenEnergy: false,
             commodityType: CommodityType.POWER,
             name: 'Variant 36',
             subject: {
@@ -254,6 +264,7 @@ export class SupplyOfferOrganismConfig {
             deliveryTo: '2019-10-06',
             deliveryLength: 1,
             permanentPaymentPrice: 650,
+            marked: true,
         },
         {
             id: 2,
@@ -283,9 +294,11 @@ export class SupplyOfferOrganismConfig {
             deliveryTo: '2019-10-06',
             deliveryLength: 2,
             permanentPaymentPrice: 250,
+            marked: true,
         },
         {
             id: 3,
+            greenEnergy: true,
             commodityType: CommodityType.GAS,
             name: 'Název 1',
             subject: {
@@ -315,6 +328,7 @@ export class SupplyOfferOrganismConfig {
         },
         {
             id: 4,
+            greenEnergy: false,
             commodityType: CommodityType.POWER,
             name: 'Variant 36',
             subject: {
@@ -373,6 +387,7 @@ export class SupplyOfferOrganismConfig {
         },
         {
             id: 6,
+            greenEnergy: false,
             commodityType: CommodityType.POWER,
             name: 'Název 1',
             subject: {

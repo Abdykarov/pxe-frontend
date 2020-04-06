@@ -1,0 +1,26 @@
+<div class="list-of-notifications">
+    <div class="row mb-2">
+        <div class="col-10 offset-1 text-center mt-4 mb-2">
+            <h2 class="mb-2">{{headerText}}</h2>
+        </div>
+    </div>
+    <div class="row pb-5">
+        <div *ngIf="notifications.length"
+            class="col-10 offset-1">
+            <ol class="list-of-notifications__list">
+                <li 
+                    class="list-of-notifications__item" 
+                    *ngFor="let notification of notifications | slice:0:maxShowNotifications">
+                    {{notification}}
+                </li>
+                <li 
+                    class="list-of-notifications__item"
+                    *ngIf="notifications.length > maxShowNotifications">a další</li>
+            </ol>
+        </div>
+        <div *ngIf="!notifications.length"
+             class="col-10 offset-1">
+            {{emptyNotifications}}
+        </div>
+    </div>
+</div>

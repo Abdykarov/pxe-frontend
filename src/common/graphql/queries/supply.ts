@@ -55,6 +55,8 @@ export const supplyPointFragment = gql`
             },
             annualConsumptionNT,
             annualConsumptionVT,
+            annualConsumptionNTUnit,
+            annualConsumptionVTUnit,
             expirationDate,
             subject{
                 type,
@@ -123,6 +125,7 @@ export const supplyPointFragment = gql`
                     totalPrice,
                     unit,
                     prepayment,
+                    greenEnergy
                 },
                 personalData {
                     name,
@@ -160,6 +163,7 @@ export const supplyPointFragment = gql`
                     },
                     deposit,
                 },
+                prolong,
             },
             progressStatus,
             allowedOperations,

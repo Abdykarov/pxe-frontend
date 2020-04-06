@@ -2,6 +2,7 @@ import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { IOffer } from 'src/common/graphql/models/offer.model';
 
 export const offerConfig: IOffer = {
+    greenEnergy: false,
     status: null,
     subject: null,
     benefits: [

@@ -6,11 +6,6 @@ export enum CommodityType {
     GAS = 'GAS',
 }
 
-export enum DistributionType {
-    VT = 'VT',
-    BOTH = 'BOTH',
-}
-
 export enum SubjectType {
     SUBJECT_TYPE_INDIVIDUAL = '1',
     SUBJECT_TYPE_BUSINESSMAN = '2',
@@ -27,6 +22,7 @@ export enum AllowedOperations {
     PARTIAL_EDIT = 'PARTIAL_EDIT',
     SHOW_DELIVERY_TO = 'SHOW_DELIVERY_TO',
     TERMINATE_CONTRACT = 'TERMINATE_CONTRACT',
+    UNSET_AUTOMATIC_PROLONGATION = 'UNSET_AUTOMATIC_PROLONGATION',
 }
 
 export interface IAddress {
@@ -133,6 +129,8 @@ export interface ISupplyPoint {
     timeToContractEndPeriod: ICodelistItem;
     contract: IContract;
     progressStatus: ProgressStatus;
+    annualConsumptionNTUnit?: string;
+    annualConsumptionVTUnit?: string;
 }
 
 export enum ProgressStatus {
@@ -159,6 +157,8 @@ export interface ISupplyPointFormData {
     annualConsumptionVT?: number;
     eic?: string;
     annualConsumption?: number;
+    annualConsumptionNTUnit?: string;
+    annualConsumptionVTUnit?: string;
 }
 
 export interface ISupplyPointStatistic {

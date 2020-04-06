@@ -1,8 +1,22 @@
+import {
+    HttpClient,
+    HttpResponse,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
+import {
+    catchError,
+    map,
+} from 'rxjs/operators';
+import { Observable } from 'apollo-client/util/Observable';
+import {
+    Observable as ObservableRxjs,
+    of,
+} from 'rxjs';
 
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import {
     deleteOfferMutation,
     saveGasOfferMutation,
@@ -10,16 +24,19 @@ import {
     updateGasOfferMutation,
     updatePowerOfferMutation,
 } from 'src/common/graphql/mutation/offer';
+import { environment } from 'src/environments/environment';
 import {
     findSupplierOffersQuery,
     findSupplyPointOffersQuery,
 } from 'src/common/graphql/queries/offer';
 import {
+    IOffer,
     IOfferInput,
     IOfferInputGasAttributes,
     IOfferInputPowerAttributes,
     IOfferStatus,
 } from 'src/common/graphql/models/offer.model';
+import { IResponseDataDocument } from 'src/app/services/model/document.model';
 
 @Injectable({
     providedIn: 'root',
@@ -28,11 +45,13 @@ export class OfferService {
 
     constructor(
         private apollo: Apollo,
+        private http: HttpClient,
     ) {}
 
     public findSupplierOffers = () => this.apollo
         .watchQuery<any>({
             query: findSupplierOffersQuery,
+            fetchPolicy: 'network-only',
         })
         .valueChanges
 
@@ -54,13 +73,15 @@ export class OfferService {
                 powerAttributes,
             },
             update: (cache, {data}) => {
-                const offers: any = cache.readQuery({ query: findSupplierOffersQuery });
+                const { findSupplierOffers: offers } = cache.readQuery({ query: findSupplierOffersQuery });
+                const createdOffer: IOffer = data.savePowerOffer;
+                createdOffer.marked = false;
                 cache.writeQuery({
                     query: findSupplierOffersQuery,
                     data: {
                         findSupplierOffers: [
-                            ...offers.findSupplierOffers,
-                            data.savePowerOffer,
+                            ...offers,
+                            createdOffer,
                         ],
                     },
                 });
@@ -75,13 +96,15 @@ export class OfferService {
                 gasAttributes,
             },
             update: (cache, {data}) => {
-                const offers: any = cache.readQuery({ query: findSupplierOffersQuery });
+                const { findSupplierOffers: offers } = cache.readQuery({ query: findSupplierOffersQuery });
+                const createdOffer: IOffer = data.saveGasOffer;
+                createdOffer.marked = false;
                 cache.writeQuery({
                     query: findSupplierOffersQuery,
                     data: {
                         findSupplierOffers: [
-                            ...offers.findSupplierOffers,
-                            data.saveGasOffer,
+                            ...offers,
+                            createdOffer,
                         ],
                     },
                 });
@@ -115,13 +138,13 @@ export class OfferService {
                 offerId,
             },
             update: (cache, {data}) => {
-                const offers: any = cache.readQuery({ query: findSupplierOffersQuery });
+                const { findSupplierOffers: offers } = cache.readQuery({ query: findSupplierOffersQuery });
                 const updatedData = R.map(offer => {
                     if (offer.id === data.deleteOffer.toString()) {
                         offer.status = IOfferStatus.DELETED;
                     }
                     return offer;
-                })(offers.findSupplierOffers);
+                })(offers);
                 cache.writeQuery({
                     query: findSupplierOffersQuery,
                     data: {
@@ -130,4 +153,86 @@ export class OfferService {
                 });
             },
         })
+
+    public batchImport = (offers: IOfferInput[]) => this.http.post<any>(
+        `${environment.url_api}/v1.0/offer/batch-import`,
+        offers,
+    )
+
+    public exportCSV = (): ObservableRxjs<IResponseDataDocument> => {
+        return this.http.get(`${environment.url_api}/v1.0/offer/export-csv`, {
+            responseType: 'blob',
+            observe: 'response',
+        }).pipe(
+            map((response: HttpResponse<any>): IResponseDataDocument => {
+                const headers = response.headers.get('content-disposition');
+                const filename = headers.split(';')[1].split('filename')[1]
+                    .split('=')[1].trim().replace(new RegExp('"', 'g'), '');
+
+                return {
+                    file: response.body,
+                    filename,
+                };
+            }),
+        );
+    }
+
+    public markAll = (mark: boolean, commodityType: CommodityType): number => {
+        const client = this.apollo.getClient();
+        const { findSupplierOffers: offers } = client.readQuery({ query: findSupplierOffersQuery });
+        let numberOfMarked = 0;
+        const markedOffers = R.map((offer: IOffer) => {
+            if (offer.commodityType === commodityType && offer.status === IOfferStatus.ACTIVE) {
+                numberOfMarked++;
+                offer.marked = mark;
+            }
+            return offer;
+        }, offers);
+        client.writeQuery({
+            query: findSupplierOffersQuery,
+            data: {
+                findSupplierOffers: markedOffers,
+            },
+        });
+        return mark ? numberOfMarked : 0;
+    }
+
+    public markOne = (id: number, commodityType: CommodityType): number => {
+        let numberOfMarked = 0;
+        const client = this.apollo.getClient();
+        const { findSupplierOffers: offers } = client.readQuery({ query: findSupplierOffersQuery });
+        const updatedOffers = R.map((offer: IOffer) => {
+            if (offer.id === id) {
+                offer.marked = !offer.marked;
+            }
+            if (offer.marked && offer.commodityType === commodityType && offer.status === IOfferStatus.ACTIVE) {
+                numberOfMarked++;
+            }
+            return offer;
+        }, offers);
+        client.writeQuery({
+            query: findSupplierOffersQuery,
+            data: {
+                findSupplierOffers: updatedOffers,
+            },
+        });
+        return numberOfMarked;
+    }
+
+    public deleteMarkedOffer = (commodityType: CommodityType): Observable<any>[] => {
+        const client = this.apollo.getClient();
+        const { findSupplierOffers: offers } = client.readQuery({ query: findSupplierOffersQuery });
+        const offerObservableForDelete = [];
+        R.map((offer: IOffer) => {
+            if (offer.marked && offer.status === IOfferStatus.ACTIVE && commodityType === offer.commodityType) {
+                offerObservableForDelete.push(
+                    this.deleteOffer(offer.id)
+                        .pipe(
+                            catchError((err) => of({isError: true, error: err})),
+                        ),
+                );
+            }
+        }, offers);
+        return offerObservableForDelete;
+    }
 }

@@ -1,6 +1,6 @@
 <pxe-layout-container pageTitle="Nastavení uživatelského účtu">
     <div class="row">
-        <div class="col-12 col-md-12">
+        <div class="col-12">
             <lnd-alert
                 *ngIf="globalError.length"
                 type="danger">
@@ -14,13 +14,16 @@
         <div class="col-12 col-md-8 col-xl-7 col-lg-5">
             <div class="page-box">
                 <pxe-user-form
+                    [oldPhone]="oldPhone"
+                    [smsSent]="smsSent"
                     [formFields]="formFields"
                     [formLoading]="formLoading"
                     [formSent]="formSent"
                     [formValues]="formValues"
                     [globalError]="globalError"
                     [fieldError]="fieldError"
-                    (submitAction)="submitForm($event)">
+                    (submitAction)="submitForm($event)"
+                    (customAction)="sendChangePhoneNumberSmsMutation($event)">
                 </pxe-user-form>
             </div>
         </div>

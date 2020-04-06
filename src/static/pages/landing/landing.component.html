@@ -28,7 +28,7 @@
             <img
                 *ngIf="!isMoreThanXlResolution"
                 class="video-picture"
-                src="/assets/images/landing-page/video-image.jpg"
+                src="/assets/images/landing-page/picture-fallback.png"
                 title="Plaťte za energie chytře díky burze"
                 alt="Plaťte za energie chytře díky burze">
             <video
@@ -40,12 +40,12 @@
                 preload="auto">
                 <source src="/assets/images/landing-page/lp-video.webm" type="video/webm">
                 <source src="/assets/images/landing-page/lp-video.mp4" type="video/mp4">
-                <img src="/assets/images/landing-page/video-image.png" alt="Získejte svobodu nad energií">
+                <img src="/assets/images/landing-page/picture-fallback.png" alt="Získejte svobodu nad energií">
                 Your browser does not support the video tag
             </video>
         </div> 
     </div>
-    <div class="section what-you-can-get bg--white">
+    <div class="section what-you-can-get">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -68,7 +68,7 @@
             </div>
         </div>
     </div>
-    <div class="section shortcut bg--white section--picture-first">
+    <div class="section shortcut section--picture-first">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-md-4 offset-md-7">
@@ -106,7 +106,7 @@
                 alt="Cesta k nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC4U">
         </div>
     </div>
-    <div class="section section--picture-second section--carousel">
+    <div class="section section--picture-second section--carousel section--arrow">
         <div class="row no-gutters">
             <div class="col-12">
                 <lnd-carousel

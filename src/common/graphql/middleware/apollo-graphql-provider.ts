@@ -1,5 +1,7 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+import * as R from 'ramda';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import {
     ApolloLink,
@@ -16,22 +18,27 @@ import { onError } from 'apollo-link-error';
 import { AuthService } from 'src/app/services/auth.service';
 import { clientSchema } from 'src/common/graphql/middleware/client-schema';
 import {
+    CONSTS,
+    OPERATIONS_WITHOUT_SCROLL_ON_ERRORS,
+} from 'src/app/app.constants';
+import {
     defaults,
     resolvers,
 } from '../resolvers/';
 import { environment } from 'src/environments/environment';
-import { OPERATIONS_WITHOUT_SCROLL_ON_ERRORS } from 'src/app/app.constants';
 import { scrollToElementFnc } from 'src/common/utils';
 
 const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
 
     const setTokenHeader = (operation: Operation): void => {
-        const token = authService.getToken();
+        const headers: HttpHeaders = authService.getAuthorizationHeaders(null);
+        const xAPIKey = headers.get('X-API-Key');
+        const Authorization = headers.get('Authorization');
         operation.setContext({
             headers: {
-                Authorization: token ? `Bearer ${token}` : '',
-                'X-API-Key': `${environment.x_api_key}`,
+                ...(!!Authorization) && {Authorization},
+                'X-API-Key': xAPIKey,
             },
         });
     };
@@ -39,6 +46,7 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     const http = new BatchHttpLink({
         uri: `${environment.url_graphql}/`,
         fetch: fetch,
+        batchMax: CONSTS.MAX_REQUEST_IN_BATCH_LINK,
     });
 
     const auth = new ApolloLink((operation: Operation, forward: NextLink) => {
@@ -48,7 +56,19 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
             let subscription, innerSubscription;
             try {
                 subscription = forward(operation).subscribe({
-                    next: observer.next.bind(observer),
+                    next: result => {
+                        if (result.errors) {
+                            const isAccessDeniedException = R.pipe(
+                                R.filter((err) => err && err.type === 'AccessDeniedException'),
+                                R.head,
+                            )(result.errors);
+
+                            if (isAccessDeniedException) {
+                                authService.logoutForced();
+                            }
+                        }
+                        observer.next(result);
+                    },
                     complete: observer.complete.bind(observer),
                     error: networkError => {
                         if (networkError.status === 401 || networkError.statusCode === 401) {

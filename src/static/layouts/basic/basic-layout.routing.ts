@@ -3,7 +3,6 @@ import {
     RouterModule,
     Routes,
 } from '@angular/router';
-
 import {
     AlertsPageModule,
     alertsPageRoutes,
@@ -16,6 +15,10 @@ import {
     BannersPageModule,
     bannersPageRoutes,
 } from 'src/static/atoms/banners/page.module';
+import {
+    ListOfNotificationsPageModule,
+    listOfNotificationsPageRoutes,
+} from 'src/static/organisms/list-of-notifications/page.module';
 import {
     BasicLayoutComponent,
 } from './basic-layout.component';
@@ -71,6 +74,10 @@ import {
     IconsPageModule,
     iconsPageRoutes,
 } from 'src/static/atoms/icons/page.module';
+import {
+    ImportUploadPageModule,
+    importUploadPageRoutes,
+} from 'src/static/pages/import-upload/page.module';
 import {
     IndicatorsPageModule,
     indicatorsPageRoutes,
@@ -205,8 +212,10 @@ const routes: Routes = [
             ...formsPageRoutes,
             ...changePasswordBannerPageRoutes,
             ...iconsPageRoutes,
+            ...importUploadPageRoutes,
             ...indicatorsPageRoutes,
             ...infoBannerPageRoutes,
+            ...listOfNotificationsPageRoutes,
             ...listSupplyPointsPageRoutes,
             ...modalsPageRoutes,
             ...newsPageRoutes,
@@ -259,8 +268,10 @@ const routes: Routes = [
         FormsPageModule,
         ChangePasswordBannerPageModule,
         IconsPageModule,
+        ImportUploadPageModule,
         IndicatorsPageModule,
         InfoBannerPageModule,
+        ListOfNotificationsPageModule,
         ListSupplyPointsPageModule,
         ModalsPageModule,
         NewsPageModule,

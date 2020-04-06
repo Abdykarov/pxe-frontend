@@ -17,6 +17,7 @@ import { IsMenuItemActivePipe } from './is-menu-item-active/is-menu-item-active.
 import { IsRouteActivePipe } from './is-route-active/is-route-acrive.pipe';
 import { KeysPipe } from './keys/keys.pipe';
 import { NewSupplyWillBeginPipe } from './new-supply-will-begin/new-supply-will-begin.pipe';
+import { OffersByCommodityTypePipe } from 'src/common/pipes/offers-by-commodity-type/offers-by-commodity-type.pipe';
 import { PathValuePipe } from './path-value/path-value.pipe';
 import { PluralPipe } from './plurar/plural.pipe';
 import { ProgressStatusPipe } from './step-of-supply-point/step-of-supply-point.pipe';
@@ -42,6 +43,7 @@ import { ValuesPipe } from './values/values.pipe';
         IsRouteActivePipe,
         KeysPipe,
         NewSupplyWillBeginPipe,
+        OffersByCommodityTypePipe,
         PathValuePipe,
         PluralPipe,
         ProgressStatusPipe,
@@ -66,6 +68,7 @@ import { ValuesPipe } from './values/values.pipe';
         IsRouteActivePipe,
         KeysPipe,
         NewSupplyWillBeginPipe,
+        OffersByCommodityTypePipe,
         PathValuePipe,
         PluralPipe,
         ProgressStatusPipe,
@@ -90,6 +93,7 @@ import { ValuesPipe } from './values/values.pipe';
         IsRouteActivePipe,
         KeysPipe,
         NewSupplyWillBeginPipe,
+        OffersByCommodityTypePipe,
         PathValuePipe,
         PluralPipe,
         ProgressStatusPipe,

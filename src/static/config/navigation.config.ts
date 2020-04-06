@@ -107,8 +107,12 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/info-banner',
                 },
                 {
-                    'label': 'Modals',
-                    'url': '/basic/modals',
+                    'label': 'News',
+                    'url': '/basic/news',
+                },
+                {
+                    'label': 'List of notifications',
+                    'url': '/basic/list-of-notifications',
                 },
                 {
                     'label': 'News',
@@ -186,6 +190,14 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/delete-account-failed',
                 },
                 {
+                    'label': 'Import approval',
+                    'url': '/full/import-approval',
+                },
+                {
+                    'label': 'Import upload',
+                    'url': '/basic/import-upload',
+                },
+                {
                     'label': 'Landing page',
                     'url': '/full/landing-page',
                 },
@@ -236,6 +248,10 @@ export const staticNavigationConfig: INavigationConfig = [
                 {
                     'label': 'supply offer',
                     'url': '/full/supply-offer',
+                },
+                {
+                    'label': 'supply offer empty',
+                    'url': '/full/supply-offer-empty',
                 },
                 {
                     'label': 'Supply points',

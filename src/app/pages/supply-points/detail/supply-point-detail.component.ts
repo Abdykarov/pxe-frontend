@@ -26,17 +26,17 @@ import {
     ISupplyPointPowerAttributes,
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
-import { defaultErrorMessage } from 'src/common/constants/errors.constant';
-import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { ContractActions } from '../models/supply-point-detail.model';
 import { ContractDeleteReason } from 'src/common/graphql/models/contract';
 import { ContractService } from 'src/common/graphql/services/contract.service';
+import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
-import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
+import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import {
     IDocumentType,
     IResponseDataDocument,
 } from 'src/app/services/model/document.model';
+import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import {
     parseGraphQLErrors,
     parseRestAPIErrors,
@@ -123,13 +123,16 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
             const powerAttributes: ISupplyPointPowerAttributes =
                 R.pick([
                     'annualConsumptionNT',
+                    'annualConsumptionNTUnit',
                     'annualConsumptionVT',
+                    'annualConsumptionVTUnit',
                 ], supplyPointFormData);
             updateSupplyPoint = this.supplyService.updatePowerSupplyPointWithContract(supplyPointFormData.id, supplyPoint, powerAttributes);
         } else {
             const gasAttributes: ISupplyPointGasAttributes =
                 R.pick([
                     'annualConsumption',
+                    'annualConsumptionUnit',
                 ], supplyPointFormData);
             updateSupplyPoint = this.supplyService.updateGasSupplyPointWithContract(supplyPointFormData.id, supplyPoint, gasAttributes);
         }
@@ -147,6 +150,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
                 },
                 (error) => {
                     this.formLoading = false;
+                    this.formSent = false;
                     const { fieldError, globalError } = parseGraphQLErrors(error);
                     this.fieldError = fieldError;
                     this.globalError = globalError;
@@ -182,15 +186,14 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     public submitVerification = (smsCode: string) => {
         this.formLoading = true;
         this.globalError = [];
-        this.contractService.deleteSignedContract(
-            this.supplyPoint.contract.contractId,
-            smsCode,
-            this.contractAction === ContractActions.LEAVE_CONTRACT ? ContractDeleteReason.LEAVING : ContractDeleteReason.TERMINATION,
-        )
+        if (this.contractAction !== ContractActions.UNSET_PROLONGATION ) {
+            this.contractService.deleteSignedContract(
+                this.supplyPoint.contract.contractId,
+                smsCode,
+                this.contractAction === ContractActions.LEAVE_CONTRACT ? ContractDeleteReason.LEAVING : ContractDeleteReason.TERMINATION,
+            )
             .pipe(
-                takeUntil(
-                    this.destroy$,
-                ),
+                takeUntil(this.destroy$),
                 map(({data}) => data.deleteSignedContract),
             )
             .subscribe(
@@ -222,7 +225,45 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
                     }
                     this.cd.markForCheck();
                 },
-        );
+            );
+        } else {
+            this.contractService.unsetContractProlongation(
+                this.supplyPoint.id,
+                this.supplyPoint.contract.contractId,
+                smsCode,
+            )
+            .pipe(
+                takeUntil(
+                    this.destroy$,
+                ),
+                map(({data}) => data.unsetContractProlongation),
+            )
+            .subscribe(
+                (unsetContractProlongation: boolean) => {
+                    if (unsetContractProlongation) {
+                        this.globalError = [];
+                        this.formSent = true;
+                        this.contractAction = ContractActions.NONE;
+                        this.formLoading = false;
+                        scrollToElementFnc('top');
+                    } else {
+                        this.globalError = [defaultErrorMessage];
+                        this.formLoading = false;
+                        this.cd.markForCheck();
+                    }
+                },
+                (error) => {
+                    this.formLoading = false;
+                    const { globalError , fieldError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.fieldError = fieldError;
+                    if (Object.keys(this.fieldError).length) {
+                        scrollToElementFnc(this.contractActionsWrapper.nativeElement);
+                    }
+                    this.cd.markForCheck();
+                },
+            );
+        }
         this.cd.markForCheck();
     }
 
@@ -235,6 +276,20 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
 
     public terminateContract = () => {
         this.contractAction = ContractActions.TERMINATE_CONTRACT;
+        this.smsSent = null;
+        this.fieldError = {};
+        this.globalError = [];
+    }
+
+    // public transferSupplyPoint = () => {
+    //     this.contractAction = ContractActions.TRANSFER_SUPPLY_POINT;
+    //     this.smsSent = null;
+    //     this.fieldError = {};
+    //     this.globalError = [];
+    // }
+
+    public interruptAutomaticProlongation = () => {
+        this.contractAction = ContractActions.UNSET_PROLONGATION;
         this.smsSent = null;
         this.fieldError = {};
         this.globalError = [];
