@@ -209,7 +209,7 @@
     </div>
     <div class="row">
         <ng-container *ngFor="let benefit of (form | valueOfForm: 'benefits').controls; let i = index"
-        formArrayName="benefits">
+            formArrayName="benefits">
             <ng-container [formGroupName]="i">
                     <div class="col-4 col-xl-3">
                         <lnd-form-field
@@ -228,7 +228,7 @@
     </div>
     <div class="row">
         <ng-container *ngFor="let benefit of (form | valueOfForm: 'benefits').controls; let i = index"
-                      formArrayName="benefits">
+            formArrayName="benefits">
             <ng-container [formGroupName]="i">
                 <div class="col-4 col-xl-3">
                     <lnd-form-field

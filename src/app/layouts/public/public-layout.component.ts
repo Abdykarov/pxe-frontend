@@ -50,6 +50,10 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
             scrollToService,
         );
 
+        if (this.authService.isLogged()) {
+            this.authService.logoutForced();
+        }
+
         this.overlayService.getOverlay()
             .pipe(
                 takeUntil(this.destroy$),

@@ -7,10 +7,11 @@ import {
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
-import * as R from 'ramda';
+import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { CONSTS } from 'src/app/app.constants';
+import { IUserProfileModelForm } from 'src/common/containers/form/forms/user-profile/user-profile-form.model';
 import { IPersonalDataInputForm } from 'src/common/graphql/models/personal-data.model';
 
 @Component({
@@ -23,6 +24,13 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
     @Input()
     public formValues = null;
 
+    @Input()
+    public oldPhone = '';
+
+    @Input()
+    public smsSent = false;
+    public phoneNumber = '';
+
     constructor(
         protected fb: FormBuilder,
     ) {
@@ -31,6 +39,15 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
 
     ngOnInit() {
         super.ngOnInit();
+
+        this.form.get('phone')
+            .valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(() => {
+                this.phoneNumber = this.getFieldValue('phonePrefix') + '' + this.getFieldValue('phone');
+                this.smsSent = false;
+            });
+
         this.prefillForm();
     }
 
@@ -51,10 +68,23 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
         this.form.get('phone').setValue(phone);
     }
 
-    public submitValidForm = () => {
+    public processSaveButton = (value: IUserProfileModelForm, submitValidFormAction = true) => {
+        this.resetCustomFieldError();
+        this.triggerValidation();
+        if (this.form.valid) {
+            if (this.oldPhone !== this.phoneNumber && (!submitValidFormAction || !this.smsSent) && this.phoneNumber) {
+                this.customAction.emit(this.form.value.phone);
+            } else {
+                this.submitValidForm(value);
+            }
+        }
+    }
+
+    public submitValidForm = (smsCode) => {
         const form: IPersonalDataInputForm = {
             ...this.form.value,
-            phoneNumber: R.concat(CONSTS.TELEPHONE_PREFIX_CZ, this.form.value.phone),
+            smsCode,
+            phoneNumber: this.phoneNumber,
         };
         this.submitAction.emit(form);
     }

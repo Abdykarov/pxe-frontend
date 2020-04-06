@@ -70,6 +70,9 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     public customFormGroupClass?: string;
 
     @Input()
+    public  customTypeClass?: string;
+
+    @Input()
     public defaultRadioGroupValue?: IOption;
 
     @Input()

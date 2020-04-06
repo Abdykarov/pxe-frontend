@@ -31,6 +31,7 @@ export interface FileUploaderOptions {
   authToken?: string;
   maxFileSize?: number;
   queueLimit?: number;
+  filesCustomType?: string;
   removeAfterUpload?: boolean;
   url?: string;
   disableMultipart?: boolean;
@@ -59,6 +60,7 @@ export class FileUploader {
     filters: [],
     removeAfterUpload: false,
     disableMultipart: false,
+    filesCustomType: null,
     formatDataFunction: (item: FileItem) => item._file,
     formatDataFunctionIsAsync: false,
   };
@@ -98,7 +100,13 @@ export class FileUploader {
   public addToQueue(files: File[], options?: FileUploaderOptions, filters?: FilterFunction[] | string): void {
     const list: File[] = [];
     for (const file of files) {
-      list.push(file);
+      if (options.filesCustomType) {
+        const blob = file.slice(0, file.size, options.filesCustomType);
+        const fileWithNewContentType = new File([blob], file.name, {type: options.filesCustomType});
+        list.push(fileWithNewContentType);
+      } else {
+        list.push(file);
+      }
     }
     const arrayOfFilters = this._getFilters(filters);
     const count = this.queue.length;
