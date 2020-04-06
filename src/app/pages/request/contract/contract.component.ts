@@ -15,7 +15,7 @@ import {
     of,
 } from 'rxjs';
 import {
-    map,
+    map, retry,
     switchMap,
     takeUntil,
 } from 'rxjs/operators';
@@ -31,6 +31,7 @@ import {
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
+import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import {
     getConfigStepper,
     parseGraphQLErrors,
@@ -43,7 +44,7 @@ import {
 } from 'src/app/services/model/document.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
-import { ROUTES } from 'src/app/app.constants';
+import { CONSTS, ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -54,6 +55,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 export class ContractComponent extends AbstractComponent implements OnInit {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.READY_FOR_SIGN;
     public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.PERSONAL_DATA;
+    public readonly BannerTypeImages = BannerTypeImages;
 
     @ViewChild('pxeVerificationFormWrapper')
     public pxeVerificationFormWrapper: ElementRef;
@@ -74,6 +76,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public formLoading = false;
     public globalError: string[] = [];
     public loadingSupplyPoint = true;
+    public showErrorMessageWithLoadingContracts = false;
     public showOffer = true;
     public smsSent: number = null;
     public subjectType = SubjectType;
@@ -105,14 +108,16 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                     this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
                     return combineLatest(
                         supplyPoint.subject.code === this.subjectType.SUBJECT_TYPE_INDIVIDUAL ?
-                            this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.INFORMATION) :
+                            this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.INFORMATION)
+                                .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)) :
                             of(
                                 {
                                     file: null,
                                     filename: null,
                                 },
                             ),
-                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.CONTRACT),
+                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.CONTRACT)
+                            .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)),
                     );
                 }),
                 takeUntil(this.destroy$),
@@ -130,6 +135,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                 },
                 (error) => {
                     const { globalError } = parseGraphQLErrors(error);
+                    this.showErrorMessageWithLoadingContracts = true;
                     this.globalError = globalError;
                     this.cd.markForCheck();
                 },
@@ -268,5 +274,9 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                     this.cd.markForCheck();
                 },
             );
+    }
+
+    public redirectToRequest = () => {
+        this.router.navigate([ROUTES.ROUTER_REQUESTS]);
     }
 }

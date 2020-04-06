@@ -8,6 +8,7 @@ export enum BannerTypeImages {
     LIGHT = '/assets/images/illustrations/light.svg',
     LOADING = '/assets/images/illustrations/loading.svg',
     MAIL_LETTER = '/assets/images/illustrations/mail-letter.svg',
+    NONE = '',
     REJECTED = '/assets/images/illustrations/rejected.svg',
     SIGN = '/assets/images/illustrations/sign.svg',
     SUPPLIER_NULL = '/assets/images/illustrations/supplier-null.svg',

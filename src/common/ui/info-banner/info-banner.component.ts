@@ -25,6 +25,8 @@ export class InfoBannerComponent {
     @Input()
     public bannerType: BannerTypeImages = BannerTypeImages.HOUSE_ALERT;
 
+    public BannerTypeImages = BannerTypeImages;
+
     @Input()
     public buttonCustomClass  = 'info-banner__btn';
 

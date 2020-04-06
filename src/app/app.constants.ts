@@ -8,6 +8,7 @@ import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
     ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],
+    CONTRACT_SIGN_NUMBER_OF_RETRY: 3,
     CURRENCY: {
         DEFAULT: 'CZK',
     },
