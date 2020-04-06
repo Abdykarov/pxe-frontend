@@ -94,7 +94,7 @@ export const graphQLMessages = {
     noActiveAccountAvailable: 'Účet nelze smazat, protože neexistuje.',
     obsoleteSupplyPointVersion: 'Kontrakt lze uzavřít pouze na nejnovější verzi OM.',
     unknownSupplyPoint: 'Hledané odběrné místo neexistuje nebo pro přístup k němu nemáte oprávnění.',
-    duplicateOffer: 'Nabídka nelze založit, protože již existuje.',
+    duplicateOffer: 'Nabídka nebyla založena, protože totožna nabídka již existuje.',
 };
 
 export const cantDeleteAllMarkedOffers = 'Nepodařilo se nám smazat veškeré označené nabídky, prosím zkuste to znovu.';
