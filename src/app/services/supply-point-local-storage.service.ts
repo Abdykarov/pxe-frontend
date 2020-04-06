@@ -22,7 +22,7 @@ export class SupplyPointLocalStorageService {
     public removeSupplyPointSubjectStream = () => this.supplyPointSubject.asObservable();
     public loadSupplyPoint = () => this.supplyPointSubject.next(this.getSupplyPoint());
     public removeSupplyPointAct = () => this.removeSupplyPointSubject.next();
-
+// je z dobreho utu?
     public getSupplyPoint = () => {
         try {
             const item = localStorage.getItem(CONSTS.LOCAL_STORAGE.SUPPLY_POINT_PARTIAL_FORM);
