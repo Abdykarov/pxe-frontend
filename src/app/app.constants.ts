@@ -1,3 +1,5 @@
+import * as CryptoJS from 'crypto-js';
+
 import {
     CommodityType,
     SubjectType,
@@ -5,8 +7,6 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
-
-import * as CryptoJS from 'crypto-js';
 
 export const CONSTS = {
     ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],

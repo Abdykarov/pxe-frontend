@@ -4,7 +4,8 @@ import {
 } from '@angular/router';
 import {
     ChangeDetectorRef,
-    Component, ComponentRef, ElementRef,
+    Component,
+    ElementRef,
     Inject,
     OnInit,
     PLATFORM_ID,
@@ -19,10 +20,8 @@ import {
     takeUntil,
 } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { SupplyPointLocalStorageService } from 'src/app/services/supply-point-local-storage.service';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { SupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/supply-point-form.component';
 import {
     CommodityType,
     ISupplyPoint,
@@ -42,6 +41,7 @@ import {
     ROUTES,
     SUPPLY_POINT_EDIT_TYPE,
 } from 'src/app/app.constants';
+import { SupplyPointLocalStorageService } from 'src/app/services/supply-point-local-storage.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
