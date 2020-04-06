@@ -23,4 +23,5 @@ export interface IUserDetailInput {
     passwordReset?: boolean;
     phoneNumber?: string;
     userName: string;
+    smsCode?: string;
 }

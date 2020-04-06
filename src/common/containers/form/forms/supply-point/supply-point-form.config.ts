@@ -7,6 +7,7 @@ import {
 import {
     CONSTS,
     CONTRACT_END_TYPE,
+    UNIT_OF_PRICES,
 } from 'src/app/app.constants';
 import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
@@ -120,27 +121,39 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
+                CustomValidators.isNumber(),
                 CustomValidators.minValue(0),
-                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
+            ],
+        ],
+        annualConsumptionNTUnit: [
+            UNIT_OF_PRICES.KWH,
+            [
+                Validators.required,
             ],
         ],
         annualConsumptionVT: [
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
+                CustomValidators.isNumber(),
                 CustomValidators.minValue(0),
-                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
+            ],
+        ],
+        annualConsumptionVTUnit: [
+            UNIT_OF_PRICES.KWH,
+            [
+                Validators.required,
             ],
         ],
         annualConsumption: [
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
+                CustomValidators.isNumber(),
                 CustomValidators.minValue(0),
-                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT),
             ],
         ],
         expirationDate: [
@@ -227,6 +240,7 @@ export const formFields: IForm = {
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
+            number: errorFieldMessages.number.positiveInteger,
             'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
             totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
@@ -235,6 +249,7 @@ export const formFields: IForm = {
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
+            number: errorFieldMessages.number.positiveInteger,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
             'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
             totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
@@ -245,6 +260,7 @@ export const formFields: IForm = {
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
+            number: errorFieldMessages.number.positiveInteger,
             'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
             totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
@@ -284,12 +300,15 @@ export const supplyPointDetailAllowedFields: ICommodityTypeFields = {
         'name',
         'annualConsumptionNT',
         'annualConsumptionVT',
+        'annualConsumptionNTUnit',
+        'annualConsumptionVTUnit',
     ],
     [CommodityType.GAS]: [
         'id',
         'commodityType',
         'name',
-        'annualConsumption',
+        'annualConsumptionVT',
+        'annualConsumptionVTUnit',
     ],
 };
 
@@ -307,6 +326,8 @@ export const supplyPointAllowedFields: ICommodityTypeFields = {
         'phasesId',
         'annualConsumptionNT',
         'annualConsumptionVT',
+        'annualConsumptionNTUnit',
+        'annualConsumptionVTUnit',
         'expirationDate',
         'contractEndTypeId',
         'timeToContractEnd',
@@ -321,7 +342,8 @@ export const supplyPointAllowedFields: ICommodityTypeFields = {
         'name',
         'eic',
         'address',
-        'annualConsumption',
+        'annualConsumptionVT',
+        'annualConsumptionVTUnit',
         'expirationDate',
         'contractEndTypeId',
         'timeToContractEnd',

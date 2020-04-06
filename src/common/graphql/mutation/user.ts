@@ -16,7 +16,13 @@ export const changePasswordMutation = gql`
 `;
 
 export const updateUserProfileMutation = gql`
-    mutation updateUserProfile($userDetail: UserDetailInput!) {
-        updateUserProfile(userDetail: $userDetail)
+    mutation updateUserProfile($userDetail: UserDetailInput!, $smsCode: String!) {
+        updateUserProfile(userDetail: $userDetail, smsCode: $smsCode)
+    }
+`;
+
+export const sendChangePhoneNumberSmsMutation = gql`
+    mutation sendChangePhoneNumberSms($phoneNumber: String!) {
+        sendChangePhoneNumberSms(phoneNumber: $phoneNumber)
     }
 `;

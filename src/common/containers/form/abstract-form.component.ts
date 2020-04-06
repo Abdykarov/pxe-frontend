@@ -93,7 +93,7 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         }
     }
 
-    public submitValidForm = () => {
+    public submitValidForm = (customParam = null) => {
         this.submitAction.emit(this.form.value);
     }
 
