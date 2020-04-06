@@ -18,20 +18,16 @@
     <lnd-info-banner
         *ngIf="showErrorMessageWithLoadingContracts"
         [bannerType]="BannerTypeImages.NONE"
-        bannerTitle="Smlouvu naleznete v rozpracovaných žádostí"
-        buttonLabel="Rozpracované žádosti"
+        bannerTitle="Smlouvu naleznete v rozpracovaných smlouvách"
+        buttonLabel="Rozpracované smlouvy"
         (buttonAction)="redirectToRequest($event)"
     >
     </lnd-info-banner>
-    <div class="row"
-         *ngIf="loadingSupplyPoint && !globalError.length">
-        <div class="col-12 col-xl-10 offset-xl-1 text-center">
-            <lnd-placeloader [loading]="true"></lnd-placeloader>
-            <h2 class="mt-2 text-center">
-                Právě připravujeme vaše smlouvy.
-            </h2>
-        </div>
-    </div>
+    <lnd-placeloader
+        *ngIf="loadingSupplyPoint && !globalError.length"
+        [loading]="true"
+        label="Právě připravujeme vaše smlouvy">
+    </lnd-placeloader>
     <div *ngIf="supplyPoint && !globalError.length"
          class="row">
         <div class="col-12 col-xl-10 offset-xl-1">
