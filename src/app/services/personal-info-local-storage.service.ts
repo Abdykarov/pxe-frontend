@@ -21,7 +21,7 @@ export class PersonalInfoLocalStorageService {
                 idOfPersonalInfoForSupplyPointId,
                 CryptoJS.AES.encrypt(
                     JSON.stringify(personalInfoForm),
-                    idOfPersonalInfoForSupplyPointId,
+                    this.authService.currentUserValue.email,
                     CONSTS.CRYPTO.SALT.toString(),
                     CONSTS.CRYPTO.IV.toString(),
                 ),
@@ -36,7 +36,7 @@ export class PersonalInfoLocalStorageService {
             return JSON.parse(
                 CryptoJS.AES.decrypt(
                     item,
-                    idOfPersonalInfoForSupplyPointId,
+                    this.authService.currentUserValue.email,
                     CONSTS.CRYPTO.SALT.toString(),
                     CONSTS.CRYPTO.IV.toString(),
                 )

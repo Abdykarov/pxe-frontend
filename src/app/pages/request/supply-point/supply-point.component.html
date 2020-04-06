@@ -4,12 +4,14 @@
             <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
         </div>
     </div>
-    <div class="row">
+    <div *ngIf="supplyPointData && pxeSupplyPointForm &&
+                (pxeSupplyPointForm.codeLists && pxeSupplyPointForm.suppliers && pxeSupplyPointForm.suppliers[pxeSupplyPointForm.form.controls.commodityType.value])"
+         class="row">
         <div class="col-12 col-xl-10 offset-xl-1">
             <lnd-banner-ui
                 *ngIf="showBannerOfContinueInPreviousForm"
                 [buttonLabel]="'Ano'"
-                [secondButtonLabel]="'Smazat'"
+                [secondButtonLabel]="'Ne'"
                 [showSecondButtonLabel]="true"
                 (customBannerAction)="continueInPreviousFormBannerAction()"
                 (customSecondBannerAction)="removePreviousFormBannerAction()"
@@ -25,6 +27,7 @@
         <div class="col-12 col-xl-10 offset-xl-1">
             <lnd-placeloader [loading]="!supplyPointData"></lnd-placeloader>
             <pxe-supply-point-form
+                #pxeSupplyPointForm
                 *ngIf="supplyPointData"
                 [editMode]="editMode"
                 [formFields]="formFields"

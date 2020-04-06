@@ -82,7 +82,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public commodityTypeOptions: Array<IOption> = COMMODITY_TYPE_OPTIONS;
     public contractEndType = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT;
     public distributionRateType: string = CODE_LIST.DIST_RATE_INDIVIDUAL;
-    public existsPartialSupplyPointValue = false;
+    public existsPartialSupplyPointValue = null;
     public expirationConfig = expirationConfig;
     public formWasPrefilled = false;
     public helpDocuments = {};
@@ -208,11 +208,13 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                         this.prefillForm();
                         this.formWasPrefilled = true;
                     } else {
-                        const partialSupplyPoint = this.supplyPointLocalStorageService.getSupplyPoint();
-                        this.existsPartialSupplyPointValue =
-                            partialSupplyPoint &&
-                            !R.isEmpty(partialSupplyPoint) &&
-                            partialSupplyPoint.email === this.authService.currentUserValue.email;
+                        if (this.existsPartialSupplyPointValue  === null) {
+                            const partialSupplyPoint = this.supplyPointLocalStorageService.getSupplyPoint();
+                            this.existsPartialSupplyPointValue =
+                                partialSupplyPoint &&
+                                !R.isEmpty(partialSupplyPoint) &&
+                                partialSupplyPoint.email === this.authService.currentUserValue.email;
+                        }
 
                         this.form
                             .valueChanges
@@ -221,17 +223,32 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                                 filter(_ => !this.existsPartialSupplyPointValue),
                             )
                             .subscribe(_ => {
-                                this.supplyPointLocalStorageService.updateSupplyPoint(this.form.getRawValue());
+                                const formValues = this.form.getRawValue();
+
+                                this.supplyPointLocalStorageService.updateSupplyPoint(formValues);
                             });
 
                         this.supplyPointLocalStorageService.getSupplyPointStream()
                             .pipe(takeUntil(this.destroy$))
+                            .subscribe(formValues => {
+                                try {
+                                    const { email, supplyPointForm } = formValues;
+                                    this.existsPartialSupplyPointValue = false;
+                                    this.supplyPointLocalStorageService.removeSupplyPoint();
+                                    if (email === this.authService.currentUserValue.email) {
+                                        if (supplyPointForm.expirationDate) {
+                                            supplyPointForm.expirationDate = new Date(supplyPointForm.expirationDate);
+                                        }
+
+                                        this.form.setValue(supplyPointForm);
+                                    }
+                                } catch (e) {}
+                            });
+
+                        this.supplyPointLocalStorageService.removeSupplyPointStream()
+                            .pipe(takeUntil(this.destroy$))
                             .subscribe(formValue => {
-                                if (formValue && formValue.email === this.authService.currentUserValue.email) {
-                                    this.form.setValue(formValue.supplyPointForm);
-                                }
                                 this.existsPartialSupplyPointValue = false;
-                                this.supplyPointLocalStorageService.removeSupplyPoint();
                             });
                     }
                 }

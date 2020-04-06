@@ -4,10 +4,11 @@ import {
 } from '@angular/router';
 import {
     ChangeDetectorRef,
-    Component,
+    Component, ComponentRef, ElementRef,
     Inject,
     OnInit,
     PLATFORM_ID,
+    ViewChild,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -21,6 +22,7 @@ import { of } from 'rxjs';
 import { SupplyPointLocalStorageService } from 'src/app/services/supply-point-local-storage.service';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { SupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/supply-point-form.component';
 import {
     CommodityType,
     ISupplyPoint,
@@ -47,6 +49,13 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./supply-point.component.scss'],
 })
 export class SupplyPointComponent extends AbstractComponent implements OnInit {
+
+    @ViewChild('pxeSupplyPointForm') set content(pxeSupplyPointForm: ElementRef) {
+        if (pxeSupplyPointForm) {
+            this.pxeSupplyPointForm = pxeSupplyPointForm;
+        }
+    }
+
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.SUPPLY_POINT;
 
     public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
@@ -55,13 +64,14 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public formLoading = false;
     public formSent = false;
     public globalError: string[] = [];
+    public pxeSupplyPointForm = null;
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public showBannerOfContinueInPreviousForm = false;
     public supplyPointData = null;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
     public bannerObj: IBannerObj = {
-        text: 'Chcete pokračovat na předchozím OM?',
+        text: 'Chcete pokračovat v minulém rozpracovaném odběrném místě?',
     };
 
     constructor(
@@ -121,7 +131,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     }
 
     public continueInPreviousFormBannerAction = () => {
-        this.supplyPointLocalStorageService.loadSupplyPoint();
+        this.supplyPointLocalStorageService.loadSupplyPointAction();
         this.showBannerOfContinueInPreviousForm = false;
     }
 

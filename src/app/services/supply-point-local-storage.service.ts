@@ -19,10 +19,9 @@ export class SupplyPointLocalStorageService {
     ) {}
 
     public getSupplyPointStream = () => this.supplyPointSubject.asObservable();
-    public removeSupplyPointSubjectStream = () => this.supplyPointSubject.asObservable();
-    public loadSupplyPoint = () => this.supplyPointSubject.next(this.getSupplyPoint());
-    public removeSupplyPointAct = () => this.removeSupplyPointSubject.next();
-// je z dobreho utu?
+    public loadSupplyPointAction = () => this.supplyPointSubject.next(this.getSupplyPoint());
+    public removeSupplyPointStream = () => this.removeSupplyPointSubject.asObservable();
+
     public getSupplyPoint = () => {
         try {
             const item = localStorage.getItem(CONSTS.LOCAL_STORAGE.SUPPLY_POINT_PARTIAL_FORM);
@@ -59,6 +58,8 @@ export class SupplyPointLocalStorageService {
         }
     }
 
-    public removeSupplyPoint = () => localStorage.removeItem(CONSTS.LOCAL_STORAGE.SUPPLY_POINT_PARTIAL_FORM);
-
+    public removeSupplyPoint = () => {
+        localStorage.removeItem(CONSTS.LOCAL_STORAGE.SUPPLY_POINT_PARTIAL_FORM);
+        this.removeSupplyPointSubject.next();
+    }
 }
