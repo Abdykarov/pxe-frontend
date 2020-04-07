@@ -1,9 +1,10 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
     Component,
-    HostListener, Inject, PLATFORM_ID,
+    HostListener,
+    Inject,
+    PLATFORM_ID,
 } from '@angular/core';
-import { $ } from 'protractor';
 import { CONSTS } from 'src/app/app.constants';
 
 import { configCoverage } from 'src/static/config/map-coverage.config';

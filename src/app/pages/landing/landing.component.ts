@@ -2,7 +2,10 @@ import { isPlatformBrowser } from '@angular/common';
 import {
     ChangeDetectorRef,
     Component,
-    ElementRef, HostListener, Inject, PLATFORM_ID,
+    ElementRef,
+    HostListener,
+    Inject,
+    PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
 import {

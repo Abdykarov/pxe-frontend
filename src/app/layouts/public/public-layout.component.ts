@@ -4,9 +4,11 @@ import {
 } from '@angular/router';
 import {
     ChangeDetectorRef,
-    Component, ElementRef,
+    Component,
+    ElementRef,
     HostListener,
-    Inject, ViewChild,
+    Inject,
+    ViewChild,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
@@ -35,10 +37,7 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
     public commodityTypePower = CommodityTypesLowerCase.POWER;
     public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
     public lastScrollTop = 0;
-    public wasLastTimeScrollToTop = false;
-
-    @ViewChild('mainDiv')
-    public mainDiv: ElementRef;
+    public wasLastTimeScrolledToTop = false;
 
     constructor(
         protected apollo: Apollo,
@@ -80,7 +79,7 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
             window.scrollY ||
             window.pageYOffset ||
             document.body.scrollTop + (document.documentElement && document.documentElement.scrollTop || 0);
-        this.wasLastTimeScrollToTop = scrollTop < this.lastScrollTop;
+        this.wasLastTimeScrolledToTop = scrollTop < this.lastScrollTop;
         this.lastScrollTop = scrollTop;
     }
 
