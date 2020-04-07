@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="col-auto"
-                     *ngIf="!isOwner">
+                     *ngIf="!isOwner && showValidityOfOffer">
                     <div class="supply-point-offer__value-box supply-point-offer__value-box--price ml-0">
                         <span class="supply-point-offer__value-name">Platnost nabídky</span>
                         <span class="supply-point-offer__value text-color--danger">{{dateDiffValidityOfOffer}} {{dateDiffValidityOfOffer | plural: 'hour'}}</span>
