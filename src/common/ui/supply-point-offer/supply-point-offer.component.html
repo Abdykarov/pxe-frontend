@@ -16,7 +16,7 @@
                     <span class="supply-point-offer__title text-break">{{supplyPointOffer?.name}} Bohemia plus</span>
                 </div>
                 <div
-                    *ngIf="supplyPointOffer.greenEnergy" 
+                    *ngIf="supplyPointOffer.greenEnergy"
                     class="col-12">
                     <div class="green-energy">
                         <span class="icon icon--leaf green-energy__icon"></span>
@@ -28,7 +28,7 @@
         <div class="
                 col-12
                 order-md-3
-                supply-point-offer__inner 
+                supply-point-offer__inner
                 pb-5"
              [class.col-12]="!isOwner"
              [class.col-6]="isOwner"
@@ -43,7 +43,7 @@
                         <span class="supply-point-offer__title-label">{{isOwner ? 'Váš stávající dodavatel' : 'Dodavatel'}}</span>
                         <span class="
                                 supply-point-offer__title
-                                mb-0 
+                                mb-0
                                 text-break">
                             {{supplyPointOffer.supplier?.name}}&nbsp;
                             <!--<span class="icon icon&#45;&#45;info supply-point-offer__info-icon"></span>-->
@@ -94,7 +94,7 @@
                 </div>
             </div>
             <div
-                *ngIf="showPriceDecomposition && !isOwner && supplyPointOffer.benefits && supplyPointOffer.benefits.length" 
+                *ngIf="showPriceDecomposition && !isOwner && supplyPointOffer.benefits && supplyPointOffer.benefits.length"
                 class="row">
                 <div class="col-12 mb-1">
                     <div class="supply-point-offer__benefits-description">
@@ -111,12 +111,12 @@
             </div>
         </div>
         <div
-            *ngIf="showPriceDecomposition"  
+            *ngIf="showPriceDecomposition"
             class="
-                col-12 
-                order-md-3 
-                supply-point-offer__inner 
-                supply-point-offer__inner--second 
+                col-12
+                order-md-3
+                supply-point-offer__inner
+                supply-point-offer__inner--second
                 pb-0
                 pb-md-4">
             <h3 class="supply-point-offer__decomposition-title">Regulovaná část ceny <small>(veškeré ceny jsou&nbsp;VČETNĚ&nbsp;DPH)</small></h3>
@@ -212,29 +212,31 @@
                     <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
                         <span class="supply-point-offer__value-name">Poplatek za Odběrné místo</span>
                         <span class="supply-point-offer__value text-break">{{supplyPointOffer.monthlyConsumptionFee | number: '1.0-2'}}&nbsp;Kč/měsíc</span>
-                        
+
                     </div>
                 </div>
             </div>
-            <div class="col-auto offset-md-6 offset-md-8"
-                 *ngIf="supplyPointOffer.prepayment || supplyPointOffer.totalPrice">
-                <span class="supply-point-offer__title-label">Vypočtená roční cena</span>
-                <span class="supply-point-offer__title text-break">
-                    <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
-                        {{(supplyPointOffer.prepayment | number: '1.0-0') * 12}}&nbsp;Kč
-                    </ng-container>
-                    <ng-template #totalPrice>
-                        {{(supplyPointOffer.totalPrice  | number: '1.0-0') * 12}}&nbsp;Kč
-                    </ng-template>
-                </span>
+            <div class="row">
+                <div class="col-auto offset-md-6 offset-md-8"
+                     *ngIf="supplyPointOffer.prepayment || supplyPointOffer.totalPrice">
+                    <span class="supply-point-offer__title-label">Vypočtená roční cena</span>
+                    <span class="supply-point-offer__title text-break">
+                        <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
+                            {{(supplyPointOffer.prepayment * 12) | number: '1.0-0'}}&nbsp;Kč
+                        </ng-container>
+                        <ng-template #totalPrice>
+                            {{(supplyPointOffer.totalPrice * 12)  | number: '1.0-0'}}&nbsp;Kč
+                        </ng-template>
+                    </span>
+                </div>
             </div>
         </div>
-        <div 
+        <div
             class="col-12 col-md-5 order-md-2 supply-point-offer__inner supply-point-offer__inner--second supply-point-offer__inner--price"
             [class.col-md-6]="isOwner"
             [class.supply-point-offer__inner--price-decomposition]="showPriceDecomposition">
             <div
-                *ngIf="supplyPointOffer.prepayment || supplyPointOffer.totalPrice" 
+                *ngIf="supplyPointOffer.prepayment || supplyPointOffer.totalPrice"
                 class="row">
                 <div class="col-12">
                     <span class="supply-point-offer__title-label">
