@@ -5,10 +5,8 @@ import {
 import {
     ChangeDetectorRef,
     Component,
-    ElementRef,
     HostListener,
     Inject,
-    ViewChild,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
@@ -38,6 +36,16 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
     public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
     public lastScrollTop = 0;
     public wasLastTimeScrolledToTop = false;
+
+    @HostListener('window:scroll', [])
+    onWindowScroll() {
+        const scrollTop =
+            window.scrollY ||
+            window.pageYOffset ||
+            document.body.scrollTop + (document.documentElement && document.documentElement.scrollTop || 0);
+        this.wasLastTimeScrolledToTop = scrollTop < this.lastScrollTop;
+        this.lastScrollTop = scrollTop;
+    }
 
     constructor(
         protected apollo: Apollo,
@@ -71,16 +79,6 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
                 this.showOverlay = current;
                 this.cd.markForCheck();
             });
-    }
-
-    @HostListener('window:scroll', [])
-    onWindowScroll() {
-        const scrollTop =
-            window.scrollY ||
-            window.pageYOffset ||
-            document.body.scrollTop + (document.documentElement && document.documentElement.scrollTop || 0);
-        this.wasLastTimeScrolledToTop = scrollTop < this.lastScrollTop;
-        this.lastScrollTop = scrollTop;
     }
 
     public supplierChange = () => this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.SUPPLIER_CHANGE);

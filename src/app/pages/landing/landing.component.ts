@@ -3,7 +3,6 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
-    HostListener,
     Inject,
     PLATFORM_ID,
     ViewChild,
@@ -15,7 +14,11 @@ import {
 import { Router } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
-import { takeUntil } from 'rxjs/operators';
+import {
+    debounceTime,
+    takeUntil,
+} from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -60,10 +63,10 @@ export class LandingComponent extends AbstractComponent {
 
     public isMoreThanXlResolution = false;
 
-    @HostListener('window:resize', ['$event'])
-    onResize(event) {
-        this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
-    }
+    public resizeEvent$ = fromEvent(window, 'resize')
+        .pipe(
+            debounceTime(200),
+        );
 
     constructor(
         private apollo: Apollo,
@@ -105,6 +108,13 @@ export class LandingComponent extends AbstractComponent {
                     scrollToElementFnc(this.supplierChangeElement.nativeElement);
                 }
             });
+
+        this.resizeEvent$
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(
+            _  =>
+                this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION
+            )
     }
 
     public submitForm = (values) => {

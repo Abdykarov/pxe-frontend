@@ -1,12 +1,17 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
     Component,
-    HostListener,
     Inject,
     PLATFORM_ID,
 } from '@angular/core';
-import { CONSTS } from 'src/app/app.constants';
+import { fromEvent } from 'rxjs';
+import {
+    debounceTime,
+    takeUntil,
+} from 'rxjs/operators';
 
+import { AbstractComponent } from 'src/common/abstract.component';
+import { CONSTS } from 'src/app/app.constants';
 import { configCoverage } from 'src/static/config/map-coverage.config';
 import { configSupplier } from 'src/static/config/suppliers.config';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
@@ -26,7 +31,7 @@ import {
     selector: 'lnd-landing-page',
     templateUrl: './landing.component.html',
 })
-export class LandingComponent {
+export class LandingComponent extends AbstractComponent{
     public breadcrumbItemsSimple: IBreadcrumbItems;
     public configCoverage: IMapCoverageConfig = configCoverage;
     public configSupplier: ISupplierLogo[] = configSupplier;
@@ -39,14 +44,15 @@ export class LandingComponent {
     public interval = interval;
     public isMoreThanXlResolution = false;
 
-    @HostListener('window:resize', ['$event'])
-    onResize(event) {
-        this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
-    }
+    public resizeEvent$ = fromEvent(window, 'resize')
+        .pipe(
+            debounceTime(200),
+        );
 
     constructor(
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
+        super();
         if (isPlatformBrowser(this.platformId)) {
             this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
         }
@@ -57,6 +63,13 @@ export class LandingComponent {
               url: null,
             },
         ];
+
+        this.resizeEvent$
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(
+                _  =>
+                    this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION
+            )
     }
 
     public submitForm = (values) => {
