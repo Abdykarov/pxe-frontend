@@ -59,19 +59,22 @@
 		}
 
 		&--carousel {
-			padding-top: ( $spacer * 2 );
-
 			// Media queries
 			@include media-breakpoint-up(md) {
-				padding-top: ( $spacer * 5 );
+				padding: ( $spacer * 5 ) 0 $spacer;
 			}
 		}
 
 		&--arrow {
+			overflow-x: hidden;
+			z-index: $zindex-lp-arrow-bg;
+
 			&::after {
 				content: '';
 				position: absolute;
-				bottom: 0;
+				display: inline-block;
+				top: 40px;
+				bottom: auto;
 				left: 50%;
 				width: 345px;
 				height: 530px;
@@ -79,12 +82,11 @@
 				background-repeat: no-repeat;
 				background-size: 100%;
 				transform: translateX(-16%);
-				z-index: -1;
+				z-index: $zindex-lp-arrow-icon;
 
 				// Media queries
 				@include media-breakpoint-up(md) {
 					top: -130px;
-					bottom: auto;
 					left: 50%;
 					transform: translateX(-32%);
 				}
@@ -99,6 +101,10 @@
 					height: 840px;
 				}
 			}
+		}
+
+		&--arrow-overlap {
+			z-index: $zindex-lp-arrow-bg-overlap;
 		}
 
 		&--light {
