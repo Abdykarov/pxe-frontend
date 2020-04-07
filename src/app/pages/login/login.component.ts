@@ -19,6 +19,7 @@ import {
     map,
     takeUntil,
 } from 'rxjs/operators';
+import { CookiesService } from 'src/app/services/cookies.service';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
@@ -63,13 +64,14 @@ export class LoginComponent extends AbstractComponent {
     public passwordWasSent = false;
     public password: string;
     public phoneNumber: string;
-    public routerState = null;
+    public reasonForLogoutUser = null;
     public state = ILoginState.LOGIN;
     public wasSentToPhone = false;
 
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
+        private cookieService: CookiesService,
         private metaService: Meta,
         private route: ActivatedRoute,
         private router: Router,
@@ -79,8 +81,8 @@ export class LoginComponent extends AbstractComponent {
     ) {
         super();
 
-        if (isPlatformBrowser(this.platformId)) {
-            this.routerState = window.history.state;
+        if (isPlatformBrowser(this.platformId) && this.cookieService.get('reasonForLogoutUser')) {
+            this.reasonForLogoutUser = this.cookieService.get('reasonForLogoutUser');
         }
 
         this.titleService.setTitle(CONSTS.TITLES.LOGIN);
@@ -109,7 +111,7 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public submitChangePassword = (changePassword: IChangePassword) => {
-        this.routerState = null;
+        this.reasonForLogoutUser = null;
         this.formLoading = true;
 
         this.userService.changePassword(this.password, changePassword.password)
@@ -132,13 +134,13 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public submitResetPassword = ({login}) => {
-        this.routerState = null;
+        this.reasonForLogoutUser = null;
         this.login = login;
         this.resetPassword(login);
     }
 
     public resetPassword = (login: string) => {
-        this.routerState = null;
+        this.reasonForLogoutUser = null;
         this.formLoading = true;
 
         this.authService.cleanUserData();
@@ -165,7 +167,7 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public submitFormLogin = (userLogin: IUserLogin) => {
-        this.routerState = null;
+        this.reasonForLogoutUser = null;
         this.password = userLogin.password;
         this.formLoading = true;
         this.authService.login(userLogin)
@@ -196,7 +198,7 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public submitSupplierLoginSms = (confirmationCode: IConfirmationCode) => {
-        this.routerState = null;
+        this.reasonForLogoutUser = null;
         this.formLoading = true;
         this.authService.confirmSupplierLoginSms(confirmationCode)
             .pipe(
@@ -214,7 +216,7 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public forgottenPasswordAction = ($event) => {
-        this.routerState = null;
+        this.reasonForLogoutUser = null;
         $event.preventDefault();
         this.resetErrorsAndLoading();
         if (this.authService.isLogged()) {
@@ -237,7 +239,7 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public sendSupplierLoginSms() {
-        this.routerState = null;
+        this.reasonForLogoutUser = null;
         this.formLoading = true;
         this.authService.sendSupplierLoginSms()
             .pipe(
@@ -255,7 +257,7 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public resendSupplierLoginSms = ($event) => {
-        this.routerState = null;
+        this.reasonForLogoutUser = null;
         $event.preventDefault();
         this.sendSupplierLoginSms();
     }

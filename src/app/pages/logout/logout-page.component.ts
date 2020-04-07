@@ -14,6 +14,7 @@ import { first } from 'rxjs/operators';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ApolloService } from 'src/app/services/apollo.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { CookiesService } from 'src/app/services/cookies.service';
 import { CONSTS } from 'src/app/app.constants';
 import { defaultState } from 'src/app/pages/logout/logout-page.config';
 import { IStateRouter } from 'src/app/pages/logout/logout-page.model';
@@ -30,6 +31,7 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
         private apollo: Apollo,
         private apolloService: ApolloService,
         private authService: AuthService,
+        private cookieService: CookiesService,
         private cd: ChangeDetectorRef,
         private router: Router,
         @Inject(PLATFORM_ID) private platformId: string,
@@ -38,7 +40,6 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
         if (isPlatformBrowser(this.platformId)) {
             this.state = window.history.state;
         }
-        console.log(this.state);
     }
 
     ngOnInit() {
@@ -51,13 +52,15 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
             .subscribe(
                 () => {
                     this.apolloService.resetStore().then(() => {
+                        this.cookieService.set(
+                            'reasonForLogoutUser',
+                            this.state.isFromUnauthorized ?
+                                CONSTS.REASON_FOR_LOGOUT_USER.UNAUTHORIZED : CONSTS.REASON_FOR_LOGOUT_USER.BY_SELF,
+                            new Date().getTime() + CONSTS.COOKIE_TEMPORARY_EXPIRATION
+                        );
+
                         this.router.navigate(
                             [CONSTS.PATHS.LOGIN],
-                            {
-                                state: {
-                                    logoutMessage: this.state && this.state.logoutMessage,
-                                },
-                            }
                         )
                         .then(() => {
                             if (this.state.refresh) {
