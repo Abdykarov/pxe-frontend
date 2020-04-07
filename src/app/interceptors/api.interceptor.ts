@@ -53,8 +53,7 @@ export class ApiInterceptor implements HttpInterceptor {
             request.url.indexOf('export-csv') > 0
         ) {
             resultRequest = request.clone({
-                headers: this.authService.getAuthorizationHeaders('application/json', 'text/csv'),
-                responseType: 'text',
+                headers: this.authService.getAuthorizationHeaders('application/octet-stream'),
             });
         }
 
