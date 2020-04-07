@@ -6,7 +6,10 @@ import {
 import {
     ChangeDetectorRef,
     Component,
+    Inject,
+    PLATFORM_ID,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import {
     Meta,
     Title,
@@ -60,6 +63,7 @@ export class LoginComponent extends AbstractComponent {
     public passwordWasSent = false;
     public password: string;
     public phoneNumber: string;
+    public routerState = null;
     public state = ILoginState.LOGIN;
     public wasSentToPhone = false;
 
@@ -71,8 +75,14 @@ export class LoginComponent extends AbstractComponent {
         private router: Router,
         private userService: UserService,
         private titleService: Title,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
+
+        if (isPlatformBrowser(this.platformId)) {
+            this.routerState = window.history.state;
+        }
+
         this.titleService.setTitle(CONSTS.TITLES.LOGIN);
         this.metaService.updateTag({
             name: 'description',
@@ -99,6 +109,7 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public submitChangePassword = (changePassword: IChangePassword) => {
+        this.routerState = null;
         this.formLoading = true;
 
         this.userService.changePassword(this.password, changePassword.password)
@@ -121,11 +132,13 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public submitResetPassword = ({login}) => {
+        this.routerState = null;
         this.login = login;
         this.resetPassword(login);
     }
 
     public resetPassword = (login: string) => {
+        this.routerState = null;
         this.formLoading = true;
 
         this.authService.cleanUserData();
@@ -152,6 +165,7 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public submitFormLogin = (userLogin: IUserLogin) => {
+        this.routerState = null;
         this.password = userLogin.password;
         this.formLoading = true;
         this.authService.login(userLogin)
@@ -182,6 +196,7 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public submitSupplierLoginSms = (confirmationCode: IConfirmationCode) => {
+        this.routerState = null;
         this.formLoading = true;
         this.authService.confirmSupplierLoginSms(confirmationCode)
             .pipe(
@@ -199,6 +214,7 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public forgottenPasswordAction = ($event) => {
+        this.routerState = null;
         $event.preventDefault();
         this.resetErrorsAndLoading();
         if (this.authService.isLogged()) {
@@ -221,6 +237,7 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public sendSupplierLoginSms() {
+        this.routerState = null;
         this.formLoading = true;
         this.authService.sendSupplierLoginSms()
             .pipe(
@@ -238,6 +255,7 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public resendSupplierLoginSms = ($event) => {
+        this.routerState = null;
         $event.preventDefault();
         this.sendSupplierLoginSms();
     }

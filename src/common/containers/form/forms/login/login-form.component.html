@@ -26,6 +26,12 @@
         Zapomněli jste heslo?
     </a>
 </ng-template>
+<lnd-alert
+    *ngIf="reasonForLogoutUser"
+    type="info"
+    customClass="mb-6">
+    {{reasonForLogoutUser}}
+</lnd-alert>
 <form
     [formGroup]="form"
     (keydown.enter)="submitForm($event);false"

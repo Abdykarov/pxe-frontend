@@ -7,7 +7,7 @@ export interface INavigationMenu extends Array<INavigationItem> {}
 export interface INavigationItem {
     label: string;
     icon: string;
-    url?: string;
+    url?: string | object;
     id?: string;
     badge?: string;
     class?: string;

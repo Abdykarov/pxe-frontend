@@ -233,9 +233,10 @@ export class AuthService {
 
     public getUuid = (): string => this.uuid;
 
-    public logoutForced = () => {
+    public logoutForced = (logoutMessage: string = CONSTS.REASON_FOR_LOGOUT_USER.UNAUTHORIZED) => {
         const state: IStateRouter = {
             refresh: true,
+            logoutMessage
         };
         return this.router.navigate(
             [CONSTS.PATHS.LOGOUT],

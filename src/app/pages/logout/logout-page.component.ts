@@ -38,6 +38,7 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
         if (isPlatformBrowser(this.platformId)) {
             this.state = window.history.state;
         }
+        console.log(this.state);
     }
 
     ngOnInit() {
@@ -50,13 +51,19 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
             .subscribe(
                 () => {
                     this.apolloService.resetStore().then(() => {
-                        this.router.navigate([CONSTS.PATHS.EMPTY])
-                            .then(() => {
-                                if (this.state.refresh) {
-                                    window.location.reload();
-                                }
-                            });
-
+                        this.router.navigate(
+                            [CONSTS.PATHS.LOGIN],
+                            {
+                                state: {
+                                    logoutMessage: this.state && this.state.logoutMessage,
+                                },
+                            }
+                        )
+                        .then(() => {
+                            if (this.state.refresh) {
+                                window.location.reload();
+                            }
+                        });
                     });
                 },
                 () => {

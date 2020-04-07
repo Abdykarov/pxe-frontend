@@ -106,7 +106,13 @@ export const navigationMenuUserActions: INavigationMenu = [
         'label': 'Odhlášení',
         'type': INavigationItemType.NORMAL,
         'icon': 'power',
-        'url' : `/${CONSTS.PATHS.LOGOUT}`,
+        'url' :
+            [
+                `/${CONSTS.PATHS.LOGOUT}`,
+                {
+                    logoutMessage: CONSTS.REASON_FOR_LOGOUT_USER.BY_SELF
+                }
+            ],
         'children': [],
         __typename: 'logout',
     },
@@ -136,7 +142,13 @@ export const navigationMenuSuppliersActions: INavigationMenu = [
         'label': 'Odhlášení',
         'type': INavigationItemType.NORMAL,
         'icon': 'power',
-        'url' : `/${CONSTS.PATHS.LOGOUT}`,
+        'url' :
+            [
+                `/${CONSTS.PATHS.LOGOUT}`,
+                {
+                    logoutMessage: CONSTS.REASON_FOR_LOGOUT_USER.BY_SELF
+                }
+            ],
         'children': [],
         __typename: 'logout',
     },

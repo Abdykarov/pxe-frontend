@@ -19,6 +19,7 @@
                                     [formLoading]="formLoading"
                                     [globalError]="globalError"
                                     [login]="login"
+                                    [reasonForLogoutUser]="routerState && routerState.logoutMessage"
                                     [wasSentToPhone]="wasSentToPhone"
                                     [passwordWasSent]="passwordWasSent"
                                     (customAction)="forgottenPasswordAction($event)"
