@@ -4,9 +4,9 @@ import {
 } from '@angular/router';
 import {
     ChangeDetectorRef,
-    Component, ElementRef,
+    Component,
     HostListener,
-    Inject, ViewChild,
+    Inject,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
@@ -35,10 +35,17 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
     public commodityTypePower = CommodityTypesLowerCase.POWER;
     public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
     public lastScrollTop = 0;
-    public wasLastTimeScrollToTop = false;
+    public wasLastTimeScrolledToTop = false;
 
-    @ViewChild('mainDiv')
-    public mainDiv: ElementRef;
+    @HostListener('window:scroll', [])
+    onWindowScroll() {
+        const scrollTop =
+            window.scrollY ||
+            window.pageYOffset ||
+            document.body.scrollTop + (document.documentElement && document.documentElement.scrollTop || 0);
+        this.wasLastTimeScrolledToTop = scrollTop < this.lastScrollTop;
+        this.lastScrollTop = scrollTop;
+    }
 
     constructor(
         protected apollo: Apollo,
@@ -72,16 +79,6 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
                 this.showOverlay = current;
                 this.cd.markForCheck();
             });
-    }
-
-    @HostListener('window:scroll', [])
-    onWindowScroll() {
-        const scrollTop =
-            window.scrollY ||
-            window.pageYOffset ||
-            document.body.scrollTop + (document.documentElement && document.documentElement.scrollTop || 0);
-        this.wasLastTimeScrollToTop = scrollTop < this.lastScrollTop;
-        this.lastScrollTop = scrollTop;
     }
 
     public supplierChange = () => this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.SUPPLIER_CHANGE);

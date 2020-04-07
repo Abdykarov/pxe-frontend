@@ -29,5 +29,5 @@ export class CarouselContainerComponent extends AbstractComponent {
         },
     ];
 
-    public readonly  interval = 1500;
+    public readonly  interval = 100;
 }
