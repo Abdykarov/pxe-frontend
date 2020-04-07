@@ -1,4 +1,8 @@
 <carousel
+    #carousel
+    (mouseenter)="setPause()"
+    (mouseup)="setPause()"
+    (activeSlideChange)="activeSlideChange.emit($event)"
     [noPause]="false"
     [interval]="interval">
 	<slide *ngFor="let item of carouselItems">
