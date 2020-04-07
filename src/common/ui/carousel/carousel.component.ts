@@ -1,4 +1,5 @@
 import {
+    ChangeDetectorRef,
     Component,
     EventEmitter,
     Input,
@@ -22,7 +23,12 @@ export class CarouselComponent {
     @Input()
     public carouselItems: ICarouselItem[];
 
-    @Output()
-    public activeSlideChange: EventEmitter<any> = new EventEmitter<any>();
 
+    constructor(
+        private cd: ChangeDetectorRef,
+    ) {
+        setInterval(() => {
+            this.cd.markForCheck();
+        }, 100);
+    }
 }

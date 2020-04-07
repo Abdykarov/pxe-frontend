@@ -1,7 +1,6 @@
 <carousel
-	(activeSlideChange)="activeSlideChange.emit($event)"
-    (mousedown)="$event.preventDefault();$event.cancelBubble = true"
-	[interval]="interval">
+    [noPause]="false"
+    [interval]="interval">
 	<slide *ngFor="let item of carouselItems">
 		<div class="row no-gutters">
 			<div class="col-12 col-md-6 offset-md-1 order-md-2">

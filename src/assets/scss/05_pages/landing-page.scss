@@ -6,6 +6,7 @@
 
 .landing-page {
 	padding-top: 110px;
+	background-color: $white;
 
 	// Media queries
 	@include media-breakpoint-up(xl) {
