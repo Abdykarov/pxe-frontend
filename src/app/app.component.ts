@@ -3,6 +3,8 @@ import {
     ChangeDetectionStrategy,
     Inject,
     PLATFORM_ID,
+    ElementRef,
+    OnInit,
 } from '@angular/core';
 import {
     DOCUMENT,
@@ -22,8 +24,9 @@ import { GTMService } from './services/gtm.service';
     styleUrls: ['./app.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     constructor(
+        private elementRef: ElementRef,
         private gtmService: GTMService,
         private router: Router,
         @Inject(DOCUMENT) private document: Document,
@@ -50,6 +53,12 @@ export class AppComponent {
                     // gaService.gtm(event);
                 }
             });
+        }
+    }
+
+    ngOnInit(): void {
+        if (environment.production) {
+            this.elementRef.nativeElement.removeAttribute('ng-version');
         }
     }
 }
