@@ -21,4 +21,4 @@ export const carouselItems: ICarouselItem[] = [
     },
 ];
 
-export const interval = 0;
+export const interval = 5000;

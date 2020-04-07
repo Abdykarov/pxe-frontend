@@ -3,6 +3,7 @@ import {
     EventEmitter,
     Input,
     Output,
+    ViewEncapsulation,
 } from '@angular/core';
 
 import { ICarouselItem } from 'src/common/ui/carousel/models/data.model';
@@ -11,6 +12,7 @@ import { ICarouselItem } from 'src/common/ui/carousel/models/data.model';
     selector: 'lnd-carousel',
     templateUrl: './carousel.component.html',
     styleUrls: ['./carousel.component.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class CarouselComponent {
 
