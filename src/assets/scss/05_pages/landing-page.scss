@@ -5,7 +5,7 @@
  */
 
 .landing-page {
-	padding-top: 110px;
+	padding-top: $header-height;
 	background-color: $white;
 
 	// Media queries
@@ -32,7 +32,7 @@
 				padding-top: ( $spacer * 2 ) + $landing-page-picture-height-mobile;
 			}
 			@include media-breakpoint-up(xl) {
-				margin-bottom: ( $spacer * 5.5 );
+				margin-bottom: ( $spacer * 3 );
 			}
 		}
 
