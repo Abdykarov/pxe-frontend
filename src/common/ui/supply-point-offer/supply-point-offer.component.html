@@ -221,7 +221,7 @@
                 <span class="supply-point-offer__title-label">Vypočtená roční cena</span>
                 <span class="supply-point-offer__title text-break">
                     <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
-                        {{(supplyPointOffer.prepayment | number: '1.0-0') * 12}}&nbsp;Kč<
+                        {{(supplyPointOffer.prepayment | number: '1.0-0') * 12}}&nbsp;Kč
                     </ng-container>
                     <ng-template #totalPrice>
                         {{(supplyPointOffer.totalPrice  | number: '1.0-0') * 12}}&nbsp;Kč
@@ -238,16 +238,17 @@
                 class="row">
                 <div class="col-12">
                     <span class="supply-point-offer__title-label">
-                        {{isFromContract ? 'Sjednaná měsíční záloha' : 'Vypočtená měsíční platba'}}
+                        {{isFromContract ? 'Sjednaná měsíční záloha' : 'Vypočtená měsíční platba'}}<br>
+                        <span class="small">(VČETNĚ&nbsp;DPH)</span>
                     </span>
                 </div>
                 <div class="col-12">
                     <span class="supply-point-offer__title text-break">
                         <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
-                            {{supplyPointOffer.prepayment | number: '1.0-0'}}&nbsp;Kč<small>&nbsp;VČETNĚ&nbsp;DPH</small>
+                            {{supplyPointOffer.prepayment | number: '1.0-0'}}&nbsp;Kč
                         </ng-container>
                         <ng-template #totalPrice>
-                            {{supplyPointOffer.totalPrice | number: '1.0-0'}}&nbsp;Kč<small>&nbsp;VČETNĚ&nbsp;DPH</small>
+                            {{supplyPointOffer.totalPrice | number: '1.0-0'}}&nbsp;Kč
                         </ng-template>
                     </span>
                 </div>
