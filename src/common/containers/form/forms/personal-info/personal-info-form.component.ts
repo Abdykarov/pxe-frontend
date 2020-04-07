@@ -104,7 +104,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             this.prefillFormData();
         } else {
             const personalInfoUnfinished = this.personalInfoLocalStorageService.getPersonalInfo(this.supplyPoint.id);
-            if (personalInfoUnfinished &&  !R.isEmpty(personalInfoUnfinished)) {
+            if (personalInfoUnfinished && !R.isEmpty(personalInfoUnfinished)) {
                 if (personalInfoUnfinished.birthDate) {
                     personalInfoUnfinished.birthDate = new Date(personalInfoUnfinished.birthDate);
                 }

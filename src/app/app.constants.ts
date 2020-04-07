@@ -11,8 +11,12 @@ import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 export const CONSTS = {
     ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],
     CRYPTO: {
-        SALT: CryptoJS.lib.WordArray.random(128 / 8),
-        IV: CryptoJS.lib.WordArray.random(128 / 8),
+        get SALT() {
+            return CryptoJS.lib.WordArray.random(128 / 8);
+        },
+        get IV() {
+            return CryptoJS.lib.WordArray.random(128 / 8);
+        },
     },
     CURRENCY: {
         DEFAULT: 'CZK',

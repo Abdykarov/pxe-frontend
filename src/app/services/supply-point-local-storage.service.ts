@@ -11,16 +11,16 @@ import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
     providedIn: 'root',
 })
 export class SupplyPointLocalStorageService {
-    private supplyPointSubject = new Subject<any>();
-    private removeSupplyPointSubject = new Subject<any>();
+    private supplyPointSubject$ = new Subject<any>();
+    private removeSupplyPointSubject$ = new Subject<any>();
 
     constructor(
         private authService: AuthService,
     ) {}
 
-    public getSupplyPointStream = () => this.supplyPointSubject.asObservable();
-    public loadSupplyPointAction = () => this.supplyPointSubject.next(this.getSupplyPoint());
-    public removeSupplyPointStream = () => this.removeSupplyPointSubject.asObservable();
+    public getSupplyPointStream = () => this.supplyPointSubject$.asObservable();
+    public loadSupplyPointAction = () => this.supplyPointSubject$.next(this.getSupplyPoint());
+    public removeSupplyPointStream = () => this.removeSupplyPointSubject$.asObservable();
 
     public getSupplyPoint = () => {
         try {
@@ -60,6 +60,6 @@ export class SupplyPointLocalStorageService {
 
     public removeSupplyPoint = () => {
         localStorage.removeItem(CONSTS.LOCAL_STORAGE.SUPPLY_POINT_PARTIAL_FORM);
-        this.removeSupplyPointSubject.next();
+        this.removeSupplyPointSubject$.next();
     }
 }

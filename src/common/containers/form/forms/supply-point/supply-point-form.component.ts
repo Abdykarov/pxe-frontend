@@ -208,7 +208,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                         this.prefillForm();
                         this.formWasPrefilled = true;
                     } else {
-                        if (this.existsPartialSupplyPointValue  === null) {
+                        if (R.isNil(this.existsPartialSupplyPointValue)) {
                             const partialSupplyPoint = this.supplyPointLocalStorageService.getSupplyPoint();
                             this.existsPartialSupplyPointValue =
                                 partialSupplyPoint &&
