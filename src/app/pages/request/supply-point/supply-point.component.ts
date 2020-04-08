@@ -68,7 +68,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
     public bannerObj: IBannerObj = {
-        text: 'Chcete pokračovat v minulém rozpracovaném odběrném místě?',
+        text: 'Evidujeme u vás nedokončené odběrné místo, chcete načíst tyto údaje?',
     };
 
     constructor(
