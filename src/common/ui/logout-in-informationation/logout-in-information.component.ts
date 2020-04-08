@@ -8,7 +8,7 @@ import {
 import { Router } from '@angular/router';
 
 import {
-    interval
+    interval,
 } from 'rxjs';
 import {
     filter,
@@ -31,7 +31,7 @@ export class LogoutInInformationComponent extends AbstractComponent {
     public tokenWillExpireInSeconds = -1;
 
     constructor(
-        private authService: AuthService,
+        public authService: AuthService,
         private cd: ChangeDetectorRef,
         private router: Router,
         @Inject(PLATFORM_ID) private platformId: string,
@@ -44,12 +44,13 @@ export class LogoutInInformationComponent extends AbstractComponent {
                     filter( _ => this.router.url.includes('secured') && this.authService.isLastRefreshToken),
                 )
                 .subscribe(_ => {
-                    this.tokenWillExpireInSeconds = Math.floor((this.authService.currentUserValue.exp * 1000 - new Date().getTime()) / 1000)
-                    if(this.tokenWillExpireInSeconds === 0) {
+                    this.tokenWillExpireInSeconds =
+                        Math.floor((this.authService.currentUserValue.exp * 1000 - new Date().getTime()) / 1000);
+                    if (this.tokenWillExpireInSeconds === 0) {
                         this.authService.logoutForced();
                         this.authService.isLastRefreshToken = false;
                     }
                     this.cd.markForCheck();
-                })
+                });
         }
     }}

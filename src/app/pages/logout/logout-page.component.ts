@@ -56,7 +56,7 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
                             'reasonForLogoutUser',
                             this.state.isFromUnauthorized ?
                                 CONSTS.REASON_FOR_LOGOUT_USER.UNAUTHORIZED : CONSTS.REASON_FOR_LOGOUT_USER.BY_SELF,
-                            new Date().getTime() + CONSTS.COOKIE_TEMPORARY_EXPIRATION
+                            new Date().getTime() + CONSTS.COOKIE_TEMPORARY_EXPIRATION,
                         );
 
                         this.router.navigate(

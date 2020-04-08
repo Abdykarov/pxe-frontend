@@ -65,7 +65,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         super();
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
-                if(event && event.url !== `/${CONSTS.PATHS.LOGIN}`) {
+                if (event && event.url !== `/${CONSTS.PATHS.LOGIN}`) {
                     this.cookieService.remove('reasonForLogoutUser');
                 }
                 if (this.showOverlay) {

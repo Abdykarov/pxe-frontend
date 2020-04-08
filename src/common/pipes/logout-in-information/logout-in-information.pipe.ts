@@ -19,16 +19,16 @@ export class LogoutInInformationPipe implements PipeTransform {
         let secText = '';
         let minText = '';
 
-        if( minutes !== 0) {
+        if (minutes !== 0) {
             minText = minutes + ' ' + this.pluralPipe.transform(minutes, 'minute');
             text = minText;
         }
 
-        if( minutes !== 0 && sec !== 0) {
+        if (minutes !== 0 && sec !== 0) {
             text += ' a ';
         }
 
-        if( sec !== 0) {
+        if (sec !== 0) {
             secText = sec + ' ' + this.pluralPipe.transform(sec, 'sec');
             text += secText;
         }
