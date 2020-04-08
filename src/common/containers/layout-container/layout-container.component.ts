@@ -1,14 +1,11 @@
 import {
-    ChangeDetectorRef,
     Component,
     Inject,
     Input,
     PLATFORM_ID,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Router } from '@angular/router';
 
-import { AuthService } from 'src/app/services/auth.service';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 
 @Component({
@@ -27,9 +24,6 @@ export class LayoutContainerComponent {
     public showBanner = false;
 
     constructor(
-        private authService: AuthService,
-        private cd: ChangeDetectorRef,
-        private router: Router,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         if (isPlatformBrowser(this.platformId)) {

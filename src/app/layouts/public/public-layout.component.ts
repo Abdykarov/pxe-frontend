@@ -18,6 +18,7 @@ import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.compone
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CommodityTypesLowerCase,
+    CONSTS,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';
@@ -53,7 +54,7 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
             scrollToService,
         );
 
-        if (this.authService.isLogged()) {
+        if (this.authService.isLogged() && !this.router.url.includes(CONSTS.PATHS.LOGOUT)) {
             this.authService.logoutForced();
         }
 
