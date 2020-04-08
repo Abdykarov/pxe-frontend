@@ -11,14 +11,14 @@
 </div>
 <lnd-banner-ui
     *ngIf="showBanner"
-    [data]="bannerObjChangedPassword"
+    [data]="{
+        linkValue: '#',
+        text: 'Vaše heslo bylo úspěšně změněno.',
+        linkType: '',
+        title: ''
+    }"
     buttonLabel=""
     [showButtonLabel]="false"
 ></lnd-banner-ui>
-<lnd-banner-ui
-    *ngIf="tokenWillExpireInSeconds < SHOW_USER_WILL_BE_LOGOUT_INTERVAL_IN_SECONDS && tokenWillExpireInSeconds > 0 && authService.isLastRefreshToken"
-    [data]="bannerObjTokenWillExpire"
-    buttonLabel=""
-    [showButtonLabel]="false"
-></lnd-banner-ui>
+<pxe-logout-in-information></pxe-logout-in-information>
 <ng-content></ng-content>

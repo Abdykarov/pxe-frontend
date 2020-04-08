@@ -67,6 +67,7 @@ export class AuthService {
         interval(CONSTS.REFRESH_TOKEN.INTERVAL)
             .pipe(
                 switchMap((number) => {
+                    this.isLastRefreshToken = false;
                     if (!this.wasRefreshCallRefreshInterval) {
                         if (!this.token) {
                             return of(this.stopMessageInterval);
