@@ -86,7 +86,7 @@
                         (action)="togglePriceDecomposition($event)">
                     </lnd-button>
                     <lnd-button
-                        *ngIf="!isOwner"
+                        *ngIf="!isOwner && !isFromContract"
                         label="Vybrat nabídku"
                         [type]="'primary'"
                         (action)="action.emit(supplyPointOffer)">
@@ -273,7 +273,7 @@
                     </div>
                     <div class="col-12 col-md-auto">
                         <lnd-button
-                            *ngIf="!isOwner"
+                            *ngIf="!isOwner && !isFromContract"
                             class="w-100"
                             customClass="w-100"
                             label="Vybrat nabídku"
