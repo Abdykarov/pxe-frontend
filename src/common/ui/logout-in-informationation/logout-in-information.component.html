@@ -2,7 +2,8 @@
     *ngIf="tokenWillExpireInSeconds < SHOW_USER_WILL_BE_LOGOUT_INTERVAL_IN_SECONDS && tokenWillExpireInSeconds > 0 && authService.isLastRefreshToken"
     [data]="{
         linkValue: '#',
-        text: 'Vaše přihlášení brzy vyprší z důvodu neaktivity. K automatickému odhlášení dojde za ' + this.tokenWillExpireInSeconds + ' sekund.',
+        text: 'Vaše přihlášení brzy vyprší z důvodu neaktivity. K automatickému odhlášení dojde za '
+            + (this.tokenWillExpireInSeconds | logoutInInformation) + '.',
         linkType: '',
         title: ''
     }"

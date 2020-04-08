@@ -59,9 +59,6 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
                             new Date().getTime() + CONSTS.COOKIE_TEMPORARY_EXPIRATION
                         );
 
-                        console.log('___AAA___');
-                        console.log(this.state);
-
                         this.router.navigate(
                             [CONSTS.PATHS.LOGIN],
                         )

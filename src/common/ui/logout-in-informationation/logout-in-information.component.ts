@@ -23,7 +23,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 
 @Component({
     selector: 'pxe-logout-in-information',
-    templateUrl: './logout-in-information.html',
+    templateUrl: './logout-in-information.component.html',
 })
 export class LogoutInInformationComponent extends AbstractComponent {
     public readonly SHOW_USER_WILL_BE_LOGOUT_INTERVAL_IN_SECONDS = CONSTS.SHOW_USER_WILL_BE_LOGOUT_INTERVAL_IN_SECONDS;

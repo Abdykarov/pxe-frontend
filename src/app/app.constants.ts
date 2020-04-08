@@ -79,15 +79,15 @@ export const CONSTS = {
         WILD_CART  : '**',
     },
     REFRESH_TOKEN: {
-        INTERVAL: 1200,
+        INTERVAL: 300000,
         COUNT: 16,
-        DONT_REFRESH_TIME_IN_MINUTES: 0,
+        DONT_REFRESH_TIME_IN_MINUTES: 2,
     },
     REASON_FOR_LOGOUT_USER: {
         BY_SELF: 'Byl jste úspěšně odhlášen',
         UNAUTHORIZED: 'Došlo k odhlášení z důvodu neaktivity',
     },
-    SHOW_USER_WILL_BE_LOGOUT_INTERVAL_IN_SECONDS: 3000,
+    SHOW_USER_WILL_BE_LOGOUT_INTERVAL_IN_SECONDS: 300,
     VALIDATORS: {
         ADULTHOOD_AGE: 18,
         MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION: 10,
