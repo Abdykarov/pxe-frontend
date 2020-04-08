@@ -41,6 +41,7 @@ import {
     ROUTES,
     SUPPLY_POINT_EDIT_TYPE,
 } from 'src/app/app.constants';
+import { SupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/supply-point-form.component';
 import { SupplyPointLocalStorageService } from 'src/app/services/supply-point-local-storage.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
@@ -50,11 +51,8 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class SupplyPointComponent extends AbstractComponent implements OnInit {
 
-    @ViewChild('pxeSupplyPointForm') set content(pxeSupplyPointForm: ElementRef) {
-        if (pxeSupplyPointForm) {
-            this.pxeSupplyPointForm = pxeSupplyPointForm;
-        }
-    }
+    @ViewChild('pxeSupplyPointForm')
+    public pxeSupplyPointForm: SupplyPointFormComponent;
 
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.SUPPLY_POINT;
 
@@ -64,7 +62,6 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public formLoading = false;
     public formSent = false;
     public globalError: string[] = [];
-    public pxeSupplyPointForm = null;
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public showBannerOfContinueInPreviousForm = false;
     public supplyPointData = null;

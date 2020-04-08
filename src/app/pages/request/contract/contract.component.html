@@ -15,7 +15,19 @@
             </lnd-alert>
         </div>
     </div>
-    <lnd-placeloader [loading]="loadingSupplyPoint && !globalError.length"></lnd-placeloader>
+    <lnd-info-banner
+        *ngIf="showErrorMessageWithLoadingContracts"
+        [bannerType]="BannerTypeImages.NONE"
+        bannerTitle="Nebojte, vše jsme pro vás uložili do rozpracovaných smluv."
+        buttonLabel="Rozpracované smlouvy"
+        (buttonAction)="redirectToRequest()"
+    >
+    </lnd-info-banner>
+    <lnd-placeloader
+        *ngIf="loadingSupplyPoint && !globalError.length"
+        [loading]="true"
+        label="Právě připravujeme vaše smlouvy">
+    </lnd-placeloader>
     <div *ngIf="supplyPoint && !globalError.length"
          class="row">
         <div class="col-12 col-xl-10 offset-xl-1">
