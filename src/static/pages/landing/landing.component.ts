@@ -31,7 +31,7 @@ import {
     selector: 'lnd-landing-page',
     templateUrl: './landing.component.html',
 })
-export class LandingComponent extends AbstractComponent{
+export class LandingComponent extends AbstractComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
     public configCoverage: IMapCoverageConfig = configCoverage;
     public configSupplier: ISupplierLogo[] = configSupplier;
@@ -66,10 +66,9 @@ export class LandingComponent extends AbstractComponent{
 
         this.resizeEvent$
             .pipe(takeUntil(this.destroy$))
-            .subscribe(
-                _  =>
-                    this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION
-            )
+            .subscribe(_  =>
+                    this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION,
+            );
     }
 
     public submitForm = (values) => {

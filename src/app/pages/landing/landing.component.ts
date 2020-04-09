@@ -81,6 +81,8 @@ export class LandingComponent extends AbstractComponent {
         super();
         if (isPlatformBrowser(this.platformId)) {
             this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+            this.autoPlayUnsupportedBrowsers();
+            this.cd.markForCheck();
         }
 
         this.titleService.setTitle(CONSTS.TITLES.LANDING_PAGE);
@@ -111,10 +113,20 @@ export class LandingComponent extends AbstractComponent {
 
         this.resizeEvent$
             .pipe(takeUntil(this.destroy$))
-            .subscribe(
-            _  =>
-                this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION
-            )
+            .subscribe(_  => {
+                this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+                this.autoPlayUnsupportedBrowsers();
+                this.cd.markForCheck();
+            });
+    }
+
+    private autoPlayUnsupportedBrowsers = () => {
+        if (this.isMoreThanXlResolution) {
+            const video = <any>document.querySelector('video[muted][autoplay]');
+            if (video) {
+                video.play();
+            }
+        }
     }
 
     public submitForm = (values) => {
