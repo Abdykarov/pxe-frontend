@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import {
     Pipe,
     PipeTransform,
@@ -13,6 +14,10 @@ import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 })
 export class ConsumptionIndicatorPipe implements PipeTransform {
     private allIsTruthy = (values) => R.all(R_.isTruthy)(values);
+
+    constructor(
+       private decimalPipe: DecimalPipe,
+    ) {}
 
     private count = (last: number, avg: number) => {
         return last / (avg / 100) - 100;
@@ -34,7 +39,11 @@ export class ConsumptionIndicatorPipe implements PipeTransform {
         ])) {
             const annualConsumption = annualConsumptionVT + annualConsumptionNT;
             const lastAnnualConsumption = lastAnnualConsumptionVT + lastAnnualConsumptionNT;
-            return this.count(annualConsumption, lastAnnualConsumption);
+            if (lastAnnualConsumption !== annualConsumption) {
+                return this.count(annualConsumption, lastAnnualConsumption);
+            } else {
+                return `${this.decimalPipe.transform(annualConsumption, '1.0-3')} ${unit}`;
+            }
         }
 
         if (annualConsumptionVT && lastAnnualConsumptionVT && annualConsumptionVT !== lastAnnualConsumptionVT) {
@@ -45,6 +54,6 @@ export class ConsumptionIndicatorPipe implements PipeTransform {
             return this.count(annualConsumptionNT, lastAnnualConsumptionNT);
         }
 
-        return `${R.sum([annualConsumptionNT, annualConsumptionVT])} ${unit}`;
+        return `${this.decimalPipe.transform(R.sum([annualConsumptionNT, annualConsumptionVT]), '1.0-3')} ${unit}`;
     }
 }
