@@ -126,7 +126,10 @@ export class OfferService {
                     const { findSupplierOffers: offers } = cache.readQuery({ query: findSupplierOffersQuery });
                     const newFindSupplierOffers = R.map((mappingOffer) => {
                         if (offerIdString === mappingOffer.id) {
-                            mappingOffer.id = newOfferId;
+                            mappingOffer = {
+                                ...data.updatePowerOffer,
+                                marked: false,
+                            };
                         }
                         return mappingOffer;
                     })(offers);
@@ -157,7 +160,10 @@ export class OfferService {
                     const { findSupplierOffers: offers } = cache.readQuery({ query: findSupplierOffersQuery });
                     const newFindSupplierOffers = R.map((mappingOffer) => {
                         if (offerIdString === mappingOffer.id) {
-                            mappingOffer.id = newOfferId;
+                            mappingOffer = {
+                                ...data.updatePowerOffer,
+                                marked: false,
+                            };
                         }
                         return mappingOffer;
                     })(offers);
