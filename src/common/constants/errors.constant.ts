@@ -43,6 +43,7 @@ export const importErrorViolations = {
     'validFromMustNotBeNull': 'Doba validity nabídky od data nesmí být prázdná',
     'supplierIdMustNotBeNull': 'ID dodavatele nesmí být prázdné',
     'priceNTMustNotBeNull': 'Nízký tarif nesmí být prázdný',
+    'greenEnergyGasShouldBeFalse': 'Zelená energie není validní',
     'nameMustNotBeBlank': 'Název nesmí být prázdný',
     'invalidDistributionLocation': 'Zadané distribuční území je nevalidní',
     'invalidSubjectTypeId': 'Zadaný typ odběratele je nevalidní',
