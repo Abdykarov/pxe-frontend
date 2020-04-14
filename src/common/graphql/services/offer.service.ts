@@ -119,6 +119,27 @@ export class OfferService {
                 offer,
                 powerAttributes,
             },
+            update: (cache, {data}) => {
+                const offerIdString = String(offerId);
+                const newOfferId = data.updatePowerOffer.id;
+                if (newOfferId !== offerIdString) {
+                    const { findSupplierOffers: offers } = cache.readQuery({ query: findSupplierOffersQuery });
+                    const newFindSupplierOffers = R.map((mappingOffer) => {
+                        if (offerIdString === mappingOffer.id) {
+                            mappingOffer.id = newOfferId;
+                        }
+                        return mappingOffer;
+                    })(offers);
+                    cache.writeQuery({
+                        query: findSupplierOffersQuery,
+                        data: {
+                            findSupplierOffers: [
+                                ...newFindSupplierOffers,
+                            ],
+                        },
+                    });
+                }
+            },
         })
 
     public updateGasOffer = (offerId: number, offer: IOfferInput, gasAttributes: IOfferInputGasAttributes) => this.apollo
@@ -128,6 +149,27 @@ export class OfferService {
                 offerId,
                 offer,
                 gasAttributes,
+            },
+            update: (cache, {data}) => {
+                const offerIdString = String(offerId);
+                const newOfferId = data.updatePowerOffer.id;
+                if (newOfferId !== offerIdString) {
+                    const { findSupplierOffers: offers } = cache.readQuery({ query: findSupplierOffersQuery });
+                    const newFindSupplierOffers = R.map((mappingOffer) => {
+                        if (offerIdString === mappingOffer.id) {
+                            mappingOffer.id = newOfferId;
+                        }
+                        return mappingOffer;
+                    })(offers);
+                    cache.writeQuery({
+                        query: findSupplierOffersQuery,
+                        data: {
+                            findSupplierOffers: [
+                                ...newFindSupplierOffers,
+                            ],
+                        },
+                    });
+                }
             },
         })
 
