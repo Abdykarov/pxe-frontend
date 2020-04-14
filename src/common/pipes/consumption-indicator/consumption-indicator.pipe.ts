@@ -13,7 +13,7 @@ import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
     name: 'consumptionIndicator',
 })
 export class ConsumptionIndicatorPipe implements PipeTransform {
-    private allIsTruthy = (values) => R.all(R_.isTruthy)(values);
+    private allIsFilled = R.all(R_.isTruthy);
 
     constructor(
        private decimalPipe: DecimalPipe,
@@ -31,7 +31,7 @@ export class ConsumptionIndicatorPipe implements PipeTransform {
             lastAnnualConsumptionNT = null,
         } = data;
 
-        if (this.allIsTruthy([
+        if (this.allIsFilled([
             annualConsumptionVT,
             annualConsumptionNT,
             lastAnnualConsumptionVT,
