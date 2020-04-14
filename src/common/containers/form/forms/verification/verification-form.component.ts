@@ -1,6 +1,8 @@
 import {
     Component,
     Input,
+    OnChanges,
+    SimpleChanges,
     OnDestroy,
     TemplateRef,
 } from '@angular/core';
@@ -16,7 +18,7 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
     templateUrl: './verification-form.component.html',
     styleUrls: ['./verification-form.component.scss'],
 })
-export class VerificationFormComponent extends AbstractFormComponent implements OnDestroy {
+export class VerificationFormComponent extends AbstractFormComponent implements OnChanges, OnDestroy {
     @Input()
     public smsSent: number = null;
 
@@ -36,7 +38,13 @@ export class VerificationFormComponent extends AbstractFormComponent implements 
     public infoTemplate: TemplateRef<any>;
 
     @Input()
+    public labelInput = 'Kód z SMS';
+
+    @Input()
     public submitLabelText = 'Podepsat smlouvu';
+
+    @Input()
+    public showDisabledInput = true;
 
     @Input()
     public showSentSmsLabelUnderFirstField = true;
@@ -60,6 +68,14 @@ export class VerificationFormComponent extends AbstractFormComponent implements 
     ngOnDestroy() {
         super.ngOnDestroy();
         this.sAnalyticsService.sFormEnd();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        super.ngOnChanges(changes);
+        if (this.form && changes.smsSent && changes.smsSent.currentValue !== changes.smsSent.previousValue) {
+            this.form.reset();
+            this.resetFormError(false);
+        }
     }
 
     public submitValidForm = () => {

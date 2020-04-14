@@ -24,10 +24,6 @@
 				}
 			}
 
-			.accordion-benefit {
-				background-color: $body-bg;
-			}
-
 			.supply-point-offer__inner--price {
 				// Media queries
 				@include media-breakpoint-up(xl) {
@@ -84,7 +80,6 @@
 			padding-top: $spacer;
 
 			.supply-point-offer__title {
-				margin-bottom: ( $spacer * 1.5 );
 				font-size: $supply-point-label-font-size;
 
 				// Media queries
@@ -130,16 +125,19 @@
 	&__inner {
 		position: relative;
 		height: 100%;
-		padding: $supply-point-offer-inner-padding $supply-point-offer-inner-padding-horizontal-mobil $supply-point-offer-inner-padding-bottom;
+		padding: $supply-point-offer-inner-padding-mobil $supply-point-offer-inner-padding-horizontal-mobil;
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			padding: ( $spacer * 2.5 ) $supply-point-offer-inner-padding-horizontal ( $spacer * 1.5 );
+			padding: $supply-point-offer-inner-padding $supply-point-offer-inner-padding;
+		}
+
+		&--second {
+			background-color: rgba($body-bg, .5);
 		}
 
 		&--price {
 			padding-bottom: ( $spacer * 1.5 );
-			background-color: rgba($body-bg, .5);
 
 			.supply-point-offer__title {
 				// Media queries
@@ -149,7 +147,7 @@
 			}
 
 			.supply-point-offer__title {
-				margin-bottom: ( $spacer * 1.5 );
+				margin-bottom: 0;
 			}
 		}
 
@@ -165,11 +163,6 @@
 
 				// Media queries
 				@include media-breakpoint-up(md) {
-					top: 20px;
-					left: $supply-point-offer-inner-padding-horizontal;
-					width: calc( 100% - ( #{$supply-point-offer-inner-padding-horizontal} * 2 ) );
-				}
-				@include media-breakpoint-up(xl) {
 					display: none;
 				}
 			}
@@ -180,6 +173,15 @@
 	&__value {
 		font-size: $supply-point-label-font-size;
 		line-height: $supply-point-label-line-height;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			font-size: $supply-point-title-font-size;
+			line-height: $supply-point-title-line-height;
+		}
+		@include media-breakpoint-up(xl) {
+			font-size: $supply-point-offer-price-font-size-xl;
+		}
 	}
 
 	&__title-label,
@@ -195,23 +197,18 @@
 
 	&__title {
 		display: block;
-		margin-bottom: ( $spacer * 1.5 );
-
-		// Media queries
-		@include media-breakpoint-up(md) {
-			font-size: $supply-point-title-font-size;
-			line-height: $supply-point-title-line-height;
-		}
+		margin-bottom: ( $spacer * .75 );
 	}
 
 	&__info-icon {
-		margin-left: ( $spacer / 2 );
+		display: inline;
+		color: $primary;
 	}
 
 	&__value-box {
 		display: flex;
 		flex-direction: column;
-		margin-bottom: $spacer;
+		margin-bottom: ( $spacer * 1.5 );
 		margin-right: $spacer;
 
 		&--price {
@@ -238,33 +235,9 @@
 		}
 	}
 
-	&__green-box {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		color: $success;
-	}
-
-	&__green-icon {
-		margin-bottom: ( $spacer / 4 );
-		font-size: $icon-size-large-px;
-	}
-
-	&__green-text {
-		font-size: $small-font-size;
-		font-weight: 700;
-		line-height: $line-height-sm;
-		text-transform: uppercase;
-		text-align: center;
-	}
-
 	&__decomposition-title {
+		font-size: $supply-point-offer-decomposition-font-size;
 		text-transform: uppercase;
-
-		// Media queries
-		@include media-breakpoint-up(xl) {
-			font-size: $supply-point-offer-decomposition-font-size;
-		}
 	}
 
 	&__addon {
@@ -280,12 +253,19 @@
 		}
 	}
 
-	&__benefits-list {
-		padding: $supply-point-offer-inner-padding $supply-point-offer-inner-padding-horizontal-mobil 0;
+	&__benefits-description-wrapper {
+		display: flex;
+		align-items: center;
+		height: 100%;
+	}
 
-		// Media queries
-		@include media-breakpoint-up(md) {
-			padding: $spacer $supply-point-offer-inner-padding-horizontal 0;
-		}
+	&__benefits-description {
+		display: flex;
+	}
+
+	&__benefits-text {
+		display: inline-block;
+		margin-left: ( $spacer / 2 );
+		text-transform: uppercase;
 	}
 }

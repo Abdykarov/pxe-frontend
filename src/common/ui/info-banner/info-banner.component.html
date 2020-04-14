@@ -1,5 +1,9 @@
 <div class="info-banner">
-    <img alt="" class="info-banner__illustration" src="{{bannerType}}" title="">
+    <img *ngIf="bannerType !== BannerTypeImages.NONE"
+         alt=""
+         class="info-banner__illustration"
+         src="{{bannerType}}"
+         title="">
     <h2 class="info-banner__title"
         [innerHTML]="bannerTitle"></h2>
     <div *ngIf="bannerDescription"

@@ -7,6 +7,8 @@ import {
     Component,
     Inject,
     PLATFORM_ID,
+    ElementRef,
+    OnInit,
 } from '@angular/core';
 import {
     NavigationEnd,
@@ -23,8 +25,9 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
     styleUrls: ['./app.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     constructor(
+        private elementRef: ElementRef,
         private gtmService: GTMService,
         private router: Router,
         private sAnalyticsService: SAnalyticsService,
@@ -59,6 +62,12 @@ export class AppComponent {
                     // gaService.gtm(event);
                 }
             });
+        }
+    }
+
+    ngOnInit(): void {
+        if (environment.production) {
+            this.elementRef.nativeElement.removeAttribute('ng-version');
         }
     }
 }

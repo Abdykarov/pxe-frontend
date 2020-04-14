@@ -19,6 +19,13 @@
 		display: block;
 	}
 
+	.field-wrapper-content {
+		.form-control-wrapper.invalid-input ~ .invalid-feedback,
+		.invalid-feedback {
+			display: none;
+		}
+	}
+
 	&-with-label {
 		.control-label {
 			z-index: $zindex-field-wrapper-control-label;
@@ -26,9 +33,7 @@
 
 		.field-wrapper-content {
 			label,
-			.input-subtext,
-			.form-control-wrapper.invalid-input ~ .invalid-feedback,
-			.invalid-feedback {
+			.input-subtext {
 				display: none;
 			}
 		}

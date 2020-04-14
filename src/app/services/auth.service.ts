@@ -52,7 +52,6 @@ export class AuthService {
     private cookieName = 'user';
     private currentUserSubject$: BehaviorSubject<IJwtPayload>;
     public currentUser$: Observable<IJwtPayload>;
-    private expiresTime = new Date().getTime() + (CONSTS.DEFAULT_EXPIRATION * 1000);
     private token: string;
     private uuid: string = null;
     private sessionUuid: string = null;
@@ -222,7 +221,8 @@ export class AuthService {
             if (window.sessionStorage) {
                 window.sessionStorage.setItem('uuid', uuid);
             }
-            this.cookiesService.setObject(this.cookieName, user, this.expiresTime);
+            const expiration = new Date().getTime() + CONSTS.DEFAULT_EXPIRATION;
+            this.cookiesService.setObject(this.cookieName, user, expiration);
             this.checkLogin();
             this.currentUserSubject$.next(jwtPayload);
         }
@@ -271,13 +271,15 @@ export class AuthService {
         });
     }
 
-    public getAuthorizationHeaders = (contentType: string = null, accept: string = '*/*'): HttpHeaders =>
-        new HttpHeaders({
-            'Authorization': 'Bearer ' + this.getToken(),
-            ...(contentType) && {'Content-Type': contentType},
+    public getAuthorizationHeaders = (contentType: string = null, accept: string = '*/*'): HttpHeaders => {
+        const token = this.getToken();
+        return new HttpHeaders({
+            ...(!!token) && {Authorization: `Bearer ${token}`},
+            ...(!!contentType) && {'Content-Type': contentType},
             'X-API-Key': `${environment.x_api_key}`,
             accept,
-        })
+        });
+    }
 
     public homeRedirect = () => {
         if (!this.isLogged()) {

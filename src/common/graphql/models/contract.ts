@@ -7,6 +7,7 @@ export interface IContract {
     deliveryFrom?: string;
     deliveryTo?: string;
     offer?: IOffer;
+    prolong?: boolean;
     personalData?: IPersonalData;
     offerValidity: Boolean;
     __typename?: string;

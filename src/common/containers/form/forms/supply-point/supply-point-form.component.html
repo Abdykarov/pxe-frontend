@@ -203,9 +203,9 @@
             </div>
         </pxe-field-wrapper>
         <lnd-form-field
+            *ngIf="form.controls.annualConsumptionNT.status !== 'DISABLED'"
             lndSFormDirective
             lndSBiometricsDirective
-            *ngIf="form.controls.annualConsumptionNT.status !== 'DISABLED'"
             [appendButtonIcon]="helpDocuments && helpDocuments['annualConsumptionNT'] ? 'icon--info' : null"
             (appendButtonAction)="showHelp('annualConsumptionNT', 'Roční spotřeba - nízký tarif')"
             [error]="formError.annualConsumptionNT || form.controls.annualConsumptionNT.errors"
@@ -219,9 +219,9 @@
             [validationMessages]="formFields.validationMessages.annualConsumptionNT"
         ></lnd-form-field>
         <lnd-form-field
+            *ngIf="form.controls.annualConsumptionVT.status !== 'DISABLED'"
             lndSFormDirective
             lndSBiometricsDirective
-            *ngIf="form.controls.annualConsumptionVT.status !== 'DISABLED'"
             [appendButtonIcon]="helpDocuments && helpDocuments['annualConsumptionVT'] ? 'icon--info' : null"
             (appendButtonAction)="showHelp('annualConsumptionVT', 'Roční spotřeba - vysoký tarif')"
             [error]="formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors"
@@ -235,9 +235,9 @@
             [validationMessages]="formFields.validationMessages.annualConsumptionVT"
         ></lnd-form-field>
         <lnd-form-field
+            *ngIf="form.controls.annualConsumption.status !== 'DISABLED'"
             lndSFormDirective
             lndSBiometricsDirective
-            *ngIf="form.controls.annualConsumption.status !== 'DISABLED'"
             [appendButtonIcon]="helpDocuments && helpDocuments['annualConsumption'] ? 'icon--info' : null"
             (appendButtonAction)="showHelp('annualConsumption', 'Roční spotřeba')"
             [error]="formError.annualConsumption || form.controls.annualConsumption.errors"

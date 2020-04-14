@@ -4,6 +4,7 @@ export * from './create-string-from-template.fnc';
 export * from './get-progress-stepper-config.fnc';
 export * from './get-error-message.fnc';
 export * from './in-array';
+export * from './any-to-string';
 export * from './includes-both-tariffs.fnc';
 export * from './is-router-link.fnc';
 export * from './is-user-name.fnc';
