@@ -8,7 +8,7 @@ export class SupplyPointsBannerPageComponent {
 
     public bannerDescription = 'Zadejte odběrné místo a my vám hned dáme nabídky';
 
-    public buttonLabel = 'Zadat odběrné místo';
+    public buttonLabel = 'Nové odběrné místo';
 
     public clicked = (evt) => {
         evt.preventDefault();

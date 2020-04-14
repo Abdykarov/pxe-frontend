@@ -8,6 +8,7 @@ import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
     ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],
+    CONTRACT_SIGN_NUMBER_OF_RETRY: 3,
     CURRENCY: {
         DEFAULT: 'CZK',
     },
@@ -486,6 +487,8 @@ export const REGIONS: Array<IOption> = [
 export const OPERATIONS_WITHOUT_SCROLL_ON_ERRORS = [
     'getSupplyPointGlobalStatistics',
     'makeRegistration',
+    'savePowerOffer',
+    'saveGasOffer',
     'sendChangePhoneNumberSmsMutation',
 ];
 
