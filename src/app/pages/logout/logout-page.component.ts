@@ -52,11 +52,14 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
             .subscribe(
                 () => {
                     this.apolloService.resetStore().then(() => {
+                        const reasonForLogoutUserValue = this.state.isFromUnauthorized ?
+                            CONSTS.REASON_FOR_LOGOUT_USER.UNAUTHORIZED : CONSTS.REASON_FOR_LOGOUT_USER.BY_SELF;
+                        const reasonForLogoutUserTime = new Date().getTime() + CONSTS.COOKIE_TEMPORARY_EXPIRATION;
+
                         this.cookieService.set(
                             'reasonForLogoutUser',
-                            this.state.isFromUnauthorized ?
-                                CONSTS.REASON_FOR_LOGOUT_USER.UNAUTHORIZED : CONSTS.REASON_FOR_LOGOUT_USER.BY_SELF,
-                            new Date().getTime() + CONSTS.COOKIE_TEMPORARY_EXPIRATION,
+                            reasonForLogoutUserValue,
+                            reasonForLogoutUserTime,
                         );
 
                         this.router.navigate(

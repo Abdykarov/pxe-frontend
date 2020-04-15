@@ -42,14 +42,14 @@ export class PluralPipe implements PipeTransform {
             'other' : 'hodin',
         },
         'minute': {
-            '=1' : 'minuta',
+            '=1' : 'minutu',
             '=2' : 'minuty',
             '=3' : 'minuty',
             '=4' : 'minuty',
             'other' : 'minut',
         },
         'sec': {
-            '=1' : 'sekunda',
+            '=1' : 'sekundu',
             '=2' : 'sekundy',
             '=3' : 'sekundy',
             '=4' : 'sekundy',

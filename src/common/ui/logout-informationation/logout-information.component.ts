@@ -22,11 +22,11 @@ import { AuthService } from 'src/app/services/auth.service';
 import { AbstractComponent } from 'src/common/abstract.component';
 
 @Component({
-    selector: 'pxe-logout-in-information',
-    templateUrl: './logout-in-information.component.html',
+    selector: 'pxe-logout-information',
+    templateUrl: './logout-information.component.html',
 })
-export class LogoutInInformationComponent extends AbstractComponent {
-    public readonly SHOW_USER_WILL_BE_LOGOUT_INTERVAL_IN_SECONDS = CONSTS.SHOW_USER_WILL_BE_LOGOUT_INTERVAL_IN_SECONDS;
+export class LogoutInformationComponent extends AbstractComponent {
+    public readonly TIME_TO_SHOW_USER_LOGOUT_BANNER = CONSTS.TIME_TO_SHOW_USER_LOGOUT_BANNER;
 
     public tokenWillExpireInSeconds = -1;
 

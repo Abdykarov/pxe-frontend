@@ -54,7 +54,7 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
             scrollToService,
         );
 
-        if (this.authService.isLogged() && !this.router.url.includes(CONSTS.PATHS.LOGOUT)) {
+        if (this.authService.isLogged() && this.router.url.indexOf(CONSTS.PATHS.LOGOUT) <= -1) {
             this.authService.logoutForced();
         }
 

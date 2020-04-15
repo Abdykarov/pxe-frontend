@@ -4,11 +4,11 @@ import { PipesModule } from 'src/common/pipes/pipes.module';
 
 // own components
 import { BannerUIModule } from 'src/common/ui/banner/banner-ui.module';
-import { LogoutInInformationComponent } from './logout-in-information.component';
+import { LogoutInformationComponent } from './logout-information.component';
 
 @NgModule({
     declarations: [
-        LogoutInInformationComponent,
+        LogoutInformationComponent,
     ],
     imports: [
         BannerUIModule,
@@ -16,7 +16,7 @@ import { LogoutInInformationComponent } from './logout-in-information.component'
         PipesModule,
     ],
     exports: [
-        LogoutInInformationComponent,
+        LogoutInformationComponent,
     ],
 })
-export class LogoutInInformationModule {}
+export class LogoutInformationModule {}

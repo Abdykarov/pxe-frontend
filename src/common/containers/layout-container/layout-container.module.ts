@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { BannerUIModule } from 'src/common/ui/banner/banner-ui.module';
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { LayoutContainerComponent } from './layout-container.component';
-import { LogoutInInformationModule } from 'src/common/ui/logout-in-informationation/logout-in-information.module';
+import { LogoutInformationModule } from 'src/common/ui/logout-informationation/logout-information.module';
 
 @NgModule({
     declarations: [
@@ -17,7 +17,7 @@ import { LogoutInInformationModule } from 'src/common/ui/logout-in-informationat
         BannerUIModule,
         BreadcrumbModule,
         CommonModule,
-        LogoutInInformationModule,
+        LogoutInformationModule,
     ],
 })
 export class LayoutContainerModule { }

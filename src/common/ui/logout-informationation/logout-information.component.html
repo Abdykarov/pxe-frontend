@@ -1,5 +1,5 @@
 <lnd-banner-ui
-    *ngIf="tokenWillExpireInSeconds < SHOW_USER_WILL_BE_LOGOUT_INTERVAL_IN_SECONDS &&
+    *ngIf="tokenWillExpireInSeconds < TIME_TO_SHOW_USER_LOGOUT_BANNER &&
     tokenWillExpireInSeconds > 0 && authService.isLastRefreshToken"
     [data]="{
         linkValue: '#',

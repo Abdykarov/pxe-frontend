@@ -20,7 +20,7 @@ export class LogoutInInformationPipe implements PipeTransform {
         let minText = '';
 
         if (minutes !== 0) {
-            minText = minutes + ' ' + this.pluralPipe.transform(minutes, 'minute');
+            minText = `${minutes} ${this.pluralPipe.transform(minutes, 'minute')}`;
             text = minText;
         }
 
@@ -29,7 +29,7 @@ export class LogoutInInformationPipe implements PipeTransform {
         }
 
         if (sec !== 0) {
-            secText = sec + ' ' + this.pluralPipe.transform(sec, 'sec');
+            secText = `${sec} ${this.pluralPipe.transform(sec, 'sec')}`;
             text += secText;
         }
 
