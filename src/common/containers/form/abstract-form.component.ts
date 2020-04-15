@@ -18,7 +18,10 @@ import { BehaviorSubject } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { CONSTS } from 'src/app/app.constants';
-import { isUserName } from 'src/common/utils';
+import {
+    isUserName,
+    scrollToWithOffsetFnc,
+} from 'src/common/utils';
 import {
     IFieldError,
     IForm,
@@ -90,6 +93,8 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         this.triggerValidation();
         if (this.form.valid) {
             this.submitValidForm();
+        } else {
+            scrollToWithOffsetFnc('.invalid-input', CONSTS.OFFSET_ERRORS.INVALID_INPUT);
         }
     }
 

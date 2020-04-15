@@ -12,6 +12,7 @@ export * from './parse-graphql-errors.fnc';
 export * from './parse-rest-erros.fnc';
 export * from './parse-violation.fnc';
 export * from './scroll-to-element.fnc';
+export * from './scroll-to-with-offset.fnc';
 export * from './transform-code-list.fnc';
 export * from './transform-http-headers-to-file-uploader-format.fnc';
 export * from './transform-suppliers.fnc';

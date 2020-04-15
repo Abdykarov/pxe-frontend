@@ -7,14 +7,20 @@ import { BatchHttpLink } from 'apollo-link-batch-http';
 import { onError } from 'apollo-link-error';
 
 import * as R from 'ramda';
-import { CONSTS } from 'src/app/app.constants';
+import fetch from 'unfetch';
 
 import { AuthService } from 'src/app/services/auth.service';
+import {
+    CONSTS,
+    OPERATIONS_WITHOUT_SCROLL_ON_ERRORS,
+} from 'src/app/app.constants';
 import { clientSchema } from 'src/common/graphql/middleware/client-schema';
-import { scrollToElementFnc } from 'src/common/utils';
+import { scrollToWithOffsetFnc } from 'src/common/utils';
 import { environment } from 'src/environments/environment';
-import fetch from 'unfetch';
-import { defaults, resolvers } from '../resolvers/';
+import {
+    defaults,
+    resolvers,
+} from '../resolvers/';
 
 const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
@@ -103,27 +109,18 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
 
 
         if (graphQLErrors || networkError) {
-            setTimeout(() => {
-                const globalErrorDanger = document.getElementsByClassName('alert-danger')[0];
-                if (globalErrorDanger) {
-                    globalErrorDanger.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start',
-                    });
-                }
+            if (!OPERATIONS_WITHOUT_SCROLL_ON_ERRORS.includes(operation.operationName)) {
+                setTimeout(() => {
+                    const globalErrorDanger = document.getElementsByClassName('alert-danger')[0];
+                    if (globalErrorDanger) {
+                        scrollToWithOffsetFnc( globalErrorDanger, CONSTS.OFFSET_ERRORS.ALERT_DANGER);
+                    }
 
-                const invalidInput = document.getElementsByClassName('invalid-input')[0];
-                if (!globalErrorDanger && invalidInput) {
-                    invalidInput.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start',
-                    });
-                }
-            });
-            // TODO scroll to error (global or field)
-            // if (!OPERATIONS_WITHOUT_SCROLL_ON_ERRORS.includes(operation.operationName)) {
-            //     scrollToElementFnc('top');
-            // }
+                    if (!globalErrorDanger ) {
+                        scrollToWithOffsetFnc('.invalid-input', CONSTS.OFFSET_ERRORS.INVALID_INPUT);
+                    }
+                });
+            }
         }
         // response.errors = null;
     });
