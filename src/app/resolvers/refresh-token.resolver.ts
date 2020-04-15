@@ -6,10 +6,6 @@ import {
 import { Injectable } from '@angular/core';
 
 import {
-    catchError,
-    tap,
-} from 'rxjs/operators';
-import {
     Observable,
     of,
 } from 'rxjs';
