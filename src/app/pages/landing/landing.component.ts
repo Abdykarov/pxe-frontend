@@ -112,24 +112,28 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
             .pipe(takeUntil(this.destroy$))
             .subscribe(_  => {
                 this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
-                this.autoPlayUnsupportedBrowsers();
+                this.autoPlayVideoInAllBrowsers();
                 this.cd.markForCheck();
             });
     }
 
-    autoPlayUnsupportedBrowsers = () => {
+    autoPlayVideoInAllBrowsers = () => {
         if (this.isMoreThanXlResolution) {
-            const video = <any>document.getElementsByTagName('video')[0];
-            if (video) {
-                video.pause();
-                video.play();
+            const myVideo = document.querySelector('video');
+            const promise = myVideo.play();
+            if (promise !== undefined) {
+                promise.then(_ => ({}))
+                    .catch(error => {
+                        myVideo.muted = true;
+                        myVideo.play();
+                    });
             }
         }
     }
 
     ngAfterViewInit() {
         if (isPlatformBrowser(this.platformId)) {
-            this.autoPlayUnsupportedBrowsers();
+            this.autoPlayVideoInAllBrowsers();
             this.cd.markForCheck();
         }
     }
