@@ -4,6 +4,7 @@ import {
     Input,
     OnInit,
 } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 import {
     FormBuilder,
     Validators,
@@ -15,6 +16,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { AddressWhispererComponent } from 'src/common/containers/address-whisperer/address-whisperer.component';
+import { AuthService } from 'src/app/services/auth.service';
 import {
     CODE_LIST,
     CONSTS,
@@ -59,6 +61,8 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     public minDate: Date = new Date(CONSTS.VALIDATORS.MIN_BIRTH_DATE);
 
     constructor(
+        private authService: AuthService,
+        private decimalPipe: DecimalPipe,
         protected fb: FormBuilder,
     ) {
         super(fb);
@@ -100,6 +104,13 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
 
         if (this.formValues) {
             this.prefillFormData();
+        } else {
+            const email = this.authService.currentUserValue.email;
+            const deposit = this.supplyPoint.contract.offer.totalPrice;
+            this.form.controls['email'].setValue(email);
+            this.form.controls['deposit'].setValue(
+                this.decimalPipe.transform(deposit, '1.0-0').replace(' ', ''),
+            );
         }
     }
 
@@ -131,6 +142,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         let deposit = null;
         let address1 = null;
         let address2 = null;
+
         if (this.formValues) {
             name = this.formValues.name;
             if (this.formValues.birthDate) {
