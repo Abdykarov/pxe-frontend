@@ -220,11 +220,10 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                             .valueChanges
                             .pipe(
                                 takeUntil(this.destroy$),
-                                filter(_ => !this.existsPartialSupplyPointValue),
+                                filter(_ => !this.existsPartialSupplyPointValue && R.empty(this.formValues)),
                             )
                             .subscribe(_ => {
                                 const formValues = this.form.getRawValue();
-
                                 this.supplyPointLocalStorageService.updateSupplyPoint(formValues);
                             });
 
@@ -241,6 +240,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                                         }
 
                                         this.form.setValue(supplyPointForm);
+                                        this.resetFormError(false);
                                     }
                                 } catch (e) {}
                             });

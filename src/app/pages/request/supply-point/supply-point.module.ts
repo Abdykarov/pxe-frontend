@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { BannerUIModule } from 'src/common/ui/banner/banner-ui.module';
+import { ButtonModule } from 'src/common/ui/button/button.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 import { NewSupplyPointRoutingModule } from './supply-point.routing';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
@@ -16,6 +17,7 @@ import { SupplyPointComponent } from './supply-point.component';
     ],
     imports: [
         BannerUIModule,
+        ButtonModule,
         CommonModule,
         LayoutContainerModule,
         NewSupplyPointRoutingModule,

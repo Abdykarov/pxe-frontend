@@ -10,17 +10,11 @@
     <div class="banner__controls"
         *ngIf="showButtonLabel">
         <lnd-button
-            [class.mb-2]="showSecondButtonLabel"
+            *ngIf="!buttonsTemplate"
             label="{{buttonLabel}}"
             (action)="data.linkValue ? bannerAction(data.linkValue, data.linkType, data.linkData) : customBannerAction.emit($event)"
             type="white">
         </lnd-button>
-        <lnd-button
-            class="ml-3"
-            *ngIf="showSecondButtonLabel"
-            label="{{secondButtonLabel}}"
-            (action)="data.secondLinkValue ? bannerAction(data.secondLinkValue, data.secondLinkType, data.secondLinkData) : customSecondBannerAction.emit($event)"
-            type="white">
-        </lnd-button>
+        <ng-container *ngTemplateOutlet="buttonsTemplate"></ng-container>
     </div>
 </div>
