@@ -120,9 +120,7 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
                     const globalErrorDanger = document.getElementsByClassName('alert-danger')[0];
                     if (globalErrorDanger) {
                         scrollToWithOffsetFnc( globalErrorDanger, CONSTS.OFFSET_ERRORS.ALERT_DANGER);
-                    }
-
-                    if (!globalErrorDanger ) {
+                    } else {
                         scrollToWithOffsetFnc('.invalid-input', CONSTS.OFFSET_ERRORS.INVALID_INPUT);
                     }
                 });
