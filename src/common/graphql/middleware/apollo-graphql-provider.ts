@@ -112,7 +112,13 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
                     });
                 }
 
-                console.log(globalErrorDanger);
+                const invalidInput = document.getElementsByClassName('invalid-input')[0];
+                if (!globalErrorDanger && invalidInput) {
+                    invalidInput.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start',
+                    });
+                }
             });
             // TODO scroll to error (global or field)
             // if (!OPERATIONS_WITHOUT_SCROLL_ON_ERRORS.includes(operation.operationName)) {
