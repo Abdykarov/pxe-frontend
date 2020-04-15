@@ -1,5 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
+    AfterViewInit,
     ChangeDetectorRef,
     Component,
     ElementRef,
@@ -43,7 +44,7 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 @Component({
     templateUrl: './landing.component.html',
 })
-export class LandingComponent extends AbstractComponent {
+export class LandingComponent extends AbstractComponent implements AfterViewInit {
 
     @ViewChild('subscription')
     public subscriptionElement: ElementRef;
@@ -79,11 +80,7 @@ export class LandingComponent extends AbstractComponent {
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
-        if (isPlatformBrowser(this.platformId)) {
-            this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
-            this.autoPlayUnsupportedBrowsers();
-            this.cd.markForCheck();
-        }
+        this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
 
         this.titleService.setTitle(CONSTS.TITLES.LANDING_PAGE);
         this.metaService.updateTag({
@@ -120,12 +117,20 @@ export class LandingComponent extends AbstractComponent {
             });
     }
 
-    private autoPlayUnsupportedBrowsers = () => {
+    autoPlayUnsupportedBrowsers = () => {
         if (this.isMoreThanXlResolution) {
-            const video = <any>document.querySelector('video[muted][autoplay]');
+            const video = <any>document.getElementsByTagName('video')[0];
             if (video) {
+                video.pause();
                 video.play();
             }
+        }
+    }
+
+    ngAfterViewInit() {
+        if (isPlatformBrowser(this.platformId)) {
+            this.autoPlayUnsupportedBrowsers();
+            this.cd.markForCheck();
         }
     }
 
