@@ -21,12 +21,12 @@ import {
     OPERATIONS_WITHOUT_SCROLL_ON_ERRORS,
 } from 'src/app/app.constants';
 import { clientSchema } from 'src/common/graphql/middleware/client-schema';
-import { scrollToWithOffsetFnc } from 'src/common/utils';
-import { environment } from 'src/environments/environment';
 import {
     defaults,
     resolvers,
 } from '../resolvers/';
+import { environment } from 'src/environments/environment';
+import { scrollToWithOffsetFnc } from 'src/common/utils';
 
 const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
