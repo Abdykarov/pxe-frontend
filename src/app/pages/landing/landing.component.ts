@@ -80,7 +80,9 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
-        this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+        if (isPlatformBrowser(this.platformId)) {
+            this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+        }
 
         this.titleService.setTitle(CONSTS.TITLES.LANDING_PAGE);
         this.metaService.updateTag({

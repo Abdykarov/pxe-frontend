@@ -67,7 +67,7 @@ export class LandingComponent extends AbstractComponent {
         this.resizeEvent$
             .pipe(takeUntil(this.destroy$))
             .subscribe(_  =>
-                    this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION,
+                this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION,
             );
     }
 
