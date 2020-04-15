@@ -29,6 +29,7 @@ import {
     CONSTS,
     CONTRACT_END_TYPE,
     CONTRACT_END_TYPE_ORDER,
+    OWN_TERMINATE_OPTIONS,
     SUBJECT_TYPE_OPTIONS,
     SUBJECT_TYPE_TO_DIST_RATE_MAP,
     SUPPLY_POINT_EDIT_TYPE,
@@ -77,6 +78,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public commodityType = CommodityType.POWER;
     public CommodityTypes = CommodityType;
     public commodityTypeOptions: Array<IOption> = COMMODITY_TYPE_OPTIONS;
+    public ownTerminateOptions: Array<IOption> = OWN_TERMINATE_OPTIONS;
     public contractEndType = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT;
     public distributionRateType: string = CODE_LIST.DIST_RATE_INDIVIDUAL;
     public expirationConfig = expirationConfig;

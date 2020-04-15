@@ -278,11 +278,12 @@
             Jak vypovíte stávající smlouvu?
         </label>
         <lnd-form-field
-            [id]="'ownTerminate'"
-            label="Vypovím si sám (sama)"
-            [type]="'CHECKBOX'"
-            [customFormGroupClass]="'mb-5'"
             [formControl]="form.controls.ownTerminate"
+            [id]="'ownTerminate'"
+            label=""
+            [type]="'RADIOGROUP'"
+            [customFormGroupClass]="'mb-5'"
+            [options]="ownTerminateOptions"
         ></lnd-form-field>
         <lnd-form-field
             *ngIf="form.controls.contractEndTypeId.status !== 'DISABLED'"

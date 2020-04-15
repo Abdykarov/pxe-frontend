@@ -337,6 +337,17 @@ export const SUBJECT_TYPE_OPTIONS: Array<IOption> = [
     },
 ];
 
+export const OWN_TERMINATE_OPTIONS: Array<IOption> = [
+    {
+        key: false,
+        label: 'Chci, aby výpověď zajistil nový dodavatel',
+    },
+    {
+        key: true,
+        label: 'Vypovím si sám (sama)',
+    },
+];
+
 export const COMMODITY_TYPE_OPTIONS: Array<IOption> = [
     {
         key: CommodityType.POWER,
