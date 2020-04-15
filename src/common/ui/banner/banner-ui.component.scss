@@ -10,9 +10,7 @@
 
 .banner {
 	position: relative;
-	display: flex;
-	flex-direction: column;
-	padding: ( $spacer * 1.5 );
+	padding: $spacer ( $spacer * 1.5 );
 	margin-bottom: $spacer;
 	background-color: $secondary;
 	color: $white;
@@ -20,10 +18,7 @@
 
 	// Media queries
 	@include media-breakpoint-up(md) {
-		flex-direction: row;
-		align-items: center;
-		justify-content: space-between;
-		padding: ( $spacer * 2.5 ) ( $spacer * 3 );
+		padding: ( $spacer * 2 ) ( $spacer * 3 );
 	}
 
 	&__content {
@@ -34,7 +29,7 @@
 		// Media queries
 		@include media-breakpoint-up(md) {
 			margin-bottom: 0;
-			margin-right: $spacer;
+			margin-right: ( $spacer * 2.5 );
 		}
 	}
 
@@ -43,6 +38,7 @@
 	}
 
 	&__controls {
+		margin-top: ( $spacer / 2 );
 		text-align: right;
 
 		// Media queries
