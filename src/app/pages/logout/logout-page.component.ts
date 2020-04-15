@@ -51,6 +51,7 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 () => {
+                    this.authService.isLastRefreshToken = false;
                     this.apolloService.resetStore().then(() => {
                         const reasonForLogoutUserValue = this.state.isFromUnauthorized ?
                             CONSTS.REASON_FOR_LOGOUT_USER.UNAUTHORIZED : CONSTS.REASON_FOR_LOGOUT_USER.BY_SELF;
