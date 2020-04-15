@@ -1,5 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
+    AfterViewInit,
     ChangeDetectorRef,
     Component,
     ElementRef,
@@ -43,7 +44,7 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 @Component({
     templateUrl: './landing.component.html',
 })
-export class LandingComponent extends AbstractComponent {
+export class LandingComponent extends AbstractComponent implements AfterViewInit {
 
     @ViewChild('subscription')
     public subscriptionElement: ElementRef;
@@ -79,11 +80,7 @@ export class LandingComponent extends AbstractComponent {
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
-        if (isPlatformBrowser(this.platformId)) {
-            this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
-            this.autoPlayUnsupportedBrowsers();
-            this.cd.markForCheck();
-        }
+        this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
 
         this.titleService.setTitle(CONSTS.TITLES.LANDING_PAGE);
         this.metaService.updateTag({
@@ -115,17 +112,29 @@ export class LandingComponent extends AbstractComponent {
             .pipe(takeUntil(this.destroy$))
             .subscribe(_  => {
                 this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
-                this.autoPlayUnsupportedBrowsers();
+                this.autoPlayVideoInAllBrowsers();
                 this.cd.markForCheck();
             });
     }
 
-    private autoPlayUnsupportedBrowsers = () => {
+    autoPlayVideoInAllBrowsers = () => {
         if (this.isMoreThanXlResolution) {
-            const video = <any>document.querySelector('video[muted][autoplay]');
-            if (video) {
-                video.play();
+            const myVideo = document.querySelector('video');
+            const promise = myVideo.play();
+            if (promise !== undefined) {
+                promise.then(_ => ({}))
+                    .catch(error => {
+                        myVideo.muted = true;
+                        myVideo.play();
+                    });
             }
+        }
+    }
+
+    ngAfterViewInit() {
+        if (isPlatformBrowser(this.platformId)) {
+            this.autoPlayVideoInAllBrowsers();
+            this.cd.markForCheck();
         }
     }
 
