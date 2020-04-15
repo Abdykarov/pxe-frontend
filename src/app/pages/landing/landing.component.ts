@@ -120,7 +120,7 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
     autoPlayVideoInAllBrowsers = () => {
         if (this.isMoreThanXlResolution) {
             const myVideo = document.querySelector('video');
-            const promise = myVideo.play();
+            const promise = myVideo && myVideo.play();
             if (promise !== undefined) {
                 promise.then(_ => ({}))
                     .catch(error => {
