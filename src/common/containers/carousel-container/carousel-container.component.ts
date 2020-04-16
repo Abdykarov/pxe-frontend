@@ -27,7 +27,7 @@ export class CarouselContainerComponent extends AbstractComponent {
     public readonly carouselItems: ICarouselItem[] = [
         {
             title: 'Nejdříve se seznámíme',
-            label: 'Představíte sebe i vaše odběrné místo nebo nahrajete fakturu, ať máme potřebné informace.',
+            label: 'Představíte nám vaše odběrné místo a základní informace o vaší aktuální smlouvě s dodavatelem.',
             alt: 'carousel obrázek - drag and drop funkce',
             src: '/assets/images/landing-page/laptop-dragdrop.png',
         },
@@ -38,8 +38,8 @@ export class CarouselContainerComponent extends AbstractComponent {
             src: '/assets/images/landing-page/laptop-offers.png',
         },
         {
-            title: 'Vyberete si a je to',
-            label: 'Nejlákavější nabídku potvrdíte jedním kliknutím a potřebný převod už za vás zařídíme my.',
+            title: 'Vyberete si a podepíšete smlouvu',
+            label: 'Nejlákavější nabídku potvrdíte jedním kliknutím, doplníte nám základní informace o majiteli odběrného místa a smlouvu online podepíšete.',
             alt: 'carousel obrázek - skvělý přehled',
             src: '/assets/images/landing-page/laptop-overview.png',
         },
