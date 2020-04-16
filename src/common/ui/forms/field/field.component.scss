@@ -20,6 +20,24 @@
 	margin: 0 auto;
 }
 
+.form-control-info-wrapper {
+	width: 100%;
+
+	// Media queries
+	@include media-breakpoint-up(md) {
+		width: 150%;
+		margin-left: 220px;
+	}
+}
+
+.form-control-info {
+	display: inline-block;
+	padding: ( $spacer / 2 ) $spacer;
+	background-color: $secondary;
+	color: $white;
+	border-radius: 3px 3px 3px 0;
+}
+
 .form-group {
 	position: relative;
 
