@@ -1,22 +1,13 @@
-<lnd-carousel
-    *ngIf="isBrowser; else carouselSSR"
-    [carouselItems]="carouselItems"
-    [interval]="intervalBetweenSliders">
-</lnd-carousel>
 <ng-template #carouselSSR>
     <div class="carousel slide">
         <ol class="carousel-indicators">
             <li *ngFor="let item of carouselItems"></li>
         </ol>
         <div *ngFor="let item of carouselItems"
-            class="carousel-inner"
-             style="display: block;"
-        >
+             class="carousel-inner d-block">
             <div
                 aria-hidden="true"
-                class="item carousel-item"
-                style="width: 100%; order: 0;"
-            >
+                class="item carousel-item w-100 d-none">
                 <div class="item">
                     <div class="row no-gutters align-items-center">
                         <div class="col-12 col-md-6 offset-md-1 order-md-2">
@@ -34,13 +25,11 @@
                 </div>
             </div>
         </div>
-        <a class="left carousel-control carousel-control-prev">
-            <span aria-hidden="true" class="icon-prev carousel-control-prev-icon"></span>
-            <span class="sr-only">Předchozí</span>
-        </a>
-        <a class="right carousel-control carousel-control-next">
-            <span aria-hidden="true" class="icon-next carousel-control-next-icon"></span>
-            <span class="sr-only">Další</span>
-        </a>
     </div>
 </ng-template>
+
+<lnd-carousel
+    *ngIf="isBrowser; else carouselSSR"
+    [carouselItems]="carouselItems"
+    [interval]="intervalBetweenSliders">
+</lnd-carousel>
