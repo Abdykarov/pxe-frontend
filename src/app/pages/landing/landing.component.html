@@ -108,9 +108,7 @@
     <div class="section section--carousel section--arrow">
         <div class="row no-gutters">
             <div class="col-12">
-                <ng-container *ngIf="isBrowser; else carouselStatic">
-                    <pxe-carousel-container></pxe-carousel-container>
-                </ng-container>
+                <pxe-carousel-container *ngIf="isBrowser; else carouselStatic"></pxe-carousel-container>
                 <ng-template #carouselStatic>
                     <div class="carousel slide">
                         <ol class="carousel-indicators">
