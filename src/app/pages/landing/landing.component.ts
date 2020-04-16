@@ -1,4 +1,3 @@
-import { isPlatformBrowser } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectorRef,
@@ -8,12 +7,14 @@ import {
     PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import {
     Meta,
     Title,
 } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
+import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 import {
     debounceTime,
@@ -80,7 +81,9 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
-        this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+        if (isPlatformBrowser(this.platformId)) {
+            this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+        }
 
         this.titleService.setTitle(CONSTS.TITLES.LANDING_PAGE);
         this.metaService.updateTag({
@@ -120,9 +123,9 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
     autoPlayVideoInAllBrowsers = () => {
         if (this.isMoreThanXlResolution) {
             const myVideo = document.querySelector('video');
-            const promise = myVideo.play();
-            if (promise !== undefined) {
-                promise.then(_ => ({}))
+            const playPromise = myVideo && myVideo.play();
+            if (!R.isNil(playPromise)) {
+                playPromise.then(_ => ({}))
                     .catch(error => {
                         myVideo.muted = true;
                         myVideo.play();
