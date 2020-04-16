@@ -16,6 +16,7 @@ import {
 } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
+import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 import { GTMService } from './services/gtm.service';
 
 @Component({
@@ -28,11 +29,19 @@ export class AppComponent implements OnInit {
     constructor(
         private elementRef: ElementRef,
         private gtmService: GTMService,
+        private onlyOneTabActiveService: OnlyOneTabActiveService,
         private router: Router,
         @Inject(DOCUMENT) private document: Document,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         if (isPlatformBrowser(this.platformId)) {
+            window.addEventListener('beforeunload', (e) => {
+                if (onlyOneTabActiveService.isThisTabActive()) {
+                    onlyOneTabActiveService.setStateToClose();
+                }
+            });
+
+
             if (!environment.gtmId) {
                 return;
             }

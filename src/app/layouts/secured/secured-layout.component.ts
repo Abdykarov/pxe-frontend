@@ -25,6 +25,7 @@ import {
     CONSTS,
     SEO,
 } from 'src/app/app.constants';
+import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 import {
     INavigationConfig,
     INavigationMenu,
@@ -55,6 +56,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
         private metaService: Meta,
         private navigationApolloService: NavigationApolloService,
         private navigationService: NavigationService,
+        private onlyOneTabActiveService: OnlyOneTabActiveService,
         protected overlayService: OverlayService,
         protected route: ActivatedRoute,
         protected router: Router,
@@ -93,6 +95,8 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
                     this.cd.markForCheck();
                 }
             });
+
+        this.onlyOneTabActiveService.setActiveTab();
     }
 
     ngOnInit() {
