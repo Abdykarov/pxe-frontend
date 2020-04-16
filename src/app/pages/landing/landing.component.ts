@@ -63,6 +63,7 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
     public formFields: IForm;
     public routes = ROUTES;
 
+    public isBrowser = false;
     public isMoreThanXlResolution = false;
 
     public resizeEvent$ = fromEvent(window, 'resize')
@@ -82,6 +83,7 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
     ) {
         super();
         if (isPlatformBrowser(this.platformId)) {
+            this.isBrowser = true;
             this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
         }
 
