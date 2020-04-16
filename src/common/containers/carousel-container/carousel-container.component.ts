@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import {
+    Component,
+    Inject,
+    PLATFORM_ID,
+} from '@angular/core';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ICarouselItem } from 'src/common/ui/carousel/models/data.model';
@@ -8,6 +13,17 @@ import { ICarouselItem } from 'src/common/ui/carousel/models/data.model';
     templateUrl: './carousel-container.component.html',
 })
 export class CarouselContainerComponent extends AbstractComponent {
+    public isBrowser = false;
+
+    constructor(
+        @Inject(PLATFORM_ID) private platformId: string,
+    ) {
+        super();
+        if (isPlatformBrowser(this.platformId)) {
+            this.isBrowser = true;
+        }
+    }
+
     public readonly carouselItems: ICarouselItem[] = [
         {
             title: 'Nejdříve se seznámíme',
