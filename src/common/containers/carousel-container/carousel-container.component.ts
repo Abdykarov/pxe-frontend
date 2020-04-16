@@ -1,9 +1,9 @@
-import { isPlatformBrowser } from '@angular/common';
 import {
     Component,
     Inject,
     PLATFORM_ID,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ICarouselItem } from 'src/common/ui/carousel/models/data.model';

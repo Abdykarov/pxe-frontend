@@ -1,4 +1,3 @@
-import { isPlatformBrowser } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectorRef,
@@ -8,6 +7,7 @@ import {
     PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import {
     Meta,
     Title,
