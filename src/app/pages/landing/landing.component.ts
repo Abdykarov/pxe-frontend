@@ -14,6 +14,7 @@ import {
 } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
+import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 import {
     debounceTime,
@@ -122,9 +123,9 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
     autoPlayVideoInAllBrowsers = () => {
         if (this.isMoreThanXlResolution) {
             const myVideo = document.querySelector('video');
-            const promise = myVideo && myVideo.play();
-            if (promise !== undefined) {
-                promise.then(_ => ({}))
+            const playPromise = myVideo && myVideo.play();
+            if (!R.isNil(playPromise)) {
+                playPromise.then(_ => ({}))
                     .catch(error => {
                         myVideo.muted = true;
                         myVideo.play();
