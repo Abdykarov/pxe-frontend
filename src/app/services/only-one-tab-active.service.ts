@@ -4,10 +4,7 @@ import {
 } from '@angular/core';
 
 import { CookiesService } from 'src/app/services/cookies.service';
-
-export enum OnlyOneTabActiveType {
-    UUID, CLOSED, EMPTY,
-}
+import { OnlyOneTabActiveType } from 'src/app/services/model/only-one-tab-active.model';
 
 @Injectable({
     providedIn: 'root',
@@ -31,10 +28,20 @@ export class OnlyOneTabActiveService {
 
     public isThisTabActive = () => this.cookieService.get('active_tab') === this.uuid;
 
-    private mapTypeToValue
+    private mapTypeToValue = (onlyOneTabActiveType: OnlyOneTabActiveType) => {
+        switch (onlyOneTabActiveType) {
+            case OnlyOneTabActiveType.UUID:
+            return this.uuid;
+            case OnlyOneTabActiveType.CLOSED:
+            return 'CLOSED';
+            case OnlyOneTabActiveType.EMPTY:
+            return '';
+        }
+        return '';
+    }
 
     public setActiveTab = (onlyOneTabActiveType: OnlyOneTabActiveType) => {
-        this.cookieService.set('active_tab', this.uuid, 0);
+        this.cookieService.set(this.mapTypeToValue(onlyOneTabActiveType), this.uuid, 0);
     }
 
 }

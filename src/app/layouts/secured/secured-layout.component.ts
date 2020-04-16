@@ -26,6 +26,7 @@ import {
     SEO,
 } from 'src/app/app.constants';
 import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
+import { OnlyOneTabActiveType } from 'src/app/services/model/only-one-tab-active.model';
 import {
     INavigationConfig,
     INavigationMenu,
@@ -96,7 +97,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
                 }
             });
 
-        this.onlyOneTabActiveService.setActiveTab();
+        this.onlyOneTabActiveService.setActiveTab(OnlyOneTabActiveType.UUID);
     }
 
     ngOnInit() {
