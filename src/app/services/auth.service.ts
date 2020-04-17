@@ -34,7 +34,6 @@ import {
     CONSTS,
     ROUTES,
 } from 'src/app/app.constants';
-import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 import { CookiesService } from './cookies.service';
 import { environment } from 'src/environments/environment';
 import {
@@ -44,6 +43,7 @@ import {
     IUserRoles,
 } from './model/auth.model';
 import { IStateRouter } from 'src/app/pages/logout/logout-page.model';
+import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 
 @Injectable({
     providedIn: 'root',

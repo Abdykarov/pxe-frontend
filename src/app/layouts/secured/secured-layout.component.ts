@@ -29,7 +29,6 @@ import {
     CONSTS,
     SEO,
 } from 'src/app/app.constants';
-import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 import { moreTabDialog } from 'src/app/services/model/only-one-tab-active.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import {
@@ -43,6 +42,7 @@ import {
     navigationMenuUserActions,
 } from './services/navigation.config';
 import { NavigationService } from './services/navigation.service';
+import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 

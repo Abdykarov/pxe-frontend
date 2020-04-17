@@ -17,8 +17,8 @@ import {
 import { CONSTS } from 'src/app/app.constants';
 
 import { environment } from 'src/environments/environment';
-import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 import { GTMService } from './services/gtm.service';
+import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 
 @Component({
     selector: 'lnd-root',
