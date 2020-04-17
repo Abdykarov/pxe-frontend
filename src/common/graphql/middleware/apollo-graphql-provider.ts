@@ -26,7 +26,7 @@ import {
     resolvers,
 } from '../resolvers/';
 import { environment } from 'src/environments/environment';
-import { scrollToWithOffsetFnc } from 'src/common/utils';
+import { processErrorScrolls } from 'src/common/utils';
 
 const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
@@ -116,14 +116,7 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
 
         if (graphQLErrors || networkError) {
             if (!OPERATIONS_WITHOUT_SCROLL_ON_ERRORS.includes(operation.operationName)) {
-                setTimeout(() => {
-                    const globalErrorDanger = document.getElementsByClassName('alert-danger')[0];
-                    if (globalErrorDanger) {
-                        scrollToWithOffsetFnc( globalErrorDanger, CONSTS.OFFSET_ERRORS.ALERT_DANGER);
-                    } else {
-                        scrollToWithOffsetFnc('.invalid-input', CONSTS.OFFSET_ERRORS.INVALID_INPUT);
-                    }
-                });
+                processErrorScrolls();
             }
         }
         // response.errors = null;

@@ -15,7 +15,7 @@ import {
 // own classes
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
-import { scrollToElementFnc } from 'src/common/utils';
+import { processErrorScrolls } from 'src/common/utils';
 
 @Injectable({
     providedIn: 'root',
@@ -63,7 +63,7 @@ export class ApiInterceptor implements HttpInterceptor {
                     if (error.status === 401) {
                         this.authService.logoutForced();
                     } else {
-                        scrollToElementFnc('top');
+                        processErrorScrolls();
                     }
                     return throwError(error);
                 }),

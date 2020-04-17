@@ -20,7 +20,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { CONSTS } from 'src/app/app.constants';
 import {
     isUserName,
-    scrollToWithOffsetFnc,
+    scrollToWithOffset,
 } from 'src/common/utils';
 import {
     IFieldError,
@@ -94,7 +94,7 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         if (this.form.valid) {
             this.submitValidForm();
         } else {
-            scrollToWithOffsetFnc('.invalid-input', CONSTS.OFFSET_ERRORS.INVALID_INPUT);
+            scrollToWithOffset('.invalid-input', CONSTS.OFFSET_ERRORS.INVALID_INPUT);
         }
     }
 

@@ -20,3 +20,5 @@ export * from './validators/custom-validators.fnc';
 export * from './validators/ean-validator.fnc';
 export * from './validators/eic-validator.fnc';
 export * from './validators/is-possible-integer.fnc';
+export * from './element-in-viewport.fnc';
+export * from './process-error-scroll.fnc';
