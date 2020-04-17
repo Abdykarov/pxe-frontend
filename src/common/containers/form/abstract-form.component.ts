@@ -94,7 +94,9 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         if (this.form.valid) {
             this.submitValidForm();
         } else {
-            scrollToWithOffset('.invalid-input', CONSTS.OFFSET_ERRORS.INVALID_INPUT);
+            setTimeout(() => {
+                scrollToWithOffset('.invalid-input', CONSTS.OFFSET_ERRORS.INVALID_INPUT);
+            });
         }
     }
 
