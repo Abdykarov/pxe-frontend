@@ -2,9 +2,11 @@ import {
     Injectable,
     PLATFORM_ID,
 } from '@angular/core';
+import { CONSTS } from 'src/app/app.constants';
 
 import { CookiesService } from 'src/app/services/cookies.service';
 import { OnlyOneTabActiveType } from 'src/app/services/model/only-one-tab-active.model';
+import { inArray } from 'src/common/utils';
 
 @Injectable({
     providedIn: 'root',
@@ -26,22 +28,23 @@ export class OnlyOneTabActiveService {
         });
     }
 
-    public isThisTabActive = () => this.cookieService.get('active_tab') === this.uuid;
+    public isThisTabActive = () =>
+        inArray(this.cookieService.get(CONSTS.ONLY_ONE_TAB_ACTIVE.NAME_COOKIE), [this.uuid])
 
     private mapTypeToValue = (onlyOneTabActiveType: OnlyOneTabActiveType) => {
         switch (onlyOneTabActiveType) {
             case OnlyOneTabActiveType.UUID:
             return this.uuid;
             case OnlyOneTabActiveType.CLOSED:
-            return 'CLOSED';
+            return CONSTS.ONLY_ONE_TAB_ACTIVE.CLOSED;
             case OnlyOneTabActiveType.EMPTY:
-            return '';
+            return CONSTS.ONLY_ONE_TAB_ACTIVE.EMPTY;
         }
-        return '';
+        return CONSTS.ONLY_ONE_TAB_ACTIVE.EMPTY;
     }
 
     public setActiveTab = (onlyOneTabActiveType: OnlyOneTabActiveType) => {
-        this.cookieService.set(this.mapTypeToValue(onlyOneTabActiveType), this.uuid, 0);
+        this.cookieService.set(CONSTS.ONLY_ONE_TAB_ACTIVE.NAME_COOKIE, this.mapTypeToValue(onlyOneTabActiveType), 0);
     }
 
 }

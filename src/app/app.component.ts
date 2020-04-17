@@ -14,6 +14,7 @@ import {
     NavigationEnd,
     Router,
 } from '@angular/router';
+import { OnlyOneTabActiveType } from 'src/app/services/model/only-one-tab-active.model';
 
 import { environment } from 'src/environments/environment';
 import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
@@ -37,7 +38,7 @@ export class AppComponent implements OnInit {
         if (isPlatformBrowser(this.platformId)) {
             window.addEventListener('beforeunload', (e) => {
                 if (onlyOneTabActiveService.isThisTabActive()) {
-                    onlyOneTabActiveService.setStateToClose();
+                    onlyOneTabActiveService.setActiveTab(OnlyOneTabActiveType.CLOSED);
                 }
             });
 

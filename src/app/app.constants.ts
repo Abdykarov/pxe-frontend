@@ -36,6 +36,11 @@ export const CONSTS = {
     MAX_REQUEST_IN_BATCH_LINK: 200,
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
+    ONLY_ONE_TAB_ACTIVE: {
+        NAME_COOKIE: 'active_tab',
+        CLOSED: 'CLOSED',
+        EMPTY: 'EMPTY',
+    },
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
     MODAL_TYPE: {
         CONFIRM_DELETE_OFFER: 'confirmDeleteOffer',
