@@ -16,11 +16,11 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { onError } from 'apollo-link-error';
 
 import { AuthService } from 'src/app/services/auth.service';
+import { clientSchema } from 'src/common/graphql/middleware/client-schema';
 import {
     CONSTS,
     OPERATIONS_WITHOUT_SCROLL_ON_ERRORS,
 } from 'src/app/app.constants';
-import { clientSchema } from 'src/common/graphql/middleware/client-schema';
 import {
     defaults,
     resolvers,
