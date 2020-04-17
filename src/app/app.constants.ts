@@ -36,15 +36,16 @@ export const CONSTS = {
     MAX_REQUEST_IN_BATCH_LINK: 200,
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
+    LAST_URL: 'last_url',
     ONLY_ONE_TAB_ACTIVE: {
-        NAME_COOKIE: 'active_tab',
+        NAME_COOKIE: 'ACTIVE_TAB',
         CLOSED: 'CLOSED',
         EMPTY: 'EMPTY',
         LOGOUT: 'LOGOUT',
     },
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
     MODAL_TYPE: {
-        MORE_TABS: 'MoreTabs',
+        MORE_TABS: 'moreTabs',
         CONFIRM_DELETE_OFFER: 'confirmDeleteOffer',
         CONFIRM_CANCEL_OFFER: 'confirmCancelOffer',
         CONFIRM_BACK_IMPORT: 'confirmBackImportOffer',

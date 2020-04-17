@@ -119,7 +119,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
                 if (modal.modalType === CONSTS.MODAL_TYPE.MORE_TABS) {
                     if (modal.confirmed) {
                         this.onlyOneTabActiveService.setActiveTab();
-                        location.reload();
+                        window.open(localStorage.getItem(CONSTS.LAST_URL), '_self');
                     } else {
                         this.router.navigate([CONSTS.PATHS.EMPTY]);
                     }
@@ -128,7 +128,6 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
             });
     }
 
-    // !this.onlyOneTabActiveService.isThisTabActive()
     private handleStoreChange = (storageEvent: StorageEvent) => {
         const newValue = storageEvent.newValue;
         if (
