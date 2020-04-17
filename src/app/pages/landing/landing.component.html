@@ -1,33 +1,15 @@
 <ng-template #agreementTemplate>
     Souhlasím s <a target="_blank" [href]="routes.ROUTER_TERMS_OF_USE">Obchodními podmínkami PARC4U</a> a beru na vědomí informace o <a target="_blank" [href]="routes.ROUTER_SECURING_YOUR_DATA">Ochraně osobních údajů</a>.
 </ng-template>
-
 <div class="landing-page">
-    <div class="section about-our-benefit section--picture-second">
+    <div class="section section--video">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 col-md-4 offset-md-1">
-                    <div class="px-3 px-md-0">
-                        <h1 class="h1--public">
+            <div class="section-video-text">
+                <div class="row">
+                    <div class="col-12 col-md-8 offset-md-2">
+                        <h1 class="h1--public mb-4">
                             Získejte svobodu nad energií
                         </h1>
-                        <p>
-                            Díky aplikaci PARC4U, od komoditní burzy PXE, získáte řadu výhod:
-                        </p>
-                        <ul class="check-list">
-                            <li>
-                                Můžete měnit dodavatele na jedno kliknutí.
-                            </li>
-                            <li>
-                                Nemusíte řešit papírování a chození na pobočky.
-                            </li>
-                            <li>
-                                Budete chráněni před nekalostmi ve smlouvě.
-                            </li>
-                            <li>
-                                Čekají vás pouze férové ceny bez skrytých poplatků.
-                            </li>
-                        </ul>
                         <lnd-button
                             label="Chci platit chytře"
                             type="primary"
@@ -37,15 +19,30 @@
                 </div>
             </div>
         </div>
-        <div class="section-picture-holder">
+        <div class="section-video-holder">
             <img
-                class="section-picture"
-                src="/assets/images/landing-page/picture-about-our-benefit.jpg"
+                *ngIf="!isMoreThanXlResolution"
+                class="video-picture"
+                src="/assets/images/landing-page/picture-fallback.png"
                 title="Plaťte za energie chytře díky burze"
                 alt="Plaťte za energie chytře díky burze">
-        </div>
+            <video
+                *ngIf="isMoreThanXlResolution"
+                class="section-video"
+                preload="auto"
+                autoplay
+                playsinline
+                loop
+                muted
+                >
+                <source src="/assets/images/landing-page/lp-video.webm" type="video/webm">
+                <source src="/assets/images/landing-page/lp-video.mp4" type="video/mp4">
+                <img src="/assets/images/landing-page/picture-fallback.png" alt="parc4u - video záloha">
+                Váš prohlížeč nepodporuje zobrazení videa
+            </video>
+        </div> 
     </div>
-    <div class="section what-you-can-get bg--white">
+    <div class="section what-you-can-get">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
@@ -69,7 +66,7 @@
         </div>
     </div>
     <div #supplierChange
-         class="section shortcut bg--white section--picture-first">
+         class="section shortcut section--picture-first section--arrow-overlap">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-md-4 offset-md-7">
@@ -108,69 +105,10 @@
                     alt="Cesta k nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC4U">
         </div>
     </div>
-    <div class="section what-you-can-expect text-center">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="px-3 px-md-0">
-                        <h2 class="h2--public mb-6 mb-lg-7">
-                            Co vás v&nbsp;PARC4U čeká
-                        </h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-10 offset-md-1">
-                    <div class="row landing-page__process">
-                        <div class="col-12 col-md-4">
-                            <div class="px-4 pb-7 pb-md-0">
-                                <img
-                                    class="landing-page-illustration"
-                                    src="/assets/images/illustrations/house.svg"
-                                    title="Nejdřív se seznámíme"
-                                    alt="Ilustrace domu">
-                                <h3 class="h3--public">
-                                    Nejdřív se seznámíme
-                                </h3>
-                                <p class="mb-0">
-                                    Představíte sebe i&nbsp;vaše odběrné místo nebo&nbsp;nahrajete fakturu, ať&nbsp;máme potřebné informace.
-                                </p>
-                            </div>
-                            <span class="landing-page__process-arrow icon icon--arrow-process"></span>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <div class="px-4 pt-7 pt-md-0 pb-7 pb-md-0">
-                                <img
-                                    class="landing-page-illustration"
-                                    src="/assets/images/illustrations/documents.svg"
-                                    title="Dostanete nabídky"
-                                    alt="Ilustrace podepsaných dokumentů">
-                                <h3 class="h3--public">
-                                    Dostanete nabídky
-                                </h3>
-                                <p class="mb-0">
-                                    Získáme pro&nbsp;vás ty nejzajímavější nabídky od&nbsp;dodavatelů, které&nbsp;před&nbsp;tím důkladně prověříme, ať&nbsp;se&nbsp;nemusíte ničeho bát.
-                                </p>
-                                <span class="landing-page__process-arrow icon icon--arrow-process"></span>
-                            </div>
-                        </div>
-                        <div class="col-13 col-md-4">
-                            <div class="px-4 pt-7 pt-md-0">
-                                <img
-                                    class="landing-page-illustration"
-                                    src="/assets/images/illustrations/light.svg"
-                                    title="Vyberete si a je to"
-                                    alt="Ilustrace rozsvíceného světla">
-                                <h3 class="h3--public">
-                                    Vyberete si a&nbsp;je to
-                                </h3>
-                                <p class="mb-0">
-                                    Nejlákavější nabídku potvrdíte jedním kliknutím a&nbsp;potřebný převod už za&nbsp;vás zařídíme my.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="section section--carousel section--arrow">
+        <div class="row no-gutters">
+            <div class="col-12">
+                <pxe-carousel-container></pxe-carousel-container>
             </div>
         </div>
     </div>
@@ -179,7 +117,7 @@
     </div>
     <div
         #subscription
-        class="section stay-in-touch">
+        class="section section--light stay-in-touch">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-3 col-lg-4 offset-lg-4">

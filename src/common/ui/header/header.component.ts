@@ -38,6 +38,9 @@ export class HeaderComponent extends AbstractComponent implements OnInit {
     public userMenu: INavigationMenu = [];
 
     @Input()
+    public sticked = false;
+
+    @Input()
     public settings: ISettings;
 
     @Input()

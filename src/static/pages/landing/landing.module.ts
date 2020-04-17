@@ -4,6 +4,7 @@ import { Routes } from '@angular/router';
 
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
+import { CarouselModule } from 'src/common/ui/carousel/carousel.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { LandingComponent } from './landing.component';
 import {
@@ -24,6 +25,7 @@ import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
     imports: [
         BreadcrumbModule,
         ButtonModule,
+        CarouselModule,
         CommonModule,
         FormModule,
         MapCoverageModule,
