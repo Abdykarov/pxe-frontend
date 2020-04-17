@@ -24,6 +24,7 @@ export class ConfirmModalComponent implements OnInit {
     public closeModal: EventEmitter<any> = new EventEmitter<any>();
 
     public showClose = true;
+    public showCloseButton = true;
     public showConfirm = true;
     public titleClose = 'Zpět';
     public titleConfirm = 'Pokračovat';
@@ -32,6 +33,8 @@ export class ConfirmModalComponent implements OnInit {
     ngOnInit() {
         this.showClose = this.instanceData && !R.isNil(this.instanceData.showClose) ?
             this.instanceData.showClose : this.showClose;
+        this.showCloseButton = this.instanceData && !R.isNil(this.instanceData.showCloseButton) ?
+            this.instanceData.showCloseButton : this.showCloseButton;
         this.showConfirm = this.instanceData && !R.isNil(this.instanceData.confirmDelete) ?
             this.instanceData.confirmDelete : this.showConfirm;
         this.titleClose = this.instanceData && !R.isNil(this.instanceData.titleClose) ?

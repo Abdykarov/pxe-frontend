@@ -1,26 +1,28 @@
+import { isPlatformBrowser } from '@angular/common';
+import { CONSTS } from 'src/app/app.constants';
 import {
+    Inject,
     Injectable,
     PLATFORM_ID,
 } from '@angular/core';
-import { CONSTS } from 'src/app/app.constants';
 
 import { CookiesService } from 'src/app/services/cookies.service';
-import { OnlyOneTabActiveType } from 'src/app/services/model/only-one-tab-active.model';
 import { inArray } from 'src/common/utils';
 
 @Injectable({
     providedIn: 'root',
 })
 export class OnlyOneTabActiveService {
-    private readonly uuid: string;
+    public readonly uuid: string;
 
     constructor(
         private cookieService: CookiesService,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         this.uuid = this.generateUuid();
     }
 
-    private generateUuid = () => {
+    generateUuid = (): string => {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
             // tslint:disable-next-line:no-bitwise
             const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
@@ -28,23 +30,14 @@ export class OnlyOneTabActiveService {
         });
     }
 
-    public isThisTabActive = () =>
-        inArray(this.cookieService.get(CONSTS.ONLY_ONE_TAB_ACTIVE.NAME_COOKIE), [this.uuid])
+    isThisTabActive = (uuid: string = '_'): boolean =>
+        inArray(this.cookieService.get(CONSTS.ONLY_ONE_TAB_ACTIVE.NAME_COOKIE), [this.uuid, uuid])
 
-    private mapTypeToValue = (onlyOneTabActiveType: OnlyOneTabActiveType) => {
-        switch (onlyOneTabActiveType) {
-            case OnlyOneTabActiveType.UUID:
-            return this.uuid;
-            case OnlyOneTabActiveType.CLOSED:
-            return CONSTS.ONLY_ONE_TAB_ACTIVE.CLOSED;
-            case OnlyOneTabActiveType.EMPTY:
-            return CONSTS.ONLY_ONE_TAB_ACTIVE.EMPTY;
+    setActiveTab = (value: string = null): void => {
+        if (isPlatformBrowser(this.platformId)) {
+            const newValue = value ? value : this.uuid;
+            this.cookieService.set(CONSTS.ONLY_ONE_TAB_ACTIVE.NAME_COOKIE, newValue, 0);
+            localStorage.setItem(CONSTS.ONLY_ONE_TAB_ACTIVE.NAME_COOKIE, newValue);
         }
-        return CONSTS.ONLY_ONE_TAB_ACTIVE.EMPTY;
     }
-
-    public setActiveTab = (onlyOneTabActiveType: OnlyOneTabActiveType) => {
-        this.cookieService.set(CONSTS.ONLY_ONE_TAB_ACTIVE.NAME_COOKIE, this.mapTypeToValue(onlyOneTabActiveType), 0);
-    }
-
 }

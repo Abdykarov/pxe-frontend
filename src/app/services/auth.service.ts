@@ -34,6 +34,7 @@ import {
     CONSTS,
     ROUTES,
 } from 'src/app/app.constants';
+import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 import { CookiesService } from './cookies.service';
 import { environment } from 'src/environments/environment';
 import {
@@ -88,6 +89,7 @@ export class AuthService {
     constructor(
         private cookiesService: CookiesService,
         private http: HttpClient,
+        private onlyOneTabActiveService: OnlyOneTabActiveService,
         private router: Router,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
@@ -163,6 +165,7 @@ export class AuthService {
             .pipe(
                 map(response => {
                     this.cleanUserData();
+                    this.onlyOneTabActiveService.setActiveTab(CONSTS.ONLY_ONE_TAB_ACTIVE.LOGOUT);
                     return response;
                 }),
                 catchError((error) => {
