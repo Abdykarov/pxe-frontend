@@ -278,22 +278,26 @@ $colors: (
 
 @keyframes slideToRightFaster {
 	from {
-		transform: translate3d(-10%, 0, 0);
+		transform: translate3d(10%, 0, 0);
+		opacity: 0;
 		visibility: visible;
 	}
 
 	to {
 		transform: translate3d(0, 0, 0);
+		opacity: 1;
 	}
 }
 
 @keyframes slideToRightSlower {
 	from {
-		transform: translate3d(-20%, 0, 0);
+		transform: translate3d(20%, 0, 0);
+		opacity: 0;
 		visibility: visible;
 	}
 
 	to {
 		transform: translate3d(0, 0, 0);
+		opacity: 1;
 	}
 }

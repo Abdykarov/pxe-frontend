@@ -251,7 +251,7 @@
 	}
 
 	.carousel {
-		padding-bottom: ( $spacer * 1.5 );
+		padding-bottom: ( $spacer * 2.5 );
 
 		// Media queries
 		@include media-breakpoint-up(md) {
@@ -270,7 +270,13 @@
 		&-item-img {
 			width: 130%;
 			height: auto;
+			margin-left: ( $spacer * 1.5 );
 			animation: slideToRightFaster .9s forwards;
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				margin-left: 0;
+			}
 		}
 
 		&-item-content {
