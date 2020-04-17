@@ -21,6 +21,7 @@ import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.compone
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CommodityTypesLowerCase,
+    CONSTS,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
@@ -43,7 +44,7 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
             window.scrollY ||
             window.pageYOffset ||
             document.body.scrollTop + (document.documentElement && document.documentElement.scrollTop || 0);
-        this.wasLastTimeScrolledToTop = scrollTop < this.lastScrollTop;
+        this.wasLastTimeScrolledToTop = scrollTop < this.lastScrollTop && scrollTop > CONSTS.START_STICKER_HEADER;
         this.lastScrollTop = scrollTop;
     }
 
