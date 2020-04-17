@@ -1,4 +1,3 @@
-import { isPlatformBrowser } from '@angular/common';
 import {
     ActivatedRoute,
     Router,
@@ -8,8 +7,10 @@ import {
     Component,
     Inject,
     OnDestroy,
-    OnInit, PLATFORM_ID,
+    OnInit,
+    PLATFORM_ID,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import {
     Meta,
     Title,
@@ -20,7 +21,8 @@ import * as R_ from 'ramda-extension';
 import { Apollo } from 'apollo-angular';
 import {
     takeUntil,
-    map, filter,
+    map,
+    filter,
 } from 'rxjs/operators';
 
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
