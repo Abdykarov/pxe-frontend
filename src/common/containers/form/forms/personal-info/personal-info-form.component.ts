@@ -4,7 +4,6 @@ import {
     Input,
     OnInit,
 } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
 import {
     FormBuilder,
     Validators,
@@ -62,7 +61,6 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
 
     constructor(
         private authService: AuthService,
-        private decimalPipe: DecimalPipe,
         protected fb: FormBuilder,
     ) {
         super(fb);
@@ -108,9 +106,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             const email = this.authService.currentUserValue.email;
             const deposit = this.supplyPoint.contract.offer.totalPrice;
             this.form.controls['email'].setValue(email);
-            this.form.controls['deposit'].setValue(
-                this.decimalPipe.transform(deposit, '1.0-0').replace(' ', ''),
-            );
+            this.form.controls['deposit'].setValue(Math.ceil(deposit));
         }
     }
 
