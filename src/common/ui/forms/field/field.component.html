@@ -1,9 +1,10 @@
 <div
     class="form-group"
     [ngClass]="customFormGroupClass">
-    <div class="form-control-info-wrapper">
+    <div *ngIf="infoText"
+         class="form-control-info-wrapper">
         <span class="form-control-info">
-            Nemusíte se bát, ani my nemáme rádi spam.
+            {{infoText}}
         </span>
     </div>
     <span
