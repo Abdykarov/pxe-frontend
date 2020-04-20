@@ -8,6 +8,7 @@ import {
 } from '@angular/platform-browser';
 
 import { Apollo } from 'apollo-angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -39,6 +40,7 @@ export class SignUpComponent extends AbstractComponent {
 
     constructor(
         private apollo: Apollo,
+        private authService: AuthService,
         private cd: ChangeDetectorRef,
         private metaService: Meta,
         private registrationService: RegistrationService,

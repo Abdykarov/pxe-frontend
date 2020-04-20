@@ -110,9 +110,9 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         }
     }
 
-    public homeRedirect = () => {
-        this.authService.homeRedirect();
-    }
+    public homeRedirect = () => this.authService.homeRedirect();
+
+    public landingPageRedirect = () => this.router.navigate([CONSTS.PATHS.EMPTY]);
 
     public toggleMenuOpen = (open: boolean) => {
         this.isMenuOpen = open;

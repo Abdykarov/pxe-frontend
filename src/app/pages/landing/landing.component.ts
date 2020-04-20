@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
 import { takeUntil } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth.service';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -56,6 +57,7 @@ export class LandingComponent extends AbstractComponent {
 
     constructor(
         private apollo: Apollo,
+        public authService: AuthService,
         private cd: ChangeDetectorRef,
         private metaService: Meta,
         private router: Router,

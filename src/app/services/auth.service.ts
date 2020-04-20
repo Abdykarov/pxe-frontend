@@ -49,7 +49,7 @@ import { IStateRouter } from 'src/app/pages/logout/logout-page.model';
 })
 export class AuthService {
     private cookieName = 'user';
-    private currentUserSubject$: BehaviorSubject<IJwtPayload>;
+    public currentUserSubject$: BehaviorSubject<IJwtPayload>;
     public currentUser$: Observable<IJwtPayload>;
     private token: string;
     private uuid: string = null;
@@ -239,10 +239,10 @@ export class AuthService {
 
     public getUuid = (): string => this.uuid;
 
-    public logoutForced = () => {
+    public logoutForced = (isFromUnauthorized = true) => {
         const state: IStateRouter = {
             refresh: true,
-            isFromUnauthorized: true,
+            isFromUnauthorized,
         };
         return this.router.navigate(
             [CONSTS.PATHS.LOGOUT],

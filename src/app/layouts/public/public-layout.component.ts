@@ -54,10 +54,6 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
             scrollToService,
         );
 
-        if (this.authService.isLogged() && this.router.url.indexOf(CONSTS.PATHS.LOGOUT) <= -1) {
-            this.authService.logoutForced();
-        }
-
         this.overlayService.getOverlay()
             .pipe(
                 takeUntil(this.destroy$),
@@ -72,4 +68,6 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
     public supplierChange = () => this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.SUPPLIER_CHANGE);
 
     public coverageMap = () => this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.MAP_COVERAGE);
+
+    public logout = () => this.authService.logoutForced(false);
 }
