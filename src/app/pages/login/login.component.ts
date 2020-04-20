@@ -15,9 +15,7 @@ import {
     Meta,
     Title,
 } from '@angular/platform-browser';
-import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { interval } from 'rxjs';
 import {
     map,
     takeUntil,
@@ -35,7 +33,7 @@ import {
     formFieldsLogin,
     LOGIN_STATE,
 } from './config';
-import { ILoginResponse, IUserRoles } from 'src/app/services/model/auth.model';
+import { ILoginResponse } from 'src/app/services/model/auth.model';
 import {
     IChangePassword,
     IConfirmationCode,

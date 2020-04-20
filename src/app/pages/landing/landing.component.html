@@ -17,28 +17,11 @@
         </div>
         <div class="container-fluid">
             <div class="section-video-text">
-                <div class="row w-100">
+                <div class="row">
                     <div class="col-12 col-md-8 offset-md-2">
                         <h1 class="h1--public mb-4">
                             Získejte svobodu nad energií
                         </h1>
-                        <p>
-                            Díky aplikaci PARC4U, od komoditní burzy PXE, získáte řadu výhod:
-                        </p>
-                        <ul class="check-list">
-                            <li>
-                                Můžete měnit dodavatele na jedno kliknutí.
-                            </li>
-                            <li>
-                                Nemusíte řešit papírování a chození na pobočky.
-                            </li>
-                            <li>
-                                Budete chráněni před nekalostmi ve smlouvě.
-                            </li>
-                            <li>
-                                Čekají vás pouze férové ceny bez skrytých poplatků.
-                            </li>
-                        </ul>
                         <lnd-button
                             *ngIf="!(authService.currentUserValue | isLogged)"
                             label="Chci platit chytře"
@@ -148,7 +131,7 @@
     </div>
     <div
         #subscription
-        *ngIf="!isLogged"
+        *ngIf="authService.currentUserValue | isLogged"
         class="section section--light stay-in-touch">
         <div class="container-fluid">
             <div class="row">

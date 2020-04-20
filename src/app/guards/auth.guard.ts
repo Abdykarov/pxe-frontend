@@ -27,7 +27,6 @@ export class AuthGuard implements CanActivateChild {
         this.authService.checkLogin();
 
         if (!this.authService.isLogged()) {
-            console.log('GUARD');
             this.authService.logoutForced();
             return false;
         }
