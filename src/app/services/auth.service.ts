@@ -116,14 +116,10 @@ export class AuthService {
         const { role } = jwtPayload;
         let roleExists = false;
         R.forEach((roleInEach) => {
-            console.log(roleInEach);
-            console.log(accessRole);
             if (inArray(roleInEach, accessRole)) {
                 roleExists = true;
             }
         })(role);
-        console.log('RESULT');
-        console.log(roleExists);
         return roleExists;
     }
 
