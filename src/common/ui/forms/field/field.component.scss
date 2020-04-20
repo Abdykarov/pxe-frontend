@@ -23,13 +23,6 @@
 .form-control-info-wrapper {
 	width: 100%;
 	padding-bottom: $icon-size-px;
-
-	// Media queries
-	@include media-breakpoint-up(xl) {
-		width: 390px;
-		padding-bottom: 0;
-		margin-left: 220px;
-	}
 }
 
 .form-control-info {
@@ -43,7 +36,7 @@
 
 .form-control-info-beak {
 	position: absolute;
-	top: 100%;
+	top: calc( 100% - 1px );
 	left: 0;
 	color: $secondary;
 }
