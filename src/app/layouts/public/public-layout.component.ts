@@ -54,7 +54,7 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
 
     constructor(
         protected apollo: Apollo,
-        protected authService: AuthService,
+        public authService: AuthService,
         protected cookieService: CookiesService,
         private cd: ChangeDetectorRef,
         protected overlayService: OverlayService,
