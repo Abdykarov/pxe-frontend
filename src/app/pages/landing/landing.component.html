@@ -4,6 +4,18 @@
 
 <div class="landing-page">
     <div class="section about-our-benefit section--picture-second">
+        <div *ngIf="authService.currentUserValue | isLogged"
+            class="container-fluid fixed-bottom">
+            <div class="row text-center">
+                <div class="col-12 col-md-8 col-xl-6 col-lg-4">
+                    <lnd-button
+                        label="Zpět do aplikace"
+                        type="primary"
+                        (action)="authService.homeRedirect()">
+                    </lnd-button>
+                </div>
+            </div>
+        </div>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-md-4 offset-md-1">
@@ -29,6 +41,7 @@
                             </li>
                         </ul>
                         <lnd-button
+                            [isDisabled]="authService.currentUserValue | isLogged"
                             label="Chci platit chytře"
                             type="primary"
                             (action)="scrollToNewSubscription()">
@@ -92,9 +105,10 @@
                             </li>
                         </ul>
                         <lnd-button
-                                label="Chci do PARC4U"
-                                type="primary"
-                                (action)="scrollToNewSubscription()">
+                            [isDisabled]="authService.currentUserValue | isLogged"
+                            label="Chci do PARC4U"
+                            type="primary"
+                            (action)="scrollToNewSubscription()">
                         </lnd-button>
                     </div>
                 </div>
@@ -179,7 +193,7 @@
     </div>
     <div
         #subscription
-        *ngIf="!authService.currentUserValue"
+        *ngIf="!(authService.currentUserValue | isLogged)"
         class="section stay-in-touch">
         <div class="container-fluid">
             <div class="row">

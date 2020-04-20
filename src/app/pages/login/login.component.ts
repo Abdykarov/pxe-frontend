@@ -7,6 +7,7 @@ import {
     ChangeDetectorRef,
     Component,
     Inject,
+    NgZone,
     PLATFORM_ID,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
@@ -15,6 +16,7 @@ import {
     Title,
 } from '@angular/platform-browser';
 
+import { interval } from 'rxjs';
 import {
     map,
     takeUntil,
@@ -32,7 +34,7 @@ import {
     formFieldsLogin,
     LOGIN_STATE,
 } from './config';
-import { ILoginResponse } from 'src/app/services/model/auth.model';
+import { ILoginResponse, IUserRoles } from 'src/app/services/model/auth.model';
 import {
     IChangePassword,
     IConfirmationCode,
@@ -45,6 +47,7 @@ import {
     PASSWORD_DESTINATION,
 } from 'src/common/graphql/models/user.model';
 import {
+    inArray, isLogged,
     parseGraphQLErrors,
     parseRestAPIErrors,
 } from 'src/common/utils/';
@@ -73,6 +76,7 @@ export class LoginComponent extends AbstractComponent {
         private cd: ChangeDetectorRef,
         private cookieService: CookiesService,
         private metaService: Meta,
+        private ngZone: NgZone,
         private route: ActivatedRoute,
         private router: Router,
         private userService: UserService,
@@ -108,6 +112,18 @@ export class LoginComponent extends AbstractComponent {
                 this.resetErrorsAndLoading();
                 this.passwordWasSent = false;
             });
+
+        this.ngZone.runOutsideAngular(() => {
+            interval(1000)
+                .pipe(
+                    takeUntil(this.destroy$),
+                )
+                .subscribe(_ => {
+                    if (isLogged(this.authService.currentUserValue)) {
+                        this.authService.logoutForced(false);
+                    }
+                });
+        });
     }
 
     public submitChangePassword = (changePassword: IChangePassword) => {

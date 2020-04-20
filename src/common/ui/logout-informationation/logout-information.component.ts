@@ -15,8 +15,9 @@ import {
     takeUntil,
 } from 'rxjs/operators';
 
-import { CONSTS } from 'src/app/app.constants';
 import { AuthService } from 'src/app/services/auth.service';
+import { CONSTS } from 'src/app/app.constants';
+import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 
 // own classes
 import { AbstractComponent } from 'src/common/abstract.component';
@@ -33,6 +34,7 @@ export class LogoutInformationComponent extends AbstractComponent {
     constructor(
         public authService: AuthService,
         private cd: ChangeDetectorRef,
+        private onlyOneTabActiveService: OnlyOneTabActiveService,
         private router: Router,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
@@ -41,7 +43,9 @@ export class LogoutInformationComponent extends AbstractComponent {
             interval(1000)
                 .pipe(
                     takeUntil(this.destroy$),
-                    filter( _ => this.router.url.includes('secured') && this.authService.isLastRefreshToken),
+                    filter( _ => this.router.url.includes('secured') &&
+                        this.authService.isLastRefreshToken && this.onlyOneTabActiveService.isThisTabActive(),
+                    ),
                 )
                 .subscribe(_ => {
                     this.tokenWillExpireInSeconds =

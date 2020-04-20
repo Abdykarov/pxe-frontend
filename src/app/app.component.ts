@@ -14,9 +14,11 @@ import {
     NavigationEnd,
     Router,
 } from '@angular/router';
+import { CONSTS } from 'src/app/app.constants';
 
 import { environment } from 'src/environments/environment';
 import { GTMService } from './services/gtm.service';
+import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 
 @Component({
     selector: 'lnd-root',
@@ -28,11 +30,19 @@ export class AppComponent implements OnInit {
     constructor(
         private elementRef: ElementRef,
         private gtmService: GTMService,
+        private onlyOneTabActiveService: OnlyOneTabActiveService,
         private router: Router,
         @Inject(DOCUMENT) private document: Document,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         if (isPlatformBrowser(this.platformId)) {
+            window.addEventListener('beforeunload', (e) => {
+                if (onlyOneTabActiveService.isThisTabActive()) {
+                    onlyOneTabActiveService.setActiveTab(CONSTS.ONLY_ONE_TAB_ACTIVE.CLOSED);
+                }
+            });
+
+
             if (!environment.gtmId) {
                 return;
             }

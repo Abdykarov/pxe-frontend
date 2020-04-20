@@ -27,6 +27,7 @@ import {
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
 import {
+    isLogged,
     parseGraphQLErrors,
     scrollToElementFnc,
 } from 'src/common/utils';
@@ -123,5 +124,9 @@ export class LandingComponent extends AbstractComponent {
                 });
     }
 
-    public scrollToNewSubscription = () => this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
+    public scrollToNewSubscription = () =>  {
+        if (isLogged(this.authService.currentUserValue)) {
+            this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
+        }
+    }
 }

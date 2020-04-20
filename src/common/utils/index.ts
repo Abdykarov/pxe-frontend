@@ -19,3 +19,4 @@ export * from './validators/custom-validators.fnc';
 export * from './validators/ean-validator.fnc';
 export * from './validators/eic-validator.fnc';
 export * from './validators/is-possible-integer.fnc';
+export * from './is-logged.fnc';

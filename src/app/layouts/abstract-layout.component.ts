@@ -73,6 +73,9 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
                         .subscribe();
                     this.toggleSubscription.unsubscribe();
                 }
+                if (event.urlAfterRedirects.indexOf('/secured') >= -1) {
+                    localStorage.setItem(CONSTS.LAST_URL, event.urlAfterRedirects);
+                }
                 this.settings = <ISettings>this.route.snapshot.firstChild.data;
                 this.activeUrl = this.router.url;
             }

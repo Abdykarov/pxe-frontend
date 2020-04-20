@@ -13,6 +13,7 @@ import { DynamicPipe } from './dynamic/dynamic.pipe';
 import { FilterCommodityTypePipe } from './filter-commodity-type/filter-commodity-type.pipe';
 import { IsAllowedOperationPipe } from './is-allowed-operation/is-allowed-operation.pipe';
 import { IsDatePast } from './is-date-past/is-date-past.pipe';
+import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import { IsMenuItemActivePipe } from './is-menu-item-active/is-menu-item-active.pipe';
 import { IsRouteActivePipe } from './is-route-active/is-route-acrive.pipe';
 import { KeysPipe } from './keys/keys.pipe';
@@ -40,6 +41,7 @@ import { ValuesPipe } from './values/values.pipe';
         FilterCommodityTypePipe,
         IsAllowedOperationPipe,
         IsDatePast,
+        IsLoggedPipe,
         IsMenuItemActivePipe,
         IsRouteActivePipe,
         KeysPipe,
@@ -66,6 +68,7 @@ import { ValuesPipe } from './values/values.pipe';
         FilterCommodityTypePipe,
         IsAllowedOperationPipe,
         IsDatePast,
+        IsLoggedPipe,
         IsMenuItemActivePipe,
         IsRouteActivePipe,
         KeysPipe,
@@ -92,6 +95,7 @@ import { ValuesPipe } from './values/values.pipe';
         FilterCommodityTypePipe,
         IsAllowedOperationPipe,
         IsDatePast,
+        IsLoggedPipe,
         IsMenuItemActivePipe,
         IsRouteActivePipe,
         KeysPipe,

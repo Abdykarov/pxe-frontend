@@ -43,6 +43,7 @@ import {
     IUserRoles,
 } from './model/auth.model';
 import { IStateRouter } from 'src/app/pages/logout/logout-page.model';
+import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 
 @Injectable({
     providedIn: 'root',
@@ -52,8 +53,6 @@ export class AuthService {
     public currentUserSubject$: BehaviorSubject<IJwtPayload>;
     public currentUser$: Observable<IJwtPayload>;
     private token: string;
-    private uuid: string = null;
-    private sessionUuid: string = null;
 
     public isLastRefreshToken = false;
     public startExpirationOfToken: Date = null;
@@ -96,6 +95,7 @@ export class AuthService {
     constructor(
         private cookiesService: CookiesService,
         private http: HttpClient,
+        private onlyOneTabActiveService: OnlyOneTabActiveService,
         private router: Router,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
@@ -134,16 +134,13 @@ export class AuthService {
     public checkLogin = () => {
         if (this.cookiesService.has(this.cookieName)) {
             this.token = (<any>this.cookiesService.getObject(this.cookieName)).token;
-            this.uuid = (<any>this.cookiesService.getObject(this.cookieName)).uuid;
         } else {
             this.token = null;
-            this.uuid = null;
         }
-        this.sessionUuid = window.sessionStorage && window.sessionStorage.getItem('uuid');
     }
 
     public isLogged = (): boolean  => {
-        return !!this.token && this.sessionUuid === this.uuid;
+        return !!this.token;
     }
 
     public needSmsConfirm(): boolean {
@@ -160,8 +157,7 @@ export class AuthService {
         return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { login, password })
             .pipe(
                 map((response: ILoginResponse) => {
-                    const uuid = this.generateUuid();
-                    const loginResponse =  this.manageLoginResponse(response, uuid);
+                    const loginResponse =  this.manageLoginResponse(response);
                     this.startRefreshTokenInterval();
                     this.startExpirationOfToken = new Date();
                     return loginResponse;
@@ -175,6 +171,7 @@ export class AuthService {
             .pipe(
                 map(response => {
                     this.cleanUserData();
+                    this.onlyOneTabActiveService.setActiveTab(CONSTS.ONLY_ONE_TAB_ACTIVE.LOGOUT);
                     return response;
                 }),
                 catchError((error) => {
@@ -208,8 +205,6 @@ export class AuthService {
 
     public cleanUserData = () => {
         this.token = null;
-        this.uuid = null;
-        this.sessionUuid = null;
         if (window.sessionStorage) {
             window.sessionStorage.clear();
         }
@@ -217,16 +212,12 @@ export class AuthService {
         this.currentUserSubject$.next(null);
     }
 
-    public manageLoginResponse = (response: ILoginResponse, uuid: string = this.uuid) => {
+    public manageLoginResponse = (response: ILoginResponse) => {
         if (response && response.token) {
             const jwtPayload = this.getJwtPayload(response.token);
             const user = {
                 token: response.token,
-                uuid: uuid,
             };
-            if (window.sessionStorage) {
-                window.sessionStorage.setItem('uuid', uuid);
-            }
             const expiration = new Date().getTime() + CONSTS.DEFAULT_EXPIRATION;
             this.cookiesService.setObject(this.cookieName, user, expiration);
             this.checkLogin();
@@ -236,8 +227,6 @@ export class AuthService {
     }
 
     public getToken = (): string => this.token;
-
-    public getUuid = (): string => this.uuid;
 
     public logoutForced = (isFromUnauthorized = true) => {
         const state: IStateRouter = {
@@ -268,14 +257,6 @@ export class AuthService {
 
         }
         return jwtPayload;
-    }
-
-    private generateUuid = () => {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            // tslint:disable-next-line:no-bitwise
-            const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
-            return v.toString(16);
-        });
     }
 
     public getAuthorizationHeaders = (contentType: string = null, accept: string = '*/*'): HttpHeaders => {

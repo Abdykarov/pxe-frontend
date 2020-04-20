@@ -3,10 +3,11 @@
     class="body-inner full-layout"
     [class.body-inner--overlay]="showOverlay">
     <lnd-header
-        [isLogged]="authService.currentUserValue"
+        [isLogged]="authService.currentUserValue | isLogged"
         [settings]="settings"
         (homeRedirect)="homeRedirect()"
         [isMenuOpen]="isMenuOpen"
+        (landingPageRedirect)="landingPageRedirect()"
         (loginAction)="login()"
         (signUpAction)="signUp()"
         (supplierChangeAction)="supplierChange()"
