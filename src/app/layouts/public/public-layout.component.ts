@@ -18,8 +18,10 @@ import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.compone
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CommodityTypesLowerCase,
+    CONSTS,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
+import { CookiesService } from 'src/app/services/cookies.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
@@ -35,6 +37,7 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
     constructor(
         protected apollo: Apollo,
         protected authService: AuthService,
+        protected cookieService: CookiesService,
         private cd: ChangeDetectorRef,
         protected overlayService: OverlayService,
         protected route: ActivatedRoute,
@@ -44,13 +47,14 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
         super(
             apollo,
             authService,
+            cookieService,
             overlayService,
             route,
             router,
             scrollToService,
         );
 
-        if (this.authService.isLogged()) {
+        if (this.authService.isLogged() && this.router.url.indexOf(CONSTS.PATHS.LOGOUT) <= -1) {
             this.authService.logoutForced();
         }
 

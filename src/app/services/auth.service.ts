@@ -55,6 +55,7 @@ export class AuthService {
     private uuid: string = null;
     private sessionUuid: string = null;
 
+    public isLastRefreshToken = false;
     public startExpirationOfToken: Date = null;
     public dontRefreshToken = true;
     public wasRefreshCallRefreshInterval = false;
@@ -66,6 +67,7 @@ export class AuthService {
         interval(CONSTS.REFRESH_TOKEN.INTERVAL)
             .pipe(
                 switchMap((number) => {
+                    this.isLastRefreshToken = false;
                     if (!this.wasRefreshCallRefreshInterval) {
                         if (!this.token) {
                             return of(this.stopMessageInterval);
@@ -75,6 +77,10 @@ export class AuthService {
                 }),
                 catchError(() => of(this.stopMessageInterval)),
                 take(CONSTS.REFRESH_TOKEN.COUNT),
+                tap( tick => {
+                    this.isLastRefreshToken = CONSTS.REFRESH_TOKEN.COUNT - 1 === tick;
+                    return tick;
+                }),
                 takeUntil(this.stopRefreshTokenIntervalSubject$),
                 repeatWhen(() => this.startRefreshTokenIntervalSubject$),
                 filter((num) => {
@@ -236,6 +242,7 @@ export class AuthService {
     public logoutForced = () => {
         const state: IStateRouter = {
             refresh: true,
+            isFromUnauthorized: true,
         };
         return this.router.navigate(
             [CONSTS.PATHS.LOGOUT],

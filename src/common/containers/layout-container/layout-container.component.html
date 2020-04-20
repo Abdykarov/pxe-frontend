@@ -11,8 +11,14 @@
 </div>
 <lnd-banner-ui
     *ngIf="showBanner"
-    [data]="bannerObj"
+    [data]="{
+        linkValue: '#',
+        text: 'Vaše heslo bylo úspěšně změněno.',
+        linkType: '',
+        title: ''
+    }"
     buttonLabel=""
     [showButtonLabel]="false"
 ></lnd-banner-ui>
+<pxe-logout-information></pxe-logout-information>
 <ng-content></ng-content>

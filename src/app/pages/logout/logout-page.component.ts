@@ -14,6 +14,7 @@ import { first } from 'rxjs/operators';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ApolloService } from 'src/app/services/apollo.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { CookiesService } from 'src/app/services/cookies.service';
 import { CONSTS } from 'src/app/app.constants';
 import { defaultState } from 'src/app/pages/logout/logout-page.config';
 import { IStateRouter } from 'src/app/pages/logout/logout-page.model';
@@ -30,6 +31,7 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
         private apollo: Apollo,
         private apolloService: ApolloService,
         private authService: AuthService,
+        private cookieService: CookiesService,
         private cd: ChangeDetectorRef,
         private router: Router,
         @Inject(PLATFORM_ID) private platformId: string,
@@ -49,14 +51,26 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 () => {
+                    this.authService.isLastRefreshToken = false;
                     this.apolloService.resetStore().then(() => {
-                        this.router.navigate([CONSTS.PATHS.EMPTY])
-                            .then(() => {
-                                if (this.state.refresh) {
-                                    window.location.reload();
-                                }
-                            });
+                        const reasonForLogoutUserValue = this.state.isFromUnauthorized ?
+                            CONSTS.REASON_FOR_LOGOUT_USER.UNAUTHORIZED : CONSTS.REASON_FOR_LOGOUT_USER.BY_SELF;
+                        const reasonForLogoutUserTime = new Date().getTime() + CONSTS.COOKIE_TEMPORARY_EXPIRATION;
 
+                        this.cookieService.set(
+                            'reasonForLogoutUser',
+                            reasonForLogoutUserValue,
+                            reasonForLogoutUserTime,
+                        );
+
+                        this.router.navigate(
+                            [CONSTS.PATHS.LOGIN],
+                        )
+                        .then(() => {
+                            if (this.state.refresh) {
+                                window.location.reload();
+                            }
+                        });
                     });
                 },
                 () => {

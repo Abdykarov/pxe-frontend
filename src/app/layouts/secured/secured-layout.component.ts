@@ -25,6 +25,7 @@ import {
     CONSTS,
     SEO,
 } from 'src/app/app.constants';
+import { CookiesService } from 'src/app/services/cookies.service';
 import {
     INavigationConfig,
     INavigationMenu,
@@ -52,6 +53,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
         protected apollo: Apollo,
         public authService: AuthService,
         private cd: ChangeDetectorRef,
+        protected cookieService: CookiesService,
         private metaService: Meta,
         private navigationApolloService: NavigationApolloService,
         private navigationService: NavigationService,
@@ -64,6 +66,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
         super(
             apollo,
             authService,
+            cookieService,
             overlayService,
             route,
             router,

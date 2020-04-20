@@ -20,6 +20,7 @@ import {
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { CONSTS } from 'src/app/app.constants';
+import { CookiesService } from 'src/app/services/cookies.service';
 import {
     ISettings,
     LoginType,
@@ -55,6 +56,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
     protected constructor(
         protected apollo: Apollo,
         protected authService: AuthService,
+        protected cookieService: CookiesService,
         protected overlayService: OverlayService,
         protected route: ActivatedRoute,
         protected router: Router,
@@ -63,6 +65,9 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         super();
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
+                if (event && event.url !== `/${CONSTS.PATHS.LOGIN}`) {
+                    this.cookieService.remove('reasonForLogoutUser');
+                }
                 if (this.showOverlay) {
                     this.toggleSubscription = this.overlayService.toggleOverlay(false)
                         .subscribe();
