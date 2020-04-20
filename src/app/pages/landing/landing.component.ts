@@ -1,18 +1,27 @@
 import {
+    AfterViewInit,
     ChangeDetectorRef,
     Component,
-    ElementRef, NgZone,
+    ElementRef,
+    Inject,
+    PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import {
     Meta,
     Title,
 } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
+import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 import { AuthService } from 'src/app/services/auth.service';
-import { takeUntil } from 'rxjs/operators';
+import {
+    debounceTime,
+    takeUntil,
+} from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -38,7 +47,7 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 @Component({
     templateUrl: './landing.component.html',
 })
-export class LandingComponent extends AbstractComponent {
+export class LandingComponent extends AbstractComponent implements AfterViewInit {
 
     @ViewChild('subscription')
     public subscriptionElement: ElementRef;
@@ -56,6 +65,13 @@ export class LandingComponent extends AbstractComponent {
     public formFields: IForm;
     public routes = ROUTES;
 
+    public isMoreThanXlResolution = false;
+
+    public resizeEvent$ = fromEvent(window, 'resize')
+        .pipe(
+            debounceTime(200),
+        );
+
     constructor(
         private apollo: Apollo,
         public authService: AuthService,
@@ -66,8 +82,13 @@ export class LandingComponent extends AbstractComponent {
         private registrationService: RegistrationService,
         private scrollToService: ScrollToService,
         private titleService: Title,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
+        if (isPlatformBrowser(this.platformId)) {
+            this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+        }
+
         this.titleService.setTitle(CONSTS.TITLES.LANDING_PAGE);
         this.metaService.updateTag({
             name: 'description',
@@ -93,6 +114,35 @@ export class LandingComponent extends AbstractComponent {
                     scrollToElementFnc(this.supplierChangeElement.nativeElement);
                 }
             });
+
+        this.resizeEvent$
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(_  => {
+                this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+                this.autoPlayVideoInAllBrowsers();
+                this.cd.markForCheck();
+            });
+    }
+
+    autoPlayVideoInAllBrowsers = () => {
+        if (this.isMoreThanXlResolution) {
+            const myVideo = document.querySelector('video');
+            const playPromise = myVideo && myVideo.play();
+            if (!R.isNil(playPromise)) {
+                playPromise.then(_ => ({}))
+                    .catch(error => {
+                        myVideo.muted = true;
+                        myVideo.play();
+                    });
+            }
+        }
+    }
+
+    ngAfterViewInit() {
+        if (isPlatformBrowser(this.platformId)) {
+            this.autoPlayVideoInAllBrowsers();
+            this.cd.markForCheck();
+        }
     }
 
     public submitForm = (values) => {

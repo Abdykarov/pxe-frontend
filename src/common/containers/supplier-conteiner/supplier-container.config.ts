@@ -49,7 +49,7 @@ export const config: ISupplierLogo[] = [
         supplierUrl: '',
         size: 'xl',
         title: 'Yello Energy',
-        width: 54,
+        width: 56,
         typeCommodity: TypeCommodity.BOTH,
     },
     {

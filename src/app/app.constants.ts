@@ -92,6 +92,7 @@ export const CONSTS = {
         COUNT: 16,
         DONT_REFRESH_TIME_IN_MINUTES: 2,
     },
+    START_STICKER_HEADER: 0,
     REASON_FOR_LOGOUT_USER: {
         BY_SELF: 'Byl jste úspěšně odhlášen',
         UNAUTHORIZED: 'Došlo k odhlášení z důvodu neaktivity',
@@ -144,6 +145,7 @@ export const CONSTS = {
         SECURING_YOUR_DATA: 'Ochrana osobních údajů | PARC4U',
         SIGN_UP: 'Registrace | PARC4U',
     },
+    XL_RESOLUTION: 992,
 };
 
 export const ROUTES = {
