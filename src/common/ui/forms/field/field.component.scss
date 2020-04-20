@@ -39,16 +39,13 @@
 	background-color: $secondary;
 	color: $white;
 	border-radius: 3px 3px 3px 0;
+}
 
-	&::after {
-		content: '\e930';
-		@include icon;
-		position: absolute;
-		top: calc( 100% - 5px );
-		left: 0;
-		color: $secondary;
-		overflow: hidden;
-	}
+.form-control-info-beak {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	color: $secondary;
 }
 
 .form-group {
