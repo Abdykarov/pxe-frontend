@@ -5,10 +5,12 @@ import {
 import {
     ChangeDetectorRef,
     Component,
+    NgZone,
 } from '@angular/core';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
+import { interval } from 'rxjs';
 import {
     map,
     takeUntil,
@@ -22,6 +24,7 @@ import {
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';
+import { IUserRoles } from 'src/app/services/model/auth.model';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';

@@ -3,14 +3,18 @@ import {
     PipeTransform,
 } from '@angular/core';
 
-import { isLogged } from 'src/common/utils/is-logged.fnc';
+import { inArray } from 'src/common/utils';
+import { IUserRoles } from 'src/app/services/model/auth.model';
 
 @Pipe({
     name: 'isLogged',
 })
 export class IsLoggedPipe implements PipeTransform {
-
     transform(currentUserValue: any): boolean {
-        return isLogged(currentUserValue);
+        return  currentUserValue && currentUserValue.role &&
+            !inArray(currentUserValue.role[0], [
+                IUserRoles.NEEDS_SMS_CONFIRMATION,
+                IUserRoles.RESET_PASSWORD,
+            ]);
     }
 }

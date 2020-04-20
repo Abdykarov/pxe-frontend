@@ -15,6 +15,7 @@ import {
     Meta,
     Title,
 } from '@angular/platform-browser';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { interval } from 'rxjs';
 import {
@@ -47,7 +48,6 @@ import {
     PASSWORD_DESTINATION,
 } from 'src/common/graphql/models/user.model';
 import {
-    inArray, isLogged,
     parseGraphQLErrors,
     parseRestAPIErrors,
 } from 'src/common/utils/';
@@ -76,7 +76,6 @@ export class LoginComponent extends AbstractComponent {
         private cd: ChangeDetectorRef,
         private cookieService: CookiesService,
         private metaService: Meta,
-        private ngZone: NgZone,
         private route: ActivatedRoute,
         private router: Router,
         private userService: UserService,
@@ -112,18 +111,6 @@ export class LoginComponent extends AbstractComponent {
                 this.resetErrorsAndLoading();
                 this.passwordWasSent = false;
             });
-
-        this.ngZone.runOutsideAngular(() => {
-            interval(1000)
-                .pipe(
-                    takeUntil(this.destroy$),
-                )
-                .subscribe(_ => {
-                    if (isLogged(this.authService.currentUserValue)) {
-                        this.authService.logoutForced(false);
-                    }
-                });
-        });
     }
 
     public submitChangePassword = (changePassword: IChangePassword) => {

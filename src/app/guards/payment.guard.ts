@@ -44,6 +44,7 @@ export class PaymentGuard implements CanActivateChild {
                     };
                     this.router.navigate([ROUTES.ROUTER_REQUEST_PAYMENT], extras);
                 } else {
+                    console.log('PAYMENT');
                     this.authService.logoutForced();
                 }
                 return false;

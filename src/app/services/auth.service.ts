@@ -10,6 +10,7 @@ import {
 } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+import * as R from 'ramda';
 import {
     BehaviorSubject,
     interval,
@@ -34,8 +35,10 @@ import {
     CONSTS,
     ROUTES,
 } from 'src/app/app.constants';
+import { cantDeleteAllMarkedOffers } from 'src/common/constants/errors.constant';
 import { CookiesService } from './cookies.service';
 import { environment } from 'src/environments/environment';
+import { inArray } from 'src/common/utils';
 import {
     IJwtPayload,
     ILoginRequest,
@@ -49,7 +52,7 @@ import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.se
     providedIn: 'root',
 })
 export class AuthService {
-    private cookieName = 'user';
+    public cookieName = 'user';
     public currentUserSubject$: BehaviorSubject<IJwtPayload>;
     public currentUser$: Observable<IJwtPayload>;
     private token: string;
@@ -105,6 +108,23 @@ export class AuthService {
         if (isPlatformBrowser(this.platformId)) {
             this.refreshTokenInterval$.subscribe();
         }
+    }
+
+    static jwtTokenHasRoles(jwtToken: string, accessRole: string[]): boolean {
+        const jwtHelper = new JwtHelperService();
+        const jwtPayload = jwtHelper.decodeToken(jwtToken);
+        const { role } = jwtPayload;
+        let roleExists = false;
+        R.forEach((roleInEach) => {
+            console.log(roleInEach);
+            console.log(accessRole);
+            if (inArray(roleInEach, accessRole)) {
+                roleExists = true;
+            }
+        })(role);
+        console.log('RESULT');
+        console.log(roleExists);
+        return roleExists;
     }
 
     public refreshTokenInterval = () => {

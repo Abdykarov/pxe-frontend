@@ -19,7 +19,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { clientSchema } from 'src/common/graphql/middleware/client-schema';
 import {
     CONSTS,
+    OPERATIONS_IGNORE_ACCESS_DENIED_EXCEPTION,
     OPERATIONS_WITHOUT_SCROLL_ON_ERRORS,
+    OPERATIONS_WITHOUT_TOKEN,
 } from 'src/app/app.constants';
 import {
     defaults,
@@ -31,13 +33,13 @@ import { scrollToElementFnc } from 'src/common/utils';
 const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
 
-    const setTokenHeader = (operation: Operation): void => {
+    const setTokenHeader = (operation: Operation, withoutToken = false): void => {
         const headers: HttpHeaders = authService.getAuthorizationHeaders(null);
         const xAPIKey = headers.get('X-API-Key');
         const Authorization = headers.get('Authorization');
         operation.setContext({
             headers: {
-                ...(!!Authorization) && {Authorization},
+                ...(!!Authorization && !withoutToken) && {Authorization},
                 'X-API-Key': xAPIKey,
             },
         });
@@ -50,7 +52,7 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     });
 
     const auth = new ApolloLink((operation: Operation, forward: NextLink) => {
-        setTokenHeader(operation);
+        setTokenHeader(operation, OPERATIONS_WITHOUT_TOKEN.includes(operation.operationName));
 
         return new Observable(observer => {
             let subscription, innerSubscription;
@@ -62,8 +64,7 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
                                 R.filter((err) => err && err.type === 'AccessDeniedException'),
                                 R.head,
                             )(result.errors);
-
-                            if (isAccessDeniedException) {
+                            if (isAccessDeniedException && !OPERATIONS_IGNORE_ACCESS_DENIED_EXCEPTION.includes(operation.operationName)) {
                                 authService.logoutForced();
                             }
                         }

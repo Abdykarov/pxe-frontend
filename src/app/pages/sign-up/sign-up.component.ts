@@ -9,6 +9,7 @@ import {
 } from '@angular/platform-browser';
 
 import { Apollo } from 'apollo-angular';
+import { CookieService } from 'ngx-cookie';
 import { interval } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -25,8 +26,7 @@ import {
     IForm,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
-import { IUserRoles } from 'src/app/services/model/auth.model';
-import { inArray, parseGraphQLErrors } from 'src/common/utils';
+import { parseGraphQLErrors } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
 import { Router } from '@angular/router';
 
@@ -46,6 +46,7 @@ export class SignUpComponent extends AbstractComponent {
         private apollo: Apollo,
         private authService: AuthService,
         private cd: ChangeDetectorRef,
+        private cookieService: CookieService,
         private metaService: Meta,
         private ngZone: NgZone,
         private registrationService: RegistrationService,
@@ -73,8 +74,9 @@ export class SignUpComponent extends AbstractComponent {
                     takeUntil(this.destroy$),
                 )
                 .subscribe(_ => {
-                    if (authService.currentUserValue && authService.currentUserValue.role) {
-                        this.authService.logoutForced(false);
+                    const userToken = this.cookieService.get(this.authService.cookieName);
+                    if (userToken) {
+                        this.router.navigate([CONSTS.PATHS.EMPTY]);
                     }
                 });
         });

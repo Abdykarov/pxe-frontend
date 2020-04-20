@@ -48,9 +48,11 @@ export class LogoutInformationComponent extends AbstractComponent {
                     ),
                 )
                 .subscribe(_ => {
+                    console.log(':___:');
                     this.tokenWillExpireInSeconds =
                         Math.floor((this.authService.currentUserValue.exp * 1000 - new Date().getTime()) / 1000);
                     if (this.tokenWillExpireInSeconds === 0) {
+                        console.log('_AAA_');
                         this.authService.logoutForced();
                         this.authService.isLastRefreshToken = false;
                     }

@@ -497,6 +497,12 @@ export const REGIONS: Array<IOption> = [
     },
 ];
 
+export const OPERATIONS_WITHOUT_TOKEN = [
+    'getSupplyPointGlobalStatistics',
+];
+
+export const OPERATIONS_IGNORE_ACCESS_DENIED_EXCEPTION = [];
+
 export const OPERATIONS_WITHOUT_SCROLL_ON_ERRORS = [
     'getSupplyPointGlobalStatistics',
     'makeRegistration',

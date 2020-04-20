@@ -1,6 +1,7 @@
 import {
     Component,
     Input,
+    NgZone,
     OnChanges,
     OnInit,
     SimpleChanges,
@@ -9,8 +10,15 @@ import {
     FormBuilder,
     FormGroup,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import * as R from 'ramda';
+import { interval } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { CONSTS } from 'src/app/app.constants';
+import { AuthService } from 'src/app/services/auth.service';
+import { CookiesService } from 'src/app/services/cookies.service';
+import { IUserRoles } from 'src/app/services/model/auth.model';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 
@@ -26,7 +34,11 @@ export class ChangePasswordFormComponent extends AbstractFormComponent implement
     public form: FormGroup;
 
     constructor(
+        private authService: AuthService,
+        private cookieService: CookiesService,
         protected fb: FormBuilder,
+        private ngZone: NgZone,
+        private router: Router,
     ) {
         super(fb);
     }
@@ -36,6 +48,18 @@ export class ChangePasswordFormComponent extends AbstractFormComponent implement
         this.form = this.fb.group(this.formFields.controls, this.formFields.options);
         if (this.isPublic) {
             this.setDisableField('currentPassword');
+            this.ngZone.runOutsideAngular(() => {
+                interval(1000)
+                    .pipe(
+                        takeUntil(this.destroy$),
+                    )
+                    .subscribe(_ => {
+                        const userToken = this.cookieService.get(this.authService.cookieName);
+                        if (!userToken || !AuthService.jwtTokenHasRoles(userToken, [IUserRoles.RESET_PASSWORD])) {
+                            this.router.navigate([CONSTS.PATHS.EMPTY]);
+                        }
+                    });
+            });
         }
     }
 

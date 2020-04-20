@@ -41,7 +41,7 @@
                             </li>
                         </ul>
                         <lnd-button
-                            [isDisabled]="authService.currentUserValue | isLogged"
+                            *ngIf="!(authService.currentUserValue | isLogged)"
                             label="Chci platit chytře"
                             type="primary"
                             (action)="scrollToNewSubscription()">
@@ -105,7 +105,7 @@
                             </li>
                         </ul>
                         <lnd-button
-                            [isDisabled]="authService.currentUserValue | isLogged"
+                            *ngIf="!(authService.currentUserValue | isLogged)"
                             label="Chci do PARC4U"
                             type="primary"
                             (action)="scrollToNewSubscription()">
@@ -193,7 +193,7 @@
     </div>
     <div
         #subscription
-        *ngIf="!(authService.currentUserValue | isLogged)"
+        *ngIf="!isLogged"
         class="section stay-in-touch">
         <div class="container-fluid">
             <div class="row">

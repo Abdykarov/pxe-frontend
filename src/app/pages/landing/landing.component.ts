@@ -1,7 +1,7 @@
 import {
     ChangeDetectorRef,
     Component,
-    ElementRef,
+    ElementRef, NgZone,
     ViewChild,
 } from '@angular/core';
 import {
@@ -11,8 +11,8 @@ import {
 import { Router } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
-import { takeUntil } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
+import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -26,8 +26,8 @@ import {
     IForm,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
+import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import {
-    isLogged,
     parseGraphQLErrors,
     scrollToElementFnc,
 } from 'src/common/utils';
@@ -60,6 +60,7 @@ export class LandingComponent extends AbstractComponent {
         private apollo: Apollo,
         public authService: AuthService,
         private cd: ChangeDetectorRef,
+        private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
         private router: Router,
         private registrationService: RegistrationService,
@@ -125,7 +126,7 @@ export class LandingComponent extends AbstractComponent {
     }
 
     public scrollToNewSubscription = () =>  {
-        if (isLogged(this.authService.currentUserValue)) {
+        if (this.isLoggedPipe.transform(this.authService.currentUserValue)) {
             this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
         }
     }
