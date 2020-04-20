@@ -22,20 +22,33 @@
 
 .form-control-info-wrapper {
 	width: 100%;
+	padding-bottom: $icon-size-px;
 
 	// Media queries
-	@include media-breakpoint-up(md) {
-		width: 150%;
+	@include media-breakpoint-up(xl) {
+		width: 390px;
+		padding-bottom: 0;
 		margin-left: 220px;
 	}
 }
 
 .form-control-info {
+	position: relative;
 	display: inline-block;
 	padding: ( $spacer / 2 ) $spacer;
 	background-color: $secondary;
 	color: $white;
 	border-radius: 3px 3px 3px 0;
+
+	&::after {
+		content: '\e930';
+		@include icon;
+		position: absolute;
+		top: calc( 100% - 5px );
+		left: 0;
+		color: $secondary;
+		overflow: hidden;
+	}
 }
 
 .form-group {
