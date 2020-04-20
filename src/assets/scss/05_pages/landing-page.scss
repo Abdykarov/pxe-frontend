@@ -34,6 +34,9 @@
 			@include media-breakpoint-up(xl) {
 				margin-bottom: ( $spacer * 3 );
 			}
+			@include media-breakpoint-up(lg) {
+				padding: ( $spacer * 7 ) 0 ( $spacer * 8 );
+			}
 		}
 
 		&--picture-second {
@@ -188,7 +191,8 @@
 	}
 
 	.section-picture {
-		@include absolute-center;
+		@include absolute-center(false);
+		bottom: 0;
 		width: 100%;
 		height: auto;
 
@@ -201,7 +205,7 @@
 			height: 125%;
 		}
 		@include media-breakpoint-up(lg) {
-			width: 108%;
+			width: 100%;
 			height: auto;
 		}
 	}
