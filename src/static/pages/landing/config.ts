@@ -15,8 +15,8 @@ export const carouselItems: ICarouselItem[] = [
     },
     {
         title: 'Vyberete si a podepíšete smlouvu',
-        label: 'Nejlákavější nabídku potvrdíte jedním kliknutím, doplníte ' +
-            'nám základní informace o majiteli odběrného místa a smlouvu online podepíšete.',
+        label: 'Nejlákavější nabídku potvrdíte jedním kliknutím, doplníte nám' +
+            ' základní informace o majiteli odběrného místa a smlouvu online podepíšete.',
         alt: 'carousel obrázek - Vyberete si a podepíšete smlouvu',
         src: '/assets/images/landing-page/laptop-payment.png',
     },
