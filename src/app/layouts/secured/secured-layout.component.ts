@@ -31,13 +31,14 @@ import {
     CONSTS,
     SEO,
 } from 'src/app/app.constants';
-import { moreTabDialog } from 'src/app/services/model/only-one-tab-active.model';
-import { ModalService } from 'src/common/containers/modal/modal.service';
+import { CookiesService } from 'src/app/services/cookies.service';
 import {
     INavigationConfig,
     INavigationMenu,
 } from 'src/common/ui/navigation/models/navigation.model';
 import { IStoreUi } from 'src/common/graphql/models/store.model';
+import { moreTabDialog } from 'src/app/services/model/only-one-tab-active.model';
+import { ModalService } from 'src/common/containers/modal/modal.service';
 import { NavigationService as NavigationApolloService} from 'src/common/graphql/services/navigation.service';
 import {
     navigationMenuSuppliersActions,
@@ -61,6 +62,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
         protected apollo: Apollo,
         public authService: AuthService,
         private cd: ChangeDetectorRef,
+        protected cookieService: CookiesService,
         private metaService: Meta,
         private modalsService: ModalService,
         private navigationApolloService: NavigationApolloService,
@@ -76,6 +78,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
         super(
             apollo,
             authService,
+            cookieService,
             overlayService,
             route,
             router,

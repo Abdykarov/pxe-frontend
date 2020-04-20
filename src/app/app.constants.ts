@@ -16,6 +16,7 @@ export const CONSTS = {
         CALENDAR: 'YYYY-MM-DD[T]HH:mm',
         SHORT: 'YYYY-MM-DD',
     },
+    COOKIE_TEMPORARY_EXPIRATION: 10000,
     DEFAULT_EXPIRATION: 700000,
     DEFAULT_DEPOSIT_PAYMENT_TYPE_ID: 'Prikaz',
     EXPORT: {
@@ -87,10 +88,15 @@ export const CONSTS = {
         WILD_CART  : '**',
     },
     REFRESH_TOKEN: {
-        INTERVAL: 300000,
+        INTERVAL: 1200,
         COUNT: 16,
         DONT_REFRESH_TIME_IN_MINUTES: 2,
     },
+    REASON_FOR_LOGOUT_USER: {
+        BY_SELF: 'Byl jste úspěšně odhlášen',
+        UNAUTHORIZED: 'Došlo k odhlášení z důvodu neaktivity',
+    },
+    TIME_TO_SHOW_USER_LOGOUT_BANNER: 300,
     VALIDATORS: {
         ADULTHOOD_AGE: 18,
         MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION: 10,
