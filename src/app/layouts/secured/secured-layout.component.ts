@@ -37,7 +37,6 @@ import {
     INavigationMenu,
 } from 'src/common/ui/navigation/models/navigation.model';
 import { IStoreUi } from 'src/common/graphql/models/store.model';
-import { moreTabDialog } from 'src/app/services/model/only-one-tab-active.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { NavigationService as NavigationApolloService} from 'src/common/graphql/services/navigation.service';
 import {
@@ -46,6 +45,7 @@ import {
 } from './services/navigation.config';
 import { NavigationService } from './services/navigation.service';
 import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
+import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
@@ -73,13 +73,14 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
         protected router: Router,
         private titleService: Title,
         protected scrollToService: ScrollToService,
-        @Inject(PLATFORM_ID) private platformId: string,
+        @Inject(PLATFORM_ID) public platformId: string,
     ) {
         super(
             apollo,
             authService,
             cookieService,
             overlayService,
+            platformId,
             route,
             router,
             scrollToService,
@@ -112,36 +113,36 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
         this.onlyOneTabActiveService.setActiveTab();
         if (isPlatformBrowser(this.platformId)) {
             window.addEventListener('storage', this.handleStoreChange);
-        }
 
-        this.modalsService.closeModalData$
-            .pipe(
-                filter(R_.isNotNil),
-            )
-            .subscribe(modal => {
-                if (modal.modalType === CONSTS.MODAL_TYPE.MORE_TABS) {
-                    if (modal.confirmed) {
-                        this.onlyOneTabActiveService.setActiveTab();
-                        window.open(localStorage.getItem(CONSTS.LAST_URL), '_self');
-                    } else {
-                        this.router.navigate([CONSTS.PATHS.EMPTY]);
+            this.modalsService.closeModalData$
+                .pipe(
+                    filter(R_.isNotNil),
+                )
+                .subscribe(modal => {
+                    if (modal.modalType === CONSTS.MODAL_TYPE.MORE_TABS) {
+                        if (modal.confirmed) {
+                            this.onlyOneTabActiveService.setActiveTab();
+                            window.open(localStorage.getItem('last_url'), '_self');
+                        } else {
+                            this.router.navigate([CONSTS.PATHS.EMPTY]);
+                        }
                     }
-                }
-                this.modalsService.closeModalData$.next(null);
-            });
+                    this.modalsService.closeModalData$.next(null);
+                });
+        }
     }
 
     private handleStoreChange = (storageEvent: StorageEvent) => {
         const newValue = storageEvent.newValue;
         if (
-            storageEvent.key === CONSTS.ONLY_ONE_TAB_ACTIVE.NAME_COOKIE &&
+            storageEvent.key === 'active_tab' &&
             newValue !== this.onlyOneTabActiveService.uuid
         ) {
-            if (CONSTS.ONLY_ONE_TAB_ACTIVE.LOGOUT === newValue) {
+            if (OnlyOneTabActiveState.LOGOUT === newValue) {
                 this.router.navigate([CONSTS.PATHS.EMPTY]);
-            } else if (CONSTS.ONLY_ONE_TAB_ACTIVE.CLOSED !== newValue) {
+            } else if (OnlyOneTabActiveState.CLOSED !== newValue) {
                 this.modalsService
-                    .showModal$.next(moreTabDialog());
+                    .showModal$.next(this.onlyOneTabActiveService.moreTabDialog());
             }
         }
     }

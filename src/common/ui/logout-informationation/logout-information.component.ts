@@ -43,16 +43,14 @@ export class LogoutInformationComponent extends AbstractComponent {
             interval(1000)
                 .pipe(
                     takeUntil(this.destroy$),
-                    filter( _ => this.router.url.includes('secured') &&
+                    filter(_ => this.router.url.includes('secured') &&
                         this.authService.isLastRefreshToken && this.onlyOneTabActiveService.isThisTabActive(),
                     ),
                 )
                 .subscribe(_ => {
-                    console.log(':___:');
                     this.tokenWillExpireInSeconds =
                         Math.floor((this.authService.currentUserValue.exp * 1000 - new Date().getTime()) / 1000);
                     if (this.tokenWillExpireInSeconds === 0) {
-                        console.log('_AAA_');
                         this.authService.logoutForced();
                         this.authService.isLastRefreshToken = false;
                     }

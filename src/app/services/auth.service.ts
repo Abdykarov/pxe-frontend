@@ -10,7 +10,7 @@ import {
 } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import * as R from 'ramda';
+import * as R_ from 'ramda-extension';
 import {
     BehaviorSubject,
     interval,
@@ -35,10 +35,9 @@ import {
     CONSTS,
     ROUTES,
 } from 'src/app/app.constants';
-import { cantDeleteAllMarkedOffers } from 'src/common/constants/errors.constant';
+import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';
 import { CookiesService } from './cookies.service';
 import { environment } from 'src/environments/environment';
-import { inArray } from 'src/common/utils';
 import {
     IJwtPayload,
     ILoginRequest,
@@ -79,7 +78,7 @@ export class AuthService {
                 }),
                 catchError(() => of(this.stopMessageInterval)),
                 take(CONSTS.REFRESH_TOKEN.COUNT),
-                tap( tick => {
+                tap(tick => {
                     this.isLastRefreshToken = CONSTS.REFRESH_TOKEN.COUNT - 1 === tick;
                     return tick;
                 }),
@@ -114,13 +113,7 @@ export class AuthService {
         const jwtHelper = new JwtHelperService();
         const jwtPayload = jwtHelper.decodeToken(jwtToken);
         const { role } = jwtPayload;
-        let roleExists = false;
-        R.forEach((roleInEach) => {
-            if (inArray(roleInEach, accessRole)) {
-                roleExists = true;
-            }
-        })(role);
-        return roleExists;
+        return R_.containsAny(role, accessRole);
     }
 
     public refreshTokenInterval = () => {
@@ -187,7 +180,7 @@ export class AuthService {
             .pipe(
                 map(response => {
                     this.cleanUserData();
-                    this.onlyOneTabActiveService.setActiveTab(CONSTS.ONLY_ONE_TAB_ACTIVE.LOGOUT);
+                    this.onlyOneTabActiveService.setActiveTab(OnlyOneTabActiveState.LOGOUT);
                     return response;
                 }),
                 catchError((error) => {

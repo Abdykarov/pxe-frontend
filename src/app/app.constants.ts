@@ -38,12 +38,6 @@ export const CONSTS = {
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
     LAST_URL: 'last_url',
-    ONLY_ONE_TAB_ACTIVE: {
-        NAME_COOKIE: 'ACTIVE_TAB',
-        CLOSED: 'CLOSED',
-        EMPTY: 'EMPTY',
-        LOGOUT: 'LOGOUT',
-    },
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
     MODAL_TYPE: {
         MORE_TABS: 'moreTabs',
@@ -501,6 +495,7 @@ export const REGIONS: Array<IOption> = [
 
 export const OPERATIONS_WITHOUT_TOKEN = [
     'getSupplyPointGlobalStatistics',
+    'resetPassword',
 ];
 
 export const OPERATIONS_IGNORE_ACCESS_DENIED_EXCEPTION = [];

@@ -1,10 +1,11 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
     ActivatedRoute,
     NavigationEnd,
     NavigationExtras,
     Router,
 } from '@angular/router';
-import { OnInit } from '@angular/core';
+import { Inject, OnInit, PLATFORM_ID } from '@angular/core';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
@@ -58,6 +59,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         protected authService: AuthService,
         protected cookieService: CookiesService,
         protected overlayService: OverlayService,
+        protected platformId: string,
         protected route: ActivatedRoute,
         protected router: Router,
         protected scrollToService: ScrollToService,
@@ -73,8 +75,11 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
                         .subscribe();
                     this.toggleSubscription.unsubscribe();
                 }
-                if (event.urlAfterRedirects.indexOf('/secured') >= -1) {
-                    localStorage.setItem(CONSTS.LAST_URL, event.urlAfterRedirects);
+                if (
+                    event.urlAfterRedirects.indexOf('/secured') >= -1 &&
+                    isPlatformBrowser(this.platformId)
+                ) {
+                    localStorage.setItem('last_url', event.urlAfterRedirects);
                 }
                 this.settings = <ISettings>this.route.snapshot.firstChild.data;
                 this.activeUrl = this.router.url;

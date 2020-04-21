@@ -3,7 +3,8 @@ import {
     PipeTransform,
 } from '@angular/core';
 
-import { inArray } from 'src/common/utils';
+import * as R_ from 'ramda-extension';
+
 import { IUserRoles } from 'src/app/services/model/auth.model';
 
 @Pipe({
@@ -12,7 +13,7 @@ import { IUserRoles } from 'src/app/services/model/auth.model';
 export class IsLoggedPipe implements PipeTransform {
     transform(currentUserValue: any): boolean {
         return  currentUserValue && currentUserValue.role &&
-            !inArray(currentUserValue.role[0], [
+            !R_.containsAny(currentUserValue.role, [
                 IUserRoles.NEEDS_SMS_CONFIRMATION,
                 IUserRoles.RESET_PASSWORD,
             ]);

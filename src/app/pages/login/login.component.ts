@@ -7,7 +7,6 @@ import {
     ChangeDetectorRef,
     Component,
     Inject,
-    NgZone,
     PLATFORM_ID,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
@@ -82,7 +81,7 @@ export class LoginComponent extends AbstractComponent {
     ) {
         super();
 
-        if (isPlatformBrowser(this.platformId) && this.cookieService.get('reasonForLogoutUser')) {
+        if (isPlatformBrowser(this.platformId)) {
             this.reasonForLogoutUser = this.cookieService.get('reasonForLogoutUser');
         }
 

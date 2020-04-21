@@ -7,13 +7,12 @@ import {
     Component,
     HostListener,
     Inject,
-    NgZone,
+    PLATFORM_ID,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
-import { interval } from 'rxjs';
 import {
     map,
     takeUntil,
@@ -27,7 +26,6 @@ import {
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';
-import { IUserRoles } from 'src/app/services/model/auth.model';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
@@ -62,12 +60,14 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
         protected router: Router,
         protected scrollToService: ScrollToService,
         @Inject(DOCUMENT) private document: any,
+        @Inject(PLATFORM_ID) public platformId: string,
     ) {
         super(
             apollo,
             authService,
             cookieService,
             overlayService,
+            platformId,
             route,
             router,
             scrollToService,

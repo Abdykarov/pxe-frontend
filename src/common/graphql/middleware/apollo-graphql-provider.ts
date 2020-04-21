@@ -52,7 +52,7 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     });
 
     const auth = new ApolloLink((operation: Operation, forward: NextLink) => {
-        setTokenHeader(operation, OPERATIONS_WITHOUT_TOKEN.includes(operation.operationName));
+        setTokenHeader(operation, R.includes(operation.operationName, OPERATIONS_WITHOUT_TOKEN));
 
         return new Observable(observer => {
             let subscription, innerSubscription;
@@ -64,7 +64,10 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
                                 R.filter((err) => err && err.type === 'AccessDeniedException'),
                                 R.head,
                             )(result.errors);
-                            if (isAccessDeniedException && !OPERATIONS_IGNORE_ACCESS_DENIED_EXCEPTION.includes(operation.operationName)) {
+                            if (
+                                isAccessDeniedException &&
+                                !R.includes(operation.operationName, OPERATIONS_IGNORE_ACCESS_DENIED_EXCEPTION)
+                            ) {
                                 authService.logoutForced();
                             }
                         }
@@ -115,8 +118,7 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
         }
 
         if (graphQLErrors || networkError) {
-            // TODO scroll to error (global or field)
-            if (!OPERATIONS_WITHOUT_SCROLL_ON_ERRORS.includes(operation.operationName)) {
+            if (!R.includes(operation.operationName, OPERATIONS_WITHOUT_SCROLL_ON_ERRORS)) {
                 scrollToElementFnc('top');
             }
         }
