@@ -1,11 +1,11 @@
-import { isPlatformBrowser } from '@angular/common';
 import {
     ActivatedRoute,
     NavigationEnd,
     NavigationExtras,
     Router,
 } from '@angular/router';
-import { Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { OnInit } from '@angular/core';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
