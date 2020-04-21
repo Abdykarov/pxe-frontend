@@ -83,6 +83,7 @@ export const CONSTS = {
         COUNT: 16,
         DONT_REFRESH_TIME_IN_MINUTES: 2,
     },
+    START_STICKER_HEADER: 0,
     VALIDATORS: {
         ADULTHOOD_AGE: 18,
         MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION: 10,
@@ -130,6 +131,7 @@ export const CONSTS = {
         SECURING_YOUR_DATA: 'Ochrana osobních údajů | PARC4U',
         SIGN_UP: 'Registrace | PARC4U',
     },
+    XL_RESOLUTION: 992,
 };
 
 export const ROUTES = {

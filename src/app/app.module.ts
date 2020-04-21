@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 
 import { ApolloModule } from 'apollo-angular';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { CookieModule } from 'ngx-cookie';
 import { HttpLinkModule } from 'apollo-angular-link-http';
 
@@ -31,6 +32,7 @@ import { PipesModule } from 'src/common/pipes/pipes.module';
         BrowserModule.withServerTransition({
             appId: 'pxe-pacr4retail',
         }),
+        CarouselModule.forRoot(),
         CookieModule.forRoot(),
         FileUploadModule,
         HttpClientModule,

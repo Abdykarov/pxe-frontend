@@ -5,7 +5,10 @@ import {
 import {
     ChangeDetectorRef,
     Component,
+    HostListener,
+    Inject,
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
@@ -18,6 +21,7 @@ import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.compone
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CommodityTypesLowerCase,
+    CONSTS,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
@@ -31,6 +35,18 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 export class PublicLayoutComponent extends AbstractLayoutComponent {
     public commodityTypePower = CommodityTypesLowerCase.POWER;
     public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
+    public lastScrollTop = 0;
+    public wasLastTimeScrolledToTop = false;
+
+    @HostListener('window:scroll', [])
+    onWindowScroll() {
+        const scrollTop =
+            window.scrollY ||
+            window.pageYOffset ||
+            document.body.scrollTop + (document.documentElement && document.documentElement.scrollTop || 0);
+        this.wasLastTimeScrolledToTop = scrollTop < this.lastScrollTop && scrollTop > CONSTS.START_STICKER_HEADER;
+        this.lastScrollTop = scrollTop;
+    }
 
     constructor(
         protected apollo: Apollo,
@@ -40,6 +56,7 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
         protected route: ActivatedRoute,
         protected router: Router,
         protected scrollToService: ScrollToService,
+        @Inject(DOCUMENT) private document: any,
     ) {
         super(
             apollo,

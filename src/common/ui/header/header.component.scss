@@ -17,6 +17,14 @@
 	color: $white;
 	z-index: 2010;
 
+	&--sticked {
+		// Media queries
+		@include media-breakpoint-up(xl) {
+			position: fixed;
+			background-color: $light;
+		}
+	}
+
 	.logo {
 		vertical-align: top;
 		height: 100%;
@@ -94,14 +102,6 @@ a.logo-link {
 		// Media queries
 		@include media-breakpoint-up(md) {
 			height: $logo-height-tablet;
-		}
-	}
-
-	.header--sticked & {
-		// Media queries
-		@include media-breakpoint-up(lg) {
-			position: fixed;
-			top: ( $spacer * 1.5 );
 		}
 	}
 }

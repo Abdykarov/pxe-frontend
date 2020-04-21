@@ -4,6 +4,8 @@ import {
     RouterModule,
 } from '@angular/router';
 
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+
 import { environment } from 'src/environments/environment';
 
 const routes: Routes = [
@@ -30,6 +32,7 @@ const routes: Routes = [
                 scrollPositionRestoration: 'top',
             },
         ),
+        CarouselModule.forRoot(),
     ],
     exports: [
         RouterModule,
