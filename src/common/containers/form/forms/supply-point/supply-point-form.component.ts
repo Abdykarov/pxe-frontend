@@ -3,6 +3,7 @@ import {
     Component,
     Input,
     OnChanges,
+    OnDestroy,
     OnInit,
     SimpleChanges,
 } from '@angular/core';
@@ -19,9 +20,9 @@ import {
     map,
     takeUntil,
 } from 'rxjs/operators';
-import { AuthService } from 'src/app/services/auth.service';
 
 import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/abstract-supply-point-form.component';
+import { AuthService } from 'src/app/services/auth.service';
 import {
     ANNUAL_CONSUMPTION_TYPES,
     ANNUAL_CONSUMPTION_UNIT_TYPES,
@@ -56,6 +57,7 @@ import {
 import { HelpModalComponent } from 'src/common/containers/modal/modals/help/help-modal.component';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SupplyPointLocalStorageService } from 'src/app/services/supply-point-local-storage.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
@@ -64,7 +66,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     templateUrl: './supply-point-form.component.html',
     styleUrls: ['./supply-point-form.component.scss'],
 })
-export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent implements OnInit, OnChanges {
+export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent implements OnInit, OnDestroy, OnChanges {
     public readonly MAX_LENGTH_NUMBER_INPUT_WITH_HINT = CONSTS.VALIDATORS.MAX_LENGTH.NUMBER_INPUT_WITH_HINT;
 
     @Input()
@@ -96,6 +98,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         private cd: ChangeDetectorRef,
         protected fb: FormBuilder,
         private modalsService: ModalService,
+        private sAnalyticsService: SAnalyticsService,
         private supplyPointLocalStorageService: SupplyPointLocalStorageService,
         private supplyService: SupplyService,
     ) {
@@ -106,6 +109,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     ngOnInit() {
         super.ngOnInit();
         this.form = this.fb.group(this.formFields.controls, this.formFields.options);
+        this.sAnalyticsService.sFormStart();
 
         this.form.get('annualConsumptionNTUnit')
             .valueChanges
@@ -370,7 +374,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         R.forEachObjIndexed((show: boolean, field: string) => {
             show ? this.setEnableField(field) : this.setDisableField(field);
         }, this.expirationConfig[this.contractEndType]);
-
         this.cd.markForCheck();
     }
 
@@ -480,5 +483,10 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 this.suppliers$.next(this.suppliers);
                 this.cd.markForCheck();
             });
+    }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        this.sAnalyticsService.sFormEnd();
     }
 }

@@ -22,6 +22,7 @@ import {
 import { of } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from 'src/app/services/auth.service';
 import {
     CommodityType,
     ISupplyPoint,
@@ -39,10 +40,12 @@ import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress
 import { parseGraphQLErrors } from 'src/common/utils';
 import {
     ROUTES,
+    S_ANALYTICS,
     SUPPLY_POINT_EDIT_TYPE,
 } from 'src/app/app.constants';
 import { SupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/supply-point-form.component';
 import { SupplyPointLocalStorageService } from 'src/app/services/supply-point-local-storage.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -72,10 +75,12 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     };
 
     constructor(
+        private authService: AuthService,
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
         private route: ActivatedRoute,
         private router: Router,
+        private sAnalyticsService: SAnalyticsService,
         private supplyService: SupplyService,
         private supplyPointLocalStorageService: SupplyPointLocalStorageService,
         @Inject(PLATFORM_ID) private platformId: string,
@@ -197,6 +202,17 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                     this.supplyPointLocalStorageService.removeSupplyPoint();
                     this.formLoading = false;
                     this.formSent = true;
+                    this.sAnalyticsService.sendWebData(
+                        {},
+                        {
+                            email: this.authService.currentUserValue.email,
+                        },
+                        {},
+                        {
+                            ACTION: S_ANALYTICS.ACTIONS.CREATE_SUPPLY_POINT,
+                            supplyPointFormData,
+                        },
+                    );
                     this.cd.markForCheck();
                     this.router.navigate(
                         [ROUTES.ROUTER_REQUEST_OFFER_SELECTION],
