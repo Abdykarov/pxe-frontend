@@ -19,7 +19,6 @@ import {
     map,
     takeUntil,
 } from 'rxjs/operators';
-import { CookiesService } from 'src/app/services/cookies.service';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
@@ -28,6 +27,7 @@ import {
     ROUTES,
     SEO,
 } from 'src/app/app.constants';
+import { CookiesService } from 'src/app/services/cookies.service';
 import {
     formFieldsLogin,
     LOGIN_STATE,
