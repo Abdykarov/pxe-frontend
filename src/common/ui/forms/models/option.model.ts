@@ -1,6 +1,6 @@
 export interface IOption {
-    key: string | number | false;
-    value?: string | number | object | false;
+    key: string | number | boolean;
+    value?: string | number | object | boolean;
     disabled?: boolean;
     label?: string;
 }
