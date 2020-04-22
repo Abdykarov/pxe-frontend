@@ -5,7 +5,9 @@ import {
 import {
     ChangeDetectorRef,
     Component,
+    Inject,
     OnInit,
+    PLATFORM_ID,
 } from '@angular/core';
 import {
     Meta,
@@ -37,6 +39,7 @@ import {
 } from './services/navigation.config';
 import { NavigationService } from './services/navigation.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
@@ -58,15 +61,19 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
         protected overlayService: OverlayService,
         protected route: ActivatedRoute,
         protected router: Router,
-        private titleService: Title,
+        protected sAnalyticsService: SAnalyticsService,
         protected scrollToService: ScrollToService,
+        private titleService: Title,
+        @Inject(PLATFORM_ID) protected platformId: string,
     ) {
         super(
             apollo,
             authService,
             overlayService,
+            platformId,
             route,
             router,
+            sAnalyticsService,
             scrollToService,
         );
         this.titleService.setTitle(CONSTS.TITLES.DEFAULT);

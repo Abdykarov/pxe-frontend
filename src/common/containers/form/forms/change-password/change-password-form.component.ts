@@ -2,6 +2,7 @@ import {
     Component,
     Input,
     OnChanges,
+    OnDestroy,
     OnInit,
     SimpleChanges,
 } from '@angular/core';
@@ -13,19 +14,21 @@ import {
 import * as R from 'ramda';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Component({
     selector: 'pxe-change-password-form',
     templateUrl: './change-password-form.component.html',
     styleUrls: ['./change-password-form.component.scss'],
 })
-export class ChangePasswordFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
+export class ChangePasswordFormComponent extends AbstractFormComponent implements OnInit, OnChanges, OnDestroy {
     @Input()
     public isPublic = true;
 
     public form: FormGroup;
 
     constructor(
+        private sAnalyticsService: SAnalyticsService,
         protected fb: FormBuilder,
     ) {
         super(fb);
@@ -33,6 +36,7 @@ export class ChangePasswordFormComponent extends AbstractFormComponent implement
 
     ngOnInit() {
         super.ngOnInit();
+        this.sAnalyticsService.sFormStart();
         this.form = this.fb.group(this.formFields.controls, this.formFields.options);
         if (this.isPublic) {
             this.setDisableField('currentPassword');
@@ -46,5 +50,10 @@ export class ChangePasswordFormComponent extends AbstractFormComponent implement
             this.form.reset(defaultValues);
             this.resetFormError(false);
         }
+    }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        this.sAnalyticsService.sFormEnd();
     }
 }

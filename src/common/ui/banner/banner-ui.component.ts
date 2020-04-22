@@ -3,6 +3,7 @@ import {
     EventEmitter,
     Input,
     Output,
+    TemplateRef,
 } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -30,6 +31,9 @@ export class BannerUIComponent extends AbstractComponent {
 
     @Input()
     public showButtonLabel = true;
+
+    @Input()
+    public buttonsTemplate?: TemplateRef<any>;
 
     @Output()
     public customBannerAction?: EventEmitter<any> = new EventEmitter<any>();

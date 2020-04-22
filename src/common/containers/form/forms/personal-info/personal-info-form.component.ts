@@ -2,6 +2,7 @@ import {
     AfterViewInit,
     Component,
     Input,
+    OnDestroy,
     OnInit,
 } from '@angular/core';
 import {
@@ -33,13 +34,15 @@ import {
     IPersonalData,
     IPersonalDataInputForm,
 } from 'src/common/graphql/models/personal-data.model';
+import { PersonalInfoLocalStorageService } from 'src/app/services/personal-info-local-storage.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Component({
     selector: 'pxe-personal-info-form',
     templateUrl: './personal-info-form.component.html',
     styleUrls: ['./personal-info-form.component.scss'],
 })
-export class PersonalInfoFormComponent extends AbstractFormComponent implements OnInit, AfterViewInit {
+export class PersonalInfoFormComponent extends AbstractFormComponent implements OnInit, AfterViewInit, OnDestroy {
 
     public readonly MAX_LENGTH_NUMBER_INPUT_WITH_HINT = CONSTS.VALIDATORS.MAX_LENGTH.NUMBER_INPUT_WITH_HINT;
 
@@ -62,12 +65,15 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     constructor(
         private authService: AuthService,
         protected fb: FormBuilder,
+        private personalInfoLocalStorageService: PersonalInfoLocalStorageService,
+        public sAnalyticsService: SAnalyticsService,
     ) {
         super(fb);
     }
 
     ngOnInit() {
         super.ngOnInit();
+        this.sAnalyticsService.sFormStart();
         this.setForm();
         this.depositPaymentTypeId = this.codeLists[CODE_LIST.DEPOSIT_PAYMENT_TYPE];
         const filteredValuesOfDefaultType = R.filter(
@@ -107,6 +113,20 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             const deposit = this.supplyPoint.contract.offer.totalPrice;
             this.form.controls['email'].setValue(email);
             this.form.controls['deposit'].setValue(Math.ceil(deposit));
+
+            const personalInfoUnfinished = this.personalInfoLocalStorageService.getPersonalInfo(this.supplyPoint.id);
+            if (personalInfoUnfinished && !R.isEmpty(personalInfoUnfinished)) {
+                if (personalInfoUnfinished.birthDate) {
+                    personalInfoUnfinished.birthDate = new Date(personalInfoUnfinished.birthDate);
+                }
+                this.form.setValue(personalInfoUnfinished);
+            }
+
+            this.form.valueChanges
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(_ => {
+                    this.personalInfoLocalStorageService.addPersonalInfo(this.supplyPoint.id, this.form.getRawValue());
+                });
         }
     }
 
@@ -223,5 +243,10 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         delete form.phonePrefix;
         delete form.onlyAddress1;
         this.submitAction.emit(form);
+    }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        this.sAnalyticsService.sFormEnd();
     }
 }
