@@ -54,7 +54,13 @@ export class SelectComponent {
     public disabledField = false;
 
     @Output()
+    public change?: EventEmitter<any> = new EventEmitter();
+
+    @Output()
     public close?: EventEmitter<any> = new EventEmitter();
+
+    @Output()
+    public open?: EventEmitter<any> = new EventEmitter();
 
     @Input()
     public customClass?: string;

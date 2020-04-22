@@ -5,6 +5,7 @@ window.angularDevstack = {
     "config": {
         "gaId": "",
         "gtmId": "GTM-58VS48R",
+        "sAnalyticsTId": "SA-00080-1",
         "production": true,
         "url_graphql": "https://parc4u.cz/graphql",
         "url_api": "https://parc4u.cz/api",

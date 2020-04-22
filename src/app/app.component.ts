@@ -1,15 +1,15 @@
 import {
-    Component,
+    DOCUMENT,
+    isPlatformBrowser,
+} from '@angular/common';
+import {
     ChangeDetectionStrategy,
+    Component,
     Inject,
     PLATFORM_ID,
     ElementRef,
     OnInit,
 } from '@angular/core';
-import {
-    DOCUMENT,
-    isPlatformBrowser,
-} from '@angular/common';
 import {
     NavigationEnd,
     Router,
@@ -17,6 +17,7 @@ import {
 
 import { environment } from 'src/environments/environment';
 import { GTMService } from './services/gtm.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Component({
     selector: 'lnd-root',
@@ -29,10 +30,18 @@ export class AppComponent implements OnInit {
         private elementRef: ElementRef,
         private gtmService: GTMService,
         private router: Router,
+        private sAnalyticsService: SAnalyticsService,
         @Inject(DOCUMENT) private document: Document,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         if (isPlatformBrowser(this.platformId)) {
+            this.sAnalyticsService.init();
+            this.sAnalyticsService.installSForm();
+            this.sAnalyticsService.installSBiometrics();
+            this.sAnalyticsService.initSBiometrics();
+            this.sAnalyticsService.initSForm();
+            this.sAnalyticsService.initSApm();
+
             if (!environment.gtmId) {
                 return;
             }
