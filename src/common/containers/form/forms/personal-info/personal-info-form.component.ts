@@ -1,7 +1,8 @@
 import {
     AfterViewInit,
     Component,
-    Input, OnDestroy,
+    Input,
+    OnDestroy,
     OnInit,
 } from '@angular/core';
 import {
@@ -32,6 +33,7 @@ import {
     IPersonalData,
     IPersonalDataInputForm,
 } from 'src/common/graphql/models/personal-data.model';
+import { PersonalInfoLocalStorageService } from 'src/app/services/personal-info-local-storage.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Component({
@@ -61,6 +63,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
 
     constructor(
         protected fb: FormBuilder,
+        private personalInfoLocalStorageService: PersonalInfoLocalStorageService,
         public sAnalyticsService: SAnalyticsService,
     ) {
         super(fb);
@@ -103,6 +106,20 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
 
         if (this.formValues) {
             this.prefillFormData();
+        } else {
+            const personalInfoUnfinished = this.personalInfoLocalStorageService.getPersonalInfo(this.supplyPoint.id);
+            if (personalInfoUnfinished && !R.isEmpty(personalInfoUnfinished)) {
+                if (personalInfoUnfinished.birthDate) {
+                    personalInfoUnfinished.birthDate = new Date(personalInfoUnfinished.birthDate);
+                }
+                this.form.setValue(personalInfoUnfinished);
+            }
+
+            this.form.valueChanges
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(_ => {
+                    this.personalInfoLocalStorageService.addPersonalInfo(this.supplyPoint.id, this.form.getRawValue());
+                });
         }
     }
 
