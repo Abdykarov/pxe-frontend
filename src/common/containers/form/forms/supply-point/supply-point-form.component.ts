@@ -40,6 +40,7 @@ import {
 } from 'src/app/app.constants';
 import {
     CommodityType,
+    ICodelistItem,
     ISupplierSampleDocument,
     ISupplyPoint,
     SubjectType,
@@ -281,9 +282,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         let annualConsumptionVT = null;
         let annualConsumption = null;
         let expirationDate = null;
-        let contractEndTypeId = null;
-        let timeToContractEnd = null;
-        let timeToContractEndPeriodId = null;
+        let contractEndTypeId = CONTRACT_END_TYPE.CONTRACT_END_INDEFINITE_PERIOD;
+        let timeToContractEnd = CONSTS.TIME_TO_CONTRACT_END_INDEFINITE_TIME_IN_MONTHS;
+        let timeToContractEndPeriodId: ICodelistItem | string = TimeToContractEndPeriod.MONTH;
         let annualConsumptionNTUnit = null;
         let annualConsumptionVTUnit = null;
 
@@ -330,7 +331,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             } else {
                 expirationDate = expirationDateFromContract || expirationDateFromSupplyPoint;
                 contractEndTypeId = CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION;
-                timeToContractEnd = String(CONSTS.TIME_TO_CONTRACT_END_PROLONGED);
+                timeToContractEnd = CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS;
                 timeToContractEndPeriodId = TimeToContractEndPeriod.DAY;
             }
             this.form.controls['annualConsumptionNTUnit'].setValue(annualConsumptionNTUnit);
