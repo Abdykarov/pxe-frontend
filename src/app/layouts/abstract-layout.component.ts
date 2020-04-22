@@ -79,7 +79,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
                     event.urlAfterRedirects.indexOf('/secured') >= -1 &&
                     isPlatformBrowser(this.platformId)
                 ) {
-                    localStorage.setItem('last_url', event.urlAfterRedirects);
+                    localStorage.setItem(CONSTS.STORAGE_HELPERS.LAST_URL, event.urlAfterRedirects);
                 }
                 this.settings = <ISettings>this.route.snapshot.firstChild.data;
                 this.activeUrl = this.router.url;

@@ -122,7 +122,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
                     if (modal.modalType === CONSTS.MODAL_TYPE.MORE_TABS) {
                         if (modal.confirmed) {
                             this.onlyOneTabActiveService.setActiveTab();
-                            window.open(localStorage.getItem('last_url'), '_self');
+                            window.open(localStorage.getItem(CONSTS.STORAGE_HELPERS.LAST_URL), '_self');
                         } else {
                             this.router.navigate([CONSTS.PATHS.EMPTY]);
                         }
@@ -135,7 +135,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
     private handleStoreChange = (storageEvent: StorageEvent) => {
         const newValue = storageEvent.newValue;
         if (
-            storageEvent.key === 'active_tab' &&
+            storageEvent.key === CONSTS.STORAGE_HELPERS.ACTIVE_TAB &&
             newValue !== this.onlyOneTabActiveService.uuid
         ) {
             if (OnlyOneTabActiveState.LOGOUT === newValue) {

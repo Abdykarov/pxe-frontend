@@ -42,7 +42,7 @@ export class LoginSupplyAuthFormComponent extends AbstractFormComponent implemen
                     takeUntil(this.destroy$),
                 )
                 .subscribe(_ => {
-                    const userToken = this.cookieService.get(this.authService.cookieName);
+                    const userToken = this.cookieService.get(CONSTS.STORAGE_HELPERS.USER);
                     if (!userToken || !AuthService.jwtTokenHasRoles(userToken, [IUserRoles.NEEDS_SMS_CONFIRMATION])) {
                         this.router.navigate([CONSTS.PATHS.EMPTY]);
                     }

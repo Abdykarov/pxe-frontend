@@ -74,7 +74,7 @@ export class SignUpComponent extends AbstractComponent {
                     takeUntil(this.destroy$),
                 )
                 .subscribe(_ => {
-                    const userToken = this.cookieService.get(this.authService.cookieName);
+                    const userToken = this.cookieService.get(CONSTS.STORAGE_HELPERS.USER);
                     if (userToken) {
                         this.router.navigate([CONSTS.PATHS.EMPTY]);
                     }

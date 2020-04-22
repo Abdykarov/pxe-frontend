@@ -26,13 +26,13 @@ export class OnlyOneTabActiveService {
     }
 
     isThisTabActive = (uuid: string = '_'): boolean =>
-        inArray(this.cookieService.get('active_tab'), [this.uuid, uuid])
+        inArray(this.cookieService.get(CONSTS.STORAGE_HELPERS.ACTIVE_TAB), [this.uuid, uuid])
 
     setActiveTab = (value: string = null): void => {
         if (isPlatformBrowser(this.platformId)) {
             const newValue = value ? value : this.uuid;
-            this.cookieService.set('active_tab', newValue, 0);
-            localStorage.setItem('active_tab', newValue);
+            this.cookieService.set(CONSTS.STORAGE_HELPERS.ACTIVE_TAB, newValue, 0);
+            localStorage.setItem(CONSTS.STORAGE_HELPERS.ACTIVE_TAB, newValue);
         }
     }
 

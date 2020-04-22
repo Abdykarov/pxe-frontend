@@ -54,7 +54,7 @@ export class ChangePasswordFormComponent extends AbstractFormComponent implement
                         takeUntil(this.destroy$),
                     )
                     .subscribe(_ => {
-                        const userToken = this.cookieService.get(this.authService.cookieName);
+                        const userToken = this.cookieService.get(CONSTS.STORAGE_HELPERS.USER);
                         if (!userToken || !AuthService.jwtTokenHasRoles(userToken, [IUserRoles.RESET_PASSWORD])) {
                             this.router.navigate([CONSTS.PATHS.EMPTY]);
                         }

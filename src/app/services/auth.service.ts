@@ -51,7 +51,6 @@ import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-activ
     providedIn: 'root',
 })
 export class AuthService {
-    public cookieName = 'user';
     public currentUserSubject$: BehaviorSubject<IJwtPayload>;
     public currentUser$: Observable<IJwtPayload>;
     private token: string;
@@ -141,8 +140,8 @@ export class AuthService {
     }
 
     public checkLogin = () => {
-        if (this.cookiesService.has(this.cookieName)) {
-            this.token = (<any>this.cookiesService.getObject(this.cookieName)).token;
+        if (this.cookiesService.has(CONSTS.STORAGE_HELPERS.USER)) {
+            this.token = (<any>this.cookiesService.getObject(CONSTS.STORAGE_HELPERS.USER)).token;
         } else {
             this.token = null;
         }
@@ -217,7 +216,7 @@ export class AuthService {
         if (window.sessionStorage) {
             window.sessionStorage.clear();
         }
-        this.cookiesService.remove(this.cookieName);
+        this.cookiesService.remove(CONSTS.STORAGE_HELPERS.USER);
         this.currentUserSubject$.next(null);
     }
 
@@ -228,7 +227,7 @@ export class AuthService {
                 token: response.token,
             };
             const expiration = new Date().getTime() + CONSTS.DEFAULT_EXPIRATION;
-            this.cookiesService.setObject(this.cookieName, user, expiration);
+            this.cookiesService.setObject(CONSTS.STORAGE_HELPERS.USER, user, expiration);
             this.checkLogin();
             this.currentUserSubject$.next(jwtPayload);
         }
@@ -261,7 +260,7 @@ export class AuthService {
                 jwtPayload.needSmsConfirm = role.indexOf(IUserRoles.NEEDS_SMS_CONFIRMATION) !== -1;
             } catch (e) {
                 this.token = null;
-                this.cookiesService.remove(this.cookieName);
+                this.cookiesService.remove(CONSTS.STORAGE_HELPERS.USER);
             }
 
         }

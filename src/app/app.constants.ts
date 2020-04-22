@@ -37,7 +37,6 @@ export const CONSTS = {
     MAX_REQUEST_IN_BATCH_LINK: 200,
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
-    LAST_URL: 'last_url',
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
     MODAL_TYPE: {
         MORE_TABS: 'moreTabs',
@@ -87,6 +86,11 @@ export const CONSTS = {
         DONT_REFRESH_TIME_IN_MINUTES: 2,
     },
     START_STICKER_HEADER: 0,
+    STORAGE_HELPERS: {
+        LAST_URL: 'last_url',
+        ACTIVE_TAB: 'active_tab',
+        USER: 'user',
+    },
     REASON_FOR_LOGOUT_USER: {
         BY_SELF: 'Byl jste úspěšně odhlášen',
         UNAUTHORIZED: 'Došlo k odhlášení z důvodu neaktivity',
