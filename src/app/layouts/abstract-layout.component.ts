@@ -87,15 +87,12 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
                     isPlatformBrowser(this.platformId)
                 ) {
                     localStorage.setItem(CONSTS.STORAGE_HELPERS.LAST_URL, event.urlAfterRedirects);
-                } else {
-                    const token = this.cookieService.get(CONSTS.STORAGE_HELPERS.USER);
-                    if (token) {
-                        this.authService.manageLoginResponse({
-                            token,
-                            landingPage: null,
-                        });
-                    }
                 }
+
+                if (event && event.url.indexOf('/secured') === -1) {
+                    this.authService.setActualStateFromOtherTab();
+                }
+
                 this.sAnalyticsService.pageView();
                 this.settings = <ISettings>this.route.snapshot.firstChild.data;
                 this.activeUrl = this.router.url;
@@ -134,7 +131,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         }
     }
 
-    public homeRedirect = () => this.authService.homeRedirect();
+    public homeRedirect = (param) => this.authService.homeRedirect(param === true ? true : param);
 
     public landingPageRedirect = () => this.router.navigate([CONSTS.PATHS.EMPTY]);
 

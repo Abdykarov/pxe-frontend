@@ -81,9 +81,9 @@ export const CONSTS = {
         WILD_CART  : '**',
     },
     REFRESH_TOKEN: {
-        INTERVAL: 1000,
+        INTERVAL: 300000,
         COUNT: 16,
-        DONT_REFRESH_TIME_IN_MINUTES: 0,
+        DONT_REFRESH_TIME_IN_MINUTES: 2,
     },
     START_STICKER_HEADER: 0,
     STORAGE_HELPERS: {
@@ -96,7 +96,7 @@ export const CONSTS = {
         BY_SELF: 'Byl jste úspěšně odhlášen',
         UNAUTHORIZED: 'Došlo k odhlášení z důvodu neaktivity',
     },
-    TIME_TO_SHOW_USER_LOGOUT_BANNER: 3000000,
+    TIME_TO_SHOW_USER_LOGOUT_BANNER: 300,
     VALIDATORS: {
         ADULTHOOD_AGE: 18,
         MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION: 10,

@@ -221,6 +221,16 @@ export class AuthService {
         this.currentUserSubject$.next(null);
     }
 
+    public setActualStateFromOtherTab = () => {
+        if (isPlatformBrowser(this.platformId)) {
+            const token = this.cookiesService.get(CONSTS.STORAGE_HELPERS.USER);
+            if (token) {
+                const jwtPayload = this.getJwtPayload(token);
+                this.currentUserSubject$.next(jwtPayload);
+            }
+        }
+    }
+
     public manageLoginResponse = (response: ILoginResponse) => {
         if (response && response.token) {
             const jwtPayload = this.getJwtPayload(response.token);
@@ -278,7 +288,11 @@ export class AuthService {
         });
     }
 
-    public homeRedirect = () => {
+    public homeRedirect = (lastLocateInMoreTab = false) => {
+        if (lastLocateInMoreTab === true) {
+            window.open(localStorage.getItem(CONSTS.STORAGE_HELPERS.LAST_URL), '_self');
+            return;
+        }
         if (!this.isLogged()) {
             this.router.navigate([CONSTS.PATHS.EMPTY]);
         } else if (this.currentUserValue.supplier) {
