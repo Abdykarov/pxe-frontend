@@ -1,7 +1,7 @@
 import {
     AfterViewInit,
     Component,
-    Input,
+    Input, OnDestroy,
     OnInit,
 } from '@angular/core';
 import {
@@ -32,13 +32,14 @@ import {
     IPersonalData,
     IPersonalDataInputForm,
 } from 'src/common/graphql/models/personal-data.model';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Component({
     selector: 'pxe-personal-info-form',
     templateUrl: './personal-info-form.component.html',
     styleUrls: ['./personal-info-form.component.scss'],
 })
-export class PersonalInfoFormComponent extends AbstractFormComponent implements OnInit, AfterViewInit {
+export class PersonalInfoFormComponent extends AbstractFormComponent implements OnInit, AfterViewInit, OnDestroy {
 
     public readonly MAX_LENGTH_NUMBER_INPUT_WITH_HINT = CONSTS.VALIDATORS.MAX_LENGTH.NUMBER_INPUT_WITH_HINT;
 
@@ -60,12 +61,14 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
 
     constructor(
         protected fb: FormBuilder,
+        public sAnalyticsService: SAnalyticsService,
     ) {
         super(fb);
     }
 
     ngOnInit() {
         super.ngOnInit();
+        this.sAnalyticsService.sFormStart();
         this.setForm();
         this.depositPaymentTypeId = this.codeLists[CODE_LIST.DEPOSIT_PAYMENT_TYPE];
         const filteredValuesOfDefaultType = R.filter(
@@ -215,5 +218,10 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         delete form.phonePrefix;
         delete form.onlyAddress1;
         this.submitAction.emit(form);
+    }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        this.sAnalyticsService.sFormEnd();
     }
 }

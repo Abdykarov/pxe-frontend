@@ -42,6 +42,12 @@ export class DatepickerComponent {
     @Output()
     public blur?: EventEmitter<any> = new EventEmitter();
 
+    @Output()
+    public change?: EventEmitter<any> = new EventEmitter();
+
+    @Output()
+    public hide?:  EventEmitter<any> = new EventEmitter();
+
     @Input()
     public config: Partial<BsDatepickerConfig> = new BsDatepickerConfig();
 
