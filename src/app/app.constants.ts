@@ -1,3 +1,5 @@
+import * as CryptoJS from 'crypto-js';
+
 import {
     CommodityType,
     SubjectType,
@@ -8,6 +10,14 @@ import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
     ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],
+    CRYPTO: {
+        get SALT() {
+            return CryptoJS.lib.WordArray.random(128 / 8);
+        },
+        get IV() {
+            return CryptoJS.lib.WordArray.random(128 / 8);
+        },
+    },
     CONTRACT_SIGN_NUMBER_OF_RETRY: 3,
     CURRENCY: {
         DEFAULT: 'CZK',
@@ -32,6 +42,10 @@ export const CONSTS = {
         NO_OFFERS_IN_IMPORT: 'NO_OFFERS_IN_IMPORT',
     },
     INTERVAL_RXJS: 5000,
+    LOCAL_STORAGE: {
+        PERSONAL_INFO_PARTIAL_FORM_PREFIX: 'PERSONAL_INFO_',
+        SUPPLY_POINT_PARTIAL_FORM: 'SUPPLY_POINT',
+    },
     LOGIN_FORM_NAME: 'login',
     MAX_REQUEST_IN_BATCH_LINK: 200,
     MONTH_DURATION: 30,
