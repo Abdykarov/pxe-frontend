@@ -57,6 +57,10 @@ export const CONSTS = {
         CONFIRM_BACK_IMPORT: 'confirmBackImportOffer',
         CONFIRM_DELETE_MARKED: 'confirmDeleteMarked',
     },
+    OFFSET_ERRORS: {
+        INVALID_INPUT: 40,
+        ALERT_DANGER: 50,
+    },
     PATHS: {
         APPROVAL: 'approval',
         CONTRACT : 'contract',
@@ -523,10 +527,6 @@ export const REGIONS: Array<IOption> = [
 
 export const OPERATIONS_WITHOUT_SCROLL_ON_ERRORS = [
     'getSupplyPointGlobalStatistics',
-    'makeRegistration',
-    'savePowerOffer',
-    'saveGasOffer',
-    'sendChangePhoneNumberSmsMutation',
 ];
 
 export enum RequestsOverviewBannerShow {
