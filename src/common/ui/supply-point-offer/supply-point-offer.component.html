@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-12">
                     <span class="supply-point-offer__title-label">Název nabídky</span>
-                    <span class="supply-point-offer__title text-break">{{supplyPointOffer?.name}} Bohemia plus</span>
+                    <span class="supply-point-offer__title text-break">{{supplyPointOffer?.name}}</span>
                 </div>
                 <div
                     *ngIf="supplyPointOffer.greenEnergy"
@@ -222,10 +222,10 @@
                     <span class="supply-point-offer__title-label">Vypočtená roční cena</span>
                     <span class="supply-point-offer__title text-break">
                         <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
-                            {{(supplyPointOffer.prepayment * 12) | number: '1.0-0'}}&nbsp;Kč
+                            {{(math.ceil(supplyPointOffer.prepayment) * 12) | number: '1.0-0'}}&nbsp;Kč
                         </ng-container>
                         <ng-template #totalPrice>
-                            {{(supplyPointOffer.totalPrice * 12)  | number: '1.0-0'}}&nbsp;Kč
+                            {{(math.ceil(supplyPointOffer.totalPrice) * 12)  | number: '1.0-0'}}&nbsp;Kč
                         </ng-template>
                     </span>
                 </div>
@@ -247,10 +247,10 @@
                 <div class="col-12">
                     <span class="supply-point-offer__title text-break">
                         <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
-                            {{supplyPointOffer.prepayment | number: '1.0-0'}}&nbsp;Kč
+                            {{math.ceil(supplyPointOffer.prepayment) | number: '1.0-0'}}&nbsp;Kč
                         </ng-container>
                         <ng-template #totalPrice>
-                            {{supplyPointOffer.totalPrice | number: '1.0-0'}}&nbsp;Kč
+                            {{math.ceil(supplyPointOffer.totalPrice) | number: '1.0-0'}}&nbsp;Kč
                         </ng-template>
                     </span>
                 </div>

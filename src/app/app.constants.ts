@@ -1,3 +1,5 @@
+import * as CryptoJS from 'crypto-js';
+
 import {
     CommodityType,
     SubjectType,
@@ -8,6 +10,14 @@ import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
     ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],
+    CRYPTO: {
+        get SALT() {
+            return CryptoJS.lib.WordArray.random(128 / 8);
+        },
+        get IV() {
+            return CryptoJS.lib.WordArray.random(128 / 8);
+        },
+    },
     CONTRACT_SIGN_NUMBER_OF_RETRY: 3,
     CURRENCY: {
         DEFAULT: 'CZK',
@@ -33,6 +43,10 @@ export const CONSTS = {
         NO_OFFERS_IN_IMPORT: 'NO_OFFERS_IN_IMPORT',
     },
     INTERVAL_RXJS: 5000,
+    LOCAL_STORAGE: {
+        PERSONAL_INFO_PARTIAL_FORM_PREFIX: 'PERSONAL_INFO_',
+        SUPPLY_POINT_PARTIAL_FORM: 'SUPPLY_POINT',
+    },
     LOGIN_FORM_NAME: 'login',
     MAX_REQUEST_IN_BATCH_LINK: 200,
     MONTH_DURATION: 30,
@@ -44,6 +58,10 @@ export const CONSTS = {
         CONFIRM_CANCEL_OFFER: 'confirmCancelOffer',
         CONFIRM_BACK_IMPORT: 'confirmBackImportOffer',
         CONFIRM_DELETE_MARKED: 'confirmDeleteMarked',
+    },
+    OFFSET_ERRORS: {
+        INVALID_INPUT: 40,
+        ALERT_DANGER: 50,
     },
     PATHS: {
         APPROVAL: 'approval',
@@ -133,7 +151,8 @@ export const CONSTS = {
         TIME_TO_CONTRACT_END_MAX: 100,
     },
     TELEPHONE_PREFIX_CZ: '+420',
-    TIME_TO_CONTRACT_END_PROLONGED: 30,
+    TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS: 30,
+    TIME_TO_CONTRACT_END_INDEFINITE_TIME_IN_MONTHS: 3,
     TITLES: {
         COOKIES_POLICY: 'Cookies policy | PARC4U',
         DEFAULT: 'PARC4U',
@@ -354,6 +373,17 @@ export const SUBJECT_TYPE_OPTIONS: Array<IOption> = [
     },
 ];
 
+export const OWN_TERMINATE_OPTIONS: Array<IOption> = [
+    {
+        key: false,
+        label: 'Chci, aby výpověď zajistil nový dodavatel',
+    },
+    {
+        key: true,
+        label: 'Vypovím si sám (sama)',
+    },
+];
+
 export const COMMODITY_TYPE_OPTIONS: Array<IOption> = [
     {
         key: CommodityType.POWER,
@@ -518,10 +548,6 @@ export const OPERATIONS_IGNORE_ACCESS_DENIED_EXCEPTION = [];
 
 export const OPERATIONS_WITHOUT_SCROLL_ON_ERRORS = [
     'getSupplyPointGlobalStatistics',
-    'makeRegistration',
-    'savePowerOffer',
-    'saveGasOffer',
-    'sendChangePhoneNumberSmsMutation',
 ];
 
 export enum RequestsOverviewBannerShow {

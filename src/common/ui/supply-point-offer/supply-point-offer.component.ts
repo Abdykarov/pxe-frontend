@@ -30,8 +30,9 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     public COMMODITY_TYPE_POWER = CommodityType.POWER;
     public COMMODITY_TYPE_GAS = CommodityType.GAS;
 
-    public showValidityOfOffer = false;
     public dateDiffValidityOfOffer = Number.MIN_VALUE;
+    public math = Math;
+    public showValidityOfOffer = false;
 
     @Input()
     public supplyPointOffer: IOffer;

@@ -28,7 +28,7 @@ import {
     resolvers,
 } from '../resolvers/';
 import { environment } from 'src/environments/environment';
-import { scrollToElementFnc } from 'src/common/utils';
+import { processErrorScrolls } from 'src/common/utils';
 
 const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     const cache = new InMemoryCache();
@@ -117,9 +117,10 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
             // console.log('%c ***** [Network error] *****', 'background: red; color: #fff; font-weight: bold', networkError);
         }
 
+
         if (graphQLErrors || networkError) {
             if (!R.includes(operation.operationName, OPERATIONS_WITHOUT_SCROLL_ON_ERRORS)) {
-                scrollToElementFnc('top');
+                processErrorScrolls();
             }
         }
         // response.errors = null;
@@ -130,15 +131,13 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     });
 
     const link = from([error, auth, http]);
-    const client = {
+    return {
         cache,
         resolvers,
         link,
         typeDefs: clientSchema,
         connectToDevTools: !environment.production,
     };
-
-    return client;
 };
 
 export const ApolloGraphQLProvider = {

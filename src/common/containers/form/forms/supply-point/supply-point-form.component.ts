@@ -16,12 +16,13 @@ import {
     combineLatest,
 } from 'rxjs';
 import {
+    filter,
     map,
     takeUntil,
 } from 'rxjs/operators';
 
 import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/abstract-supply-point-form.component';
-import { SAnalyticsService } from 'src/app/services/s-analytics.service';
+import { AuthService } from 'src/app/services/auth.service';
 import {
     ANNUAL_CONSUMPTION_TYPES,
     ANNUAL_CONSUMPTION_UNIT_TYPES,
@@ -31,6 +32,7 @@ import {
     CONSTS,
     CONTRACT_END_TYPE,
     CONTRACT_END_TYPE_ORDER,
+    OWN_TERMINATE_OPTIONS,
     SUBJECT_TYPE_OPTIONS,
     SUBJECT_TYPE_TO_DIST_RATE_MAP,
     SUPPLY_POINT_EDIT_TYPE,
@@ -38,6 +40,7 @@ import {
 } from 'src/app/app.constants';
 import {
     CommodityType,
+    ICodelistItem,
     ISupplierSampleDocument,
     ISupplyPoint,
     SubjectType,
@@ -56,6 +59,8 @@ import {
 import { HelpModalComponent } from 'src/common/containers/modal/modals/help/help-modal.component';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
+import { SupplyPointLocalStorageService } from 'src/app/services/supply-point-local-storage.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -79,8 +84,10 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public commodityType = CommodityType.POWER;
     public CommodityTypes = CommodityType;
     public commodityTypeOptions: Array<IOption> = COMMODITY_TYPE_OPTIONS;
+    public ownTerminateOptions: Array<IOption> = OWN_TERMINATE_OPTIONS;
     public contractEndType = CONTRACT_END_TYPE.CONTRACT_END_DEFAULT;
     public distributionRateType: string = CODE_LIST.DIST_RATE_INDIVIDUAL;
+    public existsPartialSupplyPointValue = null;
     public expirationConfig = expirationConfig;
     public formWasPrefilled = false;
     public helpDocuments = {};
@@ -90,10 +97,12 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public suppliers$: BehaviorSubject<any> = new BehaviorSubject([]);
 
     constructor(
+        private authService: AuthService,
         private cd: ChangeDetectorRef,
         protected fb: FormBuilder,
         private modalsService: ModalService,
         private sAnalyticsService: SAnalyticsService,
+        private supplyPointLocalStorageService: SupplyPointLocalStorageService,
         private supplyService: SupplyService,
     ) {
         super(fb);
@@ -133,9 +142,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
 
         this.form.get('commodityType')
             .valueChanges
-            .pipe(
-                takeUntil(this.destroy$),
-            )
+            .pipe(takeUntil(this.destroy$))
             .subscribe((commodityType: CommodityType) => {
                 this.commodityType = commodityType;
                 this.resetFormError(false);
@@ -148,9 +155,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
 
         this.form.get('subjectTypeId')
             .valueChanges
-            .pipe(
-                takeUntil(this.destroy$),
-            )
+            .pipe(takeUntil(this.destroy$))
             .subscribe((val: string) => {
                 this.resetFieldValue('distributionRateId', false);
                 this.distributionRateType = SUBJECT_TYPE_TO_DIST_RATE_MAP[val];
@@ -160,9 +165,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
 
         this.form.get('ownTerminate')
             .valueChanges
-            .pipe(
-                takeUntil(this.destroy$),
-            )
+            .pipe(takeUntil(this.destroy$))
             .subscribe((ownTerminate: boolean) => {
                 this.setOwnTerminate(ownTerminate);
                 this.cd.markForCheck();
@@ -170,18 +173,14 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
 
         this.form.get('distributionRateId')
             .valueChanges
-            .pipe(
-                takeUntil(this.destroy$),
-            )
+            .pipe(takeUntil(this.destroy$))
             .subscribe(val => {
                 this.setAnnualConsumptionNTState(val, this.codeLists);
             });
 
         this.form.get('contractEndTypeId')
             .valueChanges
-            .pipe(
-                takeUntil(this.destroy$),
-            )
+            .pipe(takeUntil(this.destroy$))
             .subscribe((contractEndTypeId) => {
                 if (contractEndTypeId) {
                     this.setContractEndFields();
@@ -190,9 +189,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
 
         this.form.get('supplierId')
             .valueChanges
-            .pipe(
-                takeUntil(this.destroy$),
-            )
+            .pipe(takeUntil(this.destroy$))
             .subscribe(val => {
                 this.helpDocuments = val && val.sampleDocuments ?
                     convertArrayToObject(
@@ -211,14 +208,55 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             this.suppliers$,
             this.codeLists$,
         )
-            .pipe(
-                takeUntil(this.destroy$),
-            )
+            .pipe(takeUntil(this.destroy$))
             .subscribe(([suppliers, codeLists]) => {
                 if (!R.isEmpty(suppliers) && !R.isEmpty(codeLists)) {
                     if (this.formValues && !this.formWasPrefilled) {
                         this.prefillForm();
                         this.formWasPrefilled = true;
+                    } else {
+                        if (R.isNil(this.existsPartialSupplyPointValue)) {
+                            const partialSupplyPoint = this.supplyPointLocalStorageService.getSupplyPoint();
+                            this.existsPartialSupplyPointValue =
+                                partialSupplyPoint &&
+                                !R.isEmpty(partialSupplyPoint) &&
+                                partialSupplyPoint.email === this.authService.currentUserValue.email;
+                        }
+
+                        this.form
+                            .valueChanges
+                            .pipe(
+                                takeUntil(this.destroy$),
+                                filter(_ => !this.existsPartialSupplyPointValue && R.empty(this.formValues)),
+                            )
+                            .subscribe(_ => {
+                                const formValues = this.form.getRawValue();
+                                this.supplyPointLocalStorageService.updateSupplyPoint(formValues);
+                            });
+
+                        this.supplyPointLocalStorageService.getSupplyPointStream()
+                            .pipe(takeUntil(this.destroy$))
+                            .subscribe(formValues => {
+                                try {
+                                    const { email, supplyPointForm } = formValues;
+                                    this.existsPartialSupplyPointValue = false;
+                                    this.supplyPointLocalStorageService.removeSupplyPoint();
+                                    if (email === this.authService.currentUserValue.email) {
+                                        if (supplyPointForm.expirationDate) {
+                                            supplyPointForm.expirationDate = new Date(supplyPointForm.expirationDate);
+                                        }
+
+                                        this.form.setValue(supplyPointForm);
+                                        this.resetFormError(false);
+                                    }
+                                } catch (e) {}
+                            });
+
+                        this.supplyPointLocalStorageService.removeSupplyPointStream()
+                            .pipe(takeUntil(this.destroy$))
+                            .subscribe(formValue => {
+                                this.existsPartialSupplyPointValue = false;
+                            });
                     }
                 }
             });
@@ -244,9 +282,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         let annualConsumptionVT = null;
         let annualConsumption = null;
         let expirationDate = null;
-        let contractEndTypeId = null;
-        let timeToContractEnd = null;
-        let timeToContractEndPeriodId = null;
+        let contractEndTypeId = CONTRACT_END_TYPE.CONTRACT_END_INDEFINITE_PERIOD;
+        let timeToContractEnd = CONSTS.TIME_TO_CONTRACT_END_INDEFINITE_TIME_IN_MONTHS;
+        let timeToContractEndPeriodId: ICodelistItem | string = TimeToContractEndPeriod.MONTH;
         let annualConsumptionNTUnit = null;
         let annualConsumptionVTUnit = null;
 
@@ -293,7 +331,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             } else {
                 expirationDate = expirationDateFromContract || expirationDateFromSupplyPoint;
                 contractEndTypeId = CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION;
-                timeToContractEnd = String(CONSTS.TIME_TO_CONTRACT_END_PROLONGED);
+                timeToContractEnd = CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS;
                 timeToContractEndPeriodId = TimeToContractEndPeriod.DAY;
             }
             this.form.controls['annualConsumptionNTUnit'].setValue(annualConsumptionNTUnit);

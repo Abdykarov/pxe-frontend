@@ -1,7 +1,8 @@
 import {
     AfterViewInit,
     Component,
-    Input, OnDestroy,
+    Input,
+    OnDestroy,
     OnInit,
 } from '@angular/core';
 import {
@@ -15,6 +16,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { AddressWhispererComponent } from 'src/common/containers/address-whisperer/address-whisperer.component';
+import { AuthService } from 'src/app/services/auth.service';
 import {
     CODE_LIST,
     CONSTS,
@@ -32,6 +34,7 @@ import {
     IPersonalData,
     IPersonalDataInputForm,
 } from 'src/common/graphql/models/personal-data.model';
+import { PersonalInfoLocalStorageService } from 'src/app/services/personal-info-local-storage.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Component({
@@ -60,7 +63,9 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
     public minDate: Date = new Date(CONSTS.VALIDATORS.MIN_BIRTH_DATE);
 
     constructor(
+        private authService: AuthService,
         protected fb: FormBuilder,
+        private personalInfoLocalStorageService: PersonalInfoLocalStorageService,
         public sAnalyticsService: SAnalyticsService,
     ) {
         super(fb);
@@ -103,6 +108,25 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
 
         if (this.formValues) {
             this.prefillFormData();
+        } else {
+            const email = this.authService.currentUserValue.email;
+            const deposit = this.supplyPoint.contract.offer.totalPrice;
+            this.form.controls['email'].setValue(email);
+            this.form.controls['deposit'].setValue(Math.ceil(deposit));
+
+            const personalInfoUnfinished = this.personalInfoLocalStorageService.getPersonalInfo(this.supplyPoint.id);
+            if (personalInfoUnfinished && !R.isEmpty(personalInfoUnfinished)) {
+                if (personalInfoUnfinished.birthDate) {
+                    personalInfoUnfinished.birthDate = new Date(personalInfoUnfinished.birthDate);
+                }
+                this.form.setValue(personalInfoUnfinished);
+            }
+
+            this.form.valueChanges
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(_ => {
+                    this.personalInfoLocalStorageService.addPersonalInfo(this.supplyPoint.id, this.form.getRawValue());
+                });
         }
     }
 
@@ -134,6 +158,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
         let deposit = null;
         let address1 = null;
         let address2 = null;
+
         if (this.formValues) {
             name = this.formValues.name;
             if (this.formValues.birthDate) {
