@@ -1,0 +1,28 @@
+<carousel
+    #carousel
+    (mouseenter)="setPause()"
+    (mouseup)="setPause()"
+    (activeSlideChange)="activeSlideChange.emit($event)"
+    [noPause]="false"
+    [interval]="interval">
+	<slide *ngFor="let item of carouselItems">
+		<div class="row no-gutters align-items-center">
+			<div class="col-12 col-md-6 offset-md-1 order-md-2">
+				<img
+					class="carousel-item-img"
+					[src]="item.src"
+					[alt]="item.alt">
+			</div>
+			<div class="col-12 col-md-4 offset-md-1 order-md-1">
+				<div class="carousel-item-content">
+					<h3 class="h3--public">{{item.title}}</h3>
+					<p 
+						*ngIf="item && item.label"
+						class="mb-0">
+						{{item.label}}
+					</p>
+				</div>
+			</div>
+		</div>
+	</slide>
+</carousel>
