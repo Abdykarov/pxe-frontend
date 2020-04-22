@@ -306,13 +306,14 @@
             Jak vypovíte stávající smlouvu?
         </label>
         <lnd-form-field
+            [formControl]="form.controls.ownTerminate"
             lndSFormDirective
             lndSBiometricsDirective
             [id]="'ownTerminate'"
-            label="Vypovím si sám (sama)"
-            [type]="'CHECKBOX'"
+            label=""
+            [type]="'RADIOGROUP'"
             [customFormGroupClass]="'mb-5'"
-            [formControl]="form.controls.ownTerminate"
+            [options]="ownTerminateOptions"
         ></lnd-form-field>
         <lnd-form-field
             lndSFormDirective
