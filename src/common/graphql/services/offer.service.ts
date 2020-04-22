@@ -111,6 +111,31 @@ export class OfferService {
             },
         })
 
+    private checkAndUpdateApolloClientInUpdateOffers = (offerId, data, cache) => {
+        const offerIdString = String(offerId);
+        const newOfferId = data.updatePowerOffer.id;
+        if (newOfferId !== offerIdString) {
+            const { findSupplierOffers: offers } = cache.readQuery({ query: findSupplierOffersQuery });
+            const newFindSupplierOffers = R.map((mappingOffer) => {
+                if (offerIdString === mappingOffer.id) {
+                    mappingOffer = {
+                        ...data.updatePowerOffer,
+                        marked: false,
+                    };
+                }
+                return mappingOffer;
+            })(offers);
+            cache.writeQuery({
+                query: findSupplierOffersQuery,
+                data: {
+                    findSupplierOffers: [
+                        ...newFindSupplierOffers,
+                    ],
+                },
+            });
+        }
+    }
+
     public updatePowerOffer = (offerId: number, offer: IOfferInput, powerAttributes: IOfferInputPowerAttributes) => this.apollo
         .mutate<any>({
             mutation: updatePowerOfferMutation,
@@ -118,6 +143,9 @@ export class OfferService {
                 offerId,
                 offer,
                 powerAttributes,
+            },
+            update: (cache, {data}) => {
+                this.checkAndUpdateApolloClientInUpdateOffers(offerId, data, cache);
             },
         })
 
@@ -128,6 +156,9 @@ export class OfferService {
                 offerId,
                 offer,
                 gasAttributes,
+            },
+            update: (cache, {data}) => {
+                this.checkAndUpdateApolloClientInUpdateOffers(offerId, data, cache);
             },
         })
 
