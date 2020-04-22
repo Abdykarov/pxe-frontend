@@ -142,7 +142,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
             newValue !== this.onlyOneTabActiveService.uuid
         ) {
             if (OnlyOneTabActiveState.LOGOUT === newValue) {
-                this.router.navigate([CONSTS.PATHS.EMPTY]);
+                this.router.navigate([CONSTS.PATHS.LOGIN]);
             } else if (OnlyOneTabActiveState.CLOSED !== newValue) {
                 this.modalsService
                     .showModal$.next(this.onlyOneTabActiveService.moreTabDialog());

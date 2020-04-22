@@ -17,6 +17,7 @@ import {
     fromEvent,
     Subscription,
 } from 'rxjs';
+import { IUserRoles } from 'src/app/services/model/auth.model';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
@@ -86,6 +87,14 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
                     isPlatformBrowser(this.platformId)
                 ) {
                     localStorage.setItem(CONSTS.STORAGE_HELPERS.LAST_URL, event.urlAfterRedirects);
+                } else {
+                    const token = this.cookieService.get(CONSTS.STORAGE_HELPERS.USER);
+                    if (token) {
+                        this.authService.manageLoginResponse({
+                            token,
+                            landingPage: null,
+                        });
+                    }
                 }
                 this.sAnalyticsService.pageView();
                 this.settings = <ISettings>this.route.snapshot.firstChild.data;
