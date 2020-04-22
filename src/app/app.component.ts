@@ -19,6 +19,7 @@ import { environment } from 'src/environments/environment';
 import { GTMService } from './services/gtm.service';
 import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Component({
     selector: 'lnd-root',
@@ -32,10 +33,18 @@ export class AppComponent implements OnInit {
         private gtmService: GTMService,
         private onlyOneTabActiveService: OnlyOneTabActiveService,
         private router: Router,
+        private sAnalyticsService: SAnalyticsService,
         @Inject(DOCUMENT) private document: Document,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         if (isPlatformBrowser(this.platformId)) {
+            this.sAnalyticsService.init();
+            this.sAnalyticsService.installSForm();
+            this.sAnalyticsService.installSBiometrics();
+            this.sAnalyticsService.initSBiometrics();
+            this.sAnalyticsService.initSForm();
+            this.sAnalyticsService.initSApm();
+
             window.addEventListener('beforeunload', (e) => {
                 if (onlyOneTabActiveService.isThisTabActive()) {
                     onlyOneTabActiveService.setActiveTab(OnlyOneTabActiveState.CLOSED);

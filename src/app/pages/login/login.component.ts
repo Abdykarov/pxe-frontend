@@ -82,7 +82,7 @@ export class LoginComponent extends AbstractComponent {
         super();
 
         if (isPlatformBrowser(this.platformId)) {
-            this.reasonForLogoutUser = this.cookieService.get('reasonForLogoutUser');
+            this.reasonForLogoutUser = this.cookieService.get(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
         }
 
         this.titleService.setTitle(CONSTS.TITLES.LOGIN);

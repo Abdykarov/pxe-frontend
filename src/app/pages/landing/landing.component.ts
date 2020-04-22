@@ -27,6 +27,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CONSTS,
     ROUTES,
+    S_ANALYTICS,
     SEO,
 } from 'src/app/app.constants';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
@@ -41,6 +42,7 @@ import {
     scrollToElementFnc,
 } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
@@ -80,6 +82,7 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
         private metaService: Meta,
         private router: Router,
         private registrationService: RegistrationService,
+        private sAnalyticsService: SAnalyticsService,
         private scrollToService: ScrollToService,
         private titleService: Title,
         @Inject(PLATFORM_ID) private platformId: string,
@@ -153,6 +156,16 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
             .subscribe(
                 () => {
                     this.formLoading = false;
+                    this.sAnalyticsService.sendWebData(
+                        {},
+                        {
+                            email: values.email,
+                        },
+                        {},
+                        {
+                            ACTION: S_ANALYTICS.ACTIONS.SIGN_UP,
+                        },
+                    );
                     this.formSent = true;
                     this.cd.markForCheck();
                     this.router.navigate([CONSTS.PATHS.LOGIN],

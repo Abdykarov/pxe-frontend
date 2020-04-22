@@ -58,7 +58,7 @@ export class LogoutPageComponent extends AbstractComponent implements OnInit {
                         const reasonForLogoutUserTime = new Date().getTime() + CONSTS.COOKIE_TEMPORARY_EXPIRATION;
 
                         this.cookieService.set(
-                            'reasonForLogoutUser',
+                            CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER,
                             reasonForLogoutUserValue,
                             reasonForLogoutUserTime,
                         );

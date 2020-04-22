@@ -20,14 +20,19 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { CONSTS } from 'src/app/app.constants';
+import {
+    CONSTS,
+    S_ANALYTICS,
+} from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';
+import { inArray } from 'src/common/utils';
 import {
     ISettings,
     LoginType,
     SignType,
 } from './models/router-data.model';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
@@ -62,13 +67,14 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         protected platformId: string,
         protected route: ActivatedRoute,
         protected router: Router,
+        protected sAnalyticsService: SAnalyticsService,
         protected scrollToService: ScrollToService,
     ) {
         super();
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
                 if (event && event.url !== `/${CONSTS.PATHS.LOGIN}`) {
-                    this.cookieService.remove('reasonForLogoutUser');
+                    this.cookieService.remove(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
                 }
                 if (this.showOverlay) {
                     this.toggleSubscription = this.overlayService.toggleOverlay(false)
@@ -81,6 +87,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
                 ) {
                     localStorage.setItem(CONSTS.STORAGE_HELPERS.LAST_URL, event.urlAfterRedirects);
                 }
+                this.sAnalyticsService.pageView();
                 this.settings = <ISettings>this.route.snapshot.firstChild.data;
                 this.activeUrl = this.router.url;
             }

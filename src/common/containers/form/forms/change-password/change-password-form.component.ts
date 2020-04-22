@@ -3,6 +3,7 @@ import {
     Input,
     NgZone,
     OnChanges,
+    OnDestroy,
     OnInit,
     SimpleChanges,
 } from '@angular/core';
@@ -15,19 +16,20 @@ import { Router } from '@angular/router';
 import * as R from 'ramda';
 import { interval } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { CONSTS } from 'src/app/app.constants';
-import { AuthService } from 'src/app/services/auth.service';
-import { CookiesService } from 'src/app/services/cookies.service';
-import { IUserRoles } from 'src/app/services/model/auth.model';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { CONSTS } from 'src/app/app.constants';
+import { CookiesService } from 'src/app/services/cookies.service';
+import { IUserRoles } from 'src/app/services/model/auth.model';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Component({
     selector: 'pxe-change-password-form',
     templateUrl: './change-password-form.component.html',
     styleUrls: ['./change-password-form.component.scss'],
 })
-export class ChangePasswordFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
+export class ChangePasswordFormComponent extends AbstractFormComponent implements OnInit, OnChanges, OnDestroy {
     @Input()
     public isPublic = true;
 
@@ -39,12 +41,14 @@ export class ChangePasswordFormComponent extends AbstractFormComponent implement
         protected fb: FormBuilder,
         private ngZone: NgZone,
         private router: Router,
+        private sAnalyticsService: SAnalyticsService,
     ) {
         super(fb);
     }
 
     ngOnInit() {
         super.ngOnInit();
+        this.sAnalyticsService.sFormStart();
         this.form = this.fb.group(this.formFields.controls, this.formFields.options);
         if (this.isPublic) {
             this.setDisableField('currentPassword');
@@ -70,5 +74,10 @@ export class ChangePasswordFormComponent extends AbstractFormComponent implement
             this.form.reset(defaultValues);
             this.resetFormError(false);
         }
+    }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        this.sAnalyticsService.sFormEnd();
     }
 }

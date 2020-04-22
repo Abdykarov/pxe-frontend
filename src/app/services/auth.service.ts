@@ -11,6 +11,7 @@ import {
 import { Router } from '@angular/router';
 
 import * as R_ from 'ramda-extension';
+import * as uuidFn from 'uuid/v4';
 import {
     BehaviorSubject,
     interval,
@@ -84,7 +85,7 @@ export class AuthService {
                 takeUntil(this.stopRefreshTokenIntervalSubject$),
                 repeatWhen(() => this.startRefreshTokenIntervalSubject$),
                 filter((num) => {
-                    if (num === this.stopMessageInterval) {
+                    if (num === this.stopMessageInterval || !this.onlyOneTabActiveService.isThisTabActive()) {
                         this.stopRefreshTokenInterval();
                         return false;
                     }

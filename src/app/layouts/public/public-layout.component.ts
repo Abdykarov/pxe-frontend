@@ -27,6 +27,7 @@ import {
 } from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
@@ -58,6 +59,7 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
         protected overlayService: OverlayService,
         protected route: ActivatedRoute,
         protected router: Router,
+        protected sAnalyticsService: SAnalyticsService,
         protected scrollToService: ScrollToService,
         @Inject(DOCUMENT) private document: any,
         @Inject(PLATFORM_ID) public platformId: string,
@@ -70,6 +72,7 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
             platformId,
             route,
             router,
+            sAnalyticsService,
             scrollToService,
         );
 

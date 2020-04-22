@@ -47,6 +47,7 @@ import { NavigationService } from './services/navigation.service';
 import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
@@ -71,8 +72,9 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
         protected overlayService: OverlayService,
         protected route: ActivatedRoute,
         protected router: Router,
-        private titleService: Title,
+        protected sAnalyticsService: SAnalyticsService,
         protected scrollToService: ScrollToService,
+        private titleService: Title,
         @Inject(PLATFORM_ID) public platformId: string,
     ) {
         super(
@@ -83,6 +85,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
             platformId,
             route,
             router,
+            sAnalyticsService,
             scrollToService,
         );
         this.titleService.setTitle(CONSTS.TITLES.DEFAULT);
