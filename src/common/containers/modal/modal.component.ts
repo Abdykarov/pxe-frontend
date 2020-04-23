@@ -2,7 +2,9 @@ import {
     Component,
     ComponentFactoryResolver,
     ComponentRef,
+    Inject,
     Input,
+    PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
 
@@ -15,6 +17,7 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AddModalDirective } from './add-modal.directive';
+import { isPlatformBrowser } from '@angular/common';
 import { ModalService } from './modal.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 
@@ -39,12 +42,14 @@ export class ModalComponent extends AbstractComponent {
         private componentFactoryResolver: ComponentFactoryResolver,
         private modalLoaderService: ModalService,
         private overlayService: OverlayService,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
         this.modalLoaderService.showModal$
             .pipe(
                 takeUntil(this.destroy$),
                 filter(R_.isNotNil),
+                filter( _ => !isPlatformBrowser(this.platformId)),
             )
             .subscribe(modal => {
                 if (this.component) {
@@ -53,6 +58,7 @@ export class ModalComponent extends AbstractComponent {
                 if (!this.addModal) {
                     return;
                 }
+                const offsetY = window.scrollY;
                 const componentToLoad = R.is(String, modal.component) ?
                     this.modalLoaderService.loadModalComponent(modal.component) : modal.component;
                 const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentToLoad);
@@ -81,6 +87,10 @@ export class ModalComponent extends AbstractComponent {
                             takeUntil(this.destroy$),
                         )
                         .subscribe();
+                    if (offsetY) {
+                        setTimeout(() => window.scrollBy(0, offsetY));
+                    }
+
                 });
                 this.component.changeDetectorRef.detectChanges();
         });
