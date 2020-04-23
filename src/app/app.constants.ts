@@ -99,7 +99,7 @@ export const CONSTS = {
         WILD_CART  : '**',
     },
     REFRESH_TOKEN: {
-        INTERVAL: 300000,
+        INTERVAL: 2000,
         COUNT: 16,
         DONT_REFRESH_TIME_IN_MINUTES: 2,
     },
@@ -542,6 +542,7 @@ export const REGIONS: Array<IOption> = [
 export const OPERATIONS_WITHOUT_TOKEN = [
     'getSupplyPointGlobalStatistics',
     'resetPassword',
+    'makeRegistration',
 ];
 
 export const OPERATIONS_IGNORE_ACCESS_DENIED_EXCEPTION = [];

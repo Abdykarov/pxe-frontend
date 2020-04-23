@@ -14,6 +14,8 @@ import {
     NavigationEnd,
     Router,
 } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
+import { AbstractComponent } from 'src/common/abstract.component';
 
 import { environment } from 'src/environments/environment';
 import { GTMService } from './services/gtm.service';
@@ -27,7 +29,7 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
     styleUrls: ['./app.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit {
+export class AppComponent extends AbstractComponent implements OnInit {
     constructor(
         private elementRef: ElementRef,
         private gtmService: GTMService,
@@ -37,6 +39,7 @@ export class AppComponent implements OnInit {
         @Inject(DOCUMENT) private document: Document,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
+        super();
         if (isPlatformBrowser(this.platformId)) {
             this.sAnalyticsService.init();
             this.sAnalyticsService.installSForm();
@@ -66,12 +69,14 @@ export class AppComponent implements OnInit {
 
             this.gtmService.init();
 
-            this.router.events.subscribe(event => {
-                if (event instanceof NavigationEnd) {
-                    gtmService.gtm(event);
-                    // gaService.gtm(event);
-                }
-            });
+            this.router.events
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(event => {
+                    if (event instanceof NavigationEnd) {
+                        gtmService.gtm(event);
+                        // gaService.gtm(event);
+                    }
+                });
         }
     }
 

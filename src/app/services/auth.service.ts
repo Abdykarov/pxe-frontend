@@ -288,9 +288,10 @@ export class AuthService {
         });
     }
 
-    public homeRedirect = (lastLocateInMoreTab = false) => {
-        if (lastLocateInMoreTab === true) {
-            window.open(localStorage.getItem(CONSTS.STORAGE_HELPERS.LAST_URL), '_self');
+    public homeRedirect = (forceRedirectToLastUrl = false) => {
+        if (forceRedirectToLastUrl) {
+            const lastUrl = localStorage.getItem(CONSTS.STORAGE_HELPERS.LAST_URL);
+            window.open(lastUrl, '_self');
             return;
         }
         if (!this.isLogged()) {

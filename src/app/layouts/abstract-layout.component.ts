@@ -72,32 +72,34 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         protected scrollToService: ScrollToService,
     ) {
         super();
-        this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd) {
-                if (event && event.url !== `/${CONSTS.PATHS.LOGIN}`) {
-                    this.cookieService.remove(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
-                }
-                if (this.showOverlay) {
-                    this.toggleSubscription = this.overlayService.toggleOverlay(false)
-                        .subscribe();
-                    this.toggleSubscription.unsubscribe();
-                }
-                if (
-                    event.urlAfterRedirects.indexOf('/secured') >= -1 &&
-                    isPlatformBrowser(this.platformId)
-                ) {
-                    localStorage.setItem(CONSTS.STORAGE_HELPERS.LAST_URL, event.urlAfterRedirects);
-                }
+        this.router.events
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(event => {
+                if (event instanceof NavigationEnd) {
+                    if (event && event.url !== `/${CONSTS.PATHS.LOGIN}`) {
+                        this.cookieService.remove(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
+                    }
+                    if (this.showOverlay) {
+                        this.toggleSubscription = this.overlayService.toggleOverlay(false)
+                            .subscribe();
+                        this.toggleSubscription.unsubscribe();
+                    }
+                    if (
+                        event.urlAfterRedirects.indexOf('/secured') !== -1 &&
+                        isPlatformBrowser(this.platformId)
+                    ) {
+                        localStorage.setItem(CONSTS.STORAGE_HELPERS.LAST_URL, event.urlAfterRedirects);
+                    }
 
-                if (event && event.url.indexOf('/secured') === -1) {
-                    this.authService.setActualStateFromOtherTab();
-                }
+                    if (event && event.url.indexOf('/secured') === -1) {
+                        this.authService.setActualStateFromOtherTab();
+                    }
 
-                this.sAnalyticsService.pageView();
-                this.settings = <ISettings>this.route.snapshot.firstChild.data;
-                this.activeUrl = this.router.url;
-            }
-        });
+                    this.sAnalyticsService.pageView();
+                    this.settings = <ISettings>this.route.snapshot.firstChild.data;
+                    this.activeUrl = this.router.url;
+                }
+            });
     }
 
     ngOnInit() {
@@ -131,7 +133,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         }
     }
 
-    public homeRedirect = (param) => this.authService.homeRedirect(param === true ? true : param);
+    public homeRedirect = (param) => this.authService.homeRedirect(param);
 
     public landingPageRedirect = () => this.router.navigate([CONSTS.PATHS.EMPTY]);
 

@@ -5,13 +5,16 @@ import {
 
 import * as R_ from 'ramda-extension';
 
-import { IUserRoles } from 'src/app/services/model/auth.model';
+import {
+    IJwtPayload,
+    IUserRoles,
+} from 'src/app/services/model/auth.model';
 
 @Pipe({
     name: 'isLogged',
 })
 export class IsLoggedPipe implements PipeTransform {
-    transform(currentUserValue: any): boolean {
+    transform(currentUserValue: IJwtPayload): boolean {
         return  currentUserValue && currentUserValue.role &&
             !R_.containsAny(currentUserValue.role, [
                 IUserRoles.NEEDS_SMS_CONFIRMATION,
