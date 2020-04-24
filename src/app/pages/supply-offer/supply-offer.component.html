@@ -201,7 +201,7 @@
                 </div>
             </div>
         </ng-container>
-        <div *ngIf="!loadingOffers && offerFormInEmptyPage" class="page-box">
+        <div *ngIf="!loadingOffers && offerFormInEmptyPage && tableRows && tableRows.length === 0" class="page-box">
             <pxe-supply-offer-form
                     [commodityType]="commodityType"
                     [formValues]="null"
