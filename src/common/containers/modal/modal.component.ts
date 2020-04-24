@@ -70,33 +70,27 @@ export class ModalComponent extends AbstractComponent {
                     )
                     .subscribe();
                 this.modalLoaderService.closeModal$.subscribe(_ => {
-                    this.modalLoaderService.setCloseModalData({
-                        modalType: modal.modalType,
-                        confirmed: false,
-                        ...modal.instanceData,
-                    });
-                    this.destroyComponent();
-                    this.overlayService.toggleOverlay(false)
-                        .pipe(
-                            takeUntil(this.destroy$),
-                        )
-                        .subscribe();
+                    this.closeModal(modal, _);
                 });
                 this.component.instance.closeModal.subscribe((val) => {
-                    this.modalLoaderService.setCloseModalData({
-                        modalType: modal.modalType,
-                        confirmed: val,
-                        ...modal.instanceData,
-                    });
-                    this.destroyComponent();
-                    this.overlayService.toggleOverlay(false)
-                        .pipe(
-                            takeUntil(this.destroy$),
-                        )
-                        .subscribe();
+                    this.closeModal(modal, val);
                 });
                 this.component.changeDetectorRef.detectChanges();
         });
+    }
+
+    private closeModal = (modal, val) => {
+        this.modalLoaderService.setCloseModalData({
+            modalType: modal.modalType,
+            confirmed: val,
+            ...modal.instanceData,
+        });
+        this.destroyComponent();
+        this.overlayService.toggleOverlay(false)
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe();
     }
 
     public destroyComponent = () => {

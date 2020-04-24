@@ -189,7 +189,8 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
     }
 
     public scrollToNewSubscription = () =>  {
-        if (this.isLoggedPipe.transform(this.authService.currentUserValue)) {
+        const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
+        if (isLogged) {
             this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
         }
     }

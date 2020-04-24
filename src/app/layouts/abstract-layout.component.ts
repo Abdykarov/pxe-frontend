@@ -136,7 +136,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         }
     }
 
-    public homeRedirect = (param) => this.authService.homeRedirect(param);
+    public homeRedirect = (param = false) => this.authService.homeRedirect(param);
 
     public landingPageRedirect = () => this.router.navigate([CONSTS.PATHS.EMPTY]);
 

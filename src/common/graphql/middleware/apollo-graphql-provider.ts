@@ -66,10 +66,7 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
                                 R.head,
                             )(result.errors);
                             const ignoreException = !R.includes(operation.operationName, OPERATIONS_IGNORE_ACCESS_DENIED_EXCEPTION);
-                            if (
-                                isAccessDeniedException &&
-                                ignoreException
-                            ) {
+                            if (isAccessDeniedException && ignoreException) {
                                 authService.logoutForced();
                             }
                         }

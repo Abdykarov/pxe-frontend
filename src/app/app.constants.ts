@@ -99,7 +99,7 @@ export const CONSTS = {
         WILD_CART  : '**',
     },
     REFRESH_TOKEN: {
-        INTERVAL: 2000,
+        INTERVAL: 300000,
         COUNT: 16,
         DONT_REFRESH_TIME_IN_MINUTES: 2,
     },
