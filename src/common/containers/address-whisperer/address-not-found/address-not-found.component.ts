@@ -1,12 +1,15 @@
 import {
     Component,
     EventEmitter,
+    Inject,
     Input,
     OnDestroy,
     OnInit,
     Output,
+    PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { FormBuilder } from '@angular/forms';
 
 import { takeUntil } from 'rxjs/operators';
@@ -29,12 +32,17 @@ export class AddressNotFoundComponent extends AbstractFormComponent implements O
     set cityInput(cityInput: FieldComponent) {
         this._cityInput = cityInput;
         if (this._cityInput) {
-            setTimeout(() => this._cityInput.triggerFocus = 'TRIG');
+            setTimeout(() => {
+                if (isPlatformBrowser(this.platformId)) {
+                    const firstInputWithoutValue: HTMLInputElement =
+                        document.querySelector(`.${this.whispererName} input:not(.form-control--not-empty)`);
+                    if (firstInputWithoutValue) {
+                        firstInputWithoutValue.focus();
+                    }
+                }
+            });
         }
     }
-
-    @Input()
-    public nameOfTemporaryWhispererFormGroup: string;
 
     @Input()
     public parentForm: any;
@@ -49,6 +57,7 @@ export class AddressNotFoundComponent extends AbstractFormComponent implements O
 
     constructor(
         protected fb: FormBuilder,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super(fb);
     }

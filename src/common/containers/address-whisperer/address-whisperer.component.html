@@ -10,7 +10,7 @@
     #templateItemDefault
     let-item="item"
     let-index="index">
-    {{ item.street }}&nbsp;{{ item.orientationNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.descriptiveNumber }}<br>
+    {{ item.street }}&nbsp;{{ item.descriptiveNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.orientationNumber }}<br>
     {{ item.city }}&nbsp;{{ item.postCode }}
 </ng-template>
 
@@ -18,7 +18,7 @@
     #templateLabelDefault
     let-item="item"
     let-index="index">
-    {{ item.street }}&nbsp;{{ item.orientationNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.descriptiveNumber }},
+    {{ item.street }}&nbsp;{{ item.descriptiveNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.orientationNumber }},
     {{ item.city }}, {{ item.postCode }}
 </ng-template>
 
@@ -55,7 +55,7 @@
             [typeahead]="typeahead"
             [validationMessages]="validationMessages"
             customClass="ng-select-custom--address"
-            (change)="change.emit($event)"
+            (change)="changeSelectedValue($event)"
             (focus)="focus.emit($event)"
             (blur)="blur.emit($event)"
         >

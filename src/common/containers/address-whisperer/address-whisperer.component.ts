@@ -24,6 +24,7 @@ import {
     tap,
     takeUntil,
 } from 'rxjs/operators';
+import { CONSTS } from 'src/app/app.constants';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -42,13 +43,9 @@ import { SelectComponent } from 'src/common/ui/forms/select/select.component';
     encapsulation: ViewEncapsulation.None,
 })
 export class AddressWhispererComponent extends AbstractComponent implements OnInit {
-    private static readonly ADDRESS_MIN_LENGTH = 2;
+    private static readonly ADDRESS_MIN_LENGTH = 3;
     private static readonly DEBOUNCE_TIME = 200;
     private static readonly ROWS_RESPONSE = 5;
-
-    private static readonly PATTER_START_SEARCHING =
-        new RegExp('^(.*?[' + CustomValidators.alphaCharacters + '].*?[ ,].*?[0-9].*?)|' +
-            '(.*?[0-9].*?[ ,].*?[' + CustomValidators.alphaCharacters + '].*?)$');
 
     public static readonly UNIQUE_FIELD_NAME_END = '_not_found_unique';
 
@@ -60,7 +57,6 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
 
     @Output()
     public appendButtonAction?: EventEmitter<any> = new EventEmitter();
-
 
     @Output()
     public change?: EventEmitter<any> = new EventEmitter();
@@ -163,11 +159,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
             .pipe(
                 tap((term) => {
                     this.term = term;
-                    if (this.hasTermGoodLength(this.term) && !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(this.term)) {
-                        this.isStartedSearching = false;
-                    } else {
-                        this.isStartedSearching = !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(this.term);
-                    }
+                    this.isStartedSearching = this.hasTermGoodLength(this.term);
                     this.showForm = false;
                     this.setAddressValidator(true);
                 }),
@@ -190,7 +182,6 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     }
 
     public setAddresses = (addresses = []) => {
-        this.isStartedSearching = !!AddressWhispererComponent.PATTER_START_SEARCHING.exec(this.term);
         this.addresses = addresses;
         this.cd.markForCheck();
     }
@@ -222,4 +213,16 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
         this.blur.emit();
         this.cd.markForCheck();
     }
+
+    private isAllFilled = (userData: IAddress): boolean =>
+        !!(userData && userData.street && userData.descriptiveNumber && userData.city && userData.postCode && userData.region)
+
+    public changeSelectedValue = (userData: IAddress) => {
+        this.change.emit(userData);
+        if (!this.isAllFilled(userData)) {
+            this.showForm = true;
+            this.parentForm.controls[this.whispererName + AddressWhispererComponent.UNIQUE_FIELD_NAME_END].setValue(userData);
+            this.cd.markForCheck();
+        }
+   }
 }
