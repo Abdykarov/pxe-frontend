@@ -143,7 +143,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
         ) {
             if (OnlyOneTabActiveState.LOGOUT === newValue) {
                 this.authService.currentUserSubject$.next(null);
-                this.modalsService.closeModalData$.next(null);
+                this.modalsService.closeModal$.next(null);
                 setTimeout(() => this.router.navigate([CONSTS.PATHS.LOGIN]));
             } else if (OnlyOneTabActiveState.CLOSED !== newValue) {
                 this.modalsService
