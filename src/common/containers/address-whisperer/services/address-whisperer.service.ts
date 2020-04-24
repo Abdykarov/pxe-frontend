@@ -28,7 +28,7 @@ export class AddressWhispererService {
     private responseToResult = (resultMapyCz: IResultMapyCZResponse): IAddress => {
         const userData: IUserDataMapyCzResponse = resultMapyCz.userData;
         let address: IAddress = null;
-        if ((userData.street || userData.ward)  && userData.region) {
+        if ((userData.street || userData.ward) && userData.region) {
             address = {
                 street: userData.street || userData.ward,
                 orientationNumber: userData.streetNumber,

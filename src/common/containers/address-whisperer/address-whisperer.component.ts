@@ -24,14 +24,12 @@ import {
     tap,
     takeUntil,
 } from 'rxjs/operators';
-import { CONSTS } from 'src/app/app.constants';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
     addressNotFoundFields,
 } from 'src/common/containers/address-whisperer/address-not-found/address-not-found.config';
 import { AddressWhispererService } from './services/address-whisperer.service';
-import { CustomValidators } from 'src/common/utils';
 import { IAddress } from 'src/common/graphql/models/supply.model';
 import { IValidationMessages } from 'src/common/ui/forms/models/validation-messages.model';
 import { SelectComponent } from 'src/common/ui/forms/select/select.component';
