@@ -49,7 +49,7 @@ export class ModalComponent extends AbstractComponent {
             .pipe(
                 takeUntil(this.destroy$),
                 filter(R_.isNotNil),
-                filter( _ => isPlatformBrowser(this.platformId)),
+                filter(_ => isPlatformBrowser(this.platformId)),
             )
             .subscribe(modal => {
                 if (this.component) {
