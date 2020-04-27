@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
+import * as latinize from 'latinize';
 import * as R from 'ramda';
 import {
     NgSelectComponent,
@@ -130,7 +131,14 @@ export class SelectComponent {
 
     public customSearchFn = (term: string, item: any) => {
         if (this.withoutConditionalAtLength || !!term && term.length > 2) {
-            return item.label.toLocaleLowerCase().indexOf(term) > -1 || item.label.indexOf(term) > -1;
+            const label = R.path(['label'], item);
+            if (label) {
+                const normalizationTerm = latinize(term.toLocaleLowerCase());
+                const normalizationItem = latinize(label.toLocaleLowerCase());
+                return normalizationItem.indexOf(normalizationTerm) > -1;
+            } else {
+                return false;
+            }
         }
     }
 
