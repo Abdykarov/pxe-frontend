@@ -312,6 +312,31 @@
 		}
 	}
 
+	&-back-to-app {
+		padding-right: ( $btn-padding-x-lg + $btn-back-to-app-icon-size + ( $spacer * 7.75 ) );
+		line-height: 1;
+		border: none;
+
+		.btn__icon {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			top: 50%;
+			right: $btn-padding-x-lg;
+			width: $btn-back-to-app-icon-size;
+			height: $btn-back-to-app-icon-size;
+			background-color: $white;
+			color: $primary;
+			font-size: $icon-size-small-px;
+			border-radius: $btn-back-to-app-icon-size;
+			transform: translateY(-50%);
+
+			&--right {
+				padding-right: 0;
+			}
+		}
+	}
+
 	&.btn-long {
 		// Media queries
 		@include media-breakpoint-up(sm) {

@@ -9,18 +9,6 @@
 
 <div class="landing-page">
     <div class="section section--video">
-        <div *ngIf="showStickyButton"
-             class="container-fluid fixed-bottom">
-            <div class="row text-center">
-                <div class="col-12 col-md-8 col-xl-6 col-lg-4">
-                    <lnd-button
-                        label="Zpět do aplikace"
-                        type="primary"
-                        (action)="click($event)">
-                    </lnd-button>
-                </div>
-            </div>
-        </div>
         <div class="container-fluid">
             <div class="section-video-text">
                 <div class="row w-100">
@@ -154,6 +142,23 @@
                         ></pxe-registration-form>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="showStickyButton"
+        class="fixed-bottom">
+        <div class="row w-100 mb-3 text-center">
+            <div class="col-12">
+                <lnd-button
+                    label="Zpět do aplikace"
+                    type="primary"
+                    size="lg"
+                    icon="icon--triangle-right"
+                    iconPosition="right"
+                    customClass="btn-back-to-app"
+                    (action)="click($event)">
+                </lnd-button>
             </div>
         </div>
     </div>
