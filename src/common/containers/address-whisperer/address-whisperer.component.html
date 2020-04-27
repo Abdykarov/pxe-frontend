@@ -10,16 +10,16 @@
     #templateItemDefault
     let-item="item"
     let-index="index">
-    {{ item.street }}&nbsp;{{ item.descriptiveNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.orientationNumber }}<br>
-    {{ item.city }}&nbsp;{{ item.postCode }}
+    {{ item.street }}{{item.descriptiveNumber ? '&nbsp;' : ''}}{{ item.descriptiveNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.orientationNumber }}<br>
+    {{ item.city }}{{item?.postCode ? '&nbsp;' : ''}}{{ item.postCode }}
 </ng-template>
 
 <ng-template
     #templateLabelDefault
     let-item="item"
     let-index="index">
-    {{ item.street }}&nbsp;{{ item.descriptiveNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.orientationNumber }},
-    {{ item.city }}, {{ item.postCode }}
+    {{ item.street }}{{item.descriptiveNumber ? '&nbsp;' : ''}}{{ item.descriptiveNumber }}<ng-container *ngIf="item && item.orientationNumber && item.descriptiveNumber">/</ng-container>{{ item.orientationNumber }},
+    {{ item.city }}{{item?.postCode ? ',' : ''}} {{ item.postCode }}
 </ng-template>
 
 <ng-template #subtextTemplateDefault>

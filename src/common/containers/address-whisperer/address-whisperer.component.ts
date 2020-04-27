@@ -41,7 +41,7 @@ import { SelectComponent } from 'src/common/ui/forms/select/select.component';
     encapsulation: ViewEncapsulation.None,
 })
 export class AddressWhispererComponent extends AbstractComponent implements OnInit {
-    private static readonly ADDRESS_MIN_LENGTH = 3;
+    private static readonly ADDRESS_MIN_LENGTH = 5;
     private static readonly DEBOUNCE_TIME = 200;
     private static readonly ROWS_RESPONSE = 5;
 
