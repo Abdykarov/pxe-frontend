@@ -119,6 +119,9 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     @Input()
     public whispererName: string;
 
+    @Input()
+    public withoutFocusNotFoundAddress = true;
+
     public addresses: Array<IAddress> = [];
     public typeahead: EventEmitter<any>;
     public isStartedSearching = false;
@@ -152,10 +155,10 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     ) {
         super();
         this.typeahead = new EventEmitter();
-
         this.typeahead
             .pipe(
                 tap((term) => {
+                    this.withoutFocusNotFoundAddress = false;
                     this.term = term;
                     this.isStartedSearching = this.hasTermGoodLength(this.term);
                     this.showForm = false;
@@ -177,6 +180,10 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     ngOnInit() {
         super.ngOnInit();
         this.nameOfTemporaryWhispererFormGroup = this.whispererName + AddressWhispererComponent.UNIQUE_FIELD_NAME_END;
+        const initData = this.parentForm.get(this.whispererName).value;
+        if (initData && initData.city && !this.isAllFilled(initData)) {
+            this.changeSelectedValue(initData);
+        }
     }
 
     public setAddresses = (addresses = []) => {
@@ -217,7 +224,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
 
     public changeSelectedValue = (userData: IAddress) => {
         this.change.emit(userData);
-        if (!this.isAllFilled(userData)) {
+        if (userData && !this.isAllFilled(userData)) {
             this.showForm = true;
             this.parentForm.controls[this.whispererName + AddressWhispererComponent.UNIQUE_FIELD_NAME_END].setValue(userData);
             this.cd.markForCheck();

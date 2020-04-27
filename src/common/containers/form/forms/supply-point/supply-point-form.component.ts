@@ -1,11 +1,11 @@
 import {
     ChangeDetectorRef,
-    Component,
+    Component, ElementRef,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
-    SimpleChanges,
+    SimpleChanges, ViewChild,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
@@ -20,6 +20,7 @@ import {
     map,
     takeUntil,
 } from 'rxjs/operators';
+import { AddressWhispererComponent } from 'src/common/containers/address-whisperer/address-whisperer.component';
 
 import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/abstract-supply-point-form.component';
 import { AuthService } from 'src/app/services/auth.service';
@@ -70,6 +71,14 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent implements OnInit, OnDestroy, OnChanges {
     public readonly MAX_LENGTH_NUMBER_INPUT_WITH_HINT = CONSTS.VALIDATORS.MAX_LENGTH.NUMBER_INPUT_WITH_HINT;
+    public pxeAddressWhisperer: AddressWhispererComponent;
+
+    @ViewChild('pxeAddressWhisperer')
+    set addressWhisperer(pxeAddressWhisperer: AddressWhispererComponent) {
+        if (pxeAddressWhisperer) {
+            this.pxeAddressWhisperer = pxeAddressWhisperer;
+        }
+    }
 
     @Input()
     public formValues: ISupplyPoint = null;
@@ -245,8 +254,12 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                                         if (supplyPointForm.expirationDate) {
                                             supplyPointForm.expirationDate = new Date(supplyPointForm.expirationDate);
                                         }
-
+                                        const setPartialFormForAddress = supplyPointForm['address_not_found_unique'];
+                                        delete supplyPointForm['address_not_found_unique'];
                                         this.form.setValue(supplyPointForm);
+                                        if (setPartialFormForAddress) {
+                                            this.pxeAddressWhisperer.changeSelectedValue(setPartialFormForAddress);
+                                        }
                                         this.resetFormError(false);
                                     }
                                 } catch (e) {}

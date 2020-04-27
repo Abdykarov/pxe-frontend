@@ -119,6 +119,9 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
                 if (personalInfoUnfinished.birthDate) {
                     personalInfoUnfinished.birthDate = new Date(personalInfoUnfinished.birthDate);
                 }
+
+                delete personalInfoUnfinished['address1_not_found_unique'];
+                delete personalInfoUnfinished['address2_not_found_unique'];
                 this.form.setValue(personalInfoUnfinished);
             }
 
