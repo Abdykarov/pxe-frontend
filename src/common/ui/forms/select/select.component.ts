@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import * as latinize from 'latinize';
 import * as R from 'ramda';
 import {
     NgSelectComponent,
@@ -18,7 +17,10 @@ import {
 
 import { defaultSelectConfig } from './select.config';
 import { DynamicPipe } from 'src/common/pipes/dynamic/dynamic.pipe';
-import { getErrorMessage } from 'src/common/utils';
+import {
+    getErrorMessage,
+    normalizeString,
+} from 'src/common/utils';
 import { IOption } from '../models/option.model';
 import { IValidationMessages } from '../models/validation-messages.model';
 
@@ -129,12 +131,24 @@ export class SelectComponent {
     @Input()
     public warning?: any;
 
+    constructor(
+        private config: NgSelectConfig,
+        private dynamicPipe: DynamicPipe,
+    ) {
+        R.pipe(
+            R.keys,
+            R.map(key => {
+                this.config[key] = defaultSelectConfig[key];
+            }),
+        )(defaultSelectConfig);
+    }
+
     public customSearchFn = (term: string, item: any) => {
         if (this.withoutConditionalAtLength || !!term && term.length > 2) {
             const label = R.path(['label'], item);
             if (label) {
-                const normalizationTerm = latinize(term.toLocaleLowerCase());
-                const normalizationItem = latinize(label.toLocaleLowerCase());
+                const normalizationTerm = normalizeString(term);
+                const normalizationItem = normalizeString(label);
                 return normalizationItem.indexOf(normalizationTerm) > -1;
             } else {
                 return false;
@@ -150,17 +164,5 @@ export class SelectComponent {
             window.scrollTo(window.scrollX, window.scrollY - 1);
             window.scrollTo(window.scrollX, window.scrollY + 1);
         });
-    }
-
-    constructor(
-        private config: NgSelectConfig,
-        private dynamicPipe: DynamicPipe,
-    ) {
-        R.pipe(
-            R.keys,
-            R.map(key => {
-                this.config[key] = defaultSelectConfig[key];
-            }),
-        )(defaultSelectConfig);
     }
 }
