@@ -1,11 +1,12 @@
 import {
     ChangeDetectorRef,
-    Component, ElementRef,
+    Component,
     Input,
     OnChanges,
     OnDestroy,
     OnInit,
-    SimpleChanges, ViewChild,
+    SimpleChanges,
+    ViewChild,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
@@ -247,15 +248,18 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                             .pipe(takeUntil(this.destroy$))
                             .subscribe(formValues => {
                                 try {
-                                    const { email, supplyPointForm } = formValues;
+                                    // tslint:disable-next-line
+                                    let { email, supplyPointForm } = formValues;
                                     this.existsPartialSupplyPointValue = false;
                                     this.supplyPointLocalStorageService.removeSupplyPoint();
                                     if (email === this.authService.currentUserValue.email) {
                                         if (supplyPointForm.expirationDate) {
                                             supplyPointForm.expirationDate = new Date(supplyPointForm.expirationDate);
                                         }
-                                        const setPartialFormForAddress = supplyPointForm['address_not_found_unique'];
-                                        delete supplyPointForm['address_not_found_unique'];
+                                        const setPartialFormForAddress =
+                                            AddressWhispererComponent.getAddressNotFoundUniqueValue(supplyPointForm);
+                                        supplyPointForm =
+                                            AddressWhispererComponent.removeAddressNotFoundUnique(supplyPointForm);
                                         this.form.setValue(supplyPointForm);
                                         if (setPartialFormForAddress) {
                                             this.pxeAddressWhisperer.changeSelectedValue(setPartialFormForAddress);

@@ -114,14 +114,12 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             this.form.controls['email'].setValue(email);
             this.form.controls['deposit'].setValue(Math.ceil(deposit));
 
-            const personalInfoUnfinished = this.personalInfoLocalStorageService.getPersonalInfo(this.supplyPoint.id);
+            let personalInfoUnfinished = this.personalInfoLocalStorageService.getPersonalInfo(this.supplyPoint.id);
             if (personalInfoUnfinished && !R.isEmpty(personalInfoUnfinished)) {
                 if (personalInfoUnfinished.birthDate) {
                     personalInfoUnfinished.birthDate = new Date(personalInfoUnfinished.birthDate);
                 }
-
-                delete personalInfoUnfinished['address1_not_found_unique'];
-                delete personalInfoUnfinished['address2_not_found_unique'];
+                personalInfoUnfinished = AddressWhispererComponent.removeAddressNotFoundUnique(personalInfoUnfinished);
                 this.form.setValue(personalInfoUnfinished);
             }
 

@@ -41,6 +41,23 @@ import { SelectComponent } from 'src/common/ui/forms/select/select.component';
     encapsulation: ViewEncapsulation.None,
 })
 export class AddressWhispererComponent extends AbstractComponent implements OnInit {
+
+    set showForm(showForm: boolean) {
+        // delete v not-found kvuli disable
+        if (showForm) {
+            this.parentForm.addControl(
+                this.nameOfTemporaryWhispererFormGroup,
+                this.fb.group(this.formFields.controls, this.formFields.options),
+            );
+        }
+
+        this._showForm = showForm;
+    }
+
+    get showForm() {
+        return this._showForm;
+    }
+
     private static readonly ADDRESS_MIN_LENGTH = 5;
     private static readonly DEBOUNCE_TIME = 200;
     private static readonly ROWS_RESPONSE = 5;
@@ -120,7 +137,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     public whispererName: string;
 
     @Input()
-    public withoutFocusNotFoundAddress = true;
+    public notFoundAddressWithFocus = false;
 
     public addresses: Array<IAddress> = [];
     public typeahead: EventEmitter<any>;
@@ -129,24 +146,6 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     public nameOfTemporaryWhispererFormGroup = '';
 
     private _showForm = false;
-
-    set showForm(showForm: boolean) {
-        // delete v not-found kvuli disable
-        if (showForm) {
-            this.parentForm.addControl(
-                this.nameOfTemporaryWhispererFormGroup,
-                this.fb.group(this.formFields.controls, this.formFields.options),
-            );
-        }
-
-        this._showForm = showForm;
-    }
-
-    get showForm() {
-        return this._showForm;
-    }
-
-    public hasTermGoodLength = term => term && term.length >= AddressWhispererComponent.ADDRESS_MIN_LENGTH;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -158,7 +157,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
         this.typeahead
             .pipe(
                 tap((term) => {
-                    this.withoutFocusNotFoundAddress = false;
+                    this.notFoundAddressWithFocus = true;
                     this.term = term;
                     this.isStartedSearching = this.hasTermGoodLength(this.term);
                     this.showForm = false;
@@ -177,12 +176,29 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
             });
     }
 
+    public static getAddressNotFoundUniqueValue = (object: object) => R.pipe(
+        R.keys,
+        R.filter(R.endsWith('unique')),
+        (key) => R.prop(key)(object),
+    )(object)
+
+    public static removeAddressNotFoundUnique = (object: object) => R.pipe(
+        R.keys,
+        R.reject(R.endsWith('unique')),
+        R.reduce((acc, key) => ({
+            [key]: object[key],
+            ...acc,
+        }), {}),
+    )(object)
+
+    public hasTermGoodLength = term => term && term.length >= AddressWhispererComponent.ADDRESS_MIN_LENGTH;
+
     ngOnInit() {
         super.ngOnInit();
         this.nameOfTemporaryWhispererFormGroup = this.whispererName + AddressWhispererComponent.UNIQUE_FIELD_NAME_END;
-        const initData = this.parentForm.get(this.whispererName).value;
-        if (initData && initData.city && !this.isAllFilled(initData)) {
-            this.changeSelectedValue(initData);
+        const addressData = this.parentForm.get(this.whispererName).value;
+        if (addressData && addressData.city && !this.isAllFilled(addressData)) {
+            this.changeSelectedValue(addressData);
         }
     }
 

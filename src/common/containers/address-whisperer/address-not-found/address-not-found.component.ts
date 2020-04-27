@@ -33,7 +33,7 @@ export class AddressNotFoundComponent extends AbstractFormComponent implements O
         this._cityInput = cityInput;
         if (this._cityInput) {
             setTimeout(() => {
-                if (isPlatformBrowser(this.platformId) && !this.withoutFocus) {
+                if (isPlatformBrowser(this.platformId) && this.withFocus) {
                     const firstInputWithoutValue: HTMLInputElement =
                         document.querySelector(`.${this.whispererName} input:not(.form-control--not-empty)`);
                     if (firstInputWithoutValue) {
@@ -48,7 +48,7 @@ export class AddressNotFoundComponent extends AbstractFormComponent implements O
     public parentForm: any;
 
     @Input()
-    public withoutFocus = false;
+    public withFocus = true;
 
     @Input()
     public whispererName: string;
