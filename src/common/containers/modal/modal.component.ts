@@ -70,7 +70,7 @@ export class ModalComponent extends AbstractComponent {
                     )
                     .subscribe();
                 this.modalLoaderService.closeModal$.subscribe(_ => {
-                    this.closeModal(modal, _);
+                    this.closeModal(modal);
                 });
                 this.component.instance.closeModal.subscribe((val) => {
                     this.closeModal(modal, val);
@@ -79,7 +79,7 @@ export class ModalComponent extends AbstractComponent {
         });
     }
 
-    private closeModal = (modal, val) => {
+    private closeModal = (modal, val = null) => {
         this.modalLoaderService.setCloseModalData({
             modalType: modal.modalType,
             confirmed: val,
