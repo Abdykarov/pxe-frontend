@@ -15,8 +15,8 @@ import {
     Router,
 } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
-import { AbstractComponent } from 'src/common/abstract.component';
 
+import { AbstractComponent } from 'src/common/abstract.component';
 import { environment } from 'src/environments/environment';
 import { GTMService } from './services/gtm.service';
 import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
