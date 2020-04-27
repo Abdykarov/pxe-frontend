@@ -9,6 +9,18 @@
 
 <div class="landing-page">
     <div class="section section--video">
+        <div *ngIf="showStickyButton"
+             class="container-fluid fixed-bottom">
+            <div class="row text-center">
+                <div class="col-12 col-md-8 col-xl-6 col-lg-4">
+                    <lnd-button
+                        label="Zpět do aplikace"
+                        type="primary"
+                        (action)="click($event)">
+                    </lnd-button>
+                </div>
+            </div>
+        </div>
         <div class="container-fluid">
             <div class="section-video-text">
                 <div class="row w-100">
