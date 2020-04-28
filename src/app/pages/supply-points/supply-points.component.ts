@@ -120,7 +120,7 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
 
     public createSupplyPoint = (event) => {
         event.stopPropagation();
-        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
+        this.router.navigate([ROUTES.ROUTER_REQUEST_SIGNBOARD]);
     }
 
     public navigateToSupplyPointDetail = ({id}: ISupplyPoint) => {

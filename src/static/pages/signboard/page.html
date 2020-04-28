@@ -1,7 +1,14 @@
-<pxe-layout-container pageTitle="Nové odběrné místo">
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12 col-md-6 offset-md-3 text-center">
+            <h1>
+                Nové odběrné místo
+            </h1>
+        </div>
+    </div>
     <div class="row mb-6">
         <div class="col-12 col-xl-10 offset-xl-1">
-            <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
+            <pxe-progress-bar [config]="config.stepperProgressConfig"></pxe-progress-bar>
         </div>
     </div>
     <div class="row">
@@ -20,9 +27,9 @@
                 potřebných informací vám doporučujeme připravit si následující dokumenty."
                 [notifications]="notifications"
                 [type]="typeOfListCheck"
-                customLinkClass="ml-xl-6"
+                customLinkClass="ml-6"
                 customColClass="col-12 col-xl-10 offset-xl-1"
-                customRowClass="text-xl-left text-center">
+                customRowClass="">
             </pxe-list-of-notifications>
             <p class="text-center">
                 Je-li vše jasné pokračujte tlačítkem "Vyplnit"
@@ -30,11 +37,10 @@
             <div class="text-center">
                 <lnd-button
                     type="primary"
-                    (action)="fillClick($event);"
+                    (action)="click($event);"
                     label="Vyplnit">
                 </lnd-button>
             </div>
         </div>
     </div>
-</pxe-layout-container>
-
+</div>

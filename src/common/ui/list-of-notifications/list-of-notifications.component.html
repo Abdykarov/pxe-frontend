@@ -1,13 +1,17 @@
 <div class="list-of-notifications">
-    <div class="row mb-2">
-        <div class="col-10 offset-1 text-center mt-4 mb-2">
+    <div class="row mb-2"
+         [ngClass]="customColClass">
+        <div class="text-center mt-4 mb-2">
             <h2 class="mb-2">{{headerText}}</h2>
         </div>
     </div>
-    <div class="row pb-5">
+    <div class="row"
+         [ngClass]="customRowClass">
         <div *ngIf="notifications.length"
-            class="col-10 offset-1">
-            <ol class="list-of-notifications__list">
+             [ngClass]="customColClass">
+            <ol class="list-of-notifications__list"
+                [class.check-list]="type === TypeOfList.CHECKLIST"
+                [ngClass]="customLinkClass">
                 <li 
                     class="list-of-notifications__item" 
                     *ngFor="let notification of notifications | slice:0:maxShowNotifications">
@@ -19,7 +23,7 @@
             </ol>
         </div>
         <div *ngIf="!notifications.length"
-             class="col-10 offset-1">
+             [ngClass]="customColClass">
             {{emptyNotifications}}
         </div>
     </div>
