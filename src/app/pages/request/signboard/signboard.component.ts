@@ -1,16 +1,16 @@
-import { isPlatformBrowser } from '@angular/common';
 import {
-    Component, Inject, PLATFORM_ID,
+    Component,
+    Inject,
 } from '@angular/core';
 import { Router } from '@angular/router';
+
+import * as R from 'ramda';
 
 import { getConfigStepper } from 'src/common/utils';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 import { ROUTES } from 'src/app/app.constants';
 import { TypeOfList } from 'src/common/ui/list-of-notifications/models/list-of-notifications.model';
-
-import * as R from 'ramda';
 
 @Component({
     selector: 'lnd-signboard',
@@ -30,7 +30,6 @@ export class SignboardComponent {
 
     constructor(
         private router: Router,
-        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         this.showWelcome = R.path(['history', 'state', 'afterLogin'], window);
     }
