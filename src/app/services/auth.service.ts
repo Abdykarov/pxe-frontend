@@ -10,6 +10,7 @@ import {
 } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+import * as R_ from 'ramda-extension';
 import * as uuidFn from 'uuid/v4';
 import {
     BehaviorSubject,
@@ -44,18 +45,18 @@ import {
     IUserRoles,
 } from './model/auth.model';
 import { IStateRouter } from 'src/app/pages/logout/logout-page.model';
+import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
+import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    private cookieName = 'user';
-    private currentUserSubject$: BehaviorSubject<IJwtPayload>;
+    public currentUserSubject$: BehaviorSubject<IJwtPayload>;
     public currentUser$: Observable<IJwtPayload>;
     private token: string;
-    private uuid: string = null;
-    private sessionUuid: string = null;
 
+    public isLastRefreshToken = false;
     public startExpirationOfToken: Date = null;
     public dontRefreshToken = true;
     public wasRefreshCallRefreshInterval = false;
@@ -67,6 +68,7 @@ export class AuthService {
         interval(CONSTS.REFRESH_TOKEN.INTERVAL)
             .pipe(
                 switchMap((number) => {
+                    this.isLastRefreshToken = false;
                     if (!this.wasRefreshCallRefreshInterval) {
                         if (!this.token) {
                             return of(this.stopMessageInterval);
@@ -76,10 +78,14 @@ export class AuthService {
                 }),
                 catchError(() => of(this.stopMessageInterval)),
                 take(CONSTS.REFRESH_TOKEN.COUNT),
+                tap(tick => {
+                    this.isLastRefreshToken = CONSTS.REFRESH_TOKEN.COUNT - 1 === tick;
+                    return tick;
+                }),
                 takeUntil(this.stopRefreshTokenIntervalSubject$),
                 repeatWhen(() => this.startRefreshTokenIntervalSubject$),
                 filter((num) => {
-                    if (num === this.stopMessageInterval) {
+                    if (num === this.stopMessageInterval || !this.onlyOneTabActiveService.isThisTabActive()) {
                         this.stopRefreshTokenInterval();
                         return false;
                     }
@@ -91,6 +97,7 @@ export class AuthService {
     constructor(
         private cookiesService: CookiesService,
         private http: HttpClient,
+        private onlyOneTabActiveService: OnlyOneTabActiveService,
         private router: Router,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
@@ -100,6 +107,13 @@ export class AuthService {
         if (isPlatformBrowser(this.platformId)) {
             this.refreshTokenInterval$.subscribe();
         }
+    }
+
+    static jwtTokenHasRoles(jwtToken: string, accessRole: string[]): boolean {
+        const jwtHelper = new JwtHelperService();
+        const jwtPayload = jwtHelper.decodeToken(jwtToken);
+        const { role } = jwtPayload;
+        return R_.containsAny(role, accessRole);
     }
 
     public refreshTokenInterval = () => {
@@ -127,18 +141,15 @@ export class AuthService {
     }
 
     public checkLogin = () => {
-        if (this.cookiesService.has(this.cookieName)) {
-            this.token = (<any>this.cookiesService.getObject(this.cookieName)).token;
-            this.uuid = (<any>this.cookiesService.getObject(this.cookieName)).uuid;
+        if (this.cookiesService.has(CONSTS.STORAGE_HELPERS.USER)) {
+            this.token = (<any>this.cookiesService.getObject(CONSTS.STORAGE_HELPERS.USER)).token;
         } else {
             this.token = null;
-            this.uuid = null;
         }
-        this.sessionUuid = window.sessionStorage && window.sessionStorage.getItem('uuid');
     }
 
     public isLogged = (): boolean  => {
-        return !!this.token && this.sessionUuid === this.uuid;
+        return !!this.token;
     }
 
     public needSmsConfirm(): boolean {
@@ -155,7 +166,7 @@ export class AuthService {
         return this.http.post<ILoginResponse>(`${environment.url_api}/v1.0/users/login`, { login, password })
             .pipe(
                 map((response: ILoginResponse) => {
-                    const loginResponse =  this.manageLoginResponse(response, uuidFn());
+                    const loginResponse =  this.manageLoginResponse(response);
                     this.startRefreshTokenInterval();
                     this.startExpirationOfToken = new Date();
                     return loginResponse;
@@ -169,6 +180,7 @@ export class AuthService {
             .pipe(
                 map(response => {
                     this.cleanUserData();
+                    this.onlyOneTabActiveService.setActiveTab(OnlyOneTabActiveState.LOGOUT);
                     return response;
                 }),
                 catchError((error) => {
@@ -202,27 +214,31 @@ export class AuthService {
 
     public cleanUserData = () => {
         this.token = null;
-        this.uuid = null;
-        this.sessionUuid = null;
         if (window.sessionStorage) {
             window.sessionStorage.clear();
         }
-        this.cookiesService.remove(this.cookieName);
+        this.cookiesService.remove(CONSTS.STORAGE_HELPERS.USER);
         this.currentUserSubject$.next(null);
     }
 
-    public manageLoginResponse = (response: ILoginResponse, uuid: string = this.uuid) => {
+    public setActualStateFromOtherTab = () => {
+        if (isPlatformBrowser(this.platformId)) {
+            const token = this.cookiesService.get(CONSTS.STORAGE_HELPERS.USER);
+            if (token) {
+                const jwtPayload = this.getJwtPayload(token);
+                this.currentUserSubject$.next(jwtPayload);
+            }
+        }
+    }
+
+    public manageLoginResponse = (response: ILoginResponse) => {
         if (response && response.token) {
             const jwtPayload = this.getJwtPayload(response.token);
             const user = {
                 token: response.token,
-                uuid: uuid,
             };
-            if (window.sessionStorage) {
-                window.sessionStorage.setItem('uuid', uuid);
-            }
             const expiration = new Date().getTime() + CONSTS.DEFAULT_EXPIRATION;
-            this.cookiesService.setObject(this.cookieName, user, expiration);
+            this.cookiesService.setObject(CONSTS.STORAGE_HELPERS.USER, user, expiration);
             this.checkLogin();
             this.currentUserSubject$.next(jwtPayload);
         }
@@ -231,11 +247,10 @@ export class AuthService {
 
     public getToken = (): string => this.token;
 
-    public getUuid = (): string => this.uuid;
-
-    public logoutForced = () => {
+    public logoutForced = (isFromUnauthorized = true) => {
         const state: IStateRouter = {
             refresh: true,
+            isFromUnauthorized,
         };
         return this.router.navigate(
             [CONSTS.PATHS.LOGOUT],
@@ -256,19 +271,11 @@ export class AuthService {
                 jwtPayload.needSmsConfirm = role.indexOf(IUserRoles.NEEDS_SMS_CONFIRMATION) !== -1;
             } catch (e) {
                 this.token = null;
-                this.cookiesService.remove(this.cookieName);
+                this.cookiesService.remove(CONSTS.STORAGE_HELPERS.USER);
             }
 
         }
         return jwtPayload;
-    }
-
-    private generateUuid = () => {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            // tslint:disable-next-line:no-bitwise
-            const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
-            return v.toString(16);
-        });
     }
 
     public getAuthorizationHeaders = (contentType: string = null, accept: string = '*/*'): HttpHeaders => {
@@ -281,7 +288,14 @@ export class AuthService {
         });
     }
 
-    public homeRedirect = () => {
+    public homeRedirect = (forceRedirectToLastUrl = false) => {
+        if (forceRedirectToLastUrl) {
+            const lastUrl = localStorage.getItem(CONSTS.STORAGE_HELPERS.LAST_URL);
+            if (lastUrl) {
+                window.open(lastUrl, '_self');
+                return;
+            }
+        }
         if (!this.isLogged()) {
             this.router.navigate([CONSTS.PATHS.EMPTY]);
         } else if (this.currentUserValue.supplier) {

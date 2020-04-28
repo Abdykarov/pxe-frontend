@@ -6,10 +6,6 @@ import {
 import { Injectable } from '@angular/core';
 
 import {
-    catchError,
-    tap,
-} from 'rxjs/operators';
-import {
     Observable,
     of,
 } from 'rxjs';
@@ -40,6 +36,7 @@ export class RefreshTokenResolver implements Resolve<any> {
             this.authService.dontRefreshToken = false;
             this.authService.wasRefreshCallRefreshInterval = true;
         } else if (this.needRefreshToken()) {
+            this.authService.isLastRefreshToken = false;
             return this.authService.refreshTokenInterval();
         }
         return of({});

@@ -4,14 +4,17 @@
     [class.body-inner--overlay]="showOverlay">
     <lnd-header
         [sticked]="wasLastTimeScrolledToTop"
+        [isLogged]="authService.currentUserValue | isLogged"
         [settings]="settings"
         (homeRedirect)="homeRedirect()"
         [isMenuOpen]="isMenuOpen"
+        (landingPageRedirect)="landingPageRedirect()"
         (loginAction)="login()"
         (signUpAction)="signUp()"
         (supplierChangeAction)="supplierChange()"
         (coverageMapAction)="coverageMap()"
-        (toggleMenu)="toggleMenuOpen($event)">
+        (toggleMenu)="toggleMenuOpen($event)"
+        (logoutAction)="logout()">
     </lnd-header>
     <main class="main">
         <router-outlet></router-outlet>

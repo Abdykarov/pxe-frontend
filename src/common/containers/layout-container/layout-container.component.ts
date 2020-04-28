@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
-import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 
 @Component({
@@ -23,13 +22,6 @@ export class LayoutContainerComponent {
     public pageTitle: string;
 
     public showBanner = false;
-
-    public bannerObj: IBannerObj = {
-        linkValue: '#',
-        text: 'Vaše heslo bylo úspěšně změněno.',
-        linkType: '',
-        title: '',
-    };
 
     constructor(
         @Inject(PLATFORM_ID) private platformId: string,

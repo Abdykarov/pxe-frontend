@@ -1,6 +1,7 @@
 import {
     Component,
     Input,
+    NgZone,
     OnChanges,
     OnDestroy,
     OnInit,
@@ -10,10 +11,17 @@ import {
     FormBuilder,
     FormGroup,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import * as R from 'ramda';
+import { interval } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { CONSTS } from 'src/app/app.constants';
+import { CookiesService } from 'src/app/services/cookies.service';
+import { IUserRoles } from 'src/app/services/model/auth.model';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Component({
@@ -28,8 +36,12 @@ export class ChangePasswordFormComponent extends AbstractFormComponent implement
     public form: FormGroup;
 
     constructor(
-        private sAnalyticsService: SAnalyticsService,
+        private authService: AuthService,
+        private cookieService: CookiesService,
         protected fb: FormBuilder,
+        private ngZone: NgZone,
+        private router: Router,
+        private sAnalyticsService: SAnalyticsService,
     ) {
         super(fb);
     }
@@ -40,6 +52,18 @@ export class ChangePasswordFormComponent extends AbstractFormComponent implement
         this.form = this.fb.group(this.formFields.controls, this.formFields.options);
         if (this.isPublic) {
             this.setDisableField('currentPassword');
+            this.ngZone.runOutsideAngular(() => {
+                interval(1000)
+                    .pipe(
+                        takeUntil(this.destroy$),
+                    )
+                    .subscribe(_ => {
+                        const userToken = this.cookieService.get(CONSTS.STORAGE_HELPERS.USER);
+                        if (!userToken || !AuthService.jwtTokenHasRoles(userToken, [IUserRoles.RESET_PASSWORD])) {
+                            this.router.navigate([CONSTS.PATHS.EMPTY]);
+                        }
+                    });
+            });
         }
     }
 
