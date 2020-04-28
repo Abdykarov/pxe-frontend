@@ -43,7 +43,6 @@ import { SelectComponent } from 'src/common/ui/forms/select/select.component';
 export class AddressWhispererComponent extends AbstractComponent implements OnInit {
 
     set showForm(showForm: boolean) {
-        // delete v not-found kvuli disable
         if (showForm) {
             this.parentForm.addControl(
                 this.nameOfTemporaryWhispererFormGroup,
@@ -178,7 +177,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
 
     public static getAddressNotFoundUniqueValue = (object: object) => R.pipe(
         R.keys,
-        R.filter(R.endsWith('unique')),
+        R.filter(R.endsWith(AddressWhispererComponent.UNIQUE_FIELD_NAME_END)),
         (key) => R.prop(key)(object),
     )(object)
 
@@ -235,8 +234,9 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
         this.cd.markForCheck();
     }
 
-    private isAllFilled = (userData: IAddress): boolean =>
-        !!(userData && userData.street && userData.descriptiveNumber && userData.city && userData.postCode && userData.region)
+    private isAllFilled = (addressData: IAddress): boolean =>
+        !!(addressData && addressData.street && addressData.descriptiveNumber &&
+            addressData.city && addressData.postCode && addressData.region)
 
     public changeSelectedValue = (userData: IAddress) => {
         this.change.emit(userData);
