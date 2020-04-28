@@ -1,3 +1,4 @@
 export interface IStateRouter {
-    refresh: boolean;
+    refresh?: boolean;
+    isFromUnauthorized?: boolean;
 }
