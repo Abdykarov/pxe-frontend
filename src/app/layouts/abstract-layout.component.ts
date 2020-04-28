@@ -17,7 +17,6 @@ import {
     fromEvent,
     Subscription,
 } from 'rxjs';
-import { IUserRoles } from 'src/app/services/model/auth.model';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';

@@ -54,7 +54,6 @@ export class AppComponent extends AbstractComponent implements OnInit {
                 }
             });
 
-
             if (!environment.gtmId) {
                 return;
             }
