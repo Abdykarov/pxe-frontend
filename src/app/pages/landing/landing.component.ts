@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
+import { AuthService } from 'src/app/services/auth.service';
 import {
     debounceTime,
     takeUntil,
@@ -35,6 +36,7 @@ import {
     IForm,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
+import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import {
     parseGraphQLErrors,
     scrollToElementFnc,
@@ -74,7 +76,9 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
 
     constructor(
         private apollo: Apollo,
+        public authService: AuthService,
         private cd: ChangeDetectorRef,
+        private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
         private router: Router,
         private registrationService: RegistrationService,
@@ -184,5 +188,10 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
                 });
     }
 
-    public scrollToNewSubscription = () => this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
+    public scrollToNewSubscription = () =>  {
+        const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
+        if (isLogged) {
+            this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
+        }
+    }
 }

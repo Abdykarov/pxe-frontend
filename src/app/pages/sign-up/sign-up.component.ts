@@ -1,6 +1,7 @@
 import {
     Component,
     ChangeDetectorRef,
+    NgZone,
 } from '@angular/core';
 import {
     Meta,
@@ -8,8 +9,12 @@ import {
 } from '@angular/platform-browser';
 
 import { Apollo } from 'apollo-angular';
+import { CookieService } from 'ngx-cookie';
+import { interval } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
     ROUTES,
@@ -39,8 +44,11 @@ export class SignUpComponent extends AbstractComponent {
 
     constructor(
         private apollo: Apollo,
+        private authService: AuthService,
         private cd: ChangeDetectorRef,
+        private cookieService: CookieService,
         private metaService: Meta,
+        private ngZone: NgZone,
         private registrationService: RegistrationService,
         private router: Router,
         private titleService: Title,
@@ -57,6 +65,20 @@ export class SignUpComponent extends AbstractComponent {
                 ...SEO.META_KEYWORDS.LANDING_PAGE,
                 ...SEO.META_KEYWORDS.SIGN_UP,
             ].toString(),
+        });
+
+
+        this.ngZone.runOutsideAngular(() => {
+            interval(1000)
+                .pipe(
+                    takeUntil(this.destroy$),
+                )
+                .subscribe(_ => {
+                    const userToken = this.cookieService.get(CONSTS.STORAGE_HELPERS.USER);
+                    if (userToken) {
+                        this.router.navigate([CONSTS.PATHS.EMPTY]);
+                    }
+                });
         });
 
         this.formFields = createRegistrationFormFields(SignUpType.SignUp);

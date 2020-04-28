@@ -37,7 +37,7 @@ export class CookiesService {
         const d = new Date();
         d.setTime(expires);
         return {
-            expires: d.toUTCString(),
+            ...(!!expires) && {expires: d.toUTCString()},
             path: '/',
             secure: environment.production,
         };
