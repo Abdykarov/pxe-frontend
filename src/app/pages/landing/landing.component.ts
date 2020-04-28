@@ -45,6 +45,7 @@ import { RegistrationService } from 'src/common/graphql/services/registration.se
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
+import { Tag } from 'src/config';
 
 @Component({
     templateUrl: './landing.component.html',

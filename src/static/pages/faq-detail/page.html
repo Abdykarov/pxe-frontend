@@ -1,0 +1,46 @@
+<div class="patterns-of-contracts-page container-content">
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-12 col-xl-10 offset-xl-1">
+                <h1>Často kladené otázky</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <ul class="text-center link-list">
+                    <li class="link-list__item">
+                        <a class="link-list__link link-list__link--active"
+                           href="#"
+                           (click)="routerTo($event)">
+                            Elektřina
+                        </a>
+                    </li>
+                    <li class="link-list__item">
+                        <a class="link-list__link"
+                           href="#"
+                           (click)="routerTo($event)">
+                            Plyn
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-xl-10 offset-xl-1">
+                <h1>{{tag.header}}</h1>
+                <p>{{tag.shortContent}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-xl-10 offset-xl-1">
+                <h1>Související otázky</h1>
+                <lnd-accordion [accordionItems]="accordionItems" title=""></lnd-accordion>
+            </div>
+        </div>
+    </div>
+</div>

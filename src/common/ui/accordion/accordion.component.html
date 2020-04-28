@@ -1,5 +1,5 @@
 <ng-template #defaultTemplate let-data>
-    <p>{{ data }}</p>
+    <p [innerHTML]="data"></p>
 </ng-template>
 
 <div class="accordion" [ngClass]="{ 'accordion--more-open': isMoreOpen || showAll }">
