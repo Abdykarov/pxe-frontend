@@ -1,5 +1,6 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
-    Component,
+    Component, Inject, PLATFORM_ID,
 } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,6 +9,8 @@ import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 import { ROUTES } from 'src/app/app.constants';
 import { TypeOfList } from 'src/common/ui/list-of-notifications/models/list-of-notifications.model';
+
+import * as R from 'ramda';
 
 @Component({
     selector: 'lnd-signboard',
@@ -23,10 +26,14 @@ export class SignboardComponent {
         'Pro uzavření smlouvy budete potřebovat váš mobilní telefon.',
     ];
     public typeOfListCheck = TypeOfList.CHECKLIST;
+    public showWelcome = false;
 
     constructor(
         private router: Router,
-    ) {}
+        @Inject(PLATFORM_ID) private platformId: string,
+    ) {
+        this.showWelcome = R.path(['history', 'state', 'afterLogin'], window);
+    }
 
     public fillClick = (evt) => this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
 }

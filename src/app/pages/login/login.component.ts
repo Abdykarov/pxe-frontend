@@ -268,11 +268,16 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public navigateAfterLogin = (loginResponse: ILoginResponse, changedPassword = false) => {
-        const extras: NavigationExtras = {};
+        const extras: NavigationExtras = {
+            state: {
+                afterLogin: true,
+            },
+        };
 
         if (changedPassword) {
             extras.state = {
                 showBanner: true,
+                ...extras.state,
             };
         }
 
