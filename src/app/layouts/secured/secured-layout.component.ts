@@ -125,7 +125,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
                     if (modal.modalType === CONSTS.MODAL_TYPE.MORE_TABS) {
                         if (modal.confirmed) {
                             this.onlyOneTabActiveService.setActiveTab();
-                            window.open(localStorage.getItem(CONSTS.STORAGE_HELPERS.LAST_URL), '_self');
+                            this.authService.homeRedirect(true);
                         } else {
                             this.router.navigate([CONSTS.PATHS.EMPTY]);
                         }

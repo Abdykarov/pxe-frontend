@@ -291,8 +291,10 @@ export class AuthService {
     public homeRedirect = (forceRedirectToLastUrl = false) => {
         if (forceRedirectToLastUrl) {
             const lastUrl = localStorage.getItem(CONSTS.STORAGE_HELPERS.LAST_URL);
-            window.open(lastUrl, '_self');
-            return;
+            if (lastUrl) {
+                window.open(lastUrl, '_self');
+                return;
+            }
         }
         if (!this.isLogged()) {
             this.router.navigate([CONSTS.PATHS.EMPTY]);
