@@ -1,3 +1,12 @@
+<ng-template #headerTemplate>
+    <div class="text-center mt-4 mb-2">
+        <h2 class="mb-2">V následujících krocích budeme potřebovat několik informací od vás, abychom vám mohli
+            nabídnou ty nejlepší nabídky. Pro vyplnění všech
+            potřebných informací vám doporučujeme připravit si následující dokumenty.
+        </h2>
+    </div>
+</ng-template>
+
 <pxe-layout-container pageTitle="Nové odběrné místo">
     <div class="row mb-6">
         <div class="col-12 col-xl-10 offset-xl-1">
@@ -16,9 +25,7 @@
                 Vítejte v aplikaci PARC4U.
             </p>
             <pxe-list-of-notifications
-                headerText="V následujících krocích budeme potřebovat několik informací od vás, abychom vám mohli
-                    nabídnou ty nejlepší nabídky. Pro vyplnění všech
-                    potřebných informací vám doporučujeme připravit si následující dokumenty."
+                [headerTemplate]="headerTemplate"
                 [notifications]="notifications"
                 [type]="typeOfListCheck"
                 customLinkClass="ml-xl-6"
