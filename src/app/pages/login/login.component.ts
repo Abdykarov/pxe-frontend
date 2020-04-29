@@ -32,13 +32,14 @@ import {
     formFieldsLogin,
     LOGIN_STATE,
 } from './config';
-import { ILoginResponse } from 'src/app/services/model/auth.model';
 import {
     IChangePassword,
     IConfirmationCode,
     ILoginState,
 } from './login.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
+import { ILoginResponse } from 'src/app/services/model/auth.model';
+import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import {
     IUserLogin,
     LANDING_PAGE,
@@ -72,6 +73,7 @@ export class LoginComponent extends AbstractComponent {
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private cookieService: CookiesService,
+        private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
         private route: ActivatedRoute,
         private router: Router,
@@ -142,7 +144,6 @@ export class LoginComponent extends AbstractComponent {
     public resetPassword = (login: string) => {
         this.reasonForLogoutUser = null;
         this.formLoading = true;
-
         this.authService.cleanUserData();
         this.userService.resetPassword(login)
             .pipe(
@@ -170,31 +171,36 @@ export class LoginComponent extends AbstractComponent {
         this.reasonForLogoutUser = null;
         this.password = userLogin.password;
         this.formLoading = true;
-        this.authService.login(userLogin)
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe(
-                (loginResponse: ILoginResponse) => {
-                    if (this.authService.passwordChangeRequired()) {
-                        this.state = ILoginState.CHANGE_PASSWORD;
+        this.authService.setActualStateFromOtherTab();
+        if (this.isLoggedPipe.transform(this.authService.currentUserValue)) {
+            this.authService.homeRedirect(false, true);
+        } else {
+            this.authService.login(userLogin)
+                .pipe(
+                    takeUntil(this.destroy$),
+                )
+                .subscribe(
+                    (loginResponse: ILoginResponse) => {
+                        if (this.authService.passwordChangeRequired()) {
+                            this.state = ILoginState.CHANGE_PASSWORD;
+                            this.resetErrorsAndLoading();
+                            this.cd.markForCheck();
+                            return;
+                        }
+                        if (this.authService.needSmsConfirm()) {
+                            this.state = ILoginState.SEND_SMS;
+                            this.phoneNumber = this.authService.currentUserValue.phoneNumber;
+                            this.resetErrorsAndLoading();
+                            this.cd.markForCheck();
+                            return;
+                        }
+                        this.navigateAfterLogin(loginResponse);
+                    },
+                    error => {
                         this.resetErrorsAndLoading();
-                        this.cd.markForCheck();
-                        return;
-                    }
-                    if (this.authService.needSmsConfirm()) {
-                        this.state = ILoginState.SEND_SMS;
-                        this.phoneNumber = this.authService.currentUserValue.phoneNumber;
-                        this.resetErrorsAndLoading();
-                        this.cd.markForCheck();
-                        return;
-                    }
-                    this.navigateAfterLogin(loginResponse);
-                },
-                error => {
-                    this.resetErrorsAndLoading();
-                    this.handleError(error);
-                });
+                        this.handleError(error);
+                    });
+        }
     }
 
     public submitSupplierLoginSms = (confirmationCode: IConfirmationCode) => {

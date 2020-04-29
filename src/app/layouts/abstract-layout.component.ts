@@ -41,6 +41,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
     public isMenuOpen = false;
     public showOverlay = false;
     public toggleSubscription: Subscription;
+    public isLogouting = false;
 
     public settings: ISettings = {
         isPublic: false,
@@ -75,6 +76,8 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
             .pipe(takeUntil(this.destroy$))
             .subscribe(event => {
                 if (event instanceof NavigationEnd) {
+                    this.isLogouting = event.urlAfterRedirects.indexOf('/logout') !== -1;
+
                     if (
                         event && event.urlAfterRedirects &&
                         !inArray(event.urlAfterRedirects, [`/${CONSTS.PATHS.LOGIN}`, `/${CONSTS.PATHS.LOGOUT}`])

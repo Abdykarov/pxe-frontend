@@ -44,7 +44,9 @@ export class LoginSupplyAuthFormComponent extends AbstractFormComponent implemen
                 .subscribe(_ => {
                     const userToken = this.cookieService.get(CONSTS.STORAGE_HELPERS.USER);
                     if (!userToken || !AuthService.jwtTokenHasRoles(userToken, [IUserRoles.NEEDS_SMS_CONFIRMATION])) {
-                        this.router.navigate([CONSTS.PATHS.EMPTY]);
+                        this.ngZone.run(() => {
+                            this.router.navigate([CONSTS.PATHS.EMPTY]);
+                        });
                     }
                 });
         });

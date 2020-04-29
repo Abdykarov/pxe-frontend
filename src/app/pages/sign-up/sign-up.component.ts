@@ -77,23 +77,19 @@ export class SignUpComponent extends AbstractComponent {
         this.registrationService.makeRegistration(values)
             .subscribe(
                 () => {
-                    if (this.isLoggedPipe.transform(this.authService.currentUserValue)) {
-                        this.authService.homeRedirect(false, true);
-                    } else {
-                        this.formLoading = false;
-                        this.formSent = true;
-                        this.cd.markForCheck();
-                        this.router.navigate([CONSTS.PATHS.LOGIN],
-                            {
-                                queryParams: {
-                                    email: values.email,
-                                },
-                                state: {
-                                    passwordWasSent: true,
-                                },
+                    this.formLoading = false;
+                    this.formSent = true;
+                    this.cd.markForCheck();
+                    this.router.navigate([CONSTS.PATHS.LOGIN],
+                        {
+                            queryParams: {
+                                email: values.email,
                             },
-                        );
-                    }
+                            state: {
+                                passwordWasSent: true,
+                            },
+                        },
+                    );
                 },
                 (error) => {
                     this.formLoading = false;

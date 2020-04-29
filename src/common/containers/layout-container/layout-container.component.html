@@ -20,5 +20,12 @@
     buttonLabel=""
     [showButtonLabel]="false"
 ></lnd-banner-ui>
+<lnd-banner-ui
+    *ngIf="needLogoutForLogin"
+    [data]="{
+        text: 'Pro přihlášení se nejprve musíte odhlásit na účtu ' + authService.currentUserValue.email
+    }"
+    [showButtonLabel]="false"
+></lnd-banner-ui>
 <pxe-logout-information></pxe-logout-information>
 <ng-content></ng-content>
