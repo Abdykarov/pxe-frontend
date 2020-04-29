@@ -35,7 +35,7 @@ const routes: Routes = [
         RouterModule.forRoot(
             routes,
             {
-                enableTracing: environment.production || false,
+                enableTracing: true,
                 preloadingStrategy: PreloadAllModules,
                 initialNavigation: 'enabled',
                 scrollPositionRestoration: 'top',

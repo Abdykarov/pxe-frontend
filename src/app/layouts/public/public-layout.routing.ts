@@ -45,10 +45,6 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.FAQ,
-                redirectTo: CONSTS.PATHS.FAQ + '/',
-            },
-            {
-                path: CONSTS.PATHS.FAQ + '/:tag',
                 loadChildren: '../../pages/faq/faq.module#FaqModule',
                 data: {
                     isPublic: true,

@@ -52,4 +52,9 @@ export class FaqDetailPageComponent {
             },
         ];
     }
+
+    public routerTo = (evt) => {
+        evt.preventDefault();
+        console.log('CLICKED');
+    }
 }

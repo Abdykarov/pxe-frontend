@@ -23,6 +23,7 @@ import { OffersByCommodityTypePipe } from 'src/common/pipes/offers-by-commodity-
 import { PathValuePipe } from './path-value/path-value.pipe';
 import { PluralPipe } from './plurar/plural.pipe';
 import { ProgressStatusPipe } from './step-of-supply-point/step-of-supply-point.pipe';
+import { QuestionsToAccordionItemsPipe } from 'src/common/pipes/questions-to-accordion-items/questions-to-accordion-items.pipe';
 import { SimpleNumberPipe } from 'src/common/pipes/simple-number/simple-number.pipe';
 import { SumPipe } from 'src/common/pipes/sum/sum.pipe';
 import { ValueOfFormPipe } from 'src/common/pipes/value-of-form/value-of-form.pipe';
@@ -51,6 +52,7 @@ import { ValuesPipe } from './values/values.pipe';
         PathValuePipe,
         PluralPipe,
         ProgressStatusPipe,
+        QuestionsToAccordionItemsPipe,
         SimpleNumberPipe,
         SumPipe,
         ValueOfFormPipe,
@@ -78,6 +80,7 @@ import { ValuesPipe } from './values/values.pipe';
         PathValuePipe,
         PluralPipe,
         ProgressStatusPipe,
+        QuestionsToAccordionItemsPipe,
         SimpleNumberPipe,
         SumPipe,
         ValueOfFormPipe,
@@ -105,6 +108,7 @@ import { ValuesPipe } from './values/values.pipe';
         PathValuePipe,
         PluralPipe,
         ProgressStatusPipe,
+        QuestionsToAccordionItemsPipe,
         SimpleNumberPipe,
         SumPipe,
         ValueOfFormPipe,

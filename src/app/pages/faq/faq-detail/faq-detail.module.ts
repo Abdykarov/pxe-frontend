@@ -1,21 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
-import { FaqComponent } from 'src/app/pages/faq/faq.component';
-import { FaqRoutingModule } from 'src/app/pages/faq/faq-routing.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
+import { PipesModule } from 'src/common/pipes/pipes.module';
+
+import { FaqDetailRoutingModule } from './faq-detail-routing.module';
+import { FaqDetailComponent } from './faq-detail.component';
 
 @NgModule({
     declarations: [
-        FaqComponent,
-    ],
-    exports: [
-        FaqComponent,
+        FaqDetailComponent,
     ],
     imports: [
         CommonModule,
-        FaqRoutingModule,
+        FaqDetailRoutingModule,
         LayoutContainerModule,
+        PipesModule,
     ],
 })
-export class FaqModule { }
+export class FaqDetailModule { }

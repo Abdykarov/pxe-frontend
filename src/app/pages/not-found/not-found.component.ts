@@ -14,6 +14,7 @@ import {
     LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
+import { tagConfig } from 'src/config';
 
 @Component({
     templateUrl: './not-found.component.html',
@@ -22,6 +23,7 @@ import {
 export class NotFoundComponent extends AbstractComponent {
     public commodityTypePower = CommodityTypesLowerCase.POWER;
     public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
+    public tagConfig = tagConfig;
 
     public settings: ISettings = {
         isPublic: true,

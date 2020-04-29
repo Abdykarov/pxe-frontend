@@ -1,22 +1,7 @@
 <div class="container-fluid">
     <div class="container-content">
         <pxe-layout-container pageTitle="Často kladené otázky" [breadcrumbItemsSimple]="breadcrumbItemsSimple">
-            <div class="row">
-                <div class="col-12">
-                    <ul class="text-center link-list">
-                        <li class="link-list__item" *ngFor="let tag of tagConfig">
-
-                            <a class="link-list__link"
-                               href="#"
-                               [class.link-list__link--active]="tag.type === activeTag"
-                               (click)="changeTag($event, tag.url)">
-                                    {{tag.label}}
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <p>{{questions | json}}</p>
+            <router-outlet></router-outlet>
         </pxe-layout-container>
     </div>
 </div>

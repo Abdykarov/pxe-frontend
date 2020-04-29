@@ -76,13 +76,6 @@ export const questions: IQuestion[] = [
         id: 6,
         tag: Tag.GENERAL,
         url: 'reason-for-payment',
-        header: 'Proč musím platit požadovanou 1 Kč?',
-        shortContent: 'Je to ochrana jak vás, tak nás, ale také stávajícího i nového dodavatele. Nechceme, aby v aplikaci vznikala falešná odběrná místa nebo např.  změny dodavatele pro souseda, který o to vůbec nestojí. Posláním 1 Kč dochází k ověření relevantního zájmu o naši službu. Naopak, pokud 1 Kč nepošlete, je smlouva neplatná.',
-    },
-    {
-        id: 7,
-        tag: Tag.GENERAL,
-        url: 'reason-for-payment',
         header: 'Jak se počítá celková cena za elektřinu?',
         shortContent: 'Je složená z těchto 3 částí:' +
             '1.     Distribuční cena – tvoří až 60 % z celkové ceny, je pevně daná, dodavatel ji nemůže ovlivnit\n' +

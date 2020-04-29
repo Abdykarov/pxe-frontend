@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-12">
+        <ul class="text-center link-list">
+            <li class="link-list__item" *ngFor="let tag of tagConfig">
+                <a class="link-list__link"
+                   href="#"
+                   [class.link-list__link--active]="tag.type === activeTag"
+                   (click)="changeTag($event, tag.url)">
+                    {{tag.label}}
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <lnd-accordion [accordionItems]="questions | questionsToAccordions" title=""></lnd-accordion>
+    </div>
+</div>

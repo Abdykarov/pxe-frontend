@@ -78,6 +78,7 @@ export const CONSTS = {
         GAS: 'gas',
         LOGIN : 'login',
         LOGOUT : 'logout',
+        NOT_FOUND: 'not-found',
         OFFER_SELECTION : 'offer-selection',
         PATTERNS_OF_CONTRACTS: 'patterns-of-contracts',
         PAYMENT : 'payment',

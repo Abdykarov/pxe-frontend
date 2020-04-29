@@ -4,6 +4,7 @@ import 'reflect-metadata';
 
 import { enableProdMode } from '@angular/core';
 import * as express from 'express';
+import * as fs from 'fs';
 import { join } from 'path';
 import { readFileSync } from 'fs';
 
@@ -65,6 +66,12 @@ app.set('views', join(DIST_FOLDER, 'app'));
 // TODO: implement data requests securely
 app.get('/graphql', (req, res) => {
     res.status(404).send('data requests are not supported');
+});
+
+// Server static files from /app
+app.get('/sitemap.xml', (req, res) => {
+    const contents = fs.readFileSync(join(APP_FOLDER, 'sitemap.xml'));
+    return res.send(contents + 'Hello World!');
 });
 
 // Server static files from /app
