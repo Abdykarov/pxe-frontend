@@ -127,7 +127,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
                             this.onlyOneTabActiveService.setActiveTab();
                             this.authService.homeRedirect(true);
                         } else {
-                            this.router.navigate([CONSTS.PATHS.EMPTY]);
+                            this.authService.logoutForced(true);
                         }
                     }
                     this.modalsService.closeModalData$.next(null);

@@ -87,6 +87,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     public globalFormError: string[] = [];
     private initRows = false;
     public loadingOffers = true;
+    public needLogoutForLogin = false;
     public numberOfDeletedOffers = 0;
     public countOfImportedOffers = 0;
     public numberOfMarked = 0;
@@ -131,6 +132,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         super.ngOnInit();
         if (isPlatformBrowser(this.platformId)) {
             this.countOfImportedOffers = window.history.state.countOfImportedOffers;
+            this.needLogoutForLogin = window.history.state.needLogoutForLogin;
         }
 
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
