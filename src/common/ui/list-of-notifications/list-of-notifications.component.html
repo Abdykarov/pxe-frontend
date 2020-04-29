@@ -1,9 +1,13 @@
+<ng-template #defaultHeaderTemplate>
+    <div class="text-center mt-4 mb-2">
+        <h2 class="mb-2">{{headerText}}</h2>
+    </div>
+</ng-template>
+
 <div class="list-of-notifications">
     <div class="row mb-2"
          [ngClass]="customColClass">
-        <div class="text-center mt-4 mb-2">
-            <h2 class="mb-2">{{headerText}}</h2>
-        </div>
+        <ng-container *ngTemplateOutlet="headerTemplate || defaultHeaderTemplate; context: { headerText: headerText }"></ng-container>
     </div>
     <div class="row"
          [ngClass]="customRowClass">
