@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
 
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-import { ITag, Tag } from 'src/config';
+import { IQuestion, Tag } from 'src/config';
 
 @Component({
     templateUrl: './page.html',
@@ -10,7 +10,7 @@ import { ITag, Tag } from 'src/config';
 export class FaqPageComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
-    public tag: ITag = {
+    public question: IQuestion = {
         id: 1,
         tag: Tag.GENERAL,
         url: 'price-length',

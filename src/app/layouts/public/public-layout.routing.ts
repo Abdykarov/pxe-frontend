@@ -44,6 +44,20 @@ const routes = [
                 },
             },
             {
+                path: CONSTS.PATHS.FAQ,
+                redirectTo: CONSTS.PATHS.FAQ + '/',
+            },
+            {
+                path: CONSTS.PATHS.FAQ + '/:tag',
+                loadChildren: '../../pages/faq/faq.module#FaqModule',
+                data: {
+                    isPublic: true,
+                    isSimpleFooter: false,
+                    loginType: LoginType.NAVIGATE,
+                    signUpType: SignType.SCROLL,
+                },
+            },
+            {
                 path: CONSTS.PATHS.LOGIN,
                 loadChildren: '../../pages/login/login.module#LoginModule',
                 data: {

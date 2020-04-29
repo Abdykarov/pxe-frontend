@@ -1,6 +1,6 @@
 /* tslint:disable max-line-length*/
 
-export interface ITag {
+export interface IQuestion {
     id: number;
     tag: Tag;
     url: string;
@@ -11,15 +11,30 @@ export interface ITag {
 }
 
 export enum Tag {
-    GENERAL, SUPPLIER,
+    GENERAL = 'general',
+    SUPPLIER = 'supplier',
 }
 
-export const tagConfig = {
-    [Tag.GENERAL]: 'general',
-    [Tag.SUPPLIER]: 'supplier',
-};
+export interface ITagConfigItem {
+    type: Tag;
+    url: string;
+    label: string;
+}
 
-export const tags: ITag[] = [
+export const tagConfig: ITagConfigItem[] = [
+    {
+        type: Tag.GENERAL,
+        url: 'general',
+        label: 'Obecné',
+    },
+    {
+        type: Tag.SUPPLIER,
+        url: 'supplier',
+        label: 'Dodavatelé',
+    },
+];
+
+export const questions: IQuestion[] = [
     {
         id: 1,
         tag: Tag.GENERAL,
@@ -144,5 +159,48 @@ export const tags: ITag[] = [
         url: 'price',
         header: 'Co vaše služby stojí?',
         shortContent: 'Pro vás, jako spotřebitele energií, je využívání PARC4U zcela zdarma.  Za obchodování přes PARC4U platí dodavatelé dle platného ceníku, který je pro všechny stejný a transparentní. Žádný z dodavatelů není nijak zvýhodňován.',
+    },
+    {
+        id: 16,
+        tag: Tag.SUPPLIER,
+        url: 'bohemia-energy',
+        header: 'Bohemia Energy',
+        shortContent: 'První český alternativní dodavatel energií vstoupil na trh v roce 2005, elektřinu začal dodávat domácnostem v roce 2006 a o dva roky později i plyn. Dnes představuje největšího nezávislého alternativního dodavatele koncovým spotřebitelům. Bohemia Energy je aktivním účastníkem obchodování na velkoobchodním trhu, kde zajišťuje dodávky pro své zákazníky. Kromě výhodných cen energií zabezpečuje i komplexní zákaznický servis a také energetické poradenství.',
+    },
+    {
+        id: 17,
+        tag: Tag.SUPPLIER,
+        url: 'energy-trading',
+        header: 'EP Energy Trading',
+        shortContent: 'EP Energy Trading patří do skupiny společností EP Infrastructure, která představuje druhého největšího výrobce elektrické energie v ČR a zabývá se také tranzitem, skladováním a distribucí zemního plynu. EP Energy Trading, a.s. patří k významným nezávislým dodavatelům elektřiny a plynu v České republice.',
+    },
+    {
+        id: 18,
+        tag: Tag.SUPPLIER,
+        url: 'carbounion',
+        header: 'Carbounion',
+        shortContent: 'Carbounion působí na středoevropském trhu s energiemi již od roku 1998 a aktivity zahrnují mimo jiné obchod s uhlím, elektrickou energií a zemním plynem. Společnost je významným nezávislým obchodníkem s energetickými komoditami a patří mezi 100 nejvýznamnějších firem v ČR.',
+    },
+    {
+        id: 19,
+        tag: Tag.SUPPLIER,
+        url: 'alpiq',
+        header: 'Alpiq',
+        shortContent: 'Švýcarská energetická skupina s více než 100letou tradicí patřící mezi přední evropské energetické společnosti s působností v téměř všech zemích Evropy. Vlastní a provozuje široké portfolio energetických zdrojů a v ČR mimo jiné nabízí dodávky elektrické energie a plynu koncovým zákazníkům.',
+    },
+    {
+        id: 20,
+        tag: Tag.SUPPLIER,
+        url: 'prazska-plynarenska',
+        header: 'Pražská plynárenská',
+        shortContent: 'Jeden z nejvýznamnějších obchodníků, dodávající elektrickou energii a zemní plyn zákazníkům na celém území ČR.  Dodavatel nabízí také širokou škálu nekomoditních produktů a služeb.',
+    },
+    {
+        id: 21,
+        tag: Tag.SUPPLIER,
+        url: 'yello-energy',
+        header: 'Yello Energy',
+        shortContent: 'Od roku 2012 pomáhá Yello na českém trhu desítkám tisíc klientů k férovým cenám. Jedná se o adaptaci německého konceptu Yello, který sází na jednoduchost a přímočarost. Nezatěžujeme se dlouhými řečmi ani náklady na kamenné pobočky. Náš tým je přitom snadno a stále dostupný online.\n' +
+            'Yello je součástí Skupiny PRE..',
     },
 ];

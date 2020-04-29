@@ -71,8 +71,9 @@ export const CONSTS = {
         DASHBOARD : 'dashboard',
         DELETE_ACCOUNT: 'delete-account',
         DELETED_ACCOUNT: 'deleted-account',
-        EMPTY : '',
-        IMPORT : 'import',
+        EMPTY: '',
+        IMPORT: 'import',
+        FAQ: 'faq',
         FORGOTTEN_PASSWORD : 'forgotten-password',
         GAS: 'gas',
         LOGIN : 'login',
@@ -158,6 +159,7 @@ export const CONSTS = {
         DEFAULT: 'PARC4U',
         LANDING_PAGE: 'Získejte svobodu nad energií | PARC4U',
         LOGIN: 'Přihlášení | PARC4U',
+        FAQ: 'Často kladené otázky',
         PATTERNS_OF_CONTRACTS: 'Vzory smluv o dodávce | PARC4U',
         TERMS_OF_USE: 'Podmínky užívání | PARC4U',
         SECURING_YOUR_DATA: 'Ochrana osobních údajů | PARC4U',
@@ -224,6 +226,9 @@ export const SEO = {
             'parc4u',
             'pxe',
         ],
+        FAQ: [
+            'TODO',
+        ],
         LOGIN: [
             'přihlášení',
             'kliknutí',
@@ -250,6 +255,7 @@ export const SEO = {
         COOKIES_POLICY: 'Co jsou cookies a proč je na stránkách PARC4U používáme?',
         LANDING_PAGE: 'Měňte dodavatele energií na 1 klik. Neřešte papírování a chození na' +
             ' pobočky. Chraňte se před nekalostmi ve smlouvě. Energie za férové ceny bez skrytých poplatků.',
+        FAQ: 'TODO',
         LOGIN: 'Přihlášení do PARC4U, kde máte snadný přístup k jiným cenám za energie.',
         PATTERNS_OF_CONTRACTS: 'Vzor smlouvy k dodávce uzavřené přes PARC4U.',
         TERMS_OF_USE: 'Obchodní podmínky k pravidlům registrace dodavatelů a odběratelů na trhu PARC4U.',
