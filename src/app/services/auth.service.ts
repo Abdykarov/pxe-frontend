@@ -288,7 +288,7 @@ export class AuthService {
         });
     }
 
-    public homeRedirect = (forceRedirectToLastUrl = false) => {
+    public homeRedirect = (forceRedirectToLastUrl = false, logoutRequired = false) => {
         if (forceRedirectToLastUrl) {
             const lastUrl = localStorage.getItem(CONSTS.STORAGE_HELPERS.LAST_URL);
             if (lastUrl) {
@@ -299,9 +299,17 @@ export class AuthService {
         if (!this.isLogged()) {
             this.router.navigate([CONSTS.PATHS.EMPTY]);
         } else if (this.currentUserValue.supplier) {
-            this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER]);
+            this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER_POWER], {
+                state: {
+                    logoutRequired,
+                },
+            });
         } else {
-            this.router.navigate([ROUTES.ROUTER_DASHBOARD]);
+            this.router.navigate([ROUTES.ROUTER_DASHBOARD], {
+                state: {
+                    logoutRequired,
+                },
+            });
         }
     }
 }

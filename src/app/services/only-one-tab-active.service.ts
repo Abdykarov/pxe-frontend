@@ -43,11 +43,11 @@ export class OnlyOneTabActiveService {
             component: 'ConfirmModalComponent',
             modalType: CONSTS.MODAL_TYPE.MORE_TABS,
             instanceData: {
-                confirmText: `Aplikace je otevřená ve vícero oknech, chcete ji použít zde?`,
+                confirmText: `Aplikace PARC4U je otevřena na několika kartách, použít zde?`,
                 showClose: false,
                 showCloseButton: true,
-                titleConfirm: 'Ano',
-                titleClose: 'Ne',
+                titleConfirm: 'Použít zde',
+                titleClose: 'Odhlásit',
             },
         }
     )
