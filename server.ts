@@ -80,12 +80,12 @@ app.get('/sitemap.xml', (req, res) => {
     const taqConfig = JSON.parse(fs.readFileSync(join(APP_FOLDER, 'assets/configs/faq.json'), 'utf8'));
     const questions = JSON.parse(fs.readFileSync(join(APP_FOLDER, 'assets/configs/questions.json'), 'utf8'));
     const parseString = xml2js.parseString;
-    parseString(siteMapOriginal, function(err, result) {
+    parseString(siteMapOriginal, (err, result) => {
         questions.forEach(question => {
             if (result['urlset'] && result['urlset'] && result['urlset']['url'] && result['urlset']['url'].length) {
                 result['urlset']['url'].push({
                     'loc': [
-                        req.get('host') + getTagUrl(question, taqConfig) + '/' + question.url,
+                        req.protocol + '://' + req.get('host') + '/' + getTagUrl(question, taqConfig) + '/' + question.url,
                     ],
                 });
             }

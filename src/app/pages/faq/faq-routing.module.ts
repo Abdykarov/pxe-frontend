@@ -13,6 +13,10 @@ const routes: Routes =
             component: FaqComponent,
             children: [
                 {
+                    path: '',
+                    loadChildren: '../../pages/faq/faq-overview/faq-overview.module#FaqOverviewModule',
+                },
+                {
                     path: ':tag',
                     loadChildren: '../../pages/faq/faq-overview/faq-overview.module#FaqOverviewModule',
                 },

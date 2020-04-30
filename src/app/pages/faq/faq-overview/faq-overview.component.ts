@@ -13,15 +13,18 @@ import {
 } from '@angular/platform-browser';
 
 import * as R from 'ramda';
-import { takeUntil } from 'rxjs/operators';
-
+import { combineLatest } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
+import { IQuestion, ITagConfigItem } from 'src/app/services/model/faq.model';
+
+import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CONSTS,
     ROUTES,
     SEO,
 } from 'src/app/app.constants';
-import { IQuestion } from 'src/app/pages/faq/faq.model';
+import { FaqService } from 'src/app/services/faq.service';
 
 @Component({
     selector: 'lnd-faq-overview',
@@ -29,16 +32,16 @@ import { IQuestion } from 'src/app/pages/faq/faq.model';
     styleUrls: ['./faq-overview.component.scss'],
 })
 export class FaqOverviewComponent extends AbstractFaqComponent implements OnInit {
-    public activeTag = null;
 
     constructor(
+        public faqService: FaqService,
         private cd: ChangeDetectorRef,
         private metaService: Meta,
-        private route: ActivatedRoute,
+        public route: ActivatedRoute,
         private router: Router,
         private titleService: Title,
     ) {
-        super();
+        super(faqService, route);
         this.titleService.setTitle(CONSTS.TITLES.FAQ);
         this.metaService.updateTag({
             name: 'description',
@@ -54,19 +57,17 @@ export class FaqOverviewComponent extends AbstractFaqComponent implements OnInit
     }
 
     ngOnInit(): void {
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.route.params
+        this.combineLeast$
             .pipe(
                 takeUntil(this.destroy$),
             )
-            .subscribe(params => {
-                this.activeTag = params.tag;
-                this.questions = R.filter((tag: IQuestion) => tag.tag === this.activeTag, this.questions);
-                if (this.questions.length) {
-                    this.cd.markForCheck();
-                } else {
-                    this.router.navigate([CONSTS.PATHS.NOT_FOUND]);
-                }
+            .subscribe(
+                ([params]) => {
+                    if (this.questions.length) {
+                        this.cd.markForCheck();
+                    } else {
+                        this.router.navigate([CONSTS.PATHS.FAQ, this.faqConfig[0].url]);
+                    }
             });
     }
 

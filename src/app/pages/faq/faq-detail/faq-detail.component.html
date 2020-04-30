@@ -1,11 +1,25 @@
-<div class="container-fluid">
-    <div class="container-content">
-        <!--<pxe-layout-container pageTitle="Často kladené otázky" [breadcrumbItemsSimple]="breadcrumbItemsSimple">-->
-            <!--<div class="row">-->
-                <!--<div class="col-12">-->
-                    <!--<lnd-accordion [accordionItems]="questions | questionsToAccordions" title=""></lnd-accordion>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</pxe-layout-container>-->
+<div class="row">
+    <div class="col-12">
+        {{activeQuestion.fullContent || activeQuestion.shortContent}}
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <h1>Souvisejci</h1>
+    </div>
+</div>
+<div *ngIf="activeTag"
+     class="row">
+    <div class="col-12">
+        <lnd-accordion [accordionItems]="questions | questionsToAccordions:activeTag" title=""></lnd-accordion>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 text-center">
+        <lnd-button
+            (action)="routerToOverview($event)"
+            label="Dalsí"
+            type="primary">
+        </lnd-button>
     </div>
 </div>

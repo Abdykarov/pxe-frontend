@@ -1,6 +1,14 @@
 import {
     Component,
 } from '@angular/core';
+import {
+    NavigationEnd,
+    Router,
+} from '@angular/router';
+
+import { takeUntil } from 'rxjs/operators';
+import { CONSTS } from 'src/app/app.constants';
+
 import { AbstractComponent } from 'src/common/abstract.component';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 
@@ -10,6 +18,8 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
     styleUrls: ['./faq.component.scss'],
 })
 export class FaqComponent extends AbstractComponent {
+    private readonly NUMBER_OF_SLASH_IN_DETAIL_IN_URL = 3;
+
     public breadcrumbItemsSimple: IBreadcrumbItems = [
         {
             label: 'Domů',
@@ -19,4 +29,22 @@ export class FaqComponent extends AbstractComponent {
             label: 'Často kladené otázky',
         },
     ];
+
+    constructor(
+        protected router: Router,
+    ) {
+        super();
+        this.router.events
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(event => {
+                if (event instanceof NavigationEnd) {
+                    const isDetail = (event.urlAfterRedirects.match(/\//g) || []).length === this.NUMBER_OF_SLASH_IN_DETAIL_IN_URL;
+                    if (isDetail) {
+                        this.breadcrumbItemsSimple[1].url = `/${CONSTS.PATHS.FAQ}`;
+                    } else {
+                        this.breadcrumbItemsSimple[1].url = ``;
+                    }
+                }
+            });
+    }
 }

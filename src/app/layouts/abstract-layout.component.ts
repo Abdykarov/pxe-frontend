@@ -18,7 +18,7 @@ import {
     Subscription,
 } from 'rxjs';
 
-import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
+import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
@@ -36,7 +36,7 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
-export abstract class AbstractLayoutComponent extends AbstractFaqComponent implements OnInit {
+export abstract class AbstractLayoutComponent extends AbstractComponent implements OnInit {
     public activeUrl: string;
     public isMenuOpen = false;
     public showOverlay = false;

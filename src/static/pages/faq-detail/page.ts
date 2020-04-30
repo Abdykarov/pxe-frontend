@@ -5,7 +5,7 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 import {
     IQuestion,
     Tag,
-} from 'src/app/pages/faq/faq.model';
+} from 'src/app/services/model/faq.model';
 
 @Component({
     templateUrl: './page.html',

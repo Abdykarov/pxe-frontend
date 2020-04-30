@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 
 // own modules
-import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
+import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CommodityTypesLowerCase,
@@ -18,7 +18,7 @@ import {
     templateUrl: './not-found.component.html',
     styleUrls: ['../../../assets/scss/05_pages/error-page.scss'],
 })
-export class NotFoundComponent extends AbstractFaqComponent {
+export class NotFoundComponent extends AbstractComponent {
     public commodityTypePower = CommodityTypesLowerCase.POWER;
     public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
 
