@@ -197,6 +197,6 @@ export const formFields: IForm = {
 };
 
 export const commodityTypeFields: ICommodityTypeFields = {
-    [CommodityType.POWER]: ['distributionRateId', 'circuitBreakerId', 'priceNT', 'priceVT'],
+    [CommodityType.POWER]: ['distributionRateId', 'circuitBreakerId', 'priceNT', 'priceVT', 'greenEnergy'],
     [CommodityType.GAS]: ['priceGas', 'annualConsumptionId'],
 };
