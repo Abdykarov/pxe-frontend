@@ -147,16 +147,14 @@
     </div>
     <div *ngIf="showStickyButton"
         class="fixed-bottom fixed-bottom--footer-indentation">
-        <div class="col-12">
-            <lnd-button
-                label="Zpět do aplikace"
-                type="primary"
-                size="lg"
-                icon="icon--triangle-right"
-                iconPosition="right"
-                customClass="btn-back-to-app"
-                (action)="click($event)">
-            </lnd-button>
-        </div>
+        <lnd-button
+            label="Zpět do aplikace"
+            type="primary"
+            size="lg"
+            icon="icon--triangle-right"
+            iconPosition="right"
+            customClass="btn-back-to-app"
+            (action)="click($event)">
+        </lnd-button>
     </div>
 </div>
