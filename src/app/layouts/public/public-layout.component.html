@@ -37,7 +37,7 @@
                 </a>
             </li>
             <li class="footer-navigation__item">
-                <a [routerLink]="'/faq/' + tagConfig[0].url"
+                <a [routerLink]="'/faq/' + tagConfig && tagConfig[0] && tagConfig[0].url"
                    class="footer-navigation__link"
                 >
                     Často kladené otázky

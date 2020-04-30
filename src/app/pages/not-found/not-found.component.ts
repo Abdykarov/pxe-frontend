@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 
-// own classes
-import { AbstractComponent } from 'src/common/abstract.component';
 
 // own modules
+import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CommodityTypesLowerCase,
@@ -14,16 +13,14 @@ import {
     LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
-import { tagConfig } from 'src/config';
 
 @Component({
     templateUrl: './not-found.component.html',
     styleUrls: ['../../../assets/scss/05_pages/error-page.scss'],
 })
-export class NotFoundComponent extends AbstractComponent {
+export class NotFoundComponent extends AbstractFaqComponent {
     public commodityTypePower = CommodityTypesLowerCase.POWER;
     public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
-    public tagConfig = tagConfig;
 
     public settings: ISettings = {
         isPublic: true,

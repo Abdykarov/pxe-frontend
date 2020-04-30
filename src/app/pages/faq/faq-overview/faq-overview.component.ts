@@ -15,17 +15,13 @@ import {
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
+import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
 import {
     CONSTS,
     ROUTES,
     SEO,
 } from 'src/app/app.constants';
-import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
-import {
-    IQuestion,
-    questions,
-    tagConfig,
-} from 'src/config';
+import { IQuestion } from 'src/app/pages/faq/faq.model';
 
 @Component({
     selector: 'lnd-faq-overview',
@@ -34,8 +30,6 @@ import {
 })
 export class FaqOverviewComponent extends AbstractFaqComponent implements OnInit {
     public activeTag = null;
-    public tagConfig = tagConfig;
-    public questions: IQuestion[] = null;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -67,7 +61,7 @@ export class FaqOverviewComponent extends AbstractFaqComponent implements OnInit
             )
             .subscribe(params => {
                 this.activeTag = params.tag;
-                this.questions = R.filter((tag: IQuestion) => tag.tag === this.activeTag, questions);
+                this.questions = R.filter((tag: IQuestion) => tag.tag === this.activeTag, this.questions);
                 if (this.questions.length) {
                     this.cd.markForCheck();
                 } else {

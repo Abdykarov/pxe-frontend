@@ -30,10 +30,6 @@ import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
-import {
-    Tag,
-    tagConfig,
-} from 'src/config';
 
 @Component({
     templateUrl: './public-layout.component.html',
@@ -43,7 +39,6 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
     public commodityTypePower = CommodityTypesLowerCase.POWER;
     public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
     public lastScrollTop = 0;
-    public tagConfig = tagConfig;
     public wasLastTimeScrolledToTop = false;
 
     @HostListener('window:scroll', [])
