@@ -1,9 +1,9 @@
 <ng-template #headerTemplate>
     <div class="text-center mt-4 mb-2">
-        <h2 class="mb-2">V následujících krocích budeme potřebovat několik informací od vás, abychom vám mohli
+        <p class="mb-2">V následujících krocích budeme potřebovat několik informací od vás, abychom vám mohli
             nabídnou ty nejlepší nabídky. Pro vyplnění všech
             potřebných informací vám doporučujeme připravit si následující dokumenty.
-        </h2>
+        </p>
     </div>
 </ng-template>
 
@@ -19,10 +19,10 @@
                 src="/assets/images/illustrations/sign.svg"
                 class="mb-2"
                 alt="sign">
-            <p  *ngIf="showWelcome"
+            <h2 *ngIf="showWelcome"
                 class="mb-0">
                 Vítejte v aplikaci PARC4U.
-            </p>
+        </h2>
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
             <pxe-list-of-notifications
