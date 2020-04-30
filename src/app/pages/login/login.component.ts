@@ -176,7 +176,6 @@ export class LoginComponent extends AbstractComponent {
         const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
         const nextUserIsCurrent = userLogin.login === R.path(['currentUserValue', 'userLogin'], this.authService);
         if (isLogged && !nextUserIsCurrent) {
-            console.log('OPK');
             this.authService.homeRedirect(false, true);
         } else {
             this.authService.login(userLogin)
