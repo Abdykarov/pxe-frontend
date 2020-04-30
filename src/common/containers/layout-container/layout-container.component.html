@@ -23,7 +23,7 @@
 <lnd-banner-ui
     *ngIf="logoutRequired"
     [data]="{
-        text: 'Pro přihlášení se nejprve musíte odhlásit na účtu ' + authService.currentUserValue.userLogin
+        text: 'Pro přihlášení se nejprve musíte odhlásit na účtu ' + authService.currentUserValue.userLogin + '.'
     }"
     [showButtonLabel]="false"
 ></lnd-banner-ui>
