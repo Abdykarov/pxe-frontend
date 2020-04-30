@@ -15,7 +15,7 @@ export class QuestionsToAccordionItemsPipe implements PipeTransform {
     transform(questions: IQuestion[], tag: ITagConfigItem): IAccordionItem[] {
         return R.map((question: IQuestion) => ({
             label: question.header,
-            data: question.shortContent,
+            data: question,
             isActive: false,
         }), questions);
     }

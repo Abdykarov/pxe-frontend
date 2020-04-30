@@ -1,21 +1,34 @@
-<div *ngIf="activeTag"
-     class="row">
-    <div class="col-12">
-        <ul class="text-center link-list">
-            <li class="link-list__item" *ngFor="let tag of faqConfig">
-                <a class="link-list__link"
-                   href="#"
-                   [class.link-list__link--active]="tag.type === activeTag"
-                   (click)="changeTag($event, tag.url)">
-                    {{tag.label}}
-                </a>
-            </li>
-        </ul>
+<ng-template #accordionTemplate let-data>
+    <p [innerHTML]="data.shortContent"></p>
+    <p class="mb-0">
+        <a class="link"
+          [routerLink]="['/',CONSTS.PATHS.FAQ, activeTag, data.url]">
+            Více info
+        </a>
+    </p>
+</ng-template>
+
+<ng-container *ngIf="activeTag">
+    <div class="row">
+        <div class="col-12 col-xl-8 offset-xl-2 mb-3">
+            <ul class="text-center link-list">
+                <li class="link-list__item" *ngFor="let tag of faqConfig">
+                    <a class="link-list__link"
+                       href="#"
+                       [class.link-list__link--active]="tag.type === activeTag"
+                       (click)="changeTag($event, tag.url)">
+                        {{tag.label}}
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
-<div *ngIf="activeTag"
-    class="row">
-    <div class="col-12">
-        <lnd-accordion [accordionItems]="questions | questionsToAccordions:activeTag" title=""></lnd-accordion>
+    <div class="row">
+        <div class="col-12 col-xl-8 offset-xl-2 mb-3">
+            <lnd-accordion
+                [accordionContentTemplate]="accordionTemplate"
+                [accordionItems]="questions | questionsToAccordions:activeTag" title="">
+            </lnd-accordion>
+        </div>
     </div>
-</div>
+</ng-container>

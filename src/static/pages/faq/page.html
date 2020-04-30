@@ -1,3 +1,8 @@
+<ng-template #accordionTemplate let-data let-item>
+    <p [innerHTML]="data"></p>
+    <a class="link" (click)="routerTo($event)">Více info</a>
+</ng-template>
+
 <div class="patterns-of-contracts-page container-content">
     <div class="container-fluid">
         <div class="row text-center">
@@ -32,7 +37,10 @@
         </div>
         <div class="row">
             <div class="col-12 col-xl-8 offset-xl-2 mb-3">
-                <lnd-accordion [accordionItems]="accordionItems" title=""></lnd-accordion>
+                <lnd-accordion
+                    [accordionContentTemplate]="accordionTemplate"
+                    [accordionItems]="accordionItems" title="">
+                </lnd-accordion>
             </div>
         </div>
     </div>

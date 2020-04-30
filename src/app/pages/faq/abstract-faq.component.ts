@@ -16,6 +16,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 
 export class AbstractFaqComponent extends AbstractComponent {
     public activeTag = null;
+    public readonly CONSTS = CONSTS;
     public faqConfig: ITagConfigItem[] = null;
     public questions: IQuestion[] = null;
     public combineLeast$ = combineLatest(

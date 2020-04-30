@@ -19,7 +19,6 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 })
 export class FaqComponent extends AbstractComponent {
     private readonly NUMBER_OF_SLASH_IN_DETAIL_IN_URL = 3;
-
     public breadcrumbItemsSimple: IBreadcrumbItems = [
         {
             label: 'Domů',
