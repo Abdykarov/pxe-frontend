@@ -32,6 +32,7 @@
                             "src/assets/configurations/config.js",
                             "src/assets/csv/",
                             "src/assets/images/",
+                            "src/assets/configs/",
                             "src/assets/pdfs/",
                             "src/assets/favicon.ico",
                             "src/robots.txt",
@@ -190,6 +191,7 @@
                             "src/assets/configurations/config.js",
                             "src/assets/csv/",
                             "src/assets/pdfs/",
+                            "src/assets/configs/",
                             "src/assets/images/",
                             "src/assets/favicon.ico"
                         ],

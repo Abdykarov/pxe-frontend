@@ -7,6 +7,7 @@ import * as express from 'express';
 import * as fs from 'fs';
 import { join } from 'path';
 import { readFileSync } from 'fs';
+import * as xml2js from 'xml2js';
 
 // ssr DOM
 import { createWindow } from 'domino';
@@ -68,10 +69,32 @@ app.get('/graphql', (req, res) => {
     res.status(404).send('data requests are not supported');
 });
 
+const getTagUrl = (question, taqConfig) => {
+    const foundTaq = taqConfig.find(taq => taq.type === question.tag);
+    return foundTaq.url;
+};
+
 // Server static files from /app
 app.get('/sitemap.xml', (req, res) => {
-    const contents = fs.readFileSync(join(APP_FOLDER, 'sitemap.xml'));
-    return res.send(contents + 'Hello World!');
+    const siteMapOriginal = fs.readFileSync(join(APP_FOLDER, 'sitemap.xml'), 'utf8');
+    const taqConfig = JSON.parse(fs.readFileSync(join(APP_FOLDER, 'assets/configs/faq-config.json'), 'utf8'));
+    const questions = JSON.parse(fs.readFileSync(join(APP_FOLDER, 'assets/configs/questions.json'), 'utf8'));
+    const parseString = xml2js.parseString;
+    parseString(siteMapOriginal, function(err, result) {
+        questions.forEach(question => {
+            if (result['urlset'] && result['urlset'] && result['urlset']['url'] && result['urlset']['url'].length) {
+                result['urlset']['url'].push({
+                    'loc': [
+                        'https://parc4u.cz/' + getTagUrl(question, taqConfig) + '/' + question.url,
+                    ],
+                });
+            }
+        });
+        const builder = new xml2js.Builder();
+        const xml = builder.buildObject(result);
+        res.set('Content-Type', 'text/xml');
+        return res.send(xml);
+    });
 });
 
 // Server static files from /app
