@@ -15,6 +15,7 @@ import {
     Title,
 } from '@angular/platform-browser';
 
+import * as R from 'ramda';
 import {
     map,
     takeUntil,
@@ -172,7 +173,10 @@ export class LoginComponent extends AbstractComponent {
         this.password = userLogin.password;
         this.formLoading = true;
         this.authService.setActualStateFromOtherTab();
-        if (this.isLoggedPipe.transform(this.authService.currentUserValue)) {
+        const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
+        const nextUserIsCurrent = userLogin.login === R.path(['currentUserValue', 'userLogin'], this.authService);
+        if (isLogged && !nextUserIsCurrent) {
+            console.log('OPK');
             this.authService.homeRedirect(false, true);
         } else {
             this.authService.login(userLogin)

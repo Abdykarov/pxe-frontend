@@ -1,7 +1,6 @@
 import {
     Component,
     ChangeDetectorRef,
-    NgZone,
 } from '@angular/core';
 import {
     Meta,
@@ -48,7 +47,6 @@ export class SignUpComponent extends AbstractComponent {
         private cookieService: CookieService,
         private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
-        private ngZone: NgZone,
         private registrationService: RegistrationService,
         private router: Router,
         private titleService: Title,

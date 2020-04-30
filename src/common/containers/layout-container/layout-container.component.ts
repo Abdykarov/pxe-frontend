@@ -23,7 +23,7 @@ export class LayoutContainerComponent {
     public pageTitle: string;
 
     public showBanner = false;
-    public needLogoutForLogin =  false;
+    public logoutRequired =  false;
 
     constructor(
         public authService: AuthService,
@@ -31,7 +31,7 @@ export class LayoutContainerComponent {
     ) {
         if (isPlatformBrowser(this.platformId)) {
             this.showBanner = window.history.state.showBanner;
-            this.needLogoutForLogin = window.history.state.needLogoutForLogin;
+            this.logoutRequired = window.history.state.logoutRequired;
         }
     }
 }

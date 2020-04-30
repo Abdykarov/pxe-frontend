@@ -76,7 +76,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
             .pipe(takeUntil(this.destroy$))
             .subscribe(event => {
                 if (event instanceof NavigationEnd) {
-                    this.isLogouting = event.urlAfterRedirects.indexOf('/logout') !== -1;
+                    this.isLogouting = event.urlAfterRedirects.indexOf(`/${CONSTS.PATHS.LOGOUT}`) !== -1;
 
                     if (
                         event && event.urlAfterRedirects &&
@@ -90,13 +90,13 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
                         this.toggleSubscription.unsubscribe();
                     }
                     if (
-                        event.urlAfterRedirects.indexOf('/secured') !== -1 &&
+                        event.urlAfterRedirects.indexOf(`/${CONSTS.PATHS.SECURED}`) !== -1 &&
                         isPlatformBrowser(this.platformId)
                     ) {
                         localStorage.setItem(CONSTS.STORAGE_HELPERS.LAST_URL, event.urlAfterRedirects);
                     }
 
-                    if (event && event.url.indexOf('/secured') === -1) {
+                    if (event && event.url.indexOf(`/${CONSTS.PATHS.SECURED}`) === -1) {
                         this.authService.setActualStateFromOtherTab();
                     }
 

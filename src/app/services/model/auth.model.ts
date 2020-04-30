@@ -35,6 +35,7 @@ export interface IJwtPayload {
     phoneNumber?: string;
     firstContract: boolean;
     evaluatedSupplyPoint: number;
+    userLogin: string;
 }
 
 export enum IUserRoles {

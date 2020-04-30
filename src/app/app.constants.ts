@@ -100,7 +100,7 @@ export const CONSTS = {
     },
     REFRESH_TOKEN: {
         INTERVAL: 300000,
-        COUNT: 16,
+        COUNT: 0,
         DONT_REFRESH_TIME_IN_MINUTES: 2,
     },
     START_STICKER_HEADER: 0,
