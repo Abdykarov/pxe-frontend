@@ -77,7 +77,7 @@ const getTagUrl = (question, taqConfig) => {
 // Server static files from /app
 app.get('/sitemap.xml', (req, res) => {
     const siteMapOriginal = fs.readFileSync(join(APP_FOLDER, 'sitemap.xml'), 'utf8');
-    const taqConfig = JSON.parse(fs.readFileSync(join(APP_FOLDER, 'assets/configs/faq-config.json'), 'utf8'));
+    const taqConfig = JSON.parse(fs.readFileSync(join(APP_FOLDER, 'assets/configs/faq.json'), 'utf8'));
     const questions = JSON.parse(fs.readFileSync(join(APP_FOLDER, 'assets/configs/questions.json'), 'utf8'));
     const parseString = xml2js.parseString;
     parseString(siteMapOriginal, function(err, result) {
@@ -85,7 +85,7 @@ app.get('/sitemap.xml', (req, res) => {
             if (result['urlset'] && result['urlset'] && result['urlset']['url'] && result['urlset']['url'].length) {
                 result['urlset']['url'].push({
                     'loc': [
-                        'https://parc4u.cz/' + getTagUrl(question, taqConfig) + '/' + question.url,
+                        req.get('host') + getTagUrl(question, taqConfig) + '/' + question.url,
                     ],
                 });
             }
