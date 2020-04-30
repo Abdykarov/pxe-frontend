@@ -60,7 +60,9 @@ export class ChangePasswordFormComponent extends AbstractFormComponent implement
                     .subscribe(_ => {
                         const userToken = this.cookieService.get(CONSTS.STORAGE_HELPERS.USER);
                         if (!userToken || !AuthService.jwtTokenHasRoles(userToken, [IUserRoles.RESET_PASSWORD])) {
-                            this.router.navigate([CONSTS.PATHS.EMPTY]);
+                            this.ngZone.run(() => {
+                                this.router.navigate([CONSTS.PATHS.EMPTY]);
+                            });
                         }
                     });
             });

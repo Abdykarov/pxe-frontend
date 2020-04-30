@@ -1,7 +1,6 @@
 import {
     Component,
     ChangeDetectorRef,
-    NgZone,
 } from '@angular/core';
 import {
     Meta,
@@ -10,8 +9,6 @@ import {
 
 import { Apollo } from 'apollo-angular';
 import { CookieService } from 'ngx-cookie';
-import { interval } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
@@ -26,6 +23,7 @@ import {
     IForm,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
+import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
 import { Router } from '@angular/router';
@@ -47,8 +45,8 @@ export class SignUpComponent extends AbstractComponent {
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private cookieService: CookieService,
+        private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
-        private ngZone: NgZone,
         private registrationService: RegistrationService,
         private router: Router,
         private titleService: Title,
@@ -65,20 +63,6 @@ export class SignUpComponent extends AbstractComponent {
                 ...SEO.META_KEYWORDS.LANDING_PAGE,
                 ...SEO.META_KEYWORDS.SIGN_UP,
             ].toString(),
-        });
-
-
-        this.ngZone.runOutsideAngular(() => {
-            interval(1000)
-                .pipe(
-                    takeUntil(this.destroy$),
-                )
-                .subscribe(_ => {
-                    const userToken = this.cookieService.get(CONSTS.STORAGE_HELPERS.USER);
-                    if (userToken) {
-                        this.router.navigate([CONSTS.PATHS.EMPTY]);
-                    }
-                });
         });
 
         this.formFields = createRegistrationFormFields(SignUpType.SignUp);
