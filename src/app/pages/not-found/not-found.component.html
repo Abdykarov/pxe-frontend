@@ -30,32 +30,32 @@
     <lnd-footer [isSimpleFooter]="settings.isSimpleFooter">
         <ul class="footer-navigation__list">
             <li class="footer-navigation__item">
-                <a [routerLink]="CONSTS.PATHS.TERMS_OF_USE"
+                <a [routerLink]="['/', CONSTS.PATHS.TERMS_OF_USE]"
                     class="footer-navigation__link">
                     Obchodní podmínky PARC4U
                 </a>
             </li>
             <li class="footer-navigation__item">
-                <a [routerLink]="[CONSTS.PATHS.PATTERNS_OF_CONTRACTS, subjectTypeIndividual, commodityTypePower]"
+                <a [routerLink]="['/', CONSTS.PATHS.PATTERNS_OF_CONTRACTS, subjectTypeIndividual, commodityTypePower]"
                    class="footer-navigation__link">
                     Vzory smluv o dodávce
                 </a>
             </li>
             <li class="footer-navigation__item">
-                <a [routerLink]="CONSTS.PATHS.FAQ"
+                <a [routerLink]="['/', CONSTS.PATHS.FAQ]"
                    class="footer-navigation__link"
                 >
                     Často kladené otázky
                 </a>
             </li>
             <li class="footer-navigation__item">
-                <a [routerLink]="CONSTS.PATHS.COOKIES_POLICY"
+                <a [routerLink]="['/', CONSTS.PATHS.COOKIES_POLICY]"
                     class="footer-navigation__link">
                     Cookies policy
                 </a>
             </li>
             <li class="footer-navigation__item">
-                <a [routerLink]="CONSTS.PATHS.SECURING_YOUR_DATA"
+                <a [routerLink]="['/', CONSTS.PATHS.SECURING_YOUR_DATA]"
                     class="footer-navigation__link">
                     Ochrana osobních údajů
                 </a>

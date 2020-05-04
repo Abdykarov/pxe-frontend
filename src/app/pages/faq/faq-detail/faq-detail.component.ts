@@ -3,6 +3,7 @@ import {
     Router,
 } from '@angular/router';
 import {
+    ChangeDetectorRef,
     Component,
     OnInit,
 } from '@angular/core';
@@ -25,6 +26,7 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
     public activeQuestion: IQuestion = null;
 
     constructor(
+        private cd: ChangeDetectorRef,
         public faqService: FaqService,
         public route: ActivatedRoute,
         public router: Router,
@@ -42,6 +44,8 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
                         R.curry(this.setActiveQuestion)(params),
                         R.head,
                     )(this.questions);
+                    this.questions = R.filter((question: IQuestion) => question.id !== this.activeQuestion.id , this.questions);
+                    this.cd.markForCheck();
                 });
     }
 

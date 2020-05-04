@@ -5,14 +5,12 @@ import {
 import {
     ChangeDetectorRef,
     Component,
-    OnInit,
 } from '@angular/core';
 import {
     Meta,
     Title,
 } from '@angular/platform-browser';
 
-import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
@@ -28,7 +26,7 @@ import { FaqService } from 'src/app/services/faq.service';
     templateUrl: './faq-overview.component.html',
     styleUrls: ['./faq-overview.component.scss'],
 })
-export class FaqOverviewComponent extends AbstractFaqComponent implements OnInit {
+export class FaqOverviewComponent extends AbstractFaqComponent {
 
     constructor(
         public faqService: FaqService,
@@ -51,9 +49,7 @@ export class FaqOverviewComponent extends AbstractFaqComponent implements OnInit
                 ...SEO.META_KEYWORDS.FAQ,
             ].toString(),
         });
-    }
 
-    ngOnInit(): void {
         this.loadConfigs$
             .pipe(takeUntil(this.destroy$))
             .subscribe(
@@ -63,12 +59,11 @@ export class FaqOverviewComponent extends AbstractFaqComponent implements OnInit
                     } else {
                         this.router.navigate([CONSTS.PATHS.FAQ, this.faqConfig[0].url]);
                     }
-            });
+                });
     }
 
     public changeTag = (evt, urlTag: string) => {
         evt.preventDefault();
         this.router.navigate([`${CONSTS.PATHS.FAQ }/${urlTag}`]);
     }
-
 }

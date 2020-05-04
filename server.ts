@@ -6,6 +6,7 @@ import { enableProdMode } from '@angular/core';
 
 import * as express from 'express';
 import * as fs from 'fs';
+import * as R from 'ramda';
 import * as xml2js from 'xml2js';
 import { join } from 'path';
 import { readFileSync } from 'fs';
@@ -83,10 +84,11 @@ app.get('/sitemap.xml', (req, res) => {
     const parseString = xml2js.parseString;
     parseString(siteMapOriginal, (err, result) => {
         questions.forEach(question => {
-            if (result['urlset'] && result['urlset'] && result['urlset']['url'] && result['urlset']['url'].length) {
-                result['urlset']['url'].push({
+            const url = R.path(['urlset', 'url' ], result);
+            if (url.length) {
+                url.push({
                     'loc': [
-                        req.protocol + '://' + req.get('host') + '/' + getTagUrl(question, taqConfig) + '/' + question.url,
+                        `${req.protocol}://${req.get('host')}/${getTagUrl(question, taqConfig)}/${question.url}`,
                     ],
                 });
             }
