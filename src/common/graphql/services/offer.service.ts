@@ -136,7 +136,7 @@ export class OfferService {
         }
     }
 
-    public updatePowerOffer = (offerId: number, offer: IOfferInput, powerAttributes: IOfferInputPowerAttributes) => this.apollo
+    public updatePowerOffer = (offerId: string, offer: IOfferInput, powerAttributes: IOfferInputPowerAttributes) => this.apollo
         .mutate<any>({
             mutation: updatePowerOfferMutation,
             variables: {
@@ -149,7 +149,7 @@ export class OfferService {
             },
         })
 
-    public updateGasOffer = (offerId: number, offer: IOfferInput, gasAttributes: IOfferInputGasAttributes) => this.apollo
+    public updateGasOffer = (offerId: string, offer: IOfferInput, gasAttributes: IOfferInputGasAttributes) => this.apollo
         .mutate<any>({
             mutation: updateGasOfferMutation,
             variables: {
@@ -162,7 +162,7 @@ export class OfferService {
             },
         })
 
-    public deleteOffer = (offerId: number) => this.apollo
+    public deleteOffer = (offerId: string) => this.apollo
         .mutate<any>({
             mutation: deleteOfferMutation,
             variables: {
@@ -228,7 +228,7 @@ export class OfferService {
         return mark ? numberOfMarked : 0;
     }
 
-    public markOne = (id: number, commodityType: CommodityType): number => {
+    public markOne = (id: string, commodityType: CommodityType): number => {
         let numberOfMarked = 0;
         const client = this.apollo.getClient();
         const { findSupplierOffers: offers } = client.readQuery({ query: findSupplierOffersQuery });
