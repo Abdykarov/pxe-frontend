@@ -34,5 +34,8 @@ export class SignboardComponent {
         this.showWelcome = R.path(['history', 'state', 'afterLogin'], window);
     }
 
-    public fillClick = (evt) => this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
+    public routerToNextStep = (evt) => {
+        evt.preventDefault();
+        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
+    }
 }

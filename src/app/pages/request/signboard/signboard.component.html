@@ -1,7 +1,7 @@
 <ng-template #headerTemplate>
     <div class="text-center mt-4 mb-2">
         <h2 class="mb-2">V následujících krocích budeme potřebovat několik informací od vás, abychom vám mohli
-            nabídnou ty nejlepší nabídky. Pro vyplnění všech
+            nabídnout ty nejlepší nabídky. Pro vyplnění všech
             potřebných informací vám doporučujeme připravit si následující dokumenty.
         </h2>
     </div>
@@ -33,12 +33,12 @@
                 customRowClass="text-xl-left text-center">
             </pxe-list-of-notifications>
             <p class="text-center">
-                Je-li vše jasné pokračujte tlačítkem "Vyplnit"
+                Je-li vše jasné pokračujte tlačítkem "Vyplnit".
             </p>
             <div class="text-center">
                 <lnd-button
                     type="primary"
-                    (action)="fillClick($event);"
+                    (action)="routerToNextStep($event);"
                     label="Vyplnit">
                 </lnd-button>
             </div>

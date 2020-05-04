@@ -6,5 +6,6 @@ export interface IListOfNotifications {
 }
 
 export enum TypeOfList {
-    NUMBER, CHECKLIST,
+    NUMBER,
+    CHECKLIST,
 }
