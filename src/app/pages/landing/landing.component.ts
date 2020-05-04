@@ -18,10 +18,12 @@ import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 import { AuthService } from 'src/app/services/auth.service';
 import {
-    debounceTime,
+    debounceTime, filter,
     takeUntil,
 } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
+import { FaqService } from 'src/app/services/faq.service';
+import { IQuestion } from 'src/app/services/model/faq.model';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -31,6 +33,7 @@ import {
     SEO,
 } from 'src/app/app.constants';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
+import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
 import {
     IFieldError,
     IForm,
@@ -60,6 +63,8 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
     @ViewChild('supplierChange')
     public supplierChangeElement: ElementRef;
 
+    public readonly CONSTS = CONSTS;
+    public frequentedQuestions: IAccordionItem[] = [];
     public formLoading = false;
     public formSent = false;
     public globalError: string[] = [];
@@ -78,6 +83,7 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
         private apollo: Apollo,
         public authService: AuthService,
         private cd: ChangeDetectorRef,
+        private faqService: FaqService,
         private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
         private router: Router,
@@ -91,6 +97,16 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
         if (isPlatformBrowser(this.platformId)) {
             this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
         }
+
+        this.faqService.getQuestionStream()
+            .pipe(
+                takeUntil(this.destroy$),
+                filter((questions: IQuestion[]) => !!questions),
+            )
+            .subscribe((questions: IQuestion[]) => {
+                this.frequentedQuestions = R.filter((question: IQuestion) => question.oneOfMostVisited)(questions);
+                this.cd.markForCheck();
+            });
 
         this.titleService.setTitle(CONSTS.TITLES.LANDING_PAGE);
         this.metaService.updateTag({
@@ -186,6 +202,11 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
                     this.globalError = globalError;
                     this.cd.markForCheck();
                 });
+    }
+
+    public routerToFaq = (evt) => {
+        evt.preventDefault();
+        this.router.navigate([CONSTS.PATHS.FAQ]);
     }
 
     public scrollToNewSubscription = () =>  {

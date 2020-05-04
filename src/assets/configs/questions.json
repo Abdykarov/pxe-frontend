@@ -104,7 +104,8 @@
         "tag":"general",
         "url":"future",
         "header":"Jak chcete PARC4U rozvíjet?",
-        "shortContent":"Rádi bychom získali pro PARC4U dostatek zákazníků, což nám umožní další rozvoj a automatizaci poskytovaných služeb tak, abyste měli energie již pro vždy vyřešené."
+        "shortContent":"Rádi bychom získali pro PARC4U dostatek zákazníků, což nám umožní další rozvoj a automatizaci poskytovaných služeb tak, abyste měli energie již pro vždy vyřešené.",
+        "oneOfMostVisited":true
     },
     {
         "id":15,
