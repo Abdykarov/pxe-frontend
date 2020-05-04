@@ -1,16 +1,19 @@
 import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
+import {
     Component,
     OnInit,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
-import { CONSTS } from 'src/app/app.constants';
-import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
-import { IQuestion } from 'src/app/services/model/faq.model';
-import * as R from 'ramda';
 
-import { AbstractComponent } from 'src/common/abstract.component';
+import * as R from 'ramda';
+import { takeUntil } from 'rxjs/operators';
+
+import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
+import { CONSTS } from 'src/app/app.constants';
 import { FaqService } from 'src/app/services/faq.service';
+import { IQuestion } from 'src/app/services/model/faq.model';
 
 @Component({
     selector: 'lnd-faq-detail',
@@ -31,10 +34,8 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
 
     ngOnInit() {
         super.ngOnInit();
-        this.combineLeast$
-            .pipe(
-                takeUntil(this.destroy$),
-            )
+        this.loadConfigs$
+            .pipe(takeUntil(this.destroy$))
             .subscribe(
                 ([params]) => {
                     this.activeQuestion = R.pipe(

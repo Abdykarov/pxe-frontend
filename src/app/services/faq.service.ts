@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { IQuestion, ITagConfigItem } from 'src/app/services/model/faq.model';
+
+import { BehaviorSubject } from 'rxjs';
+
+import {
+    IQuestion,
+    ITagConfigItem,
+} from 'src/app/services/model/faq.model';
 
 @Injectable({
     providedIn: 'root',

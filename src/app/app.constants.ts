@@ -160,7 +160,7 @@ export const CONSTS = {
         DEFAULT: 'PARC4U',
         LANDING_PAGE: 'Získejte svobodu nad energií | PARC4U',
         LOGIN: 'Přihlášení | PARC4U',
-        FAQ: 'Často kladené otázky',
+        FAQ: 'Často kladené otázky | PARC4U',
         PATTERNS_OF_CONTRACTS: 'Vzory smluv o dodávce | PARC4U',
         TERMS_OF_USE: 'Podmínky užívání | PARC4U',
         SECURING_YOUR_DATA: 'Ochrana osobních údajů | PARC4U',

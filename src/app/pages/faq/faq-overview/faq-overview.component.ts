@@ -12,13 +12,9 @@ import {
     Title,
 } from '@angular/platform-browser';
 
-import * as R from 'ramda';
-import { combineLatest } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
-import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
-import { IQuestion, ITagConfigItem } from 'src/app/services/model/faq.model';
+import { takeUntil } from 'rxjs/operators';
 
-import { AbstractComponent } from 'src/common/abstract.component';
+import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
 import {
     CONSTS,
     ROUTES,
@@ -57,12 +53,10 @@ export class FaqOverviewComponent extends AbstractFaqComponent implements OnInit
     }
 
     ngOnInit(): void {
-        this.combineLeast$
-            .pipe(
-                takeUntil(this.destroy$),
-            )
+        this.loadConfigs$
+            .pipe(takeUntil(this.destroy$))
             .subscribe(
-                ([params]) => {
+                _ => {
                     if (this.questions.length) {
                         this.cd.markForCheck();
                     } else {

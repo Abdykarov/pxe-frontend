@@ -2,7 +2,7 @@
     <p [innerHTML]="data.shortContent"></p>
     <p class="mb-0">
         <a class="link"
-          [routerLink]="['/', CONSTS.PATHS.FAQ, activeTag, data.url]">
+           [routerLink]="['/', CONSTS.PATHS.FAQ, activeTag, data.url]">
             Více info
         </a>
     </p>
@@ -27,7 +27,8 @@
         <div class="col-12 col-xl-8 offset-xl-2 mb-3">
             <lnd-accordion
                 [accordionContentTemplate]="accordionTemplate"
-                [accordionItems]="questions | questionsToAccordions" title="">
+                [accordionItems]="questions | questionsToAccordions"
+                title="">
             </lnd-accordion>
         </div>
     </div>

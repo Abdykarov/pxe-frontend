@@ -7,9 +7,9 @@ import {
 } from '@angular/router';
 
 import { takeUntil } from 'rxjs/operators';
-import { CONSTS } from 'src/app/app.constants';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { CONSTS } from 'src/app/app.constants';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 
 @Component({

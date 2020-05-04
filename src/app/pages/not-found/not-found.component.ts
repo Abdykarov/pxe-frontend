@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 
-
-// own modules
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CommodityTypesLowerCase,
+    CONSTS,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import {
@@ -19,6 +18,8 @@ import {
     styleUrls: ['../../../assets/scss/05_pages/error-page.scss'],
 })
 export class NotFoundComponent extends AbstractComponent {
+    public readonly CONSTS = CONSTS;
+
     public commodityTypePower = CommodityTypesLowerCase.POWER;
     public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
 

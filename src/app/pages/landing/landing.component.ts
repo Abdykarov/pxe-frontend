@@ -16,16 +16,15 @@ import { Router } from '@angular/router';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
-import { AuthService } from 'src/app/services/auth.service';
 import {
-    debounceTime, filter,
+    debounceTime,
+    filter,
     takeUntil,
 } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
-import { FaqService } from 'src/app/services/faq.service';
-import { IQuestion } from 'src/app/services/model/faq.model';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
     ROUTES,
@@ -33,13 +32,14 @@ import {
     SEO,
 } from 'src/app/app.constants';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
+import { FaqService } from 'src/app/services/faq.service';
 import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
 import {
     IFieldError,
     IForm,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
-import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
+import { IQuestion } from 'src/app/services/model/faq.model';
 import {
     parseGraphQLErrors,
     scrollToElementFnc,
@@ -103,9 +103,10 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
                 takeUntil(this.destroy$),
                 filter((questions: IQuestion[]) => !!questions),
             )
-            .subscribe((questions: IQuestion[]) => {
-                this.frequentedQuestions = R.filter((question: IQuestion) => question.oneOfMostVisited)(questions);
-                this.cd.markForCheck();
+            .subscribe(
+                (questions: IQuestion[]) => {
+                    this.frequentedQuestions = R.filter((question: IQuestion) => question.oneOfMostVisited)(questions);
+                    this.cd.markForCheck();
             });
 
         this.titleService.setTitle(CONSTS.TITLES.LANDING_PAGE);

@@ -3,11 +3,12 @@ import 'zone.js/dist/zone-node';
 import 'reflect-metadata';
 
 import { enableProdMode } from '@angular/core';
+
 import * as express from 'express';
 import * as fs from 'fs';
+import * as xml2js from 'xml2js';
 import { join } from 'path';
 import { readFileSync } from 'fs';
-import * as xml2js from 'xml2js';
 
 // ssr DOM
 import { createWindow } from 'domino';

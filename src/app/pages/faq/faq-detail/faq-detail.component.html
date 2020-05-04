@@ -1,6 +1,7 @@
 <ng-template #accordionTemplate let-data>
     <p [innerHTML]="data.fullContent || data.shortContent"></p>
 </ng-template>
+
 <ng-container>
     <div class="row">
         <div class="col-12 col-xl-8 offset-xl-2 mb-3">
@@ -13,7 +14,8 @@
             <h2>Související otázky</h2>
             <lnd-accordion
                 [accordionContentTemplate]="accordionTemplate"
-                [accordionItems]="questions | questionsToAccordions:activeTag" title="">
+                [accordionItems]="questions | questionsToAccordions"
+                title="">
             </lnd-accordion>
         </div>
     </div>

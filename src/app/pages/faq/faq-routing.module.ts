@@ -3,6 +3,7 @@ import {
     Routes,
     RouterModule,
 } from '@angular/router';
+
 import { CONSTS } from 'src/app/app.constants';
 import { FaqComponent } from 'src/app/pages/faq/faq.component';
 

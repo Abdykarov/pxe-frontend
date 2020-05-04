@@ -1,13 +1,21 @@
-import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Inject, Injectable, Optional } from '@angular/core';
+import {
+    HttpHandler,
+    HttpInterceptor,
+    HttpRequest,
+} from '@angular/common/http';
+import {
+    Inject,
+    Injectable,
+    Optional,
+} from '@angular/core';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
+
 import { Request } from 'express';
 
 const startsWithAny = (arr: string[] = []) => (value = '') => {
     return arr.some(test => value.toLowerCase().startsWith(test.toLowerCase()));
 };
 
-// http, https, protocol relative
 const isAbsoluteURL = startsWithAny(['http', '//']);
 
 @Injectable({
