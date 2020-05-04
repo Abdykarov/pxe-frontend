@@ -1,5 +1,11 @@
 <ng-template #accordionTemplate let-data>
-    <p [innerHTML]="data.fullContent || data.shortContent"></p>
+    <p [innerHTML]="data.shortContent"></p>
+    <p class="mb-0">
+        <a class="link"
+           [routerLink]="['/',CONSTS.PATHS.FAQ, data.tag, data.url]">
+            Více info
+        </a>
+    </p>
 </ng-template>
 
 <ng-container>

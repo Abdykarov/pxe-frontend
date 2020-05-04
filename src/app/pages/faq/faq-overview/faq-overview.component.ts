@@ -12,6 +12,7 @@ import {
     Title,
 } from '@angular/platform-browser';
 
+import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
