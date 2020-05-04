@@ -39,7 +39,7 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
         this.loadConfigs$
             .pipe(takeUntil(this.destroy$))
             .subscribe(
-                ([params]) => {
+                params => {
                     this.activeQuestion = R.pipe(
                         R.curry(this.setActiveQuestion)(params),
                         R.head,

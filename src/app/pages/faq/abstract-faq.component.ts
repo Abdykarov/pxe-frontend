@@ -34,7 +34,7 @@ export class AbstractFaqComponent extends AbstractComponent {
                 this.faqConfig = faqConfig;
                 this.activeTag = params.tag;
                 this.questions = R.filter((tag: IQuestion) => tag.tag === this.activeTag, questions);
-                return [params];
+                return params;
             }),
         );
 
