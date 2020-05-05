@@ -7,14 +7,13 @@ import {
     tap,
 } from 'rxjs/operators';
 
+import { AbstractComponent } from 'src/common/abstract.component';
 import { CONSTS } from 'src/app/app.constants';
 import { FaqService } from 'src/app/services/faq.service';
 import {
     IQuestion,
     ITagConfigItem,
 } from 'src/app/services/model/faq.model';
-
-import { AbstractComponent } from 'src/common/abstract.component';
 
 export class AbstractFaqComponent extends AbstractComponent {
     public readonly CONSTS = CONSTS;
