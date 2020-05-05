@@ -104,7 +104,7 @@ export class LoginComponent extends AbstractComponent {
         );
 
         this.router.routeReuseStrategy.shouldReuseRoute = () => {
-            this.cookieService.set(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER, null, new Date().getTime());
+            this.cookieService.remove(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
             return false;
         };
     }
