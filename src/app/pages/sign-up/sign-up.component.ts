@@ -10,7 +10,6 @@ import {
 import { Apollo } from 'apollo-angular';
 import { CookieService } from 'ngx-cookie';
 import { takeUntil } from 'rxjs/operators';
-import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
@@ -25,6 +24,7 @@ import {
     IForm,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
+import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';

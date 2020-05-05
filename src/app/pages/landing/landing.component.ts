@@ -16,11 +16,11 @@ import { Router } from '@angular/router';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
-import { fromEvent } from 'rxjs';
 import {
     debounceTime,
     takeUntil,
 } from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
@@ -43,8 +43,8 @@ import {
     scrollToElementFnc,
 } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
-import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
+import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
