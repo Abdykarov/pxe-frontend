@@ -539,11 +539,7 @@ export const REGIONS: Array<IOption> = [
     },
 ];
 
-export const OPERATIONS_WITHOUT_TOKEN = [
-    'getSupplyPointGlobalStatistics',
-    'resetPassword',
-    'makeRegistration',
-];
+export const OPERATIONS_WITHOUT_TOKEN = [];
 
 export const OPERATIONS_IGNORE_ACCESS_DENIED_EXCEPTION = [];
 

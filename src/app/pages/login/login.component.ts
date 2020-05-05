@@ -145,7 +145,6 @@ export class LoginComponent extends AbstractComponent {
     public resetPassword = (login: string) => {
         this.reasonForLogoutUser = null;
         this.formLoading = true;
-        this.authService.cleanUserData();
         this.userService.resetPassword(login)
             .pipe(
                 takeUntil(this.destroy$),
@@ -228,23 +227,8 @@ export class LoginComponent extends AbstractComponent {
         this.reasonForLogoutUser = null;
         $event.preventDefault();
         this.resetErrorsAndLoading();
-        if (this.authService.isLogged()) {
-            this.authService.logout()
-                .pipe(
-                    takeUntil(this.destroy$),
-                ).subscribe(
-                () => {
-                        this.state = ILoginState.RESET;
-                        this.cd.markForCheck();
-                    },
-                () => {
-                        this.state = ILoginState.RESET;
-                        this.cd.markForCheck();
-                    },
-                );
-        } else {
-            this.state = ILoginState.RESET;
-        }
+        this.state = ILoginState.RESET;
+        this.cd.markForCheck();
     }
 
     public sendSupplierLoginSms() {
