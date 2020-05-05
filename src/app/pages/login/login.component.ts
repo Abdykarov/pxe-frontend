@@ -20,7 +20,6 @@ import {
     map,
     takeUntil,
 } from 'rxjs/operators';
-
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
@@ -40,6 +39,7 @@ import {
 } from './login.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { ILoginResponse } from 'src/app/services/model/auth.model';
+import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import {
     IUserLogin,
@@ -102,15 +102,10 @@ export class LoginComponent extends AbstractComponent {
             },
         );
 
-        this.route.queryParams
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe(() => {
-                this.state = ILoginState.LOGIN;
-                this.resetErrorsAndLoading();
-                this.passwordWasSent = false;
-            });
+        this.router.routeReuseStrategy.shouldReuseRoute = () => {
+            this.cookieService.remove(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
+            return false;
+        };
     }
 
     public submitChangePassword = (changePassword: IChangePassword) => {
@@ -176,7 +171,7 @@ export class LoginComponent extends AbstractComponent {
         const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
         const nextUserIsCurrent = userLogin.login === R.path(['currentUserValue', 'userLogin'], this.authService);
         if (isLogged && !nextUserIsCurrent) {
-            this.authService.homeRedirect(false, true);
+            this.authService.homeRedirect(false, ILogoutRequired.LOGIN);
         } else {
             this.authService.login(userLogin)
                 .pipe(
@@ -234,14 +229,14 @@ export class LoginComponent extends AbstractComponent {
                     takeUntil(this.destroy$),
                 ).subscribe(
                 () => {
-                        this.state = ILoginState.RESET;
-                        this.cd.markForCheck();
-                    },
+                    this.state = ILoginState.RESET;
+                    this.cd.markForCheck();
+                },
                 () => {
-                        this.state = ILoginState.RESET;
-                        this.cd.markForCheck();
-                    },
-                );
+                    this.state = ILoginState.RESET;
+                    this.cd.markForCheck();
+                },
+            );
         } else {
             this.state = ILoginState.RESET;
         }

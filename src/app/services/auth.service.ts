@@ -11,7 +11,6 @@ import {
 import { Router } from '@angular/router';
 
 import * as R_ from 'ramda-extension';
-import * as uuidFn from 'uuid/v4';
 import {
     BehaviorSubject,
     interval,
@@ -44,6 +43,7 @@ import {
     ILoginResponse,
     IUserRoles,
 } from './model/auth.model';
+import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { IStateRouter } from 'src/app/pages/logout/logout-page.model';
 import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';
@@ -288,7 +288,7 @@ export class AuthService {
         });
     }
 
-    public homeRedirect = (forceRedirectToLastUrl = false, logoutRequired = false) => {
+    public homeRedirect = (forceRedirectToLastUrl = false, logoutRequired: ILogoutRequired = null) => {
         if (forceRedirectToLastUrl) {
             const lastUrl = localStorage.getItem(CONSTS.STORAGE_HELPERS.LAST_URL);
             if (lastUrl) {
