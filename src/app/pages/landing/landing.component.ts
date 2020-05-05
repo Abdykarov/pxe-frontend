@@ -153,48 +153,51 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
         this.formLoading = true;
         this.globalError = [];
         this.fieldError = {};
-        this.registrationService.makeRegistration(values)
-            .subscribe(
-                () => {
-                    this.formLoading = false;
-                    this.sAnalyticsService.sendWebData(
-                        {},
-                        {
-                            email: values.email,
-                        },
-                        {},
-                        {
-                            ACTION: S_ANALYTICS.ACTIONS.SIGN_UP,
-                        },
-                    );
-                    this.formSent = true;
-                    this.cd.markForCheck();
-                    const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
-                    if (isLogged) {
-                        this.authService.homeRedirect(false, ILogoutRequired.REGISTRATION);
-                    } else {
-                        this.router.navigate([CONSTS.PATHS.LOGIN],
+        this.authService.setActualStateFromOtherTab();
+        const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
+        if (isLogged) {
+            this.authService.homeRedirect(false, ILogoutRequired.REGISTRATION);
+        } else {
+            this.registrationService.makeRegistration(values)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(
+                    () => {
+                        this.formLoading = false;
+                        this.sAnalyticsService.sendWebData(
+                            {},
                             {
-                                queryParams: {
-                                    email: values.email,
-                                },
-                                state: {
-                                    passwordWasSent: true,
-                                },
+                                email: values.email,
+                            },
+                            {},
+                            {
+                                ACTION: S_ANALYTICS.ACTIONS.SIGN_UP,
                             },
                         );
-                    }
-                },
-                (error) => {
-                    this.formLoading = false;
-                    const { fieldError, globalError } = parseGraphQLErrors(error);
-                    this.fieldError = fieldError;
-                    this.globalError = globalError;
-                    this.cd.markForCheck();
-                });
+                        this.formSent = true;
+                        this.cd.markForCheck();
+                        this.router.navigate([CONSTS.PATHS.LOGIN],
+                                {
+                                    queryParams: {
+                                        email: values.email,
+                                    },
+                                    state: {
+                                        passwordWasSent: true,
+                                    },
+                                },
+                            );
+                    },
+                    (error) => {
+                        this.formLoading = false;
+                        const { fieldError, globalError } = parseGraphQLErrors(error);
+                        this.fieldError = fieldError;
+                        this.globalError = globalError;
+                        this.cd.markForCheck();
+                    });
+        }
     }
 
     public scrollToNewSubscription = () =>  {
+        this.authService.setActualStateFromOtherTab();
         const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
         if (isLogged) {
             this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);

@@ -9,6 +9,7 @@ import {
 
 import { Apollo } from 'apollo-angular';
 import { CookieService } from 'ngx-cookie';
+import { takeUntil } from 'rxjs/operators';
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 
 import { AbstractComponent } from 'src/common/abstract.component';
@@ -73,11 +74,13 @@ export class SignUpComponent extends AbstractComponent {
         this.formLoading = true;
         this.globalError = [];
         this.fieldError = {};
+        this.authService.setActualStateFromOtherTab();
         const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
         if (isLogged) {
             this.authService.homeRedirect(false, ILogoutRequired.REGISTRATION);
         } else {
             this.registrationService.makeRegistration(values)
+                .pipe(takeUntil(this.destroy$))
                 .subscribe(
                     () => {
                         this.formLoading = false;

@@ -8,6 +8,7 @@ import { isPlatformBrowser } from '@angular/common';
 
 import { AuthService } from 'src/app/services/auth.service';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 
 @Component({
     selector: 'pxe-layout-container',
@@ -24,6 +25,7 @@ export class LayoutContainerComponent {
 
     public showBanner = false;
     public logoutRequired = false;
+    public LogoutRequired = ILogoutRequired;
 
     constructor(
         public authService: AuthService,
