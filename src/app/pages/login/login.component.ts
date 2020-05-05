@@ -107,17 +107,6 @@ export class LoginComponent extends AbstractComponent {
             this.cookieService.set(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER, null, new Date().getTime());
             return false;
         };
-
-
-        this.route.queryParams
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe(() => {
-                this.state = ILoginState.LOGIN;
-                this.resetErrorsAndLoading();
-                this.passwordWasSent = false;
-            });
     }
 
     public submitChangePassword = (changePassword: IChangePassword) => {
