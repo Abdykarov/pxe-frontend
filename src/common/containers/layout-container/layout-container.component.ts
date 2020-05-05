@@ -23,7 +23,7 @@ export class LayoutContainerComponent {
     public pageTitle: string;
 
     public showBanner = false;
-    public logoutRequired =  false;
+    public logoutRequired = false;
 
     constructor(
         public authService: AuthService,

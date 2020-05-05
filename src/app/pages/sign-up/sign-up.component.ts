@@ -9,6 +9,7 @@ import {
 
 import { Apollo } from 'apollo-angular';
 import { CookieService } from 'ngx-cookie';
+import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
@@ -72,29 +73,34 @@ export class SignUpComponent extends AbstractComponent {
         this.formLoading = true;
         this.globalError = [];
         this.fieldError = {};
-        this.registrationService.makeRegistration(values)
-            .subscribe(
-                () => {
-                    this.formLoading = false;
-                    this.formSent = true;
-                    this.cd.markForCheck();
-                    this.router.navigate([CONSTS.PATHS.LOGIN],
-                        {
-                            queryParams: {
-                                email: values.email,
+        const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
+        if (isLogged) {
+            this.authService.homeRedirect(false, ILogoutRequired.REGISTRATION);
+        } else {
+            this.registrationService.makeRegistration(values)
+                .subscribe(
+                    () => {
+                        this.formLoading = false;
+                        this.formSent = true;
+                        this.cd.markForCheck();
+                        this.router.navigate([CONSTS.PATHS.LOGIN],
+                            {
+                                queryParams: {
+                                    email: values.email,
+                                },
+                                state: {
+                                    passwordWasSent: true,
+                                },
                             },
-                            state: {
-                                passwordWasSent: true,
-                            },
-                        },
-                    );
-                },
-                (error) => {
-                    this.formLoading = false;
-                    const { fieldError, globalError } = parseGraphQLErrors(error);
-                    this.fieldError = fieldError;
-                    this.globalError = globalError;
-                    this.cd.markForCheck();
-                });
+                        );
+                    },
+                    (error) => {
+                        this.formLoading = false;
+                        const { fieldError, globalError } = parseGraphQLErrors(error);
+                        this.fieldError = fieldError;
+                        this.globalError = globalError;
+                        this.cd.markForCheck();
+                    });
+        }
     }
 }

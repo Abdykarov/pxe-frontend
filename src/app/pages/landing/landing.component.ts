@@ -16,14 +16,14 @@ import { Router } from '@angular/router';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
-import { AuthService } from 'src/app/services/auth.service';
+import { fromEvent } from 'rxjs';
 import {
     debounceTime,
     takeUntil,
 } from 'rxjs/operators';
-import { fromEvent } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
     ROUTES,
@@ -36,14 +36,15 @@ import {
     IForm,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
+import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import {
     parseGraphQLErrors,
     scrollToElementFnc,
 } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
-import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
@@ -168,16 +169,21 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
                     );
                     this.formSent = true;
                     this.cd.markForCheck();
-                    this.router.navigate([CONSTS.PATHS.LOGIN],
-                        {
-                            queryParams: {
-                                email: values.email,
+                    const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
+                    if (isLogged) {
+                        this.authService.homeRedirect(false, ILogoutRequired.REGISTRATION);
+                    } else {
+                        this.router.navigate([CONSTS.PATHS.LOGIN],
+                            {
+                                queryParams: {
+                                    email: values.email,
+                                },
+                                state: {
+                                    passwordWasSent: true,
+                                },
                             },
-                            state: {
-                                passwordWasSent: true,
-                            },
-                        },
-                    );
+                        );
+                    }
                 },
                 (error) => {
                     this.formLoading = false;

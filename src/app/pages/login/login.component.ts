@@ -1,56 +1,24 @@
-import {
-    ActivatedRoute,
-    NavigationExtras,
-    Router,
-} from '@angular/router';
-import {
-    ChangeDetectorRef,
-    Component,
-    Inject,
-    PLATFORM_ID,
-} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import {
-    Meta,
-    Title,
-} from '@angular/platform-browser';
+import { ChangeDetectorRef, Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 
 import * as R from 'ramda';
-import {
-    map,
-    takeUntil,
-} from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
+import { CONSTS, ROUTES, SEO } from 'src/app/app.constants';
+import { AuthService } from 'src/app/services/auth.service';
+import { CookiesService } from 'src/app/services/cookies.service';
+import { ILoginResponse } from 'src/app/services/model/auth.model';
+import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { AuthService } from 'src/app/services/auth.service';
-import {
-    CONSTS,
-    ROUTES,
-    SEO,
-} from 'src/app/app.constants';
-import { CookiesService } from 'src/app/services/cookies.service';
-import {
-    formFieldsLogin,
-    LOGIN_STATE,
-} from './config';
-import {
-    IChangePassword,
-    IConfirmationCode,
-    ILoginState,
-} from './login.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import { ILoginResponse } from 'src/app/services/model/auth.model';
-import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
-import {
-    IUserLogin,
-    LANDING_PAGE,
-    PASSWORD_DESTINATION,
-} from 'src/common/graphql/models/user.model';
-import {
-    parseGraphQLErrors,
-    parseRestAPIErrors,
-} from 'src/common/utils/';
+import { IUserLogin, LANDING_PAGE, PASSWORD_DESTINATION } from 'src/common/graphql/models/user.model';
 import { UserService } from 'src/common/graphql/services/user.service';
+import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
+import { parseGraphQLErrors, parseRestAPIErrors } from 'src/common/utils/';
+import { formFieldsLogin, LOGIN_STATE } from './config';
+import { IChangePassword, IConfirmationCode, ILoginState } from './login.model';
 
 @Component({
     templateUrl: './login.component.html',
@@ -175,7 +143,7 @@ export class LoginComponent extends AbstractComponent {
         const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
         const nextUserIsCurrent = userLogin.login === R.path(['currentUserValue', 'userLogin'], this.authService);
         if (isLogged && !nextUserIsCurrent) {
-            this.authService.homeRedirect(false, true);
+            this.authService.homeRedirect(false, ILogoutRequired.LOGIN);
         } else {
             this.authService.login(userLogin)
                 .pipe(
