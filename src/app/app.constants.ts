@@ -267,8 +267,8 @@ export enum INavigationItemType {
 export const CODE_LIST = {
     ANNUAL_CONSUMPTION_UNITS: 'UNITS',
     DIST_RATE: 'DSTP4R',
-    DIST_RATE_COMPANY: 'DS3P4R',
-    DIST_RATE_INDIVIDUAL: 'DS4P4R',
+    DIST_RATE_COMPANY: 'DSTSA1',
+    DIST_RATE_INDIVIDUAL: 'DSTSA2',
     CIRCUIT_BREAKER: 'JISP4R',
     CIRCUIT_BREAKER_PHASE: 'POCFAZ',
     CIRCUIT_BREAKER_SIZE: 'JISTA',
@@ -539,11 +539,7 @@ export const REGIONS: Array<IOption> = [
     },
 ];
 
-export const OPERATIONS_WITHOUT_TOKEN = [
-    'getSupplyPointGlobalStatistics',
-    'resetPassword',
-    'makeRegistration',
-];
+export const OPERATIONS_WITHOUT_TOKEN = [];
 
 export const OPERATIONS_IGNORE_ACCESS_DENIED_EXCEPTION = [];
 

@@ -84,6 +84,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
                     ) {
                         this.cookieService.remove(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
                     }
+
                     if (this.showOverlay) {
                         this.toggleSubscription = this.overlayService.toggleOverlay(false)
                             .subscribe();
