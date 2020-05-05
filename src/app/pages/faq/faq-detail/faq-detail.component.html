@@ -8,7 +8,8 @@
     </p>
 </ng-template>
 
-<ng-container>
+<ng-container
+    *ngIf="activeQuestion && questions">
     <div class="row">
         <div class="col-12 col-xl-8 offset-xl-2 mb-3">
             <h2>{{activeQuestion.header}}</h2>
@@ -29,7 +30,7 @@
         <div class="col-12 text-center">
             <lnd-button
                 (action)="routerToOverview($event)"
-                label="Dalsí"
+                label="Dalsí otázky"
                 type="primary">
             </lnd-button>
         </div>

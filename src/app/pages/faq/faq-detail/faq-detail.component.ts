@@ -22,7 +22,7 @@ import { IQuestion } from 'src/app/services/model/faq.model';
     styleUrls: ['./faq-detail.component.scss'],
 })
 export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
-
+    private sicilianQuestionsToShow = 3;
     public activeQuestion: IQuestion = null;
 
     constructor(
@@ -39,12 +39,18 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
         this.loadConfigs$
             .pipe(takeUntil(this.destroy$))
             .subscribe(
-                params => {
+                ([params]) => {
                     this.activeQuestion = R.pipe(
                         R.curry(this.setActiveQuestion)(params),
                         R.head,
                     )(this.questions);
-                    this.questions = R.filter((question: IQuestion) => question.id !== this.activeQuestion.id , this.questions);
+                    this.questions = R.pipe(
+                        R.filter((question: IQuestion) => question.id !== this.activeQuestion.id && this.activeQuestion.id ),
+                        R.sort(
+                            (firstQuestion, secondQuestion) => firstQuestion.id - secondQuestion.id -
+                                (secondQuestion.id < this.activeQuestion.id ? Number.MAX_VALUE : 0),
+                        ),
+                    )(this.questions);
                     this.cd.markForCheck();
                 });
     }
