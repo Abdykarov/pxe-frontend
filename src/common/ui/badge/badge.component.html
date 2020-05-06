@@ -6,12 +6,18 @@
     *ngIf="isLink"
     (click)="preventBubble($event);action.emit($event)"
     class="badge"
-    [ngClass]="[type ? 'badge-' + type : '']">
+    [ngClass]="[
+        type ? 'badge-' + type : '',
+        hasBeak ? 'badge--with-beak' : ''
+    ]">
     <ng-container *ngTemplateOutlet="ngContent"></ng-container>
 </a>
 <span
     *ngIf="!isLink"
     class="badge"
-    [ngClass]="[type ? 'badge-' + type : '']">
+    [ngClass]="[
+        type ? 'badge-' + type : '',
+        hasBeak ? 'badge--with-beak' : ''
+    ]">
     <ng-container *ngTemplateOutlet="ngContent"></ng-container>
 </span>

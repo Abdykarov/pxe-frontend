@@ -23,10 +23,6 @@
 
 		&--active {
 			.accordion {
-				&__toggle {
-					background-color: $white;
-				}
-
 				&__toggle-icon {
 					transform: translateY(-50%) rotate(180deg);
 				}
@@ -44,13 +40,12 @@
 		flex-direction: column;
 		justify-content: center;
 		padding: $accordion-padding ( $accordion-padding + $accordion-toggle-icon-size + $accordion-padding ) $accordion-padding $accordion-padding;
-		background-color: rgba($white, .3);
+		background-color: $white;
 		font-size: 1.125rem;
 		letter-spacing: -.75px;
 
 		&:focus,
 		&:hover {
-			background-color: $white;
 			cursor: pointer;
 		}
 	}
@@ -63,7 +58,7 @@
 		right: $accordion-padding;
 		width: $accordion-toggle-icon-size;
 		height: $accordion-toggle-icon-size;
-		padding-top: 2px;
+		padding-top: ( $spacer / 10 );
 		background-color: $primary;
 		color: $white;
 		font-size: $icon-size-small;

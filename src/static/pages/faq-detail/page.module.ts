@@ -7,6 +7,7 @@ import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 
 import { AccordionModule } from 'src/common/ui/accordion/accordion.module';
+import { BadgeModule } from 'src/common/ui/badge/badge.module';
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FaqDetailPageComponent } from './page';
@@ -20,6 +21,7 @@ import { FaqDetailPageComponent } from './page';
     ],
     imports: [
         AccordionModule,
+        BadgeModule,
         BreadcrumbModule,
         ButtonModule,
         CommonModule,

@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row text-center">
             <div class="col-12 col-xl-10 offset-xl-1">
-                <h1>Často kladené otázky</h1>
+                <h1 class="h1--public">Často kladené otázky</h1>
             </div>
         </div>
         <div class="row">
@@ -32,13 +32,20 @@
         </div>
         <div class="row">
             <div class="col-12 col-xl-8 offset-xl-2 mb-3">
-                <h2>{{question.header}}</h2>
+                <h2 class="h2--public">{{question.header}}</h2>
                 <p>{{question.shortContent}}</p>
             </div>
         </div>
         <div class="row">
             <div class="col-12 col-xl-8 offset-xl-2 mb-3">
-                <h2>Související otázky</h2>
+                <h2 class="h2--public">
+                    Související otázky
+                    <pxe-badge 
+                        type="white"
+                        hasBeak="true">
+                        Elektřina
+                    </pxe-badge>
+                </h2>
                 <lnd-accordion [accordionItems]="accordionItems" title=""></lnd-accordion>
             </div>
         </div>
