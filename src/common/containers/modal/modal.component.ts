@@ -79,7 +79,7 @@ export class ModalComponent extends AbstractComponent {
                     this.closeModal(modal, null, offsetY);
                 });
                 this.component.instance.closeModal.subscribe((val) => {
-                    this.closeModal(modal, val, modalLoaderService.setCloseModalDataoffsetY);
+                    this.closeModal(modal, val, offsetY);
                 });
                 this.component.changeDetectorRef.detectChanges();
         });
