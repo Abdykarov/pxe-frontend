@@ -7,6 +7,7 @@ import {
     PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
@@ -17,7 +18,6 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AddModalDirective } from './add-modal.directive';
-import { isPlatformBrowser } from '@angular/common';
 import { ModalService } from './modal.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 
@@ -75,25 +75,31 @@ export class ModalComponent extends AbstractComponent {
                         takeUntil(this.destroy$),
                     )
                     .subscribe();
+                this.modalLoaderService.closeModal$.subscribe(_ => {
+                    this.closeModal(modal, null, offsetY);
+                });
                 this.component.instance.closeModal.subscribe((val) => {
-                    this.modalLoaderService.setCloseModalData({
-                        modalType: modal.modalType,
-                        confirmed: val,
-                        ...modal.instanceData,
-                    });
-                    this.destroyComponent();
-                    this.overlayService.toggleOverlay(false)
-                        .pipe(
-                            takeUntil(this.destroy$),
-                        )
-                        .subscribe();
-                    if (offsetY) {
-                        setTimeout(() => window.scrollBy(0, offsetY));
-                    }
-
+                    this.closeModal(modal, val, modalLoaderService.setCloseModalDataoffsetY);
                 });
                 this.component.changeDetectorRef.detectChanges();
         });
+    }
+
+    private closeModal = (modal, val = null, offsetY = null) => {
+        this.modalLoaderService.setCloseModalData({
+            modalType: modal.modalType,
+            confirmed: val,
+            ...modal.instanceData,
+        });
+        this.destroyComponent();
+        this.overlayService.toggleOverlay(false)
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe();
+        if (offsetY) {
+            setTimeout(() => window.scrollBy(0, offsetY));
+        }
     }
 
     public destroyComponent = () => {

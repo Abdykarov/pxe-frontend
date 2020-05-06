@@ -27,7 +27,16 @@ $btn-line-height-sm:               ( 18 / 11 );
 $btn-border-width:                 2px;
 $btn-border-radius-sm:             $btn-border-radius;
 
+$btn-padding-y-lg-mobile:          ( $spacer * 1.5 );
+$btn-padding-x-lg-mobile:          ( $spacer * 1.5 );
+$btn-padding-y-lg:                 ( $spacer * 2 );
+$btn-padding-x-lg:                 ( $spacer * 2 );
+$btn-font-size-lg:                 1.125rem;
+$btn-border-radius-lg:             $btn-border-radius;
+
 $btn-secondary-bg:                 transparent;
 $btn-secondary-bg-hover:           rgba($black, .03);
 $btn-secondary-color:              $font-text;
 $btn-secondary-shadow:             0 2px 4px 0 #c8d3df;
+
+$btn-back-to-app-icon-size:        20px;
