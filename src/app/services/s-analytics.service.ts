@@ -220,6 +220,10 @@ export class SAnalyticsService {
     }
 
     public pageView = () => {
+        if (!this.canUseSAnalytics() || this.installed) {
+            return;
+        }
+
         sa('send', 'pageview');
     }
 

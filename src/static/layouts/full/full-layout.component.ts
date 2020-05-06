@@ -5,6 +5,9 @@ import {
 } from '@angular/router';
 import { Component } from '@angular/core';
 
+import { takeUntil } from 'rxjs/operators';
+
+import { AbstractComponent } from 'src/common/abstract.component';
 import { CONSTS } from 'src/app/app.constants';
 import {
     ISettings,
@@ -15,7 +18,7 @@ import {
 @Component({
     templateUrl: './full-layout.component.html',
 })
-export class FullLayoutComponent {
+export class FullLayoutComponent extends AbstractComponent {
     public settings: ISettings = {
         isPublic: true,
         isLandingPage: false,
@@ -31,11 +34,14 @@ export class FullLayoutComponent {
         protected route: ActivatedRoute,
         protected router: Router,
     ) {
-        this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd) {
-                this.settings = <ISettings>this.route.snapshot.firstChild.data;
-            }
-        });
+        super();
+        this.router.events
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(event => {
+                if (event instanceof NavigationEnd) {
+                    this.settings = <ISettings>this.route.snapshot.firstChild.data;
+                }
+            });
     }
 
     public homeRedirect = () => {

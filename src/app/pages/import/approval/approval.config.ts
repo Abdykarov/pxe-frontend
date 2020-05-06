@@ -199,7 +199,7 @@ export class ApprovalConfig {
                         content: (row: IOfferImportInput) => {
                             return row.offer.distributionLocation ?
                                 R.find(R.propEq('value', row.offer.distributionLocation))
-                                (codeLists[CODE_LIST.DISTRIBUTION_POWER]).label :
+                                (codeLists[CODE_LIST.DISTRIBUTION_GAS]).label :
                                 '';
                         },
                     },

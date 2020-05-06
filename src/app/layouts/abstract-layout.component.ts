@@ -4,6 +4,7 @@ import {
     NavigationExtras,
     Router,
 } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 import { OnInit } from '@angular/core';
 
 import * as R from 'ramda';
@@ -23,6 +24,7 @@ import {
     CONSTS,
     S_ANALYTICS,
 } from 'src/app/app.constants';
+import { CookiesService } from 'src/app/services/cookies.service';
 import { inArray } from 'src/common/utils';
 import {
     ISettings,
@@ -39,6 +41,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
     public isMenuOpen = false;
     public showOverlay = false;
     public toggleSubscription: Subscription;
+    public isLogouting = false;
 
     public settings: ISettings = {
         isPublic: false,
@@ -60,6 +63,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
     protected constructor(
         protected apollo: Apollo,
         protected authService: AuthService,
+        protected cookieService: CookiesService,
         protected overlayService: OverlayService,
         protected platformId: string,
         protected route: ActivatedRoute,
@@ -70,20 +74,38 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         super();
         this.router.events
             .pipe(takeUntil(this.destroy$))
-            .subscribe(
-                event => {
-                    if (event instanceof NavigationEnd) {
-                        if (this.showOverlay) {
-                            this.toggleSubscription = this.overlayService.toggleOverlay(false)
-                                .subscribe();
-                            this.toggleSubscription.unsubscribe();
-                        }
-                        this.sAnalyticsService.pageView();
-                        this.settings = <ISettings>this.route.snapshot.firstChild.data;
-                        this.activeUrl = this.router.url;
+            .subscribe(event => {
+                if (event instanceof NavigationEnd) {
+                    this.isLogouting = event.urlAfterRedirects.indexOf(`/${CONSTS.PATHS.LOGOUT}`) !== -1;
+
+                    if (
+                        event && event.urlAfterRedirects &&
+                        !inArray(event.urlAfterRedirects, [`/${CONSTS.PATHS.LOGIN}`, `/${CONSTS.PATHS.LOGOUT}`])
+                    ) {
+                        this.cookieService.remove(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
                     }
-                },
-            );
+
+                    if (this.showOverlay) {
+                        this.toggleSubscription = this.overlayService.toggleOverlay(false)
+                            .subscribe();
+                        this.toggleSubscription.unsubscribe();
+                    }
+                    if (
+                        event.urlAfterRedirects.indexOf(`/${CONSTS.PATHS.SECURED}`) !== -1 &&
+                        isPlatformBrowser(this.platformId)
+                    ) {
+                        localStorage.setItem(CONSTS.STORAGE_HELPERS.LAST_URL, event.urlAfterRedirects);
+                    }
+
+                    if (event && event.url.indexOf(`/${CONSTS.PATHS.SECURED}`) === -1) {
+                        this.authService.setActualStateFromOtherTab();
+                    }
+
+                    this.sAnalyticsService.pageView();
+                    this.settings = <ISettings>this.route.snapshot.firstChild.data;
+                    this.activeUrl = this.router.url;
+                }
+            });
     }
 
     ngOnInit() {
@@ -117,9 +139,9 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         }
     }
 
-    public homeRedirect = () => {
-        this.authService.homeRedirect();
-    }
+    public homeRedirect = (param = false) => this.authService.homeRedirect(param);
+
+    public landingPageRedirect = () => this.router.navigate([CONSTS.PATHS.EMPTY]);
 
     public toggleMenuOpen = (open: boolean) => {
         this.isMenuOpen = open;

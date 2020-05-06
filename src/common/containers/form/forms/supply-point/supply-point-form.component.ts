@@ -21,9 +21,9 @@ import {
     map,
     takeUntil,
 } from 'rxjs/operators';
-import { AddressWhispererComponent } from 'src/common/containers/address-whisperer/address-whisperer.component';
 
 import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/abstract-supply-point-form.component';
+import { AddressWhispererComponent } from 'src/common/containers/address-whisperer/address-whisperer.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     ANNUAL_CONSUMPTION_TYPES,
@@ -250,8 +250,8 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                                 try {
                                     // tslint:disable-next-line
                                     let { email, supplyPointForm } = formValues;
-                                    this.existsPartialSupplyPointValue = false;
-                                    this.supplyPointLocalStorageService.removeSupplyPoint();
+                                    this.form.setValue(supplyPointForm);
+                                    this.resetFormError(false);
                                     if (email === this.authService.currentUserValue.email) {
                                         if (supplyPointForm.expirationDate) {
                                             supplyPointForm.expirationDate = new Date(supplyPointForm.expirationDate);
@@ -266,6 +266,8 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                                         }
                                         this.resetFormError(false);
                                     }
+                                    this.existsPartialSupplyPointValue = false;
+                                    this.supplyPointLocalStorageService.removeSupplyPoint();
                                 } catch (e) {}
                             });
 

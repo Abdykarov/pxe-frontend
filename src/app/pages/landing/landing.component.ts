@@ -23,6 +23,7 @@ import {
 import { fromEvent } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
     ROUTES,
@@ -35,6 +36,8 @@ import {
     IForm,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
+import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
+import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import {
     parseGraphQLErrors,
     scrollToElementFnc,
@@ -74,7 +77,9 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
 
     constructor(
         private apollo: Apollo,
+        public authService: AuthService,
         private cd: ChangeDetectorRef,
+        private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
         private router: Router,
         private registrationService: RegistrationService,
@@ -148,41 +153,54 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
         this.formLoading = true;
         this.globalError = [];
         this.fieldError = {};
-        this.registrationService.makeRegistration(values)
-            .subscribe(
-                () => {
-                    this.formLoading = false;
-                    this.sAnalyticsService.sendWebData(
-                        {},
-                        {
-                            email: values.email,
-                        },
-                        {},
-                        {
-                            ACTION: S_ANALYTICS.ACTIONS.SIGN_UP,
-                        },
-                    );
-                    this.formSent = true;
-                    this.cd.markForCheck();
-                    this.router.navigate([CONSTS.PATHS.LOGIN],
-                        {
-                            queryParams: {
+        this.authService.setActualStateFromOtherTab();
+        const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
+        if (isLogged) {
+            this.authService.homeRedirect(false, ILogoutRequired.REGISTRATION);
+        } else {
+            this.registrationService.makeRegistration(values)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(
+                    () => {
+                        this.formLoading = false;
+                        this.sAnalyticsService.sendWebData(
+                            {},
+                            {
                                 email: values.email,
                             },
-                            state: {
-                                passwordWasSent: true,
+                            {},
+                            {
+                                ACTION: S_ANALYTICS.ACTIONS.SIGN_UP,
                             },
-                        },
-                    );
-                },
-                (error) => {
-                    this.formLoading = false;
-                    const { fieldError, globalError } = parseGraphQLErrors(error);
-                    this.fieldError = fieldError;
-                    this.globalError = globalError;
-                    this.cd.markForCheck();
-                });
+                        );
+                        this.formSent = true;
+                        this.cd.markForCheck();
+                        this.router.navigate([CONSTS.PATHS.LOGIN],
+                                {
+                                    queryParams: {
+                                        email: values.email,
+                                    },
+                                    state: {
+                                        passwordWasSent: true,
+                                    },
+                                },
+                            );
+                    },
+                    (error) => {
+                        this.formLoading = false;
+                        const { fieldError, globalError } = parseGraphQLErrors(error);
+                        this.fieldError = fieldError;
+                        this.globalError = globalError;
+                        this.cd.markForCheck();
+                    });
+        }
     }
 
-    public scrollToNewSubscription = () => this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
+    public scrollToNewSubscription = () =>  {
+        this.authService.setActualStateFromOtherTab();
+        const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
+        if (isLogged) {
+            this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
+        }
+    }
 }
