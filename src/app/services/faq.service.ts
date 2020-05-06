@@ -20,10 +20,10 @@ export class FaqService {
     constructor(
         private http: HttpClient,
     ) {
-        http.get('assets/configs/faq.json').subscribe((faqConfig: ITagConfigItem[]) => {
+        http.get('assets/static-data/faq.json').subscribe((faqConfig: ITagConfigItem[]) => {
             this.faqConfigSubject$.next(faqConfig);
         });
-        http.get('assets/configs/questions.json').subscribe((questions: IQuestion[]) => {
+        http.get('assets/static-data/questions.json').subscribe((questions: IQuestion[]) => {
             this.questionsSubject$.next(questions);
         });
     }

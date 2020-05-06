@@ -17,9 +17,6 @@ import { IAccordionItem } from './models/accordion-item.model';
 export class AccordionComponent {
 
     @Input()
-    public title?: string;
-
-    @Input()
     public accordionItems: IAccordionItem[] = [];
 
     @Input()
@@ -28,7 +25,10 @@ export class AccordionComponent {
     @Input()
     public onlyOneItemOpened = true;
 
-    public toggleClick = (item) => {
+    @Input()
+    public title?: string;
+
+    public toggleClick = (item: IAccordionItem) => {
         if (!item.isActive && this.onlyOneItemOpened) {
             R.map((accordionItem: IAccordionItem) => {
                 accordionItem.isActive = false;

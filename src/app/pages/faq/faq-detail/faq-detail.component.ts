@@ -7,12 +7,19 @@ import {
     Component,
     OnInit,
 } from '@angular/core';
+import {
+    Meta,
+    Title,
+} from '@angular/platform-browser';
 
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
-import { CONSTS } from 'src/app/app.constants';
+import {
+    CONSTS,
+    SEO,
+} from 'src/app/app.constants';
 import { FaqService } from 'src/app/services/faq.service';
 import { IQuestion } from 'src/app/services/model/faq.model';
 
@@ -22,14 +29,16 @@ import { IQuestion } from 'src/app/services/model/faq.model';
     styleUrls: ['./faq-detail.component.scss'],
 })
 export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
-    private sicilianQuestionsToShow = 3;
+    private countOfNextQuestions = 3;
     public activeQuestion: IQuestion = null;
 
     constructor(
         private cd: ChangeDetectorRef,
         public faqService: FaqService,
+        private metaService: Meta,
         public route: ActivatedRoute,
         public router: Router,
+        private titleService: Title,
     ) {
         super(faqService, route);
     }
@@ -45,12 +54,22 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
                         R.head,
                     )(this.questions);
                     this.questions = R.pipe(
-                        R.filter((question: IQuestion) => question.id !== this.activeQuestion.id && this.activeQuestion.id ),
-                        R.sort(
-                            (firstQuestion, secondQuestion) => firstQuestion.id - secondQuestion.id -
-                                (secondQuestion.id < this.activeQuestion.id ? Number.MAX_VALUE : 0),
-                        ),
+                        R.filter((question: IQuestion) => question.id !== this.activeQuestion.id && question.tag === this.activeTag),
+                        this.sortQuestions,
+                        R.take(this.countOfNextQuestions),
                     )(this.questions);
+                    this.titleService.setTitle(this.activeQuestion.header);
+                    this.metaService.updateTag({
+                        name: 'description',
+                        content: this.activeQuestion.seoDescription,
+                    });
+                    this.metaService.updateTag({
+                        name: 'keywords',
+                        content: [
+                            ...SEO.META_KEYWORDS.LANDING_PAGE,
+                            this.activeQuestion.seoKeywords,
+                        ].toString(),
+                    });
                     this.cd.markForCheck();
                 });
     }
@@ -63,4 +82,13 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
     private setActiveQuestion = (params, questions: IQuestion[]) => R.filter(
             (question: IQuestion) => question.tag === this.activeTag && question.url === params.url,
         )(questions)
+
+    private sortFnc = (numbers: number[]): number[] => R.sort((first: number, second: number) => first - second)(numbers);
+
+    private sortQuestions = (questions: IQuestion[]) => R.pipe(
+        R.partition((question: IQuestion) => question.id < this.activeQuestion.id),
+        ([firstGroup, secondGroup]) => ([this.sortFnc(firstGroup), this.sortFnc(secondGroup)]),
+        ([firstGroup, secondGroup]) => [...secondGroup, ...firstGroup],
+    )(questions)
+
 }

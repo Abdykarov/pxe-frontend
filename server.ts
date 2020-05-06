@@ -79,8 +79,8 @@ const getTagUrl = (question, taqConfig) => {
 // Server static files from /app
 app.get('/sitemap.xml', (req, res) => {
     const siteMapOriginal = fs.readFileSync(join(APP_FOLDER, 'sitemap.xml'), 'utf8');
-    const taqConfig = JSON.parse(fs.readFileSync(join(APP_FOLDER, 'assets/configs/faq.json'), 'utf8'));
-    const questions = JSON.parse(fs.readFileSync(join(APP_FOLDER, 'assets/configs/questions.json'), 'utf8'));
+    const taqConfig = JSON.parse(fs.readFileSync(join(APP_FOLDER, 'assets/static-data/faq.json'), 'utf8'));
+    const questions = JSON.parse(fs.readFileSync(join(APP_FOLDER, 'assets/static-data/questions.json'), 'utf8'));
     const parseString = xml2js.parseString;
     parseString(siteMapOriginal, (err, result) => {
         questions.forEach(question => {

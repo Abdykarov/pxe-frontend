@@ -11,6 +11,7 @@ import { ConsumptionIndicatorPipe } from './consumption-indicator/consumption-in
 import { DateDiffPipe } from './date-diff/date-diff.pipe';
 import { DynamicPipe } from './dynamic/dynamic.pipe';
 import { FilterCommodityTypePipe } from './filter-commodity-type/filter-commodity-type.pipe';
+import { GetUrlFromTagPipe } from 'src/common/pipes/get-url-from-tag/get-url-from-tag.pipe';
 import { IsAllowedOperationPipe } from './is-allowed-operation/is-allowed-operation.pipe';
 import { IsDatePast } from './is-date-past/is-date-past.pipe';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
@@ -40,6 +41,7 @@ import { ValuesPipe } from './values/values.pipe';
         DateDiffPipe,
         DynamicPipe,
         FilterCommodityTypePipe,
+        GetUrlFromTagPipe,
         IsAllowedOperationPipe,
         IsDatePast,
         IsLoggedPipe,
@@ -68,6 +70,7 @@ import { ValuesPipe } from './values/values.pipe';
         DateDiffPipe,
         DynamicPipe,
         FilterCommodityTypePipe,
+        GetUrlFromTagPipe,
         IsAllowedOperationPipe,
         IsDatePast,
         IsLoggedPipe,
@@ -96,6 +99,7 @@ import { ValuesPipe } from './values/values.pipe';
         DecimalPipe,
         DynamicPipe,
         FilterCommodityTypePipe,
+        GetUrlFromTagPipe,
         IsAllowedOperationPipe,
         IsDatePast,
         IsLoggedPipe,

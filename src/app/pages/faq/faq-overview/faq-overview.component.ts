@@ -11,6 +11,7 @@ import {
     Title,
 } from '@angular/platform-browser';
 
+import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
@@ -20,6 +21,7 @@ import {
     SEO,
 } from 'src/app/app.constants';
 import { FaqService } from 'src/app/services/faq.service';
+import { IQuestion } from 'src/app/services/model/faq.model';
 
 @Component({
     selector: 'lnd-faq-overview',
@@ -54,6 +56,7 @@ export class FaqOverviewComponent extends AbstractFaqComponent {
             .pipe(takeUntil(this.destroy$))
             .subscribe(
                 _ => {
+                    this.questions = R.filter((tag: IQuestion) => tag.tag === this.activeTag, this.questions);
                     if (this.questions.length) {
                         this.cd.markForCheck();
                     } else {

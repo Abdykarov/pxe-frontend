@@ -228,7 +228,7 @@ export const SEO = {
             'pxe',
         ],
         FAQ: [
-            'TODO',
+            'nápověda, obecné, často kladené otázky',
         ],
         LOGIN: [
             'přihlášení',
@@ -256,7 +256,7 @@ export const SEO = {
         COOKIES_POLICY: 'Co jsou cookies a proč je na stránkách PARC4U používáme?',
         LANDING_PAGE: 'Měňte dodavatele energií na 1 klik. Neřešte papírování a chození na' +
             ' pobočky. Chraňte se před nekalostmi ve smlouvě. Energie za férové ceny bez skrytých poplatků.',
-        FAQ: 'TODO',
+        FAQ: 'Často kladené otázky',
         LOGIN: 'Přihlášení do PARC4U, kde máte snadný přístup k jiným cenám za energie.',
         PATTERNS_OF_CONTRACTS: 'Vzor smlouvy k dodávce uzavřené přes PARC4U.',
         TERMS_OF_USE: 'Obchodní podmínky k pravidlům registrace dodavatelů a odběratelů na trhu PARC4U.',

@@ -1,4 +1,8 @@
 import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
+import {
     AfterViewInit,
     ChangeDetectorRef,
     Component,
@@ -12,7 +16,6 @@ import {
     Meta,
     Title,
 } from '@angular/platform-browser';
-import { Router } from '@angular/router';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
@@ -23,7 +26,7 @@ import {
 } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
 
-import { AbstractComponent } from 'src/common/abstract.component';
+import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
@@ -53,7 +56,7 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 @Component({
     templateUrl: './landing.component.html',
 })
-export class LandingComponent extends AbstractComponent implements AfterViewInit {
+export class LandingComponent extends AbstractFaqComponent implements AfterViewInit {
 
     @ViewChild('subscription')
     public subscriptionElement: ElementRef;
@@ -84,29 +87,29 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
         private apollo: Apollo,
         public authService: AuthService,
         private cd: ChangeDetectorRef,
-        private faqService: FaqService,
+        public faqService: FaqService,
         private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
-        private router: Router,
+        public route: ActivatedRoute,
+        public router: Router,
         private registrationService: RegistrationService,
         private sAnalyticsService: SAnalyticsService,
         private scrollToService: ScrollToService,
         private titleService: Title,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
-        super();
+        super(faqService, route);
         if (isPlatformBrowser(this.platformId)) {
             this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
         }
 
-        this.faqService.getQuestionStream()
+        this.loadConfigs$
             .pipe(
                 takeUntil(this.destroy$),
-                filter((questions: IQuestion[]) => !!questions),
             )
             .subscribe(
-                (questions: IQuestion[]) => {
-                    this.frequentedQuestions = R.filter((question: IQuestion) => question.oneOfMostVisited)(questions);
+                _ => {
+                    this.frequentedQuestions = R.filter((question: IQuestion) => question.oneOfMostVisited)(this.questions);
                     this.cd.markForCheck();
             });
 
