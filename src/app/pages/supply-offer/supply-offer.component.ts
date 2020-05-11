@@ -70,7 +70,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class SupplyOfferComponent extends AbstractComponent implements OnInit {
 
-    @ViewChild('table')
+    @ViewChild('table', { static: true })
     public lndTable: TableComponent;
 
     public readonly bannerTypeImages = BannerTypeImages;

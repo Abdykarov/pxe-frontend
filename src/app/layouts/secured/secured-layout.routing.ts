@@ -16,7 +16,7 @@ const routes = [
         children: [
             {
                 path: CONSTS.PATHS.DASHBOARD,
-                loadChildren: '../../pages/dashboard/dashboard.module#DashboardModule',
+                loadChildren: () => import('../../pages/dashboard/dashboard.module').then(m => m.DashboardModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
@@ -30,7 +30,7 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.REQUEST,
-                loadChildren: '../../pages/request/request.module#RequestModule',
+                loadChildren: () => import('../../pages/request/request.module').then(m => m.RequestModule),
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
@@ -41,7 +41,7 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.REQUESTS,
-                loadChildren: '../../pages/requests-overview/requests-overview.module#RequestsOverviewModule',
+                loadChildren: () => import('../../pages/requests-overview/requests-overview.module').then(m => m.RequestsOverviewModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
@@ -55,7 +55,7 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.SUPPLY_POINT_SELECTION,
-                loadChildren: '../../pages/supply-point-selection/supply-point-selection.module#SupplyPointSelectionModule',
+                loadChildren: () => import('../../pages/supply-point-selection/supply-point-selection.module').then(m => m.SupplyPointSelectionModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
@@ -69,7 +69,7 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.SUPPLY_POINTS,
-                loadChildren: '../../pages/supply-points/supply-points.module#SupplyPointsModule',
+                loadChildren: () => import('../../pages/supply-points/supply-points.module').then(m => m.SupplyPointsModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
@@ -83,7 +83,7 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.USER_PROFILE,
-                loadChildren: '../../pages/user-profile/user-profile.module#UserProfileModule',
+                loadChildren: () => import('../../pages/user-profile/user-profile.module').then(m => m.UserProfileModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
@@ -97,7 +97,7 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.DELETE_ACCOUNT,
-                loadChildren: '../../pages/delete-account/delete-account.module#DeleteAccountModule',
+                loadChildren: () => import('../../pages/delete-account/delete-account.module').then(m => m.DeleteAccountModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
@@ -111,7 +111,7 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.IMPORT,
-                loadChildren: '../../pages/import/import.module#ImportModule',
+                loadChildren: () => import('../../pages/import/import.module').then(m => m.ImportModule),
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
@@ -123,7 +123,7 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.CHANGE_PASSWORD,
-                loadChildren: '../../pages/user-change-password/user-change-password.module#UserChangePasswordModule',
+                loadChildren: () => import('../../pages/user-change-password/user-change-password.module').then(m => m.UserChangePasswordModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
@@ -141,7 +141,7 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.SUPPLY_OFFER + '/:commodityType',
-                loadChildren: '../../pages/supply-offer/supply-offer.module#SupplyOfferModule',
+                loadChildren: () => import('../../pages/supply-offer/supply-offer.module').then(m => m.SupplyOfferModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
@@ -161,7 +161,7 @@ const routes = [
             {
                 path: CONSTS.PATHS.SUPPLIER_CONCLUDED_CONTRACTS + '/:commodityType',
                 loadChildren:
-                    '../../pages/supplier-concluded-contracts/supplier-concluded-contracts.module#SupplierConcludedContractsModule',
+                    () => import('../../pages/supplier-concluded-contracts/supplier-concluded-contracts.module').then(m => m.SupplierConcludedContractsModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },

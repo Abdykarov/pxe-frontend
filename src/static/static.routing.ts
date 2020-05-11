@@ -11,11 +11,11 @@ import { environment } from 'src/environments/environment';
 const routes: Routes = [
     {
         path: 'basic',
-        loadChildren: './layouts/basic/basic-layout.module#BasicLayoutModule',
+        loadChildren: () => import('./layouts/basic/basic-layout.module').then(m => m.BasicLayoutModule),
     },
     {
         path: 'full',
-        loadChildren: './layouts/full/full-layout.module#FullLayoutModule',
+        loadChildren: () => import('./layouts/full/full-layout.module').then(m => m.FullLayoutModule),
     },
     {
         path: '**',
