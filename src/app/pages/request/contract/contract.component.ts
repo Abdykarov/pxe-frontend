@@ -61,13 +61,13 @@ export class ContractComponent extends AbstractComponent implements OnInit {
     public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.PERSONAL_DATA;
     public readonly BannerTypeImages = BannerTypeImages;
 
-    @ViewChild('pxeVerificationFormWrapper', { static: false })
+    @ViewChild('pxeVerificationFormWrapper')
     public pxeVerificationFormWrapper: ElementRef;
 
-    @ViewChild('pdfInformation', { static: false })
+    @ViewChild('pdfInformation')
     public pdfInformation: PdfJsViewerComponent ;
 
-    @ViewChild('pdfContract', { static: false })
+    @ViewChild('pdfContract')
     public pdfContract: PdfJsViewerComponent;
 
     public commodityType = CommodityType;

@@ -25,10 +25,10 @@ import { INavigationMenu } from 'src/common/ui/navigation/models/navigation.mode
     styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent extends AbstractComponent implements OnInit {
-    @ViewChild('userProfile', { static: false })
+    @ViewChild('userProfile')
     public userProfile: DropdownComponent;
 
-    @ViewChild('publicMenu', { static: false })
+    @ViewChild('publicMenu')
     public publicMenu: DropdownComponent;
 
     @Input()

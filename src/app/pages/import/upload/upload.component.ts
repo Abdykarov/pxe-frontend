@@ -78,7 +78,7 @@ export class UploadComponent extends AbstractComponent implements OnInit {
     public loading = false;
     public tryToUploadFile = false;
 
-    @ViewChild('listOfNotificationsRow', { static: false })
+    @ViewChild('listOfNotificationsRow')
     public listOfNotificationsRow: ElementRef;
 
     constructor (

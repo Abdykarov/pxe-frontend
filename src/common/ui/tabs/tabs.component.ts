@@ -32,7 +32,7 @@ export class TabsComponent extends AbstractComponent implements AfterContentInit
 
     @ViewChild('tabList', { static: true }) tabList: ElementRef;
     @ViewChildren('tabItem') tabItems: QueryList<ElementRef>;
-    @ViewChild('moreItem', { static: false }) moreItem: ElementRef;
+    @ViewChild('moreItem') moreItem: ElementRef;
 
     public selectedTab: TabComponent;
     public shownTabsCount = 0;

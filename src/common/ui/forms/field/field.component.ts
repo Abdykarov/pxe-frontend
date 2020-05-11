@@ -38,7 +38,7 @@ import { IValidationMessages } from '../models/validation-messages.model';
     ],
 })
 export class FieldComponent implements AfterContentInit, ControlValueAccessor {
-    @ViewChild('field', { static: false })
+    @ViewChild('field')
     public field: ElementRef;
 
     // tslint:disable-next-line:no-input-rename

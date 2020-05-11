@@ -71,7 +71,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
 
     public contractActionsWrapper: ElementRef;
 
-    @ViewChild('contractActionsWrapper', { static: false }) set content(contractActionsWrapper: ElementRef) {
+    @ViewChild('contractActionsWrapper') set content(contractActionsWrapper: ElementRef) {
         if (contractActionsWrapper) {
             this.contractActionsWrapper = contractActionsWrapper;
         }

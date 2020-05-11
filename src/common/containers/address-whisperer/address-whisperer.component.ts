@@ -55,7 +55,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     @ViewChild('lndSelect', { static: true })
     public lndSelect: SelectComponent;
 
-    @ViewChild('selectWrapper', { static: false })
+    @ViewChild('selectWrapper')
     public lndSelectWrapper: ElementRef;
 
     @Output()

@@ -49,7 +49,7 @@ export class DeleteAccountComponent extends AbstractComponent implements OnInit 
 
     public pxeVerificationFormWrapper: ElementRef;
 
-    @ViewChild('pxeVerificationFormWrapper', { static: false }) set content(pxeVerificationFormWrapper: ElementRef) {
+    @ViewChild('pxeVerificationFormWrapper') set content(pxeVerificationFormWrapper: ElementRef) {
         if (pxeVerificationFormWrapper) {
             this.pxeVerificationFormWrapper = pxeVerificationFormWrapper;
         }

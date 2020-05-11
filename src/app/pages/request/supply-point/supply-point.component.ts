@@ -54,7 +54,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class SupplyPointComponent extends AbstractComponent implements OnInit {
 
-    @ViewChild('pxeSupplyPointForm', { static: false })
+    @ViewChild('pxeSupplyPointForm')
     public pxeSupplyPointForm: SupplyPointFormComponent;
 
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.SUPPLY_POINT;
