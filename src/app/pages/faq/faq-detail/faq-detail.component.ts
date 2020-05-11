@@ -21,7 +21,10 @@ import {
     SEO,
 } from 'src/app/app.constants';
 import { FaqService } from 'src/app/services/faq.service';
-import { IQuestion } from 'src/app/services/model/faq.model';
+import {
+    IQuestion,
+    ITagConfigItem,
+} from 'src/app/services/model/faq.model';
 
 @Component({
     selector: 'lnd-faq-detail',
@@ -31,6 +34,7 @@ import { IQuestion } from 'src/app/services/model/faq.model';
 export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
     private countOfNextQuestions = 3;
     public activeQuestion: IQuestion = null;
+    public activeTagLabel = '';
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -53,6 +57,8 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
                         R.curry(this.setActiveQuestion)(params),
                         R.head,
                     )(this.questions);
+                    this.activeTagLabel =
+                        this.faqConfig.find((faqConfig: ITagConfigItem) => faqConfig.type === this.activeQuestion.tag).label;
                     this.questions = R.pipe(
                         R.filter((question: IQuestion) => question.id !== this.activeQuestion.id && question.tag === this.activeTag),
                         this.sortQuestions,
