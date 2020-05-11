@@ -9,7 +9,8 @@
         "entryModule": "app/app.server.module#AppServerModule"
     },
   "files": [
-    "app.server.ts"
+    "app.server.ts",
+    "server.ts"
   ],
   "include": [
     "src/**/*.d.ts"

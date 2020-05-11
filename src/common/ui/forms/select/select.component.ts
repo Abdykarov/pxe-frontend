@@ -15,7 +15,7 @@ import {
     NgSelectConfig,
 } from '@ng-select/ng-select';
 
-import { defaultSelectConfig } from './select.config';
+// import { defaultSelectConfig } from './select.config';
 import { DynamicPipe } from 'src/common/pipes/dynamic/dynamic.pipe';
 import { getErrorMessage } from 'src/common/utils';
 import { IOption } from '../models/option.model';
@@ -151,8 +151,26 @@ export class SelectComponent {
         R.pipe(
             R.keys,
             R.map(key => {
-                this.config[key] = defaultSelectConfig[key];
+                this.config[key] = {
+                    placeholder: 'Placeholder',
+                    notFoundText: 'Nenalezeno',
+                    typeToSearchText: 'Napište výraz',
+                    addTagText: 'Přidat položku',
+                    loadingText: 'Načítání...',
+                    clearAllText: 'Vymazat',
+                    disableVirtualScroll: true,
+                    openOnEnter: true,
+                }[key];
             }),
-        )(defaultSelectConfig);
+        )({
+            placeholder: 'Placeholder',
+            notFoundText: 'Nenalezeno',
+            typeToSearchText: 'Napište výraz',
+            addTagText: 'Přidat položku',
+            loadingText: 'Načítání...',
+            clearAllText: 'Vymazat',
+            disableVirtualScroll: true,
+            openOnEnter: true,
+        });
     }
 }

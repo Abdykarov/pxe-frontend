@@ -62,8 +62,8 @@
 				background-color: $progress-bar-line-bg-done;
 			}
 		}
-
-		&--shadow-step {
+//TODO NOOO
+		.shadow-step {
 			flex-grow: 1;
 
 			.progress-bar__item-inner {
@@ -152,55 +152,55 @@
 		line-height: ( 19 / 14 );
 	}
 
-	&.progress-bar--minor {
-		.progress-bar__item:not(.progress-bar__item--done) {
-			&::before {
-				background-color: $body-bg;
-			}
-
-			.progress-bar__bullet {
-				&::before {
-					background-color: $white;
-				}
-			}
-		}
-
-		.progress-bar__item:not(.progress-bar__item--done):not(.progress-bar__item--active) {
-			.progress-bar__bullet {
-				background-color: $body-bg;
-			}
-		}
-
-		.progress-bar__item:not(.progress-bar__item--shadow-step) {
-			&::before {
-				left: 0;
-			}
-
-			&:first-child {
-				&::before {
-					left: 10px;
-				}
-			}
-
-			&:last-child {
-				flex-grow: 0;
-
-				&::before {
-					display: none;
-				}
-			}
-
-			.progress-bar__bullet {
-				margin-left: 0;
-			}
-
-			.progress-bar__label {
-				display: none;
-			}
-
-			&--shadow-step {
-				flex-grow: 2;
-			}
-		}
-	}
+	//&.progress-bar--minor {
+	//	.progress-bar__item:not(.progress-bar__item--done) {
+	//		&::before {
+	//			background-color: $body-bg;
+	//		}
+	//
+	//		.progress-bar__bullet {
+	//			&::before {
+	//				background-color: $white;
+	//			}
+	//		}
+	//	}
+	//
+	//	.progress-bar__item:not(.progress-bar__item--done):not(.progress-bar__item--active) {
+	//		.progress-bar__bullet {
+	//			background-color: $body-bg;
+	//		}
+	//	}
+	//
+	//	.progress-bar__item:not(.progress-bar__item--shadow-step) {
+	//		&::before {
+	//			left: 0;
+	//		}
+	//
+	//		&:first-child {
+	//			&::before {
+	//				left: 10px;
+	//			}
+	//		}
+	//
+	//		&:last-child {
+	//			flex-grow: 0;
+	//
+	//			&::before {
+	//				display: none;
+	//			}
+	//		}
+	//
+	//		.progress-bar__bullet {
+	//			margin-left: 0;
+	//		}
+	//
+	//		.progress-bar__label {
+	//			display: none;
+	//		}
+	//		//TODO NOOO
+	//		&--shadow-step {
+	//			flex-grow: 2;
+	//		}
+	//	}
+	//}
 }

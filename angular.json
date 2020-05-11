@@ -45,12 +45,12 @@
                     },
                     "configurations": {
                         "production": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "100kb"
+                                }
+                            ],
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
@@ -68,12 +68,12 @@
                             ]
                         },
                         "preview": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
@@ -91,12 +91,12 @@
                             ]
                         },
                         "mock": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
                             "fileReplacements": [
                                 {
                                     "replace": "src/assets/configurations/config.js",
@@ -128,7 +128,7 @@
                     "options": {
                         "sourceMap": false,
                         "outputPath": "dist/server",
-                        "main": "src/app.server.ts",
+                        "main": "server.ts",
                         "tsConfig": "src/tsconfig.server.json"
                     }
                 },
@@ -177,6 +177,32 @@
                             "**/src/static.ts"
                         ]
                     }
+                },
+                "serve-ssr": {
+                    "builder": "@nguniversal/builders:ssr-dev-server",
+                    "options": {
+                        "browserTarget": "app:build",
+                        "serverTarget": "app:server"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "app:build:production",
+                            "serverTarget": "app:server:production"
+                        }
+                    }
+                },
+                "prerender": {
+                    "builder": "@nguniversal/builders:prerender",
+                    "options": {
+                        "browserTarget": "app:build:production",
+                        "serverTarget": "app:server:production",
+                        "routes": [
+                            "/"
+                        ]
+                    },
+                    "configurations": {
+                        "production": {}
+                    }
                 }
             }
         },
@@ -190,7 +216,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-            "aot": true,
+                        "aot": true,
                         "outputPath": "dist/static",
                         "index": "src/index.html",
                         "main": "src/static.ts",
@@ -220,12 +246,12 @@
                     },
                     "configurations": {
                         "production": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
@@ -288,7 +314,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-            "aot": true,
+                        "aot": true,
                         "outputPath": "dist/500",
                         "index": "src/500/index.html",
                         "main": "",
@@ -309,12 +335,12 @@
                     },
                     "configurations": {
                         "production": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
+                            "budgets": [
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb"
+                                }
+                            ],
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,

@@ -57,17 +57,17 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
             try {
                 subscription = forward(operation).subscribe({
                     next: result => {
-                        if (result.errors) {
-                            const isAccessDeniedException = R.pipe(
-                                R.filter((err) => err && err.type === 'AccessDeniedException'),
-                                R.head,
-                            )(result.errors);
-
-                            if (isAccessDeniedException) {
-                                authService.logoutForced();
-                            }
-                        }
-                        observer.next(result);
+                        // if (result.errors) {
+                        //     const isAccessDeniedException = R.pipe(
+                        //         R.filter((err) => err && err.type === 'AccessDeniedException'),
+                        //         R.head,
+                        //     )(result.errors);
+                        //
+                        //     if (isAccessDeniedException) {
+                        //         authService.logoutForced();
+                        //     }
+                        // }
+                        // observer.next(result);
                     },
                     complete: observer.complete.bind(observer),
                     error: networkError => {

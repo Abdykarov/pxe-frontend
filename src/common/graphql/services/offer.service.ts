@@ -10,7 +10,7 @@ import {
     catchError,
     map,
 } from 'rxjs/operators';
-import { Observable } from 'apollo-client/util/Observable';
+import { Observable } from 'apollo-client/lib/util/Observable';
 import {
     Observable as ObservableRxjs,
     of,
