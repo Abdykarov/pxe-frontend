@@ -1,3 +1,5 @@
+import * as CryptoJS from 'crypto-js';
+
 import {
     CommodityType,
     SubjectType,
@@ -8,6 +10,14 @@ import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
     ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],
+    CRYPTO: {
+        get SALT() {
+            return CryptoJS.lib.WordArray.random(128 / 8);
+        },
+        get IV() {
+            return CryptoJS.lib.WordArray.random(128 / 8);
+        },
+    },
     CONTRACT_SIGN_NUMBER_OF_RETRY: 3,
     CURRENCY: {
         DEFAULT: 'CZK',
@@ -16,14 +26,15 @@ export const CONSTS = {
         CALENDAR: 'YYYY-MM-DD[T]HH:mm',
         SHORT: 'YYYY-MM-DD',
     },
-    DEFAULT_EXPIRATION: 700000,
+    COOKIE_TEMPORARY_EXPIRATION: 10000,
+    DEFAULT_EXPIRATION: 600100,
     DEFAULT_DEPOSIT_PAYMENT_TYPE_ID: 'Prikaz',
     EXPORT: {
         FILE_NAME: 'export',
         TYPE: 'csv',
     },
     EXAMPLE_OF_IMPORT_OFFER_FILE: {
-        PATH: '/assets/csv/example-import-offers.csv',
+        PATH: '/assets/csv/example_import_offers.csv',
         FILE_NAME: 'example_import_offers.csv',
     },
     IMPORT_ERROR_CODES: {
@@ -32,16 +43,25 @@ export const CONSTS = {
         NO_OFFERS_IN_IMPORT: 'NO_OFFERS_IN_IMPORT',
     },
     INTERVAL_RXJS: 5000,
+    LOCAL_STORAGE: {
+        PERSONAL_INFO_PARTIAL_FORM_PREFIX: 'PERSONAL_INFO_',
+        SUPPLY_POINT_PARTIAL_FORM: 'SUPPLY_POINT',
+    },
     LOGIN_FORM_NAME: 'login',
     MAX_REQUEST_IN_BATCH_LINK: 200,
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
     MODAL_TYPE: {
+        MORE_TABS: 'moreTabs',
         CONFIRM_DELETE_OFFER: 'confirmDeleteOffer',
         CONFIRM_CANCEL_OFFER: 'confirmCancelOffer',
         CONFIRM_BACK_IMPORT: 'confirmBackImportOffer',
         CONFIRM_DELETE_MARKED: 'confirmDeleteMarked',
+    },
+    OFFSET_ERRORS: {
+        INVALID_INPUT: 40,
+        ALERT_DANGER: 50,
     },
     PATHS: {
         APPROVAL: 'approval',
@@ -84,6 +104,17 @@ export const CONSTS = {
         DONT_REFRESH_TIME_IN_MINUTES: 2,
     },
     START_STICKER_HEADER: 0,
+    STORAGE_HELPERS: {
+        LAST_URL: 'last_url',
+        ACTIVE_TAB: 'active_tab',
+        USER: 'user',
+        REASON_FOR_LOGOUT_USER: 'reason_for_logout_user',
+    },
+    REASON_FOR_LOGOUT_USER: {
+        BY_SELF: 'Byl jste úspěšně odhlášen',
+        UNAUTHORIZED: 'Došlo k odhlášení z důvodu neaktivity',
+    },
+    TIME_TO_SHOW_USER_LOGOUT_BANNER: 300,
     VALIDATORS: {
         ADULTHOOD_AGE: 18,
         MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION: 10,
@@ -120,7 +151,8 @@ export const CONSTS = {
         TIME_TO_CONTRACT_END_MAX: 100,
     },
     TELEPHONE_PREFIX_CZ: '+420',
-    TIME_TO_CONTRACT_END_PROLONGED: 30,
+    TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS: 30,
+    TIME_TO_CONTRACT_END_INDEFINITE_TIME_IN_MONTHS: 3,
     TITLES: {
         COOKIES_POLICY: 'Cookies policy | PARC4U',
         DEFAULT: 'PARC4U',
@@ -139,6 +171,7 @@ export const ROUTES = {
     ROUTER_DASHBOARD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.DASHBOARD}`,
     ROUTER_DELETE_ACCOUNT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.DELETE_ACCOUNT}`,
     ROUTER_IMPORT_UPLOAD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.IMPORT}/${CONSTS.PATHS.UPLOAD}`,
+    ROUTER_LOGIN: `/${CONSTS.PATHS.LOGIN}`,
     ROUTER_REQUEST_SUPPLY_POINT_SELECTION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLY_POINT_SELECTION}`,
     ROUTER_REQUEST_CONTRACT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.CONTRACT}`,
     ROUTER_REQUEST_OFFER_SELECTION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.OFFER_SELECTION}`,
@@ -149,6 +182,7 @@ export const ROUTES = {
     ROUTER_REQUESTS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUESTS}`,
     ROUTER_SECURING_YOUR_DATA: `/${CONSTS.PATHS.SECURING_YOUR_DATA}`,
     ROUTER_SUPPLIER_CONCLUDED_CONTRACTS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLIER_CONCLUDED_CONTRACTS}`,
+    ROUTER_SIGN_UP: `/${CONSTS.PATHS.SIGN_UP}`,
     ROUTER_SUPPLIER_CONCLUDED_CONTRACTS_POWER:
         `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLIER_CONCLUDED_CONTRACTS}/${CONSTS.PATHS.POWER}`,
     ROUTER_SUPPLIER_CONCLUDED_CONTRACTS_GAS:
@@ -339,6 +373,17 @@ export const SUBJECT_TYPE_OPTIONS: Array<IOption> = [
     },
 ];
 
+export const OWN_TERMINATE_OPTIONS: Array<IOption> = [
+    {
+        key: false,
+        label: 'Chci, aby výpověď zajistil nový dodavatel',
+    },
+    {
+        key: true,
+        label: 'Vypovím si sám (sama)',
+    },
+];
+
 export const COMMODITY_TYPE_OPTIONS: Array<IOption> = [
     {
         key: CommodityType.POWER,
@@ -395,6 +440,15 @@ export const  ANNUAL_CONSUMPTION_OPTIONS = [
         label: '45 - 63 MWh',
     },
 ];
+
+export const S_ANALYTICS = {
+    ACTIONS: {
+        SIGN_UP: 'SIGN_UP',
+        CREATE_SUPPLY_POINT: 'CREATE_SUPPLY_POINT',
+        CHOOSE_OFFER: 'CHOOSE_OFFER',
+        RECAPITULATION: 'RECAPITULATION',
+    },
+};
 
 export const SUPPLY_POINT_EDIT_TYPE = {
     NORMAL: 'NORMAL',
@@ -485,12 +539,12 @@ export const REGIONS: Array<IOption> = [
     },
 ];
 
+export const OPERATIONS_WITHOUT_TOKEN = [];
+
+export const OPERATIONS_IGNORE_ACCESS_DENIED_EXCEPTION = [];
+
 export const OPERATIONS_WITHOUT_SCROLL_ON_ERRORS = [
     'getSupplyPointGlobalStatistics',
-    'makeRegistration',
-    'savePowerOffer',
-    'saveGasOffer',
-    'sendChangePhoneNumberSmsMutation',
 ];
 
 export enum RequestsOverviewBannerShow {

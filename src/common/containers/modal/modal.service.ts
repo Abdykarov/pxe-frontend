@@ -20,6 +20,7 @@ export class ModalService {
     };
     public closeModalData$ = new BehaviorSubject(<ICloseModalData>null);
     public showModal$: Subject<IShowModal> = new Subject();
+    public closeModal$: Subject<IShowModal> = new Subject();
 
     public loadModalComponent = (component: string) => this.components[component];
     public setCloseModalData = (data: ICloseModalData) => this.closeModalData$.next(data);

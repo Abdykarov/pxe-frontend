@@ -61,6 +61,16 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
     @Output()
     public appendButtonAction?: EventEmitter<any> = new EventEmitter();
 
+
+    @Output()
+    public change?: EventEmitter<any> = new EventEmitter();
+
+    @Output()
+    public focus?: EventEmitter<any> = new EventEmitter();
+
+    @Output()
+    public blur?: EventEmitter<any> = new EventEmitter();
+
     @Input()
     public appendButtonIcon?: string;
 
@@ -207,6 +217,9 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
 
     public sendValidAddress = (value) => {
         this.parentForm.get(this.whispererName).setValue(value);
+        this.focus.emit();
+        this.change.emit(value);
+        this.blur.emit();
         this.cd.markForCheck();
     }
 }

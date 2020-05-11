@@ -1,3 +1,16 @@
+<ng-template #bannerButtonsTemplate>
+    <lnd-button
+        customClass="mb-2 mb-md-0"
+        label="Ano"
+        type="white">
+    </lnd-button>
+    <lnd-button
+        class="ml-3"
+        label="Ne"
+        type="white">
+    </lnd-button>
+</ng-template>
+
 <ng-template #phraseHelpTemplate>
     <p class="small mt-0 mb-1">
         V případě, že zde není přesně vaše hodnota, zadejte nejbližší vyšší hodnotu
@@ -24,6 +37,11 @@
             </h2>
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
+            <lnd-banner-ui
+                [buttonsTemplate]="bannerButtonsTemplate"
+                [data]="bannerObj"
+            >
+            </lnd-banner-ui>
             <div class="page-box">
                 <form
                     [formGroup]="form"

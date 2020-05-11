@@ -55,6 +55,9 @@
             [typeahead]="typeahead"
             [validationMessages]="validationMessages"
             customClass="ng-select-custom--address"
+            (change)="change.emit($event)"
+            (focus)="focus.emit($event)"
+            (blur)="blur.emit($event)"
         >
         </lnd-select>
     </div>

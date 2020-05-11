@@ -35,12 +35,14 @@ export interface IJwtPayload {
     phoneNumber?: string;
     firstContract: boolean;
     evaluatedSupplyPoint: number;
+    userLogin: string;
 }
 
 export enum IUserRoles {
     'PARC_MANAGER' = 'PARC_MANAGER',
     'PARC_SUPPLIER_P4R' = 'PARC_SUPPLIER_P_4_R',
     'NEEDS_SMS_CONFIRMATION' = 'NEEDS_SMS_CONFIRMATION',
+    'RESET_PASSWORD' = 'RESET_PASSWORD',
 }
 
 export enum UserStatus {

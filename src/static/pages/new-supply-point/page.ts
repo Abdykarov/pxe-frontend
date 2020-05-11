@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+
 import {
     FormControl,
     FormGroup,
 } from '@angular/forms';
+import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 
 import { NewSupplyPointPageConfig } from './config';
 
@@ -25,6 +27,10 @@ export class NewSupplyPointPageComponent {
     constructor(
         public config: NewSupplyPointPageConfig,
     ) {}
+
+    public bannerObj: IBannerObj = {
+        text: 'Evidujeme u vás nedokončené odběrné místo, chcete načíst tyto údaje?',
+    };
 
     public openModal = () => alert('MODAL OPENED');
 

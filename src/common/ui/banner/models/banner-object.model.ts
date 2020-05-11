@@ -4,4 +4,7 @@ export interface IBannerObj {
     linkData?: any;
     text?: string;
     title?: string;
+    secondLinkType?: string;
+    secondLinkValue?: string;
+    secondLinkData?: any;
 }

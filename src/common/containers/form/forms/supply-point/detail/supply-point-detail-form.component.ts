@@ -74,7 +74,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     public setFormByCommodity = this.setFormFields;
     public timeToContractEndPeriodMap = TIME_TO_CONTRACT_END_PERIOD_MAP;
     public today = new Date().toISOString();
-    public timeToContractEnd = CONSTS.TIME_TO_CONTRACT_END_PROLONGED;
+    public timeToContractEnd = CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS;
     public timeToContractEndPeriod = TimeToContractEndPeriod.DAY;
 
     constructor(

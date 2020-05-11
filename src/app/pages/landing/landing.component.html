@@ -11,6 +11,7 @@
                             Získejte svobodu nad energií
                         </h1>
                         <lnd-button
+                            *ngIf="!(authService.currentUserValue | isLogged)"
                             label="Chci platit chytře"
                             type="primary"
                             (action)="scrollToNewSubscription()">
@@ -40,7 +41,7 @@
                 <img src="/assets/images/landing-page/picture-fallback.png" alt="parc4u - obrázek laptopu s aplikací">
                 Váš prohlížeč nepodporuje zobrazení videa
             </video>
-        </div> 
+        </div>
     </div>
     <div class="section what-you-can-get">
         <div class="container-fluid">
@@ -89,9 +90,10 @@
                             </li>
                         </ul>
                         <lnd-button
-                                label="Chci do PARC4U"
-                                type="primary"
-                                (action)="scrollToNewSubscription()">
+                            *ngIf="!(authService.currentUserValue | isLogged)"
+                            label="Chci do PARC4U"
+                            type="primary"
+                            (action)="scrollToNewSubscription()">
                         </lnd-button>
                     </div>
                 </div>
@@ -117,6 +119,7 @@
     </div>
     <div
         #subscription
+        *ngIf="!(authService.currentUserValue | isLogged)"
         class="section section--light stay-in-touch">
         <div class="container-fluid">
             <div class="row">
