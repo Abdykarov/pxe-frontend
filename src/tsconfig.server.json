@@ -5,14 +5,13 @@
         "module": "commonjs",
         "types": []
     },
+    "exclude": [
+        "**/*.spec.ts",
+        "./static/*.*",
+        "test.ts"
+    ],
     "angularCompilerOptions": {
+        "enableIvy": false,
         "entryModule": "app/app.server.module#AppServerModule"
-    },
-  "files": [
-    "app.server.ts",
-    "server.ts"
-  ],
-  "include": [
-    "src/**/*.d.ts"
-  ]
+    }
 }

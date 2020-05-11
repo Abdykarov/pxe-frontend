@@ -128,7 +128,7 @@
                     "options": {
                         "sourceMap": false,
                         "outputPath": "dist/server",
-                        "main": "server.ts",
+                        "main": "src/app.server.ts",
                         "tsConfig": "src/tsconfig.server.json"
                     }
                 },
@@ -261,6 +261,8 @@
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true,
+                            "browserTarget": "app:build:production",
+                            "serverTarget": "app:server:production",
                             "fileReplacements": [
                                 {
                                     "replace": "src/assets/configurations/config.js",
