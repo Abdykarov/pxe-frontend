@@ -27,12 +27,10 @@
     "test": "ng test app",
     "test:watch": "ng test --watch=true app",
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
-    "build:ssr_bak": "yarn build:client-and-server-bundles && yarn webpack:server",
+    "build:ssr_bak": "yarn build:client-and-server-bundles_bak && yarn webpack:server",
     "build:client-and-server-bundles_bak": "yarn build:app && ng run app:server",
     "dev:ssr": "ng run app:serve-ssr",
     "serve:ssr": "node dist/server/main.js",
-    "build:client-and-server-bundles": "yarn build:app && ng run app:server",
-    "build:ssr": "yarn build:client-and-server-bundles && yarn webpack:server",
     "build:ssr-new": "ng build --prod && ng run app:server:production",
     "prerender": "ng run app:prerender"
   },
