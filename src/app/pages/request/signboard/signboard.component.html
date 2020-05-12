@@ -1,0 +1,49 @@
+<ng-template #headerTemplate>
+    <div class="text-center mt-4 mb-2">
+        <p class="mb-2">V následujících krocích budeme potřebovat několik informací od vás, abychom vám mohli
+            nabídnout ty nejlepší nabídky. Pro vyplnění všech
+            potřebných informací vám doporučujeme připravit si následující dokumenty.
+        </p>
+    </div>
+</ng-template>
+
+<pxe-layout-container pageTitle="Nové odběrné místo">
+    <div class="row mb-6">
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-xl-10 offset-xl-1 text-center">
+            <img
+                src="/assets/images/illustrations/sign.svg"
+                class="mb-2"
+                alt="sign">
+            <h2 *ngIf="showWelcome"
+                class="mb-0">
+                Vítejte v aplikaci PARC4U.
+            </h2>
+        </div>
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <pxe-list-of-notifications
+                [headerTemplate]="headerTemplate"
+                [notifications]="notifications"
+                [type]="typeOfListCheck"
+                customLinkClass="ml-xl-6"
+                customColClass="col-12 col-xl-10 offset-xl-1"
+                customRowClass="text-xl-left text-center">
+            </pxe-list-of-notifications>
+            <p class="text-center">
+                Je-li vše jasné pokračujte tlačítkem "Vyplnit".
+            </p>
+            <div class="text-center">
+                <lnd-button
+                    type="primary"
+                    (action)="routerToNextStep($event);"
+                    label="Vyplnit">
+                </lnd-button>
+            </div>
+        </div>
+    </div>
+</pxe-layout-container>
+
