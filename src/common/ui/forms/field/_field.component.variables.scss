@@ -29,9 +29,9 @@ $input-textarea-min-height:          175px;
 $input-textarea-line-height:         24px;
 
 $custom-control-gutter:                                  0;
-$custom-control-indicator-top:                           3px;
-$custom-control-indicator-size:                          ( 15 / 16 ) + rem;
-$custom-control-indicator-size-px:                       15px;
+$custom-control-indicator-top:                           2px;
+$custom-control-indicator-size:                          ( 16 / 16 ) + rem;
+$custom-control-indicator-size-px:                       16px;
 $custom-control-indicator-bg:                            $white;
 $custom-control-indicator-box-shadow:                    none;
 $custom-control-indicator-bg-interactive-warning:        rgba($warning-lighten, .3);
@@ -58,12 +58,12 @@ $custom-control-label-disabled-color:                    rgba($input-color, .4);
 
 $custom-control-spacer-x:                     ( $spacer * 2 );
 
-$custom-radio-filling-size:                   7px;
+$custom-radio-filling-size:                   8px;
 $custom-radio-indicator-border-radius:        50%;
 $custom-radio-indicator-icon-checked:         none;
 $custom-radio-control-indicator-checked-bg:   $font-text;
 
-$custom-checkbox-icon-size:                   9px;
+$custom-checkbox-icon-size:                   10px;
 $custom-checkbox-indicator-border-radius:     3px;
 $custom-checkbox-indicator-icon-checked:      none;
 
