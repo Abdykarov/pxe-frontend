@@ -1,10 +1,13 @@
+/***************************************************************************************************
+ * Load `$localize` onto the global scope - used if i18n tags appear in Angular templates.
+ */
+import '@angular/localize/init';
 import 'zone.js/dist/zone-node';
 import {enableProdMode} from '@angular/core';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
+import 'cross-fetch/polyfill';
 import { join } from 'path';
-import { AppServerModule } from './src/app.server';
-import { APP_BASE_HREF } from '@angular/common';
 import { existsSync, readFileSync } from 'fs';
 
 const server = express();
@@ -36,6 +39,8 @@ global['navigator'] = win.navigator;
 global['HTMLAnchorElement'] = () => null;
 
 enableProdMode();
+
+import { AppServerModule } from './src/app.server';
 
 server.engine('html', ngExpressEngine({
     bootstrap: AppServerModule,
@@ -78,11 +83,9 @@ server.get('*', (req, res) => {
     return res.sendFile(join(APP_FOLDER, 'index.html'));
 });
 
-const port = process.env.PORT || 4000;
-
 // Start up the Node server
-server.listen(port, () => {
-    console.log(`Node Express server listening on http://localhost:${port}`);
+server.listen(PORT, () => {
+    console.log(`Node Express server listening on http://localhost:${PORT}`);
 });
 
 export * from './src/app.server';
