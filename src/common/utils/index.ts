@@ -23,3 +23,5 @@ export * from './validators/eic-validator.fnc';
 export * from './validators/is-possible-integer.fnc';
 export * from './element-in-viewport.fnc';
 export * from './process-error-scroll.fnc';
+export * from './remove-html-from-text.fnc';
+export * from './truncate-text.fnc';

@@ -6,7 +6,6 @@ export interface IQuestion {
     shortContent: string;
     fullContent?: string;
     oneOfMostVisited?: boolean;
-    seoDescription?: string;
     seoKeywords?: string;
 }
 

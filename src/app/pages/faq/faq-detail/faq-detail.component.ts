@@ -25,6 +25,10 @@ import {
     IQuestion,
     ITagConfigItem,
 } from 'src/app/services/model/faq.model';
+import {
+    removeHtmlFromText,
+    truncateText,
+} from 'src/common/utils';
 
 @Component({
     selector: 'lnd-faq-detail',
@@ -32,7 +36,8 @@ import {
     styleUrls: ['./faq-detail.component.scss'],
 })
 export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
-    private countOfNextQuestions = 3;
+    private readonly countOfNextQuestions = 3;
+    private readonly maxLengthOFMetaDescription = 150;
     public activeQuestion: IQuestion = null;
     public activeTagLabel = '';
 
@@ -67,14 +72,14 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
                     this.titleService.setTitle(this.activeQuestion.header);
                     this.metaService.updateTag({
                         name: 'description',
-                        content: this.activeQuestion.seoDescription,
+                        content: R.pipe(
+                            removeHtmlFromText,
+                            R.curry(truncateText)(150)('...'),
+                        )(this.activeQuestion.shortContent),
                     });
                     this.metaService.updateTag({
                         name: 'keywords',
-                        content: [
-                            ...SEO.META_KEYWORDS.LANDING_PAGE,
-                            this.activeQuestion.seoKeywords,
-                        ].toString(),
+                        content: this.activeQuestion.seoKeywords,
                     });
                     this.cd.markForCheck();
                 });
@@ -96,5 +101,4 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
         ([firstGroup, secondGroup]) => ([this.sortFnc(firstGroup), this.sortFnc(secondGroup)]),
         ([firstGroup, secondGroup]) => [...secondGroup, ...firstGroup],
     )(questions)
-
 }
