@@ -2,9 +2,12 @@ import {
     Component,
     ComponentFactoryResolver,
     ComponentRef,
+    Inject,
     Input,
+    PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
@@ -39,12 +42,14 @@ export class ModalComponent extends AbstractComponent {
         private componentFactoryResolver: ComponentFactoryResolver,
         private modalLoaderService: ModalService,
         private overlayService: OverlayService,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
         this.modalLoaderService.showModal$
             .pipe(
                 takeUntil(this.destroy$),
                 filter(R_.isNotNil),
+                filter(_ => isPlatformBrowser(this.platformId)),
             )
             .subscribe(modal => {
                 if (this.component) {
@@ -53,6 +58,7 @@ export class ModalComponent extends AbstractComponent {
                 if (!this.addModal) {
                     return;
                 }
+                const offsetY = window.scrollY;
                 const componentToLoad = R.is(String, modal.component) ?
                     this.modalLoaderService.loadModalComponent(modal.component) : modal.component;
                 const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentToLoad);
@@ -70,16 +76,16 @@ export class ModalComponent extends AbstractComponent {
                     )
                     .subscribe();
                 this.modalLoaderService.closeModal$.subscribe(_ => {
-                    this.closeModal(modal);
+                    this.closeModal(modal, null, offsetY);
                 });
                 this.component.instance.closeModal.subscribe((val) => {
-                    this.closeModal(modal, val);
+                    this.closeModal(modal, val, offsetY);
                 });
                 this.component.changeDetectorRef.detectChanges();
         });
     }
 
-    private closeModal = (modal, val = null) => {
+    private closeModal = (modal, val = null, offsetY = null) => {
         this.modalLoaderService.setCloseModalData({
             modalType: modal.modalType,
             confirmed: val,
@@ -91,6 +97,9 @@ export class ModalComponent extends AbstractComponent {
                 takeUntil(this.destroy$),
             )
             .subscribe();
+        if (offsetY) {
+            setTimeout(() => window.scrollBy(0, offsetY));
+        }
     }
 
     public destroyComponent = () => {
