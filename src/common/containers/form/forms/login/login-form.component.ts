@@ -35,6 +35,9 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit,
     @Input()
     public wasSentToPhone = false;
 
+    @Input()
+    public reasonForLogoutUser = '';
+
     @Output()
     public reSentAction?: EventEmitter<any> = new EventEmitter<any>();
 

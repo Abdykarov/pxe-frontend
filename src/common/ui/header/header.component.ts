@@ -32,6 +32,9 @@ export class HeaderComponent extends AbstractComponent implements OnInit {
     public publicMenu: DropdownComponent;
 
     @Input()
+    public isLogged = false;
+
+    @Input()
     public user: IJwtPayload = null;
 
     @Input()
@@ -53,7 +56,13 @@ export class HeaderComponent extends AbstractComponent implements OnInit {
     public loginAction: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
+    public logoutAction: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
     public homeRedirect: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
+    public landingPageRedirect: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
     public signUpAction: EventEmitter<any> = new EventEmitter<any>();

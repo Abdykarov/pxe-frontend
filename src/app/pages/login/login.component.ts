@@ -6,17 +6,20 @@ import {
 import {
     ChangeDetectorRef,
     Component,
+    Inject,
+    PLATFORM_ID,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import {
     Meta,
     Title,
 } from '@angular/platform-browser';
 
+import * as R from 'ramda';
 import {
     map,
     takeUntil,
 } from 'rxjs/operators';
-
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
@@ -24,17 +27,20 @@ import {
     ROUTES,
     SEO,
 } from 'src/app/app.constants';
+import { CookiesService } from 'src/app/services/cookies.service';
 import {
     formFieldsLogin,
     LOGIN_STATE,
 } from './config';
-import { ILoginResponse } from 'src/app/services/model/auth.model';
 import {
     IChangePassword,
     IConfirmationCode,
     ILoginState,
 } from './login.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
+import { ILoginResponse } from 'src/app/services/model/auth.model';
+import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
+import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import {
     IUserLogin,
     LANDING_PAGE,
@@ -60,19 +66,28 @@ export class LoginComponent extends AbstractComponent {
     public passwordWasSent = false;
     public password: string;
     public phoneNumber: string;
+    public reasonForLogoutUser = null;
     public state = ILoginState.LOGIN;
     public wasSentToPhone = false;
 
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
+        private cookieService: CookiesService,
+        private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
         private route: ActivatedRoute,
         private router: Router,
         private userService: UserService,
         private titleService: Title,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
+
+        if (isPlatformBrowser(this.platformId)) {
+            this.reasonForLogoutUser = this.cookieService.get(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
+        }
+
         this.titleService.setTitle(CONSTS.TITLES.LOGIN);
         this.metaService.updateTag({
             name: 'description',
@@ -87,18 +102,14 @@ export class LoginComponent extends AbstractComponent {
             },
         );
 
-        this.route.queryParams
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe(() => {
-                this.state = ILoginState.LOGIN;
-                this.resetErrorsAndLoading();
-                this.passwordWasSent = false;
-            });
+        this.router.routeReuseStrategy.shouldReuseRoute = () => {
+            this.cookieService.remove(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
+            return false;
+        };
     }
 
     public submitChangePassword = (changePassword: IChangePassword) => {
+        this.reasonForLogoutUser = null;
         this.formLoading = true;
 
         this.userService.changePassword(this.password, changePassword.password)
@@ -121,13 +132,14 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public submitResetPassword = ({login}) => {
+        this.reasonForLogoutUser = null;
         this.login = login;
         this.resetPassword(login);
     }
 
     public resetPassword = (login: string) => {
+        this.reasonForLogoutUser = null;
         this.formLoading = true;
-
         this.authService.cleanUserData();
         this.userService.resetPassword(login)
             .pipe(
@@ -152,36 +164,45 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public submitFormLogin = (userLogin: IUserLogin) => {
+        this.reasonForLogoutUser = null;
         this.password = userLogin.password;
         this.formLoading = true;
-        this.authService.login(userLogin)
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe(
-                (loginResponse: ILoginResponse) => {
-                    if (this.authService.passwordChangeRequired()) {
-                        this.state = ILoginState.CHANGE_PASSWORD;
+        this.authService.setActualStateFromOtherTab();
+        const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
+        const nextUserIsCurrent = userLogin.login === R.path(['currentUserValue', 'userLogin'], this.authService);
+        if (isLogged && !nextUserIsCurrent) {
+            this.authService.homeRedirect(false, ILogoutRequired.LOGIN);
+        } else {
+            this.authService.login(userLogin)
+                .pipe(
+                    takeUntil(this.destroy$),
+                )
+                .subscribe(
+                    (loginResponse: ILoginResponse) => {
+                        if (this.authService.passwordChangeRequired()) {
+                            this.state = ILoginState.CHANGE_PASSWORD;
+                            this.resetErrorsAndLoading();
+                            this.cd.markForCheck();
+                            return;
+                        }
+                        if (this.authService.needSmsConfirm()) {
+                            this.state = ILoginState.SEND_SMS;
+                            this.phoneNumber = this.authService.currentUserValue.phoneNumber;
+                            this.resetErrorsAndLoading();
+                            this.cd.markForCheck();
+                            return;
+                        }
+                        this.navigateAfterLogin(loginResponse);
+                    },
+                    error => {
                         this.resetErrorsAndLoading();
-                        this.cd.markForCheck();
-                        return;
-                    }
-                    if (this.authService.needSmsConfirm()) {
-                        this.state = ILoginState.SEND_SMS;
-                        this.phoneNumber = this.authService.currentUserValue.phoneNumber;
-                        this.resetErrorsAndLoading();
-                        this.cd.markForCheck();
-                        return;
-                    }
-                    this.navigateAfterLogin(loginResponse);
-                },
-                error => {
-                    this.resetErrorsAndLoading();
-                    this.handleError(error);
-                });
+                        this.handleError(error);
+                    });
+        }
     }
 
     public submitSupplierLoginSms = (confirmationCode: IConfirmationCode) => {
+        this.reasonForLogoutUser = null;
         this.formLoading = true;
         this.authService.confirmSupplierLoginSms(confirmationCode)
             .pipe(
@@ -199,6 +220,7 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public forgottenPasswordAction = ($event) => {
+        this.reasonForLogoutUser = null;
         $event.preventDefault();
         this.resetErrorsAndLoading();
         if (this.authService.isLogged()) {
@@ -207,20 +229,21 @@ export class LoginComponent extends AbstractComponent {
                     takeUntil(this.destroy$),
                 ).subscribe(
                 () => {
-                        this.state = ILoginState.RESET;
-                        this.cd.markForCheck();
-                    },
+                    this.state = ILoginState.RESET;
+                    this.cd.markForCheck();
+                },
                 () => {
-                        this.state = ILoginState.RESET;
-                        this.cd.markForCheck();
-                    },
-                );
+                    this.state = ILoginState.RESET;
+                    this.cd.markForCheck();
+                },
+            );
         } else {
             this.state = ILoginState.RESET;
         }
     }
 
     public sendSupplierLoginSms() {
+        this.reasonForLogoutUser = null;
         this.formLoading = true;
         this.authService.sendSupplierLoginSms()
             .pipe(
@@ -238,6 +261,7 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public resendSupplierLoginSms = ($event) => {
+        this.reasonForLogoutUser = null;
         $event.preventDefault();
         this.sendSupplierLoginSms();
     }
@@ -259,7 +283,7 @@ export class LoginComponent extends AbstractComponent {
             case LANDING_PAGE.DASHBOARD:
                 return ROUTES.ROUTER_DASHBOARD;
             case LANDING_PAGE.NEW_SUPPLY_POINT:
-                return ROUTES.ROUTER_REQUEST_SUPPLY_POINT;
+                return ROUTES.ROUTER_REQUEST_SIGNBOARD;
             case LANDING_PAGE.OFFERS:
                 return ROUTES.ROUTER_SUPPLY_OFFER_POWER;
             case LANDING_PAGE.WAITING_FOR_PAYMENT:
@@ -268,11 +292,16 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public navigateAfterLogin = (loginResponse: ILoginResponse, changedPassword = false) => {
-        const extras: NavigationExtras = {};
+        const extras: NavigationExtras = {
+            state: {
+                afterLogin: true,
+            },
+        };
 
         if (changedPassword) {
             extras.state = {
                 showBanner: true,
+                ...extras.state,
             };
         }
 

@@ -43,6 +43,7 @@ export class LandingComponent extends AbstractComponent {
     public items = carouselItems;
     public interval = interval;
     public isMoreThanXlResolution = false;
+    public showStickyButton = true;
 
     public resizeEvent$ = fromEvent(window, 'resize')
         .pipe(
@@ -74,5 +75,10 @@ export class LandingComponent extends AbstractComponent {
     public submitForm = (values) => {
         this.formLoading = true;
         alert('Formulář odeslán');
+    }
+
+    public click = (evt) => {
+        evt.preventDefault();
+        console.log('click');
     }
 }

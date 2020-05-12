@@ -7163,6 +7163,11 @@ latest-version@^3.0.0:
   dependencies:
     package-json "^4.0.0"
 
+latinize@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/latinize/-/latinize-0.4.1.tgz#1b82d6e0687f2722dfdf67a19302fc345a772738"
+  integrity sha512-A4miz97dNF+EbNgQdayPAEtud5eRpCGPwJy7JQFD1hBQcOzOgBS4m721zoREuPqpz1yKm8hYT2ANlh7pirapsA==
+
 lcid@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/lcid/-/lcid-1.0.0.tgz#308accafa0bc483a3867b4b6f2b9506251d1b835"

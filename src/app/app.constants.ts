@@ -26,14 +26,15 @@ export const CONSTS = {
         CALENDAR: 'YYYY-MM-DD[T]HH:mm',
         SHORT: 'YYYY-MM-DD',
     },
-    DEFAULT_EXPIRATION: 700000,
+    COOKIE_TEMPORARY_EXPIRATION: 10000,
+    DEFAULT_EXPIRATION: 600100,
     DEFAULT_DEPOSIT_PAYMENT_TYPE_ID: 'Prikaz',
     EXPORT: {
         FILE_NAME: 'export',
         TYPE: 'csv',
     },
     EXAMPLE_OF_IMPORT_OFFER_FILE: {
-        PATH: '/assets/csv/example-import-offers.csv',
+        PATH: '/assets/csv/example_import_offers.csv',
         FILE_NAME: 'example_import_offers.csv',
     },
     IMPORT_ERROR_CODES: {
@@ -52,6 +53,7 @@ export const CONSTS = {
     MONTHS_TO_CONTRACT_END: 2,
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
     MODAL_TYPE: {
+        MORE_TABS: 'moreTabs',
         CONFIRM_DELETE_OFFER: 'confirmDeleteOffer',
         CONFIRM_CANCEL_OFFER: 'confirmCancelOffer',
         CONFIRM_BACK_IMPORT: 'confirmBackImportOffer',
@@ -85,6 +87,7 @@ export const CONSTS = {
         RESULT : 'result',
         SECURED : 'secured',
         SECURING_YOUR_DATA : 'securing-your-data',
+        SIGNBOARD: 'signboard',
         SIGN_UP : 'sign-up',
         SUPPLY_POINT : 'supply-point',
         SUPPLY_POINT_SELECTION : 'supply-point-selection',
@@ -102,6 +105,17 @@ export const CONSTS = {
         DONT_REFRESH_TIME_IN_MINUTES: 2,
     },
     START_STICKER_HEADER: 0,
+    STORAGE_HELPERS: {
+        LAST_URL: 'last_url',
+        ACTIVE_TAB: 'active_tab',
+        USER: 'user',
+        REASON_FOR_LOGOUT_USER: 'reason_for_logout_user',
+    },
+    REASON_FOR_LOGOUT_USER: {
+        BY_SELF: 'Byl jste úspěšně odhlášen',
+        UNAUTHORIZED: 'Došlo k odhlášení z důvodu neaktivity',
+    },
+    TIME_TO_SHOW_USER_LOGOUT_BANNER: 300,
     VALIDATORS: {
         ADULTHOOD_AGE: 18,
         MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION: 10,
@@ -164,6 +178,7 @@ export const ROUTES = {
     ROUTER_REQUEST_OFFER_SELECTION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.OFFER_SELECTION}`,
     ROUTER_REQUEST_PAYMENT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.PAYMENT}`,
     ROUTER_REQUEST_RECAPITULATION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.RECAPITULATION}`,
+    ROUTER_REQUEST_SIGNBOARD: `/${CONSTS.PATHS.SECURED}//${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.SIGNBOARD}`,
     ROUTER_REQUEST_SUPPLY_POINT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.SUPPLY_POINT}`,
     ROUTER_REQUEST_RESULT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUEST}/${CONSTS.PATHS.RESULT}`,
     ROUTER_REQUESTS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.REQUESTS}`,
@@ -525,6 +540,10 @@ export const REGIONS: Array<IOption> = [
         'key': 'Zlínský kraj',
     },
 ];
+
+export const OPERATIONS_WITHOUT_TOKEN = [];
+
+export const OPERATIONS_IGNORE_ACCESS_DENIED_EXCEPTION = [];
 
 export const OPERATIONS_WITHOUT_SCROLL_ON_ERRORS = [
     'getSupplyPointGlobalStatistics',

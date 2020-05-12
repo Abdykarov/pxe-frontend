@@ -8,6 +8,7 @@ export * from './any-to-string';
 export * from './includes-both-tariffs.fnc';
 export * from './is-router-link.fnc';
 export * from './is-user-name.fnc';
+export * from './normalize-string.fnc';
 export * from './parse-graphql-errors.fnc';
 export * from './parse-rest-erros.fnc';
 export * from './parse-violation.fnc';

@@ -11,8 +11,22 @@
 </div>
 <lnd-banner-ui
     *ngIf="showBanner"
-    [data]="bannerObj"
+    [data]="{
+        linkValue: '#',
+        text: 'Vaše heslo bylo úspěšně změněno.',
+        linkType: '',
+        title: ''
+    }"
     buttonLabel=""
     [showButtonLabel]="false"
 ></lnd-banner-ui>
+<lnd-banner-ui
+    *ngIf="logoutRequired"
+    [data]="{
+        text: 'Jste přihlášen jako '  + authService.currentUserValue.userLogin + (logoutRequired === LogoutRequired.LOGIN ?
+        ', pro přihlášení pod jiným uživatelem se prosím odhlašte.' : ', pro registraci se prosím odhlašte.')
+    }"
+    [showButtonLabel]="false"
+></lnd-banner-ui>
+<pxe-logout-information></pxe-logout-information>
 <ng-content></ng-content>

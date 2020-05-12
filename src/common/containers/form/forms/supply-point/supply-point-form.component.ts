@@ -239,16 +239,16 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                             .subscribe(formValues => {
                                 try {
                                     const { email, supplyPointForm } = formValues;
-                                    this.existsPartialSupplyPointValue = false;
-                                    this.supplyPointLocalStorageService.removeSupplyPoint();
+                                    this.form.setValue(supplyPointForm);
+                                    this.resetFormError(false);
                                     if (email === this.authService.currentUserValue.email) {
                                         if (supplyPointForm.expirationDate) {
                                             supplyPointForm.expirationDate = new Date(supplyPointForm.expirationDate);
                                         }
 
-                                        this.form.setValue(supplyPointForm);
-                                        this.resetFormError(false);
                                     }
+                                    this.existsPartialSupplyPointValue = false;
+                                    this.supplyPointLocalStorageService.removeSupplyPoint();
                                 } catch (e) {}
                             });
 
