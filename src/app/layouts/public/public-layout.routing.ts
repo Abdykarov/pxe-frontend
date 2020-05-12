@@ -87,7 +87,9 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.PATTERNS_OF_CONTRACTS + '/:subjectType/:commodityType',
-                loadChildren: () => import('../../pages/patterns-of-contracts/patterns-of-contracts.module').then(m => m.PatternsOfContractsModule),
+                loadChildren: () => import('../../pages/patterns-of-contracts/patterns-of-contracts.module').then(
+                    m => m.PatternsOfContractsModule,
+                ),
                 data: {
                     isPublic: true,
                     isSimpleFooter: false,

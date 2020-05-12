@@ -1,4 +1,12 @@
-import { EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, Directive } from '@angular/core';
+import {
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
+    SimpleChanges,
+    Directive,
+} from '@angular/core';
 import {
     FormArray,
     FormBuilder,
@@ -20,7 +28,6 @@ import {
     IForm,
 } from './models/form-definition.model';
 
-@Directive()
 export class AbstractFormComponent extends AbstractComponent implements OnInit, OnChanges {
     @Input()
     public formFields: IForm;

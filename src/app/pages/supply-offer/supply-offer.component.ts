@@ -150,7 +150,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                 this.commodityType$.next(this.commodityType);
             });
 
-        combineLatest(this.codeLists$, this.offers$, this.commodityType$)
+        combineLatest([this.codeLists$, this.offers$, this.commodityType$])
             .pipe(
                 takeUntil(this.destroy$),
                 filter(([codeLists, offers, commodityType]) => !!(codeLists && offers)),

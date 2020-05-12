@@ -204,10 +204,10 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         this.setContractEndFields();
         this.loadCodeLists();
 
-        combineLatest(
+        combineLatest([
             this.suppliers$,
             this.codeLists$,
-        )
+        ])
             .pipe(takeUntil(this.destroy$))
             .subscribe(([suppliers, codeLists]) => {
                 if (!R.isEmpty(suppliers) && !R.isEmpty(codeLists)) {

@@ -55,7 +55,9 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.SUPPLY_POINT_SELECTION,
-                loadChildren: () => import('../../pages/supply-point-selection/supply-point-selection.module').then(m => m.SupplyPointSelectionModule),
+                loadChildren: () => import('../../pages/supply-point-selection/supply-point-selection.module').then(
+                    m => m.SupplyPointSelectionModule,
+                ),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
@@ -123,7 +125,9 @@ const routes = [
             },
             {
                 path: CONSTS.PATHS.CHANGE_PASSWORD,
-                loadChildren: () => import('../../pages/user-change-password/user-change-password.module').then(m => m.UserChangePasswordModule),
+                loadChildren: () => import('../../pages/user-change-password/user-change-password.module').then(
+                    m => m.UserChangePasswordModule,
+                ),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
@@ -161,7 +165,9 @@ const routes = [
             {
                 path: CONSTS.PATHS.SUPPLIER_CONCLUDED_CONTRACTS + '/:commodityType',
                 loadChildren:
-                    () => import('../../pages/supplier-concluded-contracts/supplier-concluded-contracts.module').then(m => m.SupplierConcludedContractsModule),
+                    () => import('../../pages/supplier-concluded-contracts/supplier-concluded-contracts.module').then(
+                        m => m.SupplierConcludedContractsModule,
+                    ),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },

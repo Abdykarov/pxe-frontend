@@ -103,7 +103,7 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                 this.cd.markForCheck();
             });
 
-        combineLatest(this.commodityType$, this.numberOfPages$)
+        combineLatest([this.commodityType$, this.numberOfPages$])
             .pipe(
                 switchMap(([commodityType, numberOfPage]) => {
                     this.globalError = [];

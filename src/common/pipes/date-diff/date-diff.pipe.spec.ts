@@ -13,7 +13,7 @@ describe('DateDiffPipe', () => {
             ],
         });
 
-        pipe = TestBed.get(DateDiffPipe);
+        pipe = TestBed.inject(DateDiffPipe);
     });
 
     it('2019-02-30T22:59:12.133Z diff 2019-03-31T22:59:12.133Z is 1', () => {

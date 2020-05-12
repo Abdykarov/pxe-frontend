@@ -110,7 +110,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                     this.loadingSupplyPoint = false;
                     this.supplyPoint = supplyPoint;
                     this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
-                    return combineLatest(
+                    return combineLatest([
                         supplyPoint.subject.code === this.subjectType.SUBJECT_TYPE_INDIVIDUAL ?
                             this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.INFORMATION)
                                 .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)) :
@@ -122,7 +122,7 @@ export class ContractComponent extends AbstractComponent implements OnInit {
                             ),
                         this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.CONTRACT)
                             .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)),
-                    );
+                    ]);
                 }),
                 takeUntil(this.destroy$),
             )

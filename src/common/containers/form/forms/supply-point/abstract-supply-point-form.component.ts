@@ -2,7 +2,11 @@ import {
     FormBuilder,
     Validators,
 } from '@angular/forms';
-import { OnChanges, OnInit, SimpleChanges, Directive } from '@angular/core';
+import {
+    OnChanges,
+    OnInit,
+    SimpleChanges,
+} from '@angular/core';
 
 import * as R from 'ramda';
 
@@ -24,7 +28,6 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { ICommodityTypeFields } from 'src/common/containers/form/models/form-definition.model';
 
-@Directive()
 export class AbstractSupplyPointFormComponent extends AbstractFormComponent implements OnInit, OnChanges {
     public allowedFields: ICommodityTypeFields;
 
