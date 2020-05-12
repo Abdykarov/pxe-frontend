@@ -6,6 +6,7 @@ import { ButtonModule } from 'src/common/ui/button/button.module';
 import { IndicatorModule } from 'src/common/ui/indicator/indicator.module';
 import { PipesModule } from 'src/common/pipes/pipes.module';
 import { SupplyPointOfferComponent } from './supply-point-offer.component';
+import { TooltipModule } from '../tooltip/tooltip.module';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import { SupplyPointOfferComponent } from './supply-point-offer.component';
         CommonModule,
         IndicatorModule,
         PipesModule,
+        TooltipModule,
     ],
 })
 export class SupplyPointOfferModule {}

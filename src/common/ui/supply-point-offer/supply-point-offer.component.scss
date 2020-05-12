@@ -42,7 +42,7 @@
 		color: inherit;
 		border-radius: $border-radius;
 		box-shadow: 0 2px 5px rgba($box-shadow-color, .16);
-		overflow: hidden;
+		//overflow: hidden;
 		pointer-events: none;
 	}
 
@@ -198,6 +198,10 @@
 	&__title {
 		display: block;
 		margin-bottom: ( $spacer * .75 );
+
+		&--with-tooltip {
+			position: relative;
+		}
 	}
 
 	&__info-icon {
@@ -208,6 +212,7 @@
 	&__value-box {
 		display: flex;
 		flex-direction: column;
+		align-items: flex-start;
 		margin-bottom: ( $spacer * 1.5 );
 		margin-right: $spacer;
 

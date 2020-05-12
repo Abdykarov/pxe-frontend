@@ -42,11 +42,20 @@
                     <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
                         <span class="supply-point-offer__title-label">{{isOwner ? 'Váš stávající dodavatel' : 'Dodavatel'}}</span>
                         <span class="
-                                supply-point-offer__title
-                                mb-0
-                                text-break">
-                            {{supplyPointOffer.supplier?.name}}&nbsp;
-                            <!--<span class="icon icon&#45;&#45;info supply-point-offer__info-icon"></span>-->
+                                supply-point-offer__title supply-point-offer__title--with-tooltip
+                                mb-0">
+                            <span class="text-break">{{supplyPointOffer.supplier?.name}}</span>
+                            <!-- <span class="icon icon--info supply-point-offer__info-icon"></span> -->
+                            <ng-template #tooltipBottom let-toggle="toggle">
+                                <span (click)="toggle()"><span class="icon icon--info"></span></span>
+                            </ng-template>
+                            <lnd-tooltip 
+                                [actionTemplate]="tooltipBottom"
+                                direction="bottom"
+                                customClass="ml-2 tooltip-info">
+                                Info o dodavateli, kterou platíte po stanovené období.<br>
+                                <a href="#">Více informací</a>
+                            </lnd-tooltip>
                         </span>
                     </div>
                 </div>
