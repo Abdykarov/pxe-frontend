@@ -2,21 +2,21 @@
  * Load `$localize` onto the global scope - used if i18n tags appear in Angular templates.
  */
 import '@angular/localize/init';
-import 'zone.js/dist/zone-node';
-import {enableProdMode} from '@angular/core';
+import { enableProdMode } from '@angular/core';
 import { ngExpressEngine } from '@nguniversal/express-engine';
-import * as express from 'express';
+import 'zone.js/dist/zone-node';
+
 import 'cross-fetch/polyfill';
+import * as express from 'express';
+import { createWindow } from 'domino';
 import { join } from 'path';
-import { existsSync, readFileSync } from 'fs';
+import { readFileSync } from 'fs';
 
 const server = express();
-
 const PORT = process.env.PORT || 80;
 const DIST_FOLDER = join(process.cwd(), 'dist');
 const APP_FOLDER = join(DIST_FOLDER, 'app');
 // ssr DOM
-import { createWindow } from 'domino';
 
 // index from browser build!
 const template = readFileSync(join(DIST_FOLDER, 'app', 'index.html')).toString();
@@ -40,6 +40,7 @@ global['HTMLAnchorElement'] = () => null;
 
 enableProdMode();
 
+// Musi byt pod global['window'] --> jinak window undefined u file replacmentu
 import { AppServerModule } from './src/app.server';
 
 server.engine('html', ngExpressEngine({

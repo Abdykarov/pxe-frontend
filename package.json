@@ -23,12 +23,11 @@
     "start:500": "yarn start app-500",
     "start:mock": "yarn start -c mock --proxy-config proxy-mock.conf.json",
     "start:mock-docker": "yarn start -c mock --proxy-config proxy-mock-docker.conf.json",
-    "start:ssr": "nodemon dist/server.js",
+    "start:ssr": "node dist/server/main.js",
     "test": "ng test app",
     "test:watch": "ng test --watch=true app",
     "build:client-and-server-bundles": "yarn build:app && ng run app:server:production",
     "dev:ssr": "ng run app:serve-ssr",
-    "serve:ssr": "node dist/server/main.js",
     "build:ssr": "yarn build:client-and-server-bundles",
     "prerender": "ng run app:prerender"
   },
