@@ -113,12 +113,12 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
             return;
         }
         this.router.navigate(
-            [ROUTES.ROUTER_REQUEST_SUPPLY_POINT],
+            [ROUTES.ROUTER_REQUEST_SIGNBOARD],
         );
     }
 
     public createSupplyPoint = (event) => {
         event.preventDefault();
-        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
+        this.router.navigate([ROUTES.ROUTER_REQUEST_SIGNBOARD]);
     }
 }
