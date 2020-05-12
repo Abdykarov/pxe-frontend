@@ -5,6 +5,7 @@ import {
 import {
     ChangeDetectorRef,
     Component,
+    OnDestroy,
     OnInit,
 } from '@angular/core';
 
@@ -19,9 +20,11 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from 'src/app/services/auth.service';
 import {
     CODE_LIST_TYPES,
     ROUTES,
+    S_ANALYTICS,
 } from 'src/app/app.constants';
 import { formFields } from 'src/common/containers/form/forms/personal-info/personal-info-form.config';
 import {
@@ -40,6 +43,7 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -75,11 +79,13 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         );
 
     constructor(
+        private authService: AuthService,
         private cd: ChangeDetectorRef,
         public navigateRequestService: NavigateRequestService,
         private personalDataService: PersonalDataService,
         private route: ActivatedRoute,
         private router: Router,
+        private sAnalyticsService: SAnalyticsService,
         private supplyService: SupplyService,
     ) {
         super();
@@ -124,6 +130,19 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             )
             .subscribe(
                 () => {
+                    this.sAnalyticsService.sFormSubmit(personalInfoInput);
+                    this.sAnalyticsService.sendWebData(
+                        {},
+                        {
+                            email: this.authService.currentUserValue.email,
+                        },
+                        {},
+                        {
+                            ACTION: S_ANALYTICS.ACTIONS.RECAPITULATION,
+                            personalDataAction,
+                            supplyPoint: this.supplyPoint,
+                        },
+                    );
                     this.router.navigate(
                         [ROUTES.ROUTER_REQUEST_CONTRACT], {
                         queryParams: {

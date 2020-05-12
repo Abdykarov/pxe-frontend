@@ -66,7 +66,10 @@
                     <pxe-supply-point-offer
                         (action)="saveContract(supplyPointOffer)"
                         *ngFor="let supplyPointOffer of supplyPointOffers"
-                        [supplyPointOffer]="supplyPointOffer">
+                        [supplyPointOffer]="supplyPointOffer"
+                        (mouseenter)="sAnalyticsService.sFormFocus($event);sAnalyticsService.sFormChange(supplyPointOffer)"
+                        (mouseleave)="sAnalyticsService.sFormBlur($event)"
+                    >
                     </pxe-supply-point-offer>
                 </div>
             </ng-container>

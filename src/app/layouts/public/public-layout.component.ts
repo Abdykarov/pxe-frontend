@@ -7,6 +7,7 @@ import {
     Component,
     HostListener,
     Inject,
+    PLATFORM_ID,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
@@ -24,7 +25,9 @@ import {
     CONSTS,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
+import { CookiesService } from 'src/app/services/cookies.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
@@ -50,26 +53,28 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
 
     constructor(
         protected apollo: Apollo,
-        protected authService: AuthService,
+        public authService: AuthService,
+        protected cookieService: CookiesService,
         private cd: ChangeDetectorRef,
         protected overlayService: OverlayService,
         protected route: ActivatedRoute,
         protected router: Router,
+        protected sAnalyticsService: SAnalyticsService,
         protected scrollToService: ScrollToService,
         @Inject(DOCUMENT) private document: any,
+        @Inject(PLATFORM_ID) public platformId: string,
     ) {
         super(
             apollo,
             authService,
+            cookieService,
             overlayService,
+            platformId,
             route,
             router,
+            sAnalyticsService,
             scrollToService,
         );
-
-        if (this.authService.isLogged()) {
-            this.authService.logoutForced();
-        }
 
         this.overlayService.getOverlay()
             .pipe(
@@ -85,4 +90,6 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
     public supplierChange = () => this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.SUPPLIER_CHANGE);
 
     public coverageMap = () => this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.MAP_COVERAGE);
+
+    public logout = () => this.authService.logoutForced(false);
 }

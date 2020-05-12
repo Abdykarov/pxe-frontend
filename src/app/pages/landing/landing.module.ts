@@ -6,6 +6,7 @@ import { CarouselContainerModule } from 'src/common/containers/carousel-containe
 import { LandingComponent } from './landing.component';
 import { LandingRoutingModule } from './landing.routing';
 import { MapCoverageContainerModule } from 'src/common/containers/map-coverage-container/map-coverage-container.module';
+import { PipesModule } from 'src/common/pipes/pipes.module';
 import { RegistrationFormModule } from 'src/common/containers/form/forms/registration/registration-form.module';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { RegistrationFormModule } from 'src/common/containers/form/forms/registr
         CommonModule,
         LandingRoutingModule,
         MapCoverageContainerModule,
+        PipesModule,
         RegistrationFormModule,
     ],
 })
