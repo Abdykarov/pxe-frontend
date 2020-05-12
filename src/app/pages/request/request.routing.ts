@@ -18,8 +18,15 @@ const routes: Routes = [
         children: [
             {
                 path: CONSTS.PATHS.EMPTY,
-                redirectTo: CONSTS.PATHS.SUPPLY_POINT,
+                redirectTo: CONSTS.PATHS.SIGNBOARD,
                 pathMatch: 'full',
+            },
+            {
+                path: CONSTS.PATHS.SIGNBOARD,
+                loadChildren: '../../pages/request/signboard/signboard.module#SignboardModule',
+                resolve: {
+                    refreshToken: RefreshTokenResolver,
+                },
             },
             {
                 path: CONSTS.PATHS.CONTRACT,
