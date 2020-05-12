@@ -26,11 +26,10 @@
     "start:ssr": "nodemon dist/server.js",
     "test": "ng test app",
     "test:watch": "ng test --watch=true app",
-    "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
     "build:client-and-server-bundles": "yarn build:app && ng run app:server:production",
     "dev:ssr": "ng run app:serve-ssr",
     "serve:ssr": "node dist/server/main.js",
-    "build:ssr": "yarn build:client-and-server-bundles && webpack:server",
+    "build:ssr": "yarn build:client-and-server-bundles",
     "prerender": "ng run app:prerender"
   },
   "private": true,
