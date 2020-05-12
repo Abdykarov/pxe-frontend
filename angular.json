@@ -128,8 +128,21 @@
                     "options": {
                         "sourceMap": false,
                         "outputPath": "dist/server",
-                        "main": "src/app.server.ts",
+                        "main": "server.ts",
                         "tsConfig": "src/tsconfig.server.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "outputHashing": "media",
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/assets/configurations/config.js",
+                                    "with": "src/assets/configurations/config.prod.js"
+                                }
+                            ],
+                            "sourceMap": false,
+                            "optimization": true
+                        }
                     }
                 },
                 "test": {

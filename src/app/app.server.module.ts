@@ -10,9 +10,9 @@ import { AppComponent } from './app.component';
 
 @NgModule({
     imports: [
-    AppModule,
-    ServerModule
-],
+        AppModule,
+        ServerModule,
+    ],
     providers: [
         // Add universal-only providers here
         {

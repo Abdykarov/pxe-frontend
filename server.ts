@@ -1,64 +1,88 @@
-/***************************************************************************************************
- * Load `$localize` onto the global scope - used if i18n tags appear in Angular templates.
- */
-import '@angular/localize/init';
 import 'zone.js/dist/zone-node';
-
+import {enableProdMode} from '@angular/core';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
 import { join } from 'path';
-
 import { AppServerModule } from './src/app.server';
 import { APP_BASE_HREF } from '@angular/common';
-import { existsSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 
-// The Express app is exported so that it can be used by serverless Functions.
-export function app() {
-  const server = express();
-  const distFolder = join(process.cwd(), 'dist/app');
-  const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
+const server = express();
 
-  // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
-  server.engine('html', ngExpressEngine({
+const PORT = process.env.PORT || 80;
+const DIST_FOLDER = join(process.cwd(), 'dist');
+const APP_FOLDER = join(DIST_FOLDER, 'app');
+// ssr DOM
+import { createWindow } from 'domino';
+
+// index from browser build!
+const template = readFileSync(join(DIST_FOLDER, 'app', 'index.html')).toString();
+const win = createWindow(template);
+
+// create configuration
+const configJs = readFileSync(join(DIST_FOLDER, 'app', 'assets', 'configurations', 'config.js')).toString();
+const configString = configJs.substring(
+    configJs.indexOf('= ') + 1,
+    configJs.indexOf(';'),
+);
+const config = JSON.parse(configString);
+win['angularDevstack'] = {};
+win['angularDevstack']['config'] = config.config;
+
+// create global variables
+global['window'] = win;
+global['document'] = win.document;
+global['navigator'] = win.navigator;
+global['HTMLAnchorElement'] = () => null;
+
+enableProdMode();
+
+server.engine('html', ngExpressEngine({
     bootstrap: AppServerModule,
-  }));
+}));
+server.set('view engine', 'html');
+server.set('views', join(DIST_FOLDER, 'app'));
 
-  server.set('view engine', 'html');
-  server.set('views', distFolder);
+// TODO: implement data requests securely
+server.get('/graphql', (req, res) => {
+    res.status(404).send('data requests are not supported');
+});
 
-  // Example Express Rest API endpoints
-  // server.get('/api/**', (req, res) => { });
-  // Serve static files from /browser
-  server.get('*.*', express.static(distFolder, {
-    maxAge: '1y',
-  }));
+// Server static files from /app
+server.get('*.*', express.static(join(DIST_FOLDER, 'app')));
 
-  // All regular routes use the Universal engine
-  server.get('*', (req, res) => {
-    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
-  });
+// All routes are rendered as server side routes use the Universal engine
+server.get('*', (req, res, next) => {
+    // Catch secured routes as normal client side app
+    if (req.originalUrl.indexOf('/secured') === 0) {
+        return next();
+    }
+    res.render('index', {
+        req: req,
+        res: res,
+        providers: [
+            {
+                provide: 'REQUEST',
+                useValue: (req),
+            },
+            {
+                provide: 'RESPONSE',
+                useValue: (res),
+            },
+        ],
+    });
+});
 
-  return server;
-}
+// All routes (without server side routes) are send as normal client side app
+server.get('*', (req, res) => {
+    return res.sendFile(join(APP_FOLDER, 'index.html'));
+});
 
-function run() {
-  const port = process.env.PORT || 4000;
+const port = process.env.PORT || 4000;
 
-  // Start up the Node server
-  const server = app();
-  server.listen(port, () => {
+// Start up the Node server
+server.listen(port, () => {
     console.log(`Node Express server listening on http://localhost:${port}`);
-  });
-}
-
-// Webpack will replace 'require' with '__webpack_require__'
-// '__non_webpack_require__' is a proxy to Node 'require'
-// The below code is to ensure that the server is run only when not requiring the bundle.
-declare const __non_webpack_require__: NodeRequire;
-const mainModule = __non_webpack_require__.main;
-const moduleFilename = mainModule && mainModule.filename || '';
-if (moduleFilename === __filename || moduleFilename.includes('iisnode')) {
-  run();
-}
+});
 
 export * from './src/app.server';
