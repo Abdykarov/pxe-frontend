@@ -12,9 +12,9 @@ import {
     Meta,
     Title,
 } from '@angular/platform-browser';
-import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
 
 import * as R from 'ramda';
+import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
@@ -24,7 +24,6 @@ import {
     SEO,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
-import { SupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/supply-point-form.component';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { IPdfSetting } from './patterns-of-contracts.model';
 
