@@ -153,9 +153,9 @@
         [whispererName]="'address1'">
     </pxe-address-whisperer>
     <pxe-address-whisperer
+        *ngIf="getFieldValue('onlyAddress1')"
         lndSFormDirective
         lndSBiometricsDirective
-        [disabled]="!getFieldValue('onlyAddress1')"
         [error]="formError.address2 || form.controls.address2.errors"
         [formFieldsParentForm]="formFields"
         [label]="isIndividual ? 'Korespondeční adresa' : 'Fakturační adresa'"
