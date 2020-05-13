@@ -4,8 +4,9 @@ import {
 } from '@angular/router';
 import {
     ChangeDetectorRef,
-    Component, ElementRef,
-    OnInit, ViewChild, ViewContainerRef,
+    Component,
+    OnInit,
+    ViewChild,
 } from '@angular/core';
 import {
     Meta,
@@ -114,12 +115,10 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
                     this.navigateToCorrectUrl();
                     return;
                 }
-                if (this.ng2PdfJsViewer) {
-                    const pdfCurrentSetting = this.pdfSetting[this.subjectType][this.commodityType];
-                    this.ng2PdfJsViewer.pdfSrc = pdfCurrentSetting.sourceUrl;
-                    this.ng2PdfJsViewer.downloadFileName = pdfCurrentSetting.downloadName;
-                    this.ng2PdfJsViewer.refresh();
-                }
+                const pdfCurrentSetting = this.pdfSetting[this.subjectType][this.commodityType];
+                this.ng2PdfJsViewer.pdfSrc = pdfCurrentSetting.sourceUrl;
+                this.ng2PdfJsViewer.downloadFileName = pdfCurrentSetting.downloadName;
+                this.ng2PdfJsViewer.refresh();
                 this.cd.markForCheck();
             });
     }
