@@ -4,13 +4,14 @@ import {
 } from '@angular/router';
 import {
     ChangeDetectorRef,
-    Component,
-    OnInit,
+    Component, ElementRef,
+    OnInit, ViewChild, ViewContainerRef,
 } from '@angular/core';
 import {
     Meta,
     Title,
 } from '@angular/platform-browser';
+import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
 
 import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
@@ -22,6 +23,7 @@ import {
     SEO,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
+import { SupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/supply-point-form.component';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { IPdfSetting } from './patterns-of-contracts.model';
 
@@ -31,6 +33,9 @@ import { IPdfSetting } from './patterns-of-contracts.model';
     styleUrls: ['./patterns-of-contracts.component.scss'],
 })
 export class PatternsOfContractsComponent extends AbstractComponent implements OnInit {
+    @ViewChild('ng2PdfJsViewer')
+    public ng2PdfJsViewer: PdfJsViewerComponent;
+
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
     public readonly COMMODITY_TYPE = CommodityTypesLowerCase;
@@ -96,7 +101,6 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
     }
 
     ngOnInit(): void {
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.route.params
             .pipe(
                 takeUntil(this.destroy$),
@@ -109,6 +113,12 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
                     this.subjectType = this.SUBJECT_TYPE.INDIVIDUAL;
                     this.navigateToCorrectUrl();
                     return;
+                }
+                if (this.ng2PdfJsViewer) {
+                    const pdfCurrentSetting = this.pdfSetting[this.subjectType][this.commodityType];
+                    this.ng2PdfJsViewer.pdfSrc = pdfCurrentSetting.sourceUrl;
+                    this.ng2PdfJsViewer.downloadFileName = pdfCurrentSetting.downloadName;
+                    this.ng2PdfJsViewer.refresh();
                 }
                 this.cd.markForCheck();
             });
@@ -127,6 +137,9 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
     }
 
     public navigateToCorrectUrl = () => {
-        this.router.navigate([`${CONSTS.PATHS.PATTERNS_OF_CONTRACTS}/${this.subjectType}/${this.commodityType}`]);
+        this.router.navigate(
+            [
+                `${CONSTS.PATHS.PATTERNS_OF_CONTRACTS}/${this.subjectType}/${this.commodityType}`,
+            ]);
     }
 }
