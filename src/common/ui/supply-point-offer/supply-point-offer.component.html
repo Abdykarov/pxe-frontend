@@ -4,7 +4,8 @@
     <a [href]="data?.benefit?.url" target="_blank">zde</a>.
 </ng-template>
 
-<div class="supply-point-offer"
+<div #supplyPointOfferWrapper
+    class="supply-point-offer"
    [class.supply-point-offer--owner]="isOwner"
    [class.supply-point-offer--not-interactive]="!interactive">
     <div class="row no-gutters">
@@ -51,6 +52,7 @@
                             </ng-template>
                             <lnd-tooltip 
                                 [actionTemplate]="tooltipBottom"
+                                [countPositionBy]="supplyPointOfferWrapper"
                                 direction="bottom"
                                 customClass="ml-2 tooltip-info">
                                 Info o dodavateli, kterou platíte po stanovené období.<br>
