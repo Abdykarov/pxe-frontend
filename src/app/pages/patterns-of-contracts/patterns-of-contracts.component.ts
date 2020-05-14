@@ -6,6 +6,7 @@ import {
     ChangeDetectorRef,
     Component,
     OnInit,
+    ViewChild,
 } from '@angular/core';
 import {
     Meta,
@@ -13,6 +14,7 @@ import {
 } from '@angular/platform-browser';
 
 import * as R from 'ramda';
+import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
@@ -31,6 +33,9 @@ import { IPdfSetting } from './patterns-of-contracts.model';
     styleUrls: ['./patterns-of-contracts.component.scss'],
 })
 export class PatternsOfContractsComponent extends AbstractComponent implements OnInit {
+    @ViewChild('ng2PdfJsViewer')
+    public ng2PdfJsViewer: PdfJsViewerComponent;
+
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
     public readonly COMMODITY_TYPE = CommodityTypesLowerCase;
@@ -96,7 +101,6 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
     }
 
     ngOnInit(): void {
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.route.params
             .pipe(
                 takeUntil(this.destroy$),
@@ -110,6 +114,10 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
                     this.navigateToCorrectUrl();
                     return;
                 }
+                const pdfCurrentSetting = this.pdfSetting[this.subjectType][this.commodityType];
+                this.ng2PdfJsViewer.pdfSrc = pdfCurrentSetting.sourceUrl;
+                this.ng2PdfJsViewer.downloadFileName = pdfCurrentSetting.downloadName;
+                this.ng2PdfJsViewer.refresh();
                 this.cd.markForCheck();
             });
     }
