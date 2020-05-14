@@ -1,7 +1,7 @@
 <ng-template #headerTemplate>
     <div class="text-center mt-4 mb-2">
         <p class="mb-2">V následujících krocích budeme potřebovat několik informací od vás, abychom vám mohli
-            nabídnou ty nejlepší nabídky. Pro vyplnění všech
+            nabídnout ty nejlepší nabídky. Pro vyplnění všech
             potřebných informací vám doporučujeme připravit si následující dokumenty.
         </p>
     </div>
@@ -15,14 +15,14 @@
     </div>
     <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1 text-center">
-            <img 
+            <img
                 src="/assets/images/illustrations/sign.svg"
                 class="mb-2"
                 alt="sign">
             <h2 *ngIf="showWelcome"
                 class="mb-0">
                 Vítejte v aplikaci PARC4U.
-        </h2>
+            </h2>
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
             <pxe-list-of-notifications
@@ -34,12 +34,12 @@
                 customRowClass="text-xl-left text-center">
             </pxe-list-of-notifications>
             <p class="text-center">
-                Je-li vše jasné pokračujte tlačítkem "Vyplnit"
+                Je-li vše jasné pokračujte tlačítkem "Vyplnit".
             </p>
             <div class="text-center">
                 <lnd-button
                     type="primary"
-                    (action)="fillClick($event);"
+                    (action)="routerToNextStep($event);"
                     label="Vyplnit">
                 </lnd-button>
             </div>
