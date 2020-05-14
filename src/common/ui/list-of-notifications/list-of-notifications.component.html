@@ -5,9 +5,10 @@
 </ng-template>
 
 <div class="list-of-notifications">
-    <div class="row mb-2"
-         [ngClass]="customColClass">
-        <ng-container *ngTemplateOutlet="headerTemplate || defaultHeaderTemplate; context: { headerText: headerText }"></ng-container>
+    <div class="row mb-2">
+        <div [ngClass]="customColClass">
+            <ng-container *ngTemplateOutlet="headerTemplate || defaultHeaderTemplate; context: { headerText: headerText }"></ng-container>
+        </div>
     </div>
     <div class="row"
          [ngClass]="customRowClass">
