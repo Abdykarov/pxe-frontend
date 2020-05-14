@@ -42,7 +42,7 @@
     {
         "id":6,
         "tag":"general",
-        "url":"reason-for-payment",
+        "url":"count-price",
         "header":"Jak se počítá celková cena za elektřinu?",
         "seoKeywords": "celková cena, elektřinu, distribuční cena, celkové ceny, dodavatel, silová elektřina, pravidelná záloha, odběrné místo, cena elektřiny, nízký tarif, daň z elektřiny",
         "shortContent":"Je složená z těchto 3 částí:<ol><li>Distribuční cena – tvoří až 60 % z celkové ceny, je pevně daná, dodavatel ji nemůže ovlivnit</li><li>Silová elektřina – pravidelná záloha za odběrné místo + cena elektřiny ve vysokém (VT) a nízkém (NT) tarifu</li><li>Daň z elektřiny</li></ol>"
@@ -85,7 +85,7 @@
     {
         "id":11,
         "tag":"general",
-        "url":"benefits-of-parc4u",
+        "url":"origin",
         "header":"Proč vzniklo PARC4U?",
         "seoKeywords": "přechod, přechod od jednoho dodavatele, energetičtí šmejdi, kulturnost, obchodního prostředí, prověřené dodavatele, férová dodávka energie",
         "shortContent":"<ol><li>Vadilo nám, že přechod od jednoho dodavatele k druhému je velmi administrativně náročný. Proto jsme vytvořili produkt, který je jednoduchý, uživatelsky přívětivý a který bychom sami rádi používali.</li><li>Vadí nám energetičtí šmejdi a jedním z úkolů burzy je kultivovat kulturnost obchodního prostředí. Bereme to vážně a proto v PARC4U najdete jen prověřené dodavatele, kteří se zde zavážou chovat kultivovaně. Nečekají vás žádné skryté kličky a ustanovení ve smlouvách ani žádné triky. Čeká vás pouze férová dodávka energie.</li></ol>",
