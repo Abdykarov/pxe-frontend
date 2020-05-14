@@ -183,7 +183,13 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
 
     public static removeAddressNotFoundUnique = (object: object) => R.pipe(
         R.keys,
-        R.reject(R.endsWith('unique')),
+        R.map((key: string) => {
+            if (R.endsWith(AddressWhispererComponent.UNIQUE_FIELD_NAME_END)(key)) {
+                object[key.split(AddressWhispererComponent.UNIQUE_FIELD_NAME_END)[0]] = object[key];
+            }
+            return key;
+        }),
+        R.reject(R.endsWith(AddressWhispererComponent.UNIQUE_FIELD_NAME_END)),
         R.reduce((acc, key) => ({
             [key]: object[key],
             ...acc,

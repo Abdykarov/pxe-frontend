@@ -250,7 +250,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                                 try {
                                     // tslint:disable-next-line
                                     let { email, supplyPointForm } = formValues;
-                                    this.form.setValue(supplyPointForm);
                                     this.resetFormError(false);
                                     if (email === this.authService.currentUserValue.email) {
                                         if (supplyPointForm.expirationDate) {
