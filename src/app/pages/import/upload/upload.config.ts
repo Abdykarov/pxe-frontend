@@ -9,5 +9,4 @@ export const fileUploaderFactory = (authService: AuthService): FileUploader =>
         url: `${environment.url_api}/v1.0/offer/batch-validate`,
         itemAlias: 'offers',
         headers: transformHttpHeadersToFileUploaderFormat(authService.getAuthorizationHeaders()),
-        filesCustomType: 'text/csv;charset=windows-1250',
     });
