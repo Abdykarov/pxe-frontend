@@ -57,6 +57,7 @@ import { UserService } from 'src/common/graphql/services/user.service';
     styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent extends AbstractComponent {
+    private cleanLogoutReasonBanner = false;
     public login = '';
     public formFieldsLogin = formFieldsLogin;
     public formLoading = false;
@@ -102,10 +103,20 @@ export class LoginComponent extends AbstractComponent {
             },
         );
 
-        this.router.routeReuseStrategy.shouldReuseRoute = () => {
-            this.cookieService.remove(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
-            return false;
-        };
+        this.route.queryParams
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(() => {
+                if (this.cleanLogoutReasonBanner) {
+                    this.cookieService.remove(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
+                    this.reasonForLogoutUser = null;
+                }
+                this.cleanLogoutReasonBanner = true;
+                this.state = ILoginState.LOGIN;
+                this.resetErrorsAndLoading();
+                this.passwordWasSent = false;
+            });
     }
 
     public submitChangePassword = (changePassword: IChangePassword) => {
