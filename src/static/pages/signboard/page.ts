@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { TypeOfList } from 'src/common/ui/list-of-notifications/models/list-of-notifications.model';
 
 import { NewSupplyPointPageConfig } from 'src/static/pages/new-supply-point/config';
 
