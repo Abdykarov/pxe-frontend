@@ -8,13 +8,6 @@ import { NewSupplyPointPageConfig } from 'src/static/pages/new-supply-point/conf
 })
 
 export class SignboardComponent {
-    public notifications = [
-        'Fakturu se současným dodavatelem (jedno jakého data).',
-        'Ověřte způsob výpovědi vaší smlouvy, v případě, že si nebute jistí zanechte přednastavenou hodnotu.',
-        'Pro uzavření smlouvy budete potřebovat váš mobilní telefon.',
-    ];
-    public typeOfListCheck = TypeOfList.CHECKLIST;
-
     constructor(
         public config: NewSupplyPointPageConfig,
     ) {}
