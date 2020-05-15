@@ -16,7 +16,6 @@ import { SignboardRoutingModule } from './signboard-routing.module';
         CommonModule,
         ButtonModule,
         LayoutContainerModule,
-        ListOfNotificationsModule,
         ProgressBarModule,
         SignboardRoutingModule,
     ],
