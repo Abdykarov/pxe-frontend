@@ -28,8 +28,7 @@ export class AddressWhispererService {
     private responseToResult = (resultMapyCz: IResultMapyCZResponse): IAddress => {
         const userData: IUserDataMapyCzResponse = resultMapyCz.userData;
         let address: IAddress = null;
-
-        if ((userData.street || userData.ward) && userData.houseNumber && userData.municipality && userData.zipCode && userData.region) {
+        if ((userData.street || userData.ward) && userData.region) {
             address = {
                 street: userData.street || userData.ward,
                 orientationNumber: userData.streetNumber,
@@ -47,7 +46,7 @@ export class AddressWhispererService {
             params: new HttpParams()
                 .set('count', String(count))
                 .set('phrase', phrase)
-                .set('category', 'address_cz'),
+                .set('category', 'address_cz,street_cz'),
         };
 
         return this.http.get(AddressWhispererService.MAPY_CZ_URL, options)

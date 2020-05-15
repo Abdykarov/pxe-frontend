@@ -13,6 +13,7 @@ import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 export class SupplyPointLocalStorageService {
     private supplyPointSubject$ = new Subject<any>();
     private removeSupplyPointSubject$ = new Subject<any>();
+    public isEdit = false;
 
     constructor(
         private authService: AuthService,
@@ -42,7 +43,7 @@ export class SupplyPointLocalStorageService {
     }
 
     public updateSupplyPoint = (supplyPointForm: object) => {
-        if (supplyPointForm) {
+        if (supplyPointForm && !this.isEdit) {
             localStorage.setItem(
                 CONSTS.LOCAL_STORAGE.SUPPLY_POINT_PARTIAL_FORM,
                 CryptoJS.AES.encrypt(
