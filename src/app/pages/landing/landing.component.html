@@ -20,7 +20,8 @@
                 </div>
             </div>
         </div>
-        <div class="section-video-holder">
+        <div *ngIf="isPlatformBrowser"
+             class="section-video-holder">
             <img
                 *ngIf="!isMoreThanXlResolution"
                 class="video-picture"
