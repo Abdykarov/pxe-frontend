@@ -37,8 +37,7 @@
              [class.order-md-1]="isOwner"
              [class.pt-0]="!isOwner"
              [class.pt-md-4]="!isOwner">
-            <div #rowWithTooltip
-                class="row">
+            <div class="row">
                 <div class="col-12"
                      [class.col-md-6]="!isOwner">
                     <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
@@ -47,17 +46,21 @@
                                 supply-point-offer__title supply-point-offer__title--with-tooltip
                                 mb-0">
                             <span class="text-break">{{supplyPointOffer.supplier?.name}}</span>
-                            <!-- <span class="icon icon--info supply-point-offer__info-icon"></span> -->
                             <ng-template #tooltipBottom let-toggle="toggle">
-                                <span (click)="toggle()"><span class="icon icon--info"></span></span>
+                                <span (click)="toggle()" class="icon icon--info"></span>
                             </ng-template>
-                            <lnd-tooltip 
+                            <lnd-tooltip
+                                *ngIf="question"
                                 [actionTemplate]="tooltipBottom"
                                 [countPositionByElement]="supplyPointOfferWrapper"
                                 direction="bottom"
                                 customClass="ml-2 tooltip-info">
-                                Info o dodavateli, kterou platíte po stanovené období.<br>
-                                <a href="#">Více informací</a>
+                                <div>{{question.shortContent}}</div>
+                                <a target="_blank"
+                                   [href]="'faq/supplier/' + question.url"
+                                   class="footer-navigation__link">
+                                    Více info
+                                </a>
                             </lnd-tooltip>
                         </span>
                     </div>

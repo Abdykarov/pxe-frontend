@@ -1,17 +1,18 @@
-import {
-    Component,
-    EventEmitter,
-    Input,
-    OnInit,
-    Output,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
+import { filter, takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
+import { FaqService } from 'src/app/services/faq.service';
 import { IOffer } from 'src/common/graphql/models/offer.model';
+import {
+    IQuestion,
+    Tag,
+} from 'src/app/services/model/faq.model';
 
 @Component({
     selector: 'pxe-supply-point-offer',
@@ -33,6 +34,7 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     public dateDiffValidityOfOffer = Number.MIN_VALUE;
     public math = Math;
     public showValidityOfOffer = false;
+    public question: IQuestion = null;
 
     @Input()
     public supplyPointOffer: IOffer;
@@ -50,12 +52,27 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     public action: EventEmitter<any> = new EventEmitter();
 
     constructor(
+        private cd: ChangeDetectorRef,
         private dateDiffPipe: DateDiffPipe,
+        private faqService: FaqService,
     ) {
         super();
     }
 
     ngOnInit () {
+        this.faqService.getQuestionStream()
+            .pipe(
+                filter((questions: IQuestion[]) => !R.isNil(questions)),
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                (questions: IQuestion[]) => {
+                    const vatNumber = R.path(['supplier', 'vatNumber'])(this.supplyPointOffer);
+                    this.question = R.find(R.propEq('vatNumber', vatNumber))(questions);
+                    this.cd.markForCheck();
+                },
+            );
+
         this.dateDiffValidityOfOffer = this.dateDiffPipe.transform(
             this.currentTime.toISOString(),
             this.supplyPointOffer.validTo,

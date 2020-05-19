@@ -34,8 +34,7 @@ export const offerConfig: IOffer = {
     priceVT: 3.54,
     supplier: {
         id: '',
-        name: '_______________________________________________' +
-            '__________________________________________________________________________________',
+        name: 'PRE',
         vatNumber: '',
         logoPath: '',
         sampleDocuments: [],

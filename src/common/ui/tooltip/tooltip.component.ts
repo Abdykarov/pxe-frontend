@@ -46,7 +46,6 @@ export class TooltipComponent extends AbstractComponent implements OnInit, After
 
     public isOpen: boolean;
 
-    private mq = window.matchMedia('(max-width: 992px)');
     private allowClick = true;
     private resizeEvent$ = fromEvent(window, 'resize')
         .pipe(
@@ -61,19 +60,22 @@ export class TooltipComponent extends AbstractComponent implements OnInit, After
     ) {
         super();
         this.direction = R.contains(this.direction, Object.values(ITooltipDirection)) ? this.direction : ITooltipDirection.LEFT;
-        this.allowClick = this.mq.matches;
         this.resizeEvent$
             .pipe(takeUntil(this.destroy$))
             .subscribe(() => {
                 this.manageDropdownPosition();
                 this.isOpen = false;
-                this.allowClick = this.mq.matches;
             });
     }
 
     public toggle = () => {
         if (this.allowClick) {
             this.isOpen = !this.isOpen;
+            if (this.isOpen) {
+                setTimeout(() => {
+                    this.manageDropdownPosition();
+                });
+            }
         }
     }
 
@@ -84,11 +86,9 @@ export class TooltipComponent extends AbstractComponent implements OnInit, After
             this.renderer.removeStyle(tooltipContent, 'right');
             this.renderer.removeStyle(tooltipContent, 'left');
             this.renderer.removeStyle(tooltipContent, 'transform');
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const clientHeight = document.body.clientHeight;
             const wrapperRect = this.countPositionByElement.getBoundingClientRect();
             let tooltipContentRect = tooltipContent.getBoundingClientRect();
-
 
             const differenceTooltipAndWrapperLeft = tooltipContentRect.left - wrapperRect.left;
             const needLeftShift = differenceTooltipAndWrapperLeft <= PAGE_PADDING;
