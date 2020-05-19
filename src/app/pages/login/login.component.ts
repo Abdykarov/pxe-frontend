@@ -57,6 +57,7 @@ import { UserService } from 'src/common/graphql/services/user.service';
     styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent extends AbstractComponent {
+    private cleanLogoutReasonBanner = false;
     public login = '';
     public formFieldsLogin = formFieldsLogin;
     public formLoading = false;
@@ -102,10 +103,20 @@ export class LoginComponent extends AbstractComponent {
             },
         );
 
-        this.router.routeReuseStrategy.shouldReuseRoute = () => {
-            this.cookieService.remove(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
-            return false;
-        };
+        this.route.queryParams
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(() => {
+                if (this.cleanLogoutReasonBanner) {
+                    this.cookieService.remove(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
+                    this.reasonForLogoutUser = null;
+                }
+                this.cleanLogoutReasonBanner = true;
+                this.state = ILoginState.LOGIN;
+                this.resetErrorsAndLoading();
+                this.passwordWasSent = false;
+            });
     }
 
     public submitChangePassword = (changePassword: IChangePassword) => {
@@ -283,7 +294,7 @@ export class LoginComponent extends AbstractComponent {
             case LANDING_PAGE.DASHBOARD:
                 return ROUTES.ROUTER_DASHBOARD;
             case LANDING_PAGE.NEW_SUPPLY_POINT:
-                return ROUTES.ROUTER_REQUEST_SUPPLY_POINT;
+                return ROUTES.ROUTER_REQUEST_SIGNBOARD;
             case LANDING_PAGE.OFFERS:
                 return ROUTES.ROUTER_SUPPLY_OFFER_POWER;
             case LANDING_PAGE.WAITING_FOR_PAYMENT:
@@ -292,11 +303,16 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public navigateAfterLogin = (loginResponse: ILoginResponse, changedPassword = false) => {
-        const extras: NavigationExtras = {};
+        const extras: NavigationExtras = {
+            state: {
+                afterLogin: true,
+            },
+        };
 
         if (changedPassword) {
             extras.state = {
                 showBanner: true,
+                ...extras.state,
             };
         }
 

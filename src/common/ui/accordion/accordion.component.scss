@@ -9,35 +9,27 @@
 
 .accordion {
 	margin-bottom: ( $spacer / 2 );
-	background-color: $white;
-
-	&__header {
-		padding: $spacer ( $spacer / 2 );
-		border-bottom: 1px solid $gray-100;
-	}
-
-	&__header-title {
-		margin-bottom: 0;
-	}
 
 	&__item {
-		border-top: 1px solid $gray-100;
+		margin-bottom: $spacer;
+		border-radius: 4px;
+		box-shadow: $box-shadow;
+		overflow: hidden;
 
-		&:nth-of-type(n + 3) {
-			display: none;
-		}
-
-		&:first-of-type {
-			border-top: none;
+		&:focus,
+		&:hover {
+			box-shadow: $accordion-active-shadow;
 		}
 
 		&--active {
-			.accordion__content {
-				display: block;
-			}
+			.accordion {
+				&__toggle-icon {
+					transform: translateY(-50%) rotate(180deg);
+				}
 
-			.accordion__toggle-icon {
-				transform: translateY(-50%) rotate(180deg);
+				&__content {
+					display: block;
+				}
 			}
 		}
 	}
@@ -47,69 +39,35 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		padding: ( $spacer / 1.5 ) ( $spacer / .75 ) ( $spacer / 1.5 ) ( $spacer / 2 );
+		padding: $accordion-padding ( $accordion-padding + $accordion-toggle-icon-size + $accordion-padding ) $accordion-padding $accordion-padding;
+		background-color: $white;
+		font-size: 1.125rem;
+		letter-spacing: -.75px;
 
 		&:focus,
 		&:hover {
-			background-color: rgba($blue-200, .05);
 			cursor: pointer;
 		}
 	}
 
 	&__toggle-icon {
-		position: absolute;
-		top: 50%;
-		right: 0;
-		padding: 0 ( $spacer / 2 );
+		@include absolute-center(true, false);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		right: $accordion-padding;
+		width: $accordion-toggle-icon-size;
+		height: $accordion-toggle-icon-size;
+		padding-top: ( $spacer / 10 );
+		background-color: $primary;
+		color: $white;
 		font-size: $icon-size-small;
-		transform: translateY(-50%);
+		letter-spacing: normal;
+		border-radius: $accordion-toggle-icon-size;
 	}
 
 	&__content {
 		display: none;
-		padding: ( $spacer / 2 );
-
-		p {
-			&:last-of-type {
-				margin-bottom: 0;
-			}
-		}
-	}
-
-	&__footer {
-		padding: ( $spacer / 2 );
-		text-align: center;
-		border-top: 1px solid $gray-100;
-	}
-
-	&__footer-link {
-		position: relative;
-		padding-right: ( $spacer / 1.5 );
-		color: $link-color;
-		cursor: pointer;
-
-		&:focus,
-		&:hover {
-			color: $primary-dark;
-		}
-	}
-
-	&__footer-icon {
-		position: absolute;
-		top: calc( 50% + 1px );
-		right: 0;
-		font-size: $icon-size-small;
-		transform: translateY(-50%);
-	}
-
-	&--more-open {
-		.accordion__item {
-			display: block;
-		}
-
-		.accordion__footer-icon {
-			top: 50%;
-			transform: translateY(-50%) rotate(180deg);
-		}
+		padding: $accordion-padding;
 	}
 }

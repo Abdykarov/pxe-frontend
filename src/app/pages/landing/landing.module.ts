@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
+import { AccordionModule } from 'src/common/ui/accordion/accordion.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { CarouselContainerModule } from 'src/common/containers/carousel-container/carousel-container.module';
 import { LandingComponent } from './landing.component';
@@ -17,6 +18,7 @@ import { RegistrationFormModule } from 'src/common/containers/form/forms/registr
         LandingComponent,
     ],
     imports: [
+        AccordionModule,
         ButtonModule,
         CarouselContainerModule,
         CommonModule,

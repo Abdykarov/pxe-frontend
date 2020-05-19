@@ -160,7 +160,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
         if (supplyPoint) {
             this.navigateRequestService.routerToRequestStep(supplyPoint);
         } else {
-            this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
+            this.router.navigate([ROUTES.ROUTER_REQUEST_SIGNBOARD]);
         }
     }
 

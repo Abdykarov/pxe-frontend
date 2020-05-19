@@ -1,10 +1,11 @@
 import {
+    AfterViewInit,
     OnDestroy,
     OnInit,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 
-export abstract class AbstractComponent implements OnInit, OnDestroy {
+export abstract class AbstractComponent implements OnInit, OnDestroy, AfterViewInit {
 
     protected destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -15,4 +16,7 @@ export abstract class AbstractComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit () {}
+
+    ngAfterViewInit () {}
+
 }
