@@ -25,6 +25,10 @@ import {
     listOfNotificationsPageRoutes,
 } from 'src/static/organisms/list-of-notifications/page.module';
 import {
+    SignboardPageModule,
+    signboardPageRoutes,
+} from 'src/static/pages/signboard/page.module';
+import {
     BasicLayoutComponent,
 } from './basic-layout.component';
 import {
@@ -228,6 +232,7 @@ const routes: Routes = [
             ...requestPageRoutes,
             ...requestBannerPageRoutes,
             ...requestCardPageRoutes,
+            ...signboardPageRoutes,
             ...supplierConcludedContractsEmptyRoutes,
             ...supplierConcludedContractsRoutes,
             ...supplyOfferPageRoutes,
@@ -285,6 +290,7 @@ const routes: Routes = [
         RequestBannerPageModule,
         RequestCardPageModule,
         RouterModule.forChild(routes),
+        SignboardPageModule,
         SupplierConcludedContractsEmptyModule,
         SupplierConcludedContractsModule,
         SupplyOfferPageModule,

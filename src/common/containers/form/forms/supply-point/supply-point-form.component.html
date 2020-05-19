@@ -114,6 +114,7 @@
             [validationMessages]="formFields.validationMessages.eic"
         ></lnd-form-field>
         <pxe-address-whisperer
+            #pxeAddressWhisperer
             lndSFormDirective
             lndSBiometricsDirective
             *ngIf="form.controls.address.status !== 'DISABLED'"

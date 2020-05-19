@@ -4,3 +4,8 @@ export interface IListOfNotifications {
     notifications: string[];
     emptyNotifications?: string;
 }
+
+export enum TypeOfList {
+    NUMBER,
+    CHECKLIST,
+}

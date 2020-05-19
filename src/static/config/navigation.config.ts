@@ -238,6 +238,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/request-banner',
                 },
                 {
+                    'label': 'Signboard',
+                    'url': '/basic/signboard',
+                },
+                {
                     'label': 'New supply point',
                     'url': '/basic/new-supply-point',
                 },
