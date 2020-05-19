@@ -18,6 +18,7 @@ import { takeUntil } from 'rxjs/operators';
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
 import {
     CONSTS,
+    ROUTES,
     SEO,
 } from 'src/app/app.constants';
 import { FaqService } from 'src/app/services/faq.service';
@@ -29,7 +30,6 @@ import {
     removeHtmlFromText,
     truncateText,
 } from 'src/common/utils';
-import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'lnd-faq-detail',
@@ -60,6 +60,10 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
             .pipe(takeUntil(this.destroy$))
             .subscribe(
                 ([params]) => {
+                    if (!this.activeQuestion) {
+                        this.router.navigate([CONSTS.PATHS.NOT_FOUND]);
+                    }
+
                     this.activeQuestion = R.pipe(
                         R.curry(this.setActiveQuestion)(params),
                         R.head,
