@@ -1,14 +1,14 @@
 <ng-template #accordionTemplate let-data>
-    <p [class.mb-0]="!data.fullContent"
-       [innerHTML]="data.shortContent">
-    </p>
-    <p [class.d-none]="!data.fullContent"
-       class="mb-0">
+    <div [class.mb-0]="!data.fullContent"
+         [innerHTML]="data.shortContent">
+    </div>
+    <div *ngIf="data.fullContent"
+         class="mb-0">
         <a class="link"
            [routerLink]="['/', CONSTS.PATHS.FAQ, data.tag | getUrlFromTag:faqConfig, data.url]">
             Více info
         </a>
-    </p>
+    </div>
 </ng-template>
 
 <ng-container

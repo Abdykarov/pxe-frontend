@@ -29,6 +29,7 @@ import {
     removeHtmlFromText,
     truncateText,
 } from 'src/common/utils';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'lnd-faq-detail',
@@ -70,7 +71,7 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
                         this.sortQuestions,
                         R.take(this.countOfNextQuestions),
                     )(this.questions);
-                    this.titleService.setTitle(this.activeQuestion.header);
+                    this.titleService.setTitle(`${this.activeQuestion.header} | PARC4U`);
                     this.metaService.updateTag({
                         name: 'description',
                         content: R.pipe(

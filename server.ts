@@ -88,7 +88,7 @@ app.get('/sitemap.xml', (req, res) => {
             if (url.length) {
                 url.push({
                     'loc': [
-                        `${req.protocol}://${req.get('host')}/${getTagUrl(question, taqConfig)}/${question.url}`,
+                        `${req.protocol}://${req.get('host')}/faq/${getTagUrl(question, taqConfig)}/${question.url}`,
                     ],
                 });
             }
