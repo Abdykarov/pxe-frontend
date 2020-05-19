@@ -1,11 +1,22 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+} from '@angular/core';
 
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
-import { filter, takeUntil } from 'rxjs/operators';
+import {
+    filter,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
+import { CONSTS } from 'src/app/app.constants';
 import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
 import { FaqService } from 'src/app/services/faq.service';
 import { IOffer } from 'src/common/graphql/models/offer.model';
@@ -13,6 +24,7 @@ import {
     IQuestion,
     Tag,
 } from 'src/app/services/model/faq.model';
+import { removeHtmlFromText, truncateText } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-supply-point-offer',
@@ -24,12 +36,15 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     private static readonly MIN_HOURS_VALIDITY_OF_OFFER_DISPLAYED = 1;
     private static readonly ZERO_HOURS_VALIDITY_OF_OFFER = 0;
 
+    private readonly maxLengthOfSupplierDescription = 100;
+
     public showPriceDecomposition = false;
 
     public currentTime = new Date();
 
     public COMMODITY_TYPE_POWER = CommodityType.POWER;
     public COMMODITY_TYPE_GAS = CommodityType.GAS;
+    public CONSTS = CONSTS;
 
     public dateDiffValidityOfOffer = Number.MIN_VALUE;
     public math = Math;
@@ -69,7 +84,13 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
                 (questions: IQuestion[]) => {
                     const vatNumber = R.path(['supplier', 'vatNumber'])(this.supplyPointOffer);
                     this.question = R.find(R.propEq('vatNumber', vatNumber))(questions);
-                    this.cd.markForCheck();
+                    if (this.question) {
+                        this.question.shortContent =  R.pipe(
+                            removeHtmlFromText,
+                            R.curry(truncateText)(this.maxLengthOfSupplierDescription)(CONSTS.APPEND_AFTER_CUT_TEXT),
+                        )(this.question.shortContent);
+                        this.cd.markForCheck();
+                    }
                 },
             );
 

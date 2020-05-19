@@ -55,9 +55,8 @@
                                 [countPositionByElement]="supplyPointOfferWrapper"
                                 direction="bottom"
                                 customClass="ml-2 tooltip-info">
-                                <div>{{question.shortContent}}</div>
-                                <a target="_blank"
-                                   [href]="'faq/supplier/' + question.url"
+                                <div>{{question?.shortContent}}</div>
+                                <a [routerLink]="['/', CONSTS.PATHS.FAQ, question?.tag, question?.url]"
                                    class="footer-navigation__link">
                                     Více info
                                 </a>

@@ -39,7 +39,6 @@ import {
 export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
     private readonly countOfNextQuestions = 3;
     private readonly maxLengthOFMetaDescription = 150;
-    private readonly appendAfterCutText = 150;
     public activeQuestion: IQuestion = null;
     public activeTagLabel = '';
 
@@ -81,7 +80,7 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
                         name: 'description',
                         content: R.pipe(
                             removeHtmlFromText,
-                            R.curry(truncateText)(this.maxLengthOFMetaDescription)(this.appendAfterCutText),
+                            R.curry(truncateText)(this.maxLengthOFMetaDescription)(CONSTS.APPEND_AFTER_CUT_TEXT),
                         )(this.activeQuestion.shortContent),
                     });
                     this.metaService.updateTag({
