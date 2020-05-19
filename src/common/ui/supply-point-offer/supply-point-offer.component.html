@@ -37,7 +37,8 @@
              [class.order-md-1]="isOwner"
              [class.pt-0]="!isOwner"
              [class.pt-md-4]="!isOwner">
-            <div class="row">
+            <div #rowWithTooltip
+                class="row">
                 <div class="col-12"
                      [class.col-md-6]="!isOwner">
                     <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
@@ -52,7 +53,7 @@
                             </ng-template>
                             <lnd-tooltip 
                                 [actionTemplate]="tooltipBottom"
-                                [countPositionBy]="supplyPointOfferWrapper"
+                                [countPositionByElement]="supplyPointOfferWrapper"
                                 direction="bottom"
                                 customClass="ml-2 tooltip-info">
                                 Info o dodavateli, kterou platíte po stanovené období.<br>

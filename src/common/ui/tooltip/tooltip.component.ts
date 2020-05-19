@@ -1,24 +1,35 @@
+import { isPlatformBrowser } from '@angular/common';
 import {
-    Component, ElementRef,
-    Input, Renderer2,
+    AfterViewInit,
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    Inject,
+    Input, OnInit,
+    PLATFORM_ID,
+    Renderer2,
     TemplateRef,
+    ViewChild,
 } from '@angular/core';
 import * as R from 'ramda';
-import { count, debounceTime } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
-
+import { debounceTime, map, takeUntil } from 'rxjs/operators';
+import { AbstractComponent } from 'src/common/abstract.component';
 // Own models
 import { ITooltipDirection } from './models/direction.model';
 
 const TOOLTIP_WRAPPER = '.tooltip .tooltip__content';
-const PAGE_PADDING = 30;
+const PAGE_PADDING = 8;
 
 @Component({
     selector: 'lnd-tooltip',
     templateUrl: './tooltip.component.html',
     styleUrls: ['./tooltip.component.scss'],
 })
-export class TooltipComponent {
+export class TooltipComponent extends AbstractComponent implements OnInit, AfterViewInit {
+    @ViewChild('contentWrapperDiv')
+    public contentWrapperDiv: ElementRef;
+
     @Input()
     public actionTemplate?: TemplateRef<any>;
 
@@ -29,7 +40,9 @@ export class TooltipComponent {
     public direction?: ITooltipDirection;
 
     @Input()
-    public countPositionBy = null;
+    public countPositionByElement = null;
+
+    public startDirection = null;
 
     public isOpen: boolean;
 
@@ -41,16 +54,21 @@ export class TooltipComponent {
         );
 
     constructor(
+        private cd: ChangeDetectorRef,
         private hostElement: ElementRef,
         private renderer: Renderer2,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
+        super();
         this.direction = R.contains(this.direction, Object.values(ITooltipDirection)) ? this.direction : ITooltipDirection.LEFT;
         this.allowClick = this.mq.matches;
-        this.resizeEvent$.subscribe(() => {
-            this.manageDropdownPosition();
-            this.isOpen = false;
-            this.allowClick = this.mq.matches;
-        });
+        this.resizeEvent$
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(() => {
+                this.manageDropdownPosition();
+                this.isOpen = false;
+                this.allowClick = this.mq.matches;
+            });
     }
 
     public toggle = () => {
@@ -60,68 +78,66 @@ export class TooltipComponent {
     }
 
     public manageDropdownPosition() {
-        const wrapper = this.countPositionBy;
-        const tooltipContent = wrapper.querySelector(TOOLTIP_WRAPPER);
-        const wrapperRect = wrapper.getBoundingClientRect();
-        const tooltipContentRect = tooltipContent.getBoundingClientRect();
-        let left = 0;
-        if (wrapperRect.left - tooltipContentRect.left) {
-            console.log(wrapperRect.left);
-            console.log(tooltipContentRect.left);
-            left = wrapperRect.left - tooltipContentRect.left;
-            console.log(left);
-            // this.renderer.setStyle(tooltipContent, 'left', wrapperRect.left + 'px');
+        if (this.countPositionByElement && isPlatformBrowser(this.platformId)) {
+            this.direction = this.startDirection;
+            const tooltipContent = this.countPositionByElement.querySelector(TOOLTIP_WRAPPER);
+            this.renderer.removeStyle(tooltipContent, 'right');
+            this.renderer.removeStyle(tooltipContent, 'left');
+            this.renderer.removeStyle(tooltipContent, 'transform');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const clientHeight = document.body.clientHeight;
+            const wrapperRect = this.countPositionByElement.getBoundingClientRect();
+            let tooltipContentRect = tooltipContent.getBoundingClientRect();
+
+
+            const differenceTooltipAndWrapperLeft = tooltipContentRect.left - wrapperRect.left;
+            const needLeftShift = differenceTooltipAndWrapperLeft <= PAGE_PADDING;
+            const differenceTooltipAndWrapperRight = tooltipContentRect.right - wrapperRect.right;
+            const needRightShift = differenceTooltipAndWrapperRight >= PAGE_PADDING;
+
+            const isDownAvailable =
+                document.documentElement.clientHeight - this.hostElement.nativeElement.getBoundingClientRect().bottom - 15
+                > tooltipContentRect.height;
+
+            if (!isDownAvailable) {
+                this.direction = ITooltipDirection.TOP;
+            }
+
+            if (needLeftShift) {
+                this.renderer.setStyle(tooltipContent, 'transform', 'translateX(0%)');
+                this.renderer.setStyle(tooltipContent, 'left', '0px');
+                tooltipContentRect = tooltipContent.getBoundingClientRect();
+                const diff = tooltipContentRect.left - wrapperRect.left;
+                this.renderer.setStyle(
+                    tooltipContent,
+                    'left',
+                    -(diff - PAGE_PADDING) + 'px',
+                );
+            }
+
+            if (needRightShift) {
+                this.renderer.setStyle(tooltipContent, 'transform', 'translateX(0%)');
+                this.renderer.setStyle(tooltipContent, 'left', '0px');
+                tooltipContentRect = tooltipContent.getBoundingClientRect();
+                const diff = tooltipContentRect.right - wrapperRect.right;
+                this.renderer.setStyle(
+                    tooltipContent,
+                    'left',
+                    -(diff + PAGE_PADDING) + 'px',
+                );
+            }
         }
-        // tooltipContent.
-        // console.log(tooltipContentRect);
-        // console.log(wrapperRect);
-        // console.log(wrapperRect.left);
-        // console.log(tooltipContentRect.left);
-        // console.log(wrapperRect.left - tooltipContentRect.left);
-
-
-        // const clientWidth = document.body.clientWidth;
-        // const clientHeight = document.body.clientHeight;
-        // const banan = this.countPositionBy.nativeElement;
-        // const wrapper = this.hostElement.nativeElement;
-        // const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        // const troll = wrapper.querySelector(TOOLTIP_WRAPPER);
-
-//         const dropdownMenu = wrapper.querySelector(TOOLTIP_WRAPPER);
-//         console.log('_Asdasdads_');
-//         console.log(dropdownMenu);
-//         let left;
-// console.log(wrapper);
-        // wrapper.className = '';
-        // troll.className = '';
-        // this.renderer.removeStyle(dropdownMenu, 'right');
-        // this.renderer.removeStyle(dropdownMenu, 'left');
-
-        // const wrapperRect = wrapper.getBoundingClientRect();
-        // let dropdownMenuRect = dropdownMenu.getBoundingClientRect();
-        //
-        // const isDownAvailable = scrollTop + dropdownMenuRect.height + wrapperRect.bottom + PAGE_PADDING < clientHeight;
-        // const isUpAvailable = dropdownMenuRect.height + 2 * PAGE_PADDING < wrapperRect.bottom;
-        //
-        // if (dropdownMenuRect.width + PAGE_PADDING === clientWidth) {
-        //     return;
-        // }
-
-
-        // left = (wrapperRect.width - dropdownMenuRect.width) / 2;
-        // this.renderer.setStyle(dropdownMenu, 'left', left + 'px');
-        // dropdownMenuRect = dropdownMenu.getBoundingClientRect();
-
-        // console.log(dropdownMenuRect.left);
-        // console.log(left);
-        // console.log('___');
-        //
-        // if (dropdownMenuRect.left < 0) {
-        //     this.renderer.setStyle(dropdownMenu, 'left', 0 + 'px');
-        // }
-        // if (dropdownMenuRect.right > clientWidth - PAGE_PADDING) {
-        //     left = -1 * (dropdownMenuRect.width - wrapperRect.width);
-        //     this.renderer.setStyle(dropdownMenu, 'left', left + 'px');
-        // }
     }
+
+    ngAfterViewInit(): void {
+        setTimeout(() => {
+            this.manageDropdownPosition();
+        });
+    }
+
+    ngOnInit () {
+        super.ngOnInit();
+        this.startDirection = this.direction;
+    }
+
 }
