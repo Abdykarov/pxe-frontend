@@ -60,14 +60,15 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
             .pipe(takeUntil(this.destroy$))
             .subscribe(
                 ([params]) => {
-                    if (!this.activeQuestion) {
-                        this.router.navigate([CONSTS.PATHS.NOT_FOUND]);
-                    }
-
                     this.activeQuestion = R.pipe(
                         R.curry(this.setActiveQuestion)(params),
                         R.head,
                     )(this.questions);
+
+                    if (!this.activeQuestion) {
+                        this.router.navigate([CONSTS.PATHS.NOT_FOUND]);
+                    }
+
                     this.activeTagLabel =
                         this.faqConfig.find((faqConfig: ITagConfigItem) => faqConfig.type === this.activeQuestion.tag).label;
                     this.questions = R.pipe(
