@@ -13,7 +13,7 @@ import {
     name: 'getUrlFromTag',
 })
 export class GetUrlFromTagPipe implements PipeTransform {
-    transform(questionTag: Tag, tagConfigs: ITagConfigItem[]): boolean {
+    transform(questionTag: Tag, tagConfigs: ITagConfigItem[]): string {
         return getUrlFromTag(questionTag, tagConfigs);
     }
 }

@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-12 col-xl-8 offset-xl-2 mb-3">
             <h2 class="h2--public">{{activeQuestion.header}}</h2>
-            <p [innerHTML]="activeQuestion.fullContent || activeQuestion.shortContent"></p>
+            <div [innerHTML]="activeQuestion.fullContent || activeQuestion.shortContent"></div>
         </div>
     </div>
     <div class="row">

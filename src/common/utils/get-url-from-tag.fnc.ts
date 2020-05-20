@@ -5,5 +5,7 @@ import {
     Tag,
 } from 'src/app/services/model/faq.model';
 
-export const getUrlFromTag = (questionTag: Tag, tagConfigs: ITagConfigItem[]): boolean =>
-    R.find((tagConfig: ITagConfigItem) => tagConfig.type === questionTag)(tagConfigs).url;
+export const getUrlFromTag = (questionTag: Tag, tagConfigs: ITagConfigItem[]): string => R.pipe(
+    R.find(R.propEq(questionTag)),
+    R.prop('url'),
+)(tagConfigs)
