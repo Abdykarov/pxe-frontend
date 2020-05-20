@@ -249,9 +249,7 @@
                             "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
-                            "buildOptimizer": true,
-                            "browserTarget": "app:build:production",
-                            "serverTarget": "app:server:production"
+                            "buildOptimizer": true
                         }
                     }
                 },
