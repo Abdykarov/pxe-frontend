@@ -27,7 +27,7 @@ import {
     ITagConfigItem,
 } from 'src/app/services/model/faq.model';
 import {
-    getUrlFromTag,
+    geParamFromTag,
     removeHtmlFromText,
     truncateText,
 } from 'src/common/utils';
@@ -67,7 +67,7 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
                     )(this.questions);
 
                     if (this.activeQuestion) {
-                        this.activeTagLabel = this.getActiveTagLabel();
+                        this.activeTagLabel = geParamFromTag(this.activeTag, this.faqConfig, 'label');
                         this.questions = this.getQuestions();
                         this.titleService.setTitle(`${this.activeQuestion.header} | PARC4U`);
                         this.metaService.updateTag({
@@ -93,11 +93,6 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
                 });
     }
 
-    private getActiveTagLabel = (): string => R.pipe(
-        R.find(R.propEq(this.activeQuestion.tag)),
-        R.prop('label'),
-    )(this.faqConfig)
-
     private getQuestions = (): IQuestion[] => R.pipe(
         R.filter((question: IQuestion) => question.id !== this.activeQuestion.id && question.tag === this.activeTag),
         this.sortQuestions,
@@ -106,7 +101,7 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
 
     public routerToOverview = (evt) => {
         evt.preventDefault();
-        this.router.navigate([CONSTS.PATHS.FAQ, getUrlFromTag(this.activeTag, this.faqConfig)]);
+        this.router.navigate([CONSTS.PATHS.FAQ, geParamFromTag(this.activeTag, this.faqConfig, 'url')]);
     }
 
     private setActiveQuestion = (params, questions: IQuestion[]) => R.filter(

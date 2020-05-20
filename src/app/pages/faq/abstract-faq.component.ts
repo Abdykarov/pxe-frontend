@@ -33,7 +33,6 @@ export class AbstractFaqComponent extends AbstractComponent {
                 this.faqConfig = faqConfig;
                 this.activeTag = params.tag;
                 this.questions = questions;
-                return [];
             }),
         );
 

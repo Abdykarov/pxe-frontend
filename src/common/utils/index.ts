@@ -3,7 +3,7 @@ export * from './convert-date-to-send-format.fnc';
 export * from './create-string-from-template.fnc';
 export * from './get-progress-stepper-config.fnc';
 export * from './get-error-message.fnc';
-export * from './get-url-from-tag.fnc';
+export * from './get-param-from-tag.fnc';
 export * from './in-array';
 export * from './any-to-string';
 export * from './includes-both-tariffs.fnc';
