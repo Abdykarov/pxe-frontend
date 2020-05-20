@@ -51,6 +51,7 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
         this.lastScrollTop = scrollTop;
     }
 
+
     constructor(
         protected apollo: Apollo,
         protected authService: AuthService,
