@@ -5,6 +5,14 @@
  */
 
 .landing-page {
+	padding-top: $header-height;
+	background-color: $white;
+
+	// Media queries
+	@include media-breakpoint-up(xl) {
+		padding-top: 0;
+	}
+
 	.section {
 		position: relative;
 		padding: ( $spacer * 2 ) 0 ( $spacer * 3 );
@@ -23,6 +31,12 @@
 			@include media-breakpoint-down(xs) {
 				padding-top: ( $spacer * 2 ) + $landing-page-picture-height-mobile;
 			}
+			@include media-breakpoint-up(xl) {
+				margin-bottom: ( $spacer * 3 );
+			}
+			@include media-breakpoint-up(lg) {
+				padding: ( $spacer * 7 ) 0 ( $spacer * 8 );
+			}
 		}
 
 		&--picture-second {
@@ -33,24 +47,132 @@
 				}
 			}
 		}
-	}
 
-	.about-our-benefit {
-		// Media queries
-		@include media-breakpoint-up(md) {
-			padding-top: 100px;
-		}
-		@include media-breakpoint-up(lg) {
-			padding-top: 120px;
-		}
+		&--video {
+			padding-top: $video-holder-height-mobile;
 
-		.section-picture {
 			// Media queries
-			@include media-breakpoint-down(xs) {
-				width: 140%;
-				top: 30%;
+			@include media-breakpoint-up(md) {
+				height: $video-holder-height-tablet;
+				padding: 0;
+			}
+			@include media-breakpoint-up(xl) {
+				height: $video-holder-height-desktop;
 			}
 		}
+
+		&--carousel {
+			// Media queries
+			@include media-breakpoint-up(md) {
+				padding: ( $spacer * 5 ) 0 $spacer;
+			}
+		}
+
+		&--arrow {
+			overflow: hidden;
+			z-index: $zindex-lp-arrow-bg;
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				overflow: visible;
+			}
+
+			&::after {
+				content: '';
+				position: absolute;
+				display: inline-block;
+				top: 40px;
+				bottom: auto;
+				left: 50%;
+				width: 345px;
+				height: 530px;
+				background-image: url('/assets/images/landing-page/arrow.svg');
+				background-repeat: no-repeat;
+				background-size: 100%;
+				transform: translateX(-16%);
+				z-index: $zindex-lp-arrow-icon;
+
+				// Media queries
+				@include media-breakpoint-up(md) {
+					top: -130px;
+					left: 50%;
+					transform: translateX(-32%);
+				}
+				@include media-breakpoint-up(xl) {
+					top: -200px;
+					width: 450px;
+					height: 690px;
+				}
+				@include media-breakpoint-up(lg) {
+					top: -260px;
+					width: 550px;
+					height: 840px;
+				}
+			}
+		}
+
+		&--arrow-overlap {
+			z-index: $zindex-lp-arrow-bg-overlap;
+		}
+
+		&--light {
+			background-color: $body-bg;
+		}
+	}
+
+	.section-video-text {
+		padding: ( $spacer * 3 ) ( $spacer * 1.25 );
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			position: absolute;
+			display: flex;
+			top: 0;
+			left: 0;
+			width: 50%;
+			height: 100%;
+			padding: ( $spacer * 6 ) 0 0;
+			background-color: rgba($white, .8);
+			z-index: $zindex-lp-vide-text;
+		}
+		@include media-breakpoint-up(xl) {
+			align-items: center;
+			padding-top: 0;
+			background-color: transparent;
+		}
+	}
+
+	.section-video-holder {
+		position: absolute;
+		top: 0;
+		left: 0;
+		overflow: hidden;
+		width: 100%;
+		height: $video-holder-height-mobile;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			height: 100%;
+		}
+	}
+
+	.video-picture {
+		position: absolute;
+		top: 0;
+		left: 5%;
+		width: 100%;
+	}
+
+	.section-video {
+		position: absolute;
+		display: block;
+		top: 50%;
+		left: 50%;
+		min-width: 100%;
+		width: auto;
+		min-height: 100%;
+		height: auto;
+		transform: translate(-50%, -50%);
 	}
 
 	.section-picture-holder {
@@ -69,7 +191,8 @@
 	}
 
 	.section-picture {
-		@include absolute-center;
+		@include absolute-center(false);
+		bottom: 0;
 		width: 100%;
 		height: auto;
 
@@ -82,7 +205,7 @@
 			height: 125%;
 		}
 		@include media-breakpoint-up(lg) {
-			width: 108%;
+			width: 100%;
 			height: auto;
 		}
 	}
@@ -128,6 +251,107 @@
 			width: $landing-page-process-arrow-width-desktop;
 			height: $landing-page-process-arrow-height-desktop;
 			line-height: $landing-page-process-arrow-height-desktop;
+		}
+	}
+
+	.carousel {
+		padding-bottom: ( $spacer * 2.5 );
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			padding-bottom: 0;
+		}
+
+		&-item {
+			padding: 0 ( $spacer * 1.5 );
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				padding: 0;
+			}
+		}
+
+		&-item-img {
+			width: 130%;
+			height: auto;
+			margin-left: ( $spacer * 1.5 );
+			animation: slideToRightFaster .9s forwards;
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				margin-left: 0;
+			}
+		}
+
+		&-item-content {
+			animation: slideToRightSlower 1.25s forwards;
+			transition-timing-function: ease-out;
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				height: $landing-page-video-content-height-tablet;
+				margin-bottom: 30%;
+				overflow: hidden;
+			}
+			@include media-breakpoint-up(xl) {
+				height: $landing-page-video-content-height-laptop;
+			}
+			@include media-breakpoint-up(lg) {
+				height: $landing-page-video-content-height-desktop;
+			}
+		}
+
+		.carousel-control {
+			display: none;
+		}
+
+		.carousel-indicators {
+			margin-left: ( $spacer * 1.5 );
+			right: auto;
+			margin-bottom: 0;
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				top: calc( 40% + ( #{$landing-page-video-content-height-tablet} / 2 ) + #{$spacer} );
+				bottom: auto;
+				margin-left: ( 100% / $grid-columns );
+				transform: translateY(-50%);
+			}
+			@include media-breakpoint-up(xl) {
+				top: calc( 40% + ( #{$landing-page-video-content-height-laptop} / 2 ) + #{$spacer} );
+			}
+			@include media-breakpoint-up(lg) {
+				top: calc( 40% + ( #{$landing-page-video-content-height-desktop} / 2 ) + #{$spacer} );
+			}
+
+			& > li {
+				width: $carousel-indicators-item-size;
+				height: $carousel-indicators-item-size;
+				padding: 0;
+				margin: 0 $spacer 0 0;
+				background-color: $light;
+				border: none;
+				border-radius: $carousel-indicators-item-size;
+				opacity: 1;
+
+				&:last-child {
+					margin-right: 0;
+				}
+
+				&:focus,
+				&:hover {
+					background-color: $light-dark;
+				}
+			}
+
+			.active {
+				background-color: $secondary;
+
+				&:focus,
+				&:hover {
+					background-color: $secondary-dark;
+				}
+			}
 		}
 	}
 }

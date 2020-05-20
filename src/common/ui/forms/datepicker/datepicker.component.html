@@ -16,8 +16,8 @@
                 bsDatepicker
                 #datepicker="bsDatepicker"
                 type="text"
-                (blur)="inputFocused = false;focus.emit($event)"
-                (focus)="inputFocused = true;blur.emit($event)"
+                (blur)="inputFocused = false;change.emit($event);blur.emit($event)"
+                (focus)="inputFocused = true;focus.emit($event)"
                 class="form-control"
                 [class.form-control--not-empty]="!!parentForm.controls[datepickerName].value"
                 [id]="id"
@@ -32,8 +32,8 @@
                 [attr.disabled]="!!disabledField ? 'disabled' : null"
                 [attr.autocomplete]="'off'"
                 (keyup)="checkValue($event)"
-                (onShown)="onShowPicker($event)"
-                (onHidden)="onHidePicker($event)">
+                (onShown)="onShowPicker($event);"
+                (onHidden)="hide.emit($event);onHidePicker($event);">
                 <div class="input-group-append">
                     <span class="icon icon--calendar input-group-icon"></span>
                 </div>

@@ -6,8 +6,9 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
-import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 
 @Component({
     selector: 'pxe-layout-container',
@@ -23,19 +24,16 @@ export class LayoutContainerComponent {
     public pageTitle: string;
 
     public showBanner = false;
-
-    public bannerObj: IBannerObj = {
-        linkValue: '#',
-        text: 'Vaše heslo bylo úspěšně změněno.',
-        linkType: '',
-        title: '',
-    };
+    public logoutRequired = false;
+    public LogoutRequired = ILogoutRequired;
 
     constructor(
+        public authService: AuthService,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         if (isPlatformBrowser(this.platformId)) {
             this.showBanner = window.history.state.showBanner;
+            this.logoutRequired = window.history.state.logoutRequired;
         }
     }
 }

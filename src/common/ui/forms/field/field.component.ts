@@ -94,6 +94,9 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
     public id: string;
 
     @Input()
+    public infoText = '';
+
+    @Input()
     public inlineLabel = false;
 
     @Input()

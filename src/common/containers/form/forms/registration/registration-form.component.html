@@ -13,16 +13,21 @@
     class="form-container"
     autocomplete="off">
     <lnd-form-field
+        lndSFormDirective
+        lndSBiometricsDirective
         [error]="formError.email || form.controls.email.errors"
         [formControl]="form.controls.email"
         [id]="'email'"
         label="E-mail"
+        infoText="Nemusíte se bát, ani my nemáme rádi spam."
         [success]="form.controls.email.valid && (form.controls.email.touched || formError.email)"
         [touched]="form.controls.email.touched || formError.email"
         [validationMessages]="formFields.validationMessages.email"
         [lightField]="lightTheme"
     ></lnd-form-field>
     <lnd-form-field
+        lndSFormDirective
+        lndSBiometricsDirective
         [error]="formError.consent || form.controls.consent.errors"
         [formControl]="form.controls.consent"
         [id]="'consent'"
@@ -37,7 +42,7 @@
         <lnd-button
             type="primary"
             [submit]="true"
-            (action)="submitForm($event)"
+            (action)="submitForm($event);sAnalyticsService.sFormClick($event);"
             [isDisabled]="formLoading"
             [label]="isSignUp ? 'Registrovat se' : 'Odeslat'">
         </lnd-button>

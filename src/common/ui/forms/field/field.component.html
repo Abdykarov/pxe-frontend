@@ -1,6 +1,19 @@
 <div
     class="form-group"
     [ngClass]="customFormGroupClass">
+    <div *ngIf="infoText"
+         class="form-control-info-wrapper">
+        <span class="form-control-info">
+            {{infoText}}
+            <svg class="form-control-info-beak" width="20px" height="17px" viewBox="0 0 20 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g id="Landing-page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Video-LP-fallback" transform="translate(-1024.000000, -4326.000000)" fill="#7355A6">
+                        <path d="M1024,4326 L1041,4326 L1041,4338.17157 C1041,4339.27614 1040.10457,4340.17157 1039,4340.17157 C1038.46957,4340.17157 1037.96086,4339.96086 1037.58579,4339.58579 L1024,4326 L1024,4326 Z" id="Rectangle-Copy-12" transform="translate(1032.500000, 4334.500000) scale(-1, 1) translate(-1032.500000, -4334.500000) "></path>
+                    </g>
+                </g>
+            </svg>
+        </span>
+    </div>
     <span
         *ngIf="type === 'LABEL'"
         class="form-control-text"

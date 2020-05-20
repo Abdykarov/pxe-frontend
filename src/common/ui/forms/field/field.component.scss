@@ -20,6 +20,27 @@
 	margin: 0 auto;
 }
 
+.form-control-info-wrapper {
+	width: 100%;
+	padding-bottom: $icon-size-px;
+}
+
+.form-control-info {
+	position: relative;
+	display: inline-block;
+	padding: ( $spacer / 2 ) $spacer;
+	background-color: $secondary;
+	color: $white;
+	border-radius: 3px 3px 3px 0;
+}
+
+.form-control-info-beak {
+	position: absolute;
+	top: calc( 100% - 1px );
+	left: 0;
+	color: $secondary;
+}
+
 .form-group {
 	position: relative;
 

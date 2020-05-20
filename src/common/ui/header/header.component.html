@@ -12,7 +12,8 @@
 <header
     class="header"
     [class.header--public]="settings.isPublic"
-    [class.header--secured]="!settings.isPublic">
+    [class.header--secured]="!settings.isPublic"
+    [class.header--sticked]="sticked">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
@@ -36,7 +37,7 @@
                             label="Domů"
                             customClass="mr-4"
                             type="link-text"
-                            (click)="homeRedirect.emit($event)">
+                            (click)="landingPageRedirect.emit($event)">
                         </lnd-button>
                         <lnd-button
                             *ngIf="settings.isLandingPage"
@@ -53,15 +54,30 @@
                             (click)="coverageMapAction.emit()">
                         </lnd-button>
                         <lnd-button
+                            *ngIf="!isLogged"
                             label="Přihlášení"
                             customClass="mr-4"
                             type="link-text"
                             (click)="loginAction.emit()">
                         </lnd-button>
                         <lnd-button
+                            *ngIf="!isLogged"
                             label="Registrace"
                             type="primary"
                             (click)="signUpAction.emit()">
+                        </lnd-button>
+                        <lnd-button
+                            *ngIf="isLogged"
+                            label="Odhlášení"
+                            customClass="mr-4"
+                            type="link-text"
+                            (click)="logoutAction.emit()">
+                        </lnd-button>
+                        <lnd-button
+                            *ngIf="isLogged"
+                            label="Zpět do aplikace"
+                            type="primary"
+                            (click)="homeRedirect.emit(true)">
                         </lnd-button>
                     </div>
                     <div *ngIf="settings.isPublic"
@@ -80,7 +96,7 @@
                             menuDirection="right">
                             <a class="dropdown-item dropdown-item--without-icon"
                                *ngIf="!settings.isLandingPage && !settings.isPublicEmptyPage"
-                               (click)="homeRedirect.emit($event)">
+                               (click)="landingPageRedirect.emit($event)">
                                 Domů
                             </a>
                             <a class="dropdown-item dropdown-item--without-icon"
@@ -94,12 +110,22 @@
                                 Pokrytí
                             </a>
                             <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="!settings.isPublicEmptyPage"
+                               *ngIf="!settings.isPublicEmptyPage && isLogged"
+                               (click)="logoutAction.emit() ">
+                                Odhlášení
+                            </a>
+                            <a class="dropdown-item dropdown-item--without-icon"
+                               *ngIf="!settings.isPublicEmptyPage && isLogged"
+                               (click)="homeRedirect.emit(true)">
+                                Zpět do aplikace
+                            </a>
+                            <a class="dropdown-item dropdown-item--without-icon"
+                               *ngIf="!settings.isPublicEmptyPage && !isLogged"
                                (click)="loginAction.emit() ">
                                 Přihlášení
                             </a>
                             <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="!settings.isPublicEmptyPage"
+                               *ngIf="!settings.isPublicEmptyPage && !isLogged"
                                (click)="signUpAction.emit()">
                                 Registrace
                             </a>

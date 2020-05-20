@@ -72,7 +72,7 @@ export class SupplyPointSelectionComponent extends AbstractComponent implements 
     }
 
     public createSupplyPoint = () => {
-        this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
+        this.router.navigate([ROUTES.ROUTER_REQUEST_SIGNBOARD]);
     }
 
     public navigateToSupplyPoint = (supplyPoint: ISupplyPoint) => {

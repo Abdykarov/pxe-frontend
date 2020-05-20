@@ -8,8 +8,11 @@ import {
 } from '@angular/platform-browser';
 
 import { Apollo } from 'apollo-angular';
+import { CookieService } from 'ngx-cookie';
+import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
     ROUTES,
@@ -21,6 +24,8 @@ import {
     IForm,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
+import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
+import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
 import { Router } from '@angular/router';
@@ -39,7 +44,10 @@ export class SignUpComponent extends AbstractComponent {
 
     constructor(
         private apollo: Apollo,
+        private authService: AuthService,
         private cd: ChangeDetectorRef,
+        private cookieService: CookieService,
+        private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
         private registrationService: RegistrationService,
         private router: Router,
@@ -66,29 +74,36 @@ export class SignUpComponent extends AbstractComponent {
         this.formLoading = true;
         this.globalError = [];
         this.fieldError = {};
-        this.registrationService.makeRegistration(values)
-            .subscribe(
-                () => {
-                    this.formLoading = false;
-                    this.formSent = true;
-                    this.cd.markForCheck();
-                    this.router.navigate([CONSTS.PATHS.LOGIN],
-                        {
-                            queryParams: {
-                                email: values.email,
+        this.authService.setActualStateFromOtherTab();
+        const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
+        if (isLogged) {
+            this.authService.homeRedirect(false, ILogoutRequired.REGISTRATION);
+        } else {
+            this.registrationService.makeRegistration(values)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(
+                    () => {
+                        this.formLoading = false;
+                        this.formSent = true;
+                        this.cd.markForCheck();
+                        this.router.navigate([CONSTS.PATHS.LOGIN],
+                            {
+                                queryParams: {
+                                    email: values.email,
+                                },
+                                state: {
+                                    passwordWasSent: true,
+                                },
                             },
-                            state: {
-                                passwordWasSent: true,
-                            },
-                        },
-                    );
-                },
-                (error) => {
-                    this.formLoading = false;
-                    const { fieldError, globalError } = parseGraphQLErrors(error);
-                    this.fieldError = fieldError;
-                    this.globalError = globalError;
-                    this.cd.markForCheck();
-                });
+                        );
+                    },
+                    (error) => {
+                        this.formLoading = false;
+                        const { fieldError, globalError } = parseGraphQLErrors(error);
+                        this.fieldError = fieldError;
+                        this.globalError = globalError;
+                        this.cd.markForCheck();
+                    });
+        }
     }
 }

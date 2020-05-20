@@ -33,6 +33,11 @@ export const navigationMenuUsers: INavigationMenu = [
         'children': [
             {
                 'label': 'Nové odběrné místo',
+                'url': ROUTES.ROUTER_REQUEST_SIGNBOARD,
+                __typename : 'securedChild',
+            },
+            {
+                'label': 'Nové odběrné místo',
                 'url': ROUTES.ROUTER_REQUEST_SUPPLY_POINT,
                 __typename : 'securedChild',
             },

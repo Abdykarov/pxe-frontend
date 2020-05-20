@@ -3,18 +3,34 @@
     class="body-inner full-layout"
     [class.body-inner--overlay]="showOverlay">
     <lnd-header
+        [sticked]="wasLastTimeScrolledToTop"
+        [isLogged]="authService.currentUserValue | isLogged"
         [settings]="settings"
         (homeRedirect)="homeRedirect()"
         [isMenuOpen]="isMenuOpen"
+        (landingPageRedirect)="landingPageRedirect()"
         (loginAction)="login()"
         (signUpAction)="signUp()"
         (supplierChangeAction)="supplierChange()"
         (coverageMapAction)="coverageMap()"
-        (toggleMenu)="toggleMenuOpen($event)">
+        (toggleMenu)="toggleMenuOpen($event)"
+        (logoutAction)="logout()">
     </lnd-header>
     <main class="main">
         <router-outlet></router-outlet>
     </main>
+    <div *ngIf="(authService.currentUserValue | isLogged) && !isLogouting"
+         class="fixed-bottom fixed-bottom--footer-indentation">
+            <lnd-button
+                label="Zpět do aplikace"
+                type="primary"
+                size="lg"
+                icon="icon--triangle-right"
+                iconPosition="right"
+                customClass="btn-back-to-app"
+                (action)="authService.homeRedirect(true)">
+            </lnd-button>
+    </div>
     <lnd-footer
         [isSimpleFooter]="settings.isSimpleFooter">
         <ul class="footer-navigation__list">

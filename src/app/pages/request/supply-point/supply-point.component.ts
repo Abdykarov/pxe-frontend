@@ -5,9 +5,11 @@ import {
 import {
     ChangeDetectorRef,
     Component,
+    ElementRef,
     Inject,
     OnInit,
     PLATFORM_ID,
+    ViewChild,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -20,6 +22,7 @@ import {
 import { of } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from 'src/app/services/auth.service';
 import {
     CommodityType,
     ISupplyPoint,
@@ -30,14 +33,19 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
+import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import { getConfigStepper } from 'src/common/utils';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import {
     ROUTES,
+    S_ANALYTICS,
     SUPPLY_POINT_EDIT_TYPE,
 } from 'src/app/app.constants';
+import { SupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/supply-point-form.component';
+import { SupplyPointLocalStorageService } from 'src/app/services/supply-point-local-storage.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -45,6 +53,10 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./supply-point.component.scss'],
 })
 export class SupplyPointComponent extends AbstractComponent implements OnInit {
+
+    @ViewChild('pxeSupplyPointForm')
+    public pxeSupplyPointForm: SupplyPointFormComponent;
+
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.SUPPLY_POINT;
 
     public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
@@ -54,15 +66,23 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public formSent = false;
     public globalError: string[] = [];
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
+    public showBannerOfContinueInPreviousForm = false;
     public supplyPointData = null;
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
+    public bannerObj: IBannerObj = {
+        text: 'Evidujeme u vás nedokončené odběrné místo, chcete načíst tyto údaje?',
+    };
+
     constructor(
+        private authService: AuthService,
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
         private route: ActivatedRoute,
         private router: Router,
+        private sAnalyticsService: SAnalyticsService,
         private supplyService: SupplyService,
+        private supplyPointLocalStorageService: SupplyPointLocalStorageService,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
@@ -91,12 +111,15 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                             of({});
                     }),
                     takeUntil(this.destroy$),
-                ).subscribe(
+                )
+                .subscribe(
                     () => {
+                        this.supplyPointLocalStorageService.isEdit = true;
                         this.supplyPointData = supplyPointFound;
                         this.cd.markForCheck();
                     },
                     (error) => {
+                        this.supplyPointLocalStorageService.isEdit = true;
                         this.supplyPointData = {};
                         const { globalError } = parseGraphQLErrors(error);
                         this.globalError = globalError;
@@ -104,10 +127,23 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                     },
                 );
         } else if (supplyPointCopy) {
+            this.supplyPointLocalStorageService.isEdit = true;
             this.supplyPointData = supplyPointCopy;
         } else {
+            this.supplyPointLocalStorageService.isEdit = false;
+            this.showBannerOfContinueInPreviousForm = !R.isEmpty(this.supplyPointLocalStorageService.getSupplyPoint());
             this.supplyPointData = {};
         }
+    }
+
+    public continueInPreviousFormBannerAction = () => {
+        this.supplyPointLocalStorageService.loadSupplyPointAction();
+        this.showBannerOfContinueInPreviousForm = false;
+    }
+
+    public removePreviousFormBannerAction = () => {
+        this.supplyPointLocalStorageService.removeSupplyPoint();
+        this.showBannerOfContinueInPreviousForm = false;
     }
 
     public submitSupplyForm = (supplyPointFormData: ISupplyPointFormData) => {
@@ -167,8 +203,20 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 (supplyPointId) => {
+                    this.supplyPointLocalStorageService.removeSupplyPoint();
                     this.formLoading = false;
                     this.formSent = true;
+                    this.sAnalyticsService.sendWebData(
+                        {},
+                        {
+                            email: this.authService.currentUserValue.email,
+                        },
+                        {},
+                        {
+                            ACTION: S_ANALYTICS.ACTIONS.CREATE_SUPPLY_POINT,
+                            supplyPointFormData,
+                        },
+                    );
                     this.cd.markForCheck();
                     this.router.navigate(
                         [ROUTES.ROUTER_REQUEST_OFFER_SELECTION],
@@ -179,6 +227,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                         });
                 },
                 (error) => {
+                    this.supplyPointLocalStorageService.removeSupplyPoint();
                     this.formLoading = false;
                     const { fieldError, globalError } = parseGraphQLErrors(error);
                     this.fieldError = fieldError;

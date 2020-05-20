@@ -1,22 +1,33 @@
 import {
+    AfterViewInit,
     ChangeDetectorRef,
     Component,
     ElementRef,
+    Inject,
+    PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import {
     Meta,
     Title,
 } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
+import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
-import { takeUntil } from 'rxjs/operators';
+import {
+    debounceTime,
+    takeUntil,
+} from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
     ROUTES,
+    S_ANALYTICS,
     SEO,
 } from 'src/app/app.constants';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
@@ -25,18 +36,21 @@ import {
     IForm,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
+import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
+import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import {
     parseGraphQLErrors,
     scrollToElementFnc,
 } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
     templateUrl: './landing.component.html',
 })
-export class LandingComponent extends AbstractComponent {
+export class LandingComponent extends AbstractComponent implements AfterViewInit {
 
     @ViewChild('subscription')
     public subscriptionElement: ElementRef;
@@ -54,16 +68,31 @@ export class LandingComponent extends AbstractComponent {
     public formFields: IForm;
     public routes = ROUTES;
 
+    public isMoreThanXlResolution = false;
+
+    public resizeEvent$ = fromEvent(window, 'resize')
+        .pipe(
+            debounceTime(200),
+        );
+
     constructor(
         private apollo: Apollo,
+        public authService: AuthService,
         private cd: ChangeDetectorRef,
+        private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
         private router: Router,
         private registrationService: RegistrationService,
+        private sAnalyticsService: SAnalyticsService,
         private scrollToService: ScrollToService,
         private titleService: Title,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
+        if (isPlatformBrowser(this.platformId)) {
+            this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+        }
+
         this.titleService.setTitle(CONSTS.TITLES.LANDING_PAGE);
         this.metaService.updateTag({
             name: 'description',
@@ -89,37 +118,89 @@ export class LandingComponent extends AbstractComponent {
                     scrollToElementFnc(this.supplierChangeElement.nativeElement);
                 }
             });
+
+        this.resizeEvent$
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(_  => {
+                this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+                this.autoPlayVideoInAllBrowsers();
+                this.cd.markForCheck();
+            });
+    }
+
+    autoPlayVideoInAllBrowsers = () => {
+        if (this.isMoreThanXlResolution) {
+            const myVideo = document.querySelector('video');
+            const playPromise = myVideo && myVideo.play();
+            if (!R.isNil(playPromise)) {
+                playPromise.then(_ => ({}))
+                    .catch(error => {
+                        myVideo.muted = true;
+                        myVideo.play();
+                    });
+            }
+        }
+    }
+
+    ngAfterViewInit() {
+        if (isPlatformBrowser(this.platformId)) {
+            this.autoPlayVideoInAllBrowsers();
+            this.cd.markForCheck();
+        }
     }
 
     public submitForm = (values) => {
         this.formLoading = true;
         this.globalError = [];
         this.fieldError = {};
-        this.registrationService.makeRegistration(values)
-            .subscribe(
-                () => {
-                    this.formLoading = false;
-                    this.formSent = true;
-                    this.cd.markForCheck();
-                    this.router.navigate([CONSTS.PATHS.LOGIN],
-                        {
-                            queryParams: {
+        this.authService.setActualStateFromOtherTab();
+        const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
+        if (isLogged) {
+            this.authService.homeRedirect(false, ILogoutRequired.REGISTRATION);
+        } else {
+            this.registrationService.makeRegistration(values)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(
+                    () => {
+                        this.formLoading = false;
+                        this.sAnalyticsService.sendWebData(
+                            {},
+                            {
                                 email: values.email,
                             },
-                            state: {
-                                passwordWasSent: true,
+                            {},
+                            {
+                                ACTION: S_ANALYTICS.ACTIONS.SIGN_UP,
                             },
-                        },
-                    );
-                },
-                (error) => {
-                    this.formLoading = false;
-                    const { fieldError, globalError } = parseGraphQLErrors(error);
-                    this.fieldError = fieldError;
-                    this.globalError = globalError;
-                    this.cd.markForCheck();
-                });
+                        );
+                        this.formSent = true;
+                        this.cd.markForCheck();
+                        this.router.navigate([CONSTS.PATHS.LOGIN],
+                                {
+                                    queryParams: {
+                                        email: values.email,
+                                    },
+                                    state: {
+                                        passwordWasSent: true,
+                                    },
+                                },
+                            );
+                    },
+                    (error) => {
+                        this.formLoading = false;
+                        const { fieldError, globalError } = parseGraphQLErrors(error);
+                        this.fieldError = fieldError;
+                        this.globalError = globalError;
+                        this.cd.markForCheck();
+                    });
+        }
     }
 
-    public scrollToNewSubscription = () => this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
+    public scrollToNewSubscription = () =>  {
+        this.authService.setActualStateFromOtherTab();
+        const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
+        if (isLogged) {
+            this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
+        }
+    }
 }
