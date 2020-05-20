@@ -59,13 +59,7 @@
                             "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
-                            "buildOptimizer": true,
-                            "fileReplacements": [
-                                {
-                                    "replace": "src/assets/configurations/config.js",
-                                    "with": "src/assets/configurations/config.prod.js"
-                                }
-                            ]
+                            "buildOptimizer": true
                         },
                         "preview": {
                             "budgets": [
@@ -82,25 +76,13 @@
                             "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
-                            "buildOptimizer": true,
-                            "fileReplacements": [
-                                {
-                                    "replace": "src/assets/configurations/config.js",
-                                    "with": "src/assets/configurations/config.prev.js"
-                                }
-                            ]
+                            "buildOptimizer": true
                         },
                         "mock": {
                             "budgets": [
                                 {
                                     "type": "anyComponentStyle",
                                     "maximumWarning": "6kb"
-                                }
-                            ],
-                            "fileReplacements": [
-                                {
-                                    "replace": "src/assets/configurations/config.js",
-                                    "with": "src/assets/configurations/config.mock.js"
                                 }
                             ]
                         }
@@ -134,12 +116,6 @@
                     "configurations": {
                         "production": {
                             "outputHashing": "media",
-                            "fileReplacements": [
-                                {
-                                    "replace": "src/assets/configurations/config.js",
-                                    "with": "src/assets/configurations/config.prod.js"
-                                }
-                            ],
                             "sourceMap": false,
                             "optimization": true
                         }
@@ -275,13 +251,7 @@
                             "vendorChunk": false,
                             "buildOptimizer": true,
                             "browserTarget": "app:build:production",
-                            "serverTarget": "app:server:production",
-                            "fileReplacements": [
-                                {
-                                    "replace": "src/assets/configurations/config.js",
-                                    "with": "src/assets/configurations/config.prod.js"
-                                }
-                            ]
+                            "serverTarget": "app:server:production"
                         }
                     }
                 },

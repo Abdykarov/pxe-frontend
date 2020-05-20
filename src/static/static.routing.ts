@@ -28,7 +28,7 @@ const routes: Routes = [
         RouterModule.forRoot(
             routes,
             {
-                enableTracing: !environment.production,
+                enableTracing: false,
                 scrollPositionRestoration: 'top',
             },
         ),

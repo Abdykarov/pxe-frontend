@@ -23,7 +23,7 @@ const routes: Routes = [
             },
             {
                 path: CONSTS.PATHS.SIGNBOARD,
-                loadChildren: '../../pages/request/signboard/signboard.module#SignboardModule',
+                loadChildren: () => import('../../pages/request/signboard/signboard.module').then(m => m.SignboardModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },

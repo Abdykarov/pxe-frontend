@@ -33,7 +33,7 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forRoot(routes, {
-        enableTracing: environment.production || false,
+        enableTracing: false,
         preloadingStrategy: PreloadAllModules,
         initialNavigation: 'enabled',
         scrollPositionRestoration: 'top',
