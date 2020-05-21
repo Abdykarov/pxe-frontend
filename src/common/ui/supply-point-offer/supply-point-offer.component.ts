@@ -49,6 +49,8 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     public dateDiffValidityOfOffer = Number.MIN_VALUE;
     public math = Math;
     public showValidityOfOffer = false;
+
+    @Input()
     public question: IQuestion = null;
 
     @Input()
@@ -75,24 +77,26 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     }
 
     ngOnInit () {
-        this.faqService.getQuestionStream()
-            .pipe(
-                filter((questions: IQuestion[]) => !R.isNil(questions)),
-                takeUntil(this.destroy$),
-            )
-            .subscribe(
-                (questions: IQuestion[]) => {
-                    const vatNumber = R.path(['supplier', 'vatNumber'])(this.supplyPointOffer);
-                    this.question = R.find(R.propEq('vatNumber', vatNumber))(questions);
-                    if (this.question) {
-                        this.question.shortContent =  R.pipe(
-                            removeHtmlFromText,
-                            R.curry(truncateText)(this.maxLengthOfSupplierDescription)(CONSTS.APPEND_AFTER_CUT_TEXT),
-                        )(this.question.shortContent);
-                        this.cd.markForCheck();
-                    }
-                },
-            );
+        if (!this.question) {
+            this.faqService.getQuestionStream()
+                .pipe(
+                    filter((questions: IQuestion[]) => !R.isNil(questions)),
+                    takeUntil(this.destroy$),
+                )
+                .subscribe(
+                    (questions: IQuestion[]) => {
+                        const vatNumber = R.path(['supplier', 'vatNumber'])(this.supplyPointOffer);
+                        this.question = R.find(R.propEq('vatNumber', vatNumber))(questions);
+                        if (this.question) {
+                            this.question.shortContent =  R.pipe(
+                                removeHtmlFromText,
+                                R.curry(truncateText)(this.maxLengthOfSupplierDescription)(CONSTS.APPEND_AFTER_CUT_TEXT),
+                            )(this.question.shortContent);
+                            this.cd.markForCheck();
+                        }
+                    },
+                );
+        }
 
         this.dateDiffValidityOfOffer = this.dateDiffPipe.transform(
             this.currentTime.toISOString(),

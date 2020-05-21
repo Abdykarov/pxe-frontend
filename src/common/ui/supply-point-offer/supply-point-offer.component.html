@@ -4,6 +4,10 @@
     <a [href]="data?.benefit?.url" target="_blank">zde</a>.
 </ng-template>
 
+<ng-template #tooltipBottom let-toggle="toggle">
+    <span (click)="toggle()" class="icon icon--info"></span>
+</ng-template>
+
 <div #supplyPointOfferWrapper
     class="supply-point-offer"
    [class.supply-point-offer--owner]="isOwner"
@@ -46,9 +50,6 @@
                                 supply-point-offer__title supply-point-offer__title--with-tooltip
                                 mb-0">
                             <span class="text-break">{{supplyPointOffer.supplier?.name}}</span>
-                            <ng-template #tooltipBottom let-toggle="toggle">
-                                <span (click)="toggle()" class="icon icon--info"></span>
-                            </ng-template>
                             <lnd-tooltip
                                 *ngIf="question"
                                 [actionTemplate]="tooltipBottom"
