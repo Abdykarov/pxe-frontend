@@ -45,7 +45,7 @@
         "url":"count-price",
         "header":"Jak se počítá celková cena za elektřinu?",
         "seoKeywords": "celková cena, elektřinu, distribuční cena, celkové ceny, dodavatel, silová elektřina, pravidelná záloha, odběrné místo, cena elektřiny, nízký tarif, daň z elektřiny",
-        "shortContent":"Je složená z těchto 3 částí:<ol><li>Distribuční cena – tvoří až 60 % z celkové ceny, je pevně daná, dodavatel ji nemůže ovlivnit</li><li>Silová elektřina – pravidelná záloha za odběrné místo + cena elektřiny ve vysokém (VT) a nízkém (NT) tarifu</li><li>Daň z elektřiny</li></ol>"
+        "shortContent":"Je složená z těchto 3 částí:<ol class='mt-2'><li>Distribuční cena – tvoří až 60 % z celkové ceny, je pevně daná, dodavatel ji nemůže ovlivnit</li><li>Silová elektřina – pravidelná záloha za odběrné místo + cena elektřiny ve vysokém (VT) a nízkém (NT) tarifu</li><li>Daň z elektřiny</li></ol>"
     },
     {
         "id":7,

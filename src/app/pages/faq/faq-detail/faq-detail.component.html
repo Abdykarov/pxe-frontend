@@ -4,7 +4,7 @@
     </div>
     <div *ngIf="data.fullContent"
          class="mb-0">
-        <a class="link"
+        <a class="link mt-4"
            [routerLink]="['/', CONSTS.PATHS.FAQ, data.tag | getUrlFromTag:faqConfig, data.url]">
             Více info
         </a>
