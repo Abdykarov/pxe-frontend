@@ -85,7 +85,7 @@ app.get('/sitemap.xml', (req, res) => {
     parseString(siteMapOriginal, (err, result) => {
         questions.forEach(question => {
             const url = R.path(['urlset', 'url' ], result);
-            if (url.length) {
+            if (url && url.length) {
                 url.push({
                     'loc': [
                         `${req.protocol}://${req.get('host')}/faq/${getTagUrl(question, taqConfig)}/${question.url}`,
