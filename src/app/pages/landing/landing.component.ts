@@ -63,6 +63,7 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
 
     public formLoading = false;
     public formSent = false;
+    public isPlatformBrowser = isPlatformBrowser(this.platformId);
     public globalError: string[] = [];
     public fieldError: IFieldError = {};
     public formFields: IForm;
@@ -89,7 +90,7 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
-        if (isPlatformBrowser(this.platformId)) {
+        if (isPlatformBrowser) {
             this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
         }
 
@@ -143,7 +144,7 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
     }
 
     ngAfterViewInit() {
-        if (isPlatformBrowser(this.platformId)) {
+        if (this.isPlatformBrowser) {
             this.autoPlayVideoInAllBrowsers();
             this.cd.markForCheck();
         }
