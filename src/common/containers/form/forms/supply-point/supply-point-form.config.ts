@@ -121,9 +121,11 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
                 CustomValidators.isNumber(),
                 CustomValidators.minValue(0),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(
+                    CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION,
+                ),
             ],
         ],
         annualConsumptionNTUnit: [
@@ -136,9 +138,11 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
                 CustomValidators.isNumber(),
                 CustomValidators.minValue(0),
+                CustomValidators.totalDigitLengthBeforeDecimalPoint(
+                    CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION,
+                ),
             ],
         ],
         annualConsumptionVTUnit: [
