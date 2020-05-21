@@ -123,7 +123,25 @@
         [supplierTemplatePower]="supplierTemplate"
     >
     </pxe-map-coverage>
-    <div class="section section--light stay-in-touch">
+    <div class="section section--light section-help">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-xl-8 offset-xl-2 mb-3">
+                    <h2 class="h2--public">Často kladené dotazy</h2>
+                </div>
+                <div class="col-12 col-xl-8 offset-xl-2 mb-3">
+                    <lnd-accordion [accordionItems]="accordionItems" title="Často kladené dotazy"></lnd-accordion>
+                </div>
+                <div class="col-12 text-center">
+                    <lnd-button
+                        label="Další dotazy"
+                        type="primary">
+                    </lnd-button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section stay-in-touch">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-3 col-lg-4 offset-lg-4">
