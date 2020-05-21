@@ -6,8 +6,8 @@
     <div *ngFor="let item of accordionItems"
          class="accordion__item"
          [ngClass]="{ 'accordion__item--active': item.isActive }">
-        <a href="#" class="accordion__toggle"
-           (click)="toggleClick(item)">
+        <a [href]="item.url" class="accordion__toggle"
+           (click)="toggleClick($event, item)">
             <span class="text-break" [innerHTML]="item.label"></span>
             <span class="icon
                          icon--triangle-down

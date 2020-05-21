@@ -30,7 +30,7 @@
             </h2>
             <lnd-accordion
                 [accordionContentTemplate]="accordionTemplate"
-                [accordionItems]="questions | questionsToAccordions"
+                [accordionItems]="questions | questionsToAccordions: faqConfig"
                 title="">
             </lnd-accordion>
         </div>

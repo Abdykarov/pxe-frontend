@@ -141,7 +141,7 @@
                 <div class="col-12 col-xl-8 offset-xl-2 mb-3">
                     <lnd-accordion *ngIf="frequentedQuestions.length"
                                    [accordionContentTemplate]="accordionTemplate"
-                                   [accordionItems]="frequentedQuestions | questionsToAccordions"
+                                   [accordionItems]="frequentedQuestions | questionsToAccordions: faqConfig"
                                    title="Často kladené dotazy">
                     </lnd-accordion>
                 </div>
