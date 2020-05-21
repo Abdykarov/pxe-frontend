@@ -1,7 +1,7 @@
 <ng-template #accordionTemplate let-data>
     <div [innerHTML]="data.shortContent"></div>
     <div *ngIf="data.fullContent">
-        <a class="link"
+        <a class="link mt-4"
            [routerLink]="['/', CONSTS.PATHS.FAQ, data.tag | getUrlFromTag:faqConfig, data.url]">
             Více info
         </a>
