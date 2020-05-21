@@ -332,3 +332,9 @@ $drop-zone-border-gap-width:   15px;
 $video-holder-height-mobile:   220px;
 $video-holder-height-tablet:   550px;
 $video-holder-height-desktop:  800px;
+
+
+// Accordion
+$accordion-active-shadow:      0 10px 30px 0 rgba($body-color, .2);
+$accordion-padding:            ( $spacer * 2 );
+$accordion-toggle-icon-size:   20px;

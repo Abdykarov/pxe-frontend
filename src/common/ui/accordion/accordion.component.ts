@@ -4,6 +4,8 @@ import {
     TemplateRef,
 } from '@angular/core';
 
+import * as R from 'ramda';
+
 import { IAccordionItem } from './models/accordion-item.model';
 
 @Component({
@@ -15,26 +17,25 @@ import { IAccordionItem } from './models/accordion-item.model';
 export class AccordionComponent {
 
     @Input()
-    public title?: string;
-
-    @Input()
     public accordionItems: IAccordionItem[] = [];
-
-    @Input()
-    public isMoreOpen = false;
-
-    @Input()
-    public moreOpenItemsCount = 2;
-
-    @Input()
-    public showAll = true;
 
     @Input()
     public accordionContentTemplate?: TemplateRef<any>;
 
     @Input()
-    public footerMoreLabel = 'Zobrazit vše';
+    public onlyOneItemOpened = true;
 
     @Input()
-    public footerLessLabel = 'Zobrazit méně';
+    public title?: string;
+
+    public toggleClick = (evt, item: IAccordionItem) => {
+        evt.preventDefault();
+        if (!item.isActive && this.onlyOneItemOpened) {
+            R.map((accordionItem: IAccordionItem) => {
+                accordionItem.isActive = false;
+                return accordionItem ;
+            }, this.accordionItems);
+        }
+        item.isActive = !item.isActive;
+    }
 }
