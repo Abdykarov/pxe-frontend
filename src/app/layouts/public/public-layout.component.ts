@@ -47,7 +47,8 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
             window.scrollY ||
             window.pageYOffset ||
             document.body.scrollTop + (document.documentElement && document.documentElement.scrollTop || 0);
-        this.wasLastTimeScrolledToTop = scrollTop < this.lastScrollTop && scrollTop > CONSTS.START_STICKER_HEADER;
+        this.wasLastTimeScrolledToTop = scrollTop < this.lastScrollTop && scrollTop > CONSTS.START_STICKER_HEADER ||
+            scrollTop === this.lastScrollTop && this.wasLastTimeScrolledToTop;
         this.lastScrollTop = scrollTop;
     }
 
