@@ -72,6 +72,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     public frequentedQuestions: IAccordionItem[] = [];
     public formLoading = false;
     public formSent = false;
+    public isPlatformBrowser = isPlatformBrowser(this.platformId);
     public globalError: string[] = [];
     public fieldError: IFieldError = {};
     public formFields: IForm;
@@ -100,7 +101,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super(faqService, route);
-        if (isPlatformBrowser(this.platformId)) {
+        if (isPlatformBrowser) {
             this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
         }
 
@@ -164,7 +165,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     }
 
     ngAfterViewInit() {
-        if (isPlatformBrowser(this.platformId)) {
+        if (this.isPlatformBrowser) {
             this.autoPlayVideoInAllBrowsers();
             this.cd.markForCheck();
         }
