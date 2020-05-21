@@ -21,6 +21,9 @@ export class BadgeComponent {
     @Input()
     public isLink = false;
 
+    @Input()
+    public hasBeak = false;
+
     @Output()
     public action: EventEmitter<any> = new EventEmitter<any>();
 
