@@ -26,7 +26,7 @@ export const supplyPointFragment = gql`
                     url
                 }
             },
-            ean,
+            identificationNumber,
             address{
                 street,
                 orientationNumber,
@@ -243,7 +243,7 @@ export const findSupplyPointsQuery = gql`
                 deliveryTo,
                 offerValidity,
             },
-            ean,
+            identificationNumber,
             address{
                 street,
                 orientationNumber,

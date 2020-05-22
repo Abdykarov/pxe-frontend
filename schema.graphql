@@ -219,7 +219,7 @@ type SupplyPoint {
     contract: Contract
     contractEndType: CodelistItem
     distributionRate: CodelistItem
-    ean: String!
+    identificationNumber: String!
     expirationDate: Date
     id: ID!
     lastAnnualConsumptionNT: Float

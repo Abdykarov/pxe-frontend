@@ -406,7 +406,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public submitValidForm = () => {
         const form = {
             ...this.form.value,
-            supplierId: this.form.value.supplierId && parseInt(this.form.value.supplierId.id, 10),
+            supplierId: this.form.value.supplierId && this.form.value.supplierId.id,
             expirationDate: this.form.value.expirationDate && convertDateToSendFormatFnc(this.form.value.expirationDate),
         };
         if (!R.isNil(form.annualConsumptionNT)) {
