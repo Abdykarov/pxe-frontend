@@ -179,5 +179,15 @@
         "header":"Yello Energy",
         "seoKeywords": "Yello Energy, férovým cenám, jednoduchost, přímočarost, náklady, kamenné pobočky, Skupiny PRE",
         "shortContent":"<p class='mb-0'>Od roku 2012 pomáhá Yello na českém trhu desítkám tisíc klientů k férovým cenám. Jedná se o adaptaci německého konceptu Yello, který sází na jednoduchost a přímočarost. Nezatěžujeme se dlouhými řečmi ani náklady na kamenné pobočky. Náš tým je přitom snadno a stále dostupný online. Yello je součástí Skupiny PRE.</p>"
+    },
+    {
+        "id":23,
+        "tag":"supplier",
+        "url":"yello-ahoj",
+        "header":"Yello Energy",
+        "seoKeywords": "Yello Energy, férovým cenám, jednoduchost, přímočarost, náklady, kamenné pobočky, Skupiny PRE",
+        "fullContent": "Dlouhy text - Yello Energy, férovým cenám, jednoduchost, přímočarost, náklady, kamenné pobočky, Skupiny PRE",
+        "shortContent":"<p class='mb-0'>Od roku 2012 pomáhá Yello na českém trhu desítkám tisíc klientů k férovým cenám. Jedná se o adaptaci německého konceptu Yello, který sází na jednoduchost a přímočarost. Nezatěžujeme se dlouhými řečmi ani náklady na kamenné pobočky. Náš tým je přitom snadno a stále dostupný online. Yello je součástí Skupiny PRE.</p>",
+        "oneOfMostVisited":true
     }
 ]
