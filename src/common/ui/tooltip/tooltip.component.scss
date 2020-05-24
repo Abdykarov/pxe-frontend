@@ -119,7 +119,13 @@
 		}
 	}
 
-	&-info {
+	&__content-link {
+		@include link-without-href {
+			color: $white;
+		}
+	}
+
+	&-supply-point-info {
 		.tooltip__content {
 			min-width: 290px;
 			padding: $spacer;
@@ -127,21 +133,21 @@
 		}
 	}
 
-	&:hover {
-		//.tooltip__toggle {
-		//	&::after {
-		//		// Media queries
-		//		@include media-breakpoint-up(xl) {
-		//			display: block;
-		//		}
-		//	}
-		//}
-		//
-		//.tooltip__content {
-		//	// Media queries
-		//	@include media-breakpoint-up(xl) {
-		//		display: block;
-		//	}
-		//}
+	&:hover:not(.tooltip-supply-point-info) {
+		.tooltip__toggle {
+			&::after {
+				// Media queries
+				@include media-breakpoint-up(xl) {
+					display: block;
+				}
+			}
+		}
+
+		.tooltip__content {
+			// Media queries
+			@include media-breakpoint-up(xl) {
+				display: block;
+			}
+		}
 	}
 }

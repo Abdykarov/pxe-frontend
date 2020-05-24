@@ -42,7 +42,6 @@
 		color: inherit;
 		border-radius: $border-radius;
 		box-shadow: 0 2px 5px rgba($box-shadow-color, .16);
-		//overflow: hidden;
 		pointer-events: none;
 	}
 
@@ -107,10 +106,6 @@
 	}
 
 	&.supply-point-offer--not-interactive {
-		//@include link-without-href-self {
-		//	pointer-events: none;
-		//}
-
 		.supply-point-offer__addon {
 			// Media queries
 			@include media-breakpoint-down(md) {
@@ -198,10 +193,6 @@
 	&__title {
 		display: block;
 		margin-bottom: ( $spacer * .75 );
-
-		&--with-tooltip {
-			position: relative;
-		}
 	}
 
 	&__info-icon {

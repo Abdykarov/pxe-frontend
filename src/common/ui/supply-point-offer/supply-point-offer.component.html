@@ -47,7 +47,7 @@
                     <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
                         <span class="supply-point-offer__title-label">{{isOwner ? 'Váš stávající dodavatel' : 'Dodavatel'}}</span>
                         <span class="
-                                supply-point-offer__title supply-point-offer__title--with-tooltip
+                                supply-point-offer__title
                                 mb-0">
                             <span class="text-break">{{supplyPointOffer.supplier?.name}}</span>
                             <lnd-tooltip
@@ -55,10 +55,10 @@
                                 [actionTemplate]="tooltipBottom"
                                 [countPositionByElement]="supplyPointOfferWrapper"
                                 direction="bottom"
-                                customClass="ml-2 tooltip-info">
+                                customClass="ml-2 tooltip-supply-point-info">
                                 <div>{{question?.shortContent}}</div>
                                 <a [routerLink]="['/', CONSTS.PATHS.FAQ, question?.tag, question?.url]"
-                                   class="footer-navigation__link">
+                                   class="tooltip__content-link mt-1">
                                     Více info
                                 </a>
                             </lnd-tooltip>
