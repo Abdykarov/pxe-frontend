@@ -5,11 +5,11 @@ import * as R from 'ramda';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import { environment } from 'src/environments/environment';
 import {
     IQuestion,
     ITagConfigItem,
 } from 'src/app/services/model/faq.model';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',

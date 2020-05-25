@@ -1,4 +1,7 @@
-import { IQuestion, Tag } from 'src/app/services/model/faq.model';
+import {
+    IQuestion,
+    Tag,
+} from 'src/app/services/model/faq.model';
 import { IOffer } from 'src/common/graphql/models/offer.model';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 
