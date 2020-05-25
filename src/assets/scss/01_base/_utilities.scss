@@ -31,6 +31,27 @@
 		text-decoration: $link-hover-decoration;
 	}
 
+	&--white {
+		&,
+		&:visited,
+		&:focus,
+		&:hover {
+			color: $white;
+		}
+	}
+
+	&--revert {
+		&,
+		&:visited {
+			text-decoration: $link-hover-decoration;
+		}
+
+		&:focus,
+		&:hover {
+			text-decoration: $link-decoration;
+		}
+	}
+
 	&--logout {
 		&.dropdown-item,
 		.navigation-main__link {
