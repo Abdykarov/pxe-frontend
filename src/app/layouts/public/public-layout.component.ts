@@ -36,7 +36,6 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
     styleUrls: ['./public-layout.component.scss'],
 })
 export class PublicLayoutComponent extends AbstractLayoutComponent {
-    public readonly CONSTS = CONSTS;
     public commodityTypePower = CommodityTypesLowerCase.POWER;
     public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
     public lastScrollTop = 0;
