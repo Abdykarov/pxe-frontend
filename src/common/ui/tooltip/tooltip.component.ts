@@ -1,4 +1,3 @@
-import { isPlatformBrowser } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectorRef,
@@ -11,11 +10,16 @@ import {
     TemplateRef,
     ViewChild,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+
 import * as R from 'ramda';
+import {
+    debounceTime,
+    takeUntil,
+} from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
-import { debounceTime, map, takeUntil } from 'rxjs/operators';
+
 import { AbstractComponent } from 'src/common/abstract.component';
-// Own models
 import { ITooltipDirection } from './models/direction.model';
 
 const TOOLTIP_WRAPPER = '.tooltip .tooltip__content';
