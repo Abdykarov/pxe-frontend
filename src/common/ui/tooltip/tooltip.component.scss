@@ -119,12 +119,6 @@
 		}
 	}
 
-	&__content-link {
-		@include link-without-href {
-			color: $white;
-		}
-	}
-
 	&-supply-point-info {
 		.tooltip__content {
 			min-width: 290px;
