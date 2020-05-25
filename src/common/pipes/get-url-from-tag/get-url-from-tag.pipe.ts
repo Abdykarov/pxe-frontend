@@ -3,7 +3,7 @@ import {
     PipeTransform,
 } from '@angular/core';
 
-import { getUrlFromTag } from 'src/common/utils';
+import { geParamFromTag } from 'src/common/utils';
 import {
     ITagConfigItem,
     Tag,
@@ -13,7 +13,7 @@ import {
     name: 'getUrlFromTag',
 })
 export class GetUrlFromTagPipe implements PipeTransform {
-    transform(questionTag: Tag, tagConfigs: ITagConfigItem[]): boolean {
-        return getUrlFromTag(questionTag, tagConfigs);
+    transform(questionTag: Tag, tagConfigs: ITagConfigItem[]): string {
+        return geParamFromTag(questionTag, tagConfigs, 'url');
     }
 }

@@ -27,6 +27,7 @@ import {
     ITagConfigItem,
 } from 'src/app/services/model/faq.model';
 import {
+    geParamFromTag,
     removeHtmlFromText,
     truncateText,
 } from 'src/common/utils';
@@ -64,36 +65,42 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
                         R.head,
                     )(this.questions);
 
-                    if (!this.activeQuestion) {
-                        this.router.navigate([CONSTS.PATHS.NOT_FOUND]);
+                    if (this.activeQuestion) {
+                        this.activeTagLabel = geParamFromTag(this.activeTag, this.faqConfig, 'label');
+                        this.questions = this.getQuestions();
+                        this.titleService.setTitle(`${this.activeQuestion.header} | PARC4U`);
+                        this.metaService.updateTag({
+                            name: 'description',
+                            content: R.pipe(
+                                removeHtmlFromText,
+                                R.curry(truncateText)(this.maxLengthOFMetaDescription)(CONSTS.APPEND_AFTER_CUT_TEXT),
+                            )(this.activeQuestion.shortContent),
+                        });
+                        this.metaService.updateTag({
+                            name: 'keywords',
+                            content: this.activeQuestion.seoKeywords,
+                        });
+                        this.cd.markForCheck();
+                    } else {
+                        this.router.navigate(
+                            [CONSTS.PATHS.NOT_FOUND],
+                            {
+                                skipLocationChange: true,
+                            },
+                        );
                     }
-
-                    this.activeTagLabel =
-                        this.faqConfig.find((faqConfig: ITagConfigItem) => faqConfig.type === this.activeQuestion.tag).label;
-                    this.questions = R.pipe(
-                        R.filter((question: IQuestion) => question.id !== this.activeQuestion.id && question.tag === this.activeTag),
-                        this.sortQuestions,
-                        R.take(this.countOfNextQuestions),
-                    )(this.questions);
-                    this.titleService.setTitle(`${this.activeQuestion.header} | PARC4U`);
-                    this.metaService.updateTag({
-                        name: 'description',
-                        content: R.pipe(
-                            removeHtmlFromText,
-                            R.curry(truncateText)(this.maxLengthOFMetaDescription)(CONSTS.APPEND_AFTER_CUT_TEXT),
-                        )(this.activeQuestion.shortContent),
-                    });
-                    this.metaService.updateTag({
-                        name: 'keywords',
-                        content: this.activeQuestion.seoKeywords,
-                    });
-                    this.cd.markForCheck();
                 });
     }
 
+    private getQuestions = (): IQuestion[] => R.pipe(
+        R.filter((question: IQuestion) => question.id !== this.activeQuestion.id && question.tag === this.activeTag),
+        this.sortQuestions,
+        R.take(this.countOfNextQuestions),
+    )(this.questions)
+
     public routerToOverview = (evt) => {
         evt.preventDefault();
-        this.router.navigate([CONSTS.PATHS.FAQ, this.activeTag]);
+        this.router.navigate([CONSTS.PATHS.FAQ, geParamFromTag(this.activeTag, this.faqConfig, 'url')]);
     }
 
     private setActiveQuestion = (params, questions: IQuestion[]) => R.filter(

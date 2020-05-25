@@ -5,7 +5,6 @@ import {
 import {
     ChangeDetectorRef,
     Component,
-    ElementRef,
     Inject,
     OnInit,
     PLATFORM_ID,

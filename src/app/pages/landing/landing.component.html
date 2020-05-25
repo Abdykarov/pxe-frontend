@@ -1,9 +1,6 @@
 <ng-template #accordionTemplate let-data>
-    <div [class.mb-0]="!data.fullContent"
-         [innerHTML]="data.shortContent">
-    </div>
-    <div *ngIf="data.fullContent"
-         class="mb-0">
+    <div [innerHTML]="data.shortContent"></div>
+    <div *ngIf="data.fullContent">
         <a class="link"
            [routerLink]="['/', CONSTS.PATHS.FAQ, data.tag | getUrlFromTag:faqConfig, data.url]">
             Více info
@@ -34,7 +31,8 @@
                 </div>
             </div>
         </div>
-        <div class="section-video-holder">
+        <div *ngIf="isPlatformBrowser"
+             class="section-video-holder">
             <img
                 *ngIf="!isMoreThanXlResolution"
                 class="video-picture"
@@ -141,7 +139,7 @@
                 <div class="col-12 col-xl-8 offset-xl-2 mb-3">
                     <lnd-accordion *ngIf="frequentedQuestions.length"
                                    [accordionContentTemplate]="accordionTemplate"
-                                   [accordionItems]="frequentedQuestions | questionsToAccordions"
+                                   [accordionItems]="frequentedQuestions | questionsToAccordions: faqConfig"
                                    title="Často kladené dotazy">
                     </lnd-accordion>
                 </div>
@@ -174,7 +172,7 @@
                             [globalError]="globalError"
                             [fieldError]="fieldError"
                             (submitAction)="submitForm($event)"
-                            [lightTheme]="true"
+                            [lightTheme]="false"
                         ></pxe-registration-form>
                     </div>
                 </div>

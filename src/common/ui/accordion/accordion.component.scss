@@ -35,17 +35,22 @@
 	}
 
 	&__toggle {
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		padding: $accordion-padding ( $accordion-padding + $accordion-toggle-icon-size + $accordion-padding ) $accordion-padding $accordion-padding;
-		background-color: $white;
-		font-size: 1.125rem;
-		letter-spacing: -.75px;
+		&,
+		&:visited {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			padding: $accordion-padding ( $accordion-padding + $accordion-toggle-icon-size + $accordion-padding ) $accordion-padding $accordion-padding;
+			background-color: $white;
+			color: $font-text;
+			font-size: 1.125rem;
+			letter-spacing: -.75px;
+		}
 
 		&:focus,
 		&:hover {
+			text-decoration: none;
 			cursor: pointer;
 		}
 	}

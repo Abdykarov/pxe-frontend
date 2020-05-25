@@ -83,6 +83,7 @@ export class TooltipComponent extends AbstractComponent implements OnInit, After
         if (this.countPositionByElement && isPlatformBrowser(this.platformId)) {
             this.direction = this.startDirection;
             const tooltipContent = this.countPositionByElement.querySelector(TOOLTIP_WRAPPER);
+            this.renderer.setStyle(tooltipContent, 'visibility', 'hidden');
             this.renderer.removeStyle(tooltipContent, 'right');
             this.renderer.removeStyle(tooltipContent, 'left');
             this.renderer.removeStyle(tooltipContent, 'transform');
@@ -95,13 +96,14 @@ export class TooltipComponent extends AbstractComponent implements OnInit, After
             const differenceTooltipAndWrapperRight = tooltipContentRect.right - wrapperRect.right;
             const needRightShift = differenceTooltipAndWrapperRight >= PAGE_PADDING;
 
-            const isDownAvailable =
-                document.documentElement.clientHeight - this.hostElement.nativeElement.getBoundingClientRect().bottom - 15
-                > tooltipContentRect.height;
+            const isDownAvailable = tooltipContentRect.bottom + PAGE_PADDING < document.documentElement.clientHeight;
 
-            if (!isDownAvailable) {
+            if (isDownAvailable) {
+                this.direction = ITooltipDirection.BOTTOM;
+            } else {
                 this.direction = ITooltipDirection.TOP;
             }
+            this.cd.markForCheck();
 
             if (needLeftShift) {
                 this.renderer.setStyle(tooltipContent, 'transform', 'translateX(0%)');
@@ -126,6 +128,7 @@ export class TooltipComponent extends AbstractComponent implements OnInit, After
                     -(diff + PAGE_PADDING) + 'px',
                 );
             }
+            this.renderer.removeStyle(tooltipContent, 'visibility');
         }
     }
 

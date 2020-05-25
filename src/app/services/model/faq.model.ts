@@ -8,6 +8,7 @@ export interface IQuestion {
     oneOfMostVisited?: boolean;
     seoKeywords?: string;
     vatNumber?: number;
+    isTestData?: boolean;
 }
 
 export enum Tag {

@@ -92,7 +92,6 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         super.ngOnInit();
         this.setFormByCommodity(this.commodityType[this.supplyPoint.commodityType]);
         this.subjectName = R.find(R.propEq('value', this.supplyPoint.subject.code))(SUBJECT_TYPE_OPTIONS).label;
-        this.prefillFormData();
 
         this.supplyService.findCodelistsByTypes(CODE_LIST_TYPES, 'cs')
             .pipe(takeUntil(this.destroy$))
@@ -143,6 +142,8 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
                 }
                 this.modalsService.closeModalData$.next(null);
             });
+
+        this.prefillFormData();
     }
 
     ngOnChanges(changes: SimpleChanges) {

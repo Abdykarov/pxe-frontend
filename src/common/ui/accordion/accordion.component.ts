@@ -28,7 +28,8 @@ export class AccordionComponent {
     @Input()
     public title?: string;
 
-    public toggleClick = (item: IAccordionItem) => {
+    public toggleClick = (evt, item: IAccordionItem) => {
+        evt.preventDefault();
         if (!item.isActive && this.onlyOneItemOpened) {
             R.map((accordionItem: IAccordionItem) => {
                 accordionItem.isActive = false;
