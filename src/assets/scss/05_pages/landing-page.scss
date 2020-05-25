@@ -56,7 +56,7 @@
 				height: $video-holder-height-tablet;
 				padding: 0;
 				background-image: url("/assets/images/landing-page/picture-fallback.jpg");
-				background-position: center -70px;
+				background-position: center -80px;
 			}
 			@include media-breakpoint-up(xl) {
 				height: $video-holder-height-desktop;
