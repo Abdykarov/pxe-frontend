@@ -65,7 +65,7 @@ export class TooltipComponent extends AbstractComponent {
             .pipe(takeUntil(this.destroy$))
             .subscribe(() => {
                 this.isOpen = false;
-                this.manageDropdownPosition();
+                this.manageTooltipPosition();
             });
     }
 
@@ -74,13 +74,13 @@ export class TooltipComponent extends AbstractComponent {
             this.isOpen = !this.isOpen;
             if (this.isOpen) {
                 setTimeout(() => {
-                    this.manageDropdownPosition();
+                    this.manageTooltipPosition();
                 });
             }
         }
     }
 
-    public manageDropdownPosition() {
+    public manageTooltipPosition() {
         if (this.wrapperElement && isPlatformBrowser(this.platformId) && this.isOpen) {
             if (this.direction !== ITooltipDirection.BOTTOM) {
                 this.direction = ITooltipDirection.BOTTOM;
