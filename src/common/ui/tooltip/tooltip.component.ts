@@ -65,7 +65,6 @@ export class TooltipComponent extends AbstractComponent {
             .pipe(takeUntil(this.destroy$))
             .subscribe(() => {
                 this.isOpen = false;
-                this.manageTooltipPosition();
             });
     }
 
