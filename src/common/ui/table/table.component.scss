@@ -19,6 +19,7 @@
 		width: calc( 100% + ( #{$spacer} * 2 ) );
 		margin: 0 ( $spacer * ( -1 ) ) ( $spacer * ( -1 ) );
 		padding: 0 $spacer ( $spacer * 2 );
+		margin-bottom: $spacer;
 	}
 }
 
