@@ -81,7 +81,7 @@ export class TooltipComponent extends AbstractComponent {
     }
 
     public manageDropdownPosition() {
-        if (this.wrapperElement && isPlatformBrowser(this.platformId)) {
+        if (this.wrapperElement && isPlatformBrowser(this.platformId) && this.isOpen) {
             if (this.direction !== ITooltipDirection.BOTTOM) {
                 this.direction = ITooltipDirection.BOTTOM;
                 this.cd.markForCheck();
