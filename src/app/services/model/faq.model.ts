@@ -7,7 +7,7 @@ export interface IQuestion {
     fullContent?: string;
     oneOfMostVisited?: boolean;
     seoKeywords?: string;
-    vatNumber?: number;
+    vatNumber?: string;
     isTestData?: boolean;
 }
 
