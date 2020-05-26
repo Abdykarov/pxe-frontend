@@ -10,6 +10,7 @@ import {
     ViewChild,
 } from '@angular/core';
 
+import * as R from 'ramda';
 import {
     combineLatest,
     of,
@@ -22,7 +23,8 @@ import {
 } from 'rxjs/operators';
 import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
 
-import { AbstractComponent } from 'src/common/abstract.component';
+import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
+import { FaqService } from 'src/app/services/faq.service';
 import {
     CommodityType,
     ISupplyPoint,
@@ -41,6 +43,7 @@ import {
     getConfigStepper,
     parseGraphQLErrors,
     parseRestAPIErrors,
+    removeHtmlFromText,
     scrollToElementFnc,
 } from 'src/common/utils';
 import {
@@ -56,7 +59,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     templateUrl: './contract.component.html',
     styleUrls: ['./contract.component.scss'],
 })
-export class ContractComponent extends AbstractComponent implements OnInit {
+export class ContractComponent extends AbstractFaqComponent implements OnInit {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.READY_FOR_SIGN;
     public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.PERSONAL_DATA;
     public readonly BannerTypeImages = BannerTypeImages;
@@ -91,16 +94,23 @@ export class ContractComponent extends AbstractComponent implements OnInit {
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
         private documentService: DocumentService,
+        public faqService: FaqService,
         public navigateRequestService: NavigateRequestService,
-        private route: ActivatedRoute,
+        public route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
     ) {
-        super();
+        super(faqService, route);
     }
 
     ngOnInit () {
         super.ngOnInit();
+
+        this.loadConfigs$
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(
+                _ => this.cd.markForCheck(),
+            );
 
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(

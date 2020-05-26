@@ -9,21 +9,13 @@ import {
 
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
-import {
-    filter,
-    takeUntil,
-} from 'rxjs/operators';
+import { CONSTS } from 'src/app/app.constants';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
-import { CONSTS } from 'src/app/app.constants';
 import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
-import { FaqService } from 'src/app/services/faq.service';
 import { IOffer } from 'src/common/graphql/models/offer.model';
-import {
-    IQuestion,
-    Tag,
-} from 'src/app/services/model/faq.model';
+import { IQuestion } from 'src/app/services/model/faq.model';
 import { removeHtmlFromText, truncateText } from 'src/common/utils';
 
 @Component({
@@ -36,22 +28,20 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     private static readonly MIN_HOURS_VALIDITY_OF_OFFER_DISPLAYED = 1;
     private static readonly ZERO_HOURS_VALIDITY_OF_OFFER = 0;
 
-    private readonly maxLengthOfSupplierDescription = 100;
-
     public showPriceDecomposition = false;
 
     public currentTime = new Date();
 
     public COMMODITY_TYPE_POWER = CommodityType.POWER;
     public COMMODITY_TYPE_GAS = CommodityType.GAS;
-    public CONSTS = CONSTS;
 
     public dateDiffValidityOfOffer = Number.MIN_VALUE;
     public math = Math;
     public showValidityOfOffer = false;
+    public question: IQuestion = null;
 
     @Input()
-    public question: IQuestion = null;
+    public questions: IQuestion[] = null;
 
     @Input()
     public supplyPointOffer: IOffer;
@@ -71,31 +61,20 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     constructor(
         private cd: ChangeDetectorRef,
         private dateDiffPipe: DateDiffPipe,
-        private faqService: FaqService,
     ) {
         super();
     }
 
     ngOnInit () {
-        if (!this.question) {
-            this.faqService.getQuestionStream()
-                .pipe(
-                    filter((questions: IQuestion[]) => !R.isNil(questions)),
-                    takeUntil(this.destroy$),
-                )
-                .subscribe(
-                    (questions: IQuestion[]) => {
-                        const vatNumber = R.path(['supplier', 'vatNumber'])(this.supplyPointOffer);
-                        this.question = R.find(R.propEq('vatNumber', vatNumber))(questions);
-                        if (this.question) {
-                            this.question.shortContent =  R.pipe(
-                                removeHtmlFromText,
-                                R.curry(truncateText)(this.maxLengthOfSupplierDescription)(CONSTS.APPEND_AFTER_CUT_TEXT),
-                            )(this.question.shortContent);
-                            this.cd.markForCheck();
-                        }
-                    },
-                );
+        const vatNumber = R.path(['supplier', 'vatNumber'])(this.supplyPointOffer);
+        this.question = {...R.find(R.propEq('vatNumber', vatNumber))(this.questions)};
+        if (!R.isEmpty(this.question)) {
+            const textWithoutHTML = removeHtmlFromText(this.question.shortContent);
+            const indexOfLastWord = textWithoutHTML.substr(CONSTS.MAX_LENGTH_SUPPLIER_DESCRIPTION).indexOf(' ');
+            this.question.shortContent =  R.pipe(
+                R.take(indexOfLastWord + CONSTS.MAX_LENGTH_SUPPLIER_DESCRIPTION),
+                (text) => `${text}${CONSTS.APPEND_AFTER_CUT_TEXT}`,
+            )(textWithoutHTML);
         }
 
         this.dateDiffValidityOfOffer = this.dateDiffPipe.transform(

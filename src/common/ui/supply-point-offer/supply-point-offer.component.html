@@ -51,9 +51,9 @@
                                 mb-0">
                             <span class="text-break">{{supplyPointOffer.supplier?.name}}</span>
                             <lnd-tooltip
-                                *ngIf="question"
+                                *ngIf="question && (question | keyvalue)?.length"
                                 [actionTemplate]="tooltipBottom"
-                                [countPositionByElement]="supplyPointOfferWrapper"
+                                [wrapperElement]="supplyPointOfferWrapper"
                                 direction="bottom"
                                 customClass="ml-2 tooltip-supply-point-info">
                                 <div>{{question?.shortContent}}</div>

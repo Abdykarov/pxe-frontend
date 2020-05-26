@@ -4,7 +4,7 @@ import {
     Component,
     ElementRef,
     Inject,
-    Input, OnInit,
+    Input,
     PLATFORM_ID,
     Renderer2,
     TemplateRef,
@@ -21,16 +21,16 @@ import { fromEvent } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ITooltipDirection } from './models/direction.model';
-
-const TOOLTIP_WRAPPER = '.tooltip .tooltip__content';
-const PAGE_PADDING = 8;
+import set = Reflect.set;
 
 @Component({
     selector: 'lnd-tooltip',
     templateUrl: './tooltip.component.html',
     styleUrls: ['./tooltip.component.scss'],
 })
-export class TooltipComponent extends AbstractComponent implements OnInit, AfterViewInit {
+export class TooltipComponent extends AbstractComponent implements AfterViewInit {
+    private readonly INNER_PADDING_FOR_COUNT = 8;
+
     @ViewChild('contentWrapperDiv')
     public contentWrapperDiv: ElementRef;
 
@@ -44,9 +44,7 @@ export class TooltipComponent extends AbstractComponent implements OnInit, After
     public direction?: ITooltipDirection;
 
     @Input()
-    public countPositionByElement = null;
-
-    public startDirection = null;
+    public wrapperElement = null;
 
     public isOpen: boolean;
 
@@ -84,55 +82,62 @@ export class TooltipComponent extends AbstractComponent implements OnInit, After
     }
 
     public manageDropdownPosition() {
-        if (this.countPositionByElement && isPlatformBrowser(this.platformId)) {
-            this.direction = this.startDirection;
-            const tooltipContent = this.countPositionByElement.querySelector(TOOLTIP_WRAPPER);
-            this.renderer.setStyle(tooltipContent, 'visibility', 'hidden');
-            this.renderer.removeStyle(tooltipContent, 'right');
-            this.renderer.removeStyle(tooltipContent, 'left');
-            this.renderer.removeStyle(tooltipContent, 'transform');
-            const clientHeight = document.body.clientHeight;
-            const wrapperRect = this.countPositionByElement.getBoundingClientRect();
-            let tooltipContentRect = tooltipContent.getBoundingClientRect();
-
-            const differenceTooltipAndWrapperLeft = tooltipContentRect.left - wrapperRect.left;
-            const needLeftShift = differenceTooltipAndWrapperLeft <= PAGE_PADDING;
-            const differenceTooltipAndWrapperRight = tooltipContentRect.right - wrapperRect.right;
-            const needRightShift = differenceTooltipAndWrapperRight >= PAGE_PADDING;
-
-            const isDownAvailable = tooltipContentRect.bottom + PAGE_PADDING < document.documentElement.clientHeight;
-
-            if (isDownAvailable) {
+        if (this.wrapperElement && isPlatformBrowser(this.platformId)) {
+            if (this.direction !== ITooltipDirection.BOTTOM) {
                 this.direction = ITooltipDirection.BOTTOM;
-            } else {
-                this.direction = ITooltipDirection.TOP;
-            }
-            this.cd.markForCheck();
-
-            if (needLeftShift) {
-                this.renderer.setStyle(tooltipContent, 'transform', 'translateX(0%)');
-                this.renderer.setStyle(tooltipContent, 'left', '0px');
-                tooltipContentRect = tooltipContent.getBoundingClientRect();
-                const diff = tooltipContentRect.left - wrapperRect.left;
-                this.renderer.setStyle(
-                    tooltipContent,
-                    'left',
-                    -(diff - PAGE_PADDING) + 'px',
-                );
+                this.cd.markForCheck();
             }
 
-            if (needRightShift) {
-                this.renderer.setStyle(tooltipContent, 'transform', 'translateX(0%)');
-                this.renderer.setStyle(tooltipContent, 'left', '0px');
-                tooltipContentRect = tooltipContent.getBoundingClientRect();
-                const diff = tooltipContentRect.right - wrapperRect.right;
-                this.renderer.setStyle(
-                    tooltipContent,
-                    'left',
-                    -(diff + PAGE_PADDING) + 'px',
-                );
-            }
-            this.renderer.removeStyle(tooltipContent, 'visibility');
+            const tooltipContent = this.contentWrapperDiv.nativeElement;
+            this.renderer.setStyle(tooltipContent, 'visibility', 'hidden');
+
+            setTimeout(() => {
+                this.renderer.removeStyle(tooltipContent, 'right');
+                this.renderer.removeStyle(tooltipContent, 'left');
+                this.renderer.removeStyle(tooltipContent, 'transform');
+                const wrapperRect = this.wrapperElement.getBoundingClientRect();
+                let tooltipContentRect = tooltipContent.getBoundingClientRect();
+
+                const differenceTooltipAndWrapperLeft = tooltipContentRect.left - wrapperRect.left;
+                const needLeftShift = differenceTooltipAndWrapperLeft <= this.INNER_PADDING_FOR_COUNT;
+                const differenceTooltipAndWrapperRight = tooltipContentRect.right - wrapperRect.right;
+                const needRightShift = differenceTooltipAndWrapperRight >= this.INNER_PADDING_FOR_COUNT;
+
+                const isDownAvailable = tooltipContentRect.bottom + this.INNER_PADDING_FOR_COUNT < document.documentElement.clientHeight;
+
+                if (isDownAvailable) {
+                    this.direction = ITooltipDirection.BOTTOM;
+                } else {
+                    this.direction = ITooltipDirection.TOP;
+                }
+
+                this.cd.markForCheck();
+
+                if (needLeftShift) {
+                    this.renderer.setStyle(tooltipContent, 'transform', 'translateX(0%)');
+                    this.renderer.setStyle(tooltipContent, 'left', '0px');
+                    tooltipContentRect = tooltipContent.getBoundingClientRect();
+                    const diff = tooltipContentRect.left - wrapperRect.left;
+                    this.renderer.setStyle(
+                        tooltipContent,
+                        'left',
+                        -(diff - this.INNER_PADDING_FOR_COUNT) + 'px',
+                    );
+                }
+
+                if (needRightShift) {
+                    this.renderer.setStyle(tooltipContent, 'transform', 'translateX(0%)');
+                    this.renderer.setStyle(tooltipContent, 'left', '0px');
+                    tooltipContentRect = tooltipContent.getBoundingClientRect();
+                    const diff = tooltipContentRect.right - wrapperRect.right;
+                    this.renderer.setStyle(
+                        tooltipContent,
+                        'left',
+                        -(diff + this.INNER_PADDING_FOR_COUNT) + 'px',
+                    );
+                }
+                this.renderer.removeStyle(tooltipContent, 'visibility');
+            });
         }
     }
 
@@ -141,10 +146,4 @@ export class TooltipComponent extends AbstractComponent implements OnInit, After
             this.manageDropdownPosition();
         });
     }
-
-    ngOnInit () {
-        super.ngOnInit();
-        this.startDirection = this.direction;
-    }
-
 }
