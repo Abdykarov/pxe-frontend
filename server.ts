@@ -77,7 +77,7 @@ const getTagUrl = (question, taqConfig) => {
 };
 
 const getQuestions = (questions) => {
-    if (R.path(['angularDevstack', 'config', 'showTestData'], window)) {
+    if (!R.path(['angularDevstack', 'config', 'includeTestData'], window)) {
         return R.reject(R.propEq('isTestData')(true))(questions);
     }
     return questions;

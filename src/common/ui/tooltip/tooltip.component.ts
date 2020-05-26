@@ -21,14 +21,13 @@ import { fromEvent } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { ITooltipDirection } from './models/direction.model';
-import set = Reflect.set;
 
 @Component({
     selector: 'lnd-tooltip',
     templateUrl: './tooltip.component.html',
     styleUrls: ['./tooltip.component.scss'],
 })
-export class TooltipComponent extends AbstractComponent implements AfterViewInit {
+export class TooltipComponent extends AbstractComponent {
     private readonly INNER_PADDING_FOR_COUNT = 8;
 
     @ViewChild('contentWrapperDiv')
@@ -139,11 +138,5 @@ export class TooltipComponent extends AbstractComponent implements AfterViewInit
                 this.renderer.removeStyle(tooltipContent, 'visibility');
             });
         }
-    }
-
-    ngAfterViewInit(): void {
-        setTimeout(() => {
-            this.manageDropdownPosition();
-        });
     }
 }
