@@ -64,8 +64,8 @@ export class TooltipComponent extends AbstractComponent {
         this.resizeEvent$
             .pipe(takeUntil(this.destroy$))
             .subscribe(() => {
-                this.manageDropdownPosition();
                 this.isOpen = false;
+                this.manageDropdownPosition();
             });
     }
 
