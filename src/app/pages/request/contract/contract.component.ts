@@ -24,7 +24,7 @@ import {
 import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
 
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
-import { FaqService } from 'src/app/services/faq.service';
+import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import {
     CommodityType,
     ISupplyPoint,
@@ -38,12 +38,11 @@ import {
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
-import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
+import { FaqService } from 'src/app/services/faq.service';
 import {
     getConfigStepper,
     parseGraphQLErrors,
     parseRestAPIErrors,
-    removeHtmlFromText,
     scrollToElementFnc,
 } from 'src/common/utils';
 import {

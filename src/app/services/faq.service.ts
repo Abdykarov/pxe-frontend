@@ -29,7 +29,7 @@ export class FaqService {
         http.get('assets/static-data/questions.json')
             .pipe(
                 map((questions: IQuestion[]) => {
-                    if (environment.showTestData) {
+                    if (!environment.showTestData) {
                         return R.reject(R.propEq('isTestData')(true))(questions);
                     }
                     return questions;

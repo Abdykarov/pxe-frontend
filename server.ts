@@ -76,12 +76,21 @@ const getTagUrl = (question, taqConfig) => {
     return foundTaq.url;
 };
 
+const getQuestions = (questions) => {
+    console.log(R.path(['angularDevstack', 'config', 'showTestData'], window));
+    if (R.path(['angularDevstack', 'config', 'showTestData'], window)) {
+        return R.reject(R.propEq('isTestData')(true))(questions);
+    }
+    return questions;
+};
+
 // Server static files from /app
 app.get('/sitemap.xml', (req, res) => {
     const siteMapOriginal = fs.readFileSync(join(APP_FOLDER, 'sitemap.xml'), 'utf8');
     const taqConfig = JSON.parse(fs.readFileSync(join(APP_FOLDER, 'assets/static-data/faq.json'), 'utf8'));
-    const questions = JSON.parse(fs.readFileSync(join(APP_FOLDER, 'assets/static-data/questions.json'), 'utf8'));
+    let questions = JSON.parse(fs.readFileSync(join(APP_FOLDER, 'assets/static-data/questions.json'), 'utf8'));
     const parseString = xml2js.parseString;
+    questions = getQuestions(questions);
     parseString(siteMapOriginal, (err, result) => {
         questions.forEach(question => {
             const url = R.path(['urlset', 'url' ], result);

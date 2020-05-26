@@ -66,15 +66,17 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     }
 
     ngOnInit () {
-        const vatNumber = R.path(['supplier', 'vatNumber'])(this.supplyPointOffer);
-        this.question = {...R.find(R.propEq('vatNumber', vatNumber))(this.questions)};
-        if (!R.isEmpty(this.question)) {
-            const textWithoutHTML = removeHtmlFromText(this.question.shortContent);
-            const indexOfLastWord = textWithoutHTML.substr(CONSTS.MAX_LENGTH_SUPPLIER_DESCRIPTION).indexOf(' ');
-            this.question.shortContent =  R.pipe(
-                R.take(indexOfLastWord + CONSTS.MAX_LENGTH_SUPPLIER_DESCRIPTION),
-                (text) => `${text}${CONSTS.APPEND_AFTER_CUT_TEXT}`,
-            )(textWithoutHTML);
+        if ( this.questions) {
+            const vatNumber = R.path(['supplier', 'vatNumber'])(this.supplyPointOffer);
+            this.question = {...R.find(R.propEq('vatNumber', vatNumber))(this.questions)};
+            if (!R.isEmpty(this.question)) {
+                const textWithoutHTML = removeHtmlFromText(this.question.shortContent);
+                const indexOfLastWord = textWithoutHTML.substr(CONSTS.MAX_LENGTH_SUPPLIER_DESCRIPTION).indexOf(' ');
+                this.question.shortContent =  R.pipe(
+                    R.take(indexOfLastWord + CONSTS.MAX_LENGTH_SUPPLIER_DESCRIPTION),
+                    (text) => `${text}${CONSTS.APPEND_AFTER_CUT_TEXT}`,
+                )(textWithoutHTML);
+            }
         }
 
         this.dateDiffValidityOfOffer = this.dateDiffPipe.transform(
