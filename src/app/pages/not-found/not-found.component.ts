@@ -18,8 +18,6 @@ import {
     styleUrls: ['../../../assets/scss/05_pages/error-page.scss'],
 })
 export class NotFoundComponent extends AbstractComponent {
-    public readonly CONSTS = CONSTS;
-
     public commodityTypePower = CommodityTypesLowerCase.POWER;
     public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
 

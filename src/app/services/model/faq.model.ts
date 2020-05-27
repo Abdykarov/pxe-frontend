@@ -7,6 +7,9 @@ export interface IQuestion {
     fullContent?: string;
     oneOfMostVisited?: boolean;
     seoKeywords?: string;
+    vatNumber?: string;
+    isTestData?: boolean;
+    absoluteUrl?: string[];
 }
 
 export enum Tag {
