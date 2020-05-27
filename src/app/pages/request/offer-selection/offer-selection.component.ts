@@ -29,13 +29,11 @@ import {
     ROUTES,
     S_ANALYTICS,
 } from 'src/app/app.constants';
-import { IQuestion } from 'src/app/services/model/faq.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { FaqService } from 'src/app/services/faq.service';
 import {
-    geParamFromTag,
     getConfigStepper,
-    parseGraphQLErrors, removeHtmlFromText, truncateText,
+    parseGraphQLErrors,
 } from 'src/common/utils';
 import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import {
@@ -97,19 +95,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
         this.loadConfigs$
             .pipe(takeUntil(this.destroy$))
             .subscribe(
-                _ => {
-                    this.questions = R.map( (question: IQuestion) => {
-                        question.absoluteUrl = ['/', CONSTS.PATHS.FAQ, geParamFromTag(question.tag, this.faqConfig, 'url'), question.url];
-                        return question;
-                    })([...this.questions]);
-                    this.cd.markForCheck();
-                },
-            );
-
-        this.loadConfigs$
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(
-                _ =>  this.cd.markForCheck(),
+                _ => this.cd.markForCheck(),
             );
 
         this.supplyService.getSupplyPoint(this.supplyPointId)
