@@ -29,13 +29,11 @@ import {
     ROUTES,
     S_ANALYTICS,
 } from 'src/app/app.constants';
-import { IQuestion } from 'src/app/services/model/faq.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { FaqService } from 'src/app/services/faq.service';
 import {
-    geParamFromTag,
     getConfigStepper,
-    parseGraphQLErrors, removeHtmlFromText, truncateText,
+    parseGraphQLErrors,
 } from 'src/common/utils';
 import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import {
