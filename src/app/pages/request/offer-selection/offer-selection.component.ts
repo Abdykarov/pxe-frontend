@@ -98,12 +98,6 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
                 _ => this.cd.markForCheck(),
             );
 
-        this.loadConfigs$
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(
-                _ =>  this.cd.markForCheck(),
-            );
-
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
                 map(({data}) => data.getSupplyPoint),
