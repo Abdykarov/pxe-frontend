@@ -68,7 +68,6 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     @ViewChild('supplierChange')
     public supplierChangeElement: ElementRef;
 
-    public readonly CONSTS = CONSTS;
     public frequentedQuestions: IAccordionItem[] = [];
     public formLoading = false;
     public formSent = false;

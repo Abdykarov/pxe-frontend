@@ -22,17 +22,20 @@ import {
     takeUntil,
 } from 'rxjs/operators';
 
-import { AbstractComponent } from 'src/common/abstract.component';
+import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
     ROUTES,
     S_ANALYTICS,
 } from 'src/app/app.constants';
+import { IQuestion } from 'src/app/services/model/faq.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
+import { FaqService } from 'src/app/services/faq.service';
 import {
+    geParamFromTag,
     getConfigStepper,
-    parseGraphQLErrors,
+    parseGraphQLErrors, removeHtmlFromText, truncateText,
 } from 'src/common/utils';
 import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import {
@@ -52,7 +55,7 @@ import { ValidityService } from 'src/app/services/validity.service';
     templateUrl: './offer-selection.component.html',
     styleUrls: ['./offer-selection.component.scss'],
 })
-export class OfferSelectionComponent extends AbstractComponent implements OnInit, OnDestroy {
+export class OfferSelectionComponent extends AbstractFaqComponent implements OnInit, OnDestroy {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.OFFER_STEP;
     public readonly PREVIOUS_PROGRESS_STATUS = ProgressStatus.SUPPLY_POINT;
 
@@ -76,19 +79,38 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
+        public faqService: FaqService,
         public navigateRequestService: NavigateRequestService,
         private offerService: OfferService,
-        private route: ActivatedRoute,
+        public route: ActivatedRoute,
         private router: Router,
         public sAnalyticsService: SAnalyticsService,
         private supplyService: SupplyService,
         private validityService: ValidityService,
     ) {
-        super();
+        super(faqService, route);
     }
 
     ngOnInit() {
         this.sAnalyticsService.installSForm();
+
+        this.loadConfigs$
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(
+                _ => {
+                    this.questions = R.map( (question: IQuestion) => {
+                        question.absoluteUrl = ['/', CONSTS.PATHS.FAQ, geParamFromTag(question.tag, this.faqConfig, 'url'), question.url];
+                        return question;
+                    })([...this.questions]);
+                    this.cd.markForCheck();
+                },
+            );
+
+        this.loadConfigs$
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(
+                _ =>  this.cd.markForCheck(),
+            );
 
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
@@ -100,7 +122,8 @@ export class OfferSelectionComponent extends AbstractComponent implements OnInit
                 }),
                 map(({data}) => R.sort(R.ascend(R.prop('totalPrice')))(data.findSupplyPointOffers)),
                 takeUntil(this.destroy$),
-            ).subscribe(
+            )
+            .subscribe(
                 (findSupplyPointOffers: IOffer[]) => {
                     this.supplyPointOffers = findSupplyPointOffers;
                     this.loadingSupplyPointOffers = false;

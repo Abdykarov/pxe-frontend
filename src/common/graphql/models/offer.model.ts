@@ -1,5 +1,6 @@
 import { ICodelistItem } from './supply.model';
 import { ISupplier } from 'src/common/graphql/models/supply.model';
+import { IQuestion } from 'src/app/services/model/faq.model';
 
 export interface IOffer {
     id: number;
@@ -41,6 +42,7 @@ export interface IOffer {
     prepayment?: number;
     marked?: boolean;
     greenEnergy: boolean;
+    question?: IQuestion;
     __typename?: string;
 }
 
