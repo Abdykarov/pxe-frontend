@@ -24,6 +24,7 @@ import {
 import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
 
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
+import { IQuestion } from 'src/app/services/model/faq.model';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import {
     CommodityType,
@@ -40,6 +41,7 @@ import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
 import { FaqService } from 'src/app/services/faq.service';
 import {
+    geParamFromTag,
     getConfigStepper,
     parseGraphQLErrors,
     parseRestAPIErrors,
@@ -108,7 +110,13 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
         this.loadConfigs$
             .pipe(takeUntil(this.destroy$))
             .subscribe(
-                _ => this.cd.markForCheck(),
+                _ => {
+                    this.questions = R.map( (question: IQuestion) => {
+                        question.absoluteUrl = ['/', CONSTS.PATHS.FAQ, geParamFromTag(question.tag, this.faqConfig, 'url'), question.url];
+                        return question;
+                    })([...this.questions]);
+                    this.cd.markForCheck();
+                },
             );
 
         this.supplyService.getSupplyPoint(this.supplyPointId)

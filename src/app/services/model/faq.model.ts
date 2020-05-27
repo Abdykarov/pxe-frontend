@@ -9,6 +9,7 @@ export interface IQuestion {
     seoKeywords?: string;
     vatNumber?: number;
     isTestData?: boolean;
+    absoluteUrl?: string[];
 }
 
 export enum Tag {

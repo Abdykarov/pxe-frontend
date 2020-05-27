@@ -57,7 +57,7 @@
                                 direction="bottom"
                                 customClass="ml-2 tooltip-supply-point-info">
                                 <div>{{question?.shortContent}}</div>
-                                <a [routerLink]="['/', CONSTS.PATHS.FAQ, question?.tag, question?.url]"
+                                <a [routerLink]="question.absoluteUrl"
                                    class="link--white link--interactive-revert d-block mt-1">
                                     Více info
                                 </a>

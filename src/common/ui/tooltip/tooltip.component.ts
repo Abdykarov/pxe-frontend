@@ -88,7 +88,6 @@ export class TooltipComponent extends AbstractComponent {
             }
 
             const tooltipContent = this.contentWrapperDiv.nativeElement;
-            this.renderer.setStyle(tooltipContent, 'visibility', 'hidden');
 
             setTimeout(() => {
                 this.renderer.removeStyle(tooltipContent, 'right');
@@ -135,7 +134,6 @@ export class TooltipComponent extends AbstractComponent {
                         -(diff + this.INNER_PADDING_FOR_COUNT) + 'px',
                     );
                 }
-                this.renderer.removeStyle(tooltipContent, 'visibility');
             });
         }
     }

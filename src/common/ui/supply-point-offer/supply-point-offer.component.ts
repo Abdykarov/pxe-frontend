@@ -16,7 +16,7 @@ import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
 import { IOffer } from 'src/common/graphql/models/offer.model';
 import { IQuestion } from 'src/app/services/model/faq.model';
-import { removeHtmlFromText, truncateText } from 'src/common/utils';
+import { removeHtmlFromText } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-supply-point-offer',
@@ -69,6 +69,7 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
         if ( this.questions) {
             const vatNumber = R.path(['supplier', 'vatNumber'])(this.supplyPointOffer);
             this.question = {...R.find(R.propEq('vatNumber', vatNumber))(this.questions)};
+
             if (!R.isEmpty(this.question)) {
                 const textWithoutHTML = removeHtmlFromText(this.question.shortContent);
                 const indexOfLastWord = textWithoutHTML.substr(CONSTS.MAX_LENGTH_SUPPLIER_DESCRIPTION).indexOf(' ');
