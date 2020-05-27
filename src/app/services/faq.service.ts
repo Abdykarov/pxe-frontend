@@ -40,6 +40,7 @@ export class FaqService {
                         question.absoluteUrl = ['/', CONSTS.PATHS.FAQ, geParamFromTag(question.tag, this.faqConfig, 'url'), question.url];
                         return question;
                     })(questions);
+
                     if (!environment.includeTestData) {
                         return R.reject(R.propEq('isTestData')(true))(questions);
                     }
