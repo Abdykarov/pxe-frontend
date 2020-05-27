@@ -39,7 +39,7 @@ export const offerConfig: IOffer = {
     supplier: {
         id: '',
         name: 'PRE',
-        vatNumber: '',
+        vatNumber: '555',
         logoPath: '',
         sampleDocuments: [],
     },
@@ -64,8 +64,8 @@ export const offerConfig: IOffer = {
     greenEnergy: true,
 };
 
-export const question: IQuestion = {
-    'id': 15,
+export const questions: IQuestion[] = [{
+    id: 15,
     'tag': Tag.SUPPLIER,
     'url': 'future',
     'header': 'Jak chcete PARC4U rozvíjet?',
@@ -73,4 +73,5 @@ export const question: IQuestion = {
         ' rozvoj a automatizaci poskytovaných služeb tak, abyste měli energie již pro vždy vyřešené.',
     'seoKeywords': 'PARC4U, dostatek, zákazníků, rozvoj, automatizaci, poskytovaných služeb, energie, vyřešené',
     'oneOfMostVisited': true,
-};
+    vatNumber: '555',
+}];
