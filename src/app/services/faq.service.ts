@@ -36,14 +36,13 @@ export class FaqService {
                     return http.get('assets/static-data/questions.json');
                 }),
                 map((questions: IQuestion[]) => {
-                    if (!environment.includeTestData) {
-                        return R.reject(R.propEq('isTestData')(true))(questions);
-                    }
-
                     questions = R.map( (question: IQuestion) => {
                         question.absoluteUrl = ['/', CONSTS.PATHS.FAQ, geParamFromTag(question.tag, this.faqConfig, 'url'), question.url];
                         return question;
                     })(questions);
+                    if (!environment.includeTestData) {
+                        return R.reject(R.propEq('isTestData')(true))(questions);
+                    }
 
                     return questions;
                 }),
