@@ -97,13 +97,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
         this.loadConfigs$
             .pipe(takeUntil(this.destroy$))
             .subscribe(
-                _ => {
-                    this.questions = R.map( (question: IQuestion) => {
-                        question.absoluteUrl = ['/', CONSTS.PATHS.FAQ, geParamFromTag(question.tag, this.faqConfig, 'url'), question.url];
-                        return question;
-                    })([...this.questions]);
-                    this.cd.markForCheck();
-                },
+                _ => this.cd.markForCheck(),
             );
 
         this.loadConfigs$
