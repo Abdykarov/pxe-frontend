@@ -55,8 +55,10 @@ export const supplyPointFragment = gql`
             },
             annualConsumptionNT,
             annualConsumptionVT,
+            annualConsumption,
             annualConsumptionNTUnit,
             annualConsumptionVTUnit,
+            annualConsumptionUnit,
             expirationDate,
             subject{
                 type,
@@ -221,8 +223,8 @@ export const findSupplierDocumentsByComodityQuery = gql`
 `;
 
 export const findSupplyPointsQuery = gql`
-    query findSupplyPoints($ean: String){
-        findSupplyPoints(ean: $ean){
+    query findSupplyPoints($identificationNumber: String){
+        findSupplyPoints(identificationNumber: $identificationNumber){
             id,
             name,
             commodityType,
@@ -290,8 +292,8 @@ export const getSupplyPointQuery = gql`
 `;
 
 export const findSupplyPointsByContractStatusQuery = gql`
-    query findSupplyPointsByContractStatus($ean: String, $contractStatus: [ContractStatus]!){
-        findSupplyPointsByContractStatus(ean: $ean, contractStatus: $contractStatus){
+    query findSupplyPointsByContractStatus($identificationNumber: String, $contractStatus: [ContractStatus]!){
+        findSupplyPointsByContractStatus(identificationNumber: $identificationNumber, contractStatus: $contractStatus){
             ...SupplyPointFragment
         }
     }

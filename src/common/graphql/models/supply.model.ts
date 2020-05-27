@@ -112,17 +112,19 @@ export interface ISupplyPoint {
     allowedOperations: AllowedOperations[];
     commodityType: CommodityType;
     supplier: ISupplier;
-    ean: string;
+    identificationNumber: string;
     address: IAddress;
     distributionRate: ICodelistItem;
     circuitBreaker: ICodelistItem;
     phases: ICodelistItem;
-    annualConsumptionNT: number;
-    annualConsumptionVT: number;
+    annualConsumption?: number;
+    annualConsumptionNT?: number;
+    annualConsumptionVT?: number;
     expirationDate: string;
     subject: ICodelistItem;
-    lastAnnualConsumptionNT: number;
-    lastAnnualConsumptionVT: number;
+    lastAnnualConsumption?: number;
+    lastAnnualConsumptionNT?: number;
+    lastAnnualConsumptionVT?: number;
     lastVersionOfSupplyPoint: boolean;
     contractEndType: ICodelistItem;
     timeToContractEnd: number;
@@ -131,6 +133,7 @@ export interface ISupplyPoint {
     progressStatus: ProgressStatus;
     annualConsumptionNTUnit?: string;
     annualConsumptionVTUnit?: string;
+    annualConsumptionUnit?: string;
 }
 
 export enum ProgressStatus {

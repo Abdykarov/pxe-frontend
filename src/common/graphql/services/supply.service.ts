@@ -77,11 +77,11 @@ export class SupplyService {
         })
         .valueChanges
 
-    public findSupplyPoints = (ean: string = null) => this.apollo
+    public findSupplyPoints = ($identificationNumber: string = null) => this.apollo
         .watchQuery<any>({
             query: findSupplyPointsQuery,
             variables: {
-                ean,
+                $identificationNumber,
             },
         })
         .valueChanges
@@ -170,12 +170,12 @@ export class SupplyService {
         })
         .valueChanges
 
-    public findSupplyPointsByContractStatus = (contractStatus: ContractStatus[], ean: string = null) => this.apollo
+    public findSupplyPointsByContractStatus = (contractStatus: ContractStatus[], identificationNumber: string = null) => this.apollo
         .watchQuery<any>({
             fetchPolicy: 'network-only',
             query: findSupplyPointsByContractStatusQuery,
             variables: {
-                ean,
+                identificationNumber,
                 contractStatus,
             },
         })

@@ -126,7 +126,7 @@ export class ContractService {
             {
                 query: findSupplyPointOffersQuery,
                 variables: {
-                    ean: supplyPoint.ean,
+                    identificationNumber: supplyPoint.identificationNumber,
                 },
             });
 

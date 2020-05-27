@@ -14,7 +14,7 @@ export const supplyPointConfigPower: ISupplyPoint = {
         logoPath: '',
         sampleDocuments: [],
     },
-    ean: '859182400813432086',
+    identificationNumber: '859182400813432086',
     address: {
         street: 'Milady Horákové',
         orientationNumber: '46',
@@ -203,7 +203,7 @@ export const supplyPointConfigGas: ISupplyPoint = {
             greenEnergy: true,
         },
     },
-    ean: '27zg700z0069625e',
+    identificationNumber: '27zg700z0069625e',
     address: {
         street: 'Milady Horákové',
         orientationNumber: '46',

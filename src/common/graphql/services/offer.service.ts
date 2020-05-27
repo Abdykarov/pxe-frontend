@@ -55,12 +55,12 @@ export class OfferService {
         })
         .valueChanges
 
-    public findSupplyPointOffers = (ean: string) => this.apollo
+    public findSupplyPointOffers = (identificationNumber: string) => this.apollo
         .watchQuery<any>({
             fetchPolicy: 'network-only',
             query: findSupplyPointOffersQuery,
             variables: {
-                ean,
+                identificationNumber,
             },
         })
         .valueChanges
