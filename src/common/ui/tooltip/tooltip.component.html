@@ -10,7 +10,7 @@
     <div class="tooltip__toggle">
         <ng-container *ngTemplateOutlet="actionTemplate; context: { toggle: this.toggle } "></ng-container>
     </div>
-    <div class="tooltip__content">
+    <div #contentWrapperDiv class="tooltip__content">
         <ng-content></ng-content>
     </div>
 </div>

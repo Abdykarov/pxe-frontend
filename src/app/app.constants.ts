@@ -9,6 +9,7 @@ import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
+    APPEND_AFTER_CUT_TEXT: '...',
     ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],
     CRYPTO: {
         get SALT() {
@@ -48,6 +49,7 @@ export const CONSTS = {
         SUPPLY_POINT_PARTIAL_FORM: 'SUPPLY_POINT',
     },
     LOGIN_FORM_NAME: 'login',
+    MAX_LENGTH_SUPPLIER_DESCRIPTION: 100,
     MAX_REQUEST_IN_BATCH_LINK: 200,
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,

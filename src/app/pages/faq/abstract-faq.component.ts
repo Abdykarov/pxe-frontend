@@ -16,8 +16,6 @@ import {
 } from 'src/app/services/model/faq.model';
 
 export class AbstractFaqComponent extends AbstractComponent {
-    public readonly CONSTS = CONSTS;
-
     public activeTag = null;
     public faqConfig: ITagConfigItem[] = null;
     public questions: IQuestion[] = null;

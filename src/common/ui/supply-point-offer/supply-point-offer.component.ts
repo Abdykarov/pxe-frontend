@@ -1,4 +1,5 @@
 import {
+    ChangeDetectorRef,
     Component,
     EventEmitter,
     Input,
@@ -6,12 +7,16 @@ import {
     Output,
 } from '@angular/core';
 
+import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
+import { CONSTS } from 'src/app/app.constants';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
 import { IOffer } from 'src/common/graphql/models/offer.model';
+import { IQuestion } from 'src/app/services/model/faq.model';
+import { removeHtmlFromText } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-supply-point-offer',
@@ -33,6 +38,10 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     public dateDiffValidityOfOffer = Number.MIN_VALUE;
     public math = Math;
     public showValidityOfOffer = false;
+    public question: IQuestion = null;
+
+    @Input()
+    public questions: IQuestion[] = null;
 
     @Input()
     public supplyPointOffer: IOffer;
@@ -50,12 +59,27 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     public action: EventEmitter<any> = new EventEmitter();
 
     constructor(
+        private cd: ChangeDetectorRef,
         private dateDiffPipe: DateDiffPipe,
     ) {
         super();
     }
 
     ngOnInit () {
+        if ( this.questions) {
+            const vatNumber = R.path(['supplier', 'vatNumber'])(this.supplyPointOffer);
+            this.question = {...R.find(R.propEq('vatNumber', vatNumber))(this.questions)};
+
+            if (!R.isEmpty(this.question)) {
+                const textWithoutHTML = removeHtmlFromText(this.question.shortContent);
+                const indexOfLastWord = textWithoutHTML.substr(CONSTS.MAX_LENGTH_SUPPLIER_DESCRIPTION).indexOf(' ');
+                this.question.shortContent =  R.pipe(
+                    R.take(indexOfLastWord + CONSTS.MAX_LENGTH_SUPPLIER_DESCRIPTION),
+                    (text) => `${text}${CONSTS.APPEND_AFTER_CUT_TEXT}`,
+                )(textWithoutHTML);
+            }
+        }
+
         this.dateDiffValidityOfOffer = this.dateDiffPipe.transform(
             this.currentTime.toISOString(),
             this.supplyPointOffer.validTo,

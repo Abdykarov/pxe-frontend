@@ -76,6 +76,8 @@
             [class.d-block]="showOffer"
             [class.d-none]="!showOffer">
             <pxe-supply-point-offer
+                *ngIf="questions"
+                [questions]="questions"
                 [isFromContract]="true"
                 [supplyPointOffer]="supplyPoint.contract.offer"
                 [interactive]="false">
