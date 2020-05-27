@@ -3,10 +3,13 @@ import { Injectable } from '@angular/core';
 
 import * as R from 'ramda';
 import { BehaviorSubject } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import {
+    map,
+    switchMap,
+} from 'rxjs/operators';
+
 import { CONSTS } from 'src/app/app.constants';
 import { geParamFromTag } from 'src/common/utils';
-
 import { environment } from 'src/environments/environment';
 import {
     IQuestion,
@@ -29,7 +32,6 @@ export class FaqService {
         http.get('assets/static-data/faq.json')
             .pipe(
                 switchMap((faqConfig: ITagConfigItem[]) => {
-                    this.faqConfigSubject$.next(faqConfig);
                     this.faqConfig = faqConfig;
                     return http.get('assets/static-data/questions.json');
                 }),
@@ -37,14 +39,17 @@ export class FaqService {
                     if (!environment.includeTestData) {
                         return R.reject(R.propEq('isTestData')(true))(questions);
                     }
+
+                    questions = R.map( (question: IQuestion) => {
+                        question.absoluteUrl = ['/', CONSTS.PATHS.FAQ, geParamFromTag(question.tag, this.faqConfig, 'url'), question.url];
+                        return question;
+                    })(questions);
+
                     return questions;
                 }),
             )
             .subscribe((questions: IQuestion[]) => {
-                questions = R.map( (question: IQuestion) => {
-                    question.absoluteUrl = ['/', CONSTS.PATHS.FAQ, geParamFromTag(question.tag, this.faqConfig, 'url'), question.url];
-                    return question;
-                })(questions)
+                this.faqConfigSubject$.next(this.faqConfig);
                 this.questionsSubject$.next(questions);
             });
     }
