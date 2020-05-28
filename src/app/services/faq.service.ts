@@ -29,11 +29,11 @@ export class FaqService {
     constructor(
         private http: HttpClient,
     ) {
-        http.get(`/${environment.url}assets/static-data/faq.json`)
+        http.get(`${environment.url}/assets/static-data/faq.json`)
             .pipe(
                 switchMap((faqConfig: ITagConfigItem[]) => {
                     this.faqConfig = faqConfig;
-                    return http.get(`/${environment.url}'assets/static-data/questions.json`);
+                    return http.get(`${environment.url}/'assets/static-data/questions.json`);
                 }),
                 map((questions: IQuestion[]) => {
                     questions = R.map( (question: IQuestion) => {
