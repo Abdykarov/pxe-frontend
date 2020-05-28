@@ -33,7 +33,7 @@ export class FaqService {
             .pipe(
                 switchMap((faqConfig: ITagConfigItem[]) => {
                     this.faqConfig = faqConfig;
-                    return http.get(`${environment.url}/'assets/static-data/questions.json`);
+                    return http.get(`${environment.url}/assets/static-data/questions.json`);
                 }),
                 map((questions: IQuestion[]) => {
                     questions = R.map( (question: IQuestion) => {
