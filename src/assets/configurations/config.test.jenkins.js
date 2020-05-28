@@ -6,6 +6,7 @@ window.angularDevstack = {
         "gaId": "",
         "gtmId": "",
         "production": false,
+        "url": "http://mock:9002",
         "url_graphql": "http://mock:9002/graphql",
         "url_api": "http://mock:9002/api",
         "web_api_key": "default-api-key",
