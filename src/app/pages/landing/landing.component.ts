@@ -199,7 +199,7 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
     public scrollToNewSubscription = () =>  {
         this.authService.setActualStateFromOtherTab();
         const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
-        if (isLogged) {
+        if (!isLogged) {
             this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
         }
     }
