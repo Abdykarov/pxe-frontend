@@ -25,7 +25,7 @@
 			}
 			
 			@bottom-left {
-				content: '© POWER EXCHANGE CENTRAL EUROPE, a.s.';
+				content: '© POWER EXCHANGE CENTRAL EUROPE, a.s. @year';
 				padding-bottom: 20px;
 				vertical-align: bottom;
 				font-size: 10px;
@@ -179,7 +179,14 @@
 			width: 100%;
 		}
 
-		.date {
+        .text-underline {
+            display: block;
+            float: left;
+            width: 30%;
+            border-bottom: solid black 1px;
+        }
+
+        .date {
 			display: inline-block;
 			width: 45%;
 			vertical-align: top;
@@ -190,13 +197,6 @@
 			width: 50%;
 			text-align: center;
 		}
-
-        .text-underline {
-            display: block;
-            float: left;
-            width: 30%;
-            border-bottom: solid black 1px;
-        }
 
 		/* Utilities */
 		.d-inline-block {
@@ -268,39 +268,39 @@
 				<tbody>
 					<tr>
 						<th>Název</th>
-						<td></td>
+						<td>@supplier-name</td>
 					</tr>
 					<tr>
 						<th>Se sídlem</th>
-						<td></td>
+						<td>@supplier-registered-office</td>
 					</tr>
 					<tr>
 						<th>IČO</th>
-						<td></td>
+						<td>@supplier-ico</td>
 					</tr>
 					<tr>
 						<th>DIČ</th>
-						<td></td>
+						<td>@supplier-dic</td>
 					</tr>
 					<tr>
 						<th>Zapsaný v obchodním rejstříku</th>
-						<td></td>
+						<td>@supplier-register</td>
 					</tr>
 					<tr>
 						<th>Bankovní spojení</th>
-						<td></td>
+						<td>@supplier-bank-account-power</td>
 					</tr>
 					<tr>
 						<th>Zákaznická linka</th>
-						<td></td>
+						<td>@supplier-customer-hotline</td>
 					</tr>
 					<tr>
 						<th>E-mailový kontakt</th>
-						<td></td>
+						<td>@supplier-email</td>
 					</tr>
 					<tr>
 						<th>Číslo licence na obchod s elektřinou</th>
-						<td></td>
+						<td>@supplier-electricity-license-number</td>
 					</tr>
 				</tbody>
 			</table>
@@ -309,11 +309,11 @@
 				<tbody>
 					<tr>
 						<th>Jméno a příjmení</th>
-						<td></td>
+						<td>@client-name</td>
 					</tr>
 					<tr>
 						<th>Datum narození</th>
-						<td></td>
+						<td>@client-birthdate</td>
 					</tr>
 				</tbody>
 			</table>
@@ -325,19 +325,19 @@
 					</tr>
 					<tr>
 						<th>Ulice</th>
-						<td></td>
+						<td>@client-permanent-street</td>
 					</tr>
 					<tr>
 						<th>Číslo popisné / orientační</th>
-						<td></td>
+						<td>@client-permanent-descriptive-indicative-number</td>
 					</tr>
 					<tr>
 						<th>Obec</th>
-						<td></td>
+						<td>@client-permanent-address-town</td>
 					</tr>
 					<tr>
 						<th>PSČ</th>
-						<td></td>
+						<td>@client-permanent-zip-code</td>
 					</tr>
 					<tr>
 						<th class="address-title">Korespondenční adresa</th>
@@ -345,27 +345,27 @@
 					</tr>
 					<tr>
 						<th>Ulice</th>
-						<td></td>
+						<td>@client-street</td>
 					</tr>
 					<tr>
 						<th>Číslo popisné / orientační</th>
-						<td></td>
+						<td>@client-descriptive-indicative-number</td>
 					</tr>
 					<tr>
 						<th>Obec</th>
-						<td></td>
+						<td>@client-address-town</td>
 					</tr>
 					<tr>
 						<th>PSČ</th>
-						<td></td>
+						<td>@client-zip-code</td>
 					</tr>
 					<tr>
 						<th>E-mailový kontakt</th>
-						<td></td>
+						<td>@client-email-contact</td>
 					</tr>
 					<tr>
 						<th>Telefonický kontakt</th>
-						<td></td>
+						<td>@client-phone-contact</td>
 					</tr>
 				</tbody>
 			</table>
@@ -380,39 +380,39 @@
 				<tbody>
 					<tr>
 						<th>Ulice</th>
-						<td></td>
+						<td>@client-supply-point-street</td>
 					</tr>
 					<tr>
 						<th>Číslo popisné / orientační</th>
-						<td></td>
+						<td>@client-supply-point-descriptive-indicative-number</td>
 					</tr>
 					<tr>
 						<th>Obec</th>
-						<td></td>
+						<td>@client-supply-point-address-town</td>
 					</tr>
 					<tr>
 						<th>PSČ</th>
-						<td></td>
+						<td>@client-supply-point-zip-code</td>
 					</tr>
 					<tr>
 						<th>EAN</th>
-						<td></td>
+						<td>@client-ean</td>
 					</tr>
 					<tr>
 						<th>Předpokládaná spotřeba VT (MWh/rok)</th>
-						<td></td>
+						<td>@client-expected-vt-consumption</td>
 					</tr>
 					<tr>
 						<th>Předpokládaná spotřeba NT (MWh/rok)</th>
-						<td></td>
+						<td>@client-expected-nt-consumption</td>
 					</tr>
 					<tr>
 						<th>Hodnota jističe</th>
-						<td></td>
+						<td>@client-circuit-breaker-value</td>
 					</tr>
 					<tr>
 						<th>Distribuční sazba</th>
-						<td></td>
+						<td>@client-distribution-rate</td>
 					</tr>
 					<tr>
 						<th>Typ měření</th>
@@ -429,15 +429,15 @@
 				<tbody>
 					<tr>
 						<th>Vysoký tarif</th>
-						<td>Kč/MWh včetně DPH (Kč/MWh bez DPH)</td>
+						<td>@high-tariff</td>
 					</tr>
 					<tr>
 						<th>Nízký tarif</th>
-						<td>Kč/MWh včetně DPH (Kč/MWh bez DPH)</td>
+						<td>@low-tariff</td>
 					</tr>
 					<tr>
 						<th>Výše stálé měsíční platby za odběrné místo činí</th>
-						<td>Kč včetně DPH (Kč bez DPH)</td>
+						<td>@monthly-amount-salary-om</td>
 					</tr>
 				</tbody>
 			</table>
@@ -450,7 +450,7 @@
 						<th>Způsob úhrady záloh a doplatků z vyúčtování</th>
 						<td>
 							<div class="checkbox-wrapper">
-								<span class="checkbox"></span>
+								<span class="checkbox @order-for-payment-balance-payments"></span>
 								<span class="control-label">Příkazem k úhradě</span>
 							</div>
 						</td>
@@ -459,7 +459,7 @@
 						<th></th>
 						<td>
 							<div class="checkbox-wrapper">
-								<span class="checkbox"></span>
+								<span class="checkbox @settlement-balance-payments"></span>
 								<span class="control-label">Inkasem z účtu</span>
 							</div>
 						</td>
@@ -470,7 +470,7 @@
 					</tr>
 					<tr>
 						<th>Číslo bankovního účtu Zákazníka pro platby</th>
-						<td></td>
+						<td>@client-account-payments-number/@bank-number</td>
 					</tr>
 					<tr>
 						<th>Frekvence záloh</th>
@@ -478,7 +478,7 @@
 					</tr>
 					<tr>
 						<th>Výše zálohy do prvního vyúčtování</th>
-						<td>Kč včetně DPH (Kč bez DPH)</td>
+						<td>@amount-deposit</td>
 					</tr>
 				</tbody>
 			</table>
@@ -490,15 +490,15 @@
 				<tbody>
 					<tr>
 						<th>Název</th>
-						<td></td>
+						<td>@existing-supplier-name</td>
 					</tr>
 					<tr>
 						<th>Se sídlem</th>
-						<td></td>
+						<td>@existing-supplier-registered-office</td>
 					</tr>
 					<tr>
 						<th>IČO</th>
-						<td></td>
+						<td>@existing-supplier-ico</td>
 					</tr>
 				</tbody>
 			</table>
@@ -508,8 +508,8 @@
 						<th>Stávající smluvní závazek</th>
 						<td>
 							<div class="checkbox-wrapper">
-								<span class="checkbox"></span>
-								<span class="control-label">Na dobu určitou do bez automatického prodloužení</span>
+								<span class="checkbox @existing-contractual-obligation-date-to"></span>
+								<span class="control-label">Na dobu určitou do @do bez automatického prodloužení</span>
 							</div>
 						</td>
 					</tr>
@@ -517,10 +517,10 @@
 						<th></th>
 						<td>
 							<div class="checkbox-wrapper">
-								<span class="checkbox"></span>
+								<span class="checkbox @existing-contractual-obligation-if-date-to"></span>
 								<span class="control-label">
-									Na dobu určitou do s automatickým prodloužením, pokud zákazník smlouvu 
-									nevypoví před koncem platnosti
+									Na dobu určitou do @do s automatickým prodloužením, pokud zákazník smlouvu 
+									nevypoví @notice-period @unit-time-notice-period před koncem platnosti
 								</span>
 							</div>
 						</td>
@@ -529,9 +529,9 @@
 						<th></th>
 						<td>
 							<div class="checkbox-wrapper">
-								<span class="checkbox"></span>
+								<span class="checkbox @existing-contractual-obligation-indefinitely"></span>
 								<span class="control-label">
-									Na dobu neurčitou s výpovědní dobou
+									Na dobu neurčitou s výpovědní dobou @notice-period @unit-time-notice-period
 								</span>
 							</div>
 						</td>
@@ -539,7 +539,16 @@
 				</tbody>
 			</table>
 			<h3>F.2 Sankce</h3>
-			<p>Zákazník se zavazuje, že v době, kdy má být zahájena podle této Smlouvy dodávka elektřiny do OM Zákazníka, nebude s jiným dodavatelem elektřiny než shora uvedeným současným dodavatelem ve smluvním vztahu, na základě kterého se uskutečňuje dodávka elektřiny do OM Zákazníka. Pokud Zákazník tento závazek poruší a nepůjde o vinu Dodavatele, má Dodavatel právo požadovat po Zákazníkovi smluvní pokutu ve výši násobku částky 200,- Kč a počtu kalendářních měsíců sjednané doby trvání Smlouvy. Právo smluvních stran na náhradu škody v plné výši není ujednáními o smluvní pokutě dotčeno. O porušení závazku Zákazníka dle věty první tohoto odstavce však nepůjde, pokud Zákazník bude s jiným dodavatelem elektřiny k předpokládanému datu zahájení dodávky ve smluvním vztahu proto, že ve webové aplikaci parc4u při uzavírání této Smlouvy uvedl neúmyslně, či z neznalosti, chybný údaj o svém OM nebo předchozím smluvním vztahu.</p>
+			<p>
+                Zákazník se zavazuje, že v době, kdy má být zahájena podle této Smlouvy dodávka elektřiny do OM Zákazníka,
+                nebude s jiným dodavatelem elektřiny než shora uvedeným současným dodavatelem ve smluvním vztahu, na základě
+                kterého se uskutečňuje dodávka elektřiny do OM Zákazníka. Pokud Zákazník tento závazek poruší a nepůjde o vinu Dodavatele,
+                má Dodavatel právo požadovat po Zákazníkovi smluvní pokutu ve výši násobku částky 200,- Kč a počtu kalendářních měsíců sjednané
+                doby trvání Smlouvy. Právo smluvních stran na náhradu škody v plné výši není ujednáními o smluvní pokutě dotčeno. O porušení závazku
+                Zákazníka dle věty první tohoto odstavce však nepůjde, pokud Zákazník bude s jiným dodavatelem elektřiny k předpokládanému datu zahájení
+                dodávky ve smluvním vztahu proto, že ve webové aplikaci parc4u při uzavírání této Smlouvy uvedl neúmyslně, či z neznalosti, chybný údaj
+                o svém OM nebo předchozím smluvním vztahu.
+            </p>
 		</div>
 		<div class="list__item">
 			<h2>G. Vznik a doba trvání závazku</h2>
@@ -571,7 +580,7 @@
 				<table>
 					<tbody>
 						<tr>
-							<th></th>
+							<th>@estimated-date-of-commencement-of-delivery</th>
 							<td></td>
 						</tr>
 					</tbody>
@@ -585,7 +594,7 @@
 						<th>Dodávka se sjednává na dobu určitou:</th>
 						<td>
 							<div class="checkbox-wrapper">
-								<span class="checkbox"></span>
+								<span class="checkbox @delivery-time-12-months"></span>
 								<span class="control-label">12 měsíců <sup>1</sup></span>
 							</div>
 						</td>
@@ -594,7 +603,7 @@
 						<th></th>
 						<td>
 							<div class="checkbox-wrapper">
-								<span class="checkbox"></span>
+								<span class="checkbox @delivery-time-24-months"></span>
 								<span class="control-label">24 měsíců <sup>1</sup></span>
 							</div>
 						</td>
@@ -604,43 +613,44 @@
 			<p class="mb-15">Tato doba počíná běžet dnem zahájení dodávky do OM Zákazníka a končí dnem, kdy uplyne výše uvedený počet měsíců od předpokládaného data zahájení dodávky. Pokud den, kdy uplyne tato doba, není posledním dnem kalendářního měsíce, prodlužuje se účinnost smlouvy až do bezprostředně následujícího posledního dne kalendářního měsíce.</p>
 
 			<h3>G.5 Automatické prodloužení Smlouvy o rok za ceníkovou cenu Dodavatele</h3>
-			<p class="mb-15">
-                Pokud Zákazník nejpozději 30 dní před uplynutím doby trvání této Smlouvy nebo prodloužené doby trvání této Smlouvy neoznámí písemně či prostřednictvím webové aplikace parc4u druhé smluvní straně, že trvá na jejím ukončení, prodlužuje se trvání této Smlouvy na dobu dalších 12 měsíců (dále též „<b>Nové období</b>“) s tím, že (i) pro Nové období platí Obchodní podmínky PXE pro dodávky elektřiny pro smlouvy uzavřené na trhu PXE „PARC4U“ aktuální 30. den před zahájením Nového období<sup>2</sup>  (dále jen „<b>Rozhodný den</b>“) a (ii) cena dodávky pro Nové období se sjednává ve výši uvedené v oficiálním ceníku Dodavatele, platném k Rozhodnému dni, a to takové, která je relevantní pro Nové období a dané parametry OM Zákazníka. Dodavatel není v Novém období povinen poskytovat Zákazníkovi Doplňkové služby, pokud je již k Rozhodnému dni jako součást dodávky komodity nenabízí. Oficiálním ceníkem Dodavatele dle této Smlouvy se rozumí cena dle odpovídající nabídky Dodavatele publikované ve webové aplikaci parc4u k začátku Rozhodného dne. Nebude-li k začátku Rozhodného dne ve webové aplikaci parc4u taková nabídka (toto se může stát např. v případě nepředvídaných technických problémů na straně Dodavatele), rozumí se oficiálním ceníkem dle této Smlouvy ceníková nabídka uvedená na webových stránkách Dodavatele, platná v Rozhodný den. V Rozhodný den bude Zákazník e-mailem informován o ceně dodávky a Obchodních podmínkách PXE pro dodávky elektřiny pro smlouvy uzavřené na trhu PXE „PARC4U“ platných pro Nové období pro případ automatického prodloužení Smlouvy. Nebude-li Zákazník chtít, aby došlo k automatickému prodloužení Smlouvy za cenu dle oficiálního ceníku, může mimo jiné přijmout také některou z nabídek aktuálně dostupných na trhu PXE „PARC4U“, kde Zákazník provede i zrušení této Smlouvy. Pro vyloučení pochybností platí, že uzavře-li Zákazník s Dodavatelem nejpozději 30 dní před uplynutím doby trvání této Smlouvy smlouvu o sdružených službách dodávky pro OM Zákazníka na dodávkové období bezprostředně navazující na dodávkové období sjednané v této Smlouvě, tato Smlouva se na Nové období neprodlouží a Zákazník již nemusí oznamovat Dodavateli, že na jejím ukončení trvá. Pokud právní předpisy dávají Zákazníkovi právo ukončit tuto Smlouvu před jejím automatickým prodloužením v pozdější době, než je uvedeno v této Smlouvě, platí lhůta pro takové ukončení dle právních předpisů.
+			<p>
+                Pokud Zákazník nejpozději 30 dní před uplynutím doby trvání této Smlouvy nebo prodloužené doby trvání této Smlouvy neoznámí písemně či prostřednictvím
+                webové aplikace parc4u druhé smluvní straně, že trvá na jejím ukončení, prodlužuje se trvání této Smlouvy na dobu dalších 12 měsíců (dále též „<b>Nové období</b>“)
+                s tím, že (i) pro Nové období platí Obchodní podmínky PXE pro dodávky elektřiny pro smlouvy uzavřené na trhu PXE „PARC4U“ aktuální 30. den před zahájením
+                Nového období<sup>2</sup> (dále jen „<b>Rozhodný den</b>“) a (ii) cena dodávky pro Nové období se sjednává ve výši uvedené v oficiálním ceníku Dodavatele, platném
+                k Rozhodnému dni, a to takové, která je relevantní pro Nové období a dané parametry OM Zákazníka. Dodavatel není v Novém období povinen poskytovat Zákazníkovi
+                Doplňkové služby, pokud je již k Rozhodnému dni jako součást dodávky komodity nenabízí. Oficiálním ceníkem Dodavatele dle této Smlouvy se rozumí cena dle
+                odpovídající nabídky Dodavatele publikované ve webové aplikaci parc4u k začátku Rozhodného dne. Nebude-li k začátku Rozhodného dne ve webové aplikaci parc4u
+                taková nabídka (toto se může stát např. v případě nepředvídaných technických problémů na straně Dodavatele), rozumí se oficiálním ceníkem dle této Smlouvy
+                ceníková nabídka uvedená na webových stránkách Dodavatele, platná v Rozhodný den. V Rozhodný den bude Zákazník e-mailem informován o ceně dodávky a Obchodních
+                podmínkách PXE pro dodávky elektřiny pro smlouvy uzavřené na trhu PXE „PARC4U“ platných pro Nové období pro případ automatického prodloužení Smlouvy. Nebude-li
+                Zákazník chtít, aby došlo k automatickému prodloužení Smlouvy za cenu dle oficiálního ceníku, může mimo jiné přijmout také některou z nabídek aktuálně dostupných
+                na trhu PXE „PARC4U“, kde Zákazník provede i zrušení této Smlouvy. Pro vyloučení pochybností platí, že uzavře-li Zákazník s Dodavatelem nejpozději 30 dní před uplynutím
+                doby trvání této Smlouvy smlouvu o sdružených službách dodávky pro OM Zákazníka na dodávkové období bezprostředně navazující na dodávkové období sjednané v této Smlouvě,
+                tato Smlouva se na Nové období neprodlouží a Zákazník již nemusí oznamovat Dodavateli, že na jejím ukončení trvá. Pokud právní předpisy dávají Zákazníkovi právo ukončit
+                tuto Smlouvu před jejím automatickým prodloužením v pozdější době, než je uvedeno v této Smlouvě, platí lhůta pro takové ukončení dle právních předpisů.
             </p>
-
-            <h3>G.6 Z výšení ceny a změna smluvních podmínek při automatickém prodloužení Smlouvy</h3>
+            <h3>G.6 Zvýšení ceny a změna smluvních podmínek při automatickém prodloužení Smlouvy</h3>
             <p>
-                Zákazník bere na vědomí, že při prodloužení Smlouvy může pro Nové období dojít ke zvýšení ceny nebo změně smluvních podmínek a že má za podmínek a ve lhůtě stanovených v příslušném právním předpisu<sup>3</sup> právo při zvýšení ceny nebo změně smluvních podmínek odstoupit od Smlouvy.
+                Zákazník bere na vědomí, že při prodloužení Smlouvy může pro Nové období dojít ke zvýšení ceny nebo změně smluvních podmínek a že má za podmínek a ve
+                lhůtě stanovených v příslušném právním předpisu<sup>3</sup> právo při zvýšení ceny nebo změně smluvních podmínek odstoupit od Smlouvy.
             </p>
-        </div>
-
-        <div class="list__item">
-			<h2>H. Doplňkové služby</h2>
-
-			<h3>H.1 Zákazníkovi budou současně poskytovány tyto doplňkové služby či jiná doplňková plnění</h3>
-			<table>
-				<tbody>
-					<tr>
-						<th>Popis doplňkové služby/plnění</th>
-						<td></td>
-					</tr>
-					<tr>
-						<th>Podmínky poskytování doplňkové služby/plnění na web. adrese</th>
-						<td></td>
-					</tr>
-				</tbody>
-			</table>
         </div>
 		<div class="list__item">
-            <h2>I. Plná moc pro dodavatele</h2>
+			<h2>H. Doplňkové služby</h2>
 
-            <h3>I.1 Ukončení smlouvy se stávajícím dodavatelem</h3>
-            <div class="checkbox-wrapper mb-15">
-                <span class="checkbox"></span>
-                <span class="control-label">
+			@conditions-service-performance
+		</div>
+		<div class="list__item">
+			<h2>I. Plná moc pro dodavatele</h2>
+
+			<h3>I.1 Ukončení smlouvy se stávajícím dodavatelem</h3>
+			<div class="checkbox-wrapper mb-20">
+				<span class="checkbox @supplier-represented"></span>
+				<span class="control-label">
 					Zákazník požaduje, aby jej dodavatel zastupoval při ukončení smlouvy se současným dodavatelem
 				</span>
-            </div>
+			</div>
 
             <div class="text-underline"></div>
             <br/><br/>
@@ -697,26 +707,49 @@
 
 	<div class="signatures-text">
 		<h2>Za Dodavatele</h2>
-		<p class="mb-5">V , dne </p>
+		<p class="mb-5">V @place, dne @date</p>
 		<table class="mb-10">
 			<tbody>
 				<tr>
 					<th>Jméno a příjmení</th>
-					<td></td>
+					<td>@supplier-contact-name</td>
 				</tr>
 				<tr>
 					<th>Funkce</th>
-					<td></td>
+					<td>@supplier-contact-function</td>
+				</tr>
+				<tr>
+					<th>Podpis</th>
+					<td><img src="@supplier-contact-signature" width="60" height="40"></td>
 				</tr>
 			</tbody>
 		</table>
-		<h2 class="pt-40">Zákazník</h2>
-		<p class="mb-5">V , dne</p>
+		@supplier-contact-two-comment-start
 		<table>
 			<tbody>
 				<tr>
 					<th>Jméno a příjmení</th>
-					<td></td>
+					<td>@supplier-contact-two-name</td>
+				</tr>
+				<tr>
+					<th>Funkce</th>
+					<td>@supplier-contact-two-function</td>
+				</tr>
+				<tr>
+					<th>Podpis</th>
+					<td><img src="@supplier-contact-two-signature" width="60" height="40"></td>
+				</tr>
+			</tbody>
+		</table>
+		@supplier-contact-two-comment-end
+
+		<h2 class="pt-40">Zákazník</h2>
+		<p class="mb-5">V @client-permanent-address-town, dne @date</p>
+		<table>
+			<tbody>
+				<tr>
+					<th>Jméno a příjmení</th>
+					<td>@client-name</td>
 				</tr>
 			</tbody>
 		</table>
@@ -724,7 +757,7 @@
 			<tbody>
 				<tr>
 					<th>Podepsáno pomocí SMS kódu v aplikaci parc4u.cz v</th>
-					<td></td>
+					<td>@timestamp</td>
 				</tr>
 			</tbody>
 		</table>
@@ -828,7 +861,7 @@
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">3.11.</span>
-					Smlouva je tvořena (i) Nabídkou, (ii) údaji o Zákazníkovi a jeho odběrném místě zadanými Zákazníkem ve Webové aplikaci, (iii) ujednáními obsaženými ve vzorové smlouvě o sdružených službách dodávky umístěné ve Webové aplikaci, platné ke dni, kdy zákazník vyjádřil s návrhem Smlouvy ve Webové aplikaci souhlas a (iv) obchodními podmínkami dodávky umístěnými ve Webové aplikaci, platnými ke dni, kdy zákazník vyjádřil s návrhem Smlouvy ve Webové aplikaci souhlas.
+					Smlouva je tvořena (i) Nabídkou, (ii) údaji o Zákazníkovi a jeho odběrném místě zadanými Zákazníkem ve Webové aplikaci, (iii) ujednáními obsaženými ve vzorové smlouvě o sdružených službách dodávky umístěné ve Webové aplikaci, platné ke dni, kdy zákazník vyjádřil s  návrhem Smlouvy ve Webové aplikaci souhlas a (iv) obchodními podmínkami dodávky umístěnými ve Webové aplikaci, platnými ke dni, kdy zákazník vyjádřil s  návrhem Smlouvy ve Webové aplikaci souhlas.
 				</div>
 				<div class="lower-alpha__item lower-alpha__item--number">
 					<span class="lower-alpha__letter">3.12.</span>
@@ -1140,116 +1173,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
-
-	<h1 class="mb-10 page-break-before">Plná moc pro dodavatele elektřiny </h1>
-	<p class="mb-20">Příloha smlouvy uzavřené na trhu PARC4U</p>
-
-	<h2>Zmocnitel - zákazník</h2>
-	<table class="mb-20">
-		<tbody>
-			<tr>
-				<th>Jméno a příjmení</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>Datum narození</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th class="address-title">Adresa trvalého bydliště</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>Ulice</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>Číslo popisné / orientační</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>Obec</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>PSČ</th>
-				<td></td>
-			</tr>
-		</tbody>
-	</table>
-
-	<h2>Zmocněnec – dodavatel</h2>
-	<table class="mb-20">
-		<tbody>
-			<tr>
-				<th>Název</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>Se sídlem</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>IČO</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>DIČ</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th>Zapsaný v obchodním rejstříku</th>
-				<td></td>
-			</tr>
-		</tbody>
-	</table>
-
-	<h2>Specifikace odběrného místa</h2>
-	<table>
-		<tbody>
-			<tr>
-				<th>Komodita</th>
-				<td>Elektřina</td>
-			</tr>
-			<tr>
-				<th>EAN</th>
-				<td></td>
-			</tr>
-		</tbody>
-	</table>
-
-	<h2>Plná moc k ukončení smlouvy se současným dodavatelem</h2>
-	<p class="mb-10">Zákazník <b>ne/zmocňuje</b> dodavatele, aby za něj ukončil smlouvu o sdružených službách dodávky se současným dodavatelem elektřiny pro výše uvedené odběrné místo.</p>
-
-	<h2>Plná moc k ostatním úkonům</h2>
-	<div class="mb-10">
-		Zákazník uděluje dodavateli plnou moc k vyžádání a přijímání jakýchkoli informací týkajících se výše uvedeného odběrného 
-		místa zákazníka a stávajícího smluvního závazku zákazníka od stávajícího dodavatele, provozovatele distribuční soustavy a OTE, 
-		a.s., včetně informace o datu ukončení dodávky elektřiny. Dále zákazník uděluje dodavateli plnou moc k uzavření/změně/ukončení 
-		smlouvy o zajištění služby distribuční soustavy či smlouvy o připojení k distribuční soustavě ve věci odběrného místa zákazníka 
-		s příslušným provozovatelem distribuční soustavy. Zákazník prohlašuje, že pokud jeho stávající dodavatel podá ve smyslu ustanovení 
-		vyhl. č. 408/2015 Sb. žádost o pozastavení procesu změny dodavatele, tak i přes tuto skutečnost na změně dodavatele trvá.
-	</div>
-	<div class="signatures-text">
-		<h2>Zákazník</h2>
-		<p class="mb-5">V , dne</p>
-		<table>
-			<tbody>
-				<tr>
-					<th>Jméno a příjmení</th>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
-		<table>
-			<tbody>
-				<tr>
-					<th>Podepsáno pomocí SMS kódu v aplikaci parc4u.cz v</th>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
 	</div>
 </body>
 </html>
