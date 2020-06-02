@@ -297,8 +297,8 @@
                         [clearable]="false"
                         [parentForm]="form"
                         [selectName]="'annualConsumptionVTUnit'"
-                        [success]="form.controls.annualConsumptionUnit.valid && (form.controls.annualConsumptionUnit.touched || formError.annualConsumptionUnit)"
-                        [touched]="form.controls.annualConsumptionUnit.touched || formError.annualConsumptionVTUnit">
+                        [success]="form.controls.annualConsumptionVTUnit.valid && (form.controls.annualConsumptionVTUnit.touched || formError.annualConsumptionVTUnit)"
+                        [touched]="form.controls.annualConsumptionVTUnit.touched || formError.annualConsumptionVTUnit">
                     </lnd-select>
                 </div>
             </div>
@@ -310,7 +310,7 @@
             [error]="((form.controls.annualConsumptionUnit.touched || formError.annualConsumptionUnit) && (formError.annualConsumptionUnit || form.controls.annualConsumptionUnit.errors)) ||
                      ((form.controls.annualConsumption.touched || formError.annualConsumption) && (formError.annualConsumption || form.controls.annualConsumption.errors))"
             [validationMessages]="((form.controls.annualConsumptionUnit.touched || formError.annualConsumptionUnit) && (formError.annualConsumptionUnit || form.controls.annualConsumptionUnit.errors) && formFields.validationMessages.annualConsumptionUnit) ||
-                                  ((form.controls.annualConsumption.touched || formError.annualConsumption) && (formError.annualConsumption || form.controls.annualConsumption.errors) && formFields.validationMessages.annualConsumptionVT)">
+                                  ((form.controls.annualConsumption.touched || formError.annualConsumption) && (formError.annualConsumption || form.controls.annualConsumption.errors) && formFields.validationMessages.annualConsumption)">
             <div class="row no-gutters">
                 <div class="col-12 mb-2">
                     <small>Roční spotřeba</small>
