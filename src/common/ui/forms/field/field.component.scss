@@ -1014,6 +1014,7 @@ th {
 .input-subtext {
 	margin-top: ( $spacer / 4 );
 	font-size: $small-font-size;
+	text-align: justify;
 
 	.form-group,
 	.custom-control {

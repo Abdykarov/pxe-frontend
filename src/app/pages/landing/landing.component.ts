@@ -1,4 +1,8 @@
 import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
+import {
     AfterViewInit,
     ChangeDetectorRef,
     Component,
@@ -12,17 +16,17 @@ import {
     Meta,
     Title,
 } from '@angular/platform-browser';
-import { Router } from '@angular/router';
 
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 import {
     debounceTime,
+    filter,
     takeUntil,
 } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
 
-import { AbstractComponent } from 'src/common/abstract.component';
+import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
@@ -31,6 +35,8 @@ import {
     SEO,
 } from 'src/app/app.constants';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
+import { FaqService } from 'src/app/services/faq.service';
+import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
 import {
     IFieldError,
     IForm,
@@ -38,6 +44,7 @@ import {
 } from 'src/common/containers/form/models/form-definition.model';
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
+import { IQuestion } from 'src/app/services/model/faq.model';
 import {
     parseGraphQLErrors,
     scrollToElementFnc,
@@ -50,7 +57,7 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 @Component({
     templateUrl: './landing.component.html',
 })
-export class LandingComponent extends AbstractComponent implements AfterViewInit {
+export class LandingComponent extends AbstractFaqComponent implements AfterViewInit {
 
     @ViewChild('subscription', { static: true })
     public subscriptionElement: ElementRef;
@@ -61,8 +68,10 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
     @ViewChild('supplierChange', { static: true })
     public supplierChangeElement: ElementRef;
 
+    public frequentedQuestions: IAccordionItem[] = [];
     public formLoading = false;
     public formSent = false;
+    public isPlatformBrowser = isPlatformBrowser(this.platformId);
     public globalError: string[] = [];
     public fieldError: IFieldError = {};
     public formFields: IForm;
@@ -79,19 +88,31 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
         private apollo: Apollo,
         public authService: AuthService,
         private cd: ChangeDetectorRef,
+        public faqService: FaqService,
         private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
-        private router: Router,
+        public route: ActivatedRoute,
+        public router: Router,
         private registrationService: RegistrationService,
         private sAnalyticsService: SAnalyticsService,
         private scrollToService: ScrollToService,
         private titleService: Title,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
-        super();
-        if (isPlatformBrowser(this.platformId)) {
+        super(faqService, route);
+        if (isPlatformBrowser) {
             this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
         }
+
+        this.loadConfigs$
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                _ => {
+                    this.frequentedQuestions = R.filter((question: IQuestion) => question.oneOfMostVisited)(this.questions);
+                    this.cd.markForCheck();
+            });
 
         this.titleService.setTitle(CONSTS.TITLES.LANDING_PAGE);
         this.metaService.updateTag({
@@ -143,7 +164,7 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
     }
 
     ngAfterViewInit() {
-        if (isPlatformBrowser(this.platformId)) {
+        if (this.isPlatformBrowser) {
             this.autoPlayVideoInAllBrowsers();
             this.cd.markForCheck();
         }
@@ -196,10 +217,15 @@ export class LandingComponent extends AbstractComponent implements AfterViewInit
         }
     }
 
+    public routerToFaq = (evt) => {
+        evt.preventDefault();
+        this.router.navigate([CONSTS.PATHS.FAQ]);
+    }
+
     public scrollToNewSubscription = () =>  {
         this.authService.setActualStateFromOtherTab();
         const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
-        if (isLogged) {
+        if (!isLogged) {
             this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
         }
     }

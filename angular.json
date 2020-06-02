@@ -33,6 +33,7 @@
                             "src/assets/configurations/config.js",
                             "src/assets/csv/",
                             "src/assets/images/",
+                            "src/assets/static-data/",
                             "src/assets/pdfs/",
                             "src/assets/favicon.ico",
                             "src/robots.txt",
@@ -225,6 +226,7 @@
                             "src/assets/configurations/config.js",
                             "src/assets/csv/",
                             "src/assets/pdfs/",
+                            "src/assets/static-data/",
                             "src/assets/images/",
                             "src/assets/favicon.ico"
                         ],

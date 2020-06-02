@@ -1,6 +1,17 @@
+<ng-template #accordionTemplate let-data>
+    <div [innerHTML]="data.shortContent"></div>
+    <div *ngIf="data.fullContent">
+        <a class="link"
+           [routerLink]="['/', CONSTS.PATHS.FAQ, data.tag | getUrlFromTag:faqConfig, data.url]">
+            Více info
+        </a>
+    </div>
+</ng-template>
+
 <ng-template #agreementTemplate>
     Souhlasím s <a target="_blank" [href]="routes.ROUTER_TERMS_OF_USE">Obchodními podmínkami PARC4U</a> a beru na vědomí informace o <a target="_blank" [href]="routes.ROUTER_SECURING_YOUR_DATA">Ochraně osobních údajů</a>.
 </ng-template>
+
 <div class="landing-page">
     <div class="section section--video">
         <div class="container-fluid">
@@ -20,11 +31,12 @@
                 </div>
             </div>
         </div>
-        <div class="section-video-holder">
+        <div *ngIf="isPlatformBrowser"
+             class="section-video-holder">
             <img
                 *ngIf="!isMoreThanXlResolution"
                 class="video-picture"
-                src="/assets/images/landing-page/picture-fallback.png"
+                src="/assets/images/landing-page/lp-picture.png"
                 title="Plaťte za energie chytře díky burze"
                 alt="Plaťte za energie chytře díky burze">
             <video
@@ -38,7 +50,7 @@
                 >
                 <source src="/assets/images/landing-page/lp-video.webm" type="video/webm">
                 <source src="/assets/images/landing-page/lp-video.mp4" type="video/mp4">
-                <img src="/assets/images/landing-page/picture-fallback.png" alt="parc4u - obrázek laptopu s aplikací">
+                <img src="/assets/images/landing-page/picture-fallback.jpg" alt="parc4u - obrázek laptopu s aplikací">
                 Váš prohlížeč nepodporuje zobrazení videa
             </video>
         </div>
@@ -73,7 +85,7 @@
                 <div class="col-12 col-md-4 offset-md-7">
                     <div class="px-3 px-md-0">
                         <h3 class="h3--public">
-                            Cesta k&nbsp;nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC4U
+                            Cesta k&nbsp;nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC4U.
                         </h3>
                         <ul class="check-list">
                             <li>
@@ -117,10 +129,33 @@
     <div #mapCoverage>
         <pxe-map-coverage-container></pxe-map-coverage-container>
     </div>
+    <div class="section section--light section-help">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-xl-8 offset-xl-2 mb-3">
+                    <h2 class="h2--public">Často kladené dotazy</h2>
+                </div>
+                <div class="col-12 col-xl-8 offset-xl-2 mb-3">
+                    <lnd-accordion *ngIf="frequentedQuestions.length"
+                                   [accordionContentTemplate]="accordionTemplate"
+                                   [accordionItems]="frequentedQuestions | questionsToAccordions: faqConfig"
+                                   title="Často kladené dotazy">
+                    </lnd-accordion>
+                </div>
+                <div class="col-12 text-center">
+                    <lnd-button
+                        (action)="routerToFaq($event)"
+                        label="Další dotazy"
+                        type="primary">
+                    </lnd-button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div
         #subscription
         *ngIf="!(authService.currentUserValue | isLogged)"
-        class="section section--light stay-in-touch">
+        class="section stay-in-touch">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-3 col-lg-4 offset-lg-4">
@@ -136,7 +171,7 @@
                             [globalError]="globalError"
                             [fieldError]="fieldError"
                             (submitAction)="submitForm($event)"
-                            [lightTheme]="true"
+                            [lightTheme]="false"
                         ></pxe-registration-form>
                     </div>
                 </div>

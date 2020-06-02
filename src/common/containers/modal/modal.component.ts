@@ -58,7 +58,10 @@ export class ModalComponent extends AbstractComponent {
                 if (!this.addModal) {
                     return;
                 }
-                const offsetY = window.scrollY;
+                const offsetY =
+                    window.scrollY ||
+                    window.pageYOffset ||
+                    document.body.scrollTop + (document.documentElement && document.documentElement.scrollTop || 0);
                 const componentToLoad = R.is(String, modal.component) ?
                     this.modalLoaderService.loadModalComponent(modal.component) : modal.component;
                 const componentFactory = this.componentFactoryResolver.resolveComponentFactory(componentToLoad);

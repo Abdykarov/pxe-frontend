@@ -9,6 +9,8 @@ import { FullLayoutComponent } from './full-layout.component';
 import { AccountDeletedPageModule, accountDeletedPageRoutes } from 'src/static/pages/account-deleted/page.module';
 import { CookiesPageModule, cookiesPageRoutes } from 'src/static/pages/cookies/page.module';
 import { ChangePasswordPageModule, changePasswordPageRoutes } from 'src/static/pages/change-password/page.module';
+import { FaqPageModule, faqPageRoutes } from 'src/static/pages/faq/page.module';
+import { FaqDetailPageModule, faqDetailPageRoutes } from 'src/static/pages/faq-detail/page.module';
 import { ImportApprovalModule, importApprovalPageRoutes } from 'src/static/pages/import-approval/page.module';
 import { LandingModule, landingPageRoutes } from 'src/static/pages/landing/landing.module';
 import { LoginPageModule, loginPageRoutes } from 'src/static/pages/login/page.module';
@@ -28,6 +30,8 @@ const routes: Routes = [
             ...accountDeletedPageRoutes,
             ...cookiesPageRoutes,
             ...changePasswordPageRoutes,
+            ...faqPageRoutes,
+            ...faqDetailPageRoutes,
             ...error404PageRoutes,
             ...error500PageRoutes,
             ...importApprovalPageRoutes,
@@ -53,6 +57,8 @@ const routes: Routes = [
         ChangePasswordPageModule,
         Error404PageModule,
         Error500PageModule,
+        FaqPageModule,
+        FaqDetailPageModule,
         ImportApprovalModule,
         LandingModule,
         LoginPageModule,

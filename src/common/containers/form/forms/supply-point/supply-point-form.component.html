@@ -1,6 +1,6 @@
 <ng-template #phraseHelpTemplate>
     <p class="small mt-0 mb-1">
-        V případě, že zde není přesně vaše hodnota, zadejte nejbližší vyšší hodnotu
+        V případě, že zde není přesně vaše hodnota, zadejte nejbližší vyšší hodnotu.
     </p>
 </ng-template>
 
@@ -63,7 +63,7 @@
             [parentForm]="form"
             [selectName]="'supplierId'"
             [success]="form.controls.supplierId.valid && (form.controls.supplierId.touched || formError.supplierId)"
-            subtext="Začněte psát a my vám poradíme"
+            subtext="Začněte psát a my vám poradíme."
             searchable="true"
             [touched]="form.controls.supplierId.touched || formError.supplierId"
             [validationMessages]="formFields.validationMessages.supplierId">
@@ -114,6 +114,7 @@
             [validationMessages]="formFields.validationMessages.eic"
         ></lnd-form-field>
         <pxe-address-whisperer
+            #pxeAddressWhisperer
             lndSFormDirective
             lndSBiometricsDirective
             *ngIf="form.controls.address.status !== 'DISABLED'"
@@ -335,11 +336,11 @@
             lndSBiometricsDirective
             *ngIf="form.controls.expirationDate.status !== 'DISABLED'"
             [appendButtonIcon]="helpDocuments && helpDocuments['expirationDate'] ? 'icon--info' : null"
-            (appendButtonAction)="showHelp('expirationDate', form.controls.contractEndTypeId.status !== 'DISABLED' ? 'Do kdy máte uzavřenou aktuální smlouvu' : 'Datum ukončení')"
+            (appendButtonAction)="showHelp('expirationDate', form.controls.contractEndTypeId.status !== 'DISABLED' ? 'Do kdy máte uzavřenou aktuální smlouvu?' : 'Datum ukončení')"
             [datepickerName]="'expirationDate'"
             [error]="formError.expirationDate || form.controls.expirationDate.errors"
             id="datepicker-1"
-            [label]="form.controls.contractEndTypeId.status !== 'DISABLED' ? 'Do kdy máte uzavřenou aktuální smlouvu' : 'Datum ukončení'"
+            [label]="form.controls.contractEndTypeId.status !== 'DISABLED' ? 'Do kdy máte uzavřenou aktuální smlouvu?' : 'Datum ukončení'"
             [parentForm]="form"
             [placeholder]="'dd.mm.rrrr'"
             [minDate]="minDate"

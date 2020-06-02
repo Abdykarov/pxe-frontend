@@ -17,7 +17,7 @@
 	&--advanced {
 		overflow-x: auto;
 		width: calc( 100% + ( #{$spacer} * 2 ) );
-		margin: 0 ( $spacer * ( -1 ) ) ( $spacer * ( -1 ) );
+		margin: 0 ( $spacer * ( -1 ) );
 		padding: 0 $spacer ( $spacer * 2 );
 	}
 }

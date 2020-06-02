@@ -39,7 +39,7 @@
     </div>
     <lnd-placeloader [loading]="loadingSupplyPointOffers && !globalError.length"></lnd-placeloader>
     <div class="row"
-        *ngIf="supplyPointOffers">
+        *ngIf="supplyPointOffers && questions">
         <div class="col-12 col-xl-10 offset-xl-1">
             <div class="row align-items-center mb-3">
                 <div *ngIf="supplyPointOffers && supplyPointOffers.length"
@@ -66,6 +66,7 @@
                     <pxe-supply-point-offer
                         (action)="saveContract(supplyPointOffer)"
                         *ngFor="let supplyPointOffer of supplyPointOffers"
+                        [questions]="questions"
                         [supplyPointOffer]="supplyPointOffer"
                         (mouseenter)="sAnalyticsService.sFormFocus($event);sAnalyticsService.sFormChange(supplyPointOffer)"
                         (mouseleave)="sAnalyticsService.sFormBlur($event)"

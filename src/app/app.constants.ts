@@ -9,6 +9,7 @@ import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
+    APPEND_AFTER_CUT_TEXT: '...',
     ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],
     CRYPTO: {
         get SALT() {
@@ -48,6 +49,7 @@ export const CONSTS = {
         SUPPLY_POINT_PARTIAL_FORM: 'SUPPLY_POINT',
     },
     LOGIN_FORM_NAME: 'login',
+    MAX_LENGTH_SUPPLIER_DESCRIPTION: 100,
     MAX_REQUEST_IN_BATCH_LINK: 200,
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
@@ -71,12 +73,14 @@ export const CONSTS = {
         DASHBOARD : 'dashboard',
         DELETE_ACCOUNT: 'delete-account',
         DELETED_ACCOUNT: 'deleted-account',
-        EMPTY : '',
-        IMPORT : 'import',
+        EMPTY: '',
+        IMPORT: 'import',
+        FAQ: 'faq',
         FORGOTTEN_PASSWORD : 'forgotten-password',
         GAS: 'gas',
         LOGIN : 'login',
         LOGOUT : 'logout',
+        NOT_FOUND: 'not-found',
         OFFER_SELECTION : 'offer-selection',
         PATTERNS_OF_CONTRACTS: 'patterns-of-contracts',
         PAYMENT : 'payment',
@@ -159,6 +163,7 @@ export const CONSTS = {
         DEFAULT: 'PARC4U',
         LANDING_PAGE: 'Získejte svobodu nad energií | PARC4U',
         LOGIN: 'Přihlášení | PARC4U',
+        FAQ: 'Často kladené otázky | PARC4U',
         PATTERNS_OF_CONTRACTS: 'Vzory smluv o dodávce | PARC4U',
         TERMS_OF_USE: 'Podmínky užívání | PARC4U',
         SECURING_YOUR_DATA: 'Ochrana osobních údajů | PARC4U',
@@ -226,6 +231,11 @@ export const SEO = {
             'parc4u',
             'pxe',
         ],
+        FAQ: [
+            'nápověda',
+            'obecné',
+            'často kladené otázky',
+        ],
         LOGIN: [
             'přihlášení',
             'kliknutí',
@@ -252,6 +262,7 @@ export const SEO = {
         COOKIES_POLICY: 'Co jsou cookies a proč je na stránkách PARC4U používáme?',
         LANDING_PAGE: 'Měňte dodavatele energií na 1 klik. Neřešte papírování a chození na' +
             ' pobočky. Chraňte se před nekalostmi ve smlouvě. Energie za férové ceny bez skrytých poplatků.',
+        FAQ: 'Odpovědi na často kladené otázky služby PARC4U.',
         LOGIN: 'Přihlášení do PARC4U, kde máte snadný přístup k jiným cenám za energie.',
         PATTERNS_OF_CONTRACTS: 'Vzor smlouvy k dodávce uzavřené přes PARC4U.',
         TERMS_OF_USE: 'Obchodní podmínky k pravidlům registrace dodavatelů a odběratelů na trhu PARC4U.',

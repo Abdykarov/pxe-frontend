@@ -44,6 +44,16 @@ const routes = [
                 },
             },
             {
+                path: CONSTS.PATHS.FAQ,
+                loadChildren: () => import('../../pages/faq/faq.module').then(m => m.FaqModule),
+                data: {
+                    isPublic: true,
+                    isSimpleFooter: false,
+                    loginType: LoginType.NAVIGATE,
+                    signUpType: SignType.SCROLL,
+                },
+            },
+            {
                 path: CONSTS.PATHS.LOGIN,
                 loadChildren: () => import('../../pages/login/login.module').then(m => m.LoginModule),
                 data: {

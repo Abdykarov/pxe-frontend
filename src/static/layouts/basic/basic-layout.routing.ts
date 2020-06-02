@@ -3,6 +3,11 @@ import {
     RouterModule,
     Routes,
 } from '@angular/router';
+
+import {
+    AccordionPageModule,
+    accordionPageRoutes,
+} from 'src/static/atoms/accordion/page.module';
 import {
     AlertsPageModule,
     alertsPageRoutes,
@@ -196,6 +201,7 @@ const routes: Routes = [
         path: '',
         component: BasicLayoutComponent,
         children: [
+            ...accordionPageRoutes,
             ...alertsPageRoutes,
             ...badgesPageRoutes,
             ...bannersPageRoutes,
@@ -252,6 +258,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
+        AccordionPageModule,
         AlertsPageModule,
         BadgesPageModule,
         BannersPageModule,

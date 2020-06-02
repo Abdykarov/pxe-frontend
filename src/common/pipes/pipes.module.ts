@@ -11,6 +11,7 @@ import { ConsumptionIndicatorPipe } from './consumption-indicator/consumption-in
 import { DateDiffPipe } from './date-diff/date-diff.pipe';
 import { DynamicPipe } from './dynamic/dynamic.pipe';
 import { FilterCommodityTypePipe } from './filter-commodity-type/filter-commodity-type.pipe';
+import { GetUrlFromTagPipe } from 'src/common/pipes/get-url-from-tag/get-url-from-tag.pipe';
 import { IsAllowedOperationPipe } from './is-allowed-operation/is-allowed-operation.pipe';
 import { IsDatePast } from './is-date-past/is-date-past.pipe';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
@@ -23,6 +24,7 @@ import { OffersByCommodityTypePipe } from 'src/common/pipes/offers-by-commodity-
 import { PathValuePipe } from './path-value/path-value.pipe';
 import { PluralPipe } from './plurar/plural.pipe';
 import { ProgressStatusPipe } from './step-of-supply-point/step-of-supply-point.pipe';
+import { QuestionsToAccordionItemsPipe } from 'src/common/pipes/questions-to-accordion-items/questions-to-accordion-items.pipe';
 import { SimpleNumberPipe } from 'src/common/pipes/simple-number/simple-number.pipe';
 import { SumPipe } from 'src/common/pipes/sum/sum.pipe';
 import { ValueOfFormPipe } from 'src/common/pipes/value-of-form/value-of-form.pipe';
@@ -39,6 +41,7 @@ import { ValuesPipe } from './values/values.pipe';
         DateDiffPipe,
         DynamicPipe,
         FilterCommodityTypePipe,
+        GetUrlFromTagPipe,
         IsAllowedOperationPipe,
         IsDatePast,
         IsLoggedPipe,
@@ -51,6 +54,7 @@ import { ValuesPipe } from './values/values.pipe';
         PathValuePipe,
         PluralPipe,
         ProgressStatusPipe,
+        QuestionsToAccordionItemsPipe,
         SimpleNumberPipe,
         SumPipe,
         ValueOfFormPipe,
@@ -66,6 +70,7 @@ import { ValuesPipe } from './values/values.pipe';
         DateDiffPipe,
         DynamicPipe,
         FilterCommodityTypePipe,
+        GetUrlFromTagPipe,
         IsAllowedOperationPipe,
         IsDatePast,
         IsLoggedPipe,
@@ -78,6 +83,7 @@ import { ValuesPipe } from './values/values.pipe';
         PathValuePipe,
         PluralPipe,
         ProgressStatusPipe,
+        QuestionsToAccordionItemsPipe,
         SimpleNumberPipe,
         SumPipe,
         ValueOfFormPipe,
@@ -93,6 +99,7 @@ import { ValuesPipe } from './values/values.pipe';
         DecimalPipe,
         DynamicPipe,
         FilterCommodityTypePipe,
+        GetUrlFromTagPipe,
         IsAllowedOperationPipe,
         IsDatePast,
         IsLoggedPipe,
@@ -105,6 +112,7 @@ import { ValuesPipe } from './values/values.pipe';
         PathValuePipe,
         PluralPipe,
         ProgressStatusPipe,
+        QuestionsToAccordionItemsPipe,
         SimpleNumberPipe,
         SumPipe,
         ValueOfFormPipe,

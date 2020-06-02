@@ -1,12 +1,3 @@
-<ng-template #headerTemplate>
-    <div class="text-center mt-4 mb-2">
-        <p class="mb-2">V následujících krocích budeme potřebovat několik informací od vás, abychom vám mohli
-            nabídnout ty nejlepší nabídky. Pro vyplnění všech
-            potřebných informací vám doporučujeme připravit si následující dokumenty.
-        </p>
-    </div>
-</ng-template>
-
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12 col-md-6 offset-md-3 text-center">
@@ -21,33 +12,30 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12 col-xl-10 offset-xl-1 text-center">
-            <img
+        <div class="col-12 col-xl-10 offset-xl-1 text-center mb-4">
+            <img 
                 src="/assets/images/illustrations/sign.svg"
                 class="mb-2"
                 alt="sign">
             <h2 class="mb-0">
-                Vítejte v aplikaci PARC4U.
+                Vítejte v aplikaci PARC4U
             </h2>
         </div>
-        <div class="col-12 col-xl-10 offset-xl-1">
-            <pxe-list-of-notifications
-                [headerTemplate]="headerTemplate"
-                [notifications]="notifications"
-                [type]="typeOfListCheck"
-                customLinkClass="ml-xl-6"
-                customColClass="col-12 col-xl-10 offset-xl-1">
-            </pxe-list-of-notifications>
-            <p class="text-center">
+        <div class="col-12 col-xl-8 offset-xl-2 text-center">
+            <p>V následujících krocích budeme potřebovat několik informací od vás, abychom vám mohli nabídnout ty nejlepší nabídky. Pro vyplnění všech potřebných informací vám doporučujeme připravit si následující dokumenty.</p>
+            <ul class="check-list ml-xl-5 text-left">
+                <li>Fakturu se současným dodavatelem (jedno jakého data).</li>
+                <li>Ověřte způsob výpovědi vaší smlouvy v případě, že si nebudete jistí zanechte přednastavenou hodnotu.</li>
+                <li>Pro uzavření smlouvy budete potřebovat váš mobilní telefon.</li>
+            </ul>
+            <p>
                 Je-li vše jasné pokračujte tlačítkem "Vyplnit".
             </p>
-            <div class="text-center">
-                <lnd-button
-                    type="primary"
-                    (action)="click($event);"
-                    label="Vyplnit">
-                </lnd-button>
-            </div>
+            <lnd-button
+                type="primary"
+                (action)="click($event);"
+                label="Vyplnit">
+            </lnd-button>
         </div>
     </div>
 </div>

@@ -9,6 +9,9 @@ import 'zone.js/dist/zone-node';
 import 'cross-fetch/polyfill';
 import * as express from 'express';
 import { createWindow } from 'domino';
+import * as fs from 'fs';
+import * as R from 'ramda';
+import * as xml2js from 'xml2js';
 import { join } from 'path';
 import { readFileSync } from 'fs';
 
@@ -52,6 +55,43 @@ server.set('views', join(DIST_FOLDER, 'app'));
 // TODO: implement data requests securely
 server.get('/graphql', (req, res) => {
     res.status(404).send('data requests are not supported');
+});
+
+const getTagUrl = (question, taqConfig) => {
+    const foundTaq = taqConfig.find(taq => taq.type === question.tag);
+    return foundTaq.url;
+};
+
+const getQuestions = (questions) => {
+    if (!R.path(['angularDevstack', 'config', 'includeTestData'], window)) {
+        return R.reject(R.propEq('isTestData')(true))(questions);
+    }
+    return questions;
+};
+
+// Server static files from /app
+server.get('/sitemap.xml', (req, res) => {
+    const siteMapOriginal = fs.readFileSync(join(APP_FOLDER, 'sitemap.xml'), 'utf8');
+    const taqConfig = JSON.parse(fs.readFileSync(join(APP_FOLDER, 'assets/static-data/faq.json'), 'utf8'));
+    let questions = JSON.parse(fs.readFileSync(join(APP_FOLDER, 'assets/static-data/questions.json'), 'utf8'));
+    const parseString = xml2js.parseString;
+    questions = getQuestions(questions);
+    parseString(siteMapOriginal, (err, result) => {
+        questions.forEach(question => {
+            const url = R.path(['urlset', 'url' ], result);
+            if (url && url.length) {
+                url.push({
+                    'loc': [
+                        `${req.protocol}://${req.get('host')}/faq/${getTagUrl(question, taqConfig)}/${question.url}`,
+                    ],
+                });
+            }
+        });
+        const builder = new xml2js.Builder();
+        const xml = builder.buildObject(result);
+        res.set('Content-Type', 'text/xml');
+        return res.send(xml);
+    });
 });
 
 // Server static files from /app
