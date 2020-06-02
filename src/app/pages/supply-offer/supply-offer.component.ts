@@ -340,7 +340,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         this.fieldError = {};
         let offerPointAction;
         const isCreateAction = R.isNil(supplyOfferFormData.id);
-        const id = supplyOfferFormData.id
+        const id = supplyOfferFormData.id;
 
         const offer: IOfferInput = R.pick([
             'name',
