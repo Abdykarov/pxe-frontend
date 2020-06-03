@@ -59,13 +59,13 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 })
 export class LandingComponent extends AbstractFaqComponent implements AfterViewInit {
 
-    @ViewChild('subscription')
+    @ViewChild('subscription', { static: true })
     public subscriptionElement: ElementRef;
 
-    @ViewChild('mapCoverage')
+    @ViewChild('mapCoverage', { static: true })
     public mapCoverageElement: ElementRef;
 
-    @ViewChild('supplierChange')
+    @ViewChild('supplierChange', { static: true })
     public supplierChangeElement: ElementRef;
 
     public frequentedQuestions: IAccordionItem[] = [];
@@ -225,7 +225,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     public scrollToNewSubscription = () =>  {
         this.authService.setActualStateFromOtherTab();
         const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
-        if (isLogged) {
+        if (!isLogged) {
             this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
         }
     }

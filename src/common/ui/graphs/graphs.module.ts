@@ -7,6 +7,9 @@ import { LineGraphComponent } from './line-graph/line-graph.component';
     declarations: [
         LineGraphComponent,
     ],
+    exports: [
+        LineGraphComponent,
+    ],
     imports: [
         CommonModule,
     ],

@@ -32,7 +32,7 @@ import { IValidationMessages } from '../models/validation-messages.model';
 })
 export class SelectComponent {
 
-    @ViewChild('select')
+    @ViewChild('select', { static: true })
     private select: NgSelectComponent;
 
     @Output()

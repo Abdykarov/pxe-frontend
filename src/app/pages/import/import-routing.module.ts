@@ -19,7 +19,7 @@ const routes: Routes = [
             },
             {
                 path: CONSTS.PATHS.UPLOAD,
-                loadChildren: '../../pages/import/upload/upload.module#UploadModule',
+                loadChildren: () => import('../../pages/import/upload/upload.module').then(m => m.UploadModule),
             },
             {
                 path: CONSTS.PATHS.APPROVAL,
@@ -27,7 +27,7 @@ const routes: Routes = [
             },
             {
                 path: CONSTS.PATHS.APPROVAL + '/:commodityType',
-                loadChildren: '../../pages/import/approval/approval.module#ApprovalModule',
+                loadChildren: () => import('../../pages/import/approval/approval.module').then(m => m.ApprovalModule),
             },
 
         ],

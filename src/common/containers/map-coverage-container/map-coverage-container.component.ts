@@ -26,7 +26,7 @@ export class MapCoverageContainerComponent extends AbstractComponent implements 
     public configCoverage: IMapCoverageConfig;
     public loadingData = true;
 
-    @ViewChild('pxeMapCoverageWrapper')
+    @ViewChild('pxeMapCoverageWrapper', { static: true })
     public pxeMapCoverageWrapper: ElementRef;
 
     constructor(

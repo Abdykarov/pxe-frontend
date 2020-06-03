@@ -12,7 +12,7 @@ describe('IsRouteActivePipe', () => {
             ],
         });
 
-        pipe = TestBed.get(IsRouteActivePipe);
+        pipe = TestBed.inject(IsRouteActivePipe);
     });
 
     it('/home with /home should be true', () => {

@@ -14,7 +14,7 @@ const routes: Routes = [
     },
     {
         path: ':supplyPointId',
-        loadChildren: '../../pages/supply-points/detail/supply-point-detail.module#SupplyPointDetailModule',
+        loadChildren: () => import('../../pages/supply-points/detail/supply-point-detail.module').then(m => m.SupplyPointDetailModule),
     },
 ];
 
