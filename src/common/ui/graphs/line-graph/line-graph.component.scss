@@ -1,0 +1,41 @@
+/*
+ -  Line graph
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+/* Style the lines by removing the fill and applying a stroke */
+.line {
+	fill: none;
+	stroke: $gradient-blue-dark;
+	stroke-width: 3;
+}
+
+.overlay {
+	fill: none;
+	pointer-events: all;
+}
+
+/* Style the dots by assigning a fill and stroke */
+.dot {
+	fill: #ffab00;
+	stroke: #fff;
+}
+
+.focus circle {
+	fill: none;
+	stroke: steelblue;
+}
+
+.axis {
+	color: $gray-400 !important;
+	margin: 20px;
+}
+
+path {
+	color: $gray-200 !important;
+}
+
