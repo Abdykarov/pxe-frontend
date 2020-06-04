@@ -44,133 +44,168 @@ export class LineGraphComponent implements OnInit {
 
     private initGraph = () => {
 
-        const parseTime = d3.timeParse('%Y');
+        const parseTime = d3.timeParse('%Y-%m-%d');
         const bisectDate = d3.bisector(function(d) { return d.x; }).left;
         const x = d3.scaleTime().range([0, this.width]);
         const y = d3.scaleLinear().range([this.height, 0]);
+
+
+        const locale = d3.timeFormatLocale({
+            'dateTime': '%A,%e.%B %Y, %X',
+            'date': '%-d.%-m.%Y',
+            'time': '%H:%M:%S',
+            'periods': ['AM', 'PM'],
+            'days': ['neděle', 'pondělí', 'úterý', 'středa', 'čvrtek', 'pátek', 'sobota'],
+            'shortDays': ['ne.', 'po.', 'út.', 'st.', 'čt.', 'pá.', 'so.'],
+            'months': ['leden', 'únor', 'březen', 'duben',
+                'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec'],
+            'shortMonths': ['led', 'úno', 'břez', 'dub', 'kvě', 'čer', 'červ', 'srp', 'zář', 'říj', 'list', 'pros'],
+        });
+
+
+        const formatMillisecond = locale.format('.%L'),
+            formatSecond = locale.format(':%S'),
+            formatMinute = locale.format('%I:%M'),
+            formatHour = locale.format('%I %p'),
+            formatDay = locale.format('%a %d'),
+            formatWeek = locale.format('%b %d'),
+            formatMonth = locale.format('%B'),
+            formatYear = locale.format('%Y');
+
+        const multiFormat = (date) => {
+            return (d3.timeSecond(date) < date ? formatMillisecond
+                : d3.timeMinute(date) < date ? formatSecond
+                    : d3.timeHour(date) < date ? formatMinute
+                        : d3.timeDay(date) < date ? formatHour
+                            : d3.timeMonth(date) < date ? (d3.timeWeek(date) < date ? formatDay : formatWeek)
+                                : d3.timeYear(date) < date ? formatMonth
+                                    : formatYear)(date);
+        };
+
+
 
         const parentRect = this.hostElement.nativeElement.parentNode.getBoundingClientRect();
 
 // 8. An array of objects of length N. Each object has key -> value pair, the key being "y" and the value is a random number
         const dataset = [
             {
-                'x': '2020-04-01 00:00:00',
+                'x': '2020-04-01',
                 'y': 23.84,
             },
             {
-                'x': '2020-04-02 00:00:00',
+                'x': '2020-04-02',
                 'y': 23.68,
             },
             {
-                'x': '2020-04-03 00:00:00',
+                'x': '2020-04-03',
                 'y': 22.83,
             },
             {
-                'x': '2020-04-04 00:00:00',
+                'x': '2020-04-04',
                 'y': 23.02,
             },
             {
-                'x': '2020-04-05 00:00:00',
+                'x': '2020-04-05',
                 'y': 10.93,
             },
             {
-                'x': '2020-04-06 00:00:00',
+                'x': '2020-04-06',
                 'y': 16.84,
             },
             {
-                'x': '2020-04-07 00:00:00',
+                'x': '2020-04-07',
                 'y': 24.23,
             },
             {
-                'x': '2020-04-08 00:00:00',
+                'x': '2020-04-08',
                 'y': 26.43,
             },
             {
-                'x': '2020-04-09 00:00:00',
+                'x': '2020-04-09',
                 'y': 25.81,
             },
             {
-                'x': '2020-04-10 00:00:00',
+                'x': '2020-04-10',
                 'y': 24.25,
             },
             {
-                'x': '2020-04-11 00:00:00',
+                'x': '2020-04-11',
                 'y': 23.39,
             },
             {
-                'x': '2020-04-12 00:00:00',
+                'x': '2020-04-12',
                 'y': 16.18,
             },
             {
-                'x': '2020-04-13 00:00:00',
+                'x': '2020-04-13',
                 'y': 0.58,
             },
             {
-                'x': '2020-04-14 00:00:00',
+                'x': '2020-04-14',
                 'y': 19.57,
             },
             {
-                'x': '2020-04-15 00:00:00',
+                'x': '2020-04-15',
                 'y': 23.85,
             },
             {
-                'x': '2020-04-16 00:00:00',
+                'x': '2020-04-16',
                 'y': 25.78,
             },
             {
-                'x': '2020-04-17 00:00:00',
+                'x': '2020-04-17',
                 'y': 26.78,
             },
             {
-                'x': '2020-04-18 00:00:00',
+                'x': '2020-04-18',
                 'y': 22.27,
             },
             {
-                'x': '2020-04-19 00:00:00',
+                'x': '2020-04-19',
                 'y': 13.2,
             },
             {
-                'x': '2020-04-20 00:00:00',
+                'x': '2020-04-20',
                 'y': 11.35,
             },
             {
-                'x': '2020-04-21 00:00:00',
+                'x': '2020-04-21',
                 'y': 8.98,
             },
             {
-                'x': '2020-04-22 00:00:00',
+                'x': '2020-04-22',
                 'y': 13.45,
             },
             {
-                'x': '2020-04-23 00:00:00',
+                'x': '2020-04-23',
                 'y': 27.42,
             },
             {
-                'x': '2020-04-24 00:00:00',
+                'x': '2020-04-24',
                 'y': 21.99,
             },
             {
-                'x': '2020-04-25 00:00:00',
+                'x': '2020-04-25',
                 'y': 21.11,
             },
             {
-                'x': '2020-04-26 00:00:00',
+                'x': '2020-04-26',
                 'y': 22.8,
             },
             {
-                'x': '2020-04-27 00:00:00',
+                'x': '2020-04-27',
                 'y': 28.34,
             },
             {
-                'x': '2020-04-28 00:00:00',
+                'x': '2020-04-28',
                 'y': 24.94,
             },
             {
-                'x': '2020-04-29 00:00:00',
+                'x': '2020-04-29',
                 'y': 22.22,
             },
             {
-                'x': '2020-04-30 00:00:00',
+                'x': '2020-04-30',
                 'y': 18.7,
             },
         ];
@@ -186,7 +221,6 @@ export class LineGraphComponent implements OnInit {
 
         const xScale = d3.scaleTime()
             .domain(d3.extent(dataset, function(d) {
-                    console.log(d);
                     return d.x;
                 }),
             )
@@ -204,8 +238,12 @@ export class LineGraphComponent implements OnInit {
 // 7. d3's line generator
 
         const line = d3.line()
-            .x(function(d) { return x(d.x); })
-            .y(function(d) { return y(d.y); });
+            .x(function(d) {
+                return x(d.x);
+            })
+            .y(function(d) {
+                return y(d.y);
+            });
         // .curve(d3.curveMonotoneX); // apply smoothing to the line
 
 
@@ -219,7 +257,7 @@ export class LineGraphComponent implements OnInit {
         svg.append('g')
             .attr('class', 'x axis')
             .attr('transform', 'translate(0,' + this.height + ')')
-            .call(d3.axisBottom(xScale).tickSize(0).tickPadding(20)); // Create an axis component with d3.axisBottom
+            .call(d3.axisBottom(xScale).tickSize(0).tickPadding(20).tickFormat(multiFormat)); // Create an axis component with d3.axisBottom
 
         svg.append('g')
             .attr('class', 'x axis')
