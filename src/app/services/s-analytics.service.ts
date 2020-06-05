@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { SAnalyticsPlugins } from 'src/app/services/model/s-analytics.model';
 
-import * as uuid from 'uuid/v4';
+import * as R from 'ramda';
 
 import { environment } from 'src/environments/environment';
 
@@ -66,6 +66,11 @@ export class SAnalyticsService {
             return;
         }
 
+        const userInfo = sa('get', 'userInfo');
+
+        if (R.isNil(userInfo)) {
+            return;
+        }
         const applicationWebData = {
             tid: environment.sAnalyticsTId,
             applicationId: sa('get', 'userInfo').said,
@@ -77,6 +82,7 @@ export class SAnalyticsService {
             coborrower,
             webdata,
         };
+
         sa('send', 'webdata', applicationWebData);
         this.registrationApplication();
     }
@@ -84,7 +90,7 @@ export class SAnalyticsService {
     private installPlugin = (sAnalyticsPlugins: SAnalyticsPlugins) => {
         const script = this.document.createElement('script');
         script.async = true;
-        script.src = `https://sa-sdp.lnd.bz/versions/stable/${sAnalyticsPlugins}.plugin.min.js`;
+        script.src = `https://asdasd.lnd.bz/versions/stable/${sAnalyticsPlugins}.plugin.min.js`;
         this.document.head.prepend(script);
     }
 
