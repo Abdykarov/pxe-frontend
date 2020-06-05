@@ -90,7 +90,7 @@ export class SAnalyticsService {
     private installPlugin = (sAnalyticsPlugins: SAnalyticsPlugins) => {
         const script = this.document.createElement('script');
         script.async = true;
-        script.src = `https://asdasd.lnd.bz/versions/stable/${sAnalyticsPlugins}.plugin.min.js`;
+        script.src = `https://sa-sdp.lnd.bz/versions/stable/${sAnalyticsPlugins}.plugin.min.js`;
         this.document.head.prepend(script);
     }
 
