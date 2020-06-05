@@ -14,6 +14,10 @@
 	stroke-width: 3;
 }
 
+.domain {
+	stroke-width: 0.5;
+}
+
 .overlay {
 	fill: none;
 	pointer-events: all;
@@ -39,3 +43,25 @@ path {
 	color: $gray-200 !important;
 }
 
+.tooltip {
+	fill: $gray-100;
+	opacity: 0.3;
+}
+
+.tooltip-date, .tooltip-likes {
+	font-weight: bold;
+}
+
+.tooltip-rect {
+	fill: white;
+	stroke: $gray-100;
+}
+
+.tooltip-state {
+	font-size: $font-size-sm;
+	text-transform: uppercase;
+}
+
+.polygon {
+	fill: white;
+}

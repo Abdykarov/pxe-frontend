@@ -1,8 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import * as d3 from 'd3';
-import { reduce } from 'rxjs/operators';
-import * as R from 'ramda';
 
 @Component({
     selector: 'lnd-line-graph',
@@ -14,6 +12,9 @@ export class LineGraphComponent implements OnInit {
 
     @ViewChild('canvasDiv', { static: true })
     public canvasDiv: ElementRef;
+
+    @Input()
+    public data;
 
     @Input()
     public margin: {
@@ -46,8 +47,8 @@ export class LineGraphComponent implements OnInit {
 
         const parseTime = d3.timeParse('%Y-%m-%d');
         const bisectDate = d3.bisector(function(d) { return d.x; }).left;
-        const x = d3.scaleTime().range([0, this.width]);
-        const y = d3.scaleLinear().range([this.height, 0]);
+        const formatValue = d3.format(',');
+            const dateFormatter = d3.timeFormat('%d.%m.%Y');
 
 
         const locale = d3.timeFormatLocale({
@@ -214,11 +215,6 @@ export class LineGraphComponent implements OnInit {
             d.x = parseTime(d.x);
         });
 
-        // 5. X scale will use the index of our data
-        // const xScale = d3.scaleLinear()
-        //     .domain([0, dataset.length - 1]) // input
-        //     .range([0, this.width]); // output
-
         const xScale = d3.scaleTime()
             .domain(d3.extent(dataset, function(d) {
                     return d.x;
@@ -226,28 +222,21 @@ export class LineGraphComponent implements OnInit {
             )
             .range([ 0, this.width ]);
 
-
-// 6. Y scale will use the randomly generate number
         const yScale = d3.scaleLinear()
             .domain([
-                d3.min(dataset, function(d) { return d.y; }) - 5,
-                d3.max(dataset, function(d) { return d.y; }) + 5,
+                d3.min(dataset, function(d) { return d.y; }) - 20,
+                d3.max(dataset, function(d) { return d.y; }) + 20,
             ]) // input
             .range([this.height, 0]); // output
 
-// 7. d3's line generator
-
         const line = d3.line()
             .x(function(d) {
-                return x(d.x);
+                return xScale(d.x);
             })
             .y(function(d) {
-                return y(d.y);
+                return yScale(d.y);
             });
-        // .curve(d3.curveMonotoneX); // apply smoothing to the line
 
-
-// 1. Add the SVG to the page and employ #2
         const svg = d3.select(this.canvasDiv.nativeElement).append('svg')
             .attr('width', this.width + this.margin.left + this.margin.right)
             .attr('height', this.height + this.margin.top + this.margin.bottom)
@@ -263,10 +252,10 @@ export class LineGraphComponent implements OnInit {
             .attr('class', 'x axis')
             .call(d3.axisBottom(xScale).tickSize(0).tickPadding(0).tickFormat('')); // Create an axis component with d3.axisBottom
 
-        for (let i = 1 ; i < 5 ; i++) {
+        for (let i = 1 ; i < 7 ; i++) {
             svg.append('g')
                 .attr('class', 'y axis')
-                .attr('transform', 'translate(' + this.width / 5 * i + ',0)')
+                .attr('transform', 'translate(' + ((this.width) / 7) * i + ',0)')
                 .call(d3.axisRight(yScale).tickSize(0).tickPadding(0).tickFormat('')); // Create an axis component with d3.axisLeft
         }
 
@@ -279,56 +268,12 @@ export class LineGraphComponent implements OnInit {
             .attr('class', 'y axis')
             .call(d3.axisLeft(yScale).tickSize(0).tickPadding(20)); // Create an axis component with d3.axisLeft
 
-
-
-        // const focus = svg.append('g')
-        //     .attr('class', 'focus')
-        //     .style('display', 'none');
-        //
-        // focus.append('line')
-        //     .attr('class', 'x-hover-line hover-line')
-        //     .attr('y1', 0)
-        //     .attr('y2', this.height);
-        //
-        // focus.append('line')
-        //     .attr('class', 'y-hover-line hover-line')
-        //     .attr('x1', this.width)
-        //     .attr('x2', this.width);
-        //
-        // focus.append('circle')
-        //     .attr('r', 7.5);
-        //
-        // focus.append('text')
-        //     .attr('x', 15)
-        //     .attr('dy', '.31em');
-        //
-// 9. Append the path, bind the data, and call the line generator
-//         const that = this;
-//         function mousemove() {
-//             console.log('_AAAA_AA_A_A_');
-//             const x0 = x.invert(d3.mouse(this)[0]),
-//                 i = bisectDate(dataset, x0, 1),
-//                 d0 = dataset[i - 1],
-//                 d1 = dataset[i];
-//             console.log('AHOJ');
-//             console.log(x0);
-//             console.log(i);
-//             console.log('___');
-            // focus.attr('transform', 'translate(' + x(d0.y) + ',' + y(d0.y) + ')');
-            // focus.select('text').text(function() { return d.y; });
-            // focus.select('.x-hover-line').attr('y2', that.height - y(d.y));
-            // focus.select('.y-hover-line').attr('x2', that.width + that.width);
-        // }
-
         svg.append('path')
             .datum(dataset)
             .attr('class', 'line')
             .attr('stroke', '#17a2b8')
             .attr('stroke-width', '1')
             .attr('d', line);
-            // .on('mouseover', function() { focus.style('display', null); })
-            // .on('mouseout', function() { focus.style('display', 'none'); })
-            // .on('mousemove', mousemove);
 
         svg.append('text')
             .attr('x', (this.width / 2))
@@ -337,25 +282,101 @@ export class LineGraphComponent implements OnInit {
             .attr('class', 'h2--public')
             .text(this.title);
 
+        const focus = svg.append('g')
+            .attr('class', 'focus')
+            .style('display', 'none');
+
+        focus.append('rect')
+            .attr('class', 'tooltip')
+            .attr('width', 50)
+            .attr('height', this.height)
+            .attr('x', -25)
+            .attr('y', 0)
+            .attr('stroke-opacit', '0.7');
+
+        focus.append('rect')
+            .attr('class', 'tooltip-rect')
+            .attr('width', 240)
+            .attr('height', 100)
+            .attr('x', -120)
+            .attr('rx', 4)
+            .attr('ry', 4);
+
+        focus.append('text')
+            .attr('class', 'tooltip-state')
+            .attr('width', 240)
+            .attr('height', 30);
+
+        focus.append('text')
+            .attr('class', 'tooltip-value')
+            .attr('width', 240)
+            .attr('height', 30);
+
+        focus.append('text')
+            .attr('class', 'tooltip-unit')
+            .attr('width', 240)
+            .attr('height', 30);
 
 
+        focus.append('polygon')
+            .attr('class', 'polygon')
+            .attr('points', '-20,0 20,0 0,20');
 
 
+        focus.append('path')
+            .attr('class', 'triangl')
+            .attr('fill', 'transparent')
+            .attr('stroke', '#bdcad6')
+            .attr('d', 'M-20,0 L0,19 L20,0');
 
-        // svg.selectAll('.dot')
-        //     .data(dataset)
-        //     .enter()
-        //     .filter((d, i) => i % 2 === 0)
-        //     .append('circle') // Uses the enter().append() method
-        //     .attr('class', 'dot') // Assign a class for styling
-        //     .attr('cx', function(d, i) { return xScale(i * 2); })
-        //     .attr('cy', function(d) {
-        //         return yScale(d.y); })
-        //     .attr('r', 5)
-        //     .on('mouseover', function(a, b, c) {
-        //         d3.select(this).classed('class', 'focus');
-        //     })
-        //     .on('mouseout', function() {});
+            // focus.append('text')
+        //     .attr('class', 'tooltip-date')
+        //     .attr('x', 18)
+        //     .attr('y', -2);
+
+        // focus.append('text')
+        //     .attr('x', 18)
+        //     .attr('y', 18)
+
+        // focus.append('text')
+        //     .attr('class', 'tooltip-likes')
+        //     .attr('x', 60)
+        //     .attr('y', 18);
+
+        function mousemove() {
+            const x0 = xScale.invert(d3.mouse(this)[0]),
+                i = bisectDate(dataset, x0, 1),
+                d0 = dataset[i - 1],
+                d1 = dataset[i],
+                d = x0 - <any>(d0).x > <any>(d1).x - x0 ? d1 : d0;
+            focus.attr('transform', 'translate(' + xScale(d.x) + ',' + 0 + ')');
+            const coordinates = d3.mouse(this);
+            const yy = coordinates[1];
+            focus.select('.tooltip-state')
+                .attr('transform', 'translate(' + -80 + ',' + (yy - 110) + ')')
+                .text('Stav kde dni ' + dateFormatter(d.x));
+
+            focus.select('.tooltip-value')
+                .attr('transform', 'translate(' + -80 + ',' + (yy - 70) + ')')
+                .text(formatValue(d.y));
+
+            focus.select('.tooltip-unit')
+                .attr('transform', 'translate(' + -80 + ',' + (yy - 50) + ')')
+                .text('CZK/MHw');
+
+            focus.select('.tooltip-rect').attr('transform', 'translate(' + 0 + ',' + (yy - 130) + ')');
+
+            focus.select('.polygon').attr('transform', 'translate(' + 0 + ',' + (yy + -31) + ')');
+            focus.select('.triangl').attr('transform', 'translate(' + 0 + ',' + (yy + -31) + ')');
+        }
+
+        svg.append('rect')
+            .attr('class', 'overlay')
+            .attr('width', this.width)
+            .attr('height', this.height)
+            .on('mouseover', function() { focus.style('display', null); })
+            .on('mouseout', function() { focus.style('display', 'none'); })
+            .on('mousemove', mousemove);
 
     }
 }
