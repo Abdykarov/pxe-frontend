@@ -294,7 +294,7 @@ export class LoginComponent extends AbstractComponent {
             case LANDING_PAGE.DASHBOARD:
                 return ROUTES.ROUTER_DASHBOARD;
             case LANDING_PAGE.NEW_SUPPLY_POINT:
-                return ROUTES.ROUTER_REQUEST_SUPPLY_POINT;
+                return ROUTES.ROUTER_REQUEST_SIGNBOARD;
             case LANDING_PAGE.OFFERS:
                 return ROUTES.ROUTER_SUPPLY_OFFER_POWER;
             case LANDING_PAGE.WAITING_FOR_PAYMENT:
@@ -303,11 +303,16 @@ export class LoginComponent extends AbstractComponent {
     }
 
     public navigateAfterLogin = (loginResponse: ILoginResponse, changedPassword = false) => {
-        const extras: NavigationExtras = {};
+        const extras: NavigationExtras = {
+            state: {
+                afterLogin: true,
+            },
+        };
 
         if (changedPassword) {
             extras.state = {
                 showBanner: true,
+                ...extras.state,
             };
         }
 

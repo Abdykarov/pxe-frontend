@@ -5,7 +5,6 @@ import {
 import {
     ChangeDetectorRef,
     Component,
-    ElementRef,
     Inject,
     OnInit,
     PLATFORM_ID,
@@ -114,10 +113,12 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                 )
                 .subscribe(
                     () => {
+                        this.supplyPointLocalStorageService.isEdit = true;
                         this.supplyPointData = supplyPointFound;
                         this.cd.markForCheck();
                     },
                     (error) => {
+                        this.supplyPointLocalStorageService.isEdit = true;
                         this.supplyPointData = {};
                         const { globalError } = parseGraphQLErrors(error);
                         this.globalError = globalError;
@@ -125,8 +126,10 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                     },
                 );
         } else if (supplyPointCopy) {
+            this.supplyPointLocalStorageService.isEdit = true;
             this.supplyPointData = supplyPointCopy;
         } else {
+            this.supplyPointLocalStorageService.isEdit = false;
             this.showBannerOfContinueInPreviousForm = !R.isEmpty(this.supplyPointLocalStorageService.getSupplyPoint());
             this.supplyPointData = {};
         }

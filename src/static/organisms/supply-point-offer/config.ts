@@ -1,5 +1,9 @@
-import { CommodityType } from 'src/common/graphql/models/supply.model';
+import {
+    IQuestion,
+    Tag,
+} from 'src/app/services/model/faq.model';
 import { IOffer } from 'src/common/graphql/models/offer.model';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 
 export const offerConfig: IOffer = {
     status: null,
@@ -35,7 +39,7 @@ export const offerConfig: IOffer = {
     supplier: {
         id: '',
         name: 'PRE',
-        vatNumber: '',
+        vatNumber: '555',
         logoPath: '',
         sampleDocuments: [],
     },
@@ -59,3 +63,15 @@ export const offerConfig: IOffer = {
     unit: 'MWh',
     greenEnergy: true,
 };
+
+export const questions: IQuestion[] = [{
+    id: 15,
+    'tag': Tag.SUPPLIER,
+    'url': 'future',
+    'header': 'Jak chcete PARC4U rozvíjet?',
+    'shortContent': 'Rádi bychom získali pro PARC4U dostatek zákazníků, což nám umožní další' +
+        ' rozvoj a automatizaci poskytovaných služeb tak, abyste měli energie již pro vždy vyřešené.',
+    'seoKeywords': 'PARC4U, dostatek, zákazníků, rozvoj, automatizaci, poskytovaných služeb, energie, vyřešené',
+    'oneOfMostVisited': true,
+    vatNumber: '555',
+}];

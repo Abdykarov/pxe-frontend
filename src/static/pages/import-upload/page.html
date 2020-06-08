@@ -29,6 +29,15 @@
             </pxe-file-uploader>
         </div>
     </div>
+    <div #listOfNotificationsRow
+        class="row mb-2">
+        <div class="col-xl-8 offset-xl-2">
+            <pxe-list-of-notifications
+                [headerText]="'Seznam chyb'"
+                [notifications]="['item 1','item 2']">
+            </pxe-list-of-notifications>
+        </div>
+    </div>
     <div class="row">
         <div class="col-xl-8 offset-xl-2 text-center">
             <a (click)="backAction($event)">

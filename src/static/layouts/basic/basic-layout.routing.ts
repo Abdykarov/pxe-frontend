@@ -3,6 +3,11 @@ import {
     RouterModule,
     Routes,
 } from '@angular/router';
+
+import {
+    AccordionPageModule,
+    accordionPageRoutes,
+} from 'src/static/atoms/accordion/page.module';
 import {
     AlertsPageModule,
     alertsPageRoutes,
@@ -19,6 +24,10 @@ import {
     ListOfNotificationsPageModule,
     listOfNotificationsPageRoutes,
 } from 'src/static/organisms/list-of-notifications/page.module';
+import {
+    SignboardPageModule,
+    signboardPageRoutes,
+} from 'src/static/pages/signboard/page.module';
 import {
     BasicLayoutComponent,
 } from './basic-layout.component';
@@ -192,6 +201,7 @@ const routes: Routes = [
         path: '',
         component: BasicLayoutComponent,
         children: [
+            ...accordionPageRoutes,
             ...alertsPageRoutes,
             ...badgesPageRoutes,
             ...bannersPageRoutes,
@@ -222,6 +232,7 @@ const routes: Routes = [
             ...requestPageRoutes,
             ...requestBannerPageRoutes,
             ...requestCardPageRoutes,
+            ...signboardPageRoutes,
             ...supplierConcludedContractsEmptyRoutes,
             ...supplierConcludedContractsRoutes,
             ...supplyOfferPageRoutes,
@@ -247,6 +258,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
+        AccordionPageModule,
         AlertsPageModule,
         BadgesPageModule,
         BannersPageModule,
@@ -278,6 +290,7 @@ const routes: Routes = [
         RequestBannerPageModule,
         RequestCardPageModule,
         RouterModule.forChild(routes),
+        SignboardPageModule,
         SupplierConcludedContractsEmptyModule,
         SupplierConcludedContractsModule,
         SupplyOfferPageModule,

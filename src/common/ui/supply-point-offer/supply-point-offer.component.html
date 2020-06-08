@@ -4,7 +4,12 @@
     <a [href]="data?.benefit?.url" target="_blank">zde</a>.
 </ng-template>
 
-<div class="supply-point-offer"
+<ng-template #tooltipBottom let-toggle="toggle">
+    <span (click)="toggle()" class="icon icon--info"></span>
+</ng-template>
+
+<div #supplyPointOfferWrapper
+    class="supply-point-offer"
    [class.supply-point-offer--owner]="isOwner"
    [class.supply-point-offer--not-interactive]="!interactive">
     <div class="row no-gutters">
@@ -43,10 +48,20 @@
                         <span class="supply-point-offer__title-label">{{isOwner ? 'Váš stávající dodavatel' : 'Dodavatel'}}</span>
                         <span class="
                                 supply-point-offer__title
-                                mb-0
-                                text-break">
-                            {{supplyPointOffer.supplier?.name}}&nbsp;
-                            <!--<span class="icon icon&#45;&#45;info supply-point-offer__info-icon"></span>-->
+                                mb-0">
+                            <span class="text-break">{{supplyPointOffer.supplier?.name}}</span>
+                            <lnd-tooltip
+                                *ngIf="question && (question | keyvalue)?.length"
+                                [actionTemplate]="tooltipBottom"
+                                [wrapperElement]="supplyPointOfferWrapper"
+                                direction="bottom"
+                                customClass="ml-2 tooltip-supply-point-info">
+                                <div>{{question?.shortContent}}</div>
+                                <a [routerLink]="question.absoluteUrl"
+                                   class="link--white link--interactive-revert d-block mt-1">
+                                    Více info
+                                </a>
+                            </lnd-tooltip>
                         </span>
                     </div>
                 </div>
@@ -121,16 +136,6 @@
                 pb-md-4">
             <h3 class="supply-point-offer__decomposition-title">Regulovaná část ceny <small>(veškeré ceny jsou&nbsp;VČETNĚ&nbsp;DPH)</small></h3>
             <div class="row mb-4">
-                <div class="col-12 col-md-6 col-xl-4"
-                        *ngIf="supplyPointOffer.priceGasWithVAT && supplyPointOffer.commodityType === COMMODITY_TYPE_GAS">
-                    <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
-                        <span class="supply-point-offer__value-name">Cena</span>
-                        <span class="supply-point-offer__value supply-point-offer__value--interactive text-break"
-                                (click)="togglePriceDecomposition($event)">
-                            {{supplyPointOffer.priceGasWithVAT | number: '1.0-2'}}&nbsp;Kč/MWh
-                        </span>
-                    </div>
-                </div>
                 <ng-container *ngIf="supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
                     <ng-container *ngIf="([
                         supplyPointOffer.distributionPriceByConsumptionVT,
@@ -189,8 +194,18 @@
                     </div>
                 </div>
             </div>
-            <h3 class="supply-point-offer__decomposition-title">Obchodní část ceny</h3>
+            <h3 class="supply-point-offer__decomposition-title">Obchodní část ceny <small>(veškeré ceny jsou&nbsp;VČETNĚ&nbsp;DPH)</small></h3>
             <div class="row mb-4">
+                <div class="col-12 col-md-6 col-xl-4"
+                     *ngIf="supplyPointOffer.priceGasWithVAT && supplyPointOffer.commodityType === COMMODITY_TYPE_GAS">
+                    <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
+                        <span class="supply-point-offer__value-name">Cena</span>
+                        <span class="supply-point-offer__value supply-point-offer__value text-break"
+                              (click)="togglePriceDecomposition($event)">
+                                {{supplyPointOffer.priceGasWithVAT | number: '1.0-2'}}&nbsp;Kč/MWh
+                            </span>
+                    </div>
+                </div>
                 <div class="col-12 col-md-6 col-xl-4"
                      *ngIf="supplyPointOffer.priceVTWithVAT && supplyPointOffer.commodityType === COMMODITY_TYPE_POWER">
                     <div class="supply-point-offer__value-box supply-point-offer__value-box--price">

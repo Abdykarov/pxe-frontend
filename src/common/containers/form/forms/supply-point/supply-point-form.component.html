@@ -1,6 +1,6 @@
 <ng-template #phraseHelpTemplate>
     <p class="small mt-0 mb-1">
-        V případě, že zde není přesně vaše hodnota, zadejte nejbližší vyšší hodnotu
+        V případě, že zde není přesně vaše hodnota, zadejte nejbližší vyšší hodnotu.
     </p>
 </ng-template>
 
@@ -63,7 +63,7 @@
             [parentForm]="form"
             [selectName]="'supplierId'"
             [success]="form.controls.supplierId.valid && (form.controls.supplierId.touched || formError.supplierId)"
-            subtext="Začněte psát a my vám poradíme"
+            subtext="Začněte psát a my vám poradíme."
             searchable="true"
             [touched]="form.controls.supplierId.touched || formError.supplierId"
             [validationMessages]="formFields.validationMessages.supplierId">
@@ -78,7 +78,7 @@
             [formControl]="form.controls.name"
             [id]="'name'"
             label="Vaše pojmenování odběrného místa"
-            subtext="Cokoliv, podle čeho chcete místo identifikovat"
+            subtext="Cokoliv, podle čeho chcete místo identifikovat."
             [success]="form.controls.name.valid && (form.controls.name.touched || formError.name)"
             [touched]="form.controls.name.touched || formError.name"
             [validationMessages]="formFields.validationMessages.name"
@@ -93,7 +93,7 @@
             [formControl]="form.controls.ean"
             [id]="'ean'"
             label="EAN"
-            subtext="Unikátní identifikační číslo odběrného místa"
+            subtext="Unikátní identifikační číslo odběrného místa."
             [success]="form.controls.ean.valid && (form.controls.ean.touched || formError.ean)"
             [touched]="form.controls.ean.touched || formError.ean"
             [validationMessages]="formFields.validationMessages.ean"
@@ -108,12 +108,13 @@
             [formControl]="form.controls.eic"
             [id]="'eic'"
             label="EIC"
-            subtext="Unikátní identifikační číslo odběrného místa"
+            subtext="Unikátní identifikační číslo odběrného místa."
             [success]="form.controls.eic.valid && (form.controls.eic.touched || formError.eic)"
             [touched]="form.controls.eic.touched || formError.eic"
             [validationMessages]="formFields.validationMessages.eic"
         ></lnd-form-field>
         <pxe-address-whisperer
+            #pxeAddressWhisperer
             lndSFormDirective
             lndSBiometricsDirective
             *ngIf="form.controls.address.status !== 'DISABLED'"
@@ -335,11 +336,11 @@
             lndSBiometricsDirective
             *ngIf="form.controls.expirationDate.status !== 'DISABLED'"
             [appendButtonIcon]="helpDocuments && helpDocuments['expirationDate'] ? 'icon--info' : null"
-            (appendButtonAction)="showHelp('expirationDate', form.controls.contractEndTypeId.status !== 'DISABLED' ? 'Do kdy máte uzavřenou aktuální smlouvu' : 'Datum ukončení')"
+            (appendButtonAction)="showHelp('expirationDate', form.controls.contractEndTypeId.status !== 'DISABLED' ? 'Do kdy máte uzavřenou aktuální smlouvu?' : 'Datum ukončení')"
             [datepickerName]="'expirationDate'"
             [error]="formError.expirationDate || form.controls.expirationDate.errors"
             id="datepicker-1"
-            [label]="form.controls.contractEndTypeId.status !== 'DISABLED' ? 'Do kdy máte uzavřenou aktuální smlouvu' : 'Datum ukončení'"
+            [label]="form.controls.contractEndTypeId.status !== 'DISABLED' ? 'Do kdy máte uzavřenou aktuální smlouvu?' : 'Datum ukončení'"
             [parentForm]="form"
             [placeholder]="'dd.mm.rrrr'"
             [minDate]="minDate"

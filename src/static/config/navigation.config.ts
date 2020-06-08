@@ -7,10 +7,10 @@ export const staticNavigationConfig: INavigationConfig = [
             'label': 'Atoms & Molecules',
             'icon': 'component-low',
             'children': [
-                // {
-                //     'label': 'Accordion',
-                //     'url': '/accordion',
-                // },
+                {
+                    'label': 'Accordion',
+                    'url': '/basic/accordion',
+                },
                 // {
                 //     'label': 'Add',
                 //     'url': '/add',
@@ -186,6 +186,14 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/delete-account-failed',
                 },
                 {
+                    'label': 'FAQ',
+                    'url': '/full/faq',
+                },
+                {
+                    'label': 'FAQ Detail',
+                    'url': '/full/faq-detail',
+                },
+                {
                     'label': 'Import approval',
                     'url': '/full/import-approval',
                 },
@@ -228,6 +236,10 @@ export const staticNavigationConfig: INavigationConfig = [
                 {
                     'label': 'Request (banner)',
                     'url': '/basic/request-banner',
+                },
+                {
+                    'label': 'Signboard',
+                    'url': '/basic/signboard',
                 },
                 {
                     'label': 'New supply point',

@@ -5,7 +5,9 @@ import { AccordionBenefitModule } from 'src/common/ui/accordion-benefit/accordio
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { IndicatorModule } from 'src/common/ui/indicator/indicator.module';
 import { PipesModule } from 'src/common/pipes/pipes.module';
+import { RouterModule } from '@angular/router';
 import { SupplyPointOfferComponent } from './supply-point-offer.component';
+import { TooltipModule } from '../tooltip/tooltip.module';
 
 @NgModule({
     declarations: [
@@ -20,6 +22,8 @@ import { SupplyPointOfferComponent } from './supply-point-offer.component';
         CommonModule,
         IndicatorModule,
         PipesModule,
+        RouterModule,
+        TooltipModule,
     ],
 })
 export class SupplyPointOfferModule {}
