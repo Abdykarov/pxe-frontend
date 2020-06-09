@@ -107,6 +107,7 @@ type Offer {
     commodityType: CommodityType!
     consumptionPriceNT: Float
     consumptionPriceVT: Float
+    consumptionPriceGas: Float
     deliveryFrom: Date
     deliveryLength: Int!
     deliveryTo: Date
