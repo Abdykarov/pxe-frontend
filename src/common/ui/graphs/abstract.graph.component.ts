@@ -1,7 +1,8 @@
 import {
     EventEmitter,
     Input,
-    OnInit, Output,
+    OnInit,
+    Output,
 } from '@angular/core';
 
 import {

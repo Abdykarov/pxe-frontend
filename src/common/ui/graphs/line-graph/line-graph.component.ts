@@ -198,7 +198,7 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
 
         function mouseOut() {
             focus.style('display', 'none');
-            that.mouseOut.emit();
+            that.mouseOut.emit(this);
         }
 
         function mousemove() {

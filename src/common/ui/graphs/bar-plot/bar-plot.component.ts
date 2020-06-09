@@ -27,7 +27,7 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
     public svgWrapper: ElementRef;
 
     @Input()
-    public limitForPaddingValue = 35;
+    public limitForTransformLabel = 35;
 
     @Input('data') set allowDay(data: IDataBarPlot[]) {
         this._data = R.forEachObjIndexed((dataBarPlot: IDataBarPlot, id: number) => dataBarPlot.id = id)(data);
@@ -59,8 +59,7 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
             .attr('width', this.width + this.margin.left + this.margin.right)
             .attr('height', this.height + this.margin.top + this.margin.bottom)
             .append('g')
-            .attr('transform',
-                `translate(${this.margin.left}, ${this.margin.top})`);
+            .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
 
         const x = d3.scaleBand()
             .range([ 0, this.width ])
@@ -77,7 +76,6 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
         const u = svg.selectAll('rect')
                 .data(this.data);
 
-        // tslint:disable:no-shadowed-variable
         u
             .enter()
             .append('rect')
@@ -90,28 +88,27 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
             .attr('id', (d: IDataBarPlot) => d.id)
             .on('mousemove', mouseMove)
             .on('mouseout', mouseOut);
-        // tslint:enable:no-shadowed-variable
 
         const widthOfColumn = svg.select('.column').attr('width');
-        const withPadding = widthOfColumn > this.limitForPaddingValue;
+        const withoutTransformLabel = widthOfColumn > this.limitForTransformLabel;
 
         u
             .enter()
             .append('text')
-            .attr('x', (d: IDataBarPlot) => x(d.label) + (withPadding ? 15 : (widthOfColumn / 2)))
+            .attr('x', (d: IDataBarPlot) => x(d.label) + (withoutTransformLabel ? 15 : (widthOfColumn / 2)))
             .attr('y', this.height - 25)
             .attr('class', 'label')
-            .attr('text-anchor', () => (!withPadding ? 'middle' : ''))
-            .attr('writing-mode', () => (!withPadding ? 'tb' : ''))
+            .attr('text-anchor', () => (!withoutTransformLabel ? 'middle' : ''))
+            .attr('writing-mode', () => (!withoutTransformLabel ? 'tb' : ''))
             .attr('id', (d: IDataBarPlot) => d.id)
             .text((d: IDataBarPlot) => d.value)
             .on('mousemove', mouseMove)
             .on('mouseout', mouseOut);
 
         svg.append('g')
-            .attr('transform', 'translate(0,' + (this.height + 20) + ')')
+            .attr('transform', `translate(0,${(this.height + 20)})`)
             .attr('class', 'x axis')
-            .attr('writing-mode', () => (!withPadding ? 'tb' : ''))
+            .attr('writing-mode', () => (!withoutTransformLabel ? 'tb' : ''))
             .call(d3.axisBottom(x).tickSize(0).tickPadding(10))
             .call(g => g.select('.domain').remove());
 
@@ -124,14 +121,12 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
             that.mouseMove.emit(elementHovered);
         }
 
-
         function mouseOut() {
             const elementHovered = this;
             const id = d3.select(elementHovered).attr('id');
             svg.selectAll(`[id="${id}"]`)
                 .classed('hover', false);
-
-            that.mouseOut.emit(this);
+            that.mouseOut.emit(elementHovered);
         }
     }
 }
