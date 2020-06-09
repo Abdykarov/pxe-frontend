@@ -10,13 +10,8 @@ import {
 } from '@angular/core';
 
 import * as d3 from 'd3';
-import {
-    debounceTime,
-    takeUntil,
-} from 'rxjs/operators';
-import { fromEvent } from 'rxjs';
 
-import { AbstractComponent } from 'src/common/abstract.component';
+import { AbstractGraphComponent } from 'src/common/ui/graphs/abstract.graph.component';
 import {
     IDataLineGraph,
     IMargin,
@@ -28,7 +23,7 @@ import {
     styleUrls: ['./line-graph.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class LineGraphComponent extends AbstractComponent implements OnInit {
+export class LineGraphComponent extends AbstractGraphComponent implements OnInit {
 
     @ViewChild('svgWrapper', { static: true })
     public svgWrapper: ElementRef;
@@ -46,9 +41,6 @@ export class LineGraphComponent extends AbstractComponent implements OnInit {
     public formatValue = d3.format(',');
 
     @Input()
-    public height = 400;
-
-    @Input()
     public locale = d3.timeFormatLocale({
         'dateTime': '%A,%e.%B %Y, %X',
         'date': '%-d.%-m.%Y',
@@ -62,39 +54,10 @@ export class LineGraphComponent extends AbstractComponent implements OnInit {
     });
 
     @Input()
-    public margin: IMargin = {
-        top: 0,
-        right: 60,
-        bottom: 50,
-        left: 50,
-    };
-
-    @Input()
-    public reservedValueInXAxis = 8;
-
-    @Input()
-    public titleText: string;
-
-    @Input()
     public tooltipState: string;
 
     @Input()
     public unit: string;
-
-    @Input()
-    public width = 900;
-
-    @Output()
-    public change: EventEmitter<any> = new EventEmitter<any>();
-
-    @Output()
-    public mouseOut: EventEmitter<any> = new EventEmitter<any>();
-
-    public resizeEvent$ = fromEvent(window, 'resize')
-        .pipe(
-            takeUntil(this.destroy$),
-            debounceTime(200),
-        );
 
     constructor(
         private hostElement: ElementRef,
@@ -103,14 +66,14 @@ export class LineGraphComponent extends AbstractComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.resizeEvent$.subscribe(() => {
-            this.svgWrapper.nativeElement.innerHTML = '';
-            this.initGraph();
-        });
-        this.initGraph();
+        super.ngOnInit();
     }
 
-    private initGraph = () => {
+    protected clearContent(): void {
+        this.svgWrapper.nativeElement.innerHTML  = '';
+    }
+
+    protected initGraph = () => {
         const parentRect = this.hostElement.nativeElement.parentNode.getBoundingClientRect();
         this.width = parentRect.width - (this.margin.left + this.margin.right);
 
@@ -257,7 +220,7 @@ export class LineGraphComponent extends AbstractComponent implements OnInit {
             focus.select('.tooltip--rect').attr('transform', `translate(0,${(mouseY - 130)})`);
             focus.select('.tooltip--polygon').attr('transform', `translate(0, ${(mouseY + -31)})`);
             focus.select('.tooltip--triangle').attr('transform', `translate(0, ${(mouseY + -31)})`);
-            that.change.emit({...d});
+            that.mouseMove.emit({...d});
         }
 
         svg.append('rect')

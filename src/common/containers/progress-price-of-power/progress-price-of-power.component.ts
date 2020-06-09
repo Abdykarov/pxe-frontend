@@ -28,7 +28,7 @@ export class ProgressPriceOfPowerComponent {
         this.diff = null;
     }
 
-    public change = (newValue: IDataLineGraph) => {
+    public mouseMove = (newValue: IDataLineGraph) => {
         const currIndex = R.findIndex(
             (val: IDataLineGraph) => val.date.getTime() ===  newValue.date.getTime(),
         )(this.data);
