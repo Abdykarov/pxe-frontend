@@ -40,6 +40,12 @@
 			margin: 20px;
 		}
 
+		.tick {
+			text {
+				font-size: $font-size-base;
+			}
+		}
+
 		.tooltip {
 			fill: $gray-100;
 			opacity: 0.3;

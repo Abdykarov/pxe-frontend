@@ -196,6 +196,11 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
             .attr('class', 'tooltip--triangle')
             .attr('d', 'M-10,0 L0,15 L10,0');
 
+        function mouseOut() {
+            focus.style('display', 'none');
+            that.mouseOut.emit();
+        }
+
         function mousemove() {
             const x0 = xScale.invert(d3.mouse(this)[0]),
                 i = that.bisectDate(that.data, x0, 1),
@@ -228,10 +233,7 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
             .attr('width', this.width)
             .attr('height', this.height)
             .on('mouseover', () => focus.style('display', null))
-            .on('mouseout', () => {
-                focus.style('display', 'none');
-                this.mouseOut.emit();
-            })
+            .on('mouseout', mouseOut)
             .on('mousemove', mousemove);
     }
 }

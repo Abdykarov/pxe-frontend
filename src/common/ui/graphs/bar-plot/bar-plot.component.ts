@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 
 import * as d3 from 'd3';
+import * as R from 'ramda';
 
 import { AbstractGraphComponent } from 'src/common/ui/graphs/abstract.graph.component';
 import { IDataBarPlot } from 'src/common/ui/graphs/bar-plot/models/bar-plot.models';
@@ -22,6 +23,15 @@ import { IDataBarPlot } from 'src/common/ui/graphs/bar-plot/models/bar-plot.mode
 })
 export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
 
+    @ViewChild('svgWrapper', { static: true })
+    public svgWrapper: ElementRef;
+
+    @Input()
+    public limitForPaddingValue = 35;
+
+    @Input('data') set allowDay(data: IDataBarPlot[]) {
+        this._data = R.forEachObjIndexed((dataBarPlot: IDataBarPlot, id: number) => dataBarPlot.id = id)(data);
+    }
 
     constructor(
         private hostElement: ElementRef,
@@ -29,32 +39,11 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
         super();
     }
 
-    @Input()
-    public data: IDataBarPlot[] = [{
-            label: 'Pondělí',
-            value: 12,
-        }, {
-            label: 'Úterý',
-            value: 6,
-        }, {
-            label: 'Středa',
-            value: 20,
-        }, {
-            label: 'Čtvrtek',
-            value: 30,
-        }, {
-            label: 'Pátek',
-            value: 50,
-        }, {
-            label: 'Sobota',
-            value: 5,
-        }, {
-            label: 'Neděle',
-            value: 30,
-        }];
+     public _data: IDataBarPlot[];
 
-    @ViewChild('svgWrapper', { static: true })
-    public svgWrapper: ElementRef;
+    get data(): IDataBarPlot[] {
+        return this._data;
+    }
 
     protected clearContent(): void {
         this.svgWrapper.nativeElement.innerHTML  = '';
@@ -63,7 +52,6 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
     protected initGraph(): void {
         const parentRect = this.hostElement.nativeElement.parentNode.getBoundingClientRect();
         this.width = parentRect.width - (this.margin.left + this.margin.right);
-
         const that = this;
 
         const svg = d3.select(this.svgWrapper.nativeElement)
@@ -72,11 +60,11 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
             .attr('height', this.height + this.margin.top + this.margin.bottom)
             .append('g')
             .attr('transform',
-                'translate(' + this.margin.left + ',' + this.margin.top + ')');
+                `translate(${this.margin.left}, ${this.margin.top})`);
 
         const x = d3.scaleBand()
             .range([ 0, this.width ])
-            .domain(this.data.map(function(d) { return d.label; }))
+            .domain(this.data.map((d: IDataBarPlot) => d.label))
             .padding(0.05);
 
         const y = d3.scaleLinear()
@@ -86,38 +74,64 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
             ])
             .range([ this.height, 0]);
 
-            svg.append('g')
-                .attr('transform', 'translate(0,' + this.height + ')')
-                .attr('class', 'x axis')
-                .call(d3.axisBottom(x).tickSize(0).tickPadding(10))
-                .call(g => g.select('.domain').remove());
+        const u = svg.selectAll('rect')
+                .data(this.data);
 
-            function mousemove() {
-                that.mouseMove.emit();
-            }
+        // tslint:disable:no-shadowed-variable
+        u
+            .enter()
+            .append('rect')
+            .merge(u)
+            .attr('x', (d: IDataBarPlot) => x(d.label))
+            .attr('y', (d: IDataBarPlot) => y(d.value))
+            .attr('width', x.bandwidth())
+            .attr('height', (d: IDataBarPlot) => this.height - y(d.value))
+            .attr('class', 'column')
+            .attr('id', (d: IDataBarPlot) => d.id)
+            .on('mousemove', mouseMove)
+            .on('mouseout', mouseOut);
+        // tslint:enable:no-shadowed-variable
 
-            const u = svg.selectAll('rect')
-                    .data(this.data);
+        const widthOfColumn = svg.select('.column').attr('width');
+        const withPadding = widthOfColumn > this.limitForPaddingValue;
 
-                u
-                    .enter()
-                    .append('rect')
-                    .merge(u)
-                    .attr('x', function(d) { return x(d.label); })
-                    .attr('y', function(d) { return y(d.value); })
-                    .attr('width', x.bandwidth())
-                    .attr('height', function(d) { return that.height - y(d.value); })
-                    .attr('class', 'column')
-                    .on('mousemove', () => that.mouseMove.emit())
-                    .on('mouseout', () => this.mouseOut.emit());
+        u
+            .enter()
+            .append('text')
+            .attr('x', (d: IDataBarPlot) => x(d.label) + (withPadding ? 15 : (widthOfColumn / 2)))
+            .attr('y', this.height - 25)
+            .attr('class', 'label')
+            .attr('text-anchor', () => (!withPadding ? 'middle' : ''))
+            .attr('writing-mode', () => (!withPadding ? 'tb' : ''))
+            .attr('id', (d: IDataBarPlot) => d.id)
+            .text((d: IDataBarPlot) => d.value)
+            .on('mousemove', mouseMove)
+            .on('mouseout', mouseOut);
 
-            u
-                .enter()
-                .append('text')
-                    .attr('x', function(d) { return x(d.label) + 15; })
-                    .attr('y', function(d) { return that.height - 25; })
-                    .attr('class', 'label')
-                    .text(function(d) { return d.value; });
+        svg.append('g')
+            .attr('transform', 'translate(0,' + (this.height + 20) + ')')
+            .attr('class', 'x axis')
+            .attr('writing-mode', () => (!withPadding ? 'tb' : ''))
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(10))
+            .call(g => g.select('.domain').remove());
+
+        function mouseMove() {
+            const elementHovered = this;
+            const id = d3.select(elementHovered).attr('id');
+            svg.selectAll(`[id="${id}"]`)
+                .classed('hover', true);
+
+            that.mouseMove.emit(elementHovered);
+        }
+
+
+        function mouseOut() {
+            const elementHovered = this;
+            const id = d3.select(elementHovered).attr('id');
+            svg.selectAll(`[id="${id}"]`)
+                .classed('hover', false);
+
+            that.mouseOut.emit(this);
+        }
     }
-
 }

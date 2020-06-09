@@ -22,7 +22,7 @@ export abstract class AbstractGraphComponent extends AbstractComponent implement
     public margin: IMargin = {
         top: 0,
         right: 60,
-        bottom: 50,
+        bottom: 80,
         left: 50,
     };
 

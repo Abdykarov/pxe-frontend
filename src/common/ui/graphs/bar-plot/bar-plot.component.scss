@@ -20,17 +20,24 @@
 
 		.x text{
 			font-size: $font-size-base;
-			stroke: $light;
+			color: $gray-400;
 		}
 
 		text.label {
-			stroke: black;
+			cursor: pointer;
+			color: $gray-400;
+			font-size: $font-size-base;
 		}
 
-		rect:hover {
+		text.label.hover {
+			color: white !important;
+			fill: white !important;
+		}
+
+
+		.hover {
+			cursor: pointer;
 			fill: $gradient-blue-dark;
 		}
-
-
 	}
 }
