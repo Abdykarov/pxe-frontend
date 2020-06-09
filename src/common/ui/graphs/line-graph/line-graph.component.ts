@@ -10,7 +10,13 @@ import {
 } from '@angular/core';
 
 import * as d3 from 'd3';
+import {
+    debounceTime,
+    takeUntil,
+} from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
 
+import { AbstractComponent } from 'src/common/abstract.component';
 import {
     IDataLineGraph,
     IMargin,
@@ -22,10 +28,10 @@ import {
     styleUrls: ['./line-graph.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class LineGraphComponent implements OnInit {
+export class LineGraphComponent extends AbstractComponent implements OnInit {
 
-    @ViewChild('canvasDiv', { static: true })
-    public canvasDiv: ElementRef;
+    @ViewChild('svgWrapper', { static: true })
+    public svgWrapper: ElementRef;
 
     @Input()
     public bisectDate = d3.bisector((d: IDataLineGraph) => d.date).left;
@@ -84,19 +90,31 @@ export class LineGraphComponent implements OnInit {
     @Output()
     public mouseOut: EventEmitter<any> = new EventEmitter<any>();
 
+    public resizeEvent$ = fromEvent(window, 'resize')
+        .pipe(
+            takeUntil(this.destroy$),
+            debounceTime(200),
+        );
+
     constructor(
         private hostElement: ElementRef,
-    ) {}
+    ) {
+        super();
+    }
 
     ngOnInit() {
+        this.resizeEvent$.subscribe(() => {
+            this.svgWrapper.nativeElement.innerHTML = '';
+            this.initGraph();
+        });
         this.initGraph();
     }
 
     private initGraph = () => {
-        const that = this;
         const parentRect = this.hostElement.nativeElement.parentNode.getBoundingClientRect();
         this.width = parentRect.width - (this.margin.left + this.margin.right);
 
+        const that = this;
         const formatMillisecond = this.locale.format('.%L'),
             formatSecond = this.locale.format(':%S'),
             formatMinute = this.locale.format('%I:%M'),
@@ -131,7 +149,7 @@ export class LineGraphComponent implements OnInit {
             .x((d: IDataLineGraph) => xScale(d.date))
             .y((d: IDataLineGraph) => yScale(d.value));
 
-        const svg = d3.select(this.canvasDiv.nativeElement).append('svg')
+        const svg = d3.select(this.svgWrapper.nativeElement).append('svg')
             .attr('width', this.width + this.margin.left + this.margin.right)
             .attr('height', this.height + this.margin.top + this.margin.bottom)
             .append('g')
