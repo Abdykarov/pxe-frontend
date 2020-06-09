@@ -87,7 +87,7 @@ type Mutation {
     sendContractConfirmationSms(contractId: ID!): Boolean
     sendUnregisterSms: Boolean
     setContractProlongation(contractId: ID!, prolong: Boolean!): Boolean
-    signContract(contractId: Int!, smsCode: String): Boolean
+    signContract(contractId: ID!, smsCode: String): Boolean
     unsetContractProlongation(contractId: ID!, smsCode: String!): Boolean
     updateGasOffer(gasAttributes: OfferInputGasAttributes!, offer: OfferInput!, offerId: ID!): Offer
     updateGasSupplyPoint(gasAttributes: SupplyPointInputGasAttributes!, supplyPoint: SupplyPointInput!, supplyPointId: ID!): Int
