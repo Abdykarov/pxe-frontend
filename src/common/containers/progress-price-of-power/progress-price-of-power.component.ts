@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { ChangeDetectorRef, Component } from '@angular/core';
+
+import * as d3 from 'd3';
+import * as R from 'ramda';
 
 import { conf } from 'src/common/containers/progress-price-of-power/config';
+import { IDataLineGraph } from 'src/common/ui/graphs/line-graph/models/line-graph.models';
 
 @Component({
     selector: 'pxe-progress-price-of-power',
@@ -9,8 +12,37 @@ import { conf } from 'src/common/containers/progress-price-of-power/config';
     styleUrls: ['./progress-price-of-power.component.scss'],
 })
 export class ProgressPriceOfPowerComponent {
+    public readonly data: IDataLineGraph[];
 
-    public readonly data = conf;
+    public currValue: number;
+    public prevValue: number;
 
-    constructor() {}
+    public diff: number;
+
+    constructor() {
+        this.data = R.forEach((val: IDataLineGraph) => val.date = d3.timeParse('%Y-%m-%d')(val.date))(conf);
+    }
+
+    public mouseOut = () => {
+        this.diff = null;
+    }
+
+    public change = (newValue: IDataLineGraph) => {
+        const currIndex = R.findIndex(
+            (val: IDataLineGraph) => val.date.getTime() ===  newValue.date.getTime(),
+        )(this.data);
+
+        this.currValue = this.data[currIndex].value;
+
+        if ( currIndex !== 0) {
+            this.prevValue = this.data[currIndex - 1].value;
+            this.diff = this.count(this.currValue, this.prevValue);
+        } else {
+            this.prevValue = null;
+        }
+    }
+
+    private count = (last: number, avg: number) => {
+        return last / (avg / 100) - 100;
+    }
 }

@@ -1,7 +1,9 @@
 import {
+    ChangeDetectorRef,
     Component,
     Input,
-    OnInit,
+    OnChanges,
+    SimpleChanges,
 } from '@angular/core';
 
 import * as R_ from 'ramda-extension';
@@ -11,7 +13,7 @@ import * as R_ from 'ramda-extension';
     templateUrl: './indicator.component.html',
     styleUrls: ['./indicator.component.scss'],
 })
-export class IndicatorComponent implements OnInit {
+export class IndicatorComponent implements OnChanges {
     @Input()
     public value: number | string;
 
@@ -19,11 +21,14 @@ export class IndicatorComponent implements OnInit {
     public isNegative: boolean;
     public neutralValue: string;
 
-    ngOnInit() {
+    ngOnChanges(changes: SimpleChanges): void {
         if (R_.isNumber(this.value) && R_.isTruthy(this.value)) {
             this.isNegative = R_.isNegative(this.value);
             this.absValue = Math.abs(Number(this.value));
+            this.neutralValue = undefined;
         } else {
+            this.isNegative = undefined;
+            this.absValue = undefined;
             this.neutralValue = this.value.toString();
         }
     }

@@ -7,61 +7,70 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
-/* Style the lines by removing the fill and applying a stroke */
-.line {
-	fill: none;
-	stroke: $gradient-blue-dark;
-	stroke-width: 3;
+svg {
+	overflow: visible;
+	fill: #2b4762;
+
+	path {
+		color: $gray-200;
+	}
+
+	.line {
+		fill: none;
+		stroke: $gradient-blue-dark;
+		stroke-width: 3;
+	}
+
+	.title {
+		font-size: 1.875rem;
+		text-anchor: middle;
+	}
+
+	.overlay {
+		fill: none;
+		pointer-events: all;
+	}
+
+	.axis {
+		color: $gray-400;
+		margin: 20px;
+	}
+
+	.tooltip {
+		fill: $gray-100;
+		opacity: 0.3;
+
+		&--polygon {
+			fill: white;
+		}
+
+		&--date {
+			font-weight: bold;
+		}
+
+		&--rect {
+			fill: white;
+			stroke: $gray-100;
+		}
+
+		&--value {
+			font-size: $h1-font-size;
+			fill: $gradient-blue-dark;
+		}
+
+		&--state {
+			font-size: $font-size-sm;
+			text-transform: uppercase;
+		}
+
+		&--triangle {
+			fill: transparent;
+			stroke: $gray-100;
+		}
+	}
 }
 
-.domain {
-	stroke-width: 0.5;
-}
-
-.overlay {
-	fill: none;
-	pointer-events: all;
-}
-
-/* Style the dots by assigning a fill and stroke */
-.dot {
-	fill: #ffab00;
-	stroke: #fff;
-}
-
-.focus circle {
-	fill: none;
-	stroke: steelblue;
-}
-
-.axis {
-	color: $gray-400 !important;
-	margin: 20px;
-}
-
-path {
-	color: $gray-200 !important;
-}
-
-.tooltip {
-	fill: $gray-100;
-	opacity: 0.3;
-}
-
-.tooltip-date, .tooltip-likes {
-	font-weight: bold;
-}
-
-.tooltip-rect {
-	fill: white;
-	stroke: $gray-100;
-}
-
-.tooltip-state {
-	font-size: $font-size-sm;
-	text-transform: uppercase;
-}
-
-.polygon {
-	fill: white;
+.line-graph {
+	position: relative;
+	z-index: 600000;
 }

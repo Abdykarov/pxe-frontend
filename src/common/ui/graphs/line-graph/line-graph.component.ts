@@ -1,6 +1,20 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    ViewChild,
+    ViewEncapsulation,
+} from '@angular/core';
 
 import * as d3 from 'd3';
+
+import {
+    IDataLineGraph,
+    IMargin,
+} from 'src/common/ui/graphs/line-graph/models/line-graph.models';
 
 @Component({
     selector: 'lnd-line-graph',
@@ -14,24 +28,61 @@ export class LineGraphComponent implements OnInit {
     public canvasDiv: ElementRef;
 
     @Input()
-    public data;
+    public bisectDate = d3.bisector((d: IDataLineGraph) => d.date).left;
 
     @Input()
-    public margin: {
-        top: number;
-        right: number;
-        bottom: number;
-        left: number;
-    } = {top: 50, right: 50, bottom: 50, left: 50};
+    public data: IDataLineGraph;
 
     @Input()
-    public width = 900;
+    public dateFormatter = d3.timeFormat('%d.%m.%Y');
+
+    @Input()
+    public formatValue = d3.format(',');
 
     @Input()
     public height = 400;
 
     @Input()
-    public title: string;
+    public locale = d3.timeFormatLocale({
+        'dateTime': '%A,%e.%B %Y, %X',
+        'date': '%-d.%-m.%Y',
+        'time': '%H:%M:%S',
+        'periods': ['AM', 'PM'],
+        'days': ['neděle', 'pondělí', 'úterý', 'středa', 'čvrtek', 'pátek', 'sobota'],
+        'shortDays': ['ne.', 'po.', 'út.', 'st.', 'čt.', 'pá.', 'so.'],
+        'months': ['leden', 'únor', 'březen', 'duben',
+            'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec'],
+        'shortMonths': ['led', 'úno', 'břez', 'dub', 'kvě', 'čer', 'červ', 'srp', 'zář', 'říj', 'list', 'pros'],
+    });
+
+    @Input()
+    public margin: IMargin = {
+        top: 0,
+        right: 60,
+        bottom: 50,
+        left: 50,
+    };
+
+    @Input()
+    public reservedValueInXAxis = 8;
+
+    @Input()
+    public titleText: string;
+
+    @Input()
+    public tooltipState: string;
+
+    @Input()
+    public unit: string;
+
+    @Input()
+    public width = 900;
+
+    @Output()
+    public change: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
+    public mouseOut: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(
         private hostElement: ElementRef,
@@ -41,37 +92,19 @@ export class LineGraphComponent implements OnInit {
         this.initGraph();
     }
 
-
-
     private initGraph = () => {
+        const that = this;
+        const parentRect = this.hostElement.nativeElement.parentNode.getBoundingClientRect();
+        this.width = parentRect.width - (this.margin.left + this.margin.right);
 
-        const parseTime = d3.timeParse('%Y-%m-%d');
-        const bisectDate = d3.bisector(function(d) { return d.x; }).left;
-        const formatValue = d3.format(',');
-            const dateFormatter = d3.timeFormat('%d.%m.%Y');
-
-
-        const locale = d3.timeFormatLocale({
-            'dateTime': '%A,%e.%B %Y, %X',
-            'date': '%-d.%-m.%Y',
-            'time': '%H:%M:%S',
-            'periods': ['AM', 'PM'],
-            'days': ['neděle', 'pondělí', 'úterý', 'středa', 'čvrtek', 'pátek', 'sobota'],
-            'shortDays': ['ne.', 'po.', 'út.', 'st.', 'čt.', 'pá.', 'so.'],
-            'months': ['leden', 'únor', 'březen', 'duben',
-                'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec'],
-            'shortMonths': ['led', 'úno', 'břez', 'dub', 'kvě', 'čer', 'červ', 'srp', 'zář', 'říj', 'list', 'pros'],
-        });
-
-
-        const formatMillisecond = locale.format('.%L'),
-            formatSecond = locale.format(':%S'),
-            formatMinute = locale.format('%I:%M'),
-            formatHour = locale.format('%I %p'),
-            formatDay = locale.format('%a %d'),
-            formatWeek = locale.format('%b %d'),
-            formatMonth = locale.format('%B'),
-            formatYear = locale.format('%Y');
+        const formatMillisecond = this.locale.format('.%L'),
+            formatSecond = this.locale.format(':%S'),
+            formatMinute = this.locale.format('%I:%M'),
+            formatHour = this.locale.format('%I %p'),
+            formatDay = this.locale.format('%a %d'),
+            formatWeek = this.locale.format('%b %d'),
+            formatMonth = this.locale.format('%B'),
+            formatYear = this.locale.format('%Y');
 
         const multiFormat = (date) => {
             return (d3.timeSecond(date) < date ? formatMillisecond
@@ -83,204 +116,62 @@ export class LineGraphComponent implements OnInit {
                                     : formatYear)(date);
         };
 
-
-
-        const parentRect = this.hostElement.nativeElement.parentNode.getBoundingClientRect();
-
-// 8. An array of objects of length N. Each object has key -> value pair, the key being "y" and the value is a random number
-        const dataset = [
-            {
-                'x': '2020-04-01',
-                'y': 23.84,
-            },
-            {
-                'x': '2020-04-02',
-                'y': 23.68,
-            },
-            {
-                'x': '2020-04-03',
-                'y': 22.83,
-            },
-            {
-                'x': '2020-04-04',
-                'y': 23.02,
-            },
-            {
-                'x': '2020-04-05',
-                'y': 10.93,
-            },
-            {
-                'x': '2020-04-06',
-                'y': 16.84,
-            },
-            {
-                'x': '2020-04-07',
-                'y': 24.23,
-            },
-            {
-                'x': '2020-04-08',
-                'y': 26.43,
-            },
-            {
-                'x': '2020-04-09',
-                'y': 25.81,
-            },
-            {
-                'x': '2020-04-10',
-                'y': 24.25,
-            },
-            {
-                'x': '2020-04-11',
-                'y': 23.39,
-            },
-            {
-                'x': '2020-04-12',
-                'y': 16.18,
-            },
-            {
-                'x': '2020-04-13',
-                'y': 0.58,
-            },
-            {
-                'x': '2020-04-14',
-                'y': 19.57,
-            },
-            {
-                'x': '2020-04-15',
-                'y': 23.85,
-            },
-            {
-                'x': '2020-04-16',
-                'y': 25.78,
-            },
-            {
-                'x': '2020-04-17',
-                'y': 26.78,
-            },
-            {
-                'x': '2020-04-18',
-                'y': 22.27,
-            },
-            {
-                'x': '2020-04-19',
-                'y': 13.2,
-            },
-            {
-                'x': '2020-04-20',
-                'y': 11.35,
-            },
-            {
-                'x': '2020-04-21',
-                'y': 8.98,
-            },
-            {
-                'x': '2020-04-22',
-                'y': 13.45,
-            },
-            {
-                'x': '2020-04-23',
-                'y': 27.42,
-            },
-            {
-                'x': '2020-04-24',
-                'y': 21.99,
-            },
-            {
-                'x': '2020-04-25',
-                'y': 21.11,
-            },
-            {
-                'x': '2020-04-26',
-                'y': 22.8,
-            },
-            {
-                'x': '2020-04-27',
-                'y': 28.34,
-            },
-            {
-                'x': '2020-04-28',
-                'y': 24.94,
-            },
-            {
-                'x': '2020-04-29',
-                'y': 22.22,
-            },
-            {
-                'x': '2020-04-30',
-                'y': 18.7,
-            },
-        ];
-
-        dataset.forEach(function(d) {
-            d.x = parseTime(d.x);
-        });
-
-        const xScale = d3.scaleTime()
-            .domain(d3.extent(dataset, function(d) {
-                    return d.x;
-                }),
-            )
-            .range([ 0, this.width ]);
-
         const yScale = d3.scaleLinear()
             .domain([
-                d3.min(dataset, function(d) { return d.y; }) - 20,
-                d3.max(dataset, function(d) { return d.y; }) + 20,
-            ]) // input
-            .range([this.height, 0]); // output
+                d3.min(this.data, (d: IDataLineGraph) => d.value) - this.reservedValueInXAxis,
+                d3.max(this.data, (d: IDataLineGraph) => d.value) + this.reservedValueInXAxis,
+            ])
+            .range([this.height, 0]);
+
+        const xScale = d3.scaleTime()
+            .domain(d3.extent(this.data, (d: IDataLineGraph) => d.date))
+            .range([ 0, this.width ]);
 
         const line = d3.line()
-            .x(function(d) {
-                return xScale(d.x);
-            })
-            .y(function(d) {
-                return yScale(d.y);
-            });
+            .x((d: IDataLineGraph) => xScale(d.date))
+            .y((d: IDataLineGraph) => yScale(d.value));
 
         const svg = d3.select(this.canvasDiv.nativeElement).append('svg')
             .attr('width', this.width + this.margin.left + this.margin.right)
             .attr('height', this.height + this.margin.top + this.margin.bottom)
             .append('g')
-            .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
+            .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
 
         svg.append('g')
             .attr('class', 'x axis')
-            .attr('transform', 'translate(0,' + this.height + ')')
-            .call(d3.axisBottom(xScale).tickSize(0).tickPadding(20).tickFormat(multiFormat)); // Create an axis component with d3.axisBottom
+            .attr('transform', `translate(0, ${this.height})`)
+            .call(d3.axisBottom(xScale).tickSize(0).tickPadding(20).tickFormat(multiFormat))
+            .call(
+                g =>  g.selectAll('.tick:not(:first-of-type) line').clone()
+                    .attr('y2', -this.height)
+                    .attr('stroke', '#ddd'),
+            );
 
         svg.append('g')
             .attr('class', 'x axis')
-            .call(d3.axisBottom(xScale).tickSize(0).tickPadding(0).tickFormat('')); // Create an axis component with d3.axisBottom
-
-        for (let i = 1 ; i < 7 ; i++) {
-            svg.append('g')
-                .attr('class', 'y axis')
-                .attr('transform', 'translate(' + ((this.width) / 7) * i + ',0)')
-                .call(d3.axisRight(yScale).tickSize(0).tickPadding(0).tickFormat('')); // Create an axis component with d3.axisLeft
-        }
+            .call(d3.axisBottom(xScale).tickSize(0).tickPadding(0).tickFormat(''));
 
         svg.append('g')
             .attr('class', 'y axis')
-            .attr('transform', 'translate(' + this.width + ',0)')
-            .call(d3.axisRight(yScale).tickSize(0).tickPadding(0).tickFormat('')); // Create an axis component with d3.axisLeft
+            .attr('transform', `translate(${this.width}, 0)`)
+            .call(d3.axisRight(yScale).tickSize(0).tickPadding(0).tickFormat(''));
 
         svg.append('g')
             .attr('class', 'y axis')
-            .call(d3.axisLeft(yScale).tickSize(0).tickPadding(20)); // Create an axis component with d3.axisLeft
+            .call(d3.axisLeft(yScale).tickSize(0).tickPadding(20));
 
         svg.append('path')
-            .datum(dataset)
+            .datum(this.data)
             .attr('class', 'line')
-            .attr('stroke', '#17a2b8')
-            .attr('stroke-width', '1')
             .attr('d', line);
 
-        svg.append('text')
-            .attr('x', (this.width / 2))
-            .attr('y', 0 - (parentRect.top / 2))
-            .attr('text-anchor', 'middle')
-            .attr('class', 'h2--public')
-            .text(this.title);
+        if (this.titleText) {
+            svg.append('text')
+                .attr('x', (this.width / 2))
+                .attr('y', -10)
+                .attr('class', 'title')
+                .text(this.titleText);
+        }
 
         const focus = svg.append('g')
             .attr('class', 'focus')
@@ -291,11 +182,10 @@ export class LineGraphComponent implements OnInit {
             .attr('width', 50)
             .attr('height', this.height)
             .attr('x', -25)
-            .attr('y', 0)
-            .attr('stroke-opacit', '0.7');
+            .attr('y', 0);
 
         focus.append('rect')
-            .attr('class', 'tooltip-rect')
+            .attr('class', 'tooltip--rect')
             .attr('width', 240)
             .attr('height', 100)
             .attr('x', -120)
@@ -303,12 +193,12 @@ export class LineGraphComponent implements OnInit {
             .attr('ry', 4);
 
         focus.append('text')
-            .attr('class', 'tooltip-state')
+            .attr('class', 'tooltip--state')
             .attr('width', 240)
             .attr('height', 30);
 
         focus.append('text')
-            .attr('class', 'tooltip-value')
+            .attr('class', 'tooltip--value')
             .attr('width', 240)
             .attr('height', 30);
 
@@ -317,66 +207,50 @@ export class LineGraphComponent implements OnInit {
             .attr('width', 240)
             .attr('height', 30);
 
-
         focus.append('polygon')
-            .attr('class', 'polygon')
-            .attr('points', '-20,0 20,0 0,20');
-
+            .attr('class', 'tooltip--polygon')
+            .attr('points', '-10,0 10,0 0,15');
 
         focus.append('path')
-            .attr('class', 'triangl')
-            .attr('fill', 'transparent')
-            .attr('stroke', '#bdcad6')
-            .attr('d', 'M-20,0 L0,19 L20,0');
-
-            // focus.append('text')
-        //     .attr('class', 'tooltip-date')
-        //     .attr('x', 18)
-        //     .attr('y', -2);
-
-        // focus.append('text')
-        //     .attr('x', 18)
-        //     .attr('y', 18)
-
-        // focus.append('text')
-        //     .attr('class', 'tooltip-likes')
-        //     .attr('x', 60)
-        //     .attr('y', 18);
+            .attr('class', 'tooltip--triangle')
+            .attr('d', 'M-10,0 L0,15 L10,0');
 
         function mousemove() {
             const x0 = xScale.invert(d3.mouse(this)[0]),
-                i = bisectDate(dataset, x0, 1),
-                d0 = dataset[i - 1],
-                d1 = dataset[i],
-                d = x0 - <any>(d0).x > <any>(d1).x - x0 ? d1 : d0;
-            focus.attr('transform', 'translate(' + xScale(d.x) + ',' + 0 + ')');
+                i = that.bisectDate(that.data, x0, 1),
+                d0: IDataLineGraph = that.data[i - 1],
+                d1: IDataLineGraph = that.data[i],
+                d: IDataLineGraph = x0 - <any>(d0).date > <any>(d1).date - x0 ? d1 : d0;
+            focus.attr('transform', `translate(${xScale(d.date)}, 0)`);
             const coordinates = d3.mouse(this);
-            const yy = coordinates[1];
-            focus.select('.tooltip-state')
-                .attr('transform', 'translate(' + -80 + ',' + (yy - 110) + ')')
-                .text('Stav kde dni ' + dateFormatter(d.x));
+            const mouseY = coordinates[1];
+            focus.select('.tooltip--state')
+                .attr('transform', `translate(-80, ${(mouseY - 110)})`)
+                .text(that.tooltipState + that.dateFormatter(d.date));
 
-            focus.select('.tooltip-value')
-                .attr('transform', 'translate(' + -80 + ',' + (yy - 70) + ')')
-                .text(formatValue(d.y));
+            focus.select('.tooltip--value')
+                .attr('transform', `translate(-80, ${(mouseY - 70)})`)
+                .text(that.formatValue(d.value));
 
             focus.select('.tooltip-unit')
-                .attr('transform', 'translate(' + -80 + ',' + (yy - 50) + ')')
-                .text('CZK/MHw');
+                .attr('transform', `translate(-80, ${(mouseY - 50)})`)
+                .text(that.unit);
 
-            focus.select('.tooltip-rect').attr('transform', 'translate(' + 0 + ',' + (yy - 130) + ')');
-
-            focus.select('.polygon').attr('transform', 'translate(' + 0 + ',' + (yy + -31) + ')');
-            focus.select('.triangl').attr('transform', 'translate(' + 0 + ',' + (yy + -31) + ')');
+            focus.select('.tooltip--rect').attr('transform', `translate(0,${(mouseY - 130)})`);
+            focus.select('.tooltip--polygon').attr('transform', `translate(0, ${(mouseY + -31)})`);
+            focus.select('.tooltip--triangle').attr('transform', `translate(0, ${(mouseY + -31)})`);
+            that.change.emit({...d});
         }
 
         svg.append('rect')
             .attr('class', 'overlay')
             .attr('width', this.width)
             .attr('height', this.height)
-            .on('mouseover', function() { focus.style('display', null); })
-            .on('mouseout', function() { focus.style('display', 'none'); })
+            .on('mouseover', () => focus.style('display', null))
+            .on('mouseout', () => {
+                focus.style('display', 'none');
+                this.mouseOut.emit();
+            })
             .on('mousemove', mousemove);
-
     }
 }

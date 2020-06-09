@@ -1,3 +1,18 @@
-<h1>
-   ahoj
-</h1>
+<div class="row bg-white progress-price-of-power">
+    <div class="col-12 text-center mt-2 mb-2">
+        Vývoj ceny elektřiny na trhu, více info <a href="https://www.pxe.cz/" target="_blank">zde</a>.
+    </div>
+    <div class="col-12">
+        <lnd-line-graph
+            [data]="data"
+            tooltipState="Stav kde dni "
+            unit="CZK/MHw"
+            (change)="change($event)"
+            (mouseOut)="mouseOut()"
+        ></lnd-line-graph>
+    </div>
+    <div [class.invisible]="!diff"
+         class="col-12 text-center mb-2 progress-price-of-power--footer">
+        {{currValue}} CZK/MHw&nbsp;&nbsp;<lnd-indicator *ngIf="!!diff" [value]="diff"></lnd-indicator>
+    </div>
+</div>
