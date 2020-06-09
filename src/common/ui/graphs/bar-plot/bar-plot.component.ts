@@ -30,7 +30,7 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
     public limitForTransformLabel = 35;
 
     @Input('data')
-    set allowDay(data: IDataBarPlot[]) {
+    set setData(data: IDataBarPlot[]) {
         this._data = R.forEachObjIndexed((dataBarPlot: IDataBarPlot, id: number) => dataBarPlot.id = id)(data);
     }
 
