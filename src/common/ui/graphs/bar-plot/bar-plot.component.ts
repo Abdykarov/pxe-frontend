@@ -29,7 +29,8 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
     @Input()
     public limitForTransformLabel = 35;
 
-    @Input('data') set allowDay(data: IDataBarPlot[]) {
+    @Input('data')
+    set allowDay(data: IDataBarPlot[]) {
         this._data = R.forEachObjIndexed((dataBarPlot: IDataBarPlot, id: number) => dataBarPlot.id = id)(data);
     }
 
@@ -68,8 +69,8 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
 
         const y = d3.scaleLinear()
             .domain([
-                d3.min(this.data, (d: IDataBarPlot) => d.value) - this.reservedValueInXAxis,
-                d3.max(this.data, (d: IDataBarPlot) => d.value) + this.reservedValueInXAxis,
+                d3.min(this.data, (d: IDataBarPlot) => d.value) - this.reservedValueInYAxis,
+                d3.max(this.data, (d: IDataBarPlot) => d.value) + this.reservedValueInYAxis,
             ])
             .range([ this.height, 0]);
 

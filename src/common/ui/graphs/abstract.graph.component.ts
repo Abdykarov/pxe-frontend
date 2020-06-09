@@ -28,7 +28,7 @@ export abstract class AbstractGraphComponent extends AbstractComponent implement
     };
 
     @Input()
-    public reservedValueInXAxis = 8;
+    public reservedValueInYAxis = 8;
 
     @Input()
     public width = 900;

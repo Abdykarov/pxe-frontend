@@ -99,8 +99,8 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
 
         const yScale = d3.scaleLinear()
             .domain([
-                d3.min(this.data, (d: IDataLineGraph) => d.value) - this.reservedValueInXAxis,
-                d3.max(this.data, (d: IDataLineGraph) => d.value) + this.reservedValueInXAxis,
+                d3.min(this.data, (d: IDataLineGraph) => d.value) - this.reservedValueInYAxis,
+                d3.max(this.data, (d: IDataLineGraph) => d.value) + this.reservedValueInYAxis,
             ])
             .range([this.height, 0]);
 
