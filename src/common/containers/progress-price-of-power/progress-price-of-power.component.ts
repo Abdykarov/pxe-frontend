@@ -4,6 +4,7 @@ import * as d3 from 'd3';
 import * as R from 'ramda';
 
 import { conf } from 'src/common/containers/progress-price-of-power/config';
+import { countIndicator } from 'src/common/utils';
 import { IDataLineGraph } from 'src/common/ui/graphs/line-graph/models/line-graph.models';
 
 @Component({
@@ -36,13 +37,9 @@ export class ProgressPriceOfPowerComponent {
 
         if ( currIndex !== 0) {
             this.prevValue = this.data[currIndex - 1].value;
-            this.diff = this.count(this.currValue, this.prevValue);
+            this.diff = countIndicator(this.currValue, this.prevValue);
         } else {
             this.prevValue = null;
         }
-    }
-
-    private count = (last: number, avg: number) => {
-        return last / (avg / 100) - 100;
     }
 }

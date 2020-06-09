@@ -7,6 +7,7 @@ import {
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 
+import { countIndicator } from 'src/common/utils';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 
 @Pipe({
@@ -18,10 +19,6 @@ export class ConsumptionIndicatorPipe implements PipeTransform {
     constructor(
        private decimalPipe: DecimalPipe,
     ) {}
-
-    private count = (last: number, avg: number) => {
-        return last / (avg / 100) - 100;
-    }
 
     transform(data: ISupplyPoint, unit: string): number | string {
         const {
@@ -40,18 +37,18 @@ export class ConsumptionIndicatorPipe implements PipeTransform {
             const annualConsumption = annualConsumptionVT + annualConsumptionNT;
             const lastAnnualConsumption = lastAnnualConsumptionVT + lastAnnualConsumptionNT;
             if (lastAnnualConsumption !== annualConsumption) {
-                return this.count(annualConsumption, lastAnnualConsumption);
+                return countIndicator(annualConsumption, lastAnnualConsumption);
             } else {
                 return `${this.decimalPipe.transform(annualConsumption, '1.0-3')} ${unit}`;
             }
         }
 
         if (annualConsumptionVT && lastAnnualConsumptionVT && annualConsumptionVT !== lastAnnualConsumptionVT) {
-            return this.count(annualConsumptionVT, lastAnnualConsumptionVT);
+            return countIndicator(annualConsumptionVT, lastAnnualConsumptionVT);
         }
 
         if (annualConsumptionNT && lastAnnualConsumptionNT && annualConsumptionNT !== lastAnnualConsumptionNT) {
-            return this.count(annualConsumptionNT, lastAnnualConsumptionNT);
+            return countIndicator(annualConsumptionNT, lastAnnualConsumptionNT);
         }
 
         return `${this.decimalPipe.transform(R.sum([annualConsumptionNT, annualConsumptionVT]), '1.0-3')} ${unit}`;

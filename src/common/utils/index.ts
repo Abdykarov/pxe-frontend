@@ -1,6 +1,7 @@
 export * from './convert-array-to-object.fnc';
 export * from './convert-date-to-send-format.fnc';
 export * from './create-string-from-template.fnc';
+export * from './count-indicator';
 export * from './get-progress-stepper-config.fnc';
 export * from './get-error-message.fnc';
 export * from './get-param-from-tag.fnc';

@@ -7,70 +7,70 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
-svg {
-	overflow: visible;
-	fill: #2b4762;
-
-	path {
-		color: $gray-200;
-	}
-
-	.line {
-		fill: none;
-		stroke: $gradient-blue-dark;
-		stroke-width: 3;
-	}
-
-	.title {
-		font-size: 1.875rem;
-		text-anchor: middle;
-	}
-
-	.overlay {
-		fill: none;
-		pointer-events: all;
-	}
-
-	.axis {
-		color: $gray-400;
-		margin: 20px;
-	}
-
-	.tooltip {
-		fill: $gray-100;
-		opacity: 0.3;
-
-		&--polygon {
-			fill: white;
-		}
-
-		&--date {
-			font-weight: bold;
-		}
-
-		&--rect {
-			fill: white;
-			stroke: $gray-100;
-		}
-
-		&--value {
-			font-size: $h1-font-size;
-			fill: $gradient-blue-dark;
-		}
-
-		&--state {
-			font-size: $font-size-sm;
-			text-transform: uppercase;
-		}
-
-		&--triangle {
-			fill: transparent;
-			stroke: $gray-100;
-		}
-	}
-}
-
 .line-graph {
 	position: relative;
 	z-index: 600000;
+
+	svg {
+		overflow: visible;
+		fill: #2b4762;
+
+		path {
+			color: $gray-200;
+		}
+
+		.line {
+			fill: none;
+			stroke: $gradient-blue-dark;
+			stroke-width: 3;
+		}
+
+		.title {
+			font-size: 1.875rem;
+			text-anchor: middle;
+		}
+
+		.overlay {
+			fill: none;
+			pointer-events: all;
+		}
+
+		.axis {
+			color: $gray-400;
+			margin: 20px;
+		}
+
+		.tooltip {
+			fill: $gray-100;
+			opacity: 0.3;
+
+			&--polygon {
+				fill: white;
+			}
+
+			&--date {
+				font-weight: bold;
+			}
+
+			&--rect {
+				fill: white;
+				stroke: $gray-100;
+			}
+
+			&--value {
+				font-size: $h1-font-size;
+				fill: $gradient-blue-dark;
+			}
+
+			&--state {
+				font-size: $font-size-sm;
+				text-transform: uppercase;
+			}
+
+			&--triangle {
+				fill: transparent;
+				stroke: $gray-100;
+			}
+		}
+	}
 }
