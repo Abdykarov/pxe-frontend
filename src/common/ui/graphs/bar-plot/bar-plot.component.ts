@@ -27,7 +27,7 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
     public svgWrapper: ElementRef;
 
     @Input()
-    public limitForTransformLabel = 35;
+    public limitForTransformLabel = 60;
 
     @Input('data')
     set setData(data: IDataBarPlot[]) {

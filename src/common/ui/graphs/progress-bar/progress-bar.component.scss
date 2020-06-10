@@ -1,0 +1,22 @@
+/*
+ -  Bar plot graph
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+.progress-bar {
+	position: relative;
+	z-index: 600000;
+
+	svg {
+		overflow: visible;
+	}
+
+	.percent{
+		position: absolute;
+		font-size: 32px;
+	}
+}
