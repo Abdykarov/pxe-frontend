@@ -329,3 +329,16 @@ $colors: (
 	right: auto;
 	transform: translateX(-50%);
 }
+
+.fill-light {
+	fill: $light;
+}
+
+.fill-blue-dark {
+	fill: $gradient-blue-dark;
+}
+
+.fill-primary {
+	fill: $primary;
+}
+

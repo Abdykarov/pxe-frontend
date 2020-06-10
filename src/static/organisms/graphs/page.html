@@ -22,9 +22,64 @@
         </div>
     </div>
     <div class="col-12">
-        <h2>
-            Progress bar
-        </h2>
-        <lnd-progress-bar></lnd-progress-bar>
+        <div class="row no-gutters">
+            <div class="col-12">
+                <h2>
+                    Progress bar
+                </h2>
+            </div>
+            <div class="col-12">
+                <div class="row no-gutters">
+                    <div class="col-3">
+                        <h2>Default</h2>
+                    </div>
+                    <div class="col-3">
+                        <h2>Custom</h2>
+                    </div>
+                    <div class="col-3">
+                        <h2>Custom</h2>
+                    </div>
+                    <div class="col-3">
+                        <h2>Hover</h2>
+                    </div>
+                </div>
+                <div class="row bg-white no-gutters">
+                    <div class="col-3">
+                        <lnd-progress-bar
+                            customClassOfProgressCirce="fill-blue-dark"
+                            customClassOfMainCirce="fill-light"
+                            percent="10"
+                        ></lnd-progress-bar>
+                    </div>
+                    <div class="col-3">
+                        <lnd-progress-bar
+                            customClassOfProgressCirce="fill-blue-dark"
+                            customClassOfMainCirce="fill-light"
+                            percent="70"
+                            arcWidth="5"
+                            cornerRadius="0">
+                        </lnd-progress-bar>
+                    </div>
+                    <div class="col-3">
+                        <lnd-progress-bar
+                            customClassOfProgressCirce="fill-primary"
+                            customClassOfMainCirce="fill-light"
+                            customClassLabel="h2--public fill-primary"
+                            percent="30"
+                            cornerRadius="20"
+                            arcWidth="15">
+                        </lnd-progress-bar>
+                    </div>
+                    <div class="col-3">
+                        <lnd-progress-bar
+                            customClassOfProgressCirce="fill-blue-dark"
+                            customClassOfMainCirce="fill-light"
+                            percent="30"
+                            (mouseMove)="mouseMove($event)">
+                        </lnd-progress-bar>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -6,9 +6,14 @@ import {
 } from 'src/static/organisms/graphs/config';
 
 @Component({
-  templateUrl: './page.html',
+    templateUrl: './page.html',
 })
 export class GraphsPageComponent {
     public barData = config;
     public barData2 = config2;
+
+    public mouseMove = (evt) => {
+        console.log('MOUSE MOVE');
+        console.log(evt);
+    }
 }
