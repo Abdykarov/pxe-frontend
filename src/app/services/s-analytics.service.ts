@@ -73,9 +73,9 @@ export class SAnalyticsService {
         }
         const applicationWebData = {
             tid: environment.sAnalyticsTId,
-            applicationId: sa('get', 'userInfo').said,
-            sa: sa('get', 'userInfo').sa,
-            said: sa('get', 'userInfo').said,
+            applicationId: userInfo.said,
+            sa: userInfo.sa,
+            said: userInfo.said,
             clientTimestamp: new Date().getTime(),
             loanInfo,
             borrower,
