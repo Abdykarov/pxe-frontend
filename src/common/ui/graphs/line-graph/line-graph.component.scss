@@ -48,18 +48,18 @@
 
 		.tooltip {
 			fill: $gray-100;
-			opacity: 0.3;
+			opacity: .3;
 
 			&--polygon {
-				fill: white;
+				fill: #ffffff;
 			}
 
 			&--date {
-				font-weight: bold;
+				font-weight: 700;
 			}
 
 			&--rect {
-				fill: white;
+				fill: #ffffff;
 				stroke: $gray-100;
 			}
 

@@ -18,7 +18,7 @@
 			fill: $light;
 		}
 
-		.x text{
+		.x text {
 			font-size: $font-size-base;
 			color: $gray-400;
 		}
@@ -28,12 +28,6 @@
 			color: $gray-400;
 			font-size: $font-size-base;
 		}
-
-		text.label.hover {
-			color: white !important;
-			fill: white !important;
-		}
-
 
 		.hover {
 			cursor: pointer;
