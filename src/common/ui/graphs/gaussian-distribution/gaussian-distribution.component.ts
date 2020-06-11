@@ -54,12 +54,11 @@ export class GaussianDistributionComponent extends AbstractGraphComponent implem
     protected initGraph(): void {
         const parentRect = this.hostElement.nativeElement.parentNode.getBoundingClientRect();
         this.width = parentRect.width - (this.margin.left + this.margin.right);
-        const that = this;
-        const maxFreq = operateNestedProperty(this.data, ['frequency'], R.reduce(R.max, -Infinity));
-        const maxVal = operateNestedProperty(this.data, ['value'], R.reduce(R.max, -Infinity));
-        const minVal = operateNestedProperty(this.data, ['value'], R.reduce(R.min, Infinity));
-        const firstFreq = operateNestedProperty(this.data, ['frequency'], R.head);
-        const lastFreq = operateNestedProperty(this.data, ['frequency'], R.last);
+        const maxFreq = operateNestedProperty(['frequency'], R.reduce(R.max, -Infinity), this.data);
+        const maxVal = operateNestedProperty(['value'], R.reduce(R.max, -Infinity), this.data);
+        const minVal = operateNestedProperty(['value'], R.reduce(R.min, Infinity), this.data);
+        const firstFreq = operateNestedProperty(['frequency'], R.head, this.data);
+        const lastFreq = operateNestedProperty(['frequency'], R.last, this.data);
 
         this.svg = d3.select(this.svgWrapper.nativeElement)
             .append('svg')
@@ -75,7 +74,7 @@ export class GaussianDistributionComponent extends AbstractGraphComponent implem
                     d3.min(this.data, (d: IDataGaussianDistribution) => d.value) - this.reservedValueInYAxis,
                     d3.max(this.data, (d: IDataGaussianDistribution) => d.value) + this.reservedValueInYAxis,
                 ])
-                .range([0, that.width]);
+                .range([0, this.width]);
 
 
             const y = d3.scaleLinear()
@@ -83,7 +82,7 @@ export class GaussianDistributionComponent extends AbstractGraphComponent implem
                     0,
                     d3.max(this.data, (d: IDataGaussianDistribution) => d.frequency) + this.reservedValueInYAxis,
                 ])
-                .range([that.height, 0]);
+                .range([this.height, 0]);
 
 
         this.svg.append('polygon')
@@ -95,12 +94,8 @@ export class GaussianDistributionComponent extends AbstractGraphComponent implem
             .datum(this.data)
             .attr('d', d3.line()
                 .curve(d3.curveCardinal)
-                .x(function (d) {
-                    return x(d.value);
-                })
-                .y(function (d) {
-                    return y(d.frequency);
-                }),
+                .x((d: IDataGaussianDistribution) => x(d.value))
+                .y((d: IDataGaussianDistribution) => y(d.frequency)),
             );
 
         this.svg.append('text')

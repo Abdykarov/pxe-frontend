@@ -31,9 +31,6 @@ export abstract class AbstractGraphComponent extends AbstractComponent implement
     public reservedValueInYAxis = 8;
 
     @Input()
-    public width = 900;
-
-    @Input()
     public titleText: string;
 
     @Output()
@@ -41,6 +38,8 @@ export abstract class AbstractGraphComponent extends AbstractComponent implement
 
     @Output()
     public mouseOut: EventEmitter<any> = new EventEmitter<any>();
+
+    public width = 900;
 
     public resizeEvent$ = fromEvent(window, 'resize')
         .pipe(
