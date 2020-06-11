@@ -43,7 +43,7 @@ export class ProgressBarComponent extends AbstractGraphComponent implements OnIn
     public customClassOfProgressCirce = '';
 
     @Input()
-    public percent = 30;
+    public percent;
 
     private readonly tau = 2 * Math.PI;
 
@@ -73,9 +73,7 @@ export class ProgressBarComponent extends AbstractGraphComponent implements OnIn
 
 
     protected clearContent(): void {
-        if (this.svg) {
-            this.svg.nativeElement.innerHTML  = '';
-        }
+        this.svgWrapper.nativeElement.innerHTML  = '';
     }
 
     protected initGraph(): void {
@@ -86,8 +84,6 @@ export class ProgressBarComponent extends AbstractGraphComponent implements OnIn
             left: 0,
         };
         const parentRect = this.hostElement.nativeElement.parentNode.getBoundingClientRect();
-        console.log(this.hostElement.nativeElement);
-        console.log(parentRect);
         this.width = parentRect.width;
         this.min = Math.min(this.width, this.height);
         const that = this;

@@ -143,3 +143,34 @@ export const config2 =  [
         value: 30,
     },
 ];
+
+export const config3 = [
+    {
+        frequency: 1,
+        value: 150,
+    },
+    {
+        frequency: 3,
+        value: 170,
+    },
+    {
+        frequency: 10,
+        value: 190,
+    },
+    {
+        frequency: 12,
+        value: 230,
+    },
+    {
+        frequency: 25,
+        value: 260,
+    },
+    {
+        frequency: 20,
+        value: 300,
+    },
+    {
+        frequency: 2,
+        value: 400,
+    },
+];
