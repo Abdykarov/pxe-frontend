@@ -29,6 +29,11 @@
 			font-size: $font-size-base;
 		}
 
+		text.label.hover {
+			color: #ffffff;
+			fill: #ffffff;
+		}
+
 		.hover {
 			cursor: pointer;
 			fill: $gradient-blue-dark;
