@@ -120,10 +120,21 @@
 	}
 
 	&-supply-point-info {
-		.tooltip__content {
-			min-width: 290px;
-			padding: $spacer;
-			text-transform: none;
+		.tooltip {
+			&__toggle {
+				color: $primary;
+
+				&:focus,
+				&:hover {
+					color: $primary-dark;
+				}
+			}
+
+			&__content {
+				min-width: 290px;
+				padding: $spacer;
+				text-transform: none;
+			}
 		}
 	}
 
