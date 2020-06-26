@@ -13,10 +13,10 @@ import { Router } from '@angular/router';
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import {
-    filter, map, switchMap,
+    filter,
+    map,
     takeUntil,
 } from 'rxjs/operators';
-import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 
 import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/abstract-supply-point-form.component';
 import {
@@ -47,8 +47,9 @@ import {
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { parseGraphQLErrors, transformCodeList } from 'src/common/utils';
+import { transformCodeList } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-supply-point-detail-form',
