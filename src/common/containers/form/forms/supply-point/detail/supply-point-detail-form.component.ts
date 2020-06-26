@@ -13,16 +13,17 @@ import { Router } from '@angular/router';
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import {
-    filter,
+    filter, map, switchMap,
     takeUntil,
 } from 'rxjs/operators';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 
 import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/abstract-supply-point-form.component';
 import {
     AllowedOperations,
     CommodityType,
     ICodelistOptions,
-    ISupplyPoint,
+    ISupplyPoint, ProgressStatus,
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import {
@@ -47,7 +48,7 @@ import { ContractService } from 'src/common/graphql/services/contract.service';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { transformCodeList } from 'src/common/utils';
+import { parseGraphQLErrors, transformCodeList } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-supply-point-detail-form',
@@ -82,6 +83,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         private contractService: ContractService,
         protected fb: FormBuilder,
         private modalsService: ModalService,
+        private navigateRequestService: NavigateRequestService,
         private router: Router,
         private supplyService: SupplyService,
     ) {
@@ -171,6 +173,19 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
             },
         };
         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT], {state});
+    }
+
+    public navigateToUnsignedSupplyPoint = (supplyPointId: string) => {
+        this.supplyService.getSupplyPoint(supplyPointId)
+            .pipe(
+                map(({data}) => data.getSupplyPoint),
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                (supplyPoint: ISupplyPoint) => {
+                    this.navigateRequestService.checkCorrectStep(supplyPoint, ProgressStatus.COMPLETED);
+                },
+            );
     }
 
     public prefillFormData = () => {

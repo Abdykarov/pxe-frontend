@@ -42,7 +42,8 @@ type Contract {
     offerValidity: Boolean!
     personalData: PersonalData
     prolong: Boolean
-    nextContractId: ID
+    nextSupplyPointId: ID
+    isNextContractConcluded: Boolean
 }
 
 type ContractTerms {

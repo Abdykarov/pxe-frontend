@@ -89,6 +89,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     }
 
     ngOnInit() {
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.supplyService.getSupplyPoint(this.supplyPointId)
             .pipe(
                 takeUntil(this.destroy$),

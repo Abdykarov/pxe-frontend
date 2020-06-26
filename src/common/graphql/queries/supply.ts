@@ -82,7 +82,8 @@ export const supplyPointFragment = gql`
             }
             contract {
                 contractId,
-                nextContractId,
+                nextSupplyPointId,
+                isNextContractConcluded,
                 contractStatus,
                 deliveryFrom,
                 deliveryTo,
