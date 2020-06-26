@@ -228,10 +228,10 @@
                     <div *ngIf="supplyPoint.contract.isNextContractConcluded && supplyPoint.contract.nextSupplyPointId && supplyPoint.contract.nextSupplyPointId != supplyPoint.id"
                          class="col-12">
                         <div class="mb-1">
-                            <small>Tato smlouva bude nahrazena <a [routerLink]="['/', CONSTS.PATHS.SECURED, CONSTS.PATHS.SUPPLY_POINTS, supplyPoint?.contract?.nextSupplyPointId]">smlouvou budoucí</a>.</small>
+                            <small>Tato smlouva bude nahrazena <a [routerLink]="['/', CONSTS.PATHS.SECURED, CONSTS.PATHS.SUPPLY_POINTS, supplyPoint.contract.nextSupplyPointId]">smlouvou budoucí</a>.</small>
                         </div>
                     </div>
-                    <div *ngIf="!supplyPoint.contract.isNextContractConcluded && supplyPoint.contract.nextSupplyPointId && supplyPoint?.contract?.nextSupplyPointId != supplyPoint.id"
+                    <div *ngIf="!supplyPoint.contract.isNextContractConcluded && supplyPoint.contract.nextSupplyPointId && supplyPoint.contract?.nextSupplyPointId != supplyPoint.id"
                          class="col-12">
                         <div class="mb-1">
                             <small>Tato smlouva má rozpracovanou <a (click)="navigateToUnsignedSupplyPoint(supplyPoint.contract.nextSupplyPointId)">navazující smlouvu</a>.</small>
