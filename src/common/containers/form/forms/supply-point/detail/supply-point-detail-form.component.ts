@@ -23,7 +23,8 @@ import {
     AllowedOperations,
     CommodityType,
     ICodelistOptions,
-    ISupplyPoint, ProgressStatus,
+    ISupplyPoint,
+    ProgressStatus,
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import {
