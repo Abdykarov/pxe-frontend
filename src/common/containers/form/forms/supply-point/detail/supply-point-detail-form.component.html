@@ -198,25 +198,17 @@
                         </div>
                         <span class="perex">{{supplyPoint.circuitBreaker.help || supplyPoint.circuitBreaker.description}}</span>
                     </div>
-                    <div *ngIf="supplyPoint.lastVersionOfSupplyPoint"
-                        class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>Ukončení platnosti aktuální smlouvy</small>
-                        </div>
-                        <span class="perex">{{contractEndTypeTranslateMap[
-                            supplyPoint?.contract?.prolong ?
-                                supplyPointContractEndTypes.CONTRACT_END_TERM_WITH_PROLONGATION :
-                                supplyPointContractEndTypes.CONTRACT_END_TERM
-                            ]}}
-                        </span>
-                    </div>
                     <div *ngIf="(supplyPoint | pathValue:['contract', 'deliveryTo'])"
                          [class.mb-5]="supplyPoint.contract.deliveryTo"
                          class="col-12">
                         <div class="mb-1">
                             <small>Dodávka do</small>
                         </div>
-                        <span class="perex">{{supplyPoint.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}</span>
+                        <span class="perex">{{supplyPoint.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}} - {{contractEndTypeTranslateMap[
+                            !supplyPoint?.contract?.isNextContractConcluded ?
+                                supplyPointContractEndTypes.CONTRACT_END_TERM_WITH_PROLONGATION :
+                                supplyPointContractEndTypes.CONTRACT_END_TERM
+                            ]}}</span>
                     </div>
                     <div [class.mb-5]="!supplyPoint.lastVersionOfSupplyPoint"
                          class="col-12">

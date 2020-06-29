@@ -74,12 +74,16 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
     @ViewChild('pdfContract')
     public pdfContract: PdfJsViewerComponent;
 
+    @ViewChild('pdfStopProlongation')
+    public pdfStopProlongation: PdfJsViewerComponent;
+
     public commodityType = CommodityType;
     public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public documentLoading = false;
     public documentType = IDocumentType;
     public documentTypeContract: IResponseDataDocument = null;
     public documentTypeInformation: IResponseDataDocument = null;
+    public documentTypeUnsetProlongation: IResponseDataDocument = null;
     public fieldError: IFieldError = {};
     public formLoading = false;
     public globalError: string[] = [];
@@ -133,14 +137,17 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                             ),
                         this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.CONTRACT)
                             .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)),
+                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.UNSET_PROLONGATION)
+                            .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)),
                     );
                 }),
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                ([documentTypeInformation, documentTypeContract]) => {
+                ([documentTypeInformation, documentTypeContract, documentTypeUnsetProlongation]) => {
                     this.documentTypeInformation = documentTypeInformation;
                     this.documentTypeContract = documentTypeContract;
+                    this.documentTypeUnsetProlongation = documentTypeUnsetProlongation;
                     this.loadingSupplyPoint = false;
                     this.cd.markForCheck();
                     setTimeout(() => {
@@ -166,6 +173,11 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
         if (this.pdfContract) {
             this.pdfContract.pdfSrc = this.documentTypeContract.file;
             this.pdfContract.downloadFileName = this.documentTypeContract.filename;
+            this.pdfContract.refresh();
+        }
+        if (this.pdfStopProlongation) {
+            this.pdfContract.pdfSrc = this.documentTypeUnsetProlongation.file;
+            this.pdfContract.downloadFileName = this.documentTypeUnsetProlongation.filename;
             this.pdfContract.refresh();
         }
     }
