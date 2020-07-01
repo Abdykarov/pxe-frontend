@@ -137,7 +137,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                             ),
                         this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.CONTRACT)
                             .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)),
-                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.UNSET_PROLONGATION)
+                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.VYPOVED_PREV)
                             .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)),
                     );
                 }),
