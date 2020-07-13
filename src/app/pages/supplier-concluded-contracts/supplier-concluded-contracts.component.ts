@@ -112,7 +112,7 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                             {
                                 commodityType,
                                 pagination: {
-                                    first: this.paginationConfig.itemsPerPage * (numberOfPage - 1),
+                                    first: numberOfPage - 1,
                                     offset: this.paginationConfig.itemsPerPage,
                                 },
                             },
