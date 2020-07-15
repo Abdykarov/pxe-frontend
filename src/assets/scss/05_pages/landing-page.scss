@@ -118,6 +118,7 @@
 			height: 100%;
 			padding: ( $spacer * 6 ) 0 0;
 			z-index: $zindex-lp-vide-text;
+			pointer-events: none;
 		}
 		@include media-breakpoint-up(md) {
 			align-items: center;

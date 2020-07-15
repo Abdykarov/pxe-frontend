@@ -433,6 +433,7 @@
 		height: 50px;
 		background-color: $primary;
 		border-radius: 50px;
+		pointer-events: all;
 
 		// Media queries
 		@include media-breakpoint-down(xs) {
@@ -446,7 +447,7 @@
 		.btn__icon {
 			justify-content: center;
 			width: 50px;
-			color: $white;	
+			color: $white;
 		}
 	}
 }
