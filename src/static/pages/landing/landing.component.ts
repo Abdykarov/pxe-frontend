@@ -112,11 +112,9 @@ export class LandingComponent extends AbstractComponent {
         if (!this.isVideoPlaying) {
             const playPromise = video && video.play();
             if (!R.isNil(playPromise)) {
+                this.isVideoPlaying = true;
                 playPromise
-                    .then(_ => {
-                        this.isVideoPlaying = true;
-                        return {};
-                    })
+                    .then(_ => ({}))
                     .catch(error => {
                         video.muted = true;
                         video.play();
