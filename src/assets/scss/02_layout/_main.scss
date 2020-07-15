@@ -82,6 +82,55 @@
 		}
 	}
 
+	.asd {
+		display: flex;
+		flex-wrap: wrap;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			margin: 0 -20px;
+		}
+		@include media-breakpoint-up(lg) {
+			margin: 0 -30px;
+		}
+
+		li {
+			padding-top: ( $spacer + 26px );
+			padding-left: 0;
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				width: 50%;
+				padding-left: 20px;
+				padding-right: 20px;
+			}
+			@include media-breakpoint-up(lg) {
+				width: 25%;
+				padding-left: 30px;
+				padding-right: 30px;
+			}
+
+			&::before {
+				width: 26px;
+				height: 26px;
+				background-color: $secondary;
+				color: $white;
+				font-family: $font-family-sans-serif-public;
+				letter-spacing: -2px;
+				text-align: center;
+				border-radius: 26px;
+
+				// Media queries
+				@include media-breakpoint-up(md) {
+					left: 20px;
+				}
+				@include media-breakpoint-up(lg) {
+					left: 30px;
+				}
+			}
+		}
+	}
+
 	.decimal-list {
 		&,
 		ol {
@@ -159,36 +208,6 @@
 		&--less-offset {
 			li {
 				padding-bottom: ( $spacer * .25 );
-			}
-		}
-
-		&--lp-section {
-			li {
-				display: flex;
-				justify-content: center;
-				padding: ( $spacer * 3.75 ) ( $spacer * 1.25 ) 0;
-				margin-bottom: ( $spacer * 2 );
-				text-align: center;
-
-				// Media queries
-				@include media-breakpoint-up(md) {
-					display: inline-flex;
-					width: 50%;
-				}
-				@include media-breakpoint-up(xl) {
-					width: 25%;
-				}
-
-				&::before {
-					top: 0;
-					left: auto;
-					width: $checklist-lp-before-size;
-					height: $checklist-lp-before-size;
-					background-color: $body-bg;
-					font-size: $icon-size-large-px;
-					line-height: $checklist-lp-before-size;
-					border-radius: $checklist-lp-before-size;
-				}
 			}
 		}
 	}

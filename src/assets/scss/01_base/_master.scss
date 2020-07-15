@@ -26,18 +26,42 @@ body {
 }
 
 .h1--public {
-	font-size: $h1-font-size-public;
+	font-size: $h1-font-size-public-xs;
 	line-height: ( 40 / 36 );
+
+	// Media queries
+	@include media-breakpoint-up(md) {
+		font-size: $h1-font-size-public-md;
+	}
+	@include media-breakpoint-up(xl) {
+		font-size: $h1-font-size-public;
+	}
 }
 
 .h2--public {
-	font-size: $h2-font-size-public;
+	font-size: $h2-font-size-public-xs;
 	line-height: ( 36 / 30 );
+
+	// Media queries
+	@include media-breakpoint-up(md) {
+		font-size: $h2-font-size-public-md;
+	}
+	@include media-breakpoint-up(xl) {
+		font-size: $h2-font-size-public;
+	}
 }
 
 .h3--public {
-	font-size: $h3-font-size-public;
+	font-size: $h3-font-size-public-xs;
 	line-height: ( 30 / 24 );
+
+	// Media queries
+	@include media-breakpoint-up(md) {
+		font-size: $h3-font-size-public-md;
+	}
+	@include media-breakpoint-up(xl) {
+		font-size: $h3-font-size-public;
+	}
 }
 
 h1,

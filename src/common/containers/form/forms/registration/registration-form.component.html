@@ -38,13 +38,13 @@
         [type]="'CHECKBOX'"
         [validationMessages]="formFields.validationMessages.consent"
     ></lnd-form-field>
-    <div [class.text-right]="isSignUp">
+    <div [class.text-center]="isSignUp">
         <lnd-button
             type="primary"
             [submit]="true"
             (action)="submitForm($event);sAnalyticsService.sFormClick($event);"
             [isDisabled]="formLoading"
-            [label]="isSignUp ? 'Registrovat se' : 'Odeslat'">
+            [label]="isSignUp ? 'Založit účet' : 'Odeslat'">
         </lnd-button>
     </div>
 </form>

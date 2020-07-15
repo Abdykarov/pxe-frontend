@@ -8,31 +8,122 @@
 </ng-template>
 
 <div class="landing-page">
-    <div class="section section--video">
+    <div class="section section--picture-full">
         <div class="container-fluid">
-            <div class="section-video-text">
-                <div class="row w-100">
-                    <div class="col-12 col-md-8 offset-md-2">
+            <div class="section-picture-text">
+                <div class="row w-100 ml-0">
+                    <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-1">
                         <h1 class="h1--public mb-4">
-                            Získejte svobodu nad energií
+                            Přechod k novému dodavateli energií je konečně jednoduchý
                         </h1>
+                        <p>
+                            S PARC4U získáte dlouhodobě výhodné smlouvy energií na pár kliknutí. Služba zajišťuje i navazující smlouvy bez starostí.
+                        </p>
                         <lnd-button
-                            label="Chci platit chytře"
+                            label="Založit účet"
                             type="primary">
                         </lnd-button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="section-video-holder">
+        <div class="section-picture-holder">
             <img
-                *ngIf="!isMoreThanXlResolution"
-                class="video-picture"
-                src="/assets/images/landing-page/lp-picture.png"
+                class="section-picure"
+                src="/assets/images/landing-page/lp-picture-socket.jpg"
+                srcset="
+                    /assets/images/landing-page/lp-picture-socket.jpg,
+                    /assets/images/landing-page/lp-picture-socket.jpg 2x"
                 title="Plaťte za energie chytře díky burze"
                 alt="Plaťte za energie chytře díky burze">
+        </div> 
+    </div>
+    <div class="section how-it-work">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="px-3 px-md-0">
+                        <h2 class="h2--public text-center mb-6 mb-lg-7">
+                            Jak to funguje
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-8 offset-md-2 col-xl-10 offset-xl-1">
+                    <ol class="asd">
+                        <li>
+                            <h3 class="h3--public mb-3">Zaregistrujete si své odběrné místo</h3>
+                            <p>Stačí zadat základní informace o vašem odběrném místě a současném dodavateli.</p>
+                        </li>
+                        <li>
+                            <h3 class="h3--public mb-3">Vyberete si nejvýhodnější nabídku</h3>
+                            <p>PARC4U vám ukáže přehledný seznam nejvýhodnějších nabídek od námi prověřených společností.</p>
+                        </li>
+                        <li>
+                            <h3 class="h3--public mb-3">Vše vyřídíte on-line na pár kliknutí</h3>
+                            <p>Novou  smlouvu uzavřete SMS podpisem a zasláním ověřovací platby ve výši 1 Kč.</p>
+                        </li>
+                        <li>
+                            <h3 class="h3--public mb-3">Služba PARC4U vám bude sloužit i nadále</h3>
+                            <p>Ceny za energie se stále mění. PARC4U vám kdykoliv pomůže dodavatele znovu změnit.</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section section--picture-first">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-xl-4 offset-xl-7">
+                    <div class="px-3 px-md-0">
+                        <h2 class="h2--public">
+                            Účty za energii si prostě ochočíte
+                        </h2>
+                        <p>S PARC4U si spolehlivého dodavatele vybere každý. Je to účinný nástroj, pomocí kterého je velmi jednoduché najít tu nejlepší nabídku. 
+                            S PARC4U mají uživatelé také jistotu, že se vyhnou tzv. energošmejdům, nepoctivým obchodníkům s energiemi, kteří výhody sice slibují, 
+                            ale nakonec nabídnou jen nevýhodné smlouvy se skrytými poplatky.</p>
+                        <lnd-button
+                            label="Založit účet"
+                            type="primary">
+                        </lnd-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-picture-holder">
+            <img
+                class="section-picture"
+                src="/assets/images/landing-page/picture-dog.jpg"
+                srcset="
+                    /assets/images/landing-page/picture-dog.jpg,
+                    /assets/images/landing-page/picture-dog.jpg 2x"
+                title="Cesta k nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC4U"
+                alt="Cesta k nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC4U">
+        </div>
+    </div>
+    <div class="section section--video">
+        <div class="container-fluid">
+            <div class="section-video-text">
+                <div class="row w-100 ml-0 text-center">
+                    <div class="col-12 col-md-6 offset-md-3">
+                        <h2 class="h2--public mb-4">
+                            PARC4U – snadná cesta<br class="d-none d-xl-block">
+                            k&nbsp;novému dodavateli energií
+                        </h2>
+                        <lnd-button
+                            type="icon"
+                            icon="icon--triangle-right"
+                            variant="icon"
+                            customClass="btn-video-play">
+                        </lnd-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-video-holder">
             <video
-                *ngIf="isMoreThanXlResolution"
                 poster="/assets/images/landing-page/picture-fallback.jpg"
                 class="section-video"
                 autoplay
@@ -46,55 +137,20 @@
             </video>
         </div> 
     </div>
-    <div class="section what-you-can-get">
+    <div class="section shortcut section--picture-second mb-0">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 col-xl-4 offset-xl-1">
                     <div class="px-3 px-md-0">
-                        <h2 class="h2--public text-center mb-6 mb-lg-7">
-                            Co můžete získat
+                        <h2 class="h2--public">
+                            Přečtěte si o naší filosofii
                         </h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12 col-md-10 offset-md-1">
-                    <ul class="check-list check-list--lp-section">
-                        <li><span class="h3--public">Měníte dodavatele na jedno kliknutí</span></li>
-                        <li><span class="h3--public">Neřešíte papírování a chození na pobočky</span></li>
-                        <li><span class="h3--public">Jste chráněni před nekalostmi ve smlouvě</span></li>
-                        <li><span class="h3--public">Dostáváte férové ceny bez skrytých poplatků</span></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="section shortcut section--picture-first section--arrow-overlap">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 col-md-4 offset-md-7">
-                    <div class="px-3 px-md-0">
-                        <h3 class="h3--public">
-                            Cesta k&nbsp;nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC4U.
-                        </h3>
-                        <ul class="check-list">
-                            <li>
-                                Nechte dodavatele ať&nbsp;se o&nbsp;vás poperou
-                            </li>
-                            <li>
-                                Přestaňte se bát skrytých poplatků a&nbsp;jiných kliček
-                            </li>
-                            <li>
-                                Neluštěte zbytečně z&nbsp;faktur nic, co jde zjistit i&nbsp;jinak
-                            </li>
-                            <li>
-                                Vydejte se snadnou a&nbsp;bezpečnou cestou přes&nbsp;PARC4U
-                            </li>
-                        </ul>
-                        <lnd-button
-                            label="Chci do PARC4U"
-                            type="primary">
-                        </lnd-button>
+                        <p>Na českém trhu poskytovatelů energií se opravdu vyznáme. PXE je komoditní burza a naše platforma PARC, 
+                            na které vybírají nejvýhodnější nabídky tzv. velcí hráči - firmy, města a obce, funguje již několik let. 
+                            Chtěli jsme stejné výhody poskytnout všem, proto jsme pro vás připravili službu PARC4U.</p>
+                        <blockquote>&bdquo;PXE reaguje na četné žádosti lidí, kteří chtěli nakupovat elektřinu a plyn přímo na burze. To nám sice stávající legislativa neumožňuje, 
+                            ale vyhověli jsme zákazníkům pomocí neburzovní služby, která zaručuje transparentnost nákupu i praktické výhody pro fyzické odběratele a živnostníky.&ldquo;</blockquote>
+                            <p>David Kučera, generální sekretář PXE</p>
                     </div>
                 </div>
             </div>
@@ -102,19 +158,16 @@
         <div class="section-picture-holder">
             <img
                 class="section-picture"
-                src="/assets/images/landing-page/picture-shortcut.jpg"
+                src="/assets/images/landing-page/picture-man.jpg"
+                srcset="
+                    /assets/images/landing-page/picture-man.jpg,
+                    /assets/images/landing-page/picture-man.jpg 2x"
                 title="Cesta k nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC4U"
                 alt="Cesta k nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC4U">
-        </div>
-    </div>
-    <div class="section section--carousel section--arrow">
-        <div class="row no-gutters">
-            <div class="col-12">
-                <lnd-carousel
-                    [carouselItems]="items"
-                    [interval]="interval">
-                </lnd-carousel>
-            </div>
+                <blockquote class="section-picture-overflow-text h3--public">
+                    &bdquo;Ochráníme vás<br>
+                    před energošmejdy&ldquo;
+                </blockquote>
         </div>
     </div>
     <pxe-map-coverage
@@ -135,7 +188,7 @@
                 <div class="col-12 text-center">
                     <lnd-button
                         label="Další dotazy"
-                        type="primary">
+                        type="secondary">
                     </lnd-button>
                 </div>
             </div>
@@ -146,9 +199,9 @@
             <div class="row">
                 <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-3 col-lg-4 offset-lg-4">
                     <div class="px-3 px-md-0">
-                        <h3 class="h3--public">
+                        <h2 class="h2--public">
                             Chci mít také přístup k&nbsp;jiným cenám, možnost&nbsp;měnit dodavatele jen na&nbsp;jedno kliknutí a&nbsp;zbavit se starostí s&nbsp;převodem.
-                        </h3>
+                        </h2>
                         <pxe-registration-form
                             [agreementTemplate]="agreementTemplate"
                             [formFields]="formFields"

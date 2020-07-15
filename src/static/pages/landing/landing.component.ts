@@ -23,10 +23,6 @@ import {
 } from 'src/common/containers/form/models/form-definition.model';
 import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
 import { ISupplierLogo } from 'src/common/ui/supplier/model/supplier.model';
-import {
-    carouselItems,
-    interval,
-} from 'src/static/pages/landing/config';
 
 @Component({
     selector: 'lnd-landing-page',
@@ -41,8 +37,6 @@ export class LandingComponent extends AbstractComponent {
     public formSent = false;
     public globalError: string[] = [];
     public fieldError: IFieldError = {};
-    public items = carouselItems;
-    public interval = interval;
     public isMoreThanXlResolution = false;
     public showStickyButton = false;
     public accordionItems: IAccordionItem[] = [{

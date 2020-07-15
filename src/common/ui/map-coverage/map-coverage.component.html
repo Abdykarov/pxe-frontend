@@ -1,20 +1,15 @@
-<div class="section where-we-are bg--white text-center">
+<div class="section where-we-are bg--white">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
-                <div class="px-3 px-md-0">
-                    <h2 class="h2--public">
-                        Jak se PARC4U daří
-                    </h2>
-                </div>
+            <div class="col-12 col-md-8 offset-md-2 col-lg-9 offset-lg-1">
+                <blockquote class="h2--public">
+                    Dodavatelem se může stát pouze společnost, která již obchoduje energie na burzovním velkoobchodním trhu, a podléhá tak velmi přísné regulaci burzy.
+                </blockquote>
+                <p>David Kučera, generální sekretář PXE</p>
             </div>
         </div>
-        <div *ngIf="loadingData"
-             class="row">
+        <div class="row text-center">
             <div class="col-12">
-                <div class="loading">
-                    <lnd-placeloader [loading]="true"></lnd-placeloader>
-                </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="px-3 px-md-0">
@@ -31,167 +26,6 @@
                 </div>
             </div>
         </div>
-        <div class="row"
-             *ngIf="!loadingData && globalError.length">
-            <div class="col-12">
-                <div class="error-map-coverage">
-                    <lnd-info-banner
-                        [bannerTitle]="bannerTitle"
-                        [showButton]="false"
-                    ></lnd-info-banner>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="px-3 px-md-0">
-                            <h3>
-                                REGISTROVANÍ DODAVATELÉ
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 col-md-10 offset-md-1">
-                        <ng-container *ngTemplateOutlet="supplierTemplatePower"></ng-container>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <lnd-tabs *ngIf="!loadingData && !globalError.length">
-            <lnd-tab tabTitle="ELEKTŘINA">
-                <div class="row">
-                    <div class="col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
-                        <div class="boxes">
-                            <div class="box-info">
-                                <div class="box-info__holder">
-                                    <div class="box-info__label">
-                                        Nabízeme více jak
-                                    </div>
-                                    <div class="box-info__value">
-                                        <div class="box-info__number">
-                                            {{configCoverage.powerOfferCount | number}}
-                                        </div>
-                                        <div class="box-info__unit">
-                                            {{configCoverage.powerOfferCount | plural:'offer'}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box-info box-info--primary">
-                                <div class="box-info__holder">
-                                    <div class="box-info__label">
-                                        Jsme schopni dodat elektřinu do
-                                    </div>
-                                    <div class="box-info__value">
-                                        <div class="box-info__number">
-                                            {{configCoverage.totalPossibleDeliveryCountPower | number}}
-                                        </div>
-                                        <div class="box-info__unit">
-                                            {{configCoverage.totalPossibleDeliveryCountPower | plural:'supplyPoint'}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box-info box-info--secondary">
-                                <div class="box-info__holder">
-                                    <div class="box-info__label">
-                                        Evidujeme více jak
-                                    </div>
-                                    <div class="box-info__value">
-                                        <div class="box-info__number">
-                                            {{configCoverage.powerDeliveryCount | number}}
-                                        </div>
-                                        <div class="box-info__unit">
-                                            {{configCoverage.powerDeliveryCount | plural:'supplyPoint'}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="px-3 px-md-0">
-                            <h3>
-                                REGISTROVANÍ DODAVATELÉ
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 col-md-10 offset-md-1">
-                        <ng-container *ngTemplateOutlet="supplierTemplatePower"></ng-container>
-                    </div>
-                </div>
-            </lnd-tab>
-            <lnd-tab tabTitle="PLYN">
-                <div class="row">
-                    <div class="col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
-                        <div class="boxes">
-                            <div class="box-info">
-                                <div class="box-info__holder">
-                                    <div class="box-info__label">
-                                        Nabízeme více jak
-                                    </div>
-                                    <div class="box-info__value">
-                                        <div class="box-info__number">
-                                            {{configCoverage.gasOfferCount | number}}
-                                        </div>
-                                        <div class="box-info__unit">
-                                            {{configCoverage.gasOfferCount | plural:'offer'}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box-info box-info--primary">
-                                <div class="box-info__holder">
-                                    <div class="box-info__label">
-                                        Jsme schopni dodat plyn do
-                                    </div>
-                                    <div class="box-info__value">
-                                        <div class="box-info__number">
-                                            {{configCoverage.totalPossibleDeliveryCountGas | number}}
-                                        </div>
-                                        <div class="box-info__unit">
-                                            {{configCoverage.totalPossibleDeliveryCountGas | plural:'supplyPoint'}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box-info box-info--secondary">
-                                <div class="box-info__holder">
-                                    <div class="box-info__label">
-                                        Evidujeme více jak
-                                    </div>
-                                    <div class="box-info__value">
-                                        <div class="box-info__number">
-                                            {{configCoverage.gasDeliveryCount | number}}
-                                        </div>
-                                        <div class="box-info__unit">
-                                            {{configCoverage.gasDeliveryCount | plural:'supplyPoint'}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="px-3 px-md-0">
-                            <h3>
-                                REGISTROVANÍ DODAVATELÉ
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 col-md-10 offset-md-1">
-                        <ng-container *ngTemplateOutlet="supplierTemplateGas"></ng-container>
-                    </div>
-                </div>
-            </lnd-tab>
-        </lnd-tabs>
     </div>
 </div>
 
