@@ -123,7 +123,7 @@ $sizes: map-merge((
 ), $sizes);
 
 $body-min-width:                   320px;
-$body-max-width:                   1920px;
+$body-max-width:                   1366px;
 
 
 // Typography
@@ -142,7 +142,7 @@ $h1-font-size-public-md:           2.25rem;
 $h1-font-size-public:              3rem;
 $h2-font-size:                     1.125rem;
 $h2-font-size-snd:                 .8125rem;
-$h2-font-size-public-xs:           1.875rem;
+$h2-font-size-public-xs:           1.5rem;
 $h2-font-size-public-md:           1.875rem;
 $h2-font-size-public:              2.25rem;
 $h3-font-size:                     .875rem;

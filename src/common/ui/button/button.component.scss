@@ -434,15 +434,6 @@
 		background-color: $primary;
 		border-radius: 50px;
 
-		// Media queries
-		@include media-breakpoint-down(xs) {
-			position: absolute;
-			bottom: calc( 100% + 60px + ( 180px / 2 ) );
-			left: 50%;
-			transform: translate(-50%, 50%);
-			z-index: 1;
-		}
-
 		.btn__icon {
 			justify-content: center;
 			width: 50px;

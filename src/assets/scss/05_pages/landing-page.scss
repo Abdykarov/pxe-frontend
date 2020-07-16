@@ -25,24 +25,23 @@
 			padding: ( $spacer * 4.5 ) 0 ( $spacer * 5.5 );
 		}
 
-		&--picture-first,
-		&--picture-second {
-			padding-top: ( $spacer * 2 ) + $landing-page-picture-height-mobile;
+		&--picture-half {
+			padding: 0 0 ( $spacer * 8 );
 
 			// Media queries
 			@include media-breakpoint-up(md) {
-				padding-top: ( $spacer * 2 ) + $landing-page-picture-height-tablet;
+				padding-bottom: 0;
 			}
-			@include media-breakpoint-up(xl) {
-				padding: ( $spacer * 7 ) 0 ( $spacer * 8 );
-			}
-		}
 
-		&--picture-second {
-			.section-picture-holder {
+			.section-picture-text {
+				padding-top: ( $spacer * 4 );
+
 				// Media queries
+				@include media-breakpoint-up(md) {
+					padding-top: ( $spacer * 6 );
+				}
 				@include media-breakpoint-up(xl) {
-					left: 50%;
+					padding: ( $spacer * 7 ) 0 ( $spacer * 8 );
 				}
 			}
 		}
@@ -86,16 +85,15 @@
 		}
 
 		&--video {
-			padding-top: $landing-page-video-content-height-mobil;
+			padding: 0;
+			//padding-top: $landing-page-video-content-height-mobil;
 
 			// Media queries
 			@include media-breakpoint-up(md) {
-				height: $landing-page-video-content-height-tablet;
-				padding: 0;
-				background-color: $body-bg;
+				padding-bottom: ( $spacer / 2 );
 			}
 			@include media-breakpoint-up(xl) {
-				height: $landing-page-video-content-height-desktop;
+				padding-bottom: 0;
 			}
 		}
 
@@ -106,7 +104,7 @@
 
 	// Section Video
 	.section-video-text {
-		padding: ( $spacer * 3 ) ( $spacer * 1.25 );
+		padding-top: $spacer;
 
 		// Media queries
 		@include media-breakpoint-up(md) {
@@ -116,7 +114,7 @@
 			left: 0;
 			width: 100%;
 			height: 100%;
-			padding: ( $spacer * 6 ) 0 0;
+			padding-top: 0;
 			z-index: $zindex-lp-vide-text;
 		}
 		@include media-breakpoint-up(md) {
@@ -126,17 +124,33 @@
 		}
 	}
 
+	.section-video-control {
+		// Media queries
+		@include media-breakpoint-down(xs) {
+			position: absolute;
+			top: 40%;
+			left: 50%;
+			transform: translate(-50%, 0);
+			z-index: 1;
+		}
+	}
+
 	.section-video-holder {
-		position: absolute;
-		top: 0;
-		left: 0;
 		overflow: hidden;
-		width: 100%;
-		height: $landing-page-video-content-height-mobil;
+		width: calc( 100% + 20px );
+		margin: 0 -10px;
 
 		// Media queries
 		@include media-breakpoint-up(md) {
+			// position: absolute;
+			top: 0;
+			left: 0;
 			height: 100%;
+		}
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			width: 100%;
+			margin: 0;
 		}
 	}
 
@@ -148,53 +162,45 @@
 	}
 
 	.section-video {
-		position: absolute;
 		display: block;
-		top: 50%;
-		left: 50%;
-		min-width: 100%;
-		width: auto;
-		min-height: 100%;
-		height: auto;
-		transform: translate(-50%, -50%);
+		width: 100%;
+
+		// Media queries
+		@include media-breakpoint-up(md) {}
 	}
 
 	// Section Picture
 	.section-picture-holder {
-		position: absolute;
-		top: 0;
-		left: 0;
-		overflow: hidden;
-		width: 100%;
-		height: 320px;
+		width: calc( 100% + 20px );
+		margin: 0 -10px;
 
 		// Media queries
-		@include media-breakpoint-up(md) {
-			height: $landing-page-picture-height-tablet;
-		}
 		@include media-breakpoint-up(xl) {
-			width: 50%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			overflow: hidden;
 			height: 100%;
+		}
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			width: 100%;
+			margin: 0;
 		}
 	}
 
 	.section-picture {
-		@include absolute-center(false);
-		//bottom: 0;
 		width: 100%;
 		height: auto;
 
 		// Media queries
-		/* @include media-breakpoint-up(md) {
-			width: auto;
-			height: 100%;
-		} */
 		@include media-breakpoint-up(xl) {
+			@include absolute-center(false);
 			min-width: 100%;
-			height: 125%;
+			width: auto;
+			min-height: 100%;
 		}
 		@include media-breakpoint-up(lg) {
-			width: 100%;
 			height: auto;
 		}
 	}
