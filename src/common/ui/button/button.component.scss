@@ -433,11 +433,12 @@
 		height: 50px;
 		background-color: $primary;
 		border-radius: 50px;
+		pointer-events: all;
 
 		.btn__icon {
 			justify-content: center;
 			width: 50px;
-			color: $white;	
+			color: $white;
 		}
 	}
 }

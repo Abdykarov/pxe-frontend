@@ -26,10 +26,10 @@
 		}
 
 		&--picture-half {
-			padding: 0 0 ( $spacer * 8 );
+			padding: 0 0 ( $spacer * 4.5 );
 
 			// Media queries
-			@include media-breakpoint-up(md) {
+			@include media-breakpoint-up(xl) {
 				padding-bottom: 0;
 			}
 
@@ -85,8 +85,7 @@
 		}
 
 		&--video {
-			padding: 0;
-			//padding-top: $landing-page-video-content-height-mobil;
+			padding: 0 0 ( $spacer * 4.5 );
 
 			// Media queries
 			@include media-breakpoint-up(md) {
@@ -98,7 +97,7 @@
 		}
 
 		&--light {
-			background-color: $body-bg;
+			background-color: $body-bg-public;
 		}
 	}
 
@@ -116,6 +115,7 @@
 			height: 100%;
 			padding-top: 0;
 			z-index: $zindex-lp-vide-text;
+			pointer-events: none;
 		}
 		@include media-breakpoint-up(md) {
 			align-items: center;
@@ -128,26 +128,31 @@
 		// Media queries
 		@include media-breakpoint-down(xs) {
 			position: absolute;
-			top: 40%;
+			top: 50%;
 			left: 50%;
-			transform: translate(-50%, 0);
+			transform: translate(-50%, -50%);
 			z-index: 1;
 		}
 	}
 
 	.section-video-holder {
+		position: relative;
+		width: calc( 100% + $spacer );
+		margin: 0 -( $spacer / 2 );
 		overflow: hidden;
-		width: calc( 100% + 20px );
-		margin: 0 -10px;
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			// position: absolute;
-			top: 0;
-			left: 0;
-			height: 100%;
+			width: 100%;
+			margin: 0;
 		}
-		// Media queries
+		@include media-breakpoint-up(xl) {
+			width: calc( 100% + $spacer );
+			max-width: $body-max-width;
+			left: 50%;
+			transform: translateX(-50%);
+			margin: 0 -( $spacer / 2 );
+		}
 		@include media-breakpoint-up(lg) {
 			width: 100%;
 			margin: 0;
@@ -157,22 +162,19 @@
 	.video-picture {
 		position: absolute;
 		top: 0;
-		left: 5%;
+		left: 0;
 		width: 100%;
 	}
 
 	.section-video {
 		display: block;
 		width: 100%;
-
-		// Media queries
-		@include media-breakpoint-up(md) {}
 	}
 
 	// Section Picture
 	.section-picture-holder {
-		width: calc( 100% + 20px );
-		margin: 0 -10px;
+		width: calc( 100% + $spacer );
+		margin: 0 -( $spacer / 2 );
 
 		// Media queries
 		@include media-breakpoint-up(xl) {
@@ -207,13 +209,14 @@
 
 	.section-picture-overflow-text {
 		display: none;
+
 		// Media queries
 		@include media-breakpoint-up(xl) {
 			position: absolute;
 			display: inline;
 			bottom: 20px;
 			left: 0;
-			padding: 10px;
+			padding: ( $spacer / 2 );
 			background-color: $white;
 		}
 	}

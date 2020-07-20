@@ -1,9 +1,13 @@
 import { isPlatformBrowser } from '@angular/common';
 import {
     Component,
+    ElementRef,
     Inject,
     PLATFORM_ID,
+    ViewChild,
 } from '@angular/core';
+
+import * as R from 'ramda';
 import { fromEvent } from 'rxjs';
 import {
     debounceTime,
@@ -29,6 +33,11 @@ import { ISupplierLogo } from 'src/common/ui/supplier/model/supplier.model';
     templateUrl: './landing.component.html',
 })
 export class LandingComponent extends AbstractComponent {
+    @ViewChild('video')
+    public video: ElementRef;
+
+    public isVideoPlaying = false;
+
     public breadcrumbItemsSimple: IBreadcrumbItems;
     public configCoverage: IMapCoverageConfig = configCoverage;
     public configSupplier: ISupplierLogo[] = configSupplier;
@@ -95,5 +104,27 @@ export class LandingComponent extends AbstractComponent {
     public click = (evt) => {
         evt.preventDefault();
         console.log('click');
+    }
+
+    public toggleVideo = (event) => {
+        event.preventDefault();
+        const video: HTMLMediaElement = this.video.nativeElement;
+        if (!this.isVideoPlaying) {
+            const playPromise = video && video.play();
+            if (!R.isNil(playPromise)) {
+                this.isVideoPlaying = true;
+                playPromise
+                    .then(_ => ({}))
+                    .catch(error => {
+                        video.muted = true;
+                        video.play();
+                    });
+            } else {
+                this.isVideoPlaying = true;
+            }
+        } else {
+            video.pause();
+            this.isVideoPlaying = false;
+        }
     }
 }

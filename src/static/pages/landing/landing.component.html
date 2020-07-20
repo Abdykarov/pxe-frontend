@@ -9,7 +9,7 @@
 
 <div class="landing-page">
     <div class="container-fluid container-fluid--max-height">
-        <div class="section section--picture-full">
+        <div class="section section--light section--picture-full">
             <div class="section-picture-text">
                 <div class="row w-100 ml-0">
                     <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-1">
@@ -31,15 +31,15 @@
                     class="section-picure"
                     src="/assets/images/landing-page/lp-picture-socket.jpg"
                     srcset="
-                        /assets/images/landing-page/lp-picture-socket.jpg,
-                        /assets/images/landing-page/lp-picture-socket.jpg 2x"
+                        /assets/images/landing-page/lp-picture-socket.png,
+                        /assets/images/landing-page/lp-picture-socket.png 2x"
                     title="Plaťte za energie chytře díky burze"
                     alt="Plaťte za energie chytře díky burze">
             </div> 
         </div>
     </div>
     <div class="container-fluid container-fluid--max-height">
-        <div class="section how-it-work">
+        <div class="section section--light how-it-work">
             <div class="row px-3 px-md-0">
                 <div class="col-12">
                     <div class="">
@@ -74,7 +74,7 @@
     <div class="section section--picture-half">
         <div class="container-fluid container-fluid--max-height">
             <div class="row no-gutters">
-                <div class="col-12 col-xl-6 offset-xl-1 order-xl-2">
+                <div class="col-12 col-xl-6">
                     <div class="section-picture-holder">
                         <img
                             class="section-picture"
@@ -86,13 +86,13 @@
                             alt="Cesta k nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC4U">
                     </div>
                 </div>
-                <div class="col-12 col-md-8 offset-md-2 col-xl-4 offset-xl-1 order-xl-1">
+                <div class="col-12 col-md-8 offset-md-2 col-xl-4 offset-xl-1">
                     <div class="section-picture-text px-3 px-md-0">
                         <h2 class="h2--public">
                             Účty za energii si prostě ochočíte
                         </h2>
-                        <p class="mb-4">S PARC4U si spolehlivého dodavatele vybere každý. Je to účinný nástroj, pomocí kterého je velmi jednoduché najít tu nejlepší nabídku. 
-                            S PARC4U mají uživatelé také jistotu, že se vyhnou tzv. energošmejdům, nepoctivým obchodníkům s energiemi, kteří výhody sice slibují, 
+                        <p class="mb-4">S PARC4U si spolehlivého dodavatele vybere každý. Je to účinný nástroj, pomocí kterého je velmi jednoduché najít tu nejlepší nabídku.
+                            S PARC4U mají uživatelé také jistotu, že se vyhnou tzv. energošmejdům, nepoctivým obchodníkům s energiemi, kteří výhody sice slibují,
                             ale nakonec nabídnou jen nevýhodné smlouvy se skrytými poplatky.</p>
                         <lnd-button
                             label="Založit účet"
@@ -107,9 +107,10 @@
         <div class="section section--video">
             <div class="section-video-holder">
                 <video
+                    #video
+                    (click)="isVideoPlaying && toggleVideo($event)"
                     poster="/assets/images/landing-page/picture-fallback.jpg"
                     class="section-video"
-                    autoplay
                     loop
                     muted
                     preload="auto">
@@ -118,6 +119,17 @@
                     <img src="/assets/images/landing-page/picture-fallback.jpg" alt="parc4u - obrázek laptopu s aplikací">
                     Váš prohlížeč nepodporuje zobrazení videa
                 </video>
+                <div class="section-video-control d-md-none">
+                    <lnd-button
+                        *ngIf="!isVideoPlaying"
+                        type="icon"
+                        icon="icon--triangle-right"
+                        variant="icon"
+                        customClass="btn-video-play"
+                        (action)="toggleVideo($event)"
+                    >
+                    </lnd-button>
+                </div>
             </div> 
             <div class="section-video-text">
                 <div class="row w-100 ml-0 text-center">
@@ -126,12 +138,15 @@
                             PARC4U – snadná cesta<br class="d-none d-xl-block">
                             k&nbsp;novému dodavateli energií
                         </h2>
-                        <div class="section-video-control">
+                        <div class="section-video-control d-none d-md-block">
                             <lnd-button
+                                *ngIf="!isVideoPlaying"
                                 type="icon"
                                 icon="icon--triangle-right"
                                 variant="icon"
-                                customClass="btn-video-play">
+                                customClass="btn-video-play"
+                                (action)="toggleVideo($event)"
+                            >
                             </lnd-button>
                         </div>
                     </div>
@@ -142,7 +157,7 @@
     <div class="section section--picture-half shortcut">
         <div class="container-fluid container-fluid--max-height">
             <div class="row no-gutters">
-                <div class="col-12 col-xl-6">
+                <div class="col-12 col-xl-6 offset-xl-1 order-xl-2">
                     <div class="section-picture-holder">
                         <img
                             class="section-picture"
@@ -158,15 +173,15 @@
                             </blockquote>
                     </div>
                 </div>
-                <div class="col-12 col-md-8 offset-md-2 col-xl-4 offset-xl-1">
+                <div class="col-12 col-md-8 offset-md-2 col-xl-4 offset-xl-1 order-xl-1">
                     <div class="section-picture-text px-3 px-md-0">
                         <h2 class="h2--public">
                             Přečtěte si o naší filosofii
                         </h2>
-                        <p>Na českém trhu poskytovatelů energií se opravdu vyznáme. PXE je komoditní burza a naše platforma PARC, 
-                            na které vybírají nejvýhodnější nabídky tzv. velcí hráči - firmy, města a obce, funguje již několik let. 
+                        <p>Na českém trhu poskytovatelů energií se opravdu vyznáme. PXE je komoditní burza a naše platforma PARC,
+                            na které vybírají nejvýhodnější nabídky tzv. velcí hráči - firmy, města a obce, funguje již několik let.
                             Chtěli jsme stejné výhody poskytnout všem, proto jsme pro vás připravili službu PARC4U.</p>
-                        <blockquote>&bdquo;PXE reaguje na četné žádosti lidí, kteří chtěli nakupovat elektřinu a plyn přímo na burze. To nám sice stávající legislativa neumožňuje, 
+                        <blockquote>&bdquo;PXE reaguje na četné žádosti lidí, kteří chtěli nakupovat elektřinu a plyn přímo na burze. To nám sice stávající legislativa neumožňuje,
                             ale vyhověli jsme zákazníkům pomocí neburzovní služby, která zaručuje transparentnost nákupu i praktické výhody pro fyzické odběratele a živnostníky.&ldquo;</blockquote>
                             <p>David Kučera, generální sekretář PXE</p>
                     </div>
