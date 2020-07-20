@@ -58,6 +58,10 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
     templateUrl: './landing.component.html',
 })
 export class LandingComponent extends AbstractFaqComponent implements AfterViewInit {
+    @ViewChild('video')
+    public video: ElementRef;
+
+    public isVideoPlaying = false;
 
     @ViewChild('subscription')
     public subscriptionElement: ElementRef;
@@ -139,34 +143,27 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
                     scrollToElementFnc(this.supplierChangeElement.nativeElement);
                 }
             });
-
-        this.resizeEvent$
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(_  => {
-                this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
-                this.autoPlayVideoInAllBrowsers();
-                this.cd.markForCheck();
-            });
     }
 
-    autoPlayVideoInAllBrowsers = () => {
-        if (this.isMoreThanXlResolution) {
-            const myVideo = document.querySelector('video');
-            const playPromise = myVideo && myVideo.play();
+    public toggleVideo = (event) => {
+        event.preventDefault();
+        const video: HTMLMediaElement = this.video.nativeElement;
+        if (!this.isVideoPlaying) {
+            const playPromise = video && video.play();
             if (!R.isNil(playPromise)) {
-                playPromise.then(_ => ({}))
+                this.isVideoPlaying = true;
+                playPromise
+                    .then(_ => ({}))
                     .catch(error => {
-                        myVideo.muted = true;
-                        myVideo.play();
+                        video.muted = true;
+                        video.play();
                     });
+            } else {
+                this.isVideoPlaying = true;
             }
-        }
-    }
-
-    ngAfterViewInit() {
-        if (this.isPlatformBrowser) {
-            this.autoPlayVideoInAllBrowsers();
-            this.cd.markForCheck();
+        } else {
+            video.pause();
+            this.isVideoPlaying = false;
         }
     }
 

@@ -28,11 +28,6 @@
 		&--picture-half {
 			padding: 0 0 ( $spacer * 4.5 );
 
-			// Media queries
-			@include media-breakpoint-up(xl) {
-				padding-bottom: 0;
-			}
-
 			.section-picture-text {
 				padding-top: ( $spacer * 4 );
 
