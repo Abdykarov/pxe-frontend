@@ -105,7 +105,8 @@
     </div>
     <div class="container-fluid container-fluid--max-height">
         <div class="section section--video">
-            <div class="section-video-holder">
+            <div class="section-video-holder"
+                 [class.cursor-pointer]="isVideoPlaying">
                 <video
                     #video
                     (click)="isVideoPlaying && toggleVideo($event)"
@@ -133,14 +134,14 @@
             </div> 
             <div class="section-video-text">
                 <div class="row w-100 ml-0 text-center">
-                    <div class="col-12 col-md-6 offset-md-3">
+                    <div *ngIf="!isVideoPlaying"
+                         class="col-12 col-md-6 offset-md-3">
                         <h2 class="h2--public mb-4">
                             PARC4U – snadná cesta<br class="d-none d-xl-block">
                             k&nbsp;novému dodavateli energií
                         </h2>
                         <div class="section-video-control d-none d-md-block">
                             <lnd-button
-                                *ngIf="!isVideoPlaying"
                                 type="icon"
                                 icon="icon--triangle-right"
                                 variant="icon"
@@ -190,9 +191,7 @@
         </div>
     </div>
     <pxe-map-coverage
-        [configCoverage]="configCoverage"
-        [supplierTemplateGas]="supplierTemplate"
-        [supplierTemplatePower]="supplierTemplate"
+        [supplierTemplate]="supplierTemplate"
     >
     </pxe-map-coverage>
     <div class="section section--light section-help">

@@ -3,12 +3,6 @@
 </ng-template>
 
 <div #pxeMapCoverageWrapper>
-    <pxe-map-coverage
-        [configCoverage]="configCoverage"
-        [loadingData]="loadingData"
-        [globalError]="globalError"
-        [supplierTemplateGas]="supplierTemplate"
-        [supplierTemplatePower]="supplierTemplate"
-    >
+    <pxe-map-coverage [supplierTemplate]="supplierTemplate">
     </pxe-map-coverage>
 </div>

@@ -17,7 +17,6 @@ import {
 import { AbstractComponent } from 'src/common/abstract.component';
 import { CONSTS } from 'src/app/app.constants';
 import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
-import { configCoverage } from 'src/static/config/map-coverage.config';
 import { configSupplier } from 'src/static/config/suppliers.config';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
@@ -25,7 +24,6 @@ import {
     IFieldError,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
-import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
 import { ISupplierLogo } from 'src/common/ui/supplier/model/supplier.model';
 
 @Component({
@@ -39,7 +37,6 @@ export class LandingComponent extends AbstractComponent {
     public isVideoPlaying = false;
 
     public breadcrumbItemsSimple: IBreadcrumbItems;
-    public configCoverage: IMapCoverageConfig = configCoverage;
     public configSupplier: ISupplierLogo[] = configSupplier;
     public formLoading = false;
     public formFields = createRegistrationFormFields(SignUpType.NewsSubscription);
