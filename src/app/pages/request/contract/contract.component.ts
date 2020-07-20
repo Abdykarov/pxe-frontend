@@ -122,23 +122,22 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                 map(({data}) => data.getSupplyPoint),
                 switchMap((supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
-                    this.loadingSupplyPoint = false;
-                    this.supplyPoint = supplyPoint;
                     this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
                     return combineLatest(
                         supplyPoint.subject.code === this.subjectType.SUBJECT_TYPE_INDIVIDUAL ?
                             this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.INFORMATION)
                                 .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)) :
-                            of(
-                                {
-                                    file: null,
-                                    filename: null,
-                                },
-                            ),
-                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.CONTRACT)
-                            .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)),
-                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.VYPOVED_PREV)
-                            .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)),
+                                of(
+                                    {
+                                        file: null,
+                                        filename: null,
+                                    },
+                                ),
+                            this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.CONTRACT)
+                                .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)),
+                        supplyPoint.contract.previousContractId ?
+                                this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.TERMINATE_PREV)
+                                .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)) : of(null),
                     );
                 }),
                 takeUntil(this.destroy$),
@@ -147,7 +146,9 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                 ([documentTypeInformation, documentTypeContract, documentTypeUnsetProlongation]) => {
                     this.documentTypeInformation = documentTypeInformation;
                     this.documentTypeContract = documentTypeContract;
-                    this.documentTypeUnsetProlongation = documentTypeUnsetProlongation;
+                    if (documentTypeUnsetProlongation) {
+                        this.documentTypeUnsetProlongation = documentTypeUnsetProlongation;
+                    }
                     this.loadingSupplyPoint = false;
                     this.cd.markForCheck();
                     setTimeout(() => {
