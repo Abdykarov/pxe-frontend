@@ -17,6 +17,10 @@
 	color: $white;
 	z-index: 2010;
 
+	&--public {
+		background-color: $body-bg-public;
+	}
+
 	&--sticked {
 		// Media queries
 		@include media-breakpoint-up(xl) {

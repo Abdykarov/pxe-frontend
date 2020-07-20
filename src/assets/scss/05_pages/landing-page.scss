@@ -49,7 +49,7 @@
 		&--picture-bg {
 			position: relative;
 			padding-bottom: ( $spacer * 14 );
-			z-index: 1;
+			z-index: $zindex-lp-picture-bg-overlap;
 
 			// Media queries
 			@include media-breakpoint-up(md) {
@@ -69,8 +69,8 @@
 				background-image: url(/assets/images/landing-page/lp-picture-socket.png);
 				background-repeat: no-repeat;
 				background-position: right center;
-				background-size: 125% auto;
-				z-index: -1;
+				background-size: $landing-page-picture-bg-height-mobile auto;
+				z-index: $zindex-lp-picture-bg;
 
 				// Media queries
 				@include media-breakpoint-up(md) {
@@ -98,7 +98,7 @@
 		}
 
 		&--picture-bg-overlap {
-			z-index: 1;
+			z-index: $zindex-lp-picture-bg-overlap;
 		}
 
 		&--video {
@@ -273,6 +273,7 @@
 			&::before {
 				width: $numerical-list-lp-numb-size;
 				height: $numerical-list-lp-numb-size;
+				padding-left: ( $spacer / 10 );
 				background-color: $secondary;
 				color: $white;
 				font-family: $font-family-sans-serif-public;
