@@ -15,7 +15,7 @@
 
 	.section {
 		position: relative;
-		padding: ( $spacer * 2 ) 0 ( $spacer * 3 );
+		padding: ( $spacer * 3 ) 0;
 
 		// Media queries
 		@include media-breakpoint-up(md) {
@@ -48,12 +48,12 @@
 
 		&--picture-bg {
 			position: relative;
-			padding-bottom: ( $spacer * 14 );
+			padding-bottom: ( $spacer * 13 );
 			z-index: $zindex-lp-picture-bg-overlap;
 
 			// Media queries
 			@include media-breakpoint-up(md) {
-				padding: ( $spacer * 6 ) 0 ( $spacer * 14 );
+				padding-top: ( $spacer * 6 );
 			}
 			@include media-breakpoint-up(xl) {
 				padding: ( $spacer * 7 ) 0 ( $spacer * 5 );
@@ -62,7 +62,7 @@
 			&::after {
 				content: '';
 				position: absolute;
-				top: 17%;
+				top: 20%;
 				left: -10px;
 				width: calc( 100% + #{$spacer});
 				height: $landing-page-picture-bg-height-mobile;
@@ -251,7 +251,7 @@
 			margin: 0 -$spacer;
 		}
 		@include media-breakpoint-up(lg) {
-			margin: 0 -( $spacer * 1.5 );
+			margin: 0 ( -$spacer * 1.5 );
 		}
 
 		li {
