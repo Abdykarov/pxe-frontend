@@ -46,42 +46,59 @@
 			}
 		}
 
-		&--picture-full {
+		&--picture-bg {
+			position: relative;
+			padding-bottom: ( $spacer * 14 );
+			z-index: 1;
+
 			// Media queries
-			@include media-breakpoint-down(xs) {
-				padding-bottom: ( $spacer * 2 ) + $landing-page-picture-height-mobile;
+			@include media-breakpoint-up(md) {
+				padding: ( $spacer * 6 ) 0 ( $spacer * 14 );
 			}
 			@include media-breakpoint-up(xl) {
-				margin-bottom: ( $spacer * 3 );
-			}
-			@include media-breakpoint-up(xl) {
-				padding: ( $spacer * 7 ) 0 ( $spacer * 8 );
+				padding: ( $spacer * 7 ) 0 ( $spacer * 5 );
 			}
 
-			.section-picture-text {
-				position: relative;
-				z-index: 1;
-			}
-
-			.section-picture-holder {
-				top: auto;
-				bottom: 0;
+			&::after {
+				content: '';
+				position: absolute;
+				top: 17%;
+				left: -10px;
+				width: calc( 100% + #{$spacer});
+				height: $landing-page-picture-bg-height-mobile;
+				background-image: url(/assets/images/landing-page/lp-picture-socket.png);
+				background-repeat: no-repeat;
+				background-position: right center;
+				background-size: 125% auto;
+				z-index: -1;
 
 				// Media queries
 				@include media-breakpoint-up(md) {
+					top: 32%;
+					height: $landing-page-picture-bg-height-tablet;
+					background-image: url(/assets/images/landing-page/lp-picture-socket.png);
+					background-repeat: no-repeat;
+					background-position: top right;
+					background-size: 90%;
+				}
+				@include media-breakpoint-up(xl) {
+					top: 10%;
+					height: $landing-page-picture-bg-height-laptop;
+					background-size: 70%;
+				}
+				@include media-breakpoint-up(lg) {
+					top: 0;
+					left: 0;
 					width: 100%;
-					overflow: visible;
+					height: $landing-page-picture-bg-height-desktop;
+					background-position-x: 270px;
+					background-size: $landing-page-picture-bg-height-desktop;
 				}
 			}
+		}
 
-			.section-picure {
-				position: absolute;
-				top: 0;
-				right: 0;
-				min-width: 100%;
-				width: auto;
-				min-height: 100%;
-			}
+		&--picture-bg-overlap {
+			z-index: 1;
 		}
 
 		&--video {
@@ -94,10 +111,6 @@
 			@include media-breakpoint-up(xl) {
 				padding-bottom: 0;
 			}
-		}
-
-		&--light {
-			background-color: $body-bg-public;
 		}
 	}
 
@@ -137,8 +150,8 @@
 
 	.section-video-holder {
 		position: relative;
-		width: calc( 100% + $spacer );
-		margin: 0 -( $spacer / 2 );
+		width: calc( 100% + #{$spacer} );
+		margin: 0 ( -$spacer / 2 );
 		overflow: hidden;
 
 		// Media queries
@@ -147,11 +160,11 @@
 			margin: 0;
 		}
 		@include media-breakpoint-up(xl) {
-			width: calc( 100% + $spacer );
+			width: calc( 100% + #{$spacer} );
 			max-width: $body-max-width;
 			left: 50%;
 			transform: translateX(-50%);
-			margin: 0 -( $spacer / 2 );
+			margin: 0;
 		}
 		@include media-breakpoint-up(lg) {
 			width: 100%;
@@ -173,8 +186,8 @@
 
 	// Section Picture
 	.section-picture-holder {
-		width: calc( 100% + $spacer );
-		margin: 0 -( $spacer / 2 );
+		width: calc( 100% + #{$spacer} );
+		margin: 0 ( -$spacer / 2 );
 
 		// Media queries
 		@include media-breakpoint-up(xl) {
@@ -207,7 +220,7 @@
 		}
 	}
 
-	.section-picture-overflow-text {
+	.section-picture-overflow-text-holder {
 		display: none;
 
 		// Media queries
@@ -216,22 +229,65 @@
 			display: inline;
 			bottom: 20px;
 			left: 0;
-			padding: ( $spacer / 2 );
-			background-color: $white;
 		}
 	}
 
-	.landing-page-illustration {
-		width: auto;
-		height: 100px;
-		margin-bottom: ( $spacer * 1.5 );
+	.section-picture-overflow-text {
+		// Media queries
+		@include media-breakpoint-up(xl) {
+			display: inline;
+			padding: ( $spacer / 4 ) ( $spacer / 2 );
+			background-color: $white;
+			line-height: 1.5;
+		}
+	}
+
+	.numerical-list-lp {
+		display: flex;
+		flex-wrap: wrap;
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			height: 105px;
+			margin: 0 -$spacer;
 		}
 		@include media-breakpoint-up(lg) {
-			height: 150px;
+			margin: 0 -( $spacer * 1.5 );
+		}
+
+		li {
+			padding-top: ( $spacer + $numerical-list-lp-numb-size );
+			padding-left: 0;
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				width: 50%;
+				padding-left: $spacer;
+				padding-right: $spacer;
+			}
+			@include media-breakpoint-up(lg) {
+				width: 25%;
+				padding-left: ( $spacer * 1.5 );
+				padding-right: ( $spacer * 1.5 );
+			}
+
+			&::before {
+				width: $numerical-list-lp-numb-size;
+				height: $numerical-list-lp-numb-size;
+				background-color: $secondary;
+				color: $white;
+				font-family: $font-family-sans-serif-public;
+				letter-spacing: -2px;
+				text-align: center;
+				border-radius: $numerical-list-lp-numb-size;
+
+				// Media queries
+				@include media-breakpoint-up(md) {
+					left: 20px;
+				}
+				@include media-breakpoint-up(lg) {
+					left: 30px;
+				}
+			}
 		}
 	}
 }

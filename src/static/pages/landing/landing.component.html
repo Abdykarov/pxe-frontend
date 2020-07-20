@@ -8,16 +8,16 @@
 </ng-template>
 
 <div class="landing-page">
-    <div class="container-fluid container-fluid--max-height">
-        <div class="section section--light section--picture-full">
+    <div class="container-fluid container-fluid--max-height container-fluid--light">
+        <div class="section section--picture-bg">
             <div class="section-picture-text">
-                <div class="row w-100 ml-0">
+                <div class="row px-3 px-md-0">
                     <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-1">
                         <h1 class="h1--public mb-4">
                             Přechod k novému dodavateli energií je konečně jednoduchý
                         </h1>
                         <p>
-                            S PARC4U získáte dlouhodobě výhodné smlouvy energií na pár kliknutí. Služba zajišťuje i navazující smlouvy bez starostí.
+                            S PARC4U získáte dlouhodobě výhodné smlouvy energií na pár kliknutí. Služba&nbsp;zajišťuje i navazující smlouvy bez starostí.
                         </p>
                         <lnd-button
                             label="Založit účet"
@@ -26,30 +26,18 @@
                     </div>
                 </div>
             </div>
-            <div class="section-picture-holder">
-                <img
-                    class="section-picure"
-                    src="/assets/images/landing-page/lp-picture-socket.jpg"
-                    srcset="
-                        /assets/images/landing-page/lp-picture-socket.png,
-                        /assets/images/landing-page/lp-picture-socket.png 2x"
-                    title="Plaťte za energie chytře díky burze"
-                    alt="Plaťte za energie chytře díky burze">
-            </div> 
         </div>
     </div>
-    <div class="container-fluid container-fluid--max-height">
-        <div class="section section--light how-it-work">
+    <div class="container-fluid container-fluid--max-height container-fluid--light">
+        <div class="section how-it-work section--picture-bg-overlap">
             <div class="row px-3 px-md-0">
-                <div class="col-12">
-                    <div class="">
-                        <h2 class="h2--public text-center mb-6 mb-lg-7">
-                            Jak to funguje
-                        </h2>
-                    </div>
+                <div class="col-12 col-md-8 offset-md-2 col-xl-10 offset-xl-1">
+                    <h2 class="h2--public mb-6 mb-lg-7">
+                        Jak to funguje
+                    </h2>
                 </div>
                 <div class="col-12 col-md-8 offset-md-2 col-xl-10 offset-xl-1">
-                    <ol class="asd">
+                    <ol class="numerical-list-lp">
                         <li>
                             <h3 class="h3--public mb-3">Zaregistrujete si své odběrné místo</h3>
                             <p>Stačí zadat základní informace o vašem odběrném místě a současném dodavateli.</p>
@@ -167,10 +155,12 @@
                                 /assets/images/landing-page/picture-man.jpg 2x"
                             title="Cesta k nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC4U"
                             alt="Cesta k nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC4U">
-                            <blockquote class="section-picture-overflow-text h3--public">
-                                &bdquo;Ochráníme vás<br>
-                                před energošmejdy&ldquo;
-                            </blockquote>
+                            <span class="section-picture-overflow-text-holder">
+                                <blockquote class="section-picture-overflow-text h3--public">
+                                    &bdquo;Ochráníme vás&nbsp;<br>
+                                    &nbsp;před energošmejdy&ldquo;
+                                </blockquote>
+                            </span>
                     </div>
                 </div>
                 <div class="col-12 col-md-8 offset-md-2 col-xl-4 offset-xl-1 order-xl-1">
@@ -181,7 +171,7 @@
                         <p>Na českém trhu poskytovatelů energií se opravdu vyznáme. PXE je komoditní burza a naše platforma PARC,
                             na které vybírají nejvýhodnější nabídky tzv. velcí hráči - firmy, města a obce, funguje již několik let.
                             Chtěli jsme stejné výhody poskytnout všem, proto jsme pro vás připravili službu PARC4U.</p>
-                        <blockquote>&bdquo;PXE reaguje na četné žádosti lidí, kteří chtěli nakupovat elektřinu a plyn přímo na burze. To nám sice stávající legislativa neumožňuje,
+                        <blockquote class="mb-1">&bdquo;PXE reaguje na četné žádosti lidí, kteří chtěli nakupovat elektřinu a plyn přímo na burze. To nám sice stávající legislativa neumožňuje,
                             ale vyhověli jsme zákazníkům pomocí neburzovní služby, která zaručuje transparentnost nákupu i praktické výhody pro fyzické odběratele a živnostníky.&ldquo;</blockquote>
                             <p>David Kučera, generální sekretář PXE</p>
                     </div>
@@ -195,8 +185,8 @@
         [supplierTemplatePower]="supplierTemplate"
     >
     </pxe-map-coverage>
-    <div class="section section--light section-help">
-        <div class="container-fluid container-fluid--max-height">    
+    <div class="container-fluid container-fluid--max-height container-fluid--light">
+        <div class="section section-help">
             <div class="row px-3">
                 <div class="col-12 col-xl-8 offset-xl-2 mb-3">
                     <h2 class="h2--public">Často kladené dotazy</h2>

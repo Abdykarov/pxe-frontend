@@ -159,7 +159,7 @@ $headings-font-weight:             400;
 $headings-margin-bottom:           ( $spacer * 1.5 );
 
 $blockquote-small-color:           $gray-300 !default;
-$blockquote-font-size:             ( $font-size-base * 1.231 ) !default;
+$blockquote-font-size:             $font-size-base !default;
 
 $paragraph-margin-bottom:          ( $spacer * 2 );
 
@@ -314,8 +314,11 @@ $tip-min-height-big:                180px;
 $landing-page-video-content-height-mobil:            180px;
 $landing-page-video-content-height-tablet:           340px;
 $landing-page-video-content-height-desktop:          680px;
-$landing-page-picture-height-mobile:                 320px;
-$landing-page-picture-height-tablet:                 680px;
+$landing-page-picture-bg-height-mobile:              500px;
+$landing-page-picture-bg-height-tablet:              830px;
+$landing-page-picture-bg-height-laptop:              720px;
+$landing-page-picture-bg-height-desktop:             1160px;
+$numerical-list-lp-numb-size:                        26px;
 
 
 // Drop zone
