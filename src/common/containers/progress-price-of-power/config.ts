@@ -1,4 +1,6 @@
-export const conf =  [
+import { IInputDataLineGraph } from 'src/common/ui/graphs/line-graph/models/line-graph.models';
+
+export const conf: IInputDataLineGraph[] = [
     {
         'date': '2017-12-28',
         'value': 37.33,

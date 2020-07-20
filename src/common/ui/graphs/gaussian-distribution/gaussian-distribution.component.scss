@@ -9,14 +9,14 @@
 
 .gaussian-distribution {
 	position: relative;
-	z-index: 600000;
+	z-index: $zindex-svg;
 
 	svg {
 		overflow: visible;
 
 		.graph {
 			fill: $light;
-			stroke: #000;
+			stroke: $gray-1000;
 			stroke-width: 0;
 			stroke-linejoin: round;
 		}

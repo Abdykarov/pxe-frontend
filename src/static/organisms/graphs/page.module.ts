@@ -1,3 +1,4 @@
+import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
@@ -15,6 +16,7 @@ import { GraphsPageComponent } from 'src/static/organisms/graphs/page';
         GraphsPageComponent,
     ],
     imports: [
+        BreadcrumbModule,
         CommonModule,
         GraphsModule,
         ProgressPriceOfPowerModule,

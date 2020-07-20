@@ -18,7 +18,7 @@
         ></lnd-line-graph>
     </div>
     <div [class.invisible]="!diff"
-         class="col-12 text-center mb-2 progress-price-of-power--footer">
+         class="col-12 text-center mb-2 progress-price-of-power__overview">
         {{currValue}} CZK/MHw&nbsp;&nbsp;<lnd-indicator *ngIf="!!diff" [value]="diff"></lnd-indicator>
     </div>
 </div>

@@ -13,6 +13,7 @@ import * as d3 from 'd3';
 import * as R from 'ramda';
 
 import { AbstractGraphComponent } from 'src/common/ui/graphs/abstract.graph.component';
+import { GAUSSIAN_CONSTS } from 'src/common/ui/graphs/gaussian-distribution/gaussian-distribution.config';
 import { IDataGaussianDistribution } from 'src/common/ui/graphs/gaussian-distribution/models/gaussian-distribution.models';
 import { operateNestedProperty } from 'src/common/utils';
 
@@ -94,20 +95,20 @@ export class GaussianDistributionComponent extends AbstractGraphComponent implem
             .datum(this.data)
             .attr('d', d3.line()
                 .curve(d3.curveCardinal)
-                .x((d: IDataGaussianDistribution) => x(d.value))
-                .y((d: IDataGaussianDistribution) => y(d.frequency)),
+                .x((d: any) => x(d.value))
+                .y((d: any) => y(d.frequency)),
             );
 
         this.svg.append('text')
             .attr('class', 'text-start')
             .attr('x', x(minVal))
-            .attr('y', this.height + 30)
+            .attr('y', this.height + GAUSSIAN_CONSTS.ADD_HEIGHT)
             .text(this.leftTittle);
 
         this.svg.append('text')
             .attr('class', 'text-end')
             .attr('x', x(maxVal))
-            .attr('y', this.height + 30)
+            .attr('y', this.height + GAUSSIAN_CONSTS.ADD_HEIGHT)
             .text(this.rightTittle);
 
 
@@ -124,13 +125,13 @@ export class GaussianDistributionComponent extends AbstractGraphComponent implem
             .attr('y', y(maxFreq));
 
         textWrapper.append('tspan')
-            .attr('x', x(this.active.value) + 10)
-            .attr('dy', '1.2em')
+            .attr('x', x(this.active.value) + GAUSSIAN_CONSTS.TEXT_MARGIN)
+            .attr('dy', GAUSSIAN_CONSTS.TEXT_HEIGHT)
             .text(this.titleText);
 
         textWrapper.append('tspan')
-            .attr('x', x(this.active.value) + 10)
-            .attr('dy', '1.2em')
+            .attr('x', x(this.active.value) + GAUSSIAN_CONSTS.TEXT_MARGIN)
+            .attr('dy', GAUSSIAN_CONSTS.TEXT_HEIGHT)
             .text(this.active.frequency);
 
     }

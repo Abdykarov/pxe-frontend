@@ -1,11 +1,11 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 import * as d3 from 'd3';
 import * as R from 'ramda';
 
 import { conf } from 'src/common/containers/progress-price-of-power/config';
 import { countIndicator } from 'src/common/utils';
-import { IDataLineGraph } from 'src/common/ui/graphs/line-graph/models/line-graph.models';
+import { IDataLineGraph, IInputDataLineGraph } from 'src/common/ui/graphs/line-graph/models/line-graph.models';
 
 @Component({
     selector: 'pxe-progress-price-of-power',
@@ -21,7 +21,9 @@ export class ProgressPriceOfPowerComponent {
     public diff: number;
 
     constructor() {
-        this.data = R.forEach((val: IDataLineGraph) => val.date = d3.timeParse('%Y-%m-%d')(val.date))(conf);
+        this.data = R.forEach(
+            (val: IInputDataLineGraph) => val.date = <any>d3.timeParse('%Y-%m-%d')(val.date),
+        )(conf);
     }
 
     public mouseOut = () => {
@@ -29,17 +31,19 @@ export class ProgressPriceOfPowerComponent {
     }
 
     public mouseMove = (newValue: IDataLineGraph) => {
-        const currIndex = R.findIndex(
-            (val: IDataLineGraph) => val.date.getTime() ===  newValue.date.getTime(),
+        const currIndex: number = R.pipe(
+            R.filter((val: IDataLineGraph) => val.date.getTime() ===  newValue.date.getTime()),
+            R.head,
+            R.prop('value'),
         )(this.data);
 
-        this.currValue = this.data[currIndex].value;
-
-        if ( currIndex !== 0) {
-            this.prevValue = this.data[currIndex - 1].value;
-            this.diff = countIndicator(this.currValue, this.prevValue);
-        } else {
-            this.prevValue = null;
-        }
+        console.log('___');
+        console.log(currIndex);
+        // if (currIndex !== 0) {
+        //     this.prevValue = this.data[currIndex - 1].value;
+        //     this.diff = countIndicator(this.currValue, this.prevValue);
+        // } else {
+        //     this.prevValue = null;
+        // }
     }
 }

@@ -12,23 +12,19 @@ import {
 import { fromEvent } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { DEFAULT_GRAPH_VALUES } from 'src/common/ui/graphs/abstract.graph.config';
 import { IMargin } from 'src/common/ui/graphs/line-graph/models/line-graph.models';
 
 export abstract class AbstractGraphComponent extends AbstractComponent implements OnInit {
 
     @Input()
-    public height = 400;
+    public height = DEFAULT_GRAPH_VALUES.HEIGHT;
 
     @Input()
-    public margin: IMargin = {
-        top: 0,
-        right: 60,
-        bottom: 80,
-        left: 50,
-    };
+    public margin: IMargin = DEFAULT_GRAPH_VALUES.MARGIN;
 
     @Input()
-    public reservedValueInYAxis = 8;
+    public reservedValueInYAxis = DEFAULT_GRAPH_VALUES.RESERVED_VALUE_IN_Y_AXIS;
 
     @Input()
     public titleText: string;
@@ -39,7 +35,7 @@ export abstract class AbstractGraphComponent extends AbstractComponent implement
     @Output()
     public mouseOut: EventEmitter<any> = new EventEmitter<any>();
 
-    public width = 900;
+    public width = DEFAULT_GRAPH_VALUES.WIDTH;
 
     public resizeEvent$ = fromEvent(window, 'resize')
         .pipe(

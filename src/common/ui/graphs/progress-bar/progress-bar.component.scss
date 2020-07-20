@@ -9,7 +9,7 @@
 
 .progress-bar {
 	position: relative;
-	z-index: 600000;
+	z-index: $zindex-svg;
 
 	svg {
 		overflow: visible;

@@ -12,10 +12,8 @@ import {
 import * as d3 from 'd3';
 
 import { AbstractGraphComponent } from 'src/common/ui/graphs/abstract.graph.component';
-import {
-    IDataLineGraph,
-    IMargin,
-} from 'src/common/ui/graphs/line-graph/models/line-graph.models';
+import { LINE_CONSTS } from 'src/common/ui/graphs/line-graph/line-graph.config';
+import { IDataLineGraph } from 'src/common/ui/graphs/line-graph/models/line-graph.models';
 
 @Component({
     selector: 'lnd-line-graph',
@@ -32,10 +30,10 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
     public bisectDate = d3.bisector((d: IDataLineGraph) => d.date).left;
 
     @Input()
-    public data: IDataLineGraph;
+    public data: IDataLineGraph[];
 
     @Input()
-    public dateFormatter = d3.timeFormat('%d.%m.%Y');
+    public dateFormatter = d3.timeFormat('%d. %m. %Y');
 
     @Input()
     public formatValue = d3.format(',');
@@ -43,7 +41,7 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
     @Input()
     public locale = d3.timeFormatLocale({
         'dateTime': '%A,%e.%B %Y, %X',
-        'date': '%-d.%-m.%Y',
+        'date': '%-d. %-m. %Y',
         'time': '%H:%M:%S',
         'periods': ['AM', 'PM'],
         'days': ['neděle', 'pondělí', 'úterý', 'středa', 'čvrtek', 'pátek', 'sobota'],
@@ -109,8 +107,8 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
             .range([ 0, this.width ]);
 
         const line = d3.line()
-            .x((d: IDataLineGraph) => xScale(d.date))
-            .y((d: IDataLineGraph) => yScale(d.value));
+            .x((d: any) => xScale(d.date))
+            .y((d: any) => yScale(d.value));
 
         const svg = d3.select(this.svgWrapper.nativeElement).append('svg')
             .attr('width', this.width + this.margin.left + this.margin.right)
@@ -121,7 +119,7 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
         svg.append('g')
             .attr('class', 'x axis')
             .attr('transform', `translate(0, ${this.height})`)
-            .call(d3.axisBottom(xScale).tickSize(0).tickPadding(20).tickFormat(multiFormat))
+            .call(d3.axisBottom(xScale).tickSize(0).tickPadding(LINE_CONSTS.PADDING).tickFormat(multiFormat))
             .call(
                 g =>  g.selectAll('.tick:not(:first-of-type) line').clone()
                     .attr('y2', -this.height)
@@ -130,12 +128,12 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
 
         svg.append('g')
             .attr('class', 'x axis')
-            .call(d3.axisBottom(xScale).tickSize(0).tickPadding(0).tickFormat(''));
+            .call(d3.axisBottom(xScale).tickSize(0).tickPadding(0).tickFormat(<any>''));
 
         svg.append('g')
             .attr('class', 'y axis')
             .attr('transform', `translate(${this.width}, 0)`)
-            .call(d3.axisRight(yScale).tickSize(0).tickPadding(0).tickFormat(''));
+            .call(d3.axisRight(yScale).tickSize(0).tickPadding(0).tickFormat(<any>''));
 
         svg.append('g')
             .attr('class', 'y axis')
@@ -144,7 +142,7 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
         svg.append('path')
             .datum(this.data)
             .attr('class', 'line')
-            .attr('d', line);
+            .attr('d', <any>line);
 
         if (this.titleText) {
             svg.append('text')
@@ -206,7 +204,7 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
                 i = that.bisectDate(that.data, x0, 1),
                 d0: IDataLineGraph = that.data[i - 1],
                 d1: IDataLineGraph = that.data[i],
-                d: IDataLineGraph = x0 - <any>(d0).date > <any>(d1).date - x0 ? d1 : d0;
+                d: IDataLineGraph = <any>x0 - <any>(d0).date > <any>(d1).date - <any>x0 ? d1 : d0;
             focus.attr('transform', `translate(${xScale(d.date)}, 0)`);
             const coordinates = d3.mouse(this);
             const mouseY = coordinates[1];
@@ -216,7 +214,7 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
 
             focus.select('.tooltip--value')
                 .attr('transform', `translate(-80, ${(mouseY - 70)})`)
-                .text(that.formatValue(d.value));
+                .text(that.formatValue(d.value).replace('.', ','));
 
             focus.select('.tooltip-unit')
                 .attr('transform', `translate(-80, ${(mouseY - 50)})`)

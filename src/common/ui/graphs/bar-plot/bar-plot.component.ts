@@ -80,7 +80,7 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
         u
             .enter()
             .append('rect')
-            .merge(u)
+            .merge(<any>u)
             .attr('x', (d: IDataBarPlot) => x(d.label))
             .attr('y', (d: IDataBarPlot) => y(d.value))
             .attr('width', x.bandwidth())
@@ -90,7 +90,7 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
             .on('mousemove', mouseMove)
             .on('mouseout', mouseOut);
 
-        const widthOfColumn = svg.select('.column').attr('width');
+        const widthOfColumn: number = parseInt(svg.select('.column').attr('width'), 10);
         const withoutTransformLabel = widthOfColumn > this.limitForTransformLabel;
 
         u

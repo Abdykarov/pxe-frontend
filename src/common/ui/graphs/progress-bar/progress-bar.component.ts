@@ -1,10 +1,8 @@
 import {
     Component,
     ElementRef,
-    EventEmitter,
     Input,
     OnInit,
-    Output,
     ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
@@ -104,7 +102,7 @@ export class ProgressBarComponent extends AbstractGraphComponent implements OnIn
 
         g.append('path')
             .attr('class', `${this.customClassOfMainCirce}`)
-            .attr('d', this.arcGenerator(arcInnerRadius, arcOuterRadius, this.cornerRadius)({endAngle: this.tau}));
+            .attr('d', this.arcGenerator(arcInnerRadius, arcOuterRadius, this.cornerRadius)(<any>{endAngle: this.tau}));
 
         g.append('path')
             .attr('class', `${this.customClassOfProgressCirce}`)

@@ -9,11 +9,11 @@
 
 .line-graph {
 	position: relative;
-	z-index: 600000;
+	z-index: $zindex-svg;
 
 	svg {
 		overflow: visible;
-		fill: #2b4762;
+		fill: $font-text;
 
 		path {
 			color: $gray-200;
@@ -21,7 +21,7 @@
 
 		.line {
 			fill: none;
-			stroke: $gradient-blue-dark;
+			stroke: $secondary-dark;
 			stroke-width: 3;
 		}
 
@@ -37,7 +37,7 @@
 
 		.axis {
 			color: $gray-400;
-			margin: 20px;
+			margin: $spacer;
 		}
 
 		.tick {
@@ -51,7 +51,7 @@
 			opacity: .3;
 
 			&--polygon {
-				fill: #ffffff;
+				fill: $gray-000;
 			}
 
 			&--date {
@@ -59,13 +59,13 @@
 			}
 
 			&--rect {
-				fill: #ffffff;
+				fill: $gray-000;
 				stroke: $gray-100;
 			}
 
 			&--value {
 				font-size: $h1-font-size;
-				fill: $gradient-blue-dark;
+				fill: $secondary-dark;
 			}
 
 			&--state {

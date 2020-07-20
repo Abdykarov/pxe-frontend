@@ -5,6 +5,11 @@ export interface IMargin {
     left: number;
 }
 
+export interface IInputDataLineGraph {
+    date: string;
+    value: number;
+}
+
 export interface IDataLineGraph {
     date: Date;
     value: number;
