@@ -1,14 +1,14 @@
-{
-    "/api": {
-        "target": "https://pxeparc-preview.lnd.bz",
-        "secure": false,
+[
+    {
+        "context": "/api",
         "logLevel": "debug",
-        "changeOrigin": true
+        "target": "http://localhost:4203",
+        "secure": false
     },
-    "/graphql": {
-        "target": "https://pxeparc-preview.lnd.bz",
+    {
+        "context": "/graphql",
         "logLevel": "debug",
-        "secure": false,
-        "changeOrigin": true
+        "target": "http://localhost:4203",
+        "secure": false
     }
-}
+]
