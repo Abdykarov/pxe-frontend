@@ -280,6 +280,8 @@ export const formFields: IForm = {
             bsDateMinDate: errorFieldMessages.date.expirationDateInPast,
             expirationDateInPast: errorFieldMessages.date.expirationDateInPast,
             isInTerminateInterval: errorFieldMessages.expirationDate.isInTerminateInterval,
+            expirationAtLeast30DaysBeforeNewDelivery: errorFieldMessages.expirationDate.expirationAtLeast30DaysBeforeNewDelivery,
+            notEnoughDaysToProcessContract: errorFieldMessages.expirationDate.notEnoughDaysToProcessContract,
         },
         expirationDatePower: {
             required: errorFieldMessages.expirationDate.requiredPower,
@@ -287,6 +289,8 @@ export const formFields: IForm = {
             bsDateMinDate: errorFieldMessages.date.expirationDateInPast,
             expirationDateInPast: errorFieldMessages.date.expirationDateInPast,
             isInTerminateInterval: errorFieldMessages.expirationDate.isInTerminateInterval,
+            expirationAtLeast30DaysBeforeNewDelivery: errorFieldMessages.expirationDate.expirationAtLeast30DaysBeforeNewDelivery,
+            notEnoughDaysToProcessContract: errorFieldMessages.expirationDate.notEnoughDaysToProcessContract,
         },
         contractEndTypeId: {
             required: errorFieldMessages.contractEndTypeId.required,
