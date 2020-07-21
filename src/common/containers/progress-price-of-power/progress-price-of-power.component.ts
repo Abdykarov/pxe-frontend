@@ -26,24 +26,22 @@ export class ProgressPriceOfPowerComponent {
         )(conf);
     }
 
+    public mouseIn = () => {
+        this.prevValue = null;
+        this.diff = 0;
+    }
+
     public mouseOut = () => {
-        this.diff = null;
+        this.prevValue = null;
+        this.diff = 0;
     }
 
     public mouseMove = (newValue: IDataLineGraph) => {
-        const currIndex: number = R.pipe(
-            R.filter((val: IDataLineGraph) => val.date.getTime() ===  newValue.date.getTime()),
-            R.head,
-            R.prop('value'),
+        const currIndex = R.findIndex(
+            (val: IDataLineGraph) => val.date.getTime() ===  newValue.date.getTime(),
         )(this.data);
-
-        console.log('___');
-        console.log(currIndex);
-        // if (currIndex !== 0) {
-        //     this.prevValue = this.data[currIndex - 1].value;
-        //     this.diff = countIndicator(this.currValue, this.prevValue);
-        // } else {
-        //     this.prevValue = null;
-        // }
+        this.currValue = this.data[currIndex].value;
+        this.prevValue = this.data[currIndex - 1].value;
+        this.diff = countIndicator(this.currValue, this.prevValue);
     }
 }

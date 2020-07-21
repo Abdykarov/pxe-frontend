@@ -137,7 +137,7 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
 
         svg.append('g')
             .attr('class', 'y axis')
-            .call(d3.axisLeft(yScale).tickSize(0).tickPadding(20));
+            .call(d3.axisLeft(yScale).tickSize(0).tickPadding(LINE_CONSTS.PADDING));
 
         svg.append('path')
             .datum(this.data)
@@ -147,7 +147,7 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
         if (this.titleText) {
             svg.append('text')
                 .attr('x', (this.width / 2))
-                .attr('y', -10)
+                .attr('y', LINE_CONSTS.TITLE_TEXT_MARGIN_BOTTOM)
                 .attr('class', 'title')
                 .text(this.titleText);
         }
@@ -158,33 +158,33 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
 
         focus.append('rect')
             .attr('class', 'tooltip')
-            .attr('width', 50)
+            .attr('width', LINE_CONSTS.TOOLTIP_BACKGROUND_WIDTH)
             .attr('height', this.height)
-            .attr('x', -25)
+            .attr('x', -(LINE_CONSTS.TOOLTIP_BACKGROUND_WIDTH / 2))
             .attr('y', 0);
 
         focus.append('rect')
             .attr('class', 'tooltip--rect')
-            .attr('width', 240)
-            .attr('height', 100)
-            .attr('x', -120)
-            .attr('rx', 4)
-            .attr('ry', 4);
+            .attr('width', LINE_CONSTS.TOOLTIP_WIDTH)
+            .attr('height', LINE_CONSTS.TOOLTIP_HEIGHT)
+            .attr('x', -LINE_CONSTS.TOOLTIP_WIDTH / 2)
+            .attr('rx', LINE_CONSTS.TOOLTIP_RADIUS)
+            .attr('ry', LINE_CONSTS.TOOLTIP_RADIUS);
 
         focus.append('text')
             .attr('class', 'tooltip--state')
-            .attr('width', 240)
-            .attr('height', 30);
+            .attr('width', LINE_CONSTS.TOOLTIP_WIDTH)
+            .attr('height', LINE_CONSTS.TOOLTIP_LABEL_HEIGHT);
 
         focus.append('text')
             .attr('class', 'tooltip--value')
-            .attr('width', 240)
-            .attr('height', 30);
+            .attr('width', LINE_CONSTS.TOOLTIP_WIDTH)
+            .attr('height', LINE_CONSTS.TOOLTIP_LABEL_HEIGHT);
 
         focus.append('text')
             .attr('class', 'tooltip-unit')
-            .attr('width', 240)
-            .attr('height', 30);
+            .attr('width', LINE_CONSTS.TOOLTIP_WIDTH)
+            .attr('height', LINE_CONSTS.TOOLTIP_LABEL_HEIGHT);
 
         focus.append('polygon')
             .attr('class', 'tooltip--polygon')
@@ -193,6 +193,11 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
         focus.append('path')
             .attr('class', 'tooltip--triangle')
             .attr('d', 'M-10,0 L0,15 L10,0');
+
+        function mouseIn() {
+            focus.style('display', null);
+            that.mouseIn.emit(this);
+        }
 
         function mouseOut() {
             focus.style('display', 'none');
@@ -209,20 +214,20 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
             const coordinates = d3.mouse(this);
             const mouseY = coordinates[1];
             focus.select('.tooltip--state')
-                .attr('transform', `translate(-80, ${(mouseY - 110)})`)
+                .attr('transform', `translate(${LINE_CONSTS.TOOLTIP_MARGIN_LABELS}, ${(mouseY - LINE_CONSTS.TOOLTIP_LABEL_MARGIN_STATE)})`)
                 .text(that.tooltipState + that.dateFormatter(d.date));
 
             focus.select('.tooltip--value')
-                .attr('transform', `translate(-80, ${(mouseY - 70)})`)
+                .attr('transform', `translate(${LINE_CONSTS.TOOLTIP_MARGIN_LABELS}, ${(mouseY - LINE_CONSTS.TOOLTIP_LABEL_MARGIN_VALUE)})`)
                 .text(that.formatValue(d.value).replace('.', ','));
 
             focus.select('.tooltip-unit')
-                .attr('transform', `translate(-80, ${(mouseY - 50)})`)
+                .attr('transform', `translate(${LINE_CONSTS.TOOLTIP_MARGIN_LABELS}, ${(mouseY - LINE_CONSTS.TOOLTIP_LABEL_MARGIN_UNIT)})`)
                 .text(that.unit);
 
-            focus.select('.tooltip--rect').attr('transform', `translate(0,${(mouseY - 130)})`);
-            focus.select('.tooltip--polygon').attr('transform', `translate(0, ${(mouseY + -31)})`);
-            focus.select('.tooltip--triangle').attr('transform', `translate(0, ${(mouseY + -31)})`);
+            focus.select('.tooltip--rect').attr('transform', `translate(0,${(mouseY - LINE_CONSTS.TOOLTIP_Y_MARGIN)})`);
+            focus.select('.tooltip--polygon').attr('transform', `translate(0, ${(mouseY + LINE_CONSTS.TRIANGLE_Y_MARGIN)})`);
+            focus.select('.tooltip--triangle').attr('transform', `translate(0, ${(mouseY + LINE_CONSTS.TRIANGLE_Y_MARGIN)})`);
             that.mouseMove.emit({...d});
         }
 
@@ -230,8 +235,9 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
             .attr('class', 'overlay')
             .attr('width', this.width)
             .attr('height', this.height)
-            .on('mouseover', () => focus.style('display', null))
+            .on('mouseover', mouseIn)
             .on('mouseout', mouseOut)
             .on('mousemove', mousemove);
+
     }
 }

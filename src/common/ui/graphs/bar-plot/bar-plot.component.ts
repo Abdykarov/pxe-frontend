@@ -1,10 +1,8 @@
 import {
     Component,
     ElementRef,
-    EventEmitter,
     Input,
     OnInit,
-    Output,
     ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
@@ -13,6 +11,7 @@ import * as d3 from 'd3';
 import * as R from 'ramda';
 
 import { AbstractGraphComponent } from 'src/common/ui/graphs/abstract.graph.component';
+import { BAR_PLOT_CONSTS } from 'src/common/ui/graphs/bar-plot/bar-plot.config';
 import { IDataBarPlot } from 'src/common/ui/graphs/bar-plot/models/bar-plot.models';
 
 @Component({
@@ -27,7 +26,7 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
     public svgWrapper: ElementRef;
 
     @Input()
-    public limitForTransformLabel = 60;
+    public limitForTransformLabel = BAR_PLOT_CONSTS.LIMIT_FOR_ROTATION_LABEL_TEXT;
 
     @Input('data')
     set setData(data: IDataBarPlot[]) {
@@ -53,7 +52,6 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
     protected initGraph(): void {
         const parentRect = this.hostElement.nativeElement.parentNode.getBoundingClientRect();
         this.width = parentRect.width - (this.margin.left + this.margin.right);
-        const that = this;
 
         const svg = d3.select(this.svgWrapper.nativeElement)
             .append('svg')
@@ -62,10 +60,27 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
             .append('g')
             .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
 
+        const mouseMove = (data, index, elemetns) => {
+            const elementHovered = elemetns[index];
+            const id = d3.select(elementHovered).attr('id');
+            svg.selectAll(`[id="${id}"]`)
+                .classed('hover', true);
+
+            this.mouseMove.emit(elementHovered);
+        };
+
+        const mouseOut = (data, index, elemetns) => {
+            const elementHovered = elemetns[index];
+            const id = d3.select(elementHovered).attr('id');
+            svg.selectAll(`[id="${id}"]`)
+                .classed('hover', false);
+            this.mouseOut.emit(elementHovered);
+        };
+
         const x = d3.scaleBand()
             .range([ 0, this.width ])
             .domain(this.data.map((d: IDataBarPlot) => d.label))
-            .padding(0.05);
+            .padding(BAR_PLOT_CONSTS.PADDING_BETWEEN_ROWS);
 
         const y = d3.scaleLinear()
             .domain([
@@ -96,8 +111,9 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
         u
             .enter()
             .append('text')
-            .attr('x', (d: IDataBarPlot) => x(d.label) + (withoutTransformLabel ? 15 : (widthOfColumn / 2)))
-            .attr('y', this.height - 25)
+            .attr('x', (d: IDataBarPlot) => x(d.label) + (withoutTransformLabel
+                ? BAR_PLOT_CONSTS.ROTATION_LABEL_MARGIN : (widthOfColumn / 2)))
+            .attr('y', this.height - BAR_PLOT_CONSTS.COL_MARGIN_BOTTOM)
             .attr('class', 'label')
             .attr('text-anchor', () => (!withoutTransformLabel ? 'middle' : ''))
             .attr('writing-mode', () => (!withoutTransformLabel ? 'tb' : ''))
@@ -107,27 +123,10 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
             .on('mouseout', mouseOut);
 
         svg.append('g')
-            .attr('transform', `translate(0,${(this.height + 20)})`)
+            .attr('transform', `translate(0,${(this.height + BAR_PLOT_CONSTS.AXIS_MARGIN_TOP)})`)
             .attr('class', 'x axis')
             .attr('writing-mode', () => (!withoutTransformLabel ? 'tb' : ''))
-            .call(d3.axisBottom(x).tickSize(0).tickPadding(10))
+            .call(d3.axisBottom(x).tickSize(0).tickPadding(BAR_PLOT_CONSTS.AXIS_PADDING))
             .call(g => g.select('.domain').remove());
-
-        function mouseMove() {
-            const elementHovered = this;
-            const id = d3.select(elementHovered).attr('id');
-            svg.selectAll(`[id="${id}"]`)
-                .classed('hover', true);
-
-            that.mouseMove.emit(elementHovered);
-        }
-
-        function mouseOut() {
-            const elementHovered = this;
-            const id = d3.select(elementHovered).attr('id');
-            svg.selectAll(`[id="${id}"]`)
-                .classed('hover', false);
-            that.mouseOut.emit(elementHovered);
-        }
     }
 }

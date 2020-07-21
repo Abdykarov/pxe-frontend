@@ -6,6 +6,7 @@ import {
     ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
+import { Arc, DefaultArcObject } from 'd3';
 
 import * as d3 from 'd3';
 
@@ -54,7 +55,7 @@ export class ProgressBarComponent extends AbstractGraphComponent implements OnIn
         super();
     }
 
-    private arcTween = (newAngle, arcGenerator) => (d) => {
+    private arcTween = (newAngle: any, arcGenerator: Function) => (d: Arc<any, DefaultArcObject>) => {
         const tau = 2 * Math.PI;
         const customInterpolate = d3.interpolate(d.endAngle, newAngle);
         return (t) => {

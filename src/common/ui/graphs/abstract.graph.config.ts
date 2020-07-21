@@ -1,4 +1,4 @@
-export const DEFAULT_GRAPH_VALUES = {
+export const ABSTRACT_GRAPH_VALUES = {
     HEIGHT: 400,
     MARGIN: {
         top: 0,
