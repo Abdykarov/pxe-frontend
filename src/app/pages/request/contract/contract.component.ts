@@ -25,6 +25,7 @@ import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
 
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
 import { IQuestion } from 'src/app/services/model/faq.model';
+import { AddressWhispererComponent } from 'src/common/containers/address-whisperer/address-whisperer.component';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import {
     CommodityType,
@@ -74,8 +75,14 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
     @ViewChild('pdfContract')
     public pdfContract: PdfJsViewerComponent;
 
-    @ViewChild('pdfStopProlongation')
     public pdfStopProlongation: PdfJsViewerComponent;
+
+    @ViewChild('pdfStopProlongation')
+    set addressWhisperer(pdfStopProlongation: PdfJsViewerComponent) {
+        if (pdfStopProlongation) {
+            this.pdfStopProlongation = pdfStopProlongation;
+        }
+    }
 
     public commodityType = CommodityType;
     public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
@@ -176,10 +183,11 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
             this.pdfContract.downloadFileName = this.documentTypeContract.filename;
             this.pdfContract.refresh();
         }
+
         if (this.pdfStopProlongation) {
-            this.pdfContract.pdfSrc = this.documentTypeUnsetProlongation.file;
-            this.pdfContract.downloadFileName = this.documentTypeUnsetProlongation.filename;
-            this.pdfContract.refresh();
+            this.pdfStopProlongation.pdfSrc = this.documentTypeUnsetProlongation.file;
+            this.pdfStopProlongation.downloadFileName = this.documentTypeUnsetProlongation.filename;
+            this.pdfStopProlongation.refresh();
         }
     }
 
