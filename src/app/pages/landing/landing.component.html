@@ -26,7 +26,9 @@
                         </p>
                         <lnd-button
                             label="Založit účet"
-                            type="primary">
+                            type="primary"
+                            *ngIf="!(authService.currentUserValue | isLogged)"
+                            (action)="scrollToNewSubscription()">
                         </lnd-button>
                     </div>
                 </div>
@@ -88,6 +90,8 @@
                             S PARC4U mají uživatelé také jistotu, že se vyhnou tzv. energošmejdům, nepoctivým obchodníkům s energiemi, kteří výhody sice slibují,
                             ale nakonec nabídnou jen nevýhodné smlouvy se skrytými poplatky.</p>
                         <lnd-button
+                            *ngIf="!(authService.currentUserValue | isLogged)"
+                            (action)="scrollToNewSubscription()"
                             label="Založit účet"
                             type="primary">
                         </lnd-button>
