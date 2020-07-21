@@ -151,6 +151,12 @@ export const formFields: IForm = {
                 Validators.required,
             ],
         ],
+        annualConsumptionUnit: [
+            UNIT_OF_PRICES.KWH,
+            [
+                Validators.required,
+            ],
+        ],
         annualConsumption: [
             null,
             [
@@ -311,8 +317,8 @@ export const supplyPointDetailAllowedFields: ICommodityTypeFields = {
         'id',
         'commodityType',
         'name',
-        'annualConsumptionVT',
-        'annualConsumptionVTUnit',
+        'annualConsumption',
+        'annualConsumptionUnit',
     ],
 };
 
@@ -346,8 +352,8 @@ export const supplyPointAllowedFields: ICommodityTypeFields = {
         'name',
         'eic',
         'address',
-        'annualConsumptionVT',
-        'annualConsumptionVTUnit',
+        'annualConsumption',
+        'annualConsumptionUnit',
         'expirationDate',
         'contractEndTypeId',
         'timeToContractEnd',

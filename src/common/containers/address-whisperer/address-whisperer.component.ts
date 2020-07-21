@@ -63,7 +63,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
 
     public static readonly UNIQUE_FIELD_NAME_END = '_not_found_unique';
 
-    @ViewChild('lndSelect')
+    @ViewChild('lndSelect', { static: true })
     public lndSelect: SelectComponent;
 
     @ViewChild('selectWrapper')

@@ -3,7 +3,7 @@ import { ISupplier } from 'src/common/graphql/models/supply.model';
 import { IQuestion } from 'src/app/services/model/faq.model';
 
 export interface IOffer {
-    id: number;
+    id: string;
     supplier?: ISupplier;
     status?: string;
     commodityType: string;

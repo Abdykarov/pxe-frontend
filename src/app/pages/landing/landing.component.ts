@@ -59,13 +59,13 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 })
 export class LandingComponent extends AbstractFaqComponent implements AfterViewInit {
 
-    @ViewChild('subscription')
+    @ViewChild('subscription', { static: true })
     public subscriptionElement: ElementRef;
 
-    @ViewChild('mapCoverage')
+    @ViewChild('mapCoverage', { static: true })
     public mapCoverageElement: ElementRef;
 
-    @ViewChild('supplierChange')
+    @ViewChild('supplierChange', { static: true })
     public supplierChangeElement: ElementRef;
 
     public frequentedQuestions: IAccordionItem[] = [];

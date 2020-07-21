@@ -85,8 +85,8 @@ export const findSupplierOffersQuery = gql`
 `;
 
 export const findSupplyPointOffersQuery = gql`
-    query findSupplyPointOffers($ean: String!){
-        findSupplyPointOffers(ean: $ean){
+    query findSupplyPointOffers($identificationNumber: String!){
+        findSupplyPointOffers(identificationNumber: $identificationNumber){
             ...offerFragment
         }
     }

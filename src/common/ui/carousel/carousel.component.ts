@@ -27,7 +27,7 @@ export class CarouselComponent extends AbstractComponent {
     @Output()
     public activeSlideChange: EventEmitter<any> = new EventEmitter<any>();
 
-    @ViewChild('carousel') carousel: any;
+    @ViewChild('carousel', { static: true }) carousel: any;
 
     setPause(): void {
         this.carousel.noPause = false;

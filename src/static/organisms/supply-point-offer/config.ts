@@ -30,7 +30,7 @@ export const offerConfig: IOffer = {
     deliveryFrom: '',
     deliveryTo: '',
     deliveryLength: 1,
-    id: 0,
+    id: '0',
     name: 'Bohemia plus',
     permanentPaymentPrice: 823.00,
     priceGas: 0,

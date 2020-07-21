@@ -42,7 +42,7 @@ export class ContractService {
         private apollo: Apollo,
     ) {}
 
-    public saveContract = (offerId: number, supplyPointId: string) => this.apollo
+    public saveContract = (offerId: string, supplyPointId: string) => this.apollo
         .mutate<any>({
             mutation: saveContractMutation,
             variables: {
@@ -121,12 +121,12 @@ export class ContractService {
         })
 
     // docasny reseni pred sync s BE
-    public loadSupplyPointDetail = (offerId: number, supplyPoint: ISupplyPoint, cache, data) => {
+    public loadSupplyPointDetail = (offerId: string, supplyPoint: ISupplyPoint, cache, data) => {
         const { findSupplyPointOffers } = cache.readQuery(
             {
                 query: findSupplyPointOffersQuery,
                 variables: {
-                    ean: supplyPoint.ean,
+                    identificationNumber: supplyPoint.identificationNumber,
                 },
             });
 

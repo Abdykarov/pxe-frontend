@@ -48,9 +48,9 @@ type ContractTerms {
     content: String
 }
 
-type ContractWithNameAndSupplyPointEan {
+type ContractWithNameAndSupplyPoint {
     contract: Contract!
-    ean: String!
+    identificationNumber: String!
     name: String!
 }
 
@@ -87,7 +87,7 @@ type Mutation {
     sendContractConfirmationSms(contractId: ID!): Boolean
     sendUnregisterSms: Boolean
     setContractProlongation(contractId: ID!, prolong: Boolean!): Boolean
-    signContract(contractId: Int!, smsCode: String): Boolean
+    signContract(contractId: ID!, smsCode: String): Boolean
     unsetContractProlongation(contractId: ID!, smsCode: String!): Boolean
     updateGasOffer(gasAttributes: OfferInputGasAttributes!, offer: OfferInput!, offerId: ID!): Offer
     updateGasSupplyPoint(gasAttributes: SupplyPointInputGasAttributes!, supplyPoint: SupplyPointInput!, supplyPointId: ID!): Int
@@ -107,6 +107,7 @@ type Offer {
     commodityType: CommodityType!
     consumptionPriceNT: Float
     consumptionPriceVT: Float
+    consumptionPriceGas: Float
     deliveryFrom: Date
     deliveryLength: Int!
     deliveryTo: Date
@@ -140,8 +141,8 @@ type Offer {
     validTo: Date!
 }
 
-type PaginatedContractsWithNameAndSupplyPointEan {
-    page: [ContractWithNameAndSupplyPointEan!]!
+type PaginatedContractsWithNameAndSupplyPoint {
+    page: [ContractWithNameAndSupplyPoint!]!
     totalRecords: Int!
 }
 
@@ -180,17 +181,17 @@ type Query {
     findCodelistsByTypes(locale: String, types: [String]!): [CodelistMap]!
     findSupplierDocumentsByComodity(commodityType: CommodityType, supplierId: Int): [SupplierSampleDocument]!
     findSupplierOffers: [Offer]
-    findSupplyPointOffers(ean: String!): [Offer]
-    findSupplyPoints(ean: String): [SupplyPoint]
-    findSupplyPointsByContractStatus(contractStatus: [ContractStatus]!, ean: String): [SupplyPoint]
+    findSupplyPointOffers(identificationNumber: String!): [Offer]
+    findSupplyPoints(identificationNumber: String): [SupplyPoint]
+    findSupplyPointsByContractStatus(contractStatus: [ContractStatus]!, identificationNumber: String): [SupplyPoint]
     getCodelistByType(locale: String, type: String!): [CodelistItem]!
-    getContract(ean: String, status: String, supplyPointId: ID): Contract
+    getContract(identificationNumber: String, status: String, supplyPointId: ID): Contract
     getContractTerms(contractId: ID!): ContractTerms
     getPaymentInfo(contractId: ID!, setting: QRCodeSetting!): Payment
     getPersonalData(contractId: ID!): PersonalData
     getSupplyPoint(supplyPointId: ID!): SupplyPoint
     getSupplyPointGlobalStatistics(includeHistoryData: Boolean): SupplyPointGlobalStatistic
-    listSupplierContractsBasedOnOffers(filter: ContractsBasedOnOffersFilter): PaginatedContractsWithNameAndSupplyPointEan
+    listSupplierContractsBasedOnOffers(filter: ContractsBasedOnOffersFilter): PaginatedContractsWithNameAndSupplyPoint
 }
 
 type Supplier {
@@ -214,16 +215,19 @@ type SupplyPoint {
     annualConsumptionNTUnit: String
     annualConsumptionVT: Float
     annualConsumptionVTUnit: String!
+    annualConsumption: Float
+    annualConsumptionUnit: String
     circuitBreaker: CodelistItem
     commodityType: CommodityType!
     contract: Contract
     contractEndType: CodelistItem
     distributionRate: CodelistItem
-    ean: String!
+    identificationNumber: String!
     expirationDate: Date
     id: ID!
     lastAnnualConsumptionNT: Float
     lastAnnualConsumptionVT: Float
+    lastannualConsumption: Float
     lastVersionOfSupplyPoint: Boolean
     name: String!
     phases: CodelistItem
@@ -258,7 +262,7 @@ type SupplyPointStatistic {
 
 type SupplyPointStatisticView {
     commodityType: CommodityType!
-    id: Int!
+    id: ID!
     name: String!
     progressStatus: ProgressStatus!
 }

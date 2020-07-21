@@ -23,7 +23,7 @@ const routes: Routes = [
             },
             {
                 path: CONSTS.PATHS.SIGNBOARD,
-                loadChildren: '../../pages/request/signboard/signboard.module#SignboardModule',
+                loadChildren: () => import('../../pages/request/signboard/signboard.module').then(m => m.SignboardModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
@@ -33,14 +33,14 @@ const routes: Routes = [
                 canActivateChild: [
                     SupplyPointDetailGuard,
                 ],
-                loadChildren: '../../pages/request/contract/contract.module#ContractModule',
+                loadChildren: () => import('../../pages/request/contract/contract.module').then(m => m.ContractModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
             },
             {
                 path: CONSTS.PATHS.SUPPLY_POINT,
-                loadChildren: '../../pages/request/supply-point/supply-point.module#SupplyPointModule',
+                loadChildren: () => import('../../pages/request/supply-point/supply-point.module').then(m => m.SupplyPointModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
@@ -50,7 +50,7 @@ const routes: Routes = [
                 canActivateChild: [
                     SupplyPointDetailGuard,
                 ],
-                loadChildren: '../../pages/request/offer-selection/offer-selection.module#OfferSelectionModule',
+                loadChildren: () => import('../../pages/request/offer-selection/offer-selection.module').then(m => m.OfferSelectionModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
@@ -60,7 +60,7 @@ const routes: Routes = [
                 canActivateChild: [
                     SupplyPointDetailGuard,
                 ],
-                loadChildren: '../../pages/request/recapitulation/recapitulation.module#RecapitulationModule',
+                loadChildren: () => import('../../pages/request/recapitulation/recapitulation.module').then(m => m.RecapitulationModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
@@ -70,7 +70,7 @@ const routes: Routes = [
                 canActivateChild: [
                     SupplyPointDetailGuard,
                 ],
-                loadChildren: '../../pages/request/payment/payment.module#PaymentModule',
+                loadChildren: () => import('../../pages/request/payment/payment.module').then(m => m.PaymentModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
