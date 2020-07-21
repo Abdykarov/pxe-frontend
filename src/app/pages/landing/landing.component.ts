@@ -21,7 +21,6 @@ import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 import {
     debounceTime,
-    filter,
     takeUntil,
 } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
