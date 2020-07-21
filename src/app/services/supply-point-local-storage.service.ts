@@ -5,7 +5,6 @@ import { Subject } from 'rxjs';
 import { CONSTS } from 'src/app/app.constants';
 
 import { AuthService } from 'src/app/services/auth.service';
-import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 
 @Injectable({
     providedIn: 'root',

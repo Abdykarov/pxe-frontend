@@ -4,7 +4,6 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CommodityTypesLowerCase,
-    CONSTS,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import {

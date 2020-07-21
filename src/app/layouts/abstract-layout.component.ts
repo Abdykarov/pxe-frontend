@@ -20,10 +20,7 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
-import {
-    CONSTS,
-    S_ANALYTICS,
-} from 'src/app/app.constants';
+import { CONSTS } from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';
 import { inArray } from 'src/common/utils';
 import {
