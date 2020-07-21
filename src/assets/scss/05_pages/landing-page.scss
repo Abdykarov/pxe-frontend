@@ -71,9 +71,7 @@
 				@include media-breakpoint-up(md) {
 					top: 32%;
 					height: $landing-page-picture-bg-height-tablet;
-					background-image: url(/assets/images/landing-page/lp-picture-socket.png);
-					background-repeat: no-repeat;
-					background-position: top right;
+					background-position-y: top;
 					background-size: 90%;
 				}
 				@include media-breakpoint-up(xl) {
@@ -122,7 +120,7 @@
 			width: 100%;
 			height: 100%;
 			padding-top: 0;
-			z-index: $zindex-lp-vide-text;
+			z-index: $zindex-lp-video-text;
 			pointer-events: none;
 		}
 		@include media-breakpoint-up(md) {
@@ -135,11 +133,8 @@
 	.section-video-control {
 		// Media queries
 		@include media-breakpoint-down(xs) {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			z-index: 1;
+			@include absolute-center;
+			z-index: $zindex-lp-video-control;
 		}
 	}
 
@@ -147,7 +142,6 @@
 		position: relative;
 		width: calc( 100% + #{$spacer} );
 		margin: 0 ( -$spacer / 2 );
-		overflow: hidden;
 
 		// Media queries
 		@include media-breakpoint-up(md) {
