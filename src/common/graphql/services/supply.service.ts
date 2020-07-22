@@ -160,7 +160,7 @@ export class SupplyService {
             },
         })
 
-    public getSupplyPoint = (supplyPointId: string = null, contractId: string = null) => this.apollo
+    public getSupplyPoint = (supplyPointId: string, contractId: string = null) => this.apollo
         .watchQuery<any>({
             fetchPolicy: contractId ? 'no-cache' : 'network-only',
             query: getSupplyPointQuery,
