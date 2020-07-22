@@ -205,11 +205,12 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
         }
 
         function mousemove() {
-            const x0 = xScale.invert(d3.mouse(this)[0]),
-                i = that.bisectDate(that.data, x0, 1),
-                d0: IDataLineGraph = that.data[i - 1],
-                d1: IDataLineGraph = that.data[i],
-                d: IDataLineGraph = <any>x0 - <any>(d0).date > <any>(d1).date - <any>x0 ? d1 : d0;
+            const x0 = xScale.invert(d3.mouse(this)[0]);
+            const i = that.bisectDate(that.data, x0, 1);
+            const prevIndex = i - 2;
+            const d1: IDataLineGraph = that.data[i - 1];
+            const d0: IDataLineGraph = prevIndex < 0 ? d1 : that.data[prevIndex];
+            const d: IDataLineGraph = <any>x0 - <any>(d0).date > <any>(d1).date - <any>x0 ? d1 : d0;
             focus.attr('transform', `translate(${xScale(d.date)}, 0)`);
             const coordinates = d3.mouse(this);
             const mouseY = coordinates[1];
@@ -230,6 +231,8 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
             focus.select('.tooltip--triangle').attr('transform', `translate(0, ${(mouseY + LINE_CONSTS.TRIANGLE_Y_MARGIN)})`);
             that.mouseMove.emit({...d});
         }
+
+
 
         svg.append('rect')
             .attr('class', 'overlay')

@@ -41,7 +41,7 @@ export class ProgressPriceOfPowerComponent {
             (val: IDataLineGraph) => val.date.getTime() ===  newValue.date.getTime(),
         )(this.data);
         this.currValue = this.data[currIndex].value;
-        this.prevValue = this.data[currIndex - 1].value;
+        this.prevValue = currIndex === 0 ? this.currValue : this.data[currIndex - 1].value;
         this.diff = countIndicator(this.currValue, this.prevValue);
     }
 }

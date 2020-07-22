@@ -29,7 +29,7 @@ export class IndicatorComponent implements OnChanges {
         } else {
             this.isNegative = undefined;
             this.absValue = undefined;
-            this.neutralValue = this.value.toString();
+            this.neutralValue = this.value && this.value.toString();
         }
     }
 }
