@@ -17,6 +17,8 @@ import { IMargin } from 'src/common/ui/graphs/line-graph/models/line-graph.model
 
 export abstract class AbstractGraphComponent extends AbstractComponent implements OnInit {
 
+    public viewPortWidth = 0;
+
     @Input()
     public height = ABSTRACT_GRAPH_VALUES.HEIGHT;
 
@@ -48,6 +50,7 @@ export abstract class AbstractGraphComponent extends AbstractComponent implement
 
     ngOnInit() {
         this.resizeEvent$.subscribe(() => {
+            this.viewPortWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
             this.clearContent();
             this.initGraph();
         });

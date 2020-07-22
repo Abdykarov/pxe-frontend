@@ -63,17 +63,29 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
         const mouseMove = (data, index, elemetns) => {
             const elementHovered = elemetns[index];
             const id = d3.select(elementHovered).attr('id');
-            svg.selectAll(`[id="${id}"]`)
-                .classed('hover', true);
-
+            const reactRow = svg.select(`rect[id="${id}"]`);
+            const reactRowY = parseInt(reactRow.attr('y'), 10);
+            const textRow = svg.select(`text[id="${id}"]`);
+            const textRowY = parseInt(textRow.attr('y'), 10);
+            const isRectBellowText = reactRowY
+                < (textRowY - (textRow.node() as SVGSVGElement).getBBox().height);
+            if (isRectBellowText) {
+                textRow.classed('hover', true);
+            } else {
+                textRow.attr('y', reactRowY - BAR_PLOT_CONSTS.AXIS_PADDING);
+            }
+            reactRow.classed('hover', true);
             this.mouseMove.emit(elementHovered);
         };
 
         const mouseOut = (data, index, elemetns) => {
             const elementHovered = elemetns[index];
             const id = d3.select(elementHovered).attr('id');
-            svg.selectAll(`[id="${id}"]`)
-                .classed('hover', false);
+            const reactRow = svg.select(`rect[id="${id}"]`);
+            const textRow = svg.select(`text[id="${id}"]`);
+            reactRow.classed('hover', false);
+            textRow.classed('hover', false);
+            textRow.attr('y', this.height - BAR_PLOT_CONSTS.COL_MARGIN_BOTTOM);
             this.mouseOut.emit(elementHovered);
         };
 

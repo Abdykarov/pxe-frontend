@@ -120,7 +120,7 @@ export const config2 =  [
     },
     {
         label: 'Úterý',
-        value: 6,
+        value: 200,
     },
     {
         label: 'Středa',

@@ -1,10 +1,8 @@
 import {
     Component,
     ElementRef,
-    EventEmitter,
     Input,
     OnInit,
-    Output,
     ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
@@ -119,7 +117,13 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
         svg.append('g')
             .attr('class', 'x axis')
             .attr('transform', `translate(0, ${this.height})`)
-            .call(d3.axisBottom(xScale).tickSize(0).tickPadding(LINE_CONSTS.PADDING).tickFormat(multiFormat))
+            .call(
+                d3.axisBottom(xScale)
+                    .ticks(that.viewPortWidth < this.CONSTS.XL_RESOLUTION ? LINE_CONSTS.TICKS_TABLET : LINE_CONSTS.TICKS_DESkTOP)
+                    .tickSize(0)
+                    .tickPadding(LINE_CONSTS.PADDING)
+                    .tickFormat(multiFormat),
+            )
             .call(
                 g =>  g.selectAll('.tick:not(:first-of-type) line').clone()
                     .attr('y2', -this.height)
