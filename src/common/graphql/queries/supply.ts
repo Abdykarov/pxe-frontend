@@ -283,8 +283,8 @@ export const findSupplyPointsQuery = gql`
 `;
 
 export const getSupplyPointQuery = gql`
-    query getSupplyPoint($supplyPointId: ID!){
-        getSupplyPoint(supplyPointId: $supplyPointId){
+    query getSupplyPoint($supplyPointId: ID!, $contractId: ID){
+        getSupplyPoint(supplyPointId: $supplyPointId, contractId: $contractId){
             ...SupplyPointFragment
         }
     }

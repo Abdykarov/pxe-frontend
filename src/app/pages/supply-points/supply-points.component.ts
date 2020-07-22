@@ -123,9 +123,9 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
         this.router.navigate([ROUTES.ROUTER_REQUEST_SIGNBOARD]);
     }
 
-    public navigateToSupplyPointDetail = ({contract: {contractId}}: ISupplyPoint) => {
+    public navigateToSupplyPointDetail = ({contract: {contractId}, id}: ISupplyPoint) => {
         this.router.navigate(
-            [contractId],
+            [id, contractId],
             {
                 relativeTo: this.route,
             },

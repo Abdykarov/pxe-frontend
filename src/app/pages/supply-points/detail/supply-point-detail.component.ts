@@ -66,6 +66,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     public subjectType = SubjectType;
     public supplyPoint: ISupplyPoint = null;
     public contractId = this.route.snapshot.params.contractId;
+    public supplyPointId = this.route.snapshot.params.supplyPointId;
     public contractAction: ContractActions = ContractActions.NONE;
     public contractActions = ContractActions;
 
@@ -89,7 +90,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     }
 
     ngOnInit() {
-        this.supplyService.getSupplyPoint(null, this.contractId)
+        this.supplyService.getSupplyPoint(this.supplyPointId, this.contractId)
             .pipe(
                 takeUntil(this.destroy$),
                 map(({data}) => data.getSupplyPoint),
