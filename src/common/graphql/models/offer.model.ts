@@ -29,9 +29,11 @@ export interface IOffer {
     accountingRegulatedPrice?: number;
     consumptionPriceNT?: number;
     consumptionPriceVT?: number;
+    consumptionPriceGas?: number;
     distributionPriceByCapacity?: number;
     distributionPriceByConsumptionNT?: number;
     distributionPriceByConsumptionVT?: number;
+    distributionPriceByConsumptionGas?: number;
     energyTaxRegulatedPrice?: number;
     marketOrganizerRegulatedPrice?: number;
     monthlyConsumptionFee?: number;

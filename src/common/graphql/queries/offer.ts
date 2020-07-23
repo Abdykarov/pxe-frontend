@@ -66,7 +66,9 @@ export const offerFragment = gql`
         distributionPriceByCapacity,
         distributionPriceByConsumptionVT,
         distributionPriceByConsumptionNT,
+        distributionPriceByConsumptionGas,
         systemServicesRegulatedPrice,
+        consumptionPriceGas,
         consumptionPriceVT,
         consumptionPriceNT,
         greenEnergy
