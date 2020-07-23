@@ -53,6 +53,15 @@ export class HeaderComponent extends AbstractComponent implements OnInit {
     public loginAction: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
+    public aboutServiceAction: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
+    public aboutUsAction: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
+    public faqAction: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
     public logoutAction: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
