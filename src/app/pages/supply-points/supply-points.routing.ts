@@ -13,7 +13,7 @@ const routes: Routes = [
         component: SupplyPointsComponent,
     },
     {
-        path: ':supplyPointId',
+        path: ':supplyPointId/:contractId',
         loadChildren: () => import('../../pages/supply-points/detail/supply-point-detail.module').then(m => m.SupplyPointDetailModule),
     },
 ];
