@@ -28,7 +28,7 @@
         [loading]="true"
         label="Právě připravujeme vaše smlouvy">
     </lnd-placeloader>
-    <div *ngIf="supplyPoint && !globalError.length"
+    <div *ngIf="supplyPoint && !loadingSupplyPoint && !globalError.length"
          class="row">
         <div class="col-12 col-xl-10 offset-xl-1">
             <div class="row align-items-center mb-3">
@@ -134,6 +134,27 @@
                     <div class="col-12 pdf-holder">
                         <ng2-pdfjs-viewer
                             #pdfContract
+                            [openFile]="false"
+                            [viewBookmark]="false"
+                            zoom="page-width">
+                        </ng2-pdfjs-viewer>
+                    </div>
+                </div>
+                <div *ngIf="documentTypeUnsetProlongation"
+                     class="row mb-5">
+                    <div class="col-12">
+                        <span class="text-with-icon align-items-start align-items-md-center">
+                            <span class="icon icon--document"></span>
+                            <span class="text-with-icon__text small">Smlouva o zrušení automatické prolongace
+                                <a class="ml-0 ml-md-3 mt-2 mt-md-0 d-block d-md-inline-block"
+                                   [class.link--disabled]="documentLoading"
+                                   (click)="saveDocument(supplyPoint.contract.contractId, documentType.TERMINATE_PREV)">Stáhnout</a>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="col-12 pdf-holder">
+                        <ng2-pdfjs-viewer
+                            #pdfStopProlongation
                             [openFile]="false"
                             [viewBookmark]="false"
                             zoom="page-width">
