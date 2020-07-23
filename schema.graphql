@@ -43,6 +43,7 @@ type Contract {
     personalData: PersonalData
     prolong: Boolean
     nextSupplyPointId: ID
+    previousContractId: String
     isNextContractConcluded: Boolean
 }
 
