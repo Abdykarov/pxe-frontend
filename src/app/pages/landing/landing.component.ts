@@ -65,11 +65,6 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     @ViewChild('subscription')
     public subscriptionElement: ElementRef;
 
-    @ViewChild('mapCoverage')
-    public mapCoverageElement: ElementRef;
-
-    @ViewChild('supplierChange')
-    public supplierChangeElement: ElementRef;
 
     public frequentedQuestions: IAccordionItem[] = [];
     public formLoading = false;
@@ -134,12 +129,6 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
             .subscribe((scrollTo: SCROLL_TO) => {
                 if (scrollTo === SCROLL_TO.LANDING_SUBSCRIPTION) {
                     scrollToElementFnc(this.subscriptionElement.nativeElement);
-                }
-                if (scrollTo === SCROLL_TO.MAP_COVERAGE) {
-                    scrollToElementFnc(this.mapCoverageElement.nativeElement);
-                }
-                if (scrollTo === SCROLL_TO.SUPPLIER_CHANGE) {
-                    scrollToElementFnc(this.supplierChangeElement.nativeElement);
                 }
             });
     }

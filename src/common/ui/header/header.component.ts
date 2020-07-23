@@ -50,9 +50,6 @@ export class HeaderComponent extends AbstractComponent implements OnInit {
     public isMenuOpen: boolean;
 
     @Output()
-    public coverageMapAction: EventEmitter<any> = new EventEmitter<any>();
-
-    @Output()
     public loginAction: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
@@ -66,9 +63,6 @@ export class HeaderComponent extends AbstractComponent implements OnInit {
 
     @Output()
     public signUpAction: EventEmitter<any> = new EventEmitter<any>();
-
-    @Output()
-    public supplierChangeAction: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
     public toggleMenu: EventEmitter<boolean> = new EventEmitter<boolean>();

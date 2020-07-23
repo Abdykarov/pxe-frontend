@@ -40,20 +40,6 @@
                             (click)="landingPageRedirect.emit($event)">
                         </lnd-button>
                         <lnd-button
-                            *ngIf="settings.isLandingPage"
-                            label="Změna dodavatele"
-                            customClass="mr-4"
-                            type="link-text"
-                            (click)="supplierChangeAction.emit()">
-                        </lnd-button>
-                        <lnd-button
-                            *ngIf="settings.isLandingPage"
-                            label="Pokrytí"
-                            customClass="mr-4"
-                            type="link-text"
-                            (click)="coverageMapAction.emit()">
-                        </lnd-button>
-                        <lnd-button
                             *ngIf="!isLogged"
                             label="Přihlášení"
                             customClass="mr-4"
@@ -98,16 +84,6 @@
                                *ngIf="!settings.isLandingPage && !settings.isPublicEmptyPage"
                                (click)="landingPageRedirect.emit($event)">
                                 Domů
-                            </a>
-                            <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
-                               (click)="supplierChangeAction.emit()">
-                                Změna dodavatele
-                            </a>
-                            <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
-                               (click)="coverageMapAction.emit()">
-                                Pokrytí
                             </a>
                             <a class="dropdown-item dropdown-item--without-icon"
                                *ngIf="!settings.isPublicEmptyPage && isLogged"
