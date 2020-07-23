@@ -17,15 +17,33 @@
 	color: $white;
 	z-index: 2010;
 
-	&--public {
-		background-color: $body-bg-lp;
-	}
-
 	&--sticked {
 		// Media queries
 		@include media-breakpoint-up(xl) {
 			position: fixed;
 			background-color: $light;
+		}
+
+		&.header--lp {
+			background-color: transparent;
+
+			.header-inner {
+				// Media queries
+				@include media-breakpoint-up(xl) {
+					background-color: $body-bg-lp;
+				}
+			}
+		}
+	}
+
+	&--lp {
+		.header-inner {
+			// Media queries
+			@include media-breakpoint-down(md) {
+				width: calc( 100% + #{$spacer} );
+				margin-left: -( $spacer / 2 );
+				background-color: $body-bg-lp;
+			}
 		}
 	}
 

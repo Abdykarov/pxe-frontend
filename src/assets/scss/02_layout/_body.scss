@@ -6,7 +6,7 @@
 
 
 .container-fluid {
-	&--max-height {
+	&--max-width {
 		// Media queries
 		@media (min-width: ( $body-max-width ) ) {
 			max-width: $body-max-width;

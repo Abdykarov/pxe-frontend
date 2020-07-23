@@ -13,7 +13,7 @@
 </ng-template>
 
 <div class="landing-page">
-    <div class="container-fluid container-fluid--max-height container-fluid--light">
+    <div class="container-fluid container-fluid--max-width container-fluid--light">
         <div class="section section--picture-bg">
             <div class="section-picture-text">
                 <div class="row px-3 px-md-0">
@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid container-fluid--max-height container-fluid--light">
+    <div class="container-fluid container-fluid--max-width container-fluid--light">
         <div class="section how-it-work section--picture-bg-overlap">
             <div class="row px-3 px-md-0">
                 <div class="col-12 col-md-8 offset-md-2 col-xl-10 offset-xl-1">
@@ -67,7 +67,7 @@
         </div>
     </div>
     <div class="section section--picture-half pb-xl-0">
-        <div class="container-fluid container-fluid--max-height">
+        <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
                 <div class="col-12 col-xl-6">
                     <div class="section-picture-holder">
@@ -76,9 +76,9 @@
                             src="/assets/images/landing-page/picture-dog.jpg"
                             srcset="
                                 /assets/images/landing-page/picture-dog.jpg,
-                                /assets/images/landing-page/picture-dog.jpg 2x"
-                            title="Cesta k nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC4U"
-                            alt="Cesta k nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC4U">
+                                /assets/images/landing-page/picture-dog@2x.jpg 2x"
+                            title="Účty za energii si prostě ochočíte"
+                            alt="Účty za energii si prostě ochočíte">
                     </div>
                 </div>
                 <div class="col-12 col-md-8 offset-md-2 col-xl-4 offset-xl-1">
@@ -100,7 +100,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid container-fluid--max-height">
+    <div class="container-fluid container-fluid--max-width">
         <div class="section section--video">
             <div class="section-video-holder"
                  [class.cursor-pointer]="isVideoPlaying">
@@ -153,7 +153,7 @@
         </div>
     </div>
     <div class="section section--picture-half shortcut">
-        <div class="container-fluid container-fluid--max-height">
+        <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
                 <div class="col-12 col-xl-6 offset-xl-1 order-xl-2">
                     <div class="section-picture-holder">
@@ -162,9 +162,9 @@
                             src="/assets/images/landing-page/picture-man.jpg"
                             srcset="
                                 /assets/images/landing-page/picture-man.jpg,
-                                /assets/images/landing-page/picture-man.jpg 2x"
-                            title="Cesta k nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC4U"
-                            alt="Cesta k nejlepšímu dodavateli může být dlouhá. Zkraťte si ji přes PARC4U">
+                                /assets/images/landing-page/picture-man@2x.jpg 2x"
+                            title="Přečtěte si o naší filosofii"
+                            alt="Přečtěte si o naší filosofii">
                             <span class="section-picture-overflow-text-holder">
                                 <blockquote class="section-picture-overflow-text h3--public">
                                     &bdquo;Ochráníme vás&nbsp;<br>
@@ -192,7 +192,7 @@
     <div #mapCoverage>
         <pxe-map-coverage-container></pxe-map-coverage-container>
     </div>
-    <div class="container-fluid container-fluid--max-height container-fluid--light">
+    <div class="container-fluid container-fluid--max-width container-fluid--light">
         <div class="section section-help">
             <div class="row px-3">
                 <div class="col-12 col-xl-8 offset-xl-2 mb-3">
@@ -218,7 +218,7 @@
     <div
         #subscription
         *ngIf="!(authService.currentUserValue | isLogged)"
-        class="section stay-in-touch">
+        class="section stay-in-touch pb-0">
         <div class="container-fluid">
             <div class="row px-3 px-md-0">
                 <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-3">
