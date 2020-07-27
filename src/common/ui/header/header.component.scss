@@ -39,7 +39,7 @@
 	&--lp {
 		.header-inner {
 			// Media queries
-			@include media-breakpoint-down(md) {
+			@include media-breakpoint-down(xl) {
 				width: calc( 100% + #{$spacer} );
 				margin-left: -( $spacer / 2 );
 				background-color: $body-bg-lp;
