@@ -150,10 +150,7 @@
 		}
 		@include media-breakpoint-up(xl) {
 			width: calc( 100% + #{$spacer} );
-			max-width: $body-max-width;
-			left: 50%;
-			transform: translateX(-50%);
-			margin: 0;
+			margin: 0 ( -$spacer / 2 );
 		}
 		@include media-breakpoint-up(lg) {
 			width: 100%;
