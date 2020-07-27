@@ -17,7 +17,10 @@
 	// Media queries
 	@include media-breakpoint-up(md) {
 		height: $footer-height-tablet;
-		padding-bottom: ( $spacer * 1.5 );
+		padding: ( $spacer * 3.5 ) 0 ( $spacer * 1.5 );
+	}
+	@include media-breakpoint-up(xl) {
+		padding-top: ( $spacer * 5 );
 	}
 
 	&--public {

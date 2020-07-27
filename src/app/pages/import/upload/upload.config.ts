@@ -1,5 +1,4 @@
 import { AuthService } from 'src/app/services/auth.service';
-import { CONSTS } from 'src/app/app.constants';
 import { environment } from 'src/environments/environment';
 import { FileUploader } from 'src/third-sides/file-upload';
 import { transformHttpHeadersToFileUploaderFormat } from 'src/common/utils';
