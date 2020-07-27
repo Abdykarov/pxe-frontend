@@ -109,22 +109,23 @@
                                (click)="landingPageRedirect.emit($event)">
                                 Domů
                             </a>
-                            <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage">
+                            <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                                class="dropdown-item dropdown-item--without-icon"
+                               (click)="aboutServiceAction.emit()">
                                O službě
                             </a>
-                            <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage">
-                               (click)="aboutUsAction.emit() ">
+                            <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                                class="dropdown-item dropdown-item--without-icon"
+                               (click)="aboutUsAction.emit()">
                                 O nás
                             </a>
-                            <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage">
-                               (click)="faqAction.emit() ">
+                            <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                               class="dropdown-item dropdown-item--without-icon"
+                               (click)="faqAction.emit()">
                                 FAQ
                             </a>
-                            <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="!settings.isPublicEmptyPage && isLogged"
+                            <a *ngIf="!settings.isPublicEmptyPage && isLogged"
+                                class="dropdown-item dropdown-item--without-icon"
                                (click)="logoutAction.emit() ">
                                 Odhlášení
                             </a>

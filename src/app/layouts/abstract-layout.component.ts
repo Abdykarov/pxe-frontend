@@ -121,11 +121,11 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         }
     }
 
-    public scrollToFaq = () => this.scrollToService.activeScrollTo(SCROLL_TO.FAQ);
+    public scrollToFaq = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.FAQ));
 
-    public scrollToAboutUs = () => this.scrollToService.activeScrollTo(SCROLL_TO.ABOUT_US);
+    public scrollToAboutUs = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.ABOUT_US));
 
-    public scrollToAboutService = () => this.scrollToService.activeScrollTo(SCROLL_TO.ABOUT_SERVICE);
+    public scrollToAboutService = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.ABOUT_SERVICE));
 
 
     public login = () => {
