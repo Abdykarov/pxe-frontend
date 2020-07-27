@@ -1,6 +1,5 @@
 import {
     ISupplierLogo,
-    TypeCommodity,
 } from 'src/common/ui/supplier/model/supplier.model';
 
 export const configSupplier: ISupplierLogo[] = [
@@ -11,7 +10,6 @@ export const configSupplier: ISupplierLogo[] = [
         supplierUrl: '',
         title: 'Alpiq CZ',
         width: 81,
-        typeCommodity: TypeCommodity.POWER,
     },
     {
         alt: 'logo - Amper Market, a.s.',
@@ -20,7 +18,6 @@ export const configSupplier: ISupplierLogo[] = [
         supplierUrl: '',
         title: 'Amper Market, a.s.',
         width: 98,
-        typeCommodity: TypeCommodity.POWER,
     },
     {
         alt: 'logo - Bohemia Energy entity s.r.o.',
@@ -30,7 +27,6 @@ export const configSupplier: ISupplierLogo[] = [
         size: 'sm',
         title: 'Bohemia Energy entity s.r.o.',
         width: 185,
-        typeCommodity: TypeCommodity.BOTH,
     },
     {
         alt: 'logo - ČEZ, a.s.',
@@ -39,7 +35,6 @@ export const configSupplier: ISupplierLogo[] = [
         supplierUrl: '',
         title: 'ČEZ, a.s.',
         width: 34,
-        typeCommodity: TypeCommodity.BOTH,
     },
     {
         alt: 'logo - Skupina E.ON',
@@ -49,7 +44,6 @@ export const configSupplier: ISupplierLogo[] = [
         size: 'sm',
         title: 'Skupina E.ON',
         width: 75,
-        typeCommodity: TypeCommodity.BOTH,
     },
     {
         alt: 'logo - EP Energy Trading a.s.',
@@ -58,7 +52,6 @@ export const configSupplier: ISupplierLogo[] = [
         supplierUrl: '',
         title: 'EP Energy Trading a.s.',
         width: 75,
-        typeCommodity: TypeCommodity.BOTH,
     },
     {
         alt: 'logo - CARBOUNION BOHEMIA, spol. s r. o.',
@@ -68,7 +61,6 @@ export const configSupplier: ISupplierLogo[] = [
         size: 'xl',
         title: 'CARBOUNION BOHEMIA, spol. s r. o.',
         width: 70,
-        typeCommodity: TypeCommodity.BOTH,
     },
     {
         alt: 'logo - MND a.s.',
@@ -78,7 +70,6 @@ export const configSupplier: ISupplierLogo[] = [
         size: 'sm',
         title: 'MND a.s.',
         width: 75,
-        typeCommodity: TypeCommodity.BOTH,
     },
     {
         alt: 'logo - LUMIUS, spol s.r.o.',
@@ -87,7 +78,6 @@ export const configSupplier: ISupplierLogo[] = [
         supplierUrl: '',
         title: 'LUMIUS, spol s.r.o.',
         width: 125,
-        typeCommodity: TypeCommodity.BOTH,
     },
     {
         alt: 'logo - Nano Energies a. s.',
@@ -96,7 +86,6 @@ export const configSupplier: ISupplierLogo[] = [
         supplierUrl: '',
         title: 'Nano Energies a. s.',
         width: 75,
-        typeCommodity: TypeCommodity.POWER,
     },
     {
         alt: 'logo - Pražská plynárenská a.s.',
@@ -105,7 +94,6 @@ export const configSupplier: ISupplierLogo[] = [
         supplierUrl: '',
         title: 'Pražská plynárenská a.s.',
         width: 129,
-        typeCommodity: TypeCommodity.BOTH,
     },
     {
         alt: 'logo - Pražská energetika, a.s.',
@@ -114,7 +102,6 @@ export const configSupplier: ISupplierLogo[] = [
         supplierUrl: '',
         title: 'Pražská energetika, a.s.',
         width: 61,
-        typeCommodity: TypeCommodity.BOTH,
     },
     {
         alt: 'logo - Slovenské elektrárne, a. s.',
@@ -124,7 +111,6 @@ export const configSupplier: ISupplierLogo[] = [
         size: 'xl',
         title: 'Slovenské elektrárne, a. s.',
         width: 75,
-        typeCommodity: TypeCommodity.POWER,
     },
     {
         alt: 'logo - Skupina Veolia',
@@ -133,6 +119,5 @@ export const configSupplier: ISupplierLogo[] = [
         supplierUrl: '',
         title: 'Skupina Veolia',
         width: 115,
-        typeCommodity: TypeCommodity.POWER,
     },
 ];

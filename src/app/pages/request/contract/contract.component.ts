@@ -10,7 +10,6 @@ import {
     ViewChild,
 } from '@angular/core';
 
-import * as R from 'ramda';
 import {
     combineLatest,
     of,
@@ -24,8 +23,6 @@ import {
 import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
 
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
-import { IQuestion } from 'src/app/services/model/faq.model';
-import { AddressWhispererComponent } from 'src/common/containers/address-whisperer/address-whisperer.component';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import {
     CommodityType,
@@ -42,7 +39,6 @@ import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
 import { FaqService } from 'src/app/services/faq.service';
 import {
-    geParamFromTag,
     getConfigStepper,
     parseGraphQLErrors,
     parseRestAPIErrors,

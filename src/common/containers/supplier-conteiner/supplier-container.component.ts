@@ -6,7 +6,6 @@ import {
 import { config } from './supplier-container.config';
 import {
     ISupplierLogo,
-    TypeCommodity,
 } from 'src/common/ui/supplier/model/supplier.model';
 
 @Component({
@@ -17,7 +16,4 @@ import {
 export class SupplierContainerComponent {
     @Input()
     public config: ISupplierLogo[] = config;
-
-    @Input()
-    public  typeCommodity?: TypeCommodity = TypeCommodity.BOTH;
 }

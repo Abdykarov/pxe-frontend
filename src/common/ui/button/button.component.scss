@@ -427,4 +427,18 @@
 			box-shadow: none;
 		}
 	}
+
+	&.btn-video-play {
+		width: $btn-video-play-size;
+		height: $btn-video-play-size;
+		background-color: $primary;
+		border-radius: $btn-video-play-size;
+		pointer-events: all;
+
+		.btn__icon {
+			justify-content: center;
+			width: $btn-video-play-size;
+			color: $white;
+		}
+	}
 }
