@@ -1,13 +1,15 @@
 <ng-template #images let-data="data">
-    <img
-        class="suppliers-overview__picture"
-        [ngClass]="[
-            data.size ? 'suppliers-overview__picture--' + data.size : ''
-        ]"
-        [src]="data.logoUrlHover"
-        [title]="data.title"
-        [alt]="data.alt"
-        [width]="data.width">
+    <a [routerLink]="data?.faqUrl">
+        <img
+            class="suppliers-overview__picture"
+            [ngClass]="[
+                data.size ? 'suppliers-overview__picture--' + data.size : ''
+            ]"
+            [src]="data.logoUrlHover"
+            [title]="data.title"
+            [alt]="data.alt"
+            [width]="data.width">
+    </a>
 </ng-template>
 
 <div class="suppliers-holder">
