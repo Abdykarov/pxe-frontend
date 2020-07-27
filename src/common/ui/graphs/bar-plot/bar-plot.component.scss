@@ -9,7 +9,7 @@
 
 .bar-plot {
 	position: relative;
-	z-index: $zindex-svg;
+	z-index: $zindex-graphs-svg;
 
 	svg {
 		overflow: visible;
@@ -18,14 +18,13 @@
 			fill: $light;
 		}
 
-		.x text,
-		text.label {
+		.x text {
 			cursor: pointer;
 			color: $gray-400;
 			font-size: $font-size-base;
 		}
 
-		text.label.hover {
+		.label.hover {
 			color: $white;
 			fill: $white;
 		}

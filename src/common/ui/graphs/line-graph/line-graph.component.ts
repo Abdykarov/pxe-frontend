@@ -66,7 +66,7 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
     }
 
     protected clearContent(): void {
-        this.svgWrapper.nativeElement.innerHTML  = '';
+        this.svgWrapper.nativeElement.innerHTML = '';
     }
 
     protected initGraph = () => {
@@ -125,7 +125,7 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
                     .tickFormat(multiFormat),
             )
             .call(
-                g =>  g.selectAll('.tick:not(:first-of-type) line').clone()
+                g => g.selectAll('.tick:not(:first-of-type) line').clone()
                     .attr('y2', -this.height)
                     .attr('stroke', '#ddd'),
             );
@@ -235,8 +235,6 @@ export class LineGraphComponent extends AbstractGraphComponent implements OnInit
             focus.select('.tooltip--triangle').attr('transform', `translate(0, ${(mouseY + LINE_CONSTS.TRIANGLE_Y_MARGIN)})`);
             that.mouseMove.emit({...d});
         }
-
-
 
         svg.append('rect')
             .attr('class', 'overlay')

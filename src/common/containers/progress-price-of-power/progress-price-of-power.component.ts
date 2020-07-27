@@ -5,7 +5,10 @@ import * as R from 'ramda';
 
 import { conf } from 'src/common/containers/progress-price-of-power/config';
 import { countIndicator } from 'src/common/utils';
-import { IDataLineGraph, IInputDataLineGraph } from 'src/common/ui/graphs/line-graph/models/line-graph.models';
+import {
+    IDataLineGraph,
+    IInputDataLineGraph,
+} from 'src/common/ui/graphs/line-graph/models/line-graph.models';
 
 @Component({
     selector: 'pxe-progress-price-of-power',

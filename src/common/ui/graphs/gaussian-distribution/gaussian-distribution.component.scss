@@ -1,5 +1,5 @@
 /*
- -  Bar plot graph
+ -  Gaussian distribution graph
  -
  -
  */
@@ -9,7 +9,7 @@
 
 .gaussian-distribution {
 	position: relative;
-	z-index: $zindex-svg;
+	z-index: $zindex-graphs-svg;
 
 	svg {
 		overflow: visible;

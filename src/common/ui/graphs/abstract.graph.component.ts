@@ -57,7 +57,6 @@ export abstract class AbstractGraphComponent extends AbstractComponent implement
         this.initGraph();
     }
 
-
     protected abstract clearContent(): void;
     protected abstract initGraph(): void;
 }

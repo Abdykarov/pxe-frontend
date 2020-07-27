@@ -47,7 +47,7 @@ export class GaussianDistributionComponent extends AbstractGraphComponent implem
     }
 
     protected clearContent(): void {
-        this.svgWrapper.nativeElement.innerHTML  = '';
+        this.svgWrapper.nativeElement.innerHTML = '';
     }
 
     protected initGraph(): void {

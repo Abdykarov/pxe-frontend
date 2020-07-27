@@ -72,7 +72,7 @@ export class ProgressBarComponent extends AbstractGraphComponent implements OnIn
 
 
     protected clearContent(): void {
-        this.svgWrapper.nativeElement.innerHTML  = '';
+        this.svgWrapper.nativeElement.innerHTML = '';
     }
 
     protected initGraph(): void {

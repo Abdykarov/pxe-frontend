@@ -9,7 +9,7 @@
 
 .line-graph {
 	position: relative;
-	z-index: $zindex-svg;
+	z-index: $zindex-graphs-svg;
 
 	svg {
 		overflow: visible;

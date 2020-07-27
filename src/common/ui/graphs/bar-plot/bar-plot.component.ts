@@ -39,14 +39,14 @@ export class BarPlotComponent extends AbstractGraphComponent implements OnInit {
         super();
     }
 
-     public _data: IDataBarPlot[];
+    public _data: IDataBarPlot[];
 
     get data(): IDataBarPlot[] {
         return this._data;
     }
 
     protected clearContent(): void {
-        this.svgWrapper.nativeElement.innerHTML  = '';
+        this.svgWrapper.nativeElement.innerHTML = '';
     }
 
     protected initGraph(): void {
