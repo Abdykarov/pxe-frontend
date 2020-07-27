@@ -1,3 +1,5 @@
+export * from './append-string-to-spec-position.fnc';
+export * from './append-string-to-spec-positions.fnc';
 export * from './convert-array-to-object.fnc';
 export * from './convert-date-to-send-format.fnc';
 export * from './create-string-from-template.fnc';
