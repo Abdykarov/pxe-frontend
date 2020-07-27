@@ -65,6 +65,14 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     @ViewChild('subscription')
     public subscriptionElement: ElementRef;
 
+    @ViewChild('faq')
+    public faq: ElementRef;
+
+    @ViewChild('aboutUs')
+    public aboutUs: ElementRef;
+
+    @ViewChild('aboutService')
+    public aboutService: ElementRef;
 
     public frequentedQuestions: IAccordionItem[] = [];
     public formLoading = false;
@@ -129,6 +137,15 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
             .subscribe((scrollTo: SCROLL_TO) => {
                 if (scrollTo === SCROLL_TO.LANDING_SUBSCRIPTION) {
                     scrollToElementFnc(this.subscriptionElement.nativeElement);
+                }
+                if (scrollTo === SCROLL_TO.FAQ) {
+                    scrollToElementFnc(this.faq.nativeElement);
+                }
+                if (scrollTo === SCROLL_TO.ABOUT_US) {
+                    scrollToElementFnc(this.aboutUs.nativeElement);
+                }
+                if (scrollTo === SCROLL_TO.ABOUT_SERVICE) {
+                    scrollToElementFnc(this.aboutService.nativeElement);
                 }
             });
     }
