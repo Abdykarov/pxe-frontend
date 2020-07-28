@@ -44,7 +44,13 @@
                     <lnd-button
                         label="Pokračovat"
                         type="primary"
-                        (click)="action.emit(supplyPoint)">
+                        (click)="continueAction.emit(supplyPoint)">
+                    </lnd-button>
+                    <br />
+                    <lnd-button
+                        label="Smazat"
+                        type="link-danger"
+                        (click)="removeAction.emit(supplyPoint)">
                     </lnd-button>
                 </div>
             </div>

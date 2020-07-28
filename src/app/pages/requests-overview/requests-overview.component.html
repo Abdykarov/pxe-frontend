@@ -78,7 +78,8 @@
             <pxe-request-card
                 *ngFor="let supplyPoint of supplyPoints"
                 [supplyPoint]="supplyPoint"
-                (action)="completeRequestAction(supplyPoint)">
+                (continueAction)="completeRequestAction(supplyPoint)"
+                (removeAction)="removeRequestAction(supplyPoint)">
             </pxe-request-card>
         </ng-container>
     </ng-container>

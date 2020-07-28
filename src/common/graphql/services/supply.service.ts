@@ -198,4 +198,12 @@ export class SupplyService {
             },
         })
         .valueChanges
+
+    public deleteSupplyPoint = (contractId: string) => this.apollo
+        .mutate<any>({
+            mutation: null,
+            variables: {
+                contractId,
+            },
+        })
 }
