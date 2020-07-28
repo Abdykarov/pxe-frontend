@@ -257,6 +257,9 @@ export const errorFieldMessages =  {
         positiveInteger: 'Použijte pouze celá a kladná čísla.',
         totalDigitLengthBeforeDecimalPoint: 'Použít můžete maximálně {maxLength} čísel před desetinnou čárkou.',
     },
+    numericalSeries: {
+        required: 'Vyplňte časovou řadu.',
+    },
     offerAnnualConsumptionId: {
         required: 'Vyberte ze seznamu spotřebu.',
     },

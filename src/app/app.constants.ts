@@ -101,6 +101,7 @@ export const CONSTS = {
         TERMS_OF_USE : 'terms-of-use',
         UPLOAD: 'upload',
         USER_PROFILE: 'user-profile',
+        SUPPLIER_PROFILE: 'supplier-profile',
         WILD_CART  : '**',
     },
     REFRESH_TOKEN: {
@@ -127,6 +128,7 @@ export const CONSTS = {
         MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT: 2,
         MAX_DIGIT_AFTER_DECIMAL_POINT_ANNUAL_CONSUMPTION: 3,
         MAX_LENGTH: {
+            COMPANY_NAME: 150,
             NUMBER_INPUT_WITH_HINT: 10,
             BENEFIT_NAME: 100,
             BENEFIT_URL: 5000,
@@ -203,6 +205,8 @@ export const ROUTES = {
     ROUTER_TERMS_OF_USE: `/${CONSTS.PATHS.TERMS_OF_USE}`,
     ROUTER_USER_CHANGE_PASSWORD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CHANGE_PASSWORD}`,
     ROUTER_USER_PROFILE: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.USER_PROFILE}`,
+    ROUTER_SUPPLIER_PROFILE: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.SUPPLIER_PROFILE}`,
+
 };
 
 export const SEO = {
