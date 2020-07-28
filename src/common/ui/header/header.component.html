@@ -43,18 +43,21 @@
                             (click)="landingPageRedirect.emit($event)">
                         </lnd-button>
                         <lnd-button
+                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
                             label="O službě"
                             customClass="mr-4"
                             type="link-text"
                             (click)="aboutServiceAction.emit()">
                         </lnd-button>
                         <lnd-button
+                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
                             label="O nás"
                             customClass="mr-4"
                             type="link-text"
                             (click)="aboutUsAction.emit()">
                         </lnd-button>
                         <lnd-button
+                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
                             label="FAQ"
                             customClass="mr-4"
                             type="link-text"
@@ -106,23 +109,23 @@
                                (click)="landingPageRedirect.emit($event)">
                                 Domů
                             </a>
-                            <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="!settings.isPublicEmptyPage"
-                               (click)="aboutServiceAction.emit() ">
-                                O službě
+                            <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                                class="dropdown-item dropdown-item--without-icon"
+                               (click)="aboutServiceAction.emit()">
+                               O službě
                             </a>
-                            <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="!settings.isPublicEmptyPage"
-                               (click)="aboutUsAction.emit() ">
+                            <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                                class="dropdown-item dropdown-item--without-icon"
+                               (click)="aboutUsAction.emit()">
                                 O nás
                             </a>
-                            <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="!settings.isPublicEmptyPage"
-                               (click)="faqAction.emit() ">
+                            <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                               class="dropdown-item dropdown-item--without-icon"
+                               (click)="faqAction.emit()">
                                 FAQ
                             </a>
-                            <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="!settings.isPublicEmptyPage && isLogged"
+                            <a *ngIf="!settings.isPublicEmptyPage && isLogged"
+                                class="dropdown-item dropdown-item--without-icon"
                                (click)="logoutAction.emit() ">
                                 Odhlášení
                             </a>
