@@ -121,11 +121,11 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         }
     }
 
-    public routerToFaq = () => this.router.navigate([this.CONSTS.PATHS.FAQ]);
+    public scrollToFaq = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.FAQ));
 
-    public routerToAboutUs = () => this.router.navigate([this.CONSTS.PATHS.FAQ, Tag.GENERAL, 'about-pxe']);
+    public scrollToAboutUs = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.ABOUT_US));
 
-    public routerToAboutService = () => this.router.navigate([this.CONSTS.PATHS.FAQ, Tag.GENERAL, 'about-parc4u']);
+    public scrollToAboutService = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.ABOUT_SERVICE));
 
 
     public login = () => {
