@@ -39,8 +39,13 @@
                             "src/robots.txt",
                             "src/sitemap.xml"
                         ],
+                        "extractCss": true,
                         "styles": [
-                            "src/assets/scss/front.scss"
+                            "src/assets/scss/front.scss",
+                            {
+                                "input": "src/assets/css/pdf-viewer-custom.scss",
+                                "inject": false
+                            }
                         ],
                         "scripts": []
                     },
@@ -230,8 +235,13 @@
                             "src/assets/images/",
                             "src/assets/favicon.ico"
                         ],
+                        "extractCss": true,
                         "styles": [
-                            "src/assets/scss/front.scss"
+                            "src/assets/scss/front.scss",
+                            {
+                                "input": "src/assets/css/pdf-viewer-custom.scss",
+                                "inject": false
+                            }
                         ],
                         "scripts": []
                     },

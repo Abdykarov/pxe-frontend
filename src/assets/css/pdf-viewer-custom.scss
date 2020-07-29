@@ -1,0 +1,26 @@
+/*
+ -  Supply offer page
+ -
+ -
+ */
+
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+body {
+	background-color: transparent;
+	background-image: none;
+}
+
+.toolbar {
+	display: none;
+}
+
+.pdfViewer {
+	.page {
+		border: none;
+		border-image: none;
+		background-color: transparent;
+	}
+}
