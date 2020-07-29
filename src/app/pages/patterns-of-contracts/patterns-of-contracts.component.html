@@ -2,6 +2,10 @@
     <a (click)="downloadPdf(row.sourceUrl, row.downloadName)">Stáhnout</a>
 </ng-template>
 
+<ng-template #columnTemplateDownloadText let-row="row">
+    Platná v období: {{row.dateFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.dateTo | date:'d.&nbsp;M.&nbsp;y'}}
+</ng-template>
+
 <div class="container-fluid">
     <div class="container-content">
         <pxe-layout-container pageTitle="Vzory smluv o dodávce" [breadcrumbItemsSimple]="breadcrumbItemsSimple">
@@ -28,10 +32,11 @@
                 </div>
                 <div class="col-12 col-xl-8 offset-xl-2 col-xl-8 offset-xl-2">
                     <lnd-banner-ui
-                        *ngFor="let setting of pdfSettingFuture"
+                        *ngFor="let setting of pdfFutureContracts"
                         icon="icon--info"
                         [data]="{
-                            text: setting[subjectType][commodityType].validity
+                            text: datePipe.transform(setting[subjectType][commodityType].dateFrom) + ' začíná platnost nové smlouvy o sdružených službách dodávky pro ' +
+                                (commodityType === COMMODITY_TYPE.POWER ? 'elektřiny' : 'plynu') + ' pro ' + (subjectType === SUBJECT_TYPE.INDIVIDUAL ? 'domácnost' : 'firmu')
                         }"
                         (customBannerAction)="downloadPdf(setting[subjectType][commodityType].sourceUrl, setting[subjectType][commodityType].downloadName)"
                         buttonLabel="Stáhnout"
@@ -78,7 +83,7 @@
                             zoom="page-width">
                         ></pxe-pdf-viewer>
                     </div>
-                    <ng-container *ngIf="pdfSetting[this.subjectType][this.commodityType] as pdfSetting">
+                    <ng-container *ngIf="pdfActiveContracts[this.subjectType][this.commodityType] as pdfSetting">
                         <lnd-button
                             label="Stáhnout"
                             type="primary"
@@ -87,12 +92,12 @@
                     </ng-container>
                     <h5>Archiv smluv o dodávce elektřiny společnosti Power Central Europe, a.s. pro domácnosti</h5>
                     <lnd-table
-                        *ngIf="pdfSettingOld"
                         [cols]="historyTableCols"
-                        [rows]="pdfSettingOld"
+                        [rows]="pdfOldContracts"
                         [tableWrapperClass]="['table-wrapper--advanced']"
                         [columnTemplates]="{
-                            columnTemplateDownload: columnTemplateDownload
+                            columnTemplateDownload: columnTemplateDownload,
+                            columnTemplateDownloadText: columnTemplateDownloadText
                         }">
                     ></lnd-table>
                 </div>

@@ -12,10 +12,12 @@ import {
     Meta,
     Title,
 } from '@angular/platform-browser';
-import { saveAs } from 'file-saver';
 
+import * as moment from 'moment';
 import * as R from 'ramda';
+import { DatePipe } from '@angular/common';
 import { takeUntil } from 'rxjs/operators';
+import { saveAs } from 'file-saver';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -26,22 +28,17 @@ import {
 } from 'src/app/app.constants';
 import {
     historyColConfig,
-    pdfFutureSetting,
-    pdfOldSetting,
     pdfSetting,
 } from 'src/app/pages/patterns-of-contracts/patterns-of-contracts.config';
-import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-import {
-    IPdfFileWithText,
-    IPdfSetting,
-} from 'src/app/pages/patterns-of-contracts/models/patterns-of-contracts.model';
+import { IPdfSetting } from 'src/app/pages/patterns-of-contracts/models/patterns-of-contracts.model';
 import { PdfViewerComponent } from 'src/common/ui/pdf-viewer/pdf-viewer.component';
 
 @Component({
     selector: 'pxe-patterns-of-contracts',
     templateUrl: './patterns-of-contracts.component.html',
     styleUrls: ['./patterns-of-contracts.component.scss'],
+    providers: [DatePipe],
 })
 export class PatternsOfContractsComponent extends AbstractComponent implements OnInit {
 
@@ -57,11 +54,14 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
     public subjectType = this.SUBJECT_TYPE.INDIVIDUAL;
 
     public historyTableCols = historyColConfig;
-    public pdfSetting = pdfSetting;
-    public pdfSettingOld = null;
+    public pdfSettings = pdfSetting;
+    public pdfActiveContracts = null;
+    public pdfOldContracts = null;
+    public pdfFutureContracts = null;
 
     constructor(
         private cd: ChangeDetectorRef,
+        public datePipe: DatePipe,
         private metaService: Meta,
         private route: ActivatedRoute,
         private router: Router,
@@ -101,19 +101,53 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
                 this.subjectType = params.subjectType;
                 this.commodityType = params.commodityType;
 
-                if (!R.path([this.subjectType, this.commodityType], this.pdfSetting)) {
+                this.pdfActiveContracts = R.pipe(
+                    R.filter(
+                        (setting: IPdfSetting) => {
+                            const {
+                                dateFrom,
+                                dateTo,
+                            } = setting[this.SUBJECT_TYPE.INDIVIDUAL][this.COMMODITY_TYPE.POWER];
+                            return moment().isBetween(moment(dateFrom), moment(dateTo));
+                        },
+                    ),
+                    R.head,
+                ) (this.pdfSettings);
+
+                this.pdfOldContracts = R.filter(
+                    (setting: IPdfSetting) => {
+                        const {
+                            dateTo,
+                            dateFrom,
+                        } = setting[this.SUBJECT_TYPE.INDIVIDUAL][this.COMMODITY_TYPE.POWER];
+                        const now = new Date().getTime();
+                        return dateTo.getTime() < now && dateFrom.getTime() < now;
+                    },
+                )(this.pdfSettings);
+
+                this.pdfFutureContracts = R.filter(
+                    (setting: IPdfSetting) => {
+                        const {
+                            dateTo,
+                            dateFrom,
+                        } = setting[this.SUBJECT_TYPE.INDIVIDUAL][this.COMMODITY_TYPE.POWER];
+                        const now = new Date().getTime();
+                        return dateTo.getTime() > now && dateFrom.getTime() > now;
+                    },
+                )(this.pdfSettings);
+
+                this.pdfOldContracts = R.map(
+                    (setting: IPdfSetting) => setting[this.subjectType][this.commodityType])
+                (this.pdfOldContracts);
+
+                if (!R.path([this.subjectType, this.commodityType], this.pdfActiveContracts)) {
                     this.commodityType = this.COMMODITY_TYPE.POWER;
                     this.subjectType = this.SUBJECT_TYPE.INDIVIDUAL;
                     this.navigateToCorrectUrl();
                     return;
                 }
 
-                this.pdfSettingOld =
-                    R.map(
-                        (setting: IPdfSetting<IPdfFileWithText>) => setting[this.subjectType][this.commodityType])
-                    (this.pdfSettingOldSource);
-
-                const pdfCurrentSetting = this.pdfSetting[this.subjectType][this.commodityType];
+                const pdfCurrentSetting = this.pdfActiveContracts[this.subjectType][this.commodityType];
                 this.pxePdfViewer.pdfSrc = pdfCurrentSetting.sourceUrl;
                 this.pxePdfViewer.downloadFileName = pdfCurrentSetting.downloadName;
                 this.pxePdfViewer.refresh();

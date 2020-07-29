@@ -74,11 +74,13 @@ export const pdfSetting: IPdfSetting[] = [
                 sourceUrl: '/assets/pdfs/patterns-of-contracts/contract-power-fo.pdf',
                 downloadName: 'Vzorová smlouva domácnost - elektřina',
                 dateFrom: new Date('2015-01-01'),
+                dateTo: new Date('2021-01-01'),
             },
             [CommodityTypesLowerCase.GAS]: {
                 sourceUrl: '/assets/pdfs/patterns-of-contracts/contract-gas-fo.pdf',
                 downloadName: 'Vzorová smlouva domácnost - plyn',
                 dateFrom: new Date('2015-01-01'),
+                dateTo: new Date('2021-01-01'),
             },
         },
         [SubjectTypeLowerCase.BUSINESSMAN]: {
@@ -86,11 +88,13 @@ export const pdfSetting: IPdfSetting[] = [
                 sourceUrl: '/assets/pdfs/patterns-of-contracts/contract-power-po.pdf',
                 downloadName: 'Vzorová smlouva firma - elektřina',
                 dateFrom: new Date('2015-01-01'),
+                dateTo: new Date('2021-01-01'),
             },
             [CommodityTypesLowerCase.GAS]: {
                 sourceUrl: '/assets/pdfs/patterns-of-contracts/contract-gas-po.pdf',
                 downloadName: 'Vzorová smlouva firma - plyn',
                 dateFrom: new Date('2015-01-01'),
+                dateTo: new Date('2021-01-01'),
             },
         },
     },
@@ -100,13 +104,13 @@ export const pdfSetting: IPdfSetting[] = [
                 sourceUrl: '/assets/pdfs/patterns-of-contracts/contract-power-fo.pdf',
                 downloadName: 'Vzorová smlouva domácnost - elektřina',
                 dateFrom: new Date('2022-01-01'),
-                dateTo: new Date('2020-01-01'),
+                dateTo: new Date('2026-01-01'),
             },
             [CommodityTypesLowerCase.GAS]: {
                 sourceUrl: '/assets/pdfs/patterns-of-contracts/contract-gas-fo.pdf',
                 downloadName: 'Vzorová smlouva domácnost - plyn',
                 dateFrom: new Date('2022-01-01'),
-                dateTo: new Date('2020-01-01'),
+                dateTo: new Date('2026-01-01'),
             },
         },
         [SubjectTypeLowerCase.BUSINESSMAN]: {
@@ -114,13 +118,13 @@ export const pdfSetting: IPdfSetting[] = [
                 sourceUrl: '/assets/pdfs/patterns-of-contracts/contract-power-po.pdf',
                 downloadName: 'Vzorová smlouva firma - elektřina',
                 dateFrom: new Date('2022-01-01'),
-                dateTo: new Date('2020-01-01'),
+                dateTo: new Date('2026-01-01'),
             },
             [CommodityTypesLowerCase.GAS]: {
                 sourceUrl: '/assets/pdfs/patterns-of-contracts/contract-gas-po.pdf',
                 downloadName: 'Vzorová smlouva firma - plyn',
                 dateFrom: new Date('2022-01-01'),
-                dateTo: new Date('2020-01-01'),
+                dateTo: new Date('2026-01-01'),
             },
         },
     },
@@ -131,7 +135,7 @@ export const historyColConfig = [
     {
         views: [
             {
-                content: (row) => row.validity,
+                contentTemplateName: 'columnTemplateDownloadText',
             },
         ],
     },

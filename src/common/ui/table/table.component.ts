@@ -72,7 +72,7 @@ export class TableComponent extends AbstractComponent implements OnChanges {
     }
 
     ngOnChanges () {
-        this.isAdvanced = R.contains('table--advanced', this.tableClass);
+        this.isAdvanced = this.tableClass && R.contains('table--advanced', this.tableClass);
         this.mobileCols = [];
         this.cols.forEach(column => {
             column.views.forEach(view => this.prepareViewClasses(view));
