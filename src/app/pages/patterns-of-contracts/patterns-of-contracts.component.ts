@@ -8,13 +8,15 @@ import {
     OnInit,
     ViewChild,
 } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import {
     Meta,
     Title,
 } from '@angular/platform-browser';
 
+import * as moment from 'moment';
 import * as R from 'ramda';
-import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
+import { saveAs } from 'file-saver';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
@@ -24,8 +26,13 @@ import {
     SEO,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
+import {
+    historyColConfig,
+    pdfSetting,
+} from 'src/app/pages/patterns-of-contracts/patterns-of-contracts.config';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-import { IPdfSetting } from './patterns-of-contracts.model';
+import { IPdfSetting } from 'src/app/pages/patterns-of-contracts/models/patterns-of-contracts.model';
+import { PdfViewerComponent } from 'src/common/ui/pdf-viewer/pdf-viewer.component';
 
 @Component({
     selector: 'pxe-patterns-of-contracts',
@@ -33,8 +40,9 @@ import { IPdfSetting } from './patterns-of-contracts.model';
     styleUrls: ['./patterns-of-contracts.component.scss'],
 })
 export class PatternsOfContractsComponent extends AbstractComponent implements OnInit {
-    @ViewChild('ng2PdfJsViewer', { static: true })
-    public ng2PdfJsViewer: PdfJsViewerComponent;
+
+    @ViewChild('pxePdfViewer', { static: true })
+    public pxePdfViewer: PdfViewerComponent;
 
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
@@ -43,33 +51,16 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
 
     public commodityType = this.COMMODITY_TYPE.POWER;
     public subjectType = this.SUBJECT_TYPE.INDIVIDUAL;
-    public loading = true;
 
-    public pdfSetting: IPdfSetting = {
-        [this.SUBJECT_TYPE.INDIVIDUAL]: {
-            [this.COMMODITY_TYPE.POWER]: {
-                sourceUrl: '/assets/pdfs/patterns-of-contracts/contract-power-fo.pdf',
-                downloadName: 'Vzorová smlouva domácnost - elektřina',
-            },
-            [this.COMMODITY_TYPE.GAS]: {
-                sourceUrl: '/assets/pdfs/patterns-of-contracts/contract-gas-fo.pdf',
-                downloadName: 'Vzorová smlouva domácnost - plyn',
-            },
-        },
-        [this.SUBJECT_TYPE.BUSINESSMAN]: {
-            [this.COMMODITY_TYPE.POWER]: {
-                sourceUrl: '/assets/pdfs/patterns-of-contracts/contract-power-po.pdf',
-                downloadName: 'Vzorová smlouva firma - elektřina',
-            },
-            [this.COMMODITY_TYPE.GAS]: {
-                sourceUrl: '/assets/pdfs/patterns-of-contracts/contract-gas-po.pdf',
-                downloadName: 'Vzorová smlouva firma - plyn',
-            },
-        },
-    };
+    public historyTableCols = historyColConfig;
+    public pdfSettings = pdfSetting;
+    public pdfActiveContracts = null;
+    public pdfOldContracts = null;
+    public pdfFutureContracts = null;
 
     constructor(
         private cd: ChangeDetectorRef,
+        public datePipe: DatePipe,
         private metaService: Meta,
         private route: ActivatedRoute,
         private router: Router,
@@ -108,16 +99,22 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
             .subscribe(params => {
                 this.subjectType = params.subjectType;
                 this.commodityType = params.commodityType;
-                if (!R.path([this.subjectType, this.commodityType], this.pdfSetting)) {
+
+                this.prepareActiveContract();
+                this.prepareFutureContracts();
+                this.prepareOldContracts();
+
+                if (!R.path([this.subjectType, this.commodityType], this.pdfActiveContracts)) {
                     this.commodityType = this.COMMODITY_TYPE.POWER;
                     this.subjectType = this.SUBJECT_TYPE.INDIVIDUAL;
                     this.navigateToCorrectUrl();
                     return;
                 }
-                const pdfCurrentSetting = this.pdfSetting[this.subjectType][this.commodityType];
-                this.ng2PdfJsViewer.pdfSrc = pdfCurrentSetting.sourceUrl;
-                this.ng2PdfJsViewer.downloadFileName = pdfCurrentSetting.downloadName;
-                this.ng2PdfJsViewer.refresh();
+
+                const pdfCurrentSetting = this.pdfActiveContracts[this.subjectType][this.commodityType];
+                this.pxePdfViewer.pdfSrc = pdfCurrentSetting.sourceUrl;
+                this.pxePdfViewer.downloadFileName = pdfCurrentSetting.downloadName;
+                this.pxePdfViewer.refresh();
                 this.cd.markForCheck();
             });
     }
@@ -136,5 +133,55 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
 
     public navigateToCorrectUrl = () => {
         this.router.navigate([`${CONSTS.PATHS.PATTERNS_OF_CONTRACTS}/${this.subjectType}/${this.commodityType}`]);
+    }
+
+    public downloadPdf = (sourceUrl: string, name: string) => {
+        saveAs(sourceUrl, name);
+    }
+
+    public prepareOldContracts = () => {
+        this.pdfOldContracts = R.pipe(
+            R.filter(
+                (setting: IPdfSetting) => {
+                    const {
+                        dateTo,
+                        dateFrom,
+                    } = setting[this.SUBJECT_TYPE.INDIVIDUAL][this.COMMODITY_TYPE.POWER];
+                    const now = new Date().getTime();
+                    return dateTo.getTime() < now && dateFrom.getTime() < now;
+                },
+            ),
+            R.map(
+                (setting: IPdfSetting) => setting[this.subjectType][this.commodityType],
+            ),
+        )(this.pdfSettings);
+    }
+
+    public prepareActiveContract = () => {
+        this.pdfActiveContracts = R.pipe(
+            R.filter(
+                (setting: IPdfSetting) => {
+                    const {
+                        dateFrom,
+                        dateTo,
+                    } = setting[this.SUBJECT_TYPE.INDIVIDUAL][this.COMMODITY_TYPE.POWER];
+                    return moment().isBetween(moment(dateFrom), moment(dateTo));
+                },
+            ),
+            R.head,
+        ) (this.pdfSettings);
+    }
+
+    public prepareFutureContracts = () => {
+        this.pdfFutureContracts = R.filter(
+            (setting: IPdfSetting) => {
+                const {
+                    dateTo,
+                    dateFrom,
+                } = setting[this.SUBJECT_TYPE.INDIVIDUAL][this.COMMODITY_TYPE.POWER];
+                const now = new Date().getTime();
+                return dateTo.getTime() > now && dateFrom.getTime() > now;
+            },
+        )(this.pdfSettings);
     }
 }
