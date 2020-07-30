@@ -50,7 +50,7 @@ export class VerificationFormComponent extends AbstractFormComponent implements 
     public showSentSmsLabelUnderFirstField = true;
 
     @Input()
-    public sendSmsLabel = 'Odeslat SMS kód';
+    public sendSmsLabel = 'Získat potvzovací SMS kód';
 
     @Input()
     public phone = null;

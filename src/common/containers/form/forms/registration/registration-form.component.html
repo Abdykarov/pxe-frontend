@@ -19,7 +19,7 @@
         [formControl]="form.controls.email"
         [id]="'email'"
         label="E-mail"
-        infoText="Nemusíte se bát, ani my nemáme rádi spam."
+        infoText="Založíme vám účet zdarma pro zadaný registrační e-mail. Spamu se nemusíte bát."
         [success]="form.controls.email.valid && (form.controls.email.touched || formError.email)"
         [touched]="form.controls.email.touched || formError.email"
         [validationMessages]="formFields.validationMessages.email"
@@ -44,7 +44,7 @@
             [submit]="true"
             (action)="submitForm($event);sAnalyticsService.sFormClick($event);"
             [isDisabled]="formLoading"
-            [label]="isSignUp ? 'Registrovat se' : 'Odeslat'">
+            [label]="isSignUp ? 'Založit účet' : 'Odeslat'">
         </lnd-button>
     </div>
 </form>

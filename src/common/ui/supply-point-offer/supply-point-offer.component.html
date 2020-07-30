@@ -59,7 +59,7 @@
                                 <div>{{question?.shortContent}}</div>
                                 <a [routerLink]="question.absoluteUrl"
                                    class="link--white link--interactive-revert d-block mt-1">
-                                    Více info
+                                    Zobrazit více
                                 </a>
                             </lnd-tooltip>
                         </span>
@@ -96,7 +96,7 @@
                     <lnd-button
                         *ngIf="!isOwner"
                         class="mr-md-3"
-                        [label]="showPriceDecomposition ? 'Zavřít detail nabídky' : 'Detail nabídky'"
+                        [label]="showPriceDecomposition ? 'Zavřít detail nabídky' : 'Zobrazit detail nabídky'"
                         [type]="'secondary'"
                         (action)="togglePriceDecomposition($event)">
                     </lnd-button>
@@ -281,7 +281,7 @@
                             *ngIf="!isOwner"
                             class="w-100 mb-3 mb-md-0 mr-md-3"
                             customClass="w-100 w-md-auto"
-                            [label]="showPriceDecomposition ? 'Zavřít detail nabídky' : 'Detail nabídky'"
+                            [label]="showPriceDecomposition ? 'Zavřít detail nabídky' : 'Zobrazit detail nabídky'"
                             [type]="'secondary'"
                             (action)="togglePriceDecomposition($event)">
                         </lnd-button>
