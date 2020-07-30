@@ -152,7 +152,7 @@
                 </p>
                 <div #pxeVerificationFormWrapper
                     class="row">
-                    <div class="col-12 col-lg-9 offset-lg-3">
+                    <div class="col-12 text-center">
                         <pxe-verification-form
                             *ngIf="supplyPoint | pathValue:['contract', 'personalData', 'phone']"
                             [fieldError]="fieldError"
@@ -160,7 +160,6 @@
                             [contract]="supplyPoint.contract"
                             [globalError]="globalError"
                             [phone]="supplyPoint.contract.personalData.phone"
-                            [showSentSmsLabelUnderFirstField]="false"
                             [smsSent]="smsSent"
                             (submitAction)="signContract($event)"
                             (customAction)="sendContractConfirmationSms()"

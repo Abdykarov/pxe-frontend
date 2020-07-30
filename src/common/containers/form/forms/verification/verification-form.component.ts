@@ -19,20 +19,15 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
     styleUrls: ['./verification-form.component.scss'],
 })
 export class VerificationFormComponent extends AbstractFormComponent implements OnChanges, OnDestroy {
+
+    @Input()
+    public showForm = false;
+
     @Input()
     public smsSent: number = null;
 
     @Input()
     public contract: IContract;
-
-    @Input()
-    public classMainWrapper = 'row justify-content-end';
-
-    @Input()
-    public classFirstField = 'col';
-
-    @Input()
-    public classSecondField = 'col-md-auto mt-md-4';
 
     @Input()
     public infoTemplate: TemplateRef<any>;
@@ -41,13 +36,10 @@ export class VerificationFormComponent extends AbstractFormComponent implements 
     public labelInput = 'Kód z SMS';
 
     @Input()
+    public enableVerificationLabel = 'Podepsat smlouvu';
+
+    @Input()
     public submitLabelText = 'Podepsat smlouvu';
-
-    @Input()
-    public showDisabledInput = true;
-
-    @Input()
-    public showSentSmsLabelUnderFirstField = true;
 
     @Input()
     public sendSmsLabel = 'Získat potvzovací SMS kód';
@@ -86,4 +78,6 @@ export class VerificationFormComponent extends AbstractFormComponent implements 
         this.resetFormError(false);
         this.customAction.emit();
     }
+
+    public enableVerification = () => this.showForm = true;
 }

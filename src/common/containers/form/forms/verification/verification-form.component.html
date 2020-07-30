@@ -1,57 +1,74 @@
 <ng-template #sendSmsAgainTemplate>
-    <a (click)="submitSms()"
-       *ngIf="smsSent">
-        Poslat SMS kód znovu?
+    <a [class.is-disabled]="!smsSent"
+        (click)="submitSms()">
+        Poslat znovu na číslo znovu {{phone}}
     </a>
 </ng-template>
-<form
-    [formGroup]="form"
-    autocomplete="off"
-    (keydown)="resetCustomFieldError()"
-    (keydown.enter)="submitForm($event);false"
-    (change)="resetCustomFieldError()">
-    <div [ngClass]="classMainWrapper">
-        <div *ngIf="showDisabledInput || smsSent"
-             [ngClass]="classFirstField">
-            <div class="form-container ml-0 ml-md-auto mr-md-0">
-                <lnd-form-field
-                    lndSFormDirective
-                    lndSBiometricsDirective
-                    label="Kód z SMS"
-                    [disabledField]="!smsSent"
-                    [error]="formError.smsCode || form.controls.smsCode.errors"
-                    [formControl]="form.controls.smsCode"
-                    [id]="'smsCode'"
-                    [subtextTemplate]="sendSmsAgainTemplate"
-                    [success]="form.controls.smsCode.valid && (form.controls.smsCode.touched || formError.smsCode)"
-                    [touched]="form.controls.smsCode.touched || formError.smsCode"
-                    [triggerFocus]="smsSent"
-                    [validationMessages]="formFields.validationMessages.smsCode">
-                </lnd-form-field>
-            </div>
-        </div>
-        <ng-container *ngIf="infoTemplate && smsSent">
-            <ng-container *ngTemplateOutlet="infoTemplate; context: { contract: this.contract }"></ng-container>
-        </ng-container>
-        <div [ngClass]="classSecondField">
+
+<ng-template #confirmLabelTemplate>
+    <span [class.is-disabled]="!smsSent">Ověřovací kód</span>
+</ng-template>
+
+<div class="row no-gutters">
+    <div class="col-12">
+        <lnd-button
+            *ngIf="!showForm"
+            [label]="enableVerificationLabel"
+            (click)="enableVerification()"
+            type="primary">
+        </lnd-button>
+    </div>
+
+    <div class="col-12">
+        <lnd-button
+            *ngIf="showForm"
+            class="mb-2"
+            (action)="submitSms();sAnalyticsService.sFormClick($event)"
+            [isDisabled]="formLoading || smsSent"
+            [label]="sendSmsLabel"
+            type="primary">
+        </lnd-button>
+        <p *ngIf="showForm"
+           class="small"
+           [class.is-disabled]="smsSent">
+            Ověřovací SMS kód odešleme<br>na číslo {{phone}}
+        </p>
+    </div>
+
+    <div class="col-12">
+        <form
+            class="form-container"
+            *ngIf="showForm"
+            [formGroup]="form"
+            autocomplete="off"
+            (keydown)="resetCustomFieldError()"
+            (keydown.enter)="submitForm($event);false"
+            (change)="resetCustomFieldError()">
+            <lnd-form-field
+                lndSFormDirective
+                lndSBiometricsDirective
+                class="text-left"
+                [customFieldClass]="!smsSent ? 'is-disabled' : null"
+                [disabledField]="!smsSent"
+                [error]="formError.smsCode || form.controls.smsCode.errors"
+                [formControl]="form.controls.smsCode"
+                [id]="'smsCode'"
+                [labelTemplate]="confirmLabelTemplate"
+                [subtextTemplate]="sendSmsAgainTemplate"
+                [success]="form.controls.smsCode.valid && (form.controls.smsCode.touched || formError.smsCode)"
+                [touched]="form.controls.smsCode.touched || formError.smsCode"
+                [triggerFocus]="smsSent"
+                [validationMessages]="formFields.validationMessages.smsCode">
+            </lnd-form-field>
+            <ng-container *ngIf="infoTemplate && smsSent">
+                <ng-container *ngTemplateOutlet="infoTemplate; context: { contract: this.contract }"></ng-container>
+            </ng-container>
             <lnd-button
-                *ngIf="!smsSent"
-                (action)="submitSms();sAnalyticsService.sFormClick($event)"
-                [isDisabled]="formLoading"
-                [label]="sendSmsLabel"
-                type="primary">
-            </lnd-button>
-            <lnd-button
-                *ngIf="smsSent"
                 (action)="submitForm();sAnalyticsService.sFormClick($event)"
-                [isDisabled]="formLoading"
+                [isDisabled]="formLoading || !smsSent"
                 [label]="submitLabelText"
                 type="primary">
             </lnd-button>
-            <p *ngIf="!smsSent && !showSentSmsLabelUnderFirstField"
-                class="small mt-2">
-                Ověřovací SMS kód odešleme<br>na číslo {{phone}}
-            </p>
-        </div>
+        </form>
     </div>
-</form>
+</div>

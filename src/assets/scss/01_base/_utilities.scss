@@ -329,3 +329,11 @@ $colors: (
 	right: auto;
 	transform: translateX(-50%);
 }
+
+.bg-body {
+	background-color: $body-bg;
+}
+
+.box-shadow {
+	box-shadow: $box-shadow;
+}

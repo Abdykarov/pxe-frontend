@@ -50,9 +50,6 @@
                     [globalError]="globalError"
                     [infoTemplate]="interruptAutomaticProlongationTemplate"
                     [smsSent]="smsSent"
-                    [showSentSmsLabelUnderFirstField]="false"
-                    classFirstField="col-12"
-                    classSecondField="col-12 text-center"
                     submitLabelText="Zrušit automatické prodloužení smlouvy"
                     (submitAction)="submitVerification($event)"
                     (customAction)="sendContractConfirmationSms()">
@@ -83,9 +80,6 @@
                         [infoTemplate]="leaveContactInfoTemplate"
                         [phone]="supplyPoint.contract.personalData.phone"
                         [smsSent]="smsSent"
-                        [showSentSmsLabelUnderFirstField]="false"
-                        classFirstField="col-12"
-                        classSecondField="col-12 text-center"
                         submitLabelText="Odstoupit od smlouvy"
                         (submitAction)="submitVerification($event)"
                         (customAction)="sendContractConfirmationSms()">
@@ -116,9 +110,6 @@
                         [globalError]="globalError"
                         [infoTemplate]="terminateContactInfoTemplate"
                         [smsSent]="smsSent"
-                        [showSentSmsLabelUnderFirstField]="false"
-                        classFirstField="col-12"
-                        classSecondField="col-12 text-center"
                         submitLabelText="Vypovědět smlouvu"
                         (submitAction)="submitVerification($event)"
                         (customAction)="sendContractConfirmationSms()">
