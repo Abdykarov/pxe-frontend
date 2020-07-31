@@ -66,7 +66,6 @@ export class ConsumptionIndicatorPipe implements PipeTransform {
     public getStingLabel = (annualConsumptionNT: number, annualConsumptionVT: number, annualConsumption: number, unit: string) =>
         `${this.decimalPipe.transform(R.sum([annualConsumptionNT, annualConsumptionVT, annualConsumption]), '1.0-3')} ${unit}`
 
-
     public anyProgressInAnnualConsumption = (curr: number, last: number) => curr && last && curr !== last;
 
 }
