@@ -16,6 +16,7 @@ import {
     filter,
     takeUntil,
 } from 'rxjs/operators';
+import { IDocumentType, IResponseDataDocument } from 'src/app/services/model/document.model';
 
 import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/abstract-supply-point-form.component';
 import {
@@ -25,11 +26,6 @@ import {
     ISupplyPoint,
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
-import {
-    confirmFindNewSupplyPoint,
-    confirmFindNewSupplyPointConfig,
-    supplyPointDetailAllowedFields,
-} from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import {
     ANNUAL_CONSUMPTION_TYPES,
     ANNUAL_CONSUMPTION_UNIT_TYPES,
@@ -43,11 +39,17 @@ import {
     TIME_TO_CONTRACT_END_PERIOD_MAP,
     UNIT_OF_PRICES,
 } from 'src/app/app.constants';
+import {
+    confirmFindNewSupplyPoint,
+    confirmFindNewSupplyPointConfig,
+    supplyPointDetailAllowedFields,
+} from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
+import { DocumentService } from 'src/app/services/document.service';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { transformCodeList } from 'src/common/utils';
+import { parseRestAPIErrors, transformCodeList } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-supply-point-detail-form',
@@ -72,14 +74,13 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     public subjectName = '';
     public supplyPointContractEndTypes = CONTRACT_END_TYPE;
     public setFormByCommodity = this.setFormFields;
-    public timeToContractEndPeriodMap = TIME_TO_CONTRACT_END_PERIOD_MAP;
     public today = new Date().toISOString();
     public timeToContractEnd = CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS;
-    public timeToContractEndPeriod = TimeToContractEndPeriod.DAY;
 
     constructor(
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
+        private documentService: DocumentService,
         protected fb: FormBuilder,
         private modalsService: ModalService,
         private router: Router,
@@ -252,5 +253,24 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         }
 
         this.submitAction.emit(form);
+    }
+
+    public downloadPdf = () => {
+        this.documentService.getDocument(this.supplyPoint.contract.contractId, IDocumentType.CONTRACT)
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                (responseDataDocument: IResponseDataDocument) => {
+                    this.documentService.documentSave(responseDataDocument);
+                    this.formLoading = false;
+                    this.cd.markForCheck();
+                },
+                (error) => {
+                    const message = parseRestAPIErrors(error);
+                    this.globalError = [message];
+                    this.cd.markForCheck();
+                },
+            );
     }
 }

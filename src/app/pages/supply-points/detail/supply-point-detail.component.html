@@ -26,22 +26,22 @@
 <!--</ng-template>-->
 <ng-template #contractActionsTemplate>
     <div #contractActionsWrapper>
-        <div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.UNSET_AUTOMATIC_PROLONGATION"
-             class="row no-gutters align-items-end mb-5">
-            <div class="col-12 col-md-6">
-                <small>Zrušit automatické prodloužení smlouvy</small>
-            </div>
-            <div class="col-12 col-md-6 pl-3 text-right">
-                <lnd-button
-                    (click)="interruptAutomaticProlongation()"
-                    [isDisabled]="formLoading"
-                    label="Zrušit"
-                    type="link-danger"
-                    size="sm">
-                </lnd-button>
-            </div>
-            <div *ngIf="contractAction === contractActions.UNSET_PROLONGATION"
-                 class="col-12 mt-4">
+        <!--<div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.UNSET_AUTOMATIC_PROLONGATION"-->
+             <!--class="row no-gutters align-items-end mb-5">-->
+            <!--<div class="col-12 col-md-6">-->
+                <!--<small>Zrušit automatické prodloužení smlouvy</small>-->
+            <!--</div>-->
+            <!--<div class="col-12 col-md-6 pl-3 text-right">-->
+                <!--<lnd-button-->
+                    <!--(click)="interruptAutomaticProlongation()"-->
+                    <!--[isDisabled]="formLoading"-->
+                    <!--label="Zrušit"-->
+                    <!--type="link-danger"-->
+                    <!--size="sm">-->
+                <!--</lnd-button>-->
+            <!--</div>-->
+            <!--<div *ngIf="contractAction === contractActions.UNSET_PROLONGATION"-->
+                 <!--class="col-12 mt-4">-->
                 <pxe-verification-form
                     [fieldError]="fieldError"
                     [formLoading]="formLoading"
@@ -50,11 +50,19 @@
                     [globalError]="globalError"
                     [infoTemplate]="interruptAutomaticProlongationTemplate"
                     [smsSent]="smsSent"
-                    submitLabelText="Zrušit automatické prodloužení smlouvy"
+                    enableVerificationLabel="Zrušit automatickou prolongaci"
+                    enableButtonType="secondary"
                     (submitAction)="submitVerification($event)"
                     (customAction)="sendContractConfirmationSms()">
                 </pxe-verification-form>
+            <!--</div>-->
+        <!--</div>-->
+        <div [class.mb-5]="!supplyPoint.lastVersionOfSupplyPoint"
+             class="col-12">
+            <div class="mb-1">
+                <small>Výpovědní lhůta</small>
             </div>
+            <span class="perex">{{timeToContractEnd}} {{timeToContractEnd | plural: timeToContractEndPeriodMap[timeToContractEndPeriod]}}</span>
         </div>
         <div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.LEAVE_CONTRACT"
              class="row no-gutters align-items-end mb-5">

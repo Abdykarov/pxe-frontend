@@ -24,7 +24,7 @@ import {
     ISupplyPointFormData,
     ISupplyPointGasAttributes,
     ISupplyPointPowerAttributes,
-    SubjectType,
+    SubjectType, TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import { ContractActions } from '../models/supply-point-detail.model';
 import { ContractDeleteReason } from 'src/common/graphql/models/contract';
@@ -43,8 +43,9 @@ import {
     scrollToElementFnc,
 } from 'src/common/utils';
 import {
+    CONSTS,
     RequestsOverviewBannerShow,
-    ROUTES,
+    ROUTES, TIME_TO_CONTRACT_END_PERIOD_MAP,
 } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
@@ -71,6 +72,9 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     public contractActions = ContractActions;
 
     public contractActionsWrapper: ElementRef;
+    public timeToContractEnd = CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS;
+    public timeToContractEndPeriod = TimeToContractEndPeriod.DAY;
+    public timeToContractEndPeriodMap = TIME_TO_CONTRACT_END_PERIOD_MAP;
 
     @ViewChild('contractActionsWrapper') set content(contractActionsWrapper: ElementRef) {
         if (contractActionsWrapper) {

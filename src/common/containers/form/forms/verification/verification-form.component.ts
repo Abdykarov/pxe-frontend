@@ -39,6 +39,9 @@ export class VerificationFormComponent extends AbstractFormComponent implements 
     public enableVerificationLabel = 'Podepsat smlouvu';
 
     @Input()
+    public enableButtonType = 'primary';
+
+    @Input()
     public submitLabelText = 'Podepsat smlouvu';
 
     @Input()
