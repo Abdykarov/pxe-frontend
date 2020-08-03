@@ -155,6 +155,7 @@
                     <div class="col-12 text-center">
                         <pxe-verification-form
                             *ngIf="supplyPoint | pathValue:['contract', 'personalData', 'phone']"
+                            [toggleEnableBySelf]="false"
                             [fieldError]="fieldError"
                             [formLoading]="formLoading"
                             [contract]="supplyPoint.contract"

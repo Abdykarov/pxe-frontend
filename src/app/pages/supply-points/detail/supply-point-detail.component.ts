@@ -294,6 +294,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     // }
 
     public interruptAutomaticProlongation = () => {
+        console.log('volam se ');
         this.contractAction = ContractActions.UNSET_PROLONGATION;
         this.smsSent = null;
         this.fieldError = {};

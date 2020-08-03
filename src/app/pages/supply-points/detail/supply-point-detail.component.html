@@ -26,22 +26,9 @@
 <!--</ng-template>-->
 <ng-template #contractActionsTemplate>
     <div #contractActionsWrapper>
-        <!--<div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.UNSET_AUTOMATIC_PROLONGATION"-->
-             <!--class="row no-gutters align-items-end mb-5">-->
-            <!--<div class="col-12 col-md-6">-->
-                <!--<small>Zrušit automatické prodloužení smlouvy</small>-->
-            <!--</div>-->
-            <!--<div class="col-12 col-md-6 pl-3 text-right">-->
-                <!--<lnd-button-->
-                    <!--(click)="interruptAutomaticProlongation()"-->
-                    <!--[isDisabled]="formLoading"-->
-                    <!--label="Zrušit"-->
-                    <!--type="link-danger"-->
-                    <!--size="sm">-->
-                <!--</lnd-button>-->
-            <!--</div>-->
-            <!--<div *ngIf="contractAction === contractActions.UNSET_PROLONGATION"-->
-                 <!--class="col-12 mt-4">-->
+        <div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.UNSET_AUTOMATIC_PROLONGATION"
+            class="row no-gutters mb-3">
+            <div class="col-12">
                 <pxe-verification-form
                     [fieldError]="fieldError"
                     [formLoading]="formLoading"
@@ -50,13 +37,17 @@
                     [globalError]="globalError"
                     [infoTemplate]="interruptAutomaticProlongationTemplate"
                     [smsSent]="smsSent"
+                    [showForm]="contractAction === contractActions.UNSET_PROLONGATION"
+                    (enableVerificationAction)="interruptAutomaticProlongation()"
+                    [toggleEnableBySelf]="true"
                     enableVerificationLabel="Zrušit automatickou prolongaci"
                     enableButtonType="secondary"
+                    submitLabelText="Zrušit"
                     (submitAction)="submitVerification($event)"
                     (customAction)="sendContractConfirmationSms()">
                 </pxe-verification-form>
-            <!--</div>-->
-        <!--</div>-->
+            </div>
+        </div>
         <div [class.mb-5]="!supplyPoint.lastVersionOfSupplyPoint"
              class="col-12">
             <div class="mb-1">
@@ -65,21 +56,8 @@
             <span class="perex">{{timeToContractEnd}} {{timeToContractEnd | plural: timeToContractEndPeriodMap[timeToContractEndPeriod]}}</span>
         </div>
         <div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.LEAVE_CONTRACT"
-             class="row no-gutters align-items-end mb-5">
-            <div class="col-12 col-md-6">
-                <small>Odstoupit od smlouvy do 14 dnů od podpisu</small>
-            </div>
-            <div class="col-12 col-md-6 pl-3 text-right">
-                <lnd-button
-                        (click)="leaveContract()"
-                        [isDisabled]="formLoading"
-                        label="Odstoupit"
-                        type="link-danger"
-                        size="sm">
-                </lnd-button>
-            </div>
-            <div *ngIf="contractAction === contractActions.LEAVE_CONTRACT"
-                 class="col-12 mt-4">
+            class="row no-gutters mb-3">
+            <div class="col-12">
                 <pxe-verification-form
                         [fieldError]="fieldError"
                         [formLoading]="formLoading"
@@ -88,28 +66,23 @@
                         [infoTemplate]="leaveContactInfoTemplate"
                         [phone]="supplyPoint.contract.personalData.phone"
                         [smsSent]="smsSent"
-                        submitLabelText="Odstoupit od smlouvy"
+                        enableVerificationSubText="Podle občanského zákoníku (§ 1829) můžete odstoupit od smlouvy do 14 dní od data
+                            podpisu smlouvy. Účinky nastávají okamžikem, kdy je toto právní jednání doručeno dodavateli.
+                            Smlouva se zruší od počátku a vy nemusíte udávat žádný důvod odstoupení."
+                        enableVerificationLabel="Odstoupit od smlouvy"
+                        enableButtonType="secondary"
+                        submitLabelText="Odstoupit"
+                        [showForm]="contractAction === contractActions.LEAVE_CONTRACT"
+                        [toggleEnableBySelf]="true"
+                        (enableVerificationAction)="leaveContract()"
                         (submitAction)="submitVerification($event)"
                         (customAction)="sendContractConfirmationSms()">
                 </pxe-verification-form>
             </div>
         </div>
         <div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.TERMINATE_CONTRACT"
-             class="row no-gutters align-items-end mb-5">
-            <div class="col-12 col-md-6">
-                <small>Vypovědět smlouvu</small>
-            </div>
-            <div class="col-12 col-md-6 pl-3 text-right">
-                <lnd-button
-                        (click)="terminateContract()"
-                        [isDisabled]="formLoading"
-                        label="Vypovědět"
-                        type="link-danger"
-                        size="sm">
-                </lnd-button>
-            </div>
-            <div *ngIf="contractAction === contractActions.TERMINATE_CONTRACT"
-                 class="col-12 mt-4">
+            class="row no-gutters mb-3">
+            <div class="col-12">
                 <pxe-verification-form
                         [fieldError]="fieldError"
                         [formLoading]="formLoading"
@@ -118,7 +91,15 @@
                         [globalError]="globalError"
                         [infoTemplate]="terminateContactInfoTemplate"
                         [smsSent]="smsSent"
-                        submitLabelText="Vypovědět smlouvu"
+                        enableVerificationSubText="Energetický zákon (§ 11 a odst. 3) vám nabízí možnost smlouvu vypovědět bez jakýchkoliv sankcí
+                            do 15. dne po záhajení dodávek energií. Výpovědní doba činí 15 dnů a začíná běžet prvním dnem měsíce
+                            následujícího. Jediná částka, kterou zaplatííte, je za energii, kterou jste už stihli odebrat."
+                        enableVerificationLabel="Vypovědět smlouvu"
+                        [showForm]="contractAction === contractActions.TERMINATE_CONTRACT"
+                        [toggleEnableBySelf]="true"
+                        enableButtonType="secondary"
+                        submitLabelText="Vypovědět"
+                        (enableVerificationAction)="terminateContract()"
                         (submitAction)="submitVerification($event)"
                         (customAction)="sendContractConfirmationSms()">
                 </pxe-verification-form>
@@ -186,4 +167,20 @@
                 [contractActionsTemplate]="contractActionsTemplate"
         ></pxe-supply-point-detail-form>
     </ng-container>
+
+    <div class="row text-center">
+        <div class="col-12">
+            <h2>TODO po mergy klasickyho BE --- dat sem odkaz na navazijci smlouvu </h2>
+        </div>
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <div class="page-box">
+                <h1 class="mb-1">Byt - babička</h1>
+                <p class="mb-3">Navazující smlouva pro dodávku elektřiny v období 1.1.2020 - 31.12.2020</p>
+                <lnd-button
+                    label="Dokončit žádost"
+                    type="primary">
+                </lnd-button>
+            </div>
+        </div>
+    </div>
 </pxe-layout-container>

@@ -10,19 +10,26 @@
 </ng-template>
 
 <div class="row no-gutters">
-    <div class="col-12">
+    <div
+        *ngIf="!showForm"
+        class="col-12">
         <lnd-button
-            *ngIf="!showForm"
+            class="w-100"
+            customClass="p-2 w-100"
             [label]="enableVerificationLabel"
-            (click)="enableVerification()"
+            (click)="(toggleEnableBySelf ? enableVerificationAction.emit() : enableVerification())"
             [type]="enableButtonType">
         </lnd-button>
+        <p class="input-subtext mt-1" *ngIf="enableVerificationSubText">
+            {{enableVerificationSubText}}
+        </p>
     </div>
 
     <div class="col-12">
         <lnd-button
             *ngIf="showForm"
-            class="mb-2"
+            class="w-100 mb-1"
+            customClass="p-2 w-100"
             (action)="submitSms();sAnalyticsService.sFormClick($event)"
             [isDisabled]="formLoading || smsSent"
             [label]="sendSmsLabel"
@@ -64,6 +71,8 @@
                 <ng-container *ngTemplateOutlet="infoTemplate; context: { contract: this.contract }"></ng-container>
             </ng-container>
             <lnd-button
+                class="w-100"
+                customClass="p-2 w-100"
                 (action)="submitForm();sAnalyticsService.sFormClick($event)"
                 [isDisabled]="formLoading || !smsSent"
                 [label]="submitLabelText"

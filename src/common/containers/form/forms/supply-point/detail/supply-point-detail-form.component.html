@@ -286,7 +286,7 @@
                         <h4><a (click)="downloadPdf()">Stáhnout</a> (PDF)</h4>
                     </div>
                     <div *ngIf="(supplyPoint | pathValue:['contract', 'deliveryTo'])"
-                         [class.mb-5]="supplyPoint.contract.deliveryTo"
+                         [class.mb-2]="supplyPoint.contract.deliveryTo"
                          class="col-12">
                         <div class="mb-1">
                             <small>Dodávka do</small>

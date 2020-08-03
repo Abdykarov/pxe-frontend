@@ -4,7 +4,7 @@ import {
     OnChanges,
     SimpleChanges,
     OnDestroy,
-    TemplateRef,
+    TemplateRef, Output, EventEmitter,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
@@ -39,6 +39,9 @@ export class VerificationFormComponent extends AbstractFormComponent implements 
     public enableVerificationLabel = 'Podepsat smlouvu';
 
     @Input()
+    public enableVerificationSubText: string = null;
+
+    @Input()
     public enableButtonType = 'primary';
 
     @Input()
@@ -49,6 +52,12 @@ export class VerificationFormComponent extends AbstractFormComponent implements 
 
     @Input()
     public phone = null;
+
+    @Output()
+    public enableVerificationAction = new EventEmitter<any>();
+
+    @Input()
+    public toggleEnableBySelf = true;
 
     public formFields = formFields;
 
