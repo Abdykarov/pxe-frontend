@@ -23,6 +23,28 @@
 			position: fixed;
 			background-color: $light;
 		}
+
+		&.header--lp {
+			background-color: transparent;
+
+			.header-inner {
+				// Media queries
+				@include media-breakpoint-up(xl) {
+					background-color: $body-bg-lp;
+				}
+			}
+		}
+	}
+
+	&--lp {
+		.header-inner {
+			// Media queries
+			@include media-breakpoint-down(xl) {
+				width: calc( 100% + #{$spacer} );
+				margin-left: -( $spacer / 2 );
+				background-color: $body-bg-lp;
+			}
+		}
 	}
 
 	.logo {

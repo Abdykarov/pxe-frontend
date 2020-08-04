@@ -21,7 +21,6 @@ import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 import {
     debounceTime,
-    filter,
     takeUntil,
 } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
@@ -58,15 +57,22 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
     templateUrl: './landing.component.html',
 })
 export class LandingComponent extends AbstractFaqComponent implements AfterViewInit {
+    @ViewChild('video')
+    public video: ElementRef;
+
+    public isVideoPlaying = false;
 
     @ViewChild('subscription')
     public subscriptionElement: ElementRef;
 
-    @ViewChild('mapCoverage')
-    public mapCoverageElement: ElementRef;
+    @ViewChild('faq')
+    public faq: ElementRef;
 
-    @ViewChild('supplierChange')
-    public supplierChangeElement: ElementRef;
+    @ViewChild('aboutUs')
+    public aboutUs: ElementRef;
+
+    @ViewChild('aboutService')
+    public aboutService: ElementRef;
 
     public frequentedQuestions: IAccordionItem[] = [];
     public formLoading = false;
@@ -132,41 +138,37 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
                 if (scrollTo === SCROLL_TO.LANDING_SUBSCRIPTION) {
                     scrollToElementFnc(this.subscriptionElement.nativeElement);
                 }
-                if (scrollTo === SCROLL_TO.MAP_COVERAGE) {
-                    scrollToElementFnc(this.mapCoverageElement.nativeElement);
+                if (scrollTo === SCROLL_TO.FAQ) {
+                    scrollToElementFnc(this.faq.nativeElement);
                 }
-                if (scrollTo === SCROLL_TO.SUPPLIER_CHANGE) {
-                    scrollToElementFnc(this.supplierChangeElement.nativeElement);
+                if (scrollTo === SCROLL_TO.ABOUT_US) {
+                    scrollToElementFnc(this.aboutUs.nativeElement);
                 }
-            });
-
-        this.resizeEvent$
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(_  => {
-                this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
-                this.autoPlayVideoInAllBrowsers();
-                this.cd.markForCheck();
+                if (scrollTo === SCROLL_TO.ABOUT_SERVICE) {
+                    scrollToElementFnc(this.aboutService.nativeElement);
+                }
             });
     }
 
-    autoPlayVideoInAllBrowsers = () => {
-        if (this.isMoreThanXlResolution) {
-            const myVideo = document.querySelector('video');
-            const playPromise = myVideo && myVideo.play();
+    public toggleVideo = (event) => {
+        event.preventDefault();
+        const video: HTMLMediaElement = this.video.nativeElement;
+        if (!this.isVideoPlaying) {
+            const playPromise = video && video.play();
             if (!R.isNil(playPromise)) {
-                playPromise.then(_ => ({}))
+                this.isVideoPlaying = true;
+                playPromise
+                    .then(_ => ({}))
                     .catch(error => {
-                        myVideo.muted = true;
-                        myVideo.play();
+                        video.muted = true;
+                        video.play();
                     });
+            } else {
+                this.isVideoPlaying = true;
             }
-        }
-    }
-
-    ngAfterViewInit() {
-        if (this.isPlatformBrowser) {
-            this.autoPlayVideoInAllBrowsers();
-            this.cd.markForCheck();
+        } else {
+            video.pause();
+            this.isVideoPlaying = false;
         }
     }
 

@@ -198,25 +198,17 @@
                         </div>
                         <span class="perex">{{supplyPoint.circuitBreaker.help || supplyPoint.circuitBreaker.description}}</span>
                     </div>
-                    <div *ngIf="supplyPoint.lastVersionOfSupplyPoint"
-                        class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>Ukončení platnosti aktuální smlouvy</small>
-                        </div>
-                        <span class="perex">{{contractEndTypeTranslateMap[
-                            supplyPoint?.contract?.prolong ?
-                                supplyPointContractEndTypes.CONTRACT_END_TERM_WITH_PROLONGATION :
-                                supplyPointContractEndTypes.CONTRACT_END_TERM
-                            ]}}
-                        </span>
-                    </div>
                     <div *ngIf="(supplyPoint | pathValue:['contract', 'deliveryTo'])"
                          [class.mb-5]="supplyPoint.contract.deliveryTo"
                          class="col-12">
                         <div class="mb-1">
                             <small>Dodávka do</small>
                         </div>
-                        <span class="perex">{{supplyPoint.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}</span>
+                        <span class="perex">{{supplyPoint.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}} - {{contractEndTypeTranslateMap[
+                            !supplyPoint?.contract?.isNextContractConcluded ?
+                                supplyPointContractEndTypes.CONTRACT_END_TERM_WITH_PROLONGATION :
+                                supplyPointContractEndTypes.CONTRACT_END_TERM
+                            ]}}</span>
                     </div>
                     <div [class.mb-5]="!supplyPoint.lastVersionOfSupplyPoint"
                          class="col-12">
@@ -225,10 +217,16 @@
                         </div>
                         <span class="perex">{{timeToContractEnd}} {{timeToContractEnd | plural: timeToContractEndPeriodMap[timeToContractEndPeriod]}}</span>
                     </div>
-                    <div *ngIf="!supplyPoint.lastVersionOfSupplyPoint"
+                    <div *ngIf="supplyPoint.contract.isNextContractConcluded && supplyPoint.contract.nextSupplyPointId && supplyPoint.contract.nextSupplyPointId != supplyPoint.id"
                          class="col-12">
                         <div class="mb-1">
-                            <small>Tato smlouva bude nahrazena smlouvou budoucí.</small>
+                            <small>Tato smlouva bude nahrazena <a [routerLink]="['/', CONSTS.PATHS.SECURED, CONSTS.PATHS.SUPPLY_POINTS, supplyPoint.contract.nextSupplyPointId]">smlouvou budoucí</a>.</small>
+                        </div>
+                    </div>
+                    <div *ngIf="!supplyPoint.contract.isNextContractConcluded && supplyPoint.contract.nextSupplyPointId && supplyPoint.contract?.nextSupplyPointId != supplyPoint.id"
+                         class="col-12">
+                        <div class="mb-1">
+                            <small>Tato smlouva má rozpracovanou <a (click)="navigateToUnsignedSupplyPoint(supplyPoint.contract.nextSupplyPointId)">navazující smlouvu</a>.</small>
                         </div>
                     </div>
                 </div>
