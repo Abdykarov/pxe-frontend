@@ -185,6 +185,8 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     public videoIsTouch = () => {
         if (this.isMoreThanXlResolution) {
             this.toggleVideo();
+            this.isVideoPlaying = true;
+            this.cd.detectChanges();
         }
     }
 
