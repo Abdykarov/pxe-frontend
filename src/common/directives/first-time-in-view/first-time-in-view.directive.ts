@@ -16,8 +16,8 @@ import {
     fromEvent,
 } from 'rxjs';
 
-import { AbstractComponent } from '../../abstract.component';
-import { getAbsoluteHeightOfElementFnc } from '../../utils';
+import { AbstractComponent } from 'src/common/abstract.component';
+import { getAbsoluteHeightOfElementFnc } from 'src/common/utils';
 
 @Directive({
     selector: '[lndFirstTimeInView]',
