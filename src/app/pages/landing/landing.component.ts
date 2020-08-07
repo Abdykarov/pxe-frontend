@@ -150,8 +150,9 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
             });
     }
 
-    public toggleVideo = (event) => {
-        event.preventDefault();
+    public toggleVideo = (event = null) => {
+        // tslint:disable-next-line:no-unused-expression
+        event && event.preventDefault();
         const video: HTMLMediaElement = this.video.nativeElement;
         if (!this.isVideoPlaying) {
             const playPromise = video && video.play();
@@ -169,6 +170,12 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
         } else {
             video.pause();
             this.isVideoPlaying = false;
+        }
+    }
+
+    public videoIsTouch = () => {
+        if (this.isMoreThanXlResolution) {
+            this.toggleVideo();
         }
     }
 
