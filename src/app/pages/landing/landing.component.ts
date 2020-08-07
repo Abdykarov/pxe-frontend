@@ -158,7 +158,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     }
 
     public toggleVideo = (event = null) => {
-        if ( event ) {
+        if (event) {
             event.preventDefault();
         }
 
