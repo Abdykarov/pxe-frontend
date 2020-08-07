@@ -51,14 +51,14 @@ export class FirstTimeInViewDirective extends AbstractComponent implements OnIni
                 this.scrollEvent$
                     .pipe(takeUntil(this.destroy$))
                     .subscribe(() => {
-                        const hT = this.nativeElement.offsetTop;
-                        const hH = getAbsoluteHeightOfElementFnc(this.nativeElement);
-                        const wH = window.innerHeight;
-                        const wS = window.scrollY ||
+                        const elementOffsetTop = this.nativeElement.offsetTop;
+                        const elementHeight = getAbsoluteHeightOfElementFnc(this.nativeElement);
+                        const pageHeight = window.innerHeight;
+                        const pageYOffset = window.scrollY ||
                             window.pageYOffset ||
                             document.body.scrollTop + (document.documentElement && document.documentElement.scrollTop || 0);
 
-                        if (wS > (hT + hH - wH)) {
+                        if (pageYOffset > (elementOffsetTop + elementHeight - pageHeight)) {
                             this.firstTimeInViewAction.emit();
                             scrollEvent.unsubscribe();
                         }

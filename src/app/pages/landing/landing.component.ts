@@ -158,8 +158,10 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     }
 
     public toggleVideo = (event = null) => {
-        // tslint:disable-next-line:no-unused-expression
-        event && event.preventDefault();
+        if ( event ) {
+            event.preventDefault();
+        }
+
         const video: HTMLMediaElement = this.video.nativeElement;
         if (!this.isVideoPlaying) {
             const playPromise = video && video.play();
