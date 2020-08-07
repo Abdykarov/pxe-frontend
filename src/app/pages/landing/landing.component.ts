@@ -148,6 +148,13 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
                     scrollToElementFnc(this.aboutService.nativeElement);
                 }
             });
+
+        this.resizeEvent$
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(_  => {
+                this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+                this.cd.markForCheck();
+            });
     }
 
     public toggleVideo = (event = null) => {
