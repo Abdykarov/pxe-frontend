@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AccordionModule } from 'src/common/ui/accordion/accordion.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { CarouselContainerModule } from 'src/common/containers/carousel-container/carousel-container.module';
+import { DirectivesModule } from 'src/common/directives/directives.module';
 import { LandingComponent } from './landing.component';
 import { LandingRoutingModule } from './landing.routing';
 import { MapCoverageContainerModule } from 'src/common/containers/map-coverage-container/map-coverage-container.module';
@@ -22,10 +23,12 @@ import { RegistrationFormModule } from 'src/common/containers/form/forms/registr
         ButtonModule,
         CarouselContainerModule,
         CommonModule,
+        DirectivesModule,
         LandingRoutingModule,
         MapCoverageContainerModule,
         PipesModule,
         RegistrationFormModule,
+        DirectivesModule,
     ],
 })
 export class LandingModule {}
