@@ -1,4 +1,7 @@
-import {CommonModule, DatePipe} from '@angular/common';
+import {
+    CommonModule,
+    DatePipe,
+} from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { AlertModule } from 'src/common/ui/alert/alert.module';
