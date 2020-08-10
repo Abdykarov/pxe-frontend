@@ -13,7 +13,7 @@ import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
     name: 'consumptionIndicator',
 })
 export class ConsumptionIndicatorPipe implements PipeTransform {
-    private allIsFilled = R.all(R_.isTruthy);
+    private isPowerWithNT = R.all(R_.isTruthy);
 
     constructor(
        private decimalPipe: DecimalPipe,
@@ -27,33 +27,45 @@ export class ConsumptionIndicatorPipe implements PipeTransform {
         const {
             annualConsumptionVT = null,
             annualConsumptionNT = null,
+            annualConsumption = null,
             lastAnnualConsumptionVT = null,
             lastAnnualConsumptionNT = null,
+            lastAnnualConsumption = null,
         } = data;
 
-        if (this.allIsFilled([
+        if (this.isPowerWithNT([
             annualConsumptionVT,
             annualConsumptionNT,
             lastAnnualConsumptionVT,
             lastAnnualConsumptionNT,
         ])) {
-            const annualConsumption = annualConsumptionVT + annualConsumptionNT;
-            const lastAnnualConsumption = lastAnnualConsumptionVT + lastAnnualConsumptionNT;
-            if (lastAnnualConsumption !== annualConsumption) {
-                return this.count(annualConsumption, lastAnnualConsumption);
+            const countAnnualConsumption = annualConsumptionVT + annualConsumptionNT;
+            const countLastAnnualConsumption = lastAnnualConsumptionVT + lastAnnualConsumptionNT;
+            if (this.anyProgressInAnnualConsumption(countAnnualConsumption , countLastAnnualConsumption)) {
+                return this.count(countAnnualConsumption, countLastAnnualConsumption);
             } else {
-                return `${this.decimalPipe.transform(annualConsumption, '1.0-3')} ${unit}`;
+                return `${this.decimalPipe.transform(countAnnualConsumption, '1.0-3')} ${unit}`;
             }
         }
 
-        if (annualConsumptionVT && lastAnnualConsumptionVT && annualConsumptionVT !== lastAnnualConsumptionVT) {
+        if (this.anyProgressInAnnualConsumption(annualConsumption, lastAnnualConsumption)) {
+            return this.count(annualConsumption, lastAnnualConsumption);
+        }
+
+        if (this.anyProgressInAnnualConsumption(annualConsumptionVT, lastAnnualConsumptionVT)) {
             return this.count(annualConsumptionVT, lastAnnualConsumptionVT);
         }
 
-        if (annualConsumptionNT && lastAnnualConsumptionNT && annualConsumptionNT !== lastAnnualConsumptionNT) {
+        if (this.anyProgressInAnnualConsumption(annualConsumptionNT, lastAnnualConsumptionNT)) {
             return this.count(annualConsumptionNT, lastAnnualConsumptionNT);
         }
 
-        return `${this.decimalPipe.transform(R.sum([annualConsumptionNT, annualConsumptionVT]), '1.0-3')} ${unit}`;
+        return this.getStingLabel(annualConsumptionNT, annualConsumptionVT, annualConsumption, unit);
     }
+
+    public getStingLabel = (annualConsumptionNT: number, annualConsumptionVT: number, annualConsumption: number, unit: string) =>
+        `${this.decimalPipe.transform(R.sum([annualConsumptionNT, annualConsumptionVT, annualConsumption]), '1.0-3')} ${unit}`
+
+    public anyProgressInAnnualConsumption = (curr: number, last: number) => curr && last && curr !== last;
+
 }
