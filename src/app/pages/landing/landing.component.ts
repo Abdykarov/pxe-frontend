@@ -148,10 +148,20 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
                     scrollToElementFnc(this.aboutService.nativeElement);
                 }
             });
+
+        this.resizeEvent$
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(_  => {
+                this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+                this.cd.markForCheck();
+            });
     }
 
-    public toggleVideo = (event) => {
-        event.preventDefault();
+    public toggleVideo = (event = null) => {
+        if (event) {
+            event.preventDefault();
+        }
+
         const video: HTMLMediaElement = this.video.nativeElement;
         if (!this.isVideoPlaying) {
             const playPromise = video && video.play();
@@ -169,6 +179,14 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
         } else {
             video.pause();
             this.isVideoPlaying = false;
+        }
+    }
+
+    public videoIsTouch = () => {
+        if (this.isMoreThanXlResolution) {
+            this.toggleVideo();
+            this.isVideoPlaying = true;
+            this.cd.detectChanges();
         }
     }
 
