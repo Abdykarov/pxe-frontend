@@ -41,7 +41,7 @@
 		text-align: right;
 
 		// Media queries
-		@include media-breakpoint-up(md) {
+		@include media-breakpoint-up(lg) {
 			min-width: 250px;
 		}
 	}

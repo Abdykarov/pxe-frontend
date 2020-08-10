@@ -13,4 +13,27 @@
 	@include media-breakpoint-up(lg) {
 		padding: ( $spacer * 2 );
 	}
+
+	&--with-inner {
+		padding: 0;
+
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			padding: 0;
+		}
+	}
+
+	&__inner {
+		padding: ( $spacer * 1.5 );
+		background-color: $white;
+
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			padding: ( $spacer * 2 );
+		}
+
+		&--light {
+			background-color: #f6f8fa;
+		}
+	}
 }

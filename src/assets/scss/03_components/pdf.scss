@@ -1,9 +1,13 @@
 /**
  *	Pdf
  */
+
+
 .pdf-holder {
+	width: calc( 100% + #{ $spacer * 2 } );
 	height: 700px;
-	max-height: calc( 100vh - ( #{ 2 * $spacer } ) );
+	max-height: calc( 100vh - ( #{ $spacer * 2 } ) );
+	margin: 0 ( -$spacer );
 
 	&--large {
 		height: 900px;

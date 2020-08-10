@@ -10,8 +10,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
-                <ul class="text-center link-list">
+            <div class="col-12 col-xl-6 offset-xl-3">
+                <ul class="text-center link-list mb-4">
                     <li class="link-list__item">
                         <a class="link-list__link link-list__link--active"
                             href="#"
@@ -28,67 +28,77 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-12 col-xl-8 offset-xl-2 col-xl-8 offset-xl-2">
+            <div class="col-12 col-xl-6 offset-xl-3 mb-2">
                 <lnd-banner-ui
                     icon="icon--info"
                     [data]="bannerObj"
                     buttonLabel="Stáhnout"
                 ></lnd-banner-ui>
             </div>
-            <div class="col-12 col-xl-8 offset-xl-2 col-xl-8 offset-xl-2">
-                <h5 class="mb-2">Aktuální smlouvy</h5>
+            <div class="col-12 col-xl-6 offset-xl-3">
+                <h2 class="h3 mb-3">Aktuální smlouvy</h2>
             </div>
-            <div class="col-12 col-xl-8 offset-xl-2 col-xl-8 offset-xl-2 bg-white font-size-12">
-                <ul class="link-list">
-                    <li class="link-list__item">
-                        <a class="link-list__link link-list__link--active"
-                            href="#"
-                            (click)="click($event)">
-                            Domácnost
-                        </a>
-                    </li>
-                    <li class="link-list__item">
-                        <a class="link-list__link"
-                            href="#"
-                            (click)="click($event)">
-                            Firma
-                        </a>
-                    </li>
-                </ul>
-                <h3 class="mx-5">Aktuální smlouva o dodávce elektřiny pro domácnosti</h3>
-                <p class="mx-5">
-                    Níže naleznete dokumenty potřebné k uzavření dodávky energií/plynu pro budoucí období.
-                    Návrh smlouvy o sdružených službách dodávky elektřiny/plynu, obsahuje také všeobecné podmínky dodávky a plnou moc pro dodavatele.
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-xl-8 offset-xl-2 col-xl-8 offset-xl-2 font-size-12" style="background-color: #e9ecef">
-                <div class="pdf-holder pdf-holder--large px-3 px-xl-0">
-                    <pxe-pdf-viewer
-                        [customPdfCss]="true"
-                        [zoom]="'page-width'"
-                        [pdfSrc]="urlPdfPatterOfContracts"
-                        [openFile]="false"
-                        [downloadFileName]="downloadFileName"
-                        [viewBookmark]="false"
-                        zoom="page-width">
-                    ></pxe-pdf-viewer>
+            <div class="col-12 col-xl-6 offset-xl-3">
+                <div class="page-box page-box--with-inner">
+                    <div class="page-box__inner">
+                        <ul class="link-list link-list--small mb-3">
+                            <li class="link-list__item">
+                                <a class="link-list__link link-list__link--active"
+                                    href="#"
+                                    (click)="click($event)">
+                                    Domácnost
+                                </a>
+                            </li>
+                            <li class="link-list__item">
+                                <a class="link-list__link"
+                                    href="#"
+                                    (click)="click($event)">
+                                    Firma
+                                </a>
+                            </li>
+                        </ul>
+                        <h3 class="h2 mb-2">Aktuální smlouva o dodávce elektřiny pro domácnosti</h3>
+                        <p class="mb-0">
+                            Níže naleznete dokumenty potřebné k uzavření dodávky energií/plynu pro budoucí období.
+                            Návrh smlouvy o sdružených službách dodávky elektřiny/plynu, obsahuje také všeobecné podmínky dodávky a plnou moc pro dodavatele.
+                        </p>
+                    </div>
+                    <div class="page-box__inner page-box__inner--light">
+                        <div class="row">
+                            <div class="col-12 mb-2">
+                                <div class="pdf-holder pdf-holder--large">
+                                    <pxe-pdf-viewer
+                                        [customPdfCss]="true"
+                                        [zoom]="'page-width'"
+                                        [pdfSrc]="urlPdfPatterOfContracts"
+                                        [openFile]="false"
+                                        [downloadFileName]="downloadFileName"
+                                        [viewBookmark]="false"
+                                        zoom="page-width">
+                                    ></pxe-pdf-viewer>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-5 text-right">
+                                <lnd-button
+                                    label="Stáhnout"
+                                    type="primary"
+                                    (action)="click($event)">
+                                </lnd-button>
+                            </div>
+                            <div class="col-12">
+                                <h5>Archiv smluv o dodávce elektřiny společnosti Power Central Europe, a.s. pro domácnosti</h5>
+                                <lnd-table
+                                    [cols]="tableConfig"
+                                    [rows]="rows"
+                                    [tableWrapperClass]="['table-wrapper--advanced pb-0']"
+                                    [columnTemplates]="{
+                                        columnTemplateDownload: columnTemplateDownload
+                                    }">
+                                ></lnd-table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <lnd-button
-                    label="Stáhnout"
-                    type="primary"
-                    (action)="click($event)">
-                </lnd-button>
-                <h5>Archiv smluv o dodávce elektřiny společnosti Power Central Europe, a.s. pro domácnosti</h5>
-                <lnd-table
-                    [cols]="tableConfig"
-                    [rows]="rows"
-                    [tableWrapperClass]="['table-wrapper--advanced']"
-                    [columnTemplates]="{
-                        columnTemplateDownload: columnTemplateDownload
-                    }">
-                ></lnd-table>
             </div>
         </div>
     </div>
