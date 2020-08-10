@@ -6,10 +6,10 @@
 
 
 // Core component import
-@import 'src/assets/scss/01_base/base.scss';
+@import 'src/assets/scss/01_base/base';
 
 body {
-	background-color: transparent;
+	background-color: $white;
 	background-image: none;
 }
 

@@ -32,6 +32,7 @@ export class TableComponent extends AbstractComponent implements OnChanges {
     @Input() tableClass?: string;
     @Input() rowSelectorFn?: (row: any) => boolean;
     @Input() isStatic = false;
+    @Input() withoutBorder = false;
     @Input() whiteBackgroundPropertyCondition?: string;
     @Input() dangerBackgroundPropertyCondition?: string;
 

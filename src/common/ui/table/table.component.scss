@@ -169,7 +169,11 @@
 			}
 		}
 
-		&--detail {
+		&--without-border {
+			border-top: none;
+		}
+
+	&--detail {
 			display: none;
 
 			& > th,

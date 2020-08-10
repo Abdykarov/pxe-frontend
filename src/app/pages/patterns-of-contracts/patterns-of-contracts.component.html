@@ -11,7 +11,7 @@
         <pxe-layout-container pageTitle="Vzory smluv o dodávce" [breadcrumbItemsSimple]="breadcrumbItemsSimple">
             <div class="row">
                 <div class="col-12">
-                    <ul class="text-center link-list">
+                    <ul class="text-center link-list mb-4">
                         <li class="link-list__item">
                             <a class="link-list__link"
                                 href="#"
@@ -30,7 +30,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-12 col-xl-8 offset-xl-2 col-xl-8 offset-xl-2">
+                <div class="col-12 col-xl-6 offset-xl-3 mb-2">
                     <lnd-banner-ui
                         *ngFor="let setting of pdfFutureContracts"
                         icon="icon--info"
@@ -42,64 +42,81 @@
                         buttonLabel="Stáhnout"
                     ></lnd-banner-ui>
                 </div>
-                <div class="col-12 col-xl-8 offset-xl-2 col-xl-8 offset-xl-2">
-                    <h5 class="mb-2">Aktuální smlouvy</h5>
+                <div class="col-12 col-xl-6 offset-xl-3">
+                    <h2 class="h3 mb-3">Aktuální smlouvy</h2>
                 </div>
-                <div class="col-12 col-xl-8 offset-xl-2 col-xl-8 offset-xl-2 bg-white font-size-12">
-                    <ul class="link-list">
-                        <li class="link-list__item">
-                            <a class="link-list__link"
-                               href="#"
-                               [class.link-list__link--active]="commodityType == COMMODITY_TYPE.POWER"
-                               (click)="routeToCommodityType($event, COMMODITY_TYPE.POWER)">
-                                Elektřina
-                            </a>
-                        </li>
-                        <li class="link-list__item">
-                            <a class="link-list__link"
-                               href="#"
-                               [class.link-list__link--active]="commodityType == COMMODITY_TYPE.GAS"
-                               (click)="routeToCommodityType($event, COMMODITY_TYPE.GAS)">
-                                Plyn
-                            </a>
-                        </li>
-                    </ul>
-                    <h3 class="mx-5">Aktuální smlouva o dodávce
-                        {{commodityType === COMMODITY_TYPE.POWER ? 'elektřiny' : 'plynu'}} pro {{subjectType === SUBJECT_TYPE.INDIVIDUAL ? 'domácnost' : 'firmu'}}
-                    </h3>
-                    <p class="mx-5">
-                        Níže naleznete dokumenty potřebné k uzavření dodávky {{commodityType === COMMODITY_TYPE.POWER ? 'energií' : 'plynu'}} pro budoucí období.
-                        Návrh smlouvy o sdružených službách dodávky {{commodityType === COMMODITY_TYPE.POWER ? 'energií' : 'plynu'}}, obsahuje také všeobecné
-                        podmínky dodávky a plnou moc pro dodavatele.
-                    </p>
-                </div>
-                <div class="col-12 col-xl-8 offset-xl-2 col-xl-8 offset-xl-2 font-size-12" style="background-color: #e9ecef">
-                    <div class="pdf-holder pdf-holder--large px-3 px-xl-0">
-                        <pxe-pdf-viewer
-                            #pxePdfViewer
-                            [customPdfCss]="true"
-                            [openFile]="false"
-                            [viewBookmark]="false"
-                            zoom="page-width">
-                        ></pxe-pdf-viewer>
+                <div class="col-12 col-xl-6 offset-xl-3">
+                    <div class="page-box page-box--with-inner">
+                        <div class="page-box__inner">
+                            <ul class="link-list link-list--small mb-3">
+                                <li class="link-list__item">
+                                    <a class="link-list__link"
+                                       href="#"
+                                       [class.link-list__link--active]="commodityType == COMMODITY_TYPE.POWER"
+                                       (click)="routeToCommodityType($event, COMMODITY_TYPE.POWER)">
+                                        Elektřina
+                                    </a>
+                                </li>
+                                <li class="link-list__item">
+                                    <a class="link-list__link"
+                                       href="#"
+                                       [class.link-list__link--active]="commodityType == COMMODITY_TYPE.GAS"
+                                       (click)="routeToCommodityType($event, COMMODITY_TYPE.GAS)">
+                                        Plyn
+                                    </a>
+                                </li>
+                            </ul>
+                            <h3 class="h2 mb-2">Aktuální smlouva o dodávce
+                                {{commodityType === COMMODITY_TYPE.POWER ? 'elektřiny' : 'plynu'}} pro {{subjectType === SUBJECT_TYPE.INDIVIDUAL ? 'domácnost' : 'firmu'}}
+                            </h3>
+                            <p class="mb-0">
+                                Níže naleznete dokumenty potřebné k uzavření dodávky {{commodityType === COMMODITY_TYPE.POWER ? 'energií' : 'plynu'}} pro budoucí období.
+                                Návrh smlouvy o sdružených službách dodávky {{commodityType === COMMODITY_TYPE.POWER ? 'energií' : 'plynu'}}, obsahuje také všeobecné
+                                podmínky dodávky a plnou moc pro dodavatele.
+                            </p>
+                        </div>
+                        <div class="page-box__inner page-box__inner--light">
+                            <div class="row">
+                                <div class="col-12 mb-2">
+                                    <div class="pdf-holder pdf-holder--large">
+                                        <pxe-pdf-viewer
+                                            #pxePdfViewer
+                                            [customPdfCss]="true"
+                                            [openFile]="false"
+                                            [viewBookmark]="false"
+                                            zoom="page-width">
+                                        ></pxe-pdf-viewer>
+                                    </div>
+                                </div>
+                                <ng-container *ngIf="pdfActiveContracts[this.subjectType][this.commodityType] as pdfSetting">
+                                    <div class="col-12 text-right"
+                                         [class.mb-5]="pdfOldContracts && pdfOldContracts.length">
+                                        <lnd-button
+                                            label="Stáhnout"
+                                            type="primary"
+                                            (action)="downloadPdf(pdfSetting.sourceUrl, pdfSetting.downloadName)">
+                                        </lnd-button>
+                                    </div>
+                                </ng-container>
+                                <div
+                                    *ngIf="pdfOldContracts && pdfOldContracts.length"
+                                    class="col-12">
+                                    <h5>Archiv smluv o dodávce elektřiny společnosti Power Central Europe, a.s. pro domácnosti</h5>
+                                    <lnd-table
+                                        [withoutBorder]="true"
+                                        [cols]="historyTableCols"
+                                        [rows]="pdfOldContracts"
+                                        [tableWrapperClass]="['table-wrapper--advanced']"
+                                        [tableClass]="['table--advanced', 'mb-0']"
+                                        [columnTemplates]="{
+                                            columnTemplateDownload: columnTemplateDownload,
+                                            columnTemplateDownloadText: columnTemplateDownloadText
+                                        }">
+                                    ></lnd-table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <ng-container *ngIf="pdfActiveContracts[this.subjectType][this.commodityType] as pdfSetting">
-                        <lnd-button
-                            label="Stáhnout"
-                            type="primary"
-                            (action)="downloadPdf(pdfSetting.sourceUrl, pdfSetting.downloadName)">
-                        </lnd-button>
-                    </ng-container>
-                    <h5>Archiv smluv o dodávce elektřiny společnosti Power Central Europe, a.s. pro domácnosti</h5>
-                    <lnd-table
-                        [cols]="historyTableCols"
-                        [rows]="pdfOldContracts"
-                        [tableWrapperClass]="['table-wrapper--advanced']"
-                        [columnTemplates]="{
-                            columnTemplateDownload: columnTemplateDownload,
-                            columnTemplateDownloadText: columnTemplateDownloadText
-                        }">
-                    ></lnd-table>
                 </div>
             </div>
         </pxe-layout-container>

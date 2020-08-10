@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 col-xl-6 offset-xl-3">
+            <div class="col-12">
                 <ul class="text-center link-list mb-4">
                     <li class="link-list__item">
                         <a class="link-list__link link-list__link--active"
@@ -90,6 +90,8 @@
                                 <lnd-table
                                     [cols]="tableConfig"
                                     [rows]="rows"
+                                    [withoutBorder]="true"
+                                    [tableClass]="['table--advanced', 'mb-0']"
                                     [tableWrapperClass]="['table-wrapper--advanced pb-0']"
                                     [columnTemplates]="{
                                         columnTemplateDownload: columnTemplateDownload
