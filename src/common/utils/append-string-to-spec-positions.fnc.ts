@@ -5,4 +5,4 @@ export const appendStringToSpecPositions = (str: string, indexes: number[], valu
         str = appendStringToSpecPosition(str, indexes[i] + i, value);
     }
     return str;
-}
+};
