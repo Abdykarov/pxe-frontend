@@ -118,7 +118,7 @@ export const formFields: IForm = {
             [
                 Validators.required,
                 CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT),
-                CustomValidators.minValue(0),
+                CustomValidators.minValue(-1),
                 CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
             ],
         ],
