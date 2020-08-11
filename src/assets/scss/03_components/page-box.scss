@@ -33,7 +33,7 @@
 		}
 
 		&--light {
-			background-color: #f6f8fa;
+			background-color: lighten($body-bg, 2%);
 		}
 	}
 }
