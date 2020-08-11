@@ -76,7 +76,7 @@ export class LandingComponent extends AbstractComponent {
     ) {
         super();
         if (isPlatformBrowser(this.platformId)) {
-            this.isMoreThanMdResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+            this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
         }
 
         this.breadcrumbItemsSimple = [
@@ -89,7 +89,7 @@ export class LandingComponent extends AbstractComponent {
         this.resizeEvent$
             .pipe(takeUntil(this.destroy$))
             .subscribe(_  =>
-                this.isMoreThanMdResolution = window.innerWidth >= CONSTS.XL_RESOLUTION,
+                this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION,
             );
     }
 
