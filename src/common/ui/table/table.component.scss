@@ -170,10 +170,10 @@
 		}
 
 		&--without-border {
-			border-top: none;
+			border-top-color: transparent;
 		}
 
-	&--detail {
+		&--detail {
 			display: none;
 
 			& > th,
