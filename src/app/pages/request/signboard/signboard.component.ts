@@ -1,4 +1,8 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 
 import * as R from 'ramda';
