@@ -83,7 +83,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     public formFields: IForm;
     public routes = ROUTES;
 
-    public isMoreThanXlResolution = false;
+    public isMoreThanMdResolution = false;
 
     public resizeEvent$ = fromEvent(window, 'resize')
         .pipe(
@@ -107,7 +107,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     ) {
         super(faqService, route);
         if (isPlatformBrowser) {
-            this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+            this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
         }
 
         this.loadConfigs$
@@ -152,7 +152,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
         this.resizeEvent$
             .pipe(takeUntil(this.destroy$))
             .subscribe(_  => {
-                this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+                this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
                 this.cd.markForCheck();
             });
     }
@@ -183,7 +183,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     }
 
     public videoIsTouch = () => {
-        if (this.isMoreThanXlResolution) {
+        if (this.isMoreThanMdResolution) {
             this.toggleVideo();
             this.isVideoPlaying = true;
             this.cd.detectChanges();

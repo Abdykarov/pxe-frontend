@@ -43,7 +43,7 @@ export class LandingComponent extends AbstractComponent {
     public formSent = false;
     public globalError: string[] = [];
     public fieldError: IFieldError = {};
-    public isMoreThanXlResolution = false;
+    public isMoreThanMdResolution = false;
     public showStickyButton = false;
     public accordionItems: IAccordionItem[] = [{
         label: 'Opravdu budu mít vybranou cenu po celou dobu zvoleného období?',
@@ -76,7 +76,7 @@ export class LandingComponent extends AbstractComponent {
     ) {
         super();
         if (isPlatformBrowser(this.platformId)) {
-            this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+            this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
         }
 
         this.breadcrumbItemsSimple = [
@@ -89,7 +89,7 @@ export class LandingComponent extends AbstractComponent {
         this.resizeEvent$
             .pipe(takeUntil(this.destroy$))
             .subscribe(_  =>
-                this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION,
+                this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION,
             );
     }
 
