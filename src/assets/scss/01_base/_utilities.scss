@@ -329,3 +329,21 @@ $colors: (
 	right: auto;
 	transform: translateX(-50%);
 }
+
+.video {
+	position: relative;
+
+	&__text {
+		margin-top: $spacer;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			@include absolute-center;
+			margin-top: 0;
+		}
+	}
+
+	&__control {
+		margin-bottom: $spacer;
+	}
+}

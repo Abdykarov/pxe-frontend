@@ -28,37 +28,43 @@
                 <li>Ověřte způsob výpovědi vaší smlouvy v případě, že si nebudete jistí zanechte přednastavenou hodnotu.</li>
                 <li>Pro uzavření smlouvy budete potřebovat váš mobilní telefon.</li>
             </ul>
-            <video
-                #video
-                [class.cursor-pointer]="isVideoPlaying"
-                (click)="isVideoPlaying && toggleVideo($event)"
-                class="w-100"
-                poster="/assets/images/landing-page/picture-fallback.jpg"
-                loop
-                muted
-                preload="none">
-                <source src="/assets/images/signboard/create_om_tutorial.mp4" type="video/mp4">
-                Váš prohlížeč nepodporuje zobrazení videa
-            </video>
-            <div class="section-video-control">
-                <lnd-button
-                    *ngIf="!isVideoPlaying"
-                    type="icon"
-                    icon="icon--triangle-right"
-                    variant="icon"
-                    customClass="btn-video-play"
-                    (action)="toggleVideo($event)"
-                >
-                </lnd-button>
+        </div>
+        <div class="col-12 col-xl-8 offset-xl-2 text-center">
+            <div class="video">
+                <video
+                    #video
+                    [class.cursor-pointer]="isVideoPlaying"
+                    (click)="isVideoPlaying && toggleVideo($event)"
+                    class="w-100"
+                    poster="/assets/images/landing-page/picture-fallback.jpg"
+                    loop
+                    muted
+                    preload="none">
+                    <source src="/assets/images/signboard/create_om_tutorial.mp4" type="video/mp4">
+                    Váš prohlížeč nepodporuje zobrazení videa
+                </video>
+                <div class="video__text">
+                    <div class="video-control">
+                        <lnd-button
+                            *ngIf="!isVideoPlaying"
+                            type="icon"
+                            icon="icon--triangle-right"
+                            variant="icon"
+                            customClass="btn-video-play"
+                            (action)="toggleVideo($event)"
+                        >
+                        </lnd-button>
+                    </div>
+                    <p>
+                        Je-li vše jasné pokračujte tlačítkem "Vyplnit".
+                    </p>
+                    <lnd-button
+                        type="primary"
+                        (action)="click($event);"
+                        label="Vyplnit">
+                    </lnd-button>
+                </div>
             </div>
-            <p>
-                Je-li vše jasné pokračujte tlačítkem "Vyplnit".
-            </p>
-            <lnd-button
-                type="primary"
-                (action)="click($event);"
-                label="Vyplnit">
-            </lnd-button>
         </div>
     </div>
 </div>

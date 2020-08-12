@@ -22,6 +22,9 @@
                 <li>Ověřte způsob výpovědi vaší smlouvy v případě, že si nebudete jistí zanechte přednastavenou hodnotu.</li>
                 <li>Pro uzavření smlouvy budete potřebovat váš mobilní telefon.</li>
             </ul>
+        </div>
+        <div class="col-12 col-xl-8 offset-xl-2 text-center">
+            <div class="video">
                 <video
                     #video
                     [class.cursor-pointer]="isVideoPlaying"
@@ -34,25 +37,28 @@
                     <source src="/assets/images/signboard/create_om_tutorial.mp4" type="video/mp4">
                     Váš prohlížeč nepodporuje zobrazení videa
                 </video>
-                <div class="section-video-control">
+                <div class="video__text">
+                    <div class="video__control">
+                        <lnd-button
+                            *ngIf="!isVideoPlaying"
+                            type="icon"
+                            icon="icon--triangle-right"
+                            variant="icon"
+                            customClass="btn-video-play"
+                            (action)="toggleVideo($event)"
+                        >
+                        </lnd-button>
+                    </div>
+                    <p>
+                        Je-li vše jasné pokračujte tlačítkem "Vyplnit".
+                    </p>
                     <lnd-button
-                        *ngIf="!isVideoPlaying"
-                        type="icon"
-                        icon="icon--triangle-right"
-                        variant="icon"
-                        customClass="btn-video-play"
-                        (action)="toggleVideo($event)"
-                    >
+                        type="primary"
+                        (action)="routerToNextStep($event);"
+                        label="Vyplnit">
                     </lnd-button>
                 </div>
-            <p>
-                Je-li vše jasné pokračujte tlačítkem "Vyplnit".
-            </p>
-            <lnd-button
-                type="primary"
-                (action)="routerToNextStep($event);"
-                label="Vyplnit">
-            </lnd-button>
+            </div>
         </div>
     </div>
 </pxe-layout-container>
