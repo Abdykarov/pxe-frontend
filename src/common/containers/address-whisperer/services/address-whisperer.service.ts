@@ -36,7 +36,7 @@ export class AddressWhispererService {
                 descriptiveNumber: userData.houseNumber,
                 city: userData.municipality,
                 postCode: userData.zipCode,
-                region: R.defaultTo(this.getRegion(userData.suggestSecondRow), ''),
+                region: this.getRegion(userData.suggestSecondRow),
             };
         }
         return address;
@@ -45,7 +45,7 @@ export class AddressWhispererService {
     private getRegion = (suggestSecondRow: string): any => R.pipe(
         R.split(','),
         R.map(R.trim),
-        R.find((string) => R.find(R.propEq('key', string))(REGIONS)),
+        R.find((string) => R.defaultTo(R.find(R.propEq('key', string))(REGIONS), '')),
     )(suggestSecondRow)
 
     public getPlaces = (count: number, phrase: string) => {
