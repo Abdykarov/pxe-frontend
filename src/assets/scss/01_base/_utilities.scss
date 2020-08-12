@@ -333,9 +333,16 @@ $colors: (
 .video {
 	position: relative;
 
-	&__text {
-		margin-top: $spacer;
+	&__holder {
+		margin-bottom: $spacer;
 
+		// Media queries
+		@include media-breakpoint-up(md) {
+			margin-bottom: 0;
+		}
+	}
+
+	&__text {
 		// Media queries
 		@include media-breakpoint-up(md) {
 			@include absolute-center;
