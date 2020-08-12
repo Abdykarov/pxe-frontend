@@ -14,6 +14,7 @@ import {
     IResultMapyCZResponse,
     IUserDataMapyCzResponse,
 } from 'src/common/containers/address-whisperer/model/address-whisperer.model';
+import { REGIONS } from 'src/app/app.constants';
 
 @Injectable({
     providedIn: 'root',
@@ -28,18 +29,26 @@ export class AddressWhispererService {
     private responseToResult = (resultMapyCz: IResultMapyCZResponse): IAddress => {
         const userData: IUserDataMapyCzResponse = resultMapyCz.userData;
         let address: IAddress = null;
-        if ((userData.street || userData.ward) && userData.region) {
+        if (userData.street || userData.ward) {
             address = {
                 street: userData.street || userData.ward,
                 orientationNumber: userData.streetNumber,
                 descriptiveNumber: userData.houseNumber,
                 city: userData.municipality,
                 postCode: userData.zipCode,
-                region: userData.region,
+                region: this.getRegion(userData.suggestSecondRow),
             };
         }
         return address;
     }
+
+    private getRegion = (suggestSecondRow: string): any => R.pipe(
+        R.split(`,`),
+        R.map(R.trim),
+        R.find((string) => {
+            return R.find(R.propEq('key', string))(REGIONS);
+        }),
+    )(suggestSecondRow)
 
     public getPlaces = (count: number, phrase: string) => {
         const options = {
