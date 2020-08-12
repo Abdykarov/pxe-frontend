@@ -45,7 +45,8 @@ export class AddressWhispererService {
     private getRegion = (suggestSecondRow: string): any => R.pipe(
         R.split(','),
         R.map(R.trim),
-        R.find((string) => R.defaultTo(R.find(R.propEq('key', string))(REGIONS), '')),
+        (string) => R.find(R.propEq('key')(string))(REGIONS),
+        R.defaultTo(''),
     )(suggestSecondRow)
 
     public getPlaces = (count: number, phrase: string) => {
