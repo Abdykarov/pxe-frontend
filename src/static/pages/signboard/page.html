@@ -13,7 +13,7 @@
     </div>
     <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1 text-center mb-4">
-            <img 
+            <img
                 src="/assets/images/illustrations/sign.svg"
                 class="mb-2"
                 alt="sign">
@@ -28,6 +28,29 @@
                 <li>Ověřte způsob výpovědi vaší smlouvy v případě, že si nebudete jistí zanechte přednastavenou hodnotu.</li>
                 <li>Pro uzavření smlouvy budete potřebovat váš mobilní telefon.</li>
             </ul>
+            <video
+                #video
+                [class.cursor-pointer]="isVideoPlaying"
+                (click)="isVideoPlaying && toggleVideo($event)"
+                class="w-100"
+                poster="/assets/images/landing-page/picture-fallback.jpg"
+                loop
+                muted
+                preload="none">
+                <source src="/assets/images/signboard/create_om_tutorial.mp4" type="video/mp4">
+                Váš prohlížeč nepodporuje zobrazení videa
+            </video>
+            <div class="section-video-control">
+                <lnd-button
+                    *ngIf="!isVideoPlaying"
+                    type="icon"
+                    icon="icon--triangle-right"
+                    variant="icon"
+                    customClass="btn-video-play"
+                    (action)="toggleVideo($event)"
+                >
+                </lnd-button>
+            </div>
             <p>
                 Je-li vše jasné pokračujte tlačítkem "Vyplnit".
             </p>
