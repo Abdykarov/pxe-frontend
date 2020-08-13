@@ -58,6 +58,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
 
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.SUPPLY_POINT;
 
+    private deteledContractId = null;
     public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
     public fieldError: IFieldError = {};
     public formFields = formFields;
@@ -105,16 +106,27 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                     map(({data}) => data.getSupplyPoint),
                     concatMap((supplyPoint: ISupplyPoint) => {
                         supplyPointFound = supplyPoint;
-                        return R.path(['contract', 'contractId'])(supplyPoint) && R.isNil(supplyPointIdCopy) ?
-                            this.contractService.deleteSelectedOfferFromContract(supplyPoint.contract.contractId) :
-                            of({});
+                        if (this.deteledContractId) {
+                            return of({});
+                        } else {
+                            this.deteledContractId = R.path(['contract', 'contractId'])(supplyPoint) && R.isNil(supplyPointIdCopy);
+                            return this.deteledContractId ?
+                                this.contractService.deleteSelectedOfferFromContract(supplyPoint.contract.contractId) :
+                                of({});
+                        }
+                    }),
+                    concatMap(_ => {
+                        return this.deteledContractId ?
+                        this.supplyService.getSupplyPoint(this.supplyPointId)
+                            .pipe(map(({data}) => data.getSupplyPoint)) :
+                        of({});
                     }),
                     takeUntil(this.destroy$),
                 )
                 .subscribe(
-                    () => {
+                    (supplyPoint: ISupplyPoint) => {
                         this.supplyPointLocalStorageService.isEdit = true;
-                        this.supplyPointData = supplyPointFound;
+                        this.supplyPointData = supplyPoint || supplyPointFound;
                         this.cd.markForCheck();
                     },
                     (error) => {
