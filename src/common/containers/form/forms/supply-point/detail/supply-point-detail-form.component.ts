@@ -193,7 +193,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
             annualConsumptionVTUnit = this.supplyPoint.annualConsumptionVTUnit;
             annualConsumptionVT = this.supplyPoint.annualConsumptionVT;
             annualConsumptionNT = this.supplyPoint.annualConsumptionNT;
-            annualConsumption = this.supplyPoint.annualConsumptionVT;
+            annualConsumption = this.supplyPoint.annualConsumption;
 
             if (annualConsumptionUnit === UNIT_OF_PRICES.KWH) {
                 annualConsumption *= 1000;
