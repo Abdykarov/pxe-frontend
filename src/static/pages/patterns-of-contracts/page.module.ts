@@ -10,9 +10,9 @@ import {
     LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
-import { TableModule } from 'src/common/ui/table/table.module';
 import { PatternsOfContractsPageComponent } from './page';
 import { PdfViewerModule } from 'src/common/ui/pdf-viewer/pdf-viewer.module';
+import { TableModule } from 'src/common/ui/table/table.module';
 
 @NgModule({
     declarations: [

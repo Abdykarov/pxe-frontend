@@ -10,6 +10,7 @@ export const tableConfig = [
         views: [
             {
                 contentTemplateName: 'columnTemplateDownload',
+                cellClass: 'text-right',
             },
         ],
     },

@@ -53,6 +53,7 @@ export const historyColConfig = [
         views: [
             {
                 contentTemplateName: 'columnTemplateDownload',
+                cellClass: 'text-right',
             },
         ],
     },
