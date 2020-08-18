@@ -10,4 +10,4 @@ export const confirmDeleteRequest = (data: ISupplyPoint): IShowModal => ({
         titleConfirm: 'ANO SMAZAT',
         data,
     },
-})
+});
