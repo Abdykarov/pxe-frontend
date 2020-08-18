@@ -3,8 +3,6 @@ import {
     PipeTransform,
 } from '@angular/core';
 
-import { appendStringToSpecPositions } from 'src/common/utils';
-
 @Pipe({
     name: 'phone',
 })
@@ -15,9 +13,9 @@ export class PhonePipe implements PipeTransform {
 
         switch (phoneNumber.length) {
             case 9:
-                return appendStringToSpecPositions(phoneNumber, [3, 6], ' ');
+                return phoneNumber.replace(/(\d{3})(\d{3})(\d{3})/, '$1\xa0$2\xa0$3');
             case 13:
-                return appendStringToSpecPositions(phoneNumber, [4, 7, 10], ' ');
+                return phoneNumber.replace(/(\+\d{3})(\d{3})(\d{3})(\d{3})/, '$1\xa0$2\xa0$3\xa0$4');
             default:
                 return phoneNumber;
         }
