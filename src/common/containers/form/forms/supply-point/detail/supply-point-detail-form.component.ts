@@ -117,6 +117,19 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
                 );
             });
 
+        this.form.get('annualConsumptionUnit')
+            .valueChanges
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe((annualConsumptionUnit: UNIT_OF_PRICES) => {
+                this.detectChangesForAnnualConsumption(
+                    ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION,
+                    ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_UNIT,
+                    annualConsumptionUnit,
+                );
+            });
+
         this.form.get('annualConsumptionVTUnit')
             .valueChanges
             .pipe(
