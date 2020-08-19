@@ -570,9 +570,11 @@ export const FILE_UPLOAD_CONFIG = 'file_upload_config';
 export enum ANNUAL_CONSUMPTION_TYPES {
     ANNUAL_CONSUMPTION_NT = 'annualConsumptionNT',
     ANNUAL_CONSUMPTION_VT = 'annualConsumptionVT',
+    ANNUAL_CONSUMPTION = 'annualConsumption',
 }
 
 export enum ANNUAL_CONSUMPTION_UNIT_TYPES {
     ANNUAL_CONSUMPTION_NT_UNIT = 'annualConsumptionNTUnit',
     ANNUAL_CONSUMPTION_VT_UNIT = 'annualConsumptionVTUnit',
+    ANNUAL_CONSUMPTION_UNIT = 'annualConsumptionUnit',
 }
