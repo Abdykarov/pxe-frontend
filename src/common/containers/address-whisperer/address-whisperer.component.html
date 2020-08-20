@@ -39,7 +39,7 @@
             (appendButtonAction)="appendButtonAction.emit()"
             [bindValue]="null"
             [disabledField]="disabled"
-            [error]="error"
+            [error]="!showForm && error"
             [label]="label"
             [placeholder]="placeholder"
             [searchable]="true"
