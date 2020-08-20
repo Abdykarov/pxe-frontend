@@ -5,10 +5,15 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { CONSTS } from 'src/app/app.constants';
+import {
+    CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
 
 export abstract class AbstractComponent implements OnInit, OnDestroy, AfterViewInit {
     public readonly CONSTS = CONSTS;
+    public readonly ROUTES = ROUTES;
+
     protected destroy$: Subject<boolean> = new Subject<boolean>();
 
     ngOnDestroy() {

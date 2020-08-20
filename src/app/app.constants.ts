@@ -170,6 +170,7 @@ export const CONSTS = {
         SIGN_UP: 'Registrace | PARC4U',
     },
     XL_RESOLUTION: 992,
+    MD_RESOLUTION: 768,
 };
 
 export const ROUTES = {

@@ -20,10 +20,6 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
-import {
-    CONSTS,
-    S_ANALYTICS,
-} from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';
 import { inArray } from 'src/common/utils';
 import {
@@ -35,6 +31,7 @@ import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
+import { Tag } from 'src/app/services/model/faq.model';
 
 export abstract class AbstractLayoutComponent extends AbstractComponent implements OnInit {
     public activeUrl: string;
@@ -76,13 +73,13 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
             .pipe(takeUntil(this.destroy$))
             .subscribe(event => {
                 if (event instanceof NavigationEnd) {
-                    this.isLogouting = event.urlAfterRedirects.indexOf(`/${CONSTS.PATHS.LOGOUT}`) !== -1;
+                    this.isLogouting = event.urlAfterRedirects.indexOf(`/${this.CONSTS.PATHS.LOGOUT}`) !== -1;
 
                     if (
                         event && event.urlAfterRedirects &&
-                        !inArray(event.urlAfterRedirects, [`/${CONSTS.PATHS.LOGIN}`, `/${CONSTS.PATHS.LOGOUT}`])
+                        !inArray(event.urlAfterRedirects, [`/${this.CONSTS.PATHS.LOGIN}`, `/${this.CONSTS.PATHS.LOGOUT}`])
                     ) {
-                        this.cookieService.remove(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
+                        this.cookieService.remove(this.CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
                     }
 
                     if (this.showOverlay) {
@@ -91,13 +88,13 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
                         this.toggleSubscription.unsubscribe();
                     }
                     if (
-                        event.urlAfterRedirects.indexOf(`/${CONSTS.PATHS.SECURED}`) !== -1 &&
+                        event.urlAfterRedirects.indexOf(`/${this.CONSTS.PATHS.SECURED}`) !== -1 &&
                         isPlatformBrowser(this.platformId)
                     ) {
-                        localStorage.setItem(CONSTS.STORAGE_HELPERS.LAST_URL, event.urlAfterRedirects);
+                        localStorage.setItem(this.CONSTS.STORAGE_HELPERS.LAST_URL, event.urlAfterRedirects);
                     }
 
-                    if (event && event.url.indexOf(`/${CONSTS.PATHS.SECURED}`) === -1) {
+                    if (event && event.url.indexOf(`/${this.CONSTS.PATHS.SECURED}`) === -1) {
                         this.authService.setActualStateFromOtherTab();
                     }
 
@@ -120,9 +117,16 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         if (this.settings.signUpType === SignType.SCROLL) {
             this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
         } else if (this.settings.signUpType === SignType.NAVIGATE) {
-            this.router.navigate([CONSTS.PATHS.SIGN_UP]);
+            this.router.navigate([this.CONSTS.PATHS.SIGN_UP]);
         }
     }
+
+    public scrollToFaq = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.FAQ));
+
+    public scrollToAboutUs = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.ABOUT_US));
+
+    public scrollToAboutService = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.ABOUT_SERVICE));
+
 
     public login = () => {
         if (R.indexOf(this.settings.loginType, [LoginType.RELOAD, LoginType.NAVIGATE]) >= 0) {
@@ -135,13 +139,13 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
                     skipLocationChange: true,
                 };
             }
-            this.router.navigate([CONSTS.PATHS.LOGIN], extras);
+            this.router.navigate([this.CONSTS.PATHS.LOGIN], extras);
         }
     }
 
     public homeRedirect = (param = false) => this.authService.homeRedirect(param);
 
-    public landingPageRedirect = () => this.router.navigate([CONSTS.PATHS.EMPTY]);
+    public landingPageRedirect = () => this.router.navigate([this.CONSTS.PATHS.EMPTY]);
 
     public toggleMenuOpen = (open: boolean) => {
         this.isMenuOpen = open;

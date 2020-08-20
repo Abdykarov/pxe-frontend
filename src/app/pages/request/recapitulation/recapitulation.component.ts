@@ -5,7 +5,6 @@ import {
 import {
     ChangeDetectorRef,
     Component,
-    OnDestroy,
     OnInit,
 } from '@angular/core';
 
