@@ -334,6 +334,7 @@ $colors: (
 	position: relative;
 
 	&__holder {
+		position: relative;
 		margin-bottom: $spacer;
 
 		// Media queries
@@ -352,5 +353,10 @@ $colors: (
 
 	&__control {
 		margin-bottom: $spacer;
+
+		// Media queries
+		@include media-breakpoint-down(xs) {
+			@include absolute-center;
+		}
 	}
 }
