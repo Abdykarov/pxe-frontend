@@ -35,6 +35,7 @@
             notFoundText="Nenalezeny žádné záznamy"
             [typeahead]="typeahead"
             [searchFn]="customSearchFn"
+            (remove)="remove.emit($event)"
             (change)="change.emit($event);"
             (open)="open.emit($event);"
             (close)="close.emit($event);">
