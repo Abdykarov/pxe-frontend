@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
+import * as moment from 'moment';
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import {
@@ -116,7 +117,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         private supplyService: SupplyService,
     ) {
         super(fb);
-        this.minDate = new Date();
+        this.minDate = moment().add(this.CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS, 'day').toDate();
     }
 
     ngOnInit() {

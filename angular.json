@@ -43,7 +43,7 @@
                         "styles": [
                             "src/assets/scss/front.scss",
                             {
-                                "input": "src/assets/css/pdf-viewer-custom.scss",
+                                "input": "src/assets/scss/pdf-viewer-custom.scss",
                                 "inject": false
                             }
                         ],
@@ -239,7 +239,7 @@
                         "styles": [
                             "src/assets/scss/front.scss",
                             {
-                                "input": "src/assets/css/pdf-viewer-custom.scss",
+                                "input": "src/assets/scss/pdf-viewer-custom.scss",
                                 "inject": false
                             }
                         ],

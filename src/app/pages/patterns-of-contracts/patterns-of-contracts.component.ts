@@ -60,7 +60,6 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
 
     constructor(
         private cd: ChangeDetectorRef,
-        public datePipe: DatePipe,
         private metaService: Meta,
         private route: ActivatedRoute,
         private router: Router,
