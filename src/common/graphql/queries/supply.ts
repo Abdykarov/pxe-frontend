@@ -286,7 +286,7 @@ export const findSupplyPointsQuery = gql`
 `;
 
 export const getSupplyPointQuery = gql`
-    query getSupplyPoint($supplyPointId: ID!, $contractId: ID, $skipNextContracts: Boolean = true){
+    query getSupplyPoint($supplyPointId: ID!, $contractId: ID, $skipNextContracts: Boolean = false){
         getSupplyPoint(supplyPointId: $supplyPointId, contractId: $contractId){
             ...SupplyPointFragment
         }
