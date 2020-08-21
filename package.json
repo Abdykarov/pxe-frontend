@@ -114,11 +114,5 @@
   },
   "browser": {
     "crypto": false
-  },
-  "husky": {
-    "hooks": {
-        "pre-commit": "yarn lint && yarn lint:scss",
-        "pre-push": "yarn build:ssr"
-    }
   }
 }
