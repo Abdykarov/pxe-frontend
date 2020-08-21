@@ -267,13 +267,13 @@
                         </div>
                         <span class="perex">{{timeToContractEnd}} {{timeToContractEnd | plural: timeToContractEndPeriodMap[timeToContractEndPeriod]}}</span>
                     </div>
-                    <div *ngIf="supplyPoint.contract.isNextContractConcluded && supplyPoint?.contract?.nextContractId != supplyPoint.id"
+                    <div *ngIf="supplyPoint.contract.isNextContractConcluded && supplyPoint.contract?.nextContractId != supplyPoint.id"
                          class="col-12">
                         <div class="mb-1">
                             <small>Tato smlouva bude nahrazena <a [routerLink]="['/', CONSTS.PATHS.SECURED, CONSTS.PATHS.SUPPLY_POINTS, supplyPoint.contract.nextContractId]">smlouvou budoucí</a>.</small>
                         </div>
                     </div>
-                    <div *ngIf="!supplyPoint.contract.isNextContractConcluded && supplyPoint?.contract?.nextContractId != supplyPoint.id"
+                    <div *ngIf="!supplyPoint.contract.isNextContractConcluded && supplyPoint.contract?.nextContractId != supplyPoint.id"
                          class="col-12">
                         <div class="mb-1">
                             <small>Tato smlouva má rozpracovanou <a (click)="navigateToUnsignedSupplyPoint(supplyPoint.contract.nextContractId)">navazující smlouvu</a>.</small>
