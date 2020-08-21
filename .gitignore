@@ -30,6 +30,7 @@ tags
 *.launch
 .settings/
 *.sublime-workspace
+.nvmrc
 
 # IDE - VSCode
 .vscode/*
