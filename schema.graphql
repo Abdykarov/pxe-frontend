@@ -42,8 +42,8 @@ type Contract {
     offerValidity: Boolean!
     personalData: PersonalData
     prolong: Boolean
-    nextSupplyPointId: ID
-    previousContractId: String
+    nextContractId: ID
+    previousContractId: ID
     isNextContractConcluded: Boolean
 }
 
