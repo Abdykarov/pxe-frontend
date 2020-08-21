@@ -234,7 +234,7 @@
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			margin: 0 -$spacer;
+			margin: 0 (-$spacer);
 		}
 		@include media-breakpoint-up(lg) {
 			margin: 0 ( -$spacer * 1.5 );
