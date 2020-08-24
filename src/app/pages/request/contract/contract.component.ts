@@ -139,7 +139,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                             .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY));
 
                     const documentTypeUnsetProlongation$ = supplyPoint.contract.previousContractId ?
-                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.CONTRACT)
+                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.TERMINATE_PREV)
                             .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)) : of(null);
 
                     this.supplyPoint = supplyPoint;
