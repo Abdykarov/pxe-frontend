@@ -62,7 +62,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
 
     public isVideoPlaying = false;
 
-    @ViewChild('subscription', { static: true })
+    @ViewChild('subscription', { static: false })
     public subscriptionElement: ElementRef;
 
     @ViewChild('faq', { static: true })
@@ -169,7 +169,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
                 this.isVideoPlaying = true;
                 playPromise
                     .then(_ => ({}))
-                    .catch(error => {
+                    .catch(_ => {
                         video.muted = true;
                         video.play();
                     });
