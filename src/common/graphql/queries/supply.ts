@@ -225,66 +225,6 @@ export const findSupplierDocumentsByComodityQuery = gql`
     }
 `;
 
-export const findSupplyPointsQuery = gql`
-    query findSupplyPoints($identificationNumber: String){
-        findSupplyPoints(identificationNumber: $identificationNumber){
-            id,
-            name,
-            commodityType,
-            supplier{
-                id,
-                name,
-                vatNumber,
-                logoPath,
-                sampleDocuments{
-                    type,
-                    url
-                }
-            },
-            contract {
-                contractId,
-                contractStatus,
-                deliveryFrom,
-                deliveryTo,
-                offerValidity,
-            },
-            identificationNumber,
-            address{
-                street,
-                orientationNumber,
-                descriptiveNumber,
-                city,
-                postCode,
-                region,
-            },
-            distributionRate{
-                type,
-                code,
-                description,
-                help
-            },
-            circuitBreaker{
-                type,
-                code,
-                description,
-                help
-            },
-            annualConsumptionNT,
-            expirationDate,
-            subject{
-                type,
-                code,
-                description,
-                help,
-            }
-            lastAnnualConsumptionNT,
-            lastAnnualConsumptionVT,
-            progressStatus,
-            allowedOperations,
-        }
-    }
-`;
-
 export const getSupplyPointQuery = gql`
     query getSupplyPoint($supplyPointId: ID!, $contractId: ID){
         getSupplyPoint(supplyPointId: $supplyPointId, contractId: $contractId){
