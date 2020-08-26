@@ -1,4 +1,3 @@
-import * as searchHelper from './search-helper';
 import {
     AfterViewInit,
     Directive,
@@ -8,10 +7,13 @@ import {
     Renderer2,
 } from '@angular/core';
 
+import * as searchHelper from './search-helper';
+
+// base on https://github.com/ng-select/ng-select/tree/master/src/ng-option-highlight
 @Directive({
     selector: '[lndOptionHighlight]',
 })
-export class LndOptionHighlightDirective implements OnChanges, AfterViewInit {
+export class OptionHighlightDirective implements OnChanges, AfterViewInit {
 
     @Input('lndOptionHighlight')
     public term: string;
@@ -21,7 +23,8 @@ export class LndOptionHighlightDirective implements OnChanges, AfterViewInit {
 
     constructor(
         private elementRef: ElementRef,
-        private renderer: Renderer2) {
+        private renderer: Renderer2,
+    ) {
         this.element = this.elementRef.nativeElement;
     }
 

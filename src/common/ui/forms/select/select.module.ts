@@ -4,8 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { NgSelectModule } from '@ng-select/ng-select';
 
+import { DirectivesModule } from 'src/common/directives/directives.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
-import { LndOptionHighlightModule } from 'src/third-sides/ng-option-highlight/lnd-option-highlight.module';
 import { SelectComponent } from './select.component';
 
 @NgModule({
@@ -14,8 +14,8 @@ import { SelectComponent } from './select.component';
     ],
     imports: [
         CommonModule,
+        DirectivesModule,
         FormModule,
-        LndOptionHighlightModule,
         NgSelectModule,
         ReactiveFormsModule,
     ],
