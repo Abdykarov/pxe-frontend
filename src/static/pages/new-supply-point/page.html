@@ -32,61 +32,61 @@
     </div>
     <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1 text-center">
-            <h2>
+            <p class="perex mb-4">
                 Zadejte údaje k odběrnému místu
-            </h2>
+            </p>
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
-            <lnd-banner-ui
+            <!-- <lnd-banner-ui
                 [buttonsTemplate]="bannerButtonsTemplate"
                 [data]="bannerObj"
             >
-            </lnd-banner-ui>
+            </lnd-banner-ui> -->
             <form
                 [formGroup]="form">
-                <div class="page-box mb-5">
+                <div class="page-box mb-3">
                     <div class="form-container">
-                        <div class="row no-gutters mb-5">
+                        <div class="row no-gutters mb-2">
                             <div class="col-12">
-                                <img alt="soucastna smlouva" class="w-25 mb-3" src="/assets/images/illustrations/sign.svg" title="">
-                                <h2 class="h1 mb-1">
+                                <img alt="soucastna smlouva" class="w-25 mb-3" src="/assets/images/illustrations/light.svg" title="">
+                                <h2 class="page-box__title">
                                     Komodita <br />a současný dodavatel
                                 </h2>
                             </div>
                         </div>
-                            <lnd-form-field
-                                [id]="'commodityType'"
-                                label="Druh energie"
-                                [type]="'RADIOGROUP'"
-                                [customFormGroupClass]="'mb-3'"
-                                [radioGroupItemClass]="'custom-control-inline'"
-                                [options]="config.commodityTypeOptions"
-                            ></lnd-form-field>
-                            <lnd-form-field
-                                [id]="'subscriberType'"
-                                label="Odběratel"
-                                [type]="'RADIOGROUP'"
-                                [customFormGroupClass]="'mb-3'"
-                                [radioGroupItemClass]="'custom-control-inline'"
-                                [options]="config.subscriberTypeOptions"
-                            ></lnd-form-field>
-                            <lnd-select
-                                [bindValue]="null"
-                                label="Současný dodavatel"
-                                [options]="config.suppliersOptions"
-                                [parentForm]="form"
-                                [selectName]="'supplierId'"
-                                subtext="Začněte psát a my vám poradíme."
-                                searchable="true">
-                            </lnd-select>
+                        <lnd-form-field
+                            [id]="'commodityType'"
+                            label="Druh energie"
+                            [type]="'RADIOGROUP'"
+                            [customFormGroupClass]="'mb-3'"
+                            [radioGroupItemClass]="'custom-control-inline'"
+                            [options]="config.commodityTypeOptions"
+                        ></lnd-form-field>
+                        <lnd-form-field
+                            [id]="'subscriberType'"
+                            label="Odběratel"
+                            [type]="'RADIOGROUP'"
+                            [customFormGroupClass]="'mb-3'"
+                            [radioGroupItemClass]="'custom-control-inline'"
+                            [options]="config.subscriberTypeOptions"
+                        ></lnd-form-field>
+                        <lnd-select
+                            [bindValue]="null"
+                            label="Současný dodavatel"
+                            [options]="config.suppliersOptions"
+                            [parentForm]="form"
+                            [selectName]="'supplierId'"
+                            subtext="Začněte psát a my vám poradíme."
+                            searchable="true">
+                        </lnd-select>
                     </div>
                 </div>
-                <div class="page-box mb-5">
+                <div class="page-box mb-3">
                     <div class="form-container">
-                        <div class="row no-gutters mb-5">
+                        <div class="row no-gutters mb-2">
                             <div class="col-12">
                                 <img alt="soucastna smlouva" class="w-25 mb-3" src="/assets/images/illustrations/sign.svg" title="">
-                                <h2 class="h1 mb-1">
+                                <h2 class="page-box__title">
                                     Identifikace a adresa odběrného místa
                                 </h2>
                             </div>
@@ -112,12 +112,12 @@
                         </pxe-address-whisperer>
                     </div>
                 </div>
-                <div class="page-box mb-5">
+                <div class="page-box mb-3">
                     <div class="form-container">
-                        <div class="row no-gutters mb-5">
+                        <div class="row no-gutters mb-2">
                             <div class="col-12">
                                 <img alt="soucastna smlouva" class="w-25 mb-3" src="/assets/images/illustrations/sign.svg" title="">
-                                <h2 class="h1 mb-1">
+                                <h2 class="page-box__title">
                                     Parametry odběru elekřiny
                                 </h2>
                             </div>
@@ -173,12 +173,12 @@
                         ></lnd-form-field>
                     </div>
                 </div>
-                <div class="page-box mb-5">
+                <div class="page-box mb-3">
                     <div class="form-container">
-                        <div class="row no-gutters mb-5">
+                        <div class="row no-gutters mb-2">
                             <div class="col-12">
                                 <img alt="soucastna smlouva" class="w-25 mb-3" src="/assets/images/illustrations/sign.svg" title="">
-                                <h2 class="h1 mb-1">
+                                <h2 class="page-box__title">
                                     Výpověď současné smlouvy
                                 </h2>
                             </div>
