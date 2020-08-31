@@ -12,9 +12,9 @@
 <div class="row no-gutters">
     <div
         *ngIf="!showForm"
-        class="col-12">
+        class="col-12 mb-5">
         <lnd-button
-            class="w-100"
+            class="w-100 mb-1"
             customClass="p-2 w-100"
             [label]="enableVerificationLabel"
             (click)="(toggleEnableBySelf ? enableVerificationAction.emit() : enableVerification())"

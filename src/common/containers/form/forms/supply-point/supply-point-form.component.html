@@ -505,15 +505,15 @@
                         {{newSupplyWillBegin | date:'d.&nbsp;M.&nbsp;y'}}
                     </div>
                 </div>
+                <div class="text-center">
+                    <lnd-button
+                        type="primary"
+                        (action)="submitForm();sAnalyticsService.sFormClick($event);"
+                        [isDisabled]="formLoading"
+                        label="Uložit a zobrazit nabídky">
+                    </lnd-button>
+                </div>
             </div>
-        </div>
-        <div class="text-center">
-            <lnd-button
-                type="primary"
-                (action)="submitForm();sAnalyticsService.sFormClick($event);"
-                [isDisabled]="formLoading"
-                label="Uložit a zobrazit nabídky">
-            </lnd-button>
         </div>
     </form>
 </div>

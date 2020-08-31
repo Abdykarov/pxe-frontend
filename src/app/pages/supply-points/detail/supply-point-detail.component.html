@@ -47,13 +47,11 @@
                     (customAction)="sendContractConfirmationSms()">
                 </pxe-verification-form>
             </div>
-        </div>
-        <div [class.mb-5]="!supplyPoint.lastVersionOfSupplyPoint"
-             class="col-12">
-            <div class="mb-1">
-                <small>Výpovědní lhůta</small>
+            <div [class.mb-5]="!supplyPoint.lastVersionOfSupplyPoint"
+                 class="col-12">
+                <div class="mb-1">Výpovědní lhůta</div>
+                <span class="perex">{{timeToContractEnd}} {{timeToContractEnd | plural: timeToContractEndPeriodMap[timeToContractEndPeriod]}}</span>
             </div>
-            <span class="perex">{{timeToContractEnd}} {{timeToContractEnd | plural: timeToContractEndPeriodMap[timeToContractEndPeriod]}}</span>
         </div>
         <div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.LEAVE_CONTRACT"
             class="row no-gutters mb-3">
@@ -168,7 +166,8 @@
         ></pxe-supply-point-detail-form>
     </ng-container>
 
-    <div class="row text-center">
+    <div *ngIf="supplyPoint"
+        class="row text-center">
         <div class="col-12 col-lg-4 offset-lg-4">
             <h2>TODO po mergy klasickyho BE --- dat sem odkaz na navazijci smlouvu </h2>
         </div>

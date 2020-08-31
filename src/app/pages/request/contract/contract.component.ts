@@ -10,7 +10,6 @@ import {
     ViewChild,
 } from '@angular/core';
 
-import * as R from 'ramda';
 import {
     combineLatest,
     of,
@@ -21,10 +20,8 @@ import {
     switchMap,
     takeUntil,
 } from 'rxjs/operators';
-import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
 
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
-import { IQuestion } from 'src/app/services/model/faq.model';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import {
     CommodityType,
@@ -41,7 +38,6 @@ import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
 import { FaqService } from 'src/app/services/faq.service';
 import {
-    geParamFromTag,
     getConfigStepper,
     parseGraphQLErrors,
     parseRestAPIErrors,
@@ -53,6 +49,7 @@ import {
 } from 'src/app/services/model/document.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
+import { PdfViewerComponent } from 'src/common/ui/pdf-viewer/pdf-viewer.component';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -69,10 +66,10 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
     public pxeVerificationFormWrapper: ElementRef;
 
     @ViewChild('pdfInformation')
-    public pdfInformation: PdfJsViewerComponent ;
+    public pdfInformation: PdfViewerComponent;
 
     @ViewChild('pdfContract')
-    public pdfContract: PdfJsViewerComponent;
+    public pdfContract: PdfViewerComponent;
 
     public commodityType = CommodityType;
     public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
