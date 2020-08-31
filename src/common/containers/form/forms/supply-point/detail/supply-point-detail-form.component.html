@@ -30,14 +30,12 @@
                 <div class="row no-gutters">
                     <div class="col-12">
                         <img alt="identifikace a spotreba" class="w-25 mb-3" src="/assets/images/illustrations/house.svg" title="">
-                        <h2 class="h1 mb-3">
+                        <h2 class="page-box__title mb-3">
                             Identifikace <br /> a spotřeba
                         </h2>
                     </div>
                     <div class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>Odběr</small>
-                        </div>
+                        <p class="mb-1 text-uppercase">Odběr</p>
                         <span class="perex">
                             <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">Elektřina</ng-container>
                             <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">Plynu</ng-container>
@@ -49,9 +47,10 @@
                         <span class="green-energy__text">Zelená energie</span>
                     </div>
                     <div class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>EAN</small>
-                        </div>
+                        <p class="mb-1">
+                            <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">EAN</ng-container>
+                            <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">EIC</ng-container>
+                        </p>
                         <span class="perex">{{supplyPoint.identificationNumber}}</span>
                     </div>
                 </div>
@@ -228,27 +227,21 @@
                 <div class="row no-gutters">
                     <div class="col-12">
                         <img alt="identifikace a spotreba" class="w-25 mb-3" src="/assets/images/illustrations/house.svg" title="">
-                        <h2 class="h1 mb-3">
+                        <h2 class="page-box__title mb-3">
                             Parametry odběrného místa
                         </h2>
                     </div>
                     <div class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>Typ odběru</small>
-                        </div>
+                        <p class="mb-1 text-uppercase">Typ odběru</p>
                         <span class="perex text-capitalize">{{subjectName}}</span>
                     </div>
                     <div *ngIf="(supplyPoint | pathValue:['contract', 'offer', 'supplier', 'name'])"
                          class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>Dodavatel</small>
-                        </div>
+                        <p class="mb-1 text-uppercase">Dodavatel</p>
                         <span class="perex">{{supplyPoint.contract.offer.supplier.name}}</span>
                     </div>
                     <div class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>Území</small>
-                        </div>
+                        <p class="mb-1 text-uppercase">Území</p>
                         <span class="perex">{{supplyPoint.address.city}}</span>
                     </div>
                     <div *ngIf="supplyPoint.commodityType === commodityType.POWER"
@@ -260,16 +253,12 @@
                     </div>
                     <div *ngIf="supplyPoint.commodityType === commodityType.POWER"
                          class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>Jistič – fáze</small>
-                        </div>
+                        <p class="mb-1 text-uppercase">Jistič – fáze</p>
                         <span class="perex">{{supplyPoint.phases.help || supplyPoint.phases.description}}</span>
                     </div>
                     <div *ngIf="supplyPoint.commodityType === commodityType.POWER"
                          class="col-12 mb-5">
-                        <div class="mb-1">
-                            <small>Jistič – velikost</small>
-                        </div>
+                        <p class="mb-1 text-uppercase">Jistič – velikost</p>
                         <span class="perex">{{supplyPoint.circuitBreaker.help || supplyPoint.circuitBreaker.description}}</span>
                     </div>
                 </div>
@@ -278,22 +267,20 @@
         <div class="page-box">
             <div class="form-container">
                 <div class="row no-gutters">
-                    <div class="col-12">
+                    <div class="col-12 mb-5">
                         <img alt="soucastna smlouva" class="w-25 mb-3" src="/assets/images/illustrations/sign.svg" title="">
-                        <h2 class="h1 mb-1">
+                        <h2 class="page-box__title mb-1">
                             Součastná smlouva
                         </h2>
-                        <h4><a (click)="downloadPdf()">Stáhnout</a> (PDF)</h4>
+                        <a (click)="downloadPdf()">Stáhnout</a> (PDF)
                     </div>
                     <div *ngIf="(supplyPoint | pathValue:['contract', 'deliveryTo'])"
                          [class.mb-2]="supplyPoint.contract.deliveryTo"
                          class="col-12">
-                        <div class="mb-1">
-                            <small>Dodávka do</small>
-                        </div>
+                        <p class="mb-1 text-uppercase">Dodávka do</p>
 
                         <span class="perex mb-1">{{supplyPoint.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}</span>
-                        <p class="mb-3">{{
+                        <p class="small mb-3">{{
                             contractEndTypeTranslateMap[
                                 supplyPoint?.contract?.prolong ?
                                     supplyPointContractEndTypes.CONTRACT_END_TERM_WITH_PROLONGATION :
@@ -306,9 +293,9 @@
                     </ng-container>
                     <div *ngIf="!supplyPoint.lastVersionOfSupplyPoint"
                          class="col-12">
-                        <div class="mb-1">
-                            <small>Tato smlouva bude nahrazena smlouvou budoucí.</small>
-                        </div>
+                        <p class="mb-1">
+                            Tato smlouva bude nahrazena smlouvou budoucí.
+                        </p>
                     </div>
                 </div>
                 <hr>
@@ -323,7 +310,6 @@
                             <lnd-button
                                     label="Najít dodavatele"
                                     type="link"
-                                    size="sm"
                                     [isDisabled]="formLoading"
                                     (action)="findNewSupplier(supplyPoint)">
                             </lnd-button>
