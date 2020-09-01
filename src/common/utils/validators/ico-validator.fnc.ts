@@ -1,28 +1,12 @@
-import {
-    always,
-    split,
-    isEmpty,
-    map,
-    compose,
-    reduce,
-    dropLast,
-    equals,
-    T,
-    cond,
-    o,
-    modulo,
-    prop,
-    __,
-    subtract,
-} from 'ramda';
+import * as R from 'ramda';
 
 const COUNT_NUMBERS_OF_ICO = 8;
 const CONTROL_INDEX = 7;
 
-const countWeightedSum = icArray =>
-    compose(
-        prop('weightedSum'),
-        reduce(
+const countWeightedSum = (icArray: Array<number>): number =>
+    R.compose(
+        R.prop('weightedSum'),
+        R.reduce(
             ({ weightedSum, index }, number) => ({
                 weightedSum: weightedSum + number * (COUNT_NUMBERS_OF_ICO - index),
                 index: ++index,
@@ -32,26 +16,26 @@ const countWeightedSum = icArray =>
                 index: 0,
             },
         ),
-        dropLast(1),
+        R.dropLast(1),
     )(icArray);
 
-const getCompareParameter = cond([
-    [equals(0), always(1)],
-    [equals(1), always(0)],
-    [T, subtract(11)],
+const getCompareParameter = R.cond([
+    [R.equals(0), R.always(1)],
+    [R.equals(1), R.always(0)],
+    [R.T, R.subtract(11)],
 ]);
 
-export const verifyIC = ico => {
-    const icArray = o(map(parseInt), split(''))(ico);
+export const verifyIC = (ico: string): boolean => {
+    const icArray: Array<number> = R.o(R.map(parseInt), R.split(''))(ico);
 
-    if (isEmpty(icArray)) {
+    if (R.isEmpty(icArray)) {
         return false;
     }
 
-    return compose(
-        equals(icArray[CONTROL_INDEX]),
+    return R.compose(
+        R.equals(icArray[CONTROL_INDEX]),
         getCompareParameter,
-        modulo(__, 11),
+        R.modulo(R.__, 11),
         countWeightedSum,
     )(icArray);
 };
