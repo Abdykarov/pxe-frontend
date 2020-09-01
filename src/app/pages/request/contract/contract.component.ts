@@ -10,6 +10,7 @@ import {
     ViewChild,
 } from '@angular/core';
 
+import * as R from 'ramda';
 import {
     combineLatest,
     of,
@@ -124,8 +125,14 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
             .pipe(
                 map(({data}) => data.getSupplyPoint),
                 switchMap((supplyPoint: ISupplyPoint) => {
-                    const documentTypeInformation$ = supplyPoint.subject.code === this.subjectType.SUBJECT_TYPE_INDIVIDUAL ?
-                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.INFORMATION)
+                    this.supplyPoint = supplyPoint;
+                    return this.supplyService.getSupplyPoint(supplyPoint.id, this.supplyPoint.contract.previousContractId).pipe(
+                        map(({data}) => data.getSupplyPoint),
+                    );
+                }),
+                switchMap((prevSupplyPoint: ISupplyPoint) => {
+                    const documentTypeInformation$ = this.supplyPoint.subject.code === this.subjectType.SUBJECT_TYPE_INDIVIDUAL ?
+                        this.documentService.getDocument(this.supplyPoint.contract.contractId, this.documentType.INFORMATION)
                             .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)) :
                         of(
                             {
@@ -135,14 +142,15 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                         );
 
                     const documentTypeContract$ =
-                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.CONTRACT)
+                        this.documentService.getDocument(this.supplyPoint.contract.contractId, this.documentType.CONTRACT)
                             .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY));
 
-                    const documentTypeUnsetProlongation$ = supplyPoint.contract.previousContractId ?
-                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.CONTRACT_NOT_EXTENDED)
-                            .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)) : of(null);
+                    const isChangedSupplier = prevSupplyPoint.supplier.id !== this.supplyPoint.supplier.id;
+                    const showUnsetProlongation = R.isEmpty(prevSupplyPoint) && isChangedSupplier;
+                    const documentTypeUnsetProlongation$ = showUnsetProlongation ?
+                            this.documentService.getDocument(this.supplyPoint.contract.contractId, this.documentType.CONTRACT_NOT_EXTENDED)
+                                .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)) : of(null);
 
-                    this.supplyPoint = supplyPoint;
                     this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
                     return combineLatest([documentTypeInformation$, documentTypeContract$, documentTypeUnsetProlongation$]);
                 }),
