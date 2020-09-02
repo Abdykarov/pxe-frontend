@@ -124,8 +124,10 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
             .pipe(
                 map(({data}) => data.getSupplyPoint),
                 switchMap((supplyPoint: ISupplyPoint) => {
-                    const documentTypeInformation$ = supplyPoint.subject.code === this.subjectType.SUBJECT_TYPE_INDIVIDUAL ?
-                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.INFORMATION)
+                    this.supplyPoint = supplyPoint;
+
+                    const documentTypeInformation$ = this.supplyPoint.subject.code === this.subjectType.SUBJECT_TYPE_INDIVIDUAL ?
+                        this.documentService.getDocument(this.supplyPoint.contract.contractId, this.documentType.INFORMATION)
                             .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)) :
                         of(
                             {
@@ -135,14 +137,18 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                         );
 
                     const documentTypeContract$ =
-                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.CONTRACT)
+                        this.documentService.getDocument(this.supplyPoint.contract.contractId, this.documentType.CONTRACT)
                             .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY));
 
-                    const documentTypeUnsetProlongation$ = supplyPoint.contract.previousContractId ?
-                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.CONTRACT)
-                            .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)) : of(null);
+                    const previousContractId = this.supplyPoint.contract.previousContractId;
+                    const showUnsetProlongation = !!previousContractId;
+                    const documentTypeUnsetProlongation$ = showUnsetProlongation ?
+                            this.documentService.getDocument(
+                                    previousContractId,
+                                    this.documentType.CONTRACT_NOT_EXTENDED,
+                                )
+                                .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)) : of(null);
 
-                    this.supplyPoint = supplyPoint;
                     this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
                     return combineLatest([documentTypeInformation$, documentTypeContract$, documentTypeUnsetProlongation$]);
                 }),
