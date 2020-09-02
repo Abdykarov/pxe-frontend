@@ -10,7 +10,6 @@ import {
     ViewChild,
 } from '@angular/core';
 
-import * as R from 'ramda';
 import {
     combineLatest,
     of,
@@ -126,11 +125,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                 map(({data}) => data.getSupplyPoint),
                 switchMap((supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
-                    return this.supplyService.getSupplyPoint(supplyPoint.id, this.supplyPoint.contract.previousContractId).pipe(
-                        map(({data}) => data.getSupplyPoint),
-                    );
-                }),
-                switchMap((prevSupplyPoint: ISupplyPoint) => {
+
                     const documentTypeInformation$ = this.supplyPoint.subject.code === this.subjectType.SUBJECT_TYPE_INDIVIDUAL ?
                         this.documentService.getDocument(this.supplyPoint.contract.contractId, this.documentType.INFORMATION)
                             .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)) :
@@ -145,10 +140,11 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                         this.documentService.getDocument(this.supplyPoint.contract.contractId, this.documentType.CONTRACT)
                             .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY));
 
-                    const showUnsetProlongation = !R.isEmpty(prevSupplyPoint);
+                    const previousContractId = this.supplyPoint.contract.previousContractId;
+                    const showUnsetProlongation = !!previousContractId;
                     const documentTypeUnsetProlongation$ = showUnsetProlongation ?
                             this.documentService.getDocument(
-                                    this.supplyPoint.contract.previousContractId,
+                                    previousContractId,
                                     this.documentType.CONTRACT_NOT_EXTENDED,
                                 )
                                 .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)) : of(null);
