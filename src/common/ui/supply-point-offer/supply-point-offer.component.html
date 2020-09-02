@@ -152,7 +152,7 @@
                 </ng-container>
                 <ng-container *ngIf="supplyPointOffer.commodityType === COMMODITY_TYPE_GAS">
                     <ng-container *ngIf="([
-                        supplyPointOffer.distributionPriceByConsumptionVT,
+                        supplyPointOffer.distributionPriceByConsumptionGas,
                         supplyPointOffer.distributionPriceByCapacity,
                         supplyPointOffer.accountingRegulatedPrice
                     ] | sum) as ditributionPriceGas">

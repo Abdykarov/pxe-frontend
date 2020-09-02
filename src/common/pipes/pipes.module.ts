@@ -21,6 +21,7 @@ import { LogoutInInformationPipe } from 'src/common/pipes/logout-in-information/
 import { NewSupplyWillBeginPipe } from './new-supply-will-begin/new-supply-will-begin.pipe';
 import { OffersByCommodityTypePipe } from 'src/common/pipes/offers-by-commodity-type/offers-by-commodity-type.pipe';
 import { PathValuePipe } from './path-value/path-value.pipe';
+import { PhonePipe } from 'src/common/pipes/phone/phone.pipe';
 import { PluralPipe } from './plurar/plural.pipe';
 import { ProgressStatusPipe } from './step-of-supply-point/step-of-supply-point.pipe';
 import { QuestionsToAccordionItemsPipe } from 'src/common/pipes/questions-to-accordion-items/questions-to-accordion-items.pipe';
@@ -50,6 +51,7 @@ import { ValuesPipe } from './values/values.pipe';
         LogoutInInformationPipe,
         OffersByCommodityTypePipe,
         PathValuePipe,
+        PhonePipe,
         PluralPipe,
         ProgressStatusPipe,
         QuestionsToAccordionItemsPipe,
@@ -78,6 +80,7 @@ import { ValuesPipe } from './values/values.pipe';
         LogoutInInformationPipe,
         OffersByCommodityTypePipe,
         PathValuePipe,
+        PhonePipe,
         PluralPipe,
         ProgressStatusPipe,
         QuestionsToAccordionItemsPipe,
@@ -106,6 +109,7 @@ import { ValuesPipe } from './values/values.pipe';
         NewSupplyWillBeginPipe,
         OffersByCommodityTypePipe,
         PathValuePipe,
+        PhonePipe,
         PluralPipe,
         ProgressStatusPipe,
         QuestionsToAccordionItemsPipe,

@@ -15,15 +15,15 @@ const routes: Routes =
             children: [
                 {
                     path: '',
-                    loadChildren: '../../pages/faq/faq-overview/faq-overview.module#FaqOverviewModule',
+                    loadChildren: () => import('../../pages/faq/faq-overview/faq-overview.module').then(m => m.FaqOverviewModule),
                 },
                 {
                     path: ':tag',
-                    loadChildren: '../../pages/faq/faq-overview/faq-overview.module#FaqOverviewModule',
+                    loadChildren: () => import('../../pages/faq/faq-overview/faq-overview.module').then(m => m.FaqOverviewModule),
                 },
                 {
                     path: ':tag/:url',
-                    loadChildren: '../../pages/faq/faq-detail/faq-detail.module#FaqDetailModule',
+                    loadChildren: () => import('../../pages/faq/faq-detail/faq-detail.module').then(m => m.FaqDetailModule),
                 },
             ],
         },

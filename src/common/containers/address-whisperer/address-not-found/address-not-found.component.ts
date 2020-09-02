@@ -28,7 +28,7 @@ export class AddressNotFoundComponent extends AbstractFormComponent implements O
 
     private _cityInput: FieldComponent;
 
-    @ViewChild('cityInput')
+    @ViewChild('cityInput', { static: true })
     set cityInput(cityInput: FieldComponent) {
         this._cityInput = cityInput;
         if (this._cityInput) {

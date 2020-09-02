@@ -63,7 +63,7 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
 
     public static readonly UNIQUE_FIELD_NAME_END = '_not_found_unique';
 
-    @ViewChild('lndSelect')
+    @ViewChild('lndSelect', { static: true })
     public lndSelect: SelectComponent;
 
     @ViewChild('selectWrapper')
@@ -250,6 +250,10 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
             this.showForm = true;
             this.parentForm.controls[this.whispererName + AddressWhispererComponent.UNIQUE_FIELD_NAME_END].setValue(userData);
             this.cd.markForCheck();
+        }
+
+        if (R.isNil(userData)) {
+            this.showForm = false;
         }
    }
 }

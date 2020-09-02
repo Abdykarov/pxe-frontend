@@ -1,8 +1,6 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
 import { NgModule } from '@angular/core';
 import { ServerModule } from '@angular/platform-server';
-
 import {
     CookieBackendService,
     CookieService,
@@ -16,7 +14,6 @@ import { UniversalInterceptor } from 'src/app/interceptors/universal.interceptor
     imports: [
         AppModule,
         ServerModule,
-        ModuleMapLoaderModule,
     ],
     providers: [
         // Add universal-only providers here
