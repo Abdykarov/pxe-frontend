@@ -142,7 +142,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                         );
 
                     const documentTypeContract$ =
-                        this.documentService.getDocument(this.supplyPoint.contract.contractId, this.documentType.CONTRACT)
+                        this.documentService.getDocument(this.supplyPoint.contract.previousContractId, this.documentType.CONTRACT)
                             .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY));
 
                     const isChangedSupplier = prevSupplyPoint.supplier.id !== this.supplyPoint.supplier.id;
