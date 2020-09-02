@@ -190,7 +190,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT], {state});
     }
 
-    public navigateToUnsignedSupplyPoint = (supplyPointId: string) => {
+    public navigateToUnsignedSupplyPoint = (supplyPointId: string, contractId: string) => {
         this.supplyService.getSupplyPoint(supplyPointId)
             .pipe(
                 map(({data}) => data.getSupplyPoint),

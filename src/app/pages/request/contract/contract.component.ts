@@ -146,7 +146,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                             .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY));
 
                     const isChangedSupplier = prevSupplyPoint.supplier.id !== this.supplyPoint.supplier.id;
-                    const showUnsetProlongation = R.isEmpty(prevSupplyPoint) && isChangedSupplier;
+                    const showUnsetProlongation = !R.isEmpty(prevSupplyPoint) && isChangedSupplier;
                     const documentTypeUnsetProlongation$ = showUnsetProlongation ?
                             this.documentService.getDocument(this.supplyPoint.contract.contractId, this.documentType.CONTRACT_NOT_EXTENDED)
                                 .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)) : of(null);
