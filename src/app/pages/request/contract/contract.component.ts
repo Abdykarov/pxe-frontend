@@ -71,10 +71,10 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
     @ViewChild('pdfContract')
     public pdfContract: PdfViewerComponent;
 
-    public pdfStopProlongation: PdfJsViewerComponent;
+    public pdfStopProlongation: PdfViewerComponent;
 
     @ViewChild('pdfStopProlongation')
-    set setPdfStopProlongation(pdfStopProlongation: PdfJsViewerComponent) {
+    set setPdfStopProlongation(pdfStopProlongation: PdfViewerComponent) {
         if (pdfStopProlongation) {
             this.pdfStopProlongation = pdfStopProlongation;
         }
