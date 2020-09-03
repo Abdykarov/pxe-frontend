@@ -1,7 +1,4 @@
-import {
-    CommonModule,
-    DatePipe,
-} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { AlertModule } from 'src/common/ui/alert/alert.module';
@@ -22,9 +19,6 @@ import { TableModule } from 'src/common/ui/table/table.module';
     ],
     exports: [
         PatternsOfContractsComponent,
-    ],
-    providers: [
-        DatePipe,
     ],
     imports: [
         AlertModule,
