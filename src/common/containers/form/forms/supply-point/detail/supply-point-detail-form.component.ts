@@ -14,6 +14,7 @@ import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import {
     filter,
+    map,
     takeUntil,
 } from 'rxjs/operators';
 import { IDocumentType, IResponseDataDocument } from 'src/app/services/model/document.model';
@@ -24,6 +25,7 @@ import {
     CommodityType,
     ICodelistOptions,
     ISupplyPoint,
+    ProgressStatus,
     TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import {
@@ -48,6 +50,7 @@ import { DocumentService } from 'src/app/services/document.service';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 import { parseRestAPIErrors, transformCodeList } from 'src/common/utils';
 
@@ -83,6 +86,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         private documentService: DocumentService,
         protected fb: FormBuilder,
         private modalsService: ModalService,
+        private navigateRequestService: NavigateRequestService,
         private router: Router,
         private supplyService: SupplyService,
     ) {
@@ -115,6 +119,19 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
                     ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_NT,
                     ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_NT_UNIT,
                     annualConsumptionNTUnit,
+                );
+            });
+
+        this.form.get('annualConsumptionUnit')
+            .valueChanges
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe((annualConsumptionUnit: UNIT_OF_PRICES) => {
+                this.detectChangesForAnnualConsumption(
+                    ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION,
+                    ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_UNIT,
+                    annualConsumptionUnit,
                 );
             });
 
@@ -174,6 +191,19 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT], {state});
     }
 
+    public navigateToUnsignedSupplyPoint = (supplyPointId: string, contractId: string) => {
+        this.supplyService.getSupplyPoint(supplyPointId)
+            .pipe(
+                map(({data}) => data.getSupplyPoint),
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                (supplyPoint: ISupplyPoint) => {
+                    this.navigateRequestService.checkCorrectStep(supplyPoint, ProgressStatus.COMPLETED);
+                },
+            );
+    }
+
     public prefillFormData = () => {
         let id = null;
         let commodityType = null;
@@ -194,7 +224,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
             annualConsumptionVTUnit = this.supplyPoint.annualConsumptionVTUnit;
             annualConsumptionVT = this.supplyPoint.annualConsumptionVT;
             annualConsumptionNT = this.supplyPoint.annualConsumptionNT;
-            annualConsumption = this.supplyPoint.annualConsumptionVT;
+            annualConsumption = this.supplyPoint.annualConsumption;
 
             if (annualConsumptionUnit === UNIT_OF_PRICES.KWH) {
                 annualConsumption *= 1000;

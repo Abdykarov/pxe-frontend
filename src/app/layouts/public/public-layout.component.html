@@ -9,10 +9,11 @@
         (homeRedirect)="homeRedirect()"
         [isMenuOpen]="isMenuOpen"
         (landingPageRedirect)="landingPageRedirect()"
+        (faqAction)="scrollToFaq()"
+        (aboutServiceAction)="scrollToAboutService()"
+        (aboutUsAction)="scrollToAboutUs()"
         (loginAction)="login()"
         (signUpAction)="signUp()"
-        (supplierChangeAction)="supplierChange()"
-        (coverageMapAction)="coverageMap()"
         (toggleMenu)="toggleMenuOpen($event)"
         (logoutAction)="logout()">
     </lnd-header>

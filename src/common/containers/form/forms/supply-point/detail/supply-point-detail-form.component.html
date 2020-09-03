@@ -282,7 +282,7 @@
                         <span class="perex mb-1">{{supplyPoint.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}</span>
                         <p class="small mb-3">{{
                             contractEndTypeTranslateMap[
-                                supplyPoint?.contract?.prolong ?
+                                !supplyPoint?.contract?.isNextContractConcluded ?
                                     supplyPointContractEndTypes.CONTRACT_END_TERM_WITH_PROLONGATION :
                                     supplyPointContractEndTypes.CONTRACT_END_TERM
                             ]}}
@@ -291,11 +291,17 @@
                     <ng-container *ngIf="contractActionsTemplate">
                         <ng-container *ngTemplateOutlet="contractActionsTemplate"></ng-container>
                     </ng-container>
-                    <div *ngIf="!supplyPoint.lastVersionOfSupplyPoint"
+                    <div *ngIf="supplyPoint.contract.isNextContractConcluded && supplyPoint.contract?.nextContractId != supplyPoint.contract.contractId"
                          class="col-12">
                         <p class="mb-1">
-                            Tato smlouva bude nahrazena smlouvou budoucí.
+                            <small>Tato smlouva bude nahrazena <a [routerLink]="['/', CONSTS.PATHS.SECURED, CONSTS.PATHS.SUPPLY_POINTS, supplyPoint.id, supplyPoint.contract.nextContractId]">smlouvou budoucí</a>.</small>
                         </p>
+                    </div>
+                    <div *ngIf="!(supplyPoint.contract.isNextContractConcluded) && supplyPoint.contract.nextContractId && supplyPoint.contract?.nextContractId != supplyPoint.id"
+                         class="col-12">
+                        <div class="mb-1">
+                            <small>Tato smlouva má rozpracovanou <a (click)="navigateToUnsignedSupplyPoint(supplyPoint.id, supplyPoint.contract.nextContractId)">navazující smlouvu</a>.</small>
+                        </div>
                     </div>
                 </div>
                 <ng-container *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO">

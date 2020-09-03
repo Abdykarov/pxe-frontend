@@ -2,7 +2,7 @@
     <a (click)="click($event)">Stáhnout</a>
 </ng-template>
 
-<div class="patterns-of-contracts-page container-content">
+<div class="patterns-of-contracts-page container-content container-content--public">
     <div class="container-fluid">
         <div class="row text-center">
             <div class="col-12 col-md-6 offset-md-3">
@@ -28,17 +28,17 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-12 col-xl-6 offset-xl-3 mb-2">
+            <div class="col-12 col-xl-10 offset-xl-1 mb-2">
                 <lnd-banner-ui
                     icon="icon--info"
                     [data]="bannerObj"
                     buttonLabel="Stáhnout"
                 ></lnd-banner-ui>
             </div>
-            <div class="col-12 col-xl-6 offset-xl-3">
+            <div class="col-12 col-xl-10 offset-xl-1">
                 <h2 class="h3 mb-3">Aktuální smlouvy</h2>
             </div>
-            <div class="col-12 col-xl-6 offset-xl-3">
+            <div class="col-12 col-xl-10 offset-xl-1">
                 <div class="page-box page-box--with-inner">
                     <div class="page-box__inner">
                         <ul class="link-list link-list--small mb-3">
