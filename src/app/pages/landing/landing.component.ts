@@ -21,7 +21,6 @@ import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 import {
     debounceTime,
-    filter,
     takeUntil,
 } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
@@ -58,15 +57,22 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
     templateUrl: './landing.component.html',
 })
 export class LandingComponent extends AbstractFaqComponent implements AfterViewInit {
+    @ViewChild('video')
+    public video: ElementRef;
 
-    @ViewChild('subscription', { static: true })
+    public isVideoPlaying = false;
+
+    @ViewChild('subscription', { static: false })
     public subscriptionElement: ElementRef;
 
-    @ViewChild('mapCoverage', { static: true })
-    public mapCoverageElement: ElementRef;
+    @ViewChild('faq', { static: true })
+    public faq: ElementRef;
 
-    @ViewChild('supplierChange', { static: true })
-    public supplierChangeElement: ElementRef;
+    @ViewChild('aboutUs', { static: true })
+    public aboutUs: ElementRef;
+
+    @ViewChild('aboutService', { static: true })
+    public aboutService: ElementRef;
 
     public frequentedQuestions: IAccordionItem[] = [];
     public formLoading = false;
@@ -77,7 +83,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     public formFields: IForm;
     public routes = ROUTES;
 
-    public isMoreThanXlResolution = false;
+    public isMoreThanMdResolution = false;
 
     public resizeEvent$ = fromEvent(window, 'resize')
         .pipe(
@@ -101,7 +107,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     ) {
         super(faqService, route);
         if (isPlatformBrowser) {
-            this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+            this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
         }
 
         this.loadConfigs$
@@ -132,41 +138,55 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
                 if (scrollTo === SCROLL_TO.LANDING_SUBSCRIPTION) {
                     scrollToElementFnc(this.subscriptionElement.nativeElement);
                 }
-                if (scrollTo === SCROLL_TO.MAP_COVERAGE) {
-                    scrollToElementFnc(this.mapCoverageElement.nativeElement);
+                if (scrollTo === SCROLL_TO.FAQ) {
+                    scrollToElementFnc(this.faq.nativeElement);
                 }
-                if (scrollTo === SCROLL_TO.SUPPLIER_CHANGE) {
-                    scrollToElementFnc(this.supplierChangeElement.nativeElement);
+                if (scrollTo === SCROLL_TO.ABOUT_US) {
+                    scrollToElementFnc(this.aboutUs.nativeElement);
+                }
+                if (scrollTo === SCROLL_TO.ABOUT_SERVICE) {
+                    scrollToElementFnc(this.aboutService.nativeElement);
                 }
             });
 
         this.resizeEvent$
             .pipe(takeUntil(this.destroy$))
             .subscribe(_  => {
-                this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
-                this.autoPlayVideoInAllBrowsers();
+                this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
                 this.cd.markForCheck();
             });
     }
 
-    autoPlayVideoInAllBrowsers = () => {
-        if (this.isMoreThanXlResolution) {
-            const myVideo = document.querySelector('video');
-            const playPromise = myVideo && myVideo.play();
+    public toggleVideo = (event = null) => {
+        if (event) {
+            event.preventDefault();
+        }
+
+        const video: HTMLMediaElement = this.video.nativeElement;
+        if (!this.isVideoPlaying) {
+            const playPromise = video && video.play();
             if (!R.isNil(playPromise)) {
-                playPromise.then(_ => ({}))
-                    .catch(error => {
-                        myVideo.muted = true;
-                        myVideo.play();
+                this.isVideoPlaying = true;
+                playPromise
+                    .then(_ => ({}))
+                    .catch(_ => {
+                        video.muted = true;
+                        video.play();
                     });
+            } else {
+                this.isVideoPlaying = true;
             }
+        } else {
+            video.pause();
+            this.isVideoPlaying = false;
         }
     }
 
-    ngAfterViewInit() {
-        if (this.isPlatformBrowser) {
-            this.autoPlayVideoInAllBrowsers();
-            this.cd.markForCheck();
+    public videoIsTouch = () => {
+        if (this.isMoreThanMdResolution) {
+            this.toggleVideo();
+            this.isVideoPlaying = true;
+            this.cd.detectChanges();
         }
     }
 

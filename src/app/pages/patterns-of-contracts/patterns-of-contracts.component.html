@@ -6,8 +6,8 @@
     Platná v období: {{row.dateFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{row.dateTo | date:'d.&nbsp;M.&nbsp;y'}}
 </ng-template>
 
-<div class="container-fluid">
-    <div class="container-content">
+<div class="container-fluid container-fluid--max-width">
+    <div class="container-content container-content--public">
         <pxe-layout-container pageTitle="Vzory smluv o dodávce" [breadcrumbItemsSimple]="breadcrumbItemsSimple">
             <div class="row">
                 <div class="col-12">
@@ -30,7 +30,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-12 col-xl-6 offset-xl-3 mb-2">
+                <div class="col-12 mb-2">
                     <lnd-banner-ui
                         *ngFor="let setting of pdfFutureContracts"
                         icon="icon--info"

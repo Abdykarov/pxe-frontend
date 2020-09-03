@@ -277,7 +277,7 @@ export const formFields: IForm = {
         expirationDateGas: {
             required: errorFieldMessages.expirationDate.requiredGas,
             bsDate: errorFieldMessages.date.format,
-            bsDateMinDate: errorFieldMessages.date.expirationDateInPast,
+            bsDateMinDate: errorFieldMessages.expirationDate.expirationAtLeast30DaysBeforeNewDelivery,
             expirationDateInPast: errorFieldMessages.date.expirationDateInPast,
             isInTerminateInterval: errorFieldMessages.expirationDate.isInTerminateInterval,
             expirationAtLeast30DaysBeforeNewDelivery: errorFieldMessages.expirationDate.expirationAtLeast30DaysBeforeNewDelivery,
@@ -286,7 +286,7 @@ export const formFields: IForm = {
         expirationDatePower: {
             required: errorFieldMessages.expirationDate.requiredPower,
             bsDate: errorFieldMessages.date.format,
-            bsDateMinDate: errorFieldMessages.date.expirationDateInPast,
+            bsDateMinDate: errorFieldMessages.expirationDate.expirationAtLeast30DaysBeforeNewDelivery,
             expirationDateInPast: errorFieldMessages.date.expirationDateInPast,
             isInTerminateInterval: errorFieldMessages.expirationDate.isInTerminateInterval,
             expirationAtLeast30DaysBeforeNewDelivery: errorFieldMessages.expirationDate.expirationAtLeast30DaysBeforeNewDelivery,

@@ -88,9 +88,5 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
             });
     }
 
-    public supplierChange = () => this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.SUPPLIER_CHANGE);
-
-    public coverageMap = () => this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.MAP_COVERAGE);
-
     public logout = () => this.authService.logoutForced(false);
 }

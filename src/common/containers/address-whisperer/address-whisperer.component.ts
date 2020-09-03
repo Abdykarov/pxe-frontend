@@ -251,5 +251,9 @@ export class AddressWhispererComponent extends AbstractComponent implements OnIn
             this.parentForm.controls[this.whispererName + AddressWhispererComponent.UNIQUE_FIELD_NAME_END].setValue(userData);
             this.cd.markForCheck();
         }
+
+        if (R.isNil(userData)) {
+            this.showForm = false;
+        }
    }
 }

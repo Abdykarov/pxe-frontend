@@ -5,7 +5,6 @@ import {
 
 import {
     ISupplierLogo,
-    TypeCommodity,
 } from './model/supplier.model';
 
 @Component({
@@ -16,7 +15,4 @@ import {
 export class SupplierComponent {
     @Input()
     public configSupplier: ISupplierLogo[];
-
-    @Input()
-    public typeCommodity?: TypeCommodity = TypeCommodity.BOTH;
 }
