@@ -13,8 +13,10 @@ import {
 import * as R from 'ramda';
 import {
     map,
+    switchMap,
     takeUntil,
 } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import {
@@ -23,7 +25,7 @@ import {
     ISupplyPoint,
     ISupplyPointFormData,
     ISupplyPointGasAttributes,
-    ISupplyPointPowerAttributes,
+    ISupplyPointPowerAttributes, ProgressStatus,
     SubjectType, TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import { ContractActions } from '../models/supply-point-detail.model';
@@ -37,6 +39,7 @@ import {
     IResponseDataDocument,
 } from 'src/app/services/model/document.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
+import { NavigateRequestService } from '../../../services/navigate-request.service';
 import {
     parseGraphQLErrors,
     parseRestAPIErrors,
@@ -55,6 +58,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class SupplyPointDetailComponent extends AbstractComponent implements OnInit {
     public allowedOperations = AllowedOperations;
+    public CommodityType = CommodityType;
     public dataLoading = true;
     public documentLoading = false;
     public documentType = IDocumentType;
@@ -66,6 +70,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     public smsSent: number = null;
     public subjectType = SubjectType;
     public supplyPoint: ISupplyPoint = null;
+    public nextSupplyPoint: ISupplyPoint = null;
     public contractId = this.route.snapshot.params.contractId;
     public supplyPointId = this.route.snapshot.params.supplyPointId;
     public contractAction: ContractActions = ContractActions.NONE;
@@ -86,6 +91,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
         private documentService: DocumentService,
+        private navigateRequestService: NavigateRequestService,
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
@@ -97,12 +103,22 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.supplyService.getSupplyPoint(this.supplyPointId, this.contractId)
             .pipe(
-                takeUntil(this.destroy$),
                 map(({data}) => data.getSupplyPoint),
+                switchMap((supplyPoint: ISupplyPoint) => {
+                    this.supplyPoint = supplyPoint;
+                    const nextContractId = supplyPoint.contract.nextContractId;
+                    return (nextContractId ? this.supplyService.getSupplyPoint(this.supplyPointId, nextContractId)
+                        .pipe(
+                            map(({data}) => data.getSupplyPoint),
+                        ) : of({}));
+                }),
+                takeUntil(this.destroy$),
             )
             .subscribe(
-                (supplyPoint: ISupplyPoint) => {
-                    this.supplyPoint = supplyPoint;
+                (nextSupplyPoint: ISupplyPoint) => {
+                    if (!R.isEmpty(nextSupplyPoint)) {
+                        this.nextSupplyPoint = nextSupplyPoint;
+                    }
                     this.dataLoading = false;
                     this.cd.markForCheck();
                 },
@@ -352,5 +368,13 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
                     this.cd.markForCheck();
                 },
             );
+    }
+
+    public routerToNextContract = (isNextContractConcluded: boolean) => {
+        if (isNextContractConcluded) {
+            this.router.navigate([...ROUTES.ROUTER_SUPPLY_POINTS, this.nextSupplyPoint.id, this.nextSupplyPoint.contract.contractId]);
+        } else {
+            this.navigateRequestService.checkCorrectStep(this.nextSupplyPoint, ProgressStatus.COMPLETED);
+        }
     }
 }

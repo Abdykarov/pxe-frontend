@@ -166,18 +166,20 @@
         ></pxe-supply-point-detail-form>
     </ng-container>
 
-    <div *ngIf="supplyPoint"
+    <div *ngIf="supplyPoint?.contract?.nextContractId "
         class="row text-center">
-        <div class="col-12 col-lg-4 offset-lg-4">
-            <h2>TODO po mergy klasickyho BE --- dat sem odkaz na navazijci smlouvu </h2>
+        <div class="col-12 col-lg-10 offset-lg-1">
+            <h2 *ngIf="supplyPoint.contract.isNextContractConcluded && supplyPoint.contract?.nextContractId != supplyPoint.contract.contractId"> Tato smlouva bude nahrazena budoucí smlouvou. </h2>
+            <h2 *ngIf="!(supplyPoint.contract.isNextContractConcluded) && supplyPoint.contract.nextContractId && supplyPoint.contract?.nextContractId != supplyPoint.id"> Tato smlouva má rozpracovanou navazující smlouvu. </h2>
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
             <div class="page-box">
-                <h1 class="mb-1">Byt - babička</h1>
-                <p class="mb-3">Navazující smlouva pro dodávku elektřiny v období 1.1.2020 - 31.12.2020</p>
+                <h1 class="mb-1">{{nextSupplyPoint.name}}</h1>
+                <p class="mb-3">Navazující smlouva pro dodávku {{nextSupplyPoint.commodityType === CommodityType.GAS ? 'plynu' : 'elektřiny'}} v období {{nextSupplyPoint.contract.deliveryFrom | date:'d.&nbsp;M.&nbsp;y'}} - {{nextSupplyPoint.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}</p>
                 <lnd-button
-                    label="Dokončit žádost"
-                    type="primary">
+                    [label]="supplyPoint.contract.isNextContractConcluded ? 'Uzavřená navazujcí smlouva' : 'Dokončit žádost'"
+                    type="primary"
+                    (click)="routerToNextContract(!!supplyPoint.contract.isNextContractConcluded)">
                 </lnd-button>
             </div>
         </div>

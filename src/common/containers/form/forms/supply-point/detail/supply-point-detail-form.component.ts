@@ -14,7 +14,6 @@ import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import {
     filter,
-    map,
     takeUntil,
 } from 'rxjs/operators';
 import { IDocumentType, IResponseDataDocument } from 'src/app/services/model/document.model';
@@ -25,8 +24,6 @@ import {
     CommodityType,
     ICodelistOptions,
     ISupplyPoint,
-    ProgressStatus,
-    TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import {
     ANNUAL_CONSUMPTION_TYPES,
@@ -38,7 +35,6 @@ import {
     CONTRACT_END_TYPE_TRANSLATE_MAP,
     ROUTES,
     SUBJECT_TYPE_OPTIONS,
-    TIME_TO_CONTRACT_END_PERIOD_MAP,
     UNIT_OF_PRICES,
 } from 'src/app/app.constants';
 import {
@@ -189,19 +185,6 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
             },
         };
         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT], {state});
-    }
-
-    public navigateToUnsignedSupplyPoint = (supplyPointId: string, contractId: string) => {
-        this.supplyService.getSupplyPoint(supplyPointId)
-            .pipe(
-                map(({data}) => data.getSupplyPoint),
-                takeUntil(this.destroy$),
-            )
-            .subscribe(
-                (supplyPoint: ISupplyPoint) => {
-                    this.navigateRequestService.checkCorrectStep(supplyPoint, ProgressStatus.COMPLETED);
-                },
-            );
     }
 
     public prefillFormData = () => {

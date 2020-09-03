@@ -191,8 +191,6 @@
                                     lndSFormDirective
                                     lndSBiometricsDirective
                                     label="jednotka"
-                                    [appendButtonIcon]="helpDocuments && helpDocuments['annualConsumption'] ? 'icon--info' : null"
-                                    (appendButtonAction)="showHelp('annualConsumption', 'Roční spotřeba')"
                                     [id]="'annualConsumptionUnit'"
                                     (focus)="fieldWrapperFocus('annualConsumptionUnit')"
                                     (blur)="fieldWrapperBlur()"
@@ -291,18 +289,6 @@
                     <ng-container *ngIf="contractActionsTemplate">
                         <ng-container *ngTemplateOutlet="contractActionsTemplate"></ng-container>
                     </ng-container>
-                    <div *ngIf="supplyPoint.contract.isNextContractConcluded && supplyPoint.contract?.nextContractId != supplyPoint.contract.contractId"
-                         class="col-12">
-                        <p class="mb-1">
-                            <small>Tato smlouva bude nahrazena <a [routerLink]="['/', CONSTS.PATHS.SECURED, CONSTS.PATHS.SUPPLY_POINTS, supplyPoint.id, supplyPoint.contract.nextContractId]">smlouvou budoucí</a>.</small>
-                        </p>
-                    </div>
-                    <div *ngIf="!(supplyPoint.contract.isNextContractConcluded) && supplyPoint.contract.nextContractId && supplyPoint.contract?.nextContractId != supplyPoint.id"
-                         class="col-12">
-                        <div class="mb-1">
-                            <small>Tato smlouva má rozpracovanou <a (click)="navigateToUnsignedSupplyPoint(supplyPoint.id, supplyPoint.contract.nextContractId)">navazující smlouvu</a>.</small>
-                        </div>
-                    </div>
                 </div>
                 <ng-container *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.SHOW_DELIVERY_TO">
                     <div class="row no-gutters align-items-end mb-5">
