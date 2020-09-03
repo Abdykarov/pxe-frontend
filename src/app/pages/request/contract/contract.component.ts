@@ -10,7 +10,6 @@ import {
     ViewChild,
 } from '@angular/core';
 
-import * as R from 'ramda';
 import {
     combineLatest,
     of,
@@ -24,7 +23,6 @@ import {
 import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
 
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
-import { IQuestion } from 'src/app/services/model/faq.model';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import {
     CommodityType,
@@ -41,7 +39,6 @@ import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
 import { FaqService } from 'src/app/services/faq.service';
 import {
-    geParamFromTag,
     getConfigStepper,
     parseGraphQLErrors,
     parseRestAPIErrors,
@@ -74,12 +71,22 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
     @ViewChild('pdfContract')
     public pdfContract: PdfJsViewerComponent;
 
+    public pdfStopProlongation: PdfJsViewerComponent;
+
+    @ViewChild('pdfStopProlongation')
+    set setPdfStopProlongation(pdfStopProlongation: PdfJsViewerComponent) {
+        if (pdfStopProlongation) {
+            this.pdfStopProlongation = pdfStopProlongation;
+        }
+    }
+
     public commodityType = CommodityType;
     public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public documentLoading = false;
     public documentType = IDocumentType;
     public documentTypeContract: IResponseDataDocument = null;
     public documentTypeInformation: IResponseDataDocument = null;
+    public documentTypeUnsetProlongation: IResponseDataDocument = null;
     public fieldError: IFieldError = {};
     public formLoading = false;
     public globalError: string[] = [];
@@ -118,29 +125,42 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                 map(({data}) => data.getSupplyPoint),
                 switchMap((supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
-                    this.loadingSupplyPoint = false;
-                    this.supplyPoint = supplyPoint;
+
+                    const documentTypeInformation$ = this.supplyPoint.subject.code === this.subjectType.SUBJECT_TYPE_INDIVIDUAL ?
+                        this.documentService.getDocument(this.supplyPoint.contract.contractId, this.documentType.INFORMATION)
+                            .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)) :
+                        of(
+                            {
+                                file: null,
+                                filename: null,
+                            },
+                        );
+
+                    const documentTypeContract$ =
+                        this.documentService.getDocument(this.supplyPoint.contract.contractId, this.documentType.CONTRACT)
+                            .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY));
+
+                    const previousContractId = this.supplyPoint.contract.previousContractId;
+                    const showUnsetProlongation = !!previousContractId;
+                    const documentTypeUnsetProlongation$ = showUnsetProlongation ?
+                            this.documentService.getDocument(
+                                    previousContractId,
+                                    this.documentType.CONTRACT_NOT_EXTENDED,
+                                )
+                                .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)) : of(null);
+
                     this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.READY_FOR_SIGN);
-                    return combineLatest([
-                        supplyPoint.subject.code === this.subjectType.SUBJECT_TYPE_INDIVIDUAL ?
-                            this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.INFORMATION)
-                                .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)) :
-                            of(
-                                {
-                                    file: null,
-                                    filename: null,
-                                },
-                            ),
-                        this.documentService.getDocument(supplyPoint.contract.contractId, this.documentType.CONTRACT)
-                            .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)),
-                    ]);
+                    return combineLatest([documentTypeInformation$, documentTypeContract$, documentTypeUnsetProlongation$]);
                 }),
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                ([documentTypeInformation, documentTypeContract]) => {
+                ([documentTypeInformation, documentTypeContract, documentTypeUnsetProlongation]) => {
                     this.documentTypeInformation = documentTypeInformation;
                     this.documentTypeContract = documentTypeContract;
+                    if (documentTypeUnsetProlongation) {
+                        this.documentTypeUnsetProlongation = documentTypeUnsetProlongation;
+                    }
                     this.loadingSupplyPoint = false;
                     this.cd.markForCheck();
                     setTimeout(() => {
@@ -167,6 +187,12 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
             this.pdfContract.pdfSrc = this.documentTypeContract.file;
             this.pdfContract.downloadFileName = this.documentTypeContract.filename;
             this.pdfContract.refresh();
+        }
+
+        if (this.pdfStopProlongation) {
+            this.pdfStopProlongation.pdfSrc = this.documentTypeUnsetProlongation.file;
+            this.pdfStopProlongation.downloadFileName = this.documentTypeUnsetProlongation.filename;
+            this.pdfStopProlongation.refresh();
         }
     }
 

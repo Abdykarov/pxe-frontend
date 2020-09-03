@@ -16,16 +16,9 @@ import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
-import {
-    CONSTS,
-    ROUTES,
-    SEO,
-} from 'src/app/app.constants';
+import { CONSTS } from 'src/app/app.constants';
 import { FaqService } from 'src/app/services/faq.service';
-import {
-    IQuestion,
-    ITagConfigItem,
-} from 'src/app/services/model/faq.model';
+import { IQuestion } from 'src/app/services/model/faq.model';
 import {
     geParamFromTag,
     removeHtmlFromText,

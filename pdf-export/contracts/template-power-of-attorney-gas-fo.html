@@ -25,7 +25,7 @@
 			}
 			
 			@bottom-left {
-				content: '© POWER EXCHANGE CENTRAL EUROPE, a.s. @year';
+				content: '© POWER EXCHANGE CENTRAL EUROPE, a.s. ${year}';
 				padding-bottom: 20px;
 				vertical-align: bottom;
 				font-size: 10px;
@@ -250,11 +250,11 @@
 		<tbody>
 			<tr>
 				<th>Jméno a příjmení</th>
-				<td>@client-name</td>
+				<td>${client-name}</td>
 			</tr>
 			<tr>
 				<th>Datum narození</th>
-				<td>@client-birthdate</td>
+				<td>${client-birthdate}</td>
 			</tr>
 			<tr>
 				<th class="address-title">Adresa trvalého bydliště</th>
@@ -262,19 +262,19 @@
 			</tr>
 			<tr>
 				<th>Ulice</th>
-				<td>@client-permanent-street</td>
+				<td>${client-permanent-street}</td>
 			</tr>
 			<tr>
 				<th>Číslo popisné / orientační</th>
-				<td>@client-permanent-descriptive-indicative-number</td>
+				<td>${client-permanent-descriptive-indicative-number}</td>
 			</tr>
 			<tr>
 				<th>Obec</th>
-				<td>@client-permanent-address-town</td>
+				<td>${client-permanent-address-town}</td>
 			</tr>
 			<tr>
 				<th>PSČ</th>
-				<td>@client-permanent-zip-code</td>
+				<td>${client-permanent-zip-code}</td>
 			</tr>
 		</tbody>
 	</table>
@@ -284,23 +284,23 @@
 		<tbody>
 			<tr>
 				<th>Název</th>
-				<td>@supplier-name</td>
+				<td>${supplier-name}</td>
 			</tr>
 			<tr>
 				<th>Se sídlem</th>
-				<td>@supplier-registered-office</td>
+				<td>${supplier-registered-office}</td>
 			</tr>
 			<tr>
 				<th>IČO</th>
-				<td>@supplier-ico</td>
+				<td>${supplier-ico}</td>
 			</tr>
 			<tr>
 				<th>DIČ</th>
-				<td>@supplier-dic</td>
+				<td>${supplier-dic}</td>
 			</tr>
 			<tr>
 				<th>Zapsaný v obchodním rejstříku</th>
-				<td>@supplier-register</td>
+				<td>${supplier-register}</td>
 			</tr>
 		</tbody>
 	</table>
@@ -314,14 +314,14 @@
 			</tr>
 			<tr>
 				<th>EIC</th>
-				<td>@client-ean</td>
+				<td>${client-ean}</td>
 			</tr>
 		</tbody>
 	</table>
 
 	<h2>Plná moc k ukončení smlouvy se současným dodavatelem</h2>
 	<p class="mb-10">
-		Zákazník <b>@power-attorney-to-terminate-contractzmocňuje</b> dodavatele, aby za něj ukončil smlouvu o sdružených službách dodávky se současným dodavatelem plynu pro výše uvedené odběrné místo.
+		Zákazník <b>${power-attorney-to-terminate-contract}zmocňuje</b> dodavatele, aby za něj ukončil smlouvu o sdružených službách dodávky se současným dodavatelem plynu pro výše uvedené odběrné místo.
 	</p>
 
 	<h2>Plná moc k ostatním úkonům</h2>
@@ -330,12 +330,12 @@
 	</p>
 	<div class="signatures-text">
 		<h2>Zákazník</h2>
-		<p class="mb-5">@client-permanent-address-town, dne @date</p>
+		<p class="mb-5">${client-permanent-address-town}, dne ${date}</p>
 		<table>
 			<tbody>
 				<tr>
 					<th>Jméno a příjmení</th>
-					<td>@client-name</td>
+					<td>${client-name}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -343,7 +343,7 @@
 			<tbody>
 				<tr>
 					<th>Podepsáno pomocí SMS kódu v aplikaci parc4u.cz v</th>
-					<td>@timestamp</td>
+					<td>${timestamp}</td>
 				</tr>
 			</tbody>
 		</table>

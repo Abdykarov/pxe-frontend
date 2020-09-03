@@ -1,7 +1,4 @@
-import {
-    FormGroup,
-    ValidationErrors,
-} from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 export const requireIfFieldHaveValue = (firstControlName: string, secondControlName: string) => {
     return (formGroup: FormGroup) => {

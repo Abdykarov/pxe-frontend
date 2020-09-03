@@ -1,5 +1,3 @@
-export * from './append-string-to-spec-position.fnc';
-export * from './append-string-to-spec-positions.fnc';
 export * from './convert-array-to-object.fnc';
 export * from './convert-date-to-send-format.fnc';
 export * from './create-string-from-template.fnc';
@@ -28,3 +26,4 @@ export * from './element-in-viewport.fnc';
 export * from './process-error-scroll.fnc';
 export * from './remove-html-from-text.fnc';
 export * from './truncate-text.fnc';
+export * from './get-absolute-height-of-element.fnc';

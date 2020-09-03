@@ -7,6 +7,9 @@ export interface IContract {
     deliveryFrom?: string;
     deliveryTo?: string;
     offer?: IOffer;
+    nextContractId?: string;
+    previousContractId?: string;
+    isNextContractConcluded?: boolean;
     prolong?: boolean;
     personalData?: IPersonalData;
     offerValidity: Boolean;

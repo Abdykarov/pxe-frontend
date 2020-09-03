@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
+import * as moment from 'moment';
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import {
@@ -116,7 +117,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         private supplyService: SupplyService,
     ) {
         super(fb);
-        this.minDate = new Date();
+        this.minDate = moment().add(this.CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS, 'day').toDate();
     }
 
     ngOnInit() {
@@ -134,6 +135,19 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                     ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_NT,
                     ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_NT_UNIT,
                     annualConsumptionNTUnit,
+                );
+            });
+
+        this.form.get('annualConsumptionUnit')
+            .valueChanges
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe((annualConsumptionUnit: UNIT_OF_PRICES) => {
+                this.detectChangesForAnnualConsumption(
+                    ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION,
+                    ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_UNIT,
+                    annualConsumptionUnit,
                 );
             });
 

@@ -299,9 +299,7 @@ export class CustomValidators {
             return null;
         }
 
-        const icoArray = ico.value.split('').map(item => parseInt(item, 10));
-
-        if (verifyIC(icoArray)) {
+        if (verifyIC(ico.value)) {
             return null;
         }
 
