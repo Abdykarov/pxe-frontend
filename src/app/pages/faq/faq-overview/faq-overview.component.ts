@@ -17,7 +17,6 @@ import { takeUntil } from 'rxjs/operators';
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
 import {
     CONSTS,
-    ROUTES,
     SEO,
 } from 'src/app/app.constants';
 import { FaqService } from 'src/app/services/faq.service';

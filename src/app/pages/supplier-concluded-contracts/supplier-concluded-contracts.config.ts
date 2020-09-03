@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 
 import { CommodityType } from 'src/common/graphql/models/supply.model';
-import { IContractWithNameAndSupplyPointEan } from 'src/common/graphql/models/suppplier.model';
+import { IContractWithNameAndSupplyPoint } from 'src/common/graphql/models/suppplier.model';
 import { IPaginationConfig } from 'src/app/pages/supplier-concluded-contracts/supplier-concluded-contracts.model';
 
 @Injectable({
@@ -34,7 +34,7 @@ export class SupplierConcludedContractsConfig {
                 {
                     headingClass: [''],
                     cellClass: [''],
-                    content: (row: IContractWithNameAndSupplyPointEan) => `${row.name}`,
+                    content: (row: IContractWithNameAndSupplyPoint) => `${row.name}`,
                 },
             ],
         },
@@ -44,7 +44,7 @@ export class SupplierConcludedContractsConfig {
                 {
                     headingClass: [''],
                     cellClass: [''],
-                    content: (row: IContractWithNameAndSupplyPointEan) => `${row.ean}`,
+                    content: (row: IContractWithNameAndSupplyPoint) => `${row.identificationNumber}`,
                 },
             ],
         },

@@ -26,7 +26,7 @@ export const supplyPointFragment = gql`
                     url
                 }
             },
-            ean,
+            identificationNumber,
             address{
                 street,
                 orientationNumber,
@@ -55,8 +55,10 @@ export const supplyPointFragment = gql`
             },
             annualConsumptionNT,
             annualConsumptionVT,
+            annualConsumption,
             annualConsumptionNTUnit,
             annualConsumptionVTUnit,
+            annualConsumptionUnit,
             expirationDate,
             subject{
                 type,
@@ -82,6 +84,9 @@ export const supplyPointFragment = gql`
             }
             contract {
                 contractId,
+                nextContractId @skip(if: $skipInfoAboutRelationContracts),
+                previousContractId @skip(if: $skipInfoAboutRelationContracts),
+                isNextContractConcluded @skip(if: $skipInfoAboutRelationContracts),
                 contractStatus,
                 deliveryFrom,
                 deliveryTo,
@@ -220,69 +225,9 @@ export const findSupplierDocumentsByComodityQuery = gql`
     }
 `;
 
-export const findSupplyPointsQuery = gql`
-    query findSupplyPoints($ean: String){
-        findSupplyPoints(ean: $ean){
-            id,
-            name,
-            commodityType,
-            supplier{
-                id,
-                name,
-                vatNumber,
-                logoPath,
-                sampleDocuments{
-                    type,
-                    url
-                }
-            },
-            contract {
-                contractId,
-                contractStatus,
-                deliveryFrom,
-                deliveryTo,
-                offerValidity,
-            },
-            ean,
-            address{
-                street,
-                orientationNumber,
-                descriptiveNumber,
-                city,
-                postCode,
-                region,
-            },
-            distributionRate{
-                type,
-                code,
-                description,
-                help
-            },
-            circuitBreaker{
-                type,
-                code,
-                description,
-                help
-            },
-            annualConsumptionNT,
-            expirationDate,
-            subject{
-                type,
-                code,
-                description,
-                help,
-            }
-            lastAnnualConsumptionNT,
-            lastAnnualConsumptionVT,
-            progressStatus,
-            allowedOperations,
-        }
-    }
-`;
-
 export const getSupplyPointQuery = gql`
-    query getSupplyPoint($supplyPointId: ID!){
-        getSupplyPoint(supplyPointId: $supplyPointId){
+    query getSupplyPoint($supplyPointId: ID!, $contractId: ID, $skipInfoAboutRelationContracts: Boolean = false){
+        getSupplyPoint(supplyPointId: $supplyPointId, contractId: $contractId){
             ...SupplyPointFragment
         }
     }
@@ -290,8 +235,8 @@ export const getSupplyPointQuery = gql`
 `;
 
 export const findSupplyPointsByContractStatusQuery = gql`
-    query findSupplyPointsByContractStatus($ean: String, $contractStatus: [ContractStatus]!){
-        findSupplyPointsByContractStatus(ean: $ean, contractStatus: $contractStatus){
+    query findSupplyPointsByContractStatus($identificationNumber: String, $contractStatus: [ContractStatus]!, $skipInfoAboutRelationContracts: Boolean = true){
+        findSupplyPointsByContractStatus(identificationNumber: $identificationNumber, contractStatus: $contractStatus){
             ...SupplyPointFragment
         }
     }

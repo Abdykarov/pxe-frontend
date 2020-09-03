@@ -2,7 +2,7 @@ import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { IOffer } from 'src/common/graphql/models/offer.model';
 
 export const offerConfig1: IOffer = {
-    id: 0,
+    id: '0',
     supplier: {
         id: '',
         name: 'PRE',
@@ -42,12 +42,14 @@ export const offerConfig1: IOffer = {
     accountingRegulatedPrice: 0,
     consumptionPriceNT: 0.5,
     consumptionPriceVT: 0.1,
+    consumptionPriceGas: 0.1,
     priceGasWithVAT: 11,
     priceNTWithVAT: 0,
     priceVTWithVAT: 1.92,
     distributionPriceByCapacity: 11,
     distributionPriceByConsumptionNT: 0,
     distributionPriceByConsumptionVT: 1.92,
+    distributionPriceByConsumptionGas: 1.92,
     energyTaxRegulatedPrice: 0.02,
     marketOrganizerRegulatedPrice: 6.93,
     monthlyConsumptionFee: 100,
@@ -81,7 +83,7 @@ export const offerConfig2: IOffer = {
     deliveryFrom: '',
     deliveryTo: '',
     deliveryLength: 1,
-    id: 0,
+    id: '0',
     name: '',
     permanentPaymentPrice: 869.00,
     priceGas: 0.9,
@@ -140,7 +142,7 @@ export const offerConfig3: IOffer = {
     deliveryFrom: '',
     deliveryTo: '',
     deliveryLength: 1,
-    id: 0,
+    id: '0',
     name: '',
     permanentPaymentPrice: 880.00,
     priceGas: 0,

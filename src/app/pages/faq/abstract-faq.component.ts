@@ -1,6 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
 
-import * as R from 'ramda';
 import { combineLatest } from 'rxjs';
 import {
     filter,
@@ -8,7 +7,6 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { CONSTS } from 'src/app/app.constants';
 import { FaqService } from 'src/app/services/faq.service';
 import {
     IQuestion,

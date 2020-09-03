@@ -1165,15 +1165,12 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@ng-select/ng-option-highlight@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@ng-select/ng-option-highlight/-/ng-option-highlight-0.0.5.tgz#3d0c8b479132cb3d17d27b664303c8265f4144f6"
-  integrity sha512-X3Ftec/i7Drcmr2dNnhEcRhcWkR+6wJpR5q0DYfwDXve405AcdtDZom7gf2xUDt1d2IXcFejTTVD0jy8qy8Nkw==
-
-"@ng-select/ng-select@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-4.0.0.tgz#9a6108a8c10725844c1a61cadd0f673c993a952b"
-  integrity sha512-B6OevKG9/LlbZ9aPHcmiRRQBIIdk41cJ1wn4UHOlm/0225+jtW7IWA/7Q0iv5S6gys1ieyY9+BAqfTz1elBTUw==
+"@ng-select/ng-select@^4.0.4":
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-4.0.4.tgz#fe4ba82f4ab6110627fefb072e81bfb3eb79fafb"
+  integrity sha512-KaVlVdt7DWZBfmL6nc16i80l1dDx0cO3eGjW+grQPnhZ9KurapioQUYVf6dSmYyWyBXihvt4I3SWkCzqSWFJbQ==
+  dependencies:
+    tslib "^1.10.0"
 
 "@ngtools/webpack@9.1.5":
   version "9.1.5"

@@ -48,12 +48,12 @@
     </div>
     <div class="row">
         <div class="col-12 col-lg-10 offset-lg-1">
-            <ng-container *ngIf="(paginatedContractsWithNameAndSupplyPointEan | pathValue:['page']) &&
-                                  paginatedContractsWithNameAndSupplyPointEan.page.length &&
+            <ng-container *ngIf="(paginatedContractsWithNameAndSupplyPoint | pathValue:['page']) &&
+                                  paginatedContractsWithNameAndSupplyPoint.page.length &&
                                   tableCols">
                 <lnd-table
                     [cols]="tableCols"
-                    [rows]="paginatedContractsWithNameAndSupplyPointEan.page"
+                    [rows]="paginatedContractsWithNameAndSupplyPoint.page"
                     [showHead]="true"
                     [tableWrapperClass]="['table-wrapper--advanced']"
                     [tableClass]="['table--advanced', 'mb-0']"
@@ -68,7 +68,7 @@
                         [itemsPerPage]="paginationConfig.itemsPerPage"
                         [maxSize]="paginationConfig.maxSize"
                         (pageChanged)="pageChanged($event)"
-                        [totalItems]="paginatedContractsWithNameAndSupplyPointEan.totalRecords"
+                        [totalItems]="paginatedContractsWithNameAndSupplyPoint.totalRecords"
                         [firstText]="paginationConfig.firstText"
                         [previousText]="paginationConfig.previousText"
                         [nextText]="paginationConfig.nextText"
@@ -77,8 +77,8 @@
                 </div>
             </ng-container>
             <lnd-info-banner
-                *ngIf="(paginatedContractsWithNameAndSupplyPointEan | pathValue:['page']) &&
-                        paginatedContractsWithNameAndSupplyPointEan.page.length === 0"
+                *ngIf="(paginatedContractsWithNameAndSupplyPoint | pathValue:['page']) &&
+                        paginatedContractsWithNameAndSupplyPoint.page.length === 0"
                 [bannerDescription]="'Vytvořte nabídku a uvidíte, že zájemců se objeví brzo mnoho.'"
                 [bannerTitle]="'Žádný zákazník u vás momentálně nemá zasmluvněnou dodávku ' + (commodityType === COMMODITY_TYPE_POWER ? 'elektřiny' : 'plynu') + '.'"
                 [bannerType]="bannerType"

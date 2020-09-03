@@ -10,7 +10,6 @@ import { ConsumptionPipe } from './consumption/consumption.pipe';
 import { ConsumptionIndicatorPipe } from './consumption-indicator/consumption-indicator.pipe';
 import { DateDiffPipe } from './date-diff/date-diff.pipe';
 import { DynamicPipe } from './dynamic/dynamic.pipe';
-import { FilterCommodityTypePipe } from './filter-commodity-type/filter-commodity-type.pipe';
 import { GetUrlFromTagPipe } from 'src/common/pipes/get-url-from-tag/get-url-from-tag.pipe';
 import { IsAllowedOperationPipe } from './is-allowed-operation/is-allowed-operation.pipe';
 import { IsDatePast } from './is-date-past/is-date-past.pipe';
@@ -22,6 +21,7 @@ import { LogoutInInformationPipe } from 'src/common/pipes/logout-in-information/
 import { NewSupplyWillBeginPipe } from './new-supply-will-begin/new-supply-will-begin.pipe';
 import { OffersByCommodityTypePipe } from 'src/common/pipes/offers-by-commodity-type/offers-by-commodity-type.pipe';
 import { PathValuePipe } from './path-value/path-value.pipe';
+import { PhonePipe } from 'src/common/pipes/phone/phone.pipe';
 import { PluralPipe } from './plurar/plural.pipe';
 import { ProgressStatusPipe } from './step-of-supply-point/step-of-supply-point.pipe';
 import { QuestionsToAccordionItemsPipe } from 'src/common/pipes/questions-to-accordion-items/questions-to-accordion-items.pipe';
@@ -40,7 +40,6 @@ import { ValuesPipe } from './values/values.pipe';
         ConsumptionIndicatorPipe,
         DateDiffPipe,
         DynamicPipe,
-        FilterCommodityTypePipe,
         GetUrlFromTagPipe,
         IsAllowedOperationPipe,
         IsDatePast,
@@ -52,6 +51,7 @@ import { ValuesPipe } from './values/values.pipe';
         LogoutInInformationPipe,
         OffersByCommodityTypePipe,
         PathValuePipe,
+        PhonePipe,
         PluralPipe,
         ProgressStatusPipe,
         QuestionsToAccordionItemsPipe,
@@ -69,7 +69,6 @@ import { ValuesPipe } from './values/values.pipe';
         ConsumptionIndicatorPipe,
         DateDiffPipe,
         DynamicPipe,
-        FilterCommodityTypePipe,
         GetUrlFromTagPipe,
         IsAllowedOperationPipe,
         IsDatePast,
@@ -81,6 +80,7 @@ import { ValuesPipe } from './values/values.pipe';
         LogoutInInformationPipe,
         OffersByCommodityTypePipe,
         PathValuePipe,
+        PhonePipe,
         PluralPipe,
         ProgressStatusPipe,
         QuestionsToAccordionItemsPipe,
@@ -98,7 +98,6 @@ import { ValuesPipe } from './values/values.pipe';
         DateDiffPipe,
         DecimalPipe,
         DynamicPipe,
-        FilterCommodityTypePipe,
         GetUrlFromTagPipe,
         IsAllowedOperationPipe,
         IsDatePast,
@@ -110,6 +109,7 @@ import { ValuesPipe } from './values/values.pipe';
         NewSupplyWillBeginPipe,
         OffersByCommodityTypePipe,
         PathValuePipe,
+        PhonePipe,
         PluralPipe,
         ProgressStatusPipe,
         QuestionsToAccordionItemsPipe,

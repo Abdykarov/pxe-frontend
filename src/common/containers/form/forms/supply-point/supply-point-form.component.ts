@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
+import * as moment from 'moment';
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import {
@@ -116,7 +117,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         private supplyService: SupplyService,
     ) {
         super(fb);
-        this.minDate = new Date();
+        this.minDate = moment().add(this.CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS, 'day').toDate();
     }
 
     ngOnInit() {
@@ -134,6 +135,19 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                     ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_NT,
                     ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_NT_UNIT,
                     annualConsumptionNTUnit,
+                );
+            });
+
+        this.form.get('annualConsumptionUnit')
+            .valueChanges
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe((annualConsumptionUnit: UNIT_OF_PRICES) => {
+                this.detectChangesForAnnualConsumption(
+                    ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION,
+                    ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_UNIT,
+                    annualConsumptionUnit,
                 );
             });
 
@@ -305,6 +319,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         let timeToContractEndPeriodId: ICodelistItem | string = TimeToContractEndPeriod.MONTH;
         let annualConsumptionNTUnit = null;
         let annualConsumptionVTUnit = null;
+        let annualConsumptionUnit = null;
 
         if (!R.isEmpty(this.formValues)) {
             commodityType = this.formValues.commodityType;
@@ -317,17 +332,18 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             subjectTypeId = this.formValues.subject && this.formValues.subject.code;
             supplierId = this.formValues.supplier && this.suppliers[commodityType] && supplier;
             name = this.formValues.name;
-            ean = this.formValues.commodityType === CommodityType.POWER ? this.formValues.ean : null;
-            eic = this.formValues.commodityType === CommodityType.GAS ? this.formValues.ean : null;
+            ean = this.formValues.commodityType === CommodityType.POWER ? this.formValues.identificationNumber : null;
+            eic = this.formValues.commodityType === CommodityType.GAS ? this.formValues.identificationNumber : null;
             address = this.formValues.address && R.omit(['__typename'], this.formValues.address);
             distributionRateId = this.formValues.distributionRate && this.formValues.distributionRate.code;
             circuitBreakerId = this.formValues.circuitBreaker && this.formValues.circuitBreaker.code;
             phasesId = this.formValues.phases && this.formValues.phases.code;
             annualConsumptionNTUnit = this.formValues.annualConsumptionNTUnit;
             annualConsumptionVTUnit = this.formValues.annualConsumptionVTUnit;
+            annualConsumptionUnit = this.formValues.annualConsumptionUnit;
             annualConsumptionVT = this.formValues.annualConsumptionVT;
             annualConsumptionNT = this.formValues.annualConsumptionNT;
-            annualConsumption = this.formValues.annualConsumptionVT;
+            annualConsumption = this.formValues.annualConsumption;
 
             if (annualConsumptionVTUnit === UNIT_OF_PRICES.KWH) {
                 annualConsumptionVT *= 1000;
@@ -335,6 +351,10 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
 
             if (annualConsumptionNTUnit === UNIT_OF_PRICES.KWH) {
                 annualConsumptionNT *= 1000;
+            }
+
+            if (annualConsumptionUnit === UNIT_OF_PRICES.KWH) {
+                annualConsumption *= 1000;
             }
 
             annualConsumptionNT = this.normalizationAnnualConsumption(annualConsumptionNT);
@@ -354,6 +374,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             }
             this.form.controls['annualConsumptionNTUnit'].setValue(annualConsumptionNTUnit);
             this.form.controls['annualConsumptionVTUnit'].setValue(annualConsumptionVTUnit);
+            this.form.controls['annualConsumptionUnit'].setValue(annualConsumptionUnit);
         }
 
         const filteredContractEndTypeId = contractEndTypeId === CONTRACT_END_TYPE.CONTRACT_END_TERMINATE ? null : contractEndTypeId;
@@ -406,7 +427,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public submitValidForm = () => {
         const form = {
             ...this.form.value,
-            supplierId: this.form.value.supplierId && parseInt(this.form.value.supplierId.id, 10),
+            supplierId: this.form.value.supplierId && this.form.value.supplierId.id,
             expirationDate: this.form.value.expirationDate && convertDateToSendFormatFnc(this.form.value.expirationDate),
         };
         if (!R.isNil(form.annualConsumptionNT)) {
@@ -414,6 +435,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         }
         if (!R.isNil(form.annualConsumptionVT)) {
             form.annualConsumptionVT = parseFloat(form.annualConsumptionVT.toString().replace(',', '.'));
+        }
+        if (!R.isNil(form.annualConsumption)) {
+            form.annualConsumption = parseFloat(form.annualConsumption.toString().replace(',', '.'));
         }
         if (this.contractEndType === CONTRACT_END_TYPE.CONTRACT_END_TERMINATE) {
             form.contractEndTypeId = CONTRACT_END_TYPE.CONTRACT_END_TERMINATE;
@@ -424,9 +448,8 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         if (form.annualConsumptionNTUnit === UNIT_OF_PRICES.KWH) {
             form.annualConsumptionNT = form.annualConsumptionNT / 1000;
         }
-        if (form.commodityType === CommodityType.GAS) {
-            form.annualConsumption = form.annualConsumptionVT;
-            form.annualConsumptionUnit = form.annualConsumptionVTUnit;
+        if (form.annualConsumptionUnit === UNIT_OF_PRICES.KWH) {
+            form.annualConsumption = form.annualConsumption / 1000;
         }
 
         this.submitAction.emit(form);

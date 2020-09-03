@@ -1,5 +1,5 @@
-<div class="container-fluid">
-    <div class="container-content">
+<div class="container-fluid container-fluid--max-width">
+    <div class="container-content container-content--public">
         <pxe-layout-container pageTitle="Vzory smluv o dodávce" [breadcrumbItemsSimple]="breadcrumbItemsSimple">
             <div class="row">
                 <div class="col-12">
@@ -43,7 +43,7 @@
                     </ul>
                 </div>
                 <div
-                     class="col-md-12 col-lg-8 offset-lg-2 pdf-holder pdf-holder--large px-4">
+                    class="col-md-12 col-lg-10 offset-lg-1 pdf-holder pdf-holder--large px-4">
                     <ng2-pdfjs-viewer
                         #ng2PdfJsViewer
                         [openFile]="false"
