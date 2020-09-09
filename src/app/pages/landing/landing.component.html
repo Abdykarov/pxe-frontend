@@ -109,11 +109,13 @@
                  [class.cursor-pointer]="isVideoPlaying">
                 <video
                     #video
-                    (click)="isVideoPlaying && toggleVideo($event)"
-                    poster="/assets/images/landing-page/picture-fallback.jpg"
                     class="section-video"
+                    poster="/assets/images/landing-page/picture-fallback.jpg"
                     loop
                     muted
+                    (pause)="cd.detectChanges()"
+                    (play)="cd.detectChanges()"
+                    (click)="isVideoPlaying && pause($event)"
                     preload="none">
                     <source src="/assets/images/landing-page/lp-video.webm" type="video/webm">
                     <source src="/assets/images/landing-page/lp-video.mp4" type="video/mp4">
@@ -127,7 +129,7 @@
                         icon="icon--triangle-right"
                         variant="icon"
                         customClass="btn-video-play"
-                        (action)="toggleVideo($event)"
+                        (action)="play()"
                     >
                     </lnd-button>
                 </div>
@@ -146,7 +148,7 @@
                                 icon="icon--triangle-right"
                                 variant="icon"
                                 customClass="btn-video-play"
-                                (action)="toggleVideo($event)"
+                                (action)="play()"
                             >
                             </lnd-button>
                         </div>

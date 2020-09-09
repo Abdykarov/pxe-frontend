@@ -1,18 +1,18 @@
-import { isPlatformBrowser } from '@angular/common';
 import {
+    ChangeDetectorRef,
     Component,
     ElementRef,
     Inject,
     PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
-import * as R from 'ramda';
-import { fromEvent } from 'rxjs';
 import {
     debounceTime,
     takeUntil,
 } from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { CONSTS } from 'src/app/app.constants';
@@ -25,16 +25,18 @@ import {
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
 import { ISupplierLogo } from 'src/common/ui/supplier/model/supplier.model';
+import { playVideo } from 'src/common/utils';
+
+// tslint:disable no-unused-expression
 
 @Component({
     selector: 'lnd-landing-page',
     templateUrl: './landing.component.html',
 })
 export class LandingComponent extends AbstractComponent {
-    @ViewChild('video')
-    public video: ElementRef;
 
-    public isVideoPlaying = false;
+    @ViewChild('video')
+    public _video: ElementRef;
 
     public breadcrumbItemsSimple: IBreadcrumbItems;
     public configSupplier: ISupplierLogo[] = configSupplier;
@@ -73,6 +75,7 @@ export class LandingComponent extends AbstractComponent {
 
     constructor(
         @Inject(PLATFORM_ID) private platformId: string,
+        public cd: ChangeDetectorRef,
     ) {
         super();
         if (isPlatformBrowser(this.platformId)) {
@@ -103,25 +106,21 @@ export class LandingComponent extends AbstractComponent {
         console.log('click');
     }
 
-    public toggleVideo = (event) => {
-        event.preventDefault();
-        const video: HTMLMediaElement = this.video.nativeElement;
-        if (!this.isVideoPlaying) {
-            const playPromise = video && video.play();
-            if (!R.isNil(playPromise)) {
-                this.isVideoPlaying = true;
-                playPromise
-                    .then(_ => ({}))
-                    .catch(error => {
-                        video.muted = true;
-                        video.play();
-                    });
-            } else {
-                this.isVideoPlaying = true;
-            }
-        } else {
-            video.pause();
-            this.isVideoPlaying = false;
-        }
+    public play = (event = null) => {
+        event && event.preventDefault();
+        playVideo(this.video);
+    }
+
+    public pause =  (event = null) => {
+        event && event.preventDefault();
+        this.video.pause();
+    }
+
+    get isVideoPlaying(): boolean {
+        return !this.video.paused;
+    }
+
+    get video(): HTMLMediaElement {
+        return this._video.nativeElement;
     }
 }

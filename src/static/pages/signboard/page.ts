@@ -1,25 +1,25 @@
 import {
+    ChangeDetectorRef,
     Component,
     ElementRef,
     ViewChild,
 } from '@angular/core';
 
-import * as R from 'ramda';
+// tslint:disable no-unused-expression
 
 import { NewSupplyPointPageConfig } from 'src/static/pages/new-supply-point/config';
+import { playVideo } from 'src/common/utils';
 
 @Component({
   templateUrl: './page.html',
 })
-
 export class SignboardComponent {
 
     @ViewChild('video')
-    public video: ElementRef;
-
-    public isVideoPlaying = false;
+    public _video: ElementRef;
 
     constructor(
+        public cd: ChangeDetectorRef,
         public config: NewSupplyPointPageConfig,
     ) {}
 
@@ -28,29 +28,22 @@ export class SignboardComponent {
         console.log('clicked');
     }
 
-    public toggleVideo = (event = null) => {
-        if (event) {
-            event.preventDefault();
-        }
+    public play = (event = null) => {
+        event && event.preventDefault();
+        playVideo(this.video);
+    }
 
-        const video: HTMLMediaElement = this.video.nativeElement;
-        if (!this.isVideoPlaying) {
-            const playPromise = video && video.play();
-            if (!R.isNil(playPromise)) {
-                this.isVideoPlaying = true;
-                playPromise
-                    .then(_ => ({}))
-                    .catch(error => {
-                        video.muted = true;
-                        video.play();
-                    });
-            } else {
-                this.isVideoPlaying = true;
-            }
-        } else {
-            video.pause();
-            this.isVideoPlaying = false;
-        }
+    public pause =  (event = null) => {
+        event && event.preventDefault();
+        this.video.pause();
+    }
+
+    get isVideoPlaying(): boolean {
+        return !this.video.paused;
+    }
+
+    get video(): HTMLMediaElement {
+        return this._video.nativeElement;
     }
 
 }

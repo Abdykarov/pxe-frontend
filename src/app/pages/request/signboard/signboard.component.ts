@@ -1,4 +1,5 @@
 import {
+    ChangeDetectorRef,
     Component,
     ElementRef,
     ViewChild,
@@ -7,10 +8,15 @@ import { Router } from '@angular/router';
 
 import * as R from 'ramda';
 
-import { getConfigStepper } from 'src/common/utils';
+import {
+    getConfigStepper,
+    playVideo,
+} from 'src/common/utils';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 import { ROUTES } from 'src/app/app.constants';
+
+// tslint:disable no-unused-expression
 
 @Component({
     selector: 'lnd-signboard',
@@ -20,14 +26,14 @@ import { ROUTES } from 'src/app/app.constants';
 export class SignboardComponent {
 
     @ViewChild('video')
-    public video: ElementRef;
+    public _video: ElementRef;
 
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.SUPPLY_POINT;
-    public isVideoPlaying = false;
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public showWelcome = false;
 
     constructor(
+        public cd: ChangeDetectorRef,
         private router: Router,
     ) {
         this.showWelcome = R.path(['history', 'state', 'afterLogin'], window);
@@ -38,28 +44,21 @@ export class SignboardComponent {
         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
     }
 
-    public toggleVideo = (event = null) => {
-        if (event) {
-            event.preventDefault();
-        }
+    public play = (event = null) => {
+        event && event.preventDefault();
+        playVideo(this.video);
+    }
 
-        const video: HTMLMediaElement = this.video.nativeElement;
-        if (!this.isVideoPlaying) {
-            const playPromise = video && video.play();
-            if (!R.isNil(playPromise)) {
-                this.isVideoPlaying = true;
-                playPromise
-                    .then(_ => ({}))
-                    .catch(error => {
-                        video.muted = true;
-                        video.play();
-                    });
-            } else {
-                this.isVideoPlaying = true;
-            }
-        } else {
-            video.pause();
-            this.isVideoPlaying = false;
-        }
+    public pause =  (event = null) => {
+        event && event.preventDefault();
+        this.video.pause();
+    }
+
+    get isVideoPlaying(): boolean {
+      return !this.video.paused;
+    }
+
+    get video(): HTMLMediaElement {
+        return this._video.nativeElement;
     }
 }

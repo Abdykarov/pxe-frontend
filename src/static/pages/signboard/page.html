@@ -35,7 +35,9 @@
                     <video
                         #video
                         [class.cursor-pointer]="isVideoPlaying"
-                        (click)="isVideoPlaying && toggleVideo($event)"
+                        (click)="isVideoPlaying && pause($event)"
+                        (pause)="cd.detectChanges()"
+                        (play)="cd.detectChanges()"
                         class="w-100"
                         poster="/assets/images/landing-page/picture-fallback.jpg"
                         loop
@@ -53,7 +55,7 @@
                             icon="icon--triangle-right"
                             variant="icon"
                             customClass="btn-video-play"
-                            (action)="toggleVideo($event)"
+                            (action)="play($event)"
                         >
                         </lnd-button>
                     </div>
