@@ -128,21 +128,6 @@
 			padding-top: 0;
 			background-color: transparent;
 		}
-
-		&--mobile-overlay {
-			// Media queries
-			@include media-breakpoint-down(xs) {
-				position: absolute;
-				display: flex;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				padding-top: 0;
-				z-index: $zindex-lp-video-text;
-				pointer-events: none;
-			}
-		}
 	}
 
 	.section-video-control {
