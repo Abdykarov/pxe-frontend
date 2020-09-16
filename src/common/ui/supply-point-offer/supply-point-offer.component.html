@@ -10,8 +10,11 @@
 
 <div #supplyPointOfferWrapper
     class="supply-point-offer"
-   [class.supply-point-offer--owner]="isOwner"
-   [class.supply-point-offer--not-interactive]="!interactive">
+    [ngClass]="[
+        customClass,
+    ]"
+    [class.supply-point-offer--owner]="isOwner"
+    [class.supply-point-offer--not-interactive]="!interactive">
     <div class="row no-gutters">
         <div class="col-12 col-md-7 order-md-1 supply-point-offer__inner pb-md-2"
              *ngIf="!isOwner">
