@@ -54,8 +54,6 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
-// tslint:disable no-unused-expression
-
 @Component({
     templateUrl: './landing.component.html',
 })
@@ -170,12 +168,18 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     }
 
     public play = (event = null) => {
-        event && event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
+
         playVideo(this.video);
     }
 
     public pause =  (event = null) => {
-        event && event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
+
         this.video.pause();
     }
 

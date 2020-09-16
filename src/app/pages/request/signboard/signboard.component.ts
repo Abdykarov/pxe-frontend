@@ -16,8 +16,6 @@ import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 import { ROUTES } from 'src/app/app.constants';
 
-// tslint:disable no-unused-expression
-
 @Component({
     selector: 'lnd-signboard',
     templateUrl: './signboard.component.html',
@@ -45,12 +43,18 @@ export class SignboardComponent {
     }
 
     public play = (event = null) => {
-        event && event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
+
         playVideo(this.video);
     }
 
     public pause =  (event = null) => {
-        event && event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
+
         this.video.pause();
     }
 

@@ -1,14 +1,14 @@
-[
-    {
-        "context": "/api",
+{
+    "/api": {
+        "target": "https://test.parc4u.cz",
+        "secure": false,
         "logLevel": "debug",
-        "target": "http://localhost:4203",
-        "secure": false
+        "changeOrigin": true
     },
-    {
-    "context": "/graphql",
-    "logLevel": "debug",
-    "target": "http://localhost:4203",
-    "secure": false
+    "/graphql": {
+        "target": "https://test.parc4u.cz",
+        "logLevel": "debug",
+        "secure": false,
+        "changeOrigin": true
     }
-]
+}

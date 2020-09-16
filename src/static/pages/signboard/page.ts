@@ -5,8 +5,6 @@ import {
     ViewChild,
 } from '@angular/core';
 
-// tslint:disable no-unused-expression
-
 import { NewSupplyPointPageConfig } from 'src/static/pages/new-supply-point/config';
 import { playVideo } from 'src/common/utils';
 
@@ -29,12 +27,18 @@ export class SignboardComponent {
     }
 
     public play = (event = null) => {
-        event && event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
+
         playVideo(this.video);
     }
 
     public pause =  (event = null) => {
-        event && event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
+
         this.video.pause();
     }
 

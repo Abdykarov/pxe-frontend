@@ -27,8 +27,6 @@ import {
 import { ISupplierLogo } from 'src/common/ui/supplier/model/supplier.model';
 import { playVideo } from 'src/common/utils';
 
-// tslint:disable no-unused-expression
-
 @Component({
     selector: 'lnd-landing-page',
     templateUrl: './landing.component.html',
@@ -107,12 +105,18 @@ export class LandingComponent extends AbstractComponent {
     }
 
     public play = (event = null) => {
-        event && event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
+
         playVideo(this.video);
     }
 
     public pause =  (event = null) => {
-        event && event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
+
         this.video.pause();
     }
 
