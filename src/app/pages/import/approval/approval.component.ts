@@ -155,7 +155,7 @@ export class ApprovalComponent extends AbstractComponent implements OnInit {
                     this.modalsService.closeModalData$.next(null);
                 });
 
-            combineLatest(this.codeLists$, this.commodityType$)
+            combineLatest([this.codeLists$, this.commodityType$])
                 .pipe(
                     takeUntil(this.destroy$),
                 )

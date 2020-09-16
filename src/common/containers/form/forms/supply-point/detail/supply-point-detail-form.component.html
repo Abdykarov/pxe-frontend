@@ -115,7 +115,7 @@
                                   ((form.controls.annualConsumptionVT.touched || formError.annualConsumptionVT) && (formError.annualConsumptionVT || form.controls.annualConsumptionVT.errors) && formFields.validationMessages.annualConsumptionVT)">
                         <div class="row no-gutters">
                             <div class="col-12 mb-2">
-                                <small>{{supplyPoint.commodityType === commodityType.POWER ? 'Roční spotřeba - vysoký tarif' : 'Roční spotřeba'}}</small>
+                                <small>Roční spotřeba - vysoký tarif</small>
                             </div>
                             <div class="col-12 col-md-7 pr-md-1">
                                 <lnd-form-field
@@ -149,6 +149,56 @@
                             </div>
                         </div>
                     </pxe-field-wrapper>
+                    <pxe-field-wrapper
+                        *ngIf="form.controls.annualConsumption.status !== 'DISABLED'"
+                        labelFor="annualConsumptionUnit"
+                        [wrapperFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionUnit' || (fieldWrapperFocused$ | async) === 'annualConsumption'"
+                        [error]="((form.controls.annualConsumptionUnit.touched || formError.annualConsumptionUnit) && (formError.annualConsumptionUnit || form.controls.annualConsumptionUnit.errors)) ||
+                     ((form.controls.annualConsumption.touched || formError.annualConsumption) && (formError.annualConsumption || form.controls.annualConsumption.errors))"
+                        [validationMessages]="((form.controls.annualConsumptionUnit.touched || formError.annualConsumptionUnit) && (formError.annualConsumptionUnit || form.controls.annualConsumptionUnit.errors) && formFields.validationMessages.annualConsumptionUnit) ||
+                                  ((form.controls.annualConsumption.touched || formError.annualConsumption) && (formError.annualConsumption || form.controls.annualConsumption.errors) && formFields.validationMessages.annualConsumption)">
+                        <div class="row no-gutters">
+                            <div class="col-12 mb-2">
+                                <small>Roční spotřeba</small>
+                            </div>
+                            <div class="col-12 col-md-7 pr-md-1">
+                                <lnd-form-field
+                                    lndSFormDirective
+                                    lndSBiometricsDirective
+                                    label="spotřeba"
+                                    [formControl]="form.controls.annualConsumption"
+                                    (focus)="fieldWrapperFocus('annualConsumption')"
+                                    (blur)="fieldWrapperBlur()"
+                                    [inputFocused]="(fieldWrapperFocused$ | async) === 'annualConsumption' || (fieldWrapperFocused$ | async) === 'annualConsumptionUnit'"
+                                    [id]="'annualConsumption'"
+                                    [success]="form.controls.annualConsumption.valid && (form.controls.annualConsumption.touched || formError.annualConsumption)"
+                                    [touched]="form.controls.annualConsumption.touched || formError.annualConsumption"
+                                    [error]="formError.annualConsumption || form.controls.annualConsumption.errors"
+                                    [validationMessages]="formFields.validationMessages.annualConsumption"
+                                ></lnd-form-field>
+                            </div>
+                            <div class="col-12 col-md-5 pl-md-1">
+                                <lnd-select
+                                    lndSFormDirective
+                                    lndSBiometricsDirective
+                                    label="jednotka"
+                                    [appendButtonIcon]="helpDocuments && helpDocuments['annualConsumption'] ? 'icon--info' : null"
+                                    (appendButtonAction)="showHelp('annualConsumption', 'Roční spotřeba')"
+                                    [id]="'annualConsumptionUnit'"
+                                    (focus)="fieldWrapperFocus('annualConsumptionUnit')"
+                                    (blur)="fieldWrapperBlur()"
+                                    [inputFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionUnit' || (fieldWrapperFocused$ | async) === 'annualConsumption'"
+                                    [showErrorMessage]="false"
+                                    [options]="codeLists && codeLists[codeList.ANNUAL_CONSUMPTION_UNITS]"
+                                    [clearable]="false"
+                                    [parentForm]="form"
+                                    [selectName]="'annualConsumptionUnit'"
+                                    [success]="form.controls.annualConsumptionUnit.valid && (form.controls.annualConsumptionUnit.touched || formError.annualConsumptionUnit)"
+                                    [touched]="form.controls.annualConsumptionUnit.touched || formError.annualConsumptionUnit">
+                                </lnd-select>
+                            </div>
+                        </div>
+                    </pxe-field-wrapper>
                 </form>
                 <div class="row">
                     <div class="col-12 mb-5">
@@ -156,7 +206,7 @@
                             <small *ngIf="supplyPoint.commodityType === commodityType.POWER">EAN</small>
                             <small *ngIf="supplyPoint.commodityType === commodityType.GAS">EIC</small>
                         </div>
-                        <span class="perex">{{supplyPoint.ean}}</span>
+                        <span class="perex">{{supplyPoint.identificationNumber}}</span>
                     </div>
                     <div class="col-12 mb-5">
                         <div class="mb-1">
@@ -217,16 +267,16 @@
                         </div>
                         <span class="perex">{{timeToContractEnd}} {{timeToContractEnd | plural: timeToContractEndPeriodMap[timeToContractEndPeriod]}}</span>
                     </div>
-                    <div *ngIf="supplyPoint.contract.isNextContractConcluded && supplyPoint.contract.nextSupplyPointId && supplyPoint.contract.nextSupplyPointId != supplyPoint.id"
+                    <div *ngIf="supplyPoint.contract.isNextContractConcluded && supplyPoint.contract?.nextContractId != supplyPoint.contract.contractId"
                          class="col-12">
                         <div class="mb-1">
-                            <small>Tato smlouva bude nahrazena <a [routerLink]="['/', CONSTS.PATHS.SECURED, CONSTS.PATHS.SUPPLY_POINTS, supplyPoint.contract.nextSupplyPointId]">smlouvou budoucí</a>.</small>
+                            <small>Tato smlouva bude nahrazena <a [routerLink]="['/', CONSTS.PATHS.SECURED, CONSTS.PATHS.SUPPLY_POINTS, supplyPoint.id, supplyPoint.contract.nextContractId]">smlouvou budoucí</a>.</small>
                         </div>
                     </div>
-                    <div *ngIf="!supplyPoint.contract.isNextContractConcluded && supplyPoint.contract.nextSupplyPointId && supplyPoint.contract?.nextSupplyPointId != supplyPoint.id"
+                    <div *ngIf="!(supplyPoint.contract.isNextContractConcluded) && supplyPoint.contract.nextContractId && supplyPoint.contract?.nextContractId != supplyPoint.id"
                          class="col-12">
                         <div class="mb-1">
-                            <small>Tato smlouva má rozpracovanou <a (click)="navigateToUnsignedSupplyPoint(supplyPoint.contract.nextSupplyPointId)">navazující smlouvu</a>.</small>
+                            <small>Tato smlouva má rozpracovanou <a (click)="navigateToUnsignedSupplyPoint(supplyPoint.id, supplyPoint.contract.nextContractId)">navazující smlouvu</a>.</small>
                         </div>
                     </div>
                 </div>

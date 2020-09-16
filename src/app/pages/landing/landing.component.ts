@@ -61,16 +61,16 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     @ViewChild('video')
     public _video: ElementRef;
 
-    @ViewChild('subscription')
+    @ViewChild('subscription', { static: false })
     public subscriptionElement: ElementRef;
 
-    @ViewChild('faq')
+    @ViewChild('faq', { static: true })
     public faq: ElementRef;
 
-    @ViewChild('aboutUs')
+    @ViewChild('aboutUs', { static: true })
     public aboutUs: ElementRef;
 
-    @ViewChild('aboutService')
+    @ViewChild('aboutService', { static: true })
     public aboutService: ElementRef;
 
     public frequentedQuestions: IAccordionItem[] = [];
@@ -82,7 +82,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     public formFields: IForm;
     public routes = ROUTES;
 
-    public isMoreThanXlResolution = false;
+    public isMoreThanMdResolution = false;
 
     public resizeEvent$ = fromEvent(window, 'resize')
         .pipe(
@@ -106,7 +106,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     ) {
         super(faqService, route);
         if (isPlatformBrowser) {
-            this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+            this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
         }
 
         this.loadConfigs$
@@ -151,7 +151,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
         this.resizeEvent$
             .pipe(takeUntil(this.destroy$))
             .subscribe(_  => {
-                this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+                this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
                 this.cd.markForCheck();
             });
     }
@@ -162,7 +162,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     }
 
     public videoIsTouch = () => {
-        if (this.isMoreThanXlResolution) {
+        if (this.isMoreThanMdResolution) {
             this.play();
         }
     }

@@ -33,7 +33,7 @@ import { IPdfSetting } from './patterns-of-contracts.model';
     styleUrls: ['./patterns-of-contracts.component.scss'],
 })
 export class PatternsOfContractsComponent extends AbstractComponent implements OnInit {
-    @ViewChild('ng2PdfJsViewer')
+    @ViewChild('ng2PdfJsViewer', { static: true })
     public ng2PdfJsViewer: PdfJsViewerComponent;
 
     public breadcrumbItemsSimple: IBreadcrumbItems;

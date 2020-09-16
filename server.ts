@@ -1,34 +1,25 @@
-// These are important and needed before anything else
-import 'zone.js/dist/zone-node';
-import 'reflect-metadata';
-
+/***************************************************************************************************
+ * Load `$localize` onto the global scope - used if i18n tags appear in Angular templates.
+ */
+import '@angular/localize/init';
 import { enableProdMode } from '@angular/core';
+import { ngExpressEngine } from '@nguniversal/express-engine';
+import 'zone.js/dist/zone-node';
 
+import 'cross-fetch/polyfill';
 import * as express from 'express';
+import { createWindow } from 'domino';
 import * as fs from 'fs';
 import * as R from 'ramda';
 import * as xml2js from 'xml2js';
 import { join } from 'path';
 import { readFileSync } from 'fs';
 
-// ssr DOM
-import { createWindow } from 'domino';
-
-// Express Engine
-import { ngExpressEngine } from '@nguniversal/express-engine';
-
-// Import module map for lazy loading
-import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
-
-// Faster server renders w/ Prod mode (dev mode never needed)
-enableProdMode();
-
-// Express server
-const app = express();
-
+const server = express();
 const PORT = process.env.PORT || 80;
 const DIST_FOLDER = join(process.cwd(), 'dist');
 const APP_FOLDER = join(DIST_FOLDER, 'app');
+// ssr DOM
 
 // index from browser build!
 const template = readFileSync(join(DIST_FOLDER, 'app', 'index.html')).toString();
@@ -50,24 +41,19 @@ global['document'] = win.document;
 global['navigator'] = win.navigator;
 global['HTMLAnchorElement'] = () => null;
 
-// * NOTE :: leave this as require() since this file is built Dynamically from webpack
-const {
-    AppServerModuleNgFactory,
-    LAZY_MODULE_MAP,
-} = require('./dist/server/main');
+enableProdMode();
 
-app.engine('html', ngExpressEngine({
-    bootstrap: AppServerModuleNgFactory,
-    providers: [
-        provideModuleMap(LAZY_MODULE_MAP),
-    ],
+// Musi byt pod global['window'] --> jinak window undefined u file replacmentu
+import { AppServerModule } from './src/app.server';
+
+server.engine('html', ngExpressEngine({
+    bootstrap: AppServerModule,
 }));
-
-app.set('view engine', 'html');
-app.set('views', join(DIST_FOLDER, 'app'));
+server.set('view engine', 'html');
+server.set('views', join(DIST_FOLDER, 'app'));
 
 // TODO: implement data requests securely
-app.get('/graphql', (req, res) => {
+server.get('/graphql', (req, res) => {
     res.status(404).send('data requests are not supported');
 });
 
@@ -84,7 +70,7 @@ const getQuestions = (questions) => {
 };
 
 // Server static files from /app
-app.get('/sitemap.xml', (req, res) => {
+server.get('/sitemap.xml', (req, res) => {
     const siteMapOriginal = fs.readFileSync(join(APP_FOLDER, 'sitemap.xml'), 'utf8');
     const taqConfig = JSON.parse(fs.readFileSync(join(APP_FOLDER, 'assets/static-data/faq.json'), 'utf8'));
     let questions = JSON.parse(fs.readFileSync(join(APP_FOLDER, 'assets/static-data/questions.json'), 'utf8'));
@@ -109,10 +95,10 @@ app.get('/sitemap.xml', (req, res) => {
 });
 
 // Server static files from /app
-app.get('*.*', express.static(join(DIST_FOLDER, 'app')));
+server.get('*.*', express.static(join(DIST_FOLDER, 'app')));
 
 // All routes are rendered as server side routes use the Universal engine
-app.get('*', (req, res, next) => {
+server.get('*', (req, res, next) => {
     // Catch secured routes as normal client side app
     if (req.originalUrl.indexOf('/secured') === 0) {
         return next();
@@ -134,11 +120,13 @@ app.get('*', (req, res, next) => {
 });
 
 // All routes (without server side routes) are send as normal client side app
-app.get('*', (req, res) => {
+server.get('*', (req, res) => {
     return res.sendFile(join(APP_FOLDER, 'index.html'));
 });
 
 // Start up the Node server
-app.listen(PORT, () => {
-    console.log(`Node server listening on http://localhost:${PORT}`);
+server.listen(PORT, () => {
+    console.log(`Node Express server listening on http://localhost:${PORT}`);
 });
+
+export * from './src/app.server';

@@ -6,8 +6,8 @@ import {
 import { formatDate } from '@angular/common';
 
 import {
-    IContractWithNameAndSupplyPointEan,
-    IPaginatedContractsWithNameAndSupplyPointEan,
+    IContractWithNameAndSupplyPoint,
+    IPaginatedContractsWithNameAndSupplyPoint,
 } from 'src/common/graphql/models/suppplier.model';
 import { IPaginationConfig } from 'src/app/pages/supplier-concluded-contracts/supplier-concluded-contracts.model';
 
@@ -36,7 +36,7 @@ export class SupplierConcludedContractsConfig {
                 {
                     headingClass: [''],
                     cellClass: [''],
-                    content: (row: IContractWithNameAndSupplyPointEan) => `${row.name}`,
+                    content: (row: IContractWithNameAndSupplyPoint) => `${row.name}`,
                 },
             ],
         },
@@ -46,7 +46,7 @@ export class SupplierConcludedContractsConfig {
                 {
                     headingClass: [''],
                     cellClass: [''],
-                    content: (row: IContractWithNameAndSupplyPointEan) => `${row.ean}`,
+                    content: (row: IContractWithNameAndSupplyPoint) => `${row.identificationNumber}`,
                 },
             ],
         },
@@ -56,7 +56,7 @@ export class SupplierConcludedContractsConfig {
                 {
                     headingClass: [''],
                     cellClass: [''],
-                    content: (row: IContractWithNameAndSupplyPointEan) =>
+                    content: (row: IContractWithNameAndSupplyPoint) =>
                         `${formatDate(row.contract.deliveryFrom, 'dd. MM. yyyy', this.locale)} -
                         ${formatDate(row.contract.deliveryTo, 'dd. MM. yyyy', this.locale)}`,
                 },
@@ -74,11 +74,11 @@ export class SupplierConcludedContractsConfig {
         },
     ];
 
-    public readonly paginatedContractsWithNameAndSupplyPointEan: IPaginatedContractsWithNameAndSupplyPointEan = {
+    public readonly paginatedContractsWithNameAndSupplyPointEan: IPaginatedContractsWithNameAndSupplyPoint = {
         page: [
             {
                 name: 'Jaroslav Dvořák',
-                ean: '859182407150233062',
+                identificationNumber: '859182407150233062',
                 contract: {
                     offerValidity: true,
                     deliveryTo: '2021-08-01',
@@ -106,7 +106,7 @@ export class SupplierConcludedContractsConfig {
             },
             {
                 name: 'Jaroslav Dvořák',
-                ean: '859182407150233563',
+                identificationNumber: '859182407150233563',
                 contract: {
                     offerValidity: true,
                     deliveryTo: '2021-09-01',

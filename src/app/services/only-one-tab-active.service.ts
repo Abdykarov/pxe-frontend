@@ -5,7 +5,7 @@ import {
     PLATFORM_ID,
 } from '@angular/core';
 
-import generateUuid from 'uuid/v4';
+import { v4 as generateUuid } from 'uuid';
 
 import { CONSTS } from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';
