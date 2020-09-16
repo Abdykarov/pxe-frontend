@@ -344,6 +344,8 @@ $colors: (
 	}
 
 	&__text {
+		pointer-events: none;
+
 		// Media queries
 		@include media-breakpoint-up(md) {
 			@include absolute-center;

@@ -121,10 +121,10 @@ export class LandingComponent extends AbstractComponent {
     }
 
     get isVideoPlaying(): boolean {
-        return !this.video.paused;
+        return this._video && !this.video.paused;
     }
 
     get video(): HTMLMediaElement {
-        return this._video.nativeElement;
+        return this._video && this._video.nativeElement;
     }
 }

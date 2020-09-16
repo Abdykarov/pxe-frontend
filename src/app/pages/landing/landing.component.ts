@@ -58,7 +58,7 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
     templateUrl: './landing.component.html',
 })
 export class LandingComponent extends AbstractFaqComponent implements OnInit {
-    @ViewChild('video')
+    @ViewChild('video', { static: true })
     public _video: ElementRef;
 
     @ViewChild('subscription', { static: false })
@@ -184,11 +184,11 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     }
 
     get isVideoPlaying(): boolean {
-        return !this.video.paused;
+        return this._video && !this.video.paused;
     }
 
     get video(): HTMLMediaElement {
-        return this._video.nativeElement;
+        return this._video && this._video.nativeElement;
     }
 
     public submitForm = (values) => {
