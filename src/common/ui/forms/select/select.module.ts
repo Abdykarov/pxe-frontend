@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { NgSelectModule } from '@ng-select/ng-select';
 
+import { DirectivesModule } from 'src/common/directives/directives.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { SelectComponent } from './select.component';
 
@@ -13,6 +14,7 @@ import { SelectComponent } from './select.component';
     ],
     imports: [
         CommonModule,
+        DirectivesModule,
         FormModule,
         NgSelectModule,
         ReactiveFormsModule,

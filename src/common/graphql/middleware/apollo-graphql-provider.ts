@@ -59,7 +59,7 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
             let subscription, innerSubscription;
             try {
                 subscription = forward(operation).subscribe({
-                    next: result => {
+                    next: (result: any) => {
                         if (result.errors) {
                             const isAccessDeniedException = R.pipe(
                                 R.filter((err) => err && err.type === 'AccessDeniedException'),

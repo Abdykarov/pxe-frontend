@@ -28,7 +28,7 @@ describe('ConsumptionPipe', () => {
             ],
         });
 
-        pipe = TestBed.get(ConsumptionPipe);
+        pipe = TestBed.inject(ConsumptionPipe);
     });
 
     it('create an instance', () => expect(pipe).toBeTruthy());

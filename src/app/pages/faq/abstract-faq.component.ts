@@ -18,11 +18,11 @@ export class AbstractFaqComponent extends AbstractComponent {
     public faqConfig: ITagConfigItem[] = null;
     public questions: IQuestion[] = null;
 
-    public loadConfigs$ = combineLatest(
+    public loadConfigs$ = combineLatest([
             this.route.params,
             this.faqService.getFaqConfigStream(),
             this.faqService.getQuestionStream(),
-        )
+        ])
         .pipe(
             filter(([params, faqConfig, questions]) => !!(params && faqConfig && questions)),
             tap(([params, faqConfig, questions]) => {

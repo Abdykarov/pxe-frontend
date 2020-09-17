@@ -9,6 +9,7 @@ import { ButtonModule } from 'src/common/ui/button/button.module';
 import { DirectivesModule } from 'src/common/directives/directives.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
 import { LoginSupplyAuthFormComponent } from './login-supply-auth-form.component';
+import { PipesModule } from 'src/common/pipes/pipes.module';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import { LoginSupplyAuthFormComponent } from './login-supply-auth-form.component
         DirectivesModule,
         FormModule,
         FormsModule,
+        PipesModule,
         ReactiveFormsModule,
     ],
     exports: [

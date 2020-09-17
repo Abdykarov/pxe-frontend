@@ -70,7 +70,7 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 })
 export class SupplyOfferComponent extends AbstractComponent implements OnInit {
 
-    @ViewChild('table')
+    @ViewChild('table', { static: true })
     public lndTable: TableComponent;
 
     public readonly bannerTypeImages = BannerTypeImages;
@@ -150,7 +150,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                 this.commodityType$.next(this.commodityType);
             });
 
-        combineLatest(this.codeLists$, this.offers$, this.commodityType$)
+        combineLatest([this.codeLists$, this.offers$, this.commodityType$])
             .pipe(
                 takeUntil(this.destroy$),
                 filter(([codeLists, offers, commodityType]) => !!(codeLists && offers)),
@@ -340,7 +340,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         this.fieldError = {};
         let offerPointAction;
         const isCreateAction = R.isNil(supplyOfferFormData.id);
-        const id = parseInt(supplyOfferFormData.id, 10);
+        const id = supplyOfferFormData.id;
 
         const offer: IOfferInput = R.pick([
             'name',
@@ -416,7 +416,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
             .showModal$.next(this.supplyOfferConfig.confirmDeleteMarkedConfig(this.numberOfMarked, this.commodityType));
     }
 
-    public markOne = (id: number, evt) => {
+    public markOne = (id: string, evt) => {
         this.showDeletedOfferBanner = false;
         evt.preventDefault();
         evt.cancelBubble = false;

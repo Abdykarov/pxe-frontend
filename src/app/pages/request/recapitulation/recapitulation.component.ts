@@ -91,7 +91,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     }
 
     ngOnInit () {
-        combineLatest(this.codeLists$, this.supplyPoint$)
+        combineLatest([this.codeLists$, this.supplyPoint$])
             .pipe(
                 takeUntil(this.destroy$),
             )
