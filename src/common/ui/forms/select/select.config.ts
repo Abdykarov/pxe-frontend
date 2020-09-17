@@ -1,6 +1,4 @@
-import { NgSelectConfig } from '@ng-select/ng-select';
-
-export const defaultSelectConfig: NgSelectConfig = {
+export const defaultSelectConfig = {
     placeholder: 'Placeholder',
     notFoundText: 'Nenalezeno',
     typeToSearchText: 'Napište výraz',

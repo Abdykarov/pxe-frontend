@@ -14,7 +14,7 @@ import { PaymentGuard } from 'src/app/guards/payment.guard';
 const routes: Routes = [
     {
         path: CONSTS.PATHS.EMPTY,
-        loadChildren: './layouts/public/public-layout.module#PublicLayoutModule',
+        loadChildren: () => import('./layouts/public/public-layout.module').then(m => m.PublicLayoutModule),
     },
     {
         path: CONSTS.PATHS.SECURED,
@@ -22,25 +22,22 @@ const routes: Routes = [
             AuthGuard,
             PaymentGuard,
         ],
-        loadChildren: './layouts/secured/secured-layout.module#SecuredLayoutModule',
+        loadChildren: () => import('./layouts/secured/secured-layout.module').then(m => m.SecuredLayoutModule),
     },
     {
         path: CONSTS.PATHS.WILD_CART,
-        loadChildren: './pages/not-found/not-found.module#NotFoundModule',
+        loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule),
     },
 ];
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(
-            routes,
-            {
-                enableTracing: environment.production || false,
-                preloadingStrategy: PreloadAllModules,
-                initialNavigation: 'enabled',
-                scrollPositionRestoration: 'top',
-            },
-        ),
+        RouterModule.forRoot(routes, {
+        enableTracing: false,
+        preloadingStrategy: PreloadAllModules,
+        initialNavigation: 'enabled',
+        scrollPositionRestoration: 'top',
+    }),
     ],
     exports: [
         RouterModule,

@@ -108,6 +108,7 @@ export const graphQLMessages = {
     obsoleteSupplyPointVersion: 'Kontrakt lze uzavřít pouze na nejnovější verzi OM.',
     unknownSupplyPoint: 'Hledané odběrné místo neexistuje nebo pro přístup k němu nemáte oprávnění.',
     duplicateOffer: 'Nabídka nebyla založena, protože totožná nabídka již existuje.',
+    mustBeValidPhoneNumber: 'Telefon musí obsahovat 9 číslic.',
 };
 
 export const cantDeleteAllMarkedOffers = 'Nepodařilo se nám smazat veškeré označené nabídky, prosím zkuste to znovu.';
@@ -229,6 +230,8 @@ export const errorFieldMessages =  {
         requiredGas: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr plynu.',
         requiredPower: 'Doplňte datum, dokdy je platná vaše aktuální smlouva na odběr elektřiny.',
         isInTerminateInterval: 'Vaši aktuální smlouvu už máte automaticky prodlouženou. Vložte správné datum.',
+        expirationAtLeast30DaysBeforeNewDelivery: 'Nejsme schopni v takto kratké době uzavřít navazující smlouvu.',
+        notEnoughDaysToProcessContract: 'Smlouva nemůže být změněna, protože nezbývá dostatek času ke zpracování.',
     },
     fullName: {
         requiredPerson: 'Vyplňte své jméno a příjmení.',

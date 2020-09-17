@@ -30,7 +30,7 @@ const locale = 'cs';
     encapsulation: ViewEncapsulation.None,
 })
 export class DatepickerRangeComponent {
-    @ViewChild('datepicker')
+    @ViewChild('datepicker', { static: true })
     public datepicker: any;
 
     @Output()

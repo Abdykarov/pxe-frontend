@@ -10,9 +10,6 @@ import { ModalModule } from 'src/common/ui/modal/modal.module';
     declarations: [
         ConfirmModalComponent,
     ],
-    entryComponents: [
-        ConfirmModalComponent,
-    ],
     imports: [
         ButtonModule,
         CommonModule,

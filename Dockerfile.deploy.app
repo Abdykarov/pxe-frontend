@@ -16,7 +16,7 @@ RUN yarn build:ssr
 ##
 FROM docker.lnd.bz/nodejs:10
 
-ENTRYPOINT ["node", "dist/server.js"]
+ENTRYPOINT ["node", "dist/server/main.js"]
 
 COPY --from=builder /opt/dist /opt/dist/
 

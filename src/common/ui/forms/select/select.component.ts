@@ -32,7 +32,7 @@ import { IValidationMessages } from '../models/validation-messages.model';
 })
 export class SelectComponent {
 
-    @ViewChild('select')
+    @ViewChild('select', { static: true })
     private select: NgSelectComponent;
 
     @Output()
@@ -64,6 +64,9 @@ export class SelectComponent {
 
     @Output()
     public open?: EventEmitter<any> = new EventEmitter();
+
+    @Output()
+    public remove?: EventEmitter<any> = new EventEmitter();
 
     @Input()
     public customClass?: string;

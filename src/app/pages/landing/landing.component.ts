@@ -62,16 +62,16 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
 
     public isVideoPlaying = false;
 
-    @ViewChild('subscription')
+    @ViewChild('subscription', { static: false })
     public subscriptionElement: ElementRef;
 
-    @ViewChild('faq')
+    @ViewChild('faq', { static: true })
     public faq: ElementRef;
 
-    @ViewChild('aboutUs')
+    @ViewChild('aboutUs', { static: true })
     public aboutUs: ElementRef;
 
-    @ViewChild('aboutService')
+    @ViewChild('aboutService', { static: true })
     public aboutService: ElementRef;
 
     public frequentedQuestions: IAccordionItem[] = [];
@@ -169,7 +169,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
                 this.isVideoPlaying = true;
                 playPromise
                     .then(_ => ({}))
-                    .catch(error => {
+                    .catch(_ => {
                         video.muted = true;
                         video.play();
                     });

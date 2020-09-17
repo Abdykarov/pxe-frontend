@@ -65,6 +65,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     public smsSent: number = null;
     public subjectType = SubjectType;
     public supplyPoint: ISupplyPoint = null;
+    public contractId = this.route.snapshot.params.contractId;
     public supplyPointId = this.route.snapshot.params.supplyPointId;
     public contractAction: ContractActions = ContractActions.NONE;
     public contractActions = ContractActions;
@@ -90,7 +91,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
 
     ngOnInit() {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.supplyService.getSupplyPoint(this.supplyPointId)
+        this.supplyService.getSupplyPoint(this.supplyPointId, this.contractId)
             .pipe(
                 takeUntil(this.destroy$),
                 map(({data}) => data.getSupplyPoint),
@@ -242,6 +243,12 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
             .subscribe(
                 (unsetContractProlongation: boolean) => {
                     if (unsetContractProlongation) {
+                        // hotfix pred releaseme reformating PXEBR-87 by mohlo rozbit
+                        this.supplyPoint.contract.prolong = false;
+                        this.supplyPoint.allowedOperations = this.supplyPoint.allowedOperations.filter(
+                            (allowedOperation: AllowedOperations) => allowedOperation !== AllowedOperations.UNSET_AUTOMATIC_PROLONGATION,
+                        );
+
                         this.globalError = [];
                         this.formSent = true;
                         this.contractAction = ContractActions.NONE;

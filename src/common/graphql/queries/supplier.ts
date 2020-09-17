@@ -15,7 +15,7 @@ export const listSupplierContractsBasedOnOffersQuery = gql`
                     deliveryTo,
                 },
                 name,
-                ean,
+                identificationNumber,
             }
             totalRecords,
         }

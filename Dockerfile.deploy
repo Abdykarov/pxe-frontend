@@ -1,7 +1,7 @@
 ##
 ## Stage 1 - Build using Lundegaard builder (contains yarn, node and other)
 ##
-FROM docker.lnd.bz/builder:latest as builder
+FROM docker.lnd.bz/nodejs:10 as builder
 
 ## important! declare ARGS for each stage where you need to use it
 ARG APP
