@@ -66,7 +66,9 @@ export const offerFragment = gql`
         distributionPriceByCapacity,
         distributionPriceByConsumptionVT,
         distributionPriceByConsumptionNT,
+        distributionPriceByConsumptionGas,
         systemServicesRegulatedPrice,
+        consumptionPriceGas,
         consumptionPriceVT,
         consumptionPriceNT,
         greenEnergy
@@ -85,8 +87,8 @@ export const findSupplierOffersQuery = gql`
 `;
 
 export const findSupplyPointOffersQuery = gql`
-    query findSupplyPointOffers($ean: String!){
-        findSupplyPointOffers(ean: $ean){
+    query findSupplyPointOffers($identificationNumber: String!){
+        findSupplyPointOffers(identificationNumber: $identificationNumber){
             ...offerFragment
         }
     }

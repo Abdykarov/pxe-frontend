@@ -151,6 +151,12 @@ export const formFields: IForm = {
                 Validators.required,
             ],
         ],
+        annualConsumptionUnit: [
+            UNIT_OF_PRICES.KWH,
+            [
+                Validators.required,
+            ],
+        ],
         annualConsumption: [
             null,
             [
@@ -271,16 +277,20 @@ export const formFields: IForm = {
         expirationDateGas: {
             required: errorFieldMessages.expirationDate.requiredGas,
             bsDate: errorFieldMessages.date.format,
-            bsDateMinDate: errorFieldMessages.date.expirationDateInPast,
+            bsDateMinDate: errorFieldMessages.expirationDate.expirationAtLeast30DaysBeforeNewDelivery,
             expirationDateInPast: errorFieldMessages.date.expirationDateInPast,
             isInTerminateInterval: errorFieldMessages.expirationDate.isInTerminateInterval,
+            expirationAtLeast30DaysBeforeNewDelivery: errorFieldMessages.expirationDate.expirationAtLeast30DaysBeforeNewDelivery,
+            notEnoughDaysToProcessContract: errorFieldMessages.expirationDate.notEnoughDaysToProcessContract,
         },
         expirationDatePower: {
             required: errorFieldMessages.expirationDate.requiredPower,
             bsDate: errorFieldMessages.date.format,
-            bsDateMinDate: errorFieldMessages.date.expirationDateInPast,
+            bsDateMinDate: errorFieldMessages.expirationDate.expirationAtLeast30DaysBeforeNewDelivery,
             expirationDateInPast: errorFieldMessages.date.expirationDateInPast,
             isInTerminateInterval: errorFieldMessages.expirationDate.isInTerminateInterval,
+            expirationAtLeast30DaysBeforeNewDelivery: errorFieldMessages.expirationDate.expirationAtLeast30DaysBeforeNewDelivery,
+            notEnoughDaysToProcessContract: errorFieldMessages.expirationDate.notEnoughDaysToProcessContract,
         },
         contractEndTypeId: {
             required: errorFieldMessages.contractEndTypeId.required,
@@ -311,8 +321,8 @@ export const supplyPointDetailAllowedFields: ICommodityTypeFields = {
         'id',
         'commodityType',
         'name',
-        'annualConsumptionVT',
-        'annualConsumptionVTUnit',
+        'annualConsumption',
+        'annualConsumptionUnit',
     ],
 };
 
@@ -346,8 +356,8 @@ export const supplyPointAllowedFields: ICommodityTypeFields = {
         'name',
         'eic',
         'address',
-        'annualConsumptionVT',
-        'annualConsumptionVTUnit',
+        'annualConsumption',
+        'annualConsumptionUnit',
         'expirationDate',
         'contractEndTypeId',
         'timeToContractEnd',

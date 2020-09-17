@@ -15,7 +15,6 @@ import {
     findCodelistsByTypesQuery,
     findSupplierDocumentsByComodityQuery,
     findSupplyPointsByContractStatusQuery,
-    findSupplyPointsQuery,
     getCodelistByTypeQuery,
     getSupplyPointGlobalStatisticsQuery,
     getSupplyPointQuery,
@@ -73,15 +72,6 @@ export class SupplyService {
             variables: {
                 supplierId,
                 commodityType,
-            },
-        })
-        .valueChanges
-
-    public findSupplyPoints = (ean: string = null) => this.apollo
-        .watchQuery<any>({
-            query: findSupplyPointsQuery,
-            variables: {
-                ean,
             },
         })
         .valueChanges
@@ -160,22 +150,23 @@ export class SupplyService {
             },
         })
 
-    public getSupplyPoint = (supplyPointId: string) => this.apollo
+    public getSupplyPoint = (supplyPointId: string, contractId: string = null) => this.apollo
         .watchQuery<any>({
-            fetchPolicy: 'network-only',
+            fetchPolicy: contractId ? 'no-cache' : 'network-only',
             query: getSupplyPointQuery,
             variables: {
                 supplyPointId,
+                ...(!!contractId) && {contractId},
             },
         })
         .valueChanges
 
-    public findSupplyPointsByContractStatus = (contractStatus: ContractStatus[], ean: string = null) => this.apollo
+    public findSupplyPointsByContractStatus = (contractStatus: ContractStatus[], identificationNumber: string = null) => this.apollo
         .watchQuery<any>({
-            fetchPolicy: 'network-only',
+            fetchPolicy: 'no-cache',
             query: findSupplyPointsByContractStatusQuery,
             variables: {
-                ean,
+                identificationNumber,
                 contractStatus,
             },
         })

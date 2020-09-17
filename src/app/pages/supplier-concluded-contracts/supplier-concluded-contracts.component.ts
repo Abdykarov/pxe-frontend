@@ -29,7 +29,7 @@ import {
 } from 'src/app/app.constants';
 import { defaultErrorMessage } from 'src/common/constants/errors.constant';
 import { DocumentService } from 'src/app/services/document.service';
-import { IPaginatedContractsWithNameAndSupplyPointEan } from 'src/common/graphql/models/suppplier.model';
+import { IPaginatedContractsWithNameAndSupplyPoint } from 'src/common/graphql/models/suppplier.model';
 import { IPaginationConfig } from 'src/app/pages/supplier-concluded-contracts/supplier-concluded-contracts.model';
 import {
     IDocumentType,
@@ -65,7 +65,7 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
 
     public paginationConfig: IPaginationConfig = null;
 
-    public paginatedContractsWithNameAndSupplyPointEan: IPaginatedContractsWithNameAndSupplyPointEan = null;
+    public paginatedContractsWithNameAndSupplyPoint: IPaginatedContractsWithNameAndSupplyPoint = null;
     public tableCols = null;
 
     public formLoading = false;
@@ -103,7 +103,7 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                 this.cd.markForCheck();
             });
 
-        combineLatest(this.commodityType$, this.numberOfPages$)
+        combineLatest([this.commodityType$, this.numberOfPages$])
             .pipe(
                 switchMap(([commodityType, numberOfPage]) => {
                     this.globalError = [];
@@ -112,7 +112,7 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                             {
                                 commodityType,
                                 pagination: {
-                                    first: this.paginationConfig.itemsPerPage * (numberOfPage - 1),
+                                    first: numberOfPage - 1,
                                     offset: this.paginationConfig.itemsPerPage,
                                 },
                             },
@@ -123,8 +123,8 @@ export class SupplierConcludedContractsComponent extends AbstractComponent imple
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                (paginatedContractsWithNameAndSupplyPointEan: IPaginatedContractsWithNameAndSupplyPointEan) => {
-                    this.paginatedContractsWithNameAndSupplyPointEan = paginatedContractsWithNameAndSupplyPointEan;
+                (paginatedContractsWithNameAndSupplyPoint: IPaginatedContractsWithNameAndSupplyPoint) => {
+                    this.paginatedContractsWithNameAndSupplyPoint = paginatedContractsWithNameAndSupplyPoint;
                     this.tableCols = this.supplierConcludedContractsConfig.getTableCols(this.commodityType);
                     scrollToElementFnc('top');
                     this.formLoading = false;

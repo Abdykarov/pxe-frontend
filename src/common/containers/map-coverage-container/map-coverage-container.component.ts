@@ -11,7 +11,7 @@ import {
 })
 export class MapCoverageContainerComponent {
 
-    @ViewChild('pxeMapCoverageWrapper')
+    @ViewChild('pxeMapCoverageWrapper', { static: true })
     public pxeMapCoverageWrapper: ElementRef;
 
 }

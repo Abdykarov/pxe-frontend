@@ -104,7 +104,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
                 switchMap((supplyPoint: ISupplyPoint) => {
                     this.navigateRequestService.checkCorrectStep(supplyPoint, ProgressStatus.OFFER_STEP);
                     this.supplyPoint = supplyPoint;
-                    return this.offerService.findSupplyPointOffers(this.supplyPoint.ean);
+                    return this.offerService.findSupplyPointOffers(this.supplyPoint.identificationNumber);
                 }),
                 map(({data}) => R.sort(R.ascend(R.prop('totalPrice')))(data.findSupplyPointOffers)),
                 takeUntil(this.destroy$),

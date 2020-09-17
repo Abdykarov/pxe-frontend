@@ -25,7 +25,7 @@ export const concludeContractMutation = gql`
 `;
 
 export const signContractMutation = gql`
-    mutation signContract($contractId: Int!, $smsCode: String){
+    mutation signContract($contractId: ID!, $smsCode: String){
         signContract(contractId: $contractId, smsCode: $smsCode)
     }
 `;

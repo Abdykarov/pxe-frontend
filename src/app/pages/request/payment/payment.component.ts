@@ -126,7 +126,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                             [
                                 ContractStatus.NOT_CONCLUDED,
                             ],
-                            this.supplyPoint.ean,
+                            this.supplyPoint.identificationNumber,
                         );
                     }
                     return of({
