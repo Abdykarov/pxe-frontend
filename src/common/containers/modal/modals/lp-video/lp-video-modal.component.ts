@@ -3,16 +3,20 @@ import {
     ElementRef,
     EventEmitter,
     Input,
-    Output, ViewChild,
+    OnInit,
+    Output,
+    ViewChild,
 } from '@angular/core';
+import { playVideo } from '../../../../utils';
 
 @Component({
     selector: 'pxe-lp-video-modal',
     styleUrls: ['./lp-video-modal.component.scss'],
     templateUrl: './lp-video-modal.component.html',
 })
-export class LpVideoModalComponent {
-    @ViewChild('video')
+export class LpVideoModalComponent implements OnInit {
+
+    @ViewChild('video', { static: true })
     public video: ElementRef;
 
     @Input()
@@ -23,4 +27,8 @@ export class LpVideoModalComponent {
 
     @Output()
     public closeModal: EventEmitter<any> = new EventEmitter<any>();
+
+    ngOnInit() {
+        playVideo(this.video.nativeElement);
+    }
 }

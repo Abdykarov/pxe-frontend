@@ -1,6 +1,7 @@
 <lnd-modal
     [isModalOpen]="modalOpen"
-    [size]="'xl'"
+    [size]="this.instanceData.size"
+    [withHeader]="this.instanceData.withHeader"
     (close)="closeModal.emit()">
     <div class="modal-body">
         <video

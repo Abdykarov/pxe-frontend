@@ -63,6 +63,7 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
     templateUrl: './landing.component.html',
 })
 export class LandingComponent extends AbstractFaqComponent implements OnInit {
+
     @ViewChild('video', { static: true })
     public _video: ElementRef;
 
