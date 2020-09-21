@@ -18,9 +18,11 @@ import {
 } from '@angular/platform-browser';
 
 import * as R from 'ramda';
+import * as R_ from 'ramda-extension';
 import { Apollo } from 'apollo-angular';
 import {
     debounceTime,
+    filter,
     takeUntil,
 } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
@@ -36,6 +38,7 @@ import {
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import { FaqService } from 'src/app/services/faq.service';
 import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
+import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import {
     IFieldError,
     IForm,
@@ -44,6 +47,8 @@ import {
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import { IQuestion } from 'src/app/services/model/faq.model';
+import { lpVideoModalConfig } from './landing.config';
+import { ModalService } from 'src/common/containers/modal/modal.service';
 import {
     parseGraphQLErrors,
     scrollToElementFnc,
@@ -97,6 +102,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
         public faqService: FaqService,
         private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
+        private modalService: ModalService,
         public route: ActivatedRoute,
         public router: Router,
         private registrationService: RegistrationService,
@@ -155,6 +161,22 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
                 this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
                 this.cd.markForCheck();
             });
+
+        this.modalService.closeModalData$
+            .pipe(
+                takeUntil(this.destroy$),
+                filter(R_.isNotNil),
+                filter((modal: ICloseModalData) => modal.confirmed),
+            )
+            .subscribe(modal => {
+                this.modalService.closeModalData$.next(null);
+            });
+    }
+
+    public playVideoInModal = (event) => {
+        event.preventDefault();
+        this.modalService
+            .showModal$.next(lpVideoModalConfig());
     }
 
     public toggleVideo = (event = null) => {
