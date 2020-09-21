@@ -122,7 +122,9 @@
                  [class.cursor-pointer]="isVideoPlaying">
                 <video
                     #video
-                    (click)="isVideoPlaying && toggleVideo($event)"
+                    (pause)="cd.detectChanges()"
+                    (play)="cd.detectChanges()"
+                    (click)="isVideoPlaying && pause($event)"
                     poster="/assets/images/landing-page/picture-fallback.jpg"
                     class="section-video"
                     loop
@@ -140,7 +142,7 @@
                         icon="icon--triangle-right"
                         variant="icon"
                         customClass="btn-video-play"
-                        (action)="toggleVideo($event)"
+                        (action)="play($event)"
                     >
                     </lnd-button>
                 </div>
@@ -159,7 +161,7 @@
                                 icon="icon--triangle-right"
                                 variant="icon"
                                 customClass="btn-video-play"
-                                (action)="toggleVideo($event)"
+                                (action)="play($event)"
                             >
                             </lnd-button>
                         </div>
