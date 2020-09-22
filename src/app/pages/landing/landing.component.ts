@@ -52,6 +52,8 @@ import { RegistrationService } from 'src/common/graphql/services/registration.se
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Component({
     templateUrl: './landing.component.html',
@@ -90,7 +92,10 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
             debounceTime(200),
         );
 
+    public ahoj = '';
+
     constructor(
+        private http: HttpClient,
         private apollo: Apollo,
         public authService: AuthService,
         private cd: ChangeDetectorRef,
@@ -110,7 +115,48 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
             this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
         }
 
-        this.loadConfigs$
+        const body = new FormData();
+        body.set('grant_type', 'client_credentials');
+        body.set('client_id', 'pxe-parc4u:default');
+        body.set('client_secret', 'oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx');
+        body.set('scope', 'squidex-api');
+
+        this.http.post('https://squidex.lnd.bz/identity-server/connect/token', body, {
+            headers: {
+                responseType: 'json',
+            },
+        }).subscribe(
+            (data: any) => {
+                console.log('CIS');
+                console.log(data.access_token);
+                this.http.post('https://squidex.lnd.bz/api/content/pxe-parc4u/graphql',
+                    {'query': '{queryTestContents{data{title{iv}}}}', 'variables': null}, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        responseType: 'json',
+                        Authorization: 'Bearer ' + data.access_token,
+                    },
+                }).subscribe(
+                    _ => {
+                        this.ahoj = 'Asdasd';
+                        this.cd.markForCheck();
+                    },
+                    __Error => {
+                        console.log('ASDASD');
+                        console.log(__Error);
+                    },
+                );
+
+            },
+        );
+
+        // `grant_type: client_credentials`,
+        //     'client_id: pxe-parc4u:default',
+        //     'client_secret: oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx',
+        //     'scope: squidex-api',
+
+
+            this.loadConfigs$
             .pipe(
                 takeUntil(this.destroy$),
             )

@@ -31,41 +31,41 @@ export class ApiInterceptor implements HttpInterceptor {
         next: HttpHandler,
     ): Observable<HttpEvent<any>> {
 
-        let resultRequest = request.clone({
-            setHeaders: {
-                'X-API-Key': `${environment.x_api_key}`,
-            },
-        });
+        // let resultRequest = request.clone({
+        //     setHeaders: {
+        //         'X-API-Key': `${environment.x_api_key}`,
+        //     },
+        // });
+        //
+        // if (
+        //     request.url.match(/api\//) &&
+        //     request.url.indexOf('login') < 0 &&
+        //     request.url.indexOf('export-csv') < 0
+        // ) {
+        //         resultRequest = request.clone({
+        //             headers: this.authService.getAuthorizationHeaders('application/json'),
+        //         });
+        // }
+        //
+        // if (
+        //     request.url.match(/api\//) &&
+        //     request.url.indexOf('export-csv') > 0
+        // ) {
+        //     resultRequest = request.clone({
+        //         headers: this.authService.getAuthorizationHeaders('application/octet-stream'),
+        //     });
+        // }
 
-        if (
-            request.url.match(/api\//) &&
-            request.url.indexOf('login') < 0 &&
-            request.url.indexOf('export-csv') < 0
-        ) {
-                resultRequest = request.clone({
-                    headers: this.authService.getAuthorizationHeaders('application/json'),
-                });
-        }
-
-        if (
-            request.url.match(/api\//) &&
-            request.url.indexOf('export-csv') > 0
-        ) {
-            resultRequest = request.clone({
-                headers: this.authService.getAuthorizationHeaders('application/octet-stream'),
-            });
-        }
-
-        return next.handle(resultRequest)
-            .pipe(
-                catchError((error, caught) => {
-                    if (error.status === 401) {
-                        this.authService.logoutForced();
-                    } else {
-                        processErrorScrolls();
-                    }
-                    return throwError(error);
-                }),
-            );
+        return next.handle(request);
+            // .pipe(
+            //     catchError((error, caught) => {
+            //         if (error.status === 401) {
+            //             this.authService.logoutForced();
+            //         } else {
+            //             processErrorScrolls();
+            //         }
+            //         return throwError(error);
+            //     }),
+            // );
     }
 }

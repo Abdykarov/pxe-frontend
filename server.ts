@@ -53,9 +53,9 @@ server.set('view engine', 'html');
 server.set('views', join(DIST_FOLDER, 'app'));
 
 // TODO: implement data requests securely
-server.get('/graphql', (req, res) => {
-    res.status(404).send('data requests are not supported');
-});
+// server.get('/graphql', (req, res) => {
+//     res.status(404).send('data requests are not supported');
+// });
 
 const getTagUrl = (question, taqConfig) => {
     const foundTaq = taqConfig.find(taq => taq.type === question.tag);

@@ -1,5 +1,12 @@
 [
     {
+        "context": "/squidex",
+        "target": "https://squidex.lnd.bz",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    },
+    {
         "context": "/api",
         "logLevel": "debug",
         "target": "http://localhost:8080",
