@@ -17,6 +17,7 @@ import {
     Title,
 } from '@angular/platform-browser';
 
+import * as FormData from 'form-data';
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 import {
@@ -52,8 +53,7 @@ import { RegistrationService } from 'src/common/graphql/services/registration.se
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     templateUrl: './landing.component.html',
@@ -116,10 +116,10 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
         }
 
         const body = new FormData();
-        body.set('grant_type', 'client_credentials');
-        body.set('client_id', 'pxe-parc4u:default');
-        body.set('client_secret', 'oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx');
-        body.set('scope', 'squidex-api');
+        body.append('grant_type', 'client_credentials');
+        body.append('client_id', 'pxe-parc4u:default');
+        body.append('client_secret', 'oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx');
+        body.append('scope', 'squidex-api');
 
         this.http.post('https://squidex.lnd.bz/identity-server/connect/token', body, {
             headers: {
