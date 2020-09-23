@@ -36,12 +36,18 @@
 .supply-point-offer {
 	@include link-without-href-self {
 		display: block;
+		padding: ( $spacer * 1.5 );
 		margin-bottom: $spacer;
 		background-color: $white;
 		color: inherit;
 		border-radius: $border-radius;
 		box-shadow: 0 2px 5px rgba($box-shadow-color, .16);
 		pointer-events: none;
+
+		// Media queries
+		@include media-breakpoint-up(xl) {
+			padding: ( $spacer * 2.5 );
+		}
 	}
 
 	&:not(.supply-point-offer--owner) {
@@ -163,6 +169,30 @@
 		}
 	}
 
+	&__block {
+		padding-bottom: ( $spacer * 2 );
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			height: 100%;
+			padding: ( $spacer * 1.5 );
+		}
+
+		&--second {
+			background-color: rgba($body-bg, .5);
+
+			// Media queries
+			@include media-breakpoint-down(xs) {
+				padding: $spacer ( $spacer * 1.5 );
+				margin-bottom: ( $spacer * 1.5 );
+			}
+		}
+
+		&--small-offset {
+			padding: $spacer;
+		}
+	}
+
 	&__title,
 	&__value {
 		font-size: $supply-point-label-font-size;
@@ -192,7 +222,7 @@
 	&__title {
 		display: block;
 		width: 100%;
-		margin-bottom: ( $spacer * .75 );
+		margin-bottom: ( $spacer / 4 );
 	}
 
 	&__info-icon {
@@ -208,6 +238,9 @@
 		margin-right: $spacer;
 
 		&--price {
+			margin-bottom: $spacer;
+			margin-right: 0;
+
 			.supply-point-offer__value {
 				font-size: $supply-point-offer-decomposition-font-size;
 			}
@@ -262,6 +295,32 @@
 	&__benefits-text {
 		display: inline-block;
 		margin-left: ( $spacer / 2 );
-		text-transform: uppercase;
+	}
+
+	&__benefits {
+		margin-bottom: 0;
+
+		&-item {
+			display: inline-block;
+			padding: $spacer;
+			margin-bottom: $spacer;
+			background-color: rgba($body-bg, .5);
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				width: calc(50% - #{ $spacer / 2 } );
+			}
+
+			&::before {
+				display: none;
+			}
+
+			&:nth-child(even) {
+				// Media queries
+				@include media-breakpoint-up(md) {
+					margin-left: $spacer;
+				}
+			}
+		}
 	}
 }
