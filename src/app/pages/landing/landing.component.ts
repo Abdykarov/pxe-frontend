@@ -53,6 +53,7 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 import { HttpClient } from '@angular/common/http';
+import { CmsService } from '../../../common/cms/cmsApollo.service';
 
 @Component({
     templateUrl: './landing.component.html',
@@ -94,8 +95,8 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     public ahoj = '';
 
     constructor(
+        private cmsService: CmsService,
         private http: HttpClient,
-        private apollo: Apollo,
         public authService: AuthService,
         private cd: ChangeDetectorRef,
         public faqService: FaqService,
@@ -120,9 +121,10 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
         body.append('client_secret', 'oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx');
         body.append('scope', 'squidex-api');
 
-        this.http.post('https://squidex.lnd.bz/identity-server/connect/token', body, {
+        this.http.post('https://squidex.lnd.bz/identity-server/connect/token', body.toString(), {
             headers: {
                 responseType: 'json',
+                'Content-Type': 'application/x-www-form-urlencoded',
             },
         }).subscribe(
             (data: any) => {
