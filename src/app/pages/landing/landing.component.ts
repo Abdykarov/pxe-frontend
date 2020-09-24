@@ -17,7 +17,6 @@ import {
     Title,
 } from '@angular/platform-browser';
 
-import * as FormData from 'form-data';
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 import {
@@ -115,7 +114,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
             this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
         }
 
-        const body = new FormData();
+        const body = new URLSearchParams();
         body.append('grant_type', 'client_credentials');
         body.append('client_id', 'pxe-parc4u:default');
         body.append('client_secret', 'oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx');

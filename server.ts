@@ -57,6 +57,14 @@ server.set('views', join(DIST_FOLDER, 'app'));
 //     res.status(404).send('data requests are not supported');
 // });
 
+server.get('*', (req, res, next) => {
+    console.log('ASD');
+    console.log(req.url);
+    console.log(req.originalUrl);
+    return next();
+});
+
+
 const getTagUrl = (question, taqConfig) => {
     const foundTaq = taqConfig.find(taq => taq.type === question.tag);
     return foundTaq.url;
@@ -99,10 +107,24 @@ server.get('*.*', express.static(join(DIST_FOLDER, 'app')));
 
 // All routes are rendered as server side routes use the Universal engine
 server.get('*', (req, res, next) => {
+
     // Catch secured routes as normal client side app
     if (req.originalUrl.indexOf('/secured') === 0) {
         return next();
     }
+
+    // console.log('ASDSAD');
+    // console.log(res);
+    // console.log(req);
+    // console.log(req.originalUrl);
+    // console.log(req.originalUrl.indexOf('/squidex.lnd'));
+    // if (req.originalUrl.indexOf('/squidex.lnd') === 0) {
+    //     console.log(req);
+    //     console.log(res);
+    //     console.log(next);
+    //     console.log('___');
+    // }
+
     res.render('index', {
         req: req,
         res: res,
