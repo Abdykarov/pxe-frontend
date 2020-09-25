@@ -8,14 +8,16 @@
     },
     {
         "context": "/api",
+        "target": "https://pxeparc-preview.lnd.bz",
         "logLevel": "debug",
-        "target": "http://localhost:8080",
-        "secure": false
+        "secure": false,
+        "changeOrigin": true
     },
     {
         "context": "/graphql",
+        "target": "https://pxeparc-preview.lnd.bz",
+        "secure": false,
         "logLevel": "debug",
-        "target": "http://localhost:8080",
-        "secure": false
+        "changeOrigin": true
     }
 ]

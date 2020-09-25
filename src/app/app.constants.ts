@@ -108,6 +108,16 @@ export const CONSTS = {
         COUNT: 16,
         DONT_REFRESH_TIME_IN_MINUTES: 2,
     },
+    CMS: {
+        // squidex keep 1 month of valid token
+        CLIENT_ID: 'pxe-parc4u:default',
+        CLIENT_SECRET: 'oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx',
+        COOKIE_KEY: 'cms',
+        REFRESH_TOKEN_INTERVAL: 100000,
+        GRAND_TYPE: 'client_credentials',
+        DAYS_FOR_REFRESH: 5,
+        SCOPE: 'squidex-api',
+    },
     START_STICKER_HEADER: 0,
     STORAGE_HELPERS: {
         LAST_URL: 'last_url',

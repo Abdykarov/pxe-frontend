@@ -53,7 +53,7 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 import { HttpClient } from '@angular/common/http';
-import { CmsService } from '../../../common/cms/cmsApollo.service';
+import { findSupplierOffersQuery } from '../../../common/graphql/queries/offer';
 
 @Component({
     templateUrl: './landing.component.html',
@@ -95,7 +95,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     public ahoj = '';
 
     constructor(
-        private cmsService: CmsService,
+        private apollo: Apollo,
         private http: HttpClient,
         public authService: AuthService,
         private cd: ChangeDetectorRef,
@@ -115,57 +115,15 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
             this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
         }
 
-        const body = new URLSearchParams();
-        body.append('grant_type', 'client_credentials');
-        body.append('client_id', 'pxe-parc4u:default');
-        body.append('client_secret', 'oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx');
-        body.append('scope', 'squidex-api');
-
-        this.http.post('https://squidex.lnd.bz/identity-server/connect/token', body.toString(), {
-            headers: {
-                responseType: 'json',
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-        }).subscribe(
-            (data: any) => {
-                console.log('CIS');
-                console.log(data.access_token);
-                this.http.post('https://squidex.lnd.bz/api/content/pxe-parc4u/graphql',
-                    {'query': '{queryTestContents{data{title{iv}}}}', 'variables': null}, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        responseType: 'json',
-                        Authorization: 'Bearer ' + data.access_token,
-                    },
-                }).subscribe(
-                    _ => {
-                        this.ahoj = 'Asdasd';
-                        this.cd.markForCheck();
-                    },
-                    __Error => {
-                        console.log('ASDASD');
-                        console.log(__Error);
-                    },
-                );
-
-            },
-        );
-
-        // `grant_type: client_credentials`,
-        //     'client_id: pxe-parc4u:default',
-        //     'client_secret: oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx',
-        //     'scope: squidex-api',
-
-
-            this.loadConfigs$
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe(
-                _ => {
-                    this.frequentedQuestions = R.filter((question: IQuestion) => question.oneOfMostVisited)(this.questions);
-                    this.cd.markForCheck();
-            });
+        this.loadConfigs$
+        .pipe(
+            takeUntil(this.destroy$),
+        )
+        .subscribe(
+            _ => {
+                this.frequentedQuestions = R.filter((question: IQuestion) => question.oneOfMostVisited)(this.questions);
+                this.cd.markForCheck();
+        });
 
         this.titleService.setTitle(CONSTS.TITLES.LANDING_PAGE);
         this.metaService.updateTag({

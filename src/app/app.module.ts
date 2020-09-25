@@ -16,6 +16,7 @@ import { HttpLinkModule } from 'apollo-angular-link-http';
 
 // own classes
 import { ApolloGraphQLProvider } from 'src/common/graphql/middleware/apollo-graphql-provider';
+import { ApolloCMSGraphQLProvider } from 'src/common/cms/middleware/apollo-cms-graphql-provider';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { FileUploadModule } from 'src/third-sides/file-upload';
@@ -42,6 +43,7 @@ import { PipesModule } from 'src/common/pipes/pipes.module';
     ],
     providers: [
         ApolloGraphQLProvider,
+        ApolloCMSGraphQLProvider,
         InterceptorProviders,
         {
             provide: LOCALE_ID,
