@@ -144,7 +144,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                     const showUnsetProlongation = !!previousContractId;
                     const documentTypeUnsetProlongation$ = showUnsetProlongation ?
                             this.documentService.getDocument(
-                                    previousContractId,
+                                    this.supplyPoint.contract.contractId,
                                     this.documentType.CONTRACT_NOT_EXTENDED,
                                 )
                                 .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)) : of(null);
