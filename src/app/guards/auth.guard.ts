@@ -24,18 +24,14 @@ export class AuthGuard implements CanActivateChild {
         childRoute: ActivatedRouteSnapshot,
         state: RouterStateSnapshot,
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        return true;
-
         this.authService.checkLogin();
 
         if (!this.authService.isLogged()) {
-            console.log('123123123_222');
             this.authService.logoutForced();
             return false;
         }
 
         if (!R.isNil(childRoute.data.isSupplier)) {
-            console.log('123123123_222___ASDASDASDDSA');
             const currentUser = this.authService.currentUserValue;
             return currentUser && currentUser.supplier === childRoute.data.isSupplier;
         }

@@ -53,17 +53,9 @@ server.set('view engine', 'html');
 server.set('views', join(DIST_FOLDER, 'app'));
 
 // TODO: implement data requests securely
-// server.get('/graphql', (req, res) => {
-//     res.status(404).send('data requests are not supported');
-// });
-
-server.get('*', (req, res, next) => {
-    console.log('ASD');
-    console.log(req.url);
-    console.log(req.originalUrl);
-    return next();
+server.get('/graphql', (req, res) => {
+    res.status(404).send('data requests are not supported');
 });
-
 
 const getTagUrl = (question, taqConfig) => {
     const foundTaq = taqConfig.find(taq => taq.type === question.tag);
@@ -112,18 +104,6 @@ server.get('*', (req, res, next) => {
     if (req.originalUrl.indexOf('/secured') === 0) {
         return next();
     }
-
-    // console.log('ASDSAD');
-    // console.log(res);
-    // console.log(req);
-    // console.log(req.originalUrl);
-    // console.log(req.originalUrl.indexOf('/squidex.lnd'));
-    // if (req.originalUrl.indexOf('/squidex.lnd') === 0) {
-    //     console.log(req);
-    //     console.log(res);
-    //     console.log(next);
-    //     console.log('___');
-    // }
 
     res.render('index', {
         req: req,

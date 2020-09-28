@@ -1,14 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
-import { catchError, filter, map, repeatWhen, switchMap, take, takeUntil, tap } from 'rxjs/operators';
-import { ILoginResponse } from './model/auth.model';
-import { CONSTS } from '../app.constants';
-import { CookieService } from 'ngx-cookie';
-import { interval, of, timer } from 'rxjs';
-import { ICmsJwtPayload, IRefreshTokenJwtResponse } from './model/cms.model';
-import { JwtHelperService } from '@auth0/angular-jwt';
+
 import * as moment from 'moment';
+import { timer } from 'rxjs';
+import {
+    filter,
+    map,
+    switchMap,
+} from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+import { CONSTS } from 'src/app/app.constants';
+import { environment } from 'src/environments/environment';
+import {
+    ICmsJwtPayload,
+    IRefreshTokenJwtResponse,
+} from './model/cms.model';
 
 @Injectable({
     providedIn: 'root',

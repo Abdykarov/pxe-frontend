@@ -54,7 +54,6 @@ const apolloGraphQLFactory = (authService: AuthService, router: Router) => {
     const auth = new ApolloLink((operation: Operation, forward: NextLink) => {
         const withoutToken = R.includes(operation.operationName, OPERATIONS_WITHOUT_TOKEN);
         setTokenHeader(operation, withoutToken);
-        console.log('KLASIK PROVIDER');
 
         return new Observable(observer => {
             let subscription, innerSubscription;

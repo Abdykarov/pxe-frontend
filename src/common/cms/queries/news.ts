@@ -10,9 +10,6 @@ export const getNewsQuery = gql`
                         new
                     }
                 },
-                title {
-                    iv
-                }
             }
         }
     }`;

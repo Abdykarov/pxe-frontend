@@ -52,7 +52,6 @@ import { RegistrationService } from 'src/common/graphql/services/registration.se
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
     templateUrl: './landing.component.html',
@@ -91,11 +90,8 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
             debounceTime(200),
         );
 
-    public ahoj = '';
-
     constructor(
         private apollo: Apollo,
-        private http: HttpClient,
         public authService: AuthService,
         private cd: ChangeDetectorRef,
         public faqService: FaqService,

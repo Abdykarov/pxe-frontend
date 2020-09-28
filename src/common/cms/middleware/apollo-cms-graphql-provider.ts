@@ -6,9 +6,9 @@ import {
     Observable,
     Operation,
 } from 'apollo-link';
+import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
-import { createHttpLink } from 'apollo-link-http';
 import { clientSchema } from 'src/common/graphql/middleware/client-schema';
 import { CmsService } from 'src/app/services/cms.service';
 import {
@@ -36,11 +36,10 @@ const apolloCmsGraphQLFactory = (cmsService: CmsService) => {
     });
 
     const auth = new ApolloLink((operation: Operation, forward: NextLink) => {
-        console.log('CMS');
         setTokenHeader(operation, cmsService);
 
         return new Observable(observer => {
-            let subscription, innerSubscription;
+            let subscription;
             try {
                 subscription = forward(operation).subscribe({
                     next: (result: any) => {
@@ -67,9 +66,6 @@ const apolloCmsGraphQLFactory = (cmsService: CmsService) => {
             return () => {
                 if (subscription) {
                     subscription.unsubscribe();
-                }
-                if (innerSubscription) {
-                    innerSubscription.unsubscribe();
                 }
             };
         });
