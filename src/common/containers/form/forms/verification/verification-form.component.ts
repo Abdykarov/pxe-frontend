@@ -65,7 +65,7 @@ export class VerificationFormComponent extends AbstractFormComponent implements 
 
     constructor(
         protected fb: FormBuilder,
-        private sAnalyticsService: SAnalyticsService,
+        public sAnalyticsService: SAnalyticsService,
     ) {
         super(fb);
         sAnalyticsService.sFormStart();

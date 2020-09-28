@@ -42,10 +42,10 @@
         </p>
     </div>
 
-    <div class="col-12">
+    <div *ngIf="showForm"
+         class="col-12">
         <form
             class="form-container"
-            *ngIf="showForm"
             [formGroup]="form"
             autocomplete="off"
             (keydown)="resetCustomFieldError()"
@@ -55,7 +55,7 @@
                 lndSFormDirective
                 lndSBiometricsDirective
                 class="text-left"
-                [customFieldClass]="!smsSent ? 'is-disabled' : null"
+                [disabled]="!smsSent"
                 [disabledField]="!smsSent"
                 [error]="formError.smsCode || form.controls.smsCode.errors"
                 [formControl]="form.controls.smsCode"
