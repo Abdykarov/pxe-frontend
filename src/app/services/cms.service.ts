@@ -14,8 +14,7 @@ import * as moment from 'moment';
     providedIn: 'root',
 })
 export class CmsService {
-
-    private token: string;
+    private tokenJwtResponse: IRefreshTokenJwtResponse;
     private cmsPayload: ICmsJwtPayload;
 
     public refreshTokenInterval$ =
@@ -29,7 +28,7 @@ export class CmsService {
 
         this.refreshTokenInterval$.pipe(
             filter(_ => {
-                if (this.token) {
+                if (this.tokenJwtResponse) {
                     return false;
                 }
 
@@ -65,8 +64,10 @@ export class CmsService {
     }
 
     private manageJwtToken = (cmsPayload: IRefreshTokenJwtResponse) => {
-        this.token = cmsPayload.access_token;
+        this.tokenJwtResponse = cmsPayload;
         const jwtHelper = new JwtHelperService();
-        this.cmsPayload = jwtHelper.decodeToken(this.token);
+        this.cmsPayload = jwtHelper.decodeToken(this.tokenJwtResponse.access_token);
     }
+
+    public getAuthorizationHeaders = () => `${this.tokenJwtResponse.token_type} ${this.tokenJwtResponse.access_token}`;
 }

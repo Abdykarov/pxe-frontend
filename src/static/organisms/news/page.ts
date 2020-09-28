@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import { config } from 'src/common/containers/news/news-container.config';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { newsConfig } from 'src/static/config/news-config';
 
 @Component({
     templateUrl: './page.html',
@@ -9,7 +9,7 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 export class NewsPageComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
-    public newsConfig = config;
+    public newsConfig = newsConfig;
 
     constructor() {
         this.breadcrumbItemsSimple = [

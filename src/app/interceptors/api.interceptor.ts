@@ -56,7 +56,7 @@ export class ApiInterceptor implements HttpInterceptor {
             });
         }
 
-        return next.handle(request)
+        return next.handle(resultRequest)
             .pipe(
                 catchError((error, caught) => {
                     if (error.status === 401) {

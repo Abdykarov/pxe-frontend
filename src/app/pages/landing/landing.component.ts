@@ -53,7 +53,6 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 import { HttpClient } from '@angular/common/http';
-import { findSupplierOffersQuery } from '../../../common/graphql/queries/offer';
 
 @Component({
     templateUrl: './landing.component.html',
@@ -116,14 +115,14 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
         }
 
         this.loadConfigs$
-        .pipe(
-            takeUntil(this.destroy$),
-        )
-        .subscribe(
-            _ => {
-                this.frequentedQuestions = R.filter((question: IQuestion) => question.oneOfMostVisited)(this.questions);
-                this.cd.markForCheck();
-        });
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                _ => {
+                    this.frequentedQuestions = R.filter((question: IQuestion) => question.oneOfMostVisited)(this.questions);
+                    this.cd.markForCheck();
+            });
 
         this.titleService.setTitle(CONSTS.TITLES.LANDING_PAGE);
         this.metaService.updateTag({

@@ -1,6 +1,3 @@
-import { HttpHeaders } from '@angular/common/http';
-
-import * as R from 'ramda';
 import { APOLLO_NAMED_OPTIONS } from 'apollo-angular';
 import {
     ApolloLink,
@@ -9,13 +6,11 @@ import {
     Observable,
     Operation,
 } from 'apollo-link';
-import { BatchHttpLink } from 'apollo-link-batch-http';
-import fetch from 'unfetch';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { onError } from 'apollo-link-error';
 
-import { AuthService } from 'src/app/services/auth.service';
+import { createHttpLink } from 'apollo-link-http';
 import { clientSchema } from 'src/common/graphql/middleware/client-schema';
+import { CmsService } from 'src/app/services/cms.service';
 import {
     CONSTS,
     OPERATIONS_IGNORE_ACCESS_DENIED_EXCEPTION,
@@ -23,32 +18,26 @@ import {
     OPERATIONS_WITHOUT_TOKEN,
 } from 'src/app/app.constants';
 import { environment } from 'src/environments/environment';
-import { processErrorScrolls } from 'src/common/utils';
-import { CmsService } from 'src/app/services/cms.service';
+
+const setTokenHeader = (operation: Operation, cmsService: CmsService): void => {
+    const Authorization = cmsService.getAuthorizationHeaders();
+    operation.setContext({
+        headers: {
+            ...(!!Authorization) && {Authorization},
+        },
+    });
+};
 
 const apolloCmsGraphQLFactory = (cmsService: CmsService) => {
     const cache = new InMemoryCache();
 
-    const setTokenHeader = (operation: Operation): void => {
-        console.log('AHOJ');
-        // const headers: HttpHeaders = authService.getAuthorizationHeaders(null);
-        // const xAPIKey = headers.get('X-API-Key');
-        // const Authorization = headers.get('Authorization');
-        // operation.setContext({
-        //     headers: {
-        //         ...(!!Authorization && !withoutToken) && {Authorization},
-        //         'X-API-Key': xAPIKey,
-        //     },
-        // });
-    };
-
-    const http = new BatchHttpLink({
-        uri: `https://squidex.lnd.bz/`,
-        fetch: fetch,
+    const http = createHttpLink({
+        uri: `https://squidex.lnd.bz/api/content/pxe-parc4u/graphql/`,
     });
 
     const auth = new ApolloLink((operation: Operation, forward: NextLink) => {
-        setTokenHeader(operation);
+        console.log('CMS');
+        setTokenHeader(operation, cmsService);
 
         return new Observable(observer => {
             let subscription, innerSubscription;
@@ -89,7 +78,7 @@ const apolloCmsGraphQLFactory = (cmsService: CmsService) => {
     const link = from([auth, http]);
 
     return {
-        cms: {
+        [CONSTS.APOLLO_CMS_KEY]: {
             cache,
             link,
             typeDefs: clientSchema,

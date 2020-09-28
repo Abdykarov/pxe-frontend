@@ -1,10 +1,6 @@
-import {
-    Component,
-    Input,
-} from '@angular/core';
+import { Component } from '@angular/core';
 
-import { config } from 'src/common/containers/news/news-container.config';
-import { INews } from 'src/common/ui/news/model/news.model';
+import { NewsService } from 'src/common/cms/services/news.service';
 
 @Component({
     selector: 'pxe-news-container',
@@ -12,6 +8,10 @@ import { INews } from 'src/common/ui/news/model/news.model';
     styleUrls: ['./news-container.component.scss'],
 })
 export class NewsContainerComponent {
-    @Input()
-    public config: INews = config;
+
+    public $news = this.newsService.getNews();
+
+    constructor(
+        private newsService: NewsService,
+    ) {}
 }

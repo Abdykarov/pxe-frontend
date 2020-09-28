@@ -9,6 +9,6 @@ import { supplyPointStatistic } from 'src/static/pages/dashboard/config';
 })
 
 export class DashboardComponent {
-    public news = newsConfig;
+    public news = newsConfig.news;
     public supplyPointStatistic: ISupplyPointStatistic = supplyPointStatistic;
 }
