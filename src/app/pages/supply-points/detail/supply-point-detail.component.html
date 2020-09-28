@@ -30,6 +30,7 @@
             class="row no-gutters mb-3">
             <div class="col-12">
                 <pxe-verification-form
+                    customSubmitButtonClass="mb-5 w-100"
                     [fieldError]="fieldError"
                     [formLoading]="formLoading"
                     [contract]="supplyPoint.contract"
@@ -57,24 +58,25 @@
             class="row no-gutters mb-3">
             <div class="col-12">
                 <pxe-verification-form
-                        [fieldError]="fieldError"
-                        [formLoading]="formLoading"
-                        [contract]="supplyPoint.contract"
-                        [globalError]="globalError"
-                        [infoTemplate]="leaveContactInfoTemplate"
-                        [phone]="supplyPoint.contract.personalData.phone"
-                        [smsSent]="smsSent"
-                        enableVerificationSubText="Podle občanského zákoníku (§ 1829) můžete odstoupit od smlouvy do 14 dní od data
-                            podpisu smlouvy. Účinky nastávají okamžikem, kdy je toto právní jednání doručeno dodavateli.
-                            Smlouva se zruší od počátku a vy nemusíte udávat žádný důvod odstoupení."
-                        enableVerificationLabel="Odstoupit od smlouvy"
-                        enableButtonType="secondary"
-                        submitLabelText="Odstoupit"
-                        [showForm]="contractAction === contractActions.LEAVE_CONTRACT"
-                        [toggleEnabledBySelf]="true"
-                        (enableVerificationAction)="leaveContract()"
-                        (submitAction)="submitVerification($event)"
-                        (customAction)="sendContractConfirmationSms()">
+                    customSubmitButtonClass="mb-5 w-100"
+                    [fieldError]="fieldError"
+                    [formLoading]="formLoading"
+                    [contract]="supplyPoint.contract"
+                    [globalError]="globalError"
+                    [infoTemplate]="leaveContactInfoTemplate"
+                    [phone]="supplyPoint.contract.personalData.phone"
+                    [smsSent]="smsSent"
+                    enableVerificationSubText="Podle občanského zákoníku (§ 1829) můžete odstoupit od smlouvy do 14 dní od data
+                        podpisu smlouvy. Účinky nastávají okamžikem, kdy je toto právní jednání doručeno dodavateli.
+                        Smlouva se zruší od počátku a vy nemusíte udávat žádný důvod odstoupení."
+                    enableVerificationLabel="Odstoupit od smlouvy"
+                    enableButtonType="secondary"
+                    submitLabelText="Odstoupit"
+                    [showForm]="contractAction === contractActions.LEAVE_CONTRACT"
+                    [toggleEnabledBySelf]="true"
+                    (enableVerificationAction)="leaveContract()"
+                    (submitAction)="submitVerification($event)"
+                    (customAction)="sendContractConfirmationSms()">
                 </pxe-verification-form>
             </div>
         </div>
@@ -82,24 +84,25 @@
             class="row no-gutters mb-3">
             <div class="col-12">
                 <pxe-verification-form
-                        [fieldError]="fieldError"
-                        [formLoading]="formLoading"
-                        [contract]="supplyPoint.contract"
-                        [phone]="supplyPoint.contract.personalData.phone"
-                        [globalError]="globalError"
-                        [infoTemplate]="terminateContactInfoTemplate"
-                        [smsSent]="smsSent"
-                        enableVerificationSubText="Energetický zákon (§ 11 a odst. 3) vám nabízí možnost smlouvu vypovědět bez jakýchkoliv sankcí
-                            do 15. dne po záhajení dodávek energií. Výpovědní doba činí 15 dnů a začíná běžet prvním dnem měsíce
-                            následujícího. Jediná částka, kterou zaplatííte, je za energii, kterou jste už stihli odebrat."
-                        enableVerificationLabel="Vypovědět smlouvu"
-                        [showForm]="contractAction === contractActions.TERMINATE_CONTRACT"
-                        [toggleEnabledBySelf]="true"
-                        enableButtonType="secondary"
-                        submitLabelText="Vypovědět"
-                        (enableVerificationAction)="terminateContract()"
-                        (submitAction)="submitVerification($event)"
-                        (customAction)="sendContractConfirmationSms()">
+                    customSubmitButtonClass="mb-5 w-100"
+                    [fieldError]="fieldError"
+                    [formLoading]="formLoading"
+                    [contract]="supplyPoint.contract"
+                    [phone]="supplyPoint.contract.personalData.phone"
+                    [globalError]="globalError"
+                    [infoTemplate]="terminateContactInfoTemplate"
+                    [smsSent]="smsSent"
+                    enableVerificationSubText="Energetický zákon (§ 11 a odst. 3) vám nabízí možnost smlouvu vypovědět bez jakýchkoliv sankcí
+                        do 15. dne po záhajení dodávek energií. Výpovědní doba činí 15 dnů a začíná běžet prvním dnem měsíce
+                        následujícího. Jediná částka, kterou zaplatííte, je za energii, kterou jste už stihli odebrat."
+                    enableVerificationLabel="Vypovědět smlouvu"
+                    [showForm]="contractAction === contractActions.TERMINATE_CONTRACT"
+                    [toggleEnabledBySelf]="true"
+                    enableButtonType="secondary"
+                    submitLabelText="Vypovědět"
+                    (enableVerificationAction)="terminateContract()"
+                    (submitAction)="submitVerification($event)"
+                    (customAction)="sendContractConfirmationSms()">
                 </pxe-verification-form>
             </div>
         </div>

@@ -32,6 +32,9 @@ export class VerificationFormComponent extends AbstractFormComponent implements 
     public contract: IContract;
 
     @Input()
+    public customSubmitButtonClass = 'w-100';
+
+    @Input()
     public infoTemplate: TemplateRef<any>;
 
     @Input()

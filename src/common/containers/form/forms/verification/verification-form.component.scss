@@ -6,11 +6,9 @@
 
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
+@import '../../../../ui/forms/field/field.component.variables.scss';
 
-.is-disabled {
-	pointer-events: none;
-	color: $gray-400 !important;
-	cursor: not-allowed;
-	opacity: 0.5;
-	text-decoration: none;
+.form-container {
+	max-width: $input-width;
+	margin: 0 auto;
 }
