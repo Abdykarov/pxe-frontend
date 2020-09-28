@@ -1,7 +1,7 @@
 <ng-template #sendSmsAgainTemplate>
     <a [class.is-disabled]="!smsSent"
         (click)="submitSms()">
-        Poslat znovu na číslo znovu {{phone}}
+        Poslat znovu na číslo {{phone}}
     </a>
 </ng-template>
 
@@ -17,7 +17,7 @@
             class="w-100 mb-1"
             customClass="p-2 w-100"
             [label]="enableVerificationLabel"
-            (click)="(toggleEnableBySelf ? enableVerificationAction.emit() : enableVerification())"
+            (click)="(toggleEnabledBySelf ? enableVerificationAction.emit() : enableVerification())"
             [type]="enableButtonType">
         </lnd-button>
         <p class="input-subtext mt-1" *ngIf="enableVerificationSubText">

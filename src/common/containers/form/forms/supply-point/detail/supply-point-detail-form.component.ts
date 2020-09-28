@@ -16,7 +16,6 @@ import {
     filter,
     takeUntil,
 } from 'rxjs/operators';
-import { IDocumentType, IResponseDataDocument } from 'src/app/services/model/document.model';
 
 import { AbstractSupplyPointFormComponent } from 'src/common/containers/form/forms/supply-point/abstract-supply-point-form.component';
 import {
@@ -45,10 +44,17 @@ import {
 import { DocumentService } from 'src/app/services/document.service';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
+import {
+    IDocumentType,
+    IResponseDataDocument,
+} from 'src/app/services/model/document.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
+import {
+    parseRestAPIErrors,
+    transformCodeList,
+} from 'src/common/utils';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { parseRestAPIErrors, transformCodeList } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-supply-point-detail-form',

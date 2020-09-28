@@ -25,7 +25,8 @@ import {
     ISupplyPoint,
     ISupplyPointFormData,
     ISupplyPointGasAttributes,
-    ISupplyPointPowerAttributes, ProgressStatus,
+    ISupplyPointPowerAttributes,
+    ProgressStatus,
     SubjectType, TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import { ContractActions } from '../models/supply-point-detail.model';
@@ -39,7 +40,7 @@ import {
     IResponseDataDocument,
 } from 'src/app/services/model/document.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import { NavigateRequestService } from '../../../services/navigate-request.service';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import {
     parseGraphQLErrors,
     parseRestAPIErrors,
@@ -48,7 +49,8 @@ import {
 import {
     CONSTS,
     RequestsOverviewBannerShow,
-    ROUTES, TIME_TO_CONTRACT_END_PERIOD_MAP,
+    ROUTES,
+    TIME_TO_CONTRACT_END_PERIOD_MAP,
 } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
@@ -311,7 +313,6 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
     // }
 
     public interruptAutomaticProlongation = () => {
-        console.log('volam se ');
         this.contractAction = ContractActions.UNSET_PROLONGATION;
         this.smsSent = null;
         this.fieldError = {};
