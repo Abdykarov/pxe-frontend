@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { ApolloCmsService } from './apollo-cms.service';
 import { getNewsQuery } from 'src/common/cms/queries/news';
-import { sortByDate } from 'src/common/utils';
+import { compareDates } from 'src/common/utils';
 
 @Injectable({
     providedIn: 'root',
@@ -21,7 +21,7 @@ export class NewsService {
             query: getNewsQuery,
         })
         .pipe(
-            map(({news}) => R.sort((first, second) => sortByDate(first.date, second.date, false))(news)),
+            map(({news}) => R.sort((first, second) => compareDates(first.date, second.date, false))(news)),
         )
 
 }

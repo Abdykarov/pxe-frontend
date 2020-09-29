@@ -7,25 +7,26 @@ import { WatchQueryOptions } from 'apollo-angular/types';
 
 import { CONSTS } from 'src/app/app.constants';
 
+const getOperationName = R.pipe(
+    R.path(['query', 'definitions']),
+    R.head,
+    R.path(['name', 'value']),
+);
+
+const getFirstData = R.pathOr({}, [0, 'data']);
+
+const mapIvToValue = R.map(R.prop('iv'));
+
+const mapResponseToData = R.pipe(
+    getFirstData,
+    mapIvToValue,
+);
+
+
 @Injectable({
     providedIn: 'root',
 })
 export class ApolloCmsService {
-
-    private getOperationName = R.pipe(
-        R.path(['query', 'definitions']),
-        R.head,
-        R.path(['name', 'value']),
-    );
-
-    private getFirstData = R.pathOr({}, [0, 'data']);
-
-    private mapIvToValue = R.map(R.prop('iv'));
-
-    private mapResponseToData = R.pipe(
-        this.getFirstData,
-        this.mapIvToValue,
-    );
 
     constructor(
         private apollo: Apollo,
@@ -36,7 +37,7 @@ export class ApolloCmsService {
             .watchQuery(options)
             .valueChanges
             .pipe(
-                map(({data}) =>  data[this.getOperationName(options)]),
-                map(this.mapResponseToData),
+                map(({data}) =>  data[getOperationName(options)]),
+                map(mapResponseToData),
             )
 }
