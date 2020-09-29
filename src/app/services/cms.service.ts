@@ -16,6 +16,7 @@ import {
     ICmsJwtPayload,
     IRefreshTokenJwtResponse,
 } from './model/cms.model';
+import { addMillisecondsToDate } from '../../common/utils';
 
 @Injectable({
     providedIn: 'root',
@@ -35,11 +36,11 @@ export class CmsService {
 
         this.refreshTokenInterval$.pipe(
             filter(_ => {
-                if (this.tokenJwtResponse) {
-                    return false;
+                if (!this.tokenJwtResponse) {
+                    return true;
                 }
 
-                return moment() < moment(this.cmsPayload.exp).add(-CONSTS.CMS.DAYS_FOR_REFRESH, 'days');
+                return moment() > moment(addMillisecondsToDate(this.cmsPayload.exp)).add(-CONSTS.CMS.DAYS_FOR_REFRESH, 'days');
             }),
             switchMap(this.getNewToken),
         ).subscribe();
@@ -73,7 +74,7 @@ export class CmsService {
     private manageJwtToken = (cmsPayload: IRefreshTokenJwtResponse) => {
         this.tokenJwtResponse = cmsPayload;
         const jwtHelper = new JwtHelperService();
-        this.cmsPayload = jwtHelper.decodeToken(this.tokenJwtResponse.access_token);
+        this.cmsPayload = jwtHelper.decodeToken(this.tokenJwtResponse && this.tokenJwtResponse.access_token);
     }
 
     public getAuthorizationHeaders = () => `${this.tokenJwtResponse.token_type} ${this.tokenJwtResponse.access_token}`;

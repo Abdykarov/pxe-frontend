@@ -13,9 +13,6 @@ import { clientSchema } from 'src/common/graphql/middleware/client-schema';
 import { CmsService } from 'src/app/services/cms.service';
 import {
     CONSTS,
-    OPERATIONS_IGNORE_ACCESS_DENIED_EXCEPTION,
-    OPERATIONS_WITHOUT_SCROLL_ON_ERRORS,
-    OPERATIONS_WITHOUT_TOKEN,
 } from 'src/app/app.constants';
 import { environment } from 'src/environments/environment';
 
@@ -39,31 +36,30 @@ const apolloCmsGraphQLFactory = (cmsService: CmsService) => {
         setTokenHeader(operation, cmsService);
 
         return new Observable(observer => {
-            let subscription;
+            let subscription, innerSubscription;
             try {
                 subscription = forward(operation).subscribe({
-                    next: (result: any) => {
-                        observer.next(result);
-                    },
+                    next: result => observer.next(result),
                     complete: observer.complete.bind(observer),
                     error: networkError => {
-                        // if (networkError.status === 401 || networkError.statusCode === 401) {
-                        //     authService.refreshToken()
-                        //         .subscribe(
-                        //             () => {
-                        //                 setTokenHeader(operation);
-                        //                 innerSubscription = forward(operation).subscribe(observer);
-                        //             },
-                        //             () => {});
-                        // } else {
-                            observer.error(networkError);
-                        // }
+                        if (networkError.status === 401 || networkError.statusCode === 401) {
+                            cmsService.getNewToken()
+                                .subscribe(
+                                    () => {
+                                        setTokenHeader(operation, cmsService);
+                                        innerSubscription = forward(operation).subscribe(observer);
+                                    },
+                                );
+                        }
                     },
                 });
             } catch (e) {
                 observer.error(e);
             }
             return () => {
+                if (innerSubscription) {
+                    innerSubscription.unsubscribe();
+                }
                 if (subscription) {
                     subscription.unsubscribe();
                 }

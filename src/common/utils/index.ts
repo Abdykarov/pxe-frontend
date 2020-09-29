@@ -1,3 +1,4 @@
+export * from './add-milliseconds-to-date.fnc';
 export * from './compare-dates.fnc';
 export * from './convert-array-to-object.fnc';
 export * from './convert-date-to-send-format.fnc';
