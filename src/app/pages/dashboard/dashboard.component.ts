@@ -16,8 +16,8 @@ import {
     ISupplyPointStatistic,
     ISupplyPointStatisticView,
 } from 'src/common/graphql/models/supply.model';
-import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { NewsService } from 'src/common/cms/services/news.service';
+import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
@@ -30,8 +30,9 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
 export class DashboardComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
     public loadingData = true;
-    public $news = this.newsService.getNews();
     public supplyPointStatistic: ISupplyPointStatistic;
+
+    public $news = this.newsService.getNews();
 
     constructor(
         private cd: ChangeDetectorRef,
