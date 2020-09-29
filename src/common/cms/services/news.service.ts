@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import * as R from 'ramda';
 import { map } from 'rxjs/operators';
 
-import { ApolloCmsService } from './apollo-cms.service';
+import { ApolloCmsService } from '../../../app/services/apollo-cms.service';
 import { getNewsQuery } from 'src/common/cms/queries/news';
 import { compareDates } from 'src/common/utils';
 

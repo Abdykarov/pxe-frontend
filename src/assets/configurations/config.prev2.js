@@ -10,7 +10,7 @@ window.angularDevstack = {
         "url": "https://pxeparc-preview2.lnd.bz",
         "url_graphql": "https://pxeparc-preview2.lnd.bz/graphql",
         "url_api": "https://pxeparc-preview2.lnd.bz/api",
-        "url_cms": "https://squidex.lnd.bz",
+        "url_cms": "http://pxeparc-preview2.lnd.bz/squidex",
         "web_api_key": "preview-api-key",
         "x_api_key": "6DBE159EAAB67C2AFD31DED689608711",
         "includeTestData": true

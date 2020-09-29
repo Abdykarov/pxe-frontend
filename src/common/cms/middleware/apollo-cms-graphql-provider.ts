@@ -29,7 +29,7 @@ const apolloCmsGraphQLFactory = (cmsService: CmsService) => {
     const cache = new InMemoryCache();
 
     const http = createHttpLink({
-        uri: `https://squidex.lnd.bz/api/content/pxe-parc4u/graphql/`,
+        uri: `${environment.url_cms}/`,
     });
 
     const auth = new ApolloLink((operation: Operation, forward: NextLink) => {

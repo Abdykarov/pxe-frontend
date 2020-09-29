@@ -22,7 +22,6 @@ const mapResponseToData = R.pipe(
     mapIvToValue,
 );
 
-
 @Injectable({
     providedIn: 'root',
 })

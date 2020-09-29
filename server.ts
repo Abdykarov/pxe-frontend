@@ -57,6 +57,21 @@ server.get('/graphql', (req, res) => {
     res.status(404).send('data requests are not supported');
 });
 
+server.post('*', (req, res, next) => {
+    console.log('identity-server____33');
+    return next();
+});
+
+server.post('https://squidex.lnd.bz/identity-server/connect/token', (req, res, next) => {
+    console.log('identity-server');
+    return next();
+});
+
+server.post('http://squidex.lnd.bz/identity-server/connect/token', (req, res, next) => {
+    console.log('identity-server2');
+    return next();
+});
+
 const getTagUrl = (question, taqConfig) => {
     const foundTaq = taqConfig.find(taq => taq.type === question.tag);
     return foundTaq.url;

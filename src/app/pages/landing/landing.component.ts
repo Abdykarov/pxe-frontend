@@ -52,6 +52,7 @@ import { RegistrationService } from 'src/common/graphql/services/registration.se
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
+import { LandingPageService } from '../../../common/cms/services/landing-page.service';
 
 @Component({
     templateUrl: './landing.component.html',
@@ -90,6 +91,8 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
             debounceTime(200),
         );
 
+    public title = '';
+
     constructor(
         private apollo: Apollo,
         public authService: AuthService,
@@ -97,6 +100,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
         public faqService: FaqService,
         private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
+        private landingPageService: LandingPageService,
         public route: ActivatedRoute,
         public router: Router,
         private registrationService: RegistrationService,
@@ -106,6 +110,13 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super(faqService, route);
+
+        landingPageService.getHowItWords().subscribe(_ => {
+            console.log('getHowItWords');
+            console.log(_);
+            this.title = _.title;
+        });
+
         if (isPlatformBrowser) {
             this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
         }
