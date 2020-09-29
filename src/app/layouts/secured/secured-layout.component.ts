@@ -31,6 +31,7 @@ import {
     CONSTS,
     SEO,
 } from 'src/app/app.constants';
+import { CmsInitService } from 'src/app/services/cms-init.service';
 import { CookiesService } from 'src/app/services/cookies.service';
 import {
     INavigationConfig,
@@ -63,6 +64,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
         protected apollo: Apollo,
         public authService: AuthService,
         private cd: ChangeDetectorRef,
+        private cmsInitService: CmsInitService,
         protected cookieService: CookiesService,
         private metaService: Meta,
         private modalsService: ModalService,
@@ -97,6 +99,8 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
             name: 'keywords',
             content: SEO.META_KEYWORDS.LANDING_PAGE.toString(),
         });
+
+        this.cmsInitService.securedInit();
 
         this.navigationService.getNavigationConfig();
 
