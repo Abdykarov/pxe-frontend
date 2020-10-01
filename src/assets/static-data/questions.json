@@ -130,7 +130,7 @@
         "url":"price",
         "header":"Co vaše služby stojí?",
         "seoKeywords": "spotřebitele, energií, zdarma, PARC4U, ceníku, transparentní, zvýhodňován",
-        "shortContent":"<p class='mb-0'>Pro vás, jako spotřebitele energií, je využívání PARC4U zcela zdarma.  Za obchodování přes PARC4U platí dodavatelé dle platného ceníku, který je pro všechny stejný a transparentní. Žádný z dodavatelů není nijak zvýhodňován.</p>"
+        "shortContent":"<p class='mb-1'>Pro vás, jako odběratele energií, je využívání PARC4U zcela zdarma <sup>*</sup>. Za obchodování přes PARC4U platí dodavatelé dle platného ceníku, který je pro všechny stejný a transparentní. Žádný z dodavatelů není nijak zvýhodňován.</p><p class='mb-0 small'><sup>*</sup> Pro ověření vaší identity je potřeba zaslat 1kč před uzavřením první smlouvy.</p>"
     },
     {
         "id":17,
