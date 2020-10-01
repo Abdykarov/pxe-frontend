@@ -19,6 +19,7 @@
     "preview": "yarn build:preview",
     "start": "ng serve",
     "start:app": "yarn start --proxy-config proxy-dev.conf.json",
+    "start:preview": "yarn start --proxy-config proxy-prev.conf.json",
     "start:static": "yarn start static",
     "start:500": "yarn start app-500",
     "start:mock": "yarn start -c mock --proxy-config proxy-mock.conf.json",

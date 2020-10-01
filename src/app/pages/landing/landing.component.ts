@@ -3,11 +3,11 @@ import {
     Router,
 } from '@angular/router';
 import {
-    AfterViewInit,
     ChangeDetectorRef,
     Component,
     ElementRef,
     Inject,
+    OnInit,
     PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
@@ -46,6 +46,7 @@ import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import { IQuestion } from 'src/app/services/model/faq.model';
 import {
     parseGraphQLErrors,
+    playVideo,
     scrollToElementFnc,
 } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
@@ -56,11 +57,9 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 @Component({
     templateUrl: './landing.component.html',
 })
-export class LandingComponent extends AbstractFaqComponent implements AfterViewInit {
-    @ViewChild('video')
-    public video: ElementRef;
-
-    public isVideoPlaying = false;
+export class LandingComponent extends AbstractFaqComponent implements OnInit {
+    @ViewChild('video', { static: true })
+    public _video: ElementRef;
 
     @ViewChild('subscription', { static: false })
     public subscriptionElement: ElementRef;
@@ -93,7 +92,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     constructor(
         private apollo: Apollo,
         public authService: AuthService,
-        private cd: ChangeDetectorRef,
+        public cd: ChangeDetectorRef,
         public faqService: FaqService,
         private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
@@ -157,37 +156,39 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
             });
     }
 
-    public toggleVideo = (event = null) => {
-        if (event) {
-            event.preventDefault();
-        }
-
-        const video: HTMLMediaElement = this.video.nativeElement;
-        if (!this.isVideoPlaying) {
-            const playPromise = video && video.play();
-            if (!R.isNil(playPromise)) {
-                this.isVideoPlaying = true;
-                playPromise
-                    .then(_ => ({}))
-                    .catch(_ => {
-                        video.muted = true;
-                        video.play();
-                    });
-            } else {
-                this.isVideoPlaying = true;
-            }
-        } else {
-            video.pause();
-            this.isVideoPlaying = false;
-        }
+    ngOnInit() {
+        super.ngOnInit();
+        this.video.muted = true;
     }
 
     public videoIsTouch = () => {
         if (this.isMoreThanMdResolution) {
-            this.toggleVideo();
-            this.isVideoPlaying = true;
-            this.cd.detectChanges();
+            this.play();
         }
+    }
+
+    public play = (event = null) => {
+        if (event) {
+            event.preventDefault();
+        }
+
+        playVideo(this.video);
+    }
+
+    public pause =  (event = null) => {
+        if (event) {
+            event.preventDefault();
+        }
+
+        this.video.pause();
+    }
+
+    get isVideoPlaying(): boolean {
+        return this._video && !this.video.paused;
+    }
+
+    get video(): HTMLMediaElement {
+        return this._video && this._video.nativeElement;
     }
 
     public submitForm = (values) => {
