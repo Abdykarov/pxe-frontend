@@ -157,3 +157,14 @@
 		}
 	}
 }
+
+.modal-video {
+	.modal-header,
+	.modal-body {
+		padding: 0;
+	}
+
+	.modal-body {
+		display: inline-flex;
+	}
+}
