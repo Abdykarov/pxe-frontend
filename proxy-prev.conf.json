@@ -1,0 +1,14 @@
+{
+    "/api": {
+        "target": "https://pxeparc-preview.lnd.bz",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    },
+    "/graphql": {
+        "target": "https://pxeparc-preview.lnd.bz",
+        "logLevel": "debug",
+        "secure": false,
+        "changeOrigin": true
+    }
+}
