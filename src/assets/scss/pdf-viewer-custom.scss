@@ -1,0 +1,30 @@
+/*
+ -  Pdf viewer custom
+ -
+ -
+ */
+
+
+// Core component import
+@import 'src/assets/scss/01_base/base';
+
+body {
+	background-color: $white;
+	background-image: none;
+}
+
+.toolbar {
+	display: none;
+}
+
+.pdfViewer {
+	.page {
+		border: none;
+		border-image: none;
+		background-color: transparent;
+	}
+}
+
+#viewerContainer {
+	top: 0;
+}

@@ -43,6 +43,7 @@
                 [class.table__tr--bg-white]="whiteBackgroundPropertyCondition && row[whiteBackgroundPropertyCondition]"
                 [class.table__tr--bg-danger]="dangerBackgroundPropertyCondition && row[dangerBackgroundPropertyCondition]"
                 [class.table__tr--main]="isAdvanced"
+                [class.table__tr--without-border]="withoutBorder"
                 [class.table__tr--active]="isAdvanced && openedRow === row"
                 (click)="!actionColTriggersDetail && openRow(row); !actionColTriggersDetail && selectRow(row)"
             >
