@@ -7,7 +7,8 @@ import {
     Output,
     ViewChild,
 } from '@angular/core';
-import { playVideo } from '../../../../utils';
+
+import { playVideo } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-lp-video-modal',
