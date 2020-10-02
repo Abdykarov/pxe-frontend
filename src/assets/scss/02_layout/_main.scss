@@ -170,7 +170,6 @@
 		@include media-breakpoint-up(md) {
 			margin: 0 ( -$spacer * 1.25 );
 		}
-		
 
 		&__item {
 			display: inline-flex;
@@ -193,10 +192,6 @@
 				color: $font-text;
 				font-size: $perex-font-size;
 				text-transform: uppercase;
-
-				// Media queries
-				@include media-breakpoint-up(md) {
-				}
 			}
 
 			&:focus,
