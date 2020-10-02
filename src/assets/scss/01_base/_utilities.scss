@@ -226,6 +226,7 @@ $colors: (
 	light-dark:                    $light-dark,
 	light-darken:                  $light-darken,
 	body:                          $body-bg,
+	blue-dark:                     $gradient-blue-dark,
 	disabled:                      $disabled,
 	icons-primary:                 $icons-primary,
 	icons-active:                  $icons-active,
@@ -248,10 +249,11 @@ $colors: (
 	.text-color--#{$name} {
 		color: $value;
 	}
+
+	.fill--#{$name} {
+		fill: $value;
+	}
 }
-
-
-
 
 /*
  *	Gradients mixins

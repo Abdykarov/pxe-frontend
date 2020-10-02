@@ -1,0 +1,37 @@
+/*
+ -  Bar plot graph
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+.bar-plot {
+	position: relative;
+	z-index: $zindex-graphs-svg;
+
+	svg {
+		overflow: visible;
+
+		.column {
+			fill: $light;
+		}
+
+		.x text {
+			cursor: pointer;
+			color: $gray-400;
+			font-size: $font-size-base;
+		}
+
+		.label.hover {
+			color: $white;
+			fill: $white;
+		}
+
+		.hover {
+			cursor: pointer;
+			fill: $secondary-dark;
+		}
+	}
+}

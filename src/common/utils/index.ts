@@ -1,6 +1,7 @@
 export * from './convert-array-to-object.fnc';
 export * from './convert-date-to-send-format.fnc';
 export * from './create-string-from-template.fnc';
+export * from './count-indicator';
 export * from './get-progress-stepper-config.fnc';
 export * from './get-error-message.fnc';
 export * from './get-param-from-tag.fnc';
@@ -10,6 +11,7 @@ export * from './includes-both-tariffs.fnc';
 export * from './is-router-link.fnc';
 export * from './is-user-name.fnc';
 export * from './normalize-string.fnc';
+export * from './operate-nested-property.fnc';
 export * from './parse-graphql-errors.fnc';
 export * from './parse-rest-erros.fnc';
 export * from './parse-violation.fnc';

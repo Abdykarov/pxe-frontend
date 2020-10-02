@@ -396,7 +396,7 @@
             [minDate]="minDate"
             [success]="form.controls.expirationDate.valid && (form.controls.expirationDate.touched || formError.expirationDate)"
             [touched]="form.controls.expirationDate.touched || formError.expirationDate"
-            [validationMessages]="form.controls.commodityType.value === 'POWER' ? formFields.validationMessages.expirationDatePower : formFields.validationMessages.expirationDateGas"
+            [validationMessages]="form.controls.commodityType.value === 'POWER' ? formFields.validationMessages.rexpirationDatePower : formFields.validationMessages.expirationDateGas"
         >
         </lnd-datepicker>
         <pxe-field-wrapper
