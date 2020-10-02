@@ -1,9 +1,9 @@
 [
     {
-        "context": "/api/content/pxe-parc4u/graphql",
-        "target": "https://squidex.lnd.bz/",
-        "secure": true,
+        "context": "/api",
+        "target": "https://test.parc4u.cz/",
         "logLevel": "debug",
+        "secure": false,
         "changeOrigin": true
     },
     {

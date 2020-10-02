@@ -14,8 +14,11 @@ import * as R from 'ramda';
 import * as xml2js from 'xml2js';
 import { join } from 'path';
 import { readFileSync } from 'fs';
+import * as bodyParser from 'body-parser';
 
 const server = express();
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: true }));
 const PORT = process.env.PORT || 80;
 const DIST_FOLDER = join(process.cwd(), 'dist');
 const APP_FOLDER = join(DIST_FOLDER, 'app');
@@ -41,6 +44,8 @@ global['document'] = win.document;
 global['navigator'] = win.navigator;
 global['HTMLAnchorElement'] = () => null;
 
+const request = require('request');
+const mCache = require('memory-cache');
 enableProdMode();
 
 // Musi byt pod global['window'] --> jinak window undefined u file replacmentu
@@ -52,30 +57,69 @@ server.engine('html', ngExpressEngine({
 server.set('view engine', 'html');
 server.set('views', join(DIST_FOLDER, 'app'));
 
+const PAGE_M_CACHE_PREFIX = 'PAGE_';
+const SQUIDEX_M_CACHE_PREFIX = 'SQUIDEX_';
+
+const SQUIDEX_URL = 'https://squidex.lnd.bz/';
+const SQUIDEX_REFRESH_TOKEN_URL = `${SQUIDEX_URL}identity-server/connect/token`;
+const SQUIDEX_REFRESH_QUERY_URL = `${SQUIDEX_URL}api/content/pxe-parc4u/graphql`;
+
+const getMCacheKeyPage = (page) => `${PAGE_M_CACHE_PREFIX}_${page}`;
+const getMCacheKeySquidex = (operationName) => `${SQUIDEX_M_CACHE_PREFIX}_${operationName}`;
+
+const getAuthorizationFromPayload = ({token_type, access_token}) => `${token_type} ${access_token}`;
+
+const bodyRefreshToken = new URLSearchParams();
+bodyRefreshToken.append('grant_type', 'client_credentials');
+bodyRefreshToken.append('client_id', 'pxe-parc4u:default');
+bodyRefreshToken.append('client_secret', 'oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx');
+bodyRefreshToken.append('scope', 'squidex-api');
+
+const bodyQuestionsQuery = '{ operationName: \'queryQuestionContents\',\n' +
+    '  variables: {},\n' +
+    '  query:\n' +
+    '   \'query queryQuestionContents {queryQuestionContents {flatData {id,fullContent,shortContent,isTestData,oneOfMostVisited,tag {flatData {  label  type' +
+    '  url  __typename}__typename}header,url,vatNumber,__typename}__typename}}\' }';
+
+let Authorization = null;
+let questionsSource = null;
+
+const newTokenRequest = {
+    url: SQUIDEX_REFRESH_TOKEN_URL,
+    headers: {
+        responseType: 'json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: bodyRefreshToken.toString(),
+    method: 'post',
+};
+
+const queryRequest = (body) => ({
+    url: SQUIDEX_REFRESH_QUERY_URL,
+    headers: {
+        Accept: 'application/json, text/plain, */*',
+        Authorization,
+        'content-type': 'application/json',
+    },
+    body: body,
+    method: 'post',
+});
+
+const setQuestions = () => request(queryRequest(bodyQuestionsQuery), (_, __, body) => {
+    questionsSource = JSON.parse(body);
+});
+
+request(newTokenRequest, (_, __, body) => {
+    const payload = JSON.parse(body);
+    Authorization = getAuthorizationFromPayload(payload);
+    setQuestions();
+});
+
+
 // TODO: implement data requests securely
 server.get('/graphql', (req, res) => {
     res.status(404).send('data requests are not supported');
 });
-
-server.post('*', (req, res, next) => {
-    console.log('identity-server____33');
-    return next();
-});
-
-server.post('https://squidex.lnd.bz/identity-server/connect/token', (req, res, next) => {
-    console.log('identity-server');
-    return next();
-});
-
-server.post('http://squidex.lnd.bz/identity-server/connect/token', (req, res, next) => {
-    console.log('identity-server2');
-    return next();
-});
-
-const getTagUrl = (question, taqConfig) => {
-    const foundTaq = taqConfig.find(taq => taq.type === question.tag);
-    return foundTaq.url;
-};
 
 const getQuestions = (questions) => {
     if (!R.path(['angularDevstack', 'config', 'includeTestData'], window)) {
@@ -87,17 +131,15 @@ const getQuestions = (questions) => {
 // Server static files from /app
 server.get('/sitemap.xml', (req, res) => {
     const siteMapOriginal = fs.readFileSync(join(APP_FOLDER, 'sitemap.xml'), 'utf8');
-    const taqConfig = JSON.parse(fs.readFileSync(join(APP_FOLDER, 'assets/static-data/faq.json'), 'utf8'));
-    let questions = JSON.parse(fs.readFileSync(join(APP_FOLDER, 'assets/static-data/questions.json'), 'utf8'));
     const parseString = xml2js.parseString;
-    questions = getQuestions(questions);
+    const questions = questionsSource.data.queryQuestionContents;
     parseString(siteMapOriginal, (err, result) => {
         questions.forEach(question => {
             const url = R.path(['urlset', 'url' ], result);
             if (url && url.length) {
                 url.push({
                     'loc': [
-                        `${req.protocol}://${req.get('host')}/faq/${getTagUrl(question, taqConfig)}/${question.url}`,
+                        `${req.protocol}://${req.get('host')}/faq/${(question.flatData.tag[0].flatData.url)}/${question.flatData.url}`,
                     ],
                 });
             }
@@ -106,7 +148,20 @@ server.get('/sitemap.xml', (req, res) => {
         const xml = builder.buildObject(result);
         res.set('Content-Type', 'text/xml');
         return res.send(xml);
-    });
+   });
+});
+
+server.post('/squidex', ({body}, res) => {
+    const cacheKey = getMCacheKeySquidex(body.operationName);
+    const data = mCache.get(cacheKey);
+    if (!data) {
+        request(queryRequest(body), (err, requestRes, responseBody) => {
+            mCache.put(cacheKey, responseBody, 100000);
+            return res.send(responseBody);
+        });
+    } else {
+        return res.send(data);
+    }
 });
 
 // Server static files from /app
@@ -120,20 +175,29 @@ server.get('*', (req, res, next) => {
         return next();
     }
 
-    res.render('index', {
-        req: req,
-        res: res,
-        providers: [
-            {
-                provide: 'REQUEST',
-                useValue: (req),
-            },
-            {
-                provide: 'RESPONSE',
-                useValue: (res),
-            },
-        ],
-    });
+    const cacheKey = getMCacheKeyPage(req.originalUrl);
+    const cached = mCache.get(cacheKey);
+
+    if ( cached) {
+        return res.send(cached);
+    } else {
+        res.render('index', {
+            req: req,
+            res: res,
+            providers: [
+                {
+                    provide: 'REQUEST',
+                    useValue: (req),
+                },
+                {
+                    provide: 'RESPONSE',
+                    useValue: (res),
+                },
+            ],
+        }, (err, html) => {
+            mCache.put(cacheKey, html, 100000);
+        });
+    }
 });
 
 // All routes (without server side routes) are send as normal client side app

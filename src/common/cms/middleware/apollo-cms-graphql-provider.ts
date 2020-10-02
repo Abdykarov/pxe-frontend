@@ -6,15 +6,12 @@ import {
     Observable,
     Operation,
 } from 'apollo-link';
-import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
-import { clientSchema } from 'src/common/graphql/middleware/client-schema';
 import { CmsService } from 'src/app/services/cms.service';
-import {
-    CONSTS,
-} from 'src/app/app.constants';
+import { CONSTS } from 'src/app/app.constants';
 import { environment } from 'src/environments/environment';
+import { HttpLink } from 'apollo-angular-link-http';
 
 const setTokenHeader = (operation: Operation, cmsService: CmsService): void => {
     const Authorization = cmsService.getAuthorizationHeaders();
@@ -25,15 +22,21 @@ const setTokenHeader = (operation: Operation, cmsService: CmsService): void => {
     });
 };
 
-const apolloCmsGraphQLFactory = (cmsService: CmsService) => {
+const apolloCmsGraphQLFactory = (
+    cmsService: CmsService,
+    httpLink: HttpLink,
+) => {
+    const useDirectlyCMS = environment.useDirectlyCMS;
+    const uri = useDirectlyCMS  ? environment.url_cms_local : environment.url_cms;
+
     const cache = new InMemoryCache();
 
-    const http = createHttpLink({
-        uri: `${environment.url_cms}/`,
-    });
+    const http = httpLink.create({ uri});
 
     const auth = new ApolloLink((operation: Operation, forward: NextLink) => {
-        setTokenHeader(operation, cmsService);
+        if (useDirectlyCMS) {
+            setTokenHeader(operation, cmsService);
+        }
 
         return new Observable(observer => {
             let subscription, innerSubscription;
@@ -43,13 +46,8 @@ const apolloCmsGraphQLFactory = (cmsService: CmsService) => {
                     complete: observer.complete.bind(observer),
                     error: networkError => {
                         if (networkError.status === 401 || networkError.statusCode === 401) {
-                            cmsService.getNewToken()
-                                .subscribe(
-                                    () => {
-                                        setTokenHeader(operation, cmsService);
-                                        innerSubscription = forward(operation).subscribe(observer);
-                                    },
-                                );
+                            setTokenHeader(operation, cmsService);
+                            innerSubscription = forward(operation).subscribe(observer);
                         }
                     },
                 });
@@ -73,21 +71,19 @@ const apolloCmsGraphQLFactory = (cmsService: CmsService) => {
         [CONSTS.APOLLO_CMS_KEY]: {
             cache,
             link,
-            typeDefs: clientSchema,
+            // ssrMode: true,
             connectToDevTools: !environment.production,
-            defaultOptions: {
-                watchQuery: {
-                    fetchPolicy: 'cache-first',
-                },
-            },
+            // defaultOptions,
         },
     };
 };
+
 
 export const ApolloCMSGraphQLProvider = {
     provide: APOLLO_NAMED_OPTIONS,
     useFactory: apolloCmsGraphQLFactory,
     deps: [
         CmsService,
+        HttpLink,
     ],
 };

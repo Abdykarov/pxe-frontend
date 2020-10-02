@@ -20,7 +20,6 @@ import {
 
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { CmsInitService } from 'src/app/services/cms-init.service';
 import {
     CommodityTypesLowerCase,
     CONSTS,
@@ -56,7 +55,6 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
         protected apollo: Apollo,
         public authService: AuthService,
         protected cookieService: CookiesService,
-        private cmsInitService: CmsInitService,
         private cd: ChangeDetectorRef,
         protected overlayService: OverlayService,
         protected route: ActivatedRoute,
@@ -77,8 +75,6 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
             sAnalyticsService,
             scrollToService,
         );
-
-        this.cmsInitService.publicInit();
 
         this.overlayService.getOverlay()
             .pipe(

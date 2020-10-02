@@ -6,8 +6,6 @@ import {
 
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 
-import { environment } from 'src/environments/environment';
-
 const routes: Routes = [
     {
         path: 'basic',

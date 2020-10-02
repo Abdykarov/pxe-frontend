@@ -19,6 +19,7 @@ export class NewsService {
     public getNews = () => this.apolloCmsService
         .watchQuery({
             query: getNewsQuery,
+            fetchPolicy: 'network-only',
         })
         .pipe(
             map(({news}) => R.sort((first, second) => compareDates(first.date, second.date, false))(news)),

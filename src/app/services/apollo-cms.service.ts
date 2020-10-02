@@ -13,14 +13,7 @@ const getOperationName = R.pipe(
     R.path(['name', 'value']),
 );
 
-const getFirstData = R.pathOr({}, [0, 'data']);
-
-const mapIvToValue = R.map(R.prop('iv'));
-
-const mapResponseToData = R.pipe(
-    getFirstData,
-    mapIvToValue,
-);
+const getFlatData = R.pathOr({}, [0, 'flatData']);
 
 @Injectable({
     providedIn: 'root',
@@ -37,6 +30,5 @@ export class ApolloCmsService {
             .valueChanges
             .pipe(
                 map(({data}) =>  data[getOperationName(options)]),
-                map(mapResponseToData),
             )
 }

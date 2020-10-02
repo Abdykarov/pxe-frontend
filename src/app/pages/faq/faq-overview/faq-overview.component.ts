@@ -55,12 +55,15 @@ export class FaqOverviewComponent extends AbstractFaqComponent {
             .pipe(takeUntil(this.destroy$))
             .subscribe(
                 _ => {
-                    this.questions = R.filter((tag: IQuestion) => tag.tag === this.activeTag, this.questions);
-                    if (this.questions.length) {
+                     this.questions = R.filter((question: IQuestion) => {
+                         return question.tag.type === this.activeTag;
+                     }, this.questions);
+
+                     if (this.questions.length) {
                         this.cd.markForCheck();
-                    } else {
-                        this.router.navigate([CONSTS.PATHS.FAQ, this.faqConfig[0].url], {replaceUrl: true});
-                    }
+                     } else {
+                         this.router.navigate([CONSTS.PATHS.FAQ, this.faqConfig[0].url], {replaceUrl: true});
+                     }
                 });
     }
 

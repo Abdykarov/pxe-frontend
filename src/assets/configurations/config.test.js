@@ -11,6 +11,7 @@ window.angularDevstack = {
         "url_cms": "https://test.parc4u.cz/squidex",
         "web_api_key": "default-api-key",
         "x_api_key": "6DBE159EAAB67C2AFD31DED689608711",
-        "includeTestData": true
+        "includeTestData": true,
+        "useDirectlyCMS": false
     }
 };

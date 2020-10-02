@@ -7,7 +7,7 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
-    Inject,
+    Inject, OnInit,
     PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
@@ -53,11 +53,12 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 import { LandingPageService } from '../../../common/cms/services/landing-page.service';
+import { NewsService } from '../../../common/cms/services/news.service';
 
 @Component({
     templateUrl: './landing.component.html',
 })
-export class LandingComponent extends AbstractFaqComponent implements AfterViewInit {
+export class LandingComponent extends AbstractFaqComponent implements AfterViewInit, OnInit {
     @ViewChild('video')
     public video: ElementRef;
 
@@ -99,8 +100,9 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
         private cd: ChangeDetectorRef,
         public faqService: FaqService,
         private isLoggedPipe: IsLoggedPipe,
-        private metaService: Meta,
         private landingPageService: LandingPageService,
+        private metaService: Meta,
+        private newsService: NewsService,
         public route: ActivatedRoute,
         public router: Router,
         private registrationService: RegistrationService,
@@ -110,12 +112,6 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super(faqService, route);
-
-        landingPageService.getHowItWords().subscribe(_ => {
-            console.log('getHowItWords');
-            console.log(_);
-            this.title = _.title;
-        });
 
         if (isPlatformBrowser) {
             this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
@@ -127,7 +123,9 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
             )
             .subscribe(
                 _ => {
-                    this.frequentedQuestions = R.filter((question: IQuestion) => question.oneOfMostVisited)(this.questions);
+                    this.frequentedQuestions = R.filter((question: IQuestion) => {
+                        return question.oneOfMostVisited;
+                    })(this.questions);
                     this.cd.markForCheck();
             });
 
