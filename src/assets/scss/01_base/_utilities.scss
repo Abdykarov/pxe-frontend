@@ -331,3 +331,36 @@ $colors: (
 	right: auto;
 	transform: translateX(-50%);
 }
+
+.video {
+	position: relative;
+
+	&__holder {
+		position: relative;
+		margin-bottom: $spacer;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			margin-bottom: 0;
+		}
+	}
+
+	&__text {
+		pointer-events: none;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			@include absolute-center;
+			margin-top: 0;
+		}
+	}
+
+	&__control {
+		margin-bottom: $spacer;
+
+		// Media queries
+		@include media-breakpoint-down(xs) {
+			@include absolute-center;
+		}
+	}
+}
