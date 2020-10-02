@@ -54,6 +54,7 @@ import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 import { LandingPageService } from '../../../common/cms/services/landing-page.service';
 import { NewsService } from '../../../common/cms/services/news.service';
+import { ILandingPage } from '../../../common/cms/models/landing-page';
 
 @Component({
     templateUrl: './landing.component.html',
@@ -67,13 +68,13 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     @ViewChild('subscription', { static: false })
     public subscriptionElement: ElementRef;
 
-    @ViewChild('faq', { static: true })
+    @ViewChild('faq', { static: false })
     public faq: ElementRef;
 
-    @ViewChild('aboutUs', { static: true })
+    @ViewChild('aboutUs', { static: false })
     public aboutUs: ElementRef;
 
-    @ViewChild('aboutService', { static: true })
+    @ViewChild('aboutService', { static: false })
     public aboutService: ElementRef;
 
     public frequentedQuestions: IAccordionItem[] = [];
@@ -84,6 +85,8 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     public fieldError: IFieldError = {};
     public formFields: IForm;
     public routes = ROUTES;
+
+    public landingPageCmsData: ILandingPage = null;
 
     public isMoreThanMdResolution = false;
 
@@ -112,6 +115,16 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super(faqService, route);
+
+        this.landingPageService
+            .getLandingPage()
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe((landingPageCmsData: ILandingPage) => {
+                this.landingPageCmsData = landingPageCmsData;
+                this.cd.detectChanges();
+            });
 
         if (isPlatformBrowser) {
             this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;

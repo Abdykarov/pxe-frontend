@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 
+import * as R from 'ramda';
+import { map } from 'rxjs/operators';
 
-import { ApolloCmsService } from '../../../app/services/apollo-cms.service';
-import { getLandingPageQuery } from '../queries/landing-page';
+import { ApolloCmsService } from 'src/app/services/apollo-cms.service';
+import { getLandingPageQuery } from 'src/common/cms/queries/landing-page';
+import { getFlatData, propFlatData } from 'src/common/cms/utils/normalisation';
 
 @Injectable({
     providedIn: 'root',
@@ -13,9 +16,13 @@ export class LandingPageService  {
         private apolloCmsService: ApolloCmsService,
     ) {}
 
-    public getHowItWords = () => this.apolloCmsService
+    public getLandingPage = () => this.apolloCmsService
         .watchQuery({
             query: getLandingPageQuery,
         })
+        .pipe(
+            map(getFlatData),
+            map(R.map(getFlatData)),
+        )
 
 }

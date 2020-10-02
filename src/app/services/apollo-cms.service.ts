@@ -13,8 +13,6 @@ const getOperationName = R.pipe(
     R.path(['name', 'value']),
 );
 
-const getFlatData = R.pathOr({}, [0, 'flatData']);
-
 @Injectable({
     providedIn: 'root',
 })

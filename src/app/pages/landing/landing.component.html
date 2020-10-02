@@ -12,14 +12,15 @@
     Souhlasím s <a target="_blank" [href]="routes.ROUTER_TERMS_OF_USE">Obchodními podmínkami PARC4U</a> a beru na vědomí informace o <a target="_blank" [href]="routes.ROUTER_SECURING_YOUR_DATA">Ochraně osobních údajů</a>.
 </ng-template>
 
-<div class="landing-page">
+<div *ngIf="landingPageCmsData"
+    class="landing-page">
     <div class="container-fluid container-fluid--max-width container-fluid--light">
         <div class="section section--picture-bg">
             <div class="section-picture-text">
                 <div class="row px-3 px-md-0">
                     <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-1">
                         <h1 class="h1--public mb-4">
-                            Přechod k novému dodavateli energií je konečně jednoduchý
+                            {{landingPageCmsData.introduction.title}}
                         </h1>
                         <p>
                             S PARC4U získáte dlouhodobě výhodné smlouvy energií na pár kliknutí. Služba&nbsp;zajišťuje i navazující smlouvy bez starostí.
