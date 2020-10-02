@@ -12,13 +12,16 @@
         <div class="section section--picture-bg">
             <div class="section-picture-text">
                 <div class="row px-3 px-md-0">
-                    <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-1">
+                    <div class="col-12 col-md-8 offset-md-2 col-xl-8 offset-xl-1">
                         <h1 class="h1--public mb-4">
-                            Přechod k novému dodavateli energií je konečně jednoduchý
+                            Ušetřete si provždy starosti o dodávky elektřiny a zemního plynu
                         </h1>
+                    </div>
+                    <div class="col-12 col-md-8 offset-md-2 col-xl-5 offset-xl-1">
                         <p>
-                            S PARC4U získáte dlouhodobě výhodné smlouvy energií na pár kliknutí. Služba&nbsp;zajišťuje i navazující smlouvy bez starostí.
+                            PARC4U vám umožní přímo z vašeho počítače či mobilu uzavírat a&nbsp;spravovat smlouvy na dodávky energií pro vaši domácnost anebo firmu. Přenechte starosti o&nbsp;vaše účty za energie na nás. Budeme vás informovat o&nbsp;vývoji na trhu, upozorníme kdy je vhodné provést případné změny a&nbsp;připravíme pro vás nabídky od několika prověřených dodavatelů. Vše je plně transparentní jako na burze, protože my jsme burza.
                         </p>
+                        <p><small>Platforma PARC4U je provozována komoditní burzou PXE, která je vlastněna společností European Energy Exchange AG, celosvětově největší burzou pro obchodování s elektřinou, a&nbsp;Burzou cenných papírů Praha, a.s.</small></p>
                         <lnd-button
                             label="Založit účet"
                             type="primary">
@@ -97,7 +100,9 @@
                  [class.cursor-pointer]="isVideoPlaying">
                 <video
                     #video
-                    (click)="isVideoPlaying && toggleVideo($event)"
+                    (pause)="cd.detectChanges()"
+                    (play)="cd.detectChanges()"
+                    (click)="isVideoPlaying && pause($event)"
                     poster="/assets/images/landing-page/picture-fallback.jpg"
                     class="section-video"
                     loop
@@ -115,7 +120,7 @@
                         icon="icon--triangle-right"
                         variant="icon"
                         customClass="btn-video-play"
-                        (action)="toggleVideo($event)"
+                        (action)="play($event)"
                     >
                     </lnd-button>
                 </div>
@@ -134,7 +139,7 @@
                                 icon="icon--triangle-right"
                                 variant="icon"
                                 customClass="btn-video-play"
-                                (action)="toggleVideo($event)"
+                                (action)="play($event)"
                             >
                             </lnd-button>
                         </div>
