@@ -155,7 +155,7 @@ server.post('/squidex', ({body}, res) => {
     const cacheKey = getMCacheKeySquidex(body.operationName);
     const data = mCache.get(cacheKey);
     if (!data) {
-        request(queryRequest(body), (err, requestRes, responseBody) => {
+        request(queryRequest(JSON.stringify(body)), (err, requestRes, responseBody) => {
             mCache.put(cacheKey, responseBody, 100000);
             return res.send(responseBody);
         });

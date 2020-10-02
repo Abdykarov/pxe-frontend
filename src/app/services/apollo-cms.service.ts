@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { WatchQueryOptions } from 'apollo-angular/types';
 
 import { CONSTS } from 'src/app/app.constants';
+import { QueryOptions } from 'apollo-client';
 
 const getOperationName = R.pipe(
     R.path(['query', 'definitions']),
@@ -29,4 +30,12 @@ export class ApolloCmsService {
             .pipe(
                 map(({data}) =>  data[getOperationName(options)]),
             )
+
+    public fetchQuery = (options: QueryOptions<any>): any =>
+        this.apollo.use(CONSTS.APOLLO_CMS_KEY)
+            .query(options)
+            .pipe(
+                map(({data}) =>  data[getOperationName(options)]),
+            )
+
 }

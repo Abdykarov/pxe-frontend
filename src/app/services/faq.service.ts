@@ -28,8 +28,6 @@ export class FaqService {
         const question$ = this.faqServiceCms.getQuestions()
             .pipe(
                 map((questions: IQuestion[]) => {
-                    console.log('questions');
-                    console.log(questions);
                     const data  = R.map( (question: IQuestion) => {
                         question.absoluteUrl = ['/', CONSTS.PATHS.FAQ, question.tag.url, question.url];
                         return question;

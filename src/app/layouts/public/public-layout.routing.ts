@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { CONSTS } from 'src/app/app.constants';
+import { LandingPageResolver } from 'src/app/resolvers/landing-page.resolver';
 import {
     LoginType,
     SignType,
@@ -16,6 +17,9 @@ const routes = [
             {
                 path: CONSTS.PATHS.EMPTY,
                 loadChildren: () => import('../../pages/landing/landing.module').then(m => m.LandingModule),
+                resolve: {
+                    landingPageCms: LandingPageResolver,
+                },
                 data: {
                     isPublic: true,
                     isSimpleFooter: true,

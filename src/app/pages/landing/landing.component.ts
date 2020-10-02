@@ -6,8 +6,7 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
-    Inject,
-    OnInit,
+    Inject, OnInit,
     PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
@@ -53,7 +52,6 @@ import { RegistrationService } from 'src/common/graphql/services/registration.se
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
-import { LandingPageService } from '../../../common/cms/services/landing-page.service';
 import { NewsService } from '../../../common/cms/services/news.service';
 import { ILandingPage } from '../../../common/cms/models/landing-page';
 
@@ -67,13 +65,13 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     @ViewChild('subscription', { static: false })
     public subscriptionElement: ElementRef;
 
-    @ViewChild('faq', { static: false })
+    @ViewChild('faq', { static: true })
     public faq: ElementRef;
 
-    @ViewChild('aboutUs', { static: false })
+    @ViewChild('aboutUs', { static: true })
     public aboutUs: ElementRef;
 
-    @ViewChild('aboutService', { static: false })
+    @ViewChild('aboutService', { static: true })
     public aboutService: ElementRef;
 
     public frequentedQuestions: IAccordionItem[] = [];
@@ -100,7 +98,6 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
         public cd: ChangeDetectorRef,
         public faqService: FaqService,
         private isLoggedPipe: IsLoggedPipe,
-        private landingPageService: LandingPageService,
         private metaService: Meta,
         private newsService: NewsService,
         public route: ActivatedRoute,
@@ -113,15 +110,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     ) {
         super(faqService, route);
 
-        this.landingPageService
-            .getLandingPage()
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe((landingPageCmsData: ILandingPage) => {
-                this.landingPageCmsData = landingPageCmsData;
-                this.cd.detectChanges();
-            });
+        this.landingPageCmsData = this.route.snapshot.data.landingPageCms;
 
         if (isPlatformBrowser) {
             this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;

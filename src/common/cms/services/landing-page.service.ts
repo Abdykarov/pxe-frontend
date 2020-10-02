@@ -17,7 +17,7 @@ export class LandingPageService  {
     ) {}
 
     public getLandingPage = () => this.apolloCmsService
-        .watchQuery({
+        .fetchQuery({
             query: getLandingPageQuery,
         })
         .pipe(

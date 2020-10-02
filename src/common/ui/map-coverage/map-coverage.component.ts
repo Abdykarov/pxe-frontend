@@ -4,6 +4,7 @@ import {
     TemplateRef,
 } from '@angular/core';
 
+import { IMapCoverage } from 'src/common/cms/models/landing-page';
 import { SupplierComponent } from '../supplier/supplier.component';
 
 @Component({
@@ -15,5 +16,8 @@ export class MapCoverageComponent {
 
     @Input()
     public supplierTemplate: TemplateRef<SupplierComponent>;
+
+    @Input()
+    public mapCoverage: IMapCoverage;
 
 }
