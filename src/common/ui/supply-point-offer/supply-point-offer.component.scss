@@ -150,23 +150,6 @@
 				margin-bottom: 0;
 			}
 		}
-
-		&--price-decomposition {
-			&::before {
-				content: '';
-				position: absolute;
-				top: 0;
-				left: $supply-point-offer-inner-padding-horizontal-mobil;
-				width: calc( 100% - ( #{$supply-point-offer-inner-padding-horizontal-mobil} * 2 ) );
-				height: 1px;
-				background-color: $border-color;
-
-				// Media queries
-				@include media-breakpoint-up(md) {
-					display: none;
-				}
-			}
-		}
 	}
 
 	&__block {
