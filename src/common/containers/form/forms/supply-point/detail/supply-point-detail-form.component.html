@@ -219,27 +219,27 @@
                         <div class="mb-1">
                             <small>Dodavatel</small>
                         </div>
-                        <span class="perex">{{supplyPoint.contract.offer.supplier.name}}</span>
+                        <span class="perex">{{supplyPoint.contract?.offer?.supplier?.name}}</span>
                     </div>
                     <div class="col-12 mb-5">
                         <div class="mb-1">
                             <small>Území</small>
                         </div>
-                        <span class="perex">{{supplyPoint.address.city}}</span>
+                        <span class="perex">{{supplyPoint.address?.city}}</span>
                     </div>
                     <div *ngIf="supplyPoint.commodityType === commodityType.POWER"
                          class="col-12 mb-5">
                         <div class="mb-1">
                             <small>Distribuční sazba</small>
                         </div>
-                        <span class="perex">{{supplyPoint.distributionRate.help || supplyPoint.distributionRate.description}}</span>
+                        <span class="perex">{{supplyPoint.distributionRate?.help || supplyPoint.distributionRate?.description}}</span>
                     </div>
                     <div *ngIf="supplyPoint.commodityType === commodityType.POWER"
                          class="col-12 mb-5">
                         <div class="mb-1">
                             <small>Jistič – fáze</small>
                         </div>
-                        <span class="perex">{{supplyPoint.phases.help || supplyPoint.phases.description}}</span>
+                        <span class="perex">{{supplyPoint.phases?.help || supplyPoint.phases?.description}}</span>
                     </div>
                     <div *ngIf="supplyPoint.commodityType === commodityType.POWER"
                          class="col-12 mb-5">
@@ -249,12 +249,12 @@
                         <span class="perex">{{supplyPoint.circuitBreaker.help || supplyPoint.circuitBreaker.description}}</span>
                     </div>
                     <div *ngIf="(supplyPoint | pathValue:['contract', 'deliveryTo'])"
-                         [class.mb-5]="supplyPoint.contract.deliveryTo"
+                         [class.mb-5]="supplyPoint.contract?.deliveryTo"
                          class="col-12">
                         <div class="mb-1">
                             <small>Dodávka do</small>
                         </div>
-                        <span class="perex">{{supplyPoint.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}} - {{contractEndTypeTranslateMap[
+                        <span class="perex">{{supplyPoint.contract?.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}} - {{contractEndTypeTranslateMap[
                             supplyPoint?.contract?.prolong ?
                                 supplyPointContractEndTypes.CONTRACT_END_TERM_WITH_PROLONGATION :
                                 supplyPointContractEndTypes.CONTRACT_END_TERM
@@ -267,16 +267,16 @@
                         </div>
                         <span class="perex">{{timeToContractEnd}} {{timeToContractEnd | plural: timeToContractEndPeriodMap[timeToContractEndPeriod]}}</span>
                     </div>
-                    <div *ngIf="supplyPoint.contract.isNextContractConcluded && supplyPoint.contract?.nextContractId != supplyPoint.contract.contractId"
+                    <div *ngIf="supplyPoint.contract?.isNextContractConcluded && supplyPoint.contract?.nextContractId != supplyPoint.contract?.contractId"
                          class="col-12">
                         <div class="mb-1">
                             <small>Tato smlouva bude nahrazena <a [routerLink]="['/', CONSTS.PATHS.SECURED, CONSTS.PATHS.SUPPLY_POINTS, supplyPoint.id, supplyPoint.contract.nextContractId]">smlouvou budoucí</a>.</small>
                         </div>
                     </div>
-                    <div *ngIf="!(supplyPoint.contract.isNextContractConcluded) && supplyPoint.contract.nextContractId && supplyPoint.contract?.nextContractId != supplyPoint.id"
+                    <div *ngIf="!(supplyPoint.contract?.isNextContractConcluded) && supplyPoint.contract?.nextContractId && supplyPoint.contract?.nextContractId != supplyPoint.id"
                          class="col-12">
                         <div class="mb-1">
-                            <small>Tato smlouva má rozpracovanou <a (click)="navigateToUnsignedSupplyPoint(supplyPoint.id, supplyPoint.contract.nextContractId)">navazující smlouvu</a>.</small>
+                            <small>Tato smlouva má rozpracovanou <a (click)="navigateToUnsignedSupplyPoint(supplyPoint.id, supplyPoint.contract?.nextContractId)">navazující smlouvu</a>.</small>
                         </div>
                     </div>
                 </div>
