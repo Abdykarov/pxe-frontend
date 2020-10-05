@@ -170,11 +170,6 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
                     return moment().isBetween(moment(dateFrom), moment(dateTo));
                 },
             ),
-            (aaa) => {
-                console.log('ASDASD');
-                console.log(aaa);
-                return aaa;
-            },
             R.head,
         ) (this.pdfSettings);
     }
