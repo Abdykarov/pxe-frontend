@@ -113,8 +113,11 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
                 const pdfCurrentSetting = this.pdfActiveContracts[this.subjectType][this.commodityType];
                 this.pxePdfViewer.pdfSrc = pdfCurrentSetting.sourceUrl;
                 this.pxePdfViewer.downloadFileName = pdfCurrentSetting.downloadName;
-                this.pxePdfViewer.refresh();
-                this.cd.markForCheck();
+
+                setTimeout(_ => {
+                    this.pxePdfViewer.refresh();
+                    this.cd.markForCheck();
+                });
             });
     }
 
