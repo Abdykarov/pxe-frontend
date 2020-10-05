@@ -7,6 +7,6 @@ export const lpVideoModalConfig = (): IShowModal => ({
     component: LpVideoModalComponent,
     modalType: CONSTS.MODAL_TYPE.LP_VIDEO,
     instanceData: {
-        size: IModalSize.VIDEO,
+        size: IModalSize.LG,
     },
 });
