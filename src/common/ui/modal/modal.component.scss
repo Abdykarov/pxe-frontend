@@ -118,6 +118,10 @@
 	&-sm {
 		max-width: $modal-sm;
 	}
+
+	&-video-size {
+		max-width: $modal-video-size;
+	}
 }
 
 .modal-confirm {

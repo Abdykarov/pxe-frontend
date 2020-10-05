@@ -3,4 +3,5 @@ export enum IModalSize {
     XL = 'xl',
     MD = 'md',
     SM = 'sm',
+    VIDEO = 'video-size',
 }

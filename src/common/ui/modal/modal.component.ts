@@ -35,9 +35,6 @@ export class ModalComponent {
     @Input()
     public isConfirm = false;
 
-    @Input()
-    public withHeader = true;
-
     @Output()
     public close: EventEmitter<any> = new EventEmitter<any>();
 
