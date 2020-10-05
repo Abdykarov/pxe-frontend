@@ -30,7 +30,8 @@ export class ApiInterceptor implements HttpInterceptor {
         request: HttpRequest<any>,
         next: HttpHandler,
     ): Observable<HttpEvent<any>> {
-        if (request.url.indexOf('squidex') >= -1) {
+
+        if (request.url.indexOf('squidex') !== -1) {
             return next.handle(request);
         }
 

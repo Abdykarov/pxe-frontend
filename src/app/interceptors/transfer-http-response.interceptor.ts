@@ -78,5 +78,6 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
                 }));
             }
         }
+        return next.handle(req);
     }
 }

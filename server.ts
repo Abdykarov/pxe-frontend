@@ -46,6 +46,8 @@ global['HTMLAnchorElement'] = () => null;
 
 const request = require('request');
 const mCache = require('memory-cache');
+const CronJob = require('cron').CronJob;
+
 enableProdMode();
 
 // Musi byt pod global['window'] --> jinak window undefined u file replacmentu
@@ -109,12 +111,15 @@ const setQuestions = () => request(queryRequest(bodyQuestionsQuery), (_, __, bod
     questionsSource = JSON.parse(body);
 });
 
-request(newTokenRequest, (_, __, body) => {
-    const payload = JSON.parse(body);
-    Authorization = getAuthorizationFromPayload(payload);
-    setQuestions();
-});
+const resetAppState = () => {
+    request(newTokenRequest, (_, __, body) => {
+        const payload = JSON.parse(body);
+        Authorization = getAuthorizationFromPayload(payload);
+        setQuestions();
+    });
 
+    mCache.clear();
+};
 
 // TODO: implement data requests securely
 server.get('/graphql', (req, res) => {
@@ -123,7 +128,12 @@ server.get('/graphql', (req, res) => {
 
 const getQuestions = (questions) => {
     if (!R.path(['angularDevstack', 'config', 'includeTestData'], window)) {
-        return R.reject(R.propEq('isTestData')(true))(questions);
+        return R.reject(
+            R.pipe(
+                R.prop('flatData'),
+                R.propEq('isTestData')(true),
+            ),
+        )(questions);
     }
     return questions;
 };
@@ -132,7 +142,7 @@ const getQuestions = (questions) => {
 server.get('/sitemap.xml', (req, res) => {
     const siteMapOriginal = fs.readFileSync(join(APP_FOLDER, 'sitemap.xml'), 'utf8');
     const parseString = xml2js.parseString;
-    const questions = questionsSource.data.queryQuestionContents;
+    const questions = getQuestions(questionsSource.data.queryQuestionContents);
     parseString(siteMapOriginal, (err, result) => {
         questions.forEach(question => {
             const url = R.path(['urlset', 'url' ], result);
@@ -156,7 +166,7 @@ server.post('/squidex', ({body}, res) => {
     const data = mCache.get(cacheKey);
     if (!data) {
         request(queryRequest(JSON.stringify(body)), (err, requestRes, responseBody) => {
-            mCache.put(cacheKey, responseBody, 100000);
+            mCache.put(cacheKey, responseBody);
             return res.send(responseBody);
         });
     } else {
@@ -195,7 +205,8 @@ server.get('*', (req, res, next) => {
                 },
             ],
         }, (err, html) => {
-            mCache.put(cacheKey, html, 100000);
+            mCache.put(cacheKey, html);
+            return res.send(html);
         });
     }
 });
@@ -209,5 +220,16 @@ server.get('*', (req, res) => {
 server.listen(PORT, () => {
     console.log(`Node Express server listening on http://localhost:${PORT}`);
 });
+
+const job = new CronJob(
+    '0 22 * * *',
+    () => resetAppState,
+    null,
+    true,
+    'Europe/Prague',
+);
+job.start();
+
+resetAppState();
 
 export * from './src/app.server';
