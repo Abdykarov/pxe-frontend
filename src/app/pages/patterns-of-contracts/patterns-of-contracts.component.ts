@@ -113,8 +113,11 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
                 const pdfCurrentSetting = this.pdfActiveContracts[this.subjectType][this.commodityType];
                 this.pxePdfViewer.pdfSrc = pdfCurrentSetting.sourceUrl;
                 this.pxePdfViewer.downloadFileName = pdfCurrentSetting.downloadName;
-                this.pxePdfViewer.refresh();
-                this.cd.markForCheck();
+
+                setTimeout(_ => {
+                    this.pxePdfViewer.refresh();
+                    this.cd.markForCheck();
+                });
             });
     }
 
@@ -167,6 +170,11 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
                     return moment().isBetween(moment(dateFrom), moment(dateTo));
                 },
             ),
+            (aaa) => {
+                console.log('ASDASD');
+                console.log(aaa);
+                return aaa;
+            },
             R.head,
         ) (this.pdfSettings);
     }
