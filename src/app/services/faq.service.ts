@@ -1,13 +1,15 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import * as R from 'ramda';
-import { BehaviorSubject, combineLatest } from 'rxjs';
+import {
+    BehaviorSubject,
+    combineLatest,
+} from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { FaqService as FaqServiceCms } from '../../common/cms/services/faq.service';
 import { CONSTS } from 'src/app/app.constants';
 import { environment } from 'src/environments/environment';
+import { FaqService as FaqServiceCms } from 'src/common/cms/services/faq.service';
 import {
     IQuestion,
     ITagConfigItem,

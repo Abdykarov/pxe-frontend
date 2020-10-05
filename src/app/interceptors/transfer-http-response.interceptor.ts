@@ -1,28 +1,54 @@
-import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
-import {makeStateKey, TransferState} from '@angular/platform-browser';
-import {isPlatformBrowser, isPlatformServer} from '@angular/common';
-import {tap} from 'rxjs/operators';
-import { environment } from '../../environments/environment';
+import {
+    Inject,
+    Injectable,
+    PLATFORM_ID,
+} from '@angular/core';
+import {
+    isPlatformBrowser,
+    isPlatformServer,
+} from '@angular/common';
+import {
+    HttpEvent,
+    HttpHandler,
+    HttpInterceptor,
+    HttpRequest,
+    HttpResponse,
+} from '@angular/common/http';
+import {
+    makeStateKey,
+    TransferState,
+} from '@angular/platform-browser';
 
-const STATE_KEY_PREFIX = 'http_requests:';
+import {
+    Observable,
+    of,
+} from 'rxjs';
+import { tap } from 'rxjs/operators';
+
+import { CONSTS } from 'src/app/app.constants';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
 })
 export class TransferHttpResponseInterceptor implements HttpInterceptor {
-    constructor(private transferState: TransferState,
-                @Inject(PLATFORM_ID) private platformId: string) {}
+
+    constructor(
+        private transferState: TransferState,
+        @Inject(PLATFORM_ID) private platformId: string,
+    ) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (req.url.indexOf('squidex') === -1 || req.url.indexOf('identity-server/connect/token') >= -1 && environment.useDirectlyCMS) {
+        if (
+            req.url.indexOf(CONSTS.CMS.REGEX_CONTAIN_CMS) === -1 ||
+            req.url.indexOf(CONSTS.CMS.REFRESH_TOKEN_URL) >= -1 &&
+            environment.useDirectlyCMS
+        ) {
             return next.handle(req);
         } else {
-            const key = makeStateKey<HttpResponse<object>>(STATE_KEY_PREFIX + req.body.operationName);
+            const key = makeStateKey<HttpResponse<object>>(CONSTS.ANGULAR_UNIVERSAR_STATE_KEY_PREFIX + req.body.operationName);
 
             if (isPlatformBrowser(this.platformId)) {
-
                 // Try reusing transferred response from server
                 const cachedResponse = this.transferState.get(key, null);
                 if (cachedResponse) {
@@ -30,7 +56,7 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
                     return of(new HttpResponse({
                         body: cachedResponse.body,
                         status: 200,
-                        statusText: 'OK (from server)',
+                        statusText: 'OK',
                         // headers are not transferred by current implementation.
                     }));
                 }

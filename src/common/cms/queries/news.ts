@@ -3,12 +3,10 @@ import gql from 'graphql-tag';
 export const getNewsQuery = gql`
     query queryNewsContents {
         queryNewsContents {
-            data {
+            flatData {
                 news {
-                    iv {
-                        date,
-                        new
-                    }
+                    date,
+                    new
                 },
             }
         }

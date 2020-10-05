@@ -7,9 +7,9 @@ import {
 
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { AuthService } from 'src/app/services/auth.service';
+import { CmsResolver } from './resolvers/cms.resolver';
 import { CONSTS } from './app.constants';
 import { PaymentGuard } from 'src/app/guards/payment.guard';
-import { CmsResolver } from './resolvers/cms.resolver';
 
 const routes: Routes = [
     {

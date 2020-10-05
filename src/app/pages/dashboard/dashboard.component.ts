@@ -16,8 +16,8 @@ import {
     ISupplyPointStatistic,
     ISupplyPointStatisticView,
 } from 'src/common/graphql/models/supply.model';
-import { NewsService } from 'src/common/cms/services/news.service';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
+import { NewsService } from 'src/common/cms/services/news.service';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';

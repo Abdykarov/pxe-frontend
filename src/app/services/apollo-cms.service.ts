@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 import { map } from 'rxjs/operators';
+import { QueryOptions } from 'apollo-client';
 import { WatchQueryOptions } from 'apollo-angular/types';
 
 import { CONSTS } from 'src/app/app.constants';
-import { QueryOptions } from 'apollo-client';
 
 const getOperationName = R.pipe(
     R.path(['query', 'definitions']),

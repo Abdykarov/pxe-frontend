@@ -6,7 +6,8 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
-    Inject, OnInit,
+    Inject,
+    OnInit,
     PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
@@ -40,9 +41,11 @@ import {
     IForm,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
+import { ILandingPage } from 'src/common/cms/models/landing-page';
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import { IQuestion } from 'src/app/services/model/faq.model';
+import { NewsService } from 'src/common/cms/services/news.service';
 import {
     parseGraphQLErrors,
     playVideo,
@@ -52,8 +55,6 @@ import { RegistrationService } from 'src/common/graphql/services/registration.se
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
-import { NewsService } from '../../../common/cms/services/news.service';
-import { ILandingPage } from '../../../common/cms/models/landing-page';
 
 @Component({
     templateUrl: './landing.component.html',
@@ -122,9 +123,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
             )
             .subscribe(
                 _ => {
-                    this.frequentedQuestions = R.filter((question: IQuestion) => {
-                        return question.oneOfMostVisited;
-                    })(this.questions);
+                    this.frequentedQuestions = R.filter((question: IQuestion) => question.oneOfMostVisited)(this.questions);
                     this.cd.markForCheck();
             });
 

@@ -10,8 +10,8 @@ import {
     of,
 } from 'rxjs';
 
+import { CmsService } from 'src/app/services/cms.service';
 import { environment } from 'src/environments/environment';
-import { CmsService } from '../services/cms.service';
 
 @Injectable({
     providedIn: 'root',

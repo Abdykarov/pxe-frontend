@@ -17,8 +17,8 @@ import { HttpLinkModule } from 'apollo-angular-link-http';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 
 // own classes
-import { ApolloGraphQLProvider } from 'src/common/graphql/middleware/apollo-graphql-provider';
 import { ApolloCMSGraphQLProvider } from 'src/common/cms/middleware/apollo-cms-graphql-provider';
+import { ApolloGraphQLProvider } from 'src/common/graphql/middleware/apollo-graphql-provider';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { FileUploadModule } from 'src/third-sides/file-upload';

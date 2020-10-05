@@ -9,6 +9,7 @@ import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
+    ANGULAR_UNIVERSAR_STATE_KEY_PREFIX: 'http_requests:',
     APOLLO_CMS_KEY: 'cms',
     APPEND_AFTER_CUT_TEXT: '...',
     ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],
@@ -110,13 +111,12 @@ export const CONSTS = {
         DONT_REFRESH_TIME_IN_MINUTES: 2,
     },
     CMS: {
-        // squidex keep 1 month of valid token
         CLIENT_ID: 'pxe-parc4u:default',
         CLIENT_SECRET: 'oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx',
-        COOKIE_KEY: 'cms',
-        REFRESH_TOKEN_INTERVAL: 86400000,
+        DOMAIN: 'https://squidex.lnd.bz/',
         GRAND_TYPE: 'client_credentials',
-        DAYS_FOR_REFRESH: 15,
+        REFRESH_TOKEN_URL: 'identity-server/connect/token',
+        REGEX_CONTAIN_CMS: 'squidex',
         SCOPE: 'squidex-api',
     },
     START_STICKER_HEADER: 0,

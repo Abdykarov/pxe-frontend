@@ -55,9 +55,9 @@ export class FaqOverviewComponent extends AbstractFaqComponent {
             .pipe(takeUntil(this.destroy$))
             .subscribe(
                 _ => {
-                     this.questions = R.filter((question: IQuestion) => {
-                         return question.tag.type === this.activeTag;
-                     }, this.questions);
+                     this.questions = R.filter((question: IQuestion) =>
+                         question.tag.type === this.activeTag,
+                     )(this.questions);
 
                      if (this.questions.length) {
                         this.cd.markForCheck();
