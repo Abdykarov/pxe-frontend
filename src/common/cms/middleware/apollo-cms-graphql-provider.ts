@@ -46,7 +46,10 @@ const apolloCmsGraphQLFactory = (
                     complete: observer.complete.bind(observer),
                     error: networkError => {
                         if (networkError.status === 401 || networkError.statusCode === 401) {
-                            setTokenHeader(operation, cmsService);
+                            if (useDirectlyCMS) {
+                                setTokenHeader(operation, cmsService);
+                            }
+
                             innerSubscription = forward(operation).subscribe(observer);
                         }
                     },
@@ -67,13 +70,13 @@ const apolloCmsGraphQLFactory = (
 
     const link = from([auth, http]);
 
+
+    // add default options
     return {
         [CONSTS.APOLLO_CMS_KEY]: {
             cache,
             link,
-            // ssrMode: true,
             connectToDevTools: !environment.production,
-            // defaultOptions,
         },
     };
 };

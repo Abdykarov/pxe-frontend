@@ -1,6 +1,7 @@
 import {
     Component,
-    ElementRef, Input,
+    ElementRef,
+    Input,
     ViewChild,
 } from '@angular/core';
 

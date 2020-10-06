@@ -14,6 +14,7 @@ import {
 
 // own classes
 import { AuthService } from 'src/app/services/auth.service';
+import { CONSTS } from 'src/app/app.constants';
 import { environment } from 'src/environments/environment';
 import { processErrorScrolls } from 'src/common/utils';
 
@@ -31,7 +32,7 @@ export class ApiInterceptor implements HttpInterceptor {
         next: HttpHandler,
     ): Observable<HttpEvent<any>> {
 
-        if (request.url.indexOf('squidex') !== -1) {
+        if (request.url.indexOf(CONSTS.CMS.REGEX_CONTAIN_CMS) !== -1) {
             return next.handle(request);
         }
 

@@ -84,7 +84,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     public formFields: IForm;
     public routes = ROUTES;
 
-    public landingPageCmsData: ILandingPage = null;
+    public landingPageCmsData: ILandingPage = this.route.snapshot.data.landingPageCms;
 
     public isMoreThanMdResolution = false;
 
@@ -110,8 +110,6 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super(faqService, route);
-
-        this.landingPageCmsData = this.route.snapshot.data.landingPageCms;
 
         if (isPlatformBrowser) {
             this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;

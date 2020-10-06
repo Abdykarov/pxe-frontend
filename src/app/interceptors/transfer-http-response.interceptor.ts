@@ -38,10 +38,14 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
         @Inject(PLATFORM_ID) private platformId: string,
     ) {}
 
+    private isRefreshToken = (req) => req.url.indexOf(CONSTS.CMS.REFRESH_TOKEN_URL) >= -1;
+
+    private isCmsRequest = (req) => req.url.indexOf(CONSTS.CMS.REGEX_CONTAIN_CMS) >= -1;
+
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (
-            req.url.indexOf(CONSTS.CMS.REGEX_CONTAIN_CMS) === -1 ||
-            req.url.indexOf(CONSTS.CMS.REFRESH_TOKEN_URL) >= -1 &&
+            !this.isCmsRequest(req) ||
+            this.isRefreshToken(req) &&
             environment.useDirectlyCMS
         ) {
             return next.handle(req);
