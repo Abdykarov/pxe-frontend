@@ -22,6 +22,12 @@ const setTokenHeader = (operation: Operation, cmsService: CmsService): void => {
     });
 };
 
+const defaultOptions = {
+    watchQuery: {
+        fetchPolicy: 'cache-first',
+    },
+};
+
 const apolloCmsGraphQLFactory = (
     cmsService: CmsService,
     httpLink: HttpLink,
