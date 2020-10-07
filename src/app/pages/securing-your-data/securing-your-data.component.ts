@@ -1,14 +1,13 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 import {
     Meta,
     Title,
 } from '@angular/platform-browser';
 
-import {
-    CONSTS,
-    SEO,
-} from 'src/app/app.constants';
+import { SEO } from 'src/app/app.constants';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { ISecuringYourData } from 'src/common/cms/models/securing-your-data';
 
 @Component({
     selector: 'pxe-securing-your-data',
@@ -18,20 +17,23 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 export class SecuringYourDataComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
+    public securingYourData: ISecuringYourData = this.route.snapshot.data.securingYourData;
+
     constructor(
         private metaService: Meta,
+        private route: ActivatedRoute,
         private titleService: Title,
     ) {
-        this.titleService.setTitle(CONSTS.TITLES.SECURING_YOUR_DATA);
+        this.titleService.setTitle(this.securingYourData.seo.title);
         this.metaService.updateTag({
             name: 'description',
-            content: SEO.META_DESCRIPTION.SECURING_YOUR_DATA,
+            content: this.securingYourData.seo.description,
         });
         this.metaService.updateTag({
             name: 'keywords',
             content: [
                 ...SEO.META_KEYWORDS.LANDING_PAGE,
-                ...SEO.META_KEYWORDS.SECURING_YOUR_DATA,
+                ...this.securingYourData.seo.keywords,
             ].toString(),
         });
 
@@ -41,7 +43,7 @@ export class SecuringYourDataComponent {
                 url: '/',
             },
             {
-                label: 'Ochrana osobních údajů',
+                label: this.securingYourData.breadcrumbTitle,
             },
         ];
     }

@@ -43,3 +43,8 @@ export const normalizeCookie = R.pipe(
     mapFlatAttribute('seo'),
 );
 
+export const normalizeSecuringYourData = R.pipe(
+    getFlatData,
+    mapFlatAttribute('seo'),
+);
+

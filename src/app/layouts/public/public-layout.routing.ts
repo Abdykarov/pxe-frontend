@@ -9,6 +9,7 @@ import {
     SignType,
 } from '../models/router-data.model';
 import { PublicLayoutComponent } from './public-layout.component';
+import { SecuringYourDataResolver } from 'src/app/resolvers/securing-your-data.resolver';
 
 const routes = [
     {
@@ -82,6 +83,9 @@ const routes = [
             {
                 path: CONSTS.PATHS.SECURING_YOUR_DATA,
                 loadChildren: () => import('../../pages/securing-your-data/securing-your-data.module').then(m => m.SecuringYourDataModule),
+                resolve: {
+                    securingYourData: SecuringYourDataResolver,
+                },
                 data: {
                     isPublic: true,
                     isSimpleFooter: false,

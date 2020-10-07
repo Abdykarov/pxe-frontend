@@ -176,7 +176,6 @@ export const CONSTS = {
         FAQ: 'Často kladené otázky | PARC4U',
         PATTERNS_OF_CONTRACTS: 'Vzory smluv o dodávce | PARC4U',
         TERMS_OF_USE: 'Podmínky užívání | PARC4U',
-        SECURING_YOUR_DATA: 'Ochrana osobních údajů | PARC4U',
         SIGN_UP: 'Registrace | PARC4U',
     },
     XL_RESOLUTION: 992,
@@ -271,7 +270,6 @@ export const SEO = {
         LOGIN: 'Přihlášení do PARC4U, kde máte snadný přístup k jiným cenám za energie.',
         PATTERNS_OF_CONTRACTS: 'Vzor smlouvy k dodávce uzavřené přes PARC4U.',
         TERMS_OF_USE: 'Obchodní podmínky k pravidlům registrace dodavatelů a odběratelů na trhu PARC4U.',
-        SECURING_YOUR_DATA: 'Jak v PARC4U pracujeme s osobními údaji a jak je chráníme.',
         SIGN_UP: 'Registrace do PARC4U, kde kliknutím měníte dodavatele energií,' +
             ' nemusíte na pobočky a dostáváte konečné ceny bez skrytých poplatků.',
     },
