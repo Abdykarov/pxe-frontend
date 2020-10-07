@@ -27,7 +27,8 @@ import {
     ISupplyPointGasAttributes,
     ISupplyPointPowerAttributes,
     ProgressStatus,
-    SubjectType, TimeToContractEndPeriod,
+    SubjectType,
+    TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
 import { ContractActions } from '../models/supply-point-detail.model';
 import { ContractDeleteReason } from 'src/common/graphql/models/contract';
