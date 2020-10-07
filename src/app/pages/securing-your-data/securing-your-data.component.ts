@@ -5,9 +5,10 @@ import {
     Title,
 } from '@angular/platform-browser';
 
-import { SEO } from 'src/app/app.constants';
+import { getKeywordsAsArray } from 'src/common/cms/utils';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { ISecuringYourData } from 'src/common/cms/models/securing-your-data';
+import { SEO } from 'src/app/app.constants';
 
 @Component({
     selector: 'pxe-securing-your-data',
@@ -33,7 +34,7 @@ export class SecuringYourDataComponent {
             name: 'keywords',
             content: [
                 ...SEO.META_KEYWORDS.LANDING_PAGE,
-                ...this.securingYourData.seo.keywords,
+                ...getKeywordsAsArray(this.securingYourData.seo.keywords),
             ].toString(),
         });
 

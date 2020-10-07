@@ -48,3 +48,7 @@ export const normalizeSecuringYourData = R.pipe(
     mapFlatAttribute('seo'),
 );
 
+export const normalizeTermsOfUseData = R.pipe(
+    getFlatData,
+    mapFlatAttribute('seo'),
+);

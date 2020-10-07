@@ -6,6 +6,7 @@ import {
 } from '@angular/platform-browser';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { getKeywordsAsArray } from 'src/common/cms/utils';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { ICookiePolicy } from 'src/common/cms/models/cookie.policy';
 import { SEO } from 'src/app/app.constants';
@@ -35,7 +36,7 @@ export class CookiesPolicyComponent extends AbstractComponent {
             name: 'keywords',
             content: [
                 ...SEO.META_KEYWORDS.LANDING_PAGE,
-                ...this.cookiePolicy.seo.keywords,
+                ...getKeywordsAsArray(this.cookiePolicy.seo.keywords),
             ].toString(),
         });
 

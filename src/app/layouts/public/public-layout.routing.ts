@@ -7,9 +7,10 @@ import { LandingPageResolver } from 'src/app/resolvers/landing-page.resolver';
 import {
     LoginType,
     SignType,
-} from '../models/router-data.model';
+} from 'src/app/layouts/models/router-data.model';
 import { PublicLayoutComponent } from './public-layout.component';
 import { SecuringYourDataResolver } from 'src/app/resolvers/securing-your-data.resolver';
+import { TermsOfUseResolver } from 'src/app/resolvers/terms-of-use.resolver';
 
 const routes = [
     {
@@ -96,6 +97,9 @@ const routes = [
             {
                 path: CONSTS.PATHS.TERMS_OF_USE,
                 loadChildren: () => import('../../pages/terms-of-use/terms-of-use.module').then(m => m.TermsOfUseModule),
+                resolve: {
+                    termsOfUse: TermsOfUseResolver,
+                },
                 data: {
                     isPublic: true,
                     isSimpleFooter: false,
