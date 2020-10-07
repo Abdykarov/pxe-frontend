@@ -30,7 +30,6 @@ export class TermsOfUseComponent {
             name: 'description',
             content: this.termsOfUse.seo.description,
         });
-        console.log(this.termsOfUse.seo.keywords);
         this.metaService.updateTag({
             name: 'keywords',
             content: [
