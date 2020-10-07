@@ -10,6 +10,12 @@ const sortById = R.ascend(R.prop('id'));
 
 export const getFlatData = R.pathOr({}, [0, 'flatData']);
 
+export const mapFlatAttribute = (attribute) => (source) => {
+    const dataWithoutFlat = getFlatData(source[attribute]);
+    source[attribute] = {...dataWithoutFlat};
+    return source;
+};
+
 const removeFlatDataFromTagQuestion = (question) => {
     const flatQuestion = {...question.flatData};
     flatQuestion.tag = flatQuestion.tag[0].flatData;
@@ -31,3 +37,9 @@ export const normalizeLandingPage = R.pipe(
     getFlatData,
     R.map(getFlatData),
 );
+
+export const normalizeCookie = R.pipe(
+    getFlatData,
+    mapFlatAttribute('seo'),
+);
+

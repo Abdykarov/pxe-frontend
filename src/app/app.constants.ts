@@ -170,7 +170,6 @@ export const CONSTS = {
     TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS: 30,
     TIME_TO_CONTRACT_END_INDEFINITE_TIME_IN_MONTHS: 3,
     TITLES: {
-        COOKIES_POLICY: 'Cookies policy | PARC4U',
         DEFAULT: 'PARC4U',
         LANDING_PAGE: 'Získejte svobodu nad energií | PARC4U',
         LOGIN: 'Přihlášení | PARC4U',
@@ -219,11 +218,6 @@ export const ROUTES = {
 
 export const SEO = {
     META_KEYWORDS: {
-        COOKIES_POLICY: [
-            'funkční cookies',
-            'trvalé cookies',
-            'informace',
-        ],
         LANDING_PAGE: [
             'elektřina',
             'plyn',
@@ -271,7 +265,6 @@ export const SEO = {
         ],
     },
     META_DESCRIPTION: {
-        COOKIES_POLICY: 'Co jsou cookies a proč je na stránkách PARC4U používáme?',
         LANDING_PAGE: 'Měňte dodavatele energií na 1 klik. Neřešte papírování a chození na' +
             ' pobočky. Chraňte se před nekalostmi ve smlouvě. Energie za férové ceny bez skrytých poplatků.',
         FAQ: 'Odpovědi na často kladené otázky služby PARC4U.',

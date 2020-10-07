@@ -1,12 +1,22 @@
 import gql from 'graphql-tag';
 
 export const cookiePolicyQuery = gql`
-    query queryCookiePolicyContents {
-      queryCookiePolicyContents {
+query queryCookiePolicyContents {
+  queryCookiePolicyContents {
+    flatData {
+      title,
+      breadcrumbTitle,
+      htmlContent,
+      seo {
         flatData {
-          title,
-          breadcrumbTitle,
-          htmlContent,
+          description,
+          keywords {
+            keyword
+          },
+          title
         }
       }
-    }`;
+    },
+  }
+}
+`;

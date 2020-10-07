@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { CONSTS } from 'src/app/app.constants';
+import { CookiePolicyResolver } from 'src/app/resolvers/cookie-policy.resolver';
 import { LandingPageResolver } from 'src/app/resolvers/landing-page.resolver';
 import {
     LoginType,
@@ -31,6 +32,9 @@ const routes = [
             {
                 path: CONSTS.PATHS.COOKIES_POLICY,
                 loadChildren: () => import('../../pages/cookies-policy/cookies-policy.module').then(m => m.CookiesPolicyModule),
+                resolve: {
+                    cookiePolicy: CookiePolicyResolver,
+                },
                 data: {
                     isPublic: true,
                     isSimpleFooter: false,

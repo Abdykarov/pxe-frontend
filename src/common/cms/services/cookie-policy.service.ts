@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 import { ApolloCmsService } from 'src/app/services/apollo-cms.service';
-import { cookiePolicyQuery } from '../queries/cookie-policy';
-import { getFlatData } from 'src/common/cms/utils/normalisation';
+import { cookiePolicyQuery } from 'src/common/cms/queries/cookie-policy';
+import { normalizeCookie } from 'src/common/cms/utils/normalisation';
 
 @Injectable({
     providedIn: 'root',
@@ -15,10 +15,10 @@ export class CookiePolicyService {
         private apolloCmsService: ApolloCmsService,
     ) {}
 
-    public getNews = () => this.apolloCmsService
-        .watchQuery({
+    public getCookiePolicy = () => this.apolloCmsService
+        .fetchQuery({
             query: cookiePolicyQuery,
         })
-        .pipe(map(getFlatData))
+        .pipe(map(normalizeCookie))
 
 }
