@@ -6,10 +6,8 @@ import {
 } from '@angular/platform-browser';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { getKeywordsAsArray } from 'src/common/cms/utils';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { ICookiePolicy } from 'src/common/cms/models/cookie.policy';
-import { SEO } from 'src/app/app.constants';
 
 @Component({
     selector: 'pxe-cookies-policy',
@@ -17,9 +15,16 @@ import { SEO } from 'src/app/app.constants';
     styleUrls: ['./cookies-policy.component.scss'],
 })
 export class CookiesPolicyComponent extends AbstractComponent {
-    public breadcrumbItemsSimple: IBreadcrumbItems;
-
-    public cookiePolicy: ICookiePolicy = this.route.snapshot.data.cookiePolicy;
+    public readonly cookiePolicy: ICookiePolicy = this.route.snapshot.data.cookiePolicy;
+    public readonly breadcrumbItemsSimple: IBreadcrumbItems = [
+        {
+            label: 'Domů',
+            url: '/',
+        },
+        {
+            label: this.cookiePolicy.breadcrumbTitle,
+        },
+    ];
 
     constructor(
         private metaService: Meta,
@@ -34,20 +39,7 @@ export class CookiesPolicyComponent extends AbstractComponent {
         });
         this.metaService.updateTag({
             name: 'keywords',
-            content: [
-                ...SEO.META_KEYWORDS.LANDING_PAGE,
-                ...getKeywordsAsArray(this.cookiePolicy.seo.keywords),
-            ].toString(),
+            content: this.cookiePolicy.seo.keywords,
         });
-
-        this.breadcrumbItemsSimple = [
-            {
-                label: 'Domů',
-                url: '/',
-            },
-            {
-                label: this.cookiePolicy.breadcrumbTitle,
-            },
-        ];
     }
 }

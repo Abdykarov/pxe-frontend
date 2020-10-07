@@ -18,13 +18,13 @@
             <div class="section-picture-text">
                 <div class="row px-3 px-md-0">
                     <div class="col-12 col-md-8 offset-md-2 col-xl-8 offset-xl-1">
-                        <h1 class="h1--public mb-4" [innerHTML]="landingPageCmsData.introduction.title"></h1>
+                        <h1 class="h1--public mb-4" [innerHTML]="landingPage.introduction.title"></h1>
                     </div>
                     <div class="col-12 col-md-8 offset-md-2 col-xl-5 offset-xl-1">
-                        <p [innerHTML]="landingPageCmsData.introduction.text"></p>
-                        <p><small [innerHTML]="landingPageCmsData.introduction.appendix"></small></p>
+                        <p [innerHTML]="landingPage.introduction.text"></p>
+                        <p><small [innerHTML]="landingPage.introduction.appendix"></small></p>
                         <lnd-button
-                            [label]="landingPageCmsData.introduction.buttonText"
+                            [label]="landingPage.introduction.buttonText"
                             type="primary"
                             *ngIf="!(authService.currentUserValue | isLogged)"
                             (action)="scrollToNewSubscription()">
@@ -38,11 +38,11 @@
         <div class="section how-it-work section--picture-bg-overlap">
             <div class="row px-3 px-md-0">
                 <div class="col-12 col-md-8 offset-md-2 col-xl-10 offset-xl-1">
-                    <h2 class="h2--public mb-5" [innerHTML]="landingPageCmsData.howItWorks.title"></h2>
+                    <h2 class="h2--public mb-5" [innerHTML]="landingPage.howItWorks.title"></h2>
                 </div>
                 <div class="col-12 col-md-8 offset-md-2 col-xl-10 offset-xl-1">
                     <ol class="numerical-list-lp">
-                        <li *ngFor="let config of landingPageCmsData.howItWorks.columns">
+                        <li *ngFor="let config of landingPage.howItWorks.columns">
                             <h3 class="h3--public mb-3" [innerHTML]="config.title"></h3>
                             <p [innerHTML]="config.description"></p>
                         </li>
@@ -69,12 +69,12 @@
                 </div>
                 <div class="col-12 col-md-8 offset-md-2 col-xl-4 offset-xl-1">
                     <div class="section-picture-text px-3 px-md-0">
-                        <h2 class="h2--public" [innerHTML]="landingPageCmsData.likeADog.title"></h2>
-                        <p class="mb-4" [innerHTML]="landingPageCmsData.likeADog.description"></p>
+                        <h2 class="h2--public" [innerHTML]="landingPage.likeADog.title"></h2>
+                        <p class="mb-4" [innerHTML]="landingPage.likeADog.description"></p>
                         <lnd-button
                             *ngIf="!(authService.currentUserValue | isLogged)"
                             (action)="scrollToNewSubscription()"
-                            [label]="landingPageCmsData.likeADog.buttonText"
+                            [label]="landingPage.likeADog.buttonText"
                             type="primary">
                         </lnd-button>
                     </div>
@@ -162,17 +162,17 @@
                 </div>
                 <div class="col-12 col-md-8 offset-md-2 col-xl-4 offset-xl-1 order-xl-1">
                     <div class="section-picture-text px-3 px-md-0">
-                        <h2 class="h2--public" [innerHTML]="landingPageCmsData.filosofii.title"></h2>
-                        <p [innerHTML]="landingPageCmsData.filosofii.description"></p>
-                        <blockquote class="mb-1" [innerHTML]="landingPageCmsData.filosofii.description2"></blockquote>
-                        <p [innerHTML]="landingPageCmsData.filosofii.signature"></p>
+                        <h2 class="h2--public" [innerHTML]="landingPage.filosofii.title"></h2>
+                        <p [innerHTML]="landingPage.filosofii.description"></p>
+                        <blockquote class="mb-1" [innerHTML]="landingPage.filosofii.description2"></blockquote>
+                        <p [innerHTML]="landingPage.filosofii.signature"></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div #mapCoverage>
-        <pxe-map-coverage-container [mapCoverage]="landingPageCmsData.mapCoverage"></pxe-map-coverage-container>
+        <pxe-map-coverage-container [mapCoverage]="landingPage.mapCoverage"></pxe-map-coverage-container>
     </div>
     <div #faq
         class="container-fluid container-fluid--max-width container-fluid--light">
@@ -209,6 +209,7 @@
                         Chci mít také přístup k&nbsp;jiným cenám, možnost&nbsp;měnit dodavatele jen na&nbsp;jedno kliknutí a&nbsp;zbavit se starostí s&nbsp;převodem.
                     </h3>
                     <pxe-registration-form
+                        [bubbleText]="signUp.bubbleText"
                         [agreementTemplate]="agreementTemplate"
                         [formFields]="formFields"
                         [formLoading]="formLoading"

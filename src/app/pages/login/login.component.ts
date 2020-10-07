@@ -25,7 +25,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
     ROUTES,
-    SEO,
 } from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';
 import {
@@ -38,6 +37,7 @@ import {
     ILoginState,
 } from './login.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
+import { ILogin } from 'src/common/cms/models/login';
 import { ILoginResponse } from 'src/app/services/model/auth.model';
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
@@ -57,6 +57,8 @@ import { UserService } from 'src/common/graphql/services/user.service';
     styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent extends AbstractComponent {
+    public readonly loginCms: ILogin = this.route.snapshot.data.login;
+
     private cleanLogoutReasonBanner = false;
     public login = '';
     public formFieldsLogin = formFieldsLogin;
@@ -89,17 +91,14 @@ export class LoginComponent extends AbstractComponent {
             this.reasonForLogoutUser = this.cookieService.get(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
         }
 
-        this.titleService.setTitle(CONSTS.TITLES.LOGIN);
+        this.titleService.setTitle(this.loginCms.seo.title);
         this.metaService.updateTag({
             name: 'description',
-            content: SEO.META_DESCRIPTION.LOGIN,
+            content: this.loginCms.seo.description,
         });
         this.metaService.updateTag({
                 name: 'keywords',
-                content: [
-                    ...SEO.META_KEYWORDS.LANDING_PAGE,
-                    ...SEO.META_KEYWORDS.LOGIN,
-                ].toString(),
+                content: this.loginCms.seo.keywords,
             },
         );
 

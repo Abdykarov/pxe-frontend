@@ -9,6 +9,7 @@ export const questionsQuery = gql`
           shortContent
           isTestData
           oneOfMostVisited
+          seoKeywords
           tag {
             flatData {
               label
@@ -33,3 +34,20 @@ export const faqConfigQuery = gql`
         }
       }
     }`;
+
+export const faqQuery = gql`
+query queryFaqContents {
+  queryFaqContents {
+    flatData {
+      title,
+      breadcrumbTitle,
+      seo {
+        flatData {
+          description,
+          keywords,
+          title
+        }
+      }
+    },
+  }
+}`;

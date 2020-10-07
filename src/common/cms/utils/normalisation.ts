@@ -4,7 +4,7 @@ import { compareDates } from 'src/common/utils';
 
 export const propFlatData = R.prop('flatData');
 
-export const normalizeFag = R.map(propFlatData);
+export const normalizeFagConfig = R.map(propFlatData);
 
 const sortById = R.ascend(R.prop('id'));
 
@@ -38,6 +38,11 @@ export const normalizeLandingPage = R.pipe(
     R.map(getFlatData),
 );
 
+export const normalizePatternsOfContracts = R.pipe(
+    getFlatData,
+    mapFlatAttribute('seo'),
+);
+
 export const normalizeCookie = R.pipe(
     getFlatData,
     mapFlatAttribute('seo'),
@@ -49,6 +54,21 @@ export const normalizeSecuringYourData = R.pipe(
 );
 
 export const normalizeTermsOfUseData = R.pipe(
+    getFlatData,
+    mapFlatAttribute('seo'),
+);
+
+export const normalizeFag = R.pipe(
+    getFlatData,
+    mapFlatAttribute('seo'),
+);
+
+export const normalizeLogin = R.pipe(
+    getFlatData,
+    mapFlatAttribute('seo'),
+);
+
+export const normalizeSignUp = R.pipe(
     getFlatData,
     mapFlatAttribute('seo'),
 );

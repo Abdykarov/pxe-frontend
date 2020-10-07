@@ -15,12 +15,10 @@ import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
-import {
-    CONSTS,
-    SEO,
-} from 'src/app/app.constants';
+import { CONSTS } from 'src/app/app.constants';
 import { FaqService } from 'src/app/services/faq.service';
 import { IQuestion } from 'src/app/services/model/faq.model';
+import { FaqComponent } from 'src/app/pages/faq/faq.component';
 
 @Component({
     selector: 'lnd-faq-overview',
@@ -30,6 +28,7 @@ import { IQuestion } from 'src/app/services/model/faq.model';
 export class FaqOverviewComponent extends AbstractFaqComponent {
 
     constructor(
+        private faqComponent: FaqComponent,
         public faqService: FaqService,
         private cd: ChangeDetectorRef,
         private metaService: Meta,
@@ -38,17 +37,14 @@ export class FaqOverviewComponent extends AbstractFaqComponent {
         private titleService: Title,
     ) {
         super(faqService, route);
-        this.titleService.setTitle(CONSTS.TITLES.FAQ);
+        this.titleService.setTitle(this.faqComponent.faq.seo.title);
         this.metaService.updateTag({
             name: 'description',
-            content: SEO.META_DESCRIPTION.FAQ,
+            content: this.faqComponent.faq.seo.description,
         });
         this.metaService.updateTag({
             name: 'keywords',
-            content: [
-                ...SEO.META_KEYWORDS.LANDING_PAGE,
-                ...SEO.META_KEYWORDS.FAQ,
-            ].toString(),
+            content: this.faqComponent.faq.seo.keywords,
         });
 
         this.loadConfigs$

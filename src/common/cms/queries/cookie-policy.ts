@@ -10,9 +10,7 @@ query queryCookiePolicyContents {
       seo {
         flatData {
           description,
-          keywords {
-            keyword
-          },
+          keywords,
           title
         }
       }

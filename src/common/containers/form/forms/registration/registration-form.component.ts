@@ -15,6 +15,10 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
     styleUrls: ['./registration-form.component.scss'],
 })
 export class RegistrationFormComponent extends AbstractFormComponent implements OnDestroy {
+
+    @Input()
+    public bubbleText;
+
     @Input()
     public isSignUp = true;
 

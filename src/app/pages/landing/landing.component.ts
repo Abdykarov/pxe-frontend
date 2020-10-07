@@ -31,7 +31,6 @@ import {
     CONSTS,
     ROUTES,
     S_ANALYTICS,
-    SEO,
 } from 'src/app/app.constants';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import { FaqService } from 'src/app/services/faq.service';
@@ -45,6 +44,7 @@ import { ILandingPage } from 'src/common/cms/models/landing-page';
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import { IQuestion } from 'src/app/services/model/faq.model';
+import { ISignUp } from 'src/common/cms/models/sign-up';
 import { NewsService } from 'src/common/cms/services/news.service';
 import {
     parseGraphQLErrors,
@@ -84,7 +84,8 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     public formFields: IForm;
     public routes = ROUTES;
 
-    public landingPageCmsData: ILandingPage = this.route.snapshot.data.landingPageCms;
+    public readonly landingPage: ILandingPage = this.route.snapshot.data.landingPage;
+    public readonly signUp: ISignUp = this.route.snapshot.data.signUp;
 
     public isMoreThanMdResolution = false;
 
@@ -125,14 +126,14 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
                     this.cd.markForCheck();
             });
 
-        this.titleService.setTitle(CONSTS.TITLES.LANDING_PAGE);
+        this.titleService.setTitle(this.landingPage.seo.title);
         this.metaService.updateTag({
             name: 'description',
-            content: SEO.META_DESCRIPTION.LANDING_PAGE,
+            content: this.landingPage.seo.description,
         });
         this.metaService.updateTag({
             name: 'keywords',
-            content: SEO.META_KEYWORDS.LANDING_PAGE.toString(),
+            content: this.landingPage.seo.keywords,
         });
 
         this.formFields = createRegistrationFormFields(SignUpType.SignUp);

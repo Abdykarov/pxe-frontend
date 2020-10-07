@@ -6,6 +6,7 @@ import {
     Meta,
     Title,
 } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
 import { CookieService } from 'ngx-cookie';
@@ -16,7 +17,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
     ROUTES,
-    SEO,
 } from 'src/app/app.constants';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import {
@@ -26,15 +26,17 @@ import {
 } from 'src/common/containers/form/models/form-definition.model';
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
+import { ISignUp } from 'src/common/cms/models/sign-up';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
-import { Router } from '@angular/router';
 
 @Component({
     templateUrl: './sign-up.component.html',
     styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent extends AbstractComponent {
+    public readonly signUp: ISignUp = this.route.snapshot.data.signUp;
+
     public formLoading = false;
     public formSent = false;
     public globalError: string[] = [];
@@ -50,21 +52,19 @@ export class SignUpComponent extends AbstractComponent {
         private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
         private registrationService: RegistrationService,
+        private route: ActivatedRoute,
         private router: Router,
         private titleService: Title,
     ) {
         super();
-        this.titleService.setTitle(CONSTS.TITLES.SIGN_UP);
+        this.titleService.setTitle(this.signUp.seo.title);
         this.metaService.updateTag({
             name: 'description',
-            content: SEO.META_DESCRIPTION.SIGN_UP,
+            content: this.signUp.seo.description,
         });
         this.metaService.updateTag({
             name: 'keywords',
-            content: [
-                ...SEO.META_KEYWORDS.LANDING_PAGE,
-                ...SEO.META_KEYWORDS.SIGN_UP,
-            ].toString(),
+            content: this.signUp.seo.keywords,
         });
 
         this.formFields = createRegistrationFormFields(SignUpType.SignUp);

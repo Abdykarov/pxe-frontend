@@ -27,10 +27,7 @@ import {
 
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { AuthService } from 'src/app/services/auth.service';
-import {
-    CONSTS,
-    SEO,
-} from 'src/app/app.constants';
+import { CONSTS } from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';
 import {
     INavigationConfig,
@@ -89,15 +86,6 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
             scrollToService,
         );
         this.titleService.setTitle(CONSTS.TITLES.DEFAULT);
-        this.metaService.updateTag({
-            name: 'description',
-            content: SEO.META_DESCRIPTION.LANDING_PAGE,
-        });
-        this.metaService.updateTag({
-            name: 'keywords',
-            content: SEO.META_KEYWORDS.LANDING_PAGE.toString(),
-        });
-
         this.navigationService.getNavigationConfig();
 
         this.navigationApolloService.getConfig()

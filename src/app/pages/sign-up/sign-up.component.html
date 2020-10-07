@@ -4,7 +4,7 @@
 
 <div class="container-fluid container-fluid--max-width">
     <div class="container-content container-content--public">
-        <pxe-layout-container pageTitle="Registrace">
+        <pxe-layout-container [pageTitle]="signUp.title">
             <div class="row mb-6">
                 <div class="col-12 col-md-8 offset-md-2 col-xl-5 offset-xl-0 order-xl-last">
                     <div class="page-box">
@@ -23,17 +23,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-10 offset-1 col-md-8 offset-md-2 col-xl-5 offset-xl-1 order-xl-first">
-                    <div class="check-list-wrapper">
-                        <h2 class="h3--public">V PARC4U máte přístup k jiným cenám za energie</h2>
-                        <ul class="check-list">
-                            <li>Měníte dodavatele na jedno kliknutí</li>
-                            <li>Neřešíte papírování a chození na pobočky</li>
-                            <li>Jste chráněni před nekalostmi ve smlouvě</li>
-                            <li>Dostáváte férové ceny bez skrytých poplatků</li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="col-10 offset-1 col-md-8 offset-md-2 col-xl-5 offset-xl-1 order-xl-first" [innerHTML]="signUp.leftContent"></div>
             </div>
             <div class="row">
                 <div class="col-12 col-md-8 offset-md-2 col-xl-10 offset-xl-1 col-lg-8 offset-lg-2 text-center">

@@ -5,10 +5,8 @@ import {
     Title,
 } from '@angular/platform-browser';
 
-import { getKeywordsAsArray } from 'src/common/cms/utils';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { ITermsOfUSe } from 'src/common/cms/models/terms-of-use';
-import { SEO } from 'src/app/app.constants';
 
 @Component({
     selector: 'pxe-term-of-use',
@@ -18,7 +16,7 @@ import { SEO } from 'src/app/app.constants';
 export class TermsOfUseComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
-    public termsOfUse: ITermsOfUSe = this.route.snapshot.data.termsOfUse;
+    public readonly termsOfUse: ITermsOfUSe = this.route.snapshot.data.termsOfUse;
 
     constructor(
         private metaService: Meta,
@@ -32,10 +30,7 @@ export class TermsOfUseComponent {
         });
         this.metaService.updateTag({
             name: 'keywords',
-            content: [
-                ...SEO.META_KEYWORDS.LANDING_PAGE,
-                ...getKeywordsAsArray(this.termsOfUse.seo.keywords),
-            ].toString(),
+            content: this.termsOfUse.seo.keywords,
         });
 
         this.breadcrumbItemsSimple = [

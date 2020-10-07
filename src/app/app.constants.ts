@@ -171,11 +171,6 @@ export const CONSTS = {
     TIME_TO_CONTRACT_END_INDEFINITE_TIME_IN_MONTHS: 3,
     TITLES: {
         DEFAULT: 'PARC4U',
-        LANDING_PAGE: 'Získejte svobodu nad energií | PARC4U',
-        LOGIN: 'Přihlášení | PARC4U',
-        FAQ: 'Často kladené otázky | PARC4U',
-        PATTERNS_OF_CONTRACTS: 'Vzory smluv o dodávce | PARC4U',
-        SIGN_UP: 'Registrace | PARC4U',
     },
     XL_RESOLUTION: 992,
     MD_RESOLUTION: 768,
@@ -212,57 +207,6 @@ export const ROUTES = {
     ROUTER_TERMS_OF_USE: `/${CONSTS.PATHS.TERMS_OF_USE}`,
     ROUTER_USER_CHANGE_PASSWORD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CHANGE_PASSWORD}`,
     ROUTER_USER_PROFILE: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.USER_PROFILE}`,
-};
-
-export const SEO = {
-    META_KEYWORDS: {
-        LANDING_PAGE: [
-            'elektřina',
-            'plyn',
-            'dodavatel',
-            'dodavateli',
-            'nabídka',
-            'komoditní burza',
-            'odběrné místo',
-            'změna dodavatele',
-            'cena plynu',
-            'cena elektřiny',
-            'cena za kwh',
-            'nejlevnějši elektřina',
-            'nejlevnějši plyn',
-            'distribuce plynu',
-            'distribuce elektřiny',
-            'parc4u',
-            'pxe',
-        ],
-        FAQ: [
-            'nápověda',
-            'obecné',
-            'často kladené otázky',
-        ],
-        LOGIN: [
-            'přihlášení',
-            'kliknutí',
-        ],
-        PATTERNS_OF_CONTRACTS: [
-            'komodita',
-            'nabídka',
-        ],
-        SIGN_UP: [
-            'registrace',
-            'kliknutí',
-            'obchodními podmínkami',
-        ],
-    },
-    META_DESCRIPTION: {
-        LANDING_PAGE: 'Měňte dodavatele energií na 1 klik. Neřešte papírování a chození na' +
-            ' pobočky. Chraňte se před nekalostmi ve smlouvě. Energie za férové ceny bez skrytých poplatků.',
-        FAQ: 'Odpovědi na často kladené otázky služby PARC4U.',
-        LOGIN: 'Přihlášení do PARC4U, kde máte snadný přístup k jiným cenám za energie.',
-        PATTERNS_OF_CONTRACTS: 'Vzor smlouvy k dodávce uzavřené přes PARC4U.',
-        SIGN_UP: 'Registrace do PARC4U, kde kliknutím měníte dodavatele energií,' +
-            ' nemusíte na pobočky a dostáváte konečné ceny bez skrytých poplatků.',
-    },
 };
 
 export enum INavigationItemType {

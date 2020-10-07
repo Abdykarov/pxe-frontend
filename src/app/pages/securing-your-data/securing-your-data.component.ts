@@ -5,10 +5,8 @@ import {
     Title,
 } from '@angular/platform-browser';
 
-import { getKeywordsAsArray } from 'src/common/cms/utils';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { ISecuringYourData } from 'src/common/cms/models/securing-your-data';
-import { SEO } from 'src/app/app.constants';
 
 @Component({
     selector: 'pxe-securing-your-data',
@@ -16,9 +14,16 @@ import { SEO } from 'src/app/app.constants';
     styleUrls: ['./securing-your-data.component.scss'],
 })
 export class SecuringYourDataComponent {
-    public breadcrumbItemsSimple: IBreadcrumbItems;
-
-    public securingYourData: ISecuringYourData = this.route.snapshot.data.securingYourData;
+    public readonly securingYourData: ISecuringYourData = this.route.snapshot.data.securingYourData;
+    public readonly breadcrumbItemsSimple: IBreadcrumbItems = [
+        {
+            label: 'Domů',
+            url: '/',
+        },
+        {
+            label: this.securingYourData.breadcrumbTitle,
+        },
+    ];
 
     constructor(
         private metaService: Meta,
@@ -32,20 +37,7 @@ export class SecuringYourDataComponent {
         });
         this.metaService.updateTag({
             name: 'keywords',
-            content: [
-                ...SEO.META_KEYWORDS.LANDING_PAGE,
-                ...getKeywordsAsArray(this.securingYourData.seo.keywords),
-            ].toString(),
+            content: this.securingYourData.seo.keywords,
         });
-
-        this.breadcrumbItemsSimple = [
-            {
-                label: 'Domů',
-                url: '/',
-            },
-            {
-                label: this.securingYourData.breadcrumbTitle,
-            },
-        ];
     }
 }

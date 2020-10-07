@@ -44,6 +44,13 @@ export const getLandingPageQuery = gql`
               title
             }
           }
+          seo {
+            flatData {
+              description,
+              keywords,
+              title
+            }
+          }
         },
       }
     }`;

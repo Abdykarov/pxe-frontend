@@ -1,12 +1,12 @@
 import gql from 'graphql-tag';
 
-export const securingYourDataQuery = gql`
-query querySecuringYourDataContents {
-  querySecuringYourDataContents {
+export const signUpQuery = gql`
+query querySignUpContents {
+  querySignUpContents {
     flatData {
       title,
-      breadcrumbTitle,
-      htmlContent,
+      leftContent,
+      bubbleText,
       seo {
         flatData {
           description,

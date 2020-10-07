@@ -10,9 +10,7 @@ query queryTermsOfUseContents {
       seo {
         flatData {
           description,
-          keywords {
-            keyword
-          },
+          keywords,
           title
         }
       }

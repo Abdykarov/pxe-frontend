@@ -2,6 +2,7 @@ import {
     Component,
 } from '@angular/core';
 import {
+    ActivatedRoute,
     NavigationEnd,
     Router,
 } from '@angular/router';
@@ -11,6 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { CONSTS } from 'src/app/app.constants';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { IFaq } from 'src/common/cms/models/faq';
 
 @Component({
     selector: 'pxe-patterns-of-contracts',
@@ -19,17 +21,20 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 })
 export class FaqComponent extends AbstractComponent {
     private readonly NUMBER_OF_SLASH_IN_DETAIL_IN_URL = 3;
+    public readonly faq: IFaq = this.route.snapshot.data.faq;
+
     public breadcrumbItemsSimple: IBreadcrumbItems = [
         {
             label: 'Domů',
             url: '/',
         },
         {
-            label: 'Často kladené otázky',
+            label: this.faq.breadcrumbTitle,
         },
     ];
 
     constructor(
+        private route: ActivatedRoute,
         protected router: Router,
     ) {
         super();

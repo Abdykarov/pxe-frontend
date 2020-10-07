@@ -3,13 +3,17 @@ import { RouterModule } from '@angular/router';
 
 import { CONSTS } from 'src/app/app.constants';
 import { CookiePolicyResolver } from 'src/app/resolvers/cookie-policy.resolver';
+import { FaqResolver } from 'src/app/resolvers/faq.resolver';
 import { LandingPageResolver } from 'src/app/resolvers/landing-page.resolver';
+import { LoginResolver } from 'src/app/resolvers/login.resolver';
 import {
     LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
+import { PatternsOfContractsResolver } from 'src/app/resolvers/patterns-of-contracts.resolver';
 import { PublicLayoutComponent } from './public-layout.component';
 import { SecuringYourDataResolver } from 'src/app/resolvers/securing-your-data.resolver';
+import { SignUpResolver } from 'src/app/resolvers/sign-up.resolver';
 import { TermsOfUseResolver } from 'src/app/resolvers/terms-of-use.resolver';
 
 const routes = [
@@ -21,7 +25,8 @@ const routes = [
                 path: CONSTS.PATHS.EMPTY,
                 loadChildren: () => import('../../pages/landing/landing.module').then(m => m.LandingModule),
                 resolve: {
-                    landingPageCms: LandingPageResolver,
+                    landingPage: LandingPageResolver,
+                    signUp: SignUpResolver,
                 },
                 data: {
                     isPublic: true,
@@ -56,6 +61,9 @@ const routes = [
             {
                 path: CONSTS.PATHS.FAQ,
                 loadChildren: () => import('../../pages/faq/faq.module').then(m => m.FaqModule),
+                resolve: {
+                    faq: FaqResolver,
+                },
                 data: {
                     isPublic: true,
                     isSimpleFooter: false,
@@ -66,6 +74,9 @@ const routes = [
             {
                 path: CONSTS.PATHS.LOGIN,
                 loadChildren: () => import('../../pages/login/login.module').then(m => m.LoginModule),
+                resolve: {
+                    login: LoginResolver,
+                },
                 data: {
                     isPublic: true,
                     loginType: LoginType.RELOAD,
@@ -116,6 +127,9 @@ const routes = [
                 loadChildren: () => import('../../pages/patterns-of-contracts/patterns-of-contracts.module').then(
                     m => m.PatternsOfContractsModule,
                 ),
+                resolve: {
+                    patternsOfContracts: PatternsOfContractsResolver,
+                },
                 data: {
                     isPublic: true,
                     isSimpleFooter: false,
@@ -126,6 +140,9 @@ const routes = [
             {
                 path: CONSTS.PATHS.SIGN_UP,
                 loadChildren: () => import('../../pages/sign-up/sign-up.module').then(m => m.SignUpModule),
+                resolve: {
+                    signUp: SignUpResolver,
+                },
                 data: {
                     isPublic: true,
                     loginType: LoginType.NAVIGATE,

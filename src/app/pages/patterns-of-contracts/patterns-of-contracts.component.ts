@@ -8,7 +8,6 @@ import {
     OnInit,
     ViewChild,
 } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import {
     Meta,
     Title,
@@ -23,7 +22,6 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CommodityTypesLowerCase,
     CONSTS,
-    SEO,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import {
@@ -31,6 +29,7 @@ import {
     pdfSetting,
 } from 'src/app/pages/patterns-of-contracts/patterns-of-contracts.config';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { IPatternsOfContracts } from 'src/common/cms/models/patterns-of-contracts';
 import { IPdfSetting } from 'src/app/pages/patterns-of-contracts/models/patterns-of-contracts.model';
 import { PdfViewerComponent } from 'src/common/ui/pdf-viewer/pdf-viewer.component';
 
@@ -40,11 +39,19 @@ import { PdfViewerComponent } from 'src/common/ui/pdf-viewer/pdf-viewer.componen
     styleUrls: ['./patterns-of-contracts.component.scss'],
 })
 export class PatternsOfContractsComponent extends AbstractComponent implements OnInit {
+    public readonly patternsOfContracts: IPatternsOfContracts = this.route.snapshot.data.patternsOfContracts;
+    public readonly breadcrumbItemsSimple: IBreadcrumbItems = [
+        {
+            label: 'Domů',
+            url: '/',
+        },
+        {
+            label: this.patternsOfContracts.breadcrumbTitle,
+        },
+    ];
 
     @ViewChild('pxePdfViewer', { static: true })
     public pxePdfViewer: PdfViewerComponent;
-
-    public breadcrumbItemsSimple: IBreadcrumbItems;
 
     public readonly COMMODITY_TYPE = CommodityTypesLowerCase;
     public readonly SUBJECT_TYPE = SubjectTypeLowerCase;
@@ -66,28 +73,15 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
         private titleService: Title,
     ) {
         super();
-        this.titleService.setTitle(CONSTS.TITLES.PATTERNS_OF_CONTRACTS);
+        this.titleService.setTitle(this.patternsOfContracts.seo.title);
         this.metaService.updateTag({
             name: 'description',
-            content: SEO.META_DESCRIPTION.PATTERNS_OF_CONTRACTS,
+            content: this.patternsOfContracts.seo.description,
         });
         this.metaService.updateTag({
             name: 'keywords',
-            content: [
-                ...SEO.META_KEYWORDS.LANDING_PAGE,
-                ...SEO.META_KEYWORDS.PATTERNS_OF_CONTRACTS,
-            ].toString(),
+            content: this.patternsOfContracts.seo.keywords,
         });
-
-        this.breadcrumbItemsSimple = [
-            {
-                label: 'Domů',
-                url: '/',
-            },
-            {
-                label: 'Vzory smluv o dodávce',
-            },
-        ];
     }
 
     ngOnInit(): void {

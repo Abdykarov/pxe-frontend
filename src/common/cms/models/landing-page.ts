@@ -1,3 +1,5 @@
+import { ISeo } from './seo';
+
 export interface IFilosofii {
     description: String;
     description2: String;
@@ -40,4 +42,5 @@ export interface ILandingPage {
     introduction: IIntroduction;
     likeADog: ILikeADog;
     mapCoverage: IMapCoverage;
+    seo: ISeo;
 }
