@@ -50,7 +50,8 @@ export const getLandingPageQuery = gql`
               keywords,
               title
             }
-          }
+          },
+          aboveSignUp
         },
       }
     }`;

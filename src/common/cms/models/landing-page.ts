@@ -43,4 +43,5 @@ export interface ILandingPage {
     likeADog: ILikeADog;
     mapCoverage: IMapCoverage;
     seo: ISeo;
+    aboveSignUp: string;
 }
