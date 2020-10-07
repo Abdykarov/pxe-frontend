@@ -226,6 +226,7 @@ $colors: (
 	light-dark:                    $light-dark,
 	light-darken:                  $light-darken,
 	body:                          $body-bg,
+	blue-dark:                     $gradient-blue-dark,
 	disabled:                      $disabled,
 	icons-primary:                 $icons-primary,
 	icons-active:                  $icons-active,
@@ -248,10 +249,11 @@ $colors: (
 	.text-color--#{$name} {
 		color: $value;
 	}
+
+	.fill--#{$name} {
+		fill: $value;
+	}
 }
-
-
-
 
 /*
  *	Gradients mixins
@@ -336,4 +338,37 @@ $colors: (
 
 .box-shadow {
 	box-shadow: $box-shadow;
+}
+
+.video {
+	position: relative;
+
+	&__holder {
+		position: relative;
+		margin-bottom: $spacer;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			margin-bottom: 0;
+		}
+	}
+
+	&__text {
+		pointer-events: none;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			@include absolute-center;
+			margin-top: 0;
+		}
+	}
+
+	&__control {
+		margin-bottom: $spacer;
+
+		// Media queries
+		@include media-breakpoint-down(xs) {
+			@include absolute-center;
+		}
+	}
 }

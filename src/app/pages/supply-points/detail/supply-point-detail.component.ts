@@ -265,6 +265,12 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
             .subscribe(
                 (unsetContractProlongation: boolean) => {
                     if (unsetContractProlongation) {
+                        // hotfix pred releaseme reformating PXEBR-87 by mohlo rozbit
+                        this.supplyPoint.contract.prolong = false;
+                        this.supplyPoint.allowedOperations = this.supplyPoint.allowedOperations.filter(
+                            (allowedOperation: AllowedOperations) => allowedOperation !== AllowedOperations.UNSET_AUTOMATIC_PROLONGATION,
+                        );
+
                         this.globalError = [];
                         this.formSent = true;
                         this.contractAction = ContractActions.NONE;

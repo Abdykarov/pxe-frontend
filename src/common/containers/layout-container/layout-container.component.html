@@ -23,7 +23,7 @@
 <lnd-banner-ui
     *ngIf="logoutRequired"
     [data]="{
-        text: 'Jste přihlášen jako '  + authService.currentUserValue.userLogin + (logoutRequired === LogoutRequired.LOGIN ?
+        text: 'Jste přihlášen jako '  + authService.currentUserValue.username + (logoutRequired === LogoutRequired.LOGIN ?
         ', pro přihlášení pod jiným uživatelem se prosím odhlašte.' : ', pro registraci se prosím odhlašte.')
     }"
     [showButtonLabel]="false"

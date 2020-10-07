@@ -72,6 +72,10 @@ import {
     formsPageRoutes,
 } from 'src/static/atoms/forms/page.module';
 import {
+    graphsPageRoutes,
+    GraphsPageModule,
+} from 'src/static/organisms/graphs/page.module';
+import {
     ChangePasswordBannerPageModule,
     changePasswordBannerPageRoutes,
 } from 'src/static/pages/change-password-banner/page.module';
@@ -215,6 +219,7 @@ const routes: Routes = [
             ...deleteAccountOkWithPhonePageRoutes,
             ...dropdownPageRoutes,
             ...formsPageRoutes,
+            ...graphsPageRoutes,
             ...changePasswordBannerPageRoutes,
             ...iconsPageRoutes,
             ...importUploadPageRoutes,
@@ -272,6 +277,7 @@ const routes: Routes = [
         DashboardPageModule,
         DropdownPageModule,
         FormsPageModule,
+        GraphsPageModule,
         ChangePasswordBannerPageModule,
         IconsPageModule,
         ImportUploadPageModule,
