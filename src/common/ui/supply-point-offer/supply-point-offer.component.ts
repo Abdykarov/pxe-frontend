@@ -55,6 +55,9 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     @Input()
     public isFromContract = false;
 
+    @Input()
+    public customClass = '';
+
     @Output()
     public action: EventEmitter<any> = new EventEmitter();
 

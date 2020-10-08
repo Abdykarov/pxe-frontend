@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 
 import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { BannerUIModule } from 'src/common/ui/banner/banner-ui.module';
@@ -10,6 +9,7 @@ import { ContractComponent } from './contract.component';
 import { ContractRoutingModule } from './contract-routing.module';
 import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
+import { PdfViewerModule } from 'src/common/ui/pdf-viewer/pdf-viewer.module';
 import { PipesModule } from 'src/common/pipes/pipes.module';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
 import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.module';
@@ -31,7 +31,7 @@ import { VerificationFormModule } from 'src/common/containers/form/forms/verific
         ContractRoutingModule,
         InfoBannerModule,
         LayoutContainerModule,
-        PdfJsViewerModule,
+        PdfViewerModule,
         PipesModule,
         PlaceloaderModule,
         ProgressBarModule,
