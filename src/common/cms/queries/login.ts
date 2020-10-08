@@ -1,5 +1,7 @@
 import gql from 'graphql-tag';
 
+import { seoFragment } from './seo';
+
 export const loginQuery = gql`
 query queryLoginContents {
   queryLoginContents {
@@ -7,13 +9,10 @@ query queryLoginContents {
       title,
       leftContent,
       seo {
-        flatData {
-          description,
-          keywords,
-          title
-        }
+        ...seoFragment
       }
     },
   }
 }
+${seoFragment}
 `;

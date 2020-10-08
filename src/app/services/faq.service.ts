@@ -30,16 +30,16 @@ export class FaqService {
         const question$ = this.faqServiceCms.getQuestions()
             .pipe(
                 map((questions: IQuestion[]) => {
-                    const data  = R.map( (question: IQuestion) => {
+                    const updatedQuestions = R.map( (question: IQuestion) => {
                         question.absoluteUrl = ['/', CONSTS.PATHS.FAQ, question.tag.url, question.url];
                         return question;
                     })([...questions]);
 
                     if (!environment.includeTestData) {
-                        return R.reject(R.propEq('isTestData')(true))(data);
+                        return R.reject(R.propEq('isTestData')(true))(updatedQuestions);
                     }
 
-                    return data;
+                    return updatedQuestions;
                 }),
             );
 

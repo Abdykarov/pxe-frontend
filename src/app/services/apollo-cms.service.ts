@@ -17,7 +17,7 @@ export class ApolloCmsService {
     constructor(
         private apollo: Apollo,
     ) {}
-// remove duplicitni kod
+
     public watchQuery = (options: WatchQueryOptions<any>): any =>
         this.apollo.use(CONSTS.APOLLO_CMS_KEY)
             .watchQuery(options)

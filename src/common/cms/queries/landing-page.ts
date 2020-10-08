@@ -1,5 +1,7 @@
 import gql from 'graphql-tag';
 
+import { seoFragment } from './seo';
+
 export const getLandingPageQuery = gql`
     query queryLandingPageContents {
       queryLandingPageContents {
@@ -45,13 +47,11 @@ export const getLandingPageQuery = gql`
             }
           }
           seo {
-            flatData {
-              description,
-              keywords,
-              title
-            }
+            ...seoFragment
           },
           aboveSignUp
         },
       }
-    }`;
+    }
+    ${seoFragment}
+`;

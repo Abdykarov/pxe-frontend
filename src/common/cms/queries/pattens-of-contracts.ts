@@ -1,5 +1,7 @@
 import gql from 'graphql-tag';
 
+import { seoFragment } from './seo';
+
 export const patternsOfContractsQuery = gql`
 query queryPatternsOfContractsContents {
   queryPatternsOfContractsContents {
@@ -7,13 +9,10 @@ query queryPatternsOfContractsContents {
       title,
       breadcrumbTitle,
       seo {
-        flatData {
-          description,
-          keywords,
-          title
-        }
+        ...seoFragment
       }
     },
   }
 }
+${seoFragment}
 `;

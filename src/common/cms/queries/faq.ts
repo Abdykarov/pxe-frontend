@@ -1,5 +1,7 @@
 import gql from 'graphql-tag';
 
+import { seoFragment } from './seo';
+
 export const questionsQuery = gql`
     query queryQuestionContents {
       queryQuestionContents {
@@ -42,12 +44,10 @@ query queryFaqContents {
       title,
       breadcrumbTitle,
       seo {
-        flatData {
-          description,
-          keywords,
-          title
-        }
+        ...seoFragment
       }
     },
   }
-}`;
+}
+${seoFragment}
+`;

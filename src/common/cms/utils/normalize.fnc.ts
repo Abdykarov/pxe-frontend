@@ -6,30 +6,24 @@ import { isObject } from 'src/common/utils';
 
 export const normalize = R.cond([
     [
-        (_) => {
-            return !_;
-        },
-        _ => _,
+        data => !data,
+        data => data,
     ],
     [
         isFlatDataArray,
         R.pipe(
             R.map(flatData),
             R.map(
-                ARRAY_ITEM => {
-                    return R.cond([
-                        [
-                            Array.isArray,
-                            BBB => {
-                                return R.map(normalize)(BBB);
-                            },
-                        ],
-                        [
-                            R.T,
-                            XXX => normalize(XXX),
-                        ],
-                    ])(ARRAY_ITEM);
-                },
+                R.cond([
+                    [
+                        Array.isArray,
+                        data => R.map(normalize)(data),
+                    ],
+                    [
+                        R.T,
+                        data => normalize(data),
+                    ],
+                ]),
             ),
             R.cond([
                 [Array.isArray, array => {
@@ -38,20 +32,16 @@ export const normalize = R.cond([
                     }
                     return array;
                 }],
-                [R.T, _ => _],
+                [R.T, data => data],
             ]),
         ),
     ],
     [
         isObject,
-        _ => {
-            return R.map(normalize)(_);
-        },
+        data => R.map(normalize)(data),
     ],
     [
         R.T,
-        _ => {
-            return _;
-        },
+        data => data,
     ],
 ]);

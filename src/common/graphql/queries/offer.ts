@@ -75,7 +75,6 @@ export const offerFragment = gql`
     }
 `;
 
-
 export const findSupplierOffersQuery = gql`
     query findSupplierOffers{
         findSupplierOffers{

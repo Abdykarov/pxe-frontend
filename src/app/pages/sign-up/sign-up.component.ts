@@ -6,7 +6,10 @@ import {
     Meta,
     Title,
 } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
 import { CookieService } from 'ngx-cookie';

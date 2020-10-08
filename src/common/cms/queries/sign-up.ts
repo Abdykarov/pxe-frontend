@@ -1,5 +1,7 @@
 import gql from 'graphql-tag';
 
+import { seoFragment } from './seo';
+
 export const signUpQuery = gql`
 query querySignUpContents {
   querySignUpContents {
@@ -8,13 +10,10 @@ query querySignUpContents {
       leftContent,
       bubbleText,
       seo {
-        flatData {
-          description,
-          keywords,
-          title
-        }
+        ...seoFragment
       }
     },
   }
 }
+${seoFragment}
 `;

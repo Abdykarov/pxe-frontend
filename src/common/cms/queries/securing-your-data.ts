@@ -1,5 +1,7 @@
 import gql from 'graphql-tag';
 
+import { seoFragment } from './seo';
+
 export const securingYourDataQuery = gql`
 query querySecuringYourDataContents {
   querySecuringYourDataContents {
@@ -8,13 +10,10 @@ query querySecuringYourDataContents {
       breadcrumbTitle,
       htmlContent,
       seo {
-        flatData {
-          description,
-          keywords,
-          title
-        }
+        ...seoFragment
       }
     },
   }
 }
+${seoFragment}
 `;

@@ -1,5 +1,7 @@
 import gql from 'graphql-tag';
 
+import { seoFragment } from './seo';
+
 export const termsOfUseQuery = gql`
 query queryTermsOfUseContents {
   queryTermsOfUseContents {
@@ -8,12 +10,9 @@ query queryTermsOfUseContents {
       breadcrumbTitle,
       htmlContent,
       seo {
-        flatData {
-          description,
-          keywords,
-          title
-        }
+        ...seoFragment
       }
     },
   }
-}`;
+}
+${seoFragment}`;
