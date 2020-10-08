@@ -15,7 +15,11 @@ import * as xml2js from 'xml2js';
 import { join } from 'path';
 import { readFileSync } from 'fs';
 import * as bodyParser from 'body-parser';
+import * as request from 'request';
+import * as mCache from 'memory-cache';
+import * as cron from 'cron';
 
+const CronJob = cron.CronJob;
 const server = express();
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
@@ -43,10 +47,6 @@ global['window'] = win;
 global['document'] = win.document;
 global['navigator'] = win.navigator;
 global['HTMLAnchorElement'] = () => null;
-
-const request = require('request');
-const mCache = require('memory-cache');
-const CronJob = require('cron').CronJob;
 
 enableProdMode();
 
@@ -161,8 +161,10 @@ server.get('/sitemap.xml', (req, res) => {
    });
 });
 
+// cache by detail variable
 server.post('/squidex', ({body}, res) => {
-    const cacheKey = getMCacheKeySquidex(body.operationName);
+    const { operationName, variables } = body;
+    const cacheKey = getMCacheKeySquidex(operationName + JSON.stringify(variables));
     const data = mCache.get(cacheKey);
     if (!data) {
         request(queryRequest(JSON.stringify(body)), (err, requestRes, responseBody) => {
@@ -229,7 +231,6 @@ const job = new CronJob(
     'Europe/Prague',
 );
 job.start();
-
 resetAppState();
 
 export * from './src/app.server';
