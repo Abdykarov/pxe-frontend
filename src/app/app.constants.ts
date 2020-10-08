@@ -163,7 +163,7 @@ export const CONSTS = {
         COOKIES_POLICY: 'Cookies policy | PARC4U',
         DEFAULT: 'PARC4U',
         LANDING_PAGE: 'Získejte svobodu nad energií | PARC4U',
-        LOGIN: 'Přihlášení | PARC4U',
+        LOGIN: 'Přihlásit | PARC4U',
         FAQ: 'Často kladené otázky | PARC4U',
         PATTERNS_OF_CONTRACTS: 'Vzory smluv o dodávce | PARC4U',
         TERMS_OF_USE: 'Podmínky užívání | PARC4U',
@@ -240,7 +240,7 @@ export const SEO = {
             'často kladené otázky',
         ],
         LOGIN: [
-            'přihlášení',
+            'přihlásit',
             'kliknutí',
         ],
         PATTERNS_OF_CONTRACTS: [

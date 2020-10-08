@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="74px" height="89px" viewBox="0 0 74 89" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>B50DD67E-21A3-413E-BC51-36BE34CDF7DA</title>
+    <defs>
+        <path d="M4,0 L34.780927,0 C35.8425283,2.46952226e-15 36.860587,0.422010159 37.6108542,1.17307376 L52.8299272,16.4083029 C53.579155,17.1583261 54,18.1750985 54,19.2352292 L54,65 C54,67.209139 52.209139,69 50,69 L4,69 C1.790861,69 2.705415e-16,67.209139 0,65 L0,4 C-2.705415e-16,1.790861 1.790861,4.05812251e-16 4,0 Z" id="path-1"></path>
+        <filter x="-27.8%" y="-21.7%" width="155.6%" height="143.5%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.170084227   0 0 0 0 0.299500553   0 0 0 0 0.428916879  0 0 0 0.161175272 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Supply-Point" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Vytvareni-OM" transform="translate(-800.000000, -2713.000000)">
+            <g id="Group-9" transform="translate(810.000000, 2723.000000)">
+                <g id="Rectangle">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#F6FAFD" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <path d="M26.5,21 C33.9555032,21 40,27.0443385 40,34.5006642 C40,41.9567814 33.9557118,48 26.5,48 C19.0442882,48 13,41.9567814 13,34.5006642 C13,27.0443385 19.0444968,21 26.5,21 Z M26.5,23.6568266 C20.5117046,23.6568266 15.6566959,28.5117082 15.6566959,34.5006642 C15.6566959,40.4893221 20.5114063,45.3431734 26.5,45.3431734 C32.4885937,45.3431734 37.3433041,40.4893221 37.3433041,34.5006642 C37.3433041,28.5117082 32.4882954,23.6568266 26.5,23.6568266 Z M28,28 L28,33 L33,33 L33,36 L28,36 L28,41 L25,41 L25,36 L20,36 L20,33 L25,33 L25,28 L28,28 Z" id="pridat-novy" fill="#2B4762" fill-rule="nonzero" transform="translate(26.500000, 34.500000) rotate(-315.000000) translate(-26.500000, -34.500000) "></path>
+                <path d="M37,0 L54,17 L54,4 C54,1.790861 52.209139,-4.05812251e-16 50,0 L37,0 L37,0 Z" id="Rectangle" fill="#DDE4EB" fill-rule="nonzero" transform="translate(45.500000, 8.500000) rotate(-180.000000) translate(-45.500000, -8.500000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>
