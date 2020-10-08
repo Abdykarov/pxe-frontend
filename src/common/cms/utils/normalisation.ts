@@ -35,7 +35,12 @@ export const normalizeNews = R.pipe(
 
 export const normalizeLandingPage = R.pipe(
     getFlatData,
-    R.map(getFlatData),
+    R.map(
+        R.cond([
+            [Array.isArray, getFlatData],
+            [R.T, data => data],
+        ]),
+    ),
 );
 
 export const normalizePatternsOfContracts = R.pipe(

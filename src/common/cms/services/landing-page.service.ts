@@ -19,6 +19,8 @@ export class LandingPageService  {
         .fetchQuery({
             query: getLandingPageQuery,
         })
-        .pipe(map(normalizeLandingPage))
+        .pipe(
+            map(normalizeLandingPage),
+        )
 
 }
