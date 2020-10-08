@@ -19,6 +19,7 @@
     </lnd-header>
     <main class="main">
         <router-outlet></router-outlet>
+        <lnd-modal-dynamic></lnd-modal-dynamic>
     </main>
     <div *ngIf="(authService.currentUserValue | isLogged) && !isLogouting"
          class="fixed-bottom fixed-bottom--footer-indentation">

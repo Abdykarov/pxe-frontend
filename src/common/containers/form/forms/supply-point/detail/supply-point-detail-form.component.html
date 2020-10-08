@@ -4,11 +4,11 @@
              class="row">
             <div class="col-12 col-xl-10 offset-xl-1">
                 <lnd-banner-ui
-                        buttonLabel="Najít dodavatele"
-                        [data]="{
+                    buttonLabel="Najít dodavatele"
+                    [data]="{
                             text: 'Platnost smlouvy končí za ' + contractEndInDays + ' ' + (contractEndInDays | plural: 'day')
                         }"
-                        (customBannerAction)="findNewSupplier(supplyPoint)"
+                    (customBannerAction)="findNewSupplier(supplyPoint)"
                 ></lnd-banner-ui>
             </div>
         </div>
@@ -51,15 +51,15 @@
                     (change)="resetCustomFieldError()"
                     autocomplete="off">
                     <lnd-form-field
-                            [error]="formError.name || form.controls.name.errors"
-                            [formControl]="form.controls.name"
-                            [id]="'name'"
-                            label="Vaše pojmenování odběrného místa"
-                            subtext="Cokoliv, podle čeho chcete místo identifikovat."
-                            [success]="form.controls.name.valid && (form.controls.name.touched || formError.name)"
-                            [touched]="form.controls.name.touched || formError.name"
-                            [validationMessages]="formFields.validationMessages.name"
-                            [value]="form.controls.name.value"
+                        [error]="formError.name || form.controls.name.errors"
+                        [formControl]="form.controls.name"
+                        [id]="'name'"
+                        label="Vaše pojmenování odběrného místa"
+                        subtext="Cokoliv, podle čeho chcete místo identifikovat."
+                        [success]="form.controls.name.valid && (form.controls.name.touched || formError.name)"
+                        [touched]="form.controls.name.touched || formError.name"
+                        [validationMessages]="formFields.validationMessages.name"
+                        [value]="form.controls.name.value"
                     ></lnd-form-field>
                     <pxe-field-wrapper
                         *ngIf="form.controls.annualConsumptionNT.status !== 'DISABLED'"
@@ -290,11 +290,11 @@
                         </div>
                         <div class="col-12 col-md-6 pl-3 text-right">
                             <lnd-button
-                                    label="Najít dodavatele"
-                                    type="link"
-                                    size="sm"
-                                    [isDisabled]="formLoading"
-                                    (action)="findNewSupplier(supplyPoint)">
+                                label="Najít dodavatele"
+                                type="link"
+                                size="sm"
+                                [isDisabled]="formLoading"
+                                (action)="findNewSupplier(supplyPoint)">
                             </lnd-button>
                         </div>
                     </div>
@@ -306,18 +306,18 @@
                     <div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.PARTIAL_EDIT"
                          class="col-12 mb-2">
                         <lnd-button
-                                label="Uložit"
-                                type="primary"
-                                [isDisabled]="formLoading"
-                                (action)="submitForm()">
+                            label="Uložit"
+                            type="primary"
+                            [isDisabled]="formLoading"
+                            (action)="submitForm()">
                         </lnd-button>
                     </div>
                     <div class="col-12">
                         <lnd-button
-                                label="Storno"
-                                type="link"
-                                [isDisabled]="formLoading"
-                                (action)="customAction.emit()">
+                            label="Storno"
+                            type="link"
+                            [isDisabled]="formLoading"
+                            (action)="customAction.emit()">
                         </lnd-button>
                     </div>
                 </div>
