@@ -223,7 +223,7 @@ server.listen(PORT, () => {
 
 const job = new CronJob(
     '0 22 * * *',
-    () => resetAppState,
+    resetAppState,
     null,
     true,
     'Europe/Prague',
