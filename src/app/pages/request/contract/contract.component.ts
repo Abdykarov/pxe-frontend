@@ -20,7 +20,6 @@ import {
     switchMap,
     takeUntil,
 } from 'rxjs/operators';
-import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
 
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
@@ -50,6 +49,7 @@ import {
 } from 'src/app/services/model/document.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
+import { PdfViewerComponent } from 'src/common/ui/pdf-viewer/pdf-viewer.component';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -66,15 +66,15 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
     public pxeVerificationFormWrapper: ElementRef;
 
     @ViewChild('pdfInformation')
-    public pdfInformation: PdfJsViewerComponent ;
+    public pdfInformation: PdfViewerComponent;
 
     @ViewChild('pdfContract')
-    public pdfContract: PdfJsViewerComponent;
+    public pdfContract: PdfViewerComponent;
 
-    public pdfStopProlongation: PdfJsViewerComponent;
+    public pdfStopProlongation: PdfViewerComponent;
 
     @ViewChild('pdfStopProlongation')
-    set setPdfStopProlongation(pdfStopProlongation: PdfJsViewerComponent) {
+    set setPdfStopProlongation(pdfStopProlongation: PdfViewerComponent) {
         if (pdfStopProlongation) {
             this.pdfStopProlongation = pdfStopProlongation;
         }

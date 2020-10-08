@@ -111,9 +111,7 @@
 
     <div class="text-center">
         <pxe-verification-form
-            [showDisabledInput]="false"
             sendSmsLabel="Uložit"
-            classMainWrapper="row justify-content-center"
             [phone]="form.controls.phonePrefix.value + '' + form.controls.phone.value"
             [fieldError]="fieldError"
             [formLoading]="formLoading"
