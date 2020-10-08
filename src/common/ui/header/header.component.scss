@@ -15,7 +15,7 @@
 	right: 0;
 	height: $header-height;
 	color: $white;
-	z-index: 2010;
+	z-index: $zindex-lp;
 
 	&--sticked {
 		// Media queries
@@ -26,6 +26,7 @@
 
 		&.header--lp {
 			background-color: transparent;
+			z-index: $zindex-lp;
 
 			.header-inner {
 				// Media queries

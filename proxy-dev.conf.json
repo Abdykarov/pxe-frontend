@@ -1,12 +1,12 @@
 {
     "/api": {
-        "target": "https://test.parc4u.cz",
+        "target": "http://localhost:8080",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true
     },
     "/graphql": {
-        "target": "https://test.parc4u.cz",
+        "target": "http://localhost:8080",
         "logLevel": "debug",
         "secure": false,
         "changeOrigin": true

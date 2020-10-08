@@ -4,11 +4,11 @@
              class="row">
             <div class="col-12 col-xl-10 offset-xl-1">
                 <lnd-banner-ui
-                        buttonLabel="Najít dodavatele"
-                        [data]="{
+                    buttonLabel="Najít dodavatele"
+                    [data]="{
                             text: 'Platnost smlouvy končí za ' + contractEndInDays + ' ' + (contractEndInDays | plural: 'day')
                         }"
-                        (customBannerAction)="findNewSupplier(supplyPoint)"
+                    (customBannerAction)="findNewSupplier(supplyPoint)"
                 ></lnd-banner-ui>
             </div>
         </div>
@@ -191,6 +191,8 @@
                                     lndSFormDirective
                                     lndSBiometricsDirective
                                     label="jednotka"
+                                    [appendButtonIcon]="helpDocuments && helpDocuments['annualConsumption'] ? 'icon--info' : null"
+                                    (appendButtonAction)="showHelp('annualConsumption', 'Roční spotřeba')"
                                     [id]="'annualConsumptionUnit'"
                                     (focus)="fieldWrapperFocus('annualConsumptionUnit')"
                                     (blur)="fieldWrapperBlur()"
@@ -299,14 +301,37 @@
                         </div>
                         <div class="col-12 col-md-6 pl-3 text-right">
                             <lnd-button
-                                    label="Najít dodavatele"
-                                    type="link"
-                                    [isDisabled]="formLoading"
-                                    (action)="findNewSupplier(supplyPoint)">
+                                label="Najít dodavatele"
+                                type="link"
+                                size="sm"
+                                [isDisabled]="formLoading"
+                                (action)="findNewSupplier(supplyPoint)">
                             </lnd-button>
                         </div>
                     </div>
                 </ng-container>
+                <ng-container *ngIf="contractActionsTemplate">
+                    <ng-container *ngTemplateOutlet="contractActionsTemplate"></ng-container>
+                </ng-container>
+                <div class="row text-center">
+                    <div *ngIf="supplyPoint?.allowedOperations | isAllowedOperation: allowedOperations.PARTIAL_EDIT"
+                         class="col-12 mb-2">
+                        <lnd-button
+                            label="Uložit"
+                            type="primary"
+                            [isDisabled]="formLoading"
+                            (action)="submitForm()">
+                        </lnd-button>
+                    </div>
+                    <div class="col-12">
+                        <lnd-button
+                            label="Storno"
+                            type="link"
+                            [isDisabled]="formLoading"
+                            (action)="customAction.emit()">
+                        </lnd-button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
