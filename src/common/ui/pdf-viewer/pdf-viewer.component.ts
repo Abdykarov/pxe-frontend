@@ -55,6 +55,6 @@ export class PdfViewerComponent implements OnInit {
         }
     }
 
-    public refresh = () => this.pdfjsViewer.refresh();
+    public refresh = () => setTimeout(_ => this.pdfjsViewer.refresh());
 }
 

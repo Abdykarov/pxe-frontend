@@ -58,6 +58,7 @@ export const CONSTS = {
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
     MODAL_TYPE: {
         MORE_TABS: 'moreTabs',
+        LP_VIDEO: 'lpVideo',
         CONFIRM_DELETE_OFFER: 'confirmDeleteOffer',
         CONFIRM_CANCEL_OFFER: 'confirmCancelOffer',
         CONFIRM_BACK_IMPORT: 'confirmBackImportOffer',
@@ -172,6 +173,7 @@ export const CONSTS = {
     TITLES: {
         DEFAULT: 'PARC4U',
     },
+    LG_RESOLUTION: 1366,
     XL_RESOLUTION: 992,
     MD_RESOLUTION: 768,
 };
