@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { map } from 'rxjs/operators';
-
 import { ApolloCmsService } from 'src/app/services/apollo-cms.service';
-import { normalizeSignUp } from 'src/common/cms/utils/normalisation';
 import { signUpQuery } from 'src/common/cms/queries/sign-up';
 
 @Injectable({
@@ -19,5 +16,4 @@ export class SignUpService {
         .fetchQuery({
             query: signUpQuery,
         })
-        .pipe(map(normalizeSignUp))
 }

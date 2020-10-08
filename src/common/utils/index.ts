@@ -31,3 +31,5 @@ export * from './process-error-scroll.fnc';
 export * from './remove-html-from-text.fnc';
 export * from './truncate-text.fnc';
 export * from './get-absolute-height-of-element.fnc';
+export * from './is-object.fnc';
+export * from './apollo-get-operation-name.fnc';

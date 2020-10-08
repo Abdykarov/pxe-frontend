@@ -2,7 +2,8 @@ import {
     Component,
     Input,
 } from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
+
 import * as R from 'ramda';
 
 // own models

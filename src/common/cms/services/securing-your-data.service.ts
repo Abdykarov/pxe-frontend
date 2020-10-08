@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { map } from 'rxjs/operators';
-
 import { ApolloCmsService } from 'src/app/services/apollo-cms.service';
-import { normalizeSecuringYourData } from 'src/common/cms/utils/normalisation';
 import { securingYourDataQuery } from 'src/common/cms/queries/securing-your-data';
 
 @Injectable({
@@ -19,6 +16,5 @@ export class SecuringYourDataService {
         .fetchQuery({
             query: securingYourDataQuery,
         })
-        .pipe(map(normalizeSecuringYourData))
 
 }
