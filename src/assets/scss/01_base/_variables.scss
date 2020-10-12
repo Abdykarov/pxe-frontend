@@ -243,6 +243,8 @@ $zindex-alert:                       1000;
 $zindex-body-overlayer:              2000;
 $zindex-body-overlayer-full:         3000;
 $zindex-body-overlayer-visible:      3010;
+$zindex-header:                      2010;
+$zindex-lp:                          1020;
 $zindex-modal-backdrop:              3000;
 $zindex-modal:                       3010;
 $zindex-datepicker-content:          3020;
@@ -256,6 +258,7 @@ $zindex-placeloader-holder:          10;
 $zindex-form-file-input:             -1;
 $zindex-field-wrapper-control-label: 5;
 $zindex-graph-tabs-active-after:     99;
+$zindex-graphs-svg:                  1995;
 $zindex-tooltip-content:             3000;
 $zindex-tooltip-beak:                3001;
 $zindex-drop-zone-bg-image:          -1;
@@ -334,6 +337,7 @@ $drop-zone-border-gap-width:   15px;
 // Accordion
 $accordion-active-shadow:      0 10px 30px 0 rgba($body-color, .2);
 $accordion-toggle-icon-size:   20px;
+
 $accordion-padding:            ( $spacer * 2 );
 $accordion-padding-right-xs:   ( $spacer + $accordion-toggle-icon-size + $spacer );
 $accordion-padding-right:      ( $accordion-padding + $accordion-toggle-icon-size + $accordion-padding );

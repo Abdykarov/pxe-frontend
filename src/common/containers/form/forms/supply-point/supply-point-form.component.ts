@@ -112,7 +112,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         private cd: ChangeDetectorRef,
         protected fb: FormBuilder,
         private modalsService: ModalService,
-        private sAnalyticsService: SAnalyticsService,
+        public sAnalyticsService: SAnalyticsService,
         private supplyPointLocalStorageService: SupplyPointLocalStorageService,
         private supplyService: SupplyService,
     ) {

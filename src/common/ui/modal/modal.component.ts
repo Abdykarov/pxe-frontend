@@ -21,6 +21,9 @@ export class ModalComponent {
     public isModalOpen: boolean;
 
     @Input()
+    public isVideo = false;
+
+    @Input()
     public showClose = true;
 
     @Input()

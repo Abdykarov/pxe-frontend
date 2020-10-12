@@ -17,13 +17,16 @@
         <div class="section section--picture-bg">
             <div class="section-picture-text">
                 <div class="row px-3 px-md-0">
-                    <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-1">
+                    <div class="col-12 col-md-8 offset-md-2 col-xl-8 offset-xl-1">
                         <h1 class="h1--public mb-4">
-                            Přechod k novému dodavateli energií je konečně jednoduchý
+                            Ušetřete si provždy starosti o dodávky elektřiny a zemního plynu
                         </h1>
+                    </div>
+                    <div class="col-12 col-md-8 offset-md-2 col-xl-5 offset-xl-1">
                         <p>
-                            S PARC4U získáte dlouhodobě výhodné smlouvy energií na pár kliknutí. Služba&nbsp;zajišťuje i navazující smlouvy bez starostí.
+                            PARC4U vám umožní přímo z vašeho počítače či mobilu uzavírat a&nbsp;spravovat smlouvy na dodávky energií pro vaši domácnost anebo firmu. Přenechte starosti o&nbsp;vaše účty za energie na nás. Budeme vás informovat o&nbsp;vývoji na trhu, upozorníme kdy je vhodné provést případné změny a&nbsp;připravíme pro vás nabídky od několika prověřených dodavatelů. Vše je plně transparentní jako na burze, protože my jsme burza.
                         </p>
+                        <p><small>Platforma PARC4U je provozována komoditní burzou PXE, která je vlastněna společností European Energy Exchange AG, celosvětově největší burzou pro obchodování s elektřinou, a&nbsp;Burzou cenných papírů Praha, a.s.</small></p>
                         <lnd-button
                             label="Založit účet"
                             type="primary"
@@ -62,6 +65,32 @@
                             <p>Ceny za energie se stále mění. PARC4U vám kdykoliv pomůže dodavatele znovu změnit.</p>
                         </li>
                     </ol>
+                </div>
+            </div>
+        </div>
+        <div class="section section--video pb-md-0">
+            <div class="section-video-holder text-center d-none d-md-block">
+                <img
+                    class="img-fluid"
+                    src="/assets/images/landing-page/laptop-contour.png"
+                    alt="parc4u - video o službě PARC4U">
+            </div>
+            <div class="section-video-text">
+                <div class="row w-100 ml-0 text-center">
+                    <div class="col-12 col-md-6 offset-md-3">
+                        <lnd-button
+                            (action)="playVideoInModal($event)"
+                            type="icon"
+                            icon="icon--triangle-right"
+                            variant="icon"
+                            customClass="btn-video-play mb-1"
+                        >
+                        </lnd-button>
+                        <h2 class="h2--public mb-2">
+                            Video o službě PARC4U
+                        </h2>
+                        <p class="mb-0">Přehrajte si krátké video o službě Parc4u</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -109,12 +138,14 @@
                  [class.cursor-pointer]="isVideoPlaying">
                 <video
                     #video
-                    (click)="isVideoPlaying && toggleVideo($event)"
-                    poster="/assets/images/landing-page/picture-fallback.jpg"
                     class="section-video"
+                    poster="/assets/images/landing-page/picture-fallback.jpg"
                     loop
                     muted
-                    preload="auto">
+                    (pause)="cd.detectChanges()"
+                    (play)="cd.detectChanges()"
+                    (click)="isVideoPlaying && pause($event)"
+                    preload="none">
                     <source src="/assets/images/landing-page/lp-video.webm" type="video/webm">
                     <source src="/assets/images/landing-page/lp-video.mp4" type="video/mp4">
                     <img src="/assets/images/landing-page/picture-fallback.jpg" alt="parc4u - obrázek laptopu s aplikací">
@@ -127,7 +158,7 @@
                         icon="icon--triangle-right"
                         variant="icon"
                         customClass="btn-video-play"
-                        (action)="toggleVideo($event)"
+                        (action)="play()"
                     >
                     </lnd-button>
                 </div>
@@ -146,7 +177,7 @@
                                 icon="icon--triangle-right"
                                 variant="icon"
                                 customClass="btn-video-play"
-                                (action)="toggleVideo($event)"
+                                (action)="play()"
                             >
                             </lnd-button>
                         </div>

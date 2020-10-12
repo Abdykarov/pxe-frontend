@@ -122,6 +122,11 @@
 		}
 	}
 
+	&.supply-point-offer--page-box {
+		border-radius: 0;
+		box-shadow: none;
+	}
+
 	&__inner {
 		position: relative;
 		height: 100%;

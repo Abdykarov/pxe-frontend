@@ -56,6 +56,7 @@ export const CONSTS = {
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
     MODAL_TYPE: {
         MORE_TABS: 'moreTabs',
+        LP_VIDEO: 'lpVideo',
         CONFIRM_DELETE_OFFER: 'confirmDeleteOffer',
         CONFIRM_CANCEL_OFFER: 'confirmCancelOffer',
         CONFIRM_BACK_IMPORT: 'confirmBackImportOffer',
@@ -162,13 +163,14 @@ export const CONSTS = {
         COOKIES_POLICY: 'Cookies policy | PARC4U',
         DEFAULT: 'PARC4U',
         LANDING_PAGE: 'Získejte svobodu nad energií | PARC4U',
-        LOGIN: 'Přihlášení | PARC4U',
+        LOGIN: 'Přihlásit | PARC4U',
         FAQ: 'Často kladené otázky | PARC4U',
         PATTERNS_OF_CONTRACTS: 'Vzory smluv o dodávce | PARC4U',
         TERMS_OF_USE: 'Podmínky užívání | PARC4U',
         SECURING_YOUR_DATA: 'Ochrana osobních údajů | PARC4U',
         SIGN_UP: 'Registrace | PARC4U',
     },
+    LG_RESOLUTION: 1366,
     XL_RESOLUTION: 992,
     MD_RESOLUTION: 768,
 };
@@ -238,7 +240,7 @@ export const SEO = {
             'často kladené otázky',
         ],
         LOGIN: [
-            'přihlášení',
+            'přihlásit',
             'kliknutí',
         ],
         PATTERNS_OF_CONTRACTS: [

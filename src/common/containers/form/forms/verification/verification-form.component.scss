@@ -1,0 +1,14 @@
+/*
+ -  Verification form
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+@import '../../../../ui/forms/field/field.component.variables.scss';
+
+.form-container {
+	max-width: $input-width;
+	margin: 0 auto;
+}
