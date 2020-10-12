@@ -65,6 +65,7 @@
                 <div class="supply-points-offer">
                     <pxe-supply-point-offer
                         (action)="saveContract(supplyPointOffer)"
+                        customClass="mb-3"
                         *ngFor="let supplyPointOffer of supplyPointOffers"
                         [questions]="questions"
                         [supplyPointOffer]="supplyPointOffer"
