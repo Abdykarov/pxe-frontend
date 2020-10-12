@@ -103,63 +103,63 @@ export class DatepickerComponent {
         private dynamicPipe: DynamicPipe,
         private localeService: BsLocaleService,
     ) {
-        this.resetDatepickerLocale();
-        this.config = defaultDatepickerConfig;
+        // this.resetDatepickerLocale();
+        // this.config = defaultDatepickerConfig;
     }
 
     public checkValue = (event) => {
-        const stringDate = event.target.value;
-        const dateFormatRegexp = new RegExp(defaultDatepickerConfig.dateFormatRegexp);
-        if (dateFormatRegexp.test(stringDate)) {
-            const match = stringDate.match(dateFormatRegexp);
-            const date = Date.parse(`${match[3]}-${match[2]}-${match[1]}`);
-            if (date) {
-                this.datepicker.bsValue = new Date(date);
-            } else {
-                this.resetDatepickerOnError(stringDate);
-            }
-        } else {
-            this.resetDatepickerOnError(stringDate);
-        }
+        // const stringDate = event.target.value;
+        // const dateFormatRegexp = new RegExp(defaultDatepickerConfig.dateFormatRegexp);
+        // if (dateFormatRegexp.test(stringDate)) {
+        //     const match = stringDate.match(dateFormatRegexp);
+        //     const date = Date.parse(`${match[3]}-${match[2]}-${match[1]}`);
+        //     if (date) {
+        //         this.datepicker.bsValue = new Date(date);
+        //     } else {
+        //         this.resetDatepickerOnError(stringDate);
+        //     }
+        // } else {
+        //     this.resetDatepickerOnError(stringDate);
+        // }
     }
 
     public resetDatepickerLocale = (invalidMessage = '') => {
-        csLocale.invalidDate = invalidMessage;
-        defineLocale(locale, csLocale);
-        this.localeService.use(locale);
+        // csLocale.invalidDate = invalidMessage;
+        // defineLocale(locale, csLocale);
+        // this.localeService.use(locale);
     }
 
     public resetDatepickerOnError = (value: string) => {
-        this.resetDatepickerLocale(value);
-        // IE walkaround
-        // this.datepicker.bsValue = null;
-        // this.datepicker.bsValue = undefined;
-        this.parentForm.controls[this.datepickerName].setErrors({
-            'bsDate': true,
-        });
-        this.datepicker.isOpen = false;
+        // this.resetDatepickerLocale(value);
+        // // IE walkaround
+        // // this.datepicker.bsValue = null;
+        // // this.datepicker.bsValue = undefined;
+        // this.parentForm.controls[this.datepickerName].setErrors({
+        //     'bsDate': true,
+        // });
+        // this.datepicker.isOpen = false;
     }
 
     public onShowPicker = (event) => {
-        const dayHoverHandler = event.dayHoverHandler;
-        const hoverWrapper = (hoverEvent) => {
-            const { cell, isHovered } = hoverEvent;
-
-            if ((isHovered &&
-                !!navigator.platform &&
-                /iPad|iPhone|iPod/.test(navigator.platform)) &&
-                'ontouchstart' in window
-            ) {
-                this.datepicker._datepickerRef.instance.daySelectHandler(cell);
-            }
-
-            return dayHoverHandler(hoverEvent);
-        };
-        event.dayHoverHandler = hoverWrapper;
-        setTimeout(() => {
-            window.scrollTo(window.scrollX, window.scrollY - 1);
-            window.scrollTo(window.scrollX, window.scrollY + 1);
-        });
+        // const dayHoverHandler = event.dayHoverHandler;
+        // const hoverWrapper = (hoverEvent) => {
+        //     const { cell, isHovered } = hoverEvent;
+        //
+        //     if ((isHovered &&
+        //         !!navigator.platform &&
+        //         /iPad|iPhone|iPod/.test(navigator.platform)) &&
+        //         'ontouchstart' in window
+        //     ) {
+        //         this.datepicker._datepickerRef.instance.daySelectHandler(cell);
+        //     }
+        //
+        //     return dayHoverHandler(hoverEvent);
+        // };
+        // event.dayHoverHandler = hoverWrapper;
+        // setTimeout(() => {
+        //     window.scrollTo(window.scrollX, window.scrollY - 1);
+        //     window.scrollTo(window.scrollX, window.scrollY + 1);
+        // });
     }
 
     public onHidePicker = (event) => this.cd.markForCheck();
