@@ -11,28 +11,6 @@
 @import 'supply-point-offer.component.variables.scss';
 @import '../supply-point/supply-point.component.variables.scss';
 
-::ng-deep {
-	.supply-points-offer {
-		pointer-events: none;
-
-		&:hover .supply-point-offer:not(:hover):not(.supply-point-offer--owner) {
-			@include link-without-href-self {
-				// Media queries
-				@include media-breakpoint-up(xl) {
-					background-color: $body-bg;
-				}
-			}
-
-			.supply-point-offer__inner--price {
-				// Media queries
-				@include media-breakpoint-up(xl) {
-					background-color: rgba($white, .5);
-				}
-			}
-		}
-	}
-}
-
 .supply-point-offer {
 	@include link-without-href-self {
 		display: block;
@@ -145,14 +123,12 @@
 			padding-bottom: ( $spacer * 1.5 );
 
 			.supply-point-offer__title {
+				margin-bottom: 0;
+
 				// Media queries
 				@include media-breakpoint-up(xl) {
 					font-size: $supply-point-offer-price-font-size-xl;
 				}
-			}
-
-			.supply-point-offer__title {
-				margin-bottom: 0;
 			}
 		}
 	}
@@ -236,7 +212,8 @@
 	}
 
 	&__value-name {
-		margin-bottom: ( $spacer / 2 );
+		margin-bottom: ( $spacer / 4 );
+		color: rgba($font-text, .5);
 	}
 
 	&__value {
@@ -282,7 +259,6 @@
 
 	&__benefits-text {
 		display: inline-block;
-		margin-left: ( $spacer / 2 );
 	}
 
 	&__benefits {

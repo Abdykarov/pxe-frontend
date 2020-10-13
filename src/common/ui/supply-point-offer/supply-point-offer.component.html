@@ -9,10 +9,10 @@
      [class.supply-point-offer--not-interactive]="!interactive">
     <div class="row no-gutters">
         <div
-            class="col-12 col-md-6 order-md-1 pb-md-3 pl-md-0"
+            class="col-12 col-md-6 order-md-1 supply-point-offer__block px-0"
             *ngIf="!isOwner">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 ">
                     <span class="supply-point-offer__title-label">Název nabídky</span>
                     <span class="supply-point-offer__title text-break">{{supplyPointOffer?.name}}</span>
                 </div>
@@ -62,16 +62,16 @@
                     <div class="row">
                         <div class="col-auto"
                              *ngIf="!isOwner">
-                            <div class="supply-point-offer__value-box supply-point-offer__value-box--price">
-                                <span class="supply-point-offer__value-name">Dodávka</span>
-                                <h1>{{supplyPointOffer.deliveryLength }} {{supplyPointOffer.deliveryLength | plural: 'year'}}</h1>
+                            <div class="supply-point-offer__value-box">
+                                <span class="supply-point-offer__title-label">Dodávka</span>
+                                <span class="supply-point-offer__title">{{supplyPointOffer.deliveryLength }} {{supplyPointOffer.deliveryLength | plural: 'year'}}</span>
                             </div>
                         </div>
                         <div class="col-auto"
                              *ngIf="!isOwner && showValidityOfOffer">
-                            <div class="supply-point-offer__value-box supply-point-offer__value-box--price ml-0">
-                                <span class="supply-point-offer__value-name">Platnost nabídky</span>
-                                <h1>{{dateDiffValidityOfOffer}} {{dateDiffValidityOfOffer | plural: 'hour'}}</h1>
+                            <div class="supply-point-offer__value-box">
+                                <span class="supply-point-offer__title-label">Platnost nabídky</span>
+                                <span class="supply-point-offer__title">{{dateDiffValidityOfOffer}} {{dateDiffValidityOfOffer | plural: 'hour'}}</span>
                             </div>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                      class="col-md-6">
                     <div class="supply-point-offer__benefits-description-wrapper">
                         <div class="supply-point-offer__benefits-description">
-                            <span class="icon icon--star"></span>
+                            <span class="icon icon--star mr-2"></span>
                             <span class="supply-point-offer__benefits-text">S touto nabídkou získáte zajímavé výhody.</span>
                         </div>
                     </div>
@@ -115,8 +115,7 @@
                 class="row">
                 <div class="col-12 mb-1">
                     <div class="supply-point-offer__benefits-description">
-                        <span class="icon icon--star"></span>
-                        <span class="supply-point-offer__benefits-text">K této nabídce dostanete tyto výhody</span>
+                        <span class="supply-point-offer__benefits-text text-uppercase">Výhody</span>
                     </div>
                 </div>
                 <div class="col-12">
@@ -277,10 +276,10 @@
                 <div class="col-12">
                     <span class="supply-point-offer__title mb-0 text-break">
                         <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
-                            {{math.ceil(supplyPointOffer.prepayment) | number: '1.0-0'}}&nbsp;Kč&nbsp;<span class="small">VČETNĚ&nbsp;DPH</span>
+                            {{math.ceil(supplyPointOffer.prepayment) | number: '1.0-0'}}&nbsp;Kč&nbsp;<span class="d-inline-block small">VČETNĚ&nbsp;DPH</span>
                         </ng-container>
                         <ng-template #totalPrice>
-                            {{math.ceil(supplyPointOffer.totalPrice) | number: '1.0-0'}}&nbsp;Kč&nbsp;<span class="small">VČETNĚ&nbsp;DPH</span>
+                            {{math.ceil(supplyPointOffer.totalPrice) | number: '1.0-0'}}&nbsp;Kč&nbsp;<span class="d-inline-block small">VČETNĚ&nbsp;DPH</span>
                         </ng-template>
                     </span>
                 </div>
