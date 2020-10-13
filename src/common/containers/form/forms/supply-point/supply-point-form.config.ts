@@ -378,3 +378,17 @@ export const confirmFindNewSupplyPointConfig = (data): IShowModal => {
         },
     };
 };
+
+export const confirmSaveSupplyPoint = 'confirmSaveSupplyPoint';
+
+export const confirmConfirmSaveSupplyPointConfig = (): IShowModal => {
+    return {
+        component: 'ConfirmModalComponent',
+        modalType: confirmSaveSupplyPoint,
+        instanceData: {
+            confirmText: `Opravdu chcete změny uložit?`,
+            titleConfirm: 'Uložit',
+            titleClose: 'Zrušit',
+        },
+    };
+};

@@ -38,7 +38,7 @@
                         <p class="mb-1 text-uppercase">Odběr</p>
                         <span class="perex">
                             <ng-container *ngIf="supplyPoint.commodityType === commodityType.POWER">Elektřina</ng-container>
-                            <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">Plynu</ng-container>
+                            <ng-container *ngIf="supplyPoint.commodityType === commodityType.GAS">Plyn</ng-container>
                         </span>
                     </div>
                     <div *ngIf="supplyPoint?.contract?.offer?.greenEnergy"
