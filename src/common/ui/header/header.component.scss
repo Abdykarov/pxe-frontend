@@ -15,7 +15,7 @@
 	right: 0;
 	height: $header-height;
 	color: $white;
-	z-index: $zindex-lp;
+	z-index: $zindex-header;
 
 	&--sticked {
 		// Media queries
@@ -38,6 +38,12 @@
 	}
 
 	&--lp {
+		z-index: $zindex-lp;
+
+		@include media-breakpoint-down(xl) {
+			z-index: $zindex-header;
+		}
+
 		.header-inner {
 			// Media queries
 			@include media-breakpoint-down(xl) {
