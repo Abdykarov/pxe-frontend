@@ -432,11 +432,11 @@
                     lndSBiometricsDirective
                     *ngIf="form.controls.expirationDate.status !== 'DISABLED'"
                     [appendButtonIcon]="helpDocuments && helpDocuments['expirationDate'] ? 'icon--info' : null"
-                    (appendButtonAction)="showHelp('expirationDate', form.controls.contractEndTypeId.status !== 'DISABLED' ? 'Do kdy máte uzavřenou aktuální smlouvu?' : 'Datum ukončení')"
+                    (appendButtonAction)="showHelp('expirationDate', 'Ukončení platnosti stávající smlouvy')"
                     [datepickerName]="'expirationDate'"
                     [error]="formError.expirationDate || form.controls.expirationDate.errors"
                     id="datepicker-1"
-                    [label]="form.controls.contractEndTypeId.status !== 'DISABLED' ? 'Do kdy máte uzavřenou aktuální smlouvu?' : 'Datum ukončení'"
+                    label="Ukončení platnosti stávající smlouvy"
                     [parentForm]="form"
                     [placeholder]="'dd.mm.rrrr'"
                     [minDate]="minDate"

@@ -161,6 +161,10 @@
 			background-color: $white;
 		}
 	}
+
+	&--with-placeholder {
+		@include placeholder(rgba($input-color, .5));
+	}
 }
 
 .form-control-text {
