@@ -32,6 +32,14 @@
         "shortContent":"<p class='mb-0'>Automatická prolongace je ve smlouvách přes PARC4U z důvodu vaší ochrany. Nechceme, aby se vám stalo, že nebudete mít řádně uzavřenu smlouvu o dodávce v případě, že si včas nestihnete zvolit nového dodavatele či prodloužit smlouvu s tím stávajícím.  Nemusíte se ale ničeho obávat, protože vás budeme předem informovat o tom, že je čas zajistit si dodávku na další období. Případné automatické prodloužení nastane pouze v případě, že na naše výzvy nebudete reagovat.</p>"
     },
     {
+        "id":16,
+        "tag":"general",
+        "url":"price",
+        "header":"Co vaše služby stojí?",
+        "seoKeywords": "spotřebitele, energií, zdarma, PARC4U, ceníku, transparentní, zvýhodňován",
+        "shortContent":"<p class='mb-1'>Pro vás, jako odběratele energií, je využívání PARC4U zcela zdarma <sup>*</sup>. Za obchodování přes PARC4U platí dodavatelé dle platného ceníku, který je pro všechny stejný a transparentní. Žádný z dodavatelů není nijak zvýhodňován.</p><p class='mb-0 small'><sup>*</sup> Pro ověření vaší identity je potřeba zaslat 1kč před uzavřením první smlouvy.</p>"
+    },
+    {
         "id":5,
         "tag":"general",
         "url":"reason-for-payment",
@@ -123,14 +131,6 @@
         "shortContent":"<p class='mb-0'>Rádi bychom získali pro PARC4U dostatek zákazníků, což nám umožní další rozvoj a automatizaci poskytovaných služeb tak, abyste měli energie již pro vždy vyřešené.</p>",
         "seoKeywords": "PARC4U, dostatek, zákazníků, rozvoj, automatizaci, poskytovaných služeb, energie, vyřešené",
         "oneOfMostVisited":true
-    },
-    {
-        "id":16,
-        "tag":"general",
-        "url":"price",
-        "header":"Co vaše služby stojí?",
-        "seoKeywords": "spotřebitele, energií, zdarma, PARC4U, ceníku, transparentní, zvýhodňován",
-        "shortContent":"<p class='mb-1'>Pro vás, jako odběratele energií, je využívání PARC4U zcela zdarma <sup>*</sup>. Za obchodování přes PARC4U platí dodavatelé dle platného ceníku, který je pro všechny stejný a transparentní. Žádný z dodavatelů není nijak zvýhodňován.</p><p class='mb-0 small'><sup>*</sup> Pro ověření vaší identity je potřeba zaslat 1kč před uzavřením první smlouvy.</p>"
     },
     {
         "id":17,
