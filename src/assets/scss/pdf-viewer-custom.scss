@@ -31,4 +31,7 @@ body {
 
 #viewerContainer {
 	top: 0;
+	/* stylelint-disable */
+	left: 0 !important;
+	/* stylelint-enable */
 }
