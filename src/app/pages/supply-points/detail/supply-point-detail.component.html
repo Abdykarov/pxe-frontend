@@ -94,7 +94,7 @@
                     [smsSent]="smsSent"
                     enableVerificationSubText="Energetický zákon (§ 11 a odst. 3) vám nabízí možnost smlouvu vypovědět bez jakýchkoliv sankcí
                         do 15. dne po záhajení dodávek energií. Výpovědní doba činí 15 dnů a začíná běžet prvním dnem měsíce
-                        následujícího. Jediná částka, kterou zaplatííte, je za energii, kterou jste už stihli odebrat."
+                        následujícího. Jediná částka, kterou zaplatíte, je za energii, kterou jste už stihli odebrat."
                     enableVerificationLabel="Vypovědět smlouvu"
                     [showForm]="contractAction === contractActions.TERMINATE_CONTRACT"
                     [toggleEnabledBySelf]="true"
@@ -157,15 +157,16 @@
     <lnd-placeloader [loading]="dataLoading && !globalError.length"></lnd-placeloader>
     <ng-container *ngIf="supplyPoint && !dataLoading">
         <pxe-supply-point-detail-form
-                [formFields]="formFields"
-                [formLoading]="formLoading"
-                [formSent]="formSent"
-                [globalError]="globalError"
-                [fieldError]="fieldError"
-                (submitAction)="updateSupplyForm($event)"
-                (customAction)="cancelUpdate()"
-                [supplyPoint]="supplyPoint"
-                [contractActionsTemplate]="contractActionsTemplate"
+            [formFields]="formFields"
+            [formLoading]="formLoading"
+            [formSent]="formSent"
+            [globalError]="globalError"
+            [fieldError]="fieldError"
+            [supplyPoint]="supplyPoint"
+            [contractActionsTemplate]="contractActionsTemplate"
+            (submitAction)="updateSupplyForm($event)"
+            (customAction)="cancelUpdate()"
+            (finallyNextContractAction)="routerToNextContract(false)"
         ></pxe-supply-point-detail-form>
     </ng-container>
 
@@ -173,7 +174,7 @@
         class="row text-center">
         <div class="col-12 col-lg-10 offset-lg-1">
             <h2 *ngIf="supplyPoint.contract.isNextContractConcluded && supplyPoint.contract?.nextContractId != supplyPoint.contract.contractId"> Tato smlouva bude nahrazena budoucí smlouvou. </h2>
-            <h2 *ngIf="!(supplyPoint.contract.isNextContractConcluded) && supplyPoint.contract.nextContractId && supplyPoint.contract?.nextContractId != supplyPoint.id"> Tato smlouva má rozpracovanou navazující smlouvu. </h2>
+            <h2 *ngIf="!(supplyPoint.contract.isNextContractConcluded) && supplyPoint.contract.nextContractId && supplyPoint.contract?.nextContractId != supplyPoint.id"> Máte jednu rozpracovanou navazující smlouvu, nechcete ji dokončit?</h2>
         </div>
         <div class="col-12 col-xl-10 offset-xl-1">
             <div class="page-box">
