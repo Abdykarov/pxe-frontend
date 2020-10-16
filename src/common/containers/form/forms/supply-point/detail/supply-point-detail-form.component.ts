@@ -1,9 +1,11 @@
 import {
     ChangeDetectorRef,
     Component,
+    EventEmitter,
     Input,
     OnChanges,
     OnInit,
+    Output,
     SimpleChanges,
     TemplateRef,
 } from '@angular/core';
@@ -69,6 +71,9 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
 
     @Input()
     public contractActionsTemplate: TemplateRef<any>;
+
+    @Output()
+    public finallyNextContractAction: EventEmitter<any> = new EventEmitter<any>();
 
     public allowedFields = supplyPointDetailAllowedFields;
     public allowedOperations = AllowedOperations;
