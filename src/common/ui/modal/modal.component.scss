@@ -167,4 +167,10 @@
 	.modal-body {
 		display: inline-flex;
 	}
+
+	&--lp {
+		.modal-content {
+			height: 71%;
+		}
+	}
 }
