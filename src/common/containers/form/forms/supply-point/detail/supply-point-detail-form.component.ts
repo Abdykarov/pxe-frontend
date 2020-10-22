@@ -1,9 +1,11 @@
 import {
     ChangeDetectorRef,
     Component,
+    EventEmitter,
     Input,
     OnChanges,
     OnInit,
+    Output,
     SimpleChanges,
     TemplateRef,
 } from '@angular/core';
@@ -14,7 +16,6 @@ import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import {
     filter,
-    map,
     takeUntil,
 } from 'rxjs/operators';
 
@@ -24,14 +25,7 @@ import {
     CommodityType,
     ICodelistOptions,
     ISupplyPoint,
-    ProgressStatus,
-    TimeToContractEndPeriod,
 } from 'src/common/graphql/models/supply.model';
-import {
-    confirmFindNewSupplyPoint,
-    confirmFindNewSupplyPointConfig,
-    supplyPointDetailAllowedFields,
-} from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import {
     ANNUAL_CONSUMPTION_TYPES,
     ANNUAL_CONSUMPTION_UNIT_TYPES,
@@ -42,15 +36,29 @@ import {
     CONTRACT_END_TYPE_TRANSLATE_MAP,
     ROUTES,
     SUBJECT_TYPE_OPTIONS,
-    TIME_TO_CONTRACT_END_PERIOD_MAP,
     UNIT_OF_PRICES,
 } from 'src/app/app.constants';
+import {
+    confirmConfirmSaveSupplyPointConfig,
+    confirmFindNewSupplyPoint,
+    confirmFindNewSupplyPointConfig,
+    confirmSaveSupplyPoint,
+    supplyPointDetailAllowedFields,
+} from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
+import { DocumentService } from 'src/app/services/document.service';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
+import {
+    IDocumentType,
+    IResponseDataDocument,
+} from 'src/app/services/model/document.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
+import {
+    parseRestAPIErrors,
+    transformCodeList,
+} from 'src/common/utils';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { transformCodeList } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-supply-point-detail-form',
@@ -64,6 +72,9 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     @Input()
     public contractActionsTemplate: TemplateRef<any>;
 
+    @Output()
+    public finallyNextContractAction: EventEmitter<any> = new EventEmitter<any>();
+
     public allowedFields = supplyPointDetailAllowedFields;
     public allowedOperations = AllowedOperations;
     public commodityType = CommodityType;
@@ -75,14 +86,13 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
     public subjectName = '';
     public supplyPointContractEndTypes = CONTRACT_END_TYPE;
     public setFormByCommodity = this.setFormFields;
-    public timeToContractEndPeriodMap = TIME_TO_CONTRACT_END_PERIOD_MAP;
     public today = new Date().toISOString();
     public timeToContractEnd = CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS;
-    public timeToContractEndPeriod = TimeToContractEndPeriod.DAY;
 
     constructor(
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
+        private documentService: DocumentService,
         protected fb: FormBuilder,
         private modalsService: ModalService,
         private navigateRequestService: NavigateRequestService,
@@ -157,6 +167,11 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
                 if (modal.modalType === confirmFindNewSupplyPoint) {
                     this.navigateToSupplyPoint(modal.data);
                 }
+
+                if (modal.modalType === confirmSaveSupplyPoint) {
+                    this.saveSubmittedData();
+                }
+
                 this.modalsService.closeModalData$.next(null);
             });
 
@@ -188,19 +203,6 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
             },
         };
         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT], {state});
-    }
-
-    public navigateToUnsignedSupplyPoint = (supplyPointId: string, contractId: string) => {
-        this.supplyService.getSupplyPoint(supplyPointId)
-            .pipe(
-                map(({data}) => data.getSupplyPoint),
-                takeUntil(this.destroy$),
-            )
-            .subscribe(
-                (supplyPoint: ISupplyPoint) => {
-                    this.navigateRequestService.checkCorrectStep(supplyPoint, ProgressStatus.COMPLETED);
-                },
-            );
     }
 
     public prefillFormData = () => {
@@ -257,7 +259,10 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         this.resetFormError(false);
     }
 
-    public submitValidForm = () => {
+    public submitValidForm = () => this.modalsService
+        .showModal$.next(confirmConfirmSaveSupplyPointConfig())
+
+    private saveSubmittedData = () => {
         const form: any = {
             ...this.form.value,
         };
@@ -282,5 +287,24 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         }
 
         this.submitAction.emit(form);
+    }
+
+    public downloadPdf = () => {
+        this.documentService.getDocument(this.supplyPoint.contract.contractId, IDocumentType.CONTRACT)
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(
+                (responseDataDocument: IResponseDataDocument) => {
+                    this.documentService.documentSave(responseDataDocument);
+                    this.formLoading = false;
+                    this.cd.markForCheck();
+                },
+                (error) => {
+                    const message = parseRestAPIErrors(error);
+                    this.globalError = [message];
+                    this.cd.markForCheck();
+                },
+            );
     }
 }

@@ -3,7 +3,7 @@
     <div *ngIf="data.fullContent">
         <a class="link"
            [routerLink]="['/', CONSTS.PATHS.FAQ, data.tag | getUrlFromTag:faqConfig, data.url]">
-            Více info
+            Zobrazit více
         </a>
     </div>
 </ng-template>
@@ -68,6 +68,32 @@
                 </div>
             </div>
         </div>
+        <div class="section section--video pb-md-0">
+            <div class="section-video-holder text-center d-none d-md-block">
+                <img
+                    class="img-fluid"
+                    src="/assets/images/landing-page/laptop-contour.png"
+                    alt="parc4u - video o službě PARC4U">
+            </div>
+            <div class="section-video-text">
+                <div class="row w-100 ml-0 text-center">
+                    <div class="col-12 col-md-6 offset-md-3">
+                        <lnd-button
+                            (action)="playVideoInModal($event)"
+                            type="icon"
+                            icon="icon--triangle-right"
+                            variant="icon"
+                            customClass="btn-video-play mb-1"
+                        >
+                        </lnd-button>
+                        <h2 class="h2--public mb-2">
+                            Video o službě PARC4U
+                        </h2>
+                        <p class="mb-0">Přehrajte si krátké video o službě Parc4u</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div #aboutService
         class="section section--picture-half pb-xl-0">
@@ -112,12 +138,14 @@
                  [class.cursor-pointer]="isVideoPlaying">
                 <video
                     #video
-                    (click)="isVideoPlaying && toggleVideo($event)"
-                    poster="/assets/images/landing-page/picture-fallback.jpg"
                     class="section-video"
+                    poster="/assets/images/landing-page/picture-fallback.jpg"
                     loop
                     muted
-                    preload="auto">
+                    (pause)="cd.detectChanges()"
+                    (play)="cd.detectChanges()"
+                    (click)="isVideoPlaying && pause($event)"
+                    preload="none">
                     <source src="/assets/images/landing-page/lp-video.webm" type="video/webm">
                     <source src="/assets/images/landing-page/lp-video.mp4" type="video/mp4">
                     <img src="/assets/images/landing-page/picture-fallback.jpg" alt="parc4u - obrázek laptopu s aplikací">
@@ -130,7 +158,7 @@
                         icon="icon--triangle-right"
                         variant="icon"
                         customClass="btn-video-play"
-                        (action)="toggleVideo($event)"
+                        (action)="play()"
                     >
                     </lnd-button>
                 </div>
@@ -149,7 +177,7 @@
                                 icon="icon--triangle-right"
                                 variant="icon"
                                 customClass="btn-video-play"
-                                (action)="toggleVideo($event)"
+                                (action)="play()"
                             >
                             </lnd-button>
                         </div>
