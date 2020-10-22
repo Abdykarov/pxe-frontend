@@ -7,7 +7,7 @@
         <video
             #video
             class="w-100 cursor-pointer"
-            muted
+            [muted]="false"
             preload="auto"
             (pause)="cd.detectChanges()"
             (play)="cd.detectChanges()"
