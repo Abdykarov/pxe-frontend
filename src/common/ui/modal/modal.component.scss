@@ -102,6 +102,22 @@
 		font-size: ( $icon-size-px * 1.5 );
 		z-index: $zindex-modal;
 	}
+
+	&-xl {
+		max-width: $modal-xl;
+	}
+
+	&-lg {
+		max-width: $modal-lg;
+	}
+
+	&-md {
+		max-width: $modal-md;
+	}
+
+	&-sm {
+		max-width: $modal-sm;
+	}
 }
 
 .modal-confirm {
@@ -139,5 +155,17 @@
 		> :not(:first-child) {
 			margin-left: 0;
 		}
+	}
+}
+
+.modal-video {
+	.modal-header,
+	.modal-body {
+		padding: 0;
+	}
+
+	.modal-body {
+		display: inline-flex;
+		height: 71%;
 	}
 }

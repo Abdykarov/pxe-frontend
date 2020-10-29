@@ -61,7 +61,7 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
                     if (this.activeQuestion) {
                         this.activeTagLabel = geParamFromTag(this.activeTag, this.faqConfig, 'label');
                         this.questions = this.getQuestions();
-                        this.titleService.setTitle(`${this.activeQuestion.header} | PARC4U`);
+                        this.titleService.setTitle(`${this.activeQuestion.header} | parc4u`);
                         this.metaService.updateTag({
                             name: 'description',
                             content: R.pipe(

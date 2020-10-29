@@ -7,15 +7,15 @@
     <div class="col-12 col-xl-10 offset-xl-1">
         <div class="page-box">
             <p class="mb-3">
-                Mrzí nás, že PARC4U opouštíte, ale bránit vám v tom nemůžeme.
+                Mrzí nás, že parc4u opouštíte, ale bránit vám v tom nemůžeme.
             </p>
             <p>
-                Zrušení účtu a smazání veškerých svých dat v PARC4U provedete ověřovacím SMS kódem.
+                Zrušení účtu a smazání veškerých svých dat v parc4u provedete ověřovacím SMS kódem.
             </p>
             <div class="row justify-content-between">
                 <div class="col-12 col-md-auto mb-4">
                     <lnd-button
-                        label="Zůstat v PARC4U"
+                        label="Zůstat v parc4u"
                         type="link"
                         customClass="mt-md-4"
                         (click)="redirectToUserProfile($event)">
@@ -24,7 +24,6 @@
                 <div class="col-12 col-md-9">
                     <pxe-verification-form
                         submitLabelText="Zrušit účet"
-                        [showSentSmsLabelUnderFirstField]="false"
                         [phone]="phone"
                         (customAction)="sendConfirmationSms()">
                     </pxe-verification-form>

@@ -12,7 +12,7 @@
                 alt="sign">
             <h2 *ngIf="showWelcome"
                 class="mb-0">
-                Vítejte v aplikaci PARC4U
+                Vítejte v aplikaci parc4u
             </h2>
         </div>
         <div class="col-12 col-xl-8 offset-xl-2 text-center">
@@ -22,14 +22,62 @@
                 <li>Ověřte způsob výpovědi vaší smlouvy v případě, že si nebudete jistí zanechte přednastavenou hodnotu.</li>
                 <li>Pro uzavření smlouvy budete potřebovat váš mobilní telefon.</li>
             </ul>
-            <p>
-                Je-li vše jasné pokračujte tlačítkem "Vyplnit".
-            </p>
+        </div>
+        <div class="col-12 col-xl-8 offset-xl-2 mb-5 text-center">
             <lnd-button
                 type="primary"
                 (action)="routerToNextStep($event);"
                 label="Vyplnit">
             </lnd-button>
+        </div>
+        <div class="col-12 col-xl-8 offset-xl-2 text-center">
+            <div class="video">
+                <div class="video__holder">
+                    <h1 #aaa></h1>
+                    <video
+                        #video
+                        [class.cursor-pointer]="isVideoPlaying"
+                        (click)="isVideoPlaying && pause($event)"
+                        class="w-100"
+                        poster="/assets/images/landing-page/picture-fallback.jpg"
+                        loop
+                        [muted]="false"
+                        controls
+                        (pause)="cd.detectChanges()"
+                        (play)="cd.detectChanges()"
+                        preload="none">
+                        <source src="/assets/images/signboard/create_om_tutorial.mp4" type="video/mp4">
+                        Váš prohlížeč nepodporuje zobrazení videa
+                    </video>
+                    <div class="video__control d-md-none">
+                        <lnd-button
+                            *ngIf="!isVideoPlaying"
+                            type="icon"
+                            icon="icon--triangle-right"
+                            variant="icon"
+                            customClass="btn-video-play"
+                            (action)="play()"
+                        >
+                        </lnd-button>
+                    </div>
+                </div>
+                <div class="video__text">
+                    <div class="video__control d-none d-md-block">
+                        <lnd-button
+                            *ngIf="!isVideoPlaying"
+                            type="icon"
+                            icon="icon--triangle-right"
+                            variant="icon"
+                            customClass="btn-video-play"
+                            (action)="play()"
+                        >
+                        </lnd-button>
+                    </div>
+                    <p>
+                        Je-li vše jasné pokračujte tlačítkem "Vyplnit".
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </pxe-layout-container>
