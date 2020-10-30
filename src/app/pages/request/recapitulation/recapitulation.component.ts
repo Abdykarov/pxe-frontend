@@ -44,6 +44,7 @@ import { NavigateRequestService } from 'src/app/services/navigate-request.servic
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import { GTMService } from '../../../services/gtm.service';
 
 @Component({
     selector: 'pxe-recapitulation',
@@ -80,6 +81,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     constructor(
         private authService: AuthService,
         private cd: ChangeDetectorRef,
+        private gtmService: GTMService,
         public navigateRequestService: NavigateRequestService,
         private personalDataService: PersonalDataService,
         private route: ActivatedRoute,
@@ -129,6 +131,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             )
             .subscribe(
                 () => {
+                    this.gtmService.pushEvent('A', 'B', 'c');
                     this.sAnalyticsService.sFormSubmit(personalInfoInput);
                     this.sAnalyticsService.sendWebData(
                         {},

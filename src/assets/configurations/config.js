@@ -4,7 +4,7 @@
 window.angularDevstack = {
     "config": {
         "gaId": "",
-        "gtmId": "",
+        "gtmId": "GTM-NVNBV6N",
         "production": false,
         "sAnalyticsTId": "",
         "url": "http://localhost:4200",

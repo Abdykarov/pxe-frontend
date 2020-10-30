@@ -17,11 +17,13 @@ import {
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AuthService } from './services/auth.service';
 import { environment } from 'src/environments/environment';
 import { GTMService } from './services/gtm.service';
 import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
+declare const gtag;
 
 @Component({
     selector: 'lnd-root',
@@ -31,6 +33,7 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 })
 export class AppComponent extends AbstractComponent implements OnInit {
     constructor(
+        private authService: AuthService,
         private elementRef: ElementRef,
         private gtmService: GTMService,
         private onlyOneTabActiveService: OnlyOneTabActiveService,
@@ -72,6 +75,7 @@ export class AppComponent extends AbstractComponent implements OnInit {
                 .pipe(takeUntil(this.destroy$))
                 .subscribe(event => {
                     if (event instanceof NavigationEnd) {
+                        gtmService.setUserId(this.authService.currentUserValue.email);
                         gtmService.gtm(event);
                         // gaService.gtm(event);
                     }
