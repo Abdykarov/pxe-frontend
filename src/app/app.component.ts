@@ -23,7 +23,6 @@ import { GTMService } from './services/gtm.service';
 import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
-declare const gtag;
 
 @Component({
     selector: 'lnd-root',

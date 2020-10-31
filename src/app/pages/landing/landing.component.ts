@@ -30,7 +30,8 @@ import { fromEvent } from 'rxjs';
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
-    CONSTS, PUSH_EVENTS_GA,
+    CONSTS,
+    PUSH_EVENTS_GA,
     ROUTES,
     S_ANALYTICS,
     SEO,

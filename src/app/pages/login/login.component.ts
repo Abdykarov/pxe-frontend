@@ -23,7 +23,8 @@ import {
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
-    CONSTS, PUSH_EVENTS_GA,
+    CONSTS,
+    PUSH_EVENTS_GA,
     ROUTES,
     SEO,
 } from 'src/app/app.constants';
