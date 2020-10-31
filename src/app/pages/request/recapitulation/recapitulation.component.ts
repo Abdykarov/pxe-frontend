@@ -22,6 +22,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CODE_LIST_TYPES,
+    PUSH_EVENTS_GA,
     ROUTES,
     S_ANALYTICS,
 } from 'src/app/app.constants';
@@ -31,6 +32,7 @@ import {
     parseGraphQLErrors,
     transformCodeList,
 } from 'src/common/utils';
+import { GTMService } from 'src/app/services/gtm.service';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IPersonalDataInput } from 'src/common/graphql/models/personal-data.model';
@@ -44,7 +46,6 @@ import { NavigateRequestService } from 'src/app/services/navigate-request.servic
 import { PersonalDataService } from 'src/common/graphql/services/personal-data.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { GTMService } from '../../../services/gtm.service';
 
 @Component({
     selector: 'pxe-recapitulation',
@@ -131,7 +132,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             )
             .subscribe(
                 () => {
-                    this.gtmService.pushEvent('A', 'B', 'c');
+                    this.gtmService.pushEvent(PUSH_EVENTS_GA.FORMS.RECAPITULATION);
                     this.sAnalyticsService.sFormSubmit(personalInfoInput);
                     this.sAnalyticsService.sendWebData(
                         {},

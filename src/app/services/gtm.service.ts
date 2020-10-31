@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 
+import { PUSH_EVENTS_GA } from 'src/app/app.constants';
+
 declare const gtag;
 
 @Injectable({
@@ -18,12 +20,11 @@ export class GTMService {
 
     public setUserId = (userId: string) => gtag('set', {'user_id': userId});
 
-    public pushEvent = (category: string, action: string = null, label: string = null) => {
+    public pushEvent = (action: string = null, category = PUSH_EVENTS_GA.CATEGORY) => {
         (<any>window).dataLayer.push({
-            'event': 'eventTracking',
-            'category': 'event Category',
-            'action': 'event Action',
-            'label': 'event Label',
+            event: PUSH_EVENTS_GA.EVENT,
+            category,
+            action,
         });
     }
 }

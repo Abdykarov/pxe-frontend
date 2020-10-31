@@ -23,7 +23,7 @@ import {
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
-    CONSTS,
+    CONSTS, PUSH_EVENTS_GA,
     ROUTES,
     SEO,
 } from 'src/app/app.constants';
@@ -32,6 +32,7 @@ import {
     formFieldsLogin,
     LOGIN_STATE,
 } from './config';
+import { GTMService } from 'src/app/services/gtm.service';
 import {
     IChangePassword,
     IConfirmationCode,
@@ -75,6 +76,7 @@ export class LoginComponent extends AbstractComponent {
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private cookieService: CookiesService,
+        private gtmService: GTMService,
         private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
         private route: ActivatedRoute,
@@ -292,15 +294,21 @@ export class LoginComponent extends AbstractComponent {
     public routerAfterLogin = ({landingPage}) => {
         switch (landingPage) {
             case LANDING_PAGE.DASHBOARD:
+                this.pushEventLogin();
                 return ROUTES.ROUTER_DASHBOARD;
             case LANDING_PAGE.NEW_SUPPLY_POINT:
+                this.pushEventLogin();
                 return ROUTES.ROUTER_REQUEST_SIGNBOARD;
             case LANDING_PAGE.OFFERS:
+                this.pushEventLogin();
                 return ROUTES.ROUTER_SUPPLY_OFFER_POWER;
             case LANDING_PAGE.WAITING_FOR_PAYMENT:
+                this.pushEventLogin();
                 return ROUTES.ROUTER_REQUEST_PAYMENT;
         }
     }
+
+    private pushEventLogin = () => this.gtmService.pushEvent(PUSH_EVENTS_GA.FORMS.LOGIN);
 
     public navigateAfterLogin = (loginResponse: ILoginResponse, changedPassword = false) => {
         const extras: NavigationExtras = {
