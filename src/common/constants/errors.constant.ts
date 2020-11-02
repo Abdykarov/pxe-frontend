@@ -108,6 +108,7 @@ export const graphQLMessages = {
     obsoleteSupplyPointVersion: 'Kontrakt lze uzavřít pouze na nejnovější verzi OM.',
     unknownSupplyPoint: 'Hledané odběrné místo neexistuje nebo pro přístup k němu nemáte oprávnění.',
     duplicateOffer: 'Nabídka nebyla založena, protože totožná nabídka již existuje.',
+    mustBeValidPhoneNumber: 'Telefon musí obsahovat 9 číslic.',
 };
 
 export const cantDeleteAllMarkedOffers = 'Nepodařilo se nám smazat veškeré označené nabídky, prosím zkuste to znovu.';
@@ -177,7 +178,7 @@ export const errorFieldMessages =  {
     },
     consent: {
         signUp: {
-            required: 'Nezapomeňte na souhlas s Obchodními podmínkami PARC4U a na vzetí na ' +
+            required: 'Nezapomeňte na souhlas s Obchodními podmínkami parc4u a na vzetí na ' +
                 'vědomí informací o Ochraně osobních údajů.',
         },
         newsSubscription: {

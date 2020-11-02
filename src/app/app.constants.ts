@@ -55,12 +55,13 @@ export const CONSTS = {
     MONTHS_TO_CONTRACT_END: 2,
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
     MODAL_TYPE: {
-        MORE_TABS: 'moreTabs',
         CONFIRM_DELETE_REQUEST: 'confirmDeleteOffer',
         CONFIRM_DELETE_OFFER: 'confirmDeleteOffer',
         CONFIRM_CANCEL_OFFER: 'confirmCancelOffer',
         CONFIRM_BACK_IMPORT: 'confirmBackImportOffer',
         CONFIRM_DELETE_MARKED: 'confirmDeleteMarked',
+        LP_VIDEO: 'lpVideo',
+        MORE_TABS: 'moreTabs',
     },
     OFFSET_ERRORS: {
         INVALID_INPUT: 40,
@@ -160,17 +161,19 @@ export const CONSTS = {
     TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS: 30,
     TIME_TO_CONTRACT_END_INDEFINITE_TIME_IN_MONTHS: 3,
     TITLES: {
-        COOKIES_POLICY: 'Cookies policy | PARC4U',
-        DEFAULT: 'PARC4U',
-        LANDING_PAGE: 'Získejte svobodu nad energií | PARC4U',
-        LOGIN: 'Přihlášení | PARC4U',
-        FAQ: 'Často kladené otázky | PARC4U',
-        PATTERNS_OF_CONTRACTS: 'Vzory smluv o dodávce | PARC4U',
-        TERMS_OF_USE: 'Podmínky užívání | PARC4U',
-        SECURING_YOUR_DATA: 'Ochrana osobních údajů | PARC4U',
-        SIGN_UP: 'Registrace | PARC4U',
+        COOKIES_POLICY: 'Cookies policy | parc4u',
+        DEFAULT: 'parc4u',
+        LANDING_PAGE: 'Získejte svobodu nad energií | parc4u',
+        LOGIN: 'Přihlásit | parc4u',
+        FAQ: 'Často kladené otázky | parc4u',
+        PATTERNS_OF_CONTRACTS: 'Vzory smluv o dodávce | parc4u',
+        TERMS_OF_USE: 'Podmínky užívání | parc4u',
+        SECURING_YOUR_DATA: 'Ochrana osobních údajů | parc4u',
+        SIGN_UP: 'Registrace | parc4u',
     },
+    LG_RESOLUTION: 1366,
     XL_RESOLUTION: 992,
+    MD_RESOLUTION: 768,
 };
 
 export const ROUTES = {
@@ -238,7 +241,7 @@ export const SEO = {
             'často kladené otázky',
         ],
         LOGIN: [
-            'přihlášení',
+            'přihlásit',
             'kliknutí',
         ],
         PATTERNS_OF_CONTRACTS: [
@@ -247,7 +250,7 @@ export const SEO = {
         ],
         TERMS_OF_USE: [
             'obchodní podmínky',
-            'PARC4U',
+            'parc4u',
         ],
         SECURING_YOUR_DATA: [
             'chráníme',
@@ -260,15 +263,15 @@ export const SEO = {
         ],
     },
     META_DESCRIPTION: {
-        COOKIES_POLICY: 'Co jsou cookies a proč je na stránkách PARC4U používáme?',
+        COOKIES_POLICY: 'Co jsou cookies a proč je na stránkách parc4u používáme?',
         LANDING_PAGE: 'Měňte dodavatele energií na 1 klik. Neřešte papírování a chození na' +
             ' pobočky. Chraňte se před nekalostmi ve smlouvě. Energie za férové ceny bez skrytých poplatků.',
-        FAQ: 'Odpovědi na často kladené otázky služby PARC4U.',
-        LOGIN: 'Přihlášení do PARC4U, kde máte snadný přístup k jiným cenám za energie.',
-        PATTERNS_OF_CONTRACTS: 'Vzor smlouvy k dodávce uzavřené přes PARC4U.',
-        TERMS_OF_USE: 'Obchodní podmínky k pravidlům registrace dodavatelů a odběratelů na trhu PARC4U.',
-        SECURING_YOUR_DATA: 'Jak v PARC4U pracujeme s osobními údaji a jak je chráníme.',
-        SIGN_UP: 'Registrace do PARC4U, kde kliknutím měníte dodavatele energií,' +
+        FAQ: 'Odpovědi na často kladené otázky služby parc4u.',
+        LOGIN: 'Přihlášení do parc4u, kde máte snadný přístup k jiným cenám za energie.',
+        PATTERNS_OF_CONTRACTS: 'Vzor smlouvy k dodávce uzavřené přes parc4u.',
+        TERMS_OF_USE: 'Obchodní podmínky k pravidlům registrace dodavatelů a odběratelů na trhu parc4u.',
+        SECURING_YOUR_DATA: 'Jak v parc4u pracujeme s osobními údaji a jak je chráníme.',
+        SIGN_UP: 'Registrace do parc4u, kde kliknutím měníte dodavatele energií,' +
             ' nemusíte na pobočky a dostáváte konečné ceny bez skrytých poplatků.',
     },
 };
@@ -571,9 +574,11 @@ export const FILE_UPLOAD_CONFIG = 'file_upload_config';
 export enum ANNUAL_CONSUMPTION_TYPES {
     ANNUAL_CONSUMPTION_NT = 'annualConsumptionNT',
     ANNUAL_CONSUMPTION_VT = 'annualConsumptionVT',
+    ANNUAL_CONSUMPTION = 'annualConsumption',
 }
 
 export enum ANNUAL_CONSUMPTION_UNIT_TYPES {
     ANNUAL_CONSUMPTION_NT_UNIT = 'annualConsumptionNTUnit',
     ANNUAL_CONSUMPTION_VT_UNIT = 'annualConsumptionVTUnit',
+    ANNUAL_CONSUMPTION_UNIT = 'annualConsumptionUnit',
 }

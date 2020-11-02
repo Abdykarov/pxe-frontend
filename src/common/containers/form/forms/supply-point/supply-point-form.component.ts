@@ -112,7 +112,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         private cd: ChangeDetectorRef,
         protected fb: FormBuilder,
         private modalsService: ModalService,
-        private sAnalyticsService: SAnalyticsService,
+        public sAnalyticsService: SAnalyticsService,
         private supplyPointLocalStorageService: SupplyPointLocalStorageService,
         private supplyService: SupplyService,
     ) {
@@ -135,6 +135,19 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                     ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_NT,
                     ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_NT_UNIT,
                     annualConsumptionNTUnit,
+                );
+            });
+
+        this.form.get('annualConsumptionUnit')
+            .valueChanges
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe((annualConsumptionUnit: UNIT_OF_PRICES) => {
+                this.detectChangesForAnnualConsumption(
+                    ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION,
+                    ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_UNIT,
+                    annualConsumptionUnit,
                 );
             });
 

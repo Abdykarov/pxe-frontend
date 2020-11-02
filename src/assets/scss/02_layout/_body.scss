@@ -5,13 +5,22 @@
  */
 
 
-// .container-fluid {
-// 	// Media queries
-// 	@media (min-width: ( $body-max-width ) ) {
-// 		margin-left: 0;
-// 		margin-right: 0;
-// 	}
-// }
+.container-fluid {
+	&--max-width {
+		// Media queries
+		@media (min-width: ( $body-max-width ) ) {
+			max-width: $body-max-width;
+			padding-left: 0;
+			padding-right: 0;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	}
+
+	&--light {
+		background-color: $body-bg-lp;
+	}
+}
 
 
 .body-inner {

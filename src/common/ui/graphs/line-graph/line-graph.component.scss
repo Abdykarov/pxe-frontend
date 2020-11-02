@@ -1,0 +1,82 @@
+/*
+ -  Line graph
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+.line-graph {
+	position: relative;
+	z-index: $zindex-graphs-svg;
+
+	svg {
+		overflow: visible;
+		fill: $font-text;
+
+		path {
+			color: $gray-200;
+		}
+
+		.line {
+			fill: none;
+			stroke: $secondary-dark;
+			stroke-width: 3;
+		}
+
+		.title {
+			font-size: 1.875rem;
+			text-anchor: middle;
+		}
+
+		.overlay {
+			fill: none;
+			pointer-events: all;
+		}
+
+		.axis {
+			color: $gray-400;
+			margin: $spacer;
+		}
+
+		.tick {
+			text {
+				font-size: $font-size-base;
+			}
+		}
+
+		.tooltip {
+			fill: $gray-100;
+			opacity: .3;
+
+			&--polygon {
+				fill: $gray-000;
+			}
+
+			&--date {
+				font-weight: 700;
+			}
+
+			&--rect {
+				fill: $gray-000;
+				stroke: $gray-100;
+			}
+
+			&--value {
+				font-size: $h1-font-size;
+				fill: $secondary-dark;
+			}
+
+			&--state {
+				font-size: $font-size-sm;
+				text-transform: uppercase;
+			}
+
+			&--triangle {
+				fill: transparent;
+				stroke: $gray-100;
+			}
+		}
+	}
+}

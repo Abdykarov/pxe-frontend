@@ -65,6 +65,9 @@ export class SelectComponent {
     @Output()
     public open?: EventEmitter<any> = new EventEmitter();
 
+    @Output()
+    public remove?: EventEmitter<any> = new EventEmitter();
+
     @Input()
     public customClass?: string;
 

@@ -15,7 +15,6 @@ import {
     findCodelistsByTypesQuery,
     findSupplierDocumentsByComodityQuery,
     findSupplyPointsByContractStatusQuery,
-    findSupplyPointsQuery,
     getCodelistByTypeQuery,
     getSupplyPointGlobalStatisticsQuery,
     getSupplyPointQuery,
@@ -73,15 +72,6 @@ export class SupplyService {
             variables: {
                 supplierId,
                 commodityType,
-            },
-        })
-        .valueChanges
-
-    public findSupplyPoints = ($identificationNumber: string = null) => this.apollo
-        .watchQuery<any>({
-            query: findSupplyPointsQuery,
-            variables: {
-                $identificationNumber,
             },
         })
         .valueChanges

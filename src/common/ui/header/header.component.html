@@ -13,8 +13,11 @@
     class="header"
     [class.header--public]="settings.isPublic"
     [class.header--secured]="!settings.isPublic"
-    [class.header--sticked]="sticked">
-    <div class="container-fluid">
+    [class.header--sticked]="sticked"
+    [class.header--lp]="settings.isLandingPage && !settings.isPublicEmptyPage">
+    <div
+        class="container-fluid"
+        [class.container-fluid--max-width]="settings.isPublic">
         <div class="row">
             <div class="col-12">
                 <div class="header-inner">
@@ -25,8 +28,8 @@
                             <img
                                 src="/assets/images/layout/logo-parc4u.png"
                                 class="logo"
-                                title="PARC4U"
-                                alt="logo PARC4U">
+                                title="parc4u"
+                                alt="logo parc4u">
                         </a>
                     </div>
                     <div
@@ -40,29 +43,36 @@
                             (click)="landingPageRedirect.emit($event)">
                         </lnd-button>
                         <lnd-button
-                            *ngIf="settings.isLandingPage"
-                            label="Změna dodavatele"
+                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                            label="O službě"
                             customClass="mr-4"
                             type="link-text"
-                            (click)="supplierChangeAction.emit()">
+                            (click)="aboutServiceAction.emit()">
                         </lnd-button>
                         <lnd-button
-                            *ngIf="settings.isLandingPage"
-                            label="Pokrytí"
+                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                            label="O nás"
                             customClass="mr-4"
                             type="link-text"
-                            (click)="coverageMapAction.emit()">
+                            (click)="aboutUsAction.emit()">
+                        </lnd-button>
+                        <lnd-button
+                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                            label="FAQ"
+                            customClass="mr-4"
+                            type="link-text"
+                            (click)="faqAction.emit()">
                         </lnd-button>
                         <lnd-button
                             *ngIf="!isLogged"
-                            label="Přihlášení"
+                            label="Přihlásit"
                             customClass="mr-4"
                             type="link-text"
                             (click)="loginAction.emit()">
                         </lnd-button>
                         <lnd-button
                             *ngIf="!isLogged"
-                            label="Registrace"
+                            label="Založit účet"
                             type="primary"
                             (click)="signUpAction.emit()">
                         </lnd-button>
@@ -99,18 +109,23 @@
                                (click)="landingPageRedirect.emit($event)">
                                 Domů
                             </a>
-                            <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
-                               (click)="supplierChangeAction.emit()">
-                                Změna dodavatele
+                            <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                                class="dropdown-item dropdown-item--without-icon"
+                               (click)="aboutServiceAction.emit()">
+                               O službě
                             </a>
-                            <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
-                               (click)="coverageMapAction.emit()">
-                                Pokrytí
+                            <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                                class="dropdown-item dropdown-item--without-icon"
+                               (click)="aboutUsAction.emit()">
+                                O nás
                             </a>
-                            <a class="dropdown-item dropdown-item--without-icon"
-                               *ngIf="!settings.isPublicEmptyPage && isLogged"
+                            <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                               class="dropdown-item dropdown-item--without-icon"
+                               (click)="faqAction.emit()">
+                                FAQ
+                            </a>
+                            <a *ngIf="!settings.isPublicEmptyPage && isLogged"
+                                class="dropdown-item dropdown-item--without-icon"
                                (click)="logoutAction.emit() ">
                                 Odhlášení
                             </a>
@@ -122,12 +137,12 @@
                             <a class="dropdown-item dropdown-item--without-icon"
                                *ngIf="!settings.isPublicEmptyPage && !isLogged"
                                (click)="loginAction.emit() ">
-                                Přihlášení
+                                Přihlásit
                             </a>
                             <a class="dropdown-item dropdown-item--without-icon"
                                *ngIf="!settings.isPublicEmptyPage && !isLogged"
                                (click)="signUpAction.emit()">
-                                Registrace
+                                Založit účet
                             </a>
                         </lnd-dropdown>
                     </div>

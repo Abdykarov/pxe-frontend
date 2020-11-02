@@ -1,5 +1,6 @@
 export enum SCROLL_TO {
     LANDING_SUBSCRIPTION,
-    MAP_COVERAGE,
-    SUPPLIER_CHANGE,
+    FAQ,
+    ABOUT_US,
+    ABOUT_SERVICE,
 }

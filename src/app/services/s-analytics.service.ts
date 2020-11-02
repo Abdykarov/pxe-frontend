@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { SAnalyticsPlugins } from 'src/app/services/model/s-analytics.model';
 
-import * as uuid from 'uuid/v4';
+import * as R from 'ramda';
 
 import { environment } from 'src/environments/environment';
 
@@ -66,17 +66,23 @@ export class SAnalyticsService {
             return;
         }
 
+        const userInfo = sa('get', 'userInfo');
+
+        if (R.isNil(userInfo)) {
+            return;
+        }
         const applicationWebData = {
             tid: environment.sAnalyticsTId,
-            applicationId: sa('get', 'userInfo').said,
-            sa: sa('get', 'userInfo').sa,
-            said: sa('get', 'userInfo').said,
+            applicationId: userInfo.said,
+            sa: userInfo.sa,
+            said: userInfo.said,
             clientTimestamp: new Date().getTime(),
             loanInfo,
             borrower,
             coborrower,
             webdata,
         };
+
         sa('send', 'webdata', applicationWebData);
         this.registrationApplication();
     }

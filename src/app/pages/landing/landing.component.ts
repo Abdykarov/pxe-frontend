@@ -3,11 +3,11 @@ import {
     Router,
 } from '@angular/router';
 import {
-    AfterViewInit,
     ChangeDetectorRef,
     Component,
     ElementRef,
     Inject,
+    OnInit,
     PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
@@ -18,6 +18,7 @@ import {
 } from '@angular/platform-browser';
 
 import * as R from 'ramda';
+import * as R_ from 'ramda-extension';
 import { Apollo } from 'apollo-angular';
 import {
     debounceTime,
@@ -37,6 +38,7 @@ import {
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import { FaqService } from 'src/app/services/faq.service';
 import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
+import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import {
     IFieldError,
     IForm,
@@ -45,8 +47,11 @@ import {
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import { IQuestion } from 'src/app/services/model/faq.model';
+import { lpVideoModalConfig } from './landing.config';
+import { ModalService } from 'src/common/containers/modal/modal.service';
 import {
     parseGraphQLErrors,
+    playVideo,
     scrollToElementFnc,
 } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
@@ -57,16 +62,22 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 @Component({
     templateUrl: './landing.component.html',
 })
-export class LandingComponent extends AbstractFaqComponent implements AfterViewInit {
+export class LandingComponent extends AbstractFaqComponent implements OnInit {
 
-    @ViewChild('subscription', { static: true })
+    @ViewChild('video', { static: true })
+    public _video: ElementRef;
+
+    @ViewChild('subscription', { static: false })
     public subscriptionElement: ElementRef;
 
-    @ViewChild('mapCoverage', { static: true })
-    public mapCoverageElement: ElementRef;
+    @ViewChild('faq', { static: true })
+    public faq: ElementRef;
 
-    @ViewChild('supplierChange', { static: true })
-    public supplierChangeElement: ElementRef;
+    @ViewChild('aboutUs', { static: true })
+    public aboutUs: ElementRef;
+
+    @ViewChild('aboutService', { static: true })
+    public aboutService: ElementRef;
 
     public frequentedQuestions: IAccordionItem[] = [];
     public formLoading = false;
@@ -77,7 +88,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     public formFields: IForm;
     public routes = ROUTES;
 
-    public isMoreThanXlResolution = false;
+    public isMoreThanMdResolution = false;
 
     public resizeEvent$ = fromEvent(window, 'resize')
         .pipe(
@@ -87,10 +98,11 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     constructor(
         private apollo: Apollo,
         public authService: AuthService,
-        private cd: ChangeDetectorRef,
+        public cd: ChangeDetectorRef,
         public faqService: FaqService,
         private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
+        private modalService: ModalService,
         public route: ActivatedRoute,
         public router: Router,
         private registrationService: RegistrationService,
@@ -101,7 +113,7 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
     ) {
         super(faqService, route);
         if (isPlatformBrowser) {
-            this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+            this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
         }
 
         this.loadConfigs$
@@ -132,42 +144,74 @@ export class LandingComponent extends AbstractFaqComponent implements AfterViewI
                 if (scrollTo === SCROLL_TO.LANDING_SUBSCRIPTION) {
                     scrollToElementFnc(this.subscriptionElement.nativeElement);
                 }
-                if (scrollTo === SCROLL_TO.MAP_COVERAGE) {
-                    scrollToElementFnc(this.mapCoverageElement.nativeElement);
+                if (scrollTo === SCROLL_TO.FAQ) {
+                    scrollToElementFnc(this.faq.nativeElement);
                 }
-                if (scrollTo === SCROLL_TO.SUPPLIER_CHANGE) {
-                    scrollToElementFnc(this.supplierChangeElement.nativeElement);
+                if (scrollTo === SCROLL_TO.ABOUT_US) {
+                    scrollToElementFnc(this.aboutUs.nativeElement);
+                }
+                if (scrollTo === SCROLL_TO.ABOUT_SERVICE) {
+                    scrollToElementFnc(this.aboutService.nativeElement);
                 }
             });
 
         this.resizeEvent$
             .pipe(takeUntil(this.destroy$))
             .subscribe(_  => {
-                this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
-                this.autoPlayVideoInAllBrowsers();
+                this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
                 this.cd.markForCheck();
+            });
+
+        this.modalService.closeModalData$
+            .pipe(
+                takeUntil(this.destroy$),
+                filter(R_.isNotNil),
+                filter((modal: ICloseModalData) => modal.confirmed),
+            )
+            .subscribe(modal => {
+                this.modalService.closeModalData$.next(null);
             });
     }
 
-    autoPlayVideoInAllBrowsers = () => {
-        if (this.isMoreThanXlResolution) {
-            const myVideo = document.querySelector('video');
-            const playPromise = myVideo && myVideo.play();
-            if (!R.isNil(playPromise)) {
-                playPromise.then(_ => ({}))
-                    .catch(error => {
-                        myVideo.muted = true;
-                        myVideo.play();
-                    });
-            }
+    public playVideoInModal = (event) => {
+        event.preventDefault();
+        this.modalService
+            .showModal$.next(lpVideoModalConfig());
+    }
+
+    ngOnInit() {
+        super.ngOnInit();
+        this.video.muted = true;
+    }
+
+    public videoIsTouch = () => {
+        if (this.isMoreThanMdResolution) {
+            this.play();
         }
     }
 
-    ngAfterViewInit() {
-        if (this.isPlatformBrowser) {
-            this.autoPlayVideoInAllBrowsers();
-            this.cd.markForCheck();
+    public play = (event = null) => {
+        if (event) {
+            event.preventDefault();
         }
+
+        playVideo(this.video);
+    }
+
+    public pause =  (event = null) => {
+        if (event) {
+            event.preventDefault();
+        }
+
+        this.video.pause();
+    }
+
+    get isVideoPlaying(): boolean {
+        return this._video && !this.video.paused;
+    }
+
+    get video(): HTMLMediaElement {
+        return this._video && this._video.nativeElement;
     }
 
     public submitForm = (values) => {

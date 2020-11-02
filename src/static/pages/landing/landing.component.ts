@@ -1,19 +1,22 @@
-import { isPlatformBrowser } from '@angular/common';
 import {
+    ChangeDetectorRef,
     Component,
+    ElementRef,
     Inject,
     PLATFORM_ID,
+    ViewChild,
 } from '@angular/core';
-import { fromEvent } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
+
 import {
     debounceTime,
     takeUntil,
 } from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { CONSTS } from 'src/app/app.constants';
 import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
-import { configCoverage } from 'src/static/config/map-coverage.config';
 import { configSupplier } from 'src/static/config/suppliers.config';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
@@ -21,29 +24,26 @@ import {
     IFieldError,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
-import { IMapCoverageConfig } from 'src/common/ui/map-coverage/model/coverage.model';
 import { ISupplierLogo } from 'src/common/ui/supplier/model/supplier.model';
-import {
-    carouselItems,
-    interval,
-} from 'src/static/pages/landing/config';
+import { playVideo } from 'src/common/utils';
 
 @Component({
     selector: 'lnd-landing-page',
     templateUrl: './landing.component.html',
 })
 export class LandingComponent extends AbstractComponent {
+
+    @ViewChild('video')
+    public _video: ElementRef;
+
     public breadcrumbItemsSimple: IBreadcrumbItems;
-    public configCoverage: IMapCoverageConfig = configCoverage;
     public configSupplier: ISupplierLogo[] = configSupplier;
     public formLoading = false;
     public formFields = createRegistrationFormFields(SignUpType.NewsSubscription);
     public formSent = false;
     public globalError: string[] = [];
     public fieldError: IFieldError = {};
-    public items = carouselItems;
-    public interval = interval;
-    public isMoreThanXlResolution = false;
+    public isMoreThanMdResolution = false;
     public showStickyButton = false;
     public accordionItems: IAccordionItem[] = [{
         label: 'Opravdu budu mít vybranou cenu po celou dobu zvoleného období?',
@@ -53,9 +53,9 @@ export class LandingComponent extends AbstractComponent {
         },
         {
             label: 'Mohu někde dostat lepší cenu?',
-            data: 'Nedá se vyloučit, že někteří dodavatelé, mimo PARC4U, mohou z ' +
+            data: 'Nedá se vyloučit, že někteří dodavatelé, mimo parc4u, mohou z ' +
                 'nějakého důvodu poskytnout lepší cenové podmínky. Ty ale budou, s největší pravděpodobností,' +
-                ' vykoupeny nějakými „kličkami a háčky“ v podmínkách dodávky, které v PARC4U nechceme.',
+                ' vykoupeny nějakými „kličkami a háčky“ v podmínkách dodávky, které v parc4u nechceme.',
             isActive: false,
         },
         {
@@ -73,10 +73,11 @@ export class LandingComponent extends AbstractComponent {
 
     constructor(
         @Inject(PLATFORM_ID) private platformId: string,
+        public cd: ChangeDetectorRef,
     ) {
         super();
         if (isPlatformBrowser(this.platformId)) {
-            this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION;
+            this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
         }
 
         this.breadcrumbItemsSimple = [
@@ -89,7 +90,7 @@ export class LandingComponent extends AbstractComponent {
         this.resizeEvent$
             .pipe(takeUntil(this.destroy$))
             .subscribe(_  =>
-                this.isMoreThanXlResolution = window.innerWidth >= CONSTS.XL_RESOLUTION,
+                this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION,
             );
     }
 
@@ -101,5 +102,29 @@ export class LandingComponent extends AbstractComponent {
     public click = (evt) => {
         evt.preventDefault();
         console.log('click');
+    }
+
+    public play = (event = null) => {
+        if (event) {
+            event.preventDefault();
+        }
+
+        playVideo(this.video);
+    }
+
+    public pause =  (event = null) => {
+        if (event) {
+            event.preventDefault();
+        }
+
+        this.video.pause();
+    }
+
+    get isVideoPlaying(): boolean {
+        return this._video && !this.video.paused;
+    }
+
+    get video(): HTMLMediaElement {
+        return this._video && this._video.nativeElement;
     }
 }

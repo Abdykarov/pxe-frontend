@@ -4,7 +4,6 @@ import {
     TemplateRef,
 } from '@angular/core';
 
-import { IMapCoverageConfig } from './model/coverage.model';
 import { SupplierComponent } from '../supplier/supplier.component';
 
 @Component({
@@ -15,19 +14,6 @@ import { SupplierComponent } from '../supplier/supplier.component';
 export class MapCoverageComponent {
 
     @Input()
-    public globalError: string[] = [];
+    public supplierTemplate: TemplateRef<SupplierComponent>;
 
-    @Input()
-    public loadingData = false;
-
-    @Input()
-    public configCoverage: IMapCoverageConfig;
-
-    @Input()
-    public supplierTemplateGas: TemplateRef<SupplierComponent>;
-
-    @Input()
-    public supplierTemplatePower: TemplateRef<SupplierComponent>;
-
-    public readonly bannerTitle = 'Data se bohužel nepodařilo načíst.';
 }

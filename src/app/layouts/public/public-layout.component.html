@@ -9,15 +9,17 @@
         (homeRedirect)="homeRedirect()"
         [isMenuOpen]="isMenuOpen"
         (landingPageRedirect)="landingPageRedirect()"
+        (faqAction)="scrollToFaq()"
+        (aboutServiceAction)="scrollToAboutService()"
+        (aboutUsAction)="scrollToAboutUs()"
         (loginAction)="login()"
         (signUpAction)="signUp()"
-        (supplierChangeAction)="supplierChange()"
-        (coverageMapAction)="coverageMap()"
         (toggleMenu)="toggleMenuOpen($event)"
         (logoutAction)="logout()">
     </lnd-header>
     <main class="main">
         <router-outlet></router-outlet>
+        <lnd-modal-dynamic></lnd-modal-dynamic>
     </main>
     <div *ngIf="(authService.currentUserValue | isLogged) && !isLogouting"
          class="fixed-bottom fixed-bottom--footer-indentation">
@@ -38,7 +40,7 @@
                 <a [routerLink]="['/', CONSTS.PATHS.TERMS_OF_USE]"
                    class="footer-navigation__link"
                 >
-                    Obchodní podmínky PARC4U
+                    Obchodní podmínky parc4u
                 </a>
             </li>
             <li class="footer-navigation__item">
