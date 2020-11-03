@@ -28,13 +28,11 @@ body {
 
 		&::after {
 			content: '';
-			position: absolute;
-			left: 50%;
+			@include absolute-center(false, true);
 			bottom: 0;
 			width: calc(100% + 40px);
 			height: 20px;
 			background-color: lighten($body-bg, 2%);
-			transform: translateX(-50%);
 		}
 	}
 }
