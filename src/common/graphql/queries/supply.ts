@@ -85,7 +85,7 @@ export const supplyPointFragment = gql`
             contract {
                 contractId,
                 nextContractId @skip(if: $skipInfoAboutRelationContracts),
-                previousContractId @skip(if: $skipInfoAboutRelationContracts),
+                previousContractId,
                 isNextContractConcluded @skip(if: $skipInfoAboutRelationContracts),
                 contractStatus,
                 deliveryFrom,
