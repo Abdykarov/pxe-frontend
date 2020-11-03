@@ -80,12 +80,12 @@ export const updateGasSupplyPointWithContractMutation = gql`
     }
 `;
 
-export const deleteRequestMutation = gql`
-    mutation deleteRequest(
-        $contractId: ID!,
+export const deleteUnfinishedSupplyPointMutation = gql`
+    mutation deleteUnfinishedSupplyPoint(
+        $supplyPointId: ID!,
     ){
-        deleteRequest(
-            contractId: $contractId,
+        deleteUnfinishedSupplyPoint(
+            supplyPointId: $supplyPointId,
         )
     }
 `;

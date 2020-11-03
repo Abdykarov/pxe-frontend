@@ -48,7 +48,7 @@
                         (click)="continueAction.emit(supplyPoint)">
                     </lnd-button>
                     <lnd-button
-                        *ngIf="supplyPoint.contract?.previousContractId"
+                        *ngIf="!supplyPoint.contract?.previousContractId"
                         label="Smazat"
                         type="link-danger"
                         (click)="removeAction.emit(supplyPoint)">

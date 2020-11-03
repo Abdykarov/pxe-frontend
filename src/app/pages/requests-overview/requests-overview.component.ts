@@ -111,7 +111,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
             )
             .subscribe(modal => {
                 if (modal.confirmed) {
-                    this.supplyService.deleteRequest(modal.data.contract.contractId)
+                    this.supplyService.deleteUnfinishedSupplyPoint(modal.data.id)
                         .pipe(
                             takeUntil(this.destroy$),
                         )

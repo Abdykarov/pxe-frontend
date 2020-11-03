@@ -26,7 +26,7 @@ import {
     createPowerSupplyPointMutation,
     updatePowerSupplyPointMutation,
     updatePowerSupplyPointWithContractMutation,
-    deleteRequestMutation,
+    deleteUnfinishedSupplyPointMutation,
 } from 'src/common/graphql/mutation/supply';
 
 @Injectable({
@@ -190,11 +190,11 @@ export class SupplyService {
         })
         .valueChanges
 
-    public deleteRequest = (contractId: string) => this.apollo
+    public deleteUnfinishedSupplyPoint = (supplyPointId: string) => this.apollo
         .mutate<any>({
-            mutation: deleteRequestMutation,
+            mutation: deleteUnfinishedSupplyPointMutation,
             variables: {
-                contractId,
+                supplyPointId,
             },
         })
 }
