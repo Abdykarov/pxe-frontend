@@ -35,9 +35,9 @@ export class FaqPageComponent {
     },
         {
             label: 'Mohu někde dostat lepší cenu?',
-            data: 'Nedá se vyloučit, že někteří dodavatelé, mimo PARC4U, mohou z ' +
+            data: 'Nedá se vyloučit, že někteří dodavatelé, mimo parc4u, mohou z ' +
                 'nějakého důvodu poskytnout lepší cenové podmínky. Ty ale budou, s největší pravděpodobností,' +
-                ' vykoupeny nějakými „kličkami a háčky“ v podmínkách dodávky, které v PARC4U nechceme.',
+                ' vykoupeny nějakými „kličkami a háčky“ v podmínkách dodávky, které v parc4u nechceme.',
             isActive: false,
         },
         {

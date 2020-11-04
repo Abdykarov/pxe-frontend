@@ -72,10 +72,10 @@ export const questions: IQuestion[] = [{
         label: 'Dodavatelé',
     },
     'url': 'future',
-    'header': 'Jak chcete PARC4U rozvíjet?',
-    'shortContent': 'Rádi bychom získali pro PARC4U dostatek zákazníků, což nám umožní další' +
+    'header': 'Jak chcete parc4u rozvíjet?',
+    'shortContent': 'Rádi bychom získali pro parc4u dostatek zákazníků, což nám umožní další' +
         ' rozvoj a automatizaci poskytovaných služeb tak, abyste měli energie již pro vždy vyřešené.',
-    'seoKeywords': 'PARC4U, dostatek, zákazníků, rozvoj, automatizaci, poskytovaných služeb, energie, vyřešené',
+    'seoKeywords': 'parc4u, dostatek, zákazníků, rozvoj, automatizaci, poskytovaných služeb, energie, vyřešené',
     'oneOfMostVisited': true,
     vatNumber: '555',
 }];
