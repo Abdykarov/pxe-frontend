@@ -73,7 +73,12 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./supply-point-form.component.scss'],
 })
 export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent implements OnInit, OnDestroy, OnChanges {
-    private readonly FIELDS_FOR_RESET = ['ownTerminate', 'contractEndTypeId', 'expirationDate', 'timeToContractEndPeriodId'];
+    private readonly FIELDS_FOR_RESET_EXPIRATION_DATE = [
+        'ownTerminate',
+        'contractEndTypeId',
+        'expirationDate',
+        'timeToContractEndPeriodId',
+    ];
 
     public readonly MAX_LENGTH_NUMBER_INPUT_WITH_HINT = CONSTS.VALIDATORS.MAX_LENGTH.NUMBER_INPUT_WITH_HINT;
     public pxeAddressWhisperer: AddressWhispererComponent;
@@ -156,7 +161,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                             }
                         }
                     },
-                )(this.FIELDS_FOR_RESET);
+                )(this.FIELDS_FOR_RESET_EXPIRATION_DATE);
             });
 
         this.form.get('annualConsumptionUnit')
