@@ -20,6 +20,7 @@ import {
 import {
     filter,
     map,
+    pairwise,
     takeUntil,
 } from 'rxjs/operators';
 
@@ -72,6 +73,8 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./supply-point-form.component.scss'],
 })
 export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent implements OnInit, OnDestroy, OnChanges {
+    private readonly FIELDS_FOR_RESET = ['ownTerminate', 'contractEndTypeId', 'expirationDate', 'timeToContractEndPeriodId'];
+
     public readonly MAX_LENGTH_NUMBER_INPUT_WITH_HINT = CONSTS.VALIDATORS.MAX_LENGTH.NUMBER_INPUT_WITH_HINT;
     public pxeAddressWhisperer: AddressWhispererComponent;
 
@@ -136,6 +139,24 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                     ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_NT_UNIT,
                     annualConsumptionNTUnit,
                 );
+            });
+
+        this.form
+            .valueChanges
+            .pipe(
+                takeUntil(this.destroy$),
+                pairwise(),
+            )
+            .subscribe(([prev, current]) => {
+                R.forEach(
+                    fieldName => {
+                        if (prev[fieldName] !== current[fieldName]) {
+                            if (R.path([fieldName, 'notEnoughDaysToProcessContract'])(this.formError)) {
+                                this.resetFormError(true);
+                            }
+                        }
+                    },
+                )(this.FIELDS_FOR_RESET);
             });
 
         this.form.get('annualConsumptionUnit')
