@@ -51,6 +51,7 @@ import {
     parseRestAPIErrors,
 } from 'src/common/utils/';
 import { UserService } from 'src/common/graphql/services/user.service';
+import { ISeo } from '../../../common/cms/models/seo';
 
 @Component({
     templateUrl: './login.component.html',
@@ -91,14 +92,15 @@ export class LoginComponent extends AbstractComponent {
             this.reasonForLogoutUser = this.cookieService.get(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
         }
 
-        this.titleService.setTitle(this.loginCms.seo.title);
+        const seo: ISeo = R.head(this.loginCms.seo);
+        this.titleService.setTitle(seo.title);
         this.metaService.updateTag({
             name: 'description',
-            content: this.loginCms.seo.description,
+            content: seo.description,
         });
         this.metaService.updateTag({
                 name: 'keywords',
-                content: this.loginCms.seo.keywords,
+                content: seo.keywords,
             },
         );
 

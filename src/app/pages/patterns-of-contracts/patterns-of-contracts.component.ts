@@ -32,6 +32,7 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 import { IPatternsOfContracts } from 'src/common/cms/models/patterns-of-contracts';
 import { IPdfSetting } from 'src/app/pages/patterns-of-contracts/models/patterns-of-contracts.model';
 import { PdfViewerComponent } from 'src/common/ui/pdf-viewer/pdf-viewer.component';
+import { ISeo } from '../../../common/cms/models/seo';
 
 @Component({
     selector: 'pxe-patterns-of-contracts',
@@ -73,14 +74,16 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
         private titleService: Title,
     ) {
         super();
-        this.titleService.setTitle(this.patternsOfContracts.seo.title);
+        const seo: ISeo = R.head(this.patternsOfContracts.seo);
+
+        this.titleService.setTitle(seo.title);
         this.metaService.updateTag({
             name: 'description',
-            content: this.patternsOfContracts.seo.description,
+            content: seo.description,
         });
         this.metaService.updateTag({
             name: 'keywords',
-            content: this.patternsOfContracts.seo.keywords,
+            content: seo.keywords,
         });
     }
 

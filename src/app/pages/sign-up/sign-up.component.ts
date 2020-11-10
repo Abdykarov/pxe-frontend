@@ -11,6 +11,7 @@ import {
     Router,
 } from '@angular/router';
 
+import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 import { CookieService } from 'ngx-cookie';
 import { takeUntil } from 'rxjs/operators';
@@ -29,6 +30,7 @@ import {
 } from 'src/common/containers/form/models/form-definition.model';
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
+import { ISeo } from 'src/common/cms/models/seo';
 import { ISignUp } from 'src/common/cms/models/sign-up';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
@@ -60,14 +62,16 @@ export class SignUpComponent extends AbstractComponent {
         private titleService: Title,
     ) {
         super();
-        this.titleService.setTitle(this.signUp.seo.title);
+        const seo: ISeo = R.head(this.signUp.seo);
+
+        this.titleService.setTitle(seo.title);
         this.metaService.updateTag({
             name: 'description',
-            content: this.signUp.seo.description,
+            content: seo.description,
         });
         this.metaService.updateTag({
             name: 'keywords',
-            content: this.signUp.seo.keywords,
+            content: seo.keywords,
         });
 
         this.formFields = createRegistrationFormFields(SignUpType.SignUp);

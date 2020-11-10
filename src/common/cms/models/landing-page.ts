@@ -37,11 +37,11 @@ export interface IMapCoverage {
 }
 
 export interface ILandingPage {
-    filosofii: IFilosofii[];
-    howItWorks: IHowItWorks[];
+    filosofii: IFilosofii;
+    howItWorks: IHowItWorks;
     introduction: IIntroduction;
-    likeADog: ILikeADog[];
-    mapCoverage: IMapCoverage[];
+    likeADog: ILikeADog;
+    mapCoverage: IMapCoverage;
     seo: ISeo;
     aboveSignUp: string;
 }
