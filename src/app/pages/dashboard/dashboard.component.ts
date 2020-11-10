@@ -32,7 +32,7 @@ export class DashboardComponent extends AbstractComponent implements OnInit {
     public loadingData = true;
     public supplyPointStatistic: ISupplyPointStatistic;
 
-    public $news = this.newsService.getNews();
+    public news$ = this.newsService.getNews();
 
     constructor(
         private cd: ChangeDetectorRef,

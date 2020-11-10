@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { CookiePolicyService } from 'src/common/cms/services/cookie-policy.service';
+import { ICookiePolicy } from 'src/common/cms/models/cookie.policy';
 
 @Injectable({
     providedIn: 'root',
@@ -18,7 +19,7 @@ export class CookiePolicyResolver implements Resolve<any> {
         private cookiePolicyService: CookiePolicyService,
     ) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | any {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ICookiePolicy> {
         return this.cookiePolicyService.getCookiePolicy();
     }
 }

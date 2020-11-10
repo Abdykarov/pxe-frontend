@@ -33,11 +33,11 @@ const apolloCmsGraphQLFactory = (
     httpLink: HttpLink,
 ) => {
     const useDirectlyCMS = environment.useDirectlyCMS;
-    const uri = useDirectlyCMS  ? environment.url_cms_local : environment.url_cms;
+    const uriDomain = useDirectlyCMS ? environment.url_cms_local : environment.url_cms;
 
     const cache = new InMemoryCache();
 
-    const http = httpLink.create({ uri});
+    const http = httpLink.create({ uri: `${uriDomain}/${environment.url_cms_api}` });
 
     const auth = new ApolloLink((operation: Operation, forward: NextLink) => {
         if (useDirectlyCMS) {
@@ -76,7 +76,6 @@ const apolloCmsGraphQLFactory = (
 
     const link = from([auth, http]);
 
-
     // add default options
     return {
         [CONSTS.APOLLO_CMS_KEY]: {
@@ -86,7 +85,6 @@ const apolloCmsGraphQLFactory = (
         },
     };
 };
-
 
 export const ApolloCMSGraphQLProvider = {
     provide: APOLLO_NAMED_OPTIONS,

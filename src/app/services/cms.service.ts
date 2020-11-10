@@ -8,6 +8,7 @@ import {
 import { map } from 'rxjs/operators';
 
 import { CONSTS } from 'src/app/app.constants';
+import { environment } from 'src/environments/environment';
 import { IRefreshTokenJwtResponse } from './model/cms.model';
 
 @Injectable({
@@ -30,7 +31,7 @@ export class CmsService {
             body.append('scope', CONSTS.CMS.SCOPE);
 
             return this.http.post(
-                `${CONSTS.CMS.DOMAIN}${CONSTS.CMS.REFRESH_TOKEN_URL}`,
+                `${environment.url_cms_local}/${CONSTS.CMS.REFRESH_TOKEN_URL}`,
                 body.toString(),
                 {
                     headers: {

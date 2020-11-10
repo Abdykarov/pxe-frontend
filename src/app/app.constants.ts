@@ -114,7 +114,6 @@ export const CONSTS = {
     CMS: {
         CLIENT_ID: 'pxe-parc4u:default',
         CLIENT_SECRET: 'oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx',
-        DOMAIN: 'https://squidex.lnd.bz/',
         GRAND_TYPE: 'client_credentials',
         REFRESH_TOKEN_URL: 'identity-server/connect/token',
         REGEX_CONTAIN_CMS: 'squidex',

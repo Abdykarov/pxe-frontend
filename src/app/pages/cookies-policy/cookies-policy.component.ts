@@ -5,9 +5,12 @@ import {
     Title,
 } from '@angular/platform-browser';
 
+import * as R from 'ramda';
+
 import { AbstractComponent } from 'src/common/abstract.component';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { ICookiePolicy } from 'src/common/cms/models/cookie.policy';
+import { ISeo } from 'src/common/cms/models/seo';
 
 @Component({
     selector: 'pxe-cookies-policy',
@@ -32,14 +35,15 @@ export class CookiesPolicyComponent extends AbstractComponent {
         private titleService: Title,
     ) {
         super();
-        this.titleService.setTitle(this.cookiePolicy.seo.title);
+        const seo: ISeo = R.head(this.cookiePolicy.seo);
+        this.titleService.setTitle(seo.title);
         this.metaService.updateTag({
             name: 'description',
-            content: this.cookiePolicy.seo.description,
+            content: seo.description,
         });
         this.metaService.updateTag({
             name: 'keywords',
-            content: this.cookiePolicy.seo.keywords,
+            content: seo.keywords,
         });
     }
 }
