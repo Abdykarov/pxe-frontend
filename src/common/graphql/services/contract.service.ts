@@ -104,14 +104,6 @@ export class ContractService {
             },
         })
 
-    public deleteContract = (contractId: string) => this.apollo
-        .mutate<any>({
-            mutation: deleteContractMutation,
-            variables: {
-                contractId,
-            },
-        })
-
     public concludeContract = (contractId: number) => this.apollo
         .mutate<any>({
             mutation: concludeContractMutation,
