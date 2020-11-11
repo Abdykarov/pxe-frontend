@@ -15,13 +15,42 @@
 	right: 0;
 	height: $header-height;
 	color: $white;
-	z-index: 2010;
+	z-index: $zindex-header;
 
 	&--sticked {
 		// Media queries
 		@include media-breakpoint-up(xl) {
 			position: fixed;
 			background-color: $light;
+		}
+
+		&.header--lp {
+			background-color: transparent;
+			z-index: $zindex-lp;
+
+			.header-inner {
+				// Media queries
+				@include media-breakpoint-up(xl) {
+					background-color: $body-bg-lp;
+				}
+			}
+		}
+	}
+
+	&--lp {
+		z-index: $zindex-lp;
+
+		@include media-breakpoint-down(xl) {
+			z-index: $zindex-header;
+		}
+
+		.header-inner {
+			// Media queries
+			@include media-breakpoint-down(xl) {
+				width: calc( 100% + #{$spacer} );
+				margin-left: -( $spacer / 2 );
+				background-color: $body-bg-lp;
+			}
 		}
 	}
 

@@ -42,6 +42,9 @@ type Contract {
     offerValidity: Boolean!
     personalData: PersonalData
     prolong: Boolean
+    nextContractId: ID
+    previousContractId: ID
+    isNextContractConcluded: Boolean
 }
 
 type ContractTerms {
@@ -70,6 +73,7 @@ type Mutation {
     confirmFirstContractView: Boolean
     createGasSupplyPoint(gasAttributes: SupplyPointInputGasAttributes!, supplyPoint: SupplyPointInput!): Int
     createPowerSupplyPoint(powerAttributes: SupplyPointInputPowerAttributes!, supplyPoint: SupplyPointInput!): Int
+    deleteUnfinishedSupplyPoint(supplyPointId: ID!): Boolean
     deleteOffer(offerId: ID!): Int
     deletePersonalData(contractId: ID!): Boolean
     deleteSelectedOfferFromContract(contractId: ID!): Boolean

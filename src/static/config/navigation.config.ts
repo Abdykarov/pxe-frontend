@@ -99,12 +99,12 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/breadcrumb',
                 },
                 {
-                    'label': 'Info banner',
-                    'url': '/basic/info-banner',
+                    'label': 'Graphs',
+                    'url': '/basic/graphs',
                 },
                 {
-                    'label': 'News',
-                    'url': '/basic/news',
+                    'label': 'Info banner',
+                    'url': '/basic/info-banner',
                 },
                 {
                     'label': 'List of notifications',

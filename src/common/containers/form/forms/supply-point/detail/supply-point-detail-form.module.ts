@@ -4,6 +4,7 @@ import {
     ReactiveFormsModule,
 } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { AddressWhispererModule } from 'src/common/containers/address-whisperer/address-whisperer.module';
 import { AlertModule } from 'src/common/ui/alert/alert.module';
@@ -35,6 +36,7 @@ import { SupplyPointDetailFormComponent } from './supply-point-detail-form.compo
         FormsModule,
         PipesModule,
         ReactiveFormsModule,
+        RouterModule,
         SelectModule,
     ],
 })

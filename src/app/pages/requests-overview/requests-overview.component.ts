@@ -102,36 +102,38 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
 
         this.modalsService.closeModalData$
             .pipe(
-                filter(R_.isNotNil),
+                filter(
+                    R.allPass([
+                        R_.isNotNil,
+                        R.propEq('modalType', CONSTS.MODAL_TYPE.CONFIRM_DELETE_REQUEST),
+                    ]),
+                ),
             )
             .subscribe(modal => {
-                if (modal.modalType === CONSTS.MODAL_TYPE.CONFIRM_DELETE_REQUEST) {
-                    if (modal.confirmed) {
-                        this.supplyService.deleteSupplyPoint(modal.data.contract.contractId)
-                            .pipe(
-                                takeUntil(this.destroy$),
-                            )
-                            .subscribe(
-                                _ => {
-                                    this.sourceSupplyPoints = R.filter(
-                                        (supplyPoint: ISupplyPoint) =>
-                                            R.path(['contract', 'contractId'], supplyPoint) !== modal.data.contract.contractId,
-                                    )(this.sourceSupplyPoints);
-                                    const { overviewState, supplyPoints } = getOverviewState(this.sourceSupplyPoints);
-                                    this.supplyPoints = supplyPoints;
-                                    this.state = overviewState;
-                                    this.cd.markForCheck();
-                                },
-                                (error) => {
-                                    const { globalError } = parseGraphQLErrors(error);
-                                    this.globalError = globalError;
-                                    this.cd.markForCheck();
-                                },
-                            );
-                    }
-                } else {
-                    this.modalsService.closeModalData$.next(null);
+                if (modal.confirmed) {
+                    this.supplyService.deleteUnfinishedSupplyPoint(modal.data.id)
+                        .pipe(
+                            takeUntil(this.destroy$),
+                        )
+                        .subscribe(
+                            _ => {
+                                this.sourceSupplyPoints = R.filter(
+                                    (supplyPoint: ISupplyPoint) =>
+                                        R.path(['contract', 'contractId'], supplyPoint) !== modal.data.contract.contractId,
+                                )(this.sourceSupplyPoints);
+                                const { overviewState, supplyPoints } = getOverviewState(this.sourceSupplyPoints);
+                                this.supplyPoints = supplyPoints;
+                                this.state = overviewState;
+                                this.cd.markForCheck();
+                            },
+                            (error) => {
+                                const { globalError } = parseGraphQLErrors(error);
+                                this.globalError = globalError;
+                                this.cd.markForCheck();
+                            },
+                        );
                 }
+                this.modalsService.closeModalData$.next(null);
             });
     }
 

@@ -1,6 +1,5 @@
 import {
     ISupplierLogo,
-    TypeCommodity,
 } from 'src/common/ui/supplier/model/supplier.model';
 
 export const config: ISupplierLogo[] = [
@@ -11,7 +10,7 @@ export const config: ISupplierLogo[] = [
         supplierUrl: '',
         title: 'Alpiq CZ',
         width: 81,
-        typeCommodity: TypeCommodity.POWER,
+        faqUrl: '/faq/supplier/alpiq',
     },
     {
         alt: 'logo - Bohemia Energy entity s.r.o.',
@@ -21,7 +20,7 @@ export const config: ISupplierLogo[] = [
         size: 'sm',
         title: 'Bohemia Energy entity s.r.o.',
         width: 185,
-        typeCommodity: TypeCommodity.BOTH,
+        faqUrl: '/faq/supplier/bohemia-energy',
     },
     {
         alt: 'logo - EP Energy Trading a.s.',
@@ -30,7 +29,7 @@ export const config: ISupplierLogo[] = [
         supplierUrl: '',
         title: 'EP Energy Trading a.s.',
         width: 75,
-        typeCommodity: TypeCommodity.BOTH,
+        faqUrl: '/faq/supplier/energy-trading',
     },
     {
         alt: 'logo - CARBOUNION BOHEMIA, spol. s r. o.',
@@ -40,7 +39,7 @@ export const config: ISupplierLogo[] = [
         size: 'xl',
         title: 'CARBOUNION BOHEMIA, spol. s r. o.',
         width: 70,
-        typeCommodity: TypeCommodity.BOTH,
+        faqUrl: '/faq/supplier/carbounion',
     },
     {
         alt: 'logo - Yello Energy',
@@ -50,7 +49,7 @@ export const config: ISupplierLogo[] = [
         size: 'xl',
         title: 'Yello Energy',
         width: 56,
-        typeCommodity: TypeCommodity.BOTH,
+        faqUrl: '/faq/supplier/yello-energy',
     },
     {
         alt: 'logo - Pražská plynárenská a.s.',
@@ -60,6 +59,6 @@ export const config: ISupplierLogo[] = [
         size: 'xl',
         title: 'Pražská plynárenská a.s.',
         width: 134,
-        typeCommodity: TypeCommodity.BOTH,
+        faqUrl: '/faq/supplier/prazska-plynarenska',
     },
 ];

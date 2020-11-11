@@ -1,27 +1,21 @@
 <ng-template #images let-data="data">
-    <img
-        class="suppliers-overview__picture"
-        [ngClass]="[
-            data.size ? 'suppliers-overview__picture--' + data.size : ''
-        ]"
-        [src]="data.logoUrl"
-        [title]="data.title"
-        [alt]="data.alt"
-        [width]="data.width">
-<!--    <img-->
-<!--        class="suppliers-overview__picture-hover"-->
-<!--        [ngClass]="[-->
-<!--            data.size ? 'suppliers-overview__picture-hover&#45;&#45;' + data.size : ''-->
-<!--        ]"-->
-<!--        [src]="data.logoUrlHover"-->
-<!--        [title]="data.title"-->
-<!--        [alt]="data.alt">-->
+    <a [routerLink]="data?.faqUrl">
+        <img
+            class="suppliers-overview__picture"
+            [ngClass]="[
+                data.size ? 'suppliers-overview__picture--' + data.size : ''
+            ]"
+            [src]="data.logoUrlHover"
+            [title]="data.title"
+            [alt]="data.alt"
+            [width]="data.width">
+    </a>
 </ng-template>
 
 <div class="suppliers-holder">
     <ul class="suppliers-overview">
         <li class="suppliers-overview__item"
-            *ngFor="let supplierLogoData of configSupplier | filterCommodity: typeCommodity ">
+            *ngFor="let supplierLogoData of configSupplier">
             <a
                 *ngIf="supplierLogoData.supplierUrl"
                 [href]="supplierLogoData.supplierUrl"

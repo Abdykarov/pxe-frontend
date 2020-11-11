@@ -79,3 +79,13 @@ export const updateGasSupplyPointWithContractMutation = gql`
         )
     }
 `;
+
+export const deleteUnfinishedSupplyPointMutation = gql`
+    mutation deleteUnfinishedSupplyPoint(
+        $supplyPointId: ID!,
+    ){
+        deleteUnfinishedSupplyPoint(
+            supplyPointId: $supplyPointId,
+        )
+    }
+`;

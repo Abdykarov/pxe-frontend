@@ -16,16 +16,9 @@ import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
-import {
-    CONSTS,
-    ROUTES,
-    SEO,
-} from 'src/app/app.constants';
+import { CONSTS } from 'src/app/app.constants';
 import { FaqService } from 'src/app/services/faq.service';
-import {
-    IQuestion,
-    ITagConfigItem,
-} from 'src/app/services/model/faq.model';
+import { IQuestion } from 'src/app/services/model/faq.model';
 import {
     geParamFromTag,
     removeHtmlFromText,
@@ -68,7 +61,7 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
                     if (this.activeQuestion) {
                         this.activeTagLabel = geParamFromTag(this.activeTag, this.faqConfig, 'label');
                         this.questions = this.getQuestions();
-                        this.titleService.setTitle(`${this.activeQuestion.header} | PARC4U`);
+                        this.titleService.setTitle(`${this.activeQuestion.header} | parc4u`);
                         this.metaService.updateTag({
                             name: 'description',
                             content: R.pipe(

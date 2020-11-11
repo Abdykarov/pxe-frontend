@@ -4,8 +4,6 @@ import {
     ContentChildren,
     Input,
     QueryList,
-    ViewChild,
-    ViewChildren,
 } from '@angular/core';
 
 import { AbstractComponent } from 'src/common/abstract.component';
