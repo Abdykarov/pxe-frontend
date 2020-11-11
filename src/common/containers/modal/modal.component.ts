@@ -41,7 +41,9 @@ export class ModalComponent extends AbstractComponent {
 
     @HostListener('document:keydown.escape', ['$event'])
     public onKeydownHandler(event: KeyboardEvent) {
-        this.component.instance.closeModal.next();
+        if (R.path(['instance', 'closeModal'])(this.component)) {
+            this.component.instance.closeModal.next();
+        }
     }
 
     constructor(
