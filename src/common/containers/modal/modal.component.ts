@@ -1,7 +1,7 @@
 import {
     Component,
     ComponentFactoryResolver,
-    ComponentRef,
+    ComponentRef, HostListener,
     Inject,
     Input,
     PLATFORM_ID,
@@ -27,6 +27,7 @@ import { OverlayService } from 'src/common/graphql/services/overlay.service';
     styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent extends AbstractComponent {
+
     @ViewChild(AddModalDirective, { static: true })
     public addModal: AddModalDirective;
 
@@ -37,6 +38,11 @@ export class ModalComponent extends AbstractComponent {
     public modalTitle: string;
 
     public component: ComponentRef<any>;
+
+    @HostListener('document:keydown.escape', ['$event'])
+    public onKeydownHandler(event: KeyboardEvent) {
+        this.component.instance.closeModal.next();
+    }
 
     constructor(
         private componentFactoryResolver: ComponentFactoryResolver,
