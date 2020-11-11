@@ -11,7 +11,6 @@ import {
 import {
     concludeContractMutation,
     confirmFirstContractViewMutation,
-    deleteContractMutation,
     deleteSelectedOfferFromContractMutation,
     deleteSignedContractMutation,
     saveContractMutation,
