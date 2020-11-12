@@ -6,7 +6,7 @@
         [sticked]="wasLastTimeScrolledToTop"
         [isLogged]="authService.currentUserValue | isLogged"
         [settings]="settings"
-        (homeRedirect)="homeRedirect()"
+        (homeRedirect)="homeRedirect($event)"
         [isMenuOpen]="isMenuOpen"
         (landingPageRedirect)="landingPageRedirect()"
         (faqAction)="scrollToFaq()"
