@@ -21,10 +21,12 @@ export class GTMService {
     public setUserId = (userId: string) => gtag('set', {'user_id': userId});
 
     public pushEvent = (action: string = null, category = PUSH_EVENTS_GA.CATEGORY) => {
-        (<any>window).dataLayer.push({
-            event: PUSH_EVENTS_GA.EVENT,
-            category,
-            action,
-        });
+        if ((<any>window).dataLayer) {
+            (<any>window).dataLayer.push({
+                event: PUSH_EVENTS_GA.EVENT,
+                category,
+                action,
+            });
+        }
     }
 }
