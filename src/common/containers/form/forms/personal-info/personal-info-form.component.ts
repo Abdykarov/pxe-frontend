@@ -104,19 +104,14 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
                         ),
                         CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
                     ]);
-            console.log('____');
-            console.log(R.path(['contract', 'offer', 'totalPrice'], this.supplyPoint) );
         }
 
         if (this.formValues) {
-            console.log('this.formValues');
             this.prefillFormData();
         } else {
             const email = this.authService.currentUserValue.email;
             const deposit = this.supplyPoint.contract.offer.totalPrice;
             this.form.controls['email'].setValue(email);
-            console.log('____ELSE____');
-            console.log(deposit);
             this.form.controls['deposit'].setValue(Math.ceil(deposit));
 
             let personalInfoUnfinished = this.personalInfoLocalStorageService.getPersonalInfo(this.supplyPoint.id);
