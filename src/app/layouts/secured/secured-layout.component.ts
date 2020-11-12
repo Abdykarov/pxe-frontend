@@ -28,8 +28,10 @@ import {
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
+    CommodityTypesLowerCase,
     CONSTS,
     SEO,
+    SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';
 import {
@@ -54,6 +56,8 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
     templateUrl: './secured-layout.component.html',
 })
 export class SecuredLayoutComponent extends AbstractLayoutComponent implements OnInit, OnDestroy {
+    public commodityTypePower = CommodityTypesLowerCase.POWER;
+    public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
     public isMenuOpen = false;
     public itemOpened = null;
     public navConfig: INavigationConfig = [];
