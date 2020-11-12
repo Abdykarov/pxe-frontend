@@ -1,7 +1,8 @@
 <lnd-modal
     [isModalOpen]="modalOpen"
     (close)="closeModal.emit()">
-    <div class="modal-body">
+    <div (lndOffClick)="closeModal.emit()"
+        class="modal-body">
         <img
             class="w-100"
             [attr.src]="instanceData.url"
@@ -10,7 +11,8 @@
     </div>
     <div
         *ngIf="!!instanceData.showButton"
-        class="modal-footer">
+        class="modal-footer"
+        (lndOffClick)="closeModal.emit()">
         <lnd-button
             type="primary"
             label="Zavřít"
