@@ -36,13 +36,14 @@
                     <h1 #aaa></h1>
                     <video
                         #video
+                        controls
+                        disablePictureInPicture
                         [class.cursor-pointer]="isVideoPlaying"
                         (click)="isVideoPlaying && pause($event)"
                         class="w-100"
                         poster="/assets/images/landing-page/picture-fallback.jpg"
                         loop
                         [muted]="false"
-                        controls
                         (pause)="cd.detectChanges()"
                         (play)="cd.detectChanges()"
                         preload="none">
