@@ -104,6 +104,10 @@
 			z-index: $zindex-custom-control;
 		}
 	}
+
+	.is-disabled {
+		opacity: .3;
+	}
 }
 
 .form-control {
