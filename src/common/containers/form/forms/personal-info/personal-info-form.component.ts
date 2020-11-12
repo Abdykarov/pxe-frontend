@@ -96,9 +96,9 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
                 .setValidators(
                     [
                         Validators.required,
-                        CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT),
+                        CustomValidators.isNumber(),
                         CustomValidators.minValue(
-                            this.supplyPoint.contract.offer.totalPrice,
+                            Math.ceil(this.supplyPoint.contract.offer.totalPrice),
                             true,
                             false,
                         ),
@@ -176,7 +176,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             phone = this.formValues.phone && this.formValues.phone.substr(4, 10);
             email = this.formValues.email;
             depositPaymentTypeId = this.formValues.depositPaymentType && this.formValues.depositPaymentType.code;
-            deposit = this.formValues.deposit;
+            deposit = Math.ceil(this.formValues.deposit);
             address1 = this.formValues.address1 && R.omit(['__typename'], this.formValues.address1);
             address2 = this.formValues.address2 && R.omit(['__typename'], this.formValues.address2);
         }

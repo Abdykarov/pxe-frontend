@@ -102,7 +102,7 @@ export const formFields: IForm = {
             null,
             [
                 Validators.required,
-                CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT),
+                CustomValidators.isNumber(),
                 CustomValidators.minValue(0),
                 CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
             ],
@@ -218,6 +218,7 @@ export const formFields: IForm = {
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
+            number: errorFieldMessages.number.integer,
             minMinActual: errorFieldMessages.deposit.requiredMinValue,
             totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
