@@ -581,3 +581,16 @@ export enum ANNUAL_CONSUMPTION_UNIT_TYPES {
     ANNUAL_CONSUMPTION_VT_UNIT = 'annualConsumptionVTUnit',
     ANNUAL_CONSUMPTION_UNIT = 'annualConsumptionUnit',
 }
+
+export const PUSH_EVENTS_GA = {
+    EVENT: 'eventTracking',
+    CATEGORY: 'Submit',
+    FORMS: {
+        SIGN_UP: 'Sign up',
+        LOGIN: 'Login',
+        CREATE_SUPPLY_POINT: 'Create supply point',
+        OFFER_SELECTION: 'Offer selection',
+        RECAPITULATION: 'Recapitulation',
+        CONTRACT: 'Contract',
+    },
+};
