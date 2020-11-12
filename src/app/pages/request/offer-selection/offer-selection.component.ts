@@ -26,6 +26,7 @@ import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
+    PUSH_EVENTS_GA,
     ROUTES,
     S_ANALYTICS,
 } from 'src/app/app.constants';
@@ -35,6 +36,7 @@ import {
     getConfigStepper,
     parseGraphQLErrors,
 } from 'src/common/utils';
+import { GTMService } from 'src/app/services/gtm.service';
 import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import {
     ISupplyPoint,
@@ -78,6 +80,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
         public faqService: FaqService,
+        private gtmService: GTMService,
         public navigateRequestService: NavigateRequestService,
         private offerService: OfferService,
         public route: ActivatedRoute,
@@ -154,6 +157,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
             )
             .subscribe(
                 () => {
+                    this.gtmService.pushEvent(PUSH_EVENTS_GA.FORMS.OFFER_SELECTION);
                     this.sAnalyticsService.sendWebData(
                         {},
                         {
