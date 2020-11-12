@@ -25,16 +25,12 @@
                                 "input": "src/assets/",
                                 "output": "src/assets/"
                             },
-                            {
-                                "glob": "**/*",
-                                "input": "node_modules/ng2-pdfjs-viewer/pdfjs",
-                                "output": "/assets/pdfjs"
-                            },
                             "src/assets/configurations/config.js",
                             "src/assets/csv/",
                             "src/assets/images/",
                             "src/assets/static-data/",
                             "src/assets/pdfs/",
+                            "src/assets/pdfjs/",
                             "src/assets/favicon.ico",
                             "src/robots.txt",
                             "src/sitemap.xml"
@@ -42,10 +38,6 @@
                         "extractCss": true,
                         "styles": [
                             "src/assets/scss/front.scss",
-                            {
-                                "input": "src/assets/scss/pdf-viewer-custom.scss",
-                                "inject": false
-                            }
                         ],
                         "scripts": []
                     },
@@ -140,11 +132,7 @@
                                 "input": "src/assets/",
                                 "output": "src/assets/"
                             },
-                            {
-                                "glob": "**/*",
-                                "input": "node_modules/ng2-pdfjs-viewer/pdfjs",
-                                "output": "/assets/pdfjs"
-                            },
+                            "src/assets/pdfjs/",
                             "src/assets/pdfs/",
                             "src/assets/favicon.ico",
                             "src/robots.txt",
@@ -223,11 +211,7 @@
                                 "input": "src/assets/",
                                 "output": "src/assets/"
                             },
-                            {
-                                "glob": "**/*",
-                                "input": "node_modules/ng2-pdfjs-viewer/pdfjs",
-                                "output": "/assets/pdfjs"
-                            },
+                            "src/assets/pdfjs/",
                             "src/assets/configurations/config.js",
                             "src/assets/csv/",
                             "src/assets/pdfs/",
@@ -238,10 +222,6 @@
                         "extractCss": true,
                         "styles": [
                             "src/assets/scss/front.scss",
-                            {
-                                "input": "src/assets/scss/pdf-viewer-custom.scss",
-                                "inject": false
-                            }
                         ],
                         "scripts": []
                     },
