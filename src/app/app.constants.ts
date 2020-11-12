@@ -117,8 +117,8 @@ export const CONSTS = {
         REASON_FOR_LOGOUT_USER: 'reason_for_logout_user',
     },
     REASON_FOR_LOGOUT_USER: {
-        BY_SELF: 'Byl jste úspěšně odhlášen',
-        UNAUTHORIZED: 'Došlo k odhlášení z důvodu neaktivity',
+        BY_SELF: 'Byl jste úspěšně odhlášen.',
+        UNAUTHORIZED: 'Došlo k odhlášení z důvodu neaktivity.',
     },
     TIME_TO_SHOW_USER_LOGOUT_BANNER: 300,
     VALIDATORS: {
