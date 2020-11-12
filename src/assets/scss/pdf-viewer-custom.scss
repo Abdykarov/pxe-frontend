@@ -19,9 +19,21 @@ body {
 
 .pdfViewer {
 	.page {
+		position: relative;
+		padding-bottom: $spacer;
+		margin-bottom: 0;
+		background-color: transparent;
 		border: none;
 		border-image: none;
-		background-color: transparent;
+
+		&::after {
+			content: '';
+			@include absolute-center(false, true);
+			bottom: 0;
+			width: calc(100% + 40px);
+			height: 20px;
+			background-color: lighten($body-bg, 2%);
+		}
 	}
 }
 
