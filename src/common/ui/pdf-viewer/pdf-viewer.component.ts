@@ -6,7 +6,7 @@ import {
     ViewChild,
 } from '@angular/core';
 
-import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
+import { PdfJsViewerComponent } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-viewer.component';
 
 @Component({
     selector: 'pxe-pdf-viewer',
