@@ -81,6 +81,10 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
                     (text) => `${text}${CONSTS.APPEND_AFTER_CUT_TEXT}`,
                 )(textWithoutHTML);
             }
+
+            if (this.isFromContract) {
+                this.showPriceDecomposition = true;
+            }
         }
 
         this.dateDiffValidityOfOffer = this.dateDiffPipe.transform(

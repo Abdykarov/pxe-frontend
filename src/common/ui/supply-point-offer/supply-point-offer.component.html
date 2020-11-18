@@ -95,7 +95,7 @@
                 </div>
                 <div class="col-auto d-none d-md-block">
                     <lnd-button
-                        *ngIf="!isOwner"
+                        *ngIf="!isOwner && !isFromContract"
                         class="mr-md-3"
                         [label]="showPriceDecomposition ? 'Zavřít detail nabídky' : 'Zobrazit detail nabídky'"
                         [type]="'secondary'"
@@ -279,7 +279,7 @@
                 <div class="row justify-content-end">
                     <div class="col-12 col-md-auto">
                         <lnd-button
-                            *ngIf="!isOwner"
+                            *ngIf="!isOwner && !isFromContract"
                             class="w-100 mb-3 mb-md-0 mr-md-3"
                             customClass="w-100 w-md-auto"
                             [label]="showPriceDecomposition ? 'Zavřít detail nabídky' : 'Zobrazit detail nabídky'"
