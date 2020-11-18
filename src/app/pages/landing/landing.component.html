@@ -165,7 +165,7 @@
             </div>
             <div class="section-video-text">
                 <div class="row w-100 ml-0 text-center">
-                    <div *ngIf="!isVideoPlaying"
+                    <div *ngIf="!isMoreThanMdResolution || (isMoreThanMdResolution && !isVideoPlaying)"
                          class="col-12 col-md-6 offset-md-3">
                         <h2 class="h2--public mb-4">
                             parc4u – snadná cesta<br class="d-none d-xl-block">
