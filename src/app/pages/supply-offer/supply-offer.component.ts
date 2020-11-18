@@ -177,10 +177,17 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         this.modalsService.closeModalData$
             .pipe(
                 takeUntil(this.destroy$),
+                map(_ => {
+                    console.log('__');
+                    console.log(_);
+                    return _;
+                }),
                 filter(R_.isNotNil),
                 filter((modal: ICloseModalData) => modal.confirmed),
             )
             .subscribe(modal => {
+                console.log('___');
+                console.log(modal);
                 if (modal.modalType === CONSTS.MODAL_TYPE.CONFIRM_DELETE_OFFER) {
                     this.deleteDisabled[modal.data.row.id] = true;
                     this.offerService.deleteOffer(modal.data.row.id)
@@ -318,6 +325,7 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public delete = (table, row, currentOfferFormValues = row) => {
+        console.log('DELETE');
         this.showDeletedOfferBanner = false;
         if (R_.isNilOrEmptyString(currentOfferFormValues.id)) {
             this.modalsService

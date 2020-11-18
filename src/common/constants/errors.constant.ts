@@ -109,6 +109,7 @@ export const graphQLMessages = {
     unknownSupplyPoint: 'Hledané odběrné místo neexistuje nebo pro přístup k němu nemáte oprávnění.',
     duplicateOffer: 'Nabídka nebyla založena, protože totožná nabídka již existuje.',
     mustBeValidPhoneNumber: 'Telefon musí obsahovat 9 číslic.',
+    notValidOffer: 'Platnost nabídka vypršela.',
 };
 
 export const cantDeleteAllMarkedOffers = 'Nepodařilo se nám smazat veškeré označené nabídky, prosím zkuste to znovu.';
