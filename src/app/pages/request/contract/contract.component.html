@@ -82,6 +82,7 @@
                             *ngIf="questions"
                             [questions]="questions"
                             [isFromContract]="true"
+                            [personalInfo]="supplyPoint.contract.personalData"
                             [supplyPointOffer]="supplyPoint.contract.offer"
                             [interactive]="false">
                         </pxe-supply-point-offer>
