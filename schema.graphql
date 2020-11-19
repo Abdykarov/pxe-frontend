@@ -126,7 +126,6 @@ type Offer {
     monthlyConsumptionFee: Float
     name: String!
     permanentPaymentPrice: Float
-    prepayment: Float
     priceGas: Float
     priceGasWithVAT: Float
     priceNT: Float

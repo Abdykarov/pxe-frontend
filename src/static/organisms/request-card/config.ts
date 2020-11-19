@@ -98,7 +98,6 @@ export const supplyPointConfig2: ISupplyPoint = {
             systemServicesRegulatedPrice: 0.06,
             totalPrice: 145.72,
             unit: 'MWh',
-            prepayment: 1000,
             greenEnergy: true,
         },
         personalData: null,
