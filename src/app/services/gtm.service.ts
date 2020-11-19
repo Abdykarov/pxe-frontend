@@ -2,10 +2,7 @@ import { Injectable } from '@angular/core';
 
 import * as CryptoJS from 'crypto-js';
 
-import {
-    CONSTS,
-    PUSH_EVENTS_GA,
-} from 'src/app/app.constants';
+import { PUSH_EVENTS_GA } from 'src/app/app.constants';
 
 declare const gtag;
 
