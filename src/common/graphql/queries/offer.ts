@@ -55,7 +55,6 @@ export const offerFragment = gql`
         priceVTWithVAT,
         priceNTWithVAT,
         priceGasWithVAT,
-        prepayment,
         unit,
         accountingRegulatedPrice,
         monthlyConsumptionFee,
