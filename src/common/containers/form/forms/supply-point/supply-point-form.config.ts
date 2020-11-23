@@ -164,6 +164,7 @@ export const formFields: IForm = {
                 CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
                 CustomValidators.isNumber(),
                 CustomValidators.minValue(0),
+                CustomValidators.maxValue(CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH * 1000),
             ],
         ],
         expirationDate: [
@@ -270,6 +271,8 @@ export const formFields: IForm = {
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
+            maxKWh: errorFieldMessages.annualConsumption.maxKWh,
+            maxMWh: errorFieldMessages.annualConsumption.maxMWh,
             number: errorFieldMessages.number.positiveInteger,
             'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
             totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
