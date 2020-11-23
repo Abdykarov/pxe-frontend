@@ -72,6 +72,14 @@ export class AbstractSupplyPointFormComponent extends AbstractFormComponent impl
                         CustomValidators.totalDigitLengthBeforeDecimalPoint(
                             CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION,
                         ),
+                        typeOfAnnualConsumption === ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION ?
+                            CustomValidators.maxValue(
+                                CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH * 1000,
+                                true,
+                                true,
+                                'maxKWh',
+                            ) :
+                            () => CustomValidators.alwaysValid(),
                     ]);
             const typeOfAnnualConsumptionValue = this.operationOnNumber(annualAnnualConsumption, (num) => num * 1000);
             this.form.controls[typeOfAnnualConsumption].setValue(typeOfAnnualConsumptionValue);
@@ -83,6 +91,14 @@ export class AbstractSupplyPointFormComponent extends AbstractFormComponent impl
                         CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_ANNUAL_CONSUMPTION),
                         CustomValidators.minValue(0),
                         CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
+                        typeOfAnnualConsumption === ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION ?
+                            CustomValidators.maxValue(
+                                CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH,
+                                true,
+                                true,
+                                'maxMWh',
+                            ) :
+                            () => CustomValidators.alwaysValid(),
                     ]);
             const typeOfAnnualConsumptionValue = this.operationOnNumber(annualAnnualConsumption, (num) => num / 1000);
             this.form.controls[typeOfAnnualConsumption].setValue(typeOfAnnualConsumptionValue);
