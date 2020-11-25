@@ -31,6 +31,7 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import {
     CONSTS,
+    PUSH_EVENTS_GA,
     ROUTES,
 } from 'src/app/app.constants';
 import { ContractService } from 'src/common/graphql/services/contract.service';
@@ -43,6 +44,7 @@ import {
     parseRestAPIErrors,
     scrollToElementFnc,
 } from 'src/common/utils';
+import { GTMService } from 'src/app/services/gtm.service';
 import {
     IDocumentType,
     IResponseDataDocument,
@@ -103,6 +105,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
         private contractService: ContractService,
         private documentService: DocumentService,
         public faqService: FaqService,
+        private gtmService: GTMService,
         public navigateRequestService: NavigateRequestService,
         public route: ActivatedRoute,
         private router: Router,
@@ -270,6 +273,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
             .subscribe(
                 (deleteSignedContract: boolean) => {
                     if (deleteSignedContract) {
+                        this.gtmService.pushEvent(PUSH_EVENTS_GA.FORMS.CONTRACT);
                         this.router.navigate(
                             [ROUTES.ROUTER_REQUEST_PAYMENT], {
                                 queryParams: {

@@ -15,6 +15,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
 import { IOffer } from 'src/common/graphql/models/offer.model';
+import { IPersonalData } from 'src/common/graphql/models/personal-data.model';
 import { IQuestion } from 'src/app/services/model/faq.model';
 import { removeHtmlFromText } from 'src/common/utils';
 
@@ -42,6 +43,9 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
 
     @Input()
     public questions: IQuestion[] = null;
+
+    @Input()
+    public personalInfo: IPersonalData = null;
 
     @Input()
     public supplyPointOffer: IOffer;
@@ -80,6 +84,10 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
                     R.take(indexOfLastWord + CONSTS.MAX_LENGTH_SUPPLIER_DESCRIPTION),
                     (text) => `${text}${CONSTS.APPEND_AFTER_CUT_TEXT}`,
                 )(textWithoutHTML);
+            }
+
+            if (this.isFromContract) {
+                this.showPriceDecomposition = true;
             }
         }
 

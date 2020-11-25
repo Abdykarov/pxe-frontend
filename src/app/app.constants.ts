@@ -117,12 +117,13 @@ export const CONSTS = {
         REASON_FOR_LOGOUT_USER: 'reason_for_logout_user',
     },
     REASON_FOR_LOGOUT_USER: {
-        BY_SELF: 'Byl jste úspěšně odhlášen',
-        UNAUTHORIZED: 'Došlo k odhlášení z důvodu neaktivity',
+        BY_SELF: 'Byl jste úspěšně odhlášen.',
+        UNAUTHORIZED: 'Došlo k odhlášení z důvodu neaktivity.',
     },
     TIME_TO_SHOW_USER_LOGOUT_BANNER: 300,
     VALIDATORS: {
         ADULTHOOD_AGE: 18,
+        MAX_ANNUAL_CONSUMPTION_IN_MWH: 63,
         MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION: 10,
         MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT: 7,
         MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT: 2,
@@ -581,3 +582,16 @@ export enum ANNUAL_CONSUMPTION_UNIT_TYPES {
     ANNUAL_CONSUMPTION_VT_UNIT = 'annualConsumptionVTUnit',
     ANNUAL_CONSUMPTION_UNIT = 'annualConsumptionUnit',
 }
+
+export const PUSH_EVENTS_GA = {
+    EVENT: 'eventTracking',
+    CATEGORY: 'Submit',
+    FORMS: {
+        SIGN_UP: 'Sign up',
+        LOGIN: 'Login',
+        CREATE_SUPPLY_POINT: 'Create supply point',
+        OFFER_SELECTION: 'Offer selection',
+        RECAPITULATION: 'Recapitulation',
+        CONTRACT: 'Contract',
+    },
+};

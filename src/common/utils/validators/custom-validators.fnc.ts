@@ -67,6 +67,8 @@ export class CustomValidators {
         '\uFBD3-\uFD3D\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC\uFF21-\uFF3A\uFF41-\uFF5A\uFF66-\uFFBE' +
         '\uFFC2-\uFFC7\uFFCA-\uFFCF\uFFD2-\uFFD7\uFFDA-\uFFDC';
 
+    static alwaysValid = () => null;
+
     static accountNumber = (acountNumber) => {
         if (acountNumber.pristine) {
             return null;
@@ -425,7 +427,12 @@ export class CustomValidators {
         };
     }
 
-    static maxValue = (max: number, allowEqual = false, plainError = true): ValidatorFn => {
+    static maxValue = (
+        max: number,
+        allowEqual = false,
+        plainError = true,
+        nameOfError: string = 'max',
+    ): ValidatorFn => {
         return (control: AbstractControl): ValidationErrors => {
             if (control.pristine) {
                 return null;
@@ -442,7 +449,7 @@ export class CustomValidators {
             }
 
             return {
-                max: plainError ? true : {max, actual: control.value},
+                [nameOfError]: plainError ? true : {max, actual: control.value},
             };
         };
     }

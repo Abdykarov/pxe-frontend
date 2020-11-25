@@ -31,12 +31,14 @@ import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
+    PUSH_EVENTS_GA,
     ROUTES,
     S_ANALYTICS,
     SEO,
 } from 'src/app/app.constants';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import { FaqService } from 'src/app/services/faq.service';
+import { GTMService } from 'src/app/services/gtm.service';
 import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import {
@@ -100,6 +102,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
         public authService: AuthService,
         public cd: ChangeDetectorRef,
         public faqService: FaqService,
+        private gtmService: GTMService,
         private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
         private modalService: ModalService,
@@ -227,6 +230,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
                 .pipe(takeUntil(this.destroy$))
                 .subscribe(
                     () => {
+                        this.gtmService.pushEvent(PUSH_EVENTS_GA.FORMS.SIGN_UP);
                         this.formLoading = false;
                         this.sAnalyticsService.sendWebData(
                             {},

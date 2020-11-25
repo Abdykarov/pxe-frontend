@@ -1,15 +1,13 @@
 <ng-template #sendSmsAgainTemplate>
-    <a [class.is-disabled]="!smsSent"
-        (click)="submitSms()">
-        Poslat znovu na číslo {{phone}}
-    </a>
+    <a [class.link--disabled]="!smsSent" (click)="submitSms()">Poslat znovu</a>
+    na číslo {{phone | phone}}
 </ng-template>
 
 <ng-template #confirmLabelTemplate>
     <span [class.is-disabled]="!smsSent">Ověřovací kód</span>
 </ng-template>
 
-<div class="row no-gutters form-container">
+<div class="row no-gutters form-container text-left">
     <div
         *ngIf="!showForm"
         class="col-12 mb-5">
@@ -27,6 +25,10 @@
 
     <ng-container *ngIf="showForm">
         <div class="col-12">
+            <p *ngIf="textInfoAboutVerificationPassword"
+               class="small mb-2">
+                {{textInfoAboutVerificationPassword}}
+            </p>
             <lnd-button
                 class="w-100 mb-1"
                 customClass="p-2 w-100"
@@ -37,7 +39,7 @@
             </lnd-button>
             <p class="small"
                [class.is-disabled]="smsSent">
-                Ověřovací SMS kód odešleme<br>na číslo {{phone}}
+                Ověřovací SMS kód odešlem na číslo {{phone | phone}}
             </p>
         </div>
         <div class="col-12">
