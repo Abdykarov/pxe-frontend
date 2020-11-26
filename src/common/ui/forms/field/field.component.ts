@@ -254,5 +254,20 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
         }
     }
 
+    public trim = (): void => this.value = R.trim(this._value);
+
+    public focusFnc = (evt): void => {
+        this.inputFocused = true;
+        this.focus.emit(evt);
+    }
+
+    public blurFnc = (evt, withTrim = false): void => {
+        this.inputFocused = false;
+        this.blur.emit(evt);
+        if ( withTrim) {
+            this.trim();
+        }
+    }
+
     public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages, this.dynamicPipe);
 }
