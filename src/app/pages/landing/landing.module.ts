@@ -7,6 +7,7 @@ import { CarouselContainerModule } from 'src/common/containers/carousel-containe
 import { DirectivesModule } from 'src/common/directives/directives.module';
 import { LandingComponent } from './landing.component';
 import { LandingRoutingModule } from './landing.routing';
+import { LpPersonalizationContainerModule } from 'src/common/containers/lp-personalization-container/lp-personalization-container.module';
 import { MapCoverageContainerModule } from 'src/common/containers/map-coverage-container/map-coverage-container.module';
 import { PipesModule } from 'src/common/pipes/pipes.module';
 import { RegistrationFormModule } from 'src/common/containers/form/forms/registration/registration-form.module';
@@ -25,6 +26,7 @@ import { RegistrationFormModule } from 'src/common/containers/form/forms/registr
         CommonModule,
         DirectivesModule,
         LandingRoutingModule,
+        LpPersonalizationContainerModule,
         MapCoverageContainerModule,
         PipesModule,
         RegistrationFormModule,
