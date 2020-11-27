@@ -6,7 +6,7 @@
         [sticked]="wasLastTimeScrolledToTop"
         [isLogged]="authService.currentUserValue | isLogged"
         [settings]="settings"
-        (homeRedirect)="homeRedirect()"
+        (homeRedirect)="homeRedirect($event)"
         [isMenuOpen]="isMenuOpen"
         (landingPageRedirect)="landingPageRedirect()"
         (faqAction)="scrollToFaq()"
@@ -40,7 +40,7 @@
                 <a [routerLink]="['/', CONSTS.PATHS.TERMS_OF_USE]"
                    class="footer-navigation__link"
                 >
-                    Obchodní podmínky PARC4U
+                    Obchodní podmínky parc4u
                 </a>
             </li>
             <li class="footer-navigation__item">

@@ -3,11 +3,14 @@
     [isModalOpen]="modalOpen"
     [size]="this.instanceData.size"
     (close)="closeModal.emit()">
-    <div class="modal-body">
+    <div (lndOffClick)="closeModal.emit()"
+        class="modal-body">
         <video
             #video
             class="w-100 cursor-pointer"
-            muted
+            [muted]="false"
+            controls
+            disablePictureInPicture
             preload="auto"
             (pause)="cd.detectChanges()"
             (play)="cd.detectChanges()"

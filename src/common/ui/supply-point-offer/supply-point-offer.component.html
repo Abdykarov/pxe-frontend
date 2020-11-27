@@ -12,7 +12,7 @@
             class="col-12 col-md-6 order-md-1 supply-point-offer__block px-0"
             *ngIf="!isOwner">
             <div class="row">
-                <div class="col-12 ">
+                <div class="col-12">
                     <span class="supply-point-offer__title-label">Název nabídky</span>
                     <span class="supply-point-offer__title text-break">{{supplyPointOffer?.name}}</span>
                 </div>
@@ -95,10 +95,11 @@
                 </div>
                 <div class="col-md-3 d-none d-md-block">
                     <lnd-button
-                        *ngIf="!isOwner"
+                        *ngIf="!isOwner && !isFromContract"
+                        class="mr-md-3"
                         class="w-100 mr-md-3"
                         customClass="w-100"
-                        [label]="showPriceDecomposition ? 'Zavřít kartu' : 'Detail nabídky'"
+                        [label]="showPriceDecomposition ? 'Zavřít detail nabídky' : 'Zobrazit detail nabídky'"
                         [type]="'secondary'"
                         (action)="togglePriceDecomposition($event)">
                     </lnd-button>
@@ -248,11 +249,11 @@
                     <div class="supply-point-offer__block supply-point-offer__block--second supply-point-offer__block--small-offset mb-0">
                         <h3 class="supply-point-offer__decomposition-title mb-3">Odhadovaná cena za rok</h3>
                         <div class="supply-point-offer__value-box supply-point-offer__value-box--price"
-                             *ngIf="supplyPointOffer.prepayment || supplyPointOffer.totalPrice">
+                             *ngIf="personalInfo?.deposit || supplyPointOffer.totalPrice">
                             <span class="supply-point-offer__value-name small">Vypočtená roční cena<br>/&nbsp;VČETNĚ&nbsp;DPH</span>
                             <span class="supply-point-offer__value text-break">
-                                <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
-                                    {{(math.ceil(supplyPointOffer.prepayment) * 12) | number: '1.0-0'}}&nbsp;Kč
+                                <ng-container *ngIf="personalInfo?.deposit; else totalPrice">
+                                    {{(math.ceil(personalInfo?.deposit) * 12) | number: '1.0-0'}}&nbsp;Kč
                                 </ng-container>
                                 <ng-template #totalPrice>
                                     {{(math.ceil(supplyPointOffer.totalPrice) * 12)  | number: '1.0-0'}}&nbsp;Kč
@@ -261,7 +262,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
         <div class="
                 col-12
@@ -271,7 +271,7 @@
             [class.pb-0]="isOwner"
             [class.supply-point-offer__block--second]="!isOwner">
             <div
-                *ngIf="supplyPointOffer.prepayment || supplyPointOffer.totalPrice"
+                *ngIf="personalInfo?.deposit || supplyPointOffer.totalPrice"
                 class="row">
                 <div class="col-12">
                     <span class="supply-point-offer__title-label">
@@ -280,8 +280,8 @@
                 </div>
                 <div class="col-12">
                     <span class="supply-point-offer__title mb-0 text-break">
-                        <ng-container *ngIf="supplyPointOffer.prepayment; else totalPrice">
-                            {{math.ceil(supplyPointOffer.prepayment) | number: '1.0-0'}}&nbsp;Kč&nbsp;<span class="d-inline-block small">VČETNĚ&nbsp;DPH</span>
+                        <ng-container *ngIf="personalInfo?.deposit; else totalPrice">
+                            {{math.ceil(personalInfo?.deposit) | number: '1.0-0'}}&nbsp;Kč&nbsp;<span class="d-inline-block small">VČETNĚ&nbsp;DPH</span>
                         </ng-container>
                         <ng-template #totalPrice>
                             {{math.ceil(supplyPointOffer.totalPrice) | number: '1.0-0'}}&nbsp;Kč&nbsp;<span class="d-inline-block small">VČETNĚ&nbsp;DPH</span>
@@ -299,7 +299,7 @@
                         *ngIf="!isOwner && !isFromContract"
                         class="w-100 mb-3 mb-md-0 mr-md-3"
                         customClass="w-100 w-md-auto"
-                        [label]="showPriceDecomposition ? 'Zavřít kartu' : 'Detail nabídky'"
+                        [label]="showPriceDecomposition ? 'Zavřít detail nabídky' : 'Zobrazit detail nabídky'"
                         [type]="'secondary'"
                         (action)="togglePriceDecomposition($event)">
                     </lnd-button>

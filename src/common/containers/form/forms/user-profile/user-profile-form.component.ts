@@ -31,6 +31,8 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
     public smsSent = false;
     public phoneNumber = '';
 
+    public showForm = false;
+
     constructor(
         protected fb: FormBuilder,
     ) {
@@ -46,6 +48,7 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
             .subscribe(() => {
                 this.phoneNumber = this.getFieldValue('phonePrefix') + '' + this.getFieldValue('phone');
                 this.smsSent = false;
+                this.showForm = false;
             });
 
         this.prefillForm();
@@ -72,9 +75,10 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
         this.resetCustomFieldError();
         this.triggerValidation();
         if (this.form.valid) {
-            if (this.oldPhone !== this.phoneNumber && (!submitValidFormAction || !this.smsSent) && this.phoneNumber) {
+            if (this.phoneChanged() && (!submitValidFormAction || !this.smsSent) && this.phoneNumber) {
                 this.customAction.emit(this.form.value.phone);
             } else {
+                this.showForm = false;
                 this.submitValidForm(value);
             }
         }
@@ -87,5 +91,19 @@ export class UserProfileFormComponent extends AbstractFormComponent implements O
             phoneNumber: this.phoneNumber,
         };
         this.submitAction.emit(form);
+    }
+
+    public phoneChanged = (): boolean => this.oldPhone !== this.phoneNumber;
+
+    public enableVerification = (value: IUserProfileModelForm) => {
+        this.resetCustomFieldError();
+        this.triggerValidation();
+        if (this.form.valid) {
+            if (this.phoneChanged()) {
+                this.showForm = true;
+            } else {
+                this.submitValidForm(value);
+            }
+        }
     }
 }

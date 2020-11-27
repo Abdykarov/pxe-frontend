@@ -104,6 +104,10 @@
 			z-index: $zindex-custom-control;
 		}
 	}
+
+	.is-disabled {
+		opacity: .3;
+	}
 }
 
 .form-control {
@@ -160,6 +164,10 @@
 		&:focus {
 			background-color: $white;
 		}
+	}
+
+	&--with-placeholder {
+		@include placeholder(rgba($input-color, .5));
 	}
 }
 

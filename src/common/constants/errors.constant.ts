@@ -135,6 +135,8 @@ export const errorFieldMessages =  {
     },
     annualConsumption: {
         required: 'Vyplňte roční spotřebu plynu.',
+        maxKWh: `Nejvyšší možná spotřeba je ${CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH * 1000} KWh.`,
+        maxMWh: `Nejvyšší možná spotřeba je ${CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH} MWh.`,
     },
     annualConsumptionNT: {
         required: 'Vyplňte roční spotřebu elektřiny v nízkém tarifu.',
@@ -178,7 +180,7 @@ export const errorFieldMessages =  {
     },
     consent: {
         signUp: {
-            required: 'Nezapomeňte na souhlas s Obchodními podmínkami PARC4U a na vzetí na ' +
+            required: 'Nezapomeňte na souhlas s Obchodními podmínkami parc4u a na vzetí na ' +
                 'vědomí informací o Ochraně osobních údajů.',
         },
         newsSubscription: {

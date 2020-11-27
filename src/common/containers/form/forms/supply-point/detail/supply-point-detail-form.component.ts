@@ -1,9 +1,11 @@
 import {
     ChangeDetectorRef,
     Component,
+    EventEmitter,
     Input,
     OnChanges,
     OnInit,
+    Output,
     SimpleChanges,
     TemplateRef,
 } from '@angular/core';
@@ -37,8 +39,10 @@ import {
     UNIT_OF_PRICES,
 } from 'src/app/app.constants';
 import {
+    confirmConfirmSaveSupplyPointConfig,
     confirmFindNewSupplyPoint,
     confirmFindNewSupplyPointConfig,
+    confirmSaveSupplyPoint,
     supplyPointDetailAllowedFields,
 } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { DocumentService } from 'src/app/services/document.service';
@@ -67,6 +71,9 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
 
     @Input()
     public contractActionsTemplate: TemplateRef<any>;
+
+    @Output()
+    public finallyNextContractAction: EventEmitter<any> = new EventEmitter<any>();
 
     public allowedFields = supplyPointDetailAllowedFields;
     public allowedOperations = AllowedOperations;
@@ -160,6 +167,11 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
                 if (modal.modalType === confirmFindNewSupplyPoint) {
                     this.navigateToSupplyPoint(modal.data);
                 }
+
+                if (modal.modalType === confirmSaveSupplyPoint) {
+                    this.saveSubmittedData();
+                }
+
                 this.modalsService.closeModalData$.next(null);
             });
 
@@ -247,7 +259,10 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
         this.resetFormError(false);
     }
 
-    public submitValidForm = () => {
+    public submitValidForm = () => this.modalsService
+        .showModal$.next(confirmConfirmSaveSupplyPointConfig())
+
+    private saveSubmittedData = () => {
         const form: any = {
             ...this.form.value,
         };

@@ -83,6 +83,7 @@
                             customClass="mb-0"
                             [questions]="questions"
                             [isFromContract]="true"
+                            [personalInfo]="supplyPoint.contract.personalData"
                             [supplyPointOffer]="supplyPoint.contract.offer"
                             [interactive]="false">
                         </pxe-supply-point-offer>
@@ -192,6 +193,7 @@
                                             [fieldError]="fieldError"
                                             [formLoading]="formLoading"
                                             [contract]="supplyPoint.contract"
+                                            textInfoAboutVerificationPassword="Podepsání smlouvy je nutné potvrdit ověřovacím kódem"
                                             [globalError]="globalError"
                                             [phone]="supplyPoint.contract.personalData.phone"
                                             [smsSent]="smsSent"
