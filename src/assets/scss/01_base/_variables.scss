@@ -165,7 +165,8 @@ $paragraph-margin-bottom:          ( $spacer * 2 );
 
 $list-bullet-size:                 3px;
 $lists-margin-bottom:              $spacer;
-$list-decimal-padding-left:        ( $spacer * 3.25 );
+$list-decimal-padding-left:        ( $spacer * 2.25 );
+$list-decimal-pl-heading:          ( $spacer * 0.5 );
 
 $checklist-lp-before-size:         50px;
 

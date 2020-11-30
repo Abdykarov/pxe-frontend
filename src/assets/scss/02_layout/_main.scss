@@ -92,6 +92,7 @@
 					content: counters(item, '.') '.';
 					counter-increment: item;
 					font-weight: 400;
+					position: static;
 				}
 			}
 		}
@@ -103,11 +104,13 @@
 			&::before {
 				font-size: $h2-font-size;
 				line-height: ( 24 / 18 );
+				padding-left: $list-decimal-padding-left;
 			}
 
 			h3 {
-				padding-left: $list-decimal-padding-left;
+				padding-left: $list-decimal-pl-heading;
 				margin-bottom: $spacer;
+				display: inline-block;
 			}
 
 			> ol {
