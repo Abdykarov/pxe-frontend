@@ -117,6 +117,10 @@
 				> li {
 					display: block;
 					padding-left: $list-decimal-padding-left;
+
+					&::before {
+						position: absolute;
+					}
 				}
 			}
 		}
