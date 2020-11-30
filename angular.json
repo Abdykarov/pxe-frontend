@@ -37,7 +37,12 @@
                         ],
                         "extractCss": true,
                         "styles": [
-                            "src/assets/scss/front.scss"
+                            "src/assets/scss/front.scss",
+                            {
+                                "input": "src/assets/pdfjs/web/viewer.scss",
+                                "inject": false,
+                                "bundleName": "assets/pdfjs/web/viewer"
+                            }
                         ],
                         "scripts": []
                     },
@@ -221,7 +226,12 @@
                         ],
                         "extractCss": true,
                         "styles": [
-                            "src/assets/scss/front.scss"
+                            "src/assets/scss/front.scss",
+                            {
+                                "input": "src/assets/pdfjs/web/viewer.scss",
+                                "inject": false,
+                                "bundleName": "assets/pdfjs/web/viewer"
+                            }
                         ],
                         "scripts": []
                     },

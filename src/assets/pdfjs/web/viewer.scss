@@ -13,6 +13,9 @@
  * limitations under the License.
  */
 
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
 .textLayer {
   position: absolute;
   left: 0;
@@ -280,17 +283,34 @@
   overflow: hidden;
 }
 
+.page {
+	padding-bottom: 20px;
+	background-color: transparent;
+	border: none;
+	border-image: none;
+}
+
+.page::after {
+	content: '';
+	@include absolute-center(false, true);
+	bottom: 0;
+	width: calc(100% + 40px);
+	height: 20px;
+	background-color: lighten($body-bg, 2%);
+}
+
 .pdfViewer .page {
   direction: ltr;
   width: 816px;
   height: 1056px;
-  margin: 1px auto -8px auto;
+  margin: 1px auto 0 auto;
   position: relative;
   overflow: visible;
   background-clip: content-box;
-  -o-border-image: url(images/shadow.png) 9 9 repeat;
-     border-image: url(images/shadow.png) 9 9 repeat;
-  background-color: white;
+  padding-bottom: 20px;
+  background-color: transparent;
+  border: none;
+  border-image: none;
 }
 
 .pdfViewer.removePageBorders .page {
@@ -623,16 +643,13 @@ html[dir='rtl'] #sidebarContent {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   position: absolute;
-  top: 32px;
   right: 0;
   bottom: 0;
   left: 0;
   outline: none;
   top: 0;
-  /* stylelint-disable */
-  left: 0 !important;
-  /* stylelint-enable */
 }
+
 #viewerContainer:not(.pdfPresentationMode) {
   transition-duration: 200ms;
   transition-timing-function: ease;
@@ -2262,26 +2279,6 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
   html[dir='rtl'] .outlineItemToggler::before {
     left: 0;
   }
-}
-
-/*TODO*/
-.page {
-    position: relative;
-    padding-bottom: 20px;
-    margin-bottom: 0;
-    background-color: transparent;
-    border: none;
-    border-image: none;
-}
-
-/*TODO*/
-.page::after {
-    content: '';
-    /*@include absolute-center(false, true);*/
-    bottom: 0;
-    width: calc(100% + 40px);
-    height: 20px;
-    /*background-color: lighten($body-bg, 2%);*/
 }
 
 @media print {
