@@ -37,6 +37,7 @@ import {
 } from 'src/app/app.constants';
 import { CookiesService } from './cookies.service';
 import { environment } from 'src/environments/environment';
+import { GTMService } from './gtm.service';
 import {
     IJwtPayload,
     ILoginRequest,
@@ -96,6 +97,7 @@ export class AuthService {
 
     constructor(
         private cookiesService: CookiesService,
+        private gtmService: GTMService,
         private http: HttpClient,
         private onlyOneTabActiveService: OnlyOneTabActiveService,
         private router: Router,
@@ -167,6 +169,7 @@ export class AuthService {
             .pipe(
                 map((response: ILoginResponse) => {
                     const loginResponse =  this.manageLoginResponse(response);
+                    this.gtmService.setUserId(this.currentUserValue.email);
                     this.startRefreshTokenInterval();
                     this.startExpirationOfToken = new Date();
                     return loginResponse;
@@ -181,6 +184,7 @@ export class AuthService {
                 map(response => {
                     this.cleanUserData();
                     this.onlyOneTabActiveService.setActiveTab(OnlyOneTabActiveState.LOGOUT);
+                    this.gtmService.setUserId(null);
                     return response;
                 }),
                 catchError((error) => {

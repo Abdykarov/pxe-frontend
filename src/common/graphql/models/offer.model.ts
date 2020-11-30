@@ -41,7 +41,6 @@ export interface IOffer {
     systemServicesRegulatedPrice?: number;
     totalPrice?: number;
     unit?: string;
-    prepayment?: number;
     marked?: boolean;
     greenEnergy: boolean;
     question?: IQuestion;

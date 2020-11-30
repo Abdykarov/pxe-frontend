@@ -32,12 +32,14 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
-import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import { getConfigStepper } from 'src/common/utils';
+import { GTMService } from 'src/app/services/gtm.service';
+import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import {
+    PUSH_EVENTS_GA,
     ROUTES,
     S_ANALYTICS,
     SUPPLY_POINT_EDIT_TYPE,
@@ -78,6 +80,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
+        private gtmService: GTMService,
         private route: ActivatedRoute,
         private router: Router,
         private sAnalyticsService: SAnalyticsService,
@@ -214,6 +217,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 (supplyPointId) => {
+                    this.gtmService.pushEvent(PUSH_EVENTS_GA.FORMS.CREATE_SUPPLY_POINT);
                     this.supplyPointLocalStorageService.removeSupplyPoint();
                     this.formLoading = false;
                     this.formSent = true;

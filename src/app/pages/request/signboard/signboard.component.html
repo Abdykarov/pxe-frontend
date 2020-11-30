@@ -33,16 +33,16 @@
         <div class="col-12 col-xl-8 offset-xl-2 text-center">
             <div class="video">
                 <div class="video__holder">
-                    <h1 #aaa></h1>
                     <video
                         #video
+                        controls
+                        disablePictureInPicture
                         [class.cursor-pointer]="isVideoPlaying"
                         (click)="isVideoPlaying && pause($event)"
                         class="w-100"
                         poster="/assets/images/landing-page/picture-fallback.jpg"
                         loop
                         [muted]="false"
-                        controls
                         (pause)="cd.detectChanges()"
                         (play)="cd.detectChanges()"
                         preload="none">
@@ -73,7 +73,7 @@
                         >
                         </lnd-button>
                     </div>
-                    <p>
+                    <p *ngIf="!isMoreThanMdResolution || (isMoreThanMdResolution && !isVideoPlaying)">
                         Je-li vše jasné pokračujte tlačítkem "Vyplnit".
                     </p>
                 </div>

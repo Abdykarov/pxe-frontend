@@ -6,6 +6,7 @@ import {
     Meta,
     Title,
 } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 import { Apollo } from 'apollo-angular';
 import { CookieService } from 'ngx-cookie';
@@ -15,10 +16,12 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
+    PUSH_EVENTS_GA,
     ROUTES,
     SEO,
 } from 'src/app/app.constants';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
+import { GTMService } from 'src/app/services/gtm.service';
 import {
     IFieldError,
     IForm,
@@ -28,7 +31,6 @@ import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
-import { Router } from '@angular/router';
 
 @Component({
     templateUrl: './sign-up.component.html',
@@ -47,6 +49,7 @@ export class SignUpComponent extends AbstractComponent {
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private cookieService: CookieService,
+        private gtmService: GTMService,
         private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
         private registrationService: RegistrationService,
@@ -83,6 +86,7 @@ export class SignUpComponent extends AbstractComponent {
                 .pipe(takeUntil(this.destroy$))
                 .subscribe(
                     () => {
+                        this.gtmService.pushEvent(PUSH_EVENTS_GA.FORMS.SIGN_UP);
                         this.formLoading = false;
                         this.formSent = true;
                         this.cd.markForCheck();
