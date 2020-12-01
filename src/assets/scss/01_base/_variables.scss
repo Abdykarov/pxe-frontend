@@ -129,11 +129,13 @@ $body-max-width:                   1366px;
 
 // Typography
 $font-family-sans-serif:           'roboto_mono', arial;
-$font-family-sans-serif-public:    'space_mono', arial;
+$font-family-sans-serif-public:    'roboto', arial;
 $font-size-base:                   .875rem;
 $line-height-base:                 ( 24 / 14 );
 $small-font-size:                  .75rem;
 $line-height-sm:                   ( 16 / 12 );
+$font-size-lg:                     1rem;
+$line-height-lg:                   ( 16 / 16 );
 $perex-font-size:                  1.125rem;
 
 $h1-font-size:                     1.875rem;

@@ -8,55 +8,70 @@
     <pxe-supplier [configSupplier]="configSupplier"></pxe-supplier>
 </ng-template>
 
-<div class="registration-page container-content container-content--public">
-    <div class="container-fluid container-fluid--max-width">
-        <div class="row text-center mb-md-6">
-            <div class="col-12 col-md-6 offset-md-3">
-                <h1>Log-in</h1>
-            </div>
-        </div>
-        <div class="row mb-6">
-            <div class="col-12 col-md-8 offset-md-2 col-xl-5 offset-xl-0 order-xl-last">
-                <div class="page-box">
-                    <div class="row">
-                        <div class="col-12">
-                            <form class="form-container">
-                                <lnd-form-field
-                                    id="email"
-                                    label="E-mail (přihlašovací jméno)">
-                                </lnd-form-field>
-                                <lnd-form-field
-                                    id="password"
-                                    label="Heslo"
-                                    [subtextTemplate]="forgottenPassword">
-                                </lnd-form-field>
-                                <div class="text-right">
-                                    <lnd-button
-                                        type="primary"
-                                        (action)="submitForm($event)"
-                                        label="Přihlásit se">
-                                    </lnd-button>
+<div class="registration-page container-content container-content--public landing-page">
+    <div class="container-fluid container-fluid--max-width container-fluid--light">
+        <div class="section section--picture-bg">
+            <div class="section-picture-text">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="h1--public mb-2">
+                            Přihlaste se
+                        </h1>
+                        <p>Ještě nemáte účet? <a routerLink="/secured/registration">Založte si jej zde</a>.</p>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-container ml-0">
+                            <div class="row px-3 px-md-0">
+                                <div class="col-12 mb-5">
+                                    <form>
+                                        <lnd-form-field
+                                            id="email"
+                                            label="E-mail (přihlašovací jméno)"
+                                            [lightField]="true">
+                                        </lnd-form-field>
+                                        <lnd-form-field
+                                            id="password"
+                                            label="Heslo"
+                                            [subtextTemplate]="forgottenPassword"
+                                            [lightField]="true">
+                                        </lnd-form-field>
+                                        <lnd-button
+                                            type="primary"
+                                            class="w-100"
+                                            customClass="w-100"
+                                            (action)="submitForm($event)"
+                                            label="Přihlásit se"
+                                            icon="icon--arrow-right"
+                                            iconPosition="right">
+                                        </lnd-button>
+                                    </form>
                                 </div>
-                            </form>
+                                <div class="col-12">
+                                    <p class="mb-3">Nebo si založte účet pomocí</p>
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <lnd-button
+                                                type="primary"
+                                                class="w-100"
+                                                customClass="w-100 btn--social btn--social-facebook px-3 text-left"
+                                                label="Facebook">
+                                            </lnd-button>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <lnd-button
+                                                type="white"
+                                                class="w-100"
+                                                customClass="w-100 btn--social btn--social-google px-3 text-left"
+                                                label="Google">
+                                            </lnd-button>
+                                        </div>
+                                    </div>
+                                    <p>Založením účtu souhlasím s <a href="#">Obchodními podmínkami</a> parc4u a beru na vědomí informace o <a href="#">Ochraně osobních údajů</a>.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-10 offset-1 col-md-8 offset-md-2 col-xl-5 offset-xl-1 order-xl-first">
-                <div class="check-list-wrapper">
-                    <h2 class="h3--public">Nakupujte elektřinu a plyn přímo na burze</h2>
-                    <ul class="check-list">
-                        <li>Měňte dodavatele na jedno kliknutí</li>
-                        <li>Neřešte papírování a chození na pobočky</li>
-                        <li>Buďte chráněni před nekalostmi ve smlouvě</li>
-                        <li>Dostávejte férové ceny bez skrytých poplatků</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12 col-md-8 offset-md-2 col-xl-10 offset-xl-1 col-lg-8 offset-lg-2 text-center">
-                <ng-container *ngTemplateOutlet="supplierTemplate"></ng-container>
             </div>
         </div>
     </div>
