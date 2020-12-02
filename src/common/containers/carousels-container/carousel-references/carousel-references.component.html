@@ -1,0 +1,38 @@
+<ng-template #slideTemplate let-item>
+    <div class="row carousel-references">
+        <div class="col-12 offset-lg-3 col-lg-1">
+            <img alt="blablabla" class="carousel-references--icon" src="/assets/images/landing-page/testASD.png" title="">
+        </div>
+        <div class="col-12 col-lg-5 mb-5">
+            <div class="row">
+                <div class="col-12 mb-3 carousel-references--title">
+                    “{{item.title}}“
+                </div>
+                <div class="col-12 carousel-references--name">
+                    {{item.name}}, {{item.city}}
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #customIndicatorsTemplate let-activeSlide="activeSlide" let-setActiveSlide="setActiveSlide">
+    <div class="col-12">
+        <div style="text-align:center">
+            <div style="display: inline-block; cursor: pointer;" *ngFor="let item of carouselItems; let i = index"
+                 [attr.aria-pressed]="i === activeSlide"
+                 (click)="setActiveSlide(i)" >
+                <span class="dot"
+                      [class.active-indicator]="i === activeSlide"></span>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<lnd-carousel
+    [carouselItems]="carouselItems"
+    [customIndicatorsTemplate]="customIndicatorsTemplate"
+    [showIndicators]="false"
+    [showLeftAndRightIndicators]="false"
+    [slideTemplate]="slideTemplate">
+</lnd-carousel>

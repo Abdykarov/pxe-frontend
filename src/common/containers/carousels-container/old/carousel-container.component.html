@@ -1,0 +1,34 @@
+<ng-template #customIndicatorsTemplate let-activeSlide="activeSlide" let-setActiveSlide="setActiveSlide">
+    <button *ngFor="let item of carouselItems; let i = index" type="button" class="btn btn-primary"
+        [class.active]="i === 1" [attr.aria-pressed]="i === activeSlide"
+        (click)="setActiveSlide(i)">{{i}}</button>
+</ng-template>
+
+<ng-template #slideTemplate let-item>
+    <div class="row no-gutters align-items-center">
+        <div class="col-12 col-md-6 offset-md-1 order-md-2 overflow-hidden">
+            <img
+                class="carousel-item-img"
+                [src]="item.src"
+                [alt]="item.alt">
+        </div>
+        <div class="col-12 col-md-4 offset-md-1 order-md-1">
+            <div class="carousel-item-content">
+                <h3 class="h3--public">{{item.title}}</h3>
+                <p
+                    *ngIf="item && item.label"
+                    class="mb-0">
+                    {{item.label}}
+                </p>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<lnd-carousel
+    [customIndicatorsTemplate]="customIndicatorsTemplate"
+    [carouselItems]="carouselItems"
+    [showLeftAndRightIndicators]="false"
+    [slideTemplate]="slideTemplate"
+    [interval]="intervalBetweenSliders">
+</lnd-carousel>

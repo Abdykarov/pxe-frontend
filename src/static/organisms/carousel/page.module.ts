@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 
 // own classes
+import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { CarouselComponent } from './page';
-import { CarouselContainerModule } from 'src/common/containers/carousel-container/carousel-container.module';
+import { CarouselContainersModule } from 'src/common/containers/carousels-container/carousel-containers.module';
 
 @NgModule({
     declarations: [
@@ -14,8 +15,9 @@ import { CarouselContainerModule } from 'src/common/containers/carousel-containe
         CarouselComponent,
     ],
     imports: [
+        BreadcrumbModule,
         CommonModule,
-        CarouselContainerModule,
+        CarouselContainersModule,
     ],
 })
 export class CarouselPageModule {}

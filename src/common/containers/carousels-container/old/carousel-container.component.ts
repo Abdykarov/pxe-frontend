@@ -6,7 +6,6 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { ICarouselItem } from 'src/common/ui/carousel/models/data.model';
 
 @Component({
     selector: 'pxe-carousel-container',
@@ -24,7 +23,7 @@ export class CarouselContainerComponent extends AbstractComponent {
         }
     }
 
-    public readonly carouselItems: ICarouselItem[] = [
+    public readonly carouselItems: any = [
         {
             title: 'Nejdříve se seznámíme',
             label: 'Představíte nám vaše odběrné místo a základní informace o vaší aktuální smlouvě s dodavatelem.',

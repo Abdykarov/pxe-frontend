@@ -3,12 +3,13 @@ import {
     EventEmitter,
     Input,
     Output,
+    TemplateRef,
     ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { ICarouselItem } from 'src/common/ui/carousel/models/data.model';
+import { IDefaultCarouselItem } from 'src/common/ui/carousel/models/data.model';
 
 @Component({
     selector: 'lnd-carousel',
@@ -18,16 +19,32 @@ import { ICarouselItem } from 'src/common/ui/carousel/models/data.model';
 })
 export class CarouselComponent extends AbstractComponent {
 
+    @ViewChild('carousel', { static: true }) carousel: any;
+
+    @Input()
+    public carouselItems: IDefaultCarouselItem[];
+
+    @Input()
+    public customIndicatorsTemplate?: TemplateRef<any>;
+
     @Input()
     public interval: boolean | number = false;
 
     @Input()
-    public carouselItems: ICarouselItem[];
+    public showIndicators = true;
+
+    @Input()
+    public showLeftAndRightIndicators = true;
+
+    @Input()
+    public slideTemplate: TemplateRef<any>;
 
     @Output()
     public activeSlideChange: EventEmitter<any> = new EventEmitter<any>();
 
-    @ViewChild('carousel', { static: true }) carousel: any;
+    public activeSlide = 0;
+
+    public setActiveSlide = (index: number) => this.activeSlide = index;
 
     setPause(): void {
         this.carousel.noPause = false;

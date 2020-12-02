@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AccordionModule } from 'src/common/ui/accordion/accordion.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
-import { CarouselContainerModule } from 'src/common/containers/carousel-container/carousel-container.module';
+import { CarouselContainersModule } from 'src/common/containers/carousels-container/carousel-containers.module';
 import { DirectivesModule } from 'src/common/directives/directives.module';
 import { LandingComponent } from './landing.component';
 import { LandingRoutingModule } from './landing.routing';
@@ -21,7 +21,7 @@ import { RegistrationFormModule } from 'src/common/containers/form/forms/registr
     imports: [
         AccordionModule,
         ButtonModule,
-        CarouselContainerModule,
+        CarouselContainersModule,
         CommonModule,
         DirectivesModule,
         LandingRoutingModule,
