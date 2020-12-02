@@ -4,6 +4,8 @@
     (mouseup)="setPause()"
     (activeSlideChange)="activeSlideChange.emit($event)"
     [noPause]="false"
+    [(activeSlide)]="activeSlide"
+    [showIndicators]="false"
     [interval]="interval">
 	<slide *ngFor="let item of carouselItems">
 		<div class="row no-gutters align-items-center">
@@ -16,7 +18,7 @@
 			<div class="col-12 col-md-4 offset-md-1 order-md-1">
 				<div class="carousel-item-content">
 					<h3 class="h3--public">{{item.title}}</h3>
-					<p 
+					<p
 						*ngIf="item && item.label"
 						class="mb-0">
 						{{item.label}}
@@ -24,5 +26,10 @@
 				</div>
 			</div>
 		</div>
-	</slide>
+        <div class="indicators">
+            <button *ngFor="let item of carouselItems; let i = index" type="button" class="indicator"
+                    [class.active]="i === activeSlide" [attr.aria-pressed]="i === activeSlide"
+                    (click)="switchSlide(i)"></button>
+        </div>
+    </slide>
 </carousel>
