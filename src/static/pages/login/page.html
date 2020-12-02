@@ -8,66 +8,64 @@
     <pxe-supplier [configSupplier]="configSupplier"></pxe-supplier>
 </ng-template>
 
-<div class="registration-page container-content container-content--public landing-page">
+<div class="login-page container-content container-content--public">
     <div class="container-fluid container-fluid--max-width container-fluid--light">
-        <div class="section section--picture-bg">
-            <div class="section-picture-text">
-                <div class="row">
-                    <div class="col-12">
-                        <h1 class="h1--public mb-2">
-                            Přihlaste se
-                        </h1>
-                        <p>Ještě nemáte účet? <a routerLink="/secured/registration">Založte si jej zde</a>.</p>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="form-container ml-0">
-                            <div class="row px-3 px-md-0">
-                                <div class="col-12 mb-5">
-                                    <form>
-                                        <lnd-form-field
-                                            id="email"
-                                            label="E-mail (přihlašovací jméno)"
-                                            [lightField]="true">
-                                        </lnd-form-field>
-                                        <lnd-form-field
-                                            id="password"
-                                            label="Heslo"
-                                            [subtextTemplate]="forgottenPassword"
-                                            [lightField]="true">
-                                        </lnd-form-field>
+        <div class="section-picture-text">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="h1--public mb-2">
+                        Přihlaste se
+                    </h1>
+                    <p>Ještě nemáte účet? <a routerLink="/secured/registration">Založte si jej zde</a>.</p>
+                </div>
+                <div class="col-xl-3">
+                    <div class="form-container ml-0">
+                        <div class="row px-3 px-md-0">
+                            <div class="col-12 mb-5">
+                                <form>
+                                    <lnd-form-field
+                                        id="email"
+                                        label="E-mail (přihlašovací jméno)"
+                                        [lightField]="true">
+                                    </lnd-form-field>
+                                    <lnd-form-field
+                                        id="password"
+                                        label="Heslo"
+                                        [subtextTemplate]="forgottenPassword"
+                                        [lightField]="true">
+                                    </lnd-form-field>
+                                    <lnd-button
+                                        type="primary"
+                                        class="w-100"
+                                        customClass="w-100"
+                                        (action)="submitForm($event)"
+                                        label="Přihlásit se"
+                                        icon="icon--arrow-right"
+                                        iconPosition="right">
+                                    </lnd-button>
+                                </form>
+                            </div>
+                            <div class="col-12">
+                                <p class="mb-3">Nebo si založte účet pomocí</p>
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
                                         <lnd-button
                                             type="primary"
                                             class="w-100"
-                                            customClass="w-100"
-                                            (action)="submitForm($event)"
-                                            label="Přihlásit se"
-                                            icon="icon--arrow-right"
-                                            iconPosition="right">
+                                            customClass="w-100 btn--social btn--social-facebook px-3 text-left"
+                                            label="Facebook">
                                         </lnd-button>
-                                    </form>
-                                </div>
-                                <div class="col-12">
-                                    <p class="mb-3">Nebo si založte účet pomocí</p>
-                                    <div class="row mb-4">
-                                        <div class="col-md-6">
-                                            <lnd-button
-                                                type="primary"
-                                                class="w-100"
-                                                customClass="w-100 btn--social btn--social-facebook px-3 text-left"
-                                                label="Facebook">
-                                            </lnd-button>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <lnd-button
-                                                type="white"
-                                                class="w-100"
-                                                customClass="w-100 btn--social btn--social-google px-3 text-left"
-                                                label="Google">
-                                            </lnd-button>
-                                        </div>
                                     </div>
-                                    <p>Založením účtu souhlasím s <a href="#">Obchodními podmínkami</a> parc4u a beru na vědomí informace o <a href="#">Ochraně osobních údajů</a>.</p>
+                                    <div class="col-md-6">
+                                        <lnd-button
+                                            type="white"
+                                            class="w-100"
+                                            customClass="w-100 btn--social btn--social-google px-3 text-left"
+                                            label="Google">
+                                        </lnd-button>
+                                    </div>
                                 </div>
+                                <p>Založením účtu souhlasím s <a href="#">Obchodními podmínkami</a> parc4u a beru na vědomí informace o <a href="#">Ochraně osobních údajů</a>.</p>
                             </div>
                         </div>
                     </div>
