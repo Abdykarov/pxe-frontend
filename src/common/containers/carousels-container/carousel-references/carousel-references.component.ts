@@ -45,9 +45,5 @@ export class CarouselReferencesComponent extends AbstractComponent {
         },
     ];
 
-    public maxHeightChange = (maxHeight: number) => {
-        console.log('___');
-        console.log(maxHeight);
-        this.maxHeight = maxHeight;
-    }
+    public maxHeightChange = (maxHeight: number) => this.maxHeight = maxHeight;
 }
