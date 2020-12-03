@@ -16,6 +16,9 @@
 	}
 
 	&--public {
+		background-color: $body-bg-lp;
+		font-size: $large-font-size;
+
 		// Media queries
 		@include media-breakpoint-up(lg) {
 			padding-top: ( $header-height + $spacer );

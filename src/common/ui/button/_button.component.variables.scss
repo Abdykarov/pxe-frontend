@@ -25,6 +25,7 @@ $btn-padding-y-sm:                 ( $spacer / 6 );
 $btn-padding-x-sm:                 ( $spacer / 3 );
 $font-size-sm:                     .688rem;
 $btn-line-height-sm:               ( 18 / 11 );
+$btn-font-family:                  'roboto', arial;
 $btn-border-width:                 2px;
 $btn-border-radius-sm:             $btn-border-radius;
 
@@ -43,3 +44,5 @@ $btn-secondary-shadow:             0 2px 4px 0 #c8d3df;
 $btn-back-to-app-icon-size:        20px;
 
 $btn-video-play-size:              50px;
+
+$btn-social-facebook-bg:           #4267B2;

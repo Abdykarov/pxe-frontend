@@ -314,15 +314,16 @@
 
 	&-lg {
 		min-height: $btn-height-large;
-		padding: $spacer;
+		padding: ( $spacer * 1.25 ) ( $spacer * 2 );
+		font-size: $large-font-size;
 
 		.btn__icon {
 			&--left {
-				padding-left: $spacer;
+				padding-left: ( $spacer * 2 );
 			}
 
 			&--right {
-				padding-right: $spacer;
+				padding-right: ( $spacer * 2 );
 			}
 		}
 	}
@@ -456,7 +457,11 @@
 		}
 	}
 
-	&--social {
+	&-facebook,
+	&-google {
+		padding: $spacer;
+		text-align: left;
+
 		&::after {
 			content: '';
 			position: absolute;
@@ -471,19 +476,35 @@
 		}
 	}
 
-	&--social-facebook {
+	&-facebook {
+		background-color: $btn-social-facebook-bg;
+		color: $white;
+		
 		&::after {
 			background-image: url(../../../assets/images/social/facebook.svg);
 		}
+
+		&:hover,
+		&:active,
+		&:focus:active {
+			color: $white;
+			background-color: darken($btn-social-facebook-bg, 5%);
+		}
 	}
 
-	&--social-google {
-		// background-color: $white;
-		// color: $font-text;
+	&-google {
+		background-color: $white;
+		color: $font-text;
 
 		&::after {
 			content: '';
 			background-image: url(../../../assets/images/social/google.svg);
+		}
+
+		&:hover,
+		&:active,
+		&:focus:active {
+			background-color: darken($white, 2%);
 		}
 	}
 }

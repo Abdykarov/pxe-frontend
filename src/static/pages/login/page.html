@@ -9,7 +9,7 @@
 </ng-template>
 
 <div class="login-page container-content container-content--public">
-    <div class="container-fluid container-fluid--max-width container-fluid--light">
+    <div class="container-fluid container-fluid--max-width">
         <div class="section-picture-text">
             <div class="row">
                 <div class="col-12">
@@ -40,6 +40,7 @@
                                         customClass="w-100"
                                         (action)="submitForm($event)"
                                         label="Přihlásit se"
+                                        size="lg"
                                         icon="icon--arrow-right"
                                         iconPosition="right">
                                     </lnd-button>
@@ -50,18 +51,20 @@
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <lnd-button
-                                            type="primary"
+                                            type="facebook"
                                             class="w-100"
-                                            customClass="w-100 btn--social btn--social-facebook px-3 text-left"
-                                            label="Facebook">
+                                            customClass="w-100"
+                                            label="Facebook"
+                                            size="lg">
                                         </lnd-button>
                                     </div>
                                     <div class="col-md-6">
                                         <lnd-button
-                                            type="white"
+                                            type="google"
                                             class="w-100"
-                                            customClass="w-100 btn--social btn--social-google px-3 text-left"
-                                            label="Google">
+                                            customClass="w-100"
+                                            label="Google"
+                                            size="lg">
                                         </lnd-button>
                                     </div>
                                 </div>
