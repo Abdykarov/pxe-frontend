@@ -1,14 +1,14 @@
 <ng-template #slideTemplate let-item>
-    <div class="row carousel-references">
-        <div class="col-12 offset-lg-3 col-lg-1">
-            <img alt="blablabla" class="carousel-references--icon" src="/assets/images/landing-page/testASD.png" title="">
+    <div class="row carousel-references text-center text-md-left">
+        <div class="col-12 offset-md-2 col-md-2 offset-lg-3 col-lg-1 mb-3">
+            <img [alt]="item.iconAlt" class="carousel-references__icon" [src]="item.iconUrl" title="">
         </div>
-        <div class="col-12 col-lg-5 mb-5">
+        <div class="col-12 col-md-5 mb-5">
             <div class="row">
-                <div class="col-12 mb-3 carousel-references--title">
+                <div class="col-12 mb-3 carousel-references__title">
                     “{{item.title}}“
                 </div>
-                <div class="col-12 carousel-references--name">
+                <div class="col-12 carousel-references__name">
                     {{item.name}}, {{item.city}}
                 </div>
             </div>
@@ -17,14 +17,13 @@
 </ng-template>
 
 <ng-template #customIndicatorsTemplate let-activeSlide="activeSlide" let-setActiveSlide="setActiveSlide">
-    <div class="col-12">
-        <div style="text-align:center">
-            <div style="display: inline-block; cursor: pointer;" *ngFor="let item of carouselItems; let i = index"
-                 [attr.aria-pressed]="i === activeSlide"
-                 (click)="setActiveSlide(i)" >
-                <span class="dot"
-                      [class.active-indicator]="i === activeSlide"></span>
-            </div>
+    <div class="carousel-indicators"
+         [ngStyle]="{'top': maxHeight + 'px'}">
+        <div class="carousel-indicators__indicator-wrapper" *ngFor="let item of carouselItems; let i = index"
+             [attr.aria-pressed]="i === activeSlide"
+             (click)="setActiveSlide(i)" >
+            <span class="carousel-indicators__indicator"
+                  [class.carousel-indicators__indicator--is-active]="i === activeSlide"></span>
         </div>
     </div>
 </ng-template>
@@ -34,5 +33,6 @@
     [customIndicatorsTemplate]="customIndicatorsTemplate"
     [showIndicators]="false"
     [showLeftAndRightIndicators]="false"
-    [slideTemplate]="slideTemplate">
+    [slideTemplate]="slideTemplate"
+    (maxHeightChange)="maxHeightChange($event)">
 </lnd-carousel>

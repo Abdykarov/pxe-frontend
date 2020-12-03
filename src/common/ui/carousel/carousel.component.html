@@ -1,20 +1,20 @@
-<carousel
-    #carousel
-    class="carousel"
-    [class.carousel__left-right--disabled]="!showLeftAndRightIndicators"
-    (mouseenter)="setPause()"
-    (mouseup)="setPause()"
-    (activeSlideChange)="activeSlideChange.emit($event)"
-    [noPause]="false"
-    [(activeSlide)]="activeSlide"
-    [showIndicators]="showIndicators && !customIndicatorsTemplate"
-    [interval]="interval">
-	<slide
-        class="carousel__slide"
-        *ngFor="let item of carouselItems; let i = index" [attr.data-index]="i">
-        <ng-container *ngTemplateOutlet="slideTemplate; context: {$implicit: item}"></ng-container>
-    </slide>
-    <ng-container *ngIf="customIndicatorsTemplate">
-        <ng-container *ngTemplateOutlet="customIndicatorsTemplate; context: {activeSlide: this.activeSlide, setActiveSlide: this.setActiveSlide}"></ng-container>
-    </ng-container>
-</carousel>
+<div #parent>
+    <carousel
+        #carousel
+        class="carousel"
+        [class.carousel__left-right--disabled]="!showLeftAndRightIndicators"
+        (mouseenter)="setPause()"
+        (mouseup)="setPause()"
+        (activeSlideChange)="activeSlideChange.emit($event)"
+        [noPause]="false"
+        [(activeSlide)]="activeSlide"
+        [showIndicators]="showIndicators && !customIndicatorsTemplate"
+        [interval]="interval">
+        <ng-container *ngIf="customIndicatorsTemplate">
+            <ng-container *ngTemplateOutlet="customIndicatorsTemplate; context: {activeSlide: this.activeSlide, setActiveSlide: this.setActiveSlide}"></ng-container>
+        </ng-container>
+        <slide *ngFor="let item of carouselItems; let i = index" [attr.data-index]="i">
+            <ng-container *ngTemplateOutlet="slideTemplate; context: {$implicit: item}"></ng-container>
+        </slide>
+    </carousel>
+</div>

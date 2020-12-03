@@ -15,7 +15,6 @@ import { IReference } from 'src/common/containers/carousels-container/models/mod
     encapsulation: ViewEncapsulation.None,
 })
 export class CarouselReferencesComponent extends AbstractComponent {
-    public isBrowser = false;
 
     constructor(
         @Inject(PLATFORM_ID) private platformId: string,
@@ -25,19 +24,30 @@ export class CarouselReferencesComponent extends AbstractComponent {
             this.isBrowser = true;
         }
     }
+    public isBrowser = false;
+
+    public maxHeight = 0;
 
     public readonly carouselItems: IReference[] = [
         {
             title: 'Stěhovala jsem se a parc4u to za mě vyřídil. Já si v klidu vybrala koberec a záclony. To mě baví víc.',
             city: 'Liberec',
             name: 'Aneta',
-            iconUrl: 'url',
+            iconAlt: 'url',
+            iconUrl: '/assets/images/landing-page/testASD.png',
         },
         {
             title: 'Nejdříve se seznámíme2',
             city: 'mesto2',
             name: 'name2',
-            iconUrl: 'url2',
+            iconAlt: 'url2',
+            iconUrl: '/assets/images/landing-page/testASD.png',
         },
     ];
+
+    public maxHeightChange = (maxHeight: number) => {
+        console.log('___');
+        console.log(maxHeight);
+        this.maxHeight = maxHeight;
+    }
 }
