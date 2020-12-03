@@ -9,13 +9,15 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
+// Component variables
+@import 'carousel-references.variables.scss';
 
 .carousel-references {
-	&__icon {
+	&__image {
 		border-radius: 50%;
 		max-width: 100%;
 		background-size: 100%;
-		box-shadow: -15px 25px 35px 0 rgba(0, 9, 16, .1);
+		box-shadow: -15px 20px 30px 0 rgba(0, 9, 16, .1);
 	}
 
 	&__title {
@@ -28,31 +30,39 @@
 	}
 }
 
-.carousel-item {
-	position: static !important;
-}
 
-.carousel-indicators {
-	text-align:center;
-	position: relative !important;
-	z-index: $zindex-indicators !important;
-
-	&__indicator {
-		height: 5px;
-		width: 5px;
-		margin-right: 12px;
-		margin-left: 12px;
-		background-color: #bbb;
-		border-radius: 50%;
-		display: inline-block;
-
-		&--is-active {
-			background-color: $font-text;
-		}
+.carousel {
+	.carousel-item {
+		position: static;
 	}
 
-	&__indicator-wrapper {
-		display: inline-block;
-		cursor: pointer;
+	.carousel-indicators {
+		position: relative;
+		z-index: $zindex-indicators;
+		margin: 0;
+
+		&__li {
+			cursor: pointer;
+			padding-right: $clickable-size;
+			padding-left: $clickable-size;
+			opacity: 1;
+			text-indent: 0;
+
+			&::before {
+				display: none;
+			}
+
+			&--indicator {
+				display: inline-block;
+				height: $indicator-size;
+				width: $indicator-size;
+				background-color: $gray-100;
+				border-radius: 50%;
+
+				&--is-active {
+					background-color: #675996;
+				}
+			}
+		}
 	}
 }

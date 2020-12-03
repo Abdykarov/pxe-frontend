@@ -1,7 +1,7 @@
 <ng-template #slideTemplate let-item>
     <div class="row carousel-references text-center text-md-left">
         <div class="col-12 offset-md-2 col-md-2 offset-lg-3 col-lg-1 mb-3">
-            <img [alt]="item.iconAlt" class="carousel-references__icon" [src]="item.iconUrl" title="">
+            <img [alt]="item.iconAlt" class="carousel-references__image" [src]="item.iconUrl" title="">
         </div>
         <div class="col-12 col-md-5 mb-5">
             <div class="row">
@@ -17,15 +17,16 @@
 </ng-template>
 
 <ng-template #customIndicatorsTemplate let-activeSlide="activeSlide" let-setActiveSlide="setActiveSlide">
-    <div class="carousel-indicators"
+    <ul class="carousel-indicators"
          [ngStyle]="{'top': maxHeight + 'px'}">
-        <div class="carousel-indicators__indicator-wrapper" *ngFor="let item of carouselItems; let i = index"
+        <li class="carousel-indicators__li" *ngFor="let item of carouselItems; let i = index"
              [attr.aria-pressed]="i === activeSlide"
              (click)="setActiveSlide(i)" >
-            <span class="carousel-indicators__indicator"
-                  [class.carousel-indicators__indicator--is-active]="i === activeSlide"></span>
-        </div>
-    </div>
+            <span class="carousel-indicators__li--indicator"
+                  [class.carousel-indicators__li--indicator--is-active]="i === activeSlide"
+            ></span>
+        </li>
+    </ul>
 </ng-template>
 
 <lnd-carousel
