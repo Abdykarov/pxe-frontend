@@ -16,7 +16,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
-    PUSH_EVENTS_GA,
+    GTM_CONSTS,
     ROUTES,
     SEO,
 } from 'src/app/app.constants';
@@ -86,7 +86,13 @@ export class SignUpComponent extends AbstractComponent {
                 .pipe(takeUntil(this.destroy$))
                 .subscribe(
                     () => {
-                        this.gtmService.pushEvent(PUSH_EVENTS_GA.FORMS.SIGN_UP);
+                        this.gtmService.pushEvent({
+                            'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+                            'category': GTM_CONSTS.CATEGORIES.REGISTRATION,
+                            'action': GTM_CONSTS.ACTIONS.SENT,
+                            'label': GTM_CONSTS.LABELS.REGISTRATION,
+                            'email': values.email,
+                        });
                         this.formLoading = false;
                         this.formSent = true;
                         this.cd.markForCheck();

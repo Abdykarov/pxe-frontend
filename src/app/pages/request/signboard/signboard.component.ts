@@ -8,13 +8,15 @@ import { Router } from '@angular/router';
 
 import * as R from 'ramda';
 
+import { AuthService } from 'src/app/services/auth.service';
 import {
     getConfigStepper,
     playVideo,
 } from 'src/common/utils';
+import { GTMService } from 'src/app/services/gtm.service';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
-import { ROUTES } from 'src/app/app.constants';
+import { GTM_CONSTS, ROUTES } from 'src/app/app.constants';
 
 @Component({
     selector: 'lnd-signboard',
@@ -31,10 +33,19 @@ export class SignboardComponent {
     public showWelcome = false;
 
     constructor(
+        private authService: AuthService,
         public cd: ChangeDetectorRef,
+        private gtmService: GTMService,
         private router: Router,
     ) {
         this.showWelcome = R.path(['history', 'state', 'afterLogin'], window);
+        this.gtmService.pushEvent({
+            'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+            'category': GTM_CONSTS.CATEGORIES.FORM,
+            'action': GTM_CONSTS.ACTIONS.VIEW,
+            'label': GTM_CONSTS.LABELS.STEP_ONE,
+            'userID': this.authService.currentUserValue.uuid,
+        });
     }
 
     public routerToNextStep = (evt) => {

@@ -582,15 +582,35 @@ export enum ANNUAL_CONSUMPTION_UNIT_TYPES {
     ANNUAL_CONSUMPTION_UNIT = 'annualConsumptionUnit',
 }
 
-export const PUSH_EVENTS_GA = {
-    EVENT: 'eventTracking',
-    CATEGORY: 'Submit',
-    FORMS: {
-        SIGN_UP: 'Sign up',
-        LOGIN: 'Login',
-        CREATE_SUPPLY_POINT: 'Create supply point',
-        OFFER_SELECTION: 'Offer selection',
-        RECAPITULATION: 'Recapitulation',
-        CONTRACT: 'Contract',
+export const GTM_CONSTS = {
+    ACTIONS: {
+        SENT: 'sent',
+        VIEW: 'view',
+    },
+    CATEGORIES: {
+        REGISTRATION: 'sign up',
+        FORM: 'form',
+    },
+    EVENTS: {
+        EVENT_TRACKING: 'eventTracking',
+    },
+    LABELS: {
+        REGISTRATION: 'registration',
+        STEP_ONE: 'step 1',
+        STEP_TWO: 'step 2',
+        STEP_THREE: 'step 3',
     },
 };
+
+// export const PUSH_EVENTS_GA = {
+//     EVENT: 'eventTracking',
+//     CATEGORY: 'Submit',
+//     FORMS: {
+//         SIGN_UP: 'Sign up',
+//         LOGIN: 'Login',
+//         CREATE_SUPPLY_POINT: 'Create supply point',
+//         OFFER_SELECTION: 'Offer selection',
+//         RECAPITULATION: 'Recapitulation',
+//         CONTRACT: 'Contract',
+//     },
+// };
