@@ -3,7 +3,7 @@
         <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
     </div>
 </div>
-<lnd-card
+<!-- <lnd-card
     alignment="center"
     [data]="firstCard"
     [hasButton]="true"
@@ -37,28 +37,51 @@
             </lnd-card>
         </div>
     </div>
-</div>
+</div> -->
 <h3>Card tiles</h3>
-<div class="row mb-4">
-    <div class="col-md-6 col-xl-3">
-        <lnd-card
-            [data]="tileCard"
-            type="tile"
-            (action)="tileAction()">
-        </lnd-card>
-    </div>
-    <div class="col-md-6 col-xl-3">
-        <lnd-card
-            [data]="tileCard"
-            type="tile"
-            (action)="tileAction()">
-        </lnd-card>
-    </div>
-    <div class="col-md-6 col-xl-3">
-        <lnd-card
-            [data]="tileCard"
-            type="tile"
-            (action)="tileAction()">
-        </lnd-card>
+<div class="card-tiles">
+    <div class="row no-gutters mb-4">
+        <div class="col-md-6 col-xl-4">
+            <lnd-card
+                [data]="tileCard"
+                type="tile"
+                (action)="tileAction()">
+            </lnd-card>
+        </div>
+        <div class="col-md-6 col-xl-4">
+            <lnd-card
+                [data]="tileCard"
+                type="tile"
+                (action)="tileAction()">
+            </lnd-card>
+        </div>
+        <div class="col-md-6 col-xl-4">
+            <lnd-card
+                [data]="tileCard"
+                type="tile"
+                (action)="tileAction()">
+            </lnd-card>
+        </div>
+        <div class="col-md-6 col-xl-4">
+            <lnd-card
+                [data]="tileCard"
+                type="tile"
+                (action)="tileAction()">
+            </lnd-card>
+        </div>
+        <div class="col-md-6 col-xl-4">
+            <lnd-card
+                [data]="tileCard"
+                type="tile"
+                (action)="tileAction()">
+            </lnd-card>
+        </div>
+        <div class="col-md-6 col-xl-4">
+            <lnd-card
+                [data]="tileCard"
+                type="tile"
+                (action)="tileAction()">
+            </lnd-card>
+        </div>
     </div>
 </div>

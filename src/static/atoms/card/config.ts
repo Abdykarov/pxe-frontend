@@ -28,5 +28,5 @@ export const defaultTileCard = {
     imgAlt: 'Card image',
     imgTitle: 'Card title',
     title: 'Tile card',
-    content: '<span class="text-muted">Card muted text</span>',
+    content: 'Card text. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
 };

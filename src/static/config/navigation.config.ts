@@ -31,10 +31,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Buttons',
                     'url': '/basic/buttons',
                 },
-                // {
-                //     'label': 'Cards',
-                //     'url': '/card',
-                // },
+                {
+                    'label': 'Cards',
+                    'url': '/basic/card',
+                },
                 {
                     'label': 'Colors',
                     'url': '/basic/colors',
