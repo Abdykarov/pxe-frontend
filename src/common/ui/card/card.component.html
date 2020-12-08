@@ -9,7 +9,7 @@
         [src]="domSanitizer.bypassSecurityTrustUrl(data.imgSrc)"
         [attr.title]="data.imgTitle"
         [attr.alt]="data.imgAlt"
-        class="img-fluid card-img-top"
+        class="card-img-top"
         [ngClass]="[
             type === 'list' ? 'card-img--border' : '',
             type === 'widget' ? 'card-img-widget' : '',

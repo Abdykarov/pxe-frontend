@@ -16,12 +16,15 @@
 
 
 .card {
-	padding: ( $spacer / 2 );
+	align-items: center;
 	font-family: $font-family-sans-serif-public;
+	text-align: center;
+	border: none;
 
 	// Media queries
 	@include media-breakpoint-up(md) {
-		padding: ( $spacer * 3 ) ( $spacer * 3.5 );
+		align-items: flex-start;
+		text-align: left;
 	}
 
 	.card-img-top {
@@ -36,82 +39,59 @@
 		}
 	}
 
-	.card-body {
-		position: relative;
-		height: 100%;
-
-		// Media queries
-		@include media-breakpoint-up(md) {
-			text-align: left;
-		}
-	}
-
-	.card-title {
+	&-title {
 		margin-bottom: ( $card-spacer-y / 2 );
-	}
-
-	.card-text {
-		width: 100%;
-		margin-bottom: 0;
-	}
-
-	&__item-status-icon {
-		position: absolute;
-		top: 0;
-		right: 0;
-		width: $icon-size-px;
-		height: $icon-size-px;
-		line-height: $icon-size-px;
-		text-align: center;
-		border-radius: 100%;
-	}
-
-	&--status {
-		.card-title {
-			padding-right: ( $icon-size-px + ( $spacer / 2 ) );
-		}
 	}
 }
 
-// .card-img {
-// 	&--border {
-// 		// Media queries
-// 		@include media-breakpoint-up(md) {
-// 			border: $card-img-border-width-md solid $card-img-border-color;
-// 		}
-// 		@include media-breakpoint-up(xl) {
-// 			border-width: $card-img-border-width-xl;
-// 		}
-// 	}
-
-// 	&--normal {
-// 		max-width: $card-widget-img-max-width;
-// 	}
-
-// 	&--small {
-// 		max-width: $card-widget-img-small-max-width;
-// 	}
-// }
-
 ::ng-deep .card-tiles {
-	display: block;
+	// Media queries
+	@include media-breakpoint-up(md) {
+		overflow: hidden;
+	}
+
+	&__inner {
+		// Media queries
+		@include media-breakpoint-up(md) {
+			margin-left: -$card-tile-item-spacer-tablet;
+			margin-bottom: -( $card-tile-item-spacer-tablet * 1.5 );
+		}
+		@include media-breakpoint-up(xl) {
+			margin-left: -$card-tile-item-spacer-x-desktop;
+			margin-bottom: -( $card-tile-item-spacer-y-desktop / 1.25 );
+		}
+	}
 
 	.card-tile__item {
+		margin-bottom: ( $spacer * 3 );
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			padding: $card-tile-item-spacer-tablet;
+			margin-bottom: 0;
+		}
+		@include media-breakpoint-up(xl) {
+			padding: $card-tile-item-spacer-y-desktop $card-tile-item-spacer-x-desktop;
+		}
+
+		&:nth-child(-n + 3) {
+			// Media queries
+			@include media-breakpoint-up(xl) {
+				padding-top: ( $card-tile-item-spacer-y-desktop / 6 );
+			}
+		}
+
 		&:nth-child(3n + 2),
 		&:nth-child(3n + 3) {
 			// Media queries
-			@include media-breakpoint-up(xl) {
-				border-left: 1px solid $border-color;
+			@include media-breakpoint-up(md) {
+				border-left: $card-border;
 			}
 		}
 
 		&:nth-child(n + 4) {
-			// Media queries
-			@include media-breakpoint-down(md) {
-				display: none;
-			}
-			@include media-breakpoint-up(xl) {
-				border-top: 1px solid $border-color;
+			@include media-breakpoint-up(md) {
+				border-top: $card-border;
 			}
 		}
 	}

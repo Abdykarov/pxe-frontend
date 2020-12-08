@@ -5,11 +5,16 @@
  */
 
 
-$card-bg:                           $white;
-$card-border-width:                 0;
+$card-bg:                           transparent;
+$card-border-width:                 1px;
+$card-border-color:                 rgba($border-color, .3);
+$card-border:                       $card-border-width solid $card-border-color;
 $card-border-radius:                0;
 $card-spacer-x:                     0;
 $card-spacer-y:                     $spacer;
 $card-inner-border-radius:          0;
-
 $card-img-size:                     124px;
+
+$card-tile-item-spacer-tablet:      ( $spacer * 1.5 );
+$card-tile-item-spacer-x-desktop:   ( $spacer * 4 );
+$card-tile-item-spacer-y-desktop:   ( $spacer * 3 );
