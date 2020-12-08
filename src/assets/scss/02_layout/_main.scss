@@ -108,7 +108,7 @@
 			}
 
 			h3 {
-				padding-left: $list-decimal-pl-heading;
+				padding-left: ( $spacer * 0.5 );
 				margin-bottom: $spacer;
 				display: inline-block;
 			}
