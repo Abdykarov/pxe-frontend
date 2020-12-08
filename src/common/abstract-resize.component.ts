@@ -5,15 +5,12 @@ import {
     takeUntil,
 } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
-import { CONSTS } from '../app/app.constants';
+
+import { CONSTS } from 'src/app/app.constants';
 import { TypeOfResolution } from './models/type-of-resolution';
 
 export abstract class AbstractResizeComponent extends AbstractComponent {
     public typeOfDevice = null;
-
-    constructor() {
-        super();
-    }
 
     public resizeEvent$ = fromEvent(window, 'resize')
         .pipe(

@@ -1,9 +1,7 @@
 import {
     Component,
-    Inject,
-    PLATFORM_ID, ViewEncapsulation,
+     ViewEncapsulation,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { IReference } from 'src/common/containers/carousels-container/models/models';
@@ -16,15 +14,10 @@ import { IReference } from 'src/common/containers/carousels-container/models/mod
 })
 export class CarouselReferencesComponent extends AbstractComponent {
 
-    constructor(
-        @Inject(PLATFORM_ID) private platformId: string,
-    ) {
+    constructor() {
         super();
-        if (isPlatformBrowser(this.platformId)) {
-            this.isBrowser = true;
-        }
     }
-    public isBrowser = false;
+
     public maxHeight = null;
 
     public readonly carouselItems: IReference[] = [

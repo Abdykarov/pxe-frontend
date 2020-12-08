@@ -16,11 +16,6 @@ export const getHeightOfDisplayNoneElement = (el: HTMLDivElement, countSizeFor: 
         return countSizeFor?.offsetHeight || el.offsetHeight;
     }
 
-
-    // console.log('<<<1>>>');
-    // console.log(el);
-    // console.log(el.style.position);
-
     // the element is hidden so:
     // making the el block so we can meassure its height but still be hidden
     el.style.position = 'absolute';

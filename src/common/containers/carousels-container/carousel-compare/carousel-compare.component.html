@@ -1,6 +1,6 @@
 <ng-template #slideTemplate let-item let-activeSlideRange="activeSlideRange" let-index="index">
     <div class="row carousel-compare__border"
-         [class.carousel-compare__border--none]="index === activeSlideRange[0]">
+         [class.carousel-compare__border--none]="index === activeSlideRange[0] || numberOfSlides === 1">
         <div class="col-12">
             <div class="mt-1 mb-3 font-weight-bold">
                 {{item.region}}

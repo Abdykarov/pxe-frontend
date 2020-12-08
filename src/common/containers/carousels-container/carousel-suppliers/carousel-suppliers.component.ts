@@ -1,7 +1,5 @@
 import {
     Component,
-    Inject,
-    PLATFORM_ID,
     ViewEncapsulation,
 } from '@angular/core';
 
@@ -57,9 +55,7 @@ export class CarouselSuppliersComponent extends AbstractResizeComponent {
     public deviceCouldChanged = (typeOfResolution: TypeOfResolution) =>
         this.numberOfSlides = mapTypeOfDeviceToNumberOfSlides[typeOfResolution]
 
-    constructor(
-        @Inject(PLATFORM_ID) private platformId: string,
-    ) {
+    constructor() {
         super();
         this.deviceCouldChanged(this.getTypeOfDevice());
     }
