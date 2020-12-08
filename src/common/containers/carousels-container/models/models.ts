@@ -7,3 +7,15 @@ export interface IReference extends IDefaultCarouselItem {
     name: string;
     city: string;
 }
+
+export interface ISupplierCompare extends IDefaultCarouselItem {
+    region: string;
+    saving: number;
+}
+
+export interface ISupplierLogo extends IDefaultCarouselItem {
+    alt: string;
+    logoUrl: string;
+    title: string;
+}
+

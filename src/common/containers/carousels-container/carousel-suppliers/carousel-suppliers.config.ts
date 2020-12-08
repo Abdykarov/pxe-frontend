@@ -1,6 +1,7 @@
 import {
     ISupplierLogo,
 } from 'src/common/ui/supplier/model/supplier.model';
+import { TypeOfResolution } from '../../../models/type-of-resolution';
 
 export const config: ISupplierLogo[] = [
     {
@@ -62,3 +63,9 @@ export const config: ISupplierLogo[] = [
         faqUrl: '/faq/supplier/prazska-plynarenska',
     },
 ];
+
+export const mapTypeOfDeviceToNumberOfSlides = {
+    [TypeOfResolution.DESKTOP]: 3,
+    [TypeOfResolution.TABLET]: 3,
+    [TypeOfResolution.MOBILE]: 2,
+};

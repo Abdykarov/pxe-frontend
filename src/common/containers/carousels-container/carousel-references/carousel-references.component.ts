@@ -25,7 +25,6 @@ export class CarouselReferencesComponent extends AbstractComponent {
         }
     }
     public isBrowser = false;
-
     public maxHeight = null;
 
     public readonly carouselItems: IReference[] = [
@@ -59,5 +58,5 @@ export class CarouselReferencesComponent extends AbstractComponent {
         },
     ];
 
-    public maxHeightChange = (maxHeight: number) => this.maxHeight = maxHeight;
+    public maxHeightChangeAction = (maxHeight: number) => this.maxHeight = maxHeight;
 }

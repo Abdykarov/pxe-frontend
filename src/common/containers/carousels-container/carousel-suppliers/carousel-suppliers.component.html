@@ -1,51 +1,25 @@
-<ng-template #images let-data="data">
-    <a [routerLink]="data?.faqUrl">
-        <img
-            [src]="data.logoUrlHover"
-            [title]="data.title"
-            [alt]="data.alt"
-            [height]="maxHeight">
-    </a>
-</ng-template>
-
 <ng-template #slideTemplate let-item>
-    <div class="row text-center">
+    <div class="row text-center" [style.height.px]="height">
         <div class="col-12 text-center">
-            <a
-                *ngIf="item.supplierUrl"
-                [href]="item.supplierUrl"
-                target="_blank">
-                <ng-container *ngTemplateOutlet="images; context: { data: item }"></ng-container>
-            </a>
-            <span
-                *ngIf="!item.supplierUrl">
-                <ng-container *ngTemplateOutlet="images; context: { data: item }"></ng-container>
-            </span>
+            <img
+                [src]="item.logoUrl"
+                [title]="item.title"
+                [alt]="item.alt"
+                [height]="height">
         </div>
     </div>
 </ng-template>
 
-<ng-template #images let-data="data">
-    <a [routerLink]="data?.faqUrl">
-        <img
-            class="suppliers-overview__picture mx-auto"
-            [ngClass]="[
-                data.size ? 'suppliers-overview__picture--' + data.size : ''
-            ]"
-            [src]="data.logoUrlHover"
-            [title]="data.title"
-            [alt]="data.alt"
-            [width]="data.width">
-    </a>
-</ng-template>
-
-<lnd-carousel
-    [carouselItems]="config"
-    customSlideWrapper="col-10 offset-1"
-    [itemsPerSlide]="3"
-    [singleSlideOffset]="true"
-    [showIndicators]="false"
-    [showLeftAndRightIndicators]="true"
-    [slideTemplate]="slideTemplate"
-    (maxHeightChange)="maxHeightChange($event)">
-</lnd-carousel>
+<div class="carousel-suppliers">
+    <lnd-carousel
+        [carouselItems]="config"
+        customSlideWrapper="col-10 offset-1"
+        [itemsPerSlide]="numberOfSlides"
+        [singleSlideOffset]="true"
+        [showIndicators]="false"
+        [showLeftAndRightIndicators]="true"
+        [slideTemplate]="slideTemplate"
+        [withCountHeight]="false"
+        (deviceCouldChangedAction)="deviceCouldChanged($event)">
+    </lnd-carousel>
+</div>

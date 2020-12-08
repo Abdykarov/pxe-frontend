@@ -1,0 +1,55 @@
+/*
+ -  Carousel supplier
+ -
+ - stylelint-disable for rewrite library
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+.carousel-compare {
+	.carousel {
+		.carousel-item {
+			position: static;
+			margin-right: 0;
+		}
+
+		.carousel-compare__border {
+			border-left: 1px solid rgba(151, 151, 151, .3);
+			padding-left: 20px;
+
+			&--none {
+				border: none;
+			}
+		}
+
+		.carousel-compare__price {
+			color: #675996;
+
+			&--value {
+				font-size: 2.2rem;
+			}
+		}
+
+		.carousel-control {
+			width: 7.5%;
+			opacity: 1;
+		}
+
+		.carousel-control-prev-icon {
+			background-color: $white;
+			background-image: none;
+			width: 48px;
+			height: 48px;
+			border-radius: 50%;
+		}
+
+		.carousel-control-next-icon {
+			background-color: $font-header;
+			width: 48px;
+			height: 48px;
+			border-radius: 50%;
+			background-image: none;
+		}
+	}
+}

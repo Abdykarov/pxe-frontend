@@ -29,11 +29,13 @@
     </ul>
 </ng-template>
 
-<lnd-carousel
-    [carouselItems]="carouselItems"
-    [customBeforeAppendTemplate]="customBeforeAppendTemplate"
-    [showIndicators]="false"
-    [showLeftAndRightIndicators]="false"
-    [slideTemplate]="slideTemplate"
-    (maxHeightChange)="maxHeightChange($event)">
-</lnd-carousel>
+<div class="carousel-references-wrapper">
+    <lnd-carousel
+        [carouselItems]="carouselItems"
+        [customBeforeAppendTemplate]="customBeforeAppendTemplate"
+        [showIndicators]="false"
+        [showLeftAndRightIndicators]="false"
+        [slideTemplate]="slideTemplate"
+        (maxHeightChangeAction)="maxHeightChangeAction($event)">
+    </lnd-carousel>
+</div>

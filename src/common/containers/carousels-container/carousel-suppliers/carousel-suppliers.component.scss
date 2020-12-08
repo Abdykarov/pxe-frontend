@@ -7,13 +7,15 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
-.carousel {
-	.carousel-item {
-		position: static;
-		margin-right: 0;
-	}
+.carousel-suppliers {
+	.carousel {
+		.carousel-item {
+			position: static;
+			margin-right: 0;
+		}
 
-	.carousel-control {
-		width: 10%;
+		.carousel-control {
+			width: 10%;
+		}
 	}
 }

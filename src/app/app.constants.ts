@@ -174,6 +174,7 @@ export const CONSTS = {
     LG_RESOLUTION: 1366,
     XL_RESOLUTION: 992,
     MD_RESOLUTION: 768,
+    SM_RESOLUTION: 576,
 };
 
 export const ROUTES = {
