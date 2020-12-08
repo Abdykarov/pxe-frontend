@@ -6,7 +6,7 @@ import {
     ViewChild,
 } from '@angular/core';
 
-import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
+import { PdfJsViewerComponent } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-viewer.component';
 
 @Component({
     selector: 'pxe-pdf-viewer',
@@ -40,19 +40,8 @@ export class PdfViewerComponent implements OnInit {
     public customPdfCss = false;
 
     ngOnInit(): void {
-        if (this.customPdfCss) {
-            const iframe = this.pdfjsViewerWrapper.nativeElement.querySelector('iframe');
-            iframe.setAttribute('frameBorder', 0);
-            iframe.onload = () => {
-                const contentWindow = (iframe.contentWindow || iframe.contentDocument);
-                const head = contentWindow.document.getElementsByTagName('head')[0];
-                const link = document.createElement('link');
-                link.setAttribute('type', 'text/css');
-                link.setAttribute('rel', 'stylesheet');
-                link.setAttribute('href', '/pdf-viewer-custom.css');
-                head.append(link);
-            };
-        }
+        const iframe = this.pdfjsViewerWrapper.nativeElement.querySelector('iframe');
+        iframe.setAttribute('frameBorder', 0);
     }
 
     public refresh = () => setTimeout(_ => this.pdfjsViewer.refresh());
