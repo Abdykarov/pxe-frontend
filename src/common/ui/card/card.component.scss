@@ -7,76 +7,33 @@
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
 
-::ng-deep .card {
-	position: relative;
-	display: block;
-	padding: $spacer ( $spacer / 2 );
-	text-align: center;
+// Component variables
+@import 'card.component.variables.scss';
 
-	// Media queries
-	@include media-breakpoint-up(md) {
-		text-align: left;
-		padding: $spacer;
-	}
 
-	img {
-		width: auto;
-		max-height: $card-img-max-height;
-		height: 100%;
-	}
-}
+// Bootstrap button import
+@import '~bootstrap/scss/card';
 
-.card-img-top {
-	margin-bottom: $spacer;
 
-	& + .card-body {
-		margin-bottom: 0;
-	}
-}
-
-.card-img {
-	&--border {
-		// Media queries
-		@include media-breakpoint-up(md) {
-			border: $card-img-border-width-md solid $card-img-border-color;
-		}
-		@include media-breakpoint-up(xl) {
-			border-width: $card-img-border-width-xl;
-		}
-	}
-
-	&--normal {
-		max-width: $card-widget-img-max-width;
-	}
-
-	&--small {
-		max-width: $card-widget-img-small-max-width;
-	}
-}
-
-// ::ng-deep .card-tiles {
-// 	display: block;
-// }
-
-.card-tile__item {
-	min-height: $card-tile-height;
+.card {
 	padding: ( $spacer / 2 );
 	font-family: $font-family-sans-serif-public;
 
 	// Media queries
 	@include media-breakpoint-up(md) {
 		padding: ( $spacer * 3 ) ( $spacer * 3.5 );
-		border-right: 1px solid $border-color;
-		border-bottom: 1px solid $border-color;
-	}
-
-	img {
-		max-height: $card-tile-img-max-height;
-		margin-bottom: ( $spacer * 1.75 );
 	}
 
 	.card-img-top {
-		margin-bottom: $spacer;
+		width: $card-img-size;
+		height: $card-img-size;
+		margin-bottom: $card-spacer-y;
+		border-radius: $card-img-size;
+
+		// Media queries
+		@include media-breakpoint-up(xl) {
+			margin-bottom: ( $card-spacer-y * 1.75 );
+		}
 	}
 
 	.card-body {
@@ -90,7 +47,7 @@
 	}
 
 	.card-title {
-		margin-bottom: ( $spacer / 2 );
+		margin-bottom: ( $card-spacer-y / 2 );
 	}
 
 	.card-text {
@@ -116,3 +73,48 @@
 	}
 }
 
+// .card-img {
+// 	&--border {
+// 		// Media queries
+// 		@include media-breakpoint-up(md) {
+// 			border: $card-img-border-width-md solid $card-img-border-color;
+// 		}
+// 		@include media-breakpoint-up(xl) {
+// 			border-width: $card-img-border-width-xl;
+// 		}
+// 	}
+
+// 	&--normal {
+// 		max-width: $card-widget-img-max-width;
+// 	}
+
+// 	&--small {
+// 		max-width: $card-widget-img-small-max-width;
+// 	}
+// }
+
+::ng-deep .card-tiles {
+	display: block;
+
+	.card-tile__item {
+		&:nth-child(3n + 2),
+		&:nth-child(3n + 3) {
+			// Media queries
+			@include media-breakpoint-up(xl) {
+				border-left: 1px solid $border-color;
+			}
+		}
+
+		&:nth-child(n + 4) {
+			// Media queries
+			@include media-breakpoint-down(md) {
+				display: none;
+			}
+			@include media-breakpoint-up(xl) {
+				border-top: 1px solid $border-color;
+			}
+		}
+	}
+}
+
+  

@@ -1,5 +1,5 @@
 export const defaultFirstCard = {
-    imgSrc: 'assets/images/demo/card-default.svg',
+    imgSrc: 'assets/images/landing-page/our-help-cottage.png',
     imgAlt: 'Card image',
     imgTitle: 'Card title',
     title: 'Card with image and button',
@@ -7,7 +7,7 @@ export const defaultFirstCard = {
 };
 
 export const defaultSecondCard = {
-    imgSrc: 'assets/images/demo/card-default.svg',
+    imgSrc: 'assets/images/landing-page/our-help-cottage.png',
     imgAlt: 'Card image',
     imgTitle: 'Card title',
     title: 'Card with image bottom',
@@ -16,7 +16,7 @@ export const defaultSecondCard = {
 };
 
 export const defaultListCard = {
-    imgSrc: 'assets/images/demo/card-default.svg',
+    imgSrc: 'assets/images/landing-page/our-help-cottage.png',
     imgAlt: 'Card image',
     imgTitle: 'Card title',
     title: 'List card',
@@ -24,7 +24,7 @@ export const defaultListCard = {
 };
 
 export const defaultTileCard = {
-    imgSrc: 'assets/images/demo/card-default.svg',
+    imgSrc: 'assets/images/landing-page/our-help-cottage.png',
     imgAlt: 'Card image',
     imgTitle: 'Card title',
     title: 'Tile card',
