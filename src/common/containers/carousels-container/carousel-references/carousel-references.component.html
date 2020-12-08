@@ -16,9 +16,9 @@
     </div>
 </ng-template>
 
-<ng-template #customIndicatorsTemplate let-activeSlide="activeSlide" let-setActiveSlide="setActiveSlide">
+<ng-template #customBeforeAppendTemplate let-activeSlide="activeSlide" let-setActiveSlide="setActiveSlide">
     <ul class="carousel-indicators"
-         [ngStyle]="{'top': maxHeight + 'px'}">
+         [ngStyle]="{'top': (maxHeight - 30) + 'px'}">
         <li class="carousel-indicators__li" *ngFor="let item of carouselItems; let i = index"
              [attr.aria-pressed]="i === activeSlide"
              (click)="setActiveSlide(i)" >
@@ -31,7 +31,7 @@
 
 <lnd-carousel
     [carouselItems]="carouselItems"
-    [customIndicatorsTemplate]="customIndicatorsTemplate"
+    [customBeforeAppendTemplate]="customBeforeAppendTemplate"
     [showIndicators]="false"
     [showLeftAndRightIndicators]="false"
     [slideTemplate]="slideTemplate"

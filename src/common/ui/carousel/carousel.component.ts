@@ -1,4 +1,5 @@
 import {
+    AfterViewInit,
     Component,
     EventEmitter,
     Input,
@@ -36,13 +37,25 @@ export class CarouselComponent extends AbstractComponent implements OnInit {
     public carouselItems: IDefaultCarouselItem[];
 
     @Input()
-    public customIndicatorsTemplate?: TemplateRef<any>;
+    public customAfterAppendTemplate?: TemplateRef<any>;
+
+    @Input()
+    public customBeforeAppendTemplate?: TemplateRef<any>;
+
+    @Input()
+    public customSlideWrapper = '';
 
     @Input()
     public interval: boolean | number = false;
 
     @Input()
+    public itemsPerSlide = 1;
+
+    @Input()
     public showIndicators = true;
+
+    @Input()
+    public singleSlideOffset = true;
 
     @Input()
     public showLeftAndRightIndicators = true;
@@ -59,8 +72,8 @@ export class CarouselComponent extends AbstractComponent implements OnInit {
     public activeSlide = 0;
 
     private innerCarousel: HTMLDivElement = null;
-    private maxHeightSlide = 0;
-    private maxHeightOfCarousel = 0;
+    private maxHeightSlide = null;
+    private maxHeightOfCarousel = null;
     private slides: Node[] = null;
 
     public resizeEvent$ = fromEvent(window, 'resize')
@@ -79,28 +92,19 @@ export class CarouselComponent extends AbstractComponent implements OnInit {
     ngOnInit() {
         super.ngOnInit();
         setTimeout(_ => {
-            Promise.all(
-                Array.from(document.images)
-                    .filter(
-                        img => !img.complete,
-                    )
-                    .map(
-                        img => new Promise(resolve => { img.onload = img.onerror = resolve; }),
-                    ))
-                .then(() => {
-                    const parentElement = this.parent.nativeElement;
-                    this.slides = parentElement.getElementsByTagName('slide');
-                    this.innerCarousel = R.pipe(
-                        R.head,
-                        R.prop('parentElement'),
-                    )(parentElement.getElementsByTagName('slide'));
-                    this.setHeights();
+            const parentElement = this.parent.nativeElement;
+            this.slides = parentElement.getElementsByTagName('slide');
+            this.innerCarousel = R.pipe(
+                R.head,
+                R.prop('parentElement'),
+                R.prop('parentElement'),
+            )(parentElement.getElementsByTagName('slide'));
+            this.setHeights();
 
-                    this.resizeEvent$
-                        .pipe(takeUntil(this.destroy$))
-                        .subscribe(() => {
-                            this.setHeights();
-                        });
+            this.resizeEvent$
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(() => {
+                    this.setHeights();
                 });
         });
 
@@ -110,13 +114,12 @@ export class CarouselComponent extends AbstractComponent implements OnInit {
         R.reduce((acc, element) => R.max(acc, getHeightOfDisplayNoneElement(element)), -Infinity, this.slides)
 
     private getHeightOfCarousel = (): number =>
-        R.reduce((acc, element) => R.max(acc, getHeightOfDisplayNoneElement(element.parentElement)), -Infinity, this.slides)
+         R.reduce((acc, element) => R.max(acc, getHeightOfDisplayNoneElement(element, this.innerCarousel, true)), -Infinity, this.slides)
 
     public setHeights = (): void => {
         this.innerCarousel.style.height = '';
         this.maxHeightSlide = this.getMaxHeightSlide();
-        this.maxHeightOfCarousel = this.getHeightOfCarousel();
-        this.innerCarousel.style.height = this.maxHeightOfCarousel + 'px';
+        this.innerCarousel.style.height = (this.maxHeightSlide) + 'px';
         this.maxHeightChange.emit(this.maxHeightSlide);
     }
 }

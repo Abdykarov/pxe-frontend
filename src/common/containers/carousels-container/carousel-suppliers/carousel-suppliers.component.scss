@@ -1,0 +1,19 @@
+/*
+ -  Carousel supplier
+ -
+ - stylelint-disable for rewrite library
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+.carousel {
+	.carousel-item {
+		position: static;
+		margin-right: 0;
+	}
+
+	.carousel-control {
+		width: 10%;
+	}
+}

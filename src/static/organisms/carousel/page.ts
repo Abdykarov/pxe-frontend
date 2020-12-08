@@ -14,7 +14,7 @@ export class CarouselComponent {
     ) {
         this.breadcrumbItemsSimple = [
             {
-                label: 'Carousel',
+                label: 'Carousels',
                 url: null,
             },
         ];

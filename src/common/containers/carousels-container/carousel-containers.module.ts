@@ -1,22 +1,24 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
-import { CarouselContainerComponent } from 'src/common/containers/carousels-container/old/carousel-container.component';
 import { CarouselModule } from 'src/common/ui/carousel/carousel.module';
 import { CarouselReferencesComponent } from './carousel-references/carousel-references.component';
+import { CarouselSuppliersComponent } from './carousel-suppliers/carousel-suppliers.component';
 
 @NgModule({
     declarations: [
-        CarouselContainerComponent,
         CarouselReferencesComponent,
+        CarouselSuppliersComponent,
     ],
     exports: [
-        CarouselContainerComponent,
         CarouselReferencesComponent,
+        CarouselSuppliersComponent,
     ],
     imports: [
         CommonModule,
         CarouselModule,
+        RouterModule,
     ],
 })
 export class CarouselContainersModule { }
