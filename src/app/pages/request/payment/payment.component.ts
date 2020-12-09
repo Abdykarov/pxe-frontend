@@ -33,8 +33,9 @@ import {
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
-import { ROUTES } from 'src/app/app.constants';
+import {GTM_CONSTS, ROUTES} from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
+import {GTMService} from '../../../services/gtm.service';
 
 @Component({
     selector: 'pxe-contract',
@@ -59,6 +60,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
+        private gtmService: GTMService,
         public navigateRequestService: NavigateRequestService,
         private route: ActivatedRoute,
         private router: Router,
@@ -140,6 +142,14 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 (supplyPointNewVersion: ISupplyPoint) => {
+                    this.gtmService.pushEvent({
+                        'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+                        'category': GTM_CONSTS.CATEGORIES.FORM,
+                        'dodavatel': this.supplyPoint.supplier.name.toLowerCase(),
+                        'action': GTM_CONSTS.ACTIONS.SIGNED,
+                        'label': GTM_CONSTS.LABELS.STEP_THREE,
+                        'userID': this.authService.currentUserValue.uuid,
+                    });
                     this.supplyPointNewVersion = supplyPointNewVersion;
                     this.loading = false;
                     this.cd.markForCheck();

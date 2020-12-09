@@ -50,6 +50,13 @@ export class SignboardComponent {
 
     public routerToNextStep = (evt) => {
         evt.preventDefault();
+        this.gtmService.pushEvent({
+            'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+            'category': GTM_CONSTS.CATEGORIES.FORM,
+            'action': GTM_CONSTS.ACTIONS.START,
+            'label': GTM_CONSTS.LABELS.STEP_ONE,
+            'userID': this.authService.currentUserValue.uuid,
+        });
         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
     }
 

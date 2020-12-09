@@ -25,8 +25,7 @@ import {
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
-    CONSTS,
-    PUSH_EVENTS_GA,
+    CONSTS, GTM_CONSTS,
     ROUTES,
     S_ANALYTICS,
 } from 'src/app/app.constants';
@@ -157,7 +156,6 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
             )
             .subscribe(
                 () => {
-                    this.gtmService.pushEvent(PUSH_EVENTS_GA.FORMS.OFFER_SELECTION);
                     this.sAnalyticsService.sendWebData(
                         {},
                         {
@@ -170,6 +168,14 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
                             supplyPoint: this.supplyPoint,
                         },
                     );
+                    this.gtmService.pushEvent({
+                        'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+                        'category': GTM_CONSTS.CATEGORIES.FORM,
+                        'dodavatel': supplyPointOffer.name.toLowerCase(),
+                        'action': GTM_CONSTS.ACTIONS.SELECT_OFFER,
+                        'label': GTM_CONSTS.LABELS.STEP_TWO,
+                        'userID': this.authService.currentUserValue.uuid,
+                    });
                     this.router.navigate(
                         [ROUTES.ROUTER_REQUEST_RECAPITULATION],
                         {
@@ -193,6 +199,19 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
 
         if (this.validityService.validateTermWithProlongation(this.supplyPoint)) {
             this.bannerObj.text = offerValidityMessages.contractEndWithTerminate;
+        }
+    }
+
+    public togglePriceDecompositionAction = (showedDetail: boolean, supplyPointOffer: IOffer) => {
+        if (showedDetail) {
+            this.gtmService.pushEvent({
+                'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+                'category': GTM_CONSTS.CATEGORIES.FORM,
+                'dodavatel': supplyPointOffer.name.toLowerCase(),
+                'action': GTM_CONSTS.ACTIONS.SHOW_DETAIL,
+                'label': GTM_CONSTS.LABELS.STEP_TWO,
+                'userID': this.authService.currentUserValue.uuid,
+            });
         }
     }
 

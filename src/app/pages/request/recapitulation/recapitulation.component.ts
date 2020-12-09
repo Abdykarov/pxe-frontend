@@ -21,8 +21,7 @@ import {
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
-    CODE_LIST_TYPES,
-    PUSH_EVENTS_GA,
+    CODE_LIST_TYPES, GTM_CONSTS,
     ROUTES,
     S_ANALYTICS,
 } from 'src/app/app.constants';
@@ -132,7 +131,6 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             )
             .subscribe(
                 () => {
-                    this.gtmService.pushEvent(PUSH_EVENTS_GA.FORMS.RECAPITULATION);
                     this.sAnalyticsService.sFormSubmit(personalInfoInput);
                     this.sAnalyticsService.sendWebData(
                         {},
@@ -146,6 +144,14 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                             supplyPoint: this.supplyPoint,
                         },
                     );
+                    this.gtmService.pushEvent({
+                        'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+                        'category': GTM_CONSTS.CATEGORIES.FORM,
+                        'dodavatel': this.supplyPoint.supplier.name.toLowerCase(),
+                        'action': GTM_CONSTS.ACTIONS.CONTINUE,
+                        'label': GTM_CONSTS.LABELS.STEP_TWO,
+                        'userID': this.authService.currentUserValue.uuid,
+                    });
                     this.router.navigate(
                         [ROUTES.ROUTER_REQUEST_CONTRACT], {
                         queryParams: {

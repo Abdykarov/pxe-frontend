@@ -70,6 +70,7 @@
                         [supplyPointOffer]="supplyPointOffer"
                         (mouseenter)="sAnalyticsService.sFormFocus($event);sAnalyticsService.sFormChange(supplyPointOffer)"
                         (mouseleave)="sAnalyticsService.sFormBlur($event)"
+                        (togglePriceDecompositionAction)="togglePriceDecompositionAction($event, supplyPointOffer)"
                     >
                     </pxe-supply-point-offer>
                 </div>

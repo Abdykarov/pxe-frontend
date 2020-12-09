@@ -584,8 +584,15 @@ export enum ANNUAL_CONSUMPTION_UNIT_TYPES {
 
 export const GTM_CONSTS = {
     ACTIONS: {
+        SIGN: 'sign the offer',
+        SIGNED: 'offer signed',
+        CONTINUE: 'continue',
+        SELECT_OFFER: 'select offer',
         SENT: 'sent',
         VIEW: 'view',
+        START: 'start',
+        SAVE: 'save',
+        SHOW_DETAIL: 'show detail',
     },
     CATEGORIES: {
         REGISTRATION: 'sign up',

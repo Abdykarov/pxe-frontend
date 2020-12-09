@@ -61,6 +61,9 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     @Output()
     public action: EventEmitter<any> = new EventEmitter();
 
+    @Output()
+    public togglePriceDecompositionAction: EventEmitter<any> = new EventEmitter();
+
     constructor(
         private cd: ChangeDetectorRef,
         private dateDiffPipe: DateDiffPipe,
@@ -111,5 +114,6 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
         event.preventDefault();
         event.cancelBubble = true;
         this.showPriceDecomposition = !this.showPriceDecomposition;
+        this.togglePriceDecompositionAction.emit(this.showPriceDecomposition);
     }
 }

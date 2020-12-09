@@ -39,7 +39,7 @@ import { IFieldError } from 'src/common/containers/form/models/form-definition.m
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import {
-    PUSH_EVENTS_GA,
+    GTM_CONSTS,
     ROUTES,
     S_ANALYTICS,
     SUPPLY_POINT_EDIT_TYPE,
@@ -89,6 +89,13 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
+        this.gtmService.pushEvent({
+            'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+            'category': GTM_CONSTS.CATEGORIES.FORM,
+            'action': GTM_CONSTS.ACTIONS.VIEW,
+            'label': GTM_CONSTS.LABELS.STEP_TWO,
+            'userID': this.authService.currentUserValue.uuid,
+        });
     }
 
     ngOnInit() {
@@ -217,7 +224,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 (supplyPointId) => {
-                    this.gtmService.pushEvent(PUSH_EVENTS_GA.FORMS.CREATE_SUPPLY_POINT);
+                  //  this.gtmService.pushEvent(PUSH_EVENTS_GA.FORMS.CREATE_SUPPLY_POINT);
                     this.supplyPointLocalStorageService.removeSupplyPoint();
                     this.formLoading = false;
                     this.formSent = true;
@@ -232,6 +239,15 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                             supplyPointFormData,
                         },
                     );
+                    this.gtmService.pushEvent({
+                        'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+                        'category': GTM_CONSTS.CATEGORIES.FORM,
+                        'action': GTM_CONSTS.ACTIONS.SAVE,
+                        'label': GTM_CONSTS.LABELS.STEP_ONE,
+                        'odberatel': supplyPointFormData.supplierId,
+                        'dodavatel': supplyPointFormData.commodityType.toLowerCase(),
+                        'userID': this.authService.currentUserValue.uuid,
+                    });
                     this.cd.markForCheck();
                     this.router.navigate(
                         [ROUTES.ROUTER_REQUEST_OFFER_SELECTION],
