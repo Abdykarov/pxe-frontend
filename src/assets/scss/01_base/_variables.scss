@@ -129,7 +129,7 @@ $body-max-width:                   1366px;
 
 // Typography
 $font-family-sans-serif:           'roboto_mono', arial;
-$font-family-sans-serif-public:    'space_mono', arial;
+$font-family-sans-serif-public:    'roboto', arial;
 $font-size-base:                   .875rem;
 $line-height-base:                 ( 24 / 14 );
 $small-font-size:                  .75rem;
@@ -138,9 +138,9 @@ $perex-font-size:                  1.125rem;
 
 $h1-font-size:                     1.875rem;
 $h1-font-size-snd:                 1rem;
-$h1-font-size-public-xs:           2.25rem;
-$h1-font-size-public-md:           2.25rem;
-$h1-font-size-public:              3rem;
+$h1-font-size-public-xs:           2.25rem;        // 36px
+$h1-font-size-public-md:           2.25rem;        // 36px
+$h1-font-size-public:              3.75rem;        // 60px
 $h2-font-size:                     1.125rem;
 $h2-font-size-snd:                 .8125rem;
 $h2-font-size-public-xs:           1.5rem;
