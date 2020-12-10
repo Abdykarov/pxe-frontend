@@ -26,9 +26,11 @@ $gray-1000:                        #000;                       // Gray level 100
 $white:                            $gray-000;
 $black:                            $gray-1000;
 
-$font-header:                      #2b4762;
-$font-text:                        #2b4762;
+$font-header:                      #496480;
+$font-text:                        #496480;
 $font-secondary:                   #919191;
+
+$font-text-secure:                 #2b4762;
 
 $text-muted:                       $font-secondary;
 
@@ -128,19 +130,23 @@ $body-max-width:                   1366px;
 
 
 // Typography
-$font-family-sans-serif:           'roboto_mono', arial;
-$font-family-sans-serif-public:    'roboto', arial;
-$font-size-base:                   .875rem;
-$line-height-base:                 ( 24 / 14 );
+$font-family-sans-serif:           'roboto', arial;
+$font-size-base:                   1rem;
+$line-height-base:                 ( 28 / 16 );
+
+$font-family-sans-serif-secure:    'roboto_mono', arial;
+$font-size-base-secure:            .875rem;
+$line-height-base-secure:          ( 24 / 14 );
+
 $small-font-size:                  .75rem;
 $line-height-sm:                   ( 16 / 12 );
 $perex-font-size:                  1.125rem;
 
 $h1-font-size:                     1.875rem;
 $h1-font-size-snd:                 1rem;
-$h1-font-size-public-xs:           2.25rem;        // 36px
-$h1-font-size-public-md:           2.25rem;        // 36px
-$h1-font-size-public:              3.75rem;        // 60px
+$h1-font-size-public-xs:           2.25rem;
+$h1-font-size-public-md:           2.25rem;
+$h1-font-size-public:              3rem;
 $h2-font-size:                     1.125rem;
 $h2-font-size-snd:                 .8125rem;
 $h2-font-size-public-xs:           1.5rem;
