@@ -6,8 +6,10 @@ import {
     ChangeDetectorRef,
     Component,
     HostListener,
-    Inject,
+    Inject, OnDestroy,
+    OnInit,
     PLATFORM_ID,
+    Renderer2,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
@@ -28,14 +30,13 @@ import {
 import { CookiesService } from 'src/app/services/cookies.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
-import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
     templateUrl: './public-layout.component.html',
     styleUrls: ['./public-layout.component.scss'],
 })
-export class PublicLayoutComponent extends AbstractLayoutComponent {
+export class PublicLayoutComponent extends AbstractLayoutComponent implements OnInit, OnDestroy {
     public commodityTypePower = CommodityTypesLowerCase.POWER;
     public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
     public lastScrollTop = 0;
@@ -58,6 +59,7 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
         protected cookieService: CookiesService,
         private cd: ChangeDetectorRef,
         protected overlayService: OverlayService,
+        private renderer: Renderer2,
         protected route: ActivatedRoute,
         protected router: Router,
         protected sAnalyticsService: SAnalyticsService,
@@ -86,6 +88,16 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
                 this.showOverlay = current;
                 this.cd.markForCheck();
             });
+    }
+
+    public ngOnInit() {
+        super.ngOnInit();
+        this.renderer.addClass(document.body, 'public');
+    }
+
+    public ngOnDestroy() {
+        super.ngOnDestroy();
+        this.renderer.removeClass(document.body, 'public');
     }
 
     public logout = () => this.authService.logoutForced(false);
