@@ -89,7 +89,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
         private validityService: ValidityService,
     ) {
         super(faqService, route);
-        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_TWO, this.authService.currentUserValue.uuid);
+        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_TWO, this.authService.hashedUserId);
         this.gtmService.pushEvent({
             event: GTM_CONSTS.EVENTS.CHECKOUT,
             ecommerce: {

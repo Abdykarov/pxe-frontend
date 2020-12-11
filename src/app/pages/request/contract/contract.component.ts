@@ -115,7 +115,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
         private supplyService: SupplyService,
     ) {
         super(faqService, route);
-        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_TWO, this.authService.currentUserValue.uuid);
+        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_TWO, this.authService.hashedUserId);
     }
 
     ngOnInit () {
