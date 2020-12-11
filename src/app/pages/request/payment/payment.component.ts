@@ -30,13 +30,16 @@ import {
     removeAccent,
 } from 'src/common/utils';
 import {
+    GTM_CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
+import { GTMService } from 'src/app/services/gtm.service';
+import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
-import {GTM_CONSTS, ROUTES} from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
-import { GTMService } from '../../../services/gtm.service';
 
 @Component({
     selector: 'pxe-contract',
@@ -68,7 +71,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
         private supplyService: SupplyService,
     ) {
         super();
-        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_THREE, this.authService.currentUserValue.uuid);
+        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_THREE, this.authService.hashedUserId);
     }
 
     ngOnInit () {
@@ -166,7 +169,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                         'dodavatel': removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
                         'action': GTM_CONSTS.ACTIONS.SIGNED,
                         'label': GTM_CONSTS.LABELS.STEP_THREE,
-                        'userID': this.authService.hashedId,
+                        'userID': this.authService.hashUserId,
                     });
                     this.supplyPointNewVersion = supplyPointNewVersion;
                     this.loading = false;

@@ -67,7 +67,7 @@ export class AuthService {
     private readonly stopMessageInterval = 'STOP_INTERVAL';
 
     get hashedUserId(): string {
-        return this.hashedId(this?.currentUserValue?.email);
+        return this.hashUserId(this?.currentUserValue?.email);
     }
 
     public refreshTokenInterval$ =
@@ -116,7 +116,7 @@ export class AuthService {
         }
 
         this.currentUserSubject$.subscribe( (jwtPayloadSubjectSubject: IJwtPayload) => {
-            this.gtmService.setUserId(this.hashedId(jwtPayloadSubjectSubject?.email));
+            this.gtmService.setUserId(this.hashUserId(jwtPayloadSubjectSubject?.email));
         });
     }
 
@@ -127,7 +127,7 @@ export class AuthService {
         return R_.containsAny(role, accessRole);
     }
 
-    public hashedId = (id: string): string => CryptoJS.SHA3(id ?? '').toString();
+    public hashUserId = (id: string): string => CryptoJS.SHA3(id ?? '').toString();
 
     public refreshTokenInterval = () => {
         this.startRefreshTokenInterval();

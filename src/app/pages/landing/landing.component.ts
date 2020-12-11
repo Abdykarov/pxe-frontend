@@ -235,7 +235,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
                             'category': GTM_CONSTS.CATEGORIES.REGISTRATION,
                             'action': GTM_CONSTS.ACTIONS.SENT,
                             'label': GTM_CONSTS.LABELS.REGISTRATION,
-                            'email': this.authService.hashedId(values?.email),
+                            'email': this.authService.hashUserId(values?.email),
                         });
                         this.formLoading = false;
                         this.sAnalyticsService.sendWebData(

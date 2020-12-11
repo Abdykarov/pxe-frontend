@@ -91,7 +91,7 @@ export class SignUpComponent extends AbstractComponent {
                             'category': GTM_CONSTS.CATEGORIES.REGISTRATION,
                             'action': GTM_CONSTS.ACTIONS.SENT,
                             'label': GTM_CONSTS.LABELS.REGISTRATION,
-                            'email': this.authService.hashedId(values.email),
+                            'email': this.authService.hashUserId(values.email),
                         });
                         this.formLoading = false;
                         this.formSent = true;

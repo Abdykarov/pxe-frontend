@@ -25,7 +25,8 @@ import {
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
-    CONSTS, GTM_CONSTS,
+    CONSTS,
+    GTM_CONSTS,
     ROUTES,
     S_ANALYTICS,
 } from 'src/app/app.constants';
@@ -34,6 +35,7 @@ import { FaqService } from 'src/app/services/faq.service';
 import {
     getConfigStepper,
     parseGraphQLErrors,
+    removeAccent,
 } from 'src/common/utils';
 import { GTMService } from 'src/app/services/gtm.service';
 import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
@@ -186,10 +188,10 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
                     this.gtmService.pushEvent({
                         'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
                         'category': GTM_CONSTS.CATEGORIES.FORM,
-                        'dodavatel': supplyPointOffer.name.toLowerCase(),
+                        'dodavatel': removeAccent(supplyPointOffer?.name).toLowerCase(),
                         'action': GTM_CONSTS.ACTIONS.SELECT_OFFER,
                         'label': GTM_CONSTS.LABELS.STEP_TWO,
-                        'userID': this.authService.hashedId,
+                        'userID': this.authService.hashUserId,
                     });
                     this.router.navigate(
                         [ROUTES.ROUTER_REQUEST_RECAPITULATION],
@@ -222,10 +224,10 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
             this.gtmService.pushEvent({
                 'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
                 'category': GTM_CONSTS.CATEGORIES.FORM,
-                'dodavatel': supplyPointOffer.name.toLowerCase(),
+                'dodavatel': removeAccent(supplyPointOffer?.name).toLowerCase(),
                 'action': GTM_CONSTS.ACTIONS.SHOW_DETAIL,
                 'label': GTM_CONSTS.LABELS.STEP_TWO,
-                'userID': this.authService.hashedId,
+                'userID': this.authService.hashUserId,
             });
         }
     }

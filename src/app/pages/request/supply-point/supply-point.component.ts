@@ -254,7 +254,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                         'label': GTM_CONSTS.LABELS.STEP_ONE,
                         'odberatel': supplyPointFormData.supplierId,
                         'dodavatel': supplyPointFormData.commodityType.toLowerCase(),
-                        'userID': this.authService.hashedId,
+                        'userID': this.authService.hashUserId,
                     });
                     this.cd.markForCheck();
                     this.router.navigate(
