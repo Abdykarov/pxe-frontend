@@ -11,7 +11,6 @@ import {
 import {
     concludeContractMutation,
     confirmFirstContractViewMutation,
-    deleteContractMutation,
     deleteSelectedOfferFromContractMutation,
     deleteSignedContractMutation,
     saveContractMutation,
@@ -99,14 +98,6 @@ export class ContractService {
     public updateContract = (contractId: number) => this.apollo
         .mutate<any>({
             mutation: updateContractMutation,
-            variables: {
-                contractId,
-            },
-        })
-
-    public deleteContract = (contractId: string) => this.apollo
-        .mutate<any>({
-            mutation: deleteContractMutation,
             variables: {
                 contractId,
             },

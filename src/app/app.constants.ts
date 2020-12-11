@@ -55,12 +55,13 @@ export const CONSTS = {
     MONTHS_TO_CONTRACT_END: 2,
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
     MODAL_TYPE: {
-        MORE_TABS: 'moreTabs',
-        LP_VIDEO: 'lpVideo',
+        CONFIRM_DELETE_REQUEST: 'confirmDeleteOffer',
         CONFIRM_DELETE_OFFER: 'confirmDeleteOffer',
         CONFIRM_CANCEL_OFFER: 'confirmCancelOffer',
         CONFIRM_BACK_IMPORT: 'confirmBackImportOffer',
         CONFIRM_DELETE_MARKED: 'confirmDeleteMarked',
+        LP_VIDEO: 'lpVideo',
+        MORE_TABS: 'moreTabs',
     },
     OFFSET_ERRORS: {
         INVALID_INPUT: 40,
