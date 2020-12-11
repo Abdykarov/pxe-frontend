@@ -1,24 +1,13 @@
 <div
-     class="card"
-     [ngClass]="[
-        type && type !== 'card' ? 'card-' + type + '__item' : '',
-        alignment === 'center' ? 'text-center' : ''
-     ]">
+     class="card">
     <img
-        *ngIf="data.imgSrc && imgPosition === 'top'"
         [src]="domSanitizer.bypassSecurityTrustUrl(data.imgSrc)"
         [attr.title]="data.imgTitle"
         [attr.alt]="data.imgAlt"
-        class="card-img-top"
-        [ngClass]="[
-            type === 'list' ? 'card-img--border' : '',
-            type === 'widget' ? 'card-img-widget' : '',
-            imgSize ? 'card-img--' + imgSize : ''
-        ]">
+        class="card-img-top">
     <div
-        class="card-body"
-        [ngClass]="{ 'mb-4' : data.footerContent }">
-        <h3 *ngIf="type !== 'list' && data.title "
+        class="card-body">
+        <h3 *ngIf="data.title"
             class="h3--public card-title">
             {{ data.title }}
         </h3>
@@ -27,28 +16,5 @@
             class="card-text"
             [innerHTML]="data.content">
         </p>
-        <lnd-button
-            *ngIf="hasButton"
-            [label]="buttonLabel"
-            [type]="buttonType"
-            [hasOutline]="hasButtonOutline"
-            (action)="action.emit($event)">
-        </lnd-button>
-    </div>
-    <img
-        *ngIf="data.imgSrc && imgPosition === 'bottom'"
-        [src]="domSanitizer.bypassSecurityTrustUrl(data.imgSrc)"
-        [attr.title]="data.imgTitle"
-        [attr.alt]="data.imgAlt"
-        class="img-fluid card-img-bottom"
-        [ngClass]="[
-            type === 'list' ? 'card-img--border' : '',
-            type === 'widget' ? 'card-img-widget' : '',
-            imgSize ? 'card-img--' + imgSize : ''
-        ]">
-    <div
-        *ngIf="data.footerContent"
-        class="card-footer"
-        [innerHTML]="data.footerContent">
     </div>
 </div>
