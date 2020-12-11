@@ -58,14 +58,8 @@ $light-dark:                       darken($light, 15%);
 $light-darken:                     darken($light, 25%);
 $disabled:                         #f7f9fb;                    // Disabled color
 
-$gradient-green-light:             $primary;                     // Gradient green light
-$gradient-green-dark:              $primary-dark;                // Gradient green dark
-$gradient-blue-light:              $secondary;                   // Gradient blue light
-$gradient-blue-dark:               $secondary-dark;              // Gradient blue dark, cold
-$gradient-orange-light:            $warning;                     // Gradient orange light, normal
-$gradient-orange-dark:             $warning-dark;                // Gradient orange dark, normal
-$gradient-red-light:               $danger;                      // Gradient red light, warm
-$gradient-red-dark:                $danger-dark;                 // Gradient red dark, warm
+$gradient-violet-light:            $secondary;                   // Gradient violet light
+$gradient-violet-dark:             $secondary-dark;              // Gradient violet dark
 
 $icons-primary:                    $secondary;
 $icons-secondary:                  #bdcad6;
@@ -76,6 +70,7 @@ $icons-green:                      #39b76e;
 
 $body-bg:                          #eef2f6;
 $body-bg-lp:                       #f3f4f5;
+$body-bg-lp-second:                #f8f8f8;
 $body-color:                       $font-text;
 
 $border-color:                     #bdcad6;
@@ -132,6 +127,7 @@ $body-max-width:                   1366px;
 // Typography
 $font-family-sans-serif:           'roboto', arial;
 $font-size-base:                   1rem;
+$font-size-base-px:                16px;
 $line-height-base:                 ( 28 / 16 );
 
 $font-family-sans-serif-secure:    'roboto_mono', arial;
@@ -172,6 +168,8 @@ $paragraph-margin-bottom:          ( $spacer * 2 );
 $list-bullet-size:                 3px;
 $lists-margin-bottom:              $spacer;
 $list-decimal-padding-left:        ( $spacer * 2.25 );
+
+$circular-number-list-size:        48px;
 
 $checklist-lp-before-size:         50px;
 
@@ -273,6 +271,8 @@ $zindex-lp-picture-bg-overlap:       1;
 $zindex-lp-picture-bg:               -1;
 $zindex-lp-video-text:               10;
 $zindex-lp-video-control:            1;
+$zindex-lp-bg-two-half:              1;
+$zindex-lp-bg-two-half-after:        -1;
 
 
 

@@ -82,6 +82,44 @@
 		}
 	}
 
+	ol.numerical-list-stepper {
+		& > li,
+		& > li::before {
+			color: rgba($white, .7);
+		}
+
+		& > li {
+			padding-bottom: ( $spacer * .75 );
+		}
+
+		.active,
+		.active::before {
+			color: $white;
+			font-weight: $font-weight-bold;
+		}
+	}
+
+	ol.circular-number-list {
+		& > li {
+			padding-left: ( $circular-number-list-size + ( $spacer * .75 ) );
+			padding-bottom: ( $spacer * 2 );
+			line-height: ( 24 / 16 );
+		}
+
+		& > li::before {
+			content: counter(ol-list-1, decimal);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: $circular-number-list-size;
+			height: $circular-number-list-size;
+			top: 12px;
+			background-color: $white;
+			border-radius: $circular-number-list-size;
+			transform: translateY(-50%);
+		}
+	}
+
 	.decimal-list {
 		&,
 		ol {

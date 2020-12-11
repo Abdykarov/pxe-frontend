@@ -15,14 +15,72 @@
 
 	.section {
 		position: relative;
-		padding: ( $spacer * 3 ) 0;
+		padding: ( $spacer * 2.5 ) 0;
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			padding: ( $spacer * 3 ) 0 ( $spacer * 4 );
+			padding: ( $spacer * 5 ) 0;
 		}
-		@include media-breakpoint-up(lg) {
-			padding: ( $spacer * 4.5 ) 0 ( $spacer * 5.5 );
+
+		&--bg {
+			&::before {
+				content: '';
+				@include absolute-center(false);
+				top: 0;
+				width: 100%;
+				max-width: 1680px;
+				height: 100%;
+			}
+		}
+
+		&--bg-two-half {
+			overflow: hidden;
+			z-index: $zindex-lp-bg-two-half;
+
+			&::before,
+			&::after {
+				content: '';
+				position: absolute;
+				top: 0;
+				width: 100%;
+				max-width: ( 1680px / 2 );
+				height: 100%;
+				transform: none;
+			}
+
+			&::before {
+				right: 50%;
+			}
+
+			&::after {
+				left: 50%;
+				z-index: $zindex-lp-bg-two-half-after;
+			}
+		}
+
+		&--light-gray {
+			&::before {
+				background-color: $body-bg-lp-second;
+			}
+		}
+
+		&--dark-gray,
+		&--dark-gray-left-half {
+			&::before {
+				background-color: $body-bg-lp;
+			}
+		}
+
+		&--gradient-violet {
+			&::before {
+				background: linear-gradient(90deg, $gradient-violet-light 10%, $gradient-violet-dark 90%);
+			}
+		}
+
+		&--gradient-violet-right-half {
+			&::after {
+				background: linear-gradient(90deg, $gradient-violet-light 10%, $gradient-violet-dark 90%);
+			}
 		}
 
 		&--picture-half {
