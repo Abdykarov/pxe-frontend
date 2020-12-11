@@ -13,8 +13,6 @@ $card-border-radius:                0;
 $card-spacer-x:                     0;
 $card-spacer-y:                     $spacer;
 $card-inner-border-radius:          0;
-$card-img-size:                     124px;
+$card-img-size:                     80px;
 
-$card-tile-item-spacer-tablet:      ( $spacer * 1.5 );
-$card-tile-item-spacer-x-desktop:   ( $spacer * 4 );
-$card-tile-item-spacer-y-desktop:   ( $spacer * 3 );
+$card-tile-item-spacer:             ( $spacer * 2.5 );

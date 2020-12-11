@@ -32,15 +32,6 @@
 		height: $card-img-size;
 		margin-bottom: $card-spacer-y;
 		border-radius: $card-img-size;
-
-		// Media queries
-		@include media-breakpoint-up(xl) {
-			margin-bottom: ( $card-spacer-y * 1.75 );
-		}
-	}
-
-	&-title {
-		margin-bottom: ( $card-spacer-y / 2 );
 	}
 }
 
@@ -52,46 +43,37 @@
 
 	&__inner {
 		// Media queries
-		@include media-breakpoint-up(md) {
-			margin-left: -$card-tile-item-spacer-tablet;
-			margin-bottom: -( $card-tile-item-spacer-tablet * 1.5 );
-		}
 		@include media-breakpoint-up(xl) {
-			margin-left: -$card-tile-item-spacer-x-desktop;
-			margin-bottom: -( $card-tile-item-spacer-y-desktop / 1.25 );
+			margin-left: -$card-tile-item-spacer;
+			margin-bottom: -( $card-tile-item-spacer / 1.25 );
 		}
 	}
 
 	.card-tile__item {
-		margin-bottom: ( $spacer * 3 );
+		margin-bottom: ( $spacer * 2 );
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			padding: $card-tile-item-spacer-tablet;
-			margin-bottom: 0;
+			padding: 0 ( $spacer / 2 );
 		}
 		@include media-breakpoint-up(xl) {
-			padding: $card-tile-item-spacer-y-desktop $card-tile-item-spacer-x-desktop;
+			padding: $card-tile-item-spacer;
+			margin-bottom: 0;
+			border-right: $card-border;
+			border-bottom: $card-border;
 		}
 
 		&:nth-child(-n + 3) {
 			// Media queries
 			@include media-breakpoint-up(xl) {
-				padding-top: ( $card-tile-item-spacer-y-desktop / 6 );
+				padding-top: ( $card-tile-item-spacer / 6 );
 			}
 		}
 
-		&:nth-child(3n + 2),
 		&:nth-child(3n + 3) {
 			// Media queries
-			@include media-breakpoint-up(md) {
-				border-left: $card-border;
-			}
-		}
-
-		&:nth-child(n + 4) {
-			@include media-breakpoint-up(md) {
-				border-top: $card-border;
+			@include media-breakpoint-up(xl) {
+				border-right: none;
 			}
 		}
 	}

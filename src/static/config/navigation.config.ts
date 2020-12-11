@@ -32,7 +32,7 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/buttons',
                 },
                 {
-                    'label': 'Cards',
+                    'label': 'Card',
                     'url': '/basic/card',
                 },
                 {
