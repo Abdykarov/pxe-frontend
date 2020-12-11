@@ -74,7 +74,6 @@ export class AppComponent extends AbstractComponent implements OnInit {
                 .pipe(takeUntil(this.destroy$))
                 .subscribe(event => {
                     if (event instanceof NavigationEnd) {
-                        gtmService.setUserId(this.authService.currentUserValue.email);
                         gtmService.gtm(event);
                         // gaService.gtm(event);
                     }

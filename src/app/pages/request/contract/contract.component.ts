@@ -43,6 +43,7 @@ import {
     getConfigStepper,
     parseGraphQLErrors,
     parseRestAPIErrors,
+    removeAccent,
     scrollToElementFnc,
 } from 'src/common/utils';
 import { GTMService } from 'src/app/services/gtm.service';
@@ -114,6 +115,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
         private supplyService: SupplyService,
     ) {
         super(faqService, route);
+        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_TWO, this.authService.currentUserValue.uuid);
     }
 
     ngOnInit () {
@@ -130,6 +132,21 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                 map(({data}) => data.getSupplyPoint),
                 switchMap((supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
+
+                    this.gtmService.pushEvent({
+                        event: GTM_CONSTS.EVENTS.CHECKOUT,
+                        ecommerce: {
+                            actionField: {
+                                step: 2,
+                            },
+                            products: [{
+                                name: removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
+                                id: this.supplyPoint.supplier.id,
+                                brand: 'pxe',
+                                quantity: 1,
+                            }],
+                        },
+                    });
 
                     const documentTypeInformation$ = this.supplyPoint.subject.code === this.subjectType.SUBJECT_TYPE_INDIVIDUAL ?
                         this.documentService.getDocument(this.supplyPoint.contract.contractId, this.documentType.INFORMATION)
@@ -278,10 +295,10 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                         this.gtmService.pushEvent({
                             'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
                             'category': GTM_CONSTS.CATEGORIES.FORM,
-                            'dodavatel': this.supplyPoint.supplier.name.toLowerCase(),
+                            'dodavatel': removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
                             'action': GTM_CONSTS.ACTIONS.SIGN,
                             'label': GTM_CONSTS.LABELS.STEP_THREE,
-                            'userID': this.authService.currentUserValue.uuid,
+                            'userID': this.authService.hashedId,
                         });
                         this.router.navigate(
                             [ROUTES.ROUTER_REQUEST_PAYMENT], {

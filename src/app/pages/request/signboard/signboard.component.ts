@@ -39,12 +39,20 @@ export class SignboardComponent {
         private router: Router,
     ) {
         this.showWelcome = R.path(['history', 'state', 'afterLogin'], window);
+        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_ONE, this.authService.currentUserValue.uuid);
         this.gtmService.pushEvent({
-            'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
-            'category': GTM_CONSTS.CATEGORIES.FORM,
-            'action': GTM_CONSTS.ACTIONS.VIEW,
-            'label': GTM_CONSTS.LABELS.STEP_ONE,
-            'userID': this.authService.currentUserValue.uuid,
+            event: GTM_CONSTS.EVENTS.CHECKOUT,
+            ecommerce: {
+                actionField: {
+                    step: 1,
+                },
+                products: [{
+                    name: 'odber energie',
+                    id: null,
+                    brand: 'pxe',
+                    quantity: 1,
+                }],
+            },
         });
     }
 
@@ -55,7 +63,7 @@ export class SignboardComponent {
             'category': GTM_CONSTS.CATEGORIES.FORM,
             'action': GTM_CONSTS.ACTIONS.START,
             'label': GTM_CONSTS.LABELS.STEP_ONE,
-            'userID': this.authService.currentUserValue.uuid,
+            'userID': this.authService.hashedUserId,
         });
         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
     }

@@ -600,6 +600,7 @@ export const GTM_CONSTS = {
     },
     EVENTS: {
         EVENT_TRACKING: 'eventTracking',
+        CHECKOUT: 'checkout',
     },
     LABELS: {
         REGISTRATION: 'registration',

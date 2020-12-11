@@ -10,6 +10,7 @@ import {
 } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+import * as CryptoJS from 'crypto-js';
 import * as R_ from 'ramda-extension';
 import {
     BehaviorSubject,
@@ -65,6 +66,10 @@ export class AuthService {
     private readonly stopRefreshTokenIntervalSubject$ = new Subject<void>();
     private readonly stopMessageInterval = 'STOP_INTERVAL';
 
+    get hashedUserId(): string {
+        return this.hashedId(this?.currentUserValue?.email);
+    }
+
     public refreshTokenInterval$ =
         interval(CONSTS.REFRESH_TOKEN.INTERVAL)
             .pipe(
@@ -109,6 +114,10 @@ export class AuthService {
         if (isPlatformBrowser(this.platformId)) {
             this.refreshTokenInterval$.subscribe();
         }
+
+        this.currentUserSubject$.subscribe( (jwtPayloadSubject: IJwtPayload) => {
+            this.gtmService.setUserId(this.hashedId(jwtPayloadSubject?.email));
+        });
     }
 
     static jwtTokenHasRoles(jwtToken: string, accessRole: string[]): boolean {
@@ -117,6 +126,8 @@ export class AuthService {
         const { role } = jwtPayload;
         return R_.containsAny(role, accessRole);
     }
+
+    public hashedId = (id: string): string => CryptoJS.SHA3(id ?? '').toString();
 
     public refreshTokenInterval = () => {
         this.startRefreshTokenInterval();
@@ -169,7 +180,6 @@ export class AuthService {
             .pipe(
                 map((response: ILoginResponse) => {
                     const loginResponse =  this.manageLoginResponse(response);
-                    this.gtmService.setUserId(this.currentUserValue.email);
                     this.startRefreshTokenInterval();
                     this.startExpirationOfToken = new Date();
                     return loginResponse;
@@ -184,7 +194,6 @@ export class AuthService {
                 map(response => {
                     this.cleanUserData();
                     this.onlyOneTabActiveService.setActiveTab(OnlyOneTabActiveState.LOGOUT);
-                    this.gtmService.setUserId(null);
                     return response;
                 }),
                 catchError((error) => {
