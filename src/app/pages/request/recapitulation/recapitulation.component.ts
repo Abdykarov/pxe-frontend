@@ -114,7 +114,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                                 },
                                 products: [{
                                     name: removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
-                                    id: this.supplyPoint.supplier.id,
+                                    id: this.supplyPoint?.supplier?.id,
                                     brand: 'pxe',
                                     quantity: 1,
                                 }],

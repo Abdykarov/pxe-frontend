@@ -153,7 +153,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
     public filterOffersOnlyActualSupplier = () => {
         if (!R.isNil(this.supplyPointOffers) && !R.isNil(this.supplyPoint)) {
             this.supplyPointOffers = R.filter((supplyPointOffers: IOffer) =>
-                supplyPointOffers.supplier.id === this.supplyPoint.supplier.id)
+                supplyPointOffers.supplier.id === this.supplyPoint?.supplier?.id)
             (this.supplyPointOffers);
         }
     }
