@@ -232,7 +232,6 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 (supplyPointId) => {
-                  //  this.gtmService.pushEvent(PUSH_EVENTS_GA.FORMS.CREATE_SUPPLY_POINT);
                     this.supplyPointLocalStorageService.removeSupplyPoint();
                     this.formLoading = false;
                     this.formSent = true;

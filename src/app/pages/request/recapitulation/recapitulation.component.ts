@@ -21,7 +21,8 @@ import {
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
-    CODE_LIST_TYPES, GTM_CONSTS,
+    CODE_LIST_TYPES,
+    GTM_CONSTS,
     ROUTES,
     S_ANALYTICS,
 } from 'src/app/app.constants';
