@@ -7,6 +7,7 @@ import { AbstractResizeComponent } from 'src/common/abstract-resize.component';
 import { ISupplierCompare } from 'src/common/containers/carousels-container/models/models';
 import { mapTypeOfDeviceToNumberOfSlides } from './carousel-compare.config';
 import { TypeOfResolution } from 'src/common/models/type-of-resolution';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
     selector: 'pxe-carousel-compare',
@@ -66,6 +67,14 @@ export class CarouselCompareComponent extends AbstractResizeComponent {
     constructor() {
         super();
         this.deviceCouldChanged(this.getTypeOfDevice());
+
+        this.resizeEvent$
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(() => {
+                this.showCarousel = false;
+                this.numberOfSlides = this.deviceCouldChanged(this.getTypeOfDevice());
+                setTimeout(_ => this.showCarousel = true);
+            });
     }
 
     public maxHeightChangeAction = (maxHeight: number) => this.maxHeight = maxHeight;

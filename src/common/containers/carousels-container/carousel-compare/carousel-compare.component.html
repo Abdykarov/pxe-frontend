@@ -17,6 +17,7 @@
 
 <div class="carousel-compare">
     <lnd-carousel
+        *ngIf="showCarousel"
         [carouselItems]="config"
         customSlideWrapper="col-10 offset-1"
         [itemsPerSlide]="numberOfSlides"

@@ -7,6 +7,7 @@ import { AbstractResizeComponent } from 'src/common/abstract-resize.component';
 import { ISupplierLogo } from 'src/common/containers/carousels-container/models/models';
 import { TypeOfResolution } from 'src/common/models/type-of-resolution';
 import { mapTypeOfDeviceToNumberOfSlides } from './carousel-suppliers.config';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
     selector: 'pxe-carousel-suppliers',
@@ -58,5 +59,13 @@ export class CarouselSuppliersComponent extends AbstractResizeComponent {
     constructor() {
         super();
         this.deviceCouldChanged(this.getTypeOfDevice());
+
+        this.resizeEvent$
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(() => {
+                this.showCarousel = false;
+                this.numberOfSlides = this.deviceCouldChanged(this.getTypeOfDevice());
+                setTimeout(_ => this.showCarousel = true);
+            });
     }
 }

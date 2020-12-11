@@ -14,9 +14,18 @@
 
 .carousel-references-wrapper {
 	.carousel-references {
+
+		&__image-wrapper {
+			@include media-breakpoint-up(md) {
+				position: absolute;
+				left: -($image-size + $image-margin-left);
+			}
+		}
+
 		&__image {
 			border-radius: 50%;
-			max-width: 100%;
+			height: $image-size;
+			width: $image-size;
 			background-size: 100%;
 			box-shadow: -15px 20px 30px 0 rgba(0, 9, 16, .1);
 		}

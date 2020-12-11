@@ -12,6 +12,8 @@ import { TypeOfResolution } from './models/type-of-resolution';
 export abstract class AbstractResizeComponent extends AbstractComponent {
     public typeOfDevice = null;
 
+    public showCarousel = true;
+
     public resizeEvent$ = fromEvent(window, 'resize')
         .pipe(
             takeUntil(this.destroy$),

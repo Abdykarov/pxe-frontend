@@ -10,7 +10,8 @@
     </div>
 </ng-template>
 
-<div class="carousel-suppliers">
+<div *ngIf="showCarousel"
+    class="carousel-suppliers">
     <lnd-carousel
         [carouselItems]="config"
         customSlideWrapper="col-10 offset-1"

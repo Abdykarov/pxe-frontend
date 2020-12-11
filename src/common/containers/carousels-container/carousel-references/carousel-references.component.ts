@@ -13,10 +13,8 @@ import { IReference } from 'src/common/containers/carousels-container/models/mod
     encapsulation: ViewEncapsulation.None,
 })
 export class CarouselReferencesComponent extends AbstractComponent {
-
-    constructor() {
-        super();
-    }
+    public readonly width = 106;
+    public readonly height = 106;
 
     public maxHeight = null;
 
