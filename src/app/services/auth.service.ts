@@ -127,7 +127,7 @@ export class AuthService {
         return R_.containsAny(role, accessRole);
     }
 
-    public hashUserId = (id: string): string => CryptoJS.SHA3(id ?? '').toString();
+    public hashUserId = (id: string): string => (id ? CryptoJS.SHA3(id).toString() : null);
 
     public refreshTokenInterval = () => {
         this.startRefreshTokenInterval();
