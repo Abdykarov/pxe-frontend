@@ -27,5 +27,8 @@ export const signboardPageRoutes: Routes = [
     {
         path: 'signboard',
         component: SignboardComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];

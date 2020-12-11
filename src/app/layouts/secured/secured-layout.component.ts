@@ -166,7 +166,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
 
     ngOnDestroy() {
         super.ngOnDestroy();
-        this.renderer.removeClass(document.body, 'secure');
+        this.renderer.removeClass(document.body, 'secured');
         if (isPlatformBrowser(this.platformId)) {
             window.removeEventListener('storage', this.handleStoreChange);
         }
