@@ -115,8 +115,8 @@ export class AuthService {
             this.refreshTokenInterval$.subscribe();
         }
 
-        this.currentUserSubject$.subscribe( (jwtPayloadSubject: IJwtPayload) => {
-            this.gtmService.setUserId(this.hashedId(jwtPayloadSubject?.email));
+        this.currentUserSubject$.subscribe( (jwtPayloadSubjectSubject: IJwtPayload) => {
+            this.gtmService.setUserId(this.hashedId(jwtPayloadSubjectSubject?.email));
         });
     }
 
