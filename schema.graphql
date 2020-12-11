@@ -73,7 +73,7 @@ type Mutation {
     confirmFirstContractView: Boolean
     createGasSupplyPoint(gasAttributes: SupplyPointInputGasAttributes!, supplyPoint: SupplyPointInput!): Int
     createPowerSupplyPoint(powerAttributes: SupplyPointInputPowerAttributes!, supplyPoint: SupplyPointInput!): Int
-    deleteContract(contractId: ID!): Boolean
+    deleteUnfinishedSupplyPoint(supplyPointId: ID!): Boolean
     deleteOffer(offerId: ID!): Int
     deletePersonalData(contractId: ID!): Boolean
     deleteSelectedOfferFromContract(contractId: ID!): Boolean

@@ -9,7 +9,9 @@ import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 
 import * as R from 'ramda';
+import * as R_ from 'ramda-extension';
 import {
+    filter,
     map,
     takeUntil,
 } from 'rxjs/operators';
@@ -21,18 +23,21 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import { ContractStatus } from 'src/common/graphql/models/contract';
+import {
+    CONSTS,
+    RequestsOverviewBannerShow,
+    ROUTES,
+} from 'src/app/app.constants';
+import { confirmDeleteRequest } from 'src/app/pages/requests-overview/requests-overview.config';
 import { DateDiffPipe } from 'src/common/pipes/date-diff/date-diff.pipe';
 import { getOverviewState } from 'src/common/utils/get-overview-state.fnc';
 import {
     inArray,
     parseGraphQLErrors,
 } from 'src/common/utils';
+import { ModalService } from 'src/common/containers/modal/modal.service';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
 import { OverviewState } from './requests-overview.model';
-import {
-    RequestsOverviewBannerShow,
-    ROUTES,
-} from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -55,6 +60,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
     constructor(
         private cd: ChangeDetectorRef,
         private dateDiffPipe: DateDiffPipe,
+        private modalsService: ModalService,
         private navigateRequestService: NavigateRequestService,
         private router: Router,
         private supplyService: SupplyService,
@@ -93,11 +99,48 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
                     this.cd.markForCheck();
                 },
             );
+
+        this.modalsService.closeModalData$
+            .pipe(
+                filter(
+                    R.allPass([
+                        R_.isNotNil,
+                        R.propEq('modalType', CONSTS.MODAL_TYPE.CONFIRM_DELETE_REQUEST),
+                    ]),
+                ),
+            )
+            .subscribe(modal => {
+                if (modal.confirmed) {
+                    this.supplyService.deleteUnfinishedSupplyPoint(modal.data.id)
+                        .pipe(
+                            takeUntil(this.destroy$),
+                        )
+                        .subscribe(
+                            _ => {
+                                this.sourceSupplyPoints = R.filter(
+                                    (supplyPoint: ISupplyPoint) =>
+                                        R.path(['contract', 'contractId'], supplyPoint) !== modal.data.contract.contractId,
+                                )(this.sourceSupplyPoints);
+                                const { overviewState, supplyPoints } = getOverviewState(this.sourceSupplyPoints);
+                                this.supplyPoints = supplyPoints;
+                                this.state = overviewState;
+                                this.cd.markForCheck();
+                            },
+                            (error) => {
+                                const { globalError } = parseGraphQLErrors(error);
+                                this.globalError = globalError;
+                                this.cd.markForCheck();
+                            },
+                        );
+                }
+                this.modalsService.closeModalData$.next(null);
+            });
     }
 
-    public completeRequestAction = (supplyPoint: ISupplyPoint): void => {
-        this.navigateRequestService.routerToRequestStep(supplyPoint);
-    }
+    public completeRequestAction = (supplyPoint: ISupplyPoint): void => this.navigateRequestService.routerToRequestStep(supplyPoint);
+
+    public removeRequestAction = (supplyPoint: ISupplyPoint): void => this.modalsService
+        .showModal$.next(confirmDeleteRequest(supplyPoint))
 
     public newRequestAction = (evt): void => {
         evt.preventDefault();
