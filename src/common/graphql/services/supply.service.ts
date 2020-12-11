@@ -161,13 +161,18 @@ export class SupplyService {
         })
         .valueChanges
 
-    public findSupplyPointsByContractStatus = (contractStatus: ContractStatus[], identificationNumber: string = null) => this.apollo
+    public findSupplyPointsByContractStatus = (
+        contractStatus: ContractStatus[],
+        identificationNumber: string = null,
+        skipOfferValidity = false,
+    ) => this.apollo
         .watchQuery<any>({
             fetchPolicy: 'no-cache',
             query: findSupplyPointsByContractStatusQuery,
             variables: {
                 identificationNumber,
                 contractStatus,
+                skipOfferValidity,
             },
         })
         .valueChanges

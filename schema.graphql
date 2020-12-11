@@ -39,7 +39,7 @@ type Contract {
     deliveryFrom: Date
     deliveryTo: Date
     offer: Offer
-    offerValidity: Boolean!
+    offerValidity: Boolean
     personalData: PersonalData
     prolong: Boolean
     nextContractId: ID
