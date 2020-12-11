@@ -39,12 +39,19 @@
                     </div>
                 </ng-container>
             </div>
-            <div class="col-12 col-md-10 offset-md-2 col-xl-4 offset-xl-0 order-xl-2">
+            <div class="col-12 col-md-auto offset-md-2 offset-xl-0 order-xl-2 ml-xl-auto">
                 <div class="request-card__addon">
                     <lnd-button
                         label="Pokračovat"
                         type="primary"
-                        (click)="action.emit(supplyPoint)">
+                        customClass="mb-2"
+                        (click)="continueAction.emit(supplyPoint)">
+                    </lnd-button>
+                    <lnd-button
+                        *ngIf="!supplyPoint.contract?.previousContractId"
+                        label="Smazat"
+                        type="link-danger"
+                        (click)="removeAction.emit(supplyPoint)">
                     </lnd-button>
                 </div>
             </div>
