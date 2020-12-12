@@ -1,17 +1,21 @@
 <ng-template #slideTemplate let-item>
-    <div class="row carousel-references text-center text-md-left">
-        <div class="offset-md-4 col-12 col-md-4 mb-5">
-            <div class="row position-relative">
-                <div class="col-12 mb-5 mb-md-0 carousel-references__image-wrapper">
-                    <img [alt]="item.iconAlt" class="carousel-references__image" [src]="item.iconUrl" title="">
-                </div>
-                <div class="col-12 mb-3 carousel-references__title">
-                    “{{item.title}}“
-                </div>
-                <div class="col-12 carousel-references__name">
-                    {{item.name}}, {{item.city}}
-                </div>
-            </div>
+    <!-- <div class="row carousel-references text-center text-md-left">
+        <div class="col-12 mb-5 mb-md-0">
+            <img [alt]="item.iconAlt" class="carousel-references__image" [src]="item.iconUrl" title="">
+        </div>
+        <div class="col-12 mb-3 carousel-references__title">
+            “{{item.title}}“
+        </div>
+        <div class="col-12 carousel-references__name">
+            {{item.name}}, {{item.city}}
+        </div>
+    </div> -->
+
+    <div class="carousel-references">
+        <img class="carousel-references__image mb-3 mb-md-0" [src]="item.iconUrl" [alt]="item.iconAlt" title="">
+        <div class="carousel-references__text text-center text-md-left">
+            <blockquote class="carousel-references__citation mb-2">“{{item.title}}“</blockquote>
+            <p class="mb-0">{{item.name}}, {{item.city}}</p>
         </div>
     </div>
 </ng-template>
@@ -19,12 +23,12 @@
 <ng-template #customBeforeAppendTemplate let-activeSlide="activeSlide" let-setActiveSlide="setActiveSlide">
     <ul class="carousel-indicators"
          [ngStyle]="{'top': (maxHeight - 30) + 'px'}">
-        <li class="carousel-indicators__li" *ngFor="let item of carouselItems; let i = index"
+        <li class="carousel-indicators__item" *ngFor="let item of carouselItems; let i = index"
              [attr.aria-pressed]="i === activeSlide"
              (click)="setActiveSlide(i)" >
-            <span class="carousel-indicators__li--indicator"
-                  [class.carousel-indicators__li--indicator--is-active]="i === activeSlide"
-            ></span>
+            <a class="carousel-indicators__item--indicator"
+                  [class.carousel-indicators__item--indicator--is-active]="i === activeSlide"
+            ></a>
         </li>
     </ul>
 </ng-template>

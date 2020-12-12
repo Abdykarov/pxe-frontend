@@ -12,71 +12,76 @@
 // Component variables
 @import 'carousel-references.variables.scss';
 
-.carousel-references-wrapper {
-	.carousel-references {
 
-		&__image-wrapper {
-			@include media-breakpoint-up(md) {
-				position: absolute;
-				left: -($image-size + $image-margin-left);
-			}
+.carousel-references {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	// Media queries
+	@include media-breakpoint-up(md) {
+		flex-direction: row;
+	}
+
+	&__image {
+		height: $image-size;
+		width: $image-size;
+		margin-bottom: $spacer;
+		border-radius: $image-size;
+		box-shadow: -15px 20px 30px 0 rgba(0, 9, 16, .1);
+	}
+
+	&__text {
+		// Media queries
+		@include media-breakpoint-up(md) {
+			margin-left: $spacer;
 		}
-
-		&__image {
-			border-radius: 50%;
-			height: $image-size;
-			width: $image-size;
-			background-size: 100%;
-			box-shadow: -15px 20px 30px 0 rgba(0, 9, 16, .1);
-		}
-
-		&__title {
-			font-size: $h1-font-size-snd;
-			font-style: italic;
-		}
-
-		&__name {
-			font-size: $small-font-size;
+		@include media-breakpoint-up(xl) {
+			margin-left: ( $spacer * 2 );
 		}
 	}
 
-	.carousel {
-		.carousel-item {
-			position: static;
-			margin-right: 0;
-		}
+	&__citation {
+		font-size: $h1-font-size-snd;
+		font-style: italic;
+	}
 
-		.carousel-indicators {
-			position: absolute;
-			z-index: $zindex-indicators;
-			margin: 0;
+	&__name {
+		font-size: $small-font-size;
+	}
+}
 
-			&__li {
-				cursor: pointer;
-				padding-right: $clickable-size;
-				padding-left: $clickable-size;
-				opacity: 1;
-				text-indent: 0;
-				margin: 0 0 0 10px;
-				width: auto;
-				height: auto;
-				border: none;
+.carousel {
+	.carousel-item {
+		position: static;
+		margin-right: 0;
+	}
 
-				&::before {
-					display: none;
-				}
-
-				&--indicator {
-					display: inline-block;
-					height: $indicator-size;
-					width: $indicator-size;
-					background-color: $gray-100;
-					border-radius: 50%;
-
-					&--is-active {
-						background-color: #675996;
-					}
-				}
+	.carousel-indicators {
+		@include absolute-center(false);
+		display: flex;
+		margin: 0;
+		z-index: $zindex-indicators;
+	
+		&__item {
+			height: $indicator-size;
+			width: $indicator-size;
+			padding: 0;
+			background-color: $gray-100;
+			cursor: pointer;
+			border: none;
+			opacity: 1;
+	
+			&::before {
+				display: none;
+			}
+	
+			& + .carousel-indicators__item {
+				margin-left: ( $spacer * 2 );
+			}
+	
+			&--active {
+				background-color: #675996;
 			}
 		}
 	}
