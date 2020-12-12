@@ -16,9 +16,12 @@ body {
 
 .secured {
 	font-family: $font-family-sans-serif-secured;
-	font-size: $font-size-base-secured;
-	line-height: $line-height-base-secured;
-	color: $font-text-secured;
+}
+
+.public {
+	font-size: $font-size-base-public;
+	line-height: $line-height-base-public;
+	color: $font-text-public;
 }
 
 .h1--public,
