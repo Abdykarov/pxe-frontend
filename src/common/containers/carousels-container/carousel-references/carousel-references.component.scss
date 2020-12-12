@@ -62,7 +62,7 @@
 		display: flex;
 		margin: 0;
 		z-index: $zindex-indicators;
-	
+
 		&__item {
 			height: $indicator-size;
 			width: $indicator-size;
@@ -71,15 +71,15 @@
 			cursor: pointer;
 			border: none;
 			opacity: 1;
-	
+
 			&::before {
 				display: none;
 			}
-	
+
 			& + .carousel-indicators__item {
 				margin-left: ( $spacer * 2 );
 			}
-	
+
 			&--active {
 				background-color: #675996;
 			}
