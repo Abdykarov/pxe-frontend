@@ -9,8 +9,9 @@ import { fileUploaderFactory } from 'src/app/pages/import/upload/upload.config';
 import { FileItem, FileUploader } from 'src/third-sides/file-upload';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AbstractFormComponent } from '../form/abstract-form.component';
-import { errorFieldMessages, importErrorCodes } from '../../constants/errors.constant';
+import { errorFieldMessages } from '../../constants/errors.constant';
 import { inArray } from '../../utils';
+import { FileUploaderCustom } from 'src/third-sides/file-upload/file-uploader-custom';
 
 @Component({
     selector: 'pxe-ask-for-offer-container',
@@ -29,7 +30,7 @@ import { inArray } from '../../utils';
 export class AskForOfferContainerComponent extends AbstractFormComponent implements OnInit {
 
     constructor(
-        @Inject(FILE_UPLOAD_CONFIG) public fileUploader: FileUploader,
+        @Inject(FILE_UPLOAD_CONFIG) public fileUploader: FileUploaderCustom,
         protected fb: FormBuilder,
     ) {
         super(fb);
@@ -69,11 +70,6 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
                 this.fileUploader.removeFromQueue(fileItem);
             }
         };
-
-        this.fileUploader.onBuildItemForm = (item, form) => {
-            form.append('email', this.form.getRawValue().email);
-        };
-
     }
 
     public removeFile = (item) => this.fileUploader.removeFromQueue(item);
@@ -82,7 +78,9 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
         console.log('__');
         console.log(this.form);
         if (this.fileUploader.queue.length > 0 && this.form.valid) {
-            this.fileUploader.uploadAll();
+            this.fileUploader.uploadAllFiles({
+                email: this.form.getRawValue().email,
+            });
             console.log('JSEM VALIDNI');
         } else {
             console.log('NEJSEM VALIDNI');

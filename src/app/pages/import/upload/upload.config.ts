@@ -1,14 +1,14 @@
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
-import { FileUploader } from 'src/third-sides/file-upload';
+import { FileUploaderCustom } from 'src/third-sides/file-upload/file-uploader-custom';
 import { transformHttpHeadersToFileUploaderFormat } from 'src/common/utils';
 
 export const fileUploaderFactory = (
     url: string,
     itemAlias: string,
     withHeaders: boolean,
-): Function => (authService: AuthService) => (new FileUploader( {
+): Function => (authService: AuthService) => (new FileUploaderCustom( {
     url: `${environment.url_api}/v1.0/${url}`,
     itemAlias: itemAlias,
-    ...(withHeaders) && {headers: transformHttpHeadersToFileUploaderFormat(authService.getAuthorizationHeaders())},
+    headers: transformHttpHeadersToFileUploaderFormat(authService.getAuthorizationHeaders()),
 }));
