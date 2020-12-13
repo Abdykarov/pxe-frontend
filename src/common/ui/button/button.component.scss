@@ -301,6 +301,8 @@
 	&.btn-public {
 		min-width: $btn-width-public;
 		min-height: $btn-height-public;
+		padding: $spacer ( $spacer * 2 );
+		font-size: $font-size-base-public;
 	}
 
 	&-sm {

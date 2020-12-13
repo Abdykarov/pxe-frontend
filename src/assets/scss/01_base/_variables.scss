@@ -30,6 +30,8 @@ $font-header:                      #2b4762;
 $font-text:                        #2b4762;
 $font-secondary:                   #919191;
 
+$font-text-public:                 #496480;
+
 $text-muted:                       $font-secondary;
 
 $primary:                          #0097ff;                    // Primary color
@@ -123,10 +125,13 @@ $body-max-width:                   1366px;
 
 
 // Typography
-$font-family-sans-serif:           'roboto_mono', arial;
-$font-family-sans-serif-public:    'space_mono', arial;
+$font-family-sans-serif:           'roboto', arial;
+$font-family-sans-serif-secured:   'roboto_mono', arial;
 $font-size-base:                   .875rem;
 $line-height-base:                 ( 24 / 14 );
+$font-size-base-public:            1rem;
+$line-height-base-public:          ( 28 / 16 );
+
 $small-font-size:                  .75rem;
 $line-height-sm:                   ( 16 / 12 );
 $perex-font-size:                  1.125rem;
