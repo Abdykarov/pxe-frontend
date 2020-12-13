@@ -16,6 +16,9 @@ export class FileUploaderComponent {
     @Input()
     public uploader: FileUploader;
 
+    @Input()
+    public multiple = false;
+
     @Output()
     public fileSelectAction: EventEmitter<any> = new EventEmitter();
 
