@@ -6,45 +6,57 @@
 <div class="static-pages-holder">
     <div class="static-pages static-pages--bg-transparent">
         <div class="row">
-            <div class="col-12 text-center">
+            <div class="col-12 text-center mb-3">
                 <pxe-file-uploader
                     [uploader]="fileUploader"
                     [multiple]="true"
                     mainText="Soubory přetáhněte sem nebo "
                     secondaryText="Formáty: PDF, JPG, PNG, TIFF do velikosti 10 MB."
                     [labelFromMainText]="true">
-                ></pxe-file-uploader>
+                </pxe-file-uploader>
+            </div>
+            <div class="col-12">
+                <lnd-alert
+                    *ngIf="true"
+                    type="danger">
+                    Prosím nahrajte soubory ve správném formátu.
+                </lnd-alert>
+            </div>
+            <div class="col-12 mb-3">
+                <span class="d-inline-flex align-items-center mr-4 mb-2"
+                    *ngFor="let fileItem of files">
+                    <span class="icon icon--document mr-2"></span>
+                    {{fileItem.name}}
+                    <!-- <span (click)="removeFile(fileItem)">REMOVE</span> -->
+                    <lnd-button
+                        (click)="removeFile(aaa)"
+                        icon="icon--delete"
+                        variant="icon"
+                        type="icon">
+                    </lnd-button>
+                </span>
+            </div>
+            <div class="col-12">
+                <form
+                    class="form-container"
+                    autocomplete="off">
+                    <ng-container *ngIf="true">
+                        <lnd-form-field
+                            [id]="'email'"
+                            label="E-mail"
+                            infoText="Založíme vám účet zdarma pro zadaný registrační e-mail. Spamu se nemusíte bát."
+                        ></lnd-form-field>
+                        <div class="text-right">
+                            <lnd-button
+                                type="primary"
+                                [submit]="true"
+                                (action)="submitForm($event)"
+                                label="odesllat">
+                            </lnd-button>
+                        </div>
+                    </ng-container>
+                </form>
             </div>
         </div>
-        <lnd-alert
-            *ngIf="true"
-            type="danger">
-            Soubory s nepodporovanými formáty nebyly nahrány.<br>
-        </lnd-alert>
-        <h5 style="width: 100%;float: left;background-color: red;margin-bottom: 20px" *ngFor="let fileItem of files">
-            {{fileItem.name}}
-            <span (click)="removeFile(fileItem)">
-        REMOVE
-    </span>
-        </h5>
-        <form
-            class="form-container"
-            autocomplete="off">
-            <ng-container *ngIf="true">
-                <lnd-form-field
-                    [id]="'email'"
-                    label="E-mail"
-                    infoText="Založíme vám účet zdarma pro zadaný registrační e-mail. Spamu se nemusíte bát."
-                ></lnd-form-field>
-                <div class="text-right">
-                    <lnd-button
-                        type="primary"
-                        [submit]="true"
-                        (action)="submitForm($event)"
-                        label="odesllat">
-                    </lnd-button>
-                </div>
-            </ng-container>
-        </form>
     </div>
 </div>

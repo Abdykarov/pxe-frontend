@@ -16,13 +16,14 @@
     <p
         [ngClass]="mainTextCustomClass"
          class="mb-1">
-        {{mainText}}<label for="file-upload" class="drop-zone__control"
-                       [ngClass]="labelCustomClass"
-                       *ngIf="labelFromMainText">
-                        nahrajte.
-                    </label>
+        {{mainText}}
+        <label for="file-upload" class="drop-zone__control"
+            [ngClass]="labelCustomClass"
+            *ngIf="labelFromMainText">
+            nahrajte
+        </label>.
     </p>
-    <p class="mb-3"
+    <p class="mb-0 small text-color--gray-200"
        [ngClass]="secondaryTextCustomClass">
         {{secondaryText}}
     </p>
