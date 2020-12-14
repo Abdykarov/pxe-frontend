@@ -26,16 +26,17 @@ $gray-1000:                        #000;                       // Gray level 100
 $white:                            $gray-000;
 $black:                            $gray-1000;
 
-$font-header:                      #496480;
-$font-text:                        #496480;
+$font-header:                      #2b4762;
+$font-text:                        #2b4762;
 $font-secondary:                   #919191;
 
-$font-text-secure:                 #2b4762;
+$font-text-public:                 #496480;
 
 $text-muted:                       $font-secondary;
 
 $primary:                          #0097ff;                    // Primary color
 $primary-dark:                     #0088e5;
+$primary-darken:                   #0353ce;
 $secondary-lighten:                #926ece;                    // Secondary color
 $secondary:                        #7355a6;
 $secondary-dark:                   darken($secondary, 5%);
@@ -58,6 +59,8 @@ $light-dark:                       darken($light, 15%);
 $light-darken:                     darken($light, 25%);
 $disabled:                         #f7f9fb;                    // Disabled color
 
+$gradient-blue-light:              $primary;                     // Gradient blue light
+$gradient-blue-dark:               $primary-darken;              // Gradient blue dark, cold
 $gradient-violet-light:            $secondary;                   // Gradient violet light
 $gradient-violet-dark:             $secondary-dark;              // Gradient violet dark
 
@@ -126,13 +129,12 @@ $body-max-width:                   1366px;
 
 // Typography
 $font-family-sans-serif:           'roboto', arial;
-$font-size-base:                   1rem;
-$font-size-base-px:                16px;
-$line-height-base:                 ( 28 / 16 );
+$font-size-base-public:            1rem;
+$line-height-base-public:          ( 28 / 16 );
 
-$font-family-sans-serif-secure:    'roboto_mono', arial;
-$font-size-base-secure:            .875rem;
-$line-height-base-secure:          ( 24 / 14 );
+$font-family-sans-serif-secured:   'roboto_mono', arial;
+$font-size-base:                   .875rem;
+$line-height-base:                 ( 24 / 14 );
 
 $small-font-size:                  .75rem;
 $line-height-sm:                   ( 16 / 12 );

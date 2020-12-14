@@ -230,6 +230,8 @@ $colors: (
 	icons-primary:                 $icons-primary,
 	icons-active:                  $icons-active,
 	icons-inactive:                $icons-inactive,
+	gradient-blue-light:           $gradient-blue-light,
+	gradient-blue-dark:            $gradient-blue-dark,
 	gradient-violet-light:         $gradient-violet-light,
 	gradient-violet-dark:          $gradient-violet-dark,
 );
@@ -254,12 +256,12 @@ $colors: (
 
 @mixin generate-gradient($name-color, $start-color, $end-color) {
 	.bg--gradient-#{$name-color} {
-		background: linear-gradient(90deg, $start-color 10%, $end-color 90%);
+		background: linear-gradient(143deg, $start-color 0%, $end-color 100%);
 	}
 }
 
+@include generate-gradient(blue, $gradient-blue-light, $gradient-blue-dark);
 @include generate-gradient(violet, $gradient-violet-light, $gradient-violet-dark);
-
 
 
 /*

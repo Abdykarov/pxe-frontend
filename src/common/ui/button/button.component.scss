@@ -292,6 +292,19 @@
 		@include button-ghost-color($gray-200);
 	}
 
+	&.btn-gradient-primary {
+		color: $white;
+		background: linear-gradient(143deg, $gradient-blue-light 0%, $gradient-blue-dark 100%);
+		border: none;
+	}
+
+	&.btn-public {
+		min-width: $btn-width-public;
+		min-height: $btn-height-public;
+		padding: $spacer ( $spacer * 2 );
+		font-size: $font-size-base-public;
+	}
+
 	&-sm {
 		min-width: auto;
 		min-height: $btn-height-small;

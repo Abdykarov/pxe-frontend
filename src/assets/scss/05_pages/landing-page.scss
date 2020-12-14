@@ -71,6 +71,12 @@
 			}
 		}
 
+		&--gradient-blue {
+			&::before {
+				background: linear-gradient(90deg, $gradient-blue-light 10%, $gradient-blue-dark 90%);
+			}
+		}
+
 		&--gradient-violet {
 			&::before {
 				background: linear-gradient(90deg, $gradient-violet-light 10%, $gradient-violet-dark 90%);

@@ -14,11 +14,14 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.secure {
-	font-family: $font-family-sans-serif-secure;
-	font-size: $font-size-base-secure;
-	line-height: $line-height-base-secure;
-	color: $font-text-secure;
+.secured {
+	font-family: $font-family-sans-serif-secured;
+}
+
+.public {
+	font-size: $font-size-base-public;
+	line-height: $line-height-base-public;
+	color: $font-text-public;
 }
 
 .h1--public,
