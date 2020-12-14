@@ -1,0 +1,50 @@
+<div class="row static-pages-holder">
+    <div class="col">
+        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+    </div>
+</div>
+<div class="static-pages-holder">
+    <div class="static-pages static-pages--bg-transparent">
+        <div class="row">
+            <div class="col-12 text-center">
+                <pxe-file-uploader
+                    [uploader]="fileUploader"
+                    [multiple]="true"
+                    mainText="Soubory přetáhněte sem nebo "
+                    secondaryText="Formáty: PDF, JPG, PNG, TIFF do velikosti 10 MB."
+                    [labelFromMainText]="true">
+                ></pxe-file-uploader>
+            </div>
+        </div>
+        <lnd-alert
+            *ngIf="true"
+            type="danger">
+            Soubory s nepodporovanými formáty nebyly nahrány.<br>
+        </lnd-alert>
+        <h5 style="width: 100%;float: left;background-color: red;margin-bottom: 20px" *ngFor="let fileItem of files">
+            {{fileItem.name}}
+            <span (click)="removeFile(fileItem)">
+        REMOVE
+    </span>
+        </h5>
+        <form
+            class="form-container"
+            autocomplete="off">
+            <ng-container *ngIf="true">
+                <lnd-form-field
+                    [id]="'email'"
+                    label="E-mail"
+                    infoText="Založíme vám účet zdarma pro zadaný registrační e-mail. Spamu se nemusíte bát."
+                ></lnd-form-field>
+                <div class="text-right">
+                    <lnd-button
+                        type="primary"
+                        [submit]="true"
+                        (action)="submitForm($event)"
+                        label="odesllat">
+                    </lnd-button>
+                </div>
+            </ng-container>
+        </form>
+    </div>
+</div>

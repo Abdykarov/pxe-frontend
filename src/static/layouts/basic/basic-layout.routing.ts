@@ -13,6 +13,10 @@ import {
     alertsPageRoutes,
 } from 'src/static/atoms/alerts/page.module';
 import {
+    AskForOfferFilePageModule,
+    askForOfferFilePageRoutes,
+} from 'src/static/organisms/ask-for-offer-file-uploader/page.module';
+import {
     BadgesPageModule,
     badgesPageRoutes,
 } from 'src/static/atoms/badges/page.module';
@@ -207,6 +211,7 @@ const routes: Routes = [
         children: [
             ...accordionPageRoutes,
             ...alertsPageRoutes,
+            ...askForOfferFilePageRoutes,
             ...badgesPageRoutes,
             ...bannersPageRoutes,
             ...breadcrumbPageRoutes,
@@ -265,6 +270,7 @@ const routes: Routes = [
     imports: [
         AccordionPageModule,
         AlertsPageModule,
+        AskForOfferFilePageModule,
         BadgesPageModule,
         BannersPageModule,
         BreadcrumbPageModule,

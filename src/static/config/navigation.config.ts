@@ -95,6 +95,10 @@ export const staticNavigationConfig: INavigationConfig = [
             'icon': 'component-middle',
             'children': [
                 {
+                    'label': 'Ask for offer',
+                    'url': '/basic/ask-for-offer-file-uploader',
+                },
+                {
                     'label': 'Breadcrumb',
                     'url': '/basic/breadcrumb',
                 },
