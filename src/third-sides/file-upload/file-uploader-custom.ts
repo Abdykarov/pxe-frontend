@@ -49,6 +49,12 @@ export class FileUploaderCustom extends FileUploader {
         xhr.onabort = () => {
             this.onErrorItem(fakeitem, null, xhr.status, null);
         };
+
+        xhr.upload.onprogress = (event: any) => {
+            const progress = Math.round(event.lengthComputable ? event.loaded * 100 / event.total : 0);
+            this._onProgressItem(fakeitem, progress);
+        };
+
         xhr.open('POST', this.options.url, true);
         xhr.withCredentials = true;
         if (this.options.headers) {

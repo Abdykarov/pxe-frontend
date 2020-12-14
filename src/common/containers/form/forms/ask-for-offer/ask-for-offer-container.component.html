@@ -1,7 +1,15 @@
 <pxe-file-uploader
     [uploader]="fileUploader"
-    [multiple]="true">
+    [multiple]="true"
+    mainText="Soubory přetáhněte sem nebo "
+    secondaryText="Formáty: PDF, JPG, PNG, TIFF do velikosti 10 MB."
+    [labelFromMainText]="true">
 ></pxe-file-uploader>
+<lnd-alert
+    *ngIf="errors.length"
+    type="danger">
+    {{ errors[0] }}<br>
+</lnd-alert>
 <h5 style="width: 100%;float: left;background-color: red;margin-bottom: 20px" *ngFor="let aaa of fileUploader.queue; let i = index">
     {{aaa.file.name}}
     {{aaa.file.type}}

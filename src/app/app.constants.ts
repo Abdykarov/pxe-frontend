@@ -12,8 +12,6 @@ export const CONSTS = {
     APPEND_AFTER_CUT_TEXT: '...',
     ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],
     ASK_FOR_OFFER: {
-        MAX_FILE_COUNT: 10,
-        MAX_FILE_SIZE: 5000000000,
         ALLOWED_MINE_TYPE: [
             'image/bmp',
             'application/bmp',
@@ -24,6 +22,13 @@ export const CONSTS = {
             'application/png',
             'image/tiff',
         ],
+        ERROR_CODES: {
+            FILE_TYPE: 'FILE_TYPE',
+            FILE_COUNT: 'FILE_COUNT',
+            FILE_SIZE: 'FILE_SIZE',
+        },
+        MAX_FILE_COUNT: 10,
+        MAX_FILE_SIZE: 10485760,
     },
     CRYPTO: {
         get SALT() {

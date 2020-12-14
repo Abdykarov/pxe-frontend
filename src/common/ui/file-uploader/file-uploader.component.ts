@@ -22,5 +22,29 @@ export class FileUploaderComponent {
     @Output()
     public fileSelectAction: EventEmitter<any> = new EventEmitter();
 
+    @Input()
+    public wrapperCustomClass = '';
+
+    @Input()
+    public mainTextCustomClass = '';
+
+    @Input()
+    public mainText = 'Přetáhněte vyplněnou excelovskou tabulku';
+
+    @Input()
+    public secondaryTextCustomClass = '';
+
+    @Input()
+    public secondaryText = 'nebo';
+
+    @Input()
+    public inputCustomClass = '';
+
+    @Input()
+    public labelCustomClass = '';
+
+    @Input()
+    public labelFromMainText = false;
+
     public hasBaseDropZoneOver = false;
 }
