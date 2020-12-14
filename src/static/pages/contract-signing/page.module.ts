@@ -31,5 +31,8 @@ export const contractSigningPageRoutes: Routes = [
     {
         path: 'contract-signing',
         component: ContractSigningPageComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];
