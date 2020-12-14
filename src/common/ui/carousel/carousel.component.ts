@@ -119,7 +119,7 @@ export class CarouselComponent extends AbstractResizeComponent implements OnInit
     public setHeights = (): void => {
         this.innerCarousel.style.height = '';
         this.maxHeightSlide = this.getMaxHeightSlide();
-        this.innerCarousel.style.height = (this.maxHeightSlide) + 'px';
+        this.innerCarousel.style.height = (this.maxHeightSlide + 40) + 'px';
         this.maxHeightChangeAction.emit(this.maxHeightSlide);
     }
 }

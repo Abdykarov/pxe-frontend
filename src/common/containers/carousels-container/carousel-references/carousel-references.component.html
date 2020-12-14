@@ -22,13 +22,12 @@
 
 <ng-template #customBeforeAppendTemplate let-activeSlide="activeSlide" let-setActiveSlide="setActiveSlide">
     <ul class="carousel-indicators"
-         [ngStyle]="{'top': (maxHeight - 30) + 'px'}">
+         [ngStyle]="{'top': (maxHeight + 10) + 'px'}">
         <li class="carousel-indicators__item" *ngFor="let item of carouselItems; let i = index"
-             [attr.aria-pressed]="i === activeSlide"
-             (click)="setActiveSlide(i)" >
-            <a class="carousel-indicators__item--indicator"
-                  [class.carousel-indicators__item--indicator--is-active]="i === activeSlide"
-            ></a>
+            [attr.aria-pressed]="i === activeSlide"
+            (click)="setActiveSlide(i)"
+            [class.carousel-indicators__item--active]="i === activeSlide">
+            <span class="carousel-indicators__indicator"></span>
         </li>
     </ul>
 </ng-template>

@@ -64,25 +64,36 @@
 		z-index: $zindex-indicators;
 
 		&__item {
-			height: $indicator-size;
-			width: $indicator-size;
-			padding: 0;
-			background-color: $gray-100;
 			cursor: pointer;
-			border: none;
-			opacity: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: auto;
+			height: auto;
+			padding: ( $spacer / 2 );
+			border: none;	
+			opacity: .2;		
 
 			&::before {
 				display: none;
 			}
 
-			& + .carousel-indicators__item {
-				margin-left: ( $spacer * 2 );
+			&:focus,
+			&:hover {
+				opacity: .5;
 			}
 
 			&--active {
-				background-color: #675996;
+				opacity: 1;
 			}
+		}
+
+		&__indicator {
+			display: block;
+			width: $indicator-size;
+			height: $indicator-size;
+			background-color: $font-text;
+			border-radius: $indicator-size;
 		}
 	}
 }
