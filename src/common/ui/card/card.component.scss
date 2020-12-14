@@ -34,15 +34,11 @@
 		height: $card-img-size;
 		margin-bottom: $card-spacer-y;
 		border-radius: $card-img-size;
+		box-shadow: $card-img-box-shadow;
 	}
 }
 
 ::ng-deep .card-tiles {
-	// Media queries
-	@include media-breakpoint-up(md) {
-		overflow: hidden;
-	}
-
 	&__inner {
 		// Media queries
 		@include media-breakpoint-up(xl) {
