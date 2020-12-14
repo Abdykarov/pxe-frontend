@@ -74,6 +74,11 @@
 				border-right: none;
 			}
 		}
+
+		&--last-item {
+			padding-bottom: ( $spacer / 2 );
+			border-bottom: none;
+		}
 	}
 }
 
