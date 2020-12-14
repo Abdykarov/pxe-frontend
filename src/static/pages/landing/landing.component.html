@@ -8,10 +8,10 @@
 </ng-template>
 
 <div class="landing-page">
-    <div class="container-fluid container-fluid--max-width container-fluid--light">
-        <div class="section">
-            <div class="row">
-                <div class="col-12 col-xl-7 order-xl-2">
+    <div class="section section--bg section--dark-gray">
+        <div class="container-fluid container-fluid--max-width container-fluid--light">
+            <div class="row align-items-xl-center">
+                <div class="col-12 col-md-6 col-xl-7 order-md-2">
                     <div class="section-video-holder text-center d-none d-md-block">
                         <video
                             #video
@@ -25,24 +25,24 @@
                             loop
                             muted
                             preload="none">
-                            <source src="/assets/images/signboard/.mp4" type="video/mp4">
+                            <source src="/assets/images/landing-page/lp-video.mp4" type="video/mp4">
                             Váš prohlížeč nepodporuje zobrazení videa
                         </video>
                     </div>
-                    <div class="section-video-text order-xl-1">
+                    <div class="section-video-text order-md-1">
                         <div class="row w-100 ml-0 text-center">
-                            <div class="col-12 col-md-6 offset-md-1">
+                            <div class="col-12">
                                 <lnd-button
                                     type="icon"
                                     icon="icon--triangle-right"
                                     variant="icon"
-                                    customClass="btn-video-play mb-1"
+                                    customClass="btn-video-play mb-2"
                                 >
                                 </lnd-button>
-                                <h2 class="h2--public mb-2">
-                                    Video o službě parc4u
+                                <h2 class="h3--public mb-1">
+                                    Co je parc4u
                                 </h2>
-                                <p class="mb-0">Přehrajte si krátké video o službě parc4u</p>
+                                <a href="#">Přehrát video</a>
                             </div>
                         </div>
                     </div>
@@ -56,18 +56,22 @@
                         Vyřešíme to za vás. Nabídneme vám jen solidní dodavatele, výhodnou cenu a postaráme se o smlouvu i převod. A příští rok zase.<br>
                         <span class="text-secondary">parc4u = elektřina a plyn bez starostí.</span>
                     </p>
-                    <lnd-button
-                        label="Chci vidět nabídky"
-                        type="gradient-primary"
-                        customClass="btn-public btn--icon-right"
-                        icon="icon--arrow-right"
-                        iconPosition="right">
-                    </lnd-button>
+                    <div class="text-center text-md-left">
+                        <lnd-button
+                            label="Chci vidět nabídky"
+                            type="gradient-primary"
+                            customClass="btn-public btn--icon-right"
+                            icon="icon--arrow-right"
+                            iconPosition="right">
+                        </lnd-button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="section">
-            <div class="row text-center text-md-left">
+    </div>
+    <div class="section section--bg section--dark-gray pt-3 pt-md-0 pb-xl-6">
+        <div class="container-fluid container-fluid--max-width container-fluid--light">
+            <div class="row text-center mb-xl-6 text-md-left">
                 <div class="col-12 col-md-4 mb-6 mb-md-0">
                     <div class="row">
                         <div class="col-12 col-xl-3 mb-3">
@@ -102,10 +106,17 @@
                     </div>
                 </div>
             </div>
+            <div class="row d-none d-xl-flex">
+                <div class="col-12 text-center">
+                    <a class="link-next-section" href="#">
+                        <span class="icon icon--arrow-right link-next-section__icon"></span>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="container-fluid container-fluid--max-width container-fluid--light">
-        <!-- <div class="section how-it-work section--picture-bg-overlap">
+    <!-- <div class="container-fluid container-fluid--max-width container-fluid--light">
+        <div class="section how-it-work section--picture-bg-overlap">
             <div class="row px-3 px-md-0">
                 <div class="col-12 col-md-8 offset-md-2 col-xl-10 offset-xl-1">
                     <h2 class="h2--public mb-5">
@@ -133,8 +144,8 @@
                     </ol>
                 </div>
             </div>
-        </div> -->
-        <!-- <div class="section section--video pb-md-0">
+        </div>
+        <div class="section section--video pb-md-0">
             <div class="section-video-holder text-center d-none d-md-block">
                 <img
                     class="img-fluid"
@@ -158,8 +169,8 @@
                     </div>
                 </div>
             </div>
-        </div> -->
-    </div>
+        </div>
+    </div> -->
     <!-- <div class="section section--picture-half pb-xl-0">
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
@@ -290,7 +301,7 @@
     <div class="section section--bg section--light-gray">
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
-                <div class="col-12">
+                <div class="col-12 text-center text-xl-left">
                     <h2 class="h4--public text-secondary">S čím vám Pomůžeme</h2>
                     <p>komponenta Card</p>
                 </div>
@@ -349,12 +360,17 @@
     <div class="section section--bg section--light-gray">
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
-                <div class="col-12 col-md-8 offset-md-2 col-xl-12 offset-xl-0">
+                <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-0">
                     <h2 class="h4--public text-secondary">Férové ceny energií</h2>
-                    <h3 class="h3--public">Porovnejte nabídky vybraných dodavatelů elektřiny</h3>
+                    <h3 class="h2--public">Porovnejte nabídky vybraných dodavatelů elektřiny</h3>
                     <p>Níže najdete porovnání úspor vůči hlavní dodavatelům v kraji.</p>
                     <p>taby</p>
-                    <p class="small">Úspora s PXE je vypočítána vůči dominantnímu dodavateli PRE (ceník elektřina), při odběru 24 MWh v tarifu D56d. Ceny jsou včetně DPH.</p>
+                </div>
+                <div class="col-12">
+                    <p>carousel</p>
+                </div>
+                <div class="col-12 col-md-8 offset-md-2 col-xl-12 offset-xl-0">
+                    <p>Úspora s PXE je vypočítána vůči dominantnímu dodavateli PRE (ceník elektřina), při odběru 24 MWh v tarifu D56d. Ceny jsou včetně DPH.</p>
                     <lnd-button
                         label="Chci vidět nabídky"
                         type="gradient-primary"
@@ -390,16 +406,19 @@
     <div class="section section-help">
         <div class="container-fluid container-fluid--max-width container-fluid--light">
             <div class="row px-3">
-                <div class="col-12 col-xl-8 offset-xl-2 mb-3">
+                <div class="col-12 col-xl-8 offset-xl-2 mb-3 text-md-center">
                     <h2 class="h2--public">Často kladené dotazy</h2>
                 </div>
                 <div class="col-12 col-xl-8 offset-xl-2 mb-3">
                     <lnd-accordion [accordionItems]="accordionItems" title="Často kladené dotazy"></lnd-accordion>
                 </div>
-                <div class="col-12 col-xl-8 offset-xl-2 mb-3">
+                <div class="col-12 col-xl-8 offset-xl-2">
                     <div class="row">
                         <div class="col-12 col-md-6">
-                            <a href="#">Další dotazy</a>
+                            <a class="text-with-icon text-with-icon--link text-with-icon--icon-right mb-0">
+                                <span class="text-with-icon__text text-body">Další dotazy</span>
+                                <span class="icon icon--add-new text-with-icon__icon text-with-icon__icon--public"></span>
+                            </a>
                         </div>
                         <div class="col-12 col-md-6 text-md-right">
                             Nenašli jste odpověď? Napište nám na <a href="mailto:info@parc4u.cz">info@parc4u.cz</a>
@@ -448,10 +467,18 @@
             </div>
         </div>
     </div>
-    <div class="section">
+    <div class="section section--bg section--gradient-violet">
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
-                <div class="col-12">
+                <div class="col-12 col-md-8 offset-md-2 col-xl-4 offset-xl-1">
+                    <h2 class="h2--public text-white">Nechcete nic vyplňovat? Nemusíte!</h2>
+                    <ol class="numerical-list-stepper">
+                        <li class="active">Vložte Vaši poslední fakturu za elektřinu nebo plyn.</li>
+                        <li>Zadejte váš email a my vám pošleme nabídky na míru. 
+                            Zdarma a nezávazně.</li>
+                    </ol>
+                </div>
+                <div class="col-12 col-md-8 offset-md-2 col-xl-5 offset-xl-1">
                     <h2>File upload</h2>
                 </div>
             </div>
