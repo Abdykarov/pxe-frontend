@@ -11,6 +11,20 @@ import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 export const CONSTS = {
     APPEND_AFTER_CUT_TEXT: '...',
     ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],
+    ASK_FOR_OFFER: {
+        MAX_FILE_COUNT: 10,
+        MAX_FILE_SIZE: 5000000000,
+        ALLOWED_MINE_TYPE: [
+            'image/bmp',
+            'application/bmp',
+            'image/jpg',
+            'image/jpeg',
+            'application/pdf',
+            'image/png',
+            'application/png',
+            'image/tiff',
+        ],
+    },
     CRYPTO: {
         get SALT() {
             return CryptoJS.lib.WordArray.random(128 / 8);

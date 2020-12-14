@@ -1,17 +1,18 @@
 import {
     Component,
-    Inject, OnInit,
+    Inject,
+    OnInit,
 } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 import { AuthService } from 'src/app/services/auth.service';
-import { CONSTS, FILE_UPLOAD_CONFIG } from 'src/app/app.constants';
-import { fileUploaderFactory } from 'src/app/pages/import/upload/upload.config';
-import { FileItem, FileUploader } from 'src/third-sides/file-upload';
-import { FormBuilder, Validators } from '@angular/forms';
-import { AbstractFormComponent } from '../form/abstract-form.component';
-import { errorFieldMessages } from '../../constants/errors.constant';
-import { inArray } from '../../utils';
+import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
+import { FILE_UPLOAD_CONFIG } from 'src/app/app.constants';
+import { FileItem } from 'src/third-sides/file-upload';
 import { FileUploaderCustom } from 'src/third-sides/file-upload/file-uploader-custom';
+import { fileUploaderFactory } from 'src/app/pages/import/upload/upload.config';
+import { formFields } from './ask-for-offer-container.config';
+import { inArray } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-ask-for-offer-container',
@@ -28,36 +29,17 @@ import { FileUploaderCustom } from 'src/third-sides/file-upload/file-uploader-cu
     ],
 })
 export class AskForOfferContainerComponent extends AbstractFormComponent implements OnInit {
+    public readonly allowedMineTypes = this.CONSTS.ASK_FOR_OFFER.ALLOWED_MINE_TYPE;
+    public readonly maxFileCount = this.CONSTS.ASK_FOR_OFFER.MAX_FILE_COUNT;
+    public readonly maxFileSize = this.CONSTS.ASK_FOR_OFFER.MAX_FILE_SIZE;
 
     constructor(
         @Inject(FILE_UPLOAD_CONFIG) public fileUploader: FileUploaderCustom,
         protected fb: FormBuilder,
     ) {
         super(fb);
-        this.formFields = {
-            controls: {
-                email: [
-                    '',
-                    [
-                        Validators.required,
-                        Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.EMAIL_LOGIN),
-                        Validators.email,
-                    ],
-                ],
-            },
-            validationMessages: {
-                email: {
-                    required: errorFieldMessages.email.required,
-                    email: errorFieldMessages.email.email,
-                    invalidEmail: errorFieldMessages.email.email,
-                    maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
-                },
-            },
-        };
+        this.formFields = formFields;
     }
-
-    public allowedMineTypes = ['image/bmp', 'application/bmp', 'image/jpg', 'image/jpeg', 'application/pdf', 'image/png', 'application/png', 'image/tiff'];
-    public maxFileSize = 5000000000;
 
     ngOnInit() {
         super.ngOnInit();

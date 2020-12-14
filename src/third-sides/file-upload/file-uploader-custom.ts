@@ -1,7 +1,10 @@
 import * as R from 'ramda';
 
 import { FileItem } from './file-item.class';
-import { FileUploader, FileUploaderOptions } from './file-uploader.class';
+import {
+    FileUploader,
+    FileUploaderOptions,
+} from './file-uploader.class';
 
 export class FileUploaderCustom extends FileUploader {
     constructor(options: FileUploaderOptions) {
