@@ -5,9 +5,10 @@
  */
 
 
+$card-max-width:                    300px;
 $card-bg:                           transparent;
 $card-border-width:                 1px;
-$card-border-color:                 rgba($border-color, .3);
+$card-border-color:                 rgba(#979797, .1);
 $card-border:                       $card-border-width solid $card-border-color;
 $card-border-radius:                0;
 $card-spacer-x:                     0;
