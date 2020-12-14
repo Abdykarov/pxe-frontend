@@ -13,10 +13,21 @@
             <div class="row">
                 <div class="col-12 col-xl-7 order-xl-2">
                     <div class="section-video-holder text-center d-none d-md-block">
-                        <img
-                            class="img-fluid"
-                            src="/assets/images/landing-page/laptop-contour.png"
-                            alt="parc4u - video o službě parc4u">
+                        <video
+                            #video
+                            disablePictureInPicture
+                            [class.cursor-pointer]="isVideoPlaying"
+                            (click)="isVideoPlaying && pause($event)"
+                            (pause)="cd.detectChanges()"
+                            (play)="cd.detectChanges()"
+                            class="w-100"
+                            poster="/assets/images/landing-page/picture-fallback.jpg"
+                            loop
+                            muted
+                            preload="none">
+                            <source src="/assets/images/signboard/.mp4" type="video/mp4">
+                            Váš prohlížeč nepodporuje zobrazení videa
+                        </video>
                     </div>
                     <div class="section-video-text order-xl-1">
                         <div class="row w-100 ml-0 text-center">
@@ -48,7 +59,7 @@
                     <lnd-button
                         label="Chci vidět nabídky"
                         type="gradient-primary"
-                        customClass="btn-public"
+                        customClass="btn-public btn--icon-right"
                         icon="icon--arrow-right"
                         iconPosition="right">
                     </lnd-button>
@@ -318,7 +329,7 @@
                     <lnd-button
                         label="Chci vidět nabídky"
                         type="gradient-primary"
-                        customClass="btn-public"
+                        customClass="btn-public btn--icon-right"
                         icon="icon--arrow-right"
                         iconPosition="right">
                     </lnd-button>
@@ -347,7 +358,7 @@
                     <lnd-button
                         label="Chci vidět nabídky"
                         type="gradient-primary"
-                        customClass="btn-public"
+                        customClass="btn-public btn--icon-right"
                         icon="icon--arrow-right"
                         iconPosition="right">
                     </lnd-button>
@@ -367,7 +378,7 @@
                         <lnd-button
                             label="Chci vidět nabídky"
                             type="gradient-primary"
-                            customClass="btn-public"
+                            customClass="btn-public btn--icon-right"
                             icon="icon--arrow-right"
                             iconPosition="right">
                         </lnd-button>
@@ -429,7 +440,7 @@
                     <lnd-button
                         label="Chci vidět nabídky"
                         type="gradient-primary"
-                        customClass="btn-public"
+                        customClass="btn-public btn--icon-right"
                         icon="icon--arrow-right"
                         iconPosition="right">
                     </lnd-button>
