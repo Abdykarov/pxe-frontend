@@ -127,7 +127,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
                 _ => {
                     this.frequentedQuestions = R.filter((question: IQuestion) => question.oneOfMostVisited)(this.questions);
                     this.cd.markForCheck();
-                });
+            });
 
         this.titleService.setTitle(CONSTS.TITLES.LANDING_PAGE);
         this.metaService.updateTag({
