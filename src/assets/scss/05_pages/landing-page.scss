@@ -71,6 +71,12 @@
 			}
 		}
 
+		&--dark-blue {
+			&::before {
+				background-color: $blue-500;
+			}
+		}
+
 		&--gradient-blue {
 			&::before {
 				background: linear-gradient(90deg, $gradient-blue-light 10%, $gradient-blue-dark 90%);
