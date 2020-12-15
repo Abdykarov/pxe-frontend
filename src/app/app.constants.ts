@@ -594,6 +594,7 @@ export const GTM_CONSTS = {
         SAVE: 'save',
         SHOW_DETAIL: 'show detail',
     },
+    BRAND: 'pxe',
     CATEGORIES: {
         REGISTRATION: 'sign up',
         FORM: 'form',

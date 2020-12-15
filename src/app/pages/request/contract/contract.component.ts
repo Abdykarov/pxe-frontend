@@ -142,7 +142,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                             products: [{
                                 name: removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
                                 id: this.supplyPoint?.supplier?.id,
-                                brand: 'pxe',
+                                brand: GTM_CONSTS.BRAND,
                                 quantity: 1,
                             }],
                         },

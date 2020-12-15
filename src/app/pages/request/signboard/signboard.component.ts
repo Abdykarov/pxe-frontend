@@ -49,7 +49,7 @@ export class SignboardComponent {
                 products: [{
                     name: 'odber energie',
                     id: null,
-                    brand: 'pxe',
+                    brand: GTM_CONSTS.BRAND,
                     quantity: 1,
                 }],
             },

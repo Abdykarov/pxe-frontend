@@ -99,7 +99,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                 products: [{
                     name: 'odber energie',
                     id: null,
-                    brand: 'pxe',
+                    brand: GTM_CONSTS.BRAND,
                     quantity: 1,
                 }],
             },
