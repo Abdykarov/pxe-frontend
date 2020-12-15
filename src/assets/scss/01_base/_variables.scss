@@ -65,6 +65,8 @@ $gradient-blue-dark:               $primary-darken;              // Gradient blu
 $gradient-blue-darken:             $blue-500;                    // Gradient blue darken
 $gradient-violet-light:            $secondary;                   // Gradient violet light
 
+$gradient-bg-violet:               linear-gradient(143deg, $gradient-violet-light 0%, $gradient-blue-darken 100%);                   // Gradient violet light
+
 $icons-primary:                    $secondary;
 $icons-secondary:                  #bdcad6;
 $icons-active:                     $primary;
