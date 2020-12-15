@@ -58,6 +58,10 @@
 			height: $input-height-public;
 			padding: $input-padding-y-public $input-padding-x-public;
 		}
+
+		.input-subtext {
+			font-size: $font-size-base;
+		}
 	}
 
 	&--with-currency {
