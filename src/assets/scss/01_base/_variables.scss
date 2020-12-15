@@ -184,6 +184,7 @@ $border-radius:                    5px;
 $box-shadow:                       0 2px 5px 0 rgba($body-color, .16);
 $box-shadow-circle:                -10px 20px 56px 0 rgba($box-shadow-color, .15);
 
+$box-shadow-carousel:              -15px 20px 30px 0 rgba(0, 9, 16, .1);
 
 // Links
 $link-color:                       $primary;
@@ -252,6 +253,7 @@ $modal-backdrop-opacity:             .8;
 
 // Z-indexes
 $zindex-alert:                       1000;
+$zindex-indicators:                  1030;
 $zindex-body-overlayer:              2000;
 $zindex-body-overlayer-full:         3000;
 $zindex-body-overlayer-visible:      3010;
@@ -323,6 +325,10 @@ $drop-zone-border-size:        3px;
 $drop-zone-border-dash-width:  15px;
 $drop-zone-border-gap-width:   15px;
 
+
+// Carousel compare
+$carousel-compare-price:       $secondary;
+$carousel-compare-border-left: 1px solid rgba(151, 151, 151, .3);
 
 // Accordion
 $accordion-active-shadow:      0 10px 30px 0 rgba($body-color, .2);

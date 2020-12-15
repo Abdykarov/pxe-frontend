@@ -1,0 +1,28 @@
+<ng-template #slideTemplate let-item>
+    <div class="row text-center" [style.height.px]="height">
+        <div class="col-12 text-center">
+            <img
+                class="carousel-suppliers__logo"
+                [src]="item.logoUrl"
+                [title]="item.title"
+                [alt]="item.alt"
+                [height]="height"
+                [width]="item.width">
+        </div>
+    </div>
+</ng-template>
+
+<div *ngIf="showCarousel"
+    class="carousel-suppliers">
+    <lnd-carousel
+        [carouselItems]="supplierLogos"
+        customSlideWrapper="col-8 offset-2"
+        [itemsPerSlide]="numberOfSlides"
+        [singleSlideOffset]="true"
+        [showIndicators]="false"
+        [showLeftAndRightIndicators]="true"
+        [slideTemplate]="slideTemplate"
+        [withCountHeight]="false"
+        (deviceCouldChangedAction)="deviceCouldChanged($event)">
+    </lnd-carousel>
+</div>
