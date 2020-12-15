@@ -270,6 +270,11 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
         this.router.navigate([CONSTS.PATHS.FAQ]);
     }
 
+    public routeToSignUp = (evt) => {
+        evt.preventDefault();
+        this.router.navigate([CONSTS.PATHS.SIGN_UP]);
+    }
+
     public scrollToNewSubscription = () =>  {
         this.authService.setActualStateFromOtherTab();
         const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
