@@ -12,6 +12,7 @@
     <lnd-carousel
         *ngIf="showCarousel"
         [carouselItems]="config"
+        [withCountHeight]="false"
         customSlideWrapper="col-10 offset-1"
         [itemsPerSlide]="numberOfSlides"
         [singleSlideOffset]="true"

@@ -17,5 +17,6 @@ export interface ISupplierLogo extends IDefaultCarouselItem {
     alt: string;
     logoUrl: string;
     title: string;
+    width: number;
 }
 

@@ -6,7 +6,8 @@
                 [src]="item.logoUrl"
                 [title]="item.title"
                 [alt]="item.alt"
-                [height]="height">
+                [height]="height"
+                [width]="item.width">
         </div>
     </div>
 </ng-template>
@@ -14,7 +15,7 @@
 <div *ngIf="showCarousel"
     class="carousel-suppliers">
     <lnd-carousel
-        [carouselItems]="config"
+        [carouselItems]="supplierLogos"
         customSlideWrapper="col-8 offset-2"
         [itemsPerSlide]="numberOfSlides"
         [singleSlideOffset]="true"

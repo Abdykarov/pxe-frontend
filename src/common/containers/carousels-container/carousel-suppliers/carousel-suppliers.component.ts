@@ -3,11 +3,12 @@ import {
     ViewEncapsulation,
 } from '@angular/core';
 
+import { takeUntil } from 'rxjs/operators';
+
 import { AbstractResizeComponent } from 'src/common/abstract-resize.component';
-import { ISupplierLogo } from 'src/common/containers/carousels-container/models/models';
-import { TypeOfResolution } from 'src/common/models/type-of-resolution';
 import { mapTypeOfDeviceToNumberOfSlides } from './carousel-suppliers.config';
-import {takeUntil} from 'rxjs/operators';
+import { supplierLogos } from 'src/common/containers/carousels-container/carousel-suppliers/carousel-suppliers.config';
+import { TypeOfResolution } from 'src/common/models/type-of-resolution';
 
 @Component({
     selector: 'pxe-carousel-suppliers',
@@ -20,38 +21,7 @@ export class CarouselSuppliersComponent extends AbstractResizeComponent {
 
     public numberOfSlides = null;
 
-    public config: ISupplierLogo[] = [
-        {
-            alt: 'logo - Alpiq CZ',
-            logoUrl: '/assets/images/suppliers/logo_alpiq-white.svg',
-            title: 'Alpiq CZ',
-        },
-        {
-            alt: 'logo - Bohemia Energy entity s.r.o.',
-            logoUrl: '/assets/images/suppliers/logo_bohemia-energy-white.svg',
-            title: 'Bohemia Energy entity s.r.o.',
-        },
-        {
-            alt: 'logo - EP Energy Trading a.s.',
-            logoUrl: '/assets/images/suppliers/logo_ep-energy-trading-white.svg',
-            title: 'EP Energy Trading a.s.',
-        },
-        {
-            alt: 'logo - Yello Energy',
-            logoUrl: '/assets/images/suppliers/logo_yello-energy-white.svg',
-            title: 'Yello Energy',
-        },
-        {
-            alt: 'logo - CARBOUNION BOHEMIA, spol. s r. o.',
-            logoUrl: '/assets/images/suppliers/logo_carbounion-bohemia-white.svg',
-            title: 'CARBOUNION BOHEMIA, spol. s r. o.',
-        },
-        {
-            alt: 'logo - Pražská plynárenská a.s.',
-            logoUrl: '/assets/images/suppliers/logo_prazska-plynarenska-white.svg',
-            title: 'Pražská plynárenská a.s.',
-        },
-    ];
+    public supplierLogos = supplierLogos;
 
     public deviceCouldChanged = (typeOfResolution: TypeOfResolution) =>
         this.numberOfSlides = mapTypeOfDeviceToNumberOfSlides[typeOfResolution]
