@@ -14,10 +14,20 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.secured {
+	font-family: $font-family-sans-serif-secured;
+}
+
+.public {
+	font-size: $font-size-base-public;
+	line-height: $line-height-base-public;
+	color: $font-text-public;
+}
+
 .h1--public,
 .h2--public,
 .h3--public {
-	font-family: $font-family-sans-serif-public;
+	font-weight: $font-weight-bold;
 	font-variant-ligatures: none;
 }
 
@@ -28,8 +38,7 @@ body {
 
 .h1--public {
 	font-size: $h1-font-size-public-xs;
-	line-height: ( 40 / 36 );
-	font-weight: $font-weight-bold;
+	line-height: ( 43 / 36 );
 
 	// Media queries
 	@include media-breakpoint-up(md) {
@@ -64,6 +73,11 @@ body {
 	@include media-breakpoint-up(xl) {
 		font-size: $h3-font-size-public;
 	}
+}
+
+.h4--public {
+	font-size: $h4-font-size-public;
+	text-transform: uppercase;
 }
 
 h1,

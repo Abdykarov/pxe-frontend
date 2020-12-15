@@ -30,6 +30,8 @@ $font-header:                      #2b4762;
 $font-text:                        #2b4762;
 $font-secondary:                   #919191;
 
+$font-text-public:                 #496480;
+
 $text-muted:                       $font-secondary;
 
 $primary:                          #0097ff;                    // Primary color
@@ -128,10 +130,13 @@ $body-max-width:                   1366px;
 
 
 // Typography
-$font-family-sans-serif:           'roboto_mono', arial;
-$font-family-sans-serif-public:    'roboto', arial;
+$font-family-sans-serif:           'roboto', arial;
+$font-family-sans-serif-secured:   'roboto_mono', arial;
 $font-size-base:                   .875rem;
 $line-height-base:                 ( 24 / 14 );
+$font-size-base-public:            1rem;
+$line-height-base-public:          ( 28 / 16 );
+
 $small-font-size:                  .75rem;
 $line-height-sm:                   ( 16 / 12 );
 $large-font-size:                  1rem;
@@ -142,19 +147,20 @@ $h1-font-size:                     1.875rem;
 $h1-font-size-snd:                 1rem;
 $h1-font-size-public-xs:           2.25rem;
 $h1-font-size-public-md:           2.25rem;
-$h1-font-size-public:              3rem;
+$h1-font-size-public:              3.75rem;
 $h2-font-size:                     1.125rem;
 $h2-font-size-snd:                 .8125rem;
-$h2-font-size-public-xs:           1.5rem;
+$h2-font-size-public-xs:           1.875rem;
 $h2-font-size-public-md:           1.875rem;
 $h2-font-size-public:              2.25rem;
 $h3-font-size:                     .875rem;
 $h3-font-size-public-xs:           1.125rem;
-$h3-font-size-public-md:           1.5rem;
+$h3-font-size-public-md:           1.25rem;
 $h3-font-size-public:              1.5rem;
 $h4-font-size:                     .8125rem;
 $h5-font-size:                     .8125rem;
 $h6-font-size:                     .8125rem;
+$h4-font-size-public:              1rem;
 $headings-color:                   $font-header;
 $headings-line-height:             ( 40 / 30 );
 $headings-font-weight:             400;

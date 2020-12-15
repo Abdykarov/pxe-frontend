@@ -17,12 +17,15 @@
             #pxeVerificationFormWrapper>
             <pxe-verification-form
                 *ngIf="currentUser.phoneNumber"
+                enableVerificationLabel="Zrušit účet"
+                textInfoAboutVerificationPassword="Zrušení účtu je nutné potvrdit ověřovacím kódem"
                 submitLabelText="Zrušit účet"
                 [formLoading]="formLoading"
                 [fieldError]="fieldError"
                 [globalError]="globalError"
                 [smsSent]="smsSent"
                 [phone]="currentUser.phoneNumber"
+                [toggleEnabledBySelf]="false"
                 (submitAction)="submitVerification($event)"
                 (customAction)="sendConfirmationSms()"
             ></pxe-verification-form>

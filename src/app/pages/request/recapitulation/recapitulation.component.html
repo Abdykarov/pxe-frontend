@@ -1,5 +1,8 @@
 <pxe-layout-container pageTitle="Rekapitulace">
     <div class="row mb-6">
+        <div *ngIf="supplyPoint && supplyPoint.name" class="col-12 text-center">
+            <h2>Odběrné místo: {{supplyPoint.name}}</h2>
+        </div>
         <div class="col-12 col-xl-10 offset-xl-1">
             <pxe-progress-bar [config]="stepperProgressConfig"></pxe-progress-bar>
         </div>
