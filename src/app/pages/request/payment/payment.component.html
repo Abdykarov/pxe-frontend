@@ -85,6 +85,9 @@
 </ng-template>
 <pxe-layout-container pageTitle="Platba">
     <div class="row mb-6">
+        <div *ngIf="supplyPoint && supplyPoint.name" class="col-12 text-center">
+            <h2>Odběrné místo: {{supplyPoint.name}}</h2>
+        </div>
         <div class="col-12 col-xl-10 offset-xl-1">
             <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
         </div>
@@ -123,7 +126,7 @@
             <div *ngIf="supplyPoint.contract?.contractStatus == contractStatus.CONCLUDED"
                  class="col-12 col-xl-10 offset-xl-1">
                 <lnd-info-banner
-                        [bannerTitle]="'Gratulujeme k výhodnému nákupu energie na vašem PARC4U!'"
+                        [bannerTitle]="'Gratulujeme k výhodnému nákupu energie na vašem parc4u!'"
                         [bannerDescription]="'Před koncem vaší smlouvy se ozveme s dalšími výhodnými nabídkami, které vám na burze stále hlídáme.'"
                         [buttonLabel]="'Přejít na přehled uzavřených smluv'"
                         [bannerType]="bannerTypeImages.ACCEPTED"

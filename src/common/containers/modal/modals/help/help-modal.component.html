@@ -1,20 +1,22 @@
 <lnd-modal
     [isModalOpen]="modalOpen"
     (close)="closeModal.emit()">
-    <div class="modal-body">
-        <img
-            class="w-100"
-            [attr.src]="instanceData.url"
-            [attr.alt]="instanceData.alt"
-            [attr.title]="instanceData.alt"/>
-    </div>
-    <div
-        *ngIf="!!instanceData.showButton"
-        class="modal-footer">
-        <lnd-button
-            type="primary"
-            label="Zavřít"
-            (action)="closeModal.emit()">
-        </lnd-button>
+    <div (lndOffClick)="closeModal.emit(false)">
+        <div class="modal-body">
+            <img
+                class="w-100"
+                [attr.src]="instanceData.url"
+                [attr.alt]="instanceData.alt"
+                [attr.title]="instanceData.alt"/>
+        </div>
+        <div
+            *ngIf="!!instanceData.showButton"
+            class="modal-footer">
+            <lnd-button
+                type="primary"
+                label="Zavřít"
+                (action)="closeModal.emit()">
+            </lnd-button>
+        </div>
     </div>
 </lnd-modal>
