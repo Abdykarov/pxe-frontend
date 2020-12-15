@@ -8,6 +8,11 @@
 @import 'src/assets/scss/01_base/base.scss';
 
 .carousel-suppliers {
+	&__logo {
+		max-width: 100%;
+		max-height: 100%;
+	}
+
 	.carousel {
 		.carousel-item {
 			position: static;

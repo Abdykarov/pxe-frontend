@@ -21,11 +21,13 @@
 	// Media queries
 	@include media-breakpoint-up(md) {
 		flex-direction: row;
+		align-items: flex-start;
 	}
 
 	&__image {
 		height: $image-size;
 		width: $image-size;
+		min-width: $image-size;
 		margin-bottom: $spacer;
 		border-radius: $image-size;
 		box-shadow: -15px 20px 30px 0 rgba(0, 9, 16, .1);
@@ -51,49 +53,59 @@
 	}
 }
 
-.carousel {
-	.carousel-item {
-		position: static;
-		margin-right: 0;
-	}
+.carousel-references-wrapper {
+	.carousel {
+		.carousel-inner {
+			overflow: visible;
+		}
 
-	.carousel-indicators {
-		@include absolute-center(false);
-		display: flex;
-		margin: 0;
-		z-index: $zindex-indicators;
+		.carousel-item {
+			position: static;
+			margin-right: 0;
 
-		&__item {
-			cursor: pointer;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			width: auto;
-			height: auto;
-			padding: ( $spacer / 2 );
-			border: none;	
-			opacity: .2;		
-
-			&::before {
-				display: none;
-			}
-
-			&:focus,
-			&:hover {
-				opacity: .5;
-			}
-
-			&--active {
-				opacity: 1;
+			&.active {
+				visibility: visible;
 			}
 		}
 
-		&__indicator {
-			display: block;
-			width: $indicator-size;
-			height: $indicator-size;
-			background-color: $font-text;
-			border-radius: $indicator-size;
+		.carousel-indicators {
+			@include absolute-center(false);
+			display: flex;
+			margin: 0;
+			z-index: $zindex-indicators;
+
+			&__item {
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: auto;
+				height: auto;
+				padding: ( $spacer / 2 );
+				border: none;
+				opacity: .2;
+
+				&::before {
+					display: none;
+				}
+
+				&:focus,
+				&:hover {
+					opacity: .5;
+				}
+
+				&--active {
+					opacity: 1;
+				}
+			}
+
+			&__indicator {
+				display: block;
+				width: $indicator-size;
+				height: $indicator-size;
+				background-color: $font-text;
+				border-radius: $indicator-size;
+			}
 		}
 	}
 }

@@ -2,6 +2,7 @@
     <div class="row text-center" [style.height.px]="height">
         <div class="col-12 text-center">
             <img
+                class="carousel-suppliers__logo"
                 [src]="item.logoUrl"
                 [title]="item.title"
                 [alt]="item.alt"
@@ -14,7 +15,7 @@
     class="carousel-suppliers">
     <lnd-carousel
         [carouselItems]="config"
-        customSlideWrapper="col-10 offset-1"
+        customSlideWrapper="col-8 offset-2"
         [itemsPerSlide]="numberOfSlides"
         [singleSlideOffset]="true"
         [showIndicators]="false"

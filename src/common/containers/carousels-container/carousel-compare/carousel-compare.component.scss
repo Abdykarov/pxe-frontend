@@ -8,31 +8,15 @@
 @import 'src/assets/scss/01_base/base.scss';
 
 .carousel-compare {
+	&__price {
+		color: $carousel-compare-price;
+		font-size: 2.25rem;
+	}
+
 	.carousel {
 		.carousel-item {
 			position: static;
 			margin-right: 0;
-		}
-
-		.carousel-compare__border {
-			border-left: $carousel-compare-border-left;
-			padding-left: ( $spacer );
-
-			&--none {
-				border: none;
-			}
-
-			@include media-breakpoint-down(md) {
-				padding-left: ( $spacer * 4);
-			}
-		}
-
-		.carousel-compare__price {
-			color: $carousel-compare-price;
-
-			&--value {
-				font-size: 2.2rem;
-			}
 		}
 
 		.carousel-control {
@@ -44,20 +28,33 @@
 			}
 		}
 
-		.carousel-control-prev-icon {
-			background-color: $white;
-			background-image: none;
+		.carousel-control-prev-icon,
+		.carousel-control-next-icon {
 			width: 48px;
 			height: 48px;
+			background-image: none;
 			border-radius: 50%;
+		}
+
+		.carousel-control-prev-icon {
+			background-color: $white;
 		}
 
 		.carousel-control-next-icon {
 			background-color: $font-header;
-			width: 48px;
-			height: 48px;
-			border-radius: 50%;
-			background-image: none;
+		}
+	}
+
+	.carousel-item {
+		&.active + .active {
+			// Media queries
+			@include media-breakpoint-up(xl) {
+				border-left: $carousel-compare-border-left;
+			}
+		}
+
+		.active {
+			padding: ( $spacer * 1.5 ) ( $spacer * 2 );
 		}
 	}
 }
