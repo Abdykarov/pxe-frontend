@@ -13,7 +13,7 @@
         <div class="section-picture-text">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="h1--public mb-2">
+                    <h1 class="h2--public mb-2">
                         Přihlaste se
                     </h1>
                     <p>Ještě nemáte účet? <a routerLink="/secured/registration">Založte si jej zde</a>.</p>
@@ -21,10 +21,11 @@
                 <div class="col-xl-3">
                     <div class="form-container ml-0">
                         <div class="row px-3 px-md-0">
-                            <div class="col-12 mb-5">
-                                <form>
+                            <div class="col-12">
+                                <form class="mb-5">
                                     <lnd-form-field
                                         id="email"
+                                        customFormGroupClass="form-group--public"
                                         label="E-mail (přihlašovací jméno)"
                                         [lightField]="true">
                                     </lnd-form-field>
@@ -35,40 +36,15 @@
                                         [lightField]="true">
                                     </lnd-form-field>
                                     <lnd-button
-                                        type="primary"
+                                        type="gradient-primary"
                                         class="w-100"
-                                        customClass="w-100"
+                                        customClass="btn-public btn--icon-right w-100"
                                         (action)="submitForm($event)"
                                         label="Přihlásit se"
-                                        size="lg"
                                         icon="icon--arrow-right"
                                         iconPosition="right">
                                     </lnd-button>
                                 </form>
-                            </div>
-                            <div class="col-12">
-                                <p class="mb-3">Nebo si založte účet pomocí</p>
-                                <div class="row mb-4">
-                                    <div class="col-md-6">
-                                        <lnd-button
-                                            type="facebook"
-                                            class="w-100"
-                                            customClass="w-100"
-                                            label="Facebook"
-                                            size="lg">
-                                        </lnd-button>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <lnd-button
-                                            type="google"
-                                            class="w-100"
-                                            customClass="w-100"
-                                            label="Google"
-                                            size="lg">
-                                        </lnd-button>
-                                    </div>
-                                </div>
-                                <p>Založením účtu souhlasím s <a href="#">Obchodními podmínkami</a> parc4u a beru na vědomí informace o <a href="#">Ochraně osobních údajů</a>.</p>
                             </div>
                         </div>
                     </div>

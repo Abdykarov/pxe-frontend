@@ -10,6 +10,5 @@ export enum IButtonType {
     SUCCESS = 'success',
     WARNING = 'warning',
     WHITE = 'white',
-    FACEBOOK = 'facebook',
-    GOOGLE = 'google',
+    GRADIENT_PRIAMRY = 'gradient-primary',
 }
