@@ -101,9 +101,16 @@
 
 	ol.circular-number-list {
 		& > li {
-			padding-left: ( $circular-number-list-size + ( $spacer * .75 ) );
+			padding-top: ( $circular-number-list-size + ( $spacer * .25 ) );
+			padding-left: 0;
 			padding-bottom: ( $spacer * 2 );
 			line-height: ( 24 / 16 );
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				padding-top: 0;
+				padding-left: ( $circular-number-list-size + ( $spacer * .75 ) );
+			}
 		}
 
 		& > li::before {
@@ -113,10 +120,15 @@
 			justify-content: center;
 			width: $circular-number-list-size;
 			height: $circular-number-list-size;
-			top: 12px;
+			top: 0;
 			background-color: $white;
 			border-radius: $circular-number-list-size;
-			transform: translateY(-50%);
+
+			// Media queries
+			@include media-breakpoint-up(md) {
+				top: 12px;
+				transform: translateY(-50%);
+			}
 		}
 	}
 

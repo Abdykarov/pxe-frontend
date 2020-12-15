@@ -378,3 +378,18 @@ $colors: (
 		}
 	}
 }
+
+.info-flag {
+	position: relative;
+	display: inline-block;
+	padding: $spacer ( $spacer * 1.25 );
+	background-color: $secondary;
+	border-radius: 3px;
+	border-bottom-left-radius: 0;
+
+	&__beak {
+		position: absolute;
+		top: calc( 100% - 1px );
+		left: 0;
+	}
+}
