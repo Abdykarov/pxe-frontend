@@ -31,9 +31,7 @@ import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
-    PUSH_EVENTS_GA,
     ROUTES,
-    S_ANALYTICS,
     SEO,
 } from 'src/app/app.constants';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
@@ -50,10 +48,7 @@ import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import { IQuestion } from 'src/app/services/model/faq.model';
 import { lpVideoModalConfig } from './landing.config';
 import { ModalService } from 'src/common/containers/modal/modal.service';
-import {
-    playVideo,
-    scrollToElementFnc,
-} from 'src/common/utils';
+import { scrollToElementFnc } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
@@ -180,41 +175,6 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
         event.preventDefault();
         this.modalService
             .showModal$.next(lpVideoModalConfig());
-    }
-
-    ngOnInit() {
-        super.ngOnInit();
-        this.video.muted = true;
-    }
-
-    public videoIsTouch = () => {
-        if (this.isMoreThanMdResolution) {
-            this.play();
-        }
-    }
-
-    public play = (event = null) => {
-        if (event) {
-            event.preventDefault();
-        }
-
-        playVideo(this.video);
-    }
-
-    public pause =  (event = null) => {
-        if (event) {
-            event.preventDefault();
-        }
-
-        this.video.pause();
-    }
-
-    get isVideoPlaying(): boolean {
-        return this._video && !this.video.paused;
-    }
-
-    get video(): HTMLMediaElement {
-        return this._video && this._video.nativeElement;
     }
 
     public routeToSignUp = (evt) => {

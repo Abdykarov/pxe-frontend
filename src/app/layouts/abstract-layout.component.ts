@@ -138,4 +138,6 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
             )
             .subscribe();
     }
+
+    public signUp = () => this.router.navigate([this.CONSTS.PATHS.SIGN_UP]);
 }
