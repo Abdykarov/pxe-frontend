@@ -22,6 +22,7 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
+import { AuthService } from 'src/app/services/auth.service';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import {
     CommodityType,
@@ -31,7 +32,7 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import {
     CONSTS,
-    PUSH_EVENTS_GA,
+    GTM_CONSTS,
     ROUTES,
 } from 'src/app/app.constants';
 import { ContractService } from 'src/common/graphql/services/contract.service';
@@ -42,6 +43,7 @@ import {
     getConfigStepper,
     parseGraphQLErrors,
     parseRestAPIErrors,
+    removeAccent,
     scrollToElementFnc,
 } from 'src/common/utils';
 import { GTMService } from 'src/app/services/gtm.service';
@@ -101,6 +103,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
     public supplyPointId = this.route.snapshot.queryParams.supplyPointId;
 
     constructor(
+        private authService: AuthService,
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
         private documentService: DocumentService,
@@ -112,6 +115,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
         private supplyService: SupplyService,
     ) {
         super(faqService, route);
+        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_TWO, this.authService.hashedUserId);
     }
 
     ngOnInit () {
@@ -128,6 +132,21 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                 map(({data}) => data.getSupplyPoint),
                 switchMap((supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
+
+                    this.gtmService.pushEvent({
+                        event: GTM_CONSTS.EVENTS.CHECKOUT,
+                        ecommerce: {
+                            actionField: {
+                                step: 2,
+                            },
+                            products: [{
+                                name: removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
+                                id: this.supplyPoint?.supplier?.id,
+                                brand: GTM_CONSTS.BRAND,
+                                quantity: 1,
+                            }],
+                        },
+                    });
 
                     const documentTypeInformation$ = this.supplyPoint.subject.code === this.subjectType.SUBJECT_TYPE_INDIVIDUAL ?
                         this.documentService.getDocument(this.supplyPoint.contract.contractId, this.documentType.INFORMATION)
@@ -273,7 +292,14 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
             .subscribe(
                 (deleteSignedContract: boolean) => {
                     if (deleteSignedContract) {
-                        this.gtmService.pushEvent(PUSH_EVENTS_GA.FORMS.CONTRACT);
+                        this.gtmService.pushEvent({
+                            'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+                            'category': GTM_CONSTS.CATEGORIES.FORM,
+                            'dodavatel': removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
+                            'action': GTM_CONSTS.ACTIONS.SIGN,
+                            'label': GTM_CONSTS.LABELS.STEP_THREE,
+                            'userID': this.authService.hashUserId,
+                        });
                         this.router.navigate(
                             [ROUTES.ROUTER_REQUEST_PAYMENT], {
                                 queryParams: {

@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import * as CryptoJS from 'crypto-js';
-
-import { PUSH_EVENTS_GA } from 'src/app/app.constants';
+import {GTM_CONSTS} from '../app.constants';
 
 declare const gtag;
 
@@ -20,15 +18,16 @@ export class GTMService {
         (<any>window).dataLayer.push({event: 'pageview', page_path: event.urlAfterRedirects});
     }
 
-    public setUserId = (userId: string) => gtag('set', {'user_id': CryptoJS.SHA256(userId).toString()});
+    public setUserId = (userId: string) => gtag('set', {'user_id': userId});
 
-    public pushEvent = (action: string = null, category = PUSH_EVENTS_GA.CATEGORY) => {
-        if ((<any>window).dataLayer) {
-            (<any>window).dataLayer.push({
-                event: PUSH_EVENTS_GA.EVENT,
-                category,
-                action,
-            });
-        }
-    }
+    public pushEvent = (message) => (<any>window).dataLayer.push(message);
+
+    public loadFormEvent = (label: string, userID: string) => this.pushEvent({
+        event: GTM_CONSTS.EVENTS.EVENT_TRACKING,
+        category: GTM_CONSTS.CATEGORIES.FORM,
+        action: GTM_CONSTS.ACTIONS.VIEW,
+        label,
+        userID,
+    })
+
 }
