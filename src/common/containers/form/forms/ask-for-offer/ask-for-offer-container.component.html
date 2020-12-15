@@ -16,11 +16,12 @@
         </lnd-alert>
     </div>
     <div class="col-12 mb-3">
-        <span class="d-inline-flex align-items-center mr-4" *ngFor="let aaa of fileUploader.queue; let i = index">
-            {{aaa.file.name}}
-            {{aaa.file.type}}
+        <span class="d-inline-flex align-items-center mr-4 mb-2"
+              *ngFor="let fileItem of fileUploader.queue">
+            <span class="icon icon--document mr-2"></span>
+            {{fileItem?.file?.name}}
             <lnd-button
-                (click)="removeFile(aaa)"
+                (click)="removeFile(fileItem)"
                 icon="icon--delete"
                 variant="icon"
                 type="icon">
@@ -41,7 +42,6 @@
                     [formControl]="form.controls.email"
                     [id]="'email'"
                     label="E-mail"
-                    infoText="Založíme vám účet zdarma pro zadaný registrační e-mail. Spamu se nemusíte bát."
                     [success]="form.controls.email.valid && (form.controls.email.touched || formError.email)"
                     [touched]="form.controls.email.touched || formError.email"
                     [validationMessages]="formFields.validationMessages.email"

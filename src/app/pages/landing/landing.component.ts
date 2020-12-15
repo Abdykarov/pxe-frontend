@@ -46,13 +46,11 @@ import {
     IForm,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
-import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import { IQuestion } from 'src/app/services/model/faq.model';
 import { lpVideoModalConfig } from './landing.config';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import {
-    parseGraphQLErrors,
     playVideo,
     scrollToElementFnc,
 } from 'src/common/utils';
@@ -69,17 +67,14 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     @ViewChild('video', { static: true })
     public _video: ElementRef;
 
-    @ViewChild('subscription', { static: false })
-    public subscriptionElement: ElementRef;
+    @ViewChild('howItWorks', { static: false })
+    public howItWorks: ElementRef;
 
-    @ViewChild('faq', { static: true })
-    public faq: ElementRef;
+    @ViewChild('help', { static: true })
+    public help: ElementRef;
 
-    @ViewChild('aboutUs', { static: true })
-    public aboutUs: ElementRef;
-
-    @ViewChild('aboutService', { static: true })
-    public aboutService: ElementRef;
+    @ViewChild('bestPricesInTheWorld', { static: true })
+    public bestPricesInTheWorld: ElementRef;
 
     public frequentedQuestions: IAccordionItem[] = [];
     public formLoading = false;
@@ -91,6 +86,14 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     public routes = ROUTES;
 
     public isMoreThanMdResolution = false;
+
+    public tileCard = {
+        imgSrc: 'assets/images/landing-page/our-help-cottage.png',
+        imgAlt: 'Card image',
+        imgTitle: 'Card title',
+        title: 'Tile card',
+        content: 'Card text. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    };
 
     public resizeEvent$ = fromEvent(window, 'resize')
         .pipe(
@@ -110,7 +113,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
         public router: Router,
         private registrationService: RegistrationService,
         private sAnalyticsService: SAnalyticsService,
-        private scrollToService: ScrollToService,
+        public scrollToService: ScrollToService,
         private titleService: Title,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
@@ -144,17 +147,14 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
         this.scrollToService.getScrollStream()
             .pipe(takeUntil(this.destroy$))
             .subscribe((scrollTo: SCROLL_TO) => {
-                if (scrollTo === SCROLL_TO.LANDING_SUBSCRIPTION) {
-                    scrollToElementFnc(this.subscriptionElement.nativeElement);
+                if (scrollTo === SCROLL_TO.BEST_PRICES_IN_THE_WORLD) {
+                    scrollToElementFnc(this.bestPricesInTheWorld.nativeElement, 20);
                 }
-                if (scrollTo === SCROLL_TO.FAQ) {
-                    scrollToElementFnc(this.faq.nativeElement);
+                if (scrollTo === SCROLL_TO.HELP) {
+                    scrollToElementFnc(this.help.nativeElement, 20);
                 }
-                if (scrollTo === SCROLL_TO.ABOUT_US) {
-                    scrollToElementFnc(this.aboutUs.nativeElement);
-                }
-                if (scrollTo === SCROLL_TO.ABOUT_SERVICE) {
-                    scrollToElementFnc(this.aboutService.nativeElement);
+                if (scrollTo === SCROLL_TO.HOW_IT_WORKS) {
+                    scrollToElementFnc(this.howItWorks.nativeElement, 20);
                 }
             });
 
@@ -217,69 +217,12 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
         return this._video && this._video.nativeElement;
     }
 
-    public submitForm = (values) => {
-        this.formLoading = true;
-        this.globalError = [];
-        this.fieldError = {};
-        this.authService.setActualStateFromOtherTab();
-        const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
-        if (isLogged) {
-            this.authService.homeRedirect(false, ILogoutRequired.REGISTRATION);
-        } else {
-            this.registrationService.makeRegistration(values)
-                .pipe(takeUntil(this.destroy$))
-                .subscribe(
-                    () => {
-                        this.gtmService.pushEvent(PUSH_EVENTS_GA.FORMS.SIGN_UP);
-                        this.formLoading = false;
-                        this.sAnalyticsService.sendWebData(
-                            {},
-                            {
-                                email: values.email,
-                            },
-                            {},
-                            {
-                                ACTION: S_ANALYTICS.ACTIONS.SIGN_UP,
-                            },
-                        );
-                        this.formSent = true;
-                        this.cd.markForCheck();
-                        this.router.navigate([CONSTS.PATHS.LOGIN],
-                            {
-                                queryParams: {
-                                    email: values.email,
-                                },
-                                state: {
-                                    passwordWasSent: true,
-                                },
-                            },
-                        );
-                    },
-                    (error) => {
-                        this.formLoading = false;
-                        const { fieldError, globalError } = parseGraphQLErrors(error);
-                        this.fieldError = fieldError;
-                        this.globalError = globalError;
-                        this.cd.markForCheck();
-                    });
-        }
-    }
-
-    public routerToFaq = (evt) => {
-        evt.preventDefault();
-        this.router.navigate([CONSTS.PATHS.FAQ]);
-    }
-
     public routeToSignUp = (evt) => {
         evt.preventDefault();
-        this.router.navigate([CONSTS.PATHS.SIGN_UP]);
-    }
-
-    public scrollToNewSubscription = () =>  {
-        this.authService.setActualStateFromOtherTab();
-        const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
-        if (!isLogged) {
-            this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
+        if (this.authService.isLogged()) {
+            this.authService.homeRedirect(true);
+        } else {
+            this.router.navigate([CONSTS.PATHS.SIGN_UP]);
         }
     }
 }

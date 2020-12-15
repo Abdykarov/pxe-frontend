@@ -2,7 +2,9 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { AccordionModule } from 'src/common/ui/accordion/accordion.module';
+import { AskForOfferConteinerModule } from 'src/common/containers/form/forms/ask-for-offer/ask-for-offer-conteiner.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
+import { CardModule } from 'src/common/ui/card/card.module';
 import { CarouselContainersModule } from 'src/common/containers/carousels-container/carousel-containers.module';
 import { DirectivesModule } from 'src/common/directives/directives.module';
 import { LandingComponent } from './landing.component';
@@ -20,7 +22,9 @@ import { RegistrationFormModule } from 'src/common/containers/form/forms/registr
     ],
     imports: [
         AccordionModule,
+        AskForOfferConteinerModule,
         ButtonModule,
+        CardModule,
         CarouselContainersModule,
         CommonModule,
         DirectivesModule,

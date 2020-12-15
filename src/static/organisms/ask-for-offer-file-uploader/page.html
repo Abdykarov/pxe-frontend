@@ -27,9 +27,8 @@
                     *ngFor="let fileItem of files">
                     <span class="icon icon--document mr-2"></span>
                     {{fileItem.name}}
-                    <!-- <span (click)="removeFile(fileItem)">REMOVE</span> -->
                     <lnd-button
-                        (click)="removeFile(aaa)"
+                        (click)="removeFile(fileItem)"
                         icon="icon--delete"
                         variant="icon"
                         type="icon">
@@ -44,14 +43,13 @@
                         <lnd-form-field
                             [id]="'email'"
                             label="E-mail"
-                            infoText="Založíme vám účet zdarma pro zadaný registrační e-mail. Spamu se nemusíte bát."
                         ></lnd-form-field>
                         <div class="text-right">
                             <lnd-button
                                 type="primary"
                                 [submit]="true"
                                 (action)="submitForm($event)"
-                                label="odesllat">
+                                label="Odeslat">
                             </lnd-button>
                         </div>
                     </ng-container>

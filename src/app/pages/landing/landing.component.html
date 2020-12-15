@@ -8,19 +8,6 @@
     </div>
 </ng-template>
 
-<ng-template #agreementTemplate>
-    Souhlasím s <a target="_blank" [href]="routes.ROUTER_TERMS_OF_USE">Obchodními podmínkami parc4u</a> a beru na vědomí informace o <a target="_blank" [href]="routes.ROUTER_SECURING_YOUR_DATA">Ochraně osobních údajů</a>.
-</ng-template>
-
-<ng-template #supplierTemplate>
-    <pxe-supplier [configSupplier]="configSupplier"></pxe-supplier>
-</ng-template>
-
-<ng-template #agreementTemplate>
-    Souhlasím se <a target="_blank" [href]="">Obchodními podmínkami účasti na trhu parc4u</a> a beru na vědomí
-    <a target="_blank" [href]="">Informaci o zpracování osobních údajů</a>.
-</ng-template>
-
 <div class="landing-page">
     <div class="section">
         <div class="container-fluid container-fluid--max-width">
@@ -95,7 +82,7 @@
                         </div>
                         <div class="col-xl-9">
                             <h3 class="h3--public">O smlouvy se už nikdy nemusíte starat</h3>
-                            <a href="#">S čím vám parc4u pomůže?</a>
+                            <a (click)="scrollToService.scrollToHelp()">S čím vám parc4u pomůže?</a>
                         </div>
                     </div>
                 </div>
@@ -106,7 +93,7 @@
                         </div>
                         <div class="col-xl-9">
                             <h3 class="h3--public">Vše zdarma, z domu a bez papírování</h3>
-                            <a href="#">Jak to funguje?</a>
+                            <a (click)="scrollToService.scrollToHowItsWorks()">Jak to funguje?</a>
                         </div>
                     </div>
                 </div>
@@ -117,26 +104,53 @@
                         </div>
                         <div class="col-xl-9">
                             <h3 class="h3--public">Každý rok vám zajistíme výhodnou cenu</h3>
-                            <a href="#">Více o cenách</a>
+                            <a (click)="scrollToService.scrollToBestPricesInTheWorld()">Více o cenách</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row d-none d-xl-flex">
                 <div class="col-12 text-center">
-                    <a class="link-next-section" href="#">
+                    <a class="link-next-section" (click)="scrollToService.scrollToHelp()">
                         <span class="icon icon--arrow-right link-next-section__icon"></span>
                     </a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="section section--light-gray">
+    <div #help class="section section--light-gray">
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
                 <div class="col-12 text-center text-xl-left">
                     <h2 class="h4--public text-secondary">S čím vám Pomůžeme</h2>
-                    <p>komponenta Card</p>
+                </div>
+            </div>
+            <div class="card-tiles">
+                <div class="row no-gutters card-tiles__inner">
+                    <div class="col-md-4 card-tile__item">
+                        <lnd-card [data]="tileCard"></lnd-card>
+                    </div>
+                    <div class="col-md-4 card-tile__item">
+                        <lnd-card [data]="tileCard"></lnd-card>
+                    </div>
+                    <div class="col-md-4 card-tile__item">
+                        <lnd-card [data]="tileCard"></lnd-card>
+                    </div>
+                    <div class="col-md-4 card-tile__item">
+                        <lnd-card [data]="tileCard"></lnd-card>
+                    </div>
+                    <div class="col-md-4 card-tile__item">
+                        <lnd-card [data]="tileCard"></lnd-card>
+                    </div>
+                    <div class="col-md-4 card-tile__item">
+                        <lnd-card [data]="tileCard"></lnd-card>
+                    </div>
+                    <div class="col-md-4 card-tile__item card-tile__item--last-item">
+                        <lnd-card [data]="tileCard"></lnd-card>
+                    </div>
+                    <div class="col-md-4 card-tile__item card-tile__item--last-item">
+                        <lnd-card [data]="tileCard"></lnd-card>
+                    </div>
                 </div>
             </div>
         </div>
@@ -144,13 +158,13 @@
     <div class="section section--white">
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
-                <div class="col-12">
-                    <h2>Carousel</h2>
+                <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-3">
+                    <pxe-carousel-references></pxe-carousel-references>
                 </div>
             </div>
         </div>
     </div>
-    <div class="section section--bg-two-half section--dark-gray-left-half section--gradient-violet-right-half">
+    <div #howItWorks class="section section--bg-two-half section--dark-gray-left-half section--gradient-violet-right-half">
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
                 <div class="col-xl-6">
@@ -198,7 +212,7 @@
                                 </ol>
                             </div>
                             <div class="col-md-8 offset-md-2 col-xl-10">
-                                <p>File upload</p>
+                                <pxe-ask-for-offer-container></pxe-ask-for-offer-container>
                             </div>
                         </div>
                     </div>
@@ -206,7 +220,7 @@
             </div>
         </div>
     </div>
-    <div class="section section--light-gray">
+    <div #bestPricesInTheWorld class="section section--light-gray">
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
                 <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-0">
@@ -216,7 +230,7 @@
                     <p>taby</p>
                 </div>
                 <div class="col-12">
-                    <p>carousel</p>
+                    <pxe-carousel-compare></pxe-carousel-compare>
                 </div>
                 <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-0">
                     <p class="mb-6">Úspora s PXE je vypočítána vůči dominantnímu dodavateli PRE (ceník elektřina), při odběru 24&nbsp;MWh v tarifu D56d. Ceny jsou včetně DPH.</p>
@@ -266,7 +280,7 @@
                             </lnd-button>
                         </div>
                         <div class="col-12">
-                            <p>Carousel</p>
+                            <pxe-carousel-suppliers></pxe-carousel-suppliers>
                         </div>
                     </div>
                 </div>
@@ -332,21 +346,9 @@
                     </ol>
                 </div>
                 <div class="col-12 col-md-8 offset-md-2 col-xl-5 offset-xl-1">
-                    <h2>File upload</h2>
+                    <pxe-ask-for-offer-container></pxe-ask-for-offer-container>
                 </div>
             </div>
         </div>
-    </div>
-    <div *ngIf="true"
-         class="fixed-bottom fixed-bottom--footer-indentation">
-        <lnd-button
-            label="Zpět do aplikace"
-            type="primary"
-            size="lg"
-            icon="icon--triangle-right"
-            iconPosition="right"
-            customClass="btn-back-to-app"
-            (action)="click($event)">
-        </lnd-button>
     </div>
 </div>
