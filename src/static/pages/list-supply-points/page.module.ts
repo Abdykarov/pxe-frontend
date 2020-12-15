@@ -29,5 +29,8 @@ export const listSupplyPointsPageRoutes: Routes = [
     {
         path: 'list-supply-points',
         component: ListSupplyPointsPageComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];

@@ -30,7 +30,7 @@
 		min-width: $image-size;
 		margin-bottom: $spacer;
 		border-radius: $image-size;
-		box-shadow: -15px 20px 30px 0 rgba(0, 9, 16, .1);
+		box-shadow: $box-shadow-carousel;
 	}
 
 	&__text {

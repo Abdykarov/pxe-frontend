@@ -16,39 +16,39 @@ import {takeUntil} from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None,
 })
 export class CarouselSuppliersComponent extends AbstractResizeComponent {
-    public readonly height = 35;
+    public readonly height = 25;
 
     public numberOfSlides = null;
 
     public config: ISupplierLogo[] = [
         {
             alt: 'logo - Alpiq CZ',
-            logoUrl: '/assets/images/suppliers/logo_alpiq-hover.svg',
+            logoUrl: '/assets/images/suppliers/logo_alpiq-white.svg',
             title: 'Alpiq CZ',
         },
         {
             alt: 'logo - Bohemia Energy entity s.r.o.',
-            logoUrl: '/assets/images/suppliers/logo_bohemia-energy-hover.svg',
+            logoUrl: '/assets/images/suppliers/logo_bohemia-energy-white.svg',
             title: 'Bohemia Energy entity s.r.o.',
         },
         {
             alt: 'logo - EP Energy Trading a.s.',
-            logoUrl: '/assets/images/suppliers/logo_ep-energy-trading-hover.svg',
+            logoUrl: '/assets/images/suppliers/logo_ep-energy-trading-white.svg',
             title: 'EP Energy Trading a.s.',
         },
         {
             alt: 'logo - Yello Energy',
-            logoUrl: '/assets/images/suppliers/logo_yello-energy-hover.svg',
+            logoUrl: '/assets/images/suppliers/logo_yello-energy-white.svg',
             title: 'Yello Energy',
         },
         {
             alt: 'logo - CARBOUNION BOHEMIA, spol. s r. o.',
-            logoUrl: '/assets/images/suppliers/logo_carbounion-bohemia@2x-hover.png',
+            logoUrl: '/assets/images/suppliers/logo_carbounion-bohemia-white.svg',
             title: 'CARBOUNION BOHEMIA, spol. s r. o.',
         },
         {
             alt: 'logo - Pražská plynárenská a.s.',
-            logoUrl: '/assets/images/suppliers/logo_prazska-plynarenska-hover.svg',
+            logoUrl: '/assets/images/suppliers/logo_prazska-plynarenska-white.svg',
             title: 'Pražská plynárenská a.s.',
         },
     ];

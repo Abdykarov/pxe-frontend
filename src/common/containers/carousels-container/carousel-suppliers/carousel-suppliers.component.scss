@@ -13,6 +13,21 @@
 		max-height: 100%;
 	}
 
+	.carousel-control-prev-icon,
+	.carousel-control-next-icon {
+		background-image: none;
+
+		&::before {
+			content: '\e930';
+			@include icon;
+			color: $white;
+		}
+	}
+
+	.carousel-control-prev-icon {
+		transform: rotate(180deg);
+	}
+
 	.carousel {
 		.carousel-item {
 			position: static;
@@ -21,6 +36,11 @@
 
 		.carousel-control {
 			width: 10%;
+
+			&:focus:not(.active),
+			&:hover:not(.active) {
+				text-decoration: none;
+			}
 		}
 	}
 }

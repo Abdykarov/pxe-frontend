@@ -1,9 +1,12 @@
 import {
     ChangeDetectorRef,
     Component,
+    OnDestroy,
     OnInit,
+    Renderer2,
 } from '@angular/core';
 import {
+    ActivatedRoute,
     NavigationEnd,
     Router,
 } from '@angular/router';
@@ -27,7 +30,7 @@ import { staticNavigationConfig } from 'src/static/config/navigation.config';
 @Component({
     templateUrl: './basic-layout.component.html',
 })
-export class BasicLayoutComponent extends AbstractComponent implements OnInit {
+export class BasicLayoutComponent extends AbstractComponent implements OnInit, OnDestroy {
 
     public activeUrl: string;
     public currentUser: IJwtPayload = null;
@@ -54,16 +57,23 @@ export class BasicLayoutComponent extends AbstractComponent implements OnInit {
 
     constructor (
         private cd: ChangeDetectorRef,
+        private renderer: Renderer2,
+        protected route: ActivatedRoute,
         public router: Router,
     ) {
         super();
         this.navigationConfig = staticNavigationConfig;
-        router.events.subscribe((val) => {
-            if (val instanceof NavigationEnd) {
-                this.isMenuOpen = false;
-                this.activeUrl = this.router.url;
-            }
-        });
+        router.events
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((val) => {
+                if (val instanceof NavigationEnd) {
+                    this.removeBodyClasses();
+                    const isPublic = route.snapshot.firstChild.data?.isPublic;
+                    this.renderer.addClass(document.body, isPublic || isPublic === undefined  ? 'public' : 'secured');
+                    this.isMenuOpen = false;
+                    this.activeUrl = this.router.url;
+                }
+            });
     }
 
     ngOnInit() {
@@ -85,5 +95,15 @@ export class BasicLayoutComponent extends AbstractComponent implements OnInit {
 
     public homeRedirect = () => {
         this.router.navigate([CONSTS.PATHS.EMPTY]);
+    }
+
+    private removeBodyClasses = () => {
+        this.renderer.removeClass(document.body, 'public');
+        this.renderer.removeClass(document.body, 'secured');
+    }
+
+    public ngOnDestroy() {
+        super.ngOnDestroy();
+        this.removeBodyClasses();
     }
 }

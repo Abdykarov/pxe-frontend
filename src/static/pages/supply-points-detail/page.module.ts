@@ -31,5 +31,8 @@ export const supplyPointsDetailPageRoutes: Routes = [
     {
         path: 'supply-points-detail',
         component: SupplyPointsDetailPageComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];

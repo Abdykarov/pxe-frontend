@@ -1,11 +1,14 @@
 /*
- -  Carousel supplier
+ -  Carousel compare
  -
  - stylelint-disable for rewrite library
  */
 
 // Core component import
 @import 'src/assets/scss/01_base/base.scss';
+
+// Component variables
+@import 'carousel-compare.component.variables.scss';
 
 .carousel-compare {
 	&__price {
@@ -26,35 +29,74 @@
 			@include media-breakpoint-up(md) {
 				width: 7.5%;
 			}
+
+			&:focus:not(.active),
+			&:hover:not(.active) {
+				text-decoration: none;
+			}
+		}
+
+		.carousel-control-prev {
+			&:focus,
+			&:hover {
+				.carousel-control-prev-icon {
+					background-color: darken($white, 10%);
+				}
+			}
+		}
+
+		.carousel-control-next {
+			&:focus,
+			&:hover {
+				.carousel-control-next-icon {
+					background-color: darken($font-text, 10%);
+				}
+			}
 		}
 
 		.carousel-control-prev-icon,
 		.carousel-control-next-icon {
-			width: 48px;
-			height: 48px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: $carousel-control-size;
+			height: $carousel-control-size;
 			background-image: none;
-			border-radius: 50%;
+			border-radius: $carousel-control-size;
+			box-shadow: $box-shadow-carousel;
+
+			&::before {
+				content: '\e930';
+				@include icon;
+			}
 		}
 
 		.carousel-control-prev-icon {
 			background-color: $white;
+
+			&::before {
+				color: $font-text;
+				transform: rotate(180deg);
+			}
 		}
 
 		.carousel-control-next-icon {
-			background-color: $font-header;
+			background-color: $font-text;
+
+			&::before {
+				color: $white;
+			}
 		}
 	}
 
 	.carousel-item {
+		padding: ( $spacer * 1.5 ) ( $spacer * 2 );
+
 		&.active + .active {
 			// Media queries
 			@include media-breakpoint-up(xl) {
 				border-left: $carousel-compare-border-left;
 			}
-		}
-
-		.active {
-			padding: ( $spacer * 1.5 ) ( $spacer * 2 );
 		}
 	}
 }
