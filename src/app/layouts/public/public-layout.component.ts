@@ -5,7 +5,6 @@ import {
 import {
     ChangeDetectorRef,
     Component,
-    HostListener,
     Inject,
     PLATFORM_ID,
 } from '@angular/core';
@@ -22,13 +21,11 @@ import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.compone
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CommodityTypesLowerCase,
-    CONSTS,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
-import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
 
 @Component({
@@ -39,18 +36,6 @@ export class PublicLayoutComponent extends AbstractLayoutComponent {
     public commodityTypePower = CommodityTypesLowerCase.POWER;
     public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
     public lastScrollTop = 0;
-    public wasLastTimeScrolledToTop = false;
-
-    @HostListener('window:scroll', [])
-    onWindowScroll() {
-        const scrollTop =
-            window.scrollY ||
-            window.pageYOffset ||
-            document.body.scrollTop + (document.documentElement && document.documentElement.scrollTop || 0);
-        this.wasLastTimeScrolledToTop = scrollTop < this.lastScrollTop && scrollTop > CONSTS.START_STICKER_HEADER ||
-            scrollTop === this.lastScrollTop && this.wasLastTimeScrolledToTop;
-        this.lastScrollTop = scrollTop;
-    }
 
     constructor(
         protected apollo: Apollo,

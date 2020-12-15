@@ -13,11 +13,9 @@
     class="header"
     [class.header--public]="settings.isPublic"
     [class.header--secured]="!settings.isPublic"
-    [class.header--sticked]="sticked"
     [class.header--lp]="settings.isLandingPage && !settings.isPublicEmptyPage">
     <div
-        class="container-fluid"
-        [class.container-fluid--max-width]="settings.isPublic">
+        class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="header-inner">
