@@ -245,15 +245,15 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
                         this.formSent = true;
                         this.cd.markForCheck();
                         this.router.navigate([CONSTS.PATHS.LOGIN],
-                                {
-                                    queryParams: {
-                                        email: values.email,
-                                    },
-                                    state: {
-                                        passwordWasSent: true,
-                                    },
+                            {
+                                queryParams: {
+                                    email: values.email,
                                 },
-                            );
+                                state: {
+                                    passwordWasSent: true,
+                                },
+                            },
+                        );
                     },
                     (error) => {
                         this.formLoading = false;

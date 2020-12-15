@@ -11,6 +11,25 @@ import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 export const CONSTS = {
     APPEND_AFTER_CUT_TEXT: '...',
     ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],
+    ASK_FOR_OFFER: {
+        ALLOWED_MINE_TYPE: [
+            'image/bmp',
+            'application/bmp',
+            'image/jpg',
+            'image/jpeg',
+            'application/pdf',
+            'image/png',
+            'application/png',
+            'image/tiff',
+        ],
+        ERROR_CODES: {
+            FILE_TYPE: 'FILE_TYPE',
+            FILE_COUNT: 'FILE_COUNT',
+            FILE_SIZE: 'FILE_SIZE',
+        },
+        MAX_FILE_COUNT: 10,
+        MAX_FILE_SIZE: 10485760,
+    },
     CRYPTO: {
         get SALT() {
             return CryptoJS.lib.WordArray.random(128 / 8);
@@ -55,12 +74,13 @@ export const CONSTS = {
     MONTHS_TO_CONTRACT_END: 2,
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
     MODAL_TYPE: {
-        MORE_TABS: 'moreTabs',
-        LP_VIDEO: 'lpVideo',
+        CONFIRM_DELETE_REQUEST: 'confirmDeleteOffer',
         CONFIRM_DELETE_OFFER: 'confirmDeleteOffer',
         CONFIRM_CANCEL_OFFER: 'confirmCancelOffer',
         CONFIRM_BACK_IMPORT: 'confirmBackImportOffer',
         CONFIRM_DELETE_MARKED: 'confirmDeleteMarked',
+        LP_VIDEO: 'lpVideo',
+        MORE_TABS: 'moreTabs',
     },
     OFFSET_ERRORS: {
         INVALID_INPUT: 40,
