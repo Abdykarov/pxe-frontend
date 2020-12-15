@@ -584,15 +584,32 @@ export enum ANNUAL_CONSUMPTION_UNIT_TYPES {
     ANNUAL_CONSUMPTION_UNIT = 'annualConsumptionUnit',
 }
 
-export const PUSH_EVENTS_GA = {
-    EVENT: 'eventTracking',
-    CATEGORY: 'Submit',
-    FORMS: {
-        SIGN_UP: 'Sign up',
-        LOGIN: 'Login',
-        CREATE_SUPPLY_POINT: 'Create supply point',
-        OFFER_SELECTION: 'Offer selection',
-        RECAPITULATION: 'Recapitulation',
-        CONTRACT: 'Contract',
+// czech is required by marketing agenture
+export const GTM_CONSTS = {
+    ACTIONS: {
+        SIGN: 'sign the offer',
+        SIGNED: 'offer signed',
+        CONTINUE: 'continue',
+        SELECT_OFFER: 'select offer',
+        SENT: 'sent',
+        VIEW: 'view',
+        START: 'start',
+        SAVE: 'save',
+        SHOW_DETAIL: 'show detail',
+    },
+    BRAND: 'pxe',
+    CATEGORIES: {
+        REGISTRATION: 'sign up',
+        FORM: 'form',
+    },
+    EVENTS: {
+        EVENT_TRACKING: 'eventTracking',
+        CHECKOUT: 'checkout',
+    },
+    LABELS: {
+        REGISTRATION: 'registration',
+        STEP_ONE: 'step 1',
+        STEP_TWO: 'step 2',
+        STEP_THREE: 'step 3',
     },
 };

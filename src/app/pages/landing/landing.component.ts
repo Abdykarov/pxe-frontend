@@ -31,7 +31,7 @@ import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
-    PUSH_EVENTS_GA,
+    GTM_CONSTS,
     ROUTES,
     S_ANALYTICS,
     SEO,
@@ -230,7 +230,13 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
                 .pipe(takeUntil(this.destroy$))
                 .subscribe(
                     () => {
-                        this.gtmService.pushEvent(PUSH_EVENTS_GA.FORMS.SIGN_UP);
+                        this.gtmService.pushEvent({
+                            'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+                            'category': GTM_CONSTS.CATEGORIES.REGISTRATION,
+                            'action': GTM_CONSTS.ACTIONS.SENT,
+                            'label': GTM_CONSTS.LABELS.REGISTRATION,
+                            'email': this.authService.hashUserId(values?.email),
+                        });
                         this.formLoading = false;
                         this.sAnalyticsService.sendWebData(
                             {},
