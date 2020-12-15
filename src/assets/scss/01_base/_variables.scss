@@ -78,6 +78,7 @@ $body-bg-lp-second:                #f8f8f8;
 $body-color:                       $font-text;
 
 $border-color:                     #bdcad6;
+$box-shadow-color:                 #000d16;
 
 // Config global
 $enable-shadows:                   true;
@@ -179,6 +180,7 @@ $checklist-lp-before-size:         50px;
 
 $border-radius:                    5px;
 $box-shadow:                       0 2px 5px 0 rgba($body-color, .16);
+$box-shadow-circle:                -10px 20px 56px 0 rgba($box-shadow-color, .15);
 
 
 // Links

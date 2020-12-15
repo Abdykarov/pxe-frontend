@@ -123,6 +123,7 @@
 			top: 0;
 			background-color: $white;
 			border-radius: $circular-number-list-size;
+			box-shadow: $box-shadow-circle;
 
 			// Media queries
 			@include media-breakpoint-up(md) {
