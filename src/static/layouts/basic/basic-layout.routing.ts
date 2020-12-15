@@ -40,6 +40,10 @@ import {
     buttonsPageRoutes,
 } from 'src/static/atoms/buttons/page.module';
 import {
+    CardPageModule,
+    cardPageRoutes,
+} from 'src/static/atoms/card/page.module';
+import {
     ColorsPageModule,
     colorsPageRoutes,
 } from 'src/static/atoms/colors/page.module';
@@ -211,6 +215,7 @@ const routes: Routes = [
             ...bannersPageRoutes,
             ...breadcrumbPageRoutes,
             ...buttonsPageRoutes,
+            ...cardPageRoutes,
             ...colorsPageRoutes,
             ...contractSigningPageRoutes,
             ...dashboardPageRoutes,
@@ -269,6 +274,7 @@ const routes: Routes = [
         BannersPageModule,
         BreadcrumbPageModule,
         ButtonsPageModule,
+        CardPageModule,
         ColorsPageModule,
         ContractSigningPageModule,
         DeleteAccountFailedPageModule,
