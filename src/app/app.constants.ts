@@ -582,7 +582,7 @@ export enum ANNUAL_CONSUMPTION_UNIT_TYPES {
     ANNUAL_CONSUMPTION_UNIT = 'annualConsumptionUnit',
 }
 
-// czeak is required by marketing agenture
+// czech is required by marketing agenture
 export const GTM_CONSTS = {
     ACTIONS: {
         SIGN: 'sign the offer',
