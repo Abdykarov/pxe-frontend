@@ -22,6 +22,17 @@
 			margin-right: 0;
 		}
 
+		.carousel-border {
+			padding: ( $spacer * 1.5 ) ( $spacer * 2 );
+			@include media-breakpoint-up(xl) {
+				border-left: $carousel-compare-border-left;
+			}
+
+			&--none {
+				border-left: none;
+			}
+		}
+
 		.carousel-control {
 			width: 15%;
 			opacity: 1;
@@ -85,17 +96,6 @@
 
 			&::before {
 				color: $white;
-			}
-		}
-	}
-
-	.carousel-item {
-		padding: ( $spacer * 1.5 ) ( $spacer * 2 );
-
-		&.active + .active {
-			// Media queries
-			@include media-breakpoint-up(xl) {
-				border-left: $carousel-compare-border-left;
 			}
 		}
 	}
