@@ -1,12 +1,22 @@
-import {ChangeDetectorRef, Component, Inject, Input, PLATFORM_ID, ViewEncapsulation, } from '@angular/core';
-import {isPlatformBrowser} from '@angular/common';
+import {
+    ChangeDetectorRef,
+    Component,
+    Inject,
+    Input,
+    PLATFORM_ID,
+    ViewEncapsulation,
+} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
-import {takeUntil} from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
-import {AbstractResizeComponent} from 'src/common/abstract-resize.component';
-import {CommodityType} from 'src/common/graphql/models/supply.model';
-import {mapTypeOfDeviceToNumberOfSlides, supplierCompares} from './carousel-compare.config';
-import {TypeOfResolution} from 'src/common/models/type-of-resolution';
+import { AbstractResizeComponent } from 'src/common/abstract-resize.component';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
+import {
+    mapTypeOfDeviceToNumberOfSlides,
+    supplierCompares,
+} from './carousel-compare.config';
+import { TypeOfResolution } from 'src/common/models/type-of-resolution';
 
 @Component({
     selector: 'pxe-carousel-compare',
