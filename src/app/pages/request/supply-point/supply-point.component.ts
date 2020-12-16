@@ -89,7 +89,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
-        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_ONE, this.authService.currentUserValue.uuid);
+        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_ONE, this.authService.hashedUserId);
         this.gtmService.pushEvent({
             event: GTM_CONSTS.EVENTS.CHECKOUT,
             ecommerce: {
@@ -253,7 +253,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                         'label': GTM_CONSTS.LABELS.STEP_ONE,
                         'odberatel': supplyPointFormData.supplierId,
                         'dodavatel': supplyPointFormData.commodityType.toLowerCase(),
-                        'userID': this.authService.hashUserId,
+                        'userID': this.authService.hashedUserId,
                     });
                     this.cd.markForCheck();
                     this.router.navigate(

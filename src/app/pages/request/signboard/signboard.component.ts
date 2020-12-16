@@ -71,7 +71,7 @@ export class SignboardComponent extends AbstractComponent {
                 this.cd.markForCheck();
             });
 
-        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_ONE, this.authService.currentUserValue.uuid);
+        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_ONE, this.authService.hashedUserId);
         this.gtmService.pushEvent({
             event: GTM_CONSTS.EVENTS.CHECKOUT,
             ecommerce: {
