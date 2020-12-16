@@ -17,7 +17,7 @@
         <ng-container *ngIf="customBeforeAppendTemplate">
             <ng-container *ngTemplateOutlet="customBeforeAppendTemplate; context: {activeSlide: activeSlide, setActiveSlide: setActiveSlide}"></ng-container>
         </ng-container>
-        <div class="row no-gutters w-100">
+        <div class="row no-gutters justify-content-center w-100 justify-content-md-start">
             <div class="d-flex" [ngClass]="customSlideWrapper">
                 <slide *ngFor="let item of carouselItems; let i = index" [attr.data-index]="i">
                     <ng-container *ngTemplateOutlet="slideTemplate; context: {$implicit: item, index: i,activeSlide: activeSlide, activeSlideRange: activeSlideRange}"></ng-container>

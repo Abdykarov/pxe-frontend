@@ -12,9 +12,9 @@
     <div class="section">
         <div class="container-fluid container-fluid--max-width">
             <div class="row align-items-xl-center">
-                <div class="col-12 col-md-6 col-xl-7 order-md-2">
-                    <div class="section-video-holder text-center d-none d-md-block">
-                        <img src="/assets/images/landing-page/lp-picture.png" />
+                <div class="col-12 mb-2 col-md-6 mb-0 col-xl-7 order-md-2">
+                    <div class="section-video-holder text-center">
+                        <img class="img-fluid" src="/assets/images/landing-page/lp-picture-home.png" />
                     </div>
                     <div class="section-video-text order-md-1">
                         <div class="row w-100 ml-0 text-center">
@@ -212,11 +212,18 @@
             <div class="row no-gutters">
                 <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-0">
                     <h2 class="h4--public text-secondary">Férové ceny energií</h2>
-                    <h3 class="h2--public">Porovnejte nabídky vybraných dodavatelů elektřiny</h3>
-                    <p>Níže najdete porovnání úspor vůči hlavní dodavatelům v kraji.</p>
-                    <p>taby</p>
+                    <h3 class="h2--public mb-3">Porovnejte nabídky vybraných dodavatelů elektřiny</h3>
+                    <p class="mb-4 mb-md-6">Níže najdete porovnání úspor vůči hlavní dodavatelům v kraji.</p>
+                    <ul class="link-list--lp">
+                        <li class="link-list__item">
+                            <a href="#" class="link-list__link link-list__link--active">Elektřina</a>
+                        </li>
+                        <li class="link-list__item">
+                            <a href="#" class="link-list__link">Plyn</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-12">
+                <div class="col-12 mb-5 mb-md-4 mb-xl-6">
                     <pxe-carousel-compare></pxe-carousel-compare>
                 </div>
                 <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-0">
@@ -239,7 +246,7 @@
             <div class="row no-gutters">
                 <div class="mb-6 col-md-4 offset-md-1 mb-md-0 col-xl-3 offset-xl-2">
                     <span class="info-flag">
-                        <img class="info-flag__img" src="/assets/images/layout/logo-pxe-white.svg" alt="logo pxe" title="pxe">
+                        <img class="info-flag__img d-block" src="/assets/images/layout/logo-pxe-white.svg" alt="logo pxe" title="pxe">
                         <span class="text-white">Komoditní burza energií</span>
                         <svg width="20px" height="17px" viewBox="0 0 20 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="info-flag__beak">
                             <g id="Landing-page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -248,11 +255,11 @@
                         </svg>
                     </span>
                 </div>
-                <div class="col-md-4 offset-md-1 col-xl-6 offset-xl-1">
+                <div class="mb-6 col-md-4 offset-md-1 mb-md-5 col-xl-6 mb-xl-6">
                     <div class="row">
                         <div class="col-12 mb-6">
                             <h2 class="h4--public text-white">O nás</h2>
-                            <h3 class="h2--public text-white">PXE — jsme burza. Elektřinu a plyn prodáváme již 100 let.</h3>
+                            <h3 class="h2--public text-white mb-3 mb-xl-6">PXE — jsme burza. Elektřinu a plyn prodáváme již 100 let.</h3>
                             <p class="text-white">Na českém trhu poskytovatelů energií se opravdu vyznáme. Již několik let velkoodběratelé (firmy, města, obce) využívají naší velkoobchodní aplikaci PARC.
                                 Její mladší sestra - aplikace parc4u teď nabízí stejné výhody i domácnostem a maloodběratelům. Přitom vás ochráníme před nevýhodnými
                                 podmínkami a nepoctivými prodejci - energošmejdy.</p>
@@ -266,10 +273,10 @@
                             >
                             </lnd-button>
                         </div>
-                        <div class="col-12">
-                            <pxe-carousel-suppliers></pxe-carousel-suppliers>
-                        </div>
                     </div>
+                </div>
+                <div class="col-12 col-md-10 offset-md-1 col-xl-6 offset-xl-6">
+                    <pxe-carousel-suppliers></pxe-carousel-suppliers>
                 </div>
             </div>
         </div>

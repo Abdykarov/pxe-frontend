@@ -281,6 +281,23 @@
 				}
 			}
 		}
+
+		&--lp {
+			.link-list__item {
+				padding-left: 0;
+				padding-right: 0;
+			}
+
+			.link-list__link {
+				padding: 0 ( $spacer * 2.25 ) ( $spacer / 4 );
+				font-size: $font-size-base-public;
+				text-transform: none;
+
+				&--active {
+					border-color: $font-text-public;
+				}
+			}
+		}
 	}
 
 	.qr-code-img {

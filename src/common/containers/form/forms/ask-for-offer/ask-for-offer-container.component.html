@@ -3,6 +3,7 @@
         <pxe-file-uploader
             [uploader]="fileUploader"
             [multiple]="true"
+            wrapperCustomClass="drop-zone--after-zindex text-white"
             mainText="Soubory přetáhněte sem nebo "
             secondaryText="Formáty: PDF, JPG, PNG, TIFF do velikosti 10 MB."
             [labelFromMainText]="true">
@@ -16,13 +17,13 @@
         </lnd-alert>
     </div>
     <div class="col-12 mb-3">
-        <span class="d-inline-flex align-items-center mr-4 mb-2"
+        <span class="d-inline-flex align-items-center mr-4 mb-2 text-white"
               *ngFor="let fileItem of fileUploader.queue">
             <span class="icon icon--document mr-2"></span>
             {{fileItem?.file?.name}}
             <lnd-button
                 (click)="removeFile(fileItem)"
-                icon="icon--delete"
+                icon="icon--bin"
                 variant="icon"
                 type="icon">
             </lnd-button>
@@ -34,7 +35,7 @@
             (keydown)="resetCustomFieldError()"
             (keydown.enter)="submitForm($event);false"
             (change)="resetCustomFieldError()"
-            class="form-container"
+            class="form-container ml-0"
             autocomplete="off">
             <ng-container *ngIf="fileUploader.queue.length">
                 <lnd-form-field
@@ -48,7 +49,9 @@
                 ></lnd-form-field>
                 <div class="text-right">
                     <lnd-button
-                        type="primary"
+                        type="gradient-primary"
+                        class="w-100"
+                        customClass="w-100 btn-public"
                         [submit]="true"
                         (action)="submitForm($event)"
                         label="odesllat">
