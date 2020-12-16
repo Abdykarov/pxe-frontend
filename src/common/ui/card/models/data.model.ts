@@ -4,4 +4,5 @@ export interface ICardData {
     imgAlt: string;
     imgTitle: string;
     title: string;
+    customClass?: string;
 }
