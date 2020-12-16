@@ -16,7 +16,7 @@
 .drop-zone {
 	position: relative;
 	width: 100%;
-	padding: ( $spacer * 2.5 ) 0;
+	padding: ( $spacer * 2.5 ) $spacer;
 
 	&::after {
 		content:'';

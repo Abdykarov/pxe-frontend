@@ -16,48 +16,52 @@
 		font-size: 2.25rem;
 	}
 
-	.carousel {
-		.carousel-inner {
-			padding: 0 ( $carousel-control-size + $spacer );
-		}
+	.carousel-inner {
+		padding: 0 ( $carousel-control-size + $spacer );
+	}
 
-		.carousel-item {
-			position: static;
-			margin-right: 0;
+	.carousel-item {
+		position: static;
+		margin-right: 0;
 
-			.item {
+		.item {
+			// Media queries
+			@include media-breakpoint-down(xs) {
 				display: flex;
 				justify-content: center;
 			}
 		}
 
-		.carousel-item__inner {
+		&__inner {
 			display: inline-block;
 			padding: ( $spacer * 1.5 ) ( $spacer * 1.5 ) $spacer;
 			@include media-breakpoint-up(xl) {
 				border-left: $carousel-compare-border-left;
 			}
-
+	
 			&--none {
 				border-left: none;
 			}
 		}
+	}
 
+	.carousel {
 		.carousel-control {
 			width: auto;
 			opacity: 1;
-
+	
 			&:focus:not(.active),
 			&:hover:not(.active) {
 				text-decoration: none;
-
+	
 				.carousel-control-prev-icon,
 				.carousel-control-next-icon {
 					background-color: $font-text;
+				}
 
-					&::before {
-						color: $white;
-					}
+				.carousel-control-prev-icon::before,
+				.carousel-control-next-icon::before {
+					color: $white;
 				}
 			}
 		}
@@ -73,14 +77,14 @@
 			background-image: none;
 			border-radius: $carousel-control-size;
 			box-shadow: $box-shadow-carousel;
-
+	
 			&::before {
 				content: '\e930';
 				@include icon;
 				color: $font-text;
 			}
 		}
-
+	
 		.carousel-control-prev-icon {
 			&::before {
 				color: $font-text;
