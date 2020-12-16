@@ -110,4 +110,9 @@ export class SignUpComponent extends AbstractComponent {
                     });
         }
     }
+
+    public routerToLogin = (event) => {
+        event.preventDefault();
+        this.router.navigate([ROUTES.ROUTER_LOGIN]);
+    }
 }
