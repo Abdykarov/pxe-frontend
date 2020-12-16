@@ -1,6 +1,8 @@
 import {
     Component,
+    Inject,
     OnInit,
+    PLATFORM_ID,
 } from '@angular/core';
 import {
     ActivatedRoute,
@@ -16,6 +18,7 @@ import { ModalService } from 'src/common/containers/modal/modal.service';
 import { LpPersonalizationService } from './services/lp-personalization.service';
 import { lpVideoModalConfig } from 'src/app/pages/landing/landing.config';
 import { personalizationOptions } from './lp-personalization-container.config';
+import {isPlatformBrowser} from '@angular/common';
 
 @Component({
   selector: 'lnd-lp-personalization-container',
@@ -34,16 +37,23 @@ export class LpPersonalizationContainerComponent implements OnInit {
         private lpPersonalizationService: LpPersonalizationService,
         private route: ActivatedRoute,
         private router: Router,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {}
 
     ngOnInit(): void {
-        const fragment = this.route.snapshot.fragment;
-        this.currentPersonalization = this.lpPersonalizationService.processPersonalization(fragment);
-        this.currentPersonalizationOption = R.find(
-            R.propEq('fragment', this.currentPersonalization),
-        )(personalizationOptions);
 
-        if (!this.currentPersonalizationOption) {
+        if (isPlatformBrowser(this.platformId)) {
+            const fragment = this.route.snapshot.fragment;
+            this.currentPersonalization = this.lpPersonalizationService.processPersonalization(fragment);
+            this.currentPersonalizationOption = R.find(
+                R.propEq('fragment', this.currentPersonalization),
+            )(personalizationOptions);
+
+            if (!this.currentPersonalizationOption) {
+                this.currentPersonalizationOption = this.getDefaultPersonalizationOption();
+            }
+
+        } else {
             this.currentPersonalizationOption = this.getDefaultPersonalizationOption();
         }
     }

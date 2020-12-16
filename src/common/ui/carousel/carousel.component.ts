@@ -1,9 +1,9 @@
 import {
-    Component,
-    EventEmitter,
+    Component, ElementRef,
+    EventEmitter, Inject,
     Input,
     OnInit,
-    Output,
+    Output, PLATFORM_ID,
     TemplateRef,
     ViewChild,
     ViewEncapsulation,
@@ -16,6 +16,12 @@ import { AbstractResizeComponent } from 'src/common/abstract-resize.component';
 import { getHeightOfDisplayNoneElement } from 'src/common/utils';
 import { IDefaultCarouselItem } from 'src/common/ui/carousel/models/data.model';
 import { TypeOfResolution } from 'src/common/models/type-of-resolution';
+import {AuthService} from '../../../app/services/auth.service';
+import {GTMService} from '../../../app/services/gtm.service';
+import {OnlyOneTabActiveService} from '../../../app/services/only-one-tab-active.service';
+import {Router} from '@angular/router';
+import {SAnalyticsService} from '../../../app/services/s-analytics.service';
+import {DOCUMENT, isPlatformBrowser} from '@angular/common';
 
 @Component({
     selector: 'lnd-carousel',
@@ -91,25 +97,33 @@ export class CarouselComponent extends AbstractResizeComponent implements OnInit
         this.carousel.pause();
     }
 
+    constructor(
+        @Inject(PLATFORM_ID) private platformId: string,
+    ) {
+        super();
+    }
+
     ngOnInit() {
         super.ngOnInit();
-        if (this.withCountHeight) {
-            setTimeout(_ => {
-                const parentElement = this.parent.nativeElement;
-                this.slides = parentElement.getElementsByTagName('slide');
-                this.innerCarousel = R.pipe(
-                    R.head,
-                    R.prop('parentElement'),
-                    R.prop('parentElement'),
-                )(parentElement.getElementsByTagName('slide'));
-                this.setHeights();
+        if (isPlatformBrowser(this.platformId)) {
+            if (this.withCountHeight) {
+                setTimeout(_ => {
+                    const parentElement = this.parent.nativeElement;
+                    this.slides = parentElement.getElementsByTagName('slide');
+                    this.innerCarousel = R.pipe(
+                        R.head,
+                        R.prop('parentElement'),
+                        R.prop('parentElement'),
+                    )(parentElement.getElementsByTagName('slide'));
+                    this.setHeights();
 
-                this.resizeEvent$
-                    .pipe(takeUntil(this.destroy$))
-                    .subscribe(() => {
-                        this.setHeights();
-                    });
-            });
+                    this.resizeEvent$
+                        .pipe(takeUntil(this.destroy$))
+                        .subscribe(() => {
+                            this.setHeights();
+                        });
+                });
+            }
         }
     }
 

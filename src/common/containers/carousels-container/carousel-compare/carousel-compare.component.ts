@@ -1,17 +1,12 @@
-import {
-    ChangeDetectorRef,
-    Component,
-    Input,
-    ViewEncapsulation,
-} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, Input, PLATFORM_ID, ViewEncapsulation, } from '@angular/core';
+import {isPlatformBrowser} from '@angular/common';
 
-import { takeUntil } from 'rxjs/operators';
+import {takeUntil} from 'rxjs/operators';
 
-import { AbstractResizeComponent } from 'src/common/abstract-resize.component';
-import { CommodityType } from 'src/common/graphql/models/supply.model';
-import { mapTypeOfDeviceToNumberOfSlides } from './carousel-compare.config';
-import { supplierCompares } from './carousel-compare.config';
-import { TypeOfResolution } from 'src/common/models/type-of-resolution';
+import {AbstractResizeComponent} from 'src/common/abstract-resize.component';
+import {CommodityType} from 'src/common/graphql/models/supply.model';
+import {mapTypeOfDeviceToNumberOfSlides, supplierCompares} from './carousel-compare.config';
+import {TypeOfResolution} from 'src/common/models/type-of-resolution';
 
 @Component({
     selector: 'pxe-carousel-compare',
@@ -37,20 +32,28 @@ export class CarouselCompareComponent extends AbstractResizeComponent {
 
     constructor(
         private cd: ChangeDetectorRef,
+        @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
-        this.deviceCouldChanged(this.getTypeOfDevice());
 
-        this.resizeEvent$
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(() => {
-                this.showCarousel = false;
-                this.numberOfSlides = this.deviceCouldChanged(this.getTypeOfDevice());
-                setTimeout(_ => {
-                    this.showCarousel = true;
-                    this.cd.markForCheck();
+        if (isPlatformBrowser(this.platformId)) {
+            this.deviceCouldChanged(this.getTypeOfDevice());
+
+            this.resizeEvent$
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(() => {
+                    this.showCarousel = false;
+                    this.numberOfSlides = this.deviceCouldChanged(this.getTypeOfDevice());
+                    setTimeout(_ => {
+                        this.showCarousel = true;
+                        this.cd.markForCheck();
+                    });
                 });
-            });
+        } else {
+            this.showCarousel = true;
+            this.numberOfSlides = this.deviceCouldChanged(TypeOfResolution.DESKTOP);
+            this.cd.markForCheck();
+        }
     }
 
     public maxHeightChangeAction = (maxHeight: number) => this.maxHeight = maxHeight;
