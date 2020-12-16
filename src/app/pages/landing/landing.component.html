@@ -69,29 +69,8 @@
             </div>
             <div class="card-tiles">
                 <div class="row no-gutters card-tiles__inner">
-                    <div class="col-md-4 card-tile__item">
-                        <lnd-card [data]="tileCard"></lnd-card>
-                    </div>
-                    <div class="col-md-4 card-tile__item">
-                        <lnd-card [data]="tileCard"></lnd-card>
-                    </div>
-                    <div class="col-md-4 card-tile__item">
-                        <lnd-card [data]="tileCard"></lnd-card>
-                    </div>
-                    <div class="col-md-4 card-tile__item">
-                        <lnd-card [data]="tileCard"></lnd-card>
-                    </div>
-                    <div class="col-md-4 card-tile__item">
-                        <lnd-card [data]="tileCard"></lnd-card>
-                    </div>
-                    <div class="col-md-4 card-tile__item">
-                        <lnd-card [data]="tileCard"></lnd-card>
-                    </div>
-                    <div class="col-md-4 card-tile__item card-tile__item--last-item">
-                        <lnd-card [data]="tileCard"></lnd-card>
-                    </div>
-                    <div class="col-md-4 card-tile__item card-tile__item--last-item">
-                        <lnd-card [data]="tileCard"></lnd-card>
+                    <div *ngFor="let item of cardConfig" class="col-md-4 card-tile__item" [ngClass]="item.customClass">
+                        <lnd-card [data]="item"></lnd-card>
                     </div>
                 </div>
             </div>

@@ -19,9 +19,11 @@
         </ng-container>
         <div class="row no-gutters justify-content-center w-100 justify-content-md-start">
             <div class="d-flex" [ngClass]="customSlideWrapper">
-                <slide *ngFor="let item of carouselItems; let i = index" [attr.data-index]="i">
-                    <ng-container *ngTemplateOutlet="slideTemplate; context: {$implicit: item, index: i,activeSlide: activeSlide, activeSlideRange: activeSlideRange}"></ng-container>
-                </slide>
+                <div class="carousel-items__wrapper">
+                    <slide *ngFor="let item of carouselItems; let i = index" [attr.data-index]="i">
+                        <ng-container *ngTemplateOutlet="slideTemplate; context: {$implicit: item, index: i,activeSlide: activeSlide, activeSlideRange: activeSlideRange}"></ng-container>
+                    </slide>
+                </div>
             </div>
         </div>
         <ng-container *ngIf="customAfterAppendTemplate">

@@ -32,6 +32,7 @@ import {
     AskForOfferContainerComponent,
 } from 'src/common/containers/form/forms/ask-for-offer/ask-for-offer-container.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { cardConfig } from './landing.config';
 import {
     CONSTS,
     ROUTES,
@@ -90,13 +91,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
 
     public isMoreThanMdResolution = false;
 
-    public tileCard = {
-        imgSrc: 'assets/images/landing-page/our-help-cottage.png',
-        imgAlt: 'Card image',
-        imgTitle: 'Card title',
-        title: 'Tile card',
-        content: 'Card text. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    };
+    public cardConfig = cardConfig;
 
     public resizeEvent$ = fromEvent(window, 'resize')
         .pipe(
