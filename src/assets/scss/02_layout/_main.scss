@@ -168,10 +168,10 @@
 				> li {
 					display: block;
 					padding-left: $list-decimal-padding-left;
+				}
 
-					&::before {
-						position: absolute;
-					}
+				> li::before {
+					position: absolute;
 				}
 			}
 		}
@@ -281,48 +281,48 @@
 				}
 			}
 		}
+	}
 
-		&--lp {
-			.link-list__item {
-				padding-left: 0;
-				padding-right: 0;
+	.link-list--lp {
+		.link-list__item {
+			padding-left: 0;
+			padding-right: 0;
+		}
 
-				& + .link-list__item {
-					margin-left: ( $spacer * 2 );
+		.link-list__item + .link-list__item {
+			margin-left: ( $spacer * 2 );
 
-					// Media queries
-					@include media-breakpoint-up(xl) {
-						margin-left: $spacer;
-					}
+			// Media queries
+			@include media-breakpoint-up(xl) {
+				margin-left: $spacer;
+			}
+		}
+
+		.link-list__link {
+			&,
+			&:visited {
+				padding-bottom: ( $spacer / 4 );
+				font-size: $font-size-base-public;
+				text-transform: none;
+
+				// Media queries
+				@include media-breakpoint-up(md) {
+					padding-left: ( $spacer / 2 );
+					padding-right: ( $spacer / 2 );
+				}
+				@include media-breakpoint-up(xl) {
+					padding-left: ( $spacer * 2 );
+					padding-right: ( $spacer * 2 );
 				}
 			}
 
-			.link-list__link {
-				&,
-				&:visited {
-					padding-bottom: ( $spacer / 4 );
-					font-size: $font-size-base-public;
-					text-transform: none;
+			&:focus,
+			&:hover {
+				border-bottom: 2px solid rgba($font-text-public, .6);
+			}
 
-					// Media queries
-					@include media-breakpoint-up(md) {
-						padding-left: ( $spacer / 2 );
-						padding-right: ( $spacer / 2 );
-					}
-					@include media-breakpoint-up(xl) {
-						padding-left: ( $spacer * 2 );
-						padding-right: ( $spacer * 2 );
-					}
-				}
-
-				&:focus,
-				&:hover {
-					border-bottom: 2px solid rgba($font-text-public, .6);
-				}
-
-				&--active {
-					border-color: $font-text-public;
-				}
+			&--active {
+				border-color: $font-text-public;
 			}
 		}
 	}
