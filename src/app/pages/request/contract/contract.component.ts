@@ -297,8 +297,8 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                             'category': GTM_CONSTS.CATEGORIES.FORM,
                             'dodavatel': removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
                             'action': GTM_CONSTS.ACTIONS.SIGN,
-                            'label': GTM_CONSTS.LABELS.STEP_THREE,
-                            'userID': this.authService.hashUserId,
+                            'label': GTM_CONSTS.LABELS.STEP_TWO,
+                            'userID': this.authService.hashedUserId,
                         });
                         this.router.navigate(
                             [ROUTES.ROUTER_REQUEST_PAYMENT], {
