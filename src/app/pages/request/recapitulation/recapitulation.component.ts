@@ -167,7 +167,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                         'dodavatel': removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
                         'action': GTM_CONSTS.ACTIONS.CONTINUE,
                         'label': GTM_CONSTS.LABELS.STEP_TWO,
-                        'userID': this.authService.hashUserId,
+                        'userID': this.authService.hashedUserId,
                     });
                     this.router.navigate(
                         [ROUTES.ROUTER_REQUEST_CONTRACT], {
