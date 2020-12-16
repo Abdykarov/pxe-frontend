@@ -11,9 +11,24 @@
 @import 'carousel-compare.component.variables.scss';
 
 .carousel-compare {
+	&__title {
+		// Media queries
+		@include media-breakpoint-up(xl) {
+			font-size: $h3-font-size-public-md;
+		}
+		@include media-breakpoint-up(lg) {
+			font-size: $h3-font-size-public;
+		}
+	}
+
 	&__price {
 		color: $carousel-compare-price;
-		font-size: 2.25rem;
+		font-size: 2rem;
+
+		// Media queries
+		@include media-breakpoint-up(lg) {
+			font-size: 2.25rem;
+		}
 	}
 
 	.carousel-inner {
@@ -60,10 +75,14 @@
 
 			// Media queries
 			@include media-breakpoint-up(md) {
-				padding: ( $spacer * 1.5 ) ( $spacer * 1.5 ) $spacer;
+				padding: ( $spacer * 1.5 ) $spacer $spacer;
 			}
 			@include media-breakpoint-up(xl) {
 				border-left: $carousel-compare-border-left;
+			}
+			@include media-breakpoint-up(lg) {
+				padding-left: ( $spacer * 2 );
+				padding-right: ( $spacer * 2 );
 			}
 
 			&--none {

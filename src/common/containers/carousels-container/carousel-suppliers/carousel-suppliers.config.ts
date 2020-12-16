@@ -6,37 +6,37 @@ export const supplierLogos: ISupplierLogo[] = [
         alt: 'logo - Alpiq CZ',
         logoUrl: '/assets/images/suppliers/logo_alpiq-white.svg',
         title: 'Alpiq CZ',
-        width: 100,
+        width: 79,
     },
     {
         alt: 'logo - Bohemia Energy entity s.r.o.',
         logoUrl: '/assets/images/suppliers/logo_bohemia-energy-white.svg',
         title: 'Bohemia Energy entity s.r.o.',
-        width: 120,
+        width: 108,
     },
     {
         alt: 'logo - EP Energy Trading a.s.',
         logoUrl: '/assets/images/suppliers/logo_ep-energy-trading-white.svg',
         title: 'EP Energy Trading a.s.',
-        width: 90,
+        width: 80,
     },
     {
         alt: 'logo - Yello Energy',
         logoUrl: '/assets/images/suppliers/logo_yello-energy-white.svg',
         title: 'Yello Energy',
-        width: 30,
+        width: 35,
     },
     {
         alt: 'logo - CARBOUNION BOHEMIA, spol. s r. o.',
         logoUrl: '/assets/images/suppliers/logo_carbounion-bohemia-white.svg',
         title: 'CARBOUNION BOHEMIA, spol. s r. o.',
-        width: 30,
+        width: 50,
     },
     {
         alt: 'logo - Pražská plynárenská a.s.',
         logoUrl: '/assets/images/suppliers/logo_prazska-plynarenska-white.svg',
         title: 'Pražská plynárenská a.s.',
-        width: 100,
+        width: 103,
     },
 ];
 

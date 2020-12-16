@@ -357,23 +357,22 @@
 	}
 
 	.link-next-section {
-		&,
-		&:visited {
+		@include link-without-href {
 			display: inline-flex;
 			align-items: center;
 			justify-content: center;
-			width: 48px;
-			height: 48px;
+			width: $landing-page-link-next-section-size;
+			height: $landing-page-link-next-section-size;
 			background-color: $body-bg-lp;
 			color: $font-text;
-			border-radius: 48px;
+			border-radius: $landing-page-link-next-section-size;
 			box-shadow: $box-shadow-circle;
 		}
 
-		&:focus,
-		&:hover {
-			text-decoration: none;
+		@include link-without-href-interactive {
 			background-color: darken($body-bg-lp, 5%);
+			color: $font-text;
+			text-decoration: none;
 		}
 
 		&__icon {

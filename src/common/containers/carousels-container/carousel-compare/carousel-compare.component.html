@@ -1,7 +1,7 @@
 <ng-template #slideTemplate let-item let-activeSlideRange="activeSlideRange" let-index="index">
     <div class="carousel-item__inner"
          [class.carousel-item__inner--none]="index === activeSlideRange[0]">
-        <h4 class="h3--public mb-3">
+        <h4 class="carousel-compare__title h3--public mb-3">
             {{item.region}}
         </h4>
         <p class="mb-1">

@@ -245,15 +245,15 @@
 		}
 
 		&__link {
-			&,
-			&:visited {
+
+			@include link-without-href {
 				color: $font-text;
 				font-size: $perex-font-size;
 				text-transform: uppercase;
 			}
 
-			&:focus,
-			&:hover {
+			@include link-without-href-interactive {
+				color: $font-text;
 				text-decoration: none;
 			}
 

@@ -1,6 +1,6 @@
 <div *ngIf="currentPersonalizationOption"
-    class="row align-items-xl-center">
-    <div class="col-12 col-md-6 col-xl-7 order-md-2 mb-3 mb-md-0">
+    class="row align-items-md-center">
+    <div class="col-12 col-md-5 col-xl-6 order-md-2 mb-3 mb-md-0">
         <div class="section-video-holder text-center">
             <img class="img-fluid" [src]="currentPersonalizationOption.img" />
         </div>
@@ -15,15 +15,14 @@
                         (action)="playVideoInModal($event)"
                     >
                     </lnd-button>
-                    <h2 class="h3--public mb-1">
+                    <h2 class="h3--public mb-0">
                         Co je parc4u
                     </h2>
-                    <a (click)="playVideoInModal($event)">Přehrát video</a>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-12 col-md-5 offset-md-1 offset-xl-0">
+    <div class="col-12 col-md-6 offset-md-1 offset-xl-0">
         <h1 class="h1--public mb-4" [innerHTML]="currentPersonalizationOption.header"></h1>
         <p [innerHTML]="currentPersonalizationOption.description"></p>
         <div class="text-center text-md-left">
