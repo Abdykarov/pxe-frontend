@@ -38,6 +38,7 @@ import {
     ROUTES,
     SEO,
 } from 'src/app/app.constants';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import { FaqService } from 'src/app/services/faq.service';
 import { GTMService } from 'src/app/services/gtm.service';
@@ -71,8 +72,8 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     @ViewChild('howItWorksFileContainer', { static: true })
     public howItWorksFileContainer: AskForOfferContainerComponent;
 
-    @ViewChild('lastContentFileUploader', { static: true })
-    public lastContentFileUploader: AskForOfferContainerComponent;
+    // @ViewChild('lastContentFileUploader', { static: true })
+    // public lastContentFileUploader: AskForOfferContainerComponent;
 
     @ViewChild('help', { static: true })
     public help: ElementRef;
@@ -80,6 +81,8 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     @ViewChild('bestPricesInTheWorld', { static: true })
     public bestPricesInTheWorld: ElementRef;
 
+    public activeCommodityTypeCarouselCompare = CommodityType.POWER;
+    public CommodityType = CommodityType;
     public frequentedQuestions: IAccordionItem[] = [];
     public formLoading = false;
     public formSent = false;

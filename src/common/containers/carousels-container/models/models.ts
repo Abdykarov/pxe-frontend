@@ -10,7 +10,8 @@ export interface IReference extends IDefaultCarouselItem {
 
 export interface ISupplierCompare extends IDefaultCarouselItem {
     region: string;
-    saving: number;
+    savingGas: number;
+    savingPower: number;
 }
 
 export interface ISupplierLogo extends IDefaultCarouselItem {

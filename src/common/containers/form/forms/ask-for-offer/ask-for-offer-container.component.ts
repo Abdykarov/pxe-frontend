@@ -76,7 +76,7 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
 
     public removeFile = (item) => this.fileUploader.removeFromQueue(item);
 
-    public submitForm = (yy) => {
+    public submitForm = (data) => {
         if (this.fileUploader.queue.length > 0 && this.form.valid) {
             this.fileUploader.uploadAllFiles({
                 email: this.form.getRawValue().email,

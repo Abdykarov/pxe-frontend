@@ -150,15 +150,23 @@
                     <p class="mb-4 mb-md-6">Níže najdete porovnání úspor vůči hlavní dodavatelům v kraji.</p>
                     <ul class="link-list--lp">
                         <li class="link-list__item">
-                            <a href="#" class="link-list__link link-list__link--active">Elektřina</a>
+                            <a (click)="activeCommodityTypeCarouselCompare = CommodityType.POWER"
+                               class="link-list__link"
+                               [class.link-list__link--active]="activeCommodityTypeCarouselCompare == CommodityType.POWER">
+                                Elektřina
+                            </a>
                         </li>
                         <li class="link-list__item">
-                            <a href="#" class="link-list__link">Plyn</a>
+                            <a (click)="activeCommodityTypeCarouselCompare = CommodityType.GAS"
+                               class="link-list__link"
+                               [class.link-list__link--active]="activeCommodityTypeCarouselCompare == CommodityType.GAS">
+                                Plyn
+                            </a>
                         </li>
                     </ul>
                 </div>
                 <div class="col-12 mb-5 mb-md-4 mb-xl-6">
-                    <pxe-carousel-compare></pxe-carousel-compare>
+                    <pxe-carousel-compare [commodityType]="activeCommodityTypeCarouselCompare"></pxe-carousel-compare>
                 </div>
                 <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-0">
                     <p class="mb-6">Úspora s PXE je vypočítána vůči dominantnímu dodavateli PRE (ceník elektřina), při odběru 24&nbsp;MWh v tarifu D56d. Ceny jsou včetně DPH.</p>
@@ -210,7 +218,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-10 offset-md-1 col-xl-6 offset-xl-6">
-                    <pxe-carousel-suppliers></pxe-carousel-suppliers>
+                    <pxe-carousel-suppliers></pxe-carousel-suppliers>-->
                 </div>
             </div>
         </div>
@@ -262,21 +270,21 @@
             </div>
         </div>
     </div>
-    <div class="section section--gradient-violet">
-        <div class="container-fluid container-fluid--max-width">
-            <div class="row no-gutters">
-                <div class="col-12 col-md-8 offset-md-2 col-xl-4 offset-xl-1">
-                    <h2 class="h2--public text-white">Nechcete nic vyplňovat? Nemusíte!</h2>
-                    <ol class="numerical-list-stepper">
-                        <li [class.active]="lastContentFileUploader?.fileUploader?.queue?.length === 0">Vložte Vaši poslední fakturu za elektřinu nebo plyn.</li>
-                        <li [class.active]="lastContentFileUploader?.fileUploader?.queue?.length > 1">Zadejte váš email a my vám pošleme nabídky na míru.
-                            Zdarma a nezávazně.</li>
-                    </ol>
-                </div>
-                <div class="col-12 col-md-8 offset-md-2 col-xl-5 offset-xl-1">
-                    <pxe-ask-for-offer-container id="asda" #lastContentFileUploader></pxe-ask-for-offer-container>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--    <div class="section section&#45;&#45;gradient-violet">-->
+<!--        <div class="container-fluid container-fluid&#45;&#45;max-width">-->
+<!--            <div class="row no-gutters">-->
+<!--                <div class="col-12 col-md-8 offset-md-2 col-xl-4 offset-xl-1">-->
+<!--                    <h2 class="h2&#45;&#45;public text-white">Nechcete nic vyplňovat? Nemusíte!</h2>-->
+<!--                    <ol class="numerical-list-stepper">-->
+<!--                        <li [class.active]="lastContentFileUploader?.fileUploader?.queue?.length === 0">Vložte Vaši poslední fakturu za elektřinu nebo plyn.</li>-->
+<!--                        <li [class.active]="lastContentFileUploader?.fileUploader?.queue?.length > 1">Zadejte váš email a my vám pošleme nabídky na míru.-->
+<!--                            Zdarma a nezávazně.</li>-->
+<!--                    </ol>-->
+<!--                </div>-->
+<!--                <div class="col-12 col-md-8 offset-md-2 col-xl-5 offset-xl-1">-->
+<!--                    <pxe-ask-for-offer-container id="asda" #lastContentFileUploader></pxe-ask-for-offer-container>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 </div>

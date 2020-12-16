@@ -53,8 +53,8 @@ export const personalizationOptions: IPersonalization[] = [
     {
         fragment: 'sprava-firmy',
         buttonText: 'Chci se zbavit starostí',
-        header: 'Brzdí vás starosti s drahou energií, ale nechcete řešit smlouvy a papírování?',
-        description: 'V aplikaci parc4u si vyberete dodavatele energií, který vám nejvíc sedne. Smlouvu a vše ostatní už za vás zařídíme my.',
+        header: 'Máte starosti svedením firmy, a nechce se vám ještě řešit odběr energií?',
+        description: 'Nahrajte do aplikace poslední fakturu za energie a vyberte si nejlepšího dodavatele. O vše ostatní se postaráme my.',
         img: '/assets/images/landing-page/lp-picture.png',
     },
     {

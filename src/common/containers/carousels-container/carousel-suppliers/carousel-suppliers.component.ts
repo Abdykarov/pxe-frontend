@@ -1,5 +1,7 @@
 import {
     Component,
+    Inject,
+    PLATFORM_ID,
     ViewEncapsulation,
 } from '@angular/core';
 
@@ -9,6 +11,7 @@ import { AbstractResizeComponent } from 'src/common/abstract-resize.component';
 import { mapTypeOfDeviceToNumberOfSlides } from './carousel-suppliers.config';
 import { supplierLogos } from 'src/common/containers/carousels-container/carousel-suppliers/carousel-suppliers.config';
 import { TypeOfResolution } from 'src/common/models/type-of-resolution';
+import {isPlatformBrowser} from '@angular/common';
 
 @Component({
     selector: 'pxe-carousel-suppliers',
@@ -26,16 +29,25 @@ export class CarouselSuppliersComponent extends AbstractResizeComponent {
     public deviceCouldChanged = (typeOfResolution: TypeOfResolution) =>
         this.numberOfSlides = mapTypeOfDeviceToNumberOfSlides[typeOfResolution]
 
-    constructor() {
+    constructor(
+        @Inject(PLATFORM_ID) private platformId: string,
+    ) {
         super();
-        this.deviceCouldChanged(this.getTypeOfDevice());
 
-        this.resizeEvent$
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(() => {
-                this.showCarousel = false;
-                this.numberOfSlides = this.deviceCouldChanged(this.getTypeOfDevice());
-                setTimeout(_ => this.showCarousel = true);
-            });
+        if (isPlatformBrowser(this.platformId)) {
+
+            this.deviceCouldChanged(this.getTypeOfDevice());
+
+            this.resizeEvent$
+                .pipe(takeUntil(this.destroy$))
+                .subscribe(() => {
+                    this.showCarousel = false;
+                    this.numberOfSlides = this.deviceCouldChanged(this.getTypeOfDevice());
+                    setTimeout(_ => this.showCarousel = true);
+                });
+        } else {
+            this.showCarousel = true;
+            this.numberOfSlides = this.deviceCouldChanged(TypeOfResolution.DESKTOP);
+        }
     }
 }
