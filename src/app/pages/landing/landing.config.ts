@@ -60,7 +60,7 @@ export const cardConfig: ICardData[] = [
         imgAlt: 'sprava-firmy',
         imgTitle: 'Správa firmy',
         title: 'Správa firmy',
-        content: 'TODO',
+        content: 'Nahrajte do aplikace poslední fakturu za energie a vyberte si nejlepšího dodavatele. O vše ostatní se postaráme my.',
         customClass: 'card-tile__item--last-item',
     },
     {

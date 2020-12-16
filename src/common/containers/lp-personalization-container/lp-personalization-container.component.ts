@@ -11,11 +11,11 @@ import * as R from 'ramda';
 
 import { AuthService } from 'src/app/services/auth.service';
 import { CONSTS } from 'src/app/app.constants';
+import { IPersonalization } from './models/models';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { LpPersonalizationService } from './services/lp-personalization.service';
 import { lpVideoModalConfig } from 'src/app/pages/landing/landing.config';
-import { personalizationOptions } from './config/config';
-import {IPersonalization} from './models/models';
+import { personalizationOptions } from './lp-personalization-container.config';
 
 @Component({
   selector: 'lnd-lp-personalization-container',
