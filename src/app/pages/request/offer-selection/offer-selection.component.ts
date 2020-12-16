@@ -191,7 +191,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
                         'dodavatel': removeAccent(supplyPointOffer?.name).toLowerCase(),
                         'action': GTM_CONSTS.ACTIONS.SELECT_OFFER,
                         'label': GTM_CONSTS.LABELS.STEP_TWO,
-                        'userID': this.authService.hashUserId,
+                        'userID': this.authService.hashedUserId,
                     });
                     this.router.navigate(
                         [ROUTES.ROUTER_REQUEST_RECAPITULATION],
@@ -227,7 +227,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
                 'dodavatel': removeAccent(supplyPointOffer?.name).toLowerCase(),
                 'action': GTM_CONSTS.ACTIONS.SHOW_DETAIL,
                 'label': GTM_CONSTS.LABELS.STEP_TWO,
-                'userID': this.authService.hashUserId,
+                'userID': this.authService.hashedUserId,
             });
         }
     }

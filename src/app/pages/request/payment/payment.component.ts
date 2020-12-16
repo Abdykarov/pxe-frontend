@@ -170,7 +170,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                         'dodavatel': removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
                         'action': GTM_CONSTS.ACTIONS.SIGNED,
                         'label': GTM_CONSTS.LABELS.STEP_THREE,
-                        'userID': this.authService.hashUserId,
+                        'userID': this.authService.hashedUserId,
                     });
                     this.supplyPointNewVersion = supplyPointNewVersion;
                     this.loading = false;
