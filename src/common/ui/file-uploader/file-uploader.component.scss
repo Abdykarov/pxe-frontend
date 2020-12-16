@@ -56,8 +56,8 @@
 		background-color: rgba($light-dark, .3);
 	}
 
-	&--after-zindex {
-		z-index: 1;
+	&--zindex {
+		z-index: $zindex-drop-zone;
 	}
 }
 

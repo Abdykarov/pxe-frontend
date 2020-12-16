@@ -28,6 +28,9 @@ import {
 import { fromEvent } from 'rxjs';
 
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
+import {
+    AskForOfferContainerComponent,
+} from 'src/common/containers/form/forms/ask-for-offer/ask-for-offer-container.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
@@ -46,7 +49,6 @@ import {
 } from 'src/common/containers/form/models/form-definition.model';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import { IQuestion } from 'src/app/services/model/faq.model';
-import { lpVideoModalConfig } from './landing.config';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { scrollToElementFnc } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
@@ -62,8 +64,14 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     @ViewChild('video', { static: true })
     public _video: ElementRef;
 
-    @ViewChild('howItWorks', { static: false })
+    @ViewChild('howItWorks', { static: true })
     public howItWorks: ElementRef;
+
+    @ViewChild('howItWorksFileContainer', { static: true })
+    public howItWorksFileContainer: AskForOfferContainerComponent;
+
+    @ViewChild('lastContentFileUploader', { static: true })
+    public lastContentFileUploader: AskForOfferContainerComponent;
 
     @ViewChild('help', { static: true })
     public help: ElementRef;
@@ -171,12 +179,6 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
             });
     }
 
-    public playVideoInModal = (event) => {
-        event.preventDefault();
-        this.modalService
-            .showModal$.next(lpVideoModalConfig());
-    }
-
     public routeToSignUp = (evt) => {
         evt.preventDefault();
         if (this.authService.isLogged()) {
@@ -184,5 +186,10 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
         } else {
             this.router.navigate([CONSTS.PATHS.SIGN_UP]);
         }
+    }
+
+    public routerToFaq = (evt) => {
+        evt.preventDefault();
+        this.router.navigate([CONSTS.PATHS.FAQ]);
     }
 }

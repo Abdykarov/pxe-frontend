@@ -18,25 +18,25 @@ export const supplierLogos: ISupplierLogo[] = [
         alt: 'logo - EP Energy Trading a.s.',
         logoUrl: '/assets/images/suppliers/logo_ep-energy-trading-white.svg',
         title: 'EP Energy Trading a.s.',
-        width: 130,
+        width: 90,
     },
     {
         alt: 'logo - Yello Energy',
         logoUrl: '/assets/images/suppliers/logo_yello-energy-white.svg',
         title: 'Yello Energy',
-        width: 140,
+        width: 30,
     },
     {
         alt: 'logo - CARBOUNION BOHEMIA, spol. s r. o.',
         logoUrl: '/assets/images/suppliers/logo_carbounion-bohemia-white.svg',
         title: 'CARBOUNION BOHEMIA, spol. s r. o.',
-        width: 150,
+        width: 30,
     },
     {
         alt: 'logo - Pražská plynárenská a.s.',
         logoUrl: '/assets/images/suppliers/logo_prazska-plynarenska-white.svg',
         title: 'Pražská plynárenská a.s.',
-        width: 160,
+        width: 100,
     },
 ];
 

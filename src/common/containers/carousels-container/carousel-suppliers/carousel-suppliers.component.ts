@@ -17,7 +17,7 @@ import { TypeOfResolution } from 'src/common/models/type-of-resolution';
     encapsulation: ViewEncapsulation.None,
 })
 export class CarouselSuppliersComponent extends AbstractResizeComponent {
-    public readonly height = 25;
+    public readonly height = 30;
 
     public numberOfSlides = null;
 
