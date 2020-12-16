@@ -120,7 +120,34 @@
             <div class="row no-gutters">
                 <div class="col-12 text-center text-xl-left">
                     <h2 class="h4--public text-secondary">S čím vám Pomůžeme</h2>
-                    <p>komponenta Card</p>
+                </div>
+                <div class="card-tiles">
+                    <div class="row no-gutters card-tiles__inner">
+                        <div class="col-md-4 card-tile__item">
+                            <lnd-card [data]="tileCard"></lnd-card>
+                        </div>
+                        <div class="col-md-4 card-tile__item">
+                            <lnd-card [data]="tileCard"></lnd-card>
+                        </div>
+                        <div class="col-md-4 card-tile__item">
+                            <lnd-card [data]="tileCard"></lnd-card>
+                        </div>
+                        <div class="col-md-4 card-tile__item">
+                            <lnd-card [data]="tileCard"></lnd-card>
+                        </div>
+                        <div class="col-md-4 card-tile__item">
+                            <lnd-card [data]="tileCard"></lnd-card>
+                        </div>
+                        <div class="col-md-4 card-tile__item">
+                            <lnd-card [data]="tileCard"></lnd-card>
+                        </div>
+                        <div class="col-md-4 card-tile__item card-tile__item--last-item">
+                            <lnd-card [data]="tileCard"></lnd-card>
+                        </div>
+                        <div class="col-md-4 card-tile__item card-tile__item--last-item">
+                            <lnd-card [data]="tileCard"></lnd-card>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -128,12 +155,12 @@
     <div class="section section--white">
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
-                <div class="col-12">
-                    <h2>Carousel</h2>
+                <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-3">
+                    <pxe-carousel-references></pxe-carousel-references>
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
     <div class="section section--bg-two-half section--dark-gray-left-half section--gradient-violet-right-half">
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
@@ -175,7 +202,7 @@
                                 <h2 class="h2--public text-white">Nechcete nic vyplňovat? Nemusíte!</h2>
                                 <ol class="numerical-list-stepper">
                                     <li class="active">Vložte Vaši poslední fakturu za elektřinu nebo plyn.</li>
-                                    <li>Zadejte váš email a my vám pošleme nabídky na míru. 
+                                    <li>Zadejte váš email a my vám pošleme nabídky na míru.
                                         Zdarma a nezávazně.</li>
                                 </ol>
                             </div>
@@ -198,7 +225,7 @@
                     <p>taby</p>
                 </div>
                 <div class="col-12">
-                    <p>carousel</p>
+                    <pxe-carousel-compare></pxe-carousel-compare>
                 </div>
                 <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-0">
                     <p class="mb-6">Úspora s PXE je vypočítána vůči dominantnímu dodavateli PRE (ceník elektřina), při odběru 24&nbsp;MWh v tarifu D56d. Ceny jsou včetně DPH.</p>
@@ -232,8 +259,8 @@
                         <div class="col-12 mb-6">
                             <h2 class="h4--public text-white">O nás</h2>
                             <h3 class="h2--public text-white">PXE — jsme burza. Elektřinu a plyn prodáváme již 100 let.</h3>
-                            <p class="text-white">Na českém trhu poskytovatelů energií se opravdu vyznáme. Již několik let velkoodběratelé (firmy, města, obce) využívají naší velkoobchodní aplikaci PARC. 
-                                Její mladší sestra - aplikace parc4u teď nabízí stejné výhody i domácnostem a maloodběratelům. Přitom vás ochráníme před nevýhodnými 
+                            <p class="text-white">Na českém trhu poskytovatelů energií se opravdu vyznáme. Již několik let velkoodběratelé (firmy, města, obce) využívají naší velkoobchodní aplikaci PARC.
+                                Její mladší sestra - aplikace parc4u teď nabízí stejné výhody i domácnostem a maloodběratelům. Přitom vás ochráníme před nevýhodnými
                                 podmínkami a nepoctivými prodejci - energošmejdy.</p>
                             <lnd-button
                                 label="Chci vidět nabídky"
@@ -244,7 +271,7 @@
                             </lnd-button>
                         </div>
                         <div class="col-12">
-                            <p>Carousel</p>
+                            <pxe-carousel-suppliers></pxe-carousel-suppliers>
                         </div>
                     </div>
                 </div>
@@ -299,7 +326,7 @@
                     <h2 class="h2--public text-white">Nechcete nic vyplňovat? Nemusíte!</h2>
                     <ol class="numerical-list-stepper">
                         <li class="active">Vložte Vaši poslední fakturu za elektřinu nebo plyn.</li>
-                        <li>Zadejte váš email a my vám pošleme nabídky na míru. 
+                        <li>Zadejte váš email a my vám pošleme nabídky na míru.
                             Zdarma a nezávazně.</li>
                     </ol>
                 </div>

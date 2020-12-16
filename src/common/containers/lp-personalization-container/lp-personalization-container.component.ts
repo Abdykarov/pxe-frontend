@@ -2,9 +2,20 @@ import {
     Component,
     OnInit,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
 
+import * as R from 'ramda';
+
+import { AuthService } from 'src/app/services/auth.service';
+import { CONSTS } from 'src/app/app.constants';
+import { ModalService } from 'src/common/containers/modal/modal.service';
 import { LpPersonalizationService } from './services/lp-personalization.service';
+import { lpVideoModalConfig } from 'src/app/pages/landing/landing.config';
+import { personalizationOptions } from './config/config';
+import {IPersonalization} from './models/models';
 
 @Component({
   selector: 'lnd-lp-personalization-container',
@@ -13,15 +24,46 @@ import { LpPersonalizationService } from './services/lp-personalization.service'
 })
 export class LpPersonalizationContainerComponent implements OnInit {
 
+    public personalizationOptions = personalizationOptions;
     public currentPersonalization = '';
+    public currentPersonalizationOption: IPersonalization = null;
 
     constructor(
-        private route: ActivatedRoute,
+        private authService: AuthService,
+        private modalService: ModalService,
         private lpPersonalizationService: LpPersonalizationService,
+        private route: ActivatedRoute,
+        private router: Router,
     ) {}
 
     ngOnInit(): void {
         const fragment = this.route.snapshot.fragment;
         this.currentPersonalization = this.lpPersonalizationService.processPersonalization(fragment);
+        this.currentPersonalizationOption = R.find(
+            R.propEq('fragment', this.currentPersonalization),
+        )(personalizationOptions);
+
+        if (!this.currentPersonalizationOption) {
+            this.currentPersonalizationOption = this.getDefaultPersonalizationOption();
+        }
+    }
+
+    public playVideoInModal = (event) => {
+        event.preventDefault();
+        this.modalService
+            .showModal$.next(lpVideoModalConfig());
+    }
+
+    public getDefaultPersonalizationOption = () => R.find(
+        R.propEq('fragment', ''),
+    )(personalizationOptions)
+
+    public routeToSignUp = (evt) => {
+        evt.preventDefault();
+        if (this.authService.isLogged()) {
+            this.authService.homeRedirect(true);
+        } else {
+            this.router.navigate([CONSTS.PATHS.SIGN_UP]);
+        }
     }
 }

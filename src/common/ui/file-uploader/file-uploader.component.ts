@@ -26,6 +26,9 @@ export class FileUploaderComponent {
     public wrapperCustomClass = '';
 
     @Input()
+    public id = 'file-upload';
+
+    @Input()
     public mainTextCustomClass = '';
 
     @Input()

@@ -11,52 +11,7 @@
 <div class="landing-page">
     <div class="section">
         <div class="container-fluid container-fluid--max-width">
-            <div class="row align-items-xl-center">
-                <div class="col-12 col-md-6 col-xl-7 order-md-2">
-                    <div class="section-video-holder text-center d-none d-md-block">
-                        <img src="/assets/images/landing-page/lp-picture.png" />
-                    </div>
-                    <div class="section-video-text order-md-1">
-                        <div class="row w-100 ml-0 text-center">
-                            <div class="col-12">
-                                <lnd-button
-                                    type="icon"
-                                    icon="icon--triangle-right"
-                                    variant="icon"
-                                    customClass="btn-video-play mb-2"
-                                    (action)="playVideoInModal($event)"
-                                >
-                                </lnd-button>
-                                <h2 class="h3--public mb-1">
-                                    Co je parc4u
-                                </h2>
-                                <a (click)="playVideoInModal($event)">Přehrát video</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-5 offset-md-1 offset-xl-0">
-                    <h1 class="h1--public mb-4">
-                        Neplýtvejte energií<br>
-                        <span class="text-secondary">na převody energií!</span>
-                    </h1>
-                    <p>
-                        Vyřešíme to za vás. Nabídneme vám jen solidní dodavatele, výhodnou cenu a postaráme se o smlouvu i převod. A příští rok zase.<br>
-                        <span class="text-secondary">parc4u = elektřina a plyn bez starostí.</span>
-                    </p>
-                    <div class="text-center text-md-left">
-                        <lnd-button
-                            label="Chci vidět nabídky"
-                            type="gradient-primary"
-                            customClass="btn-public btn--icon-right"
-                            icon="icon--arrow-right"
-                            iconPosition="right"
-                            (action)="routeToSignUp($event)"
-                        >
-                        </lnd-button>
-                    </div>
-                </div>
-            </div>
+            <lnd-lp-personalization-container></lnd-lp-personalization-container>
         </div>
     </div>
     <div class="section pt-3 pt-md-0 pb-xl-6">
@@ -193,13 +148,13 @@
                             <div class="col-md-8 offset-md-2">
                                 <h2 class="h2--public text-white">Nechcete nic vyplňovat? Nemusíte!</h2>
                                 <ol class="numerical-list-stepper">
-                                    <li class="active">Vložte Vaši poslední fakturu za elektřinu nebo plyn.</li>
-                                    <li>Zadejte váš email a my vám pošleme nabídky na míru.
+                                    <li [class.active]="howItWorksFileContainer?.fileUploader?.queue?.length === 0">Vložte Vaši poslední fakturu za elektřinu nebo plyn.</li>
+                                    <li [class.active]="howItWorksFileContainer?.fileUploader?.queue?.length > 0">Zadejte váš email a my vám pošleme nabídky na míru.
                                         Zdarma a nezávazně.</li>
                                 </ol>
                             </div>
                             <div class="col-md-8 offset-md-2 col-xl-10">
-                                <pxe-ask-for-offer-container></pxe-ask-for-offer-container>
+                                <pxe-ask-for-offer-container #howItWorksFileContainer></pxe-ask-for-offer-container>
                             </div>
                         </div>
                     </div>
@@ -327,13 +282,13 @@
                 <div class="col-12 col-md-8 offset-md-2 col-xl-4 offset-xl-1">
                     <h2 class="h2--public text-white">Nechcete nic vyplňovat? Nemusíte!</h2>
                     <ol class="numerical-list-stepper">
-                        <li class="active">Vložte Vaši poslední fakturu za elektřinu nebo plyn.</li>
-                        <li>Zadejte váš email a my vám pošleme nabídky na míru.
+                        <li [class.active]="lastContentFileUploader?.fileUploader?.queue?.length === 0">Vložte Vaši poslední fakturu za elektřinu nebo plyn.</li>
+                        <li [class.active]="lastContentFileUploader?.fileUploader?.queue?.length > 1">Zadejte váš email a my vám pošleme nabídky na míru.
                             Zdarma a nezávazně.</li>
                     </ol>
                 </div>
                 <div class="col-12 col-md-8 offset-md-2 col-xl-5 offset-xl-1">
-                    <pxe-ask-for-offer-container></pxe-ask-for-offer-container>
+                    <pxe-ask-for-offer-container id="asda" #lastContentFileUploader></pxe-ask-for-offer-container>
                 </div>
             </div>
         </div>

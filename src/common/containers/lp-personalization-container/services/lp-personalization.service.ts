@@ -5,7 +5,6 @@ import {
 } from '@angular/core';
 
 import * as moment from 'moment';
-import * as R from 'ramda';
 
 import { CookiesService } from 'src/app/services/cookies.service';
 

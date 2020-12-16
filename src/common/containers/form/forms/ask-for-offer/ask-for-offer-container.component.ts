@@ -1,11 +1,9 @@
 import {
     Component,
-    Inject,
+    Inject, Input,
     OnInit,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-
-import * as R from 'ramda';
 
 import { AuthService } from 'src/app/services/auth.service';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
@@ -37,6 +35,9 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
     public readonly maxFileSize = this.CONSTS.ASK_FOR_OFFER.MAX_FILE_SIZE;
 
     public errors: string[] = [];
+
+    @Input()
+    public id = 'file-upload';
 
     constructor(
         @Inject(FILE_UPLOAD_CONFIG) public fileUploader: FileUploaderCustom,
