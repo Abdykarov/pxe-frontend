@@ -55,5 +55,9 @@
 	&--interactive {
 		background-color: rgba($light-dark, .3);
 	}
+
+	&--zindex {
+		z-index: $zindex-drop-zone;
+	}
 }
 

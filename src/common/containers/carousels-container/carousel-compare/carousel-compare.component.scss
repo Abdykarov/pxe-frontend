@@ -17,13 +17,23 @@
 	}
 
 	.carousel {
+		.carousel-inner {
+			padding: 0 ( $carousel-control-size + $spacer );
+		}
+
 		.carousel-item {
 			position: static;
 			margin-right: 0;
+
+			.item {
+				display: flex;
+				justify-content: center;
+			}
 		}
 
-		.carousel-border {
-			padding: ( $spacer * 1.5 ) ( $spacer * 2 );
+		.carousel-item__inner {
+			display: inline-block;
+			padding: ( $spacer * 1.5 ) ( $spacer * 1.5 ) $spacer;
 			@include media-breakpoint-up(xl) {
 				border-left: $carousel-compare-border-left;
 			}
@@ -34,33 +44,20 @@
 		}
 
 		.carousel-control {
-			width: 15%;
+			width: auto;
 			opacity: 1;
-
-			@include media-breakpoint-up(md) {
-				width: 7.5%;
-			}
 
 			&:focus:not(.active),
 			&:hover:not(.active) {
 				text-decoration: none;
-			}
-		}
 
-		.carousel-control-prev {
-			&:focus,
-			&:hover {
-				.carousel-control-prev-icon {
-					background-color: darken($white, 10%);
-				}
-			}
-		}
-
-		.carousel-control-next {
-			&:focus,
-			&:hover {
+				.carousel-control-prev-icon,
 				.carousel-control-next-icon {
-					background-color: darken($font-text, 10%);
+					background-color: $font-text;
+
+					&::before {
+						color: $white;
+					}
 				}
 			}
 		}
@@ -72,6 +69,7 @@
 			justify-content: center;
 			width: $carousel-control-size;
 			height: $carousel-control-size;
+			background-color: $white;
 			background-image: none;
 			border-radius: $carousel-control-size;
 			box-shadow: $box-shadow-carousel;
@@ -79,23 +77,14 @@
 			&::before {
 				content: '\e930';
 				@include icon;
+				color: $font-text;
 			}
 		}
 
 		.carousel-control-prev-icon {
-			background-color: $white;
-
 			&::before {
 				color: $font-text;
 				transform: rotate(180deg);
-			}
-		}
-
-		.carousel-control-next-icon {
-			background-color: $font-text;
-
-			&::before {
-				color: $white;
 			}
 		}
 	}

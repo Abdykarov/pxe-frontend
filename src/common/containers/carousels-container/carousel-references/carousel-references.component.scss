@@ -72,7 +72,6 @@
 			@include absolute-center(false);
 			display: flex;
 			margin: 0;
-			z-index: $zindex-indicators;
 
 			&__item {
 				cursor: pointer;

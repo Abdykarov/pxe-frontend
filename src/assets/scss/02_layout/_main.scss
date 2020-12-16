@@ -281,6 +281,31 @@
 				}
 			}
 		}
+
+		&--lp {
+			.link-list__item {
+				padding-left: 0;
+				padding-right: 0;
+			}
+
+			.link-list__link {
+				&,
+				&:visited {
+					padding: 0 ( $spacer * 2.25 ) ( $spacer / 4 );
+					font-size: $font-size-base-public;
+					text-transform: none;
+				}
+
+				&:focus,
+				&:hover {
+					border-bottom: 2px solid rgba($font-text-public, .6);
+				}
+
+				&--active {
+					border-color: $font-text-public;
+				}
+			}
+		}
 	}
 
 	.qr-code-img {

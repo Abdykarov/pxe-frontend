@@ -9,22 +9,20 @@
 
 	// Section Video
 	.section-video-text {
-		padding-top: $spacer;
+		position: absolute;
+		display: flex;
+		align-items: center;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		padding-top: 0;
+		z-index: $zindex-lp-video-text;
+		pointer-events: none;
 
 		// Media queries
 		@include media-breakpoint-up(md) {
-			position: absolute;
-			display: flex;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			padding-top: 0;
-			z-index: $zindex-lp-video-text;
-			pointer-events: none;
-		}
-		@include media-breakpoint-up(md) {
-			align-items: center;
+			
 			padding-top: 0;
 			background-color: transparent;
 		}

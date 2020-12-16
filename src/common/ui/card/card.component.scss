@@ -43,7 +43,6 @@
 		// Media queries
 		@include media-breakpoint-up(xl) {
 			margin-left: -$card-tile-item-spacer;
-			margin-bottom: -( $card-tile-item-spacer / 1.25 );
 		}
 	}
 
