@@ -5,7 +5,6 @@ import {
 import {
     ChangeDetectorRef,
     Component,
-    HostListener,
     Inject,
     OnDestroy,
     OnInit,
@@ -25,7 +24,6 @@ import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.compone
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CommodityTypesLowerCase,
-    CONSTS,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';
@@ -41,18 +39,6 @@ export class PublicLayoutComponent extends AbstractLayoutComponent implements On
     public commodityTypePower = CommodityTypesLowerCase.POWER;
     public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
     public lastScrollTop = 0;
-    public wasLastTimeScrolledToTop = false;
-
-    @HostListener('window:scroll', [])
-    onWindowScroll() {
-        const scrollTop =
-            window.scrollY ||
-            window.pageYOffset ||
-            document.body.scrollTop + (document.documentElement && document.documentElement.scrollTop || 0);
-        this.wasLastTimeScrolledToTop = scrollTop < this.lastScrollTop && scrollTop > CONSTS.START_STICKER_HEADER ||
-            scrollTop === this.lastScrollTop && this.wasLastTimeScrolledToTop;
-        this.lastScrollTop = scrollTop;
-    }
 
     constructor(
         protected apollo: Apollo,

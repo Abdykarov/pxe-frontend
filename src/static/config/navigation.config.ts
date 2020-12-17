@@ -31,10 +31,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'label': 'Buttons',
                     'url': '/basic/buttons',
                 },
-                // {
-                //     'label': 'Cards',
-                //     'url': '/card',
-                // },
+                {
+                    'label': 'Card',
+                    'url': '/basic/card',
+                },
                 {
                     'label': 'Colors',
                     'url': '/basic/colors',
@@ -95,8 +95,16 @@ export const staticNavigationConfig: INavigationConfig = [
             'icon': 'component-middle',
             'children': [
                 {
+                    'label': 'Ask for offer',
+                    'url': '/basic/ask-for-offer-file-uploader',
+                },
+                {
                     'label': 'Breadcrumb',
                     'url': '/basic/breadcrumb',
+                },
+                {
+                    'label': 'Carousel',
+                    'url': '/full/carousel',
                 },
                 {
                     'label': 'Graphs',

@@ -85,6 +85,10 @@
 	& &__icon {
 		color: $icons-primary;
 		font-size: $icon-size-large;
+
+		&--public {
+			font-size: $font-size-base-public;
+		}
 	}
 
 	&__text {
@@ -101,8 +105,18 @@
 		}
 
 		.text-with-icon__icon {
-			font-size: $small-font-size;
 			color: $font-text;
+		}
+
+		.text-with-icon__icon:not(.text-with-icon__icon--public) {
+			font-size: $small-font-size;
+		}
+	}
+
+	&--icon-right {
+		.text-with-icon__text {
+			margin-left: 0;
+			margin-right: ( $spacer / 2 );
 		}
 	}
 }
@@ -226,13 +240,15 @@ $colors: (
 	light-dark:                    $light-dark,
 	light-darken:                  $light-darken,
 	body:                          $body-bg,
-	blue-dark:                     $gradient-blue-dark,
+	body-lp:                       $body-bg-lp,
 	disabled:                      $disabled,
 	icons-primary:                 $icons-primary,
 	icons-active:                  $icons-active,
 	icons-inactive:                $icons-inactive,
 	gradient-blue-light:           $gradient-blue-light,
 	gradient-blue-dark:            $gradient-blue-dark,
+	gradient-blue-darken:          $gradient-blue-darken,
+	gradient-violet-light:         $gradient-violet-light,
 );
 
 @each $name, $value in $colors {
@@ -260,7 +276,7 @@ $colors: (
 }
 
 @include generate-gradient(blue, $gradient-blue-light, $gradient-blue-dark);
-
+@include generate-gradient(violet, $gradient-violet-light, $gradient-blue-darken);
 
 
 /*
@@ -361,5 +377,24 @@ $colors: (
 		@include media-breakpoint-down(xs) {
 			@include absolute-center;
 		}
+	}
+}
+
+.info-flag {
+	position: relative;
+	display: inline-block;
+	padding: $spacer ( $spacer * 1.25 );
+	background-color: $secondary;
+	border-radius: $border-radius;
+	border-bottom-left-radius: 0;
+
+	&__beak {
+		position: absolute;
+		top: calc( 100% - 1px );
+		left: 0;
+	}
+
+	&__img {
+		width: 92px;
 	}
 }
