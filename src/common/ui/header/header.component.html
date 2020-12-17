@@ -41,6 +41,34 @@
                             (click)="landingPageRedirect.emit($event)">
                         </lnd-button>
                         <lnd-button
+                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                            label="S čím vám pomůžeme"
+                            customClass="mr-4"
+                            type="link-text"
+                            (click)="helpAction.emit()">
+                        </lnd-button>
+                        <lnd-button
+                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                            label="Jak to funguje"
+                            customClass="mr-4"
+                            type="link-text"
+                            (click)="howItWorksAction.emit()">
+                        </lnd-button>
+                        <lnd-button
+                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                            label="Více o cenách"
+                            customClass="mr-4"
+                            type="link-text"
+                            (click)="bestPricesInTheWorldAction.emit()">
+                        </lnd-button>
+                        <lnd-button
+                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                            label="FAQ"
+                            customClass="mr-4"
+                            type="link-text"
+                            (click)="faqAction.emit()">
+                        </lnd-button>
+                        <lnd-button
                             *ngIf="!isLogged"
                             label="Přihlásit"
                             customClass="mr-4"

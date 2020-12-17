@@ -24,7 +24,7 @@ export const cardConfig: ICardData[] = [
         imgSrc: 'assets/images/landing-page/our-help-managa-build.png',
         imgAlt: 'spravuji-nemovitosti',
         imgTitle: 'Spravuji nemovitost',
-        title: 'Chci ušetřit',
+        title: 'Spravuji nemovitost',
         content: 'Neztrácejte čas opakovaným hledáním dodavatelů energií. Pro každou nemovitost vám připravíme nabídky od prověřených dodavatelů. Všechny informace budete mít k dispozici přehledně na jednom místě v aplikaci parc4u.',
     },
     {
