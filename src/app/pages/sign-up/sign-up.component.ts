@@ -1,6 +1,6 @@
 import {
     Component,
-    ChangeDetectorRef,
+    ChangeDetectorRef, ViewChild,
 } from '@angular/core';
 import {
     Meta,
@@ -13,6 +13,7 @@ import { CookieService } from 'ngx-cookie';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AskForOfferContainerComponent } from 'src/common/containers/form/forms/ask-for-offer/ask-for-offer-container.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
@@ -43,6 +44,9 @@ export class SignUpComponent extends AbstractComponent {
     public fieldError: IFieldError = {};
     public formFields: IForm;
     public routes = ROUTES;
+
+    @ViewChild('fileContainer', { static: true })
+    public fileContainer: AskForOfferContainerComponent;
 
     constructor(
         private apollo: Apollo,

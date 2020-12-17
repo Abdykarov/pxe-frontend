@@ -69,6 +69,9 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     @ViewChild('howItWorks', { static: true })
     public howItWorks: ElementRef;
 
+    @ViewChild('faq', { static: true })
+    public faq: ElementRef;
+
     @ViewChild('howItWorksFileContainer', { static: true })
     public howItWorksFileContainer: AskForOfferContainerComponent;
 
@@ -156,6 +159,9 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
                 }
                 if (scrollTo === SCROLL_TO.HOW_IT_WORKS) {
                     scrollToElementFnc(this.howItWorks.nativeElement, 20);
+                }
+                if (scrollTo === SCROLL_TO.FAQ) {
+                    scrollToElementFnc(this.faq.nativeElement, 20);
                 }
             });
 

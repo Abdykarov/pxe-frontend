@@ -1,12 +1,14 @@
 <ng-template #slideTemplate let-item>
     <div class="row text-center">
         <div class="col-12 text-center">
-            <img
-                class="carousel-suppliers__logo"
-                [src]="item.logoUrl"
-                [title]="item.title"
-                [alt]="item.alt"
-                [width]="item.width">
+            <a [routerLink]="item?.faqUrl">
+                <img
+                    class="carousel-suppliers__logo"
+                    [src]="item.logoUrl"
+                    [title]="item.title"
+                    [alt]="item.alt"
+                    [width]="item.width">
+            </a>
         </div>
     </div>
 </ng-template>

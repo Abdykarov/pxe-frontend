@@ -17,6 +17,7 @@ export interface ISupplierCompare extends IDefaultCarouselItem {
 export interface ISupplierLogo extends IDefaultCarouselItem {
     alt: string;
     logoUrl: string;
+    faqUrl: string;
     title: string;
     width: number;
 }

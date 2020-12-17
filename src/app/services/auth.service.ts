@@ -113,11 +113,11 @@ export class AuthService {
         this.currentUser$ = this.currentUserSubject$.asObservable();
         if (isPlatformBrowser(this.platformId)) {
             this.refreshTokenInterval$.subscribe();
-        }
 
-        this.currentUserSubject$.subscribe( (jwtPayloadSubjectSubject: IJwtPayload) => {
-            this.gtmService.setUserId(this.hashUserId(jwtPayloadSubjectSubject?.email));
-        });
+            this.currentUserSubject$.subscribe( (jwtPayloadSubjectSubject: IJwtPayload) => {
+                this.gtmService.setUserId(this.hashUserId(jwtPayloadSubjectSubject?.email));
+            });
+        }
     }
 
     static jwtTokenHasRoles(jwtToken: string, accessRole: string[]): boolean {

@@ -1,3 +1,10 @@
+<ng-template #agreementTemplate>
+    <span class="text-white">
+        Souhlasím se <a target="_blank" [href]="">Obchodními podmínkami účasti na trhu parc4u</a> a beru na vědomí
+        <a target="_blank" [href]="">Informaci o zpracování osobních údajů</a>.
+    </span>
+</ng-template>
+
 <div class="row">
     <div class="col-12 text-center mb-3">
         <pxe-file-uploader
@@ -10,14 +17,19 @@
             [labelFromMainText]="true">
         </pxe-file-uploader>
     </div>
-    <div class="col-12">
-        <lnd-alert
-            *ngIf="errors.length"
-            type="danger">
-            {{ errors[0] }}<br>
-        </lnd-alert>
-    </div>
     <div class="col-12 mb-3">
+        <div class="col-12">
+            <lnd-alert
+                *ngIf="errors.length"
+                type="danger">
+                {{ errors[0] }}<br>
+            </lnd-alert>
+        </div>
+        <lnd-alert
+            *ngIf="success"
+            type="success">
+            Děkujeme po zpracování vaší žádosti se vám obratem ozveme.
+        </lnd-alert>
         <span class="d-inline-flex align-items-center mr-4 mb-2 text-white"
               *ngFor="let fileItem of fileUploader.queue">
             <span class="icon icon--document mr-2"></span>
@@ -31,7 +43,8 @@
             </lnd-button>
         </span>
     </div>
-    <div class="col-12">
+    <div *ngIf="fileUploader.queue.length && !success"
+        class="col-12">
         <form
             [formGroup]="form"
             (keydown)="resetCustomFieldError()"
@@ -39,28 +52,41 @@
             (change)="resetCustomFieldError()"
             class="form-container ml-0"
             autocomplete="off">
-            <ng-container *ngIf="fileUploader.queue.length">
-                <lnd-form-field
-                    [error]="formError.email || form.controls.email.errors"
-                    [formControl]="form.controls.email"
-                    [id]="'email'"
-                    customFormGroupClass="form-group--public form-group--on-dark-bg"
-                    label="E-mail"
-                    [success]="form.controls.email.valid && (form.controls.email.touched || formError.email)"
-                    [touched]="form.controls.email.touched || formError.email"
-                    [validationMessages]="formFields.validationMessages.email"
-                ></lnd-form-field>
-                <div class="text-right">
-                    <lnd-button
-                        type="gradient-primary"
-                        class="w-100"
-                        customClass="w-100 btn-public"
-                        [submit]="true"
-                        (action)="submitForm($event)"
-                        label="Odeslat">
-                    </lnd-button>
-                </div>
-            </ng-container>
+            <lnd-form-field
+                lndSFormDirective
+                lndSBiometricsDirective
+                [error]="formError.email || form.controls.email.errors"
+                [formControl]="form.controls.email"
+                [id]="'email'"
+                customFormGroupClass="form-group--public form-group--on-dark-bg"
+                label="E-mail"
+                [success]="form.controls.email.valid && (form.controls.email.touched || formError.email)"
+                [touched]="form.controls.email.touched || formError.email"
+                [validationMessages]="formFields.validationMessages.email"
+            ></lnd-form-field>
+            <lnd-form-field
+                lndSFormDirective
+                lndSBiometricsDirective
+                [error]="formError.consent || form.controls.consent.errors"
+                [formControl]="form.controls.consent"
+                [id]="'consent'"
+                label=""
+                [labelTemplate]="agreementTemplate"
+                [success]="form.controls.consent.valid && (form.controls.consent.touched || formError.consent)"
+                [touched]="form.controls.consent.touched || formError.consent"
+                [type]="'CHECKBOX'"
+                [validationMessages]="formFields.validationMessages.consent"
+            ></lnd-form-field>
+            <div class="text-right">
+                <lnd-button
+                    type="gradient-primary"
+                    class="w-100"
+                    customClass="w-100 btn-public"
+                    [submit]="true"
+                    (action)="submitForm($event)"
+                    label="Odeslat">
+                </lnd-button>
+            </div>
         </form>
     </div>
 </div>
