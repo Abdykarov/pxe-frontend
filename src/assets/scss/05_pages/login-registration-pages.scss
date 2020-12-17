@@ -8,7 +8,7 @@
 	.section-picture-text {
 		position: relative;
 		padding-bottom: ( $spacer * 13 );
-		z-index: $zindex-lp-picture-bg-overlap;
+		// z-index: $zindex-lp-picture-bg-overlap;
 
 		// Media queries
 		@include media-breakpoint-up(md) {
