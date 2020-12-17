@@ -8,7 +8,8 @@ import {
     Inject,
     OnDestroy,
     OnInit,
-    PLATFORM_ID, Renderer2,
+    PLATFORM_ID,
+    Renderer2,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import {
