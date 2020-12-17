@@ -112,7 +112,6 @@ export class AuthService {
         this.currentUserSubject$ = new BehaviorSubject<IJwtPayload>(jwtPayload);
         this.currentUser$ = this.currentUserSubject$.asObservable();
         if (isPlatformBrowser(this.platformId)) {
-            console.log('zde nejsem');
             this.refreshTokenInterval$.subscribe();
 
             this.currentUserSubject$.subscribe( (jwtPayloadSubjectSubject: IJwtPayload) => {

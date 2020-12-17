@@ -10,6 +10,7 @@ import { AskForOfferContainerComponent } from './ask-for-offer-container.compone
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FileUploaderModule } from 'src/common/ui/file-uploader/file-uploader.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
+import {DirectivesModule} from 'src/common/directives/directives.module';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { FormModule } from 'src/common/ui/forms/form.module';
         AlertModule,
         ButtonModule,
         CommonModule,
+        DirectivesModule,
         FileUploaderModule,
         FormModule,
         FormsModule,
