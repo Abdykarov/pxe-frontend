@@ -13,6 +13,7 @@
 	padding: ( $spacer * 5 ) 0 $spacer;
 	font-size: $small-font-size;
 	text-align: center;
+	z-index: $zindex-footer;
 
 	// Media queries
 	@include media-breakpoint-up(md) {

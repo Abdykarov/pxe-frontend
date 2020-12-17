@@ -132,14 +132,7 @@
         "seoKeywords": "parc4u, dostatek, zákazníků, rozvoj, automatizaci, poskytovaných služeb, energie, vyřešené",
         "oneOfMostVisited":true
     },
-    {
-        "id":17,
-        "tag":"general",
-        "url":"next-question",
-        "header":"Další dotazy",
-        "shortContent":"<p class='mb-0'>V případě dotazů či připomínek nás neváhejte kontaktovat na e-mailu <a href=\"mailto:parc4u@pxe.cz\">parc4u@pxe.cz</a>.</p>"
-    },
-    {
+        {
         "id":18,
         "tag":"supplier",
         "url":"bohemia-energy",

@@ -29,9 +29,8 @@ import {
 } from './models/router-data.model';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
-import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
-import { Tag } from 'src/app/services/model/faq.model';
+import { SCROLL_TO } from '../services/model/scroll-to.model';
 
 export abstract class AbstractLayoutComponent extends AbstractComponent implements OnInit {
     public activeUrl: string;
@@ -113,21 +112,6 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
         });
     }
 
-    public signUp = () => {
-        if (this.settings.signUpType === SignType.SCROLL) {
-            this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
-        } else if (this.settings.signUpType === SignType.NAVIGATE) {
-            this.router.navigate([this.CONSTS.PATHS.SIGN_UP]);
-        }
-    }
-
-    public scrollToFaq = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.FAQ));
-
-    public scrollToAboutUs = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.ABOUT_US));
-
-    public scrollToAboutService = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.ABOUT_SERVICE));
-
-
     public login = () => {
         if (R.indexOf(this.settings.loginType, [LoginType.RELOAD, LoginType.NAVIGATE]) >= 0) {
             let extras: NavigationExtras = {};
@@ -155,4 +139,14 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
             )
             .subscribe();
     }
+
+    public scrollToFaq = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.FAQ));
+
+    public scrollToHelp = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.HELP));
+
+    public scrollToHowItWorks = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.HOW_IT_WORKS));
+
+    public scrollToBestPricesInTheWorld = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.BEST_PRICES_IN_THE_WORLD));
+
+    public signUp = () => this.router.navigate([this.CONSTS.PATHS.SIGN_UP]);
 }

@@ -31,5 +31,8 @@ export const importUploadPageRoutes: Routes = [
     {
         path: 'import-upload',
         component: ImportUploadComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];
