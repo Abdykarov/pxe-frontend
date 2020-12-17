@@ -142,6 +142,8 @@ $line-height-base:                 ( 24 / 14 );
 
 $small-font-size:                  .75rem;
 $line-height-sm:                   ( 16 / 12 );
+$large-font-size:                  1rem;
+$line-height-lg:                   ( 16 / 16 );
 $perex-font-size:                  1.125rem;
 
 $h1-font-size:                     1.875rem;
@@ -257,6 +259,7 @@ $zindex-body-overlayer:              2000;
 $zindex-body-overlayer-full:         3000;
 $zindex-body-overlayer-visible:      3010;
 $zindex-header:                      2010;
+$zindex-footer:                      2;
 $zindex-lp:                          1020;
 $zindex-modal-backdrop:              3000;
 $zindex-modal:                       3010;
@@ -316,6 +319,12 @@ $tip-min-height-big:                180px;
 $landing-page-video-content-height-mobil:            180px;
 $landing-page-video-content-height-tablet:           340px;
 $landing-page-video-content-height-desktop:          680px;
+
+$landing-page-picture-bg-height-mobile:              125%;
+$landing-page-picture-bg-height-tablet:              750px;
+$landing-page-picture-bg-height-laptop:              720px;
+$landing-page-picture-bg-height-desktop:             1000px;
+
 $numerical-list-lp-numb-size:                        26px;
 $landing-page-link-next-section-size:                48px;
 

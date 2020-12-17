@@ -309,6 +309,7 @@
 	}
 
 	&.btn-public {
+		justify-content: space-between;
 		min-width: $btn-width-public;
 		min-height: $btn-height-public;
 		padding: $spacer ( $spacer * 2 );
@@ -331,6 +332,22 @@
 
 			&--right {
 				padding-right: ( $spacer / 3 );
+			}
+		}
+	}
+
+	&-lg {
+		min-height: $btn-height-large;
+		padding: ( $spacer * 1.25 ) ( $spacer * 2 );
+		font-size: $large-font-size;
+
+		.btn__icon {
+			&--left {
+				padding-left: ( $spacer * 2 );
+			}
+
+			&--right {
+				padding-right: ( $spacer * 2 );
 			}
 		}
 	}
@@ -373,13 +390,6 @@
 		}
 	}
 
-	&.btn-long {
-		// Media queries
-		@include media-breakpoint-up(sm) {
-			text-align: left;
-		}
-	}
-
 	&.btn--no-border {
 		border: none;
 	}
@@ -389,25 +399,31 @@
 	}
 
 	&__icon {
-		width: $btn-width-icon;
 		position: absolute;
-		top: 0;
-		height: 100%;
 		display: flex;
 		align-items: center;
+		top: 0;
+		width: $btn-width-icon;
+		height: 100%;
 
 		& + .btn__text {
 			text-align: left;
 		}
 
 		&--left {
-			left: 0;
-			padding-left: ( $spacer / 2 );
+			left: 10px;
+
+			& + .btn__text {
+				padding-left: ( $spacer / 2 );
+			}
 		}
 
 		&--right {
-			right: 0;
-			padding-right: ( $spacer / 2 );
+			right: 10px;
+
+			& + .btn__text {
+				padding-right: ( $spacer / 2 );
+			}
 		}
 
 		&--alone {
@@ -486,6 +502,57 @@
 			justify-content: center;
 			width: $btn-video-play-size;
 			color: $white;
+		}
+	}
+
+	&-facebook,
+	&-google {
+		padding: $spacer;
+		text-align: left;
+
+		&::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 20px;
+			width: 20px;
+			height: 100%;
+			//background-image: url(../../../assets/images/social/facebook.svg);
+			background-size: 20px;
+			background-repeat: no-repeat;
+			background-position-y: center;
+		}
+	}
+
+	&-facebook {
+		background-color: $btn-social-facebook-bg;
+		color: $white;
+
+		&::after {
+			//background-image: url(../../../assets/images/social/facebook.svg);
+		}
+
+		&:hover,
+		&:active,
+		&:focus:active {
+			color: $white;
+			background-color: darken($btn-social-facebook-bg, 5%);
+		}
+	}
+
+	&-google {
+		background-color: $white;
+		color: $font-text;
+
+		&::after {
+			content: '';
+			//background-image: url(../../../assets/images/social/google.svg);
+		}
+
+		&:hover,
+		&:active,
+		&:focus:active {
+			background-color: darken($white, 2%);
 		}
 	}
 }
