@@ -11,14 +11,12 @@
 @import '~bootstrap/scss/carousel';
 
 .carousel {
-	&__left-right {
-		&--disabled {
-			.left {
-				display: none;
-			}
-			.right {
-				display: none;
-			}
+	&__left-right--disabled {
+		.left {
+			display: none;
+		}
+		.right {
+			display: none;
 		}
 	}
 }

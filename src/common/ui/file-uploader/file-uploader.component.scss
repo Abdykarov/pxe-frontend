@@ -47,6 +47,7 @@
 		box-shadow: none;
 		cursor: pointer;
 
+		&:focus,
 		&:hover {
 			text-decoration: $link-hover-decoration;
 		}
