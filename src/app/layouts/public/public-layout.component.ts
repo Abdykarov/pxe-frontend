@@ -5,6 +5,7 @@ import {
 import {
     ChangeDetectorRef,
     Component,
+    HostListener,
     Inject,
     OnDestroy,
     OnInit,
