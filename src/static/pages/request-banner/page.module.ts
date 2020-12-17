@@ -29,5 +29,8 @@ export const requestBannerPageRoutes: Routes = [
     {
         path: 'request-banner',
         component: RequestBannerPageComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];

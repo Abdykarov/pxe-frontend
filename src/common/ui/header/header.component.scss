@@ -17,24 +17,9 @@
 	color: $white;
 	z-index: $zindex-header;
 
-	&--sticked {
-		// Media queries
-		@include media-breakpoint-up(xl) {
-			position: fixed;
-			background-color: $light;
-		}
-
-		&.header--lp {
-			background-color: transparent;
-			z-index: $zindex-lp;
-
-			.header-inner {
-				// Media queries
-				@include media-breakpoint-up(xl) {
-					background-color: $body-bg-lp;
-				}
-			}
-		}
+	&--public {
+		position: fixed;
+		background-color: $body-bg-lp;
 	}
 
 	&--lp {

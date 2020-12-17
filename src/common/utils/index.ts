@@ -1,7 +1,9 @@
+export * from './bytes-to-size.fnc';
 export * from './convert-array-to-object.fnc';
 export * from './convert-date-to-send-format.fnc';
 export * from './create-string-from-template.fnc';
 export * from './count-indicator';
+export * from './get-height-of-display-none-element.fnc';
 export * from './get-progress-stepper-config.fnc';
 export * from './get-error-message.fnc';
 export * from './get-param-from-tag.fnc';
@@ -33,3 +35,4 @@ export * from './process-error-scroll.fnc';
 export * from './remove-html-from-text.fnc';
 export * from './truncate-text.fnc';
 export * from './get-absolute-height-of-element.fnc';
+export * from './remove-accent.fnc';

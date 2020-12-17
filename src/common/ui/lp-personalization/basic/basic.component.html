@@ -1,0 +1,21 @@
+<div class="section-video-holder text-center d-none d-md-block">
+    <img src="/assets/images/landing-page/lp-picture.png" alt="prezencni video" title="Prezenční video" />
+</div>
+<div class="section-video-text order-md-1">
+    <div class="row w-100 ml-0 text-center">
+        <div class="col-12">
+            <lnd-button
+                type="icon"
+                icon="icon--triangle-right"
+                variant="icon"
+                customClass="btn-video-play mb-2"
+                (action)="playVideoInModal($event)"
+            >
+            </lnd-button>
+            <h2 class="h3--public mb-1">
+                Co je parc4u
+            </h2>
+            <a (click)="playVideoInModal($event)">Přehrát video</a>
+        </div>
+    </div>
+</div>

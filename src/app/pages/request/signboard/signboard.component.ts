@@ -15,16 +15,20 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import {
-    CONSTS,
-    ROUTES,
-} from 'src/app/app.constants';
+import { AuthService } from 'src/app/services/auth.service';
 import {
     getConfigStepper,
     playVideo,
 } from 'src/common/utils';
+import { GTMService } from 'src/app/services/gtm.service';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
+import {
+    CONSTS,
+    GTM_CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
+
 
 @Component({
     selector: 'lnd-signboard',
@@ -48,7 +52,9 @@ export class SignboardComponent extends AbstractComponent {
         );
 
     constructor(
+        private authService: AuthService,
         public cd: ChangeDetectorRef,
+        private gtmService: GTMService,
         private router: Router,
     ) {
         super();
@@ -64,10 +70,33 @@ export class SignboardComponent extends AbstractComponent {
                 this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
                 this.cd.markForCheck();
             });
+
+        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_ONE, this.authService.hashedUserId);
+        this.gtmService.pushEvent({
+            event: GTM_CONSTS.EVENTS.CHECKOUT,
+            ecommerce: {
+                actionField: {
+                    step: 1,
+                },
+                products: [{
+                    name: 'odber energie',
+                    id: null,
+                    brand: GTM_CONSTS.BRAND,
+                    quantity: 1,
+                }],
+            },
+        });
     }
 
     public routerToNextStep = (evt) => {
         evt.preventDefault();
+        this.gtmService.pushEvent({
+            'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+            'category': GTM_CONSTS.CATEGORIES.FORM,
+            'action': GTM_CONSTS.ACTIONS.START,
+            'label': GTM_CONSTS.LABELS.STEP_ONE,
+            'userID': this.authService.hashedUserId,
+        });
         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
     }
 
