@@ -30,10 +30,13 @@ $font-header:                      #2b4762;
 $font-text:                        #2b4762;
 $font-secondary:                   #919191;
 
+$font-text-public:                 #496480;
+
 $text-muted:                       $font-secondary;
 
 $primary:                          #0097ff;                    // Primary color
 $primary-dark:                     #0088e5;
+$primary-darken:                   #0353ce;
 $secondary-lighten:                #926ece;                    // Secondary color
 $secondary:                        #7355a6;
 $secondary-dark:                   darken($secondary, 5%);
@@ -56,14 +59,8 @@ $light-dark:                       darken($light, 15%);
 $light-darken:                     darken($light, 25%);
 $disabled:                         #f7f9fb;                    // Disabled color
 
-$gradient-green-light:             $primary;                     // Gradient green light
-$gradient-green-dark:              $primary-dark;                // Gradient green dark
-$gradient-blue-light:              $secondary;                   // Gradient blue light
-$gradient-blue-dark:               $secondary-dark;              // Gradient blue dark, cold
-$gradient-orange-light:            $warning;                     // Gradient orange light, normal
-$gradient-orange-dark:             $warning-dark;                // Gradient orange dark, normal
-$gradient-red-light:               $danger;                      // Gradient red light, warm
-$gradient-red-dark:                $danger-dark;                 // Gradient red dark, warm
+$gradient-blue-light:              $primary;                     // Gradient blue light
+$gradient-blue-dark:               $primary-darken;              // Gradient blue dark, cold
 
 $icons-primary:                    $secondary;
 $icons-secondary:                  #bdcad6;
@@ -128,10 +125,13 @@ $body-max-width:                   1366px;
 
 
 // Typography
-$font-family-sans-serif:           'roboto_mono', arial;
-$font-family-sans-serif-public:    'space_mono', arial;
+$font-family-sans-serif:           'roboto', arial;
+$font-family-sans-serif-secured:   'roboto_mono', arial;
 $font-size-base:                   .875rem;
 $line-height-base:                 ( 24 / 14 );
+$font-size-base-public:            1rem;
+$line-height-base-public:          ( 28 / 16 );
+
 $small-font-size:                  .75rem;
 $line-height-sm:                   ( 16 / 12 );
 $perex-font-size:                  1.125rem;

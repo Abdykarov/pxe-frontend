@@ -25,5 +25,8 @@ export const newsPageRoutes: Routes = [
     {
         path: 'news',
         component: NewsPageComponent ,
+        data: {
+            isPublic: false,
+        },
     },
 ];
