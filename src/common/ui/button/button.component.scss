@@ -292,6 +292,29 @@
 		@include button-ghost-color($gray-200);
 	}
 
+	&.btn-gradient-primary {
+		color: $white;
+		background: linear-gradient(143deg, $gradient-blue-light 0%, $gradient-blue-dark 100%);
+		border: none;
+
+		&:focus,
+		&.focus,
+		&:hover,
+		&:active,
+		&:focus:active,
+		&:not(:disabled):not(.disabled):active,
+		&:not(:disabled):not(.disabled).active {
+			background: linear-gradient(143deg, darken($gradient-blue-light, 5%) 0%, darken($gradient-blue-dark, 5%) 100%);
+		}
+	}
+
+	&.btn-public {
+		min-width: $btn-width-public;
+		min-height: $btn-height-public;
+		padding: $spacer ( $spacer * 2 );
+		font-size: $font-size-base-public;
+	}
+
 	&-sm {
 		min-width: auto;
 		min-height: $btn-height-small;
@@ -394,6 +417,18 @@
 		}
 	}
 
+	&.btn--icon-right {
+		display: flex;
+		flex-direction: row-reverse;
+		padding-right: ( $spacer * 2 );
+
+		.btn__icon {
+			position: initial;
+			padding-left: ( $spacer / 2 );
+			padding-right: 0;
+		}
+	}
+
 	&.disabled,
 	&.btn-disabled,
 	&[disabled],
@@ -425,6 +460,18 @@
 		&:not(:disabled):not(.disabled):active:focus {
 			color: $icons-hover;
 			box-shadow: none;
+		}
+
+		&--on-dark-bg {
+			color: $white;
+
+			&:focus,
+			&.focus,
+			&:hover,
+			&:active,
+			&:not(:disabled):not(.disabled):active:focus {
+				color: darken($white, 25%);
+			}
 		}
 	}
 
