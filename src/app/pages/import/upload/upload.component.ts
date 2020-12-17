@@ -57,7 +57,7 @@ import { ModalService } from 'src/common/containers/modal/modal.service';
     providers: [
         {
             provide: FILE_UPLOAD_CONFIG,
-            useFactory: fileUploaderFactory,
+            useFactory: fileUploaderFactory('offer/batch-validate', 'offers', true),
             deps: [
                 AuthService,
             ],
@@ -87,7 +87,7 @@ export class UploadComponent extends AbstractComponent implements OnInit {
         private modalsService: ModalService,
         private route: ActivatedRoute,
         private router: Router,
-        @Inject(FILE_UPLOAD_CONFIG) private fileUploader: FileUploader,
+        @Inject(FILE_UPLOAD_CONFIG) public fileUploader: FileUploader,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();

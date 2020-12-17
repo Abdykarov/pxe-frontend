@@ -26,6 +26,7 @@ export interface IJwtPayload {
     subjectName: string;
     surname: string;
     token: string;
+    uuid: string;
     username: string;
     email?: string;
     supplier?: boolean;
