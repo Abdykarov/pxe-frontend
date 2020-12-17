@@ -292,6 +292,19 @@
 		@include button-ghost-color($gray-200);
 	}
 
+	&.btn-gradient-primary {
+		color: $white;
+		background: linear-gradient(143deg, $gradient-blue-light 0%, $gradient-blue-dark 100%);
+		border: none;
+	}
+
+	&.btn-public {
+		min-width: $btn-width-public;
+		min-height: $btn-height-public;
+		padding: $spacer ( $spacer * 2 );
+		font-size: $font-size-base-public;
+	}
+
 	&-sm {
 		min-width: auto;
 		min-height: $btn-height-small;
@@ -391,6 +404,18 @@
 			position: relative;
 			padding: ( $spacer / 3 );
 			text-align: center;
+		}
+	}
+
+	&.btn--icon-right {
+		display: flex;
+		flex-direction: row-reverse;
+		padding-right: ( $spacer * 2 );
+
+		.btn__icon {
+			position: initial;
+			padding-left: ( $spacer / 2 );
+			padding-right: 0;
 		}
 	}
 

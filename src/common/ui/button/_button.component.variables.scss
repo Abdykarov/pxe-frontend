@@ -27,6 +27,10 @@ $btn-line-height-sm:               ( 18 / 11 );
 $btn-border-width:                 2px;
 $btn-border-radius-sm:             $btn-border-radius;
 
+$btn-width-public:                 auto;
+$btn-height-public:                64px;
+$btn-width-icon-public:            18px;
+
 $btn-padding-y-lg-mobile:          ( $spacer * 1.5 );
 $btn-padding-x-lg-mobile:          ( $spacer * 1.5 );
 $btn-padding-y-lg:                 ( $spacer * 2 );

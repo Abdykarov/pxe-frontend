@@ -14,10 +14,19 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.secured {
+	font-family: $font-family-sans-serif-secured;
+}
+
+.public {
+	font-size: $font-size-base-public;
+	line-height: $line-height-base-public;
+	color: $font-text-public;
+}
+
 .h1--public,
 .h2--public,
 .h3--public {
-	font-family: $font-family-sans-serif-public;
 	font-variant-ligatures: none;
 }
 

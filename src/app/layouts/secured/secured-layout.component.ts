@@ -9,6 +9,7 @@ import {
     OnDestroy,
     OnInit,
     PLATFORM_ID,
+    Renderer2,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import {
@@ -74,6 +75,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
         private navigationService: NavigationService,
         private onlyOneTabActiveService: OnlyOneTabActiveService,
         protected overlayService: OverlayService,
+        private renderer: Renderer2,
         protected route: ActivatedRoute,
         protected router: Router,
         protected sAnalyticsService: SAnalyticsService,
@@ -158,12 +160,14 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
 
     ngOnInit() {
         super.ngOnInit();
+        this.renderer.addClass(document.body, 'secure');
         const currentUser = this.authService.currentUserValue;
         this.navigationMenuUserActions = currentUser && currentUser.supplier ? navigationMenuSuppliersActions : navigationMenuUserActions;
     }
 
     ngOnDestroy() {
         super.ngOnDestroy();
+        this.renderer.removeClass(document.body, 'secured');
         if (isPlatformBrowser(this.platformId)) {
             window.removeEventListener('storage', this.handleStoreChange);
         }
