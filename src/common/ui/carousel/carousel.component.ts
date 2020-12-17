@@ -1,6 +1,7 @@
 import {
-    Component, ElementRef,
-    EventEmitter, Inject,
+    Component,
+    EventEmitter,
+    Inject,
     Input,
     OnInit,
     Output, PLATFORM_ID,
@@ -15,13 +16,8 @@ import { takeUntil } from 'rxjs/operators';
 import { AbstractResizeComponent } from 'src/common/abstract-resize.component';
 import { getHeightOfDisplayNoneElement } from 'src/common/utils';
 import { IDefaultCarouselItem } from 'src/common/ui/carousel/models/data.model';
+import { isPlatformBrowser } from '@angular/common';
 import { TypeOfResolution } from 'src/common/models/type-of-resolution';
-import {AuthService} from '../../../app/services/auth.service';
-import {GTMService} from '../../../app/services/gtm.service';
-import {OnlyOneTabActiveService} from '../../../app/services/only-one-tab-active.service';
-import {Router} from '@angular/router';
-import {SAnalyticsService} from '../../../app/services/s-analytics.service';
-import {DOCUMENT, isPlatformBrowser} from '@angular/common';
 
 @Component({
     selector: 'lnd-carousel',
@@ -30,6 +26,7 @@ import {DOCUMENT, isPlatformBrowser} from '@angular/common';
     encapsulation: ViewEncapsulation.None,
 })
 export class CarouselComponent extends AbstractResizeComponent implements OnInit {
+    public readonly ADDING_HEIGHT_SLIDE = 40;
 
     @ViewChild('carousel', { static: true }) carousel: any;
 
@@ -133,7 +130,7 @@ export class CarouselComponent extends AbstractResizeComponent implements OnInit
     public setHeights = (): void => {
         this.innerCarousel.style.height = '';
         this.maxHeightSlide = this.getMaxHeightSlide();
-        this.innerCarousel.style.height = (this.maxHeightSlide + 40) + 'px';
+        this.innerCarousel.style.height = (this.maxHeightSlide + this.ADDING_HEIGHT_SLIDE) + 'px';
         this.maxHeightChangeAction.emit(this.maxHeightSlide);
     }
 }

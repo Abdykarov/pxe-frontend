@@ -1,6 +1,7 @@
 import {
     Component,
-    Inject, Input,
+    Inject,
+    Input,
     OnInit,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';

@@ -1,13 +1,14 @@
 import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
+import {
     Component,
     Inject,
     OnInit,
     PLATFORM_ID,
 } from '@angular/core';
-import {
-    ActivatedRoute,
-    Router,
-} from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 import * as R from 'ramda';
 
@@ -18,7 +19,6 @@ import { ModalService } from 'src/common/containers/modal/modal.service';
 import { LpPersonalizationService } from './services/lp-personalization.service';
 import { lpVideoModalConfig } from 'src/app/pages/landing/landing.config';
 import { personalizationOptions } from './lp-personalization-container.config';
-import {isPlatformBrowser} from '@angular/common';
 
 @Component({
   selector: 'lnd-lp-personalization-container',

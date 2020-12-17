@@ -36,7 +36,7 @@ export class CarouselCompareComponent extends AbstractResizeComponent {
 
     public maxHeight = 0;
 
-    public deviceCouldChanged = (typeOfResolution: TypeOfResolution) =>
+    public deviceCouldBeChanged = (typeOfResolution: TypeOfResolution) =>
         this.numberOfSlides = mapTypeOfDeviceToNumberOfSlides[typeOfResolution]
 
 
@@ -47,13 +47,13 @@ export class CarouselCompareComponent extends AbstractResizeComponent {
         super();
 
         if (isPlatformBrowser(this.platformId)) {
-            this.deviceCouldChanged(this.getTypeOfDevice());
+            this.deviceCouldBeChanged(this.getTypeOfDevice());
 
             this.resizeEvent$
                 .pipe(takeUntil(this.destroy$))
                 .subscribe(() => {
                     this.showCarousel = false;
-                    this.numberOfSlides = this.deviceCouldChanged(this.getTypeOfDevice());
+                    this.numberOfSlides = this.deviceCouldBeChanged(this.getTypeOfDevice());
                     setTimeout(_ => {
                         this.showCarousel = true;
                         this.cd.markForCheck();
@@ -61,7 +61,7 @@ export class CarouselCompareComponent extends AbstractResizeComponent {
                 });
         } else {
             this.showCarousel = true;
-            this.numberOfSlides = this.deviceCouldChanged(TypeOfResolution.DESKTOP);
+            this.numberOfSlides = this.deviceCouldBeChanged(TypeOfResolution.DESKTOP);
             this.cd.markForCheck();
         }
     }
