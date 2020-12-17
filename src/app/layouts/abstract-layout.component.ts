@@ -30,6 +30,7 @@ import {
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
+import { SCROLL_TO } from '../services/model/scroll-to.model';
 
 export abstract class AbstractLayoutComponent extends AbstractComponent implements OnInit {
     public activeUrl: string;
@@ -138,6 +139,14 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
             )
             .subscribe();
     }
+
+    public scrollToFaq = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.FAQ));
+
+    public scrollToHelp = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.HELP));
+
+    public scrollToHowItWorks = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.HOW_IT_WORKS));
+
+    public scrollToBestPricesInTheWorld = () => setTimeout(_ => this.scrollToService.activeScrollTo(SCROLL_TO.BEST_PRICES_IN_THE_WORLD));
 
     public signUp = () => this.router.navigate([this.CONSTS.PATHS.SIGN_UP]);
 }

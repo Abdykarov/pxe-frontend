@@ -45,6 +45,7 @@
 
 	.carousel-items__wrapper {
 		width: 100%;
+		display: flex;
 
 		// Media queries
 		@include media-breakpoint-up(md) {

@@ -17,7 +17,7 @@ export const personalizationOptions: IPersonalization[] = [
     },
     {
         fragment: 'spravuji-nemovitosti',
-        buttonText: 'Chci ušetřit',
+        buttonText: 'Chci ulehčit práci',
         header: 'Vlastníte více nemovitostí?',
         description: 'Neztrácejte čas opakovaným hledáním dodavatelů energií. Pro každou nemovitost vám připravíme nabídky od prověřených dodavatelů. Všechny informace budete mít k dispozici přehledně na jednom místě v aplikaci parc4u.',
         img: '/assets/images/landing-page/lp-picture-home.png',

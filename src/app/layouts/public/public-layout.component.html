@@ -5,8 +5,12 @@
     <lnd-header
         [isLogged]="authService.currentUserValue | isLogged"
         [settings]="settings"
-        (homeRedirect)="homeRedirect($event)"
+        (homeRedirect)="homeRedirect()"
         [isMenuOpen]="isMenuOpen"
+        (howItWorksAction)="scrollToHowItWorks()"
+        (helpAction)="scrollToHelp()"
+        (faqAction)="scrollToFaq()"
+        (bestPricesInTheWorldAction)="scrollToBestPricesInTheWorld()"
         (landingPageRedirect)="landingPageRedirect()"
         (loginAction)="login()"
         (signUpAction)="signUp()"

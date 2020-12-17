@@ -1,4 +1,5 @@
 import {
+    ChangeDetectorRef,
     Component,
     Inject,
     Input,
@@ -8,7 +9,10 @@ import { FormBuilder } from '@angular/forms';
 
 import { AuthService } from 'src/app/services/auth.service';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
-import { askForOfferCodes } from 'src/common/constants/errors.constant';
+import {
+    askForOfferCodes,
+    defaultErrorMessage,
+} from 'src/common/constants/errors.constant';
 import { FILE_UPLOAD_CONFIG } from 'src/app/app.constants';
 import { FileItem } from 'src/third-sides/file-upload';
 import { FileUploaderCustom } from 'src/third-sides/file-upload/file-uploader-custom';
@@ -35,12 +39,14 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
     public readonly maxFileCount = this.CONSTS.ASK_FOR_OFFER.MAX_FILE_COUNT;
     public readonly maxFileSize = this.CONSTS.ASK_FOR_OFFER.MAX_FILE_SIZE;
 
+    public success = false;
     public errors: string[] = [];
 
     @Input()
     public id = 'file-upload';
 
     constructor(
+        private cd: ChangeDetectorRef,
         @Inject(FILE_UPLOAD_CONFIG) public fileUploader: FileUploaderCustom,
         protected fb: FormBuilder,
     ) {
@@ -52,6 +58,21 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
         super.ngOnInit();
         this.fileUploader.onBeforeAddingFiles = (files: File[]) => {
             this.errors = [];
+            this.success = false;
+        };
+
+
+        this.fileUploader.onSuccessItem = (_, __, status) => {
+            if (status === 200) {
+                this.fileUploader.queue = [];
+                this.success = true;
+                this.cd.markForCheck();
+            }
+        };
+
+        this.fileUploader.onErrorItem = (_, __, status) => {
+            this.errors.push(defaultErrorMessage);
+            this.cd.markForCheck();
         };
 
         this.fileUploader.onAfterAddingFile = (fileItem: FileItem) => {
@@ -75,7 +96,10 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
 
     }
 
-    public removeFile = (item) => this.fileUploader.removeFromQueue(item);
+    public removeFile = (item) => {
+        this.fileUploader.removeFromQueue(item);
+        this.cd.markForCheck();
+    }
 
     public submitForm = (data) => {
         if (this.fileUploader.queue.length > 0 && this.form.valid) {
