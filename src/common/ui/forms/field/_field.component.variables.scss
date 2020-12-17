@@ -28,6 +28,10 @@ $input-label-active-font-size:       .75rem;
 $input-textarea-min-height:          175px;
 $input-textarea-line-height:         24px;
 
+$input-height-public:                60px;
+$input-padding-y-public:             $spacer;
+$input-padding-x-public:             ( $spacer * 1.5 );
+
 $custom-control-gutter:                                  0;
 $custom-control-indicator-top:                           2px;
 $custom-control-indicator-size:                          ( 16 / 16 ) + rem;

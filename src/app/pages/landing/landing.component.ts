@@ -28,14 +28,17 @@ import {
 import { fromEvent } from 'rxjs';
 
 import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
+import {
+    AskForOfferContainerComponent,
+} from 'src/common/containers/form/forms/ask-for-offer/ask-for-offer-container.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { cardConfig } from './landing.config';
 import {
     CONSTS,
-    GTM_CONSTS,
     ROUTES,
-    S_ANALYTICS,
     SEO,
 } from 'src/app/app.constants';
+import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import { FaqService } from 'src/app/services/faq.service';
 import { GTMService } from 'src/app/services/gtm.service';
@@ -46,16 +49,10 @@ import {
     IForm,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
-import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import { IQuestion } from 'src/app/services/model/faq.model';
-import { lpVideoModalConfig } from './landing.config';
 import { ModalService } from 'src/common/containers/modal/modal.service';
-import {
-    parseGraphQLErrors,
-    playVideo,
-    scrollToElementFnc,
-} from 'src/common/utils';
+import { scrollToElementFnc } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
@@ -69,18 +66,23 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     @ViewChild('video', { static: true })
     public _video: ElementRef;
 
-    @ViewChild('subscription', { static: false })
-    public subscriptionElement: ElementRef;
+    @ViewChild('howItWorks', { static: true })
+    public howItWorks: ElementRef;
 
-    @ViewChild('faq', { static: true })
-    public faq: ElementRef;
+    @ViewChild('howItWorksFileContainer', { static: true })
+    public howItWorksFileContainer: AskForOfferContainerComponent;
 
-    @ViewChild('aboutUs', { static: true })
-    public aboutUs: ElementRef;
+    // @ViewChild('lastContentFileUploader', { static: true })
+    // public lastContentFileUploader: AskForOfferContainerComponent;
 
-    @ViewChild('aboutService', { static: true })
-    public aboutService: ElementRef;
+    @ViewChild('help', { static: true })
+    public help: ElementRef;
 
+    @ViewChild('bestPricesInTheWorld', { static: true })
+    public bestPricesInTheWorld: ElementRef;
+
+    public activeCommodityTypeCarouselCompare = CommodityType.POWER;
+    public CommodityType = CommodityType;
     public frequentedQuestions: IAccordionItem[] = [];
     public formLoading = false;
     public formSent = false;
@@ -91,6 +93,8 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     public routes = ROUTES;
 
     public isMoreThanMdResolution = false;
+
+    public cardConfig = cardConfig;
 
     public resizeEvent$ = fromEvent(window, 'resize')
         .pipe(
@@ -110,7 +114,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
         public router: Router,
         private registrationService: RegistrationService,
         private sAnalyticsService: SAnalyticsService,
-        private scrollToService: ScrollToService,
+        public scrollToService: ScrollToService,
         private titleService: Title,
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
@@ -144,17 +148,14 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
         this.scrollToService.getScrollStream()
             .pipe(takeUntil(this.destroy$))
             .subscribe((scrollTo: SCROLL_TO) => {
-                if (scrollTo === SCROLL_TO.LANDING_SUBSCRIPTION) {
-                    scrollToElementFnc(this.subscriptionElement.nativeElement);
+                if (scrollTo === SCROLL_TO.BEST_PRICES_IN_THE_WORLD) {
+                    scrollToElementFnc(this.bestPricesInTheWorld.nativeElement, 20);
                 }
-                if (scrollTo === SCROLL_TO.FAQ) {
-                    scrollToElementFnc(this.faq.nativeElement);
+                if (scrollTo === SCROLL_TO.HELP) {
+                    scrollToElementFnc(this.help.nativeElement, 20);
                 }
-                if (scrollTo === SCROLL_TO.ABOUT_US) {
-                    scrollToElementFnc(this.aboutUs.nativeElement);
-                }
-                if (scrollTo === SCROLL_TO.ABOUT_SERVICE) {
-                    scrollToElementFnc(this.aboutService.nativeElement);
+                if (scrollTo === SCROLL_TO.HOW_IT_WORKS) {
+                    scrollToElementFnc(this.howItWorks.nativeElement, 20);
                 }
             });
 
@@ -176,111 +177,17 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
             });
     }
 
-    public playVideoInModal = (event) => {
-        event.preventDefault();
-        this.modalService
-            .showModal$.next(lpVideoModalConfig());
-    }
-
-    ngOnInit() {
-        super.ngOnInit();
-        this.video.muted = true;
-    }
-
-    public videoIsTouch = () => {
-        if (this.isMoreThanMdResolution) {
-            this.play();
-        }
-    }
-
-    public play = (event = null) => {
-        if (event) {
-            event.preventDefault();
-        }
-
-        playVideo(this.video);
-    }
-
-    public pause =  (event = null) => {
-        if (event) {
-            event.preventDefault();
-        }
-
-        this.video.pause();
-    }
-
-    get isVideoPlaying(): boolean {
-        return this._video && !this.video.paused;
-    }
-
-    get video(): HTMLMediaElement {
-        return this._video && this._video.nativeElement;
-    }
-
-    public submitForm = (values) => {
-        this.formLoading = true;
-        this.globalError = [];
-        this.fieldError = {};
-        this.authService.setActualStateFromOtherTab();
-        const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
-        if (isLogged) {
-            this.authService.homeRedirect(false, ILogoutRequired.REGISTRATION);
+    public routeToSignUp = (evt) => {
+        evt.preventDefault();
+        if (this.authService.isLogged()) {
+            this.authService.homeRedirect(true);
         } else {
-            this.registrationService.makeRegistration(values)
-                .pipe(takeUntil(this.destroy$))
-                .subscribe(
-                    () => {
-                        this.gtmService.pushEvent({
-                            'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
-                            'category': GTM_CONSTS.CATEGORIES.REGISTRATION,
-                            'action': GTM_CONSTS.ACTIONS.SENT,
-                            'label': GTM_CONSTS.LABELS.REGISTRATION,
-                            'email': this.authService.hashUserId(values?.email),
-                        });
-                        this.formLoading = false;
-                        this.sAnalyticsService.sendWebData(
-                            {},
-                            {
-                                email: values.email,
-                            },
-                            {},
-                            {
-                                ACTION: S_ANALYTICS.ACTIONS.SIGN_UP,
-                            },
-                        );
-                        this.formSent = true;
-                        this.cd.markForCheck();
-                        this.router.navigate([CONSTS.PATHS.LOGIN],
-                                {
-                                    queryParams: {
-                                        email: values.email,
-                                    },
-                                    state: {
-                                        passwordWasSent: true,
-                                    },
-                                },
-                            );
-                    },
-                    (error) => {
-                        this.formLoading = false;
-                        const { fieldError, globalError } = parseGraphQLErrors(error);
-                        this.fieldError = fieldError;
-                        this.globalError = globalError;
-                        this.cd.markForCheck();
-                    });
+            this.router.navigate([CONSTS.PATHS.SIGN_UP]);
         }
     }
 
     public routerToFaq = (evt) => {
         evt.preventDefault();
         this.router.navigate([CONSTS.PATHS.FAQ]);
-    }
-
-    public scrollToNewSubscription = () =>  {
-        this.authService.setActualStateFromOtherTab();
-        const isLogged = this.isLoggedPipe.transform(this.authService.currentUserValue);
-        if (!isLogged) {
-            this.scrollToService.scrollToLandingPageFragment(SCROLL_TO.LANDING_SUBSCRIPTION);
-        }
     }
 }
