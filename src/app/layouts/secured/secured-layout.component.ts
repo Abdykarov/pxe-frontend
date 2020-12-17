@@ -160,7 +160,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
 
     ngOnInit() {
         super.ngOnInit();
-        this.renderer.addClass(document.body, 'secure');
+        this.renderer.addClass(document.body, 'secured');
         const currentUser = this.authService.currentUserValue;
         this.navigationMenuUserActions = currentUser && currentUser.supplier ? navigationMenuSuppliersActions : navigationMenuUserActions;
     }
