@@ -97,6 +97,8 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
     }
 
     public removeFile = (item) => {
+        console.log(item);
+        console.log(this.fileUploader.queue);
         this.fileUploader.removeFromQueue(item);
         this.cd.markForCheck();
     }
