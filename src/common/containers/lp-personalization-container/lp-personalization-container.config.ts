@@ -3,9 +3,9 @@ import { IPersonalization } from 'src/common/containers/lp-personalization-conta
 export const personalizationOptions: IPersonalization[] = [
     {
         fragment: '',
-        buttonText: 'Chci zařídit převod',
-        header: 'Stěhujete se?',
-        description: 'S novým bydlením přichází spousta radostí i starostí. Vy se věnujte zařizování nového bydlení. Převod elektřiny a plynu nechte na nás.',
+        buttonText: 'Chci vidět nabídky',
+        header: 'Neplýtvejte energií na převody energií!',
+        description: 'Vyřešíme to za vás. Nabídneme vám jen solidní dodavatele, výhodnou cenu a postaráme se o smlouvu i převod. A příští rok zase. <br><span class="text-secondary">parc4u = elektřina a plyn bez starostí.</span>',
         img: '/assets/images/landing-page/lp-picture-home.png',
     },
     {
@@ -53,7 +53,7 @@ export const personalizationOptions: IPersonalization[] = [
     {
         fragment: 'sprava-firmy',
         buttonText: 'Chci se zbavit starostí',
-        header: 'Máte starosti svedením firmy, a nechce se vám ještě řešit odběr energií?',
+        header: 'Máte starosti s vedením firmy, a nechce se vám ještě řešit odběr energií?',
         description: 'Nahrajte do aplikace poslední fakturu za energie a vyberte si nejlepšího dodavatele. O vše ostatní se postaráme my.',
         img: '/assets/images/landing-page/lp-picture-stock.png',
     },

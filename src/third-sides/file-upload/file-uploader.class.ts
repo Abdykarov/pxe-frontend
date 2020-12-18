@@ -134,9 +134,11 @@ export class FileUploader {
   public removeFromQueue(value: FileItem): void {
     const index = this.getIndexOfItem(value);
     const item = this.queue[ index ];
-    if (item.isUploading) {
-      item.cancel();
-    }
+    try {
+        if (item.isUploading) {
+            item.cancel();
+        }
+    } catch (exception) {}
     this.queue.splice(index, 1);
     this.progress = this._getTotalProgress();
   }
