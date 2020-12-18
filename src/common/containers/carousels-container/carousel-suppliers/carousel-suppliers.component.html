@@ -1,5 +1,5 @@
 <ng-template #slideTemplate let-item>
-    <div class="row text-center">
+    <div class="row">
         <div class="col-12 text-center">
             <a [routerLink]="item?.faqUrl">
                 <img
@@ -17,7 +17,7 @@
     class="carousel-suppliers">
     <lnd-carousel
         [carouselItems]="supplierLogos"
-        customSlideWrapper="col-8 offset-2"
+        customSlideWrapper="col-md-8 offset-md-2"
         [itemsPerSlide]="numberOfSlides"
         [singleSlideOffset]="true"
         [showIndicators]="false"
