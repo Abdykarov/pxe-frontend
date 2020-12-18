@@ -107,5 +107,6 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
                 email: this.form.getRawValue().email,
             });
         }
+        this.form.markAllAsTouched();
     }
 }
