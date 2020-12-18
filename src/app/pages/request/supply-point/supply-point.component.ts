@@ -28,7 +28,8 @@ import {
     ISupplyPointFormData,
     ISupplyPointGasAttributes,
     ISupplyPointPowerAttributes,
-    ProgressStatus, SubjectType,
+    ProgressStatus,
+    SubjectType,
 } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
