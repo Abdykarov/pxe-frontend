@@ -151,17 +151,18 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
         this.scrollToService.getScrollStream()
             .pipe(takeUntil(this.destroy$))
             .subscribe((scrollTo: SCROLL_TO) => {
+                const margin = this.isMoreThanMdResolution ? 20 : 60;
                 if (scrollTo === SCROLL_TO.BEST_PRICES_IN_THE_WORLD) {
-                    scrollToElementFnc(this.bestPricesInTheWorld.nativeElement, 20);
+                    scrollToElementFnc(this.bestPricesInTheWorld.nativeElement, margin);
                 }
                 if (scrollTo === SCROLL_TO.HELP) {
-                    scrollToElementFnc(this.help.nativeElement, 20);
+                    scrollToElementFnc(this.help.nativeElement, margin);
                 }
                 if (scrollTo === SCROLL_TO.HOW_IT_WORKS) {
-                    scrollToElementFnc(this.howItWorks.nativeElement, 20);
+                    scrollToElementFnc(this.howItWorks.nativeElement, margin);
                 }
                 if (scrollTo === SCROLL_TO.FAQ) {
-                    scrollToElementFnc(this.faq.nativeElement, 20);
+                    scrollToElementFnc(this.faq.nativeElement, margin);
                 }
             });
 
