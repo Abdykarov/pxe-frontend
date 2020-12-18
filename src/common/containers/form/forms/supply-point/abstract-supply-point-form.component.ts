@@ -84,8 +84,6 @@ export class AbstractSupplyPointFormComponent extends AbstractFormComponent impl
                             () => CustomValidators.alwaysValid(),
                     ]);
             const typeOfAnnualConsumptionValue = this.operationOnNumber(annualAnnualConsumption, (num) => num * 1000);
-            console.log('NEW VALUE');
-            console.log(typeOfAnnualConsumptionValue);
             this.form.controls[typeOfAnnualConsumption].setValue(typeOfAnnualConsumptionValue);
         } else {
             this.form.controls[typeOfAnnualConsumption]
