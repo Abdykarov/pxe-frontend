@@ -43,5 +43,8 @@ export const newSupplyPointPageRoutes: Routes = [
     {
         path: 'new-supply-point',
         component: NewSupplyPointPageComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];

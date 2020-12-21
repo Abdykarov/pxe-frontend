@@ -398,9 +398,18 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 timeToContractEnd = CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS;
                 timeToContractEndPeriodId = TimeToContractEndPeriod.DAY;
             }
-            this.form.controls['annualConsumptionNTUnit'].setValue(annualConsumptionNTUnit);
-            this.form.controls['annualConsumptionVTUnit'].setValue(annualConsumptionVTUnit);
-            this.form.controls['annualConsumptionUnit'].setValue(annualConsumptionUnit);
+
+            if (annualConsumptionNTUnit) {
+                this.form.controls['annualConsumptionNTUnit'].setValue(annualConsumptionNTUnit);
+            }
+
+            if (annualConsumptionVTUnit) {
+                this.form.controls['annualConsumptionVTUnit'].setValue(annualConsumptionVTUnit);
+            }
+
+            if (annualConsumptionUnit) {
+                this.form.controls['annualConsumptionUnit'].setValue(annualConsumptionUnit);
+            }
         }
 
         const filteredContractEndTypeId = contractEndTypeId === CONTRACT_END_TYPE.CONTRACT_END_TERMINATE ? null : contractEndTypeId;

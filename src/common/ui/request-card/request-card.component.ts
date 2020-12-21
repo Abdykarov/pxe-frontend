@@ -25,7 +25,10 @@ export class RequestCardComponent implements OnInit {
     public supplyPoint: ISupplyPoint;
 
     @Output()
-    public action: EventEmitter<any> = new EventEmitter();
+    public continueAction: EventEmitter<any> = new EventEmitter();
+
+    @Output()
+    public removeAction: EventEmitter<any> = new EventEmitter();
 
     public commodityType = CommodityType;
 

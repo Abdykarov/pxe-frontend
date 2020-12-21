@@ -27,5 +27,8 @@ export const supplierConcludedContractsRoutes: Routes = [
     {
         path: 'supplier-concluded-contracts',
         component: SupplierConcludedContractsComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];

@@ -22,7 +22,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CODE_LIST_TYPES,
-    PUSH_EVENTS_GA,
+    GTM_CONSTS,
     ROUTES,
     S_ANALYTICS,
 } from 'src/app/app.constants';
@@ -30,6 +30,7 @@ import { formFields } from 'src/common/containers/form/forms/personal-info/perso
 import {
     getConfigStepper,
     parseGraphQLErrors,
+    removeAccent,
     transformCodeList,
 } from 'src/common/utils';
 import { GTMService } from 'src/app/services/gtm.service';
@@ -91,6 +92,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         private supplyService: SupplyService,
     ) {
         super();
+        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_TWO, this.authService.hashedUserId);
     }
 
     ngOnInit () {
@@ -105,6 +107,20 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                         this.supplyPoint = supplyPoint;
                         this.isIndividual = this.supplyPoint.subject.code === SubjectType.SUBJECT_TYPE_INDIVIDUAL;
                         this.codeLists = codeLists;
+                        this.gtmService.pushEvent({
+                            event: GTM_CONSTS.EVENTS.CHECKOUT,
+                            ecommerce: {
+                                actionField: {
+                                    step: 2,
+                                },
+                                products: [{
+                                    name: removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
+                                    id: this.supplyPoint?.supplier?.id,
+                                    brand: GTM_CONSTS.BRAND,
+                                    quantity: 1,
+                                }],
+                            },
+                        });
                         this.cd.markForCheck();
                     }
                 },
@@ -132,7 +148,6 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             )
             .subscribe(
                 () => {
-                    this.gtmService.pushEvent(PUSH_EVENTS_GA.FORMS.RECAPITULATION);
                     this.sAnalyticsService.sFormSubmit(personalInfoInput);
                     this.sAnalyticsService.sendWebData(
                         {},
@@ -146,6 +161,14 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                             supplyPoint: this.supplyPoint,
                         },
                     );
+                    this.gtmService.pushEvent({
+                        'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+                        'category': GTM_CONSTS.CATEGORIES.FORM,
+                        'dodavatel': removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
+                        'action': GTM_CONSTS.ACTIONS.CONTINUE,
+                        'label': GTM_CONSTS.LABELS.STEP_TWO,
+                        'userID': this.authService.hashedUserId,
+                    });
                     this.router.navigate(
                         [ROUTES.ROUTER_REQUEST_CONTRACT], {
                         queryParams: {

@@ -62,8 +62,11 @@ export class SupplyPointsComponent extends AbstractComponent implements OnInit {
         super.ngOnInit();
 
         this.supplyService.findSupplyPointsByContractStatus([
-                ContractStatus.CONCLUDED,
-            ])
+                    ContractStatus.CONCLUDED,
+                ],
+                null,
+                true,
+            )
             .pipe(
                 map( ({data}) => data.findSupplyPointsByContractStatus),
                 switchMap((supplyPoints: ISupplyPoint[]) => {

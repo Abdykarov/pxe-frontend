@@ -10,6 +10,7 @@ import {
 } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+import * as CryptoJS from 'crypto-js';
 import * as R_ from 'ramda-extension';
 import {
     BehaviorSubject,
@@ -65,6 +66,10 @@ export class AuthService {
     private readonly stopRefreshTokenIntervalSubject$ = new Subject<void>();
     private readonly stopMessageInterval = 'STOP_INTERVAL';
 
+    get hashedUserId(): string {
+        return this.hashUserId(this?.currentUserValue?.email);
+    }
+
     public refreshTokenInterval$ =
         interval(CONSTS.REFRESH_TOKEN.INTERVAL)
             .pipe(
@@ -108,6 +113,10 @@ export class AuthService {
         this.currentUser$ = this.currentUserSubject$.asObservable();
         if (isPlatformBrowser(this.platformId)) {
             this.refreshTokenInterval$.subscribe();
+
+            this.currentUserSubject$.subscribe( (jwtPayloadSubjectSubject: IJwtPayload) => {
+                this.gtmService.setUserId(this.hashUserId(jwtPayloadSubjectSubject?.email));
+            });
         }
     }
 
@@ -117,6 +126,8 @@ export class AuthService {
         const { role } = jwtPayload;
         return R_.containsAny(role, accessRole);
     }
+
+    public hashUserId = (id: string): string => (id ? CryptoJS.SHA3(id).toString() : null);
 
     public refreshTokenInterval = () => {
         this.startRefreshTokenInterval();
@@ -169,7 +180,6 @@ export class AuthService {
             .pipe(
                 map((response: ILoginResponse) => {
                     const loginResponse =  this.manageLoginResponse(response);
-                    this.gtmService.setUserId(this.currentUserValue.email);
                     this.startRefreshTokenInterval();
                     this.startExpirationOfToken = new Date();
                     return loginResponse;
@@ -184,7 +194,6 @@ export class AuthService {
                 map(response => {
                     this.cleanUserData();
                     this.onlyOneTabActiveService.setActiveTab(OnlyOneTabActiveState.LOGOUT);
-                    this.gtmService.setUserId(null);
                     return response;
                 }),
                 catchError((error) => {

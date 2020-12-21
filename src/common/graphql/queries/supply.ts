@@ -85,12 +85,12 @@ export const supplyPointFragment = gql`
             contract {
                 contractId,
                 nextContractId @skip(if: $skipInfoAboutRelationContracts),
-                previousContractId @skip(if: $skipInfoAboutRelationContracts),
+                previousContractId,
                 isNextContractConcluded @skip(if: $skipInfoAboutRelationContracts),
                 contractStatus,
                 deliveryFrom,
                 deliveryTo,
-                offerValidity,
+                offerValidity @skip(if: $skipOfferValidity),
                 offer{
                     supplier{
                         id,
@@ -227,7 +227,7 @@ export const findSupplierDocumentsByComodityQuery = gql`
 `;
 
 export const getSupplyPointQuery = gql`
-    query getSupplyPoint($supplyPointId: ID!, $contractId: ID, $skipInfoAboutRelationContracts: Boolean = false){
+    query getSupplyPoint($supplyPointId: ID!, $contractId: ID, $skipInfoAboutRelationContracts: Boolean = false, $skipOfferValidity: Boolean = false){
         getSupplyPoint(supplyPointId: $supplyPointId, contractId: $contractId){
             ...SupplyPointFragment
         }
@@ -236,7 +236,7 @@ export const getSupplyPointQuery = gql`
 `;
 
 export const findSupplyPointsByContractStatusQuery = gql`
-    query findSupplyPointsByContractStatus($identificationNumber: String, $contractStatus: [ContractStatus]!, $skipInfoAboutRelationContracts: Boolean = true){
+    query findSupplyPointsByContractStatus($identificationNumber: String, $contractStatus: [ContractStatus]!, $skipInfoAboutRelationContracts: Boolean = true, $skipOfferValidity: Boolean = false){
         findSupplyPointsByContractStatus(identificationNumber: $identificationNumber, contractStatus: $contractStatus){
             ...SupplyPointFragment
         }

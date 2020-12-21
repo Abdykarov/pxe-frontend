@@ -38,5 +38,8 @@ export const userProfileChangePasswordPageRoutes: Routes = [
     {
         path: 'user-profile-change-password',
         component: UserProfileChangePasswordPageComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];

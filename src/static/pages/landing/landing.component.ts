@@ -66,6 +66,14 @@ export class LandingComponent extends AbstractComponent {
         },
     ];
 
+    public tileCard = {
+        imgSrc: 'assets/images/landing-page/our-help-cottage.png',
+        imgAlt: 'Card image',
+        imgTitle: 'Card title',
+        title: 'Tile card',
+        content: 'Card text. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    };
+
     public resizeEvent$ = fromEvent(window, 'resize')
         .pipe(
             debounceTime(200),

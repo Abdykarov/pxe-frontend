@@ -6,11 +6,12 @@
     </ng-container>
 </lnd-alert>
 <form
+    id="form-sign-up"
     [formGroup]="form"
     (keydown)="resetCustomFieldError()"
     (keydown.enter)="submitForm($event);false"
     (change)="resetCustomFieldError()"
-    class="form-container"
+    class="form-container ml-0"
     autocomplete="off">
     <lnd-form-field
         lndSFormDirective
@@ -18,7 +19,9 @@
         [error]="formError.email || form.controls.email.errors"
         [formControl]="form.controls.email"
         [id]="'email'"
+        customFormGroupClass="form-group--public"
         label="E-mail"
+        [lightField]="true"
         infoText="Založíme vám účet zdarma pro zadaný registrační e-mail. Spamu se nemusíte bát."
         [success]="form.controls.email.valid && (form.controls.email.touched || formError.email)"
         [touched]="form.controls.email.touched || formError.email"
