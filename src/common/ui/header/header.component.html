@@ -114,6 +114,27 @@
                                (click)="landingPageRedirect.emit($event)">
                                 Domů
                             </a>
+                            <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                               class="dropdown-item dropdown-item--without-icon"
+                               (click)="helpAction.emit()">
+                                S čím vám pomůžeme
+                            </a>
+                            <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                               class="dropdown-item dropdown-item--without-icon"
+                               (click)="howItWorksAction.emit()">
+                                Jak to funguje
+                            </a>
+                            <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                               class="dropdown-item dropdown-item--without-icon"
+                               (click)="bestPricesInTheWorldAction.emit()">
+                                Více o cenách
+                            </a>
+                            <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                               class="dropdown-item dropdown-item--without-icon"
+                               (click)="faqAction.emit()">
+                                FAQ
+                            </a>
+
                             <a *ngIf="!settings.isPublicEmptyPage && isLogged"
                                 class="dropdown-item dropdown-item--without-icon"
                                (click)="logoutAction.emit() ">

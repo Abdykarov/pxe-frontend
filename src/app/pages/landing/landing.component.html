@@ -101,7 +101,7 @@
                                     </li>
                                     <li>
                                         <h4 class="h3--public">Výběr nabídky</h4>
-                                        <p class="mb-0">Platforma parc4u vám ukáže přehledný seznam nejvýhodnějších nabídek od námi prověřených společností.</p>
+                                        <p class="mb-0">Služba parc4u vám ukáže přehledný seznam nejvýhodnějších nabídek od námi prověřených společností.</p>
                                     </li>
                                     <li>
                                         <h4 class="h3--public">Smlouva</h4>
@@ -127,7 +127,7 @@
                             <div class="col-md-8 offset-md-2">
                                 <h2 class="h2--public text-white">Nechcete nic vyplňovat? Nemusíte!</h2>
                                 <ol class="numerical-list-stepper">
-                                    <li [class.active]="howItWorksFileContainer?.fileUploader?.queue?.length === 0">Vložte Vaši poslední fakturu za elektřinu nebo plyn.</li>
+                                    <li [class.active]="howItWorksFileContainer?.fileUploader?.queue?.length === 0">Vložte vaši poslední fakturu za elektřinu nebo plyn.</li>
                                     <li [class.active]="howItWorksFileContainer?.fileUploader?.queue?.length > 0">Zadejte váš email a my vám pošleme nabídky na míru.
                                         Zdarma a nezávazně.</li>
                                 </ol>
@@ -146,7 +146,7 @@
             <div class="row no-gutters">
                 <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-0">
                     <h2 class="h4--public text-secondary">Férové ceny energií</h2>
-                    <h3 class="h2--public mb-3">Porovnejte nabídky vybraných dodavatelů elektřiny</h3>
+                    <h3 class="h2--public mb-3">Porovnejte nabídky vybraných dodavatelů {{activeCommodityTypeCarouselCompare === CommodityType.POWER ? 'elektřiny' : 'plynu'}}</h3>
                     <p class="mb-4 mb-md-6">Níže najdete porovnání úspor vůči hlavnímu dodavateli v kraji.</p>
                     <ul class="link-list--lp">
                         <li class="link-list__item">
@@ -169,7 +169,7 @@
                     <pxe-carousel-compare [commodityType]="activeCommodityTypeCarouselCompare"></pxe-carousel-compare>
                 </div>
                 <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-0">
-                    <p class="mb-6">Úspora je vypočítána na základě průměrné spotřeby {{activeCommodityTypeCarouselCompare === CommodityType.POWER ? 'elektřiny' : 'plynu'}} domácnosti a firmy vůči distribuční síti v daném kraji.</p>
+                    <p class="mb-6">Úspora je vypočítána na základě průměrné spotřeby {{activeCommodityTypeCarouselCompare === CommodityType.POWER ? 'elektřiny' : 'plynu'}} domácností a firem vůči cenám majoritního dodavatele v daném kraji.</p>
                     <lnd-button
                         label="Chci vidět nabídky"
                         type="gradient-primary"

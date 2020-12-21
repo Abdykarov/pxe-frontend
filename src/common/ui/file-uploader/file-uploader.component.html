@@ -17,13 +17,14 @@
         [ngClass]="mainTextCustomClass"
         class="mb-1">
         {{mainText}}
-        <label for="file-upload" class="drop-zone__control"
-            [ngClass]="labelCustomClass"
-            *ngIf="labelFromMainText">
-            nahrajte
-        </label>.
+        <ng-container *ngIf="labelFromMainText">
+            <label [for]="id" class="drop-zone__control"
+                   [ngClass]="labelCustomClass">
+                nahrajte
+            </label>.
+        </ng-container>
     </p>
-    <p class="mb-0 small text-color--gray-200"
+    <p class="mb-0"
     [ngClass]="secondaryTextCustomClass">
         {{secondaryText}}
     </p>
@@ -36,7 +37,7 @@
         (fileSelected)="fileSelectAction.emit(uploader)"
         hidden
     />
-    <label for="file-upload" class="btn btn-primary drop-zone__control"
+    <label [for]="id" class="btn btn-primary drop-zone__control"
         [ngClass]="labelCustomClass"
         *ngIf="!labelFromMainText">
         nahrát ze zařízení
