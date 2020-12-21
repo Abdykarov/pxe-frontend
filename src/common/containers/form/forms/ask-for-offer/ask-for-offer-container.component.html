@@ -1,7 +1,7 @@
-<ng-template #agreementTemplate>
+<ng-template #agreementTemplateTwo>
     <span class="text-white">
-        Souhlasím se <a target="_blank" [href]="">Obchodními podmínkami účasti na trhu parc4u</a> a beru na vědomí
-        <a target="_blank" [href]="">Informaci o zpracování osobních údajů</a>.
+        Souhlasím se <a target="_blank" [href]="ROUTES.ROUTER_TERMS_OF_USE">Obchodními podmínkami účasti na trhu parc4u</a> a beru na vědomí
+        <a target="_blank" [href]="ROUTES.ROUTER_SECURING_YOUR_DATA">Informaci o zpracování osobních údajů</a>.
     </span>
 </ng-template>
 
@@ -46,6 +46,7 @@
     <div *ngIf="fileUploader.queue.length && !success"
         class="col-12">
         <form
+            id="form-ask-for-offer"
             [formGroup]="form"
             (keydown)="resetCustomFieldError()"
             (keydown.enter)="submitForm($event);false"
@@ -55,27 +56,27 @@
             <lnd-form-field
                 lndSFormDirective
                 lndSBiometricsDirective
-                [error]="formError.email || form.controls.email.errors"
-                [formControl]="form.controls.email"
-                [id]="'email'"
+                [error]="formError.email_ask || form.controls.email_ask.errors"
+                [formControl]="form.controls.email_ask"
+                [id]="'email_ask'"
                 customFormGroupClass="form-group--public form-group--on-dark-bg"
                 label="E-mail"
-                [success]="form.controls.email.valid && (form.controls.email.touched || formError.email)"
-                [touched]="form.controls.email.touched || formError.email"
-                [validationMessages]="formFields.validationMessages.email"
+                [success]="form.controls.email_ask.valid && (form.controls.email_ask.touched || formError.email_ask)"
+                [touched]="form.controls.email_ask.touched || formError.email_ask"
+                [validationMessages]="formFields.validationMessages.email_ask"
             ></lnd-form-field>
             <lnd-form-field
                 lndSFormDirective
                 lndSBiometricsDirective
-                [error]="formError.consent || form.controls.consent.errors"
-                [formControl]="form.controls.consent"
-                [id]="'consent'"
+                [error]="formError.consent_ask || form.controls.consent_ask.errors"
+                [formControl]="form.controls.consent_ask"
+                [id]="'consent_ask'"
                 label=""
-                [labelTemplate]="agreementTemplate"
-                [success]="form.controls.consent.valid && (form.controls.consent.touched || formError.consent)"
-                [touched]="form.controls.consent.touched || formError.consent"
+                [labelTemplate]="agreementTemplateTwo"
+                [success]="form.controls.consent_ask.valid && (form.controls.consent_ask.touched || formError.consent_ask)"
+                [touched]="form.controls.consent_ask.touched || formError.consent_ask"
                 [type]="'CHECKBOX'"
-                [validationMessages]="formFields.validationMessages.consent"
+                [validationMessages]="formFields.validationMessages.consent_ask"
             ></lnd-form-field>
             <div class="text-right">
                 <lnd-button
