@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { Subject } from 'rxjs';
 
@@ -23,4 +22,7 @@ export class ScrollToService {
 
     public scrollToBestPricesInTheWorld = () => setTimeout(_ => this.activeScrollTo(SCROLL_TO.BEST_PRICES_IN_THE_WORLD));
 
+    public scrollToFaq = () => setTimeout(_ => this.activeScrollTo(SCROLL_TO.FAQ));
+
+    public scrollToHowItWorks = () => setTimeout(_ => this.activeScrollTo(SCROLL_TO.HOW_IT_WORKS));
 }
