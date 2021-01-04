@@ -7,7 +7,7 @@ import { errorFieldMessages } from 'src/common/constants/errors.constant';
 
 export const formFields = {
     controls: {
-        email: [
+        email_ask: [
             '',
             [
                 Validators.required,
@@ -15,7 +15,7 @@ export const formFields = {
                 Validators.email,
             ],
         ],
-        consent: [
+        consent_ask: [
             false,
             [
                 Validators.requiredTrue,
@@ -23,13 +23,13 @@ export const formFields = {
         ],
     },
     validationMessages: {
-        email: {
+        email_ask: {
             required: errorFieldMessages.email.required,
                 email: errorFieldMessages.email.email,
                 invalidEmail: errorFieldMessages.email.email,
                 maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
         },
-        consent: {
+        consent_ask: {
             required: R.path(
                 [
                     'consent',
