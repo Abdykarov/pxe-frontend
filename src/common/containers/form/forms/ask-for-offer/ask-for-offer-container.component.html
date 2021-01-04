@@ -1,4 +1,4 @@
-<ng-template #agreementTemplateTwo>
+<ng-template #agreementTemplate>
     <span class="text-white">
         Souhlasím se <a target="_blank" [href]="ROUTES.ROUTER_TERMS_OF_USE">Obchodními podmínkami účasti na trhu parc4u</a> a beru na vědomí
         <a target="_blank" [href]="ROUTES.ROUTER_SECURING_YOUR_DATA">Informaci o zpracování osobních údajů</a>.
@@ -71,7 +71,7 @@
                     [formControl]="form.controls.consent"
                     [id]="'consent' + id"
                     label=""
-                    [labelTemplate]="agreementTemplateTwo"
+                    [labelTemplate]="agreementTemplate"
                     [success]="form.controls.consent.valid && (form.controls.consent.touched || formError.consent)"
                     [touched]="form.controls.consent.touched || formError.consent"
                     [type]="'CHECKBOX'"

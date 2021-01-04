@@ -269,7 +269,5 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
         }
     }
 
-    public preventDefault = (evt) => evt.preventDefault();
-
     public getErrorMessage = () => getErrorMessage(this.error, this.validationMessages, this.dynamicPipe);
 }
