@@ -10,6 +10,7 @@ import {
 } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+import * as CryptoJS from 'crypto-js';
 import * as R_ from 'ramda-extension';
 import {
     BehaviorSubject,
@@ -37,6 +38,7 @@ import {
 } from 'src/app/app.constants';
 import { CookiesService } from './cookies.service';
 import { environment } from 'src/environments/environment';
+import { GTMService } from './gtm.service';
 import {
     IJwtPayload,
     ILoginRequest,
@@ -63,6 +65,10 @@ export class AuthService {
     private readonly startRefreshTokenIntervalSubject$ = new Subject<void>();
     private readonly stopRefreshTokenIntervalSubject$ = new Subject<void>();
     private readonly stopMessageInterval = 'STOP_INTERVAL';
+
+    get hashedUserId(): string {
+        return this.hashUserId(this?.currentUserValue?.email);
+    }
 
     public refreshTokenInterval$ =
         interval(CONSTS.REFRESH_TOKEN.INTERVAL)
@@ -96,6 +102,7 @@ export class AuthService {
 
     constructor(
         private cookiesService: CookiesService,
+        private gtmService: GTMService,
         private http: HttpClient,
         private onlyOneTabActiveService: OnlyOneTabActiveService,
         private router: Router,
@@ -106,6 +113,10 @@ export class AuthService {
         this.currentUser$ = this.currentUserSubject$.asObservable();
         if (isPlatformBrowser(this.platformId)) {
             this.refreshTokenInterval$.subscribe();
+
+            this.currentUserSubject$.subscribe( (jwtPayloadSubjectSubject: IJwtPayload) => {
+                this.gtmService.setUserId(this.hashUserId(jwtPayloadSubjectSubject?.email));
+            });
         }
     }
 
@@ -115,6 +126,8 @@ export class AuthService {
         const { role } = jwtPayload;
         return R_.containsAny(role, accessRole);
     }
+
+    public hashUserId = (id: string): string => (id ? CryptoJS.SHA3(id).toString() : null);
 
     public refreshTokenInterval = () => {
         this.startRefreshTokenInterval();

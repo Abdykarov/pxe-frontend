@@ -1,9 +1,11 @@
 export * from './add-milliseconds-to-date.fnc';
 export * from './compare-dates.fnc';
+export * from './bytes-to-size.fnc';
 export * from './convert-array-to-object.fnc';
 export * from './convert-date-to-send-format.fnc';
 export * from './create-string-from-template.fnc';
 export * from './count-indicator';
+export * from './get-height-of-display-none-element.fnc';
 export * from './get-progress-stepper-config.fnc';
 export * from './get-error-message.fnc';
 export * from './in-array';
@@ -36,3 +38,4 @@ export * from './truncate-text.fnc';
 export * from './get-absolute-height-of-element.fnc';
 export * from './is-object.fnc';
 export * from './apollo-get-operation-name.fnc';
+export * from './remove-accent.fnc';

@@ -25,5 +25,8 @@ export const requestCardPageRoutes: Routes = [
     {
         path: 'request-card',
         component: RequestCardComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];

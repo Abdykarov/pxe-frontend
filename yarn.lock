@@ -8635,11 +8635,6 @@ neo-async@^2.6.1:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
 
-ng2-pdfjs-viewer@5.0.7:
-  version "5.0.7"
-  resolved "https://registry.yarnpkg.com/ng2-pdfjs-viewer/-/ng2-pdfjs-viewer-5.0.7.tgz#99bb373548488f93badefee2868af6af4b011c2f"
-  integrity sha512-KkeA0ejCoqz9CDWVDiZ+qCxme0Ta0U/VZBHSpounVLI9plGr5aXiEUG0nNdRNtfcq86GSiNE4gqKFzyYXU50Kg==
-
 ngx-bootstrap@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-4.3.0.tgz#4c2213c082787701711c991ae728adaed035e637"
@@ -12932,6 +12927,11 @@ universalify@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
   integrity sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==
+
+unorm@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/unorm/-/unorm-1.6.0.tgz#029b289661fba714f1a9af439eb51d9b16c205af"
+  integrity sha512-b2/KCUlYZUeA7JFUuRJZPUtr4gZvBh7tavtv4fvk4+KV9pfGiR6CQAQAWl49ZpR3ts2dk4FYkP7EIgDJoiOLDA==
 
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"

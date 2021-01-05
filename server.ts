@@ -48,6 +48,8 @@ global['document'] = win.document;
 global['navigator'] = win.navigator;
 global['HTMLAnchorElement'] = () => null;
 
+global['window'].HTMLElement.prototype.getBoundingClientRect = () => null;
+
 enableProdMode();
 
 // Musi byt pod global['window'] --> jinak window undefined u file replacmentu

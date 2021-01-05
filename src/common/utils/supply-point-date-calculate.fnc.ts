@@ -60,7 +60,7 @@ export const expirationDateIsInTerminateInterval = (supplyPointInput: ISupplyPoi
         supplyPointInput,
     );
     const expirationDate = moment(supplyPointInput.expirationDate).startOf('day');
-    return terminateInterval.diff(expirationDate) > 0;
+    return terminateInterval.diff(expirationDate) >= 0;
 };
 
 export const contractEndTermWithProlongation = (supplyPointInput: ISupplyPointInput | ISupplyPoint) =>

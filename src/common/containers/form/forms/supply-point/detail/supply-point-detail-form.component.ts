@@ -115,6 +115,7 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
                     this.supplyPoint.distributionRate && this.supplyPoint.distributionRate.code,
                     this.codeLists,
                 );
+                this.prefillFormData();
                 this.cd.markForCheck();
             });
 
@@ -174,8 +175,6 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
 
                 this.modalsService.closeModalData$.next(null);
             });
-
-        this.prefillFormData();
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -243,9 +242,9 @@ export class SupplyPointDetailFormComponent extends AbstractSupplyPointFormCompo
             annualConsumptionVT = this.normalizationAnnualConsumption(annualConsumptionVT);
             annualConsumption = this.normalizationAnnualConsumption(annualConsumption);
 
-            this.form.controls['annualConsumptionUnit'].setValue(annualConsumptionUnit);
             this.form.controls['annualConsumptionNTUnit'].setValue(annualConsumptionNTUnit);
             this.form.controls['annualConsumptionVTUnit'].setValue(annualConsumptionVTUnit);
+            this.form.controls['annualConsumptionUnit'].setValue(annualConsumptionUnit);
         }
 
         this.form.controls['id'].setValue(id);

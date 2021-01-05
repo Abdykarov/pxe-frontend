@@ -1,4 +1,5 @@
 import { CONSTS } from 'src/app/app.constants';
+import { bytesToSize } from '../utils/bytes-to-size.fnc';
 
 export const defaultErrorMessage = 'Došlo k chybě. Zkuste to později.';
 
@@ -6,6 +7,12 @@ export const importErrorCodes = {
     [CONSTS.IMPORT_ERROR_CODES.FILE_TYPE]: 'Vložit můžete pouze csv formát.',
     [CONSTS.IMPORT_ERROR_CODES.MAX_NUMBER_OF_FILES]: 'Vložit můžeze pouze jeden soubor.',
     [CONSTS.IMPORT_ERROR_CODES.NO_OFFERS_IN_IMPORT]: 'Pro zvolenou komoditu nebyl nalezen žádný záznam.',
+};
+
+export const askForOfferCodes = {
+    [CONSTS.ASK_FOR_OFFER.ERROR_CODES.FILE_TYPE]: 'Soubory s nepodporovanými formáty nebyly nahrány.',
+    [CONSTS.ASK_FOR_OFFER.ERROR_CODES.FILE_COUNT]: `Maximální počet souborů je ${CONSTS.ASK_FOR_OFFER.MAX_FILE_COUNT}.`,
+    [CONSTS.ASK_FOR_OFFER.ERROR_CODES.FILE_SIZE]: `Maximální velikost souboru je ${bytesToSize(CONSTS.ASK_FOR_OFFER.MAX_FILE_SIZE)}.`,
 };
 
 export const defaultErrorMessageViolation  = 'Neznáma chyba.';
@@ -109,6 +116,7 @@ export const graphQLMessages = {
     unknownSupplyPoint: 'Hledané odběrné místo neexistuje nebo pro přístup k němu nemáte oprávnění.',
     duplicateOffer: 'Nabídka nebyla založena, protože totožná nabídka již existuje.',
     mustBeValidPhoneNumber: 'Telefon musí obsahovat 9 číslic.',
+    notValidOffer: 'Platnost nabídka vypršela.',
 };
 
 export const cantDeleteAllMarkedOffers = 'Nepodařilo se nám smazat veškeré označené nabídky, prosím zkuste to znovu.';
@@ -135,6 +143,8 @@ export const errorFieldMessages =  {
     },
     annualConsumption: {
         required: 'Vyplňte roční spotřebu plynu.',
+        maxKWh: `Nejvyšší možná spotřeba je ${CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH * 1000} KWh.`,
+        maxMWh: `Nejvyšší možná spotřeba je ${CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH} MWh.`,
     },
     annualConsumptionNT: {
         required: 'Vyplňte roční spotřebu elektřiny v nízkém tarifu.',

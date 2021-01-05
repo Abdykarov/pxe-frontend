@@ -26,6 +26,7 @@ import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
+    GTM_CONSTS,
     ROUTES,
     S_ANALYTICS,
 } from 'src/app/app.constants';
@@ -34,7 +35,9 @@ import { FaqService } from 'src/app/services/faq.service';
 import {
     getConfigStepper,
     parseGraphQLErrors,
+    removeAccent,
 } from 'src/common/utils';
+import { GTMService } from 'src/app/services/gtm.service';
 import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import {
     ISupplyPoint,
@@ -78,6 +81,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
         public faqService: FaqService,
+        private gtmService: GTMService,
         public navigateRequestService: NavigateRequestService,
         private offerService: OfferService,
         public route: ActivatedRoute,
@@ -87,6 +91,21 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
         private validityService: ValidityService,
     ) {
         super(faqService, route);
+        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_TWO, this.authService.hashedUserId);
+        this.gtmService.pushEvent({
+            event: GTM_CONSTS.EVENTS.CHECKOUT,
+            ecommerce: {
+                actionField: {
+                    step: 2,
+                },
+                products: [{
+                    name: 'odber energie',
+                    id: null,
+                    brand: GTM_CONSTS.BRAND,
+                    quantity: 1,
+                }],
+            },
+        });
     }
 
     ngOnInit() {
@@ -134,7 +153,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
     public filterOffersOnlyActualSupplier = () => {
         if (!R.isNil(this.supplyPointOffers) && !R.isNil(this.supplyPoint)) {
             this.supplyPointOffers = R.filter((supplyPointOffers: IOffer) =>
-                supplyPointOffers.supplier.id === this.supplyPoint.supplier.id)
+                supplyPointOffers.supplier.id === this.supplyPoint?.supplier?.id)
             (this.supplyPointOffers);
         }
     }
@@ -166,6 +185,14 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
                             supplyPoint: this.supplyPoint,
                         },
                     );
+                    this.gtmService.pushEvent({
+                        'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+                        'category': GTM_CONSTS.CATEGORIES.FORM,
+                        'dodavatel': removeAccent(supplyPointOffer?.name).toLowerCase(),
+                        'action': GTM_CONSTS.ACTIONS.SELECT_OFFER,
+                        'label': GTM_CONSTS.LABELS.STEP_TWO,
+                        'userID': this.authService.hashedUserId,
+                    });
                     this.router.navigate(
                         [ROUTES.ROUTER_REQUEST_RECAPITULATION],
                         {
@@ -189,6 +216,19 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
 
         if (this.validityService.validateTermWithProlongation(this.supplyPoint)) {
             this.bannerObj.text = offerValidityMessages.contractEndWithTerminate;
+        }
+    }
+
+    public togglePriceDecompositionAction = (showedDetail: boolean, supplyPointOffer: IOffer) => {
+        if (showedDetail) {
+            this.gtmService.pushEvent({
+                'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+                'category': GTM_CONSTS.CATEGORIES.FORM,
+                'dodavatel': removeAccent(supplyPointOffer?.name).toLowerCase(),
+                'action': GTM_CONSTS.ACTIONS.SHOW_DETAIL,
+                'label': GTM_CONSTS.LABELS.STEP_TWO,
+                'userID': this.authService.hashedUserId,
+            });
         }
     }
 

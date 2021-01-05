@@ -29,15 +29,18 @@ import {
     ISupplyPointGasAttributes,
     ISupplyPointPowerAttributes,
     ProgressStatus,
+    SubjectType,
 } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
-import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import { getConfigStepper } from 'src/common/utils';
+import { GTMService } from 'src/app/services/gtm.service';
+import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import {
+    GTM_CONSTS,
     ROUTES,
     S_ANALYTICS,
     SUPPLY_POINT_EDIT_TYPE,
@@ -78,6 +81,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
+        private gtmService: GTMService,
         private route: ActivatedRoute,
         private router: Router,
         private sAnalyticsService: SAnalyticsService,
@@ -86,6 +90,21 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
+        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_ONE, this.authService.hashedUserId);
+        this.gtmService.pushEvent({
+            event: GTM_CONSTS.EVENTS.CHECKOUT,
+            ecommerce: {
+                actionField: {
+                    step: 1,
+                },
+                products: [{
+                    name: 'odber energie',
+                    id: null,
+                    brand: GTM_CONSTS.BRAND,
+                    quantity: 1,
+                }],
+            },
+        });
     }
 
     ngOnInit() {
@@ -228,6 +247,15 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                             supplyPointFormData,
                         },
                     );
+                    this.gtmService.pushEvent({
+                        'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+                        'category': GTM_CONSTS.CATEGORIES.FORM,
+                        'action': GTM_CONSTS.ACTIONS.SAVE,
+                        'label': GTM_CONSTS.LABELS.STEP_ONE,
+                        'odberatel': (<any>supplyPoint)?.subjectTypeId === SubjectType.SUBJECT_TYPE_INDIVIDUAL ? 'domacnost' : 'firma',
+                        'energie': supplyPointFormData?.commodityType?.toLowerCase(),
+                        'userID': this.authService.hashedUserId,
+                    });
                     this.cd.markForCheck();
                     this.router.navigate(
                         [ROUTES.ROUTER_REQUEST_OFFER_SELECTION],

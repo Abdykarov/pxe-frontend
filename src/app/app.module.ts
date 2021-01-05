@@ -24,6 +24,7 @@ import { AppRoutingModule } from './app.routing';
 import { FileUploadModule } from 'src/third-sides/file-upload';
 import { InterceptorProviders } from './interceptors';
 import { PipesModule } from 'src/common/pipes/pipes.module';
+import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-viewer.module';
 
 @NgModule({
     declarations: [
@@ -37,6 +38,7 @@ import { PipesModule } from 'src/common/pipes/pipes.module';
         }),
         CarouselModule.forRoot(),
         CookieModule.forRoot(),
+        PdfJsViewerModule.forRoot(),
         FileUploadModule,
         HttpClientModule,
         HttpLinkModule,

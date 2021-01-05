@@ -13,6 +13,25 @@ export const CONSTS = {
     APOLLO_CMS_KEY: 'cms',
     APPEND_AFTER_CUT_TEXT: '...',
     ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],
+    ASK_FOR_OFFER: {
+        ALLOWED_MINE_TYPE: [
+            'image/bmp',
+            'application/bmp',
+            'image/jpg',
+            'image/jpeg',
+            'application/pdf',
+            'image/png',
+            'application/png',
+            'image/tiff',
+        ],
+        ERROR_CODES: {
+            FILE_TYPE: 'FILE_TYPE',
+            FILE_COUNT: 'FILE_COUNT',
+            FILE_SIZE: 'FILE_SIZE',
+        },
+        MAX_FILE_COUNT: 10,
+        MAX_FILE_SIZE: 10485760,
+    },
     CRYPTO: {
         get SALT() {
             return CryptoJS.lib.WordArray.random(128 / 8);
@@ -57,12 +76,13 @@ export const CONSTS = {
     MONTHS_TO_CONTRACT_END: 2,
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
     MODAL_TYPE: {
-        MORE_TABS: 'moreTabs',
-        LP_VIDEO: 'lpVideo',
+        CONFIRM_DELETE_REQUEST: 'confirmDeleteOffer',
         CONFIRM_DELETE_OFFER: 'confirmDeleteOffer',
         CONFIRM_CANCEL_OFFER: 'confirmCancelOffer',
         CONFIRM_BACK_IMPORT: 'confirmBackImportOffer',
         CONFIRM_DELETE_MARKED: 'confirmDeleteMarked',
+        LP_VIDEO: 'lpVideo',
+        MORE_TABS: 'moreTabs',
     },
     OFFSET_ERRORS: {
         INVALID_INPUT: 40,
@@ -128,12 +148,13 @@ export const CONSTS = {
         REASON_FOR_LOGOUT_USER: 'reason_for_logout_user',
     },
     REASON_FOR_LOGOUT_USER: {
-        BY_SELF: 'Byl jste úspěšně odhlášen',
-        UNAUTHORIZED: 'Došlo k odhlášení z důvodu neaktivity',
+        BY_SELF: 'Byl jste úspěšně odhlášen.',
+        UNAUTHORIZED: 'Došlo k odhlášení z důvodu neaktivity.',
     },
     TIME_TO_SHOW_USER_LOGOUT_BANNER: 300,
     VALIDATORS: {
         ADULTHOOD_AGE: 18,
+        MAX_ANNUAL_CONSUMPTION_IN_MWH: 63,
         MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION: 10,
         MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT: 7,
         MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT: 2,
@@ -176,6 +197,7 @@ export const CONSTS = {
     LG_RESOLUTION: 1366,
     XL_RESOLUTION: 992,
     MD_RESOLUTION: 768,
+    SM_RESOLUTION: 576,
 };
 
 export const ROUTES = {
@@ -517,3 +539,33 @@ export enum ANNUAL_CONSUMPTION_UNIT_TYPES {
     ANNUAL_CONSUMPTION_VT_UNIT = 'annualConsumptionVTUnit',
     ANNUAL_CONSUMPTION_UNIT = 'annualConsumptionUnit',
 }
+
+// czech is required by marketing agenture
+export const GTM_CONSTS = {
+    ACTIONS: {
+        SIGN: 'sign the offer',
+        SIGNED: 'offer signed',
+        CONTINUE: 'continue',
+        SELECT_OFFER: 'select offer',
+        SENT: 'sent',
+        VIEW: 'view',
+        START: 'start',
+        SAVE: 'save',
+        SHOW_DETAIL: 'show detail',
+    },
+    BRAND: 'pxe',
+    CATEGORIES: {
+        REGISTRATION: 'sign up',
+        FORM: 'form',
+    },
+    EVENTS: {
+        EVENT_TRACKING: 'eventTracking',
+        CHECKOUT: 'checkout',
+    },
+    LABELS: {
+        REGISTRATION: 'registration',
+        STEP_ONE: 'step 1',
+        STEP_TWO: 'step 2',
+        STEP_THREE: 'step 3',
+    },
+};

@@ -20,6 +20,7 @@ import {
 import {
     filter,
     map,
+    pairwise,
     takeUntil,
 } from 'rxjs/operators';
 
@@ -72,6 +73,13 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./supply-point-form.component.scss'],
 })
 export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent implements OnInit, OnDestroy, OnChanges {
+    private readonly FIELDS_FOR_RESET_EXPIRATION_DATE = [
+        'ownTerminate',
+        'contractEndTypeId',
+        'expirationDate',
+        'timeToContractEndPeriodId',
+    ];
+
     public readonly MAX_LENGTH_NUMBER_INPUT_WITH_HINT = CONSTS.VALIDATORS.MAX_LENGTH.NUMBER_INPUT_WITH_HINT;
     public pxeAddressWhisperer: AddressWhispererComponent;
 
@@ -136,6 +144,24 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                     ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_NT_UNIT,
                     annualConsumptionNTUnit,
                 );
+            });
+
+        this.form
+            .valueChanges
+            .pipe(
+                takeUntil(this.destroy$),
+                pairwise(),
+            )
+            .subscribe(([prev, current]) => {
+                R.forEach(
+                    fieldName => {
+                        if (prev[fieldName] !== current[fieldName]) {
+                            if (R.path([fieldName, 'notEnoughDaysToProcessContract'])(this.formError)) {
+                                this.resetFormError(true);
+                            }
+                        }
+                    },
+                )(this.FIELDS_FOR_RESET_EXPIRATION_DATE);
             });
 
         this.form.get('annualConsumptionUnit')
@@ -372,9 +398,18 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 timeToContractEnd = CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS;
                 timeToContractEndPeriodId = TimeToContractEndPeriod.DAY;
             }
-            this.form.controls['annualConsumptionNTUnit'].setValue(annualConsumptionNTUnit);
-            this.form.controls['annualConsumptionVTUnit'].setValue(annualConsumptionVTUnit);
-            this.form.controls['annualConsumptionUnit'].setValue(annualConsumptionUnit);
+
+            if (annualConsumptionNTUnit) {
+                this.form.controls['annualConsumptionNTUnit'].setValue(annualConsumptionNTUnit);
+            }
+
+            if (annualConsumptionVTUnit) {
+                this.form.controls['annualConsumptionVTUnit'].setValue(annualConsumptionVTUnit);
+            }
+
+            if (annualConsumptionUnit) {
+                this.form.controls['annualConsumptionUnit'].setValue(annualConsumptionUnit);
+            }
         }
 
         const filteredContractEndTypeId = contractEndTypeId === CONTRACT_END_TYPE.CONTRACT_END_TERMINATE ? null : contractEndTypeId;

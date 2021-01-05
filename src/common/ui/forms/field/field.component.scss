@@ -44,6 +44,33 @@
 .form-group {
 	position: relative;
 
+	&--public {
+		.form-control-case {
+			padding-top: ( $spacer * 1.5 );
+		}
+
+		.control-label,
+		.form-control {
+			font-size: $font-size-base-public;
+		}
+
+
+		.form-control {
+			height: $input-height-public;
+			padding: $input-padding-y-public $input-padding-x-public;
+		}
+
+		.input-subtext {
+			font-size: $font-size-base;
+		}
+	}
+
+	&--on-dark-bg {
+		.control-label {
+			color: $white;
+		}
+	}
+
 	&--with-currency {
 		.input-group-append {
 			right: $spacer;
@@ -103,6 +130,10 @@
 			padding-right: ( $icon-size-px + ( $spacer / 2 ) );
 			z-index: $zindex-custom-control;
 		}
+	}
+
+	.is-disabled {
+		opacity: .3;
 	}
 }
 

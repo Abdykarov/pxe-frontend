@@ -9,6 +9,7 @@ import {
     OnDestroy,
     OnInit,
     PLATFORM_ID,
+    Renderer2,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import {
@@ -27,7 +28,12 @@ import {
 
 import { AbstractLayoutComponent } from 'src/app/layouts/abstract-layout.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { CONSTS } from 'src/app/app.constants';
+import {
+    CommodityTypesLowerCase,
+    CONSTS,
+    SEO,
+    SubjectTypeLowerCase,
+} from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';
 import {
     INavigationConfig,
@@ -51,6 +57,8 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
     templateUrl: './secured-layout.component.html',
 })
 export class SecuredLayoutComponent extends AbstractLayoutComponent implements OnInit, OnDestroy {
+    public commodityTypePower = CommodityTypesLowerCase.POWER;
+    public subjectTypeIndividual = SubjectTypeLowerCase.INDIVIDUAL;
     public isMenuOpen = false;
     public itemOpened = null;
     public navConfig: INavigationConfig = [];
@@ -67,10 +75,11 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
         private navigationService: NavigationService,
         private onlyOneTabActiveService: OnlyOneTabActiveService,
         protected overlayService: OverlayService,
+        private renderer: Renderer2,
         protected route: ActivatedRoute,
         protected router: Router,
         protected sAnalyticsService: SAnalyticsService,
-        protected scrollToService: ScrollToService,
+        public scrollToService: ScrollToService,
         private titleService: Title,
         @Inject(PLATFORM_ID) public platformId: string,
     ) {
@@ -142,12 +151,14 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
 
     ngOnInit() {
         super.ngOnInit();
+        this.renderer.addClass(document.body, 'secured');
         const currentUser = this.authService.currentUserValue;
         this.navigationMenuUserActions = currentUser && currentUser.supplier ? navigationMenuSuppliersActions : navigationMenuUserActions;
     }
 
     ngOnDestroy() {
         super.ngOnDestroy();
+        this.renderer.removeClass(document.body, 'secured');
         if (isPlatformBrowser(this.platformId)) {
             window.removeEventListener('storage', this.handleStoreChange);
         }

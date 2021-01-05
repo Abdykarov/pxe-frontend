@@ -1,0 +1,60 @@
+<div class="row static-pages-holder">
+    <div class="col">
+        <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
+    </div>
+</div>
+<div class="static-pages-holder">
+    <div class="static-pages static-pages--bg-transparent">
+        <div class="row">
+            <div class="col-12 text-center mb-3">
+                <pxe-file-uploader
+                    [uploader]="fileUploader"
+                    [multiple]="true"
+                    mainText="Soubory přetáhněte sem nebo "
+                    secondaryText="Formáty: PDF, JPG, PNG, TIFF do velikosti 10 MB."
+                    [labelFromMainText]="true">
+                </pxe-file-uploader>
+            </div>
+            <div class="col-12">
+                <lnd-alert
+                    *ngIf="true"
+                    type="danger">
+                    Prosím nahrajte soubory ve správném formátu.
+                </lnd-alert>
+            </div>
+            <div class="col-12 mb-3">
+                <span class="d-inline-flex align-items-center mr-4 mb-2"
+                    *ngFor="let fileItem of files">
+                    <span class="icon icon--document mr-2"></span>
+                    {{fileItem.name}}
+                    <lnd-button
+                        (click)="removeFile(fileItem)"
+                        icon="icon--delete"
+                        variant="icon"
+                        type="icon">
+                    </lnd-button>
+                </span>
+            </div>
+            <div class="col-12">
+                <form
+                    class="form-container"
+                    autocomplete="off">
+                    <ng-container *ngIf="true">
+                        <lnd-form-field
+                            [id]="'email'"
+                            label="E-mail"
+                        ></lnd-form-field>
+                        <div class="text-right">
+                            <lnd-button
+                                type="primary"
+                                [submit]="true"
+                                (action)="submitForm($event)"
+                                label="Odeslat">
+                            </lnd-button>
+                        </div>
+                    </ng-container>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

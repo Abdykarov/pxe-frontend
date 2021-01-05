@@ -34,6 +34,7 @@
                 <div class="video__holder">
                     <video
                         #video
+                        disablePictureInPicture
                         [class.cursor-pointer]="isVideoPlaying"
                         (click)="isVideoPlaying && pause($event)"
                         (pause)="cd.detectChanges()"
