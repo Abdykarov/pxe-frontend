@@ -32,12 +32,9 @@ import {
     AskForOfferContainerComponent,
 } from 'src/common/containers/form/forms/ask-for-offer/ask-for-offer-container.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { cardConfig } from './landing.config';
 import {
     CONSTS,
     ROUTES,
-    S_ANALYTICS,
-    SEO,
 } from 'src/app/app.constants';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
@@ -51,11 +48,9 @@ import {
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
 import { ILandingPage } from 'src/common/cms/models/landing-page';
-import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import { IQuestion } from 'src/app/services/model/faq.model';
 import { ISignUp } from 'src/common/cms/models/sign-up';
-import { lpVideoModalConfig } from './landing.config';
 import { NewsService } from 'src/common/cms/services/news.service';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { scrollToElementFnc } from 'src/common/utils';
@@ -106,8 +101,6 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
 
     public isMoreThanMdResolution = false;
 
-    public cardConfig = cardConfig;
-
     public resizeEvent$ = fromEvent(window, 'resize')
         .pipe(
             debounceTime(200),
@@ -132,6 +125,8 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super(faqService, route);
+
+        console.log(this.landingPage);
 
         if (isPlatformBrowser) {
             this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;

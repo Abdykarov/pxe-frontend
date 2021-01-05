@@ -7,7 +7,6 @@ query queryLoginContents {
   queryLoginContents {
     flatData {
       title,
-      leftContent,
       seo {
         ...seoFragment
       }

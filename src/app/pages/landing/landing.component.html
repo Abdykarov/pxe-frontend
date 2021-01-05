@@ -69,7 +69,7 @@
             </div>
             <div class="card-tiles">
                 <div class="row no-gutters card-tiles__inner">
-                    <div *ngFor="let item of cardConfig" class="col-md-4 card-tile__item" [ngClass]="item.customClass">
+                    <div *ngFor="let item of landingPage?.helpSection?.cards" class="col-md-4 card-tile__item" [ngClass]="item.customClass">
                         <lnd-card [data]="item"></lnd-card>
                     </div>
                 </div>
@@ -80,7 +80,8 @@
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
                 <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-3">
-                    <pxe-carousel-references></pxe-carousel-references>
+                    {{landingPage.carouselReferences | json}}
+<!--                    <pxe-carousel-references [carouselItems]="landingPage.carouselReferences"></pxe-carousel-references>-->
                 </div>
             </div>
         </div>

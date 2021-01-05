@@ -6,50 +6,35 @@ export const getLandingPageQuery = gql`
     query queryLandingPageContents {
       queryLandingPageContents {
         flatData {
-          howItWorks {
-            flatData{
-              columns
-                {
-                  description,
-                  title
+          helpSection {
+            flatData {
+              cards {
+                content
+                customClasses
+                imgAlt
+                imgTitle
+                title
+                img {
+                  url
                 }
+              }
               title
-            }
-          },
-          likeADog {
-            flatData {
-              buttonText,
-              description,
-              title
-            }
-          },
-          mapCoverage {
-            flatData {
-              signature,
-              suppliersText,
-              title,
             }
           }
-          filosofii {
+          carouselReferences {
             flatData {
-              description,
-              description2,
-              signature,
-              title
-            }
-          },
-          introduction {
-            flatData {
-              appendix,
-              buttonText,
-              text,
-              title
+              city,
+              imgAlt,
+              name,
+              reference,
+              img {
+                url
+              }
             }
           }
           seo {
             ...seoFragment
-          },
-          aboveSignUp
+          }
         },
       }
     }

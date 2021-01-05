@@ -1,47 +1,14 @@
+import { ICardData } from 'src/common/ui/card/models/data.model';
+import { IReference } from 'src/common/containers/carousels-container/models/models';
 import { ISeo } from './seo';
 
-export interface IFilosofii {
-    description: String;
-    description2: String;
-    signature: String;
-    title: String;
-}
-
-export interface IHowItWorksColumn {
-    description: string;
-    title: string;
-}
-
-export interface IHowItWorks {
-    title: string;
-    columns: IHowItWorksColumn[];
-}
-
-export interface IIntroduction {
-    appendix: string;
-    buttonText: string;
-    text: string;
-    title: string;
-}
-
-export interface ILikeADog {
-    buttonText: string;
-    description: string;
-    title: string;
-}
-
-export interface IMapCoverage {
-    signature: string;
-    suppliersText: string;
+export interface IHelpSection {
+    cards: ICardData[];
     title: string;
 }
 
 export interface ILandingPage {
-    filosofii: IFilosofii;
-    howItWorks: IHowItWorks;
-    introduction: IIntroduction;
-    likeADog: ILikeADog;
-    mapCoverage: IMapCoverage;
+    carouselReferences: IReference[];
+    helpSection: IHelpSection;
     seo: ISeo;
-    aboveSignUp: string;
 }

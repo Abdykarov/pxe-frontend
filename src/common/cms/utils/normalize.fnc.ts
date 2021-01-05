@@ -10,6 +10,13 @@ export const normalize = R.cond([
         data => data,
     ],
     [
+        data => !!data['img'],
+        data => ({
+            ...data,
+            img: data.img[0].url,
+        }),
+    ],
+    [
         isFlatDataArray,
         R.pipe(
             R.map(flatData),
