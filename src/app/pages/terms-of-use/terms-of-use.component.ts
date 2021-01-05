@@ -5,8 +5,11 @@ import {
     Title,
 } from '@angular/platform-browser';
 
+import * as R from 'ramda';
+
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { ITermsOfUSe } from 'src/common/cms/models/terms-of-use';
+import { ISeo } from '../../../common/cms/models/seo';
 
 @Component({
     selector: 'pxe-term-of-use',
@@ -23,14 +26,16 @@ export class TermsOfUseComponent {
         private route: ActivatedRoute,
         private titleService: Title,
     ) {
-        this.titleService.setTitle(this.termsOfUse.seo.title);
+        const seo: ISeo = R.head(this.termsOfUse.seo);
+
+        this.titleService.setTitle(seo.title);
         this.metaService.updateTag({
             name: 'description',
-            content: this.termsOfUse.seo.description,
+            content: seo.description,
         });
         this.metaService.updateTag({
             name: 'keywords',
-            content: this.termsOfUse.seo.keywords,
+            content: seo.keywords,
         });
 
         this.breadcrumbItemsSimple = [

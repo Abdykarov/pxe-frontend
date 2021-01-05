@@ -5,8 +5,11 @@ import {
     Title,
 } from '@angular/platform-browser';
 
+import * as R from 'ramda';
+
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { ISecuringYourData } from 'src/common/cms/models/securing-your-data';
+import { ISeo } from 'src/common/cms/models/seo';
 
 @Component({
     selector: 'pxe-securing-your-data',
@@ -30,14 +33,15 @@ export class SecuringYourDataComponent {
         private route: ActivatedRoute,
         private titleService: Title,
     ) {
-        this.titleService.setTitle(this.securingYourData.seo.title);
+        const seo: ISeo = R.head(this.securingYourData.seo);
+        this.titleService.setTitle(seo.title);
         this.metaService.updateTag({
             name: 'description',
-            content: this.securingYourData.seo.description,
+            content: seo.description,
         });
         this.metaService.updateTag({
             name: 'keywords',
-            content: this.securingYourData.seo.keywords,
+            content: seo.keywords,
         });
     }
 }

@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
+import { ISignUp } from 'src/common/cms/models/sign-up';
 import { SignUpService } from 'src/common/cms/services/sign-up.service';
 
 @Injectable({
@@ -18,7 +19,7 @@ export class SignUpResolver implements Resolve<any> {
         private signUpService: SignUpService,
     ) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | any {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ISignUp> {
         return this.signUpService.getSignUp();
     }
 }

@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
+import { IPatternsOfContracts } from 'src/common/cms/models/patterns-of-contracts';
 import { PattensOfContractsService } from 'src/common/cms/services/pattens-of-contracts.service';
 
 @Injectable({
@@ -18,7 +19,7 @@ export class PatternsOfContractsResolver implements Resolve<any> {
         private pattensOfContractsService: PattensOfContractsService,
     ) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | any {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IPatternsOfContracts> {
         return this.pattensOfContractsService.getPatternsOfContracts();
     }
 }

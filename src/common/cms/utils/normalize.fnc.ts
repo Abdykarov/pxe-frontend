@@ -32,15 +32,6 @@ export const normalize = R.cond([
                     ],
                 ]),
             ),
-            R.cond([
-                [Array.isArray, array => {
-                    if (array.length === 1) {
-                        return R.head(array);
-                    }
-                    return array;
-                }],
-                [R.T, data => data],
-            ]),
         ),
     ],
     [

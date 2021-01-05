@@ -19,6 +19,7 @@ import { CONSTS } from 'src/app/app.constants';
 import { FaqService } from 'src/app/services/faq.service';
 import { IQuestion } from 'src/app/services/model/faq.model';
 import { FaqComponent } from 'src/app/pages/faq/faq.component';
+import { ISeo } from '../../../../common/cms/models/seo';
 
 @Component({
     selector: 'lnd-faq-overview',
@@ -37,14 +38,16 @@ export class FaqOverviewComponent extends AbstractFaqComponent {
         private titleService: Title,
     ) {
         super(faqService, route);
-        this.titleService.setTitle(this.faqComponent.faq.seo.title);
+
+        const seo: ISeo = R.head(this.faqComponent.faq.seo);
+        this.titleService.setTitle(seo.title);
         this.metaService.updateTag({
             name: 'description',
-            content: this.faqComponent.faq.seo.description,
+            content: seo.description,
         });
         this.metaService.updateTag({
             name: 'keywords',
-            content: this.faqComponent.faq.seo.keywords,
+            content: seo.keywords,
         });
 
         this.loadConfigs$
