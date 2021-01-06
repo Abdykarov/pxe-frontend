@@ -9,10 +9,18 @@ export const normalizeNews = R.pipe(
     R.sort((first, second) => compareDates(first.date, second.date, false)),
 );
 
-export const normalizeLandingPage = R.map(
+export const normalizeLandingPage = R.mapObjIndexed(
     R.cond(
         [
-            [R_.isArray, R.head],
+            [
+                (value, key) => (
+                    R.pipe(
+                        R_.isArray,
+                        R.and(key !== 'carouselReferences'),
+                    )(value)
+                ),
+                R.head,
+            ],
             [R.T, data => data],
         ],
     ),

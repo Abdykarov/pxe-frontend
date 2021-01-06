@@ -32,6 +32,36 @@ export const getLandingPageQuery = gql`
               }
             }
           }
+          howItWorksSection {
+            flatData {
+              buttonText,
+              description,
+              title,
+              steps {
+                description,
+                title
+              }
+            }
+          }
+          bestPricesInTheWorldSection {
+            flatData {
+              buttonText,
+              title,
+              carouselDiscount {
+                flatData {
+                  countingDescription,
+                  description,
+                  perex,
+                  title,
+                  prices {
+                    description,
+                    discount,
+                    title
+                  }
+                }
+              }
+            }
+          }
           seo {
             ...seoFragment
           }

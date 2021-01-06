@@ -10,7 +10,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractResizeComponent } from 'src/common/abstract-resize.component';
 import { mapTypeOfDeviceToNumberOfSlides } from './carousel-suppliers.config';
-import { supplierLogos } from 'src/common/containers/carousels-container/carousel-suppliers/carousel-suppliers.config';
+import { supplierLogos } from 'src/common/ui/carousels/carousel-suppliers/carousel-suppliers.config';
 import { TypeOfResolution } from 'src/common/models/type-of-resolution';
 
 @Component({

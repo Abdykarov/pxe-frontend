@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { IReference } from 'src/common/containers/carousels-container/models/models';
+import { IReference } from 'src/common/ui/carousels/models/models';
 
 @Component({
     selector: 'pxe-carousel-references',

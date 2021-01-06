@@ -5,7 +5,7 @@ import { Routes } from '@angular/router';
 // own classes
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { CarouselComponent } from './page';
-import { CarouselContainersModule } from 'src/common/containers/carousels-container/carousel-containers.module';
+import { CarouselContainersModule } from 'src/common/ui/carousels/carousel-containers.module';
 
 @NgModule({
     declarations: [

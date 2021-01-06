@@ -1,7 +1,7 @@
 import { IDefaultCarouselItem } from 'src/common/ui/carousel/models/data.model';
 
 export interface IReference extends IDefaultCarouselItem {
-    title: string;
+    reference: string;
     iconAlt: string;
     img: string;
     name: string;

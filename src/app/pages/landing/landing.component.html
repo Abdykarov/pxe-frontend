@@ -69,7 +69,7 @@
             </div>
             <div class="card-tiles">
                 <div class="row no-gutters card-tiles__inner">
-                    <div *ngFor="let item of landingPage?.helpSection?.cards" class="col-md-4 card-tile__item" [ngClass]="item.customClass">
+                    <div *ngFor="let item of landingPage?.helpSection?.cards" class="col-md-4 card-tile__item" [ngClass]="item.customClasses">
                         <lnd-card [data]="item"></lnd-card>
                     </div>
                 </div>
@@ -80,8 +80,7 @@
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
                 <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-3">
-                    {{landingPage.carouselReferences | json}}
-<!--                    <pxe-carousel-references [carouselItems]="landingPage.carouselReferences"></pxe-carousel-references>-->
+                    <pxe-carousel-references [carouselItems]="landingPage.carouselReferences"></pxe-carousel-references>
                 </div>
             </div>
         </div>
@@ -93,24 +92,16 @@
                     <div class="section__half">
                         <div class="row">
                             <div class="col-md-8 offset-md-2 col-xl-10 offset-xl-0">
-                                <h2 class="h4--public text-secondary">Jak to funguje</h2>
-                                <h3 class="h2--public">3 snadné kroky</h3>
+                                <h2 class="h4--public text-secondary">{{landingPage?.howItWorksSection?.title}}</h2>
+                                <h3 class="h2--public">{{landingPage?.howItWorksSection?.steps?.length}} {{landingPage?.howItWorksSection?.description}}</h3>
                                 <ol class="circular-number-list">
-                                    <li>
-                                        <h4 class="h3--public">Registrace</h4>
-                                        <p class="mb-0">K registraci stačí jen e-mailová adresa, nic víc. Pošleme vám heslo do mailu a tím se přihlásíte.</p>
-                                    </li>
-                                    <li>
-                                        <h4 class="h3--public">Výběr nabídky</h4>
-                                        <p class="mb-0">Služba parc4u vám ukáže přehledný seznam nejvýhodnějších nabídek od námi prověřených společností.</p>
-                                    </li>
-                                    <li>
-                                        <h4 class="h3--public">Smlouva</h4>
-                                        <p class="mb-0">Novou smlouvu uzavřete SMS podpisem a zasláním ověřovací platby ve výši 1 Kč. Smlouvu lze kdykoli vypovědět.</p>
+                                    <li *ngFor="let step of landingPage?.howItWorksSection?.steps">
+                                        <h4 class="h3--public">{{step.title}}</h4>
+                                        <p class="mb-0">{{step.description}}</p>
                                     </li>
                                 </ol>
                                 <lnd-button
-                                    label="Chci vidět nabídky"
+                                    [label]="landingPage.howItWorksSection.buttonText"
                                     type="gradient-primary"
                                     customClass="btn-public btn--icon-right"
                                     icon="icon--arrow-right"
@@ -126,11 +117,10 @@
                     <div class="section__half section__half--gradient-violet">
                         <div class="row">
                             <div class="col-md-8 offset-md-2">
-                                <h2 class="h2--public text-white">Nechcete nic vyplňovat? Nemusíte!</h2>
+                                <h2 class="h2--public text-white">{{askForOffer?.title}}</h2>
                                 <ol class="numerical-list-stepper">
-                                    <li [class.active]="howItWorksFileContainer?.fileUploader?.queue?.length === 0">Vložte vaši poslední fakturu za elektřinu nebo plyn.</li>
-                                    <li [class.active]="howItWorksFileContainer?.fileUploader?.queue?.length > 0">Zadejte váš email a my vám pošleme nabídky na míru.
-                                        Zdarma a nezávazně.</li>
+                                    <li [class.active]="howItWorksFileContainer?.fileUploader?.queue?.length === 0">{{askForOffer?.firstStep}}</li>
+                                    <li [class.active]="howItWorksFileContainer?.fileUploader?.queue?.length > 0">{{askForOffer?.secondStep}}</li>
                                 </ol>
                             </div>
                             <div class="col-md-8 offset-md-2 col-xl-10">
@@ -146,22 +136,22 @@
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
                 <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-0">
-                    <h2 class="h4--public text-secondary">Férové ceny energií</h2>
-                    <h3 class="h2--public mb-3">Porovnejte nabídky vybraných dodavatelů {{activeCommodityTypeCarouselCompare === CommodityType.POWER ? 'elektřiny' : 'plynu'}}</h3>
-                    <p class="mb-4 mb-md-6">Níže najdete porovnání úspor vůči hlavnímu dodavateli v kraji.</p>
+                    <h2 class="h4--public text-secondary">{{landingPage.bestPricesInTheWorldSection?.title}}</h2>
+                    <h3 class="h2--public mb-3">{{landingPage | bestPricesInTheWorldSection:activeCommodityTypeCarouselCompare:"description"}}</h3>
+                    <p class="mb-4 mb-md-6">{{landingPage | bestPricesInTheWorldSection:activeCommodityTypeCarouselCompare:"perex"}}</p>
                     <ul class="link-list--lp">
                         <li class="link-list__item">
                             <a (click)="activeCommodityTypeCarouselCompare = CommodityType.POWER"
                                class="link-list__link"
                                [class.link-list__link--active]="activeCommodityTypeCarouselCompare == CommodityType.POWER">
-                                Elektřina
+                                {{landingPage.bestPricesInTheWorldSection?.carouselDiscount[0]?.title}}
                             </a>
                         </li>
                         <li class="link-list__item">
                             <a (click)="activeCommodityTypeCarouselCompare = CommodityType.GAS"
                                class="link-list__link"
                                [class.link-list__link--active]="activeCommodityTypeCarouselCompare == CommodityType.GAS">
-                                Plyn
+                                {{landingPage.bestPricesInTheWorldSection?.carouselDiscount[1]?.title}}
                             </a>
                         </li>
                     </ul>
@@ -170,9 +160,9 @@
                     <pxe-carousel-compare [commodityType]="activeCommodityTypeCarouselCompare"></pxe-carousel-compare>
                 </div>
                 <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-0">
-                    <p class="mb-6">Úspora je vypočítána na základě průměrné spotřeby {{activeCommodityTypeCarouselCompare === CommodityType.POWER ? 'elektřiny' : 'plynu'}} domácností a firem vůči cenám majoritního dodavatele v daném kraji.</p>
+                    <p class="mb-6">{{landingPage | bestPricesInTheWorldSection:activeCommodityTypeCarouselCompare:"countingDescription"}}</p>
                     <lnd-button
-                        label="Chci vidět nabídky"
+                        [label]="landingPage.bestPricesInTheWorldSection?.buttonText"
                         type="gradient-primary"
                         customClass="btn-public btn--icon-right"
                         icon="icon--arrow-right"
@@ -275,10 +265,10 @@
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
                 <div class="col-12 col-md-8 offset-md-2 col-xl-4 offset-xl-1">
-                    <h2 class="h2--public text-white">Nechcete nic vyplňovat? Nemusíte!</h2>
+                    <h2 class="h2--public text-white">{{askForOffer?.title}}</h2>
                     <ol class="numerical-list-stepper">
-                        <li [class.active]="lastContentFileUploader?.fileUploader?.queue?.length === 0">Vložte vaši poslední fakturu za elektřinu nebo plyn.</li>
-                        <li [class.active]="lastContentFileUploader?.fileUploader?.queue?.length > 0">Zadejte váš email a my vám pošleme nabídky na míru.
+                        <li [class.active]="lastContentFileUploader?.fileUploader?.queue?.length === 0">{{askForOffer?.firstStep}}</li>
+                        <li [class.active]="lastContentFileUploader?.fileUploader?.queue?.length > 0">{{askForOffer?.secondStep}}</li>
                     </ol>
                 </div>
                 <div class="col-12 col-md-8 offset-md-2 col-xl-5 offset-xl-1">

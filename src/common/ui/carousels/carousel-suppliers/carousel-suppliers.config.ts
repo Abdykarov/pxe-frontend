@@ -1,4 +1,4 @@
-import { ISupplierLogo } from 'src/common/containers/carousels-container/models/models';
+import { ISupplierLogo } from 'src/common/ui/carousels/models/models';
 import { TypeOfResolution } from 'src/common/models/type-of-resolution';
 
 export const supplierLogos: ISupplierLogo[] = [

@@ -31,7 +31,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import {
     CommodityTypesLowerCase,
     CONSTS,
-    SEO,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';

@@ -41,6 +41,7 @@ import { createRegistrationFormFields } from 'src/common/containers/form/forms/r
 import { FaqService } from 'src/app/services/faq.service';
 import { GTMService } from 'src/app/services/gtm.service';
 import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
+import { IAskForOffer } from 'src/common/cms/models/ask-for-offer';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import {
     IFieldError,
@@ -96,6 +97,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     public formFields: IForm;
     public routes = ROUTES;
 
+    public readonly askForOffer: IAskForOffer = this.route.snapshot.data.askForOffer;
     public readonly landingPage: ILandingPage = this.route.snapshot.data.landingPage;
     public readonly signUp: ISignUp = this.route.snapshot.data.signUp;
 

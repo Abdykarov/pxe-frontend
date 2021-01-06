@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { AccountNumberPipe } from './account-number/account-number.pipe';
 import { AccordionBenefitsPipe } from 'src/common/pipes/accordion-benefits.pipe/according-benefits.pipe';
 import { AllowProgressStepPipe } from 'src/common/pipes/allow-progress-step/allow-progress-step.pipe';
+import { BestPricesInTheWorldPipe } from 'src/common/pipes/best-prices-in-the-world/best-prices-in-the-world.pipe';
 import { CeilPipe } from 'src/common/pipes/ceil-number/simple-number.pipe';
 import { ConsumptionPipe } from './consumption/consumption.pipe';
 import { ConsumptionIndicatorPipe } from './consumption-indicator/consumption-indicator.pipe';
@@ -34,6 +35,7 @@ import { ValuesPipe } from './values/values.pipe';
         AccountNumberPipe,
         AccordionBenefitsPipe,
         AllowProgressStepPipe,
+        BestPricesInTheWorldPipe,
         CeilPipe,
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
@@ -62,6 +64,7 @@ import { ValuesPipe } from './values/values.pipe';
         AccountNumberPipe,
         AccordionBenefitsPipe,
         AllowProgressStepPipe,
+        BestPricesInTheWorldPipe,
         CeilPipe,
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
@@ -89,6 +92,7 @@ import { ValuesPipe } from './values/values.pipe';
     providers: [
         AccountNumberPipe,
         AccordionBenefitsPipe,
+        BestPricesInTheWorldPipe,
         CeilPipe,
         ConsumptionPipe,
         ConsumptionIndicatorPipe,

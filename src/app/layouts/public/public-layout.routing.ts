@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { AskForOfferResolver } from 'src/app/resolvers/ask-for-offer.resolver';
 import { CONSTS } from 'src/app/app.constants';
 import { CookiePolicyResolver } from 'src/app/resolvers/cookie-policy.resolver';
 import { FaqResolver } from 'src/app/resolvers/faq.resolver';
@@ -25,6 +26,7 @@ const routes = [
                 path: CONSTS.PATHS.EMPTY,
                 loadChildren: () => import('../../pages/landing/landing.module').then(m => m.LandingModule),
                 resolve: {
+                    askForOffer: AskForOfferResolver,
                     landingPage: LandingPageResolver,
                     signUp: SignUpResolver,
                 },
