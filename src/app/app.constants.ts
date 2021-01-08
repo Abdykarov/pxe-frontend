@@ -295,6 +295,7 @@ export const SEO = {
         SIGN_UP: 'Registrace do parc4u, kde kliknutím měníte dodavatele energií,' +
             ' nemusíte na pobočky a dostáváte konečné ceny bez skrytých poplatků.',
     },
+    META_GOOGLE_SITE_VERIFICATION: 'S2HgqkW4rJgsZuVJbrgrAmdwYnguu7zKvCejgAsvyNs',
 };
 
 export enum INavigationItemType {

@@ -89,15 +89,17 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                     this.gtmService.pushEvent({
                         event: GTM_CONSTS.EVENTS.CHECKOUT,
                         ecommerce: {
-                            actionField: {
-                                step: 3,
+                            checkout: {
+                                actionField: {
+                                    step: 3,
+                                },
+                                products: [{
+                                    name: removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
+                                    id: this.supplyPoint?.supplier?.id,
+                                    brand: GTM_CONSTS.BRAND,
+                                    quantity: 1,
+                                }],
                             },
-                            products: [{
-                                name: removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
-                                id: this.supplyPoint?.supplier?.id,
-                                brand: GTM_CONSTS.BRAND,
-                                quantity: 1,
-                            }],
                         },
                     });
 

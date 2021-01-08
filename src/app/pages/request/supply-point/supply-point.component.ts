@@ -94,15 +94,17 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         this.gtmService.pushEvent({
             event: GTM_CONSTS.EVENTS.CHECKOUT,
             ecommerce: {
-                actionField: {
-                    step: 1,
+                checkout: {
+                    actionField: {
+                        step: 1,
+                    },
+                    products: [{
+                        name: 'odber energie',
+                        id: null,
+                        brand: GTM_CONSTS.BRAND,
+                        quantity: 1,
+                    }],
                 },
-                products: [{
-                    name: 'odber energie',
-                    id: null,
-                    brand: GTM_CONSTS.BRAND,
-                    quantity: 1,
-                }],
             },
         });
     }

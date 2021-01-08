@@ -95,15 +95,17 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
         this.gtmService.pushEvent({
             event: GTM_CONSTS.EVENTS.CHECKOUT,
             ecommerce: {
-                actionField: {
-                    step: 2,
+                checkout: {
+                    actionField: {
+                        step: 2,
+                    },
+                    products: [{
+                        name: 'odber energie',
+                        id: null,
+                        brand: GTM_CONSTS.BRAND,
+                        quantity: 1,
+                    }],
                 },
-                products: [{
-                    name: 'odber energie',
-                    id: null,
-                    brand: GTM_CONSTS.BRAND,
-                    quantity: 1,
-                }],
             },
         });
     }
@@ -188,7 +190,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
                     this.gtmService.pushEvent({
                         'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
                         'category': GTM_CONSTS.CATEGORIES.FORM,
-                        'dodavatel': removeAccent(supplyPointOffer?.name).toLowerCase(),
+                        'dodavatel': removeAccent(supplyPointOffer?.supplier?.name).toLowerCase(),
                         'action': GTM_CONSTS.ACTIONS.SELECT_OFFER,
                         'label': GTM_CONSTS.LABELS.STEP_TWO,
                         'userID': this.authService.hashedUserId,
@@ -224,7 +226,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
             this.gtmService.pushEvent({
                 'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
                 'category': GTM_CONSTS.CATEGORIES.FORM,
-                'dodavatel': removeAccent(supplyPointOffer?.name).toLowerCase(),
+                'dodavatel': removeAccent(supplyPointOffer?.supplier?.name).toLowerCase(),
                 'action': GTM_CONSTS.ACTIONS.SHOW_DETAIL,
                 'label': GTM_CONSTS.LABELS.STEP_TWO,
                 'userID': this.authService.hashedUserId,
