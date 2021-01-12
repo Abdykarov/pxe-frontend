@@ -41,7 +41,6 @@
                         (click)="isVideoPlaying && pause($event)"
                         class="w-100"
                         poster="/assets/images/landing-page/picture-fallback.jpg"
-                        loop
                         [muted]="false"
                         (pause)="cd.detectChanges()"
                         (play)="cd.detectChanges()"
