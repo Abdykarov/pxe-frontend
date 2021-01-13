@@ -3,6 +3,7 @@ import { Validators } from '@angular/forms';
 import * as R from 'ramda';
 
 import { CONSTS } from 'src/app/app.constants';
+import { CustomValidators } from 'src/common/utils';
 import { errorFieldMessages } from 'src/common/constants/errors.constant';
 import {
     IForm,
@@ -17,7 +18,7 @@ export function createRegistrationFormFields(signUpType: SignUpType): IForm {
                 [
                     Validators.required,
                     Validators.maxLength(CONSTS.VALIDATORS.MAX_LENGTH.EMAIL_LOGIN),
-                    Validators.pattern('^(([^<>()[\\]\\\\.,;:\\s@\\"]+(\\.[^<>()[\\]\\\\.,;:\\s@\\"]+)*)|(\\".+\\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$'),
+                    CustomValidators.email,
                 ],
             ],
             consent: [
