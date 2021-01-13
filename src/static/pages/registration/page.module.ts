@@ -7,14 +7,14 @@ import {
 
 // own classes
 import { ButtonModule } from 'src/common/ui/button/button.module';
+import { FileUploaderModule } from 'src/common/ui/file-uploader/file-uploader.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
-import { RegistrationPageComponent } from './page';
-import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
-
 import {
     LoginType,
     SignType,
 } from 'src/app/layouts/models/router-data.model';
+import { RegistrationPageComponent } from './page';
+import { SupplierModule } from 'src/common/ui/supplier/supplier.module';
 
 @NgModule({
     declarations: [
@@ -26,6 +26,7 @@ import {
     imports: [
         ButtonModule,
         CommonModule,
+        FileUploaderModule,
         FormModule,
         RouterModule,
         SupplierModule,

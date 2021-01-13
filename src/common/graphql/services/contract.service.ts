@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 
-import {
-    AllowedOperations,
-    ISupplyPoint,
-    ProgressStatus,
-} from 'src/common/graphql/models/supply.model';
+import { AllowedOperations } from 'src/common/graphql/models/supply.model';
 import {
     concludeContractMutation,
     confirmFirstContractViewMutation,
@@ -28,8 +23,6 @@ import {
     getContractTermsQuery,
     getPaymentInfoQuery,
 } from 'src/common/graphql/queries/contract';
-import { IOffer } from 'src/common/graphql/models/offer.model';
-import { findSupplyPointOffersQuery } from 'src/common/graphql/queries/offer';
 import { getSupplyPointQuery } from 'src/common/graphql/queries/supply';
 
 @Injectable({

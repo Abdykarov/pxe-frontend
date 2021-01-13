@@ -75,8 +75,8 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     @ViewChild('howItWorksFileContainer', { static: true })
     public howItWorksFileContainer: AskForOfferContainerComponent;
 
-    // @ViewChild('lastContentFileUploader', { static: true })
-    // public lastContentFileUploader: AskForOfferContainerComponent;
+    @ViewChild('lastContentFileUploader', { static: true })
+    public lastContentFileUploader: AskForOfferContainerComponent;
 
     @ViewChild('help', { static: true })
     public help: ElementRef;

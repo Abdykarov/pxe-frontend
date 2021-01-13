@@ -8,9 +8,9 @@ import {
 import { AlertModule } from 'src/common/ui/alert/alert.module';
 import { AskForOfferContainerComponent } from './ask-for-offer-container.component';
 import { ButtonModule } from 'src/common/ui/button/button.module';
+import { DirectivesModule } from 'src/common/directives/directives.module';
 import { FileUploaderModule } from 'src/common/ui/file-uploader/file-uploader.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
-import {DirectivesModule} from 'src/common/directives/directives.module';
 
 @NgModule({
     declarations: [
@@ -30,4 +30,4 @@ import {DirectivesModule} from 'src/common/directives/directives.module';
         ReactiveFormsModule,
     ],
 })
-export class AskForOfferConteinerModule {}
+export class AskForOfferContainerModule {}
