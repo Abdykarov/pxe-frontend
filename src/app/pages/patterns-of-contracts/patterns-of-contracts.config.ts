@@ -2,10 +2,7 @@ import {
     CommodityTypesLowerCase,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
-import {
-    IPdfFile,
-    IPdfSetting,
-} from 'src/app/pages/patterns-of-contracts/models/patterns-of-contracts.model';
+import { IPdfSetting } from 'src/app/pages/patterns-of-contracts/models/patterns-of-contracts.model';
 
 export const pdfSetting: IPdfSetting[] = [
     {

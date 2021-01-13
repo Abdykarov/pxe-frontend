@@ -19,7 +19,9 @@ import { CONSTS } from 'src/app/app.constants';
 import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
 import { configSupplier } from 'src/static/config/suppliers.config';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
+import { FileUploader } from 'src/third-sides/file-upload';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { ICardData } from 'src/common/ui/card/models/data.model';
 import {
     IFieldError,
     SignUpType,
@@ -66,6 +68,67 @@ export class LandingComponent extends AbstractComponent {
         },
     ];
 
+    public cardConfig: ICardData[] = [
+        {
+            imgSrc: 'assets/images/landing-page/our-help-move.png',
+            imgAlt: 'stehuji-se',
+            imgTitle: 'Stěhujeti se',
+            title: 'Stěhujeti se',
+            content: 'S novým bydlením přichází spousta radostí i starostí. Vy se věnujte zařizování nového bydlení. Převod elektřiny a plynu nechte na nás.',
+        },
+        {
+            imgSrc: 'assets/images/landing-page/our-help-managa-build.png',
+            imgAlt: 'spravuji-nemovitosti',
+            imgTitle: 'Spravuji nemovitost',
+            title: 'Spravuji nemovitost',
+            content: 'Neztrácejte čas opakovaným hledáním dodavatelů energií. Pro každou nemovitost vám připravíme nabídky od prověřených dodavatelů. Všechny informace budete mít k dispozici přehledně na jednom místě v aplikaci parc4u.',
+        },
+        {
+            imgSrc: 'assets/images/landing-page/our-help-i-want-save-money.png',
+            imgAlt: 'chci-usetrit',
+            imgTitle: 'Chci ušetřit',
+            title: 'Chci ušetřit',
+            content: 'Do aplikace parc4u si uložíte všechny své smlouvy od aktuálních dodavatelů energií. My vám dáme vědět, když objevíme lepší cenu. A vy se podle toho rozhodnete, zda chcete zařídit změnu dodavatele.',
+        },
+        {
+            imgSrc: 'assets/images/landing-page/our-help-we-are-not-comparer.png',
+            imgAlt: 'nejsme-srovnavac',
+            imgTitle: 'Nejsme srovnávač',
+            title: 'Nejsme srovnávač',
+            content: 'Ceny budeme hlídat za vás a když narazíme na nějaké lepší, pošleme vám nabídky. Pokud budete chtít udělat změnu, zařídíme i převod nebo smlouvu s novým dodavatelem.',
+        },
+        {
+            imgSrc: 'assets/images/landing-page/our-help-business.png',
+            imgAlt: 'zivnostnik',
+            imgTitle: 'Živnostník',
+            title: 'Živnostník',
+            content: 'Snižte své účty za elektřinu a plyn. My za vás budeme hlídat finančně zajímavé nabídky dodavatelů energií a vy si z nich jen vyberete.',
+        },
+        {
+            imgSrc: 'assets/images/landing-page/our-help-company.png',
+            imgAlt: 'firma',
+            imgTitle: 'Firma',
+            title: 'Firma',
+            content: 'V aplikaci parc4u si vyberete dodavatele energií, který vám nejvíc sedne. Smlouvu a vše ostatní už za vás zařídíme my.',
+        },
+        {
+            imgSrc: 'assets/images/landing-page/our-help-compare-company.png',
+            imgAlt: 'sprava-firmy',
+            imgTitle: 'Správa firmy',
+            title: 'Správa firmy',
+            content: 'Nahrajte do aplikace poslední fakturu za energie a vyberte si nejlepšího dodavatele. O vše ostatní se postaráme my.',
+            customClass: 'card-tile__item--last-item',
+        },
+        {
+            imgSrc: 'assets/images/landing-page/our-help-svj.png',
+            imgAlt: 'svj',
+            imgTitle: 'SVJ',
+            title: 'SVJ',
+            content: 'Členové SVJ budou nadšeni z nižších účtů za elektřinu a plyn. A vy budete mít v aplikaci parc4u nad vším perfektní přehled.',
+            customClass: 'card-tile__item--last-item',
+        },
+    ];
+
     public tileCard = {
         imgSrc: 'assets/images/landing-page/our-help-cottage.png',
         imgAlt: 'Card image',
@@ -73,6 +136,10 @@ export class LandingComponent extends AbstractComponent {
         title: 'Tile card',
         content: 'Card text. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     };
+
+    public fileUploader = new FileUploader({
+        url: 'none',
+    });
 
     public resizeEvent$ = fromEvent(window, 'resize')
         .pipe(

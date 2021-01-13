@@ -250,7 +250,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             });
 
         this.setFormByCommodity(this.formValues && this.formValues.commodityType);
-        this.setAnnualConsumptionNTState();
         this.setContractEndFields();
         this.loadCodeLists();
 
@@ -523,7 +522,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             .subscribe(data => {
                 this.codeLists = transformCodeList(data);
                 this.codeLists$.next(this.codeLists);
-                this.setAnnualConsumptionNTState(this.getFieldValue('distributionRateId'), this.codeLists);
                 this.cd.markForCheck();
             });
     }
