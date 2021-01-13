@@ -209,8 +209,6 @@
                                     lndSFormDirective
                                     lndSBiometricsDirective
                                     label="jednotka"
-                                    [appendButtonIcon]="helpDocuments && helpDocuments['annualConsumption'] ? 'icon--info' : null"
-                                    (appendButtonAction)="showHelp('annualConsumption', 'Roční spotřeba')"
                                     [id]="'annualConsumptionUnit'"
                                     (focus)="fieldWrapperFocus('annualConsumptionUnit')"
                                     (blur)="fieldWrapperBlur()"
@@ -296,11 +294,10 @@
                          [class.mb-2]="supplyPoint.contract.deliveryTo"
                          class="col-12">
                         <p class="mb-1 text-uppercase">Dodávka do</p>
-
                         <span class="perex mb-1">{{supplyPoint.contract.deliveryTo | date:'d.&nbsp;M.&nbsp;y'}}</span>
                         <p class="small mb-3">{{
                             contractEndTypeTranslateMap[
-                                !supplyPoint?.contract?.isNextContractConcluded ?
+                                supplyPoint?.contract?.prolong ?
                                     supplyPointContractEndTypes.CONTRACT_END_TERM_WITH_PROLONGATION :
                                     supplyPointContractEndTypes.CONTRACT_END_TERM
                             ]}}
