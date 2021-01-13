@@ -45,6 +45,7 @@ export class SignboardComponent extends AbstractComponent {
     public showWelcome = false;
 
     public isMoreThanMdResolution = false;
+    public isMouseDownOnVideo = false;
 
     public resizeEvent$ = fromEvent(window, 'resize')
         .pipe(
