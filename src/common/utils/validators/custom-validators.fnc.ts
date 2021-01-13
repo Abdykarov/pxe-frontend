@@ -296,6 +296,23 @@ export class CustomValidators {
 
     }
 
+    static email = (email) => {
+        if (email.pristine) {
+            return null;
+        }
+        email.markAsTouched();
+        const EMAIL_REGEXP = new RegExp('^[a-zA-Z0-9!#$%&amp;&apos;\*+/=?^_`{|}~-]+(\.[a-zA-Z0-9!#$%&amp;' +
+            '&apos;\*+/=?^_`{|}~-]+)*@(([a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9]+)?){1,63}\.)+([a-zA-Z0-9](' +
+            '[-a-zA-Z0-9]*[a-zA-Z0-9]+)?){2,63}$');
+        if (EMAIL_REGEXP.test(email.value)) {
+            return null;
+        }
+
+        return {
+            pattern: true,
+        };
+    }
+
     static ico = (ico): {} => {
         if (ico.pristine || R_.isNilOrEmpty(ico.value)) {
             return null;
