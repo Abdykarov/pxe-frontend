@@ -79,7 +79,7 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
         protected route: ActivatedRoute,
         protected router: Router,
         protected sAnalyticsService: SAnalyticsService,
-        protected scrollToService: ScrollToService,
+        public scrollToService: ScrollToService,
         private titleService: Title,
         @Inject(PLATFORM_ID) public platformId: string,
     ) {
