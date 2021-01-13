@@ -1,24 +1,10 @@
 <div class="landing-page">
     <div class="section">
         <div class="container-fluid container-fluid--max-width">
-            <div class="row align-items-xl-center">
-                <div class="col-12 col-md-6 col-xl-7 order-md-2">
-                    <div class="section-video-holder text-center d-none d-md-block">
-                        <video
-                            #video
-                            disablePictureInPicture
-                            [class.cursor-pointer]="isVideoPlaying"
-                            (click)="isVideoPlaying && pause($event)"
-                            (pause)="cd.detectChanges()"
-                            (play)="cd.detectChanges()"
-                            class="w-100"
-                            poster="/assets/images/landing-page/picture-fallback.jpg"
-                            loop
-                            muted
-                            preload="none">
-                            <source src="/assets/images/landing-page/lp-video.mp4" type="video/mp4">
-                            Váš prohlížeč nepodporuje zobrazení videa
-                        </video>
+            <div class="row align-items-md-center">
+                <div class="col-12 col-md-5 col-xl-6 order-md-2 mb-3 mb-md-0">
+                    <div class="section-video-holder text-center">
+                        <img class="img-fluid" src="/assets/images/landing-page/lp-picture-home.png" />
                     </div>
                     <div class="section-video-text order-md-1">
                         <div class="row w-100 ml-0 text-center">
@@ -37,14 +23,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-5 offset-md-1 offset-xl-0">
-                    <h1 class="h1--public mb-4">
-                        Neplýtvejte energií<br>
-                        <span class="text-secondary">na převody energií!</span>
-                    </h1>
+                <div class="col-12 col-md-6 offset-md-1 offset-xl-0">
+                    <h1 class="h1--public mb-4">Neplýtvejte energií na převody energií!</h1>
                     <p>
-                        Vyřešíme to za vás. Nabídneme vám jen solidní dodavatele, výhodnou cenu a postaráme se o smlouvu i převod. A příští rok zase.<br>
-                        <span class="text-secondary">parc4u = elektřina a plyn bez starostí.</span>
+                        Vyřešíme to za vás. Nabídneme vám jen solidní dodavatele, výhodnou cenu a postaráme se o smlouvu i převod. A příští rok zase. <br><span class="text-secondary">parc4u = elektřina a plyn bez starostí.</span>
                     </p>
                     <div class="text-center text-md-left">
                         <lnd-button
@@ -52,7 +34,8 @@
                             type="gradient-primary"
                             customClass="btn-public btn--icon-right"
                             icon="icon--arrow-right"
-                            iconPosition="right">
+                            iconPosition="right"
+                        >
                         </lnd-button>
                     </div>
                 </div>
@@ -98,7 +81,7 @@
             </div>
             <div class="row d-none d-xl-flex">
                 <div class="col-12 text-center">
-                    <a class="link-next-section" href="#">
+                    <a class="link-next-section">
                         <span class="icon icon--arrow-right link-next-section__icon"></span>
                     </a>
                 </div>
@@ -113,29 +96,8 @@
                 </div>
                 <div class="card-tiles">
                     <div class="row no-gutters card-tiles__inner">
-                        <div class="col-md-4 card-tile__item">
-                            <lnd-card [data]="tileCard"></lnd-card>
-                        </div>
-                        <div class="col-md-4 card-tile__item">
-                            <lnd-card [data]="tileCard"></lnd-card>
-                        </div>
-                        <div class="col-md-4 card-tile__item">
-                            <lnd-card [data]="tileCard"></lnd-card>
-                        </div>
-                        <div class="col-md-4 card-tile__item">
-                            <lnd-card [data]="tileCard"></lnd-card>
-                        </div>
-                        <div class="col-md-4 card-tile__item">
-                            <lnd-card [data]="tileCard"></lnd-card>
-                        </div>
-                        <div class="col-md-4 card-tile__item">
-                            <lnd-card [data]="tileCard"></lnd-card>
-                        </div>
-                        <div class="col-md-4 card-tile__item card-tile__item--last-item">
-                            <lnd-card [data]="tileCard"></lnd-card>
-                        </div>
-                        <div class="col-md-4 card-tile__item card-tile__item--last-item">
-                            <lnd-card [data]="tileCard"></lnd-card>
+                        <div *ngFor="let item of cardConfig" class="col-md-4 card-tile__item" [ngClass]="item.customClass">
+                            <lnd-card [data]="item"></lnd-card>
                         </div>
                     </div>
                 </div>
@@ -197,7 +159,19 @@
                                 </ol>
                             </div>
                             <div class="col-md-8 offset-md-2 col-xl-10">
-                                <p>File upload</p>
+                                <div class="row">
+                                    <div class="col-12 text-center mb-3">
+                                        <pxe-file-uploader
+                                            secondaryTextCustomClass="small text-color--gray-200"
+                                            [uploader]="fileUploader"
+                                            [multiple]="true"
+                                            wrapperCustomClass="drop-zone--zindex text-white"
+                                            mainText="Soubory přetáhněte sem nebo "
+                                            secondaryText="Formáty: PDF, JPG, PNG, TIFF do velikosti 10 MB."
+                                            [labelFromMainText]="true">
+                                        </pxe-file-uploader>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -212,12 +186,25 @@
                     <h2 class="h4--public text-secondary">Férové ceny energií</h2>
                     <h3 class="h2--public">Porovnejte nabídky vybraných dodavatelů elektřiny</h3>
                     <p>Níže najdete porovnání úspor vůči hlavní dodavatelům v kraji.</p>
+                    <ul class="link-list--lp">
+                        <li class="link-list__item">
+                            <a
+                               class="link-list__link link-list__link--active">
+                                Elektřina
+                            </a>
+                        </li>
+                        <li class="link-list__item">
+                            <a class="link-list__link">
+                                Plyn
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <div class="col-12">
                     <pxe-carousel-compare></pxe-carousel-compare>
                 </div>
                 <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-0">
-                    <p class="mb-6">Úspora s PXE je vypočítána vůči dominantnímu dodavateli PRE (ceník elektřina), při odběru 24&nbsp;MWh v tarifu D56d. Ceny jsou včetně DPH.</p>
+                    <p class="mb-6">Úspora je vypočítána na základě průměrné spotřeby elektřiny domácností a firem vůči cenám majoritního dodavatele v daném kraji.</p>
                     <lnd-button
                         label="Chci vidět nabídky"
                         type="gradient-primary"
@@ -243,7 +230,7 @@
                         </svg>
                     </span>
                 </div>
-                <div class="col-md-4 offset-md-1 col-xl-6 offset-xl-1">
+                <div class="mb-6 col-md-4 offset-md-1 mb-md-5 col-xl-6 mb-xl-6">
                     <div class="row">
                         <div class="col-12 mb-6">
                             <h2 class="h4--public text-white">O nás</h2>
@@ -256,13 +243,14 @@
                                 type="gradient-primary"
                                 customClass="btn-public btn--icon-right"
                                 icon="icon--arrow-right"
-                                iconPosition="right">
+                                iconPosition="right"
+                            >
                             </lnd-button>
                         </div>
-                        <div class="col-12 col-md-10 offset-md-1 col-xl-6 offset-xl-6">
-                            <pxe-carousel-suppliers></pxe-carousel-suppliers>
-                        </div>
                     </div>
+                </div>
+                <div class="col-12 col-md-10 offset-md-1 col-xl-6 offset-xl-6">
+                    <pxe-carousel-suppliers></pxe-carousel-suppliers>
                 </div>
             </div>
         </div>
@@ -320,7 +308,19 @@
                     </ol>
                 </div>
                 <div class="col-12 col-md-8 offset-md-2 col-xl-5 offset-xl-1">
-                    <h2>File upload</h2>
+                    <div class="row">
+                        <div class="col-12 text-center mb-3">
+                            <pxe-file-uploader
+                                secondaryTextCustomClass="small text-color--gray-200"
+                                [uploader]="fileUploader"
+                                [multiple]="true"
+                                wrapperCustomClass="drop-zone--zindex text-white"
+                                mainText="Soubory přetáhněte sem nebo "
+                                secondaryText="Formáty: PDF, JPG, PNG, TIFF do velikosti 10 MB."
+                                [labelFromMainText]="true">
+                            </pxe-file-uploader>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
