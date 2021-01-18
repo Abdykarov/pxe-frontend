@@ -137,12 +137,9 @@
 		}
 
 		&--small-offset {
-			padding-bottom: $spacer;
-
 			// Media queries
 			@include media-breakpoint-up(md) {
-				padding-left: $spacer;
-				padding-right: $spacer;
+				padding: $spacer;
 			}
 		}
 	}
