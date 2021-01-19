@@ -92,7 +92,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         private supplyService: SupplyService,
     ) {
         super();
-        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_TWO, this.authService.hashedUserId);
+        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_FOUR, this.authService.hashedUserId);
     }
 
     ngOnInit () {
@@ -112,11 +112,11 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                             ecommerce: {
                                 checkout: {
                                     actionField: {
-                                        step: 2,
+                                        step: 4,
                                     },
                                     products: [{
                                         name: removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
-                                        id: this.supplyPoint?.supplier?.id,
+                                        id: this.supplyPoint?.contract?.offer?.name,
                                         brand: GTM_CONSTS.BRAND,
                                         quantity: 1,
                                     }],
@@ -168,7 +168,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                         'category': GTM_CONSTS.CATEGORIES.FORM,
                         'dodavatel': removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
                         'action': GTM_CONSTS.ACTIONS.CONTINUE,
-                        'label': GTM_CONSTS.LABELS.STEP_TWO,
+                        'label': GTM_CONSTS.LABELS.STEP_FOUR,
                         'userID': this.authService.hashedUserId,
                     });
                     this.router.navigate(

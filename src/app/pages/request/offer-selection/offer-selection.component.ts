@@ -91,23 +91,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
         private validityService: ValidityService,
     ) {
         super(faqService, route);
-        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_TWO, this.authService.hashedUserId);
-        this.gtmService.pushEvent({
-            event: GTM_CONSTS.EVENTS.CHECKOUT,
-            ecommerce: {
-                checkout: {
-                    actionField: {
-                        step: 2,
-                    },
-                    products: [{
-                        name: 'odber energie',
-                        id: null,
-                        brand: GTM_CONSTS.BRAND,
-                        quantity: 1,
-                    }],
-                },
-            },
-        });
+        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_THREE, this.authService.hashedUserId);
     }
 
     ngOnInit() {
@@ -192,7 +176,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
                         'category': GTM_CONSTS.CATEGORIES.FORM,
                         'dodavatel': removeAccent(supplyPointOffer?.supplier?.name).toLowerCase(),
                         'action': GTM_CONSTS.ACTIONS.SELECT_OFFER,
-                        'label': GTM_CONSTS.LABELS.STEP_TWO,
+                        'label': GTM_CONSTS.LABELS.STEP_THREE,
                         'userID': this.authService.hashedUserId,
                     });
                     this.router.navigate(
@@ -228,7 +212,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
                 'category': GTM_CONSTS.CATEGORIES.FORM,
                 'dodavatel': removeAccent(supplyPointOffer?.supplier?.name).toLowerCase(),
                 'action': GTM_CONSTS.ACTIONS.SHOW_DETAIL,
-                'label': GTM_CONSTS.LABELS.STEP_TWO,
+                'label': GTM_CONSTS.LABELS.STEP_THREE,
                 'userID': this.authService.hashedUserId,
             });
         }

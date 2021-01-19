@@ -632,5 +632,8 @@ export const GTM_CONSTS = {
         STEP_ONE: 'step 1',
         STEP_TWO: 'step 2',
         STEP_THREE: 'step 3',
+        STEP_FOUR: 'step 4',
+        STEP_FIVE: 'step 5',
+        STEP_SIX: 'step 6',
     },
 };

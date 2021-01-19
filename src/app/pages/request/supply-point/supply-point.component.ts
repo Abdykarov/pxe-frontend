@@ -90,23 +90,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
-        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_ONE, this.authService.hashedUserId);
-        this.gtmService.pushEvent({
-            event: GTM_CONSTS.EVENTS.CHECKOUT,
-            ecommerce: {
-                checkout: {
-                    actionField: {
-                        step: 1,
-                    },
-                    products: [{
-                        name: 'odber energie',
-                        id: null,
-                        brand: GTM_CONSTS.BRAND,
-                        quantity: 1,
-                    }],
-                },
-            },
-        });
+        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_TWO, this.authService.hashedUserId);
     }
 
     ngOnInit() {
@@ -253,7 +237,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                         'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
                         'category': GTM_CONSTS.CATEGORIES.FORM,
                         'action': GTM_CONSTS.ACTIONS.SAVE,
-                        'label': GTM_CONSTS.LABELS.STEP_ONE,
+                        'label': GTM_CONSTS.LABELS.STEP_TWO,
                         'odberatel': (<any>supplyPoint).subjectTypeId === SubjectType.SUBJECT_TYPE_INDIVIDUAL ? 'domacnost' : 'firma',
                         'energie': supplyPointFormData.commodityType.toLowerCase(),
                         'userID': this.authService.hashedUserId,

@@ -71,7 +71,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
         private supplyService: SupplyService,
     ) {
         super();
-        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_THREE, this.authService.hashedUserId);
+        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_SIX, this.authService.hashedUserId);
     }
 
     ngOnInit () {
@@ -91,11 +91,11 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                         ecommerce: {
                             checkout: {
                                 actionField: {
-                                    step: 3,
+                                    step: 6,
                                 },
                                 products: [{
                                     name: removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
-                                    id: this.supplyPoint?.supplier?.id,
+                                    id: this.supplyPoint?.contract?.offer?.name,
                                     brand: GTM_CONSTS.BRAND,
                                     quantity: 1,
                                 }],
@@ -171,7 +171,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                         'category': GTM_CONSTS.CATEGORIES.FORM,
                         'dodavatel': removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
                         'action': GTM_CONSTS.ACTIONS.SIGNED,
-                        'label': GTM_CONSTS.LABELS.STEP_THREE,
+                        'label': GTM_CONSTS.LABELS.STEP_SIX,
                         'userID': this.authService.hashedUserId,
                     });
                     this.supplyPointNewVersion = supplyPointNewVersion;
