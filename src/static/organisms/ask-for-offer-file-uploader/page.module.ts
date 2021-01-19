@@ -4,7 +4,7 @@ import { Routes } from '@angular/router';
 
 // own classes
 import { AlertModule } from 'src/common/ui/alert/alert.module';
-import { AskForOfferConteinerModule } from 'src/common/containers/form/forms/ask-for-offer/ask-for-offer-conteiner.module';
+import { AskForOfferContainerModule } from 'src/common/containers/form/forms/ask-for-offer/ask-for-offer-container.module';
 import { AskForOfferFileUploaderComponent } from './page';
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
@@ -21,7 +21,7 @@ import { TableModule } from 'src/common/ui/table/table.module';
     ],
     imports: [
         AlertModule,
-        AskForOfferConteinerModule,
+        AskForOfferContainerModule,
         BreadcrumbModule,
         ButtonModule,
         CommonModule,

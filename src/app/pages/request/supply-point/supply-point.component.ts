@@ -238,9 +238,9 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                         'category': GTM_CONSTS.CATEGORIES.FORM,
                         'action': GTM_CONSTS.ACTIONS.SAVE,
                         'label': GTM_CONSTS.LABELS.STEP_TWO,
-                        'odberatel': (<any>supplyPoint).subjectTypeId === SubjectType.SUBJECT_TYPE_INDIVIDUAL ? 'domacnost' : 'firma',
-                        'energie': supplyPointFormData.commodityType.toLowerCase(),
-                        'userID': this.authService.hashedUserId,
+                        'odberatel': (<any>supplyPoint)?.subjectTypeId === SubjectType.SUBJECT_TYPE_INDIVIDUAL ? 'domacnost' : 'firma',
+                        'energie': supplyPointFormData?.commodityType?.toLowerCase(),
+                        'userID': this.authService?.hashedUserId,
                     });
                     this.cd.markForCheck();
                     this.router.navigate(

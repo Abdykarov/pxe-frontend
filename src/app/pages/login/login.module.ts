@@ -13,7 +13,7 @@ import { LoginRoutingModule } from './login.routing';
 import { LoginSupplyAuthFormModule } from 'src/common/containers/form/forms/login-supply-auth/login-supply-auth-form.module';
 import { ModalModule } from 'src/common/ui/modal/modal.module';
 import { ResetPasswordFormModule } from 'src/common/containers/form/forms/reset-password/reset-password-form.module';
-import { SupplierContainerModule } from 'src/common/containers/supplier-conteiner/supplier-conteiner.module';
+import { SupplierContainerModule } from 'src/common/containers/supplier-container/supplier-conteiner.module';
 
 @NgModule({
     declarations: [
