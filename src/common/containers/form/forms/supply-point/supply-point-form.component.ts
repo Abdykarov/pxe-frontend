@@ -20,7 +20,8 @@ import {
 import {
     filter,
     map,
-    pairwise, startWith,
+    pairwise,
+    startWith,
     takeUntil,
 } from 'rxjs/operators';
 
