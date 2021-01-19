@@ -137,10 +137,10 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         this.form.get('annualConsumptionNTUnit')
             .valueChanges
             .pipe(
+                takeUntil(this.destroy$),
                 startWith(UNIT_OF_PRICES.KWH),
                 pairwise(),
                 filter(([prevAnnualConsumptionNTUnit, annualConsumptionNTUnit]) => prevAnnualConsumptionNTUnit !== annualConsumptionNTUnit),
-                takeUntil(this.destroy$),
             )
             .subscribe(([_, annualConsumptionNTUnit]) => {
                 this.detectChangesForAnnualConsumption(
