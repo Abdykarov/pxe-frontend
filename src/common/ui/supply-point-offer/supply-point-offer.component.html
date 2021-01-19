@@ -83,41 +83,31 @@
             </div>
             <div
                 *ngIf="!showPriceDecomposition && !isOwner"
-                class="row">
-                <div *ngIf="supplyPointOffer.benefits && supplyPointOffer.benefits.length"
-                     class="col-md-auto">
-                    <div class="supply-point-offer__benefits-description-wrapper">
-                        <div class="supply-point-offer__benefits-description">
-                            <span class="icon icon--star mr-2"></span>
-                            <span class="supply-point-offer__benefits-text">S touto nabídkou získáte zajímavé výhody.</span>
-                        </div>
-                    </div>
-                </div>
+                class="row justify-content-end">
                 <div class="col-md-auto d-none d-md-block">
-                    <div class="row">
-                        <div class="col-md-auto">
-                            <lnd-button
-                                *ngIf="!isOwner && !isFromContract"
-                                class="mr-md-3"
-                                class="w-100 mr-md-3"
-                                customClass="w-100"
-                                [label]="showPriceDecomposition ? 'Zavřít detail nabídky' : 'Zobrazit detail nabídky'"
-                                [type]="'secondary'"
-                                (action)="togglePriceDecomposition($event)">
-                            </lnd-button>
-                        </div>
-                        <div class="col-md-auto">
-                            <lnd-button
-                                *ngIf="!isOwner && !isFromContract"
-                                class="w-100"
-                                customClass="w-100"
-                                label="Vybrat nabídku"
-                                [type]="'primary'"
-                                (action)="action.emit(supplyPointOffer)">
-                            </lnd-button>
-                        </div>
+                    <lnd-button
+                        *ngIf="!isOwner && !isFromContract"
+                        class="mr-md-3"
+                        [label]="showPriceDecomposition ? 'Zavřít detail nabídky' : 'Zobrazit detail nabídky'"
+                        [type]="'secondary'"
+                        (action)="togglePriceDecomposition($event)">
+                    </lnd-button>
+                    <lnd-button
+                        *ngIf="!isOwner && !isFromContract"
+                        label="Vybrat nabídku"
+                        [type]="'primary'"
+                        (action)="action.emit(supplyPointOffer)">
+                    </lnd-button>
+                </div>
+                <div *ngIf="supplyPointOffer.benefits && supplyPointOffer.benefits.length"
+                class="col-12 mt-md-4">
+                <div class="supply-point-offer__benefits-description-wrapper">
+                    <div class="supply-point-offer__benefits-description">
+                        <span class="icon icon--star mr-2"></span>
+                        <span class="supply-point-offer__benefits-text">S touto nabídkou získáte zajímavé výhody.</span>
                     </div>
                 </div>
+            </div>
             </div>
             <div
                 *ngIf="showPriceDecomposition && !isOwner && supplyPointOffer.benefits && supplyPointOffer.benefits.length"
