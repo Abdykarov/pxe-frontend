@@ -20,7 +20,7 @@ import {
 import {
     filter,
     map,
-    pairwise,
+    pairwise, startWith,
     takeUntil,
 } from 'rxjs/operators';
 
@@ -136,9 +136,12 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
         this.form.get('annualConsumptionNTUnit')
             .valueChanges
             .pipe(
+                startWith(UNIT_OF_PRICES.KWH),
+                pairwise(),
+                filter(([prevAnnualConsumptionNTUnit, annualConsumptionNTUnit]) => prevAnnualConsumptionNTUnit !== annualConsumptionNTUnit),
                 takeUntil(this.destroy$),
             )
-            .subscribe((annualConsumptionNTUnit: UNIT_OF_PRICES) => {
+            .subscribe(([_, annualConsumptionNTUnit]) => {
                 this.detectChangesForAnnualConsumption(
                     ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_NT,
                     ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_NT_UNIT,
