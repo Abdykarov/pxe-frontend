@@ -232,8 +232,6 @@ export const errorFieldMessages =  {
     email: {
         required: 'Vyplňte svůj e-mail.',
         email: 'Použijte pouze písmena bez diakritiky, číslice, tečku (.) a zavináč (@).',
-        emailNotRegistered: 'Tento e-mail v aplikaci neexistuje.',
-        usernameNotRegistered: 'Toto přihlašovací jméno v aplikaci neexistuje.',
         alreadyRegisteredEmail: 'Tento e-mail je již v aplikaci zaregistrovaný.',
     },
     expirationDate: {
