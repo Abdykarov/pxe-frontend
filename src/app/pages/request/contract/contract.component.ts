@@ -138,14 +138,8 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                         ecommerce: {
                             checkout: {
                                 actionField: {
-                                    step: 5,
+                                    step: 2,
                                 },
-                                products: [{
-                                    name: removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
-                                    id: this.supplyPoint?.contract?.offer?.name,
-                                    brand: GTM_CONSTS.BRAND,
-                                    quantity: 1,
-                                }],
                             },
                         },
                     });
@@ -297,7 +291,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                         this.gtmService.pushEvent({
                             'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
                             'category': GTM_CONSTS.CATEGORIES.FORM,
-                            'dodavatel': removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
+                            'dodavatel': removeAccent(this.supplyPoint?.contract?.offer?.supplier?.name).toLowerCase(),
                             'action': GTM_CONSTS.ACTIONS.SIGN,
                             'label': GTM_CONSTS.LABELS.STEP_FIVE,
                             'userID': this.authService.hashedUserId,
