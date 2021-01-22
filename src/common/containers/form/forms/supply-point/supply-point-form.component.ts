@@ -21,6 +21,7 @@ import {
     filter,
     map,
     pairwise,
+    startWith,
     takeUntil,
 } from 'rxjs/operators';
 
@@ -137,8 +138,11 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             .valueChanges
             .pipe(
                 takeUntil(this.destroy$),
+                startWith(UNIT_OF_PRICES.KWH),
+                pairwise(),
+                filter(([prevAnnualConsumptionNTUnit, annualConsumptionNTUnit]) => prevAnnualConsumptionNTUnit !== annualConsumptionNTUnit),
             )
-            .subscribe((annualConsumptionNTUnit: UNIT_OF_PRICES) => {
+            .subscribe(([_, annualConsumptionNTUnit]) => {
                 this.detectChangesForAnnualConsumption(
                     ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_NT,
                     ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_NT_UNIT,
@@ -250,7 +254,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             });
 
         this.setFormByCommodity(this.formValues && this.formValues.commodityType);
-        this.setAnnualConsumptionNTState();
         this.setContractEndFields();
         this.loadCodeLists();
 
@@ -398,9 +401,18 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                 timeToContractEnd = CONSTS.TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS;
                 timeToContractEndPeriodId = TimeToContractEndPeriod.DAY;
             }
-            this.form.controls['annualConsumptionNTUnit'].setValue(annualConsumptionNTUnit);
-            this.form.controls['annualConsumptionVTUnit'].setValue(annualConsumptionVTUnit);
-            this.form.controls['annualConsumptionUnit'].setValue(annualConsumptionUnit);
+
+            if (annualConsumptionNTUnit) {
+                this.form.controls['annualConsumptionNTUnit'].setValue(annualConsumptionNTUnit);
+            }
+
+            if (annualConsumptionVTUnit) {
+                this.form.controls['annualConsumptionVTUnit'].setValue(annualConsumptionVTUnit);
+            }
+
+            if (annualConsumptionUnit) {
+                this.form.controls['annualConsumptionUnit'].setValue(annualConsumptionUnit);
+            }
         }
 
         const filteredContractEndTypeId = contractEndTypeId === CONTRACT_END_TYPE.CONTRACT_END_TERMINATE ? null : contractEndTypeId;
@@ -514,7 +526,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             .subscribe(data => {
                 this.codeLists = transformCodeList(data);
                 this.codeLists$.next(this.codeLists);
-                this.setAnnualConsumptionNTState(this.getFieldValue('distributionRateId'), this.codeLists);
                 this.cd.markForCheck();
             });
     }

@@ -25,5 +25,8 @@ export const progressBarPageRoutes: Routes = [
     {
         path: 'progress',
         component: ProgressBarComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];

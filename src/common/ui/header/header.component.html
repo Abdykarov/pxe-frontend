@@ -13,11 +13,9 @@
     class="header"
     [class.header--public]="settings.isPublic"
     [class.header--secured]="!settings.isPublic"
-    [class.header--sticked]="sticked"
     [class.header--lp]="settings.isLandingPage && !settings.isPublicEmptyPage">
     <div
-        class="container-fluid"
-        [class.container-fluid--max-width]="settings.isPublic">
+        class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div class="header-inner">
@@ -44,17 +42,24 @@
                         </lnd-button>
                         <lnd-button
                             *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
-                            label="O službě"
+                            label="S čím vám pomůžeme"
                             customClass="mr-4"
                             type="link-text"
-                            (click)="aboutServiceAction.emit()">
+                            (click)="helpAction.emit()">
                         </lnd-button>
                         <lnd-button
                             *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
-                            label="O nás"
+                            label="Jak to funguje"
                             customClass="mr-4"
                             type="link-text"
-                            (click)="aboutUsAction.emit()">
+                            (click)="howItWorksAction.emit()">
+                        </lnd-button>
+                        <lnd-button
+                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                            label="Více o cenách"
+                            customClass="mr-4"
+                            type="link-text"
+                            (click)="bestPricesInTheWorldAction.emit()">
                         </lnd-button>
                         <lnd-button
                             *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
@@ -110,20 +115,26 @@
                                 Domů
                             </a>
                             <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
-                                class="dropdown-item dropdown-item--without-icon"
-                               (click)="aboutServiceAction.emit()">
-                               O službě
+                               class="dropdown-item dropdown-item--without-icon"
+                               (click)="helpAction.emit()">
+                                S čím vám pomůžeme
                             </a>
                             <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
-                                class="dropdown-item dropdown-item--without-icon"
-                               (click)="aboutUsAction.emit()">
-                                O nás
+                               class="dropdown-item dropdown-item--without-icon"
+                               (click)="howItWorksAction.emit()">
+                                Jak to funguje
+                            </a>
+                            <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                               class="dropdown-item dropdown-item--without-icon"
+                               (click)="bestPricesInTheWorldAction.emit()">
+                                Více o cenách
                             </a>
                             <a *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
                                class="dropdown-item dropdown-item--without-icon"
                                (click)="faqAction.emit()">
                                 FAQ
                             </a>
+
                             <a *ngIf="!settings.isPublicEmptyPage && isLogged"
                                 class="dropdown-item dropdown-item--without-icon"
                                (click)="logoutAction.emit() ">

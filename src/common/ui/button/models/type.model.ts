@@ -10,4 +10,5 @@ export enum IButtonType {
     SUCCESS = 'success',
     WARNING = 'warning',
     WHITE = 'white',
+    GRADIENT_PRIMARY = 'gradient-primary',
 }

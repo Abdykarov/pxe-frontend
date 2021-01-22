@@ -8,7 +8,6 @@ import {
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { AuthService } from 'src/app/services/auth.service';
 import { CONSTS } from './app.constants';
-import { environment } from 'src/environments/environment';
 import { PaymentGuard } from 'src/app/guards/payment.guard';
 
 const routes: Routes = [

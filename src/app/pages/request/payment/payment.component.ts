@@ -27,13 +27,18 @@ import {
 import {
     getConfigStepper,
     parseGraphQLErrors,
+    removeAccent,
 } from 'src/common/utils';
+import {
+    GTM_CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
+import { GTMService } from 'src/app/services/gtm.service';
 import {
     ISupplyPoint,
     ProgressStatus,
 } from 'src/common/graphql/models/supply.model';
 import { NavigateRequestService } from 'src/app/services/navigate-request.service';
-import { ROUTES } from 'src/app/app.constants';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -59,12 +64,14 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
         private authService: AuthService,
         private cd: ChangeDetectorRef,
         private contractService: ContractService,
+        private gtmService: GTMService,
         public navigateRequestService: NavigateRequestService,
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
     ) {
         super();
+        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_SIX, this.authService.hashedUserId);
     }
 
     ngOnInit () {
@@ -78,6 +85,24 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                 map(({data}) => data.getSupplyPoint),
                 switchMap((supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
+
+                    this.gtmService.pushEvent({
+                        event: GTM_CONSTS.EVENTS.CHECKOUT,
+                        ecommerce: {
+                            checkout: {
+                                actionField: {
+                                    step: 6,
+                                },
+                                products: [{
+                                    name: removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
+                                    id: this.supplyPoint?.contract?.offer?.name,
+                                    brand: GTM_CONSTS.BRAND,
+                                    quantity: 1,
+                                }],
+                            },
+                        },
+                    });
+
                     this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.WAITING_FOR_PAYMENT);
                     this.isContractFinalized = this.supplyPoint.contract &&
                         R.indexOf(this.supplyPoint.contract.contractStatus, [
@@ -127,6 +152,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                                 ContractStatus.NOT_CONCLUDED,
                             ],
                             this.supplyPoint.identificationNumber,
+                            true,
                         );
                     }
                     return of({
@@ -140,6 +166,14 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 (supplyPointNewVersion: ISupplyPoint) => {
+                    this.gtmService.pushEvent({
+                        'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+                        'category': GTM_CONSTS.CATEGORIES.FORM,
+                        'dodavatel': removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
+                        'action': GTM_CONSTS.ACTIONS.SIGNED,
+                        'label': GTM_CONSTS.LABELS.STEP_SIX,
+                        'userID': this.authService.hashedUserId,
+                    });
                     this.supplyPointNewVersion = supplyPointNewVersion;
                     this.loading = false;
                     this.cd.markForCheck();

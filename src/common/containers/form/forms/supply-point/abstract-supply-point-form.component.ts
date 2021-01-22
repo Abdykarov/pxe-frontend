@@ -48,8 +48,10 @@ export class AbstractSupplyPointFormComponent extends AbstractFormComponent impl
     public setAnnualConsumptionNTState = (distributionRateId: string = null, codeLists: ICodelistOptions = null) => {
         if (includesBothTariffs(distributionRateId, codeLists)) {
             this.setEnableField('annualConsumptionNT');
+            this.setEnableField('annualConsumptionNTUnit');
         } else {
             this.setDisableField('annualConsumptionNT');
+            this.setDisableField('annualConsumptionNTUnit');
         }
     }
 

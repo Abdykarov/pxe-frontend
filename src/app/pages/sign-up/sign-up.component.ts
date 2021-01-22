@@ -1,6 +1,6 @@
 import {
     Component,
-    ChangeDetectorRef,
+    ChangeDetectorRef, ViewChild,
 } from '@angular/core';
 import {
     Meta,
@@ -13,10 +13,11 @@ import { CookieService } from 'ngx-cookie';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
+import { AskForOfferContainerComponent } from 'src/common/containers/form/forms/ask-for-offer/ask-for-offer-container.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
-    PUSH_EVENTS_GA,
+    GTM_CONSTS,
     ROUTES,
     SEO,
 } from 'src/app/app.constants';
@@ -43,6 +44,9 @@ export class SignUpComponent extends AbstractComponent {
     public fieldError: IFieldError = {};
     public formFields: IForm;
     public routes = ROUTES;
+
+    @ViewChild('fileContainer', { static: true })
+    public fileContainer: AskForOfferContainerComponent;
 
     constructor(
         private apollo: Apollo,
@@ -86,7 +90,13 @@ export class SignUpComponent extends AbstractComponent {
                 .pipe(takeUntil(this.destroy$))
                 .subscribe(
                     () => {
-                        this.gtmService.pushEvent(PUSH_EVENTS_GA.FORMS.SIGN_UP);
+                        this.gtmService.pushEvent({
+                            'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+                            'category': GTM_CONSTS.CATEGORIES.REGISTRATION,
+                            'action': GTM_CONSTS.ACTIONS.SENT,
+                            'label': GTM_CONSTS.LABELS.REGISTRATION,
+                            'email': this.authService.hashUserId(values.email),
+                        });
                         this.formLoading = false;
                         this.formSent = true;
                         this.cd.markForCheck();
@@ -109,5 +119,10 @@ export class SignUpComponent extends AbstractComponent {
                         this.cd.markForCheck();
                     });
         }
+    }
+
+    public routerToLogin = (event) => {
+        event.preventDefault();
+        this.router.navigate([ROUTES.ROUTER_LOGIN]);
     }
 }

@@ -29,6 +29,7 @@ import {
     ISupplyPointGasAttributes,
     ISupplyPointPowerAttributes,
     ProgressStatus,
+    SubjectType,
 } from 'src/common/graphql/models/supply.model';
 import { ContractService } from 'src/common/graphql/services/contract.service';
 import { formFields } from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
@@ -39,7 +40,7 @@ import { IFieldError } from 'src/common/containers/form/models/form-definition.m
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { parseGraphQLErrors } from 'src/common/utils';
 import {
-    PUSH_EVENTS_GA,
+    GTM_CONSTS,
     ROUTES,
     S_ANALYTICS,
     SUPPLY_POINT_EDIT_TYPE,
@@ -89,6 +90,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
+        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_TWO, this.authService.hashedUserId);
     }
 
     ngOnInit() {
@@ -217,7 +219,6 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 (supplyPointId) => {
-                    this.gtmService.pushEvent(PUSH_EVENTS_GA.FORMS.CREATE_SUPPLY_POINT);
                     this.supplyPointLocalStorageService.removeSupplyPoint();
                     this.formLoading = false;
                     this.formSent = true;
@@ -232,6 +233,15 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                             supplyPointFormData,
                         },
                     );
+                    this.gtmService.pushEvent({
+                        'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+                        'category': GTM_CONSTS.CATEGORIES.FORM,
+                        'action': GTM_CONSTS.ACTIONS.SAVE,
+                        'label': GTM_CONSTS.LABELS.STEP_TWO,
+                        'odberatel': (<any>supplyPoint)?.subjectTypeId === SubjectType.SUBJECT_TYPE_INDIVIDUAL ? 'domacnost' : 'firma',
+                        'energie': supplyPointFormData?.commodityType?.toLowerCase(),
+                        'userID': this.authService?.hashedUserId,
+                    });
                     this.cd.markForCheck();
                     this.router.navigate(
                         [ROUTES.ROUTER_REQUEST_OFFER_SELECTION],

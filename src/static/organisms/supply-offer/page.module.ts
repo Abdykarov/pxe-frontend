@@ -39,5 +39,8 @@ export const supplyOfferPageRoutes: Routes = [
     {
         path: 'supply-offer',
         component: SupplyOfferComponent,
+        data: {
+            isPublic: false,
+        },
     },
 ];

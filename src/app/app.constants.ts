@@ -11,6 +11,25 @@ import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 export const CONSTS = {
     APPEND_AFTER_CUT_TEXT: '...',
     ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],
+    ASK_FOR_OFFER: {
+        ALLOWED_MINE_TYPE: [
+            'image/bmp',
+            'application/bmp',
+            'image/jpg',
+            'image/jpeg',
+            'application/pdf',
+            'image/png',
+            'application/png',
+            'image/tiff',
+        ],
+        ERROR_CODES: {
+            FILE_TYPE: 'FILE_TYPE',
+            FILE_COUNT: 'FILE_COUNT',
+            FILE_SIZE: 'FILE_SIZE',
+        },
+        MAX_FILE_COUNT: 10,
+        MAX_FILE_SIZE: 10485760,
+    },
     CRYPTO: {
         get SALT() {
             return CryptoJS.lib.WordArray.random(128 / 8);
@@ -55,12 +74,13 @@ export const CONSTS = {
     MONTHS_TO_CONTRACT_END: 2,
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
     MODAL_TYPE: {
-        MORE_TABS: 'moreTabs',
-        LP_VIDEO: 'lpVideo',
+        CONFIRM_DELETE_REQUEST: 'confirmDeleteOffer',
         CONFIRM_DELETE_OFFER: 'confirmDeleteOffer',
         CONFIRM_CANCEL_OFFER: 'confirmCancelOffer',
         CONFIRM_BACK_IMPORT: 'confirmBackImportOffer',
         CONFIRM_DELETE_MARKED: 'confirmDeleteMarked',
+        LP_VIDEO: 'lpVideo',
+        MORE_TABS: 'moreTabs',
     },
     OFFSET_ERRORS: {
         INVALID_INPUT: 40,
@@ -174,6 +194,7 @@ export const CONSTS = {
     LG_RESOLUTION: 1366,
     XL_RESOLUTION: 992,
     MD_RESOLUTION: 768,
+    SM_RESOLUTION: 576,
 };
 
 export const ROUTES = {
@@ -274,6 +295,7 @@ export const SEO = {
         SIGN_UP: 'Registrace do parc4u, kde kliknutím měníte dodavatele energií,' +
             ' nemusíte na pobočky a dostáváte konečné ceny bez skrytých poplatků.',
     },
+    META_GOOGLE_SITE_VERIFICATION: 'S2HgqkW4rJgsZuVJbrgrAmdwYnguu7zKvCejgAsvyNs',
 };
 
 export enum INavigationItemType {
@@ -583,15 +605,35 @@ export enum ANNUAL_CONSUMPTION_UNIT_TYPES {
     ANNUAL_CONSUMPTION_UNIT = 'annualConsumptionUnit',
 }
 
-export const PUSH_EVENTS_GA = {
-    EVENT: 'eventTracking',
-    CATEGORY: 'Submit',
-    FORMS: {
-        SIGN_UP: 'Sign up',
-        LOGIN: 'Login',
-        CREATE_SUPPLY_POINT: 'Create supply point',
-        OFFER_SELECTION: 'Offer selection',
-        RECAPITULATION: 'Recapitulation',
-        CONTRACT: 'Contract',
+// czech is required by marketing agenture
+export const GTM_CONSTS = {
+    ACTIONS: {
+        SIGN: 'sign the offer',
+        SIGNED: 'offer signed',
+        CONTINUE: 'continue',
+        SELECT_OFFER: 'select offer',
+        SENT: 'sent',
+        VIEW: 'view',
+        START: 'start',
+        SAVE: 'save',
+        SHOW_DETAIL: 'show detail',
+    },
+    BRAND: 'pxe',
+    CATEGORIES: {
+        REGISTRATION: 'sign up',
+        FORM: 'form',
+    },
+    EVENTS: {
+        EVENT_TRACKING: 'eventTracking',
+        CHECKOUT: 'checkout',
+    },
+    LABELS: {
+        REGISTRATION: 'registration',
+        STEP_ONE: 'step 1',
+        STEP_TWO: 'step 2',
+        STEP_THREE: 'step 3',
+        STEP_FOUR: 'step 4',
+        STEP_FIVE: 'step 5',
+        STEP_SIX: 'step 6',
     },
 };

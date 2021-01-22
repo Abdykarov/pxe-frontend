@@ -8,7 +8,6 @@ import {
     OnInit,
     ViewChild,
 } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import {
     Meta,
     Title,

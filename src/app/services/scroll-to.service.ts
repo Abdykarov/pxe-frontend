@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { Subject } from 'rxjs';
 
-import { CONSTS } from 'src/app/app.constants';
 import { SCROLL_TO } from './model/scroll-to.model';
 
 @Injectable({
@@ -12,22 +10,19 @@ import { SCROLL_TO } from './model/scroll-to.model';
 export class ScrollToService {
     private scrollRegister = new Subject<SCROLL_TO>();
 
-    constructor(
-        private router: Router,
-    ) {}
-
     public getScrollStream = () => this.scrollRegister.asObservable();
 
     public activeScrollTo = (scrollTo: SCROLL_TO) => {
         this.scrollRegister.next(scrollTo);
     }
 
-    public scrollToLandingPageFragment = (fragment: SCROLL_TO = SCROLL_TO.LANDING_SUBSCRIPTION) => {
-        this.router.navigate([CONSTS.PATHS.EMPTY])
-            .then(() => {
-                setTimeout(() => {
-                    this.activeScrollTo(fragment);
-                });
-            });
-    }
+    public scrollToHelp = () => setTimeout(_ => this.activeScrollTo(SCROLL_TO.HELP));
+
+    public scrollToHowItsWorks = () => setTimeout(_ => this.activeScrollTo(SCROLL_TO.HOW_IT_WORKS));
+
+    public scrollToBestPricesInTheWorld = () => setTimeout(_ => this.activeScrollTo(SCROLL_TO.BEST_PRICES_IN_THE_WORLD));
+
+    public scrollToFaq = () => setTimeout(_ => this.activeScrollTo(SCROLL_TO.FAQ));
+
+    public scrollToHowItWorks = () => setTimeout(_ => this.activeScrollTo(SCROLL_TO.HOW_IT_WORKS));
 }

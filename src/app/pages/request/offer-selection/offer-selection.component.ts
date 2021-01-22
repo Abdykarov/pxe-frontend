@@ -26,7 +26,7 @@ import { AbstractFaqComponent } from 'src/app/pages/faq/abstract-faq.component';
 import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
-    PUSH_EVENTS_GA,
+    GTM_CONSTS,
     ROUTES,
     S_ANALYTICS,
 } from 'src/app/app.constants';
@@ -35,6 +35,7 @@ import { FaqService } from 'src/app/services/faq.service';
 import {
     getConfigStepper,
     parseGraphQLErrors,
+    removeAccent,
 } from 'src/common/utils';
 import { GTMService } from 'src/app/services/gtm.service';
 import { IBannerObj } from 'src/common/ui/banner/models/banner-object.model';
@@ -90,6 +91,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
         private validityService: ValidityService,
     ) {
         super(faqService, route);
+        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_THREE, this.authService.hashedUserId);
     }
 
     ngOnInit() {
@@ -137,7 +139,7 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
     public filterOffersOnlyActualSupplier = () => {
         if (!R.isNil(this.supplyPointOffers) && !R.isNil(this.supplyPoint)) {
             this.supplyPointOffers = R.filter((supplyPointOffers: IOffer) =>
-                supplyPointOffers.supplier.id === this.supplyPoint.supplier.id)
+                supplyPointOffers.supplier.id === this.supplyPoint?.supplier?.id)
             (this.supplyPointOffers);
         }
     }
@@ -157,7 +159,6 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
             )
             .subscribe(
                 () => {
-                    this.gtmService.pushEvent(PUSH_EVENTS_GA.FORMS.OFFER_SELECTION);
                     this.sAnalyticsService.sendWebData(
                         {},
                         {
@@ -170,6 +171,14 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
                             supplyPoint: this.supplyPoint,
                         },
                     );
+                    this.gtmService.pushEvent({
+                        'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+                        'category': GTM_CONSTS.CATEGORIES.FORM,
+                        'dodavatel': removeAccent(supplyPointOffer?.supplier?.name).toLowerCase(),
+                        'action': GTM_CONSTS.ACTIONS.SELECT_OFFER,
+                        'label': GTM_CONSTS.LABELS.STEP_THREE,
+                        'userID': this.authService.hashedUserId,
+                    });
                     this.router.navigate(
                         [ROUTES.ROUTER_REQUEST_RECAPITULATION],
                         {
@@ -193,6 +202,19 @@ export class OfferSelectionComponent extends AbstractFaqComponent implements OnI
 
         if (this.validityService.validateTermWithProlongation(this.supplyPoint)) {
             this.bannerObj.text = offerValidityMessages.contractEndWithTerminate;
+        }
+    }
+
+    public togglePriceDecompositionAction = (showedDetail: boolean, supplyPointOffer: IOffer) => {
+        if (showedDetail) {
+            this.gtmService.pushEvent({
+                'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
+                'category': GTM_CONSTS.CATEGORIES.FORM,
+                'dodavatel': removeAccent(supplyPointOffer?.supplier?.name).toLowerCase(),
+                'action': GTM_CONSTS.ACTIONS.SHOW_DETAIL,
+                'label': GTM_CONSTS.LABELS.STEP_THREE,
+                'userID': this.authService.hashedUserId,
+            });
         }
     }
 
