@@ -7,7 +7,7 @@ import {
     Component,
     ElementRef,
     Inject,
-    OnInit,
+    OnDestroy,
     PLATFORM_ID,
     ViewChild,
 } from '@angular/core';
@@ -61,7 +61,7 @@ import { ScrollToService } from 'src/app/services/scroll-to.service';
 @Component({
     templateUrl: './landing.component.html',
 })
-export class LandingComponent extends AbstractFaqComponent implements OnInit {
+export class LandingComponent extends AbstractFaqComponent implements OnDestroy {
 
     @ViewChild('video', { static: true })
     public _video: ElementRef;
@@ -75,8 +75,8 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
     @ViewChild('howItWorksFileContainer', { static: true })
     public howItWorksFileContainer: AskForOfferContainerComponent;
 
-    // @ViewChild('lastContentFileUploader', { static: true })
-    // public lastContentFileUploader: AskForOfferContainerComponent;
+    @ViewChild('lastContentFileUploader', { static: true })
+    public lastContentFileUploader: AskForOfferContainerComponent;
 
     @ViewChild('help', { static: true })
     public help: ElementRef;
@@ -145,6 +145,10 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
             name: 'keywords',
             content: SEO.META_KEYWORDS.LANDING_PAGE.toString(),
         });
+        this.metaService.addTag({
+            name: 'google-site-verification',
+            content: SEO.META_GOOGLE_SITE_VERIFICATION,
+        });
 
         this.formFields = createRegistrationFormFields(SignUpType.SignUp);
 
@@ -182,6 +186,11 @@ export class LandingComponent extends AbstractFaqComponent implements OnInit {
             .subscribe(modal => {
                 this.modalService.closeModalData$.next(null);
             });
+    }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        this.metaService.removeTag('google-site-verification');
     }
 
     public routeToSignUp = (evt) => {

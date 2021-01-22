@@ -41,10 +41,10 @@
                         (click)="isVideoPlaying && pause($event)"
                         class="w-100"
                         poster="/assets/images/landing-page/picture-fallback.jpg"
-                        loop
                         [muted]="false"
                         (pause)="cd.detectChanges()"
-                        (play)="cd.detectChanges()"
+                        (play)="showTextUnderVideo = false;cd.detectChanges()"
+                        (ended)="videoEnded($event)"
                         preload="none">
                         <source src="/assets/images/signboard/create_om_tutorial.mp4" type="video/mp4">
                         Váš prohlížeč nepodporuje zobrazení videa
@@ -64,7 +64,7 @@
                 <div class="video__text">
                     <div class="video__control d-none d-md-block">
                         <lnd-button
-                            *ngIf="!isVideoPlaying"
+                            *ngIf="!isVideoPlaying && showTextUnderVideo"
                             type="icon"
                             icon="icon--triangle-right"
                             variant="icon"
@@ -73,7 +73,7 @@
                         >
                         </lnd-button>
                     </div>
-                    <p *ngIf="!isMoreThanMdResolution || (isMoreThanMdResolution && !isVideoPlaying)">
+                    <p *ngIf="showTextUnderVideo">
                         Je-li vše jasné pokračujte tlačítkem "Vyplnit".
                     </p>
                 </div>

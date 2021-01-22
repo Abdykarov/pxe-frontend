@@ -1,12 +1,12 @@
 {
     "/api": {
-        "target": "https://pxeparc-preview.lnd.bz",
+        "target": "https://test.parc4u.cz",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true
     },
     "/graphql": {
-        "target": "https://pxeparc-preview.lnd.bz",
+        "target": "https://test.parc4u.cz",
         "logLevel": "debug",
         "secure": false,
         "changeOrigin": true

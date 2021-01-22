@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+
+import { FileUploader } from 'src/third-sides/file-upload';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-import {FileUploader} from '../../../third-sides/file-upload';
 
 @Component({
   templateUrl: './page.html',
