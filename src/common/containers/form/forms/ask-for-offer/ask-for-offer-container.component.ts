@@ -107,7 +107,7 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
     public submitForm = (data) => {
         if (this.fileUploader.queue.length > 0 && this.form.valid) {
             this.fileUploader.uploadAllFiles({
-                email: this.form.getRawValue().email_ask,
+                email: this.form.getRawValue().email,
             });
         }
         this.form.markAllAsTouched();
