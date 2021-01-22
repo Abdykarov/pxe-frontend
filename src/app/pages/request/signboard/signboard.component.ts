@@ -43,9 +43,9 @@ export class SignboardComponent extends AbstractComponent {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.SUPPLY_POINT;
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public showWelcome = false;
+    public showTextUnderVideo = true;
 
     public isMoreThanMdResolution = false;
-    public isMouseDownOnVideo = false;
 
     public resizeEvent$ = fromEvent(window, 'resize')
         .pipe(
@@ -85,6 +85,11 @@ export class SignboardComponent extends AbstractComponent {
             'userID': this.authService.hashedUserId,
         });
         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
+    }
+
+    public videoEnded = (event) => {
+        this.showTextUnderVideo = true;
+        this.video.currentTime = 0;
     }
 
     public play = (event = null) => {
