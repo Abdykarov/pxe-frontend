@@ -87,15 +87,16 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                     this.supplyPoint = supplyPoint;
 
                     this.gtmService.pushEvent({
-                        event: GTM_CONSTS.EVENTS.CHECKOUT,
+                        event: GTM_CONSTS.EVENTS.PURCHASE,
                         ecommerce: {
-                            checkout: {
+                            purchase: {
                                 actionField: {
-                                    step: 6,
+                                    revenue: this.supplyPoint?.contract?.personalData?.deposit,
+                                    id: this.supplyPoint?.contract?.contractId,
                                 },
                                 products: [{
-                                    name: removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
-                                    id: this.supplyPoint?.contract?.offer?.name,
+                                    name: removeAccent(this.supplyPoint?.contract?.offer?.supplier?.name).toLowerCase(),
+                                    id: this.supplyPoint?.contract?.offer?.name?.toLocaleLowerCase(),
                                     brand: GTM_CONSTS.BRAND,
                                     quantity: 1,
                                 }],
@@ -169,7 +170,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                     this.gtmService.pushEvent({
                         'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
                         'category': GTM_CONSTS.CATEGORIES.FORM,
-                        'dodavatel': removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
+                        'dodavatel': removeAccent(this.supplyPoint?.contract?.offer?.supplier?.name).toLowerCase(),
                         'action': GTM_CONSTS.ACTIONS.SIGNED,
                         'label': GTM_CONSTS.LABELS.STEP_SIX,
                         'userID': this.authService.hashedUserId,

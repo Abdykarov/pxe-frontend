@@ -112,11 +112,11 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                             ecommerce: {
                                 checkout: {
                                     actionField: {
-                                        step: 4,
+                                        step: 1,
                                     },
                                     products: [{
-                                        name: removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
-                                        id: this.supplyPoint?.contract?.offer?.name,
+                                        name: removeAccent(this.supplyPoint?.contract?.offer?.supplier?.name).toLowerCase(),
+                                        id: this.supplyPoint?.contract?.offer?.name?.toLocaleLowerCase(),
                                         brand: GTM_CONSTS.BRAND,
                                         quantity: 1,
                                     }],
@@ -166,7 +166,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                     this.gtmService.pushEvent({
                         'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
                         'category': GTM_CONSTS.CATEGORIES.FORM,
-                        'dodavatel': removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
+                        'dodavatel': removeAccent(this.supplyPoint?.contract?.offer?.supplier?.name).toLowerCase(),
                         'action': GTM_CONSTS.ACTIONS.CONTINUE,
                         'label': GTM_CONSTS.LABELS.STEP_FOUR,
                         'userID': this.authService.hashedUserId,
