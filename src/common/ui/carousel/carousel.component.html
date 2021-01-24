@@ -1,7 +1,6 @@
 <div #parent>
     <carousel
         #carousel
-        class="carousel"
         [class.carousel__left-right--disabled]="!showLeftAndRightIndicators"
         (mouseenter)="setPause()"
         (mouseup)="setPause()"
