@@ -43,9 +43,9 @@ export class SignboardComponent extends AbstractComponent {
     public readonly ACTUAL_PROGRESS_STATUS = ProgressStatus.SUPPLY_POINT;
     public stepperProgressConfig: IStepperProgressItem[] = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public showWelcome = false;
+    public showTextUnderVideo = true;
 
     public isMoreThanMdResolution = false;
-    public isMouseDownOnVideo = false;
 
     public resizeEvent$ = fromEvent(window, 'resize')
         .pipe(
@@ -73,20 +73,6 @@ export class SignboardComponent extends AbstractComponent {
             });
 
         this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_ONE, this.authService.hashedUserId);
-        this.gtmService.pushEvent({
-            event: GTM_CONSTS.EVENTS.CHECKOUT,
-            ecommerce: {
-                actionField: {
-                    step: 1,
-                },
-                products: [{
-                    name: 'odber energie',
-                    id: null,
-                    brand: GTM_CONSTS.BRAND,
-                    quantity: 1,
-                }],
-            },
-        });
     }
 
     public routerToNextStep = (evt) => {
@@ -99,6 +85,11 @@ export class SignboardComponent extends AbstractComponent {
             'userID': this.authService.hashedUserId,
         });
         this.router.navigate([ROUTES.ROUTER_REQUEST_SUPPLY_POINT]);
+    }
+
+    public videoEnded = (event) => {
+        this.showTextUnderVideo = true;
+        this.video.currentTime = 0;
     }
 
     public play = (event = null) => {

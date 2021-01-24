@@ -43,7 +43,6 @@
 	}
 
 	&__control {
-		color: $link-color;
 		box-shadow: none;
 		cursor: pointer;
 
@@ -60,11 +59,4 @@
 	&--zindex {
 		z-index: $zindex-drop-zone;
 	}
-}
-
-
-/* stylelint-disable declaration-no-important */
-.fast-fix-uploader {
-	color: $white;
-	margin-top: $spacer;
 }

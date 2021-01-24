@@ -295,6 +295,7 @@ export const SEO = {
         SIGN_UP: 'Registrace do parc4u, kde kliknutím měníte dodavatele energií,' +
             ' nemusíte na pobočky a dostáváte konečné ceny bez skrytých poplatků.',
     },
+    META_GOOGLE_SITE_VERIFICATION: 'S2HgqkW4rJgsZuVJbrgrAmdwYnguu7zKvCejgAsvyNs',
 };
 
 export enum INavigationItemType {
@@ -625,11 +626,15 @@ export const GTM_CONSTS = {
     EVENTS: {
         EVENT_TRACKING: 'eventTracking',
         CHECKOUT: 'checkout',
+        PURCHASE: 'purchase',
     },
     LABELS: {
         REGISTRATION: 'registration',
         STEP_ONE: 'step 1',
         STEP_TWO: 'step 2',
         STEP_THREE: 'step 3',
+        STEP_FOUR: 'step 4',
+        STEP_FIVE: 'step 5',
+        STEP_SIX: 'step 6',
     },
 };
