@@ -388,6 +388,11 @@ $colors: (
 	border-radius: $border-radius;
 	border-bottom-left-radius: 0;
 
+	// Media queries
+	@include media-breakpoint-up(md) {
+		margin-top: ( $spacer * 2 );
+	}
+
 	&__beak {
 		position: absolute;
 		top: calc( 100% - 1px );

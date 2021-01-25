@@ -17,7 +17,13 @@ export class LoginAfterRegistrationPageComponent {
 
     public configSupplier: ISupplierLogo[] = configSupplier;
 
-    public submitForm = () => alert('Form submitted');
+    submitForm(evt) {
+        evt.preventDefault();
+        console.log('Submit form');
+    }
 
-    public action = () => alert('Email send');
+    public action = (evt) => {
+        evt.preventDefault();
+        window.open('/forgotten-password');
+    }
 }
