@@ -159,7 +159,7 @@
 			}
 
 			h3 {
-				padding-left: ( $spacer * 0.5 );
+				padding-left: ( $spacer * .5 );
 				margin-bottom: $spacer;
 				display: inline-block;
 			}
@@ -245,7 +245,6 @@
 		}
 
 		&__link {
-
 			@include link-without-href {
 				color: $font-text;
 				font-size: $perex-font-size;
@@ -255,6 +254,7 @@
 			@include link-without-href-interactive {
 				color: $font-text;
 				text-decoration: none;
+				border-bottom: 2px solid rgba($primary, .6);
 			}
 
 			&--active {
@@ -284,6 +284,13 @@
 	}
 
 	.link-list--lp {
+		margin: 0;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			margin: 0;
+		}
+
 		.link-list__item {
 			padding-left: 0;
 			padding-right: 0;
@@ -299,8 +306,7 @@
 		}
 
 		.link-list__link {
-			&,
-			&:visited {
+			@include link-without-href {
 				padding-bottom: ( $spacer / 4 );
 				font-size: $font-size-base-public;
 				text-transform: none;
@@ -316,8 +322,7 @@
 				}
 			}
 
-			&:focus,
-			&:hover {
+			@include link-without-href-interactive {
 				border-bottom: 2px solid rgba($font-text-public, .6);
 			}
 
