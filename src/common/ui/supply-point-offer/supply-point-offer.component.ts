@@ -76,6 +76,10 @@ export class SupplyPointOfferComponent extends AbstractComponent implements OnIn
     }
 
     ngOnInit () {
+        if (this.isFromContract) {
+            this.showPriceDecomposition = true;
+        }
+
         if ( this.questions) {
             const vatNumber = R.path(['supplier', 'vatNumber'])(this.supplyPointOffer);
             this.question = {...R.find(R.propEq('vatNumber', vatNumber))(this.questions)};
