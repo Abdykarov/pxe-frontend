@@ -245,15 +245,14 @@
 		}
 
 		&__link {
-			&,
-			&:visited {
+			@include link-without-href {
 				color: $font-text;
 				font-size: $perex-font-size;
 				text-transform: uppercase;
 			}
 
-			&:focus,
-			&:hover {
+			@include link-without-href-interactive {
+				color: $font-text;
 				text-decoration: none;
 				border-bottom: 2px solid rgba($primary, .6);
 			}
@@ -307,8 +306,7 @@
 		}
 
 		.link-list__link {
-			&,
-			&:visited {
+			@include link-without-href {
 				padding-bottom: ( $spacer / 4 );
 				font-size: $font-size-base-public;
 				text-transform: none;
@@ -324,8 +322,7 @@
 				}
 			}
 
-			&:focus,
-			&:hover {
+			@include link-without-href-interactive {
 				border-bottom: 2px solid rgba($font-text-public, .6);
 			}
 
