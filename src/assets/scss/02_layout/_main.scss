@@ -245,16 +245,17 @@
 		}
 
 		&__link {
-
-			@include link-without-href {
+			&,
+			&:visited {
 				color: $font-text;
 				font-size: $perex-font-size;
 				text-transform: uppercase;
 			}
 
-			@include link-without-href-interactive {
-				color: $font-text;
+			&:focus,
+			&:hover {
 				text-decoration: none;
+				border-bottom: 2px solid rgba($primary, .6);
 			}
 
 			&--active {
@@ -284,6 +285,13 @@
 	}
 
 	.link-list--lp {
+		margin: 0;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			margin: 0;
+		}
+
 		.link-list__item {
 			padding-left: 0;
 			padding-right: 0;
