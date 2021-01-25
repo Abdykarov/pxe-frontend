@@ -18,7 +18,7 @@ $btn-height:                       40px;
 $btn-height-small:                 30px;
 $btn-height-large:                 68px;
 $btn-padding-y:                    ( $spacer / 2 );
-$btn-padding-x:                    ( $spacer * 1.5 );
+$btn-padding-x:                    $spacer;
 $btn-line-height:                  $line-height-sm;
 $btn-border-radius:                4px;
 $btn-padding-y-sm:                 ( $spacer / 6 );
