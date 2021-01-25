@@ -167,8 +167,16 @@
 			background-repeat: no-repeat;
 
 			// Media queries
+			@include media-breakpoint-up(md) {
+				left: -270px;
+				right: auto;
+			}
+			@include media-breakpoint-up(xl) {
+				left: -160px;
+			}
 			@include media-breakpoint-up(lg) {
-				right: 50%;
+				left: auto;
+				right: 51%;
 				transform: translateX(20%);
 			}
 		}
