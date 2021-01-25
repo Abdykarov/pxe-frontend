@@ -46,11 +46,6 @@
 	.carousel-items__wrapper {
 		width: 100%;
 		display: flex;
-
-		// Media queries
-		@include media-breakpoint-up(md) {
-			margin: 0 ( -$spacer * 1.5 );
-		}
 	}
 
 	.carousel-item {
@@ -66,6 +61,7 @@
 				justify-content: center;
 			}
 			@include media-breakpoint-up(md) {
+				height: 100%;
 				margin: 0;
 			}
 		}
@@ -79,6 +75,9 @@
 				padding: ( $spacer * 1.5 ) $spacer $spacer;
 			}
 			@include media-breakpoint-up(xl) {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
 				border-left: $carousel-compare-border-left;
 			}
 			@include media-breakpoint-up(lg) {
