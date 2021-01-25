@@ -52,7 +52,6 @@
                 <lnd-placeloader [loading]="loading"></lnd-placeloader>
                 <pxe-file-uploader
                     *ngIf="!loading"
-                    labelCustomClass="fast-fix-uploader"
                     [uploader]="fileUploader"
                     (fileSelectAction)="uploadFile($event)">
                 ></pxe-file-uploader>
