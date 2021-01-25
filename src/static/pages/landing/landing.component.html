@@ -4,7 +4,7 @@
             <div class="row align-items-md-center">
                 <div class="col-12 col-md-5 col-xl-6 order-md-2 mb-3 mb-md-0">
                     <div class="section-video-holder text-center">
-                        <img class="img-fluid" src="/assets/images/landing-page/lp-picture-home.png" />
+                        <img class="img-fluid" src="/assets/images/landing-page/lp-picture-home.png" alt="prezencni video" title="Prezenční video" />
                     </div>
                     <div class="section-video-text order-md-1">
                         <div class="row w-100 ml-0 text-center">
@@ -48,7 +48,7 @@
                 <div class="col-md-4 mb-6 mb-md-0">
                     <div class="row">
                         <div class="col-xl-3 mb-3">
-                            <img class="img-fluid" src="/assets/images/illustrations/papers.svg" alt="" title="">
+                            <img class="img-fluid" src="/assets/images/illustrations/papers.svg" alt="PARC4U - O smlouvy se už nikdy nemusíte starat" title="PARC4U - O smlouvy se už nikdy nemusíte starat">
                         </div>
                         <div class="col-xl-9">
                             <h3 class="h3--public">O smlouvy se už nikdy nemusíte starat</h3>
@@ -59,7 +59,7 @@
                 <div class="col-md-4 mb-6 mb-md-0">
                     <div class="row">
                         <div class="col-xl-3 mb-3">
-                            <img class="img-fluid" src="/assets/images/illustrations/computer.svg" alt="" title="">
+                            <img class="img-fluid" src="/assets/images/illustrations/computer.svg" alt="PARC4U - Vše zdarma, z domu a bez papírování" title="PARC4U - Vše zdarma, z domu a bez papírování">
                         </div>
                         <div class="col-xl-9">
                             <h3 class="h3--public">Vše zdarma, z domu a bez papírování</h3>
@@ -70,7 +70,7 @@
                 <div class="col-md-4 mb-6 mb-md-0">
                     <div class="row">
                         <div class="col-xl-3 mb-3">
-                            <img class="img-fluid" src="/assets/images/illustrations/calendar.svg" alt="" title="">
+                            <img class="img-fluid" src="/assets/images/illustrations/calendar.svg" alt="PARC4U - Každý rok vám zajistíme výhodnou cenu" title="PARC4U - Každý rok vám zajistíme výhodnou cenu">
                         </div>
                         <div class="col-xl-9">
                             <h3 class="h3--public">Každý rok vám zajistíme výhodnou cenu</h3>
@@ -90,15 +90,11 @@
     </div>
     <div class="section section--light-gray">
         <div class="container-fluid container-fluid--max-width">
-            <div class="row no-gutters">
-                <div class="col-12 text-center text-xl-left">
-                    <h2 class="h4--public text-secondary">S čím vám pomůžeme</h2>
-                </div>
-                <div class="card-tiles">
-                    <div class="row no-gutters card-tiles__inner">
-                        <div *ngFor="let item of cardConfig" class="col-md-4 card-tile__item" [ngClass]="item.customClass">
-                            <lnd-card [data]="item"></lnd-card>
-                        </div>
+            <h2 class="h4--public text-secondary text-center text-xl-left">S čím vám pomůžeme</h2>
+            <div class="card-tiles">
+                <div class="row no-gutters card-tiles__inner">
+                    <div *ngFor="let item of cardConfig" class="col-md-4 card-tile__item" [ngClass]="item.customClass">
+                        <lnd-card [data]="item"></lnd-card>
                     </div>
                 </div>
             </div>
@@ -184,8 +180,8 @@
             <div class="row no-gutters">
                 <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-0">
                     <h2 class="h4--public text-secondary">Férové ceny energií</h2>
-                    <h3 class="h2--public">Porovnejte nabídky vybraných dodavatelů elektřiny</h3>
-                    <p>Níže najdete porovnání úspor vůči hlavní dodavatelům v kraji.</p>
+                    <h3 class="h2--public mb-3">Porovnejte nabídky vybraných dodavatelů elektřiny</h3>
+                    <p class="mb-4 mb-md-6">Níže najdete porovnání úspor vůči hlavní dodavatelům v kraji.</p>
                     <ul class="link-list--lp">
                         <li class="link-list__item">
                             <a
@@ -200,7 +196,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-12">
+                <div class="col-12 mb-5">
                     <pxe-carousel-compare></pxe-carousel-compare>
                 </div>
                 <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-0">
