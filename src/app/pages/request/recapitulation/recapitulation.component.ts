@@ -61,6 +61,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     public formFields = formFields;
     public formSent = false;
     public isIndividual = true;
+    public checkoutSent = false;
     public fieldError: IFieldError = {};
     public formLoading = false;
     public globalError: string[] = [];
@@ -107,22 +108,25 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                         this.supplyPoint = supplyPoint;
                         this.isIndividual = this.supplyPoint.subject.code === SubjectType.SUBJECT_TYPE_INDIVIDUAL;
                         this.codeLists = codeLists;
-                        this.gtmService.pushEvent({
-                            event: GTM_CONSTS.EVENTS.CHECKOUT,
-                            ecommerce: {
-                                checkout: {
-                                    actionField: {
-                                        step: 1,
+                        if (!this.checkoutSent) {
+                            this.gtmService.pushEvent({
+                                event: GTM_CONSTS.EVENTS.CHECKOUT,
+                                ecommerce: {
+                                    checkout: {
+                                        actionField: {
+                                            step: 1,
+                                        },
+                                        products: [{
+                                            name: removeAccent(this.supplyPoint?.contract?.offer?.supplier?.name).toLowerCase(),
+                                            id: this.supplyPoint?.contract?.offer?.name?.toLocaleLowerCase(),
+                                            brand: GTM_CONSTS.BRAND,
+                                            quantity: 1,
+                                        }],
                                     },
-                                    products: [{
-                                        name: removeAccent(this.supplyPoint?.contract?.offer?.supplier?.name).toLowerCase(),
-                                        id: this.supplyPoint?.contract?.offer?.name?.toLocaleLowerCase(),
-                                        brand: GTM_CONSTS.BRAND,
-                                        quantity: 1,
-                                    }],
                                 },
-                            },
-                        });
+                            });
+                            this.checkoutSent = true;
+                        }
                         this.cd.markForCheck();
                     }
                 },
