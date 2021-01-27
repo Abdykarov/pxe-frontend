@@ -62,11 +62,7 @@
     </div>
     <div #help class="section section--light-gray">
         <div class="container-fluid container-fluid--max-width">
-            <div class="row no-gutters">
-                <div class="col-12 text-center text-xl-left">
-                    <h2 class="h4--public text-secondary">S čím vám pomůžeme</h2>
-                </div>
-            </div>
+            <h2 class="h4--public text-secondary text-center text-xl-left">S čím vám pomůžeme</h2>
             <div class="card-tiles">
                 <div class="row no-gutters card-tiles__inner">
                     <div *ngFor="let item of cardConfig" class="col-md-4 card-tile__item" [ngClass]="item.customClass">
@@ -148,7 +144,7 @@
                     <h2 class="h4--public text-secondary">Férové ceny energií</h2>
                     <h3 class="h2--public mb-3">Porovnejte nabídky vybraných dodavatelů {{activeCommodityTypeCarouselCompare === CommodityType.POWER ? 'elektřiny' : 'plynu'}}</h3>
                     <p class="mb-4 mb-md-6">Níže najdete porovnání úspor vůči hlavnímu dodavateli v kraji.</p>
-                    <ul class="link-list--lp">
+                    <ul class="link-list link-list--lp">
                         <li class="link-list__item">
                             <a (click)="activeCommodityTypeCarouselCompare = CommodityType.POWER"
                                class="link-list__link"
@@ -165,7 +161,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-12 mb-5 mb-md-4 mb-xl-6">
+                <div class="col-12 mb-5">
                     <pxe-carousel-compare [commodityType]="activeCommodityTypeCarouselCompare"></pxe-carousel-compare>
                 </div>
                 <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-0">
@@ -266,6 +262,26 @@
                         (action)="routeToSignUp($event)"
                     >
                     </lnd-button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section section--gradient-violet">
+        <div class="container-fluid container-fluid--max-width">
+            <div class="row no-gutters">
+                <div class="col-12 col-md-8 offset-md-2 col-xl-4 offset-xl-1">
+                    <h2 class="h2--public text-white">Nechcete nic vyplňovat? Nemusíte!</h2>
+                    <ol class="numerical-list-stepper">
+                        <li [class.active]="lastContentFileUploader?.fileUploader?.queue?.length === 0">Vložte vaši poslední fakturu za elektřinu nebo plyn.</li>
+                        <li [class.active]="lastContentFileUploader?.fileUploader?.queue?.length > 0">Zadejte váš email a my vám pošleme nabídky na míru.
+                    </ol>
+                </div>
+                <div class="col-12 col-md-8 offset-md-2 col-xl-5 offset-xl-1">
+                    <pxe-ask-for-offer-container
+                        id="second-ask-for-offer-container"
+                        idFileUploader="file-uploader-second"
+                        #lastContentFileUploader
+                    ></pxe-ask-for-offer-container>
                 </div>
             </div>
         </div>

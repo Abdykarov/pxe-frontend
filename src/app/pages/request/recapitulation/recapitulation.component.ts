@@ -61,6 +61,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     public formFields = formFields;
     public formSent = false;
     public isIndividual = true;
+    public checkoutSent = false;
     public fieldError: IFieldError = {};
     public formLoading = false;
     public globalError: string[] = [];
@@ -92,7 +93,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         private supplyService: SupplyService,
     ) {
         super();
-        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_TWO, this.authService.hashedUserId);
+        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_FOUR, this.authService.hashedUserId);
     }
 
     ngOnInit () {
@@ -107,20 +108,25 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                         this.supplyPoint = supplyPoint;
                         this.isIndividual = this.supplyPoint.subject.code === SubjectType.SUBJECT_TYPE_INDIVIDUAL;
                         this.codeLists = codeLists;
-                        this.gtmService.pushEvent({
-                            event: GTM_CONSTS.EVENTS.CHECKOUT,
-                            ecommerce: {
-                                actionField: {
-                                    step: 2,
+                        if (!this.checkoutSent) {
+                            this.gtmService.pushEvent({
+                                event: GTM_CONSTS.EVENTS.CHECKOUT,
+                                ecommerce: {
+                                    checkout: {
+                                        actionField: {
+                                            step: 1,
+                                        },
+                                        products: [{
+                                            name: removeAccent(this.supplyPoint?.contract?.offer?.supplier?.name).toLowerCase(),
+                                            id: this.supplyPoint?.contract?.offer?.name?.toLocaleLowerCase(),
+                                            brand: GTM_CONSTS.BRAND,
+                                            quantity: 1,
+                                        }],
+                                    },
                                 },
-                                products: [{
-                                    name: removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
-                                    id: this.supplyPoint?.supplier?.id,
-                                    brand: GTM_CONSTS.BRAND,
-                                    quantity: 1,
-                                }],
-                            },
-                        });
+                            });
+                            this.checkoutSent = true;
+                        }
                         this.cd.markForCheck();
                     }
                 },
@@ -164,9 +170,9 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                     this.gtmService.pushEvent({
                         'event': GTM_CONSTS.EVENTS.EVENT_TRACKING,
                         'category': GTM_CONSTS.CATEGORIES.FORM,
-                        'dodavatel': removeAccent(this.supplyPoint?.supplier?.name).toLowerCase(),
+                        'dodavatel': removeAccent(this.supplyPoint?.contract?.offer?.supplier?.name).toLowerCase(),
                         'action': GTM_CONSTS.ACTIONS.CONTINUE,
-                        'label': GTM_CONSTS.LABELS.STEP_TWO,
+                        'label': GTM_CONSTS.LABELS.STEP_FOUR,
                         'userID': this.authService.hashedUserId,
                     });
                     this.router.navigate(

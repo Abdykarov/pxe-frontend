@@ -21,6 +21,7 @@ import {
     filter,
     map,
     pairwise,
+    startWith,
     takeUntil,
 } from 'rxjs/operators';
 
@@ -137,8 +138,11 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             .valueChanges
             .pipe(
                 takeUntil(this.destroy$),
+                startWith(UNIT_OF_PRICES.KWH),
+                pairwise(),
+                filter(([prevAnnualConsumptionNTUnit, annualConsumptionNTUnit]) => prevAnnualConsumptionNTUnit !== annualConsumptionNTUnit),
             )
-            .subscribe((annualConsumptionNTUnit: UNIT_OF_PRICES) => {
+            .subscribe(([_, annualConsumptionNTUnit]) => {
                 this.detectChangesForAnnualConsumption(
                     ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_NT,
                     ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_NT_UNIT,
@@ -250,7 +254,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             });
 
         this.setFormByCommodity(this.formValues && this.formValues.commodityType);
-        this.setAnnualConsumptionNTState();
         this.setContractEndFields();
         this.loadCodeLists();
 
@@ -523,7 +526,6 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             .subscribe(data => {
                 this.codeLists = transformCodeList(data);
                 this.codeLists$.next(this.codeLists);
-                this.setAnnualConsumptionNTState(this.getFieldValue('distributionRateId'), this.codeLists);
                 this.cd.markForCheck();
             });
     }

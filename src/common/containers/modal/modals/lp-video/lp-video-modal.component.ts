@@ -62,8 +62,6 @@ export class LpVideoModalComponent implements OnInit, OnDestroy {
                 }
             });
         }
-
-        this.play();
     }
 
     ngOnDestroy(): void {

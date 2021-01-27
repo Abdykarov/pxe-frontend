@@ -1,13 +1,15 @@
 <ng-template #slideTemplate let-item let-activeSlideRange="activeSlideRange" let-index="index">
-    <div class="carousel-item__inner"
+    <div class="carousel-item__inner h-100"
          [class.carousel-item__inner--none]="index === activeSlideRange[0]">
         <h4 class="carousel-compare__title h3--public mb-3">
             {{item.region}}
         </h4>
-        <p class="mb-1">
-            Roční úspora
-        </p>
-        <span class="carousel-compare__price">{{(commodityType === CommodityType.POWER ? item.savingPower : item.savingGas) | number}}&nbsp;KČ</span>
+        <div class="carousel-compare__savings">
+            <p class="mb-1">
+                Roční úspora
+            </p>
+            <span class="carousel-compare__price">{{(commodityType === CommodityType.POWER ? item.savingPower : item.savingGas) | number}}&nbsp;KČ</span>
+        </div>
     </div>
 </ng-template>
 

@@ -5,7 +5,6 @@ import {
 import {
     ChangeDetectorRef,
     Component,
-    HostListener,
     Inject,
     OnDestroy,
     OnInit,
@@ -51,7 +50,7 @@ export class PublicLayoutComponent extends AbstractLayoutComponent implements On
         protected route: ActivatedRoute,
         protected router: Router,
         protected sAnalyticsService: SAnalyticsService,
-        protected scrollToService: ScrollToService,
+        public scrollToService: ScrollToService,
         @Inject(DOCUMENT) private document: any,
         @Inject(PLATFORM_ID) public platformId: string,
     ) {

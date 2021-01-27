@@ -16,8 +16,8 @@ export const cardConfig: ICardData[] = [
     {
         imgSrc: 'assets/images/landing-page/our-help-move.png',
         imgAlt: 'stehuji-se',
-        imgTitle: 'Stěhujeti se',
-        title: 'Stěhujeti se',
+        imgTitle: 'Stěhuji se',
+        title: 'Stěhuji se',
         content: 'S novým bydlením přichází spousta radostí i starostí. Vy se věnujte zařizování nového bydlení. Převod elektřiny a plynu nechte na nás.',
     },
     {

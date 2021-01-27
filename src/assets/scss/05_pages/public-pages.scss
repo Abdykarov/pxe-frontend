@@ -48,6 +48,22 @@
 			}
 		}
 
+		&--fix-height {
+			position: relative;
+
+			&::before {
+				// Media queries
+				@include media-breakpoint-up(xl) {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 50vw;
+					height: 100%;
+				}
+			}
+		}
+
 		&--dark-gray {
 			&::before {
 				background-color: $body-bg-lp;
@@ -167,8 +183,16 @@
 			background-repeat: no-repeat;
 
 			// Media queries
+			@include media-breakpoint-up(md) {
+				left: -270px;
+				right: auto;
+			}
+			@include media-breakpoint-up(xl) {
+				left: -160px;
+			}
 			@include media-breakpoint-up(lg) {
-				right: 50%;
+				left: auto;
+				right: 51%;
 				transform: translateX(20%);
 			}
 		}
@@ -183,30 +207,6 @@
 		}
 		@include media-breakpoint-up(xl) {
 			padding-bottom: 0;
-		}
-	}
-
-	.link-next-section {
-		@include link-without-href {
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			width: $landing-page-link-next-section-size;
-			height: $landing-page-link-next-section-size;
-			background-color: $body-bg-lp;
-			color: $font-text;
-			border-radius: $landing-page-link-next-section-size;
-			box-shadow: $box-shadow-circle;
-		}
-
-		@include link-without-href-interactive {
-			background-color: darken($body-bg-lp, 5%);
-			color: $font-text;
-			text-decoration: none;
-		}
-
-		&__icon {
-			transform: rotate(90deg);
 		}
 	}
 }

@@ -27,9 +27,10 @@ export const getHeightOfDisplayNoneElement = (el: HTMLDivElement, countSizeFor: 
 
     if (!withLog) {
         // reverting to the original values
-        el.style.display    = isDisplayInline ? el_display : null;
-        el.style.position   = isPositionInline ? el_position : null;
-        el.style.visibility = isVisibilityInline ? el_visibility : null;
+        el.style.display    = isDisplayInline ? el_display : '';
+        el.style.position   = isPositionInline ? el_position : '';
+        el.style.visibility = isVisibilityInline ? el_visibility : '';
+
     } else {
         el.style.visibility = null;
     }

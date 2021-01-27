@@ -83,6 +83,7 @@
                         [class.d-none]="!showOffer">
                         <pxe-supply-point-offer
                             *ngIf="questions"
+                            customClass="mb-0"
                             [questions]="questions"
                             [isFromContract]="true"
                             [personalInfo]="supplyPoint.contract.personalData"

@@ -43,7 +43,10 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
     public errors: string[] = [];
 
     @Input()
-    public id = 'file-upload';
+    public id = 'ask-for-offer-container';
+
+    @Input()
+    public idFileUploader = 'file-upload';
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -97,8 +100,6 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
     }
 
     public removeFile = (item) => {
-        console.log(item);
-        console.log(this.fileUploader.queue);
         this.fileUploader.removeFromQueue(item);
         this.cd.markForCheck();
     }
@@ -106,7 +107,7 @@ export class AskForOfferContainerComponent extends AbstractFormComponent impleme
     public submitForm = (data) => {
         if (this.fileUploader.queue.length > 0 && this.form.valid) {
             this.fileUploader.uploadAllFiles({
-                email: this.form.getRawValue().email_ask,
+                email: this.form.getRawValue().email,
             });
         }
         this.form.markAllAsTouched();
