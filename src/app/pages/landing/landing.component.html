@@ -62,11 +62,7 @@
     </div>
     <div #help class="section section--light-gray">
         <div class="container-fluid container-fluid--max-width">
-            <div class="row no-gutters">
-                <div class="col-12 text-center text-xl-left">
-                    <h2 class="h4--public text-secondary">S čím vám pomůžeme</h2>
-                </div>
-            </div>
+            <h2 class="h4--public text-secondary text-center text-xl-left">S čím vám pomůžeme</h2>
             <div class="card-tiles">
                 <div class="row no-gutters card-tiles__inner">
                     <div *ngFor="let item of landingPage?.helpSection?.cards" class="col-md-4 card-tile__item" [ngClass]="item.customClasses">
@@ -139,7 +135,7 @@
                     <h2 class="h4--public text-secondary">{{landingPage.bestPricesInTheWorldSection?.title}}</h2>
                     <h3 class="h2--public mb-3">{{landingPage | bestPricesInTheWorldSection:activeCommodityTypeCarouselCompare:"description"}}</h3>
                     <p class="mb-4 mb-md-6">{{landingPage | bestPricesInTheWorldSection:activeCommodityTypeCarouselCompare:"perex"}}</p>
-                    <ul class="link-list--lp">
+                    <ul class="link-list link-list--lp">
                         <li class="link-list__item">
                             <a (click)="activeCommodityTypeCarouselCompare = CommodityType.POWER"
                                class="link-list__link"
@@ -156,7 +152,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-12 mb-5 mb-md-4 mb-xl-6">
+                <div class="col-12 mb-5">
                     <pxe-carousel-compare [commodityType]="activeCommodityTypeCarouselCompare"></pxe-carousel-compare>
                 </div>
                 <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-0">
@@ -192,7 +188,7 @@
                     <div class="row">
                         <div class="col-12 mb-6">
                             <h2 class="h4--public text-white">O nás</h2>
-                            <h3 class="h2--public text-white mb-3 mb-xl-6">PXE — jsme burza. Elektřinu a plyn prodáváme již 100 let.</h3>
+                            <h3 class="h2--public text-white mb-3 mb-xl-6">PXE — jsme burza. Elektřinu a plyn prodáváme již více jak 10 let.</h3>
                             <p class="text-white">Na českém trhu poskytovatelů energií se opravdu vyznáme. Již několik let velkoodběratelé (firmy, města, obce) využívají naší velkoobchodní aplikaci PARC.
                                 Její mladší sestra - aplikace parc4u teď nabízí stejné výhody i domácnostem a maloodběratelům. Přitom vás ochráníme před nevýhodnými
                                 podmínkami a nepoctivými prodejci - energošmejdy.</p>

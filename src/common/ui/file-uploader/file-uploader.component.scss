@@ -43,7 +43,6 @@
 	}
 
 	&__control {
-		color: $link-color;
 		box-shadow: none;
 		cursor: pointer;
 
@@ -61,4 +60,3 @@
 		z-index: $zindex-drop-zone;
 	}
 }
-

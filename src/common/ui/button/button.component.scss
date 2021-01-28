@@ -327,11 +327,11 @@
 			font-size: $icon-size-small-px;
 
 			&--left {
-				padding-left: ( $spacer / 3 );
+				margin-left: ( $spacer / 3 );
 			}
 
 			&--right {
-				padding-right: ( $spacer / 3 );
+				margin-right: ( $spacer / 3 );
 			}
 		}
 	}
@@ -343,11 +343,11 @@
 
 		.btn__icon {
 			&--left {
-				padding-left: ( $spacer * 2 );
+				margin-left: ( $spacer * 2 );
 			}
 
 			&--right {
-				padding-right: ( $spacer * 2 );
+				margin-right: ( $spacer * 2 );
 			}
 		}
 	}
@@ -385,7 +385,7 @@
 			}
 
 			&--right {
-				padding-right: 0;
+				margin-right: 0;
 			}
 		}
 	}
@@ -414,7 +414,7 @@
 			left: 10px;
 
 			& + .btn__text {
-				padding-left: ( $spacer / 2 );
+				margin-left: ( $spacer / 2 );
 			}
 		}
 
@@ -422,7 +422,7 @@
 			right: 10px;
 
 			& + .btn__text {
-				padding-right: ( $spacer / 2 );
+				margin-right: ( $spacer / 2 );
 			}
 		}
 
@@ -436,12 +436,12 @@
 	&.btn--icon-right {
 		display: flex;
 		flex-direction: row-reverse;
-		padding-right: ( $spacer * 2 );
+		margin-right: ( $spacer * 2 );
 
 		.btn__icon {
-			position: initial;
-			padding-left: ( $spacer / 2 );
-			padding-right: 0;
+			position: static;
+			margin-left: ( $spacer / 2 );
+			margin-right: 0;
 		}
 	}
 

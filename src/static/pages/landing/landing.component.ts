@@ -19,15 +19,15 @@ import { CONSTS } from 'src/app/app.constants';
 import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
 import { configSupplier } from 'src/static/config/suppliers.config';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
+import { FileUploader } from 'src/third-sides/file-upload';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { ICardData } from 'src/common/ui/card/models/data.model';
 import {
     IFieldError,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
 import { ISupplierLogo } from 'src/common/ui/supplier/model/supplier.model';
 import { playVideo } from 'src/common/utils';
-import {FileUploader} from '../../../third-sides/file-upload';
-import {ICardData} from '../../../common/ui/card/models/data.model';
 
 @Component({
     selector: 'lnd-landing-page',
