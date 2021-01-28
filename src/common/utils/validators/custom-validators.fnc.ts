@@ -464,7 +464,7 @@ export class CustomValidators {
             }
 
             return {
-                [nameOfError]: plainError ? true : {max, actual: control.value},
+                [nameOfError]: plainError ? true : {[nameOfError]: nameOfError, actual: control.value},
             };
         };
     }
