@@ -71,7 +71,6 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
         private supplyService: SupplyService,
     ) {
         super();
-        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_SIX, this.authService.hashedUserId);
     }
 
     ngOnInit () {
