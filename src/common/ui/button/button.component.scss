@@ -436,7 +436,6 @@
 	&.btn--icon-right {
 		display: flex;
 		flex-direction: row-reverse;
-		margin-right: ( $spacer * 2 );
 
 		.btn__icon {
 			position: static;
