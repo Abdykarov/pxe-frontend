@@ -7,6 +7,19 @@ export interface IHelpSection {
     title: string;
 }
 
+export interface IAboutUs {
+    title: string;
+    buttonText: string;
+    chatText: string;
+    bigText: string;
+    description: string;
+}
+
+export interface IiWantToSeeTheBestOffers {
+    buttonText: string;
+    title: string;
+}
+
 export interface ISteps {
     title: string;
     description: string;
@@ -44,5 +57,8 @@ export interface ILandingPage {
     helpSection: IHelpSection;
     howItWorksSection: IHowItWorksSection;
     bestPricesInTheWorldSection: IBestPricesInTheWorldSection;
+    iWantToSeeTheBestOffers: IiWantToSeeTheBestOffers;
+    aboutUs: IAboutUs;
     seo: ISeo;
+    metaGoogleSiteVerification: string;
 }

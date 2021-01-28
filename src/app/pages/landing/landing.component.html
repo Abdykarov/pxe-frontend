@@ -176,7 +176,7 @@
                 <div class="mb-6 col-md-4 offset-md-1 mb-md-0 col-xl-3 offset-xl-2">
                     <span class="info-flag">
                         <img class="info-flag__img d-block" src="/assets/images/layout/logo-pxe-white.svg" alt="logo pxe" title="pxe">
-                        <span class="text-white">Komoditní burza energií</span>
+                        <span class="text-white">{{landingPage.aboutUs.chatText}}</span>
                         <svg width="20px" height="17px" viewBox="0 0 20 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="info-flag__beak">
                             <g id="Landing-page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                 <g id="Video-LP-fallback" transform="translate(-1024.000000, -4326.000000)" fill="#7355A6"><path d="M1024,4326 L1041,4326 L1041,4338.17157 C1041,4339.27614 1040.10457,4340.17157 1039,4340.17157 C1038.46957,4340.17157 1037.96086,4339.96086 1037.58579,4339.58579 L1024,4326 L1024,4326 Z" id="Rectangle-Copy-12" transform="translate(1032.500000, 4334.500000) scale(-1, 1) translate(-1032.500000, -4334.500000) "></path></g>
@@ -187,13 +187,11 @@
                 <div class="mb-6 col-md-4 offset-md-1 mb-md-5 col-xl-6 mb-xl-6">
                     <div class="row">
                         <div class="col-12 mb-6">
-                            <h2 class="h4--public text-white">O nás</h2>
-                            <h3 class="h2--public text-white mb-3 mb-xl-6">PXE — jsme burza. Elektřinu a plyn prodáváme již více jak 10 let.</h3>
-                            <p class="text-white">Na českém trhu poskytovatelů energií se opravdu vyznáme. Již několik let velkoodběratelé (firmy, města, obce) využívají naší velkoobchodní aplikaci PARC.
-                                Její mladší sestra - aplikace parc4u teď nabízí stejné výhody i domácnostem a maloodběratelům. Přitom vás ochráníme před nevýhodnými
-                                podmínkami a nepoctivými prodejci - energošmejdy.</p>
+                            <h2 class="h4--public text-white">{{landingPage.aboutUs.title}}</h2>
+                            <h3 class="h2--public text-white mb-3 mb-xl-6">{{landingPage.aboutUs.bigText}}</h3>
+                            <p class="text-white">{{landingPage.aboutUs.description}}</p>
                             <lnd-button
-                                label="Chci vidět nabídky"
+                                [label]="landingPage.aboutUs.buttonText"
                                 type="gradient-primary"
                                 customClass="btn-public btn--icon-right"
                                 icon="icon--arrow-right"
@@ -243,9 +241,9 @@
         <div class="container-fluid container-fluid--max-width">
             <div class="row no-gutters">
                 <div class="col-12 col-md-8 offset-md-2 text-center">
-                    <h2 class="h2--public text-white">Chci každý rok tu nejlepší nabídku s dobrou cenou, ale&nbsp;nechci se starat o převody smluv.</h2>
+                    <h2 class="h2--public text-white">{{landingPage.iWantToSeeTheBestOffers.title}}</h2>
                     <lnd-button
-                        label="Chci vidět nabídky"
+                        [label]="landingPage.iWantToSeeTheBestOffers.buttonText"
                         type="gradient-primary"
                         customClass="btn-public btn--icon-right"
                         icon="icon--arrow-right"

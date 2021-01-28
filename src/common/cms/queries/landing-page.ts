@@ -65,6 +65,22 @@ export const getLandingPageQuery = gql`
           seo {
             ...seoFragment
           }
+          aboutUs {
+            flatData {
+              title,
+              buttonText,
+              chatText,
+              bigText,
+              description
+            }
+          }
+          iWantToSeeTheBestOffers {
+            flatData {
+              buttonText,
+              title
+            }
+          }
+          metaGoogleSiteVerification
         },
       }
     }

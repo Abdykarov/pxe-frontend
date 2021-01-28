@@ -88,7 +88,6 @@ import { ValuesPipe } from './values/values.pipe';
     ],
     providers: [
         AccountNumberPipe,
-        AccordionBenefitsPipe,
         BestPricesInTheWorldPipe,
         CeilPipe,
         ConsumptionPipe,
