@@ -128,8 +128,6 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
     ) {
         super(faqService, route);
 
-        console.log(this.landingPage);
-
         if (isPlatformBrowser) {
             this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
         }

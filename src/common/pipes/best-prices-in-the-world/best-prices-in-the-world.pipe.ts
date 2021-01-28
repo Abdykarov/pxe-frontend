@@ -11,8 +11,6 @@ import { ILandingPage } from 'src/common/cms/models/landing-page';
 })
 export class BestPricesInTheWorldPipe implements PipeTransform {
     transform(landingPage: ILandingPage, commodityType: CommodityType, property: string): any {
-        console.log('__');
-        console.log(arguments);
         return landingPage.bestPricesInTheWorldSection?.
             carouselDiscount[commodityType === CommodityType.POWER ? 0 : 1]?.[property];
     }
