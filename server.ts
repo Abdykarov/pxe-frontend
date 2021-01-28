@@ -167,10 +167,12 @@ server.get('/sitemap.xml', (req, res) => {
 server.post('/squidex', ({body}, res) => {
     const { operationName, variables } = body;
     const cacheKey = getMCacheKeySquidex(operationName + JSON.stringify(variables));
-    const data = mCache.get(cacheKey);
+    const data = config.production ? mCache.get(cacheKey) : false;
     if (!data) {
         request(queryRequest(JSON.stringify(body)), (err, requestRes, responseBody) => {
-            mCache.put(cacheKey, responseBody);
+            if (config.production) {
+                mCache.put(cacheKey, responseBody);
+            }
             return res.send(responseBody);
         });
     } else {
@@ -190,7 +192,7 @@ server.get('*', (req, res, next) => {
     }
 
     const cacheKey = getMCacheKeyPage(req.originalUrl);
-    const cached = mCache.get(cacheKey);
+    const cached = config.production ? mCache.get(cacheKey) : false;
 
     if ( cached) {
         return res.send(cached);
@@ -209,7 +211,9 @@ server.get('*', (req, res, next) => {
                 },
             ],
         }, (err, html) => {
-            mCache.put(cacheKey, html);
+            if (config.production) {
+                mCache.put(cacheKey, html);
+            }
             return res.send(html);
         });
     }
