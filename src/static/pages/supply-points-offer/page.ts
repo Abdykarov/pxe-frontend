@@ -2,13 +2,16 @@ import { Component } from '@angular/core';
 
 import { IOffer } from 'src/common/graphql/models/offer.model';
 import {
+    IQuestion,
+    Tag,
+} from 'src/app/services/model/faq.model';
+import {
     offerConfig1,
     offerConfig2,
     offerConfig3,
 } from './config';
 import { getConfigStepper } from 'src/common/utils';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
-import {IQuestion, Tag} from '../../../app/services/model/faq.model';
 
 @Component({
     templateUrl: './page.html',
