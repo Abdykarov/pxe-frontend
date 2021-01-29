@@ -100,6 +100,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                                     quantity: 1,
                                 }],
                             },
+                            'userID': this.authService?.hashedUserId,
                         },
                     });
 
