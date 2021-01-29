@@ -144,6 +144,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                                     },
                                 },
                             },
+                            'userID': this.authService?.hashedUserId,
                         });
                         this.checkoutSent = true;
                     }
