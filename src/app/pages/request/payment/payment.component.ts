@@ -100,8 +100,8 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                                     quantity: 1,
                                 }],
                             },
-                            'userID': this.authService?.hashedUserId,
                         },
+                        'userID': this.authService?.hashedUserId,
                     });
 
                     this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.WAITING_FOR_PAYMENT);
