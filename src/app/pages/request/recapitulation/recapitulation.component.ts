@@ -124,6 +124,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                                         }],
                                     },
                                 },
+                                'userID': this.authService?.hashedUserId,
                             });
                             this.checkoutSent = true;
                         }

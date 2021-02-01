@@ -71,7 +71,6 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
         private supplyService: SupplyService,
     ) {
         super();
-        this.gtmService.loadFormEvent(GTM_CONSTS.LABELS.STEP_SIX, this.authService.hashedUserId);
     }
 
     ngOnInit () {
@@ -102,6 +101,7 @@ export class PaymentComponent extends AbstractComponent implements OnInit {
                                 }],
                             },
                         },
+                        'userID': this.authService?.hashedUserId,
                     });
 
                     this.navigateRequestService.checkCorrectStep(this.supplyPoint, ProgressStatus.WAITING_FOR_PAYMENT);
