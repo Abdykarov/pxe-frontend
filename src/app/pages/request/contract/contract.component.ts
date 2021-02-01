@@ -84,6 +84,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
         }
     }
 
+    public checkoutSent = false;
     public commodityType = CommodityType;
     public configStepper = getConfigStepper(this.ACTUAL_PROGRESS_STATUS);
     public documentLoading = false;
@@ -133,16 +134,20 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                 switchMap((supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
 
-                    this.gtmService.pushEvent({
-                        event: GTM_CONSTS.EVENTS.CHECKOUT,
-                        ecommerce: {
-                            checkout: {
-                                actionField: {
-                                    step: 2,
+                    if (!this.checkoutSent) {
+                        this.gtmService.pushEvent({
+                            event: GTM_CONSTS.EVENTS.CHECKOUT,
+                            ecommerce: {
+                                checkout: {
+                                    actionField: {
+                                        step: 2,
+                                    },
                                 },
                             },
-                        },
-                    });
+                            'userID': this.authService?.hashedUserId,
+                        });
+                        this.checkoutSent = true;
+                    }
 
                     const documentTypeInformation$ = this.supplyPoint.subject.code === this.subjectType.SUBJECT_TYPE_INDIVIDUAL ?
                         this.documentService.getDocument(this.supplyPoint.contract.contractId, this.documentType.INFORMATION)
