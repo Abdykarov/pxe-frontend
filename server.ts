@@ -34,13 +34,16 @@ const win = createWindow(template);
 
 // create configuration
 const configJs = readFileSync(join(DIST_FOLDER, 'app', 'assets', 'configurations', 'config.js')).toString();
+console.log('___');
+console.log(configJs);
 const configString = configJs.substring(
     configJs.indexOf('= ') + 1,
     configJs.indexOf(';'),
 );
 const config = JSON.parse(configString);
+const plainConfig = config.config;
 win['angularDevstack'] = {};
-win['angularDevstack']['config'] = config.config;
+win['angularDevstack']['config'] = plainConfig;
 
 // create global variables
 global['window'] = win;
@@ -167,10 +170,10 @@ server.get('/sitemap.xml', (req, res) => {
 server.post('/squidex', ({body}, res) => {
     const { operationName, variables } = body;
     const cacheKey = getMCacheKeySquidex(operationName + JSON.stringify(variables));
-    const data = config.production ? mCache.get(cacheKey) : false;
+    const data = plainConfig.cacheSSR ? mCache.get(cacheKey) : false;
     if (!data) {
         request(queryRequest(JSON.stringify(body)), (err, requestRes, responseBody) => {
-            if (config.production) {
+            if (plainConfig.cacheSSR) {
                 mCache.put(cacheKey, responseBody);
             }
             return res.send(responseBody);
@@ -185,14 +188,13 @@ server.get('*.*', express.static(join(DIST_FOLDER, 'app')));
 
 // All routes are rendered as server side routes use the Universal engine
 server.get('*', (req, res, next) => {
-
     // Catch secured routes as normal client side app
     if (req.originalUrl.indexOf('/secured') === 0) {
         return next();
     }
 
     const cacheKey = getMCacheKeyPage(req.originalUrl);
-    const cached = config.production ? mCache.get(cacheKey) : false;
+    const cached = plainConfig.cacheSSR ? mCache.get(cacheKey) : false;
 
     if ( cached) {
         return res.send(cached);
@@ -211,7 +213,7 @@ server.get('*', (req, res, next) => {
                 },
             ],
         }, (err, html) => {
-            if (config.production) {
+            if (plainConfig.cacheSSR) {
                 mCache.put(cacheKey, html);
             }
             return res.send(html);
@@ -221,6 +223,7 @@ server.get('*', (req, res, next) => {
 
 // All routes (without server side routes) are send as normal client side app
 server.get('*', (req, res) => {
+    console.log('REQUEST');
     return res.sendFile(join(APP_FOLDER, 'index.html'));
 });
 
