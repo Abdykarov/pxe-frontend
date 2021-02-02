@@ -42,11 +42,15 @@
     ></lnd-form-field>
     <div [class.text-center]="isSignUp">
         <lnd-button
-            type="primary"
+            type="gradient-primary"
+            class="w-100"
+            customClass="btn-public btn--icon-right w-100"
             [submit]="true"
             (action)="submitForm($event);sAnalyticsService.sFormClick($event);"
             [isDisabled]="formLoading"
-            [label]="isSignUp ? 'Založit účet' : 'Odeslat'">
+            [label]="isSignUp ? 'Založit účet' : 'Odeslat'"
+            icon="icon--arrow-right"
+            iconPosition="right">
         </lnd-button>
     </div>
 </form>
