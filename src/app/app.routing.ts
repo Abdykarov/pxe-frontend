@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import {
-    PreloadAllModules,
     Routes,
     RouterModule,
 } from '@angular/router';
@@ -40,7 +39,6 @@ const routes: Routes = [
     imports: [
         RouterModule.forRoot(routes, {
         enableTracing: false,
-        preloadingStrategy: PreloadAllModules,
         initialNavigation: 'enabled',
         scrollPositionRestoration: 'top',
     }),
