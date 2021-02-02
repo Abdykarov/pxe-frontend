@@ -127,7 +127,6 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super(faqService, route);
-console.log('____CONSTRUKTOR____');
         if (isPlatformBrowser) {
             this.isMoreThanMdResolution = window.innerWidth >= CONSTS.MD_RESOLUTION;
         }
