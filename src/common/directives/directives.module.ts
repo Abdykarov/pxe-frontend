@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 
+import { DisplayNoneOnFirefoxDirective } from './display-none-on-firefox/display-none-on-firefox.directive';
 import { FirstTimeInViewDirective } from './first-time-in-view/first-time-in-view.directive';
 import { MaskDateDirective } from './datepicker/datepicker.directive';
 import { OffClickDirective } from './off-click/off-click.directive';
@@ -15,6 +16,7 @@ import { SFormDirective } from 'src/common/directives/s-analytics/s-form.directi
         SBiometricsDirective,
         SFormDirective,
         FirstTimeInViewDirective,
+        DisplayNoneOnFirefoxDirective,
     ],
     exports: [
         MaskDateDirective,
@@ -23,6 +25,7 @@ import { SFormDirective } from 'src/common/directives/s-analytics/s-form.directi
         SBiometricsDirective,
         SFormDirective,
         FirstTimeInViewDirective,
+        DisplayNoneOnFirefoxDirective,
     ],
 })
 export class DirectivesModule {}
