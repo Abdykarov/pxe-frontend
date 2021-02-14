@@ -9,6 +9,7 @@ export interface IShowModal {
         size?: string,
         [key: string]: any;
     };
+    withoutScroll?: boolean;
     [key: string]: any;
 }
 

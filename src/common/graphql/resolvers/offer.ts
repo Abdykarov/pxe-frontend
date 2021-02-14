@@ -5,6 +5,9 @@ export const resolvers = {
         marked(_, variables, {cache}) {
             return false;
         },
+        isLastUpdated(_, variables, {cache}) {
+            return false;
+        },
     },
 };
 

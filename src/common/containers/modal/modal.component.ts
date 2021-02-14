@@ -20,6 +20,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { AddModalDirective } from './add-modal.directive';
 import { ModalService } from './modal.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
+import {IShowModal} from './modals/model/modal.model';
 
 @Component({
     selector: 'lnd-modal-dynamic',
@@ -96,7 +97,7 @@ export class ModalComponent extends AbstractComponent {
         });
     }
 
-    private closeModal = (modal, val = null, offsetY = null) => {
+    private closeModal = (modal: IShowModal, val = null, offsetY = null) => {
         this.modalLoaderService.setCloseModalData({
             modalType: modal.modalType,
             confirmed: val,
@@ -109,7 +110,9 @@ export class ModalComponent extends AbstractComponent {
             )
             .subscribe();
         if (offsetY) {
-            setTimeout(() => window.scrollBy(0, offsetY));
+            if (!modal.withoutScroll) {
+                setTimeout(() => window.scrollBy(0, offsetY));
+            }
         }
     }
 
