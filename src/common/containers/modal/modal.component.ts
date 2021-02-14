@@ -18,9 +18,9 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AddModalDirective } from './add-modal.directive';
+import { IShowModal } from './modals/model/modal.model';
 import { ModalService } from './modal.service';
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
-import {IShowModal} from './modals/model/modal.model';
 
 @Component({
     selector: 'lnd-modal-dynamic',

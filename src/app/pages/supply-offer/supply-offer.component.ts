@@ -110,13 +110,11 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                     status: IOfferStatus.ACTIVE},
                 ),
             )(data.findSupplierOffers)),
-            map((offers) => {
-                return offers.sort(function(a, b) {
-                    if (a.name.toLowerCase() < b.name.toLowerCase()) { return -1; }
-                    if (a.name.toLowerCase() > b.name.toLowerCase()) { return 1; }
-                    return 0;
-                });
-            }),
+            map((offers) => offers.sort(function(first, second) {
+                if (first?.name?.toLowerCase() < second?.name?.toLowerCase()) { return -1; }
+                if (first?.name?.toLowerCase() > second?.name?.toLowerCase()) { return 1; }
+                return 0;
+            })),
         );
 
     constructor(
