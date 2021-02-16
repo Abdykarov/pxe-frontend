@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
 import {
     ActivatedRouteSnapshot,
     CanActivateChild,
     RouterStateSnapshot,
     UrlTree,
 } from '@angular/router';
+import { Injectable } from '@angular/core';
 
 import * as R from 'ramda';
 import { Observable } from 'rxjs';
 
 import { AuthService } from 'src/app/services/auth.service';
+import { IUserTypes } from '../services/model/auth.model';
 
 @Injectable({
     providedIn: 'root',
@@ -31,11 +32,8 @@ export class AuthGuard implements CanActivateChild {
             return false;
         }
 
-        if (!R.isNil(childRoute.data.isSupplier)) {
-            const currentUser = this.authService.currentUserValue;
-            return currentUser && currentUser.supplier === childRoute.data.isSupplier;
-        }
-
-        return true;
+        const routerUserType = childRoute.data;
+        const currentUserType = this.authService.currentUserValue.type;
+        return false;
     }
 }

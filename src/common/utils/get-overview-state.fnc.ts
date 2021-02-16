@@ -7,7 +7,7 @@ import { CONSTS } from 'src/app/app.constants';
 import {
     OverviewState,
     OverviewStateWrapper,
-} from 'src/app/pages/requests-overview/requests-overview.model';
+} from 'src/app/pages/consumers/requests-overview/requests-overview.model';
 
 export const isSupplyPointInRequestState = (supplyPoint: ISupplyPoint): boolean =>
     supplyPoint.contract === null || supplyPoint.contract.contractStatus === ContractStatus.NOT_CONCLUDED;

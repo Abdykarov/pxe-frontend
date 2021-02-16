@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 
 import { InfoBannerModule } from 'src/common/ui/info-banner/info-banner.module';
+import { IUserTypes } from 'src/app/services/model/auth.model';
 import {
     LoginType,
     SignType,
@@ -30,7 +31,7 @@ export const supplierConcludedContractsEmptyRoutes: Routes = [
         data: {
             isSimpleFooter: false,
             isPublic: false,
-            isSupplier: true,
+            userType: IUserTypes.SUPPLIER,
             loginType: LoginType.NONE,
             signUpType: SignType.NONE,
             hideLeftNavigation: true,

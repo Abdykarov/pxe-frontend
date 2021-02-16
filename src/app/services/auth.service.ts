@@ -1,54 +1,24 @@
-import {
-    Inject,
-    Injectable,
-    PLATFORM_ID,
-} from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import {
-    HttpClient,
-    HttpHeaders,
-} from '@angular/common/http';
-import { Router } from '@angular/router';
+import {Inject, Injectable, PLATFORM_ID, } from '@angular/core';
+import {isPlatformBrowser} from '@angular/common';
+import {HttpClient, HttpHeaders, } from '@angular/common/http';
+import {Router} from '@angular/router';
 
 import * as CryptoJS from 'crypto-js';
+import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
-import {
-    BehaviorSubject,
-    interval,
-    Observable,
-    of,
-    Subject,
-} from 'rxjs';
-import {
-    catchError,
-    filter,
-    first,
-    map,
-    repeatWhen,
-    switchMap,
-    take,
-    takeUntil,
-    tap,
-} from 'rxjs/operators';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import {BehaviorSubject, interval, Observable, of, Subject, } from 'rxjs';
+import {catchError, filter, first, map, repeatWhen, switchMap, take, takeUntil, tap, } from 'rxjs/operators';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
-import {
-    CONSTS,
-    ROUTES,
-} from 'src/app/app.constants';
-import { CookiesService } from './cookies.service';
-import { environment } from 'src/environments/environment';
-import { GTMService } from './gtm.service';
-import {
-    IJwtPayload,
-    ILoginRequest,
-    ILoginResponse,
-    IUserRoles,
-} from './model/auth.model';
-import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
-import { IStateRouter } from 'src/app/pages/logout/logout-page.model';
-import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
-import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';
+import {CONSTS, ROUTES, } from 'src/app/app.constants';
+import {CookiesService} from './cookies.service';
+import {environment} from 'src/environments/environment';
+import {GTMService} from './gtm.service';
+import {IJwtPayload, ILoginRequest, ILoginResponse, IUserRoles, IUserTypes, } from './model/auth.model';
+import {ILogoutRequired} from 'src/app/services/model/logout-required.model';
+import {IStateRouter} from 'src/app/pages/public/logout/logout-page.model';
+import {OnlyOneTabActiveService} from 'src/app/services/only-one-tab-active.service';
+import {OnlyOneTabActiveState} from 'src/app/services/model/only-one-tab-active.model';
 
 @Injectable({
     providedIn: 'root',
@@ -280,7 +250,7 @@ export class AuthService {
                 const jwtHelper = new JwtHelperService();
                 jwtPayload = jwtHelper.decodeToken(token);
                 const { role } = jwtPayload;
-                jwtPayload.supplier = role.indexOf(IUserRoles.PARC_SUPPLIER_P4R) !== -1;
+                jwtPayload.type = this.getUserType(role);
                 jwtPayload.needSmsConfirm = role.indexOf(IUserRoles.NEEDS_SMS_CONFIRMATION) !== -1;
             } catch (e) {
                 this.token = null;
@@ -290,6 +260,12 @@ export class AuthService {
         }
         return jwtPayload;
     }
+
+    private getUserType = (roles: string[]): IUserTypes => R.cond([
+        [(rolesParam) => R.indexOf(IUserRoles.PARC_SUPPLIER_P4R)(roles) !== -1, R.always(IUserTypes.SUPPLIER)],
+        [(rolesParam) => R.indexOf(IUserRoles.PARC_CONSUMER_P_4_R)(roles) !== -1, R.always(IUserTypes.CONSUMER)],
+        [(rolesParam) => R.indexOf(IUserRoles.PARC_MANAGER)(roles) !== -1, R.always(IUserTypes.ADMIN)],
+    ])(roles)
 
     public getAuthorizationHeaders = (contentType: string = null, accept: string = '*/*'): HttpHeaders => {
         const token = this.getToken();
@@ -301,6 +277,8 @@ export class AuthService {
         });
     }
 
+    public isCurrentUser = (userType: IUserTypes) => this.currentUserValue && this.currentUserValue.type === userType;
+
     public homeRedirect = (forceRedirectToLastUrl = false, logoutRequired: ILogoutRequired = null) => {
         if (forceRedirectToLastUrl) {
             const lastUrl = localStorage.getItem(CONSTS.STORAGE_HELPERS.LAST_URL);
@@ -309,9 +287,10 @@ export class AuthService {
                 return;
             }
         }
+        // TODO ADMIN!!!
         if (!this.isLogged()) {
             this.router.navigate([CONSTS.PATHS.EMPTY]);
-        } else if (this.currentUserValue.supplier) {
+        } else if (this.isCurrentUser(IUserTypes.SUPPLIER)) {
             this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER_POWER], {
                 state: {
                     logoutRequired,

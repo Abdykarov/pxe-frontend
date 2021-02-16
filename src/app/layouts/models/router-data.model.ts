@@ -1,10 +1,12 @@
+import { IUserTypes } from 'src/app/services/model/auth.model';
+
 export interface ISettings {
     isPublic: boolean;
     isPublicEmptyPage?: boolean;
     isLandingPage: boolean;
     isSimpleFooter: boolean;
     isStatic: boolean;
-    isSupplier?: boolean;
+    userType?: IUserTypes;
     loginType: LoginType;
     hideLeftNavigation?: boolean;
     hideHamburger?: boolean;

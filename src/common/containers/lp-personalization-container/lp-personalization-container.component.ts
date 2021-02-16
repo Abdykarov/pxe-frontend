@@ -17,7 +17,7 @@ import { CONSTS } from 'src/app/app.constants';
 import { IPersonalization } from './models/models';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { LpPersonalizationService } from './services/lp-personalization.service';
-import { lpVideoModalConfig } from 'src/app/pages/landing/landing.config';
+import { lpVideoModalConfig } from 'src/app/pages/public/landing/landing.config';
 import { personalizationOptions } from './lp-personalization-container.config';
 
 @Component({

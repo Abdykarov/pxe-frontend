@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {lpVideoModalConfig} from '../../../../app/pages/landing/landing.config';
+import {lpVideoModalConfig} from '../../../../app/pages/public/landing/landing.config';
 import {ModalService} from '../../../containers/modal/modal.service';
 
 @Component({

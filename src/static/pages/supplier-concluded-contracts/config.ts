@@ -9,7 +9,7 @@ import {
     IContractWithNameAndSupplyPoint,
     IPaginatedContractsWithNameAndSupplyPoint,
 } from 'src/common/graphql/models/suppplier.model';
-import { IPaginationConfig } from 'src/app/pages/supplier-concluded-contracts/supplier-concluded-contracts.model';
+import { IPaginationConfig } from 'src/app/pages/suppliers/concluded-contracts/concluded-contracts.model';
 
 @Injectable({
     providedIn: 'root',

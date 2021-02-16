@@ -160,9 +160,13 @@ export class SecuredLayoutComponent extends AbstractLayoutComponent implements O
 
     ngOnInit() {
         super.ngOnInit();
+
+        console.log('SECURED LAYOUT');
+        console.log('__11__');
+
         this.renderer.addClass(document.body, 'secured');
-        const currentUser = this.authService.currentUserValue;
-        this.navigationMenuUserActions = currentUser && currentUser.supplier ? navigationMenuSuppliersActions : navigationMenuUserActions;
+        const userType = this.authService.currentUserValue.type;
+        this.navigationMenuUserActions = this.navigationService.MENU_BY_USER_TYPE_MAPPING[userType]?.navigationMenuActions;
     }
 
     ngOnDestroy() {

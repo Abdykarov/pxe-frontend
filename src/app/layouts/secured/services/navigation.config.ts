@@ -77,6 +77,36 @@ export const navigationMenuUsers: INavigationMenu = [
 
 export const navigationMenuSuppliers: INavigationMenu = [];
 
+export const navigationMenuAdmins: INavigationMenu = [
+    {
+        'class': '',
+        'url': ROUTES.ROUTER_ASK_FOR_OFFER_ACCEPTED,
+        'label': 'Přijaté',
+        'icon': 'notice-board',
+        'type': INavigationItemType.NORMAL,
+        'children': [],
+        __typename : 'secured',
+    },
+    {
+        'class': '',
+        'url': ROUTES.ROUTER_ASK_FOR_OFFER_UNFINISHED,
+        'label': 'Rozpracované',
+        'icon': 'notice-board',
+        'type': INavigationItemType.NORMAL,
+        'children': [],
+        __typename : 'secured',
+    },
+    {
+        'class': '',
+        'url': ROUTES.ROUTER_ASK_FOR_OFFER_PROCESSED,
+        'label': 'Uzavřené',
+        'icon': 'notice-board',
+        'type': INavigationItemType.NORMAL,
+        'children': [],
+        __typename : 'secured',
+    },
+];
+
 export const navigationMenuUserActions: INavigationMenu = [
     {
         'class': 'd-lg-none',
@@ -138,6 +168,18 @@ export const navigationMenuSuppliersActions: INavigationMenu = [
     },
     {
         'class': 'link--logout',
+        'label': 'Odhlášení',
+        'type': INavigationItemType.NORMAL,
+        'icon': 'power',
+        'url' : `/${CONSTS.PATHS.LOGOUT}`,
+        'children': [],
+        __typename: 'logout',
+    },
+];
+
+export const navigationMenuAdminsActions: INavigationMenu = [
+    {
+        'class': 'navigation-main__item--second link--logout',
         'label': 'Odhlášení',
         'type': INavigationItemType.NORMAL,
         'icon': 'power',
