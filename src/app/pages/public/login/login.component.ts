@@ -5,7 +5,8 @@ import {
 } from '@angular/router';
 import {
     ChangeDetectorRef,
-    Component, HostListener,
+    Component,
+    HostListener,
     Inject,
     OnDestroy,
     PLATFORM_ID,
