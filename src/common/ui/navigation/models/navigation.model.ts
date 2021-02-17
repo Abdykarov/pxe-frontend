@@ -1,6 +1,5 @@
 import { INavigationItemType } from 'src/app/app.constants';
-import {IUserTypes} from '../../../../app/services/model/auth.model';
-import {ITableColumnConfig} from '../../table/models/table.model';
+import { IUserTypes } from 'src/app/services/model/auth.model';
 
 export interface INavigationConfig extends Array<INavigationMenu> {}
 

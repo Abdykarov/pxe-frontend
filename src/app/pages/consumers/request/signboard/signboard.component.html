@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1 text-center mb-4">
             <img
-                src="/src/assets/images/illustrations/sign.svg"
+                src="/assets/images/illustrations/sign.svg"
                 class="mb-2"
                 alt="sign">
             <h2 *ngIf="showWelcome"
@@ -40,13 +40,13 @@
                         [class.cursor-pointer]="isVideoPlaying"
                         (click)="isVideoPlaying && pause($event)"
                         class="w-100"
-                        poster="/src/assets/images/landing-page/picture-fallback.jpg"
+                        poster="/assets/images/landing-page/picture-fallback.jpg"
                         [muted]="false"
                         (pause)="cd.detectChanges()"
                         (play)="showTextUnderVideo = false;cd.detectChanges()"
                         (ended)="videoEnded($event)"
                         preload="none">
-                        <source src="/src/assets/images/signboard/create_om_tutorial.mp4" type="video/mp4">
+                        <source src="/assets/images/signboard/create_om_tutorial.mp4" type="video/mp4">
                         Váš prohlížeč nepodporuje zobrazení videa
                     </video>
                     <div class="video__control d-md-none" lndDisplayNoneOnFirefox>
