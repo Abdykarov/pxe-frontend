@@ -1,6 +1,7 @@
 import {
     ActivatedRouteSnapshot,
     CanActivateChild,
+    Router,
     RouterStateSnapshot,
     UrlTree,
 } from '@angular/router';
@@ -10,6 +11,7 @@ import * as R from 'ramda';
 import { Observable } from 'rxjs';
 
 import { AuthService } from 'src/app/services/auth.service';
+import { CONSTS } from '../app.constants';
 
 @Injectable({
     providedIn: 'root',
@@ -18,6 +20,7 @@ export class AuthGuard implements CanActivateChild {
 
     constructor(
         private authService: AuthService,
+        private router: Router,
     ) {}
 
     canActivateChild(
@@ -27,13 +30,22 @@ export class AuthGuard implements CanActivateChild {
         this.authService.checkLogin();
 
         if (!this.authService.isLogged()) {
-            this.authService.logoutForced();
+            this.router.navigate([CONSTS.PATHS.LOGIN], {
+                state: {
+                    urlToRedirectAfterLogin: state.url,
+                },
+            });
             return false;
         }
-        if (!R.isNil(childRoute.data.type)) {
-            const routerUserType = childRoute.data.type;
+
+        if (!R.isNil(childRoute.data.userType)) {
+            const routerUserType = childRoute.data.userType;
             const currentUserType = this.authService.currentUserValue.type;
-            return routerUserType === currentUserType;
+            const isAllowedType = routerUserType === currentUserType;
+            if (!isAllowedType) {
+                this.authService.homeRedirect();
+                return false;
+            }
         }
 
         return true;

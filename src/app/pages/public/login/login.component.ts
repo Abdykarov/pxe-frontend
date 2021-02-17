@@ -5,8 +5,9 @@ import {
 } from '@angular/router';
 import {
     ChangeDetectorRef,
-    Component,
+    Component, HostListener,
     Inject,
+    OnDestroy,
     PLATFORM_ID,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
@@ -56,7 +57,7 @@ import { UserService } from 'src/common/graphql/services/user.service';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent extends AbstractComponent {
+export class LoginComponent extends AbstractComponent implements OnDestroy {
     private cleanLogoutReasonBanner = false;
     public login = '';
     public formFieldsLogin = formFieldsLogin;
@@ -70,6 +71,12 @@ export class LoginComponent extends AbstractComponent {
     public reasonForLogoutUser = null;
     public state = ILoginState.LOGIN;
     public wasSentToPhone = false;
+    public urlToRedirectAfterLogin = null;
+
+    @HostListener('window:beforeunload', ['$event'])
+    removeReasonForLogoutUser($event) {
+        this.cookieService.remove(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
+    }
 
     constructor(
         private authService: AuthService,
@@ -87,6 +94,7 @@ export class LoginComponent extends AbstractComponent {
 
         if (isPlatformBrowser(this.platformId)) {
             this.reasonForLogoutUser = this.cookieService.get(CONSTS.STORAGE_HELPERS.REASON_FOR_LOGOUT_USER);
+            this.urlToRedirectAfterLogin = window.history.state.urlToRedirectAfterLogin;
         }
 
         this.titleService.setTitle(CONSTS.TITLES.LOGIN);
@@ -316,6 +324,11 @@ export class LoginComponent extends AbstractComponent {
                 showBanner: true,
                 ...extras.state,
             };
+        }
+
+        if (this.urlToRedirectAfterLogin) {
+            this.router.navigateByUrl(this.urlToRedirectAfterLogin, extras);
+            return;
         }
 
         if (loginResponse.landingPage === LANDING_PAGE.WAITING_FOR_PAYMENT) {
