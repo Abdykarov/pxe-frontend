@@ -72,6 +72,8 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
             .pipe(takeUntil(this.destroy$))
             .subscribe(event => {
                 if (event instanceof NavigationEnd) {
+                    console.log('ABSTR-LAYOUT');
+                    console.log(this.route);
                     this.isLogouting = event.urlAfterRedirects.indexOf(`/${this.CONSTS.PATHS.LOGOUT}`) !== -1;
 
                     if (
@@ -99,6 +101,7 @@ export abstract class AbstractLayoutComponent extends AbstractComponent implemen
 
                     this.sAnalyticsService.pageView();
                     this.settings = <ISettings>this.route.snapshot.firstChild.data;
+                    console.log(this.settings);
                     this.activeUrl = this.router.url;
                 }
             });

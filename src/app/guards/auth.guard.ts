@@ -10,7 +10,6 @@ import * as R from 'ramda';
 import { Observable } from 'rxjs';
 
 import { AuthService } from 'src/app/services/auth.service';
-import { IUserTypes } from '../services/model/auth.model';
 
 @Injectable({
     providedIn: 'root',
@@ -31,9 +30,12 @@ export class AuthGuard implements CanActivateChild {
             this.authService.logoutForced();
             return false;
         }
+        if (!R.isNil(childRoute.data.type)) {
+            const routerUserType = childRoute.data.type;
+            const currentUserType = this.authService.currentUserValue.type;
+            return routerUserType === currentUserType;
+        }
 
-        const routerUserType = childRoute.data;
-        const currentUserType = this.authService.currentUserValue.type;
-        return false;
+        return true;
     }
 }

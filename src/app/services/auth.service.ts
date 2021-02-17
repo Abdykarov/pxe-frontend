@@ -1,24 +1,55 @@
-import {Inject, Injectable, PLATFORM_ID, } from '@angular/core';
-import {isPlatformBrowser} from '@angular/common';
-import {HttpClient, HttpHeaders, } from '@angular/common/http';
-import {Router} from '@angular/router';
+import {
+    Inject,
+    Injectable,
+    PLATFORM_ID,
+} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import {
+    HttpClient,
+    HttpHeaders,
+} from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import * as CryptoJS from 'crypto-js';
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
-import {BehaviorSubject, interval, Observable, of, Subject, } from 'rxjs';
-import {catchError, filter, first, map, repeatWhen, switchMap, take, takeUntil, tap, } from 'rxjs/operators';
-import {JwtHelperService} from '@auth0/angular-jwt';
+import {
+    BehaviorSubject,
+    interval,
+    Observable,
+    of,
+    Subject,
+} from 'rxjs';
+import {
+    catchError,
+    filter,
+    first,
+    map,
+    repeatWhen,
+    switchMap,
+    take,
+    takeUntil,
+    tap,
+} from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
-import {CONSTS, ROUTES, } from 'src/app/app.constants';
-import {CookiesService} from './cookies.service';
-import {environment} from 'src/environments/environment';
-import {GTMService} from './gtm.service';
-import {IJwtPayload, ILoginRequest, ILoginResponse, IUserRoles, IUserTypes, } from './model/auth.model';
-import {ILogoutRequired} from 'src/app/services/model/logout-required.model';
-import {IStateRouter} from 'src/app/pages/public/logout/logout-page.model';
-import {OnlyOneTabActiveService} from 'src/app/services/only-one-tab-active.service';
-import {OnlyOneTabActiveState} from 'src/app/services/model/only-one-tab-active.model';
+import {
+    CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
+import { CookiesService } from './cookies.service';
+import { environment } from 'src/environments/environment';
+import { GTMService } from './gtm.service';
+import {
+    IJwtPayload,
+    ILoginRequest,
+    ILoginResponse,
+    IUserRoles, IUserTypes,
+} from './model/auth.model';
+import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
+import { IStateRouter } from 'src/app/pages/public/logout/logout-page.model';
+import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
+import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';
 
 @Injectable({
     providedIn: 'root',

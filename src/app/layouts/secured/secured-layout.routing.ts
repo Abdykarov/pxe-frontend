@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { CONSTS } from 'src/app/app.constants';
+import { IUserTypes } from 'src/app/services/model/auth.model';
 import {
     LoginType,
     SignType,
-} from '../models/router-data.model';
+} from 'src/app/layouts/models/router-data.model';
 import { SecuredLayoutComponent } from './secured-layout.component';
 import { RefreshTokenResolver } from 'src/app/resolvers/refresh-token.resolver';
-import {IUserTypes} from '../../services/model/auth.model';
 
 const routes = [
     {
