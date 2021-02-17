@@ -11,7 +11,6 @@ import {
     isPlatformBrowser,
 } from '@angular/common';
 import {
-    Event,
     NavigationEnd,
     Router,
 } from '@angular/router';
