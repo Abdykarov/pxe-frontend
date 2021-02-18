@@ -45,6 +45,9 @@ export class FaqService {
 
         combineLatest([question$, this.faqServiceCms.getFaqConfig()])
             .subscribe(([questions, faqConfig]) => {
+                console.log('___AHOJ___');
+                console.log(questions);
+                console.log(faqConfig);
                 this.faqConfigSubject$.next(<any>faqConfig);
                 this.questionsSubject$.next(<any>questions);
             });
