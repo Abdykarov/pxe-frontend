@@ -49,7 +49,7 @@
                         <source src="/assets/images/signboard/create_om_tutorial.mp4" type="video/mp4">
                         Váš prohlížeč nepodporuje zobrazení videa
                     </video>
-                    <div class="video__control d-md-none">
+                    <div class="video__control d-md-none" lndDisplayNoneOnFirefox>
                         <lnd-button
                             *ngIf="!isVideoPlaying"
                             type="icon"
@@ -61,7 +61,7 @@
                         </lnd-button>
                     </div>
                 </div>
-                <div class="video__text">
+                <div lndDisplayNoneOnFirefox class="video__text">
                     <div class="video__control d-none d-md-block">
                         <lnd-button
                             *ngIf="!isVideoPlaying && showTextUnderVideo"
