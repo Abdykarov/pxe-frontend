@@ -19,6 +19,7 @@ export class FaqPageComponent {
             type: Tag.SUPPLIER,
             url: 'supplier',
             label: 'Dodavatelé',
+            title: 'Otázky',
         },
         url: 'price-length',
         header: 'Opravdu budu mít vybranou cenu po celou dobu zvoleného období?',

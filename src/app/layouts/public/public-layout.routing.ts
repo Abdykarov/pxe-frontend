@@ -125,7 +125,7 @@ const routes = [
                 redirectTo: CONSTS.PATHS.PATTERNS_OF_CONTRACTS + '/',
             },
             {
-                path: CONSTS.PATHS.PATTERNS_OF_CONTRACTS + '/:subjectType/:commodityType',
+                path: CONSTS.PATHS.PATTERNS_OF_CONTRACTS + '/:subjectType',
                 loadChildren: () => import('../../pages/patterns-of-contracts/patterns-of-contracts.module').then(
                     m => m.PatternsOfContractsModule,
                 ),

@@ -19,6 +19,7 @@ export class FaqDetailPageComponent {
             type: Tag.GENERAL,
             url: 'general',
             label: 'Obecné',
+            title: 'Dodavatel',
         },
         url: 'price-length',
         header: 'Opravdu budu mít vybranou cenu po celou dobu zvoleného období?',

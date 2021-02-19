@@ -70,6 +70,7 @@ export const questions: IQuestion[] = [{
         type: Tag.SUPPLIER,
         url: 'supplier',
         label: 'Dodavatelé',
+        title: 'Časté otázky',
     },
     'url': 'future',
     'header': 'Jak chcete parc4u rozvíjet?',

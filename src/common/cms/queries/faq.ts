@@ -17,6 +17,7 @@ export const questionsQuery = gql`
               label
               type
               url
+              title
             }
           }
           header
@@ -30,9 +31,10 @@ export const faqConfigQuery = gql`
     query queryTagContents {
       queryTagContents {
         flatData {
-          type,
-          url,
-          label,
+          type
+          url
+          label
+          title
         }
       }
     }`;

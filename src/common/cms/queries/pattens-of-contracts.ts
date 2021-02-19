@@ -3,8 +3,8 @@ import gql from 'graphql-tag';
 import { seoFragment } from './seo';
 
 export const patternsOfContractsQuery = gql`
-query queryPatternsOfContractsContents {
-  queryPatternsOfContractsContents {
+query queryPatternsOfContractsContents($filter: String!) {
+  queryPatternsOfContractsContents (filter: $filter) {
     flatData {
       title,
       breadcrumbTitle,

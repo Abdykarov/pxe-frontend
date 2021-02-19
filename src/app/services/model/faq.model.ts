@@ -21,4 +21,5 @@ export interface ITagConfigItem {
     type: string | Tag;
     url: string;
     label: string;
+    title: string;
 }

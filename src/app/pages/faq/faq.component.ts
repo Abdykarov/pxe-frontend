@@ -21,7 +21,7 @@ import { IFaq } from 'src/common/cms/models/faq';
 })
 export class FaqComponent extends AbstractComponent {
     private readonly NUMBER_OF_SLASH_IN_DETAIL_IN_URL = 3;
-    public readonly faq: IFaq = this.route.snapshot.data.faq;
+    public faq: IFaq = this.route.snapshot.data.faq;
 
     public breadcrumbItemsSimple: IBreadcrumbItems = [
         {
@@ -42,6 +42,7 @@ export class FaqComponent extends AbstractComponent {
             .pipe(takeUntil(this.destroy$))
             .subscribe(event => {
                 if (event instanceof NavigationEnd) {
+                    this.faq = this.route.snapshot.data.faq;
                     const isDetail = (event.urlAfterRedirects.match(/\//g) || []).length === this.NUMBER_OF_SLASH_IN_DETAIL_IN_URL;
                     if (isDetail) {
                         this.breadcrumbItemsSimple[1].url = `/${CONSTS.PATHS.FAQ}`;

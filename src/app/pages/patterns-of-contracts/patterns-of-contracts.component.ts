@@ -31,8 +31,8 @@ import {
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { IPatternsOfContracts } from 'src/common/cms/models/patterns-of-contracts';
 import { IPdfSetting } from 'src/app/pages/patterns-of-contracts/models/patterns-of-contracts.model';
+import { ISeo } from 'src/common/cms/models/seo';
 import { PdfViewerComponent } from 'src/common/ui/pdf-viewer/pdf-viewer.component';
-import { ISeo } from '../../../common/cms/models/seo';
 
 @Component({
     selector: 'pxe-patterns-of-contracts',
@@ -74,7 +74,7 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
         private titleService: Title,
     ) {
         super();
-        const seo: ISeo = R.head(this.patternsOfContracts.seo);
+        const seo = R.head(this.patternsOfContracts.seo);
 
         this.titleService.setTitle(seo.title);
         this.metaService.updateTag({
@@ -94,7 +94,8 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
             )
             .subscribe(params => {
                 this.subjectType = params.subjectType;
-                this.commodityType = params.commodityType;
+                const tree = this.router.parseUrl(this.router.url);
+                this.commodityType = <CommodityTypesLowerCase>tree.fragment;
 
                 this.prepareActiveContract();
                 this.prepareFutureContracts();
@@ -131,7 +132,12 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
     }
 
     public navigateToCorrectUrl = () => {
-        this.router.navigate([`${CONSTS.PATHS.PATTERNS_OF_CONTRACTS}/${this.subjectType}/${this.commodityType}`]);
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+            this.router.navigate([`${CONSTS.PATHS.PATTERNS_OF_CONTRACTS}/${this.subjectType}`],
+                {
+                    fragment: this.commodityType,
+                }),
+        );
     }
 
     public downloadPdf = (sourceUrl: string, name: string) => {
