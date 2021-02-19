@@ -45,23 +45,26 @@
                      [class.col-md-6]="!isOwner"
                      [class.pr-md-6]="!isOwner">
                     <div class="supply-point-offer__value-box supply-point-offer__value-box--price mb-5">
-                        <span class="supply-point-offer__title-label">{{isOwner ? 'Váš stávající dodavatel' : 'Dodavatel'}}</span>
-                        <span class="
-                                supply-point-offer__title
-                                mb-0">
-                            <span class="text-break">{{supplyPointOffer.supplier?.name}}</span>
+                        <span class="supply-point-offer__title-label">
+                            {{isOwner ? 'Váš stávající dodavatel' : 'Dodavatel'}}
                             <lnd-tooltip
                                 *ngIf="question && (question | keyvalue)?.length"
                                 [actionTemplate]="tooltipBottom"
                                 [wrapperElement]="supplyPointOfferWrapper"
                                 direction="bottom"
+                                class="tooltip-supply-point-info-holder"
                                 customClass="ml-2 tooltip-supply-point-info">
                                 <div>{{question?.shortContent}}</div>
                                 <a [routerLink]="question.absoluteUrl"
-                                   class="link--white link--interactive-revert d-block mt-1">
+                                class="link--white link--interactive-revert d-block mt-1">
                                     Zobrazit více
                                 </a>
                             </lnd-tooltip>
+                        </span>
+                        <span class="
+                                supply-point-offer__title
+                                mb-0">
+                            <span class="text-break">{{supplyPointOffer.supplier?.name}}</span>
                         </span>
                     </div>
                 </div>
@@ -130,7 +133,7 @@
                                     {{benefit.name}}
                                 </div>
                                 <div class="col-md-auto">
-                                    <a [href]="benefit.url">Více info</a>
+                                    <a target="_blank" [href]="benefit.url">Více info</a>
                                 </div>
                             </div>
                         </li>

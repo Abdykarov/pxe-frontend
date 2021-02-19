@@ -164,7 +164,12 @@ export const formFields: IForm = {
                 CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
                 CustomValidators.isNumber(),
                 CustomValidators.minValue(0),
-                CustomValidators.maxValue(CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH * 1000),
+                CustomValidators.maxValue(
+                    CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH * 1000,
+                    false,
+                    true,
+                    'maxKWh',
+                ),
             ],
         ],
         expirationDate: [

@@ -90,6 +90,7 @@ export class SignboardComponent extends AbstractComponent {
     public videoEnded = (event) => {
         this.showTextUnderVideo = true;
         this.video.currentTime = 0;
+        this.pause(); // fix for IE
     }
 
     public play = (event = null) => {

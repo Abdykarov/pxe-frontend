@@ -161,7 +161,8 @@
 
 	&__title-label,
 	&__value-name {
-		display: block;
+		display: flex;
+		align-items: center;
 		line-height: ( 18 / 14 );
 		text-transform: uppercase;
 	}
