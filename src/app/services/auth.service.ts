@@ -44,7 +44,8 @@ import {
     IJwtPayload,
     ILoginRequest,
     ILoginResponse,
-    IUserRoles, IUserTypes,
+    IUserRoles,
+    IUserTypes,
 } from './model/auth.model';
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { IStateRouter } from 'src/app/pages/public/logout/logout-page.model';
@@ -296,6 +297,7 @@ export class AuthService {
         [(rolesParam) => R.indexOf(IUserRoles.PARC_SUPPLIER_P4R)(roles) !== -1, R.always(IUserTypes.SUPPLIER)],
         [(rolesParam) => R.indexOf(IUserRoles.PARC_CONSUMER_P_4_R)(roles) !== -1, R.always(IUserTypes.CONSUMER)],
         [(rolesParam) => R.indexOf(IUserRoles.PARC_MANAGER)(roles) !== -1, R.always(IUserTypes.ADMIN)],
+        [R.T, R.always(IUserTypes.CONSUMER)],
     ])(roles)
 
     public getAuthorizationHeaders = (contentType: string = null, accept: string = '*/*'): HttpHeaders => {
