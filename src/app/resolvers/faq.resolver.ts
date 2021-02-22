@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 
 import { FaqService } from 'src/common/cms/services/faq.service';
 import { IFaq } from 'src/common/cms/models/faq';
+import { Tag } from 'src/app/services/model/faq.model';
 
 @Injectable({
     providedIn: 'root',
@@ -20,6 +21,9 @@ export class FaqResolver implements Resolve<any> {
     ) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IFaq> {
-        return this.faqService.getFaq();
+        console.log('__[]__');
+        console.log(route.params?.tag);
+        const faqType = route.params?.tag || Tag.GENERAL;
+        return this.faqService.getFaq(faqType);
     }
 }

@@ -38,6 +38,7 @@ export class FaqOverviewComponent extends AbstractFaqComponent {
         private titleService: Title,
     ) {
         super(faqService, route);
+        console.log('FaqOverviewComponent');
 
         const seo: ISeo = R.head(this.faqComponent.faq.seo);
         this.titleService.setTitle(seo.title);

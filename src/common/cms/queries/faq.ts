@@ -45,6 +45,14 @@ query queryFaqContents {
     flatData {
       title,
       breadcrumbTitle,
+      tag {
+        flatData {
+          type
+          url
+          label
+          title
+        },
+      },
       seo {
         ...seoFragment
       }

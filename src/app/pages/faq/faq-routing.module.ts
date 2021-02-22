@@ -6,6 +6,7 @@ import {
 
 import { CONSTS } from 'src/app/app.constants';
 import { FaqComponent } from 'src/app/pages/faq/faq.component';
+import { FaqResolver } from 'src/app/resolvers/faq.resolver';
 
 const routes: Routes =
     [
@@ -15,11 +16,17 @@ const routes: Routes =
             children: [
                 {
                     path: '',
+                    resolve: {
+                        faq: FaqResolver,
+                    },
                     loadChildren: () => import('../../pages/faq/faq-overview/faq-overview.module').then(m => m.FaqOverviewModule),
                 },
                 {
                     path: ':tag',
                     loadChildren: () => import('../../pages/faq/faq-overview/faq-overview.module').then(m => m.FaqOverviewModule),
+                    resolve: {
+                        faq: FaqResolver,
+                    },
                 },
                 {
                     path: ':tag/:url',

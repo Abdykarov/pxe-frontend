@@ -7,6 +7,7 @@ import {
     Router,
 } from '@angular/router';
 
+import * as R from 'ramda';
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
@@ -28,9 +29,9 @@ export class FaqComponent extends AbstractComponent {
             label: 'Domů',
             url: '/',
         },
-        {
-            label: this.faq.breadcrumbTitle,
-        },
+        // {
+        //     label: this.faq.breadcrumbTitle,
+        // },
     ];
 
     constructor(
@@ -38,6 +39,9 @@ export class FaqComponent extends AbstractComponent {
         protected router: Router,
     ) {
         super();
+        console.log('faq.component.ts');
+        console.log(this.faq);
+        console.log(this.route);
         this.router.events
             .pipe(takeUntil(this.destroy$))
             .subscribe(event => {

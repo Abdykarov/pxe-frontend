@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { AskForOfferResolver } from 'src/app/resolvers/ask-for-offer.resolver';
 import { CONSTS } from 'src/app/app.constants';
 import { CookiePolicyResolver } from 'src/app/resolvers/cookie-policy.resolver';
-import { FaqResolver } from 'src/app/resolvers/faq.resolver';
 import { LandingPageResolver } from 'src/app/resolvers/landing-page.resolver';
 import { LoginResolver } from 'src/app/resolvers/login.resolver';
 import {
@@ -63,9 +62,6 @@ const routes = [
             {
                 path: CONSTS.PATHS.FAQ,
                 loadChildren: () => import('../../pages/faq/faq.module').then(m => m.FaqModule),
-                resolve: {
-                    faq: FaqResolver,
-                },
                 data: {
                     isPublic: true,
                     isSimpleFooter: false,

@@ -31,13 +31,19 @@ export class ApolloCmsService {
                 map(normalize),
             )
 
-    public fetchQuery = (options: QueryOptions<any>): any =>
+    public fetchQuery = (options: QueryOptions<any>, withFlatData = true): any =>
         this.apollo.use(CONSTS.APOLLO_CMS_KEY)
             .query(options)
             .pipe(
                 map(({data}) =>  data[apolloGetOperationName(options)]),
-                map(R.pipe(R.head, flatData)),
+                map((operation) => {
+
+                    if (withFlatData) {
+                        return R.pipe(R.head, flatData)(operation);
+                    }
+
+                    return operation;
+                }),
                 map(normalize),
             )
-
 }

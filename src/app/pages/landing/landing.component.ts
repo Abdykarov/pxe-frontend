@@ -141,6 +141,8 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
                     this.cd.markForCheck();
             });
 
+        console.log('____');
+        console.log(this.landingPage);
         this.titleService.setTitle(this.landingPage.seo.title);
         this.metaService.updateTag({
             name: 'description',

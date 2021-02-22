@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 
+import * as R from 'ramda';
+import { map } from 'rxjs/operators';
+
 import { ApolloCmsService } from 'src/app/services/apollo-cms.service';
 import {
     faqConfigQuery,
@@ -26,9 +29,23 @@ export class FaqService {
             query: faqConfigQuery,
         })
 
-    public getFaq = () => this.apolloCmsService
-        .fetchQuery({
-            query: faqQuery,
-        })
+    public getFaq = (faqType: string) => this.apolloCmsService
+        .fetchQuery(
+            {
+                query: faqQuery,
+            },
+            false,
+        )
+        .pipe(
+            map(
+                R.find(
+                    R.pipe(
+                        R.prop('tag'),
+                        R.head,
+                        R.propEq('type', faqType),
+                    ),
+                ),
+            ),
+        )
 
 }
