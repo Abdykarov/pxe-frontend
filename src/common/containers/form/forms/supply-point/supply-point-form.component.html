@@ -489,6 +489,7 @@
                                 [inputFocused]="(fieldWrapperFocused$ | async) === 'timeToContractEnd' || (fieldWrapperFocused$ | async) === 'timeToContractEndPeriodId'"
                                 [options]="codeLists && codeLists[codeList.TIME_TO_CONTRACT_END_PERIOD]"
                                 [parentForm]="form"
+                                [clearable]="false"
                                 [selectName]="'timeToContractEndPeriodId'"
                                 [showErrorMessage]="false"
                                 [success]="form.controls.timeToContractEndPeriodId.valid && (form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId)"
