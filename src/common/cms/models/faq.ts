@@ -5,5 +5,5 @@ export interface IFaq {
     title: string;
     breadcrumbTitle: string;
     seo: ISeo[];
-    tag: ITagConfigItem;
+    tag: ITagConfigItem[];
 }

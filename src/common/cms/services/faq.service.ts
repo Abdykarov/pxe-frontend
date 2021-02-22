@@ -29,23 +29,12 @@ export class FaqService {
             query: faqConfigQuery,
         })
 
-    public getFaq = (faqType: string) => this.apolloCmsService
+    public getFaq = () => this.apolloCmsService
         .fetchQuery(
             {
                 query: faqQuery,
             },
             false,
-        )
-        .pipe(
-            map(
-                R.find(
-                    R.pipe(
-                        R.prop('tag'),
-                        R.head,
-                        R.propEq('type', faqType),
-                    ),
-                ),
-            ),
         )
 
 }

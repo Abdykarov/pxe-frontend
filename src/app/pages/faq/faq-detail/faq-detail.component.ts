@@ -58,7 +58,7 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
                     )(this.questions);
 
                     if (this.activeQuestion) {
-                        this.activeTagLabel = this.activeQuestion.tag.label;
+                        this.activeTagLabel = R.head(this.activeQuestion.tag).label;
                         this.questions = this.getQuestions();
                         this.titleService.setTitle(`${this.activeQuestion.header} | parc4u`);
                         this.metaService.updateTag({
@@ -85,7 +85,7 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
     }
 
     private getQuestions = (): IQuestion[] => R.pipe(
-        R.filter((question: IQuestion) => question.id !== this.activeQuestion.id && question.tag.type === this.activeTag),
+        R.filter((question: IQuestion) => question.id !== this.activeQuestion.id && R.head(question.tag).type === this.activeTag),
         this.sortQuestions,
         R.take(this.countOfNextQuestions),
     )(this.questions)
@@ -96,7 +96,7 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
     }
 
     private setActiveQuestion = (params, questions: IQuestion[]) => R.filter(
-            (question: IQuestion) => question.tag.type === this.activeTag && question.url === params.url,
+            (question: IQuestion) => R.head(question.tag).type === this.activeTag && question.url === params.url,
         )(questions)
 
     private sortFnc = (numbers: number[]): number[] => R.sort((first: number, second: number) => first - second)(numbers);

@@ -21,7 +21,7 @@ export class QuestionsToAccordionItemsPipe implements PipeTransform {
             label: question.header,
             data: question,
             isActive: false,
-            url: `/${CONSTS.PATHS.FAQ}/${question.tag.url}/${question.url}`,
+            url: `/${CONSTS.PATHS.FAQ}/${R.head(question.tag).url}/${question.url}`,
         }), questions);
     }
 }

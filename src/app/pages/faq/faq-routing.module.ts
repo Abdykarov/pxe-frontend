@@ -13,20 +13,17 @@ const routes: Routes =
         {
             path: CONSTS.PATHS.EMPTY,
             component: FaqComponent,
+            resolve: {
+                faq: FaqResolver,
+            },
             children: [
                 {
                     path: '',
-                    resolve: {
-                        faq: FaqResolver,
-                    },
                     loadChildren: () => import('../../pages/faq/faq-overview/faq-overview.module').then(m => m.FaqOverviewModule),
                 },
                 {
                     path: ':tag',
                     loadChildren: () => import('../../pages/faq/faq-overview/faq-overview.module').then(m => m.FaqOverviewModule),
-                    resolve: {
-                        faq: FaqResolver,
-                    },
                 },
                 {
                     path: ':tag/:url',
