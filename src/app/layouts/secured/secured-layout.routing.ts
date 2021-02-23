@@ -72,6 +72,22 @@ const routes = [
                 },
             },
             {
+                path: CONSTS.PATHS.CREATE_USER,
+                loadChildren: () => import('../../pages/admins/create-user/create-user.module').then(
+                    m => m.CreateUserModule,
+                ),
+                resolve: {
+                    refreshToken: RefreshTokenResolver,
+                },
+                data: {
+                    isSimpleFooter: false,
+                    isPublic: false,
+                    userType: IUserTypes.ADMIN,
+                    loginType: LoginType.NONE,
+                    signUpType: SignType.NONE,
+                },
+            },
+            {
                 path: CONSTS.PATHS.SUPPLY_POINTS,
                 loadChildren: () => import('../../pages/consumers/supply-points/supply-points.module').then(m => m.SupplyPointsModule),
                 resolve: {

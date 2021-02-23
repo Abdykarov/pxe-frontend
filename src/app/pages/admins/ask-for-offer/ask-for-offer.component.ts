@@ -2,6 +2,10 @@ import {
     Component,
     OnInit,
 } from '@angular/core';
+import {
+    invoices,
+    rows,
+} from './ask-for-offer.config';
 
 @Component({
     selector: 'lnd-ask-for-offer',
@@ -10,8 +14,15 @@ import {
 })
 export class AskForOfferComponent implements OnInit {
 
+    public rows = rows;
+    public invoices = invoices;
+
     constructor() { }
 
     ngOnInit(): void {
+    }
+
+    public routerToFill = (aaa) => {
+        console.log(aaa);
     }
 }

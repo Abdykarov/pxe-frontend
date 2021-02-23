@@ -1,1 +1,23 @@
-<p>ask-for-offer works!</p>
+<ng-template #actionColumnFill let-row="row">
+    <lnd-button
+        (action)="routerToFill(row)"
+        label="Vyplnit"
+        type="primary">
+    </lnd-button>
+</ng-template>
+<pxe-layout-container pageTitle="Přehled nabídek">
+    <div class="row">
+        <div class="col-12">
+            <lnd-table
+                [cols]="rows"
+                [rows]="invoices"
+                [showHead]="true"
+                [tableWrapperClass]="['table-wrapper--advanced']"
+                [tableClass]="['table--advanced', 'mb-0','table-layout-fixed']"
+                [columnTemplates]="{
+                    actionColumnFill: actionColumnFill
+                }">
+            ></lnd-table>
+        </div>
+    </div>
+</pxe-layout-container>
