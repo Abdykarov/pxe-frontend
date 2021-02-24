@@ -42,6 +42,7 @@ export interface IOffer {
     totalPrice?: number;
     unit?: string;
     marked?: boolean;
+    isLastUpdated?: boolean;
     greenEnergy: boolean;
     question?: IQuestion;
     __typename?: string;

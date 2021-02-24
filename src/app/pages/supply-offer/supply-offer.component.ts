@@ -110,6 +110,11 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                     status: IOfferStatus.ACTIVE},
                 ),
             )(data.findSupplierOffers)),
+            map((offers) => offers.sort(function(first, second) {
+                if (first?.name?.toLowerCase() < second?.name?.toLowerCase()) { return -1; }
+                if (first?.name?.toLowerCase() > second?.name?.toLowerCase()) { return 1; }
+                return 0;
+            })),
         );
 
     constructor(
@@ -202,6 +207,12 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
                                 this.cd.markForCheck();
                             },
                         );
+                }
+                if (modal.modalType === CONSTS.MODAL_TYPE.CONFIRM_INFO_OFFER) {
+                    setTimeout(_ => {
+                        const lastUpdatedOffer = R.head(document.getElementsByClassName(CONSTS.IS_LAST_UPDATED_OFFER));
+                        lastUpdatedOffer?.scrollIntoView({behavior: 'auto', block: 'start', inline: 'nearest'});
+                    });
                 }
                 if (modal.modalType === CONSTS.MODAL_TYPE.CONFIRM_CANCEL_OFFER) {
                     this.toggleRow(modal.data.table, modal.data.row);
@@ -381,6 +392,8 @@ export class SupplyOfferComponent extends AbstractComponent implements OnInit {
         offerPointAction
             .subscribe(
                 (data) => {
+                    this.modalsService
+                        .showModal$.next(this.supplyOfferConfig.confirmInfo(isCreateAction));
                     this.formLoading = false;
                     this.formSent = true;
                     this.cd.markForCheck();

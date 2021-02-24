@@ -216,7 +216,7 @@
             ></pxe-supply-offer-form>
         </div>
         <div
-            class="mb-4" 
+            class="mb-4"
             [hidden]="loadingOffers || tableRows.length === 0">
             <div class="row"
                  *ngIf="showDeletedOfferBanner">
@@ -286,6 +286,7 @@
                     [isStatic]="false"
                     [tableWrapperClass]="['table-wrapper--advanced']"
                     [tableClass]="['table--advanced', 'mb-0']"
+                    customTrClassPipe="isLastUpdatedOffer"
                     [rowDetailTemplate]="rowDetail"
                     [actionColTriggersDetail]="true"
                     [whiteBackgroundPropertyCondition]="'marked'"
