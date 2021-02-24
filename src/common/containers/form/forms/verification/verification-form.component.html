@@ -4,7 +4,7 @@
 </ng-template>
 
 <ng-template #confirmLabelTemplate>
-    <span [class.is-disabled]="!smsSent">Ověřovací kód</span>
+    <span [class.is-disabled]="!smsSent">Ověřovací SMS kód</span>
 </ng-template>
 
 <div class="row no-gutters form-container text-left">
@@ -24,7 +24,8 @@
     </div>
 
     <ng-container *ngIf="showForm">
-        <div class="col-12">
+        <div *ngIf="!smsSent"
+             class="col-12">
             <p *ngIf="textInfoAboutVerificationPassword"
                class="small mb-2">
                 {{textInfoAboutVerificationPassword}}

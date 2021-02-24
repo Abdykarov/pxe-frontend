@@ -1,6 +1,6 @@
 <ng-template #confirmCodeInfoTemplate>
     <div class="small mb-3">
-        Pro ověření výše zadaného telefonního čísla vám byl zaslán ověřovací sms kód.
+        Pro ověření výše zadaného telefonního čísla vám byl zaslán ověřovací SMS kód.
     </div>
 </ng-template>
 
@@ -118,7 +118,7 @@
             [globalError]="globalError"
             [smsSent]="smsSent"
             [showForm]="showForm"
-            textInfoAboutVerificationPassword="Změnu telefonního čísla je nutné potvrdit ověřovacím kódem"
+            textInfoAboutVerificationPassword="Změnu telefonního čísla je nutné potvrdit ověřovacím SMS kódem"
             [submitLabelText]="'Uložit'"
             [infoTemplate]="confirmCodeInfoTemplate"
             (submitAction)="processSaveButton($event, true)"
