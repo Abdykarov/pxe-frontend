@@ -5,6 +5,7 @@ import {
     Input,
     OnChanges,
     Output,
+    PipeTransform,
     TemplateRef,
 } from '@angular/core';
 import { Router } from '@angular/router';
@@ -35,6 +36,7 @@ export class TableComponent extends AbstractComponent implements OnChanges {
     @Input() withoutBorder = false;
     @Input() whiteBackgroundPropertyCondition?: string;
     @Input() dangerBackgroundPropertyCondition?: string;
+    @Input() customTrClassPipe?: any;
 
     // where to switch between mobile and desktop layout
     @Input() mobileLayoutBreakpoint = 'md';

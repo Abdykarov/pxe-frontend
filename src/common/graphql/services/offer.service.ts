@@ -48,6 +48,8 @@ export class OfferService {
         private http: HttpClient,
     ) {}
 
+    private setIsLastUpdatedToFalse = (offers: IOffer[]): IOffer[] => R.map(R.assoc('isLastUpdated', false))(offers);
+
     public findSupplierOffers = () => this.apollo
         .watchQuery<any>({
             query: findSupplierOffersQuery,
@@ -74,13 +76,15 @@ export class OfferService {
             },
             update: (cache, {data}) => {
                 const { findSupplierOffers: offers } = cache.readQuery({ query: findSupplierOffersQuery });
+                const offersWithLastUpdatedFalse = this.setIsLastUpdatedToFalse(offers);
                 const createdOffer: IOffer = data.savePowerOffer;
                 createdOffer.marked = false;
+                createdOffer.isLastUpdated = true;
                 cache.writeQuery({
                     query: findSupplierOffersQuery,
                     data: {
                         findSupplierOffers: [
-                            ...offers,
+                            ...offersWithLastUpdatedFalse,
                             createdOffer,
                         ],
                     },
@@ -97,13 +101,15 @@ export class OfferService {
             },
             update: (cache, {data}) => {
                 const { findSupplierOffers: offers } = cache.readQuery({ query: findSupplierOffersQuery });
+                const offersWithLastUpdatedFalse = this.setIsLastUpdatedToFalse(offers);
                 const createdOffer: IOffer = data.saveGasOffer;
                 createdOffer.marked = false;
+                createdOffer.isLastUpdated = true;
                 cache.writeQuery({
                     query: findSupplierOffersQuery,
                     data: {
                         findSupplierOffers: [
-                            ...offers,
+                            ...offersWithLastUpdatedFalse,
                             createdOffer,
                         ],
                     },
@@ -112,28 +118,41 @@ export class OfferService {
         })
 
     private checkAndUpdateApolloClientInUpdateOffers = (offerId, data, cache) => {
+        const operationOffers = data.updatePowerOffer ? data.updatePowerOffer : data.updateGasOffer;
         const offerIdString = String(offerId);
-        const newOfferId = data.updatePowerOffer.id;
-        if (newOfferId !== offerIdString) {
-            const { findSupplierOffers: offers } = cache.readQuery({ query: findSupplierOffersQuery });
-            const newFindSupplierOffers = R.map((mappingOffer) => {
-                if (offerIdString === mappingOffer.id) {
-                    mappingOffer = {
-                        ...data.updatePowerOffer,
-                        marked: false,
-                    };
-                }
-                return mappingOffer;
-            })(offers);
-            cache.writeQuery({
-                query: findSupplierOffersQuery,
-                data: {
-                    findSupplierOffers: [
-                        ...newFindSupplierOffers,
-                    ],
-                },
-            });
-        }
+        const newOfferId = operationOffers.id;
+        const anySignedOffer = newOfferId !== offerIdString;
+
+        const { findSupplierOffers: offers } = cache.readQuery({ query: findSupplierOffersQuery });
+        const offersWithLastUpdatedFalse = this.setIsLastUpdatedToFalse(offers);
+
+        const newFindSupplierOffers = R.map((mappingOffer: IOffer) => {
+            if (anySignedOffer && offerIdString === mappingOffer.id) {
+                mappingOffer = {
+                    ...operationOffers,
+                    id: newOfferId,
+                    marked: false,
+                    isLastUpdated: true,
+                };
+            }
+            if (!anySignedOffer && offerIdString === mappingOffer.id) {
+                mappingOffer = {
+                    ...operationOffers,
+                    marked: false,
+                    isLastUpdated: true,
+                };
+            }
+            return mappingOffer;
+        })(offersWithLastUpdatedFalse);
+
+        cache.writeQuery({
+            query: findSupplierOffersQuery,
+            data: {
+                findSupplierOffers: [
+                    ...newFindSupplierOffers,
+                ],
+            },
+        });
     }
 
     public updatePowerOffer = (offerId: string, offer: IOfferInput, powerAttributes: IOfferInputPowerAttributes) => this.apollo
