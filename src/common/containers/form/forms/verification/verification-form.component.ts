@@ -53,7 +53,7 @@ export class VerificationFormComponent extends AbstractFormComponent implements 
     public submitLabelText = 'Podepsat smlouvu';
 
     @Input()
-    public sendSmsLabel = 'Získat potvzovací SMS kód';
+    public sendSmsLabel = 'Získat ověřovací SMS kód';
 
     @Input()
     public textInfoAboutVerificationPassword = '';
