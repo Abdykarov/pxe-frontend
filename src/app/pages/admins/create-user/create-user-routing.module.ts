@@ -6,6 +6,7 @@ import {
 
 import { CreateUserComponent } from './create-user.component';
 import { CONSTS } from 'src/app/app.constants';
+import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 import { RefreshTokenResolver } from 'src/app/resolvers/refresh-token.resolver';
 
 const routes: Routes = [
@@ -14,17 +15,14 @@ const routes: Routes = [
         component: CreateUserComponent,
         children: [
             {
-                path: CONSTS.PATHS.PRICES,
-                loadChildren: () => import('./prices/prices.module').then(m => m.PricesModule),
-                resolve: {
-                    refreshToken: RefreshTokenResolver,
-                },
-            },
-            {
                 path: CONSTS.PATHS.SUPPLY_POINT,
                 loadChildren: () => import('./supply-point/supply-point.module').then(m => m.SupplyPointModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
+                },
+                data: {
+                    step: ProgressStatus.SUPPLY_POINT,
+                    title: 'Nové odběrné místo',
                 },
             },
             {
@@ -32,6 +30,21 @@ const routes: Routes = [
                 loadChildren: () => import('./recapitulation/recapitulation.module').then(m => m.RecapitulationModule),
                 resolve: {
                     refreshToken: RefreshTokenResolver,
+                },
+                data: {
+                    step: ProgressStatus.PERSONAL_DATA,
+                    title: 'Osobní údaje',
+                },
+            },
+            {
+                path: CONSTS.PATHS.PRICES,
+                loadChildren: () => import('./prices/prices.module').then(m => m.PricesModule),
+                resolve: {
+                    refreshToken: RefreshTokenResolver,
+                },
+                data: {
+                    step: ProgressStatus.PRICES,
+                    title: 'Ceny',
                 },
             },
         ],

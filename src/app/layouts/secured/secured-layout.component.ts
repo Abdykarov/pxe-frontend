@@ -42,10 +42,6 @@ import {
 import { IStoreUi } from 'src/common/graphql/models/store.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { NavigationService as NavigationApolloService} from 'src/common/graphql/services/navigation.service';
-import {
-    navigationMenuSuppliersActions,
-    navigationMenuUserActions,
-} from './services/navigation.config';
 import { NavigationService } from './services/navigation.service';
 import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';

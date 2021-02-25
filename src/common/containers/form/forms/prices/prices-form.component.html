@@ -1,0 +1,60 @@
+<form
+    [formGroup]="form"
+    class="form-container"
+    autocomplete="off"
+    (keydown)="resetCustomFieldError()"
+    (keydown.enter)="submitForm($event);false">
+    <lnd-form-field
+        *ngIf="form.controls.priceNT.status !== 'DISABLED'"
+        [error]="formError.priceNT || form.controls.priceNT.errors"
+        [formControl]="form.controls.priceNT"
+        [id]="'priceNT'"
+        label="Cena za nízký tarif"
+        [success]="form.controls.priceNT.valid && (form.controls.priceNT.touched || formError.priceNT)"
+        [touched]="form.controls.priceNT.touched || formError.priceNT"
+        [validationMessages]="formFields.validationMessages.priceNT"
+    ></lnd-form-field>
+    <lnd-form-field
+        *ngIf="form.controls.priceVT.status !== 'DISABLED'"
+        [error]="formError.priceVT || form.controls.priceVT.errors"
+        [formControl]="form.controls.priceVT"
+        [id]="'priceVT'"
+        label="Cena za vysoký tarif"
+        [success]="form.controls.priceVT.valid && (form.controls.priceVT.touched || formError.priceVT)"
+        [touched]="form.controls.priceVT.touched || formError.priceVT"
+        [validationMessages]="formFields.validationMessages.priceVT"
+    ></lnd-form-field>
+    <lnd-form-field
+        *ngIf="form.controls.priceGas.status !== 'DISABLED'"
+        [error]="formError.priceGas || form.controls.priceGas.errors"
+        [formControl]="form.controls.priceGas"
+        [id]="'priceGas'"
+        label="Cena"
+        [success]="form.controls.priceGas.valid && (form.controls.priceGas.touched || formError.priceGas)"
+        [touched]="form.controls.priceGas.touched || formError.priceGas"
+        [validationMessages]="formFields.validationMessages.priceGas"
+    ></lnd-form-field>
+    <lnd-form-field
+        *ngIf="form.controls.yearPrice.status !== 'DISABLED'"
+        [error]="formError.yearPrice || form.controls.yearPrice.errors"
+        [formControl]="form.controls.yearPrice"
+        [id]="'yearPrice'"
+        label="Cena celkem za rok"
+        [success]="form.controls.yearPrice.valid && (form.controls.yearPrice.touched || formError.yearPrice)"
+        [touched]="form.controls.yearPrice.touched || formError.yearPrice"
+        [validationMessages]="formFields.validationMessages.yearPrice"
+    ></lnd-form-field>
+    <div class="text-right">
+        <lnd-button
+            type="gradient-primary"
+            class="w-100"
+            customClass="btn-public btn--icon-right w-100"
+            [submit]="true"
+            (action)="submitForm($event)"
+            [isDisabled]="!!formLoading"
+            label="Resetovat heslo"
+            icon="icon--arrow-right"
+            iconPosition="right">
+        </lnd-button>
+    </div>
+</form>

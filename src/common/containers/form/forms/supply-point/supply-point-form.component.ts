@@ -95,6 +95,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     public formValues: ISupplyPoint = null;
 
     @Input()
+    public withoutValidator = false;
+
+    @Input()
     public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
 
     public allowedFields = supplyPointAllowedFields;
@@ -147,6 +150,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                     ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_NT,
                     ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_NT_UNIT,
                     annualConsumptionNTUnit,
+                    this.withoutValidator,
                 );
             });
 
@@ -178,6 +182,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                     ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION,
                     ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_UNIT,
                     annualConsumptionUnit,
+                    this.withoutValidator,
                 );
             });
 
@@ -191,6 +196,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
                     ANNUAL_CONSUMPTION_TYPES.ANNUAL_CONSUMPTION_VT,
                     ANNUAL_CONSUMPTION_UNIT_TYPES.ANNUAL_CONSUMPTION_VT_UNIT,
                     annualConsumptionVTUnit,
+                    this.withoutValidator,
                 );
             });
 

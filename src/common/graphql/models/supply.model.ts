@@ -144,6 +144,7 @@ export enum ProgressStatus {
     READY_FOR_SIGN = 'READY_FOR_SIGN',
     SUPPLY_POINT = 'SUPPLY_POINT',
     WAITING_FOR_PAYMENT = 'WAITING_FOR_PAYMENT',
+    PRICES = 'PRICES',
 }
 
 export interface ISupplyPointFormData {

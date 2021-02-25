@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { CreateUserRoutingModule } from './create-user-routing.module';
 import { CreateUserComponent } from './create-user.component';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
-import { TableModule } from 'src/common/ui/table/table.module';
+import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.module';
 
 @NgModule({
     declarations: [
@@ -16,7 +17,8 @@ import { TableModule } from 'src/common/ui/table/table.module';
         ButtonModule,
         CommonModule,
         LayoutContainerModule,
-        TableModule,
+        ProgressBarModule,
+        RouterModule,
     ],
 })
 export class CreateUserModule { }

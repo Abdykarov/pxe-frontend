@@ -6,7 +6,7 @@ import {
     NgModule,
 } from '@angular/core';
 import localeCsExtra from '@angular/common/locales/extra/cs';
-import { ReactiveFormsModule } from '@angular/forms';
+import {ReactiveFormsModule, Validators} from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 
 import { ApolloModule } from 'apollo-angular';
@@ -61,3 +61,5 @@ export class AppModule {
         registerLocaleData(localeCs, localeCsExtra);
     }
 }
+
+Validators.required.prototype.isRequiredValidator = true;

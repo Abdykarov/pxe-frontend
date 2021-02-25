@@ -10,6 +10,7 @@ import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module'
 import { ProgressBarModule } from 'src/common/ui/progress-bar/progress-bar.module';
 import { PricesComponent } from './prices.component';
 import { PricesRoutingModule } from './prices.routing';
+import {PricesFormModule} from 'src/common/containers/form/forms/prices/prices-form.module';
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import { PricesRoutingModule } from './prices.routing';
         PersonalInfoFormModule,
         PlaceloaderModule,
         ProgressBarModule,
+        PricesFormModule,
         PricesRoutingModule,
     ],
 })

@@ -10,8 +10,25 @@ const getStatusIndex = (status: string, steps: IStepperProgressItem[]) =>
     R.findIndex(R.propEq('step', status))(steps);
 
 export enum TypeStepper {
-    IMPORT, REQUEST,
+    IMPORT,
+    REQUEST,
+    CREATE_USER,
 }
+
+const stepsCreateUser: IStepperProgressItem[] = [
+    {
+        step: ProgressStatus.SUPPLY_POINT,
+        label: 'Odběrné místo',
+    },
+    {
+        step: ProgressStatus.PERSONAL_DATA,
+        label: 'Osobní informace',
+    },
+    {
+        step: ProgressStatus.PRICES,
+        label: 'Cena',
+    },
+];
 
 const stepsImport: IStepperProgressItem[] = [
     {
@@ -83,7 +100,13 @@ export const indexesOfSecondStep = [
     indexOfSteps[ProgressStatus.WAITING_FOR_PAYMENT],
 ];
 
-const getSteps = (typeStepper: TypeStepper): IStepperProgressItem[] => (typeStepper === TypeStepper.REQUEST ? stepsRequests  : stepsImport);
+const stepsMapping = {
+    [TypeStepper.REQUEST]: stepsRequests,
+    [TypeStepper.IMPORT]: stepsImport,
+    [TypeStepper.CREATE_USER]: stepsCreateUser,
+};
+
+const getSteps = (typeStepper: TypeStepper): IStepperProgressItem[] => stepsMapping[typeStepper];
 
 export const getConfigStepper = (
     activeStep: ProgressStatus | ImportProgressStep,
