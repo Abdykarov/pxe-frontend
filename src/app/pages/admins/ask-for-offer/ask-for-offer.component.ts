@@ -24,6 +24,11 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { AskForOfferService } from 'src/common/graphql/services/ask-for-offer.service';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
 import {
+    confirmDeleteAskForOfferInfo,
+    paginationConfig,
+    tableConfig,
+} from './ask-for-offer.config';
+import {
     ContractUploadStatus,
     ContractUploadStatusUrl,
     IPaginatedAskForOffer,
@@ -35,10 +40,7 @@ import {
     parseRestAPIErrors,
 } from 'src/common/utils';
 import { IResponseDataDocument} from 'src/app/services/model/document.model';
-import {
-    paginationConfig,
-    tableConfig,
-} from './ask-for-offer.config';
+import { ModalService } from 'src/common/containers/modal/modal.service';
 
 @Component({
     selector: 'lnd-ask-for-offer',
@@ -67,6 +69,7 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
         private askForOfferService: AskForOfferService,
         private cd: ChangeDetectorRef,
         private http: HttpClient,
+        private modalsService: ModalService,
         private route: ActivatedRoute,
         private router: Router,
     ) {
@@ -124,18 +127,32 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
         },
     })
 
-    public remove = (askForOfferId: string) => this.askForOfferService.deleteAskForOffer(
-        askForOfferId,
-        {
-            statuses: [ContractUploadStatus.NEW],
-            pagination: {
-                first: this.numberOfPagesSubject$.getValue() - 1,
-                offset: this.paginationConfig.itemsPerPage,
-            },
-        })
-        .pipe(
-            takeUntil(this.destroy$),
-        ).subscribe()
+    public remove = (askForOfferId: string) => {
+        this.globalError = [];
+        this.askForOfferService.deleteAskForOffer(
+            askForOfferId,
+            {
+                statuses: [ContractUploadStatus.NEW],
+                pagination: {
+                    first: this.numberOfPagesSubject$.getValue() - 1,
+                    offset: this.paginationConfig.itemsPerPage,
+                },
+            })
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe(_ => {
+                this.modalsService
+                    .showModal$.next(confirmDeleteAskForOfferInfo());
+                },
+                error => {
+                    const message = parseRestAPIErrors(error);
+                    this.globalError.push(message);
+                    this.cd.markForCheck();
+                },
+            );
+    }
+
 
     public pageChanged = ($event: PageChangedEvent) => {
         if ($event && $event.page) {
@@ -147,6 +164,8 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public downloadAfkForOffer = (documentId: string) => {
+        this.globalError = [];
+        this.loading = true;
         downloadFile(this.http, `v1.0/ask-for-offer/uploaded-document/${documentId}`)
             .pipe(
                 takeUntil(this.destroy$),
@@ -154,6 +173,7 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
                     this.askForOfferService.documentSave(responseDataDocument);
+                    this.loading = false;
                     this.cd.markForCheck();
                 },
                 (error) => {
@@ -165,6 +185,8 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
     }
 
     public downloadAskForOffersZipArchive = (askForOfferId: string) => {
+        this.globalError = [];
+        this.loading = true;
         downloadFile(this.http, `v1.0/ask-for-offer/${askForOfferId}/archive`)
             .pipe(
                 takeUntil(this.destroy$),
@@ -172,6 +194,7 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
                     this.askForOfferService.documentSave(responseDataDocument);
+                    this.loading = false;
                     this.cd.markForCheck();
                 },
                 (error) => {

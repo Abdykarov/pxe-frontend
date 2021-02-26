@@ -1,5 +1,7 @@
 import { IPaginationConfig } from 'src/app/pages/suppliers/concluded-contracts/concluded-contracts.model';
 import { ITableColumnConfig } from 'src/common/ui/table/models/table.model';
+import {IShowModal} from '../../../../common/containers/modal/modals/model/modal.model';
+import {CONSTS} from '../../../app.constants';
 
 export const tableConfig: ITableColumnConfig[] = ([
     {
@@ -53,3 +55,16 @@ export const paginationConfig: IPaginationConfig = {
     nextText: '<span class="arrow-text">next</span>',
     lastText: '<span class="arrow-text">last</span>',
 };
+
+export const confirmDeleteAskForOfferInfo = (): IShowModal => ({
+    component: 'ConfirmModalComponent',
+    modalType: CONSTS.MODAL_TYPE.CONFIRM_INFO_DELETE_ASK_FOR_OFFER,
+    instanceData: {
+        confirmText:
+            `Faktura byla smazána.`,
+        titleConfirm: 'OK',
+        showClose: false,
+        showCloseButton: false,
+    },
+    withoutScroll: true,
+});
