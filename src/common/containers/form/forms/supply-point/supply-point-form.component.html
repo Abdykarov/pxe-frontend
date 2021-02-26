@@ -159,7 +159,7 @@
                     <div class="col-12">
                         <img alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/house-info.svg" title="">
                         <h2 class="page-box__title mb-2">
-                            Parametry odběru {{commodityType === CommodityTypes.POWER ? 'elekřiny' : 'plynu'}}
+                            Parametry odběru {{commodityType === CommodityTypes.POWER ? 'elektřiny' : 'plynu'}}
                         </h2>
                     </div>
                 </div>
@@ -489,6 +489,7 @@
                                 [inputFocused]="(fieldWrapperFocused$ | async) === 'timeToContractEnd' || (fieldWrapperFocused$ | async) === 'timeToContractEndPeriodId'"
                                 [options]="codeLists && codeLists[codeList.TIME_TO_CONTRACT_END_PERIOD]"
                                 [parentForm]="form"
+                                [clearable]="false"
                                 [selectName]="'timeToContractEndPeriodId'"
                                 [showErrorMessage]="false"
                                 [success]="form.controls.timeToContractEndPeriodId.valid && (form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId)"

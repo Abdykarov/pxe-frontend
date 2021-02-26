@@ -302,4 +302,17 @@ export class SupplyOfferConfig {
             },
         };
     }
+
+    public confirmInfo = (isCreateAction: Boolean): IShowModal => ({
+        component: 'ConfirmModalComponent',
+        modalType: CONSTS.MODAL_TYPE.CONFIRM_INFO_OFFER,
+        instanceData: {
+            confirmText:
+                `Nabídka byla úspěšně ${isCreateAction ? 'přidána' : 'upravena'}.`,
+            titleConfirm: 'OK',
+            showClose: false,
+            showCloseButton: false,
+        },
+        withoutScroll: true,
+    })
 }

@@ -24,15 +24,15 @@
     <lnd-placeloader [loading]="dataLoading && !errorMessages.length"></lnd-placeloader>
     <ng-container *ngIf="!dataLoading && supplyPoints && !supplyPoints.length && supplyPointStatistic">
         <lnd-info-banner
-            [bannerTitle]="'Zatím nemáte žádnou uzavřenou smlouvu.'"
+            [bannerTitle]="'Zatím nemáte žádnou uzavřenou smlouvu'"
             [showButton]="false"
         >
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <p>
-                        V případě zájmu o dodávku energií pro nové odběrné místo, pokračujte prosím zadáním odběrného místa.
+                        V případě zájmu o dodávku energií pro nové odběrné místo, pokračujte prosím zadáním odběrného místa<ng-container *ngIf="supplyPointStatistic.notConcludedCount">.</ng-container>
                         <ng-container *ngIf="supplyPointStatistic.notConcludedCount">
-                            Pokud už máte vytvořené odběrné místo, můžete se vrátit k vaší rozpracované smlouvě a dokončit proces.
+                            Pokud už máte vytvořené odběrné místo, můžete se vrátit k vaší rozpracované smlouvě a dokončit proces
                         </ng-container>
                     </p>
                 </div>

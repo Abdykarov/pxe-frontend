@@ -40,6 +40,9 @@
     <tbody [ngClass]="desktopLayoutClasses">
         <ng-container *ngFor="let row of rows; let i = index">
             <tr
+                [ngClass]="[
+                  row | dynamic: customTrClassPipe
+                ]"
                 [class.table__tr--bg-white]="whiteBackgroundPropertyCondition && row[whiteBackgroundPropertyCondition]"
                 [class.table__tr--bg-danger]="dangerBackgroundPropertyCondition && row[dangerBackgroundPropertyCondition]"
                 [class.table__tr--main]="isAdvanced"

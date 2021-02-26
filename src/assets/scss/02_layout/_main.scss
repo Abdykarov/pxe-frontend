@@ -62,10 +62,12 @@
 
 			> li {
 				counter-increment: ol-list-2;
+				padding-left: 0;
 			}
 
 			> li::before {
 				content: counter(ol-list-2, lower-latin) ')';
+				padding-right: ( $spacer / 4 );
 			}
 
 			ol {
@@ -158,7 +160,7 @@
 				padding-left: $list-decimal-padding-left;
 			}
 
-			h3 {
+			.decimal-list__item-title {
 				padding-left: ( $spacer * .5 );
 				margin-bottom: $spacer;
 				display: inline-block;
@@ -173,6 +175,12 @@
 				> li::before {
 					position: absolute;
 				}
+
+				h3,
+				.h3 {
+					display: inline-block;
+					margin-bottom: 0;
+				}
 			}
 		}
 	}
@@ -185,11 +193,25 @@
 		}
 	}
 
+	ol.lower-roman {
+		> li {
+			counter-increment: ol-lower-roman-list;
+			padding-left: ( $spacer * 1.5 );
+		}
+
+		> li::before {
+			position: absolute;
+			content: '(' counter(ol-lower-roman-list, lower-roman) ')';
+		}
+	}
+
 	ol.lower-alpha {
 		> li {
+			position: relative;
 			padding-left: ( $spacer * 1.5 );
 
 			&::before {
+				position: absolute;
 				content: counter(item, lower-alpha) '/';
 			}
 		}

@@ -41,7 +41,7 @@
                     [showForm]="contractAction === contractActions.UNSET_PROLONGATION"
                     (enableVerificationAction)="interruptAutomaticProlongation()"
                     [toggleEnabledBySelf]="true"
-                    textInfoAboutVerificationPassword="Zrušení automatické prolongace je nutné potvrdit ověřovacím kódem"
+                    textInfoAboutVerificationPassword="Zrušení automatické prolongace je nutné potvrdit ověřovacím SMS kódem"
                     enableVerificationLabel="Zrušit automatickou prolongaci"
                     enableButtonType="secondary"
                     submitLabelText="Zrušit"
@@ -67,7 +67,7 @@
                     [infoTemplate]="leaveContactInfoTemplate"
                     [phone]="supplyPoint.contract.personalData.phone"
                     [smsSent]="smsSent"
-                    textInfoAboutVerificationPassword="Odstoupení od smlouvy je nutné potvrdit ověřovacím kódem"
+                    textInfoAboutVerificationPassword="Odstoupení od smlouvy je nutné potvrdit ověřovacím SMS kódem"
                     enableVerificationSubText="Podle občanského zákoníku (§ 1829) můžete odstoupit od smlouvy do 14 dní od data
                         podpisu smlouvy. Účinky nastávají okamžikem, kdy je toto právní jednání doručeno dodavateli.
                         Smlouva se zruší od počátku a vy nemusíte udávat žádný důvod odstoupení."
@@ -94,7 +94,7 @@
                     [globalError]="globalError"
                     [infoTemplate]="terminateContactInfoTemplate"
                     [smsSent]="smsSent"
-                    textInfoAboutVerificationPassword="Výpověď smlouvy je nutné potvrdit ověřovacím kódem"
+                    textInfoAboutVerificationPassword="Výpověď smlouvy je nutné potvrdit ověřovacím SMS kódem"
                     enableVerificationSubText="Energetický zákon (§ 11 a odst. 3) vám nabízí možnost smlouvu vypovědět bez jakýchkoliv sankcí
                         do 15. dne po záhajení dodávek energií. Výpovědní doba činí 15 dnů a začíná běžet prvním dnem měsíce
                         následujícího. Jediná částka, kterou zaplatíte, je za energii, kterou jste už stihli odebrat."

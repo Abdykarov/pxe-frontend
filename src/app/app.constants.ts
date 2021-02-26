@@ -64,6 +64,7 @@ export const CONSTS = {
         NO_OFFERS_IN_IMPORT: 'NO_OFFERS_IN_IMPORT',
     },
     INTERVAL_RXJS: 5000,
+    IS_LAST_UPDATED_OFFER: 'is-last-updated-offer',
     LOCAL_STORAGE: {
         PERSONAL_INFO_PARTIAL_FORM_PREFIX: 'PERSONAL_INFO_',
         SUPPLY_POINT_PARTIAL_FORM: 'SUPPLY_POINT',
@@ -75,6 +76,7 @@ export const CONSTS = {
     MONTHS_TO_CONTRACT_END: 2,
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
     MODAL_TYPE: {
+        CONFIRM_INFO_OFFER: 'confirmInfoOffer',
         CONFIRM_DELETE_REQUEST: 'confirmDeleteOffer',
         CONFIRM_DELETE_OFFER: 'confirmDeleteOffer',
         CONFIRM_CANCEL_OFFER: 'confirmCancelOffer',

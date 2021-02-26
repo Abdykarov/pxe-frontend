@@ -73,7 +73,7 @@ export class DashboardComponent extends AbstractComponent implements OnInit {
             supplyPointId,
         };
         this.router.navigate(
-            [ROUTES.ROUTER_REQUEST_SUPPLY_POINT],
+            [ROUTES.ROUTER_REQUEST_SIGNBOARD],
             {state});
     }
 
