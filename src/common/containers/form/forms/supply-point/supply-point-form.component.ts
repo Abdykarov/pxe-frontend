@@ -100,6 +100,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
     @Input()
     public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
 
+    @Input()
+    public submitLabel = 'Uložit a zobrazit nabídky';
+
     public allowedFields = supplyPointAllowedFields;
     public codeList = CODE_LIST;
     public codeLists;

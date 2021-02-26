@@ -30,7 +30,7 @@ export interface IMenuUser {
 }
 
 export interface IMenuByUserTypeMapping {
-    [IUserTypes.ADMIN]: IMenuUser;
+    [IUserTypes.CONTRACT_IMPORTER]: IMenuUser;
     [IUserTypes.SUPPLIER]: IMenuUser;
     [IUserTypes.CONSUMER]: IMenuUser;
 }

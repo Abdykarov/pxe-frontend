@@ -7,6 +7,7 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
+import {ContractUploadStatus} from '../common/graphql/models/ask-for-offer';
 
 export const CONSTS = {
     APPEND_AFTER_CUT_TEXT: '...',
@@ -89,6 +90,9 @@ export const CONSTS = {
     PATHS: {
         APPROVAL: 'approval',
         ASK_FOR_OFFER : 'ask-for-offer',
+        ASK_FOR_OFFER_NEW: 'new',
+        ASK_FOR_OFFER_IN_PROGRESS: 'in-progress',
+        ASK_FOR_OFFER_PROCESSED: 'processed',
         CREATE_USER: 'create-user',
         CONTRACT : 'contract',
         COOKIES_POLICY : 'cookies-policy',
@@ -200,13 +204,12 @@ export const CONSTS = {
     SM_RESOLUTION: 576,
 };
 
-// TODO idealne ask_for_offer jako request na graphql a pres konstantu
 export const ROUTES = {
     ROUTER_ROOT: '/',
     ROUTER_ASK_FOR_OFFER: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.ASK_FOR_OFFER}`,
-    ROUTER_ASK_FOR_OFFER_ACCEPTED: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.ASK_FOR_OFFER}/accepted`,
-    ROUTER_ASK_FOR_OFFER_PROCESSED: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.ASK_FOR_OFFER}/processed`,
-    ROUTER_ASK_FOR_OFFER_UNFINISHED: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.ASK_FOR_OFFER}/unfinished`,
+    ROUTER_ASK_FOR_OFFER_NEW: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.ASK_FOR_OFFER}/${CONSTS.PATHS.ASK_FOR_OFFER_NEW}`,
+    ROUTER_ASK_FOR_OFFER_IN_PROGRESS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.ASK_FOR_OFFER}/${CONSTS.PATHS.ASK_FOR_OFFER_IN_PROGRESS}`,
+    ASK_FOR_OFFER_PROCESSED: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.ASK_FOR_OFFER}/${CONSTS.PATHS.ASK_FOR_OFFER_PROCESSED}`,
     ROUTER_CREATE_USER: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CREATE_USER}`,
     ROUTER_CREATE_USER_SUPPLY_POINT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CREATE_USER}/${CONSTS.PATHS.SUPPLY_POINT}`,
     ROUTER_CREATE_USER_RECAPITULATION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CREATE_USER}/${CONSTS.PATHS.RECAPITULATION}`,

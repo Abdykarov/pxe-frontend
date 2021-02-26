@@ -36,3 +36,4 @@ export * from './remove-html-from-text.fnc';
 export * from './truncate-text.fnc';
 export * from './get-absolute-height-of-element.fnc';
 export * from './remove-accent.fnc';
+export * from './download-file.fnc';

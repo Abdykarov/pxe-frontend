@@ -1,13 +1,14 @@
+import { IPaginationConfig } from 'src/app/pages/suppliers/concluded-contracts/concluded-contracts.model';
 import { ITableColumnConfig } from 'src/common/ui/table/models/table.model';
 
-export const rows: ITableColumnConfig[] = ([
+export const tableConfig: ITableColumnConfig[] = ([
     {
         label: 'Datum přijetí',
         views: [
             {
                 headingClass: [''],
                 cellClass: [''],
-                content: (row) => `${row.date}`,
+                contentTemplateName: 'columnCreatedAt',
             },
         ],
     },
@@ -23,55 +24,32 @@ export const rows: ITableColumnConfig[] = ([
 
     },
     {
-        label: 'PDF',
+        label: 'Soubor',
         views: [
             {
-                headingClass: [''],
-                cellClass: [''],
-                content: (row) => `${row.fileName}`,
+                contentTemplateName: 'actionColumnPDF',
             },
         ],
     },
+
     {
         label: '',
         views: [
             {
+                headingClass: ['text-right'],
+                cellClass: ['text-right'],
                 contentTemplateName: 'actionColumnFill',
             },
         ],
     },
 ]);
 
-export const invoices = [
-    {
-        id: 53,
-        date: '11.22.2015',
-        email: 'email',
-        fileName: 'lamanc.pdf',
-    },
-    {
-        id: 52,
-        date: '11.22.2015',
-        email: 'email',
-        fileName: 'lamanc.pdf',
-    },
-    {
-        id: 51,
-        date: '11.22.2015',
-        email: 'email',
-        fileName: 'lamanc.pdf',
-    },
-    {
-        id: 50,
-        date: '11.22.2015',
-        email: 'email',
-        fileName: 'lamanc.pdf',
-    },
-    {
-        id: 9090,
-        date: '11.22.2015',
-        email: 'email',
-        fileName: 'lamanc.pdf',
-    },
-];
-
+export const paginationConfig: IPaginationConfig = {
+    itemsPerPage: 20,
+    showBoundaryLinks: true,
+    maxSize: 5,
+    firstText: '<span class="arrow-text">first</span>',
+    previousText: '<span class="arrow-text">prev</span>',
+    nextText: '<span class="arrow-text">next</span>',
+    lastText: '<span class="arrow-text">last</span>',
+};

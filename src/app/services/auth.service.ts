@@ -168,11 +168,11 @@ export class AuthService {
     }
 
     public needSmsConfirm(): boolean {
-        return this.currentUserValue.needSmsConfirm;
+        return this.currentUserValue?.needSmsConfirm;
     }
 
     public passwordChangeRequired(): boolean {
-        return this.currentUserValue.passwordReset;
+        return this.currentUserValue?.passwordReset;
     }
 
     public login = ({login, password}: ILoginRequest) => {
@@ -294,9 +294,9 @@ export class AuthService {
     }
 
     private getUserType = (roles: string[]): IUserTypes => R.cond([
+        [(rolesParam) => R.indexOf(IUserRoles.ROLE_CONTRACT_IMPORTER)(roles) !== -1, R.always(IUserTypes.CONTRACT_IMPORTER)],
         [(rolesParam) => R.indexOf(IUserRoles.PARC_SUPPLIER_P4R)(roles) !== -1, R.always(IUserTypes.SUPPLIER)],
         [(rolesParam) => R.indexOf(IUserRoles.PARC_CONSUMER_P_4_R)(roles) !== -1, R.always(IUserTypes.CONSUMER)],
-        [(rolesParam) => R.indexOf(IUserRoles.PARC_MANAGER)(roles) !== -1, R.always(IUserTypes.ADMIN)],
         [R.T, R.always(IUserTypes.CONSUMER)],
     ])(roles)
 

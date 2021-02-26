@@ -8,5 +8,7 @@
         [formValues]="supplyPointData"
         [globalError]="globalError"
         [fieldError]="fieldError"
+        submitLabel="Další"
+        (submitAction)="save($event)"
     ></pxe-supply-point-form>
 </div>

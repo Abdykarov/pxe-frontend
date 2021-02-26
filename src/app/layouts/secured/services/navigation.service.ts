@@ -40,7 +40,7 @@ export class NavigationService {
             navigationMenu: navigationMenuSuppliers,
             navigationMenuActions: navigationMenuSuppliersActions,
         },
-        [IUserTypes.ADMIN]: {
+        [IUserTypes.CONTRACT_IMPORTER]: {
             navigationMenu: navigationMenuAdmins,
             navigationMenuActions: navigationMenuAdminsActions,
         },

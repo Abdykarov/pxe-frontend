@@ -308,8 +308,8 @@ export class LoginComponent extends AbstractComponent implements OnDestroy {
                 return ROUTES.ROUTER_SUPPLY_OFFER_POWER;
             case LANDING_PAGE.WAITING_FOR_PAYMENT:
                 return ROUTES.ROUTER_REQUEST_PAYMENT;
-            case LANDING_PAGE.ASK_FOR_OFFER:
-                return ROUTES.ROUTER_ASK_FOR_OFFER_ACCEPTED;
+            case LANDING_PAGE.CONTRACT_IMPORT:
+                return ROUTES.ROUTER_ASK_FOR_OFFER_NEW;
         }
     }
 
@@ -332,7 +332,7 @@ export class LoginComponent extends AbstractComponent implements OnDestroy {
             return;
         }
 
-        if (loginResponse.landingPage === LANDING_PAGE.WAITING_FOR_PAYMENT) {
+        if (loginResponse?.landingPage === LANDING_PAGE.WAITING_FOR_PAYMENT) {
             const supplyPointId = this.authService.currentUserValue.evaluatedSupplyPoint;
             if (supplyPointId) {
                 extras.queryParams = {

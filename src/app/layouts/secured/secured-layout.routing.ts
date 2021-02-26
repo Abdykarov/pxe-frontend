@@ -82,7 +82,7 @@ const routes = [
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
-                    userType: IUserTypes.ADMIN,
+                    userType: IUserTypes.CONTRACT_IMPORTER,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
                 },
@@ -199,12 +199,12 @@ const routes = [
                 },
             },
             {
-                path: CONSTS.PATHS.ASK_FOR_OFFER + '/:types',
+                path: CONSTS.PATHS.ASK_FOR_OFFER + '/:type',
                 loadChildren: () => import('../../pages/admins/ask-for-offer/ask-for-offer.module').then(m => m.AskForOfferModule),
                 data: {
                     isSimpleFooter: false,
                     isPublic: false,
-                    userType: IUserTypes.ADMIN,
+                    userType: IUserTypes.CONTRACT_IMPORTER,
                     loginType: LoginType.NONE,
                     signUpType: SignType.NONE,
                 },
