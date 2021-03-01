@@ -1,7 +1,7 @@
+import { CONSTS } from 'src/app/app.constants';
 import { IPaginationConfig } from 'src/app/pages/suppliers/concluded-contracts/concluded-contracts.model';
+import { IShowModal } from 'src/common/containers/modal/modals/model/modal.model';
 import { ITableColumnConfig } from 'src/common/ui/table/models/table.model';
-import {IShowModal} from '../../../../common/containers/modal/modals/model/modal.model';
-import {CONSTS} from '../../../app.constants';
 
 export const tableConfig: ITableColumnConfig[] = ([
     {

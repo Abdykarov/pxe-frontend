@@ -7,7 +7,6 @@ import {
 } from 'src/common/graphql/models/supply.model';
 import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
-import {ContractUploadStatus} from '../common/graphql/models/ask-for-offer';
 
 export const CONSTS = {
     APPEND_AFTER_CUT_TEXT: '...',
