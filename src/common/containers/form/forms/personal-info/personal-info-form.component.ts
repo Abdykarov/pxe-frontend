@@ -98,7 +98,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
                         Validators.required,
                         CustomValidators.isNumber(),
                         CustomValidators.minValue(
-                            Math.ceil(this.supplyPoint.contract.offer.totalPrice),
+                            Math.ceil(this.supplyPoint.contract?.offer?.totalPrice),
                             true,
                             false,
                         ),
@@ -110,7 +110,7 @@ export class PersonalInfoFormComponent extends AbstractFormComponent implements 
             this.prefillFormData();
         } else {
             const email = this.authService.currentUserValue.email;
-            const deposit = this.supplyPoint.contract.offer.totalPrice;
+            const deposit = this.supplyPoint.contract?.offer?.totalPrice;
             this.form.controls['email'].setValue(email);
             this.form.controls['deposit'].setValue(Math.ceil(deposit));
 

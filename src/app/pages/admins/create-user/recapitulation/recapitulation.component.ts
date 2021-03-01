@@ -18,6 +18,9 @@ import {formFields} from '../../../../../common/containers/form/forms/personal-i
 import {Validators} from '@angular/forms';
 
 import * as R from 'ramda';
+import {AskForOfferService} from '../../../../../common/graphql/services/ask-for-offer.service';
+import {ActivatedRoute} from '@angular/router';
+import {ISupplyPointImport} from '../../../../../common/graphql/models/ask-for-offer';
 
 @Component({
     selector: 'pxe-create-user-prices',
@@ -27,10 +30,13 @@ import * as R from 'ramda';
 export class RecapitulationComponent extends AbstractComponent implements OnInit {
 
     constructor(
+        private askForOfferService: AskForOfferService,
         private cd: ChangeDetectorRef,
+        private route: ActivatedRoute,
         private supplyService: SupplyService,
     ) {
         super();
+        this.askForOfferId = route.snapshot.queryParams.askForOfferId;
 
         this.formFields.controls = R.mapObjIndexed((a, field) => {
             const [defaultValue, validators] = a;
@@ -41,6 +47,9 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             return [defaultValue, aaa];
         })({...this.formFields.controls});
     }
+
+    public supplyPoint: null;
+    public askForOfferId = null;
     public fieldError: IFieldError = {};
     public formLoading = false;
     public formSent = false;
@@ -54,38 +63,19 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             map(({data}) => transformCodeList(data.findCodelistsByTypes)),
         );
 
+    private supplyPointFromSupplyPointImport = (supplyPointImport: ISupplyPointImport): any => {
+        const data = {
+            ...supplyPointImport,
+            ...supplyPointImport?.supplyPointPowerAttributes,
+            ...supplyPointImport?.supplyPointGasAttributes,
+            commodityType: supplyPointImport?.supplyPointGasAttributes?.eic ?
+                CommodityType.GAS : CommodityType.POWER,
+            identificationNumber: supplyPointImport?.supplyPointPowerAttributes?.ean ||
+                supplyPointImport?.supplyPointGasAttributes?.eic,
+        };
 
-
-    public supplyPointConfig: ISupplyPoint = {
-        id: '5456',
-        name: 'Byt praha',
-        allowedOperations: [],
-        commodityType: CommodityType.POWER,
-        supplier: {
-            id: '',
-            name: 'PRE',
-            vatNumber: '',
-            logoPath: '',
-            sampleDocuments: [],
-        },
-        identificationNumber: '',
-        address: null,
-        distributionRate: null,
-        circuitBreaker: null,
-        phases: null,
-        annualConsumptionNT: 0,
-        annualConsumptionVT: 0,
-        expirationDate: '0',
-        subject: null,
-        lastAnnualConsumptionNT: 0,
-        lastAnnualConsumptionVT: 0,
-        lastVersionOfSupplyPoint: false,
-        contractEndType: null,
-        timeToContractEnd: 0,
-        timeToContractEndPeriod: null,
-        contract: null,
-        progressStatus: ProgressStatus.SUPPLY_POINT,
-    };
+        return data;
+    }
 
     ngOnInit () {
         combineLatest([this.codeLists$])
@@ -103,5 +93,38 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                     this.cd.markForCheck();
                 },
             );
+
+        this.askForOfferService.
+            findSupplyPointImport(this.askForOfferId)
+            .pipe(
+                takeUntil(this.destroy$),
+                map(({data}) => data.findSupplyPointImport),
+            )
+            .subscribe( supplyPointImport => {
+                this.supplyPoint = supplyPointImport;
+                console.log(this.supplyPoint);
+                console.log(supplyPointImport);
+                this.cd.markForCheck();
+            });
+    }
+
+    public submit = (data) => {
+        const aaa = this.supplyPoint;
+        // @ts-ignore
+        aaa?.personalData = data;
+        // @ts-ignore
+        const dadaaasdad = this.supplyPoint.supplyPointPowerAttributes;
+        // @ts-ignore
+        delete dadaaasdad['__typename'];
+        // @ts-ignore
+        delete aaa['supplyPointGasAttributes'];
+        // @ts-ignore
+        delete aaa['supplyPointPowerAttributes'];
+        // @ts-ignore
+        delete aaa['__typename'];
+        // @ts-ignore
+        delete aaa['address']['__typename'];
+        // @ts-ignore
+        this.askForOfferService.createPowerSupplyPointImport(aaa, dadaaasdad).subscribe();
     }
 }

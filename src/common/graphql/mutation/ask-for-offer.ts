@@ -5,7 +5,7 @@ export const createPowerSupplyPointImportMutation = gql`
         $supplyPoint: SupplyPointInputImport!,
         $powerAttributes: SupplyPointInputPowerAttributesImport!,
     ){
-        createPowerSupplyPoint(
+        createPowerSupplyPointImport(
             supplyPoint: $supplyPoint,
             powerAttributes: $powerAttributes,
         )
@@ -17,7 +17,7 @@ export const createGasSupplyPointImportMutation = gql`
         $supplyPoint: SupplyPointInputImport!,
         $gasAttributes: SupplyPointInputGasAttributesImport!,
     ){
-        createGasSupplyPoint(
+        createGasSupplyPointImport(
             supplyPoint: $supplyPoint,
             gasAttributes: $gasAttributes,
         )

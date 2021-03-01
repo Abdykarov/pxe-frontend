@@ -1,6 +1,10 @@
 import { CONSTS } from 'src/app/app.constants';
+import {
+    IAddress,
+    ISupplyPointGasAttributes,
+    ISupplyPointPowerAttributes,
+} from './supply.model';
 import { IPagination } from './suppplier.model';
-import {IAddress, ISupplyPointGasAttributes, ISupplyPointPowerAttributes} from './supply.model';
 
 export enum ContractUploadStatus {
     NEW = 'NEW',
@@ -64,4 +68,20 @@ export interface ISupplyPointPowerAttributesImport {
 export interface ISupplyPointGasAttributesImport {
     eic: string;
     annualConsumption: number;
+}
+
+export interface ISupplyPointImport {
+    id: string;
+    supplierId: string;
+    name: string;
+    address: IAddress;
+    supplyPointPowerAttributes: ISupplyPointPowerAttributesImport;
+    supplyPointGasAttributes: ISupplyPointGasAttributesImport;
+    expirationDate: string;
+    subjectTypeId: string;
+    contractEndTypeId: string;
+    timeToContractEnd: number;
+    timeToContractEndPeriodId: string;
+    personalData: IAddress;
+    askForOfferId: string;
 }

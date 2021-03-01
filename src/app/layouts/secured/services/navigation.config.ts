@@ -89,7 +89,7 @@ export const navigationMenuAdmins: INavigationMenu = [
     },
     {
         'class': '',
-        'url': ROUTES.ASK_FOR_OFFER_PROCESSED,
+        'url': ROUTES.ROUTER_ASK_FOR_OFFER_IN_PROGRESS,
         'label': 'Rozpracované',
         'icon': 'notice-board',
         'type': INavigationItemType.NORMAL,
@@ -98,7 +98,7 @@ export const navigationMenuAdmins: INavigationMenu = [
     },
     {
         'class': '',
-        'url': ROUTES.ROUTER_ASK_FOR_OFFER_IN_PROGRESS,
+        'url': ROUTES.ASK_FOR_OFFER_PROCESSED,
         'label': 'Uzavřené',
         'icon': 'notice-board',
         'type': INavigationItemType.NORMAL,

@@ -9,7 +9,7 @@ import {
     ISupplyPointImportInput,
     ISupplyPointPowerAttributesImport,
 } from 'src/common/graphql/models/ask-for-offer';
-import { listAskForOfferQuery } from 'src/common/graphql/queries/ask-for-offer';
+import {findSupplyPointImportQuery, listAskForOfferQuery} from 'src/common/graphql/queries/ask-for-offer';
 import { IResponseDataDocument} from 'src/app/services/model/document.model';
 import {saveAs} from 'file-saver';
 import {
@@ -17,8 +17,6 @@ import {
     createPowerSupplyPointImportMutation,
     deleteAskForOfferMutation,
 } from 'src/common/graphql/mutation/ask-for-offer';
-import {IPaginationConfig} from '../../../app/pages/suppliers/concluded-contracts/concluded-contracts.model';
-
 
 @Injectable({
     providedIn: 'root',
@@ -44,31 +42,31 @@ export class AskForOfferService {
     public documentSave = (data: IResponseDataDocument) => saveAs(data.file, data.filename);
 
     public createPowerSupplyPointImport = (
-        supplyPointImport: ISupplyPointImportInput,
-        powerAttributesImport: ISupplyPointPowerAttributesImport,
+        supplyPoint: ISupplyPointImportInput,
+        powerAttributes: ISupplyPointPowerAttributesImport,
     ) => this.apollo
         .mutate<any>({
                 mutation: createPowerSupplyPointImportMutation,
                 variables: {
-                    supplyPointImport,
-                    powerAttributesImport,
+                    supplyPoint,
+                    powerAttributes,
                 },
             },
         )
 
 
-        public createGasSupplyPointImport = (
-            supplyPointImport: ISupplyPointImportInput,
-            gasAttributesImport: ISupplyPointGasAttributesImport,
-        ) => this.apollo
-            .mutate<any>({
-                mutation: createGasSupplyPointImportMutation,
-                variables: {
-                    supplyPointImport,
-                    gasAttributesImport,
-                },
+    public createGasSupplyPointImport = (
+        supplyPoint: ISupplyPointImportInput,
+        gasAttributes: ISupplyPointGasAttributesImport,
+    ) => this.apollo
+        .mutate<any>({
+            mutation: createGasSupplyPointImportMutation,
+            variables: {
+                supplyPoint,
+                gasAttributes,
             },
-        )
+        },
+    )
 
     public deleteAskForOffer = (
         askForOfferId: string,
@@ -88,4 +86,15 @@ export class AskForOfferService {
             ],
         },
     )
+
+    public findSupplyPointImport = (
+        askForOfferId: string,
+    ) => this.apollo
+        .query<any>({
+                query: findSupplyPointImportQuery,
+                variables: {
+                    askForOfferId,
+                },
+            },
+        )
 }

@@ -10,7 +10,7 @@
             type="icon"
             icon="icon--delete"
             variant="icon"
-            title="asda"
+            title="Zamítnout"
             (action)="remove(row.id)"
         ></lnd-button>
     </div>
@@ -74,7 +74,7 @@
             </ng-container>
             <ng-container *ngIf="paginatedAskForOffer.page.length === 0">
                 <lnd-info-banner
-                    [bannerType]="BannerTypeImages.DOCUMENTS"
+                    [bannerType]="BannerTypeImages.LOADING"
                     [bannerTitle]="'Nejsou zde žádné faktury.'"
                     [showButton]="false"
                 ></lnd-info-banner>

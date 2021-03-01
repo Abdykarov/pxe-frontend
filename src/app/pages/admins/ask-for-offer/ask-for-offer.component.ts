@@ -105,13 +105,10 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
             .subscribe(
                 (paginatedAskForOffer: IPaginatedAskForOffer) => {
                     this.loading = false;
-                    console.log(paginatedAskForOffer);
                     this.paginatedAskForOffer = paginatedAskForOffer;
                     this.cd.markForCheck();
                 },
                 (error) => {
-                    console.log('___');
-                    console.log(error);
                     const { globalError } = parseGraphQLErrors(error);
                     this.globalError = globalError;
                     this.loading = false;

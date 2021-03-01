@@ -1,13 +1,14 @@
-<div class="col-12 col-xl-10 offset-xl-1">
+<div class="col-12 col-xl-10 offset-xl-1" *ngIf="supplyPoint">
     <div class="page-box">
         <pxe-personal-info-form
-            [supplyPoint]="supplyPointConfig"
+            [supplyPoint]="supplyPoint"
             [codeLists]="codeLists"
             [isIndividual]="true"
             [fieldError]="fieldError"
             [formFields]="formFields"
             [formLoading]="formLoading"
-            [globalError]="globalError">
+            [globalError]="globalError"
+            (submitAction)="submit($event)">
         ></pxe-personal-info-form>
     </div>
 </div>

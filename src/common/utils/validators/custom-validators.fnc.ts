@@ -284,10 +284,6 @@ export class CustomValidators {
             return null;
         }
 
-        if (!ean.value) {
-            return null;
-        }
-
         if (EanValidator.validate(ean.value)) {
             return null;
         }
@@ -371,10 +367,6 @@ export class CustomValidators {
 
     static eic = (eic) => {
         if (eic.pristine) {
-            return null;
-        }
-
-        if (!eic.value) {
             return null;
         }
 
