@@ -28,4 +28,3 @@ import { TableModule } from 'src/common/ui/table/table.module';
     ],
 })
 export class AskForOfferModule { }
-//
