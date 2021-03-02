@@ -1,5 +1,7 @@
 import gql from 'graphql-tag';
 
+import { supplyPointFragment } from './supply';
+
 export const listAskForOfferQuery = gql`
     query listAskForOffer($filter: AskForOfferFilter!){
         listAskForOffer(filter: $filter){
@@ -20,72 +22,10 @@ export const listAskForOfferQuery = gql`
 `;
 
 export const findSupplyPointImportQuery = gql`
-    query findSupplyPointImport($askForOfferId: ID!){
+    query findSupplyPointImport($askForOfferId: ID!, $skipInfoAboutRelationContracts: Boolean = true, $skipOfferValidity: Boolean = true){
         findSupplyPointImport(askForOfferId: $askForOfferId){
-            id,
-            askForOfferId,
-            supplierId,
-            name,
-            expirationDate,
-            subjectTypeId,
-            contractEndTypeId,
-            timeToContractEnd,
-            timeToContractEndPeriodId,
-            address{
-                street,
-                orientationNumber,
-                descriptiveNumber,
-                city,
-                postCode,
-                region,
-            },
-            supplyPointPowerAttributes{
-                ean,
-                circuitBreakerId,
-                phasesId,
-                distributionRateId,
-                annualConsumptionNT,
-                annualConsumptionNTUnit,
-                annualConsumptionVT,
-                annualConsumptionVTUnit,
-            },
-            supplyPointGasAttributes{
-                eic,
-                annualConsumption,
-                annualConsumptionUnit,
-            },
-            personalData {
-                name,
-                ico,
-                dic,
-                birthDate,
-                email,
-                phone,
-                bankAccountNumber,
-                bankCode,
-                depositPaymentTypeId,
-                deposit,
-                signatoryName,
-                signatorySurname,
-                signatoryPosition,
-                address1 {
-                    street,
-                    orientationNumber,
-                    descriptiveNumber,
-                    city,
-                    postCode,
-                    region,
-                },
-                address2 {
-                    street,
-                    orientationNumber,
-                    descriptiveNumber,
-                    city,
-                    postCode,
-                    region,
-                },
-
-            }
+            ...SupplyPointFragment
         }
     }
+    ${supplyPointFragment}
 `;

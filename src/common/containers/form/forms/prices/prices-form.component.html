@@ -5,56 +5,52 @@
     (keydown)="resetCustomFieldError()"
     (keydown.enter)="submitForm($event);false">
     <lnd-form-field
-        *ngIf="form.controls.priceNT.status !== 'DISABLED'"
-        [error]="formError.priceNT || form.controls.priceNT.errors"
-        [formControl]="form.controls.priceNT"
-        [id]="'priceNT'"
+        *ngIf="form.controls.importPricePerKwPowerNT.status !== 'DISABLED'"
+        [error]="formError.importPricePerKwPowerNT || form.controls.importPricePerKwPowerNT.errors"
+        [formControl]="form.controls.importPricePerKwPowerNT"
+        [id]="'importPricePerKwPowerNT'"
         label="Cena za nízký tarif"
-        [success]="form.controls.priceNT.valid && (form.controls.priceNT.touched || formError.priceNT)"
-        [touched]="form.controls.priceNT.touched || formError.priceNT"
-        [validationMessages]="formFields.validationMessages.priceNT"
+        [success]="form.controls.importPricePerKwPowerNT.valid && (form.controls.importPricePerKwPowerNT.touched || formError.importPricePerKwPowerNT)"
+        [touched]="form.controls.importPricePerKwPowerNT.touched || formError.importPricePerKwPowerNT"
+        [validationMessages]="formFields.validationMessages.importPricePerKwPowerNT"
     ></lnd-form-field>
     <lnd-form-field
-        *ngIf="form.controls.priceVT.status !== 'DISABLED'"
-        [error]="formError.priceVT || form.controls.priceVT.errors"
-        [formControl]="form.controls.priceVT"
-        [id]="'priceVT'"
+        *ngIf="form.controls.importPricePerKwPowerVT.status !== 'DISABLED'"
+        [error]="formError.importPricePerKwPowerVT || form.controls.importPricePerKwPowerVT.errors"
+        [formControl]="form.controls.importPricePerKwPowerVT"
+        [id]="'importPricePerKwPowerVT'"
         label="Cena za vysoký tarif"
-        [success]="form.controls.priceVT.valid && (form.controls.priceVT.touched || formError.priceVT)"
-        [touched]="form.controls.priceVT.touched || formError.priceVT"
-        [validationMessages]="formFields.validationMessages.priceVT"
+        [success]="form.controls.importPricePerKwPowerVT.valid && (form.controls.importPricePerKwPowerVT.touched || formError.importPricePerKwPowerVT)"
+        [touched]="form.controls.importPricePerKwPowerVT.touched || formError.importPricePerKwPowerVT"
+        [validationMessages]="formFields.validationMessages.importPricePerKwPowerVT"
     ></lnd-form-field>
     <lnd-form-field
-        *ngIf="form.controls.priceGas.status !== 'DISABLED'"
-        [error]="formError.priceGas || form.controls.priceGas.errors"
-        [formControl]="form.controls.priceGas"
-        [id]="'priceGas'"
+        *ngIf="form.controls.importPricePerKwGas.status !== 'DISABLED'"
+        [error]="formError.importPricePerKwGas || form.controls.importPricePerKwGas.errors"
+        [formControl]="form.controls.importPricePerKwGas"
+        [id]="'importPricePerKwGas'"
         label="Cena"
-        [success]="form.controls.priceGas.valid && (form.controls.priceGas.touched || formError.priceGas)"
-        [touched]="form.controls.priceGas.touched || formError.priceGas"
-        [validationMessages]="formFields.validationMessages.priceGas"
+        [success]="form.controls.importPricePerKwGas.valid && (form.controls.importPricePerKwGas.touched || formError.importPricePerKwGas)"
+        [touched]="form.controls.importPricePerKwGas.touched || formError.importPricePerKwGas"
+        [validationMessages]="formFields.validationMessages.importPricePerKwGas"
     ></lnd-form-field>
     <lnd-form-field
-        *ngIf="form.controls.yearPrice.status !== 'DISABLED'"
-        [error]="formError.yearPrice || form.controls.yearPrice.errors"
-        [formControl]="form.controls.yearPrice"
-        [id]="'yearPrice'"
+        *ngIf="form.controls.importPriceTotalPerYear.status !== 'DISABLED'"
+        [error]="formError.importPriceTotalPerYear || form.controls.importPriceTotalPerYear.errors"
+        [formControl]="form.controls.importPriceTotalPerYear"
+        [id]="'importPriceTotalPerYear'"
         label="Cena celkem za rok"
-        [success]="form.controls.yearPrice.valid && (form.controls.yearPrice.touched || formError.yearPrice)"
-        [touched]="form.controls.yearPrice.touched || formError.yearPrice"
-        [validationMessages]="formFields.validationMessages.yearPrice"
+        [success]="form.controls.importPriceTotalPerYear.valid && (form.controls.importPriceTotalPerYear.touched || formError.importPriceTotalPerYear)"
+        [touched]="form.controls.importPriceTotalPerYear.touched || formError.importPriceTotalPerYear"
+        [validationMessages]="formFields.validationMessages.importPriceTotalPerYear"
     ></lnd-form-field>
-    <div class="text-right">
+    <div class="text-center">
         <lnd-button
-            type="gradient-primary"
-            class="w-100"
-            customClass="btn-public btn--icon-right w-100"
+            type="primary"
             [submit]="true"
             (action)="submitForm($event)"
             [isDisabled]="!!formLoading"
-            label="Resetovat heslo"
-            icon="icon--arrow-right"
-            iconPosition="right">
+            label="Uložit a odeslat nabídky E-mailem">
         </lnd-button>
     </div>
 </form>

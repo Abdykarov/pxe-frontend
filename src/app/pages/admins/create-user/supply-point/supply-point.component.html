@@ -1,6 +1,12 @@
-<div class="col-12 col-xl-10 offset-xl-1"
-     *ngIf="supplyPoint">
+<div class="col-12 col-xl-10 offset-xl-1 text-center">
+    <p class="perex mb-4">
+        Zadejte údaje k odběrnému místu
+    </p>
+</div>
+<div class="col-12 col-xl-10 offset-xl-1">
+    <lnd-placeloader [loading]="!supplyPoint"></lnd-placeloader>
     <pxe-supply-point-form
+        *ngIf="supplyPoint"
         [editMode]="editMode"
         [withoutValidator]="true"
         [formFields]="formFields"

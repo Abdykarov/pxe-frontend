@@ -41,7 +41,7 @@
         <ng-container *ngFor="let row of rows; let i = index">
             <tr
                 [ngClass]="[
-                  row | dynamic: customTrClassPipe
+                    (customTrClassPipe ? (row | dynamic: customTrClassPipe) : '')
                 ]"
                 [class.table__tr--bg-white]="whiteBackgroundPropertyCondition && row[whiteBackgroundPropertyCondition]"
                 [class.table__tr--bg-danger]="dangerBackgroundPropertyCondition && row[dangerBackgroundPropertyCondition]"

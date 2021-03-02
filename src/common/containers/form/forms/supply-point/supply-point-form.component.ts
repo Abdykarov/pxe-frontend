@@ -361,27 +361,21 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
 
         if (!R.isEmpty(this.formValues)) {
             commodityType = this.formValues.commodityType;
-            const supplier = this.formValues.supplier && R.find(R.propEq('id', this.formValues.supplier.id))(this.suppliers[commodityType]);
+            const supplier = R.find(R.propEq('id', this.formValues.supplier?.id))(this.suppliers[commodityType]);
             const expirationDateFromSupplyPoint = this.formValues.expirationDate && new Date(this.formValues.expirationDate);
             const expirationDateFromContract = this.formValues.contract &&
-                this.formValues.contract.deliveryTo &&
-                new Date(this.formValues.contract.deliveryTo);
+                this.formValues?.contract.deliveryTo &&
+                new Date(this.formValues?.contract.deliveryTo);
             id = this.formValues.id;
-            subjectTypeId = (this.formValues.subject && this.formValues.subject.code) ||
-                (<any>this.formValues).subjectTypeId;
-            supplierId = (this.formValues.supplier && this.suppliers[commodityType] && supplier) ||
-                (<any>this.formValues).supplierId;
-
+            subjectTypeId = this.formValues.subject && this.formValues.subject?.code;
+            supplierId = this.formValues.supplier && this.suppliers[commodityType] && supplier;
             name = this.formValues.name;
             ean = this.formValues.commodityType === CommodityType.POWER ? this.formValues.identificationNumber : null;
             eic = this.formValues.commodityType === CommodityType.GAS ? this.formValues.identificationNumber : null;
             address = this.formValues.address && R.omit(['__typename'], this.formValues.address);
-            distributionRateId = (this.formValues.distributionRate && this.formValues.distributionRate.code) ||
-                (<any>this.formValues).distributionRateId;
-            circuitBreakerId = (this.formValues.circuitBreaker && this.formValues.circuitBreaker.code) ||
-                (<any>this.formValues).circuitBreakerId;
-            phasesId = (this.formValues.phases && this.formValues.phases.code) ||
-                (<any>this.formValues).phasesId;
+            distributionRateId = this.formValues?.distributionRate && this.formValues.distributionRate.code;
+            circuitBreakerId = this.formValues?.circuitBreaker && this.formValues.circuitBreaker.code;
+            phasesId = this.formValues?.phases && this.formValues.phases.code;
             annualConsumptionNTUnit = this.formValues.annualConsumptionNTUnit;
             annualConsumptionVTUnit = this.formValues.annualConsumptionVTUnit;
             annualConsumptionUnit = this.formValues.annualConsumptionUnit;
@@ -407,9 +401,9 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
 
             if (this.editMode === SUPPLY_POINT_EDIT_TYPE.NORMAL) {
                 expirationDate = expirationDateFromSupplyPoint;
-                contractEndTypeId = this.formValues.contractEndType && this.formValues.contractEndType.code;
-                timeToContractEnd = this.formValues.timeToContractEnd;
-                timeToContractEndPeriodId = this.formValues.timeToContractEndPeriod && this.formValues.timeToContractEndPeriod.code;
+                contractEndTypeId = this.formValues?.contractEndType && this.formValues.contractEndType.code;
+                timeToContractEnd = this.formValues?.timeToContractEnd;
+                timeToContractEndPeriodId = this.formValues?.timeToContractEndPeriod && this.formValues.timeToContractEndPeriod.code;
             } else {
                 expirationDate = expirationDateFromContract || expirationDateFromSupplyPoint;
                 contractEndTypeId = CONTRACT_END_TYPE.CONTRACT_END_TERM_WITH_PROLONGATION;

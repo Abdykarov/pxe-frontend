@@ -134,6 +134,10 @@ export interface ISupplyPoint {
     annualConsumptionNTUnit?: string;
     annualConsumptionVTUnit?: string;
     annualConsumptionUnit?: string;
+    importPricePerKwPowerVT?: number;
+    importPricePerKwPowerNT?: number;
+    importPricePerKwGas?: number;
+    importPriceTotalPerYear?: number;
 }
 
 export enum ProgressStatus {

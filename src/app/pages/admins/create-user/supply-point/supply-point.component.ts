@@ -1,5 +1,4 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {Validators} from '@angular/forms';
 
 import * as R from 'ramda';
 
@@ -10,14 +9,9 @@ import {SUPPLY_POINT_EDIT_TYPE} from 'src/app/app.constants';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CommodityType, ISupplyPoint, } from '../../../../../common/graphql/models/supply.model';
 import {map, takeUntil} from 'rxjs/operators';
-import {parseGraphQLErrors} from '../../../../../common/utils';
+import {parseGraphQLErrors, removeRequiredValidators} from '../../../../../common/utils';
 import {AskForOfferService} from '../../../../../common/graphql/services/ask-for-offer.service';
-import {
-    ISupplyPointGasAttributesImport,
-    ISupplyPointImport,
-    ISupplyPointImportInput,
-    ISupplyPointPowerAttributesImport,
-} from '../../../../../common/graphql/models/ask-for-offer';
+import {ISupplyPointImportInput, ISupplyPointPowerAttributesImport, } from '../../../../../common/graphql/models/ask-for-offer';
 
 @Component({
     selector: 'pxe-create-user-supply-point',
@@ -32,7 +26,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public formSent = false;
     public globalError: string[] = [];
     public supplyPointImport: any = null;
-    public supplyPoint: any = null;
+    public supplyPoint = null;
 
     public askForOfferId = null;
 
@@ -44,47 +38,23 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     ) {
         super();
         this.askForOfferId = route.snapshot.queryParams.askForOfferId;
-
-        this.editMode = this.askForOfferId ? SUPPLY_POINT_EDIT_TYPE.PROLONG : SUPPLY_POINT_EDIT_TYPE.NORMAL;
-
-        this.formFields.controls = R.mapObjIndexed((a, field) => {
-            const [defaultValue, validators] = a;
-            let aaa = [];
-            if (validators) {
-                aaa = R.reject(fc => fc.toString() === Validators.required.toString())(validators);
-            }
-            return [defaultValue, aaa];
-        })({...this.formFields.controls});
-    }
-
-    private supplyPointFromSupplyPointImport = (supplyPointImport: ISupplyPointImport): any => {
-        const data = {
-            ...supplyPointImport,
-            ...supplyPointImport?.supplyPointPowerAttributes,
-            ...supplyPointImport?.supplyPointGasAttributes,
-            commodityType: supplyPointImport?.supplyPointGasAttributes?.eic ?
-                CommodityType.GAS : CommodityType.POWER,
-            identificationNumber: supplyPointImport?.supplyPointPowerAttributes?.ean ||
-                supplyPointImport?.supplyPointGasAttributes?.eic,
-        };
-
-        return data;
+        this.formFields.controls = removeRequiredValidators(this.formFields.controls);
     }
 
     ngOnInit() {
         super.ngOnInit();
-
         this.askForOfferService.
             findSupplyPointImport(this.askForOfferId)
                 .pipe(
                     takeUntil(this.destroy$),
                     map(({data}) => data.findSupplyPointImport),
                 )
-                .subscribe( supplyPointImport => {
-                    this.supplyPointImport = supplyPointImport;
-                    this.supplyPoint = this.supplyPointFromSupplyPointImport(supplyPointImport);
-                    console.log('___');
-                    console.log(this.supplyPoint);
+                .subscribe( (supplyPoint: ISupplyPoint) => {
+                    if (supplyPoint === null) {
+                        this.supplyPoint = {};
+                    } else {
+                        this.supplyPoint = supplyPoint;
+                    }
                     this.cd.markForCheck();
                 });
 
@@ -94,7 +64,6 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         this.formLoading = true;
         this.globalError = [];
         this.fieldError = {};
-        let supplyPointAction;
 
         const supplyPoint: ISupplyPointImportInput = R.pick([
             'supplierId',
@@ -106,41 +75,36 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
             'timeToContractEnd',
             'timeToContractEndPeriodId',
         ], supplyPointFormData);
-        supplyPoint.askForOfferId = this.askForOfferId;
 
         if (supplyPointFormData.commodityType === CommodityType.POWER) {
-            const powerAttributes: ISupplyPointPowerAttributesImport =
-                R.pick([
-                    'ean',
-                    'circuitBreakerId',
-                    'phasesId',
-                    'distributionRateId',
-                    'annualConsumptionNT',
-                    'annualConsumptionNTUnit',
-                    'annualConsumptionVT',
-                    'annualConsumptionVTUnit',
-                ], supplyPointFormData);
-            supplyPointAction = this.askForOfferService.createPowerSupplyPointImport(supplyPoint, powerAttributes);
+            supplyPoint.supplyPointPowerAttributes = R.pick([
+                'ean',
+                'circuitBreakerId',
+                'phasesId',
+                'distributionRateId',
+                'annualConsumptionNT',
+                'annualConsumptionNTUnit',
+                'annualConsumptionVT',
+                'annualConsumptionVTUnit',
+            ], supplyPointFormData);
         } else {
-            const gasAttributes: ISupplyPointGasAttributesImport =
-                R.pick([
-                    'eic',
-                    'annualConsumption',
-                    'annualConsumptionUnit',
-                ], supplyPointFormData);
-            supplyPointAction = this.askForOfferService.createGasSupplyPointImport(supplyPoint, gasAttributes);
+            supplyPoint.supplyPointGasAttributes = R.pick([
+                'eic',
+                'annualConsumption',
+                'annualConsumptionUnit',
+            ], supplyPointFormData);
         }
 
-        supplyPointAction
+        this.askForOfferService.createSupplyPointImport(this.askForOfferId, supplyPoint)
             .pipe(
                 takeUntil(this.destroy$),
                 map(
-                    ({data}) => data.createPowerSupplyPointImport ||
-                        data.createGasSupplyPointImport,
+                    ({data}) => data.createSupplyPointImport,
                 ),
             )
             .subscribe(
                 (supplyPointId) => {
+                    this.formLoading = false;
                     this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_RECAPITULATION], {
                         queryParams: {
                             askForOfferId: this.askForOfferId,

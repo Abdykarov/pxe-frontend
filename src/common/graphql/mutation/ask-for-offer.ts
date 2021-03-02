@@ -1,25 +1,13 @@
 import gql from 'graphql-tag';
 
-export const createPowerSupplyPointImportMutation = gql`
-    mutation createPowerSupplyPointImport(
+export const createSupplyPointImportMutation = gql`
+    mutation createSupplyPointImport(
+        $askForOfferId: ID!,
         $supplyPoint: SupplyPointInputImport!,
-        $powerAttributes: SupplyPointInputPowerAttributesImport!,
     ){
-        createPowerSupplyPointImport(
+        createSupplyPointImport(
+            askForOfferId: $askForOfferId,
             supplyPoint: $supplyPoint,
-            powerAttributes: $powerAttributes,
-        )
-    }
-`;
-
-export const createGasSupplyPointImportMutation = gql`
-    mutation createGasSupplyPointImport(
-        $supplyPoint: SupplyPointInputImport!,
-        $gasAttributes: SupplyPointInputGasAttributesImport!,
-    ){
-        createGasSupplyPointImport(
-            supplyPoint: $supplyPoint,
-            gasAttributes: $gasAttributes,
         )
     }
 `;
@@ -29,6 +17,17 @@ export const deleteAskForOfferMutation = gql`
         $askForOfferId: ID!,
     ){
         deleteAskForOffer(
+            askForOfferId: $askForOfferId,
+        )
+    }
+`;
+
+
+export const finalizeAskForOfferMutation = gql`
+    mutation finalizeAskForOffer(
+        $askForOfferId: ID!,
+    ){
+        finalizeAskForOffer(
             askForOfferId: $askForOfferId,
         )
     }

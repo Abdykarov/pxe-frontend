@@ -5,6 +5,7 @@ import {
     ISupplyPointPowerAttributes,
 } from './supply.model';
 import { IPagination } from './suppplier.model';
+import {IPersonalData, IPersonalDataInputForm} from './personal-data.model';
 
 export enum ContractUploadStatus {
     NEW = 'NEW',
@@ -42,18 +43,21 @@ export interface IPaginatedAskForOffer {
 }
 
 export interface ISupplyPointImportInput {
-    address: IAddress;
-    contractEndTypeId: string;
+    address?: IAddress;
+    contractEndTypeId?: string;
     expirationDate?: string;
-    name: string;
-    gasAttributes?: ISupplyPointGasAttributes;
-    powerAttributes?: ISupplyPointPowerAttributes;
-    subjectTypeId: string;
-    supplierId: number;
+    name?: string;
+    supplyPointPowerAttributes?: ISupplyPointPowerAttributes;
+    supplyPointGasAttributes?: ISupplyPointGasAttributes;
+    subjectTypeId?: string;
+    supplierId?: string;
     timeToContractEnd?: number;
     timeToContractEndPeriodId?: String;
-    ownTerminate?: boolean;
-    askForOfferId: string;
+    personalData?: IPersonalDataInputForm;
+    importPricePerKwPowerVT?: number;
+    importPricePerKwPowerNT?: number;
+    importPricePerKwGas?: number;
+    importPriceTotalPerYear?: number;
 }
 
 export interface ISupplyPointPowerAttributesImport {

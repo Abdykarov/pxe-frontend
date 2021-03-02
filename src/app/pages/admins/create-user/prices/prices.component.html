@@ -1,9 +1,12 @@
 <div class="col-12 col-xl-10 offset-xl-1">
     <div class="page-box">
         <pxe-price-form
+            [supplyPoint]="supplyPoint"
             [formFields]="formFields"
             [formLoading]="formLoading"
-            [globalError]="globalError">
+            [globalError]="globalError"
+            (submitAction)="submit($event)">
         ></pxe-price-form>
     </div>
+    <a (click)="send()">Finalize</a>
 </div>

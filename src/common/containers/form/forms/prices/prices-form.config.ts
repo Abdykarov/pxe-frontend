@@ -5,7 +5,7 @@ import { IForm } from 'src/common/containers/form/models/form-definition.model';
 
 export const formFields: IForm = {
     controls: {
-        priceVT: [
+        importPricePerKwPowerVT: [
             '',
             [
                 CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT),
@@ -13,7 +13,7 @@ export const formFields: IForm = {
                 CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
             ],
         ],
-        priceNT: [
+        importPricePerKwPowerNT: [
             '',
             [
                 CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT),
@@ -21,7 +21,7 @@ export const formFields: IForm = {
                 CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
             ],
         ],
-        priceGas: [
+        importPricePerKwGas: [
             '',
             [
                 CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT),
@@ -29,7 +29,7 @@ export const formFields: IForm = {
                 CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),
             ],
         ],
-        yearPrice: [
+        importPriceTotalPerYear: [
             '',
             [
                 CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_DEFAULT),
@@ -39,25 +39,25 @@ export const formFields: IForm = {
         ],
     },
     validationMessages: {
-        priceGas: {
+        importPricePerKwGas: {
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
             totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
-        priceNT: {
+        importPricePerKwPowerNT: {
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
             totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
-        priceVT: {
+        importPricePerKwPowerVT: {
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
             totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
-        yearPrice: {
+        importPriceTotalPerYear: {
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
