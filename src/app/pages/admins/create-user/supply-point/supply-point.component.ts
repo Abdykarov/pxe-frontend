@@ -1,17 +1,33 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
+import {
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+} from '@angular/core';
 
 import * as R from 'ramda';
+import {
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 
-import {AbstractComponent} from 'src/common/abstract.component';
-import {formFields} from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
-import {IFieldError} from 'src/common/containers/form/models/form-definition.model';
-import {SUPPLY_POINT_EDIT_TYPE} from 'src/app/app.constants';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CommodityType, ISupplyPoint, } from '../../../../../common/graphql/models/supply.model';
-import {map, takeUntil} from 'rxjs/operators';
-import {parseGraphQLErrors, removeRequiredValidators} from '../../../../../common/utils';
-import {AskForOfferService} from '../../../../../common/graphql/services/ask-for-offer.service';
-import {ISupplyPointImportInput, ISupplyPointPowerAttributesImport, } from '../../../../../common/graphql/models/ask-for-offer';
+import { AbstractComponent } from 'src/common/abstract.component';
+import { AskForOfferService} from 'src/common/graphql/services/ask-for-offer.service';
+import {
+    CommodityType,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
+import { formFields} from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
+import { IFieldError} from 'src/common/containers/form/models/form-definition.model';
+import { ISupplyPointImportInput } from 'src/common/graphql/models/ask-for-offer';
+import {
+    parseGraphQLErrors,
+    removeRequiredValidators,
+} from 'src/common/utils';
+import { SUPPLY_POINT_EDIT_TYPE} from 'src/app/app.constants';
 
 @Component({
     selector: 'pxe-create-user-supply-point',

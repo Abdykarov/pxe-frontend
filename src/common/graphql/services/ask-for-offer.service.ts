@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
 
-import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
+import { saveAs } from 'file-saver';
 
 import {
-    ContractUploadStatus,
-    IAskForOfferFilter,
-    ISupplyPointGasAttributesImport, ISupplyPointImport,
-    ISupplyPointImportInput,
-    ISupplyPointPowerAttributesImport,
-} from 'src/common/graphql/models/ask-for-offer';
-import {findSupplyPointImportQuery, listAskForOfferQuery} from 'src/common/graphql/queries/ask-for-offer';
-import { IResponseDataDocument} from 'src/app/services/model/document.model';
-import {saveAs} from 'file-saver';
-import {
     createSupplyPointImportMutation,
-    deleteAskForOfferMutation, finalizeAskForOfferMutation,
+    deleteAskForOfferMutation,
+    finalizeAskForOfferMutation,
 } from 'src/common/graphql/mutation/ask-for-offer';
-import {ISupplyPoint} from '../models/supply.model';
+import {
+    IAskForOfferFilter,
+    ISupplyPointImportInput,
+} from 'src/common/graphql/models/ask-for-offer';
+import { IResponseDataDocument} from 'src/app/services/model/document.model';
+import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import {
+    findSupplyPointImportQuery,
+    listAskForOfferQuery,
+} from 'src/common/graphql/queries/ask-for-offer';
 
 @Injectable({
     providedIn: 'root',

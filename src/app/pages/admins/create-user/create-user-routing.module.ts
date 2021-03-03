@@ -4,8 +4,8 @@ import {
     RouterModule,
 } from '@angular/router';
 
-import { CreateUserComponent } from './create-user.component';
 import { CONSTS } from 'src/app/app.constants';
+import { CreateUserComponent } from './create-user.component';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
 import { RefreshTokenResolver } from 'src/app/resolvers/refresh-token.resolver';
 

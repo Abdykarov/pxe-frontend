@@ -21,6 +21,7 @@ export const CONSTS = {
             'image/png',
             'application/png',
             'image/tiff',
+            'application/wps-office.pdf',
         ],
         ERROR_CODES: {
             FILE_TYPE: 'FILE_TYPE',

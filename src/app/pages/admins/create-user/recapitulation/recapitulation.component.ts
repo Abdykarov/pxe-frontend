@@ -1,26 +1,38 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
+import {
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+} from '@angular/core';
+
+import {
+    combineLatest,
+    Observable,
+} from 'rxjs';
+import {
+    map,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
+import { AskForOfferService } from 'src/common/graphql/services/ask-for-offer.service';
+import { CODE_LIST_TYPES } from 'src/app/app.constants';
+import { formFields } from 'src/common/containers/form/forms/personal-info/personal-info-form.config';
 import {
-    CommodityType,
     ICodelistOptions,
     ISupplyPoint,
-    ProgressStatus,
-    SubjectType,
-} from '../../../../../common/graphql/models/supply.model';
-import {combineLatest, Observable} from 'rxjs';
-import {CODE_LIST_TYPES} from '../../../../app.constants';
-import {map, takeUntil} from 'rxjs/operators';
-import {parseGraphQLErrors, removeAccent, removeRequiredValidators, transformCodeList} from '../../../../../common/utils';
-import {SupplyService} from '../../../../../common/graphql/services/supply.service';
-import {formFields} from '../../../../../common/containers/form/forms/personal-info/personal-info-form.config';
-import {Validators} from '@angular/forms';
-
-import * as R from 'ramda';
-import {AskForOfferService} from '../../../../../common/graphql/services/ask-for-offer.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ISupplyPointImport, ISupplyPointImportInput} from '../../../../../common/graphql/models/ask-for-offer';
+} from 'src/common/graphql/models/supply.model';
+import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
+import { ISupplyPointImportInput } from 'src/common/graphql/models/ask-for-offer';
+import {
+    parseGraphQLErrors,
+    removeRequiredValidators,
+    transformCodeList,
+} from 'src/common/utils';
+import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
     selector: 'pxe-create-user-prices',

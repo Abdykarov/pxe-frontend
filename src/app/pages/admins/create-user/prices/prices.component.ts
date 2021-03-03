@@ -1,15 +1,19 @@
+import { ActivatedRoute } from '@angular/router';
 import {
     ChangeDetectorRef,
     Component,
     OnInit,
 } from '@angular/core';
 
+import {
+    map,
+    takeUntil,
+} from 'rxjs/operators';
+
 import { AbstractComponent } from 'src/common/abstract.component';
-import {formFields} from 'src/common/containers/form/forms/prices/prices-form.config';
-import {map, takeUntil} from 'rxjs/operators';
-import {ISupplyPoint} from '../../../../../common/graphql/models/supply.model';
-import {AskForOfferService} from '../../../../../common/graphql/services/ask-for-offer.service';
-import {ActivatedRoute} from '@angular/router';
+import { AskForOfferService } from 'src/common/graphql/services/ask-for-offer.service';
+import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import { formFields } from 'src/common/containers/form/forms/prices/prices-form.config';
 
 @Component({
     selector: 'pxe-create-user-prices',
