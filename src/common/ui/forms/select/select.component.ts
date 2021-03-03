@@ -96,7 +96,7 @@ export class SelectComponent {
     public options?: Array<IOption>;
 
     @Input()
-    public placeholder?: string;
+    public placeholder = 'Vyberte';
 
     @Input()
     public searchable = false;
