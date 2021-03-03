@@ -15,13 +15,13 @@ input SupplyPointInput {
 
 
 input SupplyPointInputGasAttributesImport {
-    eic: String
+    eic: String!
     annualConsumption: Float
     annualConsumptionUnit: String
 }
 
 input SupplyPointInputPowerAttributesImport {
-    ean: String
+    ean: String!
     circuitBreakerId: String
     phasesId: String
     distributionRateId: String
@@ -75,11 +75,11 @@ input SupplyPointUpdateGasAttributes{
 
 type SupplyPoint {
     id: ID!
-    name: String!
-    commodityType: CommodityType!
-    supplier: Supplier!
-    identificationNumber: String!
-    address: Address!
+    name: String
+    commodityType: CommodityType
+    supplier: Supplier
+    identificationNumber: String
+    address: Address
     distributionRate: CodelistItem
     circuitBreaker: CodelistItem
     phases: CodelistItem
@@ -101,6 +101,11 @@ type SupplyPoint {
     progressStatus: ProgressStatus
     lastVersionOfSupplyPoint: Boolean
     allowedOperations: [AllowedOperations!]
+    imported: Boolean
+    importPricePerKwPowerVT: Float
+    importPricePerKwPowerNT: Float
+    importPricePerKwGas: Float
+    importPriceTotalPerYear: Float
 }
 
 enum ProgressStatus {
@@ -305,7 +310,71 @@ input SupplyPointInputImport {
     timeToContractEnd: Int
     timeToContractEndPeriodId: String
     personalData: PersonalDataInputImport
+    importPricePerKwPowerVT: Float
+    importPricePerKwPowerNT: Float
+    importPricePerKwGas: Float
+    importPriceTotalPerYear: Float
+}
+
+type SupplyPointImportResponse {
+    id: ID
+    supplierId: ID
+    name: String
+    address: AddressInputImportResponse
+    supplyPointPowerAttributes: SupplyPointInputPowerAttributesImportResponse
+    supplyPointGasAttributes: SupplyPointInputGasAttributesImportResponse
+    expirationDate: Date
+    subjectTypeId: String
+    contractEndTypeId: String
+    timeToContractEnd: Int
+    timeToContractEndPeriodId: String
+    personalData: PersonalDataInputImportResponse
     askForOfferId: ID
+}
+
+
+type PersonalDataInputImportResponse {
+    name: String
+    ico: String
+    dic: String
+    address1: AddressInputImportResponse
+    address2: AddressInputImportResponse
+    birthDate: Date
+    email: String
+    phone: String
+    bankAccountNumber: String
+    bankCode: String
+    depositPaymentTypeId: String
+    deposit: Float
+    signatoryName: String
+    signatorySurname: String
+    signatoryPosition: String
+}
+
+type SupplyPointInputGasAttributesImportResponse {
+    eic: String
+    annualConsumption: Float
+    annualConsumptionUnit: String
+}
+
+type SupplyPointInputPowerAttributesImportResponse {
+    ean: String
+    circuitBreakerId: String
+    phasesId: String
+    distributionRateId: String
+    annualConsumptionNT: Float
+    annualConsumptionNTUnit: String
+    annualConsumptionVT: Float
+    annualConsumptionVTUnit: String
+}
+
+type AddressInputImportResponse {
+    region: String
+    street: String
+    orientationNumber: String
+    descriptiveNumber: String
+    city: String
+    postCode: String
 }
 
 
@@ -339,10 +408,10 @@ type Contract {
 }
 
 type ContractResponseDto {
-    contractId: ID!
+    contractId: ID
     offer: Offer
     supplyPointId: ID
-    contractStatus: ContractStatus!
+    contractStatus: ContractStatus
     deliveryFrom: Date
     deliveryTo: Date
     expirationDate: Date
@@ -366,14 +435,14 @@ type PaginatedContractsWithNameAndSupplyPointEan {
     totalRecords: Int!
 }
 
-type PaginatedContractUploads {
-    page: [ContractUploadResponse!]!
+type PaginatedAskForOffer {
+    page: [AskForOfferResponse!]!
     totalRecords: Int!
 }
 
-type ContractUploadResponse {
+type AskForOfferResponse {
     createdAt: Date,
-    status: ContractUploadStatus,
+    status: AskForOfferStatus,
     email: String,
     files: [UploadFileResponse],
     id: ID
@@ -393,15 +462,16 @@ input ContractsBasedOnOffersFilter {
     pagination: Pagination
 }
 
-input ContractUploadsFilter {
-    statuses: [ContractUploadStatus]
+input AskForOfferFilter {
+    statuses: [AskForOfferStatus]
     pagination: Pagination
 }
 
-enum ContractUploadStatus {
+enum AskForOfferStatus {
     NEW,
     IN_PROGRESS,
-    PROCESSED
+    PROCESSED,
+    DELETED
 }
 
 input Pagination {
@@ -477,8 +547,8 @@ type SupplyPointStatistic {
 
 type SupplyPointStatisticView {
     id: ID!
-    name: String!
-    commodityType: CommodityType!
+    name: String
+    commodityType: CommodityType
     progressStatus: ProgressStatus!
 }
 
@@ -524,10 +594,12 @@ type Query {
     getPaymentInfo(contractId: ID!, setting: QRCodeSetting!): Payment
     computeAndGetSupplyPointStatistics: SupplyPointStatistic
     listSupplierContractsBasedOnOffers(filter: ContractsBasedOnOffersFilter): PaginatedContractsWithNameAndSupplyPointEan
-    listContractUploads(filter: ContractUploadsFilter): PaginatedContractUploads
+    listAskForOffer(filter: AskForOfferFilter): PaginatedAskForOffer
     listContractsBasedOnSupplyPointAndStatus(filter: ContractBasedOnSupplyPointFilter!): [ContractResponseDto]!
     getPersonalDataImport(input: PersonalDataInputImport): ID
+    findSupplyPointImport(askForOfferId: ID!): SupplyPoint
 }
+
 
 
 # The Root Mutation for the application
@@ -550,13 +622,9 @@ type Mutation {
         supplyPoint: SupplyPointInput!
         powerAttributes: SupplyPointInputPowerAttributes!
     ): ID
-    createGasSupplyPointImport(
+    createSupplyPointImport(
+        askForOfferId: ID!
         supplyPoint: SupplyPointInputImport!
-        gasAttributes: SupplyPointInputGasAttributesImport!
-    ): ID
-    createPowerSupplyPointImport(
-        supplyPoint: SupplyPointInputImport!
-        powerAttributes: SupplyPointInputPowerAttributesImport!
     ): ID
 
     updateGasSupplyPoint(
@@ -614,4 +682,6 @@ type Mutation {
     deleteSelectedOfferFromContract(contractId: ID!): Boolean
     updateUserProfile(userDetail: UserDetailInput!, smsCode: String): Boolean
     confirmFirstContractView: Boolean
+    deleteAskForOffer(askForOfferId: ID): ID
+    finalizeAskForOffer(askForOfferId: ID): ID
 }

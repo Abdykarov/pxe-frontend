@@ -18,16 +18,17 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { AskForOfferService} from 'src/common/graphql/services/ask-for-offer.service';
 import {
     CommodityType,
-    ISupplyPoint,
+    ISupplyPoint, SubjectType,
 } from 'src/common/graphql/models/supply.model';
 import { formFields} from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { IFieldError} from 'src/common/containers/form/models/form-definition.model';
-import { ISupplyPointImportInput } from 'src/common/graphql/models/ask-for-offer';
+import { ISupplyPointImportInput } from 'src/common/graphql/models/supply-point-import.model';
 import {
     parseGraphQLErrors,
     removeRequiredValidators,
 } from 'src/common/utils';
 import { SUPPLY_POINT_EDIT_TYPE} from 'src/app/app.constants';
+import { SupplyPointImportService } from 'src/common/graphql/services/supply-point-import.service';
 
 @Component({
     selector: 'pxe-create-user-supply-point',
@@ -43,7 +44,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public globalError: string[] = [];
     public supplyPointImport: any = null;
     public supplyPoint = null;
-
+    public isIndividual = false;
     public askForOfferId = null;
 
     constructor(
@@ -51,6 +52,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         private cd: ChangeDetectorRef,
         private route: ActivatedRoute,
         private router: Router,
+        private supplyPointImportService: SupplyPointImportService,
     ) {
         super();
         this.askForOfferId = route.snapshot.queryParams.askForOfferId;
@@ -59,7 +61,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
 
     ngOnInit() {
         super.ngOnInit();
-        this.askForOfferService.
+        this.supplyPointImportService.
             findSupplyPointImport(this.askForOfferId)
                 .pipe(
                     takeUntil(this.destroy$),
@@ -111,7 +113,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
             ], supplyPointFormData);
         }
 
-        this.askForOfferService.createSupplyPointImport(this.askForOfferId, supplyPoint)
+        this.supplyPointImportService.createSupplyPointImport(this.askForOfferId, supplyPoint)
             .pipe(
                 takeUntil(this.destroy$),
                 map(

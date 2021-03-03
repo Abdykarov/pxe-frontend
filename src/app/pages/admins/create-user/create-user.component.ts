@@ -3,10 +3,7 @@ import {
     NavigationEnd,
     Router,
 } from '@angular/router';
-import {
-    Component,
-    OnInit,
-} from '@angular/core';
+import { Component } from '@angular/core';
 
 import { takeUntil } from 'rxjs/operators';
 
@@ -22,7 +19,7 @@ import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress
     templateUrl: './create-user.component.html',
     styleUrls: ['./create-user.component.scss'],
 })
-export class CreateUserComponent extends AbstractComponent implements OnInit {
+export class CreateUserComponent extends AbstractComponent {
     public title: string = null;
     public configStepper: IStepperProgressItem[] = [];
 
@@ -40,8 +37,5 @@ export class CreateUserComponent extends AbstractComponent implements OnInit {
                     this.configStepper = getConfigStepper(step, false, TypeStepper.CREATE_USER);
                 }
             });
-    }
-
-    ngOnInit(): void {
     }
 }

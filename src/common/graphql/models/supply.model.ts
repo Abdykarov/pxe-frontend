@@ -138,6 +138,7 @@ export interface ISupplyPoint {
     importPricePerKwPowerNT?: number;
     importPricePerKwGas?: number;
     importPriceTotalPerYear?: number;
+    imported?: boolean;
 }
 
 export enum ProgressStatus {

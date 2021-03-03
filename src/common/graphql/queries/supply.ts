@@ -175,6 +175,7 @@ export const supplyPointFragment = gql`
                 },
                 prolong,
             },
+            imported,
             progressStatus,
             allowedOperations,
         }

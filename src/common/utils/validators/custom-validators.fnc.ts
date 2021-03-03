@@ -280,6 +280,12 @@ export class CustomValidators {
     }
 
     static ean = (ean) => {
+        if (!ean.value) {
+            return {
+                ean: true,
+            };
+        }
+
         if (ean.pristine) {
             return null;
         }
@@ -366,6 +372,12 @@ export class CustomValidators {
     }
 
     static eic = (eic) => {
+        if (!eic.value) {
+            return {
+                ean: true,
+            };
+        }
+
         if (eic.pristine) {
             return null;
         }

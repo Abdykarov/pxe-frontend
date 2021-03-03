@@ -26,12 +26,13 @@ import {
     ISupplyPoint,
 } from 'src/common/graphql/models/supply.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import { ISupplyPointImportInput } from 'src/common/graphql/models/ask-for-offer';
+import { ISupplyPointImportInput } from 'src/common/graphql/models/supply-point-import.model';
 import {
     parseGraphQLErrors,
     removeRequiredValidators,
     transformCodeList,
 } from 'src/common/utils';
+import { SupplyPointImportService } from 'src/common/graphql/services/supply-point-import.service';
 import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
@@ -49,7 +50,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     public codeLists = null;
     public formFields = formFields;
 
-    public supplyPoint$: Observable<ISupplyPoint> = this.askForOfferService.
+    public supplyPoint$: Observable<ISupplyPoint> = this.supplyPointImportService.
         findSupplyPointImport(this.askForOfferId)
             .pipe(
                 takeUntil(this.destroy$),
@@ -68,6 +69,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
+        private supplyPointImportService: SupplyPointImportService,
     ) {
         super();
         this.formFields.controls = removeRequiredValidators(this.formFields.controls);
@@ -80,14 +82,13 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             )
             .subscribe(
                 ([codeLists, supplyPoint]) => {
-                    console.log('___');
-                    console.log(supplyPoint);
                     this.supplyPoint = supplyPoint;
                     this.codeLists = codeLists;
                     this.cd.markForCheck();
                 },
                 (error) => {
-                    const { globalError } = parseGraphQLErrors(error);
+                    const { fieldError, globalError } = parseGraphQLErrors(error);
+                    this.fieldError = fieldError;
                     this.globalError = globalError;
                     this.cd.markForCheck();
                 },
@@ -95,19 +96,27 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     }
 
     public submit = (data) => {
-        const supplyPoint: ISupplyPointImportInput = this.askForOfferService.mapSupplyPointToSupplyPointInput(this.supplyPoint);
+        const supplyPoint: ISupplyPointImportInput = this.supplyPointImportService.mapSupplyPointToSupplyPointInput(this.supplyPoint);
         supplyPoint.personalData = data;
-        delete supplyPoint.address['__typename'];
+        delete supplyPoint?.address['__typename'];
 
-        this.askForOfferService.createSupplyPointImport(
-            this.askForOfferId,
-            supplyPoint,
-        ).subscribe( _ => {
-            this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_PRICES], {
-                queryParams: {
-                    askForOfferId: this.askForOfferId,
-                },
+        this.supplyPointImportService.createSupplyPointImport(
+                this.askForOfferId,
+                supplyPoint,
+            )
+            .pipe(takeUntil(this.destroy$))
+            .subscribe( _ => {
+                this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_PRICES], {
+                    queryParams: {
+                        askForOfferId: this.askForOfferId,
+                    },
+                });
             });
-        });
     }
+
+    public backStep = () => this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
+        queryParams: {
+            askForOfferId: this.askForOfferId,
+        },
+    })
 }

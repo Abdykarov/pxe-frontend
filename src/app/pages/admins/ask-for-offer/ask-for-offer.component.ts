@@ -49,10 +49,11 @@ import { ModalService } from 'src/common/containers/modal/modal.service';
 })
 export class AskForOfferComponent extends AbstractComponent implements OnInit {
     public readonly BannerTypeImages = BannerTypeImages;
+    public readonly ContractUploadStatus = ContractUploadStatus;
     public readonly numberOfPagesSubject$: BehaviorSubject<number> = new BehaviorSubject(1);
     public readonly numberOfPages$ = this.numberOfPagesSubject$.asObservable();
     public readonly paginationConfig = paginationConfig;
-    public readonly routerParamsSubject$: BehaviorSubject<any> = new BehaviorSubject('NEW');
+    public readonly routerParamsSubject$: BehaviorSubject<any> = new BehaviorSubject(ContractUploadStatus.NEW);
     public readonly routerParams$ = this.routerParamsSubject$.asObservable();
     public readonly tableConfig = tableConfig;
     public readonly titleMapping = {
@@ -124,12 +125,12 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
         },
     })
 
-    public remove = (askForOfferId: string) => {
+    public delete = (askForOfferId: string) => {
         this.globalError = [];
         this.askForOfferService.deleteAskForOffer(
             askForOfferId,
             {
-                statuses: [ContractUploadStatus.NEW],
+                statuses: [ContractUploadStatusUrl[this.routerParamsSubject$.getValue().type]],
                 pagination: {
                     first: this.numberOfPagesSubject$.getValue() - 1,
                     offset: this.paginationConfig.itemsPerPage,
@@ -143,8 +144,9 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
                     .showModal$.next(confirmDeleteAskForOfferInfo());
                 },
                 error => {
-                    const message = parseRestAPIErrors(error);
-                    this.globalError.push(message);
+                    const { globalError } = parseGraphQLErrors(error);
+                    this.globalError = globalError;
+                    this.loading = false;
                     this.cd.markForCheck();
                 },
             );

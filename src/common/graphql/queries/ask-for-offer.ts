@@ -21,11 +21,3 @@ export const listAskForOfferQuery = gql`
     }
 `;
 
-export const findSupplyPointImportQuery = gql`
-    query findSupplyPointImport($askForOfferId: ID!, $skipInfoAboutRelationContracts: Boolean = true, $skipOfferValidity: Boolean = true){
-        findSupplyPointImport(askForOfferId: $askForOfferId){
-            ...SupplyPointFragment
-        }
-    }
-    ${supplyPointFragment}
-`;

@@ -1,3 +1,13 @@
+<div class="col-12">
+    <lnd-alert
+        *ngIf="globalError.length"
+        type="danger">
+        <ng-container *ngFor="let error of globalError">
+            {{ error }}<br>
+        </ng-container>
+    </lnd-alert>
+</div>
+
 <form
     [formGroup]="form"
     class="form-container"
@@ -44,13 +54,26 @@
         [touched]="form.controls.importPriceTotalPerYear.touched || formError.importPriceTotalPerYear"
         [validationMessages]="formFields.validationMessages.importPriceTotalPerYear"
     ></lnd-form-field>
-    <div class="text-center">
-        <lnd-button
-            type="primary"
-            [submit]="true"
-            (action)="submitForm($event)"
-            [isDisabled]="!!formLoading"
-            label="Uložit a odeslat nabídky E-mailem">
-        </lnd-button>
+    <div class="row">
+        <div class="col-12 text-center">
+            <lnd-button
+                type="primary"
+                [submit]="true"
+                (action)="submitForm($event)"
+                [isDisabled]="!!formLoading"
+                label="Uložit a odeslat nabídky e-mailem">
+            </lnd-button>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12 text-center">
+            <lnd-button
+                type="secondary"
+                [submit]="true"
+                (action)="submitCustomActionValidFormForm($event)"
+                [isDisabled]="!!formLoading"
+                label="Uložit jako rozpracované">
+            </lnd-button>
+        </div>
     </div>
 </form>

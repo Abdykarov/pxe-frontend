@@ -1,12 +1,16 @@
 import {
-    Component, Input, OnChanges,
-    OnDestroy, SimpleChanges,
+    Component,
+    Input,
+    OnChanges,
+    SimpleChanges,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
-import {ISupplyPoint} from '../../../../graphql/models/supply.model';
-import {getErrorMessage} from '../../../../utils';
+import {
+    CommodityType,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
 
 @Component({
     selector: 'pxe-price-form',
@@ -27,8 +31,19 @@ export class PricesFormComponent extends AbstractFormComponent implements OnChan
     ngOnChanges(changes: SimpleChanges) {
         if (changes && changes.supplyPoint) {
             this.prefillFormData();
+            this.setForm();
         }
     }
+
+    public setForm = () => {
+        if (this.supplyPoint.commodityType === CommodityType.POWER) {
+            this.setDisableField('importPricePerKwGas');
+        } else {
+            this.setDisableField('importPricePerKwPowerNT');
+            this.setDisableField('importPricePerKwPowerVT');
+        }
+    }
+
     public prefillFormData = () => {
         if (!this.form) {
             return;
@@ -37,8 +52,6 @@ export class PricesFormComponent extends AbstractFormComponent implements OnChan
         let importPricePerKwPowerNT = null;
         let importPricePerKwPowerVT = null;
         let importPriceTotalPerYear = null;
-
-        console.log(this.supplyPoint);
 
         if (this.supplyPoint) {
             importPricePerKwGas = this.supplyPoint.importPricePerKwGas;

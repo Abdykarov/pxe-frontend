@@ -192,7 +192,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                     'annualConsumptionVT',
                     'annualConsumptionVTUnit',
                 ], supplyPointFormData);
-            supplyPointAction = id ?
+            supplyPointAction = id && !this.supplyPointData?.imported ?
                 this.supplyService.updatePowerSupplyPoint(id, supplyPoint, powerAttributes) :
                 this.supplyService.createPowerSupplyPoint(supplyPoint, powerAttributes);
         } else {
@@ -202,7 +202,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                     'annualConsumption',
                     'annualConsumptionUnit',
                 ], supplyPointFormData);
-            supplyPointAction = id ?
+            supplyPointAction = id && !this.supplyPointData?.imported ?
                 this.supplyService.updateGasSupplyPoint(id, supplyPoint, gasAttributes) :
                 this.supplyService.createGasSupplyPoint(supplyPoint, gasAttributes);
         }

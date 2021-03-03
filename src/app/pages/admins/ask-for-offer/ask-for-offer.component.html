@@ -1,9 +1,10 @@
 <ng-template #actionColumnFill let-row="row">
-    <div class="d-flex justify-content-end">
+    <div *ngIf="row.status !== ContractUploadStatus.PROCESSED"
+        class="d-flex justify-content-end">
         <lnd-button
             customClass="mr-3"
             (action)="routerToCreateUser(row.id)"
-            label="Vyplnit"
+            [label]="row.status === ContractUploadStatus.NEW ? 'Vyplnit' : 'Dokončit'"
             type="primary">
         </lnd-button>
         <lnd-button
@@ -11,7 +12,7 @@
             icon="icon--delete"
             variant="icon"
             title="Zamítnout"
-            (action)="remove(row.id)"
+            (action)="delete(row.id)"
         ></lnd-button>
     </div>
 </ng-template>
