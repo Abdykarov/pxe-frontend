@@ -298,6 +298,7 @@ export const SEO = {
             ' nemusíte na pobočky a dostáváte konečné ceny bez skrytých poplatků.',
     },
     META_GOOGLE_SITE_VERIFICATION: 'S2HgqkW4rJgsZuVJbrgrAmdwYnguu7zKvCejgAsvyNs',
+    FACEBOOK_DOMAIN_VERIFICATION: 'vngn44jpdm6rc7czf0f9regvnltvt3',
 };
 
 export enum INavigationItemType {
