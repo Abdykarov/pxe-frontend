@@ -10,13 +10,13 @@ import {
     DOCUMENT,
     isPlatformBrowser,
 } from '@angular/common';
+import { Meta } from '@angular/platform-browser';
 import {
     NavigationEnd,
     Router,
 } from '@angular/router';
 
 import { takeUntil } from 'rxjs/operators';
-import { Meta } from '@angular/platform-browser';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AuthService } from './services/auth.service';
