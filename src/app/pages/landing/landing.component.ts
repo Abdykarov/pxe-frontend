@@ -145,10 +145,6 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
             name: 'keywords',
             content: SEO.META_KEYWORDS.LANDING_PAGE.toString(),
         });
-        this.metaService.addTag({
-            name: 'google-site-verification',
-            content: SEO.META_GOOGLE_SITE_VERIFICATION,
-        });
 
         this.formFields = createRegistrationFormFields(SignUpType.SignUp);
 
