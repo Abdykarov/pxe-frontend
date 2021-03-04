@@ -29,7 +29,7 @@ export interface IJwtPayload {
     uuid: string;
     username: string;
     email?: string;
-    supplier?: boolean;
+    type?: IUserTypes;
     needSmsConfirm?: boolean;
     passwordReset?: boolean;
     userStatus: UserStatus;
@@ -38,11 +38,18 @@ export interface IJwtPayload {
     evaluatedSupplyPoint: number;
 }
 
+export enum IUserTypes {
+    'CONSUMER' = 'CONSUMER',
+    'SUPPLIER' = 'SUPPLIER',
+    'CONTRACT_IMPORTER' = 'CONTRACT_IMPORTER',
+}
+
 export enum IUserRoles {
-    'PARC_MANAGER' = 'PARC_MANAGER',
+    'ROLE_CONTRACT_IMPORTER' = 'CONTRACT_IMPORTER',
     'PARC_SUPPLIER_P4R' = 'PARC_SUPPLIER_P_4_R',
     'NEEDS_SMS_CONFIRMATION' = 'NEEDS_SMS_CONFIRMATION',
     'RESET_PASSWORD' = 'RESET_PASSWORD',
+    'PARC_CONSUMER_P_4_R' = 'PARC_CONSUMER_P_4_R',
 }
 
 export enum UserStatus {

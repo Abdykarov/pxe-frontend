@@ -508,7 +508,7 @@
                         type="primary"
                         (action)="submitForm();sAnalyticsService.sFormClick($event);"
                         [isDisabled]="formLoading"
-                        label="Uložit a zobrazit nabídky">
+                        [label]="submitLabel">
                     </lnd-button>
                 </div>
             </div>

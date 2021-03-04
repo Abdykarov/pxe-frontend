@@ -1,4 +1,5 @@
 import { INavigationItemType } from 'src/app/app.constants';
+import { IUserTypes } from 'src/app/services/model/auth.model';
 
 export interface INavigationConfig extends Array<INavigationMenu> {}
 
@@ -21,4 +22,15 @@ export interface INavigationChildItem {
     label: string;
     class?: string;
     __typename?: string;
+}
+
+export interface IMenuUser {
+    navigationMenu: INavigationMenu;
+    navigationMenuActions: INavigationMenu;
+}
+
+export interface IMenuByUserTypeMapping {
+    [IUserTypes.CONTRACT_IMPORTER]: IMenuUser;
+    [IUserTypes.SUPPLIER]: IMenuUser;
+    [IUserTypes.CONSUMER]: IMenuUser;
 }
