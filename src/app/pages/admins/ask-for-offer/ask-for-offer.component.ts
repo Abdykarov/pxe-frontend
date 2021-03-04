@@ -162,7 +162,7 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
         }
     }
 
-    public downloadAfkForOffer = (documentId: string) => {
+    public downloadAskForOffer = (documentId: string) => {
         this.globalError = [];
         this.loading = true;
         downloadFile(this.http, `v1.0/ask-for-offer/uploaded-document/${documentId}`)

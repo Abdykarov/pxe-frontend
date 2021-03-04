@@ -19,7 +19,7 @@
 
 <ng-template #actionColumnPDF let-row="row">
     <ng-container *ngIf="row.files && row.files.length === 1">
-        <a (click)="downloadAfkForOffer(row.files[0].id)">{{row.files[0].fileName}}</a>
+        <a (click)="downloadAskForOffer(row.files[0].id)">{{row.files[0].fileName}}</a>
     </ng-container>
     <ng-container *ngIf="row.files && row.files.length !== 1">
         <a (click)="downloadAskForOffersZipArchive(row?.id)">ZIP</a>

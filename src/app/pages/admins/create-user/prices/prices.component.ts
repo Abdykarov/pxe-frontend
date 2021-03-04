@@ -55,7 +55,7 @@ export class PricesComponent extends AbstractComponent implements OnInit {
                     takeUntil(this.destroy$),
                     map(({data}) => data.findSupplyPointImport),
                 )
-                .subscribe( (supplyPoint: ISupplyPoint) => {
+                .subscribe((supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;
                     this.cd.markForCheck();
                 });
@@ -69,7 +69,7 @@ export class PricesComponent extends AbstractComponent implements OnInit {
                 supplyPoint,
             ).pipe(
                 takeUntil(this.destroy$),
-            ).subscribe( _ => {
+            ).subscribe(_ => {
                 this.router.navigate([this.ROUTES.ROUTER_ASK_FOR_OFFER_PROCESSED]);
             },
             (error) => {

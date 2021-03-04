@@ -105,7 +105,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                 supplyPoint,
             )
             .pipe(takeUntil(this.destroy$))
-            .subscribe( _ => {
+            .subscribe(_ => {
                 this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_PRICES], {
                     queryParams: {
                         askForOfferId: this.askForOfferId,

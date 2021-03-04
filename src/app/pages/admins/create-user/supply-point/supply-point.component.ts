@@ -67,7 +67,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                     takeUntil(this.destroy$),
                     map(({data}) => data.findSupplyPointImport),
                 )
-                .subscribe( (supplyPoint: ISupplyPoint) => {
+                .subscribe((supplyPoint: ISupplyPoint) => {
                     if (supplyPoint === null) {
                         this.supplyPoint = {};
                     } else {
