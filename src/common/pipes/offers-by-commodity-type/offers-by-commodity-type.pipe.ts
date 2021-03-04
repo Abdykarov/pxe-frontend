@@ -6,7 +6,7 @@ import {
 import * as R from 'ramda';
 
 import { CommodityType } from 'src/common/graphql/models/supply.model';
-import { IOfferImportInput } from 'src/app/pages/import/import.model';
+import { IOfferImportInput } from 'src/app/pages/suppliers/import/import.model';
 
 @Pipe({
     name: 'offersByCommodityType',

@@ -62,13 +62,14 @@ export class AbstractSupplyPointFormComponent extends AbstractFormComponent impl
         typeOfAnnualConsumption: ANNUAL_CONSUMPTION_TYPES,
         typeOfAnnualConsumptionUnit: ANNUAL_CONSUMPTION_UNIT_TYPES,
         annualConsumptionUnit: UNIT_OF_PRICES,
+        withoutValidators = false,
     ) => {
         const annualAnnualConsumption = this.form.controls[typeOfAnnualConsumption].value;
         if (annualConsumptionUnit === UNIT_OF_PRICES.KWH) {
             this.form.controls[typeOfAnnualConsumption]
                 .setValidators(
                     [
-                        Validators.required,
+                        withoutValidators ? CustomValidators.alwaysValid : Validators.required,
                         CustomValidators.isNumber(),
                         CustomValidators.minValue(0),
                         CustomValidators.totalDigitLengthBeforeDecimalPoint(
@@ -89,7 +90,7 @@ export class AbstractSupplyPointFormComponent extends AbstractFormComponent impl
             this.form.controls[typeOfAnnualConsumption]
                 .setValidators(
                     [
-                        Validators.required,
+                        withoutValidators ? CustomValidators.alwaysValid : Validators.required,
                         CustomValidators.isNumber(CONSTS.VALIDATORS.MAX_DIGIT_AFTER_DECIMAL_POINT_ANNUAL_CONSUMPTION),
                         CustomValidators.minValue(0),
                         CustomValidators.totalDigitLengthBeforeDecimalPoint(CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_DEFAULT),

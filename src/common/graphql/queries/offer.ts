@@ -70,7 +70,8 @@ export const offerFragment = gql`
         consumptionPriceGas,
         consumptionPriceVT,
         consumptionPriceNT,
-        greenEnergy
+        greenEnergy,
+        imported
     }
 `;
 

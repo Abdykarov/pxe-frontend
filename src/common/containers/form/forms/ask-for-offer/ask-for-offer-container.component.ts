@@ -16,7 +16,7 @@ import {
 import { FILE_UPLOAD_CONFIG } from 'src/app/app.constants';
 import { FileItem } from 'src/third-sides/file-upload';
 import { FileUploaderCustom } from 'src/third-sides/file-upload/file-uploader-custom';
-import { fileUploaderFactory } from 'src/app/pages/import/upload/upload.config';
+import { fileUploaderFactory } from 'src/app/pages/suppliers/import/upload/upload.config';
 import { formFields } from './ask-for-offer-container.config';
 import { inArray } from 'src/common/utils';
 

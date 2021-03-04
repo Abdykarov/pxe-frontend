@@ -74,6 +74,10 @@ export class CustomValidators {
             return null;
         }
 
+        if (!acountNumber.value) {
+            return null;
+        }
+
         const value = acountNumber.value;
         const accountParts = acountNumber.value.split('-');
 
@@ -126,6 +130,10 @@ export class CustomValidators {
             return null;
         }
 
+        if (!acountBankCode.value) {
+            return null;
+        }
+
         const ACOUNT_BANK_NUMBER = /^\d{4}$/;
         if (ACOUNT_BANK_NUMBER.test(acountBankCode.value)) {
             return null;
@@ -167,6 +175,10 @@ export class CustomValidators {
 
     static mobilePhoneNumber = (phoneNumber) => {
         if (phoneNumber.pristine) {
+            return null;
+        }
+
+        if (!phoneNumber.value) {
             return null;
         }
 
@@ -268,6 +280,12 @@ export class CustomValidators {
     }
 
     static ean = (ean) => {
+        if (!ean.value) {
+            return {
+                ean: true,
+            };
+        }
+
         if (ean.pristine) {
             return null;
         }
@@ -316,6 +334,10 @@ export class CustomValidators {
             return null;
         }
 
+        if (!ico.value) {
+            return null;
+        }
+
         if (verifyIC(ico.value)) {
             return null;
         }
@@ -328,6 +350,10 @@ export class CustomValidators {
 
     static dic = (dic): {} => {
         if (dic.pristine || R_.isNilOrEmpty(dic.value)) {
+            return null;
+        }
+
+        if (!dic.value) {
             return null;
         }
 
@@ -346,6 +372,12 @@ export class CustomValidators {
     }
 
     static eic = (eic) => {
+        if (!eic.value) {
+            return {
+                ean: true,
+            };
+        }
+
         if (eic.pristine) {
             return null;
         }
@@ -364,6 +396,10 @@ export class CustomValidators {
             return null;
         }
 
+        if (!eic.value) {
+            return null;
+        }
+
         const EIC_REGEXP = /^27Z|zG|g.{12}$/;
         if (EIC_REGEXP.test(eic.value)) {
             return null;
@@ -376,6 +412,10 @@ export class CustomValidators {
 
     static eanFormat = (ean) => {
         if (ean.pristine) {
+            return null;
+        }
+
+        if (!ean.value) {
             return null;
         }
 
@@ -393,6 +433,10 @@ export class CustomValidators {
         const expresion = maxDecimals === 0 ? new RegExp(/^(0|-?[1-9]\d*)$/) : new RegExp(/^-?\d+([\.\,]?\d+)?$/);
         return (control: AbstractControl): ValidationErrors => {
             if (control.pristine) {
+                return null;
+            }
+
+            if (!control.value) {
                 return null;
             }
 
@@ -425,6 +469,10 @@ export class CustomValidators {
                 return null;
             }
 
+            if (!control.value) {
+                return null;
+            }
+
             if (!allowEqual &&
                 (R_.isNilOrEmpty(control.value) || parseFloat(control.value.toString().replace(',', '.')) > min)) {
                 return null;
@@ -450,6 +498,10 @@ export class CustomValidators {
     ): ValidatorFn => {
         return (control: AbstractControl): ValidationErrors => {
             if (control.pristine) {
+                return null;
+            }
+
+            if (!control.value) {
                 return null;
             }
 
