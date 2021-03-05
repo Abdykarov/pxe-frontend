@@ -483,6 +483,7 @@
                                 [appendButtonIcon]="helpDocuments && helpDocuments[''] ? 'icon--info' : null"
                                 (appendButtonAction)="showHelp('timeToContractEndPeriodId', 'Jistič')"
                                 [error]="formError.timeToContractEndPeriodId || form.controls.timeToContractEndPeriodId.errors"
+                                label=""
                                 (focus)="fieldWrapperFocus('timeToContractEndPeriodId')"
                                 (blur)="fieldWrapperBlur()"
                                 [inputFocused]="(fieldWrapperFocused$ | async) === 'timeToContractEnd' || (fieldWrapperFocused$ | async) === 'timeToContractEndPeriodId'"
