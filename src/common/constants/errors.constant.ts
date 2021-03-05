@@ -148,9 +148,13 @@ export const errorFieldMessages =  {
     },
     annualConsumptionNT: {
         required: 'Vyplňte roční spotřebu elektřiny v nízkém tarifu.',
+        maxKWh: `Nejvyšší možná spotřeba je ${CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH * 1000} KWh.`,
+        maxMWh: `Nejvyšší možná spotřeba je ${CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH} MWh.`,
     },
     annualConsumptionVT: {
         required: 'Vyplňte roční spotřebu elektřiny ve vysokém tarifu.',
+        maxKWh: `Nejvyšší možná spotřeba je ${CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH * 1000} KWh.`,
+        maxMWh: `Nejvyšší možná spotřeba je ${CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH} MWh.`,
     },
     bankAccountNumber: {
         required: 'Vyplňte číslo účtu.',
