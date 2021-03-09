@@ -126,6 +126,12 @@ export const formFields: IForm = {
                 CustomValidators.totalDigitLengthBeforeDecimalPoint(
                     CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION,
                 ),
+                CustomValidators.maxValue(
+                    CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH * 1000,
+                    false,
+                    true,
+                    'maxKWh',
+                ),
             ],
         ],
         annualConsumptionNTUnit: [
@@ -142,6 +148,12 @@ export const formFields: IForm = {
                 CustomValidators.minValue(0),
                 CustomValidators.totalDigitLengthBeforeDecimalPoint(
                     CONSTS.VALIDATORS.MAX_DIGIT_BEFORE_DECIMAL_POINT_ANNUAL_CONSUMPTION,
+                ),
+                CustomValidators.maxValue(
+                    CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH * 1000,
+                    false,
+                    true,
+                    'maxKWh',
                 ),
             ],
         ],
@@ -257,6 +269,8 @@ export const formFields: IForm = {
             min: errorFieldMessages.number.positive,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
             number: errorFieldMessages.number.positiveInteger,
+            maxKWh: errorFieldMessages.annualConsumption.maxKWh,
+            maxMWh: errorFieldMessages.annualConsumption.maxMWh,
             'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,
             totalDigitLengthBeforeDecimalPoint: errorFieldMessages.number.totalDigitLengthBeforeDecimalPoint,
         },
@@ -265,6 +279,8 @@ export const formFields: IForm = {
             decimal: errorFieldMessages.number.decimal,
             decimalCountActual: errorFieldMessages.number.decimalCount,
             min: errorFieldMessages.number.positive,
+            maxKWh: errorFieldMessages.annualConsumption.maxKWh,
+            maxMWh: errorFieldMessages.annualConsumption.maxMWh,
             number: errorFieldMessages.number.positiveInteger,
             negativeAnnualConsumption: errorFieldMessages.number.positive,
             'annual-consumption-must-be-positive-number': errorFieldMessages.number.positive,

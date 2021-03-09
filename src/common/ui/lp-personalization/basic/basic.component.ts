@@ -1,6 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import {lpVideoModalConfig} from '../../../../app/pages/landing/landing.config';
-import {ModalService} from '../../../containers/modal/modal.service';
+import {
+    Component,
+    Input,
+    OnInit,
+} from '@angular/core';
+
+import { lpVideoModalConfig } from 'src/app/pages/public/landing/landing.config';
+import { ModalService } from 'src/common/containers/modal/modal.service';
 
 @Component({
   selector: 'lnd-basic',
@@ -10,7 +15,7 @@ import {ModalService} from '../../../containers/modal/modal.service';
 export class BasicComponent implements OnInit {
 
     @Input()
-    public text = 'aaa';
+    public text = '';
 
   constructor(
       private modalService: ModalService,

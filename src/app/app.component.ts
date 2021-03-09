@@ -10,10 +10,12 @@ import {
     DOCUMENT,
     isPlatformBrowser,
 } from '@angular/common';
+import { Meta } from '@angular/platform-browser';
 import {
     NavigationEnd,
     Router,
 } from '@angular/router';
+
 import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
@@ -23,6 +25,7 @@ import { GTMService } from './services/gtm.service';
 import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
+import { SEO } from './app.constants';
 
 @Component({
     selector: 'lnd-root',
@@ -35,6 +38,7 @@ export class AppComponent extends AbstractComponent implements OnInit {
         private authService: AuthService,
         private elementRef: ElementRef,
         private gtmService: GTMService,
+        private metaService: Meta,
         private onlyOneTabActiveService: OnlyOneTabActiveService,
         private router: Router,
         private sAnalyticsService: SAnalyticsService,
@@ -42,6 +46,15 @@ export class AppComponent extends AbstractComponent implements OnInit {
         @Inject(PLATFORM_ID) private platformId: string,
     ) {
         super();
+        this.metaService.addTag({
+            name: 'google-site-verification',
+            content: SEO.META_GOOGLE_SITE_VERIFICATION,
+        });
+        this.metaService.addTag({
+            name: 'facebook-domain-verification',
+            content: SEO.FACEBOOK_DOMAIN_VERIFICATION,
+        });
+
         if (isPlatformBrowser(this.platformId)) {
             this.sAnalyticsService.init();
             this.sAnalyticsService.installSForm();

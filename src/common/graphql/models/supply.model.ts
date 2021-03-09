@@ -134,6 +134,11 @@ export interface ISupplyPoint {
     annualConsumptionNTUnit?: string;
     annualConsumptionVTUnit?: string;
     annualConsumptionUnit?: string;
+    importPricePerKwPowerVT?: number;
+    importPricePerKwPowerNT?: number;
+    importPricePerKwGas?: number;
+    importPriceTotalPerYear?: number;
+    imported?: boolean;
 }
 
 export enum ProgressStatus {
@@ -144,6 +149,7 @@ export enum ProgressStatus {
     READY_FOR_SIGN = 'READY_FOR_SIGN',
     SUPPLY_POINT = 'SUPPLY_POINT',
     WAITING_FOR_PAYMENT = 'WAITING_FOR_PAYMENT',
+    PRICES = 'PRICES',
 }
 
 export interface ISupplyPointFormData {

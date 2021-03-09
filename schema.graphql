@@ -1,36 +1,399 @@
-# This file was generated based on ".graphqlconfig". Do not edit manually.
+scalar Date
 
-schema {
-    query: Query
-    mutation: Mutation
+input SupplyPointInput {
+    supplierId: ID!
+    name: String!
+    address: AddressInput!
+    powerAttributes: SupplyPointInputPowerAttributes
+    gasAtttributes: SupplyPointInputGasAttributes
+    expirationDate: Date
+    subjectTypeId: String!
+    contractEndTypeId: String!
+    timeToContractEnd: Int
+    timeToContractEndPeriodId: String
+}
+
+
+input SupplyPointInputGasAttributesImport {
+    eic: String!
+    annualConsumption: Float
+    annualConsumptionUnit: String
+}
+
+input SupplyPointInputPowerAttributesImport {
+    ean: String!
+    circuitBreakerId: String
+    phasesId: String
+    distributionRateId: String
+    annualConsumptionNT: Float
+    annualConsumptionNTUnit: String
+    annualConsumptionVT: Float
+    annualConsumptionVTUnit: String
+}
+
+input AddressInputImport {
+    region: String
+    street: String
+    orientationNumber: String
+    descriptiveNumber: String
+    city: String
+    postCode: String
+}
+
+input SupplyPointInputGasAttributes {
+    eic: String!
+    annualConsumption: Float!
+    annualConsumptionUnit: String!
+}
+
+input SupplyPointInputPowerAttributes {
+    ean: String!
+    circuitBreakerId: String!
+    phasesId: String!
+    distributionRateId: String!
+    annualConsumptionNT: Float
+    annualConsumptionNTUnit: String
+    annualConsumptionVT: Float!
+    annualConsumptionVTUnit: String!
+}
+
+input SupplyPointUpdate{
+    name: String!
+}
+
+input SupplyPointUpdatePowerAttributes{
+    annualConsumptionNT: Float
+    annualConsumptionNTUnit: String
+    annualConsumptionVT: Float!
+    annualConsumptionVTUnit: String!
+}
+
+input SupplyPointUpdateGasAttributes{
+    annualConsumption: Float!
+    annualConsumptionUnit: String!
+}
+
+type SupplyPoint {
+    id: ID!
+    name: String
+    commodityType: CommodityType
+    supplier: Supplier
+    identificationNumber: String
+    address: Address
+    distributionRate: CodelistItem
+    circuitBreaker: CodelistItem
+    phases: CodelistItem
+    annualConsumptionNT: Float
+    annualConsumptionNTUnit: String
+    annualConsumptionVT: Float
+    annualConsumptionVTUnit: String
+    annualConsumption: Float
+    annualConsumptionUnit: String
+    expirationDate: Date
+    subject: CodelistItem!
+    lastAnnualConsumptionNT: Float
+    lastAnnualConsumptionVT: Float
+    lastAnnualConsumption: Float
+    contractEndType: CodelistItem
+    timeToContractEnd: Int
+    timeToContractEndPeriod: CodelistItem
+    contract: ContractResponseDto,
+    progressStatus: ProgressStatus
+    lastVersionOfSupplyPoint: Boolean
+    allowedOperations: [AllowedOperations!]
+    imported: Boolean
+    importPricePerKwPowerVT: Float
+    importPricePerKwPowerNT: Float
+    importPricePerKwGas: Float
+    importPriceTotalPerYear: Float
+}
+
+enum ProgressStatus {
+    SUPPLY_POINT
+    OFFER_STEP
+    PERSONAL_DATA
+    READY_FOR_SIGN
+    WAITING_FOR_PAYMENT
+}
+
+enum AllowedOperations{
+    TERMINATE_CONTRACT,
+    LEAVE_CONTRACT,
+    PARTIAL_EDIT,
+    SHOW_DELIVERY_TO,
+    UNSET_AUTOMATIC_PROLONGATION
+}
+
+enum ContractDeleteReason{
+    LEAVING,
+    TERMINATION
+}
+
+type Supplier {
+    id: ID!
+    name: String!
+    vatNumber: String
+    logoPath: String
+    sampleDocuments: [SupplierSampleDocument]
 }
 
 type Address {
-    city: String!
-    descriptiveNumber: String!
-    orientationNumber: String
-    postCode: String!
     region: String!
     street: String!
+    orientationNumber: String
+    descriptiveNumber: String!
+    city: String!
+    postCode: String!
 }
 
-type BankAccount {
-    accountNumber: String!
-    accountPrefix: String
-    bankCode: String!
-    iban: String
+input AddressInput {
+    region: String!
+    street: String!
+    orientationNumber: String
+    descriptiveNumber: String!
+    city: String!
+    postCode: String!
 }
 
-type CodelistItem {
-    code: String!
-    description: String
-    help: String
-    type: String!
+type SupplierSampleDocument {
+    type: String
+    url: String
+    commodityType: CommodityType!
+}
+
+enum CommodityType {
+    POWER
+    GAS
 }
 
 type CodelistMap {
-    codelistItems: [CodelistItem]!
     codelistType: String!
+    codelistItems: [CodelistItem]!
+}
+
+type CodelistItem {
+    type: String!
+    code: String!
+    description: String
+    help: String
+}
+
+input OfferInput {
+    name: String!
+    supplierId: ID
+    validFrom: Date!
+    validTo: Date!
+    deliveryFrom: Date!
+    deliveryTo: Date!
+    deliveryLength: Int!
+    distributionLocation: String!
+    permanentPaymentPrice: Float!
+    subjectTypeId: String!
+    benefits: String
+    powerAttributes: OfferInputPowerAttributes
+    gasAttributes: OfferInputGasAttributes
+    greenEnergy: Boolean!
+}
+
+
+input OfferInputPowerAttributes {
+    priceVT: Float!
+    priceNT: Float
+    distributionRateId: String!
+    circuitBreakerId: String!
+}
+
+input OfferInputGasAttributes {
+    priceGas: Float!
+    annualConsumptionId: String!
+}
+
+
+type ContractTerms{
+    content: String
+}
+
+type Offer {
+    id: ID!
+    supplier: Supplier
+    status: OfferStatus
+    commodityType: CommodityType!
+    name: String!
+    validFrom: Date!
+    validTo: Date!
+    deliveryFrom: Date
+    deliveryTo: Date
+    deliveryLength: Int!
+    greenEnergy: Boolean!
+    distributionLocation: CodelistItem
+    permanentPaymentPrice: Float
+    subject: CodelistItem
+    benefits: String
+    priceVT: Float
+    priceNT: Float
+    distributionRate: CodelistItem
+    circuitBreaker: CodelistItem
+    priceGas: Float
+    annualConsumption: CodelistItem
+    priceVTWithVAT: Float
+    priceNTWithVAT: Float
+    priceGasWithVAT: Float
+    consumptionPriceVT: Float
+    consumptionPriceNT: Float
+    consumptionPriceGas: Float
+    distributionPriceByCapacity: Float
+    distributionPriceByConsumptionVT: Float
+    distributionPriceByConsumptionNT: Float
+    distributionPriceByConsumptionGas: Float
+    systemServicesRegulatedPrice: Float
+    renewableEnergyRegulatedPrice: Float
+    marketOrganizerRegulatedPrice: Float
+    energyTaxRegulatedPrice: Float
+    totalPrice: Float
+    monthlyConsumptionFee: Float
+    accountingRegulatedPrice: Float
+    unit: String,
+    prepayment: Float
+}
+
+enum OfferStatus {
+    ACTIVE
+    DELETED
+}
+
+input PersonalDataInput {
+    name: String!
+    ico: String
+    dic: String
+    address1: AddressInput!
+    address2: AddressInput
+    birthDate: Date
+    email: String!
+    phone: String!
+    bankAccountNumber: String!
+    bankCode: String!
+    depositPaymentTypeId: String!
+    deposit: Float!
+    signatoryName: String
+    signatorySurname: String
+    signatoryPosition: String
+}
+
+input PersonalDataInputImport {
+    name: String
+    ico: String
+    dic: String
+    address1: AddressInputImport
+    address2: AddressInputImport
+    birthDate: Date
+    email: String
+    phone: String
+    bankAccountNumber: String
+    bankCode: String
+    depositPaymentTypeId: String
+    deposit: Float
+    signatoryName: String
+    signatorySurname: String
+    signatoryPosition: String
+}
+
+input SupplyPointInputImport {
+    id: ID
+    supplierId: ID
+    name: String
+    address: AddressInputImport
+    supplyPointPowerAttributes: SupplyPointInputPowerAttributesImport
+    supplyPointGasAttributes: SupplyPointInputGasAttributesImport
+    expirationDate: Date
+    subjectTypeId: String
+    contractEndTypeId: String
+    timeToContractEnd: Int
+    timeToContractEndPeriodId: String
+    personalData: PersonalDataInputImport
+    importPricePerKwPowerVT: Float
+    importPricePerKwPowerNT: Float
+    importPricePerKwGas: Float
+    importPriceTotalPerYear: Float
+}
+
+type SupplyPointImportResponse {
+    id: ID
+    supplierId: ID
+    name: String
+    address: AddressInputImportResponse
+    supplyPointPowerAttributes: SupplyPointInputPowerAttributesImportResponse
+    supplyPointGasAttributes: SupplyPointInputGasAttributesImportResponse
+    expirationDate: Date
+    subjectTypeId: String
+    contractEndTypeId: String
+    timeToContractEnd: Int
+    timeToContractEndPeriodId: String
+    personalData: PersonalDataInputImportResponse
+    askForOfferId: ID
+}
+
+
+type PersonalDataInputImportResponse {
+    name: String
+    ico: String
+    dic: String
+    address1: AddressInputImportResponse
+    address2: AddressInputImportResponse
+    birthDate: Date
+    email: String
+    phone: String
+    bankAccountNumber: String
+    bankCode: String
+    depositPaymentTypeId: String
+    deposit: Float
+    signatoryName: String
+    signatorySurname: String
+    signatoryPosition: String
+}
+
+type SupplyPointInputGasAttributesImportResponse {
+    eic: String
+    annualConsumption: Float
+    annualConsumptionUnit: String
+}
+
+type SupplyPointInputPowerAttributesImportResponse {
+    ean: String
+    circuitBreakerId: String
+    phasesId: String
+    distributionRateId: String
+    annualConsumptionNT: Float
+    annualConsumptionNTUnit: String
+    annualConsumptionVT: Float
+    annualConsumptionVTUnit: String
+}
+
+type AddressInputImportResponse {
+    region: String
+    street: String
+    orientationNumber: String
+    descriptiveNumber: String
+    city: String
+    postCode: String
+}
+
+
+type PersonalData {
+    name: String
+    ico: String
+    dic: String
+    address1: Address
+    address2: Address
+    birthDate: Date
+    email: String
+    phone: String
+    bankAccountNumber: String
+    bankCode: String
+    depositPaymentType: CodelistItem
+    deposit: Float
+    signatoryName: String
+    signatorySurname: String
+    signatoryPosition: String
 }
 
 type Contract {
@@ -39,336 +402,76 @@ type Contract {
     deliveryFrom: Date
     deliveryTo: Date
     offer: Offer
-    offerValidity: Boolean
     personalData: PersonalData
+    offerValidity: Boolean
     prolong: Boolean
-    nextContractId: ID
+}
+
+type ContractResponseDto {
+    contractId: ID
+    offer: Offer
+    supplyPointId: ID
+    contractStatus: ContractStatus
+    deliveryFrom: Date
+    deliveryTo: Date
+    expirationDate: Date
+    signDate: Date
+    prolong: Boolean
+    personalData: PersonalData
+    offerValidity: Boolean
     previousContractId: ID
+    nextContractId: ID
     isNextContractConcluded: Boolean
 }
 
-type ContractTerms {
-    content: String
-}
-
-type ContractWithNameAndSupplyPoint {
-    contract: Contract!
+type ContractWithNameAndSupplyPointEan {
+    contract: ContractResponseDto!
+    name: String!
     identificationNumber: String!
-    name: String!
 }
 
-type Currency {
-    currencyCode: String!
-}
-
-type LoginResponse {
-    landingPage: LandingPage!
-    token: String!
-}
-
-"The Root Mutation for the application"
-type Mutation {
-    changePassword(newPassword: String!, oldPassword: String!): LoginResponse
-    concludeContract(contractId: ID!): Boolean
-    confirmFirstContractView: Boolean
-    createGasSupplyPoint(gasAttributes: SupplyPointInputGasAttributes!, supplyPoint: SupplyPointInput!): Int
-    createPowerSupplyPoint(powerAttributes: SupplyPointInputPowerAttributes!, supplyPoint: SupplyPointInput!): Int
-    deleteUnfinishedSupplyPoint(supplyPointId: ID!): Boolean
-    deleteOffer(offerId: ID!): Int
-    deletePersonalData(contractId: ID!): Boolean
-    deleteSelectedOfferFromContract(contractId: ID!): Boolean
-    deleteSignedContract(contractDeleteReason: ContractDeleteReason!, contractId: ID!, smsConfirmationCode: String!): Boolean
-    makeRegistration(email: String!, preregistration: Boolean = false, termsOfConditionsApproved: Boolean!): Boolean
-    makeUnregistration(smsCode: String): Boolean
-    resetPassword(login: String!): PasswordDestination
-    saveContract(offerId: ID!, supplyPointId: ID!): ID
-    saveGasOffer(gasAttributes: OfferInputGasAttributes!, offer: OfferInput!): Offer
-    savePersonalData(contractId: ID!, personalData: PersonalDataInput!): Boolean
-    savePowerOffer(offer: OfferInput!, powerAttributes: OfferInputPowerAttributes!): Offer
-    sendChangePhoneNumberSms(phoneNumber: String!): Boolean
-    sendConfirmUnsetContractProlongationSms: Boolean
-    sendContractConfirmationSms(contractId: ID!): Boolean
-    sendUnregisterSms: Boolean
-    setContractProlongation(contractId: ID!, prolong: Boolean!): Boolean
-    signContract(contractId: ID!, smsCode: String): Boolean
-    unsetContractProlongation(contractId: ID!, smsCode: String!): Boolean
-    updateGasOffer(gasAttributes: OfferInputGasAttributes!, offer: OfferInput!, offerId: ID!): Offer
-    updateGasSupplyPoint(gasAttributes: SupplyPointInputGasAttributes!, supplyPoint: SupplyPointInput!, supplyPointId: ID!): Int
-    updateGasSupplyPointWithContract(attributes: SupplyPointUpdateGasAttributes, supplyPointId: ID!, supplyPointUpdate: SupplyPointUpdate): Int
-    updatePersonalData(contractId: ID!, personalData: PersonalDataInput!): Boolean
-    updatePowerOffer(offer: OfferInput!, offerId: ID!, powerAttributes: OfferInputPowerAttributes!): Offer
-    updatePowerSupplyPoint(powerAttributes: SupplyPointInputPowerAttributes!, supplyPoint: SupplyPointInput!, supplyPointId: ID!): Int
-    updatePowerSupplyPointWithContract(attributes: SupplyPointUpdatePowerAttributes, supplyPointId: ID!, supplyPointUpdate: SupplyPointUpdate): Int
-    updateUserProfile(smsCode: String, userDetail: UserDetailInput!): Boolean
-}
-
-type Offer {
-    accountingRegulatedPrice: Float
-    annualConsumption: CodelistItem
-    benefits: String
-    circuitBreaker: CodelistItem
-    commodityType: CommodityType!
-    consumptionPriceNT: Float
-    consumptionPriceVT: Float
-    consumptionPriceGas: Float
-    deliveryFrom: Date
-    deliveryLength: Int!
-    deliveryTo: Date
-    distributionLocation: CodelistItem
-    distributionPriceByCapacity: Float
-    distributionPriceByConsumptionNT: Float
-    distributionPriceByConsumptionVT: Float
-    distributionRate: CodelistItem
-    energyTaxRegulatedPrice: Float
-    greenEnergy: Boolean!
-    id: ID!
-    marketOrganizerRegulatedPrice: Float
-    monthlyConsumptionFee: Float
-    name: String!
-    permanentPaymentPrice: Float
-    priceGas: Float
-    priceGasWithVAT: Float
-    priceNT: Float
-    priceNTWithVAT: Float
-    priceVT: Float
-    priceVTWithVAT: Float
-    renewableEnergyRegulatedPrice: Float
-    status: OfferStatus
-    subject: CodelistItem
-    supplier: Supplier
-    systemServicesRegulatedPrice: Float
-    totalPrice: Float
-    unit: String
-    validFrom: Date!
-    validTo: Date!
-}
-
-type PaginatedContractsWithNameAndSupplyPoint {
-    page: [ContractWithNameAndSupplyPoint!]!
+type PaginatedContractsWithNameAndSupplyPointEan {
+    page: [ContractWithNameAndSupplyPointEan!]!
     totalRecords: Int!
 }
 
-type Payment {
-    accountNumber: BankAccount!
-    amount: Float!
-    currency: Currency!
-    dueDate: Date!
-    encodedQrCode: String!
-    msg: String!
-    variableSymbol: VariableSymbol!
+type PaginatedAskForOffer {
+    page: [AskForOfferResponse!]!
+    totalRecords: Int!
 }
 
-type PersonalData {
-    address1: Address!
-    address2: Address
-    bankAccountNumber: String!
-    bankCode: String!
-    birthDate: Date
-    deposit: Float!
-    depositPaymentType: CodelistItem!
-    dic: String
-    email: String!
-    ico: String
-    name: String!
-    phone: String!
-    signatoryName: String
-    signatoryPosition: String
-    signatorySurname: String
+type AskForOfferResponse {
+    createdAt: Date,
+    status: AskForOfferStatus,
+    email: String,
+    files: [UploadFileResponse],
+    id: ID
 }
 
-"The Root Query for the application"
-type Query {
-    computeAndGetSupplyPointStatistics: SupplyPointStatistic
-    findAllSuppliers(commodityType: CommodityType): [Supplier]!
-    findCodelistsByTypes(locale: String, types: [String]!): [CodelistMap]!
-    findSupplierDocumentsByComodity(commodityType: CommodityType, supplierId: Int): [SupplierSampleDocument]!
-    findSupplierOffers: [Offer]
-    findSupplyPointOffers(identificationNumber: String!): [Offer]
-    findSupplyPoints(identificationNumber: String): [SupplyPoint]
-    findSupplyPointsByContractStatus(contractStatus: [ContractStatus]!, identificationNumber: String): [SupplyPoint]
-    getCodelistByType(locale: String, type: String!): [CodelistItem]!
-    getContract(identificationNumber: String, status: String, supplyPointId: ID): Contract
-    getContractTerms(contractId: ID!): ContractTerms
-    getPaymentInfo(contractId: ID!, setting: QRCodeSetting!): Payment
-    getPersonalData(contractId: ID!): PersonalData
-    getSupplyPoint(supplyPointId: ID!): SupplyPoint
-    getSupplyPointGlobalStatistics(includeHistoryData: Boolean): SupplyPointGlobalStatistic
-    listSupplierContractsBasedOnOffers(filter: ContractsBasedOnOffersFilter): PaginatedContractsWithNameAndSupplyPoint
-}
-
-type Supplier {
-    id: ID!
-    logoPath: String
-    name: String!
-    sampleDocuments: [SupplierSampleDocument]
-    vatNumber: String
-}
-
-type SupplierSampleDocument {
-    commodityType: CommodityType!
-    type: String
-    url: String
-}
-
-type SupplyPoint {
-    address: Address!
-    allowedOperations: [AllowedOperations!]
-    annualConsumptionNT: Float
-    annualConsumptionNTUnit: String
-    annualConsumptionVT: Float
-    annualConsumptionVTUnit: String!
-    annualConsumption: Float
-    annualConsumptionUnit: String
-    circuitBreaker: CodelistItem
-    commodityType: CommodityType!
-    contract: Contract
-    contractEndType: CodelistItem
-    distributionRate: CodelistItem
-    identificationNumber: String!
-    expirationDate: Date
-    id: ID!
-    lastAnnualConsumptionNT: Float
-    lastAnnualConsumptionVT: Float
-    lastannualConsumption: Float
-    lastVersionOfSupplyPoint: Boolean
-    name: String!
-    phases: CodelistItem
-    progressStatus: ProgressStatus
-    subject: CodelistItem!
-    supplier: Supplier!
-    timeToContractEnd: Int
-    timeToContractEndPeriod: CodelistItem
-}
-
-type SupplyPointGlobalStatistic {
-    gasDeliveryCount: Int!
-    gasOfferCount: Int!
-    powerDeliveryCount: Int!
-    powerOfferCount: Int!
-    totalPossibleDeliveryCountGas: Int!
-    totalPossibleDeliveryCountPower: Int!
-}
-
-type SupplyPointStatistic {
-    concludedCount: Int!
-    concludedItems: [SupplyPointStatisticView!]
-    gasAnnualConsumptionSum: Float!
-    gasCount: Int!
-    notConcludedCount: Int!
-    notConcludedItems: [SupplyPointStatisticView!]
-    powerAnnualConsumptionSum: Float!
-    powerCount: Int!
-    showDeliveryCount: Int!
-    showDeliveryItems: [SupplyPointStatisticView!]
-}
-
-type SupplyPointStatisticView {
-    commodityType: CommodityType!
-    id: ID!
-    name: String!
-    progressStatus: ProgressStatus!
-}
-
-type VariableSymbol {
-    value: String!
-}
-
-enum AllowedOperations {
-    LEAVE_CONTRACT
-    PARTIAL_EDIT
-    SHOW_DELIVERY_TO
-    TERMINATE_CONTRACT
-    UNSET_AUTOMATIC_PROLONGATION
-}
-
-enum CommodityType {
-    GAS
-    POWER
-}
-
-enum ContractDeleteReason{
-    LEAVING,
-    TERMINATION
-}
-
-enum ContractStatus {
-    CANCELED
-    CONCLUDED
-    NOT_CONCLUDED
-    TO_BE_CANCELED
-    WAITING_FOR_PAYMENT
-}
-
-enum LandingPage {
-    DASHBOARD
-    NEW_SUPPLY_POINT
-    OFFERS
-    WAITING_FOR_PAYMENT
-}
-
-enum OfferStatus {
-    ACTIVE
-    DELETED
-}
-
-enum PasswordDestination {
-    EMAIL
-    PHONE
-}
-
-enum ProgressStatus {
-    OFFER_STEP
-    PERSONAL_DATA
-    READY_FOR_SIGN
-    SUPPLY_POINT
-    WAITING_FOR_PAYMENT
-}
-
-input AddressInput {
-    city: String!
-    descriptiveNumber: String!
-    orientationNumber: String
-    postCode: String!
-    region: String!
-    street: String!
+type UploadFileResponse {
+    id: ID
+    fileName: String
 }
 
 input ContractsBasedOnOffersFilter {
-    commodityType: CommodityType
     offerId: ID
-    pagination: Pagination
+    supplierId: ID
     signDateFrom: Date
     signDateTo: Date
-    supplierId: ID
+    commodityType: CommodityType
+    pagination: Pagination
 }
 
-input OfferInput {
-    benefits: String
-    deliveryFrom: Date!
-    deliveryLength: Int!
-    deliveryTo: Date!
-    distributionLocation: String!
-    gasAttributes: OfferInputGasAttributes
-    greenEnergy: Boolean!
-    name: String!
-    permanentPaymentPrice: Float!
-    powerAttributes: OfferInputPowerAttributes
-    subjectTypeId: String!
-    supplierId: Int!
-    validFrom: Date!
-    validTo: Date!
+input AskForOfferFilter {
+    statuses: [AskForOfferStatus]
+    pagination: Pagination
 }
 
-input OfferInputGasAttributes {
-    annualConsumptionId: String!
-    priceGas: Float!
-}
-
-input OfferInputPowerAttributes {
-    circuitBreakerId: String!
-    distributionRateId: String!
-    priceNT: Float
-    priceVT: Float!
+enum AskForOfferStatus {
+    NEW,
+    IN_PROGRESS,
+    PROCESSED,
+    DELETED
 }
 
 input Pagination {
@@ -376,84 +479,209 @@ input Pagination {
     offset: Int!
 }
 
-input PersonalDataInput {
-    address1: AddressInput!
-    address2: AddressInput
-    bankAccountNumber: String!
-    bankCode: String!
-    birthDate: Date
-    deposit: Float!
-    depositPaymentTypeId: String!
-    dic: String
-    email: String!
-    ico: String
-    name: String!
-    phone: String!
-    signatoryName: String
-    signatoryPosition: String
-    signatorySurname: String
+enum ContractStatus {
+    CANCELED
+    NOT_CONCLUDED
+    WAITING_FOR_PAYMENT
+    CONCLUDED
+    TO_BE_CANCELED
 }
 
+enum PasswordDestination{
+    EMAIL,
+    PHONE
+}
+
+enum LandingPage{
+    NEW_SUPPLY_POINT,
+    DASHBOARD,
+    WAITING_FOR_PAYMENT,
+    OFFERS
+}
+
+type LoginResponse{
+    token: String!
+    landingPage: LandingPage!
+}
 input QRCodeSetting {
-    backgroundColor: String
-    foregroundColor: String
+    width: Int
     height: Int
     margin: Int
-    width: Int
+    foregroundColor: String
+    backgroundColor: String
+}
+type Payment {
+    accountNumber: BankAccount!
+    variableSymbol: VariableSymbol!
+    amount: Float!
+    currency: Currency!
+    dueDate: Date!
+    msg: String!
+    encodedQrCode: String!
+}
+type Currency {
+    currencyCode: String!
+}
+type VariableSymbol {
+    value: String!
+}
+type BankAccount {
+    accountPrefix: String
+    accountNumber: String!
+    bankCode: String!
+    iban: String
 }
 
-input SupplyPointInput {
-    address: AddressInput!
-    contractEndTypeId: String!
-    expirationDate: Date
-    gasAtttributes: SupplyPointInputGasAttributes
-    name: String!
-    powerAttributes: SupplyPointInputPowerAttributes
-    subjectTypeId: String!
-    supplierId: Int!
-    timeToContractEnd: Int
-    timeToContractEndPeriodId: String
+type SupplyPointStatistic {
+    gasCount: Int!
+    powerCount: Int!
+    showDeliveryCount: Int!
+    notConcludedCount: Int!
+    gasAnnualConsumptionSum: Float!
+    powerAnnualConsumptionSum: Float!
+    showDeliveryItems: [SupplyPointStatisticView!]
+    notConcludedItems: [SupplyPointStatisticView!]
+    concludedCount: Int!
+    concludedItems: [SupplyPointStatisticView!]
 }
 
-input SupplyPointInputGasAttributes {
-    annualConsumption: Float!
-    annualConsumptionUnit: String!
-    eic: String!
+type SupplyPointStatisticView {
+    id: ID!
+    name: String
+    commodityType: CommodityType
+    progressStatus: ProgressStatus!
 }
 
-input SupplyPointInputPowerAttributes {
-    annualConsumptionNT: Float
-    annualConsumptionNTUnit: String
-    annualConsumptionVT: Float!
-    annualConsumptionVTUnit: String!
-    circuitBreakerId: String!
-    distributionRateId: String!
-    ean: String!
-    phasesId: String!
-}
-
-input SupplyPointUpdate {
-    name: String!
-}
-
-input SupplyPointUpdateGasAttributes {
-    annualConsumption: Float!
-    annualConsumptionUnit: String!
-}
-
-input SupplyPointUpdatePowerAttributes {
-    annualConsumptionNT: Float
-    annualConsumptionNTUnit: String
-    annualConsumptionVT: Float!
-    annualConsumptionVTUnit: String!
+type SupplyPointGlobalStatistic {
+    gasOfferCount: Int!
+    powerOfferCount: Int!
+    gasDeliveryCount: Int!
+    powerDeliveryCount: Int!
+    totalPossibleDeliveryCountGas: Int!
+    totalPossibleDeliveryCountPower: Int!
 }
 
 input UserDetailInput {
+    userName: String!
     firstName: String!
     lastName: String!
     phoneNumber: String!
-    userName: String!
 }
 
 
-scalar Date
+input ContractBasedOnSupplyPointFilter {
+    supplyPointId: ID!,
+    contractStatus: ContractStatus!
+}
+
+# The Root Query for the application
+type Query {
+    getCodelistByType(type: String!, locale: String): [CodelistItem]!
+    findAllSuppliers(commodityType: CommodityType): [Supplier]!
+    findCodelistsByTypes(types: [String]!, locale: String): [CodelistMap]!
+    findSupplierDocumentsByComodity(
+        supplierId: ID
+        commodityType: CommodityType
+    ): [SupplierSampleDocument]!
+    getSupplyPoint(supplyPointId: ID!, contractId: ID): SupplyPoint
+    findSupplyPoints(identificationNumber: String): [SupplyPoint]
+    findSupplierOffers: [Offer]
+    findSupplyPointOffers(identificationNumber: String!): [Offer]
+    getPersonalData(contractId: ID!): PersonalData
+    getContractById(contractId: ID!): ContractResponseDto
+    getContractTerms(contractId: ID!): ContractTerms
+    findSupplyPointsByContractStatus(contractStatus: [ContractStatus]!, identificationNumber: String): [SupplyPoint]
+    getPaymentInfo(contractId: ID!, setting: QRCodeSetting!): Payment
+    computeAndGetSupplyPointStatistics: SupplyPointStatistic
+    listSupplierContractsBasedOnOffers(filter: ContractsBasedOnOffersFilter): PaginatedContractsWithNameAndSupplyPointEan
+    listAskForOffer(filter: AskForOfferFilter): PaginatedAskForOffer
+    listContractsBasedOnSupplyPointAndStatus(filter: ContractBasedOnSupplyPointFilter!): [ContractResponseDto]!
+    getPersonalDataImport(input: PersonalDataInputImport): ID
+    findSupplyPointImport(askForOfferId: ID!): SupplyPoint
+}
+
+
+
+# The Root Mutation for the application
+type Mutation {
+    updatePowerSupplyPointWithContract(
+        supplyPointId: ID!,
+        supplyPointUpdate: SupplyPointUpdate
+        attributes: SupplyPointUpdatePowerAttributes
+    ): ID
+    updateGasSupplyPointWithContract(
+        supplyPointId: ID!
+        supplyPointUpdate: SupplyPointUpdate
+        attributes: SupplyPointUpdateGasAttributes
+    ): ID
+    createGasSupplyPoint(
+        supplyPoint: SupplyPointInput!
+        gasAttributes: SupplyPointInputGasAttributes!
+    ): ID
+    createPowerSupplyPoint(
+        supplyPoint: SupplyPointInput!
+        powerAttributes: SupplyPointInputPowerAttributes!
+    ): ID
+    createSupplyPointImport(
+        askForOfferId: ID!
+        supplyPoint: SupplyPointInputImport!
+    ): ID
+
+    updateGasSupplyPoint(
+        supplyPointId: ID!
+        supplyPoint: SupplyPointInput!
+        gasAttributes: SupplyPointInputGasAttributes!
+    ): ID
+    updatePowerSupplyPoint(
+        supplyPointId: ID!
+        supplyPoint: SupplyPointInput!
+        powerAttributes: SupplyPointInputPowerAttributes!
+    ): ID
+    deleteUnfinishedSupplyPoint(
+        supplyPointId: ID!
+    ): Boolean,
+    makeRegistration(
+        email: String!
+        termsOfConditionsApproved: Boolean!
+        preregistration: Boolean = false
+    ): Boolean
+    makeUnregistration(smsCode: String): Boolean
+    savePowerOffer(
+        offer: OfferInput!
+        powerAttributes: OfferInputPowerAttributes!
+    ): Offer
+    saveGasOffer(
+        offer: OfferInput!
+        gasAttributes: OfferInputGasAttributes!
+    ): Offer
+    updatePowerOffer(
+        offerId: ID!
+        offer: OfferInput!
+        powerAttributes: OfferInputPowerAttributes!
+    ): Offer
+    updateGasOffer(
+        offerId: ID!
+        offer: OfferInput!
+        gasAttributes: OfferInputGasAttributes!
+    ): Offer
+    deleteOffer(offerId: ID!): ID
+    savePersonalData(contractId: ID!, personalData: PersonalDataInput!): Boolean
+    updatePersonalData(contractId: ID!, personalData: PersonalDataInput!): Boolean
+    deletePersonalData(contractId: ID!): Boolean
+    saveContract(offerId: ID!, supplyPointId: ID!): ID
+    concludeContract(contractId: ID!): Boolean
+    unsetContractProlongation(contractId: ID!, smsCode: String!): Boolean
+    signContract(contractId: ID!, smsCode: String): Boolean
+    sendContractConfirmationSms(contractId: ID!): Boolean
+    sendConfirmUnsetContractProlongationSms: Boolean
+    sendUnregisterSms: Boolean
+    sendChangePhoneNumberSms(phoneNumber: String!): Boolean
+    resetPassword(login: String!): PasswordDestination
+    changePassword(oldPassword: String!, newPassword: String!): LoginResponse
+    deleteSignedContract(contractId: ID!, smsConfirmationCode: String!, contractDeleteReason: ContractDeleteReason!): Boolean
+    deleteSelectedOfferFromContract(contractId: ID!): Boolean
+    updateUserProfile(userDetail: UserDetailInput!, smsCode: String): Boolean
+    confirmFirstContractView: Boolean
+    deleteAskForOffer(askForOfferId: ID): ID
+    finalizeAskForOffer(askForOfferId: ID): ID
+}

@@ -9,6 +9,7 @@ import {
 import * as R from 'ramda';
 
 import { CeilPipe } from 'src/common/pipes/ceil-number/simple-number.pipe';
+import { IsLastUpdatedOfferPipe } from 'src/common/pipes/is-last-updated-offer/is-last-updated-offer.pipe';
 
 @Pipe({
     name: 'dynamic',
@@ -18,6 +19,7 @@ export class DynamicPipe implements PipeTransform {
     private pipesMapping = {
         'number': DecimalPipe,
         'ceil': CeilPipe,
+        'isLastUpdatedOffer': IsLastUpdatedOfferPipe,
     };
 
     public constructor(

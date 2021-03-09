@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { IPaginationConfig } from 'src/app/pages/supplier-concluded-contracts/supplier-concluded-contracts.model';
+import { IPaginationConfig } from 'src/app/pages/suppliers/concluded-contracts/concluded-contracts.model';
 import { IPaginatedContractsWithNameAndSupplyPoint } from 'src/common/graphql/models/suppplier.model';
 import { SupplierConcludedContractsConfig } from './config';
 

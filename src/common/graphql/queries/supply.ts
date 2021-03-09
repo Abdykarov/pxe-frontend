@@ -59,6 +59,10 @@ export const supplyPointFragment = gql`
             annualConsumptionNTUnit,
             annualConsumptionVTUnit,
             annualConsumptionUnit,
+            importPricePerKwPowerVT,
+            importPricePerKwPowerNT,
+            importPricePerKwGas,
+            importPriceTotalPerYear,
             expirationDate,
             subject{
                 type,
@@ -171,6 +175,7 @@ export const supplyPointFragment = gql`
                 },
                 prolong,
             },
+            imported,
             progressStatus,
             allowedOperations,
         }
