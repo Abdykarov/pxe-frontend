@@ -9,7 +9,7 @@ import * as R from 'ramda';
 
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { ITermsOfUSe } from 'src/common/cms/models/terms-of-use';
-import { ISeo } from '../../../common/cms/models/seo';
+import { ISeo } from 'src/common/cms/models/seo';
 
 @Component({
     selector: 'pxe-term-of-use',
