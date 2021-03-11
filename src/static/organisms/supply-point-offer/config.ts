@@ -66,7 +66,12 @@ export const offerConfig: IOffer = {
 
 export const questions: IQuestion[] = [{
     id: 15,
-    'tag': Tag.SUPPLIER,
+    tag: {
+        type: Tag.SUPPLIER,
+        url: 'supplier',
+        label: 'Dodavatelé',
+        title: 'Časté otázky',
+    },
     'url': 'future',
     'header': 'Jak chcete parc4u rozvíjet?',
     'shortContent': 'Rádi bychom získali pro parc4u dostatek zákazníků, což nám umožní další' +

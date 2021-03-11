@@ -22,7 +22,6 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import {
     CommodityTypesLowerCase,
     CONSTS,
-    SEO,
     SubjectTypeLowerCase,
 } from 'src/app/app.constants';
 import {
@@ -30,6 +29,7 @@ import {
     pdfSetting,
 } from 'src/app/pages/public/patterns-of-contracts/patterns-of-contracts.config';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { IPatternsOfContracts } from 'src/common/cms/models/patterns-of-contracts';
 import { IPdfSetting } from 'src/app/pages/public/patterns-of-contracts/models/patterns-of-contracts.model';
 import { PdfViewerComponent } from 'src/common/ui/pdf-viewer/pdf-viewer.component';
 
@@ -39,11 +39,19 @@ import { PdfViewerComponent } from 'src/common/ui/pdf-viewer/pdf-viewer.componen
     styleUrls: ['./patterns-of-contracts.component.scss'],
 })
 export class PatternsOfContractsComponent extends AbstractComponent implements OnInit {
+    public readonly patternsOfContracts: IPatternsOfContracts = this.route.snapshot.data.patternsOfContracts;
+    public readonly breadcrumbItemsSimple: IBreadcrumbItems = [
+        {
+            label: 'Domů',
+            url: '/',
+        },
+        {
+            label: this.patternsOfContracts.breadcrumbTitle,
+        },
+    ];
 
     @ViewChild('pxePdfViewer', { static: true })
     public pxePdfViewer: PdfViewerComponent;
-
-    public breadcrumbItemsSimple: IBreadcrumbItems;
 
     public readonly COMMODITY_TYPE = CommodityTypesLowerCase;
     public readonly SUBJECT_TYPE = SubjectTypeLowerCase;
@@ -65,28 +73,17 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
         private titleService: Title,
     ) {
         super();
-        this.titleService.setTitle(CONSTS.TITLES.PATTERNS_OF_CONTRACTS);
+        const seo = R.head(this.patternsOfContracts.seo);
+
+        this.titleService.setTitle(seo.title);
         this.metaService.updateTag({
             name: 'description',
-            content: SEO.META_DESCRIPTION.PATTERNS_OF_CONTRACTS,
+            content: seo.description,
         });
         this.metaService.updateTag({
             name: 'keywords',
-            content: [
-                ...SEO.META_KEYWORDS.LANDING_PAGE,
-                ...SEO.META_KEYWORDS.PATTERNS_OF_CONTRACTS,
-            ].toString(),
+            content: seo.keywords,
         });
-
-        this.breadcrumbItemsSimple = [
-            {
-                label: 'Domů',
-                url: '/',
-            },
-            {
-                label: 'Vzory smluv o dodávce',
-            },
-        ];
     }
 
     ngOnInit(): void {
@@ -96,7 +93,8 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
             )
             .subscribe(params => {
                 this.subjectType = params.subjectType;
-                this.commodityType = params.commodityType;
+                const tree = this.router.parseUrl(this.router.url);
+                this.commodityType = <CommodityTypesLowerCase>tree.fragment;
 
                 this.prepareActiveContract();
                 this.prepareFutureContracts();
@@ -133,7 +131,12 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
     }
 
     public navigateToCorrectUrl = () => {
-        this.router.navigate([`${CONSTS.PATHS.PATTERNS_OF_CONTRACTS}/${this.subjectType}/${this.commodityType}`]);
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+            this.router.navigate([`${CONSTS.PATHS.PATTERNS_OF_CONTRACTS}/${this.subjectType}`],
+                {
+                    fragment: this.commodityType,
+                }),
+        );
     }
 
     public downloadPdf = (sourceUrl: string, name: string) => {

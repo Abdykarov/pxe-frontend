@@ -1,7 +1,7 @@
 <div
      class="card">
     <img
-        [src]="domSanitizer.bypassSecurityTrustUrl(data.imgSrc)"
+        [src]="data.img"
         [attr.title]="data.imgTitle"
         [attr.alt]="data.imgAlt"
         class="card-img-top">

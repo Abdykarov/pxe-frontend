@@ -4,12 +4,12 @@ import { NgModule } from '@angular/core';
 // own classes
 import { AccountNumberPipe } from './account-number/account-number.pipe';
 import { AllowProgressStepPipe } from 'src/common/pipes/allow-progress-step/allow-progress-step.pipe';
+import { BestPricesInTheWorldPipe } from 'src/common/pipes/best-prices-in-the-world/best-prices-in-the-world.pipe';
 import { CeilPipe } from 'src/common/pipes/ceil-number/simple-number.pipe';
 import { ConsumptionPipe } from './consumption/consumption.pipe';
 import { ConsumptionIndicatorPipe } from './consumption-indicator/consumption-indicator.pipe';
 import { DateDiffPipe } from './date-diff/date-diff.pipe';
 import { DynamicPipe } from './dynamic/dynamic.pipe';
-import { GetUrlFromTagPipe } from 'src/common/pipes/get-url-from-tag/get-url-from-tag.pipe';
 import { IsAllowedOperationPipe } from './is-allowed-operation/is-allowed-operation.pipe';
 import { IsDatePast } from './is-date-past/is-date-past.pipe';
 import { IsLastUpdatedOfferPipe } from './is-last-updated-offer/is-last-updated-offer.pipe';
@@ -34,12 +34,12 @@ import { ValuesPipe } from './values/values.pipe';
     declarations: [
         AccountNumberPipe,
         AllowProgressStepPipe,
+        BestPricesInTheWorldPipe,
         CeilPipe,
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,
         DynamicPipe,
-        GetUrlFromTagPipe,
         IsAllowedOperationPipe,
         IsDatePast,
         IsLastUpdatedOfferPipe,
@@ -63,12 +63,12 @@ import { ValuesPipe } from './values/values.pipe';
     exports: [
         AccountNumberPipe,
         AllowProgressStepPipe,
+        BestPricesInTheWorldPipe,
         CeilPipe,
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,
         DynamicPipe,
-        GetUrlFromTagPipe,
         IsAllowedOperationPipe,
         IsDatePast,
         IsLastUpdatedOfferPipe,
@@ -91,13 +91,13 @@ import { ValuesPipe } from './values/values.pipe';
     ],
     providers: [
         AccountNumberPipe,
+        BestPricesInTheWorldPipe,
         CeilPipe,
         ConsumptionPipe,
         ConsumptionIndicatorPipe,
         DateDiffPipe,
         DecimalPipe,
         DynamicPipe,
-        GetUrlFromTagPipe,
         IsAllowedOperationPipe,
         IsDatePast,
         IsLastUpdatedOfferPipe,

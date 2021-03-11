@@ -32,25 +32,27 @@ import {
     AskForOfferContainerComponent,
 } from 'src/common/containers/form/forms/ask-for-offer/ask-for-offer-container.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { cardConfig } from './landing.config';
 import {
     CONSTS,
     ROUTES,
-    SEO,
 } from 'src/app/app.constants';
 import { CommodityType } from 'src/common/graphql/models/supply.model';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import { FaqService } from 'src/app/services/faq.service';
 import { GTMService } from 'src/app/services/gtm.service';
 import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
+import { IAskForOffer } from 'src/common/cms/models/ask-for-offer';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import {
     IFieldError,
     IForm,
     SignUpType,
 } from 'src/common/containers/form/models/form-definition.model';
+import { ILandingPage } from 'src/common/cms/models/landing-page';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import { IQuestion } from 'src/app/services/model/faq.model';
+import { ISignUp } from 'src/common/cms/models/sign-up';
+import { NewsService } from 'src/common/cms/services/news.service';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { scrollToElementFnc } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
@@ -95,9 +97,11 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
     public formFields: IForm;
     public routes = ROUTES;
 
-    public isMoreThanMdResolution = false;
+    public readonly askForOffer: IAskForOffer = this.route.snapshot.data.askForOffer;
+    public readonly landingPage: ILandingPage = this.route.snapshot.data.landingPage;
+    public readonly signUp: ISignUp = this.route.snapshot.data.signUp;
 
-    public cardConfig = cardConfig;
+    public isMoreThanMdResolution = false;
 
     public resizeEvent$ = fromEvent(window, 'resize')
         .pipe(
@@ -112,6 +116,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
         private gtmService: GTMService,
         private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
+        private newsService: NewsService,
         private modalService: ModalService,
         public route: ActivatedRoute,
         public router: Router,
@@ -136,14 +141,14 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
                     this.cd.markForCheck();
             });
 
-        this.titleService.setTitle(CONSTS.TITLES.LANDING_PAGE);
+        this.titleService.setTitle(this.landingPage.seo.title);
         this.metaService.updateTag({
             name: 'description',
-            content: SEO.META_DESCRIPTION.LANDING_PAGE,
+            content: this.landingPage.seo.description,
         });
         this.metaService.updateTag({
             name: 'keywords',
-            content: SEO.META_KEYWORDS.LANDING_PAGE.toString(),
+            content: this.landingPage.seo.keywords,
         });
 
         this.formFields = createRegistrationFormFields(SignUpType.SignUp);

@@ -2,7 +2,7 @@
     <div [innerHTML]="data.shortContent"></div>
     <div *ngIf="data.fullContent">
         <a class="link mt-4"
-           [routerLink]="['/', CONSTS.PATHS.FAQ, data.tag | getUrlFromTag:faqConfig, data.url]">
+           [routerLink]="['/', CONSTS.PATHS.FAQ, data.tag.type, data.url]">
             Zobrazit více
         </a>
     </div>

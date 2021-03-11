@@ -1,6 +1,6 @@
 export interface IQuestion {
     id: number;
-    tag: Tag;
+    tag: ITagConfigItem;
     url: string;
     header: string;
     shortContent: string;
@@ -18,7 +18,8 @@ export enum Tag {
 }
 
 export interface ITagConfigItem {
-    type: Tag;
+    type: string | Tag;
     url: string;
     label: string;
+    title: string;
 }

@@ -1,14 +1,15 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 import {
     Meta,
     Title,
 } from '@angular/platform-browser';
 
-import {
-    CONSTS,
-    SEO,
-} from 'src/app/app.constants';
+import * as R from 'ramda';
+
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { ISecuringYourData } from 'src/common/cms/models/securing-your-data';
+import { ISeo } from 'src/common/cms/models/seo';
 
 @Component({
     selector: 'pxe-securing-your-data',
@@ -16,33 +17,31 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
     styleUrls: ['./securing-your-data.component.scss'],
 })
 export class SecuringYourDataComponent {
-    public breadcrumbItemsSimple: IBreadcrumbItems;
+    public readonly securingYourData: ISecuringYourData = this.route.snapshot.data.securingYourData;
+    public readonly breadcrumbItemsSimple: IBreadcrumbItems = [
+        {
+            label: 'Domů',
+            url: '/',
+        },
+        {
+            label: this.securingYourData.breadcrumbTitle,
+        },
+    ];
 
     constructor(
         private metaService: Meta,
+        private route: ActivatedRoute,
         private titleService: Title,
     ) {
-        this.titleService.setTitle(CONSTS.TITLES.SECURING_YOUR_DATA);
+        const seo: ISeo = R.head(this.securingYourData.seo);
+        this.titleService.setTitle(seo.title);
         this.metaService.updateTag({
             name: 'description',
-            content: SEO.META_DESCRIPTION.SECURING_YOUR_DATA,
+            content: seo.description,
         });
         this.metaService.updateTag({
             name: 'keywords',
-            content: [
-                ...SEO.META_KEYWORDS.LANDING_PAGE,
-                ...SEO.META_KEYWORDS.SECURING_YOUR_DATA,
-            ].toString(),
+            content: seo.keywords,
         });
-
-        this.breadcrumbItemsSimple = [
-            {
-                label: 'Domů',
-                url: '/',
-            },
-            {
-                label: 'Ochrana osobních údajů',
-            },
-        ];
     }
 }

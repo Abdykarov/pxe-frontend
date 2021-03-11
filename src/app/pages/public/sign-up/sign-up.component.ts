@@ -1,13 +1,18 @@
 import {
     Component,
-    ChangeDetectorRef, ViewChild,
+    ChangeDetectorRef,
+    ViewChild,
 } from '@angular/core';
 import {
     Meta,
     Title,
 } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import {
+    ActivatedRoute,
+    Router,
+} from '@angular/router';
 
+import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 import { CookieService } from 'ngx-cookie';
 import { takeUntil } from 'rxjs/operators';
@@ -19,7 +24,6 @@ import {
     CONSTS,
     GTM_CONSTS,
     ROUTES,
-    SEO,
 } from 'src/app/app.constants';
 import { createRegistrationFormFields } from 'src/common/containers/form/forms/registration/registration-form.config';
 import { GTMService } from 'src/app/services/gtm.service';
@@ -30,6 +34,8 @@ import {
 } from 'src/common/containers/form/models/form-definition.model';
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
+import { ISeo } from 'src/common/cms/models/seo';
+import { ISignUp } from 'src/common/cms/models/sign-up';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { RegistrationService } from 'src/common/graphql/services/registration.service';
 
@@ -38,6 +44,8 @@ import { RegistrationService } from 'src/common/graphql/services/registration.se
     styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent extends AbstractComponent {
+    public readonly signUp: ISignUp = this.route.snapshot.data.signUp;
+
     public formLoading = false;
     public formSent = false;
     public globalError: string[] = [];
@@ -57,21 +65,21 @@ export class SignUpComponent extends AbstractComponent {
         private isLoggedPipe: IsLoggedPipe,
         private metaService: Meta,
         private registrationService: RegistrationService,
+        private route: ActivatedRoute,
         private router: Router,
         private titleService: Title,
     ) {
         super();
-        this.titleService.setTitle(CONSTS.TITLES.SIGN_UP);
+        const seo: ISeo = R.head(this.signUp.seo);
+
+        this.titleService.setTitle(seo.title);
         this.metaService.updateTag({
             name: 'description',
-            content: SEO.META_DESCRIPTION.SIGN_UP,
+            content: seo.description,
         });
         this.metaService.updateTag({
             name: 'keywords',
-            content: [
-                ...SEO.META_KEYWORDS.LANDING_PAGE,
-                ...SEO.META_KEYWORDS.SIGN_UP,
-            ].toString(),
+            content: seo.keywords,
         });
 
         this.formFields = createRegistrationFormFields(SignUpType.SignUp);

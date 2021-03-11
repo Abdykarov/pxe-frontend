@@ -1,14 +1,15 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 import {
     Meta,
     Title,
 } from '@angular/platform-browser';
 
-import {
-    CONSTS,
-    SEO,
-} from 'src/app/app.constants';
+import * as R from 'ramda';
+
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import { ISeo } from 'src/common/cms/models/seo';
+import { ITermsOfUSe } from 'src/common/cms/models/terms-of-use';
 
 @Component({
     selector: 'pxe-term-of-use',
@@ -18,21 +19,23 @@ import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.mod
 export class TermsOfUseComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
 
+    public readonly termsOfUse: ITermsOfUSe = this.route.snapshot.data.termsOfUse;
+
     constructor(
         private metaService: Meta,
+        private route: ActivatedRoute,
         private titleService: Title,
     ) {
-        this.titleService.setTitle(CONSTS.TITLES.TERMS_OF_USE);
+        const seo: ISeo = R.head(this.termsOfUse.seo);
+
+        this.titleService.setTitle(seo.title);
         this.metaService.updateTag({
             name: 'description',
-            content: SEO.META_DESCRIPTION.TERMS_OF_USE,
+            content: seo.description,
         });
         this.metaService.updateTag({
             name: 'keywords',
-            content: [
-                ...SEO.META_KEYWORDS.LANDING_PAGE,
-                ...SEO.META_KEYWORDS.TERMS_OF_USE,
-            ].toString(),
+            content: seo.keywords,
         });
 
         this.breadcrumbItemsSimple = [
@@ -41,7 +44,7 @@ export class TermsOfUseComponent {
                 url: '/',
             },
             {
-                label: 'Podmínky užívání',
+                label: this.termsOfUse.breadcrumbTitle,
             },
         ];
     }
