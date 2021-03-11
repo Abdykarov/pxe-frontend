@@ -29,11 +29,10 @@ export class PaymentGuard implements CanActivateChild {
         state: RouterStateSnapshot,
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
         this.authService.checkLogin();
-        const storedSupplyPointId = this.authService.currentUserValue.evaluatedSupplyPoint &&
-            this.authService.currentUserValue.evaluatedSupplyPoint.toString();
-        const actualSupplyPointId = state.root.queryParams.supplyPointId && state.root.queryParams.supplyPointId.toString();
+        const storedSupplyPointId = this.authService.currentUserValue?.evaluatedSupplyPoint?.toString();
+        const actualSupplyPointId = state.root.queryParams?.supplyPointId?.toString();
 
-        if (this.authService.currentUserValue.userStatus === UserStatus.AWAITING_VERIFICATION &&
+        if (this.authService.currentUserValue?.userStatus === UserStatus.AWAITING_VERIFICATION &&
             (R.indexOf(ROUTES.ROUTER_REQUEST_PAYMENT, state.url) < 0 || actualSupplyPointId !== storedSupplyPointId)
             ) {
                 if (storedSupplyPointId) {
