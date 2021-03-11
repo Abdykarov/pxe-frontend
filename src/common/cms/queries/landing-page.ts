@@ -80,7 +80,6 @@ export const getLandingPageQuery = gql`
               title
             }
           }
-          metaGoogleSiteVerification
         },
       }
     }
