@@ -15,7 +15,12 @@ export class FaqDetailPageComponent {
 
     public question: IQuestion = {
         id: 1,
-        tag: Tag.GENERAL,
+        tag: {
+            type: Tag.GENERAL,
+            url: 'general',
+            label: 'Obecné',
+            title: 'Dodavatel',
+        },
         url: 'price-length',
         header: 'Opravdu budu mít vybranou cenu po celou dobu zvoleného období?',
         shortContent: 'Ano, dodavatel vám cenu za silovou elektřinu nebo za odebraný zemní plyn nemůže změnit. ' +

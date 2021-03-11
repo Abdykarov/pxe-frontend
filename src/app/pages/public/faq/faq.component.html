@@ -1,6 +1,6 @@
 <div class="container-fluid container-fluid--max-width">
     <div class="container-content container-content--public">
-        <pxe-layout-container pageTitle="Často kladené otázky" [breadcrumbItemsSimple]="breadcrumbItemsSimple">
+        <pxe-layout-container *ngIf="faq" [pageTitle]="faq.title" [breadcrumbItemsSimple]="breadcrumbItemsSimple">
             <router-outlet></router-outlet>
         </pxe-layout-container>
     </div>

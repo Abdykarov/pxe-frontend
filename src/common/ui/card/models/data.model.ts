@@ -1,8 +1,8 @@
 export interface ICardData {
     content: string;
-    imgSrc: string;
+    img: string;
     imgAlt: string;
     imgTitle: string;
     title: string;
-    customClass?: string;
+    customClasses?: string;
 }

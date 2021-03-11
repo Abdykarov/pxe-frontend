@@ -17,7 +17,10 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { CookieModule } from 'ngx-cookie';
 import { HttpLinkModule } from 'apollo-angular-link-http';
 
+import { TransferHttpCacheModule } from '@nguniversal/common';
+
 // own classes
+import { ApolloCMSGraphQLProvider } from 'src/common/cms/middleware/apollo-cms-graphql-provider';
 import { ApolloGraphQLProvider } from 'src/common/graphql/middleware/apollo-graphql-provider';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
@@ -44,9 +47,11 @@ import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-vi
         HttpLinkModule,
         PipesModule,
         ReactiveFormsModule,
+        TransferHttpCacheModule,
     ],
     providers: [
         ApolloGraphQLProvider,
+        ApolloCMSGraphQLProvider,
         InterceptorProviders,
         {
             provide: LOCALE_ID,

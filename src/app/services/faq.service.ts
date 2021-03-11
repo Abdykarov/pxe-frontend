@@ -1,16 +1,15 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import * as R from 'ramda';
-import { BehaviorSubject } from 'rxjs';
 import {
-    map,
-    switchMap,
-} from 'rxjs/operators';
+    BehaviorSubject,
+    combineLatest,
+} from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { CONSTS } from 'src/app/app.constants';
-import { geParamFromTag } from 'src/common/utils';
 import { environment } from 'src/environments/environment';
+import { FaqService as FaqServiceCms } from 'src/common/cms/services/faq.service';
 import {
     IQuestion,
     ITagConfigItem,
@@ -20,37 +19,34 @@ import {
     providedIn: 'root',
 })
 export class FaqService {
-    private faqConfig = null;
     private faqConfigSubject$: BehaviorSubject<ITagConfigItem[]> = new BehaviorSubject(null);
     private questionsSubject$: BehaviorSubject<IQuestion[]> = new BehaviorSubject(null);
     public getFaqConfigStream = () => this.faqConfigSubject$.asObservable();
     public getQuestionStream = () => this.questionsSubject$.asObservable();
 
     constructor(
-        private http: HttpClient,
+        private faqServiceCms: FaqServiceCms,
     ) {
-        http.get(`${environment.url}/assets/static-data/faq.json`)
+        const question$ = this.faqServiceCms.getQuestions()
             .pipe(
-                switchMap((faqConfig: ITagConfigItem[]) => {
-                    this.faqConfig = faqConfig;
-                    return http.get(`${environment.url}/assets/static-data/questions.json`);
-                }),
                 map((questions: IQuestion[]) => {
-                    questions = R.map( (question: IQuestion) => {
-                        question.absoluteUrl = ['/', CONSTS.PATHS.FAQ, geParamFromTag(question.tag, this.faqConfig, 'url'), question.url];
+                    const updatedQuestions = R.map( (question: IQuestion) => {
+                        question.absoluteUrl = ['/', CONSTS.PATHS.FAQ, question.tag.url, question.url];
                         return question;
-                    })(questions);
+                    })([...questions]);
 
                     if (!environment.includeTestData) {
-                        return R.reject(R.propEq('isTestData')(true))(questions);
+                        return R.reject(R.propEq('isTestData')(true))(updatedQuestions);
                     }
 
-                    return questions;
+                    return updatedQuestions;
                 }),
-            )
-            .subscribe((questions: IQuestion[]) => {
-                this.faqConfigSubject$.next(this.faqConfig);
-                this.questionsSubject$.next(questions);
+            );
+
+        combineLatest([question$, this.faqServiceCms.getFaqConfig()])
+            .subscribe(([questions, faqConfig]) => {
+                this.faqConfigSubject$.next(<any>faqConfig);
+                this.questionsSubject$.next(<any>questions);
             });
     }
 }

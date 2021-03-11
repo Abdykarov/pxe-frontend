@@ -6,12 +6,16 @@ import {
 
 import { CONSTS } from 'src/app/app.constants';
 import { FaqComponent } from 'src/app/pages/public/faq/faq.component';
+import { FaqResolver } from 'src/app/resolvers/faq.resolver';
 
 const routes: Routes =
     [
         {
             path: CONSTS.PATHS.EMPTY,
             component: FaqComponent,
+            resolve: {
+                faq: FaqResolver,
+            },
             children: [
                 {
                     path: '',

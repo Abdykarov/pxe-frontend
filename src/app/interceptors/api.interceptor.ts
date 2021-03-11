@@ -14,6 +14,7 @@ import {
 
 // own classes
 import { AuthService } from 'src/app/services/auth.service';
+import { CONSTS } from 'src/app/app.constants';
 import { environment } from 'src/environments/environment';
 import { processErrorScrolls } from 'src/common/utils';
 
@@ -31,6 +32,10 @@ export class ApiInterceptor implements HttpInterceptor {
         next: HttpHandler,
     ): Observable<HttpEvent<any>> {
 
+        if (request.url.indexOf(CONSTS.CMS.REGEX_CONTAIN_CMS) !== -1) {
+            return next.handle(request);
+        }
+
         let resultRequest = request.clone({
             setHeaders: {
                 'X-API-Key': `${environment.x_api_key}`,
@@ -42,9 +47,9 @@ export class ApiInterceptor implements HttpInterceptor {
             request.url.indexOf('login') < 0 &&
             request.url.indexOf('export-csv') < 0
         ) {
-                resultRequest = request.clone({
-                    headers: this.authService.getAuthorizationHeaders('application/json'),
-                });
+            resultRequest = request.clone({
+                headers: this.authService.getAuthorizationHeaders('application/json'),
+            });
         }
 
         if (

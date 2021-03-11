@@ -50,7 +50,7 @@
         </div>
         <div class="col-md-6 mt-md-0 mt-4">
             <h2>Novinky</h2>
-            <pxe-news-container></pxe-news-container>
+            <pxe-news [news]="(news$ | async)"></pxe-news>
         </div>
     </div>
 </pxe-layout-container>
