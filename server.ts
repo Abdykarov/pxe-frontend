@@ -34,8 +34,6 @@ const win = createWindow(template);
 
 // create configuration
 const configJs = readFileSync(join(DIST_FOLDER, 'app', 'assets', 'configurations', 'config.js')).toString();
-console.log('___');
-console.log(configJs);
 const configString = configJs.substring(
     configJs.indexOf('= ') + 1,
     configJs.indexOf(';'),
