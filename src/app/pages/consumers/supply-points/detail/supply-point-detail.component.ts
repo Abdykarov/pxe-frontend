@@ -380,7 +380,7 @@ export class SupplyPointDetailComponent extends AbstractComponent implements OnI
 
     public routerToNextContract = (isNextContractConcluded: boolean) => {
         if (isNextContractConcluded) {
-            this.router.navigate([...ROUTES.ROUTER_SUPPLY_POINTS, this.nextSupplyPoint.id, this.nextSupplyPoint.contract.contractId]);
+            this.router.navigate([ROUTES.ROUTER_SUPPLY_POINTS, this.nextSupplyPoint.id, this.nextSupplyPoint.contract.contractId]);
         } else {
             this.navigateRequestService.checkCorrectStep(this.nextSupplyPoint, ProgressStatus.COMPLETED);
         }
