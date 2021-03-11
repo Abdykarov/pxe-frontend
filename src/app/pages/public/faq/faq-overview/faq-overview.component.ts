@@ -21,8 +21,8 @@ import { AbstractFaqComponent } from 'src/app/pages/public/faq/abstract-faq.comp
 import { CONSTS } from 'src/app/app.constants';
 import { FaqService } from 'src/app/services/faq.service';
 import { IQuestion } from 'src/app/services/model/faq.model';
-import { FaqComponent } from 'src/app/pages/public/faq/faq.component';
 import { ISeo } from 'src/common/cms/models/seo';
+import { FaqComponent } from 'src/app/pages/public/faq/faq.component';
 
 @Component({
     selector: 'lnd-faq-overview',

@@ -8,10 +8,10 @@ import {
 } from '@angular/router';
 
 import * as R from 'ramda';
-import {filter, takeUntil} from 'rxjs/operators';
+import { takeUntil} from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import {commodityTypes, CONSTS} from 'src/app/app.constants';
+import { CONSTS } from 'src/app/app.constants';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { IFaq } from 'src/common/cms/models/faq';
 

@@ -42,6 +42,7 @@ import { IFieldError } from 'src/common/containers/form/models/form-definition.m
 import { ILogin } from 'src/common/cms/models/login';
 import { ILoginResponse } from 'src/app/services/model/auth.model';
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
+import { ISeo } from 'src/common/cms/models/seo';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import {
     IUserLogin,
@@ -53,7 +54,6 @@ import {
     parseRestAPIErrors,
 } from 'src/common/utils';
 import { UserService } from 'src/common/graphql/services/user.service';
-import { ISeo } from 'src/common/cms/models/seo';
 
 @Component({
     templateUrl: './login.component.html',

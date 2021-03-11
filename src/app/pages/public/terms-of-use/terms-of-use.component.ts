@@ -8,8 +8,8 @@ import {
 import * as R from 'ramda';
 
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-import { ITermsOfUSe } from 'src/common/cms/models/terms-of-use';
 import { ISeo } from 'src/common/cms/models/seo';
+import { ITermsOfUSe } from 'src/common/cms/models/terms-of-use';
 
 @Component({
     selector: 'pxe-term-of-use',

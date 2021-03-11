@@ -31,7 +31,6 @@ import {
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
 import { IPatternsOfContracts } from 'src/common/cms/models/patterns-of-contracts';
 import { IPdfSetting } from 'src/app/pages/public/patterns-of-contracts/models/patterns-of-contracts.model';
-import { ISeo } from 'src/common/cms/models/seo';
 import { PdfViewerComponent } from 'src/common/ui/pdf-viewer/pdf-viewer.component';
 
 @Component({
