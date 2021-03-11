@@ -79,6 +79,7 @@ export const findSupplierOffersQuery = gql`
         findSupplierOffers{
             ...offerFragment,
             marked @client,
+            isLastUpdated @client
         }
     }
     ${offerFragment}

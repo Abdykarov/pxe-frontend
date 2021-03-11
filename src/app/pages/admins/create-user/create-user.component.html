@@ -1,0 +1,7 @@
+<pxe-layout-container [pageTitle]="title">
+    <div *ngIf="configStepper"
+        class="col-12 col-xl-10 offset-xl-1 mb-6">
+        <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
+    </div>
+    <router-outlet></router-outlet>
+</pxe-layout-container>

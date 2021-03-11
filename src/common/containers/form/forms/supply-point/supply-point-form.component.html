@@ -159,7 +159,7 @@
                     <div class="col-12">
                         <img alt="Současná smlouva" class="w-25 mb-3" src="/assets/images/illustrations/house-info.svg" title="">
                         <h2 class="page-box__title mb-2">
-                            Parametry odběru {{commodityType === CommodityTypes.POWER ? 'elekřiny' : 'plynu'}}
+                            Parametry odběru {{commodityType === CommodityTypes.POWER ? 'elektřiny' : 'plynu'}}
                         </h2>
                     </div>
                 </div>
@@ -274,6 +274,7 @@
                                 [id]="'annualConsumptionNTUnit'"
                                 (focus)="fieldWrapperFocus('annualConsumptionNTUnit')"
                                 (blur)="fieldWrapperBlur()"
+                                [error]="formError.annualConsumptionNTUnit || form.controls.annualConsumptionNTUnit.errors"
                                 [inputFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionNTUnit' || (fieldWrapperFocused$ | async) === 'annualConsumptionNT'"
                                 [showErrorMessage]="false"
                                 [options]="codeLists && codeLists[codeList.ANNUAL_CONSUMPTION_UNITS]"
@@ -325,6 +326,7 @@
                                 [id]="'annualConsumptionVTUnit'"
                                 (focus)="fieldWrapperFocus('annualConsumptionVTUnit')"
                                 (blur)="fieldWrapperBlur()"
+                                [error]="formError.annualConsumptionVTUnit || form.controls.annualConsumptionVTUnit.errors"
                                 [inputFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionVTUnit' || (fieldWrapperFocused$ | async) === 'annualConsumptionVT'"
                                 [showErrorMessage]="false"
                                 [options]="codeLists && codeLists[codeList.ANNUAL_CONSUMPTION_UNITS]"
@@ -375,6 +377,7 @@
                                 [id]="'annualConsumptionUnit'"
                                 (focus)="fieldWrapperFocus('annualConsumptionUnit')"
                                 (blur)="fieldWrapperBlur()"
+                                [error]="formError.annualConsumptionUnit || form.controls.annualConsumptionUnit.errors"
                                 [inputFocused]="(fieldWrapperFocused$ | async) === 'annualConsumptionUnit' || (fieldWrapperFocused$ | async) === 'annualConsumption'"
                                 [showErrorMessage]="false"
                                 [options]="codeLists && codeLists[codeList.ANNUAL_CONSUMPTION_UNITS]"
@@ -489,6 +492,7 @@
                                 [inputFocused]="(fieldWrapperFocused$ | async) === 'timeToContractEnd' || (fieldWrapperFocused$ | async) === 'timeToContractEndPeriodId'"
                                 [options]="codeLists && codeLists[codeList.TIME_TO_CONTRACT_END_PERIOD]"
                                 [parentForm]="form"
+                                [clearable]="false"
                                 [selectName]="'timeToContractEndPeriodId'"
                                 [showErrorMessage]="false"
                                 [success]="form.controls.timeToContractEndPeriodId.valid && (form.controls.timeToContractEndPeriodId.touched || formError.timeToContractEndPeriodId)"
@@ -510,7 +514,7 @@
                         type="primary"
                         (action)="submitForm();sAnalyticsService.sFormClick($event);"
                         [isDisabled]="formLoading"
-                        label="Uložit a zobrazit nabídky">
+                        [label]="submitLabel">
                     </lnd-button>
                 </div>
             </div>

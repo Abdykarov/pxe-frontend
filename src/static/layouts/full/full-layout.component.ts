@@ -13,6 +13,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { CONSTS } from 'src/app/app.constants';
+import { IUserTypes } from 'src/app/services/model/auth.model';
 import {
     ISettings,
     LoginType,
@@ -27,7 +28,7 @@ export class FullLayoutComponent extends AbstractComponent implements OnDestroy 
         isPublic: true,
         isLandingPage: false,
         isSimpleFooter: true,
-        isSupplier: false,
+        userType: IUserTypes.CONSUMER,
         isStatic: true,
         signUpType: SignType.STATIC,
         hideLeftNavigation: false,

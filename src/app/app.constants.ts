@@ -23,6 +23,7 @@ export const CONSTS = {
             'image/png',
             'application/png',
             'image/tiff',
+            'application/wps-office.pdf',
         ],
         ERROR_CODES: {
             FILE_TYPE: 'FILE_TYPE',
@@ -65,6 +66,7 @@ export const CONSTS = {
         NO_OFFERS_IN_IMPORT: 'NO_OFFERS_IN_IMPORT',
     },
     INTERVAL_RXJS: 5000,
+    IS_LAST_UPDATED_OFFER: 'is-last-updated-offer',
     LOCAL_STORAGE: {
         PERSONAL_INFO_PARTIAL_FORM_PREFIX: 'PERSONAL_INFO_',
         SUPPLY_POINT_PARTIAL_FORM: 'SUPPLY_POINT',
@@ -76,6 +78,8 @@ export const CONSTS = {
     MONTHS_TO_CONTRACT_END: 2,
     OWN_TERMINATE_INIT_STATE_OF_SUPPLY_POINT: false,
     MODAL_TYPE: {
+        CONFIRM_INFO_DELETE_ASK_FOR_OFFER: 'confirmAskForOfferOffer',
+        CONFIRM_INFO_OFFER: 'confirmInfoOffer',
         CONFIRM_DELETE_REQUEST: 'confirmDeleteOffer',
         CONFIRM_DELETE_OFFER: 'confirmDeleteOffer',
         CONFIRM_CANCEL_OFFER: 'confirmCancelOffer',
@@ -90,6 +94,11 @@ export const CONSTS = {
     },
     PATHS: {
         APPROVAL: 'approval',
+        ASK_FOR_OFFER : 'ask-for-offer',
+        ASK_FOR_OFFER_NEW: 'new',
+        ASK_FOR_OFFER_IN_PROGRESS: 'in-progress',
+        ASK_FOR_OFFER_PROCESSED: 'processed',
+        CREATE_USER: 'create-user',
         CONTRACT : 'contract',
         COOKIES_POLICY : 'cookies-policy',
         CHANGE_PASSWORD: 'change-password',
@@ -107,6 +116,7 @@ export const CONSTS = {
         OFFER_SELECTION : 'offer-selection',
         PATTERNS_OF_CONTRACTS: 'patterns-of-contracts',
         PAYMENT : 'payment',
+        PRICES: 'prices',
         POWER: 'power',
         RECAPITULATION : 'recapitulation',
         REQUEST : 'request',
@@ -201,6 +211,14 @@ export const CONSTS = {
 
 export const ROUTES = {
     ROUTER_ROOT: '/',
+    ROUTER_ASK_FOR_OFFER: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.ASK_FOR_OFFER}`,
+    ROUTER_ASK_FOR_OFFER_NEW: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.ASK_FOR_OFFER}/${CONSTS.PATHS.ASK_FOR_OFFER_NEW}`,
+    ROUTER_ASK_FOR_OFFER_IN_PROGRESS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.ASK_FOR_OFFER}/${CONSTS.PATHS.ASK_FOR_OFFER_IN_PROGRESS}`,
+    ROUTER_ASK_FOR_OFFER_PROCESSED: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.ASK_FOR_OFFER}/${CONSTS.PATHS.ASK_FOR_OFFER_PROCESSED}`,
+    ROUTER_CREATE_USER: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CREATE_USER}`,
+    ROUTER_CREATE_USER_SUPPLY_POINT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CREATE_USER}/${CONSTS.PATHS.SUPPLY_POINT}`,
+    ROUTER_CREATE_USER_RECAPITULATION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CREATE_USER}/${CONSTS.PATHS.RECAPITULATION}`,
+    ROUTER_CREATE_USER_PRICES: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CREATE_USER}/${CONSTS.PATHS.PRICES}`,
     ROUTER_DASHBOARD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.DASHBOARD}`,
     ROUTER_DELETE_ACCOUNT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.DELETE_ACCOUNT}`,
     ROUTER_IMPORT_UPLOAD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.IMPORT}/${CONSTS.PATHS.UPLOAD}`,

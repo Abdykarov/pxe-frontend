@@ -148,9 +148,13 @@ export const errorFieldMessages =  {
     },
     annualConsumptionNT: {
         required: 'Vyplňte roční spotřebu elektřiny v nízkém tarifu.',
+        maxKWh: `Nejvyšší možná spotřeba je ${CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH * 1000} KWh.`,
+        maxMWh: `Nejvyšší možná spotřeba je ${CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH} MWh.`,
     },
     annualConsumptionVT: {
         required: 'Vyplňte roční spotřebu elektřiny ve vysokém tarifu.',
+        maxKWh: `Nejvyšší možná spotřeba je ${CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH * 1000} KWh.`,
+        maxMWh: `Nejvyšší možná spotřeba je ${CONSTS.VALIDATORS.MAX_ANNUAL_CONSUMPTION_IN_MWH} MWh.`,
     },
     bankAccountNumber: {
         required: 'Vyplňte číslo účtu.',
@@ -232,8 +236,6 @@ export const errorFieldMessages =  {
     email: {
         required: 'Vyplňte svůj e-mail.',
         email: 'Použijte pouze písmena bez diakritiky, číslice, tečku (.) a zavináč (@).',
-        emailNotRegistered: 'Tento e-mail v aplikaci neexistuje.',
-        usernameNotRegistered: 'Toto přihlašovací jméno v aplikaci neexistuje.',
         alreadyRegisteredEmail: 'Tento e-mail je již v aplikaci zaregistrovaný.',
     },
     expirationDate: {

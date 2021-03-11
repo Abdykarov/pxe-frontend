@@ -11,6 +11,7 @@ import {
 import { Router } from '@angular/router';
 
 import * as CryptoJS from 'crypto-js';
+import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
 import {
     BehaviorSubject,
@@ -44,9 +45,10 @@ import {
     ILoginRequest,
     ILoginResponse,
     IUserRoles,
+    IUserTypes,
 } from './model/auth.model';
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
-import { IStateRouter } from 'src/app/pages/logout/logout-page.model';
+import { IStateRouter } from 'src/app/pages/public/logout/logout-page.model';
 import { OnlyOneTabActiveService } from 'src/app/services/only-one-tab-active.service';
 import { OnlyOneTabActiveState } from 'src/app/services/model/only-one-tab-active.model';
 
@@ -166,11 +168,11 @@ export class AuthService {
     }
 
     public needSmsConfirm(): boolean {
-        return this.currentUserValue.needSmsConfirm;
+        return this.currentUserValue?.needSmsConfirm;
     }
 
     public passwordChangeRequired(): boolean {
-        return this.currentUserValue.passwordReset;
+        return this.currentUserValue?.passwordReset;
     }
 
     public login = ({login, password}: ILoginRequest) => {
@@ -280,7 +282,7 @@ export class AuthService {
                 const jwtHelper = new JwtHelperService();
                 jwtPayload = jwtHelper.decodeToken(token);
                 const { role } = jwtPayload;
-                jwtPayload.supplier = role.indexOf(IUserRoles.PARC_SUPPLIER_P4R) !== -1;
+                jwtPayload.type = this.getUserType(role);
                 jwtPayload.needSmsConfirm = role.indexOf(IUserRoles.NEEDS_SMS_CONFIRMATION) !== -1;
             } catch (e) {
                 this.token = null;
@@ -290,6 +292,13 @@ export class AuthService {
         }
         return jwtPayload;
     }
+
+    private getUserType = (roles: string[]): IUserTypes => R.cond([
+        [(rolesParam) => R.indexOf(IUserRoles.ROLE_CONTRACT_IMPORTER)(roles) !== -1, R.always(IUserTypes.CONTRACT_IMPORTER)],
+        [(rolesParam) => R.indexOf(IUserRoles.PARC_SUPPLIER_P4R)(roles) !== -1, R.always(IUserTypes.SUPPLIER)],
+        [(rolesParam) => R.indexOf(IUserRoles.PARC_CONSUMER_P_4_R)(roles) !== -1, R.always(IUserTypes.CONSUMER)],
+        [R.T, R.always(IUserTypes.CONSUMER)],
+    ])(roles)
 
     public getAuthorizationHeaders = (contentType: string = null, accept: string = '*/*'): HttpHeaders => {
         const token = this.getToken();
@@ -301,6 +310,8 @@ export class AuthService {
         });
     }
 
+    public isCurrentUser = (userType: IUserTypes) => this.currentUserValue && this.currentUserValue.type === userType;
+
     public homeRedirect = (forceRedirectToLastUrl = false, logoutRequired: ILogoutRequired = null) => {
         if (forceRedirectToLastUrl) {
             const lastUrl = localStorage.getItem(CONSTS.STORAGE_HELPERS.LAST_URL);
@@ -309,9 +320,10 @@ export class AuthService {
                 return;
             }
         }
+        // TODO ADMIN!!!
         if (!this.isLogged()) {
             this.router.navigate([CONSTS.PATHS.EMPTY]);
-        } else if (this.currentUserValue.supplier) {
+        } else if (this.isCurrentUser(IUserTypes.SUPPLIER)) {
             this.router.navigate([ROUTES.ROUTER_SUPPLY_OFFER_POWER], {
                 state: {
                     logoutRequired,
