@@ -60,5 +60,4 @@ export interface ILandingPage {
     iWantToSeeTheBestOffers: IiWantToSeeTheBestOffers;
     aboutUs: IAboutUs;
     seo: ISeo;
-    metaGoogleSiteVerification: string;
 }
