@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AskForOfferResolver } from 'src/app/resolvers/ask-for-offer.resolver';
+import { BlogResolver } from 'src/app/resolvers/blog.resolver';
 import { CONSTS } from 'src/app/app.constants';
 import { CookiePolicyResolver } from 'src/app/resolvers/cookie-policy.resolver';
 import { LandingPageResolver } from 'src/app/resolvers/landing-page.resolver';
@@ -109,6 +110,19 @@ const routes = [
                 loadChildren: () => import('../../pages/public/terms-of-use/terms-of-use.module').then(m => m.TermsOfUseModule),
                 resolve: {
                     termsOfUse: TermsOfUseResolver,
+                },
+                data: {
+                    isPublic: true,
+                    isSimpleFooter: false,
+                    loginType: LoginType.NAVIGATE,
+                    signUpType: SignType.SCROLL,
+                },
+            },
+            {
+                path: CONSTS.PATHS.BLOG,
+                loadChildren: () => import('../../pages/public/blog/blog.module').then(m => m.BlogModule),
+                resolve: {
+                    blog: BlogResolver,
                 },
                 data: {
                     isPublic: true,
