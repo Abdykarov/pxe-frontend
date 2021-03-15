@@ -97,7 +97,7 @@
 	.card {
 		overflow: hidden;
 		border-radius: $border-radius;
-		box-shadow: 0 2px 5px 0 rgba(43, 76, 109, 0.16);
+		box-shadow: $box-shadow;
 	}
 
 	.card__img-holder {
@@ -109,7 +109,7 @@
 
 	.card-img-top {
 		@include absolute-center(true, false);
-		z-index: -1;
+		z-index: $zindex-card-blog-img;
 	}
 
 	.card-body {
