@@ -3,6 +3,7 @@ export interface ICardData {
     img: string;
     imgAlt: string;
     imgTitle: string;
+    textPrefix?: string;
     title: string;
     customClasses?: string;
 }

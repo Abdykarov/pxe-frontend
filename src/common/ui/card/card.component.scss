@@ -25,17 +25,6 @@
 		align-items: flex-start;
 		text-align: left;
 	}
-	@include media-breakpoint-up(md) {
-		max-width: $card-max-width;
-	}
-
-	.card-img-top {
-		width: $card-img-size;
-		height: $card-img-size;
-		margin-bottom: $card-spacer-y;
-		border-radius: $card-img-size;
-		box-shadow: $card-img-box-shadow;
-	}
 }
 
 ::ng-deep .card-tiles {
@@ -78,7 +67,53 @@
 			padding-bottom: ( $spacer / 2 );
 			border-bottom: none;
 		}
+
+		.card {
+			// Media queries
+			@include media-breakpoint-up(md) {
+				align-items: flex-start;
+				text-align: left;
+			}
+			@include media-breakpoint-up(md) {
+				max-width: $card-max-width;
+			}
+		}
+
+		.card-img-top {
+			width: $card-tile-img-size;
+			height: $card-tile-img-size;
+			margin-bottom: $card-spacer-y;
+			border-radius: $card-tile-img-size;
+			box-shadow: $card-tile-img-box-shadow;
+		}
 	}
 }
 
-  
+::ng-deep .card-blogs {
+	.card-blog__item {
+		margin-bottom: $spacer;
+	}
+
+	.card {
+		overflow: hidden;
+		border-radius: $border-radius;
+		box-shadow: $box-shadow;
+	}
+
+	.card__img-holder {
+		position: relative;
+		width: 100%;
+		height: $card-tile-height-size;
+		overflow: hidden;
+	}
+
+	.card-img-top {
+		@include absolute-center(true, false);
+		z-index: $zindex-card-blog-img;
+	}
+
+	.card-body {
+		padding: $card-blog-item-spacer;
+		background-color: $white;
+	}
+}
