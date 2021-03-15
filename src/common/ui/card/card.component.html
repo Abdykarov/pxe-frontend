@@ -1,12 +1,18 @@
-<div
-     class="card">
-    <img
-        [src]="data.img"
-        [attr.title]="data.imgTitle"
-        [attr.alt]="data.imgAlt"
-        class="card-img-top">
+<div class="card">
+     <div class="card__img-holder">
+        <img
+            [src]="data.img"
+            [attr.title]="data.imgTitle"
+            [attr.alt]="data.imgAlt"
+            class="card-img-top">
+     </div>
     <div
         class="card-body w-100">
+        <div
+            *ngIf="data.title"
+            class="card-text-prefix mb-1">
+            {{ data.textPrefix }}
+        </div>
         <h3 *ngIf="data.title"
             class="h3--public mb-1">
             {{ data.title }}
