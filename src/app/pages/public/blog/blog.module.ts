@@ -6,6 +6,7 @@ import { BlogRoutingModule } from './blog-routing.module';
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { DetailComponent } from './detail/detail.component';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
+import { PipesModule } from 'src/common/pipes/pipes.module';
 import { OverviewComponent } from './overview/overview.component';
 
 @NgModule({
@@ -19,6 +20,7 @@ import { OverviewComponent } from './overview/overview.component';
         ButtonModule,
         CommonModule,
         LayoutContainerModule,
+        PipesModule,
     ],
 })
 export class BlogModule { }

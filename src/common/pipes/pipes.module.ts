@@ -29,6 +29,7 @@ import { SimpleNumberPipe } from 'src/common/pipes/simple-number/simple-number.p
 import { SumPipe } from 'src/common/pipes/sum/sum.pipe';
 import { ValueOfFormPipe } from 'src/common/pipes/value-of-form/value-of-form.pipe';
 import { ValuesPipe } from './values/values.pipe';
+import { UpdateActiveBreadcrumbPipe } from './update-active-breadcrumb/update-active-breadcrumb.pipe';
 
 @NgModule({
     declarations: [
@@ -59,6 +60,7 @@ import { ValuesPipe } from './values/values.pipe';
         SumPipe,
         ValueOfFormPipe,
         ValuesPipe,
+        UpdateActiveBreadcrumbPipe,
     ],
     exports: [
         AccountNumberPipe,
@@ -88,6 +90,7 @@ import { ValuesPipe } from './values/values.pipe';
         SumPipe,
         ValueOfFormPipe,
         ValuesPipe,
+        UpdateActiveBreadcrumbPipe,
     ],
     providers: [
         AccountNumberPipe,
@@ -117,6 +120,7 @@ import { ValuesPipe } from './values/values.pipe';
         SumPipe,
         ValueOfFormPipe,
         ValuesPipe,
+        UpdateActiveBreadcrumbPipe,
     ],
 })
 export class PipesModule {}

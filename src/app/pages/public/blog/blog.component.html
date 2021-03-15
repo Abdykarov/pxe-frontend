@@ -1,6 +1,6 @@
 <div class="container-fluid container-fluid--max-width">
     <div class="container-content container-content--public">
-        <pxe-layout-container pageTitle="faq.title" [breadcrumbItemsSimple]="[]">
+        <pxe-layout-container [pageTitle]="blog.title" [breadcrumbItemsSimple]="breadcrumb | updateActiveBreadcrumb: blogTypes:(activeTag$ | async)">
             <router-outlet></router-outlet>
         </pxe-layout-container>
     </div>
