@@ -12,15 +12,10 @@ import {IBlog} from 'src/common/cms/models/blog';
     templateUrl: './blog.component.html',
     styleUrls: ['./blog.component.scss'],
 })
-export class BlogComponent extends AbstractComponent implements OnInit {
+export class BlogComponent {
     public readonly blog: IBlog = this.route.snapshot.data.blog;
 
     constructor(
         private route: ActivatedRoute,
-    ) {
-        super();
-        console.log(this.blog);
-    }
-
-  ngOnInit(): void {}
+    ) {}
 }
