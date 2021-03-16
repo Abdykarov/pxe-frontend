@@ -63,6 +63,13 @@
                         </lnd-button>
                         <lnd-button
                             *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
+                            label="Blog"
+                            customClass="mr-4"
+                            type="link-text"
+                            (click)="blogAction.emit()">
+                        </lnd-button>
+                        <lnd-button
+                            *ngIf="settings.isLandingPage && !settings.isPublicEmptyPage"
                             label="FAQ"
                             customClass="mr-4"
                             type="link-text"

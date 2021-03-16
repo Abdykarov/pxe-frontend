@@ -88,6 +88,9 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
     @ViewChild('bestPricesInTheWorld', { static: true })
     public bestPricesInTheWorld: ElementRef;
 
+    @ViewChild('blog', { static: true })
+    public blog: ElementRef;
+
     public activeCommodityTypeCarouselCompare = CommodityType.POWER;
     public CommodityType = CommodityType;
     public frequentedQuestions: IAccordionItem[] = [];
@@ -165,6 +168,9 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
                 }
                 if (scrollTo === SCROLL_TO.HELP) {
                     scrollToElementFnc(this.help.nativeElement, margin);
+                }
+                if (scrollTo === SCROLL_TO.BLOG) {
+                    scrollToElementFnc(this.blog.nativeElement, margin);
                 }
                 if (scrollTo === SCROLL_TO.HOW_IT_WORKS) {
                     scrollToElementFnc(this.howItWorks.nativeElement, margin);
