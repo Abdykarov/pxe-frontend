@@ -33,7 +33,6 @@ export const CONSTS = {
         MAX_FILE_COUNT: 10,
         MAX_FILE_SIZE: 10485760,
     },
-    BLOG_ALL_ARTICLE_TYPE: 'all',
     CRYPTO: {
         get SALT() {
             return CryptoJS.lib.WordArray.random(128 / 8);

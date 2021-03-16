@@ -10,6 +10,7 @@ import { ConsumptionPipe } from './consumption/consumption.pipe';
 import { ConsumptionIndicatorPipe } from './consumption-indicator/consumption-indicator.pipe';
 import { DateDiffPipe } from './date-diff/date-diff.pipe';
 import { DynamicPipe } from './dynamic/dynamic.pipe';
+import { InArrayPipe } from './in-array/in-array.pipe';
 import { IsAllowedOperationPipe } from './is-allowed-operation/is-allowed-operation.pipe';
 import { IsDatePast } from './is-date-past/is-date-past.pipe';
 import { IsLastUpdatedOfferPipe } from './is-last-updated-offer/is-last-updated-offer.pipe';
@@ -29,7 +30,6 @@ import { SimpleNumberPipe } from 'src/common/pipes/simple-number/simple-number.p
 import { SumPipe } from 'src/common/pipes/sum/sum.pipe';
 import { ValueOfFormPipe } from 'src/common/pipes/value-of-form/value-of-form.pipe';
 import { ValuesPipe } from './values/values.pipe';
-import { UpdateActiveBreadcrumbPipe } from './update-active-breadcrumb/update-active-breadcrumb.pipe';
 
 @NgModule({
     declarations: [
@@ -41,6 +41,7 @@ import { UpdateActiveBreadcrumbPipe } from './update-active-breadcrumb/update-ac
         ConsumptionIndicatorPipe,
         DateDiffPipe,
         DynamicPipe,
+        InArrayPipe,
         IsAllowedOperationPipe,
         IsDatePast,
         IsLastUpdatedOfferPipe,
@@ -60,7 +61,6 @@ import { UpdateActiveBreadcrumbPipe } from './update-active-breadcrumb/update-ac
         SumPipe,
         ValueOfFormPipe,
         ValuesPipe,
-        UpdateActiveBreadcrumbPipe,
     ],
     exports: [
         AccountNumberPipe,
@@ -71,6 +71,7 @@ import { UpdateActiveBreadcrumbPipe } from './update-active-breadcrumb/update-ac
         ConsumptionIndicatorPipe,
         DateDiffPipe,
         DynamicPipe,
+        InArrayPipe,
         IsAllowedOperationPipe,
         IsDatePast,
         IsLastUpdatedOfferPipe,
@@ -90,7 +91,6 @@ import { UpdateActiveBreadcrumbPipe } from './update-active-breadcrumb/update-ac
         SumPipe,
         ValueOfFormPipe,
         ValuesPipe,
-        UpdateActiveBreadcrumbPipe,
     ],
     providers: [
         AccountNumberPipe,
@@ -101,6 +101,7 @@ import { UpdateActiveBreadcrumbPipe } from './update-active-breadcrumb/update-ac
         DateDiffPipe,
         DecimalPipe,
         DynamicPipe,
+        InArrayPipe,
         IsAllowedOperationPipe,
         IsDatePast,
         IsLastUpdatedOfferPipe,
@@ -120,7 +121,6 @@ import { UpdateActiveBreadcrumbPipe } from './update-active-breadcrumb/update-ac
         SumPipe,
         ValueOfFormPipe,
         ValuesPipe,
-        UpdateActiveBreadcrumbPipe,
     ],
 })
 export class PipesModule {}

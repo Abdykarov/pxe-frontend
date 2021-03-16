@@ -1,16 +1,41 @@
-<div class="row">
+<div class="row" *ngIf="(activeArticle$ | async) as activeArticle">
     <div class="col-12 col-xl-10 offset-xl-1 mb-3">
-        <h2 class="h2--public">Test</h2>
-        <div>
-            Článek
+        <h2 class="h2--public">{{activeArticle.header}}</h2>
+        <div [innerHTML]="activeArticle.content"></div>
+    </div>
+</div>
+<div class="card-blogs" *ngIf="(otherArticles$ | async) as otherArticles">
+    <div class="row mb-4">
+        <div class="col-12 col-md-6 offset-md-3 text-center">
+            <h2>Všecky články</h2>
         </div>
+    </div>
+    <div class="row card-blogs__inner">
+        <ng-container *ngFor="let article of otherArticles">
+            <div class="col-md-4 card-tile__item">
+                <lnd-card [data]="{
+                        'id': article.url,
+                        'content': article.content.substr(0,75) + '...',
+                        'img': article.img,
+                        'imgAlt': article.header,
+                        'imgTitle': article.header,
+                        'textPrefix:': article.date,
+                        'title': article.header
+                    }">
+                </lnd-card>
+            </div>
+        </ng-container>
     </div>
 </div>
 <div class="row">
     <div class="col-12 text-center">
         <lnd-button
-            label="Zobrazit všechny články"
-            type="primary">
+            (action)="showAllArticle($event)"
+            type="gradient-primary"
+            customClass="btn-public btn--icon-right"
+            icon="icon--arrow-right"
+            iconPosition="right"
+            label="Zobrazit všechny články">
         </lnd-button>
     </div>
 </div>

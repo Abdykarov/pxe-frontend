@@ -1,18 +1,15 @@
-import {ActivatedRoute, Router} from '@angular/router';
-import {
-    Component,
-    OnInit,
-} from '@angular/core';
+import { Component } from '@angular/core';
+import { Router} from '@angular/router';
 
+import * as R from 'ramda';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { BlogComponent } from 'src/app/pages/public/blog/blog.component';
+import { BlogFacade } from 'src/app/pages/public/blog/blog.facade';
 import { BlogService } from 'src/app/pages/public/blog/blog.service';
-import {
-    IBlog,
-    IType,
-} from 'src/common/cms/models/blog';
+import { ICardData } from 'src/common/ui/card/models/data.model';
+import { IType } from 'src/common/cms/models/blog';
 
 @Component({
     selector: 'lnd-overview',
@@ -20,24 +17,28 @@ import {
     styleUrls: ['./overview.component.scss'],
 })
 export class OverviewComponent extends AbstractComponent {
-    public readonly blog: IBlog;
-    public readonly blogTypes = this.blogComponent.blogTypes;
-    public readonly activeTag$: Observable<string>;
+    public readonly blogTypes$: Observable<IType[]> = this.blogFacade.blogTypes$;
+    public readonly activeTag$: Observable<IType>  = this.blogFacade.activeType$;
+    public readonly activeArticles$: Observable<ICardData[]>;
 
     constructor(
-        private blogComponent: BlogComponent,
+        public blogFacade: BlogFacade,
         public blogService: BlogService,
-        private route: ActivatedRoute,
         private router: Router,
     ) {
         super();
-        this.blog = blogComponent.blog;
-        this.activeTag$ = this.blogService.getActiveTag$(route);
+        this.activeArticles$ = this.blogFacade.activeArticles$.pipe(
+            map(R.map( this.blogService.articleToCardData)),
+            map(R.map( this.blogService.toShortContent)),
+        );
     }
 
-    changeArticleType(evt, url: string): void {
+    public changeArticleType(evt, url: string): void {
         evt.preventDefault();
         this.router.navigate([this.ROUTES.ROUTER_BLOG, url]);
     }
 
+    public showDetail(activeTape: IType, article: ICardData): void {
+        this.router.navigate([this.ROUTES.ROUTER_BLOG, activeTape.url, article.id]);
+    }
 }

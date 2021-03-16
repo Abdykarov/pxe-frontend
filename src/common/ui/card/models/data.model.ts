@@ -1,4 +1,5 @@
 export interface ICardData {
+    id?: string;
     content: string;
     img: string;
     imgAlt: string;

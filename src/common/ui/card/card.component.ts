@@ -1,6 +1,8 @@
 import {
     Component,
+    EventEmitter,
     Input,
+    Output,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -16,6 +18,9 @@ export class CardComponent {
 
     @Input()
     public data: ICardData;
+
+    @Output()
+    public clickAction?: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(public domSanitizer: DomSanitizer) {}
 }

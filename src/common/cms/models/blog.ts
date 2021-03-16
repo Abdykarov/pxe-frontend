@@ -4,6 +4,8 @@ export interface IType {
     label: string;
     title: string;
     url: string;
+    seo: ISeo[];
+    order: number;
 }
 
 export interface IArticle {
@@ -12,11 +14,11 @@ export interface IArticle {
     header: string;
     oneOfMostVisited: string;
     content: string;
+    img: string;
+    date: string;
+    seo: ISeo[];
 }
 
 export interface IBlog {
-    title: string;
-    breadcrumbTitle: string;
     articles: IArticle[];
-    seo: ISeo[];
 }

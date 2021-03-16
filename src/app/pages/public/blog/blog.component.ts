@@ -1,56 +1,55 @@
-import { ActivatedRoute } from '@angular/router';
+import {
+    ActivatedRoute,
+    NavigationEnd,
+    Router,
+} from '@angular/router';
 import {
     Component,
+    OnDestroy,
 } from '@angular/core';
-import {
-    Meta,
-    Title,
-} from '@angular/platform-browser';
 
-import * as R from 'ramda';
 import { Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
-import { BlogService } from './blog.service';
-import {IBlog, IType} from 'src/common/cms/models/blog';
+import { AbstractComponent } from 'src/common/abstract.component';
+import { BlogFacade } from './blog.facade';
+import {
+    IBlog,
+    IType,
+} from 'src/common/cms/models/blog';
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-import { ISeo } from 'src/common/cms/models/seo';
+import { IRouterParams } from './blog.model';
 
 @Component({
     selector: 'pxe-blog',
     templateUrl: './blog.component.html',
     styleUrls: ['./blog.component.scss'],
 })
-export class BlogComponent {
+export class BlogComponent extends AbstractComponent implements OnDestroy {
     public readonly blog: IBlog = this.route.snapshot.data.blog;
-    public readonly activeTag$: Observable<string>;
-    public readonly blogTypes: IType[];
-    public breadcrumb: IBreadcrumbItems = [
-        {
-            label: 'Domů',
-            url: '/',
-        },
-        {
-            label: '',
-        },
-    ];
+    public readonly activeType$: Observable<IType> = this.blogFacade.activeType$;
+    public readonly breadcrumb$: Observable<IBreadcrumbItems> = this.blogFacade.breadcrumb$;
 
     constructor(
-        public blogService: BlogService,
+        public blogFacade: BlogFacade,
         private route: ActivatedRoute,
-        private metaService: Meta,
-        private titleService: Title,
+        private router: Router,
     ) {
-        this.blogTypes = this.blogService.getTypes(this.blog);
-        const seo: ISeo = R.head(this.blog.seo);
-        this.titleService.setTitle(seo.title);
-        this.metaService.updateTag({
-            name: 'description',
-            content: seo.description,
-        });
-        this.metaService.updateTag({
-            name: 'keywords',
-            content: seo.keywords,
-        });
-        this.activeTag$ = this.blogService.getActiveTag$(route.firstChild);
+        super();
+        this.blogFacade.blogSubject$.next(this.blog);
+
+        router.events
+            .pipe(
+                takeUntil(this.destroy$),
+            )
+            .subscribe((val) => {
+                if (val instanceof NavigationEnd) {
+                    this.blogFacade.routerParamsSubject$.next(<IRouterParams>this.route.firstChild.snapshot.params);
+                }
+            });
+    }
+
+    ngOnDestroy(): void {
+        this.blogFacade.blogSubject$.next(null);
     }
 }
