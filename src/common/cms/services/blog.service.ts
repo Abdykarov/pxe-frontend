@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import { ApolloCmsService } from 'src/app/services/apollo-cms.service';
-import { getBlog } from 'src/common/cms/queries/blog';
+import {
+    getBlog,
+    getLpArticles,
+} from 'src/common/cms/queries/blog';
 
 @Injectable({
     providedIn: 'root',
@@ -16,4 +19,11 @@ export class BlogService {
         .fetchQuery({
             query: getBlog,
         })
+
+    public getLpArticles = () => this.apolloCmsService
+        .fetchQuery({
+                query: getLpArticles,
+            },
+            false,
+        )
 }

@@ -42,3 +42,20 @@ export const getBlog = gql`
       }
     }
 `;
+
+export const getLpArticles =  gql`
+    query queryArticleContents {
+      queryArticleContents (filter: "data/oneOfMostVisited/iv eq true", top: 3, orderby:"data/date/iv desc"){
+          flatData {
+            content,
+            header,
+            img {
+              url
+            },
+            oneOfMostVisited,
+            url,
+            date
+        }
+      }
+    }
+`;
