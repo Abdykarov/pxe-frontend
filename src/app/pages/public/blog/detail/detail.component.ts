@@ -9,6 +9,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { BlogFacade } from 'src/app/pages/public/blog/blog.facade';
 import { BlogService } from 'src/app/pages/public/blog/blog.service';
 import { IArticle } from 'src/common/cms/models/blog';
+import { ICardData } from 'src/common/ui/card/models/data.model';
 
 @Component({
     selector: 'lnd-detail',
@@ -17,7 +18,7 @@ import { IArticle } from 'src/common/cms/models/blog';
 })
 export class DetailComponent extends AbstractComponent {
     public activeArticle$: Observable<IArticle> = this.blogFacade.activeArticle$;
-    public otherArticles$: Observable<IArticle[]>;
+    public otherArticles$: Observable<ICardData[]>;
 
     public otherArticles: IArticle[];
 
@@ -31,6 +32,7 @@ export class DetailComponent extends AbstractComponent {
             .pipe(
                 map(this.blogService.getOtherArticles(this.blogFacade.activeArticleSubject$.getValue())),
                 map(R.map( this.blogService.articleToCardData)),
+                map(R.map( this.blogService.toShortContent)),
             );
     }
 

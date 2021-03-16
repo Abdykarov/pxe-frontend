@@ -86,8 +86,11 @@ const bodyQuestionsQuery = '{ operationName: \'queryQuestionContents\',\n' +
     '   \'query queryQuestionContents {queryQuestionContents {flatData {id,fullContent,shortContent,isTestData,oneOfMostVisited,tag {flatData {  label  type' +
     '  url  __typename}__typename}header,url,vatNumber,__typename}__typename}}\' }';
 
+const bodyBlogQuery = '{"operationName":"queryBlogContents","variables":{},"query":"query queryBlogContents {\\n  queryBlogContents {\\n    flatData {\\n      articles {\\n        flatData {\\n          content\\n          date\\n          header\\n          img {\\n            url\\n            __typename\\n          }\\n          oneOfMostVisited\\n          type {\\n            flatData {\\n              label\\n              seo {\\n                flatData {\\n                  description\\n                  keywords\\n                  title\\n                  __typename\\n                }\\n                __typename\\n              }\\n              url\\n              order\\n              title\\n              __typename\\n            }\\n            __typename\\n          }\\n          url\\n          seo {\\n            flatData {\\n              description\\n              keywords\\n              title\\n              __typename\\n            }\\n            __typename\\n          }\\n          __typename\\n        }\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n"}';
+
 let Authorization = null;
 let questionsSource = null;
+let blogSource = null;
 
 const newTokenRequest = {
     url: SQUIDEX_REFRESH_TOKEN_URL,
@@ -113,12 +116,17 @@ const queryRequest = (body) => ({
 const setQuestions = () => request(queryRequest(bodyQuestionsQuery), (_, __, body) => {
     questionsSource = JSON.parse(body);
 });
+const setBlog = () => request(queryRequest(bodyBlogQuery), (_, __, body) => {
+    blogSource = JSON.parse(body);
+});
+
 
 const resetAppState = () => {
     request(newTokenRequest, (_, __, body) => {
         const payload = JSON.parse(body);
         Authorization = getAuthorizationFromPayload(payload);
         setQuestions();
+        setBlog();
     });
 
     mCache.clear();

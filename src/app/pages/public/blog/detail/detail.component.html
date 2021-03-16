@@ -7,22 +7,13 @@
 <div class="card-blogs" *ngIf="(otherArticles$ | async) as otherArticles">
     <div class="row mb-4">
         <div class="col-12 col-md-6 offset-md-3 text-center">
-            <h2>Všecky články</h2>
+            <h2 class="h2--public">Všechny články</h2>
         </div>
     </div>
     <div class="row card-blogs__inner">
         <ng-container *ngFor="let article of otherArticles">
             <div class="col-md-4 card-tile__item">
-                <lnd-card [data]="{
-                        'id': article.url,
-                        'content': article.content.substr(0,75) + '...',
-                        'img': article.img,
-                        'imgAlt': article.header,
-                        'imgTitle': article.header,
-                        'textPrefix:': article.date,
-                        'title': article.header
-                    }">
-                </lnd-card>
+                <lnd-card [data]="article"></lnd-card>
             </div>
         </ng-container>
     </div>

@@ -19,15 +19,9 @@
         <loc>https://parc4u.cz/sign-up</loc>
     </url>
     <url>
-        <loc>https://parc4u.cz/patterns-of-contracts/individual/power</loc>
+        <loc>https://parc4u.cz/patterns-of-contracts/individual</loc>
     </url>
     <url>
-        <loc>https://parc4u.cz/patterns-of-contracts/individual/gas</loc>
-    </url>
-    <url>
-        <loc>https://parc4u.cz/patterns-of-contracts/business/power</loc>
-    </url>
-    <url>
-        <loc>https://parc4u.cz/patterns-of-contracts/business/gas</loc>
+        <loc>https://parc4u.cz/patterns-of-contracts/business</loc>
     </url>
 </urlset>

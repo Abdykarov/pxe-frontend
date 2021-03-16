@@ -12,14 +12,17 @@ import { ICardData } from 'src/common/ui/card/models/data.model';
 import { IType } from 'src/common/cms/models/blog';
 
 @Component({
-    selector: 'lnd-overview',
+    selector: 'pxe-overview',
     templateUrl: './overview.component.html',
     styleUrls: ['./overview.component.scss'],
 })
 export class OverviewComponent extends AbstractComponent {
+    public readonly MAX_ITEMS_COUNT_DEFAULT = 9;
     public readonly blogTypes$: Observable<IType[]> = this.blogFacade.blogTypes$;
     public readonly activeTag$: Observable<IType>  = this.blogFacade.activeType$;
     public readonly activeArticles$: Observable<ICardData[]>;
+
+    public actualItemsCount = this.MAX_ITEMS_COUNT_DEFAULT;
 
     constructor(
         public blogFacade: BlogFacade,
@@ -40,5 +43,9 @@ export class OverviewComponent extends AbstractComponent {
 
     public showDetail(activeTape: IType, article: ICardData): void {
         this.router.navigate([this.ROUTES.ROUTER_BLOG, activeTape.url, article.id]);
+    }
+
+    public moreArticles(): void {
+        this.actualItemsCount += this.MAX_ITEMS_COUNT_DEFAULT;
     }
 }

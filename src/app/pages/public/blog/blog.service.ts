@@ -1,16 +1,26 @@
-import { Injectable } from '@angular/core';
+import { formatDate } from '@angular/common';
+import {
+    Inject,
+    Injectable,
+    LOCALE_ID,
+} from '@angular/core';
 
 import * as R from 'ramda';
 
 import { CONSTS } from 'src/app/app.constants';
+import { IArticle } from 'src/common/cms/models/blog';
 import { ICardData } from 'src/common/ui/card/models/data.model';
-import {IArticle, IBlog} from 'src/common/cms/models/blog';
 import { removeHtmlFromText } from 'src/common/utils';
 
 @Injectable({
     providedIn: 'root',
 })
 export class BlogService {
+
+    constructor(
+        @Inject(LOCALE_ID) private locale: string,
+    ) {}
+
     public articleToCardData = (article: IArticle): ICardData => ({
         id: article.url,
         content: article.content,
@@ -18,13 +28,14 @@ export class BlogService {
         imgAlt: article.img,
         imgTitle: article.img,
         title: article.header,
+        textPrefix: formatDate(article.date, 'dd. MM. yyyy', this.locale),
     })
 
     public toShortContent = (cardData: ICardData) => {
         const textWithoutHTML = removeHtmlFromText(cardData.content);
-        const indexOfLastWord = textWithoutHTML.substr(CONSTS.MAX_LENGTH_SUPPLIER_DESCRIPTION).indexOf(' ');
+        const indexOfLastWord = textWithoutHTML.substr(CONSTS.MAX_LENGTH_BLOG_DESCRIPTION).indexOf(' ');
         const cutContent =  R.pipe(
-            R.take(indexOfLastWord + CONSTS.MAX_LENGTH_SUPPLIER_DESCRIPTION),
+            R.take(indexOfLastWord + CONSTS.MAX_LENGTH_BLOG_DESCRIPTION),
             (text) => `${text}${CONSTS.APPEND_AFTER_CUT_TEXT}`,
         )(textWithoutHTML);
         return {

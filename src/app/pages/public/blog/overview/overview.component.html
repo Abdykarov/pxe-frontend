@@ -14,8 +14,21 @@
     </div>
     <div class="card-blogs" *ngIf="activeArticles$ | async as articles">
         <div class="row card-blogs__inner">
-            <div class="col-md-4 card-blog__item" *ngFor="let article of articles">
+            <div class="col-md-4 card-blog__item" *ngFor="let article of articles | slice: 0: actualItemsCount">
                 <lnd-card (clickAction)="showDetail(activeTag, article)" [data]="article"></lnd-card>
+            </div>
+        </div>
+        <div *ngIf="actualItemsCount < articles.length"
+            class="row">
+            <div class="col-12 text-center">
+                <lnd-button
+                    (action)="moreArticles()"
+                    type="gradient-primary"
+                    customClass="btn-public btn--icon-right"
+                    icon="icon--arrow-right"
+                    iconPosition="right"
+                    label="Zobrazit starší články">
+                </lnd-button>
             </div>
         </div>
     </div>

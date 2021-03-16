@@ -29,7 +29,7 @@ export class BlogFacade {
     public activeTypeSubject$: BehaviorSubject<IType> = new BehaviorSubject(null);
     public blogSubject$: BehaviorSubject<IBlog> = new BehaviorSubject(null);
     public blogTypesSubject$: BehaviorSubject<IType[]> = new BehaviorSubject(null);
-    public breadcrumbSubject$: BehaviorSubject<IBreadcrumbItems> = new BehaviorSubject(this.breadcrumbDefault);
+    public breadcrumbSubject$: BehaviorSubject<IBreadcrumbItems> = new BehaviorSubject(null);
     public routerParamsSubject$: BehaviorSubject<IRouterParams> = new BehaviorSubject(null);
 
     public activeArticle$ = this.activeArticleSubject$.asObservable();
@@ -46,18 +46,18 @@ export class BlogFacade {
     ) {
         combineLatest([this.routerParams$, this.blog$])
             .subscribe(([params, blog]) => {
-                if (!params?.type) {
+                if (!params?.type || !blog) {
                     return;
                 }
 
                 const url = params?.type;
-                const activeArticleParam = params?.article;
+                const isDetail = params?.article;
 
                 const types = this.getTypes(blog);
                 this.setTypes(types);
                 this.setActiveType(types, url);
                 this.setActiveArticles();
-                if (activeArticleParam) {
+                if (isDetail) {
                     this.setActiveArticle();
                 }
                 this.setBreadcrumb();
@@ -104,8 +104,10 @@ export class BlogFacade {
             const activeArticle = this.activeArticleSubject$.getValue();
             const activeType: IType = this.activeTypeSubject$.getValue();
             const breadcrumbDefaultCopy = [...this.breadcrumbDefault];
-            breadcrumbDefaultCopy[1].label = activeType.label;
-            breadcrumbDefaultCopy[1].url = activeType.url;
+            breadcrumbDefaultCopy[1] = {
+                label: activeType.label,
+                url: activeType.url,
+            };
             breadcrumbDefaultCopy.push({
                 label: activeArticle.header,
             });
@@ -113,7 +115,10 @@ export class BlogFacade {
         } else {
             const activeType: IType = this.activeTypeSubject$.getValue();
             const breadcrumbDefaultCopy = [...this.breadcrumbDefault];
-            breadcrumbDefaultCopy[1].label = activeType.label;
+            breadcrumbDefaultCopy[1] = {
+                ...this.breadcrumbDefault[1],
+                label: activeType.label,
+            };
             this.breadcrumbSubject$.next(breadcrumbDefaultCopy);
         }
     }
