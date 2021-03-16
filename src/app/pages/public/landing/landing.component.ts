@@ -42,7 +42,7 @@ import { FaqService } from 'src/app/services/faq.service';
 import { GTMService } from 'src/app/services/gtm.service';
 import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
 import { IAskForOffer } from 'src/common/cms/models/ask-for-offer';
-import {IArticle, IType} from 'src/common/cms/models/blog';
+import { ICardData } from 'src/common/ui/card/models/data.model';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import {
     IFieldError,
@@ -60,7 +60,6 @@ import { RegistrationService } from 'src/common/graphql/services/registration.se
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { SCROLL_TO } from 'src/app/services/model/scroll-to.model';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
-import {ICardData} from '../../../../common/ui/card/models/data.model';
 
 @Component({
     templateUrl: './landing.component.html',
