@@ -1,14 +1,24 @@
 import {Injectable} from '@angular/core';
 
 import * as R from 'ramda';
-import {Meta, Title, } from '@angular/platform-browser';
+import {
+    Meta,
+    Title,
+} from '@angular/platform-browser';
 
-import {BehaviorSubject, combineLatest, } from 'rxjs';
+import {
+    BehaviorSubject,
+    combineLatest,
+} from 'rxjs';
 
-import {IArticle, IBlog, IType, } from 'src/common/cms/models/blog';
-import {IBreadcrumbItems} from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-import {IRouterParams} from './blog.model';
-import {ISeo} from 'src/common/cms/models/seo';
+import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
+import {
+    IArticle,
+    IBlog,
+    IType,
+} from 'src/common/cms/models/blog';
+import { IRouterParams } from './blog.model';
+import { ISeo } from 'src/common/cms/models/seo';
 
 @Injectable({
     providedIn: 'root',
