@@ -1,19 +1,17 @@
- <div class="row">
+<div class="row">
     <div class="col-12">
         <p class="perex mb-4">
             Zadejte údaje k odběrnému místu
         </p>
     </div>
     <div class="col-12">
-        <lnd-placeloader [loading]="formLoading"></lnd-placeloader>
         <pxe-supply-point-form
-            *ngIf="supplyPoint"
             [editMode]="editMode"
             [withoutValidator]="true"
             [formFields]="formFields"
             [formLoading]="formLoading"
             [formSent]="formSent"
-            [formValues]="supplyPoint"
+            [formValues]="{}"
             [globalError]="globalError"
             [fieldError]="fieldError"
             submitLabel="Další"

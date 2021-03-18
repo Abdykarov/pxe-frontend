@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 
+import * as R from 'ramda';
 import { Apollo } from 'apollo-angular';
 
 import {
     createSupplyPointImportMutation,
+    deleteSupplyPointImportMutation,
     setActiveAskForOfferIdMutation,
+    setActiveSupplyPointMutation,
 } from 'src/common/graphql/mutation/supply-point-import';
-import { findSupplyPointImportsQuery, getActiveAskForOfferIdQuery } from 'src/common/graphql/queries/supply-point-import';
+import {findSupplyPointImportsQuery, getCreateUserQuery} from 'src/common/graphql/queries/supply-point-import';
 import {
     CommodityType,
     ISupplyPoint,
@@ -35,17 +38,53 @@ export class SupplyPointImportService {
             },
         )
 
-    public getActiveAskForOfferIdQuery = () => this.apollo
+    public setActiveAskForOfferId = (askForOfferId: string) => this.apollo
+        .mutate<any>({
+            mutation: setActiveAskForOfferIdMutation,
+            variables: {
+                askForOfferId,
+            },
+        })
+
+    public setActiveSupplyPoint = (supplyPoint: ISupplyPoint) => this.apollo
+        .mutate<any>({
+                mutation: setActiveSupplyPointMutation,
+                variables: {
+                    supplyPoint,
+                },
+            },
+        )
+
+    public getCreateUser = () => this.apollo
         .watchQuery<any>({
-                query: getActiveAskForOfferIdQuery,
+                query: getCreateUserQuery,
             },
         ).valueChanges
 
-    public setActiveAskForOfferId = (askForOfferId: string) => this.apollo
+    public deleteSupplyPointImportMutation = (supplyPointImportId: string, askForOfferId: string) => this.apollo
         .mutate<any>({
-                mutation: setActiveAskForOfferIdMutation,
+                mutation: deleteSupplyPointImportMutation,
                 variables: {
-                    askForOfferId,
+                    supplyPointImportId,
+                },
+                update: (cache, { data }) => {
+                    const { findSupplyPointImports } = cache.readQuery(
+                        {
+                            query: findSupplyPointImportsQuery,
+                            variables: {
+                                askForOfferId,
+                            },
+                        });
+
+                    const newState = R.reject(R.propEq('id', supplyPointImportId))(findSupplyPointImports);
+
+                    cache.writeQuery({
+                        query: findSupplyPointImportsQuery,
+                        data: { findSupplyPointImports: newState },
+                        variables: {
+                            askForOfferId,
+                        },
+                    });
                 },
             },
         )
@@ -53,14 +92,14 @@ export class SupplyPointImportService {
     public findSupplyPointImports = (
         askForOfferId: string,
     ) => this.apollo
-        .query<any>({
+        .watchQuery<any>({
                 query: findSupplyPointImportsQuery,
                 variables: {
                     askForOfferId,
                 },
-                fetchPolicy: 'network-only',
+                fetchPolicy: 'cache-first',
             },
-        )
+        ).valueChanges
 
     public mapSupplyPointToSupplyPointInput = (supplyPoint: ISupplyPoint): ISupplyPointImportInput =>  {
         const omitTypename = (key, value) => (key === '__typename' ? undefined : value);
@@ -112,7 +151,4 @@ export class SupplyPointImportService {
             },
         };
     }
-
-
-
 }

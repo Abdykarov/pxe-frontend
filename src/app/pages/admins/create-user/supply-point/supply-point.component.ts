@@ -16,20 +16,17 @@ import {
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AskForOfferService} from 'src/common/graphql/services/ask-for-offer.service';
-import {
-    CommodityType,
-    ISupplyPoint,
-} from 'src/common/graphql/models/supply.model';
+import {CommodityType, ISupplyPoint} from 'src/common/graphql/models/supply.model';
 import { formFields} from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { IFieldError} from 'src/common/containers/form/models/form-definition.model';
-import {ISupplyPointImport, ISupplyPointImportInput} from 'src/common/graphql/models/supply-point-import.model';
+import { ISupplyPointImportInput} from 'src/common/graphql/models/supply-point-import.model';
 import {
     parseGraphQLErrors,
     removeRequiredValidators,
 } from 'src/common/utils';
 import { SUPPLY_POINT_EDIT_TYPE} from 'src/app/app.constants';
 import { SupplyPointImportService } from 'src/common/graphql/services/supply-point-import.service';
-import {ITableColumnConfig} from '../../../../../common/ui/table/models/table.model';
+import {CreateUserFacade} from '../create-user.facade';
 
 @Component({
     selector: 'pxe-create-user-supply-point',
@@ -40,65 +37,26 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
     public fieldError: IFieldError = {};
     public formFields = formFields;
-    public formLoading = true;
+    public formLoading = false;
     public formSent = false;
     public globalError: string[] = [];
     public supplyPointImport: any = null;
-    public supplyPoint = null;
-    public supplyPoints = null;
     public isIndividual = false;
-    public askForOfferId = null;
 
-    public action = (data) => {
-        console.log(data);
-    }
-
-    public action2 = (data) => {
-        console.log(data);
-    }
+   // public activeAskForOfferId$ = this.createUserFacade.activeAskForOfferId$;
 
     constructor(
-        private askForOfferService: AskForOfferService,
         private cd: ChangeDetectorRef,
         private route: ActivatedRoute,
         private router: Router,
+        private createUserFacade: CreateUserFacade,
         private supplyPointImportService: SupplyPointImportService,
     ) {
         super();
-        this.askForOfferId = route.snapshot.queryParams.askForOfferId;
         this.formFields.controls = removeRequiredValidators(this.formFields.controls);
     }
 
-    ngOnInit() {
-        super.ngOnInit();
-        this.supplyPointImportService.
-            findSupplyPointImports(this.askForOfferId)
-                .pipe(
-                    takeUntil(this.destroy$),
-                    map(({data}) => data.findSupplyPointImports),
-                )
-                .subscribe(
-                    (supplyPoints: ISupplyPointImport[]) => {
-                        this.supplyPoint = {};
-                        this.supplyPoints = supplyPoints;
-                        this.formLoading = false;
-                        this.cd.markForCheck();
-                    },
-                    (error) => {
-                        const { globalError } = parseGraphQLErrors(error);
-                        this.globalError = globalError;
-                        this.formLoading = false;
-                        this.cd.markForCheck();
-                    },
-                );
-
-    }
-
-    public save = (supplyPointFormData) => {
-        this.formLoading = true;
-        this.globalError = [];
-        this.fieldError = {};
-
+    public save = (supplyPointFormData, askForOfferId: string = '37b5185e-6f62-43c5-9fc8-2c8776791080') => {
         const supplyPoint: ISupplyPointImportInput = R.pick([
             'supplierId',
             'name',
@@ -129,7 +87,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
             ], supplyPointFormData);
         }
 
-        this.supplyPointImportService.createSupplyPointImport(this.askForOfferId, supplyPoint)
+        this.supplyPointImportService.createSupplyPointImport(askForOfferId, supplyPoint)
             .pipe(
                 takeUntil(this.destroy$),
                 map(
@@ -137,13 +95,10 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                 ),
             )
             .subscribe(
-                (supplyPointId) => {
+                (newSupplyPoint: ISupplyPoint) => {
+                    this.supplyPointImportService.setActiveSupplyPoint(newSupplyPoint).pipe(takeUntil(this.destroy$)).subscribe();
                     this.formLoading = false;
-                    this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_RECAPITULATION], {
-                        queryParams: {
-                            askForOfferId: this.askForOfferId,
-                        },
-                    });
+                    this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_RECAPITULATION]);
                 },
                 (error) => {
                     this.formLoading = false;

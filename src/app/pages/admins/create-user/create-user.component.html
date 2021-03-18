@@ -8,11 +8,22 @@
             <div class="row">
                 <div class="col-12 col-xl-4" style="margin-top: 80px">
                     <p class="perex">Odběrná místa</p>
+                    {{createUserFacade.activeSupplyPoint$ | async | json}}
+                    {{createUserFacade.activeAskForOfferId$ | async | json}}
+
                     <ng-container *ngIf="supplyPointsImport$ !== null">
-                        <p *ngFor="let supplyPointImport of supplyPointsImport$ | async">
-                            {{supplyPointImport.name || supplyPointImport.identificationNumber}}
-                        </p>
+                        <lnd-micro-table
+                            [data]="(supplyPointsImportMicroTableData$ | async)"
+                            (removeAction)="deleteSupplyPointImport($event)">
+                        </lnd-micro-table>
                     </ng-container>
+<!--                    <div class="d-flex justify-content-center ">-->
+<!--                        <lnd-button-->
+<!--                            icon="icon&#45;&#45;add-new"-->
+<!--                            type="icon"-->
+<!--                            variant="icon"-->
+<!--                        ></lnd-button>-->
+<!--                    </div>-->
                 </div>
                 <div class="col-12 col-xl-8">
                     <router-outlet></router-outlet>
