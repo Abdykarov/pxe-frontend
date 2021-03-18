@@ -1,7 +1,23 @@
 <pxe-layout-container [pageTitle]="title">
-    <div *ngIf="configStepper"
-        class="col-12 col-xl-10 offset-xl-1 mb-6">
-        <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
+    <div class="row">
+        <div *ngIf="configStepper"
+             class="col-12 col-xl-10 offset-xl-1 mb-6">
+            <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12 col-xl-4" style="margin-top: 80px">
+                    <p class="perex">Odběrná místa</p>
+                    <ng-container *ngIf="supplyPointsImport$ !== null">
+                        <p *ngFor="let supplyPointImport of supplyPointsImport$ | async">
+                            {{supplyPointImport.name || supplyPointImport.identificationNumber}}
+                        </p>
+                    </ng-container>
+                </div>
+                <div class="col-12 col-xl-8">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
     </div>
-    <router-outlet></router-outlet>
 </pxe-layout-container>

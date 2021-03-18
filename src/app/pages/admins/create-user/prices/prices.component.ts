@@ -50,10 +50,10 @@ export class PricesComponent extends AbstractComponent implements OnInit {
     ngOnInit() {
         super.ngOnInit();
         this.supplyPointImportService.
-            findSupplyPointImport(this.askForOfferId)
+            findSupplyPointImports(this.askForOfferId)
                 .pipe(
                     takeUntil(this.destroy$),
-                    map(({data}) => data.findSupplyPointImport),
+                    map(({data}) => data.findSupplyPointImports),
                 )
                 .subscribe((supplyPoint: ISupplyPoint) => {
                     this.supplyPoint = supplyPoint;

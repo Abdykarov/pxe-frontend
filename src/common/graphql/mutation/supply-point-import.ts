@@ -11,3 +11,9 @@ export const createSupplyPointImportMutation = gql`
         )
     }
 `;
+
+export const setActiveAskForOfferIdMutation = gql`
+    mutation setActiveAskForOfferId($askForOfferId: ID!) {
+        setActiveAskForOfferId(askForOfferId: $askForOfferId) @client
+    }
+`;

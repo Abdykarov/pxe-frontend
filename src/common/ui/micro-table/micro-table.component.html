@@ -1,0 +1,10 @@
+<div class="micro-table">
+    <div class="micro-table--title">
+        {{title}}
+    </div>
+    <div class="micro-table--row" *ngFor="let item of data">
+        {{item.label}}
+        <span (click)="updateAction.emit(item.id)">EDIT</span>
+        <span (click)="removeAction.emit(item.id)">REMOVE</span>
+    </div>
+</div>

@@ -597,7 +597,7 @@ type Query {
     listAskForOffer(filter: AskForOfferFilter): PaginatedAskForOffer
     listContractsBasedOnSupplyPointAndStatus(filter: ContractBasedOnSupplyPointFilter!): [ContractResponseDto]!
     getPersonalDataImport(input: PersonalDataInputImport): ID
-    findSupplyPointImport(askForOfferId: ID!): SupplyPoint
+    findSupplyPointImports(askForOfferId: ID!): SupplyPoint
 }
 
 

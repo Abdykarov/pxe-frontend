@@ -1,21 +1,23 @@
-<div class="col-12 col-xl-10 offset-xl-1 text-center">
-    <p class="perex mb-4">
-        Zadejte údaje k odběrnému místu
-    </p>
-</div>
-<div class="col-12 col-xl-10 offset-xl-1">
-    <lnd-placeloader [loading]="!supplyPoint"></lnd-placeloader>
-    <pxe-supply-point-form
-        *ngIf="supplyPoint"
-        [editMode]="editMode"
-        [withoutValidator]="true"
-        [formFields]="formFields"
-        [formLoading]="formLoading"
-        [formSent]="formSent"
-        [formValues]="supplyPoint"
-        [globalError]="globalError"
-        [fieldError]="fieldError"
-        submitLabel="Další"
-        (submitAction)="save($event)"
-    ></pxe-supply-point-form>
+ <div class="row">
+    <div class="col-12">
+        <p class="perex mb-4">
+            Zadejte údaje k odběrnému místu
+        </p>
+    </div>
+    <div class="col-12">
+        <lnd-placeloader [loading]="formLoading"></lnd-placeloader>
+        <pxe-supply-point-form
+            *ngIf="supplyPoint"
+            [editMode]="editMode"
+            [withoutValidator]="true"
+            [formFields]="formFields"
+            [formLoading]="formLoading"
+            [formSent]="formSent"
+            [formValues]="supplyPoint"
+            [globalError]="globalError"
+            [fieldError]="fieldError"
+            submitLabel="Další"
+            (submitAction)="save($event)"
+        ></pxe-supply-point-form>
+    </div>
 </div>

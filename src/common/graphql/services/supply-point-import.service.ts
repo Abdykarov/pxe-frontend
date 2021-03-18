@@ -1,11 +1,17 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {Apollo} from 'apollo-angular';
+import { Apollo } from 'apollo-angular';
 
-import {createSupplyPointImportMutation} from 'src/common/graphql/mutation/supply-point-import';
-import {findSupplyPointImportQuery} from 'src/common/graphql/queries/supply-point-import';
-import {CommodityType, ISupplyPoint} from 'src/common/graphql/models/supply.model';
-import {ISupplyPointImportInput} from 'src/common/graphql/models/supply-point-import.model';
+import {
+    createSupplyPointImportMutation,
+    setActiveAskForOfferIdMutation,
+} from 'src/common/graphql/mutation/supply-point-import';
+import { findSupplyPointImportsQuery, getActiveAskForOfferIdQuery } from 'src/common/graphql/queries/supply-point-import';
+import {
+    CommodityType,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
+import { ISupplyPointImportInput } from 'src/common/graphql/models/supply-point-import.model';
 
 @Injectable({
     providedIn: 'root',
@@ -29,11 +35,26 @@ export class SupplyPointImportService {
             },
         )
 
-    public findSupplyPointImport = (
+    public getActiveAskForOfferIdQuery = () => this.apollo
+        .watchQuery<any>({
+                query: getActiveAskForOfferIdQuery,
+            },
+        ).valueChanges
+
+    public setActiveAskForOfferId = (askForOfferId: string) => this.apollo
+        .mutate<any>({
+                mutation: setActiveAskForOfferIdMutation,
+                variables: {
+                    askForOfferId,
+                },
+            },
+        )
+
+    public findSupplyPointImports = (
         askForOfferId: string,
     ) => this.apollo
         .query<any>({
-                query: findSupplyPointImportQuery,
+                query: findSupplyPointImportsQuery,
                 variables: {
                     askForOfferId,
                 },

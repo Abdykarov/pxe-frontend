@@ -1,9 +1,19 @@
 import gql from 'graphql-tag';
-import {supplyPointFragment} from './supply';
+import { supplyPointFragment } from './supply';
 
-export const findSupplyPointImportQuery = gql`
-    query findSupplyPointImport($askForOfferId: ID!, $skipInfoAboutRelationContracts: Boolean = true, $skipOfferValidity: Boolean = true){
-        findSupplyPointImport(askForOfferId: $askForOfferId){
+
+export const getActiveAskForOfferIdQuery = gql`
+    query {
+        createUser @client{
+            activeAskForOfferId
+        }
+    }
+`;
+
+
+export const findSupplyPointImportsQuery = gql`
+    query findSupplyPointImports($askForOfferId: ID!, $skipInfoAboutRelationContracts: Boolean = true, $skipOfferValidity: Boolean = true){
+        findSupplyPointImports(askForOfferId: $askForOfferId){
             ...SupplyPointFragment
         }
     }

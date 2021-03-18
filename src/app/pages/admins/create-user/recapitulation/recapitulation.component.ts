@@ -51,7 +51,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     public formFields = formFields;
 
     public supplyPoint$: Observable<ISupplyPoint> = this.supplyPointImportService.
-        findSupplyPointImport(this.askForOfferId)
+        findSupplyPointImports(this.askForOfferId)
             .pipe(
                 takeUntil(this.destroy$),
                 map(({data}) => data.findSupplyPointImport),

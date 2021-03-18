@@ -18,17 +18,18 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { AskForOfferService} from 'src/common/graphql/services/ask-for-offer.service';
 import {
     CommodityType,
-    ISupplyPoint, SubjectType,
+    ISupplyPoint,
 } from 'src/common/graphql/models/supply.model';
 import { formFields} from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { IFieldError} from 'src/common/containers/form/models/form-definition.model';
-import { ISupplyPointImportInput } from 'src/common/graphql/models/supply-point-import.model';
+import {ISupplyPointImport, ISupplyPointImportInput} from 'src/common/graphql/models/supply-point-import.model';
 import {
     parseGraphQLErrors,
     removeRequiredValidators,
 } from 'src/common/utils';
 import { SUPPLY_POINT_EDIT_TYPE} from 'src/app/app.constants';
 import { SupplyPointImportService } from 'src/common/graphql/services/supply-point-import.service';
+import {ITableColumnConfig} from '../../../../../common/ui/table/models/table.model';
 
 @Component({
     selector: 'pxe-create-user-supply-point',
@@ -39,13 +40,22 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
     public fieldError: IFieldError = {};
     public formFields = formFields;
-    public formLoading = false;
+    public formLoading = true;
     public formSent = false;
     public globalError: string[] = [];
     public supplyPointImport: any = null;
     public supplyPoint = null;
+    public supplyPoints = null;
     public isIndividual = false;
     public askForOfferId = null;
+
+    public action = (data) => {
+        console.log(data);
+    }
+
+    public action2 = (data) => {
+        console.log(data);
+    }
 
     constructor(
         private askForOfferService: AskForOfferService,
@@ -62,19 +72,25 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     ngOnInit() {
         super.ngOnInit();
         this.supplyPointImportService.
-            findSupplyPointImport(this.askForOfferId)
+            findSupplyPointImports(this.askForOfferId)
                 .pipe(
                     takeUntil(this.destroy$),
-                    map(({data}) => data.findSupplyPointImport),
+                    map(({data}) => data.findSupplyPointImports),
                 )
-                .subscribe((supplyPoint: ISupplyPoint) => {
-                    if (supplyPoint === null) {
+                .subscribe(
+                    (supplyPoints: ISupplyPointImport[]) => {
                         this.supplyPoint = {};
-                    } else {
-                        this.supplyPoint = supplyPoint;
-                    }
-                    this.cd.markForCheck();
-                });
+                        this.supplyPoints = supplyPoints;
+                        this.formLoading = false;
+                        this.cd.markForCheck();
+                    },
+                    (error) => {
+                        const { globalError } = parseGraphQLErrors(error);
+                        this.globalError = globalError;
+                        this.formLoading = false;
+                        this.cd.markForCheck();
+                    },
+                );
 
     }
 
