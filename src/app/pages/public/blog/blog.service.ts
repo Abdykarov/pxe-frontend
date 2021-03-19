@@ -25,8 +25,8 @@ export class BlogService {
         id: article.url,
         content: article.content,
         img: article.img,
-        imgAlt: article.img,
-        imgTitle: article.img,
+        imgAlt: article.header,
+        imgTitle: article.header,
         title: article.header,
         textPrefix: formatDate(article.date, 'dd. MM. yyyy', this.locale),
     })

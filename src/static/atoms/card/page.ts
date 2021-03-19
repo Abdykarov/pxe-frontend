@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
+
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-import { defaultTileCard, defaultBlogCard } from './config';
+import {
+    defaultTileCard,
+    defaultBlogCard,
+} from './config';
 
 @Component({
     templateUrl: './page.html',
