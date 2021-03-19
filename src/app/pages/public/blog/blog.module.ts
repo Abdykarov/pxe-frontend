@@ -13,8 +13,8 @@ import { OverviewComponent } from './overview/overview.component';
 @NgModule({
     declarations: [
         BlogComponent,
-        OverviewComponent,
         DetailComponent,
+        OverviewComponent,
     ],
     imports: [
         BlogRoutingModule,

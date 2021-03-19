@@ -31,8 +31,8 @@ export class OverviewComponent extends AbstractComponent {
     ) {
         super();
         this.activeArticles$ = this.blogFacade.activeArticles$.pipe(
-            map(R.map( this.blogService.articleToCardData)),
-            map(R.map( this.blogService.toShortContent)),
+            map(R.map(this.blogService.articleToCardData)),
+            map(R.map(this.blogService.toShortContent)),
         );
     }
 

@@ -25,8 +25,8 @@ export class LandingPageArticlesResolver implements Resolve<any> {
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IArticle[]> {
         return this.blogServiceCms.getLpArticles().pipe(
-            map(R.map( this.blogService.articleToCardData)),
-            map(R.map( this.blogService.toShortContent)),
+            map(R.map(this.blogService.articleToCardData)),
+            map(R.map(this.blogService.toShortContent)),
         );
     }
 }

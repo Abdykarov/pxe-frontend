@@ -15,7 +15,7 @@ import {
 import { ICardData } from 'src/common/ui/card/models/data.model';
 
 @Component({
-    selector: 'lnd-detail',
+    selector: 'pxe-blog-detail',
     templateUrl: './detail.component.html',
     styleUrls: ['./detail.component.scss'],
 })
@@ -43,8 +43,8 @@ export class DetailComponent extends AbstractComponent {
                     this.otherArticles$ = this.blogFacade.activeArticles$
                         .pipe(
                             map(this.blogService.getOtherArticles(this.blogFacade.activeArticleSubject$.getValue())),
-                            map(R.map( this.blogService.articleToCardData)),
-                            map(R.map( this.blogService.toShortContent)),
+                            map(R.map(this.blogService.articleToCardData)),
+                            map(R.map(this.blogService.toShortContent)),
                         );
                     this.cd.markForCheck();
                 }

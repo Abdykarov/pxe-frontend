@@ -216,6 +216,11 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
         this.router.navigate([CONSTS.PATHS.FAQ]);
     }
 
+    public routerToAllArticle = (evt) => {
+        evt.preventDefault();
+        this.router.navigate([CONSTS.PATHS.BLOG, 'all']);
+    }
+
     public showDetailArticle(article: ICardData): void {
         this.router.navigate([this.ROUTES.ROUTER_BLOG, 'all', article.id]);
     }
