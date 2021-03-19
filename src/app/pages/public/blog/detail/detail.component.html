@@ -4,20 +4,25 @@
         <div [innerHTML]="activeArticle.content"></div>
     </div>
 </div>
-<div class="card-blogs" *ngIf="(otherArticles$ | async) as otherArticles">
-    <div class="row mb-4">
-        <div class="col-12 col-md-6 offset-md-3 text-center">
-            <h2 class="h2--public">Všechny články</h2>
+<ng-container *ngIf="(activeType$ | async) as activeTag">
+    <div class="card-blogs" *ngIf="(otherArticles$ | async) as otherArticles">
+        <div class="row mb-4">
+            <div class="col-12 col-md-6 offset-md-3 text-center">
+                <h1 class="h2--public">Všechny články</h1>
+            </div>
+        </div>
+        <div class="row card-blogs__inner">
+            <ng-container *ngFor="let article of otherArticles">
+                <div class="col-md-4 card-tile__item">
+                    <lnd-card
+                        [data]="article"
+                        (clickAction)="showDetail(activeTag, article)"
+                    ></lnd-card>
+                </div>
+            </ng-container>
         </div>
     </div>
-    <div class="row card-blogs__inner">
-        <ng-container *ngFor="let article of otherArticles">
-            <div class="col-md-4 card-tile__item">
-                <lnd-card [data]="article"></lnd-card>
-            </div>
-        </ng-container>
-    </div>
-</div>
+</ng-container>
 <div class="row">
     <div class="col-12 text-center">
         <lnd-button

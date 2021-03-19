@@ -62,6 +62,50 @@ server.engine('html', ngExpressEngine({
 server.set('view engine', 'html');
 server.set('views', join(DIST_FOLDER, 'app'));
 
+const flatData = R.prop('flatData');
+
+const isObject = item => typeof item === 'object';
+
+const isFlatDataArray = R.allPass(
+    [
+        Array.isArray,
+        R.all(flatData),
+    ],
+);
+
+const normalize = R.cond([
+    [
+        data => !data,
+        data => data,
+    ],
+    [
+        isFlatDataArray,
+        R.pipe(
+            R.map(flatData),
+            R.map(
+                R.cond([
+                    [
+                        Array.isArray,
+                        data => R.map(normalize)(data),
+                    ],
+                    [
+                        R.T,
+                        data => normalize(data),
+                    ],
+                ]),
+            ),
+        ),
+    ],
+    [
+        isObject,
+        data => R.map(normalize)(data),
+    ],
+    [
+        R.T,
+        data => data,
+    ],
+]);
+
 const PAGE_M_CACHE_PREFIX = 'PAGE_';
 const SQUIDEX_M_CACHE_PREFIX = 'SQUIDEX_';
 
@@ -88,9 +132,12 @@ const bodyQuestionsQuery = '{ operationName: \'queryQuestionContents\',\n' +
 
 const bodyBlogQuery = '{"operationName":"queryBlogContents","variables":{},"query":"query queryBlogContents {\\n  queryBlogContents {\\n    flatData {\\n      articles {\\n        flatData {\\n          content\\n          date\\n          header\\n          img {\\n            url\\n            __typename\\n          }\\n          oneOfMostVisited\\n          type {\\n            flatData {\\n              label\\n              seo {\\n                flatData {\\n                  description\\n                  keywords\\n                  title\\n                  __typename\\n                }\\n                __typename\\n              }\\n              url\\n              order\\n              title\\n              __typename\\n            }\\n            __typename\\n          }\\n          url\\n          seo {\\n            flatData {\\n              description\\n              keywords\\n              title\\n              __typename\\n            }\\n            __typename\\n          }\\n          __typename\\n        }\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n"}';
 
+const bodyFaqType = '{"operationName":"queryFaqContents","variables":{},"query":"query queryFaqContents {\n  queryFaqContents {\n    flatData {\n      title\n      breadcrumbTitle\n      tag {\n        flatData {\n          type\n          url\n          label\n          title\n          __typename\n        }\n        __typename\n      }\n      seo {\n        ...seoFragment\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment seoFragment on SeoContent {\n  flatData {\n    description\n    keywords\n    title\n    __typename\n  }\n  __typename\n}\n"}';
+
 let Authorization = null;
 let questionsSource = null;
 let blogSource = null;
+let faqTypeSource = null;
 
 const newTokenRequest = {
     url: SQUIDEX_REFRESH_TOKEN_URL,
@@ -116,10 +163,14 @@ const queryRequest = (body) => ({
 const setQuestions = () => request(queryRequest(bodyQuestionsQuery), (_, __, body) => {
     questionsSource = JSON.parse(body);
 });
+
 const setBlog = () => request(queryRequest(bodyBlogQuery), (_, __, body) => {
     blogSource = JSON.parse(body);
 });
 
+const setFaq = () => request(queryRequest(bodyFaqType), (_, __, body) => {
+    faqTypeSource = JSON.parse(body);
+});
 
 const resetAppState = () => {
     request(newTokenRequest, (_, __, body) => {
@@ -127,6 +178,7 @@ const resetAppState = () => {
         Authorization = getAuthorizationFromPayload(payload);
         setQuestions();
         setBlog();
+        setFaq();
     });
 
     mCache.clear();
@@ -149,14 +201,25 @@ const getQuestions = (questions) => {
     return questions;
 };
 
+const getTypes = R.pipe(
+    R.map(R.prop('type')),
+    R.flatten,
+    R.uniqBy(R.prop('url')),
+    R.sortBy(R.prop('order')),
+);
+
 // Server static files from /app
 server.get('/sitemap.xml', (req, res) => {
     const siteMapOriginal = fs.readFileSync(join(APP_FOLDER, 'sitemap.xml'), 'utf8');
     const parseString = xml2js.parseString;
     const questions = getQuestions(questionsSource.data.queryQuestionContents);
+    const blogData = normalize(blogSource.data.queryBlogContents)[0].articles;
+    const types = getTypes(blogData);
+    const faqTypes = normalize(faqTypeSource.data.queryFaqContents);
+
     parseString(siteMapOriginal, (err, result) => {
+        const url = R.path(['urlset', 'url' ], result);
         questions.forEach(question => {
-            const url = R.path(['urlset', 'url' ], result);
             if (url && url.length) {
                 url.push({
                     'loc': [
@@ -165,6 +228,39 @@ server.get('/sitemap.xml', (req, res) => {
                 });
             }
         });
+        faqTypes.forEach(faqType => {
+            if (url && url.length) {
+                url.push({
+                    'loc': [
+                        `${req.protocol}://${req.get('host')}/faq/${(faqType.tag[0].url)}`,
+                    ],
+                });
+            }
+        });
+        types.forEach(type => {
+            if (url && url.length) {
+                url.push({
+                    'loc': [
+                        `${req.protocol}://${req.get('host')}/blog/${(type.url)}`,
+                    ],
+                });
+            }
+        });
+        blogData.forEach(article => {
+            if (url && url.length) {
+                url.push({
+                    'loc': [
+                        `${req.protocol}://${req.get('host')}/blog/${(R.pipe(
+                            R.prop('type'),
+                            R.reject(R.propEq('url', 'all')),
+                            R.head,
+                            R.prop('url'),
+                        )(article))}/${(article.url)}`,
+                    ],
+                });
+            }
+        });
+
         const builder = new xml2js.Builder();
         const xml = builder.buildObject(result);
         res.set('Content-Type', 'text/xml');
@@ -229,7 +325,6 @@ server.get('*', (req, res, next) => {
 
 // All routes (without server side routes) are send as normal client side app
 server.get('*', (req, res) => {
-    console.log('REQUEST');
     return res.sendFile(join(APP_FOLDER, 'index.html'));
 });
 

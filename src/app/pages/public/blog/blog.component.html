@@ -1,6 +1,9 @@
 <div class="container-fluid container-fluid--max-width">
     <div class="container-content container-content--public">
-        <pxe-layout-container [pageTitle]="(activeType$ | async)?.title" [breadcrumbItemsSimple]="(breadcrumb$ | async)">
+        <pxe-layout-container
+            [withHeader]="!(isDetail$ | async)"
+            [pageTitle]="(activeType$ | async)?.title"
+            [breadcrumbItemsSimple]="(breadcrumb$ | async)">
             <router-outlet></router-outlet>
         </pxe-layout-container>
     </div>

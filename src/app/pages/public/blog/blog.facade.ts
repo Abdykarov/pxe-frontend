@@ -41,6 +41,7 @@ export class BlogFacade {
     public blogTypesSubject$: BehaviorSubject<IType[]> = new BehaviorSubject(null);
     public breadcrumbSubject$: BehaviorSubject<IBreadcrumbItems> = new BehaviorSubject(null);
     public routerParamsSubject$: BehaviorSubject<IRouterParams> = new BehaviorSubject(null);
+    public isDetailSubject$: BehaviorSubject<boolean> = new BehaviorSubject(null);
 
     public activeArticle$ = this.activeArticleSubject$.asObservable();
     public activeArticles$ = this.activeArticlesSubject$.asObservable();
@@ -49,6 +50,7 @@ export class BlogFacade {
     public blogTypes$ = this.blogTypesSubject$.asObservable();
     public breadcrumb$ = this.breadcrumbSubject$.asObservable();
     public routerParams$ = this.routerParamsSubject$.asObservable();
+    public isDetail$ = this.isDetailSubject$.asObservable();
 
     constructor(
         private metaService: Meta,
@@ -59,10 +61,9 @@ export class BlogFacade {
                 if (!params?.type || !blog) {
                     return;
                 }
-
                 const url = params?.type;
-                const isDetail = params?.article;
-
+                const isDetail = !!params?.article;
+                this.isDetailSubject$.next(isDetail);
                 const types = this.getTypes(blog);
                 this.setTypes(types);
                 this.setActiveType(types, url);
@@ -169,5 +170,5 @@ export class BlogFacade {
         )(activeArticle);
     }
 
-    private isDetailPage = (): string => this.routerParamsSubject$.getValue().article;
+    private isDetailPage = (): boolean => this.isDetailSubject$.getValue();
 }

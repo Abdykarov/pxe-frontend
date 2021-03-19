@@ -29,6 +29,7 @@ export class BlogComponent extends AbstractComponent implements OnDestroy {
     public readonly blog: IBlog = this.route.snapshot.data.blog;
     public readonly activeType$: Observable<IType> = this.blogFacade.activeType$;
     public readonly breadcrumb$: Observable<IBreadcrumbItems> = this.blogFacade.breadcrumb$;
+    public readonly isDetail$: Observable<boolean> = this.blogFacade.isDetailSubject$;
 
     constructor(
         public blogFacade: BlogFacade,
