@@ -95,6 +95,10 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     public submit = (personalData, activeSupplyPoint: ISupplyPoint) => {
         const supplyPoint: ISupplyPointImportInput = this.supplyPointImportService.mapSupplyPointToSupplyPointInput(activeSupplyPoint);
         supplyPoint.personalData = personalData;
+        supplyPoint.importPricePerKwPowerVT = activeSupplyPoint.importPricePerKwPowerVT;
+        supplyPoint.importPricePerKwPowerNT = activeSupplyPoint.importPricePerKwPowerNT;
+        supplyPoint.importPricePerKwGas = activeSupplyPoint.importPricePerKwGas;
+        supplyPoint.importPriceTotalPerYear = activeSupplyPoint.importPriceTotalPerYear;
         delete supplyPoint?.address['__typename'];
 
         this.supplyPointImportService.createSupplyPointImport(

@@ -48,8 +48,14 @@ export class PricesComponent extends AbstractComponent implements OnInit {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
 
-    public save = (data, activeSupplyPoint) => {
+    public save = (formData, activeSupplyPoint) => {
+        const data = formData.value;
+        const isOnlySave = formData.data;
         const supplyPoint: ISupplyPointImportInput = this.supplyPointImportService.mapSupplyPointToSupplyPointInput(activeSupplyPoint);
+        supplyPoint.importPriceTotalPerYear = data?.importPriceTotalPerYear,
+        supplyPoint.importPricePerKwPowerVT = data?.importPricePerKwPowerVT,
+        supplyPoint.importPricePerKwPowerNT = data?.importPricePerKwPowerNT,
+        supplyPoint.importPricePerKwGas = data?.importPricePerKwGas,
 
         this.supplyPointImportService.createSupplyPointImport(
                 this.createUserFacade.getAskForOfferId(),
@@ -57,11 +63,13 @@ export class PricesComponent extends AbstractComponent implements OnInit {
             ).pipe(
                 takeUntil(this.destroy$),
             ).subscribe(_ => {
-                    this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
-                        queryParams: {
-                            askForOfferId: this.createUserFacade.getAskForOfferId(),
-                        },
-                    });
+                    if (!isOnlySave) {
+                        this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
+                            queryParams: {
+                                askForOfferId: this.createUserFacade.getAskForOfferId(),
+                            },
+                        });
+                    }
                 },
                 (error) => {
                     this.formLoading = false;

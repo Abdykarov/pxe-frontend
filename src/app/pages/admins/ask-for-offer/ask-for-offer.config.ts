@@ -68,3 +68,13 @@ export const confirmDeleteAskForOfferInfo = (): IShowModal => ({
     },
     withoutScroll: true,
 });
+
+export const confirmDeleteAskForOffer = (): IShowModal => ({
+    component: 'ConfirmModalComponent',
+    modalType: CONSTS.MODAL_TYPE.CONFIRM_DELETE_SUPPLY_POINT_IMPORT,
+    instanceData: {
+        confirmText: `Opravdu chcete smazat žádost?`,
+        titleConfirm: 'ANO SMAZAT',
+        data: {},
+    },
+});

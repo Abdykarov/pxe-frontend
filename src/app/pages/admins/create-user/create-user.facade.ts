@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 
 import * as R from 'ramda';
+import * as R_ from 'ramda-extension';
 import {
+    filter,
     map,
     tap,
 } from 'rxjs/operators';
@@ -10,9 +12,11 @@ import {
     Observable,
 } from 'rxjs';
 
+import { CONSTS } from 'src/app/app.constants';
 import { IMicroTableData } from 'src/common/ui/micro-table/micro-table/item.model';
 import { IQueryParams } from './models/create-user.model';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import { ModalService } from 'src/common/containers/modal/modal.service';
 import { SupplyPointImportService } from 'src/common/graphql/services/supply-point-import.service';
 
 @Injectable({
@@ -29,8 +33,25 @@ export class CreateUserFacade {
 
     constructor(
         private supplyPointImportService: SupplyPointImportService,
+        private modalsService: ModalService,
     ) {
         this.activeSupplyPoint$ = this.getCreateUser$.pipe(map(R.prop('activeSupplyPoint')));
+
+        this.modalsService.closeModalData$
+            .pipe(
+                filter(
+                    R.allPass([
+                        R_.isNotNil,
+                        R.propEq('modalType', CONSTS.MODAL_TYPE.CONFIRM_DELETE_SUPPLY_POINT_IMPORT),
+                    ]),
+                ),
+            )
+            .subscribe(modal => {
+                if (modal.confirmed) {
+                    this.deleteSupplyPointImport(modal.data.id, this.getAskForOfferId());
+                }
+                this.modalsService.closeModalData$.next(null);
+            });
     }
 
     public getCreateUser$ = this.supplyPointImportService.getCreateUser()
@@ -64,7 +85,7 @@ export class CreateUserFacade {
 
         this.supplyPointsImportMicroTableData$ = this.supplyPointsImport$.pipe(
             map(
-                R.map((supplyPoint: ISupplyPoint) => ({id: supplyPoint.id, label: supplyPoint.name || supplyPoint.identificationNumber })),
+                R.map((supplyPoint: ISupplyPoint) => ({data: supplyPoint, label: supplyPoint.name || supplyPoint.identificationNumber })),
             ),
         );
 
@@ -73,6 +94,21 @@ export class CreateUserFacade {
 
     public deleteSupplyPointImport = (supplyPointImportId: string, askForOfferId: string) =>
         this.supplyPointImportService.deleteSupplyPointImportMutation(supplyPointImportId, askForOfferId).subscribe()
+
+    public confirmDeleteSupplyPointImport = (supplyPoint: ISupplyPoint): void => {
+        this.modalsService
+            .showModal$.next({
+                component: 'ConfirmModalComponent',
+                modalType: CONSTS.MODAL_TYPE.CONFIRM_DELETE_SUPPLY_POINT_IMPORT,
+                instanceData: {
+                    confirmText: `Opravdu chcete smazat odběrné místo
+                                <strong>${supplyPoint.name || supplyPoint.identificationNumber}</strong>?`,
+                    titleConfirm: 'ANO SMAZAT',
+                    data: supplyPoint,
+                },
+            });
+    }
+
 
     public getAskForOfferId = (): string => this.queryParamsSubject$.getValue().askForOfferId;
     public getSupplyPointId = (): string => this.queryParamsSubject$.getValue().supplyPointId;

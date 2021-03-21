@@ -9,7 +9,7 @@
         type="icon"
         icon="icon--delete"
         variant="icon"
-        (action)="deleteSupplyPointImport(data.id)">
+        (action)="deleteSupplyPointImport(data)">
     </lnd-button>
 </ng-template>
 
@@ -19,18 +19,27 @@
              class="col-12 col-xl-10 offset-xl-1 mb-6">
             <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
         </div>
-        <div class="col-12">
+        <div class="col-12" *ngIf="supplyPointsImport$ | async as supplyPointImport">
             <div class="row">
-                <div class="col-12 col-xl-4" style="margin-top: 80px">
-                    <ng-container *ngIf="supplyPointsImport$ | async as supplyPointImport">
-                        <lnd-micro-table
-                            title="Odběrná místa"
-                            [data]="(supplyPointsImportMicroTableData$ | async)"
-                            [actionTemplates]="templateIcons">
-                        </lnd-micro-table>
-                    </ng-container>
+                <div *ngIf="supplyPointImport.length !== 0" class="col-12 col-xl-3" style="margin-top: 80px">
+                    <lnd-micro-table
+                        title="Odběrná místa"
+                        [data]="(supplyPointsImportMicroTableData$ | async)"
+                        [actionTemplates]="templateIcons">
+                    </lnd-micro-table>
+                    <div class="d-flex justify-content-center ">
+                        <lnd-button
+                            icon="icon--add-new"
+                            type="icon"
+                            variant="icon"
+                            (action)="routerToNewSupplyPoint()"
+                        ></lnd-button>
+                    </div>
                 </div>
-                <div class="col-12 col-xl-8">
+                <div class="col-12"
+                     [class.col-xl-9]="supplyPointImport.length !== 0"
+                     [class.col-xl-10]="supplyPointImport.length === 0"
+                     [class.offset-xl-1]="supplyPointImport.length === 0">
                     <router-outlet></router-outlet>
                 </div>
             </div>

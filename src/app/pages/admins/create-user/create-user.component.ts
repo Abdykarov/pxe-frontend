@@ -44,12 +44,18 @@ export class CreateUserComponent extends AbstractComponent {
                 if (event instanceof NavigationEnd) {
                     const {askForOfferId, supplyPointId = null} = this.route.snapshot.firstChild.queryParams;
                     if (askForOfferId) {
+                        if (!supplyPointId) {
+                            this.supplyPointImportService.setActiveSupplyPoint(null).subscribe();
+                        }
+
                         const [
                             supplyPointsImport$,
                             supplyPointsImportMicroTableData$,
                         ] = this.createUserFacade.setObservableByQueryParams$(askForOfferId, supplyPointId);
                         this.supplyPointsImport$ = <Observable<ISupplyPoint[]>>supplyPointsImport$;
                         this.supplyPointsImportMicroTableData$ = <Observable<IMicroTableData[]>>supplyPointsImportMicroTableData$;
+                    } else {
+                        this.router.navigate([this.ROUTES.ROUTER_ASK_FOR_OFFER]);
                     }
                     const step = this.route.snapshot.firstChild.data['step'];
                     this.title = this.route.snapshot.firstChild.data['title'];
@@ -70,7 +76,15 @@ export class CreateUserComponent extends AbstractComponent {
         });
     }
 
-    public deleteSupplyPointImport(supplyPointImportId: string) {
-        this.createUserFacade.deleteSupplyPointImport(supplyPointImportId, this.createUserFacade.getAskForOfferId());
+    public deleteSupplyPointImport(supplyPoint: ISupplyPoint) {
+        this.createUserFacade.confirmDeleteSupplyPointImport(supplyPoint);
+    }
+
+    public routerToNewSupplyPoint() {
+        this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
+            queryParams: {
+                askForOfferId: this.createUserFacade.queryParamsSubject$.getValue().askForOfferId,
+            },
+        });
     }
 }

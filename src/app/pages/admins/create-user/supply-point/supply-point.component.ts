@@ -35,8 +35,9 @@ import { SupplyPointImportService } from 'src/common/graphql/services/supply-poi
     styleUrls: ['./supply-point.component.scss'],
 })
 export class SupplyPointComponent extends AbstractComponent {
-    public activeSupplyPoint$ = this.createUserFacade.activeSupplyPoint$;
-    public queryParams$ = this.createUserFacade.queryParams$;
+    public readonly activeSupplyPoint$ = this.createUserFacade.activeSupplyPoint$;
+    public readonly queryParams$ = this.createUserFacade.queryParams$;
+    public readonly supplyPointsImport$ = this.createUserFacade.supplyPointsImport$;
 
     public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
     public fieldError: IFieldError = {};
@@ -95,7 +96,7 @@ export class SupplyPointComponent extends AbstractComponent {
                 this.supplyPointImportService.mapPersonalInfoToPersonalInfoInput(activeSupplyPoint.contract.personalData);
         }
 
-        this.supplyPointImportService.createSupplyPointImport(askForOfferId, supplyPoint)
+        this.supplyPointImportService.createSupplyPointImport(askForOfferId, supplyPoint, !activeSupplyPoint)
             .pipe(
                 takeUntil(this.destroy$),
                 map(
@@ -107,7 +108,10 @@ export class SupplyPointComponent extends AbstractComponent {
                     this.supplyPointImportService.setActiveSupplyPoint(newSupplyPoint).subscribe();
                     this.formLoading = false;
                     this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_RECAPITULATION], {
-                        queryParams: this.createUserFacade.queryParamsSubject$.getValue(),
+                        queryParams: {
+                            askForOfferId: this.createUserFacade.queryParamsSubject$.getValue().askForOfferId,
+                            supplyPointId: newSupplyPoint.id,
+                        },
                     });
                 },
                 (error) => {

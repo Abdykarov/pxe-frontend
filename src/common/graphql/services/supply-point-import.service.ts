@@ -27,16 +27,40 @@ export class SupplyPointImportService {
 
     public createSupplyPointImport = (
         askForOfferId: string,
-        supplyPoint: any,
+        supplyPoint: ISupplyPointImportInput,
+        isNew = false,
     ) => this.apollo
         .mutate<any>({
-                mutation: createSupplyPointImportMutation,
-                variables: {
-                    askForOfferId,
-                    supplyPoint,
-                },
+            mutation: createSupplyPointImportMutation,
+            variables: {
+                askForOfferId,
+                supplyPoint,
             },
-        )
+            update: (cache, { data }) => {
+                const { findSupplyPointImports } = cache.readQuery(
+                    {
+                        query: findSupplyPointImportsQuery,
+                        variables: {
+                            askForOfferId,
+                        },
+                    });
+
+                let newState = findSupplyPointImports;
+
+                if (isNew) {
+                    const newSupplyPoint = data.createSupplyPointImport;
+                    newState = [...newState, newSupplyPoint];
+                }
+
+                cache.writeQuery({
+                    query: findSupplyPointImportsQuery,
+                    data: { findSupplyPointImports: newState },
+                    variables: {
+                        askForOfferId,
+                    },
+                });
+            },
+        })
 
     public setActiveSupplyPoint = (supplyPoint: ISupplyPoint) => this.apollo
         .mutate<any>({
@@ -147,6 +171,10 @@ export class SupplyPointImportService {
                     annualConsumption: supplyPoint.annualConsumption,
                 },
             },
+            importPriceTotalPerYear: supplyPoint?.importPriceTotalPerYear,
+            importPricePerKwPowerVT: supplyPoint?.importPricePerKwPowerVT,
+            importPricePerKwPowerNT: supplyPoint?.importPricePerKwPowerNT,
+            importPricePerKwGas: supplyPoint?.importPricePerKwGas,
         };
     }
 }

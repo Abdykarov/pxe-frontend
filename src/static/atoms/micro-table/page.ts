@@ -10,15 +10,15 @@ export class MicroTablePageComponent {
     public breadcrumbItemsSimple: IBreadcrumbItems;
     public rows: IMicroTableData[] = [
         {
-            id: '1',
+            data: '1',
             label: 'Byt - Praha',
         },
         {
-            id: '2',
+            data: '2',
             label: '987328424',
         },
         {
-            id: '3',
+            data: '3',
             label: 'Byt - Brno',
         },
     ];

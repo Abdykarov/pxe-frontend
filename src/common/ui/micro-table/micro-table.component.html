@@ -5,7 +5,7 @@
     <div class="micro-table--row" *ngFor="let item of data">
         {{item.label}}
         <ng-container *ngIf="actionTemplates">
-            <ng-container *ngTemplateOutlet="actionTemplates; context: {data: item}"></ng-container>
+            <ng-container *ngTemplateOutlet="actionTemplates; context: {data: item.data}"></ng-container>
         </ng-container>
     </div>
 </div>

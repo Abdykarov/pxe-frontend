@@ -1,5 +1,5 @@
 
 export interface IMicroTableData {
-    id: string;
+    data: any;
     label: string;
 }
