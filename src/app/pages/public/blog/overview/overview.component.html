@@ -15,7 +15,12 @@
     <div class="card-blogs" *ngIf="activeArticles$ | async as articles">
         <div class="row card-blogs__inner">
             <div class="col-md-4 card-blog__item" *ngFor="let article of articles | slice: 0: actualItemsCount">
-                <lnd-card (clickAction)="showDetail(activeTag, article)" [data]="article"></lnd-card>
+                <lnd-card
+                    type="link"
+                    [data]="article"
+                    (clickAction)="showDetail(activeTag, article)"
+                >
+                </lnd-card>
             </div>
         </div>
         <div *ngIf="actualItemsCount < articles.length"

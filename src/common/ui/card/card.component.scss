@@ -95,9 +95,23 @@
 	}
 
 	.card {
-		overflow: hidden;
-		border-radius: $border-radius;
-		box-shadow: $box-shadow;
+		@include link-without-href {
+			height: 100%;
+			color: $font-text;
+			overflow: hidden;
+			border-radius: $border-radius;
+			box-shadow: $box-shadow;
+		}
+
+		@include link-without-href-interactive {
+			color: $font-text;
+			text-decoration: none;
+			box-shadow: $box-shadow-interactive;
+
+			.card__title {
+				color: $primary;
+			}
+		}
 	}
 
 	.card__img-holder {

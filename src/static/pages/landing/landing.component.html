@@ -43,7 +43,7 @@
         </div>
     </div>
     <div class="section pt-3 pt-md-0 pb-xl-6">
-        <div class="container-fluid container-fluid--max-width container-fluid--light">
+        <div class="container-fluid container-fluid--max-width">
             <div class="row text-center mb-xl-6 text-md-left">
                 <div class="col-md-4 mb-6 mb-md-0">
                     <div class="row">
@@ -94,7 +94,11 @@
             <div class="card-tiles">
                 <div class="row no-gutters card-tiles__inner">
                     <div *ngFor="let item of cardConfig" class="col-md-4 card-tile__item" [ngClass]="item.customClass">
-                        <lnd-card [data]="item"></lnd-card>
+                        <lnd-card
+                            type="block"
+                            [data]="item"
+                        >
+                        </lnd-card>
                     </div>
                 </div>
             </div>
@@ -251,8 +255,35 @@
             </div>
         </div>
     </div>
+    <div class="section section-blog">
+        <div class="container-fluid container-fluid--max-width">
+            <h2 class="h2--public text-md-center">Blog</h2>
+            <div class="row">
+                <div class="col-12 card-blogs mb-4">
+                    <div class="row card-blogs__inner">
+                        <div
+                            *ngFor="let item of cardBlogConfig"
+                            class="col-md-4 card-blog__item"
+                        >
+                            <lnd-card
+                                type="link"
+                                [data]="item"
+                            >
+                            </lnd-card>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 text-center">
+                    <a class="text-with-icon text-with-icon--link text-with-icon--icon-right mb-4 mb-md-0">
+                        <span class="text-with-icon__text text-body">Zobrazit všechny články</span>
+                        <span class="icon icon--add-new text-with-icon__icon text-with-icon__icon--public"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="section section-help">
-        <div class="container-fluid container-fluid--max-width container-fluid--light">
+        <div class="container-fluid container-fluid--max-width">
             <div class="row px-3">
                 <div class="col-xl-8 offset-xl-2 mb-3 text-md-center">
                     <h2 class="h2--public">Často kladené dotazy</h2>

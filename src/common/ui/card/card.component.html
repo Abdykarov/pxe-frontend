@@ -1,4 +1,4 @@
-<div class="card" (click)="clickAction.emit(data)">
+<!-- <div class="card" (click)="clickAction.emit(data)">
      <div class="card__img-holder">
         <img
             [src]="data.img"
@@ -23,39 +23,46 @@
             [innerHTML]="data.content">
         </p>
     </div>
+</div> -->
+
+<ng-template #content>
+   <div class="card__img-holder">
+       <img
+           [src]="data.img"
+           [attr.title]="data.imgTitle"
+           [attr.alt]="data.imgAlt"
+           class="card-img-top">
+   </div>
+   <div
+       class="card-body w-100">
+       <div
+           *ngIf="data.title"
+           class="card-text-prefix mb-1">
+           {{ data.textPrefix }}
+       </div>
+       <h3 *ngIf="data.title"
+           class="h3--public card__title mb-1">
+           {{ data.title }}
+       </h3>
+       <p
+           *ngIf="data.content"
+           class="card-text"
+           [innerHTML]="data.content">
+       </p>
+   </div>
+</ng-template>
+
+<div 
+    *ngIf="type === 'block'"
+    class="card"
+>
+   <ng-container *ngTemplateOutlet="content"></ng-container>
 </div>
-
-<!--<ng-template #content>-->
-<!--    <div class="card__img-holder">-->
-<!--        <img-->
-<!--            [src]="data.img"-->
-<!--            [attr.title]="data.imgTitle"-->
-<!--            [attr.alt]="data.imgAlt"-->
-<!--            class="card-img-top">-->
-<!--    </div>-->
-<!--    <div-->
-<!--        class="card-body w-100">-->
-<!--        <div-->
-<!--            *ngIf="data.title"-->
-<!--            class="card-text-prefix mb-1">-->
-<!--            {{ data.textPrefix }}-->
-<!--        </div>-->
-<!--        <h3 *ngIf="data.title"-->
-<!--            class="h3&#45;&#45;public mb-1">-->
-<!--            {{ data.title }}-->
-<!--        </h3>-->
-<!--        <p-->
-<!--            *ngIf="data.content"-->
-<!--            class="card-text"-->
-<!--            [innerHTML]="data.content">-->
-<!--        </p>-->
-<!--    </div>-->
-<!--</ng-template>-->
-
-<!--<div *ngIf="type" class="card">-->
-<!--    <ng-container *ngTemplateOutlet="content"></ng-container>-->
-<!--</div>-->
-<!--<a *ngIf="type" class="card" (click)="clickAction.emit(data)">-->
-<!--    <ng-container *ngTemplateOutlet="content"></ng-container>-->
-<!--</a>-->
+<a 
+    *ngIf="type === 'link'"
+    class="card"
+    (click)="clickAction.emit(data)"
+>
+   <ng-container *ngTemplateOutlet="content"></ng-container>
+</a>
 
