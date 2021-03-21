@@ -6,7 +6,6 @@ import { Apollo } from 'apollo-angular';
 import {
     createSupplyPointImportMutation,
     deleteSupplyPointImportMutation,
-    setActiveAskForOfferIdMutation,
     setActiveSupplyPointMutation,
 } from 'src/common/graphql/mutation/supply-point-import';
 import {findSupplyPointImportsQuery, getCreateUserQuery} from 'src/common/graphql/queries/supply-point-import';
@@ -15,6 +14,7 @@ import {
     ISupplyPoint,
 } from 'src/common/graphql/models/supply.model';
 import { ISupplyPointImportInput } from 'src/common/graphql/models/supply-point-import.model';
+import {IPersonalData, IPersonalDataInput} from '../models/personal-data.model';
 
 @Injectable({
     providedIn: 'root',
@@ -37,14 +37,6 @@ export class SupplyPointImportService {
                 },
             },
         )
-
-    public setActiveAskForOfferId = (askForOfferId: string) => this.apollo
-        .mutate<any>({
-            mutation: setActiveAskForOfferIdMutation,
-            variables: {
-                askForOfferId,
-            },
-        })
 
     public setActiveSupplyPoint = (supplyPoint: ISupplyPoint) => this.apollo
         .mutate<any>({
@@ -101,11 +93,33 @@ export class SupplyPointImportService {
             },
         ).valueChanges
 
+    public mapPersonalInfoToPersonalInfoInput = (personalData: IPersonalData): IPersonalDataInput =>  {
+        const omitTypename = (key, value) => (key === '__typename' ? undefined : value);
+        return JSON.parse(JSON.stringify({
+            email: personalData.email,
+            address1: personalData.address1,
+            address2: personalData.address2,
+            bankAccountNumber: personalData.bankAccountNumber,
+            bankCode: personalData.bankCode,
+            deposit: personalData.deposit,
+            birthDate: personalData.birthDate,
+            depositPaymentTypeId: personalData.depositPaymentType?.code,
+            dic: personalData.dic,
+            ico: personalData.ico,
+            name: personalData.name,
+            phone: personalData.phone,
+            signatoryName: personalData.signatoryName,
+            signatoryPosition: personalData.signatoryPosition,
+            signatorySurname: personalData.signatorySurname,
+        }, omitTypename));
+    }
+
     public mapSupplyPointToSupplyPointInput = (supplyPoint: ISupplyPoint): ISupplyPointImportInput =>  {
         const omitTypename = (key, value) => (key === '__typename' ? undefined : value);
         supplyPoint = JSON.parse(JSON.stringify(supplyPoint), omitTypename);
         const personalData = supplyPoint.contract?.personalData;
         return {
+            id: supplyPoint.id,
             address: supplyPoint.address,
             expirationDate: supplyPoint.expirationDate,
             name: supplyPoint.name,
@@ -115,23 +129,7 @@ export class SupplyPointImportService {
             subjectTypeId: supplyPoint.subject?.code,
             supplierId: supplyPoint.supplier?.id,
             ...(!!personalData) && {
-                personalData: {
-                    email: personalData.email,
-                    address1: personalData.address1,
-                    address2: personalData.address2,
-                    bankAccountNumber: personalData.bankAccountNumber,
-                    bankCode: personalData.bankCode,
-                    deposit: personalData.deposit,
-                    birthDate: personalData.birthDate,
-                    depositPaymentTypeId: personalData.depositPaymentType?.code,
-                    dic: personalData.dic,
-                    ico: personalData.ico,
-                    name: personalData.name,
-                    phone: personalData.phone,
-                    signatoryName: personalData.signatoryName,
-                    signatoryPosition: personalData.signatoryPosition,
-                    signatorySurname: personalData.signatorySurname,
-                },
+                personalData: this.mapPersonalInfoToPersonalInfoInput(personalData),
             },
             ...(!!supplyPoint.identificationNumber && supplyPoint.commodityType === CommodityType.POWER) && {
                 supplyPointPowerAttributes: {

@@ -5,7 +5,6 @@ import { supplyPointFragment } from './supply';
 export const getCreateUserQuery = gql`
     query {
         createUser @client {
-            activeAskForOfferId,
             activeSupplyPoint {
                 id,
                 name,

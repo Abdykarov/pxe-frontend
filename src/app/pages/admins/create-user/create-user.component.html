@@ -1,3 +1,18 @@
+<ng-template #templateIcons let-data="data">
+    <lnd-button
+        icon="icon--edit"
+        type="icon"
+        variant="icon"
+        (action)="editSupplyPoint(data.id)">
+    </lnd-button>
+    <lnd-button
+        type="icon"
+        icon="icon--delete"
+        variant="icon"
+        (action)="deleteSupplyPointImport(data.id)">
+    </lnd-button>
+</ng-template>
+
 <pxe-layout-container [pageTitle]="title">
     <div class="row">
         <div *ngIf="configStepper"
@@ -7,23 +22,13 @@
         <div class="col-12">
             <div class="row">
                 <div class="col-12 col-xl-4" style="margin-top: 80px">
-                    <p class="perex">Odběrná místa</p>
-                    {{createUserFacade.activeSupplyPoint$ | async | json}}
-                    {{createUserFacade.activeAskForOfferId$ | async | json}}
-
-                    <ng-container *ngIf="supplyPointsImport$ !== null">
+                    <ng-container *ngIf="supplyPointsImport$ | async as supplyPointImport">
                         <lnd-micro-table
+                            title="Odběrná místa"
                             [data]="(supplyPointsImportMicroTableData$ | async)"
-                            (removeAction)="deleteSupplyPointImport($event)">
+                            [actionTemplates]="templateIcons">
                         </lnd-micro-table>
                     </ng-container>
-<!--                    <div class="d-flex justify-content-center ">-->
-<!--                        <lnd-button-->
-<!--                            icon="icon&#45;&#45;add-new"-->
-<!--                            type="icon"-->
-<!--                            variant="icon"-->
-<!--                        ></lnd-button>-->
-<!--                    </div>-->
                 </div>
                 <div class="col-12 col-xl-8">
                     <router-outlet></router-outlet>

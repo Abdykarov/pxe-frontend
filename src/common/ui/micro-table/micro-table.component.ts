@@ -1,8 +1,7 @@
 import {
     Component,
-    EventEmitter,
     Input,
-    Output,
+    TemplateRef,
 } from '@angular/core';
 
 import { IMicroTableData } from './micro-table/item.model';
@@ -19,9 +18,6 @@ export class MicroTableComponent {
     @Input()
     public data: IMicroTableData[];
 
-    @Output()
-    public updateAction: EventEmitter<string> = new EventEmitter<string>();
-
-    @Output()
-    public removeAction: EventEmitter<string> = new EventEmitter<string>();
+    @Input()
+    public actionTemplates: TemplateRef<any>;
 }

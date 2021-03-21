@@ -4,18 +4,34 @@
             Zadejte údaje k odběrnému místu
         </p>
     </div>
-    <div class="col-12">
-        <pxe-supply-point-form
-            [editMode]="editMode"
-            [withoutValidator]="true"
-            [formFields]="formFields"
-            [formLoading]="formLoading"
-            [formSent]="formSent"
-            [formValues]="{}"
-            [globalError]="globalError"
-            [fieldError]="fieldError"
-            submitLabel="Další"
-            (submitAction)="save($event)"
-        ></pxe-supply-point-form>
-    </div>
+    <ng-container *ngIf="(queryParams$ | async).askForOfferId as activeAskForOfferId">
+        <div class="col-12" *ngIf="(activeSupplyPoint$ | async) as activeSupplyPoint">
+            <pxe-supply-point-form
+                [editMode]="editMode"
+                [withoutValidator]="true"
+                [formFields]="formFields"
+                [formLoading]="formLoading"
+                [formSent]="formSent"
+                [formValues]="activeSupplyPoint"
+                [globalError]="globalError"
+                [fieldError]="fieldError"
+                submitLabel="Další"
+                (submitAction)="save($event, activeAskForOfferId, activeSupplyPoint)"
+            ></pxe-supply-point-form>
+        </div>
+        <div class="col-12" *ngIf="!(queryParams$ | async)?.supplyPointId">
+            <pxe-supply-point-form
+                [editMode]="editMode"
+                [withoutValidator]="true"
+                [formFields]="formFields"
+                [formLoading]="formLoading"
+                [formSent]="formSent"
+                [formValues]="{}"
+                [globalError]="globalError"
+                [fieldError]="fieldError"
+                submitLabel="Další"
+                (submitAction)="save($event, activeAskForOfferId, null)"
+            ></pxe-supply-point-form>
+        </div>
+    </ng-container>
 </div>

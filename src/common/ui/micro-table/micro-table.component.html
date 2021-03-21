@@ -4,7 +4,8 @@
     </div>
     <div class="micro-table--row" *ngFor="let item of data">
         {{item.label}}
-        <span (click)="updateAction.emit(item.id)">EDIT</span>
-        <span (click)="removeAction.emit(item.id)">REMOVE</span>
+        <ng-container *ngIf="actionTemplates">
+            <ng-container *ngTemplateOutlet="actionTemplates; context: {data: item}"></ng-container>
+        </ng-container>
     </div>
 </div>

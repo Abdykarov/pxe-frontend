@@ -5,12 +5,8 @@ import {
 } from '@angular/router';
 import { Component } from '@angular/core';
 
-import * as R from 'ramda';
 import { Observable } from 'rxjs';
-import {
-    map,
-    takeUntil,
-} from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { CreateUserFacade } from './create-user.facade';
@@ -32,7 +28,6 @@ export class CreateUserComponent extends AbstractComponent {
     public supplyPointsImport$: Observable<ISupplyPoint[]> = null;
     public supplyPointsImportMicroTableData$: Observable<IMicroTableData[]> = null;
 
-    public askForOfferId = null;
     public title: string = null;
     public configStepper: IStepperProgressItem[] = [];
 
@@ -47,12 +42,14 @@ export class CreateUserComponent extends AbstractComponent {
             .pipe(takeUntil(this.destroy$))
             .subscribe(event => {
                 if (event instanceof NavigationEnd) {
-                    if (this.supplyPointsImport$ === null) {
-                        const askForOfferId = this.route.snapshot.firstChild.queryParams['askForOfferId'];
-                        this.askForOfferId = askForOfferId;
-                        this.supplyPointsImport$ = this.createUserFacade.findSupplyPointImports$(askForOfferId);
-                        this.setActiveAskForOfferId(askForOfferId);
-                        this.setSupplyPointsImportMicroTableData$();
+                    const {askForOfferId, supplyPointId = null} = this.route.snapshot.firstChild.queryParams;
+                    if (askForOfferId) {
+                        const [
+                            supplyPointsImport$,
+                            supplyPointsImportMicroTableData$,
+                        ] = this.createUserFacade.setObservableByQueryParams$(askForOfferId, supplyPointId);
+                        this.supplyPointsImport$ = <Observable<ISupplyPoint[]>>supplyPointsImport$;
+                        this.supplyPointsImportMicroTableData$ = <Observable<IMicroTableData[]>>supplyPointsImportMicroTableData$;
                     }
                     const step = this.route.snapshot.firstChild.data['step'];
                     this.title = this.route.snapshot.firstChild.data['title'];
@@ -61,24 +58,19 @@ export class CreateUserComponent extends AbstractComponent {
             });
     }
 
-    public setSupplyPointsImportMicroTableData$() {
-        this.supplyPointsImportMicroTableData$ = this.supplyPointsImport$.pipe(
-            map(
-                R.map((supplyPoint: ISupplyPoint) => ({id: supplyPoint.id, label: supplyPoint.name || supplyPoint.identificationNumber })),
-            ),
-        );
-    }
-
-    public setActiveAskForOfferId(askForOfferId: string) {
-        console.log(askForOfferId);
-        this.supplyPointImportService.setActiveAskForOfferId(askForOfferId).pipe(
-            takeUntil(this.destroy$),
-        ).subscribe();
+    public editSupplyPoint(supplyPointId: string) {
+        this.supplyPointImportService.setActiveSupplyPoint(null).subscribe();
+        this.router.navigate([this.ROUTES.ROUTER_ASK_FOR_OFFER]).then( _ => {
+            this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
+                queryParams: {
+                    askForOfferId: this.createUserFacade.getAskForOfferId(),
+                    supplyPointId,
+                },
+            });
+        });
     }
 
     public deleteSupplyPointImport(supplyPointImportId: string) {
-        this.supplyPointImportService.deleteSupplyPointImportMutation(supplyPointImportId, this.askForOfferId).pipe(
-            takeUntil(this.destroy$),
-        ).subscribe();
+        this.createUserFacade.deleteSupplyPointImport(supplyPointImportId, this.createUserFacade.getAskForOfferId());
     }
 }

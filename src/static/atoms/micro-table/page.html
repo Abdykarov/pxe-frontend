@@ -1,3 +1,16 @@
+<ng-template #templateIcons let-row="row">
+    <lnd-button
+        type="icon"
+        icon="icon--delete"
+        variant="icon"
+        title="Zamítnout"
+    ></lnd-button>
+    <lnd-button
+        icon="icon--edit"
+        type="icon">
+    </lnd-button>
+</ng-template>
+
 <div class="row">
     <div class="col">
         <lnd-breadcrumb [breadcrumbItems]="breadcrumbItemsSimple"></lnd-breadcrumb>
@@ -8,7 +21,6 @@
     <lnd-micro-table
         title="Odběrná místa"
         [data]="rows"
-        (removeAction)="action($event)"
-        (updateAction)="action($event)"
+        [actionTemplates]="templateIcons"
     ></lnd-micro-table>
 </div>

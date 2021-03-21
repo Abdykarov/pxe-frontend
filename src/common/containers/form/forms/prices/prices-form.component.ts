@@ -29,9 +29,11 @@ export class PricesFormComponent extends AbstractFormComponent implements OnChan
     }
 
     ngOnChanges(changes: SimpleChanges) {
+        super.ngOnChanges(changes);
+        console.log(changes);
         if (changes && changes.supplyPoint) {
             this.prefillFormData();
-            this.setForm();
+            setTimeout( _ => this.setForm());
         }
     }
 

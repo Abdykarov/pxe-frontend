@@ -8,6 +8,7 @@ import { CreateUserComponent } from './create-user.component';
 import { CreateUserRoutingModule } from './create-user-routing.module';
 import { LayoutContainerModule } from 'src/common/containers/layout-container/layout-container.module';
 import { MicroTableModule } from 'src/common/ui/micro-table/micro-table.module';
+import { PersonalInfoFormModule } from 'src/common/containers/form/forms/personal-info/personal-info-form.module';
 import { PlaceloaderModule } from 'src/common/ui/placeloader/placeloader.module';
 import { PricesComponent } from './prices/prices.component';
 import { PricesFormModule } from 'src/common/containers/form/forms/prices/prices-form.module';
@@ -31,6 +32,7 @@ import { SupplyPointFormModule } from 'src/common/containers/form/forms/supply-p
         CreateUserRoutingModule,
         LayoutContainerModule,
         MicroTableModule,
+        PersonalInfoFormModule,
         PlaceloaderModule,
         PricesFormModule,
         ProgressBarModule,

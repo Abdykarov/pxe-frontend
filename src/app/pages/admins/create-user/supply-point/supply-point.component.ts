@@ -5,7 +5,6 @@ import {
 import {
     ChangeDetectorRef,
     Component,
-    OnInit,
 } from '@angular/core';
 
 import * as R from 'ramda';
@@ -15,8 +14,11 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { AskForOfferService} from 'src/common/graphql/services/ask-for-offer.service';
-import {CommodityType, ISupplyPoint} from 'src/common/graphql/models/supply.model';
+import {
+    CommodityType,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
+import { CreateUserFacade } from 'src/app/pages/admins/create-user/create-user.facade';
 import { formFields} from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { IFieldError} from 'src/common/containers/form/models/form-definition.model';
 import { ISupplyPointImportInput} from 'src/common/graphql/models/supply-point-import.model';
@@ -26,14 +28,16 @@ import {
 } from 'src/common/utils';
 import { SUPPLY_POINT_EDIT_TYPE} from 'src/app/app.constants';
 import { SupplyPointImportService } from 'src/common/graphql/services/supply-point-import.service';
-import {CreateUserFacade} from '../create-user.facade';
 
 @Component({
     selector: 'pxe-create-user-supply-point',
     templateUrl: './supply-point.component.html',
     styleUrls: ['./supply-point.component.scss'],
 })
-export class SupplyPointComponent extends AbstractComponent implements OnInit {
+export class SupplyPointComponent extends AbstractComponent {
+    public activeSupplyPoint$ = this.createUserFacade.activeSupplyPoint$;
+    public queryParams$ = this.createUserFacade.queryParams$;
+
     public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
     public fieldError: IFieldError = {};
     public formFields = formFields;
@@ -43,8 +47,6 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public supplyPointImport: any = null;
     public isIndividual = false;
 
-   // public activeAskForOfferId$ = this.createUserFacade.activeAskForOfferId$;
-
     constructor(
         private cd: ChangeDetectorRef,
         private route: ActivatedRoute,
@@ -53,11 +55,13 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
         private supplyPointImportService: SupplyPointImportService,
     ) {
         super();
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.formFields.controls = removeRequiredValidators(this.formFields.controls);
     }
 
-    public save = (supplyPointFormData, askForOfferId: string = '37b5185e-6f62-43c5-9fc8-2c8776791080') => {
+    public save = (supplyPointFormData, askForOfferId, activeSupplyPoint: ISupplyPoint) => {
         const supplyPoint: ISupplyPointImportInput = R.pick([
+            'id',
             'supplierId',
             'name',
             'address',
@@ -86,6 +90,10 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                 'annualConsumptionUnit',
             ], supplyPointFormData);
         }
+        if (activeSupplyPoint?.contract?.personalData) {
+            supplyPoint.personalData =
+                this.supplyPointImportService.mapPersonalInfoToPersonalInfoInput(activeSupplyPoint.contract.personalData);
+        }
 
         this.supplyPointImportService.createSupplyPointImport(askForOfferId, supplyPoint)
             .pipe(
@@ -96,9 +104,11 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
             )
             .subscribe(
                 (newSupplyPoint: ISupplyPoint) => {
-                    this.supplyPointImportService.setActiveSupplyPoint(newSupplyPoint).pipe(takeUntil(this.destroy$)).subscribe();
+                    this.supplyPointImportService.setActiveSupplyPoint(newSupplyPoint).subscribe();
                     this.formLoading = false;
-                    this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_RECAPITULATION]);
+                    this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_RECAPITULATION], {
+                        queryParams: this.createUserFacade.queryParamsSubject$.getValue(),
+                    });
                 },
                 (error) => {
                     this.formLoading = false;

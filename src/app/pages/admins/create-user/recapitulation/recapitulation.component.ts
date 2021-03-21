@@ -20,10 +20,12 @@ import {
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AskForOfferService } from 'src/common/graphql/services/ask-for-offer.service';
 import { CODE_LIST_TYPES } from 'src/app/app.constants';
+import { CreateUserFacade } from 'src/app/pages/admins/create-user/create-user.facade';
 import { formFields } from 'src/common/containers/form/forms/personal-info/personal-info-form.config';
 import {
     ICodelistOptions,
     ISupplyPoint,
+    SubjectType,
 } from 'src/common/graphql/models/supply.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
 import { ISupplyPointImportInput } from 'src/common/graphql/models/supply-point-import.model';
@@ -41,8 +43,6 @@ import { SupplyService } from 'src/common/graphql/services/supply.service';
     styleUrls: ['./recapitulation.component.scss'],
 })
 export class RecapitulationComponent extends AbstractComponent implements OnInit {
-    public supplyPoint = null;
-    public askForOfferId = this.route.snapshot.queryParams.askForOfferId;
     public fieldError: IFieldError = {};
     public formLoading = false;
     public formSent = false;
@@ -50,13 +50,8 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     public codeLists = null;
     public formFields = formFields;
 
-    public supplyPoint$: Observable<ISupplyPoint> = this.supplyPointImportService.
-        findSupplyPointImports(this.askForOfferId)
-            .pipe(
-                takeUntil(this.destroy$),
-                map(({data}) => data.findSupplyPointImport),
-            );
-
+    public subjectType = SubjectType;
+    public supplyPoint$: Observable<ISupplyPoint> = this.createUserFacade.activeSupplyPoint$;
     public codeLists$: Observable<ICodelistOptions> = this.supplyService.findCodelistsByTypes(CODE_LIST_TYPES, 'cs')
         .pipe(
             takeUntil(this.destroy$),
@@ -66,23 +61,25 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     constructor(
         private askForOfferService: AskForOfferService,
         private cd: ChangeDetectorRef,
+        private createUserFacade: CreateUserFacade,
         private route: ActivatedRoute,
         private router: Router,
         private supplyService: SupplyService,
         private supplyPointImportService: SupplyPointImportService,
     ) {
         super();
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.formFields.controls = removeRequiredValidators(this.formFields.controls);
     }
 
     ngOnInit () {
-        combineLatest([this.codeLists$, this.supplyPoint$])
+        super.ngOnInit();
+        this.codeLists$
             .pipe(
                 takeUntil(this.destroy$),
             )
             .subscribe(
-                ([codeLists, supplyPoint]) => {
-                    this.supplyPoint = supplyPoint;
+                (codeLists) => {
                     this.codeLists = codeLists;
                     this.cd.markForCheck();
                 },
@@ -95,28 +92,30 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             );
     }
 
-    public submit = (data) => {
-        const supplyPoint: ISupplyPointImportInput = this.supplyPointImportService.mapSupplyPointToSupplyPointInput(this.supplyPoint);
-        supplyPoint.personalData = data;
+    public submit = (personalData, activeSupplyPoint: ISupplyPoint) => {
+        const supplyPoint: ISupplyPointImportInput = this.supplyPointImportService.mapSupplyPointToSupplyPointInput(activeSupplyPoint);
+        supplyPoint.personalData = personalData;
         delete supplyPoint?.address['__typename'];
 
         this.supplyPointImportService.createSupplyPointImport(
-                this.askForOfferId,
+                this.createUserFacade.getAskForOfferId(),
                 supplyPoint,
             )
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(_ => {
+            .pipe(
+                takeUntil(this.destroy$),
+                map(
+                    ({data}) => data.createSupplyPointImport,
+                ),
+            )
+            .subscribe(newSupplyPoint => {
+                this.supplyPointImportService.setActiveSupplyPoint(newSupplyPoint).subscribe();
                 this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_PRICES], {
-                    queryParams: {
-                        askForOfferId: this.askForOfferId,
-                    },
+                    queryParams: this.createUserFacade.queryParamsSubject$.getValue(),
                 });
             });
     }
 
     public backStep = () => this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
-        queryParams: {
-            askForOfferId: this.askForOfferId,
-        },
+        queryParams: this.createUserFacade.queryParamsSubject$.getValue(),
     })
 }
