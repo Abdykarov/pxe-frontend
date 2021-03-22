@@ -22,7 +22,6 @@ import { IQueryParams } from './models/create-user.model';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { SupplyPointImportService } from 'src/common/graphql/services/supply-point-import.service';
-import {IShowModal} from '../../../../common/containers/modal/modals/model/modal.model';
 
 @Injectable({
     providedIn: 'root',
