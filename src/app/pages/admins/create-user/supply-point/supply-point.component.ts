@@ -96,11 +96,7 @@ export class SupplyPointComponent extends AbstractComponent {
                 this.supplyPointImportService.mapPersonalInfoToPersonalInfoInput(activeSupplyPoint.contract.personalData);
         }
 
-        console.log(activeSupplyPoint);
-        supplyPoint.importPriceTotalPerYear = activeSupplyPoint?.importPriceTotalPerYear;
-        supplyPoint.importPricePerKwPowerVT = activeSupplyPoint?.importPricePerKwPowerVT;
-        supplyPoint.importPricePerKwPowerNT = activeSupplyPoint?.importPricePerKwPowerNT;
-        supplyPoint.importPricePerKwGas = activeSupplyPoint?.importPricePerKwGas;
+        this.supplyPointImportService.mapPricesToSupplyPointImport(supplyPoint, activeSupplyPoint);
 
         this.supplyPointImportService.createSupplyPointImport(askForOfferId, supplyPoint, !activeSupplyPoint)
             .pipe(

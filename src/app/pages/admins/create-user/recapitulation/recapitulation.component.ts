@@ -8,10 +8,7 @@ import {
     OnInit,
 } from '@angular/core';
 
-import {
-    combineLatest,
-    Observable,
-} from 'rxjs';
+import { Observable } from 'rxjs';
 import {
     map,
     takeUntil,
@@ -28,6 +25,7 @@ import {
     SubjectType,
 } from 'src/common/graphql/models/supply.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
+import { IPersonalDataInput } from 'src/common/graphql/models/personal-data.model';
 import { ISupplyPointImportInput } from 'src/common/graphql/models/supply-point-import.model';
 import {
     parseGraphQLErrors,
@@ -92,13 +90,10 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
             );
     }
 
-    public submit = (personalData, activeSupplyPoint: ISupplyPoint) => {
+    public submit = (personalData: IPersonalDataInput, activeSupplyPoint: ISupplyPoint) => {
         const supplyPoint: ISupplyPointImportInput = this.supplyPointImportService.mapSupplyPointToSupplyPointInput(activeSupplyPoint);
         supplyPoint.personalData = personalData;
-        supplyPoint.importPricePerKwPowerVT = activeSupplyPoint.importPricePerKwPowerVT;
-        supplyPoint.importPricePerKwPowerNT = activeSupplyPoint.importPricePerKwPowerNT;
-        supplyPoint.importPricePerKwGas = activeSupplyPoint.importPricePerKwGas;
-        supplyPoint.importPriceTotalPerYear = activeSupplyPoint.importPriceTotalPerYear;
+        this.supplyPointImportService.mapPricesToSupplyPointImport(supplyPoint, activeSupplyPoint);
         delete supplyPoint?.address['__typename'];
 
         this.supplyPointImportService.createSupplyPointImport(

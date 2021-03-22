@@ -17,6 +17,7 @@ import { AbstractComponent } from 'src/common/abstract.component';
 import { AskForOfferService } from 'src/common/graphql/services/ask-for-offer.service';
 import { CreateUserFacade } from 'src/app/pages/admins/create-user/create-user.facade';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
+import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { ISupplyPointImportInput } from 'src/common/graphql/models/supply-point-import.model';
 import { formFields } from 'src/common/containers/form/forms/prices/prices-form.config';
 import { parseGraphQLErrors } from 'src/common/utils';
@@ -48,7 +49,7 @@ export class PricesComponent extends AbstractComponent implements OnInit {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
 
-    public save = (formData, activeSupplyPoint) => {
+    public save = (formData, activeSupplyPoint: ISupplyPoint) => {
         const data = formData.value;
         const isOnlySave = formData.data;
         const supplyPoint: ISupplyPointImportInput = this.supplyPointImportService.mapSupplyPointToSupplyPointInput(activeSupplyPoint);
@@ -84,8 +85,9 @@ export class PricesComponent extends AbstractComponent implements OnInit {
                 });
     }
 
-    public saveAndSend = (data, activeSupplyPoint) => {
+    public saveAndSend = (data, activeSupplyPoint: ISupplyPoint) => {
         const supplyPoint: ISupplyPointImportInput = this.supplyPointImportService.mapSupplyPointToSupplyPointInput(activeSupplyPoint);
+        this.supplyPointImportService.mapPricesToSupplyPointImport(supplyPoint, data);
 
         this.supplyPointImportService.createSupplyPointImport(
             this.createUserFacade.getAskForOfferId(),

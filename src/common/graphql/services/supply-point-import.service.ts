@@ -177,4 +177,11 @@ export class SupplyPointImportService {
             importPricePerKwGas: supplyPoint?.importPricePerKwGas,
         };
     }
+
+    public mapPricesToSupplyPointImport = (supplyPoint: ISupplyPointImportInput, data: ISupplyPoint): void =>  {
+        supplyPoint.importPriceTotalPerYear = data?.importPriceTotalPerYear;
+        supplyPoint.importPricePerKwPowerVT = data?.importPricePerKwPowerVT;
+        supplyPoint.importPricePerKwPowerNT = data?.importPricePerKwPowerNT;
+        supplyPoint.importPricePerKwGas = data?.importPricePerKwGas;
+    }
 }
