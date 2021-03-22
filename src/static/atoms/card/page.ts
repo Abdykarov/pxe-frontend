@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
+
 import { IBreadcrumbItems } from 'src/common/ui/breadcrumb/models/breadcrumb.model';
-import { defaultTileCard } from './config';
+import {
+    defaultTileCard,
+    defaultBlogCard,
+} from './config';
 
 @Component({
     templateUrl: './page.html',
@@ -8,6 +12,7 @@ import { defaultTileCard } from './config';
 
 export class CardPageComponent {
     public tileCard = defaultTileCard;
+    public blogCard = defaultBlogCard;
     public breadcrumbItemsSimple: IBreadcrumbItems;
     public goSomewhere() {
         alert('SOMEWHERE');

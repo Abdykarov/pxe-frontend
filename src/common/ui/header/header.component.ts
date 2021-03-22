@@ -62,6 +62,9 @@ export class HeaderComponent extends AbstractComponent implements OnInit {
     public bestPricesInTheWorldAction: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()
+    public blogAction: EventEmitter<any> = new EventEmitter<any>();
+
+    @Output()
     public logoutAction: EventEmitter<any> = new EventEmitter<any>();
 
     @Output()

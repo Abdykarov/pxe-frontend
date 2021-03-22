@@ -129,6 +129,33 @@ export class LandingComponent extends AbstractComponent {
         },
     ];
 
+    public cardBlogConfig: ICardData[] = [
+        {
+            img: 'assets/images/demo/card-default.jpg',
+            imgAlt: 'Zajima-vas-puvod-energie-kterou-hodlate-odebirat',
+            imgTitle: 'Zajímá vás původ energie, kterou hodláte odebírat?',
+            textPrefix: '15. 2. 2021',
+            title: 'Zajímá vás původ energie, kterou hodláte odebírat?',
+            content: 'S aplikací parc4u můžete všechny dodavatele elektřiny a plynu ovládat z jednoho místa.',
+        },
+        {
+            img: 'assets/images/demo/card-default.jpg',
+            imgAlt: 'spravuji-nemovitosti',
+            imgTitle: 'S-aplikaci-parc4u-muzete-vsechny-dodavatele-elektriny',
+            textPrefix: '24. 1. 2021',
+            title: 'S aplikací parc4u můžete všechny dodavatele elektřiny',
+            content: 'S aplikací parc4u můžete všechny dodavatele elektřiny a plynu ovládat z jednoho místa.',
+        },
+        {
+            img: 'assets/images/demo/card-default.jpg',
+            imgAlt: 'porovnejte-nabidky-vybranych-dodavatelu',
+            imgTitle: 'Porovnejte nabídky vybraných dodavatelů',
+            textPrefix: '3. 1. 2021',
+            title: 'Porovnejte nabídky vybraných dodavatelů',
+            content: 'S aplikací parc4u můžete všechny dodavatele elektřiny a plynu ovládat z jednoho místa.',
+        },
+    ];
+
     public tileCard = {
         imgSrc: 'assets/images/landing-page/our-help-cottage.png',
         imgAlt: 'Card image',
