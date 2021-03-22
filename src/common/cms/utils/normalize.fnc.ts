@@ -1,4 +1,5 @@
 import * as R from 'ramda';
+import * as R_ from 'ramda-extension';
 
 import { flatData } from './flat-data.fnc';
 import { isFlatDataArray } from './is-flat-data-array.fnc';
@@ -10,8 +11,8 @@ export const normalize = R.cond([
         data => data,
     ],
     [
-        data => !!data['img'],
-        data => ({
+        data => !!data['img'] && R_.isArray(data['img']),
+        data => normalize({
             ...data,
             img: data.img[0].url,
         }),

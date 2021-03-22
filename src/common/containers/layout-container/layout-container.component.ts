@@ -23,6 +23,9 @@ export class LayoutContainerComponent {
     @Input()
     public pageTitle: string;
 
+    @Input()
+    public withHeader = true;
+
     public showBanner = false;
     public logoutRequired = false;
     public LogoutRequired = ILogoutRequired;

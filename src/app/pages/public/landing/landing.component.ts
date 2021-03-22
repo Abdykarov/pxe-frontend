@@ -42,6 +42,7 @@ import { FaqService } from 'src/app/services/faq.service';
 import { GTMService } from 'src/app/services/gtm.service';
 import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
 import { IAskForOffer } from 'src/common/cms/models/ask-for-offer';
+import { ICardData } from 'src/common/ui/card/models/data.model';
 import { ICloseModalData } from 'src/common/containers/modal/modals/model/modal.model';
 import {
     IFieldError,
@@ -86,6 +87,9 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
     @ViewChild('bestPricesInTheWorld', { static: true })
     public bestPricesInTheWorld: ElementRef;
 
+    @ViewChild('blog', { static: true })
+    public blog: ElementRef;
+
     public activeCommodityTypeCarouselCompare = CommodityType.POWER;
     public CommodityType = CommodityType;
     public frequentedQuestions: IAccordionItem[] = [];
@@ -100,6 +104,7 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
     public readonly askForOffer: IAskForOffer = this.route.snapshot.data.askForOffer;
     public readonly landingPage: ILandingPage = this.route.snapshot.data.landingPage;
     public readonly signUp: ISignUp = this.route.snapshot.data.signUp;
+    public readonly articles: ICardData[] = this.route.snapshot.data.articles;
 
     public isMoreThanMdResolution = false;
 
@@ -163,6 +168,9 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
                 if (scrollTo === SCROLL_TO.HELP) {
                     scrollToElementFnc(this.help.nativeElement, margin);
                 }
+                if (scrollTo === SCROLL_TO.BLOG) {
+                    scrollToElementFnc(this.blog.nativeElement, margin);
+                }
                 if (scrollTo === SCROLL_TO.HOW_IT_WORKS) {
                     scrollToElementFnc(this.howItWorks.nativeElement, margin);
                 }
@@ -206,5 +214,14 @@ export class LandingComponent extends AbstractFaqComponent implements OnDestroy 
     public routerToFaq = (evt) => {
         evt.preventDefault();
         this.router.navigate([CONSTS.PATHS.FAQ]);
+    }
+
+    public routerToAllArticle = (evt) => {
+        evt.preventDefault();
+        this.router.navigate([CONSTS.PATHS.BLOG, 'all']);
+    }
+
+    public showDetailArticle(article: ICardData): void {
+        this.router.navigate([this.ROUTES.ROUTER_BLOG, 'all', article.id]);
     }
 }
