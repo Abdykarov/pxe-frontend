@@ -69,6 +69,10 @@ export class PricesComponent extends AbstractComponent implements OnInit {
                                 askForOfferId: this.createUserFacade.getAskForOfferId(),
                             },
                         });
+                    } else {
+                        this.router.navigate([this.ROUTES.ROUTER_ASK_FOR_OFFER_IN_PROGRESS]).then(__ => {
+                            this.createUserFacade.showInfoAboutSupplyPointAdded();
+                        });
                     }
                 },
                 (error) => {
@@ -93,15 +97,15 @@ export class PricesComponent extends AbstractComponent implements OnInit {
                 }),
                 takeUntil(this.destroy$),
             ).subscribe(_ => {
-                this.router.navigate([this.ROUTES.ROUTER_ASK_FOR_OFFER_PROCESSED]);
+                    this.router.navigate([this.ROUTES.ROUTER_ASK_FOR_OFFER_PROCESSED]);
                 },
-            (error) => {
-                this.formLoading = false;
-                const { fieldError, globalError } = parseGraphQLErrors(error);
-                this.fieldError = fieldError;
-                this.globalError = globalError;
-                this.cd.markForCheck();
-            });
+                (error) => {
+                    this.formLoading = false;
+                    const { fieldError, globalError } = parseGraphQLErrors(error);
+                    this.fieldError = fieldError;
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
+                });
     }
 
     public backStep = () => this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_RECAPITULATION], {

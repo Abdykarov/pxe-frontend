@@ -1,4 +1,5 @@
 import {
+    ChangeDetectorRef,
     Component,
     Input,
     OnChanges,
@@ -23,6 +24,7 @@ export class PricesFormComponent extends AbstractFormComponent implements OnChan
     public supplyPoint: ISupplyPoint;
 
     constructor(
+        private cd: ChangeDetectorRef,
         protected fb: FormBuilder,
     ) {
         super(fb);
@@ -35,6 +37,7 @@ export class PricesFormComponent extends AbstractFormComponent implements OnChan
             setTimeout( _ => {
                 this.prefillFormData();
                 this.setForm();
+                this.cd.markForCheck();
             });
         }
     }

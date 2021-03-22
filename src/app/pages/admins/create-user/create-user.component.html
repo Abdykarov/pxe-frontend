@@ -27,14 +27,6 @@
                         [data]="(supplyPointsImportMicroTableData$ | async)"
                         [actionTemplates]="templateIcons">
                     </lnd-micro-table>
-                    <div class="d-flex justify-content-center ">
-                        <lnd-button
-                            icon="icon--add-new"
-                            type="icon"
-                            variant="icon"
-                            (action)="routerToNewSupplyPoint()"
-                        ></lnd-button>
-                    </div>
                 </div>
                 <div class="col-12"
                      [class.col-xl-9]="supplyPointImport.length !== 0"

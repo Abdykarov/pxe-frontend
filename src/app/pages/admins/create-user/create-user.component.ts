@@ -35,7 +35,6 @@ export class CreateUserComponent extends AbstractComponent {
         private route: ActivatedRoute,
         private router: Router,
         public createUserFacade: CreateUserFacade,
-        private supplyPointImportService: SupplyPointImportService,
     ) {
         super();
         this.router.events
@@ -45,7 +44,7 @@ export class CreateUserComponent extends AbstractComponent {
                     const {askForOfferId, supplyPointId = null} = this.route.snapshot.firstChild.queryParams;
                     if (askForOfferId) {
                         if (!supplyPointId) {
-                            this.supplyPointImportService.setActiveSupplyPoint(null).subscribe();
+                            this.createUserFacade.setActiveSupplyPoint(null);
                         }
 
                         const [
@@ -55,7 +54,7 @@ export class CreateUserComponent extends AbstractComponent {
                         this.supplyPointsImport$ = <Observable<ISupplyPoint[]>>supplyPointsImport$;
                         this.supplyPointsImportMicroTableData$ = <Observable<IMicroTableData[]>>supplyPointsImportMicroTableData$;
                     } else {
-                        this.router.navigate([this.ROUTES.ROUTER_ASK_FOR_OFFER]);
+                        this.router.navigate([this.ROUTES.ROUTER_ASK_FOR_OFFER_PROCESSED]);
                     }
                     const step = this.route.snapshot.firstChild.data['step'];
                     this.title = this.route.snapshot.firstChild.data['title'];
@@ -65,7 +64,7 @@ export class CreateUserComponent extends AbstractComponent {
     }
 
     public editSupplyPoint(supplyPointId: string) {
-        this.supplyPointImportService.setActiveSupplyPoint(null).subscribe();
+        this.createUserFacade.setActiveSupplyPoint(null);
         this.router.navigate([this.ROUTES.ROUTER_ASK_FOR_OFFER]).then( _ => {
             this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
                 queryParams: {
@@ -78,13 +77,5 @@ export class CreateUserComponent extends AbstractComponent {
 
     public deleteSupplyPointImport(supplyPoint: ISupplyPoint) {
         this.createUserFacade.confirmDeleteSupplyPointImport(supplyPoint);
-    }
-
-    public routerToNewSupplyPoint() {
-        this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
-            queryParams: {
-                askForOfferId: this.createUserFacade.queryParamsSubject$.getValue().askForOfferId,
-            },
-        });
     }
 }

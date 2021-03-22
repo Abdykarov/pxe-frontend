@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
@@ -12,12 +13,16 @@ import {
     Observable,
 } from 'rxjs';
 
-import { CONSTS } from 'src/app/app.constants';
+import {
+    CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
 import { IMicroTableData } from 'src/common/ui/micro-table/micro-table/item.model';
 import { IQueryParams } from './models/create-user.model';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { SupplyPointImportService } from 'src/common/graphql/services/supply-point-import.service';
+import {IShowModal} from '../../../../common/containers/modal/modals/model/modal.model';
 
 @Injectable({
     providedIn: 'root',
@@ -32,8 +37,9 @@ export class CreateUserFacade {
     public supplyPointsImportMicroTableData$: Observable<IMicroTableData[]> = null;
 
     constructor(
-        private supplyPointImportService: SupplyPointImportService,
         private modalsService: ModalService,
+        private router: Router,
+        private supplyPointImportService: SupplyPointImportService,
     ) {
         this.activeSupplyPoint$ = this.getCreateUser$.pipe(map(R.prop('activeSupplyPoint')));
 
@@ -48,6 +54,14 @@ export class CreateUserFacade {
             )
             .subscribe(modal => {
                 if (modal.confirmed) {
+                    if (this.getSupplyPointId() === modal.data.id) {
+                        this.router.navigate([ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
+                            queryParams: {
+                                askForOfferId: this.queryParamsSubject$.getValue().askForOfferId,
+                            },
+                        });
+                    }
+
                     this.deleteSupplyPointImport(modal.data.id, this.getAskForOfferId());
                 }
                 this.modalsService.closeModalData$.next(null);
@@ -74,9 +88,9 @@ export class CreateUserFacade {
                             const activeSupplyPoint: ISupplyPoint = R.find(
                                 R.propEq('id', supplyPointId),
                             )(supplyPoints);
-                            this.supplyPointImportService.setActiveSupplyPoint(activeSupplyPoint).subscribe();
+                            this.setActiveSupplyPoint(activeSupplyPoint);
                         } else {
-                            this.supplyPointImportService.setActiveSupplyPoint(null).subscribe();
+                            this.setActiveSupplyPoint(null);
                         }
                         return supplyPoints;
                     },
@@ -109,6 +123,24 @@ export class CreateUserFacade {
             });
     }
 
+    public showInfoAboutSupplyPointAdded = (): void => {
+        this.modalsService
+            .showModal$.next({
+            component: 'ConfirmModalComponent',
+            modalType: CONSTS.MODAL_TYPE.CONFIRM_INFO_SUPPLY_POINT_IMPORT_ADDED,
+            instanceData: {
+                confirmText:
+                    `Faktura byla uložena. Najdete ji v sekci rozpracované.`,
+                titleConfirm: 'OK',
+                showClose: false,
+                showCloseButton: false,
+            },
+            withoutScroll: true,
+        });
+    }
+
+    public setActiveSupplyPoint = (supplyPoint: ISupplyPoint) =>
+        this.supplyPointImportService.setActiveSupplyPoint(supplyPoint).subscribe()
 
     public getAskForOfferId = (): string => this.queryParamsSubject$.getValue().askForOfferId;
     public getSupplyPointId = (): string => this.queryParamsSubject$.getValue().supplyPointId;

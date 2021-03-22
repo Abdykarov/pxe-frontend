@@ -112,7 +112,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
                 ),
             )
             .subscribe(newSupplyPoint => {
-                this.supplyPointImportService.setActiveSupplyPoint(newSupplyPoint).subscribe();
+                this.createUserFacade.setActiveSupplyPoint(newSupplyPoint);
                 this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_PRICES], {
                     queryParams: this.createUserFacade.queryParamsSubject$.getValue(),
                 });

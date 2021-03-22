@@ -11,6 +11,7 @@
     </div>
     <div class="page-box">
         <pxe-personal-info-form
+            *ngIf="codeLists"
             [supplyPoint]="supplyPoint"
             [codeLists]="codeLists"
             [withPrefillFromProfile]="false"
