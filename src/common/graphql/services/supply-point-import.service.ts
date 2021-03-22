@@ -14,7 +14,11 @@ import {
     ISupplyPoint,
 } from 'src/common/graphql/models/supply.model';
 import { ISupplyPointImportInput } from 'src/common/graphql/models/supply-point-import.model';
-import {IPersonalData, IPersonalDataInput} from '../models/personal-data.model';
+import {
+    IPersonalData,
+    IPersonalDataInput,
+} from 'src/common/graphql/models/personal-data.model';
+import { omitTypeName } from 'src/common/utils';
 
 @Injectable({
     providedIn: 'root',
@@ -117,30 +121,26 @@ export class SupplyPointImportService {
             },
         ).valueChanges
 
-    public mapPersonalInfoToPersonalInfoInput = (personalData: IPersonalData): IPersonalDataInput =>  {
-        const omitTypename = (key, value) => (key === '__typename' ? undefined : value);
-        return JSON.parse(JSON.stringify({
-            email: personalData.email,
-            address1: personalData.address1,
-            address2: personalData.address2,
-            bankAccountNumber: personalData.bankAccountNumber,
-            bankCode: personalData.bankCode,
-            deposit: personalData.deposit,
-            birthDate: personalData.birthDate,
-            depositPaymentTypeId: personalData.depositPaymentType?.code,
-            dic: personalData.dic,
-            ico: personalData.ico,
-            name: personalData.name,
-            phone: personalData.phone,
-            signatoryName: personalData.signatoryName,
-            signatoryPosition: personalData.signatoryPosition,
-            signatorySurname: personalData.signatorySurname,
-        }, omitTypename));
-    }
+    public mapPersonalInfoToPersonalInfoInput = (personalData: IPersonalData): IPersonalDataInput =>  omitTypeName({
+        email: personalData.email,
+        address1: personalData.address1,
+        address2: personalData.address2,
+        bankAccountNumber: personalData.bankAccountNumber,
+        bankCode: personalData.bankCode,
+        deposit: personalData.deposit,
+        birthDate: personalData.birthDate,
+        depositPaymentTypeId: personalData.depositPaymentType?.code,
+        dic: personalData.dic,
+        ico: personalData.ico,
+        name: personalData.name,
+        phone: personalData.phone,
+        signatoryName: personalData.signatoryName,
+        signatoryPosition: personalData.signatoryPosition,
+        signatorySurname: personalData.signatorySurname,
+    })
 
     public mapSupplyPointToSupplyPointInput = (supplyPoint: ISupplyPoint): ISupplyPointImportInput =>  {
-        const omitTypename = (key, value) => (key === '__typename' ? undefined : value);
-        supplyPoint = JSON.parse(JSON.stringify(supplyPoint), omitTypename);
+        supplyPoint = omitTypeName(supplyPoint);
         const personalData = supplyPoint.contract?.personalData;
         return {
             id: supplyPoint.id,
