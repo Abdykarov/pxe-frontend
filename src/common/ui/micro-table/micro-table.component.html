@@ -1,0 +1,12 @@
+<div class="micro-table">
+    <div class="micro-table--title">
+        {{title}}
+    </div>
+    <div *ngFor="let item of data"
+         class="micro-table--row">
+        {{item.label}}
+        <ng-container *ngIf="actionTemplates">
+            <ng-container *ngTemplateOutlet="actionTemplates; context: {data: item.data}"></ng-container>
+        </ng-container>
+    </div>
+</div>

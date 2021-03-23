@@ -41,3 +41,4 @@ export * from './is-object.fnc';
 export * from './apollo-get-operation-name.fnc';
 export * from './remove-accent.fnc';
 export * from './download-file.fnc';
+export * from './omit-typename.fnc';

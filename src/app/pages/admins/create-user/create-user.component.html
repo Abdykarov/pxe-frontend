@@ -1,7 +1,40 @@
+<ng-template #templateIcons let-data="data">
+    <lnd-button
+        icon="icon--edit"
+        type="icon"
+        variant="icon"
+        (action)="editSupplyPoint(data.id)">
+    </lnd-button>
+    <lnd-button
+        type="icon"
+        icon="icon--delete"
+        variant="icon"
+        (action)="deleteSupplyPointImport(data)">
+    </lnd-button>
+</ng-template>
+
 <pxe-layout-container [pageTitle]="title">
-    <div *ngIf="configStepper"
-        class="col-12 col-xl-10 offset-xl-1 mb-6">
-        <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
+    <div class="row">
+        <div *ngIf="configStepper"
+             class="col-12 col-xl-10 offset-xl-1 mb-6">
+            <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
+        </div>
+        <div class="col-12" *ngIf="supplyPointsImport$ | async as supplyPointImport">
+            <div class="row">
+                <div *ngIf="supplyPointImport.length !== 0" class="col-12 col-xl-3" style="margin-top: 80px">
+                    <lnd-micro-table
+                        title="Odběrná místa"
+                        [data]="(supplyPointsImportMicroTableData$ | async)"
+                        [actionTemplates]="templateIcons">
+                    </lnd-micro-table>
+                </div>
+                <div class="col-12"
+                     [class.col-xl-9]="supplyPointImport.length !== 0"
+                     [class.col-xl-10]="supplyPointImport.length === 0"
+                     [class.offset-xl-1]="supplyPointImport.length === 0">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
     </div>
-    <router-outlet></router-outlet>
 </pxe-layout-container>
