@@ -22,6 +22,7 @@
         <div class="col-12" *ngIf="supplyPointsImport$ | async as supplyPointImport">
             <div class="row">
                 <div *ngIf="supplyPointImport.length !== 0" class="col-12 col-xl-3" style="margin-top: 80px">
+                    {{(supplyPointsImportMicroTableData$ | async | json)}}
                     <lnd-micro-table
                         title="Odběrná místa"
                         [data]="(supplyPointsImportMicroTableData$ | async)"

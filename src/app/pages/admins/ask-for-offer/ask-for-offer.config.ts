@@ -19,7 +19,7 @@ export const tableConfig: ITableColumnConfig[] = ([
         views: [
             {
                 headingClass: [''],
-                cellClass: [''],
+                cellClass: ['text-overflow-ellipsis'],
                 content: (row) => `${row.email}`,
             },
         ],
@@ -29,6 +29,7 @@ export const tableConfig: ITableColumnConfig[] = ([
         label: 'Soubor',
         views: [
             {
+                cellClass: ['text-overflow-ellipsis', 'link-color'],
                 contentTemplateName: 'actionColumnPDF',
             },
         ],
