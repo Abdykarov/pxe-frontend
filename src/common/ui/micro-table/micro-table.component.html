@@ -2,7 +2,8 @@
     <div class="micro-table--title">
         {{title}}
     </div>
-    <div class="micro-table--row" *ngFor="let item of data">
+    <div *ngFor="let item of data"
+         class="micro-table--row">
         {{item.label}}
         <ng-container *ngIf="actionTemplates">
             <ng-container *ngTemplateOutlet="actionTemplates; context: {data: item.data}"></ng-container>

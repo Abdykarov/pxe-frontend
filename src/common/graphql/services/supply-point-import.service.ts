@@ -8,7 +8,10 @@ import {
     deleteSupplyPointImportMutation,
     setActiveSupplyPointMutation,
 } from 'src/common/graphql/mutation/supply-point-import';
-import {findSupplyPointImportsQuery, getCreateUserQuery} from 'src/common/graphql/queries/supply-point-import';
+import {
+    findSupplyPointImportsQuery,
+    getCreateUserQuery,
+} from 'src/common/graphql/queries/supply-point-import';
 import {
     CommodityType,
     ISupplyPoint,
