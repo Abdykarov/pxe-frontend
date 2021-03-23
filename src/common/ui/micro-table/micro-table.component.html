@@ -1,10 +1,7 @@
-<div class="micro-table--title">
-    {{title}}
-</div>
 <ul class="list-of-supply-points">
-    <li class="list__item" *ngFor="let item of data">
-        <span class="list__item-title">{{item.label}}</span>
-        <div class="list__item-controls">
+    <li class="list-of-supply-points__item" *ngFor="let item of data">
+        <span class="list-of-supply-points__item-title">{{item.label}}</span>
+        <div class="list-of-supply-points__item-controls">
             <ng-container *ngIf="actionTemplates">
                 <ng-container *ngTemplateOutlet="actionTemplates; context: {data: item.data}"></ng-container>
             </ng-container>

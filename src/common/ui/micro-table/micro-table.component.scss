@@ -10,14 +10,8 @@
 // Custom import
 @import '~bootstrap/scss/dropdown';
 
-.micro-table {
-	&--title {
-		font-size: $h2-font-size;
-		margin-bottom: 10px;
-	}
-}
 
-.list {
+.list-of-supply-points {
 	&__item {
 		display: flex;
 		align-items: center;

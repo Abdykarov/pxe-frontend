@@ -98,7 +98,15 @@ export class CreateUserFacade {
 
         this.supplyPointsImportMicroTableData$ = this.supplyPointsImport$.pipe(
             map(
-                R.map((supplyPoint: ISupplyPoint) => ({data: supplyPoint, label: supplyPoint.name || supplyPoint.identificationNumber })),
+                R.map(
+                    (supplyPoint: ISupplyPoint) =>
+                        (
+                            {
+                                data: supplyPoint,
+                                label: supplyPoint.name || supplyPoint.identificationNumber,
+                            }
+                        ),
+                ),
             ),
         );
 
