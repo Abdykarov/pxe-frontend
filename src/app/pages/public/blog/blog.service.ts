@@ -7,6 +7,7 @@ import {
 
 import * as R from 'ramda';
 
+import { BlogContentPipe } from 'src/common/pipes/blog-content/blog-content.pipe';
 import { CONSTS } from 'src/app/app.constants';
 import { IArticle } from 'src/common/cms/models/blog';
 import { ICardData } from 'src/common/ui/card/models/data.model';
@@ -19,6 +20,7 @@ export class BlogService {
 
     constructor(
         @Inject(LOCALE_ID) private locale: string,
+        private blogContentPipe: BlogContentPipe,
     ) {}
 
     public articleToCardData = (article: IArticle): ICardData => ({
@@ -29,10 +31,11 @@ export class BlogService {
         imgTitle: article.header,
         title: article.header,
         textPrefix: formatDate(article.date, 'dd. MM. yyyy', this.locale),
+        customData: article?.type && article?.type[0].url,
     })
 
     public toShortContent = (cardData: ICardData) => {
-        const textWithoutHTML = removeHtmlFromText(cardData.content);
+        const textWithoutHTML = removeHtmlFromText(this.blogContentPipe.transformWithoutTrustHtml(cardData.content));
         const indexOfLastWord = textWithoutHTML.substr(CONSTS.MAX_LENGTH_BLOG_DESCRIPTION).indexOf(' ');
         const cutContent =  R.pipe(
             R.take(indexOfLastWord + CONSTS.MAX_LENGTH_BLOG_DESCRIPTION),

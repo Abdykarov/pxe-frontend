@@ -41,10 +41,6 @@ export class OverviewComponent extends AbstractComponent {
         this.router.navigate([this.ROUTES.ROUTER_BLOG, url]);
     }
 
-    public showDetail(activeType: IType, article: ICardData): void {
-        this.router.navigate([this.ROUTES.ROUTER_BLOG, activeType.url, article.id]);
-    }
-
     public moreArticles(): void {
         this.actualItemsCount += this.MAX_ITEMS_COUNT_DEFAULT;
     }

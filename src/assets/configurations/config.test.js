@@ -6,6 +6,7 @@ window.angularDevstack = {
         "gtmId": "GTM-58VS48R",
         "production": true,
         "url": "https://test.parc4u.cz",
+        "url_cms_assets": "https://squidex-preview.lnd.bz/api/assets/",
         "url_graphql": "https://test.parc4u.cz/graphql",
         "url_api": "https://test.parc4u.cz/api",
         "url_cms": "https://test.parc4u.cz/squidex",

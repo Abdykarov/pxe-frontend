@@ -18,7 +18,7 @@
                 <lnd-card
                     type="link"
                     [data]="article"
-                    (clickAction)="showDetail(activeTag, article)"
+                    [linkUrl]="[this.ROUTES.ROUTER_BLOG, article.customData, article.id]"
                 >
                 </lnd-card>
             </div>
@@ -30,7 +30,7 @@
                     (action)="moreArticles()"
                     type="gradient-primary"
                     customClass="btn-public btn--icon-right"
-                    icon="icon--arrow-right"
+                    icon="icon--arrow-down"
                     iconPosition="right"
                     label="Zobrazit starší články">
                 </lnd-button>
