@@ -46,7 +46,6 @@ export class FileUploaderCustom extends FileUploader {
             this[method](fakeitem, null, xhr.status, null);
         };
         xhr.onerror = () => {
-            console.log(xhr);
             this.isUploading = false;
             this.onErrorItem(fakeitem, null, xhr.status, null);
         };

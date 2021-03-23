@@ -1,17 +1,30 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import * as R from 'ramda';
 import * as R_ from 'ramda-extension';
-import {filter, map, tap, } from 'rxjs/operators';
-import {BehaviorSubject, Observable, } from 'rxjs';
+import {
+    filter,
+    map,
+    tap,
+} from 'rxjs/operators';
+import {
+    BehaviorSubject,
+    Observable,
+} from 'rxjs';
 
-import {CONSTS, ROUTES, } from 'src/app/app.constants';
-import {IMicroTableData} from 'src/common/ui/micro-table/micro-table/item.model';
-import {IQueryParams} from './models/create-user.model';
-import {CommodityType, ISupplyPoint} from 'src/common/graphql/models/supply.model';
-import {ModalService} from 'src/common/containers/modal/modal.service';
-import {SupplyPointImportService} from 'src/common/graphql/services/supply-point-import.service';
+import {
+    CONSTS,
+    ROUTES,
+} from 'src/app/app.constants';
+import { IMicroTableData } from 'src/common/ui/micro-table/micro-table/item.model';
+import { IQueryParams } from './models/create-user.model';
+import {
+    CommodityType,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
+import { ModalService } from 'src/common/containers/modal/modal.service';
+import { SupplyPointImportService } from 'src/common/graphql/services/supply-point-import.service';
 
 @Injectable({
     providedIn: 'root',
