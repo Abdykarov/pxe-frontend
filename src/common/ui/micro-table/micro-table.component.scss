@@ -31,6 +31,10 @@
 		&::before {
 			display: none;
 		}
+
+		&--active {
+			box-shadow: $box-shadow-interactivegit;
+		}
 	}
 
 	&__item-title {
