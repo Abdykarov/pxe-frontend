@@ -15,11 +15,41 @@
 		font-size: $h2-font-size;
 		margin-bottom: 10px;
 	}
+}
 
-	&--row {
+.list {
+	&__item {
 		display: flex;
+		align-items: center;
+		justify-content: space-between;
 		background-color: $white;
-		padding: 22px;
-		margin-bottom: 10px;
+		padding: $spacer;
+		margin-bottom: $spacer;
+		text-transform: uppercase;
+		border-radius: $border-radius;
+		box-shadow: $box-shadow;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			padding: ( $spacer * 1.25 ) ( $spacer * 2 );
+		}
+
+		&::before {
+			display: none;
+		}
+	}
+
+	&__item-title {
+		font-size: 1.125rem;
+	}
+
+	&__item-controls {
+		display: flex;
+		margin-left: ( $spacer * 1.5 );
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			margin-left: ( $spacer * 2 );
+		}
 	}
 }
