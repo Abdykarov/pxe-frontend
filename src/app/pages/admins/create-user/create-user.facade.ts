@@ -19,7 +19,10 @@ import {
 } from 'src/app/app.constants';
 import { IMicroTableData } from 'src/common/ui/micro-table/micro-table/item.model';
 import { IQueryParams } from './models/create-user.model';
-import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import {
+    CommodityType,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 import { SupplyPointImportService } from 'src/common/graphql/services/supply-point-import.service';
 
@@ -103,7 +106,9 @@ export class CreateUserFacade {
                         (
                             {
                                 data: supplyPoint,
-                                label: supplyPoint.name || supplyPoint.identificationNumber,
+                                label: supplyPoint.name || (supplyPoint.commodityType === CommodityType.POWER ?
+                                    'ODBÉRNÉ MÍSTO - ELEKTŘINA' : 'ODBÉRNÉ MÍSTO - PLYN'),
+                                active: supplyPoint.id === this.getSupplyPointId(),
                             }
                         ),
                 ),
@@ -123,7 +128,9 @@ export class CreateUserFacade {
                 modalType: CONSTS.MODAL_TYPE.CONFIRM_DELETE_SUPPLY_POINT_IMPORT,
                 instanceData: {
                     confirmText: `Opravdu chcete smazat odběrné místo
-                                <strong>${supplyPoint.name || supplyPoint.identificationNumber}</strong>?`,
+                                <strong>${supplyPoint.name ||
+                                            (supplyPoint.commodityType === CommodityType.POWER ?
+                                                'ODBÉRNÉ MÍSTO - ELEKTŘINA' : 'ODBÉRNÉ MÍSTO - PLYN')}</strong>?`,
                     titleConfirm: 'ANO SMAZAT',
                     data: supplyPoint,
                 },

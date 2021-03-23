@@ -329,6 +329,12 @@ export class AuthService {
                     logoutRequired,
                 },
             });
+        } else if (this.isCurrentUser(IUserTypes.CONTRACT_IMPORTER)) {
+            this.router.navigate([ROUTES.ROUTER_ASK_FOR_OFFER_NEW], {
+                state: {
+                    logoutRequired,
+                },
+            });
         } else {
             this.router.navigate([ROUTES.ROUTER_DASHBOARD], {
                 state: {

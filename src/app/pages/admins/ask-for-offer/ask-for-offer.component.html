@@ -41,7 +41,10 @@
                 </ng-container>
             </lnd-alert>
         </div>
-        <div *ngIf="paginatedAskForOffer"
+        <div class="col-12">
+            <lnd-placeloader [loading]="loading"></lnd-placeloader>
+        </div>
+        <div *ngIf="paginatedAskForOffer && !loading"
              class="col-12">
             <ng-container *ngIf="paginatedAskForOffer.page.length > 0">
                 <lnd-table
