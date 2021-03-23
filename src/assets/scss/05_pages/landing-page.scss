@@ -171,4 +171,28 @@
 			}
 		}
 	}
+
+	.link-next-section {
+		@include link-without-href {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: $landing-page-link-next-section-size;
+			height: $landing-page-link-next-section-size;
+			background-color: $body-bg-lp;
+			color: $font-text;
+			border-radius: $landing-page-link-next-section-size;
+			box-shadow: $box-shadow-circle;
+		}
+
+		@include link-without-href-interactive {
+			background-color: darken($body-bg-lp, 5%);
+			color: $font-text;
+			text-decoration: none;
+		}
+
+		&__icon {
+			transform: rotate(90deg);
+		}
+	}
 }
