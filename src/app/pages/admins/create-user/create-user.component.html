@@ -19,18 +19,21 @@
              class="col-12 col-xl-10 offset-xl-1 mb-6">
             <pxe-progress-bar [config]="configStepper"></pxe-progress-bar>
         </div>
+        <div class="col-12 col-xl-10 offset-xl-1">
+            <lnd-placeloader [loading]="!(supplyPointsImport$ | async)"></lnd-placeloader>
+        </div>
         <div class="col-12" *ngIf="supplyPointsImport$ | async as supplyPointImport">
             <div class="row">
-                <div *ngIf="supplyPointImport.length !== 0" class="col-12 col-xl-3" style="margin-top: 80px">
-                    {{(supplyPointsImportMicroTableData$ | async | json)}}
+                <div *ngIf="supplyPointImport.length !== 0"
+                     class="col-12 col-xl-4 mt-suppy-point-import">
+                    <h2>Odběrná místa</h2>
                     <lnd-micro-table
-                        title="Odběrná místa"
                         [data]="(supplyPointsImportMicroTableData$ | async)"
                         [actionTemplates]="templateIcons">
                     </lnd-micro-table>
                 </div>
                 <div class="col-12"
-                     [class.col-xl-9]="supplyPointImport.length !== 0"
+                     [class.col-xl-8]="supplyPointImport.length !== 0"
                      [class.col-xl-10]="supplyPointImport.length === 0"
                      [class.offset-xl-1]="supplyPointImport.length === 0">
                     <router-outlet></router-outlet>

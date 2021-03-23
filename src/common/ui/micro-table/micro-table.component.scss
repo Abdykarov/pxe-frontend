@@ -39,6 +39,8 @@
 
 	&__item-title {
 		font-size: 1.125rem;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	&__item-controls {

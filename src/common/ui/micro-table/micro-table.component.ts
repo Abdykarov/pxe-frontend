@@ -12,8 +12,6 @@ import { IMicroTableData } from './micro-table/item.model';
     styleUrls: ['./micro-table.component.scss'],
 })
 export class MicroTableComponent {
-    @Input()
-    public title: string;
 
     @Input()
     public data: IMicroTableData[];
