@@ -37,6 +37,7 @@ export class BlogFacade {
     public activeArticleSubject$: BehaviorSubject<IArticle> = new BehaviorSubject(null);
     public activeArticlesSubject$: BehaviorSubject<IArticle[]> = new BehaviorSubject(null);
     public activeTypeSubject$: BehaviorSubject<IType> = new BehaviorSubject(null);
+    public allTypeSubject$: BehaviorSubject<IType> = new BehaviorSubject(null);
     public blogSubject$: BehaviorSubject<IBlog> = new BehaviorSubject(null);
     public blogTypesSubject$: BehaviorSubject<IType[]> = new BehaviorSubject(null);
     public breadcrumbSubject$: BehaviorSubject<IBreadcrumbItems> = new BehaviorSubject(null);
@@ -45,6 +46,7 @@ export class BlogFacade {
 
     public activeArticle$ = this.activeArticleSubject$.asObservable();
     public activeArticles$ = this.activeArticlesSubject$.asObservable();
+    public allType$ = this.allTypeSubject$.asObservable();
     public activeType$ = this.activeTypeSubject$.asObservable();
     public blog$ = this.blogSubject$.asObservable();
     public blogTypes$ = this.blogTypesSubject$.asObservable();
@@ -63,6 +65,7 @@ export class BlogFacade {
                 }
                 const url = params?.type;
                 const isDetail = !!params?.article;
+                this.allTypeSubject$.next(blog?.allType);
                 this.isDetailSubject$.next(isDetail);
                 const types = this.getTypes(blog);
                 this.setTypes(types);
@@ -81,6 +84,7 @@ export class BlogFacade {
         R.map(R.prop('type')),
         R.flatten,
         R.uniqBy(R.prop('url')),
+        R.insert(0, this.allTypeSubject$.getValue()[0]),
         R.sortBy(R.prop('order')),
     )(blog)
 
@@ -101,7 +105,21 @@ export class BlogFacade {
 
         const activeArticles = R.pipe(
             R.prop('articles'),
-            R.filter(R.pipe(R.prop('type'), R.find(R.propEq('url', url)))),
+            R.cond([
+                [
+                    data => this.isAllType(),
+                    (data) => data,
+                ],
+                [
+                    data => !this.isAllType(),
+                    R.filter(
+                        R.pipe(
+                            R.prop('type'),
+                            R.find(R.propEq('url', url)),
+                        ),
+                    ),
+                ],
+            ]),
         )(blog);
 
         this.activeArticlesSubject$.next(activeArticles);
@@ -171,4 +189,5 @@ export class BlogFacade {
     }
 
     private isDetailPage = (): boolean => this.isDetailSubject$.getValue();
+    private isAllType = (): boolean => this.activeTypeSubject$.getValue().url === 'all';
 }

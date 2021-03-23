@@ -220,10 +220,11 @@
                     <div class="row card-blogs__inner">
                         <div *ngFor="let article of articles"
                              class="col-md-4 card-blog__item">
+                            {{article | json}}
                             <lnd-card
                                 type="link"
                                 [data]="article"
-                                (clickAction)="showDetailArticle(article)"
+                                [linkUrl]="[this.ROUTES.ROUTER_BLOG, article.customData, article.id]"
                             >
                             </lnd-card>
                         </div>
@@ -232,7 +233,7 @@
                 <div class="col-12 text-center">
                     <a (click)="routerToAllArticle($event)"
                         class="text-with-icon text-with-icon--link text-with-icon--icon-right mb-4 mb-md-0">
-                        <span class="text-with-icon__text text-body">Zobrazit všechny články</span>
+                        <span class="text-with-icon__text text-body">Všechny články</span>
                         <span class="icon icon--add-new text-with-icon__icon text-with-icon__icon--public"></span>
                     </a>
                 </div>
