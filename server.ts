@@ -269,7 +269,7 @@ server.get('/sitemap.xml', (req, res) => {
 });
 
 // cache by detail variable
-server.post('/squidex', ({body}, res) => {
+server.post('/cms', ({body}, res) => {
     const { operationName, variables } = body;
     const cacheKey = getMCacheKeySquidex(operationName + JSON.stringify(variables));
     const data = plainConfig.cacheSSR ? mCache.get(cacheKey) : false;
