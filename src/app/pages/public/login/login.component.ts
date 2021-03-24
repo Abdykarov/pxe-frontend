@@ -27,7 +27,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import {
     CONSTS,
     ROUTES,
-    SEO,
 } from 'src/app/app.constants';
 import { CookiesService } from 'src/app/services/cookies.service';
 import {
@@ -40,8 +39,10 @@ import {
     ILoginState,
 } from './login.model';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
+import { ILogin } from 'src/common/cms/models/login';
 import { ILoginResponse } from 'src/app/services/model/auth.model';
 import { ILogoutRequired } from 'src/app/services/model/logout-required.model';
+import { ISeo } from 'src/common/cms/models/seo';
 import { IsLoggedPipe } from 'src/common/pipes/is-logged/is-logged.pipe';
 import {
     IUserLogin,
@@ -59,6 +60,8 @@ import { UserService } from 'src/common/graphql/services/user.service';
     styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent extends AbstractComponent implements OnDestroy {
+    public readonly loginCms: ILogin = this.route.snapshot.data.login;
+
     private cleanLogoutReasonBanner = false;
     public login = '';
     public formFieldsLogin = formFieldsLogin;
@@ -98,17 +101,15 @@ export class LoginComponent extends AbstractComponent implements OnDestroy {
             this.urlToRedirectAfterLogin = window.history.state.urlToRedirectAfterLogin;
         }
 
-        this.titleService.setTitle(CONSTS.TITLES.LOGIN);
+        const seo: ISeo = R.head(this.loginCms.seo);
+        this.titleService.setTitle(seo.title);
         this.metaService.updateTag({
             name: 'description',
-            content: SEO.META_DESCRIPTION.LOGIN,
+            content: seo.description,
         });
         this.metaService.updateTag({
                 name: 'keywords',
-                content: [
-                    ...SEO.META_KEYWORDS.LANDING_PAGE,
-                    ...SEO.META_KEYWORDS.LOGIN,
-                ].toString(),
+                content: seo.keywords,
             },
         );
 

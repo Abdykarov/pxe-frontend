@@ -9,6 +9,8 @@ import { IOption } from 'src/common/ui/forms/models/option.model';
 import { IQRCodeSetting } from 'src/common/graphql/models/contract';
 
 export const CONSTS = {
+    ANGULAR_UNIVERSAR_STATE_KEY_PREFIX: 'http_requests:',
+    APOLLO_CMS_KEY: 'cms',
     APPEND_AFTER_CUT_TEXT: '...',
     ALLOWED_TYPE_OF_IMPORT_OFFERS_FILES: ['csv'],
     ASK_FOR_OFFER: {
@@ -71,6 +73,7 @@ export const CONSTS = {
     },
     LOGIN_FORM_NAME: 'login',
     MAX_LENGTH_SUPPLIER_DESCRIPTION: 100,
+    MAX_LENGTH_BLOG_DESCRIPTION: 100,
     MAX_REQUEST_IN_BATCH_LINK: 200,
     MONTH_DURATION: 30,
     MONTHS_TO_CONTRACT_END: 2,
@@ -78,6 +81,9 @@ export const CONSTS = {
     MODAL_TYPE: {
         CONFIRM_INFO_DELETE_ASK_FOR_OFFER: 'confirmAskForOfferOffer',
         CONFIRM_INFO_OFFER: 'confirmInfoOffer',
+        CONFIRM_INFO_SUPPLY_POINT_IMPORT_ADDED: 'confirmInfoSupplyPointImportAdded',
+        CONFIRM_DELETE_ASK_FOR_OFFER: 'confirmDeleteAskForOffer',
+        CONFIRM_DELETE_SUPPLY_POINT_IMPORT: 'confirmSupplyPointImport',
         CONFIRM_DELETE_REQUEST: 'confirmDeleteOffer',
         CONFIRM_DELETE_OFFER: 'confirmDeleteOffer',
         CONFIRM_CANCEL_OFFER: 'confirmCancelOffer',
@@ -96,6 +102,7 @@ export const CONSTS = {
         ASK_FOR_OFFER_NEW: 'new',
         ASK_FOR_OFFER_IN_PROGRESS: 'in-progress',
         ASK_FOR_OFFER_PROCESSED: 'processed',
+        BLOG: 'blog',
         CREATE_USER: 'create-user',
         CONTRACT : 'contract',
         COOKIES_POLICY : 'cookies-policy',
@@ -138,6 +145,14 @@ export const CONSTS = {
         INTERVAL: 300000,
         COUNT: 16,
         DONT_REFRESH_TIME_IN_MINUTES: 2,
+    },
+    CMS: {
+        CLIENT_ID: 'pxe-parc4u:default',
+        CLIENT_SECRET: 'oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx',
+        GRAND_TYPE: 'client_credentials',
+        REFRESH_TOKEN_URL: 'identity-server/connect/token',
+        REGEX_CONTAIN_CMS: 'squidex',
+        SCOPE: 'squidex-api',
     },
     START_STICKER_HEADER: 0,
     STORAGE_HELPERS: {
@@ -191,15 +206,7 @@ export const CONSTS = {
     TIME_TO_CONTRACT_END_PROLONGED_IN_DAYS: 30,
     TIME_TO_CONTRACT_END_INDEFINITE_TIME_IN_MONTHS: 3,
     TITLES: {
-        COOKIES_POLICY: 'Cookies policy | parc4u',
         DEFAULT: 'parc4u',
-        LANDING_PAGE: 'Získejte svobodu nad energií | parc4u',
-        LOGIN: 'Přihlásit | parc4u',
-        FAQ: 'Často kladené otázky | parc4u',
-        PATTERNS_OF_CONTRACTS: 'Vzory smluv o dodávce | parc4u',
-        TERMS_OF_USE: 'Podmínky užívání | parc4u',
-        SECURING_YOUR_DATA: 'Ochrana osobních údajů | parc4u',
-        SIGN_UP: 'Registrace | parc4u',
     },
     LG_RESOLUTION: 1366,
     XL_RESOLUTION: 992,
@@ -213,6 +220,7 @@ export const ROUTES = {
     ROUTER_ASK_FOR_OFFER_NEW: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.ASK_FOR_OFFER}/${CONSTS.PATHS.ASK_FOR_OFFER_NEW}`,
     ROUTER_ASK_FOR_OFFER_IN_PROGRESS: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.ASK_FOR_OFFER}/${CONSTS.PATHS.ASK_FOR_OFFER_IN_PROGRESS}`,
     ROUTER_ASK_FOR_OFFER_PROCESSED: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.ASK_FOR_OFFER}/${CONSTS.PATHS.ASK_FOR_OFFER_PROCESSED}`,
+    ROUTER_BLOG: `/${CONSTS.PATHS.BLOG}`,
     ROUTER_CREATE_USER: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CREATE_USER}`,
     ROUTER_CREATE_USER_SUPPLY_POINT: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CREATE_USER}/${CONSTS.PATHS.SUPPLY_POINT}`,
     ROUTER_CREATE_USER_RECAPITULATION: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CREATE_USER}/${CONSTS.PATHS.RECAPITULATION}`,
@@ -246,75 +254,6 @@ export const ROUTES = {
     ROUTER_TERMS_OF_USE: `/${CONSTS.PATHS.TERMS_OF_USE}`,
     ROUTER_USER_CHANGE_PASSWORD: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.CHANGE_PASSWORD}`,
     ROUTER_USER_PROFILE: `/${CONSTS.PATHS.SECURED}/${CONSTS.PATHS.USER_PROFILE}`,
-};
-
-export const SEO = {
-    META_KEYWORDS: {
-        COOKIES_POLICY: [
-            'funkční cookies',
-            'trvalé cookies',
-            'informace',
-        ],
-        LANDING_PAGE: [
-            'elektřina',
-            'plyn',
-            'dodavatel',
-            'dodavateli',
-            'nabídka',
-            'komoditní burza',
-            'odběrné místo',
-            'změna dodavatele',
-            'cena plynu',
-            'cena elektřiny',
-            'cena za kwh',
-            'nejlevnějši elektřina',
-            'nejlevnějši plyn',
-            'distribuce plynu',
-            'distribuce elektřiny',
-            'parc4u',
-            'pxe',
-        ],
-        FAQ: [
-            'nápověda',
-            'obecné',
-            'často kladené otázky',
-        ],
-        LOGIN: [
-            'přihlásit',
-            'kliknutí',
-        ],
-        PATTERNS_OF_CONTRACTS: [
-            'komodita',
-            'nabídka',
-        ],
-        TERMS_OF_USE: [
-            'obchodní podmínky',
-            'parc4u',
-        ],
-        SECURING_YOUR_DATA: [
-            'chráníme',
-            'zpracování údajů',
-        ],
-        SIGN_UP: [
-            'registrace',
-            'kliknutí',
-            'obchodními podmínkami',
-        ],
-    },
-    META_DESCRIPTION: {
-        COOKIES_POLICY: 'Co jsou cookies a proč je na stránkách parc4u používáme?',
-        LANDING_PAGE: 'Měňte dodavatele energií na 1 klik. Neřešte papírování a chození na' +
-            ' pobočky. Chraňte se před nekalostmi ve smlouvě. Energie za férové ceny bez skrytých poplatků.',
-        FAQ: 'Odpovědi na často kladené otázky služby parc4u.',
-        LOGIN: 'Přihlášení do parc4u, kde máte snadný přístup k jiným cenám za energie.',
-        PATTERNS_OF_CONTRACTS: 'Vzor smlouvy k dodávce uzavřené přes parc4u.',
-        TERMS_OF_USE: 'Obchodní podmínky k pravidlům registrace dodavatelů a odběratelů na trhu parc4u.',
-        SECURING_YOUR_DATA: 'Jak v parc4u pracujeme s osobními údaji a jak je chráníme.',
-        SIGN_UP: 'Registrace do parc4u, kde kliknutím měníte dodavatele energií,' +
-            ' nemusíte na pobočky a dostáváte konečné ceny bez skrytých poplatků.',
-    },
-    META_GOOGLE_SITE_VERIFICATION: 'S2HgqkW4rJgsZuVJbrgrAmdwYnguu7zKvCejgAsvyNs',
-    FACEBOOK_DOMAIN_VERIFICATION: 'vngn44jpdm6rc7czf0f9regvnltvt3',
 };
 
 export enum INavigationItemType {

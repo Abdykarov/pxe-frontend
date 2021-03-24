@@ -30,7 +30,6 @@ import {
 import { OverlayService } from 'src/common/graphql/services/overlay.service';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 import { ScrollToService } from 'src/app/services/scroll-to.service';
-import { SCROLL_TO } from '../services/model/scroll-to.model';
 
 export abstract class AbstractLayoutComponent extends AbstractComponent implements OnInit {
     public activeUrl: string;

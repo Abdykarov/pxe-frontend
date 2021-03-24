@@ -6,6 +6,7 @@ import {
 import { IPersonalDataInputForm } from './personal-data.model';
 
 export interface ISupplyPointImportInput {
+    id?: string;
     address?: IAddress;
     contractEndTypeId?: string;
     expirationDate?: string;

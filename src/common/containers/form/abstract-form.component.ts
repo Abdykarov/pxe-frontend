@@ -203,14 +203,14 @@ export class AbstractFormComponent extends AbstractComponent implements OnInit, 
         this.fieldWrapperFocused$.next(null);
     }
 
-    public submitCustomActionValidFormForm = (event = null) => {
-        if (event) {
-            event.target.blur();
-        }
+    public submitCustomActionValidFormForm = (data = null) => {
         this.resetCustomFieldError();
         this.triggerValidation();
         if (this.form.valid) {
-            this.customAction.emit(this.form.value);
+            this.customAction.emit({
+                value: this.form.value,
+                data,
+            });
         } else {
             setTimeout(() => {
                 scrollToWithOffset('.invalid-input', CONSTS.OFFSET_ERRORS.INVALID_INPUT);

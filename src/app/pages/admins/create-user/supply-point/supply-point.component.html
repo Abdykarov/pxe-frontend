@@ -1,21 +1,38 @@
-<div class="col-12 col-xl-10 offset-xl-1 text-center">
-    <p class="perex mb-4">
-        Zadejte údaje k odběrnému místu
-    </p>
-</div>
-<div class="col-12 col-xl-10 offset-xl-1">
-    <lnd-placeloader [loading]="!supplyPoint"></lnd-placeloader>
-    <pxe-supply-point-form
-        *ngIf="supplyPoint"
-        [editMode]="editMode"
-        [withoutValidator]="true"
-        [formFields]="formFields"
-        [formLoading]="formLoading"
-        [formSent]="formSent"
-        [formValues]="supplyPoint"
-        [globalError]="globalError"
-        [fieldError]="fieldError"
-        submitLabel="Další"
-        (submitAction)="save($event)"
-    ></pxe-supply-point-form>
+<div class="row">
+    <div class="col-12">
+        <p class="perex mb-4"
+           [class.text-center]="supplyPointsImport$ | async">
+            Zadejte údaje k odběrnému místu
+        </p>
+    </div>
+    <ng-container *ngIf="(queryParams$ | async).askForOfferId as activeAskForOfferId">
+        <div class="col-12" *ngIf="(activeSupplyPoint$ | async) as activeSupplyPoint">
+            <pxe-supply-point-form
+                [editMode]="editMode"
+                [withoutValidator]="true"
+                [formFields]="formFields"
+                [formLoading]="formLoading"
+                [formSent]="formSent"
+                [formValues]="activeSupplyPoint"
+                [globalError]="globalError"
+                [fieldError]="fieldError"
+                submitLabel="Další"
+                (submitAction)="save($event, activeAskForOfferId, activeSupplyPoint)"
+            ></pxe-supply-point-form>
+        </div>
+        <div class="col-12" *ngIf="!(queryParams$ | async)?.supplyPointId">
+            <pxe-supply-point-form
+                [editMode]="editMode"
+                [withoutValidator]="true"
+                [formFields]="formFields"
+                [formLoading]="formLoading"
+                [formSent]="formSent"
+                [formValues]="{}"
+                [globalError]="globalError"
+                [fieldError]="fieldError"
+                submitLabel="Další"
+                (submitAction)="save($event, activeAskForOfferId, null)"
+            ></pxe-supply-point-form>
+        </div>
+    </ng-container>
 </div>

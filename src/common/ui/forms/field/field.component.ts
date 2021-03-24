@@ -254,7 +254,7 @@ export class FieldComponent implements AfterContentInit, ControlValueAccessor {
         }
     }
 
-    public trim = (): void => this.value = R.trim(this._value);
+    public trim = (): void => this.value = R.trim(this._value || '');
 
     public focusAction = (evt): void => {
         this.inputFocused = true;

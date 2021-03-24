@@ -2,7 +2,7 @@
     <div [innerHTML]="data.shortContent"></div>
     <div *ngIf="data.fullContent">
         <a class="link mt-4"
-           [routerLink]="['/', CONSTS.PATHS.FAQ, data.tag | getUrlFromTag:faqConfig, data.url]">
+           [routerLink]="['/', CONSTS.PATHS.FAQ, data.tag[0].url, data.url]">
             Zobrazit více
         </a>
     </div>
@@ -12,7 +12,7 @@
     *ngIf="activeQuestion && questions">
     <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1 mb-3">
-            <h2 class="h2--public">{{activeQuestion.header}}</h2>
+            <h1 class="h2--public">{{activeQuestion.header}}</h1>
             <div [innerHTML]="activeQuestion.fullContent || activeQuestion.shortContent"></div>
         </div>
     </div>

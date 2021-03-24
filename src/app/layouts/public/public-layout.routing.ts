@@ -1,12 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { AskForOfferResolver } from 'src/app/resolvers/ask-for-offer.resolver';
+import { BlogResolver } from 'src/app/resolvers/blog.resolver';
 import { CONSTS } from 'src/app/app.constants';
+import { CookiePolicyResolver } from 'src/app/resolvers/cookie-policy.resolver';
+import { LandingPageResolver } from 'src/app/resolvers/landing-page.resolver';
+import { LandingPageArticlesResolver } from 'src/app/resolvers/landing-page-articles.resolver';
+import { LoginResolver } from 'src/app/resolvers/login.resolver';
 import {
     LoginType,
     SignType,
-} from '../models/router-data.model';
+} from 'src/app/layouts/models/router-data.model';
+import { PatternsOfContractsResolver } from 'src/app/resolvers/patterns-of-contracts.resolver';
 import { PublicLayoutComponent } from './public-layout.component';
+import { SecuringYourDataResolver } from 'src/app/resolvers/securing-your-data.resolver';
+import { SignUpResolver } from 'src/app/resolvers/sign-up.resolver';
+import { TermsOfUseResolver } from 'src/app/resolvers/terms-of-use.resolver';
 
 const routes = [
     {
@@ -16,6 +26,12 @@ const routes = [
             {
                 path: CONSTS.PATHS.EMPTY,
                 loadChildren: () => import('../../pages/public/landing/landing.module').then(m => m.LandingModule),
+                resolve: {
+                    askForOffer: AskForOfferResolver,
+                    landingPage: LandingPageResolver,
+                    signUp: SignUpResolver,
+                    articles: LandingPageArticlesResolver,
+                },
                 data: {
                     isPublic: true,
                     isSimpleFooter: true,
@@ -27,6 +43,9 @@ const routes = [
             {
                 path: CONSTS.PATHS.COOKIES_POLICY,
                 loadChildren: () => import('../../pages/public/cookies-policy/cookies-policy.module').then(m => m.CookiesPolicyModule),
+                resolve: {
+                    cookiePolicy: CookiePolicyResolver,
+                },
                 data: {
                     isPublic: true,
                     isSimpleFooter: false,
@@ -56,6 +75,9 @@ const routes = [
             {
                 path: CONSTS.PATHS.LOGIN,
                 loadChildren: () => import('../../pages/public/login/login.module').then(m => m.LoginModule),
+                resolve: {
+                    login: LoginResolver,
+                },
                 data: {
                     isPublic: true,
                     loginType: LoginType.RELOAD,
@@ -75,6 +97,9 @@ const routes = [
                 path: CONSTS.PATHS.SECURING_YOUR_DATA,
                 loadChildren: () => import('../../pages/public/securing-your-data/securing-your-data.module')
                     .then(m => m.SecuringYourDataModule),
+                resolve: {
+                    securingYourData: SecuringYourDataResolver,
+                },
                 data: {
                     isPublic: true,
                     isSimpleFooter: false,
@@ -85,6 +110,22 @@ const routes = [
             {
                 path: CONSTS.PATHS.TERMS_OF_USE,
                 loadChildren: () => import('../../pages/public/terms-of-use/terms-of-use.module').then(m => m.TermsOfUseModule),
+                resolve: {
+                    termsOfUse: TermsOfUseResolver,
+                },
+                data: {
+                    isPublic: true,
+                    isSimpleFooter: false,
+                    loginType: LoginType.NAVIGATE,
+                    signUpType: SignType.SCROLL,
+                },
+            },
+            {
+                path: CONSTS.PATHS.BLOG,
+                loadChildren: () => import('../../pages/public/blog/blog.module').then(m => m.BlogModule),
+                resolve: {
+                    blog: BlogResolver,
+                },
                 data: {
                     isPublic: true,
                     isSimpleFooter: false,
@@ -97,10 +138,13 @@ const routes = [
                 redirectTo: CONSTS.PATHS.PATTERNS_OF_CONTRACTS + '/',
             },
             {
-                path: CONSTS.PATHS.PATTERNS_OF_CONTRACTS + '/:subjectType/:commodityType',
+                path: CONSTS.PATHS.PATTERNS_OF_CONTRACTS + '/:subjectType',
                 loadChildren: () => import('../../pages/public/patterns-of-contracts/patterns-of-contracts.module').then(
                     m => m.PatternsOfContractsModule,
                 ),
+                resolve: {
+                    patternsOfContracts: PatternsOfContractsResolver,
+                },
                 data: {
                     isPublic: true,
                     isSimpleFooter: false,
@@ -111,6 +155,9 @@ const routes = [
             {
                 path: CONSTS.PATHS.SIGN_UP,
                 loadChildren: () => import('../../pages/public/sign-up/sign-up.module').then(m => m.SignUpModule),
+                resolve: {
+                    signUp: SignUpResolver,
+                },
                 data: {
                     isPublic: true,
                     loginType: LoginType.NAVIGATE,

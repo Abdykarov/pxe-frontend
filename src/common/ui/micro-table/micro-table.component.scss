@@ -1,0 +1,55 @@
+/*
+ -  Microtable
+ -
+ -
+ */
+
+// Core component import
+@import 'src/assets/scss/01_base/base.scss';
+
+// Custom import
+@import '~bootstrap/scss/dropdown';
+
+
+.list-of-supply-points {
+	&__item {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		background-color: $white;
+		padding: $spacer;
+		margin-bottom: $spacer;
+		text-transform: uppercase;
+		border-radius: $border-radius;
+		box-shadow: $box-shadow;
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			padding: ( $spacer * 1.25 ) ( $spacer * 2 );
+		}
+
+		&::before {
+			display: none;
+		}
+
+		&--active {
+			box-shadow: $box-shadow-interactive;
+		}
+	}
+
+	&__item-title {
+		font-size: 1.125rem;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	&__item-controls {
+		display: flex;
+		margin-left: ( $spacer * 1.5 );
+
+		// Media queries
+		@include media-breakpoint-up(md) {
+			margin-left: ( $spacer * 2 );
+		}
+	}
+}

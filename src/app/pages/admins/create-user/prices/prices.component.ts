@@ -9,16 +9,16 @@ import {
 } from '@angular/core';
 
 import {
-    map,
     switchMap,
     takeUntil,
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AskForOfferService } from 'src/common/graphql/services/ask-for-offer.service';
+import { CreateUserFacade } from 'src/app/pages/admins/create-user/create-user.facade';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import { ISupplyPointImportInput } from 'src/common/graphql/models/supply-point-import.model';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import { ISupplyPointImportInput } from 'src/common/graphql/models/supply-point-import.model';
 import { formFields } from 'src/common/containers/form/forms/prices/prices-form.config';
 import { parseGraphQLErrors } from 'src/common/utils';
 import { SupplyPointImportService } from 'src/common/graphql/services/supply-point-import.service';
@@ -29,96 +29,88 @@ import { SupplyPointImportService } from 'src/common/graphql/services/supply-poi
     styleUrls: ['./prices.component.scss'],
 })
 export class PricesComponent extends AbstractComponent implements OnInit {
+    public supplyPoint$ = this.createUserFacade.activeSupplyPoint$;
+
     public formFields = formFields;
     public formLoading = false;
     public formSent = false;
     public globalError: string[] = [];
     public fieldError: IFieldError = {};
-    public askForOfferId = this.route.snapshot.queryParams.askForOfferId;
-    public supplyPoint: ISupplyPoint;
 
     constructor(
         public askForOfferService: AskForOfferService,
         private cd: ChangeDetectorRef,
+        private createUserFacade: CreateUserFacade,
         private route: ActivatedRoute,
         private router: Router,
         private supplyPointImportService: SupplyPointImportService,
     ) {
         super();
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
 
-    ngOnInit() {
-        super.ngOnInit();
-        this.supplyPointImportService.
-            findSupplyPointImport(this.askForOfferId)
-                .pipe(
-                    takeUntil(this.destroy$),
-                    map(({data}) => data.findSupplyPointImport),
-                )
-                .subscribe((supplyPoint: ISupplyPoint) => {
-                    this.supplyPoint = supplyPoint;
-                    this.cd.markForCheck();
-                });
-    }
-
-    public save = (data) => {
-        const supplyPoint: ISupplyPointImportInput = this.supplyPointImportService.mapSupplyPointToSupplyPointInput(this.supplyPoint);
+    public save = (formData, activeSupplyPoint: ISupplyPoint) => {
+        const data = formData.value;
+        const isOnlySave = formData.data;
+        const supplyPoint: ISupplyPointImportInput = this.supplyPointImportService.mapSupplyPointToSupplyPointInput(activeSupplyPoint);
+        supplyPoint.importPriceTotalPerYear = data?.importPriceTotalPerYear,
+        supplyPoint.importPricePerKwPowerVT = data?.importPricePerKwPowerVT,
+        supplyPoint.importPricePerKwPowerNT = data?.importPricePerKwPowerNT,
+        supplyPoint.importPricePerKwGas = data?.importPricePerKwGas,
 
         this.supplyPointImportService.createSupplyPointImport(
-                this.askForOfferId,
+                this.createUserFacade.getAskForOfferId(),
                 supplyPoint,
             ).pipe(
                 takeUntil(this.destroy$),
             ).subscribe(_ => {
-                this.router.navigate([this.ROUTES.ROUTER_ASK_FOR_OFFER_PROCESSED]);
-            },
-            (error) => {
-                this.formLoading = false;
-                const { fieldError, globalError } = parseGraphQLErrors(error);
-                this.fieldError = fieldError;
-                this.globalError = globalError;
-                this.cd.markForCheck();
-            });
+                    if (!isOnlySave) {
+                        this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
+                            queryParams: {
+                                askForOfferId: this.createUserFacade.getAskForOfferId(),
+                            },
+                        });
+                    } else {
+                        this.router.navigate([this.ROUTES.ROUTER_ASK_FOR_OFFER_IN_PROGRESS]).then(__ => {
+                            this.createUserFacade.showInfoAboutSupplyPointAdded();
+                        });
+                    }
+                },
+                (error) => {
+                    this.formLoading = false;
+                    const { fieldError, globalError } = parseGraphQLErrors(error);
+                    this.fieldError = fieldError;
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
+                });
     }
 
-    public saveAndSend = (data) => {
-        const supplyPoint: ISupplyPointImportInput = this.supplyPointImportService.mapSupplyPointToSupplyPointInput(this.supplyPoint);
+    public saveAndSend = (data, activeSupplyPoint: ISupplyPoint) => {
+        const supplyPoint: ISupplyPointImportInput = this.supplyPointImportService.mapSupplyPointToSupplyPointInput(activeSupplyPoint);
+        this.supplyPointImportService.mapPricesToSupplyPointImport(supplyPoint, data);
 
         this.supplyPointImportService.createSupplyPointImport(
-                this.askForOfferId,
+            this.createUserFacade.getAskForOfferId(),
                 supplyPoint,
             )
             .pipe(
                 switchMap((_) => {
-                    return this.askForOfferService.finalizeAskForOffer(this.askForOfferId);
+                    return this.askForOfferService.finalizeAskForOffer(this.createUserFacade.getAskForOfferId());
                 }),
                 takeUntil(this.destroy$),
             ).subscribe(_ => {
-                this.router.navigate([this.ROUTES.ROUTER_ASK_FOR_OFFER_PROCESSED]);
+                    this.router.navigate([this.ROUTES.ROUTER_ASK_FOR_OFFER_PROCESSED]);
                 },
-            (error) => {
-                this.formLoading = false;
-                const { fieldError, globalError } = parseGraphQLErrors(error);
-                this.fieldError = fieldError;
-                this.globalError = globalError;
-                this.cd.markForCheck();
-            });
-    }
-
-    public submit = (prices) => {
-        let supplyPointImport = this.supplyPointImportService.mapSupplyPointToSupplyPointInput(this.supplyPoint);
-        supplyPointImport.importPricePerKwGas = parseFloat(prices.importPricePerKwGas);
-        supplyPointImport.importPricePerKwPowerNT = parseFloat(prices.importPricePerKwPowerNT);
-        supplyPointImport.importPricePerKwPowerVT = parseFloat(prices.importPricePerKwPowerVT);
-        supplyPointImport.importPriceTotalPerYear = parseFloat(prices.importPriceTotalPerYear);
-        const omitTypename = (key, value) => (key === '__typename' ? undefined : value);
-        supplyPointImport = JSON.parse(JSON.stringify(supplyPointImport), omitTypename);
-        this.supplyPointImportService.createSupplyPointImport(this.askForOfferId,  supplyPointImport).subscribe();
+                (error) => {
+                    this.formLoading = false;
+                    const { fieldError, globalError } = parseGraphQLErrors(error);
+                    this.fieldError = fieldError;
+                    this.globalError = globalError;
+                    this.cd.markForCheck();
+                });
     }
 
     public backStep = () => this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_RECAPITULATION], {
-        queryParams: {
-            askForOfferId: this.askForOfferId,
-        },
+        queryParams: this.createUserFacade.queryParamsSubject$.getValue(),
     })
 }

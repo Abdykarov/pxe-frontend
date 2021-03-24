@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 // own compoents
 import { CardComponent } from './card.component';
@@ -14,6 +15,7 @@ import { ButtonModule } from '../button/button.module';
     imports: [
         ButtonModule,
         CommonModule,
+        RouterModule,
     ],
     exports: [
         CardComponent,

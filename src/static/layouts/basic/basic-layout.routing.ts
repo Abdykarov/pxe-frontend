@@ -120,6 +120,10 @@ import {
     newSupplyPointPageRoutes,
 } from 'src/static/pages/new-supply-point/page.module';
 import {
+    microTablePageRoutes,
+    MicroTablePageModule,
+} from 'src/static/atoms/micro-table/page.module';
+import {
     PaginationPageModule,
     paginationPageRoutes,
 } from 'src/static/atoms/pagination/page.module';
@@ -238,6 +242,7 @@ const routes: Routes = [
             ...listOfNotificationsPageRoutes,
             ...listSupplyPointsPageRoutes,
             ...modalsPageRoutes,
+            ...microTablePageRoutes,
             ...newsPageRoutes,
             ...newSupplyPointPageRoutes,
             ...paginationPageRoutes,
@@ -297,6 +302,7 @@ const routes: Routes = [
         InfoBannerPageModule,
         ListOfNotificationsPageModule,
         ListSupplyPointsPageModule,
+        MicroTablePageModule,
         ModalsPageModule,
         NewsPageModule,
         NewSupplyPointPageModule,

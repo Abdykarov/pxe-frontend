@@ -402,6 +402,7 @@
 		position: absolute;
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		top: 0;
 		width: $btn-width-icon;
 		height: 100%;
@@ -429,8 +430,7 @@
 		&--alone {
 			position: relative;
 			width: $btn-width-icon-alone;
-			padding: ( $spacer / 3 );
-			text-align: center;
+			padding: ( $spacer / 4 );
 		}
 	}
 
@@ -468,6 +468,7 @@
 	&.btn-icon {
 		width: $btn-width-icon-alone;
 		color: $icons-secondary;
+		border-width: 0;
 
 		&:focus,
 		&.focus,

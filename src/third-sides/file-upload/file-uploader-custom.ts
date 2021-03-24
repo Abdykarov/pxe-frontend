@@ -11,6 +11,7 @@ export class FileUploaderCustom extends FileUploader {
         super(options);
     }
     uploadAllFiles(appendData: object): void {
+        this.isUploading = true;
         const xhr = new XMLHttpRequest();
         const sendable = new FormData();
         const fakeitem: FileItem = null;
@@ -39,14 +40,17 @@ export class FileUploaderCustom extends FileUploader {
             });
         }
         xhr.onload = () => {
+            this.isUploading = false;
             const gist = (xhr.status >= 200 && xhr.status < 300) || xhr.status === 304 ? 'Success' : 'Error';
             const method = 'on' + gist + 'Item';
             this[method](fakeitem, null, xhr.status, null);
         };
         xhr.onerror = () => {
+            this.isUploading = false;
             this.onErrorItem(fakeitem, null, xhr.status, null);
         };
         xhr.onabort = () => {
+            this.isUploading = false;
             this.onErrorItem(fakeitem, null, xhr.status, null);
         };
 
