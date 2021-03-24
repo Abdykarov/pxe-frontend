@@ -50,9 +50,15 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
         ) {
             return next.handle(req);
         } else {
-            const key = makeStateKey<HttpResponse<object>>(CONSTS.ANGULAR_UNIVERSAR_STATE_KEY_PREFIX + req.body.operationName);
+            const plainKey = req.body && req.body.operationName;
+
+            if (!plainKey) {
+                return next.handle(req);
+            }
+            const key = makeStateKey<HttpResponse<object>>(CONSTS.ANGULAR_UNIVERSAR_STATE_KEY_PREFIX + plainKey);
 
             if (isPlatformBrowser(this.platformId)) {
+
                 // Try reusing transferred response from server
                 const cachedResponse = this.transferState.get(key, null);
                 if (cachedResponse) {

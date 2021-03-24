@@ -5,6 +5,7 @@ import {
 } from '@angular/router';
 import { Component } from '@angular/core';
 
+import * as R from 'ramda';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -17,7 +18,6 @@ import {
 import { IMicroTableData } from 'src/common/ui/micro-table/micro-table/item.model';
 import { IStepperProgressItem } from 'src/common/ui/progress-bar/models/progress.model';
 import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
-import { SupplyPointImportService } from 'src/common/graphql/services/supply-point-import.service';
 
 @Component({
     selector: 'pxe-create-user',
@@ -25,10 +25,11 @@ import { SupplyPointImportService } from 'src/common/graphql/services/supply-poi
     styleUrls: ['./create-user.component.scss'],
 })
 export class CreateUserComponent extends AbstractComponent {
+    public isInitRouterEvents = true;
     public supplyPointsImport$: Observable<ISupplyPoint[]> = null;
     public supplyPointsImportMicroTableData$: Observable<IMicroTableData[]> = null;
-
     public title: string = null;
+
     public configStepper: IStepperProgressItem[] = [];
 
     constructor(
@@ -41,7 +42,7 @@ export class CreateUserComponent extends AbstractComponent {
             .pipe(takeUntil(this.destroy$))
             .subscribe(event => {
                 if (event instanceof NavigationEnd) {
-                    const {askForOfferId, supplyPointId = null} = this.route.snapshot.firstChild.queryParams;
+                    const {askForOfferId, email, supplyPointId = null} = this.route.snapshot.firstChild.queryParams;
                     if (askForOfferId) {
                         if (!supplyPointId) {
                             this.createUserFacade.setActiveSupplyPoint(null);
@@ -50,7 +51,7 @@ export class CreateUserComponent extends AbstractComponent {
                         const [
                             supplyPointsImport$,
                             supplyPointsImportMicroTableData$,
-                        ] = this.createUserFacade.setObservableByQueryParams$(askForOfferId, supplyPointId);
+                        ] = this.createUserFacade.setObservableByQueryParams$(askForOfferId, supplyPointId, email, this.isInitRouterEvents);
                         this.supplyPointsImport$ = <Observable<ISupplyPoint[]>>supplyPointsImport$;
                         this.supplyPointsImportMicroTableData$ = <Observable<IMicroTableData[]>>supplyPointsImportMicroTableData$;
                     } else {
@@ -59,6 +60,7 @@ export class CreateUserComponent extends AbstractComponent {
                     const step = this.route.snapshot.firstChild.data['step'];
                     this.title = this.route.snapshot.firstChild.data['title'];
                     this.configStepper = getConfigStepper(step, false, TypeStepper.CREATE_USER);
+                    this.isInitRouterEvents = false;
                 }
             });
     }
@@ -69,6 +71,7 @@ export class CreateUserComponent extends AbstractComponent {
             this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
                 queryParams: {
                     askForOfferId: this.createUserFacade.getAskForOfferId(),
+                    email: this.createUserFacade.getEmail(),
                     supplyPointId,
                 },
             });

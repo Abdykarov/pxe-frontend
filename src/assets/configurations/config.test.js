@@ -9,7 +9,7 @@ window.angularDevstack = {
         "url_cms_assets": "https://squidex-preview.lnd.bz/api/assets/",
         "url_graphql": "https://test.parc4u.cz/graphql",
         "url_api": "https://test.parc4u.cz/api",
-        "url_cms": "https://test.parc4u.cz/squidex",
+        "url_cms": "https://test.parc4u.cz/cms-api",
         "web_api_key": "default-api-key",
         "x_api_key": "6DBE159EAAB67C2AFD31DED689608711",
         "includeTestData": true,

@@ -1,16 +1,27 @@
 <ng-template #templateIcons let-data="data">
-    <lnd-button
-        icon="icon--edit"
-        type="icon"
-        variant="icon"
-        (action)="editSupplyPoint(data.id)">
-    </lnd-button>
-    <lnd-button
-        type="icon"
-        icon="icon--delete"
-        variant="icon"
-        (action)="deleteSupplyPointImport(data)">
-    </lnd-button>
+    <ng-template #tooltipEdit let-toggle="toggle">
+        <lnd-button
+            icon="icon--edit"
+            type="icon"
+            variant="icon"
+            (action)="editSupplyPoint(data.id)">
+        </lnd-button>
+    </ng-template>
+    <ng-template #tooltipDelete let-toggle="toggle">
+        <lnd-button
+            type="icon"
+            icon="icon--delete"
+            variant="icon"
+            (action)="deleteSupplyPointImport(data)">
+        </lnd-button>
+    </ng-template>
+
+    <lnd-tooltip [actionTemplate]="tooltipDelete" direction="bottom">
+        Ostranit
+    </lnd-tooltip>
+    <lnd-tooltip [actionTemplate]="tooltipEdit" direction="bottom">
+        Upravit
+    </lnd-tooltip>
 </ng-template>
 
 <pxe-layout-container [pageTitle]="title">
