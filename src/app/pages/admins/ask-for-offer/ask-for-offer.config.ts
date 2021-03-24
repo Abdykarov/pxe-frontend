@@ -48,7 +48,7 @@ export const tableConfig: ITableColumnConfig[] = ([
 ]);
 
 export const paginationConfig: IPaginationConfig = {
-    itemsPerPage: 10,
+    itemsPerPage: 20,
     showBoundaryLinks: true,
     maxSize: 5,
     firstText: '<span class="arrow-text">first</span>',
