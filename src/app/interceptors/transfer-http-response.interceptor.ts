@@ -63,14 +63,14 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
             return next.handle(req);
         } else {
             console.log(2123123);
+            const plainKey = req.body && req.body.operationName;
 
-            const key = makeStateKey<HttpResponse<object>>(CONSTS.ANGULAR_UNIVERSAR_STATE_KEY_PREFIX + req.body && req.body.operationName);
-
-            if (!key) {
+            if (!plainKey) {
                 console.log('key not exists');
                 console.log(req);
                 return next.handle(req);
             }
+            const key = makeStateKey<HttpResponse<object>>(CONSTS.ANGULAR_UNIVERSAR_STATE_KEY_PREFIX + plainKey);
 
             if (isPlatformBrowser(this.platformId)) {
                 console.log(10);
