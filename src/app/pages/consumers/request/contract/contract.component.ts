@@ -149,6 +149,8 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                         this.checkoutSent = true;
                     }
 
+                    console.log('JSEM PRED SUBJECT TYPE INDIVIDUAL');
+                    console.log(this.supplyPoint.subject.code === this.subjectType.SUBJECT_TYPE_INDIVIDUAL);
                     const documentTypeInformation$ = this.supplyPoint.subject.code === this.subjectType.SUBJECT_TYPE_INDIVIDUAL ?
                         this.documentService.getDocument(this.supplyPoint.contract.contractId, this.documentType.INFORMATION)
                             .pipe(retry(CONSTS.CONTRACT_SIGN_NUMBER_OF_RETRY)) :
@@ -178,6 +180,7 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
             )
             .subscribe(
                 ([documentTypeInformation, documentTypeContract, documentTypeUnsetProlongation]) => {
+                    console.log('VSE JE OK');
                     this.documentTypeInformation = documentTypeInformation;
                     this.documentTypeContract = documentTypeContract;
                     if (documentTypeUnsetProlongation) {
@@ -191,6 +194,9 @@ export class ContractComponent extends AbstractFaqComponent implements OnInit {
                     });
                 },
                 (error) => {
+                    console.log('error');
+                    console.log(error);
+                    console.log(JSON.stringify(error));
                     const { globalError } = parseGraphQLErrors(error);
                     this.showErrorMessageWithLoadingContracts = true;
                     this.globalError = globalError;

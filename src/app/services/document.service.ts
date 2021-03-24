@@ -30,11 +30,14 @@ export class DocumentService {
     ) {}
 
     public getDocument = (contractId: string, documentType: IDocumentType): Observable<IResponseDataDocument> => {
+        console.log('VOLAM GET DOCUMENT');
         return this.http.get(`${environment.url_api}/v1.0/documents/${contractId}/${documentType}`, {
             responseType: 'blob',
             observe: 'response',
         }).pipe(
             map((response: HttpResponse<any>): IResponseDataDocument => {
+                console.log('dostal jsem response');
+                console.log(response);
                 const headers = response.headers.get('content-disposition');
                 const filename = headers.split(';')[1].split('filename')[1]
                     .split('=')[1].trim().replace(new RegExp('"', 'g'), '');
