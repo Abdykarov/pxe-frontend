@@ -31,16 +31,18 @@ export class ApiInterceptor implements HttpInterceptor {
         request: HttpRequest<any>,
         next: HttpHandler,
     ): Observable<HttpEvent<any>> {
-
+        console.log('API INTERCEPTOR');
         if (request.url.indexOf(CONSTS.CMS.REGEX_CONTAIN_CMS) !== -1) {
             return next.handle(request);
         }
+        console.log('API INTERCEPTOR2');
 
         let resultRequest = request.clone({
             setHeaders: {
                 'X-API-Key': `${environment.x_api_key}`,
             },
         });
+        console.log('API INTERCEPTOR3');
 
         if (
             request.url.match(/api\//) &&
@@ -51,6 +53,7 @@ export class ApiInterceptor implements HttpInterceptor {
                 headers: this.authService.getAuthorizationHeaders('application/json'),
             });
         }
+        console.log('API INTERCEPTOR4');
 
         if (
             request.url.match(/api\//) &&
@@ -60,10 +63,13 @@ export class ApiInterceptor implements HttpInterceptor {
                 headers: this.authService.getAuthorizationHeaders('application/octet-stream'),
             });
         }
+        console.log('API INTERCEPTOR5');
 
         return next.handle(resultRequest)
             .pipe(
                 catchError((error, caught) => {
+                    console.log('API INTERCEPTOR CATHCED');
+                    console.log(error);
                     if (error.status === 401) {
                         this.authService.logoutForced();
                     } else {
