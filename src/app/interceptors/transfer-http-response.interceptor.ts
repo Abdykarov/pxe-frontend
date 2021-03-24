@@ -44,7 +44,9 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         console.log('!this.isCmsRequest(req)');
+        console.log(req);
         console.log(this.isRefreshToken(req));
+        console.log(!this.isCmsRequest(req));
         console.log(environment.useDirectlyCMS);
 
         if (
@@ -56,6 +58,11 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
             return next.handle(req);
         } else {
             console.log(2);
+            if (req.body?.operationName) {
+                console.log(22);
+                return next.handle(req);
+            }
+            console.log(2123123);
 
             const key = makeStateKey<HttpResponse<object>>(CONSTS.ANGULAR_UNIVERSAR_STATE_KEY_PREFIX + req.body.operationName);
 

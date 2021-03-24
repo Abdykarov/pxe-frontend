@@ -151,7 +151,7 @@ export const CONSTS = {
         CLIENT_SECRET: 'oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx',
         GRAND_TYPE: 'client_credentials',
         REFRESH_TOKEN_URL: 'identity-server/connect/token',
-        REGEX_CONTAIN_CMS: 'cms',
+        REGEX_CONTAIN_CMS: 'cms-api',
         SCOPE: 'squidex-api',
     },
     START_STICKER_HEADER: 0,
