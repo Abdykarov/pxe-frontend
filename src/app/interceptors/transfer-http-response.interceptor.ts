@@ -43,42 +43,25 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
     private isCmsRequest = (req) => req.url.indexOf(CONSTS.CMS.REGEX_CONTAIN_CMS) >= -1;
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log('!this.isCmsRequest(req)');
-        console.log(req);
-        console.log(this.isRefreshToken(req));
-        console.log(!this.isCmsRequest(req));
-        console.log(environment.useDirectlyCMS);
-
-        console.log('result');
-        console.log(!this.isCmsRequest(req) ||
-            this.isRefreshToken(req) &&
-            environment.useDirectlyCMS);
-
         if (
             !this.isCmsRequest(req) ||
             this.isRefreshToken(req) &&
             environment.useDirectlyCMS
         ) {
-            console.log(1);
             return next.handle(req);
         } else {
-            console.log(2123123);
             const plainKey = req.body && req.body.operationName;
 
             if (!plainKey) {
-                console.log('key not exists');
-                console.log(req);
                 return next.handle(req);
             }
             const key = makeStateKey<HttpResponse<object>>(CONSTS.ANGULAR_UNIVERSAR_STATE_KEY_PREFIX + plainKey);
 
             if (isPlatformBrowser(this.platformId)) {
-                console.log(10);
 
                 // Try reusing transferred response from server
                 const cachedResponse = this.transferState.get(key, null);
                 if (cachedResponse) {
-                    console.log(cachedResponse);
                     this.transferState.remove(key); // cached response should be used for the very first time
                     return of(new HttpResponse({
                         body: cachedResponse.body,
@@ -91,7 +74,6 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
             }
 
             if (isPlatformServer(this.platformId)) {
-                console.log(11);
                 // Try saving response to be transferred to browser
                 return next.handle(req).pipe(tap(event => {
                     if (event instanceof HttpResponse && event.status === 200) {
