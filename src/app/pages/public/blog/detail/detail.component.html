@@ -1,7 +1,7 @@
 <div class="row mb-6" *ngIf="(activeArticle$ | async) as activeArticle">
     <div class="col-12 col-xl-10 offset-xl-1 mb-3">
         <h2 class="h2--public">{{activeArticle.header}}</h2>
-        <div [innerHTML]="activeArticle.content"></div>
+        <div [innerHTML]="activeArticle.content | blogContent"></div>
     </div>
 </div>
 <ng-container *ngIf="(activeType$ | async) as activeTag">
@@ -13,7 +13,7 @@
                     <lnd-card
                         type="link"
                         [data]="article"
-                        (clickAction)="showDetail(activeTag, article)"
+                        [linkUrl]="[this.ROUTES.ROUTER_BLOG, activeTag.url, article.id]"
                     ></lnd-card>
                 </div>
             </ng-container>

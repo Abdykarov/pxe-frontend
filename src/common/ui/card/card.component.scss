@@ -95,7 +95,7 @@
 	}
 
 	.card {
-		@include link-without-href {
+		@include link {
 			height: 100%;
 			color: $font-text;
 			overflow: hidden;
@@ -103,7 +103,7 @@
 			box-shadow: $box-shadow;
 		}
 
-		@include link-without-href-interactive {
+		@include link-interactive {
 			color: $font-text;
 			text-decoration: none;
 			box-shadow: $box-shadow-interactive;

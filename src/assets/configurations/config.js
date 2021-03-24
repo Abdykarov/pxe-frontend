@@ -10,6 +10,7 @@ window.angularDevstack = {
         "sAnalyticsTId": "",
         "url": "http://localhost:4200",
         "url_graphql": "http://localhost:4200/graphql",
+        "url_cms_assets": "https://squidex.lnd.bz/api/assets/",
         "url_cms": "https://squidex.lnd.bz",
         "url_cms_local": "https://squidex.lnd.bz",
         "url_cms_api": "api/content/pxe-parc4u/graphql",

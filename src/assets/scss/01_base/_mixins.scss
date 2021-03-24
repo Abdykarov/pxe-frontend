@@ -272,6 +272,26 @@
 
 
 /*
+ - Mixin for link
+ */
+
+@mixin link() {
+	&,
+	&:visited {
+		@content;
+	}
+}
+
+@mixin link-interactive() {
+	&.focus,
+	&:focus,
+	&:hover {
+		@content;
+	}
+}
+
+
+/*
  - Mixin for link without [href]
  */
 

@@ -24,8 +24,8 @@ export class CardComponent {
     @Input()
     public type: ICardType;
 
-    @Output()
-    public clickAction?: EventEmitter<any> = new EventEmitter<any>();
+    @Input()
+    public linkUrl?: string[];
 
     constructor(public domSanitizer: DomSanitizer) {
         this.type = R.contains(this.type, Object.values(ICardType)) ? this.type : null;

@@ -38,6 +38,21 @@ export const getBlog = gql`
               }
             }
           }
+          allType {
+            flatData {
+              label,
+              order,
+              title
+              seo {
+                flatData {
+                  description,
+                  keywords,
+                  title
+                }
+              }
+              url
+            }
+          }
         }
       }
     }
@@ -51,6 +66,11 @@ export const getLpArticles =  gql`
             header,
             img {
               url
+            },
+            type {
+              flatData {
+                url,
+              }
             },
             oneOfMostVisited,
             url,

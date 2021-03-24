@@ -7,4 +7,5 @@ export interface ICardData {
     textPrefix?: string;
     title: string;
     customClasses?: string;
+    customData?: any;
 }

@@ -130,8 +130,7 @@ const bodyQuestionsQuery = '{ operationName: \'queryQuestionContents\',\n' +
     '   \'query queryQuestionContents {queryQuestionContents {flatData {id,fullContent,shortContent,isTestData,oneOfMostVisited,tag {flatData {  label  type' +
     '  url  __typename}__typename}header,url,vatNumber,__typename}__typename}}\' }';
 
-const bodyBlogQuery = '{"operationName":"queryBlogContents","variables":{},"query":"query queryBlogContents {\\n  queryBlogContents {\\n    flatData {\\n      articles {\\n        flatData {\\n          content\\n          date\\n          header\\n          img {\\n            url\\n            __typename\\n          }\\n          oneOfMostVisited\\n          type {\\n            flatData {\\n              label\\n              seo {\\n                flatData {\\n                  description\\n                  keywords\\n                  title\\n                  __typename\\n                }\\n                __typename\\n              }\\n              url\\n              order\\n              title\\n              __typename\\n            }\\n            __typename\\n          }\\n          url\\n          seo {\\n            flatData {\\n              description\\n              keywords\\n              title\\n              __typename\\n            }\\n            __typename\\n          }\\n          __typename\\n        }\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n"}';
-
+const bodyBlogQuery = '{"operationName":"queryBlogContents","variables":{},"query":"query queryBlogContents {\n  queryBlogContents {\n    flatData {\n      articles {\n        flatData {\n          content\n          date\n          header\n          img {\n            url\n            __typename\n          }\n          oneOfMostVisited\n          type {\n            flatData {\n              label\n              seo {\n                flatData {\n                  description\n                  keywords\n                  title\n                  __typename\n                }\n                __typename\n              }\n              url\n              order\n              title\n              __typename\n            }\n            __typename\n          }\n          url\n          seo {\n            flatData {\n              description\n              keywords\n              title\n              __typename\n            }\n            __typename\n          }\n          __typename\n        }\n        __typename\n      }\n      allType {\n        flatData {\n          label\n          order\n          title\n          seo {\n            flatData {\n              description\n              keywords\n              title\n              __typename\n            }\n            __typename\n          }\n          url\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n"}';
 const bodyFaqType = '{"operationName":"queryFaqContents","variables":{},"query":"query queryFaqContents {\n  queryFaqContents {\n    flatData {\n      title\n      breadcrumbTitle\n      tag {\n        flatData {\n          type\n          url\n          label\n          title\n          __typename\n        }\n        __typename\n      }\n      seo {\n        ...seoFragment\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment seoFragment on SeoContent {\n  flatData {\n    description\n    keywords\n    title\n    __typename\n  }\n  __typename\n}\n"}';
 
 let Authorization = null;
@@ -201,20 +200,21 @@ const getQuestions = (questions) => {
     return questions;
 };
 
-const getTypes = R.pipe(
+const getTypes = (types, allType) => R.pipe(
     R.map(R.prop('type')),
     R.flatten,
     R.uniqBy(R.prop('url')),
+    R.insert(0, allType),
     R.sortBy(R.prop('order')),
-);
+)(types);
 
 // Server static files from /app
 server.get('/sitemap.xml', (req, res) => {
     const siteMapOriginal = fs.readFileSync(join(APP_FOLDER, 'sitemap.xml'), 'utf8');
     const parseString = xml2js.parseString;
     const questions = getQuestions(questionsSource.data.queryQuestionContents);
-    const blogData = normalize(blogSource.data.queryBlogContents)[0].articles;
-    const types = getTypes(blogData);
+    const blogData = normalize(blogSource.data.queryBlogContents)[0];
+    const types = getTypes(blogData.articles, blogData.allType[0]);
     const faqTypes = normalize(faqTypeSource.data.queryFaqContents);
 
     parseString(siteMapOriginal, (err, result) => {
@@ -246,7 +246,7 @@ server.get('/sitemap.xml', (req, res) => {
                 });
             }
         });
-        blogData.forEach(article => {
+        blogData.articles.forEach(article => {
             if (url && url.length) {
                 url.push({
                     'loc': [

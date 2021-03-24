@@ -55,9 +55,4 @@ export class DetailComponent extends AbstractComponent {
         evt.preventDefault();
         this.router.navigate([this.ROUTES.ROUTER_BLOG, 'all']);
     }
-
-    public showDetail(activeType: IType, article: ICardData): void {
-        this.router.navigate([this.ROUTES.ROUTER_BLOG, activeType.url, article.id]);
-    }
-
 }

@@ -21,4 +21,5 @@ export interface IArticle {
 
 export interface IBlog {
     articles: IArticle[];
+    allType: IType;
 }
