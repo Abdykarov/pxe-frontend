@@ -372,7 +372,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             name = this.formValues.name;
             ean = this.formValues.commodityType === CommodityType.POWER ? this.formValues.identificationNumber : null;
             eic = this.formValues.commodityType === CommodityType.GAS ? this.formValues.identificationNumber : null;
-            address = this.formValues.address && R.omit(['__typename'], this.formValues.address);
+            address = this.formValues?.address?.city && R.omit(['__typename'], this.formValues.address);
             distributionRateId = this.formValues?.distributionRate && this.formValues.distributionRate.code;
             circuitBreakerId = this.formValues?.circuitBreaker && this.formValues.circuitBreaker.code;
             phasesId = this.formValues?.phases && this.formValues.phases.code;

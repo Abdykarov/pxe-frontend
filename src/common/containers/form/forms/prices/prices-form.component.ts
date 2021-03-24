@@ -1,4 +1,5 @@
 import {
+    ChangeDetectorRef,
     Component,
     Input,
     OnChanges,
@@ -23,15 +24,20 @@ export class PricesFormComponent extends AbstractFormComponent implements OnChan
     public supplyPoint: ISupplyPoint;
 
     constructor(
+        private cd: ChangeDetectorRef,
         protected fb: FormBuilder,
     ) {
         super(fb);
     }
 
     ngOnChanges(changes: SimpleChanges) {
+        super.ngOnChanges(changes);
         if (changes && changes.supplyPoint) {
-            this.prefillFormData();
-            this.setForm();
+            setTimeout( _ => {
+                this.prefillFormData();
+                this.setForm();
+                this.cd.markForCheck();
+            });
         }
     }
 

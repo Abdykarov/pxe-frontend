@@ -11,7 +11,7 @@
             type="icon"
             icon="icon--delete"
             variant="icon"
-            title="Zamítnout"
+            title="Odstranit"
             (action)="delete(row.id)"
         ></lnd-button>
     </div>
@@ -44,7 +44,7 @@
         <div class="col-12">
             <lnd-placeloader [loading]="loading"></lnd-placeloader>
         </div>
-        <div *ngIf="paginatedAskForOffer"
+        <div *ngIf="paginatedAskForOffer && !loading"
              class="col-12">
             <ng-container *ngIf="paginatedAskForOffer.page.length > 0">
                 <lnd-table

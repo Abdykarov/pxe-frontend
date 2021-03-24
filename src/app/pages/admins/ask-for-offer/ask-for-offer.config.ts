@@ -19,7 +19,7 @@ export const tableConfig: ITableColumnConfig[] = ([
         views: [
             {
                 headingClass: [''],
-                cellClass: [''],
+                cellClass: ['text-overflow-ellipsis'],
                 content: (row) => `${row.email}`,
             },
         ],
@@ -29,6 +29,7 @@ export const tableConfig: ITableColumnConfig[] = ([
         label: 'Soubor',
         views: [
             {
+                cellClass: ['text-overflow-ellipsis', 'link-color'],
                 contentTemplateName: 'actionColumnPDF',
             },
         ],
@@ -67,4 +68,14 @@ export const confirmDeleteAskForOfferInfo = (): IShowModal => ({
         showCloseButton: false,
     },
     withoutScroll: true,
+});
+
+export const confirmDeleteAskForOffer = (): IShowModal => ({
+    component: 'ConfirmModalComponent',
+    modalType: CONSTS.MODAL_TYPE.CONFIRM_DELETE_SUPPLY_POINT_IMPORT,
+    instanceData: {
+        confirmText: `Opravdu chcete smazat žádost?`,
+        titleConfirm: 'ANO SMAZAT',
+        data: {},
+    },
 });

@@ -81,6 +81,9 @@ export const CONSTS = {
     MODAL_TYPE: {
         CONFIRM_INFO_DELETE_ASK_FOR_OFFER: 'confirmAskForOfferOffer',
         CONFIRM_INFO_OFFER: 'confirmInfoOffer',
+        CONFIRM_INFO_SUPPLY_POINT_IMPORT_ADDED: 'confirmInfoSupplyPointImportAdded',
+        CONFIRM_DELETE_ASK_FOR_OFFER: 'confirmDeleteAskForOffer',
+        CONFIRM_DELETE_SUPPLY_POINT_IMPORT: 'confirmSupplyPointImport',
         CONFIRM_DELETE_REQUEST: 'confirmDeleteOffer',
         CONFIRM_DELETE_OFFER: 'confirmDeleteOffer',
         CONFIRM_CANCEL_OFFER: 'confirmCancelOffer',
