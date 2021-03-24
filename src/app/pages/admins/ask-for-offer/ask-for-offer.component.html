@@ -2,18 +2,18 @@
     <div *ngIf="row.status !== ContractUploadStatus.PROCESSED"
         class="d-flex justify-content-end">
         <lnd-button
-            customClass="mr-3"
-            (action)="routerToCreateUser(row.id, row.email)"
-            [label]="row.status === ContractUploadStatus.NEW ? 'Vyplnit' : 'Dokončit'"
-            type="primary">
-        </lnd-button>
-        <lnd-button
             type="icon"
             icon="icon--delete"
             variant="icon"
             title="Odstranit"
             (action)="delete(row.id)"
         ></lnd-button>
+        <lnd-button
+            customClass="mr-3"
+            (action)="routerToCreateUser(row.id, row.email)"
+            [label]="row.status === ContractUploadStatus.NEW ? 'Vyplnit' : 'Dokončit'"
+            type="primary">
+        </lnd-button>
     </div>
 </ng-template>
 

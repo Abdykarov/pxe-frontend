@@ -49,6 +49,11 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
         console.log(!this.isCmsRequest(req));
         console.log(environment.useDirectlyCMS);
 
+        console.log('result');
+        console.log(!this.isCmsRequest(req) ||
+            this.isRefreshToken(req) &&
+            environment.useDirectlyCMS);
+
         if (
             !this.isCmsRequest(req) ||
             this.isRefreshToken(req) &&
@@ -57,14 +62,15 @@ export class TransferHttpResponseInterceptor implements HttpInterceptor {
             console.log(1);
             return next.handle(req);
         } else {
-            console.log(2);
-            if (req.body?.operationName) {
-                console.log(22);
-                return next.handle(req);
-            }
             console.log(2123123);
 
-            const key = makeStateKey<HttpResponse<object>>(CONSTS.ANGULAR_UNIVERSAR_STATE_KEY_PREFIX + req.body.operationName);
+            const key = makeStateKey<HttpResponse<object>>(CONSTS.ANGULAR_UNIVERSAR_STATE_KEY_PREFIX + req.body && req.body.operationName);
+
+            if (!key) {
+                console.log('key not exists');
+                console.log(req);
+                return next.handle(req);
+            }
 
             if (isPlatformBrowser(this.platformId)) {
                 console.log(10);
