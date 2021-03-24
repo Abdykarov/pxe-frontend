@@ -163,9 +163,13 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
 
     }
 
-    public routerToCreateUser = (askForOfferId: string) => this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
+    public routerToCreateUser = (
+        askForOfferId: string,
+        email: string,
+    ) => this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
         queryParams: {
             askForOfferId,
+            email,
         },
     })
 
@@ -193,7 +197,6 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
 
     public downloadAskForOffer = (documentId: string) => {
         this.globalError = [];
-        this.loading = true;
         downloadFile(this.http, `v1.0/ask-for-offer/uploaded-document/${documentId}`)
             .pipe(
                 takeUntil(this.destroy$),
@@ -201,7 +204,6 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
                     this.askForOfferService.documentSave(responseDataDocument);
-                    this.loading = false;
                     this.cd.markForCheck();
                 },
                 (error) => {
@@ -214,7 +216,6 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
 
     public downloadAskForOffersZipArchive = (askForOfferId: string) => {
         this.globalError = [];
-        this.loading = true;
         downloadFile(this.http, `v1.0/ask-for-offer/${askForOfferId}/archive`)
             .pipe(
                 takeUntil(this.destroy$),
@@ -222,7 +223,6 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
                     this.askForOfferService.documentSave(responseDataDocument);
-                    this.loading = false;
                     this.cd.markForCheck();
                 },
                 (error) => {

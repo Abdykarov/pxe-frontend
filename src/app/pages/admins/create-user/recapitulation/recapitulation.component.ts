@@ -49,7 +49,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
     public formFields = formFields;
 
     public subjectType = SubjectType;
-    public supplyPoint$: Observable<ISupplyPoint> = this.createUserFacade.activeSupplyPoint$;
+    public supplyPoint$: Observable<ISupplyPoint> = null;
     public codeLists$: Observable<ICodelistOptions> = this.supplyService.findCodelistsByTypes(CODE_LIST_TYPES, 'cs')
         .pipe(
             takeUntil(this.destroy$),
@@ -68,6 +68,18 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         super();
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.formFields.controls = removeRequiredValidators(this.formFields.controls);
+        this.supplyPoint$ = this.createUserFacade.activeSupplyPoint$.pipe(
+            map((supplyPoint: ISupplyPoint) => {
+                if (supplyPoint.contract && !supplyPoint.contract?.personalData?.email) {
+                    supplyPoint.contract.personalData = {
+                        email: this.createUserFacade.queryParamsSubject$.getValue().email,
+                        ...supplyPoint?.contract?.personalData,
+                    };
+                }
+
+                return supplyPoint;
+            }),
+        );
     }
 
     ngOnInit () {
