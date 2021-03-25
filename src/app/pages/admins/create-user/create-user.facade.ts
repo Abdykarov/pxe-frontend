@@ -107,7 +107,7 @@ export class CreateUserFacade {
                             {
                                 data: supplyPoint,
                                 label: supplyPoint.name || (supplyPoint.commodityType === CommodityType.POWER ?
-                                    'ODBÉRNÉ MÍSTO - ELEKTŘINA' : 'ODBÉRNÉ MÍSTO - PLYN'),
+                                    'ODBĚRNÉ MÍSTO - ELEKTŘINA' : 'ODBĚRNÉ MÍSTO - PLYN'),
                                 active: supplyPoint.id === this.getSupplyPointId(),
                             }
                         ),
