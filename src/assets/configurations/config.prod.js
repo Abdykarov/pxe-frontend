@@ -4,6 +4,7 @@
 window.angularDevstack = {
     "config": {
         "gaId": "",
+        "environment": "prod",
         "gtmId": "GTM-58VS48R",
         "sAnalyticsTId": "SA-00080-1",
         "production": true,

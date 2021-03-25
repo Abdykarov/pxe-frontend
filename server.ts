@@ -106,10 +106,22 @@ const normalize = R.cond([
     ],
 ]);
 
+const squidexSettingByEnvironment = {
+    preview: {
+        url: 'https://squidex.lnd.bz/',
+    },
+    test: {
+        url: 'https://squidex-preview.lnd.bz/',
+    },
+    prod: {
+        url: 'https://squidex-prod.lnd.bz/', // replace by prod
+    },
+};
+
 const PAGE_M_CACHE_PREFIX = 'PAGE_';
 const SQUIDEX_M_CACHE_PREFIX = 'SQUIDEX_';
 
-const SQUIDEX_URL = 'https://squidex.lnd.bz/';
+const SQUIDEX_URL = squidexSettingByEnvironment[plainConfig.environment].url;
 const SQUIDEX_REFRESH_TOKEN_URL = `${SQUIDEX_URL}identity-server/connect/token`;
 const SQUIDEX_REFRESH_QUERY_URL = `${SQUIDEX_URL}api/content/pxe-parc4u/graphql`;
 
@@ -275,6 +287,7 @@ server.post('/cms-api', ({body}, res) => {
     const data = plainConfig.cacheSSR ? mCache.get(cacheKey) : false;
     if (!data) {
         request(queryRequest(JSON.stringify(body)), (err, requestRes, responseBody) => {
+
             if (plainConfig.cacheSSR) {
                 mCache.put(cacheKey, responseBody);
             }
