@@ -59,7 +59,7 @@ export class SupplyPointImportService {
                     newState = [...newState, newSupplyPoint];
                 }
 
-                cache.writeQuery({
+                return cache.writeQuery({
                     query: findSupplyPointImportsQuery,
                     data: { findSupplyPointImports: newState },
                     variables: {

@@ -41,7 +41,11 @@ export class CreateUserComponent extends AbstractComponent {
             .pipe(takeUntil(this.destroy$))
             .subscribe(event => {
                 if (event instanceof NavigationEnd) {
-                    const {askForOfferId, email, supplyPointId = null} = this.route.snapshot.firstChild.queryParams;
+                    const {
+                        askForOfferId,
+                        email,
+                        supplyPointId = null,
+                    } = this.route.snapshot.firstChild.queryParams;
 
                     if (askForOfferId) {
                         if (!supplyPointId) {
@@ -53,7 +57,12 @@ export class CreateUserComponent extends AbstractComponent {
                         const [
                             supplyPointsImport$,
                             supplyPointsImportMicroTableData$,
-                        ] = this.createUserFacade.setObservableByQueryParams$(askForOfferId, supplyPointId, email, isNewSupplyPoint);
+                        ] = this.createUserFacade.setObservableByQueryParams$(
+                            askForOfferId,
+                            supplyPointId,
+                            email,
+                            isNewSupplyPoint,
+                        );
                         this.supplyPointsImport$ = <Observable<ISupplyPoint[]>>supplyPointsImport$;
                         this.supplyPointsImportMicroTableData$ = <Observable<IMicroTableData[]>>supplyPointsImportMicroTableData$;
                     } else {
