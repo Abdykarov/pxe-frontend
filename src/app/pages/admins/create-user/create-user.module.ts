@@ -17,6 +17,7 @@ import { RecapitulationComponent } from './recapitulation/recapitulation.compone
 import { RecapitulationRoutingModule } from 'src/app/pages/consumers/request/recapitulation/recapitulation.routing';
 import { SupplyPointComponent } from './supply-point/supply-point.component';
 import { SupplyPointFormModule } from 'src/common/containers/form/forms/supply-point/supply-point-form.module';
+import { TooltipModule } from 'src/common/ui/tooltip/tooltip.module';
 
 @NgModule({
     declarations: [
@@ -39,6 +40,7 @@ import { SupplyPointFormModule } from 'src/common/containers/form/forms/supply-p
         RouterModule,
         RecapitulationRoutingModule,
         SupplyPointFormModule,
+        TooltipModule,
     ],
 })
 export class CreateUserModule { }

@@ -113,6 +113,7 @@ export class SupplyPointComponent extends AbstractComponent {
                         queryParams: {
                             askForOfferId: this.createUserFacade.queryParamsSubject$.getValue().askForOfferId,
                             supplyPointId: newSupplyPoint.id,
+                            email: this.createUserFacade.getEmail(),
                         },
                     });
                 },

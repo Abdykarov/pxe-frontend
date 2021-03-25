@@ -1,27 +1,29 @@
-<ng-container *ngIf="supplyPoint$ | async as supplyPoint">
-    <div *ngIf="supplyPoint"
-         class="row align-items-center mb-3">
-        <div class="col-12 mb-5 col-md-3 mb-md-0 text-center text-md-left">
-            <lnd-button
-                label="Krok zpět"
-                type="secondary"
-                (action)="backStep()">
-            </lnd-button>
+<ng-container *ngIf="supplyPoint$">
+    <ng-container *ngIf="supplyPoint$ | async as supplyPoint">
+        <div *ngIf="supplyPoint"
+             class="row align-items-center mb-3">
+            <div class="col-12 mb-5 col-md-3 mb-md-0 text-center text-md-left">
+                <lnd-button
+                    label="Krok zpět"
+                    type="secondary"
+                    (action)="backStep()">
+                </lnd-button>
+            </div>
         </div>
-    </div>
-    <div class="page-box">
-        <pxe-personal-info-form
-            *ngIf="codeLists"
-            [supplyPoint]="supplyPoint"
-            [codeLists]="codeLists"
-            [withPrefillFromProfile]="false"
-            [isIndividual]="subjectType.SUBJECT_TYPE_INDIVIDUAL === supplyPoint.subject.code"
-            [fieldError]="fieldError"
-            [formFields]="formFields"
-            [formValues]="supplyPoint.contract.personalData"
-            [formLoading]="formLoading"
-            [globalError]="globalError"
-            (submitAction)="submit($event, supplyPoint)">
-        </pxe-personal-info-form>
-    </div>
+        <div class="page-box">
+            <pxe-personal-info-form
+                *ngIf="codeLists"
+                [supplyPoint]="supplyPoint"
+                [codeLists]="codeLists"
+                [withPrefillFromProfile]="false"
+                [isIndividual]="subjectType.SUBJECT_TYPE_INDIVIDUAL === supplyPoint.subject.code"
+                [fieldError]="fieldError"
+                [formFields]="formFields"
+                [formValues]="supplyPoint.contract.personalData"
+                [formLoading]="formLoading"
+                [globalError]="globalError"
+                (submitAction)="submit($event, supplyPoint)">
+            </pxe-personal-info-form>
+        </div>
+    </ng-container>
 </ng-container>

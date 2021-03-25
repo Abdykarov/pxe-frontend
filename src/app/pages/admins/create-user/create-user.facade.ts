@@ -75,10 +75,16 @@ export class CreateUserFacade {
             map(({data}) => data.createUser),
         );
 
-    public setObservableByQueryParams$ = (askForOfferId: string, supplyPointId: string) => {
+    public setObservableByQueryParams$ = (
+        askForOfferId: string,
+        supplyPointId: string,
+        email: string,
+        isInitRouterEvents: boolean,
+    ) => {
         this.queryParamsSubject$.next({
             askForOfferId,
             supplyPointId,
+            email,
         });
 
         this.supplyPointsImport$ = this.supplyPointImportService.findSupplyPointImports(askForOfferId)
@@ -86,11 +92,20 @@ export class CreateUserFacade {
                 map(({data}) => data.findSupplyPointImports),
                 tap(
                     (supplyPoints: ISupplyPoint[]) => {
+                        const supplyPointCount = supplyPoints.length;
                         if (supplyPointId !== null) {
                             const activeSupplyPoint: ISupplyPoint = R.find(
                                 R.propEq('id', supplyPointId),
                             )(supplyPoints);
                             this.setActiveSupplyPoint(activeSupplyPoint);
+                        } else if (isInitRouterEvents && supplyPointCount > 0) {
+                            this.router.navigate([ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
+                                queryParams: {
+                                    askForOfferId: this.queryParamsSubject$.getValue().askForOfferId,
+                                    supplyPointId: R.last(supplyPoints).id,
+                                    email: this.getEmail(),
+                                },
+                            });
                         } else {
                             this.setActiveSupplyPoint(null);
                         }
@@ -102,7 +117,7 @@ export class CreateUserFacade {
         this.supplyPointsImportMicroTableData$ = this.supplyPointsImport$.pipe(
             map(
                 R.map(
-                    (supplyPoint: ISupplyPoint) =>
+                    (supplyPoint: ISupplyPoint): IMicroTableData =>
                         (
                             {
                                 data: supplyPoint,
@@ -156,6 +171,7 @@ export class CreateUserFacade {
     public setActiveSupplyPoint = (supplyPoint: ISupplyPoint) =>
         this.supplyPointImportService.setActiveSupplyPoint(supplyPoint).subscribe()
 
+    public getEmail = (): string => this.queryParamsSubject$.getValue().email;
     public getAskForOfferId = (): string => this.queryParamsSubject$.getValue().askForOfferId;
     public getSupplyPointId = (): string => this.queryParamsSubject$.getValue().supplyPointId;
 }
