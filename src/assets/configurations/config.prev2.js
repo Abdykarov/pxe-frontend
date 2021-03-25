@@ -5,6 +5,7 @@ window.angularDevstack = {
     "config": {
         "gaId": "",
         "gtmId": "",
+        "environment": "preview",
         "production": true,
         "sAnalyticsTId": "",
         "url": "https://pxeparc-preview.lnd.bz",

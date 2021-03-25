@@ -1,11 +1,12 @@
 // Default variables for all not defined environments and for DEV
 // !!! it is necessary to follow the JSON structure !!!
 //api/content/pxe-parc4u/graphql for localhost developing url_cms_api
-
+//cms-api for ssr
 window.angularDevstack = {
     "config": {
         "gaId": "",
         "gtmId": "",
+        "environment": "preview",
         "production": false,
         "sAnalyticsTId": "",
         "url": "http://localhost:4200",

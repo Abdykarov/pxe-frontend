@@ -99,13 +99,12 @@ export class SupplyPointComponent extends AbstractComponent {
         this.supplyPointImportService.mapPricesToSupplyPointImport(supplyPoint, activeSupplyPoint);
 
         if (!supplyPoint.name) {
-            supplyPoint.name = supplyPointFormData.commodityType === CommodityType.POWER === supplyPoint ?
+            supplyPoint.name = supplyPointFormData.commodityType === CommodityType.POWER ?
                 'ODBĚRNÉ MÍSTO - ELEKTŘINA' : 'ODBĚRNÉ MÍSTO - PLYN';
         }
 
         this.supplyPointImportService.createSupplyPointImport(askForOfferId, supplyPoint, !activeSupplyPoint)
             .pipe(
-                takeUntil(this.destroy$),
                 map(
                     ({data}) => data.createSupplyPointImport,
                 ),
@@ -128,6 +127,7 @@ export class SupplyPointComponent extends AbstractComponent {
                     this.fieldError = fieldError;
                     this.globalError = globalError;
                     this.cd.markForCheck();
-                });
+                },
+            );
     }
 }
