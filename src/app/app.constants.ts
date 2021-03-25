@@ -152,6 +152,7 @@ export const CONSTS = {
         GRAND_TYPE: 'client_credentials',
         REFRESH_TOKEN_URL: 'identity-server/connect/token',
         REGEX_CONTAIN_CMS: 'cms-api',
+        REGEX_CONTAIN_CMS_DIRECT: 'https://squidex.lnd.bz/api/content/pxe-parc4u/graphql',
         SCOPE: 'squidex-api',
     },
     START_STICKER_HEADER: 0,

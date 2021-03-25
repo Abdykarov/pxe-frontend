@@ -86,6 +86,7 @@ export interface ISupplyPointInput {
 export interface ISupplyPointGasAttributes {
     eic: string;
     annualConsumption: number;
+    annualConsumptionUnit?: string;
 }
 
 export interface ISupplyPointUpdateGasAttributes {
@@ -99,6 +100,8 @@ export interface ISupplyPointPowerAttributes {
     distributionRateId: string;
     annualConsumptionNT: number;
     annualConsumptionVT: number;
+    annualConsumptionNTUnit?: string;
+    annualConsumptionVTUnit?: string;
 }
 
 export interface ISupplyPointUpdatePowerAttributes {

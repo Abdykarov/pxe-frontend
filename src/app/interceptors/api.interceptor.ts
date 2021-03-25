@@ -31,7 +31,10 @@ export class ApiInterceptor implements HttpInterceptor {
         request: HttpRequest<any>,
         next: HttpHandler,
     ): Observable<HttpEvent<any>> {
-        if (request.url.indexOf(CONSTS.CMS.REGEX_CONTAIN_CMS) !== -1) {
+        if (
+            request.url.indexOf(CONSTS.CMS.REGEX_CONTAIN_CMS) !== -1 ||
+            request.url.indexOf(CONSTS.CMS.REGEX_CONTAIN_CMS_DIRECT) !== -1
+        ) {
             return next.handle(request);
         }
 
