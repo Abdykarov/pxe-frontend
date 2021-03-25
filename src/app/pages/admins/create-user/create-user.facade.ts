@@ -79,7 +79,7 @@ export class CreateUserFacade {
         askForOfferId: string,
         supplyPointId: string,
         email: string,
-        isInitRouterEvents: boolean,
+        isNewSupplyPoint: boolean,
     ) => {
         this.queryParamsSubject$.next({
             askForOfferId,
@@ -98,7 +98,7 @@ export class CreateUserFacade {
                                 R.propEq('id', supplyPointId),
                             )(supplyPoints);
                             this.setActiveSupplyPoint(activeSupplyPoint);
-                        } else if (isInitRouterEvents && supplyPointCount > 0) {
+                        } else if (!isNewSupplyPoint && supplyPointCount > 0) {
                             this.router.navigate([ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
                                 queryParams: {
                                     askForOfferId: this.queryParamsSubject$.getValue().askForOfferId,
@@ -121,8 +121,7 @@ export class CreateUserFacade {
                         (
                             {
                                 data: supplyPoint,
-                                label: supplyPoint.name || (supplyPoint.commodityType === CommodityType.POWER ?
-                                    'ODBĚRNÉ MÍSTO - ELEKTŘINA' : 'ODBĚRNÉ MÍSTO - PLYN'),
+                                label: supplyPoint.name || supplyPoint.identificationNumber,
                                 active: supplyPoint.id === this.getSupplyPointId(),
                             }
                         ),

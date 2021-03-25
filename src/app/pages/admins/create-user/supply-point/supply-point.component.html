@@ -7,6 +7,7 @@
     </div>
     <ng-container *ngIf="(queryParams$ | async).askForOfferId as activeAskForOfferId">
         <div class="col-12" *ngIf="(activeSupplyPoint$ | async) as activeSupplyPoint">
+            {{activeSupplyPoint | json}}
             <pxe-supply-point-form
                 [editMode]="editMode"
                 [withoutValidator]="true"

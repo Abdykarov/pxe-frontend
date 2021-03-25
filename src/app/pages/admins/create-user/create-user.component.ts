@@ -25,7 +25,6 @@ import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
     styleUrls: ['./create-user.component.scss'],
 })
 export class CreateUserComponent extends AbstractComponent {
-    public isInitRouterEvents = true;
     public supplyPointsImport$: Observable<ISupplyPoint[]> = null;
     public supplyPointsImportMicroTableData$: Observable<IMicroTableData[]> = null;
     public title: string = null;
@@ -43,15 +42,18 @@ export class CreateUserComponent extends AbstractComponent {
             .subscribe(event => {
                 if (event instanceof NavigationEnd) {
                     const {askForOfferId, email, supplyPointId = null} = this.route.snapshot.firstChild.queryParams;
+
                     if (askForOfferId) {
                         if (!supplyPointId) {
                             this.createUserFacade.setActiveSupplyPoint(null);
                         }
 
+                        const isNewSupplyPoint = R.path(['history', 'state', 'isNewSupplyPoint'], window);
+
                         const [
                             supplyPointsImport$,
                             supplyPointsImportMicroTableData$,
-                        ] = this.createUserFacade.setObservableByQueryParams$(askForOfferId, supplyPointId, email, this.isInitRouterEvents);
+                        ] = this.createUserFacade.setObservableByQueryParams$(askForOfferId, supplyPointId, email, isNewSupplyPoint);
                         this.supplyPointsImport$ = <Observable<ISupplyPoint[]>>supplyPointsImport$;
                         this.supplyPointsImportMicroTableData$ = <Observable<IMicroTableData[]>>supplyPointsImportMicroTableData$;
                     } else {
@@ -60,7 +62,6 @@ export class CreateUserComponent extends AbstractComponent {
                     const step = this.route.snapshot.firstChild.data['step'];
                     this.title = this.route.snapshot.firstChild.data['title'];
                     this.configStepper = getConfigStepper(step, false, TypeStepper.CREATE_USER);
-                    this.isInitRouterEvents = false;
                 }
             });
     }

@@ -28,6 +28,7 @@ export class PaymentGuard implements CanActivateChild {
         childRoute: ActivatedRouteSnapshot,
         state: RouterStateSnapshot,
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+        return true;
         this.authService.checkLogin();
         const storedSupplyPointId = this.authService.currentUserValue?.evaluatedSupplyPoint?.toString();
         const actualSupplyPointId = state.root.queryParams?.supplyPointId?.toString();
