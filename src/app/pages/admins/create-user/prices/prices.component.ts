@@ -68,6 +68,10 @@ export class PricesComponent extends AbstractComponent implements OnInit {
                         this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
                             queryParams: {
                                 askForOfferId: this.createUserFacade.getAskForOfferId(),
+                                email: this.createUserFacade.getEmail(),
+                            },
+                            state: {
+                                isNewSupplyPoint: true,
                             },
                         });
                     } else {

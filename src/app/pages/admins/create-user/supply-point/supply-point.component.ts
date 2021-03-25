@@ -98,6 +98,11 @@ export class SupplyPointComponent extends AbstractComponent {
 
         this.supplyPointImportService.mapPricesToSupplyPointImport(supplyPoint, activeSupplyPoint);
 
+        if (!supplyPoint.name) {
+            supplyPoint.name = supplyPointFormData.commodityType === CommodityType.POWER === supplyPoint ?
+                'ODBĚRNÉ MÍSTO - ELEKTŘINA' : 'ODBĚRNÉ MÍSTO - PLYN';
+        }
+
         this.supplyPointImportService.createSupplyPointImport(askForOfferId, supplyPoint, !activeSupplyPoint)
             .pipe(
                 takeUntil(this.destroy$),

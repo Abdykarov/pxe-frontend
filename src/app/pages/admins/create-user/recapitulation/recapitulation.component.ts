@@ -70,7 +70,7 @@ export class RecapitulationComponent extends AbstractComponent implements OnInit
         this.formFields.controls = removeRequiredValidators(this.formFields.controls);
         this.supplyPoint$ = this.createUserFacade.activeSupplyPoint$.pipe(
             map((supplyPoint: ISupplyPoint) => {
-                if (supplyPoint.contract && !supplyPoint.contract?.personalData?.email) {
+                if (supplyPoint?.contract && !supplyPoint.contract?.personalData?.email) {
                     supplyPoint.contract.personalData = {
                         email: this.createUserFacade.queryParamsSubject$.getValue().email,
                         ...supplyPoint?.contract?.personalData,
