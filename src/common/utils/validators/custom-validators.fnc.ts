@@ -374,7 +374,7 @@ export class CustomValidators {
     static eic = (eic) => {
         if (!eic.value) {
             return {
-                ean: true,
+                eic: true,
             };
         }
 
