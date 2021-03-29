@@ -56,14 +56,6 @@ export class CreateUserFacade {
             )
             .subscribe(modal => {
                 if (modal.confirmed) {
-                    if (this.getSupplyPointId() === modal.data.id) {
-                        this.router.navigate([ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
-                            queryParams: {
-                                askForOfferId: this.queryParamsSubject$.getValue().askForOfferId,
-                            },
-                        });
-                    }
-
                     this.deleteSupplyPointImport(modal.data.id, this.getAskForOfferId());
                 }
                 this.modalsService.closeModalData$.next(null);
@@ -132,8 +124,23 @@ export class CreateUserFacade {
         return [this.supplyPointsImport$, this.supplyPointsImportMicroTableData$];
     }
 
-    public deleteSupplyPointImport = (supplyPointImportId: string, askForOfferId: string) =>
-        this.supplyPointImportService.deleteSupplyPointImportMutation(supplyPointImportId, askForOfferId).subscribe()
+    public deleteSupplyPointImport = (supplyPointImportId: string, askForOfferId: string) => {
+        this.supplyPointImportService.deleteSupplyPointImportMutation(supplyPointImportId, askForOfferId).subscribe( _ => {
+            const deletingSupplyPointIdIsActive = supplyPointImportId === this.getSupplyPointId();
+            if (deletingSupplyPointIdIsActive) {
+                const supplyPointsImport = this.supplyPointImportService.getSupplyPointImports(askForOfferId);
+                this.router.navigate([ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
+                    queryParams: {
+                        askForOfferId: this.queryParamsSubject$.getValue().askForOfferId,
+                        email: this.getEmail(),
+                    },
+                    state: {
+                        isNewSupplyPoint: supplyPointsImport.length === 0,
+                    },
+                });
+            }
+        });
+    }
 
     public confirmDeleteSupplyPointImport = (supplyPoint: ISupplyPoint): void => {
         this.modalsService
