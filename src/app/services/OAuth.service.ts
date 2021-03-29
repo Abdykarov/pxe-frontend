@@ -19,7 +19,7 @@ export class OAuthService {
 
     public getError = (loginResponse: ILoginResponse): string => oAuthApiError[loginResponse?.error];
 
-    public processLogin = (loginResponse: ILoginResponse) => {
+    public processLogin = (loginResponse: ILoginResponse): void => {
         this.authService.manageLoginResponse(loginResponse);
         this.authService.startRefreshTokenInterval();
         this.authService.startExpirationOfToken = new Date();
@@ -27,9 +27,9 @@ export class OAuthService {
         this.authService.wasRefreshCallRefreshInterval = true;
     }
 
-    public tryLoginWithOAuth = (oAuthType: OAuthType) => {
+    public tryLoginWithOAuth = (oAuthType: OAuthType): void => {
         window.open(
-            `http://localhost:8080/oauth2/authorize/${oAuthType}?redirect_uri=${environment.url}/login`,
+            `${environment.url}/oauth2/authorize/${oAuthType}?redirect_uri=${environment.url}/login`,
             '_self',
         );
     }
