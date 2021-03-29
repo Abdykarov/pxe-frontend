@@ -151,8 +151,8 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
                         dateTo,
                         dateFrom,
                     } = setting[this.SUBJECT_TYPE.INDIVIDUAL][this.COMMODITY_TYPE.POWER];
-                    const now = new Date().getTime();
-                    return dateTo.getTime() < now && dateFrom.getTime() < now;
+                    const now = moment();
+                    return moment(dateFrom) < now && moment(dateTo).add(1, 'days') < now;
                 },
             ),
             R.map(
@@ -169,7 +169,7 @@ export class PatternsOfContractsComponent extends AbstractComponent implements O
                         dateFrom,
                         dateTo,
                     } = setting[this.SUBJECT_TYPE.INDIVIDUAL][this.COMMODITY_TYPE.POWER];
-                    return moment().isBetween(moment(dateFrom), moment(dateTo));
+                    return moment().isBetween(moment(dateFrom), moment(dateTo).add(1, 'days'));
                 },
             ),
             R.head,
