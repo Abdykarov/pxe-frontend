@@ -530,7 +530,7 @@
 		color: $white;
 
 		&::after {
-			//background-image: url(../../../assets/images/social/facebook.svg);
+			background-image: url("../../../assets/images/social/fb.svg");
 		}
 
 		&:hover,
@@ -547,7 +547,7 @@
 
 		&::after {
 			content: '';
-			//background-image: url(../../../assets/images/social/google.svg);
+			background-image: url(../../../assets/images/social/google.svg);
 		}
 
 		&:hover,
