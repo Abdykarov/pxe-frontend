@@ -124,7 +124,7 @@ export class CreateUserFacade {
         return [this.supplyPointsImport$, this.supplyPointsImportMicroTableData$];
     }
 
-    public deleteSupplyPointImport = (supplyPointImportId: string, askForOfferId: string) => {
+    public deleteSupplyPointImport = (supplyPointImportId: string, askForOfferId: string) =>
         this.supplyPointImportService.deleteSupplyPointImportMutation(supplyPointImportId, askForOfferId).subscribe( _ => {
             const deletingSupplyPointIdIsActive = supplyPointImportId === this.getSupplyPointId();
             if (deletingSupplyPointIdIsActive) {
@@ -139,8 +139,7 @@ export class CreateUserFacade {
                     },
                 });
             }
-        });
-    }
+        })
 
     public confirmDeleteSupplyPointImport = (supplyPoint: ISupplyPoint): void => {
         this.modalsService
