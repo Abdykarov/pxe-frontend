@@ -21,12 +21,6 @@ export function createRegistrationFormFields(signUpType: SignUpType): IForm {
                     CustomValidators.email,
                 ],
             ],
-            consent: [
-                false,
-                [
-                    Validators.requiredTrue,
-                ],
-            ],
         },
         validationMessages: {
             email: {
@@ -35,16 +29,6 @@ export function createRegistrationFormFields(signUpType: SignUpType): IForm {
                 invalidEmail: errorFieldMessages.email.email,
                 alreadyRegisteredEmail: errorFieldMessages.email.alreadyRegisteredEmail,
                 maxlengthRequiredLengthActualLength: errorFieldMessages.string.maxlength,
-            },
-            consent: {
-                required: R.path(
-                    [
-                        'consent',
-                        SignUpType.NewsSubscription === signUpType ? 'newsSubscription' : 'signUp',
-                        'required',
-                    ],
-                    errorFieldMessages,
-                ),
             },
         },
     };

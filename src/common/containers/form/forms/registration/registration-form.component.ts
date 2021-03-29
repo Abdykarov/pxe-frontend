@@ -7,6 +7,8 @@ import {
 import { FormBuilder } from '@angular/forms';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
+import { OAuthService } from 'src/app/services/OAuth.service';
+import { OAuthType } from 'src/app/models/oAuth/oAuth.model';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Component({
@@ -15,6 +17,7 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
     styleUrls: ['./registration-form.component.scss'],
 })
 export class RegistrationFormComponent extends AbstractFormComponent implements OnDestroy {
+    public readonly oAuthType = OAuthType;
 
     @Input()
     public bubbleText;
@@ -30,6 +33,7 @@ export class RegistrationFormComponent extends AbstractFormComponent implements 
 
     constructor(
         public sAnalyticsService: SAnalyticsService,
+        public oauthService: OAuthService,
         protected fb: FormBuilder,
     ) {
         super(fb);

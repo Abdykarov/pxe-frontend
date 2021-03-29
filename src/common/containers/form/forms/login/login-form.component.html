@@ -69,7 +69,7 @@
     <div class="text-right">
         <lnd-button
             type="gradient-primary"
-            class="w-100"
+            class="w-100 mb-5"
             customClass="btn-public btn--icon-right w-100"
             [submit]="true"
             (action)="submitForm($event);sAnalyticsService.sFormClick($event);"
@@ -79,4 +79,27 @@
             iconPosition="right">
         </lnd-button>
     </div>
+    <p class="mb-2">
+        Nebo se založte účet pomocí
+    </p>
+    <div class="row mb-5">
+        <div class="col-md-6">
+            <lnd-button
+                label="Facebook"
+                type="facebook"
+                (action)="oauthService.tryLoginWithOAuth(oAuthType.FACEBOOK)">
+            </lnd-button>
+        </div>
+        <div class="col-md-6">
+            <lnd-button
+                label="Google"
+                type="google"
+                (action)="oauthService.tryLoginWithOAuth(oAuthType.GOOGLE)">
+            </lnd-button>
+        </div>
+    </div>
+    <p class="font-size-14">
+        Založením účtu souhlasím s <a target="_blank">Obchodními podmínkami parc4u</a> a beru na vědomí informace o <a target="_blank">Ochraně osobních údajů</a>.
+    </p>
 </form>
+
