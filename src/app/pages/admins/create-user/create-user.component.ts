@@ -77,7 +77,7 @@ export class CreateUserComponent extends AbstractComponent {
 
     public editSupplyPoint(supplyPointId: string) {
         this.createUserFacade.setActiveSupplyPoint(null);
-        this.router.navigate([this.ROUTES.ROUTER_ASK_FOR_OFFER]).then( _ => {
+        this.router.navigate([this.ROUTES.ROUTER_ASK_FOR_OFFER_IN_PROGRESS]).then( _ => {
             this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
                 queryParams: {
                     askForOfferId: this.createUserFacade.getAskForOfferId(),

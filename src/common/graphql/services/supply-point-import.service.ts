@@ -124,6 +124,16 @@ export class SupplyPointImportService {
             },
         ).valueChanges
 
+    public getSupplyPointImports = (
+        askForOfferId: string,
+    ) => this.apollo.getClient().readQuery<ISupplyPointImportInput[]>({
+                query: findSupplyPointImportsQuery,
+                variables: {
+                    askForOfferId,
+                },
+            },
+        )
+
     public mapPersonalInfoToPersonalInfoInput = (personalData: IPersonalData): IPersonalDataInput =>  omitTypeName({
         email: personalData.email,
         address1: personalData.address1,
