@@ -518,7 +518,6 @@
 			right: 20px;
 			width: 20px;
 			height: 100%;
-			//background-image: url(../../../assets/images/social/facebook.svg);
 			background-size: 20px;
 			background-repeat: no-repeat;
 			background-position-y: center;
@@ -530,7 +529,7 @@
 		color: $white;
 
 		&::after {
-			//background-image: url(../../../assets/images/social/facebook.svg);
+			background-image: url(../../../assets/images/social/fb.svg);
 		}
 
 		&:hover,
@@ -547,7 +546,7 @@
 
 		&::after {
 			content: '';
-			//background-image: url(../../../assets/images/social/google.svg);
+			background-image: url(../../../assets/images/social/google.svg);
 		}
 
 		&:hover,

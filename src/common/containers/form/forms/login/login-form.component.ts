@@ -15,6 +15,8 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { CONSTS } from 'src/app/app.constants';
+import { OAuthService } from 'src/app/services/OAuth.service';
+import { OAuthType } from 'src/app/models/oAuth/oAuth.model';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Component({
@@ -23,8 +25,8 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
     styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent extends AbstractFormComponent implements OnInit, OnDestroy {
-
     public readonly LOGIN_FORM_NAME = CONSTS.LOGIN_FORM_NAME;
+    public readonly oAuthType = OAuthType;
 
     @Input()
     public passwordWasSent = false;
@@ -43,6 +45,7 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit,
 
     constructor(
         protected fb: FormBuilder,
+        public oauthService: OAuthService,
         public sAnalyticsService: SAnalyticsService,
         private route: ActivatedRoute,
         @Inject(PLATFORM_ID) private platformId: string,
