@@ -28,9 +28,6 @@ export class RegistrationFormComponent extends AbstractFormComponent implements 
     @Input()
     public lightTheme = false;
 
-    @Input()
-    public agreementTemplate: TemplateRef<any>;
-
     constructor(
         public sAnalyticsService: SAnalyticsService,
         public oauthService: OAuthService,
