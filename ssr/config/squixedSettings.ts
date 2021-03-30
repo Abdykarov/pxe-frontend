@@ -8,4 +8,8 @@ export const squixedSettings = {
     prod: {
         url: 'https://squidex-prod.lnd.bz/', // replace by prod
     },
+    grant_type: 'client_credentials',
+    client_id: 'pxe-parc4u:default',
+    client_secret: 'oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx',
+    scope: 'squidex-api',
 };
