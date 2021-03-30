@@ -7,10 +7,10 @@ import {
 
 import * as R from 'ramda';
 
-import { BlogContentPipe } from 'src/common/pipes/blog-content/blog-content.pipe';
 import { CONSTS } from 'src/app/app.constants';
 import { IArticle } from 'src/common/cms/models/blog';
 import { ICardData } from 'src/common/ui/card/models/data.model';
+import { HtmlContentPipe } from 'src/common/pipes/html-content/html-content.pipe';
 import { removeHtmlFromText } from 'src/common/utils';
 
 @Injectable({
@@ -20,7 +20,7 @@ export class BlogService {
 
     constructor(
         @Inject(LOCALE_ID) private locale: string,
-        private blogContentPipe: BlogContentPipe,
+        private htmlContentPipe: HtmlContentPipe,
     ) {}
 
     public articleToCardData = (article: IArticle): ICardData => ({
@@ -35,7 +35,7 @@ export class BlogService {
     })
 
     public toShortContent = (cardData: ICardData) => {
-        const textWithoutHTML = removeHtmlFromText(this.blogContentPipe.transformWithoutTrustHtml(cardData.content));
+        const textWithoutHTML = removeHtmlFromText(this.htmlContentPipe.transformWithoutTrustHtml(cardData.content));
         const indexOfLastWord = textWithoutHTML.substr(CONSTS.MAX_LENGTH_BLOG_DESCRIPTION).indexOf(' ');
         const cutContent =  R.pipe(
             R.take(indexOfLastWord + CONSTS.MAX_LENGTH_BLOG_DESCRIPTION),

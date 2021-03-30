@@ -1,5 +1,5 @@
 <ng-template #accordionTemplate let-data>
-    <div [innerHTML]="data.shortContent"></div>
+    <div [innerHTML]="data.shortContent | htmlContent"></div>
     <div *ngIf="data.fullContent">
         <a class="link mt-4"
            [routerLink]="['/', CONSTS.PATHS.FAQ, data.tag[0].url, data.url]">
@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-12 col-xl-10 offset-xl-1 mb-3">
             <h1 class="h2--public">{{activeQuestion.header}}</h1>
-            <div [innerHTML]="activeQuestion.fullContent || activeQuestion.shortContent"></div>
+            <div [innerHTML]="(activeQuestion.fullContent || activeQuestion.shortContent) | htmlContent"></div>
         </div>
     </div>
     <div class="row">

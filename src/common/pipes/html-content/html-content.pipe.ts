@@ -10,9 +10,9 @@ import {
 import * as R from 'ramda';
 
 @Pipe({
-    name: 'blogContent',
+    name: 'htmlContent',
 })
-export class BlogContentPipe implements PipeTransform {
+export class HtmlContentPipe implements PipeTransform {
 
     constructor(private domSanitizer: DomSanitizer) {}
 
