@@ -13,7 +13,7 @@ import {
     ICodelistOptions,
     ISupplyPoint,
 } from 'src/common/graphql/models/supply.model';
-import {includesBothTariffs} from '../../../../utils';
+import { includesBothTariffs } from 'src/common/utils';
 
 @Component({
     selector: 'pxe-price-form',
