@@ -9,7 +9,7 @@
     },
     "files": [
         "app.server.ts",
-        "../server.ts"
+        "../ssr/index.ts"
     ],
     "include": [
         "src/**/*.d.ts",

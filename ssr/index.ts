@@ -20,9 +20,9 @@ import * as mCache from 'memory-cache';
 import * as cron from 'cron';
 
 const CronJob = cron.CronJob;
-const server = express();
-server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({ extended: true }));
+const index = express();
+index.use(bodyParser.json());
+index.use(bodyParser.urlencoded({ extended: true }));
 const PORT = process.env.PORT || 80;
 const DIST_FOLDER = join(process.cwd(), 'dist');
 const APP_FOLDER = join(DIST_FOLDER, 'app');
@@ -54,13 +54,15 @@ global['window'].HTMLElement.prototype.getBoundingClientRect = () => null;
 enableProdMode();
 
 // Musi byt pod global['window'] --> jinak window undefined u file replacmentu
-import { AppServerModule } from './src/app.server';
+import { AppServerModule } from '../src/app.server';
+import {squixedSettings} from './config/squixedSettings';
+import {normalize} from '../src/common/cms/utils';
 
-server.engine('html', ngExpressEngine({
+index.engine('html', ngExpressEngine({
     bootstrap: AppServerModule,
 }));
-server.set('view engine', 'html');
-server.set('views', join(DIST_FOLDER, 'app'));
+index.set('view engine', 'html');
+index.set('views', join(DIST_FOLDER, 'app'));
 
 const flatData = R.prop('flatData');
 
@@ -73,55 +75,11 @@ const isFlatDataArray = R.allPass(
     ],
 );
 
-const normalize = R.cond([
-    [
-        data => !data,
-        data => data,
-    ],
-    [
-        isFlatDataArray,
-        R.pipe(
-            R.map(flatData),
-            R.map(
-                R.cond([
-                    [
-                        Array.isArray,
-                        data => R.map(normalize)(data),
-                    ],
-                    [
-                        R.T,
-                        data => normalize(data),
-                    ],
-                ]),
-            ),
-        ),
-    ],
-    [
-        isObject,
-        data => R.map(normalize)(data),
-    ],
-    [
-        R.T,
-        data => data,
-    ],
-]);
-
-const squidexSettingByEnvironment = {
-    preview: {
-        url: 'https://squidex.lnd.bz/',
-    },
-    test: {
-        url: 'https://squidex-preview.lnd.bz/',
-    },
-    prod: {
-        url: 'https://squidex-prod.lnd.bz/', // replace by prod
-    },
-};
 
 const PAGE_M_CACHE_PREFIX = 'PAGE_';
 const SQUIDEX_M_CACHE_PREFIX = 'SQUIDEX_';
 
-const SQUIDEX_URL = squidexSettingByEnvironment[plainConfig.environment].url;
+const SQUIDEX_URL = squixedSettings[plainConfig.environment].url;
 const SQUIDEX_REFRESH_TOKEN_URL = `${SQUIDEX_URL}identity-server/connect/token`;
 const SQUIDEX_REFRESH_QUERY_URL = `${SQUIDEX_URL}api/content/pxe-parc4u/graphql`;
 
@@ -196,7 +154,7 @@ const resetAppState = () => {
 };
 
 // TODO: implement data requests securely
-server.get('/graphql', (req, res) => {
+index.get('/graphql', (req, res) => {
     res.status(404).send('data requests are not supported');
 });
 
@@ -221,7 +179,7 @@ const getTypes = (types, allType) => R.pipe(
 )(types);
 
 // Server static files from /app
-server.get('/sitemap.xml', (req, res) => {
+index.get('/sitemap.xml', (req, res) => {
     const siteMapOriginal = fs.readFileSync(join(APP_FOLDER, 'sitemap.xml'), 'utf8');
     const parseString = xml2js.parseString;
     const questions = getQuestions(questionsSource.data.queryQuestionContents);
@@ -281,7 +239,7 @@ server.get('/sitemap.xml', (req, res) => {
 });
 
 // cache by detail variable
-server.post('/cms-api', ({body}, res) => {
+index.post('/cms-api', ({body}, res) => {
     const { operationName, variables } = body;
     const cacheKey = getMCacheKeySquidex(operationName + JSON.stringify(variables));
     const data = plainConfig.cacheSSR ? mCache.get(cacheKey) : false;
@@ -299,10 +257,10 @@ server.post('/cms-api', ({body}, res) => {
 });
 
 // Server static files from /app
-server.get('*.*', express.static(join(DIST_FOLDER, 'app')));
+index.get('*.*', express.static(join(DIST_FOLDER, 'app')));
 
 // All routes are rendered as server side routes use the Universal engine
-server.get('*', (req, res, next) => {
+index.get('*', (req, res, next) => {
     // Catch secured routes as normal client side app
     if (req.originalUrl.indexOf('/secured') === 0) {
         return next();
@@ -337,12 +295,12 @@ server.get('*', (req, res, next) => {
 });
 
 // All routes (without server side routes) are send as normal client side app
-server.get('*', (req, res) => {
+index.get('*', (req, res) => {
     return res.sendFile(join(APP_FOLDER, 'index.html'));
 });
 
 // Start up the Node server
-server.listen(PORT, () => {
+index.listen(PORT, () => {
     console.log(`Node Express server listening on http://localhost:${PORT}`);
 });
 
@@ -356,4 +314,4 @@ const job = new CronJob(
 job.start();
 resetAppState();
 
-export * from './src/app.server';
+export * from '../src/app.server';
