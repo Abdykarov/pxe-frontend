@@ -33,7 +33,7 @@
                         *ngFor="let setting of pdfFutureContracts"
                         icon="icon--info"
                         [data]="{
-                            text: (setting[subjectType][commodityType].dateFrom | date: 'd.&nbsp;M.&nbsp;y') +  ' začíná platnost nové smlouvy o sdružených službách dodávky pro ' +
+                            text: (setting[subjectType][commodityType].dateFrom | date: 'd.&nbsp;M.&nbsp;y') +  ' začíná platnost nové smlouvy o sdružených službách dodávky ' +
                                 (commodityType === COMMODITY_TYPE.POWER ? 'elektřiny' : 'plynu') + ' pro ' + (subjectType === SUBJECT_TYPE.INDIVIDUAL ? 'domácnost' : 'firmu')
                         }"
                         (customBannerAction)="downloadPdf(setting[subjectType][commodityType].sourceUrl, setting[subjectType][commodityType].downloadName)"
