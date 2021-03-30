@@ -4,7 +4,7 @@ import { seoFragment } from './seo';
 
 export const questionsQuery = gql`
     query queryQuestionContents {
-      queryQuestionContents (orderby:"data/header/iv"){
+      queryQuestionContents (orderby:"data/header/iv", top: 100){
         flatData {
           id
           fullContent

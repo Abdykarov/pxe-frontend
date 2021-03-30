@@ -383,15 +383,15 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             annualConsumptionNT = this.formValues.annualConsumptionNT;
             annualConsumption = this.formValues.annualConsumption;
 
-            if (annualConsumptionVTUnit === UNIT_OF_PRICES.KWH) {
+            if (annualConsumptionVT && annualConsumptionVTUnit === UNIT_OF_PRICES.KWH) {
                 annualConsumptionVT *= 1000;
             }
 
-            if (annualConsumptionNTUnit === UNIT_OF_PRICES.KWH) {
+            if (annualConsumptionNT && annualConsumptionNTUnit === UNIT_OF_PRICES.KWH) {
                 annualConsumptionNT *= 1000;
             }
 
-            if (annualConsumptionUnit === UNIT_OF_PRICES.KWH) {
+            if (annualConsumption && annualConsumptionUnit === UNIT_OF_PRICES.KWH) {
                 annualConsumption *= 1000;
             }
 

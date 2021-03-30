@@ -9,19 +9,29 @@ import {
 } from '@angular/core';
 
 import {
+    map,
     switchMap,
     takeUntil,
 } from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AskForOfferService } from 'src/common/graphql/services/ask-for-offer.service';
+import { CODE_LIST_TYPES } from 'src/app/app.constants';
 import { CreateUserFacade } from 'src/app/pages/admins/create-user/create-user.facade';
 import { IFieldError } from 'src/common/containers/form/models/form-definition.model';
-import { ISupplyPoint } from 'src/common/graphql/models/supply.model';
+import {
+    ICodelistOptions,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
 import { ISupplyPointImportInput } from 'src/common/graphql/models/supply-point-import.model';
 import { formFields } from 'src/common/containers/form/forms/prices/prices-form.config';
-import { parseGraphQLErrors } from 'src/common/utils';
+import {
+    parseGraphQLErrors,
+    transformCodeList,
+} from 'src/common/utils';
 import { SupplyPointImportService } from 'src/common/graphql/services/supply-point-import.service';
+import { SupplyService } from 'src/common/graphql/services/supply.service';
 
 @Component({
     selector: 'pxe-create-user-prices',
@@ -44,10 +54,17 @@ export class PricesComponent extends AbstractComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private supplyPointImportService: SupplyPointImportService,
+        private supplyService: SupplyService,
     ) {
         super();
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     }
+
+    public codeLists$: Observable<ICodelistOptions> = this.supplyService.findCodelistsByTypes(CODE_LIST_TYPES, 'cs')
+        .pipe(
+            takeUntil(this.destroy$),
+            map(({data}) => transformCodeList(data.findCodelistsByTypes)),
+        );
 
     public save = (formData, activeSupplyPoint: ISupplyPoint) => {
         const data = formData.value;
