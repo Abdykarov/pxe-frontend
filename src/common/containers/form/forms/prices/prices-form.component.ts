@@ -10,8 +10,10 @@ import { FormBuilder } from '@angular/forms';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import {
     CommodityType,
+    ICodelistOptions,
     ISupplyPoint,
 } from 'src/common/graphql/models/supply.model';
+import {includesBothTariffs} from '../../../../utils';
 
 @Component({
     selector: 'pxe-price-form',
@@ -22,6 +24,9 @@ export class PricesFormComponent extends AbstractFormComponent implements OnChan
 
     @Input()
     public supplyPoint: ISupplyPoint;
+
+    @Input()
+    public codeLists: ICodelistOptions;
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -44,9 +49,16 @@ export class PricesFormComponent extends AbstractFormComponent implements OnChan
     public setForm = () => {
         if (this.supplyPoint.commodityType === CommodityType.POWER) {
             this.setDisableField('importPricePerKwGas');
+            this.setAnnualConsumptionNTState(this.supplyPoint.distributionRate.code, this.codeLists);
         } else {
             this.setDisableField('importPricePerKwPowerNT');
             this.setDisableField('importPricePerKwPowerVT');
+        }
+    }
+
+    public setAnnualConsumptionNTState = (distributionRateId: string = null, codeLists: ICodelistOptions = null) => {
+        if (distributionRateId && !includesBothTariffs(distributionRateId, codeLists)) {
+            this.setDisableField('importPricePerKwPowerNT');
         }
     }
 
