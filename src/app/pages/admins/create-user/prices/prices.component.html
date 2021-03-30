@@ -14,6 +14,7 @@
     <div class="col-12">
         <div class="page-box">
             <pxe-price-form
+                [codeLists]="codeLists$ | async"
                 [supplyPoint]="supplyPoint"
                 [formFields]="formFields"
                 [formLoading]="formLoading"
