@@ -66,19 +66,17 @@
         [validationMessages]="formFields.validationMessages.password"
         [subtextTemplate]="forgottenPassword"
     ></lnd-form-field>
-    <div class="text-right">
-        <lnd-button
-            type="gradient-primary"
-            class="w-100 mb-5"
-            customClass="btn-public btn--icon-right w-100"
-            [submit]="true"
-            (action)="submitForm($event);sAnalyticsService.sFormClick($event);"
-            [isDisabled]="!!formLoading"
-            label="Přihlásit se"
-            icon="icon--arrow-right"
-            iconPosition="right">
-        </lnd-button>
-    </div>
+    <lnd-button
+        type="gradient-primary"
+        class="w-100 mb-5"
+        customClass="btn-public btn--icon-right w-100"
+        [submit]="true"
+        (action)="submitForm($event);sAnalyticsService.sFormClick($event);"
+        [isDisabled]="!!formLoading"
+        label="Přihlásit se"
+        icon="icon--arrow-right"
+        iconPosition="right">
+    </lnd-button>
     <p class="mb-2">
         Nebo si založte účet pomocí
     </p>
