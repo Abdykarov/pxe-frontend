@@ -96,6 +96,11 @@ export const importErrorViolations = {
     'deliveryFromMustBeBeforeDeliveryTo': 'Datum začátku dodávkového období musí být dřívější než jeho konec.',
 };
 
+export const oAuthApiError = {
+    'SEC0003': 'Přihlášení se nezdařilo.',
+    'SEC0003#_=_': 'Přihlášení se nezdařilo.',
+};
+
 export const restAPIErrorCodes = {
     'CLI0001': 'Špatné přihlašovací údaje.',
     'VAL00001': 'Vyplněný kód se neshoduje s kódem, který vám přišel v SMS.',
