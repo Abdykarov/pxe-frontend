@@ -30,7 +30,7 @@ export class HtmlContentPipe implements PipeTransform {
         }
 
         const result =
-            R.replace(new RegExp('@IMG\\[(.*?) (.*?)\\]', 'gm'), '<img class="card-img-top" src="https://squidex.lnd.bz/api/assets/$1" title="$2" alt="$2">')(content);
+            R.replace(new RegExp('@IMG\\[(.*?) (.*?) (.*?)\\]', 'gm'), '<img class="card-img-top $3" src="https://squidex.lnd.bz/api/assets/$1" title="$2" alt="$2">')(content);
 
         return result;
     }
