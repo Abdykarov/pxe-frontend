@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 
 import * as R from 'ramda';
-import {environment} from '../../../environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Pipe({
     name: 'htmlContent',
