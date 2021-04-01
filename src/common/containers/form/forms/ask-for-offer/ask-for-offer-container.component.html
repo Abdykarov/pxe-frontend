@@ -37,18 +37,21 @@
                 type="success">
                 Děkujeme po zpracování vaší žádosti se vám obratem ozveme.
             </lnd-alert>
-            <span class="d-inline-flex align-items-center mr-4 mb-2 text-white"
-                  *ngFor="let fileItem of fileUploader.queue">
-                <span class="icon icon--document mr-2"></span>
-                {{fileItem?.file?.name}}
-                <lnd-button
-                    (click)="removeFile(fileItem)"
-                    customClass="btn-icon--on-dark-bg"
-                    icon="icon--bin"
-                    variant="icon"
-                    type="icon">
-                </lnd-button>
-            </span>
+            <ng-container *ngIf="!fileUploader.isUploading">
+                <span class="d-inline-flex align-items-center mr-4 mb-2 text-white"
+                      *ngFor="let fileItem of fileUploader.queue">
+                    <span class="icon icon--document mr-2"></span>
+                    {{fileItem?.file?.name}}
+                    <lnd-button
+                        *ngIf="!fileUploader.isUploading"
+                        (click)="removeFile(fileItem)"
+                        customClass="btn-icon--on-dark-bg"
+                        icon="icon--bin"
+                        variant="icon"
+                        type="icon">
+                    </lnd-button>
+                </span>
+            </ng-container>
         </div>
         <div class="col-12" *ngIf="fileUploader.queue.length && !success">
             <div class="form-container ml-0">
@@ -60,6 +63,7 @@
                     [id]="'email' + id"
                     customFormGroupClass="form-group--public form-group--on-dark-bg"
                     label="E-mail"
+                    [disabledField]="fileUploader.isUploading"
                     [success]="form.controls.email.valid && (form.controls.email.touched || formError.email)"
                     [touched]="form.controls.email.touched || formError.email"
                     [validationMessages]="formFields.validationMessages.email"
@@ -71,6 +75,7 @@
                     [formControl]="form.controls.consent"
                     [id]="'consent' + id"
                     label=""
+                    [disabledField]="fileUploader.isUploading"
                     [labelTemplate]="agreementTemplate"
                     [success]="form.controls.consent.valid && (form.controls.consent.touched || formError.consent)"
                     [touched]="form.controls.consent.touched || formError.consent"
@@ -81,10 +86,11 @@
                     <lnd-button
                         type="gradient-primary"
                         class="w-100"
+                        [isDisabled]="fileUploader.isUploading"
                         customClass="w-100 btn-public"
                         [submit]="true"
                         (action)="submitForm($event)"
-                        label="Odeslat">
+                        [label]="!fileUploader.isUploading ? 'Odeslat' : 'Odesílám...'">
                     </lnd-button>
                 </div>
             </div>

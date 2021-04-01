@@ -70,7 +70,15 @@
             <lnd-button
                 type="secondary"
                 [submit]="true"
-                (action)="submitCustomActionValidFormForm($event)"
+                (action)="submitCustomActionValidFormForm(false)"
+                [isDisabled]="!!formLoading"
+                label="Uložit a přidat odběrné místo">
+            </lnd-button>
+            <lnd-button
+                class="mt-3"
+                type="secondary"
+                [submit]="true"
+                (action)="submitCustomActionValidFormForm(true)"
                 [isDisabled]="!!formLoading"
                 label="Uložit jako rozpracované">
             </lnd-button>

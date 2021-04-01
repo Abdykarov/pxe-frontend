@@ -110,6 +110,10 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                 .pipe(
                     map(({data}) => data.getSupplyPoint),
                     concatMap((supplyPoint: ISupplyPoint) => {
+                        if (supplyPoint.imported) {
+                            return of(supplyPoint);
+                        }
+
                         supplyPointFound = supplyPoint;
                         if (this.deteledContractId) {
                             return of({});
@@ -120,7 +124,11 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                                 of({});
                         }
                     }),
-                    concatMap(_ => {
+                    concatMap((supplyPoint: ISupplyPoint) => {
+                        if (supplyPoint.imported) {
+                            return of(supplyPoint);
+                        }
+
                         return this.deteledContractId ?
                         this.supplyService.getSupplyPoint(this.supplyPointId)
                             .pipe(map(({data}) => data.getSupplyPoint)) :

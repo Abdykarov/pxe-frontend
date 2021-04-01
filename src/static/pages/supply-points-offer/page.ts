@@ -24,7 +24,12 @@ export class SupplyPointsOfferPageComponent {
     public questions: IQuestion[] = [
         {
             'id': 18,
-            'tag': Tag.SUPPLIER,
+            'tag': {
+                type: Tag.SUPPLIER,
+                url: '',
+                label: 'dodavatel',
+                title: 'Otázky',
+            },
             'url': 'bohemia-energy',
             'header': 'BOHEMIA ENERGY entity, s.r.o.',
             'seoKeywords': 'alternativní dodavatel, energií, elektřinu, plyn, nezávislého, Bohemia energy, zákazníky, komplexní zákaznický servis',
@@ -33,7 +38,12 @@ export class SupplyPointsOfferPageComponent {
         },
         {
             'id': 19,
-            'tag': Tag.SUPPLIER,
+            'tag': {
+                type: Tag.SUPPLIER,
+                url: '',
+                label: 'dodavatel',
+                title: 'Otázky',
+            },
             'url': 'energy-trading',
             'header': 'EP Energy Trading, a.s.',
             'seoKeywords': 'EP energy, EP, energy, EP energy trading, elektrické energie, v ČR, zemního plynu, plynu',
@@ -42,7 +52,12 @@ export class SupplyPointsOfferPageComponent {
         },
         {
             'id': 20,
-            'tag': Tag.SUPPLIER,
+            'tag': {
+                type: Tag.SUPPLIER,
+                url: '',
+                label: 'dodavatel',
+                title: 'Otázky',
+            },
             'url': 'carbounion',
             'header': 'CARBOUNION BOHEMIA, spol. s r. o.',
             'seoKeywords': 'Carbounion, energemi, obchod s uhlím, elektrickou energií, komoditami, 100 nejvýznamnějších firem v ČR',
@@ -51,7 +66,12 @@ export class SupplyPointsOfferPageComponent {
         },
         {
             'id': 21,
-            'tag': Tag.SUPPLIER,
+            'tag': {
+                type: Tag.SUPPLIER,
+                url: '',
+                label: 'dodavatel',
+                title: 'Otázky',
+            },
             'url': 'alpiq',
             'header': 'Alpiq Retail CZ s.r.o.',
             'seoKeywords': 'Alpiq, Švýcarská, energetická skupina, portfolio, dodávky, elektrické energie, plynu',
@@ -60,7 +80,12 @@ export class SupplyPointsOfferPageComponent {
         },
         {
             'id': 22,
-            'tag': Tag.SUPPLIER,
+            'tag': {
+                type: Tag.SUPPLIER,
+                url: '',
+                label: 'dodavatel',
+                title: 'Otázky',
+            },
             'url': 'prazska-plynarenska',
             'header': 'Pražská plynárenská, a.s.',
             'seoKeywords': 'Pražská plynárenská, elektrickou energii, zemní plyn, nekomoditních produktů, služeb',
@@ -69,7 +94,12 @@ export class SupplyPointsOfferPageComponent {
         },
         {
             'id': 23,
-            'tag': Tag.SUPPLIER,
+            'tag': {
+                type: Tag.SUPPLIER,
+                url: '',
+                label: 'dodavatel',
+                title: 'Otázky',
+            },
             'url': 'yello-energy',
             'header': 'eYello CZ, k.s.',
             'seoKeywords': 'Yello Energy, férovým cenám, jednoduchost, přímočarost, náklady, kamenné pobočky, Skupiny PRE',
@@ -78,7 +108,12 @@ export class SupplyPointsOfferPageComponent {
         },
         {
             'id': 24,
-            'tag': Tag.SUPPLIER,
+            'tag': {
+                type: Tag.SUPPLIER,
+                url: '',
+                label: 'dodavatel',
+                title: 'Otázky',
+            },
             'url': 'pxe-ctvrty-dodavatel',
             'header': 'PXE Ctvrty dodavatel',
             'seoKeywords': 'test',
@@ -88,7 +123,12 @@ export class SupplyPointsOfferPageComponent {
         },
         {
             'id': 25,
-            'tag': Tag.SUPPLIER,
+            'tag': {
+                type: Tag.SUPPLIER,
+                url: '',
+                label: 'dodavatel',
+                title: 'Otázky',
+            },
             'url': 'parc-dodavatel',
             'header': 'PARC 4 U dodavatel 2',
             'seoKeywords': 'Yello Energy, férovým cenám, jednoduchost, přímočarost, náklady, kamenné pobočky, Skupiny PRE',

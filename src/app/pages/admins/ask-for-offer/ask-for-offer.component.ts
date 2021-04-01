@@ -9,11 +9,14 @@ import {
 } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 
+import * as R from 'ramda';
+import * as R_ from 'ramda-extension';
 import {
     BehaviorSubject,
     combineLatest,
 } from 'rxjs';
 import {
+    filter,
     map,
     switchMap,
     takeUntil,
@@ -23,6 +26,7 @@ import { PageChangedEvent} from 'ngx-bootstrap';
 import { AbstractComponent } from 'src/common/abstract.component';
 import { AskForOfferService } from 'src/common/graphql/services/ask-for-offer.service';
 import { BannerTypeImages } from 'src/common/ui/info-banner/models/info-banner.model';
+import { CONSTS } from 'src/app/app.constants';
 import {
     confirmDeleteAskForOfferInfo,
     paginationConfig,
@@ -43,7 +47,7 @@ import { IResponseDataDocument} from 'src/app/services/model/document.model';
 import { ModalService } from 'src/common/containers/modal/modal.service';
 
 @Component({
-    selector: 'lnd-ask-for-offer',
+    selector: 'pxe-ask-for-offer',
     templateUrl: './ask-for-offer.component.html',
     styleUrls: ['./ask-for-offer.component.scss'],
 })
@@ -83,6 +87,46 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
             .subscribe(params => {
                 this.routerParamsSubject$.next(params);
             });
+
+
+        this.modalsService.closeModalData$
+            .pipe(
+                filter(
+                    R.allPass([
+                        R_.isNotNil,
+                        R.propEq('modalType', CONSTS.MODAL_TYPE.CONFIRM_DELETE_ASK_FOR_OFFER),
+                    ]),
+                ),
+            )
+            .subscribe(modal => {
+                if (modal.confirmed) {
+                    this.globalError = [];
+                    this.askForOfferService.deleteAskForOffer(
+                        modal.data,
+                        {
+                            statuses: [ContractUploadStatusUrl[this.routerParamsSubject$.getValue().type]],
+                            pagination: {
+                                first: this.numberOfPagesSubject$.getValue() - 1,
+                                offset: this.paginationConfig.itemsPerPage,
+                            },
+                        })
+                        .pipe(
+                            takeUntil(this.destroy$),
+                        )
+                        .subscribe(_ => {
+                                this.modalsService
+                                    .showModal$.next(confirmDeleteAskForOfferInfo());
+                            },
+                            error => {
+                                const { globalError } = parseGraphQLErrors(error);
+                                this.globalError = globalError;
+                                this.loading = false;
+                                this.cd.markForCheck();
+                            },
+                        );
+                }
+                this.modalsService.closeModalData$.next(null);
+            });
     }
 
     ngOnInit(): void {
@@ -119,39 +163,28 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
 
     }
 
-    public routerToCreateUser = (askForOfferId: string) => this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
+    public routerToCreateUser = (
+        askForOfferId: string,
+        email: string,
+    ) => this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_SUPPLY_POINT], {
         queryParams: {
             askForOfferId,
+            email,
         },
     })
 
-    public delete = (askForOfferId: string) => {
-        this.globalError = [];
-        this.askForOfferService.deleteAskForOffer(
-            askForOfferId,
-            {
-                statuses: [ContractUploadStatusUrl[this.routerParamsSubject$.getValue().type]],
-                pagination: {
-                    first: this.numberOfPagesSubject$.getValue() - 1,
-                    offset: this.paginationConfig.itemsPerPage,
-                },
-            })
-            .pipe(
-                takeUntil(this.destroy$),
-            )
-            .subscribe(_ => {
-                this.modalsService
-                    .showModal$.next(confirmDeleteAskForOfferInfo());
-                },
-                error => {
-                    const { globalError } = parseGraphQLErrors(error);
-                    this.globalError = globalError;
-                    this.loading = false;
-                    this.cd.markForCheck();
-                },
-            );
+    public delete = (askForOfferId: string): void => {
+        this.modalsService
+            .showModal$.next({
+            component: 'ConfirmModalComponent',
+            modalType: CONSTS.MODAL_TYPE.CONFIRM_DELETE_ASK_FOR_OFFER,
+            instanceData: {
+                confirmText: `Opravdu chcete smazat žádost?`,
+                titleConfirm: 'ANO SMAZAT',
+                data: askForOfferId,
+            },
+        });
     }
-
 
     public pageChanged = ($event: PageChangedEvent) => {
         if ($event && $event.page) {
@@ -164,7 +197,6 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
 
     public downloadAskForOffer = (documentId: string) => {
         this.globalError = [];
-        this.loading = true;
         downloadFile(this.http, `v1.0/ask-for-offer/uploaded-document/${documentId}`)
             .pipe(
                 takeUntil(this.destroy$),
@@ -172,7 +204,6 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
                     this.askForOfferService.documentSave(responseDataDocument);
-                    this.loading = false;
                     this.cd.markForCheck();
                 },
                 (error) => {
@@ -185,7 +216,6 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
 
     public downloadAskForOffersZipArchive = (askForOfferId: string) => {
         this.globalError = [];
-        this.loading = true;
         downloadFile(this.http, `v1.0/ask-for-offer/${askForOfferId}/archive`)
             .pipe(
                 takeUntil(this.destroy$),
@@ -193,7 +223,6 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
                     this.askForOfferService.documentSave(responseDataDocument);
-                    this.loading = false;
                     this.cd.markForCheck();
                 },
                 (error) => {

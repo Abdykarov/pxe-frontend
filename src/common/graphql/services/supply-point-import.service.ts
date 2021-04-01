@@ -1,11 +1,27 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {Apollo} from 'apollo-angular';
+import * as R from 'ramda';
+import { Apollo } from 'apollo-angular';
 
-import {createSupplyPointImportMutation} from 'src/common/graphql/mutation/supply-point-import';
-import {findSupplyPointImportQuery} from 'src/common/graphql/queries/supply-point-import';
-import {CommodityType, ISupplyPoint} from 'src/common/graphql/models/supply.model';
-import {ISupplyPointImportInput} from 'src/common/graphql/models/supply-point-import.model';
+import {
+    createSupplyPointImportMutation,
+    deleteSupplyPointImportMutation,
+    setActiveSupplyPointMutation,
+} from 'src/common/graphql/mutation/supply-point-import';
+import {
+    findSupplyPointImportsQuery,
+    getCreateUserQuery,
+} from 'src/common/graphql/queries/supply-point-import';
+import {
+    CommodityType,
+    ISupplyPoint,
+} from 'src/common/graphql/models/supply.model';
+import { ISupplyPointImportInput } from 'src/common/graphql/models/supply-point-import.model';
+import {
+    IPersonalData,
+    IPersonalDataInput,
+} from 'src/common/graphql/models/personal-data.model';
+import { omitTypeName } from 'src/common/utils';
 
 @Injectable({
     providedIn: 'root',
@@ -18,34 +34,129 @@ export class SupplyPointImportService {
 
     public createSupplyPointImport = (
         askForOfferId: string,
-        supplyPoint: any,
+        supplyPoint: ISupplyPointImportInput,
+        isNew = false,
     ) => this.apollo
         .mutate<any>({
-                mutation: createSupplyPointImportMutation,
+            mutation: createSupplyPointImportMutation,
+            variables: {
+                askForOfferId,
+                supplyPoint,
+            },
+            update: (cache, { data }) => {
+                const { findSupplyPointImports } = cache.readQuery(
+                    {
+                        query: findSupplyPointImportsQuery,
+                        variables: {
+                            askForOfferId,
+                        },
+                    });
+
+                let newState = findSupplyPointImports;
+
+                if (isNew) {
+                    const newSupplyPoint = data.createSupplyPointImport;
+                    newState = [...newState, newSupplyPoint];
+                }
+
+                return cache.writeQuery({
+                    query: findSupplyPointImportsQuery,
+                    data: { findSupplyPointImports: newState },
+                    variables: {
+                        askForOfferId,
+                    },
+                });
+            },
+        })
+
+    public setActiveSupplyPoint = (supplyPoint: ISupplyPoint) => this.apollo
+        .mutate<any>({
+                mutation: setActiveSupplyPointMutation,
                 variables: {
-                    askForOfferId,
                     supplyPoint,
                 },
             },
         )
 
-    public findSupplyPointImport = (
-        askForOfferId: string,
-    ) => this.apollo
-        .query<any>({
-                query: findSupplyPointImportQuery,
+    public getCreateUser = () => this.apollo
+        .watchQuery<any>({
+                query: getCreateUserQuery,
+            },
+        ).valueChanges
+
+    public deleteSupplyPointImportMutation = (supplyPointImportId: string, askForOfferId: string) => this.apollo
+        .mutate<any>({
+                mutation: deleteSupplyPointImportMutation,
                 variables: {
-                    askForOfferId,
+                    supplyPointImportId,
                 },
-                fetchPolicy: 'network-only',
+                update: (cache, { data }) => {
+                    const { findSupplyPointImports } = cache.readQuery(
+                        {
+                            query: findSupplyPointImportsQuery,
+                            variables: {
+                                askForOfferId,
+                            },
+                        });
+
+                    const newState = R.reject(R.propEq('id', supplyPointImportId))(findSupplyPointImports);
+
+                    cache.writeQuery({
+                        query: findSupplyPointImportsQuery,
+                        data: { findSupplyPointImports: newState },
+                        variables: {
+                            askForOfferId,
+                        },
+                    });
+                },
             },
         )
 
+    public findSupplyPointImports = (
+        askForOfferId: string,
+    ) => this.apollo
+        .watchQuery<any>({
+                query: findSupplyPointImportsQuery,
+                variables: {
+                    askForOfferId,
+                },
+                fetchPolicy: 'cache-first',
+            },
+        ).valueChanges
+
+    public getSupplyPointImports = (
+        askForOfferId: string,
+    ) => this.apollo.getClient().readQuery<ISupplyPointImportInput[]>({
+                query: findSupplyPointImportsQuery,
+                variables: {
+                    askForOfferId,
+                },
+            },
+        )
+
+    public mapPersonalInfoToPersonalInfoInput = (personalData: IPersonalData): IPersonalDataInput =>  omitTypeName({
+        email: personalData.email,
+        address1: personalData.address1,
+        address2: personalData.address2,
+        bankAccountNumber: personalData.bankAccountNumber,
+        bankCode: personalData.bankCode,
+        deposit: personalData.deposit,
+        birthDate: personalData.birthDate,
+        depositPaymentTypeId: personalData.depositPaymentType?.code,
+        dic: personalData.dic,
+        ico: personalData.ico,
+        name: personalData.name,
+        phone: personalData.phone,
+        signatoryName: personalData.signatoryName,
+        signatoryPosition: personalData.signatoryPosition,
+        signatorySurname: personalData.signatorySurname,
+    })
+
     public mapSupplyPointToSupplyPointInput = (supplyPoint: ISupplyPoint): ISupplyPointImportInput =>  {
-        const omitTypename = (key, value) => (key === '__typename' ? undefined : value);
-        supplyPoint = JSON.parse(JSON.stringify(supplyPoint), omitTypename);
+        supplyPoint = omitTypeName(supplyPoint);
         const personalData = supplyPoint.contract?.personalData;
         return {
+            id: supplyPoint.id,
             address: supplyPoint.address,
             expirationDate: supplyPoint.expirationDate,
             name: supplyPoint.name,
@@ -55,23 +166,7 @@ export class SupplyPointImportService {
             subjectTypeId: supplyPoint.subject?.code,
             supplierId: supplyPoint.supplier?.id,
             ...(!!personalData) && {
-                personalData: {
-                    email: personalData.email,
-                    address1: personalData.address1,
-                    address2: personalData.address2,
-                    bankAccountNumber: personalData.bankAccountNumber,
-                    bankCode: personalData.bankCode,
-                    deposit: personalData.deposit,
-                    birthDate: personalData.birthDate,
-                    depositPaymentTypeId: personalData.depositPaymentType?.code,
-                    dic: personalData.dic,
-                    ico: personalData.ico,
-                    name: personalData.name,
-                    phone: personalData.phone,
-                    signatoryName: personalData.signatoryName,
-                    signatoryPosition: personalData.signatoryPosition,
-                    signatorySurname: personalData.signatorySurname,
-                },
+                personalData: this.mapPersonalInfoToPersonalInfoInput(personalData),
             },
             ...(!!supplyPoint.identificationNumber && supplyPoint.commodityType === CommodityType.POWER) && {
                 supplyPointPowerAttributes: {
@@ -79,19 +174,30 @@ export class SupplyPointImportService {
                     circuitBreakerId: supplyPoint.circuitBreaker?.code,
                     phasesId: supplyPoint.phases?.code,
                     distributionRateId: supplyPoint.distributionRate?.code,
-                    annualConsumptionNT: supplyPoint.annualConsumptionNT,
-                    annualConsumptionVT: supplyPoint.annualConsumptionVT,
+                    annualConsumptionNT: supplyPoint?.annualConsumptionNT,
+                    annualConsumptionVT: supplyPoint?.annualConsumptionVT,
+                    annualConsumptionNTUnit: supplyPoint?.annualConsumptionNTUnit,
+                    annualConsumptionVTUnit: supplyPoint?.annualConsumptionVTUnit,
                 },
             },
             ...(!!supplyPoint.identificationNumber && supplyPoint.commodityType === CommodityType.GAS) && {
                 supplyPointGasAttributes: {
                     eic: supplyPoint.identificationNumber,
                     annualConsumption: supplyPoint.annualConsumption,
+                    annualConsumptionUnit: supplyPoint?.annualConsumptionUnit,
                 },
             },
+            importPriceTotalPerYear: supplyPoint?.importPriceTotalPerYear,
+            importPricePerKwPowerVT: supplyPoint?.importPricePerKwPowerVT,
+            importPricePerKwPowerNT: supplyPoint?.importPricePerKwPowerNT,
+            importPricePerKwGas: supplyPoint?.importPricePerKwGas,
         };
     }
 
-
-
+    public mapPricesToSupplyPointImport = (supplyPoint: ISupplyPointImportInput, data: ISupplyPoint): void =>  {
+        supplyPoint.importPriceTotalPerYear = data?.importPriceTotalPerYear;
+        supplyPoint.importPricePerKwPowerVT = data?.importPricePerKwPowerVT;
+        supplyPoint.importPricePerKwPowerNT = data?.importPricePerKwPowerNT;
+        supplyPoint.importPricePerKwGas = data?.importPricePerKwGas;
+    }
 }

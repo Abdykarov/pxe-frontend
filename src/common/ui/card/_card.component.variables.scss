@@ -13,8 +13,10 @@ $card-border:                       $card-border-width solid $card-border-color;
 $card-border-radius:                0;
 $card-spacer-x:                     0;
 $card-spacer-y:                     $spacer;
-$card-inner-border-radius:          0;
-$card-img-size:                     80px;
-$card-img-box-shadow:               -30px 50px 80px 0 rgba(#000d16, .2);
 
 $card-tile-item-spacer:             ( $spacer * 2.5 );
+$card-tile-img-size:                80px;
+$card-tile-img-box-shadow:          -30px 50px 80px 0 rgba(#000d16, .2);
+
+$card-blog-item-spacer:             ( $spacer * 2 );
+$card-tile-height-size:             220px;

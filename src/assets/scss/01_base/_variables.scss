@@ -184,6 +184,7 @@ $checklist-lp-before-size:         50px;
 
 $border-radius:                    5px;
 $box-shadow:                       0 2px 5px 0 rgba($body-color, .16);
+$box-shadow-interactive:           0 10px 30px 0 rgba($body-color, .2);
 $box-shadow-circle:                -10px 20px 56px 0 rgba($box-shadow-color, .15);
 
 $box-shadow-carousel:              -15px 20px 30px 0 rgba(0, 9, 16, .1);
@@ -286,6 +287,7 @@ $zindex-lp-bg-two-half-after:        -1;
 $zindex-lp-picure-section:           1;
 $zindex-lp-picture-bg:               -1;
 $zindex-drop-zone:                   1;
+$zindex-card-blog-img:               -1;
 
 
 // Pagination

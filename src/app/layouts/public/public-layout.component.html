@@ -10,6 +10,7 @@
         (howItWorksAction)="scrollToService.scrollToHowItWorks()"
         (helpAction)="scrollToService.scrollToHelp()"
         (faqAction)="scrollToService.scrollToFaq()"
+        (blogAction)="scrollToService.scrollToBlog()"
         (bestPricesInTheWorldAction)="scrollToService.scrollToBestPricesInTheWorld()"
         (landingPageRedirect)="landingPageRedirect()"
         (loginAction)="login()"
@@ -44,7 +45,8 @@
                 </a>
             </li>
             <li class="footer-navigation__item">
-                <a [routerLink]="['/', CONSTS.PATHS.PATTERNS_OF_CONTRACTS, subjectTypeIndividual, commodityTypePower]"
+                <a [routerLink]="['/', CONSTS.PATHS.PATTERNS_OF_CONTRACTS, subjectTypeIndividual]"
+                   [fragment]="commodityTypePower"
                    class="footer-navigation__link"
                 >
                     Vzory smluv o dodávce
@@ -62,6 +64,13 @@
                    class="footer-navigation__link"
                 >
                     Cookies policy
+                </a>
+            </li>
+            <li class="footer-navigation__item">
+                <a [routerLink]="['/', CONSTS.PATHS.BLOG]"
+                   class="footer-navigation__link"
+                >
+                    Blog
                 </a>
             </li>
             <li class="footer-navigation__item">

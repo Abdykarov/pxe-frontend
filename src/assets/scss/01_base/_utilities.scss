@@ -78,7 +78,7 @@
 }
 
 .text-with-icon {
-	display: flex;
+	display: inline-flex;
 	align-items: center;
 	margin-bottom: $spacer;
 
@@ -408,3 +408,15 @@ $colors: (
 	table-layout: fixed;
 }
 
+.text-overflow-ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.link-color {
+	color: $link-color;
+}
+
+.mt-suppy-point-import {
+	margin-top: 80px;
+}

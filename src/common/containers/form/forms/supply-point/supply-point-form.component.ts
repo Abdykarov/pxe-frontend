@@ -372,7 +372,7 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             name = this.formValues.name;
             ean = this.formValues.commodityType === CommodityType.POWER ? this.formValues.identificationNumber : null;
             eic = this.formValues.commodityType === CommodityType.GAS ? this.formValues.identificationNumber : null;
-            address = this.formValues.address && R.omit(['__typename'], this.formValues.address);
+            address = this.formValues?.address?.city && R.omit(['__typename'], this.formValues.address);
             distributionRateId = this.formValues?.distributionRate && this.formValues.distributionRate.code;
             circuitBreakerId = this.formValues?.circuitBreaker && this.formValues.circuitBreaker.code;
             phasesId = this.formValues?.phases && this.formValues.phases.code;
@@ -383,15 +383,15 @@ export class SupplyPointFormComponent extends AbstractSupplyPointFormComponent i
             annualConsumptionNT = this.formValues.annualConsumptionNT;
             annualConsumption = this.formValues.annualConsumption;
 
-            if (annualConsumptionVTUnit === UNIT_OF_PRICES.KWH) {
+            if (annualConsumptionVT && annualConsumptionVTUnit === UNIT_OF_PRICES.KWH) {
                 annualConsumptionVT *= 1000;
             }
 
-            if (annualConsumptionNTUnit === UNIT_OF_PRICES.KWH) {
+            if (annualConsumptionNT && annualConsumptionNTUnit === UNIT_OF_PRICES.KWH) {
                 annualConsumptionNT *= 1000;
             }
 
-            if (annualConsumptionUnit === UNIT_OF_PRICES.KWH) {
+            if (annualConsumption && annualConsumptionUnit === UNIT_OF_PRICES.KWH) {
                 annualConsumption *= 1000;
             }
 

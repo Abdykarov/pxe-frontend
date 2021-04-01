@@ -20,7 +20,6 @@ import { CONSTS } from 'src/app/app.constants';
 import { FaqService } from 'src/app/services/faq.service';
 import { IQuestion } from 'src/app/services/model/faq.model';
 import {
-    geParamFromTag,
     removeHtmlFromText,
     truncateText,
 } from 'src/common/utils';
@@ -59,7 +58,7 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
                     )(this.questions);
 
                     if (this.activeQuestion) {
-                        this.activeTagLabel = geParamFromTag(this.activeTag, this.faqConfig, 'label');
+                        this.activeTagLabel = R.head(this.activeQuestion.tag).label;
                         this.questions = this.getQuestions();
                         this.titleService.setTitle(`${this.activeQuestion.header} | parc4u`);
                         this.metaService.updateTag({
@@ -86,18 +85,18 @@ export class FaqDetailComponent extends AbstractFaqComponent implements OnInit {
     }
 
     private getQuestions = (): IQuestion[] => R.pipe(
-        R.filter((question: IQuestion) => question.id !== this.activeQuestion.id && question.tag === this.activeTag),
+        R.filter((question: IQuestion) => question.id !== this.activeQuestion.id && R.head(question.tag).type === this.activeTag),
         this.sortQuestions,
         R.take(this.countOfNextQuestions),
     )(this.questions)
 
     public routerToOverview = (evt) => {
         evt.preventDefault();
-        this.router.navigate([CONSTS.PATHS.FAQ, geParamFromTag(this.activeTag, this.faqConfig, 'url')]);
+        this.router.navigate([CONSTS.PATHS.FAQ, this.activeTag]);
     }
 
     private setActiveQuestion = (params, questions: IQuestion[]) => R.filter(
-            (question: IQuestion) => question.tag === this.activeTag && question.url === params.url,
+            (question: IQuestion) => R.head(question.tag).type === this.activeTag && question.url === params.url,
         )(questions)
 
     private sortFnc = (numbers: number[]): number[] => R.sort((first: number, second: number) => first - second)(numbers);

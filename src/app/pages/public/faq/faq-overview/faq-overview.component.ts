@@ -12,15 +12,17 @@ import {
 } from '@angular/platform-browser';
 
 import * as R from 'ramda';
-import { takeUntil } from 'rxjs/operators';
+import {
+    filter,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { AbstractFaqComponent } from 'src/app/pages/public/faq/abstract-faq.component';
-import {
-    CONSTS,
-    SEO,
-} from 'src/app/app.constants';
+import { CONSTS } from 'src/app/app.constants';
 import { FaqService } from 'src/app/services/faq.service';
 import { IQuestion } from 'src/app/services/model/faq.model';
+import { ISeo } from 'src/common/cms/models/seo';
+import { FaqComponent } from 'src/app/pages/public/faq/faq.component';
 
 @Component({
     selector: 'lnd-faq-overview',
@@ -30,6 +32,7 @@ import { IQuestion } from 'src/app/services/model/faq.model';
 export class FaqOverviewComponent extends AbstractFaqComponent {
 
     constructor(
+        private faqComponent: FaqComponent,
         public faqService: FaqService,
         private cd: ChangeDetectorRef,
         private metaService: Meta,
@@ -38,29 +41,32 @@ export class FaqOverviewComponent extends AbstractFaqComponent {
         private titleService: Title,
     ) {
         super(faqService, route);
-        this.titleService.setTitle(CONSTS.TITLES.FAQ);
-        this.metaService.updateTag({
-            name: 'description',
-            content: SEO.META_DESCRIPTION.FAQ,
-        });
-        this.metaService.updateTag({
-            name: 'keywords',
-            content: [
-                ...SEO.META_KEYWORDS.LANDING_PAGE,
-                ...SEO.META_KEYWORDS.FAQ,
-            ].toString(),
-        });
 
         this.loadConfigs$
             .pipe(takeUntil(this.destroy$))
             .subscribe(
                 _ => {
-                    this.questions = R.filter((tag: IQuestion) => tag.tag === this.activeTag, this.questions);
-                    if (this.questions.length) {
-                        this.cd.markForCheck();
-                    } else {
-                        this.router.navigate([CONSTS.PATHS.FAQ, this.faqConfig[0].url], {replaceUrl: true});
-                    }
+                    // Sync s faq.component.ts
+                    setTimeout(__ => {
+                        const seo: ISeo = R.head(this.faqComponent.faq.seo);
+                        this.titleService.setTitle(seo.title);
+                        this.metaService.updateTag({
+                            name: 'description',
+                            content: seo.description,
+                        });
+                        this.metaService.updateTag({
+                            name: 'keywords',
+                            content: seo.keywords,
+                        });
+
+                        this.questions = R.filter((question: IQuestion) => question.tag[0]?.type === this.activeTag)(this.questions);
+
+                        if (this.questions.length) {
+                            this.cd.markForCheck();
+                        } else {
+                            this.router.navigate([CONSTS.PATHS.FAQ, this.faqConfig[0].url], {replaceUrl: true});
+                        }
+                    });
                 });
     }
 

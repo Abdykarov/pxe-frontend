@@ -5,7 +5,6 @@ import {
 import {
     ChangeDetectorRef,
     Component,
-    OnInit,
 } from '@angular/core';
 
 import * as R from 'ramda';
@@ -15,14 +14,14 @@ import {
 } from 'rxjs/operators';
 
 import { AbstractComponent } from 'src/common/abstract.component';
-import { AskForOfferService} from 'src/common/graphql/services/ask-for-offer.service';
 import {
     CommodityType,
-    ISupplyPoint, SubjectType,
+    ISupplyPoint,
 } from 'src/common/graphql/models/supply.model';
+import { CreateUserFacade } from 'src/app/pages/admins/create-user/create-user.facade';
 import { formFields} from 'src/common/containers/form/forms/supply-point/supply-point-form.config';
 import { IFieldError} from 'src/common/containers/form/models/form-definition.model';
-import { ISupplyPointImportInput } from 'src/common/graphql/models/supply-point-import.model';
+import { ISupplyPointImportInput} from 'src/common/graphql/models/supply-point-import.model';
 import {
     parseGraphQLErrors,
     removeRequiredValidators,
@@ -35,7 +34,11 @@ import { SupplyPointImportService } from 'src/common/graphql/services/supply-poi
     templateUrl: './supply-point.component.html',
     styleUrls: ['./supply-point.component.scss'],
 })
-export class SupplyPointComponent extends AbstractComponent implements OnInit {
+export class SupplyPointComponent extends AbstractComponent {
+    public readonly activeSupplyPoint$ = this.createUserFacade.activeSupplyPoint$;
+    public readonly queryParams$ = this.createUserFacade.queryParams$;
+    public readonly supplyPointsImport$ = this.createUserFacade.supplyPointsImport$;
+
     public editMode = SUPPLY_POINT_EDIT_TYPE.NORMAL;
     public fieldError: IFieldError = {};
     public formFields = formFields;
@@ -43,47 +46,23 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
     public formSent = false;
     public globalError: string[] = [];
     public supplyPointImport: any = null;
-    public supplyPoint = null;
     public isIndividual = false;
-    public askForOfferId = null;
 
     constructor(
-        private askForOfferService: AskForOfferService,
         private cd: ChangeDetectorRef,
         private route: ActivatedRoute,
         private router: Router,
+        private createUserFacade: CreateUserFacade,
         private supplyPointImportService: SupplyPointImportService,
     ) {
         super();
-        this.askForOfferId = route.snapshot.queryParams.askForOfferId;
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.formFields.controls = removeRequiredValidators(this.formFields.controls);
     }
 
-    ngOnInit() {
-        super.ngOnInit();
-        this.supplyPointImportService.
-            findSupplyPointImport(this.askForOfferId)
-                .pipe(
-                    takeUntil(this.destroy$),
-                    map(({data}) => data.findSupplyPointImport),
-                )
-                .subscribe((supplyPoint: ISupplyPoint) => {
-                    if (supplyPoint === null) {
-                        this.supplyPoint = {};
-                    } else {
-                        this.supplyPoint = supplyPoint;
-                    }
-                    this.cd.markForCheck();
-                });
-
-    }
-
-    public save = (supplyPointFormData) => {
-        this.formLoading = true;
-        this.globalError = [];
-        this.fieldError = {};
-
+    public save = (supplyPointFormData, askForOfferId, activeSupplyPoint: ISupplyPoint) => {
         const supplyPoint: ISupplyPointImportInput = R.pick([
+            'id',
             'supplierId',
             'name',
             'address',
@@ -112,20 +91,33 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                 'annualConsumptionUnit',
             ], supplyPointFormData);
         }
+        if (activeSupplyPoint?.contract?.personalData) {
+            supplyPoint.personalData =
+                this.supplyPointImportService.mapPersonalInfoToPersonalInfoInput(activeSupplyPoint.contract.personalData);
+        }
 
-        this.supplyPointImportService.createSupplyPointImport(this.askForOfferId, supplyPoint)
+        this.supplyPointImportService.mapPricesToSupplyPointImport(supplyPoint, activeSupplyPoint);
+
+        if (!supplyPoint.name) {
+            supplyPoint.name = supplyPointFormData.commodityType === CommodityType.POWER ?
+                'ODBĚRNÉ MÍSTO - ELEKTŘINA' : 'ODBĚRNÉ MÍSTO - PLYN';
+        }
+
+        this.supplyPointImportService.createSupplyPointImport(askForOfferId, supplyPoint, !activeSupplyPoint)
             .pipe(
-                takeUntil(this.destroy$),
                 map(
                     ({data}) => data.createSupplyPointImport,
                 ),
             )
             .subscribe(
-                (supplyPointId) => {
+                (newSupplyPoint: ISupplyPoint) => {
+                    this.supplyPointImportService.setActiveSupplyPoint(newSupplyPoint).subscribe();
                     this.formLoading = false;
                     this.router.navigate([this.ROUTES.ROUTER_CREATE_USER_RECAPITULATION], {
                         queryParams: {
-                            askForOfferId: this.askForOfferId,
+                            askForOfferId: this.createUserFacade.queryParamsSubject$.getValue().askForOfferId,
+                            supplyPointId: newSupplyPoint.id,
+                            email: this.createUserFacade.getEmail(),
                         },
                     });
                 },
@@ -135,6 +127,7 @@ export class SupplyPointComponent extends AbstractComponent implements OnInit {
                     this.fieldError = fieldError;
                     this.globalError = globalError;
                     this.cd.markForCheck();
-                });
+                },
+            );
     }
 }

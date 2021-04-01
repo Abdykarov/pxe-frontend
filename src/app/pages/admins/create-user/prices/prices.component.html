@@ -1,25 +1,27 @@
-<div class="col-12 col-xl-10 offset-xl-1">
-    <div *ngIf="supplyPoint"
-         class="row align-items-center mb-3">
-        <div class="col-12 mb-5 col-md-3 mb-md-0 text-center text-md-left">
-            <lnd-button
-                label="Krok zpět"
-                type="secondary"
-                (action)="backStep()">
-            </lnd-button>
+<ng-container *ngIf="supplyPoint$ | async as supplyPoint ">
+    <div class="col-12">
+        <div *ngIf="supplyPoint"
+             class="row align-items-center mb-3">
+            <div class="col-12 mb-5 col-md-3 mb-md-0 text-center text-md-left">
+                <lnd-button
+                    label="Krok zpět"
+                    type="secondary"
+                    (action)="backStep()">
+                </lnd-button>
+            </div>
         </div>
     </div>
-</div>
-
-<div class="col-12 col-xl-10 offset-xl-1">
-    <div class="page-box">
-        <pxe-price-form
-            [supplyPoint]="supplyPoint"
-            [formFields]="formFields"
-            [formLoading]="formLoading"
-            [globalError]="globalError"
-            (customAction)="save($event)"
-            (submitAction)="saveAndSend($event)">
-        ></pxe-price-form>
+    <div class="col-12">
+        <div class="page-box">
+            <pxe-price-form
+                [codeLists]="codeLists$ | async"
+                [supplyPoint]="supplyPoint"
+                [formFields]="formFields"
+                [formLoading]="formLoading"
+                [globalError]="globalError"
+                (customAction)="save($event, supplyPoint)"
+                (submitAction)="saveAndSend($event, supplyPoint)">
+            ></pxe-price-form>
+        </div>
     </div>
-</div>
+</ng-container>

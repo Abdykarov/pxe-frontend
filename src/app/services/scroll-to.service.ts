@@ -16,6 +16,8 @@ export class ScrollToService {
         this.scrollRegister.next(scrollTo);
     }
 
+    public scrollToBlog = () => setTimeout(_ => this.activeScrollTo(SCROLL_TO.BLOG));
+
     public scrollToHelp = () => setTimeout(_ => this.activeScrollTo(SCROLL_TO.HELP));
 
     public scrollToHowItsWorks = () => setTimeout(_ => this.activeScrollTo(SCROLL_TO.HOW_IT_WORKS));

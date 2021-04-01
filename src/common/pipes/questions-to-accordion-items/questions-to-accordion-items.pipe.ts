@@ -6,7 +6,6 @@ import {
 import * as R from 'ramda';
 
 import { CONSTS } from 'src/app/app.constants';
-import { geParamFromTag } from 'src/common/utils';
 import { IAccordionItem } from 'src/common/ui/accordion/models/accordion-item.model';
 import {
     IQuestion,
@@ -22,7 +21,7 @@ export class QuestionsToAccordionItemsPipe implements PipeTransform {
             label: question.header,
             data: question,
             isActive: false,
-            url: `/${CONSTS.PATHS.FAQ}/${geParamFromTag(question.tag, tagConfigs, 'url')}/${question.url}`,
+            url: `/${CONSTS.PATHS.FAQ}/${R.head(question.tag).url}/${question.url}`,
         }), questions);
     }
 }

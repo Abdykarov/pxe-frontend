@@ -6,7 +6,10 @@ import {
 
 import { CONSTS } from 'src/app/app.constants';
 import { CreateUserComponent } from './create-user.component';
+import { PricesComponent } from './prices/prices.component';
+import { SupplyPointComponent } from './supply-point/supply-point.component';
 import { ProgressStatus } from 'src/common/graphql/models/supply.model';
+import { RecapitulationComponent } from './recapitulation/recapitulation.component';
 import { RefreshTokenResolver } from 'src/app/resolvers/refresh-token.resolver';
 
 const routes: Routes = [
@@ -16,7 +19,7 @@ const routes: Routes = [
         children: [
             {
                 path: CONSTS.PATHS.SUPPLY_POINT,
-                loadChildren: () => import('./supply-point/supply-point.module').then(m => m.SupplyPointModule),
+                component: SupplyPointComponent,
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
@@ -27,7 +30,7 @@ const routes: Routes = [
             },
             {
                 path: CONSTS.PATHS.RECAPITULATION,
-                loadChildren: () => import('./recapitulation/recapitulation.module').then(m => m.RecapitulationModule),
+                component: RecapitulationComponent,
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },
@@ -38,7 +41,7 @@ const routes: Routes = [
             },
             {
                 path: CONSTS.PATHS.PRICES,
-                loadChildren: () => import('./prices/prices.module').then(m => m.PricesModule),
+                component: PricesComponent,
                 resolve: {
                     refreshToken: RefreshTokenResolver,
                 },

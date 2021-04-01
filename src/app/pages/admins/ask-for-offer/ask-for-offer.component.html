@@ -3,7 +3,7 @@
         class="d-flex justify-content-end">
         <lnd-button
             customClass="mr-3"
-            (action)="routerToCreateUser(row.id)"
+            (action)="routerToCreateUser(row.id, row.email)"
             [label]="row.status === ContractUploadStatus.NEW ? 'Vyplnit' : 'Dokončit'"
             type="primary">
         </lnd-button>
@@ -11,7 +11,7 @@
             type="icon"
             icon="icon--delete"
             variant="icon"
-            title="Zamítnout"
+            title="Odstranit"
             (action)="delete(row.id)"
         ></lnd-button>
     </div>
@@ -48,6 +48,7 @@
              class="col-12">
             <ng-container *ngIf="paginatedAskForOffer.page.length > 0">
                 <lnd-table
+                    *ngIf="!loading"
                     [cols]="tableConfig"
                     [rows]="paginatedAskForOffer.page"
                     [showHead]="true"
@@ -59,7 +60,8 @@
                         columnCreatedAt: columnCreatedAt
                     }">
                     ></lnd-table>
-                <div class="float-right">
+                <div [class.d-none]="loading"
+                     class="float-right">
                     <lnd-pagination
                         [showBoundaryLinks]="paginationConfig.showBoundaryLinks"
                         [itemsPerPage]="paginationConfig.itemsPerPage"
@@ -73,7 +75,7 @@
                     ></lnd-pagination>
                 </div>
             </ng-container>
-            <ng-container *ngIf="paginatedAskForOffer.page.length === 0">
+            <ng-container *ngIf="paginatedAskForOffer.page.length === 0 && !loading">
                 <lnd-info-banner
                     [bannerType]="BannerTypeImages.LOADING"
                     [bannerTitle]="'Nejsou zde žádné faktury.'"

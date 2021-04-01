@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import {
-    PreloadAllModules,
     Routes,
     RouterModule,
 } from '@angular/router';
 
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { AuthService } from 'src/app/services/auth.service';
+import { CmsResolver } from './resolvers/cms.resolver';
 import { CONSTS } from './app.constants';
 import { PaymentGuard } from 'src/app/guards/payment.guard';
 
@@ -14,6 +14,9 @@ const routes: Routes = [
     {
         path: CONSTS.PATHS.EMPTY,
         loadChildren: () => import('./layouts/public/public-layout.module').then(m => m.PublicLayoutModule),
+        resolve: {
+            cmsToken: CmsResolver,
+        },
     },
     {
         path: CONSTS.PATHS.SECURED,
@@ -22,6 +25,9 @@ const routes: Routes = [
             PaymentGuard,
         ],
         loadChildren: () => import('./layouts/secured/secured-layout.module').then(m => m.SecuredLayoutModule),
+        resolve: {
+            cmsToken: CmsResolver,
+        },
     },
     {
         path: CONSTS.PATHS.WILD_CART,
