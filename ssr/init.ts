@@ -1,6 +1,8 @@
 /***************************************************************************************************
  * Load `$localize` onto the global scope - used if i18n tags appear in Angular templates.
  */
+console.log('INIT');
+
 import '@angular/localize/init';
 import { enableProdMode } from '@angular/core';
 import { ngExpressEngine } from '@nguniversal/express-engine';
@@ -18,7 +20,6 @@ const CronJob = cron.CronJob;
 export const server = express();
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
-export const PORT = process.env.PORT || 80;
 export const DIST_FOLDER = join(process.cwd(), 'dist');
 export const APP_FOLDER = join(DIST_FOLDER, 'app');
 // ssr DOM

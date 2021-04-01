@@ -13,3 +13,6 @@ export const squixedSettings = {
     client_secret: 'oummskzkwilyxzzufv1xhcmg7ljxpavxuq6wiu9oizqx',
     scope: 'squidex-api',
 };
+
+export const PORT = process.env.PORT || 80;
+

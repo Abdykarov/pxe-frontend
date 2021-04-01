@@ -6,7 +6,7 @@ import fs from 'fs';
 import { join } from 'path';
 import { normalize } from '../../src/common/cms/utils';
 import {APP_FOLDER, server} from '../init';
-import {blogSource, faqTypeSource, questionsSource} from '../requests/squidex';
+import {blogSource, faqTypeSource, questionsSource} from '../jobs/appState';
 
 const getQuestions = (questions) => {
     if (!R.path(['angularDevstack', 'config', 'includeTestData'], window)) {

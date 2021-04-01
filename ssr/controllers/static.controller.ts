@@ -1,16 +1,9 @@
-import {APP_FOLDER, DIST_FOLDER, plainConfig, PORT, server} from './init';
 import * as mCache from 'memory-cache';
-import * as R from 'ramda';
+import {APP_FOLDER, DIST_FOLDER, plainConfig, server} from '../init';
 import * as express from 'express';
 import {join} from 'path';
-import { getMCacheKeyPage} from './utils';
+import {getMCacheKeyPage} from '../utils';
 
-// TODO: implement data requests securely
-server.get('/graphql', (req, res) => {
-    res.status(404).send('data requests are not supported');
-});
-
-// Server static files from /app
 server.get('*.*', express.static(join(DIST_FOLDER, 'app')));
 
 // All routes are rendered as server side routes use the Universal engine
@@ -52,10 +45,3 @@ server.get('*', (req, res, next) => {
 server.get('*', (req, res) => {
     return res.sendFile(join(APP_FOLDER, 'index.html'));
 });
-
-// Start up the Node server
-server.listen(PORT, () => {
-    console.log(`Node Express server listening on http://localhost:${PORT}`);
-});
-
-export * from '../src/app.server';
