@@ -4,7 +4,7 @@ import * as xml2js from 'xml2js';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { normalize } from '../../src/common/cms/utils';
-import {blogSource, faqTypeSource, questionsSource} from '../jobs/appState';
+import {appState} from '../jobs/appState';
 import {APP_FOLDER} from '../consts';
 
 const getQuestions = (questions) => {
@@ -29,12 +29,13 @@ const getTypes = (types, allType) => R.pipe(
 
 const controller = {
     sitemap: (req, res) => {
+        const state = appState.getState();
         const siteMapOriginal = readFileSync(join(APP_FOLDER, 'sitemap.xml'), 'utf8');
         const parseString = xml2js.parseString;
-        const questions = getQuestions(questionsSource.data.queryQuestionContents);
-        const blogData = normalize(blogSource.data.queryBlogContents)[0];
+        const questions = getQuestions(state.questionsSource.data.queryQuestionContents);
+        const blogData = normalize(state.blogSource.data.queryBlogContents)[0];
         const types = getTypes(blogData.articles, blogData.allType[0]);
-        const faqTypes = normalize(faqTypeSource.data.queryFaqContents);
+        const faqTypes = normalize(state.faqTypeSource.data.queryFaqContents);
 
         parseString(siteMapOriginal, (err, result) => {
             const url = R.path(['urlset', 'url' ], result);

@@ -3,7 +3,7 @@ import angularController from '../controllers/angular.controller';
 
 const router = express.Router();
 
-router.get('/', angularController.public);
-router.get('/', angularController.secured);
+router.get('*', angularController.public);
+router.get('*', angularController.secured);
 
 export default router;
