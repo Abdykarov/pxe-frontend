@@ -40,6 +40,7 @@ export class RegistrationFormComponent extends AbstractFormComponent implements 
     public submitValidForm = () => {
         const val = this.form.value;
         val.preregistration = !this.isSignUp;
+        val.consent = true;
         this.submitAction.emit(val);
     }
 
