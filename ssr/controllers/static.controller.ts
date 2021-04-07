@@ -1,5 +1,9 @@
-// import {DIST_FOLDER, server} from '../init';
-// import * as express from 'express';
-// import {join} from 'path';
-//
-// server.get('*.*', express.static(join(DIST_FOLDER, 'app')));
+import {join} from 'path';
+import * as express from 'express';
+import {DIST_FOLDER} from '../consts';
+
+const controller = {
+    staticFiles: express.static(join(DIST_FOLDER, 'app')),
+};
+
+export default controller;
