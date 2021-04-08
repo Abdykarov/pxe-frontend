@@ -102,6 +102,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
 
         this.modalsService.closeModalData$
             .pipe(
+                takeUntil(this.destroy$),
                 filter(
                     R.allPass([
                         R_.isNotNil,

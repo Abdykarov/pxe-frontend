@@ -91,6 +91,7 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
 
         this.modalsService.closeModalData$
             .pipe(
+                takeUntil(this.destroy$),
                 filter(
                     R.allPass([
                         R_.isNotNil,

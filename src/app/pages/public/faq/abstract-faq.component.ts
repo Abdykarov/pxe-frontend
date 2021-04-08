@@ -26,6 +26,8 @@ export class AbstractFaqComponent extends AbstractComponent {
         .pipe(
             filter(([params, faqConfig, questions]) => !!(params && faqConfig && questions)),
             tap(([params, faqConfig, questions]) => {
+                console.log('_A_A_A_');
+                console.log(params);
                 this.faqConfig = faqConfig;
                 this.activeTag = params.tag;
                 this.questions = questions;
