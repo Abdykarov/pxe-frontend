@@ -8,7 +8,7 @@ import staticRoutes from './static.routes';
 
 const router = express.Router();
 
-router.all('/cms-api', squidex);
+router.post('/cms/*', squidex);
 router.get('/sitemap.xml', siteMap);
 router.get('/graphql', mockRoutes);
 router.get('*.*', staticRoutes);
