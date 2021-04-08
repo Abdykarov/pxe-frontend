@@ -9,7 +9,7 @@ import {
     newTokenRequest,
     queryRequest,
 } from 'ssr/requests/squidex';
-import { getAuthorizationFromPayload } from 'ssr/utils';
+import { getAuthorizationFromPayload } from 'ssr/utils/squidex';
 
 const initState = () => {
     let Authorization = null;

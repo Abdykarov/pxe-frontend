@@ -2,10 +2,8 @@ import * as mCache from 'memory-cache';
 import * as request from 'request';
 
 import { appState } from 'ssr/jobs/appState';
-import {
-    getConfig,
-    getMCacheKeySquidex,
-} from 'ssr/utils';
+import { getConfig } from 'ssr/utils/config';
+import { getMCacheKeySquidex } from 'ssr/utils/squidex';
 import { queryRequest } from 'ssr/requests/squidex';
 import { THE_MOST_SECRET_PASSWORD_IN_HOGWARTS_TO_RESET_CACHE } from 'ssr/consts';
 
