@@ -97,10 +97,10 @@ export const importErrorViolations = {
 };
 
 export const oAuthApiError = {
-    'SEC0004': 'Přihlášení se nezdařilo. Jste registrován přes standardní formulář.',
-    'SEC0005': 'Přihlášení se nezdařilo. Jste registrován přes facebook.',
-    'SEC0005#_=_': 'Přihlášení se nezdařilo. Jste registrován přes facebook.',
-    'SEC0006': 'Přihlášení se nezdařilo. Jste registrován přes google.',
+    'SEC0004': 'Přihlášení se nezdařilo. Přihlašte se pomocí E-mailu (přihlašovacího jména) a hesla.',
+    'SEC0005': 'Přihlášení se nezdařilo. Přihlašte se přes Facebook.',
+    'SEC0005#_=_': 'Přihlášení se nezdařilo. Přihlašte se přes Facebook.',
+    'SEC0006': 'Přihlášení se nezdařilo. Přihlašte se přes Google.',
     'SEC0003': 'Přihlášení se nezdařilo.',
     'SEC0003#_=_': 'Přihlášení se nezdařilo.',
 };
