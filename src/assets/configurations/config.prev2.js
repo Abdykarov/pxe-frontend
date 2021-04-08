@@ -9,7 +9,7 @@ window.angularDevstack = {
         "production": true,
         "sAnalyticsTId": "",
         "url": "https://pxeparc-preview.lnd.bz",
-        "url_cms_assets": "https://squidex.lnd.bz/api/assets/",
+        "url_cms_assets": "https://squidex.lnd.bz/api/assets/pxe-parc4u/",
         "url_graphql": "https://pxeparc-preview.lnd.bz/graphql",
         "url_api": "https://pxeparc-preview.lnd.bz/api",
         "url_cms_api": "/cms/api",

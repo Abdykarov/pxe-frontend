@@ -9,6 +9,7 @@ window.angularDevstack = {
         "sAnalyticsTId": "SA-00080-1",
         "production": true,
         "url": "https://parc4u.cz",
+        "url_cms_assets": "https://squidex-prod.lnd.bz/api/assets/pxe-parc4u/",
         "url_graphql": "https://parc4u.cz/graphql",
         "url_api": "https://parc4u.cz/api",
         "url_cms_api": "cms/api",
