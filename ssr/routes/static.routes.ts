@@ -1,5 +1,6 @@
 import * as express from 'express';
-import staticController from '../controllers/static.controller';
+
+import staticController from 'ssr/controllers/static.controller';
 
 const router = express.Router();
 

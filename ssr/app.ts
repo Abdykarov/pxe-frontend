@@ -1,16 +1,19 @@
 import './init';
-
-/***************************************************************************************************
- * Load `$localize` onto the global scope - used if i18n tags appear in Angular templates.
- */
 import '@angular/localize/init';
+
+// Load `$localize` onto the global scope - used if i18n tags appear in Angular templates.
 import { ngExpressEngine } from '@nguniversal/express-engine';
+
+import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import { join } from 'path';
-import * as bodyParser from 'body-parser';
-import {DIST_FOLDER, PORT} from './consts';
+
+import {
+    DIST_FOLDER,
+    PORT,
+} from './consts';
 import router from './routes/index';
-// Musi byt pod global['window'] --> jinak window undefined u file replacmentu
+// Musi byt definovaný global['window'] --> jinak window undefined u file replacmentu
 import { AppServerModule } from '../src/app.server';
 
 const server = express();

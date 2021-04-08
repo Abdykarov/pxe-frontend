@@ -1,4 +1,4 @@
-import {join} from 'path';
+import { join } from 'path';
 
 export const DIST_FOLDER = join(process.cwd(), 'dist');
 export const APP_FOLDER = join(DIST_FOLDER, 'app');

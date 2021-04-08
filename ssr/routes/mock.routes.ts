@@ -1,5 +1,6 @@
 import * as express from 'express';
-import mockController from '../controllers/mock.controller';
+
+import mockController from 'ssr/controllers/mock.controller';
 
 const router = express.Router();
 

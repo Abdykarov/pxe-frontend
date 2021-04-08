@@ -1,5 +1,6 @@
 import * as express from 'express';
-import siteMap from '../controllers/sitemap.controller';
+
+import siteMap from 'ssr/controllers/sitemap.controller';
 
 const router = express.Router();
 

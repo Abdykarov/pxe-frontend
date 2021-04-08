@@ -1,5 +1,5 @@
-import {squixedSettings} from '../config/squixedSettings';
-import {getConfig} from '../utils';
+import { getConfig } from 'ssr/utils/config';
+import { squixedSettings } from 'ssr/config/squixedSettings';
 
 const SQUIDEX_URL = squixedSettings[getConfig().environment].url;
 const SQUIDEX_REFRESH_TOKEN_URL = `${SQUIDEX_URL}identity-server/connect/token`;

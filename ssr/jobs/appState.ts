@@ -1,8 +1,15 @@
-import * as request from 'request';
-import * as mCache from 'memory-cache';
 import * as cron from 'cron';
-import {getAuthorizationFromPayload} from '../utils';
-import {bodyBlogQuery, bodyFaqType, bodyQuestionsQuery, newTokenRequest, queryRequest} from '../requests/squidex';
+import * as mCache from 'memory-cache';
+import * as request from 'request';
+
+import {
+    bodyBlogQuery,
+    bodyFaqType,
+    bodyQuestionsQuery,
+    newTokenRequest,
+    queryRequest,
+} from 'ssr/requests/squidex';
+import { getAuthorizationFromPayload } from 'ssr/utils';
 
 const initState = () => {
     let Authorization = null;

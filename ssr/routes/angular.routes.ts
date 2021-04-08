@@ -1,5 +1,6 @@
 import * as express from 'express';
-import angularController from '../controllers/angular.controller';
+
+import angularController from 'ssr/controllers/angular.controller';
 
 const router = express.Router();
 

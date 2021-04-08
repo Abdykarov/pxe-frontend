@@ -1,10 +1,13 @@
-import * as request from 'request';
 import * as mCache from 'memory-cache';
+import * as request from 'request';
 
-import {getConfig, getMCacheKeySquidex} from '../utils';
-import {queryRequest} from '../requests/squidex';
-import {appState} from '../jobs/appState';
-import {THE_MOST_SECRET_PASSWORD_IN_HOGWARTS_TO_RESET_CACHE} from '../consts';
+import { appState } from 'ssr/jobs/appState';
+import {
+    getConfig,
+    getMCacheKeySquidex,
+} from 'ssr/utils';
+import { queryRequest } from 'ssr/requests/squidex';
+import { THE_MOST_SECRET_PASSWORD_IN_HOGWARTS_TO_RESET_CACHE } from 'ssr/consts';
 
 const controller = {
     cmsApi: ({body}, res) => {

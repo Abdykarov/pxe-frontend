@@ -1,6 +1,7 @@
-import {join} from 'path';
 import * as express from 'express';
-import {DIST_FOLDER} from '../consts';
+import { join } from 'path';
+
+import { DIST_FOLDER } from 'ssr/consts';
 
 const controller = {
     staticFiles: express.static(join(DIST_FOLDER, 'app')),

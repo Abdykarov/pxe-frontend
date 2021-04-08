@@ -1,5 +1,6 @@
 import * as express from 'express';
-import squidexController from '../controllers/squidex.controller';
+
+import squidexController from 'ssr/controllers/squidex.controller';
 
 const router = express.Router();
 

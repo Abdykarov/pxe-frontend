@@ -1,8 +1,9 @@
 import * as express from 'express';
+
 import angularRoutes from './angular.routes';
+import mockRoutes from './mock.routes';
 import squidex from './squidex.routes';
 import siteMap from './sitemap.routes';
-import mockRoutes from './mock.routes';
 import staticRoutes from './static.routes';
 
 const router = express.Router();

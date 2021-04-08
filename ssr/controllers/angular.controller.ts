@@ -1,8 +1,9 @@
-// All routes are rendered as server side routes use the Universal engine
 import * as mCache from 'memory-cache';
-import {getConfig, getMCacheKeyPage} from '../utils';
-import {join} from 'path';
-import {APP_FOLDER} from '../consts';
+import { join } from 'path';
+
+import { APP_FOLDER } from 'ssr/consts';
+import { getConfig } from 'ssr/utils/config';
+import { getMCacheKeyPage } from 'ssr/utils/squidex';
 
 const controller = {
     public: (req, res, next) => {
@@ -15,7 +16,7 @@ const controller = {
         const cacheKey = getMCacheKeyPage(req.originalUrl);
         const cached = config.cacheSSR ? mCache.get(cacheKey) : false;
 
-        if ( cached) {
+        if (cached) {
             return res.send(cached);
         } else {
             res.render('index', {

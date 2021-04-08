@@ -1,31 +1,16 @@
-// Server static files from /app
 import * as R from 'ramda';
 import * as xml2js from 'xml2js';
-import { readFileSync } from 'fs';
 import { join } from 'path';
-import { normalize } from '../../src/common/cms/utils';
-import {appState} from '../jobs/appState';
-import {APP_FOLDER} from '../consts';
+import { readFileSync } from 'fs';
 
-const getQuestions = (questions) => {
-    if (!R.path(['angularDevstack', 'config', 'includeTestData'], window)) {
-        return R.reject(
-            R.pipe(
-                R.prop('flatData'),
-                R.propEq('isTestData')(true),
-            ),
-        )(questions);
-    }
-    return questions;
-};
-
-const getTypes = (types, allType) => R.pipe(
-    R.map(R.prop('type')),
-    R.flatten,
-    R.uniqBy(R.prop('url')),
-    R.insert(0, allType),
-    R.sortBy(R.prop('order')),
-)(types);
+import { APP_FOLDER } from 'ssr/consts';
+import { appState } from 'ssr/jobs/appState';
+import {
+    getQuestions,
+    getTypeOfArticle,
+    getTypes,
+} from 'ssr/utils/sitemap';
+import { normalize } from 'src/common/cms/utils';
 
 const controller = {
     sitemap: (req, res) => {
@@ -70,12 +55,7 @@ const controller = {
                 if (url && url.length) {
                     url.push({
                         'loc': [
-                            `${req.protocol}://${req.get('host')}/blog/${(R.pipe(
-                                R.prop('type'),
-                                R.reject(R.propEq('url', 'all')),
-                                R.head,
-                                R.prop('url'),
-                            )(article))}/${(article.url)}`,
+                            `${req.protocol}://${req.get('host')}/blog/${getTypeOfArticle(article)}/${(article.url)}`,
                         ],
                     });
                 }
