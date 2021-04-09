@@ -507,7 +507,8 @@
 	}
 
 	&-facebook,
-	&-google {
+	&-google,
+	&-bankid {
 		padding: $spacer;
 		text-align: left;
 
@@ -515,18 +516,28 @@
 			content: '';
 			position: absolute;
 			top: 0;
-			right: 20px;
-			width: 20px;
+			right: $btn-padding-x;
+			width: $btn-width-icon;
 			height: 100%;
-			background-size: 20px;
+			background-size: $btn-width-icon;
 			background-repeat: no-repeat;
 			background-position-y: center;
 		}
 	}
 
+	&-facebook,
+	&-bankid {
+		color: $white;
+
+		&:hover,
+		&:active,
+		&:focus:active {
+			color: $white;
+		}
+	}
+
 	&-facebook {
 		background-color: $btn-social-facebook-bg;
-		color: $white;
 
 		&::after {
 			background-image: url(../../../assets/images/social/fb.svg);
@@ -535,7 +546,6 @@
 		&:hover,
 		&:active,
 		&:focus:active {
-			color: $white;
 			background-color: darken($btn-social-facebook-bg, 5%);
 		}
 	}
@@ -553,6 +563,22 @@
 		&:active,
 		&:focus:active {
 			background-color: darken($white, 2%);
+		}
+	}
+
+	&-bankid {
+		padding-right: ( $btn-padding-x + $btn-width-icon + ( $spacer * .75 ) );
+		background-color: $success-darken;
+
+		&::after {
+			content: '';
+			background-image: url(../../../assets/images/social/bankid.svg);
+		}
+
+		&:hover,
+		&:active,
+		&:focus:active {
+			background-color: darken($success-darken, 2%);
 		}
 	}
 }
