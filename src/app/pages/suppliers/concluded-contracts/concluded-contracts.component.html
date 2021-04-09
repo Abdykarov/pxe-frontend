@@ -9,9 +9,10 @@
                 <span class="icon icon--document"></span>
             </span>
         <span class="icon-box__name ml-1">
-            <a [class.link--disabled]="downloadingContractId == row.contract.contractId"
+            <a [class.link--disabled]="row.contract.contractId | inArray: downloadingContractIds"
                (click)="downloadPDF(row.contract.contractId)">Stáhnout PDF</a>
         </span>
+        <lnd-loader *ngIf="row.contract.contractId | inArray: downloadingContractIds" class="ml-1"></lnd-loader>
     </div>
 </ng-template>
 

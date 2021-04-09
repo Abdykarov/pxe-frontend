@@ -5,6 +5,7 @@ import { Routes } from '@angular/router';
 // own classes
 import { LoaderPageComponent } from './page';
 import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
+import { LoaderModule } from 'src/common/ui/loader/loader.module';
 
 @NgModule({
     declarations: [
@@ -16,6 +17,7 @@ import { BreadcrumbModule } from 'src/common/ui/breadcrumb/breadcrumb.module';
     imports: [
         BreadcrumbModule,
         CommonModule,
+        LoaderModule,
     ],
 })
 export class LoaderPageModule {}

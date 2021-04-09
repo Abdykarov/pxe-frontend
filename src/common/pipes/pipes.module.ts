@@ -11,6 +11,7 @@ import { ConsumptionIndicatorPipe } from './consumption-indicator/consumption-in
 import { DateDiffPipe } from './date-diff/date-diff.pipe';
 import { DynamicPipe } from './dynamic/dynamic.pipe';
 import { HtmlContentPipe } from './html-content/html-content.pipe';
+import { InArrayPipe } from './in-array/in-array.pipe';
 import { IsAllowedOperationPipe } from './is-allowed-operation/is-allowed-operation.pipe';
 import { IsDatePast } from './is-date-past/is-date-past.pipe';
 import { IsLastUpdatedOfferPipe } from './is-last-updated-offer/is-last-updated-offer.pipe';
@@ -42,6 +43,7 @@ import { ValuesPipe } from './values/values.pipe';
         DateDiffPipe,
         DynamicPipe,
         HtmlContentPipe,
+        InArrayPipe,
         IsAllowedOperationPipe,
         IsDatePast,
         IsLastUpdatedOfferPipe,
@@ -72,6 +74,7 @@ import { ValuesPipe } from './values/values.pipe';
         DateDiffPipe,
         DynamicPipe,
         HtmlContentPipe,
+        InArrayPipe,
         IsAllowedOperationPipe,
         IsDatePast,
         IsLastUpdatedOfferPipe,
@@ -102,6 +105,7 @@ import { ValuesPipe } from './values/values.pipe';
         DecimalPipe,
         DynamicPipe,
         HtmlContentPipe,
+        InArrayPipe,
         IsAllowedOperationPipe,
         IsDatePast,
         IsLastUpdatedOfferPipe,
