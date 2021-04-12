@@ -69,6 +69,7 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
     public loading = true;
     public globalError: string[] = [];
     public paginatedAskForOffer: IPaginatedAskForOffer = null;
+    public downloadingAskForOfferIds: string[] = [];
 
     constructor(
         private askForOfferService: AskForOfferService,
@@ -195,18 +196,22 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
         }
     }
 
-    public downloadAskForOffer = (documentId: string) => {
+    public downloadAskForOffer = (askForOfferId: string, documentId: string) => {
         this.globalError = [];
+        this.downloadingAskForOfferIds = R.append(askForOfferId, this.downloadingAskForOfferIds);
+
         downloadFile(this.http, `v1.0/ask-for-offer/uploaded-document/${documentId}`)
             .pipe(
                 takeUntil(this.destroy$),
             )
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
+                    this.downloadingAskForOfferIds = R.without(askForOfferId, this.downloadingAskForOfferIds);
                     this.askForOfferService.documentSave(responseDataDocument);
                     this.cd.markForCheck();
                 },
                 (error) => {
+                    this.downloadingAskForOfferIds = R.without(askForOfferId, this.downloadingAskForOfferIds);
                     const message = parseRestAPIErrors(error);
                     this.globalError.push(message);
                     this.cd.markForCheck();
@@ -216,6 +221,8 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
 
     public downloadAskForOffersZipArchive = (askForOfferId: string) => {
         this.globalError = [];
+        this.downloadingAskForOfferIds = R.append(askForOfferId, this.downloadingAskForOfferIds);
+
         downloadFile(this.http, `v1.0/ask-for-offer/${askForOfferId}/archive`)
             .pipe(
                 takeUntil(this.destroy$),
@@ -223,9 +230,11 @@ export class AskForOfferComponent extends AbstractComponent implements OnInit {
             .subscribe(
                 (responseDataDocument: IResponseDataDocument) => {
                     this.askForOfferService.documentSave(responseDataDocument);
+                    this.downloadingAskForOfferIds = R.without(askForOfferId, this.downloadingAskForOfferIds);
                     this.cd.markForCheck();
                 },
                 (error) => {
+                    this.downloadingAskForOfferIds = R.without(askForOfferId, this.downloadingAskForOfferIds);
                     const message = parseRestAPIErrors(error);
                     this.globalError.push(message);
                     this.cd.markForCheck();

@@ -113,6 +113,7 @@
                                 </div>
                                 <div>
                                     <span class="col-auto mb-1">
+                                        <lnd-loader class="mr-2" *ngIf="documentLoading"></lnd-loader>
                                         <a class="small"
                                             [class.link--disabled]="documentLoading"
                                             (click)="saveDocument(supplyPoint.contract.contractId, documentType.INFORMATION)">Stáhnout</a>
@@ -136,6 +137,7 @@
                                 </span>
                             </div>
                             <div class="col-auto mb-1">
+                                <lnd-loader class="mr-2" *ngIf="documentLoading"></lnd-loader>
                                 <a class="small"
                                    [class.link--disabled]="documentLoading"
                                    (click)="saveDocument(supplyPoint.contract.contractId, documentType.CONTRACT)">Stáhnout</a>
@@ -157,6 +159,7 @@
                                 </span>
                             </div>
                             <div class="col-auto mb-1">
+                                <lnd-loader class="mr-2" *ngIf="documentLoading"></lnd-loader>
                                 <a class="small"
                                    [class.link--disabled]="documentLoading"
                                    (click)="saveDocument(supplyPoint.contract.contractId, documentType.CONTRACT_NOT_EXTENDED)">Stáhnout</a>

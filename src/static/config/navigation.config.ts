@@ -56,6 +56,10 @@ export const staticNavigationConfig: INavigationConfig = [
                     'url': '/basic/indicators',
                 },
                 {
+                    'label': 'Loader',
+                    'url': '/basic/loader',
+                },
+                {
                     'label': 'Micro table',
                     'url': '/basic/micro-table',
                 },
