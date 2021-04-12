@@ -16,8 +16,10 @@ import { takeUntil } from 'rxjs/operators';
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
 import { CONSTS } from 'src/app/app.constants';
 import { OAuthService } from 'src/app/services/OAuth.service';
-import { OAuthType } from 'src/app/models/oAuth/oAuth.model';
+import { OAuthType } from 'src/app/models/o-auth/oAuth.model';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
+import {EnvironmentService} from '../../../../../app/services/environment.service';
+import {Environment} from '../../../../../app/models/environment/oAuth.model';
 
 @Component({
     selector: 'pxe-login-form',
@@ -25,8 +27,10 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
     styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent extends AbstractFormComponent implements OnInit, OnDestroy {
+    public readonly isProduction = this.environmentService.is(Environment.PROD);
     public readonly LOGIN_FORM_NAME = CONSTS.LOGIN_FORM_NAME;
     public readonly oAuthType = OAuthType;
+
 
     @Input()
     public passwordWasSent = false;
@@ -44,6 +48,7 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit,
     public reSentAction?: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(
+        public environmentService: EnvironmentService,
         protected fb: FormBuilder,
         public oauthService: OAuthService,
         public sAnalyticsService: SAnalyticsService,

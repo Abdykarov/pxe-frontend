@@ -20,7 +20,10 @@
 	margin: 0 auto;
 
 	&--large {
-		max-width: $input-width-large;
+		&,
+		.form-control-case {
+			max-width: $input-width-large;
+		}
 	}
 }
 
