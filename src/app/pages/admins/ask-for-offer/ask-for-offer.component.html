@@ -19,10 +19,16 @@
 
 <ng-template #actionColumnPDF let-row="row">
     <ng-container *ngIf="row.files && row.files.length === 1">
-        <a [class.link--disabled]="row.id | inArray: downloadingAskForOfferIds" (click)="downloadAskForOffer(row?.id, row.files[0].id)">{{row.files[0].fileName}}</a>
+        <a [class.link--disabled]="row.id | inArray: downloadingAskForOfferIds"
+           (click)="downloadAskForOffer(row?.id, row.files[0].id)">
+            {{row.files[0].fileName}}
+        </a>
     </ng-container>
     <ng-container *ngIf="row.files && row.files.length !== 1">
-        <a [class.link--disabled]="row.id | inArray: downloadingAskForOfferIds" (click)="downloadAskForOffersZipArchive(row?.id)">ZIP</a>
+        <a [class.link--disabled]="row.id | inArray: downloadingAskForOfferIds"
+           (click)="downloadAskForOffersZipArchive(row?.id)">
+            ZIP
+        </a>
     </ng-container>
     <lnd-loader *ngIf="row.id | inArray: downloadingAskForOfferIds" class="ml-1"></lnd-loader>
 </ng-template>

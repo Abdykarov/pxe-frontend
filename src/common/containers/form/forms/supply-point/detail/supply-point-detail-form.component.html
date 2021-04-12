@@ -285,7 +285,10 @@
                         <h2 class="page-box__title mb-1">
                             Současná smlouva
                         </h2>
-                        <a [class.link--disabled]="formLoading" (click)="downloadPdf()">Stáhnout</a> (PDF)
+                        <a [class.link--disabled]="formLoading"
+                           (click)="downloadPdf()">
+                            Stáhnout
+                        </a> (PDF)
                         <lnd-loader *ngIf="formLoading"></lnd-loader>
                     </div>
                     <div *ngIf="(supplyPoint | pathValue:['contract', 'deliveryTo'])"
