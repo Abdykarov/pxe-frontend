@@ -8,6 +8,7 @@ export interface ILoginRequest {
 export interface ILoginResponse {
     token: string;
     landingPage: LANDING_PAGE;
+    error?: string;
 }
 
 export interface IJwtPayload {

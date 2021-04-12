@@ -8,10 +8,9 @@
 @import 'src/assets/scss/01_base/base.scss';
 
 .menu-toggle {
-	display: block;
+	position: relative;
 	width: $menu-width;
 	height: $menu-height;
-	position: relative;
 	margin-top: ( $menu-height - $logo-height-mobile );
 	margin-right: -$menu-toggle-line-center;
 	cursor: pointer;
