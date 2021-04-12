@@ -31,7 +31,6 @@ export class LoginFormComponent extends AbstractFormComponent implements OnInit,
     public readonly LOGIN_FORM_NAME = CONSTS.LOGIN_FORM_NAME;
     public readonly oAuthType = OAuthType;
 
-
     @Input()
     public passwordWasSent = false;
 
