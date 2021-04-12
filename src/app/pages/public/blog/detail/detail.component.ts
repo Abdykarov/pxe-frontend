@@ -40,8 +40,9 @@ export class DetailComponent extends AbstractComponent {
             )
             .subscribe((val) => {
                 if (val instanceof NavigationEnd) {
-                    this.otherArticles$ = this.blogFacade.activeArticles$
+                    this.otherArticles$ = this.blogFacade.blogSubject$
                         .pipe(
+                            map(R.prop('articles')),
                             map(this.blogService.getOtherArticles(this.blogFacade.activeArticleSubject$.getValue())),
                             map(R.map(this.blogService.articleToCardData)),
                             map(R.map(this.blogService.toShortContent)),

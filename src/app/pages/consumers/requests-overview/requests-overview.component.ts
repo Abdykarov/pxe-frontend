@@ -102,6 +102,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
 
         this.modalsService.closeModalData$
             .pipe(
+                takeUntil(this.destroy$),
                 filter(
                     R.allPass([
                         R_.isNotNil,
@@ -119,7 +120,7 @@ export class RequestsOverviewComponent extends AbstractComponent implements OnIn
                             _ => {
                                 this.sourceSupplyPoints = R.filter(
                                     (supplyPoint: ISupplyPoint) =>
-                                        R.path(['contract', 'contractId'], supplyPoint) !== modal.data.contract.contractId,
+                                        R.path(['identificationNumber'], supplyPoint) !== modal.data.identificationNumber,
                                 )(this.sourceSupplyPoints);
                                 const { overviewState, supplyPoints } = getOverviewState(this.sourceSupplyPoints);
                                 this.supplyPoints = supplyPoints;
