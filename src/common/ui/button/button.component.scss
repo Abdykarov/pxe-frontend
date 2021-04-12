@@ -506,9 +506,10 @@
 		}
 	}
 
-	&-facebook,
-	&-google,
-	&-bankid {
+	&.btn-facebook,
+	&.btn-google,
+	&.btn-bankid {
+		height: $btn-social-height;
 		padding: $spacer;
 		text-align: left;
 
@@ -525,8 +526,8 @@
 		}
 	}
 
-	&-facebook,
-	&-bankid {
+	&.btn-facebook,
+	&.btn-bankid {
 		color: $white;
 
 		&:hover,
@@ -536,7 +537,7 @@
 		}
 	}
 
-	&-facebook {
+	&.btn-facebook {
 		background-color: $btn-social-facebook-bg;
 
 		&::after {
@@ -550,7 +551,7 @@
 		}
 	}
 
-	&-google {
+	&.btn-google {
 		background-color: $white;
 		color: $font-text;
 
@@ -566,7 +567,7 @@
 		}
 	}
 
-	&-bankid {
+	&.btn-bankid {
 		padding-right: ( $btn-padding-x + $btn-width-icon + ( $spacer * .75 ) );
 		background-color: $success-darken;
 

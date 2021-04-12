@@ -47,6 +47,7 @@
             <lnd-button
                 label="Facebook"
                 type="facebook"
+                class="btn-public"
                 (action)="oauthService.tryLoginWithOAuth(oAuthType.FACEBOOK)">
             </lnd-button>
         </div>
@@ -54,13 +55,16 @@
             <lnd-button
                 label="Google"
                 type="google"
+                class="btn-public"
                 (action)="oauthService.tryLoginWithOAuth(oAuthType.GOOGLE)">
             </lnd-button>
         </div>
-        <div class="col-md-auto mx-auto">
+        <div class="col-12">
             <lnd-button
                 label="Bankovní identita"
-                type="bankid">
+                type="bankid"
+                class="btn-public w-100"
+                customClass="w-100">
             </lnd-button>
         </div>
     </div>
