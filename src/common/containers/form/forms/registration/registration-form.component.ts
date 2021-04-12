@@ -1,12 +1,16 @@
-import {Component, Input, OnDestroy, } from '@angular/core';
-import {FormBuilder} from '@angular/forms';
+import {
+    Component,
+    Input,
+    OnDestroy,
+} from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
-import {AbstractFormComponent} from 'src/common/containers/form/abstract-form.component';
-import {EnvironmentService} from 'src/app/services/environment.service';
-import {OAuthService} from 'src/app/services/OAuth.service';
-import {OAuthType} from 'src/app/models/o-auth/oAuth.model';
-import {SAnalyticsService} from 'src/app/services/s-analytics.service';
-import {Environment} from '../../../../../app/models/environment/oAuth.model';
+import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
+import { Environment } from 'src/app/models/environment/oAuth.model';
+import { EnvironmentService } from 'src/app/services/environment.service';
+import { OAuthService } from 'src/app/services/OAuth.service';
+import { OAuthType } from 'src/app/models/o-auth/oAuth.model';
+import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Component({
     selector: 'pxe-registration-form',
