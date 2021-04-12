@@ -4,15 +4,15 @@
 </ng-template>
 
 <ng-template #downloadPdfTemplate let-row="row">
-    <div class="icon-box" title="document">
-            <span class="icon-box__symbol">
-                <span class="icon icon--document"></span>
-            </span>
-        <span class="icon-box__name ml-1">
-            <a [class.link--disabled]="row.contract.contractId | inArray: downloadingContractIds"
-               (click)="downloadPDF(row.contract.contractId)">Stáhnout PDF</a>
-        </span>
-        <lnd-loader *ngIf="row.contract.contractId | inArray: downloadingContractIds" class="ml-1"></lnd-loader>
+    <div class="loader__wrapper-text">
+        <a
+            class="text-with-icon text-with-icon--link align-items-baseline mb-0"
+            [class.link--disabled]="row.contract.contractId | inArray: downloadingContractIds"
+            (click)="downloadPDF(row.contract.contractId)">
+            <span class="icon icon--document text-with-icon__icon text-with-icon__icon--public"></span>
+            <span class="text-with-icon__text">Stáhnout PDF</span>
+        </a>
+        <lnd-loader *ngIf="row.contract.contractId | inArray: downloadingContractIds"></lnd-loader>
     </div>
 </ng-template>
 
