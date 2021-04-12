@@ -18,6 +18,13 @@
 .form-container {
 	max-width: $input-width;
 	margin: 0 auto;
+
+	&--large {
+		&,
+		.form-control-case {
+			max-width: $input-width-large;
+		}
+	}
 }
 
 .form-control-info-wrapper {
