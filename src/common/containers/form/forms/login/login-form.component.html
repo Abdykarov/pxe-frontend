@@ -97,8 +97,10 @@
         </div>
         <div class="col-md-auto mx-auto">
             <lnd-button
+                *ngIf="!isProduction"
                 label="Bankovní identita"
-                type="bankid">
+                type="bankid"
+                (action)="oauthService.tryLoginWithOAuth(oAuthType.BANK_ID)">
             </lnd-button>
         </div>
     </div>
