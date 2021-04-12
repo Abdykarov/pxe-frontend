@@ -11,7 +11,7 @@
     (keydown)="resetCustomFieldError()"
     (keydown.enter)="submitForm($event);false"
     (change)="resetCustomFieldError()"
-    class="form-container ml-0"
+    class="form-container form-container--large ml-0"
     autocomplete="off">
     <lnd-form-field
         lndSFormDirective
@@ -43,18 +43,32 @@
         Nebo si založte účet pomocí
     </p>
     <div class="row mb-5">
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3">
             <lnd-button
                 label="Facebook"
                 type="facebook"
+                class="w-100"
+                customClass="btn-public w-100"
                 (action)="oauthService.tryLoginWithOAuth(oAuthType.FACEBOOK)">
             </lnd-button>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3">
             <lnd-button
                 label="Google"
                 type="google"
+                class="w-100"
+                customClass="btn-public w-100"
                 (action)="oauthService.tryLoginWithOAuth(oAuthType.GOOGLE)">
+            </lnd-button>
+        </div>
+        <div class="col-12">
+            <lnd-button
+                *ngIf="!isProduction"
+                label="Bankovní identita"
+                type="bankid"
+                class="w-100"
+                customClass="btn-public w-100"
+                (action)="oauthService.tryLoginWithOAuth(oAuthType.BANK_ID)">
             </lnd-button>
         </div>
     </div>

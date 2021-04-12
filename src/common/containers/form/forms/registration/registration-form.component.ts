@@ -2,13 +2,14 @@ import {
     Component,
     Input,
     OnDestroy,
-    TemplateRef,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 import { AbstractFormComponent } from 'src/common/containers/form/abstract-form.component';
+import { Environment } from 'src/app/models/environment/oAuth.model';
+import { EnvironmentService } from 'src/app/services/environment.service';
 import { OAuthService } from 'src/app/services/OAuth.service';
-import { OAuthType } from 'src/app/models/oAuth/oAuth.model';
+import { OAuthType } from 'src/app/models/o-auth/oAuth.model';
 import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Component({
@@ -17,6 +18,7 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
     styleUrls: ['./registration-form.component.scss'],
 })
 export class RegistrationFormComponent extends AbstractFormComponent implements OnDestroy {
+    public readonly isProduction = this.environmentService.is(Environment.PROD);
     public readonly oAuthType = OAuthType;
 
     @Input()
@@ -29,6 +31,7 @@ export class RegistrationFormComponent extends AbstractFormComponent implements 
     public lightTheme = false;
 
     constructor(
+        public environmentService: EnvironmentService,
         public sAnalyticsService: SAnalyticsService,
         public oauthService: OAuthService,
         protected fb: FormBuilder,

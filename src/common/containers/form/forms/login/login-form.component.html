@@ -35,7 +35,7 @@
 <form
     [formGroup]="form"
     (keydown.enter)="submitForm($event);false"
-    class="form-container"
+    class="form-container form-container--large"
     autocomplete="off">
     <lnd-form-field
         lndSFormDirective
@@ -81,18 +81,32 @@
         Nebo se přihlaště pomocí
     </p>
     <div class="row mb-5">
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3">
             <lnd-button
                 label="Facebook"
                 type="facebook"
+                class="w-100"
+                customClass="btn-public w-100"
                 (action)="oauthService.tryLoginWithOAuth(oAuthType.FACEBOOK)">
             </lnd-button>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3">
             <lnd-button
                 label="Google"
                 type="google"
+                class="w-100"
+                customClass="btn-public w-100"
                 (action)="oauthService.tryLoginWithOAuth(oAuthType.GOOGLE)">
+            </lnd-button>
+        </div>
+        <div class="col-12">
+            <lnd-button
+                *ngIf="!isProduction"
+                label="Bankovní identita"
+                type="bankid"
+                class="w-100"
+                customClass="btn-public w-100"
+                (action)="oauthService.tryLoginWithOAuth(oAuthType.BANK_ID)">
             </lnd-button>
         </div>
     </div>

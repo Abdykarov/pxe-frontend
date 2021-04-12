@@ -17,7 +17,7 @@
                         Přihlaste se
                     </h1>
                     <p>Ještě nemáte účet? <a class="d-inline-block" routerLink="/secured/registration">Založte si jej zde</a>.</p>
-                    <div class="form-container ml-0">
+                    <div class="form-container form-container--large ml-0">
                         <form class="mb-5">
                             <lnd-form-field
                                 id="email"
@@ -45,16 +45,28 @@
                                 Nebo si založte účet pomocí
                             </p>
                             <div class="row mb-5">
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-3">
                                     <lnd-button
                                         label="Facebook"
-                                        type="facebook">
+                                        type="facebook"
+                                        class="w-100"
+                                        customClass="btn-public w-100">
                                     </lnd-button>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 mb-3">
                                     <lnd-button
                                         label="Google"
-                                        type="google">
+                                        type="google"
+                                        class="w-100"
+                                        customClass="btn-public w-100">
+                                    </lnd-button>
+                                </div>
+                                <div class="col-12">
+                                    <lnd-button
+                                        label="Bankovní identita"
+                                        type="bankid"
+                                        class="w-100"
+                                        customClass="btn-public w-100">
                                     </lnd-button>
                                 </div>
                             </div>
