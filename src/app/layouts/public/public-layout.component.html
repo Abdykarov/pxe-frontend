@@ -19,6 +19,11 @@
         (logoutAction)="logout()">
     </lnd-header>
     <main class="main">
+        <re-captcha
+            #captchaRef="reCaptcha"
+            (resolved)="resolveAction.emit(lastData);reset()"
+            (error)="errored($event)"
+        ></re-captcha>
         <router-outlet></router-outlet>
         <lnd-modal-dynamic></lnd-modal-dynamic>
     </main>

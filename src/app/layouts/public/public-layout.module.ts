@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { RecaptchaModule } from 'ng-recaptcha';
+
 import { ButtonModule } from 'src/common/ui/button/button.module';
 import { FooterModule } from 'src/common/ui/footer/footer.module';
 import { HeaderModule } from 'src/common/ui/header/header.module';
@@ -20,6 +22,7 @@ import { PublicLayoutRoutingModule } from './public-layout.routing';
         HeaderModule,
         ModalModule,
         PipesModule,
+        RecaptchaModule,
         PublicLayoutRoutingModule,
     ],
 })
