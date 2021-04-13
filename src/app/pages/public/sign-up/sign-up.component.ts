@@ -85,6 +85,16 @@ export class SignUpComponent extends AbstractComponent {
         this.formFields = createRegistrationFormFields(SignUpType.SignUp);
     }
 
+    public captchaResponse = '';
+    public resolved(captchaResponse: string): void {
+        this.captchaResponse += `${JSON.stringify(captchaResponse)}\n`;
+    }
+
+    public onError(errorDetails: any): void {
+        this.captchaResponse += `ERROR; error details (if any) have been logged to console\n`;
+        console.log(`reCAPTCHA error encountered; details:`, errorDetails);
+    }
+
     public submitForm = (values) => {
         this.formLoading = true;
         this.globalError = [];

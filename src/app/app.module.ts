@@ -16,7 +16,11 @@ import { ApolloModule } from 'apollo-angular';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { CookieModule } from 'ngx-cookie';
 import { HttpLinkModule } from 'apollo-angular-link-http';
-
+import {
+    RECAPTCHA_LANGUAGE,
+    RECAPTCHA_SETTINGS,
+    RecaptchaModule,
+} from 'ng-recaptcha';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 
 // own classes
@@ -46,6 +50,7 @@ import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-vi
         HttpClientModule,
         HttpLinkModule,
         PipesModule,
+        RecaptchaModule,
         ReactiveFormsModule,
         TransferHttpCacheModule,
     ],
@@ -56,6 +61,20 @@ import { PdfJsViewerModule } from 'src/third-sides/ng2-pdfjs-viewer/ng2-pdfjs-vi
         {
             provide: LOCALE_ID,
             useValue: 'cs-CZ',
+        },
+        {
+            provide: RECAPTCHA_SETTINGS,
+            useValue: {
+                siteKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', // TEST
+//                siteKey: '6Ldp0xgUAAAAAF_iIss_hpFaVrjLbPGjwyfJwebB', // ERROR
+                size: 'invisible',
+                errorMode: 'handled',
+                badge: 'none',
+            },
+        },
+        {
+            provide: RECAPTCHA_LANGUAGE,
+            useValue: 'cs', // use French language
         },
     ],
     bootstrap: [

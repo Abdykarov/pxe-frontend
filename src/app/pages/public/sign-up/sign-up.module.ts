@@ -8,6 +8,7 @@ import { RegistrationFormModule } from 'src/common/containers/form/forms/registr
 import { SignUpComponent } from './sign-up.component';
 import { SignUpRoutingModule } from './sign-up-routing.module';
 import { SupplierContainerModule } from 'src/common/containers/supplier-container/supplier-conteiner.module';
+import {ReCaptchaModule} from 'src/common/ui/re-captcha/re-captcha.module';
 
 @NgModule({
     declarations: [
@@ -21,6 +22,7 @@ import { SupplierContainerModule } from 'src/common/containers/supplier-containe
         ButtonModule,
         CommonModule,
         LayoutContainerModule,
+        ReCaptchaModule,
         RegistrationFormModule,
         SignUpRoutingModule,
         SupplierContainerModule,

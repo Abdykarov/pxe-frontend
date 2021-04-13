@@ -11,6 +11,7 @@ import { ButtonModule } from 'src/common/ui/button/button.module';
 import { DirectivesModule } from 'src/common/directives/directives.module';
 import { FileUploaderModule } from 'src/common/ui/file-uploader/file-uploader.module';
 import { FormModule } from 'src/common/ui/forms/form.module';
+import { ReCaptchaModule } from 'src/common/ui/re-captcha/re-captcha.module';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import { FormModule } from 'src/common/ui/forms/form.module';
         FormModule,
         FormsModule,
         ReactiveFormsModule,
+        ReCaptchaModule,
     ],
 })
 export class AskForOfferContainerModule {}

@@ -28,7 +28,7 @@ import { SAnalyticsService } from 'src/app/services/s-analytics.service';
 
 @Component({
     selector: 'lnd-root',
-    template: '<router-outlet></router-outlet>',
+    templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -90,4 +90,6 @@ export class AppComponent extends AbstractComponent implements OnInit {
             this.elementRef.nativeElement.removeAttribute('ng-version');
         }
     }
+
+    public resolve = (aa) => console.log(aa);
 }
