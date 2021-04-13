@@ -1,5 +1,8 @@
 import { INavigationItemType } from 'src/app/app.constants';
-import { IUserTypes } from 'src/app/services/model/auth.model';
+import {
+    ILoginProvider,
+    IUserTypes,
+} from 'src/app/services/model/auth.model';
 
 export interface INavigationConfig extends Array<INavigationMenu> {}
 
@@ -12,6 +15,7 @@ export interface INavigationItem {
     id?: string;
     badge?: string;
     class?: string;
+    allowedLoginProviders?: ILoginProvider[];
     type?: INavigationItemType;
     children?: Array<INavigationChildItem>;
     __typename?: string;
